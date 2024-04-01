@@ -73,6 +73,7 @@ class PurchaseGoodsorderListController extends GetxController {
   StreamSubscription<int>? facilityIdStreamSubscription;
   int facilityId = 0;
 
+  Rx<bool> isLoading = true.obs;
   @override
   void onInit() async {
     this.filterText = {
@@ -86,37 +87,32 @@ class PurchaseGoodsorderListController extends GetxController {
       facilityId = event;
       Future.delayed(Duration(seconds: 2), () async {
         await getRequestOrderList(
-          facilityId,
-          formattedTodate1,
-          formattedFromdate1,
-          false,
-          false
-        );
+            facilityId, formattedTodate1, formattedFromdate1, false);
       });
     });
     super.onInit();
   }
 
-  Future<void> getRequestOrderList(int facilityId, dynamic startDate,
-      dynamic endDate, bool isLoading, bool isExport) async {
+  Future<void> getRequestOrderList(
+      int facilityId, dynamic startDate, dynamic endDate, bool isExport) async {
     goodsOrdersList.value = <GetRequestOrderListModel>[];
     filteredData.value = <GetRequestOrderListModel>[];
 
     final _goodsordersList =
         await purchaseGoodsorderListPresenter.getRequestOrderList(
-      isLoading: true,
-      start_date: startDate,
-      end_date: endDate,
-      facility_id: facilityId,
-      isExport: isExport
-    );
-    goodsOrdersList.value = _goodsordersList;
+            isLoading: isLoading.value,
+            start_date: startDate,
+            end_date: endDate,
+            facility_id: facilityId,
+            isExport: isExport);
+    if(_goodsordersList != null){
+      goodsOrdersList.value = _goodsordersList;
     paginationController = PaginationController(
       rowCount: goodsOrdersList.length ?? 0,
       rowsPerPage: 10,
     );
 
-    if (goodsOrdersList.isNotEmpty) {
+        if (goodsOrdersList.isNotEmpty) {
       filteredData.value = goodsOrdersList.value;
 
       goodsOrdersListModel = goodsOrdersList[0];
@@ -126,6 +122,7 @@ class PurchaseGoodsorderListController extends GetxController {
         goodsOrdersListTableColumns.add(key);
       }
     }
+    }
   }
 
   void onValueChanged(dynamic list, dynamic value) {
@@ -134,7 +131,7 @@ class PurchaseGoodsorderListController extends GetxController {
 
   void getPmTaskListByDate() {
     getRequestOrderList(
-        facilityId, formattedFromdate1, formattedTodate1, false,false);
+        facilityId, formattedFromdate1, formattedTodate1, false);
   }
 
   void search(String keyword) {
@@ -213,12 +210,7 @@ class PurchaseGoodsorderListController extends GetxController {
                   deleteGoodsOrders(id).then((value) {
                     Get.back();
                     getRequestOrderList(
-                      facilityId,
-                      formattedTodate,
-                      formattedFromdate,
-                      false,
-                      false
-                    );
+                        facilityId, formattedTodate, formattedFromdate, false);
                   });
                 },
                 child: Text('YES'),
@@ -244,13 +236,8 @@ class PurchaseGoodsorderListController extends GetxController {
   void clearTypeStoreData() {
     purchaseGoodsorderListPresenter.clearTypeValue();
   }
+
   void export() {
-    getRequestOrderList(
-      facilityId,
-      formattedTodate,
-      formattedFromdate,
-      true,
-      true
-    );
+    getRequestOrderList(facilityId, formattedTodate, formattedFromdate, true);
   }
 }

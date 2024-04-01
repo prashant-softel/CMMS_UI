@@ -329,8 +329,10 @@ class _StockManagementGoodsOrdersWebState
                                   SizedBox(
                                     height: 10,
                                   ),
-                                  controller.goodsOrdersList.isEmpty
+                                  controller.goodsOrdersList.isEmpty == true && controller.isLoading == false
                                       ? Center(child: Text('No data'))
+                                      : controller.isLoading.value == true
+                                      ? Center(child: Text("Data Loading......"))
                                       : Expanded(
                                           child: ValueListenableBuilder(
                                               valueListenable:

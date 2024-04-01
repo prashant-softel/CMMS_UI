@@ -85,9 +85,10 @@ class VegExecutionListController extends GetxController {
   }
 
   void getVegExcustionListByDate() {
-    getVegTaskList(facilityId, false,false);
+    getVegTaskList(facilityId, false);
   }
 
+  Rx<bool> isLoading = true.obs;
   @override
   void onInit() async {
     this.filterText = {
@@ -105,12 +106,10 @@ class VegExecutionListController extends GetxController {
       facilityId = event;
       Future.delayed(Duration(seconds: 2), () async {
         await getVegTaskList(
-          facilityId,
-          // formattedTodate1,
-          // formattedFromdate1,
-          false,
-          false
-        );
+            facilityId,
+            // formattedTodate1,
+            // formattedFromdate1,
+            false);
       });
     });
     super.onInit();
@@ -134,10 +133,7 @@ class VegExecutionListController extends GetxController {
                     .toLowerCase()
                     .contains(keyword.toLowerCase()) ??
                 false) ||
-            (item?.frequency
-                    ?.toString()
-                    .toLowerCase()
-                    .contains(keyword.toLowerCase()) ??
+            (item?.frequency?.toString().toLowerCase().contains(keyword.toLowerCase()) ??
                 false) ||
             (item?.noOfDays?.toString().toLowerCase().contains(keyword.toLowerCase()) ??
                 false) ||
@@ -178,12 +174,11 @@ class VegExecutionListController extends GetxController {
 
   Future<void> getVegTaskList(
       int facilityId, //dynamic startDate, dynamic endDate,
-      bool isLoading,
       bool isExport) async {
     vegTaskList.value = <VegTaskListModel>[];
 
     final list = await vegExecutionListPresenter.getVegTaskList(
-        isLoading: isLoading,
+        isLoading: isLoading.value,
         // start_date: startDate, //// "2020-01-01",
         // end_date: endDate,
         facility_id: facilityId,
@@ -195,6 +190,7 @@ class VegExecutionListController extends GetxController {
 
     vegTaskList.value = list;
     filteredData.value = vegTaskList.value;
+    isLoading.value = false;
     paginationController = PaginationController(
       rowCount: vegTaskList.length,
       rowsPerPage: 10,
@@ -222,7 +218,8 @@ class VegExecutionListController extends GetxController {
   void clearStoreDataVegPlanid() {
     vegExecutionListPresenter.clearValueVegPlanId();
   }
+
   void export() {
-    getVegTaskList(facilityId, false,true);
+    getVegTaskList(facilityId, true);
   }
 }

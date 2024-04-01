@@ -308,55 +308,62 @@ class EmployeeStockReportContentWeb
                                       ],
                                     ),
                                     Dimens.boxHeight5,
-                                    controller.StockDetailsList.isEmpty == true
+                                    controller.StockDetailsList.isEmpty ==
+                                                true &&
+                                            controller.isLoading == false
                                         ? Center(child: Text('No data'))
-                                        : Expanded(
-                                            child: ValueListenableBuilder(
-                                                valueListenable:
-                                                    controller.columnVisibility,
-                                                builder:
-                                                    (context, value, child) {
-                                                  final dataSource =
-                                                      PlantListDataSource(
-                                                          controller);
+                                        : controller.isLoading.value == true
+                                            ? Center(
+                                                child:
+                                                    Text("Data Loading......"))
+                                            : Expanded(
+                                                child: ValueListenableBuilder(
+                                                    valueListenable: controller
+                                                        .columnVisibility,
+                                                    builder: (context, value,
+                                                        child) {
+                                                      final dataSource =
+                                                          PlantListDataSource(
+                                                              controller);
 
-                                                  return PaginatedDataTable2(
-                                                    // fixedLeftColumns: 1,
-                                                    dataRowHeight:
-                                                        70, //Get.height * 0.10,
-                                                    columnSpacing: 10,
-                                                    source:
-                                                        dataSource, // Custom DataSource class
-                                                    // headingRowHeight:
-                                                    //     Get.height * 0.12,
-                                                    minWidth:
-                                                        2000, //Get.width * 1.2,
-                                                    showCheckboxColumn: false,
-                                                    rowsPerPage:
-                                                        10, // Number of rows per page
-                                                    availableRowsPerPage: [
-                                                      10,
-                                                      20,
-                                                      30,
-                                                      50
-                                                    ],
-                                                    columns: [
-                                                      for (var entry
-                                                          in value.entries)
-                                                        if (entry.value)
-                                                          buildDataColumn(
-                                                            entry.key,
-                                                            controller
-                                                                    .filterText[
-                                                                entry.key]!,
-                                                            controller
-                                                                    .columnwidth[
-                                                                entry.key],
-                                                          ),
-                                                    ],
-                                                  );
-                                                }),
-                                          )
+                                                      return PaginatedDataTable2(
+                                                        // fixedLeftColumns: 1,
+                                                        dataRowHeight:
+                                                            70, //Get.height * 0.10,
+                                                        columnSpacing: 10,
+                                                        source:
+                                                            dataSource, // Custom DataSource class
+                                                        // headingRowHeight:
+                                                        //     Get.height * 0.12,
+                                                        minWidth:
+                                                            2000, //Get.width * 1.2,
+                                                        showCheckboxColumn:
+                                                            false,
+                                                        rowsPerPage:
+                                                            10, // Number of rows per page
+                                                        availableRowsPerPage: [
+                                                          10,
+                                                          20,
+                                                          30,
+                                                          50
+                                                        ],
+                                                        columns: [
+                                                          for (var entry
+                                                              in value.entries)
+                                                            if (entry.value)
+                                                              buildDataColumn(
+                                                                entry.key,
+                                                                controller
+                                                                        .filterText[
+                                                                    entry.key]!,
+                                                                controller
+                                                                        .columnwidth[
+                                                                    entry.key],
+                                                              ),
+                                                        ],
+                                                      );
+                                                    }),
+                                              )
                                   ],
                                 ),
                               ),

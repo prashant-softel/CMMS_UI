@@ -35,7 +35,8 @@ class BusinessTypeListContentWeb extends GetView<BusinessTypeListController> {
                   ),
                   boxShadow: [
                     BoxShadow(
-                      color: Color.fromARGB(255, 236, 234, 234).withOpacity(0.5),
+                      color:
+                          Color.fromARGB(255, 236, 234, 234).withOpacity(0.5),
                       spreadRadius: 2,
                       blurRadius: 5,
                       offset: Offset(0, 2),
@@ -136,7 +137,8 @@ class BusinessTypeListContentWeb extends GetView<BusinessTypeListController> {
                                             child: Wrap(
                                               children: [
                                                 Text(
-                                                  controller.selectedItem == null
+                                                  controller.selectedItem ==
+                                                          null
                                                       ? "BusinessType added Successfully in the List."
                                                       : "BusinessType updated Successfully in the List.",
                                                   style: TextStyle(
@@ -159,7 +161,7 @@ class BusinessTypeListContentWeb extends GetView<BusinessTypeListController> {
                                             //   "Title",
                                             //   style: Styles.blackBold16,
                                             // ),
-      
+
                                             Expanded(
                                                 child: CustomRichText(
                                                     title: 'Name ')),
@@ -181,7 +183,8 @@ class BusinessTypeListContentWeb extends GetView<BusinessTypeListController> {
                                                     spreadRadius: 1.0,
                                                   ),
                                                   BoxShadow(
-                                                    color: ColorValues.whiteColor,
+                                                    color:
+                                                        ColorValues.whiteColor,
                                                     offset:
                                                         const Offset(0.0, 0.0),
                                                     blurRadius: 0.0,
@@ -197,7 +200,8 @@ class BusinessTypeListContentWeb extends GetView<BusinessTypeListController> {
                                                     fontSize: 14.0,
                                                     height: 1.0,
                                                     color: Colors.black),
-                                                controller: controller.nameCtrlr,
+                                                controller:
+                                                    controller.nameCtrlr,
                                                 focusNode: controller.nameFocus,
                                                 scrollController:
                                                     controller.nameScroll,
@@ -235,7 +239,8 @@ class BusinessTypeListContentWeb extends GetView<BusinessTypeListController> {
                                                           borderRadius:
                                                               BorderRadius
                                                                   .circular(5),
-                                                          borderSide: BorderSide(
+                                                          borderSide:
+                                                              BorderSide(
                                                             color: ColorValues
                                                                 .redColorDark,
                                                           ),
@@ -247,7 +252,8 @@ class BusinessTypeListContentWeb extends GetView<BusinessTypeListController> {
                                                           borderRadius:
                                                               BorderRadius
                                                                   .circular(5),
-                                                          borderSide: BorderSide(
+                                                          borderSide:
+                                                              BorderSide(
                                                             color: ColorValues
                                                                 .redColorDark,
                                                           ),
@@ -306,7 +312,8 @@ class BusinessTypeListContentWeb extends GetView<BusinessTypeListController> {
                                                     spreadRadius: 1.0,
                                                   ),
                                                   BoxShadow(
-                                                    color: ColorValues.whiteColor,
+                                                    color:
+                                                        ColorValues.whiteColor,
                                                     offset:
                                                         const Offset(0.0, 0.0),
                                                     blurRadius: 0.0,
@@ -359,7 +366,8 @@ class BusinessTypeListContentWeb extends GetView<BusinessTypeListController> {
                                                           borderRadius:
                                                               BorderRadius
                                                                   .circular(5),
-                                                          borderSide: BorderSide(
+                                                          borderSide:
+                                                              BorderSide(
                                                             color: ColorValues
                                                                 .redColorDark,
                                                           ),
@@ -372,7 +380,8 @@ class BusinessTypeListContentWeb extends GetView<BusinessTypeListController> {
                                                           borderRadius:
                                                               BorderRadius
                                                                   .circular(5),
-                                                          borderSide: BorderSide(
+                                                          borderSide:
+                                                              BorderSide(
                                                             color: ColorValues
                                                                 .redColorDark,
                                                           ),
@@ -412,7 +421,8 @@ class BusinessTypeListContentWeb extends GetView<BusinessTypeListController> {
                                     width: (Get.width * .1),
                                     height: 40,
                                     child: CustomElevatedButton(
-                                        backgroundColor: ColorValues.appRedColor,
+                                        backgroundColor:
+                                            ColorValues.appRedColor,
                                         onPressed: () {
                                           controller.cleardata();
                                         },
@@ -446,8 +456,9 @@ class BusinessTypeListContentWeb extends GetView<BusinessTypeListController> {
                                                   ColorValues.appDarkBlueColor,
                                               onPressed: () {
                                                 controller
-                                                    .updateBusinessType(controller
-                                                        .selectedItem?.id)
+                                                    .updateBusinessType(
+                                                        controller
+                                                            .selectedItem?.id)
                                                     .then((value) {
                                                   print("UPDATE");
                                                   print("value,$value");
@@ -465,7 +476,7 @@ class BusinessTypeListContentWeb extends GetView<BusinessTypeListController> {
                         ),
                       ),
                     ),
-      
+
                     Expanded(
                       child: Container(
                         width: Get.width * 7,
@@ -503,19 +514,22 @@ class BusinessTypeListContentWeb extends GetView<BusinessTypeListController> {
                                         onChanged: (value) =>
                                             controller.search(value),
                                         decoration: InputDecoration(
-                                          enabledBorder: const OutlineInputBorder(
+                                          enabledBorder:
+                                              const OutlineInputBorder(
                                             borderSide: const BorderSide(
                                               color: Colors.grey,
                                               width: 0.0,
                                             ),
                                           ),
-                                          focusedBorder: const OutlineInputBorder(
+                                          focusedBorder:
+                                              const OutlineInputBorder(
                                             borderSide: const BorderSide(
                                               color: Colors.grey,
                                               width: 0.0,
                                             ),
                                           ),
-                                          contentPadding: Dimens.edgeInsets05_10,
+                                          contentPadding:
+                                              Dimens.edgeInsets05_10,
                                           hintText: 'search'.tr,
                                           hintStyle: Styles.grey16,
                                         ),
@@ -524,144 +538,163 @@ class BusinessTypeListContentWeb extends GetView<BusinessTypeListController> {
                                   ],
                                 ),
                               ),
-      
+
                               // Row(
                               //   children: [
                               //     Spacer(),
-      
+
                               //   ],
                               // ),
                               SizedBox(
                                 height: 20,
                               ),
-                              Expanded(
-                                child: Obx(
-                                  () => DataTable2(
-                                    key: UniqueKey(),
-                                    dataRowHeight: 50,
-                                    columnSpacing: 10,
-                                    border: TableBorder.all(
-                                        color:
-                                            Color.fromARGB(255, 206, 229, 234)),
-                                    columns: [
-                                      DataColumn2(
-                                          fixedWidth: 100,
-                                          label: Text(
-                                            "Sr No",
-                                            style: TextStyle(
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.bold),
-                                          )),
-                                      DataColumn2(
-                                          // fixedWidth: 150,
-                                          label: Text(
-                                        "Name",
-                                        style: TextStyle(
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.bold),
-                                      )),
-                                      DataColumn2(
-                                          // fixedWidth: 300,
-                                          label: Text(
-                                        "Description",
-                                        style: TextStyle(
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.bold),
-                                      )),
-                                      DataColumn2(
-                                          fixedWidth: 100,
-                                          label: Text(
-                                            'Action',
-                                            style: TextStyle(
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.bold),
-                                          )),
-                                    ],
-                                    rows: List<DataRow>.generate(
-                                      controller.businessTypeList.length ?? 0,
-                                      (index) => DataRow(cells: [
-                                        DataCell(Text((index + 1).toString())),
-                                        DataCell(Text(controller
-                                                .businessTypeList[index]?.name
-                                                .toString() ??
-                                            '')),
-                                        DataCell(Text(controller
-                                                .businessTypeList[index]
-                                                ?.description ??
-                                            '')),
-                                        DataCell(Row(
-                                          children: [
-                                            TableActionButton(
-                                                color: ColorValues.editColor,
-                                                icon: Icons.edit,
-                                                message: 'Edit',
-                                                onPress: () {
-                                                  controller.selectedItem =
-                                                      controller
-                                                          .businessTypeList
-                                                          .firstWhere((element) =>
-                                                              "${element?.id}" ==
-                                                              controller
-                                                                  .businessTypeList[
-                                                                      index]
-                                                                  ?.id
-                                                                  .toString());
-      
-                                                  controller.nameCtrlr.text =
-                                                      controller.selectedItem
-                                                              ?.name ??
-                                                          '';
-                                                  controller.descriptionCtrlr
-                                                      .text = controller
-                                                          .selectedItem
-                                                          ?.description ??
-                                                      '';
-                                                  controller.isContainerVisible
-                                                      .value = true;
-                                                  // int spvId = int.tryParse(
-                                                  //         businessTypeList?.name ??
-                                                  //             "") ??
-                                                  //     0;
-                                                  // if (spvId != 0) {
-                                                  //   Get.toNamed(
-                                                  //       Routes.SPVListScreen,
-                                                  //       arguments: {"spvId": spvId});
-                                                  // }
-                                                  // controller.selectedItem =
-                                                  //     controller.businessTypeList.firstWhere(
-                                                  //         (element) =>
-                                                  //             "${element.id}" ==
-                                                  //             _permitTypeList[0]);
-                                                  // controller.selectedItem =
-                                                  //     controller.businessTypeList.firstWhere(
-                                                  //         (element) =>
-                                                  //             "${element.id}" ==
-                                                  //             _permitTypeList[0]);
-                                                })
-                                            // : Container(),
-                                            ,
-                                            TableActionButton(
-                                              color: ColorValues.deleteColor,
-                                              icon: Icons.delete,
-                                              message: 'Delete',
-                                              onPress: () {
-                                                controller.isDeleteDialog(
-                                                    businesstype_id: controller
+                              controller.businessTypeList.isEmpty == true &&
+                                      controller.isLoading == false
+                                  ? Center(child: Text("No Data"))
+                                  : controller.isLoading.value == true
+                                      ? Center(
+                                          child: Text("Data Loading......"))
+                                      : Expanded(
+                                          child: DataTable2(
+                                            key: UniqueKey(),
+                                            dataRowHeight: 50,
+                                            columnSpacing: 10,
+                                            border: TableBorder.all(
+                                                color: Color.fromARGB(
+                                                    255, 206, 229, 234)),
+                                            columns: [
+                                              DataColumn2(
+                                                  fixedWidth: 100,
+                                                  label: Text(
+                                                    "Sr No",
+                                                    style: TextStyle(
+                                                        fontSize: 15,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  )),
+                                              DataColumn2(
+                                                  // fixedWidth: 150,
+                                                  label: Text(
+                                                "Name",
+                                                style: TextStyle(
+                                                    fontSize: 15,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              )),
+                                              DataColumn2(
+                                                  // fixedWidth: 300,
+                                                  label: Text(
+                                                "Description",
+                                                style: TextStyle(
+                                                    fontSize: 15,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              )),
+                                              DataColumn2(
+                                                  fixedWidth: 100,
+                                                  label: Text(
+                                                    'Action',
+                                                    style: TextStyle(
+                                                        fontSize: 15,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  )),
+                                            ],
+                                            rows: List<DataRow>.generate(
+                                              controller.businessTypeList
+                                                      .length ??
+                                                  0,
+                                              (index) => DataRow(cells: [
+                                                DataCell(Text(
+                                                    (index + 1).toString())),
+                                                DataCell(Text(controller
                                                         .businessTypeList[index]
-                                                        ?.id
-                                                        .toString(),
-                                                    businesstype: controller
+                                                        ?.name
+                                                        .toString() ??
+                                                    '')),
+                                                DataCell(Text(controller
                                                         .businessTypeList[index]
-                                                        ?.name);
-                                              },
+                                                        ?.description ??
+                                                    '')),
+                                                DataCell(Row(
+                                                  children: [
+                                                    TableActionButton(
+                                                        color: ColorValues
+                                                            .editColor,
+                                                        icon: Icons.edit,
+                                                        message: 'Edit',
+                                                        onPress: () {
+                                                          controller.selectedItem = controller
+                                                              .businessTypeList
+                                                              .firstWhere((element) =>
+                                                                  "${element?.id}" ==
+                                                                  controller
+                                                                      .businessTypeList[
+                                                                          index]
+                                                                      ?.id
+                                                                      .toString());
+
+                                                          controller.nameCtrlr
+                                                              .text = controller
+                                                                  .selectedItem
+                                                                  ?.name ??
+                                                              '';
+                                                          controller
+                                                              .descriptionCtrlr
+                                                              .text = controller
+                                                                  .selectedItem
+                                                                  ?.description ??
+                                                              '';
+                                                          controller
+                                                              .isContainerVisible
+                                                              .value = true;
+                                                          // int spvId = int.tryParse(
+                                                          //         businessTypeList?.name ??
+                                                          //             "") ??
+                                                          //     0;
+                                                          // if (spvId != 0) {
+                                                          //   Get.toNamed(
+                                                          //       Routes.SPVListScreen,
+                                                          //       arguments: {"spvId": spvId});
+                                                          // }
+                                                          // controller.selectedItem =
+                                                          //     controller.businessTypeList.firstWhere(
+                                                          //         (element) =>
+                                                          //             "${element.id}" ==
+                                                          //             _permitTypeList[0]);
+                                                          // controller.selectedItem =
+                                                          //     controller.businessTypeList.firstWhere(
+                                                          //         (element) =>
+                                                          //             "${element.id}" ==
+                                                          //             _permitTypeList[0]);
+                                                        })
+                                                    // : Container(),
+                                                    ,
+                                                    TableActionButton(
+                                                      color: ColorValues
+                                                          .deleteColor,
+                                                      icon: Icons.delete,
+                                                      message: 'Delete',
+                                                      onPress: () {
+                                                        controller.isDeleteDialog(
+                                                            businesstype_id:
+                                                                controller
+                                                                    .businessTypeList[
+                                                                        index]
+                                                                    ?.id
+                                                                    .toString(),
+                                                            businesstype: controller
+                                                                .businessTypeList[
+                                                                    index]
+                                                                ?.name);
+                                                      },
+                                                    ),
+                                                  ],
+                                                )),
+                                              ]),
                                             ),
-                                          ],
-                                        )),
-                                      ]),
-                                    ),
-                                  ),
-                                ),
-                              ),
+                                          ),
+                                        ),
                             ],
                           ),
                         ),

@@ -588,9 +588,9 @@ class TBTTypeListContentWeb extends GetView<TBTTypeListController> {
                                 style: Styles.blackBold16,
                               ),
                             ),
-                            Divider(
-                              color: ColorValues.greyLightColour,
-                            ),
+                            // Divider(
+                            //   color: ColorValues.greyLightColour,
+                            // ),
                             Row(
                               children: [
                                 // Container(
@@ -638,70 +638,10 @@ class TBTTypeListContentWeb extends GetView<TBTTypeListController> {
                             // SizedBox(
                             //   height: 20,
                             // ),
-                            controller.jobTypeList.isEmpty
-                                ? Expanded(
-                                    child: DataTable2(
-                                      columns: [
-                                        DataColumn2(
-                                          label: Text(
-                                            "Sr.No.",
-                                            style: TextStyle(
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                          size: ColumnSize.S,
-                                        ),
-                                        DataColumn2(
-                                          label: Text(
-                                            "Title",
-                                            style: TextStyle(
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                          size: ColumnSize.M,
-                                        ),
-                                        DataColumn2(
-                                          label: Text(
-                                            "Description",
-                                            style: TextStyle(
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                          size: ColumnSize.S,
-                                        ),
-                                        DataColumn2(
-                                          label: Text(
-                                            "Require\nSOP/JSA",
-                                            style: TextStyle(
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                          size: ColumnSize.S,
-                                        ),
-                                        DataColumn2(
-                                          label: Text(
-                                            "Action",
-                                            style: TextStyle(
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                          size: ColumnSize.S,
-                                        ),
-                                      ],
-                                      rows: List.generate(
-                                        controller.jobTypeList.length,
-                                        (index) {
-                                          return DataRow(cells: [
-                                            DataCell(Text('')),
-                                            DataCell(Text('')),
-                                            DataCell(Text('')),
-                                            DataCell(Text('')),
-                                            DataCell(Text('')),
-                                          ]);
-                                        },
-                                      ),
-                                    ),
-                                  )
+                            controller.jobTypeList.isEmpty == true && controller.isLoading == false
+                            ? Center(child: Text('No Data'))
+                            : controller.isLoading.value == true
+                            ? Center(child: Text("Data Loading......"))
                                 : Expanded(
                                     child: DataTable2(
                                       columns: [

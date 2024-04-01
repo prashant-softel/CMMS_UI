@@ -124,6 +124,7 @@ class BodyInjuredController extends GetxController {
   var titleCtrlr = TextEditingController();
   var descriptionCtrlr = TextEditingController();
 
+  Rx<bool> isLoading = true.obs;
   @override
   void onInit() async {
     // getInventoryCategoryList();
@@ -152,11 +153,14 @@ class BodyInjuredController extends GetxController {
     bodyinjuredList.value = <BodyInjuredModel>[];
     BufferBodyInjuredList.value = <BodyInjuredModel>[];
     final _bodypartList = await bodyinjuredpresenter.getBodyInjuredList(
-      isLoading: true,
+      isLoading: isLoading.value,
     );
-    for (var facilityType_list in _bodypartList) {
-      bodyinjuredList.add(facilityType_list);
-      BufferBodyInjuredList.add(facilityType_list);
+    if (_bodypartList != null) {
+      isLoading.value = false;
+      for (var facilityType_list in _bodypartList) {
+        bodyinjuredList.add(facilityType_list);
+        BufferBodyInjuredList.add(facilityType_list);
+      }
     }
 
     BodyInjuredListPaginationController = PaginationController(

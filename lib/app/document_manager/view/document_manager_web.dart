@@ -187,276 +187,269 @@ class DocumentManagerWeb extends GetView<DocumentManagerController> {
                                 ),
                               ],
                             ),
-                            child: controller.userList!.isEmpty
-                                ? Center(
-                                    child: Text(
-                                      "No data Found.....",
-                                      style: Styles.black15W600,
-                                    ),
-                                  )
-                                : ScrollableTableView(
-                                    paginationController:
-                                        controller.paginationController,
-                                    columns: [
-                                      "Document ID ",
-                                      "Site Name",
-                                      "Category Name",
-                                      "Status",
-                                      "Action"
-                                    ].map((column) {
-                                      if (column == "Action") {
-                                        return TableViewColumn(
-                                          minWidth: 300,
-                                          label: column,
-                                        );
-                                      } else {
-                                        return TableViewColumn(
-                                          minWidth: 200,
-                                          label: column,
-                                        );
-                                      }
-                                    }).toList(),
-                                    rows: //
-                                        [
-                                      ...List.generate(
-                                        controller.userList?.length ?? 0,
-                                        (index) {
-                                          var userListModelListDetails =
-                                              controller.userList?[index];
-                                          return [
-                                            '${userListModelListDetails?.user_name}',
-                                            '${userListModelListDetails?.role_name}',
-                                            '${userListModelListDetails?.contact_no}',
-                                            '${userListModelListDetails?.status}',
-                                            "Action"
-                                          ];
-                                        },
-                                      ),
-                                    ].map((_userList) {
-                                      return TableViewRow(
-                                          onTap: () {
-                                            controller.selectedItem = controller
-                                                .userList!
-                                                .firstWhere((element) =>
-                                                    "${element?.user_name}" ==
-                                                    _userList[1]);
-                                            int userId =
-                                                controller.selectedItem?.id ??
-                                                    0;
-                                            if (userId != 0) {
-                                              Get.offNamed(
-                                                  Routes.viewUserDetail,
-                                                  arguments: userId);
-                                            }
-                                          },
-                                          height: 60,
-                                          cells: _userList.map((value) {
-                                            return TableViewCell(
-                                                child: (value == "Profile_Img")
-                                                    ? controller.userList!
-                                                                .firstWhere(
-                                                                  (e) =>
-                                                                      "${e?.photoPath}" ==
-                                                                      _userList[
-                                                                          0],
-                                                                  orElse: () =>
-                                                                      DocumentManagerModel(
-                                                                          id: 000),
-                                                                )
-                                                                ?.photoPath !=
-                                                            null
-                                                        ? Container(
-                                                            height: 45,
-                                                            width: 45,
-                                                            decoration:
-                                                                BoxDecoration(
-                                                              color: Color
-                                                                  .fromARGB(
-                                                                      255,
-                                                                      171,
-                                                                      38,
-                                                                      38),
-                                                              border:
-                                                                  Border.all(
-                                                                color: Color
-                                                                    .fromARGB(
-                                                                        255,
-                                                                        134,
-                                                                        78,
-                                                                        78),
-                                                              ),
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          100),
-                                                            ),
-                                                            child:
-                                                                GestureDetector(
-                                                              onTap: () {},
-                                                              child: Center(
-                                                                child: Icon(
-                                                                  Icons.person,
-                                                                  size: 25,
-                                                                  color: ColorValues
-                                                                      .appBlueBackgroundColor,
-                                                                ),
-                                                              ), //Circ
-                                                            ),
-                                                          )
-                                                        : Container(
-                                                            height: 45,
-                                                            width: 45,
-                                                            decoration:
-                                                                BoxDecoration(
-                                                              color: ColorValues
-                                                                  .appDarkGreyColor,
-                                                              border:
-                                                                  Border.all(
-                                                                color: ColorValues
-                                                                    .appDarkGreyColor,
-                                                              ),
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          100),
-                                                            ),
-                                                            child:
-                                                                GestureDetector(
-                                                              onTap: () {},
-                                                              child: Center(
-                                                                child: Icon(
-                                                                  Icons.person,
-                                                                  size: 25,
-                                                                  color: ColorValues
-                                                                      .appBlueBackgroundColor,
-                                                                ),
-                                                              ), //Circ
-                                                            ),
-                                                          )
-                                                    : (value == "Action")
-                                                        ? Wrap(children: [
-                                                            TableActionButton(
-                                                              color: ColorValues
-                                                                  .appDarkBlueColor,
-                                                              icon: Icons
-                                                                  .remove_red_eye_outlined,
-                                                              message: 'view',
-                                                              onPress: () {
-                                                                controller.selectedItem = controller
-                                                                    .userList!
-                                                                    .firstWhere((element) =>
-                                                                        "${element?.user_name}" ==
-                                                                        _userList[
-                                                                            1]);
-                                                                int userId = controller
-                                                                        .selectedItem
-                                                                        ?.id ??
-                                                                    0;
-                                                                if (userId !=
-                                                                    0) {
-                                                                  Get.offNamed(
-                                                                      Routes
-                                                                          .viewUserDetail,
-                                                                      arguments:
-                                                                          userId);
-                                                                }
-                                                              },
-                                                            ),
-                                                            TableActionButton(
-                                                              color: ColorValues
-                                                                  .appYellowColor,
-                                                              icon: Icons
-                                                                  .download,
-                                                              message: 'Edit',
-                                                              onPress: () {
-                                                                controller.selectedItem = controller
-                                                                    .userList!
-                                                                    .firstWhere((element) =>
-                                                                        "${element?.user_name}" ==
-                                                                        _userList[
-                                                                            1]);
-                                                                int userId = controller
-                                                                        .selectedItem
-                                                                        ?.id ??
-                                                                    0;
-                                                                if (userId !=
-                                                                    0) {
-                                                                  Get.offNamed(
-                                                                      Routes
-                                                                          .addUser,
-                                                                      arguments:
-                                                                          userId);
-                                                                }
-                                                              },
-                                                            ),
-                                                            TableActionButton(
-                                                              color: ColorValues
-                                                                  .appGreenColor,
-                                                              icon: Icons.check,
-                                                              message: 'Edit',
-                                                              onPress: () {
-                                                                controller.selectedItem = controller
-                                                                    .userList!
-                                                                    .firstWhere((element) =>
-                                                                        "${element?.user_name}" ==
-                                                                        _userList[
-                                                                            1]);
-                                                                int userId = controller
-                                                                        .selectedItem
-                                                                        ?.id ??
-                                                                    0;
-                                                                if (userId !=
-                                                                    0) {
-                                                                  Get.offNamed(
-                                                                      Routes
-                                                                          .addUser,
-                                                                      arguments:
-                                                                          userId);
-                                                                }
-                                                              },
-                                                            ),
-                                                            TableActionButton(
-                                                              color: ColorValues
-                                                                  .appRedColor,
-                                                              icon: Icons.close,
-                                                              message: 'Edit',
-                                                              onPress: () {
-                                                                controller.selectedItem = controller
-                                                                    .userList!
-                                                                    .firstWhere((element) =>
-                                                                        "${element?.user_name}" ==
-                                                                        _userList[
-                                                                            1]);
-                                                                int userId = controller
-                                                                        .selectedItem
-                                                                        ?.id ??
-                                                                    0;
-                                                                if (userId !=
-                                                                    0) {
-                                                                  Get.offNamed(
-                                                                      Routes
-                                                                          .addUser,
-                                                                      arguments:
-                                                                          userId);
-                                                                }
-                                                              },
-                                                            ),
-                                                            TableActionButton(
-                                                              color: ColorValues
-                                                                  .skyBlueColor,
-                                                              icon: Icons.send,
-                                                              message: 'Delete',
-                                                              onPress: () {},
-                                                            )
-                                                          ])
-                                                        : Expanded(
-                                                            child: Text(
-                                                              value,
-                                                            ),
-                                                          ));
-                                          }).toList());
-                                    }).toList(),
-                                  )),
+                            child:
+                                controller.userList!.isEmpty == true &&
+                                        controller.isLoading == false
+                                    ? Center(
+                                        child: Text(
+                                          "No data Found.....",
+                                        ),
+                                      )
+                                    : controller.isLoading.value == true
+                                        ? Center(
+                                            child: Text("Data Loading......"))
+                                        : ScrollableTableView(
+                                            paginationController:
+                                                controller.paginationController,
+                                            columns: [
+                                              "Document ID ",
+                                              "Site Name",
+                                              "Category Name",
+                                              "Status",
+                                              "Action"
+                                            ].map((column) {
+                                              if (column == "Action") {
+                                                return TableViewColumn(
+                                                  minWidth: 300,
+                                                  label: column,
+                                                );
+                                              } else {
+                                                return TableViewColumn(
+                                                  minWidth: 200,
+                                                  label: column,
+                                                );
+                                              }
+                                            }).toList(),
+                                            rows: //
+                                                [
+                                              ...List.generate(
+                                                controller.userList?.length ??
+                                                    0,
+                                                (index) {
+                                                  var userListModelListDetails =
+                                                      controller
+                                                          .userList?[index];
+                                                  return [
+                                                    '${userListModelListDetails?.user_name}',
+                                                    '${userListModelListDetails?.role_name}',
+                                                    '${userListModelListDetails?.contact_no}',
+                                                    '${userListModelListDetails?.status}',
+                                                    "Action"
+                                                  ];
+                                                },
+                                              ),
+                                            ].map((_userList) {
+                                              return TableViewRow(
+                                                  onTap: () {
+                                                    controller.selectedItem = controller
+                                                        .userList!
+                                                        .firstWhere((element) =>
+                                                            "${element?.user_name}" ==
+                                                            _userList[1]);
+                                                    int userId = controller
+                                                            .selectedItem?.id ??
+                                                        0;
+                                                    if (userId != 0) {
+                                                      Get.offNamed(
+                                                          Routes.viewUserDetail,
+                                                          arguments: userId);
+                                                    }
+                                                  },
+                                                  height: 60,
+                                                  cells: _userList.map((value) {
+                                                    return TableViewCell(
+                                                        child: (value ==
+                                                                "Profile_Img")
+                                                            ? controller
+                                                                        .userList!
+                                                                        .firstWhere(
+                                                                          (e) =>
+                                                                              "${e?.photoPath}" ==
+                                                                              _userList[0],
+                                                                          orElse: () =>
+                                                                              DocumentManagerModel(id: 000),
+                                                                        )
+                                                                        ?.photoPath !=
+                                                                    null
+                                                                ? Container(
+                                                                    height: 45,
+                                                                    width: 45,
+                                                                    decoration:
+                                                                        BoxDecoration(
+                                                                      color: Color.fromARGB(
+                                                                          255,
+                                                                          171,
+                                                                          38,
+                                                                          38),
+                                                                      border:
+                                                                          Border
+                                                                              .all(
+                                                                        color: Color.fromARGB(
+                                                                            255,
+                                                                            134,
+                                                                            78,
+                                                                            78),
+                                                                      ),
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(
+                                                                              100),
+                                                                    ),
+                                                                    child:
+                                                                        GestureDetector(
+                                                                      onTap:
+                                                                          () {},
+                                                                      child:
+                                                                          Center(
+                                                                        child:
+                                                                            Icon(
+                                                                          Icons
+                                                                              .person,
+                                                                          size:
+                                                                              25,
+                                                                          color:
+                                                                              ColorValues.appBlueBackgroundColor,
+                                                                        ),
+                                                                      ), //Circ
+                                                                    ),
+                                                                  )
+                                                                : Container(
+                                                                    height: 45,
+                                                                    width: 45,
+                                                                    decoration:
+                                                                        BoxDecoration(
+                                                                      color: ColorValues
+                                                                          .appDarkGreyColor,
+                                                                      border:
+                                                                          Border
+                                                                              .all(
+                                                                        color: ColorValues
+                                                                            .appDarkGreyColor,
+                                                                      ),
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(
+                                                                              100),
+                                                                    ),
+                                                                    child:
+                                                                        GestureDetector(
+                                                                      onTap:
+                                                                          () {},
+                                                                      child:
+                                                                          Center(
+                                                                        child:
+                                                                            Icon(
+                                                                          Icons
+                                                                              .person,
+                                                                          size:
+                                                                              25,
+                                                                          color:
+                                                                              ColorValues.appBlueBackgroundColor,
+                                                                        ),
+                                                                      ), //Circ
+                                                                    ),
+                                                                  )
+                                                            : (value ==
+                                                                    "Action")
+                                                                ? Wrap(
+                                                                    children: [
+                                                                        TableActionButton(
+                                                                          color:
+                                                                              ColorValues.appDarkBlueColor,
+                                                                          icon:
+                                                                              Icons.remove_red_eye_outlined,
+                                                                          message:
+                                                                              'view',
+                                                                          onPress:
+                                                                              () {
+                                                                            controller.selectedItem = controller.userList!.firstWhere((element) =>
+                                                                                "${element?.user_name}" ==
+                                                                                _userList[1]);
+                                                                            int userId =
+                                                                                controller.selectedItem?.id ?? 0;
+                                                                            if (userId !=
+                                                                                0) {
+                                                                              Get.offNamed(Routes.viewUserDetail, arguments: userId);
+                                                                            }
+                                                                          },
+                                                                        ),
+                                                                        TableActionButton(
+                                                                          color:
+                                                                              ColorValues.appYellowColor,
+                                                                          icon:
+                                                                              Icons.download,
+                                                                          message:
+                                                                              'Edit',
+                                                                          onPress:
+                                                                              () {
+                                                                            controller.selectedItem = controller.userList!.firstWhere((element) =>
+                                                                                "${element?.user_name}" ==
+                                                                                _userList[1]);
+                                                                            int userId =
+                                                                                controller.selectedItem?.id ?? 0;
+                                                                            if (userId !=
+                                                                                0) {
+                                                                              Get.offNamed(Routes.addUser, arguments: userId);
+                                                                            }
+                                                                          },
+                                                                        ),
+                                                                        TableActionButton(
+                                                                          color:
+                                                                              ColorValues.appGreenColor,
+                                                                          icon:
+                                                                              Icons.check,
+                                                                          message:
+                                                                              'Edit',
+                                                                          onPress:
+                                                                              () {
+                                                                            controller.selectedItem = controller.userList!.firstWhere((element) =>
+                                                                                "${element?.user_name}" ==
+                                                                                _userList[1]);
+                                                                            int userId =
+                                                                                controller.selectedItem?.id ?? 0;
+                                                                            if (userId !=
+                                                                                0) {
+                                                                              Get.offNamed(Routes.addUser, arguments: userId);
+                                                                            }
+                                                                          },
+                                                                        ),
+                                                                        TableActionButton(
+                                                                          color:
+                                                                              ColorValues.appRedColor,
+                                                                          icon:
+                                                                              Icons.close,
+                                                                          message:
+                                                                              'Edit',
+                                                                          onPress:
+                                                                              () {
+                                                                            controller.selectedItem = controller.userList!.firstWhere((element) =>
+                                                                                "${element?.user_name}" ==
+                                                                                _userList[1]);
+                                                                            int userId =
+                                                                                controller.selectedItem?.id ?? 0;
+                                                                            if (userId !=
+                                                                                0) {
+                                                                              Get.offNamed(Routes.addUser, arguments: userId);
+                                                                            }
+                                                                          },
+                                                                        ),
+                                                                        TableActionButton(
+                                                                          color:
+                                                                              ColorValues.skyBlueColor,
+                                                                          icon:
+                                                                              Icons.send,
+                                                                          message:
+                                                                              'Delete',
+                                                                          onPress:
+                                                                              () {},
+                                                                        )
+                                                                      ])
+                                                                : Expanded(
+                                                                    child: Text(
+                                                                      value,
+                                                                    ),
+                                                                  ));
+                                                  }).toList());
+                                            }).toList(),
+                                          )),
                       ),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 25),

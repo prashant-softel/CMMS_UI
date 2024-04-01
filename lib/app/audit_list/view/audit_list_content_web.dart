@@ -319,8 +319,10 @@ class _AuditListContentWebState extends State<AuditListContentWeb> {
                                   SizedBox(
                                     height: 20,
                                   ),
-                                  controller.auditPlanList.isEmpty
+                                  controller.auditPlanList.isEmpty == true && controller.isLoading== false
                                       ? Center(child: Text('No data'))
+                                      : controller.isLoading == true
+                                      ? Center(child: Text("Data Loading......"))
                                       : Expanded(
                                           child: ValueListenableBuilder(
                                               valueListenable:

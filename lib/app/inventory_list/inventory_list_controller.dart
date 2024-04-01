@@ -75,6 +75,7 @@ class InventoryListController extends GetxController {
     print({"updated columnVisibility": columnVisibility});
   }
 
+  Rx<bool> isLoading = true.obs;
   @override
   void onInit() async {
     this.filterText = {
@@ -88,7 +89,7 @@ class InventoryListController extends GetxController {
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
       facilityId = event;
       Future.delayed(Duration(seconds: 2), () async {
-        await getInventoryAssetsList(facilityId, true, false);
+        await getInventoryAssetsList(facilityId,  false);
       });
     });
     super.onInit();
@@ -137,31 +138,35 @@ class InventoryListController extends GetxController {
     inventoryList.value = filteredList;
   }
 
-  Future<void> getInventoryAssetsList(
-      int facilityId, bool isLoading, bool isExport) async {
+  Future<void> getInventoryAssetsList(int facilityId, bool isExport) async {
     inventoryList.value = <InventoryModel>[];
     filteredData.value = <InventoryModel>[];
     final _inventoryList = await inventoryListPresenter.getInventoryAssetsList(
-        isLoading: true, facility_id: facilityId, isExport: isExport);
-    inventoryList.value = _inventoryList;
-    filteredData.value = inventoryList.value;
-    paginationController = PaginationController(
-      rowCount: inventoryList.length,
-      rowsPerPage: 10,
-    );
+        isLoading: isLoading.value,
+        facility_id: facilityId,
+        isExport: isExport);
+    if (inventoryList != null) {
+      inventoryList.value = _inventoryList;
+      filteredData.value = inventoryList.value;
+      isLoading.value = false;
+      paginationController = PaginationController(
+        rowCount: inventoryList.length,
+        rowsPerPage: 10,
+      );
 
-    if (inventoryList.isNotEmpty) {
-      inventoryListModel = inventoryList[0];
-      var inventoryListJson = inventoryListModel?.toJson();
-      inventoryListTableColumns.value = <String>[];
-      for (var key in inventoryListJson?.keys.toList() ?? []) {
-        inventoryListTableColumns.add(key);
+      if (inventoryList.isNotEmpty) {
+        inventoryListModel = inventoryList[0];
+        var inventoryListJson = inventoryListModel?.toJson();
+        inventoryListTableColumns.value = <String>[];
+        for (var key in inventoryListJson?.keys.toList() ?? []) {
+          inventoryListTableColumns.add(key);
+        }
       }
     }
   }
 
   void export() {
-    getInventoryAssetsList(facilityId, true, true);
+    getInventoryAssetsList(facilityId,  true);
   }
 
   void onValueChanged(dynamic list, dynamic value) {

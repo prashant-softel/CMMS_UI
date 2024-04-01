@@ -1563,207 +1563,246 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                               SizedBox(
                                 height: 20,
                               ),
-                              Expanded(
-                                child: Obx(
-                                  () => DataTable2(
-                                    key: UniqueKey(),
-                                    dataRowHeight: 50,
-                                    columnSpacing: 8,
-                                    border: TableBorder.all(
-                                        color:
-                                            Color.fromARGB(255, 206, 229, 234)),
-                                    columns: [
-                                      DataColumn2(
-                                          fixedWidth: 45,
-                                          label: Text(
-                                            "Sr No",
-                                            style: TextStyle(
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.bold),
-                                          )),
-                                      DataColumn2(
-                                          fixedWidth: 350,
-                                          label: Text(
-                                            "Company Name",
-                                            style: TextStyle(
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.bold),
-                                          )),
-                                      DataColumn2(
-                                          // fixedWidth: 350,
-                                          label: Text(
-                                        "Business Type",
-                                        style: TextStyle(
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.bold),
-                                      )),
-                                      DataColumn2(
-                                          // fixedWidth: 100,
-                                          label: Text(
-                                        "Contact Person",
-                                        style: TextStyle(
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.bold),
-                                      )),
-                                      DataColumn2(
-                                          // fixedWidth: 150,
-                                          label: Text(
-                                        "Contact No",
-                                        style: TextStyle(
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.bold),
-                                      )),
-                                      DataColumn2(
-                                          // fixedWidth: 100,
-                                          label: Text(
-                                        "Email",
-                                        style: TextStyle(
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.bold),
-                                      )),
-                                      DataColumn2(
-                                          // fixedWidth: 100,
-                                          label: Text(
-                                        "City",
-                                        style: TextStyle(
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.bold),
-                                      )),
-                                      DataColumn2(
-                                          fixedWidth: 100,
-                                          label: Text(
-                                            'Action',
-                                            style: TextStyle(
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.bold),
-                                          )),
-                                    ],
-                                    rows: List<DataRow>.generate(
-                                      controller.moduleList?.length ?? 0,
-                                      (index) => DataRow(cells: [
-                                        DataCell(Text((index + 1).toString())),
-                                        DataCell(Text(controller
-                                                .moduleList?[index]?.name ??
-                                            '')),
-                                        DataCell(Text(
-                                            // Here, you should find the corresponding business type name
-                                            controller.businessCategoryList
-                                                    .firstWhere((element) =>
-                                                        element!.id ==
-                                                        controller
-                                                            .moduleList?[index]
-                                                            ?.type)!
-                                                    .name ??
-                                                '')),
-                                        DataCell(Text(controller
-                                                .moduleList?[index]
-                                                ?.contactPerson ??
-                                            '')),
-                                        DataCell(Text(controller
-                                                .moduleList?[index]
-                                                ?.contactnumber
-                                                .toString() ??
-                                            '')),
-                                        DataCell(Text(controller
-                                                .moduleList?[index]?.email
-                                                .toString() ??
-                                            '')),
-                                        DataCell(Text(controller
-                                                .moduleList?[index]?.city
-                                                .toString() ??
-                                            '')),
-                                        DataCell(Row(
-                                          children: [
-                                            TableActionButton(
-                                                color: ColorValues.editColor,
-                                                icon: Icons.edit,
-                                                message: 'Edit',
-                                                onPress: () {
-                                                  controller.selectedItem =
-                                                      controller
-                                                          .moduleList!
-                                                          .firstWhere((element) =>
-                                                              "${element!.id}" ==
-                                                              controller
-                                                                  .moduleList?[
-                                                                      index]
-                                                                  ?.id
-                                                                  .toString());
-
-                                                  controller
-                                                      .businesslistNumberCtrlr
-                                                      .text = controller
-                                                          .selectedItem?.name ??
-                                                      '';
-                                                  controller.emailCtrlr.text =
-                                                      controller.selectedItem
-                                                              ?.email ??
-                                                          '';
-                                                  controller.contactpersonCtrlr
-                                                      .text = controller
-                                                          .selectedItem
-                                                          ?.contactPerson ??
-                                                      '';
-                                                  controller.contactnumberCtrlr
-                                                      .text = controller
-                                                          .selectedItem
-                                                          ?.contactnumber ??
-                                                      '';
-                                                  controller.websiteCtrlr.text =
-                                                      controller.selectedItem
-                                                              ?.website ??
-                                                          '';
-                                                  controller.locationCtrlr
-                                                      .text = controller
-                                                          .selectedItem
-                                                          ?.location ??
-                                                      '';
-                                                  controller.addressCtrlr.text =
-                                                      controller.selectedItem
-                                                              ?.address ??
-                                                          '';
-                                                  controller.selectedCity
-                                                      .value = controller
-                                                          .selectedItem?.city ??
-                                                      '';
-                                                  controller.selectedState
-                                                      .value = controller
-                                                          .selectedItem
-                                                          ?.state ??
-                                                      '';
-                                                  controller.selectedCountry
-                                                      .value = controller
-                                                          .selectedItem
-                                                          ?.country ??
-                                                      '';
-                                                  controller.zipCtrlr.text =
-                                                      controller.selectedItem
-                                                              ?.zip ??
-                                                          '';
-                                                  controller.isContainerVisible
-                                                      .value = true;
-                                                }),
-                                            TableActionButton(
-                                              color: ColorValues.deleteColor,
-                                              icon: Icons.delete,
-                                              message: 'Delete',
-                                              onPress: () {
-                                                controller.isDeleteDialog(
-                                                    business_id: controller
-                                                        .moduleList?[index]?.id
-                                                        .toString(),
-                                                    business: controller
+                              controller.moduleList!.isEmpty == true &&
+                                      controller.isLoading == false
+                                  ? Center(child: Text("No Data"))
+                                  : controller.isLoading.value == true
+                                      ? Center(
+                                          child: Text("Data Loading......"))
+                                      : Expanded(
+                                          child: DataTable2(
+                                            key: UniqueKey(),
+                                            dataRowHeight: 50,
+                                            columnSpacing: 8,
+                                            border: TableBorder.all(
+                                                color: Color.fromARGB(
+                                                    255, 206, 229, 234)),
+                                            columns: [
+                                              DataColumn2(
+                                                  fixedWidth: 45,
+                                                  label: Text(
+                                                    "Sr No",
+                                                    style: TextStyle(
+                                                        fontSize: 15,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  )),
+                                              DataColumn2(
+                                                  fixedWidth: 350,
+                                                  label: Text(
+                                                    "Company Name",
+                                                    style: TextStyle(
+                                                        fontSize: 15,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  )),
+                                              DataColumn2(
+                                                  // fixedWidth: 350,
+                                                  label: Text(
+                                                "Business Type",
+                                                style: TextStyle(
+                                                    fontSize: 15,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              )),
+                                              DataColumn2(
+                                                  // fixedWidth: 100,
+                                                  label: Text(
+                                                "Contact Person",
+                                                style: TextStyle(
+                                                    fontSize: 15,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              )),
+                                              DataColumn2(
+                                                  // fixedWidth: 150,
+                                                  label: Text(
+                                                "Contact No",
+                                                style: TextStyle(
+                                                    fontSize: 15,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              )),
+                                              DataColumn2(
+                                                  // fixedWidth: 100,
+                                                  label: Text(
+                                                "Email",
+                                                style: TextStyle(
+                                                    fontSize: 15,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              )),
+                                              DataColumn2(
+                                                  // fixedWidth: 100,
+                                                  label: Text(
+                                                "City",
+                                                style: TextStyle(
+                                                    fontSize: 15,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              )),
+                                              DataColumn2(
+                                                  fixedWidth: 100,
+                                                  label: Text(
+                                                    'Action',
+                                                    style: TextStyle(
+                                                        fontSize: 15,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  )),
+                                            ],
+                                            rows: List<DataRow>.generate(
+                                              controller.moduleList?.length ??
+                                                  0,
+                                              (index) => DataRow(cells: [
+                                                DataCell(Text(
+                                                    (index + 1).toString())),
+                                                DataCell(Text(controller
                                                         .moduleList?[index]
-                                                        ?.name);
-                                              },
+                                                        ?.name ??
+                                                    '')),
+                                                DataCell(Text(
+                                                    // Here, you should find the corresponding business type name
+                                                    controller
+                                                            .businessCategoryList
+                                                            .firstWhere((element) =>
+                                                                element!.id ==
+                                                                controller
+                                                                    .moduleList?[
+                                                                        index]
+                                                                    ?.type)!
+                                                            .name ??
+                                                        '')),
+                                                DataCell(Text(controller
+                                                        .moduleList?[index]
+                                                        ?.contactPerson ??
+                                                    '')),
+                                                DataCell(Text(controller
+                                                        .moduleList?[index]
+                                                        ?.contactnumber
+                                                        .toString() ??
+                                                    '')),
+                                                DataCell(Text(controller
+                                                        .moduleList?[index]
+                                                        ?.email
+                                                        .toString() ??
+                                                    '')),
+                                                DataCell(Text(controller
+                                                        .moduleList?[index]
+                                                        ?.city
+                                                        .toString() ??
+                                                    '')),
+                                                DataCell(Row(
+                                                  children: [
+                                                    TableActionButton(
+                                                        color: ColorValues
+                                                            .editColor,
+                                                        icon: Icons.edit,
+                                                        message: 'Edit',
+                                                        onPress: () {
+                                                          controller.selectedItem = controller
+                                                              .moduleList!
+                                                              .firstWhere((element) =>
+                                                                  "${element!.id}" ==
+                                                                  controller
+                                                                      .moduleList?[
+                                                                          index]
+                                                                      ?.id
+                                                                      .toString());
+
+                                                          controller
+                                                              .businesslistNumberCtrlr
+                                                              .text = controller
+                                                                  .selectedItem
+                                                                  ?.name ??
+                                                              '';
+                                                          controller.emailCtrlr
+                                                              .text = controller
+                                                                  .selectedItem
+                                                                  ?.email ??
+                                                              '';
+                                                          controller
+                                                              .contactpersonCtrlr
+                                                              .text = controller
+                                                                  .selectedItem
+                                                                  ?.contactPerson ??
+                                                              '';
+                                                          controller
+                                                              .contactnumberCtrlr
+                                                              .text = controller
+                                                                  .selectedItem
+                                                                  ?.contactnumber ??
+                                                              '';
+                                                          controller
+                                                              .websiteCtrlr
+                                                              .text = controller
+                                                                  .selectedItem
+                                                                  ?.website ??
+                                                              '';
+                                                          controller
+                                                              .locationCtrlr
+                                                              .text = controller
+                                                                  .selectedItem
+                                                                  ?.location ??
+                                                              '';
+                                                          controller
+                                                              .addressCtrlr
+                                                              .text = controller
+                                                                  .selectedItem
+                                                                  ?.address ??
+                                                              '';
+                                                          controller
+                                                              .selectedCity
+                                                              .value = controller
+                                                                  .selectedItem
+                                                                  ?.city ??
+                                                              '';
+                                                          controller
+                                                              .selectedState
+                                                              .value = controller
+                                                                  .selectedItem
+                                                                  ?.state ??
+                                                              '';
+                                                          controller
+                                                              .selectedCountry
+                                                              .value = controller
+                                                                  .selectedItem
+                                                                  ?.country ??
+                                                              '';
+                                                          controller.zipCtrlr
+                                                              .text = controller
+                                                                  .selectedItem
+                                                                  ?.zip ??
+                                                              '';
+                                                          controller
+                                                              .isContainerVisible
+                                                              .value = true;
+                                                        }),
+                                                    TableActionButton(
+                                                      color: ColorValues
+                                                          .deleteColor,
+                                                      icon: Icons.delete,
+                                                      message: 'Delete',
+                                                      onPress: () {
+                                                        controller.isDeleteDialog(
+                                                            business_id:
+                                                                controller
+                                                                    .moduleList?[
+                                                                        index]
+                                                                    ?.id
+                                                                    .toString(),
+                                                            business: controller
+                                                                .moduleList?[
+                                                                    index]
+                                                                ?.name);
+                                                      },
+                                                    ),
+                                                  ],
+                                                )),
+                                              ]),
                                             ),
-                                          ],
-                                        )),
-                                      ]),
-                                    ),
-                                  ),
-                                ),
-                              ),
+                                          ),
+                                        ),
                             ],
                           ),
                         ),

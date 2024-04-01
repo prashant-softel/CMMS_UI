@@ -125,6 +125,7 @@ class IncidentRiskTypeController extends GetxController {
   var titleCtrlr = TextEditingController();
   // var descriptionCtrlr = TextEditingController();
 
+  Rx<bool> isLoading = true.obs;
   @override
   void onInit() async {
     // getInventoryCategoryList();
@@ -149,12 +150,15 @@ class IncidentRiskTypeController extends GetxController {
     incidentrisktypeList.value = <IncidentRiskTypeModell>[];
     BufferincidentrisktypeList.value = <IncidentRiskTypeModell>[];
     final _irisktypeList = await incidentrisktypepresenter.getIncidentRiskType(
-      facilityId:facilityId,
+      facilityId: facilityId,
       isLoading: true,
     );
-    for (var facilityType_list in _irisktypeList) {
-      incidentrisktypeList.add(facilityType_list);
-      BufferincidentrisktypeList.add(facilityType_list);
+    if (_irisktypeList != null) {
+      isLoading.value = false;
+      for (var facilityType_list in _irisktypeList) {
+        incidentrisktypeList.add(facilityType_list);
+        BufferincidentrisktypeList.add(facilityType_list);
+      }
     }
 
     IncidentRiskTypeListPaginationController = PaginationController(

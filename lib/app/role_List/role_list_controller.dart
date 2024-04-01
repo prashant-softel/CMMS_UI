@@ -56,12 +56,14 @@ class RoleListController extends GetxController {
   RoleModel? selectedItem;
   StreamSubscription<int>? facilityIdStreamSubscription;
 
+  Rx<bool> isLoading = true.obs;
+
   @override
   void onInit() async {
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
       facilityId = event;
       Future.delayed(Duration(seconds: 2), () {
-        getRoleList(true);
+        getRoleList();
       });
     });
     rolenameFocus.addListener(() {
@@ -72,16 +74,17 @@ class RoleListController extends GetxController {
     super.onInit();
   }
 
-  Future<void> getRoleList(bool isLoading) async {
+  Future<void> getRoleList() async {
     roleList?.value = <RoleModel>[];
     filteredData.value = <RoleModel>[];
 
     final _moduleList =
-        await roleListPresenter.getRoleList(isLoading: isLoading);
+        await roleListPresenter.getRoleList(isLoading: isLoading.value);
 
     if (_moduleList != null) {
       roleList!.value = _moduleList.cast<RoleModel?>();
       filteredData.value = roleList!.value;
+      isLoading.value = false;
       paginationController = PaginationController(
         rowCount: roleList?.length ?? 0,
         rowsPerPage: 10,
@@ -141,7 +144,7 @@ class RoleListController extends GetxController {
       );
       return true;
     }
-    getRoleList(true);
+    getRoleList();
     return true;
   }
 
@@ -156,7 +159,7 @@ class RoleListController extends GetxController {
     rolelistNumberCtrlr.text = '';
     selectedItem = null;
     Future.delayed(Duration(seconds: 1), () {
-      getRoleList(true);
+      getRoleList();
     });
     Future.delayed(Duration(seconds: 5), () {
       isSuccess.value = false;
@@ -216,7 +219,7 @@ class RoleListController extends GetxController {
                 onPressed: () {
                   deleteRoleList(module_id).then((value) {
                     Get.back();
-                    getRoleList(true);
+                    getRoleList();
                   });
                 },
                 child: Text('YES'),

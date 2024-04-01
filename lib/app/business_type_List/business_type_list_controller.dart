@@ -45,12 +45,13 @@ class BusinessTypeListController extends GetxController {
   var descriptionCtrlr = TextEditingController();
   final isSuccess = false.obs;
   StreamSubscription<int>? facilityIdStreamSubscription;
+  Rx<bool> isLoading = true.obs;
   @override
   void onInit() async {
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
       facilityId = event;
       Future.delayed(Duration(seconds: 2), () {
-        getBusinessTypeList(facilityId, type, true);
+        getBusinessTypeList(facilityId, type);
       });
     });
 
@@ -84,15 +85,15 @@ class BusinessTypeListController extends GetxController {
         .toList();
   }
 
-  Future<void> getBusinessTypeList(
-      int facilityId, int type, bool isLoading) async {
+  Future<void> getBusinessTypeList(int facilityId, int type) async {
     businessTypeList.value = <BusinessTypeModel>[];
     final _businessTypeList = await businessTypepresenter.getBusinessTypeList(
-        businessType: facilityId, isLoading: isLoading);
+        businessType: facilityId, isLoading: isLoading.value);
 
     if (_businessTypeList != null) {
       businessTypeList.value = _businessTypeList;
       filteredData.value = _businessTypeList;
+      isLoading.value = false;
       paginationController = PaginationController(
         rowCount: businessTypeList.length ?? 0,
         rowsPerPage: 10,
@@ -157,7 +158,7 @@ class BusinessTypeListController extends GetxController {
       );
       return true;
     }
-    getBusinessTypeList(facilityId, type, true);
+    getBusinessTypeList(facilityId, type);
     return true;
   }
 
@@ -173,7 +174,7 @@ class BusinessTypeListController extends GetxController {
     selectedItem = null;
 
     Future.delayed(Duration(seconds: 1), () {
-      getBusinessTypeList(facilityId, type, true);
+      getBusinessTypeList(facilityId, type);
     });
     Future.delayed(Duration(seconds: 5), () {
       isSuccess.value = false;
@@ -217,7 +218,7 @@ class BusinessTypeListController extends GetxController {
                 onPressed: () {
                   deleteBusinessType(businesstype_id).then((value) {
                     Get.back();
-                    getBusinessTypeList(facilityId, type, true);
+                    getBusinessTypeList(facilityId, type);
                   });
                 },
                 child: Text('YES'),

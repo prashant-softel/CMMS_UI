@@ -91,12 +91,13 @@ class ModuleListController extends GetxController {
 
   ModuleListModel? selectedItem;
   StreamSubscription<int>? facilityIdStreamSubscription;
+  Rx<bool> isLoading = true.obs;
   @override
   void onInit() async {
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
       facilityId = event;
       Future.delayed(Duration(seconds: 2), () {
-        getModuleList(facilityId, type, true);
+        getModuleList(facilityId, type);
       });
     });
     modnameFocus.addListener(() {
@@ -113,16 +114,17 @@ class ModuleListController extends GetxController {
     super.onInit();
   }
 
-  Future<void> getModuleList(int facilityId, int type, bool isLoading) async {
+  Future<void> getModuleList(int facilityId, int type) async {
     moduleList.value = <ModuleListModel>[];
     BufferModuleList.value = <ModuleListModel>[];
 
     final _moduleList = await moduleListPresenter.getModuleList(
-        facilityId: facilityId, type: type, isLoading: isLoading);
+        facilityId: facilityId, type: type, isLoading: isLoading.value);
 
     if (_moduleList != null) {
       moduleList.value = _moduleList.cast<ModuleListModel>();
       BufferModuleList.value = moduleList.value;
+      isLoading.value = false;
       paginationController = PaginationController(
         rowCount: moduleList.length ?? 0,
         rowsPerPage: 10,
@@ -223,7 +225,7 @@ class ModuleListController extends GetxController {
       );
       return true;
     }
-    getModuleList(facilityId, type, true);
+    getModuleList(facilityId, type);
     return true;
   }
 
@@ -250,7 +252,7 @@ class ModuleListController extends GetxController {
     isToggle5On.value = false;
     isToggle6On.value = false;
     Future.delayed(Duration(seconds: 1), () {
-      getModuleList(facilityId, type, true);
+      getModuleList(facilityId, type);
     });
     Future.delayed(Duration(seconds: 5), () {
       isSuccess.value = false;
@@ -294,7 +296,7 @@ class ModuleListController extends GetxController {
                 onPressed: () {
                   deleteModulelist(module_id).then((value) {
                     Get.back();
-                    getModuleList(facilityId, type, true);
+                    getModuleList(facilityId, type);
                   });
                 },
                 child: Text('YES'),

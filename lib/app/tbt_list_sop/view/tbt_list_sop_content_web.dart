@@ -744,50 +744,10 @@ class TBTSOPListContentWeb extends GetView<TBTSOPListController> {
                             // SizedBox(
                             //   height: 20,
                             // ),
-                            controller.sopPermitList.isEmpty
-                                ? Expanded(
-                                    child: DataTable2(
-                                      columns: [
-                                        DataColumn2(
-                                          label: Text(
-                                            "Sr.No.",
-                                            style: TextStyle(
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                          size: ColumnSize.S,
-                                        ),
-                                        DataColumn2(
-                                          label: Text(
-                                            "Title",
-                                            style: TextStyle(
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                          size: ColumnSize.L,
-                                        ),
-                                        DataColumn2(
-                                          label: Text(
-                                            "Job Type Name",
-                                            style: TextStyle(
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                          size: ColumnSize.L,
-                                        ),
-                                        DataColumn2(
-                                          label: Text(
-                                            "Action",
-                                            style: TextStyle(
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                          size: ColumnSize.S,
-                                        ),
-                                      ],
-                                      rows: [],
-                                    ),
-                                  )
+                            controller.sopPermitList.isEmpty == true && controller.isLoading == false
+                            ? Center(child: Text("No Data"))
+                            : controller.isLoading.value == true
+                            ? Center(child: Text("Data Loading......."))
                                 : Expanded(
                                     child: DataTable2(
                                       columns: [

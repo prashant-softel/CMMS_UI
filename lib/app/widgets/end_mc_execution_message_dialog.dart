@@ -85,7 +85,7 @@ class EndMCExecutionMessageDialog extends GetView {
                     _controller.facilityId,
                     _controller.formattedTodate,
                     _controller.formattedFromdate,
-                    true,
+                    
                     false);
 
                 Get.back();

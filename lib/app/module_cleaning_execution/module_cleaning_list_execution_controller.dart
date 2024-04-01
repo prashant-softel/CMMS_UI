@@ -87,9 +87,10 @@ class ModuleCleaningListExecutionController extends GetxController {
 
   void getMcExcustionListByDate() {
     getMCTaskList(
-        facilityId, formattedFromdate1, formattedTodate1, false, false);
+        facilityId, formattedFromdate1, formattedTodate1,  false);
   }
 
+  Rx<bool> isLoading = true.obs;
   @override
   void onInit() async {
     this.filterText = {
@@ -107,7 +108,7 @@ class ModuleCleaningListExecutionController extends GetxController {
       facilityId = event;
       Future.delayed(Duration(seconds: 1), () async {
         await getMCTaskList(
-            facilityId, formattedTodate1, formattedFromdate1, false, false);
+            facilityId, formattedTodate1, formattedFromdate1,  false);
       });
     });
     super.onInit();
@@ -178,18 +179,21 @@ class ModuleCleaningListExecutionController extends GetxController {
   }
 
   Future<void> getMCTaskList(int facilityId, dynamic startDate, dynamic endDate,
-      bool isLoading, bool isExport) async {
+       bool isExport) async {
     mcTaskList.value = <MCTaskListModel>[];
 
     final list = await moduleCleaningListExecutionPresenter.getMCTaskList(
-        isLoading: isLoading,
+        isLoading: isLoading.value,
         isExport: isExport,
         start_date: startDate, //// "2020-01-01",
         end_date: endDate,
         facility_id: facilityId);
 
-    for (var mc_task_list in list) {
-      mcTaskList.add(mc_task_list);
+    if (list != null) {
+      isLoading.value = false;
+      for (var mc_task_list in list) {
+        mcTaskList.add(mc_task_list);
+      }
     }
 
     mcTaskList.value = list;
@@ -226,7 +230,7 @@ class ModuleCleaningListExecutionController extends GetxController {
   //   getGoodsOrdersList(facilityId, formattedFromdate1, formattedTodate1, false);
   // }
   void export() {
-    getMCTaskList(facilityId, formattedFromdate1, formattedTodate1, true, true);
+    getMCTaskList(facilityId, formattedFromdate1, formattedTodate1,  true);
   }
 }
 

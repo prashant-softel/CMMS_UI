@@ -126,6 +126,7 @@ class PlantStockReportController extends GetxController {
   }
 
   ///
+  Rx<bool> isLoading = true.obs;
   @override
   void onInit() async {
     this.filterText = {
@@ -141,7 +142,7 @@ class PlantStockReportController extends GetxController {
       facilityId = event;
       Future.delayed(Duration(seconds: 2), () {
         getPlantStockList(facilityId, formattedTodate1, formattedFromdate1,
-            true, false, selectedAssetsNameIdList.value);
+             false, selectedAssetsNameIdList.value);
       });
       Future.delayed(Duration(seconds: 2), () {
         getAssetList(facilityId);
@@ -167,7 +168,6 @@ class PlantStockReportController extends GetxController {
       int facilityId,
       dynamic startDate,
       dynamic endDate,
-      bool isLoading,
       bool? isExport,
       List<int>? selectedAssetsNameIdList) async {
     plantStockList?.value = <PlantStockListModel>[];
@@ -175,13 +175,15 @@ class PlantStockReportController extends GetxController {
 
     final _plantStockList = await pantStockReportPresenter.getPlantStockList(
         facilityId: facilityId,
-        isLoading: isLoading,
+        isLoading: isLoading.value,
         isExport: isExport,
         startDate: startDate,
         endDate: endDate,
         selectedAssetsNameIdList: selectedAssetsNameIdList);
 
     if (_plantStockList != null) {
+      plantStockList?.value = _plantStockList;
+      isLoading.value = false;
       for (var facility in _plantStockList) {
         for (var stockDetail in facility!.stockDetails) {
           StockDetailsList.add(stockDetail);
@@ -197,7 +199,7 @@ class PlantStockReportController extends GetxController {
   }
 
   void getPlantStockListByDate() {
-    getPlantStockList(facilityId, formattedTodate1, formattedFromdate1, true,
+    getPlantStockList(facilityId, formattedTodate1, formattedFromdate1, 
         false, selectedAssetsNameIdList.value);
   }
 
@@ -220,7 +222,7 @@ class PlantStockReportController extends GetxController {
           plantStockList?.value = <PlantStockListModel>[];
 
           getPlantStockList(facilityId, formattedTodate1, formattedFromdate1,
-              true, false, selectedAssetsNameIdList.value);
+               false, selectedAssetsNameIdList.value);
         }
         break;
     }
@@ -229,6 +231,6 @@ class PlantStockReportController extends GetxController {
 
   void export() {
     getPlantStockList(facilityId, formattedTodate1, formattedFromdate1, true,
-        true, selectedAssetsNameIdList.value);
+         selectedAssetsNameIdList.value);
   }
 }

@@ -129,6 +129,7 @@ class FacilityTypeListController extends GetxController {
   var zipcodeCtrlr = TextEditingController();
   Rx<bool> isZipCodeInvalid = false.obs;
 
+  Rx<bool> isLoading = true.obs;
   @override
   void onInit() async {
     // getInventoryCategoryList();
@@ -416,9 +417,10 @@ class FacilityTypeListController extends GetxController {
   Future<void> getSpvList() async {
     SpvList.clear();
     final list = await facilityTypeListPresenter.getSpvList(
-      isLoading: true,
+      isLoading: isLoading.value,
     );
     if (list != null) {
+      isLoading.value = false;
       for (var _spvList in list) {
         SpvList.add(_spvList);
       }

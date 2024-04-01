@@ -105,16 +105,12 @@ class VegetationPlanListController extends GetxController {
             isLoading: isLoading.value,
             facility_id: facilityId,
             isExport: isExport);
-    vegetationPlanList.value = _vegetationPlanList;
-    paginationController = PaginationController(
-      rowCount: vegetationPlanList.length,
-      rowsPerPage: 10,
-    );
+    
 
     if (_vegetationPlanList != null) {
       vegetationPlanList.value = _vegetationPlanList;
       isLoading.value = false;
-    }
+    vegetationPlanList.value = _vegetationPlanList;
     if (vegetationPlanList.isNotEmpty) {
       filteredData.value = vegetationPlanList.value;
       vegetationPlanListModel = vegetationPlanList[0];
@@ -124,6 +120,13 @@ class VegetationPlanListController extends GetxController {
         vegetationPlanListTableColumns.add(key);
       }
     }
+    paginationController = PaginationController(
+      rowCount: vegetationPlanList.length,
+      rowsPerPage: 10,
+    );
+
+    }
+    
   }
 
   void onValueChanged(dynamic list, dynamic value) {

@@ -544,9 +544,13 @@ class DesignationListContentWeb extends GetView<DesignationListController> {
                               SizedBox(
                                 height: 20,
                               ),
-                              Expanded(
-                                child: Obx(
-                                  () => DataTable2(
+                              controller.designationList!.isEmpty == true &&
+                                    controller.isLoading == false
+                                ? Center(child: Text("No Data"))
+                                : controller.isLoading.value == true
+                                    ? Center(child: Text("Data Loading......"))
+                              : Expanded(
+                                child: DataTable2(
                                     key: UniqueKey(),
                                     dataRowHeight: 50,
                                     columnSpacing: 10,
@@ -668,7 +672,7 @@ class DesignationListContentWeb extends GetView<DesignationListController> {
                                         )),
                                       ]),
                                     ),
-                                  ),
+                                  
                                 ),
                               ),
                             ],

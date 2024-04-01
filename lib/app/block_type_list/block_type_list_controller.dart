@@ -87,6 +87,7 @@ class BlockTypeListController extends GetxController {
   StreamSubscription<int>? facilityIdStreamSubscription;
   int facilityId = 0;
 
+  Rx<bool> isLoading = true.obs;
   @override
   void onInit() async {
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
@@ -145,14 +146,17 @@ class BlockTypeListController extends GetxController {
     bufferblockTypeList.value = <BlockTypeListModel>[];
 
     final _blockTypePermitList = await blockTypeListPresenter.getBlockTypeList(
-      isLoading: true,
+      isLoading: isLoading.value,
       // categoryIds: categoryIds,
       job_type_id: selectedFacilityId,
       // job_type_id: 36,
     );
-    for (var blockType_list in _blockTypePermitList) {
-      blockTypeList.add(blockType_list);
-      bufferblockTypeList.add(blockType_list);
+    if (_blockTypePermitList != null) {
+      isLoading.value = false;
+      for (var blockType_list in _blockTypePermitList) {
+        blockTypeList.add(blockType_list);
+        bufferblockTypeList.add(blockType_list);
+      }
     }
 
     update(['block_type_list']);

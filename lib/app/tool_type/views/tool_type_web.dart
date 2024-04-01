@@ -605,142 +605,167 @@ class ToolTypeWeb extends GetView<ToolTypeController> {
                               SizedBox(
                                 height: 20,
                               ),
-                              Expanded(
-                                child: Obx(
-                                  () => DataTable2(
-                                    minWidth: 1000,
-                                    key: UniqueKey(),
-                                    dataRowHeight: 50,
-                                    columnSpacing: 10,
-                                    border: TableBorder.all(
-                                        color:
-                                            Color.fromARGB(255, 206, 229, 234)),
-                                    columns: [
-                                      DataColumn2(
-                                          fixedWidth: 100,
-                                          label: Text(
-                                            "Sr No",
-                                            style: TextStyle(
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.bold),
-                                          )),
-                                      DataColumn2(
-                                          // fixedWidth: 150,
-                                          label: Text(
-                                        "Tool Name",
-                                        style: TextStyle(
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.bold),
-                                      )),
-                                      DataColumn2(
-                                          // fixedWidth: 150,
-                                          label: Text(
-                                        "Category",
-                                        style: TextStyle(
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.bold),
-                                      )),
-                                      DataColumn2(
-                                          // fixedWidth: 150,
-                                          label: Text(
-                                        "Work type",
-                                        style: TextStyle(
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.bold),
-                                      )),
-                                      DataColumn2(
-                                          fixedWidth: 100,
-                                          label: Text(
-                                            'Action',
-                                            style: TextStyle(
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.bold),
-                                          )),
-                                    ],
-                                    rows: List<DataRow>.generate(
-                                      controller
-                                          .toolsRequiredToWorkTypeList!.length,
-                                      (index) => DataRow(cells: [
-                                        DataCell(Text((index + 1).toString())),
-                                        DataCell(Text(
-                                            "${controller.toolsRequiredToWorkTypeList![index]?.linkedToolName}")),
-                                        DataCell(Text(
-                                            "${controller.toolsRequiredToWorkTypeList![index]?.Equipment_name}")),
-                                        DataCell(Text(
-                                            "${controller.toolsRequiredToWorkTypeList![index]?.workTypeName}")),
-                                        DataCell(Row(
-                                          children: [
-                                            TableActionButton(
-                                              color: ColorValues.editColor,
-                                              icon: Icons.edit,
-                                              message: 'Edit',
-                                              onPress: () {
-                                                controller.selectedItem = controller
-                                                    .toolsRequiredToWorkTypeList!
-                                                    .firstWhere(
-                                                  (element) =>
-                                                      "${element!.id}" ==
-                                                      controller
-                                                          .toolsRequiredToWorkTypeList![
-                                                              index]!
-                                                          .id
-                                                          .toString(),
-                                                );
+                              controller.toolsRequiredToWorkTypeList!.isEmpty ==
+                                          true &&
+                                      controller.isLoading == false
+                                  ? Center(child: Text("No Data"))
+                                  : controller.isLoading.value == true
+                                      ? Center(
+                                          child: Text("Data Loading......"))
+                                      : Expanded(
+                                          child: DataTable2(
+                                            minWidth: 1000,
+                                            key: UniqueKey(),
+                                            dataRowHeight: 50,
+                                            columnSpacing: 10,
+                                            border: TableBorder.all(
+                                                color: Color.fromARGB(
+                                                    255, 206, 229, 234)),
+                                            columns: [
+                                              DataColumn2(
+                                                  fixedWidth: 100,
+                                                  label: Text(
+                                                    "Sr No",
+                                                    style: TextStyle(
+                                                        fontSize: 15,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  )),
+                                              DataColumn2(
+                                                  // fixedWidth: 150,
+                                                  label: Text(
+                                                "Tool Name",
+                                                style: TextStyle(
+                                                    fontSize: 15,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              )),
+                                              DataColumn2(
+                                                  // fixedWidth: 150,
+                                                  label: Text(
+                                                "Category",
+                                                style: TextStyle(
+                                                    fontSize: 15,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              )),
+                                              DataColumn2(
+                                                  // fixedWidth: 150,
+                                                  label: Text(
+                                                "Work type",
+                                                style: TextStyle(
+                                                    fontSize: 15,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              )),
+                                              DataColumn2(
+                                                  fixedWidth: 100,
+                                                  label: Text(
+                                                    'Action',
+                                                    style: TextStyle(
+                                                        fontSize: 15,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  )),
+                                            ],
+                                            rows: List<DataRow>.generate(
+                                              controller
+                                                  .toolsRequiredToWorkTypeList!
+                                                  .length,
+                                              (index) => DataRow(cells: [
+                                                DataCell(Text(
+                                                    (index + 1).toString())),
+                                                DataCell(Text(
+                                                    "${controller.toolsRequiredToWorkTypeList![index]?.linkedToolName}")),
+                                                DataCell(Text(
+                                                    "${controller.toolsRequiredToWorkTypeList![index]?.Equipment_name}")),
+                                                DataCell(Text(
+                                                    "${controller.toolsRequiredToWorkTypeList![index]?.workTypeName}")),
+                                                DataCell(Row(
+                                                  children: [
+                                                    TableActionButton(
+                                                      color:
+                                                          ColorValues.editColor,
+                                                      icon: Icons.edit,
+                                                      message: 'Edit',
+                                                      onPress: () {
+                                                        controller
+                                                                .selectedItem =
+                                                            controller
+                                                                .toolsRequiredToWorkTypeList!
+                                                                .firstWhere(
+                                                          (element) =>
+                                                              "${element!.id}" ==
+                                                              controller
+                                                                  .toolsRequiredToWorkTypeList![
+                                                                      index]!
+                                                                  .id
+                                                                  .toString(),
+                                                        );
 
-                                                controller.titleCtrlr.text =
-                                                    controller.selectedItem
-                                                            ?.linkedToolName ??
-                                                        '';
-                                                controller.assetc.value =
-                                                    controller.selectedItem
-                                                            ?.workTypeName ??
-                                                        '';
-                                                controller.selectedassetcategory
-                                                    .value = controller
-                                                        .selectedItem
-                                                        ?.Equipment_name ??
-                                                    '';
-                                                controller.selectedEquipmentId =
-                                                    controller.selectedItem
-                                                            ?.equipmentCategoryId ??
-                                                        0;
-                                                controller.selectedWorkTypeId =
-                                                    controller.selectedItem
-                                                            ?.WorkTypeId ??
-                                                        0;
-                                                if (controller
-                                                        .selectedEquipmentId >
-                                                    0) {
-                                                  controller.getWorkTypeList();
-                                                }
-                                                controller.isContainerVisible
-                                                    .value = true;
-                                              },
+                                                        controller.titleCtrlr
+                                                            .text = controller
+                                                                .selectedItem
+                                                                ?.linkedToolName ??
+                                                            '';
+                                                        controller.assetc
+                                                            .value = controller
+                                                                .selectedItem
+                                                                ?.workTypeName ??
+                                                            '';
+                                                        controller
+                                                            .selectedassetcategory
+                                                            .value = controller
+                                                                .selectedItem
+                                                                ?.Equipment_name ??
+                                                            '';
+                                                        controller
+                                                                .selectedEquipmentId =
+                                                            controller
+                                                                    .selectedItem
+                                                                    ?.equipmentCategoryId ??
+                                                                0;
+                                                        controller
+                                                                .selectedWorkTypeId =
+                                                            controller
+                                                                    .selectedItem
+                                                                    ?.WorkTypeId ??
+                                                                0;
+                                                        if (controller
+                                                                .selectedEquipmentId >
+                                                            0) {
+                                                          controller
+                                                              .getWorkTypeList();
+                                                        }
+                                                        controller
+                                                            .isContainerVisible
+                                                            .value = true;
+                                                      },
+                                                    ),
+                                                    TableActionButton(
+                                                      color: ColorValues
+                                                          .deleteColor,
+                                                      icon: Icons.delete,
+                                                      message: 'Delete',
+                                                      onPress: () {
+                                                        controller.isDeleteDialog(
+                                                            worktype_id: controller
+                                                                .toolsRequiredToWorkTypeList![
+                                                                    index]!
+                                                                .id
+                                                                .toString(),
+                                                            worktype: controller
+                                                                .toolsRequiredToWorkTypeList![
+                                                                    index]!
+                                                                .linkedToolName);
+                                                      },
+                                                    ),
+                                                  ],
+                                                )),
+                                              ]),
                                             ),
-                                            TableActionButton(
-                                              color: ColorValues.deleteColor,
-                                              icon: Icons.delete,
-                                              message: 'Delete',
-                                              onPress: () {
-                                                controller.isDeleteDialog(
-                                                    worktype_id: controller
-                                                        .toolsRequiredToWorkTypeList![
-                                                            index]!
-                                                        .id
-                                                        .toString(),
-                                                    worktype: controller
-                                                        .toolsRequiredToWorkTypeList![
-                                                            index]!
-                                                        .linkedToolName);
-                                              },
-                                            ),
-                                          ],
-                                        )),
-                                      ]),
-                                    ),
-                                  ),
-                                ),
-                              ),
+                                          ),
+                                        ),
                             ],
                           ),
                         ),

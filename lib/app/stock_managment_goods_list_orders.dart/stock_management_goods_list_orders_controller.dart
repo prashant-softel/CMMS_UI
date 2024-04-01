@@ -81,6 +81,7 @@ class StockManagementGoodsOrdersController extends GetxController {
     print({"updated columnVisibility": columnVisibility});
   }
 
+  Rx<bool> isLoading = true.obs;
   @override
   void onInit() async {
     this.filterText = {
@@ -97,12 +98,7 @@ class StockManagementGoodsOrdersController extends GetxController {
       facilityId = event;
       Future.delayed(Duration(seconds: 2), () async {
         await getGoodsOrdersList(
-          facilityId,
-          formattedTodate1,
-          formattedFromdate1,
-          false,
-          false
-        );
+            facilityId, formattedTodate1, formattedFromdate1, false);
       });
     });
     super.onInit();
@@ -152,25 +148,24 @@ class StockManagementGoodsOrdersController extends GetxController {
     goodsOrdersList.value = filteredList;
   }
 
-  Future<void> getGoodsOrdersList(int facilityId, dynamic startDate,
-      dynamic endDate, bool isLoading, bool isExport) async {
+  Future<void> getGoodsOrdersList(
+      int facilityId, dynamic startDate, dynamic endDate, bool isExport) async {
     goodsOrdersList.value = <GoodsOrdersListModel>[];
     filteredData.value = <GoodsOrdersListModel>[];
 
     final _goodsordersList =
         await stockManagementGoodsOrdersPresenter.getGoodsOrdersList(
-      isLoading: true,
-      start_date: startDate,
-      end_date: endDate,
-      facility_id: facilityId,
-      isExport: isExport
-    );
-    goodsOrdersList.value = _goodsordersList;
+            isLoading: isLoading.value,
+            start_date: startDate,
+            end_date: endDate,
+            facility_id: facilityId,
+            isExport: isExport);
+    if(_goodsordersList != null) {
+      goodsOrdersList.value = _goodsordersList;
     paginationController = PaginationController(
       rowCount: goodsOrdersList.length,
       rowsPerPage: 10,
     );
-
     if (goodsOrdersList.isNotEmpty) {
       filteredData.value = goodsOrdersList.value;
       goodsOrdersListModel = goodsOrdersList[0];
@@ -179,6 +174,7 @@ class StockManagementGoodsOrdersController extends GetxController {
       for (var key in newPermitListJson?.keys.toList() ?? []) {
         goodsOrdersListTableColumns.add(key);
       }
+    }
     }
   }
 
@@ -197,7 +193,7 @@ class StockManagementGoodsOrdersController extends GetxController {
   }
 
   void getPmTaskListByDate() {
-    getGoodsOrdersList(facilityId, formattedFromdate1, formattedTodate1, false,false);
+    getGoodsOrdersList(facilityId, formattedFromdate1, formattedTodate1, false);
   }
 
   Future<void> deleteGoodsOrders(String? id) async {
@@ -214,13 +210,8 @@ class StockManagementGoodsOrdersController extends GetxController {
   void clearTypeStoreData() {
     stockManagementGoodsOrdersPresenter.clearTypeValue();
   }
+
   void export() {
-    getGoodsOrdersList(
-      facilityId,
-      formattedTodate1,
-      formattedFromdate1,
-      true,
-      true
-    );
+    getGoodsOrdersList(facilityId, formattedTodate1, formattedFromdate1, true);
   }
 }

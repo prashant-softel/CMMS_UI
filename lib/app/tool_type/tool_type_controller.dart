@@ -87,6 +87,7 @@ class ToolTypeController extends GetxController {
   Stream<int> get facilityId$ => _facilityId.stream;
   var titleCtrlr = TextEditingController();
 
+  Rx<bool> isLoading = true.obs;
   @override
   void onInit() async {
     facilityIdStreamSubscription =
@@ -112,11 +113,12 @@ class ToolTypeController extends GetxController {
     BufferworktypetoolList?.value = <ToolsModel>[];
 
     final list = await worktypeToolpresenter.getToolsRequiredToWorkTypeList(
-      isLoading: false,
+      isLoading: isLoading.value,
       workTypeIds: workTypeIds.toString(),
     );
     toolsRequiredToWorkTypeList!.value = list ?? <ToolsModel>[];
     BufferworktypetoolList!.value = toolsRequiredToWorkTypeList!.value;
+    isLoading.value = false;
 
     // str = toolsRequiredToWorkTypeList.join(" , ");
     // print({"str", str});

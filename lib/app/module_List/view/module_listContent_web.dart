@@ -36,7 +36,8 @@ class ModuleListContentWeb extends GetView<ModuleListController> {
                   ),
                   boxShadow: [
                     BoxShadow(
-                      color: Color.fromARGB(255, 236, 234, 234).withOpacity(0.5),
+                      color:
+                          Color.fromARGB(255, 236, 234, 234).withOpacity(0.5),
                       spreadRadius: 2,
                       blurRadius: 5,
                       offset: Offset(0, 2),
@@ -131,7 +132,8 @@ class ModuleListContentWeb extends GetView<ModuleListController> {
                                             child: Wrap(
                                               children: [
                                                 Text(
-                                                  controller.selectedItem == null
+                                                  controller.selectedItem ==
+                                                          null
                                                       ? "ModuleList added Successfully in the List."
                                                       : "ModuleList updated Successfully in the List.",
                                                   style: TextStyle(
@@ -154,7 +156,7 @@ class ModuleListContentWeb extends GetView<ModuleListController> {
                                             //   "Title",
                                             //   style: Styles.blackBold16,
                                             // ),
-      
+
                                             Expanded(
                                                 child: CustomRichText(
                                                     title: 'Module Name ')),
@@ -176,7 +178,8 @@ class ModuleListContentWeb extends GetView<ModuleListController> {
                                                     spreadRadius: 1.0,
                                                   ),
                                                   BoxShadow(
-                                                    color: ColorValues.whiteColor,
+                                                    color:
+                                                        ColorValues.whiteColor,
                                                     offset:
                                                         const Offset(0.0, 0.0),
                                                     blurRadius: 0.0,
@@ -190,15 +193,17 @@ class ModuleListContentWeb extends GetView<ModuleListController> {
                                               child: TextField(
                                                 controller: controller
                                                     .modulelistNumberCtrlr,
-                                                  focusNode: controller.modnameFocus,
-                                                  scrollController: controller.modnameScroll,
+                                                focusNode:
+                                                    controller.modnameFocus,
+                                                scrollController:
+                                                    controller.modnameScroll,
                                                 keyboardType:
                                                     TextInputType.multiline,
                                                 autofocus: false,
                                                 style: TextStyle(
-                                                      fontSize: 14.0,
-                                                      height: 1.0,
-                                                      color: Colors.black),
+                                                    fontSize: 14.0,
+                                                    height: 1.0,
+                                                    color: Colors.black),
                                                 decoration: InputDecoration(
                                                   fillColor:
                                                       ColorValues.whiteColor,
@@ -231,7 +236,8 @@ class ModuleListContentWeb extends GetView<ModuleListController> {
                                                           borderRadius:
                                                               BorderRadius
                                                                   .circular(5),
-                                                          borderSide: BorderSide(
+                                                          borderSide:
+                                                              BorderSide(
                                                             color: ColorValues
                                                                 .redColorDark,
                                                           ),
@@ -244,7 +250,8 @@ class ModuleListContentWeb extends GetView<ModuleListController> {
                                                           borderRadius:
                                                               BorderRadius
                                                                   .circular(5),
-                                                          borderSide: BorderSide(
+                                                          borderSide:
+                                                              BorderSide(
                                                             color: ColorValues
                                                                 .redColorDark,
                                                           ),
@@ -303,7 +310,8 @@ class ModuleListContentWeb extends GetView<ModuleListController> {
                                                     spreadRadius: 1.0,
                                                   ),
                                                   BoxShadow(
-                                                    color: ColorValues.whiteColor,
+                                                    color:
+                                                        ColorValues.whiteColor,
                                                     offset:
                                                         const Offset(0.0, 0.0),
                                                     blurRadius: 0.0,
@@ -317,15 +325,17 @@ class ModuleListContentWeb extends GetView<ModuleListController> {
                                               child: TextField(
                                                 controller:
                                                     controller.featureCtrlr,
-                                                    focusNode: controller.feanameFocus,
-                                                    scrollController: controller.feanameScroll,
+                                                focusNode:
+                                                    controller.feanameFocus,
+                                                scrollController:
+                                                    controller.feanameScroll,
                                                 keyboardType:
                                                     TextInputType.multiline,
                                                 autofocus: false,
                                                 style: TextStyle(
-                                                      fontSize: 14.0,
-                                                      height: 1.0,
-                                                      color: Colors.black),
+                                                    fontSize: 14.0,
+                                                    height: 1.0,
+                                                    color: Colors.black),
                                                 decoration: InputDecoration(
                                                   fillColor:
                                                       ColorValues.whiteColor,
@@ -352,31 +362,36 @@ class ModuleListContentWeb extends GetView<ModuleListController> {
                                                             Colors.transparent),
                                                   ),
                                                   focusedErrorBorder: controller
-                                                          .isFeatureInvalid.value
+                                                          .isFeatureInvalid
+                                                          .value
                                                       ? OutlineInputBorder(
                                                           borderRadius:
                                                               BorderRadius
                                                                   .circular(5),
-                                                          borderSide: BorderSide(
+                                                          borderSide:
+                                                              BorderSide(
                                                             color: ColorValues
                                                                 .redColorDark,
                                                           ),
                                                         )
                                                       : InputBorder.none,
                                                   errorBorder: controller
-                                                          .isFeatureInvalid.value
+                                                          .isFeatureInvalid
+                                                          .value
                                                       ? OutlineInputBorder(
                                                           borderRadius:
                                                               BorderRadius
                                                                   .circular(5),
-                                                          borderSide: BorderSide(
+                                                          borderSide:
+                                                              BorderSide(
                                                             color: ColorValues
                                                                 .redColorDark,
                                                           ),
                                                         )
                                                       : null,
                                                   errorText: controller
-                                                          .isFeatureInvalid.value
+                                                          .isFeatureInvalid
+                                                          .value
                                                       ? "Required field"
                                                       : null,
                                                 ),
@@ -409,7 +424,8 @@ class ModuleListContentWeb extends GetView<ModuleListController> {
                                           children: [
                                             Row(
                                               mainAxisAlignment:
-                                                  MainAxisAlignment.spaceBetween,
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
                                               children: [
                                                 CustomRichText(title: "Add"),
                                                 // SizedBox(width:12),
@@ -424,7 +440,7 @@ class ModuleListContentWeb extends GetView<ModuleListController> {
                                                         onChanged: (value) {
                                                           controller.toggle();
                                                         }),
-      
+
                                                     // Text("Yes"),
                                                   ],
                                                 ),
@@ -448,7 +464,7 @@ class ModuleListContentWeb extends GetView<ModuleListController> {
                                                         onChanged: (value) {
                                                           controller.toggle1();
                                                         }),
-      
+
                                                     // Text("Yes"),
                                                   ],
                                                 ),
@@ -474,7 +490,7 @@ class ModuleListContentWeb extends GetView<ModuleListController> {
                                                           controller.toggle2();
                                                         }),
                                                     // SizedBox(width:2),
-      
+
                                                     // Text("Yes"),
                                                   ],
                                                 ),
@@ -491,7 +507,8 @@ class ModuleListContentWeb extends GetView<ModuleListController> {
                                           children: [
                                             Row(
                                               mainAxisAlignment:
-                                                  MainAxisAlignment.spaceBetween,
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
                                               children: [
                                                 CustomRichText(title: "View"),
                                                 // SizedBox(width:12),
@@ -506,7 +523,7 @@ class ModuleListContentWeb extends GetView<ModuleListController> {
                                                         onChanged: (value) {
                                                           controller.toggle3();
                                                         }),
-      
+
                                                     // Text("Yes"),
                                                   ],
                                                 ),
@@ -516,7 +533,8 @@ class ModuleListContentWeb extends GetView<ModuleListController> {
                                               mainAxisAlignment:
                                                   MainAxisAlignment.spaceEvenly,
                                               children: [
-                                                CustomRichText(title: "Approve"),
+                                                CustomRichText(
+                                                    title: "Approve"),
                                                 SizedBox(width: 12),
                                                 Row(
                                                   mainAxisAlignment:
@@ -530,7 +548,7 @@ class ModuleListContentWeb extends GetView<ModuleListController> {
                                                         onChanged: (value) {
                                                           controller.toggle4();
                                                         }),
-      
+
                                                     // Text("Yes"),
                                                   ],
                                                 ),
@@ -556,7 +574,7 @@ class ModuleListContentWeb extends GetView<ModuleListController> {
                                                           controller.toggle5();
                                                         }),
                                                     // SizedBox(width:2),
-      
+
                                                     // Text("Yes"),
                                                   ],
                                                 ),
@@ -575,7 +593,8 @@ class ModuleListContentWeb extends GetView<ModuleListController> {
                                               mainAxisAlignment:
                                                   MainAxisAlignment.spaceEvenly,
                                               children: [
-                                                CustomRichText(title: "SelfView"),
+                                                CustomRichText(
+                                                    title: "SelfView"),
                                                 SizedBox(width: 12),
                                                 Row(
                                                   mainAxisAlignment:
@@ -591,7 +610,7 @@ class ModuleListContentWeb extends GetView<ModuleListController> {
                                                           controller.toggle6();
                                                         }),
                                                     // SizedBox(width:2),
-      
+
                                                     // Text("Yes"),
                                                   ],
                                                 ),
@@ -615,7 +634,8 @@ class ModuleListContentWeb extends GetView<ModuleListController> {
                                     width: (Get.width * .1),
                                     height: 40,
                                     child: CustomElevatedButton(
-                                        backgroundColor: ColorValues.appRedColor,
+                                        backgroundColor:
+                                            ColorValues.appRedColor,
                                         onPressed: () {
                                           controller.cleardata();
                                         },
@@ -706,19 +726,22 @@ class ModuleListContentWeb extends GetView<ModuleListController> {
                                         onChanged: (value) =>
                                             controller.search(value),
                                         decoration: InputDecoration(
-                                          enabledBorder: const OutlineInputBorder(
+                                          enabledBorder:
+                                              const OutlineInputBorder(
                                             borderSide: const BorderSide(
                                               color: Colors.grey,
                                               width: 0.0,
                                             ),
                                           ),
-                                          focusedBorder: const OutlineInputBorder(
+                                          focusedBorder:
+                                              const OutlineInputBorder(
                                             borderSide: const BorderSide(
                                               color: Colors.grey,
                                               width: 0.0,
                                             ),
                                           ),
-                                          contentPadding: Dimens.edgeInsets05_10,
+                                          contentPadding:
+                                              Dimens.edgeInsets05_10,
                                           hintText: 'search'.tr,
                                           hintStyle: Styles.grey16,
                                         ),
@@ -727,266 +750,304 @@ class ModuleListContentWeb extends GetView<ModuleListController> {
                                   ],
                                 ),
                               ),
-      
+
                               // Row(
                               //   children: [
                               //     Spacer(),
-      
+
                               //   ],
                               // ),
                               SizedBox(
                                 height: 20,
                               ),
-                              Expanded(
-                                child: Obx(
-                                  () => DataTable2(
-                                    key: UniqueKey(),
-                                    dataRowHeight: 50,
-                                    columnSpacing: 10,
-                                    border: TableBorder.all(
-                                        color:
-                                            Color.fromARGB(255, 206, 229, 234)),
-                                    columns: [
-                                      DataColumn2(
-                                          fixedWidth: 70,
-                                          label: Text(
-                                            "Sr No",
-                                            style: TextStyle(
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.bold),
-                                          )),
-                                      DataColumn2(
-                                          fixedWidth: 300,
-                                          label: Text(
-                                            "Module Name",
-                                            style: TextStyle(
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.bold),
-                                          )),
-                                      DataColumn2(
-                                          fixedWidth: 300,
-                                          label: Text(
-                                            "Feature Name",
-                                            style: TextStyle(
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.bold),
-                                          )),
-                                      DataColumn2(
-                                          // fixedWidth: 100,
-                                          label: Text(
-                                        "Add",
-                                        style: TextStyle(
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.bold),
-                                      )),
-                                      DataColumn2(
-                                          // fixedWidth: 300,
-                                          label: Text(
-                                        "Edit",
-                                        style: TextStyle(
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.bold),
-                                      )),
-                                      DataColumn2(
-                                          // fixedWidth: 300,
-                                          label: Text(
-                                        "Delete",
-                                        style: TextStyle(
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.bold),
-                                      )),
-                                      DataColumn2(
-                                          // fixedWidth: 300,
-                                          label: Text(
-                                        "View",
-                                        style: TextStyle(
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.bold),
-                                      )),
-                                      DataColumn2(
-                                          // fixedWidth: 300,
-                                          label: Text(
-                                        "Approve",
-                                        style: TextStyle(
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.bold),
-                                      )),
-                                      DataColumn2(
-                                          // fixedWidth: 300,
-                                          label: Text(
-                                        "Issue",
-                                        style: TextStyle(
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.bold),
-                                      )),
-                                      DataColumn2(
-                                          // fixedWidth: 300,
-                                          label: Text(
-                                        "Self View",
-                                        style: TextStyle(
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.bold),
-                                      )),
-                                      DataColumn2(
-                                          fixedWidth: 100,
-                                          label: Text(
-                                            'Action',
-                                            style: TextStyle(
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.bold),
-                                          )),
-                                    ],
-                                    rows: List<DataRow>.generate(
-                                      controller.moduleList.length ?? 0,
-                                      (index) => DataRow(cells: [
-                                        DataCell(Text((index + 1).toString())),
-                                        DataCell(Text(controller
-                                                .moduleList[index].name
-                                                .toString() ??
-                                            '')),
-                                        DataCell(Text(controller
-                                                .moduleList[index].featureName ??
-                                            '')),
-                                        DataCell(Text(controller
-                                                .moduleList[index].add
-                                                .toString() ??
-                                            "")),
-                                        DataCell(Text(controller
-                                                .moduleList[index].edit
-                                                .toString() ??
-                                            "")),
-                                        DataCell(Text(controller
-                                                .moduleList[index].delete
-                                                .toString() ??
-                                            "")),
-                                        DataCell(Text(controller
-                                                .moduleList[index].view
-                                                .toString() ??
-                                            "")),
-                                        DataCell(Text(controller
-                                                .moduleList[index].approve
-                                                .toString() ??
-                                            "")),
-                                        DataCell(Text(controller
-                                                .moduleList[index].issue
-                                                .toString() ??
-                                            "")),
-                                        DataCell(Text(controller
-                                                .moduleList[index].selfView
-                                                .toString() ??
-                                            "")),
-                                        DataCell(Row(
-                                          children: [
-                                            TableActionButton(
-                                                color: ColorValues.editColor,
-                                                icon: Icons.edit,
-                                                message: 'Edit',
-                                                onPress: () {
-                                                  controller.selectedItem =
-                                                      controller
-                                                          .moduleList
-                                                          .firstWhere((element) =>
-                                                              "${element.id}" ==
-                                                              controller
-                                                                  .moduleList[
-                                                                      index]
-                                                                  .id
-                                                                  .toString());
-      
-                                                  controller.featureCtrlr.text =
-                                                      controller.selectedItem
-                                                              ?.featureName ??
-                                                          '';
-                                                  controller.modulelistNumberCtrlr
-                                                      .text = controller
-                                                          .selectedItem?.name ??
-                                                      '';
-                                                  controller.isToggleOn.value =
-                                                      controller.selectedItem
-                                                                  ?.add ==
-                                                              1
-                                                          ? true
-                                                          : false;
-                                                  controller.isToggle1On.value =
-                                                      controller.selectedItem
-                                                                  ?.edit ==
-                                                              1
-                                                          ? true
-                                                          : false;
-                                                  controller.isToggle2On.value =
-                                                      controller.selectedItem
-                                                                  ?.delete ==
-                                                              1
-                                                          ? true
-                                                          : false;
-                                                  controller.isToggle3On.value =
-                                                      controller.selectedItem
-                                                                  ?.view ==
-                                                              1
-                                                          ? true
-                                                          : false;
-                                                  controller.isToggle4On.value =
-                                                      controller.selectedItem
-                                                                  ?.approve ==
-                                                              1
-                                                          ? true
-                                                          : false;
-                                                  controller.isToggle5On.value =
-                                                      controller.selectedItem
-                                                                  ?.issue ==
-                                                              1
-                                                          ? true
-                                                          : false;
-                                                  controller.isToggle6On.value =
-                                                      controller.selectedItem
-                                                                  ?.selfView ==
-                                                              1
-                                                          ? true
-                                                          : false;
-                                                  controller.isContainerVisible
-                                                      .value = true;
-                                                  // int spvId = int.tryParse(
-                                                  //         moduleList?.name ??
-                                                  //             "") ??
-                                                  //     0;
-                                                  // if (spvId != 0) {
-                                                  //   Get.toNamed(
-                                                  //       Routes.moduleListScreen,
-                                                  //       arguments: {"spvId": spvId});
-                                                  // }
-                                                  // controller.selectedItem =
-                                                  //     controller.moduleList.firstWhere(
-                                                  //         (element) =>
-                                                  //             "${element.id}" ==
-                                                  //             _permitTypeList[0]);
-                                                  // controller.selectedItem =
-                                                  //     controller.moduleList.firstWhere(
-                                                  //         (element) =>
-                                                  //             "${element.id}" ==
-                                                  //             _permitTypeList[0]);
-                                                })
-                                            // : Container(),
-                                            ,
-                                            TableActionButton(
-                                              color: ColorValues.deleteColor,
-                                              icon: Icons.delete,
-                                              message: 'Delete',
-                                              onPress: () {
-                                                controller.isDeleteDialog(
-                                                    module_id: controller
-                                                        .moduleList[index].id
-                                                        .toString(),
-                                                    module: controller
-                                                        .moduleList[index].name);
-                                              },
+                              controller.moduleList.isEmpty == true &&
+                                      controller.isLoading == false
+                                  ? Center(child: Text("No Data"))
+                                  : controller.isLoading.value == true
+                                      ? Center(
+                                          child: Text("Data Loading......"))
+                                      : Expanded(
+                                          child: DataTable2(
+                                            key: UniqueKey(),
+                                            dataRowHeight: 50,
+                                            columnSpacing: 10,
+                                            border: TableBorder.all(
+                                                color: Color.fromARGB(
+                                                    255, 206, 229, 234)),
+                                            columns: [
+                                              DataColumn2(
+                                                  fixedWidth: 70,
+                                                  label: Text(
+                                                    "Sr No",
+                                                    style: TextStyle(
+                                                        fontSize: 15,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  )),
+                                              DataColumn2(
+                                                  fixedWidth: 300,
+                                                  label: Text(
+                                                    "Module Name",
+                                                    style: TextStyle(
+                                                        fontSize: 15,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  )),
+                                              DataColumn2(
+                                                  fixedWidth: 300,
+                                                  label: Text(
+                                                    "Feature Name",
+                                                    style: TextStyle(
+                                                        fontSize: 15,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  )),
+                                              DataColumn2(
+                                                  // fixedWidth: 100,
+                                                  label: Text(
+                                                "Add",
+                                                style: TextStyle(
+                                                    fontSize: 15,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              )),
+                                              DataColumn2(
+                                                  // fixedWidth: 300,
+                                                  label: Text(
+                                                "Edit",
+                                                style: TextStyle(
+                                                    fontSize: 15,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              )),
+                                              DataColumn2(
+                                                  // fixedWidth: 300,
+                                                  label: Text(
+                                                "Delete",
+                                                style: TextStyle(
+                                                    fontSize: 15,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              )),
+                                              DataColumn2(
+                                                  // fixedWidth: 300,
+                                                  label: Text(
+                                                "View",
+                                                style: TextStyle(
+                                                    fontSize: 15,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              )),
+                                              DataColumn2(
+                                                  // fixedWidth: 300,
+                                                  label: Text(
+                                                "Approve",
+                                                style: TextStyle(
+                                                    fontSize: 15,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              )),
+                                              DataColumn2(
+                                                  // fixedWidth: 300,
+                                                  label: Text(
+                                                "Issue",
+                                                style: TextStyle(
+                                                    fontSize: 15,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              )),
+                                              DataColumn2(
+                                                  // fixedWidth: 300,
+                                                  label: Text(
+                                                "Self View",
+                                                style: TextStyle(
+                                                    fontSize: 15,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              )),
+                                              DataColumn2(
+                                                  fixedWidth: 100,
+                                                  label: Text(
+                                                    'Action',
+                                                    style: TextStyle(
+                                                        fontSize: 15,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  )),
+                                            ],
+                                            rows: List<DataRow>.generate(
+                                              controller.moduleList.length ?? 0,
+                                              (index) => DataRow(cells: [
+                                                DataCell(Text(
+                                                    (index + 1).toString())),
+                                                DataCell(Text(controller
+                                                        .moduleList[index].name
+                                                        .toString() ??
+                                                    '')),
+                                                DataCell(Text(controller
+                                                        .moduleList[index]
+                                                        .featureName ??
+                                                    '')),
+                                                DataCell(Text(controller
+                                                        .moduleList[index].add
+                                                        .toString() ??
+                                                    "")),
+                                                DataCell(Text(controller
+                                                        .moduleList[index].edit
+                                                        .toString() ??
+                                                    "")),
+                                                DataCell(Text(controller
+                                                        .moduleList[index]
+                                                        .delete
+                                                        .toString() ??
+                                                    "")),
+                                                DataCell(Text(controller
+                                                        .moduleList[index].view
+                                                        .toString() ??
+                                                    "")),
+                                                DataCell(Text(controller
+                                                        .moduleList[index]
+                                                        .approve
+                                                        .toString() ??
+                                                    "")),
+                                                DataCell(Text(controller
+                                                        .moduleList[index].issue
+                                                        .toString() ??
+                                                    "")),
+                                                DataCell(Text(controller
+                                                        .moduleList[index]
+                                                        .selfView
+                                                        .toString() ??
+                                                    "")),
+                                                DataCell(Row(
+                                                  children: [
+                                                    TableActionButton(
+                                                        color: ColorValues
+                                                            .editColor,
+                                                        icon: Icons.edit,
+                                                        message: 'Edit',
+                                                        onPress: () {
+                                                          controller.selectedItem = controller
+                                                              .moduleList
+                                                              .firstWhere((element) =>
+                                                                  "${element.id}" ==
+                                                                  controller
+                                                                      .moduleList[
+                                                                          index]
+                                                                      .id
+                                                                      .toString());
+
+                                                          controller
+                                                              .featureCtrlr
+                                                              .text = controller
+                                                                  .selectedItem
+                                                                  ?.featureName ??
+                                                              '';
+                                                          controller
+                                                              .modulelistNumberCtrlr
+                                                              .text = controller
+                                                                  .selectedItem
+                                                                  ?.name ??
+                                                              '';
+                                                          controller.isToggleOn
+                                                              .value = controller
+                                                                      .selectedItem
+                                                                      ?.add ==
+                                                                  1
+                                                              ? true
+                                                              : false;
+                                                          controller.isToggle1On
+                                                              .value = controller
+                                                                      .selectedItem
+                                                                      ?.edit ==
+                                                                  1
+                                                              ? true
+                                                              : false;
+                                                          controller.isToggle2On
+                                                              .value = controller
+                                                                      .selectedItem
+                                                                      ?.delete ==
+                                                                  1
+                                                              ? true
+                                                              : false;
+                                                          controller.isToggle3On
+                                                              .value = controller
+                                                                      .selectedItem
+                                                                      ?.view ==
+                                                                  1
+                                                              ? true
+                                                              : false;
+                                                          controller.isToggle4On
+                                                              .value = controller
+                                                                      .selectedItem
+                                                                      ?.approve ==
+                                                                  1
+                                                              ? true
+                                                              : false;
+                                                          controller.isToggle5On
+                                                              .value = controller
+                                                                      .selectedItem
+                                                                      ?.issue ==
+                                                                  1
+                                                              ? true
+                                                              : false;
+                                                          controller.isToggle6On
+                                                              .value = controller
+                                                                      .selectedItem
+                                                                      ?.selfView ==
+                                                                  1
+                                                              ? true
+                                                              : false;
+                                                          controller
+                                                              .isContainerVisible
+                                                              .value = true;
+                                                          // int spvId = int.tryParse(
+                                                          //         moduleList?.name ??
+                                                          //             "") ??
+                                                          //     0;
+                                                          // if (spvId != 0) {
+                                                          //   Get.toNamed(
+                                                          //       Routes.moduleListScreen,
+                                                          //       arguments: {"spvId": spvId});
+                                                          // }
+                                                          // controller.selectedItem =
+                                                          //     controller.moduleList.firstWhere(
+                                                          //         (element) =>
+                                                          //             "${element.id}" ==
+                                                          //             _permitTypeList[0]);
+                                                          // controller.selectedItem =
+                                                          //     controller.moduleList.firstWhere(
+                                                          //         (element) =>
+                                                          //             "${element.id}" ==
+                                                          //             _permitTypeList[0]);
+                                                        })
+                                                    // : Container(),
+                                                    ,
+                                                    TableActionButton(
+                                                      color: ColorValues
+                                                          .deleteColor,
+                                                      icon: Icons.delete,
+                                                      message: 'Delete',
+                                                      onPress: () {
+                                                        controller.isDeleteDialog(
+                                                            module_id:
+                                                                controller
+                                                                    .moduleList[
+                                                                        index]
+                                                                    .id
+                                                                    .toString(),
+                                                            module: controller
+                                                                .moduleList[
+                                                                    index]
+                                                                .name);
+                                                      },
+                                                    ),
+                                                  ],
+                                                )),
+                                              ]),
                                             ),
-                                          ],
-                                        )),
-                                      ]),
-                                    ),
-                                  ),
-                                ),
-                              ),
+                                          ),
+                                        ),
                             ],
                           ),
                         ),

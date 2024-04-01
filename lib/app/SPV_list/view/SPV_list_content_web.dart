@@ -572,7 +572,12 @@ class SPVListContentWeb extends GetView<SPVListController> {
                               SizedBox(
                                 height: 20,
                               ),
-                              Expanded(
+                              controller.SPVList.isEmpty == true &&
+                                    controller.isLoading == false
+                                ? Center(child: Text("No Data"))
+                                : controller.isLoading.value == true
+                                    ? Center(child: Text("Data Loading......"))
+                              :Expanded(
                                 child: Obx(
                                   () => DataTable2(
                                     key: UniqueKey(),

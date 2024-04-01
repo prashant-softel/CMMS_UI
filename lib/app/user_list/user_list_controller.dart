@@ -92,6 +92,7 @@ class UserListController extends GetxController {
     userList.value = filteredList;
   }
 
+  Rx<bool> isLoading = true.obs;
   @override
   void onInit() async {
     this.filterText = {
@@ -105,24 +106,24 @@ class UserListController extends GetxController {
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
       facilityId = event;
       Future.delayed(Duration(seconds: 1), () {
-        getUserList(facilityId, true, false);
+        getUserList(facilityId,  false);
       });
     });
 
     super.onInit();
   }
 
-  Future<void> getUserList(
-      int facilityId, bool isLoading, bool isExport) async {
+  Future<void> getUserList(int facilityId, bool isExport) async {
     userList.value = <UserListModel>[];
     filteredData.value = <UserListModel>[];
 
     final _userList = await userListPresenter.getUserList(
-        facilityId: facilityId, isLoading: isLoading, isExport: isExport);
+        facilityId: facilityId, isLoading: isLoading.value, isExport: isExport);
 
     if (_userList != null) {
       userList.value = _userList;
       filteredData.value = userList.value;
+      isLoading.value = false;
     }
     update(['user_list']);
   }
@@ -168,7 +169,7 @@ class UserListController extends GetxController {
                 onPressed: () {
                   deleteUser(user_id).then((value) {
                     Get.back();
-                    getUserList(facilityId, true, false);
+                    getUserList(facilityId,  false);
                   });
                 },
                 child: Text('YES'),
@@ -190,6 +191,6 @@ class UserListController extends GetxController {
   }
 
   void export() {
-    getUserList(facilityId, true, true);
+    getUserList(facilityId,  true);
   }
 }

@@ -74,6 +74,7 @@ class FaultyMaterialReportController extends GetxController {
   }
 
   ///
+  Rx<bool> isLoading = true.obs;
   @override
   void onInit() async {
     this.filterText = {
@@ -88,25 +89,26 @@ class FaultyMaterialReportController extends GetxController {
       facilityId = event;
       Future.delayed(Duration(seconds: 2), () {
         getFaultyMaterialReportList(
-            facilityId, formattedTodate1, formattedFromdate1, true);
+            facilityId, formattedTodate1, formattedFromdate1);
       });
     });
     super.onInit();
   }
 
-  Future<void> getFaultyMaterialReportList(int facilityId, dynamic startDate,
-      dynamic endDate, bool isLoading) async {
+  Future<void> getFaultyMaterialReportList(
+      int facilityId, dynamic startDate, dynamic endDate) async {
     faultyMaterialReportList.value = <FaultyMaterialReportModel>[];
     final _preventiveCheckList =
         await faultyMaterialReportPresenter.getFaultyMaterialReportList(
             facilityId: facilityId,
-            isLoading: isLoading,
+            isLoading: isLoading.value,
             startDate: startDate,
             endDate: endDate);
 
     if (_preventiveCheckList != null) {
       faultyMaterialReportList.value = _preventiveCheckList;
       filteredData.value = _preventiveCheckList;
+      isLoading.value = false;
       paginationController = PaginationController(
         rowCount: faultyMaterialReportList.length ?? 0,
         rowsPerPage: 10,
@@ -166,6 +168,6 @@ class FaultyMaterialReportController extends GetxController {
 
   void getPlantStockListByDate() {
     getFaultyMaterialReportList(
-        facilityId, formattedTodate1, formattedFromdate1, true);
+        facilityId, formattedTodate1, formattedFromdate1);
   }
 }

@@ -152,6 +152,7 @@ class IncidentReportListController extends GetxController {
   StreamSubscription<int>? facilityIdStreamSubscription;
   int facilityId = 0;
 
+  Rx<bool> isLoading = true.obs;
   @override
   void onInit() async {
     this.filterText = {
@@ -171,7 +172,7 @@ class IncidentReportListController extends GetxController {
       facilityId = event;
       Future.delayed(Duration(seconds: 2), () {
         getIncidentReportList(
-            facilityId, formattedFromdate, formattedTodate, false, false);
+            facilityId, formattedFromdate, formattedTodate, false);
       });
     });
 
@@ -269,11 +270,11 @@ class IncidentReportListController extends GetxController {
   }
 
   Future<void> getIncidentReportList(int facilityId, dynamic startDate,
-      dynamic endDate, bool isLoading, bool isExport) async {
+      dynamic endDate, bool isExport) async {
     incidentReportList.value = <IncidentReportListModel>[];
 
     final list = await incidentReportPresenter.getIncidentReportList(
-        isLoading: isLoading,
+        isLoading: isLoading.value,
         isExport: isExport,
         start_date: formattedFromdate1, //startDate,
         end_date: formattedTodate1, //endDate,
@@ -286,6 +287,7 @@ class IncidentReportListController extends GetxController {
 
     incidentReportList.value = list;
     filteredData.value = incidentReportList.value;
+    isLoading.value = false;
     // print('Filtered data:${filteredData.value}');
     paginationIncidentReportController = PaginationController(
       rowCount: incidentReportList.length,
@@ -324,7 +326,7 @@ class IncidentReportListController extends GetxController {
 
   void getIncidentReportListByDate() {
     getIncidentReportList(
-        facilityId, formattedFromdate, formattedTodate, false, false);
+        facilityId, formattedFromdate, formattedTodate, false);
   }
 
   Future<void> viewIncidentReport({int? id}) async {
@@ -343,6 +345,6 @@ class IncidentReportListController extends GetxController {
 
   void export() {
     getIncidentReportList(
-        facilityId, formattedFromdate, formattedTodate, true, true);
+        facilityId, formattedFromdate, formattedTodate, true);
   }
 }

@@ -286,8 +286,10 @@ class _UserListContentWebState extends State<UserListContentWeb> {
                                   SizedBox(
                                     height: 20,
                                   ),
-                                  controller.userList.isEmpty == true
+                                  controller.userList.isEmpty == true && controller.isLoading == false
                                       ? Center(child: Text('No data'))
+                                      : controller.isLoading.value == true
+                                      ? Center(child: Text("Data Loading......"))
                                       : Expanded(
                                           child: ValueListenableBuilder(
                                               valueListenable:

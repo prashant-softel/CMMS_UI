@@ -305,6 +305,7 @@ class PreventiveCheckPointController extends GetxController {
     if (_preventiveCheckpoint != null) {
       preventiveCheckpoint!.value = _preventiveCheckpoint;
       BufferPreventiveCheckPoint!.value = preventiveCheckpoint!.value;
+      isLoading.value = false;
 
       // paginationController = PaginationController(
       //   rowCount: preventiveCheckpoint!.length,

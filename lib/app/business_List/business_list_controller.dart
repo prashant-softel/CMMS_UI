@@ -108,6 +108,8 @@ class BusinessListController extends GetxController {
 
   BusinessListModel? selectedItem;
   StreamSubscription<int>? facilityIdStreamSubscription;
+  Rx<bool> isLoading = true.obs;
+
   @override
   void onInit() async {
     getCountryList();
@@ -117,7 +119,7 @@ class BusinessListController extends GetxController {
       facilityId = event;
       Future.delayed(Duration(seconds: 1), () {
         getBusinessTypeList();
-        getBusinessList(0, true, facilityId);
+        getBusinessList(0,  facilityId);
       });
     });
     cnameFocus.addListener(() {
@@ -223,7 +225,7 @@ class BusinessListController extends GetxController {
     // }
     selectedBusinessType.value = businessCategoryList[0]?.name!;
     selectedBusinessTypeId = businessCategoryList[0]?.id!;
-    getBusinessList(0, true, facilityId);
+    getBusinessList(0,  facilityId);
   }
 
   Future<void> getCountryList() async {
@@ -296,7 +298,7 @@ class BusinessListController extends GetxController {
           selectedBusinessTypeId =
               businessCategoryList[equipmentIndex]?.id ?? 0;
           selectedBusinessType.value = value;
-          getBusinessList(selectedBusinessTypeId!, true, facilityId);
+          getBusinessList(selectedBusinessTypeId!,  facilityId);
         }
 
         break;
@@ -361,17 +363,17 @@ class BusinessListController extends GetxController {
     return selectedBusinessType.value;
   }
 
-  Future<void> getBusinessList(
-      selectedBusinessTypeId, bool isLoading, int facilityId) async {
+  Future<void> getBusinessList(selectedBusinessTypeId, int facilityId) async {
     moduleList?.value = <BusinessListModel>[];
     final _moduleList = await businessListPresenter.getBusinessList(
         facilityId: facilityId,
         businessType: selectedBusinessTypeId,
-        isLoading: isLoading);
+        isLoading: isLoading.value);
 
     if (_moduleList != null) {
       moduleList!.value = _moduleList;
       filteredData.value = moduleList!.value;
+      isLoading.value = false;
       paginationController = PaginationController(
         rowCount: moduleList?.length ?? 0,
         rowsPerPage: 10,
@@ -528,7 +530,7 @@ class BusinessListController extends GetxController {
       );
       return true;
     }
-    getBusinessList(selectedBusinessTypeId, true, facilityId);
+    getBusinessList(selectedBusinessTypeId,  facilityId);
     return true;
   }
 
@@ -554,7 +556,7 @@ class BusinessListController extends GetxController {
     selectedState.value = '';
     selectedItem = null;
     Future.delayed(Duration(seconds: 1), () {
-      getBusinessList(selectedBusinessTypeId, true, facilityId);
+      getBusinessList(selectedBusinessTypeId,  facilityId);
     });
     Future.delayed(Duration(seconds: 5), () {
       isSuccess.value = false;
@@ -598,7 +600,7 @@ class BusinessListController extends GetxController {
                 onPressed: () {
                   deleteBusiness(business_id).then((value) {
                     Get.back();
-                    getBusinessList(0, true, facilityId);
+                    getBusinessList(0,  facilityId);
                   });
                 },
                 child: Text('YES'),

@@ -570,118 +570,136 @@ class BodyInjuredWeb extends GetView<BodyInjuredController> {
 
                               //   ],
                               // ),
-                              SizedBox(
-                                height: 20,
-                              ),
-                              Expanded(
-                                child: Obx(
-                                  () => DataTable2(
-                                    key: UniqueKey(),
-                                    dataRowHeight: 50,
-                                    columnSpacing: 10,
-                                    border: TableBorder.all(
-                                        color:
-                                            Color.fromARGB(255, 206, 229, 234)),
-                                    columns: [
-                                      DataColumn2(
-                                          fixedWidth: 100,
-                                          label: Text(
-                                            "Sr No",
-                                            style: TextStyle(
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.bold),
-                                          )),
-                                      DataColumn2(
-                                          // fixedWidth: 150,
-                                          label: Text(
-                                        "Injury Name",
-                                        style: TextStyle(
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.bold),
-                                      )),
-                                      DataColumn2(
-                                          // fixedWidth: 300,
-                                          label: Text(
-                                        "Description",
-                                        style: TextStyle(
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.bold),
-                                      )),
-                                      DataColumn2(
-                                          fixedWidth: 100,
-                                          label: Text(
-                                            'Action',
-                                            style: TextStyle(
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.bold),
-                                          )),
-                                    ],
-                                    rows: List<DataRow>.generate(
-                                      controller.bodyinjuredList.length,
-                                      (index) => DataRow(cells: [
-                                        DataCell(Text((index + 1).toString())),
-                                        DataCell(Text(controller
-                                            .bodyinjuredList[index].name
-                                            .toString())),
-                                        DataCell(Text(controller
-                                                .bodyinjuredList[index]
-                                                .description ??
-                                            '')),
-                                        DataCell(Row(
-                                          children: [
-                                            TableActionButton(
-                                              color: ColorValues.editColor,
-                                              icon: Icons.edit,
-                                              message: 'Edit',
-                                              onPress: () {
-                                                controller.selectedItem =
-                                                    controller.bodyinjuredList
-                                                        .firstWhere(
-                                                  (element) =>
-                                                      "${element.id}" ==
-                                                      controller
-                                                          .bodyinjuredList[
-                                                              index]
-                                                          .id
-                                                          .toString(),
-                                                );
-
-                                                controller.titleCtrlr.text =
-                                                    controller.selectedItem
-                                                            ?.name ??
-                                                        '';
-                                                controller.descriptionCtrlr
-                                                    .text = controller
-                                                        .selectedItem
-                                                        ?.description ??
-                                                    '';
-
-                                                controller.isContainerVisible
-                                                    .value = true;
-                                              },
-                                            ),
-                                            TableActionButton(
-                                              color: ColorValues.deleteColor,
-                                              icon: Icons.delete,
-                                              message: 'Delete',
-                                              onPress: () {
-                                                controller.isDeleteDialog(
-                                                    bodypart_id: controller
+                              // SizedBox(
+                              //   height: 20,
+                              // ),
+                              controller.bodyinjuredList.isEmpty == true &&
+                                      controller.isLoading == false
+                                  ? Center(child: Text('No Data'))
+                                  : controller.isLoading.value == true
+                                      ? Center(
+                                          child: Text("Data Loading......"))
+                                      : Expanded(
+                                          child: DataTable2(
+                                            key: UniqueKey(),
+                                            dataRowHeight: 50,
+                                            columnSpacing: 10,
+                                            border: TableBorder.all(
+                                                color: Color.fromARGB(
+                                                    255, 206, 229, 234)),
+                                            columns: [
+                                              DataColumn2(
+                                                  fixedWidth: 100,
+                                                  label: Text(
+                                                    "Sr No",
+                                                    style: TextStyle(
+                                                        fontSize: 15,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  )),
+                                              DataColumn2(
+                                                  // fixedWidth: 150,
+                                                  label: Text(
+                                                "Injury Name",
+                                                style: TextStyle(
+                                                    fontSize: 15,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              )),
+                                              DataColumn2(
+                                                  // fixedWidth: 300,
+                                                  label: Text(
+                                                "Description",
+                                                style: TextStyle(
+                                                    fontSize: 15,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              )),
+                                              DataColumn2(
+                                                  fixedWidth: 100,
+                                                  label: Text(
+                                                    'Action',
+                                                    style: TextStyle(
+                                                        fontSize: 15,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  )),
+                                            ],
+                                            rows: List<DataRow>.generate(
+                                              controller.bodyinjuredList.length,
+                                              (index) => DataRow(cells: [
+                                                DataCell(Text(
+                                                    (index + 1).toString())),
+                                                DataCell(Text(controller
+                                                    .bodyinjuredList[index].name
+                                                    .toString())),
+                                                DataCell(Text(controller
                                                         .bodyinjuredList[index]
-                                                        .id
-                                                        .toString(),
-                                                    bodypart: controller
-                                                        .bodyinjuredList[index]
-                                                        .name);
-                                              },
+                                                        .description ??
+                                                    '')),
+                                                DataCell(Row(
+                                                  children: [
+                                                    TableActionButton(
+                                                      color:
+                                                          ColorValues.editColor,
+                                                      icon: Icons.edit,
+                                                      message: 'Edit',
+                                                      onPress: () {
+                                                        controller
+                                                                .selectedItem =
+                                                            controller
+                                                                .bodyinjuredList
+                                                                .firstWhere(
+                                                          (element) =>
+                                                              "${element.id}" ==
+                                                              controller
+                                                                  .bodyinjuredList[
+                                                                      index]
+                                                                  .id
+                                                                  .toString(),
+                                                        );
+
+                                                        controller.titleCtrlr
+                                                            .text = controller
+                                                                .selectedItem
+                                                                ?.name ??
+                                                            '';
+                                                        controller
+                                                            .descriptionCtrlr
+                                                            .text = controller
+                                                                .selectedItem
+                                                                ?.description ??
+                                                            '';
+
+                                                        controller
+                                                            .isContainerVisible
+                                                            .value = true;
+                                                      },
+                                                    ),
+                                                    TableActionButton(
+                                                      color: ColorValues
+                                                          .deleteColor,
+                                                      icon: Icons.delete,
+                                                      message: 'Delete',
+                                                      onPress: () {
+                                                        controller.isDeleteDialog(
+                                                            bodypart_id: controller
+                                                                .bodyinjuredList[
+                                                                    index]
+                                                                .id
+                                                                .toString(),
+                                                            bodypart: controller
+                                                                .bodyinjuredList[
+                                                                    index]
+                                                                .name);
+                                                      },
+                                                    ),
+                                                  ],
+                                                )),
+                                              ]),
                                             ),
-                                          ],
-                                        )),
-                                      ]),
-                                    ),
-                                  ),
-                                ),
-                              ),
+                                          ),
+                                        ),
                             ],
                           ),
                         ),

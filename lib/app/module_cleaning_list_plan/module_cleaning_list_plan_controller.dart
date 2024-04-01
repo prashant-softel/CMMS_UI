@@ -94,15 +94,18 @@ class ModuleCleaningListPlanController extends GetxController {
     super.onInit();
   }
 
-  Future<void> getModuleCleaningListPlan(
-      int facilityId, bool isExport) async {
+  Future<void> getModuleCleaningListPlan(int facilityId, bool isExport) async {
     moduleCleaningListPlan.value = <ModuleCleaningListPlanModel>[];
     filteredData.value = <ModuleCleaningListPlanModel>[];
 
     final _moduleCleaningListPlan =
         await moduleCleaningListPlanPresenter.getModuleCleaningListPlan(
-            isLoading: isLoading.value, facility_id: facilityId, isExport: isExport);
-    moduleCleaningListPlan.value = _moduleCleaningListPlan;
+            isLoading: isLoading.value,
+            facility_id: facilityId,
+            isExport: isExport);
+    if (moduleCleaningListPlan != null) {
+      moduleCleaningListPlan.value = _moduleCleaningListPlan;
+      isLoading.value = false; 
     paginationController = PaginationController(
       rowCount: moduleCleaningListPlan.length,
       rowsPerPage: 10,
@@ -110,7 +113,6 @@ class ModuleCleaningListPlanController extends GetxController {
 
     if (moduleCleaningListPlan.isNotEmpty) {
       filteredData.value = moduleCleaningListPlan.value;
-      isLoading.value = false;
 
       moduleCleaningListModel = moduleCleaningListPlan[0];
       var newPermitListJson = moduleCleaningListModel?.toJson();
@@ -118,6 +120,7 @@ class ModuleCleaningListPlanController extends GetxController {
       for (var key in newPermitListJson?.keys.toList() ?? []) {
         moduleCleaningListTableColumns.add(key);
       }
+    }
     }
   }
 
