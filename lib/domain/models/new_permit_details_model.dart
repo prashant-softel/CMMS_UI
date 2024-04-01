@@ -313,7 +313,7 @@ class LotoLists {
   String? equipment_cat;
   String? loto_Key;
   String? employee_name;
-  int? loto_lock_number;
+  String? loto_lock_number;
 
   factory LotoLists.fromJson(Map<String, dynamic> json) => LotoLists(
       equipment_name: json["equipment_name"],
