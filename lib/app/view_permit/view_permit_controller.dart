@@ -35,7 +35,6 @@ import 'package:cmms/domain/models/type_permit_model.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart';
 import 'package:intl/intl.dart';
-import 'package:path/path.dart';
 import 'package:rxdart/subjects.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 import 'package:syncfusion_flutter_pdf/pdf.dart';
