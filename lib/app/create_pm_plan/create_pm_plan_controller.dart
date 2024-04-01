@@ -73,18 +73,17 @@ class CreatePmPlanController extends GetxController {
   void onInit() async {
     try {
       await setPmPlanId();
-      if (pmPlanId.value != 0) {
-        await getPmPlanDetails(
-            pmPlanId: pmPlanId.value, isloading: true, facilityId: facilityId);
-      }
+
       facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
         facilityId = event;
-        Future.delayed(Duration(seconds: 1), () {
-          getPmPlanDetails(
-              pmPlanId: pmPlanId.value,
-              isloading: true,
-              facilityId: facilityId);
-        });
+        if (pmPlanId.value != 0) {
+          Future.delayed(Duration(seconds: 1), () {
+            getPmPlanDetails(
+                pmPlanId: pmPlanId.value,
+                isloading: true,
+                facilityId: facilityId);
+          });
+        }
 
         Future.delayed(Duration(seconds: 1), () {
           getInventoryCategoryList();
