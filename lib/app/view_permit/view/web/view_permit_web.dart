@@ -2635,7 +2635,7 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                                           CrossAxisAlignment.start,
                                       children: [
                                         Text(
-                                          '${controller.viewPermitDetailsModel.value?.issue_at}',
+                                          '${controller.viewPermitDetailsModel.value?.request_datetime}',
                                         ),
                                         // Text(
                                         //   '${controller.viewPermitDetailsModel.value?.issue_at}',

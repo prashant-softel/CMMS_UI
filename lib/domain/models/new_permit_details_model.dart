@@ -40,6 +40,7 @@ class NewPermitDetailModel {
   int? workingTime;
   String? issuedByName;
   DateTime? issue_at;
+  DateTime? request_datetime;
   String? approvedByName;
   DateTime? approve_at;
   String? completedByName;
@@ -105,6 +106,7 @@ class NewPermitDetailModel {
     this.workingTime,
     this.issuedByName,
     this.issue_at,
+    this.request_datetime,
     this.approvedByName,
     this.approve_at,
     this.completedByName,
@@ -167,6 +169,9 @@ class NewPermitDetailModel {
         issue_at: json["issue_at"] == null
             ? null
             : DateTime.parse(json['issue_at'] as String),
+        request_datetime: json["request_datetime"] == null
+            ? null
+            : DateTime.parse(json['request_datetime'] as String),
         approvedByName: json['approvedByName'],
         approve_at: json["approve_at"] == null
             ? null
@@ -228,7 +233,7 @@ class NewPermitDetailModel {
         closeDetails: CloseDetails.fromJson(json['closeDetails']),
         physical_iso_remark: json['physical_iso_remark'],
         is_TBT_Expire: json['is_TBT_Expire'],
-        is_loto_required: json["is_loto_required"], 
+        is_loto_required: json["is_loto_required"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -262,6 +267,7 @@ class NewPermitDetailModel {
         "workingTime": workingTime,
         "issuedByName": issuedByName,
         "issue_at": issue_at,
+        "request_datetime": request_datetime,
         "approvedByName": approvedByName,
         "approve_at": approve_at,
         "completedByName": completedByName,
