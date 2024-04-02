@@ -519,113 +519,134 @@ class WorkTypeWeb extends GetView<WorkTypeController> {
                               SizedBox(
                                 height: 20,
                               ),
-                              Expanded(
-                                child: Obx(
-                                  () => DataTable2(
-                                    key: UniqueKey(),
-                                    dataRowHeight: 50,
-                                    columnSpacing: 10,
-                                    border: TableBorder.all(
-                                        color:
-                                            Color.fromARGB(255, 206, 229, 234)),
-                                    columns: [
-                                      DataColumn2(
-                                          fixedWidth: 100,
-                                          label: Text(
-                                            "Sr No",
-                                            style: TextStyle(
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.bold),
-                                          )),
-                                      DataColumn2(
-                                          // fixedWidth: 150,
-                                          label: Text(
-                                        "Work Type",
-                                        style: TextStyle(
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.bold),
-                                      )),
-                                      DataColumn2(
-                                          // fixedWidth: 150,
-                                          label: Text(
-                                        "Category",
-                                        style: TextStyle(
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.bold),
-                                      )),
-                                      DataColumn2(
-                                          fixedWidth: 100,
-                                          label: Text(
-                                            'Action',
-                                            style: TextStyle(
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.bold),
-                                          )),
-                                    ],
-                                    rows: List<DataRow>.generate(
-                                      controller.worktypeList.length,
-                                      (index) => DataRow(cells: [
-                                        DataCell(Text((index + 1).toString())),
-                                        DataCell(Text(controller
-                                            .worktypeList[index]!.name
-                                            .toString())),
-                                        DataCell(Text(controller
-                                                .worktypeList[index]!
-                                                .categoryName ??
-                                            '')),
-                                        DataCell(Row(
-                                          children: [
-                                            TableActionButton(
-                                              color: ColorValues.editColor,
-                                              icon: Icons.edit,
-                                              message: 'Edit',
-                                              onPress: () {
-                                                controller.selectedItem =
-                                                    controller.worktypeList
-                                                        .firstWhere(
-                                                  (element) =>
-                                                      "${element!.id}" ==
-                                                      controller
-                                                          .worktypeList[index]!
-                                                          .id
-                                                          .toString(),
-                                                );
-
-                                                controller.titleCtrlr.text =
-                                                    controller.selectedItem
-                                                            ?.name ??
-                                                        '';
-                                                controller.selectedassetcategory
-                                                    .value = controller
-                                                        .selectedItem
-                                                        ?.categoryName ??
-                                                    '';
-
-                                                controller.isContainerVisible
-                                                    .value = true;
-                                              },
-                                            ),
-                                            TableActionButton(
-                                              color: ColorValues.deleteColor,
-                                              icon: Icons.delete,
-                                              message: 'Delete',
-                                              onPress: () {
-                                                controller.isDeleteDialog(
-                                                    worktype_id: controller
-                                                        .worktypeList[index]!.id
-                                                        .toString(),
-                                                    worktype: controller
+                              controller.worktypeList.isEmpty == true &&
+                                      controller.isLoading == false
+                                  ? Center(child: Text("No Data"))
+                                  : controller.isLoading.value == true
+                                      ? Center(
+                                          child: Text("Data Loading......"))
+                                      : Expanded(
+                                          child: DataTable2(
+                                            key: UniqueKey(),
+                                            dataRowHeight: 50,
+                                            columnSpacing: 10,
+                                            border: TableBorder.all(
+                                                color: Color.fromARGB(
+                                                    255, 206, 229, 234)),
+                                            columns: [
+                                              DataColumn2(
+                                                  fixedWidth: 100,
+                                                  label: Text(
+                                                    "Sr No",
+                                                    style: TextStyle(
+                                                        fontSize: 15,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  )),
+                                              DataColumn2(
+                                                  // fixedWidth: 150,
+                                                  label: Text(
+                                                "Work Type",
+                                                style: TextStyle(
+                                                    fontSize: 15,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              )),
+                                              DataColumn2(
+                                                  // fixedWidth: 150,
+                                                  label: Text(
+                                                "Category",
+                                                style: TextStyle(
+                                                    fontSize: 15,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              )),
+                                              DataColumn2(
+                                                  fixedWidth: 100,
+                                                  label: Text(
+                                                    'Action',
+                                                    style: TextStyle(
+                                                        fontSize: 15,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  )),
+                                            ],
+                                            rows: List<DataRow>.generate(
+                                              controller.worktypeList.length,
+                                              (index) => DataRow(cells: [
+                                                DataCell(Text(
+                                                    (index + 1).toString())),
+                                                DataCell(Text(controller
+                                                    .worktypeList[index]!.name
+                                                    .toString())),
+                                                DataCell(Text(controller
                                                         .worktypeList[index]!
-                                                        .name);
-                                              },
+                                                        .categoryName ??
+                                                    '')),
+                                                DataCell(Row(
+                                                  children: [
+                                                    TableActionButton(
+                                                      color:
+                                                          ColorValues.editColor,
+                                                      icon: Icons.edit,
+                                                      message: 'Edit',
+                                                      onPress: () {
+                                                        controller
+                                                                .selectedItem =
+                                                            controller
+                                                                .worktypeList
+                                                                .firstWhere(
+                                                          (element) =>
+                                                              "${element!.id}" ==
+                                                              controller
+                                                                  .worktypeList[
+                                                                      index]!
+                                                                  .id
+                                                                  .toString(),
+                                                        );
+
+                                                        controller.titleCtrlr
+                                                            .text = controller
+                                                                .selectedItem
+                                                                ?.name ??
+                                                            '';
+                                                        controller
+                                                            .selectedassetcategory
+                                                            .value = controller
+                                                                .selectedItem
+                                                                ?.categoryName ??
+                                                            '';
+
+                                                        controller
+                                                            .isContainerVisible
+                                                            .value = true;
+                                                      },
+                                                    ),
+                                                    TableActionButton(
+                                                      color: ColorValues
+                                                          .deleteColor,
+                                                      icon: Icons.delete,
+                                                      message: 'Delete',
+                                                      onPress: () {
+                                                        controller.isDeleteDialog(
+                                                            worktype_id:
+                                                                controller
+                                                                    .worktypeList[
+                                                                        index]!
+                                                                    .id
+                                                                    .toString(),
+                                                            worktype: controller
+                                                                .worktypeList[
+                                                                    index]!
+                                                                .name);
+                                                      },
+                                                    ),
+                                                  ],
+                                                )),
+                                              ]),
                                             ),
-                                          ],
-                                        )),
-                                      ]),
-                                    ),
-                                  ),
-                                ),
-                              ),
+                                          ),
+                                        ),
                             ],
                           ),
                         ),

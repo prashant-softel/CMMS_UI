@@ -102,6 +102,7 @@ class SafetyQuestionsListController extends GetxController {
     rowsPerPage: 10,
   );
 
+  Rx<bool> isLoading = true.obs;
   @override
   void onInit() async {
     // getInventoryCategoryList();
@@ -304,7 +305,7 @@ class SafetyQuestionsListController extends GetxController {
                 onPressed: () {
                   deleteSafetyMeasure(safetyMeasure_id).then((value) {
                     Get.back();
-                    getSafetyMeasureList(true, selectedTypePermitId!);
+                    getSafetyMeasureList(selectedTypePermitId!);
                   });
                 },
                 child: Text('YES'),
@@ -322,24 +323,26 @@ class SafetyQuestionsListController extends GetxController {
         id,
         isLoading: true,
       );
-      getSafetyMeasureList(true, selectedTypePermitId!);
+      getSafetyMeasureList(selectedTypePermitId!);
     }
   }
 
-  Future<void> getSafetyMeasureList(
-      bool isLoading, int selectedTypePermitId) async {
+  Future<void> getSafetyMeasureList(int selectedTypePermitId) async {
     safetyMeasureList.value = <SafetyMeasureListModel>[];
     final _safetyMeasureList =
         await safetyQuestionsListPresenter.getSafetyMeasureList(
-      isLoading: isLoading,
+      isLoading: isLoading.value,
       // categoryIds: categoryIds,
       permit_type_id: selectedTypePermitId,
       // job_type_id: 36,
     );
-    for (var safetyMeasure_list in _safetyMeasureList) {
-      safetyMeasureList.add(safetyMeasure_list);
+    if (_safetyMeasureList != null) {
+      isLoading.value = false;
+      for (var safetyMeasure_list in _safetyMeasureList) {
+        safetyMeasureList.add(safetyMeasure_list);
+      }
+      BufferPreventiveseff.value = safetyMeasureList.value;
     }
-    BufferPreventiveseff.value = safetyMeasureList.value;
 
     // supplierNameList = _supplierNameList;
     safetyQuestionListPaginationController = PaginationController(
@@ -363,7 +366,7 @@ class SafetyQuestionsListController extends GetxController {
       selectedTypePermit.value = typePermitList[0]?.name ?? '';
       selectedTypePermitId = typePermitList[0]?.id;
       print('PermitTypeId:$selectedTypePermitId');
-      getSafetyMeasureList(true, 0);
+      getSafetyMeasureList(0);
     }
   }
 
@@ -389,7 +392,7 @@ class SafetyQuestionsListController extends GetxController {
           int typePermitIndex =
               typePermitList.indexWhere((x) => x?.name == value);
           selectedTypePermitId = typePermitList[typePermitIndex]?.id ?? 0;
-          getSafetyMeasureList(true, selectedTypePermitId!);
+          getSafetyMeasureList(selectedTypePermitId!);
           print('Permit Type Id:$selectedTypePermitId');
         }
         break;
@@ -424,7 +427,7 @@ class SafetyQuestionsListController extends GetxController {
 
     // selectedfrequency.value = '';
     Future.delayed(Duration(seconds: 1), () {
-      getSafetyMeasureList(true, selectedTypePermitId!);
+      getSafetyMeasureList(selectedTypePermitId!);
     });
     Future.delayed(Duration(seconds: 5), () {
       isSuccess.value = false;

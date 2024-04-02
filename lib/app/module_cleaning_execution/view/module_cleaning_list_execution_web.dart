@@ -305,8 +305,11 @@ class _ModuleCleaningListExecutionState
                                   SizedBox(
                                     height: 10,
                                   ),
-                                  controller.mcTaskList.isEmpty
-                                      ? Center(child: Text('No data'))
+                                  controller.mcTaskList.isEmpty== true &&
+                                    controller.isLoading == false
+                                ? Center(child: Text("No Data"))
+                                : controller.isLoading.value == true
+                                    ? Center(child: Text("Data Loading......"))
                                       : Expanded(
                                           child: ValueListenableBuilder(
                                               valueListenable:

@@ -570,7 +570,12 @@ class IncidentRiskTypeWeb extends GetView<IncidentRiskTypeController> {
                               SizedBox(
                                 height: 20,
                               ),
-                              Expanded(
+                              controller.incidentrisktypeList.isEmpty == true &&
+                                    controller.isLoading == false
+                                ? Center(child: Text("No Data"))
+                                : controller.isLoading.value == true
+                                    ? Center(child: Text("Data Loading......"))
+                              :Expanded(
                                 child: Obx(
                                   () => DataTable2(
                                     key: UniqueKey(),

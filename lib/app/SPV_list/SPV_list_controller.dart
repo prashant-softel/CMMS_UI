@@ -122,6 +122,7 @@ class SPVListController extends GetxController {
   FocusNode descFocus = FocusNode();
   ScrollController descScroll = ScrollController();
 
+  Rx<bool> isLoading = true.obs;
   @override
   void onInit() async {
     // getInventoryCategoryList();
@@ -150,14 +151,17 @@ class SPVListController extends GetxController {
     SPVList.value = <SPVListModel>[];
     BufferSPVList.value = <SPVListModel>[];
     final _spvList = await sPVListPresenter.getSPVList(
-      isLoading: true,
+      isLoading: isLoading.value,
       // categoryIds: categoryIds,
       job_type_id: selectedJobSOPId,
       // job_type_id: 36,
     );
-    for (var facilityType_list in _spvList) {
+    if(_spvList != null) {
+      isLoading.value = false;
+      for (var facilityType_list in _spvList) {
       SPVList.add(facilityType_list);
       BufferSPVList.add(facilityType_list);
+    }
     }
     // selectedSopPermit.value = _SPVList[0].name ?? '';
 

@@ -130,6 +130,7 @@ class TransactionReportListController extends GetxController {
     print({"updated columnVisibility": columnVisibility});
   }
 
+  Rx<bool> isLoading = true.obs;
   @override
   void onInit() async {
     selectedActorType.value = actorType[2].name;
@@ -151,7 +152,7 @@ class TransactionReportListController extends GetxController {
       Future.delayed(Duration(seconds: 1), () async {
         if (selectedactorTypeId == 3) {
           getPmTaskList(
-              facilityId, formattedTodate1, formattedFromdate1, false);
+              facilityId, formattedTodate1, formattedFromdate1);
         }
       });
     });
@@ -204,16 +205,20 @@ class TransactionReportListController extends GetxController {
     // update(['stock_Mangement_Date']);
   }
 
-  Future<void> getPmTaskList(int facilityId, dynamic startDate, dynamic endDate,
-      bool isLoading) async {
+  Future<void> getPmTaskList(
+    int facilityId,
+    dynamic startDate,
+    dynamic endDate,
+  ) async {
     pmTaskList.value = <PmTaskListModel>[];
     // pmTaskList?.clear();
     final _pmTaskList = await transactionReportListPresenter.getPmTaskList(
         facilityId: facilityId,
-        isLoading: isLoading,
+        isLoading: isLoading.value,
         startDate: startDate,
         endDate: endDate);
     if (_pmTaskList != null) {
+      isLoading.value = false;
       for (var taskName in _pmTaskList) {
         pmTaskList.add(taskName);
       }
@@ -226,7 +231,7 @@ class TransactionReportListController extends GetxController {
           actorType: selectedactorTypeId,
           actorID: actorId,
           endDate: formattedFromdate1,
-          isLoading: true);
+          isLoading: isLoading.value);
     }
   }
 
@@ -261,7 +266,7 @@ class TransactionReportListController extends GetxController {
           selectedActorType.value = actorType[userIndex].name;
           if (selectedactorTypeId == AppConstants.kTask) {
             getPmTaskList(
-                facilityId, formattedTodate1, formattedFromdate1, false);
+                facilityId, formattedTodate1, formattedFromdate1);
           } else if (selectedactorTypeId == AppConstants.kStore) {
             getFacilityList();
           } else if (selectedactorTypeId == AppConstants.kJobCard) {

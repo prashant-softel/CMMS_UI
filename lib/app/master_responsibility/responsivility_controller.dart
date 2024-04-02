@@ -54,12 +54,14 @@ class ResponsibilityListController extends GetxController {
   DesignationModel? selectedItem = null;
   StreamSubscription<int>? facilityIdStreamSubscription;
   bool isEditMode = false;
+  Rx<bool> isLoading = true.obs;
+
   @override
   void onInit() async {
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
       facilityId = event;
       Future.delayed(Duration(seconds: 2), () {
-        getResponsibilityList(true);
+        getResponsibilityList();
       });
     });
     nameFocus.addListener(() {
@@ -76,13 +78,14 @@ class ResponsibilityListController extends GetxController {
     super.onInit();
   }
 
-  Future<void> getResponsibilityList(bool isLoading) async {
+  Future<void> getResponsibilityList() async {
     responsibilityList?.value = <DesignationModel>[];
     final _moduleList = await responsibilityPresenter.getResponsibilityList(
-        isLoading: isLoading);
+        isLoading: isLoading.value);
 
     if (_moduleList != null) {
       responsibilityList!.value = _moduleList.cast<DesignationModel?>();
+      isLoading.value = false;
       paginationController = PaginationController(
         rowCount: responsibilityList?.length ?? 0,
         rowsPerPage: 10,
@@ -148,7 +151,7 @@ class ResponsibilityListController extends GetxController {
       );
       return true;
     }
-    getResponsibilityList(true);
+    getResponsibilityList();
     return true;
   }
 
@@ -164,7 +167,7 @@ class ResponsibilityListController extends GetxController {
     descriptionCtrlr.text = '';
     selectedItem = null;
     Future.delayed(Duration(seconds: 1), () {
-      getResponsibilityList(true);
+      getResponsibilityList();
     });
     Future.delayed(Duration(seconds: 5), () {
       isSuccess.value = false;
@@ -208,7 +211,7 @@ class ResponsibilityListController extends GetxController {
                 onPressed: () {
                   deleteResponsibility(module_id).then((value) {
                     Get.back();
-                    getResponsibilityList(true);
+                    getResponsibilityList();
                   });
                 },
                 child: Text('YES'),

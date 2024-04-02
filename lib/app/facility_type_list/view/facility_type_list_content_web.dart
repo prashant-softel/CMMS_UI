@@ -1405,280 +1405,322 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                               SizedBox(
                                 height: 20,
                               ),
-                              Expanded(
-                                child: Obx(
-                                  () => DataTable2(
-                                    key: UniqueKey(),
-                                    dataRowHeight: 60,
-                                    columnSpacing: 10,
-                                    border: TableBorder.all(
-                                        color:
-                                            Color.fromARGB(255, 206, 229, 234)),
-                                    columns: [
-                                      DataColumn2(
-                                          fixedWidth: 45,
-                                          label: Text(
-                                            "Sr No",
-                                            style: TextStyle(
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.bold),
-                                          )),
-                                      DataColumn2(
-                                          // fixedWidth: 150,
-                                          label: Text(
-                                        "Plant Name",
-                                        style: TextStyle(
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.bold),
-                                      )),
-                                      // DataColumn2(
-                                      //     // fixedWidth: 300,
-                                      //     label: Text(
-                                      //   "Desc",
-                                      //   style: TextStyle(
-                                      //       fontSize: 15,
-                                      //       fontWeight: FontWeight.bold),
-                                      // )),
-                                      DataColumn2(
-                                          // fixedWidth: 150,
-                                          label: Text(
-                                        "SPV",
-                                        style: TextStyle(
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.bold),
-                                      )),
-                                      DataColumn2(
-                                          // fixedWidth: 300,
-                                          label: Text(
-                                        "Owner",
-                                        style: TextStyle(
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.bold),
-                                      )),
-                                      // DataColumn2(
-                                      //     fixedWidth: 100,
-                                      //     label: Text(
-                                      //       "State",
-                                      //       style: TextStyle(
-                                      //           fontSize: 15,
-                                      //           fontWeight: FontWeight.bold),
-                                      //     )),
-                                      DataColumn2(
-                                          // fixedWidth: 150,
-                                          label: Text(
-                                        "Operator",
-                                        style: TextStyle(
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.bold),
-                                      )),
-                                      DataColumn2(
-                                          // fixedWidth: 60,
-                                          label: Text(
-                                        "Customer",
-                                        style: TextStyle(
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.bold),
-                                      )),
-                                      DataColumn2(
-                                          // fixedWidth: 60,
-                                          label: Text(
-                                        "City",
-                                        style: TextStyle(
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.bold),
-                                      )),
-                                      DataColumn2(
-                                          fixedWidth: 100,
-                                          label: Text(
-                                            'Action',
-                                            style: TextStyle(
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.bold),
-                                          )),
-                                    ],
-                                    rows: List<DataRow>.generate(
-                                      controller.facilityTypeList.length ?? 0,
-                                      (index) => DataRow(cells: [
-                                        DataCell(Text((index + 1).toString())),
-                                        DataCell(Text(controller
-                                                .facilityTypeList[index].name
-                                                .toString() ??
-                                            '')),
-                                        // DataCell(Text(controller
-                                        //         .facilityTypeList?[index]
-                                        //         ?.description ??
-                                        //     '')),
-                                        DataCell(Text(controller
-                                                .facilityTypeList[index].spv ??
-                                            '')),
-                                        DataCell(Text(controller
-                                                .facilityTypeList[index]
-                                                .owner ??
-                                            '')),
-                                        // DataCell(Text(controller
-                                        //         .facilityTypeList?[index]
-                                        //         ?.state ??
-                                        //     '')),
-                                        DataCell(Text(controller
-                                                .facilityTypeList[index]
-                                                .operator ??
-                                            '')),
-                                        DataCell(Text(controller
-                                                .facilityTypeList[index]
-                                                .customer ??
-                                            '')),
-                                        DataCell(Text(controller
-                                                .facilityTypeList[index].city
-                                                .toString() ??
-                                            '')),
-                                        DataCell(Row(
-                                          children: [
-                                            TableActionButton(
-                                                color: ColorValues.editColor,
-                                                icon: Icons.edit,
-                                                message: 'Edit',
-                                                onPress: () {
-                                                  controller.selectedItem = controller
-                                                      .facilityTypeList
-                                                      .firstWhere((element) =>
-                                                          "${element.id}" ==
+                              controller.facilityTypeList.isEmpty == true &&
+                                      controller.isLoading == false
+                                  ? Center(child: Text("No Data"))
+                                  : controller.isLoading.value == true
+                                      ? Center(
+                                          child: Text("Data Loading......"))
+                                      : Expanded(
+                                          child: DataTable2(
+                                            key: UniqueKey(),
+                                            dataRowHeight: 60,
+                                            columnSpacing: 10,
+                                            border: TableBorder.all(
+                                                color: Color.fromARGB(
+                                                    255, 206, 229, 234)),
+                                            columns: [
+                                              DataColumn2(
+                                                  fixedWidth: 45,
+                                                  label: Text(
+                                                    "Sr No",
+                                                    style: TextStyle(
+                                                        fontSize: 15,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  )),
+                                              DataColumn2(
+                                                  // fixedWidth: 150,
+                                                  label: Text(
+                                                "Plant Name",
+                                                style: TextStyle(
+                                                    fontSize: 15,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              )),
+                                              // DataColumn2(
+                                              //     // fixedWidth: 300,
+                                              //     label: Text(
+                                              //   "Desc",
+                                              //   style: TextStyle(
+                                              //       fontSize: 15,
+                                              //       fontWeight: FontWeight.bold),
+                                              // )),
+                                              DataColumn2(
+                                                  // fixedWidth: 150,
+                                                  label: Text(
+                                                "SPV",
+                                                style: TextStyle(
+                                                    fontSize: 15,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              )),
+                                              DataColumn2(
+                                                  // fixedWidth: 300,
+                                                  label: Text(
+                                                "Owner",
+                                                style: TextStyle(
+                                                    fontSize: 15,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              )),
+                                              // DataColumn2(
+                                              //     fixedWidth: 100,
+                                              //     label: Text(
+                                              //       "State",
+                                              //       style: TextStyle(
+                                              //           fontSize: 15,
+                                              //           fontWeight: FontWeight.bold),
+                                              //     )),
+                                              DataColumn2(
+                                                  // fixedWidth: 150,
+                                                  label: Text(
+                                                "Operator",
+                                                style: TextStyle(
+                                                    fontSize: 15,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              )),
+                                              DataColumn2(
+                                                  // fixedWidth: 60,
+                                                  label: Text(
+                                                "Customer",
+                                                style: TextStyle(
+                                                    fontSize: 15,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              )),
+                                              DataColumn2(
+                                                  // fixedWidth: 60,
+                                                  label: Text(
+                                                "City",
+                                                style: TextStyle(
+                                                    fontSize: 15,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              )),
+                                              DataColumn2(
+                                                  fixedWidth: 100,
+                                                  label: Text(
+                                                    'Action',
+                                                    style: TextStyle(
+                                                        fontSize: 15,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  )),
+                                            ],
+                                            rows: List<DataRow>.generate(
+                                              controller.facilityTypeList
+                                                      .length ??
+                                                  0,
+                                              (index) => DataRow(cells: [
+                                                DataCell(Text(
+                                                    (index + 1).toString())),
+                                                DataCell(Text(controller
+                                                        .facilityTypeList[index]
+                                                        .name
+                                                        .toString() ??
+                                                    '')),
+                                                // DataCell(Text(controller
+                                                //         .facilityTypeList?[index]
+                                                //         ?.description ??
+                                                //     '')),
+                                                DataCell(Text(controller
+                                                        .facilityTypeList[index]
+                                                        .spv ??
+                                                    '')),
+                                                DataCell(Text(controller
+                                                        .facilityTypeList[index]
+                                                        .owner ??
+                                                    '')),
+                                                // DataCell(Text(controller
+                                                //         .facilityTypeList?[index]
+                                                //         ?.state ??
+                                                //     '')),
+                                                DataCell(Text(controller
+                                                        .facilityTypeList[index]
+                                                        .operator ??
+                                                    '')),
+                                                DataCell(Text(controller
+                                                        .facilityTypeList[index]
+                                                        .customer ??
+                                                    '')),
+                                                DataCell(Text(controller
+                                                        .facilityTypeList[index]
+                                                        .city
+                                                        .toString() ??
+                                                    '')),
+                                                DataCell(Row(
+                                                  children: [
+                                                    TableActionButton(
+                                                        color: ColorValues
+                                                            .editColor,
+                                                        icon: Icons.edit,
+                                                        message: 'Edit',
+                                                        onPress: () {
+                                                          controller.selectedItem = controller
+                                                              .facilityTypeList
+                                                              .firstWhere((element) =>
+                                                                  "${element.id}" ==
+                                                                  controller
+                                                                      .facilityTypeList[
+                                                                          index]
+                                                                      .id
+                                                                      .toString());
+
+                                                          controller.titleCtrlr
+                                                              .text = controller
+                                                                  .selectedItem
+                                                                  ?.name ??
+                                                              '';
                                                           controller
-                                                              .facilityTypeList[
-                                                                  index]
-                                                              .id
-                                                              .toString());
+                                                              .descriptionCtrlr
+                                                              .text = controller
+                                                                  .selectedItem
+                                                                  ?.description ??
+                                                              '';
+                                                          controller
+                                                              .addressCtrlr
+                                                              .text = controller
+                                                                  .selectedItem
+                                                                  ?.address ??
+                                                              '';
+                                                          controller
+                                                              .zipcodeCtrlr
+                                                              .text = controller
+                                                                  .selectedItem
+                                                                  ?.pin
+                                                                  .toString() ??
+                                                              '';
 
-                                                  controller.titleCtrlr.text =
-                                                      controller.selectedItem
-                                                              ?.name ??
-                                                          '';
-                                                  controller.descriptionCtrlr
-                                                      .text = controller
-                                                          .selectedItem
-                                                          ?.description ??
-                                                      '';
-                                                  controller.addressCtrlr.text =
-                                                      controller.selectedItem
-                                                              ?.address ??
-                                                          '';
-                                                  controller.zipcodeCtrlr.text =
-                                                      controller
-                                                              .selectedItem?.pin
-                                                              .toString() ??
-                                                          '';
+                                                          controller.selectedSpv
+                                                              .value = controller
+                                                                  .selectedItem
+                                                                  ?.spv ??
+                                                              '';
+                                                          controller
+                                                              .selectedOwner
+                                                              .value = controller
+                                                                  .selectedItem
+                                                                  ?.owner ??
+                                                              '';
+                                                          controller
+                                                              .selectedOperator
+                                                              .value = controller
+                                                                  .selectedItem
+                                                                  ?.customer ??
+                                                              '';
+                                                          controller
+                                                              .selectedCustomer
+                                                              .value = controller
+                                                                  .selectedItem
+                                                                  ?.operator ??
+                                                              '';
+                                                          controller
+                                                              .selectedCity
+                                                              .value = controller
+                                                                  .selectedItem
+                                                                  ?.city ??
+                                                              '';
+                                                          controller
+                                                              .selectedState
+                                                              .value = controller
+                                                                  .selectedItem
+                                                                  ?.state ??
+                                                              '';
+                                                          controller
+                                                                  .selectedStateId =
+                                                              controller
+                                                                      .selectedItem
+                                                                      ?.stateid ??
+                                                                  0;
+                                                          if (controller
+                                                                  .selectedStateId >
+                                                              0) {
+                                                            controller.getCityList(
+                                                                controller
+                                                                    .selectedStateId);
+                                                          }
+                                                          controller
+                                                              .selectedCountry
+                                                              .value = controller
+                                                                  .selectedItem
+                                                                  ?.country ??
+                                                              '';
+                                                          controller
+                                                              .selectedCountryId = controller
+                                                                  .selectedItem
+                                                                  ?.countryid ??
+                                                              0;
+                                                          if (controller
+                                                                  .selectedCountryId >
+                                                              0) {
+                                                            controller.getStateList(
+                                                                controller
+                                                                    .selectedCountryId);
+                                                          }
+                                                          controller
+                                                                  .selectedCityId =
+                                                              controller
+                                                                      .selectedItem
+                                                                      ?.cityId ??
+                                                                  0;
+                                                          controller
+                                                              .isContainerVisible
+                                                              .value = true;
 
-                                                  controller.selectedSpv.value =
-                                                      controller.selectedItem
-                                                              ?.spv ??
-                                                          '';
-                                                  controller.selectedOwner
-                                                      .value = controller
-                                                          .selectedItem
-                                                          ?.owner ??
-                                                      '';
-                                                  controller.selectedOperator
-                                                      .value = controller
-                                                          .selectedItem
-                                                          ?.customer ??
-                                                      '';
-                                                  controller.selectedCustomer
-                                                      .value = controller
-                                                          .selectedItem
-                                                          ?.operator ??
-                                                      '';
-                                                  controller.selectedCity
-                                                      .value = controller
-                                                          .selectedItem?.city ??
-                                                      '';
-                                                  controller.selectedState
-                                                      .value = controller
-                                                          .selectedItem
-                                                          ?.state ??
-                                                      '';
-                                                  controller.selectedStateId =
-                                                      controller.selectedItem
-                                                              ?.stateid ??
-                                                          0;
-                                                  if (controller
-                                                          .selectedStateId >
-                                                      0) {
-                                                    controller.getCityList(
-                                                        controller
-                                                            .selectedStateId);
-                                                  }
-                                                  controller.selectedCountry
-                                                      .value = controller
-                                                          .selectedItem
-                                                          ?.country ??
-                                                      '';
-                                                  controller.selectedCountryId =
-                                                      controller.selectedItem
-                                                              ?.countryid ??
-                                                          0;
-                                                  if (controller
-                                                          .selectedCountryId >
-                                                      0) {
-                                                    controller.getStateList(
-                                                        controller
-                                                            .selectedCountryId);
-                                                  }
-                                                  controller.selectedCityId =
-                                                      controller.selectedItem
-                                                              ?.cityId ??
-                                                          0;
-                                                  controller.isContainerVisible
-                                                      .value = true;
+                                                          // controller.descriptionCtrlr
+                                                          //     .text = controller
+                                                          //         .selectedItem
+                                                          //         ?. ??
+                                                          //     '';
 
-                                                  // controller.descriptionCtrlr
-                                                  //     .text = controller
-                                                  //         .selectedItem
-                                                  //         ?. ??
-                                                  //     '';
-
-                                                  // int spvId = int.tryParse(
-                                                  //         facilityTypeList?.name ??
-                                                  //             "") ??
-                                                  //     0;
-                                                  // if (spvId != 0) {
-                                                  //   Get.toNamed(
-                                                  //       Routes.SPVListScreen,
-                                                  //       arguments: {"spvId": spvId});
-                                                  // }
-                                                  // controller.selectedItem =
-                                                  //     controller.facilityTypeList.firstWhere(
-                                                  //         (element) =>
-                                                  //             "${element.id}" ==
-                                                  //             _permitTypeList[0]);
-                                                  // controller.selectedItem =
-                                                  //     controller.facilityTypeList.firstWhere(
-                                                  //         (element) =>
-                                                  //             "${element.id}" ==
-                                                  //             _permitTypeList[0]);
-                                                })
-                                            // : Container(),
-                                            ,
-                                            TableActionButton(
-                                              color: ColorValues.deleteColor,
-                                              icon: Icons.delete,
-                                              message: 'Delete',
-                                              onPress: () {
-                                                controller.isDeleteDialog(
-                                                    business_id: controller
-                                                        .facilityTypeList[index]
-                                                        .id
-                                                        .toString(),
-                                                    business: controller
-                                                        .facilityTypeList[index]
-                                                        .name);
-                                              },
+                                                          // int spvId = int.tryParse(
+                                                          //         facilityTypeList?.name ??
+                                                          //             "") ??
+                                                          //     0;
+                                                          // if (spvId != 0) {
+                                                          //   Get.toNamed(
+                                                          //       Routes.SPVListScreen,
+                                                          //       arguments: {"spvId": spvId});
+                                                          // }
+                                                          // controller.selectedItem =
+                                                          //     controller.facilityTypeList.firstWhere(
+                                                          //         (element) =>
+                                                          //             "${element.id}" ==
+                                                          //             _permitTypeList[0]);
+                                                          // controller.selectedItem =
+                                                          //     controller.facilityTypeList.firstWhere(
+                                                          //         (element) =>
+                                                          //             "${element.id}" ==
+                                                          //             _permitTypeList[0]);
+                                                        })
+                                                    // : Container(),
+                                                    ,
+                                                    TableActionButton(
+                                                      color: ColorValues
+                                                          .deleteColor,
+                                                      icon: Icons.delete,
+                                                      message: 'Delete',
+                                                      onPress: () {
+                                                        controller.isDeleteDialog(
+                                                            business_id: controller
+                                                                .facilityTypeList[
+                                                                    index]
+                                                                .id
+                                                                .toString(),
+                                                            business: controller
+                                                                .facilityTypeList[
+                                                                    index]
+                                                                .name);
+                                                      },
+                                                    ),
+                                                  ],
+                                                )),
+                                              ]),
                                             ),
-                                          ],
-                                        )),
-                                      ]),
-                                    ),
-                                  ),
-                                ),
-                              ),
+                                          ),
+                                        ),
                             ],
                           ),
                         ),

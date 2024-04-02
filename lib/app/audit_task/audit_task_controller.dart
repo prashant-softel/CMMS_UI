@@ -89,6 +89,7 @@ class AuditTaskController extends GetxController {
     // print({"updated columnVisibility": columnVisibility});
   }
 
+  Rx<bool> isLoading = true.obs;
   @override
   void onInit() async {
     this.filterText = {
@@ -105,7 +106,7 @@ class AuditTaskController extends GetxController {
       facilityId = event;
       Future.delayed(Duration(seconds: 2), () async {
         getAuditTaskList(
-            facilityId, formattedTodate1, formattedFromdate1, false,false);
+            facilityId, formattedTodate1, formattedFromdate1,  false);
       });
       // isDataLoading.value = false;
 
@@ -129,30 +130,34 @@ class AuditTaskController extends GetxController {
     //     .toList();
   }
 
-  Future<void> getAuditTaskList(int facilityId, dynamic startDate,
-      dynamic endDate, bool isLoading, bool isExport) async {
+  Future<void> getAuditTaskList(
+      int facilityId, dynamic startDate, dynamic endDate, bool isExport) async {
     pmTaskList.value = <PmTaskListModel>[];
     // pmTaskList?.clear();
     final _pmTaskList = await auditTaskPresenter.getAuditTaskList(
         facilityId: facilityId,
-        isLoading: isLoading,
+        isLoading: isLoading.value,
         isExport: isExport,
         startDate: startDate,
         endDate: endDate);
     if (_pmTaskList != null) {
       pmTaskList.value = _pmTaskList;
       filteredData.value = pmTaskList.value;
+      isLoading.value = false;
     }
   }
 
   void getPmTaskListByDate() {
-    getAuditTaskList(facilityId, formattedTodate1, formattedFromdate1, false,false);
+    getAuditTaskList(
+        facilityId, formattedTodate1, formattedFromdate1,  false);
   }
 
   void clearStoreData() {
     auditTaskPresenter.clearValue();
   }
+
   void export() {
-    getAuditTaskList(facilityId, formattedTodate1, formattedFromdate1, false, true);
+    getAuditTaskList(
+        facilityId, formattedTodate1, formattedFromdate1,  true);
   }
 }

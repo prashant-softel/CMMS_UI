@@ -26,25 +26,27 @@ class DocumentManagerController extends GetxController {
   RxList<String> userListTableColumns = <String>[].obs;
   DocumentManagerModel? selectedItem;
 
+  Rx<bool> isLoading = true.obs;
   @override
   void onInit() async {
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
       facilityId = event;
       Future.delayed(Duration(seconds: 2), () {
-        getDocumentManager(facilityId, true);
+        getDocumentManager(facilityId);
       });
     });
 
     super.onInit();
   }
 
-  Future<void> getDocumentManager(int facilityId, bool isLoading) async {
+  Future<void> getDocumentManager(int facilityId) async {
     userList?.value = <DocumentManagerModel>[];
     final _userList = await documentManagerPresenter.getDocumentManager(
-        facilityId: facilityId, isLoading: isLoading);
+        facilityId: facilityId, isLoading: isLoading.value);
 
     if (_userList != null) {
       userList!.value = _userList;
+      isLoading.value = false;
       paginationController = PaginationController(
         rowCount: userList?.length ?? 0,
         rowsPerPage: 10,

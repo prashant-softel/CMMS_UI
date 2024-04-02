@@ -331,8 +331,10 @@ class _IncidentReportListWebState extends State<IncidentReportListWeb> {
                                     SizedBox(
                                       height: 10,
                                     ),
-                                    controller.incidentReportList.isEmpty
+                                    controller.incidentReportList.isEmpty == true && controller.isLoading == false
                                         ? Center(child: Text('No data'))
+                                        :controller.isLoading.value == true
+                                        ? Center(child: Text("Data Loading......"))
                                         : Expanded(
                                             child: ValueListenableBuilder(
                                                 valueListenable:

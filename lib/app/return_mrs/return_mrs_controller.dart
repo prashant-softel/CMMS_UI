@@ -63,6 +63,7 @@ class ReturnMrsListController extends GetxController {
     // print({"updated columnVisibility": columnVisibility});
   }
 
+  Rx<bool> isLoading = true.obs;
   @override
   void onInit() async {
     this.filterText = {
@@ -75,21 +76,22 @@ class ReturnMrsListController extends GetxController {
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
       facilityId = event;
       Future.delayed(Duration(seconds: 2), () {
-        getReturnMrsList(facilityId, true, false);
+        getReturnMrsList(facilityId,  false);
       });
     });
     super.onInit();
   }
 
   Future<void> getReturnMrsList(
-      int facilityId, bool isLoading, bool isExport) async {
+      int facilityId, bool isExport) async {
     mrsList.value = <ReturnMrsListModel>[];
     final _mrsList = await returnmrsListPresenter.getReturnMrsList(
-        facilityId: facilityId, isLoading: isLoading, isExport: isExport);
+        facilityId: facilityId, isLoading: isLoading.value, isExport: isExport);
 
     if (_mrsList != null) {
       mrsList.value = _mrsList;
       filteredData.value = _mrsList;
+      isLoading.value = false;
       paginationController = PaginationController(
         rowCount: mrsList.length ?? 0,
         rowsPerPage: 10,
@@ -155,6 +157,6 @@ class ReturnMrsListController extends GetxController {
   }
 
   void export() {
-    getReturnMrsList(facilityId, true, true);
+    getReturnMrsList(facilityId,  true);
   }
 }

@@ -224,8 +224,10 @@ class _ReturnMrsListContentWebState extends State<ReturnMrsListContentWeb> {
                                   ),
                                 ],
                               ),
-                              controller.mrsList.isEmpty == true
+                              controller.mrsList.isEmpty == true && controller.isLoading == false
                                   ? Center(child: Text('No data'))
+                                  : controller.isLoading.value == true
+                                  ? Center(child: Text("Data Loading......"))
                                   : Expanded(
                                       child: ValueListenableBuilder(
                                           valueListenable:

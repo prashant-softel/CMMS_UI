@@ -81,7 +81,7 @@ class AbandonScheduleExecutionMessageDialog extends GetView {
               style: Styles.darkBlueElevatedButtonStyle,
               onPressed: () {
                 Get.offAllNamed(Routes.moduleCleaningListExecution);
-                _controller.getMCTaskList(_controller.facilityId, _controller.formattedTodate, _controller.formattedFromdate, true,false);
+                _controller.getMCTaskList(_controller.facilityId, _controller.formattedTodate, _controller.formattedFromdate, false);
                 Get.back();
               },
               child: const Text('Ok'),

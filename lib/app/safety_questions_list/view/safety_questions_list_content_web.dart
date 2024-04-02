@@ -984,81 +984,10 @@ class SafetyQuestionsListContentWeb
                               ],
                             ),
                             Dimens.boxHeight10,
-                            controller.safetyMeasureList.isEmpty
-                                ? Expanded(
-                                    child: DataTable2(
-                                      columnSpacing: Get.width * 0.16,
-                                      columns: [
-                                        DataColumn2(
-                                          label: Text(
-                                            "Id",
-                                            style: TextStyle(
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                          size: ColumnSize.S,
-                                        ),
-                                        DataColumn2(
-                                          label: Text(
-                                            "Permit Type",
-                                            style: TextStyle(
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                          size: ColumnSize.L,
-                                        ),
-                                        DataColumn2(
-                                          label: Text(
-                                            "Title",
-                                            style: TextStyle(
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                          size: ColumnSize.L,
-                                        ),
-                                        DataColumn2(
-                                          label: Text(
-                                            "Confirmation",
-                                            style: TextStyle(
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                          size: ColumnSize.S,
-                                        ),
-                                        DataColumn2(
-                                          label: Text(
-                                            "Required SOP/JSA",
-                                            style: TextStyle(
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                          size: ColumnSize.S,
-                                        ),
-                                        DataColumn2(
-                                          label: Text(
-                                            "Action",
-                                            style: TextStyle(
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                          size: ColumnSize.S,
-                                        ),
-                                      ],
-                                      rows: List.generate(
-                                        controller.safetyMeasureList.length,
-                                        (index) {
-                                          return DataRow(cells: [
-                                            DataCell(Text('')),
-                                            DataCell(Text('')),
-                                            DataCell(Text('')),
-                                            DataCell(Text('')),
-                                            DataCell(Text('')),
-                                            DataCell(Text('')),
-                                          ]);
-                                        },
-                                      ),
-                                    ),
-                                  )
+                            controller.safetyMeasureList.isEmpty == true && controller.isLoading == false
+                            ? Center(child: Text("No Data"))
+                            : controller.isLoading.value ==true
+                            ? Center(child: Text("Data Loading......"))
                                 : Expanded(
                                     child: DataTable2(
                                       key: UniqueKey(),

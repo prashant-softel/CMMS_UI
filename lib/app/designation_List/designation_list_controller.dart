@@ -22,7 +22,7 @@ class DesignationListController extends GetxController {
   final HomeController homecontroller = Get.find();
   FocusNode nameFocus = FocusNode();
   ScrollController nameScroll = ScrollController();
-    FocusNode descFocus = FocusNode();
+  FocusNode descFocus = FocusNode();
   ScrollController descScroll = ScrollController();
 
   // final HomeController homecontroller = Get.put( HomeController.new);
@@ -55,12 +55,13 @@ class DesignationListController extends GetxController {
   DesignationModel? selectedItem = null;
   StreamSubscription<int>? facilityIdStreamSubscription;
   bool isEditMode = false;
+  Rx<bool> isLoading = true.obs;
   @override
   void onInit() async {
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
       facilityId = event;
       Future.delayed(Duration(seconds: 2), () {
-        getDesignationList(true);
+        getDesignationList();
       });
     });
     nameFocus.addListener(() {
@@ -77,13 +78,14 @@ class DesignationListController extends GetxController {
     super.onInit();
   }
 
-  Future<void> getDesignationList(bool isLoading) async {
+  Future<void> getDesignationList() async {
     designationList?.value = <DesignationModel>[];
     final _moduleList =
-        await designationPresenter.getDesignationList(isLoading: isLoading);
+        await designationPresenter.getDesignationList(isLoading: isLoading.value);
 
     if (_moduleList != null) {
       designationList!.value = _moduleList.cast<DesignationModel?>();
+      isLoading.value = false;
       paginationController = PaginationController(
         rowCount: designationList?.length ?? 0,
         rowsPerPage: 10,
@@ -151,7 +153,7 @@ class DesignationListController extends GetxController {
       );
       return true;
     }
-    getDesignationList(true);
+    getDesignationList();
     return true;
   }
 
@@ -167,7 +169,7 @@ class DesignationListController extends GetxController {
     descriptionCtrlr.text = '';
     selectedItem = null;
     Future.delayed(Duration(seconds: 1), () {
-      getDesignationList(true);
+      getDesignationList();
     });
     Future.delayed(Duration(seconds: 5), () {
       isSuccess.value = false;
@@ -211,7 +213,7 @@ class DesignationListController extends GetxController {
                 onPressed: () {
                   deleteDesignation(module_id).then((value) {
                     Get.back();
-                    getDesignationList(true);
+                    getDesignationList();
                   });
                 },
                 child: Text('YES'),

@@ -545,137 +545,154 @@ class ResponsibilityListContentWeb
                               SizedBox(
                                 height: 20,
                               ),
-                              Expanded(
-                                child: Obx(
-                                  () => DataTable2(
-                                    key: UniqueKey(),
-                                    dataRowHeight: 50,
-                                    columnSpacing: 10,
-                                    border: TableBorder.all(
-                                        color:
-                                            Color.fromARGB(255, 206, 229, 234)),
-                                    columns: [
-                                      DataColumn2(
-                                          fixedWidth: 100,
-                                          label: Text(
-                                            "Sr No",
-                                            style: TextStyle(
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.bold),
-                                          )),
-                                      DataColumn2(
-                                          // fixedWidth: 150,
-                                          label: Text(
-                                        "Name",
-                                        style: TextStyle(
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.bold),
-                                      )),
-                                      DataColumn2(
-                                          // fixedWidth: 150,
-                                          label: Text(
-                                        "Responsbility Description",
-                                        style: TextStyle(
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.bold),
-                                      )),
-                                      DataColumn2(
-                                          fixedWidth: 100,
-                                          label: Text(
-                                            'Action',
-                                            style: TextStyle(
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.bold),
-                                          )),
-                                    ],
-                                    rows: List<DataRow>.generate(
-                                      controller.responsibilityList?.length ??
-                                          0,
-                                      (index) => DataRow(cells: [
-                                        DataCell(Text((index + 1).toString())),
-                                        DataCell(Text(controller
-                                                .responsibilityList?[index]
-                                                ?.name
-                                                .toString() ??
-                                            '')),
-                                        DataCell(Text(controller
-                                                .responsibilityList?[index]
-                                                ?.description ??
-                                            '')),
-                                        DataCell(Row(
-                                          children: [
-                                            TableActionButton(
-                                                color: ColorValues.editColor,
-                                                icon: Icons.edit,
-                                                message: 'Edit',
-                                                onPress: () {
-                                                  controller.selectedItem = controller
-                                                      .responsibilityList
-                                                      ?.firstWhere((element) =>
-                                                          "${element?.id}" ==
-                                                          controller
-                                                              .responsibilityList?[
-                                                                  index]
-                                                              ?.id
-                                                              .toString());
+                              controller.responsibilityList!.isEmpty == true &&
+                                      controller.isLoading == false
+                                  ? Center(child: Text("No Data"))
+                                  : controller.isLoading.value == true
+                                      ? Center(
+                                          child: Text("Data Loading......"))
+                                      : Expanded(
+                                          child: DataTable2(
+                                            key: UniqueKey(),
+                                            dataRowHeight: 50,
+                                            columnSpacing: 10,
+                                            border: TableBorder.all(
+                                                color: Color.fromARGB(
+                                                    255, 206, 229, 234)),
+                                            columns: [
+                                              DataColumn2(
+                                                  fixedWidth: 100,
+                                                  label: Text(
+                                                    "Sr No",
+                                                    style: TextStyle(
+                                                        fontSize: 15,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  )),
+                                              DataColumn2(
+                                                  // fixedWidth: 150,
+                                                  label: Text(
+                                                "Name",
+                                                style: TextStyle(
+                                                    fontSize: 15,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              )),
+                                              DataColumn2(
+                                                  // fixedWidth: 150,
+                                                  label: Text(
+                                                "Responsbility Description",
+                                                style: TextStyle(
+                                                    fontSize: 15,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              )),
+                                              DataColumn2(
+                                                  fixedWidth: 100,
+                                                  label: Text(
+                                                    'Action',
+                                                    style: TextStyle(
+                                                        fontSize: 15,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  )),
+                                            ],
+                                            rows: List<DataRow>.generate(
+                                              controller.responsibilityList
+                                                      ?.length ??
+                                                  0,
+                                              (index) => DataRow(cells: [
+                                                DataCell(Text(
+                                                    (index + 1).toString())),
+                                                DataCell(Text(controller
+                                                        .responsibilityList?[
+                                                            index]
+                                                        ?.name
+                                                        .toString() ??
+                                                    '')),
+                                                DataCell(Text(controller
+                                                        .responsibilityList?[
+                                                            index]
+                                                        ?.description ??
+                                                    '')),
+                                                DataCell(Row(
+                                                  children: [
+                                                    TableActionButton(
+                                                        color: ColorValues
+                                                            .editColor,
+                                                        icon: Icons.edit,
+                                                        message: 'Edit',
+                                                        onPress: () {
+                                                          controller.selectedItem = controller
+                                                              .responsibilityList
+                                                              ?.firstWhere((element) =>
+                                                                  "${element?.id}" ==
+                                                                  controller
+                                                                      .responsibilityList?[
+                                                                          index]
+                                                                      ?.id
+                                                                      .toString());
 
-                                                  controller.nameCtrlr.text =
-                                                      controller.selectedItem
-                                                              ?.name ??
-                                                          '';
-                                                  controller.descriptionCtrlr
-                                                      .text = controller
-                                                          .selectedItem
-                                                          ?.description ??
-                                                      '';
-                                                  controller.isContainerVisible
-                                                      .value = true;
-                                                  // int spvId = int.tryParse(
-                                                  //        .responsibilityList?.name ??
-                                                  //             "") ??
-                                                  //     0;
-                                                  // if (spvId != 0) {
-                                                  //   Get.toNamed(
-                                                  //       Routes.responsibilityListScreen,
-                                                  //       arguments: {"spvId": spvId});
-                                                  // }
-                                                  // controller.selectedItem =
-                                                  //     controller.responsibilityList.firstWhere(
-                                                  //         (element) =>
-                                                  //             "${element.id}" ==
-                                                  //             _permitTypeList[0]);
-                                                  // controller.selectedItem =
-                                                  //     controller.responsibilityList.firstWhere(
-                                                  //         (element) =>
-                                                  //             "${element.id}" ==
-                                                  //             _permitTypeList[0]);
-                                                })
-                                            // : Container(),
-                                            ,
-                                            TableActionButton(
-                                              color: ColorValues.deleteColor,
-                                              icon: Icons.delete,
-                                              message: 'Delete',
-                                              onPress: () {
-                                                controller.isDeleteDialog(
-                                                    module_id: controller
-                                                        .responsibilityList?[
-                                                            index]
-                                                        ?.id
-                                                        .toString(),
-                                                    module: controller
-                                                        .responsibilityList?[
-                                                            index]
-                                                        ?.name);
-                                              },
+                                                          controller.nameCtrlr
+                                                              .text = controller
+                                                                  .selectedItem
+                                                                  ?.name ??
+                                                              '';
+                                                          controller
+                                                              .descriptionCtrlr
+                                                              .text = controller
+                                                                  .selectedItem
+                                                                  ?.description ??
+                                                              '';
+                                                          controller
+                                                              .isContainerVisible
+                                                              .value = true;
+                                                          // int spvId = int.tryParse(
+                                                          //        .responsibilityList?.name ??
+                                                          //             "") ??
+                                                          //     0;
+                                                          // if (spvId != 0) {
+                                                          //   Get.toNamed(
+                                                          //       Routes.responsibilityListScreen,
+                                                          //       arguments: {"spvId": spvId});
+                                                          // }
+                                                          // controller.selectedItem =
+                                                          //     controller.responsibilityList.firstWhere(
+                                                          //         (element) =>
+                                                          //             "${element.id}" ==
+                                                          //             _permitTypeList[0]);
+                                                          // controller.selectedItem =
+                                                          //     controller.responsibilityList.firstWhere(
+                                                          //         (element) =>
+                                                          //             "${element.id}" ==
+                                                          //             _permitTypeList[0]);
+                                                        })
+                                                    // : Container(),
+                                                    ,
+                                                    TableActionButton(
+                                                      color: ColorValues
+                                                          .deleteColor,
+                                                      icon: Icons.delete,
+                                                      message: 'Delete',
+                                                      onPress: () {
+                                                        controller.isDeleteDialog(
+                                                            module_id: controller
+                                                                .responsibilityList?[
+                                                                    index]
+                                                                ?.id
+                                                                .toString(),
+                                                            module: controller
+                                                                .responsibilityList?[
+                                                                    index]
+                                                                ?.name);
+                                                      },
+                                                    ),
+                                                  ],
+                                                )),
+                                              ]),
                                             ),
-                                          ],
-                                        )),
-                                      ]),
-                                    ),
-                                  ),
-                                ),
-                              ),
+                                          ),
+                                        ),
                             ],
                           ),
                         ),

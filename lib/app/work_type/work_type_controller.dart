@@ -76,6 +76,7 @@ class WorkTypeController extends GetxController {
   Stream<int> get facilityId$ => _facilityId.stream;
   var titleCtrlr = TextEditingController();
 
+  Rx<bool> isLoading = true.obs;
   @override
   void onInit() async {
     facilityIdStreamSubscription =
@@ -162,12 +163,13 @@ class WorkTypeController extends GetxController {
     String lststrCategoryIds = receivedCategoryIds?.join(', ').toString() ?? '';
     final _workTypeList = await worktypepresenter.getWorkTypeList(
       categoryIds: lststrCategoryIds,
-      isLoading: false,
+      isLoading: isLoading.value,
     );
     worktypeList.value = _workTypeList ?? <WorkTypeModel>[];
     BufferworktypeList.value =
         _workTypeList?.whereType<WorkTypeModel>()?.toList() ??
             <WorkTypeModel>[];
+    isLoading.value = false;
 
     // BufferworktypeList.value = worktypeList.value
   }

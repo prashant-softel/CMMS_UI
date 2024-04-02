@@ -69,6 +69,7 @@ class MrsListController extends GetxController {
   }
 
   ///
+  Rx<bool> isLoading = true.obs;
   @override
   void onInit() async {
     this.filterText = {
@@ -83,7 +84,7 @@ class MrsListController extends GetxController {
       if (facilityId > 0) {
         //Future.delayed(Duration(seconds: 1), () {
         getMrsList(
-            facilityId, formattedTodate1, formattedFromdate1, true, false);
+            facilityId, formattedTodate1, formattedFromdate1,  false);
         // });
       }
     });
@@ -134,13 +135,13 @@ class MrsListController extends GetxController {
   }
 
   Future<void> getMrsList(int facilityId, dynamic startDate, dynamic endDate,
-      bool isLoading, bool? isExport) async {
+      bool? isExport) async {
     mrsList.value = <MrsListModel>[];
     filteredData.value = <MrsListModel>[];
 
     final _mrsList = await mrsListPresenter.getMrsList(
         facilityId: facilityId,
-        isLoading: isLoading,
+        isLoading: isLoading.value,
         isExport: isExport,
         startDate: startDate,
         endDate: endDate);
@@ -148,6 +149,7 @@ class MrsListController extends GetxController {
     if (_mrsList != null) {
       mrsList.value = _mrsList;
       filteredData.value = _mrsList;
+      isLoading.value = false;
       paginationController = PaginationController(
         rowCount: mrsList.length,
         rowsPerPage: 10,
@@ -166,7 +168,7 @@ class MrsListController extends GetxController {
   }
 
   void getMrsListByDate() {
-    getMrsList(facilityId, formattedTodate1, formattedFromdate1, true, false);
+    getMrsList(facilityId, formattedTodate1, formattedFromdate1,  false);
   }
 
   void clearStoreData() {
@@ -198,6 +200,6 @@ class MrsListController extends GetxController {
   }
 
   void export() {
-    getMrsList(facilityId, formattedTodate1, formattedFromdate1, true, true);
+    getMrsList(facilityId, formattedTodate1, formattedFromdate1,  true);
   }
 }

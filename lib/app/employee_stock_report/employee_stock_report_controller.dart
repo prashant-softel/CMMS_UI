@@ -72,6 +72,7 @@ class EmployeeStockReportController extends GetxController {
     // print({"updated columnVisibility": columnVisibility});
   }
 
+  Rx<bool> isLoading = true.obs;
   @override
   void onInit() async {
     this.filterText = {
@@ -86,18 +87,19 @@ class EmployeeStockReportController extends GetxController {
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
       facilityId = event;
       Future.delayed(Duration(seconds: 1), () {
-        getUserList(facilityId, true);
+        getUserList(facilityId);
       });
     });
 
     super.onInit();
   }
 
-  Future<void> getUserList(int facilityId, bool isLoading) async {
+  Future<void> getUserList(int facilityId) async {
     userList.value = <UserListModel>[];
     final list = await employeeStockReportPresenter.getUserList(
-        facilityId: facilityId, isLoading: isLoading);
+        facilityId: facilityId, isLoading: isLoading.value);
     if (list != null) {
+      isLoading.value = false;
       for (var _userList in list) {
         userList.add(_userList!);
       }

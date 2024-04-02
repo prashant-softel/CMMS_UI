@@ -83,6 +83,7 @@ class TBTTypeListController extends GetxController {
   BehaviorSubject<int> _facilityId = BehaviorSubject.seeded(0);
   Stream<int> get facilityId$ => _facilityId.stream;
 
+  Rx<bool> isLoading = true.obs;
   @override
   void onInit() async {
     // getInventoryCategoryList();
@@ -130,12 +131,15 @@ class TBTTypeListController extends GetxController {
   Future<void> getJobTypePermitList(selectedFacilityId) async {
     jobTypeList.value = <JobTypeListModel>[];
     final _jobTypeList = await tbtTypeListPresenter.getJobTypePermitList(
-      isLoading: true,
+      isLoading: isLoading.value,
       // categoryIds: cPategoryIds,
       facility_id: selectedFacilityId,
     );
-    for (var jobType_list in _jobTypeList) {
-      jobTypeList.add(jobType_list);
+    if (_jobTypeList != null) {
+      isLoading.value = false;
+      for (var jobType_list in _jobTypeList) {
+        jobTypeList.add(jobType_list);
+      }
     }
     // selectedJobType.value = _jobTypeList[0].name ?? '';
 

@@ -280,8 +280,10 @@ class _AuditTaskContentWebState extends State<AuditTaskContentWeb> {
                                 SizedBox(
                                   height: 20,
                                 ),
-                                controller.pmTaskList.isEmpty == true
+                                controller.pmTaskList.isEmpty == true && controller.isLoading == false
                                     ? Center(child: Text('No data'))
+                                    : controller.isLoading.value == true
+                                    ? Center(child: Text("Data Loading......"))
                                     : Expanded(
                                         child: ValueListenableBuilder(
                                             valueListenable:
