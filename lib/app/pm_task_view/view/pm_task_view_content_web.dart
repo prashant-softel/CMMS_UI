@@ -953,7 +953,7 @@ class PreventiveMaintenanceTaskViewContentWeb
                             child: CustomElevatedButton(
                               // icon: Icons.link,
                               backgroundColor: ColorValues.blueColor,
-                              text: "Assign",
+                              text: "Reassign",
                               onPressed: () {
                                 Get.dialog<void>(AssignToPMTaskDialog(
                                     id: controller.pmtaskViewModel.value?.id ??
@@ -1059,27 +1059,15 @@ class PreventiveMaintenanceTaskViewContentWeb
                         : Dimens.box0,
                     Dimens.boxWidth10,
                     controller.pmtaskViewModel.value?.status == 162 &&
-                                varUserAccessModel.value.access_list!
-                                        .where((e) =>
-                                            e.feature_id ==
-                                                UserAccessConstants
-                                                    .kPermitFeatureId &&
-                                            e.add ==
-                                                UserAccessConstants
-                                                    .kHaveAddAccess)
-                                        .length >
-                                    0 ||
-                            controller.pmtaskViewModel.value?.status == 161 &&
-                                varUserAccessModel.value.access_list!
-                                        .where((e) =>
-                                            e.feature_id ==
-                                                UserAccessConstants
-                                                    .kPermitFeatureId &&
-                                            e.add ==
-                                                UserAccessConstants
-                                                    .kHaveAddAccess)
-                                        .length >
-                                    0
+                            varUserAccessModel.value.access_list!
+                                    .where((e) =>
+                                        e.feature_id ==
+                                            UserAccessConstants
+                                                .kPermitFeatureId &&
+                                        e.add ==
+                                            UserAccessConstants.kHaveAddAccess)
+                                    .length >
+                                0
                         ? Container(
                             height: 35,
                             child: CustomElevatedButton(
