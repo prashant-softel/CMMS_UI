@@ -371,6 +371,7 @@ class NewPermitListController extends GetxController {
       "jobModel": jobDetailsModel.value,
       "pmTaskModel": pmtaskViewModel.value
     });
+    print('PermitIDForTBt:$permitId');
     print('PermitIdArgument:$isChecked');
   }
 

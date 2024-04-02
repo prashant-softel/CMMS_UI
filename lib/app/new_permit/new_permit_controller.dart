@@ -76,8 +76,7 @@ class NewPermitController extends GetxController {
   }
 
   ///Checkbox
-  RxBool isChecked1 =
-      false.obs; // Create an observable boolean to track the checkbox state
+  RxBool isChecked1 = false.obs;
   RxBool isChecked2 = false.obs;
   RxBool isChecked3 = false.obs;
   RxBool isChecked4 = false.obs;
@@ -474,6 +473,9 @@ class NewPermitController extends GetxController {
         }
       });
 
+      if (permitId.value > 0 && selectedEquipmentIsolationIdList != null) {
+        equipmentIsolationSelected(selectedEquipmentIsolationIdList);
+      }
       // await getPermitIssuerList();
       // await getPermitApproverList();
     } catch (e) {
@@ -649,15 +651,13 @@ class NewPermitController extends GetxController {
           .map((obj) => obj!.isolationAssetsCatID)
           .toList();
       print('Islation id:$idList');
-      selectedEditEquipemntIsolationIdList.value = idList;
-      print('Islation id:$selectedEditEquipemntIsolationIdList');
+      selectedEquipmentIsolationIdList.value = idList.whereType<int>().toList();
+      print('Islation id:$selectedEquipmentIsolationIdList');
 
-      workPermitRemarkTextCtrlr.text =
-          newPermitDetailsModel.value?.physical_iso_remark ?? "";
+      // workPermitRemarkTextCtrlr.text =
+      //     newPermitDetailsModel.value?.physical_iso_remark ?? "";
       int num = newPermitDetailsModel.value!.is_loto_required!;
       num == 1 ? isToggleOn.value = true : isToggleOn.value = false;
-
-      
 
       // print('EmployeeList:${listEmployee}');
     }
@@ -1254,10 +1254,11 @@ class NewPermitController extends GetxController {
         (e) {
           loto_map_list.add(
             LotoList(
-                Loto_id: e?.id,
-                Loto_Key: e?.name,
-                Loto_lock_number: e?.serialNumber,
-                user_id: userId),
+              Loto_id: e?.id,
+              Loto_Key: e?.name,
+              Loto_lock_number: e?.serialNumber,
+              user_id: userId,
+            ),
           );
         },
       );
