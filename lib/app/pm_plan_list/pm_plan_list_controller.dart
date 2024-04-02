@@ -99,9 +99,12 @@ class PmPlanListController extends GetxController {
     };
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
       facilityId = event;
-      Future.delayed(Duration(seconds: 2), () async {
+      if (facilityId > 0) {
+        //Future.delayed(Duration(seconds: 2), () async {
         getPmPlanList(facilityId, formattedTodate1, formattedFromdate1, false);
-      });
+        //   });
+      }
+
       // isDataLoading.value = false;
 
       // Future.delayed(Duration(seconds: 2), () async {
@@ -180,8 +183,7 @@ class PmPlanListController extends GetxController {
   }
 
   void getPmPlanListByDate() {
-    getPmPlanList(
-        facilityId, formattedTodate1, formattedFromdate1, false);
+    getPmPlanList(facilityId, formattedTodate1, formattedFromdate1, false);
   }
 
   void isDeleteDialog({String? planId, String? planName}) {

@@ -84,7 +84,8 @@ class PmPlanMessageApproveDialog extends GetView {
                       if (controller.pmPlanId != 0) {
                         //  print({"fghvjbggjhjgk", pmPlanId});
 
-                        await controller.getPmPlanDetails(facilityId:controller.facilityId,
+                        await controller.getPmPlanDetails(
+                            facilityId: controller.facilityId,
                             pmPlanId: controller.pmPlanId.value,
                             isloading: true);
                       }
