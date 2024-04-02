@@ -25,7 +25,7 @@ class ViewWarrantyClaimModel {
     this.good_order_id,
     this.order_reference_number,
     this.warranty_description,
-    this.affected_part,
+    this.affectedParts,
     this.affected_sr_no,
     this.failure_time,
     this.estimated_cost,
@@ -43,7 +43,6 @@ class ViewWarrantyClaimModel {
     this.log,
     this.equipment_id,
     this.currencyId,
-    // this.approverId,
     this.additionalEmailEmployees,
     this.externalEmails,
     this.supplierActions,
@@ -62,7 +61,7 @@ class ViewWarrantyClaimModel {
   String? good_order_id;
   String? order_reference_number;
   String? warranty_description;
-  String? affected_part;
+
   String? affected_sr_no;
   DateTime? failure_time;
   int? estimated_cost;
@@ -81,6 +80,7 @@ class ViewWarrantyClaimModel {
   int? equipment_id;
   int? currencyId;
   int? approverId;
+  List<AffectedParts?>? affectedParts;
   List<AdditionalEmailsEmployeesList?>? additionalEmailEmployees;
   List<ExternalsEmailsList?>? externalEmails;
   List<SuppliersActionsList?>? supplierActions;
@@ -102,7 +102,10 @@ class ViewWarrantyClaimModel {
         good_order_id: json["good_order_id"],
         order_reference_number: json["order_reference_number"],
         warranty_description: json["warranty_description"],
-        affected_part: json['affected_part'],
+        affectedParts: json["affectedParts"] != null
+            ? List<AffectedParts>.from(
+                json["affectedParts"]?.map((x) => AffectedParts.fromJson(x)))
+            : [],
         affected_sr_no: json['affected_sr_no'],
         failure_time: json['failure_time'] == null
             ? null
@@ -124,7 +127,9 @@ class ViewWarrantyClaimModel {
         currencyId: json['currencyId'],
         // approverId: json['approverId'],
         additionalEmailEmployees: json["additionalEmailEmployees"] != null
-            ? List<AdditionalEmailsEmployeesList>.from(json["additionalEmailEmployees"].map((x) => AdditionalEmailsEmployeesList.fromJson(x)))
+            ? List<AdditionalEmailsEmployeesList>.from(
+                json["additionalEmailEmployees"]
+                    .map((x) => AdditionalEmailsEmployeesList.fromJson(x)))
             : [],
 
         externalEmails: json["externalEmails"] != null
@@ -152,7 +157,7 @@ class ViewWarrantyClaimModel {
         "good_order_id": good_order_id,
         "order_reference_number": order_reference_number,
         "warranty_description": warranty_description,
-        "affected_part": affected_part,
+
         "affected_sr_no": affected_sr_no,
         "failure_time": failure_time?.toIso8601String(),
         "estimated_cost": estimated_cost,
@@ -166,6 +171,7 @@ class ViewWarrantyClaimModel {
         "approver_name": approver_name,
         "last_updated_at": last_updated_at,
         "closed_at": closed_at,
+        "affectedParts": List<dynamic>.from(affectedParts!.map((x) => x)),
         "status": status,
         "log": log,
         "equipment_id": equipment_id,
@@ -220,6 +226,22 @@ class AdditionalEmailsEmployeesList {
         "user_id": user_id,
         "name": name,
         "email": email,
+      };
+}
+
+class AffectedParts {
+  AffectedParts({
+    this.name,
+  });
+
+  String? name;
+
+  factory AffectedParts.fromJson(Map<String, dynamic> json) => AffectedParts(
+        name: json["name"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "name": name,
       };
 }
 

@@ -7,9 +7,11 @@ import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_multiselect_dialog_field.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
+import 'package:cmms/app/widgets/custom_textField.dart';
 import 'package:cmms/app/widgets/dropdown_web.dart';
 import 'package:cmms/app/widgets/file_upload_details_widget_web.dart';
 import 'package:cmms/app/widgets/file_upload_with_dropzone_widget.dart';
+import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -253,7 +255,7 @@ class EditWarrantyClaimWeb extends GetView<EditWarrantyClaimController> {
                                                                 .onValueChanged,
                                                           ),
                                                         ),
-              
+
                                                         // LoginCustomTextfield(),
                                                       ),
                                                     ],
@@ -263,135 +265,344 @@ class EditWarrantyClaimWeb extends GetView<EditWarrantyClaimController> {
                                               SizedBox(
                                                 height: 20,
                                               ),
-              
+
                                               ///Affected Part
-                                              SizedBox(
-                                                height: 220,
-                                                width: MediaQuery.of(context)
-                                                        .size
-                                                        .width /
-                                                    1.2,
-                                                child: Center(
-                                                  child: Container(
-                                                    margin: Dimens.edgeInsets16,
-                                                    height: Get.height,
-                                                    decoration: BoxDecoration(
-                                                      border: Border.all(
-                                                          color: Colors.grey
-                                                              .withOpacity(.3)),
+                                              Obx(
+                                          () => Container(
+                                            margin: Dimens.edgeInsets20,
+                                            height: ((controller.rowItems.value
+                                                        .length) *
+                                                    90) +
+                                                170,
+                                            decoration: BoxDecoration(
+                                              border: Border.all(
+                                                color: ColorValues
+                                                    .lightGreyColorWithOpacity35,
+                                                width: 1,
+                                              ),
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: ColorValues
+                                                      .appBlueBackgroundColor,
+                                                  spreadRadius: 2,
+                                                  blurRadius: 5,
+                                                  offset: Offset(0, 2),
+                                                ),
+                                              ],
+                                            ),
+                                            child: Column(children: [
+                                              // Column(
+                                              //     children: []..addAll(controller.rowItem.value.map((e) {
+                                              //         return Text(jsonEncode(e));
+                                              //       }))),
+                                              // Text(jsonEncode(controller.dropdownMapperData)),
+                                              Padding(
+                                                padding:
+                                                    const EdgeInsets.all(10.0),
+                                                child: Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
+                                                  children: [
+                                                    Text(
+                                                      "Select Affected Part ",
+                                                      style: Styles.blue700,
                                                     ),
-                                                    constraints: BoxConstraints(
-                                                      maxWidth: 1100,
-                                                    ),
-                                                    child: SingleChildScrollView(
-                                                      child: Column(
-                                                        children: [
-                                                          CustomAppBar(
-                                                            title: 'Affected Part'.tr,
+                                                    GestureDetector(
+                                                      onTap: () {
+                                                        // controller
+                                                        //     .addRowItem();
+                                                      },
+                                                      child: Container(
+                                                        height: 25,
+                                                        width: 70,
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          color: ColorValues
+                                                              .addNewColor,
+                                                          border: Border.all(
+                                                            color: ColorValues
+                                                                .lightGreyColorWithOpacity35,
+                                                            width: 1,
                                                           ),
-                                                          Dimens.boxHeight10,
-                                                          Wrap(
-                                                            children: [
-                                                              Padding(
-                                                                padding:
-                                                                    const EdgeInsets
-                                                                        .only(
-                                                                        left: 150),
-                                                                child: Row(
-                                                                  children: [
-                                                                    CustomRichText(
-                                                                        title:
-                                                                            'Select Affected Part: '),
-                                                                    SizedBox(
-                                                                      width: 5,
-                                                                    ),
-                                                                    SizedBox(
-                                                                      width: MediaQuery.of(
-                                                                                  context)
-                                                                              .size
-                                                                              .width /
-                                                                          3.8,
-                                                                      child: Obx(
-                                                                        () =>
-                                                                            DropdownWebWidget(
-                                                                          dropdownList:
-                                                                              controller
-                                                                                  .affectedPartEqipmentNameList,
-                                                                          isValueSelected:
-                                                                              controller
-                                                                                  .isAffectedPartSelected
-                                                                                  .value,
-                                                                          selectedValue:
-                                                                              controller
-                                                                                  .selectedAffectedPart
-                                                                                  .value,
-                                                                          onValueChanged:
-                                                                              controller
-                                                                                  .onValueChanged,
-                                                                        ),
-                                                                      ),
-                                                                      //               child: Obx(
-                                                                      //   () => DropdownWebWidget(
-                                                                      //     dropdownList: controller
-                                                                      //         .equipmentCategoryList,
-                                                                      //     isValueSelected: controller
-                                                                      //         .isEquipmentCategorySelected
-                                                                      //         .value,
-                                                                      //     selectedValue: controller
-                                                                      //         .selectedEquipmentCategory
-                                                                      //         .value,
-                                                                      //     onValueChanged: controller
-                                                                      //         .onValueChanged,
-                                                                      //   ),
-                                                                      // ),
-                                                                      //     CustomMultiSelectDialogField(
-                                                                      //   buttonText:
-                                                                      //       'Affected parts',
-                                                                      //   title:
-                                                                      //       'Select Affected Part',
-                                                                      //   initialValue: (controller
-                                                                      //           .selectedAffectedPartEquipmentIdList
-                                                                      //           .isNotEmpty)
-                                                                      //       ? controller
-                                                                      //           .selectedAffectedPartEquipmentIdList
-                                                                      //       : [],
-                                                                      //   items: controller
-                                                                      //       .affectedPartEqipmentNameList
-                                                                      //       .map(
-                                                                      //         (equipmentList) =>
-                                                                      //             MultiSelectItem(
-                                                                      //           equipmentList
-                                                                      //               ?.id,
-                                                                      //           equipmentList?.name ??
-                                                                      //               '',
-                                                                      //         ),
-                                                                      //       )
-                                                                      //       .toList(),
-                                                                      //   onConfirm:
-                                                                      //       (selectedOptionsList) =>
-                                                                      //           {
-                                                                      //     controller
-                                                                      //         .affectedPartSelected(
-                                                                      //             selectedOptionsList),
-                                                                      //     print(
-                                                                      //         'Affected part Equipment Name list ${controller.selectedAffectedPartEquipmentIdList}')
-                                                                      //   },
-                                                                      // ),
-                                                                    ),
-                                                                    SizedBox(
-                                                                      width: 100,
-                                                                    ),
-                                                                  ],
-                                                                ),
-                                                              ),
-                                                            ],
+                                                          borderRadius:
+                                                              BorderRadius.all(
+                                                                  Radius
+                                                                      .circular(
+                                                                          5)),
+                                                        ),
+                                                        child: Center(
+                                                          child: Text(
+                                                            " + Add ",
+                                                            style: TextStyle(
+                                                                fontSize: 18,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w100,
+                                                                color: Colors
+                                                                    .white),
                                                           ),
-                                                        ],
+                                                        ),
                                                       ),
                                                     ),
-                                                  ),
+                                                  ],
                                                 ),
                                               ),
+                                              Expanded(
+                                                child: DataTable2(
+                                                  // minWidth: 2000,
+                                                  dataRowHeight: 70,
+                                                  columnSpacing: 10,
+                                                  border: TableBorder.all(
+                                                      color: Color.fromARGB(
+                                                          255, 206, 229, 234)),
+                                                  columns: [
+                                                    DataColumn2(
+                                                        // fixedWidth: 150,
+                                                        label: Text(
+                                                      "Affected Parts",
+                                                      style: TextStyle(
+                                                          fontSize: 15,
+                                                          fontWeight:
+                                                              FontWeight.bold),
+                                                    )),
+                                                    DataColumn2(
+                                                        fixedWidth: 100,
+                                                        label: Text(
+                                                          "Action",
+                                                          style: TextStyle(
+                                                              fontSize: 15,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold),
+                                                        )),
+                                                  ],
+                                                  rows: controller
+                                                      .rowItems.value
+                                                      .map((record) {
+                                                    return DataRow(
+                                                      // height: 130,
+                                                      cells:
+                                                          record.map((mapData) {
+                                                        return DataCell(
+                                                          (mapData['key'] ==
+                                                                  "Affected Parts")
+                                                              ? Padding(
+                                                                  padding:
+                                                                      EdgeInsets
+                                                                          .only(
+                                                                              top: 10),
+                                                                  child: Column(
+                                                                    mainAxisAlignment:
+                                                                        MainAxisAlignment
+                                                                            .start,
+                                                                    crossAxisAlignment:
+                                                                        CrossAxisAlignment
+                                                                            .start,
+                                                                    children: [
+                                                                      Container(
+                                                                          decoration:
+                                                                              BoxDecoration(
+                                                                            boxShadow: [
+                                                                              BoxShadow(
+                                                                                color: Colors.black26,
+                                                                                offset: const Offset(
+                                                                                  5.0,
+                                                                                  5.0,
+                                                                                ),
+                                                                                blurRadius: 5.0,
+                                                                                spreadRadius: 1.0,
+                                                                              ),
+                                                                            ],
+                                                                            color:
+                                                                                ColorValues.whiteColor,
+                                                                            borderRadius:
+                                                                                BorderRadius.circular(5),
+                                                                          ),
+                                                                          child:
+                                                                              LoginCustomTextfield(
+                                                                            maxLine:
+                                                                                1,
+                                                                            textController:
+                                                                                new TextEditingController(text: mapData["value"] ?? ''),
+                                                                            onChanged:
+                                                                                (txt) {
+                                                                              mapData["value"] = txt;
+                                                                            },
+                                                                          )),
+                                                                    ],
+                                                                  ),
+                                                                )
+                                                              : (mapData['key'] ==
+                                                                      "Action ")
+                                                                  ? Padding(
+                                                                      padding: EdgeInsets
+                                                                          .only(
+                                                                              top: 10),
+                                                                      child:
+                                                                          Column(
+                                                                        mainAxisAlignment:
+                                                                            MainAxisAlignment.start,
+                                                                        crossAxisAlignment:
+                                                                            CrossAxisAlignment.start,
+                                                                        children: [
+                                                                          TableActionButton(
+                                                                            color:
+                                                                                ColorValues.appRedColor,
+                                                                            icon:
+                                                                                Icons.delete,
+                                                                            label:
+                                                                                '',
+                                                                            message:
+                                                                                '',
+                                                                            onPress:
+                                                                                () {
+                                                                              controller.rowItems.remove(record);
+                                                                            },
+                                                                          )
+                                                                        ],
+                                                                      ),
+                                                                    )
+                                                                  : Text(mapData[
+                                                                          'key'] ??
+                                                                      ''),
+                                                        );
+                                                      }).toList(),
+                                                    );
+                                                  }).toList(),
+                                                ),
+                                              ),
+                                            ]),
+                                          ),
+                                        ),
+
+                                        //SizedBox(
+                                              //  height: 220,
+                                              //  width: MediaQuery.of(context)
+                                                        //.size
+                                                        //.width /
+                                             //       1.2,
+                                              //  child: Center(
+                                              //    child: Container(
+                                              //      margin: Dimens.edgeInsets16,
+                                              //      height: Get.height,
+                                              //      decoration: BoxDecoration(
+                                              //        border: Border.all(
+                                              //            color: Colors.grey
+                                              //                .withOpacity(.3)),
+                                              //      ),
+                                              //      constraints: BoxConstraints(
+                                              //        maxWidth: 1100,
+                                              //      ),
+                                              //      child: SingleChildScrollView(
+                                              //        child: Column(
+                                              //          children: [
+                                              //            CustomAppBar(
+                                              //              title: 'Affected Part'.tr,
+                                              //            ),
+                                              //            Dimens.boxHeight10,
+                                              //            Wrap(
+                                              //              children: [
+                                              //                Padding(
+                                              //                  padding:
+                                              //                      const EdgeInsets
+                                              //                          .only(
+                                              //                          left: 150),
+                                              //                  child: Row(
+                                              //                    children: [
+                                              //                      CustomRichText(
+                                              //                          title:
+                                              //                              'Select Affected Part: '),
+                                              //                      SizedBox(
+                                              //                        width: 5,
+                                              //                      ),
+                                              //                      SizedBox(
+                                              //                        width: MediaQuery.of(
+                                              //                                    context)
+                                              //                                .size
+                                              //                                .width /
+                                              //                            3.8,
+                                              //                        child: Obx(
+                                              //                          () =>
+                                              //                              DropdownWebWidget(
+                                              //                            dropdownList:
+                                              //                                controller
+                                              //                                    .affectedPartEqipmentNameList,
+                                              //                            isValueSelected:
+                                              //                                controller
+                                              //                                    .isAffectedPartSelected
+                                              //                                    .value,
+                                              //                            selectedValue:
+                                              //                                controller
+                                              //                                    .selectedAffectedPart
+                                              //                                    .value,
+                                              //                            onValueChanged:
+                                              //                                controller
+                                              //                                    .onValueChanged,
+                                              //                          ),
+                                              //                        ),
+                                                                      //               //child: Obx(
+                                                                      //   //() => DropdownWebWidget(
+                                                                      //     //dropdownList: controller
+                                                                      //         //.equipmentCategoryList,
+                                                                      //     //isValueSelected: controller
+                                                                      //         //.isEquipmentCategorySelected
+                                                                      //         //.value,
+                                                                      //     //selectedValue: controller
+                                                                      //         //.selectedEquipmentCategory
+                                                                      //         //.value,
+                                                                      //     //onValueChanged: controller
+                                                                      //         //.onValueChanged,
+                                                                      //   //),
+                                                                      // //),
+                                                                      //     //CustomMultiSelectDialogField(
+                                                                      //   //buttonText:
+                                                                      //       //'Affected parts',
+                                                                      //   //title:
+                                                                      //       //'Select Affected Part',
+                                                                      //   //initialValue: (controller
+                                                                      //           //.selectedAffectedPartEquipmentIdList
+                                                                      //           //.isNotEmpty)
+                                                                      //       //? controller
+                                                                      //           //.selectedAffectedPartEquipmentIdList
+                                                                      //       //: [],
+                                                                      //   //items: controller
+                                                                      //       //.affectedPartEqipmentNameList
+                                                                      //       //.map(
+                                                                      //         //(equipmentList) =>
+                                                                      //             //MultiSelectItem(
+                                                                      //           //equipmentList
+                                                                      //               //?.id,
+                                                                      //           //equipmentList?.name ??
+                                                                      //               //'',
+                                                                      //         //),
+                                                                      //       //)
+                                                                      //       //.toList(),
+                                                                      //   //onConfirm:
+                                                                      //       //(selectedOptionsList) =>
+                                                                      //           //{
+                                                                      //     //controller
+                                                                      //         //.affectedPartSelected(
+                                                                      //             //selectedOptionsList),
+                                                                      //     //print(
+                                                                      //         //'Affected part Equipment Name list ${controller.selectedAffectedPartEquipmentIdList}')
+                                                                      //   //},
+                                                                      // //),
+                                              //                      ),
+                                              //                      SizedBox(
+                                              //                        width: 100,
+                                              //                      ),
+                                              //                    ],
+                                              //                  ),
+                                              //                ),
+                                              //              ],
+                                              //            ),
+                                              //          ],
+                                              //        ),
+                                              //      ),
+                                              //    ),
+                                              //  ),
+                                              //),
                                               Row(
                                                 mainAxisAlignment:
                                                     MainAxisAlignment.start,
@@ -405,7 +616,7 @@ class EditWarrantyClaimWeb extends GetView<EditWarrantyClaimController> {
                                                     //     controller.categoryTextController,
                                                     textController: controller
                                                         .failureDateTimeCtrlrWeb,
-              
+
                                                     onTap: () {
                                                       pickFailureDateTime_web(
                                                           context);
@@ -502,7 +713,7 @@ class EditWarrantyClaimWeb extends GetView<EditWarrantyClaimController> {
                                                   SizedBox(
                                                     width: 30,
                                                   ),
-              
+
                                                   ///Additional Email
                                                   SizedBox(
                                                     height: 400,
@@ -601,12 +812,12 @@ class EditWarrantyClaimWeb extends GetView<EditWarrantyClaimController> {
                                                                                         SizedBox(
                                                                                           height: 15,
                                                                                         ),
-              
+
                                                                                         emailDropdown(
                                                                                           context,
                                                                                           'Select Employees',
                                                                                         ),
-              
+
                                                                                         SizedBox(
                                                                                           height: 10,
                                                                                         ),
@@ -621,9 +832,9 @@ class EditWarrantyClaimWeb extends GetView<EditWarrantyClaimController> {
                                                                                         // emailDropdown(context, 'Joseph Fernandez'),
                                                                                       ],
                                                                                     )),
-              
+
                                                                                     ////Second TabBar View
-              
+
                                                                                     // Center(child: Text('Second Tab'))
                                                                                     SingleChildScrollView(
                                                                                       child: Column(
@@ -661,10 +872,10 @@ class EditWarrantyClaimWeb extends GetView<EditWarrantyClaimController> {
                                                                                               // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                                                                               children: [
                                                                                             // for (var rowData in controller.rowList) Text(rowData)
-              
+
                                                                                             // for (var rowData2 in controller.rowList2)
                                                                                             //   Text(rowData2),
-              
+
                                                                                             // for (var rowData3 in controller.rowList3)
                                                                                             //   Text(rowData3)
                                                                                           ]..addAll(controller.externalEmails.map((data) => Row(
@@ -680,7 +891,7 @@ class EditWarrantyClaimWeb extends GetView<EditWarrantyClaimController> {
                                                                                                       SizedBox(width: 200, child: Text('${data.email}')),
                                                                                                     ],
                                                                                                   )))),
-              
+
                                                                                           //For shwing External emails List from API
                                                                                           Column(
                                                                                               // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -697,7 +908,7 @@ class EditWarrantyClaimWeb extends GetView<EditWarrantyClaimController> {
                                                                                                       SizedBox(width: 200, child: Text('${data?.email}')),
                                                                                                     ],
                                                                                                   )))),
-              
+
                                                                                           // SizedBox(
                                                                                           //     width: MediaQuery.of(context).size.width / 3,
                                                                                           //     child: CustomTextField(
@@ -720,10 +931,10 @@ class EditWarrantyClaimWeb extends GetView<EditWarrantyClaimController> {
                                                                                             onPressed: () {
                                                                                               // controller.addRow(controller.serialNoTextFieldController.text);
                                                                                               // controller.serialNoTextFieldController.clear();
-              
+
                                                                                               // controller.addRow(controller.nameTextFieldController.text);
                                                                                               // controller.nameTextFieldController.clear();
-              
+
                                                                                               // controller.addRow(controller.emailTextFieldController.text);
                                                                                               // controller.emailTextFieldController.clear();
                                                                                               controller.updateText(controller.nameTextFieldController.text, controller.emailTextFieldController.text);
@@ -743,7 +954,7 @@ class EditWarrantyClaimWeb extends GetView<EditWarrantyClaimController> {
                                                                         ),
                                                                       ],
                                                                     ),
-              
+
                                                                     /// Employee
                                                                   ],
                                                                 ),
@@ -808,7 +1019,7 @@ class EditWarrantyClaimWeb extends GetView<EditWarrantyClaimController> {
                                                                             FileUploadDetailsWidgetWeb()),
                                                                   ]),
                                                             ),
-              
+
                                                             // Padding(
                                                             //   padding:
                                                             //       const EdgeInsets
@@ -858,7 +1069,7 @@ class EditWarrantyClaimWeb extends GetView<EditWarrantyClaimController> {
                                                             //                     .spaceBetween,
                                                             //             children: [
                                                             //               // Text('#'),
-              
+
                                                             //               Text(
                                                             //                   'Name'),
                                                             //               Dimens
@@ -961,7 +1172,7 @@ class EditWarrantyClaimWeb extends GetView<EditWarrantyClaimController> {
                                                   )
                                                 ],
                                               ),
-              
+
                                               SizedBox(
                                                 height: 20,
                                               ),
@@ -1131,7 +1342,7 @@ class EditWarrantyClaimWeb extends GetView<EditWarrantyClaimController> {
                                                             children: [
                                                               // Text('${element.name}'),
                                                               // Text('${element.required_by_date}')
-              
+
                                                               supplierActionData(
                                                                   '${element.srNumber}',
                                                                   '${element.name}',
@@ -1148,7 +1359,7 @@ class EditWarrantyClaimWeb extends GetView<EditWarrantyClaimController> {
                                                             children: [
                                                               // Text('${element.name}'),
                                                               // Text('${element.required_by_date}')
-              
+
                                                               supplierActionData(
                                                                   '#',
                                                                   '${element?.name}',
@@ -1158,7 +1369,7 @@ class EditWarrantyClaimWeb extends GetView<EditWarrantyClaimController> {
                                                             ],
                                                           ))),
                                                 ),
-              
+
                                                 // supplierActionData(
                                                 //     '2',
                                                 //     'Material Replinishment',
@@ -1196,7 +1407,7 @@ class EditWarrantyClaimWeb extends GetView<EditWarrantyClaimController> {
                                                               .supplierActionTextFieldController,
                                                           label: 'Supplier Action',
                                                         )),
-              
+
                                                     ///Checkbox
                                                     Row(
                                                       children: [
@@ -1223,7 +1434,7 @@ class EditWarrantyClaimWeb extends GetView<EditWarrantyClaimController> {
                                                             }),
                                                       ],
                                                     ),
-              
+
                                                     SizedBox(
                                                       width: MediaQuery.of(context)
                                                               .size
@@ -1238,7 +1449,7 @@ class EditWarrantyClaimWeb extends GetView<EditWarrantyClaimController> {
                                                         //     controller.categoryTextController,
                                                         textController: controller
                                                             .supplierActionDateTimeCtrlrWeb,
-              
+
                                                         onTap: () {
                                                           pickRequiredSupplierDate_web(
                                                               context);
@@ -1263,7 +1474,7 @@ class EditWarrantyClaimWeb extends GetView<EditWarrantyClaimController> {
                                                     //       controller
                                                     //           .supplierActionSrNumberTextFieldController
                                                     //           .text,
-              
+
                                                     //       // controller.isCheckedRequire
                                                     //       //     .value
                                                     //     );
@@ -1294,7 +1505,7 @@ class EditWarrantyClaimWeb extends GetView<EditWarrantyClaimController> {
                                                           controller
                                                               .supplierActionSrNumberTextFieldController
                                                               .text,
-              
+
                                                           // controller.isCheckedRequire
                                                           //     .value
                                                         );
@@ -1319,7 +1530,7 @@ class EditWarrantyClaimWeb extends GetView<EditWarrantyClaimController> {
                                         ),
                                       ),
                                     ),
-              
+
                                     Wrap(
                                       children: [
                                         SizedBox(
@@ -1369,7 +1580,7 @@ class EditWarrantyClaimWeb extends GetView<EditWarrantyClaimController> {
                                         )
                                       ],
                                     ),
-              
+
                                     Padding(
                                       padding: const EdgeInsets.only(top: 30),
                                       child: Row(
@@ -1399,7 +1610,7 @@ class EditWarrantyClaimWeb extends GetView<EditWarrantyClaimController> {
                                         ],
                                       ),
                                     ),
-              
+
                                     Row(
                                       mainAxisAlignment: MainAxisAlignment.center,
                                       children: [
@@ -1427,7 +1638,7 @@ class EditWarrantyClaimWeb extends GetView<EditWarrantyClaimController> {
                                         // ),
                                       ],
                                     )
-              
+
                                     // Wrap(
                                     //   children: [
                                     //     Row(

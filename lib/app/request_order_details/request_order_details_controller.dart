@@ -144,7 +144,8 @@ class GoodsOrdersReqDetailController extends GetxController {
     ]);
   }
 
-  Future<void> getRoDetailsByID({required int requestID,required int facilityId}) async {
+  Future<void> getRoDetailsByID(
+      {required int requestID, required int facilityId}) async {
     getPurchaseDetailsByIDModelList?.value = <GetRODetailsByIDModel>[];
 
     final _getPurchaseDetailsById = await goodsOrdersReqDetailPresenter
@@ -171,6 +172,7 @@ class GoodsOrdersReqDetailController extends GetxController {
           {'key': "Order", "value": '${element.ordered_qty}'},
           {'key': "Comment", "value": '${element.comment}'},
         ]);
+
         commentCtrlr.text = getPurchaseDetailsByIDModel.value?.comment ?? "";
         dropdownMapperData[element.name ?? ""] =
             assetList.firstWhere((e) => e?.name == element.name, orElse: null)!;

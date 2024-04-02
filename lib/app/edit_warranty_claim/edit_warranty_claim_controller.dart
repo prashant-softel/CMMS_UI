@@ -130,7 +130,8 @@ class EditWarrantyClaimController extends GetxController {
   RxList<int?> selectedEquipmentNameId = <int?>[].obs;
 
   // String? selectedEquipmentName = '';
-
+  RxList<List<Map<String, String>>> rowItems =
+      <List<Map<String, String>>>[].obs;
   //Affected Part Equipemnt Name lIst
   RxList<InventoryCategoryModel?> affectedPartEqipmentNameList =
       <InventoryCategoryModel>[].obs;
@@ -300,12 +301,18 @@ class EditWarrantyClaimController extends GetxController {
           editWarrantyClaimDetailsModel.value?.warranty_claim_title ?? '';
       warrantyClaimBriefDescTextController.text =
           editWarrantyClaimDetailsModel.value?.warranty_description ?? '';
+      editWarrantyClaimDetailsModel.value?.affectedParts?.forEach((element) {
+        rowItems.add([
+          {'key': "Affected Parts", "value": '${element?.name}'},
+          {'key': "Action ", "value": ''},
+        ]);
+      });
       selectedEquipmentName.value =
           editWarrantyClaimDetailsModel.value?.equipment_name ?? '';
       selectedEquipmentCategory.value =
           editWarrantyClaimDetailsModel.value?.equipment_category ?? '';
-      selectedAffectedPart.value =
-          editWarrantyClaimDetailsModel.value?.affected_part ?? '';
+      // selectedAffectedPart.value =
+      //     editWarrantyClaimDetailsModel.value?.affected_part ?? '';
       failureDateTimeCtrlrWeb.text =
           '${DateFormat('yyyy-MM-dd').format(DateTime.parse('${editWarrantyClaimDetailsModel.value?.failure_time}'))}';
       affectedSerialNoTextController.text =
@@ -656,6 +663,13 @@ class EditWarrantyClaimController extends GetxController {
     blockTextController.text = selectedBlock.name ?? '';
 
     update(['block_field']);
+  }
+
+  void addRowItem() {
+    rowItems.add([
+      {'key': "Affected Parts", "value": ''},
+      {'key': "Action ", "value": ''},
+    ]);
   }
 
   void onValueChanged(dynamic list, dynamic value) {
