@@ -2,6 +2,8 @@ import 'dart:convert';
 
 import 'package:cmms/domain/models/create_pm_plan_model.dart';
 
+import '../../app/utils/utility.dart';
+
 PMPlanDetail pmPlanDetailFromJson(String str) =>
     PMPlanDetail.fromJson(json.decode(str));
 
@@ -87,7 +89,9 @@ class PMPlanDetail {
       mapAssetChecklist: mapAssetChecklist,
       facility_name: parsedJson['facility_name'],
       isDraft: parsedJson['isDraft'],
-      plan_date: parsedJson['plan_date'],
+      plan_date: parsedJson['plan_date'] == null
+          ? parsedJson['plan_date']
+          : Utility.getFormatedyearMonthDay(parsedJson['plan_date']),
       status_long: parsedJson['status_long'],
       plan_freq_id: parsedJson['plan_freq_id'],
       plan_freq_name: parsedJson['plan_freq_name'],
