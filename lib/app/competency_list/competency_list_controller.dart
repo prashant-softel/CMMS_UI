@@ -56,12 +56,14 @@ class CompetencyListController extends GetxController {
   int selectedfrequencyId = 0;
   final isSuccess = false.obs;
   StreamSubscription<int>? facilityIdStreamSubscription;
+  Rx<bool> isLoading = true.obs;
+
   @override
   void onInit() async {
     // facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
     //   facilityId = event;
     //   Future.delayed(Duration(seconds: 2), () {
-    getCompetencyList(true);
+    getCompetencyList();
     //   });
     // });
     nameFocus.addListener(() {
@@ -81,13 +83,14 @@ class CompetencyListController extends GetxController {
     isContainerVisible.toggle();
   }
 
-  Future<void> getCompetencyList(bool isLoading) async {
+  Future<void> getCompetencyList() async {
     competencyList?.value = <CompetencyModel>[];
     final _competencyList =
-        await competencyListPresenter.getCompetencyList(isLoading: isLoading);
+        await competencyListPresenter.getCompetencyList(isLoading: isLoading.value);
 
     if (_competencyList != null) {
       competencyList!.value = _competencyList.cast<CompetencyModel?>();
+      isLoading.value = false;
       paginationController = PaginationController(
         rowCount: competencyList?.length ?? 0,
         rowsPerPage: 10,
@@ -155,7 +158,7 @@ class CompetencyListController extends GetxController {
       );
       return true;
     }
-    getCompetencyList(true);
+    getCompetencyList();
     return true;
   }
 
@@ -170,7 +173,7 @@ class CompetencyListController extends GetxController {
     descriptionCtrlr.text = '';
     selectedItem = null;
     Future.delayed(Duration(seconds: 1), () {
-      getCompetencyList(true);
+      getCompetencyList();
     });
     Future.delayed(Duration(seconds: 5), () {
       isSuccess.value = false;
@@ -259,7 +262,7 @@ class CompetencyListController extends GetxController {
                 onPressed: () {
                   deleteCompetencyList(checklist_id).then((value) {
                     Get.back();
-                    getCompetencyList(true);
+                    getCompetencyList();
                   });
                 },
                 child: Text('YES'),
