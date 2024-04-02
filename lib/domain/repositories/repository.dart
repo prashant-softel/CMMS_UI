@@ -3213,7 +3213,7 @@ class Repository {
 
       if (!res.hasError) {
         var warrantyClaimList = warrantyClaimModelFromJson(res.data);
-        return warrantyClaimList;
+        return warrantyClaimList.reversed.toList();
       } //
       else {
         Utility.showDialog(res.errorCode.toString(), 'getWarrantyClaimList');

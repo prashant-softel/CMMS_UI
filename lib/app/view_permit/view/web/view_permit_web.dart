@@ -845,7 +845,7 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                                     ),
                                     Spacer(),
                                     Text(
-                                      'Loto Applied ',
+                                      'LOTO Applied ',
                                       style: Styles.blue700,
                                     ),
                                     Checkbox(
@@ -917,14 +917,14 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                                         columns: [
                                           DataColumn(
                                               label: Text(
-                                            "Loto Applied On",
+                                            "LOTO Applied On",
                                             style: TextStyle(
                                                 fontSize: 15,
                                                 fontWeight: FontWeight.bold),
                                           )),
                                           DataColumn(
                                               label: Text(
-                                            "Loto Lock Sr. No.",
+                                            "LOTO Lock Sr. No.",
                                             style: TextStyle(
                                                 fontSize: 15,
                                                 fontWeight: FontWeight.bold),

@@ -817,7 +817,7 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                               child: Column(
                                                 children: [
                                                   CustomAppBar(
-                                                    title: 'Loto Equipment List'
+                                                    title: 'LOTO Equipment List'
                                                         .tr,
                                                     action: Row(
                                                       children: [
@@ -907,7 +907,7 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                                                     columns: [
                                                                       DataColumn(
                                                                         label: Text(
-                                                                            "Loto Applied On"),
+                                                                            "LOTO Applied On"),
                                                                       ),
                                                                       DataColumn(
                                                                         label: Text(

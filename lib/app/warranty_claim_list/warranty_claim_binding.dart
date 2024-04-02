@@ -6,23 +6,19 @@ import 'package:get/get.dart';
 
 import '../../domain/usecases/home_usecase.dart';
 
-/// A list of bindings which will be used in the route of [HomeScreen].
 class WarrantyClaimBinding extends Bindings {
   @override
   void dependencies() {
-      // Get.find<WarrantyClaimController>();
-    Get.lazyPut(
+    Get.lazyPut<WarrantyClaimController>(
       () => WarrantyClaimController(
-        Get.put(
-          WarrantyClaimPresenter(
-            WarrantyClaimUsecase(
-              Get.find(),
-            ),
+        WarrantyClaimPresenter(
+          WarrantyClaimUsecase(
+            Get.find(),
           ),
         ),
       ),
     );
-     Get.lazyPut(
+    Get.lazyPut(
       () => HomeController(
         Get.put(
           HomePresenter(
