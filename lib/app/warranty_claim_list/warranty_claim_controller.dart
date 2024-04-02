@@ -229,8 +229,9 @@ class WarrantyClaimController extends GetxController {
 
   final columnVisibility = ValueNotifier<Map<String, bool>>({
     "WC Id": true,
-    "Date Of Claim": true,
     "Warranty Claim Title": true,
+    "Date Of Claim": true,
+
     "Equipment Serial No.": true,
     "Equipment Category": true,
     "Equipment Name": true,
@@ -241,8 +242,8 @@ class WarrantyClaimController extends GetxController {
   });
   final Map<String, double> columnwidth = {
     "WC Id": 153,
-    "Date Of Claim": 320,
     "Warranty Claim Title": 220,
+    "Date Of Claim": 320,
     "Equipment Serial No.": 200,
     "Equipment Category": 250,
     "Equipment Name": 250,
@@ -309,8 +310,8 @@ class WarrantyClaimController extends GetxController {
   void onInit() async {
     this.filterText = {
       "WC Id": warrantyClaimIdFilterText,
-      "Date Of Claim": dateOfClaimFilterText,
       "Warranty Claim Title": wcTitleFilterText,
+      "Date Of Claim": dateOfClaimFilterText,
       "Equipment Serial No.": equipmentSrNoFilterText,
       "Equipment Category": equipmentCategoryFilterText,
       "Equipment Name": equipmentNameFilterText,
@@ -871,10 +872,10 @@ class WarrantyClaimController extends GetxController {
   ///Create Warranty Claim
   void createWarrantyClaim() async {
     {
-      checkForm();
-      if (isFormInvalid.value) {
-        return;
-      }
+      // checkForm();
+      // if (isFormInvalid.value) {
+      //   return;
+      // }
 
       String _warrantyClaimTitle =
           htmlEscape.convert(warrantyClaimTitleTextController.text.trim());
@@ -912,11 +913,11 @@ class WarrantyClaimController extends GetxController {
           // is_required: e.is_required
         ));
       });
-      late List<AffectedParts> affectedParts = [];
+      List<AffectedParts> affectedPart = [];
 
       rowItems.forEach((element) {
-        AffectedParts item = AffectedParts(name: element[1]["value"] ?? '0');
-        affectedParts.add(item);
+        AffectedParts item = AffectedParts(name: element[0]["value"] ?? '0');
+        affectedPart.add(item);
         print('Create req  order  data: $item');
       });
 
@@ -925,7 +926,7 @@ class WarrantyClaimController extends GetxController {
               facilityId: facilityId,
               equipmentId: selectedEquipmentnameId,
               goodsOrderId: 14205,
-              affectedParts: affectedParts,
+              affectedParts: affectedPart,
               orderReference: _orderReferenceNo,
               affectedSrNo: _affectedSerialNo,
               costOfReplacement: costOfReplacement,

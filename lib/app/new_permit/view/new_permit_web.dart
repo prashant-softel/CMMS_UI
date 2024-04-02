@@ -390,16 +390,21 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                                   title: 'Block/Plot: '),
                                               Dimens.boxWidth10,
                                               IgnorePointer(
-                                                ignoring: 
-                                                controller.jobModel?.id != null ? true : false,
+                                                ignoring:
+                                                    controller.jobModel?.id !=
+                                                            null
+                                                        ? true
+                                                        : false,
                                                 child: SizedBox(
                                                   width: Get.width * .2,
                                                   child: Obx(
                                                     () => DropdownWebWidget(
                                                       dropdownList:
                                                           controller.blockList,
-                                                      isValueSelected: controller
-                                                          .isBlockSelected.value,
+                                                      isValueSelected:
+                                                          controller
+                                                              .isBlockSelected
+                                                              .value,
                                                       selectedValue: controller
                                                           .selectedBlock.value,
                                                       onValueChanged: controller
@@ -469,14 +474,17 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                                   title:
                                                       'Equipment Categories: '),
                                               Dimens.boxWidth10,
-                                              controller.pmtaskViewModel?.id != null || controller.jobModel?.id != null
+                                              controller.pmtaskViewModel?.id !=
+                                                          null ||
+                                                      controller.jobModel?.id !=
+                                                          null
                                                   ? IgnorePointer(
-                                                    child: SizedBox(
-                                                        width:
-                                                            MediaQuery.of(context)
-                                                                    .size
-                                                                    .width /
-                                                                5,
+                                                      child: SizedBox(
+                                                        width: MediaQuery.of(
+                                                                    context)
+                                                                .size
+                                                                .width /
+                                                            5,
                                                         child:
                                                             CustomMultiSelectDialogField(
                                                           title:
@@ -513,7 +521,7 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                                           },
                                                         ),
                                                       ),
-                                                  )
+                                                    )
                                                   : SizedBox(
                                                       width: Get.width * .2,
                                                       child:
@@ -813,7 +821,7 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                               child: Column(
                                                 children: [
                                                   CustomAppBar(
-                                                    title: 'Loto Equipment List'
+                                                    title: 'LOTO Equipment List'
                                                         .tr,
                                                     action: Row(
                                                       children: [
@@ -996,7 +1004,7 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                                                   columns: [
                                                                     DataColumn(
                                                                       label: Text(
-                                                                          "Loto Applied On"),
+                                                                          "LOTO Applied On"),
                                                                       tooltip:
                                                                           "Name",
                                                                     ),
