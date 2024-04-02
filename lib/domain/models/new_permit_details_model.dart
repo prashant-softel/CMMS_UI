@@ -55,6 +55,7 @@ class NewPermitDetailModel {
   List<ListCategory?>? lstCategory;
   List<LotoLists>? loto_list;
   List<LotoOtherDetails>? lotoOtherDetails;
+  String? request_datetime;
 
   List<ListAssociatedJob?>? lstAssociatedJobs;
   List<ListAssociatedPm?>? lstAssociatedPM;
@@ -129,6 +130,7 @@ class NewPermitDetailModel {
     this.physical_iso_remark,
     this.file_list,
     this.is_loto_required,
+    this.request_datetime,
   });
 
   factory NewPermitDetailModel.fromJson(Map<String, dynamic> json) =>
@@ -228,7 +230,8 @@ class NewPermitDetailModel {
         closeDetails: CloseDetails.fromJson(json['closeDetails']),
         physical_iso_remark: json['physical_iso_remark'],
         is_TBT_Expire: json['is_TBT_Expire'],
-        is_loto_required: json["is_loto_required"], 
+        is_loto_required: json["is_loto_required"],
+        request_datetime: json["request_datetime"],
       );
 
   Map<String, dynamic> toJson() => {
