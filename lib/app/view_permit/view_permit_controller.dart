@@ -35,7 +35,6 @@ import 'package:cmms/domain/models/type_permit_model.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart';
 import 'package:intl/intl.dart';
-import 'package:path/path.dart';
 import 'package:rxdart/subjects.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 import 'package:syncfusion_flutter_pdf/pdf.dart';
@@ -479,8 +478,10 @@ class ViewPermitController extends GetxController {
         print('FacilityIdsss$facilityId');
         Future.delayed(Duration(seconds: 1), () async {
           await getBlocksList(facilityId);
-          await getViewPermitDetail(permitId: permitId.value, facilityId: facilityId);
-          await getPermitHistory(permitId: permitId.value, facilityId: facilityId);
+          await getViewPermitDetail(
+              permitId: permitId.value, facilityId: facilityId);
+          await getPermitHistory(
+              permitId: permitId.value, facilityId: facilityId);
         });
         // Future.delayed(Duration(seconds: 1), () {
 
@@ -488,7 +489,7 @@ class ViewPermitController extends GetxController {
       });
       // await getViewPermitDetail(
       //     permitId: permitId.value, facilityId: facilityId);
-      await getSafetyMeasureList();
+      // await getSafetyMeasureList();
       await getPermitHistory(permitId: permitId.value, facilityId: facilityId);
       await getPermitConditionList(isCancle: isCancle!, facilityId: facilityId);
       await getPermitCloseConditionList(isClose: isClose!);
@@ -844,6 +845,9 @@ class ViewPermitController extends GetxController {
           '${DateFormat('yyyy-MM-dd HH:mm').format(DateTime.parse('${viewPermitDetailsModel.value?.end_datetime}'))}';
 
       selectedSafetyMeasureId = viewPermitDetailsModel.value?.permitTypeid ?? 0;
+      if (selectedSafetyMeasureId > 0) {
+        getSafetyMeasureList();
+      }
       rowTBTTrainingOtherPersonItem.value = [];
       viewPermitDetailsModel.value?.lotoOtherDetails?.forEach((element) {
         rowTBTTrainingOtherPersonItem.value.add([
@@ -961,6 +965,8 @@ class ViewPermitController extends GetxController {
       permit_type_id: selectedSafetyMeasureId,
       // job_type_id: 36,
     );
+    safetyMeasureList.value = <SafetyMeasureListModel>[];
+
     print('View SafetyrMeasure${selectedSafetyMeasureId}');
     for (var safetyMeasure_list in _safetyMeasureList) {
       safetyMeasureList.add(safetyMeasure_list);

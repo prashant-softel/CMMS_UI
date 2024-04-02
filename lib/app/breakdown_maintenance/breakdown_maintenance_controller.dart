@@ -73,6 +73,18 @@ class BreakdownMaintenanceController extends GetxController {
     );
   }
 
+   Future<void> goToWorkTypeList() async {
+    Get.toNamed(
+      Routes.worktype,
+    );
+  }
+
+  Future<void> goToToolTypeList() async {
+    Get.toNamed(
+      Routes.tooltype,
+    );
+  }
+
   void goToJobListScreen() {
     Get.toNamed(Routes.jobList);
   }

@@ -105,14 +105,14 @@ class _JobCardContentWebState extends State<JobCardContentWeb> {
                                           style: Styles.blackBold16,
                                         ),
                                         Spacer(),
-                                        ActionButton(
-                                          icon: Icons.add,
-                                          label: "Add New",
-                                          onPressed: () {
-                                            Get.toNamed(Routes.addUser);
-                                          },
-                                          color: ColorValues.addNewColor,
-                                        ),
+                                        // ActionButton(
+                                        //   icon: Icons.add,
+                                        //   label: "Add New",
+                                        //   onPressed: () {
+                                        //     Get.toNamed(Routes.addUser);
+                                        //   },
+                                        //   color: ColorValues.addNewColor,
+                                        // ),
                                       ],
                                     ),
                                   ),

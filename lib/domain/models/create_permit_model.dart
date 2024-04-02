@@ -19,7 +19,7 @@ class CreatePermitModel {
   int? issuer_id;
   int? approver_id;
   int? user_id;
-  bool? is_isolation_required;
+  bool? is_loto_required;
   bool? resubmit;
 
   String? start_datetime;
@@ -55,7 +55,7 @@ class CreatePermitModel {
     this.employee_list,
     this.end_datetime,
     this.facility_id,
-    this.is_isolation_required,
+    this.is_loto_required,
     this.resubmit,
     this.isolated_category_ids,
     this.issuer_id,
@@ -94,7 +94,7 @@ class CreatePermitModel {
         TBT_Done_at: json['TBT_Done_at'],
         description: json["description"],
         title: json["title"],
-        is_isolation_required: json["is_isolation_required"],
+        is_loto_required: json["is_loto_required"],
         resubmit: json['resubmit'],
         Loto_list: json["Loto_list"] != null
             ? List<LotoList>.from(
@@ -141,7 +141,7 @@ class CreatePermitModel {
         "TBT_Done_at": TBT_Done_at,
         "description": description,
         "title": title,
-        "is_isolation_required": is_isolation_required,
+        "is_loto_required": is_loto_required,
         "resubmit": resubmit,
         "Loto_list": List<dynamic>.from(Loto_list!.map((x) => x.toJson())),
         "lotoOtherDetails":
@@ -163,19 +163,27 @@ class LotoList {
   LotoList({
     this.Loto_id,
     this.Loto_Key,
+    this.Loto_lock_number,
+    this.user_id,
   });
 
   int? Loto_id;
   String? Loto_Key;
+  String? Loto_lock_number;
+  int? user_id;
 
   factory LotoList.fromJson(Map<String, dynamic> json) => LotoList(
         Loto_Key: json["Loto_Key"],
         Loto_id: json["Loto_id"],
+        Loto_lock_number: json["Loto_lock_number"],
+        user_id: json["user_id"],
       );
 
   Map<String, dynamic> toJson() => {
         "Loto_Key": Loto_Key,
         "Loto_id": Loto_id,
+        "Loto_lock_number": Loto_lock_number,
+        "user_id": user_id,
       };
 }
 

@@ -130,13 +130,9 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                     Expanded(
                                       child: Container(
                                         width: Get.width * 0.7,
-                                        // height: Get.height * 0.2,
+                                        height: Get.height * 0.2,
                                         margin: EdgeInsets.symmetric(
                                             horizontal: 50, vertical: 20),
-                                        // decoration: BoxDecoration(
-                                        //   border:
-                                        //       Border.all(color: Colors.black),
-                                        // ),
                                         child: DataTable2(
                                           border: TableBorder.all(
                                             color: Colors.black,

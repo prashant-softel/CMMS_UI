@@ -3,6 +3,7 @@ import 'package:cmms/app/home/home_controller.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/pm_task_view/pm_task_view_controller.dart';
+import 'package:cmms/app/pm_task_view/view/tbt_dialog.dart';
 import 'package:cmms/app/theme/dimens.dart';
 import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/app/widgets/assign_to_pm_task_dialog.dart';
@@ -995,7 +996,17 @@ class PreventiveMaintenanceTaskViewContentWeb
                               backgroundColor: ColorValues.linktopermitColor,
                               text: "Start",
                               onPressed: () {
-                                controller.setPmTask();
+                                controller.pmtaskViewModel.value
+                                            ?.ptw_tbt_done ==
+                                        1
+                                    ? controller.setPmTask()
+                                    : Get.dialog<void>(TbtDonePMTaskDialog(
+                                        ptw_id: controller.pmtaskViewModel.value
+                                                ?.permit_id ??
+                                            0,
+                                        id: controller
+                                                .pmtaskViewModel.value?.id ??
+                                            0));
                               },
                             ),
                           )
