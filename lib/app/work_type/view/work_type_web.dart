@@ -61,10 +61,10 @@ class WorkTypeWeb extends GetView<WorkTypeController> {
                     ),
                     InkWell(
                       onTap: () {
-                        Get.offNamed(Routes.masterDashboard);
+                        Get.offNamed(Routes.breakdown);
                       },
                       child: Text(
-                        " / MASTERS",
+                        " / BREAKDOWN MAINTENANCE",
                         style: Styles.greyLight14,
                       ),
                     ),

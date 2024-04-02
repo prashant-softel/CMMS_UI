@@ -3,6 +3,7 @@ import 'package:cmms/app/app.dart';
 import 'package:cmms/app/breakdown_maintenance/breakdown_maintenance_controller.dart';
 import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/home/widgets/mobile_drawer.dart';
+import 'package:cmms/app/onHover.dart';
 import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -342,6 +343,65 @@ class BreakdownMaintenanceScreen
                                               controller.goToJobSOPList();
                                             })
                                         : Dimens.box0
+                                  ],
+                                ),
+                                GridView.count(
+                                  shrinkWrap: true,
+                                  primary: false,
+                                  padding: Dimens.edgeInsets15,
+                                  crossAxisSpacing: 70,
+                                  mainAxisSpacing: 6,
+                                  crossAxisCount:
+                                      Responsive.isMobile(context) ? 2 : 5,
+                                  childAspectRatio: Responsive.isMobile(context)
+                                      ? (itemWidth / itemHeight)
+                                      : 5,
+                                  children: <Widget>[
+                                    OnHover(builder: (((isHovered) {
+                                      return
+                                          //  varUserAccessModel.value.access_list!
+                                          //             .where((e) =>
+                                          //                 e.feature_id == 5 && e.add == 0)
+                                          //             .length >
+                                          //         0
+                                          //     ?
+                                          createContentTile(
+                                              title: "Work Type",
+                                              onTap: () {
+                                                controller.goToWorkTypeList();
+                                              });
+                                    }))),
+                                    OnHover(builder: (((isHovered) {
+                                      return
+                                          //  varUserAccessModel.value.access_list!
+                                          //             .where((e) =>
+                                          //                 e.feature_id == 5 && e.add == 0)
+                                          //             .length >
+                                          //         0
+                                          //     ?
+                                          createContentTile(
+                                              title: "Work Tool Type",
+                                              onTap: () {
+                                                controller.goToToolTypeList();
+                                              });
+
+                                      // : Dimens.box0;
+                                    }))),
+                                    // OnHover(builder: (((isHovered) {
+                                    //   return
+                                    //       // varUserAccessModel.value.access_list!
+                                    //       //             .where((e) =>
+                                    //       //                 e.feature_id == 5 && e.add == 0)
+                                    //       //             .length >
+                                    //       //         0
+                                    //       //     ?
+                                    //       createContentTile(
+                                    //           title: "Body Injured",
+                                    //           onTap: () {
+                                    // controller.goToBodyinjured();
+                                    //           });
+                                    //   // : Dimens.box0;
+                                    // }))),
                                   ],
                                 ),
                               ]),

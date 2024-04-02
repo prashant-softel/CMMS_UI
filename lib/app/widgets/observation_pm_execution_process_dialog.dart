@@ -371,7 +371,7 @@ class ObservationPmExecutionViewDialog extends GetView {
                                                                               ))
                                                                           : (mapData['key'] == "type" && mapData['inpute_type'] == "0")
                                                                               ? Text('Text')
-                                                                              : (mapData['key'] == "job_created" && mapData['cp_ok_value'] == "0" && mapData['job_value'] == "0")
+                                                                              : (mapData['key'] == "job_created" && mapData['cp_ok_value'] == "0" && mapData['job_value'] == "0" || mapData['key'] == "job_created" && mapData['cp_ok_value'] == "0" && mapData['job_value'] == "1")
                                                                                   ?
                                                                                   // Obx(() {
                                                                                   //     return
@@ -384,7 +384,7 @@ class ObservationPmExecutionViewDialog extends GetView {
                                                                                       // Update the reactive variable
                                                                                       //  });
                                                                                     })
-                                                                                  : mapData['job_value'] != 0 || mapData['job_value'] != 1
+                                                                                  : mapData['job_value'] != "1"
                                                                                       ? Text('JOB${mapData['job_value']}')
                                                                                       : Dimens.box0,
                                               // : Text(mapData['value'] ?? ''),

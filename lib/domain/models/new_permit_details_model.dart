@@ -58,6 +58,7 @@ class NewPermitDetailModel {
 
   List<ListAssociatedJob?>? lstAssociatedJobs;
   List<ListAssociatedPm?>? lstAssociatedPM;
+  List<int?>? category_ids;
 
   ExtendDetails? extendDetails;
   CancelDetails? cancelDetails;
@@ -70,10 +71,10 @@ class NewPermitDetailModel {
   // int? user_id;
   // bool? is_isolation_required;
   // List<int?>? block_ids;
-  // List<int?>? category_ids;
   // List<int?>? isolated_category_ids;
 
   NewPermitDetailModel({
+    this.category_ids,
     this.isExpired,
     this.insertedId,
     this.ptwStatus,
@@ -189,6 +190,9 @@ class NewPermitDetailModel {
         employee_list: json["employee_list"] != null
             ? List<ListEmployees>.from(
                 json["employee_list"].map((x) => ListEmployees.fromJson(x)))
+            : [],
+        category_ids: json["category_ids"] != null
+            ? List<int>.from(json["category_ids"])
             : [],
         lstIsolation: json["lstIsolation"] != null
             ? List<ListIsolation>.from(
@@ -309,7 +313,7 @@ class LotoLists {
   String? equipment_cat;
   String? loto_Key;
   String? employee_name;
-  int? loto_lock_number;
+  String? loto_lock_number;
 
   factory LotoLists.fromJson(Map<String, dynamic> json) => LotoLists(
       equipment_name: json["equipment_name"],

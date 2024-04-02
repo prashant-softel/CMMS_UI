@@ -635,7 +635,9 @@ class NewPermitController extends GetxController {
       if (selectedPermitTypeId != 0) {
         getSafetyMeasureList();
       }
-
+      selectedEquipmentCategoryIdList.assignAll(
+        (newPermitDetailsModel.value?.category_ids ?? []) as Iterable<int>,
+      );
       selectedJobType.value = newPermitDetailsModel.value?.job_type_name ?? "";
       selectedSopPermit.value =
           newPermitDetailsModel.value?.sop_type_name ?? '';
@@ -1245,9 +1247,17 @@ class NewPermitController extends GetxController {
 
       late List<LotoList> loto_map_list = [];
 
-      filteredEquipmentNameList.forEach((e) {
-        loto_map_list.add(LotoList(Loto_id: e?.id, Loto_Key: e?.name));
-      });
+      filteredEquipmentNameList.forEach(
+        (e) {
+          loto_map_list.add(
+            LotoList(
+                Loto_id: e?.id,
+                Loto_Key: e?.name,
+                Loto_lock_number: e?.serialNumber,
+                user_id: userId),
+          );
+        },
+      );
 
       late List<Safetyquestionlist> safety_measure_map_list = [];
 
@@ -1296,7 +1306,7 @@ class NewPermitController extends GetxController {
           block_ids: selectedEmployeeNameIdList,
           category_ids: selectedEquipmentCategoryIdList,
           uploadfile_ids: fileIds,
-          is_isolation_required: isToggleOn.value,
+          is_loto_required: isToggleOn.value,
           isolated_category_ids: selectedEquipmentIsolationIdList,
           Loto_list: loto_map_list,
           lotoOtherDetails: [],
@@ -1352,9 +1362,17 @@ class NewPermitController extends GetxController {
 
       late List<LotoList> loto_map_list = [];
 
-      filteredEquipmentNameList.forEach((e) {
-        loto_map_list.add(LotoList(Loto_id: e?.id, Loto_Key: e?.name));
-      });
+      filteredEquipmentNameList.forEach(
+        (e) {
+          loto_map_list.add(
+            LotoList(
+                Loto_id: e?.id,
+                Loto_Key: e?.name,
+                Loto_lock_number: e?.serialNumber,
+                user_id: userId),
+          );
+        },
+      );
 
       late List<Safetyquestionlist> safety_measure_map_list = [];
 
@@ -1404,7 +1422,7 @@ class NewPermitController extends GetxController {
           longitude: 0,
           block_ids: selectedEmployeeNameIdList,
           category_ids: selectedEquipmentCategoryIdList,
-          is_isolation_required: isToggleOn.value,
+          is_loto_required: isToggleOn.value,
           isolated_category_ids: selectedEquipmentIsolationIdList,
           Loto_list: loto_map_list,
           employee_list: employee_map_list,
@@ -1469,9 +1487,18 @@ class NewPermitController extends GetxController {
 
       late List<LotoList> loto_map_list = [];
 
-      filteredEquipmentNameList.forEach((e) {
-        loto_map_list.add(LotoList(Loto_id: e?.id, Loto_Key: e?.name));
-      });
+      filteredEquipmentNameList.forEach(
+        (e) {
+          loto_map_list.add(
+            LotoList(
+              Loto_id: e?.id,
+              Loto_Key: e?.name,
+              Loto_lock_number: e?.serialNumber,
+              user_id: userId,
+            ),
+          );
+        },
+      );
       print("loto_map_list: ${loto_map_list}");
 
       late List<Safetyquestionlist> safety_measure_map_list = [];
@@ -1489,6 +1516,7 @@ class NewPermitController extends GetxController {
         lotoId: selectedEquipmentCategoryIdList.first,
         permitTypeId: selectedPermitTypeId,
         resubmit: false,
+
         ///Permit Type Id
         start_datetime: startDateTimeCtrlrBuffer,
         end_datetime: validTillTimeCtrlrBuffer,
@@ -1504,7 +1532,7 @@ class NewPermitController extends GetxController {
         longitude: 0,
         block_ids: selectedEmployeeNameIdList,
         category_ids: selectedEquipmentCategoryIdList,
-        is_isolation_required: isToggleOn.value,
+        is_loto_required: isToggleOn.value,
         isolated_category_ids: selectedEquipmentIsolationIdList,
         Loto_list: loto_map_list,
         lotoOtherDetails: [],
@@ -1611,9 +1639,18 @@ class NewPermitController extends GetxController {
 
       late List<LotoList> loto_map_list = [];
 
-      filteredEquipmentNameList.forEach((e) {
-        loto_map_list.add(LotoList(Loto_id: e?.id, Loto_Key: e?.name));
-      });
+      filteredEquipmentNameList.forEach(
+        (e) {
+          loto_map_list.add(
+            LotoList(
+              Loto_id: e?.id,
+              Loto_Key: e?.name,
+              Loto_lock_number: e?.serialNumber,
+              user_id: userId,
+            ),
+          );
+        },
+      );
 
       late List<Safetyquestionlist> safety_measure_map_list = [];
 
@@ -1644,7 +1681,7 @@ class NewPermitController extends GetxController {
           block_ids: selectedEmployeeNameIdList,
           category_ids: selectedEquipmentCategoryIdList,
           uploadfile_ids: fileIds,
-          is_isolation_required: isToggleOn.value,
+          is_loto_required: isToggleOn.value,
           isolated_category_ids: selectedEquipmentIsolationIdList,
           Loto_list: loto_map_list,
           employee_list: employee_map_list,
@@ -1692,9 +1729,18 @@ class NewPermitController extends GetxController {
 
       late List<LotoList> loto_map_list = [];
 
-      filteredEquipmentNameList.forEach((e) {
-        loto_map_list.add(LotoList(Loto_id: e?.id, Loto_Key: e?.name));
-      });
+      filteredEquipmentNameList.forEach(
+        (e) {
+          loto_map_list.add(
+            LotoList(
+              Loto_id: e?.id,
+              Loto_Key: e?.name,
+              Loto_lock_number: e?.serialNumber,
+              user_id: userId,
+            ),
+          );
+        },
+      );
 
       late List<Safetyquestionlist> safety_measure_map_list = [];
 
@@ -1725,7 +1771,7 @@ class NewPermitController extends GetxController {
           longitude: 0,
           block_ids: selectedEmployeeNameIdList,
           category_ids: selectedEquipmentCategoryIdList,
-          is_isolation_required: isToggleOn.value,
+          is_loto_required: isToggleOn.value,
           isolated_category_ids: selectedEquipmentIsolationIdList,
           Loto_list: loto_map_list,
           employee_list: employee_map_list,

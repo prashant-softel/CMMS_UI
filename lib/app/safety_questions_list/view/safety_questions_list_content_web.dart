@@ -832,45 +832,158 @@ class SafetyQuestionsListContentWeb
                             ),
                             Row(
                               children: [
-                                // Container(
-                                //   height: 45,
-                                //   margin: EdgeInsets.only(left: 10),
-                                //   child: CustomElevatedButton(
-                                //       backgroundColor: ColorValues.appLightBlueColor,
-                                //       onPressed: () {
-                                //         FlutterClipboard.copy(controller
-                                //                 // .preventiveCheckList![0]
-                                //                 .toString())
-                                //             .then((value) {
-                                //           print("copy data");
-                                //         });
-                                //       },
-                                //       text: 'Copy'),
-                                // ),
-                                // Container(
-                                //   height: 45,
-                                //   margin: EdgeInsets.only(left: 10),
-                                //   child: CustomElevatedButton(backgroundColor: ColorValues.appLightBlueColor, onPressed: () {}, text: 'Excel'),
-                                // ),
-                                // Container(
-                                //   height: 45,
-                                //   margin: EdgeInsets.only(left: 10),
-                                //   child: CustomElevatedButton(backgroundColor: ColorValues.appLightBlueColor, onPressed: () {}, text: 'PDF'),
-                                // ),
-                                // Container(
-                                //   height: 45,
-                                //   margin: EdgeInsets.only(left: 10),
-                                //   child: CustomElevatedButton(
-                                //     backgroundColor: ColorValues.appLightBlueColor,
-                                //     onPressed: () {},
-                                //     text: 'columnVisibility'.tr,
+                                // PopupMenuButton<String>(
+                                //   tooltip: "",
+                                //   elevation: 25.0,
+                                //   child: Container(
+                                //     height: 35,
+                                //     margin: EdgeInsets.only(left: 10),
+                                //     padding: EdgeInsets.only(
+                                //         top: 4,
+                                //         bottom: 4,
+                                //         right: 8,
+                                //         left: 8),
+                                //     decoration: BoxDecoration(
+                                //         color: ColorValues
+                                //             .appLightBlueColor,
+                                //         borderRadius:
+                                //             BorderRadius.circular(5),
+                                //         boxShadow: [
+                                //           BoxShadow(
+                                //             color: Colors.black26,
+                                //             offset:
+                                //                 const Offset(4.0, 2.0),
+                                //             blurRadius: 5.0,
+                                //             spreadRadius: 1.0,
+                                //           ),
+                                //         ]),
+                                //     child: Text(
+                                //       'Column Visibility',
+                                //       style: TextStyle(
+                                //         color: Colors.white,
+                                //         fontSize: 16,
+                                //         fontWeight: FontWeight.w400,
+                                //       ),
+                                //     ),
                                 //   ),
-                                // )
+                                //   itemBuilder: (BuildContext context) =>
+                                //       <PopupMenuEntry<String>>[]
+                                //         ..addAll(controller
+                                //             .columnVisibility
+                                //             .value
+                                //             .entries
+                                //             .map((e) {
+                                //           return PopupMenuItem<String>(
+                                //               child:
+                                //                   ValueListenableBuilder(
+                                //                       valueListenable:
+                                //                           controller
+                                //                               .columnVisibility,
+                                //                       builder: (context,
+                                //                           value,
+                                //                           child) {
+                                //                         return Row(
+                                //                           children: [
+                                //                             Checkbox(
+                                //                               value: value[
+                                //                                   e.key],
+                                //                               onChanged:
+                                //                                   (newValue) {
+                                //                                 controller.setColumnVisibility(
+                                //                                     e.key,
+                                //                                     newValue!);
+                                //                               },
+                                //                             ),
+                                //                             Text(e.key),
+                                //                           ],
+                                //                         );
+                                //                       }));
+                                //         })),
+                                //   onSelected: (String value) {
+                                //     // Handle column selection
+                                //   },
+                                // ),
+                                // // Container(
+                                // //   height: 35,
+                                // //   margin: EdgeInsets.only(left: 10),
+                                // //   child: CustomElevatedButton(
+                                // //     backgroundColor:
+                                // //         ColorValues.appLightBlueColor,
+                                // //     onPressed: () {},
+                                // //     text: 'Column Visibility',
+                                // //   ),
+                                // // ),
+                                // // Container(
+                                // //   height: 35,
+                                // //   margin: EdgeInsets.only(left: 10),
+                                // //   child: CustomElevatedButton(
+                                // //       backgroundColor:
+                                // //           ColorValues.appLightBlueColor,
+                                // //       onPressed: () {},
+                                // //       text: 'Copy'),
+                                // // ),
+                                // Container(
+                                //   decoration: BoxDecoration(boxShadow: [
+                                //     BoxShadow(
+                                //       color: Colors.black26,
+                                //       offset: const Offset(2.0, 1.0),
+                                //       blurRadius: 5.0,
+                                //       spreadRadius: 1.0,
+                                //     )
+                                //   ]),
+                                //   height: 35,
+                                //   margin: EdgeInsets.only(left: 10),
+                                //   child: CustomElevatedButton(
+                                //       backgroundColor:
+                                //           ColorValues.appLightBlueColor,
+                                //       onPressed: () {
+                                //         controller.export();
+                                //       },
+                                //       text: 'Excel'),
+                                // ),
+                                // Container(
+                                //   height: 35,
+                                //   margin: EdgeInsets.only(left: 10),
+                                //   child: CustomElevatedButton(
+                                //       backgroundColor:
+                                //           ColorValues.appLightBlueColor,
+                                //       onPressed: () {},
+                                //       text: 'PDF'),
+                                // ),
+                                Spacer(),
+                                Container(
+                                  width: 300,
+                                  height: 40,
+                                  margin: Dimens.edgeInsets0_0_16_0,
+                                  child: TextField(
+                                    style: TextStyle(
+                                        fontSize: 16.0,
+                                        height: 1.0,
+                                        color: Colors.black),
+                                    onChanged: (value) =>
+                                        controller.search(value),
+                                    decoration: InputDecoration(
+                                      enabledBorder: const OutlineInputBorder(
+                                        borderSide: const BorderSide(
+                                          color: Colors.grey,
+                                          width: 0.0,
+                                        ),
+                                      ),
+                                      focusedBorder: const OutlineInputBorder(
+                                        borderSide: const BorderSide(
+                                          color: Colors.grey,
+                                          width: 0.0,
+                                        ),
+                                      ),
+                                      contentPadding: Dimens.edgeInsets05_10,
+                                      hintText: 'search'.tr,
+                                      hintStyle: Styles.grey16,
+                                    ),
+                                  ),
+                                ),
                               ],
                             ),
-                            // SizedBox(
-                            //   height: 20,
-                            // ),
+                            Dimens.boxHeight10,
                             controller.safetyMeasureList.isEmpty
                                 ? Expanded(
                                     child: DataTable2(
@@ -884,6 +997,15 @@ class SafetyQuestionsListContentWeb
                                                 fontWeight: FontWeight.bold),
                                           ),
                                           size: ColumnSize.S,
+                                        ),
+                                        DataColumn2(
+                                          label: Text(
+                                            "Permit Type",
+                                            style: TextStyle(
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                          size: ColumnSize.L,
                                         ),
                                         DataColumn2(
                                           label: Text(
@@ -931,6 +1053,7 @@ class SafetyQuestionsListContentWeb
                                             DataCell(Text('')),
                                             DataCell(Text('')),
                                             DataCell(Text('')),
+                                            DataCell(Text('')),
                                           ]);
                                         },
                                       ),
@@ -953,6 +1076,15 @@ class SafetyQuestionsListContentWeb
                                                 fontSize: 15,
                                                 fontWeight: FontWeight.bold),
                                           ),
+                                        ),
+                                        DataColumn2(
+                                          label: Text(
+                                            "Permit Type",
+                                            style: TextStyle(
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                          size: ColumnSize.L,
                                         ),
                                         DataColumn2(
                                           label: Text(
@@ -1000,6 +1132,10 @@ class SafetyQuestionsListContentWeb
                                           return DataRow(cells: [
                                             DataCell(
                                                 Text((index + 1).toString())),
+                                            DataCell(Text(controller
+                                                .safetyMeasureList[index]
+                                                .permitType
+                                                .toString())),
                                             DataCell(Text(controller
                                                 .safetyMeasureList[index].name
                                                 .toString())),
