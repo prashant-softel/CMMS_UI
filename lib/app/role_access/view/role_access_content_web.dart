@@ -230,7 +230,7 @@ class RoleAccessContentWeb extends GetView<RoleAccessController> {
                                           rows: controller.accesslevel
                                               .map((getAccesslevelDetails) =>
                                                   TableViewRow(
-                                                      height: 90,
+                                                      height: 35,
                                                       cells: [
                                                         TableViewCell(
                                                           child: Obx(() {
