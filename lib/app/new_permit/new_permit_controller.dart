@@ -657,8 +657,6 @@ class NewPermitController extends GetxController {
       int num = newPermitDetailsModel.value!.is_loto_required!;
       num == 1 ? isToggleOn.value = true : isToggleOn.value = false;
 
-      
-
       // print('EmployeeList:${listEmployee}');
     }
   }
