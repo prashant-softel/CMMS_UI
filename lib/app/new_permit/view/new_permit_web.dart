@@ -705,80 +705,92 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                                 SizedBox(
                                                   width: 5,
                                                 ),
-                                                // controller.permitId
-                                                //             .value >
-                                                //         0
-                                                //     ? SizedBox(
-                                                //         width:
-                                                //             MediaQuery.of(context).size.width /
-                                                //                 5,
-                                                //         child:
-                                                //             CustomMultiSelectDialogField(
-                                                //           buttonText:
-                                                //               'Select Equipment Isolation',
-                                                //           title:
-                                                //               'Equipment Isolation EDit',
-                                                //           initialValue: (controller.selectedEditEquipemntIsolationIdList.isNotEmpty)
-                                                //               ? controller.selectedEditEquipemntIsolationIdList
-                                                //               : [],
-                                                //           items: controller
-                                                //               .equipmentIsolationList
-                                                //               .map(
-                                                //                 (equipmentIsolation) => MultiSelectItem(
-                                                //                   equipmentIsolation?.id,
-                                                //                   equipmentIsolation?.name ?? '',
-                                                //                 ),
-                                                //               )
-                                                //               .toList(),
-                                                //           onConfirm:
-                                                //               (selectedOptionsList) => {
-                                                //             controller.equipmentIsolationSelected(selectedOptionsList),
-                                                //             print('Equipment Edit Isolation list5: ${controller.equipmentIsolationList}')
-                                                //           },
-                                                //         ),
-                                                //       )
-                                                //     :
-                                                SizedBox(
-                                                  width: MediaQuery.of(context)
-                                                          .size
-                                                          .width /
-                                                      5,
-                                                  child:
-                                                      CustomMultiSelectDialogField(
-                                                    buttonText:
-                                                        'Select Equipment Isolation',
-                                                    title:
-                                                        'Equipment Isolation',
-                                                    initialValue: (controller
-                                                            .selectedEquipmentIsolationIdList
-                                                            .isNotEmpty)
-                                                        ? controller
-                                                            .selectedEquipmentIsolationIdList
-                                                        : [],
-                                                    items: controller
-                                                        .equipmentIsolationList
-                                                        .map(
-                                                          (equipmentIsolation) =>
-                                                              MultiSelectItem(
-                                                            equipmentIsolation
-                                                                ?.id,
-                                                            equipmentIsolation
-                                                                    ?.name ??
-                                                                '',
-                                                          ),
-                                                        )
-                                                        .toList(),
-                                                    onConfirm:
-                                                        (selectedOptionsList) =>
-                                                            {
-                                                      controller
-                                                          .equipmentIsolationSelected(
-                                                              selectedOptionsList),
-                                                      print(
-                                                          'Equipment Isolation list5: ${controller.equipmentIsolationList}')
-                                                    },
-                                                  ),
-                                                ),
+                                                controller.permitId.value > 0
+                                                    ? SizedBox(
+                                                        width: MediaQuery.of(
+                                                                    context)
+                                                                .size
+                                                                .width /
+                                                            5,
+                                                        height: 110,
+                                                        child:
+                                                            CustomMultiSelectDialogField(
+                                                          buttonText:
+                                                              'Select Equipment Isolation',
+                                                          title:
+                                                              'Equipment Isolation Edit',
+                                                          initialValue: (controller
+                                                                  .selectedEditEquipemntIsolationIdList
+                                                                  .isNotEmpty)
+                                                              ? controller
+                                                                  .selectedEditEquipemntIsolationIdList
+                                                              : [],
+                                                          items: controller
+                                                              .equipmentIsolationList
+                                                              .map(
+                                                                (equipmentIsolation) =>
+                                                                    MultiSelectItem(
+                                                                  equipmentIsolation
+                                                                      ?.id,
+                                                                  equipmentIsolation
+                                                                          ?.name ??
+                                                                      '',
+                                                                ),
+                                                              )
+                                                              .toList(),
+                                                          onConfirm:
+                                                              (selectedOptionsList) =>
+                                                                  {
+                                                            controller
+                                                                .equipmentIsolationSelected(
+                                                                    selectedOptionsList),
+                                                            print(
+                                                                'Equipment Edit Isolation list5: ${controller.equipmentIsolationList}')
+                                                          },
+                                                        ),
+                                                      )
+                                                    : SizedBox(
+                                                        width: MediaQuery.of(
+                                                                    context)
+                                                                .size
+                                                                .width /
+                                                            5,
+                                                        child:
+                                                            CustomMultiSelectDialogField(
+                                                          buttonText:
+                                                              'Select Equipment Isolation',
+                                                          title:
+                                                              'Equipment Isolation',
+                                                          initialValue: (controller
+                                                                  .selectedEquipmentIsolationIdList
+                                                                  .isNotEmpty)
+                                                              ? controller
+                                                                  .selectedEquipmentIsolationIdList
+                                                              : [],
+                                                          items: controller
+                                                              .equipmentIsolationList
+                                                              .map(
+                                                                (equipmentIsolation) =>
+                                                                    MultiSelectItem(
+                                                                  equipmentIsolation
+                                                                      ?.id,
+                                                                  equipmentIsolation
+                                                                          ?.name ??
+                                                                      '',
+                                                                ),
+                                                              )
+                                                              .toList(),
+                                                          onConfirm:
+                                                              (selectedOptionsList) =>
+                                                                  {
+                                                            controller
+                                                                .equipmentIsolationSelected(
+                                                                    selectedOptionsList),
+                                                            print(
+                                                                'Equipment Isolation list5: ${controller.equipmentIsolationList}')
+                                                          },
+                                                        ),
+                                                      ),
                                               ],
                                             )
                                           : Center(

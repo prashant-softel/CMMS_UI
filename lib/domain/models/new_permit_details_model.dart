@@ -65,11 +65,11 @@ class NewPermitDetailModel {
   CloseDetails? closeDetails;
   String? physical_iso_remark;
   bool? is_TBT_Expire;
+  int? is_loto_required;
   // int? sop_type_id;
   // int? issuer_id;
   // int? approver_id;
   // int? user_id;
-  // bool? is_isolation_required;
   // List<int?>? block_ids;
   // List<int?>? isolated_category_ids;
 
@@ -128,6 +128,7 @@ class NewPermitDetailModel {
     this.is_TBT_Expire,
     this.physical_iso_remark,
     this.file_list,
+    this.is_loto_required,
   });
 
   factory NewPermitDetailModel.fromJson(Map<String, dynamic> json) =>
@@ -227,6 +228,7 @@ class NewPermitDetailModel {
         closeDetails: CloseDetails.fromJson(json['closeDetails']),
         physical_iso_remark: json['physical_iso_remark'],
         is_TBT_Expire: json['is_TBT_Expire'],
+        is_loto_required: json["is_loto_required"], 
       );
 
   Map<String, dynamic> toJson() => {
@@ -288,12 +290,12 @@ class NewPermitDetailModel {
         "closeDetails": closeDetails,
         "physical_iso_remark": physical_iso_remark,
         "is_TBT_Expire": is_TBT_Expire,
+        "is_loto_required": is_loto_required,
 
         // "approver_id": approver_id,
         // "issuer_id": issuer_id,
         // "sop_type_id": sop_type_id,
         // "user_id": user_id,
-        // "is_isolation_required": is_isolation_required,
         // "block_ids": List<dynamic>.from(block_ids!.map((x) => x)),
         // "isolated_category_ids": List<dynamic>.from(isolated_category_ids!.map((x) => x)),
         // "category_ids": List<dynamic>.from(category_ids!.map((x) => x)),

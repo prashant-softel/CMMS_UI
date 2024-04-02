@@ -654,6 +654,10 @@ class NewPermitController extends GetxController {
 
       workPermitRemarkTextCtrlr.text =
           newPermitDetailsModel.value?.physical_iso_remark ?? "";
+      int num = newPermitDetailsModel.value!.is_loto_required!;
+      num == 1 ? isToggleOn.value = true : isToggleOn.value = false;
+
+      
 
       // print('EmployeeList:${listEmployee}');
     }
@@ -779,7 +783,6 @@ class NewPermitController extends GetxController {
     for (var _selectedIsolationId in _selectedEquipmentIsolationIds) {
       selectedEquipmentIsolationIdList.add(_selectedIsolationId);
     }
-
     getInventoryEquipmentNameList();
   }
 
