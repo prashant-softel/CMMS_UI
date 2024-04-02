@@ -3160,7 +3160,7 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                             child: CustomElevatedButton(
                               backgroundColor: ColorValues.appYellowColor,
                               text: "Edit Permit",
-                              icon: Icons.close,
+                              icon: Icons.edit,
                               onPressed: () {
                                 controller.editNewPermit(
                                     permitId: controller
