@@ -998,95 +998,95 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                     : Center(
                                         child: Text('Nothing to show !!'),
                                       ),
-                                // controller.safetyMeasureList.isEmpty
-                                //     // ||  controller
-                                //     // .safetyList!
-                                //     // .isEmpty
-                                //     ? Dimens.box0
-                                //     : SizedBox(
-                                //         // height: ((controller
-                                //         //             .safetyMeasureList
-                                //         //             .length) *
-                                //         //         10) +
-                                //         //     200,
-                                //         width:
-                                //             MediaQuery.of(context).size.width /
-                                //                 1.3,
-                                //         child: Center(
-                                //           child: Column(
-                                //             children: [
-                                //               CustomAppBar(
-                                //                 title:
-                                //                     'Permit Type Checklist'.tr,
-                                //               ),
-                                //               Dimens.boxHeight10,
-                                //               // controller.permitId.value <=
-                                //               //         0
-                                //               controller.safetyMeasureList
-                                //                           .length >
-                                //                       0
-                                //                   ? Column(
-                                //                       // alignment: WrapAlignment.start,
-                                //                       // spacing: 100,
-                                //                       children: []..addAll(
-                                //                           controller
-                                //                               .safetyMeasureList
-                                //                               .map(
-                                //                             (element) => Column(
-                                //                               // mainAxisSize: MainAxisSize.min,
-                                //                               mainAxisAlignment:
-                                //                                   MainAxisAlignment
-                                //                                       .start,
-                                //                               crossAxisAlignment:
-                                //                                   CrossAxisAlignment
-                                //                                       .start,
-                                //                               children: [
-                                //                                 SizedBox(
-                                //                                   // width: 200,
-                                //                                   child: Row(
-                                //                                     children: [
-                                //                                       checkBoxMethod(
-                                //                                           1),
-                                //                                       Text(
-                                //                                           "${element.name}"),
-                                //                                     ],
-                                //                                   ),
-                                //                                 ),
-                                //                               ],
-                                //                             ),
-                                //                           ),
-                                //                         ),
-                                //                     )
-                                //                   : Dimens.box0,
-                                //               // controller.selectedPermitTypeIdForSafetyList != null
-                                //               // ?Column(
-                                //               //     // alignment: WrapAlignment.start,
-                                //               //     // spacing: 100,
-                                //               //     children: []..addAll(controller.safetyList!.map((element) =>
-                                //               //         Column(
-                                //               //           // mainAxisSize: MainAxisSize.min,
-                                //               //           mainAxisAlignment: MainAxisAlignment.start,
-                                //               //           crossAxisAlignment: CrossAxisAlignment.start,
-                                //               //           children: [
-                                //               //             SizedBox(
-                                //               //               // width: 200,
-                                //               //               child: Row(
-                                //               //                 children: [
-                                //               //                   checkBoxMethod(1),
+                                controller.safetyMeasureList.isEmpty
+                                    // ||  controller
+                                    // .safetyList!
+                                    // .isEmpty
+                                    ? Dimens.box0
+                                    : SizedBox(
+                                        // height: ((controller
+                                        //             .safetyMeasureList
+                                        //             .length) *
+                                        //         10) +
+                                        //     200,
+                                        width:
+                                            MediaQuery.of(context).size.width /
+                                                1.3,
+                                        child: Center(
+                                          child: Column(
+                                            children: [
+                                              CustomAppBar(
+                                                title:
+                                                    'Permit Type Checklist'.tr,
+                                              ),
+                                              Dimens.boxHeight10,
+                                              // controller.permitId.value <=
+                                              //         0
+                                              controller.safetyMeasureList
+                                                          .length >
+                                                      0
+                                                  ? Column(
+                                                      // alignment: WrapAlignment.start,
+                                                      // spacing: 100,
+                                                      children: []..addAll(
+                                                          controller
+                                                              .safetyMeasureList
+                                                              .map(
+                                                            (element) => Column(
+                                                              // mainAxisSize: MainAxisSize.min,
+                                                              mainAxisAlignment:
+                                                                  MainAxisAlignment
+                                                                      .start,
+                                                              crossAxisAlignment:
+                                                                  CrossAxisAlignment
+                                                                      .start,
+                                                              children: [
+                                                                SizedBox(
+                                                                  // width: 200,
+                                                                  child: Row(
+                                                                    children: [
+                                                                      checkBoxMethod(
+                                                                          1),
+                                                                      Text(
+                                                                          "${element.name}"),
+                                                                    ],
+                                                                  ),
+                                                                ),
+                                                              ],
+                                                            ),
+                                                          ),
+                                                        ),
+                                                    )
+                                                  : Dimens.box0,
+                                              // controller.selectedPermitTypeIdForSafetyList != null
+                                              // ?Column(
+                                              //     // alignment: WrapAlignment.start,
+                                              //     // spacing: 100,
+                                              //     children: []..addAll(controller.safetyList!.map((element) =>
+                                              //         Column(
+                                              //           // mainAxisSize: MainAxisSize.min,
+                                              //           mainAxisAlignment: MainAxisAlignment.start,
+                                              //           crossAxisAlignment: CrossAxisAlignment.start,
+                                              //           children: [
+                                              //             SizedBox(
+                                              //               // width: 200,
+                                              //               child: Row(
+                                              //                 children: [
+                                              //                   checkBoxMethod(1),
 
-                                //               //                   // Text("${j= j! + 1}. "),
-                                //               //                   Text("${element?.saftyQuestionName}")
-                                //               //                 ],
-                                //               //               ),
-                                //               //             )
-                                //               //           ],
-                                //               //         ))),
-                                //               //   ) : Dimens.box0
-                                //             ],
-                                //           ),
-                                //         ),
-                                //       ),
-                                // Dimens.boxHeight10
+                                              //                   // Text("${j= j! + 1}. "),
+                                              //                   Text("${element?.saftyQuestionName}")
+                                              //                 ],
+                                              //               ),
+                                              //             )
+                                              //           ],
+                                              //         ))),
+                                              //   ) : Dimens.box0
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                Dimens.boxHeight10
                               ],
                             ),
                           ),
