@@ -284,8 +284,10 @@ class _WarrantyCertificatesListContentWebState
                                   SizedBox(
                                     height: 20,
                                   ),
-                                  controller.inventoryList.isEmpty
+                                  controller.inventoryList.isEmpty == true && controller.isLoading == false
                                       ? Center(child: Text('No data'))
+                                      : controller.isLoading.value == true
+                                      ? Center(child: Text("Data Loading......"))
                                       : Expanded(
                                           child: ValueListenableBuilder(
                                               valueListenable:

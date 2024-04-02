@@ -306,6 +306,7 @@ class WarrantyClaimController extends GetxController {
 
   ///
 // int? wc_id = 0;
+  Rx<bool> isLoading = true.obs;
   @override
   void onInit() async {
     this.filterText = {
@@ -324,7 +325,7 @@ class WarrantyClaimController extends GetxController {
       facilityId = event;
       Future.delayed(Duration(seconds: 1), () {
         getWarrantyClaimList(
-            facilityId, formattedTodate, formattedFromdate, true);
+            facilityId, formattedTodate, formattedFromdate);
       });
     });
 
@@ -607,12 +608,12 @@ class WarrantyClaimController extends GetxController {
     // update(['warranty_claim_list']);
   }
 
-  Future<void> getWarrantyClaimList(int facilityId, dynamic startDate,
-      dynamic endDate, bool isLoading) async {
+  Future<void> getWarrantyClaimList(
+      int facilityId, dynamic startDate, dynamic endDate) async {
     // supplierNameList.value = <WarrantyClaimModel>[];
 
     final list = await warrantyClaimPresenter.getWarrantyClaimList(
-      isLoading: isLoading,
+      isLoading: isLoading.value,
       categoryIds: categoryIds,
       facilityId: facilityId,
       start_date: startDate,
@@ -627,6 +628,7 @@ class WarrantyClaimController extends GetxController {
     }
     warrantyClaimList.value = list;
     filteredData.value = warrantyClaimList.value;
+    isLoading.value = false;
     paginationWarrantyController = PaginationController(
       rowCount: warrantyClaimList.length,
       rowsPerPage: 10,
@@ -1142,6 +1144,6 @@ class WarrantyClaimController extends GetxController {
   }
 
   void getWarrantyClaimtListByDate() {
-    getWarrantyClaimList(facilityId, formattedFromdate, formattedTodate, true);
+    getWarrantyClaimList(facilityId, formattedFromdate, formattedTodate);
   }
 }

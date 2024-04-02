@@ -265,8 +265,10 @@ class _WarrantyClaimListWebState extends State<WarrantyClaimListWeb> {
                                   SizedBox(
                                     height: 20,
                                   ),
-                                  controller.warrantyClaimList.isEmpty
+                                  controller.warrantyClaimList.isEmpty == true && controller.isLoading == false
                                       ? Center(child: Text('No data'))
+                                      : controller.isLoading.value == true
+                                      ? Center(child: Text("Data Loading......"))
                                       : Expanded(
                                           child: ValueListenableBuilder(
                                               valueListenable:

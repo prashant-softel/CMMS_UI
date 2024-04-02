@@ -565,63 +565,10 @@ class TypeOfObsWeb extends GetView<TypeOfObsController> {
                               SizedBox(
                                 height: 20,
                               ),
-                              controller.moduleList!.isEmpty
-                                  ? Expanded(
-                                      child: DataTable2(
-                                        key: UniqueKey(),
-                                        dataRowHeight: 50,
-                                        columnSpacing: 10,
-                                        border: TableBorder.all(
-                                            color: Color.fromARGB(
-                                                255, 206, 229, 234)),
-                                        columns: [
-                                          DataColumn2(
-                                              fixedWidth: 100,
-                                              label: Text(
-                                                "Id",
-                                                style: TextStyle(
-                                                    fontSize: 15,
-                                                    fontWeight:
-                                                        FontWeight.bold),
-                                              )),
-                                          DataColumn2(
-                                              // fixedWidth: 700,
-                                              label: Text(
-                                            "Observation name",
-                                            style: TextStyle(
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.bold),
-                                          )),
-                                          DataColumn2(
-                                              // fixedWidth: 300,
-                                              label: Text(
-                                            "Description",
-                                            style: TextStyle(
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.bold),
-                                          )),
-                                          DataColumn2(
-                                              // fixedWidth: 100,
-                                              label: Text(
-                                            "Action",
-                                            style: TextStyle(
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.bold),
-                                          )),
-                                        ],
-                                        rows: List.generate(
-                                          controller.moduleList?.length ?? 0,
-                                          (index) {
-                                            return DataRow(cells: [
-                                              DataCell(Text('')),
-                                              DataCell(Text('')),
-                                              DataCell(Text('')),
-                                              DataCell(Text('')),
-                                            ]);
-                                          },
-                                        ),
-                                      ),
-                                    )
+                              controller.moduleList!.isEmpty == true && controller.isLoading == false
+                              ? Center(child: Text("No Data"))
+                              : controller.isLoading.value == true
+                              ? Center(child: Text("Data Loading......"))
                                   : Expanded(
                                       child: DataTable2(
                                         key: UniqueKey(),

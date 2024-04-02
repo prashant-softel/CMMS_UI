@@ -65,7 +65,7 @@ class DocumentManagerWeb extends GetView<DocumentManagerController> {
                 ],
               ),
             ),
-            Flexible(
+            Expanded(
               child: Container(
                 width: Get.width * 7,
                 margin: EdgeInsets.only(left: 10, top: 30),
@@ -442,10 +442,8 @@ class DocumentManagerWeb extends GetView<DocumentManagerController> {
                                                                               () {},
                                                                         )
                                                                       ])
-                                                                : Expanded(
-                                                                    child: Text(
-                                                                      value,
-                                                                    ),
+                                                                : Text(
+                                                                    value,
                                                                   ));
                                                   }).toList());
                                             }).toList(),

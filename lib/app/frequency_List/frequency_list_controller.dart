@@ -53,14 +53,15 @@ class FrequencyListController extends GetxController {
   int selectedfrequencyId = 0;
   final isSuccess = false.obs;
   StreamSubscription<int>? facilityIdStreamSubscription;
+  Rx<bool> isLoading = true.obs;
   @override
   void onInit() async {
-    getFrequencyList(true);
+    getFrequencyList();
 
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
       facilityId = event;
       Future.delayed(Duration(seconds: 2), () {
-        getFrequencyList(true);
+        getFrequencyList();
       });
     });
     nameFocus.addListener(() {
@@ -71,13 +72,14 @@ class FrequencyListController extends GetxController {
     super.onInit();
   }
 
-  Future<void> getFrequencyList(bool isLoading) async {
+  Future<void> getFrequencyList() async {
     frequencyList?.value = <FrequencyModel>[];
     final _moduleList =
-        await frequencyListPresenter.getFrequencyList(isLoading: isLoading);
+        await frequencyListPresenter.getFrequencyList(isLoading: isLoading.value);
 
     if (_moduleList != null) {
       frequencyList!.value = _moduleList.cast<FrequencyModel?>();
+      isLoading.value = false;
       paginationController = PaginationController(
         rowCount: frequencyList?.length ?? 0,
         rowsPerPage: 10,
@@ -93,6 +95,7 @@ class FrequencyListController extends GetxController {
       }
     }
   }
+
   cleardata() {
     freqNameCtrlr.text = '';
     manpowerCtrlr.text = '';
@@ -106,7 +109,7 @@ class FrequencyListController extends GetxController {
     // SpvId = 0;
 
     Future.delayed(Duration(seconds: 1), () {
-      getFrequencyList(true);
+      getFrequencyList();
     });
     Future.delayed(Duration(seconds: 5), () {
       isSuccess.value = false;
@@ -256,7 +259,7 @@ class FrequencyListController extends GetxController {
     selectedItem = null;
 
     Future.delayed(Duration(seconds: 1), () {
-      getFrequencyList(true);
+      getFrequencyList();
     });
     Future.delayed(Duration(seconds: 5), () {
       isSuccess.value = false;

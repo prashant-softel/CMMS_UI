@@ -77,6 +77,7 @@ class WarrantyCertificatesListController extends GetxController {
 
   ///
   // int? id = 0;
+  Rx<bool> isLoading = true.obs;
   @override
   void onInit() async {
     this.filterText = {
@@ -155,12 +156,13 @@ class WarrantyCertificatesListController extends GetxController {
   Future<void> getInventoryList(int facilityId) async {
     // eqipmentNameList.value = <InventoryModel>[];
     final _inventoryList = await inventoryListPresenter.inventoryList(
-        isLoading: true, facilityId: facilityId, categoryId: 2);
+        isLoading: isLoading.value, facilityId: facilityId, categoryId: 2);
     for (var inventory_list in _inventoryList) {
       inventoryList.add(inventory_list);
     }
     inventoryList.value = _inventoryList;
     filteredData.value = inventoryList;
+    isLoading.value = false;
     // print('equipment Name List:$inventoryList');
 
     paginationController = PaginationController(

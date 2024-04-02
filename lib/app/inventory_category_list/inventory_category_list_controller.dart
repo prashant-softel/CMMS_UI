@@ -78,6 +78,7 @@ class InventoryCategoryListController extends GetxController {
   int selectedfrequencyId = 0;
   final isSuccess = false.obs;
   StreamSubscription<int>? facilityIdStreamSubscription;
+  Rx<bool> isLoading = true.obs;
   @override
   void onInit() async {
     // getInventoryCategoryList();
@@ -86,7 +87,7 @@ class InventoryCategoryListController extends GetxController {
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
       facilityId = event;
       Future.delayed(Duration(seconds: 2), () {
-        getInventoryCategoryList(facilityId, type, true);
+        getInventoryCategoryList(facilityId, type);
       });
     });
     nameFocus.addListener(() {
@@ -123,17 +124,17 @@ class InventoryCategoryListController extends GetxController {
   //   }
   // }
 
-  Future<void> getInventoryCategoryList(
-      int facilityId, int type, bool isLoading) async {
+  Future<void> getInventoryCategoryList(int facilityId, int type) async {
     inventoryStatusList?.value = <InventoryCategoryModel2>[];
     filteredData?.value = <InventoryCategoryModel2>[];
 
     final _inventoryStatusList = await inventoryStatusListPresenter
-        .getInventoryCategoryList(isLoading: isLoading);
+        .getInventoryCategoryList(isLoading: isLoading.value);
 
     if (_inventoryStatusList != null) {
       inventoryStatusList!.value = _inventoryStatusList;
       filteredData?.value = inventoryStatusList!.value;
+      isLoading.value = false;
       paginationController = PaginationController(
         rowCount: inventoryStatusList?.length ?? 0,
         rowsPerPage: 10,
@@ -234,7 +235,7 @@ class InventoryCategoryListController extends GetxController {
       );
       return true;
     }
-    getInventoryCategoryList(facilityId, type, true);
+    getInventoryCategoryList(facilityId, type);
     return true;
   }
 
@@ -253,7 +254,7 @@ class InventoryCategoryListController extends GetxController {
     //
     // selectedfrequency.value = '';
     Future.delayed(Duration(seconds: 1), () {
-      getInventoryCategoryList(facilityId, type, true);
+      getInventoryCategoryList(facilityId, type);
     });
     Future.delayed(Duration(seconds: 5), () {
       isSuccess.value = false;
@@ -297,7 +298,7 @@ class InventoryCategoryListController extends GetxController {
                 onPressed: () {
                   deleteCkecklist(checklist_id).then((value) {
                     Get.back();
-                    getInventoryCategoryList(facilityId, type, true);
+                    getInventoryCategoryList(facilityId, type);
                   });
                 },
                 child: Text('YES'),
