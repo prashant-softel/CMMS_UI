@@ -13,7 +13,6 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
-
 class WarrantyTabWidget extends StatefulWidget {
   WarrantyTabWidget({
     Key? key,
@@ -52,15 +51,12 @@ class _WarrantyTabWidgetState extends State<WarrantyTabWidget> {
                               SizedBox(width: 10),
                               SizedBox(
                                 child: Container(
-                                decoration: BoxDecoration(
-                                                        
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(5),
-                                                      ),
-
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(5),
+                                  ),
                                   child: DropdownWebStock(
-                                    width: MediaQuery.of(context).size.width / 5,
+                                    width:
+                                        MediaQuery.of(context).size.width / 5,
                                     dropdownList: controller.warrantyNameList,
                                     isValueSelected:
                                         controller.isWarrentyNameSelected.value,
@@ -80,21 +76,19 @@ class _WarrantyTabWidgetState extends State<WarrantyTabWidget> {
                               SizedBox(width: 10),
                               SizedBox(
                                 child: Container(
-                                decoration: BoxDecoration(
-                                                        
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(5),
-                                                      ),
-
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(5),
+                                  ),
                                   child: DropdownWebStock(
-                                    width: MediaQuery.of(context).size.width / 5,
+                                    width:
+                                        MediaQuery.of(context).size.width / 5,
                                     dropdownList:
                                         controller.warrantyUsageTermNameList,
                                     isValueSelected: controller
                                         .iswarrantyUsageTermNameSelected.value,
                                     selectedValue: controller
-                                        .selectedwarrantyUsageTermListName.value,
+                                        .selectedwarrantyUsageTermListName
+                                        .value,
                                     onValueChanged: controller.onValueChanged,
                                   ),
                                 ),
@@ -107,11 +101,11 @@ class _WarrantyTabWidgetState extends State<WarrantyTabWidget> {
                               CustomRichText(title: "Description"),
                               SizedBox(width: 10),
                               GoodsOrderTextField(
-                                  textController:
-                                      controller.warrentyDescriptionCtrlr,
-                                      focusnode: controller.wdescFocus,
-                                      scroll: controller.wdescScroll,
-                                      ),
+                                textController:
+                                    controller.warrentyDescriptionCtrlr,
+                                focusnode: controller.wdescFocus,
+                                scroll: controller.wdescScroll,
+                              ),
                             ],
                           ),
                           Dimens.boxHeight10,
@@ -143,21 +137,18 @@ class _WarrantyTabWidgetState extends State<WarrantyTabWidget> {
                               SizedBox(width: 10),
                               SizedBox(
                                 child: Container(
-                                decoration: BoxDecoration(
-                                                        
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(5),
-                                                      ),
-
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(5),
+                                  ),
                                   child: DropdownWebStock(
-                                    width: MediaQuery.of(context).size.width / 5,
+                                    width:
+                                        MediaQuery.of(context).size.width / 5,
                                     dropdownList:
                                         controller.manufacturerModelNameList,
                                     isValueSelected: controller
                                         .iswarrantymanufacturerSelected.value,
-                                    selectedValue:
-                                        controller.selectedmanufacturerName.value,
+                                    selectedValue: controller
+                                        .selectedmanufacturerName.value,
                                     onValueChanged: controller.onValueChanged,
                                   ),
                                 ),

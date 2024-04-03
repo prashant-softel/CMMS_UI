@@ -372,14 +372,14 @@ class AddInventoryController extends GetxController {
     String _warrentyDescriptionCtrlr = warrentyDescriptionCtrlr.text.trim();
 
     LstWarrantyDetail lstWarrantyDetail = LstWarrantyDetail(
-        warrantyDescription: _warrentyDescriptionCtrlr,
+        // warranty_description: _warrentyDescriptionCtrlr,
         warrantyProviderId: selectedmanufacturerNameId,
         warrantyStatus: 1,
         warrantyType: selectedWarrentyNameId,
-        warrrantyTermType: selectedwarrantyUsageTermNameId,
+        warrranty_term_type: selectedwarrantyUsageTermNameId,
         // meterLimit: 1,
         // meterUnit: 1,
-        certificateNumber: int.tryParse(_certificateNoCtrlr),
+        certificate_number: int.tryParse(_certificateNoCtrlr),
         expiryDate: "2030-12-31",
         // startDate///  is missing
         warrantyDiscription: _warrentyDescriptionCtrlr);
@@ -390,6 +390,7 @@ class AddInventoryController extends GetxController {
             name: _assetsNameCtrlr,
             description: _discriptionCtrlr,
             assetdescription: _assesDiscriptionCtrlr,
+            warranty_description: _warrentyDescriptionCtrlr,
             typeId: selectedTypeNameId,
             statusId: selectedStatusNameId,
             facilityId: facilityId,
@@ -403,9 +404,11 @@ class AddInventoryController extends GetxController {
             serialNumber: _serialNoCtrlr,
             parentId: selectedEquipmentnameId,
             calibrationFrequency: selectedfrequencyId,
-            calibrationReminderDays: 10, //int.tryParse("2023-03-10"),
-            calibrationLastDate: "2023-01-10",
-            calibrationFirstDueDate: "2023-01-10",
+            calibrationReminderDays: int.tryParse(_calibrationRemainderInTc),
+            calibrationLastDate: _lastCalibrationDateTc
+            // calibrationFirstDueDate: "2023-01-10",
+            ,
+            warranty_type: selectedWarrentyNameId,
             calibrationFrequencyType: 2,
             acCapacity: 2000,
             dcCapacity: 5000,
@@ -501,18 +504,19 @@ class AddInventoryController extends GetxController {
     String _calibrationRemainderInTc = calibrationRemaingCtrlr.text.trim();
     String _lastCalibrationDateTc = lastCalibrationDateTc.text.trim();
     String _expireDateTc = expireDateTc.text.trim();
+    String _startDateTc = startDateTc.text.trim();
+
     String _warrentyDescriptionCtrlr = warrentyDescriptionCtrlr.text.trim();
 
     LstWarrantyDetail lstWarrantyDetail = LstWarrantyDetail(
-        warrantyDescription: _warrentyDescriptionCtrlr,
         warrantyProviderId: selectedmanufacturerNameId,
         warrantyStatus: 1,
         warrantyType: selectedWarrentyNameId,
-        warrrantyTermType: selectedwarrantyUsageTermNameId,
+        warrranty_term_type: selectedwarrantyUsageTermNameId,
         // meterLimit: 1,
         // meterUnit: 1,
-        certificateNumber: int.tryParse(_certificateNoCtrlr),
-        expiryDate: "2030-12-31",
+        certificate_number: int.tryParse(_certificateNoCtrlr),
+        expiryDate: _expireDateTc,
         // startDate///  is missing
         warrantyDiscription: _warrentyDescriptionCtrlr);
 
@@ -520,8 +524,9 @@ class AddInventoryController extends GetxController {
         AddInventoryRequestModel(
             id: 0,
             name: _assetsNameCtrlr,
-            moduleQuantity: int.tryParse(_moduleQuantityCtrlr),
+            moduleQuantity: int.tryParse(_moduleQuantityCtrlr) ?? 0,
             description: _discriptionCtrlr,
+            warranty_description: _warrentyDescriptionCtrlr,
             assetdescription: _assesDiscriptionCtrlr,
             typeId: selectedTypeNameId,
             statusId: selectedStatusNameId,
@@ -530,7 +535,7 @@ class AddInventoryController extends GetxController {
             manufacturerId: selectedmanufacturerNameId,
             blockId: selectedBlockListId,
             categoryId: selectedEquipmentCategoryNameId.value,
-            currency: selectedUnitCurrency.value,
+            currency: selectedUnitCurrencyId.toString(),
             cost: int.tryParse(_costCtrlr),
             model: _modelNoCtrlr,
             serialNumber: _serialNoCtrlr,
@@ -538,6 +543,10 @@ class AddInventoryController extends GetxController {
             calibrationFrequency: selectedfrequencyId,
             calibrationReminderDays: int.tryParse(_calibrationRemainderInTc),
             calibrationLastDate: _lastCalibrationDateTc,
+            start_date: _startDateTc,
+            expiry_date: _expireDateTc,
+            warranty_provider_id: selectedmanufacturerNameId,
+            warranty_type: selectedWarrentyNameId,
 
             //  calibrationFirstDueDate: _lastCalibrationDateTc,
             calibrationFrequencyType: 2,
