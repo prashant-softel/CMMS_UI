@@ -701,7 +701,8 @@ class _AddJobContentWebState extends State<AddJobContentWeb> {
                                             Row(
                                               children: [
                                                 CustomRichText(
-                                                    title: 'Work Type :'),
+                                                    title:
+                                                        'Error Description :'),
                                                 Dimens.boxWidth10,
                                                 Container(
                                                   decoration: BoxDecoration(
