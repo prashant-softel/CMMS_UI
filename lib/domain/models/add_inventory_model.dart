@@ -8,6 +8,7 @@ class AddInventoryRequestModel {
   int? blockId;
   int? parentId;
   int? categoryId;
+  int? warranty_type;
   int? acCapacity;
   int? dcCapacity;
   String? serialNumber;
@@ -18,7 +19,10 @@ class AddInventoryRequestModel {
   String? calibrationFirstDueDate;
   String? calibrationLastDate;
   int? customerId;
+  String? start_date;
+  String? expiry_date;
   int? ownerId;
+  int? warranty_provider_id;
   int? operatorId;
   int? manufacturerId;
   int? supplierId;
@@ -41,6 +45,7 @@ class AddInventoryRequestModel {
       this.blockId,
       this.parentId,
       this.categoryId,
+      this.warranty_type,
       this.acCapacity,
       this.dcCapacity,
       this.serialNumber,
@@ -55,6 +60,9 @@ class AddInventoryRequestModel {
       this.operatorId,
       this.manufacturerId,
       this.supplierId,
+      this.start_date,
+      this.expiry_date,
+      this.warranty_provider_id,
       this.model,
       this.stockCount,
       this.moduleQuantity,
@@ -66,21 +74,23 @@ class AddInventoryRequestModel {
 
   AddInventoryRequestModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-
     name = json['name'];
     description = json['description'];
     assetdescription = json['assetdescription'];
-
     typeId = json['typeId'];
     statusId = json['statusId'];
     facilityId = json['facilityId'];
     blockId = json['blockId'];
     parentId = json['parentId'];
     categoryId = json['categoryId'];
+    warranty_type = json['warranty_type'];
+
     acCapacity = json['acCapacity'];
     dcCapacity = json['dcCapacity'];
     serialNumber = json['serialNumber'];
     multiplier = json['multiplier'];
+    start_date = json['start_date'];
+    expiry_date = json['expiry_date'];
     calibrationFrequency = json['calibrationFrequency'];
     calibrationFrequencyType = json['calibrationFrequencyType'];
     calibrationReminderDays = json['calibrationReminderDays'];
@@ -88,6 +98,8 @@ class AddInventoryRequestModel {
     calibrationLastDate = json['calibrationLastDate'];
     customerId = json['customerId'];
     ownerId = json['ownerId'];
+    warranty_provider_id = json['warranty_provider_id'];
+
     operatorId = json['operatorId'];
     manufacturerId = json['manufacturerId'];
     supplierId = json['supplierId'];
@@ -117,7 +129,12 @@ class AddInventoryRequestModel {
     data['facilityId'] = this.facilityId;
     data['blockId'] = this.blockId;
     data['parentId'] = this.parentId;
+    data['start_date'] = this.start_date;
+    data['expiry_date'] = this.expiry_date;
+
     data['categoryId'] = this.categoryId;
+    data['warranty_type'] = this.warranty_type;
+
     data['acCapacity'] = this.acCapacity;
     data['dcCapacity'] = this.dcCapacity;
     data['serialNumber'] = this.serialNumber;
@@ -129,6 +146,8 @@ class AddInventoryRequestModel {
     data['calibrationLastDate'] = this.calibrationLastDate;
     data['customerId'] = this.customerId;
     data['ownerId'] = this.ownerId;
+    data['warranty_provider_id'] = this.warranty_provider_id;
+
     data['operatorId'] = this.operatorId;
     data['manufacturerId'] = this.manufacturerId;
     data['supplierId'] = this.supplierId;
@@ -149,36 +168,36 @@ class AddInventoryRequestModel {
 class LstWarrantyDetail {
   int? warrantyType;
   String? warrantyDescription;
-  int? warrrantyTermType;
+  int? warrranty_term_type;
   String? expiryDate;
   int? meterLimit;
   int? meterUnit;
   int? warrantyProviderId;
-  dynamic certificateNumber;
+  dynamic certificate_number;
   int? warrantyStatus;
   String? warrantyDiscription;
 
   LstWarrantyDetail(
       {this.warrantyType,
       this.warrantyDescription,
-      this.warrrantyTermType,
+      this.warrranty_term_type,
       this.expiryDate,
       this.meterLimit,
       this.meterUnit,
       this.warrantyProviderId,
-      this.certificateNumber,
+      this.certificate_number,
       this.warrantyStatus,
       this.warrantyDiscription});
 
   LstWarrantyDetail.fromJson(Map<String, dynamic> json) {
     warrantyType = json['warranty_type'];
     warrantyDescription = json['warranty_description'];
-    warrrantyTermType = json['warrranty_term_type'];
+    warrranty_term_type = json['warrranty_term_type'];
     expiryDate = json['expiry_date'];
     meterLimit = json['meter_limit'];
     meterUnit = json['meter_unit'];
     warrantyProviderId = json['warranty_provider_Id'];
-    certificateNumber = json['certificate_number'];
+    certificate_number = json['certificate_number'];
     warrantyStatus = json['warranty_status'];
     warrantyDiscription = json['warranty_description'];
   }
@@ -187,12 +206,12 @@ class LstWarrantyDetail {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['warranty_type'] = this.warrantyType;
     data['warranty_description'] = this.warrantyDescription;
-    data['warrranty_term_type'] = this.warrrantyTermType;
+    data['warrranty_term_type'] = this.warrranty_term_type;
     data['expiry_date'] = this.expiryDate;
     data['meter_limit'] = this.meterLimit;
     data['meter_unit'] = this.meterUnit;
     data['warranty_provider_Id'] = this.warrantyProviderId;
-    data['certificate_number'] = this.certificateNumber;
+    data['certificate_number'] = this.certificate_number;
     data['warranty_status'] = this.warrantyStatus;
     data['warranty_description'] = this.warrantyDiscription;
     return data;
