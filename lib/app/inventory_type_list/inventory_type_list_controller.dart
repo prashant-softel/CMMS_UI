@@ -80,9 +80,10 @@ class InventoryTypeListController extends GetxController {
   int selectedfrequencyId = 0;
   final isSuccess = false.obs;
   StreamSubscription<int>? facilityIdStreamSubscription;
+  Rx<bool> isLoading = true.obs;
   @override
   void onInit() async {
-    getInventoryTypeList(facilityId, type, true);
+    getInventoryTypeList(facilityId, type);
 
     // facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
     //   facilityId = event;
@@ -128,18 +129,18 @@ class InventoryTypeListController extends GetxController {
     isContainerVisible.toggle();
   }
 
-  Future<void> getInventoryTypeList(
-      int facilityId, int type, bool isLoading) async {
+  Future<void> getInventoryTypeList(int facilityId, int type) async {
     inventoryTypeList?.value = <InventoryTypeListModel>[];
     filteredData.value = <InventoryTypeListModel>[];
 
     final _inventoryTypeList =
         await inventoryTypeListPresenter.getInventoryTypeList(
-            facilityId: facilityId, type: type, isLoading: isLoading);
+            facilityId: facilityId, type: type, isLoading: isLoading.value);
 
     if (_inventoryTypeList != null) {
       inventoryTypeList!.value = _inventoryTypeList;
       filteredData.value = inventoryTypeList!.value;
+      isLoading.value = false;
       paginationController = PaginationController(
         rowCount: inventoryTypeList?.length ?? 0,
         rowsPerPage: 10,
@@ -236,7 +237,7 @@ class InventoryTypeListController extends GetxController {
       );
       return true;
     }
-    getInventoryTypeList(facilityId, type, true);
+    getInventoryTypeList(facilityId, type);
     return true;
   }
 
@@ -251,7 +252,7 @@ class InventoryTypeListController extends GetxController {
     descriptionCtrlr.text = '';
     selectedItem = null;
     Future.delayed(Duration(seconds: 1), () {
-      getInventoryTypeList(facilityId, type, true);
+      getInventoryTypeList(facilityId, type);
     });
     Future.delayed(Duration(seconds: 5), () {
       isSuccess.value = false;
@@ -295,7 +296,7 @@ class InventoryTypeListController extends GetxController {
                 onPressed: () {
                   deleteInventoryType(checklist_id).then((value) {
                     Get.back();
-                    getInventoryTypeList(facilityId, type, true);
+                    getInventoryTypeList(facilityId, type);
                   });
                 },
                 child: Text('YES'),

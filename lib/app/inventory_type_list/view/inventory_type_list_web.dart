@@ -35,7 +35,8 @@ class InventoryTypeListContentWeb extends GetView<InventoryTypeListController> {
                   ),
                   boxShadow: [
                     BoxShadow(
-                      color: Color.fromARGB(255, 236, 234, 234).withOpacity(0.5),
+                      color:
+                          Color.fromARGB(255, 236, 234, 234).withOpacity(0.5),
                       spreadRadius: 2,
                       blurRadius: 5,
                       offset: Offset(0, 2),
@@ -163,7 +164,7 @@ class InventoryTypeListContentWeb extends GetView<InventoryTypeListController> {
                                             //   "Title",
                                             //   style: Styles.blackBold16,
                                             // ),
-      
+
                                             Expanded(
                                                 child: CustomRichText(
                                                     title: 'Name: ')),
@@ -185,7 +186,8 @@ class InventoryTypeListContentWeb extends GetView<InventoryTypeListController> {
                                                     spreadRadius: 1.0,
                                                   ),
                                                   BoxShadow(
-                                                    color: ColorValues.whiteColor,
+                                                    color:
+                                                        ColorValues.whiteColor,
                                                     offset:
                                                         const Offset(0.0, 0.0),
                                                     blurRadius: 0.0,
@@ -201,7 +203,8 @@ class InventoryTypeListContentWeb extends GetView<InventoryTypeListController> {
                                                     fontSize: 14.0,
                                                     height: 1.0,
                                                     color: Colors.black),
-                                                controller: controller.nameCtrlr,
+                                                controller:
+                                                    controller.nameCtrlr,
                                                 focusNode: controller.nameFocus,
                                                 scrollController:
                                                     controller.nameScroll,
@@ -212,8 +215,9 @@ class InventoryTypeListContentWeb extends GetView<InventoryTypeListController> {
                                                   fillColor:
                                                       ColorValues.whiteColor,
                                                   filled: true,
-                                                  contentPadding: EdgeInsets.only(
-                                                      left: 5, right: 5),
+                                                  contentPadding:
+                                                      EdgeInsets.only(
+                                                          left: 5, right: 5),
                                                   border: InputBorder.none,
                                                   enabledBorder:
                                                       OutlineInputBorder(
@@ -239,7 +243,8 @@ class InventoryTypeListContentWeb extends GetView<InventoryTypeListController> {
                                                           borderRadius:
                                                               BorderRadius
                                                                   .circular(5),
-                                                          borderSide: BorderSide(
+                                                          borderSide:
+                                                              BorderSide(
                                                             color: ColorValues
                                                                 .redColorDark,
                                                           ),
@@ -251,7 +256,8 @@ class InventoryTypeListContentWeb extends GetView<InventoryTypeListController> {
                                                           borderRadius:
                                                               BorderRadius
                                                                   .circular(5),
-                                                          borderSide: BorderSide(
+                                                          borderSide:
+                                                              BorderSide(
                                                             color: ColorValues
                                                                 .redColorDark,
                                                           ),
@@ -310,7 +316,8 @@ class InventoryTypeListContentWeb extends GetView<InventoryTypeListController> {
                                                     spreadRadius: 1.0,
                                                   ),
                                                   BoxShadow(
-                                                    color: ColorValues.whiteColor,
+                                                    color:
+                                                        ColorValues.whiteColor,
                                                     offset:
                                                         const Offset(0.0, 0.0),
                                                     blurRadius: 0.0,
@@ -338,8 +345,9 @@ class InventoryTypeListContentWeb extends GetView<InventoryTypeListController> {
                                                   fillColor:
                                                       ColorValues.whiteColor,
                                                   filled: true,
-                                                  contentPadding: EdgeInsets.only(
-                                                      left: 5, right: 5),
+                                                  contentPadding:
+                                                      EdgeInsets.only(
+                                                          left: 5, right: 5),
                                                   border: InputBorder.none,
                                                   enabledBorder:
                                                       OutlineInputBorder(
@@ -366,7 +374,8 @@ class InventoryTypeListContentWeb extends GetView<InventoryTypeListController> {
                                                           borderRadius:
                                                               BorderRadius
                                                                   .circular(5),
-                                                          borderSide: BorderSide(
+                                                          borderSide:
+                                                              BorderSide(
                                                             color: ColorValues
                                                                 .redColorDark,
                                                           ),
@@ -379,7 +388,8 @@ class InventoryTypeListContentWeb extends GetView<InventoryTypeListController> {
                                                           borderRadius:
                                                               BorderRadius
                                                                   .circular(5),
-                                                          borderSide: BorderSide(
+                                                          borderSide:
+                                                              BorderSide(
                                                             color: ColorValues
                                                                 .redColorDark,
                                                           ),
@@ -419,7 +429,8 @@ class InventoryTypeListContentWeb extends GetView<InventoryTypeListController> {
                                     width: (Get.width * .1),
                                     height: 40,
                                     child: CustomElevatedButton(
-                                        backgroundColor: ColorValues.appRedColor,
+                                        backgroundColor:
+                                            ColorValues.appRedColor,
                                         onPressed: () {
                                           controller.cleardata();
                                         },
@@ -473,7 +484,7 @@ class InventoryTypeListContentWeb extends GetView<InventoryTypeListController> {
                         ),
                       ),
                     ),
-      
+
                     Expanded(
                       child: Container(
                         width: Get.width * 7,
@@ -511,19 +522,22 @@ class InventoryTypeListContentWeb extends GetView<InventoryTypeListController> {
                                         onChanged: (value) =>
                                             controller.search(value),
                                         decoration: InputDecoration(
-                                          enabledBorder: const OutlineInputBorder(
+                                          enabledBorder:
+                                              const OutlineInputBorder(
                                             borderSide: const BorderSide(
                                               color: Colors.grey,
                                               width: 0.0,
                                             ),
                                           ),
-                                          focusedBorder: const OutlineInputBorder(
+                                          focusedBorder:
+                                              const OutlineInputBorder(
                                             borderSide: const BorderSide(
                                               color: Colors.grey,
                                               width: 0.0,
                                             ),
                                           ),
-                                          contentPadding: Dimens.edgeInsets05_10,
+                                          contentPadding:
+                                              Dimens.edgeInsets05_10,
                                           hintText: 'search'.tr,
                                           hintStyle: Styles.grey16,
                                         ),
@@ -535,112 +549,133 @@ class InventoryTypeListContentWeb extends GetView<InventoryTypeListController> {
                               SizedBox(
                                 height: 20,
                               ),
-                              Expanded(
-                                child: Obx(
-                                  () => DataTable2(
-                                    key: UniqueKey(),
-                                    dataRowHeight: 50,
-                                    columnSpacing: 10,
-                                    border: TableBorder.all(
-                                        color:
-                                            Color.fromARGB(255, 206, 229, 234)),
-                                    columns: [
-                                      DataColumn2(
-                                          fixedWidth: 100,
-                                          label: Text(
-                                            "Sr No",
-                                            style: TextStyle(
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.bold),
-                                          )),
-                                      DataColumn2(
-                                          // fixedWidth: 150,
-                                          label: Text(
-                                        "Name",
-                                        style: TextStyle(
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.bold),
-                                      )),
-                                      DataColumn2(
-                                          // fixedWidth: 300,
-                                          label: Text(
-                                        "Description",
-                                        style: TextStyle(
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.bold),
-                                      )),
-                                      DataColumn2(
-                                          fixedWidth: 100,
-                                          label: Text(
-                                            'Action',
-                                            style: TextStyle(
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.bold),
-                                          )),
-                                    ],
-                                    rows: List<DataRow>.generate(
-                                      controller.inventoryTypeList?.length ?? 0,
-                                      (index) => DataRow(cells: [
-                                        DataCell(Text((index + 1).toString())),
-                                        DataCell(Text(controller
-                                                .inventoryTypeList?[index]?.name
-                                                .toString() ??
-                                            '')),
-                                        DataCell(Text(controller
-                                                .inventoryTypeList?[index]
-                                                ?.description ??
-                                            '')),
-                                        DataCell(Row(
-                                          children: [
-                                            TableActionButton(
-                                                color: ColorValues.editColor,
-                                                icon: Icons.edit,
-                                                message: 'Edit',
-                                                onPress: () {
-                                                  controller.selectedItem = controller
-                                                      .inventoryTypeList
-                                                      ?.firstWhere((element) =>
-                                                          "${element?.id}" ==
+                              controller.inventoryTypeList!.isEmpty == true &&
+                                      controller.isLoading == false
+                                  ? Center(child: Text("No Data"))
+                                  : controller.isLoading.value == true
+                                      ? Center(
+                                          child: Text("Data Loading......"))
+                                      : Expanded(
+                                          child: DataTable2(
+                                            key: UniqueKey(),
+                                            dataRowHeight: 50,
+                                            columnSpacing: 10,
+                                            border: TableBorder.all(
+                                                color: Color.fromARGB(
+                                                    255, 206, 229, 234)),
+                                            columns: [
+                                              DataColumn2(
+                                                  fixedWidth: 100,
+                                                  label: Text(
+                                                    "Sr No",
+                                                    style: TextStyle(
+                                                        fontSize: 15,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  )),
+                                              DataColumn2(
+                                                  // fixedWidth: 150,
+                                                  label: Text(
+                                                "Name",
+                                                style: TextStyle(
+                                                    fontSize: 15,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              )),
+                                              DataColumn2(
+                                                  // fixedWidth: 300,
+                                                  label: Text(
+                                                "Description",
+                                                style: TextStyle(
+                                                    fontSize: 15,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              )),
+                                              DataColumn2(
+                                                  fixedWidth: 100,
+                                                  label: Text(
+                                                    'Action',
+                                                    style: TextStyle(
+                                                        fontSize: 15,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  )),
+                                            ],
+                                            rows: List<DataRow>.generate(
+                                              controller.inventoryTypeList
+                                                      ?.length ??
+                                                  0,
+                                              (index) => DataRow(cells: [
+                                                DataCell(Text(
+                                                    (index + 1).toString())),
+                                                DataCell(Text(controller
+                                                        .inventoryTypeList?[
+                                                            index]
+                                                        ?.name
+                                                        .toString() ??
+                                                    '')),
+                                                DataCell(Text(controller
+                                                        .inventoryTypeList?[
+                                                            index]
+                                                        ?.description ??
+                                                    '')),
+                                                DataCell(Row(
+                                                  children: [
+                                                    TableActionButton(
+                                                        color: ColorValues
+                                                            .editColor,
+                                                        icon: Icons.edit,
+                                                        message: 'Edit',
+                                                        onPress: () {
+                                                          controller.selectedItem = controller
+                                                              .inventoryTypeList
+                                                              ?.firstWhere((element) =>
+                                                                  "${element?.id}" ==
+                                                                  controller
+                                                                      .inventoryTypeList?[
+                                                                          index]
+                                                                      ?.id
+                                                                      .toString());
+
+                                                          controller.nameCtrlr
+                                                              .text = controller
+                                                                  .selectedItem
+                                                                  ?.name ??
+                                                              '';
                                                           controller
-                                                              .inventoryTypeList?[
-                                                                  index]
-                                                              ?.id
-                                                              .toString());
-      
-                                                  controller.nameCtrlr.text =
-                                                      controller.selectedItem
-                                                              ?.name ??
-                                                          '';
-                                                  controller.descriptionCtrlr
-                                                      .text = controller
-                                                          .selectedItem
-                                                          ?.description ??
-                                                      '';
-                                                  controller.isContainerVisible
-                                                      .value = true;
-                                                }),
-                                            TableActionButton(
-                                              color: ColorValues.deleteColor,
-                                              icon: Icons.delete,
-                                              message: 'Delete',
-                                              onPress: () {
-                                                controller.isDeleteDialog(
-                                                    checklist_id: controller
-                                                        .inventoryTypeList?[index]
-                                                        ?.id
-                                                        .toString(),
-                                                    checklist: controller
-                                                        .inventoryTypeList?[index]
-                                                        ?.name);
-                                              },
+                                                              .descriptionCtrlr
+                                                              .text = controller
+                                                                  .selectedItem
+                                                                  ?.description ??
+                                                              '';
+                                                          controller
+                                                              .isContainerVisible
+                                                              .value = true;
+                                                        }),
+                                                    TableActionButton(
+                                                      color: ColorValues
+                                                          .deleteColor,
+                                                      icon: Icons.delete,
+                                                      message: 'Delete',
+                                                      onPress: () {
+                                                        controller.isDeleteDialog(
+                                                            checklist_id: controller
+                                                                .inventoryTypeList?[
+                                                                    index]
+                                                                ?.id
+                                                                .toString(),
+                                                            checklist: controller
+                                                                .inventoryTypeList?[
+                                                                    index]
+                                                                ?.name);
+                                                      },
+                                                    ),
+                                                  ],
+                                                )),
+                                              ]),
                                             ),
-                                          ],
-                                        )),
-                                      ]),
-                                    ),
-                                  ),
-                                ),
-                              ),
+                                          ),
+                                        ),
                             ],
                           ),
                         ),

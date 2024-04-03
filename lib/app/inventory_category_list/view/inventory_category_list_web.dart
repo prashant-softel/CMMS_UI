@@ -541,9 +541,13 @@ class InventoryCategoryListContentWeb
                               SizedBox(
                                 height: 20,
                               ),
-                              Expanded(
-                                child: Obx(
-                                  () => DataTable2(
+                              controller.inventoryStatusList!.isEmpty == true &&
+                                    controller.isLoading == false
+                                ? Center(child: Text("No Data"))
+                                : controller.isLoading.value == true
+                                    ? Center(child: Text("Data Loading......"))
+                              : Expanded(
+                                child: DataTable2(
                                     key: UniqueKey(),
                                     dataRowHeight: 50,
                                     columnSpacing: 10,
@@ -649,7 +653,7 @@ class InventoryCategoryListContentWeb
                                       ]),
                                     ),
                                   ),
-                                ),
+                                
                               ),
                             ],
                           ),

@@ -11,7 +11,6 @@ import '../../domain/models/modulelist_model.dart';
 import '../navigators/app_pages.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-
 class SourceOfObsController extends GetxController {
   SourceOfObsController(
     this.moduleListPresenter,
@@ -28,18 +27,17 @@ class SourceOfObsController extends GetxController {
   RxBool isCheckedRequire = false.obs;
   void requiretoggleCheckbox() {
     isCheckedRequire.value =
-    !isCheckedRequire.value; // Toggle the checkbox state
+        !isCheckedRequire.value; // Toggle the checkbox state
   }
-  RxList<ModuleListModel?>?
-  moduleList =
-      <ModuleListModel?>[].obs;
+
+  RxList<ModuleListModel?>? moduleList = <ModuleListModel?>[].obs;
   int facilityId = 0;
   int type = 1;
   PaginationController paginationController = PaginationController(
     rowCount: 0,
     rowsPerPage: 10,
   );
-void toggleContainer() {
+  void toggleContainer() {
     isContainerVisible.toggle();
   }
 
@@ -56,21 +54,27 @@ void toggleContainer() {
   void toggle() {
     isToggleOn.value = !isToggleOn.value;
   }
+
   void toggle1() {
     isToggle1On.value = !isToggle1On.value;
   }
+
   void toggle2() {
     isToggle2On.value = !isToggle2On.value;
   }
+
   void toggle3() {
     isToggle3On.value = !isToggle3On.value;
   }
+
   void toggle4() {
     isToggle4On.value = !isToggle4On.value;
   }
+
   void toggle5() {
     isToggle5On.value = !isToggle5On.value;
   }
+
   void toggle6() {
     isToggle6On.value = !isToggle6On.value;
   }
@@ -88,13 +92,13 @@ void toggleContainer() {
   ScrollController rnameScroll = ScrollController();
   ModuleListModel? selectedItem;
   StreamSubscription<int>? facilityIdStreamSubscription;
+  Rx<bool> isLoading = true.obs;
   @override
   void onInit() async {
-
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
       facilityId = event;
       Future.delayed(Duration(seconds: 2), () {
-        getModuleList(facilityId, type, true);
+        getModuleList(facilityId, type);
       });
       rnameFocus.addListener(() {
         if (!rnameFocus.hasFocus) {
@@ -110,16 +114,14 @@ void toggleContainer() {
     super.onInit();
   }
 
-  Future<void> getModuleList(
-      int facilityId, int type, bool isLoading)
-  async {
+  Future<void> getModuleList(int facilityId, int type) async {
     moduleList?.value = <ModuleListModel>[];
-    final _moduleList =
-        await moduleListPresenter.getModuleList(
-            facilityId: facilityId, type: type, isLoading: isLoading);
+    final _moduleList = await moduleListPresenter.getModuleList(
+        facilityId: facilityId, type: type, isLoading: isLoading.value);
 
     if (_moduleList != null) {
       moduleList!.value = _moduleList.cast<ModuleListModel?>();
+      isLoading.value = false;
       paginationController = PaginationController(
         rowCount: moduleList?.length ?? 0,
         rowsPerPage: 10,
@@ -142,10 +144,9 @@ void toggleContainer() {
     );
   }
 
-
   Future<bool> createModuleListNumber() async {
     if (modulelistNumberCtrlr.text.trim() == '' ||
-        featureCtrlr.text.trim() == ''  ) {
+        featureCtrlr.text.trim() == '') {
       Fluttertoast.showToast(
           msg: "Please enter required field", fontSize: 16.0);
     } else {
@@ -153,20 +154,20 @@ void toggleContainer() {
       String _featureNumber = featureCtrlr.text.trim();
 
       CreateModuleListModel createModuleList = CreateModuleListModel(
-          moduleName : _moduleListNumber,
-          featureName : _featureNumber,
-          menuImage : null,
-          add : isToggleOn.value?1:0,
-          edit: isToggle1On.value?1:0,
-          delete: isToggle2On.value?1:0,
-          view: isToggle3On.value?1:0,
-          approve: isToggle4On.value?1:0,
-          issue: isToggle5On.value?1:0,
-          selfView: isToggle6On.value?1:0,
+        moduleName: _moduleListNumber,
+        featureName: _featureNumber,
+        menuImage: null,
+        add: isToggleOn.value ? 1 : 0,
+        edit: isToggle1On.value ? 1 : 0,
+        delete: isToggle2On.value ? 1 : 0,
+        view: isToggle3On.value ? 1 : 0,
+        approve: isToggle4On.value ? 1 : 0,
+        issue: isToggle5On.value ? 1 : 0,
+        selfView: isToggle6On.value ? 1 : 0,
       );
 
       var moduleListJsonString =
-        createModuleList.toJson(); //createCheckListToJson([createChecklist]);
+          createModuleList.toJson(); //createCheckListToJson([createChecklist]);
 
       print({"checklistJsonString", moduleListJsonString});
       await moduleListPresenter.createModulelistNumber(
@@ -175,7 +176,7 @@ void toggleContainer() {
       );
       return true;
     }
-    getModuleList(facilityId, type, true);
+    getModuleList(facilityId, type);
     return true;
   }
 
@@ -198,7 +199,7 @@ void toggleContainer() {
     isToggle5On.value = false;
     isToggle6On.value = false;
     Future.delayed(Duration(seconds: 1), () {
-      getModuleList(facilityId, type, true);
+      getModuleList(facilityId, type);
     });
     Future.delayed(Duration(seconds: 5), () {
       isSuccess.value = false;
@@ -242,7 +243,7 @@ void toggleContainer() {
                 onPressed: () {
                   deleteModulelist(module_id).then((value) {
                     Get.back();
-                    getModuleList(facilityId, type, true);
+                    getModuleList(facilityId, type);
                   });
                 },
                 child: Text('YES'),
@@ -268,18 +269,18 @@ void toggleContainer() {
     String _featurelistNumber = featureCtrlr.text.trim();
 
     ModuleListModel createModulelist = ModuleListModel(
-        id:moduleId,
-        name: _modulelistNumber,
-        featureName: _featurelistNumber,
-        menuImage : null,
-        add : isToggleOn.value?1:0,
-        edit: isToggle1On.value?1:0,
-        delete: isToggle2On.value?1:0,
-        view: isToggle3On.value?1:0,
-        approve: isToggle4On.value?1:0,
-        issue: isToggle5On.value?1:0,
-        selfView: isToggle6On.value?1:0,
-    )  ;
+      id: moduleId,
+      name: _modulelistNumber,
+      featureName: _featurelistNumber,
+      menuImage: null,
+      add: isToggleOn.value ? 1 : 0,
+      edit: isToggle1On.value ? 1 : 0,
+      delete: isToggle2On.value ? 1 : 0,
+      view: isToggle3On.value ? 1 : 0,
+      approve: isToggle4On.value ? 1 : 0,
+      issue: isToggle5On.value ? 1 : 0,
+      selfView: isToggle6On.value ? 1 : 0,
+    );
     var modulelistJsonString =
         createModulelist.toJson(); //createCheckListToJson([createChecklist]);
 
@@ -291,4 +292,3 @@ void toggleContainer() {
     return true;
   }
 }
-

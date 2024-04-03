@@ -549,197 +549,141 @@ class FrequencyListContentWeb extends GetView<FrequencyListController> {
                                   // )
                                 ],
                               ),
-                              controller.frequencyList!.isEmpty
-                                  ? Expanded(
-                                      child: Obx(
-                                        () => DataTable2(
-                                          key: UniqueKey(),
-                                          dataRowHeight: 50,
-                                          columnSpacing: 10,
-                                          border: TableBorder.all(
-                                              color: Color.fromARGB(
-                                                  255, 206, 229, 234)),
-                                          columns: [
-                                            DataColumn2(
-                                                fixedWidth: 100,
-                                                label: Text(
-                                                  "Id",
-                                                  style: TextStyle(
-                                                      fontSize: 15,
-                                                      fontWeight:
-                                                          FontWeight.bold),
-                                                )),
-                                            DataColumn2(
-                                                // fixedWidth: 100,
-                                                label: Text(
-                                              "Name",
-                                              style: TextStyle(
-                                                  fontSize: 15,
-                                                  fontWeight: FontWeight.bold),
-                                            )),
-                                            DataColumn2(
-                                                // fixedWidth: 100,
-                                                label: Text(
-                                              "Days",
-                                              style: TextStyle(
-                                                  fontSize: 15,
-                                                  fontWeight: FontWeight.bold),
-                                            )),
-                                            DataColumn2(
-                                                fixedWidth: 100,
-                                                label: Text(
-                                                  "Action",
-                                                  style: TextStyle(
-                                                      fontSize: 15,
-                                                      fontWeight:
-                                                          FontWeight.bold),
-                                                )),
-                                          ],
-                                          rows: List.generate(
-                                            controller.frequencyList?.length ??
-                                                0,
-                                            (index) {
-                                              return DataRow(
-                                                cells: [
-                                                  DataCell(Text('')),
-                                                  DataCell(Text('')),
-                                                  DataCell(Text('')),
-                                                  DataCell(Text('')),
-                                                ],
-                                              );
-                                            },
-                                          ).toList(),
-                                        ),
-                                      ),
-                                    )
-                                  : Expanded(
-                                      child: Obx(
-                                        () => DataTable2(
-                                          key: UniqueKey(),
-                                          dataRowHeight: 50,
-                                          columnSpacing: 10,
-                                          border: TableBorder.all(
-                                              color: Color.fromARGB(
-                                                  255, 206, 229, 234)),
-                                          columns: [
-                                            DataColumn2(
-                                                fixedWidth: 100,
-                                                label: Text(
-                                                  "Id",
-                                                  style: TextStyle(
-                                                      fontSize: 15,
-                                                      fontWeight:
-                                                          FontWeight.bold),
-                                                )),
-                                            DataColumn2(
-                                                // fixedWidth: 100,
-                                                label: Text(
-                                              "Name",
-                                              style: TextStyle(
-                                                  fontSize: 15,
-                                                  fontWeight: FontWeight.bold),
-                                            )),
-                                            DataColumn2(
-                                                // fixedWidth: 100,
-                                                label: Text(
-                                              "Days",
-                                              style: TextStyle(
-                                                  fontSize: 15,
-                                                  fontWeight: FontWeight.bold),
-                                            )),
-                                            DataColumn2(
-                                                fixedWidth: 100,
-                                                label: Text(
-                                                  "Action",
-                                                  style: TextStyle(
-                                                      fontSize: 15,
-                                                      fontWeight:
-                                                          FontWeight.bold),
-                                                )),
-                                          ],
-                                          rows: List.generate(
-                                            controller.frequencyList?.length ??
-                                                0,
-                                            (index) {
-                                              var frequencyListModelListDetails =
-                                                  controller
-                                                      .frequencyList?[index];
-                                              return DataRow(
-                                                cells: [
-                                                  DataCell(Text(
-                                                      '${frequencyListModelListDetails?.id}')),
-                                                  DataCell(Text(
-                                                      '${frequencyListModelListDetails?.name}')),
-                                                  DataCell(Text(
-                                                      '${frequencyListModelListDetails?.days}')),
-                                                  DataCell(Row(
-                                                    children: [
-                                                      TableActionButton(
-                                                        color: ColorValues
-                                                            .editColor,
-                                                        icon: Icons.edit,
-                                                        message: 'Edit',
-                                                        onPress: () {
-                                                          controller
-                                                                  .selectedItem =
-                                                              controller
-                                                                  .frequencyList!
-                                                                  .firstWhere(
-                                                            (element) =>
-                                                                "${element!.id}" ==
-                                                                controller
-                                                                    .frequencyList![
-                                                                        index]!
-                                                                    .id
-                                                                    .toString(),
-                                                          );
-
-                                                          controller
-                                                              .freqNameCtrlr
-                                                              .text = controller
-                                                                  .selectedItem
-                                                                  ?.name ??
-                                                              '';
-                                                          controller
-                                                              .manpowerCtrlr
-                                                              .text = controller
-                                                                  .selectedItem
-                                                                  ?.days
-                                                                  .toString() ??
-                                                              '';
-
-                                                          controller
-                                                              .isContainerVisible
-                                                              .value = true;
-                                                        },
-                                                      ),
-                                                      TableActionButton(
-                                                        color: ColorValues
-                                                            .deleteColor,
-                                                        icon: Icons.delete,
-                                                        message: 'Delete',
-                                                        onPress: () {
-                                                          // controller.isDeleteDialog(
-                                                          //     business_id: controller
-                                                          //         .riskTypeList[
-                                                          //             index]
-                                                          //         .id
-                                                          //         .toString(),
-                                                          //     business: controller
-                                                          //         .riskTypeList[
-                                                          //             index]
-                                                          //         .name);
-                                                        },
-                                                      ),
-                                                    ],
+                              controller.frequencyList!.isEmpty == true &&
+                                      controller.isLoading == false
+                                  ? Center(child: Text("No Data"))
+                                  : controller.isLoading.value == true
+                                      ? Center(
+                                          child: Text("Data Loading......"))
+                                      : Expanded(
+                                          child: DataTable2(
+                                            key: UniqueKey(),
+                                            dataRowHeight: 50,
+                                            columnSpacing: 10,
+                                            border: TableBorder.all(
+                                                color: Color.fromARGB(
+                                                    255, 206, 229, 234)),
+                                            columns: [
+                                              DataColumn2(
+                                                  fixedWidth: 100,
+                                                  label: Text(
+                                                    "Id",
+                                                    style: TextStyle(
+                                                        fontSize: 15,
+                                                        fontWeight:
+                                                            FontWeight.bold),
                                                   )),
-                                                ],
-                                              );
-                                            },
-                                          ).toList(),
+                                              DataColumn2(
+                                                  // fixedWidth: 100,
+                                                  label: Text(
+                                                "Name",
+                                                style: TextStyle(
+                                                    fontSize: 15,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              )),
+                                              DataColumn2(
+                                                  // fixedWidth: 100,
+                                                  label: Text(
+                                                "Days",
+                                                style: TextStyle(
+                                                    fontSize: 15,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              )),
+                                              DataColumn2(
+                                                  fixedWidth: 100,
+                                                  label: Text(
+                                                    "Action",
+                                                    style: TextStyle(
+                                                        fontSize: 15,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  )),
+                                            ],
+                                            rows: List.generate(
+                                              controller
+                                                      .frequencyList?.length ??
+                                                  0,
+                                              (index) {
+                                                var frequencyListModelListDetails =
+                                                    controller
+                                                        .frequencyList?[index];
+                                                return DataRow(
+                                                  cells: [
+                                                    DataCell(Text(
+                                                        '${frequencyListModelListDetails?.id}')),
+                                                    DataCell(Text(
+                                                        '${frequencyListModelListDetails?.name}')),
+                                                    DataCell(Text(
+                                                        '${frequencyListModelListDetails?.days}')),
+                                                    DataCell(Row(
+                                                      children: [
+                                                        TableActionButton(
+                                                          color: ColorValues
+                                                              .editColor,
+                                                          icon: Icons.edit,
+                                                          message: 'Edit',
+                                                          onPress: () {
+                                                            controller
+                                                                    .selectedItem =
+                                                                controller
+                                                                    .frequencyList!
+                                                                    .firstWhere(
+                                                              (element) =>
+                                                                  "${element!.id}" ==
+                                                                  controller
+                                                                      .frequencyList![
+                                                                          index]!
+                                                                      .id
+                                                                      .toString(),
+                                                            );
+
+                                                            controller
+                                                                .freqNameCtrlr
+                                                                .text = controller
+                                                                    .selectedItem
+                                                                    ?.name ??
+                                                                '';
+                                                            controller
+                                                                .manpowerCtrlr
+                                                                .text = controller
+                                                                    .selectedItem
+                                                                    ?.days
+                                                                    .toString() ??
+                                                                '';
+
+                                                            controller
+                                                                .isContainerVisible
+                                                                .value = true;
+                                                          },
+                                                        ),
+                                                        TableActionButton(
+                                                          color: ColorValues
+                                                              .deleteColor,
+                                                          icon: Icons.delete,
+                                                          message: 'Delete',
+                                                          onPress: () {
+                                                            // controller.isDeleteDialog(
+                                                            //     business_id: controller
+                                                            //         .riskTypeList[
+                                                            //             index]
+                                                            //         .id
+                                                            //         .toString(),
+                                                            //     business: controller
+                                                            //         .riskTypeList[
+                                                            //             index]
+                                                            //         .name);
+                                                          },
+                                                        ),
+                                                      ],
+                                                    )),
+                                                  ],
+                                                );
+                                              },
+                                            ).toList(),
+                                          ),
                                         ),
-                                      ),
-                                    ),
                             ],
                           ),
                         ),
