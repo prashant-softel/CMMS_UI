@@ -473,9 +473,9 @@ class NewPermitController extends GetxController {
         }
       });
 
-      if (permitId.value > 0 && selectedEquipmentIsolationIdList != null) {
-        equipmentIsolationSelected(selectedEquipmentIsolationIdList);
-      }
+      // if (permitId.value > 0 && selectedEquipmentIsolationIdList != null) {
+      //   equipmentIsolationSelected(selectedEquipmentIsolationIdList);
+      // }
       // await getPermitIssuerList();
       // await getPermitApproverList();
     } catch (e) {
@@ -784,6 +784,13 @@ class NewPermitController extends GetxController {
       selectedEquipmentIsolationIdList.add(_selectedIsolationId);
     }
     getInventoryEquipmentNameList();
+  }
+
+  void EquipmentNames(selectedEquipmentIsolationIdList) async {
+    for (var _selectedIsolationId in selectedEquipmentIsolationIdList) {
+      selectedEquipmentIsolationIdList.add(_selectedIsolationId);
+    }
+    await getInventoryEquipmentNameList();
   }
 
   Future<void> getAssignedToList() async {
