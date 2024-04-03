@@ -391,7 +391,7 @@ class ViewAddInventoryController extends GetxController {
     String _warrentyDescriptionCtrlr = warrentyDescriptionCtrlr.text.trim();
 
     LstWarrantyDetail lstWarrantyDetail = LstWarrantyDetail(
-        warrantyDescription: _warrentyDescriptionCtrlr,
+        // warranty_description: _warrentyDescriptionCtrlr,
         warrantyProviderId: selectedmanufacturerNameId,
         warrantyStatus: 1,
         warrantyType: selectedWarrentyNameId,

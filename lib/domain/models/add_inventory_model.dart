@@ -32,6 +32,8 @@ class AddInventoryRequestModel {
   int? cost;
   String? currency;
   String? assetdescription;
+  String? warranty_description;
+
   dynamic attachments;
   List<LstWarrantyDetail>? lstWarrantyDetail;
 
@@ -46,6 +48,7 @@ class AddInventoryRequestModel {
       this.parentId,
       this.categoryId,
       this.warranty_type,
+      this.warranty_description,
       this.acCapacity,
       this.dcCapacity,
       this.serialNumber,
@@ -78,6 +81,7 @@ class AddInventoryRequestModel {
     description = json['description'];
     assetdescription = json['assetdescription'];
     typeId = json['typeId'];
+    warranty_description = json['warranty_description'];
     statusId = json['statusId'];
     facilityId = json['facilityId'];
     blockId = json['blockId'];
@@ -123,7 +127,7 @@ class AddInventoryRequestModel {
     data['name'] = this.name;
     data['description'] = this.description;
     data['assetdescription'] = this.assetdescription;
-
+    data['warranty_description'] = this.warranty_description;
     data['typeId'] = this.typeId;
     data['statusId'] = this.statusId;
     data['facilityId'] = this.facilityId;
@@ -167,7 +171,7 @@ class AddInventoryRequestModel {
 
 class LstWarrantyDetail {
   int? warrantyType;
-  String? warrantyDescription;
+
   int? warrranty_term_type;
   String? expiryDate;
   int? meterLimit;
@@ -179,7 +183,6 @@ class LstWarrantyDetail {
 
   LstWarrantyDetail(
       {this.warrantyType,
-      this.warrantyDescription,
       this.warrranty_term_type,
       this.expiryDate,
       this.meterLimit,
@@ -191,7 +194,7 @@ class LstWarrantyDetail {
 
   LstWarrantyDetail.fromJson(Map<String, dynamic> json) {
     warrantyType = json['warranty_type'];
-    warrantyDescription = json['warranty_description'];
+
     warrranty_term_type = json['warrranty_term_type'];
     expiryDate = json['expiry_date'];
     meterLimit = json['meter_limit'];
@@ -205,7 +208,7 @@ class LstWarrantyDetail {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['warranty_type'] = this.warrantyType;
-    data['warranty_description'] = this.warrantyDescription;
+
     data['warrranty_term_type'] = this.warrranty_term_type;
     data['expiry_date'] = this.expiryDate;
     data['meter_limit'] = this.meterLimit;

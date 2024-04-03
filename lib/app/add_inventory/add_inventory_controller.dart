@@ -372,7 +372,7 @@ class AddInventoryController extends GetxController {
     String _warrentyDescriptionCtrlr = warrentyDescriptionCtrlr.text.trim();
 
     LstWarrantyDetail lstWarrantyDetail = LstWarrantyDetail(
-        warrantyDescription: _warrentyDescriptionCtrlr,
+        // warranty_description: _warrentyDescriptionCtrlr,
         warrantyProviderId: selectedmanufacturerNameId,
         warrantyStatus: 1,
         warrantyType: selectedWarrentyNameId,
@@ -390,6 +390,7 @@ class AddInventoryController extends GetxController {
             name: _assetsNameCtrlr,
             description: _discriptionCtrlr,
             assetdescription: _assesDiscriptionCtrlr,
+            warranty_description: _warrentyDescriptionCtrlr,
             typeId: selectedTypeNameId,
             statusId: selectedStatusNameId,
             facilityId: facilityId,
@@ -508,7 +509,6 @@ class AddInventoryController extends GetxController {
     String _warrentyDescriptionCtrlr = warrentyDescriptionCtrlr.text.trim();
 
     LstWarrantyDetail lstWarrantyDetail = LstWarrantyDetail(
-        warrantyDescription: _warrentyDescriptionCtrlr,
         warrantyProviderId: selectedmanufacturerNameId,
         warrantyStatus: 1,
         warrantyType: selectedWarrentyNameId,
@@ -525,7 +525,8 @@ class AddInventoryController extends GetxController {
             id: 0,
             name: _assetsNameCtrlr,
             moduleQuantity: int.tryParse(_moduleQuantityCtrlr) ?? 0,
-            description: _warrentyDescriptionCtrlr,
+            description: _discriptionCtrlr,
+            warranty_description: _warrentyDescriptionCtrlr,
             assetdescription: _assesDiscriptionCtrlr,
             typeId: selectedTypeNameId,
             statusId: selectedStatusNameId,
