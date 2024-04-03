@@ -632,7 +632,7 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                           //                   (selectedOptionsList) =>
                                           //                       {
                                           //                 controller
-                                          //                     .equipmentNameSelected(
+                                          //                         .equipmentNameSelected(
                                           //                         selectedOptionsList),
                                           //                 print(
                                           //                     'Equipment Name list25: ${controller.selectedEquipmentNameIdList}')
@@ -952,15 +952,18 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                     : Center(
                                         child: Text('Nothing to show !!'),
                                       ),
+                                Dimens.boxHeight10,
                                 controller.safetyMeasureList.isEmpty
                                     // ||  controller
                                     // .safetyList!
                                     // .isEmpty
+
                                     ? Dimens.box0
-                                    : SizedBox(
+                                    : Container(
                                         width:
                                             MediaQuery.of(context).size.width /
-                                                1.3,
+                                                1.2,
+                                        margin: EdgeInsets.all(16),
                                         child: Center(
                                           child: Column(
                                             children: [
@@ -1743,7 +1746,8 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                         },
                                       )),
                                 )
-                              : controller.pmtaskViewModel?.id != null && controller.permitId.value <= 0
+                              : controller.pmtaskViewModel?.id != null &&
+                                      controller.permitId.value <= 0
                                   ? Center(
                                       child: Container(
                                           height: 45,
