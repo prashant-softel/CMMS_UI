@@ -315,6 +315,7 @@ class LotoLists {
     this.loto_Key,
     this.loto_lock_number,
     this.employee_name,
+    this.loto_id,
   });
 
   String? equipment_name;
@@ -322,12 +323,14 @@ class LotoLists {
   String? loto_Key;
   String? employee_name;
   String? loto_lock_number;
+  int? loto_id;
 
   factory LotoLists.fromJson(Map<String, dynamic> json) => LotoLists(
       equipment_name: json["equipment_name"],
       equipment_cat: json["equipment_cat"],
       loto_Key: json['loto_Key'],
       loto_lock_number: json['loto_lock_number'],
+      loto_id: json['loto_id'],
       employee_name: json['employee_name']);
 
   Map<String, dynamic> toJson() => {
@@ -336,6 +339,7 @@ class LotoLists {
         "loto_Key": loto_Key,
         "loto_lock_number": loto_lock_number,
         "employee_name": employee_name,
+        "loto_id": loto_id,
       };
 }
 
