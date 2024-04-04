@@ -203,6 +203,7 @@ class NewPermitController extends GetxController {
   Rx<bool> isBlockSelected = true.obs;
   Rx<String> selectedBlock = ''.obs;
   Rx<bool> isstartdateFieldSelected = true.obs;
+  RxBool isCheckedValue = false.obs;
 
   int selectedBlockId = 0;
   RxList<EquipmentModel?> equipmentList = <EquipmentModel>[].obs;
@@ -1276,7 +1277,9 @@ class NewPermitController extends GetxController {
 
       safetyMeasureList.forEach((e) {
         safety_measure_map_list.add(Safetyquestionlist(
-            safetyMeasureId: e.id, safetyMeasureValue: e.name));
+            safetyMeasureId: e.id,
+            safetyMeasureValue: e.name,
+            ischeck: e.isChecked ? 1 : 0));
       });
 
       //  List<Employeelist> employee_list= <Employeelist>[];
@@ -1515,11 +1518,13 @@ class NewPermitController extends GetxController {
       print("loto_map_list: ${loto_map_list}");
 
       late List<Safetyquestionlist> safety_measure_map_list = [];
-
       safetyMeasureList.forEach((e) {
         safety_measure_map_list.add(Safetyquestionlist(
-            safetyMeasureId: e.id, safetyMeasureValue: e.name));
+            safetyMeasureId: e.id,
+            safetyMeasureValue: e.name,
+            ischeck: e.isChecked ? 1 : 0));
       });
+
       print("safety_measure_map_list: ${safety_measure_map_list}");
 
       CreatePermitModel createPermitModel = CreatePermitModel(
