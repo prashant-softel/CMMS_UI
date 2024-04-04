@@ -26,14 +26,14 @@ class JobDetailsPresenter {
       );
   Future<List<JobAssociatedModel?>?> getjobDetailsModel({
     String? auth,
+    required int jobId,
     required int facilityId,
-    int? jobId,
     int? userId,
     bool? isLoading,
   }) async =>
       await jobDetailsUsecase.getjobDetailsModel(
         auth: auth ?? "",
-        jobId: jobId ?? 0,
+        jobId: jobId,
         userId: userId,
         facilityId:facilityId,
         isLoading: isLoading,

@@ -803,7 +803,7 @@ class _AddJobContentWebState extends State<AddJobContentWeb> {
                                               children: [
                                                 CustomRichText(
                                                     title:
-                                                        'Tools Required For Work Type :'),
+                                                        'Tools Required For Error :'),
                                                 Dimens.boxWidth10,
                                                 Container(
                                                   decoration: BoxDecoration(

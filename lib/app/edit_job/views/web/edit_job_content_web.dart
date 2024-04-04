@@ -429,74 +429,68 @@ class _EditJobContentWebState extends State<EditJobContentWeb> {
                                                             .width *
                                                         .2),
                                                     child: Obx(
-                                                      () => SizedBox(
-                                                        // height:
-                                                        //     MediaQuery.of(context).size.height *
-                                                        //         0.040,
-                                                        child:
-                                                            MultiSelectDialogField(
+                                                      () => MultiSelectDialogField(
                                                           searchable: true,
                                                           initialValue: //
-                                                              controller
-                                                                  .selectedWorkAreaIdList
-                                                                  .map((equipmentId) =>
-                                                                      equipmentId) // Extract the IDs from the list of InventoryCategoryModel objects
-                                                                  .toList(),
+                                                        controller
+                                                            .selectedWorkAreaIdList
+                                                            .map((equipmentId) =>
+                                                                equipmentId) // Extract the IDs from the list of InventoryCategoryModel objects
+                                                            .toList(),
                                                           validator:
-                                                              (selectedItems) {
-                                                            if (controller
-                                                                    .isWorkAreaSelected
-                                                                    .value ==
-                                                                false) {
-                                                              return "Required field";
-                                                            } else {
-                                                              return null;
-                                                            }
+                                                        (selectedItems) {
+                                                      if (controller
+                                                              .isWorkAreaSelected
+                                                              .value ==
+                                                          false) {
+                                                        return "Required field";
+                                                      } else {
+                                                        return null;
+                                                      }
                                                           },
                                                           autovalidateMode:
-                                                              AutovalidateMode
-                                                                  .always,
+                                                        AutovalidateMode
+                                                            .always,
                                                           decoration:
-                                                              BoxDecoration(
-                                                            border: Border.all(
-                                                              color: controller
-                                                                          .isWorkAreaSelected
-                                                                          .value ==
-                                                                      false
-                                                                  ? Colors.red
-                                                                  : Colors
-                                                                      .transparent,
-                                                              width: 1.0,
-                                                            ),
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(5),
+                                                        BoxDecoration(
+                                                      border: Border.all(
+                                                        color: controller
+                                                                    .isWorkAreaSelected
+                                                                    .value ==
+                                                                false
+                                                            ? Colors.red
+                                                            : Colors
+                                                                .transparent,
+                                                        width: 1.0,
+                                                      ),
+                                                      borderRadius:
+                                                          BorderRadius
+                                                              .circular(5),
                                                           ),
                                                           buttonIcon: Icon(Icons
-                                                              .arrow_drop_down),
+                                                        .arrow_drop_down),
                                                           items: controller
-                                                              .workAreaList
-                                                              .map(
-                                                                (equipment) =>
-                                                                    MultiSelectItem(
-                                                                  equipment?.id,
-                                                                  equipment
-                                                                          ?.name ??
-                                                                      '',
-                                                                ),
-                                                              )
-                                                              .toList(),
+                                                        .workAreaList
+                                                        .map(
+                                                          (equipment) =>
+                                                              MultiSelectItem(
+                                                            equipment?.id,
+                                                            equipment
+                                                                    ?.name ??
+                                                                '',
+                                                          ),
+                                                        )
+                                                        .toList(),
                                                           onConfirm:
-                                                              (selectedOptionsList) =>
-                                                                  {
-                                                            controller
-                                                                .workAreasSelected(
-                                                                    selectedOptionsList)
+                                                        (selectedOptionsList) =>
+                                                            {
+                                                      controller
+                                                          .workAreasSelected(
+                                                              selectedOptionsList)
                                                           },
                                                           chipDisplay:
-                                                              MultiSelectChipDisplay(),
+                                                        MultiSelectChipDisplay(),
                                                         ),
-                                                      ),
                                                     ),
                                                   ),
                                                 ],

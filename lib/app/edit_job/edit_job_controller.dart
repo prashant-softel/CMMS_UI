@@ -87,6 +87,7 @@ class EditJobController extends GetxController {
   RxList<ToolsModel?>? toolsRequiredToWorkTypeList = <ToolsModel>[].obs;
   RxList<String?> selectedtoolsRequiredToWorkTypeList = <String>[].obs;
   RxList<int?> selectedtoolsRequiredToWorkTypeIdList = <int>[].obs;
+  RxList<WorkTypeList?>? workTypeListObj = <WorkTypeList>[].obs;
 
   ///
   int selectedPermitId = 0;
@@ -136,13 +137,15 @@ class EditJobController extends GetxController {
             blockId: selectedBlockId,
           );
         });
-        // Future.delayed(Duration(seconds: 1), () {
-        //   getWorkTypeList();
-        // });
+        Future.delayed(Duration(seconds: 1), () {
+          getWorkTypeList();
+        });
         Future.delayed(Duration(seconds: 1), () {
           getAssignedToList();
         });
-        //  await getToolsRequiredToWorkTypeList(workTypeIds.toString());
+        Future.delayed(Duration(seconds: 1), () {
+          getToolsRequiredToWorkTypeList(workTypeIds.toString());
+        });
       });
     } catch (e) {
       print({"editjoberror", e});
@@ -168,10 +171,10 @@ class EditJobController extends GetxController {
     }
   }
 
-  Future<void> getJobDetails(int _jobId,int facilityId) async {
+  Future<void> getJobDetails(int _jobId, int facilityId) async {
     jobDetailsList?.value = <JobDetailsModel>[];
-    final _jobDetailsList =
-        await jobDetailsPresenter.getJobDetails(jobId: _jobId,facilityId: facilityId);
+    final _jobDetailsList = await jobDetailsPresenter.getJobDetails(
+        jobId: _jobId, facilityId: facilityId);
 
     if (_jobDetailsList != null && _jobDetailsList.isNotEmpty) {
       jobDetailsModel.value = _jobDetailsList[0];
@@ -181,7 +184,10 @@ class EditJobController extends GetxController {
       jobDescriptionCtrlr.text = jobDetailsModel.value?.jobDescription ?? '';
       breakdownTimeCtrlr.text =
           formatDateTimeForUI(jobDetailsModel.value?.breakdownTime);
-      // jobDetailsModel.value.workType
+      // workTypeListObj?.value = jobDetailsModel.value!.workTypeList ?? [];
+      // List<int?> workTypeIdList =
+      //     workTypeListObj!.map((element) => element!.workTypeId).toList();
+      // selectedWorkTypeIdList.value = workTypeIdList.whereType<int>().toList();
     }
 
     associatedPermitList?.value =
