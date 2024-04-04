@@ -185,7 +185,7 @@ class JobDetailsController extends GetxController {
     }
   }
 
-  void getjobDetailsModel(int? jobId, int facilityId) async {
+  void getjobDetailsModel(int jobId, int facilityId) async {
     try {
       jobAssociatedModelsList?.value = <JobAssociatedModel>[];
       final _jobAssociatedModelsList =

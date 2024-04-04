@@ -4921,8 +4921,8 @@ class Repository {
 
   Future<List<JobAssociatedModel>> getjobDetailsModel(
     String? auth,
-    int facilityId,
     int jobId,
+    int facilityId,
     int? userId,
     bool? isLoading,
   ) async {

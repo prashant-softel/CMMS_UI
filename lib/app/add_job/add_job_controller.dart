@@ -476,12 +476,7 @@ class AddJobController extends GetxController {
     for (var _selectedCategory in _selectedToolsRequired) {
       selectedtoolsRequiredToWorkTypeList.add(_selectedCategory.name);
     }
-
-    // getToolsRequiredToWorkTypeList(
-    //   facilityId: facilityId,
-    //   blockId: selectedBlockId,
-    //   receivedCategoryIds: selectedEquipmentCategoryIdList,
-    // );
+    getToolsRequiredToWorkTypeList(selectedEquipmentCategoryIdList);
   }
 
   /// Work-areas / Equipments selected - multi select

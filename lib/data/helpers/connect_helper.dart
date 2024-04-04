@@ -2100,9 +2100,9 @@ class ConnectHelper {
 
   Future<ResponseModel> getjobDetailsModel({
     required String auth,
+    required int jobId,
     required int facilityId,
     bool? isLoading,
-    int? jobId,
     int? userId,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
