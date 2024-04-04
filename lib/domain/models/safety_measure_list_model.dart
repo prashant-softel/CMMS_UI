@@ -4,6 +4,8 @@
 
 import 'dart:convert';
 
+import 'package:get/get_rx/src/rx_types/rx_types.dart';
+
 List<SafetyMeasureListModel> safetyMeasureListModelFromJson(String str) =>
     List<SafetyMeasureListModel>.from(
         json.decode(str).map((x) => SafetyMeasureListModel.fromJson(x)));
@@ -27,7 +29,7 @@ class SafetyMeasureListModel {
   String? inputName;
   String? permitType;
   int? isRequired;
-  bool? isChecked;
+  bool isChecked;
 
   factory SafetyMeasureListModel.fromJson(Map<String, dynamic> json) =>
       SafetyMeasureListModel(

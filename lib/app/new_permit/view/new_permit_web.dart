@@ -974,42 +974,55 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                               controller.safetyMeasureList
                                                           .length >
                                                       0
-                                                  ? Column(
-                                                      children: controller
-                                                          .safetyMeasureList
-                                                          .map((element) {
+                                                  ? GetBuilder<
+                                                          NewPermitController>(
+                                                      init: controller,
+                                                      builder: (ctrl) {
                                                         return Column(
-                                                          mainAxisAlignment:
-                                                              MainAxisAlignment
-                                                                  .start,
-                                                          crossAxisAlignment:
-                                                              CrossAxisAlignment
-                                                                  .start,
-                                                          children: [
-                                                            SizedBox(
-                                                              child: Row(
-                                                                children: [
-                                                                  checkBoxMethod(
-                                                                      element.isChecked ??
-                                                                          false,
-                                                                      (value) {
-                                                                    element.isChecked =
-                                                                        value;
-                                                                  }),
-                                                                  // Text(
-                                                                  //   'Checkbox ${element.id} is ${isInitialChecked ? 'checked' : 'unchecked'}',
-                                                                  // ),
-                                                                  Dimens
-                                                                      .boxWidth10,
-                                                                  Text(
-                                                                      "${element.name}"),
-                                                                ],
-                                                              ),
-                                                            ),
-                                                          ],
+                                                          children: controller
+                                                              .safetyMeasureList
+                                                              .map((element) {
+                                                            return Column(
+                                                              mainAxisAlignment:
+                                                                  MainAxisAlignment
+                                                                      .start,
+                                                              crossAxisAlignment:
+                                                                  CrossAxisAlignment
+                                                                      .start,
+                                                              children: [
+                                                                SizedBox(
+                                                                  child: Row(
+                                                                    children: [
+                                                                      checkBoxMethod(
+                                                                          element.isChecked ??
+                                                                              false,
+                                                                          (value) {
+                                                                        element.isChecked =
+                                                                            value ??
+                                                                                false;
+                                                                        // final index = controller.safetyMeasureList.indexWhere((e) =>
+                                                                        //     e.id ==
+                                                                        //     element.id);
+                                                                        // if (index >
+                                                                        //     -1)
+                                                                        // controller
+                                                                        //     .safetyMeasureList[index]
+                                                                        //     .isChecked = value ?? false;
+                                                                        controller
+                                                                            .update();
+                                                                      }),
+                                                                      Dimens
+                                                                          .boxWidth10,
+                                                                      Text(
+                                                                          "${element.name}"),
+                                                                    ],
+                                                                  ),
+                                                                ),
+                                                              ],
+                                                            );
+                                                          }).toList(),
                                                         );
-                                                      }).toList(),
-                                                    )
+                                                      })
                                                   : Dimens.box0,
                                             ],
                                           ),
