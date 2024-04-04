@@ -30,10 +30,10 @@ class FileUploadDetailsWidgetWeb extends StatelessWidget {
                   dataRowHeight: Get.height * 0.08,
                   border: TableBorder.all(color: ColorValues.appLightBlueColor),
                   columns: [
-                    DataColumn2(
-                      label: Text('Event'),
-                      size: ColumnSize.M,
-                    ),
+                    // DataColumn2(
+                    //   label: Text('Event'),
+                    //   size: ColumnSize.M,
+                    // ),
                     DataColumn2(
                       label: Text('Description'),
                       size: ColumnSize.L,
@@ -64,22 +64,22 @@ class FileUploadDetailsWidgetWeb extends StatelessWidget {
                           if (selected ?? true) {}
                         },
                         cells: [
-                          DataCell(
-                            DropdownButton<FileUploadEvents>(
-                              isExpanded: true,
-                              value: _fileUploadController.selectedEvent.value,
-                              onChanged: (FileUploadEvents? newValue) {
-                                _fileUploadController.setSelectedEvent(
-                                    newValue ?? FileUploadEvents.BEFORE);
-                              },
-                              items: FileUploadEvents.values.map((event) {
-                                return DropdownMenuItem<FileUploadEvents>(
-                                  value: event,
-                                  child: Text(event.toString().split('.').last),
-                                );
-                              }).toList(),
-                            ),
-                          ),
+                          // DataCell(
+                          //   DropdownButton<FileUploadEvents>(
+                          //     isExpanded: true,
+                          //     value: _fileUploadController.selectedEvent.value,
+                          //     onChanged: (FileUploadEvents? newValue) {
+                          //       _fileUploadController.setSelectedEvent(
+                          //           newValue ?? FileUploadEvents.BEFORE);
+                          //     },
+                          //     items: FileUploadEvents.values.map((event) {
+                          //       return DropdownMenuItem<FileUploadEvents>(
+                          //         value: event,
+                          //         child: Text(event.toString().split('.').last),
+                          //       );
+                          //     }).toList(),
+                          //   ),
+                          // ),
                           DataCell(
                             TextFormField(
                               decoration: InputDecoration(
