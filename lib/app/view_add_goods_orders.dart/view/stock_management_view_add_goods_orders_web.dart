@@ -1359,7 +1359,7 @@ class _ViewAddGoodsOrdersWebState extends State<ViewAddGoodsOrdersWeb> {
                                                     backgroundColor: ColorValues
                                                         .appGreenColor,
                                                     text: "Approve",
-                                                    icon: Icons.add,
+                                                    icon: Icons.check,
                                                     onPressed: () {
                                                       Get.dialog(
                                                           GoodsOrderApprovedDialog(

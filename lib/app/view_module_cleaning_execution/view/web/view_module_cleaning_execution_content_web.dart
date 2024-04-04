@@ -1167,7 +1167,7 @@ class ViewModuleCleaningExecutionContentWeb
                                                             ColorValues
                                                                 .appGreenColor,
                                                         text: "Approve",
-                                                        icon: Icons.add,
+                                                        icon: Icons.check,
                                                         onPressed: () {
                                                           Get.dialog(
                                                               ApproveMcExecutionDialog(

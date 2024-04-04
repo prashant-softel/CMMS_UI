@@ -726,7 +726,7 @@ class _ViewMcPlaningWebState extends State<ViewVegPlanWeb> {
                               child: CustomElevatedButton(
                                 backgroundColor: ColorValues.appGreenColor,
                                 text: "Approve",
-                                icon: Icons.add,
+                                icon: Icons.check,
                                 onPressed: () {
                                   controller.vegPlanApprovedButton(
                                     id: controller.id.value,

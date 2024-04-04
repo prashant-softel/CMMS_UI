@@ -32,7 +32,7 @@ class JobUpdatedDialog extends GetView<EditJobController> {
       content: Builder(builder: (context) {
         return Container(
           padding: Dimens.edgeInsets05_0_5_0,
-          height: Get.height / 6,
+          height: 80,
           width: double.infinity,
           child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch, //
@@ -44,34 +44,33 @@ class JobUpdatedDialog extends GetView<EditJobController> {
                 Dimens.boxHeight20,
                 Center(child: Text(message ?? '')),
                 Dimens.boxHeight25,
-                Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      ElevatedButton(
-                        style: Styles.greenElevatedButtonStyle,
-                        onPressed: () => controller.goToJobListScreen(),
-                        child: const Text('Job List'),
-                      ),
-                      Dimens.boxWidth10,
-                      ElevatedButton(
-                        style: Styles.yellowElevatedButtonStyle,
-                        onPressed: () {
-                          controller.goToJobDetailsScreen(jobId ?? 0);
-                        },
-                        child: const Text('View Job'),
-                      ),
-                      Dimens.boxWidth10,
-                      ElevatedButton(
-                        style: Styles.redElevatedButtonStyle,
-                        onPressed: () => //
-                            controller.goToAddJobScreen(),
-                        child: const Text('Add New Job'),
-                      ),
-                    ]),
               ]),
         );
       }),
-      actions: [],
+      actions: [
+        Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+          ElevatedButton(
+            style: Styles.greenElevatedButtonStyle,
+            onPressed: () => controller.goToJobListScreen(),
+            child: const Text('Job List'),
+          ),
+          Dimens.boxWidth10,
+          ElevatedButton(
+            style: Styles.yellowElevatedButtonStyle,
+            onPressed: () {
+              controller.goToJobDetailsScreen(jobId ?? 0);
+            },
+            child: const Text('View Job'),
+          ),
+          Dimens.boxWidth10,
+          ElevatedButton(
+            style: Styles.redElevatedButtonStyle,
+            onPressed: () => //
+                controller.goToAddJobScreen(),
+            child: const Text('Add New Job'),
+          ),
+        ]),
+      ],
     );
   }
 

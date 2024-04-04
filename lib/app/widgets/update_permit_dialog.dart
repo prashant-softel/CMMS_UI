@@ -72,8 +72,6 @@ class UpdateNewPermitDialog extends GetView {
                                 .bold, // Set any additional styles as needed
                           ),
                         ),
-                        TextSpan(
-                            text: '\n Please Click on OK button to go back.'),
                       ],
                     ),
                   ),

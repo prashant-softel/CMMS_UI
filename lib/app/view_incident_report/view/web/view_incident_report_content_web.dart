@@ -1914,7 +1914,7 @@ class ViewIncidentReportContentWeb
                                                                     ColorValues
                                                                         .appGreenColor,
                                                                 text: "Approve",
-                                                                icon: Icons.add,
+                                                                icon: Icons.check,
                                                                 onPressed: () {
                                                                   Get.dialog(
                                                                       ApproveIncidentReportDialog(
@@ -1968,7 +1968,7 @@ class ViewIncidentReportContentWeb
                                                                           text:
                                                                               "Approve IR",
                                                                           icon:
-                                                                              Icons.add,
+                                                                              Icons.check,
                                                                           onPressed:
                                                                               () {
                                                                             Get.dialog(ApproveIncidentReportDialog(

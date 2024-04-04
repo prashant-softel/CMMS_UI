@@ -515,7 +515,7 @@ class PreventiveMaintenanceExecutionContentMobile
                                     text: "Execution Close",
                                     controller: controller,
                                     buttonText: "Close",
-                                    style: Styles.redElevatedButtonStyle,
+                                    style: Styles.navyBlueElevatedButtonStyle,
                                     onPressed: () {
                                       controller.closePmTaskExecution();
                                       Get.back();

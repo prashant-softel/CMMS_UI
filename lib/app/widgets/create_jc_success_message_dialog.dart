@@ -51,10 +51,10 @@ class CreateJobCardDialog extends GetView {
                         // Text('${data}',
                         //     style: TextStyle(color: Colors.green),
                         //     textAlign: TextAlign.center),`
-                        Text('Permit is created for the Job',
+                        Text('Permit is created for the Job ',
                             style: TextStyle(color: Colors.black),
                             textAlign: TextAlign.center),
-                        Text('${jcId![0]}',
+                        Text('[${jcId![0]}]',
                             style: TextStyle(color: Colors.green),
                             textAlign: TextAlign.center),
                       ],

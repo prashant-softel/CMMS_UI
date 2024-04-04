@@ -705,7 +705,7 @@ class IncidentReportListDataSource extends DataTableSource {
                                         incidentReportListDetails!.status == 184
                                 ? TableActionButton(
                                     color: ColorValues.approveColor,
-                                    icon: Icons.approval_rounded,
+                                    icon: Icons.check,
                                     message: 'Approve IR',
 
                                     onPress: () {
@@ -883,7 +883,7 @@ class IncidentReportListDataSource extends DataTableSource {
                                         "Submitted"
                                 ? TableActionButton(
                                     color: ColorValues.appGreenColor,
-                                    icon: Icons.add,
+                                    icon: Icons.check,
                                     message: 'Approve/Reject',
                                     onPress: () {
                                       // Get.dialog(PermitApprovedDialog(

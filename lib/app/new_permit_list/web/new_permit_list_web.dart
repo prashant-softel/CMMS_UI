@@ -849,8 +849,8 @@ class PermitListDataSource extends DataTableSource {
                                                       .PTW_EXTEND_REQUESTED //133
 
                                       ? TableActionButton(
-                                          color: ColorValues.appGreenColor,
-                                          icon: Icons.add,
+                                          color: const Color.fromRGBO(134, 196, 102, 1),
+                                          icon: Icons.check,
                                           message: controller.newPermitList
                                                       .firstWhere(
                                                         (e) =>
