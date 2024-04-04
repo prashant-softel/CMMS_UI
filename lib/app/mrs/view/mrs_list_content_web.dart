@@ -634,7 +634,7 @@ class MrsListDataSource extends DataTableSource {
                                     0
                             ? TableActionButton(
                                 color: ColorValues.approveColor,
-                                icon: Icons.approval,
+                                icon: Icons.check,
                                 message: 'approval',
                                 onPress: () {
                                   controller.clearStoreData();

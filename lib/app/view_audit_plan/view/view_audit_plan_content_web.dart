@@ -321,7 +321,7 @@ class _ViewAuditPlanWebState extends State<ViewAuditPlanWeb> {
                                                 backgroundColor:
                                                     ColorValues.appGreenColor,
                                                 text: "Approve",
-                                                icon: Icons.add,
+                                                icon: Icons.check,
                                                 onPressed: () {
                                                   Get.dialog(AuditApprovedDialog(
                                                       // id: controller.pmPlanId.value,

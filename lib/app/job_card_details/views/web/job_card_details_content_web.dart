@@ -608,7 +608,7 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                                                             ColorValues
                                                                 .appGreenColor,
                                                         text: "Approve",
-                                                        icon: Icons.add,
+                                                        icon: Icons.check,
                                                         onPressed: () {
                                                           // controller
                                                           //     .createNewPermit();
@@ -686,7 +686,7 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                                                             ColorValues
                                                                 .appGreenColor,
                                                         text: "Approve",
-                                                        icon: Icons.add,
+                                                        icon: Icons.check,
                                                         onPressed: () {
                                                           // controller
                                                           //     .createNewPermit();

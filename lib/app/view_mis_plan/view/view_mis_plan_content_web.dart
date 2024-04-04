@@ -472,7 +472,7 @@ class _ViewMisPlanWebState extends State<ViewMisPlanWeb> {
                                           backgroundColor:
                                               ColorValues.appGreenColor,
                                           text: "Approve",
-                                          icon: Icons.add,
+                                          icon: Icons.check,
                                           onPressed: () {
                                             Get.dialog(PmPlanApprovedDialog(
                                                 // id: controller.pmPlanId.value,

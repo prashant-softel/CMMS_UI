@@ -2848,7 +2848,7 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                             child: CustomElevatedButton(
                               backgroundColor: ColorValues.appGreenColor,
                               text: "Approve Permit",
-                              icon: Icons.add,
+                              icon: Icons.check,
                               onPressed: () {
                                 // controller
                                 //     .createNewPermit();
@@ -2881,7 +2881,7 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                             child: CustomElevatedButton(
                               backgroundColor: ColorValues.appGreenColor,
                               text: "Extend Approve",
-                              icon: Icons.add,
+                              icon: Icons.check,
                               onPressed: () {
                                 // controller
                                 //     .createNewPermit();

@@ -848,7 +848,7 @@ class ViewVegExecutionContentWeb extends GetView<ViewVegExecutionController> {
                                                             ColorValues
                                                                 .appGreenColor,
                                                         text: "Approve",
-                                                        icon: Icons.add,
+                                                        icon: Icons.check,
                                                         onPressed: () {
                                                           Get.dialog(
                                                               ApproveVegExecutionDialog(

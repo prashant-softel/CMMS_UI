@@ -1081,7 +1081,7 @@ class ViewPermitMobile extends GetView<ViewPermitController> {
                 ? CustomElevatedButton(
                     backgroundColor: ColorValues.appGreenColor,
                     text: "Approve",
-                    icon: Icons.add,
+                    icon: Icons.check,
                     onPressed: () {
                       // controller
                       //     .createNewPermit();
@@ -1108,7 +1108,7 @@ class ViewPermitMobile extends GetView<ViewPermitController> {
                 ? CustomElevatedButton(
                     backgroundColor: ColorValues.appGreenColor,
                     text: "Extend Approve",
-                    icon: Icons.add,
+                    icon: Icons.check,
                     onPressed: () {
                       Get.dialog(PermitApprovedDialog(
                         permitId:
