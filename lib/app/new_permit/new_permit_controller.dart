@@ -652,8 +652,16 @@ class NewPermitController extends GetxController {
           .toList();
       print('Islation id:$idList');
       selectedEquipmentIsolationIdList.value = idList.whereType<int>().toList();
+      // List<String?> equname = listLoto?.value.equipment_name
+      //     .map((obj) => obj!.isolationAssetsCatID)
+      //     .toList();
+      // print('Islation id:$idList');
+      selectedEquipmentIsolationIdList.value = idList.whereType<int>().toList();
       print('Islation id:$selectedEquipmentIsolationIdList');
+      equipmentIsolationSelected(idList);
 
+      List<String?> nameList = listLoto!.map((obj) => obj!.loto_Key).toList();
+      // selectedEquipmentNameIdList
       // workPermitRemarkTextCtrlr.text =
       //     newPermitDetailsModel.value?.physical_iso_remark ?? "";
       int num = newPermitDetailsModel.value!.is_loto_required!;
@@ -784,13 +792,6 @@ class NewPermitController extends GetxController {
       selectedEquipmentIsolationIdList.add(_selectedIsolationId);
     }
     getInventoryEquipmentNameList();
-  }
-
-  void EquipmentNames(selectedEquipmentIsolationIdList) async {
-    for (var _selectedIsolationId in selectedEquipmentIsolationIdList) {
-      selectedEquipmentIsolationIdList.add(_selectedIsolationId);
-    }
-    await getInventoryEquipmentNameList();
   }
 
   Future<void> getAssignedToList() async {

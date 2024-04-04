@@ -275,7 +275,7 @@ class ObservationPmExecutionViewDialog extends GetView {
                                                                       'value'] ??
                                                                   '')
                                                               : (mapData['key'] ==
-                                                                      "uploadimg")
+                                                                      "uploading")
                                                                   ? Row(
                                                                       mainAxisAlignment:
                                                                           MainAxisAlignment

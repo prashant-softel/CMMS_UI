@@ -80,7 +80,7 @@ class PreventiveMaintenanceExecutionController extends GetxController {
   Map<String, ScheduleCheckPoint> checkdropdownMapperData = {};
 
   ///fileIDs
-  List<dynamic> fileIds = [];
+  int fileIds = 0;
   @override
   void onInit() async {
     try {
@@ -115,6 +115,7 @@ class PreventiveMaintenanceExecutionController extends GetxController {
       {'key': "Material_Type", "value": ''},
       {'key': "Issued_Qty", "value": ''},
       {'key': "Consumed_Qty", "value": ''},
+      {'key': "uploading", "value": ''},
       {'key': "Action ", "value": ''},
     ]);
   }
@@ -276,7 +277,7 @@ class PreventiveMaintenanceExecutionController extends GetxController {
           job_create: int.tryParse(element[7]["job_value"] ?? '0'),
           text: element[6]["value"] ?? '',
           cp_ok: int.tryParse(element[3]["value"] ?? '0'),
-          pm_files: []);
+          pm_files: pmfile);
       addObservations.add(item);
     });
     // });
@@ -610,7 +611,7 @@ class PreventiveMaintenanceExecutionController extends GetxController {
 
       var id = jsonResponse['id'];
       print('File Id,${id[0]}');
-      fileIds.addAll(jsonResponse['id']);
+      fileIds = (jsonResponse['id']);
       print('Files uploaded successfully,$fileIds');
     } else {
       print('Failed to upload files: ${response.reasonPhrase}');
