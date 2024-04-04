@@ -24,6 +24,7 @@ class EditWarrantyClaimController extends GetxController {
   EditWarrantyClaimPresenter editWarrantyClaimPresenter;
 
   final HomeController homeController = Get.find();
+  final GlobalKey<State<StatefulWidget>> printKey = GlobalKey();
 
   ///Radio
   RxString selectedSeverity = RxString('');

@@ -946,6 +946,7 @@ class _AddJobContentWebState extends State<AddJobContentWeb> {
                                         Spacer(),
                                       ],
                                     ),
+                                    Dimens.boxHeight15,
                                     Row(
                                       children: [
                                         Padding(
