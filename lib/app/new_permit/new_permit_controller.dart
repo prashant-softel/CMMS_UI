@@ -660,8 +660,9 @@ class NewPermitController extends GetxController {
       print('Islation id:$selectedEquipmentIsolationIdList');
       equipmentIsolationSelected(idList);
 
-      List<String?> nameList = listLoto!.map((obj) => obj!.loto_Key).toList();
-      // selectedEquipmentNameIdList
+      List<int?> nameList = listLoto!.map((obj) => obj!.loto_id).toList();
+      selectedEquipmentNameIdList.value = nameList.whereType<int>().toList();
+      print("$selectedEquipmentNameIdList");
       // workPermitRemarkTextCtrlr.text =
       //     newPermitDetailsModel.value?.physical_iso_remark ?? "";
       int num = newPermitDetailsModel.value!.is_loto_required!;
