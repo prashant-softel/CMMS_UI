@@ -369,6 +369,9 @@ class PreventiveMaintenanceExecutionContentWeb
                                                                   controller
                                                                           .selectedItem =
                                                                       null;
+                                                                  controller
+                                                                      .rowItemobs
+                                                                      .value = [];
                                                                   controller.selectedItem = controller
                                                                       .scheduleCheckPoints
                                                                       .firstWhere((element) =>
