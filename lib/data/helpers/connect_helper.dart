@@ -2080,13 +2080,13 @@ class ConnectHelper {
 
   Future<ResponseModel> getJobDetails({
     required String auth,
+    int? jobId,
     required int facilityId,
     bool? isLoading,
-    int? jobId,
     int? userId,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
-      'Job/GetJobDetails?job_id=$facilityId&facility_id=$jobId',
+      'Job/GetJobDetails?job_id=$jobId&facility_id=$facilityId',
       Request.get,
       null,
       isLoading ?? false,
@@ -3530,9 +3530,9 @@ class ConnectHelper {
 
   Future<ResponseModel> getJobCardHistory({
     required String? auth,
-    required int facilityId,
     int? moduleType,
     int? jobCardId,
+    required int facilityId,
     bool? isLoading,
   }) async {
     var responseModel = await apiWrapper.makeRequest(

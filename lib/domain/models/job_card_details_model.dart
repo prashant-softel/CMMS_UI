@@ -59,7 +59,7 @@ class JobCardDetailsModel {
   List<LstCmjcIsolatedDetailList>? lstCmjcIsolatedDetailList;
   List<dynamic>? lstCmjcLotoDetailList;
   List<dynamic>? lstCmjcEmpList;
-  List<dynamic>? fileList;
+  List<int?>? fileList;
   int? status;
   String? status_short;
   String? status_long;
@@ -98,7 +98,7 @@ class JobCardDetailsModel {
             List<dynamic>.from(json["lstCMJCLotoDetailList"].map((x) => x)),
         lstCmjcEmpList:
             List<dynamic>.from(json["lstCMJCEmpList"].map((x) => x)),
-        fileList: List<dynamic>.from(json["file_list"].map((x) => x)),
+        fileList: List<int>.from(json["file_list"].map((x) => x)),
       );
 
   Map<String, dynamic> toJson() => {
@@ -121,17 +121,17 @@ class JobCardDetailsModel {
         "status_short": status_short,
         "created_by": created_by,
         "jC_Approved": jC_Approved,
-        "lstCMJCJobDetailList": List<dynamic>.from(
+        "lstCMJCJobDetailList": List<LstCmjcJobDetailList>.from(
             lstCmjcJobDetailList?.map((x) => x.toJson()) ?? []),
-        "lstPermitDetailList": List<dynamic>.from(
+        "lstPermitDetailList": List<LstPermitDetailList>.from(
             lstPermitDetailList?.map((x) => x.toJson()) ?? []),
-        "lstCMJCIsolatedDetailList": List<dynamic>.from(
+        "lstCMJCIsolatedDetailList": List<LstCmjcIsolatedDetailList>.from(
             lstCmjcIsolatedDetailList?.map((x) => x.toJson()) ?? []),
         "lstCMJCLotoDetailList":
             List<dynamic>.from(lstCmjcLotoDetailList?.map((x) => x) ?? []),
         "lstCMJCEmpList":
             List<dynamic>.from(lstCmjcEmpList?.map((x) => x) ?? []),
-        "file_list": List<dynamic>.from(fileList?.map((x) => x) ?? []),
+        "file_list": List<int>.from(fileList?.map((x) => x) ?? []),
       };
 }
 
@@ -159,6 +159,9 @@ class LstCmjcJobDetailList {
     this.jobAssignedEmployeeName,
     this.jobDescription,
     this.workType,
+    this.facility_id,
+    this.status,
+    this.status_short,
   });
 
   int? jobId;
@@ -166,6 +169,9 @@ class LstCmjcJobDetailList {
   String? jobAssignedEmployeeName;
   String? jobDescription;
   String? workType;
+  int? facility_id;
+  int? status;
+  String? status_short;
 
   factory LstCmjcJobDetailList.fromJson(Map<String, dynamic> json) =>
       LstCmjcJobDetailList(
@@ -174,6 +180,9 @@ class LstCmjcJobDetailList {
         jobAssignedEmployeeName: json["job_assigned_employee_name"],
         jobDescription: json["job_description"],
         workType: json["work_type"],
+        facility_id: json["facility_id"],
+        status: json["status"],
+        status_short: json["status_short"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -182,6 +191,9 @@ class LstCmjcJobDetailList {
         "job_assigned_employee_name": jobAssignedEmployeeName,
         "job_description": jobDescription,
         "work_type": workType,
+        "facility_id": facility_id,
+        "status": status,
+        "status_short": status_short,
       };
 }
 
@@ -199,7 +211,7 @@ class LstPermitDetailList {
 
   int permitId;
   int sitePermitNo;
-  dynamic permitType;
+  String? permitType;
   String permitDescription;
   String? jobCreatedByName;
   String? permitIssuedByName;

@@ -1332,16 +1332,16 @@ class DataRepository extends DomainRepository {
 
   Future<ResponseModel> getJobDetails({
     required String auth,
-    required int facilityId,
     int? jobId,
+    required int facilityId,
     int? userId,
     bool? isLoading,
   }) async =>
       await connectHelper.getJobDetails(
         auth: auth,
+        facilityId: facilityId,
         jobId: jobId ?? 0,
         userId: userId,
-        facilityId: facilityId,
         isLoading: isLoading,
       );
 
@@ -1945,8 +1945,8 @@ class DataRepository extends DomainRepository {
     return await connectHelper.getJobCardHistory(
       auth: auth,
       moduleType: moduleType,
-      facilityId: facilityId,
       jobCardId: jobCardId,
+      facilityId: facilityId,
       isLoading: isLoading,
     );
   }
