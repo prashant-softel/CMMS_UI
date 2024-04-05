@@ -81,7 +81,7 @@ class JobCardDetailsController extends GetxController {
 
   /// Plant Details
   int userId = 35;
-  int facilityId = 46;
+  int facilityId = 0;
   RxMap plantDetails = {}.obs;
 
   /// Job Card
@@ -102,7 +102,7 @@ class JobCardDetailsController extends GetxController {
       facilityId = event;
       if (facilityId > 0) {
         isFacilitySelected.value = true;
-        getHistory(facilityId);
+        await getHistory(facilityId);
       }
     });
     // print({"madfhuiwef", jobCardId});
@@ -124,13 +124,13 @@ class JobCardDetailsController extends GetxController {
             ) ??
             [];
       }
-      getHistory(facilityId);
+      await getHistory(facilityId);
       createPlantDetailsTableData();
 
       createJobDetailsTableData();
       createPermitDetailsTableData();
       //  createJcDetailsTableData();
-      getEmployeeList();
+      await getEmployeeList();
       //  getPermitDetails();
 
       responsibilityCtrlrs.add(TextEditingController());
@@ -441,7 +441,7 @@ class JobCardDetailsController extends GetxController {
               isLoading: true,
             ) ??
             [];
-        getHistory(facilityId);
+        await getHistory(facilityId);
       }
     }
 

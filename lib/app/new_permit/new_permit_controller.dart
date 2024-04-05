@@ -638,6 +638,8 @@ class NewPermitController extends GetxController {
       if (selectedPermitTypeId != 0) {
         getSafetyMeasureList();
       }
+      int num = newPermitDetailsModel.value!.is_loto_required!;
+      num == 1 ? isToggleOn.value = true : isToggleOn.value = false;
       selectedEquipmentCategoryIdList.assignAll(
         (newPermitDetailsModel.value?.category_ids ?? []) as Iterable<int>,
       );
@@ -653,21 +655,23 @@ class NewPermitController extends GetxController {
           .toList();
       print('Islation id:$idList');
       selectedEquipmentIsolationIdList.value = idList.whereType<int>().toList();
-      // List<String?> equname = listLoto?.value.equipment_name
-      //     .map((obj) => obj!.isolationAssetsCatID)
-      //     .toList();
-      // print('Islation id:$idList');
-      selectedEquipmentIsolationIdList.value = idList.whereType<int>().toList();
       print('Islation id:$selectedEquipmentIsolationIdList');
       equipmentIsolationSelected(idList);
 
       List<int?> nameList = listLoto!.map((obj) => obj!.loto_id).toList();
       selectedEquipmentNameIdList.value = nameList.whereType<int>().toList();
+      for (var _selectedNameId in nameList) {
+      selectedEquipmentNameIdList.add(_selectedNameId!);
+      InventoryModel? e = equipmentNameList.firstWhere((element) {
+        print("element id : ${_selectedNameId}");
+        return element?.id == _selectedNameId;
+      });
+      filteredEquipmentNameList.add(e);
+    }
+      equipmentNameSelected(nameList);
       print("$selectedEquipmentNameIdList");
       // workPermitRemarkTextCtrlr.text =
       //     newPermitDetailsModel.value?.physical_iso_remark ?? "";
-      int num = newPermitDetailsModel.value!.is_loto_required!;
-      num == 1 ? isToggleOn.value = true : isToggleOn.value = false;
 
       // print('EmployeeList:${listEmployee}');
     }
@@ -714,6 +718,21 @@ class NewPermitController extends GetxController {
     for (var _selectedNameId in _selectedEquipmentNameIds) {
       selectedEquipmentNameIdList.add(_selectedNameId);
       InventoryModel? e = equipmentNameList.firstWhere((element) {
+        print("element id : ${_selectedNameId}");
+        return element?.id == _selectedNameId;
+      });
+      filteredEquipmentNameList.add(e);
+    }
+    //  print({"selectedEquipmentNameIdList le":selectedEquipmentNameIdList.value.length,"filteredEquipmentNameList":filteredEquipmentNameList.value.length});
+  }
+
+  void equipmentNameSelectedGet(_selectedEquipmentNameIds) {
+    selectedEquipmentNameIdList.value = <int>[];
+    filteredEquipmentNameList.value = <InventoryModel>[];
+    for (var _selectedNameId in _selectedEquipmentNameIds) {
+      selectedEquipmentNameIdList.add(_selectedNameId);
+      InventoryModel? e = equipmentNameList.firstWhere((element) {
+        print("element id : ${_selectedNameId}");
         return element?.id == _selectedNameId;
       });
       filteredEquipmentNameList.add(e);
