@@ -12,8 +12,8 @@ class JobDetailsPresenter {
   ///
   Future<List<JobDetailsModel?>?> getJobDetails({
     String? auth,
-    required int facilityId,
     int? jobId,
+    required int facilityId,
     int? userId,
     bool? isLoading,
   }) async =>

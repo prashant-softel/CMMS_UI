@@ -101,15 +101,20 @@ class JobDetailsController extends GetxController {
         isFacilitySelected.value = true;
       }
       Future.delayed(Duration(seconds: 1), () {
-        getJobDetails(jobId.value, facilityId);
+        if (jobId.value > 0) {
+          getJobDetails(jobId.value, facilityId);
+        }
       });
     });
     try {
       await setJobId();
-      getJobDetails(jobId.value, facilityId);
-
-      getjobDetailsModel(jobId.value, facilityId);
-      getMrsListByModule(jobId: jobId.value, facilityId: facilityId);
+      // getJobDetails(jobId.value, facilityId);
+      if (jobId.value > 0) {
+        getjobDetailsModel(jobId.value, facilityId);
+      }
+      if (jobId.value > 0) {
+        getMrsListByModule(jobId: jobId.value, facilityId: facilityId);
+      }
 
       isDataLoading.value = false;
       textControllers =

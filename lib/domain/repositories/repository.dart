@@ -3823,7 +3823,7 @@ class Repository {
           var responseMap = json.decode(res.data);
           type == 1
               ? Get.offAllNamed(Routes.pmTaskView)
-              : Get.offAndToNamed(Routes.newPermitList);
+              : Get.offAllNamed(Routes.newPermitList);
           return responseMap;
         } else {
           // Get.dialog<void>(WarrantyClaimErrorDialog());
@@ -4886,8 +4886,8 @@ class Repository {
 
   Future<List<JobDetailsModel>> getJobDetails(
     String? auth,
-    int facilityId,
     int jobId,
+    int facilityId,
     int? userId,
     bool? isLoading,
   ) async {
@@ -5777,8 +5777,8 @@ class Repository {
 
   Future<List<HistoryModel>?> getJobCardHistory(
     int? moduleType,
-    int facilityId,
     int? jobCardId,
+    int facilityId,
     bool? isLoading,
   ) async {
     try {
@@ -5786,8 +5786,8 @@ class Repository {
       final res = await _dataRepository.getJobCardHistory(
         auth: auth,
         moduleType: moduleType,
-        facilityId: facilityId,
         jobCardId: jobCardId,
+        facilityId: facilityId,
         isLoading: isLoading,
       );
 

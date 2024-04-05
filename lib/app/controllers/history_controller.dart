@@ -20,11 +20,11 @@ class HistoryController extends GetxController {
 
   Future<List<HistoryModel>?> getJobCardHistory(
     int? moduleType,
-    int facilityId,
     int? jobCardId,
+    int facilityId,
   ) async {
-    var jobCardHistoryList =
-        await repository.getJobCardHistory(moduleType,facilityId, jobCardId, true);
+    var jobCardHistoryList = await repository.getJobCardHistory(
+        moduleType, jobCardId, facilityId, true);
     return jobCardHistoryList;
   }
 
