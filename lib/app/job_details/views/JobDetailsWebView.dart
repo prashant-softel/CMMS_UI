@@ -522,12 +522,9 @@ class JobDetailsWebView extends GetView<JobDetailsController> {
                                                             ?.length ??
                                                         0,
                                                     (index) => DataRow(cells: [
-                                                      DataCell(Text(controller
-                                                              .jobAssociatedModelsList?[
-                                                                  index]
-                                                              ?.jobCardId
-                                                              .toString() ??
-                                                          '')),
+                                                      DataCell(Text(
+                                                          "JC${controller.jobAssociatedModelsList?[index]?.jobCardId.toString()}" ??
+                                                              '')),
                                                       DataCell(Text(controller
                                                               .jobAssociatedModelsList?[
                                                                   index]

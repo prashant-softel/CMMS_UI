@@ -13,8 +13,8 @@ class JobDetailsUsecase {
 
   Future<List<JobDetailsModel?>?> getJobDetails({
     required String auth,
-    required int facilityId,
     required int jobId,
+    required int facilityId,
     int? userId,
     bool? isLoading,
   }) async =>

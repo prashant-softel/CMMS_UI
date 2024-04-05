@@ -665,19 +665,10 @@ class NewPermitController extends GetxController {
 
       List<int?> nameList = listLoto!.map((obj) => obj!.loto_id).toList();
       selectedEquipmentNameIdList.value = nameList.whereType<int>().toList();
-      for (var _selectedNameId in nameList) {
-        selectedEquipmentNameIdList.add(_selectedNameId!);
-        InventoryModel? e = equipmentNameList.firstWhere((element) {
-          print("element id : ${_selectedNameId}");
-          return element?.id == _selectedNameId;
-        });
-        filteredEquipmentNameList.add(e);
-      }
-      equipmentNameSelected(nameList);
-      print("$selectedEquipmentNameIdList");
+      // equipmentNameSelected(nameList);
+      print("equipment names id's: $selectedEquipmentNameIdList");
       // workPermitRemarkTextCtrlr.text =
       //     newPermitDetailsModel.value?.physical_iso_remark ?? "";
-
       // print('EmployeeList:${listEmployee}');
     }
   }
