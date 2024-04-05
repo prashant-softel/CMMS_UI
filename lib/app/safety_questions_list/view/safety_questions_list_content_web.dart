@@ -243,7 +243,7 @@ class SafetyQuestionsListContentWeb
                                         children: [
                                           Expanded(
                                             child: CustomRichText(
-                                                title: 'Checklist Title'),
+                                                title: 'Checkpoint title'),
                                           ),
                                           Container(
                                             width: (MediaQuery.of(context)
@@ -1008,7 +1008,7 @@ class SafetyQuestionsListContentWeb
                                         ),
                                         DataColumn2(
                                           label: Text(
-                                            "Permit Type",
+                                            "Permit Type Checklist",
                                             style: TextStyle(
                                                 fontSize: 15,
                                                 fontWeight: FontWeight.bold),
@@ -1017,7 +1017,7 @@ class SafetyQuestionsListContentWeb
                                         ),
                                         DataColumn2(
                                           label: Text(
-                                            "Title",
+                                            "Checkpoint",
                                             style: TextStyle(
                                                 fontSize: 15,
                                                 fontWeight: FontWeight.bold),

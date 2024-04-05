@@ -190,7 +190,7 @@ class AddJobController extends GetxController {
   }
 
   Future<void> getToolsRequiredToWorkTypeList(workTypeIds) async {
-    print("Work type in controller, $workTypeIds");
+    print("Fault in controller, $workTypeIds");
     final list = await addJobPresenter.getToolsRequiredToWorkTypeList(
       isLoading: false,
       workTypeIds: workTypeIds,
@@ -318,7 +318,7 @@ class AddJobController extends GetxController {
       for (var _selectedworktype in selectedWorkTypeList) {
         selectedwrktype.add(_selectedworktype?.id ?? 0);
       }
-      print("selected  work type : $selectedwrktype");
+      print("selected  Fault : $selectedwrktype");
 
       AddJobModel addJobModel = AddJobModel(
         id: 0,

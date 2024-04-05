@@ -65,7 +65,7 @@ class AddJobPresenter {
 
     bool? isLoading,
   }) async {
-    print("Work type id in presenter: $workTypeIds");
+    print("Fault id in presenter: $workTypeIds");
     return addJobUsecase.getToolsRequiredToWorkTypeList(
       auth:auth ?? "",
       workTypeIds: workTypeIds,

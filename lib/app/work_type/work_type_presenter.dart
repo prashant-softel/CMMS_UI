@@ -32,7 +32,7 @@ Future<List<WorkTypeModel?>?> getWorkTypeList({
     worktypeJsonString,
     required bool isLoading,
   }) async {
-    print("presenter Create work type function.");
+    print("presenter Create fault function.");
     workTypeUsecase.createWorkType(
       worktypeJsonString: worktypeJsonString,
       isLoading: isLoading,

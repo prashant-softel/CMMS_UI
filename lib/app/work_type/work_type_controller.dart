@@ -215,7 +215,7 @@ class WorkTypeController extends GetxController {
           ),
           RichText(
             text: TextSpan(
-                text: 'Are you sure you want to delete the Work Type?',
+                text: 'Are you sure you want to delete the Fault?',
                 style: Styles.blackBold16,
                 children: [
                   TextSpan(

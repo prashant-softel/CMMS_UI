@@ -22,7 +22,7 @@ class ToolsRequiredWidget extends StatelessWidget {
         alignment: Alignment.centerLeft,
         child: RichText(
           text: TextSpan(
-            text: 'Tools Required To Work Type: ',
+            text: 'Tools Required To Fault: ',
             style: Styles.blackBold16,
             children: [],
           ),

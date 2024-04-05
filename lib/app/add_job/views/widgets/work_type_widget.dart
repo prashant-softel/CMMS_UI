@@ -21,7 +21,7 @@ class _WorkTypeWidgetState extends State<WorkTypeWidget> {
       () => Column(
         crossAxisAlignment : CrossAxisAlignment.start,
         children: [
-        CustomRichTextMobile(title: 'Work Type: '),
+        CustomRichTextMobile(title: 'Fault: '),
         Dimens.boxHeight2,
         Container(
           padding: EdgeInsets.symmetric(horizontal: 10.0),

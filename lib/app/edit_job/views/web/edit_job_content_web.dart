@@ -308,7 +308,7 @@ class _EditJobContentWebState extends State<EditJobContentWeb> {
                                                   child: Row(
                                                     children: [
                                                       CustomRichText(
-                                                          title: 'Work Type :'),
+                                                          title: 'Fault :'),
                                                       Dimens.boxWidth10,
                                                       Container(
                                                         decoration:
@@ -532,7 +532,7 @@ class _EditJobContentWebState extends State<EditJobContentWeb> {
                                                   children: [
                                                     CustomRichText(
                                                         title:
-                                                            'Tools Required For Work Type :'),
+                                                            'Tools Required For Fault :'),
                                                     Dimens.boxWidth10,
                                                     Container(
                                                       decoration: BoxDecoration(

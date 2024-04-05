@@ -25,7 +25,7 @@ class _ToolsRequiredWidgetState extends State<ToolsRequiredWidget> {
           Column(
             crossAxisAlignment : CrossAxisAlignment.start,
               children: [
-       CustomRichTextMobile(title: 'Tools Required For Work Type: '),
+       CustomRichTextMobile(title: 'Tools Required For Fault: '),
         Dimens.boxHeight2,
         Container(
           decoration: BoxDecoration(

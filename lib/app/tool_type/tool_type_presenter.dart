@@ -31,7 +31,7 @@ class ToolTypePresenter {
     worktypetoolJsonString,
     required bool isLoading,
   }) async {
-    print("presenter Create work type function.");
+    print("presenter Create tooltype function.");
     toolTypeUsecase.createWorkTypeTool(
       worktypetoolJsonString: worktypetoolJsonString,
       isLoading: isLoading,
@@ -44,7 +44,7 @@ class ToolTypePresenter {
     String? workTypeIds,
     bool? isLoading,
   }) async {
-    print("Work type id in presenter: $workTypeIds");
+    print("Fault id in presenter: $workTypeIds");
     return toolTypeUsecase.getToolsRequiredToWorkTypeList(
       auth: auth ?? "",
       workTypeIds: workTypeIds,

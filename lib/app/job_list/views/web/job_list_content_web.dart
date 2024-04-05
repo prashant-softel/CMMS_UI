@@ -302,7 +302,7 @@ class JobListContentWeb extends StatelessWidget {
                                         170),
                                     buildDataColumn(
                                         'workType',
-                                        'Work Type',
+                                        'Fault',
                                         // ColumnSize.L,
                                         controller.workTypeFilterText,
                                         150),
