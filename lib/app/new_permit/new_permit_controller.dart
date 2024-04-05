@@ -1394,7 +1394,9 @@ class NewPermitController extends GetxController {
 
       safetyMeasureList.forEach((e) {
         safety_measure_map_list.add(Safetyquestionlist(
-            safetyMeasureId: e.id, safetyMeasureValue: e.name));
+            safetyMeasureId: e.id,
+            safetyMeasureValue: e.name,
+            ischeck: e.isChecked ? 1 : 0));
       });
 
       //  List<Employeelist> employee_list= <Employeelist>[];
@@ -1674,7 +1676,9 @@ class NewPermitController extends GetxController {
 
       safetyMeasureList.forEach((e) {
         safety_measure_map_list.add(Safetyquestionlist(
-            safetyMeasureId: e.id, safetyMeasureValue: e.name));
+            safetyMeasureId: e.id,
+            safetyMeasureValue: e.name,
+            ischeck: e.isChecked ? 1 : 0));
       });
 
       CreatePermitModel updatePermitModel = CreatePermitModel(
@@ -1764,7 +1768,9 @@ class NewPermitController extends GetxController {
 
       safetyMeasureList.forEach((e) {
         safety_measure_map_list.add(Safetyquestionlist(
-            safetyMeasureId: e.id, safetyMeasureValue: e.name));
+            safetyMeasureId: e.id,
+            safetyMeasureValue: e.name,
+            ischeck: e.isChecked ? 1 : 0));
       });
 
       CreatePermitModel updatePermitModel = CreatePermitModel(
