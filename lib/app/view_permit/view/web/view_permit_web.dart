@@ -1012,63 +1012,64 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                                             //   ),
                                             // ),
                                             Dimens.boxHeight10,
-                                            Container(
-                                              width: MediaQuery.of(context)
-                                                      .size
-                                                      .width /
-                                                  1.2,
-                                              margin: EdgeInsets.all(16),
-                                              child: Center(
-                                                child: Column(
-                                                  children: [
-                                                    CustomAppBar(
-                                                        title:
-                                                            'Permit Type Checklist'
-                                                                .tr),
-                                                    Dimens.boxHeight10,
-                                                    controller.safetyMeasureList
-                                                                .length >
-                                                            0
-                                                        ? GetBuilder<
-                                                                ViewPermitController>(
-                                                            init: controller,
-                                                            builder: (ctrl) {
-                                                              return Column(
-                                                                children: controller
-                                                                    .viewPermitDetailsModel
-                                                                    .value!
-                                                                    .safety_question_list!
-                                                                    .map(
-                                                                        (element) {
-                                                                  return Column(
-                                                                    mainAxisAlignment:
-                                                                        MainAxisAlignment
-                                                                            .start,
-                                                                    crossAxisAlignment:
-                                                                        CrossAxisAlignment
-                                                                            .start,
-                                                                    children: [
-                                                                      SizedBox(
-                                                                        child:
-                                                                            Row(
-                                                                          children: [
-                                                                            checkBoxMethod(element.ischeck == 1 ? true : false,
-                                                                                (value) {
-                                                                              element.ischeck == value ?? false;
-                                                                              controller.update();
-                                                                            }),
-                                                                            Dimens.boxWidth10,
-                                                                            Text("${element.saftyQuestionName}"),
-                                                                          ],
+                                            IgnorePointer(
+                                              child: Container(
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width /
+                                                    1.2,
+                                                margin: EdgeInsets.all(16),
+                                                child: Center(
+                                                  child: Column(
+                                                    children: [
+                                                      CustomAppBar(
+                                                          title:
+                                                              'Permit Type Checklist'
+                                                                  .tr),
+                                                      Dimens.boxHeight10,
+                                                      controller.safetyMeasureList
+                                                                  .length >
+                                                              0
+                                                          ? GetBuilder<
+                                                                  ViewPermitController>(
+                                                              init: controller,
+                                                              builder: (ctrl) {
+                                                                return Column(
+                                                                  children: controller
+                                                                      .viewPermitDetailsModel
+                                                                      .value!
+                                                                      .safety_question_list!
+                                                                      .map(
+                                                                          (element) {
+                                                                    return Column(
+                                                                      mainAxisAlignment:
+                                                                          MainAxisAlignment
+                                                                              .start,
+                                                                      crossAxisAlignment:
+                                                                          CrossAxisAlignment
+                                                                              .start,
+                                                                      children: [
+                                                                        SizedBox(
+                                                                          child:
+                                                                              Row(
+                                                                            children: [
+                                                                              checkBoxMethod(element.ischeck == 1 ? true : false, (value) {
+                                                                                element.ischeck == value ?? false;
+                                                                                controller.update();
+                                                                              }),
+                                                                              Dimens.boxWidth10,
+                                                                              Text("${element.saftyQuestionName}"),
+                                                                            ],
+                                                                          ),
                                                                         ),
-                                                                      ),
-                                                                    ],
-                                                                  );
-                                                                }).toList(),
-                                                              );
-                                                            })
-                                                        : Dimens.box0,
-                                                  ],
+                                                                      ],
+                                                                    );
+                                                                  }).toList(),
+                                                                );
+                                                              })
+                                                          : Dimens.box0,
+                                                    ],
+                                                  ),
                                                 ),
                                               ),
                                             ),
@@ -1518,205 +1519,205 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                                             ),
                                           ),
                                         ),
-                                        Container(
-                                          margin: EdgeInsets.only(
-                                              left: 20, right: 20, bottom: 20),
-                                          height: ((controller
+                                        IgnorePointer(
+                                          child: Container(
+                                            margin: EdgeInsets.only(
+                                                left: 20,
+                                                right: 20,
+                                                bottom: 20),
+                                            height: ((controller
+                                                        .rowTBTTrainingOtherPersonItem
+                                                        .value
+                                                        .length) *
+                                                    70) +
+                                                140,
+                                            decoration: BoxDecoration(
+                                              border: Border.all(
+                                                color: ColorValues
+                                                    .lightGreyColorWithOpacity35,
+                                                width: 1,
+                                              ),
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: ColorValues
+                                                      .appBlueBackgroundColor,
+                                                  spreadRadius: 2,
+                                                  blurRadius: 5,
+                                                  offset: Offset(0, 2),
+                                                ),
+                                              ],
+                                            ),
+                                            child: Column(children: [
+                                              // Column(
+                                              //     children: []..addAll(controller.rowTBTTrainingOtherPersonItem.value.map((e) {
+                                              //         return Text(jsonEncode(e));
+                                              //       }))),
+                                              // Text(jsonEncode(controller.dropdownMapperData)),
+                                              Padding(
+                                                padding:
+                                                    const EdgeInsets.all(10.0),
+                                                child: Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
+                                                  children: [
+                                                    Text(
+                                                      "TBT Training Attended By Other Person ",
+                                                      style: Styles.blue700,
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                              Expanded(
+                                                child: DataTable2(
+                                                  // minWidth: 1700,
+                                                  dataRowHeight: 50,
+                                                  // columnSpacing: 10,
+                                                  border: TableBorder.all(
+                                                      color: Color.fromARGB(
+                                                          255, 206, 229, 234)),
+                                                  columns: [
+                                                    DataColumn2(
+                                                        label: Text(
+                                                      "Employee Name",
+                                                      style: TextStyle(
+                                                          fontSize: 15,
+                                                          fontWeight:
+                                                              FontWeight.bold),
+                                                    )),
+                                                    DataColumn2(
+                                                        label: Text(
+                                                      "Contact Number",
+                                                      style: TextStyle(
+                                                          fontSize: 15,
+                                                          fontWeight:
+                                                              FontWeight.bold),
+                                                    )),
+                                                    DataColumn2(
+                                                        label: Text(
+                                                      "Responsibility",
+                                                      style: TextStyle(
+                                                          fontSize: 15,
+                                                          fontWeight:
+                                                              FontWeight.bold),
+                                                    )),
+                                                    DataColumn2(
+                                                        fixedWidth: 100,
+                                                        label: Text(
+                                                          "Action",
+                                                          style: TextStyle(
+                                                              fontSize: 15,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold),
+                                                        )),
+                                                  ],
+                                                  rows: controller
                                                       .rowTBTTrainingOtherPersonItem
                                                       .value
-                                                      .length) *
-                                                  70) +
-                                              140,
-                                          decoration: BoxDecoration(
-                                            border: Border.all(
-                                              color: ColorValues
-                                                  .lightGreyColorWithOpacity35,
-                                              width: 1,
-                                            ),
-                                            boxShadow: [
-                                              BoxShadow(
-                                                color: ColorValues
-                                                    .appBlueBackgroundColor,
-                                                spreadRadius: 2,
-                                                blurRadius: 5,
-                                                offset: Offset(0, 2),
-                                              ),
-                                            ],
-                                          ),
-                                          child: Column(children: [
-                                            // Column(
-                                            //     children: []..addAll(controller.rowTBTTrainingOtherPersonItem.value.map((e) {
-                                            //         return Text(jsonEncode(e));
-                                            //       }))),
-                                            // Text(jsonEncode(controller.dropdownMapperData)),
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.all(10.0),
-                                              child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: [
-                                                  Text(
-                                                    "TBT Training Attended By Other Person ",
-                                                    style: Styles.blue700,
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                            Expanded(
-                                              child: DataTable2(
-                                                // minWidth: 1700,
-                                                dataRowHeight: 50,
-                                                // columnSpacing: 10,
-                                                border: TableBorder.all(
-                                                    color: Color.fromARGB(
-                                                        255, 206, 229, 234)),
-                                                columns: [
-                                                  DataColumn2(
-                                                      label: Text(
-                                                    "Employee Name",
-                                                    style: TextStyle(
-                                                        fontSize: 15,
-                                                        fontWeight:
-                                                            FontWeight.bold),
-                                                  )),
-                                                  DataColumn2(
-                                                      label: Text(
-                                                    "Contact Number",
-                                                    style: TextStyle(
-                                                        fontSize: 15,
-                                                        fontWeight:
-                                                            FontWeight.bold),
-                                                  )),
-                                                  DataColumn2(
-                                                      label: Text(
-                                                    "Responsibility",
-                                                    style: TextStyle(
-                                                        fontSize: 15,
-                                                        fontWeight:
-                                                            FontWeight.bold),
-                                                  )),
-                                                  DataColumn2(
-                                                      fixedWidth: 100,
-                                                      label: Text(
-                                                        "Action",
-                                                        style: TextStyle(
-                                                            fontSize: 15,
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .bold),
-                                                      )),
-                                                ],
-                                                rows: controller
-                                                    .rowTBTTrainingOtherPersonItem
-                                                    .value
-                                                    .map((record) {
-                                                  return DataRow(
-                                                    // height: 130,
-                                                    cells:
-                                                        record.map((mapData) {
-                                                      return DataCell(
-                                                        (mapData['key'] ==
-                                                                    "Employee Name") ||
-                                                                (mapData[
-                                                                        'key'] ==
-                                                                    "Contact Number") ||
-                                                                (mapData[
-                                                                        'key'] ==
-                                                                    "Responsibility")
-                                                            ? Padding(
-                                                                padding: EdgeInsets
-                                                                    .only(
-                                                                        top:
-                                                                            10),
-                                                                child: Column(
-                                                                  mainAxisAlignment:
-                                                                      MainAxisAlignment
-                                                                          .start,
-                                                                  crossAxisAlignment:
-                                                                      CrossAxisAlignment
-                                                                          .start,
-                                                                  children: [
-                                                                    Container(
-                                                                        decoration:
-                                                                            BoxDecoration(
-                                                                          boxShadow: [
-                                                                            BoxShadow(
-                                                                              color: Colors.black26,
-                                                                              offset: const Offset(
-                                                                                5.0,
-                                                                                5.0,
+                                                      .map((record) {
+                                                    return DataRow(
+                                                      // height: 130,
+                                                      cells:
+                                                          record.map((mapData) {
+                                                        return DataCell(
+                                                          (mapData['key'] ==
+                                                                      "Employee Name") ||
+                                                                  (mapData[
+                                                                          'key'] ==
+                                                                      "Contact Number") ||
+                                                                  (mapData[
+                                                                          'key'] ==
+                                                                      "Responsibility")
+                                                              ? Padding(
+                                                                  padding:
+                                                                      EdgeInsets
+                                                                          .only(
+                                                                              top: 10),
+                                                                  child: Column(
+                                                                    mainAxisAlignment:
+                                                                        MainAxisAlignment
+                                                                            .start,
+                                                                    crossAxisAlignment:
+                                                                        CrossAxisAlignment
+                                                                            .start,
+                                                                    children: [
+                                                                      Container(
+                                                                          decoration:
+                                                                              BoxDecoration(
+                                                                            boxShadow: [
+                                                                              BoxShadow(
+                                                                                color: Colors.black26,
+                                                                                offset: const Offset(
+                                                                                  5.0,
+                                                                                  5.0,
+                                                                                ),
+                                                                                blurRadius: 5.0,
+                                                                                spreadRadius: 1.0,
                                                                               ),
-                                                                              blurRadius: 5.0,
-                                                                              spreadRadius: 1.0,
-                                                                            ),
-                                                                          ],
-                                                                          color:
-                                                                              ColorValues.whiteColor,
-                                                                          borderRadius:
-                                                                              BorderRadius.circular(5),
-                                                                        ),
-                                                                        child:
-                                                                            LoginCustomTextfield(
-                                                                          keyboardType:
-                                                                              TextInputType.number,
-                                                                          maxLine:
-                                                                              1,
-                                                                          textController:
-                                                                              new TextEditingController(text: mapData["value"] ?? ''),
-                                                                          onChanged:
-                                                                              (txt) {
-                                                                            mapData["value"] =
-                                                                                txt;
-                                                                          },
-                                                                        )),
-                                                                  ],
-                                                                ),
-                                                              )
-                                                            : (mapData['key'] ==
-                                                                    "Action ")
-                                                                ? Padding(
-                                                                    padding: EdgeInsets
-                                                                        .only(
-                                                                            top:
-                                                                                10),
-                                                                    child:
-                                                                        Column(
-                                                                      mainAxisAlignment:
-                                                                          MainAxisAlignment
-                                                                              .start,
-                                                                      crossAxisAlignment:
-                                                                          CrossAxisAlignment
-                                                                              .start,
-                                                                      children: [
-                                                                        TableActionButton(
-                                                                          color:
-                                                                              ColorValues.appRedColor,
-                                                                          icon:
-                                                                              Icons.delete,
-                                                                          label:
-                                                                              '',
-                                                                          message:
-                                                                              '',
-                                                                          onPress:
-                                                                              () {
-                                                                            controller.rowTBTTrainingOtherPersonItem.remove(record);
-                                                                          },
-                                                                        )
-                                                                      ],
-                                                                    ),
-                                                                  )
-                                                                : Text(mapData[
-                                                                        'key'] ??
-                                                                    ''),
-                                                      );
-                                                    }).toList(),
-                                                  );
-                                                }).toList(),
+                                                                            ],
+                                                                            color:
+                                                                                ColorValues.whiteColor,
+                                                                            borderRadius:
+                                                                                BorderRadius.circular(5),
+                                                                          ),
+                                                                          child:
+                                                                              LoginCustomTextfield(
+                                                                            keyboardType:
+                                                                                TextInputType.number,
+                                                                            maxLine:
+                                                                                1,
+                                                                            textController:
+                                                                                new TextEditingController(text: mapData["value"] ?? ''),
+                                                                            onChanged:
+                                                                                (txt) {
+                                                                              mapData["value"] = txt;
+                                                                            },
+                                                                          )),
+                                                                    ],
+                                                                  ),
+                                                                )
+                                                              : (mapData['key'] ==
+                                                                      "Action ")
+                                                                  ? Padding(
+                                                                      padding: EdgeInsets
+                                                                          .only(
+                                                                              top: 10),
+                                                                      child:
+                                                                          Column(
+                                                                        mainAxisAlignment:
+                                                                            MainAxisAlignment.start,
+                                                                        crossAxisAlignment:
+                                                                            CrossAxisAlignment.start,
+                                                                        children: [
+                                                                          TableActionButton(
+                                                                            color:
+                                                                                ColorValues.appRedColor,
+                                                                            icon:
+                                                                                Icons.delete,
+                                                                            label:
+                                                                                '',
+                                                                            message:
+                                                                                '',
+                                                                            onPress:
+                                                                                () {
+                                                                              controller.rowTBTTrainingOtherPersonItem.remove(record);
+                                                                            },
+                                                                          )
+                                                                        ],
+                                                                      ),
+                                                                    )
+                                                                  : Text(mapData[
+                                                                          'key'] ??
+                                                                      ''),
+                                                        );
+                                                      }).toList(),
+                                                    );
+                                                  }).toList(),
+                                                ),
                                               ),
-                                            ),
-                                          ]),
+                                            ]),
+                                          ),
                                         ),
                                       ],
                                     ),
