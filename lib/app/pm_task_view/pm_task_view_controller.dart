@@ -335,6 +335,7 @@ class PreventiveMaintenanceTaskViewController extends GetxController {
                                   facilityId: facilityId);
                               getHistory(facilityId);
                               getMrsListByModuleTask(taskId: scheduleId.value);
+                              getAssignedToList(facilityId);
                             }
                             // textControllers =
                             //     List.generate(permitValuesCount, (_) => TextEditingController());

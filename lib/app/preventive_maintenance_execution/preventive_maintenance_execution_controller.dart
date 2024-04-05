@@ -184,6 +184,8 @@ class PreventiveMaintenanceExecutionController extends GetxController {
 
   Future<void> getPmtaskViewList(
       {int? scheduleId, bool? isloading, required int facilityId}) async {
+    scheduleCheckPoints.value = <ScheduleCheckPoint>[];
+    rowItemclone.value = [];
     final _permitDetails =
         await preventiveMaintenanceExecutionPresenter.getPmtaskViewList(
             scheduleId: scheduleId,
@@ -250,26 +252,7 @@ class PreventiveMaintenanceExecutionController extends GetxController {
     List<PmFiles> pmfile = <PmFiles>[];
 
     List<AddObservations> addObservations = <AddObservations>[];
-    // for (var checkpoint in selectedItem!.checklist_observation ?? []) {
-    //   checklistObservations?.add(checkpoint);
-    // }
-// pmfile.add(PmFiles(file_id:fileIds));
-    // checklistObse rvations?.forEach((e) {
-    //   //
-    //   // e.files?.forEach((element) { pmfile.add(PmFiles(file_id:element.));});// ));
-    //   addObservations.add(AddObservations(
-    //       execution_id: e.execution_id ?? 0,
-    //       observation: e.observation_value_controller?.text ?? "",
-    //       job_create: e.linked_job_id.value,
-    //       text: e.check_point_type == 1
-    //           ? e.type_bool.value.toString()
-    //           : e.check_point_type == 2
-    //               ? e.type_text_value_controller?.text ?? ""
-    //               : "",
-    //       cp_ok: e.cp_ok.value,
-    //       // boolean: 1,
-    //       pm_files: []));
-    // });
+
     rowItemobs.value.forEach((element) {
       AddObservations item = AddObservations(
           execution_id: int.tryParse(element[0]["id"] ?? '0'),
@@ -299,9 +282,8 @@ class PreventiveMaintenanceExecutionController extends GetxController {
       pmExecutionJsonString: pmExecutionJsonString,
       isLoading: true,
     );
-    // _updatedailog();
+    _updatedailog();
     // Get.back();
-    Fluttertoast.showToast(msg: "PM Schedule Successfully...", fontSize: 16.0);
   }
 
   void cloneDialog(String assets) {
@@ -374,6 +356,7 @@ class PreventiveMaintenanceExecutionController extends GetxController {
                       child: CustomElevatedButton(
                         text: "Clone",
                         onPressed: () {
+                          Get.back();
                           var select = scheduleCheckPoints.firstWhere(
                             (element) => element.name == selectedasset.value,
                           );
@@ -432,10 +415,7 @@ class PreventiveMaintenanceExecutionController extends GetxController {
       isLoading: true,
     );
     if (response == true) {
-      final _flutterSecureStorage = const FlutterSecureStorage();
-
-      _flutterSecureStorage.delete(key: "pmTaskId");
-      Get.offAllNamed(Routes.pmTask);
+      _updatedailog();
     }
   }
 
@@ -465,11 +445,109 @@ class PreventiveMaintenanceExecutionController extends GetxController {
             taskId: scheduleId.value,
             isloading: true);
     if (response == true) {
-      final _flutterSecureStorage = const FlutterSecureStorage();
-
-      _flutterSecureStorage.delete(key: "pmTaskId");
-      Get.offAllNamed(Routes.pmTask);
+      _updatedailog();
     }
+  }
+
+  void _updatedailog() {
+    Get.dialog(AlertDialog(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(Radius.circular(15.0)),
+      ),
+      insetPadding: Dimens.edgeInsets10_0_10_0,
+      contentPadding: EdgeInsets.zero,
+      title: Column(
+        children: [
+          Text(
+            'Task ID:${scheduleId}',
+            textAlign: TextAlign.center,
+            style: Styles.green700,
+          ),
+          Divider(
+            color: ColorValues.greyColor,
+          )
+        ],
+      ),
+      content: Builder(builder: (context) {
+        var height = Get.height;
+
+        return Container(
+          height: height / 6,
+          width: double.infinity,
+          child: Container(
+            margin: Dimens.edgeInsets20,
+            child: Column(
+              children: [
+                Text("Successfully...."),
+                Dimens.boxHeight10,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    // RichText(
+                    //   text: TextSpan(
+                    //       text: 'PM Execution Submitted with',
+                    //       style: Styles.blue700,
+                    //       children: <TextSpan>[
+                    //         TextSpan(text: ' \n     Code', style: Styles.blue700),
+                    //         TextSpan(
+                    //           text: '  2444',
+                    //           style: Styles.redBold15,
+                    //         ),
+                    //       ]),
+                    // ),
+                    // Dimens.boxHeight12,
+                    //  Text("PM Execution Submitted with code PMSC87456"),
+                    Container(
+                      height: 35,
+                      child: CustomElevatedButton(
+                        text: "PM Task List",
+                        onPressed: () {
+                          Get.back();
+
+                          Get.offAndToNamed(Routes.pmTask);
+                        },
+                        backgroundColor: ColorValues.appDarkBlueColor,
+                        textColor: ColorValues.whiteColor,
+                      ),
+                    ),
+                    Dimens.boxWidth10,
+                    Container(
+                      height: 35,
+                      child: CustomElevatedButton(
+                        text: "Execute",
+                        onPressed: () async {
+                          Get.back();
+                          try {
+                            await setScheduleId();
+
+                            if (scheduleId != 0) {
+                              getPmtaskViewList(
+                                  scheduleId: scheduleId.value,
+                                  isloading: true,
+                                  facilityId: facilityId);
+
+                              getHistory();
+                            }
+                            // textControllers =
+                            //     List.generate(permitValuesCount, (_) => TextEditingController());
+                            // permitValues = RxList<String>.filled(permitValuesCount, '');
+                          } catch (e) {
+                            print(e);
+                          }
+                        },
+                        backgroundColor: ColorValues.appYellowColor,
+                        textColor: ColorValues.whiteColor,
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        );
+      }),
+      actions: [],
+    ));
   }
 
   selectFiles() async {
