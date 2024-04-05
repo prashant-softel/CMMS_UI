@@ -3823,7 +3823,7 @@ class Repository {
           var responseMap = json.decode(res.data);
           type == 1
               ? Get.offAllNamed(Routes.pmTaskView)
-              : Get.offAndToNamed(Routes.newPermitList);
+              : Get.offAllNamed(Routes.newPermitList);
           return responseMap;
         } else {
           // Get.dialog<void>(WarrantyClaimErrorDialog());

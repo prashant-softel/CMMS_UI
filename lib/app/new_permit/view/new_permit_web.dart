@@ -669,8 +669,7 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                     children: [
                                       Row(
                                         children: [
-                                          CustomRichText(
-                                              title: 'Work Description: '),
+                                          CustomRichText(title: 'Work Title: '),
                                           Expanded(
                                             child:
                                                 _buildPermitDescriptionField_web(
