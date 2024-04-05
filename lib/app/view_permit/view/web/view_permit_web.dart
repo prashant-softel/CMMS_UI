@@ -1012,63 +1012,64 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                                             //   ),
                                             // ),
                                             Dimens.boxHeight10,
-                                            Container(
-                                              width: MediaQuery.of(context)
-                                                      .size
-                                                      .width /
-                                                  1.2,
-                                              margin: EdgeInsets.all(16),
-                                              child: Center(
-                                                child: Column(
-                                                  children: [
-                                                    CustomAppBar(
-                                                        title:
-                                                            'Permit Type Checklist'
-                                                                .tr),
-                                                    Dimens.boxHeight10,
-                                                    controller.safetyMeasureList
-                                                                .length >
-                                                            0
-                                                        ? GetBuilder<
-                                                                ViewPermitController>(
-                                                            init: controller,
-                                                            builder: (ctrl) {
-                                                              return Column(
-                                                                children: controller
-                                                                    .viewPermitDetailsModel
-                                                                    .value!
-                                                                    .safety_question_list!
-                                                                    .map(
-                                                                        (element) {
-                                                                  return Column(
-                                                                    mainAxisAlignment:
-                                                                        MainAxisAlignment
-                                                                            .start,
-                                                                    crossAxisAlignment:
-                                                                        CrossAxisAlignment
-                                                                            .start,
-                                                                    children: [
-                                                                      SizedBox(
-                                                                        child:
-                                                                            Row(
-                                                                          children: [
-                                                                            checkBoxMethod(element.ischeck == 1 ? true : false,
-                                                                                (value) {
-                                                                              element.ischeck == value ?? false;
-                                                                              controller.update();
-                                                                            }),
-                                                                            Dimens.boxWidth10,
-                                                                            Text("${element.saftyQuestionName}"),
-                                                                          ],
+                                            IgnorePointer(
+                                              child: Container(
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width /
+                                                    1.2,
+                                                margin: EdgeInsets.all(16),
+                                                child: Center(
+                                                  child: Column(
+                                                    children: [
+                                                      CustomAppBar(
+                                                          title:
+                                                              'Permit Type Checklist'
+                                                                  .tr),
+                                                      Dimens.boxHeight10,
+                                                      controller.safetyMeasureList
+                                                                  .length >
+                                                              0
+                                                          ? GetBuilder<
+                                                                  ViewPermitController>(
+                                                              init: controller,
+                                                              builder: (ctrl) {
+                                                                return Column(
+                                                                  children: controller
+                                                                      .viewPermitDetailsModel
+                                                                      .value!
+                                                                      .safety_question_list!
+                                                                      .map(
+                                                                          (element) {
+                                                                    return Column(
+                                                                      mainAxisAlignment:
+                                                                          MainAxisAlignment
+                                                                              .start,
+                                                                      crossAxisAlignment:
+                                                                          CrossAxisAlignment
+                                                                              .start,
+                                                                      children: [
+                                                                        SizedBox(
+                                                                          child:
+                                                                              Row(
+                                                                            children: [
+                                                                              checkBoxMethod(element.ischeck == 1 ? true : false, (value) {
+                                                                                element.ischeck == value ?? false;
+                                                                                controller.update();
+                                                                              }),
+                                                                              Dimens.boxWidth10,
+                                                                              Text("${element.saftyQuestionName}"),
+                                                                            ],
+                                                                          ),
                                                                         ),
-                                                                      ),
-                                                                    ],
-                                                                  );
-                                                                }).toList(),
-                                                              );
-                                                            })
-                                                        : Dimens.box0,
-                                                  ],
+                                                                      ],
+                                                                    );
+                                                                  }).toList(),
+                                                                );
+                                                              })
+                                                          : Dimens.box0,
+                                                    ],
+                                                  ),
                                                 ),
                                               ),
                                             ),
