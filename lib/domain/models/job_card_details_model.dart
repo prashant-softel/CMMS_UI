@@ -36,22 +36,24 @@ class JobCardDetailsModel {
       this.status_long,
       this.status_short,
       this.created_by,
+      this.jC_Approved,
       this.jC_Start_By_Name});
 
-  dynamic plantName;
-  dynamic assetCategoryName;
-  dynamic jcApprovedByName;
-  dynamic updatedByName;
+  String? plantName;
+  String? assetCategoryName;
+  String? jcApprovedByName;
+  String? updatedByName;
   int? id;
   int? currentEmpId;
-  dynamic currentStatus;
-  dynamic jcClosedByName;
-  dynamic jcRejectedByName;
-  dynamic description;
+  String? currentStatus;
+  String? jcClosedByName;
+  String? jcRejectedByName;
+  String? description;
+  int? jC_Approved;
   int? jobId;
   int? ptwId;
-  dynamic title;
-  dynamic created_by;
+  String? title;
+  String? created_by;
   List<LstCmjcJobDetailList>? lstCmjcJobDetailList;
   List<LstPermitDetailList>? lstPermitDetailList;
   List<LstCmjcIsolatedDetailList>? lstCmjcIsolatedDetailList;
@@ -59,9 +61,9 @@ class JobCardDetailsModel {
   List<dynamic>? lstCmjcEmpList;
   List<dynamic>? fileList;
   int? status;
-  dynamic status_short;
-  dynamic status_long;
-  dynamic jC_Start_By_Name;
+  String? status_short;
+  String? status_long;
+  String? jC_Start_By_Name;
   factory JobCardDetailsModel.fromJson(Map<String, dynamic> json) =>
       JobCardDetailsModel(
         plantName: json["plant_name"],
@@ -82,6 +84,7 @@ class JobCardDetailsModel {
         status_long: json["status_long"],
         status_short: json["status_short"],
         created_by: json["created_by"],
+        jC_Approved: json["jC_Approved"],
         lstCmjcJobDetailList: List<LstCmjcJobDetailList>.from(
             json["lstCMJCJobDetailList"]
                 .map((x) => LstCmjcJobDetailList.fromJson(x))),
@@ -117,6 +120,7 @@ class JobCardDetailsModel {
         "status_long": status_long,
         "status_short": status_short,
         "created_by": created_by,
+        "jC_Approved": jC_Approved,
         "lstCMJCJobDetailList": List<dynamic>.from(
             lstCmjcJobDetailList?.map((x) => x.toJson()) ?? []),
         "lstPermitDetailList": List<dynamic>.from(

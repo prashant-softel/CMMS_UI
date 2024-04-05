@@ -124,7 +124,7 @@ class JobCardDetailsController extends GetxController {
             ) ??
             [];
       }
-      await getHistory(facilityId);
+      // await getHistory(facilityId);
       createPlantDetailsTableData();
 
       createJobDetailsTableData();
@@ -180,18 +180,12 @@ class JobCardDetailsController extends GetxController {
   }
 
   Future<void> getHistory(int facilityId) async {
-    /// TODO: CHANGE THESE VALUES
     int moduleType = 4;
-    // int tempModuleType = 21;
-    // int tempJobCardId = 5326;
-    //
     historyList?.value = await jobCardDetailsPresenter.getJobCardHistory(
-          // tempModuleType,
-          // tempJobCardId,
           moduleType,
           jobCardId.value,
+          facilityId,
           true,
-          facilityId
         ) ??
         [];
     update(["historyList"]);
@@ -446,7 +440,7 @@ class JobCardDetailsController extends GetxController {
     }
 
     /// Get History
-    getHistory(facilityId);
+    // getHistory(facilityId);
   }
 
   void toggleIsNormalizedSwitch(bool value, int index) {
