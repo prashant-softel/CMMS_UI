@@ -67,6 +67,7 @@ class NewPermitDetailModel {
   String? physical_iso_remark;
   bool? is_TBT_Expire;
   int? is_loto_required;
+  int? tbT_Done_Check;
   // int? sop_type_id;
   // int? issuer_id;
   // int? approver_id;
@@ -131,6 +132,7 @@ class NewPermitDetailModel {
     this.physical_iso_remark,
     this.file_list,
     this.is_loto_required,
+    this.tbT_Done_Check,
   });
 
   factory NewPermitDetailModel.fromJson(Map<String, dynamic> json) =>
@@ -139,6 +141,7 @@ class NewPermitDetailModel {
         insertedId: json["insertedId"],
         ptwStatus: json["ptwStatus"],
         permitNo: json["permitNo"],
+        tbT_Done_Check: json["tbT_Done_Check"],
         sitePermitNo: json["sitePermitNo"],
         permitTypeid: json["permitTypeid"],
         job_type_id: json['job_type_id'],
@@ -241,6 +244,7 @@ class NewPermitDetailModel {
         "insertedId": insertedId,
         "ptwStatus": ptwStatus,
         "permitNo": permitNo,
+        "tbT_Done_Check": tbT_Done_Check,
         "sitePermitNo": sitePermitNo,
         "permitTypeid": permitTypeid,
         "job_type_id": job_type_id,

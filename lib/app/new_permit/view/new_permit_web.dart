@@ -1846,7 +1846,12 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                                             .newPermitDetailsModel
                                                             .value
                                                             ?.is_TBT_Expire ==
-                                                        false
+                                                        false &&
+                                                    controller
+                                                            .newPermitDetailsModel
+                                                            .value
+                                                            ?.tbT_Done_Check ==
+                                                        0
                                                 ? Center(
                                                     child: Container(
                                                       height: 45,
