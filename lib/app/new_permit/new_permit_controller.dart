@@ -637,15 +637,6 @@ class NewPermitController extends GetxController {
           );
         },
       );
-      // late List<ListSafetyQuestion> safety_measure_map_list = [];
-      // newPermitDetailsModel.value?.safety_question_list?.forEach((element) {
-      //   safety_measure_map_list.add(
-      //     ListSafetyQuestion(
-      //         saftyQuestionId: element.saftyQuestionId,
-      //         saftyQuestionName: element.saftyQuestionName,
-      //         ischeck: element.ischeck != null ? 1 : 0),
-      //   );
-      // });
 
       // safetyList?.value =
       //     newPermitDetailsModel.value?.safety_question_list ?? [];

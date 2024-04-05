@@ -849,7 +849,8 @@ class PermitListDataSource extends DataTableSource {
                                                       .PTW_EXTEND_REQUESTED //133
 
                                       ? TableActionButton(
-                                          color: const Color.fromRGBO(134, 196, 102, 1),
+                                          color: const Color.fromRGBO(
+                                              134, 196, 102, 1),
                                           icon: Icons.check,
                                           message: controller.newPermitList
                                                       .firstWhere(
@@ -922,8 +923,6 @@ class PermitListDataSource extends DataTableSource {
                                                     PermitDetails?.permitId,
                                                 isChecked:
                                                     controller.isChecked.value);
-                                            print(
-                                                'PermitTest:${controller.newPermitListModel?.permitId}');
                                           },
                                         )
                                       : Dimens.box0,
@@ -950,6 +949,17 @@ class PermitListDataSource extends DataTableSource {
                                                           UserAccessConstants
                                                               .kHaveAddAccess)
                                                   .length >
+                                              0 &&
+                                          controller.newPermitList
+                                                  .firstWhere(
+                                                    (e) =>
+                                                        "${e?.permitId}" ==
+                                                        "${PermitDetails?.permitId}",
+                                                    orElse: () =>
+                                                        NewPermitModel(
+                                                            permitId: 000),
+                                                  )
+                                                  ?.tbT_Done_Check ==
                                               0
                                       ? TableActionButton(
                                           color: Color.fromARGB(
@@ -965,8 +975,6 @@ class PermitListDataSource extends DataTableSource {
                                                     PermitDetails?.permitId,
                                                 isChecked:
                                                     controller.isChecked.value);
-                                            print(
-                                                'PermitTest:${controller.newPermitListModel?.permitId}');
                                           },
                                         )
                                       : Dimens.box0,
@@ -1005,8 +1013,6 @@ class PermitListDataSource extends DataTableSource {
                                                     PermitDetails?.permitId,
                                                 isChecked:
                                                     controller.isChecked.value);
-                                            print(
-                                                'PermitTest:${controller.newPermitListModel?.permitId}');
                                           },
                                         )
                                       : Dimens.box0,

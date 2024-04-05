@@ -669,8 +669,7 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                     children: [
                                       Row(
                                         children: [
-                                          CustomRichText(
-                                              title: 'Work Description: '),
+                                          CustomRichText(title: 'Work Title: '),
                                           Expanded(
                                             child:
                                                 _buildPermitDescriptionField_web(
@@ -1847,7 +1846,12 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                                             .newPermitDetailsModel
                                                             .value
                                                             ?.is_TBT_Expire ==
-                                                        false
+                                                        false &&
+                                                    controller
+                                                            .newPermitDetailsModel
+                                                            .value
+                                                            ?.tbT_Done_Check ==
+                                                        0
                                                 ? Center(
                                                     child: Container(
                                                       height: 45,

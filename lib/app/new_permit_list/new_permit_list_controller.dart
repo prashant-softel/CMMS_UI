@@ -102,7 +102,7 @@ class NewPermitListController extends GetxController {
   var breakdownTime;
   Rx<DateTime> startDate = DateTime.now().obs;
   Rx<DateTime> endDate = DateTime.now().obs;
-  NewPermitModel? newPermitListModel;
+  // NewPermitModel? newPermitListModel;
   PermitIssueModel? permitIssueModel;
   RxList<String> newPermitListTableColumns = <String>[].obs;
   PaginationController newPermitPaginationController = PaginationController(
@@ -290,7 +290,8 @@ class NewPermitListController extends GetxController {
       filteredData.value = newPermitList.value;
       isLoading.value = false;
       if (newPermitList.isNotEmpty) {
-        // newPermitListModel = newPermitList![0];
+        NewPermitModel? newPermitListModel = newPermitList[0];
+
         newPermitListModel = filteredData[0];
         var newPermitListJson = newPermitListModel?.toJson();
         newPermitListTableColumns.value = <String>[];
