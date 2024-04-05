@@ -392,22 +392,27 @@ class ListSafetyQuestion {
     this.saftyQuestionId,
     this.saftyQuestionName,
     this.input,
+    this.ischeck,
   });
 
   int? saftyQuestionId;
   String? saftyQuestionName;
   int? input;
+  int? ischeck;
 
   factory ListSafetyQuestion.fromJson(Map<String, dynamic> json) =>
       ListSafetyQuestion(
-          saftyQuestionId: json["saftyQuestionId"],
-          saftyQuestionName: json["saftyQuestionName"],
-          input: json['input']);
+        saftyQuestionId: json["saftyQuestionId"],
+        saftyQuestionName: json["saftyQuestionName"],
+        input: json['input'],
+        ischeck: json['ischeck'],
+      );
 
   Map<String, dynamic> toJson() => {
         "saftyQuestionId": saftyQuestionId,
         "saftyQuestionName": saftyQuestionName,
         "input": input,
+        "ischeck": ischeck,
       };
 }
 

@@ -1000,14 +1000,7 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                                                         element.isChecked =
                                                                             value ??
                                                                                 false;
-                                                                        // final index = controller.safetyMeasureList.indexWhere((e) =>
-                                                                        //     e.id ==
-                                                                        //     element.id);
-                                                                        // if (index >
-                                                                        //     -1)
-                                                                        // controller
-                                                                        //     .safetyMeasureList[index]
-                                                                        //     .isChecked = value ?? false;
+
                                                                         controller
                                                                             .update();
                                                                       }),

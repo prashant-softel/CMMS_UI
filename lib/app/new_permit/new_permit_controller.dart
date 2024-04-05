@@ -613,6 +613,7 @@ class NewPermitController extends GetxController {
 
       ///
       selectedBlock.value = newPermitDetailsModel.value?.blockName ?? "";
+
       selectedTypePermit.value =
           newPermitDetailsModel.value?.permitTypeName ?? '';
       selectedPermitTypeId = newPermitDetailsModel.value?.permitTypeid ?? 0;
@@ -624,14 +625,27 @@ class NewPermitController extends GetxController {
           newPermitDetailsModel.value?.approvedByName ?? '';
       listEmployee?.value = newPermitDetailsModel.value?.employee_list ?? [];
       rowTBTTrainingOtherPersonItem.value = [];
-      newPermitDetailsModel.value?.lotoOtherDetails?.forEach((element) {
-        rowTBTTrainingOtherPersonItem.value.add([
-          {'key': "Employee Name", "value": '${element?.employee_name}'},
-          {'key': "Contact Number", "value": '${element?.contact_number}'},
-          {'key': "Responsibility", "value": '${element?.responsibility}'},
-          {'key': "Action ", "value": ''},
-        ]);
-      });
+      newPermitDetailsModel.value?.lotoOtherDetails?.forEach(
+        (element) {
+          rowTBTTrainingOtherPersonItem.value.add(
+            [
+              {'key': "Employee Name", "value": '${element?.employee_name}'},
+              {'key': "Contact Number", "value": '${element?.contact_number}'},
+              {'key': "Responsibility", "value": '${element?.responsibility}'},
+              {'key': "Action ", "value": ''},
+            ],
+          );
+        },
+      );
+      // late List<ListSafetyQuestion> safety_measure_map_list = [];
+      // newPermitDetailsModel.value?.safety_question_list?.forEach((element) {
+      //   safety_measure_map_list.add(
+      //     ListSafetyQuestion(
+      //         saftyQuestionId: element.saftyQuestionId,
+      //         saftyQuestionName: element.saftyQuestionName,
+      //         ischeck: element.ischeck != null ? 1 : 0),
+      //   );
+      // });
 
       // safetyList?.value =
       //     newPermitDetailsModel.value?.safety_question_list ?? [];
