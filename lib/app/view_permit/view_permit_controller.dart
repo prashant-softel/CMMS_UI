@@ -13,6 +13,7 @@ import 'package:cmms/domain/models/block_model.dart';
 import 'package:cmms/domain/models/cancel_permit_request_model.dart';
 import 'package:cmms/domain/models/close_permit_model.dart';
 import 'package:cmms/domain/models/comment_model.dart';
+import 'package:cmms/domain/models/create_permit_model.dart';
 import 'package:cmms/domain/models/create_sop_model.dart';
 import 'package:cmms/domain/models/employee_list_model.dart';
 import 'package:cmms/domain/models/employee_list_model2.dart';
@@ -849,14 +850,28 @@ class ViewPermitController extends GetxController {
         getSafetyMeasureList();
       }
       rowTBTTrainingOtherPersonItem.value = [];
-      viewPermitDetailsModel.value?.lotoOtherDetails?.forEach((element) {
-        rowTBTTrainingOtherPersonItem.value.add([
-          {'key': "Employee Name", "value": '${element?.employee_name}'},
-          {'key': "Contact Number", "value": '${element?.contact_number}'},
-          {'key': "Responsibility", "value": '${element?.responsibility}'},
-          {'key': "Action ", "value": ''},
-        ]);
+      viewPermitDetailsModel.value?.lotoOtherDetails?.forEach(
+        (element) {
+          rowTBTTrainingOtherPersonItem.value.add(
+            [
+              {'key': "Employee Name", "value": '${element?.employee_name}'},
+              {'key': "Contact Number", "value": '${element?.contact_number}'},
+              {'key': "Responsibility", "value": '${element?.responsibility}'},
+              {'key': "Action ", "value": ''},
+            ],
+          );
+        },
+      );
+      late List<ListSafetyQuestion> safety_measure_map_list = [];
+      viewPermitDetailsModel.value?.safety_question_list?.forEach((element) {
+        safety_measure_map_list.add(
+          ListSafetyQuestion(
+              saftyQuestionId: element.saftyQuestionId,
+              saftyQuestionName: element.saftyQuestionName,
+              ischeck: element.ischeck != null ? 1 : 0),
+        );
       });
+      print("safety_measure_map_listghevdwj: ${safety_measure_map_list}");
 
       listAssociatedJobs?.value =
           viewPermitDetailsModel.value?.lstAssociatedJobs ?? [];

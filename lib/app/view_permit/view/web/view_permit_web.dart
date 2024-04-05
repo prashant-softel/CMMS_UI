@@ -1003,59 +1003,120 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                                                 ],
                                               ),
                                             ),
-                                            Padding(
-                                              padding: const EdgeInsets.only(
-                                                  left: 10, right: 10, top: 10),
-                                              child: Text(
-                                                'Permit Checkpoints',
-                                                style: Styles.blue700,
+                                            // Padding(
+                                            //   padding: const EdgeInsets.only(
+                                            //       left: 10, right: 10, top: 10),
+                                            //   child: Text(
+                                            //     'Permit Checkpoints',
+                                            //     style: Styles.blue700,
+                                            //   ),
+                                            // ),
+                                            Dimens.boxHeight10,
+                                            Container(
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width /
+                                                  1.2,
+                                              margin: EdgeInsets.all(16),
+                                              child: Center(
+                                                child: Column(
+                                                  children: [
+                                                    CustomAppBar(
+                                                        title:
+                                                            'Permit Type Checklist'
+                                                                .tr),
+                                                    Dimens.boxHeight10,
+                                                    controller.safetyMeasureList
+                                                                .length >
+                                                            0
+                                                        ? GetBuilder<
+                                                                ViewPermitController>(
+                                                            init: controller,
+                                                            builder: (ctrl) {
+                                                              return Column(
+                                                                children: controller
+                                                                    .viewPermitDetailsModel
+                                                                    .value!
+                                                                    .safety_question_list!
+                                                                    .map(
+                                                                        (element) {
+                                                                  return Column(
+                                                                    mainAxisAlignment:
+                                                                        MainAxisAlignment
+                                                                            .start,
+                                                                    crossAxisAlignment:
+                                                                        CrossAxisAlignment
+                                                                            .start,
+                                                                    children: [
+                                                                      SizedBox(
+                                                                        child:
+                                                                            Row(
+                                                                          children: [
+                                                                            checkBoxMethod(element.ischeck == 1 ? true : false,
+                                                                                (value) {
+                                                                              element.ischeck == value ?? false;
+                                                                              controller.update();
+                                                                            }),
+                                                                            Dimens.boxWidth10,
+                                                                            Text("${element.saftyQuestionName}"),
+                                                                          ],
+                                                                        ),
+                                                                      ),
+                                                                    ],
+                                                                  );
+                                                                }).toList(),
+                                                              );
+                                                            })
+                                                        : Dimens.box0,
+                                                  ],
+                                                ),
                                               ),
                                             ),
-                                            Dimens.boxHeight10,
-                                            Wrap(
-                                              children: [
-                                                Column(
-                                                  children: [
-                                                    controller.permitId != null
-                                                        ? Column(
-                                                            // alignment: WrapAlignment.start,
-                                                            // spacing: 100,
-                                                            children: []
-                                                              ..addAll(controller
-                                                                  .safetyMeasureList
-                                                                  .map(
-                                                                      (element) =>
-                                                                          Column(
-                                                                            // mainAxisSize: MainAxisSize.min,
-                                                                            mainAxisAlignment:
-                                                                                MainAxisAlignment.start,
-                                                                            crossAxisAlignment:
-                                                                                CrossAxisAlignment.start,
-                                                                            children: [
-                                                                              Padding(
-                                                                                padding: const EdgeInsets.only(left: 20),
-                                                                                child: SizedBox(
-                                                                                  // width: 200,
-                                                                                  child: Row(
-                                                                                    children: [
-                                                                                      checkBoxMethod(1),
-                                                                                      // Text("${l = l! + 1}. "),
-                                                                                      Expanded(child: Text("${element.name}"))
-                                                                                    ],
-                                                                                  ),
-                                                                                ),
-                                                                              )
-                                                                            ],
-                                                                          ))),
-                                                          )
-                                                        : Container(),
-                                                    SizedBox(
-                                                      height: 20,
-                                                    ),
-                                                  ],
-                                                )
-                                              ],
-                                            ),
+
+                                            // Wrap(
+                                            //   children: [
+                                            //     Column(
+                                            //       children: [
+                                            //         controller.permitId != null
+                                            //             ? Column(
+                                            //                 // alignment: WrapAlignment.start,
+                                            //                 // spacing: 100,
+                                            //                 children: []
+                                            //                   ..addAll(controller
+                                            //                       .safetyMeasureList
+                                            //                       .map(
+                                            //                           (element) =>
+                                            //                               Column(
+                                            //                                 // mainAxisSize: MainAxisSize.min,
+                                            //                                 mainAxisAlignment:
+                                            //                                     MainAxisAlignment.start,
+                                            //                                 crossAxisAlignment:
+                                            //                                     CrossAxisAlignment.start,
+                                            //                                 children: [
+                                            //                                   Padding(
+                                            //                                     padding: const EdgeInsets.only(left: 20),
+                                            //                                     child: SizedBox(
+                                            //                                       // width: 200,
+                                            //                                       child: Row(
+                                            //                                         children: [
+                                            //                                           checkBoxMethod(1),
+                                            //                                           // Text("${l = l! + 1}. "),
+                                            //                                           Expanded(child: Text("${element.name}"))
+                                            //                                         ],
+                                            //                                       ),
+                                            //                                     ),
+                                            //                                   )
+                                            //                                 ],
+                                            //                               ))),
+                                            //               )
+                                            //             : Container(),
+                                            //         SizedBox(
+                                            //           height: 20,
+                                            //         ),
+                                            //       ],
+                                            //     )
+                                            //   ],
+                                            // ),
                                           ],
                                         ),
                                       ),
@@ -1716,7 +1777,7 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                                                                           child:
                                                                               Row(
                                                                             children: [
-                                                                              checkBoxMethod(1),
+                                                                              checkBoxMethods(1),
                                                                               // Text("${l = l! + 1}. "),
                                                                               Expanded(child: Text("${element!.name}")),
                                                                             ],
@@ -1891,7 +1952,7 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                                                                           child:
                                                                               Row(
                                                                             children: [
-                                                                              checkBoxMethod(1),
+                                                                              checkBoxMethods(1),
                                                                               // Text("${l = l! + 1}. "),
                                                                               Expanded(child: Text("${element!.name}"))
                                                                             ],
@@ -2060,7 +2121,7 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                                                                           child:
                                                                               Row(
                                                                             children: [
-                                                                              checkBoxMethod(1),
+                                                                              checkBoxMethods(1),
                                                                               // Text("${l = l! + 1}. "),
                                                                               Expanded(child: Text("${element!.name}"))
                                                                             ],
@@ -3624,7 +3685,15 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
     );
   }
 
-  checkBoxMethod(int position) {
+  checkBoxMethod(bool isChecked, Function(bool?) onChange) {
+    return Checkbox(
+      value: isChecked,
+      // value: isInitialChecked,
+      onChanged: onChange,
+    );
+  }
+
+  checkBoxMethods(int position) {
     return Checkbox(
         value: position == 1
             ? controller.isChecked1.value = true
