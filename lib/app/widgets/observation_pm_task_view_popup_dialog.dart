@@ -498,32 +498,32 @@ class ObservationPMTaskViewDialog extends GetView {
                                               style: Styles.blue700,
                                             ),
                                             Spacer(),
-                                            Container(
-                                              height: 30,
-                                              child: CustomElevatedButton(
-                                                backgroundColor:
-                                                    ColorValues.addNewColor,
-                                                onPressed: () async {
-                                                  Get.offAllNamed(
-                                                      Routes.createMrs,
-                                                      arguments: {
-                                                        "whereUsedId":
-                                                            controller
-                                                                .pmtaskViewModel
-                                                                .value
-                                                                ?.id,
-                                                        "activity": controller
-                                                            .pmtaskViewModel
-                                                            .value
-                                                            ?.plan_title,
-                                                        "whereUsed": 27,
-                                                        "fromActorTypeId": 2,
-                                                        "to_actor_type_id": 3
-                                                      });
-                                                },
-                                                text: "Add New MRS",
-                                              ),
-                                            ),
+                                            // Container(
+                                            //   height: 30,
+                                            //   child: CustomElevatedButton(
+                                            //     backgroundColor:
+                                            //         ColorValues.addNewColor,
+                                            //     onPressed: () async {
+                                            //       Get.offAllNamed(
+                                            //           Routes.createMrs,
+                                            //           arguments: {
+                                            //             "whereUsedId":
+                                            //                 controller
+                                            //                     .pmtaskViewModel
+                                            //                     .value
+                                            //                     ?.id,
+                                            //             "activity": controller
+                                            //                 .pmtaskViewModel
+                                            //                 .value
+                                            //                 ?.plan_title,
+                                            //             "whereUsed": 27,
+                                            //             "fromActorTypeId": 2,
+                                            //             "to_actor_type_id": 3
+                                            //           });
+                                            //     },
+                                            //     text: "Add New MRS",
+                                            //   ),
+                                            // ),
                                           ],
                                         ),
                                       ),
@@ -634,29 +634,35 @@ class ObservationPMTaskViewDialog extends GetView {
                                                                       "$mrsId")
                                                             });
                                                       }),
-                                                  TableActionButton(
-                                                      color:
-                                                          ColorValues.editColor,
-                                                      icon: Icons.edit,
-                                                      message: "Edit MRS",
-                                                      onPress: () {
-                                                        controller
-                                                            .clearMrsStoreData();
-                                                        String mrsId = controller
-                                                                .listMrsByTaskId?[
-                                                                    index]
-                                                                ?.mrsId
-                                                                .toString() ??
-                                                            "";
-                                                        print({"mrsId": mrsId});
-                                                        Get.toNamed(
-                                                            Routes.editMrs,
-                                                            arguments: {
-                                                              'mrsId':
-                                                                  int.tryParse(
-                                                                      "$mrsId")
+                                                  controller.pmtaskViewModel
+                                                              .value?.status ==
+                                                          169
+                                                      ? Dimens.box0
+                                                      : TableActionButton(
+                                                          color: ColorValues
+                                                              .editColor,
+                                                          icon: Icons.edit,
+                                                          message: "Edit MRS",
+                                                          onPress: () {
+                                                            controller
+                                                                .clearMrsStoreData();
+                                                            String mrsId = controller
+                                                                    .listMrsByTaskId?[
+                                                                        index]
+                                                                    ?.mrsId
+                                                                    .toString() ??
+                                                                "";
+                                                            print({
+                                                              "mrsId": mrsId
                                                             });
-                                                      })
+                                                            Get.toNamed(
+                                                                Routes.editMrs,
+                                                                arguments: {
+                                                                  'mrsId': int
+                                                                      .tryParse(
+                                                                          "$mrsId")
+                                                                });
+                                                          })
                                                 ],
                                               )),
                                             ]),

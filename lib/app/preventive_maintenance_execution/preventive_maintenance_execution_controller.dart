@@ -115,7 +115,7 @@ class PreventiveMaintenanceExecutionController extends GetxController {
       {'key': "Material_Type", "value": ''},
       {'key': "Issued_Qty", "value": ''},
       {'key': "Consumed_Qty", "value": ''},
-      {'key': "uploadimg", "value": ''},
+      // {'key': "uploadimg", "value": ''},
       {'key': "Action ", "value": ''},
     ]);
   }
