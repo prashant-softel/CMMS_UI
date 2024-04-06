@@ -840,23 +840,22 @@ class PreventiveMaintenanceTaskViewContentWeb
                                                                                 'type': 1
                                                                               });
                                                                             }),
-                                                                        TableActionButton(
-                                                                            color: ColorValues
-                                                                                .editColor,
-                                                                            icon: Icons
-                                                                                .edit,
-                                                                            message:
-                                                                                "Edit MRS",
-                                                                            onPress:
-                                                                                () {
-                                                                              String mrsId = controller.listMrsByTaskId?[index]?.mrsId.toString() ?? "";
-                                                                              print({
-                                                                                "mrsId": mrsId
-                                                                              });
-                                                                              Get.toNamed(Routes.editMrs, arguments: {
-                                                                                'mrsId': int.tryParse("$mrsId")
-                                                                              });
-                                                                            })
+                                                                        controller.pmtaskViewModel.value?.status ==
+                                                                                169
+                                                                            ? Dimens.box0
+                                                                            : TableActionButton(
+                                                                                color: ColorValues.editColor,
+                                                                                icon: Icons.edit,
+                                                                                message: "Edit MRS",
+                                                                                onPress: () {
+                                                                                  String mrsId = controller.listMrsByTaskId?[index]?.mrsId.toString() ?? "";
+                                                                                  print({
+                                                                                    "mrsId": mrsId
+                                                                                  });
+                                                                                  Get.toNamed(Routes.editMrs, arguments: {
+                                                                                    'mrsId': int.tryParse("$mrsId")
+                                                                                  });
+                                                                                })
                                                                       ],
                                                                     )),
                                                                   ]),
