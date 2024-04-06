@@ -70,7 +70,8 @@ class HistoryTableWidgetWeb extends StatelessWidget {
       rows: List<DataRow>.generate(
         historyList?.length ?? 0,
         (index) => DataRow(cells: [
-          DataCell(Text(historyList?[index]?.createdAt.toString() ?? '')),
+          DataCell(
+              Text(historyList?[index]?.createdAt?.result.toString() ?? '')),
           DataCell(Text(historyList?[index]?.createdByName.toString() ?? '')),
           DataCell(Text(historyList?[index]?.comment.toString() ?? '')),
           DataCell(Text(historyList?[index]?.status_name.toString() ?? '')),
