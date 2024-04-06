@@ -428,6 +428,7 @@ class FileList {
     this.fileSize,
     this.status,
     this.ptwFiles,
+    this.description,
   });
 
   int? id;
@@ -436,6 +437,7 @@ class FileList {
   int? fileSize;
   int? status;
   String? ptwFiles;
+  String? description;
 
   factory FileList.fromJson(Map<String, dynamic> json) => FileList(
         id: json["id"],
@@ -444,6 +446,7 @@ class FileList {
         fileSize: json['fileSize'],
         status: json['status'],
         ptwFiles: json['ptwFiles'] ?? '',
+        description: json['description'] ?? '',
       );
 
   Map<String, dynamic> toJson() => {
@@ -453,6 +456,7 @@ class FileList {
         "fileSize": fileSize,
         "status": status,
         "ptwFiles": ptwFiles,
+        "description": description,
       };
 }
 
