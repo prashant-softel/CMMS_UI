@@ -366,7 +366,7 @@ class BreakdownMaintenanceScreen
                                           //         0
                                           //     ?
                                           createContentTile(
-                                              title: "Work Type",
+                                              title: "Fault",
                                               onTap: () {
                                                 controller.goToWorkTypeList();
                                               });
@@ -380,7 +380,7 @@ class BreakdownMaintenanceScreen
                                           //         0
                                           //     ?
                                           createContentTile(
-                                              title: "Work Tool Type",
+                                              title: "Tool Type",
                                               onTap: () {
                                                 controller.goToToolTypeList();
                                               });

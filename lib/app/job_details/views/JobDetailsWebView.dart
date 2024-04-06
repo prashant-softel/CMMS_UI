@@ -262,7 +262,7 @@ class JobDetailsWebView extends GetView<JobDetailsController> {
                                                       MainAxisAlignment.start,
                                                   children: [
                                                     Text(
-                                                      "Work Type:",
+                                                      "Fault:",
                                                       style: Styles.black14,
                                                     ),
                                                     Container(
@@ -522,9 +522,13 @@ class JobDetailsWebView extends GetView<JobDetailsController> {
                                                             ?.length ??
                                                         0,
                                                     (index) => DataRow(cells: [
-                                                      DataCell(Text(
-                                                          "JC${controller.jobAssociatedModelsList?[index]?.jobCardId.toString()}" ??
-                                                              '')),
+                                                      DataCell(Text('JC' +
+                                                          (controller
+                                                                  .jobAssociatedModelsList?[
+                                                                      index]
+                                                                  ?.jobCardId
+                                                                  .toString() ??
+                                                              ''))),
                                                       DataCell(Text(controller
                                                               .jobAssociatedModelsList?[
                                                                   index]

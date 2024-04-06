@@ -24,7 +24,7 @@ class WorkTypeWidget extends StatelessWidget {
           alignment: Alignment.centerLeft,
           child: RichText(
             text: TextSpan(
-                text: 'Work Type: ',
+                text: 'Fault: ',
                 style: Styles.blackBold16,
                 children: [
                   TextSpan(

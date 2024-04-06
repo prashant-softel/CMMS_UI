@@ -56,7 +56,7 @@ class AddJobContentMobile extends StatelessWidget {
                 /// WORK AREA (= EQUIPMENTS) DropDown
                 WorkAreaWidget(),
 
-                /// WORK TYPE  DropDown
+                /// Fault  DropDown
                 WorkTypeWidget(),
 
                 /// TOOLS REQUIRED DropDown

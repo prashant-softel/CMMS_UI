@@ -69,7 +69,7 @@ class WorkTypeWeb extends GetView<WorkTypeController> {
                       ),
                     ),
                     Text(
-                      " / WORK TYPE",
+                      " / FAULT",
                       style: Styles.greyLight14,
                     ),
                   ],
@@ -85,8 +85,8 @@ class WorkTypeWeb extends GetView<WorkTypeController> {
                   child: Obx(() {
                     return Text(
                       controller.isContainerVisible.value
-                          ? 'Close Create Work Type'
-                          : 'Open Create Work Type',
+                          ? 'Close Create Fault'
+                          : 'Open Create Fault',
                     );
                   }),
                 ),
@@ -127,7 +127,7 @@ class WorkTypeWeb extends GetView<WorkTypeController> {
                                           CrossAxisAlignment.start,
                                       children: [
                                         Text(
-                                          "Create Work Type",
+                                          "Create Fault",
                                           style: Styles.blackBold16,
                                         ),
                                         SizedBox(
@@ -143,8 +143,8 @@ class WorkTypeWeb extends GetView<WorkTypeController> {
                                                           false
                                                       ? controller.selectedItem ==
                                                               null
-                                                          ? "Work Type Created Successfully in the List."
-                                                          : "Work Type updated Successfully in the List."
+                                                          ? "Fault Created Successfully in the List."
+                                                          : "Fault updated Successfully in the List."
                                                       : "Facility is not added.",
                                                   style: TextStyle(
                                                       fontSize: 16,
@@ -164,7 +164,7 @@ class WorkTypeWeb extends GetView<WorkTypeController> {
                                           children: [
                                             Expanded(
                                                 child: CustomRichText(
-                                                    title: 'Work Type Name ')),
+                                                    title: 'Fault Name ')),
                                             Container(
                                               width: (MediaQuery.of(context)
                                                       .size
@@ -423,7 +423,7 @@ class WorkTypeWeb extends GetView<WorkTypeController> {
                                                   },
                                                 );
                                               },
-                                              text: 'Create Work Type',
+                                              text: 'Create Fault',
                                             ),
                                           )
                                         : CustomElevatedButton(
@@ -474,7 +474,7 @@ class WorkTypeWeb extends GetView<WorkTypeController> {
                                 child: Row(
                                   children: [
                                     Text(
-                                      "List of Work Type",
+                                      "List of Fault",
                                       style: Styles.blackBold16,
                                     ),
                                     Spacer(),
@@ -546,7 +546,7 @@ class WorkTypeWeb extends GetView<WorkTypeController> {
                                               DataColumn2(
                                                   // fixedWidth: 150,
                                                   label: Text(
-                                                "Work Type",
+                                                "Fault",
                                                 style: TextStyle(
                                                     fontSize: 15,
                                                     fontWeight:

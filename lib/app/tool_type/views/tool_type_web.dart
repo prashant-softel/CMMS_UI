@@ -250,7 +250,7 @@ class ToolTypeWeb extends GetView<ToolTypeController> {
                                           children: [
                                             Expanded(
                                                 child: CustomRichText(
-                                                    title: 'Work Type ')),
+                                                    title: 'Fault ')),
                                             Container(
                                               decoration: BoxDecoration(
                                                 boxShadow: [
@@ -652,7 +652,7 @@ class ToolTypeWeb extends GetView<ToolTypeController> {
                                               DataColumn2(
                                                   // fixedWidth: 150,
                                                   label: Text(
-                                                "Work type",
+                                                "Fault",
                                                 style: TextStyle(
                                                     fontSize: 15,
                                                     fontWeight:

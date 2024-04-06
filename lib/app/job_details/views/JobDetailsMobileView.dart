@@ -122,7 +122,7 @@ Widget _content(context, controller) {
                                               : [],
                                         ),
                                         JobDetailMultiValueField(
-                                          title: 'Work Type',
+                                          title: 'Fault',
                                           values: (controller.jobDetailsModel
                                                       .value?.workType !=
                                                   null)

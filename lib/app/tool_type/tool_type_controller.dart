@@ -109,7 +109,7 @@ class ToolTypeController extends GetxController {
   }
 
   Future<void> getToolsRequiredToWorkTypeList(workTypeIds) async {
-    print("Work type in controller, $workTypeIds");
+    print("Fault in controller, $workTypeIds");
     BufferworktypetoolList?.value = <ToolsModel>[];
 
     final list = await worktypeToolpresenter.getToolsRequiredToWorkTypeList(
@@ -199,7 +199,7 @@ class ToolTypeController extends GetxController {
           ),
           RichText(
             text: TextSpan(
-                text: 'Are you sure you want to delete the Work Type?',
+                text: 'Sure you want to delete the tool type?',
                 style: Styles.blackBold16,
                 children: [
                   TextSpan(

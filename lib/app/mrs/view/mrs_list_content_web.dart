@@ -179,55 +179,57 @@ class MrsListContentWeb extends StatelessWidget {
                                 ),
                               ],
                             ),
-                            controller.mrsList.isEmpty == true && controller.isLoading == false
+                            controller.mrsList.isEmpty == true &&
+                                    controller.isLoading == false
                                 ? Center(child: Text('No data'))
                                 : controller.isLoading.value == true
-                                ? Center(child: Text("Data Loading......"))
-                                : Expanded(
-                                    child: ValueListenableBuilder(
-                                        valueListenable:
-                                            controller.columnVisibility,
-                                        builder: (context, value, child) {
-                                          final dataSource =
-                                              MrsListDataSource(controller);
+                                    ? Center(child: Text("Data Loading......"))
+                                    : Expanded(
+                                        child: ValueListenableBuilder(
+                                            valueListenable:
+                                                controller.columnVisibility,
+                                            builder: (context, value, child) {
+                                              final dataSource =
+                                                  MrsListDataSource(controller);
 
-                                          return PaginatedDataTable2(
-                                            // fixedLeftColumns: 1,
-                                            dataRowHeight:
-                                                70, //Get.height * 0.10,
-                                            columnSpacing: 10,
-                                            source:
-                                                dataSource, // Custom DataSource class
-                                            // headingRowHeight: Get.height * 0.12,
-                                            minWidth: Get.width * 1.2,
-                                            showCheckboxColumn: false,
-                                            rowsPerPage:
-                                                10, // Number of rows per page
-                                            availableRowsPerPage: [
-                                              10,
-                                              20,
-                                              30,
-                                              50
-                                            ],
-                                            columns: [
-                                              for (var entry in value.entries)
-                                                if (entry.value)
+                                              return PaginatedDataTable2(
+                                                // fixedLeftColumns: 1,
+                                                dataRowHeight:
+                                                    70, //Get.height * 0.10,
+                                                columnSpacing: 10,
+                                                source:
+                                                    dataSource, // Custom DataSource class
+                                                // headingRowHeight: Get.height * 0.12,
+                                                minWidth: Get.width * 1.2,
+                                                showCheckboxColumn: false,
+                                                rowsPerPage:
+                                                    10, // Number of rows per page
+                                                availableRowsPerPage: [
+                                                  10,
+                                                  20,
+                                                  30,
+                                                  50
+                                                ],
+                                                columns: [
+                                                  for (var entry
+                                                      in value.entries)
+                                                    if (entry.value)
+                                                      buildDataColumn(
+                                                        entry.key,
+                                                        controller.filterText[
+                                                            entry.key]!,
+                                                        controller.columnwidth[
+                                                            entry.key],
+                                                      ),
                                                   buildDataColumn(
-                                                    entry.key,
-                                                    controller
-                                                        .filterText[entry.key]!,
-                                                    controller
-                                                        .columnwidth[entry.key],
+                                                    'Actions',
+                                                    controller.idFilterText,
+                                                    200,
                                                   ),
-                                              buildDataColumn(
-                                                'Actions',
-                                                controller.idFilterText,
-                                                200,
-                                              ),
-                                            ],
-                                          );
-                                        }),
-                                  )
+                                                ],
+                                              );
+                                            }),
+                                      )
                           ],
                         ),
                       ),
@@ -615,74 +617,74 @@ class MrsListDataSource extends DataTableSource {
                                 },
                               )
                             : Dimens.box0,
-                        controller.mrsList
-                                        .firstWhere(
-                                          (e) => e?.id == MrsDetails!.id,
-                                          orElse: () => MrsListModel(id: 00),
-                                        )
-                                        ?.status ==
-                                    324 &&
-                                varUserAccessModel.value.access_list!
-                                        .where((e) =>
-                                            e.feature_id ==
-                                                UserAccessConstants
-                                                    .kMrsFeatureId &&
-                                            e.approve ==
-                                                UserAccessConstants
-                                                    .kHaveApproveAccess)
-                                        .length >
-                                    0
-                            ? TableActionButton(
-                                color: ColorValues.approveColor,
-                                icon: Icons.check,
-                                message: 'approval',
-                                onPress: () {
-                                  controller.clearStoreData();
+                        // controller.mrsList
+                        //                 .firstWhere(
+                        //                   (e) => e?.id == MrsDetails!.id,
+                        //                   orElse: () => MrsListModel(id: 00),
+                        //                 )
+                        //                 ?.status ==
+                        //             324 &&
+                        //         varUserAccessModel.value.access_list!
+                        //                 .where((e) =>
+                        //                     e.feature_id ==
+                        //                         UserAccessConstants
+                        //                             .kMrsFeatureId &&
+                        //                     e.approve ==
+                        //                         UserAccessConstants
+                        //                             .kHaveApproveAccess)
+                        //                 .length >
+                        //             0
+                        //     ? TableActionButton(
+                        //         color: ColorValues.approveColor,
+                        //         icon: Icons.check,
+                        //         message: 'approval',
+                        //         onPress: () {
+                        //           controller.clearStoreData();
 
-                                  // final _flutterSecureStorage =
-                                  //     const FlutterSecureStorage();
+                        //           // final _flutterSecureStorage =
+                        //           //     const FlutterSecureStorage();
 
-                                  // _flutterSecureStorage.delete(key: "mrsId");
-                                  int mrsId = MrsDetails?.id ?? 0;
-                                  Get.toNamed(Routes.issueMrsApprove,
-                                      arguments: {'mrsId': mrsId});
-                                },
-                              )
-                            : Dimens.box0,
-                        controller.mrsList
-                                        .firstWhere(
-                                          (e) => e?.id == MrsDetails!.id,
-                                          orElse: () => MrsListModel(id: 00),
-                                        )
-                                        ?.status ==
-                                    324 &&
-                                varUserAccessModel.value.access_list!
-                                        .where((e) =>
-                                            e.feature_id ==
-                                                UserAccessConstants
-                                                    .kMrsFeatureId &&
-                                            e.issue ==
-                                                UserAccessConstants
-                                                    .kHaveIssueAccess)
-                                        .length >
-                                    0
-                            ? TableActionButton(
-                                color: ColorValues.rejectColor,
-                                icon: Icons.close_fullscreen,
-                                message: 'issue',
-                                onPress: () {
-                                  controller.clearStoreData();
+                        //           // _flutterSecureStorage.delete(key: "mrsId");
+                        //           int mrsId = MrsDetails?.id ?? 0;
+                        //           Get.toNamed(Routes.issueMrsApprove,
+                        //               arguments: {'mrsId': mrsId});
+                        //         },
+                        //       )
+                        //     : Dimens.box0,
+                        // controller.mrsList
+                        //                 .firstWhere(
+                        //                   (e) => e?.id == MrsDetails!.id,
+                        //                   orElse: () => MrsListModel(id: 00),
+                        //                 )
+                        //                 ?.status ==
+                        //             324 &&
+                        //         varUserAccessModel.value.access_list!
+                        //                 .where((e) =>
+                        //                     e.feature_id ==
+                        //                         UserAccessConstants
+                        //                             .kMrsFeatureId &&
+                        //                     e.issue ==
+                        //                         UserAccessConstants
+                        //                             .kHaveIssueAccess)
+                        //                 .length >
+                        //             0
+                        //     ? TableActionButton(
+                        //         color: ColorValues.rejectColor,
+                        //         icon: Icons.close_fullscreen,
+                        //         message: 'issue',
+                        //         onPress: () {
+                        //           controller.clearStoreData();
 
-                                  // final _flutterSecureStorage =
-                                  //     const FlutterSecureStorage();
+                        //           // final _flutterSecureStorage =
+                        //           //     const FlutterSecureStorage();
 
-                                  // _flutterSecureStorage.delete(key: "mrsId");
-                                  int mrsId = MrsDetails?.id ?? 0;
-                                  Get.toNamed(Routes.issueMrsApprove,
-                                      arguments: {'mrsId': mrsId});
-                                },
-                              )
-                            : Dimens.box0,
+                        //           // _flutterSecureStorage.delete(key: "mrsId");
+                        //           int mrsId = MrsDetails?.id ?? 0;
+                        //           Get.toNamed(Routes.issueMrsApprove,
+                        //               arguments: {'mrsId': mrsId});
+                        //         },
+                        //       )
+                        //     : Dimens.box0,
                         controller.mrsList
                                         .firstWhere(
                                           (e) => e?.id == MrsDetails!.id,

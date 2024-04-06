@@ -2360,7 +2360,7 @@ class ConnectHelper {
     String? workTypeIds,
     bool? isLoading,
   }) async {
-    print("Work type id in connect helper: $workTypeIds");
+    print("Tool type id in connect helper: $workTypeIds");
     var responseModel = await apiWrapper.makeRequest(
       'JobWorkType/GetMasterToolList?worktypeIds=$workTypeIds',
       Request.get,

@@ -200,7 +200,7 @@ class JobCardDetailsController extends GetxController {
       }
       strEquipmentCategories.value = equipmentCategoryNames.join(', ');
       plantDetails.value = {
-        "Plant Details": jobCardDetailsModel.value?.plantName,
+        "Plant": jobCardDetailsModel.value?.plantName,
         "Block": jobCardDetailsModel.value?.plantName,
         // "Equipment Categories": jobCardDetailsModel.value?.assetCategoryName,
       };
@@ -275,8 +275,8 @@ class JobCardDetailsController extends GetxController {
           "Job Description": jobCardDetailsModel.value?.description,
           "Job Assigned To": strAssignName.value, //jobCardDetailsModel.value?.,
           // "Work Area / Equipments": strWorkAreasOrEquipments.value,
-          "Work Type": strWorkTypes.value,
-          "Linked Tool To  Work Type": strToolsRequired.value,
+          "Fault": strWorkTypes.value,
+          "Linked Tool To Fault": strToolsRequired.value,
           "Job Created By": jobCardDetailsModel.value?.created_by,
           "Job Status": jobCardDetailsModel.value?.status_short,
         };

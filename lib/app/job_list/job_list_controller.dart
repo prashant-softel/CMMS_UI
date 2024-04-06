@@ -249,7 +249,7 @@ class JobListController extends GetxController {
         sheetName, CellIndex.indexByString('E1'), 'Work Area / Equipment');
     excel.updateCell(sheetName, CellIndex.indexByString('F1'), 'Description');
     excel.updateCell(sheetName, CellIndex.indexByString('G1'), 'Job Details');
-    excel.updateCell(sheetName, CellIndex.indexByString('H1'), 'Work Type');
+    excel.updateCell(sheetName, CellIndex.indexByString('H1'), 'Fault');
     excel.updateCell(sheetName, CellIndex.indexByString('I1'), 'Raised By');
     excel.updateCell(
         sheetName, CellIndex.indexByString('J1'), 'Breakdown Time');
