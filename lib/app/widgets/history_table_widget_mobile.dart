@@ -19,7 +19,8 @@ class HistoryTableWidgetMobile extends GetView<HistoryController> {
       itemBuilder: (context, index) {
         return Card(
           child: ListTile(
-            title: Text(controller.formatDate(historyList?[index]?.createdAt)),
+            title: Text(
+                controller.formatDate(historyList?[index]?.createdAt!.result)),
             subtitle: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [

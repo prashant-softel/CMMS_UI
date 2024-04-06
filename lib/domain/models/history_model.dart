@@ -35,7 +35,7 @@ class HistoryModel {
   String? comment;
   int? createdById;
   String? createdByName;
-  DateTime? createdAt;
+  CreatedAt? createdAt;
   int? status;
   String? status_name;
   dynamic latitude;
@@ -43,6 +43,7 @@ class HistoryModel {
 
   factory HistoryModel.fromJson(Map<String, dynamic> json) => HistoryModel(
         id: json['id'] == null ? 0 : json['id'],
+        createdAt: CreatedAt.fromJson(json['created_at']),
         moduleType: json["module_type"] == null ? 0 : json["module_type"],
         moduleRefId: json["module_ref_id"] == null ? 0 : json["module_ref_id"],
         secondaryModuleType: json["secondary_module_type"] == null
@@ -55,12 +56,8 @@ class HistoryModel {
         createdById: json["created_by_id"] == null ? 0 : json["created_by_id"],
         createdByName:
             json["created_by_name"] == null ? '' : json["created_by_name"],
-        createdAt: json['created_at'] == null
-            ? DateTime.now()
-            : DateTime.parse(json['created_at'] as String),
         status: json["status"] == null ? 0 : json["status"],
         status_name: json["status_name"] == null ? 0 : json["status_name"],
-
         latitude: json["latitude"] == null ? '' : json["latitude"],
         longitude: json["longitude"] == null ? '' : json["longitude"],
       );
@@ -74,7 +71,7 @@ class HistoryModel {
         "comment": comment,
         "created_by_id": createdById,
         "created_by_name": createdByNameValues.reverse[createdByName],
-        "created_at": createdAt?.toIso8601String(),
+        "created_at": createdAt,
         "status": status,
         "status_name": status_name,
         "latitude": latitude,
@@ -96,5 +93,47 @@ class EnumValues<T> {
   Map<T, String> get reverse {
     reverseMap = map.map((k, v) => MapEntry(v, k));
     return reverseMap;
+  }
+}
+
+class CreatedAt {
+  DateTime? result;
+  int? id;
+  dynamic exception;
+  int? status;
+  bool? isCanceled;
+  bool? isCompleted;
+  bool? isCompletedSuccessfully;
+  int? creationOptions;
+  dynamic asyncState;
+  bool? isFaulted;
+
+  CreatedAt(
+      {this.result,
+      this.id,
+      this.asyncState,
+      this.creationOptions,
+      this.exception,
+      this.isCanceled,
+      this.isCompleted,
+      this.isCompletedSuccessfully,
+      this.isFaulted,
+      this.status});
+
+  factory CreatedAt.fromJson(Map<String, dynamic> json) {
+    return CreatedAt(
+      result: json['result'] == null
+          ? DateTime.now()
+          : DateTime.parse(json['result'] as String),
+      id: json['id'],
+      asyncState: json['asyncState'],
+      creationOptions: json['creationOptions'],
+      exception: json['exception'],
+      isCanceled: json['isCanceled'],
+      isCompleted: json['isCompleted'],
+      isCompletedSuccessfully: json['isCompletedSuccessfully'],
+      isFaulted: json['isFaulted'],
+      status: json['status'],
+    );
   }
 }
