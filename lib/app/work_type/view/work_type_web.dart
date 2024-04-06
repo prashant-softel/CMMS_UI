@@ -69,7 +69,7 @@ class WorkTypeWeb extends GetView<WorkTypeController> {
                       ),
                     ),
                     Text(
-                      " / Fault".toUpperCase(),
+                      " / FAULT",
                       style: Styles.greyLight14,
                     ),
                   ],
