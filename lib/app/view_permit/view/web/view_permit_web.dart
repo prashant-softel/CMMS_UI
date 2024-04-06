@@ -2285,7 +2285,7 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                                         columns: [
                                           DataColumn(
                                             label: Text(
-                                              "File Name",
+                                              "File Description",
                                               style: TextStyle(
                                                 fontSize: 15,
                                                 fontWeight: FontWeight.bold,
@@ -2308,7 +2308,7 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                                             cells: [
                                               DataCell(Text(
                                                 controller.file_list![index]
-                                                        ?.fileName
+                                                        ?.description
                                                         .toString() ??
                                                     '',
                                               )),

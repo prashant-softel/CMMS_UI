@@ -49,8 +49,8 @@ class FileUploadController extends GetxController {
     return pickedFiles.value;
   }
 
-  Future<void> uploadSingleFile(
-      XFile file, List<int> bytesData, String token, int index,
+  Future<void> uploadSingleFile(XFile file, List<int> bytesData, String token,
+      int index, TextEditingController descriptionController,
       {required Function(double) uploadProgressCallback}) async {
     ///
 
@@ -65,6 +65,7 @@ class FileUploadController extends GetxController {
       "facility_id": "380",
       "module_id": "1",
       "id": "3263",
+      "description": descriptionController.text,
     };
 
     var fieldsData = requestFields.entries
@@ -147,8 +148,8 @@ class FileUploadController extends GetxController {
     }
   }
 
-  Future<void> uploadFiles(
-      List<XFile> files, List<List<int>> bytesDataList, String token,
+  Future<void> uploadFiles(List<XFile> files, List<List<int>> bytesDataList,
+      String token, List<TextEditingController> descriptionCtrlrs,
       {required Function(double) uploadProgressCallback}) async {
     progresses.value = List<int>.filled(files.length, 0);
 
@@ -158,6 +159,7 @@ class FileUploadController extends GetxController {
         bytesDataList[i],
         token,
         i,
+        descriptionCtrlrs[i],
         uploadProgressCallback: (progress) {
           var updatedProgresses = List<int>.from(progresses.value);
           updatedProgresses[i] = progress.round();
@@ -228,6 +230,7 @@ class FileUploadController extends GetxController {
         pickedFiles,
         bytesDataList!,
         token,
+        descriptionCtrlrs,
         uploadProgressCallback: (progress) {
           print('Upload progress: $progress%');
         },

@@ -675,16 +675,19 @@ class JobDetailsWebView extends GetView<JobDetailsController> {
                                             ],
                                           ),
                                         ),
-
                                   ///
                                   controller.listMrsByJobId!.length > 0
                                       ? Container(
                                           margin: Dimens.edgeInsets20,
-                                          height: ((controller.listMrsByJobId
-                                                          ?.length ??
-                                                      0) *
-                                                  40) +
-                                              150,
+                                          height: controller
+                                                      .listMrsByJobId!.length >
+                                                  0
+                                              ? ((controller.listMrsByJobId
+                                                              ?.length ??
+                                                          0) *
+                                                      40) +
+                                                  150
+                                              : 55,
                                           decoration: BoxDecoration(
                                             border: Border.all(
                                               color: ColorValues
@@ -712,13 +715,46 @@ class JobDetailsWebView extends GetView<JobDetailsController> {
                                                       "Material Issue / Used",
                                                       style: Styles.blue700,
                                                     ),
+                                                    Spacer(),
+                                                    controller.listMrsByJobId!
+                                                            .isEmpty
+                                                        ? Container(
+                                                            height: 30,
+                                                            child:
+                                                                CustomElevatedButton(
+                                                              backgroundColor:
+                                                                  ColorValues
+                                                                      .addNewColor,
+                                                              onPressed:
+                                                                  () async {
+                                                                Get.offAllNamed(
+                                                                    Routes
+                                                                        .createMrs,
+                                                                    arguments: {
+                                                                      "whereUsedId": controller
+                                                                          .jobDetailsModel
+                                                                          .value
+                                                                          ?.id,
+                                                                      "activity": controller
+                                                                          .jobDetailsModel
+                                                                          .value
+                                                                          ?.jobTitle,
+                                                                      "whereUsed":
+                                                                          27,
+                                                                      "fromActorTypeId":
+                                                                          2,
+                                                                      "to_actor_type_id":
+                                                                          3
+                                                                    });
+                                                              },
+                                                              text:
+                                                                  "Add New MRS",
+                                                            ),
+                                                          )
+                                                        : Dimens.box0,
                                                   ],
                                                 ),
                                               ),
-                                              // Divider(
-                                              //   color:
-                                              //       ColorValues.greyLightColour,
-                                              // ),
                                               Expanded(
                                                 child: DataTable2(
                                                   border: TableBorder.all(
@@ -971,7 +1007,90 @@ class JobDetailsWebView extends GetView<JobDetailsController> {
                                             ],
                                           ),
                                         )
-                                      : Dimens.box0,
+                                      : Container(
+                                          margin: Dimens.edgeInsets20,
+                                          height: Get.height / 7,
+                                          decoration: BoxDecoration(
+                                            border: Border.all(
+                                              color: ColorValues
+                                                  .lightGreyColorWithOpacity35,
+                                              width: 1,
+                                            ),
+                                            boxShadow: [
+                                              BoxShadow(
+                                                color: ColorValues
+                                                    .appBlueBackgroundColor,
+                                                spreadRadius: 2,
+                                                blurRadius: 5,
+                                                offset: Offset(0, 2),
+                                              ),
+                                            ],
+                                          ),
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Padding(
+                                                padding:
+                                                    const EdgeInsets.all(10.0),
+                                                child: Row(
+                                                  children: [
+                                                    Text(
+                                                      "Material Issue / Used",
+                                                      style: Styles.blue700,
+                                                    ),
+                                                    Spacer(),
+                                                    controller.listMrsByJobId!
+                                                            .isEmpty
+                                                        ? Container(
+                                                            height: 30,
+                                                            child:
+                                                                CustomElevatedButton(
+                                                              backgroundColor:
+                                                                  ColorValues
+                                                                      .addNewColor,
+                                                              onPressed:
+                                                                  () async {
+                                                                Get.offAllNamed(
+                                                                    Routes
+                                                                        .createMrs,
+                                                                    arguments: {
+                                                                      "whereUsedId": controller
+                                                                          .jobDetailsModel
+                                                                          .value
+                                                                          ?.id,
+                                                                      "activity": controller
+                                                                          .jobDetailsModel
+                                                                          .value
+                                                                          ?.jobTitle,
+                                                                      "whereUsed":
+                                                                          27,
+                                                                      "fromActorTypeId":
+                                                                          2,
+                                                                      "to_actor_type_id":
+                                                                          3
+                                                                    });
+                                                              },
+                                                              text:
+                                                                  'Add New MRS',
+                                                            ),
+                                                          )
+                                                        : Dimens.box0
+                                                  ],
+                                                ),
+                                              ),
+                                              Row(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.center,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: [
+                                                  Text("No Data Found"),
+                                                ],
+                                              )
+                                            ],
+                                          ),
+                                        ),
                                   // Container(
                                   //     margin: Dimens.edgeInsets20,
                                   //     height: Get.height / 7,
