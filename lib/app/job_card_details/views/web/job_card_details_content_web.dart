@@ -214,9 +214,13 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                                       children: [
                                         Text(" ${controller.jobCardId.value}",
                                             style: Styles.blue14),
-                                        Text(
-                                            " ${controller.jobCardDetailsModel.value?.assetCategoryName ?? ""}",
-                                            style: Styles.blue14),
+                                        Container(
+                                          width: 400,
+                                          child: Text(
+                                              " ${controller.jobCardDetailsModel.value?.assetCategoryName ?? ""}",
+                                              maxLines: 3,
+                                              style: Styles.blue14),
+                                        ),
                                         Text(
                                             " ${controller.jobCardDetailsModel.value?.jobId ?? ""}",
                                             style: Styles.blue14),
@@ -263,9 +267,13 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                                         Text(
                                             " ${controller.jobCardDetailsModel.value?.plantName ?? ""}",
                                             style: Styles.blue14),
-                                        Text(
-                                            " ${controller.jobCardDetailsModel.value?.title ?? ""}",
-                                            style: Styles.blue14),
+                                        Container(
+                                          width: 480,
+                                          child: Text(
+                                              " ${controller.jobCardDetailsModel.value?.title ?? ""}",
+                                              maxLines: 2,
+                                              style: Styles.blue14),
+                                        ),
                                         Text(
                                             " ${controller.jobCardDetailsModel.value?.jcClosedByName ?? ""}",
                                             style: Styles.blue14),
