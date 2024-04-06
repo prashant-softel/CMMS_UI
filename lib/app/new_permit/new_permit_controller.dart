@@ -637,11 +637,25 @@ class NewPermitController extends GetxController {
           );
         },
       );
+      late List<ListSafetyQuestion> safety_measure_map_list = [];
+      newPermitDetailsModel.value?.safety_question_list?.forEach((element) {
+        // safety_measure_map_list.add(
+        //   ListSafetyQuestion(
+        //       saftyQuestionId: element.saftyQuestionId,
+        //       saftyQuestionName: element.saftyQuestionName,
+        //       ischeck: element.ischeck != null ? 1 : 0),
+        // );
+        safetyMeasureList.add(SafetyMeasureListModel(
+            id: element.saftyQuestionId,
+            name: element.saftyQuestionName,
+            isChecked: element.ischeck == 1 ? true : false));
 
-      // safetyList?.value =
-      //     newPermitDetailsModel.value?.safety_question_list ?? [];
+        print('Islationidsafty:$safety_measure_map_list');
+      });
+      safetyList?.value =
+          newPermitDetailsModel.value?.safety_question_list ?? [];
       if (selectedPermitTypeId != 0) {
-        getSafetyMeasureList();
+        // getSafetyMeasureList();
       }
       int num = newPermitDetailsModel.value!.is_loto_required!;
       num == 1 ? isToggleOn.value = true : isToggleOn.value = false;
