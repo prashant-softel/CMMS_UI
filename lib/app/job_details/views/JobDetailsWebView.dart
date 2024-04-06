@@ -551,6 +551,34 @@ class JobDetailsWebView extends GetView<JobDetailsController> {
                                                                 .spaceEvenly,
                                                         children: [
                                                           TableActionButton(
+                                                            color: ColorValues
+                                                                .addNewColor,
+                                                            message: "Add MRS",
+                                                            icon: Icons
+                                                                .assignment,
+                                                            onPress: () async {
+                                                              Get.offAllNamed(
+                                                                  Routes
+                                                                      .createMrs,
+                                                                  arguments: {
+                                                                    "whereUsedId": controller
+                                                                        .jobAssociatedModelsList?[
+                                                                            index]
+                                                                        ?.jobCardId,
+                                                                    "activity": controller
+                                                                        .jobDetailsModel
+                                                                        .value
+                                                                        ?.jobTitle,
+                                                                    "whereUsed":
+                                                                        4,
+                                                                    "fromActorTypeId":
+                                                                        2,
+                                                                    "to_actor_type_id":
+                                                                        4
+                                                                  });
+                                                            },
+                                                          ),
+                                                          TableActionButton(
                                                               color: ColorValues
                                                                   .viewColor,
                                                               icon: Icons
@@ -675,6 +703,7 @@ class JobDetailsWebView extends GetView<JobDetailsController> {
                                             ],
                                           ),
                                         ),
+
                                   ///
                                   controller.listMrsByJobId!.length > 0
                                       ? Container(
@@ -706,53 +735,12 @@ class JobDetailsWebView extends GetView<JobDetailsController> {
                                           ),
                                           child: Column(
                                             children: [
-                                              Padding(
-                                                padding:
-                                                    const EdgeInsets.all(10.0),
-                                                child: Row(
-                                                  children: [
-                                                    Text(
-                                                      "Material Issue / Used",
-                                                      style: Styles.blue700,
-                                                    ),
-                                                    Spacer(),
-                                                    controller.listMrsByJobId!
-                                                            .isEmpty
-                                                        ? Container(
-                                                            height: 30,
-                                                            child:
-                                                                CustomElevatedButton(
-                                                              backgroundColor:
-                                                                  ColorValues
-                                                                      .addNewColor,
-                                                              onPressed:
-                                                                  () async {
-                                                                Get.offAllNamed(
-                                                                    Routes
-                                                                        .createMrs,
-                                                                    arguments: {
-                                                                      "whereUsedId": controller
-                                                                          .jobDetailsModel
-                                                                          .value
-                                                                          ?.id,
-                                                                      "activity": controller
-                                                                          .jobDetailsModel
-                                                                          .value
-                                                                          ?.jobTitle,
-                                                                      "whereUsed":
-                                                                          27,
-                                                                      "fromActorTypeId":
-                                                                          2,
-                                                                      "to_actor_type_id":
-                                                                          3
-                                                                    });
-                                                              },
-                                                              text:
-                                                                  "Add New MRS",
-                                                            ),
-                                                          )
-                                                        : Dimens.box0,
-                                                  ],
+                                              Container(
+                                                alignment: Alignment.topLeft,
+                                                padding: EdgeInsets.all(10),
+                                                child: Text(
+                                                  "Material Issue / Used",
+                                                  style: Styles.blue700,
                                                 ),
                                               ),
                                               Expanded(
@@ -1007,90 +995,7 @@ class JobDetailsWebView extends GetView<JobDetailsController> {
                                             ],
                                           ),
                                         )
-                                      : Container(
-                                          margin: Dimens.edgeInsets20,
-                                          height: Get.height / 7,
-                                          decoration: BoxDecoration(
-                                            border: Border.all(
-                                              color: ColorValues
-                                                  .lightGreyColorWithOpacity35,
-                                              width: 1,
-                                            ),
-                                            boxShadow: [
-                                              BoxShadow(
-                                                color: ColorValues
-                                                    .appBlueBackgroundColor,
-                                                spreadRadius: 2,
-                                                blurRadius: 5,
-                                                offset: Offset(0, 2),
-                                              ),
-                                            ],
-                                          ),
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Padding(
-                                                padding:
-                                                    const EdgeInsets.all(10.0),
-                                                child: Row(
-                                                  children: [
-                                                    Text(
-                                                      "Material Issue / Used",
-                                                      style: Styles.blue700,
-                                                    ),
-                                                    Spacer(),
-                                                    controller.listMrsByJobId!
-                                                            .isEmpty
-                                                        ? Container(
-                                                            height: 30,
-                                                            child:
-                                                                CustomElevatedButton(
-                                                              backgroundColor:
-                                                                  ColorValues
-                                                                      .addNewColor,
-                                                              onPressed:
-                                                                  () async {
-                                                                Get.offAllNamed(
-                                                                    Routes
-                                                                        .createMrs,
-                                                                    arguments: {
-                                                                      "whereUsedId": controller
-                                                                          .jobDetailsModel
-                                                                          .value
-                                                                          ?.id,
-                                                                      "activity": controller
-                                                                          .jobDetailsModel
-                                                                          .value
-                                                                          ?.jobTitle,
-                                                                      "whereUsed":
-                                                                          27,
-                                                                      "fromActorTypeId":
-                                                                          2,
-                                                                      "to_actor_type_id":
-                                                                          3
-                                                                    });
-                                                              },
-                                                              text:
-                                                                  'Add New MRS',
-                                                            ),
-                                                          )
-                                                        : Dimens.box0
-                                                  ],
-                                                ),
-                                              ),
-                                              Row(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.center,
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                children: [
-                                                  Text("No Data Found"),
-                                                ],
-                                              )
-                                            ],
-                                          ),
-                                        ),
+                                      : Dimens.box0,
                                   // Container(
                                   //     margin: Dimens.edgeInsets20,
                                   //     height: Get.height / 7,

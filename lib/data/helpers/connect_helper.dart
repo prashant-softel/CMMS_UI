@@ -661,7 +661,7 @@ class ConnectHelper {
 //var statusParam = (status!=null status!='')?'status=1':'';
     // var statusParam = 'status=1';
     ResponseModel responseModel = await apiWrapper.makeRequest(
-      'MC/GetMCEquipmentList?facilityId=$facilityId',
+      'MC/GetMCEquipmentList?facility_id=$facilityId',
       // startDateParam +
       // endDateParam,
       Request.getMultiparts,
