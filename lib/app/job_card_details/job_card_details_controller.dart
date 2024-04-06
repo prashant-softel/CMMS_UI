@@ -107,7 +107,6 @@ class JobCardDetailsController extends GetxController {
     });
     // print({"madfhuiwef", jobCardId});
     try {
-
       Get.put(FileUploadController());
 
       // final _flutterSecureStorage = const FlutterSecureStorage();
@@ -123,6 +122,7 @@ class JobCardDetailsController extends GetxController {
               isLoading: true,
             ) ??
             [];
+        getHistory(facilityId);
       }
       // await getHistory(facilityId);
       createPlantDetailsTableData();
@@ -459,8 +459,8 @@ class JobCardDetailsController extends GetxController {
   }
 
   void getPermitDetails(int facilityId, int? permitId) async {
-    final _permitDetails =
-        await jobCardDetailsPresenter.getPermitDetails(permitId: permitId,facilityId:facilityId);
+    final _permitDetails = await jobCardDetailsPresenter.getPermitDetails(
+        permitId: permitId, facilityId: facilityId);
 
     isolationAssetsCategoryList.value = _permitDetails?.lstIsolation ?? [];
     lotoAppliedAssets.value = _permitDetails?.lstLoto ?? [];
