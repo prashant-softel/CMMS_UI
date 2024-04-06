@@ -639,12 +639,6 @@ class NewPermitController extends GetxController {
       );
       late List<ListSafetyQuestion> safety_measure_map_list = [];
       newPermitDetailsModel.value?.safety_question_list?.forEach((element) {
-        // safety_measure_map_list.add(
-        //   ListSafetyQuestion(
-        //       saftyQuestionId: element.saftyQuestionId,
-        //       saftyQuestionName: element.saftyQuestionName,
-        //       ischeck: element.ischeck != null ? 1 : 0),
-        // );
         safetyMeasureList.add(SafetyMeasureListModel(
             id: element.saftyQuestionId,
             name: element.saftyQuestionName,
@@ -675,11 +669,12 @@ class NewPermitController extends GetxController {
       print('Islation id:$idList');
       selectedEquipmentIsolationIdList.value = idList.whereType<int>().toList();
       print('Islation id:$selectedEquipmentIsolationIdList');
-      equipmentIsolationSelected(idList);
+      await equipmentIsolationSelected(idList);
 
       List<int?> nameList = listLoto!.map((obj) => obj!.loto_id).toList();
       selectedEquipmentNameIdList.value = nameList.whereType<int>().toList();
-      // equipmentNameSelected(nameList);
+
+      equipmentNameSelected(nameList);
       print("equipment names id's: $selectedEquipmentNameIdList");
       // workPermitRemarkTextCtrlr.text =
       //     newPermitDetailsModel.value?.physical_iso_remark ?? "";
@@ -733,6 +728,7 @@ class NewPermitController extends GetxController {
       });
       filteredEquipmentNameList.add(e);
     }
+    print({"filteredEquipmentNameList": filteredEquipmentNameList});
     //  print({"selectedEquipmentNameIdList le":selectedEquipmentNameIdList.value.length,"filteredEquipmentNameList":filteredEquipmentNameList.value.length});
   }
 
@@ -817,12 +813,12 @@ class NewPermitController extends GetxController {
     // employee_map[emp_id] = selectedEmployeeNameIdList;
   }
 
-  void equipmentIsolationSelected(_selectedEquipmentIsolationIds) {
+  equipmentIsolationSelected(_selectedEquipmentIsolationIds) async {
     selectedEquipmentIsolationIdList.value = <int>[];
     for (var _selectedIsolationId in _selectedEquipmentIsolationIds) {
       selectedEquipmentIsolationIdList.add(_selectedIsolationId);
     }
-    getInventoryEquipmentNameList();
+    await getInventoryEquipmentNameList();
   }
 
   Future<void> getAssignedToList() async {
