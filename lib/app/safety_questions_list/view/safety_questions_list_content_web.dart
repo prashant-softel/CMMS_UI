@@ -3,6 +3,7 @@ import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/safety_questions_list/safety_questions_list_controller.dart';
 import 'package:cmms/app/widgets/dropdown_web.dart';
+import 'package:cmms/app/widgets/stock_dropdown.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -660,11 +661,6 @@ class SafetyQuestionsListContentWeb
                                             decoration: BoxDecoration(
                                               borderRadius:
                                                   BorderRadius.circular(6),
-                                              border: Border.all(
-                                                color: Color.fromARGB(
-                                                    255, 227, 224, 224),
-                                                width: 1,
-                                              ),
                                               boxShadow: [
                                                 BoxShadow(
                                                   color: Colors.black26,
@@ -688,37 +684,15 @@ class SafetyQuestionsListContentWeb
                                                     .size
                                                     .width *
                                                 .1),
-                                            height: 30,
+                                            height: 28,
                                             padding:
                                                 const EdgeInsets.only(left: 16),
-                                            child: DropdownButtonHideUnderline(
-                                              child: DropdownButton<String>(
-                                                isExpanded: true,
-                                                value:
-                                                    controller.updateType.value,
-                                                onChanged: (value) => controller
-                                                  ..updateChecklistType(value!),
-                                                items: <String>[
-                                                  '',
-                                                  'Checkbox',
-                                                  'Radio',
-                                                  'Text'
-                                                ].map<DropdownMenuItem<String>>(
-                                                    (String value) {
-                                                  return DropdownMenuItem<
-                                                      String>(
-                                                    value: value,
-                                                    child: Container(
-                                                      margin: EdgeInsets.only(
-                                                          left: 10),
-                                                      child: Text(
-                                                        value,
-                                                        style: Styles.black12,
-                                                      ),
-                                                    ),
-                                                  );
-                                                }).toList(),
-                                              ),
+                                            child: DropdownWebStock(
+                                              dropdownList: controller.types,
+                                              selectedValue: controller
+                                                  .isselectedtype.value,
+                                              onValueChanged:
+                                                  controller.onValueChanged,
                                             ),
                                           ),
                                         ],
@@ -984,148 +958,175 @@ class SafetyQuestionsListContentWeb
                               ],
                             ),
                             Dimens.boxHeight10,
-                            controller.safetyMeasureList.isEmpty == true && controller.isLoading == false
-                            ? Center(child: Text("No Data"))
-                            : controller.isLoading.value ==true
-                            ? Center(child: Text("Data Loading......"))
-                                : Expanded(
-                                    child: DataTable2(
-                                      key: UniqueKey(),
-                                      dataRowHeight: 50,
-                                      columnSpacing: 10,
-                                      border: TableBorder.all(
-                                          color: Color.fromARGB(
-                                              255, 206, 229, 234)),
-                                      columns: [
-                                        DataColumn2(
-                                          fixedWidth: 100,
-                                          label: Text(
-                                            "Id",
-                                            style: TextStyle(
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                        ),
-                                        DataColumn2(
-                                          label: Text(
-                                            "Permit Type Checklist",
-                                            style: TextStyle(
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                          size: ColumnSize.L,
-                                        ),
-                                        DataColumn2(
-                                          label: Text(
-                                            "Checkpoint",
-                                            style: TextStyle(
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                          size: ColumnSize.L,
-                                        ),
-                                        DataColumn2(
-                                          label: Text(
-                                            "Confirmation",
-                                            style: TextStyle(
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                          size: ColumnSize.S,
-                                        ),
-                                        DataColumn2(
-                                          label: Text(
-                                            "Required SOP/JSA",
-                                            style: TextStyle(
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                          size: ColumnSize.S,
-                                        ),
-                                        DataColumn2(
-                                          fixedWidth: 100,
-                                          label: Text(
-                                            "Action",
-                                            style: TextStyle(
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                        ),
-                                      ],
-                                      rows: List<DataRow>.generate(
-                                        controller.safetyMeasureList.length,
-                                        (index) {
-                                          var safetyQuestionsListDetails =
-                                              controller
-                                                  .safetyMeasureList[index];
-                                          return DataRow(cells: [
-                                            DataCell(
-                                                Text((index + 1).toString())),
-                                            DataCell(Text(controller
-                                                .safetyMeasureList[index]
-                                                .permitType
-                                                .toString())),
-                                            DataCell(Text(controller
-                                                .safetyMeasureList[index].name
-                                                .toString())),
-                                            DataCell(Text(controller
-                                                .safetyMeasureList[index]
-                                                .inputName
-                                                .toString())),
-                                            DataCell(Checkbox(
-                                              value: controller.isChecked.value,
-                                              onChanged: (val) {},
-                                            )),
-                                            // DataCell(Text(
-                                            //     '${safetyQuestionsListDetails.isRequired}')),
-                                            DataCell(Wrap(
-                                              alignment: WrapAlignment.center,
-                                              children: [
-                                                TableActionButton(
-                                                  color: ColorValues.editColor,
-                                                  icon: Icons.edit,
-                                                  message: 'Edit',
-                                                  onPress: () {
-                                                    controller.selectedItem =
-                                                        safetyQuestionsListDetails;
-                                                    controller.titleCtrlr.text =
-                                                        controller.selectedItem
+                            controller.safetyMeasureList.isEmpty == true &&
+                                    controller.isLoading == false
+                                ? Center(child: Text("No Data"))
+                                : controller.isLoading.value == true
+                                    ? Center(child: Text("Data Loading......"))
+                                    : Expanded(
+                                        child: DataTable2(
+                                          key: UniqueKey(),
+                                          dataRowHeight: 50,
+                                          columnSpacing: 10,
+                                          border: TableBorder.all(
+                                              color: Color.fromARGB(
+                                                  255, 206, 229, 234)),
+                                          columns: [
+                                            DataColumn2(
+                                              fixedWidth: 100,
+                                              label: Text(
+                                                "Id",
+                                                style: TextStyle(
+                                                    fontSize: 15,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              ),
+                                            ),
+                                            DataColumn2(
+                                              label: Text(
+                                                "Permit Type Checklist",
+                                                style: TextStyle(
+                                                    fontSize: 15,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              ),
+                                              size: ColumnSize.L,
+                                            ),
+                                            DataColumn2(
+                                              label: Text(
+                                                "Checkpoint",
+                                                style: TextStyle(
+                                                    fontSize: 15,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              ),
+                                              size: ColumnSize.L,
+                                            ),
+                                            DataColumn2(
+                                              label: Text(
+                                                "Confirmation",
+                                                style: TextStyle(
+                                                    fontSize: 15,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              ),
+                                              size: ColumnSize.S,
+                                            ),
+                                            DataColumn2(
+                                              label: Text(
+                                                "Required SOP/JSA",
+                                                style: TextStyle(
+                                                    fontSize: 15,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              ),
+                                              size: ColumnSize.S,
+                                            ),
+                                            DataColumn2(
+                                              fixedWidth: 100,
+                                              label: Text(
+                                                "Action",
+                                                style: TextStyle(
+                                                    fontSize: 15,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              ),
+                                            ),
+                                          ],
+                                          rows: List<DataRow>.generate(
+                                            controller.safetyMeasureList.length,
+                                            (index) {
+                                              var safetyQuestionsListDetails =
+                                                  controller
+                                                      .safetyMeasureList[index];
+                                              return DataRow(cells: [
+                                                DataCell(Text(
+                                                    (index + 1).toString())),
+                                                DataCell(Text(controller
+                                                    .safetyMeasureList[index]
+                                                    .permitType
+                                                    .toString())),
+                                                DataCell(Text(controller
+                                                    .safetyMeasureList[index]
+                                                    .name
+                                                    .toString())),
+                                                DataCell(Text(controller
+                                                    .safetyMeasureList[index]
+                                                    .inputName
+                                                    .toString())),
+                                                DataCell(Checkbox(
+                                                  value: controller
+                                                      .isChecked.value,
+                                                  onChanged: (val) {},
+                                                )),
+                                                // DataCell(Text(
+                                                //     '${safetyQuestionsListDetails.isRequired}')),
+                                                DataCell(Wrap(
+                                                  alignment:
+                                                      WrapAlignment.center,
+                                                  children: [
+                                                    TableActionButton(
+                                                      color:
+                                                          ColorValues.editColor,
+                                                      icon: Icons.edit,
+                                                      message: 'Edit',
+                                                      onPress: () {
+                                                        controller
+                                                                .selectedItem =
+                                                            safetyQuestionsListDetails;
+                                                        controller.titleCtrlr
+                                                            .text = controller
+                                                                .selectedItem
                                                                 ?.name ??
                                                             '';
-                                                    controller.isCheckedRequire
-                                                        .value = controller
+                                                        controller
+                                                            .selectedTypePermit
+                                                            .value = controller
                                                                 .selectedItem
-                                                                ?.isRequired ==
-                                                            1
-                                                        ? true
-                                                        : false;
-                                                    controller
-                                                        .isContainerVisible
-                                                        .value = true;
-                                                    // Your edit logic...
-                                                  },
-                                                ),
-                                                TableActionButton(
-                                                    color:
-                                                        ColorValues.appRedColor,
-                                                    icon: Icons.delete,
-                                                    message: 'Delete',
-                                                    onPress: () {
-                                                      controller.isDeleteDialog(
-                                                        safetyMeasure_id:
-                                                            '${safetyQuestionsListDetails.id}',
-                                                        safetyMeasure:
-                                                            safetyQuestionsListDetails
-                                                                .name,
-                                                      );
-                                                    }),
-                                              ],
-                                            )),
-                                          ]);
-                                        },
+                                                                ?.permitType ??
+                                                            '';
+                                                        controller
+                                                            .isCheckedRequire
+                                                            .value = controller
+                                                                    .selectedItem
+                                                                    ?.isRequired ==
+                                                                1
+                                                            ? true
+                                                            : false;
+                                                        controller
+                                                                .isselectedtype
+                                                                .value =
+                                                            controller
+                                                                .selectedItem
+                                                                !.inputName!;
+                                                        controller
+                                                            .isContainerVisible
+                                                            .value = true;
+                                                        // Your edit logic...
+                                                      },
+                                                    ),
+                                                    TableActionButton(
+                                                        color: ColorValues
+                                                            .appRedColor,
+                                                        icon: Icons.delete,
+                                                        message: 'Delete',
+                                                        onPress: () {
+                                                          controller
+                                                              .isDeleteDialog(
+                                                            safetyMeasure_id:
+                                                                '${safetyQuestionsListDetails.id}',
+                                                            safetyMeasure:
+                                                                safetyQuestionsListDetails
+                                                                    .name,
+                                                          );
+                                                        }),
+                                                  ],
+                                                )),
+                                              ]);
+                                            },
+                                          ),
+                                        ),
                                       ),
-                                    ),
-                                  ),
                           ],
                         ),
                       ),
