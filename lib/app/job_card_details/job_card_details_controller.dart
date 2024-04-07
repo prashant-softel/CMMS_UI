@@ -300,7 +300,7 @@ class JobCardDetailsController extends GetxController {
             jobCardDetailsModel.value!.lstPermitDetailList ?? [];
         //  jobCardDetailsModel.value?.associatedPermitList ?? [];
 //
-        LstPermitDetailList? permit = permitList as LstPermitDetailList?;
+        LstPermitDetailList? permit = permitList?[0];
 
         if (permit != null) {
           permitId = permit.permitId;
