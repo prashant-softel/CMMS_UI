@@ -67,7 +67,7 @@ class JobCardDetailsController extends GetxController {
   RxString strWorkAreasOrEquipments = ''.obs;
   RxString strToolsRequired = ''.obs;
   RxString strEquipmentCategories = ''.obs;
-  List<String> workTypeNames = [];
+  List<String?> workTypeNames = [];
   List<String> assignNames = [];
   RxString strAssignName = ''.obs;
 
@@ -75,6 +75,8 @@ class JobCardDetailsController extends GetxController {
   List<String> equipmentCategoryNames = [];
   RxList<JobCardDetailsModel?> jobCardList = <JobCardDetailsModel?>[].obs;
   Rx<JobCardDetailsModel?> jobCardDetailsModel = JobCardDetailsModel().obs;
+  RxList<LstCmjcJobDetailList> lstCmjcJobDetailList =
+      <LstCmjcJobDetailList>[].obs;
 
   TextEditingController approveCommentTextFieldCtrlr = TextEditingController();
   TextEditingController rejectCommentTextFieldCtrlr = TextEditingController();
@@ -229,10 +231,12 @@ class JobCardDetailsController extends GetxController {
         //     );
         //   }
         //   // Convert work type(s) to comma separated list
-        workTypeNames = <String>[];
-        for (var workType
+        workTypeNames = <String?>[];
+        for (var workTypenames
             in jobCardDetailsModel.value?.lstCmjcJobDetailList ?? []) {
-          workTypeNames.add(workType.workType);
+          if (workTypenames != null) {
+            workTypeNames.add(workTypenames.workType);
+          }
         }
         strWorkTypes.value = workTypeNames.join(', ');
         //remove extra comma at the end
