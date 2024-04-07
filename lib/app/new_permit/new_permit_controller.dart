@@ -116,7 +116,7 @@ class NewPermitController extends GetxController {
   }
 
   void jSAtoggleCheckbox() {
-    isCheckedJSA.value = !isCheckedJSA.value; // Toggle the checkbox state
+    isCheckedJSA.value = !isCheckedJSA.value;
   }
 
   void soptoggleCheckbox() {
@@ -450,8 +450,11 @@ class NewPermitController extends GetxController {
         if (permitId.value > 0) {
           getNewPermitDetail(
               intPermitId: permitId.value, facilityId: facilityId);
+          isCheckedJSA.value = true;
+          isCheckedSOP.value = true;
           getPermitHistory(permitId: permitId.value, facilityId: facilityId);
         }
+
         // Future.delayed(Duration(seconds: 1), () {
         //   getNewPermitDetail(
         //       intPermitId: permitId.value, facilityId: facilityId);
