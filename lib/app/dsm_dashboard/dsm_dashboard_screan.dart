@@ -26,110 +26,107 @@ class DsmDashboard extends GetView<DsmDashboardController> {
 
     final double itemWidth = size.width / 2;
 
-    return SelectionArea(
-      child: Scaffold(
-        appBar: Responsive.isMobile(context)
-            ? AppBar(
-                title: HeaderWidget(),
-                elevation: 0,
-                toolbarHeight: 60,
-                automaticallyImplyLeading: false,
-              )
-            : null,
-        drawer: //
-            (Responsive.isMobile(context) || Responsive.isTablet(context))
-                ? HomeDrawer() //ResponsiveSideMenu()
-                : null,
-        body: Obx(
-          () => Stack(
-            children: [
-              AnimatedContainer(
-                duration: Duration(milliseconds: 450),
-                margin: EdgeInsets.only(
-                    left: homeController.menuButton.value ? 250.0 : 70.0),
-                width: Get.width,
-                height: Get.height,
-                child: Row(
-                  children: [
-                    // (Responsive.isMobile(context) || Responsive.isTablet(context))
-                    //     ? Dimens.box0
-                    //     :
-                    //     //
-                    //     HomeDrawer(),
-                    Expanded(
-                      child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            if (Responsive.isDesktop(context))
-                              HeaderWidgetAllDash(),
-                            Container(
-                              margin: EdgeInsets.only(left: 20),
-                              child: Text(
-                                "DSM Charges",
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 24,
-                                    fontWeight: FontWeight.bold),
-                              ),
+    return Scaffold(
+      appBar: Responsive.isMobile(context)
+          ? AppBar(
+              title: HeaderWidget(),
+              elevation: 0,
+              toolbarHeight: 60,
+              automaticallyImplyLeading: false,
+            )
+          : null,
+      drawer: //
+          (Responsive.isMobile(context) || Responsive.isTablet(context))
+              ? HomeDrawer() //ResponsiveSideMenu()
+              : null,
+      body: Obx(
+        () => Stack(
+          children: [
+            AnimatedContainer(
+              duration: Duration(milliseconds: 450),
+              margin: EdgeInsets.only(
+                  left: homeController.menuButton.value ? 250.0 : 70.0),
+              width: Get.width,
+              height: Get.height,
+              child: Row(
+                children: [
+                  // (Responsive.isMobile(context) || Responsive.isTablet(context))
+                  //     ? Dimens.box0
+                  //     :
+                  //     //
+                  //     HomeDrawer(),
+                  Expanded(
+                    child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          if (Responsive.isDesktop(context))
+                            HeaderWidgetAllDash(),
+                          Container(
+                            margin: EdgeInsets.only(left: 20),
+                            child: Text(
+                              "DSM Charges",
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 24,
+                                  fontWeight: FontWeight.bold),
                             ),
-                            SizedBox(
-                              height: 15,
-                            ),
-                            Expanded(
-                              // height: Get.height,
-                              // margin: EdgeInsets.only(left: 20),
-                              child: SingleChildScrollView(
-                                  child: Column(
-                                children: [
-                                  GridView.count(
-                                    shrinkWrap: true,
-                                    primary: false,
-                                    padding: Dimens.edgeInsets15,
-                                    crossAxisSpacing: 70,
-                                    mainAxisSpacing: 6,
-                                    crossAxisCount:
-                                        Responsive.isMobile(context) ? 2 : 5,
-                                    childAspectRatio:
-                                        Responsive.isMobile(context)
-                                            ? (itemWidth / itemHeight)
-                                            : 5,
-                                    children: <Widget>[
-                                      OnHover(builder: (((isHovered) {
-                                        return createContentTile(
-                                            title: "DSM Charges", onTap: () {});
-                                      }))),
-                                      OnHover(builder: (((isHovered) {
-                                        return createContentTile(
-                                            title: "Import DSM List",
-                                            onTap: () {
-                                              controller
-                                                  .goToImportDsmListChargesScreen();
-                                            });
-                                      }))),
-                                      OnHover(builder: (((isHovered) {
-                                        return createContentTile(
-                                            title: "Import DSM",
-                                            onTap: () {
-                                              controller
-                                                  .goToImportDsmChargesScreen();
-                                            });
-                                      }))),
-                                    ],
-                                  ),
-                                ],
-                              )),
-                            ),
-                          ]),
-                    ),
-                  ],
-                ),
+                          ),
+                          SizedBox(
+                            height: 15,
+                          ),
+                          Expanded(
+                            // height: Get.height,
+                            // margin: EdgeInsets.only(left: 20),
+                            child: SingleChildScrollView(
+                                child: Column(
+                              children: [
+                                GridView.count(
+                                  shrinkWrap: true,
+                                  primary: false,
+                                  padding: Dimens.edgeInsets15,
+                                  crossAxisSpacing: 70,
+                                  mainAxisSpacing: 6,
+                                  crossAxisCount:
+                                      Responsive.isMobile(context) ? 2 : 5,
+                                  childAspectRatio: Responsive.isMobile(context)
+                                      ? (itemWidth / itemHeight)
+                                      : 5,
+                                  children: <Widget>[
+                                    OnHover(builder: (((isHovered) {
+                                      return createContentTile(
+                                          title: "DSM Charges", onTap: () {});
+                                    }))),
+                                    OnHover(builder: (((isHovered) {
+                                      return createContentTile(
+                                          title: "Import DSM List",
+                                          onTap: () {
+                                            controller
+                                                .goToImportDsmListChargesScreen();
+                                          });
+                                    }))),
+                                    OnHover(builder: (((isHovered) {
+                                      return createContentTile(
+                                          title: "Import DSM",
+                                          onTap: () {
+                                            controller
+                                                .goToImportDsmChargesScreen();
+                                          });
+                                    }))),
+                                  ],
+                                ),
+                              ],
+                            )),
+                          ),
+                        ]),
+                  ),
+                ],
               ),
-              AnimatedPositioned(
-                duration: Duration(milliseconds: 450),
-                child: HomeDrawer(),
-              ),
-            ],
-          ),
+            ),
+            AnimatedPositioned(
+              duration: Duration(milliseconds: 450),
+              child: HomeDrawer(),
+            ),
+          ],
         ),
       ),
     );
