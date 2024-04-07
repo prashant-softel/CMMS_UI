@@ -579,6 +579,12 @@ class _EditJobContentWebState extends State<EditJobContentWeb> {
                                                         //     return null;
                                                         //   }
                                                         // },
+                                                        initialValue: //
+                                                              controller
+                                                                  .selectedtoolsRequiredToWorkTypeIdList
+                                                                  .map((equipmentId) =>
+                                                                      equipmentId) // Extract the IDs from the list of InventoryCategoryModel objects
+                                                                  .toList(),
                                                         autovalidateMode:
                                                             AutovalidateMode
                                                                 .always,
