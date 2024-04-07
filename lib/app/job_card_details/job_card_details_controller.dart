@@ -100,10 +100,10 @@ class JobCardDetailsController extends GetxController {
     facilityIdStreamSubscription =
         homeController.facilityId$.listen((event) async {
       facilityId = event;
-      if (facilityId > 0) {
-        isFacilitySelected.value = true;
-        await getHistory(facilityId);
-      }
+      // if (facilityId > 0) {
+      //   isFacilitySelected.value = true;
+      //   await getHistory(facilityId);
+      // }
     });
     // print({"madfhuiwef", jobCardId});
     try {
