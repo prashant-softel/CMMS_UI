@@ -128,29 +128,45 @@ class ViewJSADialog extends GetView {
                         Responsive.isDesktop(context)
                             ? Row(
                                 children: [
-                                  Checkbox(
-                                    value: _controller.isCheckedJSA.value,
-                                    onChanged: (bool? value) {
-                                      _controller.jSAtoggleCheckbox();
-                                    },
+                                  IgnorePointer(
+                                    ignoring: _controller.permitId.value > 0
+                                        ? true
+                                        : false,
+                                    child: Checkbox(
+                                      value: _controller.permitId > 0
+                                          ? true
+                                          : _controller.isCheckedJSA.value,
+                                      // value: _controller.isCheckedJSA.value,
+                                      onChanged: (bool? value) {
+                                        _controller.jSAtoggleCheckbox();
+                                      },
+                                    ),
                                   ),
                                   Text(
                                       'I have read and accept terms and conditions')
                                 ],
                               )
-                            : Row(
-                                children: [
-                                  Checkbox(
-                                    value: _controller.isCheckedJSA.value,
-                                    onChanged: (bool? value) {
-                                      _controller.jSAtoggleCheckbox();
-                                    },
-                                  ),
-                                  Text(
-                                    'I have read and accept\nterms and conditions',
-                                    style: TextStyle(fontSize: 13),
-                                  )
-                                ],
+                            : IgnorePointer(
+                                ignoring: _controller.permitId.value > 0
+                                    ? true
+                                    : false,
+                                child: Row(
+                                  children: [
+                                    Checkbox(
+                                      value: _controller.permitId.value > 0
+                                          ? true
+                                          : _controller.isCheckedJSA.value,
+                                      // value: _controller.isCheckedJSA.value,
+                                      onChanged: (bool? value) {
+                                        _controller.jSAtoggleCheckbox();
+                                      },
+                                    ),
+                                    Text(
+                                      'I have read and accept\nterms and conditions',
+                                      style: TextStyle(fontSize: 13),
+                                    )
+                                  ],
+                                ),
                               )
                       ],
                     ),
