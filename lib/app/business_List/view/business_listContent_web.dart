@@ -194,7 +194,8 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                                           .isSelectedBusinessType
                                                           .value,
                                                       selectedValue: controller
-                                                          .selectedbtype.value,
+                                                          .selectedBusinessType
+                                                          .value,
                                                       onValueChanged: controller
                                                           .onValueChanged,
                                                     ),

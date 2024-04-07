@@ -45,8 +45,8 @@ class JobDetailsModel {
       this.workingAreaList,
       this.workTypeList,
       this.associatedPermitList,
-      this.lstToolsRequired,
       this.latestJCStatus,
+      this.toolsRequiredList,
       this.latestJCStatusShort});
 
   int? id;
@@ -76,8 +76,7 @@ class JobDetailsModel {
   List<WorkingAreaList>? workingAreaList;
   List<WorkTypeList>? workTypeList;
   List<AssociatedPermit>? associatedPermitList;
-
-  dynamic lstToolsRequired;
+  List<ToolsRequiredList>? toolsRequiredList;
 
   factory JobDetailsModel.fromJson(Map<String, dynamic> json) =>
       JobDetailsModel(
@@ -131,6 +130,10 @@ class JobDetailsModel {
             ? List<WorkingAreaList>.from(json["working_area_name_list"]
                 .map((x) => WorkingAreaList.fromJson(x)))
             : [],
+        toolsRequiredList: (json["tools_required_list"] != null)
+            ? List<ToolsRequiredList>.from(json["tools_required_list"]
+                .map((x) => ToolsRequiredList.fromJson(x)))
+            : [],
         associatedPermitList: (json["associated_permit_list"] != null)
             ? List<AssociatedPermit>.from(json["associated_permit_list"]
                 .map((x) => AssociatedPermit.fromJson(x)))
@@ -169,7 +172,6 @@ class JobDetailsModel {
             List<dynamic>.from(workTypeList?.map((x) => x.toJson()) ?? []),
         "associated_permit_list": List<dynamic>.from(
             associatedPermitList?.map((x) => x.toJson()) ?? []),
-        "lst_tools_required": lstToolsRequired,
       };
 }
 
@@ -360,4 +362,16 @@ class JobAssociatedModel {
         "approvedStatus": approvedStatus,
         "status_short": status_short,
       };
+}
+
+class ToolsRequiredList {
+  int? toolId;
+  String? toolName;
+
+  ToolsRequiredList(this.toolId, this.toolName);
+  factory ToolsRequiredList.fromJson(Map<String, dynamic> json) =>
+      ToolsRequiredList(
+        json["toolId"] == null ? 0 : json["toolId"],
+        json["toolName"] == null ? '' : json["toolName"],
+      );
 }
