@@ -312,6 +312,13 @@ class PreventiveMaintenanceExecutionContentWeb
                                                                         .appDarkBlueColor,
                                                                 text: "Clone",
                                                                 onPressed: () {
+                                                                  controller.selectedItem = controller
+                                                                      .scheduleCheckPoints
+                                                                      .firstWhere((element) =>
+                                                                          "${element.name}" ==
+                                                                          record[0]['value']
+                                                                              .toString());
+
                                                                   var select =
                                                                       controller
                                                                           .scheduleCheckPoints
@@ -323,28 +330,14 @@ class PreventiveMaintenanceExecutionContentWeb
                                                                             .selectedasset
                                                                             .value,
                                                                   );
-                                                                  select.schedule_link_job!
+                                                                  select
+                                                                          .schedule_link_job!
                                                                           .isNotEmpty
                                                                       ? controller
                                                                           .cloneAlertDialog()
-                                                                      :
-                                                                      //     : controller
-                                                                      //             .selectedItem =
-                                                                      //         null;
-                                                                      // controller.selectedItem = controller
-                                                                      //     .scheduleCheckPoints
-                                                                      //     .firstWhere((element) =>
-                                                                      //         "${element.name}" ==
-                                                                      //         record[0]['value']
-                                                                      //             .toString());
-
-                                                                      // if (controller
-                                                                      //         .selectedItem !=
-                                                                      //     null) {
-                                                                      controller.cloneDialog(controller
+                                                                      : controller.cloneDialog(controller
                                                                           .selectedasset
                                                                           .value);
-                                                                  // }
                                                                 },
                                                               ),
                                                             ),
@@ -365,12 +358,15 @@ class PreventiveMaintenanceExecutionContentWeb
                                                                   controller,
                                                               dropdownList:
                                                                   controller
-                                                                      .scheduleCheckPoints,
+                                                                      .scheduleCheckPointsdrop,
                                                               selectedValue:
                                                                   mapData[
                                                                       "value"],
                                                               onValueChanged: (list,
                                                                   selectedValue) {
+                                                                controller
+                                                                    .selectedasset
+                                                                    .value;
                                                                 mapData["value"] =
                                                                     selectedValue;
 

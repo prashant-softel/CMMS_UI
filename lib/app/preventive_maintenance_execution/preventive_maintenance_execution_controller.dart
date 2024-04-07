@@ -45,6 +45,8 @@ class PreventiveMaintenanceExecutionController extends GetxController {
 
   Rx<PmtaskViewModel?> pmtaskViewModel = PmtaskViewModel().obs;
   RxList<ScheduleCheckPoint> scheduleCheckPoints = <ScheduleCheckPoint>[].obs;
+  RxList<ScheduleCheckPoint> scheduleCheckPointsdrop =
+      <ScheduleCheckPoint>[].obs;
   RxList<ChecklistObservation>? checklistObservations =
       <ChecklistObservation>[].obs;
   RxList<HistoryModel?>? historyList = <HistoryModel?>[].obs;
@@ -121,6 +123,7 @@ class PreventiveMaintenanceExecutionController extends GetxController {
   }
 
   Future<void> getMrsListByModuleTask({required int taskId}) async {
+    cmmrsItems!.value = [];
     listMrsByTaskId?.value =
         await preventiveMaintenanceExecutionPresenter.getMrsListByModuleTask(
               taskId,
@@ -185,6 +188,8 @@ class PreventiveMaintenanceExecutionController extends GetxController {
   Future<void> getPmtaskViewList(
       {int? scheduleId, bool? isloading, required int facilityId}) async {
     scheduleCheckPoints.value = <ScheduleCheckPoint>[];
+    scheduleCheckPointsdrop.value = <ScheduleCheckPoint>[];
+
     rowItemclone.value = [];
     final _permitDetails =
         await preventiveMaintenanceExecutionPresenter.getPmtaskViewList(
@@ -194,6 +199,7 @@ class PreventiveMaintenanceExecutionController extends GetxController {
     if (_permitDetails != null) {
       pmtaskViewModel.value = _permitDetails;
       _permitDetails.schedules?.forEach((element) {
+        //  if (element.completedBy_id == 0) {
         rowItemclone.value.add([
           {
             "key": "Asset",
@@ -208,6 +214,10 @@ class PreventiveMaintenanceExecutionController extends GetxController {
           {'key': "executionDone", 'value': '${element.completedBy_id}'},
           {'key': "dropdown", "value": ''},
         ]);
+        // Add to scheduleCheckPoints if completedBy_id != 0
+        if (element.completedBy_id != 0) {
+          scheduleCheckPointsdrop.value.add(element);
+        }
       });
       if (_permitDetails.schedules != null) {
         for (var _frequencyList in _permitDetails.schedules ?? []) {
@@ -365,13 +375,10 @@ class PreventiveMaintenanceExecutionController extends GetxController {
                           var select = scheduleCheckPoints.firstWhere(
                             (element) => element.name == selectedasset.value,
                           );
-                          select.schedule_link_job!.isNotEmpty
-                              ? cloneAlertDialog()
-                              : cloneSchedule(
-                                  from_schedule_id:
-                                      selectedItem?.schedule_id ?? 0,
-                                  to_schedule_id: select.schedule_id ?? 0,
-                                  cloneJobs: 1);
+                          cloneSchedule(
+                              from_schedule_id: selectedItem?.schedule_id ?? 0,
+                              to_schedule_id: select.schedule_id ?? 0,
+                              cloneJobs: 1);
                         },
                         backgroundColor: ColorValues.appDarkBlueColor,
                         textColor: ColorValues.whiteColor,
@@ -432,89 +439,93 @@ class PreventiveMaintenanceExecutionController extends GetxController {
       content: Builder(builder: (context) {
         var height = Get.height;
 
-        return Obx(
-          () => Container(
-            // margin: Dimens.edgeInsets15,
-            // padding: Dimens.edgeInsets25,
-            height: height / 7,
-            width: double.infinity,
+        return
+            //  Obx(
+            //   () =>
+            Container(
+          // margin: Dimens.edgeInsets15,
+          // padding: Dimens.edgeInsets25,
+          height: height / 7,
+          width: double.infinity,
 
-            child: Column(
-              children: [
-                RichText(
-                  textAlign: TextAlign.center,
-                  text: TextSpan(
-                      text: 'Do you want to clone the ',
-                      style: Styles.blue700,
-                      children: <TextSpan>[
-                        TextSpan(
-                          text: '\n ${selectedasset.value}',
-                          style: Styles.redBold15,
-                        ),
-                        TextSpan(
-                            text: '? It contain the job',
-                            style: Styles.blue700),
-                      ]),
+          child: Column(
+            children: [
+              RichText(
+                textAlign: TextAlign.center,
+                text: TextSpan(
+                  text:
+                      'The schedule to be cloned contains job(s), do you want to create new job(s) during clone?',
+                  style: Styles.blue700,
+                  // children: <TextSpan>[
+                  //   TextSpan(
+                  //     text: '\n ${selectedasset.value}',
+                  //     style: Styles.redBold15,
+                  //   ),
+                  //   TextSpan(
+                  //       text: '? It contain the job',
+                  //       style: Styles.blue700),
+                  // ]
                 ),
-                Dimens.boxHeight12,
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Container(
-                      height: 35,
-                      child: CustomElevatedButton(
-                        text: "Cancel",
-                        onPressed: () {
-                          Get.back();
-                        },
-                        backgroundColor: ColorValues.cancelColor,
-                        textColor: ColorValues.whiteColor,
-                      ),
+              ),
+              Dimens.boxHeight12,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    height: 35,
+                    child: CustomElevatedButton(
+                      text: "Cancel",
+                      onPressed: () {
+                        Get.back();
+                      },
+                      backgroundColor: ColorValues.cancelColor,
+                      textColor: ColorValues.whiteColor,
                     ),
-                    // Spacer(),
-                    Dimens.boxWidth20,
-                    Container(
-                      height: 35,
-                      child: CustomElevatedButton(
-                        text: "No",
-                        onPressed: () {
-                          Get.back();
-                          var select = scheduleCheckPoints.firstWhere(
-                            (element) => element.name == selectedasset.value,
-                          );
-                          cloneSchedule(
-                              from_schedule_id: selectedItem?.schedule_id ?? 0,
-                              to_schedule_id: select.schedule_id ?? 0,
-                              cloneJobs: 0);
-                        },
-                        backgroundColor: ColorValues.appDarkBlueColor,
-                        textColor: ColorValues.whiteColor,
-                      ),
+                  ),
+                  // Spacer(),
+                  Dimens.boxWidth20,
+                  Container(
+                    height: 35,
+                    child: CustomElevatedButton(
+                      text: "No",
+                      onPressed: () {
+                        Get.back();
+                        var select = scheduleCheckPoints.firstWhere(
+                          (element) => element.name == selectedasset.value,
+                        );
+                        cloneSchedule(
+                            from_schedule_id: selectedItem?.schedule_id ?? 0,
+                            to_schedule_id: select.schedule_id ?? 0,
+                            cloneJobs: 0);
+                      },
+                      backgroundColor: ColorValues.appDarkBlueColor,
+                      textColor: ColorValues.whiteColor,
                     ),
-                    Dimens.boxWidth20,
-                    Container(
-                      height: 35,
-                      child: CustomElevatedButton(
-                        text: "Yes",
-                        onPressed: () {
-                          Get.back();
-                          var select = scheduleCheckPoints.firstWhere(
-                            (element) => element.name == selectedasset.value,
-                          );
-                          cloneSchedule(
-                              from_schedule_id: selectedItem?.schedule_id ?? 0,
-                              to_schedule_id: select.schedule_id ?? 0,
-                              cloneJobs: 1);
-                        },
-                        backgroundColor: ColorValues.appGreenColor,
-                        textColor: ColorValues.whiteColor,
-                      ),
+                  ),
+                  Dimens.boxWidth20,
+                  Container(
+                    height: 35,
+                    child: CustomElevatedButton(
+                      text: "Yes",
+                      onPressed: () {
+                        Get.back();
+                        var select = scheduleCheckPoints.firstWhere(
+                          (element) => element.name == selectedasset.value,
+                        );
+                        cloneSchedule(
+                            from_schedule_id: selectedItem?.schedule_id ?? 0,
+                            to_schedule_id: select.schedule_id ?? 0,
+                            cloneJobs: 1);
+                      },
+                      backgroundColor: ColorValues.appGreenColor,
+                      textColor: ColorValues.whiteColor,
                     ),
-                  ],
-                ),
-              ],
-            ),
+                  ),
+                ],
+              ),
+            ],
           ),
+          // ),
         );
       }),
       actions: [],

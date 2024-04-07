@@ -31,7 +31,8 @@ class MrsViewContentWeb extends GetView<MrsViewController> {
                   ),
                   boxShadow: [
                     BoxShadow(
-                      color: Color.fromARGB(255, 236, 234, 234).withOpacity(0.5),
+                      color:
+                          Color.fromARGB(255, 236, 234, 234).withOpacity(0.5),
                       spreadRadius: 2,
                       blurRadius: 5,
                       offset: Offset(0, 2),
@@ -67,8 +68,8 @@ class MrsViewContentWeb extends GetView<MrsViewController> {
               ),
               Expanded(
                 child: ScrollConfiguration(
-                  behavior:
-                      ScrollConfiguration.of(context).copyWith(scrollbars: false),
+                  behavior: ScrollConfiguration.of(context)
+                      .copyWith(scrollbars: false),
                   child: SingleChildScrollView(
                     child: Container(
                       height: Get.height,
@@ -199,7 +200,7 @@ class MrsViewContentWeb extends GetView<MrsViewController> {
                                   ],
                                 ),
                                 Dimens.boxWidth20,
-      
+
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
@@ -231,8 +232,8 @@ class MrsViewContentWeb extends GetView<MrsViewController> {
                           ),
                           Container(
                             margin: Dimens.edgeInsets20,
-                            height: ((controller.mrsDetailsModel.value!.cmmrsItems
-                                            ?.length ??
+                            height: ((controller.mrsDetailsModel.value!
+                                            .cmmrsItems?.length ??
                                         0) *
                                     40) +
                                 120,
@@ -291,16 +292,16 @@ class MrsViewContentWeb extends GetView<MrsViewController> {
                                             fontSize: 15,
                                             fontWeight: FontWeight.bold),
                                       )),
-                                      // DataColumn(
-                                      //     label: Text(
-                                      //   "Approved Qty.",
-                                      //   style: TextStyle(
-                                      //       fontSize: 15,
-                                      //       fontWeight: FontWeight.bold),
-                                      // )),
                                       DataColumn(
                                           label: Text(
                                         "issued Qyt.",
+                                        style: TextStyle(
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.bold),
+                                      )),
+                                      DataColumn(
+                                          label: Text(
+                                        "Consumed Qty.",
                                         style: TextStyle(
                                             fontSize: 15,
                                             fontWeight: FontWeight.bold),
@@ -328,17 +329,17 @@ class MrsViewContentWeb extends GetView<MrsViewController> {
                                                   .cmmrsItems![index]
                                                   .requested_qty
                                                   .toString())),
-                                              // DataCell(Text(controller
-                                              //     .mrsDetailsModel
-                                              //     .value!
-                                              //     .cmmrsItems![index]
-                                              //     .a
-                                              //     .toString())),
                                               DataCell(Text(controller
                                                   .mrsDetailsModel
                                                   .value!
                                                   .cmmrsItems![index]
                                                   .issued_qty
+                                                  .toString())),
+                                              DataCell(Text(controller
+                                                  .mrsDetailsModel
+                                                  .value!
+                                                  .cmmrsItems![index]
+                                                  .used_qty
                                                   .toString())),
                                             ])),
                                   ),
