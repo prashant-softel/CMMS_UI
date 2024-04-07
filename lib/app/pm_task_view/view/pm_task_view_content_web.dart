@@ -75,10 +75,11 @@ class PreventiveMaintenanceTaskViewContentWeb
                     ),
                     InkWell(
                       onTap: () {
-                        final _flutterSecureStorage =
-                            const FlutterSecureStorage();
-
-                        _flutterSecureStorage.delete(key: "scheduleId");
+                        controller.clearStoreTaskData();
+                        controller.clearStoreTaskActivityData();
+                        controller.clearStoreTasktoActorData();
+                        controller.clearStoreTaskWhereUsedData();
+                        controller.clearStoreTaskfromActorData();
 
                         Get.offNamed(Routes.preventive);
                       },
