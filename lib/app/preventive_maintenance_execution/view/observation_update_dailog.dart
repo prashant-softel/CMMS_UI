@@ -1,7 +1,5 @@
 import 'package:cmms/app/app.dart';
-import 'package:cmms/app/pm_task_view/pm_task_view_controller.dart';
 import 'package:cmms/app/preventive_maintenance_execution/preventive_maintenance_execution_controller.dart';
-import 'package:cmms/domain/models/pm_task_view_list_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

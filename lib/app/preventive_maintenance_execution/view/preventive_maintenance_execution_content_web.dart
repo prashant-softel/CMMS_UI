@@ -274,13 +274,23 @@ class PreventiveMaintenanceExecutionContentWeb
                                                   fontWeight: FontWeight.bold),
                                             )),
                                             DataColumn2(
-                                                // fixedWidth: 200,
+                                                fixedWidth: 200,
                                                 label: Text(
-                                              "Checklist Observation",
-                                              style: TextStyle(
-                                                  fontSize: 15,
-                                                  fontWeight: FontWeight.bold),
-                                            )),
+                                                  "Execution Status",
+                                                  style: TextStyle(
+                                                      fontSize: 15,
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                )),
+                                            DataColumn2(
+                                                fixedWidth: 400,
+                                                label: Text(
+                                                  "Checklist Observation",
+                                                  style: TextStyle(
+                                                      fontSize: 15,
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                )),
                                           ],
                                           rows: controller.rowItemclone.value
                                               .map((record) {
@@ -302,26 +312,47 @@ class PreventiveMaintenanceExecutionContentWeb
                                                                         .appDarkBlueColor,
                                                                 text: "Clone",
                                                                 onPressed: () {
-                                                                  controller
-                                                                          .selectedItem =
-                                                                      null;
-                                                                  controller.selectedItem = controller
-                                                                      .scheduleCheckPoints
-                                                                      .firstWhere((element) =>
-                                                                          "${element.name}" ==
-                                                                          record[0]['value']
-                                                                              .toString());
+                                                                  var select =
+                                                                      controller
+                                                                          .scheduleCheckPoints
+                                                                          .firstWhere(
+                                                                    (element) =>
+                                                                        element
+                                                                            .name ==
+                                                                        controller
+                                                                            .selectedasset
+                                                                            .value,
+                                                                  );
+                                                                  select.schedule_link_job!
+                                                                          .isNotEmpty
+                                                                      ? controller
+                                                                          .cloneAlertDialog()
+                                                                      :
+                                                                      //     : controller
+                                                                      //             .selectedItem =
+                                                                      //         null;
+                                                                      // controller.selectedItem = controller
+                                                                      //     .scheduleCheckPoints
+                                                                      //     .firstWhere((element) =>
+                                                                      //         "${element.name}" ==
+                                                                      //         record[0]['value']
+                                                                      //             .toString());
 
-                                                                  if (controller
-                                                                          .selectedItem !=
-                                                                      null) {
-                                                                    controller.cloneDialog(controller
-                                                                        .selectedasset
-                                                                        .value);
-                                                                  }
+                                                                      // if (controller
+                                                                      //         .selectedItem !=
+                                                                      //     null) {
+                                                                      controller.cloneDialog(controller
+                                                                          .selectedasset
+                                                                          .value);
+                                                                  // }
                                                                 },
                                                               ),
                                                             ),
+                                                            // mapData['executionDone'] ==
+                                                            //         "0"
+                                                            //     ? Dimens.box0
+                                                            //     : Text(
+                                                            //         "Execution Done"),
                                                             Dimens.boxWidth10,
                                                             DropdownWebWidget(
                                                               width: (MediaQuery.of(
@@ -456,8 +487,16 @@ class PreventiveMaintenanceExecutionContentWeb
                                                                 })
                                                           ],
                                                         )
-                                                      : Text(mapData['value'] ??
-                                                          ''),
+                                                      : (mapData['key'] ==
+                                                              "executionDone")
+                                                          ? Text(mapData[
+                                                                      'value'] ==
+                                                                  "0"
+                                                              ? ""
+                                                              : "Execution Done")
+                                                          : Text(mapData[
+                                                                  'value'] ??
+                                                              ''),
                                                 );
                                               }).toList(),
                                             );

@@ -8,16 +8,9 @@ class PreventiveMaintenanceExecutionUsecase {
   final Repository repository;
 
   PreventiveMaintenanceExecutionUsecase(this.repository);
-  Future<PmtaskViewModel?> getPmtaskViewList({
-    int? scheduleId,
-    bool? isLoading,
-    required int facilityId
-  }) async =>
-      await repository.getPmtaskViewList(
-        scheduleId,
-        isLoading,
-        facilityId
-      );
+  Future<PmtaskViewModel?> getPmtaskViewList(
+          {int? scheduleId, bool? isLoading, required int facilityId}) async =>
+      await repository.getPmtaskViewList(scheduleId, isLoading, facilityId);
   Future<List<dynamic>> updatePmExecution({
     pmExecutionJsonString,
     bool? isLoading,
@@ -55,11 +48,13 @@ class PreventiveMaintenanceExecutionUsecase {
           {required int from_schedule_id,
           required int to_schedule_id,
           required int taskId,
+          required int cloneJobs,
           bool? isloading}) async =>
       await repository.cloneSchedule(
           from_schedule_id: from_schedule_id,
           to_schedule_id: to_schedule_id,
           taskId: taskId,
+          cloneJobs: cloneJobs,
           isloading: isloading);
   void saveValue({String? pmTaskId}) async =>
       repository.saveValue(LocalKeys.pmTaskId, pmTaskId);

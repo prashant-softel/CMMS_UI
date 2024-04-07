@@ -200,7 +200,12 @@ class PreventiveMaintenanceExecutionController extends GetxController {
             "value": '${element.name}',
             "id": '${element.assetsID}'
           },
-          {'key': "Checklist", "value": '${element.checklist_name}'},
+          {
+            'key': "Checklist",
+            "value": '${element.checklist_name}',
+            'executionDone': '${element.completedBy_id}'
+          },
+          {'key': "executionDone", 'value': '${element.completedBy_id}'},
           {'key': "dropdown", "value": ''},
         ]);
       });
@@ -360,10 +365,13 @@ class PreventiveMaintenanceExecutionController extends GetxController {
                           var select = scheduleCheckPoints.firstWhere(
                             (element) => element.name == selectedasset.value,
                           );
-
-                          cloneSchedule(
-                              from_schedule_id: selectedItem?.schedule_id ?? 0,
-                              to_schedule_id: select.schedule_id ?? 0);
+                          select.schedule_link_job!.isNotEmpty
+                              ? cloneAlertDialog()
+                              : cloneSchedule(
+                                  from_schedule_id:
+                                      selectedItem?.schedule_id ?? 0,
+                                  to_schedule_id: select.schedule_id ?? 0,
+                                  cloneJobs: 1);
                         },
                         backgroundColor: ColorValues.appDarkBlueColor,
                         textColor: ColorValues.whiteColor,
@@ -402,6 +410,117 @@ class PreventiveMaintenanceExecutionController extends GetxController {
     }
   }
 
+  void cloneAlertDialog() {
+    Get.dialog(AlertDialog(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(Radius.circular(15.0)),
+      ),
+      insetPadding: Dimens.edgeInsets10_0_10_0,
+      contentPadding: EdgeInsets.zero,
+      title: Column(
+        children: [
+          Text(
+            'CheckList Observation Clone',
+            textAlign: TextAlign.center,
+            style: Styles.green700,
+          ),
+          Divider(
+            color: ColorValues.greyColor,
+          )
+        ],
+      ),
+      content: Builder(builder: (context) {
+        var height = Get.height;
+
+        return Obx(
+          () => Container(
+            // margin: Dimens.edgeInsets15,
+            // padding: Dimens.edgeInsets25,
+            height: height / 7,
+            width: double.infinity,
+
+            child: Column(
+              children: [
+                RichText(
+                  textAlign: TextAlign.center,
+                  text: TextSpan(
+                      text: 'Do you want to clone the ',
+                      style: Styles.blue700,
+                      children: <TextSpan>[
+                        TextSpan(
+                          text: '\n ${selectedasset.value}',
+                          style: Styles.redBold15,
+                        ),
+                        TextSpan(
+                            text: '? It contain the job',
+                            style: Styles.blue700),
+                      ]),
+                ),
+                Dimens.boxHeight12,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      height: 35,
+                      child: CustomElevatedButton(
+                        text: "Cancel",
+                        onPressed: () {
+                          Get.back();
+                        },
+                        backgroundColor: ColorValues.cancelColor,
+                        textColor: ColorValues.whiteColor,
+                      ),
+                    ),
+                    // Spacer(),
+                    Dimens.boxWidth20,
+                    Container(
+                      height: 35,
+                      child: CustomElevatedButton(
+                        text: "No",
+                        onPressed: () {
+                          Get.back();
+                          var select = scheduleCheckPoints.firstWhere(
+                            (element) => element.name == selectedasset.value,
+                          );
+                          cloneSchedule(
+                              from_schedule_id: selectedItem?.schedule_id ?? 0,
+                              to_schedule_id: select.schedule_id ?? 0,
+                              cloneJobs: 0);
+                        },
+                        backgroundColor: ColorValues.appDarkBlueColor,
+                        textColor: ColorValues.whiteColor,
+                      ),
+                    ),
+                    Dimens.boxWidth20,
+                    Container(
+                      height: 35,
+                      child: CustomElevatedButton(
+                        text: "Yes",
+                        onPressed: () {
+                          Get.back();
+                          var select = scheduleCheckPoints.firstWhere(
+                            (element) => element.name == selectedasset.value,
+                          );
+                          cloneSchedule(
+                              from_schedule_id: selectedItem?.schedule_id ?? 0,
+                              to_schedule_id: select.schedule_id ?? 0,
+                              cloneJobs: 1);
+                        },
+                        backgroundColor: ColorValues.appGreenColor,
+                        textColor: ColorValues.whiteColor,
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        );
+      }),
+      actions: [],
+    ));
+  }
+
   void UpdatePMTaskExecution() async {
     String _comment = updatecommentCtrlr.text.trim();
 
@@ -436,13 +555,17 @@ class PreventiveMaintenanceExecutionController extends GetxController {
     }
   }
 
-  void cloneSchedule(
-      {required int from_schedule_id, required int to_schedule_id}) async {
+  void cloneSchedule({
+    required int from_schedule_id,
+    required int to_schedule_id,
+    required int cloneJobs,
+  }) async {
     final response =
         await preventiveMaintenanceExecutionPresenter.cloneSchedule(
             from_schedule_id: from_schedule_id,
             to_schedule_id: to_schedule_id,
             taskId: scheduleId.value,
+            cloneJobs: cloneJobs,
             isloading: true);
     if (response == true) {
       _updatedailog();

@@ -129,6 +129,9 @@ class ScheduleCheckPoint {
   String? name;
   int? assetsID;
   String? checklist_name;
+  int? completedBy_id;
+  String? completedBy_name;
+
   List<ChecklistObservation>? checklist_observation;
   List<ScheduleLinkJob>? schedule_link_job;
 
@@ -140,7 +143,9 @@ class ScheduleCheckPoint {
       this.schedule_id,
       this.assetsID,
       this.checklist_observation,
-      this.schedule_link_job});
+      this.schedule_link_job,
+      this.completedBy_name,
+      this.completedBy_id});
 
   factory ScheduleCheckPoint.fromJson(Map<String, dynamic> json) =>
       ScheduleCheckPoint(
@@ -150,6 +155,8 @@ class ScheduleCheckPoint {
           assetsID: json["assetsID"] ?? 0,
           clone_of_name: json["clone_of_name"] ?? '',
           schedule_id: json["schedule_id"] ?? 0,
+          completedBy_id: json["completedBy_id"] ?? 0,
+          completedBy_name: json["completedBy_name"] ?? "",
           checklist_observation: List<ChecklistObservation>.from(
               json["checklist_observation"]
                   .map((x) => ChecklistObservation.fromJson(x))),
@@ -159,6 +166,8 @@ class ScheduleCheckPoint {
 
   Map<String, dynamic> toJson() => {
         "asset_name": name,
+        "completedBy_name": completedBy_name,
+        "completedBy_id": completedBy_id,
         "checklist_name": checklist_name,
         "clone_of_asset": clone_of_asset,
         "clone_of_name": clone_of_name,

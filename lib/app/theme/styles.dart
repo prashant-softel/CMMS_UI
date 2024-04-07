@@ -656,7 +656,7 @@ abstract class Styles {
   );
 
   static TextStyle red12 = TextStyle(
-    // color: ColorValues.redColor,
+    color: ColorValues.redColor,
     fontSize: Dimens.twelve,
   );
 

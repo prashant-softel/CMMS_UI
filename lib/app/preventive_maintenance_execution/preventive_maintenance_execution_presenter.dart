@@ -62,11 +62,13 @@ class PreventiveMaintenanceExecutionPresenter {
       {required int from_schedule_id,
       required int to_schedule_id,
       required int taskId,
+      required int cloneJobs,
       bool? isloading}) async {
     return preventiveMaintenanceExecutionUsecase.cloneSchedule(
         from_schedule_id: from_schedule_id,
         to_schedule_id: to_schedule_id,
         taskId: taskId,
+        cloneJobs: cloneJobs,
         isloading: isloading);
   }
 
