@@ -6868,10 +6868,11 @@ class ConnectHelper {
       required int from_schedule_id,
       required int to_schedule_id,
       required int taskId,
+      required int cloneJobs,
       bool? isloading}) async {
     // facilityId = 45;
     var responseModel = await apiWrapper.makeRequest(
-      'PMScheduleView/cloneSchedule?task_id=${taskId}&from_schedule_id=${to_schedule_id}&to_schedule_id=${from_schedule_id}',
+      'PMScheduleView/cloneSchedule?task_id=${taskId}&from_schedule_id=${to_schedule_id}&to_schedule_id=${from_schedule_id}&cloneJobs=$cloneJobs',
       Request.patch,
       null,
       isloading ?? true,

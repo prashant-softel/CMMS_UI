@@ -10577,6 +10577,7 @@ class Repository {
       {required int from_schedule_id,
       required int to_schedule_id,
       required int taskId,
+      required int cloneJobs,
       bool? isloading}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
@@ -10586,6 +10587,7 @@ class Repository {
           from_schedule_id: from_schedule_id,
           to_schedule_id: to_schedule_id,
           taskId: taskId,
+          cloneJobs: cloneJobs,
           isloading: isloading);
       print({"res.data", res.data});
       if (!res.hasError) {
