@@ -199,20 +199,20 @@ class LstCmjcJobDetailList {
 
 class LstPermitDetailList {
   LstPermitDetailList(
-      {required this.permitId,
-      required this.sitePermitNo,
+      {this.permitId,
+      this.sitePermitNo,
       this.permitType,
-      required this.permitDescription,
+      this.permitDescription,
       this.jobCreatedByName,
       this.permitIssuedByName,
       this.permitApprovedByName,
       this.status,
       this.status_short});
 
-  int permitId;
-  int sitePermitNo;
+  int? permitId;
+  int? sitePermitNo;
   String? permitType;
-  String permitDescription;
+  String? permitDescription;
   String? jobCreatedByName;
   String? permitIssuedByName;
   String? permitApprovedByName;
