@@ -298,27 +298,23 @@ class JobCardDetailsController extends GetxController {
 
         permitList?.value =
             jobCardDetailsModel.value!.lstPermitDetailList ?? [];
-        //  jobCardDetailsModel.value?.associatedPermitList ?? [];
-//
-        LstPermitDetailList? permit = permitList?[0];
 
-        if (permit != null) {
-          permitId = permit.permitId;
-          // getPermitDetails();
+        if (permitList!.value.isNotEmpty) {
+          // Check if permitList is not empty
+          LstPermitDetailList permit =
+              permitList!.value[0]; // Access the first element
+
+          permitDetails.value = {
+            "Permit ID": permit.permitId.toString(),
+            "Site Permit No.": permit.sitePermitNo.toString(),
+            "Permit Type": permit.permitType,
+            "Permit Description": permit.permitDescription,
+            "Permit Issued By": permit.permitIssuedByName ?? "",
+            "Permit Status": permit.status_short ?? ""
+          };
         }
-
-        permitDetails.value = {
-          "Permit ID": permit?.permitId.toString(),
-          "Site Permit No.": permit?.sitePermitNo.toString(),
-          "Permit Type": permit?.permitType,
-          "Permit Description": permit?.permitDescription,
-          "Permit Issued By": permit?.permitIssuedByName ?? "",
-          "Permit Status": permit?.status_short ?? ""
-        };
-        //var x = jobDetails.value;
       }
-    } //
-    catch (e) {
+    } catch (e) {
       print(e);
     }
   }

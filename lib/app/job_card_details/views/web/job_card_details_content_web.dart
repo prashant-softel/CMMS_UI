@@ -421,8 +421,8 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
 
                           /// START JOB CARD BUTTON
                           // (controller.isJobCardStarted == false)
-                          controller.jobCardDetailsModel.value!.status == 151 &&
-                                  controller.permitList?[0]?.status == 125
+                          controller.jobCardDetailsModel.value!.status == 151 
+                          // && controller.permitList?[0]?.status == 125
                               ? //
                               Row(
                                   mainAxisAlignment:
