@@ -301,8 +301,8 @@ class JobCardDetailsController extends GetxController {
 
         if (permitList!.value.isNotEmpty) {
           // Check if permitList is not empty
-          LstPermitDetailList permit =
-              permitList!.value[0]; // Access the first element
+          LstPermitDetailList permit = permitList!.value.firstWhere((element) =>
+              element.permitId != null); // Access the first element
 
           permitDetails.value = {
             "Permit ID": permit.permitId.toString(),
