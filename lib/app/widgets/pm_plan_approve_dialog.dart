@@ -93,7 +93,7 @@ class PmPlanApprovedDialog extends GetView {
                 // print('Goods order id:$id');
                 Get.back();
               },
-              child: Text('Approve PmPlan'),
+              child: Text('Approve PMPlan'),
             ),
           ]),
         ],

@@ -243,7 +243,7 @@ class JobCardDetailsController extends GetxController {
         if (strWorkTypes.value.length > 0) {
           strWorkTypes.value = strWorkTypes.substring(
             0,
-            strWorkTypes.value.length - 1,
+            strWorkTypes.value.length,
           );
         }
         assignNames = <String>[];
@@ -256,7 +256,7 @@ class JobCardDetailsController extends GetxController {
         if (strAssignName.value.length > 0) {
           strAssignName.value = strAssignName.substring(
             0,
-            strAssignName.value.length - 1,
+            strAssignName.value.length,
           );
         }
         // Convert work area(s)/equipment(s) to comma separated list
