@@ -356,6 +356,10 @@ class JobDetailsController extends GetxController {
     jobDetailsPresenter.clearValue();
   }
 
+  void clearValueJobId() {
+    jobDetailsPresenter.clearValueJobId();
+  }
+
   void clearMrsIdStoreData() {
     jobDetailsPresenter.clearMrsIdStoreData();
   }
