@@ -71,7 +71,8 @@ class HistoryModel {
         "comment": comment,
         "created_by_id": createdById,
         "created_by_name": createdByNameValues.reverse[createdByName],
-        "created_at": createdAt,
+        "created_at":
+            createdAt?.result.toString(), // Access and convert result to string
         "status": status,
         "status_name": status_name,
         "latitude": latitude,
