@@ -550,34 +550,39 @@ class JobDetailsWebView extends GetView<JobDetailsController> {
                                                             MainAxisAlignment
                                                                 .spaceEvenly,
                                                         children: [
-                                                          TableActionButton(
-                                                            color: ColorValues
-                                                                .addNewColor,
-                                                            message: "Add MRS",
-                                                            icon: Icons
-                                                                .assignment,
-                                                            onPress: () async {
-                                                              Get.offAllNamed(
-                                                                  Routes
-                                                                      .createMrs,
-                                                                  arguments: {
-                                                                    "whereUsedId": controller
-                                                                        .jobAssociatedModelsList?[
-                                                                            index]
-                                                                        ?.jobCardId,
-                                                                    "activity": controller
-                                                                        .jobDetailsModel
-                                                                        .value
-                                                                        ?.jobTitle,
-                                                                    "whereUsed":
-                                                                        4,
-                                                                    "fromActorTypeId":
-                                                                        2,
-                                                                    "to_actor_type_id":
-                                                                        4
-                                                                  });
-                                                            },
-                                                          ),
+                                                          controller.listMrsByJobId!
+                                                                      .length >
+                                                                  0
+                                                              ? Dimens.box0
+                                                              : TableActionButton(
+                                                                  color: ColorValues
+                                                                      .addNewColor,
+                                                                  message:
+                                                                      "Add MRS",
+                                                                  icon: Icons
+                                                                      .assignment,
+                                                                  onPress:
+                                                                      () async {
+                                                                    Get.offAllNamed(
+                                                                        Routes
+                                                                            .createMrs,
+                                                                        arguments: {
+                                                                          "whereUsedId": controller
+                                                                              .jobAssociatedModelsList?[index]
+                                                                              ?.jobCardId,
+                                                                          "activity": controller
+                                                                              .jobDetailsModel
+                                                                              .value
+                                                                              ?.jobTitle,
+                                                                          "whereUsed":
+                                                                              4,
+                                                                          "fromActorTypeId":
+                                                                              2,
+                                                                          "to_actor_type_id":
+                                                                              4
+                                                                        });
+                                                                  },
+                                                                ),
                                                           TableActionButton(
                                                               color: ColorValues
                                                                   .viewColor,
