@@ -577,8 +577,11 @@ class NewPermitController extends GetxController {
 
     if (responseMapJobCardStarted != null &&
         responseMapJobCardStarted.length > 0) {
-      Get.toNamed(Routes.createMrs,
-          arguments: {"whereUsedId": jobModel?.id, "whereUsed": 1});
+      Get.toNamed(Routes.createMrs, arguments: {
+        "whereUsedId": jobModel?.id,
+        "activity": jobModel?.jobTitle,
+        "whereUsed": 1,
+      });
     }
     //  }
   }
