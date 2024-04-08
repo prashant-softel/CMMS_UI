@@ -421,8 +421,8 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
 
                           /// START JOB CARD BUTTON
                           // (controller.isJobCardStarted == false)
-                          controller.jobCardDetailsModel.value!.status == 151 
-                          // && controller.permitList?[0]?.status == 125
+                          controller.jobCardDetailsModel.value!.status == 151
+                              // && controller.permitList?[0]?.status == 125
                               ? //
                               Row(
                                   mainAxisAlignment:
@@ -443,10 +443,14 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                                       // ),
                                     ])
                               : //
-                              controller.jobCardDetailsModel.value!.status == 157 ||
-                                      controller.jobCardDetailsModel.value!.status ==
+                              controller.jobCardDetailsModel.value!.status ==
+                                          157 ||
+                                      controller.jobCardDetailsModel.value!
+                                              .status ==
                                           152 ||
-                                      controller.jobCardDetailsModel.value!.status == 154
+                                      controller.jobCardDetailsModel.value!
+                                              .status ==
+                                          154
                                   ? Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.center,
@@ -525,7 +529,9 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                                           ),
                                           Dimens.boxWidth10,
                                         ])
-                                  : controller.jobCardDetailsModel.value!.status == 153
+                                  : controller.jobCardDetailsModel.value!
+                                              .status ==
+                                          153
                                       // ||
                                       //         controller.jobCardList[0]!.status ==
                                       //             156
@@ -591,7 +597,9 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                                                                       1)
                                                               .length >
                                                           0 &&
-                                                      controller.jobCardDetailsModel.value!
+                                                      controller
+                                                              .jobCardDetailsModel
+                                                              .value!
                                                               .status ==
                                                           153
                                                   //         ||
@@ -640,7 +648,9 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                                                                       1)
                                                               .length >
                                                           0 &&
-                                                      controller.jobCardDetailsModel.value!
+                                                      controller
+                                                              .jobCardDetailsModel
+                                                              .value!
                                                               .status ==
                                                           153
                                                   //          ||
@@ -680,7 +690,9 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                                                       ))
                                                   : Container(),
                                             ])
-                                      : controller.jobCardDetailsModel.value!.status == 156
+                                      : controller.jobCardDetailsModel.value!
+                                                  .status ==
+                                              156
                                           ? Row(
                                               mainAxisAlignment:
                                                   MainAxisAlignment.center,

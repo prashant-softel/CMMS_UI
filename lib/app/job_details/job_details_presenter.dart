@@ -20,7 +20,7 @@ class JobDetailsPresenter {
       await jobDetailsUsecase.getJobDetails(
         auth: auth ?? "",
         jobId: jobId ?? 0,
-        facilityId:facilityId,
+        facilityId: facilityId,
         userId: userId,
         isLoading: isLoading,
       );
@@ -35,7 +35,7 @@ class JobDetailsPresenter {
         auth: auth ?? "",
         jobId: jobId,
         userId: userId,
-        facilityId:facilityId,
+        facilityId: facilityId,
         isLoading: isLoading,
       );
 
@@ -58,7 +58,7 @@ class JobDetailsPresenter {
   ) async =>
       await jobDetailsUsecase.getMrsListByModule(
         jobId: jobId,
-        facilityId:facilityId,
+        facilityId: facilityId,
         isLoading: isLoading,
       );
 
@@ -89,6 +89,8 @@ class JobDetailsPresenter {
 
   Future<String?> getValue() async => await jobDetailsUsecase.getValue();
   void clearValue() async => jobDetailsUsecase.clearValue();
+  void clearValueJobId() async => jobDetailsUsecase.clearValueJobId();
+
   void clearMrsIdStoreData() async => jobDetailsUsecase.clearMrsIdStoreData();
 
   void clearPermitStoreData() async => jobDetailsUsecase.clearPermitStoreData();

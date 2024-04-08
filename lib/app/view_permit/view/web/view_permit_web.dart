@@ -2490,6 +2490,7 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                                                   DataCell(Text(controller
                                                           .historyList?[index]
                                                           ?.createdAt
+                                                          ?.result
                                                           .toString() ??
                                                       '')),
                                                   DataCell(Text(controller

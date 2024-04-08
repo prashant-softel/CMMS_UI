@@ -588,7 +588,8 @@ class JobDetailsWebView extends GetView<JobDetailsController> {
                                                               onPress: () {
                                                                 controller
                                                                     .clearStoreData();
-
+                                                                controller
+                                                                    .clearValueJobId();
                                                                 String jobCardId = controller
                                                                         .jobAssociatedModelsList?[
                                                                             index]
