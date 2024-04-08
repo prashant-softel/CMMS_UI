@@ -607,7 +607,7 @@ class ObservationPmExecutionViewDialog extends GetView {
                                                                 : (mapData['key'] ==
                                                                         "Issued_Qty")
                                                                     ? Text(
-                                                                        "${(controller.dropdownMapperData[record[0]['value']]?.issued_qty ?? 0) - (controller.dropdownMapperData[record[0]['value']]?.used_qty ?? 0)}")
+                                                                        "${(controller.dropdownMapperData[record[0]['value']]?.issued_qty ?? 0) }")
                                                                     : (mapData['key'] ==
                                                                             "Consumed_Qty")
                                                                         ? Padding(

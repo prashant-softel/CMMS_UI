@@ -13,6 +13,7 @@ class MrsDetailsModel {
   String? requestd_date;
   dynamic returnDate;
   String? approval_date;
+  String? issued_date;
   int? approval_status;
   String? requested_by_name;
   int? status;
@@ -29,6 +30,7 @@ class MrsDetailsModel {
   MrsDetailsModel(
       {this.activity,
       this.approval_date,
+      this.issued_date,
       this.approval_status,
       this.approver_name,
       this.id,
@@ -58,6 +60,8 @@ class MrsDetailsModel {
         approval_date: parsedJson["approval_date"] == null
             ? ""
             : parsedJson['approval_date'],
+        issued_date:
+            parsedJson["issued_date"] == null ? "" : parsedJson['issued_date'],
         approval_status: parsedJson["approval_status"] == null
             ? 0
             : parsedJson['approval_status'],
@@ -73,8 +77,7 @@ class MrsDetailsModel {
             parsedJson["status_long"] == null ? "" : parsedJson['status_long'],
         requestd_date: parsedJson["requestd_date"] == null
             ? ""
-            : Utility.getDayMonthYear(
-                DateTime.parse(parsedJson['requestd_date'])),
+            : parsedJson['requestd_date'],
         requested_by_emp_ID: parsedJson["requested_by_emp_ID"] == null
             ? 0
             : parsedJson['requested_by_emp_ID'],
