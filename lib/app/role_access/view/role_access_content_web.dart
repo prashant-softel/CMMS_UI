@@ -224,7 +224,7 @@ class RoleAccessContentWeb extends GetView<RoleAccessController> {
                                               label: column,
                                               // Set the width of the column to 100
 
-                                              minWidth: Get.width * 0.10,
+                                              minWidth: Get.width * 0.11,
                                             );
                                           }).toList(),
                                           rows: controller.accesslevel
