@@ -190,7 +190,7 @@ class RoleAccessContentWeb extends GetView<RoleAccessController> {
                             children: [
                               Container(
                                   height: Get.height * .55,
-                                  width: Get.width,
+                                  width: Get.width * .90,
                                   margin: Dimens.edgeInsets15,
                                   decoration: BoxDecoration(
                                     border: Border.all(
@@ -224,7 +224,7 @@ class RoleAccessContentWeb extends GetView<RoleAccessController> {
                                               label: column,
                                               // Set the width of the column to 100
 
-                                              minWidth: Get.width * 0.10,
+                                              minWidth: Get.width * 0.11,
                                             );
                                           }).toList(),
                                           rows: controller.accesslevel
