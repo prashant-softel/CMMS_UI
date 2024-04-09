@@ -190,7 +190,7 @@ class RoleAccessContentWeb extends GetView<RoleAccessController> {
                             children: [
                               Container(
                                   height: Get.height * .55,
-                                  width: Get.width * .90,
+                                  width: Get.width,
                                   margin: Dimens.edgeInsets15,
                                   decoration: BoxDecoration(
                                     border: Border.all(
