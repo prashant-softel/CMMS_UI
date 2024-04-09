@@ -68,6 +68,7 @@ import 'package:cmms/domain/domain.dart';
 import 'package:cmms/domain/models/add_inventory_model.dart';
 import 'package:cmms/domain/models/add_user_model.dart';
 import 'package:cmms/domain/models/create_sop_model.dart';
+import 'package:cmms/domain/models/update_pm_task_execution_model.dart';
 import 'package:http/http.dart' as http;
 
 import 'package:get/get.dart';
@@ -4175,6 +4176,35 @@ class ConnectHelper {
     print('SOPDataId${createSOPModel.sop_fileId}');
 
     return createSOPModel;
+  }
+
+  Future<PmFiles?> browsePmFiles({
+    required String auth,
+    Uint8List? fileBytes,
+    required String fileName,
+    bool? isLoading,
+  }) async {
+    final request = http.MultipartRequest('POST',
+        Uri.parse('http://65.0.20.19/CMMS_API/api/FileUpload/UploadFile'));
+    // Uri.parse('http://172.20.43.9:83/api/FileUpload/UploadFile'));
+
+    request.files.add(
+        http.MultipartFile.fromBytes('files', fileBytes!, filename: fileName));
+    request.headers.addAll({'Authorization': 'Bearer $auth'});
+
+    // Send the request and wait for the response
+    final response = await request.send();
+    var respStr = await response.stream.bytesToString();
+    var jsonResponse = json.decode(respStr);
+
+    // Check if the upload was successful
+    if (response.statusCode == 200) {
+      PmFiles files =
+          PmFiles(file_id: int.parse(jsonResponse["id"][0].toString()));
+      print('SOPDataId${files.file_id}');
+
+      return files;
+    }
   }
 
   Future<ResponseModel> importInventory(
