@@ -1,6 +1,8 @@
 import 'package:cmms/domain/domain.dart';
 import 'package:cmms/domain/models/history_model.dart';
 import 'package:cmms/domain/models/mrs_list_by_jobId.dart';
+import 'package:cmms/domain/models/update_pm_task_execution_model.dart';
+import 'package:flutter/services.dart';
 
 import '../models/pm_task_view_list_model.dart';
 
@@ -19,6 +21,16 @@ class PreventiveMaintenanceExecutionUsecase {
         pmExecutionJsonString,
         isLoading,
       );
+  Future<PmFiles?> browseFiles(
+      Uint8List? fileBytes, String fileName, bool isLoading) async {
+    return await repository.browsePmFiles(
+      fileBytes,
+      fileName,
+      isLoading,
+    );
+    // return true;
+  }
+
   Future<List<HistoryModel>?> getHistory({
     moduleType,
     id,
