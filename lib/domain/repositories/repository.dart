@@ -5732,12 +5732,22 @@ class Repository {
       );
 
       if (!res.hasError) {
-        if (res.errorCode == 200) {
-          var responseMap = json.decode(res.data);
-          return responseMap;
-        }
-      } else {
-        Utility.showDialog(res.errorCode.toString(), 'startJobCard');
+        // Fluttertoast.showToast(
+        //     msg: "Start Job Card Successfully...", fontSize: 16.0);
+
+        Get.offAllNamed(Routes.jobCard,
+            arguments: {'JcId': int.tryParse("$jcCard")});
+        // Fluttertoast.showToast(msg: "Data add successfully...", fontSize: 16.0);
+      }
+      // if (!res.hasError) {
+      //   if (res.errorCode == 200) {
+      //     var responseMap = json.decode(res.data);
+      //     Get.offAllNamed(Routes.jobDetails);
+      //     return responseMap;
+      //   }
+      // }
+      else {
+        // Utility.showDialog(res.errorCode.toString(), 'startJobCard');
       }
       return Map();
     } catch (error) {
