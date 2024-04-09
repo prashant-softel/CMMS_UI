@@ -8,6 +8,7 @@ import 'package:cmms/app/widgets/custom_textField.dart';
 import 'package:cmms/app/widgets/stock_dropdown.dart';
 import 'package:cmms/app/widgets/table_action_button.dart';
 import 'package:data_table_2/data_table_2.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -283,8 +284,17 @@ class ObservationPmExecutionViewDialog extends GetView {
                                                                       children: [
                                                                         InkWell(
                                                                           onTap:
-                                                                              () {
-                                                                            controller.selectFiles();
+                                                                              () async {
+                                                                            final result =
+                                                                                await FilePicker.platform.pickFiles();
+                                                                            if (result !=
+                                                                                null) {
+                                                                              controller.fileName.value = result.files.single.name;
+                                                                              controller.fileBytes = result.files.single.bytes;
+                                                                              controller.browseFiles(
+                                                                                fileBytes: controller.fileBytes,
+                                                                              );
+                                                                            }
                                                                           },
                                                                           child:
                                                                               Container(

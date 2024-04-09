@@ -654,46 +654,17 @@ class SafetyQuestionsListContentWeb
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceBetween,
                                         children: [
-                                          Expanded(
-                                              child: CustomRichText(
-                                                  title: "Select Type")),
-                                          Container(
-                                            decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(6),
-                                              boxShadow: [
-                                                BoxShadow(
-                                                  color: Colors.black26,
-                                                  offset: const Offset(
-                                                    5.0,
-                                                    5.0,
-                                                  ),
-                                                  blurRadius: 5.0,
-                                                  spreadRadius: 1.0,
-                                                ),
-                                                BoxShadow(
-                                                  color: ColorValues.whiteColor,
-                                                  offset:
-                                                      const Offset(0.0, 0.0),
-                                                  blurRadius: 0.0,
-                                                  spreadRadius: 0.0,
-                                                ),
-                                              ],
-                                            ),
-                                            width: (MediaQuery.of(context)
+                                          CustomRichText(title: "Select Type"),
+                                          DropdownWebStock(
+                                            width: MediaQuery.of(context)
                                                     .size
-                                                    .width *
-                                                .1),
-                                            height: 28,
-                                            padding:
-                                                const EdgeInsets.only(left: 16),
-                                            child: DropdownWebStock(
-                                              dropdownList: controller.types,
-                                              selectedValue: controller
-                                                  .isselectedtype.value,
-                                              onValueChanged:
-                                                  controller.onValueChanged,
-                                            ),
+                                                    .width /
+                                                6,
+                                            dropdownList: controller.types,
+                                            selectedValue:
+                                                controller.isselectedtype.value,
+                                            onValueChanged:
+                                                controller.onValueChanged,
                                           ),
                                         ],
                                       ),
@@ -1097,8 +1068,8 @@ class SafetyQuestionsListContentWeb
                                                                 .isselectedtype
                                                                 .value =
                                                             controller
-                                                                .selectedItem
-                                                                !.inputName!;
+                                                                .selectedItem!
+                                                                .inputName!;
                                                         controller
                                                             .isContainerVisible
                                                             .value = true;

@@ -76,6 +76,7 @@ import 'package:cmms/domain/models/supplier_name_model.dart';
 import 'package:cmms/domain/models/tools_model.dart';
 import 'package:cmms/domain/models/transaction_report_list_model.dart';
 import 'package:cmms/domain/models/type_permit_model.dart';
+import 'package:cmms/domain/models/update_pm_task_execution_model.dart';
 import 'package:cmms/domain/models/user_detail_model.dart';
 import 'package:cmms/domain/models/veg_execution_details_model.dart';
 import 'package:cmms/domain/models/veg_plan_detail_model.dart';
@@ -5731,12 +5732,22 @@ class Repository {
       );
 
       if (!res.hasError) {
-        if (res.errorCode == 200) {
-          var responseMap = json.decode(res.data);
-          return responseMap;
-        }
-      } else {
-        Utility.showDialog(res.errorCode.toString(), 'startJobCard');
+        // Fluttertoast.showToast(
+        //     msg: "Start Job Card Successfully...", fontSize: 16.0);
+
+        Get.offAllNamed(Routes.jobCard,
+            arguments: {'JcId': int.tryParse("$jcCard")});
+        // Fluttertoast.showToast(msg: "Data add successfully...", fontSize: 16.0);
+      }
+      // if (!res.hasError) {
+      //   if (res.errorCode == 200) {
+      //     var responseMap = json.decode(res.data);
+      //     Get.offAllNamed(Routes.jobDetails);
+      //     return responseMap;
+      //   }
+      // }
+      else {
+        // Utility.showDialog(res.errorCode.toString(), 'startJobCard');
       }
       return Map();
     } catch (error) {
@@ -6795,6 +6806,34 @@ class Repository {
           importType: importType ?? 0,
           isLoading: isLoading,
           facilityId: facilityId);
+      if (res != null) {
+        print("file upload:${res}");
+        return res;
+      } //
+      else {
+        // Utility.showDialog(res.errorCode.toString() + 'getPmtaskViewList');
+        return null;
+      }
+    } //
+    catch (error) {
+      print(error.toString());
+      return null;
+    }
+  }
+
+  Future<PmFiles?> browsePmFiles(
+    Uint8List? fileBytes,
+    String fileName,
+    bool isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.browsePmFiles(
+        auth: auth,
+        fileBytes: fileBytes,
+        fileName: fileName,
+        isLoading: isLoading,
+      );
       if (res != null) {
         print("file upload:${res}");
         return res;

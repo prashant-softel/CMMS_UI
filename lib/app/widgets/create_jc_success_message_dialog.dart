@@ -100,7 +100,7 @@ class CreateJobCardDialog extends GetView {
               ElevatedButton(
                 style: Styles.darkRedElevatedButtonStyle,
                 onPressed: () {
-                  Get.back();
+                  Get.offAllNamed(Routes.newPermitList);
                 },
                 child: const Text('Cancel'),
               ),

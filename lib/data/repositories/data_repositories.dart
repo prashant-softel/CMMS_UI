@@ -4,6 +4,7 @@ import 'package:cmms/data/data.dart';
 import 'package:cmms/domain/domain.dart';
 import 'package:cmms/domain/models/add_inventory_model.dart';
 import 'package:cmms/domain/models/create_sop_model.dart';
+import 'package:cmms/domain/models/update_pm_task_execution_model.dart';
 
 import '../../domain/models/add_user_model.dart';
 
@@ -2382,6 +2383,21 @@ class DataRepository extends DomainRepository {
         importType: importType,
         isLoading: true,
         facilityId: facilityId);
+    // return true;
+  }
+
+  Future<PmFiles?> browsePmFiles({
+    required String auth,
+    Uint8List? fileBytes,
+    required String fileName,
+    required bool isLoading,
+  }) async {
+    return await connectHelper.browsePmFiles(
+      auth: auth,
+      fileBytes: fileBytes,
+      fileName: fileName,
+      isLoading: true,
+    );
     // return true;
   }
 
