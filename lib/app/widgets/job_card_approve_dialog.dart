@@ -1,4 +1,5 @@
 import 'package:cmms/app/job_card_details/job_card_details_controller.dart';
+import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/theme/color_values.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:flutter/material.dart';
@@ -124,7 +125,7 @@ class JobCardApproveDialog extends GetView {
                     onPressed: () {
                       _controller.approvecloseJob();
                       print('PermitStatus:$ptwStatus');
-                      Get.back();
+                      Get.toNamed(Routes.jobList);
                     },
                     child: Text('Approve Job Card'),
                   )
