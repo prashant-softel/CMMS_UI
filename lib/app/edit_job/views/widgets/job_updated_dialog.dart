@@ -64,7 +64,7 @@ class JobUpdatedDialog extends GetView<EditJobController> {
           ),
           Dimens.boxWidth10,
           ElevatedButton(
-            style: Styles.redElevatedButtonStyle,
+            style: Styles.greenElevatedButtonStyle,
             onPressed: () => //
                 controller.goToAddJobScreen(),
             child: const Text('Add New Job'),

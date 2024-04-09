@@ -529,12 +529,12 @@ class JobDetailsWebView extends GetView<JobDetailsController> {
                                                                   ?.jobCardId
                                                                   .toString() ??
                                                               ''))),
-                                                      DataCell(Text(controller
+                                                      DataCell(Text('PTW' +(controller
                                                               .jobAssociatedModelsList?[
                                                                   index]
                                                               ?.permitId
                                                               .toString() ??
-                                                          '')),
+                                                          ''))),
                                                       DataCell(Text(controller
                                                               .jobAssociatedModelsList?[
                                                                   index]

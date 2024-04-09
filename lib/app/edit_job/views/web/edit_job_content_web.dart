@@ -580,11 +580,11 @@ class _EditJobContentWebState extends State<EditJobContentWeb> {
                                                         //   }
                                                         // },
                                                         initialValue: //
-                                                              controller
-                                                                  .selectedtoolsRequiredToWorkTypeIdList
-                                                                  .map((equipmentId) =>
-                                                                      equipmentId) // Extract the IDs from the list of InventoryCategoryModel objects
-                                                                  .toList(),
+                                                            controller
+                                                                .selectedtoolsRequiredToWorkTypeIdList
+                                                                .map((equipmentId) =>
+                                                                    equipmentId) // Extract the IDs from the list of InventoryCategoryModel objects
+                                                                .toList(),
                                                         autovalidateMode:
                                                             AutovalidateMode
                                                                 .always,
@@ -677,50 +677,44 @@ class _EditJobContentWebState extends State<EditJobContentWeb> {
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.end,
                                             children: [
-                                              IgnorePointer(
-                                                child: Row(
-                                                  children: [
-                                                    CustomRichText(
-                                                        title:
-                                                            'Select Block :'),
-                                                    Dimens.boxWidth10,
-                                                    Container(
-                                                      decoration: BoxDecoration(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(10),
-                                                        border: Border.all(
-                                                          color: Color.fromARGB(
-                                                              255,
-                                                              227,
-                                                              224,
-                                                              224),
-                                                          width: 1,
-                                                        ),
-                                                        boxShadow: [
-                                                          BoxShadow(
-                                                            color: Color
-                                                                    .fromARGB(
-                                                                        255,
-                                                                        236,
-                                                                        234,
-                                                                        234)
-                                                                .withOpacity(
-                                                                    0.5),
-                                                            spreadRadius: 2,
-                                                            blurRadius: 5,
-                                                            offset:
-                                                                Offset(0, 2),
-                                                          ),
-                                                        ],
+                                              Row(
+                                                children: [
+                                                  CustomRichText(
+                                                      title: 'Select Block :'),
+                                                  Dimens.boxWidth10,
+                                                  Container(
+                                                    decoration: BoxDecoration(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              10),
+                                                      border: Border.all(
+                                                        color: Color.fromARGB(
+                                                            255, 227, 224, 224),
+                                                        width: 1,
                                                       ),
-                                                      width: (MediaQuery.of(
-                                                                  context)
-                                                              .size
-                                                              .width *
-                                                          .2),
-                                                      child: Obx(
-                                                        () => DropdownWebWidget(
+                                                      boxShadow: [
+                                                        BoxShadow(
+                                                          color: Color.fromARGB(
+                                                                  255,
+                                                                  236,
+                                                                  234,
+                                                                  234)
+                                                              .withOpacity(0.5),
+                                                          spreadRadius: 2,
+                                                          blurRadius: 5,
+                                                          offset: Offset(0, 2),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                    width:
+                                                        (MediaQuery.of(context)
+                                                                .size
+                                                                .width *
+                                                            .2),
+                                                    child: Obx(
+                                                      () => IgnorePointer(
+                                                        child:
+                                                            DropdownWebWidget(
                                                           dropdownList:
                                                               controller
                                                                   .blockList,
@@ -738,8 +732,8 @@ class _EditJobContentWebState extends State<EditJobContentWeb> {
                                                         ),
                                                       ),
                                                     ),
-                                                  ],
-                                                ),
+                                                  ),
+                                                ],
                                               ),
                                               Dimens.boxHeight10,
 
