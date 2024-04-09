@@ -268,7 +268,7 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                                             " ${controller.jobCardDetailsModel.value?.plantName ?? ""}",
                                             style: Styles.blue14),
                                         Container(
-                                          width: 480,
+                                          width: 400,
                                           child: Text(
                                               " ${controller.jobCardDetailsModel.value?.title ?? ""}",
                                               maxLines: 2,
@@ -423,8 +423,8 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                           // (controller.isJobCardStarted == false)
                           controller.jobCardDetailsModel.value!.status == 151 &&
                                   controller.permitList
-                                          ?.firstWhere(
-                                              (element) => element.permitId != null)
+                                          ?.firstWhere((element) =>
+                                              element.permitId != null)
                                           .status ==
                                       125
                               ? //
