@@ -210,12 +210,6 @@ class MrsViewContentWeb extends GetView<MrsViewController> {
                                     Dimens.boxHeight10,
                                     Text(
                                         controller.mrsDetailsModel.value
-                                                ?.approval_date ??
-                                            "",
-                                        style: Styles.blue17),
-                                    Dimens.boxHeight10,
-                                    Text(
-                                        controller.mrsDetailsModel.value
                                                 ?.requestd_date ??
                                             "",
                                         style: Styles.blue17),
@@ -223,6 +217,12 @@ class MrsViewContentWeb extends GetView<MrsViewController> {
                                     Text(
                                         controller.mrsDetailsModel.value
                                                 ?.approval_date ??
+                                            "",
+                                        style: Styles.blue17),
+                                    Dimens.boxHeight10,
+                                    Text(
+                                        controller.mrsDetailsModel.value
+                                                ?.issued_date ??
                                             "",
                                         style: Styles.blue17),
                                   ],

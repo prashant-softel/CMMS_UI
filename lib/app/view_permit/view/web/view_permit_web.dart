@@ -96,7 +96,7 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                                               Get.offAllNamed(
                                                   Routes.newPermitList);
                                             },
-                                            child: Text(" / NEW PERMIT LIST",
+                                            child: Text(" / PERMIT LIST",
                                                 style: Styles.greyLight14),
                                           ),
                                     Text(" / VIEW PERMIT",
