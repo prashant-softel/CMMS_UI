@@ -1523,7 +1523,7 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                                                                             // width:
                                                                                             //     115, // Set the width of the column to 100
 
-                                                                                            minWidth: Get.width * 0.085,
+                                                                                            minWidth: Get.width * 0.08,
                                                                                           );
                                                                                         }).toList(),
                                                                                         rows: true
@@ -1553,7 +1553,7 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                                                                                               //       controller.update();
                                                                                                               //     }),
                                                                                                               Dimens.boxWidth5,
-                                                                                                              Text("${getAccesslevelDetails?.feature_name}")
+                                                                                                              Expanded(child: Text("${getAccesslevelDetails?.feature_name}"))
                                                                                                             ],
                                                                                                           );
                                                                                                         }),
