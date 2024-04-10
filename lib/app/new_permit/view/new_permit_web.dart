@@ -67,12 +67,25 @@ class NewPermitWeb extends GetView<NewPermitController> {
                     onTap: () {
                       Get.offAllNamed(Routes.newPermitList);
                     },
-                    child: Text(" / BREAKDOWN MAINTENANCE ",
-                        style: Styles.greyLight14),
+                    child: Text(
+                      " / BREAKDOWN MAINTENANCE ",
+                      style: Styles.greyLight14,
+                    ),
                   ),
                   controller.newPermitDetailsModel.value?.permitNo == null
-                      ? Text(" / ADD NEW PERMIT", style: Styles.greyLight14)
-                      : Text(" / UPDATE NEW PERMIT", style: Styles.greyLight14),
+                      ? Text(
+                          " / ADD NEW PERMIT",
+                          style: Styles.greyLight14,
+                        )
+                      : controller.newPermitDetailsModel.value?.ptwStatus == 125
+                          ? Text(
+                              " / UPDATE TBT",
+                              style: Styles.greyLight14,
+                            )
+                          : Text(
+                              " / UPDATE PERMIT",
+                              style: Styles.greyLight14,
+                            ),
                   Spacer(),
                   controller.newPermitDetailsModel.value?.permitNo != null
                       ? Text(

@@ -613,6 +613,7 @@ class _ViewMcPlaningWebState extends State<ViewMcPlaningWeb> {
                                                               .historyList?[
                                                                   index]
                                                               ?.createdAt
+                                                              ?.result
                                                               .toString() ??
                                                           '')),
                                                       DataCell(Text(controller
