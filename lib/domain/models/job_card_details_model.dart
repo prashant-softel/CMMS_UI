@@ -32,6 +32,7 @@ class JobCardDetailsModel {
       this.lstCmjcLotoDetailList,
       this.lstCmjcEmpList,
       this.fileList,
+      this.toolList,
       this.status,
       this.status_long,
       this.status_short,
@@ -60,6 +61,7 @@ class JobCardDetailsModel {
   List<dynamic>? lstCmjcLotoDetailList;
   List<dynamic>? lstCmjcEmpList;
   List<FilesModel?>? fileList;
+  List<ToolList>? toolList;
   int? status;
   String? status_short;
   String? status_long;
@@ -100,6 +102,8 @@ class JobCardDetailsModel {
             List<dynamic>.from(json["lstCMJCEmpList"].map((x) => x)),
         fileList: List<FilesModel>.from(
             json["file_list"].map((x) => FilesModel.fromJson(x))),
+        toolList: List<ToolList>.from(
+            json["tools_List"].map((x) => ToolList.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -133,6 +137,8 @@ class JobCardDetailsModel {
         "lstCMJCEmpList":
             List<dynamic>.from(lstCmjcEmpList?.map((x) => x) ?? []),
         "file_list": List<int>.from(fileList?.map((x) => x) ?? []),
+        "tools_List":
+            List<ToolList>.from(toolList?.map((x) => x.toJson()) ?? []),
       };
 }
 
@@ -283,5 +289,20 @@ class FilesModel {
         "status": status,
         "ptwFiles": ptwFiles,
         "description": description,
+      };
+}
+
+class ToolList {
+  ToolList({this.toolId, this.toolName});
+  int? toolId;
+  String? toolName;
+
+  factory ToolList.fromJson(Map<String, dynamic> json) => ToolList(
+        toolId: json["toolId"],
+        toolName: json["toolName"],
+      );
+  Map<String, dynamic> toJson() => {
+        "toolId": toolId,
+        "toolName": toolName,
       };
 }

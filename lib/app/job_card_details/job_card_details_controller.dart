@@ -219,76 +219,70 @@ class JobCardDetailsController extends GetxController {
         //   // jobCardDetailsModel.value = jobCardList[0];
 
         //   // Convert tools required to comma separated list
-        //   toolsRequiredNames = <String>[];
-        //   // for (var toolRequired
-        //   //     in jobCardDetailsModel.value?.lstToolsRequired ?? []) {
-        //   //   toolsRequiredNames.add(toolRequired.name);
-        //   //  }
-        //   strToolsRequired.value = toolsRequiredNames.join(', ');
-        //   //remove extra comma at the end
-        //   if (strToolsRequired.value.length > 0) {
-        //     strToolsRequired.value = strToolsRequired.substring(
-        //       0,
-        //       strToolsRequired.value.length - 1,
-        //     );
-        //   }
-        //   // Convert work type(s) to comma separated list
-        workTypeNames = <String?>[];
-        for (var workTypenames
-            in jobCardDetailsModel.value?.lstCmjcJobDetailList ?? []) {
-          if (workTypenames != null) {
-            workTypeNames.add(workTypenames.workType);
+        if (jobCardDetailsModel != null) {
+          List<String> toolsRequiredNames = jobCardDetailsModel.value?.toolList
+                  ?.map((tool) => tool.toolName ?? '')
+                  .toList() ??
+              [];
+          strToolsRequired.value = toolsRequiredNames.join(', ');
+          //   // Convert work type(s) to comma separated list
+          workTypeNames = <String?>[];
+          for (var workTypenames
+              in jobCardDetailsModel.value?.lstCmjcJobDetailList ?? []) {
+            if (workTypenames != null) {
+              workTypeNames.add(workTypenames.workType);
+            }
           }
-        }
-        strWorkTypes.value = workTypeNames.join(', ');
-        //remove extra comma at the end
-        if (strWorkTypes.value.length > 0) {
-          strWorkTypes.value = strWorkTypes.substring(
-            0,
-            strWorkTypes.value.length,
-          );
-        }
-        assignNames = <String>[];
-        for (var assignName
-            in jobCardDetailsModel.value?.lstCmjcJobDetailList ?? []) {
-          assignNames.add(assignName.jobAssignedEmployeeName);
-        }
-        strAssignName.value = assignNames.join(', ');
-        //remove extra comma at the end
-        if (strAssignName.value.length > 0) {
-          strAssignName.value = strAssignName.substring(
-            0,
-            strAssignName.value.length,
-          );
-        }
-        // Convert work area(s)/equipment(s) to comma separated list
-        //   var workAreaNames = <String>[];
-        // // for (var workArea in jobCardDetailsModel.value?.workingAreaList ?? []) {
-        // //   workAreaNames.add(workArea.workingAreaName);
-        // // }
-        // strWorkAreasOrEquipments.value = workAreaNames.join(', ');
-        // //remove extra comma at the end
-        // if (strWorkAreasOrEquipments.value.length > 0) {
-        //   strWorkAreasOrEquipments.value = strWorkAreasOrEquipments.substring(
-        //     0,
-        //     strWorkAreasOrEquipments.value.length - 1,
-        //   );
-        // }
+          strWorkTypes.value = workTypeNames.join(', ');
+          //remove extra comma at the end
+          if (strWorkTypes.value.length > 0) {
+            strWorkTypes.value = strWorkTypes.substring(
+              0,
+              strWorkTypes.value.length,
+            );
+          }
+          assignNames = <String>[];
+          for (var assignName
+              in jobCardDetailsModel.value?.lstCmjcJobDetailList ?? []) {
+            assignNames.add(assignName.jobAssignedEmployeeName);
+          }
+          strAssignName.value = assignNames.join(', ');
+          //remove extra comma at the end
+          if (strAssignName.value.length > 0) {
+            strAssignName.value = strAssignName.substring(
+              0,
+              strAssignName.value.length,
+            );
+          }
+          // Convert work area(s)/equipment(s) to comma separated list
+          //   var workAreaNames = <String>[];
+          // // for (var workArea in jobCardDetailsModel.value?.workingAreaList ?? []) {
+          // //   workAreaNames.add(workArea.workingAreaName);
+          // // }
+          // strWorkAreasOrEquipments.value = workAreaNames.join(', ');
+          // //remove extra comma at the end
+          // if (strWorkAreasOrEquipments.value.length > 0) {
+          //   strWorkAreasOrEquipments.value = strWorkAreasOrEquipments.substring(
+          //     0,
+          //     strWorkAreasOrEquipments.value.length - 1,
+          //   );
+          // }
 
-        jobDetails.value = {
-          "Job ID": jobCardDetailsModel.value?.jobId.toString(),
-          "Job Title": jobCardDetailsModel.value?.title,
-          "Job Description": jobCardDetailsModel.value?.description,
-          "Job Assigned To": strAssignName.value, //jobCardDetailsModel.value?.,
-          // "Work Area / Equipments": strWorkAreasOrEquipments.value,
-          "Fault": strWorkTypes.value,
-          "Linked Tool To Fault": strToolsRequired.value,
-          "Job Created By": jobCardDetailsModel.value?.created_by,
-          "Job Status": jobCardDetailsModel.value?.status_short,
-        };
-      }
-    } //
-    catch (e) {
+          jobDetails.value = {
+            "Job ID": jobCardDetailsModel.value?.jobId.toString(),
+            "Job Title": jobCardDetailsModel.value?.title,
+            "Job Description": jobCardDetailsModel.value?.description,
+            "Job Assigned To":
+                strAssignName.value, //jobCardDetailsModel.value?.,
+            // "Work Area / Equipments": strWorkAreasOrEquipments.value,
+            "Fault": strWorkTypes.value,
+            "Linked Tool To Fault": strToolsRequired.value,
+            "Job Created By": jobCardDetailsModel.value?.created_by,
+            "Job Status": jobCardDetailsModel.value?.status_short,
+          };
+        }
+      } //
+    } catch (e) {
       print(e);
     }
   }
@@ -312,7 +306,7 @@ class JobCardDetailsController extends GetxController {
             "Permit Type": permit.permitType,
             "Permit Description": permit.permitDescription,
             "Permit Requested By": permit.permitIssuedByName ?? "",
-            "Permit Approved By":permit.permitApprovedByName ?? "",
+            "Permit Approved By": permit.permitApprovedByName ?? "",
             "Permit Status": permit.status_short ?? ""
           };
         }

@@ -1528,7 +1528,7 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                                                                         }).toList(),
                                                                                         rows: true
                                                                                             ? controller.accesslevel
-                                                                                                .map((getAccesslevelDetails) => TableViewRow(height: 60, cells: [
+                                                                                                .map((getAccesslevelDetails) => TableViewRow(height: 40, cells: [
                                                                                                       TableViewCell(
                                                                                                         child: Obx(() {
                                                                                                           return Row(
