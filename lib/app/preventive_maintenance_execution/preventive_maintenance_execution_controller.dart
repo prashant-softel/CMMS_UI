@@ -83,7 +83,7 @@ class PreventiveMaintenanceExecutionController extends GetxController {
   Map<String, ScheduleCheckPoint> checkdropdownMapperData = {};
   Uint8List? fileBytes;
   RxString fileName = "".obs;
-  var fileId;
+  int fileId = 0;
 
   ///fileIDs
   int fileIds = 0;
@@ -120,14 +120,16 @@ class PreventiveMaintenanceExecutionController extends GetxController {
       {"key": "Drop_down", "value": 'Please Select'},
       {'key': "Material_Type", "value": ''},
       {'key': "Issued_Qty", "value": ''},
+      {'key': "Used_Qty", "value": ''},
       {'key': "Consumed_Qty", "value": ''},
-      // {'key': "uploadimg", "value": ''},
       {'key': "Action ", "value": ''},
     ]);
   }
 
   Future<void> getMrsListByModuleTask({required int taskId}) async {
-    cmmrsItems!.value = [];
+    rowItem.value = [];
+    cmmrsItems!.value = <CmmrsItems>[];
+
     listMrsByTaskId?.value =
         await preventiveMaintenanceExecutionPresenter.getMrsListByModuleTask(
               taskId,
@@ -246,7 +248,7 @@ class PreventiveMaintenanceExecutionController extends GetxController {
           fromActorID: scheduleId.value,
           fromActorType: AppConstants.kTask,
           mrsID: listMrsByTaskId![0]!.mrsId ?? 0,
-          qty: int.tryParse(element[3]["value"] ?? '0') ?? 0,
+          qty: int.tryParse(element[4]["value"] ?? '0') ?? 0,
           refID: scheduleId.value,
           refType: AppConstants.kTask,
           remarks: "remarks",
@@ -272,12 +274,12 @@ class PreventiveMaintenanceExecutionController extends GetxController {
   }) async {
     PmFiles? pmfile = await preventiveMaintenanceExecutionPresenter.browseFiles(
         fileBytes, fileName.value, true);
-    fileId = pmfile?.file_id;
+    fileId = pmfile?.file_id ?? 0;
     return true;
   }
 
   void updatePmExecution() async {
-    PmFiles fil = PmFiles(file_id: fileId);
+    PmFiles fil = PmFiles(file_id: fileId ?? 0, pm_event: 0);
     List<PmFiles> pmfile = <PmFiles>[fil];
 
     List<AddObservations> addObservations = <AddObservations>[];
