@@ -99,9 +99,9 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
               ),
               InkWell(
                 onTap: () {
-                  Get.offNamed(Routes.breakdown);
+                  Get.offNamed(Routes.goToJobCardList);
                 },
-                child: Text(" / BREAKDOWN MAINTAINANCE".toUpperCase(),
+                child: Text(" / JOB CARD LIST".toUpperCase(),
                     style: Styles.greyMediumLight12),
               ),
               Text(" / JOB CARD DETAILS ", style: Styles.greyMediumLight12)

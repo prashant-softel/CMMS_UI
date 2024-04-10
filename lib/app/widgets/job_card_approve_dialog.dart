@@ -10,10 +10,10 @@ import '../theme/dimens.dart';
 import '../theme/styles.dart';
 
 class JobCardApproveDialog extends GetView {
-  String? permitApprovedDialog;
-  String? JobCardId;
-  String? ptwStatus;
-  int? type;
+  final String? permitApprovedDialog;
+  final String? JobCardId;
+  final String? ptwStatus;
+  final int? type;
 
   JobCardApproveDialog(
       {super.key,
@@ -38,8 +38,6 @@ class JobCardApproveDialog extends GetView {
           // style: TextStyle(color: Colors.green),
         ),
         content: Builder(builder: (context) {
-          var height = MediaQuery.of(context).size.height;
-
           return Container(
             padding: Dimens.edgeInsets05_0_5_0,
             height: 200,
@@ -125,7 +123,7 @@ class JobCardApproveDialog extends GetView {
                     onPressed: () {
                       _controller.approvecloseJob();
                       print('PermitStatus:$ptwStatus');
-                      Get.toNamed(Routes.jobList);
+                      Get.toNamed(Routes.goToJobCardList);
                     },
                     child: Text('Approve Job Card'),
                   )
@@ -134,7 +132,7 @@ class JobCardApproveDialog extends GetView {
                     onPressed: () {
                       _controller.approveJobCards();
                       print('PermitStatus:$ptwStatus');
-                      Get.back();
+                      Get.toNamed(Routes.goToJobCardList);
                     },
                     child: Text('Approve Job Card'),
                   ),
