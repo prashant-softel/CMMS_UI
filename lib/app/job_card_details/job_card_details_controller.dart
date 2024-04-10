@@ -308,10 +308,11 @@ class JobCardDetailsController extends GetxController {
 
           permitDetails.value = {
             "Permit ID": permit.permitId.toString(),
-            "Site Permit No.": permit.sitePermitNo.toString(),
+            // "Site Permit No.": permit.sitePermitNo.toString(),
             "Permit Type": permit.permitType,
             "Permit Description": permit.permitDescription,
-            "Permit Issued By": permit.permitIssuedByName ?? "",
+            "Permit Requested By": permit.permitIssuedByName ?? "",
+            "Permit Approved By":permit.permitApprovedByName ?? "",
             "Permit Status": permit.status_short ?? ""
           };
         }
