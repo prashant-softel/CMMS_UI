@@ -103,7 +103,7 @@ class JobCardUpdatedDialog extends GetView<JobCardDetailsController> {
                       // ),
                       Dimens.boxWidth10,
                       ElevatedButton(
-                        style: Styles.yellowElevatedButtonStyle,
+                        style: Styles.darkBlueElevatedButtonStyle,
                         onPressed: () {
                           controller.goToAddJobScreen();
                         },
