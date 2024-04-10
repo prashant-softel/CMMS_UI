@@ -59,7 +59,7 @@ class JobCardDetailsModel {
   List<LstCmjcIsolatedDetailList>? lstCmjcIsolatedDetailList;
   List<dynamic>? lstCmjcLotoDetailList;
   List<dynamic>? lstCmjcEmpList;
-  List<int?>? fileList;
+  List<FilesModel?>? fileList;
   int? status;
   String? status_short;
   String? status_long;
@@ -98,7 +98,8 @@ class JobCardDetailsModel {
             List<dynamic>.from(json["lstCMJCLotoDetailList"].map((x) => x)),
         lstCmjcEmpList:
             List<dynamic>.from(json["lstCMJCEmpList"].map((x) => x)),
-        fileList: List<int>.from(json["file_list"].map((x) => x)),
+        fileList: List<FilesModel>.from(
+            json["file_list"].map((x) => FilesModel.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -242,5 +243,45 @@ class LstPermitDetailList {
         "permit_approved_by_name": permitApprovedByName,
         "status_short": status_short,
         "status": status
+      };
+}
+
+class FilesModel {
+  int? id;
+  String? fileName;
+  String? fileCategory;
+  int? fileSize;
+  int? status;
+  String? ptwFiles;
+  String? description;
+
+  FilesModel({
+    this.id,
+    this.fileName,
+    this.fileCategory,
+    this.fileSize,
+    this.status,
+    this.ptwFiles,
+    this.description,
+  });
+
+  factory FilesModel.fromJson(Map<String, dynamic> json) => FilesModel(
+        id: json["id"],
+        fileName: json["fileName"],
+        fileCategory: json["fileCategory"],
+        fileSize: json["fileSize"],
+        status: json["status"],
+        ptwFiles: json["ptwFiles"],
+        description: json["description"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "fileName": fileName,
+        "fileCategory": fileCategory,
+        "fileSize": fileSize,
+        "status": status,
+        "ptwFiles": ptwFiles,
+        "description": description,
       };
 }

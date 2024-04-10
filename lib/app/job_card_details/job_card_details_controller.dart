@@ -34,6 +34,7 @@ class JobCardDetailsController extends GetxController {
   /// History
   var historyController = Get.put(HistoryController());
   RxList<HistoryModel?>? historyList = <HistoryModel?>[].obs;
+  RxList<FilesModel?>? file_list = <FilesModel?>[].obs;
 
   /// Employee Table
   Rx<String> selectedEmployeeName = ''.obs;
@@ -207,6 +208,7 @@ class JobCardDetailsController extends GetxController {
         // "Equipment Categories": jobCardDetailsModel.value?.assetCategoryName,
       };
     }
+    file_list?.value = jobCardDetailsModel.value?.fileList ?? [];
   }
 
   void createJobDetailsTableData() {

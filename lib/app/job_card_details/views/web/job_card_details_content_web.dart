@@ -3,9 +3,12 @@ import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/widgets/job_card_approve_dialog.dart';
 import 'package:cmms/app/widgets/job_card_reject_dialog.dart';
+import 'package:cmms/app/widgets/table_action_button.dart';
+import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../../controllers/file_upload_controller.dart';
 import '../../../theme/color_values.dart';
@@ -332,22 +335,143 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                           CustomDivider(),
 
                           /// FILE UPLOAD WIDGET
-                          Container(
-                            height: Get.height * 0.2,
-                            width: Get.width,
-                            child: Row(//
-                                children: [
-                              Expanded(
-                                flex: 2,
-                                child: FileUploadWidgetWithDropzone(),
-                              ),
-                              Dimens.boxWidth10,
-                              Expanded(
-                                  flex: 8, child: FileUploadDetailsWidgetWeb()),
-                            ]),
-                          ),
+                          controller.jobCardDetailsModel.value!.status == 158
+                              ? Dimens.box0
+                              : Container(
+                                  height: Get.height * 0.2,
+                                  width: Get.width,
+                                  child: Row(//
+                                      children: [
+                                    Expanded(
+                                      flex: 2,
+                                      child: FileUploadWidgetWithDropzone(),
+                                    ),
+                                    Dimens.boxWidth10,
+                                    Expanded(
+                                        flex: 8,
+                                        child: FileUploadDetailsWidgetWeb()),
+                                  ]),
+                                ),
                           Dimens.boxHeight20,
                           CustomDivider(),
+                          Dimens.boxHeight20,
+                          controller.file_list!.length > 0
+                              ? Container(
+                                  margin: Dimens.edgeInsets20,
+                                  height: ((controller.file_list?.length ?? 0) *
+                                          40) +
+                                      130,
+                                  decoration: BoxDecoration(
+                                    border: Border.all(
+                                      color: ColorValues
+                                          .lightGreyColorWithOpacity35,
+                                      width: 1,
+                                    ),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color:
+                                            ColorValues.appBlueBackgroundColor,
+                                        spreadRadius: 2,
+                                        blurRadius: 5,
+                                        offset: Offset(0, 2),
+                                      ),
+                                    ],
+                                  ),
+                                  child: Column(
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.all(10.0),
+                                        child: Row(
+                                          children: [
+                                            Text(
+                                              'All Files Uploaded',
+                                              style: Styles.blue700,
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      Expanded(
+                                        child: DataTable2(
+                                          border: TableBorder.all(
+                                            color: Color.fromARGB(
+                                                255, 206, 229, 234),
+                                          ),
+                                          columns: [
+                                            DataColumn(
+                                              label: Text(
+                                                "File Description",
+                                                style: TextStyle(
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                            ),
+                                            DataColumn(
+                                              label: Text(
+                                                "View Image",
+                                                style: TextStyle(
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                          rows: List<DataRow>.generate(
+                                            controller.file_list?.length ?? 0,
+                                            (index) => DataRow(
+                                              cells: [
+                                                DataCell(Text(
+                                                  controller.file_list![index]
+                                                          ?.description
+                                                          .toString() ??
+                                                      '',
+                                                )),
+                                                DataCell(
+                                                  // Text("View Image"),
+                                                  Wrap(
+                                                    children: [
+                                                      TableActionButton(
+                                                        color: ColorValues
+                                                            .appDarkBlueColor,
+                                                        icon: Icons.visibility,
+                                                        message: 'View Permit',
+                                                        onPress: () async {
+                                                          String baseUrl =
+                                                              "http://65.0.20.19/CMMS_API/";
+                                                          // String baseUrl =
+                                                          // 'http://172.20.43.9:83/';
+                                                          String fileName =
+                                                              controller
+                                                                      .file_list![
+                                                                          index]
+                                                                      ?.fileName ??
+                                                                  "";
+                                                          String fullUrl =
+                                                              baseUrl +
+                                                                  fileName;
+                                                          if (await canLaunch(
+                                                              fullUrl)) {
+                                                            await launch(
+                                                                fullUrl);
+                                                          } else {
+                                                            throw 'Could not launch $fullUrl';
+                                                          }
+                                                          // String baseUrl = 'http://172.20.43.9:83/';
+                                                        },
+                                                      )
+                                                    ],
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                )
+                              : Dimens.box0,
+                          Dimens.boxHeight20,
                           Row(//
                               children: [
                             Text('History', style: Styles.blackBold16),
