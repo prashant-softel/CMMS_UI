@@ -561,7 +561,10 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                                         text: 'Start Job Card',
                                         onPressed: () =>
                                             controller.startJobCard(
-                                                controller.jobCardId.value),
+                                                jcCard:
+                                                    controller.jobCardId.value,
+                                                fileIds:
+                                                    dropzoneController.fileIds),
                                         backgroundColor:
                                             ColorValues.addNewColor,
                                       )

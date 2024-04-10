@@ -36,11 +36,13 @@ class JobCardDetailsUsecase {
   Future<Map<String, dynamic>?> startJobCard({
     String? auth,
     int? jcCard,
+    files,
     bool? isLoading,
   }) async =>
       await repository.startJobCard(
         auth,
         jcCard,
+        files,
         isLoading,
       );
 

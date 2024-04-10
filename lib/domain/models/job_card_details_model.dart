@@ -103,7 +103,8 @@ class JobCardDetailsModel {
         fileList: List<FilesModel>.from(
             json["file_list"].map((x) => FilesModel.fromJson(x))),
         toolList: List<ToolList>.from(
-            json["tools_List"].map((x) => ToolList.fromJson(x))),
+            json["tool_List"].map((x) => ToolList.fromJson(x))),
+       
       );
 
   Map<String, dynamic> toJson() => {
@@ -137,7 +138,7 @@ class JobCardDetailsModel {
         "lstCMJCEmpList":
             List<dynamic>.from(lstCmjcEmpList?.map((x) => x) ?? []),
         "file_list": List<int>.from(fileList?.map((x) => x) ?? []),
-        "tools_List":
+        "tool_List":
             List<ToolList>.from(toolList?.map((x) => x.toJson()) ?? []),
       };
 }
@@ -304,5 +305,21 @@ class ToolList {
   Map<String, dynamic> toJson() => {
         "toolId": toolId,
         "toolName": toolName,
+      };
+}
+
+class UploadFiles {
+  List<dynamic>? uploadfile_ids;
+  UploadFiles({
+    this.uploadfile_ids,
+  });
+  factory UploadFiles.fromJson(Map<String, dynamic> json) => UploadFiles(
+        uploadfile_ids: json["uploadfile_ids"] != null
+            ? List<int>.from(json["uploadfile_ids"].map((x) => x))
+            : [],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "uploadfile_ids": List<dynamic>.from(uploadfile_ids!.map((x) => x)),
       };
 }
