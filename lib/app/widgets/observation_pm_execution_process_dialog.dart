@@ -519,6 +519,15 @@ class ObservationPmExecutionViewDialog extends GetView {
                                               DataColumn2(
                                                   //  fixedWidth: 350,
                                                   label: Text(
+                                                "Used Qty",
+                                                style: TextStyle(
+                                                    fontSize: 15,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              )),
+                                              DataColumn2(
+                                                  //  fixedWidth: 350,
+                                                  label: Text(
                                                 "Consumed  Qty",
                                                 style: TextStyle(
                                                     fontSize: 15,
@@ -617,43 +626,46 @@ class ObservationPmExecutionViewDialog extends GetView {
                                                                 : (mapData['key'] ==
                                                                         "Issued_Qty")
                                                                     ? Text(
-                                                                        "${(controller.dropdownMapperData[record[0]['value']]?.issued_qty ?? 0) }")
+                                                                        "${(controller.dropdownMapperData[record[0]['value']]?.issued_qty ?? 0)}")
                                                                     : (mapData['key'] ==
-                                                                            "Consumed_Qty")
-                                                                        ? Padding(
-                                                                            padding:
-                                                                                const EdgeInsets.only(top: 10),
-                                                                            child: Container(
-                                                                                decoration: BoxDecoration(
-                                                                                  boxShadow: [
-                                                                                    BoxShadow(
-                                                                                      color: Colors.black26,
-                                                                                      offset: const Offset(
-                                                                                        5.0,
-                                                                                        5.0,
-                                                                                      ),
-                                                                                      blurRadius: 5.0,
-                                                                                      spreadRadius: 1.0,
+                                                                            "Used_Qty")
+                                                                        ? Text(
+                                                                            "${(controller.dropdownMapperData[record[0]['value']]?.used_qty ?? 0)}")
+                                                                        : (mapData['key'] ==
+                                                                                "Consumed_Qty")
+                                                                            ? Padding(
+                                                                                padding: const EdgeInsets.only(top: 10),
+                                                                                child: Container(
+                                                                                    decoration: BoxDecoration(
+                                                                                      boxShadow: [
+                                                                                        BoxShadow(
+                                                                                          color: Colors.black26,
+                                                                                          offset: const Offset(
+                                                                                            5.0,
+                                                                                            5.0,
+                                                                                          ),
+                                                                                          blurRadius: 5.0,
+                                                                                          spreadRadius: 1.0,
+                                                                                        ),
+                                                                                      ],
+                                                                                      color: ColorValues.whiteColor,
+                                                                                      borderRadius: BorderRadius.circular(5),
                                                                                     ),
-                                                                                  ],
-                                                                                  color: ColorValues.whiteColor,
-                                                                                  borderRadius: BorderRadius.circular(5),
-                                                                                ),
-                                                                                child: LoginCustomTextfield(
-                                                                                  width: (Get.width * .4),
-                                                                                  keyboardType: TextInputType.number,
-                                                                                  inputFormatters: <TextInputFormatter>[
-                                                                                    FilteringTextInputFormatter.digitsOnly
-                                                                                  ],
-                                                                                  maxLine: 1,
-                                                                                  textController: new TextEditingController(text: mapData["value"] ?? ''),
-                                                                                  onChanged: (txt) {
-                                                                                    mapData["value"] = txt;
-                                                                                  },
-                                                                                )),
-                                                                          )
-                                                                        : Text(mapData['value'] ??
-                                                                            ''),
+                                                                                    child: LoginCustomTextfield(
+                                                                                      width: (Get.width * .4),
+                                                                                      keyboardType: TextInputType.number,
+                                                                                      inputFormatters: <TextInputFormatter>[
+                                                                                        FilteringTextInputFormatter.digitsOnly
+                                                                                      ],
+                                                                                      maxLine: 1,
+                                                                                      textController: new TextEditingController(text: mapData["value"] ?? ''),
+                                                                                      onChanged: (txt) {
+                                                                                        mapData["value"] = txt;
+                                                                                      },
+                                                                                    )),
+                                                                              )
+                                                                            : Text(mapData['value'] ??
+                                                                                ''),
                                                   );
                                                 }).toList(),
                                               );
