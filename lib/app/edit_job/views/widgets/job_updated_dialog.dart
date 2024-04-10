@@ -50,7 +50,7 @@ class JobUpdatedDialog extends GetView<EditJobController> {
       actions: [
         Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
           ElevatedButton(
-            style: Styles.greenElevatedButtonStyle,
+            style: Styles.darkBlueElevatedButtonStyle,
             onPressed: () => controller.goToJobListScreen(),
             child: const Text('Job List'),
           ),

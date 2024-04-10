@@ -601,7 +601,7 @@ class PmPlanDataSource extends DataTableSource {
                                     0
                             ? TableActionButton(
                                 color: ColorValues.approveColor,
-                                icon: Icons.approval,
+                                icon: Icons.check,
                                 message: 'Approve/Reject',
                                 onPress: () {
                                   controller.clearStoreData();
