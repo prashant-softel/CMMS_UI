@@ -389,6 +389,7 @@ class NewPermitController extends GetxController {
   PmtaskViewModel? pmtaskViewModel;
   RxList<ScheduleCheckPoint?>? scheduleCheckPoint;
   int? jcId = 0;
+  RxList<FileList?>? file_list = <FileList>[].obs;
 
   //File Import
   RxString fileName = "".obs;
@@ -676,12 +677,11 @@ class NewPermitController extends GetxController {
       selectedEquipmentIsolationIdList.value = idList.whereType<int>().toList();
       print('Islation id:$selectedEquipmentIsolationIdList');
       await equipmentIsolationSelected(idList);
-
       List<int?> nameList = listLoto!.map((obj) => obj!.loto_id).toList();
       selectedEquipmentNameIdList.value = nameList.whereType<int>().toList();
-
       equipmentNameSelected(nameList);
       print("equipment names id's: $selectedEquipmentNameIdList");
+      file_list?.value = newPermitDetailsModel.value?.file_list ?? [];
       // workPermitRemarkTextCtrlr.text =
       //     newPermitDetailsModel.value?.physical_iso_remark ?? "";
       // print('EmployeeList:${listEmployee}');
