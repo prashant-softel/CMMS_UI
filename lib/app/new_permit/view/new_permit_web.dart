@@ -19,6 +19,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:intl/intl.dart';
 import 'package:multi_select_flutter/util/multi_select_item.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class NewPermitWeb extends GetView<NewPermitController> {
   NewPermitWeb({Key? key}) : super(key: key);
@@ -68,7 +69,7 @@ class NewPermitWeb extends GetView<NewPermitController> {
                       Get.offAllNamed(Routes.newPermitList);
                     },
                     child: Text(
-                      " / BREAKDOWN MAINTENANCE ",
+                      " / PERMIT LIST ",
                       style: Styles.greyLight14,
                     ),
                   ),
@@ -971,65 +972,68 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                     // .isEmpty
 
                                     ? Dimens.box0
-                                    : Container(
-                                        width:
-                                            MediaQuery.of(context).size.width /
-                                                1.2,
-                                        margin: EdgeInsets.all(16),
-                                        child: Center(
-                                          child: Column(
-                                            children: [
-                                              CustomAppBar(
-                                                  title: 'Permit Type Checklist'
-                                                      .tr),
-                                              Dimens.boxHeight10,
-                                              controller.safetyMeasureList
-                                                          .length >
-                                                      0
-                                                  ? GetBuilder<
-                                                          NewPermitController>(
-                                                      init: controller,
-                                                      builder: (ctrl) {
-                                                        return Column(
-                                                          children: controller
-                                                              .safetyMeasureList
-                                                              .map((element) {
-                                                            return Column(
-                                                              mainAxisAlignment:
-                                                                  MainAxisAlignment
-                                                                      .start,
-                                                              crossAxisAlignment:
-                                                                  CrossAxisAlignment
-                                                                      .start,
-                                                              children: [
-                                                                SizedBox(
-                                                                  child: Row(
-                                                                    children: [
-                                                                      checkBoxMethod(
-                                                                          element.isChecked ??
-                                                                              false,
-                                                                          (value) {
-                                                                        element.isChecked =
-                                                                            value ??
-                                                                                false;
+                                    : Center(
+                                        child: Container(
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width /
+                                              1.2,
+                                          margin: EdgeInsets.all(16),
+                                          child: Center(
+                                            child: Column(
+                                              children: [
+                                                CustomAppBar(
+                                                    title:
+                                                        'Permit Type Checklist'
+                                                            .tr),
+                                                Dimens.boxHeight10,
+                                                controller.safetyMeasureList
+                                                            .length >
+                                                        0
+                                                    ? GetBuilder<
+                                                            NewPermitController>(
+                                                        init: controller,
+                                                        builder: (ctrl) {
+                                                          return Column(
+                                                            children: controller
+                                                                .safetyMeasureList
+                                                                .map((element) {
+                                                              return Column(
+                                                                mainAxisAlignment:
+                                                                    MainAxisAlignment
+                                                                        .start,
+                                                                crossAxisAlignment:
+                                                                    CrossAxisAlignment
+                                                                        .start,
+                                                                children: [
+                                                                  SizedBox(
+                                                                    child: Row(
+                                                                      children: [
+                                                                        checkBoxMethod(
+                                                                            element.isChecked ??
+                                                                                false,
+                                                                            (value) {
+                                                                          element.isChecked =
+                                                                              value ?? false;
 
-                                                                        controller
-                                                                            .update();
-                                                                      }),
-                                                                      Dimens
-                                                                          .boxWidth10,
-                                                                      Text(
-                                                                          "${element.name}"),
-                                                                    ],
+                                                                          controller
+                                                                              .update();
+                                                                        }),
+                                                                        Dimens
+                                                                            .boxWidth10,
+                                                                        Text(
+                                                                            "${element.name}"),
+                                                                      ],
+                                                                    ),
                                                                   ),
-                                                                ),
-                                                              ],
-                                                            );
-                                                          }).toList(),
-                                                        );
-                                                      })
-                                                  : Dimens.box0,
-                                            ],
+                                                                ],
+                                                              );
+                                                            }).toList(),
+                                                          );
+                                                        })
+                                                    : Dimens.box0,
+                                              ],
+                                            ),
                                           ),
                                         ),
                                       ),
@@ -1157,34 +1161,39 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                           SizedBox(
                                             height: 22,
                                           ),
-
-                                          /// FILE UPLOAD WIDGET
-                                          Container(
-                                            height: Get.height * 0.2,
-                                            width: Get.width,
-                                            padding: EdgeInsets.all(10),
-                                            child: Row(
-                                              //
-                                              children: [
-                                                Expanded(
-                                                  flex: 2,
-                                                  child:
-                                                      FileUploadWidgetWithDropzone(),
-                                                ),
-                                                Dimens.boxWidth10,
-                                                Expanded(
-                                                  flex: 8,
-                                                  child: Padding(
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                            top: 15),
-                                                    child:
-                                                        FileUploadDetailsWidgetWeb2(),
+                                          controller.permitId.value > 0 &&
+                                                  controller
+                                                          .newPermitDetailsModel
+                                                          .value
+                                                          ?.ptwStatus ==
+                                                      125
+                                              ? Dimens.box0
+                                              : Container(
+                                                  height: Get.height * 0.2,
+                                                  width: Get.width,
+                                                  padding: EdgeInsets.all(10),
+                                                  child: Row(
+                                                    children: [
+                                                      Expanded(
+                                                        flex: 2,
+                                                        child:
+                                                            FileUploadWidgetWithDropzone(),
+                                                      ),
+                                                      Dimens.boxWidth10,
+                                                      Expanded(
+                                                        flex: 8,
+                                                        child: Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .only(
+                                                                  top: 15),
+                                                          child:
+                                                              FileUploadDetailsWidgetWeb2(),
+                                                        ),
+                                                      ),
+                                                    ],
                                                   ),
                                                 ),
-                                              ],
-                                            ),
-                                          ),
                                         ],
                                       ),
                                     ],
@@ -1193,6 +1202,118 @@ class NewPermitWeb extends GetView<NewPermitController> {
                               ),
                             ),
                           ),
+                          Dimens.boxHeight10,
+                          controller.permitId.value > 0 &&
+                                  controller.newPermitDetailsModel.value!
+                                          .ptwStatus ==
+                                      125 &&
+                                  controller.newPermitDetailsModel.value!
+                                          .file_list!.length >
+                                      0
+                              ? Center(
+                                  child: Container(
+                                    width:
+                                        MediaQuery.of(context).size.width / 1.2,
+                                    height:
+                                        ((controller.file_list!.length) * 41) +
+                                            117,
+                                    margin: EdgeInsets.all(16),
+                                    decoration: BoxDecoration(
+                                      border: Border.all(
+                                          color: Colors.grey.withOpacity(.3)),
+                                    ),
+                                    constraints: BoxConstraints(
+                                      maxWidth: 1280,
+                                    ),
+                                    child: Column(
+                                      children: [
+                                        CustomAppBar(
+                                          title: 'Images Uploaded'.tr,
+                                        ),
+                                        Expanded(
+                                          child: DataTable2(
+                                            border: TableBorder.all(
+                                              color: Color.fromARGB(
+                                                  255, 206, 229, 234),
+                                            ),
+                                            dataRowHeight: 40,
+                                            columns: [
+                                              DataColumn(
+                                                label: Text(
+                                                  "File Description",
+                                                  style: TextStyle(
+                                                    fontSize: 15,
+                                                    fontWeight: FontWeight.bold,
+                                                  ),
+                                                ),
+                                              ),
+                                              DataColumn(
+                                                label: Text(
+                                                  "View Image",
+                                                  style: TextStyle(
+                                                    fontSize: 15,
+                                                    fontWeight: FontWeight.bold,
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                            rows: List<DataRow>.generate(
+                                              controller.file_list?.length ?? 0,
+                                              (index) => DataRow(
+                                                cells: [
+                                                  DataCell(Text(
+                                                    controller.file_list![index]
+                                                            ?.description
+                                                            .toString() ??
+                                                        '',
+                                                  )),
+                                                  DataCell(
+                                                    // Text("View Image"),
+                                                    Wrap(
+                                                      children: [
+                                                        TableActionButton(
+                                                          color: ColorValues
+                                                              .appDarkBlueColor,
+                                                          icon:
+                                                              Icons.visibility,
+                                                          message: 'view',
+                                                          onPress: () async {
+                                                            String baseUrl =
+                                                                "http://65.0.20.19/CMMS_API/";
+                                                            // String baseUrl =
+                                                            // 'http://172.20.43.9:83/';
+                                                            String fileName = controller
+                                                                    .file_list![
+                                                                        index]
+                                                                    ?.fileName ??
+                                                                "";
+                                                            String fullUrl =
+                                                                baseUrl +
+                                                                    fileName;
+                                                            if (await canLaunch(
+                                                                fullUrl)) {
+                                                              await launch(
+                                                                  fullUrl);
+                                                            } else {
+                                                              throw 'Could not launch $fullUrl';
+                                                            }
+                                                            // String baseUrl = 'http://172.20.43.9:83/';
+                                                          },
+                                                        )
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                )
+                              : Dimens.box0,
+                          Dimens.boxHeight10,
                           controller.newPermitDetailsModel.value?.ptwStatus ==
                                       125 &&
                                   controller.newPermitDetailsModel.value
