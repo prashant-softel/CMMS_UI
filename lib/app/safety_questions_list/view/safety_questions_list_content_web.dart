@@ -668,10 +668,8 @@ class SafetyQuestionsListContentWeb
                                               boxShadow: [
                                                 BoxShadow(
                                                   color: Colors.black26,
-                                                  offset: const Offset(
-                                                    5.0,
-                                                    5.0,
-                                                  ),
+                                                  offset:
+                                                      const Offset(5.0, 5.0),
                                                   blurRadius: 5.0,
                                                   spreadRadius: 1.0,
                                                 ),
@@ -697,27 +695,29 @@ class SafetyQuestionsListContentWeb
                                                 value:
                                                     controller.updateType.value,
                                                 onChanged: (value) => controller
-                                                  ..updateChecklistType(value!),
+                                                    .updateChecklistType(
+                                                        value!),
                                                 items: <String>[
                                                   '',
                                                   'Checkbox',
                                                   'Radio',
                                                   'Text'
                                                 ].map<DropdownMenuItem<String>>(
-                                                    (String value) {
-                                                  return DropdownMenuItem<
-                                                      String>(
-                                                    value: value,
-                                                    child: Container(
-                                                      margin: EdgeInsets.only(
-                                                          left: 10),
-                                                      child: Text(
-                                                        value,
-                                                        style: Styles.black12,
+                                                  (String value) {
+                                                    return DropdownMenuItem<
+                                                        String>(
+                                                      value: value,
+                                                      child: Container(
+                                                        margin: EdgeInsets.only(
+                                                            left: 10),
+                                                        child: Text(
+                                                          value,
+                                                          style: Styles.black12,
+                                                        ),
                                                       ),
-                                                    ),
-                                                  );
-                                                }).toList(),
+                                                    );
+                                                  },
+                                                ).toList(),
                                               ),
                                             ),
                                           ),
@@ -1110,6 +1110,11 @@ class SafetyQuestionsListContentWeb
                                                                 .selectedItem
                                                                 ?.name ??
                                                             '';
+                                                        controller.updateType
+                                                            .value = controller
+                                                                .selectedItem
+                                                                ?.inputName ??
+                                                            '';
                                                         controller
                                                             .isCheckedRequire
                                                             .value = controller
@@ -1121,7 +1126,6 @@ class SafetyQuestionsListContentWeb
                                                         controller
                                                             .isContainerVisible
                                                             .value = true;
-                                                        // Your edit logic...
                                                       },
                                                     ),
                                                     TableActionButton(
