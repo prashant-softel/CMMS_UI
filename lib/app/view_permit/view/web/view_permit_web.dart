@@ -3015,7 +3015,7 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                                     .length >
                                 0 &&
                             controller
-                                .isOneHour(controller.validTillTimeCtrlr.text)
+                                .isOneHour(controller.validTillTimeCtrlr.text) == true
                     ? Padding(
                         padding: const EdgeInsets.only(left: 5),
                         child: Container(
