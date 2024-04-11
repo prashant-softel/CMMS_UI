@@ -4517,7 +4517,7 @@ class Repository {
         return _typePermitModelList;
       } //
       else {
-        Utility.showDialog(res.errorCode.toString(), 'getTypePermitList');
+        // Utility.showDialog(res.errorCode.toString(), 'getTypePermitList');
         return null;
       }
     } catch (error) {
