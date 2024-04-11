@@ -3,7 +3,6 @@ import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/safety_questions_list/safety_questions_list_controller.dart';
 import 'package:cmms/app/widgets/dropdown_web.dart';
-import 'package:cmms/app/widgets/stock_dropdown.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -654,17 +653,73 @@ class SafetyQuestionsListContentWeb
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceBetween,
                                         children: [
-                                          CustomRichText(title: "Select Type"),
-                                          DropdownWebStock(
-                                            width: MediaQuery.of(context)
+                                          Expanded(
+                                              child: CustomRichText(
+                                                  title: "Select Type")),
+                                          Container(
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(6),
+                                              border: Border.all(
+                                                color: Color.fromARGB(
+                                                    255, 227, 224, 224),
+                                                width: 1,
+                                              ),
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: Colors.black26,
+                                                  offset: const Offset(
+                                                    5.0,
+                                                    5.0,
+                                                  ),
+                                                  blurRadius: 5.0,
+                                                  spreadRadius: 1.0,
+                                                ),
+                                                BoxShadow(
+                                                  color: ColorValues.whiteColor,
+                                                  offset:
+                                                      const Offset(0.0, 0.0),
+                                                  blurRadius: 0.0,
+                                                  spreadRadius: 0.0,
+                                                ),
+                                              ],
+                                            ),
+                                            width: (MediaQuery.of(context)
                                                     .size
-                                                    .width /
-                                                6,
-                                            dropdownList: controller.types,
-                                            selectedValue:
-                                                controller.isselectedtype.value,
-                                            onValueChanged:
-                                                controller.onValueChanged,
+                                                    .width *
+                                                .1),
+                                            height: 30,
+                                            padding:
+                                                const EdgeInsets.only(left: 16),
+                                            child: DropdownButtonHideUnderline(
+                                              child: DropdownButton<String>(
+                                                isExpanded: true,
+                                                value:
+                                                    controller.updateType.value,
+                                                onChanged: (value) => controller
+                                                  ..updateChecklistType(value!),
+                                                items: <String>[
+                                                  '',
+                                                  'Checkbox',
+                                                  'Radio',
+                                                  'Text'
+                                                ].map<DropdownMenuItem<String>>(
+                                                    (String value) {
+                                                  return DropdownMenuItem<
+                                                      String>(
+                                                    value: value,
+                                                    child: Container(
+                                                      margin: EdgeInsets.only(
+                                                          left: 10),
+                                                      child: Text(
+                                                        value,
+                                                        style: Styles.black12,
+                                                      ),
+                                                    ),
+                                                  );
+                                                }).toList(),
+                                              ),
+                                            ),
                                           ),
                                         ],
                                       ),
@@ -1026,12 +1081,17 @@ class SafetyQuestionsListContentWeb
                                                     .inputName
                                                     .toString())),
                                                 DataCell(Checkbox(
-                                                  value: controller
-                                                      .isChecked.value,
-                                                  onChanged: (val) {},
+                                                  value:
+                                                      safetyQuestionsListDetails
+                                                                  .isRequired ==
+                                                              1
+                                                          ? true
+                                                          : false,
+                                                  onChanged: (val) {
+                                                    controller.isChecked.value =
+                                                        val!;
+                                                  },
                                                 )),
-                                                // DataCell(Text(
-                                                //     '${safetyQuestionsListDetails.isRequired}')),
                                                 DataCell(Wrap(
                                                   alignment:
                                                       WrapAlignment.center,
@@ -1051,12 +1111,6 @@ class SafetyQuestionsListContentWeb
                                                                 ?.name ??
                                                             '';
                                                         controller
-                                                            .selectedTypePermit
-                                                            .value = controller
-                                                                .selectedItem
-                                                                ?.permitType ??
-                                                            '';
-                                                        controller
                                                             .isCheckedRequire
                                                             .value = controller
                                                                     .selectedItem
@@ -1064,12 +1118,6 @@ class SafetyQuestionsListContentWeb
                                                                 1
                                                             ? true
                                                             : false;
-                                                        controller
-                                                                .isselectedtype
-                                                                .value =
-                                                            controller
-                                                                .selectedItem!
-                                                                .inputName!;
                                                         controller
                                                             .isContainerVisible
                                                             .value = true;
