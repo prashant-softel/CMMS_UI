@@ -32,7 +32,7 @@ class LinkToPermitDialog extends GetView {
         insetPadding: Dimens.edgeInsets10_0_10_0,
         contentPadding: EdgeInsets.zero,
         title: Text(
-          'Link Permit Successfully....',
+          'Permit Linked Successfully....',
           textAlign: TextAlign.center,
           style: TextStyle(color: Colors.black),
         ),
