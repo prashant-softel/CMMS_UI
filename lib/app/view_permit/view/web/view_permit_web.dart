@@ -701,7 +701,7 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                                                 ),
                                                 DataColumn(
                                                   label: Text(
-                                                    "Start Date",
+                                                    "Due Date",
                                                     style: TextStyle(
                                                         fontSize: 15,
                                                         fontWeight:
