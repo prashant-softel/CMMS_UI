@@ -390,10 +390,10 @@ class StockManagementAddGoodsOrdersController extends GetxController {
     }
   }
 
-  Future<void> getBusinessList(ListType,int facilityId) async {
+  Future<void> getBusinessList(ListType, int facilityId) async {
     final list = await stockManagementAddGoodsOrdersPresenter.getBusinessList(
       ListType: ListType,
-      facilityId:facilityId,
+      facilityId: facilityId,
       isLoading: true,
     );
     if (list!.length > 0) {
@@ -432,7 +432,8 @@ class StockManagementAddGoodsOrdersController extends GetxController {
     addRowItem();
   }
 
-  Future<void> getRoDetailsByID({required int requestID, required int facilityId}) async {
+  Future<void> getRoDetailsByID(
+      {required int requestID, required int facilityId}) async {
     goDetailsList?.value = [];
 
     final _getRoDetailsById = await stockManagementAddGoodsOrdersPresenter
@@ -499,14 +500,19 @@ class StockManagementAddGoodsOrdersController extends GetxController {
 
       case RxList<GetRequestOrderListModel>:
         {
-          int reqOrderIndex =
-              goodsOrdersList.indexWhere((x) => x?.name == value);
-          rowItem.value = <List<Map<String, String>>>[].obs;
-          // rowItem.remove();
-          selectedReqOrder.value = goodsOrdersList[reqOrderIndex]?.name ?? "";
-          selectedReqOrderId =
-              int.tryParse(goodsOrdersList[reqOrderIndex]?.name ?? "") ?? 0;
-          getRoDetailsByID(requestID: selectedReqOrderId, facilityId: facilityId);
+          final filteredOrders =
+              goodsOrdersList.where((order) => order?.status == 344).toList();
+          if (filteredOrders.isNotEmpty) {
+            int reqOrderIndex =
+                filteredOrders.indexWhere((x) => x?.name == value);
+            rowItem.value = <List<Map<String, String>>>[].obs;
+            // rowItem.remove();
+            selectedReqOrder.value = filteredOrders[reqOrderIndex]?.name ?? "";
+            selectedReqOrderId =
+                int.tryParse(filteredOrders[reqOrderIndex]?.name ?? "") ?? 0;
+            getRoDetailsByID(
+                requestID: selectedReqOrderId, facilityId: facilityId);
+          }
         }
         break;
       case RxList<BusinessTypeModel>:
@@ -693,13 +699,16 @@ class StockManagementAddGoodsOrdersController extends GetxController {
       end_date: endDate,
       facility_id: facilityId,
     );
-    for (var requ in _goodsordersList) {
+    final filteredOrders =
+        _goodsordersList.where((order) => order.status == 344).toList();
+    for (var requ in filteredOrders) {
       goodsOrdersList.add(requ);
     }
-    selectedReqOrderId = int.tryParse(goodsOrdersList[0]?.name ?? "") ?? 0;
-    selectedReqOrder.value = goodsOrdersList[0]?.name ?? "";
-
-    getRoDetailsByID(requestID: selectedReqOrderId, facilityId: facilityId);
+    if (filteredOrders.isNotEmpty) {
+      selectedReqOrderId = int.tryParse(filteredOrders[0]?.name ?? "") ?? 0;
+      selectedReqOrder.value = filteredOrders[0]?.name ?? "";
+      getRoDetailsByID(requestID: selectedReqOrderId, facilityId: facilityId);
+    }
 
     update(['requ']);
   }
