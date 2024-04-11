@@ -32,14 +32,6 @@ class SafetyQuestionsListController extends GetxController {
   int? selectedTypePermitId = 0;
 
   SafetyMeasureListModel? selectedItem;
-  Rx<String> isselectedtype = ''.obs;
-  int selectedtypesId = 0;
-  RxList<TypeModel> types = <TypeModel>[
-    TypeModel(name: "Please Select", id: "0"),
-    TypeModel(name: 'Checkbox', id: "1"),
-    TypeModel(name: 'Radio', id: "2"),
-    TypeModel(name: 'Text', id: "3"),
-  ].obs;
 
   var updateType = ''.obs;
 
@@ -380,10 +372,11 @@ class SafetyQuestionsListController extends GetxController {
 
   void onValueChanged(dynamic list, dynamic value) {
     switch (list.runtimeType) {
-      case RxList<TypeModel>:
+      case RxList<InventoryCategoryModel>:
         {
-          int typesindex = types.indexWhere((x) => x.name == value);
-          selectedtypesId = types[typesindex].id as int;
+          // int equipmentIndex =
+          //     equipmentCategoryList.indexWhere((x) => x?.name == value);
+          // selectedEquipmentId = equipmentCategoryList[equipmentIndex]?.id ?? 0;
         }
 
         break;
