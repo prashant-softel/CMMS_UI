@@ -606,7 +606,7 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                                                 'Are you sure you want to Update job ?',
                                               );
                                               if (confirmed == true) {
-                                                controller.updateJobCard();
+                                                controller.updateJobCard(fileIds: dropzoneController.fileIds);
 
                                                 Text(
                                                     'Are you sure you want to Update job ?');
@@ -651,7 +651,7 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                                                 'Are you sure you want to Carry Forward Job ?',
                                               );
                                               if (confirmed == true) {
-                                                controller.carryForwardJob();
+                                                controller.carryForwardJob(fileIds: dropzoneController.fileIds);
 
                                                 Text(
                                                     'Are you sure you want to Carry Forward Job ?');
@@ -690,7 +690,7 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                                                     'Are you sure you want to Update job ?',
                                                   );
                                                   if (confirmed == true) {
-                                                    controller.updateJobCard();
+                                                    controller.updateJobCard(fileIds: dropzoneController.fileIds);
 
                                                     Text(
                                                         'Are you sure you want to Update job ?');

@@ -316,7 +316,7 @@ class JobCardDetailsController extends GetxController {
     }
   }
 
-  void updateJobCard() async {
+  void updateJobCard({List<dynamic>? fileIds}) async {
     // isolation asset categories
     try {
       var _isolatedAssetCatList = [];
@@ -356,7 +356,8 @@ class JobCardDetailsController extends GetxController {
         "is_isolation_required": true,
         "isolated_list": _isolatedAssetCatList,
         "loto_list": _lotoAssetList,
-        "employee_list": _employeeList
+        "employee_list": _employeeList,
+        "uploadfile_ids": fileIds,
       };
 
       Map<String, dynamic>? responseMapJobCardUpdated =
@@ -505,7 +506,7 @@ class JobCardDetailsController extends GetxController {
     // print('update  Create GO  data: $carryForwardJCModelJsonString');
   }
 
-  void carryForwardJob() async {
+  void carryForwardJob({List<dynamic>? fileIds}) async {
     int isolationId = 0;
     for (IsolationAssetsCategory isolationAssetsCategory
         in isolationAssetsCategoryList) {
@@ -534,6 +535,7 @@ class JobCardDetailsController extends GetxController {
       "employee_id": _employeeId,
       "normalisedStatus": 1,
       "lotoStatus": lotoStatus,
+      "uploadfile_ids": fileIds,
     };
     Map<String, dynamic>? responseCarryForwardJCModel =
         await jobCardDetailsPresenter.carryForwardJob(
