@@ -22,7 +22,7 @@ class JobCardBinding extends Bindings {
       ),
     );
     Get.lazyPut(
-          () => HomeController(
+      () => HomeController(
         Get.put(
           HomePresenter(
             HomeUsecase(

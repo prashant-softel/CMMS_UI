@@ -414,14 +414,16 @@ class JobCardDetailsController extends GetxController {
     getHistory(facilityId);
   }
 
-  Future<void> startJobCard(int jcCard) async {
+  Future<void> startJobCard(
+      {required int jcCard, List<dynamic>? fileIds}) async {
     await startStopJobCard();
-
-    ///
+    print("filesids: ${fileIds}");
+    Map<String, dynamic> files = UploadFiles(uploadfile_ids: fileIds).toJson();
     if (isJobCardStarted.value == true) {
       Map<String, dynamic>? responseMapJobCardStarted =
           await jobCardDetailsPresenter.startJobCard(
         jcCard: jcCard,
+        files: files,
         isLoading: true,
       );
 
@@ -435,9 +437,6 @@ class JobCardDetailsController extends GetxController {
         await getHistory(facilityId);
       }
     }
-
-    /// Get History
-    // getHistory(facilityId);
   }
 
   void toggleIsNormalizedSwitch(bool value, int index) {
