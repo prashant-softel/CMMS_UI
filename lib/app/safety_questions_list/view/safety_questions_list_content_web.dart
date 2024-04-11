@@ -1126,6 +1126,12 @@ class SafetyQuestionsListContentWeb
                                                         controller
                                                             .isContainerVisible
                                                             .value = true;
+                                                        controller
+                                                            .selectedTypePermit
+                                                            .value = controller
+                                                                .selectedItem
+                                                                ?.permitType ??
+                                                            '';
                                                       },
                                                     ),
                                                     TableActionButton(
