@@ -1081,12 +1081,17 @@ class SafetyQuestionsListContentWeb
                                                     .inputName
                                                     .toString())),
                                                 DataCell(Checkbox(
-                                                  value: controller
-                                                      .isChecked.value,
-                                                  onChanged: (val) {},
+                                                  value:
+                                                      safetyQuestionsListDetails
+                                                                  .isRequired ==
+                                                              1
+                                                          ? true
+                                                          : false,
+                                                  onChanged: (val) {
+                                                    controller.isChecked.value =
+                                                        val!;
+                                                  },
                                                 )),
-                                                // DataCell(Text(
-                                                //     '${safetyQuestionsListDetails.isRequired}')),
                                                 DataCell(Wrap(
                                                   alignment:
                                                       WrapAlignment.center,
