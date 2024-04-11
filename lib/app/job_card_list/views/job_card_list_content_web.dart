@@ -11,7 +11,6 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../navigators/app_pages.dart';
 import '../../theme/color_values.dart';
 import '../../theme/styles.dart';
-import '../../widgets/action_button.dart';
 import '../../widgets/table_action_button.dart';
 
 class JobCardContentWeb extends StatefulWidget {
@@ -86,7 +85,7 @@ class _JobCardContentWebState extends State<JobCardContentWeb> {
                       child: SingleChildScrollView(
                         child: Container(
                           width: Get.width * 7,
-                          height: Get.height,
+                          height: Get.height * 0.86,
                           child: Card(
                             color: Color.fromARGB(255, 245, 248, 250),
                             elevation: 10,
@@ -218,16 +217,9 @@ class _JobCardContentWebState extends State<JobCardContentWeb> {
                                               child: Text("Data Loading......"))
                                           : Expanded(
                                               child: PaginatedDataTable2(
-                                                // border: TableBorder.all(
-                                                //     color: Color.fromARGB(
-                                                //         255, 9, 5, 20)),
-                                                // fixedLeftColumns: 1,
-                                                // dataRowHeight: Get.height * 0.12,
                                                 columnSpacing: 10,
-
-                                                source:
-                                                    dataSource, // Custom DataSource class
-                                                // headingRowHeight: Get.height * 0.12,
+                                                dataRowHeight: 90,
+                                                source: dataSource,
                                                 minWidth: Get.width * 1.2,
                                                 showCheckboxColumn: false,
                                                 rowsPerPage:
@@ -252,7 +244,7 @@ class _JobCardContentWebState extends State<JobCardContentWeb> {
                                                     //  ColumnSize.S,
                                                     controller
                                                         .JobCardIdFilterText,
-                                                    130,
+                                                    200,
                                                   ),
                                                   buildDataColumn(
                                                       "JobId",
@@ -305,12 +297,19 @@ class _JobCardContentWebState extends State<JobCardContentWeb> {
                                                           .EndTimeFilterText,
                                                       200),
                                                   buildDataColumn(
+                                                      "Status",
+                                                      "Status",
+                                                      // ColumnSize.L,
+                                                      controller
+                                                          .PermitStatusFilterText,
+                                                      100),
+                                                  buildDataColumn(
                                                       'Action'.tr,
                                                       'Actions',
                                                       // ColumnSize.L,
                                                       controller
                                                           .ActionFilterText,
-                                                      150),
+                                                      130),
                                                 ],
                                               ),
                                             )
@@ -429,6 +428,8 @@ class JobDataSource extends DataTableSource {
               .toString()
               .toLowerCase()
               .contains(controller.PermitIdFilterText.value.toLowerCase()) &&
+          (Job?.currentStatus ?? '').toString().toLowerCase().contains(
+              controller.PermitStatusFilterText.value.toLowerCase()) &&
           (Job?.permit_no ?? '')
               .toString()
               .toLowerCase()
@@ -460,7 +461,8 @@ class JobDataSource extends DataTableSource {
       },
       cells: [
         // '${JobDetails?.id ?? ''}',
-        'JC${JobDetails?.jobCardId ?? ''}',
+        // 'JC${JobDetails?.jobCardId ?? ''}',
+        "id",
         'JOB${JobDetails?.jobId ?? ''}', '${JobDetails?.permit_id ?? ''}',
         '${JobDetails?.permit_no ?? ''}',
 
@@ -468,28 +470,64 @@ class JobDataSource extends DataTableSource {
         '${JobDetails?.description ?? ''}',
         '${JobDetails?.start_time ?? ''}',
         '${JobDetails?.end_time ?? ''}',
+        '${JobDetails?.currentStatus ?? ''}',
         'Actions',
       ].map((value) {
         return DataCell(
           Padding(
             padding: EdgeInsets.zero,
-            child: (value == 'Actions')
-                ? Wrap(children: [
-                    TableActionButton(
-                      color: ColorValues.viewColor,
-                      icon: Icons.remove_red_eye_outlined,
-                      message: 'view',
-                      onPress: () {
-                        controller.clearStoreData();
-                        int jobCardId = JobDetails?.jobCardId ?? 0;
-                        if (jobCardId != 0) {
-                          Get.toNamed(Routes.jobCard,
-                              arguments: {'JcId': jobCardId});
-                        }
-                      },
-                    ),
-                  ])
-                : Text(value.toString()),
+            child: (value == 'id')
+                ? Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'JC${JobDetails?.jobCardId}',
+                      ),
+                      Dimens.boxHeight10,
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: Container(
+                          padding:
+                              EdgeInsets.symmetric(vertical: 2, horizontal: 5),
+                          margin: EdgeInsets.only(top: 5),
+                          decoration: BoxDecoration(
+                            color: JobDetails!.currentStatus == 151
+                                ? ColorValues.createsColor
+                                : JobDetails.currentStatus == 152
+                                    ? ColorValues.startColor
+                                    : JobDetails.currentStatus == 153
+                                        ? Color.fromARGB(255, 181, 129, 179)
+                                        : JobDetails.currentStatus == 155
+                                            ? ColorValues
+                                                .waitingForApproveStatusColor
+                                            : ColorValues.lightBlueColor,
+                            borderRadius: BorderRadius.circular(5),
+                          ),
+                          child: Text(
+                            ' ${JobDetails.statusShort ?? ''}',
+                            style: TextStyle(color: ColorValues.whiteColor),
+                          ),
+                        ),
+                      ),
+                    ],
+                  )
+                : (value == 'Actions')
+                    ? Wrap(children: [
+                        TableActionButton(
+                          color: ColorValues.viewColor,
+                          icon: Icons.remove_red_eye_outlined,
+                          message: 'view',
+                          onPress: () {
+                            controller.clearStoreData();
+                            int jobCardId = JobDetails?.jobCardId ?? 0;
+                            if (jobCardId != 0) {
+                              Get.toNamed(Routes.jobCard,
+                                  arguments: {'JcId': jobCardId});
+                            }
+                          },
+                        ),
+                      ])
+                    : Text(value.toString()),
           ),
         );
       }).toList(),
