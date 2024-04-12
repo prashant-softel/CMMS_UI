@@ -655,10 +655,16 @@ class PreventiveMaintenanceTaskViewContentWeb
                                               ),
                                             ),
                                       controller.pmtaskViewModel.value
+                                                          ?.status ==
+                                                      169 &&
+                                                  controller.listMrsByTaskId!
+                                                      .isEmpty ||
+                                              controller.pmtaskViewModel.value
                                                       ?.status ==
-                                                  169 &&
-                                              controller
-                                                  .listMrsByTaskId!.isEmpty
+                                                  162 ||
+                                              controller.pmtaskViewModel.value
+                                                      ?.status ==
+                                                  161
                                           ? Dimens.box0
                                           : Container(
                                               margin: Dimens.edgeInsets20,
