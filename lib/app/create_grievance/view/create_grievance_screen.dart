@@ -22,10 +22,10 @@ class CreateGrievancesScreen extends GetView<CreateGrievanceController> {
               elevation: 0,
             )
           : null,
-      drawer: //
-          (Responsive.isMobile(context) || Responsive.isTablet(context))
-              ? HomeDrawer()
-              : null,
+      // drawer: //
+      //     (Responsive.isMobile(context) || Responsive.isTablet(context))
+      //         ? HomeDrawer()
+      //         : null,
       body: Obx(
         () => Stack(
           children: [
@@ -37,10 +37,6 @@ class CreateGrievancesScreen extends GetView<CreateGrievanceController> {
                 height: Get.height,
                 child: Row(
                   children: [
-                    (Responsive.isMobile(context) ||
-                            Responsive.isTablet(context))
-                        ? Dimens.box0
-                        : Container(),
                     Expanded(
                       child: Column(
                         children: [

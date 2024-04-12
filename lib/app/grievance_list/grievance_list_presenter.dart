@@ -1,3 +1,4 @@
+import 'package:cmms/domain/models/grievance_List_model.dart';
 import 'package:cmms/domain/models/grievance_model.dart';
 import 'package:cmms/domain/usecases/grievance_list_usecase.dart';
 
@@ -7,7 +8,7 @@ class GrievanceListPresenter {
 
   ///
 
-  Future<List<GrievanceModel?>?> getGrievanceList({
+  Future<List<GrievanceListModel?>?> getGrievanceList({
     String? auth,
     int? facilityId,
     // int? userId,
