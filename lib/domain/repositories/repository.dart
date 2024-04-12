@@ -2,7 +2,9 @@ import 'dart:convert';
 import 'dart:developer';
 import 'dart:typed_data';
 import 'package:cmms/domain/models/get_mc_task_equipment_model.dart';
+import 'package:cmms/domain/models/grievanceTypeList.dart';
 import 'package:cmms/domain/models/incident_risk_type_model.dart';
+import 'package:cmms/domain/models/grievance_List_model.dart';
 import 'package:cmms/domain/models/module_cleaning_list_plan_model.dart';
 import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/utils/utils.dart';
@@ -3614,7 +3616,7 @@ class Repository {
     }
   }
 
-  Future<List<GrievanceModel?>?> getGrievanceList(
+  Future<List<GrievanceListModel?>?> getGrievanceList(
     String auth,
     int? facilityId,
     bool? isLoading,
@@ -3634,9 +3636,9 @@ class Repository {
       // print({"res.data", res.data});
       if (!res.hasError) {
         final jsonGrievanceModels = jsonDecode(res.data);
-        final List<GrievanceModel> _grievanceModelList = jsonGrievanceModels
-            .map<GrievanceModel>(
-                (m) => GrievanceModel.fromJson(Map<String, dynamic>.from(m)))
+        final List<GrievanceListModel> _grievanceModelList = jsonGrievanceModels
+            .map<GrievanceListModel>((m) =>
+                GrievanceListModel.fromJson(Map<String, dynamic>.from(m)))
             .toList();
 
         return _grievanceModelList;
@@ -3646,6 +3648,31 @@ class Repository {
       }
     } catch (error) {
       print(error.toString());
+      return [];
+    }
+  }
+
+  Future<List<GrievanceType?>?> getGrievanceType(bool? isLoading) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getGrievanceType(
+          auth: auth, isLoading: isLoading);
+
+      if (!res.hasError) {
+        final jsonGrievanceType = jsonDecode(res.data);
+        final List<GrievanceType> _grievanceType = jsonGrievanceType
+            .map<GrievanceType>(
+                (m) => GrievanceType.fromJson(Map<String, dynamic>.from(m)))
+            .toList();
+        return _grievanceType;
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString(), 'getGrievanceType');
+        return null;
+      }
+    } catch (error) {
+      print(error.toString());
+
       return [];
     }
   }
@@ -3686,6 +3713,36 @@ class Repository {
       return Map();
     } catch (error) {
       print(error.toString());
+      return Map();
+    }
+  }
+
+  Future<Map<String, dynamic>> saveGrievance(
+    grievance,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.saveGrievance(
+        auth: auth,
+        grievance: grievance,
+        isLoading: isLoading ?? false,
+      );
+
+      if (!res.hasError) {
+        if (res.errorCode == 200) {
+          var responseMap = json.decode(res.data);
+          return responseMap;
+        }
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString(), ' saveGrievance');
+        return Map();
+      }
+      return Map();
+    } //
+    catch (error) {
+      Utility.showDialog(error.toString(), ' saveGrievance');
       return Map();
     }
   }

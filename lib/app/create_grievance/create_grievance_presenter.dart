@@ -1,7 +1,6 @@
 import 'package:cmms/domain/models/get_asset_data_list_model.dart';
+import 'package:cmms/domain/models/grievanceTypeList.dart';
 import 'package:cmms/domain/models/history_model.dart';
-import 'package:cmms/domain/models/req_order_details_by_id_model.dart';
-
 import 'package:cmms/domain/usecases/create_grievance_usecase.dart';
 
 class CreateGrievancePresenter {
@@ -17,17 +16,9 @@ class CreateGrievancePresenter {
         facilityId: facilityId ?? 0,
         isLoading: isLoading ?? false,
       );
-  Future<GetRODetailsByIDModel?> getRoDetailsByID({
-    bool? isLoading,
-    required int requestID,
-    required int facilityId
-  }) async {
-    return createGrievanceUsecase.getRoDetailsByID(
-      requestID: requestID,
-      facilityId:facilityId,
-      isLoading: isLoading ?? false,
-    );
-  }
+
+  Future<List<GrievanceType?>?> getGrievanceType() async =>
+      await createGrievanceUsecase.getGrievanceType(true);
 
   Future<List<HistoryModel>?> getRoHistory(
     moduleType,
@@ -59,9 +50,19 @@ class CreateGrievancePresenter {
     );
   }
 
-  void saveValue({String? roId}) async {
-    return createGrievanceUsecase.saveValue(roId: roId);
-  }
+  // void saveValue({String? roId}) async {
+  //   return createGrievanceUsecase.saveValue(roId: roId);
+  // }
 
-  Future<String?> getValue() async => await createGrievanceUsecase.getValue();
+  // Future<String?> getValue() async => await createGrievanceUsecase.getValue();
+
+  Future<Map<String, dynamic>?> saveGrievance({
+    grievance,
+    required bool isLoading,
+  }) async {
+    return createGrievanceUsecase.saveGrievance(
+      grievance: grievance,
+      isLoading: isLoading,
+    );
+  }
 }

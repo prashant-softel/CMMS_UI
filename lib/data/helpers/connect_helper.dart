@@ -2828,7 +2828,6 @@ class ConnectHelper {
         'Authorization': 'Bearer $auth',
       },
     );
-
     return responseModel;
   }
 
@@ -3296,7 +3295,7 @@ class ConnectHelper {
     int? requestID,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
-      "RequestOrder/GetRODetailsByID?requestID=$requestID&facility_id=$facilityId",
+      "RequestOrder/GetRODetailsByID?requestID=$requestID",
       Request.get,
       null,
       isLoading ?? false,
@@ -7040,6 +7039,44 @@ class ConnectHelper {
       },
     );
 
+    return responseModel;
+  }
+
+  Future<ResponseModel> getGrievanceType(
+      {String? auth, bool? isLoading}) async {
+    ResponseModel response = ResponseModel(data: '', hasError: true);
+    // print('PermitTypeResponse: $response');
+    try {
+      response = await apiWrapper.makeRequest(
+        'MISMaster/GetGrievanceTypeList',
+        Request.get,
+        null,
+        true,
+        {
+          'Authorization': 'Bearer $auth',
+        },
+      );
+    } catch (error) {
+      print(error);
+    }
+    return response;
+  }
+
+  Future<ResponseModel> saveGrievance({
+    required String auth,
+    grievance,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Grievance/CreateGrievance',
+      Request.post,
+      grievance,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
     return responseModel;
   }
 

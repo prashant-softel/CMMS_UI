@@ -1,4 +1,5 @@
 import 'package:cmms/domain/models/get_asset_data_list_model.dart';
+import 'package:cmms/domain/models/grievanceTypeList.dart';
 import 'package:cmms/domain/models/history_model.dart';
 import 'package:cmms/domain/models/req_order_details_by_id_model.dart';
 import 'package:cmms/domain/repositories/local_storage_keys.dart';
@@ -45,18 +46,17 @@ class CreateGrievanceUsecase {
         facilityId,
         isLoading,
       );
-  Future<GetRODetailsByIDModel?> getRoDetailsByID({
+
+  Future<Map<String, dynamic>> saveGrievance({
+    grievance,
     bool? isLoading,
-    required int facilityId,
-    required int requestID,
   }) async =>
-      await repository.getRoDetailsByID(
-        requestID: requestID,
-        facilityId:facilityId,
-        isLoading: isLoading ?? false,
+      await repository.saveGrievance(
+        grievance,
+        isLoading,
       );
-  void saveValue({String? roId}) async =>
-      repository.saveValue(LocalKeys.roId, roId);
-  Future<String?> getValue() async =>
-      await repository.getStringValue(LocalKeys.roId);
+
+       Future<List<GrievanceType?>?>  getGrievanceType(
+          bool? isLoading) async =>
+      await repository.getGrievanceType(isLoading);
 }

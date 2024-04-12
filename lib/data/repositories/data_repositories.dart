@@ -1823,8 +1823,8 @@ class DataRepository extends DomainRepository {
   }) async =>
       await connectHelper.getRoDetailsByID(
         auth: auth,
-        facilityId: facilityId,
         requestID: requestID,
+        facilityId: facilityId,
         isLoading: isLoading ?? false,
       );
 
@@ -4075,6 +4075,11 @@ class DataRepository extends DomainRepository {
         self_view: self_view,
         isLoading: isLoading ?? false,
       );
+  Future<ResponseModel> getGrievanceType({
+    String? auth,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.getGrievanceType(auth: auth, isLoading: isLoading);
   Future<ResponseModel> getResponsibilityList({
     required String auth,
     bool? isLoading,
@@ -4084,6 +4089,17 @@ class DataRepository extends DomainRepository {
       isLoading: isLoading,
     );
   }
+
+  Future<ResponseModel> saveGrievance({
+    required String auth,
+    grievance,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.saveGrievance(
+        auth: auth,
+        grievance: grievance,
+        isLoading: isLoading ?? false,
+      );
 
   Future<ResponseModel> createBodyInjured({
     auth,
