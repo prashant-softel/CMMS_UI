@@ -64,10 +64,10 @@ android {
 
     signingConfigs {
        release {
-            keyAlias 'release_key_alias'
-            keyPassword 'whAtthefu6k!'
+            keyAlias 'keyCmms'
+            keyPassword 'madhuban'
             storeFile file('../../release-key.jks')
-            storePassword 'whAtthefu6k!' 
+            storePassword 'madhuban' 
        }
    }
    buildTypes {
