@@ -7,22 +7,22 @@ String mrslistModelToJson(List<MrsListModel> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
 class MrsListModel {
-  int? id;
-  int? requested_by_emp_ID;
+  dynamic? id;
+  dynamic? requested_by_emp_ID;
   dynamic approver_name;
   String? requestd_date;
   dynamic returnDate;
   String? approval_date;
-  int? approval_status;
+  dynamic? approval_status;
   dynamic approval_comment;
   dynamic remarks;
   dynamic requested_by_name;
-  int? status;
+  dynamic? status;
   String? status_short;
   String? status_long;
   String? activity;
   String? whereUsedType;
-  int? whereUsedTypeId;
+  dynamic? whereUsedTypeId;
   List<CmmsItems>? cmmrsItems;
 
   MrsListModel(
@@ -46,7 +46,7 @@ class MrsListModel {
 
   factory MrsListModel.fromJson(Map<String, dynamic> parsedJson) {
     var list = parsedJson['cmmrsItems'] as List;
-    print(list.runtimeType);
+    // prdynamic(list.runtimeType);
     List<CmmsItems> cmmrsItems =
         list.map((i) => CmmsItems.fromJson(i)).toList();
 
@@ -93,29 +93,29 @@ class MrsListModel {
 }
 
 class CmmsItems {
-  int? id;
+  dynamic id;
   dynamic return_remarks;
-  int? mrs_return_ID;
+  dynamic mrs_return_ID;
   dynamic finalRemark;
-  int? asset_item_ID;
+  dynamic asset_item_ID;
   String? asset_MDM_code;
   dynamic serial_number;
-  int? returned_qty;
-  int? available_qty;
-  int? used_qty;
-  int? issued_qty;
-  int? flag;
+  dynamic returned_qty;
+  dynamic available_qty;
+  dynamic used_qty;
+  dynamic issued_qty;
+  dynamic flag;
   dynamic returnDate;
-  int? approval_status;
+  dynamic approval_status;
   String? approved_date;
   String? issued_date;
-  int? requested_qty;
+  dynamic requested_qty;
   String? approval_required;
   String? asset_name;
-  int? asset_type_ID;
+  dynamic asset_type_ID;
   String? asset_type;
   String? file_path;
-  int? asset_master_id;
+  dynamic asset_master_id;
   int? status;
   String? status_short;
 
