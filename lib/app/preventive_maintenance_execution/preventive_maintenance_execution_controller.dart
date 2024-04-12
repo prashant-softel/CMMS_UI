@@ -217,7 +217,11 @@ class PreventiveMaintenanceExecutionController extends GetxController {
             "value": '${element.checklist_name}',
             'executionDone': '${element.completedBy_id}'
           },
-          {'key': "executionDone", 'value': '${element.completedBy_id}'},
+          {
+            'key': "executionDone",
+            'value': '${element.completedBy_id}',
+            'completed': '${element.completedBy_name}'
+          },
           {'key': "dropdown", "value": ''},
         ]);
         // Add to scheduleCheckPoints if completedBy_id != 0

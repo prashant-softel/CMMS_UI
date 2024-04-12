@@ -342,6 +342,15 @@ class PreventiveMaintenanceTaskViewContentWeb
                                                             FontWeight.bold),
                                                   )),
                                                   DataColumn2(
+                                                      // fixedWidth: 300,
+                                                      label: Text(
+                                                    "Execution Status",
+                                                    style: TextStyle(
+                                                        fontSize: 15,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  )),
+                                                  DataColumn2(
                                                       fixedWidth: 200,
                                                       label: Text(
                                                         "Failure Score",
@@ -380,6 +389,13 @@ class PreventiveMaintenanceTaskViewContentWeb
                                                                 index]
                                                             ?.checklist_name ??
                                                         '')),
+                                                    DataCell(Text(controller
+                                                                .scheduleCheckPoint?[
+                                                                    index]
+                                                                ?.completedBy_id ==
+                                                            0
+                                                        ? ""
+                                                        : 'Execution done by ${controller.scheduleCheckPoint?[index]?.completedBy_name ?? ''}')),
                                                     DataCell(Text(
                                                         // controller
                                                         //       .scheduleCheckPoint?[
@@ -639,10 +655,16 @@ class PreventiveMaintenanceTaskViewContentWeb
                                               ),
                                             ),
                                       controller.pmtaskViewModel.value
+                                                          ?.status ==
+                                                      169 &&
+                                                  controller.listMrsByTaskId!
+                                                      .isEmpty ||
+                                              controller.pmtaskViewModel.value
                                                       ?.status ==
-                                                  169 &&
-                                              controller
-                                                  .listMrsByTaskId!.isEmpty
+                                                  162 ||
+                                              controller.pmtaskViewModel.value
+                                                      ?.status ==
+                                                  161
                                           ? Dimens.box0
                                           : Container(
                                               margin: Dimens.edgeInsets20,
