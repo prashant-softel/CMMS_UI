@@ -378,6 +378,7 @@ class NewPermitController extends GetxController {
   BehaviorSubject<int> _facilityId = BehaviorSubject.seeded(0);
   Stream<int> get facilityId$ => _facilityId.stream;
   int get facilityId1 => _facilityId.value;
+  List<dynamic>? files = [0, 0];
 
   Map<dynamic, dynamic> employee_map = {};
   Map<int, dynamic> loto_map = {};
@@ -527,8 +528,8 @@ class NewPermitController extends GetxController {
       }
       if (_permitId == null || _permitId == "" || _permitId == "null") {
         var dataFromPreviousScreen = Get.arguments;
-
         permitId.value = dataFromPreviousScreen['permitId'];
+        print("permit id: ${permitId.value}");
         isChecked.value = dataFromPreviousScreen['isChecked'];
         jobModel = dataFromPreviousScreen['jobModel'];
         pmtaskViewModel = dataFromPreviousScreen['pmTaskModel'];
@@ -682,6 +683,10 @@ class NewPermitController extends GetxController {
       equipmentNameSelected(nameList);
       print("equipment names id's: $selectedEquipmentNameIdList");
       file_list?.value = newPermitDetailsModel.value?.file_list ?? [];
+      List<int?> fileid = file_list!.map((element) => element!.id).toList();
+      print("files while getting ${fileid}");
+      files!.addAll(fileid);
+      print("files while getting ${files}");
       // workPermitRemarkTextCtrlr.text =
       //     newPermitDetailsModel.value?.physical_iso_remark ?? "";
       // print('EmployeeList:${listEmployee}');
@@ -1677,6 +1682,10 @@ class NewPermitController extends GetxController {
 
         rowTBTTrainingOtherPersonItems.add(item);
       });
+      if (fileIds != null) {
+        files?.addAll(fileIds);
+      }
+      print("files while updating ${files}");
       // List<LotoOtherDetails> rowItemLotoOtherDetails = [];
       // rowItemLotoOtherDetails.forEach((element) {
       //   LotoOtherDetails item = LotoOtherDetails(
@@ -1733,7 +1742,7 @@ class NewPermitController extends GetxController {
           longitude: 0,
           block_ids: selectedEmployeeNameIdList,
           category_ids: selectedEquipmentCategoryIdList,
-          uploadfile_ids: fileIds,
+          uploadfile_ids: files,
           is_loto_required: isToggleOn.value,
           isolated_category_ids: selectedEquipmentIsolationIdList,
           Loto_list: loto_map_list,
@@ -1854,6 +1863,12 @@ class NewPermitController extends GetxController {
     Get.toNamed(
       Routes.newPermit,
     );
+  }
+
+  void removeImage(int? num, int index) {
+    files!.remove(num);
+    file_list!.removeAt(index);
+    print('removed file ids ${files}');
   }
 
   loadPermitDetails(jobModel) {
