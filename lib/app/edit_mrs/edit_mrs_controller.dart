@@ -101,6 +101,7 @@ class EditMrsController extends GetxController {
             {'key': "Image", "value": '${element.approved_date}'},
             {'key': "Available_Qty", "value": ''},
             {'key': "Requested_Qty", "value": '${element.requested_qty}'},
+            {'key': "Action ", "value": ''},
           ],
         );
         // dropdownMapperData = element.approval_required;
@@ -139,6 +140,7 @@ class EditMrsController extends GetxController {
       {'key': "Image", "value": ''},
       {'key': "Available_Qty", "value": ''},
       {'key': "Requested_Qty", "value": ''},
+      {'key': "Action ", "value": ''},
     ]);
   }
 
