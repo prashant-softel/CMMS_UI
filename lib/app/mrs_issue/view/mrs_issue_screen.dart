@@ -31,7 +31,7 @@ class MrsIssueScreen extends GetView<MrsIssueController> {
             children: [
               (Responsive.isMobile(context) || Responsive.isTablet(context))
                   ? Dimens.box0
-                  : HomeDrawer(),
+                  : Container(),
               Expanded(
                 child: Column(
                   children: [
