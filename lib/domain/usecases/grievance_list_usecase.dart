@@ -7,18 +7,21 @@ class GrievanceListUsecase {
   GrievanceListUsecase(this.repository);
   Repository repository;
 
-  Future<List<GrievanceListModel?>?> getGrievance({
+  Future<List<GrievanceListModel?>?> getGrievanceList({
     required String auth,
     int? facilityId,
-    bool? self_view,
     bool? isLoading,
+    bool? self_view,
+    String? start_date,
+    String? end_date,
   }) async =>
       await repository.getGrievanceList(
         auth,
         facilityId,
-        self_view,
         isLoading,
+        self_view,
+        start_date,
+        end_date,
       );
   void clearValue() async => repository.clearData(LocalKeys.jobId);
 }
-

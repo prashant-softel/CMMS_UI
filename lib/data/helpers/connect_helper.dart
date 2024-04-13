@@ -7024,13 +7024,19 @@ class ConnectHelper {
 // <<<<<<< HEAD
   Future<ResponseModel> getGrievanceList({
     required String auth,
-    bool? isLoading,
     int? facilityId,
+    bool? isLoading,
     bool? self_view,
-    int? userId,
+    String? start_date,
+    String? end_date,
   }) async {
+    int num = self_view! ? 1 : 0;
+    var startDateParam = (start_date != null) ? 'startDate=$start_date&' : '';
+    var endDateParam = (end_date != '') ? 'endDate=$end_date' : '';
     var responseModel = await apiWrapper.makeRequest(
-      'Grievance/GetGrievanceList?facility_id=$facilityId&userId=$userId&self_view=$self_view',
+      'Grievance/GetGrievanceList?facilityId=$facilityId&self_view=$num&status_id=231&' +
+          startDateParam +
+          endDateParam,
       Request.get,
       null,
       isLoading ?? true,

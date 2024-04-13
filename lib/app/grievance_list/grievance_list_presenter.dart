@@ -11,15 +11,17 @@ class GrievanceListPresenter {
   Future<List<GrievanceListModel?>?> getGrievanceList({
     String? auth,
     int? facilityId,
-    // int? userId,
+    required bool isLoading,
     required bool self_view,
-    bool? isLoading,
+    String? start_date,
+    required String end_date,
   }) async =>
-      await grievanceUsecase.getGrievance(
+      await grievanceUsecase.getGrievanceList(
         auth: auth ?? "",
-        facilityId: facilityId ?? 0,
+        facilityId: facilityId,
+        isLoading: isLoading,
         self_view: self_view,
-        isLoading: isLoading ?? false,
+        start_date: start_date,
+        end_date: end_date,
       );
-  void clearValue() async => grievanceUsecase.clearValue();
 }

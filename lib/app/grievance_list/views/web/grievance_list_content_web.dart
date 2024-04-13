@@ -1,393 +1,391 @@
+import 'package:cmms/app/home/home_screen.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
+import 'package:cmms/app/theme/dimens.dart';
 import 'package:cmms/app/theme/styles.dart';
+import 'package:cmms/app/widgets/custom_richtext.dart';
+import 'package:cmms/app/widgets/date_picker.dart';
+import 'package:cmms/domain/models/grievance_List_model.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 import '../../../theme/color_values.dart';
 import '../../../widgets/action_button.dart';
 import '../../../widgets/table_action_button.dart';
 import '../../grievance_list_controller.dart';
 
-final List<Map<dynamic, dynamic>> grievanceData = [
-  {
-    "Month": "April",
-    "Grievance Type": "Contractor Workforce",
-    "Date": "2023-4-2",
-    "Concern": "Test",
-    "Resolved at Level": "Level 1",
-    "Grievance Close Date": "2023-4-12",
-    "Status": "Resolved"
-  },
-  {
-    "Month": "May",
-    "Grievance Type": "Local Communities",
-    "Date": "2023-5-",
-    "Concern": "Test",
-    "Resolved at Level": "Level 2",
-    "Grievance Close Date": "2023-5-12",
-    "Status": "Pending"
-  },
-  {
-    "Month": "June",
-    "Grievance Type": "Contractor Workforce",
-    "Date": "2023-6-2",
-    "Concern": "Test",
-    "Resolved at Level": "Level 3",
-    "Grievance Close Date": "2023-6-12",
-    "Status": "Ongoing"
-  },
-  {
-    "Month": "July",
-    "Grievance Type": "Local Communities",
-    "Date": "2023-7-2",
-    "Concern": "Test",
-    "Resolved at Level": "Level 1",
-    "Grievance Close Date": "2023-7-12",
-    "Status": "Resolved"
-  },
-  {
-    "Month": "August",
-    "Grievance Type": "Contractor Workforce",
-    "Date": "2023-8-3",
-    "Concern": "Test",
-    "Resolved at Level": "Level 2",
-    "Grievance Close Date": "2023-8-12",
-    "Status": "Resolved"
-  },
-  {
-    "Month": "September",
-    "Grievance Type": "Local Communities",
-    "Date": "2023-9-3",
-    "Concern": "Test",
-    "Resolved at Level": "Level 3",
-    "Grievance Close Date": "2023-9-12",
-    "Status": "Pending"
-  },
-  {
-    "Month": "October",
-    "Grievance Type": "Local Communities",
-    "Date": "2023-10-3",
-    "Concern": "Test",
-    "Resolved at Level": "Level 1",
-    "Grievance Close Date": "2023-10-12",
-    "Status": "Resolved"
-  },
-  {
-    "Month": "November",
-    "Grievance Type": "Contractor Workforce",
-    "Date": "2023-11-23",
-    "Concern": "Test",
-    "Resolved at Level": "Level 2",
-    "Grievance Close Date": "2023-11-12",
-    "Status": "Resolved"
-  },
-  {
-    "Month": "December",
-    "Grievance Type": "Contractor Workforce",
-    "Date": "2023-12-23",
-    "Concern": "Test",
-    "Resolved at Level": "Level 3",
-    "Grievance Close Date": "2023-12-12",
-    "Status": "Ongoing"
-  },
-  {
-    "Month": "January",
-    "Grievance Type": "Local Communities",
-    "Date": "2023-1-23",
-    "Concern": "Test",
-    "Resolved at Level": "Level 1",
-    "Grievance Close Date": "2023-1-12",
-    "Status": "Resolved"
-  },
-  {
-    "Month": "February",
-    "Grievance Type": "Contractor Workforce",
-    "Date": "2023-2-23",
-    "Concern": "Test",
-    "Resolved at Level": "Level 2",
-    "Grievance Close Date": "2023-2-12",
-    "Status": "Ongoing"
-  },
-  {
-    "Month": "March",
-    "Grievance Type": "Local Communities",
-    "Date": "2023-3-23",
-    "Concern": "Test",
-    "Resolved at Level": "Level 3",
-    "Grievance Close Date": "2023-3-12",
-    "Status": "Pending"
-  },
-];
-
 class GrievanceListContentWeb extends StatelessWidget {
   GrievanceListContentWeb({Key? key});
-
-  ///
   Widget build(BuildContext context) {
     return GetBuilder<GrievanceController>(
-      id: "stock_Mangement_Date",
+      id: "grievance_list",
       builder: (controller) {
-        return SelectionArea(
-          child: SingleChildScrollView(
-            child: Column(children: [
-              HeaderWidget(),
-              Container(
-                height: 45,
-                decoration: BoxDecoration(
-                    border: Border.all(
-                        color: Color.fromARGB(255, 227, 224, 224), width: 1),
-                    boxShadow: [
-                      BoxShadow(
-                        color:
-                            Color.fromARGB(255, 236, 234, 234).withOpacity(0.5),
-                        spreadRadius: 2,
-                        blurRadius: 5,
-                        offset: Offset(0, 2),
-                      )
-                    ]),
-                child: Row(
+        return Obx(
+          () => SelectionArea(
+            child: Stack(
+              children: [
+                Column(
                   children: [
-                    Icon(
-                      Icons.home,
-                      color: ColorValues.greyLightColor,
-                    ),
-                    InkWell(
-                      onTap: () {
-                        Get.offNamed(Routes.home);
-                      },
-                      child: Text(
-                        "DASHBOARD",
-                        style: Styles.greyLight14,
-                      ),
-                    ),
-                    InkWell(
-                      onTap: () {
-                        Get.offNamed(Routes.misDashboard);
-                      },
-                      child: Text(
-                        " / MIS",
-                        style: Styles.greyLight14,
-                      ),
-                    ),
-                    Text(
-                      " / GRIEVANCE LIST",
-                      style: Styles.greyLight14,
-                    )
-                  ],
-                ),
-              ),
-              Stack(children: [
-                Container(
-                    width: Get.width * 7,
-                    margin: EdgeInsets.only(left: 10, top: 20, right: 10),
-                    height: Get.height,
-                    child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                    HeaderWidget(),
+                    Container(
+                      height: 45,
+                      decoration: BoxDecoration(
+                          border: Border.all(
+                              color: Color.fromARGB(255, 227, 224, 224),
+                              width: 1),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Color.fromARGB(255, 236, 234, 234)
+                                  .withOpacity(0.5),
+                              spreadRadius: 2,
+                              blurRadius: 5,
+                              offset: Offset(0, 2),
+                            )
+                          ]),
+                      child: Row(
                         children: [
-                          Expanded(
-                              child: SingleChildScrollView(
-                            child: Container(
-                                margin: EdgeInsets.only(
-                                    left: 10, top: 10, right: 10),
-                                child: Column(
-                                  children: [
-                                    Card(
-                                        color:
-                                            Color.fromARGB(255, 245, 248, 250),
-                                        elevation: 10,
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(10.0),
+                          Icon(
+                            Icons.home,
+                            color: ColorValues.greyLightColor,
+                          ),
+                          InkWell(
+                            onTap: () {
+                              Get.offNamed(Routes.home);
+                            },
+                            child: Text(
+                              "DASHBOARD",
+                              style: Styles.greyLight14,
+                            ),
+                          ),
+                          InkWell(
+                            onTap: () {
+                              Get.offNamed(Routes.misDashboard);
+                            },
+                            child: Text(
+                              " / MIS",
+                              style: Styles.greyLight14,
+                            ),
+                          ),
+                          Text(
+                            " / GRIEVANCE LIST",
+                            style: Styles.greyLight14,
+                          )
+                        ],
+                      ),
+                    ),
+                    Expanded(
+                      child: SingleChildScrollView(
+                        child: Container(
+                          width: Get.width * 7,
+                          height: Get.height * 0.85,
+                          margin: EdgeInsets.only(left: 10, top: 10, right: 10),
+                          child: Card(
+                            color: Color.fromARGB(255, 245, 248, 250),
+                            elevation: 10,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10.0),
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Row(children: [
+                                  Padding(
+                                    padding: EdgeInsets.only(
+                                      left: 20,
+                                      top: 20,
+                                    ),
+                                    child: Text(
+                                      "Grievance List",
+                                      style: Styles.blackBold16,
+                                    ),
+                                  ),
+                                  Spacer(),
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 20),
+                                    child: Row(
+                                      children: [
+                                        CustomRichText(title: 'Date Range'),
+                                        Dimens.boxWidth10,
+                                        CustomTextFieldForStock(
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width /
+                                              5,
+                                          numberTextField: true,
+                                          onTap: () {
+                                            controller
+                                                    .openFromDateToStartDatePicker =
+                                                !controller
+                                                    .openFromDateToStartDatePicker;
+                                            controller
+                                                .update(['grievance_list']);
+                                          },
+                                          hintText:
+                                              '${controller.formattedFromdate.toString()} - ${controller.formattedTodate.toString()}',
                                         ),
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Row(children: [
-                                              Padding(
-                                                padding: EdgeInsets.only(
-                                                  left: 20,
-                                                  top: 20,
-                                                ),
-                                                child: Text(
-                                                  "Grievance List",
-                                                  style: Styles.blackBold16,
-                                                ),
+                                      ],
+                                    ),
+                                  ),
+                                  Dimens.boxWidth10,
+                                  Padding(
+                                      padding:
+                                          EdgeInsets.only(top: 20, right: 20),
+                                      child: Row(
+                                        children: [
+                                          ActionButton(
+                                            icon: Icons.add,
+                                            label: "Add New",
+                                            onPressed: () {
+                                              Get.offNamed(Routes.addGrievance);
+                                            },
+                                            color: ColorValues.addNewColor,
+                                          ),
+                                        ],
+                                      ))
+                                ]),
+                                Divider(
+                                  color: ColorValues.greyLightColor,
+                                ),
+                                Row(
+                                  children: [
+                                    PopupMenuButton<String>(
+                                      tooltip: "",
+                                      elevation: 25.0,
+                                      child: Container(
+                                        height: 35,
+                                        margin: EdgeInsets.only(left: 10),
+                                        padding: EdgeInsets.only(
+                                            top: 4,
+                                            bottom: 4,
+                                            right: 8,
+                                            left: 8),
+                                        decoration: BoxDecoration(
+                                            color:
+                                                ColorValues.appLightBlueColor,
+                                            borderRadius:
+                                                BorderRadius.circular(5),
+                                            boxShadow: [
+                                              BoxShadow(
+                                                color: Colors.black26,
+                                                offset: const Offset(4.0, 2.0),
+                                                blurRadius: 5.0,
+                                                spreadRadius: 1.0,
                                               ),
-                                              Spacer(),
-                                              Padding(
-                                                  padding: EdgeInsets.only(
-                                                      top: 20, right: 20),
-                                                  child: Row(
-                                                    children: [
-                                                      ActionButton(
-                                                        icon: Icons.add,
-                                                        label: "Add New",
-                                                        onPressed: () {
-                                                          Get.offNamed(Routes
-                                                              .addGrievance);
-                                                        },
-                                                        color: ColorValues
-                                                            .addNewColor,
-                                                      ),
-                                                    ],
-                                                  ))
                                             ]),
-                                            Divider(
-                                              color: ColorValues.greyLightColor,
-                                            ),
-                                            Container(
-                                              color: Color.fromARGB(
-                                                  255, 245, 248, 250),
-                                              width: Get.width,
-                                              height: Get.height,
-                                              child: Padding(
-                                                  padding:
-                                                      const EdgeInsets.all(16),
-                                                  child: DataTable2(
-                                                    // fixedLeftColumns: 1,
-                                                    headingRowHeight: 70,
-                                                    columnSpacing: 12,
-                                                    horizontalMargin: 12,
-                                                    headingRowColor:
-                                                        MaterialStateColor
-                                                            .resolveWith(
-                                                      (states) {
-                                                        return ColorValues
-                                                            .lightGreyColor;
-                                                      },
-                                                    ),
-                                                    columns: [
-                                                      DataColumn2(
-                                                        // fixedWidth: 70,
-                                                        label: Text(
-                                                          'Month',
-                                                          style: Styles
-                                                              .blackBold14,
-                                                        ),
-                                                        // size: ColumnSize.L,
-                                                      ),
-                                                      DataColumn2(
-                                                        // fixedWidth: 110,
-                                                        label: Text(
-                                                          'Grievance Type',
-                                                          style: Styles
-                                                              .blackBold14,
-                                                        ),
-                                                        // size: ColumnSize.L,
-                                                      ),
-                                                      DataColumn2(
-                                                        // fixedWidth: 160,
-                                                        label: Text(
-                                                          'Date',
-                                                          style: Styles
-                                                              .blackBold14,
-                                                        ),
-                                                        // size: ColumnSize.L,
-                                                      ),
-                                                      DataColumn2(
-                                                        // fixedWidth: 110,
-                                                        label: Text(
-                                                          'Concern',
-                                                          style: Styles
-                                                              .blackBold14,
-                                                        ),
-                                                        // size: ColumnSize.L,
-                                                      ),
-                                                      DataColumn2(
-                                                        // fixedWidth: 90,
-                                                        label: Text(
-                                                          'Resolved at\n Level',
-                                                          style: Styles
-                                                              .blackBold14,
-                                                        ),
-                                                        // size: ColumnSize.L,
-                                                      ),
-                                                      DataColumn2(
-                                                        // fixedWidth: 90,
-                                                        label: Text(
-                                                          'Grievance Close\n Date',
-                                                          style: Styles
-                                                              .blackBold14,
-                                                        ),
-                                                        // size: ColumnSize.L,
-                                                      ),
-                                                      DataColumn2(
-                                                        // fixedWidth: 90,
-                                                        label: Text(
-                                                          'Status',
-                                                          style: Styles
-                                                              .blackBold14,
-                                                        ),
-                                                        // size: ColumnSize.L,
-                                                      ),
-                                                      DataColumn2(
-                                                          label: Text('Action',
-                                                              style: Styles
-                                                                  .blackBold14))
-                                                    ],
-                                                    rows: grievanceData.map(
-                                                      (data) {
-                                                        return DataRow(
-                                                          cells: [
-                                                            DataCell(Text(data[
-                                                                'Month'
-                                                                    .toString()])),
-                                                            DataCell(Text(data[
-                                                                'Grievance Type'])),
-                                                            DataCell(Text(
-                                                                data['Date'])),
-                                                            DataCell(Text(data[
-                                                                'Concern'])),
-                                                            DataCell(Text(data[
-                                                                'Resolved at Level'])),
-                                                            DataCell(Text(data[
-                                                                'Grievance Close Date'
-                                                                    .toString()])),
-                                                            DataCell(Text(data[
-                                                                'Status'])),
-                                                            DataCell(
-                                                              Row(
-                                                                children: [
-                                                                  TableActionButton(
-                                                                    color: ColorValues
-                                                                        .viewColor,
-                                                                    icon: Icons
-                                                                        .remove_red_eye_outlined,
-                                                                    message:
-                                                                        'View',
-                                                                    onPress:
-                                                                        () {},
-                                                                  ),
-                                                                  TableActionButton(
-                                                                    color: ColorValues
-                                                                        .editColor,
-                                                                    icon: Icons
-                                                                        .edit,
-                                                                    message:
-                                                                        'Edit',
-                                                                    onPress:
-                                                                        () {},
-                                                                  ),
-                                                                ],
-                                                              ),
+                                        child: Text(
+                                          'Column Visibility',
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w400,
+                                          ),
+                                        ),
+                                      ),
+                                      itemBuilder: (BuildContext context) =>
+                                          <PopupMenuEntry<String>>[]..addAll(
+                                              controller.columnVisibility.value
+                                                  .entries
+                                                  .map(
+                                                (e) {
+                                                  return PopupMenuItem<String>(
+                                                    child:
+                                                        ValueListenableBuilder(
+                                                      valueListenable:
+                                                          controller
+                                                              .columnVisibility,
+                                                      builder: (context, value,
+                                                          child) {
+                                                        return Row(
+                                                          children: [
+                                                            Checkbox(
+                                                              value:
+                                                                  value[e.key],
+                                                              onChanged:
+                                                                  (newValue) {
+                                                                controller
+                                                                    .setColumnVisibility(
+                                                                        e.key,
+                                                                        newValue!);
+                                                              },
                                                             ),
+                                                            Text(e.key),
                                                           ],
                                                         );
                                                       },
-                                                    ).toList(),
-                                                  )),
-                                            )
-                                          ],
-                                        ))
+                                                    ),
+                                                  );
+                                                },
+                                              ),
+                                            ),
+                                      onSelected: (String value) {
+                                        // Handle column selection
+                                      },
+                                    ),
+                                    // Container(
+                                    //   decoration:
+                                    //       BoxDecoration(boxShadow: [
+                                    //     BoxShadow(
+                                    //       color: Colors.black26,
+                                    //       offset: const Offset(2.0, 1.0),
+                                    //       blurRadius: 5.0,
+                                    //       spreadRadius: 1.0,
+                                    //     )
+                                    //   ]),
+                                    //   height: 35,
+                                    //   margin: EdgeInsets.only(left: 10),
+                                    //   child: CustomElevatedButton(
+                                    //       backgroundColor: ColorValues
+                                    //           .appLightBlueColor,
+                                    //       onPressed: () {
+                                    //         // controller.export();
+                                    //       },
+                                    //       text: 'Excel'),
+                                    // ),
+                                    Spacer(),
+                                    Container(
+                                      width: 200,
+                                      height: 35,
+                                      margin: Dimens.edgeInsets0_0_16_0,
+                                      child: TextField(
+                                        style: GoogleFonts.lato(
+                                          textStyle: TextStyle(
+                                              fontSize: 16.0,
+                                              height: 1.0,
+                                              color: Colors.black),
+                                        ),
+                                        // onChanged: (value) =>
+                                        //     controller.search(value),
+                                        decoration: InputDecoration(
+                                          enabledBorder:
+                                              const OutlineInputBorder(
+                                            borderSide: const BorderSide(
+                                                color: Colors.grey, width: 0.0),
+                                          ),
+                                          focusedBorder:
+                                              const OutlineInputBorder(
+                                            borderSide: const BorderSide(
+                                                color: Colors.grey, width: 0.0),
+                                          ),
+                                          contentPadding:
+                                              Dimens.edgeInsets10_0_0_0,
+                                          hintText: 'search'.tr,
+                                          hintStyle: Styles.grey12,
+                                        ),
+                                      ),
+                                    ),
                                   ],
-                                )),
-                          ))
-                        ]))
-              ]),
-            ]),
+                                ),
+                                Dimens.boxHeight20,
+                                controller.grievanceList.isEmpty == true &&
+                                        controller.isLoading == false
+                                    ? Center(child: Text('No data'))
+                                    : controller.isLoading.value == true
+                                        ? Center(
+                                            child: Text("Data Loading......"))
+                                        : Expanded(
+                                            child: ValueListenableBuilder(
+                                              valueListenable:
+                                                  controller.columnVisibility,
+                                              builder: (context, value, child) {
+                                                final dataSource =
+                                                    GrievanceListDataSource(
+                                                        controller);
+                                                return PaginatedDataTable2(
+                                                  columnSpacing: 10,
+                                                  dataRowHeight:
+                                                      Get.height * 0.12,
+                                                  source:
+                                                      dataSource, // Custom DataSource class
+                                                  // headingRowHeight:
+                                                  // Get.height * 0.12,
+                                                  minWidth:
+                                                      3000, //Get.width * 1.2,
+                                                  showCheckboxColumn: false,
+                                                  rowsPerPage:
+                                                      10, // Number of rows per page
+                                                  availableRowsPerPage: [
+                                                    10,
+                                                    20,
+                                                    30,
+                                                    50
+                                                  ],
+                                                  columns: [
+                                                    for (var entry
+                                                        in value.entries)
+                                                      if (entry.value)
+                                                        buildDataColumn(
+                                                            entry.key,
+                                                            controller
+                                                                    .filterText[
+                                                                entry.key]!
+                                                            // controller
+                                                            //         .columnwidth[
+                                                            //     entry
+                                                            //         .key],
+                                                            ),
+                                                    buildDataColumn(
+                                                        'Actions',
+                                                        controller
+                                                            .ActionFilterText
+                                                        //  150,
+                                                        ),
+                                                  ],
+                                                );
+                                              },
+                                            ),
+                                          )
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                if (controller.openFromDateToStartDatePicker)
+                  Positioned(
+                    right: 230,
+                    top: 90,
+                    child: DatePickerWidget(
+                      selectionMode: DateRangePickerSelectionMode.range,
+                      monthCellStyle: DateRangePickerMonthCellStyle(
+                        todayCellDecoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: ColorValues.appDarkBlueColor),
+                      ), // last date of this year
+                      // controller: DateRangePickerController(),
+                      initialSelectedRange: PickerDateRange(
+                        controller.fromDate.value,
+                        controller.toDate.value,
+                      ),
+
+                      onSubmit: (value) {
+                        print('po valu ${value.toString()}');
+                        PickerDateRange? data = value as PickerDateRange;
+
+                        var pickUpDate =
+                            DateTime.parse(data.startDate.toString());
+                        controller.fromDate.value = pickUpDate;
+                        var dropDate = DateTime.parse(data.endDate.toString());
+                        dropDate != null
+                            ? controller.toDate.value = dropDate
+                            : controller.toDate.value = pickUpDate;
+
+                        controller.getGrievanceListByDate();
+                        controller.openFromDateToStartDatePicker =
+                            !controller.openFromDateToStartDatePicker;
+                        controller.update(['grievance_list']);
+
+                        // Get.toNamed(
+                        //   Routes.stockManagementGoodsOrdersScreen,
+                        // );
+                      },
+                    ),
+                  ),
+              ],
+            ),
           ),
         );
       },
@@ -401,49 +399,49 @@ DataColumn2 buildDataColumn(
 
   /// ColumnSize columnSize,
   RxString filterText,
-  double? fixedWidth,
+  //double? fixedWidth,
   //  {required Function(String) onSearchCallBack}
 ) {
   return //
       DataColumn2(
     // size: columnSize,
-    fixedWidth: fixedWidth,
+    //fixedWidth: fixedWidth,
 
     label: //
         Column(
             mainAxisAlignment: MainAxisAlignment.center, //
             children: [
-          SizedBox(
-            height: Get.height * 0.05,
-            child: TextField(
-              style: GoogleFonts.lato(
-                textStyle:
-                    TextStyle(fontSize: 16.0, height: 1.0, color: Colors.black),
-              ),
-              onChanged: (value) {
-                filterText.value = value;
-                //   onSearchCallBack(value);
-              },
-              textAlign: TextAlign.left,
-              decoration: InputDecoration(
-                hintText: 'Filter',
-                contentPadding:
-                    EdgeInsets.fromLTRB(5, 0, 5, 0), // Reduced vertical padding
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(5),
-                  borderSide: BorderSide(color: Colors.black),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(5),
-                  borderSide: BorderSide(color: Colors.black),
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(5),
-                  borderSide: BorderSide(color: Colors.black),
-                ),
-              ),
-            ),
-          ),
+          // SizedBox(
+          //   height: Get.height * 0.05,
+          //   child: TextField(
+          //     style: GoogleFonts.lato(
+          //       textStyle:
+          //           TextStyle(fontSize: 16.0, height: 1.0, color: Colors.black),
+          //     ),
+          //     onChanged: (value) {
+          //       filterText.value = value;
+          //       //   onSearchCallBack(value);
+          //     },
+          //     textAlign: TextAlign.left,
+          //     decoration: InputDecoration(
+          //       hintText: 'Filter',
+          //       contentPadding:
+          //           EdgeInsets.fromLTRB(5, 0, 5, 0), // Reduced vertical padding
+          //       border: OutlineInputBorder(
+          //         borderRadius: BorderRadius.circular(5),
+          //         borderSide: BorderSide(color: Colors.black),
+          //       ),
+          //       focusedBorder: OutlineInputBorder(
+          //         borderRadius: BorderRadius.circular(5),
+          //         borderSide: BorderSide(color: Colors.black),
+          //       ),
+          //       enabledBorder: OutlineInputBorder(
+          //         borderRadius: BorderRadius.circular(5),
+          //         borderSide: BorderSide(color: Colors.black),
+          //       ),
+          //     ),
+          //   ),
+          // ),
           Align(
             alignment: Alignment.centerLeft,
             child: Text(
@@ -454,4 +452,76 @@ DataColumn2 buildDataColumn(
         ]),
     // ),
   );
+}
+
+class GrievanceListDataSource extends DataTableSource {
+  GrievanceListDataSource(this.controller);
+  late List<GrievanceListModel?> grievanceListModel;
+  late final GrievanceController controller;
+
+  @override
+  DataRow? getRow(int index) {
+    // print({"getRow call"});
+    final GrievanceDetails = grievanceListModel[index];
+
+    //controller.permitId.value = GrievanceDetails?.id ?? 0;
+    var cellsBuffer = [
+      '${GrievanceDetails?.id ?? ''}',
+      '${GrievanceDetails?.grievanceType ?? ''}',
+      '${GrievanceDetails?.concern ?? ''}',
+      '${GrievanceDetails?.description ?? ''}',
+      '${GrievanceDetails?.createdAt ?? ''}',
+      'Actions',
+    ];
+    var cells = [];
+    int i = 0;
+
+    for (var entry in controller.columnVisibility.value.entries) {
+      // print({"entry.value entry": entry});
+      if (entry.key == "search") {
+        return null;
+      }
+      if (entry.value) {
+        // print({"entry.value removed": entry.key});
+        cells.add(cellsBuffer[i]);
+      }
+      i++;
+    }
+    cells.add('Actions');
+
+    // print({"cell": cells});
+    return DataRow.byIndex(
+      index: index,
+      cells: cells.map((value) {
+        return DataCell(
+          Padding(
+            padding: EdgeInsets.zero,
+            child: (value == 'Actions')
+                ? Wrap(
+                    children: [
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [],
+                      ),
+                    ],
+                  )
+                : Text(value.toString()),
+          ),
+        );
+      }).toList(),
+      //   ],
+      // onSelectChanged: (_) {
+      //   controller.viewNewPermitList(permitId: GrievanceDetails?.permitId);
+      // },
+    );
+  }
+
+  @override
+  int get rowCount => grievanceListModel.length;
+
+  @override
+  bool get isRowCountApproximate => false;
+
+  @override
+  int get selectedRowCount => 0;
 }
