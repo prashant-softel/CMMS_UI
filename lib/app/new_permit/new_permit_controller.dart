@@ -1220,6 +1220,15 @@ class NewPermitController extends GetxController {
     if (selectedTypePermit.value == '') {
       isTypePermit.value = false;
     }
+    if (selectedJobType.value == '') {
+      isJobTypeListSelected.value = false;
+    }
+    if (selectedSopPermit.value == '') {
+      isSopPermitListSelected.value = false;
+    }
+    if (selectedEquipmentCategoryIdList.isEmpty) {
+      Fluttertoast.showToast(msg: "Select the equipment category");
+    }
     if (startDateTimeCtrlr.text == '') {
       Fluttertoast.showToast(msg: 'Start date Field cannot be empty');
     }

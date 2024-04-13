@@ -289,7 +289,7 @@ class AddJobController extends GetxController {
 
   void saveJob() async {
     try {
-      // checkForm();
+      checkForm();
       if (isFormInvalid.value) {
         return;
       }
