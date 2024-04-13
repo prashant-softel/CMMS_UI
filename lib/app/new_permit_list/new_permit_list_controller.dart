@@ -381,7 +381,7 @@ class NewPermitListController extends GetxController {
     clearTypeStoreData();
     clearisCheckedtoreData();
     Get.toNamed(Routes.viewPermitScreen,
-        arguments: {"permitId": permitId, "types": 1});
+        arguments: {"permitId": permitId, "type": 1});
   }
 
   Future<void> cancelPermitList({int? permitId}) async {
@@ -389,7 +389,7 @@ class NewPermitListController extends GetxController {
     clearTypeStoreData();
     clearisCheckedtoreData();
     Get.toNamed(Routes.viewPermitScreen,
-        arguments: {"permitId": permitId, "types": 0});
+        arguments: {"permitId": permitId, "type": 0});
   }
 
   Future<void> extendPermitList({int? permitId}) async {
@@ -399,7 +399,7 @@ class NewPermitListController extends GetxController {
     clearjobmodelValue();
     clearpmTaskValue();
     Get.toNamed(Routes.viewPermitScreen,
-        arguments: {"permitId": permitId, "types": 0});
+        arguments: {"permitId": permitId, "type": 0});
   }
 
   Future<void> closePermitRequestList({int? permitId}) async {
@@ -409,7 +409,7 @@ class NewPermitListController extends GetxController {
     clearjobmodelValue();
     clearpmTaskValue();
     Get.toNamed(Routes.viewPermitScreen,
-        arguments: {"permitId": permitId, "types": 0});
+        arguments: {"permitId": permitId, "type": 0});
   }
 
   void goToJobCardScreen(int? jobId) {
