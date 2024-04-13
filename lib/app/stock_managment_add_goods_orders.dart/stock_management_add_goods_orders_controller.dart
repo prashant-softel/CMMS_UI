@@ -60,6 +60,7 @@ class StockManagementAddGoodsOrdersController extends GetxController {
   Rx<String> selectedpaid = ''.obs;
   int selectedReqOrderId = 0;
   Rx<int> roId = 0.obs;
+
   var commentCtrlr = TextEditingController();
   Rx<String> selectedFacility = ''.obs;
   Rx<String> selectedUnitCurrency = ''.obs;
@@ -547,6 +548,9 @@ class StockManagementAddGoodsOrdersController extends GetxController {
   }
 
   void createGoodsOrder() async {
+    DateTime now = DateTime.now();
+    String currentDate =
+        DateTime.now().toString().split(' ')[0].replaceAll('-', '-');
     String _challanNoCtrlr = challanNoCtrlr.text.trim();
     String _pOCtrlr = pOCtrlr.text.trim();
     String _frieghtToPayPaidCtrlr = frieghtToPayPaidCtrlr.text.trim();
@@ -562,57 +566,70 @@ class StockManagementAddGoodsOrdersController extends GetxController {
     String _lrNoCtrlr = lrNoCtrlr.text.trim();
     String _vehicleNoCtrlr = vehicleNoCtrlr.text.trim();
     String _jobRefCtrlr = jobRefCtrlr.text.trim();
+
+    // Initialize an empty list of Items
     List<Items> items = [];
+
+    // Iterate through rowItem.value and populate the items list
     rowItem.value.forEach((element) {
       Items item = Items(
-          goItemID: 0,
-          received_qty: 0,
-          lost_qty: 0,
-          accepted_qty: 0,
-          damaged_qty: 0,
-          requested_qty: double.tryParse(element[2]["value"] ?? '0'),
-          assetMasterItemID:
-              dropdownMapperData[element[0]["value"]]?.assetMasterItemID,
-          cost: double.tryParse(element[3]["value"] ?? '0'),
-          ordered_qty: double.tryParse(element[4]["value"] ?? '0'),
-          paid_by_ID: paiddropdownMapperData[element[1]["value"]]?.id);
+        goItemID: 0,
+        received_qty: 0,
+        lost_qty: 0,
+        accepted_qty: 0,
+        damaged_qty: 0,
+        requested_qty: double.tryParse(element[2]["value"] ?? '0'),
+        assetMasterItemID:
+            dropdownMapperData[element[0]["value"]]?.assetMasterItemID,
+        cost: double.tryParse(element[3]["value"] ?? '0'),
+        ordered_qty: double.tryParse(element[4]["value"] ?? '0'),
+        paid_by_ID: paiddropdownMapperData[element[1]["value"]]?.id,
+      );
       items.add(item);
     });
-    CreateGoModel createGoModel = CreateGoModel(
-        is_submit: 1,
-        id: 0,
-        facility_id: facilityId,
-        order_type: 1,
-        location_ID: 1,
-        vendorID: selectedBusinessTypeId,
-        purchaseDate: _purchaseDateTc,
-        challan_no: _challanNoCtrlr,
-        challan_date: _challanDateTc,
-        po_no: _pOCtrlr,
-        po_date: _poDateDateTc,
-        freight: _frieghtToPayPaidCtrlr,
-        receivedAt: _receivedDateTc,
-        no_pkg_received: _noOfPackagesReceivedCtrlr,
-        lr_no: _lrNoCtrlr,
-        condition_pkg_received: _conditionOfPackagesReceivedCtrlr,
-        vehicle_no: _vehicleNoCtrlr,
-        gir_no: _girNoCtrlr,
-        job_ref: _jobRefCtrlr,
-        amount: int.tryParse(_amountCtrlr) ?? 0,
-        currencyID: selectedUnitCurrencyId,
-        items: items);
 
+    // Create a CreateGoModel instance
+    CreateGoModel createGoModel = CreateGoModel(
+      is_submit: 1,
+      id: 0,
+      facility_id: facilityId,
+      order_type: 1,
+      location_ID: 1,
+      vendorID: selectedBusinessTypeId,
+      purchaseDate: currentDate,
+      challan_no: _challanNoCtrlr,
+      challan_date: "1900-01-01",
+      po_no: _pOCtrlr,
+      po_date: _poDateDateTc,
+      freight: _frieghtToPayPaidCtrlr,
+      receivedAt: "1900-01-01",
+      no_pkg_received: _noOfPackagesReceivedCtrlr,
+      lr_no: _lrNoCtrlr,
+      condition_pkg_received: _conditionOfPackagesReceivedCtrlr,
+      vehicle_no: _vehicleNoCtrlr,
+      gir_no: _girNoCtrlr,
+      job_ref: _jobRefCtrlr,
+      amount: int.tryParse(_amountCtrlr) ?? 0,
+      currencyID: selectedUnitCurrencyId,
+      items: items,
+    );
+
+    // Convert the CreateGoModel instance to JSON
     var createGoModelJsonString = createGoModel.toJson();
+
+    // Call the createGoodsOrder function from stockManagementAddGoodsOrdersPresenter
     Map<String, dynamic>? responseCreateGoModel =
         await stockManagementAddGoodsOrdersPresenter.createGoodsOrder(
       createGo: createGoModelJsonString,
       isLoading: true,
     );
 
+    // Handle the response
     if (responseCreateGoModel == null) {
-      //  CreateNewPermitDialog();
+      // CreateNewPermitDialog();
       // showAlertDialog();
     }
+
     print('Create  Create GO  data: $createGoModelJsonString');
   }
 

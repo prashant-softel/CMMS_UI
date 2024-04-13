@@ -64,7 +64,6 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                           style: Styles.blackBold16,
                                         ),
                                         Spacer(),
-
                                         Container(
                                             padding: EdgeInsets.symmetric(
                                                 vertical: 2, horizontal: 5),
@@ -124,15 +123,6 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                                   style: Styles.blackBold16,
                                                 ),
                                               )
-
-                                        // ActionButton(
-                                        //   icon: Icons.menu,
-                                        //   label: "User List",
-                                        //   onPressed: () {
-                                        //     Get.offNamed(Routes.userList);
-                                        //   },
-                                        //   color: ColorValues.greenlightColor,
-                                        // ),
                                       ],
                                     ),
                                   ),
@@ -145,6 +135,7 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
+                                        Spacer(),
                                         Column(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.end,
@@ -177,30 +168,31 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                                 ),
                                               ],
                                             ),
-                                            Dimens.boxHeight5,
-                                            Row(
-                                              children: [
-                                                CustomRichText(
-                                                    title:
-                                                        'Delivery Challan: '),
-                                                Dimens.boxWidth10,
-                                                GoodsOrderTextField(
-                                                  keyboardType:
-                                                      TextInputType.number,
-                                                  inputFormatters: <TextInputFormatter>[
-                                                    FilteringTextInputFormatter
-                                                        .digitsOnly
-                                                  ],
-                                                  textController:
-                                                      controller.challanNoCtrlr,
-                                                  focusnode:
-                                                      controller.delchfocus,
-                                                  scroll:
-                                                      controller.delchscroll,
-                                                ),
-                                              ],
-                                            ),
-                                            Dimens.boxHeight5,
+                                            Dimens.boxHeight10,
+
+                                            // Row(
+                                            //   children: [
+                                            //     CustomRichText(
+                                            //         title:
+                                            //             'Delivery Challan: '),
+                                            //     Dimens.boxWidth10,
+                                            //     GoodsOrderTextField(
+                                            //       keyboardType:
+                                            //           TextInputType.number,
+                                            //       inputFormatters: <TextInputFormatter>[
+                                            //         FilteringTextInputFormatter
+                                            //             .digitsOnly
+                                            //       ],
+                                            //       textController:
+                                            //           controller.challanNoCtrlr,
+                                            //       focusnode:
+                                            //           controller.delchfocus,
+                                            //       scroll:
+                                            //           controller.delchscroll,
+                                            //     ),
+                                            //   ],
+                                            // ),
+
                                             Row(
                                               children: [
                                                 CustomRichText(
@@ -221,91 +213,91 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                                 ),
                                               ],
                                             ),
+                                            // Dimens.boxHeight5,
+                                            // Row(
+                                            //   children: [
+                                            //     CustomRichText(
+                                            //         title:
+                                            //             'Frieght:To Pay /Paid : '),
+                                            //     Dimens.boxWidth10,
+                                            //     GoodsOrderTextField(
+                                            //       keyboardType:
+                                            //           TextInputType.number,
+                                            //       inputFormatters: <TextInputFormatter>[
+                                            //         FilteringTextInputFormatter
+                                            //             .digitsOnly
+                                            //       ],
+                                            //       textController: controller
+                                            //           .frieghtToPayPaidCtrlr,
+                                            //       focusnode:
+                                            //           controller.freightfocus,
+                                            //       scroll:
+                                            //           controller.freightscroll,
+                                            //     ),
+                                            //   ],
+                                            // ),
+                                            // Dimens.boxHeight5,
+                                            // Row(
+                                            //   children: [
+                                            //     CustomRichText(
+                                            //         title:
+                                            //             'Materials Received Against PO:'),
+                                            //     Dimens.boxWidth10,
+                                            //     GoodsOrderTextField(
+                                            //       textController: controller
+                                            //           .noOfPackagesReceivedCtrlr,
+                                            //       focusnode:
+                                            //           controller.matpofocus,
+                                            //       scroll:
+                                            //           controller.matposcroll,
+                                            //     ),
+                                            //   ],
+                                            // ),
+                                            // Dimens.boxHeight5,
+                                            // Row(
+                                            //   children: [
+                                            //     CustomRichText(
+                                            //         title:
+                                            //             'Condition of Packages Received : '),
+                                            //     Dimens.boxWidth10,
+                                            //     GoodsOrderTextField(
+                                            //       keyboardType:
+                                            //           TextInputType.number,
+                                            //       inputFormatters: <TextInputFormatter>[
+                                            //         FilteringTextInputFormatter
+                                            //             .digitsOnly
+                                            //       ],
+                                            //       textController: controller
+                                            //           .conditionOfPackagesReceivedCtrlr,
+                                            //       focusnode:
+                                            //           controller.pacrfocus,
+                                            //       scroll: controller.pacrscroll,
+                                            //     ),
+                                            //   ],
+                                            // ),
                                             Dimens.boxHeight5,
-                                            Row(
-                                              children: [
-                                                CustomRichText(
-                                                    title:
-                                                        'Frieght:To Pay /Paid : '),
-                                                Dimens.boxWidth10,
-                                                GoodsOrderTextField(
-                                                  keyboardType:
-                                                      TextInputType.number,
-                                                  inputFormatters: <TextInputFormatter>[
-                                                    FilteringTextInputFormatter
-                                                        .digitsOnly
-                                                  ],
-                                                  textController: controller
-                                                      .frieghtToPayPaidCtrlr,
-                                                  focusnode:
-                                                      controller.freightfocus,
-                                                  scroll:
-                                                      controller.freightscroll,
-                                                ),
-                                              ],
-                                            ),
-                                            Dimens.boxHeight5,
-                                            Row(
-                                              children: [
-                                                CustomRichText(
-                                                    title:
-                                                        'Materials Received Against PO:'),
-                                                Dimens.boxWidth10,
-                                                GoodsOrderTextField(
-                                                  textController: controller
-                                                      .noOfPackagesReceivedCtrlr,
-                                                  focusnode:
-                                                      controller.matpofocus,
-                                                  scroll:
-                                                      controller.matposcroll,
-                                                ),
-                                              ],
-                                            ),
-                                            Dimens.boxHeight5,
-                                            Row(
-                                              children: [
-                                                CustomRichText(
-                                                    title:
-                                                        'Condition of Packages Received : '),
-                                                Dimens.boxWidth10,
-                                                GoodsOrderTextField(
-                                                  keyboardType:
-                                                      TextInputType.number,
-                                                  inputFormatters: <TextInputFormatter>[
-                                                    FilteringTextInputFormatter
-                                                        .digitsOnly
-                                                  ],
-                                                  textController: controller
-                                                      .conditionOfPackagesReceivedCtrlr,
-                                                  focusnode:
-                                                      controller.pacrfocus,
-                                                  scroll: controller.pacrscroll,
-                                                ),
-                                              ],
-                                            ),
-                                            Dimens.boxHeight5,
-                                            Row(
-                                              children: [
-                                                CustomRichText(
-                                                    title:
-                                                        'Gate Inward Register No. : '),
-                                                Dimens.boxWidth10,
-                                                GoodsOrderTextField(
-                                                  keyboardType:
-                                                      TextInputType.number,
-                                                  inputFormatters: <TextInputFormatter>[
-                                                    FilteringTextInputFormatter
-                                                        .digitsOnly
-                                                  ],
-                                                  textController:
-                                                      controller.girNoCtrlr,
-                                                  focusnode:
-                                                      controller.inregfocus,
-                                                  scroll:
-                                                      controller.inregscroll,
-                                                ),
-                                              ],
-                                            ),
+                                            // Row(
+                                            //   children: [
+                                            //     CustomRichText(
+                                            //         title:
+                                            //             'Gate Inward Register No. : '),
+                                            //     Dimens.boxWidth10,
+                                            //     GoodsOrderTextField(
+                                            //       keyboardType:
+                                            //           TextInputType.number,
+                                            //       inputFormatters: <TextInputFormatter>[
+                                            //         FilteringTextInputFormatter
+                                            //             .digitsOnly
+                                            //       ],
+                                            //       textController:
+                                            //           controller.girNoCtrlr,
+                                            //       focusnode:
+                                            //           controller.inregfocus,
+                                            //       scroll:
+                                            //           controller.inregscroll,
+                                            //     ),
+                                            //   ],
+                                            // ),
                                             Dimens.boxHeight5,
                                             Row(
                                               children: [
@@ -335,60 +327,60 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                           crossAxisAlignment:
                                               CrossAxisAlignment.end,
                                           children: [
-                                            Row(
-                                              children: [
-                                                CustomRichText(
-                                                    title: 'Purchase Date :'),
-                                                Dimens.boxWidth10,
-                                                CustomTextFieldForStock(
-                                                  width: MediaQuery.of(context)
-                                                          .size
-                                                          .width /
-                                                      5,
-                                                  numberTextField: true,
-                                                  onTap: () {
-                                                    controller
-                                                            .openPurchaseDatePicker =
-                                                        !controller
-                                                            .openPurchaseDatePicker;
-                                                    controller.update(
-                                                        ['stock_Mangement']);
-                                                  },
-                                                  textController:
-                                                      controller.purchaseDateTc,
-                                                ),
-                                              ],
-                                            ),
+                                            // Row(
+                                            //   children: [
+                                            //     CustomRichText(
+                                            //         title: 'Purchase Date :'),
+                                            //     Dimens.boxWidth10,
+                                            //     CustomTextFieldForStock(
+                                            //       width: MediaQuery.of(context)
+                                            //               .size
+                                            //               .width /
+                                            //           5,
+                                            //       numberTextField: true,
+                                            //       onTap: () {
+                                            //         controller
+                                            //                 .openPurchaseDatePicker =
+                                            //             !controller
+                                            //                 .openPurchaseDatePicker;
+                                            //         controller.update(
+                                            //             ['stock_Mangement']);
+                                            //       },
+                                            //       textController:
+                                            //           controller.purchaseDateTc,
+                                            //     ),
+                                            //   ],
+                                            // ),
                                             SizedBox(
                                               height: 6,
                                             ),
-                                            Row(
-                                              children: [
-                                                CustomRichText(
-                                                    title: 'Challan Date : '),
-                                                Dimens.boxWidth10,
-                                                CustomTextFieldForStock(
-                                                  width: MediaQuery.of(context)
-                                                          .size
-                                                          .width /
-                                                      5,
-                                                  numberTextField: true,
-                                                  onTap: () {
-                                                    controller
-                                                            .openChallanDatePicker =
-                                                        !controller
-                                                            .openChallanDatePicker;
-                                                    controller.update(
-                                                        ['stock_Mangement']);
-                                                  },
-                                                  textController:
-                                                      controller.challanDateTc,
-                                                ),
-                                              ],
-                                            ),
-                                            SizedBox(
-                                              height: 6,
-                                            ),
+                                            // Row(
+                                            //   children: [
+                                            //     CustomRichText(
+                                            //         title: 'Challan Date : '),
+                                            //     Dimens.boxWidth10,
+                                            //     CustomTextFieldForStock(
+                                            //       width: MediaQuery.of(context)
+                                            //               .size
+                                            //               .width /
+                                            //           5,
+                                            //       numberTextField: true,
+                                            //       onTap: () {
+                                            //         controller
+                                            //                 .openChallanDatePicker =
+                                            //             !controller
+                                            //                 .openChallanDatePicker;
+                                            //         controller.update(
+                                            //             ['stock_Mangement']);
+                                            //       },
+                                            //       textController:
+                                            //           controller.challanDateTc,
+                                            //     ),
+                                            //   ],
+                                            // ),
+                                            // SizedBox(
+                                            //   height: 6,
+                                            // ),
                                             Row(
                                               children: [
                                                 CustomRichText(
@@ -413,101 +405,101 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                                 ),
                                               ],
                                             ),
-                                            SizedBox(
-                                              height: 6,
-                                            ),
-                                            Row(
-                                              children: [
-                                                CustomRichText(
-                                                    title: 'Received Date  : '),
-                                                Dimens.boxWidth10,
-                                                CustomTextFieldForStock(
-                                                  width: MediaQuery.of(context)
-                                                          .size
-                                                          .width /
-                                                      5,
-                                                  numberTextField: true,
-                                                  onTap: () {
-                                                    controller
-                                                            .openReceivedPicker =
-                                                        !controller
-                                                            .openReceivedPicker;
-                                                    controller.update(
-                                                        ['stock_Mangement']);
-                                                  },
-                                                  textController:
-                                                      controller.receivedDateTc,
-                                                ),
-                                              ],
-                                            ),
-                                            SizedBox(
-                                              height: 6,
-                                            ),
-                                            Row(
-                                              children: [
-                                                CustomRichText(
-                                                    title: 'L.R No.  : '),
-                                                Dimens.boxWidth10,
-                                                GoodsOrderTextField(
-                                                  keyboardType:
-                                                      TextInputType.number,
-                                                  inputFormatters: <TextInputFormatter>[
-                                                    FilteringTextInputFormatter
-                                                        .digitsOnly
-                                                  ],
-                                                  textController:
-                                                      controller.lrNoCtrlr,
-                                                  focusnode: controller.lrfocus,
-                                                  scroll: controller.lrscroll,
-                                                ),
-                                              ],
-                                            ),
-                                            SizedBox(
-                                              height: 6,
-                                            ),
-                                            Row(
-                                              children: [
-                                                CustomRichText(
-                                                    title: 'Vehicle  No. : '),
-                                                Dimens.boxWidth10,
-                                                GoodsOrderTextField(
-                                                  keyboardType:
-                                                      TextInputType.number,
-                                                  inputFormatters: <TextInputFormatter>[
-                                                    FilteringTextInputFormatter
-                                                        .digitsOnly
-                                                  ],
-                                                  textController:
-                                                      controller.vehicleNoCtrlr,
-                                                  focusnode:
-                                                      controller.vehfocus,
-                                                  scroll: controller.vehscroll,
-                                                ),
-                                              ],
-                                            ),
-                                            SizedBox(
-                                              height: 6,
-                                            ),
-                                            Row(
-                                              children: [
-                                                CustomRichText(
-                                                    title: 'Job Ref. : '),
-                                                Dimens.boxWidth10,
-                                                GoodsOrderTextField(
-                                                  keyboardType:
-                                                      TextInputType.number,
-                                                  inputFormatters: <TextInputFormatter>[
-                                                    FilteringTextInputFormatter
-                                                        .digitsOnly
-                                                  ],
-                                                  textController:
-                                                      controller.jobRefCtrlr,
-                                                  focusnode:
-                                                      controller.jobrfocus,
-                                                  scroll: controller.jobrscroll,
-                                                ),
-                                              ],
-                                            ),
+                                            // SizedBox(
+                                            //   height: 6,
+                                            // ),
+                                            // Row(
+                                            //   children: [
+                                            //     CustomRichText(
+                                            //         title: 'Received Date  : '),
+                                            //     Dimens.boxWidth10,
+                                            //     CustomTextFieldForStock(
+                                            //       width: MediaQuery.of(context)
+                                            //               .size
+                                            //               .width /
+                                            //           5,
+                                            //       numberTextField: true,
+                                            //       onTap: () {
+                                            //         controller
+                                            //                 .openReceivedPicker =
+                                            //             !controller
+                                            //                 .openReceivedPicker;
+                                            //         controller.update(
+                                            //             ['stock_Mangement']);
+                                            //       },
+                                            //       textController:
+                                            //           controller.receivedDateTc,
+                                            //     ),
+                                            //   ],
+                                            // ),
+                                            // SizedBox(
+                                            //   height: 6,
+                                            // ),
+                                            // Row(
+                                            //   children: [
+                                            //     CustomRichText(
+                                            //         title: 'L.R No.  : '),
+                                            //     Dimens.boxWidth10,
+                                            //     GoodsOrderTextField(
+                                            //       keyboardType:
+                                            //           TextInputType.number,
+                                            //       inputFormatters: <TextInputFormatter>[
+                                            //         FilteringTextInputFormatter
+                                            //             .digitsOnly
+                                            //       ],
+                                            //       textController:
+                                            //           controller.lrNoCtrlr,
+                                            //       focusnode: controller.lrfocus,
+                                            //       scroll: controller.lrscroll,
+                                            //     ),
+                                            //   ],
+                                            // ),
+                                            // SizedBox(
+                                            //   height: 6,
+                                            // ),
+                                            // Row(
+                                            //   children: [
+                                            //     CustomRichText(
+                                            //         title: 'Vehicle  No. : '),
+                                            //     Dimens.boxWidth10,
+                                            //     GoodsOrderTextField(
+                                            //       keyboardType:
+                                            //           TextInputType.number,
+                                            //       inputFormatters: <TextInputFormatter>[
+                                            //         FilteringTextInputFormatter
+                                            //             .digitsOnly
+                                            //       ],
+                                            //       textController:
+                                            //           controller.vehicleNoCtrlr,
+                                            //       focusnode:
+                                            //           controller.vehfocus,
+                                            //       scroll: controller.vehscroll,
+                                            //     ),
+                                            //   ],
+                                            // ),
+                                            // SizedBox(
+                                            //   height: 6,
+                                            // ),
+                                            // Row(
+                                            //   children: [
+                                            //     CustomRichText(
+                                            //         title: 'Job Ref. : '),
+                                            //     Dimens.boxWidth10,
+                                            //     GoodsOrderTextField(
+                                            //       keyboardType:
+                                            //           TextInputType.number,
+                                            //       inputFormatters: <TextInputFormatter>[
+                                            //         FilteringTextInputFormatter
+                                            //             .digitsOnly
+                                            //       ],
+                                            //       textController:
+                                            //           controller.jobRefCtrlr,
+                                            //       focusnode:
+                                            //           controller.jobrfocus,
+                                            //       scroll: controller.jobrscroll,
+                                            //     ),
+                                            //   ],
+                                            // ),
                                             SizedBox(
                                               height: 6,
                                             ),
@@ -540,7 +532,7 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                             ),
                                           ],
                                         ),
-                                        Dimens.boxWidth30,
+                                        Spacer(),
                                       ],
                                     ),
                                   ),
@@ -718,8 +710,8 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                               ),
                             if (controller.openPODatePicker)
                               Positioned(
-                                right: 65,
-                                top: 200,
+                                right: 210,
+                                top: 110,
                                 child: DatePickerWidget(
                                   minDate: DateTime(DateTime.now().year),
                                   maxDate: DateTime(DateTime.now().year, 13,
