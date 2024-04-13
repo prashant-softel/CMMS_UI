@@ -548,9 +548,9 @@ class StockManagementAddGoodsOrdersController extends GetxController {
   }
 
   void createGoodsOrder() async {
-    DateTime now = DateTime.now();
-    String currentDate =
-        DateTime.now().toString().split(' ')[0].replaceAll('-', '-');
+    // DateTime now = DateTime.now();
+    // String currentDate =
+    //     DateTime.now().toString().split(' ')[0].replaceAll('-', '-');
     String _challanNoCtrlr = challanNoCtrlr.text.trim();
     String _pOCtrlr = pOCtrlr.text.trim();
     String _frieghtToPayPaidCtrlr = frieghtToPayPaidCtrlr.text.trim();
@@ -596,13 +596,13 @@ class StockManagementAddGoodsOrdersController extends GetxController {
       order_type: 1,
       location_ID: 1,
       vendorID: selectedBusinessTypeId,
-      purchaseDate: currentDate,
+      purchaseDate: null,
       challan_no: _challanNoCtrlr,
-      challan_date: "1900-01-01",
+      challan_date: null,
       po_no: _pOCtrlr,
       po_date: _poDateDateTc,
       freight: _frieghtToPayPaidCtrlr,
-      receivedAt: "1900-01-01",
+      receivedAt: null,
       no_pkg_received: _noOfPackagesReceivedCtrlr,
       lr_no: _lrNoCtrlr,
       condition_pkg_received: _conditionOfPackagesReceivedCtrlr,
