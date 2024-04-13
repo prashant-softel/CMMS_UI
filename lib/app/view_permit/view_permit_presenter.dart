@@ -42,7 +42,7 @@ class ViewPermitPresenter {
   ) async =>
       await viewPermitUsecase.getPermitHistory(
         moduleType: moduleType,
-        facilityId:facilityId,
+        facilityId: facilityId,
         permitId: permitId,
         isLoading: isLoading,
       );
@@ -229,10 +229,7 @@ class ViewPermitPresenter {
     required int? isCancle,
   }) async {
     return viewPermitUsecase.getPermitConditionList(
-      isLoading: isLoading,
-      isCancle: isCancle,
-      facilityId: facilityId
-    );
+        isLoading: isLoading, isCancle: isCancle, facilityId: facilityId);
   }
 
   Future<List<PermitCancelListModel>> getPermitCloseConditionList({
@@ -327,7 +324,7 @@ class ViewPermitPresenter {
         // facilityId: 45,
         // facilityId: facilityId ?? 0,
         id: id,
-        facilityId:facilityId,
+        facilityId: facilityId,
         isLoading: isLoading ?? false,
       );
 
@@ -338,7 +335,7 @@ class ViewPermitPresenter {
   }) async {
     return viewPermitUsecase.getViewPermitDetail(
       permitId: permitId,
-      facilityId:facilityId,
+      facilityId: facilityId,
       isLoading: isLoading ?? false,
     );
   }
@@ -406,14 +403,14 @@ class ViewPermitPresenter {
   void saveValue({String? permitId}) async {
     return viewPermitUsecase.saveValue(permitId: permitId);
   }
-
   Future<String?> getValue() async => await viewPermitUsecase.getValue();
+
   void saveJobIdValue({String? jobId}) async {
     return viewPermitUsecase.saveJobIdValue(jobId: jobId);
   }
-
   Future<String?> getJobIdValue() async =>
       await viewPermitUsecase.getJobIdValue();
+
 
   void clearValue() async => viewPermitUsecase.clearValue();
   void clearTypeValue() async => viewPermitUsecase.clearTypeValue();

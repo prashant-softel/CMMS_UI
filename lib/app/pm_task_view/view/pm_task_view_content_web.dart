@@ -344,7 +344,7 @@ class PreventiveMaintenanceTaskViewContentWeb
                                                   DataColumn2(
                                                       // fixedWidth: 300,
                                                       label: Text(
-                                                    "Execution Status",
+                                                    "Execution Done By",
                                                     style: TextStyle(
                                                         fontSize: 15,
                                                         fontWeight:
@@ -395,7 +395,7 @@ class PreventiveMaintenanceTaskViewContentWeb
                                                                 ?.completedBy_id ==
                                                             0
                                                         ? ""
-                                                        : 'Execution done by ${controller.scheduleCheckPoint?[index]?.completedBy_name ?? ''}')),
+                                                        : '${controller.scheduleCheckPoint?[index]?.completedBy_name ?? ''}')),
                                                     DataCell(Text(
                                                         // controller
                                                         //       .scheduleCheckPoint?[

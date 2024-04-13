@@ -67,7 +67,7 @@ class PermitTypeContentWeb extends GetView<PermitTypeController> {
                     child: Text(" / BREAKDOWN MAINTENANCE",
                         style: Styles.greyLight14),
                   ),
-                  Text(" / PERMIT TYPE", style: Styles.greyLight14)
+                  Text(" / PERMIT TYPE CHECKLIST", style: Styles.greyLight14)
                 ],
               ),
             ),
@@ -81,8 +81,8 @@ class PermitTypeContentWeb extends GetView<PermitTypeController> {
                 child: Obx(() {
                   return Text(
                     controller.isContainerVisible.value
-                        ? 'Close Permit Type'
-                        : 'Open Permit Type',
+                        ? 'Close Permit Checklist'
+                        : 'Open Permit Checklist',
                   );
                 }),
               ),
@@ -116,7 +116,7 @@ class PermitTypeContentWeb extends GetView<PermitTypeController> {
                                         CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        "Create Permit Type",
+                                        "Create Permit Type Checklist",
                                         style: Styles.blackBold16,
                                       ),
                                       SizedBox(
@@ -132,8 +132,8 @@ class PermitTypeContentWeb extends GetView<PermitTypeController> {
                                                         false
                                                     ? controller.selectedItem ==
                                                             null
-                                                        ? "Permit Type added Successfully in the List."
-                                                        : "Permit Type updated Successfully in the List."
+                                                        ? "Permit Checklist added Successfully in the List."
+                                                        : "Permit Checklist updated Successfully in the List."
                                                     : "Facility not added",
                                                 style: TextStyle(
                                                     fontSize: 16,
@@ -566,7 +566,7 @@ class PermitTypeContentWeb extends GetView<PermitTypeController> {
                               child: Row(
                                 children: [
                                   Text(
-                                    "List of Permit Type",
+                                    "List of Permit Checklist",
                                     style: Styles.blackBold16,
                                   ),
                                   Spacer()

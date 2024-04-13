@@ -1,5 +1,3 @@
-// ignore_for_file: unnecessary_null_comparison
-
 import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/home/home_screen.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
@@ -40,7 +38,6 @@ class _NewPermitListWebState extends State<NewPermitListWeb> {
         builder: (controller) {
           return Obx(() {
             final dataSource = PermitListDataSource(controller);
-
             return SelectionArea(
               child: Stack(
                 children: [
@@ -790,9 +787,10 @@ class PermitListDataSource extends DataTableSource {
                                           icon: Icons.visibility,
                                           message: 'View Permit',
                                           onPress: () {
+                                            int? permitId = controller
+                                                .newPermitList[index]?.permitId;
                                             controller.viewNewPermitList(
-                                                permitId:
-                                                    PermitDetails?.permitId);
+                                                permitId: permitId);
                                           },
                                         )
                                       : Container(),

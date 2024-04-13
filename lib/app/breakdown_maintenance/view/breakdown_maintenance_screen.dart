@@ -297,7 +297,7 @@ class BreakdownMaintenanceScreen
                                               .length >
                                           0
                                       ? createContentTile(
-                                          title: "Permit Type",
+                                          title: "Permit Type Checklist",
                                           onTap: () {
                                             controller.goToPermitTypeScreen();
                                           })
@@ -310,7 +310,7 @@ class BreakdownMaintenanceScreen
                                               .length >
                                           0
                                       ? createContentTile(
-                                          title: "Permit Type Checklist",
+                                          title: "Permit Type Checkpoint",
                                           onTap: () {
                                             controller
                                                 .gotToSafetyQuestionsList();
