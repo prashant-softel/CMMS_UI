@@ -9,11 +9,14 @@ import 'package:cmms/app/widgets/close_goods_order_dialog.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/custom_textField.dart';
+import 'package:cmms/app/widgets/date_picker.dart';
 import 'package:cmms/app/widgets/stock_dropdown.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
+import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
 import '../../../widgets/reject_go_receive_dialog.dart';
 
@@ -118,8 +121,10 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                                             ?.status ==
                                                         302
                                                     ? ColorValues.createsColor
-                                                    : controller.getPurchaseDetailsByIDModel
-                                                                .value?.status ==
+                                                    : controller
+                                                                .getPurchaseDetailsByIDModel
+                                                                .value
+                                                                ?.status ==
                                                             301
                                                         ? ColorValues.draftColor
                                                         : controller
@@ -161,7 +166,7 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                               : Text(
                                                   " Order ID :${controller.getPurchaseDetailsByIDModel.value?.id} ",
                                                 )
-            
+
                                           // ActionButton(
                                           //   icon: Icons.menu,
                                           //   label: "User List",
@@ -217,7 +222,8 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                                                       304
                                                                   ? ColorValues.appPurpleColor
                                                                   : ColorValues.lightBlueColor,
-                                          borderRadius: BorderRadius.circular(5),
+                                          borderRadius:
+                                              BorderRadius.circular(5),
                                         ),
                                         child: Obx(
                                           () => Text(
@@ -225,6 +231,19 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                           ),
                                         )),
                                     IgnorePointer(
+                                      ignoring: varUserAccessModel
+                                                  .value.access_list!
+                                                  .where((e) =>
+                                                      e.feature_id ==
+                                                          UserAccessConstants
+                                                              .kGoodsFeatureId &&
+                                                      e.approve ==
+                                                          UserAccessConstants
+                                                              .kHaveApproveAccess)
+                                                  .length >
+                                              0
+                                          ? true
+                                          : false,
                                       child: Container(
                                         margin: Dimens.edgeInsets20,
                                         child: Row(
@@ -235,32 +254,37 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.end,
                                               children: [
-                                                Row(
-                                                  children: [
-                                                    Dimens.boxWidth10,
-                                                    CustomRichText(
-                                                        title: 'Vendor: '),
-                                                    Dimens.boxWidth10,
-                                                    SizedBox(
-                                                      child: DropdownWebStock(
-                                                        width:
-                                                            MediaQuery.of(context)
-                                                                    .size
-                                                                    .width /
-                                                                5,
-                                                        dropdownList:
-                                                            controller.ownerList,
-                                                        isValueSelected: controller
-                                                            .isSelectedBusinessType
-                                                            .value,
-                                                        selectedValue: controller
-                                                            .selectedBusinessType
-                                                            .value,
-                                                        onValueChanged: controller
-                                                            .onValueChanged,
+                                                IgnorePointer(
+                                                  child: Row(
+                                                    children: [
+                                                      Dimens.boxWidth10,
+                                                      CustomRichText(
+                                                          title: 'Vendor: '),
+                                                      Dimens.boxWidth10,
+                                                      SizedBox(
+                                                        child: DropdownWebStock(
+                                                          width: MediaQuery.of(
+                                                                      context)
+                                                                  .size
+                                                                  .width /
+                                                              5,
+                                                          dropdownList:
+                                                              controller
+                                                                  .ownerList,
+                                                          isValueSelected:
+                                                              controller
+                                                                  .isSelectedBusinessType
+                                                                  .value,
+                                                          selectedValue: controller
+                                                              .selectedBusinessType
+                                                              .value,
+                                                          onValueChanged:
+                                                              controller
+                                                                  .onValueChanged,
+                                                        ),
                                                       ),
-                                                    ),
-                                                  ],
+                                                    ],
+                                                  ),
                                                 ),
                                                 Dimens.boxHeight5,
                                                 Row(
@@ -269,16 +293,18 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                                         title: 'Challan No.: '),
                                                     Dimens.boxWidth10,
                                                     Container(
-                                                        decoration: BoxDecoration(
+                                                        decoration:
+                                                            BoxDecoration(
                                                           borderRadius:
                                                               BorderRadius
                                                                   .circular(10),
                                                           border: Border.all(
-                                                            color: Color.fromARGB(
-                                                                255,
-                                                                227,
-                                                                224,
-                                                                224),
+                                                            color:
+                                                                Color.fromARGB(
+                                                                    255,
+                                                                    227,
+                                                                    224,
+                                                                    224),
                                                             width: 1,
                                                           ),
                                                           boxShadow: [
@@ -312,52 +338,58 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                                   ],
                                                 ),
                                                 Dimens.boxHeight5,
-                                                Row(
-                                                  children: [
-                                                    CustomRichText(
-                                                        title: 'P.O: '),
-                                                    Dimens.boxWidth10,
-                                                    Container(
-                                                        decoration: BoxDecoration(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(10),
-                                                          border: Border.all(
-                                                            color: Color.fromARGB(
-                                                                255,
-                                                                227,
-                                                                224,
-                                                                224),
-                                                            width: 1,
-                                                          ),
-                                                          boxShadow: [
-                                                            BoxShadow(
+                                                IgnorePointer(
+                                                  child: Row(
+                                                    children: [
+                                                      CustomRichText(
+                                                          title: 'P.O: '),
+                                                      Dimens.boxWidth10,
+                                                      Container(
+                                                          decoration:
+                                                              BoxDecoration(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        10),
+                                                            border: Border.all(
                                                               color: Color
-                                                                      .fromARGB(
-                                                                          255,
-                                                                          236,
-                                                                          234,
-                                                                          234)
-                                                                  .withOpacity(
-                                                                      0.5),
-                                                              spreadRadius: 2,
-                                                              blurRadius: 5,
-                                                              offset:
-                                                                  Offset(0, 2),
+                                                                  .fromARGB(
+                                                                      255,
+                                                                      227,
+                                                                      224,
+                                                                      224),
+                                                              width: 1,
                                                             ),
-                                                          ],
-                                                        ),
-                                                        width: (MediaQuery.of(
-                                                                    context)
-                                                                .size
-                                                                .width *
-                                                            .2),
-                                                        child:
-                                                            LoginCustomTextfield(
-                                                          textController:
-                                                              controller.pOCtrlr,
-                                                        )),
-                                                  ],
+                                                            boxShadow: [
+                                                              BoxShadow(
+                                                                color: Color
+                                                                        .fromARGB(
+                                                                            255,
+                                                                            236,
+                                                                            234,
+                                                                            234)
+                                                                    .withOpacity(
+                                                                        0.5),
+                                                                spreadRadius: 2,
+                                                                blurRadius: 5,
+                                                                offset: Offset(
+                                                                    0, 2),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                          width: (MediaQuery.of(
+                                                                      context)
+                                                                  .size
+                                                                  .width *
+                                                              .2),
+                                                          child:
+                                                              LoginCustomTextfield(
+                                                            textController:
+                                                                controller
+                                                                    .pOCtrlr,
+                                                          )),
+                                                    ],
+                                                  ),
                                                 ),
                                                 Dimens.boxHeight5,
                                                 Row(
@@ -367,16 +399,18 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                                             'Frieght:To Pay /Paid : '),
                                                     Dimens.boxWidth10,
                                                     Container(
-                                                        decoration: BoxDecoration(
+                                                        decoration:
+                                                            BoxDecoration(
                                                           borderRadius:
                                                               BorderRadius
                                                                   .circular(10),
                                                           border: Border.all(
-                                                            color: Color.fromARGB(
-                                                                255,
-                                                                227,
-                                                                224,
-                                                                224),
+                                                            color:
+                                                                Color.fromARGB(
+                                                                    255,
+                                                                    227,
+                                                                    224,
+                                                                    224),
                                                             width: 1,
                                                           ),
                                                           boxShadow: [
@@ -416,16 +450,18 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                                             'No. of Packages  received :'),
                                                     Dimens.boxWidth10,
                                                     Container(
-                                                        decoration: BoxDecoration(
+                                                        decoration:
+                                                            BoxDecoration(
                                                           borderRadius:
                                                               BorderRadius
                                                                   .circular(10),
                                                           border: Border.all(
-                                                            color: Color.fromARGB(
-                                                                255,
-                                                                227,
-                                                                224,
-                                                                224),
+                                                            color:
+                                                                Color.fromARGB(
+                                                                    255,
+                                                                    227,
+                                                                    224,
+                                                                    224),
                                                             width: 1,
                                                           ),
                                                           boxShadow: [
@@ -465,16 +501,18 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                                             'Condition of Packages Received : '),
                                                     Dimens.boxWidth10,
                                                     Container(
-                                                        decoration: BoxDecoration(
+                                                        decoration:
+                                                            BoxDecoration(
                                                           borderRadius:
                                                               BorderRadius
                                                                   .circular(10),
                                                           border: Border.all(
-                                                            color: Color.fromARGB(
-                                                                255,
-                                                                227,
-                                                                224,
-                                                                224),
+                                                            color:
+                                                                Color.fromARGB(
+                                                                    255,
+                                                                    227,
+                                                                    224,
+                                                                    224),
                                                             width: 1,
                                                           ),
                                                           boxShadow: [
@@ -513,16 +551,18 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                                         title: 'GIR. No. : '),
                                                     Dimens.boxWidth10,
                                                     Container(
-                                                        decoration: BoxDecoration(
+                                                        decoration:
+                                                            BoxDecoration(
                                                           borderRadius:
                                                               BorderRadius
                                                                   .circular(10),
                                                           border: Border.all(
-                                                            color: Color.fromARGB(
-                                                                255,
-                                                                227,
-                                                                224,
-                                                                224),
+                                                            color:
+                                                                Color.fromARGB(
+                                                                    255,
+                                                                    227,
+                                                                    224,
+                                                                    224),
                                                             width: 1,
                                                           ),
                                                           boxShadow: [
@@ -563,35 +603,43 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                                   Container(
                                                       decoration: BoxDecoration(
                                                         borderRadius:
-                                                            BorderRadius.circular(
-                                                                10),
+                                                            BorderRadius
+                                                                .circular(10),
                                                         border: Border.all(
                                                           color: Color.fromARGB(
-                                                              255, 227, 224, 224),
+                                                              255,
+                                                              227,
+                                                              224,
+                                                              224),
                                                           width: 1,
                                                         ),
                                                         boxShadow: [
                                                           BoxShadow(
-                                                            color: Color.fromARGB(
-                                                                    255,
-                                                                    236,
-                                                                    234,
-                                                                    234)
-                                                                .withOpacity(0.5),
+                                                            color: Color
+                                                                    .fromARGB(
+                                                                        255,
+                                                                        236,
+                                                                        234,
+                                                                        234)
+                                                                .withOpacity(
+                                                                    0.5),
                                                             spreadRadius: 2,
                                                             blurRadius: 5,
-                                                            offset: Offset(0, 2),
+                                                            offset:
+                                                                Offset(0, 2),
                                                           ),
                                                         ],
                                                       ),
-                                                      width:
-                                                          (MediaQuery.of(context)
-                                                                  .size
-                                                                  .width *
-                                                              .2),
-                                                      child: LoginCustomTextfield(
-                                                        textController: controller
-                                                            .amountCtrlr,
+                                                      width: (MediaQuery.of(
+                                                                  context)
+                                                              .size
+                                                              .width *
+                                                          .2),
+                                                      child:
+                                                          LoginCustomTextfield(
+                                                        textController:
+                                                            controller
+                                                                .amountCtrlr,
                                                       )),
                                                 ]),
                                               ],
@@ -604,7 +652,8 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                                 Row(
                                                   children: [
                                                     CustomRichText(
-                                                        title: 'Purchase Date :'),
+                                                        title:
+                                                            'Purchase Date :'),
                                                     Dimens.boxWidth10,
                                                     CustomTextFieldForStock(
                                                       width:
@@ -618,8 +667,9 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                                                 .openPurchaseDatePicker =
                                                             !controller
                                                                 .openPurchaseDatePicker;
-                                                        controller.update(
-                                                            ['stock_Mangement']);
+                                                        controller.update([
+                                                          'stock_Mangement'
+                                                        ]);
                                                       },
                                                       textController: controller
                                                           .purchaseDateTc,
@@ -630,7 +680,8 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                                 Row(
                                                   children: [
                                                     CustomRichText(
-                                                        title: 'Challan Date : '),
+                                                        title:
+                                                            'Challan Date : '),
                                                     Dimens.boxWidth10,
                                                     CustomTextFieldForStock(
                                                       width:
@@ -644,8 +695,9 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                                                 .openChallanDatePicker =
                                                             !controller
                                                                 .openChallanDatePicker;
-                                                        controller.update(
-                                                            ['stock_Mangement']);
+                                                        controller.update([
+                                                          'stock_Mangement'
+                                                        ]);
                                                       },
                                                       textController: controller
                                                           .challanDateTc,
@@ -653,30 +705,34 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                                   ],
                                                 ),
                                                 Dimens.boxHeight5,
-                                                Row(
-                                                  children: [
-                                                    CustomRichText(
-                                                        title: 'PO Date  : '),
-                                                    Dimens.boxWidth10,
-                                                    CustomTextFieldForStock(
-                                                      width:
-                                                          MediaQuery.of(context)
-                                                                  .size
-                                                                  .width /
-                                                              5.1,
-                                                      numberTextField: true,
-                                                      onTap: () {
-                                                        controller
-                                                                .openPODatePicker =
-                                                            !controller
-                                                                .openPODatePicker;
-                                                        controller.update(
-                                                            ['stock_Mangement']);
-                                                      },
-                                                      textController:
-                                                          controller.poDateDateTc,
-                                                    ),
-                                                  ],
+                                                IgnorePointer(
+                                                  child: Row(
+                                                    children: [
+                                                      CustomRichText(
+                                                          title: 'PO Date  : '),
+                                                      Dimens.boxWidth10,
+                                                      CustomTextFieldForStock(
+                                                        width: MediaQuery.of(
+                                                                    context)
+                                                                .size
+                                                                .width /
+                                                            5.1,
+                                                        numberTextField: true,
+                                                        onTap: () {
+                                                          controller
+                                                                  .openPODatePicker =
+                                                              !controller
+                                                                  .openPODatePicker;
+                                                          controller.update([
+                                                            'stock_Mangement'
+                                                          ]);
+                                                        },
+                                                        textController:
+                                                            controller
+                                                                .poDateDateTc,
+                                                      ),
+                                                    ],
+                                                  ),
                                                 ),
                                                 Dimens.boxHeight5,
                                                 Row(
@@ -697,8 +753,9 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                                                 .openReceivedPicker =
                                                             !controller
                                                                 .openReceivedPicker;
-                                                        controller.update(
-                                                            ['stock_Mangement']);
+                                                        controller.update([
+                                                          'stock_Mangement'
+                                                        ]);
                                                       },
                                                       textController: controller
                                                           .receivedDateTc,
@@ -712,16 +769,18 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                                         title: 'L.R No.  : '),
                                                     Dimens.boxWidth10,
                                                     Container(
-                                                        decoration: BoxDecoration(
+                                                        decoration:
+                                                            BoxDecoration(
                                                           borderRadius:
                                                               BorderRadius
                                                                   .circular(10),
                                                           border: Border.all(
-                                                            color: Color.fromARGB(
-                                                                255,
-                                                                227,
-                                                                224,
-                                                                224),
+                                                            color:
+                                                                Color.fromARGB(
+                                                                    255,
+                                                                    227,
+                                                                    224,
+                                                                    224),
                                                             width: 1,
                                                           ),
                                                           boxShadow: [
@@ -758,19 +817,22 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                                 Row(
                                                   children: [
                                                     CustomRichText(
-                                                        title: 'Vehicle  No. : '),
+                                                        title:
+                                                            'Vehicle  No. : '),
                                                     Dimens.boxWidth10,
                                                     Container(
-                                                        decoration: BoxDecoration(
+                                                        decoration:
+                                                            BoxDecoration(
                                                           borderRadius:
                                                               BorderRadius
                                                                   .circular(10),
                                                           border: Border.all(
-                                                            color: Color.fromARGB(
-                                                                255,
-                                                                227,
-                                                                224,
-                                                                224),
+                                                            color:
+                                                                Color.fromARGB(
+                                                                    255,
+                                                                    227,
+                                                                    224,
+                                                                    224),
                                                             width: 1,
                                                           ),
                                                           boxShadow: [
@@ -810,16 +872,18 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                                         title: 'Job Ref. : '),
                                                     Dimens.boxWidth10,
                                                     Container(
-                                                        decoration: BoxDecoration(
+                                                        decoration:
+                                                            BoxDecoration(
                                                           borderRadius:
                                                               BorderRadius
                                                                   .circular(10),
                                                           border: Border.all(
-                                                            color: Color.fromARGB(
-                                                                255,
-                                                                227,
-                                                                224,
-                                                                224),
+                                                            color:
+                                                                Color.fromARGB(
+                                                                    255,
+                                                                    227,
+                                                                    224,
+                                                                    224),
                                                             width: 1,
                                                           ),
                                                           boxShadow: [
@@ -853,32 +917,36 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                                   ],
                                                 ),
                                                 Dimens.boxHeight5,
-                                                Row(
-                                                  children: [
-                                                    Dimens.boxWidth10,
-                                                    CustomRichText(
-                                                        title: 'Currency: '),
-                                                    Dimens.boxWidth10,
-                                                    SizedBox(
-                                                      child: DropdownWebStock(
-                                                        width:
-                                                            MediaQuery.of(context)
-                                                                    .size
-                                                                    .width /
-                                                                5,
-                                                        dropdownList: controller
-                                                            .unitCurrencyList,
-                                                        isValueSelected: controller
-                                                            .isUnitCurrencySelected
-                                                            .value,
-                                                        selectedValue: controller
-                                                            .selectedUnitCurrency
-                                                            .value,
-                                                        onValueChanged: controller
-                                                            .onValueChanged,
+                                                IgnorePointer(
+                                                  child: Row(
+                                                    children: [
+                                                      Dimens.boxWidth10,
+                                                      CustomRichText(
+                                                          title: 'Currency: '),
+                                                      Dimens.boxWidth10,
+                                                      SizedBox(
+                                                        child: DropdownWebStock(
+                                                          width: MediaQuery.of(
+                                                                      context)
+                                                                  .size
+                                                                  .width /
+                                                              5,
+                                                          dropdownList: controller
+                                                              .unitCurrencyList,
+                                                          isValueSelected:
+                                                              controller
+                                                                  .isUnitCurrencySelected
+                                                                  .value,
+                                                          selectedValue: controller
+                                                              .selectedUnitCurrency
+                                                              .value,
+                                                          onValueChanged:
+                                                              controller
+                                                                  .onValueChanged,
+                                                        ),
                                                       ),
-                                                    ),
-                                                  ],
+                                                    ],
+                                                  ),
                                                 ),
                                               ],
                                             ),
@@ -888,11 +956,12 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                       ),
                                     ),
                                     Container(
-                                      margin: Dimens.edgeInsets20, //height: 300,
-                                      height:
-                                          ((controller.goDetails!.value.length) *
-                                                  80) +
-                                              170,
+                                      margin:
+                                          Dimens.edgeInsets20, //height: 300,
+                                      height: ((controller
+                                                  .goDetails!.value.length) *
+                                              80) +
+                                          170,
                                       decoration: BoxDecoration(
                                         border: Border.all(
                                           color: ColorValues
@@ -954,7 +1023,8 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                                 "Requested  Qty",
                                                 style: TextStyle(
                                                     fontSize: 15,
-                                                    fontWeight: FontWeight.bold),
+                                                    fontWeight:
+                                                        FontWeight.bold),
                                               )),
                                               DataColumn2(
                                                   // fixedWidth: 300,
@@ -962,7 +1032,8 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                                 "Cost",
                                                 style: TextStyle(
                                                     fontSize: 15,
-                                                    fontWeight: FontWeight.bold),
+                                                    fontWeight:
+                                                        FontWeight.bold),
                                               )),
                                               DataColumn2(
                                                   // fixedWidth: 300,
@@ -970,7 +1041,8 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                                 "Dispatch Qty",
                                                 style: TextStyle(
                                                     fontSize: 15,
-                                                    fontWeight: FontWeight.bold),
+                                                    fontWeight:
+                                                        FontWeight.bold),
                                               )),
                                               DataColumn2(
                                                   // fixedWidth: 300,
@@ -978,7 +1050,8 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                                 "Received  Qty",
                                                 style: TextStyle(
                                                     fontSize: 15,
-                                                    fontWeight: FontWeight.bold),
+                                                    fontWeight:
+                                                        FontWeight.bold),
                                               )),
                                               DataColumn2(
                                                   //  fixedWidth: 300,
@@ -986,7 +1059,8 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                                 "Accepted Qty",
                                                 style: TextStyle(
                                                     fontSize: 15,
-                                                    fontWeight: FontWeight.bold),
+                                                    fontWeight:
+                                                        FontWeight.bold),
                                               )),
                                               DataColumn2(
                                                   //  fixedWidth: 300,
@@ -994,7 +1068,8 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                                 "Damaged Items",
                                                 style: TextStyle(
                                                     fontSize: 15,
-                                                    fontWeight: FontWeight.bold),
+                                                    fontWeight:
+                                                        FontWeight.bold),
                                               )),
                                             ],
                                             rows: controller.rowItem.value
@@ -1086,9 +1161,12 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                                                 padding:
                                                                     const EdgeInsets
                                                                         .only(
-                                                                        left: 10,
-                                                                        right: 10,
-                                                                        top: 10),
+                                                                        left:
+                                                                            10,
+                                                                        right:
+                                                                            10,
+                                                                        top:
+                                                                            10),
                                                                 child:
                                                                     IgnorePointer(
                                                                   child: Column(
@@ -1097,16 +1175,13 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                                                             .start,
                                                                     children: [
                                                                       DropdownWebStock(
-                                                                        width: MediaQuery.of(
-                                                                                context)
+                                                                        width: MediaQuery.of(context)
                                                                             .size
                                                                             .width,
                                                                         dropdownList:
-                                                                            controller
-                                                                                .paid,
+                                                                            controller.paid,
                                                                         selectedValue:
-                                                                            mapData[
-                                                                                "value"],
+                                                                            mapData["value"],
                                                                         onValueChanged:
                                                                             (list,
                                                                                 selectedValue) {
@@ -1119,11 +1194,8 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                                                           mapData["value"] =
                                                                               selectedValue;
                                                                           controller.paiddropdownMapperData[selectedValue] = list.firstWhere(
-                                                                              (element) =>
-                                                                                  element.name ==
-                                                                                  selectedValue,
-                                                                              orElse:
-                                                                                  null);
+                                                                              (element) => element.name == selectedValue,
+                                                                              orElse: null);
                                                                         },
                                                                       ),
                                                                     ],
@@ -1136,17 +1208,18 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                                                             'key'] ==
                                                                         "Cost")
                                                                 ? Padding(
-                                                                    padding:
-                                                                        EdgeInsets
-                                                                            .only(
-                                                                                top: 10),
-                                                                    child: Column(
+                                                                    padding: EdgeInsets
+                                                                        .only(
+                                                                            top:
+                                                                                10),
+                                                                    child:
+                                                                        Column(
                                                                       mainAxisAlignment:
                                                                           MainAxisAlignment
                                                                               .start,
                                                                       children: [
                                                                         Container(
-            
+
                                                                             // padding: EdgeInsets.all(value),
                                                                             decoration:
                                                                                 BoxDecoration(
@@ -1161,15 +1234,12 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                                                                   spreadRadius: 1.0,
                                                                                 ),
                                                                               ],
-                                                                              color:
-                                                                                  ColorValues.whiteColor,
-                                                                              borderRadius:
-                                                                                  BorderRadius.circular(5),
+                                                                              color: ColorValues.whiteColor,
+                                                                              borderRadius: BorderRadius.circular(5),
                                                                             ),
                                                                             child:
                                                                                 IgnorePointer(
-                                                                              child:
-                                                                                  LoginCustomTextfield(
+                                                                              child: LoginCustomTextfield(
                                                                                 width: (Get.width * .4),
                                                                                 keyboardType: TextInputType.number,
                                                                                 inputFormatters: <TextInputFormatter>[
@@ -1188,9 +1258,8 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                                                 : (mapData['key'] ==
                                                                         "Received")
                                                                     ? Padding(
-                                                                        padding: EdgeInsets
-                                                                            .only(
-                                                                                top: 10),
+                                                                        padding:
+                                                                            EdgeInsets.only(top: 10),
                                                                         child:
                                                                             Column(
                                                                           mainAxisAlignment:
@@ -1200,8 +1269,7 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                                                           children: [
                                                                             Container(
                                                                               // padding: EdgeInsets.all(value),
-                                                                              decoration:
-                                                                                  BoxDecoration(
+                                                                              decoration: BoxDecoration(
                                                                                 boxShadow: [
                                                                                   BoxShadow(
                                                                                     color: Colors.black26,
@@ -1216,8 +1284,7 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                                                                 color: ColorValues.whiteColor,
                                                                                 borderRadius: BorderRadius.circular(5),
                                                                               ),
-                                                                              child:
-                                                                                  LoginCustomTextfield(
+                                                                              child: LoginCustomTextfield(
                                                                                 width: (Get.width * .4),
                                                                                 keyboardType: TextInputType.number,
                                                                                 inputFormatters: <TextInputFormatter>[
@@ -1231,8 +1298,7 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                                                                 },
                                                                               ),
                                                                             ),
-                                                                            Dimens
-                                                                                .boxHeight10,
+                                                                            Dimens.boxHeight10,
                                                                             controller.dropdownMapperData[record[0]['value']]?.asset_type == "Spare"
                                                                                 ? Text(
                                                                                     "Sr No",
@@ -1278,11 +1344,10 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                                                                 EdgeInsets.only(top: 10),
                                                                             child:
                                                                                 Column(
-                                                                              mainAxisAlignment:
-                                                                                  MainAxisAlignment.start,
+                                                                              mainAxisAlignment: MainAxisAlignment.start,
                                                                               children: [
                                                                                 Container(
-            
+
                                                                                     // padding: EdgeInsets.all(value),
                                                                                     decoration: BoxDecoration(
                                                                                       boxShadow: [
@@ -1431,8 +1496,8 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                             child: Column(
                                               children: [
                                                 Padding(
-                                                  padding:
-                                                      const EdgeInsets.all(10.0),
+                                                  padding: const EdgeInsets.all(
+                                                      10.0),
                                                   child: Row(
                                                     children: [
                                                       Text(
@@ -1443,14 +1508,17 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                                   ),
                                                 ),
                                                 Divider(
-                                                  color:
-                                                      ColorValues.greyLightColour,
+                                                  color: ColorValues
+                                                      .greyLightColour,
                                                 ),
                                                 Expanded(
                                                   child: DataTable2(
                                                     border: TableBorder.all(
                                                         color: Color.fromARGB(
-                                                            255, 206, 229, 234)),
+                                                            255,
+                                                            206,
+                                                            229,
+                                                            234)),
                                                     columns: [
                                                       DataColumn(
                                                           label: Text(
@@ -1458,7 +1526,8 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                                         style: TextStyle(
                                                             fontSize: 15,
                                                             fontWeight:
-                                                                FontWeight.bold),
+                                                                FontWeight
+                                                                    .bold),
                                                       )),
                                                       DataColumn(
                                                           label: Text(
@@ -1466,7 +1535,8 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                                         style: TextStyle(
                                                             fontSize: 15,
                                                             fontWeight:
-                                                                FontWeight.bold),
+                                                                FontWeight
+                                                                    .bold),
                                                       )),
                                                       DataColumn(
                                                           label: Text(
@@ -1474,7 +1544,8 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                                         style: TextStyle(
                                                             fontSize: 15,
                                                             fontWeight:
-                                                                FontWeight.bold),
+                                                                FontWeight
+                                                                    .bold),
                                                       )),
                                                       DataColumn(
                                                           label: Text(
@@ -1482,7 +1553,8 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                                         style: TextStyle(
                                                             fontSize: 15,
                                                             fontWeight:
-                                                                FontWeight.bold),
+                                                                FontWeight
+                                                                    .bold),
                                                       )),
                                                       DataColumn(
                                                           label: Text(
@@ -1490,14 +1562,17 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                                         style: TextStyle(
                                                             fontSize: 15,
                                                             fontWeight:
-                                                                FontWeight.bold),
+                                                                FontWeight
+                                                                    .bold),
                                                       )),
                                                     ],
-                                                    rows: List<DataRow>.generate(
+                                                    rows:
+                                                        List<DataRow>.generate(
                                                       controller.historyList
                                                               ?.length ??
                                                           0,
-                                                      (index) => DataRow(cells: [
+                                                      (index) =>
+                                                          DataRow(cells: [
                                                         DataCell(Text(controller
                                                                 .historyList?[
                                                                     index]
@@ -1533,6 +1608,84 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                   ],
                                 ),
                               ),
+                              if (controller.openPurchaseDatePicker)
+                                Positioned(
+                                  right: 60,
+                                  top: 130,
+                                  child: DatePickerWidget(
+                                    minDate: DateTime(DateTime.now().year),
+                                    maxDate: DateTime(DateTime.now().year, 13,
+                                        0), // last date of this year
+                                    controller: DateRangePickerController(),
+                                    selectionChanges: (p0) {
+                                      print('po valu ${p0.value.toString()}');
+                                      controller.purchaseDateTc.text =
+                                          DateFormat('yyyy-MM-dd')
+                                              .format(p0.value);
+                                      controller.openPurchaseDatePicker =
+                                          !controller.openPurchaseDatePicker;
+                                      controller.update(['stock_Mangement']);
+                                    },
+                                  ),
+                                ),
+                              if (controller.openChallanDatePicker)
+                                Positioned(
+                                  right: 65,
+                                  top: 170,
+                                  child: DatePickerWidget(
+                                    minDate: DateTime(DateTime.now().year),
+                                    maxDate: DateTime(DateTime.now().year, 13,
+                                        0), // last date of this year
+                                    controller: DateRangePickerController(),
+                                    selectionChanges: (p0) {
+                                      print('po valu ${p0.value.toString()}');
+                                      controller.challanDateTc.text =
+                                          DateFormat('yyyy-MM-dd')
+                                              .format(p0.value);
+                                      controller.openChallanDatePicker =
+                                          !controller.openChallanDatePicker;
+                                      controller.update(['stock_Mangement']);
+                                    },
+                                  ),
+                                ),
+                              if (controller.openPODatePicker)
+                                Positioned(
+                                  right: 210,
+                                  top: 110,
+                                  child: DatePickerWidget(
+                                    minDate: DateTime(DateTime.now().year),
+                                    maxDate: DateTime(DateTime.now().year, 13,
+                                        0), // last date of this year
+                                    controller: DateRangePickerController(),
+                                    selectionChanges: (p0) {
+                                      print('po valu ${p0.value.toString()}');
+                                      controller.poDateDateTc.text =
+                                          DateFormat('yyyy-MM-dd')
+                                              .format(p0.value);
+                                      controller.openPODatePicker =
+                                          !controller.openPODatePicker;
+                                      controller.update(['stock_Mangement']);
+                                    },
+                                  ),
+                                ),
+                              if (controller.openReceivedPicker)
+                                Positioned(
+                                  right: 65,
+                                  top: 230,
+                                  child: DatePickerWidget(
+                                    // last date of this year
+                                    controller: DateRangePickerController(),
+                                    selectionChanges: (p0) {
+                                      print('po valu ${p0.value.toString()}');
+                                      controller.receivedDateTc.text =
+                                          DateFormat('yyyy-MM-dd')
+                                              .format(p0.value);
+                                      controller.openReceivedPicker =
+                                          !controller.openReceivedPicker;
+                                      controller.update(['stock_Mangement']);
+                                    },
+                                  ),
+                                ),
                             ],
                           ),
                         ),
@@ -1554,7 +1707,7 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                   //     },
                   //   ),
                   // ),
-            
+
                   // controller.getPurchaseDetailsByIDModel.value?.status == 307
                   //     ?
                   // Container(
@@ -1568,26 +1721,26 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                   //   ),
                   // ),
                   Dimens.boxWidth15,
-                  controller.getPurchaseDetailsByIDModel.value?.status == 306 &&
-                              varUserAccessModel.value.access_list!
-                                      .where((e) =>
-                                          e.feature_id == UserAccessConstants.kGoodsFeatureId &&
-                                          e.add ==
-                                              UserAccessConstants.kHaveAddAccess)
-                                      .length >
+                  controller.getPurchaseDetailsByIDModel.value?.status ==
+                                  306 &&
+                              varUserAccessModel.value.access_list!.where((e) => e.feature_id == UserAccessConstants.kGoodsFeatureId && e.add == UserAccessConstants.kHaveAddAccess).length >
                                   0 ||
                           controller.getPurchaseDetailsByIDModel.value?.status == 307 &&
                               varUserAccessModel.value.access_list!
                                       .where((e) =>
                                           e.feature_id == UserAccessConstants.kGoodsFeatureId &&
                                           e.add ==
-                                              UserAccessConstants.kHaveAddAccess)
+                                              UserAccessConstants
+                                                  .kHaveAddAccess)
                                       .length >
                                   0 ||
                           controller.getPurchaseDetailsByIDModel.value?.status ==
                                   309 &&
                               varUserAccessModel.value.access_list!
-                                      .where((e) => e.feature_id == UserAccessConstants.kGoodsFeatureId && e.add == UserAccessConstants.kHaveAddAccess)
+                                      .where((e) =>
+                                          e.feature_id ==
+                                              UserAccessConstants.kGoodsFeatureId &&
+                                          e.add == UserAccessConstants.kHaveAddAccess)
                                       .length >
                                   0
                       ? Container(
@@ -1601,27 +1754,28 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                           ),
                         )
                       : Dimens.box0,
+
                   Dimens.boxWidth15,
-                  controller.getPurchaseDetailsByIDModel.value?.status == 306 &&
-                              varUserAccessModel.value.access_list!
-                                      .where((e) =>
-                                          e.feature_id == UserAccessConstants.kGoodsFeatureId &&
-                                          e.add ==
-                                              UserAccessConstants.kHaveAddAccess)
-                                      .length >
+                  controller.getPurchaseDetailsByIDModel.value?.status ==
+                                  306 &&
+                              varUserAccessModel.value.access_list!.where((e) => e.feature_id == UserAccessConstants.kGoodsFeatureId && e.add == UserAccessConstants.kHaveAddAccess).length >
                                   0 ||
                           controller.getPurchaseDetailsByIDModel.value?.status == 307 &&
                               varUserAccessModel.value.access_list!
                                       .where((e) =>
                                           e.feature_id == UserAccessConstants.kGoodsFeatureId &&
                                           e.add ==
-                                              UserAccessConstants.kHaveAddAccess)
+                                              UserAccessConstants
+                                                  .kHaveAddAccess)
                                       .length >
                                   0 ||
                           controller.getPurchaseDetailsByIDModel.value?.status ==
                                   309 &&
                               varUserAccessModel.value.access_list!
-                                      .where((e) => e.feature_id == UserAccessConstants.kGoodsFeatureId && e.add == UserAccessConstants.kHaveAddAccess)
+                                      .where((e) =>
+                                          e.feature_id ==
+                                              UserAccessConstants.kGoodsFeatureId &&
+                                          e.add == UserAccessConstants.kHaveAddAccess)
                                       .length >
                                   0
                       ? Container(
@@ -1657,7 +1811,7 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                           ),
                         )
                       : Dimens.box0,
-            
+
                   Dimens.boxWidth15,
                   varUserAccessModel.value.access_list!
                               .where((e) =>
@@ -1703,7 +1857,7 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                           ),
                         )
                       : Dimens.box0,
-            
+
                   // :
                   // Container(),
                   Spacer()
