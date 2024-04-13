@@ -66,7 +66,7 @@ class SafetyQuestionsListContentWeb
                     child: Text(" / BREAKDOWN MAINTENANCE",
                         style: Styles.greyLight14),
                   ),
-                  Text(" / PERMIT TYPE CHECKLIST", style: Styles.greyLight14)
+                  Text(" / PERMIT TYPE CHECKPOINT", style: Styles.greyLight14)
                 ],
               ),
             ),
@@ -80,8 +80,8 @@ class SafetyQuestionsListContentWeb
                 child: Obx(() {
                   return Text(
                     controller.isContainerVisible.value
-                        ? 'Close Permit checklist'
-                        : 'Open Permit Checklist',
+                        ? 'Close Permit checkpoint'
+                        : 'Open Permit checkpoint',
                   );
                 }),
               ),
@@ -115,7 +115,7 @@ class SafetyQuestionsListContentWeb
                                         CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        "Add Permit Type Checklist",
+                                        "Add Permit Type Checkpoint",
                                         style: Styles.blackBold16,
                                       ),
                                       SizedBox(
@@ -128,8 +128,8 @@ class SafetyQuestionsListContentWeb
                                             children: [
                                               Text(
                                                 controller.selectedItem == null
-                                                    ? "permit type added Successfully in the List."
-                                                    : "permit type updated Successfully in the List.",
+                                                    ? "permit checkpoint added Successfully in the List."
+                                                    : "permit checkpoint updated Successfully in the List.",
                                                 style: TextStyle(
                                                     fontSize: 16,
                                                     color: Color.fromARGB(
@@ -826,7 +826,7 @@ class SafetyQuestionsListContentWeb
                             Padding(
                               padding: const EdgeInsets.all(10.0),
                               child: Text(
-                                "List of Permit Type Checklist",
+                                "List of Permit Type Checkpoint",
                                 style: Styles.blackBold16,
                               ),
                             ),
