@@ -135,6 +135,7 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
+                                        Spacer(),
                                         Column(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.end,
@@ -167,7 +168,7 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                                 ),
                                               ],
                                             ),
-                                            Dimens.boxHeight5,
+                                            Dimens.boxHeight10,
 
                                             // Row(
                                             //   children: [
@@ -191,7 +192,7 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                             //     ),
                                             //   ],
                                             // ),
-                                            Dimens.boxHeight5,
+
                                             Row(
                                               children: [
                                                 CustomRichText(
@@ -212,7 +213,7 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                                 ),
                                               ],
                                             ),
-                                            Dimens.boxHeight5,
+                                            // Dimens.boxHeight5,
                                             // Row(
                                             //   children: [
                                             //     CustomRichText(
@@ -235,7 +236,7 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                             //     ),
                                             //   ],
                                             // ),
-                                            Dimens.boxHeight5,
+                                            // Dimens.boxHeight5,
                                             // Row(
                                             //   children: [
                                             //     CustomRichText(
@@ -252,7 +253,7 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                             //     ),
                                             //   ],
                                             // ),
-                                            Dimens.boxHeight5,
+                                            // Dimens.boxHeight5,
                                             // Row(
                                             //   children: [
                                             //     CustomRichText(
@@ -377,9 +378,9 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                             //     ),
                                             //   ],
                                             // ),
-                                            SizedBox(
-                                              height: 6,
-                                            ),
+                                            // SizedBox(
+                                            //   height: 6,
+                                            // ),
                                             Row(
                                               children: [
                                                 CustomRichText(
@@ -404,9 +405,9 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                                 ),
                                               ],
                                             ),
-                                            SizedBox(
-                                              height: 6,
-                                            ),
+                                            // SizedBox(
+                                            //   height: 6,
+                                            // ),
                                             // Row(
                                             //   children: [
                                             //     CustomRichText(
@@ -431,9 +432,9 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                             //     ),
                                             //   ],
                                             // ),
-                                            SizedBox(
-                                              height: 6,
-                                            ),
+                                            // SizedBox(
+                                            //   height: 6,
+                                            // ),
                                             // Row(
                                             //   children: [
                                             //     CustomRichText(
@@ -476,9 +477,9 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                             //     ),
                                             //   ],
                                             // ),
-                                            SizedBox(
-                                              height: 6,
-                                            ),
+                                            // SizedBox(
+                                            //   height: 6,
+                                            // ),
                                             // Row(
                                             //   children: [
                                             //     CustomRichText(
@@ -531,7 +532,7 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                             ),
                                           ],
                                         ),
-                                        Dimens.boxWidth30,
+                                        Spacer(),
                                       ],
                                     ),
                                   ),
@@ -709,8 +710,8 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                               ),
                             if (controller.openPODatePicker)
                               Positioned(
-                                right: 65,
-                                top: 200,
+                                right: 210,
+                                top: 110,
                                 child: DatePickerWidget(
                                   minDate: DateTime(DateTime.now().year),
                                   maxDate: DateTime(DateTime.now().year, 13,
