@@ -38,6 +38,8 @@ class GetPurchaseDetailsByIDModel {
   String? challan_no;
   String? purchaseDate;
   int? location_ID;
+  String? freight_value;
+  String? inspection_report;
   String? facilityName;
 
   List<Items> goDetails;
@@ -58,6 +60,8 @@ class GetPurchaseDetailsByIDModel {
     this.job_ref,
     this.gir_no,
     this.vehicle_no,
+    this.freight_value,
+    this.inspection_report,
     this.condition_pkg_received,
     this.lr_no,
     this.no_pkg_received,
@@ -104,6 +108,9 @@ class GetPurchaseDetailsByIDModel {
         challan_date:
             Utility.getFormatedyearMonthDay(parsedJson['challan_date'] ?? ""),
         challan_no: parsedJson["challan_no"] ?? "",
+        inspection_report: parsedJson["inspection_report"] ?? "",
+        freight_value: parsedJson["freight_value"] ?? "",
+
         purchaseDate:
             Utility.getFormatedyearMonthDay(parsedJson['purchaseDate'] ?? ""),
         location_ID: parsedJson["location_ID"] ?? 0,
@@ -120,6 +127,8 @@ class GetPurchaseDetailsByIDModel {
         // "asset_type_ID": asset_type_ID,
         "vendorID": vendorID,
         "status": status,
+        "freight_value": freight_value,
+        "inspection_report": inspection_report,
         "status_short": status_short,
         "status_long": status_long,
         "accepted_qty": accepted_qty,
