@@ -612,6 +612,8 @@ class StockManagementAddGoodsOrdersController extends GetxController {
       amount: int.tryParse(_amountCtrlr) ?? 0,
       currencyID: selectedUnitCurrencyId,
       items: items,
+      freight_value: "",
+      inspection_report: "",
     );
 
     // Convert the CreateGoModel instance to JSON
@@ -688,6 +690,8 @@ class StockManagementAddGoodsOrdersController extends GetxController {
         vehicle_no: _vehicleNoCtrlr,
         gir_no: _girNoCtrlr,
         job_ref: _jobRefCtrlr,
+        freight_value: "",
+        inspection_report: "",
         amount: int.tryParse(_amountCtrlr) ?? 0,
         currencyID: selectedUnitCurrencyId,
         items: items);

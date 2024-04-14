@@ -19,15 +19,15 @@ class DropdownWebStock extends StatelessWidget {
     this.margin,
   });
 
-  late final String? selectedValue;
-  final bool? isValueSelected;
+  String? selectedValue;
+  bool? isValueSelected;
   final List? dropdownList;
   final bool? isEditable;
-  final Function(dynamic, dynamic) onValueChanged;
+  Function(dynamic, dynamic) onValueChanged;
   final dynamic controller;
   final FocusNode? focusNode;
-  final double? width;
-  final EdgeInsetsGeometry? margin;
+  double? width;
+  EdgeInsetsGeometry? margin;
 
   @override
   Widget build(BuildContext context) {
