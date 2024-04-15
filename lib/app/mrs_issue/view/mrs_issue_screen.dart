@@ -32,42 +32,26 @@ class MrsIssueScreen extends GetView<MrsIssueController> {
           (Responsive.isMobile(context) || Responsive.isTablet(context))
               ? HomeDrawerMobile()
               : null,
-      body: Stack(children: [
-        AnimatedContainer(
-            duration: Duration(milliseconds: 450),
-            margin: EdgeInsets.only(
-              left: Responsive.isDesktop(context)
-                  ? homecontroller.menuButton.value
-                      ? 250.0
-                      : 70.0
-                  : 0,
-            ),
-            width: Get.width,
-            height: Get.height,
-            child: Row(
-              children: [
-                (Responsive.isMobile(context) || Responsive.isTablet(context))
-                    ? Dimens.box0
-                    : Container(),
-                Expanded(
-                  child: Column(
-                    children: [
-                      if (Responsive.isMobile(context))
-                        Expanded(child: MrsIssueContentMobile()),
-                      if (Responsive.isDesktop(context))
-                        Expanded(
-                          child: MrsIssueContentWeb(),
-                        )
-                    ],
-                  ),
+      body: Container(
+          child: Row(
+            children: [
+              (Responsive.isMobile(context) || Responsive.isTablet(context))
+                  ? Dimens.box0
+                  : Container(),
+              Expanded(
+                child: Column(
+                  children: [
+                    if (Responsive.isMobile(context))
+                      Expanded(child: MrsIssueContentMobile()),
+                    if (Responsive.isDesktop(context))
+                      Expanded(
+                        child: MrsIssueContentWeb(),
+                      )
+                  ],
                 ),
-              ],
-            )),
-        Responsive.isDesktop(context)
-            ? AnimatedPositioned(
-                child: HomeDrawer(), duration: Duration(milliseconds: 450))
-            : Dimens.box0
-      ]),
+              ),
+            ],
+          )),
     );
   }
 }

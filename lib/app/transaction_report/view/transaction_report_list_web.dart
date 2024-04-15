@@ -629,6 +629,8 @@ class TransactionReportListDataSource extends DataTableSource {
               .contains(controller.toActorNameFilterText.value.toLowerCase()) &&
           (transactionReportList.assetItemName ?? '').contains(
               controller.assetItemNameFilterText.value.toLowerCase()) &&
+          (transactionReportList.assettype ?? '')
+              .contains(controller.assettypeFilterText.value.toLowerCase()) &&
           (transactionReportList.qty ?? '')
               .toString()
               .contains(controller.qtyFilterText.value.toLowerCase()) &&
@@ -655,6 +657,7 @@ class TransactionReportListDataSource extends DataTableSource {
       '${transactionReportListDetails?.toActorType ?? ''}',
       '${transactionReportListDetails?.toActorName ?? ''}',
       '${transactionReportListDetails?.assetItemName ?? ''}',
+      '${transactionReportListDetails?.assettype ?? ''}',
       '${transactionReportListDetails?.qty ?? ''}',
       '${transactionReportListDetails?.lastUpdated ?? ''}',
     ];

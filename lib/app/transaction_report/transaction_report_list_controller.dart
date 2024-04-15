@@ -69,6 +69,7 @@ class TransactionReportListController extends GetxController {
   RxString toActorTypeFilterText = ''.obs;
   RxString toActorNameFilterText = ''.obs;
   RxString assetItemNameFilterText = ''.obs;
+  RxString assettypeFilterText = ''.obs;
   RxString qtyFilterText = ''.obs;
   RxString lastUpdatedFilterText = ''.obs;
   RxString statusFilterText = ''.obs;
@@ -105,6 +106,7 @@ class TransactionReportListController extends GetxController {
     "To Actor Type": true,
     "To Actor Name": true,
     "Asset Item Name": true,
+    "Asset type": true,
     "Qty": true,
     "Last Updated": true,
     // "Status": true
@@ -118,6 +120,7 @@ class TransactionReportListController extends GetxController {
     "To Actor Type": 200,
     "To Actor Name": 223,
     "Asset Item Name": 153,
+    "Asset type": 153,
     "Qty": 130,
     "Last Updated": 120,
     // "Status": 100
@@ -143,6 +146,7 @@ class TransactionReportListController extends GetxController {
       "To Actor Type": toActorTypeFilterText,
       "To Actor Name": toActorNameFilterText,
       "Asset Item Name": assetItemNameFilterText,
+      "Asset type": assettypeFilterText,
       "Qty": qtyFilterText,
       "Last Updated": lastUpdatedFilterText,
       // "Status": statusFilterText
@@ -151,8 +155,7 @@ class TransactionReportListController extends GetxController {
       facilityId = event;
       Future.delayed(Duration(seconds: 1), () async {
         if (selectedactorTypeId == 3) {
-          getPmTaskList(
-              facilityId, formattedTodate1, formattedFromdate1);
+          getPmTaskList(facilityId, formattedTodate1, formattedFromdate1);
         }
       });
     });
@@ -265,8 +268,7 @@ class TransactionReportListController extends GetxController {
               int.tryParse(actorType[userIndex].id ?? "") ?? 0;
           selectedActorType.value = actorType[userIndex].name;
           if (selectedactorTypeId == AppConstants.kTask) {
-            getPmTaskList(
-                facilityId, formattedTodate1, formattedFromdate1);
+            getPmTaskList(facilityId, formattedTodate1, formattedFromdate1);
           } else if (selectedactorTypeId == AppConstants.kStore) {
             getFacilityList();
           } else if (selectedactorTypeId == AppConstants.kJobCard) {
