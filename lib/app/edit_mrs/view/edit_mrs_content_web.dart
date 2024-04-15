@@ -64,7 +64,7 @@ class EditMrsContentWeb extends GetView<EditMrsController> {
                       Get.back();
                     },
                     child:
-                        Text(" / STOCK MANAGEMENT ", style: Styles.greyLight14),
+                        Text(" / MRS LIST ", style: Styles.greyLight14),
                   ),
                   Text(" / NEW MATERIAL SLIP ", style: Styles.greyLight14)
                 ],
@@ -410,8 +410,7 @@ class EditMrsContentWeb extends GetView<EditMrsController> {
                                                             ),
                                                             child:
                                                                 LoginCustomTextfield(
-                                                              inputFormatters: <
-                                                                  TextInputFormatter>[
+                                                              inputFormatters: <TextInputFormatter>[
                                                                 FilteringTextInputFormatter
                                                                     .digitsOnly
                                                               ],
@@ -545,6 +544,7 @@ class EditMrsContentWeb extends GetView<EditMrsController> {
                     onPressed: () {
                       // controller.addUser();
                       controller.editMrs();
+                      Get.back();
                     },
                   ),
                 ),
