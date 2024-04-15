@@ -7,21 +7,21 @@ List<GetAssetItemsModel> MrsModelFromJson(String str) =>
         json.decode(str).map((x) => GetAssetItemsModel.fromJson(x)));
 
 class GetAssetItemsModel {
-  int? asset_type_ID;
-  int? asset_ID;
+  dynamic asset_type_ID;
+  dynamic asset_ID;
   String? asset_code;
   String? cat_name;
-  int? id;
+  dynamic id;
   dynamic serial_number;
   String? name;
   String? asset_type;
   String? approval_required;
   String? file_path;
-  int? asset_master_id;
-  int? spare_multi_selection;
-  int? available_qty;
-  int? mrs_return_ID;
-  int? asset_item_ID;
+  dynamic asset_master_id;
+  dynamic spare_multi_selection;
+  dynamic available_qty;
+  dynamic mrs_return_ID;
+  dynamic asset_item_ID;
   String? asset_MDM_code;
   double? returned_qty;
   double? used_qty;
@@ -30,12 +30,12 @@ class GetAssetItemsModel {
   String? issued_date;
   double? requested_qty;
   String? asset_name;
-  int? status;
+  dynamic status;
   String? status_short;
   String? status_long;
   TextEditingController? issued_qty_controller;
-  int? materialID;
-  int? assetMasterID;
+  dynamic materialID;
+  dynamic assetMasterID;
   TextEditingController? serial_number_controller;
 
   GetAssetItemsModel(

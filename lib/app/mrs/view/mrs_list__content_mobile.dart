@@ -1,6 +1,7 @@
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/home/widgets/mobile_header_widget.dart';
 import 'package:cmms/app/mrs/mrs_list_controller.dart';
+import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/domain/models/get_mrs_list_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -10,6 +11,7 @@ import '../../widgets/date_picker.dart';
 
 class MrsListContentMobile extends GetView<MrsListController> {
   MrsListContentMobile({Key? key}) : super(key: key);
+  final homecontroller = Get.find<HomeController>();
 
   @override
   Widget build(BuildContext context) {
@@ -85,10 +87,12 @@ class MrsListContentMobile extends GetView<MrsListController> {
                               onTap: () {
                                 controller.clearStoreData();
                                 // controller.clearStoreDatatype();
-                                // var _taskId =
-                                //     controller.pmTaskList[index]!.id ?? 0;
-                                // Get.toNamed(Routes.pmTaskView,
-                                //     arguments: {'pmTaskId': _taskId});
+                                var _mrsId = controller.mrsList[index]!.id ?? 0;
+                                controller.mrsList[index]?.status == 323
+                                    ? Get.toNamed(Routes.mrsIssueScreen,
+                                        arguments: {'mrsId': _mrsId})
+                                    : Get.toNamed(Routes.mrsApprovalScreen,
+                                        arguments: {'mrsId': _mrsId});
                               },
                               child: Container(
                                 margin: EdgeInsets.only(left: 10, right: 10),
