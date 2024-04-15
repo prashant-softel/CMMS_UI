@@ -76,7 +76,7 @@ class MrsIssueContentWeb extends GetView<MrsIssueController> {
                             child: Text(" / STOCK MANAGEMENT ",
                                 style: Styles.greyMediumLight12),
                           ),
-                          Text(" / MATERIAL REQUISITION  Issue",
+                          Text(" / MATERIAL REQUISITION ISSUE",
                               style: Styles.greyMediumLight12)
                         ],
                       ),

@@ -14,6 +14,7 @@ class TransactionReportListModel {
   String? toActorName;
   int? assetItemID;
   String? assetItemName;
+  String? assettype;
   double? qty;
   String? facilityName;
   String? remarks;
@@ -30,6 +31,7 @@ class TransactionReportListModel {
     this.toActorName,
     this.assetItemID,
     this.assetItemName,
+    this.assettype,
     this.qty,
     this.facilityName,
     this.remarks,
@@ -49,6 +51,7 @@ class TransactionReportListModel {
       toActorName: json["toActorName"],
       assetItemID: json["assetItemID"],
       assetItemName: json["assetItemName"],
+      assettype: json["asset_type"],
       qty: json["qty"],
       facilityName: json["facilityName"],
       remarks: json["remarks"],
@@ -68,6 +71,7 @@ class TransactionReportListModel {
     data['toActorName'] = this.toActorName;
     data['assetItemID'] = this.assetItemID;
     data['assetItemName'] = this.assetItemName;
+    data['asset_type'] = this.assettype;
     data['qty'] = this.qty;
     data['facilityName'] = this.facilityName;
     data['remarks'] = this.remarks;
