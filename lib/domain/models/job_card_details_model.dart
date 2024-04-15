@@ -323,3 +323,21 @@ class UploadFiles {
         "uploadfile_ids": List<dynamic>.from(uploadfile_ids!.map((x) => x)),
       };
 }
+
+class SelectedEmployee {
+  int? empId;
+  String? responsibility;
+
+  SelectedEmployee({this.empId, this.responsibility});
+
+  factory SelectedEmployee.fromJson(Map<String, dynamic> json) =>
+      SelectedEmployee(
+        empId: json["empId"],
+        responsibility: json["responsibility"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "empId": empId,
+        "responsibility": responsibility,
+      };
+}

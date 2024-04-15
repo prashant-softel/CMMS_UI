@@ -631,7 +631,7 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                                                       'Are you sure you want to Close Job ?',
                                                     );
                                                     if (confirmed == true) {
-                                                      controller.closeJob();
+                                                      controller.closeJob(fileIds: dropzoneController.fileIds);
 
                                                       Text(
                                                           'Are you sure you want to Close Job ?');
