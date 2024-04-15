@@ -276,7 +276,7 @@ class PreventiveMaintenanceExecutionContentWeb
                                             DataColumn2(
                                                 fixedWidth: 200,
                                                 label: Text(
-                                                  "Execution Status",
+                                                  "Execution Done By",
                                                   style: TextStyle(
                                                       fontSize: 15,
                                                       fontWeight:
@@ -489,7 +489,7 @@ class PreventiveMaintenanceExecutionContentWeb
                                                                       'value'] ==
                                                                   "0"
                                                               ? ""
-                                                              : "Execution Done by ${mapData['completed']}")
+                                                              : "${mapData['completed']}")
                                                           : Text(mapData[
                                                                   'value'] ??
                                                               ''),
