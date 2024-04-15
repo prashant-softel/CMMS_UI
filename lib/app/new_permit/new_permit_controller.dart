@@ -533,7 +533,13 @@ class NewPermitController extends GetxController {
         isChecked.value = dataFromPreviousScreen['isChecked'];
         jobModel = dataFromPreviousScreen['jobModel'];
         pmtaskViewModel = dataFromPreviousScreen['pmTaskModel'];
+        permitPresenter.saveValue(permitId: permitId.value.toString());
+        permitPresenter.savePmTaskModelValue(
+            pmtaskModel: pmtaskViewModel.toString());
+        permitPresenter.saveisCheckedValue(isChecked: isChecked.value);
+        permitPresenter.saveJobModelValue(jobModel: jobModel.toString());
         print("SChedule check point: ${pmtaskViewModel}");
+
         for (int i = 0; i < pmtaskViewModel!.schedules!.length; i++) {
           allChecklistNames +=
               pmtaskViewModel!.schedules![i].checklist_name ?? '';
@@ -542,13 +548,6 @@ class NewPermitController extends GetxController {
           //   allChecklistNames += ', ';
           // }
         }
-
-        permitPresenter.saveValue(permitId: permitId.value.toString());
-        permitPresenter.savePmTaskModelValue(
-            pmtaskModel: pmtaskViewModel.toString());
-        permitPresenter.saveJobModelValue(jobModel: jobModel.toString());
-
-        permitPresenter.saveisCheckedValue(isChecked: isChecked.value);
       } else {
         permitId.value = int.tryParse(_permitId) ?? 0;
         if (jobDetail != null) {
