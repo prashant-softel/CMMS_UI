@@ -386,16 +386,32 @@ class PreventiveTaskViewContentMobile
                             Spacer(),
                             controller.listMrsByTaskId!.isNotEmpty
                                 ? Dimens.box0
-                                : Container(
-                                    padding: Dimens.edgeInsets8_2_8_2,
-                                    decoration: BoxDecoration(
-                                      color: ColorValues.addNewColor,
-                                      borderRadius: BorderRadius.circular(4),
-                                    ),
-                                    child: Text(
-                                      'Add MRS',
-                                      style: Styles.white10.copyWith(
-                                        color: Colors.white,
+                                : GestureDetector(
+                                    onTap: () async {
+                                      Get.offAllNamed(Routes.createMrs,
+                                          arguments: {
+                                            "whereUsedId": controller
+                                                .pmtaskViewModel.value?.id,
+                                            "activity": controller
+                                                .pmtaskViewModel
+                                                .value
+                                                ?.plan_title,
+                                            "whereUsed": 27,
+                                            "fromActorTypeId": 2,
+                                            "to_actor_type_id": 3
+                                          });
+                                    },
+                                    child: Container(
+                                      padding: Dimens.edgeInsets8_2_8_2,
+                                      decoration: BoxDecoration(
+                                        color: ColorValues.addNewColor,
+                                        borderRadius: BorderRadius.circular(4),
+                                      ),
+                                      child: Text(
+                                        'Add MRS',
+                                        style: Styles.white10.copyWith(
+                                          color: Colors.white,
+                                        ),
                                       ),
                                     ),
                                   ),
@@ -485,40 +501,70 @@ class PreventiveTaskViewContentMobile
                                               ]),
                                               Row(//
                                                   children: [
-                                                Container(
-                                                  padding:
-                                                      Dimens.edgeInsets8_2_8_2,
-                                                  decoration: BoxDecoration(
-                                                    color:
-                                                        ColorValues.editColor,
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            4),
-                                                  ),
-                                                  child: Text(
-                                                    'Edit',
-                                                    style:
-                                                        Styles.white10.copyWith(
-                                                      color: Colors.white,
+                                                GestureDetector(
+                                                  onTap: () {
+                                                    controller.clearStoreData();
+
+                                                    // final _flutterSecureStorage =
+                                                    //     const FlutterSecureStorage();
+
+                                                    // _flutterSecureStorage.delete(key: "mrsId");
+                                                    int mrsId =
+                                                        pmTaskMrsModel?.mrsId ??
+                                                            0;
+                                                    Get.toNamed(Routes.editMrs,
+                                                        arguments: {
+                                                          'mrsId': mrsId
+                                                        });
+                                                  },
+                                                  child: Container(
+                                                    padding: Dimens
+                                                        .edgeInsets8_2_8_2,
+                                                    decoration: BoxDecoration(
+                                                      color:
+                                                          ColorValues.editColor,
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              4),
+                                                    ),
+                                                    child: Text(
+                                                      'Edit',
+                                                      style: Styles.white10
+                                                          .copyWith(
+                                                        color: Colors.white,
+                                                      ),
                                                     ),
                                                   ),
                                                 ),
                                                 Spacer(),
-                                                Container(
-                                                  padding:
-                                                      Dimens.edgeInsets8_2_8_2,
-                                                  decoration: BoxDecoration(
-                                                    color:
-                                                        ColorValues.viewColor,
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            4),
-                                                  ),
-                                                  child: Text(
-                                                    'View',
-                                                    style:
-                                                        Styles.white10.copyWith(
-                                                      color: Colors.white,
+                                                GestureDetector(
+                                                  onTap: () {
+                                                    int mrsId =
+                                                        pmTaskMrsModel?.mrsId ??
+                                                            0;
+                                                    Get.toNamed(
+                                                        Routes
+                                                            .mrsApprovalScreen,
+                                                        arguments: {
+                                                          'mrsId': mrsId
+                                                        });
+                                                  },
+                                                  child: Container(
+                                                    padding: Dimens
+                                                        .edgeInsets8_2_8_2,
+                                                    decoration: BoxDecoration(
+                                                      color:
+                                                          ColorValues.viewColor,
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              4),
+                                                    ),
+                                                    child: Text(
+                                                      'View',
+                                                      style: Styles.white10
+                                                          .copyWith(
+                                                        color: Colors.white,
+                                                      ),
                                                     ),
                                                   ),
                                                 ),

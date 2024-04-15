@@ -191,7 +191,7 @@ class EditMrsContentWeb extends GetView<EditMrsController> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                "Equipment",
+                                "Material",
                                 style: Styles.blue700,
                               ),
                               GestureDetector(
