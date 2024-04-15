@@ -2164,13 +2164,13 @@ class DataRepository extends DomainRepository {
   Future<ResponseModel> startJobCard({
     String? auth,
     jcCard,
-    files,
+    jobCard,
     bool? isLoading,
   }) async =>
       await connectHelper.startJobCard(
         auth: auth,
         jcCard: jcCard,
-        files: files,
+        jobCard: jobCard,
         isLoading: isLoading ?? false,
       );
 

@@ -426,13 +426,19 @@ class JobCardDetailsController extends GetxController {
   Future<void> startJobCard(
       {required int jcCard, List<dynamic>? fileIds}) async {
     await startStopJobCard();
+
+    var jobCard = {
+      "uploadfile_ids": fileIds,
+      "employee_list": employee,
+    };
+
     print("filesids: ${fileIds}");
-    Map<String, dynamic> files = UploadFiles(uploadfile_ids: fileIds).toJson();
+    // Map<String, dynamic> files = UploadFiles(uploadfile_ids: fileIds).toJson();
     if (isJobCardStarted.value == true) {
       Map<String, dynamic>? responseMapJobCardStarted =
           await jobCardDetailsPresenter.startJobCard(
         jcCard: jcCard,
-        files: files,
+        jobCard: jobCard,
         isLoading: true,
       );
 
