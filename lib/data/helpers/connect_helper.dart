@@ -2476,10 +2476,10 @@ class ConnectHelper {
   Future<ResponseModel> startJobCard({
     String? auth,
     int? jcCard,
-    files,
+    jobCard,
     bool? isLoading,
   }) async {
-    final body = jsonEncode(files);
+    final body = jsonEncode(jobCard);
     var responseModel = await apiWrapper.makeRequest(
       'JC/StartJC?jc_id=$jcCard',
       Request.put,

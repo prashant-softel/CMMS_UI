@@ -38,6 +38,7 @@ class CreatePermitModel {
   int? TBT_Done_by;
   String? TBT_Done_at;
   String? PHYSICAL_ISO_REMARK;
+  bool? is_physical_iso_required;
 
   CreatePermitModel({
     this.permit_id,
@@ -69,6 +70,7 @@ class CreatePermitModel {
     this.TBT_Done_by,
     this.TBT_Done_at,
     this.PHYSICAL_ISO_REMARK,
+    this.is_physical_iso_required,
   });
 
   factory CreatePermitModel.fromJson(Map<String, dynamic> json) =>
@@ -122,6 +124,7 @@ class CreatePermitModel {
             : [],
         TBT_Done_by: json['TBT_Done_by'],
         PHYSICAL_ISO_REMARK: json['PHYSICAL_ISO_REMARK'],
+        is_physical_iso_required: json['is_physical_iso_required'] ?? true,
       );
 
   Map<String, dynamic> toJson() => {
@@ -156,6 +159,7 @@ class CreatePermitModel {
         "uploadfile_ids": List<dynamic>.from(uploadfile_ids!.map((x) => x)),
         "TBT_Done_by": TBT_Done_by,
         "PHYSICAL_ISO_REMARK": PHYSICAL_ISO_REMARK,
+        "is_physical_iso_required": is_physical_iso_required,
       };
 }
 

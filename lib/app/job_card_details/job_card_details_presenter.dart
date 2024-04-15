@@ -35,13 +35,13 @@ class JobCardDetailsPresenter {
   Future<Map<String, dynamic>?> startJobCard({
     String? auth,
     int? jcCard,
-    files,
+    jobCard,
     bool? isLoading,
   }) async =>
       await jobCardDetailsUsecase.startJobCard(
         auth: auth,
         jcCard: jcCard,
-        files: files,
+        jobCard: jobCard,
         isLoading: isLoading,
       );
 

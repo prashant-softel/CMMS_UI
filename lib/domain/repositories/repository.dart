@@ -5778,7 +5778,7 @@ class Repository {
   Future<Map<String, dynamic>> startJobCard(
     auth,
     jcCard,
-    files,
+    jobCard,
     bool? isLoading,
   ) async {
     try {
@@ -5786,7 +5786,7 @@ class Repository {
       final res = await _dataRepository.startJobCard(
         auth: auth,
         jcCard: jcCard,
-        files: files,
+        jobCard: jobCard,
         isLoading: isLoading,
       );
 
