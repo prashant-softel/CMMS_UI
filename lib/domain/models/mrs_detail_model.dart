@@ -7,24 +7,24 @@ MrsDetailsModel mrsDetailsModelFromJson(String str) =>
     MrsDetailsModel.fromJson(json.decode(str));
 
 class MrsDetailsModel {
-  int? id;
-  int? requested_by_emp_ID;
+  dynamic id;
+  dynamic requested_by_emp_ID;
   dynamic approver_name;
   String? requestd_date;
   dynamic returnDate;
   String? approval_date;
   String? issued_date;
-  int? approval_status;
+  dynamic approval_status;
   String? requested_by_name;
-  int? status;
+  dynamic status;
   String? status_short;
   String? status_long;
   String? activity;
-  int? whereUsedType;
-  int? whereUsedTypeId;
+  dynamic whereUsedType;
+  dynamic whereUsedTypeId;
   String? remarks;
   String? whereUsedTypeName;
-  int? whereUsedRefID;
+  dynamic whereUsedRefID;
   List<GetAssetItemsModel>? cmmrsItems;
 
   MrsDetailsModel(
@@ -104,8 +104,8 @@ class MrsDetailsModel {
 }
 
 // class CmmrsItems {
-//   int? id;
-//   int? mrs_return_ID;
+//   dynamic id;
+//   dynamic mrs_return_ID;
 //   int? asset_item_ID;
 //   String? asset_MDM_code;
 //   double? returned_qty;

@@ -838,21 +838,21 @@ class _AddJobContentWebState extends State<AddJobContentWeb> {
                                                     dialogWidth: 300,
                                                     dialogHeight: 400,
                                                     searchable: true,
-                                                    // validator: (selectedItems) {
-                                                    //   if (controller.isToolRequiredToWorkTypeSelected.value == false) {
-                                                    //     return "Required field";
-                                                    //   } else {
-                                                    //     return null;
-                                                    //   }
-                                                    // },
+                                                    validator: (selectedItems) {
+                                                      if (controller.isToolRequiredToWorkTypeSelected.value == false) {
+                                                        return "Required field";
+                                                      } else {
+                                                        return null;
+                                                      }
+                                                    },
                                                     autovalidateMode:
                                                         AutovalidateMode.always,
                                                     decoration: BoxDecoration(
                                                       border: Border.all(
                                                         color:
-                                                            // con troller.isToolRequiredToWorkTypeSelected.value == false
-                                                            //     ? Colors.red
-                                                            //     :
+                                                            controller.isToolRequiredToWorkTypeSelected.value == false
+                                                                ? Colors.red
+                                                                :
                                                             Colors.transparent,
                                                         width: 1.0,
                                                       ),

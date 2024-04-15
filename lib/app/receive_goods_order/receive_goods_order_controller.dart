@@ -114,7 +114,7 @@ class ReceiveGoodsOrdersController extends GetxController {
         updatePaidBy();
       });
       Future.delayed(Duration(seconds: 1), () {
-        getBusinessList(4,facilityId);
+        getBusinessList(4, facilityId);
       });
       Future.delayed(Duration(seconds: 1), () {
         getAssetList(facilityId);
@@ -238,13 +238,18 @@ class ReceiveGoodsOrdersController extends GetxController {
             (e) => e?.name == element.assetItem_Name,
             orElse: null)!;
       });
-
-      challanDateTc.text =
+      String challanDate =
           getPurchaseDetailsByIDModel.value?.challan_date ?? "";
-      purchaseDateTc.text =
+      challanDateTc.text = (challanDate == "0001-01-01") ? "" : challanDate;
+
+      String receivedDate = getPurchaseDetailsByIDModel.value?.receivedAt ?? "";
+      receivedDateTc.text = (receivedDate == "0001-01-01") ? "" : receivedDate;
+
+      String purchaseDate =
           getPurchaseDetailsByIDModel.value?.purchaseDate ?? "";
+      purchaseDateTc.text = (purchaseDate == "0001-01-01") ? "" : purchaseDate;
       poDateDateTc.text = getPurchaseDetailsByIDModel.value?.po_date ?? "";
-      receivedDateTc.text = getPurchaseDetailsByIDModel.value?.receivedAt ?? "";
+
       challanNoCtrlr.text = getPurchaseDetailsByIDModel.value?.challan_no ?? "";
       pOCtrlr.text = getPurchaseDetailsByIDModel.value?.po_no ?? "";
       frieghtToPayPaidCtrlr.text =
@@ -271,9 +276,9 @@ class ReceiveGoodsOrdersController extends GetxController {
     }
   }
 
-  Future<void> getBusinessList(ListType,int facilityId) async {
+  Future<void> getBusinessList(ListType, int facilityId) async {
     final list = await receiveGoodsOrdersPresenter.getBusinessList(
-      facilityId:facilityId,
+      facilityId: facilityId,
       ListType: ListType,
       isLoading: true,
     );

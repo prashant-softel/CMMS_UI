@@ -18,6 +18,9 @@ class CreateGoModel {
   String? receivedAt;
   String? no_pkg_received;
   String? lr_no;
+  String? freight_value;
+  String? inspection_report;
+
   String? condition_pkg_received;
   String? vehicle_no;
   String? gir_no;
@@ -26,6 +29,7 @@ class CreateGoModel {
   int? amount;
   int? currencyID;
   int? is_submit;
+
   List<Items?>? items;
   CreateGoModel(
       {this.facility_id,
@@ -41,6 +45,8 @@ class CreateGoModel {
       this.receivedAt,
       this.no_pkg_received,
       this.lr_no,
+      this.freight_value,
+      this.inspection_report,
       this.condition_pkg_received,
       this.vehicle_no,
       this.gir_no,
@@ -67,6 +73,8 @@ class CreateGoModel {
       receivedAt: json['receivedAt'],
       no_pkg_received: json['no_pkg_received'],
       lr_no: json['lr_no'],
+      freight_value: json['freight_value'],
+      inspection_report: json['inspection_report'],
       condition_pkg_received: json['condition_pkg_received'],
       vehicle_no: json['vehicle_no'],
       gir_no: json['gir_no'],
@@ -95,6 +103,8 @@ class CreateGoModel {
         "receivedAt": receivedAt,
         "no_pkg_received": no_pkg_received,
         "lr_no": lr_no,
+        "freight_value": freight_value,
+        "inspection_report": inspection_report,
         "condition_pkg_received": condition_pkg_received,
         "vehicle_no": vehicle_no,
         "gir_no": gir_no,
