@@ -29,16 +29,10 @@ class DropdownWebStock extends StatelessWidget {
   double? width;
   EdgeInsetsGeometry? margin;
 
-  ///
   @override
   Widget build(BuildContext context) {
-    ///
-    return //
-
-        //   Obx(
-        // () =>
-        Container(
-      height: 30, //MediaQuery.of(context).size.height * 0.040,
+    return Container(
+      height: 30,
       width: width,
       margin: margin,
       decoration: BoxDecoration(
@@ -66,9 +60,7 @@ class DropdownWebStock extends StatelessWidget {
         color: ColorValues.whiteColor,
         borderRadius: BorderRadius.circular(5),
       ),
-      child: //
-
-          Obx(
+      child: Obx(
         () => DropdownSearch<String>(
           autoValidateMode: AutovalidateMode.always,
           validator: (String? item) {
@@ -85,6 +77,9 @@ class DropdownWebStock extends StatelessWidget {
               Icons.arrow_drop_down,
               color: ColorValues.blackColor,
             ),
+            iconSize: 24,
+            padding: EdgeInsets.zero,
+            alignment: Alignment.center,
           ),
           popupProps: PopupProps.menu(
             searchFieldProps: TextFieldProps(
@@ -124,7 +119,5 @@ class DropdownWebStock extends StatelessWidget {
         ),
       ),
     );
-    // );
   }
 }
-//  popupProps: PopupProps.menu(menuProps: MenuProps()),

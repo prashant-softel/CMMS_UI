@@ -1205,9 +1205,6 @@ class NewPermitWeb extends GetView<NewPermitController> {
                           Dimens.boxHeight10,
                           controller.permitId.value > 0 &&
                                   controller.newPermitDetailsModel.value!
-                                          .ptwStatus ==
-                                      125 &&
-                                  controller.newPermitDetailsModel.value!
                                           .file_list!.length >
                                       0
                               ? Center(
@@ -1299,7 +1296,24 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                                             }
                                                             // String baseUrl = 'http://172.20.43.9:83/';
                                                           },
-                                                        )
+                                                        ),
+                                                        controller
+                                                                    .newPermitDetailsModel
+                                                                    .value!
+                                                                    .ptwStatus ==
+                                                                125
+                                                            ? Dimens.box0
+                                                            : TableActionButton(
+                                                                color: ColorValues
+                                                                    .deleteColor,
+                                                                icon: Icons
+                                                                    .delete_outline_outlined,
+                                                                message:
+                                                                    'remove',
+                                                                onPress: () {
+                                                                  controller.removeImage(controller.file_list![index]?.id, index);
+                                                                },
+                                                              ),
                                                       ],
                                                     ),
                                                   ),

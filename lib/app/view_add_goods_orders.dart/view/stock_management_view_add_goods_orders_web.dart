@@ -225,6 +225,7 @@ class _ViewAddGoodsOrdersWebState extends State<ViewAddGoodsOrdersWeb> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
+                                        Spacer(),
                                         Column(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.end,
@@ -257,46 +258,46 @@ class _ViewAddGoodsOrdersWebState extends State<ViewAddGoodsOrdersWeb> {
                                               ],
                                             ),
                                             Dimens.boxHeight5,
-                                            Row(
-                                              children: [
-                                                CustomRichText(
-                                                    title: 'Challan No.: '),
-                                                Dimens.boxWidth10,
-                                                Container(
-                                                    decoration: BoxDecoration(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              10),
-                                                      border: Border.all(
-                                                        color: Color.fromARGB(
-                                                            255, 227, 224, 224),
-                                                        width: 1,
-                                                      ),
-                                                      boxShadow: [
-                                                        BoxShadow(
-                                                          color: Color.fromARGB(
-                                                                  255,
-                                                                  236,
-                                                                  234,
-                                                                  234)
-                                                              .withOpacity(0.5),
-                                                          spreadRadius: 2,
-                                                          blurRadius: 5,
-                                                          offset: Offset(0, 2),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                    width:
-                                                        (MediaQuery.of(context)
-                                                                .size
-                                                                .width *
-                                                            .2),
-                                                    child: LoginCustomTextfield(
-                                                      textController: controller
-                                                          .challanNoCtrlr,
-                                                    )),
-                                              ],
-                                            ),
+                                            // Row(
+                                            //   children: [
+                                            //     CustomRichText(
+                                            //         title: 'Challan No.: '),
+                                            //     Dimens.boxWidth10,
+                                            //     Container(
+                                            //         decoration: BoxDecoration(
+                                            //           borderRadius:
+                                            //               BorderRadius.circular(
+                                            //                   10),
+                                            //           border: Border.all(
+                                            //             color: Color.fromARGB(
+                                            //                 255, 227, 224, 224),
+                                            //             width: 1,
+                                            //           ),
+                                            //           boxShadow: [
+                                            //             BoxShadow(
+                                            //               color: Color.fromARGB(
+                                            //                       255,
+                                            //                       236,
+                                            //                       234,
+                                            //                       234)
+                                            //                   .withOpacity(0.5),
+                                            //               spreadRadius: 2,
+                                            //               blurRadius: 5,
+                                            //               offset: Offset(0, 2),
+                                            //             ),
+                                            //           ],
+                                            //         ),
+                                            //         width:
+                                            //             (MediaQuery.of(context)
+                                            //                     .size
+                                            //                     .width *
+                                            //                 .2),
+                                            //         child: LoginCustomTextfield(
+                                            //           textController: controller
+                                            //               .challanNoCtrlr,
+                                            //         )),
+                                            //   ],
+                                            // ),
                                             Dimens.boxHeight5,
                                             Row(
                                               children: [
@@ -337,174 +338,176 @@ class _ViewAddGoodsOrdersWebState extends State<ViewAddGoodsOrdersWeb> {
                                                     )),
                                               ],
                                             ),
+                                            // Dimens.boxHeight5,
+                                            // Row(
+                                            //   children: [
+                                            //     CustomRichText(
+                                            //         title:
+                                            //             'Frieght:To Pay /Paid : '),
+                                            //     Dimens.boxWidth10,
+                                            //     Container(
+                                            //         decoration: BoxDecoration(
+                                            //           borderRadius:
+                                            //               BorderRadius.circular(
+                                            //                   10),
+                                            //           border: Border.all(
+                                            //             color: Color.fromARGB(
+                                            //                 255, 227, 224, 224),
+                                            //             width: 1,
+                                            //           ),
+                                            //           boxShadow: [
+                                            //             BoxShadow(
+                                            //               color: Color.fromARGB(
+                                            //                       255,
+                                            //                       236,
+                                            //                       234,
+                                            //                       234)
+                                            //                   .withOpacity(0.5),
+                                            //               spreadRadius: 2,
+                                            //               blurRadius: 5,
+                                            //               offset: Offset(0, 2),
+                                            //             ),
+                                            //           ],
+                                            //         ),
+                                            //         width:
+                                            //             (MediaQuery.of(context)
+                                            //                     .size
+                                            //                     .width *
+                                            //                 .2),
+                                            //         child: LoginCustomTextfield(
+                                            //           textController: controller
+                                            //               .frieghtToPayPaidCtrlr,
+                                            //         )),
+                                            //   ],
+                                            // ),
+                                            // Dimens.boxHeight5,
+                                            // Row(
+                                            //   children: [
+                                            //     CustomRichText(
+                                            //         title:
+                                            //             'No. of Packages  received :'),
+                                            //     Dimens.boxWidth10,
+                                            //     Container(
+                                            //         decoration: BoxDecoration(
+                                            //           borderRadius:
+                                            //               BorderRadius.circular(
+                                            //                   10),
+                                            //           border: Border.all(
+                                            //             color: Color.fromARGB(
+                                            //                 255, 227, 224, 224),
+                                            //             width: 1,
+                                            //           ),
+                                            //           boxShadow: [
+                                            //             BoxShadow(
+                                            //               color: Color.fromARGB(
+                                            //                       255,
+                                            //                       236,
+                                            //                       234,
+                                            //                       234)
+                                            //                   .withOpacity(0.5),
+                                            //               spreadRadius: 2,
+                                            //               blurRadius: 5,
+                                            //               offset: Offset(0, 2),
+                                            //             ),
+                                            //           ],
+                                            //         ),
+                                            //         width:
+                                            //             (MediaQuery.of(context)
+                                            //                     .size
+                                            //                     .width *
+                                            //                 .2),
+                                            //         child: LoginCustomTextfield(
+                                            //           textController: controller
+                                            //               .noOfPackagesReceivedCtrlr,
+                                            //         )),
+                                            //   ],
+                                            // ),
+                                            // Dimens.boxHeight5,
+                                            // Row(
+                                            //   children: [
+                                            //     CustomRichText(
+                                            //         title:
+                                            //             'Condition of Packages Received : '),
+                                            //     Dimens.boxWidth10,
+                                            //     Container(
+                                            //         decoration: BoxDecoration(
+                                            //           borderRadius:
+                                            //               BorderRadius.circular(
+                                            //                   10),
+                                            //           border: Border.all(
+                                            //             color: Color.fromARGB(
+                                            //                 255, 227, 224, 224),
+                                            //             width: 1,
+                                            //           ),
+                                            //           boxShadow: [
+                                            //             BoxShadow(
+                                            //               color: Color.fromARGB(
+                                            //                       255,
+                                            //                       236,
+                                            //                       234,
+                                            //                       234)
+                                            //                   .withOpacity(0.5),
+                                            //               spreadRadius: 2,
+                                            //               blurRadius: 5,
+                                            //               offset: Offset(0, 2),
+                                            //             ),
+                                            //           ],
+                                            //         ),
+                                            //         width:
+                                            //             (MediaQuery.of(context)
+                                            //                     .size
+                                            //                     .width *
+                                            //                 .2),
+                                            //         child: LoginCustomTextfield(
+                                            //           textController: controller
+                                            //               .conditionOfPackagesReceivedCtrlr,
+                                            //         )),
+                                            //   ],
+                                            // ),
+                                            // Dimens.boxHeight5,
+                                            // Row(
+                                            //   children: [
+                                            //     CustomRichText(
+                                            //         title: 'GIR. No. : '),
+                                            //     Dimens.boxWidth10,
+                                            //     Container(
+                                            //         decoration: BoxDecoration(
+                                            //           borderRadius:
+                                            //               BorderRadius.circular(
+                                            //                   10),
+                                            //           border: Border.all(
+                                            //             color: Color.fromARGB(
+                                            //                 255, 227, 224, 224),
+                                            //             width: 1,
+                                            //           ),
+                                            //           boxShadow: [
+                                            //             BoxShadow(
+                                            //               color: Color.fromARGB(
+                                            //                       255,
+                                            //                       236,
+                                            //                       234,
+                                            //                       234)
+                                            //                   .withOpacity(0.5),
+                                            //               spreadRadius: 2,
+                                            //               blurRadius: 5,
+                                            //               offset: Offset(0, 2),
+                                            //             ),
+                                            //           ],
+                                            //         ),
+                                            //         width:
+                                            //             (MediaQuery.of(context)
+                                            //                     .size
+                                            //                     .width *
+                                            //                 .2),
+                                            //         child: LoginCustomTextfield(
+                                            //           textController:
+                                            //               controller.girNoCtrlr,
+                                            //         )),
+                                            //   ],
+                                            // ),
+
                                             Dimens.boxHeight5,
-                                            Row(
-                                              children: [
-                                                CustomRichText(
-                                                    title:
-                                                        'Frieght:To Pay /Paid : '),
-                                                Dimens.boxWidth10,
-                                                Container(
-                                                    decoration: BoxDecoration(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              10),
-                                                      border: Border.all(
-                                                        color: Color.fromARGB(
-                                                            255, 227, 224, 224),
-                                                        width: 1,
-                                                      ),
-                                                      boxShadow: [
-                                                        BoxShadow(
-                                                          color: Color.fromARGB(
-                                                                  255,
-                                                                  236,
-                                                                  234,
-                                                                  234)
-                                                              .withOpacity(0.5),
-                                                          spreadRadius: 2,
-                                                          blurRadius: 5,
-                                                          offset: Offset(0, 2),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                    width:
-                                                        (MediaQuery.of(context)
-                                                                .size
-                                                                .width *
-                                                            .2),
-                                                    child: LoginCustomTextfield(
-                                                      textController: controller
-                                                          .frieghtToPayPaidCtrlr,
-                                                    )),
-                                              ],
-                                            ),
-                                            Dimens.boxHeight5,
-                                            Row(
-                                              children: [
-                                                CustomRichText(
-                                                    title:
-                                                        'No. of Packages  received :'),
-                                                Dimens.boxWidth10,
-                                                Container(
-                                                    decoration: BoxDecoration(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              10),
-                                                      border: Border.all(
-                                                        color: Color.fromARGB(
-                                                            255, 227, 224, 224),
-                                                        width: 1,
-                                                      ),
-                                                      boxShadow: [
-                                                        BoxShadow(
-                                                          color: Color.fromARGB(
-                                                                  255,
-                                                                  236,
-                                                                  234,
-                                                                  234)
-                                                              .withOpacity(0.5),
-                                                          spreadRadius: 2,
-                                                          blurRadius: 5,
-                                                          offset: Offset(0, 2),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                    width:
-                                                        (MediaQuery.of(context)
-                                                                .size
-                                                                .width *
-                                                            .2),
-                                                    child: LoginCustomTextfield(
-                                                      textController: controller
-                                                          .noOfPackagesReceivedCtrlr,
-                                                    )),
-                                              ],
-                                            ),
-                                            Dimens.boxHeight5,
-                                            Row(
-                                              children: [
-                                                CustomRichText(
-                                                    title:
-                                                        'Condition of Packages Received : '),
-                                                Dimens.boxWidth10,
-                                                Container(
-                                                    decoration: BoxDecoration(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              10),
-                                                      border: Border.all(
-                                                        color: Color.fromARGB(
-                                                            255, 227, 224, 224),
-                                                        width: 1,
-                                                      ),
-                                                      boxShadow: [
-                                                        BoxShadow(
-                                                          color: Color.fromARGB(
-                                                                  255,
-                                                                  236,
-                                                                  234,
-                                                                  234)
-                                                              .withOpacity(0.5),
-                                                          spreadRadius: 2,
-                                                          blurRadius: 5,
-                                                          offset: Offset(0, 2),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                    width:
-                                                        (MediaQuery.of(context)
-                                                                .size
-                                                                .width *
-                                                            .2),
-                                                    child: LoginCustomTextfield(
-                                                      textController: controller
-                                                          .conditionOfPackagesReceivedCtrlr,
-                                                    )),
-                                              ],
-                                            ),
-                                            Dimens.boxHeight5,
-                                            Row(
-                                              children: [
-                                                CustomRichText(
-                                                    title: 'GIR. No. : '),
-                                                Dimens.boxWidth10,
-                                                Container(
-                                                    decoration: BoxDecoration(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              10),
-                                                      border: Border.all(
-                                                        color: Color.fromARGB(
-                                                            255, 227, 224, 224),
-                                                        width: 1,
-                                                      ),
-                                                      boxShadow: [
-                                                        BoxShadow(
-                                                          color: Color.fromARGB(
-                                                                  255,
-                                                                  236,
-                                                                  234,
-                                                                  234)
-                                                              .withOpacity(0.5),
-                                                          spreadRadius: 2,
-                                                          blurRadius: 5,
-                                                          offset: Offset(0, 2),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                    width:
-                                                        (MediaQuery.of(context)
-                                                                .size
-                                                                .width *
-                                                            .2),
-                                                    child: LoginCustomTextfield(
-                                                      textController:
-                                                          controller.girNoCtrlr,
-                                                    )),
-                                              ],
-                                            ),
-                                            Dimens.boxHeight5,
+
                                             Row(children: [
                                               CustomRichText(
                                                   title: 'Amount : '),
@@ -549,66 +552,66 @@ class _ViewAddGoodsOrdersWebState extends State<ViewAddGoodsOrdersWeb> {
                                           crossAxisAlignment:
                                               CrossAxisAlignment.end,
                                           children: [
+                                            // Row(
+                                            //   children: [
+                                            //     CustomRichText(
+                                            //         title: 'Purchase Date :'),
+                                            //     Dimens.boxWidth10,
+                                            //     CustomTextFieldForStock(
+                                            //       width: MediaQuery.of(context)
+                                            //               .size
+                                            //               .width /
+                                            //           5.1,
+                                            //       numberTextField: true,
+                                            //       onTap: () {
+                                            //         controller
+                                            //                 .openPurchaseDatePicker =
+                                            //             !controller
+                                            //                 .openPurchaseDatePicker;
+                                            //         controller.update(
+                                            //             ['stock_Mangement']);
+                                            //       },
+                                            //       textController:
+                                            //           controller.purchaseDateTc,
+                                            //     ),
+                                            //   ],
+                                            // ),
+                                            // Dimens.boxHeight5,
+                                            // Row(
+                                            //   children: [
+                                            //     CustomRichText(
+                                            //         title: 'Challan Date : '),
+                                            //     Dimens.boxWidth10,
+                                            //     CustomTextFieldForStock(
+                                            //       width: MediaQuery.of(context)
+                                            //               .size
+                                            //               .width /
+                                            //           5.1,
+                                            //       numberTextField: true,
+                                            //       onTap: () {
+                                            //         controller
+                                            //                 .openChallanDatePicker =
+                                            //             !controller
+                                            //                 .openChallanDatePicker;
+                                            //         controller.update(
+                                            //             ['stock_Mangement']);
+                                            //       },
+                                            //       textController:
+                                            //           controller.challanDateTc,
+                                            //     ),
+                                            //   ],
+                                            // ),
+                                            // Dimens.boxHeight5,
                                             Row(
                                               children: [
                                                 CustomRichText(
-                                                    title: 'Purchase Date :'),
+                                                    title: 'PO Date: '),
                                                 Dimens.boxWidth10,
                                                 CustomTextFieldForStock(
                                                   width: MediaQuery.of(context)
                                                           .size
                                                           .width /
-                                                      5.1,
-                                                  numberTextField: true,
-                                                  onTap: () {
-                                                    controller
-                                                            .openPurchaseDatePicker =
-                                                        !controller
-                                                            .openPurchaseDatePicker;
-                                                    controller.update(
-                                                        ['stock_Mangement']);
-                                                  },
-                                                  textController:
-                                                      controller.purchaseDateTc,
-                                                ),
-                                              ],
-                                            ),
-                                            Dimens.boxHeight5,
-                                            Row(
-                                              children: [
-                                                CustomRichText(
-                                                    title: 'Challan Date : '),
-                                                Dimens.boxWidth10,
-                                                CustomTextFieldForStock(
-                                                  width: MediaQuery.of(context)
-                                                          .size
-                                                          .width /
-                                                      5.1,
-                                                  numberTextField: true,
-                                                  onTap: () {
-                                                    controller
-                                                            .openChallanDatePicker =
-                                                        !controller
-                                                            .openChallanDatePicker;
-                                                    controller.update(
-                                                        ['stock_Mangement']);
-                                                  },
-                                                  textController:
-                                                      controller.challanDateTc,
-                                                ),
-                                              ],
-                                            ),
-                                            Dimens.boxHeight5,
-                                            Row(
-                                              children: [
-                                                CustomRichText(
-                                                    title: 'PO Date  : '),
-                                                Dimens.boxWidth10,
-                                                CustomTextFieldForStock(
-                                                  width: MediaQuery.of(context)
-                                                          .size
-                                                          .width /
-                                                      5.1,
+                                                      5,
                                                   numberTextField: true,
                                                   onTap: () {
                                                     controller
@@ -623,158 +626,162 @@ class _ViewAddGoodsOrdersWebState extends State<ViewAddGoodsOrdersWeb> {
                                                 ),
                                               ],
                                             ),
-                                            Dimens.boxHeight5,
-                                            Row(
-                                              children: [
-                                                CustomRichText(
-                                                    title: 'Received Date  : '),
-                                                Dimens.boxWidth10,
-                                                CustomTextFieldForStock(
-                                                  width: MediaQuery.of(context)
-                                                          .size
-                                                          .width /
-                                                      5.1,
-                                                  numberTextField: true,
-                                                  onTap: () {
-                                                    controller
-                                                            .openReceivedPicker =
-                                                        !controller
-                                                            .openReceivedPicker;
-                                                    controller.update(
-                                                        ['stock_Mangement']);
-                                                  },
-                                                  textController:
-                                                      controller.receivedDateTc,
-                                                ),
-                                              ],
+                                            SizedBox(
+                                              height: 7,
                                             ),
-                                            Dimens.boxHeight5,
+                                            // Row(
+                                            //   children: [
+                                            //     CustomRichText(
+                                            //         title: 'Received Date  : '),
+                                            //     Dimens.boxWidth10,
+                                            //     CustomTextFieldForStock(
+                                            //       width: MediaQuery.of(context)
+                                            //               .size
+                                            //               .width /
+                                            //           5.1,
+                                            //       numberTextField: true,
+                                            //       onTap: () {
+                                            //         controller
+                                            //                 .openReceivedPicker =
+                                            //             !controller
+                                            //                 .openReceivedPicker;
+                                            //         controller.update(
+                                            //             ['stock_Mangement']);
+                                            //       },
+                                            //       textController:
+                                            //           controller.receivedDateTc,
+                                            //     ),
+                                            //   ],
+                                            // ),
+                                            // Dimens.boxHeight5,
+
+                                            // Row(
+                                            //   children: [
+                                            //     CustomRichText(
+                                            //         title: 'L.R No.  : '),
+                                            //     Dimens.boxWidth10,
+                                            //     Container(
+                                            //         decoration: BoxDecoration(
+                                            //           borderRadius:
+                                            //               BorderRadius.circular(
+                                            //                   10),
+                                            //           border: Border.all(
+                                            //             color: Color.fromARGB(
+                                            //                 255, 227, 224, 224),
+                                            //             width: 1,
+                                            //           ),
+                                            //           boxShadow: [
+                                            //             BoxShadow(
+                                            //               color: Color.fromARGB(
+                                            //                       255,
+                                            //                       236,
+                                            //                       234,
+                                            //                       234)
+                                            //                   .withOpacity(0.5),
+                                            //               spreadRadius: 2,
+                                            //               blurRadius: 5,
+                                            //               offset: Offset(0, 2),
+                                            //             ),
+                                            //           ],
+                                            //         ),
+                                            //         width:
+                                            //             (MediaQuery.of(context)
+                                            //                     .size
+                                            //                     .width *
+                                            //                 .2),
+                                            //         child: LoginCustomTextfield(
+                                            //           textController:
+                                            //               controller.lrNoCtrlr,
+                                            //         )),
+                                            //   ],
+                                            // ),
+                                            // Dimens.boxHeight5,
+                                            // Row(
+                                            //   children: [
+                                            //     CustomRichText(
+                                            //         title: 'Vehicle  No. : '),
+                                            //     Dimens.boxWidth10,
+                                            //     Container(
+                                            //         decoration: BoxDecoration(
+                                            //           borderRadius:
+                                            //               BorderRadius.circular(
+                                            //                   10),
+                                            //           border: Border.all(
+                                            //             color: Color.fromARGB(
+                                            //                 255, 227, 224, 224),
+                                            //             width: 1,
+                                            //           ),
+                                            //           boxShadow: [
+                                            //             BoxShadow(
+                                            //               color: Color.fromARGB(
+                                            //                       255,
+                                            //                       236,
+                                            //                       234,
+                                            //                       234)
+                                            //                   .withOpacity(0.5),
+                                            //               spreadRadius: 2,
+                                            //               blurRadius: 5,
+                                            //               offset: Offset(0, 2),
+                                            //             ),
+                                            //           ],
+                                            //         ),
+                                            //         width:
+                                            //             (MediaQuery.of(context)
+                                            //                     .size
+                                            //                     .width *
+                                            //                 .2),
+                                            //         child: LoginCustomTextfield(
+                                            //           textController: controller
+                                            //               .vehicleNoCtrlr,
+                                            //         )),
+                                            //   ],
+                                            // ),
+                                            // Dimens.boxHeight5,
+                                            // Row(
+                                            //   children: [
+                                            //     CustomRichText(
+                                            //         title: 'Job Ref. : '),
+                                            //     Dimens.boxWidth10,
+                                            //     Container(
+                                            //         decoration: BoxDecoration(
+                                            //           borderRadius:
+                                            //               BorderRadius.circular(
+                                            //                   10),
+                                            //           border: Border.all(
+                                            //             color: Color.fromARGB(
+                                            //                 255, 227, 224, 224),
+                                            //             width: 1,
+                                            //           ),
+                                            //           boxShadow: [
+                                            //             BoxShadow(
+                                            //               color: Color.fromARGB(
+                                            //                       255,
+                                            //                       236,
+                                            //                       234,
+                                            //                       234)
+                                            //                   .withOpacity(0.5),
+                                            //               spreadRadius: 2,
+                                            //               blurRadius: 5,
+                                            //               offset: Offset(0, 2),
+                                            //             ),
+                                            //           ],
+                                            //         ),
+                                            //         width:
+                                            //             (MediaQuery.of(context)
+                                            //                     .size
+                                            //                     .width *
+                                            //                 .2),
+                                            //         child: LoginCustomTextfield(
+                                            //           textController: controller
+                                            //               .jobRefCtrlr,
+                                            //         )),
+                                            //   ],
+                                            // ),
+
+                                            // Dimens.boxHeight5,
+
                                             Row(
                                               children: [
-                                                CustomRichText(
-                                                    title: 'L.R No.  : '),
-                                                Dimens.boxWidth10,
-                                                Container(
-                                                    decoration: BoxDecoration(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              10),
-                                                      border: Border.all(
-                                                        color: Color.fromARGB(
-                                                            255, 227, 224, 224),
-                                                        width: 1,
-                                                      ),
-                                                      boxShadow: [
-                                                        BoxShadow(
-                                                          color: Color.fromARGB(
-                                                                  255,
-                                                                  236,
-                                                                  234,
-                                                                  234)
-                                                              .withOpacity(0.5),
-                                                          spreadRadius: 2,
-                                                          blurRadius: 5,
-                                                          offset: Offset(0, 2),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                    width:
-                                                        (MediaQuery.of(context)
-                                                                .size
-                                                                .width *
-                                                            .2),
-                                                    child: LoginCustomTextfield(
-                                                      textController:
-                                                          controller.lrNoCtrlr,
-                                                    )),
-                                              ],
-                                            ),
-                                            Dimens.boxHeight5,
-                                            Row(
-                                              children: [
-                                                CustomRichText(
-                                                    title: 'Vehicle  No. : '),
-                                                Dimens.boxWidth10,
-                                                Container(
-                                                    decoration: BoxDecoration(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              10),
-                                                      border: Border.all(
-                                                        color: Color.fromARGB(
-                                                            255, 227, 224, 224),
-                                                        width: 1,
-                                                      ),
-                                                      boxShadow: [
-                                                        BoxShadow(
-                                                          color: Color.fromARGB(
-                                                                  255,
-                                                                  236,
-                                                                  234,
-                                                                  234)
-                                                              .withOpacity(0.5),
-                                                          spreadRadius: 2,
-                                                          blurRadius: 5,
-                                                          offset: Offset(0, 2),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                    width:
-                                                        (MediaQuery.of(context)
-                                                                .size
-                                                                .width *
-                                                            .2),
-                                                    child: LoginCustomTextfield(
-                                                      textController: controller
-                                                          .vehicleNoCtrlr,
-                                                    )),
-                                              ],
-                                            ),
-                                            Dimens.boxHeight5,
-                                            Row(
-                                              children: [
-                                                CustomRichText(
-                                                    title: 'Job Ref. : '),
-                                                Dimens.boxWidth10,
-                                                Container(
-                                                    decoration: BoxDecoration(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              10),
-                                                      border: Border.all(
-                                                        color: Color.fromARGB(
-                                                            255, 227, 224, 224),
-                                                        width: 1,
-                                                      ),
-                                                      boxShadow: [
-                                                        BoxShadow(
-                                                          color: Color.fromARGB(
-                                                                  255,
-                                                                  236,
-                                                                  234,
-                                                                  234)
-                                                              .withOpacity(0.5),
-                                                          spreadRadius: 2,
-                                                          blurRadius: 5,
-                                                          offset: Offset(0, 2),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                    width:
-                                                        (MediaQuery.of(context)
-                                                                .size
-                                                                .width *
-                                                            .2),
-                                                    child: LoginCustomTextfield(
-                                                      textController: controller
-                                                          .jobRefCtrlr,
-                                                    )),
-                                              ],
-                                            ),
-                                            Dimens.boxHeight5,
-                                            Row(
-                                              children: [
-                                                Dimens.boxWidth10,
                                                 CustomRichText(
                                                     title: 'Currency: '),
                                                 Dimens.boxWidth10,
@@ -801,7 +808,7 @@ class _ViewAddGoodsOrdersWebState extends State<ViewAddGoodsOrdersWeb> {
                                             ),
                                           ],
                                         ),
-                                        Dimens.boxWidth30,
+                                        Spacer(),
                                       ],
                                     ),
                                   ),

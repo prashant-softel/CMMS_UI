@@ -37,15 +37,11 @@ class GrievanceListScreen extends GetView<GrievanceController> {
                 height: Get.height,
                 child: Row(
                   children: [
-                    (Responsive.isMobile(context) ||
-                            Responsive.isTablet(context))
-                        ? Dimens.box0
-                        : Container(),
                     Expanded(
                       child: Column(
                         children: [
-                          if (Responsive.isMobile(context))
-                            Expanded(child: GrievanceListContentMobile()),
+                          // if (Responsive.isMobile(context))
+                          // Expanded(child: GrievanceListContentMobile()),
                           if (Responsive.isDesktop(context))
                             Expanded(
                               child: GrievanceListContentWeb(),

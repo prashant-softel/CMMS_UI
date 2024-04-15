@@ -29,6 +29,7 @@ class GoodsOrdersListModel {
   int? facility_id;
   String? facility_name;
   String? purchaseDate;
+  String? po_date;
   String? challandate;
   int? vendorID;
   int? status;
@@ -67,6 +68,7 @@ class GoodsOrdersListModel {
     this.facility_id,
     this.facility_name,
     this.purchaseDate,
+    this.po_date,
     this.challandate,
     this.vendorID,
     this.status,
@@ -108,6 +110,7 @@ class GoodsOrdersListModel {
       facility_id: json['facility_id'],
       facility_name: json['facilityName'],
       purchaseDate: Utility.getFormatedyearMonthDay(json['purchaseDate']),
+      po_date: Utility.getFormatedyearMonthDay(json['po_date']),
       vendorID: json['vendorID'],
       status: json['status'],
       asset_code: json['asset_code'],
@@ -149,6 +152,7 @@ class GoodsOrdersListModel {
         'facility_id': facility_id,
         'facilityName': facility_name,
         'purchaseDate': purchaseDate,
+        'po_date': po_date,
         'vendorID': vendorID,
         'status': status,
         'asset_code': asset_code,

@@ -241,7 +241,7 @@ class ViewPermitUsecase {
   }) async =>
       await repository.getViewPermitDetail(
         permitId: permitId,
-        facilityId:facilityId,
+        facilityId: facilityId,
         isLoading: isLoading ?? false,
       );
 

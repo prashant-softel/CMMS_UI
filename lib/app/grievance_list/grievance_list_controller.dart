@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/grievance_list/grievance_list_presenter.dart';
 import 'package:cmms/app/utils/user_access_constants.dart';
+import 'package:cmms/domain/models/grievance_List_model.dart';
 import 'package:cmms/domain/models/grievance_model.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -20,7 +21,7 @@ class GrievanceController extends GetxController {
   HomeController homeController = Get.find();
 
   ///
-  RxList<GrievanceModel?> grievanceList = <GrievanceModel?>[].obs;
+  RxList<GrievanceListModel?> grievanceList = <GrievanceListModel?>[].obs;
   RxList<BlockModel?> blockList = <BlockModel>[].obs;
   Rx<String> selectedBlock = ''.obs;
   RxList<String> grievanceListTableColumns = <String>[].obs;
@@ -58,7 +59,7 @@ class GrievanceController extends GetxController {
     int userId,
     bool self_view,
   ) async {
-    grievanceList.value = <GrievanceModel>[];
+    grievanceList.value = <GrievanceListModel>[];
     if (facilityId > 0) {
       final _grievanceList = await grievanceListPresenter.getGrievanceList(
         facilityId: facilityId,
@@ -95,7 +96,7 @@ class GrievanceController extends GetxController {
   int facilityId = 0;
   int userId = 0;
   String? GrievanceType;
-  GrievanceModel? grievanceModel;
+  GrievanceListModel? grievanceModel;
   PaginationController paginationController = PaginationController(
     rowCount: 0,
     rowsPerPage: 10,
@@ -134,8 +135,8 @@ class GrievanceController extends GetxController {
   }
 
   Future<void> getFacilityList({bool? isLoading}) async {
-    grievanceList.value = <GrievanceModel>[];
-    List<GrievanceModel?>? _grievanceList = <GrievanceModel?>[];
+    grievanceList.value = <GrievanceListModel>[];
+    List<GrievanceListModel?>? _grievanceList = <GrievanceListModel?>[];
 
     _grievanceList =
         await grievanceListPresenter.getGrievanceList(self_view: true);
@@ -194,6 +195,7 @@ class GrievanceController extends GetxController {
 
       return formattedDateTimeString;
     }
+
     ///
   }
 

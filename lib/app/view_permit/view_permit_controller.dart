@@ -120,10 +120,6 @@ class ViewPermitController extends GetxController {
     isCheckedJSA.value = !isCheckedJSA.value; // Toggle the checkbox state
   }
 
-  void _doSomething() {
-    // Do something
-  }
-
   Rx<PmtaskViewModel?> pmtaskViewModel = PmtaskViewModel().obs;
   Rx<JobDetailsModel?> jobDetailsModel = JobDetailsModel().obs;
 
@@ -509,22 +505,20 @@ class ViewPermitController extends GetxController {
     try {
       final _permitId = await viewPermitPresenter.getValue();
       final _type = await viewPermitPresenter.getTypeValue();
-
-      final _jobId = await viewPermitPresenter.getJobIdValue();
-
-      if (_permitId == null || _permitId == '' || _permitId == "null") {
+      // final _jobId = await viewPermitPresenter.getJobIdValue();
+      if (_permitId == null || _permitId == "" || _permitId == "null") {
         var dataFromPreviousScreen = Get.arguments;
-
         permitId.value = dataFromPreviousScreen['permitId'];
-        jobId.value = dataFromPreviousScreen['jobId'];
         type.value = dataFromPreviousScreen['type'];
-
+        // jobId.value = dataFromPreviousScreen['jobId'];
         viewPermitPresenter.saveValue(permitId: permitId.value.toString());
-        viewPermitPresenter.saveJobIdValue(jobId: jobId.value.toString());
         viewPermitPresenter.saveTypeValue(type: type.value.toString());
+        print("permitId: ${permitId.value}");
+        print("type: ${type.value}");
+        // print("jobId: ${jobId.value}");
+        // viewPermitPresenter.saveJobIdValue(jobId: jobId.value.toString());
       } else {
         permitId.value = int.tryParse(_permitId) ?? 0;
-        jobId.value = int.tryParse(_jobId ?? "") ?? 0;
         type.value = int.tryParse(_type ?? "") ?? 0;
       }
     } catch (e) {
