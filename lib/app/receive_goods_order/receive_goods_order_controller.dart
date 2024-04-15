@@ -219,11 +219,12 @@ class ReceiveGoodsOrdersController extends GetxController {
           {
             'key': "Order",
             "value": '${element.ordered_qty}',
-            // 'id': '${element.assetMasterItemID}'
+            'id': '${element.assetMasterItemID}'
           },
           {
             'key': "Received",
             "value": '${element.received_qty}',
+            "sr_no": '${element.sr_no}',
             // "lostQty": '${element.lost_qty}'
           },
           {
