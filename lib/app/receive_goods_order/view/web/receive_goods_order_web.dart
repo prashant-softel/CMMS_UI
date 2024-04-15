@@ -644,6 +644,53 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                                                 .amountCtrlr,
                                                       )),
                                                 ]),
+                                                  Dimens.boxHeight5,
+                                                Row(children: [
+                                                  CustomRichText(
+                                                      title: 'Freight : '),
+                                                  Dimens.boxWidth10,
+                                                  Container(
+                                                      decoration: BoxDecoration(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(10),
+                                                        border: Border.all(
+                                                          color: Color.fromARGB(
+                                                              255,
+                                                              227,
+                                                              224,
+                                                              224),
+                                                          width: 1,
+                                                        ),
+                                                        boxShadow: [
+                                                          BoxShadow(
+                                                            color: Color
+                                                                    .fromARGB(
+                                                                        255,
+                                                                        236,
+                                                                        234,
+                                                                        234)
+                                                                .withOpacity(
+                                                                    0.5),
+                                                            spreadRadius: 2,
+                                                            blurRadius: 5,
+                                                            offset:
+                                                                Offset(0, 2),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                      width: (MediaQuery.of(
+                                                                  context)
+                                                              .size
+                                                              .width *
+                                                          .2),
+                                                      child:
+                                                          LoginCustomTextfield(
+                                                        textController: controller
+                                                            .freightValueCtrlr,
+                                                      )),
+                                                ]),
+                                           
                                               ],
                                             ),
                                             Spacer(),
@@ -977,6 +1024,53 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                                     ],
                                                   ),
                                                 ),
+                                               Dimens.boxHeight5,
+                                                Row(children: [
+                                                  CustomRichText(
+                                                      title: 'Inspection Report : '),
+                                                  Dimens.boxWidth10,
+                                                  Container(
+                                                      decoration: BoxDecoration(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(10),
+                                                        border: Border.all(
+                                                          color: Color.fromARGB(
+                                                              255,
+                                                              227,
+                                                              224,
+                                                              224),
+                                                          width: 1,
+                                                        ),
+                                                        boxShadow: [
+                                                          BoxShadow(
+                                                            color: Color
+                                                                    .fromARGB(
+                                                                        255,
+                                                                        236,
+                                                                        234,
+                                                                        234)
+                                                                .withOpacity(
+                                                                    0.5),
+                                                            spreadRadius: 2,
+                                                            blurRadius: 5,
+                                                            offset:
+                                                                Offset(0, 2),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                      width: (MediaQuery.of(
+                                                                  context)
+                                                              .size
+                                                              .width *
+                                                          .2),
+                                                      child:
+                                                          LoginCustomTextfield(
+                                                        textController: controller
+                                                            .inspectionReportCtrlr,
+                                                      )),
+                                                ]),
+                                           
                                               ],
                                             ),
                                             Dimens.boxWidth30,
