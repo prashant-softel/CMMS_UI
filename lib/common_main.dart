@@ -22,7 +22,7 @@ import 'package:cmms/domain/usecases/preventive_usecase.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 // import 'package:flutter/services.dart';
-import 'package:flutter/services.dart';
+import 'package:flutter/services.dart' hide appFlavor;
 // import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';

@@ -411,7 +411,7 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      'Work Description: ',
+                                      'Title: ',
                                       style: Styles.black17,
                                     ),
                                     Dimens.boxHeight5,
@@ -2529,6 +2529,25 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                               //   ),
                               // ),
 
+                              Padding(
+                                padding: const EdgeInsets.only(left: 20),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      'Comments: ',
+                                      style: Styles.black17,
+                                    ),
+                                    Dimens.boxHeight5,
+                                    Container(
+                                      child: Text(
+                                          '${controller.viewPermitDetailsModel.value?.physical_iso_remark}',
+                                          style: Styles.blue17),
+                                    ),
+                                  ],
+                                ),
+                              ),
                               Dimens.boxHeight10,
                               Container(
                                 margin: EdgeInsets.all(20),
