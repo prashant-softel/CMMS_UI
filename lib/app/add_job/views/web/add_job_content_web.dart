@@ -850,9 +850,9 @@ class _AddJobContentWebState extends State<AddJobContentWeb> {
                                                     decoration: BoxDecoration(
                                                       border: Border.all(
                                                         color:
-                                                            controller.isToolRequiredToWorkTypeSelected.value == false
-                                                                ? Colors.red
-                                                                :
+                                                        //     controller.isToolRequiredToWorkTypeSelected.value == false
+                                                        //         ? Colors.red
+                                                        //         :
                                                             Colors.transparent,
                                                         width: 1.0,
                                                       ),
