@@ -1311,7 +1311,12 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                                                 message:
                                                                     'remove',
                                                                 onPress: () {
-                                                                  controller.removeImage(controller.file_list![index]?.id, index);
+                                                                  controller.removeImage(
+                                                                      controller
+                                                                          .file_list![
+                                                                              index]
+                                                                          ?.id,
+                                                                      index);
                                                                 },
                                                               ),
                                                       ],
@@ -2010,6 +2015,49 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                                                 .appDarkBlueColor,
                                                         text: "Update TBT",
                                                         onPressed: () {
+                                                          if (controller
+                                                                      .tbtDateTimeCtrlrBuffer ==
+                                                                  null ||
+                                                              controller
+                                                                      .selectedTbtConductedId ==
+                                                                  0 ||
+                                                              controller
+                                                                  .tbtDateTimeCtrlrBuffer
+                                                                  .isEmpty ||
+                                                              controller
+                                                                      .tbtDateTimeCtrlrBuffer ==
+                                                                  "") {
+                                                            showDialog(
+                                                              context: context,
+                                                              builder:
+                                                                  (BuildContext
+                                                                      context) {
+                                                                return AlertDialog(
+                                                                  title: Text(
+                                                                      "Select Time"),
+                                                                  content: controller
+                                                                              .selectedTbtConductedId ==
+                                                                          0
+                                                                      ? Text(
+                                                                          "Select TBT Conducted By")
+                                                                      : Text(
+                                                                          "Can't do TBT without entering the time."),
+                                                                  actions: <Widget>[
+                                                                    TextButton(
+                                                                      onPressed:
+                                                                          () {
+                                                                        Navigator.of(context)
+                                                                            .pop();
+                                                                      },
+                                                                      child: Text(
+                                                                          "OK"),
+                                                                    ),
+                                                                  ],
+                                                                );
+                                                              },
+                                                            );
+                                                            return null;
+                                                          }
                                                           controller.updateNewPermit(
                                                               fileIds:
                                                                   dropzoneController
