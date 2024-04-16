@@ -1152,7 +1152,7 @@ class _AddJobContentWebState extends State<AddJobContentWeb> {
                               Center(
                                 child: CustomElevatedButton(
                                   text: 'Submit',
-                                  onPressed: controller.saveJob,
+                                  onPressed: () => controller.saveJob(fileIds: dropzoneController.fileIds),
                                   backgroundColor: ColorValues.appDarkBlueColor,
                                 ),
                               ),

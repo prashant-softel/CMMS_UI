@@ -9,8 +9,7 @@ AddJobModel addJobModelFromJson(String str) =>
 
 String addJobModelToJson(AddJobModel data) => json.encode(data.toJson());
 
-class
-AddJobModel {
+class AddJobModel {
   AddJobModel({
     this.id,
     required this.facilityId,
@@ -23,6 +22,7 @@ AddJobModel {
     required this.breakdownTime,
     required this.assetsIds,
     required this.workTypeIds,
+    this.uploadfile_ids,
   });
 
   int? id;
@@ -38,6 +38,7 @@ AddJobModel {
   String? breakdownTime;
   List<int> assetsIds;
   List<int?> workTypeIds;
+  List<dynamic>? uploadfile_ids;
 
   factory AddJobModel.fromJson(Map<String, dynamic> json) => AddJobModel(
         id: json["id"],
@@ -53,6 +54,7 @@ AddJobModel {
             : json['breakdown_time'] as String,
         assetsIds: List<int>.from(json["AssetsIds"].map((x) => x)),
         workTypeIds: List<int>.from(json["WorkType_Ids"].map((x) => x)),
+        uploadfile_ids: List<int>.from(json["uploadfile_ids"].map((x) => x)),
       );
 
   Map<String, dynamic> toJson() => {
@@ -67,6 +69,7 @@ AddJobModel {
         "breakdown_time": breakdownTime,
         "AssetsIds": List<dynamic>.from(assetsIds.map((x) => x)),
         "WorkType_Ids": List<dynamic>.from(workTypeIds.map((x) => x)),
+        "uploadfile_ids": List<dynamic>.from(uploadfile_ids!.map((x) => x)),
       };
 }
 
