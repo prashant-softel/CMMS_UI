@@ -117,6 +117,7 @@ class TBTTypeListController extends GetxController {
     final _facilityList = await tbtTypeListPresenter.getFacilityList();
     //print('Facility25:$_facilityList');
     if (_facilityList != null) {
+      facilityList.clear();
       for (var facility in _facilityList) {
         facilityList.add(facility);
       }
