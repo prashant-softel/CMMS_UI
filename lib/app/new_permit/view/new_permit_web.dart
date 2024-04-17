@@ -251,13 +251,13 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                           label: Text('Job ID',
                                               overflow: TextOverflow.ellipsis)),
                                       DataColumn2(
-                                          fixedWidth: Get.width * .2,
+                                          fixedWidth: Get.width * .1,
                                           label: Text('Job Title',
                                               overflow: TextOverflow.ellipsis)),
                                       DataColumn2(
-                                          fixedWidth: Get.width * .1,
+                                          fixedWidth: Get.width * .12,
                                           label: Text('Equipment Category',
-                                              overflow: TextOverflow.ellipsis)),
+                                              overflow: TextOverflow.clip)),
                                       DataColumn2(
                                           fixedWidth: Get.width * .1,
                                           label: Text('Block',
@@ -309,12 +309,12 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                               children: controller
                                                   .listJobModelCategory
                                                   .map((element) => Column(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .start,
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
+                                                        // mainAxisAlignment:
+                                                        //     MainAxisAlignment
+                                                        //         .start,
+                                                        // crossAxisAlignment:
+                                                        //     CrossAxisAlignment
+                                                        //         .start,
                                                         children: [
                                                           SizedBox(
                                                             child: Text(
