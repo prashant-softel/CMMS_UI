@@ -4064,16 +4064,18 @@ class DataRepository extends DomainRepository {
   Future<ResponseModel> getGrievanceList({
     required String auth,
     int? facilityId,
-    int? userId,
-    bool? self_view,
     bool? isLoading,
+    bool? self_view,
+    String? start_date,
+    String? end_date,
   }) async =>
       await connectHelper.getGrievanceList(
         auth: auth,
         facilityId: facilityId ?? 0,
-        userId: userId,
-        self_view: self_view,
         isLoading: isLoading ?? false,
+        self_view: self_view,
+        start_date: start_date,
+        end_date: end_date,
       );
   Future<ResponseModel> getGrievanceType({
     String? auth,

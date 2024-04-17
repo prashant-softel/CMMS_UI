@@ -3621,19 +3621,21 @@ class Repository {
     int? facilityId,
     bool? isLoading,
     bool? self_view,
+    String? start_date,
+    String? end_date,
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      int userId = varUserAccessModel.value.user_id ?? 0;
-
       final res = await _dataRepository.getGrievanceList(
         auth: auth,
         facilityId: facilityId ?? 0,
-        userId: userId,
-        self_view: self_view,
         isLoading: isLoading ?? false,
+        self_view: self_view,
+        start_date: start_date,
+        end_date: end_date,
       );
-      // print({"res.data", res.data});
+      print({"res.data", res.data});
+      print(res);
       if (!res.hasError) {
         final jsonGrievanceModels = jsonDecode(res.data);
         final List<GrievanceListModel> _grievanceModelList = jsonGrievanceModels

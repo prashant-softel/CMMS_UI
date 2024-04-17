@@ -53,7 +53,9 @@ class GrievanceCreatedDialog extends GetView<CreateGrievanceController> {
                     children: [
                       ElevatedButton(
                         style: Styles.navyBlueElevatedButtonStyle,
-                        onPressed: () => controller.goToJobListScreen(),
+                        onPressed: () {
+                          Get.offNamed(Routes.grievanceList);
+                        },
                         child: const Text('Grievance List'),
                       ),
                       ElevatedButton(
