@@ -27,7 +27,7 @@ class SafetyQuestionsListController extends GetxController {
   RxList<TypePermitModel?> typePermitList = <TypePermitModel>[].obs;
   Rx<bool> isTypePermitSelected = true.obs;
   Rx<String> selectedTypePermit = ''.obs;
-  Rx<String> selectedTypeOfPermit = ''.obs;
+  RxString selectedTypeOfPermit = ''.obs;
   Rx<bool> isTypePermit = true.obs;
   int? selectedTypePermitId = 0;
 
@@ -360,6 +360,7 @@ class SafetyQuestionsListController extends GetxController {
     print('FacilityIdForSafetyQuestions$facilityId');
 
     if (_permitTypeList != null) {
+      typePermitList.clear();
       for (var permitType in _permitTypeList) {
         typePermitList.add(permitType);
       }
