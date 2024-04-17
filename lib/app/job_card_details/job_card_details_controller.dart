@@ -429,7 +429,7 @@ class JobCardDetailsController extends GetxController {
 
     var jobCard = {
       "uploadfile_ids": fileIds,
-      "employee_list": employee,
+      "LstCMJCEmpList": employee,
     };
 
     print("filesids: ${fileIds}");

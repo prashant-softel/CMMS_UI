@@ -544,16 +544,18 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                           Dimens.boxHeight20,
 
                           /// START JOB CARD BUTTON
-                          // (controller.isJobCardStarted == false)
-                          controller.jobCardDetailsModel.value!.status == 151
-                              // controller.jobCardDetailsModel.value!.status == 151 &&
-                              //         controller.permitList
-                              //                 ?.firstWhere((element) =>
-                              //                     element.permitId != null)
-                              //                 .status ==
-                              //             125
-                              ? //
-                              Row(
+                          controller.jobCardDetailsModel.value!.status == 151 &&
+                                  controller.permitList
+                                          ?.firstWhere((element) =>
+                                              element.permitId != null)
+                                          .status ==
+                                      125 &&
+                                  controller.permitList
+                                          ?.firstWhere((element) =>
+                                              element.permitId != null)
+                                          .tbT_Done_Check ==
+                                      1
+                              ? Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.center, //
                                   children: [
@@ -576,8 +578,7 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                                     ])
                               : controller.jobCardDetailsModel.value!.status ==
                                           157 ||
-                                      controller.jobCardDetailsModel.value!
-                                              .status ==
+                                      controller.jobCardDetailsModel.value!.status ==
                                           152 ||
                                       controller.jobCardDetailsModel.value!
                                               .status ==
@@ -606,7 +607,9 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                                                 'Are you sure you want to Update job ?',
                                               );
                                               if (confirmed == true) {
-                                                controller.updateJobCard(fileIds: dropzoneController.fileIds);
+                                                controller.updateJobCard(
+                                                    fileIds: dropzoneController
+                                                        .fileIds);
 
                                                 Text(
                                                     'Are you sure you want to Update job ?');
@@ -631,7 +634,10 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                                                       'Are you sure you want to Close Job ?',
                                                     );
                                                     if (confirmed == true) {
-                                                      controller.closeJob(fileIds: dropzoneController.fileIds);
+                                                      controller.closeJob(
+                                                          fileIds:
+                                                              dropzoneController
+                                                                  .fileIds);
 
                                                       Text(
                                                           'Are you sure you want to Close Job ?');
@@ -651,7 +657,9 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                                                 'Are you sure you want to Carry Forward Job ?',
                                               );
                                               if (confirmed == true) {
-                                                controller.carryForwardJob(fileIds: dropzoneController.fileIds);
+                                                controller.carryForwardJob(
+                                                    fileIds: dropzoneController
+                                                        .fileIds);
 
                                                 Text(
                                                     'Are you sure you want to Carry Forward Job ?');
@@ -660,8 +668,7 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                                           ),
                                           Dimens.boxWidth10,
                                         ])
-                                  : controller.jobCardDetailsModel.value!
-                                              .status ==
+                                  : controller.jobCardDetailsModel.value!.status ==
                                           153
                                       // ||
                                       //         controller.jobCardList[0]!.status ==
@@ -690,7 +697,10 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                                                     'Are you sure you want to Update job ?',
                                                   );
                                                   if (confirmed == true) {
-                                                    controller.updateJobCard(fileIds: dropzoneController.fileIds);
+                                                    controller.updateJobCard(
+                                                        fileIds:
+                                                            dropzoneController
+                                                                .fileIds);
 
                                                     Text(
                                                         'Are you sure you want to Update job ?');
@@ -825,8 +835,7 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                                                   .status ==
                                               156
                                           ? Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
+                                              mainAxisAlignment: MainAxisAlignment.center,
                                               //
                                               children: [
                                                   Container(
