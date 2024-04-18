@@ -577,13 +577,8 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                                                           .toString() ??
                                                       '')),
                                                   DataCell(
-                                                    Tooltip(
-                                                      message: controller
-                                                              .listAssociatedJobs?[
-                                                                  index]
-                                                              ?.equipment
-                                                              .toString() ??
-                                                          '',
+                                                    SingleChildScrollView(
+                                                      scrollDirection: Axis.horizontal,
                                                       child: Text(
                                                         controller
                                                                 .listAssociatedJobs?[
@@ -592,8 +587,6 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                                                                 .toString() ??
                                                             '',
                                                         maxLines: 2,
-                                                        overflow: TextOverflow
-                                                            .ellipsis,
                                                       ),
                                                     ),
                                                   ),
