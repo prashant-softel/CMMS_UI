@@ -1,3 +1,4 @@
+import 'package:cmms/app/home/widgets/header_widget_all_dash.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/theme/theme.dart';
 import 'package:cmms/app/utils/app_constants.dart';
@@ -25,7 +26,7 @@ class ImportInventoryContentWeb extends GetView<ImportInventoryController> {
       () => SelectionArea(
         child: Column(
           children: [
-            HeaderWidget(),
+            HeaderWidgetAllDash(),
             Container(
                 height: 45,
                 decoration: BoxDecoration(
@@ -201,7 +202,7 @@ class ImportInventoryContentWeb extends GetView<ImportInventoryController> {
                                                 child: Text(" / MASTER",
                                                     style: Styles.greyLight14),
                                               ),
-                                              Text(" / IMPORT BUSSINESS",
+                                              Text(" / IMPORT BUSINESS",
                                                   style: Styles.greyLight14),
                                             ],
                                           )
@@ -242,13 +243,13 @@ class ImportInventoryContentWeb extends GetView<ImportInventoryController> {
                                                 : controller.importType.value ==
                                                         AppConstants
                                                             .kImportBussiness
-                                                    ? "Import Bussiness file"
+                                                    ? "Import Business file"
                                                     : "",
                             style: Styles.blackBold16,
                           ),
                         ),
                         Dimens.boxHeight20,
-                        Center(child: Text("File to  import")),
+                        Center(child: Text("File to import")),
                         Dimens.boxHeight20,
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
