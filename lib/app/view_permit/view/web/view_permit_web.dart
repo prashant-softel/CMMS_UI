@@ -586,7 +586,6 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                                                                 ?.equipment
                                                                 .toString() ??
                                                             '',
-                                                        maxLines: 2,
                                                       ),
                                                     ),
                                                   ),
