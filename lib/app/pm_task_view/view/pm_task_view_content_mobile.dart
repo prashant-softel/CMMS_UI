@@ -504,11 +504,6 @@ class PreventiveTaskViewContentMobile
                                                 GestureDetector(
                                                   onTap: () {
                                                     controller.clearStoreData();
-
-                                                    // final _flutterSecureStorage =
-                                                    //     const FlutterSecureStorage();
-
-                                                    // _flutterSecureStorage.delete(key: "mrsId");
                                                     int mrsId =
                                                         pmTaskMrsModel?.mrsId ??
                                                             0;
@@ -539,6 +534,8 @@ class PreventiveTaskViewContentMobile
                                                 Spacer(),
                                                 GestureDetector(
                                                   onTap: () {
+                                                    controller.clearStoreData();
+
                                                     int mrsId =
                                                         pmTaskMrsModel?.mrsId ??
                                                             0;

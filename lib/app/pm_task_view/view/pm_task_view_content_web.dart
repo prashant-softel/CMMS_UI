@@ -856,6 +856,7 @@ class PreventiveMaintenanceTaskViewContentWeb
                                                                                 "View MRS",
                                                                             onPress:
                                                                                 () {
+                                                                              controller.clearMrsStoreData();
                                                                               String mrsId = controller.listMrsByTaskId?[index]?.mrsId.toString() ?? "";
 
                                                                               Get.toNamed(Routes.mrsViewScreen, arguments: {
@@ -871,6 +872,8 @@ class PreventiveMaintenanceTaskViewContentWeb
                                                                                 icon: Icons.edit,
                                                                                 message: "Edit MRS",
                                                                                 onPress: () {
+                                                                                  controller.clearMrsStoreData();
+
                                                                                   String mrsId = controller.listMrsByTaskId?[index]?.mrsId.toString() ?? "";
                                                                                   print({
                                                                                     "mrsId": mrsId

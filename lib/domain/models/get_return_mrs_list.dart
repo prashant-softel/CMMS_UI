@@ -102,13 +102,13 @@ class CmmsItems {
   int? mrs_return_ID;
   int? asset_item_ID;
   dynamic asset_MDM_code;
-  int? returned_qty;
-  double? available_qty;
-  int? used_qty;
-  int? issued_qty;
+  dynamic returned_qty;
+  dynamic available_qty;
+  dynamic used_qty;
+  dynamic issued_qty;
   String? approved_date;
   String? issued_date;
-  double? requested_qty;
+  dynamic requested_qty;
   String? approval_required;
   String? asset_name;
   int? asset_type_ID;

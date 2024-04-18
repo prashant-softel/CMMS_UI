@@ -2,6 +2,7 @@ import 'package:cmms/app/app.dart';
 import 'package:cmms/app/home/widgets/mobile_header_widget.dart';
 import 'package:cmms/app/mrs/mrs_list_controller.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
+import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/domain/models/get_mrs_list_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -236,6 +237,27 @@ class MrsListContentMobile extends GetView<MrsListController> {
                                               ],
                                             ),
                                           ]),
+                                          Dimens.boxHeight5,
+                                          Center(
+                                            child: CustomElevatedButton(
+                                              onPressed: () {
+                                                controller.clearStoreData();
+
+                                                String mrsId = mrsListModel?.id
+                                                        .toString() ??
+                                                    "";
+                                                print({"mrsId": mrsId});
+                                                Get.toNamed(Routes.editMrs,
+                                                    arguments: {
+                                                      'mrsId':
+                                                          int.tryParse("$mrsId")
+                                                    });
+                                              },
+                                              text: 'Edit MRS',
+                                              icon: Icons.edit,
+                                              backgroundColor: Colors.blue,
+                                            ),
+                                          )
                                         ]),
                                   ),
                                 ),
