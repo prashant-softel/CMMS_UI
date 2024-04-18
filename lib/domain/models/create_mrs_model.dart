@@ -88,12 +88,12 @@ class Equipments {
   int? equipmentID;
   int? asset_type_ID;
   String? asset_code;
-  int? requested_qty;
-  int? issued_qty;
+  dynamic requested_qty;
+  dynamic issued_qty;
 
-  int? returned_qty;
-  int? used_qty;
-  int? available_qty;
+  dynamic returned_qty;
+  dynamic used_qty;
+  dynamic available_qty;
   factory Equipments.fromJson(Map<String, dynamic> json) => Equipments(
         id: json["id"],
         equipmentID: json["asset_item_ID"],

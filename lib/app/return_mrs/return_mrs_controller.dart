@@ -75,15 +75,16 @@ class ReturnMrsListController extends GetxController {
     };
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
       facilityId = event;
-      Future.delayed(Duration(seconds: 2), () {
-        getReturnMrsList(facilityId,  false);
-      });
+      if (facilityId > 0) {
+        Future.delayed(Duration(seconds: 2), () {
+          getReturnMrsList(facilityId, false);
+        });
+      }
     });
     super.onInit();
   }
 
-  Future<void> getReturnMrsList(
-      int facilityId, bool isExport) async {
+  Future<void> getReturnMrsList(int facilityId, bool isExport) async {
     mrsList.value = <ReturnMrsListModel>[];
     final _mrsList = await returnmrsListPresenter.getReturnMrsList(
         facilityId: facilityId, isLoading: isLoading.value, isExport: isExport);
@@ -157,6 +158,6 @@ class ReturnMrsListController extends GetxController {
   }
 
   void export() {
-    getReturnMrsList(facilityId,  true);
+    getReturnMrsList(facilityId, true);
   }
 }
