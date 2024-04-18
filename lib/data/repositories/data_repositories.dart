@@ -4081,7 +4081,60 @@ class DataRepository extends DomainRepository {
     String? auth,
     bool? isLoading,
   }) async =>
-      await connectHelper.getGrievanceType(auth: auth, isLoading: isLoading);
+      await connectHelper.getGrievanceType(
+        auth: auth,
+        isLoading: isLoading,
+      );
+  Future<ResponseModel> getGrievanceTypeById({
+    String? auth,
+    int? grievanceTypeId,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.getGrievanceTypeById(
+        auth: auth,
+        grievanceTypeId: grievanceTypeId,
+        isLoading: isLoading,
+      );
+
+  Future<ResponseModel> createGrievanceType({
+    auth,
+    grievanceJson,
+    bool? isLoading,
+  }) async {
+    var response = await connectHelper.createGrievanceType(
+      auth: auth,
+      grievanceJson: grievanceJson,
+      isLoading: isLoading,
+    );
+    return response;
+  }
+
+  Future<ResponseModel> updateGrievanceType({
+    auth,
+    grievanceJson,
+    bool? isLoading,
+  }) async {
+    var response = await connectHelper.updateGrievanceType(
+      auth: auth,
+      grievanceJson: grievanceJson,
+      isLoading: isLoading,
+    );
+    return response;
+  }
+
+  Future<ResponseModel> deleteGrievanceType({
+    auth,
+    int? grievanceTypeId,
+    bool? isLoading,
+  }) async {
+    var response = await connectHelper.deleteGrievanceType(
+      auth: auth,
+      grievanceTypeId: grievanceTypeId,
+      isLoading: isLoading,
+    );
+    return response;
+  }
+
   Future<ResponseModel> getResponsibilityList({
     required String auth,
     bool? isLoading,

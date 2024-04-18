@@ -5,7 +5,7 @@ import 'package:cmms/app/grievance_list/grievance_list_presenter.dart';
 import 'package:cmms/app/home/home_presenter.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/domain/models/get_asset_data_list_model.dart';
-import 'package:cmms/domain/models/grievanceTypeList.dart';
+import 'package:cmms/domain/models/grievance_type_model.dart';
 import 'package:cmms/domain/models/grievance_model.dart';
 import 'package:cmms/domain/models/history_model.dart';
 import 'package:cmms/domain/models/req_order_details_by_id_model.dart';
@@ -67,7 +67,7 @@ class CreateGrievanceController extends GetxController {
   List<int> selectedAssetsIdList = [];
   RxList<CreateGrievanceModel?> selectedWorkAreaList =
       <CreateGrievanceModel>[].obs;
-  RxList<GrievanceType?> grievanceType = <GrievanceType>[].obs;
+  RxList<GrievanceTypeModel?> grievanceType = <GrievanceTypeModel>[].obs;
   int? selectedGrievanceTypeId = 0;
   Rx<bool> isGrievanceTypeSelected = true.obs;
   Rx<String> selectedGrievanceType = ''.obs;
@@ -186,7 +186,7 @@ class CreateGrievanceController extends GetxController {
 
   void onValueChanged(dynamic list, dynamic value) {
     switch (list.runtimeType) {
-      case RxList<GrievanceType>:
+      case RxList<GrievanceTypeModel>:
         {
           int grievanceTypeIndex =
               grievanceType.indexWhere((x) => x?.name == value);

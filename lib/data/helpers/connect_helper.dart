@@ -7048,10 +7048,27 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> saveGrievance({
+    required String auth,
+    grievance,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Grievance/CreateGrievance',
+      Request.post,
+      grievance,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
   Future<ResponseModel> getGrievanceType(
       {String? auth, bool? isLoading}) async {
     ResponseModel response = ResponseModel(data: '', hasError: true);
-    // print('PermitTypeResponse: $response');
     try {
       response = await apiWrapper.makeRequest(
         'MISMaster/GetGrievanceTypeList',
@@ -7068,15 +7085,72 @@ class ConnectHelper {
     return response;
   }
 
-  Future<ResponseModel> saveGrievance({
+  Future<ResponseModel> getGrievanceTypeById(
+      {String? auth, int? grievanceTypeId, bool? isLoading}) async {
+    ResponseModel response = ResponseModel(data: '', hasError: true);
+    try {
+      response = await apiWrapper.makeRequest(
+        'MISMaster/GetGrievanceType?id=$grievanceTypeId',
+        Request.get,
+        null,
+        true,
+        {
+          'Authorization': 'Bearer $auth',
+        },
+      );
+    } catch (error) {
+      print(error);
+    }
+    return response;
+  }
+
+  Future<ResponseModel> createGrievanceType({
     required String auth,
-    grievance,
+    required grievanceJson,
+    bool? isLoading,
+  }) async {
+    var responseModel =
+        // responseModel =
+        await apiWrapper.makeRequest(
+      'MISMaster/AddGrievanceType', //AddBusiness
+      Request.post,
+      grievanceJson,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
+  Future<ResponseModel> updateGrievanceType({
+    required String auth,
+    grievanceJson,
     bool? isLoading,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
-      'Grievance/CreateGrievance',
-      Request.post,
-      grievance,
+      'MISMaster/UpdateGrievanceType',
+      Request.patch,
+      grievanceJson,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
+  Future<ResponseModel> deleteGrievanceType({
+    required String auth,
+    int? grievanceTypeId,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'MISMaster/DeleteGrievanceType?id=$grievanceTypeId',
+      Request.delete,
+      null,
       isLoading ?? false,
       {
         'Content-Type': 'application/json',

@@ -193,6 +193,7 @@ abstract class Routes {
   static const grievanceDetails = _Paths.grievanceDetails;
   static const grievanceCardList = _Paths.grievanceCardList;
   static const editGrievance = _Paths.editGrievance;
+  static const grievanceType = _Paths.grievanceType;
   static const responsibility = _Paths.responsibility;
   static const auditTask = _Paths.auditTask;
   static const addWaterData = _Paths.addWaterData;
@@ -398,6 +399,7 @@ abstract class _Paths {
   static const editGrievance = '/edit-grievance-screen';
   static const grievanceCardList = '/grievance-card-list';
   static const viewHazWasteData = '/viewHazWasteData';
+  static const grievanceType = '/grievance-type';
 
 // static const editPermitWebScreen = '/edit-permit-web-screen';
   static const responsibility = '/responsibility';
