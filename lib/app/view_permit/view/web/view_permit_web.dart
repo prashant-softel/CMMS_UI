@@ -434,8 +434,8 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                                                   0) *
                                               50) +
                                           125,
-                                      width: MediaQuery.of(context).size.width /
-                                          1.2,
+                                      width: MediaQuery.of(context).size.width *
+                                          1.5,
                                       decoration: BoxDecoration(
                                         border: Border.all(
                                           color: ColorValues
@@ -474,15 +474,16 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                                                   color: Color.fromARGB(
                                                       255, 206, 229, 234)),
                                               columns: [
-                                                DataColumn(
+                                                DataColumn2(
+                                                    fixedWidth: 100,
                                                     label: Text(
-                                                  "Job Id",
-                                                  style: TextStyle(
-                                                      fontSize: 15,
-                                                      fontWeight:
-                                                          FontWeight.bold),
-                                                )),
-                                                DataColumn(
+                                                      "Job Id",
+                                                      style: TextStyle(
+                                                          fontSize: 15,
+                                                          fontWeight:
+                                                              FontWeight.bold),
+                                                    )),
+                                                DataColumn2(
                                                     label: Text(
                                                   "Job Title",
                                                   style: TextStyle(
@@ -490,7 +491,7 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                                                       fontWeight:
                                                           FontWeight.bold),
                                                 )),
-                                                DataColumn(
+                                                DataColumn2(
                                                     label: Text(
                                                   "Equipment\nCategory",
                                                   style: TextStyle(
@@ -498,15 +499,16 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                                                       fontWeight:
                                                           FontWeight.bold),
                                                 )),
-                                                DataColumn(
-                                                    label: Text(
-                                                  "Equipment",
-                                                  style: TextStyle(
-                                                      fontSize: 15,
-                                                      fontWeight:
-                                                          FontWeight.bold),
-                                                )),
-                                                DataColumn(
+                                                DataColumn2(
+                                                  label: Text(
+                                                    "Equipment",
+                                                    style: TextStyle(
+                                                        fontSize: 15,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  ),
+                                                ),
+                                                DataColumn2(
                                                     label: Text(
                                                   "Breakdown\nTime",
                                                   style: TextStyle(
@@ -514,7 +516,7 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                                                       fontWeight:
                                                           FontWeight.bold),
                                                 )),
-                                                DataColumn(
+                                                DataColumn2(
                                                     label: Text(
                                                   "Assigned To",
                                                   style: TextStyle(
@@ -522,7 +524,7 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                                                       fontWeight:
                                                           FontWeight.bold),
                                                 )),
-                                                DataColumn(
+                                                DataColumn2(
                                                     label: Text(
                                                   "Status",
                                                   style: TextStyle(
@@ -575,15 +577,24 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                                                           .toString() ??
                                                       '')),
                                                   DataCell(
-                                                    Text(
-                                                      controller
+                                                    Tooltip(
+                                                      message: controller
                                                               .listAssociatedJobs?[
                                                                   index]
                                                               ?.equipment
                                                               .toString() ??
                                                           '',
-                                                      overflow:
-                                                          TextOverflow.ellipsis,
+                                                      child: Text(
+                                                        controller
+                                                                .listAssociatedJobs?[
+                                                                    index]
+                                                                ?.equipment
+                                                                .toString() ??
+                                                            '',
+                                                        maxLines: 2,
+                                                        overflow: TextOverflow
+                                                            .ellipsis,
+                                                      ),
                                                     ),
                                                   ),
                                                   DataCell(Text(controller
