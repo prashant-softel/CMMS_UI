@@ -6,9 +6,9 @@ import 'package:cmms/app/widgets/table_action_button.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../theme/dimens.dart';
 import '../theme/styles.dart';
-import 'dart:html' as html;
 // import '../view_incident_report/view_incident_report_controller.dart';
 
 class ObservationPMTaskViewDialog extends GetView {
@@ -251,15 +251,25 @@ class ObservationPMTaskViewDialog extends GetView {
                                                 color: ColorValues.viewColor,
                                                 icon: Icons.remove_red_eye,
                                                 message: "View",
-                                                onPress: () {
+                                                onPress: () async {
+                                                  String baseUrl =
+                                                      'http://65.0.20.19/CMMS_API/';
                                                   String imageUrl =
-                                                      "assets/files/logo.png";
-                                                  String imagePath = html.window
-                                                          .location.origin +
-                                                      '/' +
-                                                      imageUrl;
-                                                  html.window.open(
-                                                      imagePath, '_blank');
+                                                      "${controller.selectedItem?.checklist_observation![index].files?[index].file_path}";
+                                                  String fullUrl =
+                                                      baseUrl + imageUrl;
+                                                  if (await canLaunch(
+                                                      fullUrl)) {
+                                                    await launch(fullUrl);
+                                                  }
+                                                  print(
+                                                      "${controller.selectedItem?.checklist_observation![index].files?[index].file_path}");
+                                                  // String imagePath = html.window
+                                                  //         .location.origin +
+                                                  //     '/' +
+                                                  //     imageUrl;
+                                                  // html.window.open(
+                                                  //     imagePath, '_blank');
                                                 },
                                               ),
                                             ),
