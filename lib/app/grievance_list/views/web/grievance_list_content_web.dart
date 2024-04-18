@@ -294,14 +294,15 @@ class GrievanceListContentWeb extends StatelessWidget {
                                                         controller);
                                                 return PaginatedDataTable2(
                                                   columnSpacing: 10,
-                                                  dataRowHeight:
-                                                      Get.height * 0.12,
+                                                  // dataRowHeight:
+                                                  //     Get.height * 0.12,
+                                                  dataRowHeight: 40,
                                                   source:
                                                       dataSource, // Custom DataSource class
                                                   // headingRowHeight:
                                                   // Get.height * 0.12,
-                                                  minWidth:
-                                                      3000, //Get.width * 1.2,
+                                                  // minWidth:
+                                                  //     3000, //Get.width * 1.2,
                                                   showCheckboxColumn: false,
                                                   rowsPerPage:
                                                       10, // Number of rows per page
@@ -455,9 +456,36 @@ DataColumn2 buildDataColumn(
 }
 
 class GrievanceListDataSource extends DataTableSource {
-  GrievanceListDataSource(this.controller);
+  GrievanceListDataSource(this.controller) {
+    filterUsers();
+  }
   late List<GrievanceListModel?> grievanceListModel;
   late final GrievanceController controller;
+
+  void filterUsers() {
+    grievanceListModel = <GrievanceListModel?>[];
+    grievanceListModel = controller.grievanceList.where((GrievanceList) {
+      return (GrievanceList?.id ?? '').toString().toLowerCase().contains(
+              controller.GrievanceTypeFilterText.value.toLowerCase()) &&
+          (GrievanceList?.concern ?? '')
+              .toString()
+              .toLowerCase()
+              .contains(controller.ConcernFilterText.value.toLowerCase()) &&
+          (GrievanceList?.description ?? '')
+              .toString()
+              .toLowerCase()
+              .contains(controller.DescriptionFilterText.value.toLowerCase()) &&
+          (GrievanceList?.grievanceType ?? '').toLowerCase().contains(
+              controller.GrievanceTypeFilterText.value.toLowerCase()) &&
+          (GrievanceList?.description ?? '')
+              .toLowerCase()
+              .contains(controller.DescriptionFilterText.value.toLowerCase()) &&
+          (GrievanceList?.createdAt ?? '')
+              .toString()
+              .toLowerCase()
+              .contains(controller.CreatedAtFilterText.value.toLowerCase());
+    }).toList();
+  }
 
   @override
   DataRow? getRow(int index) {
@@ -467,9 +495,9 @@ class GrievanceListDataSource extends DataTableSource {
     //controller.permitId.value = GrievanceDetails?.id ?? 0;
     var cellsBuffer = [
       '${GrievanceDetails?.id ?? ''}',
-      '${GrievanceDetails?.grievanceType ?? ''}',
       '${GrievanceDetails?.concern ?? ''}',
       '${GrievanceDetails?.description ?? ''}',
+      '${GrievanceDetails?.grievanceType ?? ''}',
       '${GrievanceDetails?.createdAt ?? ''}',
       'Actions',
     ];

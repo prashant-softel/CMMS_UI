@@ -66,6 +66,7 @@ class GrievanceListModel {
         id: json["id"],
         facilityId: json["facility_id"],
         grievanceTypeId: json["type_id"],
+        grievanceType: json["grievanceType"],
         concern: json['concern'],
         description: json['description'],
         actionTaken: json['actionTaken'],
