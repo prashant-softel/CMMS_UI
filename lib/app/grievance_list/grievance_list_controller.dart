@@ -37,8 +37,22 @@ class GrievanceController extends GetxController {
   StreamSubscription<int>? facilityIdStreamSubscription;
   StreamSubscription<String>? facilityNameStreamSubscription;
 
+  RxString GrievanceIdFilterText = ''.obs;
+  RxString GrievanceTypeFilterText = ''.obs;
+  RxString ConcernFilterText = ''.obs;
+  RxString DescriptionFilterText = ''.obs;
+  RxString CreatedAtFilterText = ''.obs;
+
   @override
   void onInit() async {
+    this.filterText = {
+      "Grievance Id": GrievanceIdFilterText,
+      "Concern": ConcernFilterText,
+      "Description": DescriptionFilterText,
+      "Grievance Type": GrievanceTypeFilterText,
+      "Created At": CreatedAtFilterText,
+    };
+
     facilityIdStreamSubscription = homeController.facilityId$.listen((event) {
       facilityId = event;
       Future.delayed(Duration(seconds: 1), () {
@@ -46,7 +60,6 @@ class GrievanceController extends GetxController {
         getGrievanceList(facilityId, false, formattedFromdate, formattedTodate);
       });
     });
-
     super.onInit();
   }
 
@@ -56,9 +69,9 @@ class GrievanceController extends GetxController {
 
   final columnVisibility = ValueNotifier<Map<String, bool>>({
     "Grievance Id": true,
-    "Grievance Type": true,
     "Concern": true,
     "Description": true,
+    "Grievance Type": true,
     "Created At": true,
   });
 

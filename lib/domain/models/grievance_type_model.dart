@@ -1,14 +1,15 @@
 import 'dart:convert';
 
-class GrievanceType {
+class GrievanceTypeModel {
   int? id;
   String? name;
   String? description;
   int? status;
 
-  GrievanceType({this.id, this.name, this.description, this.status});
+  GrievanceTypeModel({this.id, this.name, this.description, this.status});
 
-  factory GrievanceType.fromJson(Map<String, dynamic> json) => GrievanceType(
+  factory GrievanceTypeModel.fromJson(Map<String, dynamic> json) =>
+      GrievanceTypeModel(
         id: json['id'],
         name: json['name'],
         description: json['description'],
@@ -23,9 +24,9 @@ class GrievanceType {
       };
 }
 
-List<GrievanceType> grievanceTypeFromJson(String str) =>
-    List<GrievanceType>.from(json.decode(str).map(GrievanceType.fromJson));
+List<GrievanceTypeModel> grievanceTypeFromJson(String str) =>
+    List<GrievanceTypeModel>.from(
+        json.decode(str).map(GrievanceTypeModel.fromJson));
 
-String grievanceTypeToJson(List<GrievanceType> data) =>
+String grievanceTypeToJson(List<GrievanceTypeModel> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
-
