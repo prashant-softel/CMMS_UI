@@ -290,6 +290,12 @@ class MastersController extends GetxController {
     );
   }
 
+  Future<void> grievanceType() async {
+    Get.toNamed(
+      Routes.grievanceType,
+    );
+  }
+
   Future<void> breakdownMaintenance() async {
     Get.toNamed(
       Routes.warrantyClaimListWeb,
