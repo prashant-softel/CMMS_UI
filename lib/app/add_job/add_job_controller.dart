@@ -287,7 +287,7 @@ class AddJobController extends GetxController {
     }
   }
 
-  void saveJob() async {
+  void saveJob({List<dynamic>? fileIds}) async {
     try {
       checkForm();
       if (isFormInvalid.value) {
@@ -319,6 +319,7 @@ class AddJobController extends GetxController {
         selectedwrktype.add(_selectedworktype?.id ?? 0);
       }
       print("selected  Fault : $selectedwrktype");
+      print("Files: ${fileIds}");
 
       AddJobModel addJobModel = AddJobModel(
         id: 0,
@@ -332,6 +333,7 @@ class AddJobController extends GetxController {
         breakdownTime: _breakdownTime,
         assetsIds: selectedAssetsIdList,
         workTypeIds: selectedwrktype,
+        uploadfile_ids: fileIds,
       );
 
       Map<String, dynamic>? responseMapJobCreated =

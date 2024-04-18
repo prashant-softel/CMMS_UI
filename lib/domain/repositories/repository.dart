@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:developer';
 import 'dart:typed_data';
 import 'package:cmms/domain/models/get_mc_task_equipment_model.dart';
-import 'package:cmms/domain/models/grievanceTypeList.dart';
+import 'package:cmms/domain/models/grievance_type_model.dart';
 import 'package:cmms/domain/models/incident_risk_type_model.dart';
 import 'package:cmms/domain/models/grievance_List_model.dart';
 import 'package:cmms/domain/models/module_cleaning_list_plan_model.dart';
@@ -3654,7 +3654,7 @@ class Repository {
     }
   }
 
-  Future<List<GrievanceType?>?> getGrievanceType(bool? isLoading) async {
+  Future<List<GrievanceTypeModel?>?> getGrievanceType({bool? isLoading}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.getGrievanceType(
@@ -3662,20 +3662,111 @@ class Repository {
 
       if (!res.hasError) {
         final jsonGrievanceType = jsonDecode(res.data);
-        final List<GrievanceType> _grievanceType = jsonGrievanceType
-            .map<GrievanceType>(
-                (m) => GrievanceType.fromJson(Map<String, dynamic>.from(m)))
+        final List<GrievanceTypeModel> _grievanceType = jsonGrievanceType
+            .map<GrievanceTypeModel>((m) =>
+                GrievanceTypeModel.fromJson(Map<String, dynamic>.from(m)))
             .toList();
         return _grievanceType;
       } //
       else {
-        Utility.showDialog(res.errorCode.toString(), 'getGrievanceType');
+        Utility.showDialog(res.errorCode.toString(), 'getGrievanceTypeList');
         return null;
       }
     } catch (error) {
       print(error.toString());
 
       return [];
+    }
+  }
+
+  Future<GrievanceTypeModel?> getGrievanceTypeById(
+      {bool? isLoading, int? grievanceTypeId}) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getGrievanceTypeById(
+          auth: auth, grievanceTypeId: grievanceTypeId, isLoading: isLoading);
+
+      if (!res.hasError) {
+        final jsonGrievanceType = jsonDecode(res.data);
+        final GrievanceTypeModel _grievanceType = jsonGrievanceType
+            .map<GrievanceTypeModel>((m) =>
+                GrievanceTypeModel.fromJson(Map<String, dynamic>.from(m)))
+            .toList();
+        return _grievanceType;
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString(), 'getGrievanceTypeList');
+        return null;
+      }
+    } catch (error) {
+      print(error.toString());
+      return null;
+    }
+  }
+
+  Future<bool> createGrievanceType({bool? isLoading, grievanceJson}) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.createGrievanceType(
+        auth: auth,
+        grievanceJson: grievanceJson,
+        isLoading: isLoading,
+      );
+
+      if (!res.hasError) {
+        return true;
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString(), ' createCheckListNumber');
+        return false;
+      }
+    } catch (error) {
+      print(error.toString());
+      return false;
+    }
+  }
+
+  Future<bool> updateGrievanceType({
+    grievanceJson,
+    bool? isLoading,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.updateGrievanceType(
+        auth: auth,
+        grievanceJson: grievanceJson,
+        isLoading: isLoading,
+      );
+      print(res.data);
+      if (!res.hasError) {
+        return true;
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString(), 'updateBusinesslist');
+        return false;
+      }
+    } catch (error) {
+      print(error.toString());
+      return false;
+    }
+  }
+
+  Future<void> deleteGrievanceType({int? grievanceTypeId, bool? isLoading}) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.deleteGrievanceType(
+        auth: auth,
+        grievanceTypeId: grievanceTypeId,
+        isLoading: isLoading,
+      );
+
+      if (!res.hasError) {
+        //get delete response back from API
+      } else {
+        Utility.showDialog(res.errorCode.toString(), 'deleteGrievanceType');
+      }
+    } catch (error) {
+      print(error.toString());
     }
   }
 
@@ -5780,7 +5871,7 @@ class Repository {
   Future<Map<String, dynamic>> startJobCard(
     auth,
     jcCard,
-    files,
+    jobCard,
     bool? isLoading,
   ) async {
     try {
@@ -5788,7 +5879,7 @@ class Repository {
       final res = await _dataRepository.startJobCard(
         auth: auth,
         jcCard: jcCard,
-        files: files,
+        jobCard: jobCard,
         isLoading: isLoading,
       );
 

@@ -49,6 +49,11 @@ class JobCardDetailsController extends GetxController {
   RxList<int> selectedEmployeeIdList = <int>[].obs;
   RxList<String> responsibilityList = <String>[].obs;
 
+  // Employee
+  RxList<SelectedEmployee> employee = <SelectedEmployee>[].obs;
+  SelectedEmployee selectedEmployees = SelectedEmployee();
+  int selectedEmployeeId = 0;
+
   /// Isolation and Loto Assets
   Rx<bool> isNormalized = false.obs;
 
@@ -336,17 +341,16 @@ class JobCardDetailsController extends GetxController {
         });
       }
       // selected employees
-      var _employeeList = [];
+      // var _employeeList = [];
 
-      for (EmployeeModel employee in selectedEmployeeList ?? []) {
-        int _index = selectedEmployeeList?.indexOf(employee) ?? 0;
-        final _responsibility = getResponsibility(_index);
-        _employeeList.add({
-          "empId": employee.id,
-          "employeeId": employee.id,
-          "responsibility": _responsibility,
-        });
-      }
+      // for (EmployeeModel employee in selectedEmployeeList ?? []) {
+      //   int _index = selectedEmployeeList?.indexOf(employee) ?? 0;
+      //   final _responsibility = getResponsibility(_index);
+      //   _employeeList.add({
+      //     "empId": employee.id,
+      //     "responsibility": _responsibility,
+      //   });
+      // }
       var _comment = descriptionOfWorkDoneCtrlr.text.trim();
       // create jobcard object
       var jobCard = {
@@ -356,7 +360,7 @@ class JobCardDetailsController extends GetxController {
         "is_isolation_required": true,
         "isolated_list": _isolatedAssetCatList,
         "loto_list": _lotoAssetList,
-        "employee_list": _employeeList,
+        "employee_list": employee,
         "uploadfile_ids": fileIds,
       };
 
@@ -387,6 +391,10 @@ class JobCardDetailsController extends GetxController {
 
   void onDropdownValueChanged(dropdownList, selectedValue) {
     selectedEmployeeName.value = selectedValue;
+    int employeeId =
+        employeeList.indexWhere((element) => element!.name == selectedValue);
+    selectedEmployeeId = employeeList[employeeId]!.id ?? 0;
+    print('Selected Employee Id: $selectedEmployeeId');
   }
 
   startStopJobCard() {
@@ -418,13 +426,19 @@ class JobCardDetailsController extends GetxController {
   Future<void> startJobCard(
       {required int jcCard, List<dynamic>? fileIds}) async {
     await startStopJobCard();
+
+    var jobCard = {
+      "uploadfile_ids": fileIds,
+      "LstCMJCEmpList": employee,
+    };
+
     print("filesids: ${fileIds}");
-    Map<String, dynamic> files = UploadFiles(uploadfile_ids: fileIds).toJson();
+    // Map<String, dynamic> files = UploadFiles(uploadfile_ids: fileIds).toJson();
     if (isJobCardStarted.value == true) {
       Map<String, dynamic>? responseMapJobCardStarted =
           await jobCardDetailsPresenter.startJobCard(
         jcCard: jcCard,
-        files: files,
+        jobCard: jobCard,
         isLoading: true,
       );
 
@@ -463,7 +477,7 @@ class JobCardDetailsController extends GetxController {
     lotoAppliedAssets.value = _permitDetails?.lstLoto ?? [];
   }
 
-  void closeJob() async {
+  void closeJob({List<dynamic>? fileIds}) async {
     int isolationId = 0;
     for (IsolationAssetsCategory isolationAssetsCategory
         in isolationAssetsCategoryList) {
@@ -492,6 +506,7 @@ class JobCardDetailsController extends GetxController {
       "employee_id": _employeeId,
       "normalisedStatus": 1,
       "lotoStatus": lotoStatus,
+      "uploadfile_ids": fileIds,
     };
     Map<String, dynamic>? responseCarryForwardJCModel =
         await jobCardDetailsPresenter.closeJob(
@@ -532,7 +547,7 @@ class JobCardDetailsController extends GetxController {
       "isolationId": isolationId,
       "lotoId": lotoId,
       "comment": _comment,
-      "employee_id": _employeeId,
+      "employee_list": employee,
       "normalisedStatus": 1,
       "lotoStatus": lotoStatus,
       "uploadfile_ids": fileIds,
@@ -732,7 +747,6 @@ class JobCardDetailsController extends GetxController {
   }
 
   void addNewEmployee(EmployeeModel selectedEmployee, String responsibility) {
-    ///
     // Create a new index for this row based on the current number of rows
     final uniqueKey = UniqueKey();
     // Create a new DataRow2 with the selected employee and responsibility
@@ -767,11 +781,14 @@ class JobCardDetailsController extends GetxController {
       ],
     );
 
-    // Add the new row to the list of rows
-    employeeTableRows.add(newRow);
+    selectedEmployees = SelectedEmployee(
+      empId: selectedEmployeeId,
+      responsibility: responsibility,
+    );
+    employee.add(selectedEmployees);
+    print("Employees names and ids: ${employee[0]}");
 
-    // Add the selected employee to the list of selected employees
-    selectedEmployeeList?.add(selectedEmployee);
+    employeeTableRows.add(newRow);
 
     responsibilityCtrlr.clear();
     selectedEmployeeName.value = '';
@@ -783,6 +800,7 @@ class JobCardDetailsController extends GetxController {
     if (index != -1) {
       // If found, remove the row from the table
       employeeTableRows.removeAt(index);
+      employee.removeAt(index);
     }
   }
 

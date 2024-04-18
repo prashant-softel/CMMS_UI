@@ -1,5 +1,5 @@
 import 'package:cmms/domain/models/get_asset_data_list_model.dart';
-import 'package:cmms/domain/models/grievanceTypeList.dart';
+import 'package:cmms/domain/models/grievance_type_model.dart';
 import 'package:cmms/domain/models/history_model.dart';
 import 'package:cmms/domain/usecases/create_grievance_usecase.dart';
 
@@ -17,7 +17,7 @@ class CreateGrievancePresenter {
         isLoading: isLoading ?? false,
       );
 
-  Future<List<GrievanceType?>?> getGrievanceType() async =>
+  Future<List<GrievanceTypeModel?>?> getGrievanceType() async =>
       await createGrievanceUsecase.getGrievanceType(true);
 
   Future<List<HistoryModel>?> getRoHistory(

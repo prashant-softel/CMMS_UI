@@ -92,10 +92,10 @@ class TBTTypeListController extends GetxController {
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
       facilityId = event;
       Future.delayed(Duration(seconds: 1), () {
-        getJobTypePermitList(selectedFacilityId);
+        getFacilityList();
       });
       Future.delayed(Duration(seconds: 1), () {
-        getFacilityList();
+        getJobTypePermitList(selectedFacilityId);
       });
 
       titleFocus.addListener(() {
@@ -117,6 +117,7 @@ class TBTTypeListController extends GetxController {
     final _facilityList = await tbtTypeListPresenter.getFacilityList();
     //print('Facility25:$_facilityList');
     if (_facilityList != null) {
+      facilityList.clear();
       for (var facility in _facilityList) {
         facilityList.add(facility);
       }

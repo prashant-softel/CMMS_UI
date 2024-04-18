@@ -1219,12 +1219,12 @@ class NewPermitController extends GetxController {
     if (selectedTypePermit.value == '') {
       isTypePermit.value = false;
     }
-    if (selectedJobType.value == '') {
-      isJobTypeListSelected.value = false;
-    }
-    if (selectedSopPermit.value == '') {
-      isSopPermitListSelected.value = false;
-    }
+    // if (selectedJobType.value == '') {
+    //   isJobTypeListSelected.value = false;
+    // }
+    // if (selectedSopPermit.value == '') {
+    //   isSopPermitListSelected.value = false;
+    // }
     if (selectedEquipmentCategoryIdList.isEmpty) {
       Fluttertoast.showToast(msg: "Select the equipment category");
     }
@@ -1346,35 +1346,37 @@ class NewPermitController extends GetxController {
       // }
 
       CreatePermitModel createPermitModel = CreatePermitModel(
-          facility_id: facilityId,
-          blockId: selectedBlockId,
-          lotoId: selectedEquipmentCategoryIdList.first,
-          permitTypeId: selectedPermitTypeId,
+        facility_id: facilityId,
+        blockId: selectedBlockId,
+        lotoId: selectedEquipmentCategoryIdList.first,
+        permitTypeId: selectedPermitTypeId,
 
-          ///Permit Type Id
-          start_datetime: startDateTimeCtrlrBuffer,
-          end_datetime: validTillTimeCtrlrBuffer,
-          title: _title,
-          description: _description,
-          job_type_id: selectedJobTypesId, ////Job type Id
-          sop_type_id: selectedSOPId,
-          issuer_id: selectedPermitIssuerTypeId,
-          approver_id: selectedPermitApproverTypeId,
-          user_id: userId,
-          latitude: 0,
-          longitude: 0,
-          block_ids: selectedEmployeeNameIdList,
-          category_ids: selectedEquipmentCategoryIdList,
-          uploadfile_ids: fileIds,
-          is_loto_required: isToggleOn.value,
-          isolated_category_ids: selectedEquipmentIsolationIdList,
-          Loto_list: loto_map_list,
-          lotoOtherDetails: [],
-          employee_list: employee_map_list,
-          safety_question_list: safety_measure_map_list,
-          TBT_Done_by: selectedTbtConductedId,
-          TBT_Done_at: tbtDateTimeCtrlrBuffer,
-          PHYSICAL_ISO_REMARK: _workPermitRemark);
+        ///Permit Type Id
+        start_datetime: startDateTimeCtrlrBuffer,
+        end_datetime: validTillTimeCtrlrBuffer,
+        title: _title,
+        description: _description,
+        job_type_id: selectedJobTypesId, ////Job type Id
+        sop_type_id: selectedSOPId,
+        issuer_id: selectedPermitIssuerTypeId,
+        approver_id: selectedPermitApproverTypeId,
+        user_id: userId,
+        latitude: 0,
+        longitude: 0,
+        block_ids: selectedEmployeeNameIdList,
+        category_ids: selectedEquipmentCategoryIdList,
+        uploadfile_ids: fileIds,
+        is_loto_required: isToggleOn.value,
+        isolated_category_ids: selectedEquipmentIsolationIdList,
+        Loto_list: loto_map_list,
+        lotoOtherDetails: [],
+        employee_list: employee_map_list,
+        safety_question_list: safety_measure_map_list,
+        TBT_Done_by: selectedTbtConductedId,
+        TBT_Done_at: tbtDateTimeCtrlrBuffer,
+        PHYSICAL_ISO_REMARK: _workPermitRemark,
+        is_physical_iso_required: true,
+      );
       var jobJsonString = createPermitModel.toJson();
       Map<String, dynamic>? responseNewPermitCreated =
           await permitPresenter.createNewPermit(
@@ -1463,35 +1465,37 @@ class NewPermitController extends GetxController {
       // }
 
       CreatePermitModel createPermitModel = CreatePermitModel(
-          facility_id: facilityId,
-          blockId: selectedBlockId,
-          lotoId: selectedEquipmentCategoryIdList.first,
-          permitTypeId: selectedPermitTypeId,
+        facility_id: facilityId,
+        blockId: selectedBlockId,
+        lotoId: selectedEquipmentCategoryIdList.first,
+        permitTypeId: selectedPermitTypeId,
 
-          ///Permit Type Id
-          start_datetime: startDateTimeCtrlrBuffer,
-          end_datetime: validTillTimeCtrlrBuffer,
-          title: _title,
-          description: _description,
-          job_type_id: selectedJobTypesId, ////Job type Id
-          sop_type_id: selectedSOPId,
-          issuer_id: selectedPermitIssuerTypeId,
-          approver_id: selectedPermitApproverTypeId,
-          uploadfile_ids: fileIds,
-          user_id: userId,
-          lotoOtherDetails: [],
-          latitude: 0,
-          longitude: 0,
-          block_ids: selectedEmployeeNameIdList,
-          category_ids: selectedEquipmentCategoryIdList,
-          is_loto_required: isToggleOn.value,
-          isolated_category_ids: selectedEquipmentIsolationIdList,
-          Loto_list: loto_map_list,
-          employee_list: employee_map_list,
-          safety_question_list: safety_measure_map_list,
-          TBT_Done_by: selectedTbtConductedId,
-          TBT_Done_at: tbtDateTimeCtrlrBuffer,
-          PHYSICAL_ISO_REMARK: _workPermitRemark);
+        ///Permit Type Id
+        start_datetime: startDateTimeCtrlrBuffer,
+        end_datetime: validTillTimeCtrlrBuffer,
+        title: _title,
+        description: _description,
+        job_type_id: selectedJobTypesId, ////Job type Id
+        sop_type_id: selectedSOPId,
+        issuer_id: selectedPermitIssuerTypeId,
+        approver_id: selectedPermitApproverTypeId,
+        uploadfile_ids: fileIds,
+        user_id: userId,
+        lotoOtherDetails: [],
+        latitude: 0,
+        longitude: 0,
+        block_ids: selectedEmployeeNameIdList,
+        category_ids: selectedEquipmentCategoryIdList,
+        is_loto_required: isToggleOn.value,
+        isolated_category_ids: selectedEquipmentIsolationIdList,
+        Loto_list: loto_map_list,
+        employee_list: employee_map_list,
+        safety_question_list: safety_measure_map_list,
+        TBT_Done_by: selectedTbtConductedId,
+        TBT_Done_at: tbtDateTimeCtrlrBuffer,
+        PHYSICAL_ISO_REMARK: _workPermitRemark,
+        is_physical_iso_required: true,
+      );
       var jobJsonString = createPermitModel.toJson();
       Map<String, dynamic>? responseNewPermitCreatedForJob =
           await permitPresenter.createNewPermitForJob(
@@ -1605,6 +1609,7 @@ class NewPermitController extends GetxController {
         TBT_Done_by: selectedTbtConductedId,
         TBT_Done_at: tbtDateTimeCtrlrBuffer,
         PHYSICAL_ISO_REMARK: _workPermitRemark,
+        is_physical_iso_required: true,
       );
       var jobJsonString = createPermitModel.toJson();
       print(createPermitModel);
@@ -1730,37 +1735,39 @@ class NewPermitController extends GetxController {
       });
 
       CreatePermitModel updatePermitModel = CreatePermitModel(
-          facility_id: facilityId,
-          blockId: selectedBlockId,
-          lotoId: selectedEquipmentCategoryIdList.first,
-          permit_id: permitId.value,
-          permitTypeId: selectedPermitTypeId,
+        facility_id: facilityId,
+        blockId: selectedBlockId,
+        lotoId: selectedEquipmentCategoryIdList.first,
+        permit_id: permitId.value,
+        permitTypeId: selectedPermitTypeId,
 
-          ///Permit Type Id
-          start_datetime: startDateTimeCtrlrBuffer,
-          end_datetime: validTillTimeCtrlrBuffer,
-          title: _title,
-          description: _description,
-          job_type_id: selectedJobTypesId, ////Job type Id
-          sop_type_id: selectedSOPId,
-          issuer_id: selectedPermitIssuerTypeId,
-          approver_id: selectedPermitApproverTypeId,
-          user_id: userId,
-          latitude: 0,
-          longitude: 0,
-          block_ids: selectedEmployeeNameIdList,
-          category_ids: selectedEquipmentCategoryIdList,
-          uploadfile_ids: files,
-          is_loto_required: isToggleOn.value,
-          isolated_category_ids: selectedEquipmentIsolationIdList,
-          Loto_list: loto_map_list,
-          employee_list: employee_map_list,
-          safety_question_list: safety_measure_map_list,
-          resubmit: isChecked.value,
-          lotoOtherDetails: rowTBTTrainingOtherPersonItems,
-          TBT_Done_by: selectedTbtConductedId,
-          TBT_Done_at: tbtDateTimeCtrlrBuffer,
-          PHYSICAL_ISO_REMARK: _workPermitRemark);
+        ///Permit Type Id
+        start_datetime: startDateTimeCtrlrBuffer,
+        end_datetime: validTillTimeCtrlrBuffer,
+        title: _title,
+        description: _description,
+        job_type_id: selectedJobTypesId, ////Job type Id
+        sop_type_id: selectedSOPId,
+        issuer_id: selectedPermitIssuerTypeId,
+        approver_id: selectedPermitApproverTypeId,
+        user_id: userId,
+        latitude: 0,
+        longitude: 0,
+        block_ids: selectedEmployeeNameIdList,
+        category_ids: selectedEquipmentCategoryIdList,
+        uploadfile_ids: files,
+        is_loto_required: isToggleOn.value,
+        isolated_category_ids: selectedEquipmentIsolationIdList,
+        Loto_list: loto_map_list,
+        employee_list: employee_map_list,
+        safety_question_list: safety_measure_map_list,
+        resubmit: isChecked.value,
+        lotoOtherDetails: rowTBTTrainingOtherPersonItems,
+        TBT_Done_by: selectedTbtConductedId,
+        TBT_Done_at: tbtDateTimeCtrlrBuffer,
+        PHYSICAL_ISO_REMARK: _workPermitRemark,
+        is_physical_iso_required: true,
+      );
       var jobJsonString = updatePermitModel.toJson();
       Map<String, dynamic>? responseUpdatePermit =
           await permitPresenter.updateNewPermit(
@@ -1822,36 +1829,37 @@ class NewPermitController extends GetxController {
       });
 
       CreatePermitModel updatePermitModel = CreatePermitModel(
-          facility_id: facilityId,
-          blockId: selectedBlockId,
-          lotoId: selectedEquipmentCategoryIdList.first,
-          permit_id: permitId.value,
-          permitTypeId: selectedPermitTypeId,
+        facility_id: facilityId,
+        blockId: selectedBlockId,
+        lotoId: selectedEquipmentCategoryIdList.first,
+        permit_id: permitId.value,
+        permitTypeId: selectedPermitTypeId,
 
-          ///Permit Type Id
-          start_datetime: startDateTimeCtrlrBuffer,
-          end_datetime: validTillTimeCtrlrBuffer,
-          title: _title,
-          description: _description,
-          job_type_id: selectedJobTypesId, ////Job type Id
-          sop_type_id: selectedSOPId,
-          issuer_id: selectedPermitIssuerTypeId,
-          approver_id: selectedPermitApproverTypeId,
-          uploadfile_ids: fileIds,
-          user_id: userId,
-          latitude: 0,
-          longitude: 0,
-          block_ids: selectedEmployeeNameIdList,
-          category_ids: selectedEquipmentCategoryIdList,
-          is_loto_required: isToggleOn.value,
-          isolated_category_ids: selectedEquipmentIsolationIdList,
-          Loto_list: loto_map_list,
-          employee_list: employee_map_list,
-          safety_question_list: safety_measure_map_list,
-          resubmit: true,
-          TBT_Done_by: selectedTbtConductedId,
-          TBT_Done_at: tbtDateTimeCtrlrBuffer,
-          PHYSICAL_ISO_REMARK: _workPermitRemark);
+        ///Permit Type Id
+        start_datetime: startDateTimeCtrlrBuffer,
+        end_datetime: validTillTimeCtrlrBuffer,
+        title: _title,
+        description: _description,
+        job_type_id: selectedJobTypesId, ////Job type Id
+        sop_type_id: selectedSOPId,
+        issuer_id: selectedPermitIssuerTypeId,
+        approver_id: selectedPermitApproverTypeId,
+        uploadfile_ids: fileIds,
+        user_id: userId,
+        latitude: 0,
+        longitude: 0,
+        block_ids: selectedEmployeeNameIdList,
+        category_ids: selectedEquipmentCategoryIdList,
+        is_loto_required: isToggleOn.value,
+        isolated_category_ids: selectedEquipmentIsolationIdList,
+        Loto_list: loto_map_list,
+        employee_list: employee_map_list,
+        safety_question_list: safety_measure_map_list,
+        resubmit: true,
+        TBT_Done_by: selectedTbtConductedId,
+        TBT_Done_at: tbtDateTimeCtrlrBuffer,
+        PHYSICAL_ISO_REMARK: _workPermitRemark, is_physical_iso_required: true,
+      );
       var jobJsonString = updatePermitModel.toJson();
       Map<String, dynamic>? responseUpdatePermit =
           await permitPresenter.resubmitPermit(

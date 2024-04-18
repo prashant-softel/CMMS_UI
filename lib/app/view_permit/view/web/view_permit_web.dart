@@ -82,23 +82,23 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                                         style: Styles.greyLight14,
                                       ),
                                     ),
-                                    controller.type.value == 1
-                                        ? InkWell(
-                                            onTap: () {
-                                              Get.offAllNamed(
-                                                  Routes.pmTaskView);
-                                            },
-                                            child: Text(" / VIEW PM TASK",
-                                                style: Styles.greyLight14),
-                                          )
-                                        : InkWell(
-                                            onTap: () {
-                                              Get.offAllNamed(
-                                                  Routes.newPermitList);
-                                            },
-                                            child: Text(" / PERMIT LIST",
-                                                style: Styles.greyLight14),
-                                          ),
+                                    // controller.type.value == 1
+                                    //     ? InkWell(
+                                    //         onTap: () {
+                                    //           Get.offAllNamed(
+                                    //               Routes.pmTaskView);
+                                    //         },
+                                    //         child: Text(" / VIEW PM TASK",
+                                    //             style: Styles.greyLight14),
+                                    //       )
+                                    //     :
+                                    InkWell(
+                                      onTap: () {
+                                        Get.offAllNamed(Routes.newPermitList);
+                                      },
+                                      child: Text(" / PERMIT LIST",
+                                          style: Styles.greyLight14),
+                                    ),
                                     Text(" / VIEW PERMIT",
                                         style: Styles.greyLight14)
                                   ],
@@ -411,7 +411,7 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      'Work Description: ',
+                                      'Title: ',
                                       style: Styles.black17,
                                     ),
                                     Dimens.boxHeight5,
@@ -2529,6 +2529,25 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                               //   ),
                               // ),
 
+                              Padding(
+                                padding: const EdgeInsets.only(left: 20),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      'Comments: ',
+                                      style: Styles.black17,
+                                    ),
+                                    Dimens.boxHeight5,
+                                    Container(
+                                      child: Text(
+                                          '${controller.viewPermitDetailsModel.value?.physical_iso_remark}',
+                                          style: Styles.blue17),
+                                    ),
+                                  ],
+                                ),
+                              ),
                               Dimens.boxHeight10,
                               Container(
                                 margin: EdgeInsets.all(20),
@@ -3014,8 +3033,9 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                                             UserAccessConstants.kHaveEditAccess)
                                     .length >
                                 0 &&
-                            controller
-                                .isOneHour(controller.validTillTimeCtrlr.text) == true
+                            controller.isOneHour(
+                                    controller.validTillTimeCtrlr.text) ==
+                                true
                     ? Padding(
                         padding: const EdgeInsets.only(left: 5),
                         child: Container(

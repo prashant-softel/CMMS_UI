@@ -77,6 +77,9 @@ class ReceiveGoodsOrdersController extends GetxController {
   var conditionOfPackagesReceivedCtrlr = TextEditingController();
   var girNoCtrlr = TextEditingController();
   var amountCtrlr = TextEditingController();
+  var freightValueCtrlr = TextEditingController();
+  var inspectionReportCtrlr = TextEditingController();
+
   var purchaseDateTc = TextEditingController();
   var challanDateTc = TextEditingController();
   var poDateDateTc = TextEditingController();
@@ -216,11 +219,12 @@ class ReceiveGoodsOrdersController extends GetxController {
           {
             'key': "Order",
             "value": '${element.ordered_qty}',
-            // 'id': '${element.assetMasterItemID}'
+            'id': '${element.assetMasterItemID}'
           },
           {
             'key': "Received",
             "value": '${element.received_qty}',
+            "sr_no": '${element.sr_no}',
             // "lostQty": '${element.lost_qty}'
           },
           {
@@ -258,6 +262,10 @@ class ReceiveGoodsOrdersController extends GetxController {
           getPurchaseDetailsByIDModel.value?.no_pkg_received ?? "";
       conditionOfPackagesReceivedCtrlr.text =
           getPurchaseDetailsByIDModel.value?.condition_pkg_received ?? "";
+      freightValueCtrlr.text =
+          getPurchaseDetailsByIDModel.value?.freight_value ?? "";
+      inspectionReportCtrlr.text =
+          getPurchaseDetailsByIDModel.value?.inspection_report ?? "";
       girNoCtrlr.text = getPurchaseDetailsByIDModel.value?.gir_no ?? "";
       amountCtrlr.text =
           getPurchaseDetailsByIDModel.value?.amount.toString() ?? "";
@@ -516,6 +524,8 @@ class ReceiveGoodsOrdersController extends GetxController {
     String _noOfPackagesReceivedCtrlr = noOfPackagesReceivedCtrlr.text.trim();
     String _conditionOfPackagesReceivedCtrlr =
         conditionOfPackagesReceivedCtrlr.text.trim();
+    String _freightValueCtrlr = freightValueCtrlr.text.trim();
+    String _inspectionReportCtrlr = inspectionReportCtrlr.text.trim();
     String _girNoCtrlr = girNoCtrlr.text.trim();
     String _amountCtrlr = amountCtrlr.text.trim();
     String _purchaseDateTc = purchaseDateTc.text.trim();
@@ -574,6 +584,8 @@ class ReceiveGoodsOrdersController extends GetxController {
         lr_no: _lrNoCtrlr,
         condition_pkg_received: _conditionOfPackagesReceivedCtrlr,
         vehicle_no: _vehicleNoCtrlr,
+        freight_value: _freightValueCtrlr,
+        inspection_report: _inspectionReportCtrlr,
         gir_no: _girNoCtrlr,
         job_ref: _jobRefCtrlr,
         amount: int.tryParse(_amountCtrlr) ?? 0,

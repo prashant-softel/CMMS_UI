@@ -838,21 +838,21 @@ class _AddJobContentWebState extends State<AddJobContentWeb> {
                                                     dialogWidth: 300,
                                                     dialogHeight: 400,
                                                     searchable: true,
-                                                    validator: (selectedItems) {
-                                                      if (controller.isToolRequiredToWorkTypeSelected.value == false) {
-                                                        return "Required field";
-                                                      } else {
-                                                        return null;
-                                                      }
-                                                    },
+                                                    // validator: (selectedItems) {
+                                                    //   if (controller.isToolRequiredToWorkTypeSelected.value == false) {
+                                                    //     return "Required field";
+                                                    //   } else {
+                                                    //     return null;
+                                                    //   }
+                                                    // },
                                                     autovalidateMode:
                                                         AutovalidateMode.always,
                                                     decoration: BoxDecoration(
                                                       border: Border.all(
                                                         color:
-                                                            controller.isToolRequiredToWorkTypeSelected.value == false
-                                                                ? Colors.red
-                                                                :
+                                                        //     controller.isToolRequiredToWorkTypeSelected.value == false
+                                                        //         ? Colors.red
+                                                        //         :
                                                             Colors.transparent,
                                                         width: 1.0,
                                                       ),
@@ -1152,7 +1152,7 @@ class _AddJobContentWebState extends State<AddJobContentWeb> {
                               Center(
                                 child: CustomElevatedButton(
                                   text: 'Submit',
-                                  onPressed: controller.saveJob,
+                                  onPressed: () => controller.saveJob(fileIds: dropzoneController.fileIds),
                                   backgroundColor: ColorValues.appDarkBlueColor,
                                 ),
                               ),

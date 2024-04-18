@@ -1005,6 +1005,8 @@ class CheckPointDataSource extends DataTableSource {
                             "${controller.selectedItem?.check_point}";
                         controller.checkpointType.value =
                             "${controller.selectedItem?.checkpoint_type}";
+                        controller.selectedchecklist.value =
+                            "${controller.selectedItem?.checklist_name}";
 
                         controller.failurewtgCtrlr.text =
                             "${controller.selectedItem?.failure_weightage}";

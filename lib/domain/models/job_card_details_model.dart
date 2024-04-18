@@ -104,7 +104,6 @@ class JobCardDetailsModel {
             json["file_list"].map((x) => FilesModel.fromJson(x))),
         toolList: List<ToolList>.from(
             json["tool_List"].map((x) => ToolList.fromJson(x))),
-       
       );
 
   Map<String, dynamic> toJson() => {
@@ -206,16 +205,18 @@ class LstCmjcJobDetailList {
 }
 
 class LstPermitDetailList {
-  LstPermitDetailList(
-      {this.permitId,
-      this.sitePermitNo,
-      this.permitType,
-      this.permitDescription,
-      this.jobCreatedByName,
-      this.permitIssuedByName,
-      this.permitApprovedByName,
-      this.status,
-      this.status_short});
+  LstPermitDetailList({
+    this.permitId,
+    this.sitePermitNo,
+    this.permitType,
+    this.permitDescription,
+    this.jobCreatedByName,
+    this.permitIssuedByName,
+    this.permitApprovedByName,
+    this.status,
+    this.status_short,
+    this.tbT_Done_Check,
+  });
 
   int? permitId;
   int? sitePermitNo;
@@ -226,6 +227,7 @@ class LstPermitDetailList {
   String? permitApprovedByName;
   int? status;
   String? status_short;
+  int? tbT_Done_Check;
 
   factory LstPermitDetailList.fromJson(Map<String, dynamic> json) =>
       LstPermitDetailList(
@@ -238,6 +240,7 @@ class LstPermitDetailList {
         permitApprovedByName: json["permit_approved_by_name"],
         status: json["status"],
         status_short: json["status_short"],
+        tbT_Done_Check: json["tbT_Done_Check"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -249,7 +252,7 @@ class LstPermitDetailList {
         "permit_issued_by_name": permitIssuedByName,
         "permit_approved_by_name": permitApprovedByName,
         "status_short": status_short,
-        "status": status
+        "tbT_Done_Check": tbT_Done_Check
       };
 }
 
@@ -321,5 +324,23 @@ class UploadFiles {
 
   Map<String, dynamic> toJson() => {
         "uploadfile_ids": List<dynamic>.from(uploadfile_ids!.map((x) => x)),
+      };
+}
+
+class SelectedEmployee {
+  int? empId;
+  String? responsibility;
+
+  SelectedEmployee({this.empId, this.responsibility});
+
+  factory SelectedEmployee.fromJson(Map<String, dynamic> json) =>
+      SelectedEmployee(
+        empId: json["empId"],
+        responsibility: json["responsibility"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "empId": empId,
+        "responsibility": responsibility,
       };
 }

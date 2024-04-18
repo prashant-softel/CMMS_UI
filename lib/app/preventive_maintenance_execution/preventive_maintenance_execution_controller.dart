@@ -631,7 +631,7 @@ class PreventiveMaintenanceExecutionController extends GetxController {
             margin: Dimens.edgeInsets20,
             child: Column(
               children: [
-                Text("Successfully...."),
+                Text("Updated checkpoints successfully."),
                 Dimens.boxHeight10,
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
