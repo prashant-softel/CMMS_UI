@@ -510,6 +510,7 @@ class TBTTypeListContentWeb extends GetView<TBTTypeListController> {
                                                   if (value == true)
                                                     controller
                                                         .issuccessCreatechecklist();
+                                                    controller.toggleContainer();
                                                 });
                                               },
                                               text: 'Update')),
