@@ -396,9 +396,9 @@ class ConnectHelper {
   }
 
   Future<ResponseModel> getJobTypePermitList(
-      {required bool isLoading, required String auth, int? facility_id}) async {
+      {required bool isLoading, required String auth}) async {
     ResponseModel responseModel = await apiWrapper.makeRequest(
-      'Permit/GetJobTypeList?facility_id=$facility_id',
+      'Permit/GetJobTypeList',
       Request.getMultiparts,
       null,
       isLoading,

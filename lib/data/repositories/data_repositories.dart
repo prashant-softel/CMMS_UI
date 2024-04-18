@@ -284,14 +284,12 @@ class DataRepository extends DomainRepository {
 
   @override
   Future<ResponseModel> getJobTypePermitList({
-    int? facility_id,
     required bool isLoading,
     required String auth,
   }) async {
     return await connectHelper.getJobTypePermitList(
       isLoading: isLoading,
       auth: auth,
-      facility_id: facility_id,
     );
   }
 

@@ -2901,7 +2901,6 @@ class Repository {
   }
 
   Future<List<JobTypeListModel>> getJobTypePermitList({
-    required int? facility_id,
     // int? blockId,
     // required String categoryIds,
     required bool isLoading,
@@ -2911,7 +2910,6 @@ class Repository {
 
       log(auth);
       final res = await _dataRepository.getJobTypePermitList(
-        facility_id: facility_id,
         isLoading: isLoading,
         auth: auth,
       );
