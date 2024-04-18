@@ -14,6 +14,7 @@ String jobCardDetailsModelToJson(List<JobCardDetailsModel> data) =>
 class JobCardDetailsModel {
   JobCardDetailsModel(
       {this.plantName,
+      this.blockName,
       this.assetCategoryName,
       this.jcApprovedByName,
       this.updatedByName,
@@ -41,6 +42,7 @@ class JobCardDetailsModel {
       this.jC_Start_By_Name});
 
   String? plantName;
+  String? blockName;
   String? assetCategoryName;
   String? jcApprovedByName;
   String? updatedByName;
@@ -69,6 +71,7 @@ class JobCardDetailsModel {
   factory JobCardDetailsModel.fromJson(Map<String, dynamic> json) =>
       JobCardDetailsModel(
         plantName: json["plant_name"],
+        blockName: json["block_name"],
         assetCategoryName: json["asset_category_name"],
         jcApprovedByName: json["jC_Approved_By_Name"],
         updatedByName: json["updatedByName"],
@@ -108,6 +111,7 @@ class JobCardDetailsModel {
 
   Map<String, dynamic> toJson() => {
         "plant_name": plantName,
+        "block_name" : blockName,
         "asset_category_name": assetCategoryName,
         "jC_Approved_By_Name": jcApprovedByName,
         "updatedByName": updatedByName,

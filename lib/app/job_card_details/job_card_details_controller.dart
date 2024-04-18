@@ -209,7 +209,7 @@ class JobCardDetailsController extends GetxController {
       strEquipmentCategories.value = equipmentCategoryNames.join(', ');
       plantDetails.value = {
         "Plant": jobCardDetailsModel.value?.plantName,
-        "Block": jobCardDetailsModel.value?.plantName,
+        "Block": jobCardDetailsModel.value?.blockName,
         // "Equipment Categories": jobCardDetailsModel.value?.assetCategoryName,
       };
     }

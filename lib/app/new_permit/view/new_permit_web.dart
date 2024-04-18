@@ -153,6 +153,7 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                           ),
                                           columns: [
                                             DataColumn2(
+                                              fixedWidth: 105,
                                               label: Text('PM Task ID'),
                                             ),
                                             DataColumn2(
@@ -168,6 +169,7 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                               label: Text('Frequency'),
                                             ),
                                             DataColumn2(
+                                              fixedWidth: 200,
                                               label: Text('Assigned To'),
                                             ),
                                           ],
@@ -204,7 +206,7 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                                     scrollDirection:
                                                         Axis.horizontal,
                                                     child: Text(
-                                                      '${controller.allChecklistNames}',
+                                                      '${controller.allChecklistNames},',
                                                     ),
                                                   ),
                                                 ),
