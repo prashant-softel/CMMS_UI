@@ -61,7 +61,7 @@ class JobCardDetailsModel {
   List<LstPermitDetailList>? lstPermitDetailList;
   List<LstCmjcIsolatedDetailList>? lstCmjcIsolatedDetailList;
   List<dynamic>? lstCmjcLotoDetailList;
-  List<dynamic>? lstCmjcEmpList;
+  List<SelectedEmployee>? lstCmjcEmpList;
   List<FilesModel?>? fileList;
   List<ToolList>? toolList;
   int? status;
@@ -101,8 +101,8 @@ class JobCardDetailsModel {
                 .map((x) => LstCmjcIsolatedDetailList.fromJson(x))),
         lstCmjcLotoDetailList:
             List<dynamic>.from(json["lstCMJCLotoDetailList"].map((x) => x)),
-        lstCmjcEmpList:
-            List<dynamic>.from(json["lstCMJCEmpList"].map((x) => x)),
+        lstCmjcEmpList: List<SelectedEmployee>.from(
+            json["lstCMJCEmpList"].map((x) => SelectedEmployee.fromJson(x))),
         fileList: List<FilesModel>.from(
             json["file_list"].map((x) => FilesModel.fromJson(x))),
         toolList: List<ToolList>.from(
@@ -111,7 +111,7 @@ class JobCardDetailsModel {
 
   Map<String, dynamic> toJson() => {
         "plant_name": plantName,
-        "block_name" : blockName,
+        "block_name": blockName,
         "asset_category_name": assetCategoryName,
         "jC_Approved_By_Name": jcApprovedByName,
         "updatedByName": updatedByName,
@@ -333,18 +333,21 @@ class UploadFiles {
 
 class SelectedEmployee {
   int? empId;
+  String? empName;
   String? responsibility;
 
-  SelectedEmployee({this.empId, this.responsibility});
+  SelectedEmployee({this.empId, this.empName, this.responsibility});
 
   factory SelectedEmployee.fromJson(Map<String, dynamic> json) =>
       SelectedEmployee(
         empId: json["empId"],
+        empName: json["empName"],
         responsibility: json["responsibility"],
       );
 
   Map<String, dynamic> toJson() => {
         "empId": empId,
+        "empName": empName,
         "responsibility": responsibility,
       };
 }

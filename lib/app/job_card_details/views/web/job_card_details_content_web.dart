@@ -1,8 +1,12 @@
+import 'dart:convert';
+
 import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
+import 'package:cmms/app/widgets/custom_textField.dart';
 import 'package:cmms/app/widgets/job_card_approve_dialog.dart';
 import 'package:cmms/app/widgets/job_card_reject_dialog.dart';
+import 'package:cmms/app/widgets/stock_dropdown.dart';
 import 'package:cmms/app/widgets/table_action_button.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
@@ -327,10 +331,10 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                               : Dimens.boxHeight20,
                           CustomDivider(),
 
-                          /// EMPLOYEE TABLE
-
-                          EmployeeTableWidget(
-                              controller: controller, isWeb: true),
+                          /// EMPLOYEE TABL
+                          DeployedTeam(),
+                          // EmployeeTableWidget(
+                          //     controller: controller, isWeb: true),
                           Dimens.boxHeight20,
                           CustomDivider(),
 
@@ -899,6 +903,247 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
           ),
         ),
       ],
+    );
+  }
+}
+
+class DeployedTeam extends StatelessWidget {
+  final JobCardDetailsController controller = Get.find();
+  DeployedTeam({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Obx(
+      () => Container(
+        margin: Dimens.edgeInsets20,
+        height: ((controller.employeesDeployed.value.length) * 60) + 170,
+        decoration: BoxDecoration(
+          border: Border.all(
+            color: ColorValues.lightGreyColorWithOpacity35,
+            width: 1.5,
+          ),
+          boxShadow: [
+            BoxShadow(
+              color: Color.fromARGB(255, 237, 240, 242),
+              spreadRadius: 2,
+              blurRadius: 5,
+              offset: Offset(0, 2),
+            ),
+          ],
+        ),
+        child: Column(
+          children: [
+            Column(
+                children: []
+                  ..addAll(controller.employeesDeployed.value.map((e) {
+                    return Text(jsonEncode(e));
+                  }))),
+            Text(jsonEncode(controller.deployedEmployeeMapperData)),
+            Padding(
+              padding: const EdgeInsets.only(
+                top: 10,
+                bottom: 10,
+                left: 10,
+                right: 10,
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "Team Deployed To Carry Out The Job",
+                    style: Styles.blue700,
+                  ),
+                  InkWell(
+                    onTap: () {
+                      controller.addEmployeesDeployed();
+                    },
+                    child: Container(
+                      height: 25,
+                      width: 90,
+                      decoration: BoxDecoration(
+                        color: ColorValues.addNewColor,
+                        border: Border.all(
+                          color: ColorValues.lightGreyColorWithOpacity35,
+                          width: 1,
+                        ),
+                        borderRadius: BorderRadius.all(Radius.circular(5)),
+                      ),
+                      child: Center(
+                        child: Text(
+                          " + Add ",
+                          style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.w100,
+                              color: Colors.white),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Expanded(
+              child: DataTable2(
+                columnSpacing: 10,
+                dataRowHeight: 70,
+                border: TableBorder.all(
+                  color: Color.fromARGB(255, 206, 229, 234),
+                ),
+                columns: [
+                  DataColumn2(
+                    label: Text("Employee Name"),
+                  ),
+                  DataColumn2(
+                    label: Text("Responsibility"),
+                  ),
+                  DataColumn2(
+                    label: Text("Action"),
+                  ),
+                ],
+                rows: controller.employeesDeployed.value.map(
+                  (record) {
+                    return DataRow(
+                      cells: record.map(
+                        (mapData) {
+                          return DataCell(
+                            (mapData['key'] == "Employee Name")
+                                ? Padding(
+                                    padding: const EdgeInsets.only(
+                                        left: 10, right: 10, top: 10),
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Container(
+                                          decoration: BoxDecoration(
+                                            boxShadow: [
+                                              BoxShadow(
+                                                color: Colors.black26,
+                                                offset: const Offset(
+                                                  5.0,
+                                                  5.0,
+                                                ),
+                                                blurRadius: 5.0,
+                                                spreadRadius: 1.0,
+                                              ),
+                                            ],
+                                            color: ColorValues.whiteColor,
+                                            borderRadius:
+                                                BorderRadius.circular(5),
+                                          ),
+                                          child: DropdownWebStock(
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width /
+                                                4,
+                                            controller: controller,
+                                            dropdownList:
+                                                controller.employeeList,
+                                            selectedValue: mapData["value"],
+                                            onValueChanged:
+                                                (list, selectedValue) {
+                                              if (selectedValue != null) {
+                                                controller.updateSelectedOption(
+                                                    selectedValue);
+                                              }
+                                              mapData["value"] = selectedValue;
+                                              controller.deployedEmployeeMapperData[
+                                                      selectedValue] =
+                                                  list.firstWhere(
+                                                      (element) =>
+                                                          element.name ==
+                                                          selectedValue,
+                                                      orElse: null);
+                                            },
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  )
+                                : (mapData['key'] == "Responsibility")
+                                    ? Padding(
+                                        padding: EdgeInsets.only(top: 10),
+                                        child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Container(
+                                                decoration: BoxDecoration(
+                                                  boxShadow: [
+                                                    BoxShadow(
+                                                      color: Colors.black26,
+                                                      offset: const Offset(
+                                                        5.0,
+                                                        5.0,
+                                                      ),
+                                                      blurRadius: 5.0,
+                                                      spreadRadius: 1.0,
+                                                    ),
+                                                  ],
+                                                  color: ColorValues.whiteColor,
+                                                  borderRadius:
+                                                      BorderRadius.circular(5),
+                                                ),
+                                                child: LoginCustomTextfield(
+                                                  keyboardType:
+                                                      TextInputType.text,
+                                                  // inputFormatters: <
+                                                  //     TextInputFormatter>[
+                                                  //   FilteringTextInputFormatter
+                                                  //       .digitsOnly
+                                                  // ],
+                                                  maxLine: 1,
+                                                  textController:
+                                                      new TextEditingController(
+                                                          text: mapData[
+                                                                  "value"] ??
+                                                              ''),
+                                                  onChanged: (txt) {
+                                                    mapData["value"] = txt;
+                                                  },
+                                                )),
+                                          ],
+                                        ),
+                                      )
+                                    : (mapData['key'] == "Action")
+                                        ? Padding(
+                                            padding: EdgeInsets.only(top: 10),
+                                            child: Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                TableActionButton(
+                                                  color:
+                                                      ColorValues.appRedColor,
+                                                  icon: Icons.delete,
+                                                  label: '',
+                                                  message: '',
+                                                  onPress: () {
+                                                    controller.employeesDeployed
+                                                        .remove(record);
+                                                  },
+                                                )
+                                              ],
+                                            ),
+                                          )
+                                        : Text(mapData['key'] ?? ''),
+                          );
+                        },
+                      ).toList(),
+                    );
+                  },
+                ).toList(),
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
