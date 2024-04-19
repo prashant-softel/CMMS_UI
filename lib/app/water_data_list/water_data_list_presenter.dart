@@ -13,4 +13,14 @@ class WaterDataListPresenter {
       isLoading: isLoading,
     );
   }
+
+  Future<Map<String, dynamic>?> createWaterDataConsumption({
+    createWaterData,
+    required bool isLoading,
+  }) async {
+    return waterDataListUsecase.createWaterData(
+      createWaterData: createWaterData,
+      isLoading: isLoading,
+    );
+  }
 }
