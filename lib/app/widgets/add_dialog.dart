@@ -7,7 +7,6 @@ import 'package:cmms/app/widgets/stock_dropdown.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:intl/intl.dart';
 
 class AddDialog extends GetView {
   final WaterDataListController controller = Get.find();
@@ -134,16 +133,12 @@ class AddDialog extends GetView {
                       Dimens.boxHeight10,
                       GoodsOrderTextField(
                         keyboardType: TextInputType.number,
-
-                        // textController:
-                        //     controller.girNoCtrlr,
+                        textController: controller.qtyCtrlr,
                       ),
                       Dimens.boxHeight10,
                       GoodsOrderTextField(
-
-                          // textController:
-                          //     controller.girNoCtrlr,
-                          ),
+                        textController: controller.descriptionCtrlr,
+                      ),
                     ],
                   ),
                 ],
@@ -172,7 +167,7 @@ class AddDialog extends GetView {
                   backgroundColor: ColorValues.greenColor,
                   text: 'Submit',
                   onPressed: () {
-                    // controller.createMcPlan();
+                    controller.createWaterData();
                   },
                 ),
               ),
