@@ -8,6 +8,7 @@ class ReturnMrsDetailsModel {
   int? requested_by_emp_ID;
   String? approver_name;
   dynamic requestd_date;
+  String? issued_date;
   String? returnDate;
   String? approval_date;
   int? approval_status;
@@ -20,6 +21,7 @@ class ReturnMrsDetailsModel {
   int? whereUsedType;
   int? whereUsedTypeId;
   String? remarks;
+  String? issued_name;
   List<CmmsItems>? cmmrsItems;
 
   ReturnMrsDetailsModel(
@@ -39,6 +41,8 @@ class ReturnMrsDetailsModel {
       this.whereUsedType,
       this.whereUsedTypeId,
       this.remarks,
+      this.issued_date,
+      this.issued_name,
       this.status_long});
 
   factory ReturnMrsDetailsModel.fromJson(Map<String, dynamic> parsedJson) {
@@ -49,6 +53,8 @@ class ReturnMrsDetailsModel {
 
     return ReturnMrsDetailsModel(
       activity: parsedJson['activity'],
+      issued_date: parsedJson['issued_date'],
+      issued_name: parsedJson['issued_name'],
       approval_comment: parsedJson['approval_comment'],
       approval_date: parsedJson['approval_date'],
       approval_status: parsedJson['approval_status'],
@@ -69,6 +75,8 @@ class ReturnMrsDetailsModel {
   }
   Map<String, dynamic> toJson() => {
         "activity": activity,
+        "issued_date": issued_date,
+        "issued_name": issued_name,
         "approval_comment": approval_comment,
         "approval_date": approval_date,
         "approval_status": approval_status,
@@ -94,10 +102,10 @@ class CmmsItems {
   int? mrs_return_ID;
   int? asset_item_ID;
   dynamic asset_MDM_code;
-  int? returned_qty;
+  dynamic? returned_qty;
   double? available_qty;
-  int? used_qty;
-  int? issued_qty;
+  dynamic? used_qty;
+  dynamic? issued_qty;
   String? approved_date;
   String? issued_date;
   double? requested_qty;

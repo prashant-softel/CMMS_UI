@@ -1205,53 +1205,6 @@ class PreventiveMaintenanceTaskViewContentWeb
                             ),
                           )
                         : Dimens.box0,
-                    Dimens.boxWidth10,
-                    controller.pmtaskViewModel.value?.status == 169 &&
-                            varUserAccessModel.value.access_list!
-                                .where((e) =>
-                                    e.feature_id ==
-                                        UserAccessConstants.kPmTaskFeatureId &&
-                                    e.add == UserAccessConstants.kHaveAddAccess)
-                                .isNotEmpty &&
-                            controller.listMrsByTaskId!.isNotEmpty &&
-                            (() {
-                              try {
-                                final firstCmmrsItem =
-                                    controller.cmmrsItems.firstWhere(
-                                  (element) => element.mrs_return_ID == 0,
-                                  orElse: () => CmmrsItems(mrs_return_ID: 1),
-                                );
-                                return firstCmmrsItem != null;
-                              } catch (e) {
-                                return false;
-                              }
-                            }())
-                        ? Container(
-                            height: 35,
-                            child: CustomElevatedButton(
-                              icon: Icons.keyboard_return_outlined,
-                              backgroundColor: ColorValues.linktopermitColor,
-                              text: "Return Mrs",
-                              onPressed: () {
-                                controller.clearStoreTaskData();
-                                controller.clearStoreTaskActivityData();
-                                controller.clearStoreTasktoActorData();
-                                controller.clearStoreTaskWhereUsedData();
-                                controller.clearStoreTaskfromActorData();
-
-                                Get.toNamed(Routes.mrsReturnScreen, arguments: {
-                                  "whereUsed": 27,
-                                  "fromActorTypeId": 3,
-                                  "to_actor_type_id": 2,
-                                  "pmTaskId":
-                                      controller.pmtaskViewModel.value?.id ?? 0,
-                                  "activity": controller
-                                      .pmtaskViewModel.value?.plan_title
-                                });
-                              },
-                            ),
-                          )
-                        : SizedBox(), // Use SizedBox to provide an empty space when the condition is not met
                   ],
                 ),
               )
