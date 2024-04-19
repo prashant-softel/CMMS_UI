@@ -4085,6 +4085,32 @@ class DataRepository extends DomainRepository {
         start_date: start_date,
         end_date: end_date,
       );
+
+    Future<ResponseModel> getGrievanceDetails({
+    required String auth,
+    int? id,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.getGrievanceDetails(
+        auth: auth,
+        id: id ?? 0,
+        isLoading: isLoading ?? false,
+      );
+
+Future<ResponseModel> updateGrievanceDetails({
+    auth,
+    grievanceJson,
+    bool? isLoading,
+  }) async {
+    var response = await connectHelper.updateGrievanceDetails(
+      auth: auth,
+      grievanceJson: grievanceJson,
+      isLoading: isLoading,
+    );
+    return response;
+  }
+      
+      
   Future<ResponseModel> getGrievanceType({
     String? auth,
     bool? isLoading,

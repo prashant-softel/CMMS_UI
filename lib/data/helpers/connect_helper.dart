@@ -7071,6 +7071,43 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> getGrievanceDetails({
+    required String auth,
+    int? id,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Grievance/GetGrievanceDetails?id=$id',
+      Request.get,
+      null,
+      isLoading ?? true,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> updateGrievanceDetails({
+    required String auth,
+    required grievanceJson,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Grievance/UpdateGrievance',
+      Request.put,
+      jsonEncode(grievanceJson),
+      isLoading ?? true,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
   Future<ResponseModel> saveGrievance({
     required String auth,
     grievance,

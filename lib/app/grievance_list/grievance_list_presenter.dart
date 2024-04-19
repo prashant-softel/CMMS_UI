@@ -24,4 +24,14 @@ class GrievanceListPresenter {
         start_date: start_date,
         end_date: end_date,
       );
+
+  Future<String?> getValue() async => await grievanceUsecase.getValue();
+
+  void saveValue({String? grievanceId}) async {
+    return grievanceUsecase.saveValue(grievanceId: grievanceId);
+  }
+
+  void clearValue() async => grievanceUsecase.clearValue();
+
+  
 }

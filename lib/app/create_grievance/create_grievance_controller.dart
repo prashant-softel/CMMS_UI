@@ -5,6 +5,7 @@ import 'package:cmms/app/grievance_list/grievance_list_presenter.dart';
 import 'package:cmms/app/home/home_presenter.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/domain/models/get_asset_data_list_model.dart';
+import 'package:cmms/domain/models/grievance_List_model.dart';
 import 'package:cmms/domain/models/grievance_type_model.dart';
 import 'package:cmms/domain/models/grievance_model.dart';
 import 'package:cmms/domain/models/history_model.dart';
@@ -71,17 +72,24 @@ class CreateGrievanceController extends GetxController {
   int? selectedGrievanceTypeId = 0;
   Rx<bool> isGrievanceTypeSelected = true.obs;
   Rx<String> selectedGrievanceType = ''.obs;
+  Rx<int> grievanceId = 0.obs;
+  Rx<bool> isLoading = true.obs;
+  GrievanceListModel grievanceData = GrievanceListModel();
 
   @override
   void onInit() async {
     try {
+      await setUserId();
       facilityIdStreamSubscription = homeController.facilityId$.listen((event) {
         facilityId = event;
       });
-      Future.delayed(Duration(seconds: 1), () {
-        getGrievanceType();
+      Future.delayed(Duration(seconds: 1), () async {
+        await getGrievanceType();
       });
-      // getGrievanceType();
+      if (grievanceId > 0) {
+        await getGrievanceDetails(grievanceId: grievanceId.value);
+        print("griev ${grievanceId}");
+      }
     } catch (e) {
       print(e.toString());
     }
@@ -145,7 +153,7 @@ class CreateGrievanceController extends GetxController {
 
   void saveGrievance() async {
     try {
-      String _concern = htmlEscape.convert(descriptionController.text.trim());
+      String _concern = htmlEscape.convert(concernController.text.trim());
       String _description =
           htmlEscape.convert(descriptionController.text.trim());
       selectedAssetsIdList.clear();
@@ -192,7 +200,7 @@ class CreateGrievanceController extends GetxController {
               grievanceType.indexWhere((x) => x?.name == value);
           // selectedTypePermitId = facilityList[grievanceTypeIndex]?.id ?? 0;
           selectedGrievanceTypeId = grievanceType[grievanceTypeIndex]?.id ?? 0;
-          print('PErmit Type Id: $selectedGrievanceTypeId');
+          print('Grievance Type Id: $selectedGrievanceTypeId');
           if (selectedGrievanceTypeId != 0) {
             isGrievanceTypeSelected.value = true;
           }
@@ -200,5 +208,71 @@ class CreateGrievanceController extends GetxController {
         }
         break;
     }
+  }
+
+  Future<void> setUserId() async {
+    try {
+      final _grievanceId = await grievanceListPresenter.getValue();
+      if (_grievanceId == null ||
+          _grievanceId == '' ||
+          _grievanceId == "null") {
+        var dataFromPreviousScreen = Get.arguments;
+
+        grievanceId.value = dataFromPreviousScreen['grievanceId'];
+        print("gri: ${grievanceId}");
+        grievanceListPresenter.saveValue(
+            grievanceId: grievanceId.value.toString());
+      } else {
+        grievanceId.value = int.tryParse(_grievanceId) ?? 0;
+      }
+    } catch (e) {
+      print(e.toString() + 'grievanceId');
+      //  Utility.showDialog(e.toString() + 'userId');
+    }
+  }
+
+  void clearStoreData() {
+    grievanceListPresenter.clearValue();
+  }
+
+  Future<void> getGrievanceDetails({int? grievanceId}) async {
+    final GrievanceListModel? _grievanceTypeList =
+        await createGrievancePresenter.getGrievanceDetails(
+      id: grievanceId,
+      isLoading: isLoading.value,
+    );
+    if (_grievanceTypeList != null) {
+      isLoading.value = false;
+    }
+    grievanceData = _grievanceTypeList!;
+
+    concernController.text = grievanceData.concern!;
+    descriptionController.text = grievanceData.description!;
+    selectedGrievanceTypeId = grievanceData.grievanceTypeId ?? 0;
+    selectedGrievanceType.value = grievanceData.grievanceType ?? '';
+    print("selected Item: ${grievanceData}");
+  }
+
+  Future<bool> updateGrievanceDetails() async {
+    int _id = grievanceId.value;
+    String _concern = concernController.text.trim();
+    String _description = descriptionController.text.trim();
+    int? _grievanceType = selectedGrievanceTypeId;
+
+    CreateGrievanceModel grievanceTypeJson = CreateGrievanceModel(
+      id: _id,
+      concern: _concern,
+      facilityId: facilityId,
+      description: _description,
+      grievanceType: _grievanceType,
+    );
+
+    var grievanceJson = grievanceTypeJson.toJson();
+    print({"Grievance", grievanceJson});
+    await createGrievancePresenter.updateGrievanceDetails(
+      grievanceJson: grievanceJson,
+      isLoading: true,
+    );
+    return true;
   }
 }

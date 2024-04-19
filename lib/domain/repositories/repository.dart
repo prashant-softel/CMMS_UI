@@ -3681,7 +3681,7 @@ class Repository {
                 GrievanceListModel.fromJson(Map<String, dynamic>.from(m)))
             .toList();
 
-        return _grievanceModelList;
+        return _grievanceModelList.reversed.toList();
       } else {
         Utility.showDialog(res.errorCode.toString(), 'getGrievanceList');
         return [];
@@ -3739,6 +3739,53 @@ class Repository {
     } catch (error) {
       print(error.toString());
       return null;
+    }
+  }
+
+  Future<GrievanceListModel?> getGrievanceDetails(
+      {bool? isLoading, int? id}) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getGrievanceDetails(
+          auth: auth, id: id, isLoading: isLoading);
+
+      if (!res.hasError) {
+        // final jsonGrievanceType = jsonDecode(res.data);
+        final GrievanceListModel _grievanceDetails =
+            grievanceListModelFromJson(res.data);
+        return _grievanceDetails;
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString(), 'getGrievanceList');
+        return null;
+      }
+    } catch (error) {
+      print(error.toString());
+      return null;
+    }
+  }
+Future<bool> updateGrievanceDetails({
+    grievanceJson,
+    bool? isLoading,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.updateGrievanceDetails(
+        auth: auth,
+        grievanceJson: grievanceJson,
+        isLoading: isLoading,
+      );
+      print(res.data);
+      if (!res.hasError) {
+        return true;
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString(), 'updateGrievanceDetails');
+        return false;
+      }
+    } catch (error) {
+      print(error.toString());
+      return false;
     }
   }
 

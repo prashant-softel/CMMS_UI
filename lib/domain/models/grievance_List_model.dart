@@ -4,6 +4,9 @@ List<GrievanceListModel> facilityListFromJson(String str) =>
     List<GrievanceListModel>.from(
         json.decode(str).map(GrievanceListModel.fromJson));
 
+        GrievanceListModel grievanceListModelFromJson(String str) =>
+    GrievanceListModel.fromJson(json.decode(str));
+
 String facilityListToJson(List<GrievanceListModel> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 

@@ -527,10 +527,19 @@ class GrievanceListDataSource extends DataTableSource {
             child: (value == 'Actions')
                 ? Wrap(
                     children: [
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [],
+                      TableActionButton(
+                        color: ColorValues.editColor,
+                        icon: Icons.edit_outlined,
+                        message: "edit",
+                        onPress: () {
+                          int? id = GrievanceDetails?.id;
+                          controller.editGrievance(grievanceId: id);
+                        },
                       ),
+                      // TableActionButton(
+                      //   color: ColorValues.viewColor,
+                      //   icon: Icons.view_column,
+                      // ),
                     ],
                   )
                 : Text(value.toString()),
