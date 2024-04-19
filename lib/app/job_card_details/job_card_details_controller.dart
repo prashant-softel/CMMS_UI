@@ -101,6 +101,32 @@ class JobCardDetailsController extends GetxController {
   Rx<int> currentIndex = 0.obs;
   final unescape = HtmlUnescape();
   var descriptionOfWorkDoneCtrlr = TextEditingController();
+  Map<String, EmployeeModel> deployedEmployeeMapperData = {};
+
+  RxString selectedOption = ''.obs;
+  RxList<List<Map<String, String>>> employeesDeployed =
+      <List<Map<String, String>>>[].obs;
+
+  void addEmployeesDeployed() {
+    employeesDeployed.add([
+      {
+        "key": "Employee Name",
+        "value": "Please Select",
+      },
+      {
+        "key": "Responsibility",
+        "value": "",
+      },
+      {
+        'key': "Action",
+        "value": '',
+      },
+    ]);
+  }
+
+  void updateSelectedOption(String newValue) {
+    selectedOption.value = newValue;
+  }
 
   ///
   @override
@@ -131,10 +157,28 @@ class JobCardDetailsController extends GetxController {
             ) ??
             [];
         getHistory(facilityId);
+        jobCardDetailsModel.value =
+            jobCardList.value.firstWhere((element) => element?.id != null);
+        jobCardDetailsModel.value?.lstCmjcEmpList?.forEach((element) {
+          employeesDeployed.value.add([
+            {
+              "key": "Employee Name",
+              "value": "${element.empId}",
+              "empName": "${element.empName}",
+            },
+            {
+              "key": "Responsibility",
+              "value": "${element.responsibility}",
+            },
+            {
+              "key": "Action",
+              "value": "",
+            }
+          ]);
+        });
       }
       // await getHistory(facilityId);
       createPlantDetailsTableData();
-
       createJobDetailsTableData();
       createPermitDetailsTableData();
       //  createJcDetailsTableData();
@@ -143,6 +187,7 @@ class JobCardDetailsController extends GetxController {
 
       responsibilityCtrlrs.add(TextEditingController());
       currentIndex.value = -1;
+      addEmployeesDeployed();
       super.onInit();
     } catch (e) {
       print(e);
@@ -183,7 +228,7 @@ class JobCardDetailsController extends GetxController {
       for (var employee in _employeeList) {
         employeeList.add(employee);
       }
-      // update(["employeeList"]);
+      update(["employeeList"]);
     }
   }
 
@@ -332,6 +377,16 @@ class JobCardDetailsController extends GetxController {
           "normalisedStatus": isolationAssetsCategory.isNormalized ?? 0,
         });
       }
+
+      List<SelectedEmployee> employees = [];
+      employeesDeployed.forEach((element) {
+        SelectedEmployee item = SelectedEmployee(
+          empId: deployedEmployeeMapperData[element[0]["value"]]?.id,
+          empName: deployedEmployeeMapperData[element[0]["empName"]]?.name,
+          responsibility: element[1]["value"] ?? '0',
+        );
+        employees.add(item);
+      });
       // lots assets
       var _lotoAssetList = [];
       for (LotoAsset lotoAsset in lotoAppliedAssets) {
@@ -360,7 +415,7 @@ class JobCardDetailsController extends GetxController {
         "is_isolation_required": true,
         "isolated_list": _isolatedAssetCatList,
         "loto_list": _lotoAssetList,
-        "employee_list": employee,
+        "employee_list": employees,
         "uploadfile_ids": fileIds,
       };
 
@@ -427,9 +482,18 @@ class JobCardDetailsController extends GetxController {
       {required int jcCard, List<dynamic>? fileIds}) async {
     await startStopJobCard();
 
+    List<SelectedEmployee> employees = [];
+    employeesDeployed.forEach((element) {
+      SelectedEmployee item = SelectedEmployee(
+        empId: deployedEmployeeMapperData[element[0]["value"]]?.id,
+        responsibility: element[1]["value"] ?? '0',
+      );
+      employees.add(item);
+    });
+
     var jobCard = {
       "uploadfile_ids": fileIds,
-      "LstCMJCEmpList": employee,
+      "LstCMJCEmpList": employees,
     };
 
     print("filesids: ${fileIds}");
@@ -535,11 +599,20 @@ class JobCardDetailsController extends GetxController {
       lotoStatus = lotoAsset.removedStatus ?? 0;
       lotoId = lotoAsset.lotoId ?? 0;
     }
-    int _employeeId = 0;
 
-    for (EmployeeModel employee in selectedEmployeeList ?? []) {
-      _employeeId = employee.id ?? 0;
-    }
+    List<SelectedEmployee> employees = [];
+    employeesDeployed.forEach((element) {
+      SelectedEmployee item = SelectedEmployee(
+        empId: deployedEmployeeMapperData[element[0]["value"]]?.id,
+        responsibility: element[1]["value"] ?? '0',
+      );
+      employees.add(item);
+    });
+
+    // int _employeeId = 0;
+    // for (EmployeeModel employee in selectedEmployeeList ?? []) {
+    //   _employeeId = employee.id ?? 0;
+    // }
     var _comment = descriptionOfWorkDoneCtrlr.text.trim();
 
     var jobCard = {
@@ -547,7 +620,7 @@ class JobCardDetailsController extends GetxController {
       "isolationId": isolationId,
       "lotoId": lotoId,
       "comment": _comment,
-      "employee_list": employee,
+      "employee_list": employees,
       "normalisedStatus": 1,
       "lotoStatus": lotoStatus,
       "uploadfile_ids": fileIds,
