@@ -1,3 +1,4 @@
+import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/theme/color_values.dart';
 import 'package:cmms/app/view_permit/view_permit_controller.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
@@ -335,7 +336,7 @@ class PermitApprovedDialog extends GetView {
                     jobId: jobId,
                     type: type);
                 print('jobId:$jobId');
-                Get.back();
+                Get.offAndToNamed(Routes.newPermitList);
               },
               child: Text(
                   '${ptwStatus == '133' ? 'Extend Approve' : 'Approve Permit'}'),
