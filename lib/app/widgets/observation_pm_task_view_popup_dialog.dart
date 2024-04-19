@@ -254,6 +254,7 @@ class ObservationPMTaskViewDialog extends GetView {
                                                 onPress: () async {
                                                   String baseUrl =
                                                       'http://65.0.20.19/CMMS_API/';
+                                                      // 'http://172.20.43.18:82/';
                                                   String imageUrl =
                                                       "${controller.selectedItem?.checklist_observation![index].files?[index].file_path}";
                                                   String fullUrl =
