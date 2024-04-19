@@ -16,31 +16,29 @@ class CreateTbtTypeModel {
     // this.id,
     this.title,
     this.description,
-    this.facilityId
-
-
+    this.isRequired,
   });
 
   // int? id;
   String? title;
   String? description;
-  int? facilityId;
-  
+  int? isRequired;
+
   // String? addAt;
 
-
-  factory CreateTbtTypeModel.fromJson(Map<String, dynamic> json) => CreateTbtTypeModel(
-    // id: json["id"],
-    title: json["title"],
-    description: json["description"],
-      facilityId: json["facilityId"]
-  );
+  factory CreateTbtTypeModel.fromJson(Map<String, dynamic> json) =>
+      CreateTbtTypeModel(
+        // id: json["id"],
+        title: json["title"],
+        description: json["description"],
+        isRequired: json["requires_SOP_JSA"]
+      );
 
   Map<String, dynamic> toJson() => {
-    // "id": id,
-    "title": title,
-    "description": description,
-    "facilityId": facilityId,
-    // "addAt": addAt
-  };
+        // "id": id,
+        "title": title,
+        "description": description,
+        "requires_SOP_JSA" : isRequired
+        // "addAt": addAt
+      };
 }

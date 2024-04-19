@@ -273,7 +273,6 @@ class ViewPermitUsecase {
       {required bool isLoading, required int? facility_id}) async {
     return repository.getJobTypePermitList(
       isLoading: isLoading,
-      facility_id: facility_id,
     );
   }
 

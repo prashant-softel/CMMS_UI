@@ -95,7 +95,7 @@ class TBTTypeListController extends GetxController {
         getFacilityList();
       });
       Future.delayed(Duration(seconds: 1), () {
-        getJobTypePermitList(selectedFacilityId);
+        getJobTypePermitList();
       });
 
       titleFocus.addListener(() {
@@ -125,18 +125,18 @@ class TBTTypeListController extends GetxController {
       selectedFacility.value = facilityList[0]?.name ?? '';
       _facilityId.sink.add(facilityList[0]?.id ?? 0);
       selectedFacilityId = facilityList[0]?.id;
-      getJobTypePermitList(selectedFacilityId);
+      getJobTypePermitList();
     }
   }
 
-  Future<void> getJobTypePermitList(selectedFacilityId) async {
+  Future<void> getJobTypePermitList() async {
     jobTypeList.value = <JobTypeListModel>[];
     final _jobTypeList = await tbtTypeListPresenter.getJobTypePermitList(
       isLoading: isLoading.value,
       // categoryIds: cPategoryIds,
-      facility_id: selectedFacilityId,
     );
     if (_jobTypeList != null) {
+      jobTypeList.clear();
       isLoading.value = false;
       for (var jobType_list in _jobTypeList) {
         jobTypeList.add(jobType_list);
@@ -186,9 +186,10 @@ class TBTTypeListController extends GetxController {
       String _description = descriptionCtrlr.text.trim();
 
       CreateTbtTypeModel createCheckpoint = CreateTbtTypeModel(
-          title: _title,
-          description: _description,
-          facilityId: selectedFacilityId);
+        title: _title,
+        description: _description,
+       isRequired: isCheckedRequire.value ? 1 : 0,
+      );
       print("OUT ");
       var facilitylistJsonString = createCheckpoint
           .toJson(); //createCheckPointToJson([createCheckpoint]);
@@ -203,28 +204,28 @@ class TBTTypeListController extends GetxController {
     return true;
   }
 
-  void onValueChanged(dynamic list, dynamic value) {
-    switch (list.runtimeType) {
-      case RxList<FacilityModel>:
-        {
-          int facilityIndex = facilityList.indexWhere((x) => x?.name == value);
-          // int facilityId = 0;
-          if (facilityIndex >= 0) {
-            facilityId = facilityList[facilityIndex]?.id ?? 0;
-          }
-          selectedFacilityId = facilityId;
+  // void onValueChanged(dynamic list, dynamic value) {
+  //   switch (list.runtimeType) {
+  //     case RxList<FacilityModel>:
+  //       {
+  //         int facilityIndex = facilityList.indexWhere((x) => x?.name == value);
+  //         // int facilityId = 0;
+  //         if (facilityIndex >= 0) {
+  //           facilityId = facilityList[facilityIndex]?.id ?? 0;
+  //         }
+  //         selectedFacilityId = facilityId;
 
-          // _facilityId.add(facilityList[facilityIndex]?.id ?? 0);
-          getJobTypePermitList(selectedFacilityId);
-        }
-        break;
-      default:
-        {
-          //statements;
-        }
-        break;
-    }
-  }
+  //         // _facilityId.add(facilityList[facilityIndex]?.id ?? 0);
+  //         getJobTypePermitList(selectedFacilityId);
+  //       }
+  //       break;
+  //     default:
+  //       {
+  //         //statements;
+  //       }
+  //       break;
+  //   }
+  // }
 
   Future<bool> updateTbt(checklistId) async {
     String _name = titleCtrlr.text.trim();
@@ -234,7 +235,7 @@ class TBTTypeListController extends GetxController {
       id: checklistId,
       name: _name,
       description: _desc,
-      facilityId: selectedFacilityId,
+      isRequired: isCheckedRequire.value ? 1 : 0,
     );
     var updateTbt = createTbt.toJson();
 
@@ -254,7 +255,8 @@ class TBTTypeListController extends GetxController {
   clearData() {
     titleCtrlr.text = '';
     descriptionCtrlr.text = '';
-    selectedFacilityId = 0;
+    selectedItem = null;
+    // selectedFacilityId = 0;
   }
 
   _cleardata() {
@@ -263,7 +265,7 @@ class TBTTypeListController extends GetxController {
     selectedItem = null;
     isCheckedRequire.value = false;
     Future.delayed(Duration(seconds: 1), () {
-      getJobTypePermitList(selectedFacilityId);
+      getJobTypePermitList();
     });
     Future.delayed(Duration(seconds: 5), () {
       isSuccess.value = false;
@@ -307,7 +309,7 @@ class TBTTypeListController extends GetxController {
                 onPressed: () {
                   deleteJobType(business_id).then((value) {
                     Get.back();
-                    getJobTypePermitList(selectedFacilityId);
+                    getJobTypePermitList();
                   });
                 },
                 child: Text('YES'),

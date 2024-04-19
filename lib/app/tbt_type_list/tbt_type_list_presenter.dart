@@ -9,11 +9,9 @@ class TBTTypeListPresenter {
 
   Future<List<JobTypeListModel>> getJobTypePermitList({
     required bool isLoading,
-    required int? facility_id,
   }) async {
     return tbtTypeListUsecase.getJobTypePermitList(
       isLoading: isLoading,
-      facility_id: facility_id,
     );
   }
 

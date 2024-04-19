@@ -141,57 +141,6 @@ class TBTTypeListContentWeb extends GetView<TBTTypeListController> {
                                         ),
                                       ),
                                       Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Expanded(
-                                            child: CustomRichText(
-                                                title: 'Facility: '),
-                                          ),
-                                          SizedBox(
-                                            height: MediaQuery.of(context)
-                                                    .size
-                                                    .height *
-                                                0.040,
-                                            width: (MediaQuery.of(context)
-                                                    .size
-                                                    .width *
-                                                .2),
-                                            child: DropdownWebWidget(
-                                              boxShadow: [
-                                                BoxShadow(
-                                                  color: Colors.black26,
-                                                  offset: const Offset(
-                                                    5.0,
-                                                    5.0,
-                                                  ),
-                                                  blurRadius: 5.0,
-                                                  spreadRadius: 1.0,
-                                                ),
-                                                BoxShadow(
-                                                  color: ColorValues.whiteColor,
-                                                  offset:
-                                                      const Offset(0.0, 0.0),
-                                                  blurRadius: 0.0,
-                                                  spreadRadius: 0.0,
-                                                ),
-                                              ],
-                                              dropdownList:
-                                                  controller.facilityList,
-                                              isValueSelected: controller
-                                                  .isFacilitySelected.value,
-                                              selectedValue: controller
-                                                  .selectedFacility.value,
-                                              onValueChanged:
-                                                  controller.onValueChanged,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      SizedBox(
-                                        height: 10,
-                                      ),
-                                      Row(
                                         // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceBetween,
@@ -501,6 +450,8 @@ class TBTTypeListContentWeb extends GetView<TBTTypeListController> {
                                             onChanged: (bool? value) {
                                               controller
                                                   .requiretoggleCheckbox();
+                                                  print(
+                                                  'Checkbox:${controller.isCheckedRequire.value}');
                                             },
                                           ),
                                         ],
@@ -538,9 +489,12 @@ class TBTTypeListContentWeb extends GetView<TBTTypeListController> {
                                                     .createJobType()
                                                     .then((value) {
                                                   print("value,$value");
-                                                  if (value == true)
+                                                  if (value == true) {
                                                     controller
                                                         .issuccessCreatechecklist();
+                                                    controller
+                                                        .toggleContainer();
+                                                  }
                                                 });
                                               },
                                               text: 'Create JOB Type ')
@@ -556,6 +510,7 @@ class TBTTypeListContentWeb extends GetView<TBTTypeListController> {
                                                   if (value == true)
                                                     controller
                                                         .issuccessCreatechecklist();
+                                                    controller.toggleContainer();
                                                 });
                                               },
                                               text: 'Update')),
@@ -638,125 +593,153 @@ class TBTTypeListContentWeb extends GetView<TBTTypeListController> {
                             // SizedBox(
                             //   height: 20,
                             // ),
-                            controller.jobTypeList.isEmpty == true && controller.isLoading == false
-                            ? Center(child: Text('No Data'))
-                            : controller.isLoading.value == true
-                            ? Center(child: Text("Data Loading......"))
-                                : Expanded(
-                                    child: DataTable2(
-                                      columns: [
-                                        DataColumn2(
-                                          label: Text(
-                                            "Sr.No.",
-                                            style: TextStyle(
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                          size: ColumnSize.S,
-                                        ),
-                                        DataColumn2(
-                                          label: Text(
-                                            "Title",
-                                            style: TextStyle(
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                          size: ColumnSize.M,
-                                        ),
-                                        DataColumn2(
-                                          label: Text(
-                                            "Description",
-                                            style: TextStyle(
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                          size: ColumnSize.S,
-                                        ),
-                                        DataColumn2(
-                                          label: Text(
-                                            "Require\nSOP/JSA",
-                                            style: TextStyle(
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                          size: ColumnSize.S,
-                                        ),
-                                        DataColumn2(
-                                          label: Text(
-                                            "Action",
-                                            style: TextStyle(
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                          size: ColumnSize.S,
-                                        ),
-                                      ],
-                                      rows: List<DataRow>.generate(
-                                        controller.jobTypeList.length,
-                                        (index) {
-                                          var jobTypeListDetails =
-                                              controller.jobTypeList[index];
-                                          return DataRow(cells: [
-                                            DataCell(
-                                                Text((index + 1).toString())),
-                                            DataCell(Text(controller
-                                                .jobTypeList[index].name
-                                                .toString())),
-                                            DataCell(Text(controller
-                                                .jobTypeList[index].description
-                                                .toString())),
-                                            DataCell(Checkbox(
-                                              value: controller.isChecked.value,
-                                              onChanged: (val) {},
-                                            )),
-                                            DataCell(Wrap(
-                                              alignment: WrapAlignment.center,
-                                              children: [
-                                                TableActionButton(
-                                                  color: ColorValues.editColor,
-                                                  icon: Icons.edit,
-                                                  message: 'Edit',
-                                                  onPress: () {
-                                                    controller.selectedItem = controller
-                                                        .jobTypeList
-                                                        .firstWhere((element) =>
-                                                            "${element.id}" ==
-                                                            '${jobTypeListDetails.id}');
-                                                    controller.titleCtrlr.text =
-                                                        controller.selectedItem
+                            controller.jobTypeList.isEmpty == true &&
+                                    controller.isLoading == false
+                                ? Center(child: Text('No Data'))
+                                : controller.isLoading.value == true
+                                    ? Center(child: Text("Data Loading......"))
+                                    : Expanded(
+                                        child: DataTable2(
+                                          columns: [
+                                            DataColumn2(
+                                              label: Text(
+                                                "Sr.No.",
+                                                style: TextStyle(
+                                                    fontSize: 15,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              ),
+                                              size: ColumnSize.S,
+                                            ),
+                                            DataColumn2(
+                                              label: Text(
+                                                "Title",
+                                                style: TextStyle(
+                                                    fontSize: 15,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              ),
+                                              size: ColumnSize.M,
+                                            ),
+                                            DataColumn2(
+                                              label: Text(
+                                                "Description",
+                                                style: TextStyle(
+                                                    fontSize: 15,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              ),
+                                              size: ColumnSize.S,
+                                            ),
+                                            DataColumn2(
+                                              label: Text(
+                                                "Require\nSOP/JSA",
+                                                style: TextStyle(
+                                                    fontSize: 15,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              ),
+                                              size: ColumnSize.S,
+                                            ),
+                                            DataColumn2(
+                                              label: Text(
+                                                "Action",
+                                                style: TextStyle(
+                                                    fontSize: 15,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              ),
+                                              size: ColumnSize.S,
+                                            ),
+                                          ],
+                                          rows: List<DataRow>.generate(
+                                            controller.jobTypeList.length,
+                                            (index) {
+                                              var jobTypeListDetails =
+                                                  controller.jobTypeList[index];
+                                              return DataRow(cells: [
+                                                DataCell(Text(
+                                                    (index + 1).toString())),
+                                                DataCell(Text(controller
+                                                    .jobTypeList[index].name
+                                                    .toString())),
+                                                DataCell(Text(controller
+                                                    .jobTypeList[index]
+                                                    .description
+                                                    .toString())),
+                                                DataCell(Checkbox(
+                                                   value:
+                                                      jobTypeListDetails
+                                                                  .isRequired ==
+                                                              1
+                                                          ? true
+                                                          : false,
+                                                  onChanged: (val) {
+                                                    controller.isChecked.value =
+                                                        val!;
+                                                  },
+                                                )),
+                                                DataCell(Wrap(
+                                                  alignment:
+                                                      WrapAlignment.center,
+                                                  children: [
+                                                    TableActionButton(
+                                                      color:
+                                                          ColorValues.editColor,
+                                                      icon: Icons.edit,
+                                                      message: 'Edit',
+                                                      onPress: () {
+                                                        controller.selectedItem = controller
+                                                            .jobTypeList
+                                                            .firstWhere((element) =>
+                                                                "${element.id}" ==
+                                                                '${jobTypeListDetails.id}');
+                                                        controller.titleCtrlr
+                                                            .text = controller
+                                                                .selectedItem
                                                                 ?.name ??
                                                             '';
-                                                    controller.descriptionCtrlr
-                                                        .text = controller
-                                                            .selectedItem
-                                                            ?.description ??
-                                                        '';
-                                                    controller
-                                                        .isContainerVisible
-                                                        .value = true;
-                                                  },
-                                                ),
-                                                TableActionButton(
-                                                  color:
-                                                      ColorValues.deleteColor,
-                                                  icon: Icons.delete,
-                                                  message: 'Delete',
-                                                  onPress: () {
-                                                    controller.isDeleteDialog(
-                                                      business_id:
-                                                          '${jobTypeListDetails.id}',
-                                                      business:
-                                                          '${jobTypeListDetails.name}',
-                                                    );
-                                                  },
-                                                ),
-                                              ],
-                                            )),
-                                          ]);
-                                        },
-                                      ),
-                                    ),
-                                  )
+                                                        controller
+                                                            .descriptionCtrlr
+                                                            .text = controller
+                                                                .selectedItem
+                                                                ?.description ??
+                                                            '';
+                                                            controller
+                                                            .isCheckedRequire
+                                                            .value = controller
+                                                                    .selectedItem
+                                                                    ?.isRequired ==
+                                                                1
+                                                            ? true
+                                                            : false;
+                                                        controller
+                                                            .isContainerVisible
+                                                            .value = true;
+                                                      },
+                                                    ),
+                                                    TableActionButton(
+                                                      color: ColorValues
+                                                          .deleteColor,
+                                                      icon: Icons.delete,
+                                                      message: 'Delete',
+                                                      onPress: () {
+                                                        controller
+                                                            .isDeleteDialog(
+                                                          business_id:
+                                                              '${jobTypeListDetails.id}',
+                                                          business:
+                                                              '${jobTypeListDetails.name}',
+                                                        );
+                                                      },
+                                                    ),
+                                                  ],
+                                                )),
+                                              ]);
+                                            },
+                                          ),
+                                        ),
+                                      )
                           ],
                         ),
                       ),
