@@ -578,7 +578,8 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                                                       '')),
                                                   DataCell(
                                                     SingleChildScrollView(
-                                                      scrollDirection: Axis.horizontal,
+                                                      scrollDirection:
+                                                          Axis.horizontal,
                                                       child: Text(
                                                         controller
                                                                 .listAssociatedJobs?[
@@ -787,15 +788,17 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                                                           ''),
                                                     ),
                                                     DataCell(
-                                                      Text(
-                                                        controller
-                                                                .listAssociatedPm?[
-                                                                    index]
-                                                                ?.equipment
-                                                                .toString() ??
-                                                            '',
-                                                        overflow: TextOverflow
-                                                            .ellipsis,
+                                                      SingleChildScrollView(
+                                                        scrollDirection:
+                                                            Axis.horizontal,
+                                                        child: Text(
+                                                          controller
+                                                                  .listAssociatedPm?[
+                                                                      index]
+                                                                  ?.equipment
+                                                                  .toString() ??
+                                                              '',
+                                                        ),
                                                       ),
                                                     ),
                                                     DataCell(

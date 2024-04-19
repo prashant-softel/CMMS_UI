@@ -802,39 +802,39 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                                         color:
                                                             Colors.transparent),
                                                   ),
-                                                  focusedErrorBorder: controller
-                                                          .isWebsiteInvalid
-                                                          .value
-                                                      ? OutlineInputBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(5),
-                                                          borderSide:
-                                                              BorderSide(
-                                                            color: ColorValues
-                                                                .redColorDark,
-                                                          ),
-                                                        )
-                                                      : InputBorder.none,
-                                                  errorBorder: controller
-                                                          .isWebsiteInvalid
-                                                          .value
-                                                      ? OutlineInputBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(5),
-                                                          borderSide:
-                                                              BorderSide(
-                                                            color: ColorValues
-                                                                .redColorDark,
-                                                          ),
-                                                        )
-                                                      : null,
-                                                  errorText: controller
-                                                          .isWebsiteInvalid
-                                                          .value
-                                                      ? "Required field"
-                                                      : null,
+                                                  // focusedErrorBorder: controller
+                                                  //         .isWebsiteInvalid
+                                                  //         .value
+                                                  //     ? OutlineInputBorder(
+                                                  //         borderRadius:
+                                                  //             BorderRadius
+                                                  //                 .circular(5),
+                                                  //         borderSide:
+                                                  //             BorderSide(
+                                                  //           color: ColorValues
+                                                  //               .redColorDark,
+                                                  //         ),
+                                                  //       )
+                                                  //     : InputBorder.none,
+                                                  // errorBorder: controller
+                                                  //         .isWebsiteInvalid
+                                                  //         .value
+                                                  //     ? OutlineInputBorder(
+                                                  //         borderRadius:
+                                                  //             BorderRadius
+                                                  //                 .circular(5),
+                                                  //         borderSide:
+                                                  //             BorderSide(
+                                                  //           color: ColorValues
+                                                  //               .redColorDark,
+                                                  //         ),
+                                                  //       )
+                                                  //     : null,
+                                                  // errorText: controller
+                                                  //         .isWebsiteInvalid
+                                                  //         .value
+                                                  //     ? "Required field"
+                                                  //     : null,
                                                 ),
                                                 onChanged: (value) {
                                                   if (value.trim().length > 1) {

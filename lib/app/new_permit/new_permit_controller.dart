@@ -1216,9 +1216,9 @@ class NewPermitController extends GetxController {
     // if (selectedSopPermit.value == '') {
     //   isSopPermitListSelected.value = false;
     // }
-    if (selectedTypePermit.value == '') {
-      isTypePermit.value = false;
-    }
+    // if (selectedTypePermit.value == '') {
+    //   isTypePermit.value = false;
+    // }
     // if (selectedJobType.value == '') {
     //   isJobTypeListSelected.value = false;
     // }
@@ -1235,7 +1235,7 @@ class NewPermitController extends GetxController {
       Fluttertoast.showToast(msg: 'End date Field cannot be empty');
     }
     if (selectedTypePermit.value == '') {
-      isTypePermitSelected.value = false;
+      Fluttertoast.showToast(msg: 'Permit type should not be empty');
     }
     if (permitDescriptionCtrlr.text.trim().length < 3) {
       isJobDescriptionInvalid.value = true;
