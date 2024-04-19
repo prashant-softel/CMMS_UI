@@ -770,7 +770,7 @@ class Repository {
       if (!res.hasError) {
         Fluttertoast.showToast(
             msg: "Submit Water Data  Successfully...", fontSize: 16.0);
-        Get.offNamed(
+        Get.offAllNamed(
           Routes.waterDataListScreen,
         );
 
@@ -781,7 +781,7 @@ class Repository {
 
         // Fluttertoast.showToast(msg: "Data add successfully...", fontSize: 16.0);
       } else {
-        Utility.showDialog(res.errorCode.toString(), 'createGoodsOrder');
+        Utility.showDialog(res.errorCode.toString(), 'Craete Water Data');
         //return '';
       }
       return Map();

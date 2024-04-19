@@ -135,7 +135,6 @@ class WaterDataListController extends GetxController {
   }
 
   Future pickDateTime(BuildContext context) async {
-    var dateTime = selectedProcurementTime.value;
     final date = await pickDate(context);
     if (date == null) {
       return;
@@ -146,16 +145,17 @@ class WaterDataListController extends GetxController {
       return;
     }
 
-    dateTime = DateTime(
+    DateTime selectedDateTime = DateTime(
       date.year,
       date.month,
       date.day,
       time.hour,
       time.minute,
     );
-    selectedProcurementTime.value = dateTime;
+
+    selectedProcurementTime.value = selectedDateTime;
     procurementTimeCtrlr
-      ..text = DateFormat("yyyy-MM-dd HH:mm").format(dateTime)
+      ..text = DateFormat("yyyy-MM-dd HH:mm").format(selectedDateTime)
       ..selection = TextSelection.fromPosition(
         TextPosition(
           offset: procurementTimeCtrlr.text.length,
