@@ -1759,17 +1759,34 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                                                   ?.city ??
                                                               '';
                                                           controller
+                                                              .selectedCityId
+                                                               = (controller
+                                                                  .selectedItem
+                                                                  ?.cityId ??
+                                                              '') as int;
+                                                          controller
                                                               .selectedState
                                                               .value = controller
                                                                   .selectedItem
                                                                   ?.state ??
                                                               '';
                                                           controller
+                                                              .selectedStateId
+                                                               = (controller
+                                                                  .selectedItem
+                                                                  ?.stateId ??
+                                                              '') as int;
+                                                          controller
                                                               .selectedCountry
                                                               .value = controller
                                                                   .selectedItem
                                                                   ?.country ??
                                                               '';
+                                                          controller
+                                                              .selectedCountryId = (controller
+                                                                  .selectedItem
+                                                                  ?.countryId ??
+                                                              '') as int?;
                                                           controller.zipCtrlr
                                                               .text = controller
                                                                   .selectedItem

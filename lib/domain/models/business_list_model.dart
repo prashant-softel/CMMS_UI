@@ -22,8 +22,11 @@ class BusinessListModel {
     this.location,
     this.address,
     this.country,
+    this.countryId,
     this.state,
+    this.stateId,
     this.city,
+    this.cityId,
     this.zip,
     this.type,
     this.status,
@@ -39,8 +42,11 @@ class BusinessListModel {
   String? location;
   String? address;
   String? country;
+  int? countryId;
   String? state;
+  int? stateId;
   String? city;
+  int? cityId;
   String? zip;
   int? type;
   int? status;
@@ -57,8 +63,11 @@ class BusinessListModel {
           location: json["location"],
           address: json["address"],
           country: json["country"],
+          countryId: json["countryId"],
           state: json["state"],
+          stateId: json["stateId"],
           city: json["city"],
+          cityId: json["cityId"],
           zip: json["zip"],
           type: json["type"],
           status: json["status"],
@@ -74,8 +83,11 @@ class BusinessListModel {
         "location": location,
         "address": address,
         "country": country,
+        "countryId": countryId,
         "state": state,
+        "stateId": stateId,
         "city": city,
+        "cityId": cityId,
         "zip": zip,
         "type": type,
         "status": status,

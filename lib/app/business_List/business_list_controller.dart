@@ -48,7 +48,7 @@ class BusinessListController extends GetxController {
   Rx<bool> isSelectedStateType = true.obs;
   Rx<bool> isSelectedCityType = true.obs;
   int? selectedBusinessTypeId = 1;
-  int selectedCountryId = 0;
+  int? selectedCountryId = 0;
   int selectedStateId = 0;
   int selectedCityId = 0;
   RxList<int> selectedEquipmentCategoryIdList = <int>[].obs;
@@ -119,7 +119,7 @@ class BusinessListController extends GetxController {
       facilityId = event;
       Future.delayed(Duration(seconds: 1), () {
         getBusinessTypeList();
-        getBusinessList(0,  facilityId);
+        getBusinessList(0, facilityId);
       });
     });
     cnameFocus.addListener(() {
@@ -225,7 +225,7 @@ class BusinessListController extends GetxController {
     // }
     selectedBusinessType.value = businessCategoryList[0]?.name!;
     selectedBusinessTypeId = businessCategoryList[0]?.id!;
-    getBusinessList(0,  facilityId);
+    getBusinessList(0, facilityId);
   }
 
   Future<void> getCountryList() async {
@@ -239,10 +239,10 @@ class BusinessListController extends GetxController {
 
     // selectedCountryId = Get.arguments;
     print(selectedCountryId);
-    if (selectedCountryId > 0) {
+    if (selectedCountryId! > 0) {
       isSelectedCountryType.value = true;
       // Future.delayed(Duration(seconds: 1), () async {
-      await getStateList(selectedCountryId);
+      await getStateList(selectedCountryId!);
       // getAssignedToList(facilityId);
       // });
     }
@@ -298,7 +298,7 @@ class BusinessListController extends GetxController {
           selectedBusinessTypeId =
               businessCategoryList[equipmentIndex]?.id ?? 0;
           selectedBusinessType.value = value;
-          getBusinessList(selectedBusinessTypeId!,  facilityId);
+          getBusinessList(selectedBusinessTypeId!, facilityId);
         }
 
         break;
@@ -306,17 +306,17 @@ class BusinessListController extends GetxController {
         {
           int frequencyIndex = countryList.indexWhere((x) => x?.name == value);
           selectedCountryId = countryList[frequencyIndex]?.id ?? 0;
-          if (selectedCountryId > 0) {
+          if (selectedCountryId! > 0) {
             isSelectedCountryType.value = true;
           }
           selectedCountry.value = value;
-          getStateList(selectedCountryId);
+          getStateList(selectedCountryId!);
           if (selectedStateId != 0 || selectedCityId != 0) {
             selectedStateId = 0;
             selectedCityId = 0;
             selectedState = ''.obs;
             selectedCity = ''.obs;
-            getStateList(selectedCountryId);
+            getStateList(selectedCountryId!);
             getCityList(selectedStateId);
           }
         }
@@ -477,8 +477,7 @@ class BusinessListController extends GetxController {
       return false;
     }
 
-    if (websiteCtrlr.text.trim() == '' ||
-        emailCtrlr.text.trim() == '' ||
+    if (emailCtrlr.text.trim() == '' ||
         contactpersonCtrlr.text.trim() == '' ||
         contactnumberCtrlr.text.trim() == '' ||
         locationCtrlr.text.trim() == '' ||
@@ -530,7 +529,7 @@ class BusinessListController extends GetxController {
       );
       return true;
     }
-    getBusinessList(selectedBusinessTypeId,  facilityId);
+    getBusinessList(selectedBusinessTypeId, facilityId);
     return true;
   }
 
@@ -556,7 +555,7 @@ class BusinessListController extends GetxController {
     selectedState.value = '';
     selectedItem = null;
     Future.delayed(Duration(seconds: 1), () {
-      getBusinessList(selectedBusinessTypeId,  facilityId);
+      getBusinessList(selectedBusinessTypeId, facilityId);
     });
     Future.delayed(Duration(seconds: 5), () {
       isSuccess.value = false;
@@ -600,7 +599,7 @@ class BusinessListController extends GetxController {
                 onPressed: () {
                   deleteBusiness(business_id).then((value) {
                     Get.back();
-                    getBusinessList(0,  facilityId);
+                    getBusinessList(0, facilityId);
                   });
                 },
                 child: Text('YES'),
