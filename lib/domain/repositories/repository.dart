@@ -3643,7 +3643,7 @@ class Repository {
                 GrievanceListModel.fromJson(Map<String, dynamic>.from(m)))
             .toList();
 
-        return _grievanceModelList;
+        return _grievanceModelList.reversed.toList();
       } else {
         Utility.showDialog(res.errorCode.toString(), 'getGrievanceList');
         return [];
@@ -3704,6 +3704,53 @@ class Repository {
     }
   }
 
+  Future<GrievanceListModel?> getGrievanceDetails(
+      {bool? isLoading, int? id}) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getGrievanceDetails(
+          auth: auth, id: id, isLoading: isLoading);
+
+      if (!res.hasError) {
+        // final jsonGrievanceType = jsonDecode(res.data);
+        final GrievanceListModel _grievanceDetails =
+            grievanceListModelFromJson(res.data);
+        return _grievanceDetails;
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString(), 'getGrievanceList');
+        return null;
+      }
+    } catch (error) {
+      print(error.toString());
+      return null;
+    }
+  }
+Future<bool> updateGrievanceDetails({
+    grievanceJson,
+    bool? isLoading,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.updateGrievanceDetails(
+        auth: auth,
+        grievanceJson: grievanceJson,
+        isLoading: isLoading,
+      );
+      print(res.data);
+      if (!res.hasError) {
+        return true;
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString(), 'updateGrievanceDetails');
+        return false;
+      }
+    } catch (error) {
+      print(error.toString());
+      return false;
+    }
+  }
+
   Future<bool> createGrievanceType({bool? isLoading, grievanceJson}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
@@ -3751,7 +3798,8 @@ class Repository {
     }
   }
 
-  Future<void> deleteGrievanceType({int? grievanceTypeId, bool? isLoading}) async {
+  Future<void> deleteGrievanceType(
+      {int? grievanceTypeId, bool? isLoading}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.deleteGrievanceType(

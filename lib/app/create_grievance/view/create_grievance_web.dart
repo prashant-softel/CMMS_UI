@@ -64,6 +64,7 @@ class CreateGrievancesWeb extends GetView<CreateGrievanceController> {
                 InkWell(
                   onTap: () {
                     Get.offAllNamed(Routes.misDashboard);
+                    controller.clearStoreData();
                   },
                   child: Text(
                     " / MIS ",
@@ -109,9 +110,6 @@ class CreateGrievancesWeb extends GetView<CreateGrievanceController> {
                       Divider(
                         color: ColorValues.greyLightColour,
                       ),
-                      // Dimens.boxHeight10,
-                      // Dimens.boxHeight15,
-                      // Dimens.boxHeight15,
                       Padding(
                         padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
                         child: Column(
@@ -413,11 +411,20 @@ class CreateGrievancesWeb extends GetView<CreateGrievanceController> {
                                   },
                                 ),
                                 Dimens.boxWidth15,
-                                CustomElevatedButton(
-                                  backgroundColor: ColorValues.appGreenColor,
-                                  text: 'Create Grievance',
-                                  onPressed: controller.saveGrievance,
-                                ),
+                                controller.grievanceId > 0
+                                    ? CustomElevatedButton(
+                                        backgroundColor:
+                                            ColorValues.appGreenColor,
+                                        text: 'Update Grievance',
+                                        onPressed:
+                                            controller.updateGrievanceDetails,
+                                      )
+                                    : CustomElevatedButton(
+                                        backgroundColor:
+                                            ColorValues.appGreenColor,
+                                        text: 'Create Grievance',
+                                        onPressed: controller.saveGrievance,
+                                      ),
                               ],
                             ),
                             Dimens.boxHeight15,

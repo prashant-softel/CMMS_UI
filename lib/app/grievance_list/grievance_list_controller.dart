@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/grievance_list/grievance_list_presenter.dart';
+import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/domain/models/grievance_List_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -118,5 +119,16 @@ class GrievanceController extends GetxController {
     );
 
     update(['grievance_list']);
+  }
+
+  void clearStoreData() {
+    grievanceListPresenter.clearValue();
+  }
+
+  Future<void> editGrievance({int? grievanceId}) async {
+    clearStoreData();
+    Get.toNamed(Routes.addGrievance, arguments: {
+      "grievanceId": grievanceId,
+    });
   }
 }

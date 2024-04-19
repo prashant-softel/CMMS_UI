@@ -1,4 +1,5 @@
 import 'package:cmms/domain/models/get_asset_data_list_model.dart';
+import 'package:cmms/domain/models/grievance_List_model.dart';
 import 'package:cmms/domain/models/grievance_type_model.dart';
 import 'package:cmms/domain/models/history_model.dart';
 import 'package:cmms/domain/usecases/create_grievance_usecase.dart';
@@ -64,5 +65,20 @@ class CreateGrievancePresenter {
       grievance: grievance,
       isLoading: isLoading,
     );
+  }
+
+  Future<GrievanceListModel?> getGrievanceDetails({int? id, bool? isLoading}) async =>
+      await createGrievanceUsecase.getGrievanceDetails(id: id, isLoading: isLoading);
+
+
+  Future<bool> updateGrievanceDetails({
+    grievanceJson,
+    bool? isLoading,
+  }) async {
+     createGrievanceUsecase.updateGrievanceDetails(
+      grievanceJson: grievanceJson,
+      isLoading: isLoading,
+    );
+    return true;
   }
 }

@@ -23,5 +23,13 @@ class GrievanceListUsecase {
         start_date,
         end_date,
       );
-  void clearValue() async => repository.clearData(LocalKeys.jobId);
+  void clearValue() async => repository.clearData(LocalKeys.grievanceId);
+
+  Future<String?> getValue() async =>
+      await repository.getStringValue(LocalKeys.grievanceId);
+
+      void saveValue({String? grievanceId}) async =>
+      repository.saveValue(LocalKeys.grievanceId, grievanceId);
+
+     
 }

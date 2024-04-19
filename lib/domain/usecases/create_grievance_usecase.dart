@@ -1,4 +1,5 @@
 import 'package:cmms/domain/models/get_asset_data_list_model.dart';
+import 'package:cmms/domain/models/grievance_List_model.dart';
 import 'package:cmms/domain/models/grievance_type_model.dart';
 import 'package:cmms/domain/models/history_model.dart';
 import 'package:cmms/domain/models/req_order_details_by_id_model.dart';
@@ -47,6 +48,8 @@ class CreateGrievanceUsecase {
         isLoading,
       );
 
+  
+
   Future<Map<String, dynamic>> saveGrievance({
     grievance,
     bool? isLoading,
@@ -56,7 +59,19 @@ class CreateGrievanceUsecase {
         isLoading,
       );
 
-       Future<List<GrievanceTypeModel?>?>  getGrievanceType(
-          bool? isLoading) async =>
+  Future<List<GrievanceTypeModel?>?> getGrievanceType(bool? isLoading) async =>
       await repository.getGrievanceType(isLoading: isLoading);
+
+       Future<GrievanceListModel?> getGrievanceDetails({bool? isLoading, int? id}) async =>
+      await repository.getGrievanceDetails(isLoading: isLoading, id:id);
+
+       Future<bool> updateGrievanceDetails({
+    grievanceJson,
+    bool? isLoading,
+  }) async =>
+      await repository.updateGrievanceDetails(
+        isLoading: isLoading,
+        grievanceJson: grievanceJson,
+      );
+
 }
