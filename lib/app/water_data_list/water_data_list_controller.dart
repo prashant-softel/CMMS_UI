@@ -115,7 +115,36 @@ class WaterDataListController extends GetxController {
     CreateWaterData createWaterData = CreateWaterData(
       consumeType: 1,
       facilityId: facilityId,
-      creditQty: 2,
+      creditQty: double.tryParse(_qtCtrlr) ?? 0,
+      date: formattedDate,
+      debitQty: 0,
+      description: _descriptionCtrlr,
+      waterTypeId: 1,
+    );
+    var createWaterDataModelJsonString = createWaterData.toJson();
+    Map<String, dynamic>? responseCreateWaterDataModel =
+        await waterDataListPresenter.createWaterData(
+      createWaterData: createWaterDataModelJsonString,
+      isLoading: true,
+    );
+
+    // Handle the response
+    if (responseCreateWaterDataModel == null) {}
+
+    print('Create Water data: $createWaterDataModelJsonString');
+  }
+
+  void createWaterDataConsumption() async {
+    String _descriptionCtrlr = descriptionCtrlr.text.trim();
+    String _qtCtrlr = qtyCtrlr.text.trim();
+    DateTime procurementTime = selectedProcurementTime.value;
+    String formattedDate =
+        DateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'").format(procurementTime);
+
+    CreateWaterData createWaterData = CreateWaterData(
+      consumeType: 1,
+      facilityId: facilityId,
+      creditQty: 0,
       date: formattedDate,
       debitQty: double.tryParse(_qtCtrlr) ?? 0,
       description: _descriptionCtrlr,
@@ -123,7 +152,7 @@ class WaterDataListController extends GetxController {
     );
     var createWaterDataModelJsonString = createWaterData.toJson();
     Map<String, dynamic>? responseCreateWaterDataModel =
-        await waterDataListPresenter.createWaterData(
+        await waterDataListPresenter.createWaterDataConsumption(
       createWaterData: createWaterDataModelJsonString,
       isLoading: true,
     );
