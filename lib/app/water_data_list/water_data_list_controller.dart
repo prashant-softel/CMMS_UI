@@ -115,9 +115,9 @@ class WaterDataListController extends GetxController {
     CreateWaterData createWaterData = CreateWaterData(
       consumeType: 1,
       facilityId: facilityId,
-      creditQty: 2,
+      creditQty: double.tryParse(_qtCtrlr) ?? 0,
       date: formattedDate,
-      debitQty: double.tryParse(_qtCtrlr) ?? 0,
+      debitQty: 0,
       description: _descriptionCtrlr,
       waterTypeId: 1,
     );
