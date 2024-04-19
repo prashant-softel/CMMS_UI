@@ -6,6 +6,7 @@ import 'package:cmms/domain/models/audit_plan_list_model.dart';
 import 'package:cmms/domain/models/type_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 
 class WaterDataListController extends GetxController {
@@ -16,6 +17,9 @@ class WaterDataListController extends GetxController {
   final HomeController homecontroller = Get.find();
   RxList<AuditPlanListModel> auditPlanList = <AuditPlanListModel>[].obs;
   RxList<AuditPlanListModel> filteredData = <AuditPlanListModel>[].obs;
+
+  Rx<DateTime> selectedProcurementTime = DateTime.now().obs;
+  var procurementTimeCtrlr = TextEditingController();
   // Rx<int> Plan Id = 0.obs;
   Rx<int> PlanId = 0.obs;
   RxString planIdFilterText = ''.obs;
@@ -45,7 +49,6 @@ class WaterDataListController extends GetxController {
 
   //Start DateTime
   bool openStartDatePicker = false;
-  var startDateTimeCtrlr = TextEditingController();
 
   // Rx<DateTime> fromDate = DateTime.now().subtract(Duration(days: 7)).obs;
   // Rx<DateTime> toDate = DateTime.now().obs;
@@ -159,5 +162,70 @@ class WaterDataListController extends GetxController {
 
   void clearStoreIdData() {
     waterDataListPresenter.clearStoreIdData();
+  }
+
+  Future pickDateTime(BuildContext context) async {
+    var dateTime = selectedProcurementTime.value;
+    final date = await pickDate(context);
+    if (date == null) {
+      return;
+    }
+
+    final time = await pickTime(context);
+    if (time == null) {
+      return;
+    }
+
+    dateTime = DateTime(
+      date.year,
+      date.month,
+      date.day,
+      time.hour,
+      time.minute,
+    );
+    selectedProcurementTime.value = dateTime;
+    procurementTimeCtrlr
+      ..text = DateFormat("dd-MM-yyyy HH:mm").format(dateTime)
+      ..selection = TextSelection.fromPosition(
+        TextPosition(
+          offset: procurementTimeCtrlr.text.length,
+          affinity: TextAffinity.upstream,
+        ),
+      );
+  }
+
+  Future<DateTime?> pickDate(BuildContext context) async {
+    DateTime? dateTime = selectedProcurementTime.value;
+
+    final newDate = await showDatePicker(
+      context: context,
+      initialDate: dateTime,
+      firstDate: DateTime(DateTime.now().year - 5),
+      lastDate: DateTime.now(),
+    );
+
+    if (newDate == null) return null;
+
+    return newDate;
+  }
+
+  Future<TimeOfDay?> pickTime(BuildContext context) async {
+    DateTime dateTime = selectedProcurementTime.value;
+
+    final newTime = await showTimePicker(
+        context: context,
+        initialTime: TimeOfDay(hour: dateTime.hour, minute: dateTime.minute),
+        builder: (BuildContext context, Widget? child) {
+          return Theme(
+            data: ThemeData.light(),
+            child: child!,
+          );
+        });
+
+    if (newTime == null) {
+      return null;
+    }
+
+    return newTime;
   }
 }
