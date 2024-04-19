@@ -2813,6 +2813,29 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> createWaterData({
+    required String auth,
+    createWaterData,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'MISMaster/CreateWaterData',
+      Request.post,
+      createWaterData,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    print('Submit Water Orders Response:${responseModel.data}');
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+
+    return responseModel;
+  }
+
   Future<ResponseModel> createGrievance({
     required String auth,
     bool? isLoading,

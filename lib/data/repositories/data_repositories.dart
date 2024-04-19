@@ -1634,6 +1634,16 @@ class DataRepository extends DomainRepository {
         createGo: createGo,
         isLoading: isLoading ?? false,
       );
+  Future<ResponseModel> createWaterData({
+    required String auth,
+    createWaterData,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.createWaterData(
+        auth: auth,
+        createWaterData: createWaterData,
+        isLoading: isLoading ?? false,
+      );
   Future<ResponseModel> submitPurchaseOrderData({
     required String auth,
     createGoReq,
