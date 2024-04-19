@@ -24,6 +24,7 @@ class FileUploadController extends GetxController {
   Rx<int> progress = 0.obs;
   Rx<int> index = 0.obs;
   RxList<XFile> pickedFiles = <XFile>[].obs;
+  Rx<bool> uploadingImage = false.obs;
   var selectedEvent = FileUploadEvents.BEFORE.obs;
   var token = '';
   List<TextEditingController> descriptionCtrlrs = [];
@@ -225,6 +226,7 @@ class FileUploadController extends GetxController {
   }
 
   uploadSelectedFiles() async {
+    uploadingImage.value = true;
     if (bytesDataList != null) {
       await uploadFiles(
         pickedFiles,
@@ -235,6 +237,7 @@ class FileUploadController extends GetxController {
           print('Upload progress: $progress%');
         },
       );
+      uploadingImage.value = false;
     } else {
       print('No files selected');
     }
