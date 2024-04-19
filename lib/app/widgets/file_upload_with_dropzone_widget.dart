@@ -117,15 +117,11 @@ class _FileUploadWidgetWithDropzoneState
                                           ),
                                         )
                                       : SizedBox(
-                                          height: Get.height * 0.02,
-                                          child: ElevatedButton(
-                                            onPressed: null,
-                                            child:
-                                                CircularProgressIndicator(), // Replace Container with CircularProgressIndicator
-                                            style: ElevatedButton.styleFrom(
-                                              backgroundColor:
-                                                  ColorValues.appDarkBlueColor,
-                                            ),
+                                          width: 20,
+                                          height: 20,
+                                          child: CircularProgressIndicator(
+                                            color: Colors.white,
+                                            strokeWidth: 2,
                                           ),
                                         ),
                                 ],
