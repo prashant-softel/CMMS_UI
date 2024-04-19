@@ -751,6 +751,46 @@ class Repository {
     }
   }
 
+  Future<Map<String, dynamic>> createWaterData(
+    createWaterData,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.createWaterData(
+        auth: auth,
+        createWaterData: createWaterData,
+        isLoading: isLoading ?? false,
+      );
+
+      var resourceData = res.data;
+
+      print('Response Create Water data : ${resourceData}');
+
+      if (!res.hasError) {
+        Fluttertoast.showToast(
+            msg: "Submit Water Data  Successfully...", fontSize: 16.0);
+        Get.offAllNamed(
+          Routes.waterDataListScreen,
+        );
+
+        // if (res.errorCode == 200) {
+        //   var responseMap = json.decode(res.data);
+        //   return responseMap;
+        // }
+
+        // Fluttertoast.showToast(msg: "Data add successfully...", fontSize: 16.0);
+      } else {
+        Utility.showDialog(res.errorCode.toString(), 'Craete Water Data');
+        //return '';
+      }
+      return Map();
+    } catch (error) {
+      print(error.toString());
+      return Map();
+    }
+  }
+
   Future<Map<String, dynamic>> submitPurchaseOrderData(
     createGoReq,
     bool? isLoading,
@@ -3749,7 +3789,8 @@ class Repository {
     }
   }
 
-  Future<void> deleteGrievanceType({int? grievanceTypeId, bool? isLoading}) async {
+  Future<void> deleteGrievanceType(
+      {int? grievanceTypeId, bool? isLoading}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.deleteGrievanceType(

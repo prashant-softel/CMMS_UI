@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:cmms/app/home/home_controller.dart';
 import 'package:cmms/app/water_data_list/water_data_list_presenter.dart';
 import 'package:cmms/domain/models/audit_plan_list_model.dart';
+import 'package:cmms/domain/models/create_water_data_model.dart';
 import 'package:cmms/domain/models/type_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -21,13 +22,10 @@ class WaterDataListController extends GetxController {
   Rx<DateTime> selectedProcurementTime = DateTime.now().obs;
   var procurementTimeCtrlr = TextEditingController();
   // Rx<int> Plan Id = 0.obs;
-  Rx<int> PlanId = 0.obs;
-  RxString planIdFilterText = ''.obs;
-  RxString planTitleFilterText = ''.obs;
-  RxString noOfDaysFilterText = ''.obs;
-  RxString createdByFilterText = ''.obs;
-  RxString frequencyFilterText = ''.obs;
-  RxString startdateFilterText = ''.obs;
+
+  var descriptionCtrlr = TextEditingController();
+  var qtyCtrlr = TextEditingController();
+
   RxList<MonthModel> month = <MonthModel>[
     MonthModel(name: 'Water used for domestic and other purpose', id: "1"),
     MonthModel(name: 'Water used for drinking', id: "2"),
@@ -97,20 +95,9 @@ class WaterDataListController extends GetxController {
 
   @override
   void onInit() async {
-    //await setType();
-
-    this.filterText = {
-      'Plan ID': planIdFilterText,
-      'SOP Number': planTitleFilterText,
-      'Checklist': noOfDaysFilterText,
-      // 'Site Name': createdByFilterText,
-      'Start Date': frequencyFilterText,
-      'Frequency Name': startdateFilterText,
-      "Status": statusFilterText,
-    };
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
       facilityId = event;
-      Future.delayed(Duration(seconds: 2), () async {
+      Future.delayed(Duration(seconds: 1), () async {
         // getAuditPlanList(
         //     facilityId, formattedTodate1, formattedFromdate1, true);
       });
@@ -118,54 +105,36 @@ class WaterDataListController extends GetxController {
     super.onInit();
   }
 
-  Future<void> getAuditPlanList(int facilityId, dynamic startDate,
-      dynamic endDate, bool isLoading) async {
-    auditPlanList.value = <AuditPlanListModel>[];
-    // pmPlanList?.clear();
-    final _auditPlanList = await waterDataListPresenter.getAuditPlanList(
-        facilityId: facilityId,
-        isLoading: isLoading,
-        startDate: startDate,
-        endDate: endDate);
-    if (_auditPlanList != null) {
-      auditPlanList.value = _auditPlanList;
-    }
+  void createWaterData() async {
+    String _descriptionCtrlr = descriptionCtrlr.text.trim();
+    String _qtCtrlr = qtyCtrlr.text.trim();
+    DateTime procurementTime = selectedProcurementTime.value;
+    String formattedDate =
+        DateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'").format(procurementTime);
 
-    update(['pmPlan_list']);
-  }
+    CreateWaterData createWaterData = CreateWaterData(
+      consumeType: 1,
+      facilityId: facilityId,
+      creditQty: 2,
+      date: formattedDate,
+      debitQty: double.tryParse(_qtCtrlr) ?? 0,
+      description: _descriptionCtrlr,
+      waterTypeId: 1,
+    );
+    var createWaterDataModelJsonString = createWaterData.toJson();
+    Map<String, dynamic>? responseCreateWaterDataModel =
+        await waterDataListPresenter.createWaterData(
+      createWaterData: createWaterDataModelJsonString,
+      isLoading: true,
+    );
 
-  Future<void> setType() async {
-    try {
-      // Read jobId
-      String? _type = await waterDataListPresenter.getValue();
-      if (_type == null || _type == '' || _type == "null") {
-        var dataFromPreviousScreen = Get.arguments;
+    // Handle the response
+    if (responseCreateWaterDataModel == null) {}
 
-        type.value = dataFromPreviousScreen['type'];
-        waterDataListPresenter.saveValue(type: type.value.toString());
-      } else {
-        type.value = int.tryParse(_type) ?? 0;
-      }
-    } catch (e) {
-      print(e.toString() + 'type');
-      //  Utility.showDialog(e.toString() + 'type');
-    }
-  }
-
-  // void getAuditListByDate() {
-  //   getAuditPlanList(facilityId, formattedTodate1, formattedFromdate1, true);
-  // }
-
-  Future<void> clearValue() async {
-    waterDataListPresenter.clearValue();
-  }
-
-  void clearStoreIdData() {
-    waterDataListPresenter.clearStoreIdData();
+    print('Create Water data: $createWaterDataModelJsonString');
   }
 
   Future pickDateTime(BuildContext context) async {
-    var dateTime = selectedProcurementTime.value;
     final date = await pickDate(context);
     if (date == null) {
       return;
@@ -176,16 +145,17 @@ class WaterDataListController extends GetxController {
       return;
     }
 
-    dateTime = DateTime(
+    DateTime selectedDateTime = DateTime(
       date.year,
       date.month,
       date.day,
       time.hour,
       time.minute,
     );
-    selectedProcurementTime.value = dateTime;
+
+    selectedProcurementTime.value = selectedDateTime;
     procurementTimeCtrlr
-      ..text = DateFormat("dd-MM-yyyy HH:mm").format(dateTime)
+      ..text = DateFormat("yyyy-MM-dd HH:mm").format(selectedDateTime)
       ..selection = TextSelection.fromPosition(
         TextPosition(
           offset: procurementTimeCtrlr.text.length,

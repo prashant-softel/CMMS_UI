@@ -7,6 +7,7 @@ import 'package:cmms/app/widgets/execution_approve_dialog.dart';
 import 'package:cmms/app/widgets/history_table_widget_web.dart';
 import 'package:cmms/app/widgets/observation_pm_execution_process_dialog.dart';
 import 'package:cmms/app/widgets/table_action_button.dart';
+import 'package:cmms/domain/models/mrs_list_by_jobId.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -635,6 +636,63 @@ class PreventiveMaintenanceExecutionContentWeb
                                         },
                                       ),
                                     ),
+                                    Dimens.boxWidth10,
+                                    controller.listMrsByTaskId!.isNotEmpty &&
+                                            (() {
+                                              try {
+                                                final firstCmmrsItem =
+                                                    controller.cmmrsItems!
+                                                        .firstWhere(
+                                                  (element) =>
+                                                      element?.mrs_return_ID ==
+                                                      0,
+                                                  orElse: () => CmmrsItems(
+                                                      mrs_return_ID: 1),
+                                                );
+                                                return firstCmmrsItem != null;
+                                              } catch (e) {
+                                                return false;
+                                              }
+                                            }())
+                                        ? Container(
+                                            height: 35,
+                                            child: CustomElevatedButton(
+                                              icon: Icons
+                                                  .keyboard_return_outlined,
+                                              backgroundColor:
+                                                  ColorValues.linktopermitColor,
+                                              text: "Return Mrs",
+                                              onPressed: () {
+                                                // controller.clearStoreTaskData();
+                                                // controller
+                                                //     .clearStoreTaskActivityData();
+                                                // controller
+                                                //     .clearStoreTasktoActorData();
+                                                // controller
+                                                //     .clearStoreTaskWhereUsedData();
+                                                // controller
+                                                //     .clearStoreTaskfromActorData();
+
+                                                Get.toNamed(
+                                                    Routes.mrsReturnScreen,
+                                                    arguments: {
+                                                      "whereUsed": 27,
+                                                      "fromActorTypeId": 3,
+                                                      "to_actor_type_id": 2,
+                                                      "pmTaskId": controller
+                                                              .pmtaskViewModel
+                                                              .value
+                                                              ?.id ??
+                                                          0,
+                                                      "activity": controller
+                                                          .pmtaskViewModel
+                                                          .value
+                                                          ?.plan_title
+                                                    });
+                                              },
+                                            ),
+                                          )
+                                        : Dimens.box0
                                   ],
                                 ),
                                 Dimens.boxHeight20
