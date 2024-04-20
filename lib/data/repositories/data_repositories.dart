@@ -204,6 +204,56 @@ class DataRepository extends DomainRepository {
     );
   }
 
+  Future<ResponseModel> getWaterTypeById({
+    String? auth,
+    int? waterTypeId,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.getWaterTypeById(
+        auth: auth,
+        waterTypeId: waterTypeId,
+        isLoading: isLoading,
+      );
+
+  Future<ResponseModel> createWaterType({
+    auth,
+    waterTypeJson,
+    bool? isLoading,
+  }) async {
+    var response = await connectHelper.createWaterType(
+      auth: auth,
+      waterTypeJson: waterTypeJson,
+      isLoading: isLoading,
+    );
+    return response;
+  }
+
+  Future<ResponseModel> updateWaterType({
+    auth,
+    waterTypeJson,
+    bool? isLoading,
+  }) async {
+    var response = await connectHelper.updateWaterType(
+      auth: auth,
+      waterTypeJson: waterTypeJson,
+      isLoading: isLoading,
+    );
+    return response;
+  }
+
+  Future<ResponseModel> deleteWaterType({
+    auth,
+    int? waterTypeId,
+    bool? isLoading,
+  }) async {
+    var response = await connectHelper.deleteWaterType(
+      auth: auth,
+      waterTypeId: waterTypeId,
+      isLoading: isLoading,
+    );
+    return response;
+  }
+
   Future<ResponseModel> updatePaidBy({
     int? facilityId,
     required bool isLoading,
