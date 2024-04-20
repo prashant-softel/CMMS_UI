@@ -296,10 +296,83 @@ class ConnectHelper {
       {required bool isLoading, required String auth, int? facilityId}) async {
     ResponseModel responseModel = await apiWrapper.makeRequest(
       'MISMaster/GetWaterType?facility_id=$facilityId',
-      Request.getMultiparts,
+      Request.get,
       null,
       isLoading,
       {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
+  Future<ResponseModel> getWaterTypeById(
+      {String? auth, int? waterTypeId, bool? isLoading}) async {
+    ResponseModel response = ResponseModel(data: '', hasError: true);
+    try {
+      response = await apiWrapper.makeRequest(
+        '',
+        Request.get,
+        null,
+        true,
+        {
+          'Authorization': 'Bearer $auth',
+        },
+      );
+    } catch (error) {
+      print(error);
+    }
+    return response;
+  }
+
+  Future<ResponseModel> createWaterType({
+    required String auth,
+    required waterTypeJson,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'MISMaster/CreateWaterType', //AddBusiness
+      Request.post,
+      waterTypeJson,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
+  Future<ResponseModel> updateWaterType({
+    required String auth,
+    waterTypeJson,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'MISMaster/UpdateWaterType',
+      Request.put,
+      jsonEncode(waterTypeJson),
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
+  Future<ResponseModel> deleteWaterType({
+    required String auth,
+    int? waterTypeId,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      '',
+      Request.delete,
+      null,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
         'Authorization': 'Bearer $auth',
       },
     );

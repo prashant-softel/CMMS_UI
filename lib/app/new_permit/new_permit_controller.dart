@@ -378,7 +378,7 @@ class NewPermitController extends GetxController {
   BehaviorSubject<int> _facilityId = BehaviorSubject.seeded(0);
   Stream<int> get facilityId$ => _facilityId.stream;
   int get facilityId1 => _facilityId.value;
-  List<dynamic>? files = [0, 0];
+  List<dynamic>? files = [];
 
   Map<dynamic, dynamic> employee_map = {};
   Map<int, dynamic> loto_map = {};
@@ -474,8 +474,10 @@ class NewPermitController extends GetxController {
         getJobTypePermitList();
         if (pmtaskViewModel?.id != null) {
           loadPermitDetailsWithTask(pmtaskViewModel);
-        } else if (jobModel != null) {
+        } else if (jobModel != null || jobModel != "") {
           loadPermitDetails(jobModel);
+        } else {
+          print("Nothing to load");
         }
       });
 
@@ -540,13 +542,15 @@ class NewPermitController extends GetxController {
         permitPresenter.saveJobModelValue(jobModel: jobModel.toString());
         print("SChedule check point: ${pmtaskViewModel}");
 
-        for (int i = 0; i < pmtaskViewModel!.schedules!.length; i++) {
-          allChecklistNames +=
-              pmtaskViewModel!.schedules![i].checklist_name ?? '';
-          // Add a comma and space if it's not the last item
-          // if (i < pmtaskViewModel.s.length - 1) {
-          //   allChecklistNames += ', ';
-          // }
+        if (pmtaskViewModel?.id != null || pmtaskViewModel?.id != 0) {
+          for (int i = 0; i < pmtaskViewModel!.schedules!.length; i++) {
+            allChecklistNames +=
+                pmtaskViewModel!.schedules![i].checklist_name ?? '';
+            // Add a comma and space if it's not the last item
+            // if (i < pmtaskViewModel.s.length - 1) {
+            //   allChecklistNames += ', ';
+            // }
+          }
         }
       } else {
         permitId.value = int.tryParse(_permitId) ?? 0;
@@ -1920,7 +1924,7 @@ class NewPermitController extends GetxController {
     ///end uncomment
 
     // idCtrlr.text = '${int.tryParse(jobModel.id ?? 0)}';
-    blockNameTextCtrlr.text = jobModel.blockName;
+    blockNameTextCtrlr.text = jobModel?.blockwName;
     assignToTextCtrlr.text = jobModel.assignedName;
     breakdownTimeTextCtrlr.text =
         '${DateFormat('yyyy-MM-dd HH:mm').format(DateTime.parse('${jobModel.breakdownTime}')).toString()}';

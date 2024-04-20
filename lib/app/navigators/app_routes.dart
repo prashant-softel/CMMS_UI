@@ -207,6 +207,7 @@ abstract class Routes {
   static const importDsmListChargesListScreen =
       _Paths.importDsmListChargesListScreen;
   static const importDsmChargesScreen = _Paths.importDsmChargesScreen;
+  static const waterTypeMaster = _Paths.waterTypeMaster;
 }
 
 abstract class _Paths {
@@ -411,4 +412,5 @@ abstract class _Paths {
   static const importDsmListChargesListScreen =
       '/importDsmListChargesListScreen';
   static const importDsmChargesScreen = '/importDsmChargesScreen';
+  static const waterTypeMaster = '/water-type-master';
 }

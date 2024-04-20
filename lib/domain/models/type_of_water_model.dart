@@ -10,7 +10,7 @@ String waterListModelToJson(List<WaterSource> data) =>
 class WaterSource {
   WaterSource({
     this.id,
-    this.facilityID,
+    this.facility_id,
     this.name,
     this.description,
     this.status,
@@ -21,7 +21,7 @@ class WaterSource {
   });
 
   int? id;
-  int? facilityID;
+  int? facility_id;
   String? name;
   String? description;
   int? status;
@@ -32,7 +32,7 @@ class WaterSource {
 
   factory WaterSource.fromJson(Map<String, dynamic> json) => WaterSource(
         id: json['id'],
-        facilityID: json['facilityID'],
+        facility_id: json['facility_id'],
         name: json['name'],
         description: json['description'],
         status: json['status'],
@@ -46,13 +46,13 @@ class WaterSource {
 
   Map<String, dynamic> toJson() => {
         "id": id,
-        "facilityID": facilityID,
+        "facility_id": facility_id,
         "name": name,
         "description": description,
-        "status": status,
-        "createdAt": createdAt,
-        "createdBy": createdBy,
-        "updatedAt": updatedAt,
-        "updatedBy": updatedBy,
+        // "status": status,
+        // "createdAt": createdAt,
+        // "createdBy": createdBy,
+        // "updatedAt": updatedAt,
+        // "updatedBy": updatedBy,
       };
 }
