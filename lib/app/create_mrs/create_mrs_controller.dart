@@ -88,6 +88,7 @@ class CreateMrsController extends GetxController {
     final _assetList =
         await createMrsPresenter.getEquipmentList(facilityId: facilityId);
     if (_assetList != null) {
+      assetItemList.clear();
       for (var asset in _assetList) {
         assetItemList.add(asset);
       }
