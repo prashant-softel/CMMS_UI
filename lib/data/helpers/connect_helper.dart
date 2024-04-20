@@ -7122,6 +7122,25 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> deleteGrievanceDetails({
+    required String auth,
+    int? Id,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Grievance/DeleteGrievance?id=$Id',
+      Request.delete,
+      null,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
+
   Future<ResponseModel> saveGrievance({
     required String auth,
     grievance,
@@ -7233,6 +7252,8 @@ class ConnectHelper {
     );
     return responseModel;
   }
+
+
 
   Future<ResponseModel> getAuditPlanDetails({
     required String? auth,

@@ -4122,6 +4122,20 @@ class DataRepository extends DomainRepository {
     return response;
   }
 
+   Future<ResponseModel> deleteGrievanceDetails({
+    auth,
+    int? Id,
+    bool? isLoading,
+  }) async {
+    var response = await connectHelper.deleteGrievanceDetails(
+      auth: auth,
+      Id: Id,
+      isLoading: isLoading,
+    );
+    return response;
+  }
+
+
   Future<ResponseModel> getGrievanceType({
     String? auth,
     bool? isLoading,

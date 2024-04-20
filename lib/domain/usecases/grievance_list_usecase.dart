@@ -28,8 +28,15 @@ class GrievanceListUsecase {
   Future<String?> getValue() async =>
       await repository.getStringValue(LocalKeys.grievanceId);
 
-      void saveValue({String? grievanceId}) async =>
+  void saveValue({String? grievanceId}) async =>
       repository.saveValue(LocalKeys.grievanceId, grievanceId);
 
-     
+  Future<void> deleteGrievanceDetails({
+    int? Id,
+    bool? isLoading,
+  }) async =>
+      await repository.deleteGrievanceDetails(
+        Id: Id,
+        isLoading: isLoading,
+      );
 }

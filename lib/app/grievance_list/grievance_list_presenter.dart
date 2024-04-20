@@ -33,5 +33,14 @@ class GrievanceListPresenter {
 
   void clearValue() async => grievanceUsecase.clearValue();
 
+  deleteGrievanceDetails({
+    int? Id,
+    bool? isLoading,
+  }) async =>
+      await grievanceUsecase.deleteGrievanceDetails(
+        Id: Id,
+        isLoading: isLoading,
+      );
+
   
 }
