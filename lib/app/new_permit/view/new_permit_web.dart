@@ -237,11 +237,11 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                   width: Get.width * .8,
                                   height: Get.height * .2,
                                   margin: EdgeInsets.symmetric(
-                                      horizontal: 10, vertical: 10),
+                                      horizontal: 9, vertical: 10),
                                   padding: EdgeInsets.all(10),
-                                  // decoration: BoxDecoration(
-                                  //   border: Border.all(color: Colors.black),
-                                  // ),
+                                  decoration: BoxDecoration(
+                                    border: Border.all(color: Colors.black),
+                                  ),
                                   child: DataTable2(
                                     border: TableBorder.all(
                                       color: Colors.black,
@@ -249,11 +249,11 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                     columnSpacing: 11,
                                     columns: [
                                       DataColumn2(
-                                          fixedWidth: Get.width * .05,
+                                          fixedWidth: 100,
                                           label: Text('Job ID',
                                               overflow: TextOverflow.ellipsis)),
                                       DataColumn2(
-                                          fixedWidth: Get.width * .1,
+                                          fixedWidth: 180,
                                           label: Text('Job Title',
                                               overflow: TextOverflow.ellipsis)),
                                       DataColumn2(
@@ -265,7 +265,7 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                           label: Text('Block',
                                               overflow: TextOverflow.ellipsis)),
                                       DataColumn2(
-                                          fixedWidth: Get.width * .1,
+                                          fixedWidth: 200,
                                           label: Text('Equipment Name',
                                               overflow: TextOverflow.ellipsis)),
                                       DataColumn2(
