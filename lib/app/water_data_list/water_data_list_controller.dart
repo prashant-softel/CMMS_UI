@@ -5,6 +5,7 @@ import 'package:cmms/app/water_data_list/water_data_list_presenter.dart';
 import 'package:cmms/domain/models/audit_plan_list_model.dart';
 import 'package:cmms/domain/models/create_water_data_model.dart';
 import 'package:cmms/domain/models/type_model.dart';
+import 'package:cmms/domain/models/type_of_water_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -22,27 +23,14 @@ class WaterDataListController extends GetxController {
   Rx<DateTime> selectedProcurementTime = DateTime.now().obs;
   var procurementTimeCtrlr = TextEditingController();
   // Rx<int> Plan Id = 0.obs;
+  RxList<WaterSource?> typeOfWaterList = <WaterSource>[].obs;
+  Rx<bool> istypeOfWaterListSelected = true.obs;
+  Rx<String> selectedtypeOfWater = ''.obs;
+  int selectedTypeOfWaterId = 0;
 
   var descriptionCtrlr = TextEditingController();
   var qtyCtrlr = TextEditingController();
 
-  RxList<MonthModel> month = <MonthModel>[
-    MonthModel(name: 'Water used for domestic and other purpose', id: "1"),
-    MonthModel(name: 'Water used for drinking', id: "2"),
-    MonthModel(name: 'Water used for Module cleaning ', id: "3"),
-    MonthModel(name: 'Ground Water  ', id: "4"),
-    MonthModel(name: 'Surface Water ', id: "5"),
-    MonthModel(
-        name: 'Water Procured from Third Party for Module cleaning ', id: "6"),
-    MonthModel(
-        name: 'Water Consumption  from Third Party for Module cleaning ',
-        id: "7"),
-    MonthModel(
-        name:
-            'Water Procured from Third Party for Domestic and others purposes ',
-        id: "8"),
-    MonthModel(name: 'Water Procured from Third Party for Drinking', id: "9"),
-  ].obs;
   RxString statusFilterText = ''.obs;
 
   //Start DateTime
@@ -98,11 +86,24 @@ class WaterDataListController extends GetxController {
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
       facilityId = event;
       Future.delayed(Duration(seconds: 1), () async {
-        // getAuditPlanList(
-        //     facilityId, formattedTodate1, formattedFromdate1, true);
+        getTypeOfWaterList();
       });
     });
     super.onInit();
+  }
+
+  void getTypeOfWaterList() async {
+    typeOfWaterList.value = <WaterSource>[];
+    final _typeOfWaterList = await waterDataListPresenter.getTypeOfWaterList(
+      isLoading: true,
+      facilityId: facilityId,
+    );
+    print('type Of Water List:$typeOfWaterList');
+    for (var unit_currency_list in _typeOfWaterList) {
+      typeOfWaterList.add(unit_currency_list);
+    }
+
+    update(['unit_currency_list']);
   }
 
   void createWaterData() async {
@@ -119,7 +120,7 @@ class WaterDataListController extends GetxController {
       date: formattedDate,
       debitQty: 0,
       description: _descriptionCtrlr,
-      waterTypeId: 1,
+      waterTypeId: selectedTypeOfWaterId,
     );
     var createWaterDataModelJsonString = createWaterData.toJson();
     Map<String, dynamic>? responseCreateWaterDataModel =
@@ -226,5 +227,17 @@ class WaterDataListController extends GetxController {
     }
 
     return newTime;
+  }
+
+  void onValueChanged(dynamic list, dynamic value) {
+    switch (list.runtimeType) {
+      case RxList<WaterSource>:
+        {
+          int typeOfWaterIndex =
+              typeOfWaterList.indexWhere((x) => x?.name == value);
+          selectedTypeOfWaterId = typeOfWaterList[typeOfWaterIndex]?.id ?? 0;
+        }
+        break;
+    }
   }
 }

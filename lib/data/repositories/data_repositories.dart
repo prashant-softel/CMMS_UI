@@ -192,6 +192,18 @@ class DataRepository extends DomainRepository {
     );
   }
 
+  Future<ResponseModel> getTypeOfWaterList({
+    int? facilityId,
+    required bool isLoading,
+    required String auth,
+  }) async {
+    return await connectHelper.getTypeOfWaterList(
+      isLoading: isLoading,
+      auth: auth,
+      facilityId: facilityId,
+    );
+  }
+
   Future<ResponseModel> updatePaidBy({
     int? facilityId,
     required bool isLoading,
@@ -4086,7 +4098,7 @@ class DataRepository extends DomainRepository {
         end_date: end_date,
       );
 
-    Future<ResponseModel> getGrievanceDetails({
+  Future<ResponseModel> getGrievanceDetails({
     required String auth,
     int? id,
     bool? isLoading,
@@ -4097,7 +4109,7 @@ class DataRepository extends DomainRepository {
         isLoading: isLoading ?? false,
       );
 
-Future<ResponseModel> updateGrievanceDetails({
+  Future<ResponseModel> updateGrievanceDetails({
     auth,
     grievanceJson,
     bool? isLoading,
@@ -4109,8 +4121,7 @@ Future<ResponseModel> updateGrievanceDetails({
     );
     return response;
   }
-      
-      
+
   Future<ResponseModel> getGrievanceType({
     String? auth,
     bool? isLoading,
