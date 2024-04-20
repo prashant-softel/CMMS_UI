@@ -7909,4 +7909,68 @@ class ConnectHelper {
     );
     return responseModel;
   }
+  // Future<ResponseModel> createWasteType({
+  //   required String auth,
+  //   required wasteTypeJson,
+  //   bool? isLoading,
+  // }) async {
+  //   var responseModel = await apiWrapper.makeRequest(
+  //     '', //AddBusiness
+  //     Request.post,
+  //     wasteTypeJson,
+  //     isLoading ?? false,
+  //     {
+  //       'Content-Type': 'application/json',
+  //       'Authorization': 'Bearer $auth',
+  //     },
+  //   );
+  //   return responseModel;
+  // }
+  // Future<ResponseModel> updateWasteType({
+  //   required String auth,
+  //   wasteTypeJson,
+  //   bool? isLoading,
+  // }) async {
+  //   var responseModel = await apiWrapper.makeRequest(
+  //     '',
+  //     Request.put,
+  //     jsonEncode(wasteTypeJson),
+  //     isLoading ?? false,
+  //     {
+  //       'Content-Type': 'application/json',
+  //       'Authorization': 'Bearer $auth',
+  //     },
+  //   );
+  //   return responseModel;
+  // }
+  // Future<ResponseModel> deleteWasteType({
+  //   required String auth,
+  //   int? wasteTypeId,
+  //   bool? isLoading,
+  // }) async {
+  //   var responseModel = await apiWrapper.makeRequest(
+  //     '',
+  //     Request.delete,
+  //     null,
+  //     isLoading ?? false,
+  //     {
+  //       'Content-Type': 'application/json',
+  //       'Authorization': 'Bearer $auth',
+  //     },
+  //   );
+  //   return responseModel;
+  // }
+  // Future<ResponseModel> getTypeOfWasteList(
+  //     {required bool isLoading, required String auth, int? facilityId}) async {
+  //   ResponseModel responseModel = await apiWrapper.makeRequest(
+  //     '',
+  //     Request.get,
+  //     null,
+  //     isLoading,
+  //     {
+  //       'Authorization': 'Bearer $auth',
+  //     },
+  //   );
+  //   return responseModel;
+  // }
 }

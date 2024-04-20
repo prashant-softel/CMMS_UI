@@ -868,24 +868,15 @@ class MastersDashboard extends GetView<MastersController> {
                                       ontap: () {
                                         controller.grievanceType();
                                       }),
-                                ],
-                              ),
-                              GridView.count(
-                                shrinkWrap: true,
-                                primary: false,
-                                padding: const EdgeInsets.all(16),
-                                crossAxisSpacing: 70,
-                                mainAxisSpacing: 6,
-                                crossAxisCount:
-                                    Responsive.isMobile(context) ? 2 : 5,
-                                childAspectRatio: Responsive.isMobile(context)
-                                    ? (itemWidth / itemHeight)
-                                    : 5,
-                                children: <Widget>[
-                                  _inventoryList(
+                                      _inventoryList(
                                       tittle: "Water Type",
                                       ontap: () {
                                         controller.waterTypeMaster();
+                                      }),
+                                       _inventoryList(
+                                      tittle: "Waste Type",
+                                      ontap: () {
+                                        controller.wasteTypeMaster();
                                       }),
                                 ],
                               ),

@@ -301,6 +301,11 @@ class MastersController extends GetxController {
       Routes.waterTypeMaster,
     );
   }
+  Future<void> wasteTypeMaster() async {
+    Get.toNamed(
+      Routes.wasteTypeMaster,
+    );
+  }
 
   Future<void> breakdownMaintenance() async {
     Get.toNamed(

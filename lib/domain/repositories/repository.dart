@@ -90,6 +90,7 @@ import 'package:cmms/domain/models/view_warranty_claim_model.dart';
 import 'package:cmms/domain/models/warranty_claim_model.dart';
 import 'package:cmms/domain/models/warranty_type_model.dart';
 import 'package:cmms/domain/models/warranty_usage_term_list_model.dart';
+import 'package:cmms/domain/models/waste_type_master_model.dart';
 import 'package:cmms/domain/models/work_type_model.dart';
 import 'package:cmms/domain/repositories/repositories.dart';
 import 'package:cmms/domain/models/facility_model.dart';
@@ -12219,5 +12220,101 @@ class Repository {
       return false;
     }
   }
+  // Future<List<WasteSource>> getTypeOfWasteList({
+  //   required int? facilityId,
+  //   // int? blockId,
+  //   // required String categoryIds,
+  //   required bool isLoading,
+  // }) async {
+  //   try {
+  //     final auth = await getSecuredValue(LocalKeys.authToken);
+
+  //     log(auth);
+  //     final res = await _dataRepository.getTypeOfWasteList(
+  //       facilityId: facilityId,
+  //       isLoading: isLoading,
+  //       auth: auth,
+  //     );
+  //     print('Waste Source List Data: ${res.data}');
+
+  //     if (!res.hasError) {
+  //       var typeOfWasteList = wasteSourceListModelFromJson(res.data);
+  //       return typeOfWasteList;
+  //     }
+  //     return [];
+  //   } catch (error) {
+  //     log(error.toString());
+  //     return [];
+  //   }
+  // }
+  // Future<bool> createWasteType({
+  //   bool? isLoading,
+  //   wasteTypeJson,
+  // }) async {
+  //   try {
+  //     final auth = await getSecuredValue(LocalKeys.authToken);
+  //     final res = await _dataRepository.createWasteType(
+  //       auth: auth,
+  //       wasteTypeJson: wasteTypeJson,
+  //       isLoading: isLoading,
+  //     );
+
+  //     if (!res.hasError) {
+  //       return true;
+  //     } //
+  //     else {
+  //       Utility.showDialog(res.errorCode.toString(), ' createWasteType');
+  //       return false;
+  //     }
+  //   } catch (error) {
+  //     print(error.toString());
+  //     return false;
+  //   }
+  // }
+  // Future<bool> updateWasteType({
+  //   wasteTypeJson,
+  //   bool? isLoading,
+  // }) async {
+  //   try {
+  //     final auth = await getSecuredValue(LocalKeys.authToken);
+  //     final res = await _dataRepository.updateWasteType(
+  //       auth: auth,
+  //       wasteTypeJson: wasteTypeJson,
+  //       isLoading: isLoading,
+  //     );
+  //     print(res.data);
+  //     if (!res.hasError) {
+  //       return true;
+  //     } //
+  //     else {
+  //       Utility.showDialog(res.errorCode.toString(), 'updateWasteType');
+  //       return false;
+  //     }
+  //   } catch (error) {
+  //     print(error.toString());
+  //     return false;
+  //   }
+  // }
+  // Future<void> deleteWasteType({
+  //   int? wasteTypeId,
+  //   bool? isLoading,
+  // }) async {
+  //   try {
+  //     final auth = await getSecuredValue(LocalKeys.authToken);
+  //     final res = await _dataRepository.deleteWasteType(
+  //       auth: auth,
+  //       wasteTypeId: wasteTypeId,
+  //       isLoading: isLoading,
+  //     );
+
+  //     if (!res.hasError) {
+  //       //get delete response back from API
+  //     } else {
+  //       Utility.showDialog(res.errorCode.toString(), 'deleteWasteType');
+  //     }
+  //   } catch (error) {
+  //     print(error.toString());
+  //   }
+  // }
   //end
 }
