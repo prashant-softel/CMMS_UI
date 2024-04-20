@@ -367,7 +367,7 @@ class ConnectHelper {
     bool? isLoading,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
-      '',
+      'MISMaster/DeleteWaterType?id=$waterTypeId',
       Request.delete,
       null,
       isLoading ?? false,
