@@ -3918,6 +3918,26 @@ class Repository {
     }
   }
 
+  Future<void> deleteGrievanceDetails(
+      {int? Id, bool? isLoading}) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.deleteGrievanceDetails(
+        auth: auth,
+        Id: Id,
+        isLoading: isLoading,
+      );
+
+      if (!res.hasError) {
+        //get delete response back from API
+      } else {
+        Utility.showDialog(res.errorCode.toString(), 'deleteGrievance');
+      }
+    } catch (error) {
+      print(error.toString());
+    }
+  }
+
   Future<bool> createGrievanceType({bool? isLoading, grievanceJson}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
