@@ -933,12 +933,12 @@ class DeployedTeam extends StatelessWidget {
         ),
         child: Column(
           children: [
-            Column(
-                children: []
-                  ..addAll(controller.employeesDeployed.value.map((e) {
-                    return Text(jsonEncode(e));
-                  }))),
-            Text(jsonEncode(controller.deployedEmployeeMapperData)),
+            // Column(
+            //     children: []
+            //       ..addAll(controller.employeesDeployed.value.map((e) {
+            //         return Text(jsonEncode(e));
+            //       }))),
+            // Text(jsonEncode(controller.deployedEmployeeMapperData)),
             Padding(
               padding: const EdgeInsets.only(
                 top: 10,
