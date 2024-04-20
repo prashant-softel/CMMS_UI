@@ -536,6 +536,15 @@ class GrievanceListDataSource extends DataTableSource {
                           controller.editGrievance(grievanceId: id);
                         },
                       ),
+                      TableActionButton(
+                        color: ColorValues.deleteColor,
+                        icon: Icons.delete_outline,
+                        message: "delete",
+                        onPress: () {
+                          int? id = GrievanceDetails?.id;
+                          controller.deleteGrievanceDetails(grievanceId: id);
+                        },
+                      ),
                       // TableActionButton(
                       //   color: ColorValues.viewColor,
                       //   icon: Icons.view_column,
