@@ -127,7 +127,21 @@ class _FileUploadWidgetWithDropzoneState
                                                 strokeWidth: 2,
                                               ),
                                             )
-                                          : Dimens.box0,
+                                          : SizedBox(
+                                              height: Get.height * 0.03,
+                                              child: ElevatedButton(
+                                                onPressed: () {},
+                                                child: const Text(
+                                                  'Upload',
+                                                  style:
+                                                      TextStyle(fontSize: 12),
+                                                ),
+                                                style: ElevatedButton.styleFrom(
+                                                  backgroundColor: ColorValues
+                                                      .appDarkBlueColor,
+                                                ),
+                                              ),
+                                            ),
                                 ],
                               ),
                             ),
