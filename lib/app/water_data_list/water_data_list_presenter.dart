@@ -1,3 +1,4 @@
+import 'package:cmms/domain/models/type_of_water_model.dart';
 import 'package:cmms/domain/usecases/water_data_list_usecase.dart';
 
 class WaterDataListPresenter {
@@ -21,6 +22,16 @@ class WaterDataListPresenter {
     return waterDataListUsecase.createWaterData(
       createWaterData: createWaterData,
       isLoading: isLoading,
+    );
+  }
+
+  Future<List<WaterSource>> getTypeOfWaterList({
+    required bool isLoading,
+    required int? facilityId,
+  }) async {
+    return waterDataListUsecase.getTypeOfWaterList(
+      isLoading: isLoading,
+      facilityId: facilityId,
     );
   }
 }

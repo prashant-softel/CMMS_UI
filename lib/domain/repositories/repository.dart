@@ -77,6 +77,7 @@ import 'package:cmms/domain/models/stock_management_update_goods_orders_model.da
 import 'package:cmms/domain/models/supplier_name_model.dart';
 import 'package:cmms/domain/models/tools_model.dart';
 import 'package:cmms/domain/models/transaction_report_list_model.dart';
+import 'package:cmms/domain/models/type_of_water_model.dart';
 import 'package:cmms/domain/models/type_permit_model.dart';
 import 'package:cmms/domain/models/update_pm_task_execution_model.dart';
 import 'package:cmms/domain/models/user_detail_model.dart';
@@ -2121,6 +2122,34 @@ class Repository {
     }
   }
 
+  Future<List<WaterSource>> getTypeOfWaterList({
+    required int? facilityId,
+    // int? blockId,
+    // required String categoryIds,
+    required bool isLoading,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+
+      log(auth);
+      final res = await _dataRepository.getTypeOfWaterList(
+        facilityId: facilityId,
+        isLoading: isLoading,
+        auth: auth,
+      );
+      print('Water Source List Data: ${res.data}');
+
+      if (!res.hasError) {
+        var typeOfWaterList = waterSourceListModelFromJson(res.data);
+        return typeOfWaterList;
+      }
+      return [];
+    } catch (error) {
+      log(error.toString());
+      return [];
+    }
+  }
+
   Future<Map<String, dynamic>> goodsOrderApprovedButton(
     goodsOrderApproveJsonString,
     bool? isLoading,
@@ -3764,7 +3793,8 @@ class Repository {
       return null;
     }
   }
-Future<bool> updateGrievanceDetails({
+
+  Future<bool> updateGrievanceDetails({
     grievanceJson,
     bool? isLoading,
   }) async {

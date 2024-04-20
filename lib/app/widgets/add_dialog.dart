@@ -124,11 +124,15 @@ class AddDialog extends GetView {
                         ),
                       ),
                       Dimens.boxHeight10,
-                      DropdownWebStock(
-                        width: MediaQuery.of(context).size.width / 5,
-                        dropdownList: controller.month,
-                        // selectedValue: ,
-                        onValueChanged: (month, selectedValue) {},
+                      SizedBox(
+                        child: DropdownWebStock(
+                          width: MediaQuery.of(context).size.width / 5,
+                          dropdownList: controller.typeOfWaterList,
+                          isValueSelected:
+                              controller.istypeOfWaterListSelected.value,
+                          selectedValue: controller.selectedtypeOfWater.value,
+                          onValueChanged: controller.onValueChanged,
+                        ),
                       ),
                       Dimens.boxHeight10,
                       GoodsOrderTextField(
