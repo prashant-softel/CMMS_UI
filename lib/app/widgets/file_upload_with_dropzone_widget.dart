@@ -76,6 +76,8 @@ class _FileUploadWidgetWithDropzoneState
                                     child: ElevatedButton.icon(
                                       onPressed: () {
                                         controller.selectFiles();
+                                        controller.showUploadButton.value =
+                                            true;
                                       },
                                       icon: Icon(Icons.search),
                                       label: Text(
@@ -99,7 +101,7 @@ class _FileUploadWidgetWithDropzoneState
                                   Dimens.boxHeight5,
 
                                   /// UPLOAD BUTTON
-                                  controller.uploadingImage == false
+                                  controller.showUploadButton == true
                                       ? SizedBox(
                                           height: Get.height * 0.03,
                                           child: ElevatedButton(
@@ -116,14 +118,30 @@ class _FileUploadWidgetWithDropzoneState
                                             ),
                                           ),
                                         )
-                                      : SizedBox(
-                                          width: 20,
-                                          height: 20,
-                                          child: CircularProgressIndicator(
-                                            color: Colors.white,
-                                            strokeWidth: 2,
-                                          ),
-                                        ),
+                                      : controller.uploadingImage == true
+                                          ? SizedBox(
+                                              width: 20,
+                                              height: 20,
+                                              child: CircularProgressIndicator(
+                                                color: Colors.white,
+                                                strokeWidth: 2,
+                                              ),
+                                            )
+                                          : SizedBox(
+                                              height: Get.height * 0.03,
+                                              child: ElevatedButton(
+                                                onPressed: () {},
+                                                child: const Text(
+                                                  'Upload',
+                                                  style:
+                                                      TextStyle(fontSize: 12),
+                                                ),
+                                                style: ElevatedButton.styleFrom(
+                                                  backgroundColor: ColorValues
+                                                      .appDarkBlueColor,
+                                                ),
+                                              ),
+                                            ),
                                 ],
                               ),
                             ),

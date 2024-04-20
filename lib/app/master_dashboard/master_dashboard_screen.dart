@@ -69,29 +69,28 @@ class MastersDashboard extends GetView<MastersController> {
                 //     HomeDrawer(),
                 Expanded(
                   child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        if (Responsive.isDesktop(context))
-                          HeaderWidgetAllDash(),
-                        Container(
-                          margin: EdgeInsets.only(left: 20),
-                          child: Text(
-                            "Masters",
-                            style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 24,
-                                fontWeight: FontWeight.bold),
-                          ),
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      if (Responsive.isDesktop(context)) HeaderWidgetAllDash(),
+                      Container(
+                        margin: EdgeInsets.only(left: 20),
+                        child: Text(
+                          "Masters",
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 24,
+                              fontWeight: FontWeight.bold),
                         ),
-                        SizedBox(
-                          height: 15,
-                        ),
-                        Expanded(
-                          // height: Get.height,
-                          // margin: EdgeInsets.only(left: 20),
-                          child: SingleChildScrollView(
-                              child: Column(
+                      ),
+                      SizedBox(
+                        height: 15,
+                      ),
+                      Expanded(
+                        // height: Get.height,
+                        // margin: EdgeInsets.only(left: 20),
+                        child: SingleChildScrollView(
+                          child: Column(
                             children: [
                               Container(
                                 margin: EdgeInsets.only(left: 20),
@@ -100,8 +99,8 @@ class MastersDashboard extends GetView<MastersController> {
                                     Text(
                                       "Facility",
                                       style: TextStyle(
-                                        color: Color.fromARGB(
-                                            255, 159, 156, 156),
+                                        color:
+                                            Color.fromARGB(255, 159, 156, 156),
                                         fontSize: 16,
                                         fontWeight: FontWeight.w400,
                                       ),
@@ -158,8 +157,7 @@ class MastersDashboard extends GetView<MastersController> {
                                         createContentTile(
                                             title: "Facility List",
                                             onTap: () {
-                                              controller
-                                                  .goToFacilityTypeList();
+                                              controller.goToFacilityTypeList();
                                             });
                                     // : Dimens.box0;
                                   }))),
@@ -274,8 +272,8 @@ class MastersDashboard extends GetView<MastersController> {
                                     Text(
                                       "Business ",
                                       style: TextStyle(
-                                        color: Color.fromARGB(
-                                            255, 159, 156, 156),
+                                        color:
+                                            Color.fromARGB(255, 159, 156, 156),
                                         fontSize: 16,
                                         fontWeight: FontWeight.w400,
                                       ),
@@ -336,8 +334,8 @@ class MastersDashboard extends GetView<MastersController> {
                                     Text(
                                       "Users Management",
                                       style: TextStyle(
-                                        color: Color.fromARGB(
-                                            255, 159, 156, 156),
+                                        color:
+                                            Color.fromARGB(255, 159, 156, 156),
                                         fontSize: 16,
                                         fontWeight: FontWeight.w400,
                                       ),
@@ -396,8 +394,7 @@ class MastersDashboard extends GetView<MastersController> {
                                         createContentTile(
                                             title: "Add User",
                                             onTap: () {
-                                              controller
-                                                  .clearStoreUserIdData();
+                                              controller.clearStoreUserIdData();
 
                                               controller.goToAddUser();
                                             });
@@ -529,8 +526,8 @@ class MastersDashboard extends GetView<MastersController> {
                                     Text(
                                       "General ",
                                       style: TextStyle(
-                                        color: Color.fromARGB(
-                                            255, 159, 156, 156),
+                                        color:
+                                            Color.fromARGB(255, 159, 156, 156),
                                         fontSize: 16,
                                         fontWeight: FontWeight.w400,
                                       ),
@@ -619,8 +616,8 @@ class MastersDashboard extends GetView<MastersController> {
                                     Text(
                                       "Assets",
                                       style: TextStyle(
-                                        color: Color.fromARGB(
-                                            255, 159, 156, 156),
+                                        color:
+                                            Color.fromARGB(255, 159, 156, 156),
                                         fontSize: 16,
                                         fontWeight: FontWeight.w400,
                                       ),
@@ -718,8 +715,8 @@ class MastersDashboard extends GetView<MastersController> {
                                     Text(
                                       "Document Manager",
                                       style: TextStyle(
-                                        color: Color.fromARGB(
-                                            255, 159, 156, 156),
+                                        color:
+                                            Color.fromARGB(255, 159, 156, 156),
                                         fontSize: 16,
                                         fontWeight: FontWeight.w400,
                                       ),
@@ -766,8 +763,8 @@ class MastersDashboard extends GetView<MastersController> {
                                     Text(
                                       "Warranty",
                                       style: TextStyle(
-                                        color: Color.fromARGB(
-                                            255, 159, 156, 156),
+                                        color:
+                                            Color.fromARGB(255, 159, 156, 156),
                                         fontSize: 16,
                                         fontWeight: FontWeight.w400,
                                       ),
@@ -881,9 +878,11 @@ class MastersDashboard extends GetView<MastersController> {
                                 ],
                               ),
                             ],
-                          )),
+                          ),
                         ),
-                      ]),
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),
