@@ -9,6 +9,7 @@ import 'package:cmms/domain/models/facility_model.dart';
 import 'package:cmms/domain/models/type_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 class WasteDataController extends GetxController {
   WasteDataController(
@@ -24,6 +25,10 @@ class WasteDataController extends GetxController {
   RxList<FacilityModel?> facilityList = <FacilityModel>[].obs;
 
   Rx<String> selectedBlock = ''.obs;
+  Rx<DateTime> selectedWasteDataTime = DateTime.now().obs;
+  var wasteDataTimeCtrlr = TextEditingController();
+  var qtyCtrlr = TextEditingController();
+  var descriptionCtrlr = TextEditingController();
 
   StreamSubscription<int>? facilityIdStreamSubscription;
   StreamSubscription<String>? facilityNameStreamSubscription;
@@ -62,6 +67,71 @@ class WasteDataController extends GetxController {
     if (facilityList.isNotEmpty) {
       selectedBlock.value = facilityList[0]?.name ?? '';
     }
+  }
+
+  Future pickDateTime(BuildContext context) async {
+    final date = await pickDate(context);
+    if (date == null) {
+      return;
+    }
+
+    final time = await pickTime(context);
+    if (time == null) {
+      return;
+    }
+
+    DateTime selectedDateTime = DateTime(
+      date.year,
+      date.month,
+      date.day,
+      time.hour,
+      time.minute,
+    );
+
+    selectedWasteDataTime.value = selectedDateTime;
+    wasteDataTimeCtrlr
+      ..text = DateFormat("yyyy-MM-dd HH:mm").format(selectedDateTime)
+      ..selection = TextSelection.fromPosition(
+        TextPosition(
+          offset: wasteDataTimeCtrlr.text.length,
+          affinity: TextAffinity.upstream,
+        ),
+      );
+  }
+
+  Future<DateTime?> pickDate(BuildContext context) async {
+    DateTime? dateTime = selectedWasteDataTime.value;
+
+    final newDate = await showDatePicker(
+      context: context,
+      initialDate: dateTime,
+      firstDate: DateTime(DateTime.now().year - 5),
+      lastDate: DateTime.now(),
+    );
+
+    if (newDate == null) return null;
+
+    return newDate;
+  }
+
+  Future<TimeOfDay?> pickTime(BuildContext context) async {
+    DateTime dateTime = selectedWasteDataTime.value;
+
+    final newTime = await showTimePicker(
+        context: context,
+        initialTime: TimeOfDay(hour: dateTime.hour, minute: dateTime.minute),
+        builder: (BuildContext context, Widget? child) {
+          return Theme(
+            data: ThemeData.light(),
+            child: child!,
+          );
+        });
+
+    if (newTime == null) {
+      return null;
+    }
+
+    return newTime;
   }
 
   void onValueChanged(dynamic list, dynamic value) {
