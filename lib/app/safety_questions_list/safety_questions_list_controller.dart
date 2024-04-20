@@ -361,6 +361,7 @@ class SafetyQuestionsListController extends GetxController {
 
     if (_permitTypeList != null) {
       typePermitList.clear();
+      isLoading = false.obs;
       for (var permitType in _permitTypeList) {
         typePermitList.add(permitType);
       }
