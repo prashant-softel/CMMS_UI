@@ -239,9 +239,9 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                   margin: EdgeInsets.symmetric(
                                       horizontal: 9, vertical: 10),
                                   padding: EdgeInsets.all(10),
-                                  decoration: BoxDecoration(
-                                    border: Border.all(color: Colors.black),
-                                  ),
+                                  // decoration: BoxDecoration(
+                                  //   border: Border.all(color: Colors.black),
+                                  // ),
                                   child: DataTable2(
                                     border: TableBorder.all(
                                       color: Colors.black,
