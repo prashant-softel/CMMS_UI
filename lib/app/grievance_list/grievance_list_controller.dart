@@ -131,4 +131,14 @@ class GrievanceController extends GetxController {
       "grievanceId": grievanceId,
     });
   }
+
+  Future<void> deleteGrievanceDetails({int? grievanceId}) async {
+    {
+      await grievanceListPresenter.deleteGrievanceDetails(
+        Id: grievanceId,
+        isLoading: true,
+      );
+    }
+    getGrievanceList(facilityId, false, formattedFromdate, formattedTodate);
+  }
 }
