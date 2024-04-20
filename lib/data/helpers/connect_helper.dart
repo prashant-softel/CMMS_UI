@@ -6732,7 +6732,7 @@ class ConnectHelper {
     required bool isLoading,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
-      'CheckList/ImportChecklistCheckpoint?file_id=$fileId',
+      'CMMS/ImportBusiness?file_id=$fileId',
       Request.post,
       null,
       true,
