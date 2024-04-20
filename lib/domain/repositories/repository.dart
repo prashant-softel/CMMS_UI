@@ -3794,7 +3794,7 @@ class Repository {
     }
   }
 
-  Future<bool> updateGrievanceDetails({
+  Future<Map<String, dynamic>> updateGrievanceDetails({
     grievanceJson,
     bool? isLoading,
   }) async {
@@ -3807,20 +3807,20 @@ class Repository {
       );
       print(res.data);
       if (!res.hasError) {
-        return true;
+        var responseMap = json.decode(res.data);
+        return responseMap;
       } //
       else {
         Utility.showDialog(res.errorCode.toString(), 'updateGrievanceDetails');
-        return false;
+        return Map();
       }
     } catch (error) {
       print(error.toString());
-      return false;
+      return Map();
     }
   }
 
-  Future<void> deleteGrievanceDetails(
-      {int? Id, bool? isLoading}) async {
+  Future<void> deleteGrievanceDetails({int? Id, bool? isLoading}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.deleteGrievanceDetails(

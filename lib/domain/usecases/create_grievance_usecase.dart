@@ -65,7 +65,7 @@ class CreateGrievanceUsecase {
        Future<GrievanceListModel?> getGrievanceDetails({bool? isLoading, int? id}) async =>
       await repository.getGrievanceDetails(isLoading: isLoading, id:id);
 
-       Future<bool> updateGrievanceDetails({
+       Future<Map<String, dynamic>>  updateGrievanceDetails({
     grievanceJson,
     bool? isLoading,
   }) async =>
