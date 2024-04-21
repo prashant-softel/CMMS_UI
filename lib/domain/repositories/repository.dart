@@ -9462,7 +9462,7 @@ class Repository {
     int? facilityId,
     bool? isLoading,
     int? actorID,
-    int? actorType,
+    int? actorType,int?mrsId
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
@@ -9471,7 +9471,7 @@ class Repository {
         facilityId: facilityId ?? 0,
         isLoading: isLoading ?? false,
         actorID: actorID,
-        actorType: actorType,
+        actorType: actorType,mrsId:mrsId
       );
 
       if (!res.hasError) {

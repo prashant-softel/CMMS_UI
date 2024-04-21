@@ -59,7 +59,7 @@ class ApproveReturnMrsContentWeb extends GetView<ApproveReturnMrsController> {
                     child: Text(" / STOCK MANAGEMENT ",
                         style: Styles.greyMediumLight12),
                   ),
-                  Text(" / RETURN EQUIPMENT APPROVAL AND REJECT",
+                  Text(" / RETURN EQUIPMENT DETAILS",
                       style: Styles.greyMediumLight12)
                 ],
               ),
@@ -80,7 +80,7 @@ class ApproveReturnMrsContentWeb extends GetView<ApproveReturnMrsController> {
                           child: Row(
                             children: [
                               Text(
-                                "Return Equipment Approval And Reject ",
+                                "Return Equipment Details ",
                                 style: Styles.blackBold16,
                               ),
                               Spacer(),
@@ -92,16 +92,17 @@ class ApproveReturnMrsContentWeb extends GetView<ApproveReturnMrsController> {
                                 "${controller.returnMrsDetailsModel.value?.id ?? ""}",
                                 style: Styles.blue17,
                               ),
-                              // Dimens.boxWidth8,
-                              // Container(
-                              //   height: 30,
-                              //   child: CustomElevatedButton(
-                              //     backgroundColor: ColorValues.appLightBlueColor,
-                              //     onPressed: () async {},
-                              //     text:
-                              //         "${controller.returnMrsDetailsModel.value?.status ?? ""}",
-                              //   ),
-                              // ),
+                              Dimens.boxWidth8,
+                              Container(
+                                height: 30,
+                                child: CustomElevatedButton(
+                                  backgroundColor:
+                                      ColorValues.appLightBlueColor,
+                                  onPressed: () async {},
+                                  text:
+                                      "${controller.returnMrsDetailsModel.value?.status_short ?? ""}",
+                                ),
+                              ),
                             ],
                           ),
                         ),
@@ -130,6 +131,15 @@ class ApproveReturnMrsContentWeb extends GetView<ApproveReturnMrsController> {
                                     'Activity:',
                                     style: Styles.black17,
                                   ),
+                                  Dimens.boxHeight10,
+                                  controller.returnMrsDetailsModel.value
+                                              ?.status ==
+                                          321
+                                      ? Dimens.box0
+                                      : Text(
+                                          'Return Approved By: ',
+                                          style: Styles.black17,
+                                        ),
                                 ],
                               ),
                               Dimens.boxWidth20,
@@ -147,6 +157,16 @@ class ApproveReturnMrsContentWeb extends GetView<ApproveReturnMrsController> {
                                               ?.activity ??
                                           "",
                                       style: Styles.blue17),
+                                  Dimens.boxHeight10,
+                                  controller.returnMrsDetailsModel.value
+                                              ?.status ==
+                                          321
+                                      ? Dimens.box0
+                                      : Text(
+                                          controller.returnMrsDetailsModel.value
+                                                  ?.approver_name ??
+                                              "",
+                                          style: Styles.blue17),
                                 ],
                               ),
                               Spacer(),
@@ -162,22 +182,41 @@ class ApproveReturnMrsContentWeb extends GetView<ApproveReturnMrsController> {
                                     'Where Used: ',
                                     style: Styles.black17,
                                   ),
+                                  Dimens.boxHeight10,
+                                  controller.returnMrsDetailsModel.value
+                                              ?.status ==
+                                          321
+                                      ? Dimens.box0
+                                      : Text(
+                                          'Approved Date Time: ',
+                                          style: Styles.black17,
+                                        ),
                                 ],
                               ),
                               Dimens.boxWidth20,
-        
+
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
                                       controller.returnMrsDetailsModel.value
-                                              ?.requestd_date ??
+                                              ?.returnDate ??
                                           "",
                                       style: Styles.blue17),
                                   Dimens.boxHeight10,
                                   Text(
-                                      "${controller.whereUsedType}${controller.returnMrsDetailsModel.value?.whereUsedTypeId ?? ""}",
+                                      "${controller.returnMrsDetailsModel.value?.whereUsedType ?? ""}${controller.returnMrsDetailsModel.value?.whereUsedTypeId ?? ""}",
                                       style: Styles.blue17),
+                                  Dimens.boxHeight10,
+                                  controller.returnMrsDetailsModel.value
+                                              ?.status ==
+                                          321
+                                      ? Dimens.box0
+                                      : Text(
+                                          controller.returnMrsDetailsModel.value
+                                                  ?.approval_date ??
+                                              "",
+                                          style: Styles.blue17),
                                 ],
                               )
                             ],
@@ -219,7 +258,8 @@ class ApproveReturnMrsContentWeb extends GetView<ApproveReturnMrsController> {
                               Expanded(
                                 child: DataTable2(
                                   border: TableBorder.all(
-                                      color: Color.fromARGB(255, 206, 229, 234)),
+                                      color:
+                                          Color.fromARGB(255, 206, 229, 234)),
                                   columns: [
                                     DataColumn(
                                         label: Text(
@@ -237,14 +277,14 @@ class ApproveReturnMrsContentWeb extends GetView<ApproveReturnMrsController> {
                                     )),
                                     DataColumn(
                                         label: Text(
-                                      "Serial Number",
+                                      "Issued Qyt.",
                                       style: TextStyle(
                                           fontSize: 15,
                                           fontWeight: FontWeight.bold),
                                     )),
                                     DataColumn(
                                         label: Text(
-                                      "Available Qyt.",
+                                      "Issued Date",
                                       style: TextStyle(
                                           fontSize: 15,
                                           fontWeight: FontWeight.bold),
@@ -277,81 +317,87 @@ class ApproveReturnMrsContentWeb extends GetView<ApproveReturnMrsController> {
                                                 .returnMrsDetailsModel
                                                 .value!
                                                 .cmmrsItems![index]
-                                                .requested_qty
-                                                .toString())),
-                                            DataCell(Text(controller
-                                                .returnMrsDetailsModel
-                                                .value!
-                                                .cmmrsItems![index]
-                                                .available_qty
-                                                .toString())),
-                                            DataCell(Text(controller
-                                                .returnMrsDetailsModel
-                                                .value!
-                                                .cmmrsItems![index]
                                                 .issued_qty
+                                                .toString())),
+                                            DataCell(Text(controller
+                                                .returnMrsDetailsModel
+                                                .value!
+                                                .cmmrsItems![index]
+                                                .issued_date
+                                                .toString())),
+                                            DataCell(Text(controller
+                                                .returnMrsDetailsModel
+                                                .value!
+                                                .cmmrsItems![index]
+                                                .returned_qty
                                                 .toString())),
                                           ])),
                                 ),
                               ),
                             ])),
-                        Container(
-                          margin: Dimens.edgeInsets15,
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              CustomRichText(title: "Comment:"),
-                              Dimens.boxWidth10,
-                              LoginCustomTextfield(
-                                width: (Get.width * .6),
-                                maxLine: 5,
-                                textController: controller.commentCtrlr,
-                              ),
-                            ],
-                          ),
-                        ),
-                        Container(
-                          margin: EdgeInsets.only(bottom: 30),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              // Container(
-                              //   height: 35,
-                              //   child: CustomElevatedButton(
-                              //     backgroundColor: ColorValues.cancelColor,
-                              //     text: "Cancel",
-                              //     onPressed: () {},
-                              //   ),
-                              // ),
-                              // SizedBox(
-                              //   width: 20,
-                              // ),
-                              Container(
-                                height: 35,
-                                child: CustomElevatedButton(
-                                  backgroundColor: ColorValues.approveColor,
-                                  text: 'Approve',
-                                  onPressed: () {
-                                    controller.approveReturnMrs();
-                                  },
+                        controller.returnMrsDetailsModel.value?.status == 321
+                            ? Container(
+                                margin: Dimens.edgeInsets15,
+                                child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    CustomRichText(title: "Comment:"),
+                                    Dimens.boxWidth10,
+                                    LoginCustomTextfield(
+                                      width: (Get.width * .6),
+                                      maxLine: 5,
+                                      textController: controller.commentCtrlr,
+                                    ),
+                                  ],
                                 ),
-                              ),
-                              SizedBox(
-                                width: 20,
-                              ),
-                              Container(
-                                height: 35,
-                                child: CustomElevatedButton(
-                                  backgroundColor: ColorValues.rejectColor,
-                                  text: 'Reject',
-                                  onPressed: () {
-                                    controller.rejectRetrunMrs();
-                                  },
+                              )
+                            : Dimens.box0,
+                        controller.returnMrsDetailsModel.value?.status == 321
+                            ? Container(
+                                margin: EdgeInsets.only(bottom: 30),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    // Container(
+                                    //   height: 35,
+                                    //   child: CustomElevatedButton(
+                                    //     backgroundColor: ColorValues.cancelColor,
+                                    //     text: "Cancel",
+                                    //     onPressed: () {},
+                                    //   ),
+                                    // ),
+                                    // SizedBox(
+                                    //   width: 20,
+                                    // ),
+                                    Container(
+                                      height: 35,
+                                      child: CustomElevatedButton(
+                                        backgroundColor:
+                                            ColorValues.approveColor,
+                                        text: 'Approve',
+                                        onPressed: () {
+                                          controller.approveReturnMrs();
+                                        },
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width: 20,
+                                    ),
+                                    Container(
+                                      height: 35,
+                                      child: CustomElevatedButton(
+                                        backgroundColor:
+                                            ColorValues.rejectColor,
+                                        text: 'Reject',
+                                        onPressed: () {
+                                          controller.rejectRetrunMrs();
+                                        },
+                                      ),
+                                    ),
+                                  ],
                                 ),
-                              ),
-                            ],
-                          ),
-                        )
+                              )
+                            : Dimens.box0
                       ],
                     ),
                   ),

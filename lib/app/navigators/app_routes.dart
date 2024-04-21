@@ -143,7 +143,7 @@ abstract class Routes {
   static const issueMrsApprove = _Paths.issueMrsApprove;
   static const profile = _Paths.profile;
   static const changePassword = _Paths.changePassword;
-  static const returnMrsView = _Paths.returnMrsView;
+  // static const returnMrsView = _Paths.returnMrsView;
   static const approverReturnMrs = _Paths.approverReturnMrs;
   static const receiveGoodsOrders = _Paths.receiveGoodsOrders;
   static const addModuleCleaningExecutionContentWeb =
@@ -348,8 +348,8 @@ abstract class _Paths {
   static const issueMrsApprove = '/issue-mrs-approve-reject';
   static const profile = '/profile';
   static const changePassword = '/changePassword';
-  static const returnMrsView = '/returnMrsView';
-  static const approverReturnMrs = '/approverReturnMrs';
+  // static const returnMrsView = '/returnMrsView';
+  static const approverReturnMrs = '/returnMrsView';
   static const receiveGoodsOrders = '/receiveGoodsOrders';
   static const purchaseGoodsorder = '/purchaseGoodsorder';
   static const purchaseGoodsorderView = '/purchaseGoodsorderView';

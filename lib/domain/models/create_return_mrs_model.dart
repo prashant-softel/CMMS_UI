@@ -32,6 +32,7 @@ class CreateReturnMrsModel {
       CreateReturnMrsModel(
         ID: json["ID"],
         facility_ID: json["facility_ID"],
+        activity: json["activity"],
         from_actor_id: json["from_actor_id"],
         to_actor_id: json["to_actor_id"],
         from_actor_type_id: json["from_actor_type_id"],
@@ -39,7 +40,7 @@ class CreateReturnMrsModel {
         remarks: json["remarks"],
         setAsTemplate: json["setAsTemplate"],
         whereUsedType: json["whereUsedType"],
-        whereUsedTypeId: json["whereUsedTypeId"],
+        whereUsedTypeId: json["whereUsedRefID"],
         cmmrsItems: List<CmmsItem>.from(
             json["cmmrsItems"].map((x) => CmmsItem.fromJson(x))),
       );
@@ -51,7 +52,8 @@ class CreateReturnMrsModel {
         "to_actor_id": to_actor_id,
         "from_actor_id": from_actor_id,
         "facility_ID": facility_ID,
-        "whereUsedTypeId": whereUsedTypeId,
+        "activity": activity,
+        "whereUsedRefID": whereUsedTypeId,
         "whereUsedType": whereUsedType,
         "setAsTemplate": setAsTemplate,
         "remarks": remarks,
@@ -71,10 +73,10 @@ class CmmsItem {
 
   int? asset_item_ID;
   int? approval_required;
-  int? issued_qty;
+  dynamic issued_qty;
   String? return_remarks;
-  int? requested_qty;
-  int? returned_qty;
+  dynamic requested_qty;
+  dynamic returned_qty;
 
   int? is_faulty;
 
