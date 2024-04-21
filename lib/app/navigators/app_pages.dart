@@ -324,8 +324,6 @@ import '../role_List/view/role_list_screen.dart';
 import '../view_incident_report/view_incident_report_binding.dart';
 import '../view_incident_report/view_incident_report_screen.dart';
 import '../view_pm_plan/view/view_pm_plan_screen.dart';
-import '../view_return_mrs/view/view_return_mrs_screen.dart';
-import '../view_return_mrs/view_return_mrs_binding.dart';
 import '../view_user_detail/view/view_user_detail_screen.dart';
 import '../view_user_detail/view_user_detail_binding.dart';
 import '../warrantyType/view/warranty_list_screen.dart';
@@ -978,11 +976,7 @@ class AppPages {
       page: ChangePasswordScreen.new,
       binding: ChangePasswordBinding(),
     ),
-    GetPage<dynamic>(
-      name: _Paths.returnMrsView,
-      page: MrsReturnViewScreen.new,
-      binding: MrsReturnViewBinding(),
-    ),
+
     GetPage<dynamic>(
       name: _Paths.approverReturnMrs,
       page: ApproveReturnMrsScreen.new,

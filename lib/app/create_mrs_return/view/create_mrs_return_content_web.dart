@@ -214,7 +214,7 @@ class CreateMrsReturnContentWeb extends GetView<CreateMrsReturnController> {
                                   child: ScrollableTableView(
                                     columns: [
                                       "Material Name",
-                                      "Available Qty",
+                                      "Issue Qty",
                                       "Return Qty",
                                       "Is Faulty?",
                                       "Remark",
@@ -354,7 +354,7 @@ class CreateMrsReturnContentWeb extends GetView<CreateMrsReturnController> {
                                                         : (mapData['key'] ==
                                                                 "Issue_Qty")
                                                             ? Text(
-                                                                "${controller.dropdownMapperData.value[record[0]['value']]?.balance ?? ""}")
+                                                                "${controller.dropdownMapperData.value[record[0]['value']]?.issued_qty ?? ""}")
                                                             : (mapData['key'] ==
                                                                     "is_faulty")
                                                                 ? Padding(

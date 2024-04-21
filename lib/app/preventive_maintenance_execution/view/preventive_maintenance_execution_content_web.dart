@@ -663,6 +663,10 @@ class PreventiveMaintenanceExecutionContentWeb
                                                   ColorValues.linktopermitColor,
                                               text: "Return Mrs",
                                               onPressed: () {
+                                                controller
+                                                    .getMrsListByModuleTask(
+                                                        taskId: controller
+                                                            .scheduleId.value);
                                                 // controller.clearStoreTaskData();
                                                 // controller
                                                 //     .clearStoreTaskActivityData();
@@ -687,7 +691,12 @@ class PreventiveMaintenanceExecutionContentWeb
                                                       "activity": controller
                                                           .pmtaskViewModel
                                                           .value
-                                                          ?.plan_title
+                                                          ?.plan_title,
+                                                      "mrsId": controller
+                                                              .listMrsByTaskId![
+                                                                  0]!
+                                                              .mrsId ??
+                                                          0
                                                     });
                                               },
                                             ),
