@@ -5,7 +5,15 @@ class WasteDataPresenter {
   WasteDataPresenter(this.wasteDataUsecase);
   WasteDataUsecase wasteDataUsecase;
 
-  ///
+  Future<Map<String, dynamic>?> createWasteData({
+    createWasteData,
+    required bool isLoading,
+  }) async {
+    return wasteDataUsecase.createWasteData(
+      createWasteData: createWasteData,
+      isLoading: isLoading,
+    );
+  }
 
   Future<List<FacilityModel?>?> getFacilityList({bool? isLoading}) async =>
       await wasteDataUsecase.getFacilityList(isLoading: isLoading);

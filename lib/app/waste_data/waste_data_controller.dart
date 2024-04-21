@@ -5,6 +5,8 @@ import 'package:cmms/app/waste_data/waste_data_presenter.dart';
 
 import 'package:cmms/domain/models/business_list_model.dart';
 import 'package:cmms/domain/models/business_type_model.dart';
+import 'package:cmms/domain/models/create_waste_data_model.dart';
+import 'package:cmms/domain/models/create_water_data_model.dart';
 import 'package:cmms/domain/models/facility_model.dart';
 import 'package:cmms/domain/models/type_model.dart';
 import 'package:flutter/material.dart';
@@ -24,6 +26,7 @@ class WasteDataController extends GetxController {
   Rx<String> selectedBusinessType = ''.obs;
   RxList<FacilityModel?> facilityList = <FacilityModel>[].obs;
 
+  int facilityId = 0;
   Rx<String> selectedBlock = ''.obs;
   Rx<DateTime> selectedWasteDataTime = DateTime.now().obs;
   var wasteDataTimeCtrlr = TextEditingController();
@@ -132,6 +135,35 @@ class WasteDataController extends GetxController {
     }
 
     return newTime;
+  }
+
+  void createWasteData() async {
+    String _descriptionCtrlr = descriptionCtrlr.text.trim();
+    String _qtCtrlr = qtyCtrlr.text.trim();
+    DateTime procurementTime = selectedWasteDataTime.value;
+    String formattedDate =
+        DateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'").format(procurementTime);
+
+    CreateWasteData createWasteData = CreateWasteData(
+      consumeType: 1,
+      facilityId: facilityId,
+      creditQty: 0,
+      date: formattedDate,
+      debitQty: double.tryParse(_qtCtrlr) ?? 0,
+      description: _descriptionCtrlr,
+      wasteTypeId: 1,
+    );
+    var createWaterDataModelJsonString = createWasteData.toJson();
+    Map<String, dynamic>? responseCreateWaterDataModel =
+        await wasteDataPresenter.createWasteData(
+      createWasteData: createWaterDataModelJsonString,
+      isLoading: true,
+    );
+
+    // Handle the response
+    if (responseCreateWaterDataModel == null) {}
+
+    print('Create Water data: $createWaterDataModelJsonString');
   }
 
   void onValueChanged(dynamic list, dynamic value) {

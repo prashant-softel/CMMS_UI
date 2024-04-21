@@ -2850,6 +2850,29 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> createWasteData({
+    required String auth,
+    createWasteData,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'MISMaster/CreateWasteData',
+      Request.post,
+      createWasteData,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    print('Submit Waste Orders Response:${responseModel.data}');
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+
+    return responseModel;
+  }
+
   Future<ResponseModel> createGrievance({
     required String auth,
     bool? isLoading,
