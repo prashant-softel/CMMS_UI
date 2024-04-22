@@ -306,6 +306,20 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> getTypeOfWasteList(
+      {required bool isLoading, required String auth, int? facilityId}) async {
+    ResponseModel responseModel = await apiWrapper.makeRequest(
+      'MISMaster/GetWasteType?facility_id=$facilityId',
+      Request.getMultiparts,
+      null,
+      isLoading,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
   Future<ResponseModel> updatePaidBy(
       {required bool isLoading, required String auth, int? facilityId}) async {
     ResponseModel responseModel = await apiWrapper.makeRequest(
