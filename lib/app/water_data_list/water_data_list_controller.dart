@@ -1,11 +1,10 @@
 import 'dart:async';
-
 import 'package:cmms/app/home/home_controller.dart';
 import 'package:cmms/app/water_data_list/water_data_list_presenter.dart';
 import 'package:cmms/domain/models/audit_plan_list_model.dart';
 import 'package:cmms/domain/models/create_water_data_model.dart';
-import 'package:cmms/domain/models/type_model.dart';
 import 'package:cmms/domain/models/type_of_water_model.dart';
+import 'package:cmms/domain/models/water_data_list_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -17,39 +16,37 @@ class WaterDataListController extends GetxController {
   );
   WaterDataListPresenter waterDataListPresenter;
   final HomeController homecontroller = Get.find();
-  RxList<AuditPlanListModel> auditPlanList = <AuditPlanListModel>[].obs;
-  RxList<AuditPlanListModel> filteredData = <AuditPlanListModel>[].obs;
 
   Rx<DateTime> selectedProcurementTime = DateTime.now().obs;
   var procurementTimeCtrlr = TextEditingController();
-  // Rx<int> Plan Id = 0.obs;
   RxList<WaterSource?> typeOfWaterList = <WaterSource>[].obs;
   Rx<bool> istypeOfWaterListSelected = true.obs;
   Rx<String> selectedtypeOfWater = ''.obs;
   int selectedTypeOfWaterId = 0;
+  Rx<DateTime> fromDate = DateTime.now().subtract(Duration(days: 7)).obs;
+  Rx<DateTime> toDate = DateTime.now().obs;
+  String get formattedFromdate =>
+      DateFormat('dd/MM/yyyy').format(fromDate.value);
+  String get formattedTodate => DateFormat('dd/MM/yyyy').format(toDate.value);
+  String get formattedTodate1 => DateFormat('yyyy-MM-dd').format(toDate.value);
+  String get formattedFromdate1 =>
+      DateFormat('yyyy-MM-dd').format(fromDate.value);
+  RxList<WaterDataList> waterDataList = <WaterDataList>[].obs;
+  RxList<WaterDataList> filteredData = <WaterDataList>[].obs;
+  WaterDataList? waterDataListModel;
+  RxList<String> waterDataListTableColumns = <String>[].obs;
 
   var descriptionCtrlr = TextEditingController();
   var qtyCtrlr = TextEditingController();
 
   RxString statusFilterText = ''.obs;
 
-  //Start DateTime
   bool openStartDatePicker = false;
-
-  // Rx<DateTime> fromDate = DateTime.now().subtract(Duration(days: 7)).obs;
-  // Rx<DateTime> toDate = DateTime.now().obs;
-  // String get formattedFromdate =>
-  //     DateFormat('dd/MM/yyyy').format(fromDate.value);
-  // String get formattedTodate => DateFormat('dd/MM/yyyy').format(toDate.value);
-  // String get formattedTodate1 => DateFormat('yyyy-MM-dd').format(toDate.value);
-  // String get formattedFromdate1 =>
-  //     DateFormat('yyyy-MM-dd').format(fromDate.value);
 
   final columnVisibility = ValueNotifier<Map<String, bool>>({
     'Plan ID': true,
     'SOP Number': true,
     'Checklist': true,
-    // 'Site Name': true,
     'Start Date': true,
     'Frequency Name': true,
   });
@@ -57,7 +54,6 @@ class WaterDataListController extends GetxController {
     'Plan ID': 153,
     'SOP Number': 320,
     'Checklist': 220,
-    // 'Site Name': 200,
     'Start Date': 250,
     'Frequency Name': 250,
   };
@@ -80,16 +76,55 @@ class WaterDataListController extends GetxController {
   StreamSubscription<int>? facilityIdStreamSubscription;
   int facilityId = 0;
   Rx<int> type = 0.obs;
+  Rx<bool> isLoading = true.obs;
 
   @override
   void onInit() async {
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
       facilityId = event;
+      Future.delayed(
+        Duration(seconds: 2),
+        () async {
+          await getWaterDataList(
+              facilityId, formattedTodate1, formattedFromdate1, false);
+        },
+      );
       Future.delayed(Duration(seconds: 1), () async {
         getTypeOfWaterList();
       });
     });
+
     super.onInit();
+  }
+
+  Future<void> getWaterDataList(
+      int facilityId, dynamic startDate, dynamic endDate, bool isExport) async {
+    waterDataList.value = <WaterDataList>[];
+    filteredData.value = <WaterDataList>[];
+
+    final _waterDataList = await waterDataListPresenter.getWaterDataList(
+        isLoading: isLoading.value,
+        start_date: startDate,
+        end_date: endDate,
+        facility_id: facilityId,
+        isExport: isExport);
+    if (_waterDataList != null) {
+      waterDataList.value = _waterDataList;
+      isLoading.value = false;
+      paginationController = PaginationController(
+        rowCount: waterDataList.length,
+        rowsPerPage: 10,
+      );
+      if (waterDataList.isNotEmpty) {
+        filteredData.value = waterDataList.value;
+        waterDataListModel = waterDataList[0];
+        var newPermitListJson = waterDataListModel?.toJson();
+        waterDataListTableColumns.value = <String>[];
+        // for (var key in newPermitListJson?.keys.toList() ?? []) {
+        //   waterDataListTableColumns.add(key);
+        // }
+      }
+    }
   }
 
   void getTypeOfWaterList() async {
