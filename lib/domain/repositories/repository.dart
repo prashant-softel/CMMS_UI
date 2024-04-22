@@ -3987,8 +3987,7 @@ class Repository {
     }
   }
 
-  Future<void> deleteGrievanceDetails(
-      {int? Id, bool? isLoading}) async {
+  Future<void> deleteGrievanceDetails({int? Id, bool? isLoading}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.deleteGrievanceDetails(
@@ -9527,21 +9526,17 @@ class Repository {
     }
   }
 
-  Future<List<PlantStockListModel?>?> getPlantStockListReturn(
-    int? facilityId,
-    bool? isLoading,
-    int? actorID,
-    int? actorType,int?mrsId
-  ) async {
+  Future<List<PlantStockListModel?>?> getPlantStockListReturn(int? facilityId,
+      bool? isLoading, int? actorID, int? actorType, int? mrsId) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.getPlantStockListReturn(
-        auth: auth,
-        facilityId: facilityId ?? 0,
-        isLoading: isLoading ?? false,
-        actorID: actorID,
-        actorType: actorType,mrsId:mrsId
-      );
+          auth: auth,
+          facilityId: facilityId ?? 0,
+          isLoading: isLoading ?? false,
+          actorID: actorID,
+          actorType: actorType,
+          mrsId: mrsId);
 
       if (!res.hasError) {
         final jsonPlantStockListModels = jsonDecode(res.data);
@@ -10033,7 +10028,7 @@ class Repository {
           approvetoJsonString: approvetoJsonString);
       print({"res.data", res.data});
       if (!res.hasError) {
-        Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
+        Fluttertoast.showToast(msg: "MRS approved!", fontSize: 45.0);
 
         return true;
       } else {
@@ -10108,7 +10103,7 @@ class Repository {
 
       if (!res.hasError) {
         Fluttertoast.showToast(
-            msg: " Mrs edit Successfully...", fontSize: 16.0);
+            msg: "MRS updated Successfully...", fontSize: 16.0);
       } else {
         Utility.showDialog(res.errorCode.toString(), 'editMrs');
         //return '';
@@ -10246,7 +10241,7 @@ class Repository {
           issuetoJsonString: issuetoJsonString);
       print({"res.data", res.data});
       if (!res.hasError) {
-        Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
+        Fluttertoast.showToast(msg: 'MRS issued!', fontSize: 45.0);
 
         return true;
       } else {
@@ -10270,7 +10265,7 @@ class Repository {
           issuemrsapprovetoJsonString: issuemrsapprovetoJsonString);
       print({"res.data", res.data});
       if (!res.hasError) {
-        Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
+        Fluttertoast.showToast(msg: "MRS approved!", fontSize: 45.0);
 
         return true;
       } else {

@@ -11,6 +11,7 @@ import 'package:data_table_2/data_table_2.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import '../preventive_maintenance_execution/preventive_maintenance_execution_controller.dart';
 import '../theme/dimens.dart';
@@ -636,33 +637,48 @@ class ObservationPmExecutionViewDialog extends GetView {
                                                                             ? Padding(
                                                                                 padding: const EdgeInsets.only(top: 10),
                                                                                 child: Container(
-                                                                                    decoration: BoxDecoration(
-                                                                                      boxShadow: [
-                                                                                        BoxShadow(
-                                                                                          color: Colors.black26,
-                                                                                          offset: const Offset(
-                                                                                            5.0,
-                                                                                            5.0,
-                                                                                          ),
-                                                                                          blurRadius: 5.0,
-                                                                                          spreadRadius: 1.0,
+                                                                                  decoration: BoxDecoration(
+                                                                                    boxShadow: [
+                                                                                      BoxShadow(
+                                                                                        color: Colors.black26,
+                                                                                        offset: const Offset(
+                                                                                          5.0,
+                                                                                          5.0,
                                                                                         ),
-                                                                                      ],
-                                                                                      color: ColorValues.whiteColor,
-                                                                                      borderRadius: BorderRadius.circular(5),
-                                                                                    ),
-                                                                                    child: LoginCustomTextfield(
-                                                                                      width: (Get.width * .4),
-                                                                                      keyboardType: TextInputType.number,
-                                                                                      inputFormatters: <TextInputFormatter>[
-                                                                                        FilteringTextInputFormatter.digitsOnly
-                                                                                      ],
-                                                                                      maxLine: 1,
-                                                                                      textController: new TextEditingController(text: mapData["value"] ?? ''),
-                                                                                      onChanged: (txt) {
+                                                                                        blurRadius: 5.0,
+                                                                                        spreadRadius: 1.0,
+                                                                                      ),
+                                                                                    ],
+                                                                                    color: ColorValues.whiteColor,
+                                                                                    borderRadius: BorderRadius.circular(5),
+                                                                                  ),
+                                                                                  child: LoginCustomTextfield(
+                                                                                    width: (Get.width * .4),
+                                                                                    keyboardType: TextInputType.number,
+                                                                                    inputFormatters: <TextInputFormatter>[
+                                                                                      FilteringTextInputFormatter.digitsOnly
+                                                                                    ],
+                                                                                    maxLine: 1,
+                                                                                    textController: new TextEditingController(text: mapData["value"] ?? ''),
+                                                                                    onChanged: (txt) {
+                                                                                      // Ensure the entered value is less than or equal to the issued qty
+                                                                                      num issuedQty = controller.dropdownMapperData[record[0]['value']]?.issued_qty ?? 0;
+                                                                                      num usedQty = controller.dropdownMapperData[record[0]['value']]?.used_qty ?? 0;
+                                                                                      int consumedQty = int.tryParse(txt) ?? 0;
+
+                                                                                      if (consumedQty <= issuedQty && (usedQty == 0 || consumedQty <= usedQty)) {
                                                                                         mapData["value"] = txt;
-                                                                                      },
-                                                                                    )),
+                                                                                      } else {
+                                                                                        // If the entered quantity exceeds the issued quantity, show an error message or handle it accordingly
+                                                                                        Fluttertoast.showToast(msg: "Enter appropriate consumed quantity.");
+                                                                                        // Reset the consumed quantity to the previous valid value
+                                                                                        setState(() {
+                                                                                          mapData["value"] = mapData["value"]!;
+                                                                                        });
+                                                                                      }
+                                                                                    },
+                                                                                  ),
+                                                                                ),
                                                                               )
                                                                             : Text(mapData['value'] ??
                                                                                 ''),
