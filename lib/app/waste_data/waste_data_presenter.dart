@@ -1,4 +1,5 @@
 import 'package:cmms/domain/models/facility_model.dart';
+import 'package:cmms/domain/models/type_of_waste_model.dart';
 import 'package:cmms/domain/usecases/waste_data_usecase.dart';
 
 class WasteDataPresenter {
@@ -12,6 +13,16 @@ class WasteDataPresenter {
     return wasteDataUsecase.createWasteData(
       createWasteData: createWasteData,
       isLoading: isLoading,
+    );
+  }
+
+  Future<List<WasteSource>> getTypeOfWasteList({
+    required bool isLoading,
+    required int? facilityId,
+  }) async {
+    return wasteDataUsecase.getTypeOfWasteList(
+      isLoading: isLoading,
+      facilityId: facilityId,
     );
   }
 

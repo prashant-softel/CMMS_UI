@@ -149,7 +149,7 @@ class WaterDataListController extends GetxController {
       date: formattedDate,
       debitQty: double.tryParse(_qtCtrlr) ?? 0,
       description: _descriptionCtrlr,
-      waterTypeId: 1,
+      waterTypeId: selectedTypeOfWaterId,
     );
     var createWaterDataModelJsonString = createWaterData.toJson();
     Map<String, dynamic>? responseCreateWaterDataModel =
