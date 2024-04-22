@@ -1,53 +1,35 @@
+import 'dart:convert';
+
+List<WaterDataList> MrsModelFromJson(String str) => List<WaterDataList>.from(
+    json.decode(str).map((x) => WaterDataList.fromJson(x)));
+
+String WaterDataListToJson(List<WaterDataList> data) =>
+    json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+
 class WaterDataList {
-  List<FacilityData> facilities;
+  int? facilityID;
+  String? facilityName;
 
-  WaterDataList({
-    required this.facilities,
-  });
-
-  factory WaterDataList.fromJson(List<dynamic> json) {
-    List<FacilityData> facilities = [];
-    for (var facilityJson in json) {
-      facilities.add(FacilityData.fromJson(facilityJson));
-    }
-    return WaterDataList(facilities: facilities);
-  }
-
-  List<Map<String, dynamic>> toJson() {
-    return facilities.map((facility) => facility.toJson()).toList();
-  }
-}
-
-class FacilityData {
-  int facilityId;
-  String facilityName;
   List<PeriodData> periods;
 
-  FacilityData({
-    required this.facilityId,
-    required this.facilityName,
-    required this.periods,
-  });
+  WaterDataList({required this.periods, this.facilityID, this.facilityName});
 
-  factory FacilityData.fromJson(Map<String, dynamic> json) {
-    List<PeriodData> periods = [];
-    for (var periodJson in json['period']) {
-      periods.add(PeriodData.fromJson(periodJson));
-    }
-    return FacilityData(
-      facilityId: json['facility_id'],
-      facilityName: json['facility_name'],
+  factory WaterDataList.fromJson(Map<String, dynamic> parsedJson) {
+    var list = parsedJson['periods'] as List;
+    print(list.runtimeType);
+    List<PeriodData> periods = list.map((i) => PeriodData.fromJson(i)).toList();
+
+    return WaterDataList(
+      facilityID: parsedJson['facilityID'],
+      facilityName: parsedJson['facilityName'],
       periods: periods,
     );
   }
-
-  Map<String, dynamic> toJson() {
-    return {
-      'facility_id': facilityId,
-      'facility_name': facilityName,
-      'period': periods.map((period) => period.toJson()).toList(),
-    };
-  }
+  Map<String, dynamic> toJson() => {
+        "facilityID": facilityID,
+        "facilityName": facilityName,
+        "periods": List<dynamic>.from(periods.map((x) => x.toJson())),
+      };
 }
 
 class PeriodData {
