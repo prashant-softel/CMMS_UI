@@ -216,6 +216,56 @@ class DataRepository extends DomainRepository {
     );
   }
 
+  Future<ResponseModel> getWaterTypeById({
+    String? auth,
+    int? waterTypeId,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.getWaterTypeById(
+        auth: auth,
+        waterTypeId: waterTypeId,
+        isLoading: isLoading,
+      );
+
+  Future<ResponseModel> createWaterType({
+    auth,
+    waterTypeJson,
+    bool? isLoading,
+  }) async {
+    var response = await connectHelper.createWaterType(
+      auth: auth,
+      waterTypeJson: waterTypeJson,
+      isLoading: isLoading,
+    );
+    return response;
+  }
+
+  Future<ResponseModel> updateWaterType({
+    auth,
+    waterTypeJson,
+    bool? isLoading,
+  }) async {
+    var response = await connectHelper.updateWaterType(
+      auth: auth,
+      waterTypeJson: waterTypeJson,
+      isLoading: isLoading,
+    );
+    return response;
+  }
+
+  Future<ResponseModel> deleteWaterType({
+    auth,
+    int? waterTypeId,
+    bool? isLoading,
+  }) async {
+    var response = await connectHelper.deleteWaterType(
+      auth: auth,
+      waterTypeId: waterTypeId,
+      isLoading: isLoading,
+    );
+    return response;
+  }
+
   Future<ResponseModel> updatePaidBy({
     int? facilityId,
     required bool isLoading,
@@ -3302,14 +3352,15 @@ class DataRepository extends DomainRepository {
     bool? isLoading,
     int? actorID,
     int? actorType,
+    int? mrsId,
   }) async =>
       await connectHelper.getPlantStockListReturn(
-        auth: auth,
-        facilityId: facilityId ?? 0,
-        isLoading: isLoading ?? false,
-        actorID: actorID,
-        actorType: actorType,
-      );
+          auth: auth,
+          facilityId: facilityId ?? 0,
+          isLoading: isLoading ?? false,
+          actorID: actorID,
+          actorType: actorType,
+          mrsId: mrsId);
 
   Future<ResponseModel> getFaultyMaterialReportList({
     required String auth,
@@ -4143,6 +4194,20 @@ class DataRepository extends DomainRepository {
     );
     return response;
   }
+
+   Future<ResponseModel> deleteGrievanceDetails({
+    auth,
+    int? Id,
+    bool? isLoading,
+  }) async {
+    var response = await connectHelper.deleteGrievanceDetails(
+      auth: auth,
+      Id: Id,
+      isLoading: isLoading,
+    );
+    return response;
+  }
+
 
   Future<ResponseModel> getGrievanceType({
     String? auth,

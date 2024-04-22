@@ -296,6 +296,12 @@ class MastersController extends GetxController {
     );
   }
 
+  Future<void> waterTypeMaster() async {
+    Get.toNamed(
+      Routes.waterTypeMaster,
+    );
+  }
+
   Future<void> breakdownMaintenance() async {
     Get.toNamed(
       Routes.warrantyClaimListWeb,

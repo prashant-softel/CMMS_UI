@@ -201,12 +201,12 @@ class ReturnMrsListContentMobile extends GetView<ReturnMrsListController> {
                                                             .toString() ??
                                                         "";
                                                 print({"mrsId": mrsId});
-                                                Get.toNamed(
-                                                    Routes.returnMrsView,
-                                                    arguments: {
-                                                      'mrsId':
-                                                          int.tryParse("$mrsId")
-                                                    });
+                                                // Get.toNamed(
+                                                //     Routes.approverReturnMrs,
+                                                //     arguments: {
+                                                //       'mrsId':
+                                                //           int.tryParse("$mrsId")
+                                                //     });
                                               },
                                               text: 'Edit MRS',
                                               icon: Icons.edit,

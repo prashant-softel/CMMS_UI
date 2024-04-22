@@ -25,6 +25,7 @@ class FileUploadController extends GetxController {
   Rx<int> index = 0.obs;
   RxList<XFile> pickedFiles = <XFile>[].obs;
   Rx<bool> uploadingImage = false.obs;
+  Rx<bool> showUploadButton = true.obs;
   var selectedEvent = FileUploadEvents.BEFORE.obs;
   var token = '';
   List<TextEditingController> descriptionCtrlrs = [];
@@ -227,6 +228,7 @@ class FileUploadController extends GetxController {
 
   uploadSelectedFiles() async {
     uploadingImage.value = true;
+    showUploadButton.value = false;
     if (bytesDataList != null) {
       await uploadFiles(
         pickedFiles,

@@ -18,10 +18,11 @@ class ReturnMrsDetailsModel {
   String? status_short;
   String? status_long;
   String? activity;
-  int? whereUsedType;
+  String? whereUsedType;
   int? whereUsedTypeId;
   String? remarks;
   String? issued_name;
+  dynamic returned_qty;
   List<CmmsItems>? cmmrsItems;
 
   ReturnMrsDetailsModel(
@@ -43,7 +44,8 @@ class ReturnMrsDetailsModel {
       this.remarks,
       this.issued_date,
       this.issued_name,
-      this.status_long});
+      this.status_long,
+      this.returned_qty});
 
   factory ReturnMrsDetailsModel.fromJson(Map<String, dynamic> parsedJson) {
     var list = parsedJson['cmmrsItems'] as List;
@@ -53,6 +55,7 @@ class ReturnMrsDetailsModel {
 
     return ReturnMrsDetailsModel(
       activity: parsedJson['activity'],
+      returned_qty: parsedJson['returned_qty'],
       issued_date: parsedJson['issued_date'],
       issued_name: parsedJson['issued_name'],
       approval_comment: parsedJson['approval_comment'],
@@ -65,10 +68,10 @@ class ReturnMrsDetailsModel {
       requested_by_name: parsedJson['requested_by_name'],
       returnDate: parsedJson['returnDate'],
       status_short: parsedJson['status_short'],
-      whereUsedTypeId: parsedJson['whereUsedTypeId'],
+      whereUsedTypeId: parsedJson['whereUsedRefID'],
       cmmrsItems: cmmrsItems,
       status: parsedJson['status'],
-      whereUsedType: parsedJson['whereUsedType'],
+      whereUsedType: parsedJson['whereUsedTypeName'],
       remarks: parsedJson['remarks'],
       status_long: parsedJson['status_long'],
     );
@@ -76,6 +79,7 @@ class ReturnMrsDetailsModel {
   Map<String, dynamic> toJson() => {
         "activity": activity,
         "issued_date": issued_date,
+        "returned_qty": returned_qty,
         "issued_name": issued_name,
         "approval_comment": approval_comment,
         "approval_date": approval_date,
@@ -87,9 +91,9 @@ class ReturnMrsDetailsModel {
         "requested_by_name": requested_by_name,
         "returnDate": returnDate,
         "status_short": status_short,
-        "whereUsedTypeId": whereUsedTypeId,
+        "whereUsedRefID": whereUsedTypeId,
         "status": status,
-        "whereUsedType": whereUsedType,
+        "whereUsedTypeName": whereUsedType,
         "remarks": remarks,
         "status_long": status_long,
         "cmmrsItems":

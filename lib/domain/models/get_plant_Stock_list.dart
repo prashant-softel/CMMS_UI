@@ -6,6 +6,7 @@ List<PlantStockListModel> MrsModelFromJson(String str) =>
 
 String plantstockListModelToJson(List<PlantStockListModel> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+
 class PlantStockListModel {
   int? facilityID;
   String? facilityName;
@@ -35,6 +36,12 @@ class PlantStockListModel {
 }
 
 class StockDetails {
+  dynamic serial_no;
+  dynamic available_qty;
+  dynamic requested_qty;
+  dynamic consumed_qty;
+  dynamic issued_qty;
+  dynamic approved_qty;
   int? facility_Is_Block;
   dynamic facility_Is_Block_of_name;
   int? assetItemID;
@@ -58,11 +65,23 @@ class StockDetails {
       this.facility_Is_Block_of_name,
       this.inward,
       this.opening,
-      this.outward});
+      this.outward,
+      this.approved_qty,
+      this.available_qty,
+      this.consumed_qty,
+      this.issued_qty,
+      this.requested_qty,
+      this.serial_no});
 
   factory StockDetails.fromJson(Map<String, dynamic> parsedJson) {
     return StockDetails(
       assetItemID: parsedJson['assetItemID'],
+      approved_qty: parsedJson['approved_qty'],
+      available_qty: parsedJson['available_qty'],
+      consumed_qty: parsedJson['consumed_qty'],
+      issued_qty: parsedJson['issued_qty'],
+      requested_qty: parsedJson['requested_qty'],
+      serial_no: parsedJson['serial_no'],
       asset_code: parsedJson['asset_code'],
       asset_type_ID: parsedJson['asset_type_ID'],
       asset_type: parsedJson['asset_type'],
@@ -77,6 +96,12 @@ class StockDetails {
   }
   Map<String, dynamic> toJson() => {
         "assetItemID": assetItemID,
+        "approved_qty": approved_qty,
+        "available_qty": available_qty,
+        "consumed_qty": consumed_qty,
+        "issued_qty": issued_qty,
+        "requested_qty": requested_qty,
+        "serial_no": serial_no,
         "asset_code": asset_code,
         "asset_type_ID": asset_type_ID,
         "balance": balance,

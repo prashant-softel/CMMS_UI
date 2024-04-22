@@ -129,6 +129,8 @@ import 'package:cmms/app/tool_type/views/tool_type_screen.dart';
 import 'package:cmms/app/training_courses/training_course_binding.dart';
 import 'package:cmms/app/training_courses/views/training_course_screen.dart';
 import 'package:cmms/app/transaction_report/view/transaction_report_list_screen.dart';
+import 'package:cmms/app/type_water_master/type_water_master_binding.dart';
+import 'package:cmms/app/type_water_master/view/type_water_master_screen.dart';
 import 'package:cmms/app/vegetation_control/vegetation_binding.dart';
 import 'package:cmms/app/vegetation_control/view/vegetation_dashboard_screen.dart';
 import 'package:cmms/app/vegetation_execution_plan_list/veg_execution_list_binding.dart';
@@ -326,8 +328,6 @@ import '../role_List/view/role_list_screen.dart';
 import '../view_incident_report/view_incident_report_binding.dart';
 import '../view_incident_report/view_incident_report_screen.dart';
 import '../view_pm_plan/view/view_pm_plan_screen.dart';
-import '../view_return_mrs/view/view_return_mrs_screen.dart';
-import '../view_return_mrs/view_return_mrs_binding.dart';
 import '../view_user_detail/view/view_user_detail_screen.dart';
 import '../view_user_detail/view_user_detail_binding.dart';
 import '../warrantyType/view/warranty_list_screen.dart';
@@ -980,11 +980,7 @@ class AppPages {
       page: ChangePasswordScreen.new,
       binding: ChangePasswordBinding(),
     ),
-    GetPage<dynamic>(
-      name: _Paths.returnMrsView,
-      page: MrsReturnViewScreen.new,
-      binding: MrsReturnViewBinding(),
-    ),
+
     GetPage<dynamic>(
       name: _Paths.approverReturnMrs,
       page: ApproveReturnMrsScreen.new,
@@ -1239,6 +1235,11 @@ class AppPages {
       name: _Paths.dsmDashboardScreen,
       page: DsmDashboard.new,
       binding: DsmDashboardBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.waterTypeMaster,
+      page: WaterTypeMasterScreen.new,
+      binding: WaterTypeMasterBinding(),
     ),
   ];
 }

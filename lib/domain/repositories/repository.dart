@@ -2219,6 +2219,105 @@ class Repository {
     }
   }
 
+  Future<WaterSource?> getWaterTypeById({
+    bool? isLoading,
+    int? waterTypeId,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getWaterTypeById(
+          auth: auth, waterTypeId: waterTypeId, isLoading: isLoading);
+
+      if (!res.hasError) {
+        final jsonWaterType = jsonDecode(res.data);
+        final WaterSource _waterType = jsonWaterType
+            .map<WaterSource>(
+                (m) => WaterSource.fromJson(Map<String, dynamic>.from(m)))
+            .toList();
+        return _waterType;
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString(), 'getWaterTypeById');
+        return null;
+      }
+    } catch (error) {
+      print(error.toString());
+      return null;
+    }
+  }
+
+  Future<bool> createWaterType({
+    bool? isLoading,
+    waterTypeJson,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.createWaterType(
+        auth: auth,
+        waterTypeJson: waterTypeJson,
+        isLoading: isLoading,
+      );
+
+      if (!res.hasError) {
+        return true;
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString(), ' createWaterType');
+        return false;
+      }
+    } catch (error) {
+      print(error.toString());
+      return false;
+    }
+  }
+
+  Future<bool> updateWaterType({
+    waterTypeJson,
+    bool? isLoading,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.updateWaterType(
+        auth: auth,
+        waterTypeJson: waterTypeJson,
+        isLoading: isLoading,
+      );
+      print(res.data);
+      if (!res.hasError) {
+        return true;
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString(), 'updateWaterType');
+        return false;
+      }
+    } catch (error) {
+      print(error.toString());
+      return false;
+    }
+  }
+
+  Future<void> deleteWaterType({
+    int? waterTypeId,
+    bool? isLoading,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.deleteWaterType(
+        auth: auth,
+        waterTypeId: waterTypeId,
+        isLoading: isLoading,
+      );
+
+      if (!res.hasError) {
+        //get delete response back from API
+      } else {
+        Utility.showDialog(res.errorCode.toString(), 'deleteWaterType');
+      }
+    } catch (error) {
+      print(error.toString());
+    }
+  }
+
   Future<Map<String, dynamic>> goodsOrderApprovedButton(
     goodsOrderApproveJsonString,
     bool? isLoading,
@@ -3885,6 +3984,26 @@ class Repository {
     } catch (error) {
       print(error.toString());
       return false;
+    }
+  }
+
+  Future<void> deleteGrievanceDetails(
+      {int? Id, bool? isLoading}) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.deleteGrievanceDetails(
+        auth: auth,
+        Id: Id,
+        isLoading: isLoading,
+      );
+
+      if (!res.hasError) {
+        //get delete response back from API
+      } else {
+        Utility.showDialog(res.errorCode.toString(), 'deleteGrievance');
+      }
+    } catch (error) {
+      print(error.toString());
     }
   }
 
@@ -9412,7 +9531,7 @@ class Repository {
     int? facilityId,
     bool? isLoading,
     int? actorID,
-    int? actorType,
+    int? actorType,int?mrsId
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
@@ -9421,7 +9540,7 @@ class Repository {
         facilityId: facilityId ?? 0,
         isLoading: isLoading ?? false,
         actorID: actorID,
-        actorType: actorType,
+        actorType: actorType,mrsId:mrsId
       );
 
       if (!res.hasError) {

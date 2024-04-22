@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:cmms/app/utils/utility.dart';
 
 List<ReturnMrsListModel> MrsModelFromJson(String str) =>
     List<ReturnMrsListModel>.from(
@@ -21,7 +22,7 @@ class ReturnMrsListModel {
   String? status_short;
   String? status_long;
   String? activity;
-  int? whereUsedType;
+  String? whereUsedType;
   int? whereUsedTypeId;
   int? issplitted;
   String? remarks;
@@ -63,13 +64,15 @@ class ReturnMrsListModel {
       requestd_date: parsedJson['requestd_date'],
       requested_by_emp_ID: parsedJson['requested_by_emp_ID'],
       requested_by_name: parsedJson['requested_by_name'],
-      returnDate: parsedJson['returnDate'],
+      returnDate: // parsedJson['returnDate'] == null
+          parsedJson['returnDate'],
+      //Utility.getFormatedyearMonthDay(parsedJson['returnDate']),
       status_short: parsedJson['status_short'],
       whereUsedTypeId: parsedJson['whereUsedRefID'],
       issplitted: parsedJson['is_splited'],
       cmmrsItems: cmmrsItems,
       status: parsedJson['status'],
-      whereUsedType: parsedJson['whereUsedType'],
+      whereUsedType: parsedJson['whereUsedTypeName'],
       remarks: parsedJson['remarks'],
       status_long: parsedJson['status_long'],
     );
@@ -89,7 +92,7 @@ class ReturnMrsListModel {
         "whereUsedRefID": whereUsedTypeId,
         "is_splited": issplitted,
         "status": status,
-        "whereUsedType": whereUsedType,
+        "whereUsedTypeName": whereUsedType,
         "remarks": remarks,
         "status_long": status_long,
         "cmmrsItems":
