@@ -291,7 +291,7 @@ class MrsIssueContentWeb extends GetView<MrsIssueController> {
                                             )),
                                             DataColumn(
                                                 label: Text(
-                                              "Issued Qyt.",
+                                              "Issued Qty.",
                                               style: TextStyle(
                                                   fontSize: 15,
                                                   fontWeight: FontWeight.bold),

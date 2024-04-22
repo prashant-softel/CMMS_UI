@@ -4608,5 +4608,52 @@ class DataRepository extends DomainRepository {
         auth: auth, isLoading: isLoading, freqJsonString: freqJsonString);
     return response;
   }
+  // Future<ResponseModel> createWasteType({
+  //   auth,
+  //   wasteTypeJson,
+  //   bool? isLoading,
+  // }) async {
+  //   var response = await connectHelper.createWasteType(
+  //     auth: auth,
+  //     wasteTypeJson: wasteTypeJson,
+  //     isLoading: isLoading,
+  //   );
+  //   return response;
+  // }
+  // Future<ResponseModel> updateWasteType({
+  //   auth,
+  //   wasteTypeJson,
+  //   bool? isLoading,
+  // }) async {
+  //   var response = await connectHelper.updateWasteType(
+  //     auth: auth,
+  //     wasteTypeJson: wasteTypeJson,
+  //     isLoading: isLoading,
+  //   );
+  //   return response;
+  // }
+  // Future<ResponseModel> deleteWasteType({
+  //   auth,
+  //   int? wasteTypeId,
+  //   bool? isLoading,
+  // }) async {
+  //   var response = await connectHelper.deleteWasteType(
+  //     auth: auth,
+  //     wasteTypeId: wasteTypeId,
+  //     isLoading: isLoading,
+  //   );
+  //   return response;
+  // }
+  // Future<ResponseModel> getTypeOfWasteList({
+  //   int? facilityId,
+  //   required bool isLoading,
+  //   required String auth,
+  // }) async {
+  //   return await connectHelper.getTypeOfWasteList(
+  //     isLoading: isLoading,
+  //     auth: auth,
+  //     facilityId: facilityId,
+  //   );
+  // }
 //end
 }
