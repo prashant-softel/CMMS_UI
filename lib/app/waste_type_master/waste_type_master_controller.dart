@@ -4,7 +4,8 @@ import 'package:cmms/app/home/home_controller.dart';
 import 'package:cmms/app/theme/color_values.dart';
 import 'package:cmms/app/theme/styles.dart';
 import 'package:cmms/app/waste_type_master/waste_type_master_presenter.dart';
-import 'package:cmms/domain/models/waste_type_master_model.dart';
+import 'package:cmms/domain/models/type_of_waste_model.dart';
+
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';

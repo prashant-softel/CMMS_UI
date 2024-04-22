@@ -1,5 +1,5 @@
-import 'package:cmms/domain/models/waste_type_master_model.dart';
 import 'package:cmms/domain/usecases/waste_type_master_usecase.dart';
+import 'package:cmms/domain/models/type_of_waste_model.dart';
 
 class WasteTypeMasterPresenter {
   WasteTypeMasterPresenter(this.wasteTypeMasterUsecase);
