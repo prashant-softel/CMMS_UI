@@ -71,14 +71,13 @@ class CreateGrievancePresenter {
       await createGrievanceUsecase.getGrievanceDetails(id: id, isLoading: isLoading);
 
 
-  Future<bool> updateGrievanceDetails({
+  Future<Map<String, dynamic>>  updateGrievanceDetails({
     grievanceJson,
     bool? isLoading,
   }) async {
-     createGrievanceUsecase.updateGrievanceDetails(
+     return createGrievanceUsecase.updateGrievanceDetails(
       grievanceJson: grievanceJson,
       isLoading: isLoading,
     );
-    return true;
   }
 }
