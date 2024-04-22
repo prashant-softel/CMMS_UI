@@ -77,6 +77,7 @@ import 'package:cmms/domain/models/stock_management_update_goods_orders_model.da
 import 'package:cmms/domain/models/supplier_name_model.dart';
 import 'package:cmms/domain/models/tools_model.dart';
 import 'package:cmms/domain/models/transaction_report_list_model.dart';
+import 'package:cmms/domain/models/type_of_waste_model.dart';
 import 'package:cmms/domain/models/type_of_water_model.dart';
 import 'package:cmms/domain/models/type_permit_model.dart';
 import 'package:cmms/domain/models/update_pm_task_execution_model.dart';
@@ -784,6 +785,46 @@ class Repository {
         // Fluttertoast.showToast(msg: "Data add successfully...", fontSize: 16.0);
       } else {
         Utility.showDialog(res.errorCode.toString(), 'Craete Water Data');
+        //return '';
+      }
+      return Map();
+    } catch (error) {
+      print(error.toString());
+      return Map();
+    }
+  }
+
+  Future<Map<String, dynamic>> createWasteData(
+    createWasteData,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.createWasteData(
+        auth: auth,
+        createWasteData: createWasteData,
+        isLoading: isLoading ?? false,
+      );
+
+      var resourceData = res.data;
+
+      print('Response Create Water data : ${resourceData}');
+
+      if (!res.hasError) {
+        Fluttertoast.showToast(
+            msg: "Submit Water Data  Successfully...", fontSize: 16.0);
+        Get.offAllNamed(
+          Routes.wasteData,
+        );
+
+        // if (res.errorCode == 200) {
+        //   var responseMap = json.decode(res.data);
+        //   return responseMap;
+        // }
+
+        // Fluttertoast.showToast(msg: "Data add successfully...", fontSize: 16.0);
+      } else {
+        Utility.showDialog(res.errorCode.toString(), 'Craete Waste Data');
         //return '';
       }
       return Map();
@@ -2143,6 +2184,34 @@ class Repository {
       if (!res.hasError) {
         var typeOfWaterList = waterSourceListModelFromJson(res.data);
         return typeOfWaterList;
+      }
+      return [];
+    } catch (error) {
+      log(error.toString());
+      return [];
+    }
+  }
+
+  Future<List<WasteSource>> getTypeOfWasteList({
+    required int? facilityId,
+    // int? blockId,
+    // required String categoryIds,
+    required bool isLoading,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+
+      log(auth);
+      final res = await _dataRepository.getTypeOfWasteList(
+        facilityId: facilityId,
+        isLoading: isLoading,
+        auth: auth,
+      );
+      print('Waste Source List Data: ${res.data}');
+
+      if (!res.hasError) {
+        var typeOfWasteList = wasteSourceListModelFromJson(res.data);
+        return typeOfWasteList;
       }
       return [];
     } catch (error) {
@@ -9463,7 +9532,7 @@ class Repository {
     int? facilityId,
     bool? isLoading,
     int? actorID,
-    int? actorType,
+    int? actorType,int?mrsId
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
@@ -9472,7 +9541,7 @@ class Repository {
         facilityId: facilityId ?? 0,
         isLoading: isLoading ?? false,
         actorID: actorID,
-        actorType: actorType,
+        actorType: actorType,mrsId:mrsId
       );
 
       if (!res.hasError) {

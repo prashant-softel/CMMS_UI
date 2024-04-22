@@ -13,13 +13,10 @@ class CreateMrsReturnUsecase {
     bool? isLoading,
     int? actorID,
     int? actorType,
+    int? mrsId,
   }) async =>
       await repository.getPlantStockListReturn(
-        facilityId,
-        isLoading,
-        actorID,
-        actorType,
-      );
+          facilityId, isLoading, actorID, actorType, mrsId);
   Future<Map<String, dynamic>> createReturnMrs({
     createReturnMrsJsonString,
     bool? isLoading,

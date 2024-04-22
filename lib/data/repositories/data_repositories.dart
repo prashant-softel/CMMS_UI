@@ -204,6 +204,18 @@ class DataRepository extends DomainRepository {
     );
   }
 
+  Future<ResponseModel> getTypeOfWasteList({
+    int? facilityId,
+    required bool isLoading,
+    required String auth,
+  }) async {
+    return await connectHelper.getTypeOfWasteList(
+      isLoading: isLoading,
+      auth: auth,
+      facilityId: facilityId,
+    );
+  }
+
   Future<ResponseModel> getWaterTypeById({
     String? auth,
     int? waterTypeId,
@@ -1702,6 +1714,16 @@ class DataRepository extends DomainRepository {
       await connectHelper.createWaterData(
         auth: auth,
         createWaterData: createWaterData,
+        isLoading: isLoading ?? false,
+      );
+  Future<ResponseModel> createWasteData({
+    required String auth,
+    createWasteData,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.createWasteData(
+        auth: auth,
+        createWasteData: createWasteData,
         isLoading: isLoading ?? false,
       );
   Future<ResponseModel> submitPurchaseOrderData({
@@ -3330,14 +3352,15 @@ class DataRepository extends DomainRepository {
     bool? isLoading,
     int? actorID,
     int? actorType,
+    int? mrsId,
   }) async =>
       await connectHelper.getPlantStockListReturn(
-        auth: auth,
-        facilityId: facilityId ?? 0,
-        isLoading: isLoading ?? false,
-        actorID: actorID,
-        actorType: actorType,
-      );
+          auth: auth,
+          facilityId: facilityId ?? 0,
+          isLoading: isLoading ?? false,
+          actorID: actorID,
+          actorType: actorType,
+          mrsId: mrsId);
 
   Future<ResponseModel> getFaultyMaterialReportList({
     required String auth,

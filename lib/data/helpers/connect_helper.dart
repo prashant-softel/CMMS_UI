@@ -306,6 +306,20 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> getTypeOfWasteList(
+      {required bool isLoading, required String auth, int? facilityId}) async {
+    ResponseModel responseModel = await apiWrapper.makeRequest(
+      'MISMaster/GetWasteType?facility_id=$facilityId',
+      Request.getMultiparts,
+      null,
+      isLoading,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
   Future<ResponseModel> getWaterTypeById(
       {String? auth, int? waterTypeId, bool? isLoading}) async {
     ResponseModel response = ResponseModel(data: '', hasError: true);
@@ -2917,6 +2931,29 @@ class ConnectHelper {
     );
 
     print('Submit Water Orders Response:${responseModel.data}');
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> createWasteData({
+    required String auth,
+    createWasteData,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'MISMaster/CreateWasteData',
+      Request.post,
+      createWasteData,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    print('Submit Waste Orders Response:${responseModel.data}');
     var res = responseModel.data;
     var parsedJson = json.decode(res);
 
@@ -5754,15 +5791,17 @@ class ConnectHelper {
     return responseModel;
   }
 
-  Future<ResponseModel> getPlantStockListReturn({
-    required String auth,
-    bool? isLoading,
-    int? facilityId,
-    int? actorID,
-    int? actorType,
-  }) async {
+  Future<ResponseModel> getPlantStockListReturn(
+      {required String auth,
+      bool? isLoading,
+      int? facilityId,
+      int? actorID,
+      int? actorType,
+      int? mrsId}) async {
     var responseModel = await apiWrapper.makeRequest(
-      'SMReports/GetStockReport?facility_id=$facilityId&actorTypeID=$actorType&actorID=$actorID',
+      // 'SMReports/GetStockReport?facility_id=$facilityId&actorTypeID=$actorType&actorID=$actorID',
+      'MRS/getMRSReturnStockItems?mrs_id=$mrsId',
+
       Request.get,
       null,
       isLoading ?? false,

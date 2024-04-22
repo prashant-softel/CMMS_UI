@@ -5,8 +5,11 @@ import 'package:cmms/app/waste_data/waste_data_presenter.dart';
 
 import 'package:cmms/domain/models/business_list_model.dart';
 import 'package:cmms/domain/models/business_type_model.dart';
+import 'package:cmms/domain/models/create_waste_data_model.dart';
+import 'package:cmms/domain/models/create_water_data_model.dart';
 import 'package:cmms/domain/models/facility_model.dart';
 import 'package:cmms/domain/models/type_model.dart';
+import 'package:cmms/domain/models/type_of_waste_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -16,7 +19,8 @@ class WasteDataController extends GetxController {
     this.wasteDataPresenter,
   );
   WasteDataPresenter wasteDataPresenter;
-  HomeController homeController = Get.find();
+
+  final HomeController homecontroller = Get.find();
   RxList<BusinessListModel?> ownerList = <BusinessListModel>[].obs;
   Rx<bool> isSelectedBusinessType = true.obs;
 
@@ -24,11 +28,16 @@ class WasteDataController extends GetxController {
   Rx<String> selectedBusinessType = ''.obs;
   RxList<FacilityModel?> facilityList = <FacilityModel>[].obs;
 
+  int facilityId = 0;
   Rx<String> selectedBlock = ''.obs;
   Rx<DateTime> selectedWasteDataTime = DateTime.now().obs;
   var wasteDataTimeCtrlr = TextEditingController();
   var qtyCtrlr = TextEditingController();
   var descriptionCtrlr = TextEditingController();
+  RxList<WasteSource?> typeOfWasteList = <WasteSource>[].obs;
+  Rx<bool> istypeOfWasteListSelected = true.obs;
+  Rx<String> selectedtypeOfWaste = ''.obs;
+  int selectedTypeOfWasteId = 0;
 
   StreamSubscription<int>? facilityIdStreamSubscription;
   StreamSubscription<String>? facilityNameStreamSubscription;
@@ -53,6 +62,12 @@ class WasteDataController extends GetxController {
   ///
   @override
   void onInit() async {
+    facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
+      facilityId = event;
+      Future.delayed(Duration(seconds: 1), () async {
+        getTypeOfWasteList();
+      });
+    });
     super.onInit();
   }
 
@@ -67,6 +82,20 @@ class WasteDataController extends GetxController {
     if (facilityList.isNotEmpty) {
       selectedBlock.value = facilityList[0]?.name ?? '';
     }
+  }
+
+  void getTypeOfWasteList() async {
+    typeOfWasteList.value = <WasteSource>[];
+    final _typeOfWaterList = await wasteDataPresenter.getTypeOfWasteList(
+      isLoading: true,
+      facilityId: facilityId,
+    );
+    print('type Of Water List:$typeOfWasteList');
+    for (var waste_data_list in _typeOfWaterList) {
+      typeOfWasteList.add(waste_data_list);
+    }
+
+    update(['unit_currency_list']);
   }
 
   Future pickDateTime(BuildContext context) async {
@@ -134,12 +163,42 @@ class WasteDataController extends GetxController {
     return newTime;
   }
 
+  void createWasteData() async {
+    String _descriptionCtrlr = descriptionCtrlr.text.trim();
+    String _qtCtrlr = qtyCtrlr.text.trim();
+    DateTime procurementTime = selectedWasteDataTime.value;
+    String formattedDate =
+        DateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'").format(procurementTime);
+
+    CreateWasteData createWasteData = CreateWasteData(
+      consumeType: 1,
+      facilityId: facilityId,
+      creditQty: 0,
+      date: formattedDate,
+      debitQty: double.tryParse(_qtCtrlr) ?? 0,
+      description: _descriptionCtrlr,
+      wasteTypeId: selectedTypeOfWasteId,
+    );
+    var createWaterDataModelJsonString = createWasteData.toJson();
+    Map<String, dynamic>? responseCreateWaterDataModel =
+        await wasteDataPresenter.createWasteData(
+      createWasteData: createWaterDataModelJsonString,
+      isLoading: true,
+    );
+
+    // Handle the response
+    if (responseCreateWaterDataModel == null) {}
+
+    print('Create Water data: $createWaterDataModelJsonString');
+  }
+
   void onValueChanged(dynamic list, dynamic value) {
     switch (list.runtimeType) {
-      case RxList<BusinessTypeModel>:
+      case RxList<WasteSource>:
         {
-          int equipmentIndex = ownerList.indexWhere((x) => x?.name == value);
-          selectedBusinessTypeId = ownerList[equipmentIndex]?.id ?? 0;
+          int typeOfWaterIndex =
+              typeOfWasteList.indexWhere((x) => x?.name == value);
+          selectedTypeOfWasteId = typeOfWasteList[typeOfWaterIndex]?.id ?? 0;
         }
         break;
     }

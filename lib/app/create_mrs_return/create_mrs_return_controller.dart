@@ -37,6 +37,7 @@ class CreateMrsReturnController extends GetxController {
   Rx<int> whereUsed = 0.obs;
   Rx<int> fromActorTypeId = 0.obs;
   Rx<int> to_actor_type_id = 0.obs;
+  Rx<int> mrsId = 0.obs;
 
   var isSetTemplate = false.obs;
 
@@ -55,39 +56,42 @@ class CreateMrsReturnController extends GetxController {
     }
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
       facilityId = event;
-      Future.delayed(Duration(seconds: 1), () {
-        getCmmsItemList(
-          facilityId,
-        );
-      });
+      if (mrsId > 0) {
+        Future.delayed(Duration(seconds: 1), () {
+          getCmmsItemList(
+            facilityId,
+          );
+        });
+      }
     });
     super.onInit();
   }
 
   Future<void> setId() async {
     try {
-      final _whereUsedTypeId = await createmrsReturnPresenter.getValue();
-      final _activity = await createmrsReturnPresenter.getactivityValue();
+      // final _whereUsedTypeId = await createmrsReturnPresenter.getValue();
+      // final _activity = await createmrsReturnPresenter.getactivityValue();
 
-      if (_whereUsedTypeId == null ||
-          _whereUsedTypeId == '' ||
-          _whereUsedTypeId == "null") {
-        var dataFromPreviousScreen = Get.arguments;
+      // if (_whereUsedTypeId == null ||
+      //     _whereUsedTypeId == '' ||
+      //     _whereUsedTypeId == "null") {
+      var dataFromPreviousScreen = Get.arguments;
 
-        activity.value = dataFromPreviousScreen['activity'];
-        whereUsedTypeId.value = dataFromPreviousScreen['pmTaskId'];
-        whereUsed.value = dataFromPreviousScreen['whereUsed'];
-        fromActorTypeId.value = dataFromPreviousScreen['fromActorTypeId'];
-        to_actor_type_id.value = dataFromPreviousScreen['to_actor_type_id'];
+      activity.value = dataFromPreviousScreen['activity'];
+      whereUsedTypeId.value = dataFromPreviousScreen['pmTaskId'];
+      whereUsed.value = dataFromPreviousScreen['whereUsed'];
+      fromActorTypeId.value = dataFromPreviousScreen['fromActorTypeId'];
+      to_actor_type_id.value = dataFromPreviousScreen['to_actor_type_id'];
+      mrsId.value = dataFromPreviousScreen['mrsId'];
 
-        createmrsReturnPresenter.saveValue(
-            whereUsedTypeId: whereUsedTypeId.value.toString());
-        createmrsReturnPresenter.saveactivityValue(
-            activity: activity.value.toString());
-      } else {
-        whereUsedTypeId.value = int.tryParse(_whereUsedTypeId) ?? 0;
-        activity.value = _activity ?? "";
-      }
+      createmrsReturnPresenter.saveValue(
+          whereUsedTypeId: whereUsedTypeId.value.toString());
+      createmrsReturnPresenter.saveactivityValue(
+          activity: activity.value.toString());
+      // } else {
+      //   whereUsedTypeId.value = int.tryParse(_whereUsedTypeId) ?? 0;
+      //   activity.value = _activity ?? "";
+      // }
     } catch (e) {
       print(e.toString() + 'goId');
       //  Utility.showDialog(e.toString() + 'userId');
@@ -101,7 +105,8 @@ class CreateMrsReturnController extends GetxController {
         facilityId: facilityId,
         actorType: fromActorTypeId.value,
         actorID: whereUsedTypeId.value,
-        isLoading: false);
+        isLoading: false,
+        mrsId: mrsId.value);
     if (_assetList != null) {
       for (var facility in _assetList) {
         for (var stockDetail in facility!.stockDetails) {
@@ -144,8 +149,7 @@ class CreateMrsReturnController extends GetxController {
       CmmsItem item = CmmsItem(
         asset_item_ID:
             dropdownMapperData.value[element[0]["value"]]?.assetItemID,
-        issued_qty:
-            dropdownMapperData.value[element[0]["value"]]?.balance?.round(),
+        issued_qty: dropdownMapperData.value[element[0]["value"]].issued_qty,
         returned_qty: int.tryParse(element[2]["value"] ?? '0'),
         requested_qty: 0,
         approval_required: 0,

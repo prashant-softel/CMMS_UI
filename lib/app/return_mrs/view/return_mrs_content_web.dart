@@ -369,10 +369,10 @@ class ReturnMrsListDataSource extends DataTableSource {
     controller.MrsId.value = MrsDetails?.id ?? 0;
     var cellsBuffer = [
       "mrsId", // '${MrsDetails?.id ?? ''}',
-      "Requested by:${MrsDetails?.requested_by_name ?? ""}\nIssued by:${MrsDetails?.approver_name ?? ""}",
-      '${MrsDetails?.requestd_date ?? ''}',
+      "Requested by:${MrsDetails?.requested_by_name ?? ""}\Approved by:${MrsDetails?.approver_name ?? ""}",
+      '${MrsDetails?.returnDate ?? ''}',
       '${MrsDetails?.activity ?? ''}',
-      '${MrsDetails?.whereUsedType ?? ''}',
+      '${MrsDetails?.whereUsedType.toString().toUpperCase() ?? ''}${MrsDetails?.whereUsedTypeId ?? ''}',
       'Actions',
     ];
     var cells = [];
@@ -403,7 +403,7 @@ class ReturnMrsListDataSource extends DataTableSource {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        '${MrsDetails?.id}',
+                        'MRS${MrsDetails?.id}',
                       ),
                       Dimens.boxHeight10,
                       Align(
@@ -500,7 +500,7 @@ class ReturnMrsListDataSource extends DataTableSource {
                           onPress: () {
                             controller.clearStoreData();
                             int mrsId = MrsDetails?.id ?? 0;
-                            Get.toNamed(Routes.returnMrsView,
+                            Get.toNamed(Routes.approverReturnMrs,
                                 arguments: {'mrsId': mrsId});
                           },
                         ),
@@ -514,33 +514,34 @@ class ReturnMrsListDataSource extends DataTableSource {
                             Get.toNamed(Routes.editReturnMrs, arguments: mrsId);
                           },
                         ),
-                        // controller.mrsList!
-                        //                 .firstWhere(
-                        //                   (e) => e?.id == mrsListDetails!.id,
-                        //                   orElse: () => MrsListModel(id: 00),
-                        //                 )
-                        //                 ?.status ==
-                        //             321 &&
-                        //         controller.mrsList!
-                        //                 .firstWhere(
-                        //                   (e) => e?.id == mrsListDetails!.id,
-                        //                   orElse: () => MrsListModel(id: 00),
-                        //                 )
-                        //                 ?.approval_status ==
-                        //             0
-                        //     ?
-                        TableActionButton(
-                          color: ColorValues.approveColor,
-                          icon: Icons.check,
-                          message: 'Approve',
-                          onPress: () {
-                            controller.clearStoreData();
-                            int mrsId = MrsDetails?.id ?? 0;
-                            Get.toNamed(Routes.approverReturnMrs,
-                                arguments: {'mrsId': mrsId});
-                          },
-                        ),
-                        //     : Dimens.box0,
+                        controller.mrsList!
+                                        .firstWhere(
+                                          (e) => e?.id == MrsDetails!.id,
+                                          orElse: () =>
+                                              ReturnMrsListModel(id: 00),
+                                        )
+                                        ?.status ==
+                                    321 &&
+                                controller.mrsList!
+                                        .firstWhere(
+                                          (e) => e?.id == MrsDetails!.id,
+                                          orElse: () =>
+                                              ReturnMrsListModel(id: 00),
+                                        )
+                                        ?.approval_status ==
+                                    0
+                            ? TableActionButton(
+                                color: ColorValues.approveColor,
+                                icon: Icons.check,
+                                message: 'Approve',
+                                onPress: () {
+                                  controller.clearStoreData();
+                                  int mrsId = MrsDetails?.id ?? 0;
+                                  Get.toNamed(Routes.approverReturnMrs,
+                                      arguments: {'mrsId': mrsId});
+                                },
+                              )
+                            : Dimens.box0,
                         // controller.mrsList!
                         //             .firstWhere(
                         //               (e) => e?.id == mrsListDetails!.id,
@@ -569,33 +570,35 @@ class ReturnMrsListDataSource extends DataTableSource {
                         //   },
                         // ),
                         //     : Dimens.box0,
-                        // controller.mrsList!
-                        //                 .firstWhere(
-                        //                   (e) => e?.id == mrsListDetails!.id,
-                        //                   orElse: () => MrsListModel(id: 00),
-                        //                 )
-                        //                 ?.status ==
-                        //             321 &&
-                        //         controller.mrsList!
-                        //                 .firstWhere(
-                        //                   (e) => e?.id == mrsListDetails!.id,
-                        //                   orElse: () => MrsListModel(id: 00),
-                        //                 )
-                        //                 ?.approval_status ==
-                        //             0
-                        //     ?
-                        TableActionButton(
-                          color: ColorValues.rejectColor,
-                          icon: Icons.close,
-                          message: 'Reject',
-                          onPress: () {
-                            controller.clearStoreData();
+                        controller.mrsList!
+                                        .firstWhere(
+                                          (e) => e?.id == MrsDetails!.id,
+                                          orElse: () =>
+                                              ReturnMrsListModel(id: 00),
+                                        )
+                                        ?.status ==
+                                    321 &&
+                                controller.mrsList!
+                                        .firstWhere(
+                                          (e) => e?.id == MrsDetails!.id,
+                                          orElse: () =>
+                                              ReturnMrsListModel(id: 00),
+                                        )
+                                        ?.approval_status ==
+                                    0
+                            ? TableActionButton(
+                                color: ColorValues.rejectColor,
+                                icon: Icons.close,
+                                message: 'Reject',
+                                onPress: () {
+                                  controller.clearStoreData();
 
-                            int mrsId = MrsDetails?.id ?? 0;
-                            Get.toNamed(Routes.approverReturnMrs,
-                                arguments: {'mrsId': mrsId});
-                          },
-                        ),
+                                  int mrsId = MrsDetails?.id ?? 0;
+                                  Get.toNamed(Routes.approverReturnMrs,
+                                      arguments: {'mrsId': mrsId});
+                                },
+                              )
+                            : Dimens.box0
                       ])
                     : Text(value.toString()),
           ),
@@ -606,7 +609,7 @@ class ReturnMrsListDataSource extends DataTableSource {
         controller.clearStoreData();
         int mrsId = MrsDetails?.id ?? 0;
 
-        Get.toNamed(Routes.returnMrsView, arguments: {'mrsId': mrsId});
+        Get.toNamed(Routes.approverReturnMrs, arguments: {'mrsId': mrsId});
       },
     );
   }

@@ -127,11 +127,15 @@ class WasteGeneratedAddDialog extends GetView {
                         ),
                       ),
                       Dimens.boxHeight10,
-                      DropdownWebStock(
-                        width: MediaQuery.of(context).size.width / 5,
-                        dropdownList: controller.wasteData,
-                        // selectedValue: ,
-                        onValueChanged: (wasteData, selectedValue) {},
+                      SizedBox(
+                        child: DropdownWebStock(
+                          width: MediaQuery.of(context).size.width / 5,
+                          dropdownList: controller.typeOfWasteList,
+                          isValueSelected:
+                              controller.istypeOfWasteListSelected.value,
+                          selectedValue: controller.selectedtypeOfWaste.value,
+                          onValueChanged: controller.onValueChanged,
+                        ),
                       ),
                       Dimens.boxHeight10,
                       GoodsOrderTextField(
@@ -170,7 +174,7 @@ class WasteGeneratedAddDialog extends GetView {
                   backgroundColor: ColorValues.greenColor,
                   text: 'Submit',
                   onPressed: () {
-                    // controller.createMcPlan();
+                    controller.createWasteData();
                   },
                 ),
               ),
