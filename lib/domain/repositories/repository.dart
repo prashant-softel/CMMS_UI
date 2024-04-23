@@ -10070,7 +10070,7 @@ class Repository {
           approvetoJsonString: approvetoJsonString);
       print({"res.data", res.data});
       if (!res.hasError) {
-        Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
+        Fluttertoast.showToast(msg: "MRS approved!", fontSize: 45.0);
 
         return true;
       } else {
@@ -10145,7 +10145,7 @@ class Repository {
 
       if (!res.hasError) {
         Fluttertoast.showToast(
-            msg: " Mrs edit Successfully...", fontSize: 16.0);
+            msg: "MRS updated Successfully...", fontSize: 16.0);
       } else {
         Utility.showDialog(res.errorCode.toString(), 'editMrs');
         //return '';
@@ -10283,7 +10283,7 @@ class Repository {
           issuetoJsonString: issuetoJsonString);
       print({"res.data", res.data});
       if (!res.hasError) {
-        Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
+        Fluttertoast.showToast(msg: 'MRS issued!', fontSize: 45.0);
 
         return true;
       } else {
@@ -10307,7 +10307,7 @@ class Repository {
           issuemrsapprovetoJsonString: issuemrsapprovetoJsonString);
       print({"res.data", res.data});
       if (!res.hasError) {
-        Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
+        Fluttertoast.showToast(msg: "MRS approved!", fontSize: 45.0);
 
         return true;
       } else {
