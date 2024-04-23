@@ -38,6 +38,7 @@ class JobCardDetailsModel {
       this.status_long,
       this.status_short,
       this.created_by,
+      this.fileListJc,
       this.jC_Approved,
       this.jC_Start_By_Name});
 
@@ -63,6 +64,7 @@ class JobCardDetailsModel {
   List<dynamic>? lstCmjcLotoDetailList;
   List<SelectedEmployee>? lstCmjcEmpList;
   List<FilesModel?>? fileList;
+  List<FilesModel?>? fileListJc;
   List<ToolList>? toolList;
   int? status;
   String? status_short;
@@ -105,6 +107,8 @@ class JobCardDetailsModel {
             json["lstCMJCEmpList"].map((x) => SelectedEmployee.fromJson(x))),
         fileList: List<FilesModel>.from(
             json["file_list"].map((x) => FilesModel.fromJson(x))),
+        fileListJc: List<FilesModel>.from(
+            json["file_listJc"].map((x) => FilesModel.fromJson(x))),
         toolList: List<ToolList>.from(
             json["tool_List"].map((x) => ToolList.fromJson(x))),
       );
@@ -347,7 +351,6 @@ class SelectedEmployee {
 
   Map<String, dynamic> toJson() => {
         "empId": empId,
-        "empName": empName,
         "responsibility": responsibility,
       };
 }

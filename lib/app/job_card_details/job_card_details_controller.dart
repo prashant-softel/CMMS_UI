@@ -34,7 +34,9 @@ class JobCardDetailsController extends GetxController {
   /// History
   var historyController = Get.put(HistoryController());
   RxList<HistoryModel?>? historyList = <HistoryModel?>[].obs;
-  RxList<FilesModel?>? file_list = <FilesModel?>[].obs;
+  RxList<FilesModel?> file_list = <FilesModel?>[].obs;
+  RxList<FilesModel?> file_list_new = <FilesModel?>[].obs;
+  RxList<FilesModel?> allFiles = <FilesModel?>[].obs;
 
   /// Employee Table
   Rx<String> selectedEmployeeName = ''.obs;
@@ -101,7 +103,7 @@ class JobCardDetailsController extends GetxController {
   Rx<int> currentIndex = 0.obs;
   final unescape = HtmlUnescape();
   var descriptionOfWorkDoneCtrlr = TextEditingController();
-  Map<String, EmployeeModel> deployedEmployeeMapperData = {};
+  RxMap<dynamic, dynamic> deployedEmployeeMapperData = {}.obs;
 
   RxString selectedOption = ''.obs;
   RxList<List<Map<String, String>>> employeesDeployed =
@@ -258,7 +260,11 @@ class JobCardDetailsController extends GetxController {
         // "Equipment Categories": jobCardDetailsModel.value?.assetCategoryName,
       };
     }
-    file_list?.value = jobCardDetailsModel.value?.fileList ?? [];
+    file_list.value = jobCardDetailsModel.value?.fileList ?? [];
+    file_list_new.value = jobCardDetailsModel.value?.fileListJc ?? [];
+
+    allFiles.addAll(file_list);
+    allFiles.addAll(file_list_new);
   }
 
   void createJobDetailsTableData() {

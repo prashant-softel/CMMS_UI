@@ -4,6 +4,7 @@ import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/widgets/custom_textField.dart';
+import 'package:cmms/app/widgets/dropdown_web.dart';
 import 'package:cmms/app/widgets/job_card_approve_dialog.dart';
 import 'package:cmms/app/widgets/job_card_reject_dialog.dart';
 import 'package:cmms/app/widgets/stock_dropdown.dart';
@@ -359,10 +360,10 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                           Dimens.boxHeight20,
                           CustomDivider(),
                           Dimens.boxHeight20,
-                          controller.file_list!.length > 0
+                          controller.allFiles.length > 0
                               ? Container(
                                   margin: Dimens.edgeInsets20,
-                                  height: ((controller.file_list?.length ?? 0) *
+                                  height: ((controller.allFiles.length ?? 0) *
                                           40) +
                                       130,
                                   decoration: BoxDecoration(
@@ -421,11 +422,11 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                                             ),
                                           ],
                                           rows: List<DataRow>.generate(
-                                            controller.file_list?.length ?? 0,
+                                            controller.allFiles.length ?? 0,
                                             (index) => DataRow(
                                               cells: [
                                                 DataCell(Text(
-                                                  controller.file_list![index]
+                                                  controller.allFiles[index]
                                                           ?.description
                                                           .toString() ??
                                                       '',
@@ -446,7 +447,7 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                                                           // 'http://172.20.43.9:83/';
                                                           String fileName =
                                                               controller
-                                                                      .file_list![
+                                                                      .allFiles[
                                                                           index]
                                                                       ?.fileName ??
                                                                   "";
@@ -1016,48 +1017,29 @@ class DeployedTeam extends StatelessWidget {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        Container(
-                                          decoration: BoxDecoration(
-                                            boxShadow: [
-                                              BoxShadow(
-                                                color: Colors.black26,
-                                                offset: const Offset(
-                                                  5.0,
-                                                  5.0,
-                                                ),
-                                                blurRadius: 5.0,
-                                                spreadRadius: 1.0,
-                                              ),
-                                            ],
-                                            color: ColorValues.whiteColor,
-                                            borderRadius:
-                                                BorderRadius.circular(5),
-                                          ),
-                                          child: DropdownWebStock(
-                                            width: MediaQuery.of(context)
-                                                    .size
-                                                    .width /
-                                                4,
-                                            controller: controller,
-                                            dropdownList:
-                                                controller.employeeList,
-                                            selectedValue: mapData["value"],
-                                            onValueChanged:
-                                                (list, selectedValue) {
-                                              if (selectedValue != null) {
-                                                controller.updateSelectedOption(
-                                                    selectedValue);
-                                              }
-                                              mapData["value"] = selectedValue;
-                                              controller.deployedEmployeeMapperData[
-                                                      selectedValue] =
-                                                  list.firstWhere(
-                                                      (element) =>
-                                                          element.name ==
-                                                          selectedValue,
-                                                      orElse: null);
-                                            },
-                                          ),
+                                        DropdownWebWidget(
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width /
+                                              4,
+                                          // controller: controller,
+                                          dropdownList: controller.employeeList,
+                                          selectedValue: mapData["value"],
+                                          onValueChanged:
+                                              (list, selectedValue) {
+                                            // if (selectedValue != null) {
+                                            //   controller.updateSelectedOption(
+                                            //       selectedValue);
+                                            // }
+                                            mapData["value"] = selectedValue;
+                                            controller.deployedEmployeeMapperData[
+                                                    selectedValue] =
+                                                list.firstWhere(
+                                                    (element) =>
+                                                        element.name ==
+                                                        selectedValue,
+                                                    orElse: null);
+                                          },
                                         ),
                                       ],
                                     ),
