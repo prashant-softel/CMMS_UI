@@ -29,6 +29,7 @@ class FileUploadController extends GetxController {
   var selectedEvent = FileUploadEvents.BEFORE.obs;
   var token = '';
   List<TextEditingController> descriptionCtrlrs = [];
+  List<TextEditingController> newDescriptionCtrlrs = [];
   List<List<int>>? bytesDataList;
   Rx<double?> tileHeight = 0.0.obs;
 
@@ -45,9 +46,10 @@ class FileUploadController extends GetxController {
   ///
   Future<List<XFile>> addFiles() async {
     final ImagePicker picker = ImagePicker();
-    pickedFiles.value = await picker.pickMultiImage();
-    // if (pickedFiles.isNotEmpty)
-    initializeDescriptionControllers(pickedFiles.value);
+    final List<XFile> newFiles = await picker.pickMultiImage();
+    pickedFiles.addAll(newFiles);
+    initializeDescriptionControllers(
+        newFiles); // assuming this method takes a list of XFile
     return pickedFiles.value;
   }
 
@@ -176,10 +178,11 @@ class FileUploadController extends GetxController {
   }
 
   void initializeDescriptionControllers(List<XFile> files) {
-    descriptionCtrlrs = List<TextEditingController>.generate(
+    newDescriptionCtrlrs = List<TextEditingController>.generate(
       files.length,
       (index) => TextEditingController(),
     );
+    descriptionCtrlrs.addAll(newDescriptionCtrlrs);
   }
 
   void removeFile(file) {
@@ -227,6 +230,7 @@ class FileUploadController extends GetxController {
   }
 
   uploadSelectedFiles() async {
+    fileIds.clear();
     uploadingImage.value = true;
     showUploadButton.value = false;
     if (bytesDataList != null) {
