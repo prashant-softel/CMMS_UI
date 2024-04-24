@@ -91,6 +91,7 @@ import 'package:cmms/domain/models/view_warranty_claim_model.dart';
 import 'package:cmms/domain/models/warranty_claim_model.dart';
 import 'package:cmms/domain/models/warranty_type_model.dart';
 import 'package:cmms/domain/models/warranty_usage_term_list_model.dart';
+import 'package:cmms/domain/models/water_data_list_model.dart';
 import 'package:cmms/domain/models/work_type_model.dart';
 import 'package:cmms/domain/repositories/repositories.dart';
 import 'package:cmms/domain/models/facility_model.dart';
@@ -1450,6 +1451,46 @@ class Repository {
         }
 
         return _goodOrderModelList.reversed.toList();
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString(), 'getIncidentReportList');
+        return [];
+      }
+    } catch (error) {
+      print(error.toString());
+      return [];
+    }
+  }
+
+  Future<List<WaterDataList>> getWaterDataList({
+    required int? facility_id,
+    bool? isExport,
+    String? start_date,
+    required String end_date,
+    required bool isLoading,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+
+      log(auth);
+      final res = await _dataRepository.getWaterDataList(
+        facility_id: facility_id,
+        start_date: start_date,
+        end_date: end_date,
+        isLoading: isLoading,
+        auth: auth,
+      );
+      print('water data list: ${res.data}');
+
+      if (!res.hasError) {
+        final jsonWaterDataListModels = jsonDecode(res.data);
+
+        final List<WaterDataList> _WaterDataListList = jsonWaterDataListModels
+            .map<WaterDataList>(
+                (m) => WaterDataList.fromJson(Map<String, dynamic>.from(m)))
+            .toList();
+
+        return _WaterDataListList.reversed.toList();
       } //
       else {
         Utility.showDialog(res.errorCode.toString(), 'getIncidentReportList');
@@ -9527,21 +9568,17 @@ class Repository {
     }
   }
 
-  Future<List<PlantStockListModel?>?> getPlantStockListReturn(
-    int? facilityId,
-    bool? isLoading,
-    int? actorID,
-    int? actorType,int?mrsId
-  ) async {
+  Future<List<PlantStockListModel?>?> getPlantStockListReturn(int? facilityId,
+      bool? isLoading, int? actorID, int? actorType, int? mrsId) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.getPlantStockListReturn(
-        auth: auth,
-        facilityId: facilityId ?? 0,
-        isLoading: isLoading ?? false,
-        actorID: actorID,
-        actorType: actorType,mrsId:mrsId
-      );
+          auth: auth,
+          facilityId: facilityId ?? 0,
+          isLoading: isLoading ?? false,
+          actorID: actorID,
+          actorType: actorType,
+          mrsId: mrsId);
 
       if (!res.hasError) {
         final jsonPlantStockListModels = jsonDecode(res.data);
@@ -10033,7 +10070,7 @@ class Repository {
           approvetoJsonString: approvetoJsonString);
       print({"res.data", res.data});
       if (!res.hasError) {
-        Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
+        Fluttertoast.showToast(msg: "MRS approved!", fontSize: 45.0);
 
         return true;
       } else {
@@ -10108,7 +10145,7 @@ class Repository {
 
       if (!res.hasError) {
         Fluttertoast.showToast(
-            msg: " Mrs edit Successfully...", fontSize: 16.0);
+            msg: "MRS updated Successfully...", fontSize: 16.0);
       } else {
         Utility.showDialog(res.errorCode.toString(), 'editMrs');
         //return '';
@@ -10246,7 +10283,7 @@ class Repository {
           issuetoJsonString: issuetoJsonString);
       print({"res.data", res.data});
       if (!res.hasError) {
-        Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
+        Fluttertoast.showToast(msg: 'MRS issued!', fontSize: 45.0);
 
         return true;
       } else {
@@ -10270,7 +10307,7 @@ class Repository {
           issuemrsapprovetoJsonString: issuemrsapprovetoJsonString);
       print({"res.data", res.data});
       if (!res.hasError) {
-        Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
+        Fluttertoast.showToast(msg: "MRS approved!", fontSize: 45.0);
 
         return true;
       } else {

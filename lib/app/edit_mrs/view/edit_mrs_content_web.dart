@@ -64,9 +64,9 @@ class EditMrsContentWeb extends GetView<EditMrsController> {
                       Get.back();
                     },
                     child:
-                        Text(" / MRS LIST ", style: Styles.greyLight14),
+                        Text(" / MRS LIST", style: Styles.greyLight14),
                   ),
-                  Text(" / NEW MATERIAL SLIP ", style: Styles.greyLight14)
+                  Text(" / NEW MATERIAL SLIP", style: Styles.greyLight14)
                 ],
               ),
             ),

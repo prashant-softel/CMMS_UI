@@ -922,6 +922,26 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> getWaterDataList({
+    required bool isLoading,
+    required String auth,
+    int? facility_id,
+    String? start_date,
+    required String end_date,
+  }) async {
+    ResponseModel responseModel = await apiWrapper.makeRequest(
+      'MISMaster/GetWaterDataListMonthWise?facility_id=$facility_id&fromDate=$end_date&toDate=$start_date',
+      Request.getMultiparts,
+      null,
+      isLoading,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
   Future<ResponseModel> transactionReport({
     required bool isLoading,
     required String auth,
@@ -7252,7 +7272,6 @@ class ConnectHelper {
     return responseModel;
   }
 
-
   Future<ResponseModel> saveGrievance({
     required String auth,
     grievance,
@@ -7364,8 +7383,6 @@ class ConnectHelper {
     );
     return responseModel;
   }
-
-
 
   Future<ResponseModel> getAuditPlanDetails({
     required String? auth,

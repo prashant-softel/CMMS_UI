@@ -663,6 +663,22 @@ class DataRepository extends DomainRepository {
     );
   }
 
+  Future<ResponseModel> getWaterDataList({
+    int? facility_id,
+    String? start_date,
+    required String end_date,
+    required bool isLoading,
+    required String auth,
+  }) async {
+    return await connectHelper.getWaterDataList(
+      isLoading: isLoading,
+      auth: auth,
+      facility_id: facility_id,
+      start_date: start_date,
+      end_date: end_date,
+    );
+  }
+
   Future<ResponseModel> transactionReport({
     int? actorID,
     int? actorType,
@@ -4195,7 +4211,7 @@ class DataRepository extends DomainRepository {
     return response;
   }
 
-   Future<ResponseModel> deleteGrievanceDetails({
+  Future<ResponseModel> deleteGrievanceDetails({
     auth,
     int? Id,
     bool? isLoading,
@@ -4207,7 +4223,6 @@ class DataRepository extends DomainRepository {
     );
     return response;
   }
-
 
   Future<ResponseModel> getGrievanceType({
     String? auth,
