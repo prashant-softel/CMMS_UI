@@ -317,12 +317,11 @@ class WasteTypeMasterWeb extends GetView<WasteTypeMasterController> {
                                                     BorderRadius.circular(5),
                                               ),
                                               child: TextField(
-                                                style: GoogleFonts.lato(
-                                                  textStyle: TextStyle(
+                                                style:
+                                                   TextStyle(
                                                       fontSize: 16.0,
                                                       height: 1.0,
-                                                      color: Colors.black),
-                                                ),
+                                                   ),
                                                 controller:
                                                     controller.descriptionCtrlr,
                                                 focusNode: controller.descFocus,
@@ -440,21 +439,21 @@ class WasteTypeMasterWeb extends GetView<WasteTypeMasterController> {
                                               backgroundColor:
                                                   ColorValues.appDarkBlueColor,
                                               onPressed: () {
-                                                // controller
-                                                //     .createWaterType()
-                                                //     .then(
-                                                //   (value) {
-                                                //     print("CREATE");
-                                                //     print("value,$value");
-                                                //     if (value == true) {
-                                                //       controller
-                                                //           .isSuccessfullyCreated();
-                                                //       // Close the Create SPV container
-                                                //       controller
-                                                //           .toggleContainer();
-                                                //     }
-                                                //   },
-                                                // );
+                                                controller
+                                                    .createWasteType()
+                                                    .then(
+                                                  (value) {
+                                                    print("CREATE");
+                                                    print("value,$value");
+                                                    if (value == true) {
+                                                      controller
+                                                          .isSuccessfullyCreated();
+                                                      // Close the Create SPV container
+                                                      controller
+                                                          .toggleContainer();
+                                                    }
+                                                  },
+                                                );
                                               },
                                               text: 'Create Waste Type',
                                             ),
@@ -678,17 +677,17 @@ class WasteTypeMasterWeb extends GetView<WasteTypeMasterController> {
                                                             icon: Icons.delete,
                                                             message: 'Delete',
                                                             onPress: () {
-                                                              // controller
-                                                              //     .isDeleteDialog(
-                                                              //   waterTypeId: controller
-                                                              //       .wasteTypeMasterList?[
-                                                              //           index]!
-                                                              //       .id,
-                                                              //   name: controller
-                                                              //       .wasteTypeMasterList?[
-                                                              //           index]!
-                                                              //       .name,
-                                                              // );
+                                                              controller
+                                                                  .isDeleteDialog(
+                                                                wasteTypeId: controller
+                                                                    .wasteTypeMasterList?[
+                                                                        index]!
+                                                                    .id,
+                                                                name: controller
+                                                                    .wasteTypeMasterList?[
+                                                                        index]!
+                                                                    .name,
+                                                              );
                                                             },
                                                           ),
                                                         ],
