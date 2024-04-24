@@ -6,6 +6,7 @@ import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_textField.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 
@@ -280,46 +281,89 @@ class CreateMrsContentWeb extends GetView<CreateMrsController> {
                                                   padding:
                                                       const EdgeInsets.all(8.0),
                                                   child: Container(
-                                                      width: (Get.width * .4),
-                                                      // padding: EdgeInsets.all(value),
-                                                      decoration: BoxDecoration(
-                                                        boxShadow: [
-                                                          BoxShadow(
-                                                            color:
-                                                                Colors.black26,
-                                                            offset:
-                                                                const Offset(
-                                                              5.0,
-                                                              5.0,
-                                                            ),
-                                                            blurRadius: 5.0,
-                                                            spreadRadius: 1.0,
+                                                    width: (Get.width * .4),
+                                                    // padding: EdgeInsets.all(value),
+                                                    decoration: BoxDecoration(
+                                                      boxShadow: [
+                                                        BoxShadow(
+                                                          color: Colors.black26,
+                                                          offset: const Offset(
+                                                            5.0,
+                                                            5.0,
                                                           ),
-                                                        ],
-                                                        color: ColorValues
-                                                            .whiteColor,
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(5),
-                                                      ),
-                                                      child:
-                                                          LoginCustomTextfield(
-                                                        inputFormatters: <
-                                                            TextInputFormatter>[
-                                                          FilteringTextInputFormatter
-                                                              .digitsOnly
-                                                        ],
-                                                        maxLine: 1,
-                                                        textController:
-                                                            new TextEditingController(
-                                                                text: mapData[
-                                                                        "value"] ??
-                                                                    ''),
-                                                        onChanged: (txt) {
+                                                          blurRadius: 5.0,
+                                                          spreadRadius: 1.0,
+                                                        ),
+                                                      ],
+                                                      color: ColorValues
+                                                          .whiteColor,
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              5),
+                                                    ),
+                                                    child: LoginCustomTextfield(
+                                                      inputFormatters: <TextInputFormatter>[
+                                                        FilteringTextInputFormatter
+                                                            .digitsOnly
+                                                      ],
+                                                      maxLine: 1,
+                                                      textController:
+                                                          new TextEditingController(
+                                                              text: mapData[
+                                                                      "value"] ??
+                                                                  ''),
+                                                      onChanged: (txt) {
+                                                        // Convert the entered text to an integer
+                                                        int requestedQty =
+                                                            int.tryParse(txt) ??
+                                                                0;
+                                                        // Get the available quantity for the current record
+                                                        int availableQty = controller
+                                                                .dropdownMapperData
+                                                                .value[record[0]
+                                                                    ['value']]
+                                                                ?.available_qty ??
+                                                            0;
+                                                        // Validate if the requested quantity is less than or equal to the available quantity
+                                                        if (requestedQty >
+                                                            availableQty) {
+                                                          // Show an error message or perform any action as needed
+                                                          showDialog(
+                                                            context: context,
+                                                            builder:
+                                                                (BuildContext
+                                                                    context) {
+                                                              return AlertDialog(
+                                                                title: Text(
+                                                                    "Invalid Quantity!"),
+                                                                content: Text(
+                                                                    "Please select appropriate quantity.\nAvailable qty is: ${availableQty}, you requested: ${requestedQty}."),
+                                                                actions: <Widget>[
+                                                                  TextButton(
+                                                                    onPressed:
+                                                                        () {
+                                                                      Navigator.of(
+                                                                              context)
+                                                                          .pop();
+                                                                    },
+                                                                    child: Text(
+                                                                        "OK"),
+                                                                  ),
+                                                                ],
+                                                              );
+                                                            },
+                                                          );
+                                                          mapData["value"] =
+                                                              mapData[
+                                                                  "value"]!; // This line is to trigger a rebuild
+                                                        } else {
+                                                          // Update the value if it's valid
                                                           mapData["value"] =
                                                               txt;
-                                                        },
-                                                      )),
+                                                        }
+                                                      },
+                                                    ),
+                                                  ),
                                                 )
                                               : (mapData['key'] == "Action ")
                                                   ? Padding(

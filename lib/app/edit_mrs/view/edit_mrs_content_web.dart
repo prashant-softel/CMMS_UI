@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
-
+import 'package:fluttertoast/fluttertoast.dart';
 import '../../widgets/custom_richtext.dart';
 import '../../widgets/dropdown_web.dart';
 
@@ -63,8 +63,7 @@ class EditMrsContentWeb extends GetView<EditMrsController> {
                       _flutterSecureStorage.delete(key: "mrsId");
                       Get.back();
                     },
-                    child:
-                        Text(" / MRS LIST", style: Styles.greyLight14),
+                    child: Text(" / MRS LIST", style: Styles.greyLight14),
                   ),
                   Text(" / NEW MATERIAL SLIP", style: Styles.greyLight14)
                 ],
@@ -381,50 +380,72 @@ class EditMrsContentWeb extends GetView<EditMrsController> {
                                                               .start,
                                                       children: [
                                                         Container(
-                                                            width: (Get.width *
-                                                                .4),
-                                                            // padding: EdgeInsets.all(value),
-                                                            decoration:
-                                                                BoxDecoration(
-                                                              boxShadow: [
-                                                                BoxShadow(
-                                                                  color: Colors
-                                                                      .black26,
-                                                                  offset:
-                                                                      const Offset(
-                                                                    5.0,
-                                                                    5.0,
-                                                                  ),
-                                                                  blurRadius:
-                                                                      5.0,
-                                                                  spreadRadius:
-                                                                      1.0,
-                                                                ),
-                                                              ],
-                                                              color: ColorValues
-                                                                  .whiteColor,
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          5),
-                                                            ),
-                                                            child:
-                                                                LoginCustomTextfield(
-                                                              inputFormatters: <TextInputFormatter>[
-                                                                FilteringTextInputFormatter
-                                                                    .digitsOnly
-                                                              ],
-                                                              maxLine: 1,
-                                                              textController:
-                                                                  new TextEditingController(
-                                                                      text: mapData[
-                                                                              "value"] ??
-                                                                          ''),
-                                                              onChanged: (txt) {
+                                                          width:
+                                                              (Get.width * .4),
+                                                          decoration:
+                                                              BoxDecoration(
+                                                            boxShadow: [
+                                                              BoxShadow(
+                                                                color: Colors
+                                                                    .black26,
+                                                                offset:
+                                                                    const Offset(
+                                                                        5.0,
+                                                                        5.0),
+                                                                blurRadius: 5.0,
+                                                                spreadRadius:
+                                                                    1.0,
+                                                              ),
+                                                            ],
+                                                            color: ColorValues
+                                                                .whiteColor,
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        5),
+                                                          ),
+                                                          child:
+                                                              LoginCustomTextfield(
+                                                            inputFormatters: <TextInputFormatter>[
+                                                              FilteringTextInputFormatter
+                                                                  .digitsOnly
+                                                            ],
+                                                            keyboardType:
+                                                                TextInputType
+                                                                    .number,
+                                                            maxLine: 1,
+                                                            textController:
+                                                                new TextEditingController(
+                                                                    text: mapData[
+                                                                            "value"] ??
+                                                                        ''),
+                                                            onChanged: (txt) {
+                                                              int requestedQty =
+                                                                  int.tryParse(
+                                                                          txt) ??
+                                                                      0;
+                                                              int availableQty = controller
+                                                                      .dropdownMapperData[
+                                                                          record[0]
+                                                                              [
+                                                                              'value']]
+                                                                      ?.available_qty ??
+                                                                  "0";
+                                                              if (requestedQty <=
+                                                                  availableQty) {
                                                                 mapData["value"] =
-                                                                    txt;
-                                                              },
-                                                            )),
+                                                                    txt; // Update only if within limit
+                                                              } else {
+                                                                // Optionally, reset the text field or alert the user
+                                                                Fluttertoast
+                                                                    .showToast(
+                                                                        msg:
+                                                                            "Enter appropriate requested quantity.");
+                                                                // You might want to reset the field or revert to the last valid value
+                                                              }
+                                                            },
+                                                          ),
+                                                        ),
                                                       ],
                                                     ),
                                                   )
