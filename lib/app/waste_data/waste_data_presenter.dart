@@ -16,6 +16,16 @@ class WasteDataPresenter {
     );
   }
 
+  Future<Map<String, dynamic>?> createWasteDataDisposed({
+    createWasteData,
+    required bool isLoading,
+  }) async {
+    return wasteDataUsecase.createWasteDataDisposed(
+      createWasteData: createWasteData,
+      isLoading: isLoading,
+    );
+  }
+
   Future<List<WasteSource>> getTypeOfWasteList({
     required bool isLoading,
     required int? facilityId,

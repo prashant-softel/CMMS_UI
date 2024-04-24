@@ -14,6 +14,15 @@ class WasteDataUsecase {
         createWasteData,
         isLoading,
       );
+  Future<Map<String, dynamic>> createWasteDataDisposed({
+    createWasteData,
+    bool? isLoading,
+  }) async =>
+      await repository.createWasteData(
+        createWasteData,
+        isLoading,
+      );
+
   Future<List<WasteSource>> getTypeOfWasteList(
       {required bool isLoading, required int? facilityId}) async {
     return repository.getTypeOfWasteList(
