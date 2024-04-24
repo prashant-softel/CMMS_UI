@@ -317,11 +317,10 @@ class WasteTypeMasterWeb extends GetView<WasteTypeMasterController> {
                                                     BorderRadius.circular(5),
                                               ),
                                               child: TextField(
-                                                style:
-                                                   TextStyle(
-                                                      fontSize: 16.0,
-                                                      height: 1.0,
-                                                   ),
+                                                style: TextStyle(
+                                                  fontSize: 14.0,
+                                                  height: 1.0,
+                                                ),
                                                 controller:
                                                     controller.descriptionCtrlr,
                                                 focusNode: controller.descFocus,
@@ -447,8 +446,7 @@ class WasteTypeMasterWeb extends GetView<WasteTypeMasterController> {
                                                     print("value,$value");
                                                     if (value == true) {
                                                       controller
-                                                          .isSuccessfullyCreated();
-                                                      // Close the Create SPV container
+                                                          .issuccessCreatechecklist();
                                                       controller
                                                           .toggleContainer();
                                                     }
@@ -462,19 +460,19 @@ class WasteTypeMasterWeb extends GetView<WasteTypeMasterController> {
                                             backgroundColor:
                                                 ColorValues.appDarkBlueColor,
                                             onPressed: () {
-                                              // controller
-                                              //     .updateSPV(controller
-                                              //         .selectedItem?.id)
-                                              //     .then(
-                                              //   (value) {
-                                              //     print("UPDATE");
-                                              //     print("value,$value");
-                                              //     if (value == true)
-                                              //       controller
-                                              //           .issuccessCreatechecklist();
-                                              //     controller.toggleContainer();
-                                              //   },
-                                              // );
+                                              controller
+                                                  .updateWasteType(controller
+                                                      .selectedItem?.id)
+                                                  .then(
+                                                (value) {
+                                                  print("UPDATE");
+                                                  print("value,$value");
+                                                  if (value == true)
+                                                    controller
+                                                        .issuccessCreatechecklist();
+                                                  controller.toggleContainer();
+                                                },
+                                              );
                                             },
                                             text: 'Update',
                                           ),
@@ -658,17 +656,35 @@ class WasteTypeMasterWeb extends GetView<WasteTypeMasterController> {
                                                             icon: Icons.edit,
                                                             message: 'Edit',
                                                             onPress: () {
-                                                              // int? waterTypeId =
-                                                              //     controller
-                                                              //         .wasteTypeMasterList?[
-                                                              //             index]!
-                                                              //         .id;
-                                                              // controller.getWaterTypeById(
-                                                              //     waterTypeId:
-                                                              //         waterTypeId);
-                                                              // controller
-                                                              //     .isContainerVisible
-                                                              //     .value = true;
+                                                              controller
+                                                                      .selectedItem =
+                                                                  controller
+                                                                      .wasteTypeMasterList!
+                                                                      .firstWhere(
+                                                                (element) =>
+                                                                    "${element!.id}" ==
+                                                                    controller
+                                                                        .wasteTypeMasterList![
+                                                                            index]!
+                                                                        .id
+                                                                        .toString(),
+                                                              );
+
+                                                              controller
+                                                                  .titleCtrlr
+                                                                  .text = controller
+                                                                      .selectedItem
+                                                                      ?.name ??
+                                                                  '';
+                                                              controller
+                                                                  .descriptionCtrlr
+                                                                  .text = controller
+                                                                      .selectedItem
+                                                                      ?.description ??
+                                                                  '';
+                                                              controller
+                                                                  .isContainerVisible
+                                                                  .value = true;
                                                             },
                                                           ),
                                                           TableActionButton(

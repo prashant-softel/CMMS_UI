@@ -79,6 +79,11 @@ class WasteTypeMasterController extends GetxController {
     wasteTypeMasterList?.value = filteredList;
   }
 
+  Future<void> issuccessCreatechecklist() async {
+    isSuccess.toggle();
+    await {cleardata()};
+  }
+
   void toggleContainer() {
     isContainerVisible.toggle();
   }
@@ -176,7 +181,30 @@ class WasteTypeMasterController extends GetxController {
     return true;
   }
 
-  Future<bool> updateWasteType() async {
+  // Future<void> getWasteTypeById({int? wasteTypeId}) async {
+  //   wasteTypeMasterList?.value = <WasteSource>[];
+  //   BufferWasteTypeMasterList?.value = <WasteSource>[];
+  //   final WasteSource? _waterTypeMaster =
+  //       await wasteTypeMasterPresenter.getWasteTypeById(
+  //     wasteTypeId: wasteTypeId,
+  //     isLoading: isLoading.value,
+  //   );
+  //   if (_waterTypeMaster != null) {
+  //     isLoading.value = false;
+  //   }
+  //   selectedItem = _waterTypeMaster!;
+  //   wasteTypeMasterListPaginationController = PaginationController(
+  //     rowCount: wasteTypeMasterList!.length,
+  //     rowsPerPage: 10,
+  //   );
+  //   print("selected Item: ${selectedItem}");
+  //   wasteTypeId = selectedItem?.id;
+  //   titleCtrlr.text = selectedItem!.name!;
+  //   descriptionCtrlr.text = selectedItem!.description!;
+  //   update(['grievance_type_by_id']);
+  // }
+
+  Future<bool> updateWasteType(wastetypeid) async {
     if (titleCtrlr.text.trim() == '') {
       isTitleInvalid.value = true;
       isFormInvalid.value = true;
@@ -196,18 +224,17 @@ class WasteTypeMasterController extends GetxController {
       Fluttertoast.showToast(
           msg: "Please enter required field", fontSize: 16.0);
     } else {
-      int? _id = wasteTypeId;
+      int? _id = wastetypeid;
       String _name = titleCtrlr.text.trim();
       String _description = descriptionCtrlr.text.trim();
       int _facilityId = facilityId;
 
       CreateWasteSource wasteTypeMasterJson = CreateWasteSource(
-        id: _id,
-        name: _name,
-        description: _description,
-        facilityID: _facilityId,
-        type: 2
-      );
+          id: _id,
+          name: _name,
+          description: _description,
+          facilityID: _facilityId,
+          type: 2);
 
       var wasteTypeJson = wasteTypeMasterJson.toJson();
       print({"waste type updated", wasteTypeJson});
@@ -231,14 +258,12 @@ class WasteTypeMasterController extends GetxController {
     wasteTypeId = 0;
     titleCtrlr.clear();
     descriptionCtrlr.clear();
-    // Future.delayed(Duration(seconds: 1), () {
-    //   getTypeOfWasteList();
-    // });
-    Future.delayed(Duration(seconds: 3), () {
-      isSuccess.value = false;
-    });
+    selectedItem = null;
     Future.delayed(Duration(seconds: 1), () {
       getWasteTypeList();
+    });
+    Future.delayed(Duration(seconds: 3), () {
+      isSuccess.value = false;
     });
   }
 

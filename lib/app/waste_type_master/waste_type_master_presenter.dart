@@ -14,12 +14,12 @@ class WasteTypeMasterPresenter {
     );
   }
 
-  // Future<WasteSource?> getWaterTypeById({
-  //   int? waterTypeId,
+  // Future<WasteSource?> getWasteTypeById({
+  //   int? wasteTypeId,
   //   bool? isLoading,
   // }) async {
-  //   return wasteTypeMasterUsecase.getWaterTypeById(
-  //     waterTypeId: waterTypeId,
+  //   return wasteTypeMasterUsecase.getWasteTypeById(
+  //     wasteTypeId: wasteTypeId,
   //     isLoading: isLoading,
   //   );
   // }
