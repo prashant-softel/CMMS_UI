@@ -38,6 +38,7 @@ class CreateMrsReturnController extends GetxController {
   Rx<int> fromActorTypeId = 0.obs;
   Rx<int> to_actor_type_id = 0.obs;
   Rx<int> mrsId = 0.obs;
+  var isToggleOn = false.obs;
 
   var isSetTemplate = false.obs;
 
@@ -151,11 +152,13 @@ class CreateMrsReturnController extends GetxController {
         asset_item_ID:
             dropdownMapperData.value[element[0]["value"]]?.assetItemID,
         issued_qty: dropdownMapperData.value[element[0]["value"]].issued_qty,
-        returned_qty: int.tryParse(element[2]["value"] ?? '0'),
+        returned_qty: int.tryParse(element[3]["value"] ?? '0'),
         requested_qty: 0,
         approval_required: 0,
-        is_faulty: 0, // int.tryParse(element[3]["value"] ?? '0'),
-        return_remarks: element[4]["value"] ?? '0',
+        is_faulty: element[3]["value"] == "" || element[3]["value"] == null
+            ? 0
+            : int.tryParse(element[4]["value"] ?? "0"),
+        return_remarks: element[5]["value"] ?? '0',
       );
       items.add(item);
     });
@@ -187,5 +190,9 @@ class CreateMrsReturnController extends GetxController {
         Routes.returnMrsList,
       );
     }
+  }
+
+  void toggle(bool value) {
+    isToggleOn.value = value;
   }
 }

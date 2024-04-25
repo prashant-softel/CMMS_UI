@@ -454,7 +454,9 @@ class PreventiveMaintenanceExecutionContentWeb
                                                                           'key':
                                                                               "uploadimg",
                                                                           "value":
-                                                                              ''
+                                                                              '',
+                                                                          "uploaded":
+                                                                              ""
                                                                         },
                                                                         {
                                                                           'key':
