@@ -321,7 +321,7 @@ class PreventiveTaskContentMobile
                                                     CrossAxisAlignment.start,
                                                 children: [
                                                   Text(
-                                                    'Next Done Date',
+                                                    'Next Due Date',
                                                     style: const TextStyle(
                                                         color: ColorValues
                                                             .blackColor,

@@ -305,7 +305,7 @@ class ReturnMrsContentMobile extends GetView<CreateMrsReturnController> {
                                                                     : (mapData['key'] ==
                                                                             "Issue_Qty")
                                                                         ? Text(
-                                                                            "${controller.dropdownMapperData.value[controller.rowItem.value[index]]?.balance ?? ""}")
+                                                                            "${controller.dropdownMapperData.value[controller.rowItem.value[index]]?.issued_qty ?? ""}")
                                                                         : (mapData['key'] ==
                                                                                 "is_faulty")
                                                                             ? Row(

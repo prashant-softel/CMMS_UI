@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../domain/models/get_return_mrs_detail.dart';
+import '../../widgets/custom_richtext.dart';
+import '../../widgets/custom_textfield.dart';
 
 class ApproveReturnMrsViewContentMobile
     extends GetView<ApproveReturnMrsController> {
@@ -66,20 +68,19 @@ class ApproveReturnMrsViewContentMobile
                                                 .value?.activity ??
                                             "",
                                       ),
-                                      JobDetailField(
-                                        title: 'Approved By',
-                                        value: controller.returnMrsDetailsModel
-                                                .value?.approver_name
-                                                .toString() ??
-                                            '',
-                                      ),
-                                      JobDetailField(
-                                        title: 'Issued By',
-                                        value: controller.returnMrsDetailsModel
-                                                .value?.issued_name
-                                                .toString() ??
-                                            '',
-                                      ),
+                                      controller.returnMrsDetailsModel.value
+                                                  ?.status ==
+                                              321
+                                          ? Dimens.box0
+                                          : JobDetailField(
+                                              title: 'Approved By',
+                                              value: controller
+                                                      .returnMrsDetailsModel
+                                                      .value
+                                                      ?.approver_name
+                                                      .toString() ??
+                                                  '',
+                                            )
                                     ]),
                               ),
                               // ),
@@ -96,33 +97,33 @@ class ApproveReturnMrsViewContentMobile
                                       JobDetailField(
                                         title: 'Status',
                                         value: controller.returnMrsDetailsModel
-                                                .value?.status
+                                                .value?.status_short
                                                 .toString() ??
                                             '',
                                       ),
                                       JobDetailField(
                                         title: 'Where Used',
                                         value:
-                                            '${controller.returnMrsDetailsModel.value?.activity.toString().toUpperCase() ?? ''}${controller.returnMrsDetailsModel.value?.activity ?? ''}',
+                                            "${controller.returnMrsDetailsModel.value?.whereUsedType ?? ""}${controller.returnMrsDetailsModel.value?.whereUsedTypeId ?? ""}",
                                       ),
                                       JobDetailField(
                                         title: 'Requested Date Time',
                                         value: controller.returnMrsDetailsModel
-                                                .value?.requestd_date ??
+                                                .value?.returnDate ??
                                             'null',
                                       ),
-                                      JobDetailField(
-                                        title: 'Approved Date Time',
-                                        value: controller.returnMrsDetailsModel
-                                                .value?.approval_date ??
-                                            '',
-                                      ),
-                                      JobDetailField(
-                                        title: 'Issued Date time',
-                                        value: controller.returnMrsDetailsModel
-                                                .value?.issued_date ??
-                                            '',
-                                      ),
+                                      controller.returnMrsDetailsModel.value
+                                                  ?.status ==
+                                              321
+                                          ? Dimens.box0
+                                          : JobDetailField(
+                                              title: 'Approved Date Time',
+                                              value: controller
+                                                      .returnMrsDetailsModel
+                                                      .value
+                                                      ?.approval_date ??
+                                                  '',
+                                            ),
                                     ]),
                               ),
                             ]),
@@ -192,21 +193,7 @@ class ApproveReturnMrsViewContentMobile
                                             )
                                           ]),
                                           Row(children: [
-                                            Text('Requested Qty.: ',
-                                                style: Styles.appDarkGrey12),
-                                            SizedBox(
-                                              width: 5,
-                                            ),
-                                            Expanded(
-                                              child: Text(
-                                                  mrsViewModel?.requested_qty
-                                                          .toString() ??
-                                                      '',
-                                                  style: Styles.appDarkBlue12),
-                                            )
-                                          ]),
-                                          Row(children: [
-                                            Text('issued Qyt.: ',
+                                            Text('Issued Qty.: ',
                                                 style: Styles.appDarkGrey12),
                                             SizedBox(
                                               width: 5,
@@ -220,14 +207,28 @@ class ApproveReturnMrsViewContentMobile
                                             )
                                           ]),
                                           Row(children: [
-                                            Text('Consumed Qty.: ',
+                                            Text('issued Date: ',
                                                 style: Styles.appDarkGrey12),
                                             SizedBox(
                                               width: 5,
                                             ),
                                             Expanded(
                                               child: Text(
-                                                  mrsViewModel?.used_qty
+                                                  mrsViewModel?.issued_date
+                                                          .toString() ??
+                                                      '',
+                                                  style: Styles.appDarkBlue12),
+                                            )
+                                          ]),
+                                          Row(children: [
+                                            Text('Return Qty.: ',
+                                                style: Styles.appDarkGrey12),
+                                            SizedBox(
+                                              width: 5,
+                                            ),
+                                            Expanded(
+                                              child: Text(
+                                                  mrsViewModel?.returned_qty
                                                           .toString() ??
                                                       '',
                                                   style: Styles.appDarkBlue12),
@@ -238,7 +239,22 @@ class ApproveReturnMrsViewContentMobile
                                 ),
                               );
                             }),
-                        // Spacer(),
+                        //Spacer(),
+                        controller.returnMrsDetailsModel.value?.status == 321
+                            ? Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  CustomRichText(title: "Comment:"),
+                                  Dimens.boxHeight10,
+                                  LoginCustomTextfield(
+                                    // width: (Get.width * .6),
+                                    maxLine: 5,
+                                    textController: controller.commentCtrlr,
+                                  ),
+                                ],
+                              )
+                            : Dimens.box0,
+                        Dimens.boxHeight15,
                         Container(
                           margin: EdgeInsets.only(bottom: 30),
                           child: Row(
@@ -253,7 +269,7 @@ class ApproveReturnMrsViewContentMobile
                                             ColorValues.approveColor,
                                         text: 'Approve',
                                         onPressed: () {
-                                          // controller.approveMrs();
+                                          controller.approveReturnMrs();
                                         },
                                       ),
                                     )
@@ -270,7 +286,7 @@ class ApproveReturnMrsViewContentMobile
                                             ColorValues.rejectColor,
                                         text: 'Reject',
                                         onPressed: () {
-                                          //789    controller.rejectMrs();
+                                          controller.rejectRetrunMrs();
                                         },
                                       ),
                                     )
