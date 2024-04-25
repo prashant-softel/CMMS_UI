@@ -173,36 +173,34 @@ class _TransactionReportListWebState extends State<TransactionReportListWeb> {
                                             ),
                                           ),
                                         ),
-                                        itemBuilder: (BuildContext context) =>
-                                            <PopupMenuEntry<String>>[]..addAll(
-                                                  controller.columnVisibility
-                                                      .value.entries
-                                                      .map((e) {
-                                                return PopupMenuItem<String>(
-                                                    child:
-                                                        ValueListenableBuilder(
-                                                            valueListenable:
-                                                                controller
-                                                                    .columnVisibility,
-                                                            builder: (context,
-                                                                value, child) {
-                                                              return Row(
-                                                                children: [
-                                                                  Checkbox(
-                                                                    value: value[
-                                                                        e.key],
-                                                                    onChanged:
-                                                                        (newValue) {
-                                                                      controller.setColumnVisibility(
-                                                                          e.key,
-                                                                          newValue!);
-                                                                    },
-                                                                  ),
-                                                                  Text(e.key),
-                                                                ],
-                                                              );
-                                                            }));
-                                              })),
+                                        itemBuilder: (BuildContext context) => <
+                                            PopupMenuEntry<String>>[]..addAll(
+                                              controller.columnVisibility.value
+                                                  .entries
+                                                  .map((e) {
+                                            return PopupMenuItem<String>(
+                                                child: ValueListenableBuilder(
+                                                    valueListenable: controller
+                                                        .columnVisibility,
+                                                    builder: (context, value,
+                                                        child) {
+                                                      return Row(
+                                                        children: [
+                                                          Checkbox(
+                                                            value: value[e.key],
+                                                            onChanged:
+                                                                (newValue) {
+                                                              controller
+                                                                  .setColumnVisibility(
+                                                                      e.key,
+                                                                      newValue!);
+                                                            },
+                                                          ),
+                                                          Text(e.key),
+                                                        ],
+                                                      );
+                                                    }));
+                                          })),
                                         onSelected: (String value) {
                                           // Handle column selection
                                         },
@@ -688,7 +686,7 @@ class TransactionReportListDataSource extends DataTableSource {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        ' TR ${transactionReportListDetails?.fromActorID}',
+                        ' ${transactionReportListDetails?.fromActorID}',
                       ),
                       // Dimens.boxHeight10,
                       // Align(

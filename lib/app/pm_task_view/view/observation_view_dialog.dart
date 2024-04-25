@@ -58,7 +58,7 @@ class ObservationViewDialog extends GetView {
                               ),
                               Expanded(
                                 child: Text(
-                                    '${pmTaskModel?.check_point_id}'
+                                    'CP${pmTaskModel?.check_point_id}'
                                     '',
                                     style: Styles.appDarkBlue12),
                               ),
