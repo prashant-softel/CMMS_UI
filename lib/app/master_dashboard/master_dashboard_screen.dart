@@ -861,17 +861,20 @@ class MastersDashboard extends GetView<MastersController> {
                                     : 5,
                                 children: <Widget>[
                                   _inventoryList(
-                                    tittle: "Grievance Type",
-                                    ontap: () {
-                                      controller.grievanceType();
-                                    },
-                                  ),
-                                  _inventoryList(
-                                    tittle: "Water Type",
-                                    ontap: () {
-                                      controller.waterTypeMaster();
-                                    },
-                                  ),
+                                      tittle: "Grievance Type",
+                                      ontap: () {
+                                        controller.grievanceType();
+                                      }),
+                                      _inventoryList(
+                                      tittle: "Water Type",
+                                      ontap: () {
+                                        controller.waterTypeMaster();
+                                      }),
+                                       _inventoryList(
+                                      tittle: "Waste Type",
+                                      ontap: () {
+                                        controller.wasteTypeMaster();
+                                      }),
                                 ],
                               ),
                             ],

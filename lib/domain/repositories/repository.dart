@@ -77,6 +77,7 @@ import 'package:cmms/domain/models/stock_management_update_goods_orders_model.da
 import 'package:cmms/domain/models/supplier_name_model.dart';
 import 'package:cmms/domain/models/tools_model.dart';
 import 'package:cmms/domain/models/transaction_report_list_model.dart';
+import 'package:cmms/domain/models/type_of_waste_model.dart';
 import 'package:cmms/domain/models/type_of_water_model.dart';
 import 'package:cmms/domain/models/type_permit_model.dart';
 import 'package:cmms/domain/models/update_pm_task_execution_model.dart';
@@ -90,6 +91,7 @@ import 'package:cmms/domain/models/view_warranty_claim_model.dart';
 import 'package:cmms/domain/models/warranty_claim_model.dart';
 import 'package:cmms/domain/models/warranty_type_model.dart';
 import 'package:cmms/domain/models/warranty_usage_term_list_model.dart';
+import 'package:cmms/domain/models/water_data_list_model.dart';
 import 'package:cmms/domain/models/work_type_model.dart';
 import 'package:cmms/domain/repositories/repositories.dart';
 import 'package:cmms/domain/models/facility_model.dart';
@@ -1460,6 +1462,46 @@ class Repository {
     }
   }
 
+  Future<List<WaterDataList>> getWaterDataList({
+    required int? facility_id,
+    bool? isExport,
+    String? start_date,
+    required String end_date,
+    required bool isLoading,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+
+      log(auth);
+      final res = await _dataRepository.getWaterDataList(
+        facility_id: facility_id,
+        start_date: start_date,
+        end_date: end_date,
+        isLoading: isLoading,
+        auth: auth,
+      );
+      print('water data list: ${res.data}');
+
+      if (!res.hasError) {
+        final jsonWaterDataListModels = jsonDecode(res.data);
+
+        final List<WaterDataList> _WaterDataListList = jsonWaterDataListModels
+            .map<WaterDataList>(
+                (m) => WaterDataList.fromJson(Map<String, dynamic>.from(m)))
+            .toList();
+
+        return _WaterDataListList.reversed.toList();
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString(), 'getIncidentReportList');
+        return [];
+      }
+    } catch (error) {
+      print(error.toString());
+      return [];
+    }
+  }
+
   Future<List<TransactionReportListModel>> transactionReport({
     int? actorID,
     int? actorType,
@@ -2182,6 +2224,34 @@ class Repository {
       if (!res.hasError) {
         var typeOfWaterList = waterSourceListModelFromJson(res.data);
         return typeOfWaterList;
+      }
+      return [];
+    } catch (error) {
+      log(error.toString());
+      return [];
+    }
+  }
+
+  Future<List<WasteSource>> getTypeOfWasteList({
+    required int? facilityId,
+    // int? blockId,
+    // required String categoryIds,
+    required bool isLoading,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+
+      log(auth);
+      final res = await _dataRepository.getTypeOfWasteList(
+        facilityId: facilityId,
+        isLoading: isLoading,
+        auth: auth,
+      );
+      print('Waste Source List Data: ${res.data}');
+
+      if (!res.hasError) {
+        var typeOfWasteList = wasteSourceListModelFromJson(res.data);
+        return typeOfWasteList;
       }
       return [];
     } catch (error) {
@@ -3933,7 +4003,7 @@ class Repository {
     }
   }
 
-  Future<bool> updateGrievanceDetails({
+  Future<Map<String, dynamic>> updateGrievanceDetails({
     grievanceJson,
     bool? isLoading,
   }) async {
@@ -3946,20 +4016,20 @@ class Repository {
       );
       print(res.data);
       if (!res.hasError) {
-        return true;
+        var responseMap = json.decode(res.data);
+        return responseMap;
       } //
       else {
         Utility.showDialog(res.errorCode.toString(), 'updateGrievanceDetails');
-        return false;
+        return Map();
       }
     } catch (error) {
       print(error.toString());
-      return false;
+      return Map();
     }
   }
 
-  Future<void> deleteGrievanceDetails(
-      {int? Id, bool? isLoading}) async {
+  Future<void> deleteGrievanceDetails({int? Id, bool? isLoading}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.deleteGrievanceDetails(
@@ -9498,21 +9568,17 @@ class Repository {
     }
   }
 
-  Future<List<PlantStockListModel?>?> getPlantStockListReturn(
-    int? facilityId,
-    bool? isLoading,
-    int? actorID,
-    int? actorType,int?mrsId
-  ) async {
+  Future<List<PlantStockListModel?>?> getPlantStockListReturn(int? facilityId,
+      bool? isLoading, int? actorID, int? actorType, int? mrsId) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.getPlantStockListReturn(
-        auth: auth,
-        facilityId: facilityId ?? 0,
-        isLoading: isLoading ?? false,
-        actorID: actorID,
-        actorType: actorType,mrsId:mrsId
-      );
+          auth: auth,
+          facilityId: facilityId ?? 0,
+          isLoading: isLoading ?? false,
+          actorID: actorID,
+          actorType: actorType,
+          mrsId: mrsId);
 
       if (!res.hasError) {
         final jsonPlantStockListModels = jsonDecode(res.data);
@@ -10004,7 +10070,7 @@ class Repository {
           approvetoJsonString: approvetoJsonString);
       print({"res.data", res.data});
       if (!res.hasError) {
-        Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
+        Fluttertoast.showToast(msg: "MRS approved!", fontSize: 45.0);
 
         return true;
       } else {
@@ -10079,7 +10145,7 @@ class Repository {
 
       if (!res.hasError) {
         Fluttertoast.showToast(
-            msg: " Mrs edit Successfully...", fontSize: 16.0);
+            msg: "MRS updated Successfully...", fontSize: 16.0);
       } else {
         Utility.showDialog(res.errorCode.toString(), 'editMrs');
         //return '';
@@ -10217,7 +10283,7 @@ class Repository {
           issuetoJsonString: issuetoJsonString);
       print({"res.data", res.data});
       if (!res.hasError) {
-        Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
+        Fluttertoast.showToast(msg: 'MRS issued!', fontSize: 45.0);
 
         return true;
       } else {
@@ -10241,7 +10307,7 @@ class Repository {
           issuemrsapprovetoJsonString: issuemrsapprovetoJsonString);
       print({"res.data", res.data});
       if (!res.hasError) {
-        Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
+        Fluttertoast.showToast(msg: "MRS approved!", fontSize: 45.0);
 
         return true;
       } else {
@@ -12257,6 +12323,98 @@ class Repository {
     } catch (error) {
       print(error.toString());
       return false;
+    }
+  }
+  Future<List<WasteSource>> getWasteTypeList({
+    required bool isLoading,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+
+      log(auth);
+      final res = await _dataRepository.getWasteTypeList(
+        isLoading: isLoading,
+        auth: auth,
+      );
+      print('Waste Source List Data: ${res.data}');
+
+      if (!res.hasError) {
+        var typeOfWasteList = wasteSourceListModelFromJson(res.data);
+        return typeOfWasteList;
+      }
+      return [];
+    } catch (error) {
+      log(error.toString());
+      return [];
+    }
+  }
+  Future<bool> createWasteType({
+    bool? isLoading,
+    wasteTypeJson,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.createWasteType(
+        auth: auth,
+        wasteTypeJson: wasteTypeJson,
+        isLoading: isLoading,
+      );
+
+      if (!res.hasError) {
+        return true;
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString(), 'createWasteType');
+        return false;
+      }
+    } catch (error) {
+      print(error.toString());
+      return false;
+    }
+  }
+  Future<bool> updateWasteType({
+    wasteTypeJson,
+    bool? isLoading,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.updateWasteType(
+        auth: auth,
+        wasteTypeJson: wasteTypeJson,
+        isLoading: isLoading,
+      );
+      print(res.data);
+      if (!res.hasError) {
+        return true;
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString(), 'updateWasteType');
+        return false;
+      }
+    } catch (error) {
+      print(error.toString());
+      return false;
+    }
+  }
+  Future<void> deleteWasteType({
+    int? wasteTypeId,
+    bool? isLoading,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.deleteWasteType(
+        auth: auth,
+        wasteTypeId: wasteTypeId,
+        isLoading: isLoading,
+      );
+
+      if (!res.hasError) {
+        //get delete response back from API
+      } else {
+        Utility.showDialog(res.errorCode.toString(), 'deleteWasteType');
+      }
+    } catch (error) {
+      print(error.toString());
     }
   }
   //end

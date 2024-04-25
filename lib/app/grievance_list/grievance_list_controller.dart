@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:cmms/app/app.dart';
+import 'package:cmms/app/create_grievance/widgets/grievance_created_dialog.dart';
 import 'package:cmms/app/grievance_list/grievance_list_presenter.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/domain/models/grievance_List_model.dart';
@@ -49,7 +50,7 @@ class GrievanceController extends GetxController {
     this.filterText = {
       "Grievance Id": GrievanceIdFilterText,
       "Concern": ConcernFilterText,
-      "Description": DescriptionFilterText,
+      // "Description": DescriptionFilterText,
       "Grievance Type": GrievanceTypeFilterText,
       "Created At": CreatedAtFilterText,
     };
@@ -64,6 +65,11 @@ class GrievanceController extends GetxController {
     super.onInit();
   }
 
+  void onReady() {
+    getGrievanceList(facilityId, false, formattedFromdate, formattedTodate);
+    super.onReady();
+  }
+
   void getGrievanceListByDate() {
     getGrievanceList(facilityId, false, formattedFromdate, formattedTodate);
   }
@@ -71,7 +77,7 @@ class GrievanceController extends GetxController {
   final columnVisibility = ValueNotifier<Map<String, bool>>({
     "Grievance Id": true,
     "Concern": true,
-    "Description": true,
+    // "Description": true,
     "Grievance Type": true,
     "Created At": true,
   });
@@ -82,6 +88,16 @@ class GrievanceController extends GetxController {
       ..[columnName] = isVisible;
     columnVisibility.value = newVisibility;
     print({"updated columnVisibility": columnVisibility});
+  }
+
+  static void showAlertDialog({
+    int? grievanceId,
+    String? message,
+    String? title,
+    Function()? onPress,
+  }) async {
+    await Get.dialog<void>(
+        GrievanceCreatedDialog(grievanceId: grievanceId, message: message));
   }
 
   Future<void> getGrievanceList(

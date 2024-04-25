@@ -208,6 +208,7 @@ abstract class Routes {
       _Paths.importDsmListChargesListScreen;
   static const importDsmChargesScreen = _Paths.importDsmChargesScreen;
   static const waterTypeMaster = _Paths.waterTypeMaster;
+  static const wasteTypeMaster = _Paths.wasteTypeMaster;
 }
 
 abstract class _Paths {
@@ -287,7 +288,7 @@ abstract class _Paths {
   static const SPVListScreen = '/spv-list-screen';
   static const blockTypeListScreen = '/block-type-list-screen';
   static const Bodyinjured = '/body-injured';
-  static const importInventory = '/importInventory';
+  static const importInventory = '/import';
   static const userList = '/userList';
   static const addUser = '/addUser';
   static const viewUserDetail = '/view-user-detail';
@@ -413,4 +414,5 @@ abstract class _Paths {
       '/importDsmListChargesListScreen';
   static const importDsmChargesScreen = '/importDsmChargesScreen';
   static const waterTypeMaster = '/water-type-master';
+  static const wasteTypeMaster = '/waste-type-master';
 }

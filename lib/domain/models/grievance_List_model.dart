@@ -4,7 +4,7 @@ List<GrievanceListModel> facilityListFromJson(String str) =>
     List<GrievanceListModel>.from(
         json.decode(str).map(GrievanceListModel.fromJson));
 
-        GrievanceListModel grievanceListModelFromJson(String str) =>
+GrievanceListModel grievanceListModelFromJson(String str) =>
     GrievanceListModel.fromJson(json.decode(str));
 
 String facilityListToJson(List<GrievanceListModel> data) =>
@@ -68,7 +68,7 @@ class GrievanceListModel {
       GrievanceListModel(
         id: json["id"],
         facilityId: json["facility_id"],
-        grievanceTypeId: json["type_id"],
+        grievanceTypeId: json["grievanceTypeId"],
         grievanceType: json["grievanceType"],
         concern: json['concern'],
         description: json['description'],

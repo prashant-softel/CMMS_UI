@@ -1,7 +1,7 @@
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
-import 'package:cmms/app/type_water_master/type_water_master_controller.dart';
+import 'package:cmms/app/waste_type_master/waste_type_master_controller.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:data_table_2/data_table_2.dart';
@@ -10,8 +10,8 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class WaterTypeMasterWeb extends GetView<WaterTypeMasterController> {
-  WaterTypeMasterWeb({Key? key}) : super(key: key);
+class WasteTypeMasterWeb extends GetView<WasteTypeMasterController> {
+  WasteTypeMasterWeb({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -67,7 +67,7 @@ class WaterTypeMasterWeb extends GetView<WaterTypeMasterController> {
                       ),
                     ),
                     Text(
-                      " / WATER TYPE ",
+                      " / WASTE TYPE ",
                       style: Styles.greyLight14,
                     ),
                   ],
@@ -83,8 +83,8 @@ class WaterTypeMasterWeb extends GetView<WaterTypeMasterController> {
                   child: Obx(() {
                     return Text(
                       controller.isContainerVisible.value
-                          ? 'Close Create Water Type'
-                          : 'Open Create Water Type',
+                          ? 'Close Create Waste Type'
+                          : 'Open Create Waste Type',
                     );
                   }),
                 ),
@@ -117,7 +117,7 @@ class WaterTypeMasterWeb extends GetView<WaterTypeMasterController> {
                                           CrossAxisAlignment.start,
                                       children: [
                                         Text(
-                                          "Create Water Type",
+                                          "Create Waste Type",
                                           style: Styles.blackBold16,
                                         ),
                                         SizedBox(
@@ -133,8 +133,8 @@ class WaterTypeMasterWeb extends GetView<WaterTypeMasterController> {
                                                           false
                                                       ? controller.selectedItem ==
                                                               null
-                                                          ? "Water Type Created Successfully in the List."
-                                                          : "Water Type Updated Successfully in the List."
+                                                          ? "Waste Type Created Successfully in the List."
+                                                          : "Waste Type Updated Successfully in the List."
                                                       : "Facility is not added.",
                                                   style: TextStyle(
                                                       fontSize: 16,
@@ -154,7 +154,7 @@ class WaterTypeMasterWeb extends GetView<WaterTypeMasterController> {
                                           children: [
                                             Expanded(
                                                 child: CustomRichText(
-                                                    title: 'Water Type Name ')),
+                                                    title: 'Waste Type Name ')),
                                             Container(
                                               width: (MediaQuery.of(context)
                                                       .size
@@ -317,11 +317,9 @@ class WaterTypeMasterWeb extends GetView<WaterTypeMasterController> {
                                                     BorderRadius.circular(5),
                                               ),
                                               child: TextField(
-                                                style: GoogleFonts.lato(
-                                                  textStyle: TextStyle(
-                                                      fontSize: 16.0,
-                                                      height: 1.0,
-                                                      color: Colors.black),
+                                                style: TextStyle(
+                                                  fontSize: 14.0,
+                                                  height: 1.0,
                                                 ),
                                                 controller:
                                                     controller.descriptionCtrlr,
@@ -441,41 +439,40 @@ class WaterTypeMasterWeb extends GetView<WaterTypeMasterController> {
                                                   ColorValues.appDarkBlueColor,
                                               onPressed: () {
                                                 controller
-                                                    .createWaterType()
+                                                    .createWasteType()
                                                     .then(
                                                   (value) {
                                                     print("CREATE");
                                                     print("value,$value");
                                                     if (value == true) {
                                                       controller
-                                                          .isSuccessfullyCreated();
-                                                      // Close the Create SPV container
+                                                          .issuccessCreatechecklist();
                                                       controller
                                                           .toggleContainer();
                                                     }
                                                   },
                                                 );
                                               },
-                                              text: 'Create Water Type',
+                                              text: 'Create Waste Type',
                                             ),
                                           )
                                         : CustomElevatedButton(
                                             backgroundColor:
                                                 ColorValues.appDarkBlueColor,
                                             onPressed: () {
-                                              // controller
-                                              //     .updateSPV(controller
-                                              //         .selectedItem?.id)
-                                              //     .then(
-                                              //   (value) {
-                                              //     print("UPDATE");
-                                              //     print("value,$value");
-                                              //     if (value == true)
-                                              //       controller
-                                              //           .issuccessCreatechecklist();
-                                              //     controller.toggleContainer();
-                                              //   },
-                                              // );
+                                              controller
+                                                  .updateWasteType(controller
+                                                      .selectedItem?.id)
+                                                  .then(
+                                                (value) {
+                                                  print("UPDATE");
+                                                  print("value,$value");
+                                                  if (value == true)
+                                                    controller
+                                                        .issuccessCreatechecklist();
+                                                  controller.toggleContainer();
+                                                },
+                                              );
                                             },
                                             text: 'Update',
                                           ),
@@ -506,7 +503,7 @@ class WaterTypeMasterWeb extends GetView<WaterTypeMasterController> {
                                 child: Row(
                                   children: [
                                     Text(
-                                      "List of Water Type",
+                                      "List of Waste Type",
                                       style: Styles.blackBold16,
                                     ),
                                     Spacer(),
@@ -558,7 +555,7 @@ class WaterTypeMasterWeb extends GetView<WaterTypeMasterController> {
                               SizedBox(
                                 height: 20,
                               ),
-                              controller.waterTypeMasterList?.isEmpty == true &&
+                              controller.wasteTypeMasterList?.isEmpty == true &&
                                       controller.isLoading == false
                                   ? Center(child: Text("No Data"))
                                   : controller.isLoading.value == true
@@ -589,7 +586,7 @@ class WaterTypeMasterWeb extends GetView<WaterTypeMasterController> {
                                                 DataColumn2(
                                                   // fixedWidth: 150,
                                                   label: Text(
-                                                    "Water Type",
+                                                    "Waste Type",
                                                     style: TextStyle(
                                                       fontSize: 15,
                                                       fontWeight:
@@ -621,7 +618,7 @@ class WaterTypeMasterWeb extends GetView<WaterTypeMasterController> {
                                                 ),
                                               ],
                                               rows: List<DataRow>.generate(
-                                                controller.waterTypeMasterList!
+                                                controller.wasteTypeMasterList!
                                                         .length ??
                                                     0,
                                                 (index) => DataRow(
@@ -634,7 +631,7 @@ class WaterTypeMasterWeb extends GetView<WaterTypeMasterController> {
                                                     DataCell(
                                                       Text(
                                                         controller
-                                                                .waterTypeMasterList![
+                                                                .wasteTypeMasterList![
                                                                     index]
                                                                 ?.name
                                                                 .toString() ??
@@ -644,7 +641,7 @@ class WaterTypeMasterWeb extends GetView<WaterTypeMasterController> {
                                                     DataCell(
                                                       Text(
                                                         controller
-                                                                .waterTypeMasterList?[
+                                                                .wasteTypeMasterList?[
                                                                     index]
                                                                 ?.description ??
                                                             '',
@@ -659,14 +656,32 @@ class WaterTypeMasterWeb extends GetView<WaterTypeMasterController> {
                                                             icon: Icons.edit,
                                                             message: 'Edit',
                                                             onPress: () {
-                                                              int? waterTypeId =
+                                                              controller
+                                                                      .selectedItem =
                                                                   controller
-                                                                      .waterTypeMasterList?[
-                                                                          index]!
-                                                                      .id;
-                                                              controller.getWaterTypeById(
-                                                                  waterTypeId:
-                                                                      waterTypeId);
+                                                                      .wasteTypeMasterList!
+                                                                      .firstWhere(
+                                                                (element) =>
+                                                                    "${element!.id}" ==
+                                                                    controller
+                                                                        .wasteTypeMasterList![
+                                                                            index]!
+                                                                        .id
+                                                                        .toString(),
+                                                              );
+
+                                                              controller
+                                                                  .titleCtrlr
+                                                                  .text = controller
+                                                                      .selectedItem
+                                                                      ?.name ??
+                                                                  '';
+                                                              controller
+                                                                  .descriptionCtrlr
+                                                                  .text = controller
+                                                                      .selectedItem
+                                                                      ?.description ??
+                                                                  '';
                                                               controller
                                                                   .isContainerVisible
                                                                   .value = true;
@@ -680,12 +695,12 @@ class WaterTypeMasterWeb extends GetView<WaterTypeMasterController> {
                                                             onPress: () {
                                                               controller
                                                                   .isDeleteDialog(
-                                                                waterTypeId: controller
-                                                                    .waterTypeMasterList?[
+                                                                wasteTypeId: controller
+                                                                    .wasteTypeMasterList?[
                                                                         index]!
                                                                     .id,
                                                                 name: controller
-                                                                    .waterTypeMasterList?[
+                                                                    .wasteTypeMasterList?[
                                                                         index]!
                                                                     .name,
                                                               );

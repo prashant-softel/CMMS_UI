@@ -83,13 +83,11 @@ class CreateGrievanceController extends GetxController {
       facilityIdStreamSubscription = homeController.facilityId$.listen((event) {
         facilityId = event;
       });
-      Future.delayed(Duration(seconds: 1), () async {
-        await getGrievanceType();
-      });
-      if (grievanceId > 0) {
+      if (grievanceId.value > 0) {
         await getGrievanceDetails(grievanceId: grievanceId.value);
         print("griev ${grievanceId}");
       }
+      await getGrievanceType();
     } catch (e) {
       print(e.toString());
     }
@@ -232,6 +230,10 @@ class CreateGrievanceController extends GetxController {
   }
 
   void clearStoreData() {
+    selectedGrievanceType.value = "";
+    selectedGrievanceTypeId = 0;
+    concernController.clear();
+    descriptionController.clear();
     grievanceListPresenter.clearValue();
   }
 
@@ -248,31 +250,55 @@ class CreateGrievanceController extends GetxController {
 
     concernController.text = grievanceData.concern!;
     descriptionController.text = grievanceData.description!;
-    selectedGrievanceTypeId = grievanceData.grievanceTypeId ?? 0;
+    selectedGrievanceTypeId = grievanceData.grievanceTypeId!;
     selectedGrievanceType.value = grievanceData.grievanceType ?? '';
-    print("selected Item: ${grievanceData}");
+    print("selected Item: ${concernController.text}");
+    print("concern Item: ${grievanceData}");
+    print("desc Item: ${descriptionController.text}");
+    print("griId Item: ${selectedGrievanceTypeId}");
+    print("GriTypeNamw Item: ${selectedGrievanceType.value}");
   }
 
-  Future<bool> updateGrievanceDetails() async {
-    int _id = grievanceId.value;
-    String _concern = concernController.text.trim();
-    String _description = descriptionController.text.trim();
-    int? _grievanceType = selectedGrievanceTypeId;
+  void updateGrievanceDetails() async {
+    try {
+      int _id = grievanceId.value;
+      String _concern = concernController.text.trim();
+      String _description = descriptionController.text.trim();
+      int? _grievanceType = selectedGrievanceTypeId;
+      var ms = '';
 
-    CreateGrievanceModel grievanceTypeJson = CreateGrievanceModel(
-      id: _id,
-      concern: _concern,
-      facilityId: facilityId,
-      description: _description,
-      grievanceType: _grievanceType,
-    );
+      CreateGrievanceModel grievanceTypeJson = CreateGrievanceModel(
+        id: _id,
+        concern: _concern,
+        facilityId: facilityId,
+        description: _description,
+        grievanceType: _grievanceType,
+      );
 
-    var grievanceJson = grievanceTypeJson.toJson();
-    print({"Grievance", grievanceJson});
-    await createGrievancePresenter.updateGrievanceDetails(
-      grievanceJson: grievanceJson,
-      isLoading: true,
-    );
-    return true;
+      var grievanceJson = grievanceTypeJson.toJson();
+      print({"Grievance", grievanceJson});
+      Map<String, dynamic>? responseMapGrievanceUpdate =
+          await createGrievancePresenter.updateGrievanceDetails(
+        grievanceJson: grievanceJson,
+        isLoading: true,
+      );
+
+      if (responseMapGrievanceUpdate != null) {
+        // var _grievanceId = 0;
+        var _message = '';
+        if (responseMapGrievanceUpdate["grievanceType"] != null &&
+            responseMapGrievanceUpdate["grievanceType"].isNotEmpty) {
+          // _grievanceId = responseMapGrievanceUpdate["grievanceType"][0];
+        }
+        if (responseMapGrievanceUpdate["message"] != null) {
+          _message = responseMapGrievanceUpdate["message"];
+        }
+        grievanceId.value = 0;
+        clearStoreData();
+        showAlertDialog(grievanceId: grievanceId.value, message: _message);
+      }
+    } catch (e) {
+      print(e.toString());
+    }
   }
 }

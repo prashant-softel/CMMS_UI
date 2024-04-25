@@ -204,6 +204,18 @@ class DataRepository extends DomainRepository {
     );
   }
 
+  Future<ResponseModel> getTypeOfWasteList({
+    int? facilityId,
+    required bool isLoading,
+    required String auth,
+  }) async {
+    return await connectHelper.getTypeOfWasteList(
+      isLoading: isLoading,
+      auth: auth,
+      facilityId: facilityId,
+    );
+  }
+
   Future<ResponseModel> getWaterTypeById({
     String? auth,
     int? waterTypeId,
@@ -643,6 +655,22 @@ class DataRepository extends DomainRepository {
     required String auth,
   }) async {
     return await connectHelper.getGoodsOrdersList(
+      isLoading: isLoading,
+      auth: auth,
+      facility_id: facility_id,
+      start_date: start_date,
+      end_date: end_date,
+    );
+  }
+
+  Future<ResponseModel> getWaterDataList({
+    int? facility_id,
+    String? start_date,
+    required String end_date,
+    required bool isLoading,
+    required String auth,
+  }) async {
+    return await connectHelper.getWaterDataList(
       isLoading: isLoading,
       auth: auth,
       facility_id: facility_id,
@@ -4183,7 +4211,7 @@ class DataRepository extends DomainRepository {
     return response;
   }
 
-   Future<ResponseModel> deleteGrievanceDetails({
+  Future<ResponseModel> deleteGrievanceDetails({
     auth,
     int? Id,
     bool? isLoading,
@@ -4195,7 +4223,6 @@ class DataRepository extends DomainRepository {
     );
     return response;
   }
-
 
   Future<ResponseModel> getGrievanceType({
     String? auth,
@@ -4595,6 +4622,52 @@ class DataRepository extends DomainRepository {
     var response = await connectHelper.createfreq(
         auth: auth, isLoading: isLoading, freqJsonString: freqJsonString);
     return response;
+  }
+  Future<ResponseModel> createWasteType({
+    auth,
+    wasteTypeJson,
+    bool? isLoading,
+  }) async {
+    var response = await connectHelper.createWasteType(
+      auth: auth,
+      wasteTypeJson: wasteTypeJson,
+      isLoading: isLoading,
+    );
+    return response;
+  }
+  Future<ResponseModel> updateWasteType({
+    auth,
+    wasteTypeJson,
+    bool? isLoading,
+  }) async {
+    var response = await connectHelper.updateWasteType(
+      auth: auth,
+      wasteTypeJson: wasteTypeJson,
+      isLoading: isLoading,
+    );
+    return response;
+  }
+  Future<ResponseModel> deleteWasteType({
+    auth,
+    int? wasteTypeId,
+    bool? isLoading,
+  }) async {
+    var response = await connectHelper.deleteWasteType(
+      auth: auth,
+      wasteTypeId: wasteTypeId,
+      isLoading: isLoading,
+    );
+    return response;
+  }
+
+  Future<ResponseModel> getWasteTypeList({
+    required bool isLoading,
+    required String auth,
+  }) async {
+    return await connectHelper.getWasteTypeList(
+      isLoading: isLoading,
+      auth: auth,
+    );
   }
 //end
 }

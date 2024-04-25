@@ -291,7 +291,7 @@ class MrsIssueContentWeb extends GetView<MrsIssueController> {
                                             )),
                                             DataColumn(
                                                 label: Text(
-                                              "Issued Qyt.",
+                                              "Issued Qty.",
                                               style: TextStyle(
                                                   fontSize: 15,
                                                   fontWeight: FontWeight.bold),
@@ -452,7 +452,7 @@ class MrsIssueContentWeb extends GetView<MrsIssueController> {
                                                                           Fluttertoast
                                                                               .showToast(
                                                                             msg:
-                                                                                'Enter qty below the requested qty',
+                                                                                'Enter qty below the approved qty',
                                                                             fontSize:
                                                                                 16.0,
                                                                           );

@@ -471,15 +471,15 @@ class GrievanceListDataSource extends DataTableSource {
               .toString()
               .toLowerCase()
               .contains(controller.ConcernFilterText.value.toLowerCase()) &&
-          (GrievanceList?.description ?? '')
-              .toString()
-              .toLowerCase()
-              .contains(controller.DescriptionFilterText.value.toLowerCase()) &&
+          // (GrievanceList?.description ?? '')
+          //     .toString()
+          //     .toLowerCase()
+          //     .contains(controller.DescriptionFilterText.value.toLowerCase()) &&
           (GrievanceList?.grievanceType ?? '').toLowerCase().contains(
               controller.GrievanceTypeFilterText.value.toLowerCase()) &&
-          (GrievanceList?.description ?? '')
-              .toLowerCase()
-              .contains(controller.DescriptionFilterText.value.toLowerCase()) &&
+          // (GrievanceList?.description ?? '')
+          //     .toLowerCase()
+          //     .contains(controller.DescriptionFilterText.value.toLowerCase()) &&
           (GrievanceList?.createdAt ?? '')
               .toString()
               .toLowerCase()
@@ -494,9 +494,9 @@ class GrievanceListDataSource extends DataTableSource {
 
     //controller.permitId.value = GrievanceDetails?.id ?? 0;
     var cellsBuffer = [
-      '${GrievanceDetails?.id ?? ''}',
+      'GR${GrievanceDetails?.id ?? ''}',
       '${GrievanceDetails?.concern ?? ''}',
-      '${GrievanceDetails?.description ?? ''}',
+      // '${GrievanceDetails?.description ?? ''}',
       '${GrievanceDetails?.grievanceType ?? ''}',
       '${GrievanceDetails?.createdAt ?? ''}',
       'Actions',

@@ -306,6 +306,20 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> getTypeOfWasteList(
+      {required bool isLoading, required String auth, int? facilityId}) async {
+    ResponseModel responseModel = await apiWrapper.makeRequest(
+      'MISMaster/GetWasteType?facility_id=$facilityId',
+      Request.getMultiparts,
+      null,
+      isLoading,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
   Future<ResponseModel> getWaterTypeById(
       {String? auth, int? waterTypeId, bool? isLoading}) async {
     ResponseModel response = ResponseModel(data: '', hasError: true);
@@ -897,6 +911,26 @@ class ConnectHelper {
   }) async {
     ResponseModel responseModel = await apiWrapper.makeRequest(
       'GO/GetGOList?facility_id=$facility_id&fromDate=$end_date&toDate=$start_date',
+      Request.getMultiparts,
+      null,
+      isLoading,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> getWaterDataList({
+    required bool isLoading,
+    required String auth,
+    int? facility_id,
+    String? start_date,
+    required String end_date,
+  }) async {
+    ResponseModel responseModel = await apiWrapper.makeRequest(
+      'MISMaster/GetWaterDataListMonthWise?facility_id=$facility_id&fromDate=$end_date&toDate=$start_date',
       Request.getMultiparts,
       null,
       isLoading,
@@ -6830,7 +6864,7 @@ class ConnectHelper {
     required bool isLoading,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
-      'CheckList/ImportChecklistCheckpoint?file_id=$fileId',
+      'CMMS/ImportBusiness?file_id=$fileId',
       Request.post,
       null,
       true,
@@ -7238,7 +7272,6 @@ class ConnectHelper {
     return responseModel;
   }
 
-
   Future<ResponseModel> saveGrievance({
     required String auth,
     grievance,
@@ -7350,8 +7383,6 @@ class ConnectHelper {
     );
     return responseModel;
   }
-
-
 
   Future<ResponseModel> getAuditPlanDetails({
     required String? auth,
@@ -7929,6 +7960,72 @@ class ConnectHelper {
       isLoading ?? false,
       {
         'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+  Future<ResponseModel> createWasteType({
+    required String auth,
+    required wasteTypeJson,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'MISMaster/CreateWasteType', //AddBusiness
+      Request.post,
+      wasteTypeJson,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
+  Future<ResponseModel> updateWasteType({
+    required String auth,
+    wasteTypeJson,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'MISMaster/UpdateWasteType',
+      Request.put,
+      jsonEncode(wasteTypeJson),
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+  Future<ResponseModel> deleteWasteType({
+    required String auth,
+    int? wasteTypeId,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'MISMaster/DeleteWasteType?id=$wasteTypeId',
+      Request.delete,
+      null,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
+  Future<ResponseModel> getWasteTypeList(
+      {required bool isLoading, required String auth}) async {
+    ResponseModel responseModel = await apiWrapper.makeRequest(
+      'MISMaster/GetWasteType',
+      Request.get,
+      null,
+      isLoading,
+      {
         'Authorization': 'Bearer $auth',
       },
     );

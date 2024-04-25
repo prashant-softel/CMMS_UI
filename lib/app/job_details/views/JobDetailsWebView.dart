@@ -1166,6 +1166,8 @@ class JobDetailsWebView extends GetView<JobDetailsController> {
                                                     ?.assignedId ??
                                                 0) >
                                             0) ...[
+                                          controller.jobDetailsModel.value?.latestJCStatus == 158 
+                                          ? Dimens.box0
                                           //check if status is "ASSIGNED"
                                           // if (controller.jobDetailsModel.value
                                           //             ?.status !=
@@ -1177,7 +1179,7 @@ class JobDetailsWebView extends GetView<JobDetailsController> {
                                           //                     .value
                                           //                     ?.status) ==
                                           //         AppConstants.kJobStatusAssigned)
-                                          CustomElevatedButton(
+                                          : CustomElevatedButton(
                                             onPressed: () => controller
                                                 .goToEditJobScreen(controller
                                                     .jobDetailsModel.value?.id),

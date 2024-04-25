@@ -6,8 +6,8 @@ import 'package:cmms/app/theme/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class GrievanceCreatedDialog extends GetView<CreateGrievanceController> {
-  const GrievanceCreatedDialog({
+class GrievanceUpdatedDialog extends GetView<CreateGrievanceController> {
+  const GrievanceUpdatedDialog({
     this.grievanceId,
     this.message,
     super.key,
@@ -43,11 +43,9 @@ class GrievanceCreatedDialog extends GetView<CreateGrievanceController> {
                   thickness: 1,
                 ),
                 Dimens.boxHeight10,
-                Center(
-                  child: Text(
-                    message ?? '',
-                    overflow: TextOverflow.ellipsis,
-                  ),
+                Text(
+                  message ?? '',
+                  overflow: TextOverflow.ellipsis,
                 ),
                 Dimens.boxHeight10,
                 Row(
@@ -56,7 +54,7 @@ class GrievanceCreatedDialog extends GetView<CreateGrievanceController> {
                       ElevatedButton(
                         style: Styles.navyBlueElevatedButtonStyle,
                         onPressed: () {
-                          Get.toNamed(Routes.grievanceList);
+                          Get.offNamed(Routes.grievanceList);
                         },
                         child: const Text('Grievance List'),
                       ),
@@ -64,7 +62,7 @@ class GrievanceCreatedDialog extends GetView<CreateGrievanceController> {
                         style: Styles.greenElevatedButtonStyle,
                         onPressed: () {
                           controller.clearStoreData();
-                          Get.offNamed(Routes.addGrievance);
+                          Get.offAndToNamed(Routes.addGrievance);
                           Get.back();
                         },
                         child: const Text('Add New Grievance'),

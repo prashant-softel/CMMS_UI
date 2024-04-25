@@ -38,6 +38,7 @@ class JobCardDetailsModel {
       this.status_long,
       this.status_short,
       this.created_by,
+      this.fileListJc,
       this.jC_Approved,
       this.jC_Start_By_Name});
 
@@ -63,6 +64,7 @@ class JobCardDetailsModel {
   List<dynamic>? lstCmjcLotoDetailList;
   List<SelectedEmployee>? lstCmjcEmpList;
   List<FilesModel?>? fileList;
+  List<FilesModel?>? fileListJc;
   List<ToolList>? toolList;
   int? status;
   String? status_short;
@@ -105,6 +107,8 @@ class JobCardDetailsModel {
             json["lstCMJCEmpList"].map((x) => SelectedEmployee.fromJson(x))),
         fileList: List<FilesModel>.from(
             json["file_list"].map((x) => FilesModel.fromJson(x))),
+        fileListJc: List<FilesModel>.from(
+            json["file_listJc"].map((x) => FilesModel.fromJson(x))),
         toolList: List<ToolList>.from(
             json["tool_List"].map((x) => ToolList.fromJson(x))),
       );
@@ -332,22 +336,21 @@ class UploadFiles {
 }
 
 class SelectedEmployee {
-  int? empId;
-  String? empName;
+  int? id;
+  String? name;
   String? responsibility;
 
-  SelectedEmployee({this.empId, this.empName, this.responsibility});
+  SelectedEmployee({this.id, this.name, this.responsibility});
 
   factory SelectedEmployee.fromJson(Map<String, dynamic> json) =>
       SelectedEmployee(
-        empId: json["empId"],
-        empName: json["empName"],
+        id: json["id"],
+        name: json["name"],
         responsibility: json["responsibility"],
       );
 
   Map<String, dynamic> toJson() => {
-        "empId": empId,
-        "empName": empName,
+        "id": id,
         "responsibility": responsibility,
       };
 }

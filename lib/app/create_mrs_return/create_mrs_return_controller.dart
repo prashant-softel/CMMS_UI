@@ -129,6 +129,7 @@ class CreateMrsReturnController extends GetxController {
     rowItem.add([
       {"key": "Drop_down", "value": 'Please Select'},
       {'key': "Issue_Qty", "value": ''},
+      {'key': "Used_Qty", "value": ''},
       {'key': "Return_Qty", "value": ''},
       {'key': "is_faulty", "value": ''},
       {'key': "Remark", "value": ''},

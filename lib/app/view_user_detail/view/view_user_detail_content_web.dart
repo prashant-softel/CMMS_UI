@@ -521,9 +521,9 @@ class ViewUserDetailContentWeb extends GetView<ViewUserDetailController> {
                                                                         "Edit",
                                                                         "Delete",
                                                                         "View",
+                                                                        "Self View",
                                                                         "Issue",
-                                                                        "Approve",
-                                                                        "Self View"
+                                                                        "Approve"
                                                                       ].map(
                                                                           (column) {
                                                                         return TableViewColumn(
@@ -539,8 +539,16 @@ class ViewUserDetailContentWeb extends GetView<ViewUserDetailController> {
                                                                       rows: true
                                                                           ? controller
                                                                               .accessList
-                                                                              .map((getAccesslevelDetails) => TableViewRow(height: 90, cells: [
-                                                                                    TableViewCell(child: Text("${getAccesslevelDetails?.feature_name ?? ""}")),
+                                                                              .map((getAccesslevelDetails) => TableViewRow(height: 40, cells: [
+                                                                                    TableViewCell(child: Obx(() {
+                                                                                      return 
+                                                                                      Row(
+                                                                                        children: [
+                                                                                          Dimens.boxWidth5,
+                                                                                          Expanded(child: Text("${getAccesslevelDetails?.feature_name ?? ""}")),
+                                                                                        ],
+                                                                                      );
+                                                                                    })),
                                                                                     TableViewCell(
                                                                                         child: _rowItem(
                                                                                       getAccesslevelDetails?.add.value,
@@ -559,15 +567,15 @@ class ViewUserDetailContentWeb extends GetView<ViewUserDetailController> {
                                                                                     )),
                                                                                     TableViewCell(
                                                                                         child: _rowItem(
+                                                                                      getAccesslevelDetails?.selfView.value,
+                                                                                    )),
+                                                                                    TableViewCell(
+                                                                                        child: _rowItem(
                                                                                       getAccesslevelDetails?.issue.value,
                                                                                     )),
                                                                                     TableViewCell(
                                                                                         child: _rowItem(
                                                                                       getAccesslevelDetails?.approve.value,
-                                                                                    )),
-                                                                                    TableViewCell(
-                                                                                        child: _rowItem(
-                                                                                      getAccesslevelDetails?.selfView.value,
                                                                                     )),
                                                                                   ]))
                                                                               .toList()

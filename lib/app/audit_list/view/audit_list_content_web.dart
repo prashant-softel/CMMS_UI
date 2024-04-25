@@ -537,7 +537,7 @@ class AuditListListDataSource extends DataTableSource {
       "planId",
       '${AuditPlanPlanningListDetails?.plan_number ?? ''}',
       '${AuditPlanPlanningListDetails?.checklist_name ?? ''}',
-      '${AuditPlanPlanningListDetails?.created_by ?? ''}',
+      '${AuditPlanPlanningListDetails?.facility_name ?? ''}',
       '${AuditPlanPlanningListDetails?.schedule_Date ?? ''}',
       '${AuditPlanPlanningListDetails?.frequency_name ?? ''}',
       'Actions',

@@ -210,6 +210,8 @@ import 'package:cmms/app/warranty_certificates_list/warranty_certificates_list_s
 import 'package:cmms/app/warranty_claim_list/warranty_claim_binding.dart';
 import 'package:cmms/app/waste_data/views/waste_data_screen.dart';
 import 'package:cmms/app/waste_data/waste_data_binding.dart';
+import 'package:cmms/app/waste_type_master/view/waste_type_master_screen.dart';
+import 'package:cmms/app/waste_type_master/waste_type_master_binding.dart';
 import 'package:cmms/app/water_data/view/water_data_screen.dart';
 import 'package:cmms/app/water_data/water_data_binding.dart';
 import 'package:cmms/app/water_data_list/view/water_data_list_screen.dart';
@@ -1240,6 +1242,11 @@ class AppPages {
       name: _Paths.waterTypeMaster,
       page: WaterTypeMasterScreen.new,
       binding: WaterTypeMasterBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.wasteTypeMaster,
+      page: WasteTypeMasterScreen.new,
+      binding: WasteTypeMasterBinding(),
     ),
   ];
 }

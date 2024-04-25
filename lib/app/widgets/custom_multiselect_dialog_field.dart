@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:multi_select_flutter/multi_select_flutter.dart';
 
-class CustomMultiSelectDialogField extends StatelessWidget {
+class CustomMultiSelectDialogField extends StatefulWidget {
   final List<dynamic>? initialValue;
   final List<MultiSelectItem>? items;
   final String? title;
@@ -19,8 +19,22 @@ class CustomMultiSelectDialogField extends StatelessWidget {
   });
 
   @override
+  _CustomMultiSelectDialogFieldState createState() =>
+      _CustomMultiSelectDialogFieldState();
+}
+
+class _CustomMultiSelectDialogFieldState
+    extends State<CustomMultiSelectDialogField> {
+  late List<dynamic> _selectedItems;
+
+  @override
+  void initState() {
+    super.initState();
+    _selectedItems = widget.initialValue ?? [];
+  }
+
+  @override
   Widget build(BuildContext context) {
-    List<dynamic> _selectedItems = initialValue ?? [];
     final ScrollController _firstController = ScrollController();
 
     return Container(
@@ -42,10 +56,10 @@ class CustomMultiSelectDialogField extends StatelessWidget {
           ListTile(
             title: Responsive.isMobile(context) || Responsive.isTablet(context)
                 ? Text(
-                    title!,
+                    widget.title!,
                     style: Styles.black13,
                   )
-                : Text(title!),
+                : Text(widget.title!),
             trailing: IconButton(
               icon: Icon(Icons.arrow_drop_down),
               onPressed: () async {
@@ -54,13 +68,15 @@ class CustomMultiSelectDialogField extends StatelessWidget {
                     height: MediaQuery.of(context).size.height * 0.4,
                     width: MediaQuery.of(context).size.height * 0.3,
                     searchable: true,
-                    items: items!,
+                    items: widget.items!,
                     initialValue: _selectedItems,
                   ),
                 );
                 if (selectedItems != null) {
-                  _selectedItems = selectedItems.cast<dynamic>().toList();
-                  onConfirm(selectedItems);
+                  setState(() {
+                    _selectedItems = selectedItems.cast<dynamic>().toList();
+                  });
+                  widget.onConfirm(_selectedItems);
                 }
               },
             ),
@@ -78,12 +94,15 @@ class CustomMultiSelectDialogField extends StatelessWidget {
                   itemBuilder: (context, index) {
                     final item = _selectedItems[index];
                     return Chip(
-                      label: Text(items!
+                      label: Text(widget.items!
                           .firstWhere((element) => element.value == item)
                           .label), // Displaying the name of the selected item
                       deleteIcon: Icon(Icons.cancel),
                       onDeleted: () {
-                        _selectedItems.remove(item);
+                        setState(() {
+                          _selectedItems.remove(item);
+                        });
+                        widget.onConfirm(_selectedItems);
                       },
                     );
                   },

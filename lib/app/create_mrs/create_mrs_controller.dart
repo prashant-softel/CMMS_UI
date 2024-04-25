@@ -27,6 +27,7 @@ class CreateMrsController extends GetxController {
   var remarkCtrlr = TextEditingController();
   var whereUsedCtrlr = TextEditingController();
   var setTemlateCtrlr = TextEditingController();
+  RxList<String> removedMaterials = <String>[].obs;
   // int whereUsedTypeId = 0;
   var isSetTemplate = false.obs;
   Rx<int> whereUsedTypeId = 0.obs;
@@ -88,6 +89,7 @@ class CreateMrsController extends GetxController {
     final _assetList =
         await createMrsPresenter.getEquipmentList(facilityId: facilityId);
     if (_assetList != null) {
+      assetItemList.clear();
       for (var asset in _assetList) {
         assetItemList.add(asset);
       }
