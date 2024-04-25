@@ -336,21 +336,21 @@ class UploadFiles {
 }
 
 class SelectedEmployee {
-  int? empId;
-  String? empName;
+  int? id;
+  String? name;
   String? responsibility;
 
-  SelectedEmployee({this.empId, this.empName, this.responsibility});
+  SelectedEmployee({this.id, this.name, this.responsibility});
 
   factory SelectedEmployee.fromJson(Map<String, dynamic> json) =>
       SelectedEmployee(
-        empId: json["empId"],
-        empName: json["empName"],
+        id: json["id"],
+        name: json["name"],
         responsibility: json["responsibility"],
       );
 
   Map<String, dynamic> toJson() => {
-        "empId": empId,
+        "id": id,
         "responsibility": responsibility,
       };
 }
