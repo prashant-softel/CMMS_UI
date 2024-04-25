@@ -1605,7 +1605,7 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                                                           DataColumn(
                                                                               label: Text("Responsibility")),
                                                                           DataColumn(
-                                                                              label: Text("Responsibility")),
+                                                                              label: Text("Action")),
                                                                         ],
                                                                         rows: List<
                                                                             DataRow>.generate(

@@ -27,6 +27,7 @@ class CreateMrsController extends GetxController {
   var remarkCtrlr = TextEditingController();
   var whereUsedCtrlr = TextEditingController();
   var setTemlateCtrlr = TextEditingController();
+  RxList<String> removedMaterials = <String>[].obs;
   // int whereUsedTypeId = 0;
   var isSetTemplate = false.obs;
   Rx<int> whereUsedTypeId = 0.obs;

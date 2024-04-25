@@ -21,6 +21,7 @@ class EditMrsController extends GetxController {
   RxList<List<Map<String, String>>> rowItem = <List<Map<String, String>>>[].obs;
 
   RxMap<dynamic, dynamic> dropdownMapperData = {}.obs;
+  List<String> removedMaterials = <String>[].obs;
 
   var activityCtrlr = TextEditingController();
   var remarkCtrlr = TextEditingController();

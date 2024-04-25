@@ -6,7 +6,6 @@ import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_textField.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 
@@ -273,6 +272,20 @@ class CreateMrsContentWeb extends GetView<CreateMrsController> {
                                                               element.name ==
                                                               selectedValue,
                                                           orElse: null);
+                                                  if (controller
+                                                      .removedMaterials
+                                                      .contains(
+                                                          selectedValue)) {
+                                                    controller.removedMaterials
+                                                        .remove(selectedValue);
+                                                  } else {
+                                                    controller.removedMaterials
+                                                        .add(selectedValue);
+                                                  }
+                                                  controller.assetItemList
+                                                      .removeWhere((item) =>
+                                                          item?.name ==
+                                                          selectedValue);
                                                 },
                                               ),
                                             )
@@ -384,6 +397,20 @@ class CreateMrsContentWeb extends GetView<CreateMrsController> {
                                                             label: '',
                                                             message: '',
                                                             onPress: () {
+                                                              controller
+                                                                  .removedMaterials
+                                                                  .forEach(
+                                                                      (material) {
+                                                                controller
+                                                                    .assetItemList
+                                                                    .add(controller
+                                                                        .dropdownMapperData
+                                                                        .value[material]);
+                                                              });
+                                                              // Clear the removedMaterials list
+                                                              // controller
+                                                              //     .removedMaterials
+                                                              //     .clear();
                                                               controller.rowItem
                                                                   .remove(
                                                                       record);
