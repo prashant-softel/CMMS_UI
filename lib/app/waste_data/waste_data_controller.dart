@@ -192,6 +192,35 @@ class WasteDataController extends GetxController {
     print('Create Water data: $createWaterDataModelJsonString');
   }
 
+  void createWasteDataDisposed() async {
+    String _descriptionCtrlr = descriptionCtrlr.text.trim();
+    String _qtCtrlr = qtyCtrlr.text.trim();
+    DateTime procurementTime = selectedWasteDataTime.value;
+    String formattedDate =
+        DateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'").format(procurementTime);
+
+    CreateWasteData createWasteData = CreateWasteData(
+      consumeType: 1,
+      facilityId: facilityId,
+      creditQty: double.tryParse(_qtCtrlr) ?? 0,
+      date: formattedDate,
+      debitQty: 0,
+      description: _descriptionCtrlr,
+      wasteTypeId: selectedTypeOfWasteId,
+    );
+    var createWaterDataModelJsonString = createWasteData.toJson();
+    Map<String, dynamic>? responseCreateWaterDataModel =
+        await wasteDataPresenter.createWasteDataDisposed(
+      createWasteData: createWaterDataModelJsonString,
+      isLoading: true,
+    );
+
+    // Handle the response
+    if (responseCreateWaterDataModel == null) {}
+
+    print('Create Water data: $createWaterDataModelJsonString');
+  }
+
   void onValueChanged(dynamic list, dynamic value) {
     switch (list.runtimeType) {
       case RxList<WasteSource>:
