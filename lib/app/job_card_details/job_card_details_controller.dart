@@ -165,8 +165,8 @@ class JobCardDetailsController extends GetxController {
           employeesDeployed.value.add([
             {
               "key": "Employee Name",
-              "value": "${element.empName}",
-              "empId": "${element.empId}",
+              "value": "${element.name}",
+              "empId": "${element.id}",
             },
             {
               "key": "Responsibility",
@@ -387,7 +387,7 @@ class JobCardDetailsController extends GetxController {
       List<SelectedEmployee> employees = [];
       employeesDeployed.forEach((element) {
         SelectedEmployee item = SelectedEmployee(
-          empId: int.parse(
+          id: int.parse(
               deployedEmployeeMapperData[element[0]["value"]]?.id.toString() ??
                   '0'),
           responsibility: element[1]["value"] ?? '0',
@@ -492,7 +492,7 @@ class JobCardDetailsController extends GetxController {
     List<SelectedEmployee> employees = [];
     employeesDeployed.forEach((element) {
       SelectedEmployee item = SelectedEmployee(
-        empId: deployedEmployeeMapperData[element[0]["value"]]?.id,
+        id: deployedEmployeeMapperData[element[0]["value"]]?.id,
         responsibility: element[1]["value"] ?? '0',
       );
       employees.add(item);
@@ -610,7 +610,7 @@ class JobCardDetailsController extends GetxController {
     List<SelectedEmployee> employees = [];
     employeesDeployed.forEach((element) {
       SelectedEmployee item = SelectedEmployee(
-        empId: deployedEmployeeMapperData[element[0]["value"]]?.id,
+        id: deployedEmployeeMapperData[element[0]["value"]]?.id,
         responsibility: element[1]["value"] ?? '0',
       );
       employees.add(item);
@@ -862,7 +862,7 @@ class JobCardDetailsController extends GetxController {
     );
 
     selectedEmployees = SelectedEmployee(
-      empId: selectedEmployeeId,
+      id: selectedEmployeeId,
       responsibility: responsibility,
     );
     employee.add(selectedEmployees);
