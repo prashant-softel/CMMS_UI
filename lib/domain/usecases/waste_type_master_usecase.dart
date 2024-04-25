@@ -12,10 +12,10 @@ class WasteTypeMasterUsecase {
     );
   }
 
-  // Future<WasteSource?> getWaterTypeById(
-  //     {int? waterTypeId, bool? isLoading}) async {
-  //   return await repository.getWaterTypeById(
-  //     waterTypeId: waterTypeId,
+  // Future<WasteSource?> getWasteTypeById(
+  //     {int? wasteTypeId, bool? isLoading}) async {
+  //   return await repository.getWasteTypeById(
+  //     wasteTypeId: wasteTypeId,
   //     isLoading: isLoading,
   //   );
   // }
