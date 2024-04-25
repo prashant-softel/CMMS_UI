@@ -216,9 +216,9 @@ class RoleAccessContentWeb extends GetView<RoleAccessController> {
                                             "Edit",
                                             "Delete",
                                             "View",
+                                            "Self View",
                                             "Issue",
-                                            "Approve",
-                                            "Self View"
+                                            "Approve"
                                           ].map((column) {
                                             return TableViewColumn(
                                               label: column,
@@ -350,6 +350,21 @@ class RoleAccessContentWeb extends GetView<RoleAccessController> {
                                                             child: Obx(() {
                                                           return _rowItem(
                                                               getAccesslevelDetails
+                                                                  ?.selfView
+                                                                  .value,
+                                                              onCheck: (val) {
+                                                            getAccesslevelDetails
+                                                                    ?.selfView
+                                                                    .value =
+                                                                val == true
+                                                                    ? 1
+                                                                    : 0;
+                                                          });
+                                                        })),
+                                                        TableViewCell(
+                                                            child: Obx(() {
+                                                          return _rowItem(
+                                                              getAccesslevelDetails
                                                                   ?.issue.value,
                                                               onCheck: (val) {
                                                             getAccesslevelDetails
@@ -375,21 +390,7 @@ class RoleAccessContentWeb extends GetView<RoleAccessController> {
                                                                     : 0;
                                                           });
                                                         })),
-                                                        TableViewCell(
-                                                            child: Obx(() {
-                                                          return _rowItem(
-                                                              getAccesslevelDetails
-                                                                  ?.selfView
-                                                                  .value,
-                                                              onCheck: (val) {
-                                                            getAccesslevelDetails
-                                                                    ?.selfView
-                                                                    .value =
-                                                                val == true
-                                                                    ? 1
-                                                                    : 0;
-                                                          });
-                                                        })),
+                                                        
                                                       ]))
                                               .toList())
                                       : Dimens.box0),

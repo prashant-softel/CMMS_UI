@@ -1514,9 +1514,9 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                                                                           "Edit",
                                                                                           "Delete",
                                                                                           "View",
+                                                                                          "Self View",
                                                                                           "Issue",
-                                                                                          "Approve",
-                                                                                          "Self View"
+                                                                                          "Approve"
                                                                                         ].map((column) {
                                                                                           return TableViewColumn(
                                                                                             label: column,
@@ -1583,6 +1583,11 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                                                                                         });
                                                                                                       })),
                                                                                                       TableViewCell(child: Obx(() {
+                                                                                                        return controller.rowItem(getAccesslevelDetails?.selfView.value, onCheck: (val) {
+                                                                                                          getAccesslevelDetails?.selfView.value = val == true ? 1 : 0;
+                                                                                                        });
+                                                                                                      })),
+                                                                                                      TableViewCell(child: Obx(() {
                                                                                                         return controller.rowItem(getAccesslevelDetails?.issue.value, onCheck: (val) {
                                                                                                           getAccesslevelDetails?.issue.value = val == true ? 1 : 0;
                                                                                                         });
@@ -1590,11 +1595,6 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                                                                                       TableViewCell(child: Obx(() {
                                                                                                         return controller.rowItem(getAccesslevelDetails?.approve.value, onCheck: (val) {
                                                                                                           getAccesslevelDetails?.approve.value = val == true ? 1 : 0;
-                                                                                                        });
-                                                                                                      })),
-                                                                                                      TableViewCell(child: Obx(() {
-                                                                                                        return controller.rowItem(getAccesslevelDetails?.selfView.value, onCheck: (val) {
-                                                                                                          getAccesslevelDetails?.selfView.value = val == true ? 1 : 0;
                                                                                                         });
                                                                                                       })),
                                                                                                     ]))
