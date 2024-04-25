@@ -281,9 +281,9 @@ class AddUserController extends GetxController {
     facility_map[emp_id] = selectedfacilityNameIdList;
   }
 
-  Future<void> getBusinessList(ListType,int facilityId) async {
+  Future<void> getBusinessList(ListType, int facilityId) async {
     final list = await addUserPresenter.getBusinessList(
-      facilityId:facilityId,
+      facilityId: facilityId,
       ListType: ListType,
       isLoading: true,
     );
@@ -793,7 +793,7 @@ class AddUserController extends GetxController {
   }
 
   AddfacilityListAlertBox() {
-    return StatefulBuilder(builder: ((context, setState) {
+    return StatefulBuilder(builder: (context, setState) {
       return AlertDialog(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(15.0)),
@@ -838,8 +838,9 @@ class AddUserController extends GetxController {
                               ),
                             )
                             .toList(),
-                        onConfirm: (selectedOptionsList) => {
-                          facilityNameSelected(selectedOptionsList),
+                        onConfirm: (selectedOptionsList) {
+                          facilityNameSelected(selectedOptionsList);
+                          setState(() {});
                         },
                       ),
                     )
@@ -861,7 +862,7 @@ class AddUserController extends GetxController {
           ),
         ],
       );
-    }));
+    });
   }
 
   Widget rowItem(int? defaultValue, {required Function(bool) onCheck}) {
