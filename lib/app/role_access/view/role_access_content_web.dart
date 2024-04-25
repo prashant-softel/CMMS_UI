@@ -419,7 +419,9 @@ class RoleAccessContentWeb extends GetView<RoleAccessController> {
                                                   TextButton(
                                                     onPressed: () {
                                                       Navigator.of(context)
-                                                          .pop();
+                                                          .popUntil((route) =>
+                                                              route.isFirst);
+                                                      controller.update();
                                                     },
                                                     child: Text("OK"),
                                                   ),
@@ -436,7 +438,10 @@ class RoleAccessContentWeb extends GetView<RoleAccessController> {
                                       child: CustomElevatedButton(
                                         backgroundColor: ColorValues.redColor,
                                         text: "Cancel",
-                                        onPressed: () {},
+                                        onPressed: () {
+                                          Get.offAndToNamed(
+                                              Routes.masterDashboard);
+                                        },
                                       ),
                                     ),
                                   ],
