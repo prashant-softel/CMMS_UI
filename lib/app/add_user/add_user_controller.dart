@@ -45,6 +45,7 @@ class AddUserController extends GetxController {
   Rx<bool> isFacilitySelected = true.obs;
   AddUserPresenter addUserPresenter;
   RxList<CountryModel?> countryList = <CountryModel>[].obs;
+
   Rx<String> selectedCountry = ''.obs;
   Rx<String> selectedGender = ''.obs;
 
@@ -127,6 +128,7 @@ class AddUserController extends GetxController {
   double thumbnailSize = Get.height * 0.25;
   RxList<String?> selectedfacilityDataList = <String>[].obs;
   RxList<int?> selectedfacilityIdList = <int>[].obs;
+
   RxList<FacilityModel?> selectedFacilityNameList = <FacilityModel>[].obs;
   RxList<int> selectedfacilityNameIdList = <int>[].obs;
   RxList<FacilityModel?> facilityNameList = <FacilityModel>[].obs;
@@ -829,7 +831,7 @@ class AddUserController extends GetxController {
                       child: CustomMultiSelectDialogField(
                         buttonText: 'Add Facility',
                         title: 'Select Facility',
-                        initialValue: selectedfacilityNameIdList,
+                        initialValue: selectedfacilityNameIdList.value,
                         items: facilityNameList
                             .map(
                               (facilityName) => MultiSelectItem(
@@ -840,6 +842,8 @@ class AddUserController extends GetxController {
                             .toList(),
                         onConfirm: (selectedOptionsList) {
                           facilityNameSelected(selectedOptionsList);
+                          selectedfacilityNameIdList.value =
+                              selectedOptionsList.cast<int>().toList();
                           setState(() {});
                         },
                       ),
