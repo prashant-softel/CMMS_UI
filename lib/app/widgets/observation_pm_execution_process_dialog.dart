@@ -289,7 +289,7 @@ class ObservationPmExecutionViewDialog extends GetView {
                                                                                 await FilePicker.platform.pickFiles();
                                                                             if (result !=
                                                                                 null) {
-                                                                              controller.fileName.value = result.files.single.name;
+                                                                              mapData['uploaded'] = result.files.single.name;
                                                                               controller.fileBytes = result.files.single.bytes;
                                                                               controller.browseFiles(
                                                                                 fileBytes: controller.fileBytes,
@@ -312,6 +312,12 @@ class ObservationPmExecutionViewDialog extends GetView {
                                                                                 color: ColorValues.whiteColor),
                                                                           ),
                                                                         ),
+
+                                                                        Text(
+                                                                          "${mapData['uploaded']}",
+                                                                          overflow:
+                                                                              TextOverflow.ellipsis,
+                                                                        )
                                                                         // Dimens.boxWidth15,
                                                                         // Container(
                                                                         //   width: 60,
