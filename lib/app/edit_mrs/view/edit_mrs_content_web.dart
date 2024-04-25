@@ -310,10 +310,10 @@ class EditMrsContentWeb extends GetView<EditMrsController> {
                                                       mapData["value"],
                                                   onValueChanged:
                                                       (list, selectedValue) {
-                                                    // print({
-                                                    //   selectedValue:
-                                                    //       selectedValue
-                                                    // });
+                                                    print({
+                                                      selectedValue:
+                                                          selectedValue
+                                                    });
                                                     mapData["value"] =
                                                         selectedValue;
                                                     controller.dropdownMapperData[
@@ -323,6 +323,23 @@ class EditMrsContentWeb extends GetView<EditMrsController> {
                                                                 element.name ==
                                                                 selectedValue,
                                                             orElse: null);
+                                                    if (controller
+                                                        .removedMaterials
+                                                        .contains(
+                                                            selectedValue)) {
+                                                      controller
+                                                          .removedMaterials
+                                                          .remove(
+                                                              (selectedValue));
+                                                    } else {
+                                                      controller
+                                                          .removedMaterials
+                                                          .add(selectedValue);
+                                                    }
+                                                    controller.assetItemList
+                                                        .removeWhere((item) =>
+                                                            item?.name ==
+                                                            selectedValue);
                                                   },
                                                 ),
                                                 // SizedBox(
@@ -358,6 +375,20 @@ class EditMrsContentWeb extends GetView<EditMrsController> {
                                                       onPress: () {
                                                         controller.rowItem
                                                             .remove(record);
+                                                        controller
+                                                            .removedMaterials
+                                                            .forEach(
+                                                                (material) {
+                                                          controller
+                                                              .assetItemList
+                                                              .add(controller
+                                                                  .dropdownMapperData
+                                                                  .value[material]);
+                                                        });
+                                                        // Clear the removedMaterials list
+                                                        // controller
+                                                        //     .removedMaterials
+                                                        //     .clear();
                                                       },
                                                     )
                                                   ],
