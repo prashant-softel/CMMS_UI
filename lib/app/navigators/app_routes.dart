@@ -288,7 +288,7 @@ abstract class _Paths {
   static const SPVListScreen = '/spv-list-screen';
   static const blockTypeListScreen = '/block-type-list-screen';
   static const Bodyinjured = '/body-injured';
-  static const importInventory = '/importInventory';
+  static const importInventory = '/import';
   static const userList = '/userList';
   static const addUser = '/addUser';
   static const viewUserDetail = '/view-user-detail';

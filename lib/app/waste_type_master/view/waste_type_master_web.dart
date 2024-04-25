@@ -317,11 +317,9 @@ class WasteTypeMasterWeb extends GetView<WasteTypeMasterController> {
                                                     BorderRadius.circular(5),
                                               ),
                                               child: TextField(
-                                                style: GoogleFonts.lato(
-                                                  textStyle: TextStyle(
-                                                      fontSize: 16.0,
-                                                      height: 1.0,
-                                                      color: Colors.black),
+                                                style: TextStyle(
+                                                  fontSize: 14.0,
+                                                  height: 1.0,
                                                 ),
                                                 controller:
                                                     controller.descriptionCtrlr,
@@ -440,21 +438,20 @@ class WasteTypeMasterWeb extends GetView<WasteTypeMasterController> {
                                               backgroundColor:
                                                   ColorValues.appDarkBlueColor,
                                               onPressed: () {
-                                                // controller
-                                                //     .createWaterType()
-                                                //     .then(
-                                                //   (value) {
-                                                //     print("CREATE");
-                                                //     print("value,$value");
-                                                //     if (value == true) {
-                                                //       controller
-                                                //           .isSuccessfullyCreated();
-                                                //       // Close the Create SPV container
-                                                //       controller
-                                                //           .toggleContainer();
-                                                //     }
-                                                //   },
-                                                // );
+                                                controller
+                                                    .createWasteType()
+                                                    .then(
+                                                  (value) {
+                                                    print("CREATE");
+                                                    print("value,$value");
+                                                    if (value == true) {
+                                                      controller
+                                                          .issuccessCreatechecklist();
+                                                      controller
+                                                          .toggleContainer();
+                                                    }
+                                                  },
+                                                );
                                               },
                                               text: 'Create Waste Type',
                                             ),
@@ -463,19 +460,19 @@ class WasteTypeMasterWeb extends GetView<WasteTypeMasterController> {
                                             backgroundColor:
                                                 ColorValues.appDarkBlueColor,
                                             onPressed: () {
-                                              // controller
-                                              //     .updateSPV(controller
-                                              //         .selectedItem?.id)
-                                              //     .then(
-                                              //   (value) {
-                                              //     print("UPDATE");
-                                              //     print("value,$value");
-                                              //     if (value == true)
-                                              //       controller
-                                              //           .issuccessCreatechecklist();
-                                              //     controller.toggleContainer();
-                                              //   },
-                                              // );
+                                              controller
+                                                  .updateWasteType(controller
+                                                      .selectedItem?.id)
+                                                  .then(
+                                                (value) {
+                                                  print("UPDATE");
+                                                  print("value,$value");
+                                                  if (value == true)
+                                                    controller
+                                                        .issuccessCreatechecklist();
+                                                  controller.toggleContainer();
+                                                },
+                                              );
                                             },
                                             text: 'Update',
                                           ),
@@ -659,17 +656,35 @@ class WasteTypeMasterWeb extends GetView<WasteTypeMasterController> {
                                                             icon: Icons.edit,
                                                             message: 'Edit',
                                                             onPress: () {
-                                                              // int? waterTypeId =
-                                                              //     controller
-                                                              //         .wasteTypeMasterList?[
-                                                              //             index]!
-                                                              //         .id;
-                                                              // controller.getWaterTypeById(
-                                                              //     waterTypeId:
-                                                              //         waterTypeId);
-                                                              // controller
-                                                              //     .isContainerVisible
-                                                              //     .value = true;
+                                                              controller
+                                                                      .selectedItem =
+                                                                  controller
+                                                                      .wasteTypeMasterList!
+                                                                      .firstWhere(
+                                                                (element) =>
+                                                                    "${element!.id}" ==
+                                                                    controller
+                                                                        .wasteTypeMasterList![
+                                                                            index]!
+                                                                        .id
+                                                                        .toString(),
+                                                              );
+
+                                                              controller
+                                                                  .titleCtrlr
+                                                                  .text = controller
+                                                                      .selectedItem
+                                                                      ?.name ??
+                                                                  '';
+                                                              controller
+                                                                  .descriptionCtrlr
+                                                                  .text = controller
+                                                                      .selectedItem
+                                                                      ?.description ??
+                                                                  '';
+                                                              controller
+                                                                  .isContainerVisible
+                                                                  .value = true;
                                                             },
                                                           ),
                                                           TableActionButton(
@@ -678,17 +693,17 @@ class WasteTypeMasterWeb extends GetView<WasteTypeMasterController> {
                                                             icon: Icons.delete,
                                                             message: 'Delete',
                                                             onPress: () {
-                                                              // controller
-                                                              //     .isDeleteDialog(
-                                                              //   waterTypeId: controller
-                                                              //       .wasteTypeMasterList?[
-                                                              //           index]!
-                                                              //       .id,
-                                                              //   name: controller
-                                                              //       .wasteTypeMasterList?[
-                                                              //           index]!
-                                                              //       .name,
-                                                              // );
+                                                              controller
+                                                                  .isDeleteDialog(
+                                                                wasteTypeId: controller
+                                                                    .wasteTypeMasterList?[
+                                                                        index]!
+                                                                    .id,
+                                                                name: controller
+                                                                    .wasteTypeMasterList?[
+                                                                        index]!
+                                                                    .name,
+                                                              );
                                                             },
                                                           ),
                                                         ],

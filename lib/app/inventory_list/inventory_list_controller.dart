@@ -53,7 +53,7 @@ class InventoryListController extends GetxController {
     "Id": true,
     "Assets Name": true,
     "Serial No": true,
-    "Parrent Asset": true,
+    "Parent Asset": true,
     "Catergory": true,
     "Asset Facility Name": true,
 
@@ -63,7 +63,7 @@ class InventoryListController extends GetxController {
     "Id": 153,
     "Assets Name": 320,
     "Serial No": 120,
-    "Parrent Asset": 200,
+    "Parent Asset": 200,
     "Catergory": 223,
     "Asset Facility Name": 153,
   };
@@ -82,7 +82,7 @@ class InventoryListController extends GetxController {
       "Id": idFilterText,
       "Assets Name": assetsNameFilterText,
       "Serial No": serialNoFilterText,
-      "Parrent Asset": parrentAssetFilterText,
+      "Parent Asset": parrentAssetFilterText,
       "Catergory": catergoryFilterText,
       "Asset Facility Name": assetFacilityNameFilterText,
     };

@@ -215,6 +215,7 @@ class CreateMrsReturnContentWeb extends GetView<CreateMrsReturnController> {
                                     columns: [
                                       "Material Name",
                                       "Issue Qty",
+                                      "Used Qty",
                                       "Return Qty",
                                       "Is Faulty?",
                                       "Remark",
@@ -303,8 +304,7 @@ class CreateMrsReturnContentWeb extends GetView<CreateMrsReturnController> {
                                                             ),
                                                             child:
                                                                 LoginCustomTextfield(
-                                                              inputFormatters: <
-                                                                  TextInputFormatter>[
+                                                              inputFormatters: <TextInputFormatter>[
                                                                 FilteringTextInputFormatter
                                                                     .digitsOnly
                                                               ],
@@ -356,59 +356,57 @@ class CreateMrsReturnContentWeb extends GetView<CreateMrsReturnController> {
                                                             ? Text(
                                                                 "${controller.dropdownMapperData.value[record[0]['value']]?.issued_qty ?? ""}")
                                                             : (mapData['key'] ==
-                                                                    "is_faulty")
-                                                                ? Padding(
-                                                                    padding: const EdgeInsets
+                                                                    "Used_Qty")
+                                                                ? Text(
+                                                                    "${controller.dropdownMapperData.value[record[0]['value']]?.consumed_qty ?? ""}")
+                                                                : (mapData['key'] ==
+                                                                        "is_faulty")
+                                                                    ? Padding(
+                                                                        padding: const EdgeInsets
                                                                             .only(
-                                                                        top:
-                                                                            8.0),
-                                                                    child:
-                                                                        CustomSwitchTroggle(
-                                                                            value: controller
-                                                                                .isSetTemplate.value,
-                                                                            onChanged:
-                                                                                (value) {
+                                                                            top:
+                                                                                8.0),
+                                                                        child: CustomSwitchTroggle(
+                                                                            value: controller.isSetTemplate.value,
+                                                                            onChanged: (value) {
                                                                               controller.setTemplatetoggle();
                                                                             }))
-                                                                : (mapData['key'] ==
-                                                                        "Remark")
-                                                                    ? Padding(
-                                                                        padding:
-                                                                            const EdgeInsets.all(8.0),
-                                                                        child: Container(
-                                                                            width: (Get.width * .5),
-                                                                            // padding: EdgeInsets.all(value),
-                                                                            decoration: BoxDecoration(
-                                                                              boxShadow: [
-                                                                                BoxShadow(
-                                                                                  color: Colors.black26,
-                                                                                  offset: const Offset(
-                                                                                    5.0,
-                                                                                    5.0,
-                                                                                  ),
-                                                                                  blurRadius: 5.0,
-                                                                                  spreadRadius: 1.0,
+                                                                    : (mapData['key'] == "Remark")
+                                                                        ? Padding(
+                                                                            padding:
+                                                                                const EdgeInsets.all(8.0),
+                                                                            child: Container(
+                                                                                width: (Get.width * .5),
+                                                                                // padding: EdgeInsets.all(value),
+                                                                                decoration: BoxDecoration(
+                                                                                  boxShadow: [
+                                                                                    BoxShadow(
+                                                                                      color: Colors.black26,
+                                                                                      offset: const Offset(
+                                                                                        5.0,
+                                                                                        5.0,
+                                                                                      ),
+                                                                                      blurRadius: 5.0,
+                                                                                      spreadRadius: 1.0,
+                                                                                    ),
+                                                                                  ],
+                                                                                  color: ColorValues.whiteColor,
+                                                                                  borderRadius: BorderRadius.circular(5),
                                                                                 ),
-                                                                              ],
-                                                                              color: ColorValues.whiteColor,
-                                                                              borderRadius: BorderRadius.circular(5),
-                                                                            ),
-                                                                            child: LoginCustomTextfield(
-                                                                              // inputFormatters: <
-                                                                              //     TextInputFormatter>[
-                                                                              //   FilteringTextInputFormatter
-                                                                              //       .digitsOnly
-                                                                              // ],
-                                                                              maxLine: 1,
-                                                                              textController: new TextEditingController(text: mapData["value"] ?? ''),
-                                                                              onChanged: (txt) {
-                                                                                mapData["value"] = txt;
-                                                                              },
-                                                                            )),
-                                                                      )
-                                                                    : Text(mapData[
-                                                                            'key'] ??
-                                                                        ''),
+                                                                                child: LoginCustomTextfield(
+                                                                                  // inputFormatters: <
+                                                                                  //     TextInputFormatter>[
+                                                                                  //   FilteringTextInputFormatter
+                                                                                  //       .digitsOnly
+                                                                                  // ],
+                                                                                  maxLine: 1,
+                                                                                  textController: new TextEditingController(text: mapData["value"] ?? ''),
+                                                                                  onChanged: (txt) {
+                                                                                    mapData["value"] = txt;
+                                                                                  },
+                                                                                )),
+                                                                          )
+                                                                        : Text(mapData['key'] ?? ''),
                                           );
                                         }).toList(),
                                       );

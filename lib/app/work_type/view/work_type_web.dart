@@ -616,6 +616,11 @@ class WorkTypeWeb extends GetView<WorkTypeController> {
                                                                 .selectedItem
                                                                 ?.categoryName ??
                                                             '';
+                                                        controller
+                                                                .selectedEquipmentId =
+                                                            controller
+                                                                .selectedItem!
+                                                                .categoryid!;
 
                                                         controller
                                                             .isContainerVisible

@@ -6,54 +6,52 @@ class WasteTypeMasterPresenter {
 
   WasteTypeMasterUsecase wasteTypeMasterUsecase;
 
-  // Future<List<WasteSource>> getTypeOfWasteList({
-  //   required bool isLoading,
-  //   required int? facilityId,
-  // }) async {
-  //   return wasteTypeMasterUsecase.getTypeOfWasteList(
-  //     facilityId: facilityId,
-  //     isLoading: isLoading,
-  //   );
-  // }
+  Future<List<WasteSource>> getWasteTypeList({
+    required bool isLoading,
+  }) async {
+    return wasteTypeMasterUsecase.getWasteTypeList(
+      isLoading: isLoading,
+    );
+  }
 
-  // Future<WasteSource?> getWaterTypeById({
-  //   int? waterTypeId,
-  //   bool? isLoading,
-  // }) async {
-  //   return wasteTypeMasterUsecase.getWaterTypeById(
-  //     waterTypeId: waterTypeId,
-  //     isLoading: isLoading,
-  //   );
-  // }
-
-  // Future<bool> createWasteType({
-  //   wasteTypeJson,
-  //   bool? isLoading,
-  // }) async {
-  //   wasteTypeMasterUsecase.createWasteType(
-  //     wasteTypeJson: wasteTypeJson,
-  //     isLoading: isLoading,
-  //   );
-  //   return true;
-  // }
-
-  // Future<bool> updateWasteType({
-  //   wasteTypeJson,
-  //   bool? isLoading,
-  // }) async {
-  //   wasteTypeMasterUsecase.updateWasteType(
-  //     wasteTypeJson: wasteTypeJson,
-  //     isLoading: isLoading,
-  //   );
-  //   return true;
-  // }
-
-  // Future<void> deleteWasteType({
+  // Future<WasteSource?> getWasteTypeById({
   //   int? wasteTypeId,
   //   bool? isLoading,
-  // }) async =>
-  //     await wasteTypeMasterUsecase.deleteWasteType(
-  //       wasteTypeId: wasteTypeId,
-  //       isLoading: isLoading,
-  //     );
+  // }) async {
+  //   return wasteTypeMasterUsecase.getWasteTypeById(
+  //     wasteTypeId: wasteTypeId,
+  //     isLoading: isLoading,
+  //   );
+  // }
+
+  Future<bool> createWasteType({
+    wasteTypeJson,
+    bool? isLoading,
+  }) async {
+    wasteTypeMasterUsecase.createWasteType(
+      wasteTypeJson: wasteTypeJson,
+      isLoading: isLoading,
+    );
+    return true;
+  }
+
+  Future<bool> updateWasteType({
+    wasteTypeJson,
+    bool? isLoading,
+  }) async {
+    wasteTypeMasterUsecase.updateWasteType(
+      wasteTypeJson: wasteTypeJson,
+      isLoading: isLoading,
+    );
+    return true;
+  }
+
+  Future<void> deleteWasteType({
+   required int? wasteTypeId,
+    bool? isLoading,
+  }) async =>
+      await wasteTypeMasterUsecase.deleteWasteType(
+        wasteTypeId: wasteTypeId ?? 0,
+        isLoading: isLoading,
+      );
 }

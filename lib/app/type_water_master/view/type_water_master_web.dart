@@ -506,7 +506,7 @@ class WaterTypeMasterWeb extends GetView<WaterTypeMasterController> {
                                 child: Row(
                                   children: [
                                     Text(
-                                      "List of Grievance Type",
+                                      "List of Water Type",
                                       style: Styles.blackBold16,
                                     ),
                                     Spacer(),

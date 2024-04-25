@@ -43,9 +43,11 @@ class GrievanceCreatedDialog extends GetView<CreateGrievanceController> {
                   thickness: 1,
                 ),
                 Dimens.boxHeight10,
-                Text(
-                  message ?? '',
-                  overflow: TextOverflow.ellipsis,
+                Center(
+                  child: Text(
+                    message ?? '',
+                    overflow: TextOverflow.ellipsis,
+                  ),
                 ),
                 Dimens.boxHeight10,
                 Row(

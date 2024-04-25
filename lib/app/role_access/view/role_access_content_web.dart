@@ -406,6 +406,26 @@ class RoleAccessContentWeb extends GetView<RoleAccessController> {
                                         onPressed: () {
                                           //controller.addUser();
                                           controller.saveRoleAccess();
+                                          showDialog(
+                                            context: context,
+                                            builder: (BuildContext context) {
+                                              return AlertDialog(
+                                                title:
+                                                    Text("Success"),
+                                                content: Text(
+                                                    "Role updated successfully!"),
+                                                actions: <Widget>[
+                                                  TextButton(
+                                                    onPressed: () {
+                                                      Navigator.of(context)
+                                                          .pop();
+                                                    },
+                                                    child: Text("OK"),
+                                                  ),
+                                                ],
+                                              );
+                                            },
+                                          );
                                         },
                                       ),
                                     ),

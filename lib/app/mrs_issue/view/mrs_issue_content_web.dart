@@ -452,7 +452,7 @@ class MrsIssueContentWeb extends GetView<MrsIssueController> {
                                                                           Fluttertoast
                                                                               .showToast(
                                                                             msg:
-                                                                                'Enter qty below the requested qty',
+                                                                                'Enter qty below the approved qty',
                                                                             fontSize:
                                                                                 16.0,
                                                                           );

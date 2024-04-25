@@ -150,22 +150,27 @@ class ViewSOPDialog extends GetView {
                                   ],
                                 ),
                               )
-                            : Row(
-                                children: [
-                                  Checkbox(
-                                    value: _controller.permitId.value > 0
-                                        ? true
-                                        : _controller.isCheckedSOP.value,
-                                    // value: _controller.isCheckedSOP.value,
-                                    onChanged: (bool? value) {
-                                      _controller.soptoggleCheckbox();
-                                    },
-                                  ),
-                                  Text(
-                                    'I have read and accept\nterms and conditions',
-                                    style: TextStyle(fontSize: 13),
-                                  )
-                                ],
+                            : IgnorePointer(
+                                ignoring: _controller.permitId.value > 0
+                                    ? true
+                                    : false,
+                                child: Row(
+                                  children: [
+                                    Checkbox(
+                                      value: _controller.permitId.value > 0
+                                          ? true
+                                          : _controller.isCheckedSOP.value,
+                                      // value: _controller.isCheckedSOP.value,
+                                      onChanged: (bool? value) {
+                                        _controller.soptoggleCheckbox();
+                                      },
+                                    ),
+                                    Text(
+                                      'I have read and accept\nterms and conditions',
+                                      style: TextStyle(fontSize: 13),
+                                    )
+                                  ],
+                                ),
                               )
                       ],
                     ),

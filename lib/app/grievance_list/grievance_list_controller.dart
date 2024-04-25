@@ -50,7 +50,7 @@ class GrievanceController extends GetxController {
     this.filterText = {
       "Grievance Id": GrievanceIdFilterText,
       "Concern": ConcernFilterText,
-      "Description": DescriptionFilterText,
+      // "Description": DescriptionFilterText,
       "Grievance Type": GrievanceTypeFilterText,
       "Created At": CreatedAtFilterText,
     };
@@ -77,7 +77,7 @@ class GrievanceController extends GetxController {
   final columnVisibility = ValueNotifier<Map<String, bool>>({
     "Grievance Id": true,
     "Concern": true,
-    "Description": true,
+    // "Description": true,
     "Grievance Type": true,
     "Created At": true,
   });

@@ -539,8 +539,16 @@ class ViewUserDetailContentWeb extends GetView<ViewUserDetailController> {
                                                                       rows: true
                                                                           ? controller
                                                                               .accessList
-                                                                              .map((getAccesslevelDetails) => TableViewRow(height: 90, cells: [
-                                                                                    TableViewCell(child: Text("${getAccesslevelDetails?.feature_name ?? ""}")),
+                                                                              .map((getAccesslevelDetails) => TableViewRow(height: 40, cells: [
+                                                                                    TableViewCell(child: Obx(() {
+                                                                                      return 
+                                                                                      Row(
+                                                                                        children: [
+                                                                                          Dimens.boxWidth5,
+                                                                                          Expanded(child: Text("${getAccesslevelDetails?.feature_name ?? ""}")),
+                                                                                        ],
+                                                                                      );
+                                                                                    })),
                                                                                     TableViewCell(
                                                                                         child: _rowItem(
                                                                                       getAccesslevelDetails?.add.value,
