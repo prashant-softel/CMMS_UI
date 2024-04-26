@@ -1,4 +1,5 @@
 import 'package:cmms/app/app.dart';
+import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/user_profile/user_profile_controller.dart';
@@ -735,17 +736,22 @@ class UserProfileContentWeb extends GetView<UserProfileController> {
                 ],
               ),
             ),
-            floatingActionButton: Container(
-              height: 45,
-              child: CustomElevatedButton(
-                backgroundColor: ColorValues.appDarkBlueColor,
-                text: 'Edit Profile',
-                onPressed: () {
-                  controller.editProfile();
-                  //  controller.saveAccessLevel();
-                },
-              ),
-            ),
+            floatingActionButton: varUserAccessModel.value.access_list!
+                        .where((e) => e.feature_id == 40 && e.edit == 1)
+                        .length >
+                    0
+                ? Container(
+                    height: 45,
+                    child: CustomElevatedButton(
+                      backgroundColor: ColorValues.appDarkBlueColor,
+                      text: 'Edit Profile',
+                      onPressed: () {
+                        controller.editProfile();
+                        //  controller.saveAccessLevel();
+                      },
+                    ),
+                  )
+                : Dimens.box0,
             floatingActionButtonLocation:
                 FloatingActionButtonLocation.centerFloat,
           )),
