@@ -155,7 +155,7 @@ class CreateMrsReturnController extends GetxController {
         returned_qty: int.tryParse(element[3]["value"] ?? '0'),
         requested_qty: 0,
         approval_required: 0,
-        is_faulty: element[3]["value"] == "" || element[3]["value"] == null
+        is_faulty: element[4]["value"] == "" || element[4]["value"] == null
             ? 0
             : int.tryParse(element[4]["value"] ?? "0"),
         return_remarks: element[5]["value"] ?? '0',
