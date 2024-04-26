@@ -366,7 +366,7 @@ class NewPermitController extends GetxController {
       <CreatePermitModel?>[].obs;
 
   Rx<NewPermitDetailModel?> newPermitDetailsModel = NewPermitDetailModel().obs;
-  RxList<NewPermitDetailModel?>? newPermitDetailsList =
+  RxList<NewPermitDetailModel?>? newPermitDetailsList = 
       <NewPermitDetailModel?>[].obs;
 
   ///SOP File Path
@@ -512,8 +512,8 @@ class NewPermitController extends GetxController {
 
   Future<void> setId() async {
     try {
-      var jobDetail;
-      var pmdetail;
+      JobDetailsModel? jobDetail;
+      PmtaskViewModel? pmdetail;
 
       final _permitId = await permitPresenter.getValue();
       final _isChecked = await permitPresenter.getisCheckedValue();
@@ -542,16 +542,16 @@ class NewPermitController extends GetxController {
         permitPresenter.saveJobModelValue(jobModel: jobModel.toString());
         print("SChedule check point: ${pmtaskViewModel}");
 
-        if (pmtaskViewModel?.id != null || pmtaskViewModel?.id != 0) {
-          for (int i = 0; i < pmtaskViewModel!.schedules!.length; i++) {
-            allChecklistNames +=
-                pmtaskViewModel!.schedules![i].checklist_name ?? '';
-            // Add a comma and space if it's not the last item
-            // if (i < pmtaskViewModel.s.length - 1) {
-            //   allChecklistNames += ', ';
-            // }
-          }
-        }
+        // if (pmtaskViewModel?.id != null || pmtaskViewModel?.id != 0) {
+        //   for (int i = 0; i < pmtaskViewModel!.schedules!.length; i++) {
+        //     allChecklistNames +=
+        //         pmtaskViewModel!.schedules![i].checklist_name ?? '';
+        //     // Add a comma and space if it's not the last item
+        //     // if (i < pmtaskViewModel.s.length - 1) {
+        //     //   allChecklistNames += ', ';
+        //     // }
+        //   }
+        // }
       } else {
         permitId.value = int.tryParse(_permitId) ?? 0;
         if (jobDetail != null) {
@@ -996,7 +996,7 @@ class NewPermitController extends GetxController {
             isBlockSelected.value = true;
           }
           selectedBlock.value = value;
-          getInventoryCategoryList(facilityId: selectedBlockId.toString());
+          // getInventoryCategoryList(facilityId: selectedBlockId.toString());
         }
         break;
       case RxList<EquipmentModel>:
@@ -1059,7 +1059,7 @@ class NewPermitController extends GetxController {
             isTypePermitSelected.value = true;
           }
           selectedTypePermit.value = value;
-          getBlocksList(selectedPermitTypeId ?? 0);
+          // getBlocksList(selectedPermitTypeId ?? 0);
         }
         break;
       case RxList<EmployeeListModel>:
@@ -1924,10 +1924,10 @@ class NewPermitController extends GetxController {
     ///end uncomment
 
     // idCtrlr.text = '${int.tryParse(jobModel.id ?? 0)}';
-    blockNameTextCtrlr.text = jobModel?.blockwName;
     assignToTextCtrlr.text = jobModel.assignedName;
     breakdownTimeTextCtrlr.text =
         '${DateFormat('yyyy-MM-dd HH:mm').format(DateTime.parse('${jobModel.breakdownTime}')).toString()}';
+    blockNameTextCtrlr.text = jobModel.blockwName ?? '';
 
     // RxList<JobDetailsModel> jobDataList =
     // filteredEmployeeNameList = jobModel.assignedId;
