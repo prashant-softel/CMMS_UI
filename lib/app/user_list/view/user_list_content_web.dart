@@ -286,58 +286,63 @@ class _UserListContentWebState extends State<UserListContentWeb> {
                                   SizedBox(
                                     height: 20,
                                   ),
-                                  controller.userList.isEmpty == true && controller.isLoading == false
+                                  controller.userList.isEmpty == true &&
+                                          controller.isLoading == false
                                       ? Center(child: Text('No data'))
                                       : controller.isLoading.value == true
-                                      ? Center(child: Text("Data Loading......"))
-                                      : Expanded(
-                                          child: ValueListenableBuilder(
-                                              valueListenable:
-                                                  controller.columnVisibility,
-                                              builder: (context, value, child) {
-                                                final dataSource =
-                                                    UserDataSource(controller);
+                                          ? Center(
+                                              child: Text("Data Loading......"))
+                                          : Expanded(
+                                              child: ValueListenableBuilder(
+                                                  valueListenable: controller
+                                                      .columnVisibility,
+                                                  builder:
+                                                      (context, value, child) {
+                                                    final dataSource =
+                                                        UserDataSource(
+                                                            controller);
 
-                                                return PaginatedDataTable2(
-                                                  // fixedLeftColumns: 1,
-                                                  // dataRowHeight: Get.height * 0.12,
-                                                  columnSpacing: 10,
-                                                  source:
-                                                      dataSource, // Custom DataSource class
-                                                  // headingRowHeight:
-                                                  //     Get.height * 0.12,
-                                                  minWidth: Get.width * 1.2,
-                                                  showCheckboxColumn: false,
-                                                  rowsPerPage:
-                                                      10, // Number of rows per page
-                                                  availableRowsPerPage: [
-                                                    10,
-                                                    20,
-                                                    30,
-                                                    50
-                                                  ],
-                                                  columns: [
-                                                    for (var entry
-                                                        in value.entries)
-                                                      if (entry.value)
+                                                    return PaginatedDataTable2(
+                                                      // fixedLeftColumns: 1,
+                                                      // dataRowHeight: Get.height * 0.12,
+                                                      columnSpacing: 10,
+                                                      source:
+                                                          dataSource, // Custom DataSource class
+                                                      // headingRowHeight:
+                                                      //     Get.height * 0.12,
+                                                      minWidth: Get.width * 1.2,
+                                                      showCheckboxColumn: false,
+                                                      rowsPerPage:
+                                                          10, // Number of rows per page
+                                                      availableRowsPerPage: [
+                                                        10,
+                                                        20,
+                                                        30,
+                                                        50
+                                                      ],
+                                                      columns: [
+                                                        for (var entry
+                                                            in value.entries)
+                                                          if (entry.value)
+                                                            buildDataColumn(
+                                                              entry.key,
+                                                              controller
+                                                                      .filterText[
+                                                                  entry.key]!,
+                                                              controller
+                                                                      .columnwidth[
+                                                                  entry.key],
+                                                            ),
                                                         buildDataColumn(
-                                                          entry.key,
-                                                          controller.filterText[
-                                                              entry.key]!,
+                                                          'Actions',
                                                           controller
-                                                                  .columnwidth[
-                                                              entry.key],
+                                                              .userDateFilterText,
+                                                          150,
                                                         ),
-                                                    buildDataColumn(
-                                                      'Actions',
-                                                      controller
-                                                          .userDateFilterText,
-                                                      150,
-                                                    ),
-                                                  ],
-                                                );
-                                              }),
-                                        )
+                                                      ],
+                                                    );
+                                                  }),
+                                            )
                                 ]),
                           ),
                         ),
@@ -486,76 +491,75 @@ class UserDataSource extends DataTableSource {
           Padding(
             padding: EdgeInsets.zero,
             child: (value == 'Actions')
-                ? Wrap(children: [
-                    // varUserAccessModel.value.access_list!
-                    //             .where((e) => e.feature_id == 40 && e.view == 1)
-                    //             .length >
-                    //         0
-                    //     ?
+                ? Wrap(
+                    children: [
+                      // varUserAccessModel.value.access_list!
+                      //             .where((e) => e.feature_id == 40 && e.view == 1)
+                      //             .length >
+                      //         0
+                      //     ?
 
-                    TableActionButton(
-                      color: ColorValues.viewColor,
-                      icon: Icons.remove_red_eye_outlined,
-                      message: 'View',
-                      onPress: () {
-                        controller.clearStoreData();
+                      TableActionButton(
+                        color: ColorValues.viewColor,
+                        icon: Icons.remove_red_eye_outlined,
+                        message: 'View',
+                        onPress: () {
+                          controller.clearStoreData();
 
-                        // final _flutterSecureStorage =
-                        //     const FlutterSecureStorage();
+                          // final _flutterSecureStorage =
+                          //     const FlutterSecureStorage();
 
-                        // _flutterSecureStorage.delete(key: "userId");
-                        int userId = UserDetails?.id ?? 0;
-                        if (userId != 0) {
-                          Get.toNamed(Routes.viewUserDetail,
-                              arguments: {'userId': userId});
-                        }
-                      },
-                    )
-                    //  : Dimens.box0,
-                    // varUserAccessModel.value.access_list!
-                    //             .where((e) => e.feature_id == 40 && e.edit == 1)
-                    //             .length >
-                    //         0
-                    //     ?
-                    ,
-                    TableActionButton(
-                      color: ColorValues.editColor,
-                      icon: Icons.edit,
-                      message: 'Edit',
-                      onPress: () {
-                        controller.clearStoreData();
+                          // _flutterSecureStorage.delete(key: "userId");
+                          int userId = UserDetails?.id ?? 0;
+                          if (userId != 0) {
+                            Get.toNamed(Routes.viewUserDetail,
+                                arguments: {'userId': userId});
+                          }
+                        },
+                      ),
+                      varUserAccessModel.value.access_list!
+                                  .where(
+                                      (e) => e.feature_id == 40 && e.edit == 1)
+                                  .length >
+                              0
+                          ? TableActionButton(
+                              color: ColorValues.editColor,
+                              icon: Icons.edit,
+                              message: 'Edit',
+                              onPress: () {
+                                controller.clearStoreData();
 
-                        // final _flutterSecureStorage =
-                        //     const FlutterSecureStorage();
+                                // final _flutterSecureStorage =
+                                //     const FlutterSecureStorage();
 
-                        // _flutterSecureStorage.delete(key: "userId");
-                        int userId = UserDetails?.id ?? 0;
-                        if (userId != 0) {
-                          Get.toNamed(Routes.addUser,
-                              arguments: {'userId': userId});
-                        }
-                      },
-                    )
-                    // : Dimens.box0,
-                    // varUserAccessModel.value.access_list!
-                    //             .where(
-                    //                 (e) => e.feature_id == 40 && e.delete == 1)
-                    //             .length >
-                    //         0
-                    //     ?
-                    ,
-                    TableActionButton(
-                      color: ColorValues.deleteColor,
-                      icon: Icons.delete,
-                      message: 'Delete',
-                      onPress: () {
-                        controller.isDeleteDialog(
-                            user_id: controller.userList[index].id.toString(),
-                            user: controller.userList[index].full_name);
-                      },
-                    )
-                    // : Dimens.box0
-                  ])
+                                // _flutterSecureStorage.delete(key: "userId");
+                                int userId = UserDetails?.id ?? 0;
+                                if (userId != 0) {
+                                  Get.toNamed(Routes.addUser,
+                                      arguments: {'userId': userId});
+                                }
+                              },
+                            )
+                          : Dimens.box0,
+                      varUserAccessModel.value.access_list!
+                                  .where((e) =>
+                                      e.feature_id == 40 && e.delete == 1)
+                                  .length >
+                              0
+                          ? TableActionButton(
+                              color: ColorValues.deleteColor,
+                              icon: Icons.delete,
+                              message: 'Delete',
+                              onPress: () {
+                                controller.isDeleteDialog(
+                                    user_id: controller.userList[index].id
+                                        .toString(),
+                                    user: controller.userList[index].full_name);
+                              },
+                            )
+                          : Dimens.box0,
+                    ],
+                  )
                 : Text(value.toString()),
           ),
         );
