@@ -286,15 +286,26 @@ class ObservationPmExecutionViewDialog extends GetView {
                                                                         InkWell(
                                                                           onTap:
                                                                               () async {
-                                                                            final result =
-                                                                                await FilePicker.platform.pickFiles();
-                                                                            if (result !=
-                                                                                null) {
-                                                                              mapData['uploaded'] = result.files.single.name;
-                                                                              controller.fileBytes = result.files.single.bytes;
-                                                                              controller.browseFiles(
-                                                                                fileBytes: controller.fileBytes,
+                                                                            try {
+                                                                              final result = await FilePicker.platform.pickFiles(
+                                                                                type: FileType.image,
                                                                               );
+                                                                              if (result != null && result.files.single.bytes != null) {
+                                                                                setState(() {
+                                                                                  mapData['uploaded'] = result.files.single.name;
+                                                                                  controller.fileName.value = result.files.single.name;
+                                                                                  controller.fileBytes = result.files.single.bytes;
+                                                                                });
+                                                                                controller.browseFiles(
+                                                                                  fileBytes: controller.fileBytes,
+                                                                                );
+                                                                              } else {
+                                                                                // Handle the case where no file is picked
+                                                                                print('No file selected');
+                                                                              }
+                                                                            } catch (e) {
+                                                                              // Handle the error scenario
+                                                                              print('Error picking file: $e');
                                                                             }
                                                                           },
                                                                           child:
@@ -313,38 +324,22 @@ class ObservationPmExecutionViewDialog extends GetView {
                                                                                 color: ColorValues.whiteColor),
                                                                           ),
                                                                         ),
-
-                                                                        Text(
-                                                                          "${mapData['uploaded']}",
-                                                                          overflow:
-                                                                              TextOverflow.ellipsis,
-                                                                        )
-                                                                        // Dimens.boxWidth15,
-                                                                        // Container(
-                                                                        //   width: 60,
-                                                                        //   decoration: BoxDecoration(
-                                                                        //     borderRadius:
-                                                                        //         BorderRadius.circular(2),
-                                                                        //     color: ColorValues
-                                                                        //         .appDarkBlueColor,
-                                                                        //     border: Border.all(
-                                                                        //       color: ColorValues
-                                                                        //           .appDarkBlueColor,
-                                                                        //       width: 1,
-                                                                        //     ),
-                                                                        //   ),
-                                                                        //   child: Text(
-                                                                        //     "${controller.fileIds.length} Files",
-                                                                        //     textAlign: TextAlign.center,
-                                                                        //     style:
-                                                                        //         Styles.white12.copyWith(
-                                                                        //       color: Theme.of(context)
-                                                                        //           .textTheme
-                                                                        //           .displaySmall!
-                                                                        //           .color,
-                                                                        //     ),
-                                                                        //   ),
-                                                                        // ),
+                                                                        SizedBox(
+                                                                            width:
+                                                                                10), // Add some spacing between the icon and text
+                                                                        Expanded(
+                                                                          // Wrap with Expanded to handle long filenames gracefully
+                                                                          child:
+                                                                              SingleChildScrollView(
+                                                                            scrollDirection:
+                                                                                Axis.horizontal,
+                                                                            child:
+                                                                                Text(
+                                                                              "${mapData['uploaded'] ?? 'No file selected'}",
+                                                                              overflow: TextOverflow.ellipsis,
+                                                                            ),
+                                                                          ),
+                                                                        ),
                                                                       ],
                                                                     )
                                                                   : (mapData['key'] ==
