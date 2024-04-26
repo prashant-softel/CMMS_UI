@@ -6,6 +6,7 @@ import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/custom_textField.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 import 'package:flutter/services.dart';
@@ -293,52 +294,60 @@ class CreateMrsReturnContentWeb extends GetView<CreateMrsReturnController> {
                                                               const EdgeInsets
                                                                   .all(8.0),
                                                           child: Container(
-                                                              width:
-                                                                  (Get.width *
-                                                                      .9),
-                                                              // padding: EdgeInsets.all(value),
-                                                              decoration:
-                                                                  BoxDecoration(
-                                                                boxShadow: [
-                                                                  BoxShadow(
-                                                                    color: Colors
-                                                                        .black26,
-                                                                    offset:
-                                                                        const Offset(
-                                                                      5.0,
-                                                                      5.0,
-                                                                    ),
-                                                                    blurRadius:
-                                                                        5.0,
-                                                                    spreadRadius:
-                                                                        1.0,
-                                                                  ),
-                                                                ],
-                                                                color: ColorValues
-                                                                    .whiteColor,
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            5),
-                                                              ),
-                                                              child:
-                                                                  LoginCustomTextfield(
-                                                                inputFormatters: <
-                                                                    TextInputFormatter>[
-                                                                  FilteringTextInputFormatter
-                                                                      .digitsOnly
-                                                                ],
-                                                                maxLine: 1,
-                                                                textController:
-                                                                    new TextEditingController(
-                                                                        text: mapData["value"] ??
-                                                                            ''),
-                                                                onChanged:
-                                                                    (txt) {
+                                                            width: (Get.width *
+                                                                .9),
+                                                            child:
+                                                                LoginCustomTextfield(
+                                                              inputFormatters: <TextInputFormatter>[
+                                                                FilteringTextInputFormatter
+                                                                    .digitsOnly
+                                                              ],
+                                                              maxLine: 1,
+                                                              textController:
+                                                                  new TextEditingController(
+                                                                      text: mapData[
+                                                                              "value"] ??
+                                                                          ''),
+                                                              onChanged: (txt) {
+                                                                int? issueQty = int.tryParse(controller
+                                                                        .dropdownMapperData
+                                                                        .value[record[0]
+                                                                            [
+                                                                            'value']]
+                                                                        ?.issued_qty ??
+                                                                    "");
+                                                                int? usedQty = int.tryParse(controller
+                                                                        .dropdownMapperData
+                                                                        .value[record[0]
+                                                                            [
+                                                                            'value']]
+                                                                        ?.consumed_qty ??
+                                                                    "");
+                                                                int? returnQty =
+                                                                    int.tryParse(
+                                                                        txt);
+                                                                if (returnQty !=
+                                                                        null &&
+                                                                    issueQty !=
+                                                                        null &&
+                                                                    usedQty !=
+                                                                        null &&
+                                                                    returnQty <=
+                                                                        (issueQty -
+                                                                            usedQty)) {
                                                                   mapData["value"] =
                                                                       txt;
-                                                                },
-                                                              )),
+                                                                } else {
+                                                                  // Show an error message if the return qty is greater than (issue - used) qty
+                                                                  Fluttertoast
+                                                                      .showToast(
+                                                                    msg:
+                                                                        "Please enter appropriate qty!",
+                                                                  );
+                                                                }
+                                                              },
+                                                            ),
+                                                          ),
                                                         )
                                                       : (mapData['key'] ==
                                                               "Action ")
