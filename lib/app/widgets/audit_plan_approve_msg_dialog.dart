@@ -84,16 +84,16 @@ class AuditPlanMessageApproveDialog extends GetView {
                         await controller.setauditPlanId();
                         if (controller.auditId.value != 0) {
                           print({"fghvjbggjhjgk", controller.auditId});
-      
+
                           await controller.getAuditPlanDetails(
                               auditPlanId: controller.auditId.value,
-                              facilityId:controller.facilityId,
+                              facilityId: controller.facilityId,
                               isloading: true);
                         }
                       } catch (e) {
                         print(e);
                       }
-      
+
                       // Future.delayed(Duration(seconds: 1), () {
                       //   controller.getUnitCurrencyList();
                       // });
