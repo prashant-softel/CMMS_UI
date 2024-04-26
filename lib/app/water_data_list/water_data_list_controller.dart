@@ -36,6 +36,10 @@ class WaterDataListController extends GetxController {
   WaterDataList? waterDataListModel;
   RxList<String> waterDataListTableColumns = <String>[].obs;
 
+  int selectedYear = 2024;
+  int selectedMonth = 4;
+  String month = 'April';
+
   var descriptionCtrlr = TextEditingController();
   var qtyCtrlr = TextEditingController();
 

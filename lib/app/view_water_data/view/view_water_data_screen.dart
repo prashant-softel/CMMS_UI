@@ -3,7 +3,6 @@ import 'package:cmms/app/view_water_data/view_water_data_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../home/widgets/home_drawer.dart';
-import '../../theme/dimens.dart';
 import '../../utils/responsive.dart';
 
 class ViewWaterDataScreen extends GetView<ViewWaterDataController> {
@@ -28,9 +27,9 @@ class ViewWaterDataScreen extends GetView<ViewWaterDataController> {
           height: Get.height,
           child: Row(
             children: [
-              (Responsive.isMobile(context) || Responsive.isTablet(context))
-                  ? Dimens.box0
-                  : HomeDrawer(),
+              // (Responsive.isMobile(context) || Responsive.isTablet(context))
+              //     ? Dimens.box0
+              //     : HomeDrawer(),
               Expanded(
                 child: Column(
                   children: [

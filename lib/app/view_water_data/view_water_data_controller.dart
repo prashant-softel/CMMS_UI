@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:cmms/app/home/home_controller.dart';
 import 'package:cmms/app/view_water_data/view_water_data_presenter.dart';
 import 'package:cmms/domain/models/type_model.dart';
+import 'package:cmms/domain/models/water_data_month.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -15,8 +16,17 @@ class ViewWaterDataController extends GetxController {
   bool openPurchaseDatePicker = false;
   var purchaseDateTc = TextEditingController();
   StreamSubscription<int>? facilityIdStreamSubscription;
-  int facilityId = 0;
+  Rx<int> facilityId = 0.obs;
   Rx<int> type = 0.obs;
+  Rx<int> selectedYear = 0.obs;
+  Rx<int> selectedMonth = 0.obs;
+  Rx<String> monthName = ''.obs;
+  Rx<WaterDataMonth?> waterDataByMonth = WaterDataMonth().obs;
+  RxList<WaterDataMonth?> waterDataByMonthList = <WaterDataMonth?>[].obs;
+  Rx<ItemData?> itemData = ItemData().obs;
+  RxList<ItemData?>? itemDataList = <ItemData?>[].obs;
+  Rx<Details?> details = Details().obs;
+  RxList<Details?>? detailsList = <Details?>[].obs;
 
   RxList<MonthModel> month = <MonthModel>[
     MonthModel(name: "Please Select", id: "0"),
@@ -35,29 +45,65 @@ class ViewWaterDataController extends GetxController {
   ].obs;
   @override
   void onInit() async {
-    //await setType();
-
-    facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
-      facilityId = event;
+    await setWaterData();
+    facilityIdStreamSubscription =
+        homecontroller.facilityId$.listen((event) async {
+      facilityId.value = event;
+      await getWaterDataMonthDetail(
+        month: selectedMonth.value,
+        year: selectedYear.value,
+        facilityId: facilityId.value,
+      );
     });
     super.onInit();
   }
 
-  Future<void> setType() async {
+  Future<void> setWaterData() async {
     try {
-      // Read jobId
-      String? _type = await viewWaterDataPresenter.getValue();
-      if (_type == null || _type == '' || _type == "null") {
+      String? _monthId = await viewWaterDataPresenter.getMonthValue();
+      String? _year = await viewWaterDataPresenter.getYearValue();
+      if (_monthId == null || _monthId == '' || _monthId == "null") {
         var dataFromPreviousScreen = Get.arguments;
 
-        type.value = dataFromPreviousScreen['type'];
-        viewWaterDataPresenter.saveValue(type: type.value.toString());
+        selectedMonth.value = dataFromPreviousScreen['monthId'];
+        selectedYear.value = dataFromPreviousScreen['year'];
+        viewWaterDataPresenter.saveMonthValue(
+            monthId: selectedMonth.value.toString());
+        viewWaterDataPresenter.saveYearValue(
+            year: selectedYear.value.toString());
+
+        monthName.value =
+            month.firstWhere((element) => element.id == selectedMonth).name;
       } else {
-        type.value = int.tryParse(_type) ?? 0;
+        selectedMonth.value = int.tryParse(_monthId) ?? 0;
+        selectedYear.value = int.tryParse(_year!) ?? 0;
       }
     } catch (e) {
-      print(e.toString() + 'type');
+      print(e.toString() + ' month or year');
       //  Utility.showDialog(e.toString() + 'type');
     }
+  }
+
+  Future<void> getWaterDataMonthDetail(
+      {required int year, required int month, required int facilityId}) async {
+    final _waterDataMonthDetail =
+        await viewWaterDataPresenter.getWaterDataMonthDetail(
+      year: year,
+      month: month,
+      facilityId: facilityId,
+    );
+
+    if (_waterDataMonthDetail != null) {
+      waterDataByMonthList.value = _waterDataMonthDetail;
+      waterDataByMonth.value =
+          waterDataByMonthList.firstWhere((element) => element?.month != null);
+      itemDataList?.value = waterDataByMonth.value!.itemData!;
+      // detailsList?.value = itemDataList?.value?.details;
+    }
+  }
+
+  void clearStoreData() {
+    viewWaterDataPresenter.clearMonthValue();
+    viewWaterDataPresenter.clearYearValue();
   }
 }

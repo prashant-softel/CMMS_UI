@@ -1,22 +1,33 @@
+import 'package:cmms/domain/models/water_data_month.dart';
 import 'package:cmms/domain/repositories/local_storage_keys.dart';
-import 'package:cmms/domain/models/audit_plan_list_model.dart';
 import 'package:cmms/domain/repositories/repository.dart';
 
 class ViewWaterDataUsecase {
   Repository repository;
 
   ViewWaterDataUsecase(this.repository);
-  Future<List<AuditPlanListModel>?> getAuditPlanList(
-          {int? facilityId,
-          bool? isLoading,
-          dynamic endDate,
-          dynamic startDate}) async =>
-      await repository.getAuditPlanList(
-          facilityId, isLoading, startDate, endDate,false);
-  void saveValue({String? type}) async =>
-      repository.saveValue(LocalKeys.type, type);
-  Future<String?> getValue() async =>
-      await repository.getStringValue(LocalKeys.type);
-  void clearValue() async => repository.clearData(LocalKeys.type);
-  void clearStoreIdData() async => repository.clearData(LocalKeys.type);
+
+   Future<List<WaterDataMonth?>?> getWaterDataMonthDetail({
+    required int month,
+    required int year,
+    required int facilityId,
+    bool? isLoading,
+  }) async =>
+      await repository.getWaterDataMonthDetail(
+        month: month,
+        year: year,
+        facilityId: facilityId,
+        isLoading: isLoading ?? false,
+      );
+
+  void saveYearValue({String? year}) async =>
+      repository.saveValue(LocalKeys.year, year);
+  void saveMonthValue({String? monthId}) async =>
+      repository.saveValue(LocalKeys.monthId, monthId);
+  Future<String?> getYearValue() async =>
+      await repository.getStringValue(LocalKeys.year);
+  Future<String?> getMonthValue() async =>
+      await repository.getStringValue(LocalKeys.monthId);
+  void clearMonthValue() async => repository.clearData(LocalKeys.monthId);
+  void clearYearValue() async => repository.clearData(LocalKeys.year);
 }

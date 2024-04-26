@@ -692,6 +692,10 @@ class AddUserController extends GetxController {
     String _password = passwordCtrlr.text.trim();
     String _joiningdate = joingdateCtrlr.text.trim();
 
+    if (_joiningdate.isEmpty) {
+      return Future.error("Date of Joining cannot be empty.");
+    }
+
     Credentials credentials =
         Credentials(password: _password, user_name: _loginId);
 

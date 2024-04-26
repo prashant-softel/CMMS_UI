@@ -90,4 +90,6 @@ abstract class LocalKeys {
   static const freeSignupCredit = 'freeSignupCredit';
 
   static const grievanceId = 'grievanceId';
+  static const monthId = 'monthId';
+  static const year = 'year';
 }

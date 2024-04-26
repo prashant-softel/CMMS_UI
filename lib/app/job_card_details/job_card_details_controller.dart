@@ -262,7 +262,7 @@ class JobCardDetailsController extends GetxController {
     }
     file_list.value = jobCardDetailsModel.value?.fileList ?? [];
     file_list_new.value = jobCardDetailsModel.value?.fileListJc ?? [];
-
+    allFiles.clear();
     allFiles.addAll(file_list);
     allFiles.addAll(file_list_new);
   }
