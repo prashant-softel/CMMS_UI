@@ -92,6 +92,7 @@ import 'package:cmms/domain/models/warranty_claim_model.dart';
 import 'package:cmms/domain/models/warranty_type_model.dart';
 import 'package:cmms/domain/models/warranty_usage_term_list_model.dart';
 import 'package:cmms/domain/models/water_data_list_model.dart';
+import 'package:cmms/domain/models/water_data_month.dart';
 import 'package:cmms/domain/models/work_type_model.dart';
 import 'package:cmms/domain/repositories/repositories.dart';
 import 'package:cmms/domain/models/facility_model.dart';
@@ -12325,6 +12326,7 @@ class Repository {
       return false;
     }
   }
+
   Future<List<WasteSource>> getWasteTypeList({
     required bool isLoading,
   }) async {
@@ -12348,6 +12350,7 @@ class Repository {
       return [];
     }
   }
+
   Future<bool> createWasteType({
     bool? isLoading,
     wasteTypeJson,
@@ -12372,6 +12375,7 @@ class Repository {
       return false;
     }
   }
+
   Future<bool> updateWasteType({
     wasteTypeJson,
     bool? isLoading,
@@ -12396,6 +12400,7 @@ class Repository {
       return false;
     }
   }
+
   Future<void> deleteWasteType({
     int? wasteTypeId,
     bool? isLoading,
@@ -12417,5 +12422,40 @@ class Repository {
       print(error.toString());
     }
   }
+
+  Future<List<WaterDataMonth?>?> getWaterDataMonthDetail({
+    required int month,
+    required int year,
+    required int facilityId,
+    bool? isLoading,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getWaterDataMonthDetail(
+        auth: auth,
+        month: month,
+        year: year,
+        facilityId: facilityId,
+        isLoading: isLoading ?? false,
+      );
+      print({"water data by month", res.data});
+      if (!res.hasError) {
+        if (res.errorCode == 200) {
+          var waterDataMonthDetails =
+              waterDataMonthDetailModelFromJson(res.data);
+          print({"water data by month", waterDataMonthDetails});
+          return waterDataMonthDetails;
+        }
+      } else {
+        Utility.showDialog(res.errorCode.toString(), '400 Popup issue');
+        //return '';
+      }
+      return null;
+    } catch (error) {
+      print(error.toString());
+      return null;
+    }
+  }
+
   //end
 }

@@ -6,6 +6,7 @@ import 'package:cmms/app/widgets/dropdown_web.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
@@ -1014,8 +1015,15 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                             Dimens.boxHeight8,
                                             Row(
                                               children: [
-                                                CustomRichText(
-                                                    title: 'Landline: '),
+                                                Text(
+                                                  'Landline: ',
+                                                  style: TextStyle(
+                                                    color:
+                                                        ColorValues.blackColor,
+                                                    fontWeight: FontWeight.w500,
+                                                    fontSize: Dimens.sixteen,
+                                                  ),
+                                                ),
                                                 Dimens.boxWidth10,
                                                 Container(
                                                     decoration: BoxDecoration(
@@ -1757,8 +1765,15 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                                   backgroundColor:
                                                       ColorValues.greenColor,
                                                   text: 'Submit',
-                                                  onPressed: () {
-                                                    controller.addUser();
+                                                  onPressed: () async {
+                                                    try {
+                                                      await controller
+                                                          .addUser();
+                                                    } catch (e) {
+                                                      Fluttertoast.showToast(
+                                                          msg: e.toString(),
+                                                          fontSize: 16.0);
+                                                    }
                                                     //  controller.saveAccessLevel();
                                                   },
                                                 ),

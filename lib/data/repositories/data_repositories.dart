@@ -4669,5 +4669,20 @@ class DataRepository extends DomainRepository {
       auth: auth,
     );
   }
+
+  Future<ResponseModel> getWaterDataMonthDetail({
+    required String auth,
+    required int month,
+    required int year,
+    required int facilityId,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.getWaterDataMonthDetail(
+        auth: auth,
+        month: month,
+        year: year,
+        facilityId: facilityId,
+        isLoading: isLoading ?? false,
+      );
 //end
 }

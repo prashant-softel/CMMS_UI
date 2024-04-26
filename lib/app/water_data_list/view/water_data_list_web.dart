@@ -401,7 +401,7 @@ class _WaterDataListWebState extends State<WaterDataListWeb> {
                                                                 message: 'View',
                                                                 onPress: () {
                                                                   Get.toNamed(Routes
-                                                                      .viewWaterData);
+                                                                      .viewWaterData, arguments: {"monthId": controller.selectedMonth, "year": controller.selectedYear});
                                                                 },
                                                               ),
                                                               // TableActionButton(
@@ -547,7 +547,7 @@ DataColumn2 buildDataColumn(
 }
 
 _showYearPicker(BuildContext context, WaterDataListController controller) {
-  int selectedYear = DateTime.now().year;
+  controller.selectedYear = DateTime.now().year;
   showDialog(
     context: context,
     builder: (BuildContext context) {
@@ -558,7 +558,7 @@ _showYearPicker(BuildContext context, WaterDataListController controller) {
           child: CupertinoPicker(
             itemExtent: 40,
             onSelectedItemChanged: (int index) {
-              selectedYear = DateTime.now().year - index;
+              controller.selectedYear = DateTime.now().year - index;
             },
             children: List.generate(10, (index) {
               return Center(
@@ -579,7 +579,7 @@ _showYearPicker(BuildContext context, WaterDataListController controller) {
           ActionButton(
             color: ColorValues.addNewColor,
             onPressed: () {
-              controller.waterDateTc.text = selectedYear.toString();
+              controller.waterDateTc.text = controller.selectedYear.toString();
               controller.update(['stock_Mangement_Date']);
               Navigator.of(context).pop();
             },

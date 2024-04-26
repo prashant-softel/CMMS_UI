@@ -812,6 +812,16 @@ abstract class Styles {
     fontWeight: FontWeight.w700,
     fontSize: Dimens.seventeen,
   );
+  static TextStyle green17 = TextStyle(
+    color: ColorValues.greenColor,
+    fontWeight: FontWeight.w700,
+    fontSize: Dimens.seventeen,
+  );
+  static TextStyle red17 = TextStyle(
+    color: ColorValues.cancelColor,
+    fontWeight: FontWeight.w700,
+    fontSize: Dimens.seventeen,
+  );
   static TextStyle blue25 = TextStyle(
     color: ColorValues.appDarkBlueColor,
     fontWeight: FontWeight.w700,

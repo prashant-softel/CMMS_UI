@@ -8031,4 +8031,24 @@ class ConnectHelper {
     );
     return responseModel;
   }
+
+  Future<ResponseModel> getWaterDataMonthDetail({
+    required String auth,
+    required int month,
+    required int year,
+    required int facilityId,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'MISMASTER/GetWaterDataMonthDetail?Month=$month&Year=$year&facility_id=$facilityId',
+      Request.get,
+      null,
+      isLoading ?? false,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    print('ViewResponseModel${responseModel.data}');
+    return responseModel;
+  }
 }
