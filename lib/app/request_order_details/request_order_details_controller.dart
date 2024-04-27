@@ -55,7 +55,7 @@ class GoodsOrdersReqDetailController extends GetxController {
         if (roId.value != 0) {
           Future.delayed(Duration(seconds: 1), () {
             getRoDetailsByID(requestID: roId.value, facilityId: facilityId);
-            getRoHistory(id: roId.value);
+            getRoHistory(id: roId.value, facilityId:facilityId);
           });
         }
       });
@@ -98,7 +98,7 @@ class GoodsOrdersReqDetailController extends GetxController {
     }
   }
 
-  Future<void> getRoHistory({required int id}) async {
+  Future<void> getRoHistory({required int id, required int facilityId}) async {
     /// TODO: CHANGE THESE VALUES
 
     int moduleType = UserModuleTypeConstants.kReqOrderModuleTypeId;
@@ -109,6 +109,7 @@ class GoodsOrdersReqDetailController extends GetxController {
           // tempJobCardId,
           moduleType,
           id,
+          facilityId,
           true,
         ) ??
         [];
