@@ -1740,6 +1740,16 @@ class DataRepository extends DomainRepository {
         createWaterData: createWaterData,
         isLoading: isLoading ?? false,
       );
+  Future<ResponseModel> updateWaterData({
+    required String auth,
+    createWaterData,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.updateWaterData(
+        auth: auth,
+        createWaterData: createWaterData,
+        isLoading: isLoading ?? false,
+      );
   Future<ResponseModel> createWasteData({
     required String auth,
     createWasteData,

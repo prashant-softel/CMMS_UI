@@ -57,7 +57,8 @@ class ItemData {
         waterType: json['water_type'],
         waterTypeId: json['waterTypeId'],
         opening: json['opening'],
-        details: List<Details>.from(json["details"].map((x) => Details.fromJson(x))),
+        details:
+            List<Details>.from(json["details"].map((x) => Details.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -69,13 +70,15 @@ class ItemData {
 }
 
 class Details {
+  int? id;
   String? date;
   String? description;
-  int? procuredQty;
-  int? consumedQty;
+  double? procuredQty;
+  double? consumedQty;
   String? transactionType;
 
   Details({
+    this.id,
     this.date,
     this.description,
     this.procuredQty,
@@ -84,6 +87,7 @@ class Details {
   });
 
   factory Details.fromJson(Map<String, dynamic> json) => Details(
+        id: json['id'],
         date: json['date'],
         description: json['description'],
         procuredQty: json['procured_qty'],
@@ -92,10 +96,12 @@ class Details {
       );
 
   Map<String, dynamic> toJson() => {
+        'id': id,
         'date': date,
         'description': description,
         'procured_qty': procuredQty,
         'consumed_qty': consumedQty,
         'transactionType': transactionType,
-      };
+ 
+     };
 }

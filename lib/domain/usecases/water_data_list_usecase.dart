@@ -16,6 +16,14 @@ class WaterDataListUsecase {
         createWaterData,
         isLoading,
       );
+  Future<Map<String, dynamic>> updateWaterData({
+    createWaterData,
+    bool? isLoading,
+  }) async =>
+      await repository.updateWaterData(
+        createWaterData,
+        isLoading,
+      );
 
   Future<List<WaterSource>> getTypeOfWaterList(
       {required bool isLoading, required int? facilityId}) async {
