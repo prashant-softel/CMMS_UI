@@ -1,3 +1,4 @@
+import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/home/home_screen.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/module_cleaning_execution/module_cleaning_list_execution_controller.dart';
@@ -589,7 +590,13 @@ class MCExcutionListDataSource extends DataTableSource {
                               }
                             },
                           ),
-                          TableActionButton(
+                          varUserAccessModel.value.access_list!
+                                        .where((e) =>
+                                            e.feature_id == 43 &&
+                                            e.edit == 1)
+                                        .length >
+                                    0
+                          ? TableActionButton(
                             color: ColorValues.appYellowColor,
                             icon: Icons.edit,
                             message: 'Edit',
@@ -604,8 +611,15 @@ class MCExcutionListDataSource extends DataTableSource {
                                     arguments: {"mcid": id, "planId": planId});
                               }
                             },
-                          ),
-                          TableActionButton(
+                          )
+                          :Dimens.box0,
+                          varUserAccessModel.value.access_list!
+                                        .where((e) =>
+                                            e.feature_id == 43 &&
+                                            e.approve == 1)
+                                        .length >
+                                    0
+                          ? TableActionButton(
                             color: ColorValues.appGreenColor,
                             icon: Icons.add,
                             message: 'Start/End',
@@ -621,6 +635,7 @@ class MCExcutionListDataSource extends DataTableSource {
                               }
                             },
                           )
+                          :Dimens.box0
                         ],
                       )
                     : Text(value.toString()),

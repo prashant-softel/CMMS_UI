@@ -120,13 +120,21 @@ class ModuleCleaningDashboardScreen
                                   })
                                   :Dimens.box0,
                               //  if (Responsive.isDesktop(context))
-                              _moduleCleaningList(
+                              varUserAccessModel.value.access_list!
+                                        .where((e) =>
+                                            e.feature_id == 43 &&
+                                            e.view == 1 ||
+                                            e.add == 1)
+                                        .length >
+                                    0
+                              ? _moduleCleaningList(
                                   tittle: "Execution",
                                   ontap: () {
                                     Get.toNamed(
                                       Routes.moduleCleaningListExecution,
                                     );
-                                  }),
+                                  })
+                                  :Dimens.box0
                             ],
                           )
                         ]),
