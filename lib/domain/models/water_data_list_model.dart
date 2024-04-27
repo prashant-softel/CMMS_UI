@@ -12,23 +12,33 @@ class WaterDataList {
 
   List<PeriodData> periods;
 
-  WaterDataList({required this.periods, this.facilityID, this.facilityName});
+  List<Master_list> master_list;
+
+  WaterDataList(
+      {required this.periods,
+      this.facilityID,
+      this.facilityName,
+      required this.master_list});
 
   factory WaterDataList.fromJson(Map<String, dynamic> parsedJson) {
     var list = parsedJson['periods'] as List;
     print(list.runtimeType);
     List<PeriodData> periods = list.map((i) => PeriodData.fromJson(i)).toList();
+    List<Master_list> master_list =
+        list.map((i) => Master_list.fromJson(i)).toList();
 
     return WaterDataList(
       facilityID: parsedJson['facilityID'],
       facilityName: parsedJson['facilityName'],
       periods: periods,
+      master_list: master_list,
     );
   }
   Map<String, dynamic> toJson() => {
         "facilityID": facilityID,
         "facilityName": facilityName,
         "periods": List<dynamic>.from(periods.map((x) => x.toJson())),
+        "master_list": List<dynamic>.from(periods.map((x) => x.toJson())),
       };
 }
 
@@ -64,12 +74,37 @@ class PeriodData {
   }
 }
 
+class Master_list {
+  String water_type;
+  int show_opening;
+
+  Master_list({
+    required this.show_opening,
+    required this.water_type,
+  });
+
+  factory Master_list.fromJson(Map<String, dynamic> json) {
+    return Master_list(
+      water_type: json['water_type'],
+      show_opening: json['show_opening'],
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'water_type': water_type,
+      'show_opening': show_opening,
+    };
+  }
+}
+
 class DetailData {
   String waterType;
   double opening;
   double procuredQty;
   double consumedQty;
   double closingQty;
+  int show_opening;
 
   DetailData({
     required this.waterType,
@@ -77,6 +112,7 @@ class DetailData {
     required this.procuredQty,
     required this.consumedQty,
     required this.closingQty,
+    required this.show_opening,
   });
 
   factory DetailData.fromJson(Map<String, dynamic> json) {
@@ -86,6 +122,7 @@ class DetailData {
       procuredQty: json['procured_qty'].toDouble(),
       consumedQty: json['consumed_qty'].toDouble(),
       closingQty: json['closing_qty'].toDouble(),
+      show_opening: json['show_opening'],
     );
   }
 
@@ -96,6 +133,7 @@ class DetailData {
       'procured_qty': procuredQty,
       'consumed_qty': consumedQty,
       'closing_qty': closingQty,
+      'show_opening': show_opening,
     };
   }
 }
