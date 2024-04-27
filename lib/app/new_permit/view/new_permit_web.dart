@@ -833,58 +833,62 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                                                   .tr,
                                                           action: Row(
                                                             children: [
-                                                              CustomRichText(
-                                                                  title:
-                                                                      "Add new"),
-                                                              Dimens.boxWidth10,
-                                                              SizedBox(
-                                                                width: 250,
-                                                                height: 50,
-                                                                child:
-                                                                    CustomMultiSelectDialogField(
-                                                                  buttonText:
-                                                                      'Select Equipment Name',
-                                                                  title:
-                                                                      'Equipment Name',
-                                                                  initialValue: (controller
-                                                                          .selectedEquipmentNameList
-                                                                          .isNotEmpty)
-                                                                      ? controller
-                                                                          .selectedEquipmentNameIdList
-                                                                      : [],
-                                                                  items: controller
-                                                                      .equipmentNameList
-                                                                      .map(
-                                                                        (equipmentName) =>
-                                                                            MultiSelectItem(
-                                                                          equipmentName
-                                                                              ?.id,
-                                                                          equipmentName?.name ??
-                                                                              '',
-                                                                        ),
-                                                                      )
-                                                                      .toList(),
-                                                                  onConfirm:
-                                                                      (selectedOptionsList) =>
-                                                                          {
-                                                                    controller
-                                                                        .equipmentNameSelected(
-                                                                            selectedOptionsList),
-                                                                    print(
-                                                                        'Equipment Name list25: ${controller.selectedEquipmentNameIdList}')
-                                                                  },
-                                                                ),
-                                                              )
-                                                              // ActionButton(
-                                                              //     label: 'Add New',
-                                                              //     icon: Icons.add,
-                                                              //     onPressed: () {
-                                                              //       //  showEquipmentNameAlertBox();
-                                                              //       // Get.dialog<void>(
-                                                              //       //     showEquipmentNameAlertBox());
+                                                              // CustomRichText(
+                                                              //     title:
+                                                              //         "Add new"),
+                                                              // Dimens.boxWidth10,
+                                                              // SizedBox(
+                                                              //   width: 250,
+                                                              //   height: 50,
+                                                              //   child:
+                                                              //       CustomMultiSelectDialogField(
+                                                              //     buttonText:
+                                                              //         'Select Equipment Name',
+                                                              //     title:
+                                                              //         'Equipment Name',
+                                                              //     initialValue: (controller
+                                                              //             .selectedEquipmentNameList
+                                                              //             .isNotEmpty)
+                                                              //         ? controller
+                                                              //             .selectedEquipmentNameIdList
+                                                              //         : [],
+                                                              //     items: controller
+                                                              //         .equipmentNameList
+                                                              //         .map(
+                                                              //           (equipmentName) =>
+                                                              //               MultiSelectItem(
+                                                              //             equipmentName
+                                                              //                 ?.id,
+                                                              //             equipmentName?.name ??
+                                                              //                 '',
+                                                              //           ),
+                                                              //         )
+                                                              //         .toList(),
+                                                              //     onConfirm:
+                                                              //         (selectedOptionsList) =>
+                                                              //             {
+                                                              //       controller
+                                                              //           .equipmentNameSelected(
+                                                              //               selectedOptionsList),
+                                                              //       print(
+                                                              //           'Equipment Name list25: ${controller.selectedEquipmentNameIdList}')
                                                               //     },
-                                                              //     color: ColorValues
-                                                              //         .appGreenColor),
+                                                              //   ),
+                                                              // )
+                                                              ActionButton(
+                                                                  label:
+                                                                      'Add New',
+                                                                  icon:
+                                                                      Icons.add,
+                                                                  onPressed:
+                                                                      () {
+                                                                    // showEquipmentNameAlertBox();
+                                                                    Get.dialog<
+                                                                            void>(
+                                                                        showEquipmentNameAlertBox());
+                                                                  },
+                                                                  color: ColorValues
+                                                                      .appGreenColor),
                                                             ],
                                                           ),
                                                         ),
@@ -1523,57 +1527,31 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                                     ),
                                                     child: Column(
                                                       children: [
-                                                        Obx(
-                                                          () => CustomAppBar(
-                                                            title:
-                                                                'TBT Training Attended By'
-                                                                    .tr,
-                                                            action: Row(
-                                                              children: [
-                                                                CustomRichText(
-                                                                    title:
-                                                                        "Add Employee"),
-                                                                Dimens
-                                                                    .boxWidth10,
-                                                                SizedBox(
-                                                                  width: 220,
-                                                                  height: 50,
-                                                                  child:
-                                                                      CustomMultiSelectDialogField(
-                                                                    buttonText:
-                                                                        'Add Employee',
-                                                                    title:
-                                                                        'Select Employee',
-                                                                    initialValue: (controller
-                                                                            .selectedEmployeeNameList
-                                                                            .isNotEmpty)
-                                                                        ? controller
-                                                                            .selectedEmployeeNameIdList
-                                                                        : [],
-                                                                    items: controller
-                                                                        .employeeNameList
-                                                                        .map(
-                                                                          (employeeName) =>
-                                                                              MultiSelectItem(
-                                                                            employeeName?.id,
-                                                                            employeeName?.name ??
-                                                                                '',
-                                                                          ),
-                                                                        )
-                                                                        .toList(),
-                                                                    onConfirm:
-                                                                        (selectedOptionsList) =>
-                                                                            {
-                                                                      controller
-                                                                          .employeeNameSelected(
-                                                                              selectedOptionsList),
-                                                                      print(
-                                                                          'Employee Name list50: ${controller.selectedEmployeeNameIdList}')
-                                                                    },
-                                                                  ),
-                                                                ),
-                                                              ],
-                                                            ),
+                                                        CustomAppBar(
+                                                          title:
+                                                              'TBT Training Attended By'
+                                                                  .tr,
+                                                          action: Row(
+                                                            children: [
+                                                              //   CustomRichText(
+                                                              //       title:
+                                                              //           "Add Employee"),
+                                                              //   Dimens
+                                                              //       .boxWidth10,
+                                                              ActionButton(
+                                                                color: ColorValues
+                                                                    .appGreenColor,
+                                                                label:
+                                                                    "Add New",
+                                                                icon: Icons.add,
+                                                                onPressed: () {
+                                                                  Get.dialog<
+                                                                      void>(
+                                                                    AddEmployeeListAlertBox(),
+                                                                  );
+                                                                },
+                                                              ),
+                                                            ],
                                                           ),
                                                         ),
                                                         Dimens.boxHeight10,
@@ -2682,13 +2660,14 @@ class NewPermitWeb extends GetView<NewPermitController> {
           textAlign: TextAlign.center,
           // style: TextStyle(color: Colors.green),
         ),
-        content: Builder(builder: (context) {
-          return Obx(
-            () => Container(
-              padding: Dimens.edgeInsets05_0_5_0,
-              height: double.infinity,
-              width: double.infinity,
-              child: Column(
+        content: Builder(
+          builder: (context) {
+            return Obx(
+              () => Container(
+                padding: Dimens.edgeInsets05_0_5_0,
+                height: 300,
+                width: 300,
+                child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     Divider(
@@ -2698,10 +2677,38 @@ class NewPermitWeb extends GetView<NewPermitController> {
                     SizedBox(
                       height: 50,
                     ),
-                  ]),
-            ),
-          );
-        }),
+                    SizedBox(
+                      width: 250,
+                      height: 120,
+                      child: CustomMultiSelectDialogField(
+                        buttonText: 'Select Equipment Name',
+                        title: 'Equipment Name',
+                        initialValue:
+                            controller.selectedEquipmentNameIdList.value,
+                        items: controller.equipmentNameList
+                            .map(
+                              (equipmentName) => MultiSelectItem(
+                                equipmentName?.id,
+                                equipmentName?.name ?? '',
+                              ),
+                            )
+                            .toList(),
+                        onConfirm: (selectedOptionsList) => {
+                          controller.equipmentNameSelected(selectedOptionsList),
+                          controller.selectedEquipmentNameIdList.value =
+                              selectedOptionsList.cast<int>().toList(),
+                          // setState(() {}),
+                          print(
+                              'Equipment Name list25: ${controller.selectedEquipmentNameIdList}')
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            );
+          },
+        ),
         actions: [
           Center(
             child: Container(
@@ -2768,42 +2775,71 @@ class NewPermitWeb extends GetView<NewPermitController> {
   }
 
   AddEmployeeListAlertBox() {
-    return StatefulBuilder(builder: ((context, setState) {
-      return AlertDialog(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(15.0)),
-        ),
-        insetPadding: Dimens.edgeInsets10_0_10_0,
-        contentPadding: EdgeInsets.zero,
-        title: Text(
-          'Select Employee Name',
-          textAlign: TextAlign.center,
-          // style: TextStyle(color: Colors.green),
-        ),
-        content: Builder(builder: (context) {
-          return Obx(
-            () => Container(
-              padding: Dimens.edgeInsets05_0_5_0,
-              // height: double.infinity,
-              width: MediaQuery.of(context).size.width / 2,
-              height: MediaQuery.of(context).size.height / 1.5,
-              child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    Divider(
-                      color: ColorValues.greyLightColour,
-                      thickness: 1,
-                    ),
-                    SizedBox(
-                      height: 50,
-                    ),
-                  ]),
-            ),
-          );
-        }),
-        actions: [
-          Center(
-            child: Container(
+    return StatefulBuilder(
+      builder: ((context, setState) {
+        return AlertDialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(15.0)),
+          ),
+          insetPadding: Dimens.edgeInsets10_0_10_0,
+          contentPadding: EdgeInsets.zero,
+          title: Text(
+            'Select Employee Name',
+            textAlign: TextAlign.center,
+            // style: TextStyle(color: Colors.green),
+          ),
+          content: Builder(
+            builder: (context) {
+              return Obx(
+                () => Container(
+                  padding: Dimens.edgeInsets05_0_5_0,
+                  height: 300,
+                  width: 300,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      Divider(
+                        color: ColorValues.greyLightColour,
+                        thickness: 1,
+                      ),
+                      SizedBox(
+                        height: 50,
+                      ),
+                      SizedBox(
+                        width: 250,
+                        height: 120,
+                        child: CustomMultiSelectDialogField(
+                          buttonText: 'Add Employee',
+                          title: 'Select Employee',
+                          initialValue:
+                              controller.selectedEmployeeNameIdList.value,
+                          items: controller.employeeNameList
+                              .map(
+                                (employeeName) => MultiSelectItem(
+                                  employeeName?.id,
+                                  employeeName?.name ?? '',
+                                ),
+                              )
+                              .toList(),
+                          onConfirm: (selectedOptionsList) => {
+                            controller
+                                .employeeNameSelected(selectedOptionsList),
+                            controller.selectedEmployeeNameIdList.value =
+                                selectedOptionsList.cast<int>().toList(),
+                            print(
+                                'Employee Name list50: ${controller.selectedEmployeeNameIdList}')
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            },
+          ),
+          actions: [
+            Center(
+              child: Container(
                 height: 45,
                 child: CustomElevatedButton(
                   backgroundColor: ColorValues.navyBlueColor,
@@ -2811,11 +2847,13 @@ class NewPermitWeb extends GetView<NewPermitController> {
                   onPressed: () {
                     Get.back();
                   },
-                )),
-          ),
-        ],
-      );
-    }));
+                ),
+              ),
+            ),
+          ],
+        );
+      }),
+    );
   }
 
   checkBoxMethod(bool isChecked, Function(bool?) onChange) {
@@ -2828,6 +2866,7 @@ class NewPermitWeb extends GetView<NewPermitController> {
 
   void _removeRow(int index) {
     controller.filteredEmployeeNameList.removeAt(index);
+    controller.selectedEmployeeNameIdList.removeAt(index);
   }
 }
 

@@ -366,7 +366,7 @@ class NewPermitController extends GetxController {
       <CreatePermitModel?>[].obs;
 
   Rx<NewPermitDetailModel?> newPermitDetailsModel = NewPermitDetailModel().obs;
-  RxList<NewPermitDetailModel?>? newPermitDetailsList = 
+  RxList<NewPermitDetailModel?>? newPermitDetailsList =
       <NewPermitDetailModel?>[].obs;
 
   ///SOP File Path
@@ -507,6 +507,7 @@ class NewPermitController extends GetxController {
 
   void removeItem(int index) {
     filteredEquipmentNameList.removeAt(index);
+    selectedEquipmentNameIdList.removeAt(index);
     print("Item at index $index removed successfully.");
   }
 
