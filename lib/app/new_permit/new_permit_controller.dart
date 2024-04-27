@@ -542,16 +542,16 @@ class NewPermitController extends GetxController {
         permitPresenter.saveJobModelValue(jobModel: jobModel.toString());
         print("SChedule check point: ${pmtaskViewModel}");
 
-        // if (pmtaskViewModel?.id != null || pmtaskViewModel?.id != 0) {
-        //   for (int i = 0; i < pmtaskViewModel!.schedules!.length; i++) {
-        //     allChecklistNames +=
-        //         pmtaskViewModel!.schedules![i].checklist_name ?? '';
-        //     // Add a comma and space if it's not the last item
-        //     // if (i < pmtaskViewModel.s.length - 1) {
-        //     //   allChecklistNames += ', ';
-        //     // }
-        //   }
-        // }
+        if (pmtaskViewModel?.id != null || pmtaskViewModel?.id != 0) {
+          for (int i = 0; i < pmtaskViewModel!.schedules!.length; i++) {
+            allChecklistNames +=
+                pmtaskViewModel!.schedules![i].checklist_name ?? '';
+            // Add a comma and space if it's not the last item
+            // if (i < pmtaskViewModel.s.length - 1) {
+            //   allChecklistNames += ', ';
+            // }
+          }
+        }
       } else {
         permitId.value = int.tryParse(_permitId) ?? 0;
         if (jobDetail != null) {
