@@ -9,8 +9,8 @@ import '../theme/styles.dart';
 
 class ImportMsgDialog extends GetView {
   // String? approveIncidentReportData;
-  String? data;
-  dynamic importLog;
+  final String? data;
+  final dynamic importLog;
 
   ImportMsgDialog({super.key, this.data, this.importLog});
   final ImportInventoryController controller = Get.find();
