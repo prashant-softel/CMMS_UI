@@ -69,6 +69,7 @@ import 'package:cmms/domain/models/add_inventory_model.dart';
 import 'package:cmms/domain/models/add_user_model.dart';
 import 'package:cmms/domain/models/create_sop_model.dart';
 import 'package:cmms/domain/models/update_pm_task_execution_model.dart';
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 import 'package:get/get.dart';
@@ -6851,10 +6852,13 @@ class ConnectHelper {
     );
     var res = responseModel.data;
     var parsedJson = json.decode(res);
-    var import = parsedJson['import_log'];
-    String logString = import.join('\n');
+    var importlog = parsedJson['import_log'];
+    String message = parsedJson["message"];
+    Utility.showDialog(message, '');
+    String logString = importlog.join('\n');
     Get.dialog<void>(
-        ImportMsgDialog(data: parsedJson['message'], importLog: logString));
+      ImportMsgDialog(data: message, importLog: logString),
+    );
     return responseModel;
   }
 
@@ -7965,6 +7969,7 @@ class ConnectHelper {
     );
     return responseModel;
   }
+
   Future<ResponseModel> createWasteType({
     required String auth,
     required wasteTypeJson,
@@ -8000,6 +8005,7 @@ class ConnectHelper {
     );
     return responseModel;
   }
+
   Future<ResponseModel> deleteWasteType({
     required String auth,
     int? wasteTypeId,

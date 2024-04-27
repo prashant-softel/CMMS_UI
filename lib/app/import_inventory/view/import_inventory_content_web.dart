@@ -2,6 +2,7 @@ import 'package:cmms/app/home/widgets/header_widget_all_dash.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/theme/theme.dart';
 import 'package:cmms/app/utils/app_constants.dart';
+import 'package:cmms/domain/services/export_to_excel_service.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -343,7 +344,7 @@ class ImportInventoryContentWeb extends GetView<ImportInventoryController> {
                                                       ? 'bussinesslist.xlsx'
                                                       : 'example.xlsx';
 
-                              //    downloadFile(assetPath, fileName);
+                              downloadFile(assetPath, fileName);
                             },
                             child: Text(
                               "Download template",
