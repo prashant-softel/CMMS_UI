@@ -4996,6 +4996,32 @@ class Repository {
       return [];
     }
   }
+  Future<List<FacilityModel?>?> getFacilityListByUserId(bool? isLoading) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getFacilityListByUserId(
+        auth: auth,
+        isLoading: isLoading,
+      );
+      if (!res.hasError) {
+        final jsonFacilityModels = jsonDecode(res.data);
+        final List<FacilityModel> _facilityModelList = jsonFacilityModels
+            .map<FacilityModel>(
+                (m) => FacilityModel.fromJson(Map<String, dynamic>.from(m)))
+            .toList();
+
+        return _facilityModelList;
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString(), 'getFacilityList');
+        return null;
+      }
+    } catch (error) {
+      print(error.toString());
+
+      return [];
+    }
+  }
 
   Future<List<TypePermitModel?>?> getTypePermitList(
       bool? isLoading, int? facility_id) async {

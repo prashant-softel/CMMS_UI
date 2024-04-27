@@ -134,8 +134,8 @@ class HomeUsecase {
     );
   }
 
-  Future<List<FacilityModel?>?> getFacilityList() async =>
-      await _repository.getFacilityList(true);
+  Future<List<FacilityModel?>?> getFacilityListByUserId() async =>
+      await _repository.getFacilityListByUserId(true);
   Future<String?> getUserAccessList() async =>
       await _repository.getUserAccessData(LocalKeys.userAccess);
   void saveValue({String? facilitydata}) async =>

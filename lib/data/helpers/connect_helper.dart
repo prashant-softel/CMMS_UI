@@ -2283,6 +2283,29 @@ class ConnectHelper {
     return response;
   }
 
+  Future<ResponseModel> getFacilityListByUserId({
+    String? auth,
+    bool? isLoading,
+  }) async {
+    ResponseModel response = ResponseModel(data: '', hasError: true);
+    print('Facility List: ${response}');
+    try {
+      response = await apiWrapper.makeRequest(
+        'CMMS/GetFacilityListByUserId',
+        Request.get,
+        null,
+        isLoading ?? false,
+        {
+          'Authorization': 'Bearer $auth',
+        },
+      );
+    } catch (error) {
+      print(error);
+    }
+
+    return response;
+  }
+
   Future<ResponseModel> getTypePermitList(
       {String? auth, bool? isLoading, int? facility_id}) async {
     ResponseModel response = ResponseModel(data: '', hasError: true);
