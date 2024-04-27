@@ -552,6 +552,13 @@ class PmPlanDataSource extends DataTableSource {
                                 },
                               )
                             : Dimens.box0,
+                            controller.pmPlanList
+                                        .firstWhere(
+                                          (e) => e?.plan_id == pmPlanDetails!.plan_id,
+                                          orElse: () => PmPlanListModel(plan_id: 00),
+                                        )
+                                        ?.status_id ==
+                                    321 &&
                         varUserAccessModel.value.access_list!
                                     .where((e) =>
                                         e.feature_id ==
