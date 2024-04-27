@@ -1,4 +1,5 @@
 import 'package:cmms/app/app.dart';
+import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/home/widgets/header_widget_all_dash.dart';
 import 'package:cmms/app/module_cleaning_dashboard/module_controller.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
@@ -103,13 +104,21 @@ class ModuleCleaningDashboardScreen
                                 ? (itemWidth / itemHeight)
                                 : 5,
                             children: <Widget>[
-                              _moduleCleaningList(
+                              varUserAccessModel.value.access_list!
+                                        .where((e) =>
+                                            e.feature_id == 32 &&
+                                            e.view == 1 ||
+                                            e.add == 1)
+                                        .length >
+                                    0
+                              ?_moduleCleaningList(
                                   tittle: "Planning",
                                   ontap: () {
                                     Get.toNamed(
                                       Routes.moduleCleaningListPlan,
                                     );
-                                  }),
+                                  })
+                                  :Dimens.box0,
                               //  if (Responsive.isDesktop(context))
                               _moduleCleaningList(
                                   tittle: "Execution",

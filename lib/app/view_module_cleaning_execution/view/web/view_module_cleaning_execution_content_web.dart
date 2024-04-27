@@ -1114,7 +1114,7 @@ class ViewModuleCleaningExecutionContentWeb
                                                         .where((e) =>
                                                             e.feature_id ==
                                                                 UserAccessConstants
-                                                                    .kModuleCleaningFeatureId &&
+                                                                    .kModuleCleaningexeFeatureId &&
                                                             e.approve ==
                                                                 UserAccessConstants
                                                                     .kHaveApproveAccess)
@@ -1149,7 +1149,7 @@ class ViewModuleCleaningExecutionContentWeb
                                                         .where((e) =>
                                                             e.feature_id ==
                                                                 UserAccessConstants
-                                                                    .kModuleCleaningFeatureId &&
+                                                                    .kModuleCleaningexeFeatureId &&
                                                             e.approve ==
                                                                 UserAccessConstants
                                                                     .kHaveApproveAccess)

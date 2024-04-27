@@ -1,7 +1,9 @@
 import 'package:cmms/app/app.dart';
+import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/preventive_List/preventive_list_controller.dart';
+import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/app/widgets/custom_textField.dart';
 import 'package:cmms/app/widgets/dropdown_web.dart';
 import 'package:cmms/domain/models/preventive_checklist_model.dart';
@@ -78,7 +80,16 @@ class PreventiveChecklistListContentWeb
                   ],
                 ),
               ),
-              Padding(
+              varUserAccessModel.value.access_list!
+                                    .where((e) =>
+                                        e.feature_id ==
+                                            UserAccessConstants
+                                                .kPMchecklistFeatureId &&
+                                        e.add ==
+                                            UserAccessConstants.kHaveAddAccess)
+                                    .length >
+                                0
+                            ? Padding(
                 padding: EdgeInsets.only(left: 10, top: 10),
                 child: ElevatedButton(
                   style: Styles.navyBlueElevatedButtonStyle,
@@ -93,7 +104,8 @@ class PreventiveChecklistListContentWeb
                     );
                   }),
                 ),
-              ),
+              )
+              : Dimens.box0,
               Expanded(
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -408,6 +420,8 @@ class PreventiveChecklistListContentWeb
                                             ColorValues.appRedColor,
                                         onPressed: () {
                                           controller.cleardata();
+                                          controller.isContainerVisible.value =
+                                              false;
                                         },
                                         text: 'Cancel'),
                                   ),

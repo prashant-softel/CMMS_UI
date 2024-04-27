@@ -1,7 +1,9 @@
 import 'package:cmms/app/app.dart';
+import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/safety_questions_list/safety_questions_list_controller.dart';
+import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/app/widgets/dropdown_web.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
@@ -70,22 +72,30 @@ class SafetyQuestionsListContentWeb
                 ],
               ),
             ),
-            Padding(
-              padding: EdgeInsets.only(left: 10, top: 10),
-              child: ElevatedButton(
-                style: Styles.navyBlueElevatedButtonStyle,
-                onPressed: () {
-                  controller.toggleContainer();
-                },
-                child: Obx(() {
-                  return Text(
-                    controller.isContainerVisible.value
-                        ? 'Close Permit checkpoint'
-                        : 'Open Permit checkpoint',
-                  );
-                }),
-              ),
-            ),
+            varUserAccessModel.value.access_list!
+                        .where((e) =>
+                            e.feature_id ==
+                                UserAccessConstants.kPermitcheckpointFeatureId &&
+                            e.add == UserAccessConstants.kHaveAddAccess)
+                        .length >
+                    0
+                ? Padding(
+                    padding: EdgeInsets.only(left: 10, top: 10),
+                    child: ElevatedButton(
+                      style: Styles.navyBlueElevatedButtonStyle,
+                      onPressed: () {
+                        controller.toggleContainer();
+                      },
+                      child: Obx(() {
+                        return Text(
+                          controller.isContainerVisible.value
+                              ? 'Close Permit checkpoint'
+                              : 'Open Permit checkpoint',
+                        );
+                      }),
+                    ),
+                  )
+                : Dimens.box0,
             Expanded(
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -1096,59 +1106,85 @@ class SafetyQuestionsListContentWeb
                                                   alignment:
                                                       WrapAlignment.center,
                                                   children: [
-                                                    TableActionButton(
-                                                      color:
-                                                          ColorValues.editColor,
-                                                      icon: Icons.edit,
-                                                      message: 'Edit',
-                                                      onPress: () {
-                                                        controller
-                                                                .selectedItem =
-                                                            safetyQuestionsListDetails;
-                                                        controller.titleCtrlr
-                                                            .text = controller
-                                                                .selectedItem
-                                                                ?.name ??
-                                                            '';
-                                                        controller.updateType
-                                                            .value = controller
-                                                                .selectedItem
-                                                                ?.inputName ??
-                                                            '';
-                                                        controller
-                                                            .isCheckedRequire
-                                                            .value = controller
-                                                                    .selectedItem
-                                                                    ?.isRequired ==
-                                                                1
-                                                            ? true
-                                                            : false;
-                                                        controller
-                                                            .isContainerVisible
-                                                            .value = true;
-                                                        controller
-                                                            .selectedTypePermit
-                                                            .value = controller
-                                                                .selectedItem
-                                                                ?.permitType ??
-                                                            '';
-                                                      },
-                                                    ),
-                                                    TableActionButton(
-                                                        color: ColorValues
-                                                            .appRedColor,
-                                                        icon: Icons.delete,
-                                                        message: 'Delete',
-                                                        onPress: () {
-                                                          controller
-                                                              .isDeleteDialog(
-                                                            safetyMeasure_id:
-                                                                '${safetyQuestionsListDetails.id}',
-                                                            safetyMeasure:
-                                                                safetyQuestionsListDetails
-                                                                    .name,
-                                                          );
-                                                        }),
+                                                    varUserAccessModel.value
+                                                                .access_list!
+                                                                .where((e) =>
+                                                                    e.feature_id ==
+                                                                        UserAccessConstants
+                                                                            .kFeaturePermitcheckpointName &&
+                                                                    e.edit ==
+                                                                        UserAccessConstants
+                                                                            .kHaveEditAccess)
+                                                                .length >
+                                                            0
+                                                        ? TableActionButton(
+                                                            color: ColorValues
+                                                                .editColor,
+                                                            icon: Icons.edit,
+                                                            message: 'Edit',
+                                                            onPress: () {
+                                                              controller
+                                                                      .selectedItem =
+                                                                  safetyQuestionsListDetails;
+                                                              controller
+                                                                  .titleCtrlr
+                                                                  .text = controller
+                                                                      .selectedItem
+                                                                      ?.name ??
+                                                                  '';
+                                                              controller
+                                                                  .updateType
+                                                                  .value = controller
+                                                                      .selectedItem
+                                                                      ?.inputName ??
+                                                                  '';
+                                                              controller
+                                                                  .isCheckedRequire
+                                                                  .value = controller
+                                                                          .selectedItem
+                                                                          ?.isRequired ==
+                                                                      1
+                                                                  ? true
+                                                                  : false;
+                                                              controller
+                                                                  .isContainerVisible
+                                                                  .value = true;
+                                                              controller
+                                                                  .selectedTypePermit
+                                                                  .value = controller
+                                                                      .selectedItem
+                                                                      ?.permitType ??
+                                                                  '';
+                                                            },
+                                                          )
+                                                        : Dimens.box0,
+                                                    varUserAccessModel.value
+                                                                .access_list!
+                                                                .where((e) =>
+                                                                    e.feature_id ==
+                                                                        UserAccessConstants
+                                                                            .kFeaturePermitcheckpointName &&
+                                                                    e.delete ==
+                                                                        UserAccessConstants
+                                                                            .kHaveDeleteAccess)
+                                                                .length >
+                                                            0
+                                                        ? TableActionButton(
+                                                            color: ColorValues
+                                                                .appRedColor,
+                                                            icon: Icons.delete,
+                                                            message: 'Delete',
+                                                            onPress: () {
+                                                              controller
+                                                                  .isDeleteDialog(
+                                                                safetyMeasure_id:
+                                                                    '${safetyQuestionsListDetails.id}',
+                                                                safetyMeasure:
+                                                                    safetyQuestionsListDetails
+                                                                        .name,
+                                                              );
+                                                            })
+                                                        : Dimens.box0,
                                                   ],
                                                 )),
                                               ]);

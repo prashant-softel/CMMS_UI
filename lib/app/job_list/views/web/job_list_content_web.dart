@@ -1,6 +1,7 @@
 import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
+import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -551,7 +552,14 @@ class JobDataSource extends DataTableSource {
                           );
                         },
                       ),
-                      if (jobDetails?.status == 102)
+                      if (jobDetails?.status == 102 && varUserAccessModel.value.access_list!
+                                  .where((e) =>
+                                      e.feature_id ==
+                                          UserAccessConstants.kJobFeatureId &&
+                                      e.approve ==
+                                          UserAccessConstants.kHaveApproveAccess)
+                                  .length >
+                              0)
                         TableActionButton(
                           color: ColorValues.appYellowColor,
                           icon: Icons.assignment_ind,

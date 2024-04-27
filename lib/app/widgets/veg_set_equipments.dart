@@ -232,7 +232,7 @@ class VegSetEquipment extends GetView {
                           .where((e) =>
                               e.feature_id ==
                                   UserAccessConstants
-                                      .kModuleCleaningFeatureId &&
+                                      .kVegetationControlFeatureId &&
                               e.add == UserAccessConstants.kHaveAddAccess)
                           .length >
                       0

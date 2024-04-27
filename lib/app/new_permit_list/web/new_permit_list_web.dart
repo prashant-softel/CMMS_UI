@@ -898,9 +898,9 @@ class PermitListDataSource extends DataTableSource {
                                                       e.feature_id ==
                                                           UserAccessConstants
                                                               .kPermitFeatureId &&
-                                                      e.add ==
+                                                      e.edit ==
                                                           UserAccessConstants
-                                                              .kHaveAddAccess)
+                                                              .kHaveEditAccess)
                                                   .length >
                                               0 &&
                                           controller.newPermitList

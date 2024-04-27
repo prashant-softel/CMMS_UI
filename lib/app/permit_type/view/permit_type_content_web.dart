@@ -1,16 +1,15 @@
 import 'package:cmms/app/app.dart';
+import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/permit_type/permit_type_controller.dart';
+import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:scrollable_table_view/scrollable_table_view.dart';
 import '../../widgets/custom_elevated_button.dart';
 import '../../widgets/custom_richtext.dart';
-import '../../widgets/custom_swich_toggle.dart';
 import '../../widgets/dropdown_web.dart';
 
 class PermitTypeContentWeb extends GetView<PermitTypeController> {
@@ -71,22 +70,30 @@ class PermitTypeContentWeb extends GetView<PermitTypeController> {
                 ],
               ),
             ),
-            Padding(
-              padding: EdgeInsets.only(left: 10, top: 10),
-              child: ElevatedButton(
-                style: Styles.navyBlueElevatedButtonStyle,
-                onPressed: () {
-                  controller.toggleContainer();
-                },
-                child: Obx(() {
-                  return Text(
-                    controller.isContainerVisible.value
-                        ? 'Close Permit Checklist'
-                        : 'Open Permit Checklist',
-                  );
-                }),
-              ),
-            ),
+            varUserAccessModel.value.access_list!
+                        .where((e) =>
+                            e.feature_id ==
+                                UserAccessConstants.kPermitchecklistFeatureId &&
+                            e.add == UserAccessConstants.kHaveAddAccess)
+                        .length >
+                    0
+                ? Padding(
+                    padding: EdgeInsets.only(left: 10, top: 10),
+                    child: ElevatedButton(
+                      style: Styles.navyBlueElevatedButtonStyle,
+                      onPressed: () {
+                        controller.toggleContainer();
+                      },
+                      child: Obx(() {
+                        return Text(
+                          controller.isContainerVisible.value
+                              ? 'Close Permit Checklist'
+                              : 'Open Permit Checklist',
+                        );
+                      }),
+                    ),
+                  )
+                : Dimens.box0,
             Expanded(
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -692,64 +699,88 @@ class PermitTypeContentWeb extends GetView<PermitTypeController> {
                                                       .toString())),
                                                   DataCell(Row(
                                                     children: [
-                                                      TableActionButton(
-                                                        color: ColorValues
-                                                            .editColor,
-                                                        icon: Icons.edit,
-                                                        message: 'Edit',
-                                                        onPress: () {
-                                                          controller
-                                                              .toggleContainer();
-                                                          controller.selectedItem = controller
-                                                              .typePermitList
-                                                              .firstWhere((element) =>
-                                                                  "${element?.id}" ==
-                                                                  controller
-                                                                      .typePermitList[
-                                                                          index]!
-                                                                      .id
-                                                                      .toString());
-                                                          controller.titleCtrlr
-                                                              .text = controller
-                                                                  .selectedItem
-                                                                  ?.name ??
-                                                              '';
-                                                          controller
-                                                              .descriptionCtrlr
-                                                              .text = controller
-                                                                  .selectedItem
-                                                                  ?.description ??
-                                                              '';
-                                                          controller
-                                                                  .selectedFacility
-                                                                  .value =
-                                                              controller
-                                                                  .onFetchNameFromId(
-                                                                      controller
-                                                                          .selectedItem
-                                                                          ?.id)!;
-                                                          print(
-                                                              "${controller.selectedFacility.value}");
-                                                        },
-                                                      ),
-                                                      TableActionButton(
-                                                        color: ColorValues
-                                                            .deleteColor,
-                                                        icon: Icons.delete,
-                                                        message: 'Delete',
-                                                        onPress: () {
-                                                          controller.isDeleteDialog(
-                                                              checklist_id: controller
-                                                                  .typePermitList[
-                                                                      index]!
-                                                                  .id
-                                                                  .toString(),
-                                                              checklist: controller
-                                                                  .typePermitList[
-                                                                      index]!
-                                                                  .name);
-                                                        },
-                                                      ),
+                                                      varUserAccessModel.value
+                                                                  .access_list!
+                                                                  .where((e) =>
+                                                                      e.feature_id ==
+                                                                          UserAccessConstants
+                                                                              .kPermitchecklistFeatureId &&
+                                                                      e.edit ==
+                                                                          UserAccessConstants
+                                                                              .kHaveEditAccess)
+                                                                  .length >
+                                                              0
+                                                          ? TableActionButton(
+                                                              color: ColorValues
+                                                                  .editColor,
+                                                              icon: Icons.edit,
+                                                              message: 'Edit',
+                                                              onPress: () {
+                                                                controller
+                                                                    .toggleContainer();
+                                                                controller.selectedItem = controller
+                                                                    .typePermitList
+                                                                    .firstWhere((element) =>
+                                                                        "${element?.id}" ==
+                                                                        controller
+                                                                            .typePermitList[index]!
+                                                                            .id
+                                                                            .toString());
+                                                                controller
+                                                                    .titleCtrlr
+                                                                    .text = controller
+                                                                        .selectedItem
+                                                                        ?.name ??
+                                                                    '';
+                                                                controller
+                                                                    .descriptionCtrlr
+                                                                    .text = controller
+                                                                        .selectedItem
+                                                                        ?.description ??
+                                                                    '';
+                                                                controller
+                                                                        .selectedFacility
+                                                                        .value =
+                                                                    controller.onFetchNameFromId(
+                                                                        controller
+                                                                            .selectedItem
+                                                                            ?.id)!;
+                                                                print(
+                                                                    "${controller.selectedFacility.value}");
+                                                              },
+                                                            )
+                                                          : Dimens.box0,
+                                                      varUserAccessModel.value
+                                                                  .access_list!
+                                                                  .where((e) =>
+                                                                      e.feature_id ==
+                                                                          UserAccessConstants
+                                                                              .kPermitchecklistFeatureId &&
+                                                                      e.delete ==
+                                                                          UserAccessConstants
+                                                                              .kHaveDeleteAccess)
+                                                                  .length >
+                                                              0
+                                                          ? TableActionButton(
+                                                              color: ColorValues
+                                                                  .deleteColor,
+                                                              icon:
+                                                                  Icons.delete,
+                                                              message: 'Delete',
+                                                              onPress: () {
+                                                                controller.isDeleteDialog(
+                                                                    checklist_id: controller
+                                                                        .typePermitList[
+                                                                            index]!
+                                                                        .id
+                                                                        .toString(),
+                                                                    checklist: controller
+                                                                        .typePermitList[
+                                                                            index]!
+                                                                        .name);
+                                                              },
+                                                            )
+                                                          : Dimens.box0,
                                                     ],
                                                   )),
                                                 ],

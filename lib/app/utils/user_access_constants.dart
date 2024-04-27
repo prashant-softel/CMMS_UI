@@ -14,6 +14,14 @@ abstract class UserAccessConstants {
   static int kJobCardFeatureId = 4;
   static String kFeatureJobCardName = "Job Card";
 
+  ///PERMIT TYPE CHECKLIST
+  static int kPermitchecklistFeatureId = 41;
+  static String kFeaturePermitchecklistName = "Permit Checklist";
+
+  ///PERMIT TYPE CHECKPOINT
+  static int kPermitcheckpointFeatureId = 42;
+  static String kFeaturePermitcheckpointName = "Permit Checkpoint";
+
   /// PERMIT ACCESS
   static int kPermitFeatureId = 3;
   static String kFeaturePermitName = "Permit";
@@ -55,13 +63,27 @@ abstract class UserAccessConstants {
   static int kPmExecutionFeatureId = 10;
   static String kFeaturePmExecutionName = "PM Execution";
 
+  ///PM CHECKLIST
+  static int kPMchecklistFeatureId = 5;
+  static String kFeaturePMchecklistName = "PM Checklist Number";
+
+  ///PM CHECKPOINT
+  static int kPMcheckpointFeatureId = 6;
+  static String kFeaturePMcheckpointName = "PM Check Points";
+
   /// MODULE CLEANING ACCESS
-  static int kModuleCleaningFeatureId = 32;
-  static String kFeatureModuleCleaning = "MC";
+  static int kModuleCleaningplanFeatureId = 32;
+  static String kFeatureModuleCleaningplan = "MC Planning";
+  // Module Cleaning execution
+  static int kModuleCleaningexeFeatureId = 43;
+  static String kFeatureModuleCleaningexe = "MC Execution";
 
   // Vegetation Control
   static int kVegetationControlFeatureId = 33;
-  static String kFeatureVegetationControl = "Veg";
+  static String kFeatureVegetationControl = "Vegetation Planning";
+  // Vegetation Control execution
+  static int kVegetationControlexeFeatureId = 44;
+  static String kFeatureVegetationControlexe = "Vegetation Execution";
 
   ///USER ACCESS
   static int kHaveAddAccess = 1;

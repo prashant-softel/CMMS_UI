@@ -685,7 +685,16 @@ class PmTaskDataSource extends DataTableSource {
                                 },
                               )
                             : Dimens.box0,
-                        TableActionButton(
+                            varUserAccessModel.value.access_list!
+                                    .where((e) =>
+                                        e.feature_id ==
+                                            UserAccessConstants
+                                                .kPmTaskFeatureId &&
+                                        e.delete ==
+                                            UserAccessConstants.kHaveDeleteAccess)
+                                    .length >
+                                0
+                            ? TableActionButton(
                           color: ColorValues.deleteColor,
                           icon: Icons.delete,
                           message: 'Delete',
@@ -694,7 +703,8 @@ class PmTaskDataSource extends DataTableSource {
                                 task_id: pmTaskDetails?.id.toString(),
                                 task: pmTaskDetails?.name ?? "");
                           },
-                        ),
+                        )
+                        :Dimens.box0,
                       ])
                     : Text(value.toString()),
           ),
