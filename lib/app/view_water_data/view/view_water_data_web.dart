@@ -2,6 +2,7 @@ import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/view_water_data/view_water_data_controller.dart';
 import 'package:cmms/app/widgets/add_dialog.dart';
+import 'package:cmms/app/widgets/minus_dialog.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -151,11 +152,11 @@ class _WaterDataWebState extends State<ViewWaterDataWeb> {
                                                 ),
                                               ],
                                             ),
-                                            constraints: BoxConstraints(
-                                              minHeight: 100,
-                                              maxHeight: Get.height * .6,
-                                            ),
-                                            // height: Get.height * .6,
+                                            // height: 194,
+                                            height:
+                                                ((item?.details?.length ?? 0) *
+                                                        50 +
+                                                    155),
                                             margin: EdgeInsets.all(15),
                                             child: Column(
                                               crossAxisAlignment:
@@ -263,9 +264,34 @@ class _WaterDataWebState extends State<ViewWaterDataWeb> {
                                                                           "edit",
                                                                       onPress:
                                                                           () {
-                                                                        Get.dialog(
-                                                                          AddDialog(),
-                                                                        );
+                                                                        if (detail.transactionType ==
+                                                                            "Procurement") {
+                                                                          Get.dialog(
+                                                                            AddDialog(
+                                                                              id: detail.id,
+                                                                              date: detail.date,
+                                                                              description: detail.description,
+                                                                              quantity: detail.procuredQty.toString(),
+                                                                              waterTypeId: item.waterTypeId,
+                                                                              waterTypeName: item.waterType,
+                                                                            ),
+                                                                            barrierDismissible:
+                                                                                false,
+                                                                          );
+                                                                        } else {
+                                                                          Get.dialog(
+                                                                            MinusDialog(
+                                                                              id: detail.id,
+                                                                              date: detail.date,
+                                                                              description: detail.description,
+                                                                              quantity: detail.consumedQty.toString(),
+                                                                              waterTypeId: item.waterTypeId,
+                                                                              waterTypeName: item.waterType,
+                                                                            ),
+                                                                            barrierDismissible:
+                                                                                false,
+                                                                          );
+                                                                        }
                                                                       },
                                                                     ),
                                                                   ), // Add this line
@@ -320,34 +346,6 @@ class _WaterDataWebState extends State<ViewWaterDataWeb> {
                 ],
               ),
             ),
-
-            // floatingActionButton: Row(
-            //   children: [
-            //     Spacer(),
-            //     Container(
-            //       height: 40,
-            //       child: CustomElevatedButton(
-            //         backgroundColor: ColorValues.cancelColor,
-            //         text: 'Cancel',
-            //         onPressed: () {
-            //           Get.back();
-            //         },
-            //       ),
-            //     ),
-            //     Dimens.boxWidth15,
-            //     Container(
-            //       height: 40,
-            //       child: CustomElevatedButton(
-            //         backgroundColor: ColorValues.submitColor,
-            //         text: 'Update',
-            //         onPressed: () {
-            //           // controller.createGoodsOrder();
-            //         },
-            //       ),
-            //     ),
-            //     Spacer(),
-            //   ],
-            // ),
           ),
         );
         // );
@@ -355,56 +353,3 @@ class _WaterDataWebState extends State<ViewWaterDataWeb> {
     );
   }
 }
-
-// class AppBarGoodsOrder extends StatelessWidget {
-//   const AppBarGoodsOrder({
-//     super.key,
-//   });
-
-//   @override
-//   Widget build(BuildContext context) {
-//     final controller = Get.find<ViewWaterDataController>();
-//     return Container(
-//       height: 45,
-//       decoration: BoxDecoration(
-//         border: Border.all(
-//           color: Color.fromARGB(255, 227, 224, 224),
-//           width: 1,
-//         ),
-//         boxShadow: [
-//           BoxShadow(
-//             color: Color.fromARGB(255, 236, 234, 234).withOpacity(0.5),
-//             spreadRadius: 2,
-//             blurRadius: 5,
-//             offset: Offset(0, 2),
-//           ),
-//         ],
-//       ),
-//       child: Row(
-//         children: [
-//           Icon(
-//             Icons.home,
-//             color: ColorValues.greyLightColor,
-//           ),
-//           InkWell(
-//             onTap: () {
-//               Get.offNamed(Routes.home);
-//             },
-//             child: Text(
-//               "DASHBOARD",
-//               style: Styles.greyLight14,
-//             ),
-//           ),
-//           InkWell(
-//             onTap: () {
-//               controller.clearStoreData();
-//               Get.offNamed(Routes.misDashboard);
-//             },
-//             child: Text(" / MIS", style: Styles.greyLight14),
-//           ),
-//           Text(" /VIEW WATER DATA", style: Styles.greyLight14),
-//         ],
-//       ),
-//     );
-//   }
-// }

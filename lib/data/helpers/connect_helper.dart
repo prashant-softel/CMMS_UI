@@ -2283,6 +2283,29 @@ class ConnectHelper {
     return response;
   }
 
+  Future<ResponseModel> getFacilityListByUserId({
+    String? auth,
+    bool? isLoading,
+  }) async {
+    ResponseModel response = ResponseModel(data: '', hasError: true);
+    print('Facility List: ${response}');
+    try {
+      response = await apiWrapper.makeRequest(
+        'CMMS/GetFacilityListByUserId',
+        Request.get,
+        null,
+        isLoading ?? false,
+        {
+          'Authorization': 'Bearer $auth',
+        },
+      );
+    } catch (error) {
+      print(error);
+    }
+
+    return response;
+  }
+
   Future<ResponseModel> getTypePermitList(
       {String? auth, bool? isLoading, int? facility_id}) async {
     ResponseModel response = ResponseModel(data: '', hasError: true);
@@ -2958,6 +2981,29 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> updateWaterData({
+    required String auth,
+    createWaterData,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'MISMaster/UpdateWaterData',
+      Request.put,
+      jsonEncode(createWaterData),
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    print('Submit Water Orders Response:${responseModel.data}');
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    print(parsedJson);
+    return responseModel;
+  }
+
   Future<ResponseModel> createWasteData({
     required String auth,
     createWasteData,
@@ -3463,7 +3509,7 @@ class ConnectHelper {
     int? requestID,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
-      "RequestOrder/GetRODetailsByID?requestID=$requestID",
+      "RequestOrder/GetRODetailsByID?IDs=$requestID&facility_id=$facilityId",
       Request.get,
       null,
       isLoading ?? false,

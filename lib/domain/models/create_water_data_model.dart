@@ -4,6 +4,7 @@ CreateWaterData createWaterDataModelFromJson(String str) =>
     CreateWaterData.fromJson(json.decode(str));
 
 class CreateWaterData {
+  int? id;
   int? facilityId;
   String? date;
   int? waterTypeId;
@@ -12,17 +13,20 @@ class CreateWaterData {
   double? debitQty;
   double? creditQty;
 
-  CreateWaterData(
-      {this.facilityId,
-      this.date,
-      this.waterTypeId,
-      this.description,
-      this.consumeType,
-      this.debitQty,
-      this.creditQty});
+  CreateWaterData({
+    this.id,
+    this.facilityId,
+    this.date,
+    this.waterTypeId,
+    this.description,
+    this.consumeType,
+    this.debitQty,
+    this.creditQty,
+  });
 
   factory CreateWaterData.fromJson(Map<String, dynamic> json) {
     return CreateWaterData(
+      id: json['id'],
       facilityId: json['facilityId'],
       date: json['date'],
       waterTypeId: json['waterTypeId'],
@@ -33,6 +37,7 @@ class CreateWaterData {
     );
   }
   Map<String, dynamic> toJson() => {
+        "id": id,
         "facilityId": facilityId,
         "date": date,
         "waterTypeId": waterTypeId,

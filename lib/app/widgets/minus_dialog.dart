@@ -9,10 +9,22 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class MinusDialog extends GetView {
+  final int? id;
+  final String? date;
+  final int? waterTypeId;
+  final String? waterTypeName;
+  final String? quantity;
+  final String? description;
+  MinusDialog({
+    this.id,
+    this.date,
+    this.waterTypeId,
+    this.waterTypeName,
+    this.quantity,
+    this.description,
+  });
   final WaterDataListController controller = Get.find();
-
-  DateTime selectedDate =
-      DateTime.now(); // Add this line to store the selected date
+  final DateTime selectedDate = DateTime.now();
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +41,21 @@ class MinusDialog extends GetView {
         ),
         content: Builder(builder: (context) {
           var height = MediaQuery.of(context).size.height;
-
+           if (date != null) {
+            controller.procurementTimeCtrlr.text = date!;
+          }
+          if (quantity != null) {
+            controller.qtyCtrlr.text = quantity.toString();
+          }
+          if (description != null) {
+            controller.descriptionCtrlr.text = description!;
+          }
+          if (waterTypeId != null) {
+            controller.selectedTypeOfWaterId = waterTypeId!;
+          }
+          if (waterTypeName != null) {
+            controller.selectedtypeOfWater.value = waterTypeName!;
+          }
           return Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
@@ -164,6 +190,7 @@ class MinusDialog extends GetView {
                   backgroundColor: ColorValues.redColor,
                   text: "Cancel",
                   onPressed: () {
+                    controller.clearData();
                     Get.back();
                   },
                 ),
@@ -171,11 +198,22 @@ class MinusDialog extends GetView {
               Dimens.boxWidth20,
               Container(
                 height: 35,
-                child: CustomElevatedButton(
+                child:
+                id == 0 || id == null 
+                ?CustomElevatedButton(
                   backgroundColor: ColorValues.greenColor,
                   text: 'Submit',
                   onPressed: () {
                     controller.createWaterDataConsumption();
+                    Get.back();
+                  },
+                )
+                : CustomElevatedButton(
+                  backgroundColor: ColorValues.greenColor,
+                  text: 'update',
+                  onPressed: () {
+                    controller.createWaterDataConsumption();
+                    Get.back();
                   },
                 ),
               ),

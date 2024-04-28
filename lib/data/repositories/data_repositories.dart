@@ -1342,6 +1342,14 @@ class DataRepository extends DomainRepository {
         auth: auth,
         isLoading: isLoading,
       );
+  Future<ResponseModel> getFacilityListByUserId({
+    String? auth,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.getFacilityListByUserId(
+        auth: auth,
+        isLoading: isLoading,
+      );
 
   Future<ResponseModel> getBlocksList({
     String? auth,
@@ -1728,6 +1736,16 @@ class DataRepository extends DomainRepository {
     bool? isLoading,
   }) async =>
       await connectHelper.createWaterData(
+        auth: auth,
+        createWaterData: createWaterData,
+        isLoading: isLoading ?? false,
+      );
+  Future<ResponseModel> updateWaterData({
+    required String auth,
+    createWaterData,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.updateWaterData(
         auth: auth,
         createWaterData: createWaterData,
         isLoading: isLoading ?? false,

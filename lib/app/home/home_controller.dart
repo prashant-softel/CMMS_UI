@@ -85,7 +85,7 @@ class HomeController extends GetxController {
   Rx<int> selectedIndex = 0.obs;
   var isExpanded = false.obs;
   RxBool menuButton = false.obs;
-  
+
   Map<String, double> getDataMap() {
     return {
       "BM": 5,
@@ -128,7 +128,7 @@ class HomeController extends GetxController {
     // });
 
     Future.delayed(Duration(seconds: 1), () {
-      getFacilityList();
+      getFacilityListByUserId();
     });
     //  Future.delayed(Duration(seconds: 1), () {
     //   getInventoryCategoryList();
@@ -159,8 +159,8 @@ class HomeController extends GetxController {
     }
   }
 
-  Future<void> getFacilityList() async {
-    final _facilityList = await homePresenter.getFacilityList();
+  Future<void> getFacilityListByUserId() async {
+    final _facilityList = await homePresenter.getFacilityListByUserId();
 
     if (_facilityList != null) {
       for (var facility in _facilityList) {

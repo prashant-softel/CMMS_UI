@@ -9,6 +9,22 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class AddDialog extends GetView {
+  final int? id;
+  final String? date;
+  final int? waterTypeId;
+  final String? waterTypeName;
+  final String? quantity;
+  final String? description;
+
+  AddDialog({
+    this.id,
+    this.date,
+    this.waterTypeId,
+    this.waterTypeName,
+    this.quantity,
+    this.description,
+  });
+
   final WaterDataListController controller = Get.find();
 
   @override
@@ -26,6 +42,24 @@ class AddDialog extends GetView {
         ),
         content: Builder(builder: (context) {
           var height = MediaQuery.of(context).size.height;
+          if (id != null) {
+            controller.detailId = id!;
+          }
+          if (date != null) {
+            controller.procurementTimeCtrlr.text = date!;
+          }
+          if (quantity != null) {
+            controller.qtyCtrlr.text = quantity.toString();
+          }
+          if (description != null) {
+            controller.descriptionCtrlr.text = description!;
+          }
+          if (waterTypeId != null) {
+            controller.selectedTypeOfWaterId = waterTypeId!;
+          }
+          if (waterTypeName != null) {
+            controller.selectedtypeOfWater.value = waterTypeName!;
+          }
 
           return Container(
             decoration: BoxDecoration(
@@ -160,6 +194,7 @@ class AddDialog extends GetView {
                   backgroundColor: ColorValues.redColor,
                   text: "Cancel",
                   onPressed: () {
+                    controller.clearData();
                     Get.back();
                   },
                 ),
@@ -167,16 +202,26 @@ class AddDialog extends GetView {
               Dimens.boxWidth20,
               Container(
                 height: 35,
-                child: CustomElevatedButton(
-                  backgroundColor: ColorValues.greenColor,
-                  text: 'Submit',
-                  onPressed: () {
-                    controller.createWaterData();
-                  },
-                ),
+                child: id == 0 || id == null
+                    ? CustomElevatedButton(
+                        backgroundColor: ColorValues.greenColor,
+                        text: 'Submit',
+                        onPressed: () {
+                          controller.createWaterData();
+                          Get.back();
+                        },
+                      )
+                    : CustomElevatedButton(
+                        backgroundColor: ColorValues.greenColor,
+                        text: 'Update',
+                        onPressed: () {
+                          controller.updateWaterData();
+                          Get.back();
+                        },
+                      ),
               ),
             ],
-          )
+          ),
         ],
       );
     }));

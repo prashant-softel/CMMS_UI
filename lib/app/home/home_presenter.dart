@@ -124,8 +124,8 @@ class HomePresenter {
     );
   }
 
-  Future<List<FacilityModel?>?> getFacilityList() async =>
-      await homeUsecase.getFacilityList();
+  Future<List<FacilityModel?>?> getFacilityListByUserId() async =>
+      await homeUsecase.getFacilityListByUserId();
   Future<String?> getUserAccessList() async =>
       await homeUsecase.getUserAccessList();
   void saveValue({String? facilitydata}) async {
