@@ -2539,8 +2539,8 @@ class NewPermitWeb extends GetView<NewPermitController> {
     final newDate = await showDatePicker(
       context: context,
       initialDate: dateTime,
-      firstDate: DateTime(DateTime.now().year - 5),
-      lastDate: DateTime(DateTime.now().year + 5),
+      firstDate: dateTime,
+      lastDate: dateTime,
     );
 
     if (newDate == null) return null;
@@ -2549,6 +2549,8 @@ class NewPermitWeb extends GetView<NewPermitController> {
   }
 
   Future<TimeOfDay?> pickTimeTBT_web(BuildContext context) async {
+    DateTime startTime = DateTime.parse(controller.startDateTimeCtrlr.text);
+    DateTime tbtTime = startTime.add(Duration(hours: 1));
     DateTime dateTime = controller.selectedDateTime.value;
     //final initialTime = TimeOfDay(hour: 12, minute: 0);
     final newTime = await showTimePicker(
@@ -2565,7 +2567,35 @@ class NewPermitWeb extends GetView<NewPermitController> {
       return null;
     }
 
+    if (TimeOfDayToDateTime(newTime, dateTime)!.isBefore(startTime) ||
+        TimeOfDayToDateTime(newTime, dateTime)!.isAfter(tbtTime)) {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text("Invalid Time"),
+            content:
+                Text("Please select the time within one hour from Start Time."),
+            actions: <Widget>[
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: Text("OK"),
+              ),
+            ],
+          );
+        },
+      );
+      return null;
+    }
+
     return newTime;
+  }
+
+  DateTime? TimeOfDayToDateTime(TimeOfDay timeOfDay, DateTime dateTime) {
+    return DateTime(dateTime.year, dateTime.month, dateTime.day, timeOfDay.hour,
+        timeOfDay.minute);
   }
 
   Widget _buildWorkPermitCommentTextField_web(BuildContext context) {
