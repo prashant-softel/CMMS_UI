@@ -263,7 +263,7 @@ class SetEquipmentDialog extends GetView {
                           .where((e) =>
                               e.feature_id ==
                                   UserAccessConstants
-                                      .kModuleCleaningFeatureId &&
+                                      .kModuleCleaningplanFeatureId &&
                               e.add == UserAccessConstants.kHaveAddAccess)
                           .length >
                       0

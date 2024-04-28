@@ -135,18 +135,31 @@ class _PurchaseGoodsorderListWebState extends State<ModuleCleaningListPlan> {
                                         //   ],
                                         // ),
                                         Dimens.boxWidth10,
-                                        ActionButton(
-                                          icon: Icons.add,
-                                          label: "Add New",
-                                          onPressed: () {
-                                            controller.clearStoreDataMcid();
-                                            controller.clearStoreDataPlanid();
+                                        varUserAccessModel.value.access_list!
+                                                    .where((e) =>
+                                                        e.feature_id ==
+                                                            UserAccessConstants
+                                                                .kModuleCleaningplanFeatureId &&
+                                                        e.add ==
+                                                            UserAccessConstants
+                                                                .kHaveAddAccess)
+                                                    .length >
+                                                0
+                                            ? ActionButton(
+                                                icon: Icons.add,
+                                                label: "Add New",
+                                                onPressed: () {
+                                                  controller
+                                                      .clearStoreDataMcid();
+                                                  controller
+                                                      .clearStoreDataPlanid();
 
-                                            Get.offNamed(
-                                                Routes.moduleCleaningPlanning);
-                                          },
-                                          color: ColorValues.addNewColor,
-                                        ),
+                                                  Get.offNamed(Routes
+                                                      .moduleCleaningPlanning);
+                                                },
+                                                color: ColorValues.addNewColor,
+                                              )
+                                            : Dimens.box0
                                       ],
                                     ),
                                   ),
@@ -311,58 +324,63 @@ class _PurchaseGoodsorderListWebState extends State<ModuleCleaningListPlan> {
                                   SizedBox(
                                     height: 20,
                                   ),
-                                  controller.moduleCleaningListPlan.isEmpty ==true && controller.isLoading==false
-                                  ?Center(child: Text("No Data"))
-                                  : controller.isLoading.value == true
-                                  ? Center(child: Text("Data Loading......"))
-                                      : Expanded(
-                                          child: ValueListenableBuilder(
-                                              valueListenable:
-                                                  controller.columnVisibility,
-                                              builder: (context, value, child) {
-                                                final dataSource =
-                                                    ModuleCleaningPlanListDataSource(
-                                                        controller);
+                                  controller.moduleCleaningListPlan.isEmpty ==
+                                              true &&
+                                          controller.isLoading == false
+                                      ? Center(child: Text("No Data"))
+                                      : controller.isLoading.value == true
+                                          ? Center(
+                                              child: Text("Data Loading......"))
+                                          : Expanded(
+                                              child: ValueListenableBuilder(
+                                                  valueListenable: controller
+                                                      .columnVisibility,
+                                                  builder:
+                                                      (context, value, child) {
+                                                    final dataSource =
+                                                        ModuleCleaningPlanListDataSource(
+                                                            controller);
 
-                                                return PaginatedDataTable2(
-                                                  columnSpacing: 10,
-                                                  dataRowHeight: 70,
-                                                  source:
-                                                      dataSource, // Custom DataSource class
-                                                  // headingRowHeight:
-                                                  //     Get.height * 0.12,
-                                                  minWidth: Get.width * 1.2,
-                                                  showCheckboxColumn: false,
-                                                  rowsPerPage:
-                                                      10, // Number of rows per page
-                                                  availableRowsPerPage: [
-                                                    10,
-                                                    20,
-                                                    30,
-                                                    50
-                                                  ],
-                                                  columns: [
-                                                    for (var entry
-                                                        in value.entries)
-                                                      if (entry.value)
+                                                    return PaginatedDataTable2(
+                                                      columnSpacing: 10,
+                                                      dataRowHeight: 70,
+                                                      source:
+                                                          dataSource, // Custom DataSource class
+                                                      // headingRowHeight:
+                                                      //     Get.height * 0.12,
+                                                      minWidth: Get.width * 1.2,
+                                                      showCheckboxColumn: false,
+                                                      rowsPerPage:
+                                                          10, // Number of rows per page
+                                                      availableRowsPerPage: [
+                                                        10,
+                                                        20,
+                                                        30,
+                                                        50
+                                                      ],
+                                                      columns: [
+                                                        for (var entry
+                                                            in value.entries)
+                                                          if (entry.value)
+                                                            buildDataColumn(
+                                                              entry.key,
+                                                              controller
+                                                                      .filterText[
+                                                                  entry.key]!,
+                                                              controller
+                                                                      .columnwidth[
+                                                                  entry.key],
+                                                            ),
                                                         buildDataColumn(
-                                                          entry.key,
-                                                          controller.filterText[
-                                                              entry.key]!,
+                                                          'Actions',
                                                           controller
-                                                                  .columnwidth[
-                                                              entry.key],
+                                                              .planIdFilterText,
+                                                          150,
                                                         ),
-                                                    buildDataColumn(
-                                                      'Actions',
-                                                      controller
-                                                          .planIdFilterText,
-                                                      150,
-                                                    ),
-                                                  ],
-                                                );
-                                              }),
-                                        ),
+                                                      ],
+                                                    );
+                                                  }),
+                                            ),
                                 ],
                               ),
                             ),
@@ -619,7 +637,7 @@ class ModuleCleaningPlanListDataSource extends DataTableSource {
                                         .where((e) =>
                                             e.feature_id ==
                                                 UserAccessConstants
-                                                    .kModuleCleaningFeatureId &&
+                                                    .kModuleCleaningplanFeatureId &&
                                             e.edit ==
                                                 UserAccessConstants
                                                     .kHaveEditAccess)
@@ -687,7 +705,7 @@ class ModuleCleaningPlanListDataSource extends DataTableSource {
                                         .where((e) =>
                                             e.feature_id ==
                                                 UserAccessConstants
-                                                    .kModuleCleaningFeatureId &&
+                                                    .kModuleCleaningplanFeatureId &&
                                             e.approve ==
                                                 UserAccessConstants
                                                     .kHaveApproveAccess)

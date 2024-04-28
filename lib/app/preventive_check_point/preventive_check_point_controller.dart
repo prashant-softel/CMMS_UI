@@ -106,7 +106,7 @@ class PreventiveCheckPointController extends GetxController {
         "Failure Weightage": failerFilterText,
         "Type": typeFilterText,
       };
-      if (type.value != 0) {
+      // if (type.value != 0) {
         facilityIdStreamSubscription =
             homecontroller.facilityId$.listen((event) {
           facilityId = event;
@@ -116,7 +116,7 @@ class PreventiveCheckPointController extends GetxController {
                 selectedchecklistId: 0.toString(), facilityId: facilityId);
           });
         });
-      }
+      // }
       chckFocus.addListener(() {
         if (!chckFocus.hasFocus) {
           chckScroll.jumpTo(0.0);

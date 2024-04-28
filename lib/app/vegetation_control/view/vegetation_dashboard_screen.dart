@@ -1,3 +1,5 @@
+import 'package:cmms/app/app.dart';
+import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/home/home_controller.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/home/widgets/header_widget_all_dash.dart';
@@ -100,13 +102,21 @@ class VegetationDashboardScreen extends GetView<VegetationDashboardController> {
                                 ? (itemWidth / itemHeight)
                                 : 5,
                             children: <Widget>[
-                              _vegetationList(
+                              varUserAccessModel.value.access_list!
+                                        .where((e) =>
+                                            e.feature_id == 33 &&
+                                            e.view == 1 ||
+                                            e.add == 1)
+                                        .length >
+                                    0
+                              ?_vegetationList(
                                   tittle: "Planning",
                                   ontap: () {
                                     Get.offNamed(
                                       Routes.vegetationPlanListScreen,
                                     );
-                                  }),
+                                  })
+                                  :Dimens.box0,
                               //  if (Responsive.isDesktop(context))
                               _vegetationList(
                                   tittle: "Execution",

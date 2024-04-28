@@ -289,8 +289,8 @@ class BreakdownMaintenanceScreen
                             children: <Widget>[
                               varUserAccessModel.value.access_list!
                                           .where((e) =>
-                                              e.feature_id == 5 &&
-                                              e.view == 1 &&
+                                              e.feature_id == 42 &&
+                                              e.view == 1 ||
                                               e.add == 1)
                                           .length >
                                       0
@@ -302,8 +302,8 @@ class BreakdownMaintenanceScreen
                                   : Dimens.box0,
                               varUserAccessModel.value.access_list!
                                           .where((e) =>
-                                              e.feature_id == 5 &&
-                                              e.view == 1 &&
+                                              e.feature_id == 43 &&
+                                              e.view == 1 ||
                                               e.add == 1)
                                           .length >
                                       0
@@ -316,7 +316,7 @@ class BreakdownMaintenanceScreen
                               varUserAccessModel.value.access_list!
                                           .where((e) =>
                                               e.feature_id == 5 &&
-                                              e.view == 1 &&
+                                              e.view == 1 ||
                                               e.add == 1)
                                           .length >
                                       0
@@ -329,7 +329,7 @@ class BreakdownMaintenanceScreen
                               varUserAccessModel.value.access_list!
                                           .where((e) =>
                                               e.feature_id == 5 &&
-                                              e.view == 1 &&
+                                              e.view == 1 ||
                                               e.add == 1)
                                           .length >
                                       0

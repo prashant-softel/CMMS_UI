@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
+import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/app/widgets/custom_textField.dart';
 import 'package:cmms/app/widgets/dropdown_web.dart';
 import 'package:cmms/app/widgets/job_card_approve_dialog.dart';
@@ -601,7 +602,18 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                                                 ColorValues.appRedColor,
                                           ),
                                           Dimens.boxWidth10,
-                                          CustomElevatedButton(
+                                          varUserAccessModel
+                                                  .value.access_list!
+                                                  .where((e) =>
+                                                      e.feature_id ==
+                                                          UserAccessConstants
+                                                              .kJobCardFeatureId &&
+                                                      e.edit ==
+                                                          UserAccessConstants
+                                                              .kHaveEditAccess)
+                                                  .length >
+                                              0
+                                          ? CustomElevatedButton(
                                             text: 'Update',
                                             backgroundColor:
                                                 ColorValues.appYellowColor,
@@ -620,7 +632,8 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                                                     'Are you sure you want to Update job ?');
                                               }
                                             },
-                                          ),
+                                          )
+                                          : Dimens.box0,
                                           Dimens.boxWidth10,
                                           varUserAccessModel.value.access_list!
                                                       .where((e) =>

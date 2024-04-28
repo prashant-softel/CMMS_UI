@@ -1,5 +1,6 @@
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
+import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/app/widgets/custom_swich_toggle.dart';
 import 'package:cmms/app/widgets/dropdown_web.dart';
 import 'package:data_table_2/data_table_2.dart';
@@ -80,22 +81,30 @@ class PreventiveCheckPointContentWeb
                   ],
                 ),
               ),
-              Padding(
-                padding: EdgeInsets.only(left: 10, top: 10),
-                child: ElevatedButton(
-                  style: Styles.navyBlueElevatedButtonStyle,
-                  onPressed: () {
-                    controller.toggleContainer();
-                  },
-                  child: Obx(() {
-                    return Text(
-                      controller.isContainerVisible.value
-                          ? 'Close Create Check Point'
-                          : 'Open Create Check Point',
-                    );
-                  }),
-                ),
-              ),
+              varUserAccessModel.value.access_list!
+                          .where((e) =>
+                              e.feature_id ==
+                                  UserAccessConstants.kPMcheckpointFeatureId &&
+                              e.add == UserAccessConstants.kHaveAddAccess)
+                          .length >
+                      0
+                  ? Padding(
+                      padding: EdgeInsets.only(left: 10, top: 10),
+                      child: ElevatedButton(
+                        style: Styles.navyBlueElevatedButtonStyle,
+                        onPressed: () {
+                          controller.toggleContainer();
+                        },
+                        child: Obx(() {
+                          return Text(
+                            controller.isContainerVisible.value
+                                ? 'Close Create Check Point'
+                                : 'Open Create Check Point',
+                          );
+                        }),
+                      ),
+                    )
+                  : Dimens.box0,
               Expanded(
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -570,6 +579,8 @@ class PreventiveCheckPointContentWeb
                                               ColorValues.appRedColor,
                                           onPressed: () {
                                             controller.cleardata();
+                                            controller.isContainerVisible
+                                                .value = false;
                                           },
                                           text: 'Cancel'),
                                     ),
@@ -623,35 +634,38 @@ class PreventiveCheckPointContentWeb
                     )
                     //  : Container(),
                     ,
-                    varUserAccessModel.value.access_list!
-                                .where((e) => e.feature_id == 6 && e.add == 1)
-                                .length >
-                            0
-                        ? Expanded(
-                            child: Container(
-                              width: Get.width * 7,
-                              margin: EdgeInsets.only(left: 10, top: 10),
-                              height: Get.height,
-                              child: Card(
-                                color: Color.fromARGB(255, 251, 252, 253),
-                                elevation: 10,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10.0),
-                                ),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
+                    Expanded(
+                      child: Container(
+                        width: Get.width * 7,
+                        margin: EdgeInsets.only(left: 10, top: 10),
+                        height: Get.height,
+                        child: Card(
+                          color: Color.fromARGB(255, 251, 252, 253),
+                          elevation: 10,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10.0),
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.all(10.0),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Padding(
-                                      padding: const EdgeInsets.all(10.0),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Text(
-                                            "Check Point List",
-                                            style: Styles.blackBold16,
-                                          ),
-                                          ActionButton(
+                                    Text(
+                                      "Check Point List",
+                                      style: Styles.blackBold16,
+                                    ),
+                                    varUserAccessModel.value.access_list!
+                                                .where((e) =>
+                                                    e.feature_id == 6 &&
+                                                    e.view == 1 &&
+                                                    e.add == 1)
+                                                .length >
+                                            0
+                                        ? ActionButton(
                                             icon: Icons.upload,
                                             label: 'Import Check Point',
                                             onPressed: () {
@@ -663,238 +677,218 @@ class PreventiveCheckPointContentWeb
                                                   });
                                             },
                                             color: ColorValues.appDarkBlueColor,
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                    Divider(
-                                      color: ColorValues.greyLightColour,
-                                    ),
-                                    SizedBox(
-                                      height: 15,
-                                    ),
-                                    Row(
-                                      children: [
-                                        PopupMenuButton<String>(
-                                          tooltip: "",
-                                          elevation: 25.0,
-                                          child: Container(
-                                            height: 35,
-                                            margin: EdgeInsets.only(left: 10),
-                                            padding: EdgeInsets.only(
-                                                top: 4,
-                                                bottom: 4,
-                                                right: 8,
-                                                left: 8),
-                                            decoration: BoxDecoration(
-                                                color: ColorValues
-                                                    .appLightBlueColor,
-                                                borderRadius:
-                                                    BorderRadius.circular(5),
-                                                boxShadow: [
-                                                  BoxShadow(
-                                                    color: Colors.black26,
-                                                    offset:
-                                                        const Offset(4.0, 2.0),
-                                                    blurRadius: 5.0,
-                                                    spreadRadius: 1.0,
-                                                  ),
-                                                ]),
-                                            child: Text(
-                                              'Column Visibility',
-                                              style: TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 16,
-                                                fontWeight: FontWeight.w400,
-                                              ),
-                                            ),
-                                          ),
-                                          itemBuilder: (BuildContext context) =>
-                                              <PopupMenuEntry<String>>[]
-                                                ..addAll(controller
-                                                    .columnVisibility
-                                                    .value
-                                                    .entries
-                                                    .map((e) {
-                                                  return PopupMenuItem<String>(
-                                                      child:
-                                                          ValueListenableBuilder(
-                                                              valueListenable:
-                                                                  controller
-                                                                      .columnVisibility,
-                                                              builder: (context,
-                                                                  value,
-                                                                  child) {
-                                                                return Row(
-                                                                  children: [
-                                                                    Checkbox(
-                                                                      value: value[
-                                                                          e.key],
-                                                                      onChanged:
-                                                                          (newValue) {
-                                                                        controller.setColumnVisibility(
-                                                                            e.key,
-                                                                            newValue!);
-                                                                      },
-                                                                    ),
-                                                                    Text(e.key),
-                                                                  ],
-                                                                );
-                                                              }));
-                                                })),
-                                          onSelected: (String value) {
-                                            // Handle column selection
-                                          },
-                                        ),
-                                        // Container(
-                                        //   height: 35,
-                                        //   margin: EdgeInsets.only(left: 10),
-                                        //   child: CustomElevatedButton(
-                                        //     backgroundColor:
-                                        //         ColorValues.appLightBlueColor,
-                                        //     onPressed: () {},
-                                        //     text: 'Column Visibility',
-                                        //   ),
-                                        // ),
-                                        // Container(
-                                        //   height: 35,
-                                        //   margin: EdgeInsets.only(left: 10),
-                                        //   child: CustomElevatedButton(
-                                        //       backgroundColor:
-                                        //           ColorValues.appLightBlueColor,
-                                        //       onPressed: () {},
-                                        //       text: 'Copy'),
-                                        // ),
-                                        Container(
-                                          decoration: BoxDecoration(boxShadow: [
+                                          )
+                                        : Dimens.box0
+                                  ],
+                                ),
+                              ),
+                              Divider(
+                                color: ColorValues.greyLightColour,
+                              ),
+                              SizedBox(
+                                height: 15,
+                              ),
+                              Row(
+                                children: [
+                                  PopupMenuButton<String>(
+                                    tooltip: "",
+                                    elevation: 25.0,
+                                    child: Container(
+                                      height: 35,
+                                      margin: EdgeInsets.only(left: 10),
+                                      padding: EdgeInsets.only(
+                                          top: 4, bottom: 4, right: 8, left: 8),
+                                      decoration: BoxDecoration(
+                                          color: ColorValues.appLightBlueColor,
+                                          borderRadius:
+                                              BorderRadius.circular(5),
+                                          boxShadow: [
                                             BoxShadow(
                                               color: Colors.black26,
-                                              offset: const Offset(2.0, 1.0),
+                                              offset: const Offset(4.0, 2.0),
                                               blurRadius: 5.0,
                                               spreadRadius: 1.0,
-                                            )
-                                          ]),
-                                          height: 35,
-                                          margin: EdgeInsets.only(left: 10),
-                                          child: CustomElevatedButton(
-                                              backgroundColor:
-                                                  ColorValues.appLightBlueColor,
-                                              onPressed: () {
-                                                controller.export();
-                                              },
-                                              text: 'Excel'),
-                                        ),
-                                        // Container(
-                                        //   height: 35,
-                                        //   margin: EdgeInsets.only(left: 10),
-                                        //   child: CustomElevatedButton(
-                                        //       backgroundColor:
-                                        //           ColorValues.appLightBlueColor,
-                                        //       onPressed: () {},
-                                        //       text: 'PDF'),
-                                        // ),
-                                        Spacer(),
-                                        Container(
-                                          width: 300,
-                                          height: 40,
-                                          margin: Dimens.edgeInsets0_0_16_0,
-                                          child: TextField(
-                                            style: TextStyle(
-                                                fontSize: 16.0,
-                                                height: 1.0,
-                                                color: Colors.black),
-                                            onChanged: (value) =>
-                                                controller.search(value),
-                                            decoration: InputDecoration(
-                                              enabledBorder:
-                                                  const OutlineInputBorder(
-                                                borderSide: const BorderSide(
-                                                  color: Colors.grey,
-                                                  width: 0.0,
-                                                ),
-                                              ),
-                                              focusedBorder:
-                                                  const OutlineInputBorder(
-                                                borderSide: const BorderSide(
-                                                  color: Colors.grey,
-                                                  width: 0.0,
-                                                ),
-                                              ),
-                                              contentPadding:
-                                                  Dimens.edgeInsets05_10,
-                                              hintText: 'search'.tr,
-                                              hintStyle: Styles.grey16,
                                             ),
-                                          ),
+                                          ]),
+                                      child: Text(
+                                        'Column Visibility',
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w400,
                                         ),
-                                      ],
+                                      ),
                                     ),
-                                    SizedBox(
-                                      height: 20,
-                                    ),
-                                    controller.preventiveCheckpoint!.isEmpty ==
-                                                true &&
-                                            controller.isLoading == false
-                                        ? Center(child: Text("No data"))
-                                        : controller.isLoading.value == true
-                                            ? Center(
-                                                child:
-                                                    Text("Data Loading......"))
-                                            : Expanded(
+                                    itemBuilder: (BuildContext context) =>
+                                        <PopupMenuEntry<String>>[]..addAll(
+                                              controller.columnVisibility.value
+                                                  .entries
+                                                  .map((e) {
+                                            return PopupMenuItem<String>(
                                                 child: ValueListenableBuilder(
                                                     valueListenable: controller
                                                         .columnVisibility,
                                                     builder: (context, value,
                                                         child) {
-                                                      final dataSource =
-                                                          CheckPointDataSource(
-                                                              controller);
-
-                                                      return PaginatedDataTable2(
-                                                        columnSpacing: 10,
-                                                        source: dataSource,
-
-                                                        minWidth: 2000,
-                                                        showCheckboxColumn:
-                                                            false,
-                                                        rowsPerPage:
-                                                            10, // Number of rows per page
-                                                        availableRowsPerPage: [
-                                                          10,
-                                                          20,
-                                                          30,
-                                                          50
-                                                        ],
-                                                        border: TableBorder.all(
-                                                            color:
-                                                                Color.fromARGB(
-                                                                    255,
-                                                                    206,
-                                                                    229,
-                                                                    234)),
-                                                        columns: [
-                                                          for (var entry
-                                                              in value.entries)
-                                                            if (entry.value)
-                                                              buildDataColumn(
-                                                                entry.key,
-                                                                controller
-                                                                        .columnwidth[
-                                                                    entry.key],
-                                                              ),
-                                                          buildDataColumn(
-                                                            'Actions',
-                                                            150,
+                                                      return Row(
+                                                        children: [
+                                                          Checkbox(
+                                                            value: value[e.key],
+                                                            onChanged:
+                                                                (newValue) {
+                                                              controller
+                                                                  .setColumnVisibility(
+                                                                      e.key,
+                                                                      newValue!);
+                                                            },
                                                           ),
+                                                          Text(e.key),
                                                         ],
                                                       );
-                                                    })),
-                                  ],
-                                ),
+                                                    }));
+                                          })),
+                                    onSelected: (String value) {
+                                      // Handle column selection
+                                    },
+                                  ),
+                                  // Container(
+                                  //   height: 35,
+                                  //   margin: EdgeInsets.only(left: 10),
+                                  //   child: CustomElevatedButton(
+                                  //     backgroundColor:
+                                  //         ColorValues.appLightBlueColor,
+                                  //     onPressed: () {},
+                                  //     text: 'Column Visibility',
+                                  //   ),
+                                  // ),
+                                  // Container(
+                                  //   height: 35,
+                                  //   margin: EdgeInsets.only(left: 10),
+                                  //   child: CustomElevatedButton(
+                                  //       backgroundColor:
+                                  //           ColorValues.appLightBlueColor,
+                                  //       onPressed: () {},
+                                  //       text: 'Copy'),
+                                  // ),
+                                  Container(
+                                    decoration: BoxDecoration(boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.black26,
+                                        offset: const Offset(2.0, 1.0),
+                                        blurRadius: 5.0,
+                                        spreadRadius: 1.0,
+                                      )
+                                    ]),
+                                    height: 35,
+                                    margin: EdgeInsets.only(left: 10),
+                                    child: CustomElevatedButton(
+                                        backgroundColor:
+                                            ColorValues.appLightBlueColor,
+                                        onPressed: () {
+                                          controller.export();
+                                        },
+                                        text: 'Excel'),
+                                  ),
+                                  // Container(
+                                  //   height: 35,
+                                  //   margin: EdgeInsets.only(left: 10),
+                                  //   child: CustomElevatedButton(
+                                  //       backgroundColor:
+                                  //           ColorValues.appLightBlueColor,
+                                  //       onPressed: () {},
+                                  //       text: 'PDF'),
+                                  // ),
+                                  Spacer(),
+                                  Container(
+                                    width: 300,
+                                    height: 40,
+                                    margin: Dimens.edgeInsets0_0_16_0,
+                                    child: TextField(
+                                      style: TextStyle(
+                                          fontSize: 16.0,
+                                          height: 1.0,
+                                          color: Colors.black),
+                                      onChanged: (value) =>
+                                          controller.search(value),
+                                      decoration: InputDecoration(
+                                        enabledBorder: const OutlineInputBorder(
+                                          borderSide: const BorderSide(
+                                            color: Colors.grey,
+                                            width: 0.0,
+                                          ),
+                                        ),
+                                        focusedBorder: const OutlineInputBorder(
+                                          borderSide: const BorderSide(
+                                            color: Colors.grey,
+                                            width: 0.0,
+                                          ),
+                                        ),
+                                        contentPadding: Dimens.edgeInsets05_10,
+                                        hintText: 'search'.tr,
+                                        hintStyle: Styles.grey16,
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
-                            ),
-                          )
-                        : Container(),
+                              SizedBox(
+                                height: 20,
+                              ),
+                              controller.preventiveCheckpoint!.isEmpty ==
+                                          true &&
+                                      controller.isLoading == false
+                                  ? Center(child: Text("No data"))
+                                  : controller.isLoading.value == true
+                                      ? Center(
+                                          child: Text("Data Loading......"))
+                                      : Expanded(
+                                          child: ValueListenableBuilder(
+                                              valueListenable:
+                                                  controller.columnVisibility,
+                                              builder: (context, value, child) {
+                                                final dataSource =
+                                                    CheckPointDataSource(
+                                                        controller);
+
+                                                return PaginatedDataTable2(
+                                                  columnSpacing: 10,
+                                                  source: dataSource,
+
+                                                  minWidth: 2000,
+                                                  showCheckboxColumn: false,
+                                                  rowsPerPage:
+                                                      10, // Number of rows per page
+                                                  availableRowsPerPage: [
+                                                    10,
+                                                    20,
+                                                    30,
+                                                    50
+                                                  ],
+                                                  border: TableBorder.all(
+                                                      color: Color.fromARGB(
+                                                          255, 206, 229, 234)),
+                                                  columns: [
+                                                    for (var entry
+                                                        in value.entries)
+                                                      if (entry.value)
+                                                        buildDataColumn(
+                                                          entry.key,
+                                                          controller
+                                                                  .columnwidth[
+                                                              entry.key],
+                                                        ),
+                                                    buildDataColumn(
+                                                      'Actions',
+                                                      150,
+                                                    ),
+                                                  ],
+                                                );
+                                              })),
+                            ],
+                          ),
+                        ),
+                      ),
+                    )
                   ],
                 ),
               ),
@@ -988,56 +982,77 @@ class CheckPointDataSource extends DataTableSource {
             padding: EdgeInsets.zero,
             child: (value == 'Actions')
                 ? Wrap(children: [
-                    TableActionButton(
-                      color: ColorValues.editColor,
-                      icon: Icons.edit,
-                      message: 'Edit',
-                      onPress: () {
-                        controller.selectedItem =
-                            controller.preventiveCheckpoint!.firstWhere(
-                          (element) =>
-                              "${element?.id}" ==
-                              controller.preventiveCheckpoint![index]?.id
-                                  .toString(),
-                        );
+                    varUserAccessModel.value.access_list!
+                                .where((e) =>
+                                    e.feature_id ==
+                                        UserAccessConstants
+                                            .kPMcheckpointFeatureId &&
+                                    e.edit ==
+                                        UserAccessConstants.kHaveEditAccess)
+                                .length >
+                            0
+                        ? TableActionButton(
+                            color: ColorValues.editColor,
+                            icon: Icons.edit,
+                            message: 'Edit',
+                            onPress: () {
+                              controller.selectedItem =
+                                  controller.preventiveCheckpoint!.firstWhere(
+                                (element) =>
+                                    "${element?.id}" ==
+                                    controller.preventiveCheckpoint![index]?.id
+                                        .toString(),
+                              );
 
-                        controller.checkPointCtrlr.text =
-                            "${controller.selectedItem?.check_point}";
-                        controller.checkpointType.value =
-                            "${controller.selectedItem?.checkpoint_type}";
-                        controller.selectedchecklist.value =
-                            "${controller.selectedItem?.checklist_name}";
+                              controller.checkPointCtrlr.text =
+                                  "${controller.selectedItem?.check_point}";
+                              controller.checkpointType.value =
+                                  "${controller.selectedItem?.checkpoint_type}";
+                              controller.selectedchecklist.value =
+                                  "${controller.selectedItem?.checklist_name}";
 
-                        controller.failurewtgCtrlr.text =
-                            "${controller.selectedItem?.failure_weightage}";
-                        controller.maxRangeCtrlr.text =
-                            "${controller.selectedItem?.max}";
-                        controller.minRangeCtrlr.text =
-                            "${controller.selectedItem?.min}";
-                        controller.requirementCtrlr.text =
-                            controller.selectedItem?.requirement ?? "";
-                        controller.isToggleOn.value =
-                            controller.selectedItem?.is_document_required == 1
-                                ? true
-                                : false;
-                        controller.isContainerVisible.value = true;
-                      },
-                    ),
-                    TableActionButton(
-                      color: ColorValues.deleteColor,
-                      icon: Icons.delete,
-                      message: 'Delete',
-                      onPress: () {
-                        controller.isDeleteDialog(
-                          check_point: controller
-                              .preventiveCheckpoint![index]?.check_point
-                              .toString(),
-                          check_point_id: controller
-                              .preventiveCheckpoint![index]?.id
-                              .toString(),
-                        );
-                      },
-                    )
+                              controller.failurewtgCtrlr.text =
+                                  "${controller.selectedItem?.failure_weightage}";
+                              controller.maxRangeCtrlr.text =
+                                  "${controller.selectedItem?.max}";
+                              controller.minRangeCtrlr.text =
+                                  "${controller.selectedItem?.min}";
+                              controller.requirementCtrlr.text =
+                                  controller.selectedItem?.requirement ?? "";
+                              controller.isToggleOn.value = controller
+                                          .selectedItem?.is_document_required ==
+                                      1
+                                  ? true
+                                  : false;
+                              controller.isContainerVisible.value = true;
+                            },
+                          )
+                        : Dimens.box0,
+                    varUserAccessModel.value.access_list!
+                                .where((e) =>
+                                    e.feature_id ==
+                                        UserAccessConstants
+                                            .kPMcheckpointFeatureId &&
+                                    e.delete ==
+                                        UserAccessConstants.kHaveDeleteAccess)
+                                .length >
+                            0
+                        ? TableActionButton(
+                            color: ColorValues.deleteColor,
+                            icon: Icons.delete,
+                            message: 'Delete',
+                            onPress: () {
+                              controller.isDeleteDialog(
+                                check_point: controller
+                                    .preventiveCheckpoint![index]?.check_point
+                                    .toString(),
+                                check_point_id: controller
+                                    .preventiveCheckpoint![index]?.id
+                                    .toString(),
+                              );
+                            },
+                          )
+                        : Dimens.box0
                   ])
                 : (value == "upload_image") //"0" || value == '1')
                     ? Wrap(

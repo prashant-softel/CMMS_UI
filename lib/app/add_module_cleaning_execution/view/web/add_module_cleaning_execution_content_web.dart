@@ -803,7 +803,7 @@ class AddModuleCleaningExecutionContentWeb
                                                             .where((e) =>
                                                                 e.feature_id ==
                                                                     UserAccessConstants
-                                                                        .kModuleCleaningFeatureId &&
+                                                                        .kModuleCleaningexeFeatureId &&
                                                                 e.edit ==
                                                                     UserAccessConstants
                                                                         .kHaveEditAccess)
@@ -837,7 +837,7 @@ class AddModuleCleaningExecutionContentWeb
                                                             .where((e) =>
                                                                 e.feature_id ==
                                                                     UserAccessConstants
-                                                                        .kModuleCleaningFeatureId &&
+                                                                        .kModuleCleaningexeFeatureId &&
                                                                 e.edit ==
                                                                     UserAccessConstants
                                                                         .kHaveEditAccess)
@@ -871,7 +871,7 @@ class AddModuleCleaningExecutionContentWeb
                                                             .where((e) =>
                                                                 e.feature_id ==
                                                                     UserAccessConstants
-                                                                        .kModuleCleaningFeatureId &&
+                                                                        .kModuleCleaningexeFeatureId &&
                                                                 e.edit ==
                                                                     UserAccessConstants
                                                                         .kHaveEditAccess)
@@ -882,7 +882,7 @@ class AddModuleCleaningExecutionContentWeb
                                                             .where((e) =>
                                                                 e.feature_id ==
                                                                     UserAccessConstants
-                                                                        .kModuleCleaningFeatureId &&
+                                                                        .kModuleCleaningexeFeatureId &&
                                                                 e.approve ==
                                                                     UserAccessConstants
                                                                         .kHaveApproveAccess)

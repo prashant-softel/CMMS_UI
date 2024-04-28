@@ -1,6 +1,8 @@
+import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/job_card_list/job_card_list_controller.dart';
 import 'package:cmms/app/theme/dimens.dart';
+import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/domain/models/job_card_model.dart';
 
@@ -513,19 +515,29 @@ class JobDataSource extends DataTableSource {
                   )
                 : (value == 'Actions')
                     ? Wrap(children: [
-                        TableActionButton(
-                          color: ColorValues.viewColor,
-                          icon: Icons.remove_red_eye_outlined,
-                          message: 'view',
-                          onPress: () {
-                            controller.clearStoreData();
-                            int jobCardId = JobDetails?.jobCardId ?? 0;
-                            if (jobCardId != 0) {
-                              Get.toNamed(Routes.jobCard,
-                                  arguments: {'JcId': jobCardId});
-                            }
-                          },
-                        ),
+                        varUserAccessModel.value.access_list!
+                                    .where((e) =>
+                                        e.feature_id ==
+                                            UserAccessConstants
+                                                .kJobCardFeatureId &&
+                                        e.view ==
+                                            UserAccessConstants.kHaveViewAccess)
+                                    .length >
+                                0
+                            ? TableActionButton(
+                                color: ColorValues.viewColor,
+                                icon: Icons.remove_red_eye_outlined,
+                                message: 'view',
+                                onPress: () {
+                                  controller.clearStoreData();
+                                  int jobCardId = JobDetails?.jobCardId ?? 0;
+                                  if (jobCardId != 0) {
+                                    Get.toNamed(Routes.jobCard,
+                                        arguments: {'JcId': jobCardId});
+                                  }
+                                },
+                              )
+                            : Dimens.box0
                       ])
                     : Text(value.toString()),
           ),
