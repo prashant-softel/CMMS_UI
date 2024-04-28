@@ -1,6 +1,8 @@
+import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/theme/dimens.dart';
+import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/app/widgets/custom_textField.dart';
 import 'package:cmms/app/widgets/dropdown_web.dart';
 import 'package:cmms/app/widgets/execution_approve_dialog.dart';
@@ -305,42 +307,40 @@ class PreventiveMaintenanceExecutionContentWeb
                                                             Container(
                                                               height: 25,
                                                               width: 90,
-                                                              child:
-                                                                  CustomElevatedButton(
-                                                                size: 12,
-                                                                backgroundColor:
-                                                                    ColorValues
-                                                                        .appDarkBlueColor,
-                                                                text: "Clone",
-                                                                onPressed: () {
-                                                                  controller.selectedItem = controller
-                                                                      .scheduleCheckPoints
-                                                                      .firstWhere((element) =>
-                                                                          "${element.name}" ==
-                                                                          record[0]['value']
-                                                                              .toString());
+                                                              child: varUserAccessModel
+                                                                          .value
+                                                                          .access_list!
+                                                                          .where((e) =>
+                                                                              e.feature_id == UserAccessConstants.kPmExecutionFeatureId &&
+                                                                              e.edit == UserAccessConstants.kHaveEditAccess)
+                                                                          .length >
+                                                                      0
+                                                                  ? CustomElevatedButton(
+                                                                      size: 12,
+                                                                      backgroundColor:
+                                                                          ColorValues
+                                                                              .appDarkBlueColor,
+                                                                      text:
+                                                                          "Clone",
+                                                                      onPressed:
+                                                                          () {
+                                                                        controller.selectedItem = controller.scheduleCheckPoints.firstWhere((element) =>
+                                                                            "${element.name}" ==
+                                                                            record[0]['value'].toString());
 
-                                                                  var select =
-                                                                      controller
-                                                                          .scheduleCheckPoints
-                                                                          .firstWhere(
-                                                                    (element) =>
-                                                                        element
-                                                                            .name ==
-                                                                        controller
-                                                                            .selectedasset
-                                                                            .value,
-                                                                  );
-                                                                  select
-                                                                          .schedule_link_job!
-                                                                          .isNotEmpty
-                                                                      ? controller
-                                                                          .cloneAlertDialog()
-                                                                      : controller.cloneDialog(controller
-                                                                          .selectedasset
-                                                                          .value);
-                                                                },
-                                                              ),
+                                                                        var select = controller
+                                                                            .scheduleCheckPoints
+                                                                            .firstWhere(
+                                                                          (element) =>
+                                                                              element.name ==
+                                                                              controller.selectedasset.value,
+                                                                        );
+                                                                        select.schedule_link_job!.isNotEmpty
+                                                                            ? controller.cloneAlertDialog()
+                                                                            : controller.cloneDialog(controller.selectedasset.value);
+                                                                      },
+                                                                    )
+                                                                  : Dimens.box0,
                                                             ),
                                                             // mapData['executionDone'] ==
                                                             //         "0"
@@ -387,103 +387,92 @@ class PreventiveMaintenanceExecutionContentWeb
                                                               },
                                                             ),
                                                             // Spacer(),
-                                                            TableActionButton(
-                                                                color: ColorValues
-                                                                    .editColor,
-                                                                icon:
-                                                                    Icons.edit,
-                                                                message: "Edit",
-                                                                onPress: () {
-                                                                  controller
-                                                                          .selectedItem =
-                                                                      null;
-                                                                  controller
-                                                                      .rowItemobs
-                                                                      .value = [];
-                                                                  controller.selectedItem = controller
-                                                                      .scheduleCheckPoints
-                                                                      .firstWhere((element) =>
-                                                                          "${element.name}" ==
-                                                                          record[0]['value']
-                                                                              .toString());
-                                                                  if (controller
-                                                                          .selectedItem !=
-                                                                      null) {
-                                                                    controller
-                                                                        .selectedItem!
-                                                                        .checklist_observation
-                                                                        ?.forEach(
-                                                                            (element) {
+                                                            varUserAccessModel
+                                                                        .value
+                                                                        .access_list!
+                                                                        .where((e) =>
+                                                                            e.feature_id == UserAccessConstants.kPmExecutionFeatureId &&
+                                                                            e.edit ==
+                                                                                UserAccessConstants
+                                                                                    .kHaveEditAccess)
+                                                                        .length >
+                                                                    0
+                                                                ? TableActionButton(
+                                                                    color: ColorValues
+                                                                        .editColor,
+                                                                    icon: Icons
+                                                                        .edit,
+                                                                    message:
+                                                                        "Edit",
+                                                                    onPress:
+                                                                        () {
+                                                                      controller
+                                                                              .selectedItem =
+                                                                          null;
                                                                       controller
                                                                           .rowItemobs
-                                                                          .value
-                                                                          .add([
-                                                                        {
-                                                                          "key":
-                                                                              "checkpoint",
-                                                                          "id":
-                                                                              '${element.execution_id}',
-                                                                          "value":
-                                                                              '${element.check_point_name}',
-                                                                        },
-                                                                        {
-                                                                          "key":
-                                                                              "requirement",
-                                                                          "value":
-                                                                              '${element.requirement}'
-                                                                        },
-                                                                        {
-                                                                          'key':
-                                                                              "weightage",
-                                                                          "value":
-                                                                              '${element.failure_waightage}'
-                                                                        },
-                                                                        {
-                                                                          'key':
-                                                                              "cpok",
-                                                                          "value":
-                                                                              '${element.cp_ok.value}'
-                                                                        },
-                                                                        {
-                                                                          'key':
-                                                                              "observation",
-                                                                          "value":
-                                                                              '${element.observation}'
-                                                                        },
-                                                                        {
-                                                                          'key':
-                                                                              "uploadimg",
-                                                                          "value":
-                                                                              '',
-                                                                          "uploaded":
-                                                                              ""
-                                                                        },
-                                                                        {
-                                                                          'key':
-                                                                              "type",
-                                                                          'inpute_type':
-                                                                              '${element.check_point_type}',
-                                                                          "value":
-                                                                              '${element.type_text}',
-                                                                          "min":
-                                                                              '${element.min_range}',
-                                                                          "max":
-                                                                              '${element.max_range}'
-                                                                        },
-                                                                        {
-                                                                          'key':
-                                                                              "job_created",
-                                                                          "job_value":
-                                                                              '${element.linked_job_id.value}',
-                                                                          "cp_ok_value":
-                                                                              '${element.cp_ok.value}',
-                                                                        },
-                                                                      ]);
-                                                                    });
-                                                                    Get.dialog(
-                                                                        ObservationPmExecutionViewDialog());
-                                                                  }
-                                                                })
+                                                                          .value = [];
+                                                                      controller.selectedItem = controller
+                                                                          .scheduleCheckPoints
+                                                                          .firstWhere((element) =>
+                                                                              "${element.name}" ==
+                                                                              record[0]['value'].toString());
+                                                                      if (controller
+                                                                              .selectedItem !=
+                                                                          null) {
+                                                                        controller
+                                                                            .selectedItem!
+                                                                            .checklist_observation
+                                                                            ?.forEach((element) {
+                                                                          controller
+                                                                              .rowItemobs
+                                                                              .value
+                                                                              .add([
+                                                                            {
+                                                                              "key": "checkpoint",
+                                                                              "id": '${element.execution_id}',
+                                                                              "value": '${element.check_point_name}',
+                                                                            },
+                                                                            {
+                                                                              "key": "requirement",
+                                                                              "value": '${element.requirement}'
+                                                                            },
+                                                                            {
+                                                                              'key': "weightage",
+                                                                              "value": '${element.failure_waightage}'
+                                                                            },
+                                                                            {
+                                                                              'key': "cpok",
+                                                                              "value": '${element.cp_ok.value}'
+                                                                            },
+                                                                            {
+                                                                              'key': "observation",
+                                                                              "value": '${element.observation}'
+                                                                            },
+                                                                            {
+                                                                              'key': "uploadimg",
+                                                                              "value": '',
+                                                                              "uploaded": ""
+                                                                            },
+                                                                            {
+                                                                              'key': "type",
+                                                                              'inpute_type': '${element.check_point_type}',
+                                                                              "value": '${element.type_text}',
+                                                                              "min": '${element.min_range}',
+                                                                              "max": '${element.max_range}'
+                                                                            },
+                                                                            {
+                                                                              'key': "job_created",
+                                                                              "job_value": '${element.linked_job_id.value}',
+                                                                              "cp_ok_value": '${element.cp_ok.value}',
+                                                                            },
+                                                                          ]);
+                                                                        });
+                                                                        Get.dialog(
+                                                                            ObservationPmExecutionViewDialog());
+                                                                      }
+                                                                    })
+                                                                : Dimens.box0
                                                           ],
                                                         )
                                                       : (mapData['key'] ==

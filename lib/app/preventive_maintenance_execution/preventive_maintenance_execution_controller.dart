@@ -118,6 +118,8 @@ class PreventiveMaintenanceExecutionController extends GetxController {
   void addRowItem() {
     rowItem.add([
       {"key": "Drop_down", "value": 'Please Select'},
+      {'key': "Sr_No", "value": ''},
+      {'key': "code", "value": ''},
       {'key': "Material_Type", "value": ''},
       {'key': "Issued_Qty", "value": ''},
       {'key': "Used_Qty", "value": ''},
@@ -252,7 +254,8 @@ class PreventiveMaintenanceExecutionController extends GetxController {
           fromActorID: scheduleId.value,
           fromActorType: AppConstants.kTask,
           mrsID: listMrsByTaskId![0]!.mrsId ?? 0,
-          qty: int.tryParse(element[4]["value"] ?? '0') ?? 0,
+          mrsItemID: listMrsByTaskId![0]!.mrsId ?? 0,
+          qty: int.tryParse(element[6]["value"] ?? '0') ?? 0,
           refID: scheduleId.value,
           refType: AppConstants.kTask,
           remarks: "remarks",

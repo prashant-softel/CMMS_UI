@@ -15,6 +15,7 @@ class TranferItems {
   int refID;
   String remarks;
   int mrsID;
+  int mrsItemID;
 
   TranferItems(
       {required this.assetItemID,
@@ -27,7 +28,8 @@ class TranferItems {
       required this.refType,
       required this.remarks,
       required this.toActorID,
-      required this.toActorType});
+      required this.toActorType,
+      required this.mrsItemID});
 
   factory TranferItems.fromJson(Map<String, dynamic> json) => TranferItems(
         assetItemID: json['assetItemID'],
@@ -35,6 +37,7 @@ class TranferItems {
         fromActorID: json['fromActorID'],
         fromActorType: json['fromActorType'],
         mrsID: json['mrsID'],
+        mrsItemID: json['mrsItemID'],
         qty: json['qty'],
         refID: json['refID'],
         refType: json['refType'],
@@ -54,6 +57,7 @@ class TranferItems {
         'remarks': remarks,
         'toActorID': toActorID,
         'toActorType': toActorType,
-        'mrsID': mrsID
+        'mrsID': mrsID,
+        'mrsItemID': mrsItemID
       };
 }
