@@ -254,15 +254,24 @@ class CreateMrsContentWeb extends GetView<CreateMrsController> {
                                                         .size
                                                         .width /
                                                     4,
-                                                dropdownList:
-                                                    controller.assetItemList,
+                                                dropdownList: controller
+                                                    .assetItemList
+                                                    .where((p0) {
+                                                      return !controller.rowItem
+                                                          .map((p0) =>
+                                                              p0[0]["value"])
+                                                          .contains(p0!.name);
+                                                    })
+                                                    .toList()
+                                                    .obs,
                                                 selectedValue: mapData["value"],
                                                 onValueChanged:
                                                     (list, selectedValue) {
-                                                  // print({
-                                                  //   selectedValue:
-                                                  //       selectedValue
-                                                  // });
+                                                  print({
+                                                    controller
+                                                            .dropdownMapperData[
+                                                        selectedValue]
+                                                  });
                                                   mapData["value"] =
                                                       selectedValue;
                                                   controller.dropdownMapperData[
@@ -272,20 +281,6 @@ class CreateMrsContentWeb extends GetView<CreateMrsController> {
                                                               element.name ==
                                                               selectedValue,
                                                           orElse: null);
-                                                  if (controller
-                                                      .removedMaterials
-                                                      .contains(
-                                                          selectedValue)) {
-                                                    controller.removedMaterials
-                                                        .remove(selectedValue);
-                                                  } else {
-                                                    controller.removedMaterials
-                                                        .add(selectedValue);
-                                                  }
-                                                  controller.assetItemList
-                                                      .removeWhere((item) =>
-                                                          item?.name ==
-                                                          selectedValue);
                                                 },
                                               ),
                                             )
@@ -397,20 +392,6 @@ class CreateMrsContentWeb extends GetView<CreateMrsController> {
                                                             label: '',
                                                             message: '',
                                                             onPress: () {
-                                                              controller
-                                                                  .removedMaterials
-                                                                  .forEach(
-                                                                      (material) {
-                                                                controller
-                                                                    .assetItemList
-                                                                    .add(controller
-                                                                        .dropdownMapperData
-                                                                        .value[material]);
-                                                              });
-                                                              // Clear the removedMaterials list
-                                                              // controller
-                                                              //     .removedMaterials
-                                                              //     .clear();
                                                               controller.rowItem
                                                                   .remove(
                                                                       record);
