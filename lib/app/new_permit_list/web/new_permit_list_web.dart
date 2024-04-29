@@ -1040,9 +1040,9 @@ class PermitListDataSource extends DataTableSource {
                                                           e.feature_id ==
                                                               UserAccessConstants
                                                                   .kPermitFeatureId &&
-                                                          e.add ==
+                                                          e.edit ==
                                                               UserAccessConstants
-                                                                  .kHaveAddAccess)
+                                                                  .kHaveEditAccess)
                                                       .length >
                                                   0 &&
                                               controller.newPermitList
@@ -1173,17 +1173,18 @@ class PermitListDataSource extends DataTableSource {
                                                               .kHaveApproveAccess)
                                                   .length >
                                               0 ||
-                                          // varUserAccessModel.value.access_list!
-                                          //         .where((e) =>
-                                          //             e.feature_id ==
-                                          //                 UserAccessConstants
-                                          //                     .kPermitFeatureId &&
-                                          //             e.edit ==
-                                          //                 UserAccessConstants
-                                          //                     .kHaveEditAccess)
-                                          //         .length >
-                                          //     0
-                                          //      ||
+                                              
+                                          varUserAccessModel.value.access_list!
+                                                  .where((e) =>
+                                                      e.feature_id ==
+                                                          UserAccessConstants
+                                                              .kPermitFeatureId &&
+                                                      e.edit ==
+                                                          UserAccessConstants
+                                                              .kHaveEditAccess)
+                                                  .length >
+                                              0
+                                               ||
                                           controller.newPermitList
                                                   .firstWhere(
                                                     (e) =>
