@@ -193,7 +193,7 @@ class WaterDataListController extends GetxController {
     String formattedDate =
         DateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'").format(procurementTime);
 
-    CreateWaterData createWaterData = CreateWaterData(
+    CreateWaterData updateWaterData= CreateWaterData(
       id: _id,
       consumeType: 1,
       facilityId: facilityId,
@@ -203,20 +203,21 @@ class WaterDataListController extends GetxController {
       description: _descriptionCtrlr,
       waterTypeId: selectedTypeOfWaterId,
     );
-    var createWaterDataModelJsonString = createWaterData.toJson();
+    var updateWaterDataModelJsonString = updateWaterData.toJson();
     Map<String, dynamic>? responseCreateWaterDataModel =
         await waterDataListPresenter.updateWaterData(
-      createWaterData: createWaterDataModelJsonString,
+      updateWaterData: updateWaterDataModelJsonString,
       isLoading: true,
     );
 
     // Handle the response
     if (responseCreateWaterDataModel == null) {}
 
-    print('Create Water data: $createWaterDataModelJsonString');
+    print('Create Water data: $updateWaterDataModelJsonString');
   }
 
   void createWaterDataConsumption() async {
+    int _id = detailId;
     String _descriptionCtrlr = descriptionCtrlr.text.trim();
     String _qtCtrlr = qtyCtrlr.text.trim();
     DateTime procurementTime = selectedProcurementTime.value;
@@ -224,6 +225,7 @@ class WaterDataListController extends GetxController {
         DateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'").format(procurementTime);
 
     CreateWaterData createWaterData = CreateWaterData(
+      id: _id,
       consumeType: 1,
       facilityId: facilityId,
       creditQty: 0,
@@ -244,36 +246,38 @@ class WaterDataListController extends GetxController {
 
     print('Create Water data: $createWaterDataModelJsonString');
   }
-  // void updateWaterDataConsumption() async {
-  //   int _id = detailId;
-  //   String _descriptionCtrlr = descriptionCtrlr.text.trim();
-  //   String _qtCtrlr = qtyCtrlr.text.trim();
-  //   DateTime procurementTime = selectedProcurementTime.value;
-  //   String formattedDate =
-  //       DateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'").format(procurementTime);
 
-  //   CreateWaterData createWaterData = CreateWaterData(
-  //     id: _id,
-  //     consumeType: 1,
-  //     facilityId: facilityId,
-  //     creditQty: 0,
-  //     date: formattedDate,
-  //     debitQty: double.tryParse(_qtCtrlr) ?? 0,
-  //     description: _descriptionCtrlr,
-  //     waterTypeId: selectedTypeOfWaterId,
-  //   );
-  //   var createWaterDataModelJsonString = createWaterData.toJson();
-  //   Map<String, dynamic>? responseCreateWaterDataModel =
-  //       await waterDataListPresenter.createWaterDataConsumption(
-  //     createWaterData: createWaterDataModelJsonString,
-  //     isLoading: true,
-  //   );
+  void updateWaterDataConsumption() async {
+    int _id = detailId;
+    String _descriptionCtrlr = descriptionCtrlr.text.trim();
+    String _qtCtrlr = qtyCtrlr.text.trim();
+    DateTime procurementTime = selectedProcurementTime.value;
+    String formattedDate =
+        DateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'").format(procurementTime);
 
-  //   // Handle the response
-  //   if (responseCreateWaterDataModel == null) {}
+    CreateWaterData updateWaterData = CreateWaterData(
+      id: _id,
+      consumeType: 1,
+      facilityId: facilityId,
+      creditQty: 0,
+      date: formattedDate,
+      debitQty: double.tryParse(_qtCtrlr) ?? 0,
+      description: _descriptionCtrlr,
+      waterTypeId: selectedTypeOfWaterId,
+    );
+    print("update consumption payload ${updateWaterData}");
+    var updateWaterDataModelJsonString = updateWaterData.toJson();
+    Map<String, dynamic>? responseCreateWaterDataModel =
+        await waterDataListPresenter.updateWaterDataConsumption(
+      updateWaterData: updateWaterDataModelJsonString,
+      isLoading: true,
+    );
 
-  //   print('Create Water data: $createWaterDataModelJsonString');
-  // }
+    // Handle the response
+    if (responseCreateWaterDataModel == null) {}
+
+    print('Create Water data: $updateWaterDataModelJsonString');
+  }
 
   Future pickDateTime(BuildContext context) async {
     final date = await pickDate(context);

@@ -47,6 +47,7 @@ class AddDialog extends GetView {
           }
           if (date != null) {
             controller.procurementTimeCtrlr.text = date!;
+            controller.selectedProcurementTime.value = DateTime.parse(date!);
           }
           if (quantity != null) {
             controller.qtyCtrlr.text = quantity.toString();

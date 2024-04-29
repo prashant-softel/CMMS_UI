@@ -43,7 +43,7 @@ class WaterDataMonth {
 class ItemData {
   String? waterType;
   int? waterTypeId;
-  int? opening;
+  double? opening;
   List<Details>? details;
 
   ItemData({

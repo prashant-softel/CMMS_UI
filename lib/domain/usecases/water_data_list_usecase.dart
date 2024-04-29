@@ -1,7 +1,5 @@
 import 'package:cmms/domain/models/type_of_water_model.dart';
 import 'package:cmms/domain/models/water_data_list_model.dart';
-import 'package:cmms/domain/repositories/local_storage_keys.dart';
-import 'package:cmms/domain/models/audit_plan_list_model.dart';
 import 'package:cmms/domain/repositories/repository.dart';
 
 class WaterDataListUsecase {
@@ -17,11 +15,11 @@ class WaterDataListUsecase {
         isLoading,
       );
   Future<Map<String, dynamic>> updateWaterData({
-    createWaterData,
+    updateWaterData,
     bool? isLoading,
   }) async =>
       await repository.updateWaterData(
-        createWaterData,
+        updateWaterData,
         isLoading,
       );
 

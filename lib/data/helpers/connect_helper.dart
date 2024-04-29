@@ -2983,13 +2983,13 @@ class ConnectHelper {
 
   Future<ResponseModel> updateWaterData({
     required String auth,
-    createWaterData,
+    updateWaterData,
     bool? isLoading,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
       'MISMaster/UpdateWaterData',
       Request.put,
-      jsonEncode(createWaterData),
+      jsonEncode(updateWaterData),
       isLoading ?? false,
       {
         'Content-Type': 'application/json',

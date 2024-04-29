@@ -41,8 +41,9 @@ class MinusDialog extends GetView {
         ),
         content: Builder(builder: (context) {
           var height = MediaQuery.of(context).size.height;
-           if (date != null) {
+          if (date != null) {
             controller.procurementTimeCtrlr.text = date!;
+            controller.selectedProcurementTime.value = DateTime.parse(date!);
           }
           if (quantity != null) {
             controller.qtyCtrlr.text = quantity.toString();
@@ -198,24 +199,23 @@ class MinusDialog extends GetView {
               Dimens.boxWidth20,
               Container(
                 height: 35,
-                child:
-                id == 0 || id == null 
-                ?CustomElevatedButton(
-                  backgroundColor: ColorValues.greenColor,
-                  text: 'Submit',
-                  onPressed: () {
-                    controller.createWaterDataConsumption();
-                    Get.back();
-                  },
-                )
-                : CustomElevatedButton(
-                  backgroundColor: ColorValues.greenColor,
-                  text: 'update',
-                  onPressed: () {
-                    controller.createWaterDataConsumption();
-                    Get.back();
-                  },
-                ),
+                child: id == 0 || id == null
+                    ? CustomElevatedButton(
+                        backgroundColor: ColorValues.greenColor,
+                        text: 'Submit',
+                        onPressed: () {
+                          controller.createWaterDataConsumption();
+                          Get.back();
+                        },
+                      )
+                    : CustomElevatedButton(
+                        backgroundColor: ColorValues.greenColor,
+                        text: 'update',
+                        onPressed: () {
+                          controller.updateWaterDataConsumption();
+                          Get.back();
+                        },
+                      ),
               ),
             ],
           )
