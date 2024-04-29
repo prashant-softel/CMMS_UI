@@ -6,6 +6,7 @@ import 'package:cmms/domain/models/inventory_category_model.dart';
 import 'package:cmms/domain/models/type_permit_model.dart';
 import 'package:cmms/domain/models/warranty_claim_model.dart';
 
+import '../../domain/models/dashboard_model.dart';
 import '../../domain/models/facility_model.dart';
 
 class HomePresenter {
@@ -42,7 +43,14 @@ class HomePresenter {
         facilityId: facilityId ?? 0,
         isLoading: isLoading ?? false,
       );
-
+  Future<List<DashboardModel?>?> getdashboardList({
+    int? facilityId,
+    bool? isLoading,
+  }) async =>
+      await homeUsecase.getdashboardList(
+        facilityId: facilityId ?? 0,
+        isLoading: isLoading ?? false,
+      );
   Future<List<TypePermitModel?>?> getTypePermitList(
           {required int facility_id}) async =>
       await homeUsecase.getTypePermitList(true, facility_id);
@@ -53,10 +61,9 @@ class HomePresenter {
     required int? businessType,
   }) async {
     return homeUsecase.getBusinessList(
-      isLoading: isLoading,
-      businessType: businessType,
-      facilityId:facilityId
-    );
+        isLoading: isLoading,
+        businessType: businessType,
+        facilityId: facilityId);
   }
 
   Future<List<CurrencyListModel>> getUnitCurrencyList({

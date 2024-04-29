@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
 import 'dart:typed_data';
+import 'package:cmms/domain/models/dashboard_model.dart';
 import 'package:cmms/domain/models/get_mc_task_equipment_model.dart';
 import 'package:cmms/domain/models/grievance_type_model.dart';
 import 'package:cmms/domain/models/incident_risk_type_model.dart';
@@ -794,6 +795,7 @@ class Repository {
       return Map();
     }
   }
+
   Future<Map<String, dynamic>> updateWaterData(
     updateWaterData,
     bool? isLoading,
@@ -5035,6 +5037,7 @@ class Repository {
       return [];
     }
   }
+
   Future<List<FacilityModel?>?> getFacilityListByUserId(bool? isLoading) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
@@ -5958,6 +5961,38 @@ class Repository {
           exportToExcel(checklistData, "checklist.xlsx");
         }
         return _PreventiveCheckListModelList;
+      } else {
+        Utility.showDialog(res.errorCode.toString(), ' getPreventiveCheckList');
+        return [];
+      }
+    } catch (error) {
+      print(error.toString());
+      return [];
+    }
+  }
+
+  Future<List<DashboardModel?>?> getdashboardList({
+    int? facilityId,
+    bool? isLoading,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getdashboardList(
+        auth: auth,
+        facilityId: facilityId ?? 0,
+        isLoading: isLoading ?? false,
+      );
+
+      if (!res.hasError) {
+        final jsonDashboardModelModels = jsonDecode(res.data);
+        // print(res.data);
+        final List<DashboardModel> _DashboardModelList =
+            jsonDashboardModelModels
+                .map<DashboardModel>((m) =>
+                    DashboardModel.fromJson(Map<String, dynamic>.from(m)))
+                .toList();
+
+        return _DashboardModelList;
       } else {
         Utility.showDialog(res.errorCode.toString(), ' getPreventiveCheckList');
         return [];

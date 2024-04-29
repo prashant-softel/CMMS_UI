@@ -1258,6 +1258,16 @@ class DataRepository extends DomainRepository {
           isLoading: isLoading ?? false,
           categoryId: categoryId,
           frequencyid: frequencyid);
+  Future<ResponseModel> getdashboardList({
+    required String auth,
+    int? facilityId,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.getdashboardList(
+        auth: auth,
+        facilityId: facilityId ?? 0,
+        isLoading: isLoading ?? false,
+      );
   Future<ResponseModel> getPreventiveCheckListForPm(
           {required String auth,
           int? facilityId,
@@ -4641,6 +4651,7 @@ class DataRepository extends DomainRepository {
         auth: auth, isLoading: isLoading, freqJsonString: freqJsonString);
     return response;
   }
+
   Future<ResponseModel> createWasteType({
     auth,
     wasteTypeJson,
@@ -4653,6 +4664,7 @@ class DataRepository extends DomainRepository {
     );
     return response;
   }
+
   Future<ResponseModel> updateWasteType({
     auth,
     wasteTypeJson,
@@ -4665,6 +4677,7 @@ class DataRepository extends DomainRepository {
     );
     return response;
   }
+
   Future<ResponseModel> deleteWasteType({
     auth,
     int? wasteTypeId,

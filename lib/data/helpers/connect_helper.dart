@@ -2075,6 +2075,24 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> getdashboardList({
+    required String auth,
+    bool? isLoading,
+    int? facilityId,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'CMMS/getDashboadDetails?facilityId=$facilityId',
+      Request.get,
+      null,
+      isLoading ?? false,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
   Future<ResponseModel> getPreventiveCheckListForPm(
       {required String auth,
       bool? isLoading,
