@@ -1,7 +1,8 @@
 import 'dart:convert';
 
-GetRODetailsByIDModel getRODetailsByIDModelFromJson(String str) =>
-    GetRODetailsByIDModel.fromJson(json.decode(str));
+List<GetRODetailsByIDModel> getRODetailsByIDModelFromJson(String str) =>
+    List<GetRODetailsByIDModel>.from(
+        json.decode(str).map((x) => GetRODetailsByIDModel.fromJson(x)));
 
 String getRODetailsByIDModelToJson(GetRODetailsByIDModel data) =>
     json.encode(data.toJson());

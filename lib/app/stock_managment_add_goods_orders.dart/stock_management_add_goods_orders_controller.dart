@@ -442,7 +442,9 @@ class StockManagementAddGoodsOrdersController extends GetxController {
     // print('Edit goods order  Detail:$_getRoDetailsById');
 
     if (_getRoDetailsById != null) {
-      var _godetail = _getRoDetailsById.request_order_items;
+      getRoDetailsByIDModelList?.value = _getRoDetailsById;
+      getRoDetailsByIDModel.value = getRoDetailsByIDModelList!.firstWhere((element) => element?.request_order_id != null);
+      var _godetail = getRoDetailsByIDModel.value?.request_order_items;
       for (var asset in _godetail!) {
         goDetailsList!.add(asset);
       }
