@@ -795,14 +795,14 @@ class Repository {
     }
   }
   Future<Map<String, dynamic>> updateWaterData(
-    createWaterData,
+    updateWaterData,
     bool? isLoading,
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.updateWaterData(
         auth: auth,
-        createWaterData: createWaterData,
+        updateWaterData: updateWaterData,
         isLoading: isLoading ?? false,
       );
 

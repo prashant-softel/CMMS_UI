@@ -15,15 +15,6 @@ class WaterDataListPresenter {
       isLoading: isLoading,
     );
   }
-  Future<Map<String, dynamic>?> updateWaterData({
-    createWaterData,
-    required bool isLoading,
-  }) async {
-    return waterDataListUsecase.updateWaterData(
-      createWaterData: createWaterData,
-      isLoading: isLoading,
-    );
-  }
 
   Future<Map<String, dynamic>?> createWaterDataConsumption({
     createWaterData,
@@ -31,6 +22,27 @@ class WaterDataListPresenter {
   }) async {
     return waterDataListUsecase.createWaterData(
       createWaterData: createWaterData,
+      isLoading: isLoading,
+    );
+  }
+
+  Future<Map<String, dynamic>?> updateWaterData({
+    updateWaterData,
+    required bool isLoading,
+  }) async {
+    return waterDataListUsecase.updateWaterData(
+      updateWaterData: updateWaterData,
+      isLoading: isLoading,
+    );
+  }
+
+  
+  Future<Map<String, dynamic>?> updateWaterDataConsumption({
+    updateWaterData,
+    required bool isLoading,
+  }) async {
+    return waterDataListUsecase.updateWaterData(
+      updateWaterData: updateWaterData,
       isLoading: isLoading,
     );
   }
