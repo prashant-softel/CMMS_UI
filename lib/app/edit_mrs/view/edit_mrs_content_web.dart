@@ -304,15 +304,25 @@ class EditMrsContentWeb extends GetView<EditMrsController> {
                                                           .size
                                                           .width /
                                                       4,
-                                                  dropdownList:
-                                                      controller.assetItemList,
+                                                  dropdownList: controller
+                                                      .assetItemList
+                                                      .where((p0) {
+                                                        return !controller
+                                                            .rowItem
+                                                            .map((p0) =>
+                                                                p0[0]["value"])
+                                                            .contains(p0!.name);
+                                                      })
+                                                      .toList()
+                                                      .obs,
                                                   selectedValue:
                                                       mapData["value"],
                                                   onValueChanged:
                                                       (list, selectedValue) {
                                                     print({
-                                                      selectedValue:
-                                                          selectedValue
+                                                      controller
+                                                              .dropdownMapperData[
+                                                          selectedValue]
                                                     });
                                                     mapData["value"] =
                                                         selectedValue;
@@ -323,23 +333,6 @@ class EditMrsContentWeb extends GetView<EditMrsController> {
                                                                 element.name ==
                                                                 selectedValue,
                                                             orElse: null);
-                                                    if (controller
-                                                        .removedMaterials
-                                                        .contains(
-                                                            selectedValue)) {
-                                                      controller
-                                                          .removedMaterials
-                                                          .remove(
-                                                              (selectedValue));
-                                                    } else {
-                                                      controller
-                                                          .removedMaterials
-                                                          .add(selectedValue);
-                                                    }
-                                                    controller.assetItemList
-                                                        .removeWhere((item) =>
-                                                            item?.name ==
-                                                            selectedValue);
                                                   },
                                                 ),
                                                 // SizedBox(
@@ -348,9 +341,7 @@ class EditMrsContentWeb extends GetView<EditMrsController> {
                                                 // Row(
                                                 //   children: [
                                                 //     Text("Approval :"),
-                                                //     Text(
-                                                //         // "${controller.dropdownMapperData[mapData['value']]?.asset_code ?? ''}")
-                                                //         "${controller.dropdownMapperData[mapData['value']]?.approval_required ?? ""}"),
+
                                                 //   ],
                                                 // ),
                                               ],
@@ -375,16 +366,17 @@ class EditMrsContentWeb extends GetView<EditMrsController> {
                                                       onPress: () {
                                                         controller.rowItem
                                                             .remove(record);
-                                                        controller
-                                                            .removedMaterials
-                                                            .forEach(
-                                                                (material) {
-                                                          controller
-                                                              .assetItemList
-                                                              .add(controller
-                                                                  .dropdownMapperData
-                                                                  .value[material]);
-                                                        });
+                                                        // controller
+                                                        //     .removedMaterials
+                                                        //     .forEach(
+                                                        //         (material) {
+                                                        //   controller
+                                                        //       .assetItemList
+                                                        //       .add(controller
+                                                        //           .dropdownMapperData
+                                                        //           .value[material]);
+                                                        // }
+                                                        // );
                                                         // Clear the removedMaterials list
                                                         // controller
                                                         //     .removedMaterials

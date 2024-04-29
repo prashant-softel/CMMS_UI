@@ -170,10 +170,10 @@ class CreateMrsReturnController extends GetxController {
         //1 is job,2 is pm
         whereUsedType: whereUsed.value,
         whereUsedTypeId: whereUsedTypeId.value,
-        to_actor_id: whereUsedTypeId.value,
+        to_actor_id: facilityId, //
         to_actor_type_id: to_actor_type_id.value,
         from_actor_type_id: fromActorTypeId.value,
-        from_actor_id: facilityId,
+        from_actor_id: whereUsedTypeId.value,
         remarks: _remark,
         cmmrsItems: items);
     var createReturnMrsJsonString = createMrs.toJson();
