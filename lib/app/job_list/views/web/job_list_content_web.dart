@@ -152,7 +152,12 @@ class JobListContentWeb extends StatelessWidget {
                               Spacer(),
                               varUserAccessModel.value.access_list!
                                           .where((e) =>
-                                              e.feature_id == 2 && e.add == 1)
+                                              e.feature_id ==
+                                                  UserAccessConstants
+                                                      .kJobFeatureId &&
+                                              e.add ==
+                                                  UserAccessConstants
+                                                      .kHaveAddAccess)
                                           .length >
                                       0
                                   ? ActionButton(
@@ -552,12 +557,14 @@ class JobDataSource extends DataTableSource {
                           );
                         },
                       ),
-                      if (jobDetails?.status == 102 && varUserAccessModel.value.access_list!
+                      if (jobDetails?.status == 102 &&
+                          varUserAccessModel.value.access_list!
                                   .where((e) =>
                                       e.feature_id ==
                                           UserAccessConstants.kJobFeatureId &&
                                       e.approve ==
-                                          UserAccessConstants.kHaveApproveAccess)
+                                          UserAccessConstants
+                                              .kHaveApproveAccess)
                                   .length >
                               0)
                         TableActionButton(

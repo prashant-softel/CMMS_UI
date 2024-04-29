@@ -7,6 +7,7 @@ import 'package:cmms/app/home/widgets/home_drawer.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/theme/color_values.dart';
 import 'package:cmms/app/utils/responsive.dart';
+import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/app/vegetation_control/vegetation_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -103,36 +104,48 @@ class VegetationDashboardScreen extends GetView<VegetationDashboardController> {
                                 : 5,
                             children: <Widget>[
                               varUserAccessModel.value.access_list!
-                                        .where((e) =>
-                                            e.feature_id == 33 &&
-                                            e.view == 1 ||
-                                            e.add == 1)
-                                        .length >
-                                    0
-                              ?_vegetationList(
-                                  tittle: "Planning",
-                                  ontap: () {
-                                    Get.offNamed(
-                                      Routes.vegetationPlanListScreen,
-                                    );
-                                  })
-                                  :Dimens.box0,
+                                          .where((e) =>
+                                              e.feature_id ==
+                                                      UserAccessConstants
+                                                          .kVegetationControlFeatureId &&
+                                                  e.view ==
+                                                      UserAccessConstants
+                                                          .kHaveViewAccess ||
+                                              e.add ==
+                                                  UserAccessConstants
+                                                      .kHaveAddAccess)
+                                          .length >
+                                      0
+                                  ? _vegetationList(
+                                      tittle: "Planning",
+                                      ontap: () {
+                                        Get.offNamed(
+                                          Routes.vegetationPlanListScreen,
+                                        );
+                                      })
+                                  : Dimens.box0,
                               //  if (Responsive.isDesktop(context))
                               varUserAccessModel.value.access_list!
-                                        .where((e) =>
-                                            e.feature_id == 44 &&
-                                            e.view == 1 ||
-                                            e.add == 1)
-                                        .length >
-                                    0
-                              ? _vegetationList(
-                                  tittle: "Execution",
-                                  ontap: () {
-                                    Get.offNamed(
-                                      Routes.vegExecutionListScreen,
-                                    );
-                                  })
-                                  :Dimens.box0,
+                                          .where((e) =>
+                                              e.feature_id ==
+                                                      UserAccessConstants
+                                                          .kVegetationControlexeFeatureId &&
+                                                  e.view ==
+                                                      UserAccessConstants
+                                                          .kHaveViewAccess ||
+                                              e.add ==
+                                                  UserAccessConstants
+                                                      .kHaveAddAccess)
+                                          .length >
+                                      0
+                                  ? _vegetationList(
+                                      tittle: "Execution",
+                                      ontap: () {
+                                        Get.offNamed(
+                                          Routes.vegExecutionListScreen,
+                                        );
+                                      })
+                                  : Dimens.box0,
                             ],
                           )
                         ]),

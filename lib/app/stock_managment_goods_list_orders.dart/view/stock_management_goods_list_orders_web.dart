@@ -948,9 +948,9 @@ class GoodsOrderListDataSource extends DataTableSource {
                                                 e.feature_id ==
                                                     UserAccessConstants
                                                         .kGoodsFeatureId &&
-                                                e.approve ==
+                                                e.issue ==
                                                     UserAccessConstants
-                                                        .kHaveAddAccess)
+                                                        .kHaveIssueAccess)
                                             .length >
                                         0 ||
                                 controller.goodsOrdersList

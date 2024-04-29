@@ -202,34 +202,36 @@ class _PreventiveMaintenanceTaskContentWebState
                                           ),
                                         ),
                                       ),
-                                      itemBuilder: (BuildContext context) => <
-                                          PopupMenuEntry<String>>[]..addAll(
-                                            controller
-                                                .columnVisibility.value.entries
-                                                .map((e) {
-                                          return PopupMenuItem<String>(
-                                              child: ValueListenableBuilder(
-                                                  valueListenable: controller
-                                                      .columnVisibility,
-                                                  builder:
-                                                      (context, value, child) {
-                                                    return Row(
-                                                      children: [
-                                                        Checkbox(
-                                                          value: value[e.key],
-                                                          onChanged:
-                                                              (newValue) {
-                                                            controller
-                                                                .setColumnVisibility(
-                                                                    e.key,
-                                                                    newValue!);
-                                                          },
-                                                        ),
-                                                        Text(e.key),
-                                                      ],
-                                                    );
-                                                  }));
-                                        })),
+                                      itemBuilder: (BuildContext context) =>
+                                          <PopupMenuEntry<String>>[]..addAll(
+                                                controller.columnVisibility
+                                                    .value.entries
+                                                    .map((e) {
+                                              return PopupMenuItem<String>(
+                                                  child: ValueListenableBuilder(
+                                                      valueListenable:
+                                                          controller
+                                                              .columnVisibility,
+                                                      builder: (context, value,
+                                                          child) {
+                                                        return Row(
+                                                          children: [
+                                                            Checkbox(
+                                                              value:
+                                                                  value[e.key],
+                                                              onChanged:
+                                                                  (newValue) {
+                                                                controller
+                                                                    .setColumnVisibility(
+                                                                        e.key,
+                                                                        newValue!);
+                                                              },
+                                                            ),
+                                                            Text(e.key),
+                                                          ],
+                                                        );
+                                                      }));
+                                            })),
                                       onSelected: (String value) {
                                         // Handle column selection
                                       },
@@ -685,26 +687,34 @@ class PmTaskDataSource extends DataTableSource {
                                 },
                               )
                             : Dimens.box0,
-                            varUserAccessModel.value.access_list!
-                                    .where((e) =>
-                                        e.feature_id ==
-                                            UserAccessConstants
-                                                .kPmTaskFeatureId &&
-                                        e.delete ==
-                                            UserAccessConstants.kHaveDeleteAccess)
-                                    .length >
-                                0
+                        varUserAccessModel.value.access_list!
+                                        .where((e) =>
+                                            e.feature_id ==
+                                                UserAccessConstants
+                                                    .kPmTaskFeatureId &&
+                                            e.delete ==
+                                                UserAccessConstants
+                                                    .kHaveDeleteAccess)
+                                        .length >
+                                    0 &&
+                                controller.pmTaskList
+                                        .firstWhere(
+                                          (e) => e?.id == pmTaskDetails?.id,
+                                          orElse: () => PmTaskListModel(id: 00),
+                                        )
+                                        ?.status !=
+                                    169
                             ? TableActionButton(
-                          color: ColorValues.deleteColor,
-                          icon: Icons.delete,
-                          message: 'Delete',
-                          onPress: () {
-                            controller.isDeleteDialog(
-                                task_id: pmTaskDetails?.id.toString(),
-                                task: pmTaskDetails?.name ?? "");
-                          },
-                        )
-                        :Dimens.box0,
+                                color: ColorValues.deleteColor,
+                                icon: Icons.delete,
+                                message: 'Delete',
+                                onPress: () {
+                                  controller.isDeleteDialog(
+                                      task_id: pmTaskDetails?.id.toString(),
+                                      task: pmTaskDetails?.name ?? "");
+                                },
+                              )
+                            : Dimens.box0,
                       ])
                     : Text(value.toString()),
           ),

@@ -2,6 +2,7 @@ import 'package:cmms/app/app.dart';
 import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
+import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:cmms/app/widgets/custom_textfield.dart';
@@ -35,7 +36,8 @@ class BloodListContentWeb extends GetView<BloodListController> {
                   ),
                   boxShadow: [
                     BoxShadow(
-                      color: Color.fromARGB(255, 236, 234, 234).withOpacity(0.5),
+                      color:
+                          Color.fromARGB(255, 236, 234, 234).withOpacity(0.5),
                       spreadRadius: 2,
                       blurRadius: 5,
                       offset: Offset(0, 2),
@@ -74,7 +76,11 @@ class BloodListContentWeb extends GetView<BloodListController> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     varUserAccessModel.value.access_list!
-                                .where((e) => e.feature_id == 5 && e.add == 1)
+                                .where((e) =>
+                                    e.feature_id ==
+                                        UserAccessConstants
+                                            .kPMchecklistFeatureId &&
+                                    e.add == UserAccessConstants.kHaveAddAccess)
                                 .length >
                             0
                         ? Container(
@@ -138,11 +144,12 @@ class BloodListContentWeb extends GetView<BloodListController> {
                                               ),
                                               Expanded(
                                                 child: Container(
-                                                    width: (MediaQuery.of(context)
-                                                                .size
-                                                                .width *
-                                                            .2) -
-                                                        30,
+                                                    width:
+                                                        (MediaQuery.of(context)
+                                                                    .size
+                                                                    .width *
+                                                                .2) -
+                                                            30,
                                                     decoration: BoxDecoration(
                                                       boxShadow: [
                                                         BoxShadow(
@@ -163,8 +170,8 @@ class BloodListContentWeb extends GetView<BloodListController> {
                                                           spreadRadius: 0.0,
                                                         ),
                                                       ],
-                                                      color:
-                                                          ColorValues.whiteColor,
+                                                      color: ColorValues
+                                                          .whiteColor,
                                                       borderRadius:
                                                           BorderRadius.circular(
                                                               5),
@@ -190,11 +197,12 @@ class BloodListContentWeb extends GetView<BloodListController> {
                                               ),
                                               Expanded(
                                                 child: Container(
-                                                    width: (MediaQuery.of(context)
-                                                                .size
-                                                                .width *
-                                                            .2) -
-                                                        30,
+                                                    width:
+                                                        (MediaQuery.of(context)
+                                                                    .size
+                                                                    .width *
+                                                                .2) -
+                                                            30,
                                                     decoration: BoxDecoration(
                                                       boxShadow: [
                                                         BoxShadow(
@@ -215,15 +223,15 @@ class BloodListContentWeb extends GetView<BloodListController> {
                                                           spreadRadius: 0.0,
                                                         ),
                                                       ],
-                                                      color:
-                                                          ColorValues.whiteColor,
+                                                      color: ColorValues
+                                                          .whiteColor,
                                                       borderRadius:
                                                           BorderRadius.circular(
                                                               5),
                                                     ),
                                                     child: LoginCustomTextfield(
-                                                      textController:
-                                                          controller.featureCtrlr,
+                                                      textController: controller
+                                                          .featureCtrlr,
                                                     )),
                                               ),
                                             ],
@@ -244,7 +252,8 @@ class BloodListContentWeb extends GetView<BloodListController> {
                                                   // SizedBox(width:12),
                                                   Row(
                                                     mainAxisAlignment:
-                                                        MainAxisAlignment.center,
+                                                        MainAxisAlignment
+                                                            .center,
                                                     children: [
                                                       // Text("No"),
                                                       CustomSwitchTroggle(
@@ -253,7 +262,7 @@ class BloodListContentWeb extends GetView<BloodListController> {
                                                           onChanged: (value) {
                                                             controller.toggle();
                                                           }),
-      
+
                                                       // Text("Yes"),
                                                     ],
                                                   ),
@@ -261,7 +270,8 @@ class BloodListContentWeb extends GetView<BloodListController> {
                                               ),
                                               Row(
                                                 mainAxisAlignment:
-                                                    MainAxisAlignment.spaceEvenly,
+                                                    MainAxisAlignment
+                                                        .spaceEvenly,
                                                 children: [
                                                   CustomRichText(title: "Edit"),
                                                   SizedBox(width: 12),
@@ -273,11 +283,13 @@ class BloodListContentWeb extends GetView<BloodListController> {
                                                       // Text("No"),
                                                       CustomSwitchTroggle(
                                                           value: controller
-                                                              .isToggle1On.value,
+                                                              .isToggle1On
+                                                              .value,
                                                           onChanged: (value) {
-                                                            controller.toggle1();
+                                                            controller
+                                                                .toggle1();
                                                           }),
-      
+
                                                       // Text("Yes"),
                                                     ],
                                                   ),
@@ -285,9 +297,11 @@ class BloodListContentWeb extends GetView<BloodListController> {
                                               ),
                                               Row(
                                                 mainAxisAlignment:
-                                                    MainAxisAlignment.spaceEvenly,
+                                                    MainAxisAlignment
+                                                        .spaceEvenly,
                                                 children: [
-                                                  CustomRichText(title: "Delete"),
+                                                  CustomRichText(
+                                                      title: "Delete"),
                                                   SizedBox(width: 12),
                                                   Row(
                                                     mainAxisAlignment:
@@ -298,12 +312,14 @@ class BloodListContentWeb extends GetView<BloodListController> {
                                                       // SizedBox(width:2),
                                                       CustomSwitchTroggle(
                                                           value: controller
-                                                              .isToggle2On.value,
+                                                              .isToggle2On
+                                                              .value,
                                                           onChanged: (value) {
-                                                            controller.toggle2();
+                                                            controller
+                                                                .toggle2();
                                                           }),
                                                       // SizedBox(width:2),
-      
+
                                                       // Text("Yes"),
                                                     ],
                                                   ),
@@ -327,16 +343,19 @@ class BloodListContentWeb extends GetView<BloodListController> {
                                                   // SizedBox(width:12),
                                                   Row(
                                                     mainAxisAlignment:
-                                                        MainAxisAlignment.center,
+                                                        MainAxisAlignment
+                                                            .center,
                                                     children: [
                                                       // Text("No"),
                                                       CustomSwitchTroggle(
                                                           value: controller
-                                                              .isToggle3On.value,
+                                                              .isToggle3On
+                                                              .value,
                                                           onChanged: (value) {
-                                                            controller.toggle3();
+                                                            controller
+                                                                .toggle3();
                                                           }),
-      
+
                                                       // Text("Yes"),
                                                     ],
                                                   ),
@@ -344,7 +363,8 @@ class BloodListContentWeb extends GetView<BloodListController> {
                                               ),
                                               Row(
                                                 mainAxisAlignment:
-                                                    MainAxisAlignment.spaceEvenly,
+                                                    MainAxisAlignment
+                                                        .spaceEvenly,
                                                 children: [
                                                   CustomRichText(
                                                       title: "Approve"),
@@ -357,11 +377,13 @@ class BloodListContentWeb extends GetView<BloodListController> {
                                                       // Text("No"),
                                                       CustomSwitchTroggle(
                                                           value: controller
-                                                              .isToggle4On.value,
+                                                              .isToggle4On
+                                                              .value,
                                                           onChanged: (value) {
-                                                            controller.toggle4();
+                                                            controller
+                                                                .toggle4();
                                                           }),
-      
+
                                                       // Text("Yes"),
                                                     ],
                                                   ),
@@ -369,9 +391,11 @@ class BloodListContentWeb extends GetView<BloodListController> {
                                               ),
                                               Row(
                                                 mainAxisAlignment:
-                                                    MainAxisAlignment.spaceEvenly,
+                                                    MainAxisAlignment
+                                                        .spaceEvenly,
                                                 children: [
-                                                  CustomRichText(title: "Issue"),
+                                                  CustomRichText(
+                                                      title: "Issue"),
                                                   SizedBox(width: 12),
                                                   Row(
                                                     mainAxisAlignment:
@@ -382,12 +406,14 @@ class BloodListContentWeb extends GetView<BloodListController> {
                                                       // SizedBox(width:2),
                                                       CustomSwitchTroggle(
                                                           value: controller
-                                                              .isToggle5On.value,
+                                                              .isToggle5On
+                                                              .value,
                                                           onChanged: (value) {
-                                                            controller.toggle5();
+                                                            controller
+                                                                .toggle5();
                                                           }),
                                                       // SizedBox(width:2),
-      
+
                                                       // Text("Yes"),
                                                     ],
                                                   ),
@@ -404,7 +430,8 @@ class BloodListContentWeb extends GetView<BloodListController> {
                                             children: [
                                               Row(
                                                 mainAxisAlignment:
-                                                    MainAxisAlignment.spaceEvenly,
+                                                    MainAxisAlignment
+                                                        .spaceEvenly,
                                                 children: [
                                                   CustomRichText(
                                                       title: "SelfView"),
@@ -418,12 +445,14 @@ class BloodListContentWeb extends GetView<BloodListController> {
                                                       // SizedBox(width:2),
                                                       CustomSwitchTroggle(
                                                           value: controller
-                                                              .isToggle6On.value,
+                                                              .isToggle6On
+                                                              .value,
                                                           onChanged: (value) {
-                                                            controller.toggle6();
+                                                            controller
+                                                                .toggle6();
                                                           }),
                                                       // SizedBox(width:2),
-      
+
                                                       // Text("Yes"),
                                                     ],
                                                   ),
@@ -475,7 +504,8 @@ class BloodListContentWeb extends GetView<BloodListController> {
                                                     controller
                                                         .updateModulelistNumber(
                                                             controller
-                                                                .selectedItem?.id)
+                                                                .selectedItem
+                                                                ?.id)
                                                         .then((value) {
                                                       print("value,$value");
                                                       if (value == true)
@@ -492,7 +522,12 @@ class BloodListContentWeb extends GetView<BloodListController> {
                           )
                         : Container(),
                     varUserAccessModel.value.access_list!
-                                .where((e) => e.feature_id == 5 && e.view == 0)
+                                .where((e) =>
+                                    e.feature_id ==
+                                        UserAccessConstants
+                                            .kPMchecklistFeatureId &&
+                                    e.view ==
+                                        UserAccessConstants.kHaveViewAccess)
                                 .length >
                             0
                         ? Expanded(
@@ -594,7 +629,8 @@ class BloodListContentWeb extends GetView<BloodListController> {
                                               }).toList(),
                                               rows: [
                                                 ...List.generate(
-                                                  controller.bloodList?.length ??
+                                                  controller
+                                                          .bloodList?.length ??
                                                       0,
                                                   (index) {
                                                     return [
@@ -626,8 +662,8 @@ class BloodListContentWeb extends GetView<BloodListController> {
                                           )
                                         : Expanded(
                                             child: ScrollableTableView(
-                                              paginationController:
-                                                  controller.paginationController,
+                                              paginationController: controller
+                                                  .paginationController,
                                               columns: [
                                                 "Id",
                                                 "Name"
@@ -651,7 +687,8 @@ class BloodListContentWeb extends GetView<BloodListController> {
                                               rows: //
                                                   [
                                                 ...List.generate(
-                                                  controller.bloodList?.length ??
+                                                  controller
+                                                          .bloodList?.length ??
                                                       0,
                                                   (index) {
                                                     var bloodListDetails =
@@ -705,10 +742,8 @@ class BloodListContentWeb extends GetView<BloodListController> {
                                                                                 'Edit',
                                                                             onPress:
                                                                                 () {
-                                                                              controller.selectedItem = controller.bloodList!.firstWhere((element) =>
-                                                                                  "${element?.id}" ==
-                                                                                  _bloodList[0]);
-      
+                                                                              controller.selectedItem = controller.bloodList!.firstWhere((element) => "${element?.id}" == _bloodList[0]);
+
                                                                               // controller.modulelistNumberCtrlr.text = controller.selectedItem?.moduleName ?? '';
                                                                               // controller.featureCtrlr.text = controller.selectedItem?.featureName ?? '';
                                                                               // controller.isToggleOn.value = controller.selectedItem?.add == 1 ? true : false;
@@ -734,9 +769,7 @@ class BloodListContentWeb extends GetView<BloodListController> {
                                                                             onPress:
                                                                                 () {
                                                                               print(_bloodList[0]);
-                                                                              controller.isDeleteDialog(
-                                                                                  module_id: _bloodList[0],
-                                                                                  module: _bloodList[1]);
+                                                                              controller.isDeleteDialog(module_id: _bloodList[0], module: _bloodList[1]);
                                                                             },
                                                                           )
                                                                           // : Container()

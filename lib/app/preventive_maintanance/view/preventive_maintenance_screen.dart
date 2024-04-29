@@ -101,9 +101,15 @@ class PreventiveScreen extends GetView<PreventiveController> {
                           children: <Widget>[
                             varUserAccessModel.value.access_list!
                                         .where((e) =>
-                                            e.feature_id == 38 &&
-                                            e.view == 1 &&
-                                            e.add == 1)
+                                            e.feature_id ==
+                                                    UserAccessConstants
+                                                        .kPmPlanFeatureId &&
+                                                e.view ==
+                                                    UserAccessConstants
+                                                        .kHaveViewAccess ||
+                                            e.add ==
+                                                UserAccessConstants
+                                                    .kHaveAddAccess)
                                         .length >
                                     0
                                 ? _priventiveList(
@@ -114,7 +120,12 @@ class PreventiveScreen extends GetView<PreventiveController> {
                                 : Dimens.box0,
                             varUserAccessModel.value.access_list!
                                         .where((e) =>
-                                            e.feature_id == 38 && e.add == 1)
+                                            e.feature_id ==
+                                                UserAccessConstants
+                                                    .kPmPlanFeatureId &&
+                                            e.add ==
+                                                UserAccessConstants
+                                                    .kHaveAddAccess)
                                         .length >
                                     0
                                 ? _priventiveList(
@@ -125,9 +136,15 @@ class PreventiveScreen extends GetView<PreventiveController> {
                                 : Dimens.box0,
                             varUserAccessModel.value.access_list!
                                         .where((e) =>
-                                            e.feature_id == 39 &&
-                                            e.view == 1 &&
-                                            e.add == 1)
+                                            e.feature_id ==
+                                                UserAccessConstants
+                                                    .kPmTaskFeatureId &&
+                                            e.view ==
+                                                UserAccessConstants
+                                                    .kHaveViewAccess &&
+                                            e.add ==
+                                                UserAccessConstants
+                                                    .kHaveAddAccess)
                                         .length >
                                     0
                                 ? _priventiveList(
@@ -196,42 +213,58 @@ class PreventiveScreen extends GetView<PreventiveController> {
                           children: <Widget>[
                             varUserAccessModel.value.access_list!
                                         .where((e) =>
-                                            e.feature_id == 5 &&
-                                            e.view == 1 ||
-                                            e.add == 1)
+                                            e.feature_id ==
+                                                    UserAccessConstants
+                                                        .kPMchecklistFeatureId &&
+                                                e.view ==
+                                                    UserAccessConstants
+                                                        .kHaveViewAccess ||
+                                            e.add ==
+                                                UserAccessConstants
+                                                    .kHaveAddAccess)
                                         .length >
                                     0
-                            ? _priventiveList(
-                                tittle: "Check List",
-                                ontap: () {
-                                  controller.createChecklist();
-                                })
-                                :Dimens.box0,
-                                varUserAccessModel.value.access_list!
+                                ? _priventiveList(
+                                    tittle: "Check List",
+                                    ontap: () {
+                                      controller.createChecklist();
+                                    })
+                                : Dimens.box0,
+                            varUserAccessModel.value.access_list!
                                         .where((e) =>
-                                            e.feature_id == 6 &&
-                                            e.view == 1 ||
-                                            e.add == 1)
+                                            e.feature_id ==
+                                                    UserAccessConstants
+                                                        .kPMcheckpointFeatureId &&
+                                                e.view ==
+                                                    UserAccessConstants
+                                                        .kHaveViewAccess ||
+                                            e.add ==
+                                                UserAccessConstants
+                                                    .kHaveAddAccess)
                                         .length >
                                     0
-                            ?_priventiveList(
-                                tittle: "Check Point",
-                                ontap: () {
-                                  controller.checkPoint();
-                                })
-                                :Dimens.box0,
-                                varUserAccessModel.value.access_list!
+                                ? _priventiveList(
+                                    tittle: "Check Point",
+                                    ontap: () {
+                                      controller.checkPoint();
+                                    })
+                                : Dimens.box0,
+                            varUserAccessModel.value.access_list!
                                         .where((e) =>
-                                            e.feature_id == 5 &&
-                                            e.add == 1)
+                                            e.feature_id ==
+                                                UserAccessConstants
+                                                    .kPMchecklistFeatureId &&
+                                            e.add ==
+                                                UserAccessConstants
+                                                    .kHaveAddAccess)
                                         .length >
                                     0
-                            ?_priventiveList(
-                                tittle: "Import Checklist",
-                                ontap: () {
-                                  controller.importChecklist();
-                                })
-                                :Dimens.box0,
+                                ? _priventiveList(
+                                    tittle: "Import Checklist",
+                                    ontap: () {
+                                      controller.importChecklist();
+                                    })
+                                : Dimens.box0,
                           ],
                         ),
                       ]),

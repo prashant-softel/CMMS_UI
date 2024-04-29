@@ -1,5 +1,7 @@
+import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/theme/dimens.dart';
+import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/app/widgets/custom_textField.dart';
 import 'package:cmms/app/widgets/dropdown_web.dart';
 import 'package:cmms/domain/models/calibration_list_model.dart';
@@ -432,18 +434,30 @@ class CalibrationListContentWeb extends GetView<CalibrationListController> {
                                                   // ),
 
                                                   controller.calibrationList!
-                                                              .firstWhere(
-                                                                (e) =>
-                                                                    e?.asset_id ==
-                                                                    calibrationListListDetails!
-                                                                        .asset_id,
-                                                                orElse: () =>
-                                                                    CalibrationListModel(
-                                                                        asset_id:
-                                                                            00),
-                                                              )
-                                                              ?.statusID ==
-                                                          211
+                                                                  .firstWhere(
+                                                                    (e) =>
+                                                                        e?.asset_id ==
+                                                                        calibrationListListDetails!
+                                                                            .asset_id,
+                                                                    orElse: () =>
+                                                                        CalibrationListModel(
+                                                                            asset_id:
+                                                                                00),
+                                                                  )
+                                                                  ?.statusID ==
+                                                              211 &&
+                                                          varUserAccessModel
+                                                                  .value
+                                                                  .access_list!
+                                                                  .where((e) =>
+                                                                      e.feature_id ==
+                                                                          UserAccessConstants
+                                                                              .kCalibrationFeatureId &&
+                                                                      e.approve ==
+                                                                          UserAccessConstants
+                                                                              .kHaveApproveAccess)
+                                                                  .length >
+                                                              0
                                                       ? TableActionButton(
                                                           color: ColorValues
                                                               .rejectColor,
@@ -460,18 +474,33 @@ class CalibrationListContentWeb extends GetView<CalibrationListController> {
                                                         )
                                                       : Dimens.box0,
                                                   controller.calibrationList!
-                                                              .firstWhere(
-                                                                (e) =>
-                                                                    e?.asset_id ==
-                                                                    calibrationListListDetails!
-                                                                        .asset_id,
-                                                                orElse: () =>
-                                                                    CalibrationListModel(
-                                                                        asset_id:
-                                                                            00),
-                                                              )
-                                                              ?.statusID ==
-                                                          213
+                                                                  .firstWhere(
+                                                                    (e) =>
+                                                                        e?.asset_id ==
+                                                                        calibrationListListDetails!
+                                                                            .asset_id,
+                                                                    orElse: () =>
+                                                                        CalibrationListModel(
+                                                                            asset_id:
+                                                                                00),
+                                                                  )
+                                                                  ?.statusID ==
+                                                              213 &&
+                                                          varUserAccessModel
+                                                                  .value
+                                                                  .access_list!
+                                                                  .where((e) =>
+                                                                      e.feature_id ==
+                                                                              UserAccessConstants
+                                                                                  .kCalibrationFeatureId &&
+                                                                          e.issue ==
+                                                                              UserAccessConstants
+                                                                                  .kHaveIssueAccess ||
+                                                                      e.approve ==
+                                                                          UserAccessConstants
+                                                                              .kHaveApproveAccess)
+                                                                  .length >
+                                                              0
                                                       ? TableActionButton(
                                                           color: ColorValues
                                                               .startColor,
@@ -511,18 +540,30 @@ class CalibrationListContentWeb extends GetView<CalibrationListController> {
                                                           onPress: () {},
                                                         ),
                                                   controller.calibrationList!
-                                                              .firstWhere(
-                                                                (e) =>
-                                                                    e?.asset_id ==
-                                                                    calibrationListListDetails!
-                                                                        .asset_id,
-                                                                orElse: () =>
-                                                                    CalibrationListModel(
-                                                                        asset_id:
-                                                                            00),
-                                                              )
-                                                              ?.statusID ==
-                                                          216
+                                                                  .firstWhere(
+                                                                    (e) =>
+                                                                        e?.asset_id ==
+                                                                        calibrationListListDetails!
+                                                                            .asset_id,
+                                                                    orElse: () =>
+                                                                        CalibrationListModel(
+                                                                            asset_id:
+                                                                                00),
+                                                                  )
+                                                                  ?.statusID ==
+                                                              216 &&
+                                                          varUserAccessModel
+                                                                  .value
+                                                                  .access_list!
+                                                                  .where((e) =>
+                                                                      e.feature_id ==
+                                                                          UserAccessConstants
+                                                                              .kCalibrationFeatureId &&
+                                                                      e.approve ==
+                                                                          UserAccessConstants
+                                                                              .kHaveApproveAccess)
+                                                                  .length >
+                                                              0
                                                       ? TableActionButton(
                                                           color: ColorValues
                                                               .approveColor,
@@ -568,18 +609,30 @@ class CalibrationListContentWeb extends GetView<CalibrationListController> {
                                                         )
                                                       : Dimens.box0,
                                                   controller.calibrationList!
-                                                              .firstWhere(
-                                                                (e) =>
-                                                                    e?.asset_id ==
-                                                                    calibrationListListDetails!
-                                                                        .asset_id,
-                                                                orElse: () =>
-                                                                    CalibrationListModel(
-                                                                        asset_id:
-                                                                            00),
-                                                              )
-                                                              ?.statusID ==
-                                                          215
+                                                                  .firstWhere(
+                                                                    (e) =>
+                                                                        e?.asset_id ==
+                                                                        calibrationListListDetails!
+                                                                            .asset_id,
+                                                                    orElse: () =>
+                                                                        CalibrationListModel(
+                                                                            asset_id:
+                                                                                00),
+                                                                  )
+                                                                  ?.statusID ==
+                                                              215 &&
+                                                          varUserAccessModel
+                                                                  .value
+                                                                  .access_list!
+                                                                  .where((e) =>
+                                                                      e.feature_id ==
+                                                                          UserAccessConstants
+                                                                              .kCalibrationFeatureId &&
+                                                                      e.approve ==
+                                                                          UserAccessConstants
+                                                                              .kHaveApproveAccess)
+                                                                  .length >
+                                                              0
                                                       ? TableActionButton(
                                                           color: ColorValues
                                                               .completeColor,
@@ -596,18 +649,30 @@ class CalibrationListContentWeb extends GetView<CalibrationListController> {
                                                         )
                                                       : Dimens.box0,
                                                   controller.calibrationList!
-                                                              .firstWhere(
-                                                                (e) =>
-                                                                    e?.asset_id ==
-                                                                    calibrationListListDetails!
-                                                                        .asset_id,
-                                                                orElse: () =>
-                                                                    CalibrationListModel(
-                                                                        asset_id:
-                                                                            00),
-                                                              )
-                                                              ?.statusID ==
-                                                          211
+                                                                  .firstWhere(
+                                                                    (e) =>
+                                                                        e?.asset_id ==
+                                                                        calibrationListListDetails!
+                                                                            .asset_id,
+                                                                    orElse: () =>
+                                                                        CalibrationListModel(
+                                                                            asset_id:
+                                                                                00),
+                                                                  )
+                                                                  ?.statusID ==
+                                                              211 &&
+                                                          varUserAccessModel
+                                                                  .value
+                                                                  .access_list!
+                                                                  .where((e) =>
+                                                                      e.feature_id ==
+                                                                          UserAccessConstants
+                                                                              .kCalibrationFeatureId &&
+                                                                      e.approve ==
+                                                                          UserAccessConstants
+                                                                              .kHaveApproveAccess)
+                                                                  .length >
+                                                              0
                                                       ? TableActionButton(
                                                           color: ColorValues
                                                               .approveColor,

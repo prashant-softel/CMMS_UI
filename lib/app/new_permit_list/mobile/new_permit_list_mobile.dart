@@ -1,5 +1,6 @@
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/home/widgets/mobile_header_widget.dart';
+import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/domain/models/new_permit_list_model.dart';
 import 'package:cmms/app/new_permit_list/new_permit_list_controller.dart';
@@ -264,8 +265,12 @@ class NewPermitListMobile extends GetView<NewPermitListController> {
                                 // Edit Button
                                 (varUserAccessModel.value.access_list!
                                             .where((e) =>
-                                                e.feature_id == 3 &&
-                                                e.edit == 1)
+                                                e.feature_id ==
+                                                    UserAccessConstants
+                                                        .kPermitFeatureId &&
+                                                e.edit ==
+                                                    UserAccessConstants
+                                                        .kHaveEditAccess)
                                             .length >
                                         0)
                                     ? CustomElevatedButton(
