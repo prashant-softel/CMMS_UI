@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rxdart/subjects.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
+import '../../domain/models/dashboard_model.dart';
 import '../../domain/models/facility_model.dart';
 import '../../domain/models/user_access_model.dart';
 
@@ -75,7 +76,16 @@ class HomeController extends GetxController {
     rowCount: 0,
     rowsPerPage: 10,
   );
+  RxList<DashboardModel?> dashboardList = <DashboardModel?>[].obs;
+  Rx<DashboardModel?> dashboardBmList = DashboardModel().obs;
 
+  RxList<DashboardModel?> dashboardPmList = <DashboardModel?>[].obs;
+  RxList<DashboardModel?> dashboardIRList = <DashboardModel?>[].obs;
+  RxList<DashboardModel?> dashboardSmList = <DashboardModel?>[].obs;
+  RxList<DashboardModel?> dashboardMcList = <DashboardModel?>[].obs;
+
+  RxList<DashboardModel?> filteredData = <DashboardModel>[].obs;
+  List<DashboardModel?>? BufferdashboardList = <DashboardModel?>[].obs;
   BehaviorSubject<int> _facilityId = BehaviorSubject.seeded(0);
   Stream<int> get facilityId$ => _facilityId.stream;
   int get facilityId1 => _facilityId.value;
@@ -112,19 +122,12 @@ class HomeController extends GetxController {
 
   @override
   void onInit() async {
-    // facilityIdStreamSubscription = homeController.facilityId$.listen((event) {
+    // facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
     //   facilityId = event;
+    //   if (facilityId > 0) {
+    //Future.delayed(Duration(seconds: 2), () async {
 
-    //   Future.delayed(Duration(seconds: 1), () {
-    //     getBlocksList(facilityId);
-    //   });
-    // });
-
-    // Future.delayed(Duration(seconds: 1), () async {
-    //   await getuserAccessData();
-    // });
-    //  Future.delayed(Duration(seconds: 1), () {
-    //   getInventoryList();
+    // }
     // });
 
     Future.delayed(Duration(seconds: 1), () {
@@ -136,6 +139,22 @@ class HomeController extends GetxController {
     // await getTypePermitList();
 
     super.onInit();
+  }
+
+  Future<void> getdashboardList(
+    int facilityId,
+  ) async {
+    dashboardList.value = <DashboardModel>[];
+    // filteredData.value = <DashboardModel>[];
+    final _dashboardList = await homePresenter.getdashboardList(
+      facilityId: facilityId,
+    );
+    if (_dashboardList != null) {
+      dashboardList.value = _dashboardList;
+      dashboardBmList.value = _dashboardList[0];
+      // BufferdashboardList = dashboardList.value;
+      update(['pmPlan_list']);
+    }
   }
 
   void clearStoreData() {
@@ -176,6 +195,7 @@ class HomeController extends GetxController {
       print({"selected facality": selectedFacility});
       _facilityId.sink.add(savaData['id'] ?? facilityList[0]?.id ?? 0);
       _facilityName.sink.add(savaData['name'] ?? facilityList[0]?.name ?? '');
+      //   await getdashboardList(facilityList[0]?.id ?? 0);
     }
   }
 

@@ -1,6 +1,7 @@
 import 'package:cmms/domain/domain.dart';
 import 'package:cmms/domain/models/business_list_model.dart';
 import 'package:cmms/domain/models/currency_list_model.dart';
+import 'package:cmms/domain/models/dashboard_model.dart';
 import 'package:cmms/domain/models/employee_list_model.dart';
 import 'package:cmms/domain/models/inventory_category_model.dart';
 import 'package:cmms/domain/models/safety_measure_list_model.dart';
@@ -44,7 +45,14 @@ class HomeUsecase {
         facilityId,
         isLoading,
       );
-
+  Future<List<DashboardModel?>?> getdashboardList({
+    int? facilityId,
+    bool? isLoading,
+  }) async =>
+      await _repository.getdashboardList(
+        facilityId: facilityId,
+        isLoading: isLoading,
+      );
   Future<List<TypePermitModel?>?> getTypePermitList(
           bool? isLoading, int? facility_id) async =>
       await _repository.getTypePermitList(isLoading, facility_id);
@@ -64,7 +72,7 @@ class HomeUsecase {
   }) async {
     return _repository.getBusinessList(
       isLoading: isLoading,
-      facilityId:facilityId,
+      facilityId: facilityId,
       businessType: businessType,
     );
   }
