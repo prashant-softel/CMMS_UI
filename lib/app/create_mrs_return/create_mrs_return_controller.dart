@@ -152,7 +152,7 @@ class CreateMrsReturnController extends GetxController {
         asset_item_ID:
             dropdownMapperData.value[element[0]["value"]]?.assetItemID,
         issued_qty: dropdownMapperData.value[element[0]["value"]].issued_qty,
-        returned_qty: int.tryParse(element[3]["value"] ?? '0'),
+        returned_qty: double.tryParse(element[3]["value"] ?? '0'),
         requested_qty: 0,
         approval_required: 0,
         is_faulty: element[4]["value"] == "" || element[4]["value"] == null
