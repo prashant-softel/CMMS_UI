@@ -289,9 +289,15 @@ class BreakdownMaintenanceScreen
                             children: <Widget>[
                               varUserAccessModel.value.access_list!
                                           .where((e) =>
-                                              e.feature_id == 42 &&
-                                              e.view == 1 ||
-                                              e.add == 1)
+                                              e.feature_id ==
+                                                      UserAccessConstants
+                                                          .kPermitchecklistFeatureId &&
+                                                  e.add ==
+                                                      UserAccessConstants
+                                                          .kHaveAddAccess ||
+                                              e.view ==
+                                                  UserAccessConstants
+                                                      .kHaveViewAccess)
                                           .length >
                                       0
                                   ? createContentTile(
@@ -302,9 +308,15 @@ class BreakdownMaintenanceScreen
                                   : Dimens.box0,
                               varUserAccessModel.value.access_list!
                                           .where((e) =>
-                                              e.feature_id == 43 &&
-                                              e.view == 1 ||
-                                              e.add == 1)
+                                              e.feature_id ==
+                                                      UserAccessConstants
+                                                          .kPermitcheckpointFeatureId &&
+                                                  e.add ==
+                                                      UserAccessConstants
+                                                          .kHaveAddAccess ||
+                                              e.view ==
+                                                  UserAccessConstants
+                                                      .kHaveViewAccess)
                                           .length >
                                       0
                                   ? createContentTile(
@@ -313,32 +325,34 @@ class BreakdownMaintenanceScreen
                                         controller.gotToSafetyQuestionsList();
                                       })
                                   : Dimens.box0,
-                              varUserAccessModel.value.access_list!
-                                          .where((e) =>
-                                              e.feature_id == 5 &&
-                                              e.view == 1 ||
-                                              e.add == 1)
-                                          .length >
-                                      0
-                                  ? createContentTile(
-                                      title: "JOB Type",
-                                      onTap: () {
-                                        controller.goToJobTypeList();
-                                      })
-                                  : Dimens.box0,
-                              varUserAccessModel.value.access_list!
-                                          .where((e) =>
-                                              e.feature_id == 5 &&
-                                              e.view == 1 ||
-                                              e.add == 1)
-                                          .length >
-                                      0
-                                  ? createContentTile(
-                                      title: "TBT SOP List",
-                                      onTap: () {
-                                        controller.goToJobSOPList();
-                                      })
-                                  : Dimens.box0
+                              // varUserAccessModel.value.access_list!
+                              //             .where((e) =>
+                              //                 e.feature_id == 5 &&
+                              //                     e.view == 1 ||
+                              //                 e.add == 1)
+                              //             .length >
+                              //         0
+                              //     ?
+                              createContentTile(
+                                  title: "JOB Type",
+                                  onTap: () {
+                                    controller.goToJobTypeList();
+                                  }),
+                              // : Dimens.box0,
+                              // varUserAccessModel.value.access_list!
+                              //             .where((e) =>
+                              //                 e.feature_id == 5 &&
+                              //                     e.view == 1 ||
+                              //                 e.add == 1)
+                              //             .length >
+                              //         0
+                              //     ?
+                              createContentTile(
+                                  title: "TBT SOP List",
+                                  onTap: () {
+                                    controller.goToJobSOPList();
+                                  })
+                              // : Dimens.box0
                             ],
                           ),
                           GridView.count(

@@ -1,7 +1,9 @@
+import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/return_mrs/return_mrs_controller.dart';
 import 'package:cmms/app/theme/dimens.dart';
+import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/table_action_button.dart';
 import 'package:cmms/domain/models/get_return_mrs_list.dart';
@@ -504,16 +506,27 @@ class ReturnMrsListDataSource extends DataTableSource {
                                 arguments: {'mrsId': mrsId});
                           },
                         ),
-                        TableActionButton(
-                          color: ColorValues.editColor,
-                          icon: Icons.edit,
-                          message: 'edit',
-                          onPress: () {
-                            controller.clearStoreData();
-                            int mrsId = MrsDetails?.id ?? 0;
-                            Get.toNamed(Routes.editReturnMrs, arguments: mrsId);
-                          },
-                        ),
+                        varUserAccessModel.value.access_list!
+                                    .where((e) =>
+                                        e.feature_id ==
+                                            UserAccessConstants
+                                                .kreturnMrsFeatureId &&
+                                        e.edit ==
+                                            UserAccessConstants.kHaveEditAccess)
+                                    .length >
+                                0
+                            ? TableActionButton(
+                                color: ColorValues.editColor,
+                                icon: Icons.edit,
+                                message: 'edit',
+                                onPress: () {
+                                  controller.clearStoreData();
+                                  int mrsId = MrsDetails?.id ?? 0;
+                                  Get.toNamed(Routes.editReturnMrs,
+                                      arguments: mrsId);
+                                },
+                              )
+                            : Dimens.box0,
                         controller.mrsList!
                                         .firstWhere(
                                           (e) => e?.id == MrsDetails!.id,
@@ -529,6 +542,16 @@ class ReturnMrsListDataSource extends DataTableSource {
                                               ReturnMrsListModel(id: 00),
                                         )
                                         ?.approval_status ==
+                                    0 &&
+                                varUserAccessModel.value.access_list!
+                                        .where((e) =>
+                                            e.feature_id ==
+                                                UserAccessConstants
+                                                    .kreturnMrsFeatureId &&
+                                            e.approve ==
+                                                UserAccessConstants
+                                                    .kHaveApproveAccess)
+                                        .length >
                                     0
                             ? TableActionButton(
                                 color: ColorValues.approveColor,
@@ -585,6 +608,16 @@ class ReturnMrsListDataSource extends DataTableSource {
                                               ReturnMrsListModel(id: 00),
                                         )
                                         ?.approval_status ==
+                                    0 &&
+                                varUserAccessModel.value.access_list!
+                                        .where((e) =>
+                                            e.feature_id ==
+                                                UserAccessConstants
+                                                    .kreturnMrsFeatureId &&
+                                            e.approve ==
+                                                UserAccessConstants
+                                                    .kHaveApproveAccess)
+                                        .length >
                                     0
                             ? TableActionButton(
                                 color: ColorValues.rejectColor,

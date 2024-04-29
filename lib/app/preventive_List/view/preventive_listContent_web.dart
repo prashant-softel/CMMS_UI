@@ -81,31 +81,29 @@ class PreventiveChecklistListContentWeb
                 ),
               ),
               varUserAccessModel.value.access_list!
-                                    .where((e) =>
-                                        e.feature_id ==
-                                            UserAccessConstants
-                                                .kPMchecklistFeatureId &&
-                                        e.add ==
-                                            UserAccessConstants.kHaveAddAccess)
-                                    .length >
-                                0
-                            ? Padding(
-                padding: EdgeInsets.only(left: 10, top: 10),
-                child: ElevatedButton(
-                  style: Styles.navyBlueElevatedButtonStyle,
-                  onPressed: () {
-                    controller.toggleContainer();
-                  },
-                  child: Obx(() {
-                    return Text(
-                      controller.isContainerVisible.value
-                          ? 'Close Create Checklist'
-                          : 'Open Create Checklist',
-                    );
-                  }),
-                ),
-              )
-              : Dimens.box0,
+                          .where((e) =>
+                              e.feature_id ==
+                                  UserAccessConstants.kPMchecklistFeatureId &&
+                              e.add == UserAccessConstants.kHaveAddAccess)
+                          .length >
+                      0
+                  ? Padding(
+                      padding: EdgeInsets.only(left: 10, top: 10),
+                      child: ElevatedButton(
+                        style: Styles.navyBlueElevatedButtonStyle,
+                        onPressed: () {
+                          controller.toggleContainer();
+                        },
+                        child: Obx(() {
+                          return Text(
+                            controller.isContainerVisible.value
+                                ? 'Close Create Checklist'
+                                : 'Open Create Checklist',
+                          );
+                        }),
+                      ),
+                    )
+                  : Dimens.box0,
               Expanded(
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -796,53 +794,78 @@ class CheckListDataSource extends DataTableSource {
             padding: EdgeInsets.zero,
             child: (value == 'Actions')
                 ? Wrap(children: [
-                    TableActionButton(
-                      color: ColorValues.editColor,
-                      icon: Icons.edit,
-                      message: 'Edit',
-                      onPress: () {
-                        controller.selectedItem =
-                            controller.preventiveCheckList!.firstWhere(
-                          (element) =>
-                              "${element!.id}" ==
-                              controller.preventiveCheckList![index]?.id
-                                  .toString(),
-                        );
+                    varUserAccessModel.value.access_list!
+                                .where((e) =>
+                                    e.feature_id ==
+                                        UserAccessConstants
+                                            .kPMchecklistFeatureId &&
+                                    e.edit ==
+                                        UserAccessConstants.kHaveEditAccess)
+                                .length >
+                            0
+                        ? TableActionButton(
+                            color: ColorValues.editColor,
+                            icon: Icons.edit,
+                            message: 'Edit',
+                            onPress: () {
+                              controller.selectedItem =
+                                  controller.preventiveCheckList!.firstWhere(
+                                (element) =>
+                                    "${element!.id}" ==
+                                    controller.preventiveCheckList![index]?.id
+                                        .toString(),
+                              );
 
-                        controller.checklistNumberCtrlr.text =
-                            controller.selectedItem?.name ?? '';
-                        controller.durationCtrlr.text =
-                            controller.selectedItem?.duration.toString() ?? '';
+                              controller.checklistNumberCtrlr.text =
+                                  controller.selectedItem?.name ?? '';
+                              controller.durationCtrlr.text = controller
+                                      .selectedItem?.duration
+                                      .toString() ??
+                                  '';
 
-                        controller.manpowerCtrlr.text =
-                            controller.selectedItem?.manPower.toString() ?? '';
-                        controller.selectedfrequency.value =
-                            controller.selectedItem?.frequency_name ?? '';
-                        controller.selectedequipment.value =
-                            controller.selectedItem?.category_name.toString() ??
-                                '';
-                        controller.selectedEquipmentId =
-                            controller.selectedItem?.category_id ?? 0;
-                        controller.selectedfrequencyId =
-                            controller.selectedItem?.frequency_id ?? 0;
-                        controller.isContainerVisible.value = true;
-                      },
-                    ),
-                    TableActionButton(
-                      color: ColorValues.deleteColor,
-                      icon: Icons.delete,
-                      message: 'Delete',
-                      onPress: () {
-                        controller.isDeleteDialog(
-                            checklist_id: controller
-                                .preventiveCheckList![index]?.id
-                                .toString(),
-                            checklist:
-                                controller.preventiveCheckList![index]?.name);
+                              controller.manpowerCtrlr.text = controller
+                                      .selectedItem?.manPower
+                                      .toString() ??
+                                  '';
+                              controller.selectedfrequency.value =
+                                  controller.selectedItem?.frequency_name ?? '';
+                              controller.selectedequipment.value = controller
+                                      .selectedItem?.category_name
+                                      .toString() ??
+                                  '';
+                              controller.selectedEquipmentId =
+                                  controller.selectedItem?.category_id ?? 0;
+                              controller.selectedfrequencyId =
+                                  controller.selectedItem?.frequency_id ?? 0;
+                              controller.isContainerVisible.value = true;
+                            },
+                          )
+                        : Dimens.box0,
+                    varUserAccessModel.value.access_list!
+                                .where((e) =>
+                                    e.feature_id ==
+                                        UserAccessConstants
+                                            .kPMchecklistFeatureId &&
+                                    e.delete ==
+                                        UserAccessConstants.kHaveDeleteAccess)
+                                .length >
+                            0
+                        ? TableActionButton(
+                            color: ColorValues.deleteColor,
+                            icon: Icons.delete,
+                            message: 'Delete',
+                            onPress: () {
+                              controller.isDeleteDialog(
+                                  checklist_id: controller
+                                      .preventiveCheckList![index]?.id
+                                      .toString(),
+                                  checklist: controller
+                                      .preventiveCheckList![index]?.name);
 
-                        // controller.isContainerVisible.value = true;
-                      },
-                    )
+                              // controller.isContainerVisible.value = true;
+                            },
+                          )
+                        : Dimens.box0
                   ])
                 : Text(value.toString()),
           ),

@@ -3,6 +3,7 @@ import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/user_profile/user_profile_controller.dart';
+import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
@@ -737,7 +738,10 @@ class UserProfileContentWeb extends GetView<UserProfileController> {
               ),
             ),
             floatingActionButton: varUserAccessModel.value.access_list!
-                        .where((e) => e.feature_id == 40 && e.edit == 1)
+                        .where((e) =>
+                            e.feature_id ==
+                                UserAccessConstants.kUserFeatureId &&
+                            e.edit == UserAccessConstants.kHaveEditAccess)
                         .length >
                     0
                 ? Container(

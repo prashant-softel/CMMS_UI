@@ -34,9 +34,6 @@ abstract class UserAccessConstants {
   static int kIncidentReportFeatureId = 34;
   static String kFeatureIncidentReportName = "Incident Report";
 
-  ///MODULE CLEANING ACCESS
-  static int kModuleCleaningExecutionFeatureId = 32;
-  static String kFeatureModuleCleaningExecutionName = "Module Cleaning";
 
   //GOODS ORDER ACCESS
   static int kGoodsFeatureId = 35;
@@ -44,12 +41,21 @@ abstract class UserAccessConstants {
 
   //REQ Order
   static int kReqOrderFeatureId = 36;
-  static String kFeatureReqOrderName = "Req Order";
+  static String kFeatureReqOrderName = "Request Order";
+
+// sm master
+  static int kassetmasterFeatureId = 13;
+  static String kFeatureassetmasterName = "SM Master";
 
   //MRS
 
   static int kMrsFeatureId = 15;
   static String kFeatureMrsName = "SM MRS";
+
+  // return mrs
+  static int kreturnMrsFeatureId = 16;
+  static String kFeaturereturnMrsName = "SM MRS Return";
+
   //Pm plan
 
   static int kPmPlanFeatureId = 38;
@@ -84,6 +90,30 @@ abstract class UserAccessConstants {
   // Vegetation Control execution
   static int kVegetationControlexeFeatureId = 44;
   static String kFeatureVegetationControlexe = "Vegetation Execution";
+// plant stock report
+  static int kplantstockrepFeatureId = 45;
+  static String kFeeatureplantstockrepName = "Plant Stockreport";
+// employee stock report
+  static int kempstockrepFeatureId = 46;
+  static String kFeeatureempstockrepName = "Employee Stockreport";
+// transaction stock report
+  static int ktransactionrepFeatureId = 47;
+  static String kFeeaturetransactrepName = "Transaction Report";
+// faulty material report
+  static int kfaultystockrepFeatureId = 48;
+  static String kFeeaturefaultystockrepName = "Plant Stockreport";
+
+  /// Grievance ACCESS
+  static int kGrievanceFeatureId = 49;
+  static String kFeatureGrievanceName = "Grievance";
+
+  /// CALIBRATION ACCESS
+  static int kCalibrationFeatureId = 31;
+  static String kFeatureCalibrationName = "Calibration";
+
+  /// USER ACCESS
+  static int kUserFeatureId = 40;
+  static String kFeatureUserName = "User";
 
   ///USER ACCESS
   static int kHaveAddAccess = 1;
@@ -106,10 +136,6 @@ abstract class UserAccessConstants {
 
   static int kHaveSelfViewAccess = 1;
   static int kNotHaveSelfViewAccess = 0;
-
-  /// Grievance ACCESS
-  static int kGrievanceFeatureId = 2;
-  static String kFeatureGrievanceName = "Grievance";
 }
 
 AppFlavor? appFlavor;

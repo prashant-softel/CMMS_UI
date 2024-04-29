@@ -499,22 +499,31 @@ class MrsListDataSource extends DataTableSource {
                                 arguments: {'mrsId': mrsId});
                           },
                         ),
-                        TableActionButton(
-                          color: ColorValues.editColor,
-                          icon: Icons.edit,
-                          message: 'edit',
-                          onPress: () {
-                            controller.clearStoreData();
 
-                            // final _flutterSecureStorage =
-                            //     const FlutterSecureStorage();
+                        varUserAccessModel.value.access_list!
+                                    .where((e) =>
+                                        e.feature_id ==
+                                            UserAccessConstants.kMrsFeatureId &&
+                                        e.edit ==
+                                            UserAccessConstants.kHaveEditAccess)
+                                    .length >
+                                0
+                            ? TableActionButton(
+                                color: ColorValues.editColor,
+                                icon: Icons.edit,
+                                message: 'edit',
+                                onPress: () {
+                                  controller.clearStoreData();
 
-                            // _flutterSecureStorage.delete(key: "mrsId");
-                            int mrsId = MrsDetails?.id ?? 0;
-                            Get.toNamed(Routes.editMrs,
-                                arguments: {'mrsId': mrsId});
-                          },
-                        ),
+                                  // final _flutterSecureStorage =
+                                  //     const FlutterSecureStorage();
+
+                                  // _flutterSecureStorage.delete(key: "mrsId");
+                                  int mrsId = MrsDetails?.id ?? 0;
+                                  Get.toNamed(Routes.editMrs,
+                                      arguments: {'mrsId': mrsId});
+                                })
+                            : Dimens.box0,
                         controller.mrsList
                                         .firstWhere(
                                           (e) => e?.id == MrsDetails!.id,
@@ -569,7 +578,7 @@ class MrsListDataSource extends DataTableSource {
                             ? TableActionButton(
                                 color: ColorValues.issueColor,
                                 icon: Icons.report,
-                                message: 'issue',
+                                message: 'Issue',
                                 onPress: () {
                                   controller.clearStoreData();
 

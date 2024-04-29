@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/facility/facility_presenter.dart';
 import 'package:cmms/app/home/home_controller.dart';
+import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/domain/models/mrs_list_by_jobId.dart';
 import 'package:cmms/domain/models/pm_task_view_list_model.dart';
 import 'package:flutter/material.dart';
@@ -254,7 +255,9 @@ class JobDetailsController extends GetxController {
     final _permitList = await jobDetailsPresenter.getPermitList(
         facilityId: facilityId,
         selfView: varUserAccessModel.value.access_list!
-                    .where((e) => e.feature_id == 4 && e.selfView == 1)
+                    .where((e) =>
+                        e.feature_id == UserAccessConstants.kJobCardFeatureId &&
+                        e.selfView == UserAccessConstants.kHaveSelfViewAccess)
                     .length >
                 0
             ? true

@@ -364,9 +364,9 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                           controller.allFiles.length > 0
                               ? Container(
                                   margin: Dimens.edgeInsets20,
-                                  height: ((controller.allFiles.length ?? 0) *
-                                          40) +
-                                      130,
+                                  height:
+                                      ((controller.allFiles.length ?? 0) * 40) +
+                                          130,
                                   decoration: BoxDecoration(
                                     border: Border.all(
                                       color: ColorValues
@@ -602,43 +602,47 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                                                 ColorValues.appRedColor,
                                           ),
                                           Dimens.boxWidth10,
-                                          varUserAccessModel
-                                                  .value.access_list!
-                                                  .where((e) =>
-                                                      e.feature_id ==
-                                                          UserAccessConstants
-                                                              .kJobCardFeatureId &&
-                                                      e.edit ==
-                                                          UserAccessConstants
-                                                              .kHaveEditAccess)
-                                                  .length >
-                                              0
-                                          ? CustomElevatedButton(
-                                            text: 'Update',
-                                            backgroundColor:
-                                                ColorValues.appYellowColor,
-                                            onPressed: () async {
-                                              bool? confirmed =
-                                                  await showConfirmationDialog(
-                                                context,
-                                                'Are you sure you want to Update job ?',
-                                              );
-                                              if (confirmed == true) {
-                                                controller.updateJobCard(
-                                                    fileIds: dropzoneController
-                                                        .fileIds);
+                                          varUserAccessModel.value.access_list!
+                                                      .where((e) =>
+                                                          e.feature_id ==
+                                                              UserAccessConstants
+                                                                  .kJobCardFeatureId &&
+                                                          e.edit ==
+                                                              UserAccessConstants
+                                                                  .kHaveEditAccess)
+                                                      .length >
+                                                  0
+                                              ? CustomElevatedButton(
+                                                  text: 'Update',
+                                                  backgroundColor: ColorValues
+                                                      .appYellowColor,
+                                                  onPressed: () async {
+                                                    bool? confirmed =
+                                                        await showConfirmationDialog(
+                                                      context,
+                                                      'Are you sure you want to Update job ?',
+                                                    );
+                                                    if (confirmed == true) {
+                                                      controller.updateJobCard(
+                                                          fileIds:
+                                                              dropzoneController
+                                                                  .fileIds);
 
-                                                Text(
-                                                    'Are you sure you want to Update job ?');
-                                              }
-                                            },
-                                          )
-                                          : Dimens.box0,
+                                                      Text(
+                                                          'Are you sure you want to Update job ?');
+                                                    }
+                                                  },
+                                                )
+                                              : Dimens.box0,
                                           Dimens.boxWidth10,
                                           varUserAccessModel.value.access_list!
                                                       .where((e) =>
-                                                          e.feature_id == 4 &&
-                                                          e.add == 1)
+                                                          e.feature_id ==
+                                                              UserAccessConstants
+                                                                  .kJobCardFeatureId &&
+                                                          e.add ==
+                                                              UserAccessConstants
+                                                                  .kHaveAddAccess)
                                                       .length >
                                                   0
                                               ? CustomElevatedButton(

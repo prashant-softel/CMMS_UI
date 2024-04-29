@@ -1,6 +1,7 @@
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
+import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:cmms/app/widgets/custom_textfield.dart';
@@ -78,7 +79,11 @@ class InsuranceStatusWeb extends GetView<InsuranceStatusController> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   varUserAccessModel.value.access_list!
-                              .where((e) => e.feature_id == 5 && e.add == 0)
+                              .where((e) =>
+                                  e.feature_id ==
+                                      UserAccessConstants
+                                          .kCalibrationFeatureId &&
+                                  e.add == UserAccessConstants.kHaveAddAccess)
                               .length >
                           0
                       ? Container(
@@ -243,7 +248,11 @@ class InsuranceStatusWeb extends GetView<InsuranceStatusController> {
                         )
                       : Container(),
                   varUserAccessModel.value.access_list!
-                              .where((e) => e.feature_id == 5 && e.view == 0)
+                              .where((e) =>
+                                  e.feature_id ==
+                                      UserAccessConstants
+                                          .kCalibrationFeatureId &&
+                                  e.view == UserAccessConstants.kHaveViewAccess)
                               .length >
                           0
                       ? Expanded(

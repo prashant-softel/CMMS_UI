@@ -298,8 +298,7 @@ class CreateMrsReturnContentWeb extends GetView<CreateMrsReturnController> {
                                                                 .9),
                                                             child:
                                                                 LoginCustomTextfield(
-                                                              inputFormatters: <
-                                                                  TextInputFormatter>[
+                                                              inputFormatters: <TextInputFormatter>[
                                                                 FilteringTextInputFormatter
                                                                     .digitsOnly
                                                               ],
@@ -394,7 +393,8 @@ class CreateMrsReturnContentWeb extends GetView<CreateMrsReturnController> {
                                                                   : (mapData['key'] ==
                                                                           "is_faulty")
                                                                       ? Padding(
-                                                                          padding: const EdgeInsets.only(
+                                                                          padding: const EdgeInsets
+                                                                              .only(
                                                                               top:
                                                                                   8.0),
                                                                           child: _rowItem(
@@ -569,7 +569,9 @@ class CreateMrsReturnContentWeb extends GetView<CreateMrsReturnController> {
                     child: CustomElevatedButton(
                       backgroundColor: ColorValues.redColor,
                       text: "Cancel",
-                      onPressed: () {},
+                      onPressed: () {
+                        Get.offAndToNamed(Routes.returnMrsList);
+                      },
                     ),
                   ),
                 ],

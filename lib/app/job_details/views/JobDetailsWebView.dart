@@ -529,12 +529,13 @@ class JobDetailsWebView extends GetView<JobDetailsController> {
                                                                   ?.jobCardId
                                                                   .toString() ??
                                                               ''))),
-                                                      DataCell(Text('PTW' +(controller
-                                                              .jobAssociatedModelsList?[
-                                                                  index]
-                                                              ?.permitId
-                                                              .toString() ??
-                                                          ''))),
+                                                      DataCell(Text('PTW' +
+                                                          (controller
+                                                                  .jobAssociatedModelsList?[
+                                                                      index]
+                                                                  ?.permitId
+                                                                  .toString() ??
+                                                              ''))),
                                                       DataCell(Text(controller
                                                               .jobAssociatedModelsList?[
                                                                   index]
@@ -1166,26 +1167,31 @@ class JobDetailsWebView extends GetView<JobDetailsController> {
                                                     ?.assignedId ??
                                                 0) >
                                             0) ...[
-                                          controller.jobDetailsModel.value?.latestJCStatus == 158 
-                                          ? Dimens.box0
-                                          //check if status is "ASSIGNED"
-                                          // if (controller.jobDetailsModel.value
-                                          //             ?.status !=
-                                          //         null &&
-                                          //     JobStatusData
-                                          //             .getStatusStringFromInt(
-                                          //                 controller
-                                          //                     .jobDetailsModel
-                                          //                     .value
-                                          //                     ?.status) ==
-                                          //         AppConstants.kJobStatusAssigned)
-                                          : CustomElevatedButton(
-                                            onPressed: () => controller
-                                                .goToEditJobScreen(controller
-                                                    .jobDetailsModel.value?.id),
-                                            text: 'Re-Assign',
-                                            icon: Icons.edit,
-                                          ),
+                                          controller.jobDetailsModel.value
+                                                      ?.latestJCStatus ==
+                                                  158
+                                              ? Dimens.box0
+                                              //check if status is "ASSIGNED"
+                                              // if (controller.jobDetailsModel.value
+                                              //             ?.status !=
+                                              //         null &&
+                                              //     JobStatusData
+                                              //             .getStatusStringFromInt(
+                                              //                 controller
+                                              //                     .jobDetailsModel
+                                              //                     .value
+                                              //                     ?.status) ==
+                                              //         AppConstants.kJobStatusAssigned)
+                                              : CustomElevatedButton(
+                                                  onPressed: () => controller
+                                                      .goToEditJobScreen(
+                                                          controller
+                                                              .jobDetailsModel
+                                                              .value
+                                                              ?.id),
+                                                  text: 'Re-Assign',
+                                                  icon: Icons.edit,
+                                                ),
                                         ],
 
                                         Dimens.boxWidth10,

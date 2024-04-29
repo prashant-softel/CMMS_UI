@@ -5,6 +5,7 @@ import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/theme/color_values.dart';
 import 'package:cmms/app/theme/dimens.dart';
 import 'package:cmms/app/theme/styles.dart';
+import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/app/vegetation_execution_plan_list/veg_execution_list_controller.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
@@ -592,49 +593,59 @@ class VegExcutionListDataSource extends DataTableSource {
                             },
                           ),
                           varUserAccessModel.value.access_list!
-                                        .where((e) =>
-                                            e.feature_id == 44 &&
-                                            e.edit == 1)
-                                        .length >
-                                    0
-                          ? TableActionButton(
-                            color: ColorValues.appYellowColor,
-                            icon: Icons.edit,
-                            message: 'Edit',
-                            onPress: () {
-                              // controller.clearStoreDatavegid();
-                              // controller.clearStoreDataPlanid();
-                              // int id = VegExcutionListDetails?.id ?? 0;
-                              // int vegplanId = VegExcutionListDetails?.vegplanId ?? 0;
-                              // if (id != 0) {
-                              //   Get.toNamed(
-                              //       Routes.addModuleCleaningExecutionContentWeb,
-                              //       arguments: {"vegid": id, "vegplanId": vegplanId});
-                              // }
-                            },
-                          ): Dimens.box0,
+                                      .where((e) =>
+                                          e.feature_id ==
+                                              UserAccessConstants
+                                                  .kVegetationControlexeFeatureId &&
+                                          e.edit ==
+                                              UserAccessConstants
+                                                  .kHaveEditAccess)
+                                      .length >
+                                  0
+                              ? TableActionButton(
+                                  color: ColorValues.appYellowColor,
+                                  icon: Icons.edit,
+                                  message: 'Edit',
+                                  onPress: () {
+                                    // controller.clearStoreDatavegid();
+                                    // controller.clearStoreDataPlanid();
+                                    // int id = VegExcutionListDetails?.id ?? 0;
+                                    // int vegplanId = VegExcutionListDetails?.vegplanId ?? 0;
+                                    // if (id != 0) {
+                                    //   Get.toNamed(
+                                    //       Routes.addModuleCleaningExecutionContentWeb,
+                                    //       arguments: {"vegid": id, "vegplanId": vegplanId});
+                                    // }
+                                  },
+                                )
+                              : Dimens.box0,
                           varUserAccessModel.value.access_list!
-                                        .where((e) =>
-                                            e.feature_id == 44 &&
-                                            e.approve == 1)
-                                        .length >
-                                    0
-                          ? TableActionButton(
-                            color: ColorValues.appGreenColor,
-                            icon: Icons.add,
-                            message: 'Start/End',
-                            onPress: () {
-                              // controller.clearStoreDatavegid();
-                              // controller.clearStoreDataPlanid();
-                              // int id = VegExcutionListDetails?.id ?? 0;
-                              // int vegplanId = VegExcutionListDetails?.vegplanId ?? 0;
-                              // if (id != 0) {
-                              //   Get.toNamed(
-                              //       Routes.addModuleCleaningExecutionContentWeb,
-                              //       arguments: {"vegid": id, "vegplanId": vegplanId});
-                              // }
-                            },
-                          ): Dimens.box0,
+                                      .where((e) =>
+                                          e.feature_id ==
+                                              UserAccessConstants
+                                                  .kVegetationControlexeFeatureId &&
+                                          e.approve ==
+                                              UserAccessConstants
+                                                  .kHaveApproveAccess)
+                                      .length >
+                                  0
+                              ? TableActionButton(
+                                  color: ColorValues.appGreenColor,
+                                  icon: Icons.add,
+                                  message: 'Start/End',
+                                  onPress: () {
+                                    // controller.clearStoreDatavegid();
+                                    // controller.clearStoreDataPlanid();
+                                    // int id = VegExcutionListDetails?.id ?? 0;
+                                    // int vegplanId = VegExcutionListDetails?.vegplanId ?? 0;
+                                    // if (id != 0) {
+                                    //   Get.toNamed(
+                                    //       Routes.addModuleCleaningExecutionContentWeb,
+                                    //       arguments: {"vegid": id, "vegplanId": vegplanId});
+                                    // }
+                                  },
+                                )
+                              : Dimens.box0,
                         ],
                       )
                     : Text(value.toString()),

@@ -1,6 +1,8 @@
 import 'package:cmms/app/app.dart';
+import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/home/widgets/mobile_drawer.dart';
 import 'package:cmms/app/stock_management/stock_management_controller.dart';
+import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -106,31 +108,87 @@ class StockManagementDashboardScreen
                               ? (itemWidth / itemHeight)
                               : 5,
                           children: <Widget>[
-                            _stockManagementList(
-                                tittle: "Request Orders",
-                                ontap: () {
-                                  Get.offNamed(Routes.purchaseGoodsorder);
-                                }),
+                            varUserAccessModel.value.access_list!
+                                        .where((e) =>
+                                            e.feature_id ==
+                                                    UserAccessConstants
+                                                        .kGoodsFeatureId &&
+                                                e.view ==
+                                                    UserAccessConstants
+                                                        .kHaveViewAccess ||
+                                            e.add ==
+                                                UserAccessConstants
+                                                    .kHaveAddAccess)
+                                        .length >
+                                    0
+                                ? _stockManagementList(
+                                    tittle: "Request Orders",
+                                    ontap: () {
+                                      Get.offNamed(Routes.purchaseGoodsorder);
+                                    })
+                                : Dimens.box0,
 
                             //  if (Responsive.isDesktop(context))
-                            _stockManagementList(
-                                tittle: "Goods Order  List",
-                                ontap: () {
-                                  Get.toNamed(
-                                    Routes.stockManagementGoodsOrdersScreen,
-                                  );
-                                  //controller.checkPoint();
-                                }),
-                            _stockManagementList(
-                                tittle: "MRS List",
-                                ontap: () {
-                                  Get.offNamed(Routes.mrsListScreen);
-                                }),
-                            _stockManagementList(
-                                tittle: "MRS Return",
-                                ontap: () {
-                                  Get.offNamed(Routes.returnMrsList);
-                                }),
+                            varUserAccessModel.value.access_list!
+                                        .where((e) =>
+                                            e.feature_id ==
+                                                    UserAccessConstants
+                                                        .kGoodsFeatureId &&
+                                                e.view ==
+                                                    UserAccessConstants
+                                                        .kHaveViewAccess ||
+                                            e.add ==
+                                                UserAccessConstants
+                                                    .kHaveAddAccess)
+                                        .length >
+                                    0
+                                ? _stockManagementList(
+                                    tittle: "Goods Order List",
+                                    ontap: () {
+                                      Get.toNamed(
+                                        Routes.stockManagementGoodsOrdersScreen,
+                                      );
+                                      //controller.checkPoint();
+                                    })
+                                : Dimens.box0,
+                            varUserAccessModel.value.access_list!
+                                        .where((e) =>
+                                            e.feature_id ==
+                                                    UserAccessConstants
+                                                        .kMrsFeatureId &&
+                                                e.view ==
+                                                    UserAccessConstants
+                                                        .kHaveViewAccess ||
+                                            e.add ==
+                                                UserAccessConstants
+                                                    .kHaveAddAccess)
+                                        .length >
+                                    0
+                                ? _stockManagementList(
+                                    tittle: "MRS List",
+                                    ontap: () {
+                                      Get.offNamed(Routes.mrsListScreen);
+                                    })
+                                : Dimens.box0,
+                            varUserAccessModel.value.access_list!
+                                        .where((e) =>
+                                            e.feature_id ==
+                                                UserAccessConstants
+                                                    .kreturnMrsFeatureId &&
+                                            e.view ==
+                                                UserAccessConstants
+                                                    .kHaveViewAccess &&
+                                            e.add ==
+                                                UserAccessConstants
+                                                    .kHaveAddAccess)
+                                        .length >
+                                    0
+                                ? _stockManagementList(
+                                    tittle: "MRS Return",
+                                    ontap: () {
+                                      Get.offNamed(Routes.returnMrsList);
+                                    })
+                                : Dimens.box0,
                             // _stockManagementList(
                             //   tittle: "Receive Goods Order",
                             //    ontap: () {
@@ -179,29 +237,73 @@ class StockManagementDashboardScreen
                               ? (itemWidth / itemHeight)
                               : 5,
                           children: <Widget>[
-                            _stockManagementList(
-                                tittle: "Plant Stock Report",
-                                ontap: () {
-                                  Get.toNamed(
-                                    Routes.plantStockReport,
-                                  );
-                                  //  controller.checkPoint();
-                                }),
-                            _stockManagementList(
-                                tittle: "Employee Stock Report",
-                                ontap: () {
-                                  Get.toNamed(Routes.employeeStockReport);
-                                }),
-                            _stockManagementList(
-                                tittle: "Transaction Report",
-                                ontap: () {
-                                  Get.toNamed(Routes.transactionReport);
-                                }),
-                            _stockManagementList(
-                                tittle: "Faulty Material Report",
-                                ontap: () {
-                                  Get.offNamed(Routes.faultyMaterialReport);
-                                }),
+                            varUserAccessModel.value.access_list!
+                                        .where((e) =>
+                                            e.feature_id ==
+                                                UserAccessConstants
+                                                    .kplantstockrepFeatureId &&
+                                            e.view ==
+                                                UserAccessConstants
+                                                    .kHaveViewAccess)
+                                        .length >
+                                    0
+                                ? _stockManagementList(
+                                    tittle: "Plant Stock Report",
+                                    ontap: () {
+                                      Get.toNamed(
+                                        Routes.plantStockReport,
+                                      );
+                                      //  controller.checkPoint();
+                                    })
+                                : Dimens.box0,
+                            varUserAccessModel.value.access_list!
+                                        .where((e) =>
+                                            e.feature_id ==
+                                                UserAccessConstants
+                                                    .kempstockrepFeatureId &&
+                                            e.view ==
+                                                UserAccessConstants
+                                                    .kHaveViewAccess)
+                                        .length >
+                                    0
+                                ? _stockManagementList(
+                                    tittle: "Employee Stock Report",
+                                    ontap: () {
+                                      Get.toNamed(Routes.employeeStockReport);
+                                    })
+                                : Dimens.box0,
+                            varUserAccessModel.value.access_list!
+                                        .where((e) =>
+                                            e.feature_id ==
+                                                UserAccessConstants
+                                                    .ktransactionrepFeatureId &&
+                                            e.view ==
+                                                UserAccessConstants
+                                                    .kHaveViewAccess)
+                                        .length >
+                                    0
+                                ? _stockManagementList(
+                                    tittle: "Transaction Report",
+                                    ontap: () {
+                                      Get.toNamed(Routes.transactionReport);
+                                    })
+                                : Dimens.box0,
+                            varUserAccessModel.value.access_list!
+                                        .where((e) =>
+                                            e.feature_id ==
+                                                UserAccessConstants
+                                                    .kfaultystockrepFeatureId &&
+                                            e.view ==
+                                                UserAccessConstants
+                                                    .kHaveViewAccess)
+                                        .length >
+                                    0
+                                ? _stockManagementList(
+                                    tittle: "Faulty Material Report",
+                                    ontap: () {
+                                      Get.offNamed(Routes.faultyMaterialReport);
+                                    })
+                                : Dimens.box0,
                           ],
                         ),
                         Container(
@@ -241,21 +343,57 @@ class StockManagementDashboardScreen
                               ? (itemWidth / itemHeight)
                               : 5,
                           children: <Widget>[
-                            _stockManagementList(
-                                tittle: "Asset Master",
-                                ontap: () {
-                                  Get.offNamed(Routes.assetMasterList);
-                                }),
-                            _stockManagementList(
-                                tittle: "Add Asset Master",
-                                ontap: () {
-                                  Get.offNamed(Routes.addassetMaster);
-                                }),
-                            _importPlan(
-                                tittle: "Import Material",
-                                ontap: () {
-                                  controller.importMaterial();
-                                }),
+                            varUserAccessModel.value.access_list!
+                                        .where((e) =>
+                                            e.feature_id ==
+                                                    UserAccessConstants
+                                                        .kassetmasterFeatureId &&
+                                                e.view ==
+                                                    UserAccessConstants
+                                                        .kHaveViewAccess ||
+                                            e.add ==
+                                                UserAccessConstants
+                                                    .kHaveAddAccess)
+                                        .length >
+                                    0
+                                ? _stockManagementList(
+                                    tittle: "Asset Master",
+                                    ontap: () {
+                                      Get.offNamed(Routes.assetMasterList);
+                                    })
+                                : Dimens.box0,
+                            varUserAccessModel.value.access_list!
+                                        .where((e) =>
+                                            e.feature_id ==
+                                                UserAccessConstants
+                                                    .kassetmasterFeatureId &&
+                                            e.add ==
+                                                UserAccessConstants
+                                                    .kHaveAddAccess)
+                                        .length >
+                                    0
+                                ? _stockManagementList(
+                                    tittle: "Add Asset Master",
+                                    ontap: () {
+                                      Get.offNamed(Routes.addassetMaster);
+                                    })
+                                : Dimens.box0,
+                            varUserAccessModel.value.access_list!
+                                        .where((e) =>
+                                            e.feature_id ==
+                                                UserAccessConstants
+                                                    .kassetmasterFeatureId &&
+                                            e.add ==
+                                                UserAccessConstants
+                                                    .kHaveAddAccess)
+                                        .length >
+                                    0
+                                ? _importPlan(
+                                    tittle: "Import Material",
+                                    ontap: () {
+                                      controller.importMaterial();
+                                    })
+                                : Dimens.box0,
                           ],
                         ),
                       ]),

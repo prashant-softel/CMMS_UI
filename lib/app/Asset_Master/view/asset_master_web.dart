@@ -1,6 +1,8 @@
 import 'package:cmms/app/app.dart';
+import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
+import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -531,12 +533,25 @@ class AssetMasterWeb extends GetView<AssetMasterController> {
                                       ),
                                     ),
                                   ),
-                                  ActionButton(
-                                    icon: Icons.add,
-                                    label: 'Add Material'.tr,
-                                    onPressed: () {},
-                                    color: ColorValues.addNewColor,
-                                  ),
+                                  varUserAccessModel.value.access_list!
+                                              .where((e) =>
+                                                  e.feature_id ==
+                                                      UserAccessConstants
+                                                          .kassetmasterFeatureId &&
+                                                  e.add ==
+                                                      UserAccessConstants
+                                                          .kHaveAddAccess)
+                                              .length >
+                                          0
+                                      ? ActionButton(
+                                          icon: Icons.add,
+                                          label: 'Add Material'.tr,
+                                          onPressed: () {
+                                            Get.offNamed(Routes.addassetMaster);
+                                          },
+                                          color: ColorValues.addNewColor,
+                                        )
+                                      : Dimens.box0,
                                   Dimens.boxWidth10,
                                 ]),
                               ),

@@ -4,6 +4,7 @@ import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/module_cleaning_execution/module_cleaning_list_execution_controller.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/theme/dimens.dart';
+import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/date_picker.dart';
@@ -306,59 +307,62 @@ class _ModuleCleaningListExecutionState
                                   SizedBox(
                                     height: 10,
                                   ),
-                                  controller.mcTaskList.isEmpty== true &&
-                                    controller.isLoading == false
-                                ? Center(child: Text("No Data"))
-                                : controller.isLoading.value == true
-                                    ? Center(child: Text("Data Loading......"))
-                                      : Expanded(
-                                          child: ValueListenableBuilder(
-                                              valueListenable:
-                                                  controller.columnVisibility,
-                                              builder: (context, value, child) {
-                                                final dataSource =
-                                                    MCExcutionListDataSource(
-                                                        controller);
+                                  controller.mcTaskList.isEmpty == true &&
+                                          controller.isLoading == false
+                                      ? Center(child: Text("No Data"))
+                                      : controller.isLoading.value == true
+                                          ? Center(
+                                              child: Text("Data Loading......"))
+                                          : Expanded(
+                                              child: ValueListenableBuilder(
+                                                  valueListenable: controller
+                                                      .columnVisibility,
+                                                  builder:
+                                                      (context, value, child) {
+                                                    final dataSource =
+                                                        MCExcutionListDataSource(
+                                                            controller);
 
-                                                return PaginatedDataTable2(
-                                                  columnSpacing: 10,
-                                                  dataRowHeight: 55,
-                                                  source:
-                                                      dataSource, // Custom DataSource class
-                                                  /// headingRowHeight:
-                                                  //      Get.height * 0.12,
-                                                  minWidth: Get.width * 1.2,
-                                                  showCheckboxColumn: false,
-                                                  rowsPerPage:
-                                                      10, // Number of rows per page
-                                                  availableRowsPerPage: [
-                                                    10,
-                                                    20,
-                                                    30,
-                                                    50
-                                                  ],
-                                                  columns: [
-                                                    for (var entry
-                                                        in value.entries)
-                                                      if (entry.value)
+                                                    return PaginatedDataTable2(
+                                                      columnSpacing: 10,
+                                                      dataRowHeight: 55,
+                                                      source:
+                                                          dataSource, // Custom DataSource class
+                                                      /// headingRowHeight:
+                                                      //      Get.height * 0.12,
+                                                      minWidth: Get.width * 1.2,
+                                                      showCheckboxColumn: false,
+                                                      rowsPerPage:
+                                                          10, // Number of rows per page
+                                                      availableRowsPerPage: [
+                                                        10,
+                                                        20,
+                                                        30,
+                                                        50
+                                                      ],
+                                                      columns: [
+                                                        for (var entry
+                                                            in value.entries)
+                                                          if (entry.value)
+                                                            buildDataColumn(
+                                                              entry.key,
+                                                              controller
+                                                                      .filterText[
+                                                                  entry.key]!,
+                                                              controller
+                                                                      .columnwidth[
+                                                                  entry.key],
+                                                            ),
                                                         buildDataColumn(
-                                                          entry.key,
-                                                          controller.filterText[
-                                                              entry.key]!,
+                                                          'Actions',
                                                           controller
-                                                                  .columnwidth[
-                                                              entry.key],
+                                                              .mcExecutionFilterText,
+                                                          150,
                                                         ),
-                                                    buildDataColumn(
-                                                      'Actions',
-                                                      controller
-                                                          .mcExecutionFilterText,
-                                                      150,
-                                                    ),
-                                                  ],
-                                                );
-                                              }),
-                                        ),
+                                                      ],
+                                                    );
+                                                  }),
+                                            ),
                                 ],
                               ),
                             ),
@@ -591,51 +595,69 @@ class MCExcutionListDataSource extends DataTableSource {
                             },
                           ),
                           varUserAccessModel.value.access_list!
-                                        .where((e) =>
-                                            e.feature_id == 43 &&
-                                            e.edit == 1)
-                                        .length >
-                                    0
-                          ? TableActionButton(
-                            color: ColorValues.appYellowColor,
-                            icon: Icons.edit,
-                            message: 'Edit',
-                            onPress: () {
-                              controller.clearStoreDataMcid();
-                              controller.clearStoreDataPlanid();
-                              int id = McExcutionListDetails?.id ?? 0;
-                              int planId = McExcutionListDetails?.planId ?? 0;
-                              if (id != 0) {
-                                Get.toNamed(
-                                    Routes.addModuleCleaningExecutionContentWeb,
-                                    arguments: {"mcid": id, "planId": planId});
-                              }
-                            },
-                          )
-                          :Dimens.box0,
+                                      .where((e) =>
+                                          e.feature_id ==
+                                              UserAccessConstants
+                                                  .kModuleCleaningexeFeatureId &&
+                                          e.edit ==
+                                              UserAccessConstants
+                                                  .kHaveEditAccess)
+                                      .length >
+                                  0
+                              ? TableActionButton(
+                                  color: ColorValues.appYellowColor,
+                                  icon: Icons.edit,
+                                  message: 'Edit',
+                                  onPress: () {
+                                    controller.clearStoreDataMcid();
+                                    controller.clearStoreDataPlanid();
+                                    int id = McExcutionListDetails?.id ?? 0;
+                                    int planId =
+                                        McExcutionListDetails?.planId ?? 0;
+                                    if (id != 0) {
+                                      Get.toNamed(
+                                          Routes
+                                              .addModuleCleaningExecutionContentWeb,
+                                          arguments: {
+                                            "mcid": id,
+                                            "planId": planId
+                                          });
+                                    }
+                                  },
+                                )
+                              : Dimens.box0,
                           varUserAccessModel.value.access_list!
-                                        .where((e) =>
-                                            e.feature_id == 43 &&
-                                            e.approve == 1)
-                                        .length >
-                                    0
-                          ? TableActionButton(
-                            color: ColorValues.appGreenColor,
-                            icon: Icons.add,
-                            message: 'Start/End',
-                            onPress: () {
-                              controller.clearStoreDataMcid();
-                              controller.clearStoreDataPlanid();
-                              int id = McExcutionListDetails?.id ?? 0;
-                              int planId = McExcutionListDetails?.planId ?? 0;
-                              if (id != 0) {
-                                Get.toNamed(
-                                    Routes.addModuleCleaningExecutionContentWeb,
-                                    arguments: {"mcid": id, "planId": planId});
-                              }
-                            },
-                          )
-                          :Dimens.box0
+                                      .where((e) =>
+                                          e.feature_id ==
+                                              UserAccessConstants
+                                                  .kModuleCleaningexeFeatureId &&
+                                          e.approve ==
+                                              UserAccessConstants
+                                                  .kHaveApproveAccess)
+                                      .length >
+                                  0
+                              ? TableActionButton(
+                                  color: ColorValues.appGreenColor,
+                                  icon: Icons.add,
+                                  message: 'Start/End',
+                                  onPress: () {
+                                    controller.clearStoreDataMcid();
+                                    controller.clearStoreDataPlanid();
+                                    int id = McExcutionListDetails?.id ?? 0;
+                                    int planId =
+                                        McExcutionListDetails?.planId ?? 0;
+                                    if (id != 0) {
+                                      Get.toNamed(
+                                          Routes
+                                              .addModuleCleaningExecutionContentWeb,
+                                          arguments: {
+                                            "mcid": id,
+                                            "planId": planId
+                                          });
+                                    }
+                                  },
+                                )
+                              : Dimens.box0
                         ],
                       )
                     : Text(value.toString()),

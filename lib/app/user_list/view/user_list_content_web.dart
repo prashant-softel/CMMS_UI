@@ -1,6 +1,7 @@
 import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/theme/dimens.dart';
+import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/domain/models/user_list_model.dart';
 import 'package:data_table_2/data_table_2.dart';
@@ -107,8 +108,12 @@ class _UserListContentWebState extends State<UserListContentWeb> {
                                         Spacer(),
                                         varUserAccessModel.value.access_list!
                                                     .where((e) =>
-                                                        e.feature_id == 40 &&
-                                                        e.add == 1)
+                                                        e.feature_id ==
+                                                            UserAccessConstants
+                                                                .kUserFeatureId &&
+                                                        e.add ==
+                                                            UserAccessConstants
+                                                                .kHaveAddAccess)
                                                     .length >
                                                 0
                                             ? ActionButton(
@@ -518,8 +523,11 @@ class UserDataSource extends DataTableSource {
                         },
                       ),
                       varUserAccessModel.value.access_list!
-                                  .where(
-                                      (e) => e.feature_id == 40 && e.edit == 1)
+                                  .where((e) =>
+                                      e.feature_id ==
+                                          UserAccessConstants.kUserFeatureId &&
+                                      e.edit ==
+                                          UserAccessConstants.kHaveEditAccess)
                                   .length >
                               0
                           ? TableActionButton(
@@ -543,7 +551,10 @@ class UserDataSource extends DataTableSource {
                           : Dimens.box0,
                       varUserAccessModel.value.access_list!
                                   .where((e) =>
-                                      e.feature_id == 40 && e.delete == 1)
+                                      e.feature_id ==
+                                          UserAccessConstants.kUserFeatureId &&
+                                      e.delete ==
+                                          UserAccessConstants.kHaveDeleteAccess)
                                   .length >
                               0
                           ? TableActionButton(
