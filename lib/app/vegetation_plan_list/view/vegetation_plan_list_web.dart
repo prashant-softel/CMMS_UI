@@ -117,7 +117,7 @@ class _VegetationPlanListWebState extends State<VegetationPlanListWeb> {
                                                                 .kVegetationControlFeatureId &&
                                                         e.add ==
                                                             UserAccessConstants
-                                                                .kHaveApproveAccess)
+                                                                .kHaveAddAccess)
                                                     .length >
                                                 0
                                             ? ActionButton(

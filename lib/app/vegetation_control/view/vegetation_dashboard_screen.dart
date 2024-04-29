@@ -118,13 +118,21 @@ class VegetationDashboardScreen extends GetView<VegetationDashboardController> {
                                   })
                                   :Dimens.box0,
                               //  if (Responsive.isDesktop(context))
-                              _vegetationList(
+                              varUserAccessModel.value.access_list!
+                                        .where((e) =>
+                                            e.feature_id == 44 &&
+                                            e.view == 1 ||
+                                            e.add == 1)
+                                        .length >
+                                    0
+                              ? _vegetationList(
                                   tittle: "Execution",
                                   ontap: () {
                                     Get.offNamed(
                                       Routes.vegExecutionListScreen,
                                     );
-                                  }),
+                                  })
+                                  :Dimens.box0,
                             ],
                           )
                         ]),
