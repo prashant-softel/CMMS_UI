@@ -92,16 +92,16 @@ abstract class UserAccessConstants {
   static String kFeatureVegetationControlexe = "Vegetation Execution";
 // plant stock report
   static int kplantstockrepFeatureId = 45;
-  static String kFeeatureplantstockrepName = "Plant Stockreport";
+  static String kFeeatureplantstockrepName = "Plant Stock Report";
 // employee stock report
   static int kempstockrepFeatureId = 46;
-  static String kFeeatureempstockrepName = "Employee Stockreport";
+  static String kFeeatureempstockrepName = "Employee Stock Report";
 // transaction stock report
   static int ktransactionrepFeatureId = 47;
   static String kFeeaturetransactrepName = "Transaction Report";
 // faulty material report
   static int kfaultystockrepFeatureId = 48;
-  static String kFeeaturefaultystockrepName = "Plant Stockreport";
+  static String kFeeaturefaultystockrepName = "Faulty Material Report";
 
   /// Grievance ACCESS
   static int kGrievanceFeatureId = 49;
@@ -113,7 +113,7 @@ abstract class UserAccessConstants {
 
   /// USER ACCESS
   static int kUserFeatureId = 40;
-  static String kFeatureUserName = "User";
+  static String kFeatureUserName = "User Management";
 
   ///USER ACCESS
   static int kHaveAddAccess = 1;

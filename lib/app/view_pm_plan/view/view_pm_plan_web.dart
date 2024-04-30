@@ -171,6 +171,10 @@ class _ViewPmPlanWebState extends State<ViewPmPlanWeb> {
                                             CrossAxisAlignment.end,
                                         children: [
                                           Text(
+                                            'Plan Id :',
+                                            style: Styles.black17,
+                                          ),
+                                          Text(
                                             'Frequency : ',
                                             style: Styles.black17,
                                           ),
@@ -180,6 +184,9 @@ class _ViewPmPlanWebState extends State<ViewPmPlanWeb> {
                                         crossAxisAlignment:
                                             CrossAxisAlignment.end,
                                         children: [
+                                          Text(
+                                              '${controller.pmPlanDetailsModel.value?.plan_id ?? ''}',
+                                              style: Styles.blue17),
                                           Text(
                                               '${controller.pmPlanDetailsModel.value?.plan_freq_name ?? ''}',
                                               style: Styles.blue17),
