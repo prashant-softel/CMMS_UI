@@ -109,7 +109,7 @@ class TbtDonePMTaskDialog extends GetView {
                           });
                           // controller.assignToPmTask(id: id ?? 0);
                         },
-                        child: const Text('TBT Done'),
+                        child: const Text('Go for TBT'),
                       ),
                     ]),
                     Spacer(),
