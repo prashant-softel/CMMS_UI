@@ -663,9 +663,9 @@ class PreventiveCheckPointContentWeb
                                                     e.feature_id ==
                                                         UserAccessConstants
                                                             .kPMcheckpointFeatureId &&
-                                                    e.view ==
+                                                    e.add ==
                                                         UserAccessConstants
-                                                            .kHaveViewAccess)
+                                                            .kHaveAddAccess)
                                                 .length >
                                             0
                                         ? ActionButton(
