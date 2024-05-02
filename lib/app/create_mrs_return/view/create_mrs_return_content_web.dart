@@ -136,13 +136,16 @@ class CreateMrsReturnContentWeb extends GetView<CreateMrsReturnController> {
                                       width:
                                           (MediaQuery.of(context).size.width *
                                               .2),
-                                      child: LoginCustomTextfield(
-                                        // inputFormatters: [
-                                        //   FilteringTextInputFormatter.deny(
-                                        //       RegExp(r'\s')),
-                                        // ],
-                                        textController:
-                                            controller.activityCtrlr,
+                                      child: IgnorePointer(
+                                        ignoring: true,
+                                        child: LoginCustomTextfield(
+                                          // inputFormatters: [
+                                          //   FilteringTextInputFormatter.deny(
+                                          //       RegExp(r'\s')),
+                                          // ],
+                                          textController:
+                                              controller.activityCtrlr,
+                                        ),
                                       )),
                                   Spacer(),
                                   Text('Task ID: '),
@@ -173,13 +176,16 @@ class CreateMrsReturnContentWeb extends GetView<CreateMrsReturnController> {
                                           ),
                                         ],
                                       ),
-                                      child: LoginCustomTextfield(
-                                        // enabled: false,
-                                        width:
-                                            (MediaQuery.of(context).size.width *
-                                                .2),
-                                        textController:
-                                            controller.whereUsedCtrlr,
+                                      child: IgnorePointer(
+                                        ignoring: true,
+                                        child: LoginCustomTextfield(
+                                          // enabled: false,
+                                          width:
+                                              (MediaQuery.of(context).size.width *
+                                                  .2),
+                                          textController:
+                                              controller.whereUsedCtrlr,
+                                        ),
                                       )),
                                 ],
                               ),

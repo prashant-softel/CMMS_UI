@@ -1,6 +1,6 @@
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/constant/constant.dart';
-import 'package:cmms/app/home/widgets/header_widget.dart';
+import 'package:cmms/app/home/widgets/header_widget_all_dash.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/user_profile/user_profile_controller.dart';
 import 'package:cmms/app/utils/user_access_constants.dart';
@@ -25,7 +25,7 @@ class UserProfileContentWeb extends GetView<UserProfileController> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  HeaderWidget(),
+                  HeaderWidgetAllDash(),
                   Container(
                     height: 45,
                     decoration: BoxDecoration(

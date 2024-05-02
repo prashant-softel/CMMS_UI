@@ -141,7 +141,7 @@ class PreventiveScreen extends GetView<PreventiveController> {
                                                     .kPmTaskFeatureId &&
                                             e.view ==
                                                 UserAccessConstants
-                                                    .kHaveViewAccess &&
+                                                    .kHaveViewAccess ||
                                             e.add ==
                                                 UserAccessConstants
                                                     .kHaveAddAccess)
