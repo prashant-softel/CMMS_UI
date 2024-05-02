@@ -69,9 +69,9 @@ class AuditPlanMessageApproveDialog extends GetView {
                   child: ElevatedButton(
                     style: Styles.greenElevatedButtonStyle,
                     onPressed: () {
-                      //  Get.offAllNamed(Routes.pmTask);
+                      Get.offAllNamed(Routes.auditTask);
                     },
-                    child: const Text('Schedule Execution'),
+                    child: const Text('Audit Task'),
                   ),
                 ),
                 Dimens.boxWidth10,
