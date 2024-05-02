@@ -1,20 +1,18 @@
 class DashboardModel {
-  int? module_name;
+  String? module_name;
 
-  List<CmDashboadDetails>? cmDashboadDetails;
+  CmDashboadDetails? cmDashboadDetails;
   DashboardModel({this.module_name, this.cmDashboadDetails});
 
   factory DashboardModel.fromJson(Map<String, dynamic> json) => DashboardModel(
         module_name: json["module_name"],
-        cmDashboadDetails: List<CmDashboadDetails>.from(
-            json["cmDashboadDetails"]
-                .map((x) => CmDashboadDetails.fromJson(x))),
+        cmDashboadDetails:
+            CmDashboadDetails.fromJson(json['cmDashboadDetails']),
       );
 
   Map<String, dynamic> toJson() => {
         "module_name": module_name,
-        "cmDashboadDetails":
-            List<dynamic>.from(cmDashboadDetails!.map((x) => x.toJson())),
+        "cmDashboadDetails": cmDashboadDetails!.toJson(),
       };
 }
 
@@ -29,6 +27,9 @@ class CmDashboadDetails {
       this.rejected,
       this.submitted,
       this.total,
+      this.wo_backlog,
+      this.wo_delay,
+      this.wo_on_time,
       this.item_list});
   int? created;
   int? submitted;
@@ -39,11 +40,17 @@ class CmDashboadDetails {
   int? total;
   int? completed;
   int? pending;
+  int? wo_on_time;
+  int? wo_delay;
+  int? wo_backlog;
   List<Itemlist>? item_list;
 
   factory CmDashboadDetails.fromJson(Map<String, dynamic> parsedJson) =>
       CmDashboadDetails(
         created: parsedJson['created'],
+        wo_on_time: parsedJson['wo_on_time'],
+        wo_delay: parsedJson['wo_delay'],
+        wo_backlog: parsedJson['wo_backlog'],
         submitted: parsedJson['submitted'],
         assigned: parsedJson['assigned'],
         rejected: parsedJson['rejected'],
@@ -58,6 +65,9 @@ class CmDashboadDetails {
 
   Map<String, dynamic> toJson() => {
         "created": created,
+        "wo_on_time": wo_on_time,
+        "wo_delay": wo_delay,
+        "wo_backlog": wo_backlog,
         "total": total,
         "approved": approved,
         "assigned": assigned,
@@ -100,9 +110,10 @@ class Itemlist {
   int? latestJCid;
   int? latestJCPTWStatus;
   int? latestJCApproval;
+
   factory Itemlist.fromJson(Map<String, dynamic> parsedJson) => Itemlist(
         facility_id: parsedJson['facility_id'],
-        facility_name: parsedJson['asset_facility_name'],
+        facility_name: parsedJson['facility_name'],
         wo_number: parsedJson['wo_number'],
         status: parsedJson['status'],
         status_long: parsedJson['status_long'],
