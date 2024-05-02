@@ -146,8 +146,7 @@ class HomeController extends GetxController {
     dashboardList.value = <DashboardModel>[];
     // filteredData.value = <DashboardModel>[];
     final _dashboardList = await homePresenter.getdashboardList(
-      facilityId: facilityId,
-    );
+        facilityId: facilityId, isLoading: true);
     if (_dashboardList != null) {
       dashboardList.value = _dashboardList;
       dashboardBmList.value = _dashboardList[0];
