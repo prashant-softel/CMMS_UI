@@ -6,6 +6,7 @@ import 'package:cmms/app/home/widgets/header_widget_all_dash.dart';
 import 'package:cmms/app/home/widgets/mobile_drawer.dart';
 import 'package:cmms/app/master_dashboard/master_controller.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
+import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -383,30 +384,43 @@ class MastersDashboard extends GetView<MastersController> {
                                     // : Dimens.box0;
                                   }))),
                                   OnHover(builder: (((isHovered) {
-                                    return
-                                        // varUserAccessModel.value.access_list!
-                                        //             .where((e) =>
-                                        //                 e.feature_id == 40 &&
-                                        //                 e.add == 1)
-                                        //             .length >
-                                        //         0
-                                        //     ?
-                                        createContentTile(
+                                    return varUserAccessModel.value.access_list!
+                                                .where((e) =>
+                                                    e.feature_id ==
+                                                        UserAccessConstants
+                                                            .kUserFeatureId &&
+                                                    e.add ==
+                                                        UserAccessConstants
+                                                            .kHaveAddAccess)
+                                                .length >
+                                            0
+                                        ? createContentTile(
                                             title: "Add User",
                                             onTap: () {
                                               controller.clearStoreUserIdData();
 
                                               controller.goToAddUser();
-                                            });
-                                    // : Dimens.box0;
+                                            })
+                                        : Dimens.box0;
                                   }))),
-                                  OnHover(builder: (((isHovered) {
-                                    return createContentTile(
-                                        title: "Import User",
-                                        onTap: () {
-                                          controller.goToImportUser();
-                                        });
-                                  }))),
+                                  varUserAccessModel.value.access_list!
+                                              .where((e) =>
+                                                  e.feature_id ==
+                                                      UserAccessConstants
+                                                          .kUserFeatureId &&
+                                                  e.add ==
+                                                      UserAccessConstants
+                                                          .kHaveAddAccess)
+                                              .length >
+                                          0
+                                      ? OnHover(builder: (((isHovered) {
+                                          return createContentTile(
+                                              title: "Import User",
+                                              onTap: () {
+                                                controller.goToImportUser();
+                                              });
+                                        })))
+                                      : Dimens.box0,
                                   OnHover(builder: (((isHovered) {
                                     return createContentTile(
                                         title: "Responsibility",
@@ -865,12 +879,12 @@ class MastersDashboard extends GetView<MastersController> {
                                       ontap: () {
                                         controller.grievanceType();
                                       }),
-                                      _inventoryList(
+                                  _inventoryList(
                                       tittle: "Water Type",
                                       ontap: () {
                                         controller.waterTypeMaster();
                                       }),
-                                       _inventoryList(
+                                  _inventoryList(
                                       tittle: "Waste Type",
                                       ontap: () {
                                         controller.wasteTypeMaster();
