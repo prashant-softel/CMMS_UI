@@ -78,11 +78,10 @@ class HomeController extends GetxController {
   );
   RxList<DashboardModel?> dashboardList = <DashboardModel?>[].obs;
   Rx<DashboardModel?> dashboardBmList = DashboardModel().obs;
-
-  RxList<DashboardModel?> dashboardPmList = <DashboardModel?>[].obs;
-  RxList<DashboardModel?> dashboardIRList = <DashboardModel?>[].obs;
-  RxList<DashboardModel?> dashboardSmList = <DashboardModel?>[].obs;
-  RxList<DashboardModel?> dashboardMcList = <DashboardModel?>[].obs;
+  Rx<DashboardModel?> dashboardPmList = DashboardModel().obs;
+  Rx<DashboardModel?> dashboardIrList = DashboardModel().obs;
+  Rx<DashboardModel?> dashboardSmList = DashboardModel().obs;
+  Rx<DashboardModel?> dashboardMcList = DashboardModel().obs;
 
   RxList<DashboardModel?> filteredData = <DashboardModel>[].obs;
   List<DashboardModel?>? BufferdashboardList = <DashboardModel?>[].obs;
@@ -152,6 +151,11 @@ class HomeController extends GetxController {
     if (_dashboardList != null) {
       dashboardList.value = _dashboardList;
       dashboardBmList.value = _dashboardList[0];
+      dashboardPmList.value = _dashboardList[1];
+      dashboardMcList.value = _dashboardList[2];
+      dashboardIrList.value = _dashboardList[3];
+      dashboardSmList.value = _dashboardList[4];
+
       // BufferdashboardList = dashboardList.value;
       update(['pmPlan_list']);
     }
@@ -195,7 +199,7 @@ class HomeController extends GetxController {
       print({"selected facality": selectedFacility});
       _facilityId.sink.add(savaData['id'] ?? facilityList[0]?.id ?? 0);
       _facilityName.sink.add(savaData['name'] ?? facilityList[0]?.name ?? '');
-      //   await getdashboardList(facilityList[0]?.id ?? 0);
+      await getdashboardList(facilityList[0]?.id ?? 0);
     }
   }
 
