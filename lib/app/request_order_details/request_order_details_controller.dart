@@ -175,6 +175,7 @@ class GoodsOrdersReqDetailController extends GetxController {
           {'key': "Cost", "value": '${element.cost}'},
           {'key': "Order", "value": '${element.ordered_qty}'},
           {'key': "Comment", "value": '${element.comment}'},
+          {'key': "Action", "value": ''},
         ]);
 
         commentCtrlr.text = getPurchaseDetailsByIDModel.value?.comment ?? "";
