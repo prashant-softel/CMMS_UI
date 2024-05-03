@@ -226,7 +226,7 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                                         Container(
                                           width: 400,
                                           child: Text(
-                                              " ${controller.jobCardDetailsModel.value?.assetCategoryName ?? ""}",
+                                              " ${controller.jobCardDetailsModel.value?.assetcatlist != null ? controller.jobCardDetailsModel.value?.assetcatlist?.map<String>((item) => item.name.toString()).toList(): []}",
                                               maxLines: 3,
                                               style: Styles.blue14),
                                         ),
