@@ -23,7 +23,7 @@ class GoodsOrdersReqDetailController extends GetxController {
   GoodsOrdersReqDetailPresenter goodsOrdersReqDetailPresenter;
   final HomeController homecontroller = Get.find();
   RxList<List<Map<String, String>>> rowItem = <List<Map<String, String>>>[].obs;
-  RxList<GetRODetailsByIDModel?>? getPurchaseDetailsByIDModelList =
+  RxList<GetRODetailsByIDModel?> getPurchaseDetailsByIDModelList =
       <GetRODetailsByIDModel?>[].obs;
   Rx<GetRODetailsByIDModel?> getPurchaseDetailsByIDModel =
       GetRODetailsByIDModel().obs;
@@ -53,9 +53,10 @@ class GoodsOrdersReqDetailController extends GetxController {
         getAssetList(facilityId);
 
         if (roId.value != 0) {
-          Future.delayed(Duration(seconds: 1), () {
-            getRoDetailsByID(requestID: roId.value, facilityId: facilityId);
-            getRoHistory(id: roId.value, facilityId:facilityId);
+          Future.delayed(Duration(seconds: 1), () async {
+            await getRoDetailsByID(
+                requestID: roId.value, facilityId: facilityId);
+            await getRoHistory(id: roId.value, facilityId: facilityId);
           });
         }
       });
@@ -154,13 +155,15 @@ class GoodsOrdersReqDetailController extends GetxController {
     // print('Edit gosods order  Detail:$_getPurchaseDetailsById');
 
     if (_getPurchaseDetailsById != null) {
-      getPurchaseDetailsByIDModel.value = _getPurchaseDetailsById;
-      getPurchaseDetailsByIDModel.value = _getPurchaseDetailsById;
+      getPurchaseDetailsByIDModelList.value = _getPurchaseDetailsById;
+      getPurchaseDetailsByIDModel.value = getPurchaseDetailsByIDModelList
+          .firstWhere((element) => element?.request_order_id != null);
 
       print(
-          'Additioanl Email Employees${_getPurchaseDetailsById.request_order_items?.length ?? 0}');
+          'Additioanl Email Employees${getPurchaseDetailsByIDModel.value?.request_order_items?.length ?? 0}');
       rowItem = <List<Map<String, String>>>[].obs;
-      _getPurchaseDetailsById.request_order_items?.forEach((element) {
+      getPurchaseDetailsByIDModel.value?.request_order_items
+          ?.forEach((element) {
         rowItem.add([
           {
             "key": "Drop_down",

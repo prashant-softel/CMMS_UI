@@ -45,7 +45,7 @@ class GoodsOrdersReqDetailUsecase {
         facilityId,
         isLoading,
       );
-  Future<GetRODetailsByIDModel?> getRoDetailsByID({
+  Future<List<GetRODetailsByIDModel?>?> getRoDetailsByID({
     bool? isLoading,
     required int requestID,
     required int facilityId

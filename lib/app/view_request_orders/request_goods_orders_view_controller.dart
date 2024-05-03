@@ -200,13 +200,13 @@ class PurchaseGoodsorderViewController extends GetxController {
     // print('Edit goods order  Detail:$_getPurchaseDetailsById');
 
     if (_getPurchaseDetailsById != null) {
-      getPurchaseDetailsByIDModel.value = _getPurchaseDetailsById;
-      getPurchaseDetailsByIDModel.value = _getPurchaseDetailsById;
+      getPurchaseDetailsByIDModelList?.value = _getPurchaseDetailsById;
+      getPurchaseDetailsByIDModel.value = getPurchaseDetailsByIDModelList?.firstWhere((element) => element?.request_order_id != null);
 
       print(
-          'Additioanl Email Employees${_getPurchaseDetailsById.request_order_items?.length ?? 0}');
+          'Additioanl Email Employees${getPurchaseDetailsByIDModel.value?.request_order_items?.length ?? 0}');
       rowItem.value = [];
-      _getPurchaseDetailsById.request_order_items?.forEach((element) {
+      getPurchaseDetailsByIDModel.value?.request_order_items?.forEach((element) {
         rowItem.value.add([
           {"key": "Drop_down", "value": '${element.name}'},
           // {'key': "Paid_By", "value": '${element.assetItem_Name}'},
