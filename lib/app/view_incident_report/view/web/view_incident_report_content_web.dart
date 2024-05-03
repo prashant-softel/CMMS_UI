@@ -1811,7 +1811,7 @@ class ViewIncidentReportContentWeb
                                                                         cells: [
                                                                       DataCell(Text(controller
                                                                               .historyList?[index]
-                                                                              ?.createdAt
+                                                                              ?.createdAt?.result
                                                                               .toString() ??
                                                                           '')),
                                                                       DataCell(Text(controller
