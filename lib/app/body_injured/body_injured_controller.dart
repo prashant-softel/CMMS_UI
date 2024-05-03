@@ -201,7 +201,7 @@ class BodyInjuredController extends GetxController {
       String _description = descriptionCtrlr.text.trim();
 
       BodyInjeredTypeModel createCheckpoint = BodyInjeredTypeModel(
-          name: _title, description: _description, sequence_no: 0);
+          id: 0, name: _title, description: _description, sequence_no: 0);
       print("OUT ");
       var facilitylistJsonString = createCheckpoint
           .toJson(); //createCheckPointToJson([createCheckpoint]);
