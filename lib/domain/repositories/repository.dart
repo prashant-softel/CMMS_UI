@@ -2113,7 +2113,7 @@ class Repository {
     }
   }
 
-  Future<GetRODetailsByIDModel?> getRoDetailsByID({
+  Future<List<GetRODetailsByIDModel?>?> getRoDetailsByID({
     bool? isLoading,
     required int facilityId,
     int? requestID,
@@ -2131,12 +2131,12 @@ class Repository {
 
       if (!res.hasError) {
         if (res.errorCode == 200) {
-          final GetRODetailsByIDModel _getPurchaseDetailsByIDModelFromJson =
+          var _getPurchaseDetailsByIDModelFromJson =
               getRODetailsByIDModelFromJson(res.data);
 
-          var responseMap = _getPurchaseDetailsByIDModelFromJson;
-          print({"getRoDetailsByID", responseMap});
-          return responseMap;
+          // var responseMap = _getPurchaseDetailsByIDModelFromJson;
+          print({"getRoDetailsByID", _getPurchaseDetailsByIDModelFromJson});
+          return _getPurchaseDetailsByIDModelFromJson;
         }
       } else {
         Utility.showDialog(res.errorCode.toString(), 'GetPurchaseDetailsByID');

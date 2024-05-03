@@ -123,7 +123,7 @@ class StockManagementAddGoodsOrdersUsecase {
     );
   }
 
-  Future<GetRODetailsByIDModel?> getRoDetailsByID({
+  Future<List<GetRODetailsByIDModel?>?> getRoDetailsByID({
     bool? isLoading,
     required int facilityId,
     required int requestID,

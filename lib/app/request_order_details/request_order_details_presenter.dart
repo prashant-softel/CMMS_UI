@@ -17,7 +17,7 @@ class GoodsOrdersReqDetailPresenter {
         facilityId: facilityId ?? 0,
         isLoading: isLoading ?? false,
       );
-  Future<GetRODetailsByIDModel?> getRoDetailsByID({
+  Future<List<GetRODetailsByIDModel?>?> getRoDetailsByID({
     bool? isLoading,
     required int requestID,
     required int facilityId

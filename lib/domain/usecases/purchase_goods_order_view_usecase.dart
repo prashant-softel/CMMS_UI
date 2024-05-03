@@ -7,7 +7,7 @@ class PurchaseGoodsorderViewUsecase {
   final Repository _repository;
 
   PurchaseGoodsorderViewUsecase(this._repository);
-  Future<GetRODetailsByIDModel?> getRoDetailsByID({
+  Future<List<GetRODetailsByIDModel?>?> getRoDetailsByID({
     bool? isLoading,
     required int facilityId,
     required int requestID,
