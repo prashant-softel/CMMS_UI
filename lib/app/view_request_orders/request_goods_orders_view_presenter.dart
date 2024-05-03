@@ -7,7 +7,7 @@ import '../../domain/usecases/purchase_goods_order_view_usecase.dart';
 class PurchaseGoodsorderViewPresenter {
   PurchaseGoodsorderViewPresenter(this.purchaseGoodsorderViewUsecase);
   PurchaseGoodsorderViewUsecase purchaseGoodsorderViewUsecase;
-  Future<GetRODetailsByIDModel?> getRoDetailsByID({
+  Future<List<GetRODetailsByIDModel?>?> getRoDetailsByID({
     bool? isLoading,
     required int requestID,
     required int facilityId
