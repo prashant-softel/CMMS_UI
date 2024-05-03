@@ -827,9 +827,7 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                                       onChanged: (value) {
                                                         // controller.validatePassword(value);
                                                       },
-                                                      autofillHints: const [
-                                                        AutofillHints.password
-                                                      ],
+                                                      autofillHints: const [],
                                                     )),
                                               ],
                                             ),
