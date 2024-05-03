@@ -515,7 +515,7 @@ class AddRowInReqGoodsOrder extends StatelessWidget {
                                     ],
                                   ),
                                 )
-                              : (mapData['key'] == "Action ")
+                              : (mapData['key'] == "Action")
                                   ? Padding(
                                       padding: EdgeInsets.only(top: 10),
                                       child: Column(
