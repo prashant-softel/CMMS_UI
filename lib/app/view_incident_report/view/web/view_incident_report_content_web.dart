@@ -1003,6 +1003,42 @@ class ViewIncidentReportContentWeb
                                                     ),
 
                                               ///Why Why Analysis
+                                              Row(
+                                                children: [
+                                                  Dimens.boxWidth10,
+                                                  CustomRichText(
+                                                      title:
+                                                          'Why Why Analysis Required: '),
+                                                  Dimens.boxWidth10,
+                                                  SizedBox(
+                                                    width:
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .width /
+                                                            5,
+                                                    child: Obx(
+                                                      () => IgnorePointer(
+                                                        ignoring: true,
+                                                        child: Switch(
+                                                          activeColor:
+                                                              Colors.green,
+                                                          value: controller
+                                                              .whyWhyAnalysisValue
+                                                              .value,
+                                                          onChanged: (value) {
+                                                            controller
+                                                                .whyWhyAnalysisValue
+                                                                .value = value;
+
+                                                            print(
+                                                                'Why Why Analysis required: ${controller.whyWhyAnalysisValue.value}');
+                                                          },
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
                                               controller.whyWhyAnalysisList!
                                                       .isEmpty
                                                   ? Dimens.box0
@@ -1596,60 +1632,32 @@ class ViewIncidentReportContentWeb
                                                                         .width /
                                                                     5,
                                                                 child: Obx(
-                                                                  () => Switch(
-                                                                    activeColor:
-                                                                        Colors
-                                                                            .green,
-                                                                    value: controller
-                                                                        .detailInvestigationTeamValue
-                                                                        .value,
-                                                                    onChanged:
-                                                                        (value) {
-                                                                      controller
+                                                                  () =>
+                                                                      IgnorePointer(
+                                                                    ignoring:
+                                                                        true,
+                                                                    child:
+                                                                        Switch(
+                                                                      activeColor:
+                                                                          Colors
+                                                                              .green,
+                                                                      value: controller
                                                                           .detailInvestigationTeamValue
-                                                                          .value = value;
-                                                                      print(
-                                                                          'detail investigation required: ${controller.detailInvestigationTeamValue.value}');
-                                                                    },
+                                                                          .value,
+                                                                      onChanged:
+                                                                          (value) {
+                                                                        controller
+                                                                            .detailInvestigationTeamValue
+                                                                            .value = value;
+                                                                        print(
+                                                                            'detail investigation required: ${controller.detailInvestigationTeamValue.value}');
+                                                                      },
+                                                                    ),
                                                                   ),
                                                                 ),
                                                               ),
                                                             ],
                                                           ),
-                                                          Row(
-                                                            children: [
-                                                              CustomRichText(
-                                                                  title:
-                                                                      'Why Why Analysis Required: '),
-                                                              Dimens.boxWidth10,
-                                                              SizedBox(
-                                                                width: MediaQuery.of(
-                                                                            context)
-                                                                        .size
-                                                                        .width /
-                                                                    5,
-                                                                child: Obx(
-                                                                  () => Switch(
-                                                                    activeColor:
-                                                                        Colors
-                                                                            .green,
-                                                                    value: controller
-                                                                        .whyWhyAnalysisValue
-                                                                        .value,
-                                                                    onChanged:
-                                                                        (value) {
-                                                                      controller
-                                                                          .whyWhyAnalysisValue
-                                                                          .value = value;
-
-                                                                      print(
-                                                                          'Why Why Analysis required: ${controller.whyWhyAnalysisValue.value}');
-                                                                    },
-                                                                  ),
-                                                                ),
-                                                              ),
-                                                            ],
-                                                          )
                                                         ],
                                                       ),
                                                     )
@@ -1914,7 +1922,8 @@ class ViewIncidentReportContentWeb
                                                                     ColorValues
                                                                         .appGreenColor,
                                                                 text: "Approve",
-                                                                icon: Icons.check,
+                                                                icon:
+                                                                    Icons.check,
                                                                 onPressed: () {
                                                                   Get.dialog(
                                                                       ApproveIncidentReportDialog(
