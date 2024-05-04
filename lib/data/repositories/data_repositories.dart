@@ -4715,5 +4715,26 @@ class DataRepository extends DomainRepository {
         facilityId: facilityId,
         isLoading: isLoading ?? false,
       );
+       Future<ResponseModel> getSourceObservationList({
+    required bool isLoading,
+    required String auth,
+  }) async {
+    return await connectHelper.getSourceObservationList(
+      isLoading: isLoading,
+      auth: auth,
+    );
+  }
+  //create
+   Future<ResponseModel> createSourceOfObslist({
+    auth,
+    bool? isLoading,
+    businesslistJsonString,
+  }) async {
+    var response = await connectHelper.createSourceOfOb(
+        auth: auth,
+        isLoading: isLoading,
+        businesslistJsonString: businesslistJsonString);
+    return response;
+  }
 //end
 }

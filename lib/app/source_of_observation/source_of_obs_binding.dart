@@ -1,5 +1,6 @@
 import 'package:cmms/app/source_of_observation/source_of_obs_controller.dart';
 import 'package:cmms/app/source_of_observation/source_of_obs_presenter.dart';
+import 'package:cmms/domain/usecases/sourceofobervationusecase.dart';
 import 'package:get/get.dart';
 import '../../domain/usecases/module_list_usecase.dart';
 
@@ -15,7 +16,7 @@ class SourceOfObsBinding extends Bindings {
 
         Get.put(
           SourceOfObsPresenter(
-            ModulelistUsecase(
+            SourceListUsecase(
               Get.find(),
             ),
           ),

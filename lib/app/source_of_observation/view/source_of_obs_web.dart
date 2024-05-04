@@ -198,7 +198,7 @@ class SourceOfObsWeb extends GetView<SourceOfObsController> {
                                                   height: 1.0,
                                                   color: Colors.black),
                                               controller: controller
-                                                  .modulelistNumberCtrlr,
+                                                  .titleCtrlr,
                                               focusNode: controller.rnameFocus,
                                               scrollController:
                                                   controller.rnameScroll,
@@ -331,7 +331,7 @@ class SourceOfObsWeb extends GetView<SourceOfObsController> {
                                                   height: 1.0,
                                                   color: Colors.black),
                                               controller:
-                                                  controller.featureCtrlr,
+                                                  controller.descriptionCtrlr,
                                               focusNode: controller.rdescFocus,
                                               scrollController:
                                                   controller.rdescScroll,
@@ -417,28 +417,8 @@ class SourceOfObsWeb extends GetView<SourceOfObsController> {
                                       SizedBox(
                                         height: 15,
                                       ),
-                                      Row(
-                                        children: [
-                                          Expanded(
-                                            child: CustomRichText(
-                                                title: 'Status: '),
-                                          ),
-                                          SizedBox(
-                                            width: 4,
-                                          ),
-                                          Checkbox(
-                                            value: controller
-                                                .isCheckedRequire.value,
-                                            onChanged: (bool? value) {
-                                              controller
-                                                  .requiretoggleCheckbox();
-                                            },
-                                          ),
-                                        ],
-                                      ),
-                                      SizedBox(
-                                        height: 15,
-                                      ),
+                                  
+                              
                                     ]),
                               ),
                               Row(
@@ -451,7 +431,7 @@ class SourceOfObsWeb extends GetView<SourceOfObsController> {
                                           backgroundColor:
                                               ColorValues.appRedColor,
                                           onPressed: () {
-                                            controller.cleardata();
+                                            // controller.cleardata();
                                           },
                                           text: 'Cancel')),
                                   SizedBox(
@@ -466,12 +446,12 @@ class SourceOfObsWeb extends GetView<SourceOfObsController> {
                                                   ColorValues.appDarkBlueColor,
                                               onPressed: () {
                                                 controller
-                                                    .createModuleListNumber()
+                                                    .createSourceOfObservationList()
                                                     .then((value) {
                                                   print("value,$value");
-                                                  if (value == true)
-                                                    controller
-                                                        .issuccessCreatemodulelist();
+                                                //   if (value == true)
+                                                //     controller
+                                                //         // .issuccessCreateChecklist();
                                                 });
                                               },
                                               text:
@@ -480,16 +460,16 @@ class SourceOfObsWeb extends GetView<SourceOfObsController> {
                                               backgroundColor:
                                                   ColorValues.appDarkBlueColor,
                                               onPressed: () {
-                                                controller
-                                                    .updateModulelistNumber(
-                                                        controller
-                                                            .selectedItem?.id)
-                                                    .then((value) {
-                                                  print("value,$value");
-                                                  if (value == true)
-                                                    controller
-                                                        .issuccessCreatemodulelist();
-                                                });
+                                                // controller
+                                                //     .updateModulelistNumber(
+                                                //         controller
+                                                //             .selectedItem?.id)
+                                                //     .then((value) {
+                                                //   print("value,$value");
+                                                //   if (value == true)
+                                                //     controller
+                                                //         .issuccessCreatemodulelist();
+                                                // });
                                               },
                                               text: 'Update')),
                                 ],
@@ -574,7 +554,7 @@ class SourceOfObsWeb extends GetView<SourceOfObsController> {
                                   // )
                                 ],
                               ),
-                              controller.moduleList!.isEmpty == true && controller.isLoading == false
+                              controller.sourceObsList!.isEmpty == true && controller.isLoading == false
                               ? Center(child: Text("No Data"))
                               : controller.isLoading.value == true
                               ? Center(child: Text("Data Loading......"))
@@ -623,17 +603,17 @@ class SourceOfObsWeb extends GetView<SourceOfObsController> {
                                               )),
                                         ],
                                         rows: List.generate(
-                                          controller.moduleList?.length ?? 0,
+                                          controller.sourceObsList?.length ?? 0,
                                           (index) {
-                                            var moduleListDetails =
-                                                controller.moduleList?[index];
+                                            var sourceObsListDetails =
+                                                controller.sourceObsList?[index];
                                             return DataRow(cells: [
                                               DataCell(Text(
-                                                  '${moduleListDetails?.id}')),
+                                                  '${sourceObsListDetails?.id}')),
                                               DataCell(Text(
-                                                  '${moduleListDetails?.name}')),
+                                                  '${sourceObsListDetails?.name}')),
                                               DataCell(Text(
-                                                  '${moduleListDetails?.featureName}')),
+                                                  '${sourceObsListDetails?.description}')),
                                               DataCell(Row(
                                                 children: [
                                                   TableActionButton(
@@ -642,25 +622,25 @@ class SourceOfObsWeb extends GetView<SourceOfObsController> {
                                                     icon: Icons.edit,
                                                     message: 'Edit',
                                                     onPress: () {
-                                                      controller.selectedItem = controller
-                                                          .moduleList!
-                                                          .firstWhere((element) =>
-                                                              "${element?.id}" ==
-                                                              '${moduleListDetails?.id}');
-                                                      controller
-                                                          .modulelistNumberCtrlr
-                                                          .text = controller
-                                                              .selectedItem
-                                                              ?.name ??
-                                                          '';
-                                                      controller.featureCtrlr
-                                                          .text = controller
-                                                              .selectedItem
-                                                              ?.featureName ??
-                                                          '';
-                                                      controller
-                                                          .isContainerVisible
-                                                          .value = true;
+                                                      // controller.selectedItem = controller
+                                                      //     .sourceObsList
+                                                      //     .firstWhere((element) =>
+                                                      //         "${element?.id}" ==
+                                                      //         '${sourceObsListDetails?.id}');
+                                                      // controller
+                                                      //     .modulelistNumberCtrlr
+                                                      //     .text = controller
+                                                      //         .selectedItem
+                                                      //         ?.name ??
+                                                      //     '';
+                                                      // controller.featureCtrlr
+                                                      //     .text = controller
+                                                      //         .selectedItem
+                                                      //         // ?.featureName ??
+                                                      //     '';
+                                                      // controller
+                                                      //     .isContainerVisible
+                                                      //     .value = true;
                                                     },
                                                   ),
                                                   SizedBox(
@@ -672,13 +652,13 @@ class SourceOfObsWeb extends GetView<SourceOfObsController> {
                                                     icon: Icons.delete,
                                                     message: 'Delete',
                                                     onPress: () {
-                                                      print(
-                                                          '${moduleListDetails?.id}');
-                                                      controller.isDeleteDialog(
-                                                          module_id:
-                                                              '${moduleListDetails?.id}',
-                                                          module:
-                                                              '${moduleListDetails?.name}');
+                                                      // print(
+                                                      //     '${moduleListDetails?.id}');
+                                                      // controller.isDeleteDialog(
+                                                      //     module_id:
+                                                      //         '${moduleListDetails?.id}',
+                                                      //     module:
+                                                      //         '${moduleListDetails?.name}');
                                                     },
                                                   ),
                                                 ],

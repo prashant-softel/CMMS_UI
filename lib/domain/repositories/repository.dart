@@ -74,6 +74,7 @@ import 'package:cmms/domain/models/asset_type_list_model.dart';
 import 'package:cmms/domain/models/facility_type_list_model.dart';
 import 'package:cmms/domain/models/block_type_list_model.dart';
 import 'package:cmms/domain/models/set_pm_schedule_model.dart';
+import 'package:cmms/domain/models/source_of_obs_list_model.dart';
 import 'package:cmms/domain/models/stock_management_update_goods_orders_model.dart';
 import 'package:cmms/domain/models/supplier_name_model.dart';
 import 'package:cmms/domain/models/tools_model.dart';
@@ -12554,6 +12555,51 @@ class Repository {
     } catch (error) {
       print(error.toString());
       return null;
+    }
+  }
+   Future<List<SourceOfObservationListModel>> getSourceObservationList({
+    required bool isLoading,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+
+      log(auth);
+      final res = await _dataRepository.getSourceObservationList(
+        isLoading: isLoading,
+        auth: auth,
+      );
+      print('Source Of Obervation: ${res.data}');
+
+      if (!res.hasError) {
+ 
+        var Sourcetype = sourceofobservationFromJson(res.data);
+        return  Sourcetype;
+      }
+      return [];
+    } catch (error) {
+      log(error.toString());
+      return [];
+    }
+  }
+  //create
+  Future<bool> createSourceOfObslist({bool? isLoading, businesslistJsonString}) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.createSourceOfObslist(
+          auth: auth,
+          isLoading: isLoading,
+          businesslistJsonString: businesslistJsonString);
+
+      if (!res.hasError) {
+        return true;
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString(), ' createCheckListNumber');
+        return false;
+      }
+    } catch (error) {
+      print(error.toString());
+      return false;
     }
   }
 
