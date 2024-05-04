@@ -454,6 +454,8 @@ class SourceOfObsWeb extends GetView<SourceOfObsController> {
                                                     if (value == true)
                                                       controller
                                                           .issuccessCreatechecklist();
+                                                          controller
+                                                          .toggleContainer();
                                                   });
                                                 },
                                                 text:
@@ -467,10 +469,12 @@ class SourceOfObsWeb extends GetView<SourceOfObsController> {
                                                           controller
                                                               .selectedItem?.id)
                                                       .then((value) {
+                                                        print("UPDATE");
                                                     print("value,$value");
                                                     if (value == true)
                                                       controller
                                                           .issuccessCreatemodulelist();
+                                                          controller.toggleContainer();
                                                   });
                                                 },
                                                 text: 'Update')),
