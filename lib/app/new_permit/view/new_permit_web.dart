@@ -334,7 +334,7 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                           SizedBox(
                                             // width: Get.width * 0.2,
                                             child: Text(
-                                              '${controller.blockNameTextCtrlr.text}',
+                                              '${controller.selectedBlock}',
                                               maxLines: 3,
                                             ),
                                           ),
