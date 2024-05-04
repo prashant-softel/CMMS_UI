@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:cmms/app/utils/utility.dart';
+
 AddInventoryDetailsModel addInventoryDetailModelFromJson(String str) =>
     AddInventoryDetailsModel.fromJson(json.decode(str));
 
@@ -38,8 +40,11 @@ class AddInventoryDetailsModel {
   int? calibrationFrequency;
   String? calibrationFreqType;
   int? calibrationReminderDays;
-  DateTime? calibrationLastDate;
-  DateTime? calibrationDueDate;
+  String? calibrationLastDate;
+  String? calibrationDueDate;
+  String? start_date;
+  String? expiry_date;
+  String? parent_equipment_no;
   int? specialTool;
   dynamic specialToolEmp;
   int? warrantyId;
@@ -65,6 +70,7 @@ class AddInventoryDetailsModel {
   dynamic updatedBy;
   dynamic deletedAt;
   dynamic deletedBy;
+  String? asset_description;
 
   AddInventoryDetailsModel({
     this.id,
@@ -128,6 +134,10 @@ class AddInventoryDetailsModel {
     this.updatedBy,
     this.deletedAt,
     this.deletedBy,
+    this.asset_description,
+    this.expiry_date,
+    this.start_date,
+    this.parent_equipment_no,
   });
 
   // Factory method to create a AddInventoryDetailsModel instance from JSON
@@ -167,9 +177,18 @@ class AddInventoryDetailsModel {
       calibrationFrequency: json['calibrationFrequency'],
       calibrationFreqType: json['calibrationFreqType'],
       calibrationReminderDays: json['calibrationReminderDays'],
-      calibrationLastDate: DateTime.parse(json['calibrationLastDate']),
-      calibrationDueDate: DateTime.parse(json['calibrationDueDate']),
+      calibrationLastDate:
+          Utility.getFormatedyearMonthDay(json['calibrationLastDate']),
+      // calibrationLastDate: DateTime.parse(json['calibrationLastDate']),
+      calibrationDueDate:
+          Utility.getFormatedyearMonthDay(json['calibrationDueDate']),
+      expiry_date: Utility.getFormatedyearMonthDay(json['expiry_date']),
+      start_date: Utility.getFormatedyearMonthDay(json['start_date']),
+
+      // calibrationDueDate: DateTime.parse(json['calibrationDueDate']),
       specialTool: json['specialTool'],
+      parent_equipment_no: json['parent_equipment_no'],
+
       specialToolEmp: json['specialToolEmp'],
       warrantyId: json['warrantyId'],
       warrantyDescription: json['warranty_description'],
@@ -194,6 +213,7 @@ class AddInventoryDetailsModel {
       updatedBy: json['updated_by'],
       deletedAt: json['deleted_at'],
       deletedBy: json['deleted_by'],
+      asset_description: json['asset_description'],
     );
   }
 }
