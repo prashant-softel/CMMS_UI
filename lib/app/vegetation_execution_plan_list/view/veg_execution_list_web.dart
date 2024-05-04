@@ -538,7 +538,7 @@ class VegExcutionListDataSource extends DataTableSource {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'MC ${VegExcutionListDetails?.id}',
+                        'VE ${VegExcutionListDetails?.id}',
                       ),
                       Dimens.boxHeight10,
                       Align(
