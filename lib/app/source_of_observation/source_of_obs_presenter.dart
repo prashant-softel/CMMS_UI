@@ -1,59 +1,62 @@
 
+import 'package:cmms/domain/models/source_of_obs_list_model.dart';
+import 'package:cmms/domain/usecases/sourceofobervationusecase.dart';
+
 import '../../domain/models/frequency_model.dart';
 import '../../domain/models/inventory_category_model.dart';
 import '../../domain/models/modulelist_model.dart';
 import '../../domain/usecases/module_list_usecase.dart';
 
 class SourceOfObsPresenter {
-  SourceOfObsPresenter(this.moduleUsecase);
-  ModulelistUsecase moduleUsecase;
+  SourceOfObsPresenter(this.sourecObs);
+  
+  SourceListUsecase sourecObs;
 
-  Future<List<InventoryCategoryModel?>?> getInventoryCategoryList({
+
+  Future<List<SourceOfObservationListModel?>> getSourceObservationList({
     bool? isLoading,
   }) async =>
-      await moduleUsecase.getInventoryCategoryList(
+      await sourecObs.getSourceObservationList(
+  
         isLoading: isLoading ?? false,
       );
-  Future<List<ModuleListModel?>?> getModuleList({
-    int? facilityId,
-    int? type,
-    bool? isLoading,
-  }) async =>
-      await moduleUsecase.getModuleList(
-        facilityId: facilityId ?? 0,
-        type: type,
-        isLoading: isLoading ?? false,
-      );
-  Future<List<FrequencyModel?>?> getFrequencyList({
-    bool? isLoading,
-  }) async =>
-      await moduleUsecase.getFrequencyList(
-        isLoading: isLoading ?? false,
-      );
-  Future<bool> createModulelistNumber({
-    modulelistJsonString,
+  //create
+      Future<bool> createSourceOfObslist({
+    facilitylistJsonString,
     required bool isLoading,
   }) async {
-    print("presenter");
-    moduleUsecase.createModulelistNumber(
-      modulelistJsonString: modulelistJsonString,
+    print("presenter Create Facility type function.");
+    sourecObs.createSourceOfObslist(
+      facilitylistJsonString: facilitylistJsonString,
       isLoading: isLoading,
     );
     return true;
   }
+ 
+  // Future<bool> createModulelistNumber({
+  //   modulelistJsonString,
+  //   required bool isLoading,
+  // }) async {
+  //   print("presenter");
+  //   sourecObs.createModulelistNumber(
+  //     modulelistJsonString: modulelistJsonString,
+  //     isLoading: isLoading,
+  //   );
+  //   return true;
+  // }
 
-  deleteModulelist(String? module_id, {required bool isLoading}) async =>
-      await moduleUsecase.deleteModulelist(
-        module_id: module_id ?? 0,
-        isLoading: isLoading,
-      );
-  Future<bool> updateModulelistNumber(
-      {modulelistJsonString, required bool isLoading, moduleId}) async {
-    print("presenter");
-    moduleUsecase.updateModulelistNumber(
-      modulelistJsonString: modulelistJsonString,
-      isLoading: isLoading,
-    );
-    return true;
-  }
+  // deleteModulelist(String? module_id, {required bool isLoading}) async =>
+  //     await sourecObs.deleteModulelist(
+  //       module_id: module_id ?? 0,
+  //       isLoading: isLoading,
+  //     );
+  // Future<bool> updateModulelistNumber(
+  //     {modulelistJsonString, required bool isLoading, moduleId}) async {
+  //   print("presenter");
+  //   sourecObs.updateModulelistNumber(
+  //     modulelistJsonString: modulelistJsonString,
+  //     isLoading: isLoading,
+  //   );
+  //   return true;
+  // }
 }

@@ -8121,4 +8121,41 @@ class ConnectHelper {
     print('ViewResponseModel${responseModel.data}');
     return responseModel;
   }
+
+
+  Future<ResponseModel> getSourceObservationList(
+      {required bool isLoading, required String auth}) async {
+    ResponseModel responseModel = await apiWrapper.makeRequest(
+      'MISMaster/GetSourceOfObservationList',
+      Request.get,
+      null,
+      isLoading,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
+  //create
+   Future<ResponseModel> createSourceOfOb({
+    required String auth,
+    bool? isLoading,
+    required businesslistJsonString,
+  }) async {
+    var responseModel =
+        // responseModel =
+        await apiWrapper.makeRequest(
+      'MISMaster/AddSourceOfObservation', //AddBusiness
+      Request.post,
+      businesslistJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
 }
