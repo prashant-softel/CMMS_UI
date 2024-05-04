@@ -377,8 +377,6 @@ class AddInventoryController extends GetxController {
         warrantyStatus: 1,
         warrantyType: selectedWarrentyNameId,
         warrranty_term_type: selectedwarrantyUsageTermNameId,
-        // meterLimit: 1,
-        // meterUnit: 1,
         certificate_number: int.tryParse(_certificateNoCtrlr),
         expiryDate: "2030-12-31",
         // startDate///  is missing
@@ -503,22 +501,23 @@ class AddInventoryController extends GetxController {
     String _costCtrlr = costCtrlr.text.trim();
     String _calibrationRemainderInTc = calibrationRemaingCtrlr.text.trim();
     String _lastCalibrationDateTc = lastCalibrationDateTc.text.trim();
+
     String _expireDateTc = expireDateTc.text.trim();
     String _startDateTc = startDateTc.text.trim();
 
     String _warrentyDescriptionCtrlr = warrentyDescriptionCtrlr.text.trim();
 
-    LstWarrantyDetail lstWarrantyDetail = LstWarrantyDetail(
-        warrantyProviderId: selectedmanufacturerNameId,
-        warrantyStatus: 1,
-        warrantyType: selectedWarrentyNameId,
-        warrranty_term_type: selectedwarrantyUsageTermNameId,
-        // meterLimit: 1,
-        // meterUnit: 1,
-        certificate_number: int.tryParse(_certificateNoCtrlr),
-        expiryDate: _expireDateTc,
-        // startDate///  is missing
-        warrantyDiscription: _warrentyDescriptionCtrlr);
+    // LstWarrantyDetail lstWarrantyDetail = LstWarrantyDetail(
+    //     warrantyProviderId: selectedmanufacturerNameId,
+    //     warrantyStatus: 1,
+    //     warrantyType: selectedWarrentyNameId,
+    //     warrranty_term_type: selectedwarrantyUsageTermNameId,
+    //     // meterLimit: 1,
+    //     // meterUnit: 1,
+    //     certificate_number: int.tryParse(_certificateNoCtrlr),
+    //     expiryDate: _expireDateTc,
+    //     // startDate///  is missing
+    //     warrantyDiscription: _warrentyDescriptionCtrlr);
 
     AddInventoryRequestModel addInventoryRequestModel =
         AddInventoryRequestModel(
@@ -545,10 +544,11 @@ class AddInventoryController extends GetxController {
             calibrationLastDate: _lastCalibrationDateTc,
             start_date: _startDateTc,
             expiry_date: _expireDateTc,
+            certificate_number: _certificateNoCtrlr,
             warranty_provider_id: selectedmanufacturerNameId,
             warranty_type: selectedWarrentyNameId,
-
-            //  calibrationFirstDueDate: _lastCalibrationDateTc,
+            warranty_term_type: selectedwarrantyUsageTermNameId,
+            parent_equipment_no: _parentEquipmentNoCtrlr,
             calibrationFrequencyType: 2,
             acCapacity: 2000,
             dcCapacity: 5000,
