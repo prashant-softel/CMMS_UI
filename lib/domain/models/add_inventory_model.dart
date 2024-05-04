@@ -33,6 +33,9 @@ class AddInventoryRequestModel {
   String? currency;
   String? assetdescription;
   String? warranty_description;
+  String? parent_equipment_no;
+  int? warranty_term_type;
+  String? certificate_number;
 
   dynamic attachments;
   List<LstWarrantyDetail>? lstWarrantyDetail;
@@ -73,7 +76,10 @@ class AddInventoryRequestModel {
       this.currency,
       this.attachments,
       this.assetdescription,
-      this.lstWarrantyDetail});
+      this.lstWarrantyDetail,
+      this.parent_equipment_no,
+      this.warranty_term_type,
+      this.certificate_number});
 
   AddInventoryRequestModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -112,6 +118,10 @@ class AddInventoryRequestModel {
     moduleQuantity = json['moduleQuantity'];
     cost = json['cost'];
     currency = json['currency'];
+    parent_equipment_no = json['parent_equipment_no'];
+    warranty_term_type = json['warranty_term_type'];
+    certificate_number = json['certificate_number'];
+
     attachments = json['attachments'];
     if (json['lstWarrantyDetail'] != null) {
       lstWarrantyDetail = <LstWarrantyDetail>[];
@@ -159,6 +169,10 @@ class AddInventoryRequestModel {
     data['stockCount'] = this.stockCount;
     data['moduleQuantity'] = this.moduleQuantity;
     data['cost'] = this.cost;
+    data['parent_equipment_no'] = this.parent_equipment_no;
+    data['warranty_term_type'] = this.warranty_term_type;
+    data['certificate_number'] = this.certificate_number;
+
     data['currency'] = this.currency;
     data['attachments'] = this.attachments;
     if (this.lstWarrantyDetail != null) {
