@@ -299,11 +299,16 @@ class AddInventoryController extends GetxController {
 
       assesDiscriptionCtrlr.text =
           editAddInventoryDetailsModel.value?.description ?? "";
+
       warrentyDescriptionCtrlr.text =
           editAddInventoryDetailsModel.value?.warrantyDescription ?? "";
       lastCalibrationDateTc.text =
           editAddInventoryDetailsModel.value?.calibrationLastDate.toString() ??
               "";
+      startDateTc.text =
+          editAddInventoryDetailsModel.value?.start_date.toString() ?? "";
+      expireDateTc.text =
+          editAddInventoryDetailsModel.value?.expiry_date.toString() ?? "";
       calibrationRemainderInTc.text =
           editAddInventoryDetailsModel.value?.calibrationDueDate.toString() ??
               "";
@@ -324,8 +329,20 @@ class AddInventoryController extends GetxController {
           editAddInventoryDetailsModel.value?.serialNumber ?? "";
       selectedUnitCurrency.value =
           editAddInventoryDetailsModel.value?.currency ?? "";
+      // parentEquipmentNoCtrlr.text =
+      //     editAddInventoryDetailsModel.value?.parentName ?? "";
+      assesDiscriptionCtrlr.text =
+          editAddInventoryDetailsModel.value?.asset_description ?? "";
+
+      certificateNoCtrlr.text =
+          editAddInventoryDetailsModel.value?.certificateNumber ?? "";
+
       parentEquipmentNoCtrlr.text =
-          editAddInventoryDetailsModel.value?.parentName ?? "";
+          editAddInventoryDetailsModel.value?.parent_equipment_no.toString() ??
+              "";
+
+      modelNoCtrlr.text = editAddInventoryDetailsModel.value?.model ?? "";
+
       costCtrlr.text =
           editAddInventoryDetailsModel.value?.cost.toString() ?? "";
       calibrationRemainderInTc.text = editAddInventoryDetailsModel
@@ -333,8 +350,10 @@ class AddInventoryController extends GetxController {
               .toString() ??
           "";
       selectedBlockListId = editAddInventoryDetailsModel.value?.blockId ?? 0;
+
       selectedfrequency.value =
-          "${int.tryParse("${editAddInventoryDetailsModel.value?.calibrationFrequency ?? ""}")}";
+          editAddInventoryDetailsModel.value?.calibrationFreqType ?? "";
+
       calibrationRemaingCtrlr.text =
           "${int.tryParse("${editAddInventoryDetailsModel.value?.calibrationReminderDays ?? 0}")}";
       selectedWarrantyName.value =
@@ -366,29 +385,33 @@ class AddInventoryController extends GetxController {
     String _modelNoCtrlr = modelNoCtrlr.text.trim();
     String _parentEquipmentNoCtrlr = parentEquipmentNoCtrlr.text.trim();
     String _costCtrlr = costCtrlr.text.trim();
-    String _calibrationRemainderInTc = calibrationRemainderInTc.text.trim();
+    String _calibrationRemainderInTc = calibrationRemaingCtrlr.text.trim();
     String _lastCalibrationDateTc = lastCalibrationDateTc.text.trim();
+
     String _expireDateTc = expireDateTc.text.trim();
+    String _startDateTc = startDateTc.text.trim();
+
     String _warrentyDescriptionCtrlr = warrentyDescriptionCtrlr.text.trim();
 
-    LstWarrantyDetail lstWarrantyDetail = LstWarrantyDetail(
-        // warranty_description: _warrentyDescriptionCtrlr,
-        warrantyProviderId: selectedmanufacturerNameId,
-        warrantyStatus: 1,
-        warrantyType: selectedWarrentyNameId,
-        warrranty_term_type: selectedwarrantyUsageTermNameId,
-        certificate_number: int.tryParse(_certificateNoCtrlr),
-        expiryDate: "2030-12-31",
-        // startDate///  is missing
-        warrantyDiscription: _warrentyDescriptionCtrlr);
+    // LstWarrantyDetail lstWarrantyDetail = LstWarrantyDetail(
+    //     // warranty_description: _warrentyDescriptionCtrlr,
+    //     warrantyProviderId: selectedmanufacturerNameId,
+    //     warrantyStatus: 1,
+    //     warrantyType: selectedWarrentyNameId,
+    //     warrranty_term_type: selectedwarrantyUsageTermNameId,
+    //     certificate_number: int.tryParse(_certificateNoCtrlr),
+    //     expiryDate: "2030-12-31",
+    //     // startDate///  is missing
+    //     warrantyDiscription: _warrentyDescriptionCtrlr);
 
     AddInventoryRequestModel addInventoryRequestModel =
         AddInventoryRequestModel(
             id: inventoryId.value,
             name: _assetsNameCtrlr,
+            moduleQuantity: int.tryParse(_moduleQuantityCtrlr) ?? 0,
             description: _discriptionCtrlr,
-            assetdescription: _assesDiscriptionCtrlr,
             warranty_description: _warrentyDescriptionCtrlr,
+            assetdescription: _assesDiscriptionCtrlr,
             typeId: selectedTypeNameId,
             statusId: selectedStatusNameId,
             facilityId: facilityId,
@@ -396,17 +419,21 @@ class AddInventoryController extends GetxController {
             manufacturerId: selectedmanufacturerNameId,
             blockId: selectedBlockListId,
             categoryId: selectedEquipmentCategoryNameId.value,
-            currency: selectedUnitCurrency.value,
+            currency: selectedUnitCurrencyId.toString(),
             cost: int.tryParse(_costCtrlr),
             model: _modelNoCtrlr,
             serialNumber: _serialNoCtrlr,
             parentId: selectedEquipmentnameId,
             calibrationFrequency: selectedfrequencyId,
             calibrationReminderDays: int.tryParse(_calibrationRemainderInTc),
-            calibrationLastDate: _lastCalibrationDateTc
-            // calibrationFirstDueDate: "2023-01-10",
-            ,
+            calibrationLastDate: _lastCalibrationDateTc,
+            start_date: _startDateTc,
+            expiry_date: _expireDateTc,
+            certificate_number: _certificateNoCtrlr,
+            warranty_provider_id: selectedmanufacturerNameId,
             warranty_type: selectedWarrentyNameId,
+            warranty_term_type: selectedwarrantyUsageTermNameId,
+            parent_equipment_no: _parentEquipmentNoCtrlr,
             calibrationFrequencyType: 2,
             acCapacity: 2000,
             dcCapacity: 5000,
@@ -415,7 +442,6 @@ class AddInventoryController extends GetxController {
             operatorId: 3,
             ownerId: 2,
             stockCount: 50,
-            moduleQuantity: int.tryParse(_moduleQuantityCtrlr),
             attachments: null);
     var addInventoryJsonString = addInventoryRequestModel
         .toJson(); //createCheckListToJson([createChecklist]);
