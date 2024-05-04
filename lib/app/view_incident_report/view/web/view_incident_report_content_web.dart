@@ -1811,7 +1811,7 @@ class ViewIncidentReportContentWeb
                                                                         cells: [
                                                                       DataCell(Text(controller
                                                                               .historyList?[index]
-                                                                              ?.createdAt
+                                                                              ?.createdAt?.result
                                                                               .toString() ??
                                                                           '')),
                                                                       DataCell(Text(controller
@@ -1914,7 +1914,8 @@ class ViewIncidentReportContentWeb
                                                                     ColorValues
                                                                         .appGreenColor,
                                                                 text: "Approve",
-                                                                icon: Icons.check,
+                                                                icon:
+                                                                    Icons.check,
                                                                 onPressed: () {
                                                                   Get.dialog(
                                                                       ApproveIncidentReportDialog(

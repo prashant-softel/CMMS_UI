@@ -447,7 +447,7 @@ class VegetationPlanListDataSource extends DataTableSource {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'VC ${VegetationListDetails?.planId}',
+                          'VE ${VegetationListDetails?.planId}',
                         ),
                         Dimens.boxHeight10,
                         Align(

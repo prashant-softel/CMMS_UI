@@ -15,7 +15,6 @@ class JobCardDetailsModel {
   JobCardDetailsModel(
       {this.plantName,
       this.blockName,
-      this.assetCategoryName,
       this.jcApprovedByName,
       this.updatedByName,
       this.id,
@@ -33,6 +32,7 @@ class JobCardDetailsModel {
       this.lstCmjcLotoDetailList,
       this.lstCmjcEmpList,
       this.fileList,
+      this.assetcatlist,
       this.toolList,
       this.status,
       this.status_long,
@@ -44,7 +44,6 @@ class JobCardDetailsModel {
 
   String? plantName;
   String? blockName;
-  String? assetCategoryName;
   String? jcApprovedByName;
   String? updatedByName;
   int? id;
@@ -66,6 +65,7 @@ class JobCardDetailsModel {
   List<FilesModel?>? fileList;
   List<FilesModel?>? fileListJc;
   List<ToolList>? toolList;
+  List<AssetCategories>? assetcatlist;
   int? status;
   String? status_short;
   String? status_long;
@@ -74,7 +74,6 @@ class JobCardDetailsModel {
       JobCardDetailsModel(
         plantName: json["plant_name"],
         blockName: json["block_name"],
-        assetCategoryName: json["asset_category_name"],
         jcApprovedByName: json["jC_Approved_By_Name"],
         updatedByName: json["updatedByName"],
         id: json["id"],
@@ -111,12 +110,13 @@ class JobCardDetailsModel {
             json["file_listJc"].map((x) => FilesModel.fromJson(x))),
         toolList: List<ToolList>.from(
             json["tool_List"].map((x) => ToolList.fromJson(x))),
+        assetcatlist: List<AssetCategories>.from(
+            json["asset_category_name"].map((x) => AssetCategories.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
         "plant_name": plantName,
         "block_name": blockName,
-        "asset_category_name": assetCategoryName,
         "jC_Approved_By_Name": jcApprovedByName,
         "updatedByName": updatedByName,
         "id": id,
@@ -147,6 +147,8 @@ class JobCardDetailsModel {
         "file_list": List<int>.from(fileList?.map((x) => x) ?? []),
         "tool_List":
             List<ToolList>.from(toolList?.map((x) => x.toJson()) ?? []),
+        "asset_category_name": List<AssetCategories>.from(
+            assetcatlist?.map((x) => x.toJson()) ?? []),
       };
 }
 
@@ -352,5 +354,17 @@ class SelectedEmployee {
   Map<String, dynamic> toJson() => {
         "id": id,
         "responsibility": responsibility,
+      };
+}
+
+class AssetCategories {
+  String? name;
+  AssetCategories({this.name});
+  factory AssetCategories.fromJson(Map<String, dynamic> json) =>
+      AssetCategories(
+        name: json["asset_category_name"],
+      );
+  Map<String, dynamic> toJson() => {
+        "asset_category_name": name,
       };
 }
