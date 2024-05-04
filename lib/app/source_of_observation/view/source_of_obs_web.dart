@@ -422,7 +422,8 @@ class SourceOfObsWeb extends GetView<SourceOfObsController> {
                                     ]),
                               ),
                               Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   Container(
                                       height: 40,
@@ -431,47 +432,49 @@ class SourceOfObsWeb extends GetView<SourceOfObsController> {
                                           backgroundColor:
                                               ColorValues.appRedColor,
                                           onPressed: () {
-                                            // controller.cleardata();
+                                            controller.cleardata();
                                           },
                                           text: 'Cancel')),
                                   SizedBox(
                                     width: 10,
                                   ),
-                                  Container(
-                                      height: 40,
-                                      width: (Get.width * .2) - 30,
-                                      child: controller.selectedItem == null
-                                          ? CustomElevatedButton(
-                                              backgroundColor:
-                                                  ColorValues.appDarkBlueColor,
-                                              onPressed: () {
-                                                controller
-                                                    .createSourceOfObservationList()
-                                                    .then((value) {
-                                                  print("value,$value");
-                                                //   if (value == true)
-                                                //     controller
-                                                //         // .issuccessCreateChecklist();
-                                                });
-                                              },
-                                              text:
-                                                  'Create Source Observation ')
-                                          : CustomElevatedButton(
-                                              backgroundColor:
-                                                  ColorValues.appDarkBlueColor,
-                                              onPressed: () {
-                                                // controller
-                                                //     .updateModulelistNumber(
-                                                //         controller
-                                                //             .selectedItem?.id)
-                                                //     .then((value) {
-                                                //   print("value,$value");
-                                                //   if (value == true)
-                                                //     controller
-                                                //         .issuccessCreatemodulelist();
-                                                // });
-                                              },
-                                              text: 'Update')),
+                                 
+                                    Container(
+                                        height: 40,
+                                        width: (Get.width * .2) - 30,
+                                        child: controller.selectedItem == null
+                                            ? CustomElevatedButton(
+                                                backgroundColor:
+                                                    ColorValues.appDarkBlueColor,
+                                                onPressed: () {
+                                                  controller
+                                                      .createSourceOfObservationList()
+                                                      .then((value) {
+                                                    print("value,$value");
+                                                    if (value == true)
+                                                      controller
+                                                          .issuccessCreatechecklist();
+                                                  });
+                                                },
+                                                text:
+                                                    'Create Source Observation ')
+                                            : CustomElevatedButton(
+                                                backgroundColor:
+                                                    ColorValues.appDarkBlueColor,
+                                                onPressed: () {
+                                                  controller
+                                                      .updatesourceOfObs(
+                                                          controller
+                                                              .selectedItem?.id)
+                                                      .then((value) {
+                                                    print("value,$value");
+                                                    if (value == true)
+                                                      controller
+                                                          .issuccessCreatemodulelist();
+                                                  });
+                                                },
+                                                text: 'Update')),
+                                  
                                 ],
                               ),
                             ],
@@ -622,25 +625,25 @@ class SourceOfObsWeb extends GetView<SourceOfObsController> {
                                                     icon: Icons.edit,
                                                     message: 'Edit',
                                                     onPress: () {
-                                                      // controller.selectedItem = controller
-                                                      //     .sourceObsList
-                                                      //     .firstWhere((element) =>
-                                                      //         "${element?.id}" ==
-                                                      //         '${sourceObsListDetails?.id}');
-                                                      // controller
-                                                      //     .modulelistNumberCtrlr
-                                                      //     .text = controller
-                                                      //         .selectedItem
-                                                      //         ?.name ??
-                                                      //     '';
-                                                      // controller.featureCtrlr
-                                                      //     .text = controller
-                                                      //         .selectedItem
-                                                      //         // ?.featureName ??
-                                                      //     '';
-                                                      // controller
-                                                      //     .isContainerVisible
-                                                      //     .value = true;
+                                                      controller.selectedItem = controller
+                                                          .sourceObsList
+                                                          .firstWhere((element) =>
+                                                              "${element?.id}" ==
+                                                              '${sourceObsListDetails?.id}');
+                                                      controller
+                                                          .titleCtrlr
+                                                          .text = controller
+                                                              .selectedItem
+                                                              ?.name ??
+                                                          '';
+                                                      controller.descriptionCtrlr
+                                                          .text = controller
+                                                              .selectedItem
+                                                              ?.description ??
+                                                          '';
+                                                      controller
+                                                          .isContainerVisible
+                                                          .value = true;
                                                     },
                                                   ),
                                                   SizedBox(
@@ -652,13 +655,12 @@ class SourceOfObsWeb extends GetView<SourceOfObsController> {
                                                     icon: Icons.delete,
                                                     message: 'Delete',
                                                     onPress: () {
-                                                      // print(
-                                                      //     '${moduleListDetails?.id}');
-                                                      // controller.isDeleteDialog(
-                                                      //     module_id:
-                                                      //         '${moduleListDetails?.id}',
-                                                      //     module:
-                                                      //         '${moduleListDetails?.name}');
+                                                    
+                                                      controller.isDeleteDialog(
+                                                          business_id:
+                                                              '${sourceObsListDetails?.id}',
+                                                          business:
+                                                              '${sourceObsListDetails?.name}');
                                                     },
                                                   ),
                                                 ],

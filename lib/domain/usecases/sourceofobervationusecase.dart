@@ -20,6 +20,24 @@ class SourceListUsecase {
   }) async =>
       await repository.createSourceOfObslist(
           isLoading: isLoading, businesslistJsonString: facilitylistJsonString);
+//update
+  Future<bool> updatesourceOfObs({
+    modulelistJsonString,
+    bool? isLoading,
+  }) async =>
+      await repository.updatesourceOfObs(
+        isLoading: isLoading,
+        modulelistJsonString: modulelistJsonString,
+      );
+
+
+//detele
+  deleteSourceOfObs(
+      {required Object business_id, required bool isLoading}) async =>
+      await repository.deleteSourceOfObs(
+        business_id,
+        isLoading,
+      );
 
 
   // deleteSourceOfObservation(

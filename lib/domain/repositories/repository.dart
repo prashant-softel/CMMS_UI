@@ -12602,6 +12602,50 @@ class Repository {
       return false;
     }
   }
+  //update
+   Future<bool> updatesourceOfObs({
+    bool? isLoading,
+    modulelistJsonString,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.updatesourceOfObs(
+        auth: auth,
+        isLoading: isLoading,
+        modulelistJsonString: modulelistJsonString,
+      );
+      print(res.data);
+      if (!res.hasError) {
+        return true;
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString(), 'updateBusinesslist');
+        return false;
+      }
+    } catch (error) {
+      print(error.toString());
+      return false;
+    }
+  }
+  //delete
+  Future<void> deleteSourceOfObs(Object business_id, bool isLoading) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.deleteSourceOfObs(
+        auth: auth,
+        business_id: business_id,
+        isLoading: isLoading,
+      );
+
+      if (!res.hasError) {
+        //get delete response back from API
+      } else {
+        Utility.showDialog(res.errorCode.toString(), 'delete Source of observation');
+      }
+    } catch (error) {
+      print(error.toString());
+    }
+  }
 
   //end
 }

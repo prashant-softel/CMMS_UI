@@ -27,6 +27,8 @@ class SourceOfObsController extends GetxController {
   RxBool isContainerVisible = false.obs;
    Rx<bool> isDescriptionInvalid = false.obs;
   Rx<bool> isFormInvalid = false.obs;
+  SourceOfObservationListModel? selectedItemupdate;
+
   Rx<bool> isSelectedequipment = true.obs;
   RxList<int> selectedEquipmentCategoryIdList = <int>[].obs;
   RxBool isCheckedRequire = false.obs;
@@ -144,6 +146,7 @@ class SourceOfObsController extends GetxController {
         }
       }
     }
+    update(['Source_Of_Obs_list']);
   }
 
 
@@ -196,11 +199,89 @@ class SourceOfObsController extends GetxController {
     }
     return true;
   }
-  Future<void> issuccessCreatechecklist() async {
-    isSuccess.toggle();
-    await {cleardata()};
+
+  //Update
+
+  Future<bool> updatesourceOfObs(checklistId) async {
+    String _name = titleCtrlr.text.trim();
+    String _description = descriptionCtrlr.text.trim();
+
+    SourceOfObservationListModel createChecklist = SourceOfObservationListModel(
+      id: checklistId,
+      name: _name,
+      description: _description,
+    );
+    var businessTypeJsonString = createChecklist.toJson();
+
+    print({"businessTypeJsonString", businessTypeJsonString});
+    await moduleListPresenter.updatesourceOfObs(
+      modulelistJsonString: businessTypeJsonString,
+      isLoading: true,
+    );
+    return true;
+    
+  }
+  // delete
+  
+  void isDeleteDialog({String? business_id, String? business}) {
+    Get.dialog(
+      AlertDialog(
+        content: Column(mainAxisSize: MainAxisSize.min, children: [
+          Icon(Icons.delete, size: 35, color: ColorValues.redColor),
+          SizedBox(
+            height: 10,
+          ),
+          RichText(
+            text: TextSpan(
+                text: 'Are you sure you want to delete the Source_Of_Observatio ',
+                style: Styles.blackBold16,
+                children: [
+                  TextSpan(
+                    text: "[$business]",
+                    style: TextStyle(
+                      color: ColorValues.orangeColor,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ]),
+          ),
+        ]),
+        actions: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              TextButton(
+                onPressed: () {
+                  Get.back();
+                },
+                child: Text('NO'),
+              ),
+              TextButton(
+                onPressed: () {
+                  deleteSourceOfObs(business_id).then((value) {
+                    Get.back();
+                    getSourceObservationList();
+                  });
+                },
+                child: Text('YES'),
+              ),
+            ],
+          )
+        ],
+      ),
+    );
+    
+  }
+
+  Future<void> deleteSourceOfObs(String? business_id) async {
+      await moduleListPresenter.deleteSourceOfObs(
+        business_id,
+        isLoading: true,
+      );
+    
   }
   
+
   
 
 
@@ -240,12 +321,16 @@ class SourceOfObsController extends GetxController {
   //   return true;
   // }
 
-  // Future<void> issuccessCreatemodulelist() async {
-  //   isSuccess.toggle();
+  Future<void> issuccessCreatemodulelist() async {
+    isSuccess.toggle();
 
-  //   // isToggleOn.value = false;
-  //   await {cleardata()};
-  // }
+    // isToggleOn.value = false;
+    await {cleardata()};
+  }
+    Future<void> issuccessCreatechecklist() async {
+    isSuccess.toggle();
+    await {cleardata()};
+  }
 
   cleardata() {
   
