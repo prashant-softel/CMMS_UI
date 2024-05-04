@@ -114,12 +114,15 @@ class CreateMrsContentWeb extends GetView<CreateMrsController> {
                                 ],
                               ),
                               width: (MediaQuery.of(context).size.width * .2),
-                              child: LoginCustomTextfield(
-                                // inputFormatters: [
-                                //   FilteringTextInputFormatter.deny(
-                                //       RegExp(r'\s')),
-                                // ],
-                                textController: controller.activityCtrlr,
+                              child: IgnorePointer(
+                                ignoring: true,
+                                child: LoginCustomTextfield(
+                                  // inputFormatters: [
+                                  //   FilteringTextInputFormatter.deny(
+                                  //       RegExp(r'\s')),
+                                  // ],
+                                  textController: controller.activityCtrlr,
+                                ),
                               )),
                           Spacer(),
                           Text('Task ID: '),
@@ -150,9 +153,12 @@ class CreateMrsContentWeb extends GetView<CreateMrsController> {
                                 ],
                               ),
                               width: (MediaQuery.of(context).size.width * .2),
-                              child: LoginCustomTextfield(
-                                // enabled: false,
-                                textController: controller.whereUsedCtrlr,
+                              child: IgnorePointer(
+                                ignoring: true,
+                                child: LoginCustomTextfield(
+                                  // enabled: false,
+                                  textController: controller.whereUsedCtrlr,
+                                ),
                               )),
                         ],
                       ),
