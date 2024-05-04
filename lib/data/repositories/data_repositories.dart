@@ -4736,5 +4736,29 @@ class DataRepository extends DomainRepository {
         businesslistJsonString: businesslistJsonString);
     return response;
   }
+  //update
+  Future<ResponseModel> updatesourceOfObs({
+    auth,
+    bool? isLoading,
+    modulelistJsonString,
+  }) async {
+    var response = await connectHelper.updatesourceOfObs(
+      auth: auth,
+      isLoading: isLoading,
+      modulelistJsonString: modulelistJsonString,
+    );
+    return response;
+  }
+
+  //delete 
+  Future<ResponseModel> deleteSourceOfObs({
+    auth,
+    bool? isLoading,
+    business_id,
+  }) async {
+    var response = await connectHelper.deleteSourceOfObs(
+        auth: auth, isLoading: isLoading, business_id: business_id);
+    return response;
+  }
 //end
 }
