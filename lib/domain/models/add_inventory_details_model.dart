@@ -71,6 +71,8 @@ class AddInventoryDetailsModel {
   dynamic deletedAt;
   dynamic deletedBy;
   String? asset_description;
+  String? warrantyType;
+  String? warranty_term_type;
 
   AddInventoryDetailsModel({
     this.id,
@@ -138,6 +140,8 @@ class AddInventoryDetailsModel {
     this.expiry_date,
     this.start_date,
     this.parent_equipment_no,
+    this.warrantyType,
+    this.warranty_term_type,
   });
 
   // Factory method to create a AddInventoryDetailsModel instance from JSON
@@ -214,6 +218,8 @@ class AddInventoryDetailsModel {
       deletedAt: json['deleted_at'],
       deletedBy: json['deleted_by'],
       asset_description: json['asset_description'],
+      warrantyType: json['warrantyType'],
+      warranty_term_type: json['warranty_term_type'],
     );
   }
 }
