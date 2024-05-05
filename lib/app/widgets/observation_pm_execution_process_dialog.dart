@@ -444,7 +444,7 @@ class ObservationPmExecutionViewDialog extends GetView {
                                               MainAxisAlignment.spaceBetween,
                                           children: [
                                             Text(
-                                              "Material Used ",
+                                              "Material Used For ",
                                               style: Styles.blue700,
                                             ),
                                             GestureDetector(
