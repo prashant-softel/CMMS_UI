@@ -1,4 +1,6 @@
 import 'package:cmms/domain/models/audit_plan_detail_model.dart';
+import 'package:cmms/domain/models/history_model.dart';
+import 'package:cmms/domain/models/view_audit_task_model.dart';
 import 'package:cmms/domain/repositories/repository.dart';
 
 import '../repositories/local_storage_keys.dart';
@@ -23,14 +25,31 @@ class ViewAuditTaskUsecase {
         pmPlanRejectJsonString,
         isLoading,
       );
-  Future<AuditPlanDetailModel?> getAuditPlanDetails({
-    int? auditPlanId,
-    required int facilityId,
+  Future<List<HistoryModel>?> getHistory({
+    moduleType,
+    id,
     bool? isLoading,
   }) async =>
-      await repository.getAuditPlanDetails(
-        auditPlanId,
-        facilityId,
+      await repository.getHistory(
+        moduleType,
+        id,
+        0,
+        isLoading,
+      );
+  Future<Map<String, dynamic>?> startAuditTask({
+    int? auditTaskId,
+    bool? isLoading,
+  }) async =>
+      await repository.startAuditTask(
+        auditTaskId,
+        isLoading,
+      );
+  Future<AuditTaskViewModel?> getAuditTaskDetails({
+    int? auditTaskId,
+    bool? isLoading,
+  }) async =>
+      await repository.getAuditTaskDetails(
+        auditTaskId,
         isLoading,
       );
   void saveValue({String? auditTaskId}) async =>

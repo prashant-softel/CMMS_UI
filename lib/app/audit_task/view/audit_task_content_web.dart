@@ -36,7 +36,7 @@ class _AuditTaskContentWebState extends State<AuditTaskContentWeb> {
           return SelectionArea(
             child: Obx(() {
               final dataSource = PmTaskDataSource(controller);
-            
+
               return Column(
                 children: [
                   HeaderWidget(),
@@ -49,8 +49,8 @@ class _AuditTaskContentWebState extends State<AuditTaskContentWeb> {
                       ),
                       boxShadow: [
                         BoxShadow(
-                          color:
-                              Color.fromARGB(255, 236, 234, 234).withOpacity(0.5),
+                          color: Color.fromARGB(255, 236, 234, 234)
+                              .withOpacity(0.5),
                           spreadRadius: 2,
                           blurRadius: 5,
                           offset: Offset(0, 2),
@@ -172,19 +172,23 @@ class _AuditTaskContentWebState extends State<AuditTaskContentWeb> {
                                         height: 35,
                                         margin: EdgeInsets.only(left: 10),
                                         padding: EdgeInsets.only(
-                                            top: 4, bottom: 4, right: 8, left: 8),
+                                            top: 4,
+                                            bottom: 4,
+                                            right: 8,
+                                            left: 8),
                                         decoration: BoxDecoration(
-                                          color: ColorValues.appLightBlueColor,
-                                          borderRadius: BorderRadius.circular(5),
-                                          boxShadow: [
+                                            color:
+                                                ColorValues.appLightBlueColor,
+                                            borderRadius:
+                                                BorderRadius.circular(5),
+                                            boxShadow: [
                                               BoxShadow(
                                                 color: Colors.black26,
                                                 offset: const Offset(4.0, 2.0),
                                                 blurRadius: 5.0,
                                                 spreadRadius: 1.0,
                                               ),
-                                            ]
-                                        ),
+                                            ]),
                                         child: Text(
                                           'Column Visibility',
                                           style: TextStyle(
@@ -194,34 +198,34 @@ class _AuditTaskContentWebState extends State<AuditTaskContentWeb> {
                                           ),
                                         ),
                                       ),
-                                      itemBuilder: (BuildContext context) =>
-                                          <PopupMenuEntry<String>>[]..addAll(
-                                                controller.columnVisibility.value
-                                                    .entries
-                                                    .map((e) {
-                                              return PopupMenuItem<String>(
-                                                  child: ValueListenableBuilder(
-                                                      valueListenable: controller
-                                                          .columnVisibility,
-                                                      builder: (context, value,
-                                                          child) {
-                                                        return Row(
-                                                          children: [
-                                                            Checkbox(
-                                                              value: value[e.key],
-                                                              onChanged:
-                                                                  (newValue) {
-                                                                controller
-                                                                    .setColumnVisibility(
-                                                                        e.key,
-                                                                        newValue!);
-                                                              },
-                                                            ),
-                                                            Text(e.key),
-                                                          ],
-                                                        );
-                                                      }));
-                                            })),
+                                      itemBuilder: (BuildContext context) => <
+                                          PopupMenuEntry<String>>[]..addAll(
+                                            controller
+                                                .columnVisibility.value.entries
+                                                .map((e) {
+                                          return PopupMenuItem<String>(
+                                              child: ValueListenableBuilder(
+                                                  valueListenable: controller
+                                                      .columnVisibility,
+                                                  builder:
+                                                      (context, value, child) {
+                                                    return Row(
+                                                      children: [
+                                                        Checkbox(
+                                                          value: value[e.key],
+                                                          onChanged:
+                                                              (newValue) {
+                                                            controller
+                                                                .setColumnVisibility(
+                                                                    e.key,
+                                                                    newValue!);
+                                                          },
+                                                        ),
+                                                        Text(e.key),
+                                                      ],
+                                                    );
+                                                  }));
+                                        })),
                                       onSelected: (String value) {
                                         // Handle column selection
                                       },
@@ -258,11 +262,13 @@ class _AuditTaskContentWebState extends State<AuditTaskContentWeb> {
                                               color: Colors.black),
                                         ),
                                         decoration: InputDecoration(
-                                          enabledBorder: const OutlineInputBorder(
+                                          enabledBorder:
+                                              const OutlineInputBorder(
                                             borderSide: const BorderSide(
                                                 color: Colors.grey, width: 0.0),
                                           ),
-                                          focusedBorder: const OutlineInputBorder(
+                                          focusedBorder:
+                                              const OutlineInputBorder(
                                             borderSide: const BorderSide(
                                                 color: Colors.grey, width: 0.0),
                                           ),
@@ -280,55 +286,65 @@ class _AuditTaskContentWebState extends State<AuditTaskContentWeb> {
                                 SizedBox(
                                   height: 20,
                                 ),
-                                controller.pmTaskList.isEmpty == true && controller.isLoading == false
+                                controller.pmTaskList.isEmpty == true &&
+                                        controller.isLoading == false
                                     ? Center(child: Text('No data'))
                                     : controller.isLoading.value == true
-                                    ? Center(child: Text("Data Loading......"))
-                                    : Expanded(
-                                        child: ValueListenableBuilder(
-                                            valueListenable:
-                                                controller.columnVisibility,
-                                            builder: (context, value, child) {
-                                              final dataSource =
-                                                  PmTaskDataSource(controller);
-            
-                                              return PaginatedDataTable2(
-                                                // fixedLeftColumns: 1,
-                                                dataRowHeight: Get.height * 0.10,
-                                                columnSpacing: 10,
-                                                source:
-                                                    dataSource, // Custom DataSource class
-                                                headingRowHeight:
-                                                    Get.height * 0.12,
-                                                minWidth: 2000, //Get.width * 1.2,
-                                                showCheckboxColumn: false,
-                                                rowsPerPage:
-                                                    10, // Number of rows per page
-                                                availableRowsPerPage: [
-                                                  10,
-                                                  20,
-                                                  30,
-                                                  50
-                                                ],
-                                                columns: [
-                                                  for (var entry in value.entries)
-                                                    if (entry.value)
+                                        ? Center(
+                                            child: Text("Data Loading......"))
+                                        : Expanded(
+                                            child: ValueListenableBuilder(
+                                                valueListenable:
+                                                    controller.columnVisibility,
+                                                builder:
+                                                    (context, value, child) {
+                                                  final dataSource =
+                                                      PmTaskDataSource(
+                                                          controller);
+
+                                                  return PaginatedDataTable2(
+                                                    // fixedLeftColumns: 1,
+                                                    dataRowHeight:
+                                                        Get.height * 0.10,
+                                                    columnSpacing: 10,
+                                                    source:
+                                                        dataSource, // Custom DataSource class
+                                                    headingRowHeight:
+                                                        Get.height * 0.12,
+                                                    minWidth:
+                                                        2000, //Get.width * 1.2,
+                                                    showCheckboxColumn: false,
+                                                    rowsPerPage:
+                                                        10, // Number of rows per page
+                                                    availableRowsPerPage: [
+                                                      10,
+                                                      20,
+                                                      30,
+                                                      50
+                                                    ],
+                                                    columns: [
+                                                      for (var entry
+                                                          in value.entries)
+                                                        if (entry.value)
+                                                          buildDataColumn(
+                                                            entry.key,
+                                                            controller
+                                                                    .filterText[
+                                                                entry.key]!,
+                                                            controller
+                                                                    .columnwidth[
+                                                                entry.key],
+                                                          ),
                                                       buildDataColumn(
-                                                        entry.key,
-                                                        controller.filterText[
-                                                            entry.key]!,
-                                                        controller.columnwidth[
-                                                            entry.key],
+                                                        'Actions',
+                                                        controller
+                                                            .titleFilterText,
+                                                        200,
                                                       ),
-                                                  buildDataColumn(
-                                                    'Actions',
-                                                    controller.titleFilterText,
-                                                    200,
-                                                  ),
-                                                ],
-                                              );
-                                            }),
-                                      )
+                                                    ],
+                                                  );
+                                                }),
+                                          )
                               ],
                             ),
                           ),
@@ -349,11 +365,12 @@ class _AuditTaskContentWebState extends State<AuditTaskContentWeb> {
                                 controller.fromDate.value,
                                 controller.toDate.value,
                               ),
-            
+
                               onSubmit: (value) {
                                 print('po valu ${value.toString()}');
-                                PickerDateRange? data = value as PickerDateRange;
-            
+                                PickerDateRange? data =
+                                    value as PickerDateRange;
+
                                 var pickUpDate =
                                     DateTime.parse(data.startDate.toString());
                                 controller.fromDate.value = pickUpDate;
@@ -362,12 +379,12 @@ class _AuditTaskContentWebState extends State<AuditTaskContentWeb> {
                                 dropDate != null
                                     ? controller.toDate.value = dropDate
                                     : controller.toDate.value = pickUpDate;
-            
+
                                 controller.getPmTaskListByDate();
                                 controller.openFromDateToStartDatePicker =
                                     !controller.openFromDateToStartDatePicker;
                                 controller.update(['AuditTask']);
-            
+
                                 // Get.toNamed(
                                 //   Routes.stockManagementGoodsOrdersScreen,
                                 // );
@@ -503,8 +520,8 @@ class PmTaskDataSource extends DataTableSource {
       '${pmTaskDetails?.due_date ?? ''}',
       '${pmTaskDetails?.done_date ?? ''}',
       '${pmTaskDetails?.frequency_name ?? ''}',
-      '${pmTaskDetails?.assigned_to_name ?? ''}',
-      '${pmTaskDetails?.permit_code ?? ''}',
+      // '${pmTaskDetails?.assigned_to_name ?? ''}',
+      // '${pmTaskDetails?.permit_code ?? ''}',
       'Actions',
     ];
     var cells = [];
@@ -535,7 +552,7 @@ class PmTaskDataSource extends DataTableSource {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'PMT${pmTaskDetails?.id}',
+                        'AUT${pmTaskDetails?.id}',
                       ),
                       Dimens.boxHeight5,
                       Align(
@@ -655,10 +672,12 @@ class PmTaskDataSource extends DataTableSource {
                                 onPress: () {
                                   controller.clearStoreData();
 
-                                  int pmTaskId = pmTaskDetails?.id ?? 0;
-                                  if (pmTaskId != 0) {
+                                  int auditTaskId = pmTaskDetails?.id ?? 0;
+                                  if (auditTaskId != 0) {
                                     Get.toNamed(Routes.viewAuditTask,
-                                        arguments: {'auditTaskId': pmTaskId});
+                                        arguments: {
+                                          'auditTaskId': auditTaskId
+                                        });
                                   }
                                 },
                               )

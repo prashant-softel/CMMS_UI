@@ -66,8 +66,8 @@ class AuditTaskController extends GetxController {
     "Due Date": true,
     "Done Date": true,
     "Order Frequency": true,
-    "Assigned To": true,
-    "PTW": true,
+    // "Assigned To": true,
+    // "PTW": true,
   });
   Rx<int> pmTaskId = 0.obs;
 
@@ -78,8 +78,8 @@ class AuditTaskController extends GetxController {
     "Due Date": 200,
     "Done Date": 200,
     "Order Frequency": 200,
-    "Assigned To": 150,
-    "PTW": 150,
+    // "Assigned To": 150,
+    // "PTW": 150,
   };
   Map<String, RxString> filterText = {};
   void setColumnVisibility(String columnName, bool isVisible) {
@@ -99,14 +99,14 @@ class AuditTaskController extends GetxController {
       "Due Date": dueDateFilterText,
       "Done Date": doneDateFilterText,
       "Order Frequency": frequencyFilterText,
-      "Assigned To": assignFilterText,
-      "PTW": ptwFilterText,
+      // "Assigned To": assignFilterText,
+      // "PTW": ptwFilterText,
     };
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
       facilityId = event;
       Future.delayed(Duration(seconds: 2), () async {
         getAuditTaskList(
-            facilityId, formattedTodate1, formattedFromdate1,  false);
+            facilityId, formattedTodate1, formattedFromdate1, false);
       });
       // isDataLoading.value = false;
 
@@ -148,8 +148,7 @@ class AuditTaskController extends GetxController {
   }
 
   void getPmTaskListByDate() {
-    getAuditTaskList(
-        facilityId, formattedTodate1, formattedFromdate1,  false);
+    getAuditTaskList(facilityId, formattedTodate1, formattedFromdate1, false);
   }
 
   void clearStoreData() {
@@ -157,7 +156,6 @@ class AuditTaskController extends GetxController {
   }
 
   void export() {
-    getAuditTaskList(
-        facilityId, formattedTodate1, formattedFromdate1,  true);
+    getAuditTaskList(facilityId, formattedTodate1, formattedFromdate1, true);
   }
 }

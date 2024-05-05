@@ -1,5 +1,7 @@
 import 'package:cmms/domain/models/audit_plan_detail_model.dart';
+import 'package:cmms/domain/models/view_audit_task_model.dart';
 
+import '../../domain/models/history_model.dart';
 import '../../domain/usecases/view_audit_task_usecase.dart';
 
 class ViewAuditTaskPresenter {
@@ -26,15 +28,31 @@ class ViewAuditTaskPresenter {
     );
   }
 
-  Future<AuditPlanDetailModel?> getAuditPlanDetails({
-    int? auditPlanId,
-    required int facilityId,
+  Future<List<HistoryModel>?> getHistory(
+    moduleType,
+    id,
+    isLoading,
+  ) async =>
+      await viewAuditTaskUsecase.getHistory(
+        moduleType: moduleType,
+        id: id,
+        isLoading: isLoading,
+      );
+  Future<Map<String, dynamic>?> startAuditTask({
+    int? auditTaskId,
     bool? isLoading,
   }) async =>
-      await viewAuditTaskUsecase.getAuditPlanDetails(
-        auditPlanId: auditPlanId,
+      await viewAuditTaskUsecase.startAuditTask(
+        auditTaskId: auditTaskId,
         isLoading: isLoading,
-        facilityId: facilityId
+      );
+  Future<AuditTaskViewModel?> getAuditTaskDetails({
+    int? auditTaskId,
+    bool? isLoading,
+  }) async =>
+      await viewAuditTaskUsecase.getAuditTaskDetails(
+        auditTaskId: auditTaskId,
+        isLoading: isLoading,
       );
   void saveValue({String? auditTaskId}) async {
     return viewAuditTaskUsecase.saveValue(auditTaskId: auditTaskId);

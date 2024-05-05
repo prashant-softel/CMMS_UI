@@ -28,26 +28,42 @@ class ViewAuditPlanController extends GetxController {
 
   @override
   void onInit() async {
-    facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
-      facilityId = event;
-      Future.delayed(Duration(seconds: 1), () {
-        getAuditPlanDetails(
-            auditPlanId: auditId.value,
-            isloading: true,
-            facilityId: facilityId);
-      });
-    });
     try {
       await setauditPlanId();
-      if (auditId != 0) {
-        print({"fghvjbggjhjgk", auditId});
+      facilityIdStreamSubscription =
+          homecontroller.facilityId$.listen((event) async {
+        facilityId = event;
+        if (facilityId > 0) {
+          if (auditId != 0) {
+            await getAuditPlanDetails(
+                auditPlanId: auditId.value,
+                isloading: true,
+                facilityId: facilityId);
+            getHistory(facilityId);
+          }
+        }
+      });
 
-        await getAuditPlanDetails(auditPlanId: auditId.value, isloading: true, facilityId: facilityId);
-      }
       super.onInit();
     } catch (e) {
       print(e);
     }
+  }
+
+  Future<void> getHistory(int facilityId) async {
+    /// TODO: CHANGE THESE VALUES
+    int moduleType = 41;
+    //
+    historyList?.value = await viewAuditPlanPresenter.getHistory(
+          // tempModuleType,
+          // tempJobCardId,
+          moduleType,
+          auditId.value,
+          facilityId,
+          true,
+        ) ??
+        [];
+    update(["historyList"]);
   }
 
   Future<void> setauditPlanId() async {
@@ -72,9 +88,13 @@ class ViewAuditPlanController extends GetxController {
     }
   }
 
-  Future<void> getAuditPlanDetails({int? auditPlanId, bool? isloading,required int facilityId}) async {
-    final _auditPlanDetailsModel = await viewAuditPlanPresenter
-        .getAuditPlanDetails(auditPlanId: auditPlanId, isLoading: isloading, facilityId:facilityId);
+  Future<void> getAuditPlanDetails(
+      {int? auditPlanId, bool? isloading, required int facilityId}) async {
+    final _auditPlanDetailsModel =
+        await viewAuditPlanPresenter.getAuditPlanDetails(
+            auditPlanId: auditPlanId,
+            isLoading: isloading,
+            facilityId: facilityId);
 
     if (_auditPlanDetailsModel != null) {
       auditPlanDetailModel.value = _auditPlanDetailsModel;

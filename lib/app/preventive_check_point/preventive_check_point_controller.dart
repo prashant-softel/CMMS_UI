@@ -107,15 +107,14 @@ class PreventiveCheckPointController extends GetxController {
         "Type": typeFilterText,
       };
       // if (type.value != 0) {
-        facilityIdStreamSubscription =
-            homecontroller.facilityId$.listen((event) {
-          facilityId = event;
-          Future.delayed(Duration(seconds: 2), () {
-            getPreventiveCheckList(facilityId, type.value);
-            getCheckPointlist(
-                selectedchecklistId: 0.toString(), facilityId: facilityId);
-          });
+      facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
+        facilityId = event;
+        Future.delayed(Duration(seconds: 2), () {
+          getPreventiveCheckList(facilityId, type.value);
+          getCheckPointlist(
+              selectedchecklistId: 0.toString(), facilityId: facilityId);
         });
+      });
       // }
       chckFocus.addListener(() {
         if (!chckFocus.hasFocus) {
@@ -239,8 +238,8 @@ class PreventiveCheckPointController extends GetxController {
     int _failurewtg = int.tryParse(failurewtgCtrlr.text.trim()) ?? 0;
     String _checkPoint = checkPointCtrlr.text.trim();
     String _requirement = requirementCtrlr.text.trim();
-    dynamic _max = double.tryParse(maxRangeCtrlr.text.trim());
-    dynamic _min = double.tryParse(minRangeCtrlr.text.trim());
+    dynamic _max = double.tryParse(maxRangeCtrlr.text.trim()) ?? 0.0;
+    dynamic _min = double.tryParse(minRangeCtrlr.text.trim()) ?? 0.0;
 
     int _checklistId = int.tryParse(selectedchecklistId.value) ?? 0;
     if (checkPointCtrlr.text.trim() == '' ||

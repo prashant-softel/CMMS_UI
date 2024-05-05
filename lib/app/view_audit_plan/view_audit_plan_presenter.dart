@@ -1,4 +1,5 @@
 import 'package:cmms/domain/models/audit_plan_detail_model.dart';
+import 'package:cmms/domain/models/history_model.dart';
 import 'package:cmms/domain/usecases/view_audit_plan_usecase.dart';
 
 class ViewAuditPlanPresenter {
@@ -15,6 +16,18 @@ class ViewAuditPlanPresenter {
     );
   }
 
+  Future<List<HistoryModel>?> getHistory(
+    moduleType,
+    id,
+    facilityId,
+    isLoading,
+  ) async =>
+      await viewAuditPlanUsecase.getHistory(
+        moduleType: moduleType,
+        id: id,
+        facilityId: facilityId,
+        isLoading: isLoading,
+      );
   Future<Map<String, dynamic>?> auditPlanRejectButton({
     auditPlanRejectJsonString,
     required bool isLoading,
@@ -32,7 +45,7 @@ class ViewAuditPlanPresenter {
   }) async =>
       await viewAuditPlanUsecase.getAuditPlanDetails(
         auditPlanId: auditPlanId,
-        facilityId:facilityId,
+        facilityId: facilityId,
         isLoading: isLoading,
       );
   void saveValue({String? auditId}) async {
