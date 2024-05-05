@@ -71,7 +71,7 @@ class CmmrsItems {
   String? issued_date;
   double? requested_qty;
   String? approval_required;
-  String? name;
+  String? assetsName;
   int? asset_type_ID;
   String? asset_type;
   int? status;
@@ -82,13 +82,14 @@ class CmmrsItems {
   int? materialID;
   int? assetMasterID;
   String? serial_number;
+  String? name;
 
   CmmrsItems(
       {this.approval_required,
       this.approved_date,
       this.asset_MDM_code,
       this.asset_item_ID,
-      this.name,
+      this.assetsName,
       this.asset_type,
       this.asset_type_ID,
       this.available_qty,
@@ -105,7 +106,8 @@ class CmmrsItems {
       this.issued_qty_controller,
       this.assetMasterID,
       this.materialID,
-      this.serial_number});
+      this.serial_number,
+      this.name});
 
   factory CmmrsItems.fromJson(Map<String, dynamic> parsedJson) {
     return CmmrsItems(
@@ -147,7 +149,8 @@ class CmmrsItems {
         approval_required: parsedJson["approval_required"] == null
             ? ""
             : parsedJson['approval_required'],
-        name: parsedJson["asset_name"] == null ? "" : parsedJson['asset_name'],
+        assetsName:
+            parsedJson["asset_name"] == null ? "" : parsedJson['asset_name'],
         asset_type_ID: parsedJson["asset_type_ID"] == null
             ? 0
             : parsedJson['asset_type_ID'],
@@ -157,6 +160,7 @@ class CmmrsItems {
         status_short: parsedJson["status_short"] == null
             ? ''
             : parsedJson['status_short'],
+        name: "${parsedJson['asset_name']} (${parsedJson['serial_number']})",
         status_long:
             parsedJson["status_long"] == null ? "" : parsedJson['status_long'],
         issued_qty_controller: TextEditingController(
