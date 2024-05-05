@@ -143,7 +143,8 @@ class CalibrationViewContentWeb extends GetView<CalibrationViewController> {
                                   ),
                                   Dimens.boxWidth15,
                                   Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Text(
                                           "${controller.calibrationDetailModel.value?.assetName ?? ""}",
@@ -189,7 +190,8 @@ class CalibrationViewContentWeb extends GetView<CalibrationViewController> {
                                   ),
                                   Dimens.boxWidth15,
                                   Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Text(
                                           "${controller.calibrationDetailModel.value?.categoryName ?? ""}",
@@ -393,8 +395,8 @@ class CalibrationViewContentWeb extends GetView<CalibrationViewController> {
                                   ),
                                   Dimens.boxWidth10,
                                   CustomSwitchTroggle(
-                                    value: controller.calibrationDetailModel.value
-                                                ?.is_damaged ==
+                                    value: controller.calibrationDetailModel
+                                                .value?.is_damaged ==
                                             0
                                         ? false
                                         : true,
@@ -456,7 +458,7 @@ class CalibrationViewContentWeb extends GetView<CalibrationViewController> {
                               //     ),
                               //   ],
                               // ),
-      
+
                               Dimens.boxHeight60,
                               Container(
                                 margin: EdgeInsets.only(bottom: 40, top: 40),

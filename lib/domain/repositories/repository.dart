@@ -89,6 +89,7 @@ import 'package:cmms/domain/models/veg_plan_detail_model.dart';
 import 'package:cmms/domain/models/veg_task_list_model.dart';
 import 'package:cmms/domain/models/vegetation_equipment_model.dart';
 import 'package:cmms/domain/models/vegetation_list_plan_model.dart';
+import 'package:cmms/domain/models/view_audit_task_model.dart';
 import 'package:cmms/domain/models/view_warranty_claim_model.dart';
 import 'package:cmms/domain/models/warranty_claim_model.dart';
 import 'package:cmms/domain/models/warranty_type_model.dart';
@@ -2950,6 +2951,63 @@ class Repository {
     } catch (error) {
       print(error.toString());
       return Map();
+    }
+  }
+
+  Future<Map<String, dynamic>> startAuditTask(
+    auditTaskId,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.startAuditTask(
+        auth: auth,
+        auditTaskId: auditTaskId,
+        isLoading: isLoading ?? false,
+      );
+
+      if (!res.hasError) {
+        if (res.errorCode == 200) {
+          var responseMap = json.decode(res.data);
+          return responseMap;
+        }
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString(), 'startAuditTask');
+        return Map();
+      }
+      return Map();
+    } //
+    catch (error) {
+      Utility.showDialog(error.toString(), 'startAuditTask');
+      return Map();
+    }
+  }
+
+  Future<AuditTaskViewModel?> getAuditTaskDetails(
+    int? auditTaskId,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getAuditTaskDetails(
+        auth: auth,
+        auditTaskId: auditTaskId,
+        isLoading: isLoading,
+      );
+      if (!res.hasError) {
+        final AuditTaskViewModel _auditTaskViewModel =
+            auditTaskViewModelFromJson(res.data);
+        return _auditTaskViewModel;
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString(), 'getPmPlanDetails');
+        return null;
+      }
+    } //
+    catch (error) {
+      print(error.toString());
+      return null;
     }
   }
 
@@ -6588,7 +6646,7 @@ class Repository {
     //String? auth,
     int? moduleType,
     int? id,
-    int facilityId,
+    int? facilityId,
     bool? isLoading,
   ) async {
     try {
@@ -6598,7 +6656,7 @@ class Repository {
         isLoading: isLoading,
         moduleType: moduleType,
         id: id,
-        facilityId: facilityId,
+        facilityId: facilityId ?? 0,
       );
 
       if (!res.hasError) {

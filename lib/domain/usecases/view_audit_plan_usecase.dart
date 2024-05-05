@@ -1,6 +1,7 @@
 import 'package:cmms/domain/models/audit_plan_detail_model.dart';
 import 'package:cmms/domain/repositories/repository.dart';
 
+import '../models/history_model.dart';
 import '../repositories/local_storage_keys.dart';
 
 class ViewAuditPlanUsecase {
@@ -13,6 +14,18 @@ class ViewAuditPlanUsecase {
   }) async =>
       await repository.auditPlanApprovedButton(
         auditPlanApproveJsonString,
+        isLoading,
+      );
+  Future<List<HistoryModel>?> getHistory({
+    moduleType,
+    id,
+    facilityId,
+    bool? isLoading,
+  }) async =>
+      await repository.getHistory(
+        moduleType,
+        id,
+        facilityId,
         isLoading,
       );
   Future<Map<String, dynamic>> auditPlanRejectButton({

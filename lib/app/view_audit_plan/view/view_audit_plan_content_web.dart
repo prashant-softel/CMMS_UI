@@ -45,8 +45,8 @@ class _ViewAuditPlanWebState extends State<ViewAuditPlanWeb> {
                       ),
                       boxShadow: [
                         BoxShadow(
-                          color:
-                              Color.fromARGB(255, 236, 234, 234).withOpacity(0.5),
+                          color: Color.fromARGB(255, 236, 234, 234)
+                              .withOpacity(0.5),
                           spreadRadius: 2,
                           blurRadius: 5,
                           offset: Offset(0, 2),
@@ -69,7 +69,8 @@ class _ViewAuditPlanWebState extends State<ViewAuditPlanWeb> {
                           },
                           child: controller.type.value == 3
                               ? Text(" / MIS", style: Styles.greyMediumLight12)
-                              : Text(" / AUDIT", style: Styles.greyMediumLight12),
+                              : Text(" / AUDIT",
+                                  style: Styles.greyMediumLight12),
                         ),
                         controller.type.value == 3
                             ? Text(" / VIEW OBSERVATION PLAN",
@@ -86,7 +87,8 @@ class _ViewAuditPlanWebState extends State<ViewAuditPlanWeb> {
                           Container(
                             height: MediaQuery.of(context).size.height / 1.2,
                             width: Get.width * 7,
-                            margin: EdgeInsets.only(left: 20, top: 10, right: 20),
+                            margin:
+                                EdgeInsets.only(left: 20, top: 10, right: 20),
                             // height: Get.height,
                             child: Card(
                               color: ColorValues.cardColor,
@@ -134,7 +136,8 @@ class _ViewAuditPlanWebState extends State<ViewAuditPlanWeb> {
                                     padding: const EdgeInsets.symmetric(
                                         horizontal: 50),
                                     child: Row(
-                                      crossAxisAlignment: CrossAxisAlignment.end,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.end,
                                       children: [
                                         Column(
                                           crossAxisAlignment:
@@ -187,7 +190,7 @@ class _ViewAuditPlanWebState extends State<ViewAuditPlanWeb> {
                                                 '${controller.auditPlanDetailModel.value?.auditee_Emp_Name ?? ''}',
                                                 style: Styles.blue17),
                                             Text(
-                                                '${controller.auditPlanDetailModel.value?.auditor_Emp_Name ?? ""}',
+                                                '${controller.auditPlanDetailModel.value?.checklist_name ?? ""}',
                                                 style: Styles.blue17),
                                             Text('', style: Styles.blue17),
                                             Text(
@@ -213,7 +216,7 @@ class _ViewAuditPlanWebState extends State<ViewAuditPlanWeb> {
                                               style: Styles.black17,
                                             ),
                                             Text(
-                                              ' Frequency Name : ',
+                                              ' Frequency Name :',
                                               style: Styles.black17,
                                             ),
                                           ],
@@ -240,48 +243,49 @@ class _ViewAuditPlanWebState extends State<ViewAuditPlanWeb> {
                                     ),
                                   ),
                                   Dimens.boxHeight15,
-                                  // (controller.historyList != null &&
-                                  //         controller.historyList!.isNotEmpty)
-                                  //     ?
-                                  Container(
-                                    margin: Dimens.edgeInsets20,
-                                    height:
-                                        ((controller.historyList?.length ?? 0) *
-                                                40) +
-                                            120,
-                                    decoration: BoxDecoration(
-                                      border: Border.all(
-                                        color: ColorValues
-                                            .lightGreyColorWithOpacity35,
-                                        width: 1,
-                                      ),
-                                    ),
-                                    child: //
-                                        Column(
-                                      children: [
-                                        Padding(
-                                          padding: const EdgeInsets.all(8.0),
-                                          child: Row(
+                                  (controller.historyList != null &&
+                                          controller.historyList!.isNotEmpty)
+                                      ? Container(
+                                          margin: Dimens.edgeInsets20,
+                                          height: ((controller.historyList
+                                                          ?.length ??
+                                                      0) *
+                                                  40) +
+                                              120,
+                                          decoration: BoxDecoration(
+                                            border: Border.all(
+                                              color: ColorValues
+                                                  .lightGreyColorWithOpacity35,
+                                              width: 1,
+                                            ),
+                                          ),
+                                          child: //
+                                              Column(
                                             children: [
-                                              Text(
-                                                "PM History ",
-                                                style: Styles.blue700,
+                                              Padding(
+                                                padding:
+                                                    const EdgeInsets.all(8.0),
+                                                child: Row(
+                                                  children: [
+                                                    Text(
+                                                      "PM History ",
+                                                      style: Styles.blue700,
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                              Expanded(
+                                                child: HistoryTableWidgetWeb(
+                                                  historyList:
+                                                      controller.historyList,
+                                                ),
                                               ),
                                             ],
                                           ),
-                                        ),
-                                        Expanded(
-                                          child: HistoryTableWidgetWeb(
-                                            historyList: controller.historyList,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  )
-                                  //  )
-                                  //  : //
-                                  //   Dimens.box0,
-                                  ,
+                                        )
+                                      //  )
+                                      : //
+                                      Dimens.box0,
                                   Dimens.boxHeight35,
                                   Row(
                                     children: [
