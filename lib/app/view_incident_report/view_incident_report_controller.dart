@@ -66,6 +66,7 @@ class ViewIncidentReportController extends GetxController {
   Rx<bool> isEnddate = true.obs;
   RxBool detailInvestigationTeamValue = false.obs;
   RxBool whyWhyAnalysisValue = false.obs;
+  RxList<FileList?>? file_list = <FileList>[].obs;
 
   final TextEditingController serialNoTextFieldController =
       TextEditingController();
@@ -244,7 +245,7 @@ class ViewIncidentReportController extends GetxController {
         getuserAccessData();
       });
       Future.delayed(Duration(seconds: 1), () {
-        getIncidentReportHistory(id: irId.value, facilityId:facilityId);
+        getIncidentReportHistory(id: irId.value, facilityId: facilityId);
       });
     } catch (e) {}
 
@@ -258,6 +259,7 @@ class ViewIncidentReportController extends GetxController {
         var dataFromPreviousScreen = Get.arguments;
 
         irId.value = dataFromPreviousScreen['irId'];
+        print("$irId.value");
         viewIncidentReportPresenter.saveValue(irId: irId.value.toString());
       } else {
         irId.value = int.tryParse(_irId) ?? 0;
@@ -338,6 +340,7 @@ class ViewIncidentReportController extends GetxController {
           incidentReportDetailsModel.value?.proposed_action_plan ?? [];
       investiagtionTeamList?.value =
           incidentReportDetailsModel.value?.investigation_team ?? [];
+          file_list?.value = incidentReportDetailsModel.value?.fileList ?? [];
     }
   }
 
@@ -441,7 +444,8 @@ class ViewIncidentReportController extends GetxController {
   //   print('Incident Report Reject Button Data:${id}');
   // }
 
-  Future<void> getIncidentReportHistory({required int id,required int facilityId}) async {
+  Future<void> getIncidentReportHistory(
+      {required int id, required int facilityId}) async {
     /// TODO: CHANGE THESE VALUES
     int moduleType = 131;
     // int tempModuleType = 21;

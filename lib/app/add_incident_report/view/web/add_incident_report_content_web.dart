@@ -24,8 +24,8 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
   final FileUploadController dropzoneController =
       Get.put(FileUploadController());
 
-  bool valuefirst = false;
-  bool _switchValue = false;
+  // bool valuefirst = false;
+  // bool _switchValue = false;
 
   // final controller = Get.find<HomeController>();
   final AddIncidentReportController controller = Get.find();
@@ -1230,34 +1230,30 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
 
                                                           /// FILE UPLOAD WIDGET
                                                           Dimens.boxHeight10,
-
-                                                          Text(
-                                                            "Add Photo Of Incident Belwo ↓",
-                                                            style: Styles
-                                                                .black15W400,
-                                                          ),
-                                                          Container(
-                                                            height: Get.height *
-                                                                0.2,
-                                                            width: Get.width,
-                                                            child: Row(
-                                                                //
-                                                                children: [
-                                                                  Expanded(
-                                                                    flex: 2,
-                                                                    child:
-                                                                        FileUploadWidgetWithDropzone(),
-                                                                  ),
-                                                                  Dimens
-                                                                      .boxWidth10,
-                                                                  Expanded(
-                                                                      flex: 8,
-                                                                      child:
-                                                                          FileUploadDetailsWidgetWeb()),
-                                                                ]),
-                                                          ),
                                                         ],
-                                                      )
+                                                      ),
+                                                Text(
+                                                  "Add Photo Of Incident Below ↓",
+                                                  style: Styles.black15W400,
+                                                ),
+                                                Container(
+                                                  height: Get.height * 0.2,
+                                                  width: Get.width,
+                                                  child: Row(
+                                                      //
+                                                      children: [
+                                                        Expanded(
+                                                          flex: 2,
+                                                          child:
+                                                              FileUploadWidgetWithDropzone(),
+                                                        ),
+                                                        Dimens.boxWidth10,
+                                                        Expanded(
+                                                            flex: 8,
+                                                            child:
+                                                                FileUploadDetailsWidgetWeb()),
+                                                      ]),
+                                                ),
                                               ],
                                             ),
                                           ),
@@ -1449,8 +1445,10 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                               .appDarkBlueColor,
                                                       onPressed: () {
                                                         // showAlertDialog();
-                                                        controller
-                                                            .updateIncidentReport();
+                                                        controller.updateIncidentReport(
+                                                            fileIds:
+                                                                dropzoneController
+                                                                    .fileIds);
                                                       },
                                                       text: 'Update',
                                                     )
@@ -1462,8 +1460,10 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                               .appGreenColor,
                                                       onPressed: () {
                                                         // showAlertDialog();
-                                                        controller
-                                                            .createIncidentReport();
+                                                        controller.createIncidentReport(
+                                                            fileIds:
+                                                                dropzoneController
+                                                                    .fileIds);
                                                       },
                                                       text: 'Submit',
                                                     )
@@ -1480,8 +1480,10 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                               .appGreenColor,
                                                       onPressed: () {
                                                         // showAlertDialog();
-                                                        controller
-                                                            .createIncidentReport();
+                                                        controller.createIncidentReport(
+                                                            fileIds:
+                                                                dropzoneController
+                                                                    .fileIds);
                                                       },
                                                       text: 'Re-Submit',
                                                     )
@@ -1500,8 +1502,10 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                               .appDarkBlueColor,
                                                       onPressed: () {
                                                         // showAlertDialog();
-                                                        controller
-                                                            .updateIRSecondStep();
+                                                        controller.updateIRSecondStep(
+                                                            fileIds:
+                                                                dropzoneController
+                                                                    .fileIds);
                                                       },
                                                       text: 'Update IR',
                                                     )
@@ -4786,50 +4790,60 @@ class DetailsOfInjuredPerson extends StatelessWidget {
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
                                             children: [
-                                              Container(
-                                                decoration: BoxDecoration(
-                                                  boxShadow: [
-                                                    BoxShadow(
-                                                      color: Colors.black26,
-                                                      offset: const Offset(
-                                                        5.0,
-                                                        5.0,
+                                              controller.selectedOption ==
+                                                      "Other"
+                                                  ? Container(
+                                                      decoration: BoxDecoration(
+                                                        boxShadow: [
+                                                          BoxShadow(
+                                                            color:
+                                                                Colors.black26,
+                                                            offset:
+                                                                const Offset(
+                                                              5.0,
+                                                              5.0,
+                                                            ),
+                                                            blurRadius: 5.0,
+                                                            spreadRadius: 1.0,
+                                                          ),
+                                                        ],
+                                                        color: ColorValues
+                                                            .whiteColor,
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(5),
                                                       ),
-                                                      blurRadius: 5.0,
-                                                      spreadRadius: 1.0,
-                                                    ),
-                                                  ],
-                                                  color: ColorValues.whiteColor,
-                                                  borderRadius:
-                                                      BorderRadius.circular(5),
-                                                ),
-                                                child: DropdownWebStock(
-                                                  width: MediaQuery.of(context)
-                                                          .size
-                                                          .width /
-                                                      4,
-                                                  dropdownList:
-                                                      controller.genderList,
-                                                  selectedValue:
-                                                      mapData["value"],
-                                                  onValueChanged:
-                                                      (list, selectedValue) {
-                                                    print({
-                                                      selectedValue:
-                                                          selectedValue
-                                                    });
-                                                    mapData["value"] =
-                                                        selectedValue;
-                                                    controller.dropdownGenderMapperData[
-                                                            selectedValue] =
-                                                        list.firstWhere(
-                                                            (element) =>
-                                                                element.name ==
-                                                                selectedValue,
-                                                            orElse: null);
-                                                  },
-                                                ),
-                                              ),
+                                                      child: DropdownWebStock(
+                                                        width: MediaQuery.of(
+                                                                    context)
+                                                                .size
+                                                                .width /
+                                                            4,
+                                                        dropdownList: controller
+                                                            .genderList,
+                                                        selectedValue:
+                                                            mapData["value"],
+                                                        onValueChanged: (list,
+                                                            selectedValue) {
+                                                          print({
+                                                            selectedValue:
+                                                                selectedValue
+                                                          });
+                                                          mapData["value"] =
+                                                              selectedValue;
+                                                          controller.dropdownGenderMapperData[
+                                                                  selectedValue] =
+                                                              list.firstWhere(
+                                                                  (element) =>
+                                                                      element
+                                                                          .name ==
+                                                                      selectedValue,
+                                                                  orElse: null);
+                                                        },
+                                                      ),
+                                                    )
+                                                  : Text(
+                                                      "${controller.dropdownVictimNameMapperData[record[0]['value']]?.gender ?? ""}")
                                             ],
                                           ),
                                         )
