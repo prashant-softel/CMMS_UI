@@ -65,14 +65,31 @@ class NewPermitWeb extends GetView<NewPermitController> {
                     ),
                   ),
                   InkWell(
-                    onTap: () {
-                      Get.offAllNamed(Routes.newPermitList);
-                    },
-                    child: Text(
-                      " / PERMIT LIST ",
-                      style: Styles.greyLight14,
-                    ),
-                  ),
+                      onTap: () {
+                        var taskId;
+                        var jobId;
+                        controller.typee.value == 1
+                            ? Get.offAllNamed(Routes.jobDetails,
+                                arguments: {'jobId': jobId})
+                            : controller.typee.value == 2
+                                ? Get.offAllNamed(Routes.pmTaskView,
+                                    arguments: {'pmTaskId': taskId})
+                                : Get.offNamed(Routes.newPermitList);
+                      },
+                      child: controller.typee.value == 1
+                          ? Text(
+                              "/ JOB",
+                              style: Styles.greyLight14,
+                            )
+                          : controller.typee.value == 2
+                              ? Text(
+                                  "/ PM TASK",
+                                  style: Styles.greyLight14,
+                                )
+                              : Text(
+                                  "/ PERMIT LIST",
+                                  style: Styles.greyLight14,
+                                )),
                   controller.newPermitDetailsModel.value?.permitNo == null
                       ? Text(
                           " / ADD NEW PERMIT",

@@ -118,6 +118,7 @@ class CreateJobCardDialog extends GetView {
                     "whereUsedId": jcId![0],
                     "activity": _controller.titleTextCtrlr.text,
                     "whereUsed": 4,
+                    "type": 1,
                     "fromActorTypeId": 2,
                     "to_actor_type_id": 4
                   });

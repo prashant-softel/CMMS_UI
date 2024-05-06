@@ -36,6 +36,10 @@ class EditMrsPresenter {
   void saveValue({String? mrsId}) async {
     return editmrsUsecase.saveValue(mrsId: mrsId);
   }
+  void saveValuee({String? type}) async {
+    return editmrsUsecase.saveValuee(type: type);
+  }
 
   Future<String?> getValue() async => await editmrsUsecase.getValue();
+  Future<String?> getValuee() async => await editmrsUsecase.getValuee();
 }

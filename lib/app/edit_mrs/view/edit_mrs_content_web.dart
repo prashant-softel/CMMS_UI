@@ -59,13 +59,31 @@ class EditMrsContentWeb extends GetView<EditMrsController> {
                     onTap: () {
                       final _flutterSecureStorage =
                           const FlutterSecureStorage();
-
                       _flutterSecureStorage.delete(key: "mrsId");
-                      Get.back();
+
+                      var taskId;
+                      var jobId;
+                      controller.type.value == 1
+                          ? Get.offAllNamed(Routes.jobDetails,
+                              arguments: {'jobId': jobId})
+                          : controller.type.value == 2
+                              ? Get.offAllNamed(Routes.pmTaskView,
+                                  arguments: {'pmTaskId': taskId})
+                              : Get.offNamed(Routes.mrsListScreen);
                     },
-                    child: Text(" / MRS LIST", style: Styles.greyLight14),
+                    child: controller.type.value == 1
+                        ? Text(
+                            "/ JOB",
+                            style: Styles.greyLight14,
+                          )
+                        : controller.type.value == 2
+                            ? Text(
+                                "/ PM TASK",
+                                style: Styles.greyLight14,
+                              )
+                            : Text(" / MRS LIST", style: Styles.greyLight14),
                   ),
-                  Text(" / NEW MATERIAL SLIP", style: Styles.greyLight14)
+                  Text(" / EDIT MATERIAL SLIP", style: Styles.greyLight14)
                 ],
               ),
             ),
@@ -588,7 +606,6 @@ class EditMrsContentWeb extends GetView<EditMrsController> {
                     onPressed: () {
                       // controller.addUser();
                       controller.editMrs();
-                      Get.back();
                     },
                   ),
                 ),
@@ -598,7 +615,9 @@ class EditMrsContentWeb extends GetView<EditMrsController> {
                   child: CustomElevatedButton(
                     backgroundColor: ColorValues.cancelColor,
                     text: "Cancel",
-                    onPressed: () {},
+                    onPressed: () {
+                      Get.back();
+                    },
                   ),
                 ),
               ],

@@ -423,6 +423,7 @@ class PreventiveMaintenanceTaskViewController extends GetxController {
       "jobModel": jobDetailsModel.value,
       "permitId": 0,
       "isChecked": false,
+      "type": 2,
       "isFromPmTaskDetails": true,
     });
   }

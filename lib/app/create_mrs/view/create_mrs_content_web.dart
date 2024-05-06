@@ -55,10 +55,29 @@ class CreateMrsContentWeb extends GetView<CreateMrsController> {
                 ),
                 InkWell(
                   onTap: () {
-                    Get.offNamed(Routes.stockManagementDashboardScreen);
+                    var taskId;
+                    var jobId;
+                    controller.type.value == 1
+                        ? Get.offAllNamed(Routes.jobDetails,
+                            arguments: {'jobId': jobId})
+                        : controller.type.value == 2
+                            ? Get.offAllNamed(Routes.pmTaskView,
+                                arguments: {'pmTaskId': taskId})
+                            : Get.offNamed(
+                                Routes.stockManagementDashboardScreen);
                   },
-                  child: Text(" / STOCK MANAGEMENT ",
-                      style: Styles.greyMediumLight12),
+                  child: controller.type.value == 1
+                      ? Text(
+                          "/ JOB",
+                          style: Styles.greyLight14,
+                        )
+                      : controller.type.value == 2
+                          ? Text(
+                              "/ PM TASK",
+                              style: Styles.greyLight14,
+                            )
+                          : Text(" / STOCK MANAGEMENT ",
+                              style: Styles.greyMediumLight12),
                 ),
                 Text(" / NEW MATERIAL SLIP ", style: Styles.greyMediumLight12)
               ],
@@ -75,7 +94,7 @@ class CreateMrsContentWeb extends GetView<CreateMrsController> {
                     Padding(
                       padding: const EdgeInsets.all(10.0),
                       child: Text(
-                        "New Material Requisition Slip",
+                        "Material Requisition Slip",
                         style: Styles.blackBold16,
                       ),
                     ),
@@ -529,7 +548,9 @@ class CreateMrsContentWeb extends GetView<CreateMrsController> {
                           child: CustomElevatedButton(
                             backgroundColor: ColorValues.redColor,
                             text: "Cancel",
-                            onPressed: () {},
+                            onPressed: () {
+                              Get.back();
+                            },
                           ),
                         ),
                       ],
