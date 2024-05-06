@@ -315,6 +315,9 @@ class AddInventoryController extends GetxController {
       selectedStatusNameId = editAddInventoryDetailsModel.value?.statusId ?? 0;
       selectedStatusName.value =
           editAddInventoryDetailsModel.value?.status ?? '';
+      selectedWarrantyName?.value =
+          editAddInventoryDetailsModel.value?.warrantyType ?? '';
+
       selectedEquipmentCategoryNameId.value =
           editAddInventoryDetailsModel.value?.categoryId ?? 0;
       selectedEquipmentCategoryName.value =
@@ -356,12 +359,13 @@ class AddInventoryController extends GetxController {
 
       calibrationRemaingCtrlr.text =
           "${int.tryParse("${editAddInventoryDetailsModel.value?.calibrationReminderDays ?? 0}")}";
-      selectedWarrantyName.value =
-          editAddInventoryDetailsModel.value?.warrantyTypeName ?? "";
+      // selectedWarrantyName.value =
+      //     editAddInventoryDetailsModel.value?.warrantyTypeName ?? "";
+
       selectedmanufacturerName.value =
           editAddInventoryDetailsModel.value?.warrantyProviderName ?? "";
       selectedwarrantyUsageTermListName.value =
-          editAddInventoryDetailsModel.value?.warrantyTermTypeName ?? "";
+          editAddInventoryDetailsModel.value?.warranty_term_type ?? "";
       warrentyDescriptionCtrlr.text =
           editAddInventoryDetailsModel.value?.warrantyDescription ?? "";
       selectedmanufacturerName.value =

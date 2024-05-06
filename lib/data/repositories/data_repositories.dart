@@ -943,6 +943,18 @@ class DataRepository extends DomainRepository {
         pmPlanRejectJsonString: pmPlanRejectJsonString,
         isLoading: isLoading ?? false,
       );
+  Future<ResponseModel> getAuditTaskDetails({
+    String? auth,
+    int? auditTaskId,
+    bool? isLoading,
+  }) async {
+    return await connectHelper.getAuditTaskDetails(
+      auth: auth,
+      auditTaskId: auditTaskId,
+      isLoading: isLoading,
+    );
+  }
+
   Future<ResponseModel> auditPlanRejectButton({
     required String auth,
     auditPlanRejectJsonString,
@@ -3831,6 +3843,16 @@ class DataRepository extends DomainRepository {
       await connectHelper.setPmTask(
         auth: auth,
         scheduleId: scheduleId,
+        isLoading: isLoading ?? false,
+      );
+  Future<ResponseModel> startAuditTask({
+    required String auth,
+    auditTaskId,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.startAuditTask(
+        auth: auth,
+        auditTaskId: auditTaskId,
         isLoading: isLoading ?? false,
       );
   Future<ResponseModel> approveReturnMrs({

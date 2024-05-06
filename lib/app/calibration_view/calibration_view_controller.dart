@@ -38,7 +38,10 @@ class CalibrationViewController extends GetxController {
     calibrationId = Get.arguments;
     print('calibrationId:$calibrationId');
     if (calibrationId != 0) {
-      await getCalibrationView(calibrationId: calibrationId, isloading: true, facilityId: facilityId);
+      await getCalibrationView(
+          calibrationId: calibrationId,
+          isloading: true,
+          facilityId: facilityId);
       await getHistory(calibrationId: calibrationId, moduleType: moduleType);
     }
 
@@ -56,10 +59,14 @@ class CalibrationViewController extends GetxController {
     update(["historyList"]);
   }
 
-  Future<void> getCalibrationView({int? calibrationId, bool? isloading,required int facilityId}) async {
+  Future<void> getCalibrationView(
+      {int? calibrationId, bool? isloading, required int facilityId}) async {
 //calibrationId = 5326;
-    final _calibrationDetails = await calibrationViewPresenter
-        .getCalibrationView(calibrationId: calibrationId, isloading: isloading,facilityId: facilityId);
+    final _calibrationDetails =
+        await calibrationViewPresenter.getCalibrationView(
+            calibrationId: calibrationId,
+            isloading: isloading,
+            facilityId: facilityId);
     print({"vasddf", _calibrationDetails});
     if (_calibrationDetails != null) {
       calibrationDetailModel.value = _calibrationDetails;

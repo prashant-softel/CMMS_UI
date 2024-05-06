@@ -8,7 +8,7 @@ import '../../utils/responsive.dart';
 
 class CalibrationViewScreen extends GetView<CalibrationViewController> {
   CalibrationViewScreen({super.key});
-  final controller = Get.find<CalibrationViewController>();
+  // final controller = Get.find<CalibrationViewController>();
 
   @override
   Widget build(BuildContext context) {

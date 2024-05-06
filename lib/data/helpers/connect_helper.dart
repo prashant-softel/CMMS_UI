@@ -6541,6 +6541,24 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> startAuditTask({
+    required String auth,
+    auditTaskId,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'AuditPlan/StartAuditTask?task_id=$auditTaskId',
+      Request.post,
+      null,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
   Future<ResponseModel> createJobType({
     required String auth,
     bool? isLoading,
@@ -7460,6 +7478,24 @@ class ConnectHelper {
   }) async {
     var responseModel = await apiWrapper.makeRequest(
       'AuditPlan/GetAuditPlanByID?id=$auditPlanId&facility_id=$facilityId',
+      Request.get,
+      null,
+      isLoading ?? true,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> getAuditTaskDetails({
+    required String? auth,
+    int? auditTaskId,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'AuditPlan/GetPlanDetail?planId=$auditTaskId',
       Request.get,
       null,
       isLoading ?? true,
