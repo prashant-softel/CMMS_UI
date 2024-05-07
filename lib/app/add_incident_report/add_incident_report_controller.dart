@@ -1505,7 +1505,7 @@ class AddIncidentReportController extends GetxController {
 
   ///Create Incident Report
 
-  void createIncidentReport() async {
+  void createIncidentReport({dynamic fileIds}) async {
     {
       checkForm();
       if (isFormInvalid.value) {
@@ -1591,7 +1591,15 @@ class AddIncidentReportController extends GetxController {
               selectedOption.value == "Other" ? element[1]["value"] ?? '0' : "",
           person_type: 1,
           age: 30,
-          sex: dropdownGenderMapperData[element[2]["value"]]?.id,
+          sex: selectedOption == "Other"
+              ? dropdownGenderMapperData[element[2]["value"]]?.id
+              : dropdownVictimNameMapperData[element[2]["value"]]?.gender ==
+                      "Male"
+                  ? 1
+                  : dropdownVictimNameMapperData[element[2]["value"]]?.gender ==
+                          "Female"
+                      ? 2
+                      : 3,
           designation: element[3]["value"] ?? '0',
           address: element[4]["value"] ?? '0',
           name_contractor:
@@ -1670,6 +1678,7 @@ class AddIncidentReportController extends GetxController {
               // insurance_remark: _insuranceRemark,
               insurance_remark: _insuranceAvailable,
               severity: selectedSeverity.value,
+              uploadfileIds: fileIds,
               //new data adding
               type_of_job: _jobType,
               is_person_involved: _is_person_involved,
@@ -1704,7 +1713,7 @@ class AddIncidentReportController extends GetxController {
   }
 
   ///Update Incident Report
-  void updateIncidentReport() async {
+  void updateIncidentReport({dynamic fileIds}) async {
     {
       checkForm();
       if (isFormInvalid.value) {
@@ -1882,6 +1891,7 @@ class AddIncidentReportController extends GetxController {
               insurance_status: 2,
               insurance_remark: _insuranceRemark,
               severity: selectedSeverity.value,
+              uploadfileIds: fileIds,
 
               ///new data adding
               type_of_job: _typeOfJob,
@@ -1914,7 +1924,7 @@ class AddIncidentReportController extends GetxController {
     }
   }
 
-  void updateIRSecondStep() async {
+  void updateIRSecondStep({dynamic fileIds}) async {
     {
       checkForm();
       if (isFormInvalid.value) {
@@ -2090,6 +2100,7 @@ class AddIncidentReportController extends GetxController {
               insurance_status: 2,
               insurance_remark: _insuranceRemark,
               severity: selectedSeverity.value,
+              uploadfileIds: fileIds,
 
               ///new data adding
               type_of_job: _typeOfJob,

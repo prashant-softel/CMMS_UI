@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:cmms/app/home/home_controller.dart';
 import 'package:cmms/app/theme/dimens.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
@@ -148,6 +147,32 @@ class AddUserController extends GetxController {
   int selectedresId = 0;
   RxList<int> selectedresIdsList = <int>[].obs;
   RxList<DesignationModel> selectedResNameList = <DesignationModel>[].obs;
+  Rx<String> selectedFacility = ''.obs;
+  Rx<int> selectedFacilityId = 0.obs;
+  Rx<String> address = ''.obs;
+  RxBool isEmployee = false.obs;
+  void toggleIsEmployee() {
+    print("IsEmployee before toogle: $isEmployee");
+    isEmployee.toggle();
+    print("IsEmployee After toogle: $isEmployee");
+  }
+
+  var isEmployeeFacilityList = <IsEmployeeFacilityModel>[].obs;
+  void updateFacilityList({
+    required int id,
+    required String name,
+    required String address,
+    required bool isEmployee,
+  }) {
+    isEmployeeFacilityList.add(
+      IsEmployeeFacilityModel(
+        id: id,
+        name: name,
+        address: address,
+        isEmployee: isEmployee,
+      ),
+    );
+  }
 
   ///
   void onInit() async {
@@ -367,7 +392,7 @@ class AddUserController extends GetxController {
               ))
           .toList();
       await getUserAccessListById(userId: userId.value, isloading: true);
-      await getUserNotificationListById(userId: userId.value, isloading: true);
+      // await getUserNotificationListById(userId: userId.value, isloading: true);
     }
     // if (_responsList != null) {
     //   responsList.value = _responsList;
@@ -560,6 +585,20 @@ class AddUserController extends GetxController {
           selectedBusinessTypeId = businessList[equipmentIndex]?.id ?? 0;
         }
         break;
+      case RxList<FacilityModel>:
+        {
+          for (var facility in facilityNameList) {
+            print("facilities ${facility}");
+          }
+          int facilityIndex =
+              facilityNameList.indexWhere((x) => x?.name == value);
+          selectedFacility.value = facilityNameList[facilityIndex]?.name ?? '';
+          address.value = facilityNameList[facilityIndex]?.address ?? '';
+          selectedFacilityId.value = facilityNameList[facilityIndex]?.id ?? 0;
+          print({"selected facality11": selectedFacility});
+          print("facility selected $selectedFacilityId, $selectedFacility");
+        }
+        break;
       default:
         {
           //statements;
@@ -719,7 +758,7 @@ class AddUserController extends GetxController {
         role_id: selectedRoleId,
         zipcode: int.parse(_zipcode),
         isEmployee: 1,
-        facilities: selectedfacilityNameIdList,
+        facilities: isEmployeeFacilityList,
         user_responsibility_list: reslist,
         credentials: credentials);
     var adduserJsonString = [adduser.toJson()];
@@ -784,7 +823,7 @@ class AddUserController extends GetxController {
         photo_id: photoId,
         role_id: selectedRoleId,
         zipcode: int.parse(_zipcode),
-        facilities: selectedfacilityNameIdList,
+        facilities: isEmployeeFacilityList,
         isEmployee: 1,
         user_responsibility_list: reslist,
         credentials: credentials);

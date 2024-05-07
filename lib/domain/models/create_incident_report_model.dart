@@ -43,6 +43,7 @@ class CreateIncidentReportModel {
   String? insurance_remark;
   int? id;
   String? severity;
+  dynamic uploadfileIds;
   List<WhyWhyAnalysis?>? why_why_analysis;
   List<RootCause?>? root_cause;
   List<ImmediateCorrection?>? immediate_correction;
@@ -87,6 +88,7 @@ class CreateIncidentReportModel {
     this.insurance_remark,
     this.id,
     this.severity,
+    this.uploadfileIds,
     this.why_why_analysis,
     this.root_cause,
     this.immediate_correction,
@@ -133,6 +135,7 @@ class CreateIncidentReportModel {
         insurance: json['insurance'],
         insurance_status: json['insurance_status'],
         insurance_remark: json['insurance_remark'],
+        uploadfileIds: json['uploadfile_ids'],
         id: json['id'],
         severity: json['severity'],
         why_why_analysis: json['why_why_analysis'] != null
@@ -198,6 +201,7 @@ class CreateIncidentReportModel {
         "insurance_remark": insurance_remark,
         "id": id,
         "severity": severity,
+        "uploadfile_ids": uploadfileIds,
         "why_why_analysis": List<dynamic>.from(why_why_analysis!.map((x) => x)),
         "root_cause": List<dynamic>.from(root_cause!.map((x) => x)),
         "immediate_correction":
