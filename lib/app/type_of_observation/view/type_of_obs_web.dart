@@ -68,7 +68,7 @@ class TypeOfObsWeb extends GetView<TypeOfObsController> {
                       },
                       child: Text(" / MIS", style: Styles.greyLight14),
                     ),
-                    Text(" / OBSERVATION LIST", style: Styles.greyLight14),
+                    Text(" / TYPE OF OBSERVATION", style: Styles.greyLight14),
                     // Text(" / CREATE CHECKLIST NUMBER",
                     //     style: Styles.greyMediumLight12)
                   ],
@@ -84,8 +84,8 @@ class TypeOfObsWeb extends GetView<TypeOfObsController> {
                   child: Obx(() {
                     return Text(
                       controller.isContainerVisible.value
-                          ? 'Close Create Observation'
-                          : 'Open Create Observation',
+                          ? 'Close  Type Of Observation'
+                          : 'Open  Type Of Observation',
                     );
                   }),
                 ),
@@ -123,7 +123,7 @@ class TypeOfObsWeb extends GetView<TypeOfObsController> {
                                         CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        "Create Observation",
+                                        "Create Type Of Observation",
                                         style: Styles.blackBold16,
                                       ),
                                       SizedBox(
@@ -136,8 +136,8 @@ class TypeOfObsWeb extends GetView<TypeOfObsController> {
                                             children: [
                                               Text(
                                                 controller.selectedItem == null
-                                                    ? "ObservationList added Successfully in the List."
-                                                    : "ObservationList updated Successfully in the List.",
+                                                    ? "Type Of Observation added Successfully in the List."
+                                                    : "Type Of Observation updated Successfully in the List.",
                                                 style: TextStyle(
                                                     fontSize: 16,
                                                     color: Color.fromARGB(
@@ -156,7 +156,7 @@ class TypeOfObsWeb extends GetView<TypeOfObsController> {
                                         children: [
                                           Expanded(
                                             child: CustomRichText(
-                                                title: 'Observation Name: '),
+                                                title: 'Type Of Observation Name: '),
                                           ),
                                           Container(
                                             width: (MediaQuery.of(context)
@@ -193,7 +193,7 @@ class TypeOfObsWeb extends GetView<TypeOfObsController> {
                                                   height: 1.0,
                                                   color: Colors.black),
                                               controller: controller
-                                                  .modulelistNumberCtrlr,
+                                                  .titleCtrlr,
                                               focusNode: controller.rnameFocus,
                                               scrollController:
                                                   controller.rnameScroll,
@@ -322,7 +322,7 @@ class TypeOfObsWeb extends GetView<TypeOfObsController> {
                                                   height: 1.0,
                                                   color: Colors.black),
                                               controller:
-                                                  controller.featureCtrlr,
+                                                  controller.descriptionCtrlr,
                                               focusNode: controller.rdescFocus,
                                               scrollController:
                                                   controller.rdescScroll,
@@ -455,7 +455,7 @@ class TypeOfObsWeb extends GetView<TypeOfObsController> {
                                                   ColorValues.appDarkBlueColor,
                                               onPressed: () {
                                                 controller
-                                                    .createModuleListNumber()
+                                                    .createTypeOfObservationList()
                                                     .then((value) {
                                                   print("value,$value");
                                                   if (value == true)
@@ -463,13 +463,13 @@ class TypeOfObsWeb extends GetView<TypeOfObsController> {
                                                         .issuccessCreatemodulelist();
                                                 });
                                               },
-                                              text: 'Create Observation')
+                                              text: 'Create Type Of Observation')
                                           : CustomElevatedButton(
                                               backgroundColor:
                                                   ColorValues.appDarkBlueColor,
                                               onPressed: () {
                                                 controller
-                                                    .updateModulelistNumber(
+                                                    .updatetypeOfObs(
                                                         controller
                                                             .selectedItem?.id)
                                                     .then((value) {
@@ -510,7 +510,7 @@ class TypeOfObsWeb extends GetView<TypeOfObsController> {
                               Padding(
                                 padding: const EdgeInsets.all(10.0),
                                 child: Text(
-                                  "Observation List",
+                                  "Type Of Observation List",
                                   style: Styles.blackBold16,
                                 ),
                               ),
@@ -590,7 +590,7 @@ class TypeOfObsWeb extends GetView<TypeOfObsController> {
                                           DataColumn2(
                                               // fixedWidth: 700,
                                               label: Text(
-                                            "Observation name",
+                                            "Type Of Observation name",
                                             style: TextStyle(
                                                 fontSize: 15,
                                                 fontWeight: FontWeight.bold),
@@ -616,15 +616,15 @@ class TypeOfObsWeb extends GetView<TypeOfObsController> {
                                         rows: List.generate(
                                           controller.moduleList?.length ?? 0,
                                           (index) {
-                                            var moduleListDetails =
+                                            var TypeOfObsListDetails =
                                                 controller.moduleList?[index];
                                             return DataRow(cells: [
                                               DataCell(Text(
-                                                  '${moduleListDetails?.id}')),
+                                                  '${TypeOfObsListDetails?.id}')),
                                               DataCell(Text(
-                                                  '${moduleListDetails?.name}')),
+                                                  '${TypeOfObsListDetails?.name}')),
                                               DataCell(Text(
-                                                  '${moduleListDetails?.featureName}')),
+                                                  '${TypeOfObsListDetails?.featureName}')),
                                               DataCell(Row(
                                                 mainAxisAlignment:
                                                     MainAxisAlignment.center,
@@ -636,20 +636,20 @@ class TypeOfObsWeb extends GetView<TypeOfObsController> {
                                                     message: 'Edit',
                                                     onPress: () {
                                                       controller.selectedItem = controller
-                                                          .moduleList!
+                                                          .TypeOfObsList
                                                           .firstWhere((element) =>
                                                               "${element?.id}" ==
-                                                              '${moduleListDetails?.id}');
+                                                              '${TypeOfObsListDetails?.id}');
                                                       controller
-                                                          .modulelistNumberCtrlr
+                                                          .titleCtrlr
                                                           .text = controller
                                                               .selectedItem
                                                               ?.name ??
                                                           '';
-                                                      controller.featureCtrlr
+                                                      controller.descriptionCtrlr
                                                           .text = controller
                                                               .selectedItem
-                                                              ?.featureName ??
+                                                              ?.description ??
                                                           '';
                                                       controller
                                                           .isContainerVisible
@@ -666,12 +666,12 @@ class TypeOfObsWeb extends GetView<TypeOfObsController> {
                                                     message: 'Delete',
                                                     onPress: () {
                                                       print(
-                                                          '${moduleListDetails?.id}');
+                                                          '${TypeOfObsListDetails?.id}');
                                                       controller.isDeleteDialog(
-                                                          module_id:
-                                                              '${moduleListDetails?.id}',
-                                                          module:
-                                                              '${moduleListDetails?.name}');
+                                                          business_id:
+                                                              '${TypeOfObsListDetails?.id}',
+                                                          business:
+                                                              '${TypeOfObsListDetails?.name}');
                                                     },
                                                   ),
                                                 ],
