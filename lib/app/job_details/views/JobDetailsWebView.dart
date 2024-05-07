@@ -575,6 +575,8 @@ class JobDetailsWebView extends GetView<JobDetailsController> {
                                                                               .jobDetailsModel
                                                                               .value
                                                                               ?.jobTitle,
+                                                                          "type":
+                                                                              1,
                                                                           "whereUsed":
                                                                               4,
                                                                           "fromActorTypeId":
@@ -894,7 +896,8 @@ class JobDetailsWebView extends GetView<JobDetailsController> {
                                                                     arguments: {
                                                                       'mrsId': int
                                                                           .tryParse(
-                                                                              "$mrsId")
+                                                                              "$mrsId"),
+                                                                      'type': 1
                                                                     });
                                                               })
                                                         ],

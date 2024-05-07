@@ -280,6 +280,7 @@ class JobDetailsController extends GetxController {
       "jobModel": jobDetailsModel.value,
       "permitId": 0,
       "isChecked": false,
+      "type": 1,
       "isFromJobDetails": true,
       "pmTaskModel": pmtaskViewModel.value
     });

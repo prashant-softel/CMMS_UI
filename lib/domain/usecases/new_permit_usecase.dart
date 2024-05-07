@@ -261,6 +261,10 @@ class NewPermitUsecase {
       repository.saveValue(LocalKeys.permitId, permitId);
   Future<String?> getValue() async =>
       await repository.getStringValue(LocalKeys.permitId);
+  void saveValuee({String? type}) async =>
+      repository.saveValue(LocalKeys.type, type);
+  Future<String?> getValuee() async =>
+      await repository.getStringValue(LocalKeys.type);
   void saveisCheckedValue({bool? isChecked}) async =>
       repository.saveValue(LocalKeys.isChecked, isChecked);
   Future<bool?> getisCheckedValue() async =>

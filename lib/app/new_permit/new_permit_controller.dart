@@ -385,6 +385,7 @@ class NewPermitController extends GetxController {
   int userId = varUserAccessModel.value.user_id ?? 0;
   bool isFromJobDetails = false;
   Rx<int> permitId = 0.obs;
+  Rx<int> typee = 0.obs;
   Rx<bool> isChecked = false.obs;
   JobDetailsModel? jobModel;
   PmtaskViewModel? pmtaskViewModel;
@@ -415,7 +416,6 @@ class NewPermitController extends GetxController {
     // print('JobCardId:$jcId');
     try {
       await setId();
-
       // final arguments = Get.arguments;
       // if (arguments != null) {
       //   if (arguments.containsKey('permitId')) {
@@ -517,6 +517,7 @@ class NewPermitController extends GetxController {
       PmtaskViewModel? pmdetail;
 
       final _permitId = await permitPresenter.getValue();
+      final _type = await permitPresenter.getValuee();
       final _isChecked = await permitPresenter.getisCheckedValue();
       final _pmTaskModel = await permitPresenter.getPmtaskModelValue();
       final _jobModel = await permitPresenter.getJobModelValue();
@@ -534,9 +535,11 @@ class NewPermitController extends GetxController {
         permitId.value = dataFromPreviousScreen['permitId'];
         print("permit id: ${permitId.value}");
         isChecked.value = dataFromPreviousScreen['isChecked'];
+        typee.value = dataFromPreviousScreen['type'];
         jobModel = dataFromPreviousScreen['jobModel'];
         pmtaskViewModel = dataFromPreviousScreen['pmTaskModel'];
         permitPresenter.saveValue(permitId: permitId.value.toString());
+        permitPresenter.saveValuee(type: typee.value.toString());
         permitPresenter.savePmTaskModelValue(
             pmtaskModel: pmtaskViewModel.toString());
         permitPresenter.saveisCheckedValue(isChecked: isChecked.value);
@@ -562,6 +565,7 @@ class NewPermitController extends GetxController {
           pmtaskViewModel = pmdetail;
         }
         isChecked.value = _isChecked ?? false;
+        typee.value = int.tryParse(_type!) ?? 0;
         // print({"permit11", permitId});
         // print({"isChecked", isChecked});
       }

@@ -735,6 +735,8 @@ class PreventiveMaintenanceTaskViewContentWeb
                                                                               27,
                                                                           "fromActorTypeId":
                                                                               2,
+                                                                          "type":
+                                                                              2,
                                                                           "to_actor_type_id":
                                                                               3
                                                                         });
@@ -879,7 +881,8 @@ class PreventiveMaintenanceTaskViewContentWeb
                                                                                     "mrsId": mrsId
                                                                                   });
                                                                                   Get.toNamed(Routes.editMrs, arguments: {
-                                                                                    'mrsId': int.tryParse("$mrsId")
+                                                                                    'mrsId': int.tryParse("$mrsId"),
+                                                                                    'type': 2
                                                                                   });
                                                                                 })
                                                                       ],

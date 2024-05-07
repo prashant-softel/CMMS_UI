@@ -32,6 +32,7 @@ class CreateMrsController extends GetxController {
   var isSetTemplate = false.obs;
   Rx<int> whereUsedTypeId = 0.obs;
   Rx<int> whereUsed = 0.obs;
+  Rx<int> type = 0.obs;
   Rx<int> fromActorTypeId = 0.obs;
   Rx<int> to_actor_type_id = 0.obs;
 
@@ -55,6 +56,9 @@ class CreateMrsController extends GetxController {
         }
         if (arguments.containsKey('to_actor_type_id')) {
           to_actor_type_id.value = arguments['to_actor_type_id'];
+        }
+        if (arguments.containsKey('type')) {
+          type.value = arguments['type'];
         }
         if (arguments.containsKey('fromActorTypeId')) {
           fromActorTypeId.value = arguments['fromActorTypeId'];
