@@ -1,19 +1,18 @@
-
 import 'package:cmms/domain/models/source_of_obs_list_model.dart';
 import 'package:cmms/domain/models/type_of_obs_list_model.dart';
 import 'package:cmms/domain/repositories/repository.dart';
 
-class  TypeOfObsUsecase {
-   TypeOfObsUsecase(this.repository);
+class TypeOfObsUsecase {
+  TypeOfObsUsecase(this.repository);
   Repository repository;
 
-  Future<Future<List<TypeOfObsListModel>>> getTypeOfObservationList(
+  Future<List<TypeOfObsListModel>> getTypeOfObservationList(
       {required bool isLoading}) async {
     return repository.getTypeOfObservationList(
       isLoading: isLoading,
-    
     );
   }
+
   //create
   Future<bool> createTypeOfObslist({
     facilitylistJsonString,
@@ -31,15 +30,13 @@ class  TypeOfObsUsecase {
         modulelistJsonString: modulelistJsonString,
       );
 
-
 // //detele
   deleteTypeOfObs(
-      {required Object business_id, required bool isLoading}) async =>
+          {required Object business_id, required bool isLoading}) async =>
       await repository.deleteTypeOfObs(
         business_id,
         isLoading,
       );
-
 
   // deleteSourceOfObservation(
   //     {required Object business_id, required bool isLoading}) async =>

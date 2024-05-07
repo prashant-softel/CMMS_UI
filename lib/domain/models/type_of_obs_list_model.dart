@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-List<TypeOfObsListModel> typeofobservationFromJson(String str) =>
+List<TypeOfObsListModel> TypeofobservationFromJson(String str) =>
     List<TypeOfObsListModel>.from(
         json.decode(str).map((x) => TypeOfObsListModel.fromJson(x)));
 

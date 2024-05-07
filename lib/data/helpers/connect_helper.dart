@@ -8158,7 +8158,6 @@ class ConnectHelper {
     return responseModel;
   }
 
-
   Future<ResponseModel> getSourceObservationList(
       {required bool isLoading, required String auth}) async {
     ResponseModel responseModel = await apiWrapper.makeRequest(
@@ -8174,7 +8173,7 @@ class ConnectHelper {
   }
 
   //create
-   Future<ResponseModel> createSourceOfOb({
+  Future<ResponseModel> createSourceOfOb({
     required String auth,
     bool? isLoading,
     required businesslistJsonString,
@@ -8194,8 +8193,9 @@ class ConnectHelper {
 
     return responseModel;
   }
+
   //update
-   Future<ResponseModel> updatesourceOfObs({
+  Future<ResponseModel> updatesourceOfObs({
     required String auth,
     bool? isLoading,
     required modulelistJsonString,
@@ -8221,7 +8221,7 @@ class ConnectHelper {
     required business_id,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
-     'MISMaster/DeleteSourceOfObservation?id=$business_id',
+      'MISMaster/DeleteSourceOfObservation?id=$business_id',
       Request.delete,
       business_id,
       isLoading ?? false,
@@ -8233,6 +8233,7 @@ class ConnectHelper {
 
     return responseModel;
   }
+
   //Type Of Observation
   Future<ResponseModel> getTypeOfObservationList(
       {required bool isLoading, required String auth}) async {
@@ -8247,8 +8248,9 @@ class ConnectHelper {
     );
     return responseModel;
   }
+
   //create
-   Future<ResponseModel> createTypeOfObslist({
+  Future<ResponseModel> createTypeOfObslist({
     required String auth,
     bool? isLoading,
     required businesslistJsonString,
@@ -8268,8 +8270,9 @@ class ConnectHelper {
 
     return responseModel;
   }
-   //update
-   Future<ResponseModel> updatetypeOfObs({
+
+  //update
+  Future<ResponseModel> updatetypeOfObs({
     required String auth,
     bool? isLoading,
     required modulelistJsonString,
@@ -8295,7 +8298,7 @@ class ConnectHelper {
     required business_id,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
-     'MISMaster/DeleteTypeOfObservation?id=$business_id',
+      'MISMaster/DeleteTypeOfObservation?id=$business_id',
       Request.delete,
       null,
       isLoading ?? false,
