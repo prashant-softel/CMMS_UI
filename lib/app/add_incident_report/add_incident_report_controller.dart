@@ -23,6 +23,8 @@ import 'package:scrollable_table_view/scrollable_table_view.dart';
 import '../../domain/models/facility_model.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
+import 'package:cmms/domain/models/incident_risk_type_model.dart';
+
 class AddIncidentReportController extends GetxController {
   AddIncidentReportController(this.incidentReportPresenter);
   AddIncidentReportPresenter incidentReportPresenter;
@@ -154,6 +156,8 @@ class AddIncidentReportController extends GetxController {
 
   ///Risk Type List
   RxList<RiskTypeModel> riskTypeList = <RiskTypeModel>[].obs;
+  RxList<IncidentRiskTypeModell> incidentrisktypeList =
+      <IncidentRiskTypeModell>[].obs;
   Rx<bool> isRiskTypeListSelected = true.obs;
   Rx<String> selectedRiskTypeList = ''.obs;
   int selectedRiskTypeId = 0;
@@ -522,6 +526,7 @@ class AddIncidentReportController extends GetxController {
           });
           Future.delayed(Duration(seconds: 1), () {
             getBlocksList(facilityId);
+            getIncidentRiskType(facilityId);
           });
         }
       });
@@ -1072,6 +1077,19 @@ class AddIncidentReportController extends GetxController {
     update(['riskType_list']);
   }
 
+  Future<void> getIncidentRiskType(int facilityId) async {
+    incidentrisktypeList.value = <IncidentRiskTypeModell>[];
+    final _irisktypeList = await incidentReportPresenter.getIncidentRiskType(
+      facilityId: facilityId,
+      isLoading: true,
+    );
+    if (_irisktypeList != null) {
+      for (var facilityType_list in _irisktypeList) {
+        incidentrisktypeList.add(facilityType_list);
+      }
+    }
+  }
+
   void getAssetRestorationActionTakenByList() async {
     assetRestorationActionTakenByList.value = <EmployeeListModel>[];
     final _assetRestorationActionTakenByList =
@@ -1333,11 +1351,11 @@ class AddIncidentReportController extends GetxController {
               'Incident Investigation Done By Id: $selectedIncidentInvestigationDoneById');
         }
         break;
-      case RxList<RiskTypeModel>:
+      case RxList<IncidentRiskTypeModell>:
         {
           int riskTypeListIndex =
-              riskTypeList.indexWhere((x) => x.name == value);
-          selectedRiskTypeId = riskTypeList[riskTypeListIndex].id ?? 0;
+              incidentrisktypeList.indexWhere((x) => x.name == value);
+          selectedRiskTypeId = incidentrisktypeList[riskTypeListIndex].id ?? 0;
           print('Risk Type id: $selectedRiskTypeId');
         }
         break;

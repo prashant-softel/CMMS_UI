@@ -224,7 +224,7 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                                     DropdownWebWidget(
                                                                   dropdownList:
                                                                       controller
-                                                                          .riskTypeList,
+                                                                          .incidentrisktypeList,
                                                                   isValueSelected:
                                                                       controller
                                                                           .isRiskTypeListSelected

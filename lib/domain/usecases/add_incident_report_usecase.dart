@@ -5,6 +5,7 @@ import 'package:cmms/domain/models/employee_list_model.dart';
 import 'package:cmms/domain/models/history_model.dart';
 import 'package:cmms/domain/models/incident_report_details_model.dart';
 import 'package:cmms/domain/models/incident_report_list_model.dart';
+import 'package:cmms/domain/models/incident_risk_type_model.dart';
 import 'package:cmms/domain/models/risk_type_list_model.dart';
 import 'package:cmms/domain/models/type_permit_model.dart';
 
@@ -83,10 +84,9 @@ class AddIncidentReportUsecase {
     required bool isLoading,
   }) async =>
       await _repository.getBusinessList(
-        businessType: businessType,
-        isLoading: isLoading,
-        facilityId: facilityId
-      );
+          businessType: businessType,
+          isLoading: isLoading,
+          facilityId: facilityId);
 
   Future<List<EmployeeListModel>>
       getIncidentInvestigationVerificationDoneByList(
@@ -117,6 +117,14 @@ class AddIncidentReportUsecase {
     return _repository.getRiskTypeList(
       isLoading: isLoading,
       facility_id: facility_id,
+    );
+  }
+
+  Future<List<IncidentRiskTypeModell>> getIncidentRiskType(
+      {required bool isLoading, required int facilityId}) async {
+    return _repository.getIncidentRiskType(
+      isLoading: isLoading,
+      facilityId: facilityId,
     );
   }
 
