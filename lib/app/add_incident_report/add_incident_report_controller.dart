@@ -529,12 +529,11 @@ class AddIncidentReportController extends GetxController {
       if (irId.value != 0) {
         Future.delayed(Duration(seconds: 1), () {
           getIncidentReportDetail(id: irId.value);
+          getIncidentReportHistory(id: irId.value);
         });
       }
       if (irId != 0) {
-        Future.delayed(Duration(seconds: 1), () {
-          getIncidentReportHistory(id: irId.value);
-        });
+        Future.delayed(Duration(seconds: 1), () {});
       }
       Future.delayed(Duration(seconds: 1), () {
         getFacilityPlantList();
@@ -543,7 +542,7 @@ class AddIncidentReportController extends GetxController {
       //   getuserAccessData();
       // });
       Future.delayed(Duration(seconds: 1), () {
-        getTypePermitList();
+        getTypePermitList(facilityId);
       });
       Future.delayed(Duration(seconds: 1), () {
         getInventoryList();
@@ -571,10 +570,8 @@ class AddIncidentReportController extends GetxController {
       });
       Future.delayed(Duration(seconds: 1), () {
         getBodyInjuredData();
-      });
-
-      Future.delayed(Duration(seconds: 1), () {
-        getIncidentReportHistory(id: irId.value);
+        getVictimNameList();
+        getInventoryList();
       });
     } catch (e) {}
 
@@ -1106,9 +1103,9 @@ class AddIncidentReportController extends GetxController {
     }
   }
 
-  Future<void> getTypePermitList() async {
-    final _permitTypeList =
-        await incidentReportPresenter.getTypePermitList(facility_id: 45);
+  Future<void> getTypePermitList(int facility_id) async {
+    final _permitTypeList = await incidentReportPresenter.getTypePermitList(
+        facility_id: facility_id);
 
     if (_permitTypeList != null) {
       for (var permitType in _permitTypeList) {

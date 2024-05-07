@@ -777,7 +777,7 @@ class AddInventoryScreen extends GetView<AddInventoryController> {
                               backgroundColor: ColorValues.appGreenColor,
                               text: 'Submit',
                               onPressed: () {
-                                controller.AddInventory();
+                                controller.AddInventory(fileIds: dropzoneController.fileIds);
                               },
                             ),
                           )
@@ -787,7 +787,7 @@ class AddInventoryScreen extends GetView<AddInventoryController> {
                               backgroundColor: ColorValues.appDarkBlueColor,
                               text: 'Update',
                               onPressed: () {
-                                controller.updateInventory();
+                                controller.updateInventory(fileIds: dropzoneController.fileIds);
                               },
                             ),
                           ),

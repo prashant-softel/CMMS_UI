@@ -378,7 +378,7 @@ class AddInventoryController extends GetxController {
     }
   }
 
-  Future<bool> updateInventory() async {
+  Future<bool> updateInventory({List<dynamic>? fileIds}) async {
     String _serialNoCtrlr = serialNoCtrlr.text.trim();
     String _assetsNameCtrlr = assetsNameCtrlr.text.trim();
     String _moduleQuantityCtrlr = moduleQuantityCtrlr.text.trim();
@@ -438,6 +438,7 @@ class AddInventoryController extends GetxController {
             warranty_type: selectedWarrentyNameId,
             warranty_term_type: selectedwarrantyUsageTermNameId,
             parent_equipment_no: _parentEquipmentNoCtrlr,
+            uplaodfile_ids: fileIds,
             calibrationFrequencyType: 2,
             acCapacity: 2000,
             dcCapacity: 5000,
@@ -518,7 +519,7 @@ class AddInventoryController extends GetxController {
   ///
 
 // /add inventory
-  Future<bool> AddInventory() async {
+  Future<bool> AddInventory({List<dynamic>? fileIds}) async {
     String _serialNoCtrlr = serialNoCtrlr.text.trim();
     String _assetsNameCtrlr = assetsNameCtrlr.text.trim();
     String _moduleQuantityCtrlr = moduleQuantityCtrlr.text.trim();
@@ -579,6 +580,7 @@ class AddInventoryController extends GetxController {
             warranty_type: selectedWarrentyNameId,
             warranty_term_type: selectedwarrantyUsageTermNameId,
             parent_equipment_no: _parentEquipmentNoCtrlr,
+            uplaodfile_ids: fileIds,
             calibrationFrequencyType: 2,
             acCapacity: 2000,
             dcCapacity: 5000,
