@@ -13,7 +13,6 @@ import '../../domain/models/modulelist_model.dart';
 import '../navigators/app_pages.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-
 class TypeOfObsController extends GetxController {
   TypeOfObsController(
     this.moduleListPresenter,
@@ -24,9 +23,9 @@ class TypeOfObsController extends GetxController {
   RxList<InventoryCategoryModel?> equipmentCategoryList =
       <InventoryCategoryModel>[].obs;
   Rx<String> selectedequipment = ''.obs;
-   Rx<bool> isTitleInvalid = false.obs;
+  Rx<bool> isTitleInvalid = false.obs;
   RxBool isContainerVisible = false.obs;
-   Rx<bool> isDescriptionInvalid = false.obs;
+  Rx<bool> isDescriptionInvalid = false.obs;
   Rx<bool> isFormInvalid = false.obs;
   SourceOfObservationListModel? selectedItemupdate;
 
@@ -37,11 +36,9 @@ class TypeOfObsController extends GetxController {
     isCheckedRequire.value =
         !isCheckedRequire.value; // Toggle the checkbox state
   }
-  RxList<TypeOfObsListModel?> TypeOfObsList =
-  <TypeOfObsListModel>[].obs;
 
+  RxList<TypeOfObsListModel?> TypeOfObsList = <TypeOfObsListModel>[].obs;
 
-  RxList<ModuleListModel?>?moduleList = <ModuleListModel?>[].obs;
   int facilityId = 0;
   int type = 1;
   PaginationController paginationController = PaginationController(
@@ -49,55 +46,19 @@ class TypeOfObsController extends GetxController {
     rowsPerPage: 10,
   );
   TypeOfObsListModel? typeOfObsModel;
- 
+
   void toggleContainer() {
     isContainerVisible.toggle();
   }
 
-   TypeOfObsListModel? typeOfObsListModel;
+  TypeOfObsListModel? typeOfObsListModel;
 
   ModuleListModel? moduleListModel;
-  var isToggleOn = false.obs;
-  var isToggle1On = false.obs;
-  var isToggle2On = false.obs;
-  var isToggle3On = false.obs;
-  var isToggle4On = false.obs;
-  var isToggle5On = false.obs;
-  var isToggle6On = false.obs;
+
   final isSuccess = false.obs;
 
-  void toggle() {
-    isToggleOn.value = !isToggleOn.value;
-  }
-
-  void toggle1() {
-    isToggle1On.value = !isToggle1On.value;
-  }
-
-  void toggle2() {
-    isToggle2On.value = !isToggle2On.value;
-  }
-
-  void toggle3() {
-    isToggle3On.value = !isToggle3On.value;
-  }
-
-  void toggle4() {
-    isToggle4On.value = !isToggle4On.value;
-  }
-
-  void toggle5() {
-    isToggle5On.value = !isToggle5On.value;
-  }
-
-  void toggle6() {
-    isToggle6On.value = !isToggle6On.value;
-  }
-
   RxList<String> sourceCloumn = <String>[].obs;
-  RxList<FrequencyModel?> frequencyList = <FrequencyModel>[].obs;
-  Rx<String> selectedfrequency = ''.obs;
-  Rx<bool> isSelectedfrequency = true.obs;
+
   var titleCtrlr = TextEditingController();
   var descriptionCtrlr = TextEditingController();
   FocusNode rdescFocus = FocusNode();
@@ -137,7 +98,7 @@ class TypeOfObsController extends GetxController {
       TypeOfObsList.value = _TypeOfObsList;
       isLoading.value = false;
       paginationController = PaginationController(
-        rowCount: moduleList?.length ?? 0,
+        rowCount: TypeOfObsList?.length ?? 0,
         rowsPerPage: 10,
       );
 
@@ -153,13 +114,13 @@ class TypeOfObsController extends GetxController {
     update(['Type_of_Observation_list']);
   }
 
-
   Future<void> createModulelist() async {
     Get.toNamed(
       Routes.createCheckList,
     );
   }
-   Future<bool> createTypeOfObservationList() async {
+
+  Future<bool> createTypeOfObservationList() async {
     print("CREATE CONTROLLER");
     if (titleCtrlr.text.trim() == '') {
       isTitleInvalid.value = true;
@@ -192,19 +153,18 @@ class TypeOfObsController extends GetxController {
           .toJson(); //createCheckPointToJson([createCheckpoint]);
 
       print({"checkpointJsonString", facilitylistJsonString});
-      await  moduleListPresenter.createTypeOfObslist(
+      await moduleListPresenter.createTypeOfObslist(
         facilitylistJsonString: facilitylistJsonString,
         isLoading: true,
       );
       cleardata();
-       getTypeOfObservationList();
+      getTypeOfObservationList();
       return true;
-    
     }
     return true;
   }
 
-   //Update
+  //Update
 
   Future<bool> updatetypeOfObs(checklistId) async {
     String _name = titleCtrlr.text.trim();
@@ -223,10 +183,9 @@ class TypeOfObsController extends GetxController {
       isLoading: true,
     );
     return true;
-    
   }
   // delete
-  
+
   void isDeleteDialog({String? business_id, String? business}) {
     Get.dialog(
       AlertDialog(
@@ -237,7 +196,8 @@ class TypeOfObsController extends GetxController {
           ),
           RichText(
             text: TextSpan(
-                text: 'Are you sure you want to delete the Source_Of_Observation',
+                text:
+                    'Are you sure you want to delete the Source_Of_Observation',
                 style: Styles.blackBold16,
                 children: [
                   TextSpan(
@@ -274,15 +234,13 @@ class TypeOfObsController extends GetxController {
         ],
       ),
     );
-    
   }
 
   Future<void> deleteTypeOfObs(String? business_id) async {
-      await moduleListPresenter.deleteTypeOfObs(
-        business_id,
-        isLoading: true,
-      );
-    
+    await moduleListPresenter.deleteTypeOfObs(
+      business_id,
+      isLoading: true,
+    );
   }
 
   // //Update
@@ -304,10 +262,10 @@ class TypeOfObsController extends GetxController {
   //     isLoading: true,
   //   );
   //   return true;
-    
+
   // }
   // delete
-  
+
   // void isDeleteDialog({String? business_id, String? business}) {
   //   Get.dialog(
   //     AlertDialog(
@@ -355,7 +313,7 @@ class TypeOfObsController extends GetxController {
   //       ],
   //     ),
   //   );
-    
+
   // }
 
   // Future<void> deleteSourceOfObs(String? business_id) async {
@@ -363,12 +321,8 @@ class TypeOfObsController extends GetxController {
   //       business_id,
   //       isLoading: true,
   //     );
-    
+
   // }
-  
-
-  
-
 
   // Future<bool> createModuleListNumber() async {
   //   if (modulelistNumberCtrlr.text.trim() == '' ||
@@ -412,13 +366,13 @@ class TypeOfObsController extends GetxController {
     // isToggleOn.value = false;
     await {cleardata()};
   }
-    Future<void> issuccessCreatechecklist() async {
+
+  Future<void> issuccessCreatechecklist() async {
     isSuccess.toggle();
     await {cleardata()};
   }
 
   cleardata() {
-  
     selectedItem = null;
     titleCtrlr.clear();
     descriptionCtrlr.clear();
@@ -516,11 +470,11 @@ class TypeOfObsController extends GetxController {
   //   return true;
   // }
 
-  void checkForm(){
-    if(isTitleInvalid.value == true || isDescriptionInvalid.value ==true){
+  void checkForm() {
+    if (isTitleInvalid.value == true || isDescriptionInvalid.value == true) {
       isFormInvalid.value = true;
-    }else{
-       isFormInvalid.value = false;
+    } else {
+      isFormInvalid.value = false;
     }
   }
 }

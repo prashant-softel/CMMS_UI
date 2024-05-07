@@ -12616,7 +12616,8 @@ class Repository {
       return null;
     }
   }
-   Future<List<SourceOfObservationListModel>> getSourceObservationList({
+
+  Future<List<SourceOfObservationListModel>> getSourceObservationList({
     required bool isLoading,
   }) async {
     try {
@@ -12630,9 +12631,8 @@ class Repository {
       print('Source Of Obervation: ${res.data}');
 
       if (!res.hasError) {
- 
         var Sourcetype = sourceofobservationFromJson(res.data);
-        return  Sourcetype;
+        return Sourcetype;
       }
       return [];
     } catch (error) {
@@ -12640,9 +12640,10 @@ class Repository {
       return [];
     }
   }
-  
+
   //create
-  Future<bool> createSourceOfObslist({bool? isLoading, businesslistJsonString}) async {
+  Future<bool> createSourceOfObslist(
+      {bool? isLoading, businesslistJsonString}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.createSourceOfObslist(
@@ -12662,8 +12663,9 @@ class Repository {
       return false;
     }
   }
+
   //update
-   Future<bool> updatesourceOfObs({
+  Future<bool> updatesourceOfObs({
     bool? isLoading,
     modulelistJsonString,
   }) async {
@@ -12687,6 +12689,7 @@ class Repository {
       return false;
     }
   }
+
   //delete
   Future<void> deleteSourceOfObs(Object business_id, bool isLoading) async {
     try {
@@ -12700,7 +12703,8 @@ class Repository {
       if (!res.hasError) {
         //get delete response back from API
       } else {
-        Utility.showDialog(res.errorCode.toString(), 'delete Source of observation');
+        Utility.showDialog(
+            res.errorCode.toString(), 'delete Source of observation');
       }
     } catch (error) {
       print(error.toString());
@@ -12709,7 +12713,7 @@ class Repository {
 
   //Type_of_oservation
   //get
-  Future<List<TypeOfObsListModel >> getTypeOfObservationList({
+  Future<List<TypeOfObsListModel>> getTypeOfObservationList({
     required bool isLoading,
   }) async {
     try {
@@ -12723,9 +12727,8 @@ class Repository {
       print('Type Of Obervation: ${res.data}');
 
       if (!res.hasError) {
- 
-        var Sourcetype =  typeofobservationFromJson(res.data);
-        return  Sourcetype;
+        var Sourcetype = TypeofobservationFromJson(res.data);
+        return Sourcetype;
       }
       return [];
     } catch (error) {
@@ -12733,8 +12736,10 @@ class Repository {
       return [];
     }
   }
-   //create
-  Future<bool> createTypeOfObslist({bool? isLoading, businesslistJsonString}) async {
+
+  //create
+  Future<bool> createTypeOfObslist(
+      {bool? isLoading, businesslistJsonString}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.createTypeOfObslist(
@@ -12754,8 +12759,9 @@ class Repository {
       return false;
     }
   }
-   //update
-   Future<bool> updatetypeOfObs({
+
+  //update
+  Future<bool> updatetypeOfObs({
     bool? isLoading,
     modulelistJsonString,
   }) async {
@@ -12779,6 +12785,7 @@ class Repository {
       return false;
     }
   }
+
   //delete
   Future<void> deleteTypeOfObs(Object business_id, bool isLoading) async {
     try {
@@ -12792,14 +12799,13 @@ class Repository {
       if (!res.hasError) {
         //get delete response back from API
       } else {
-        Utility.showDialog(res.errorCode.toString(), 'delete Type of observation');
+        Utility.showDialog(
+            res.errorCode.toString(), 'delete Type of observation');
       }
     } catch (error) {
       print(error.toString());
     }
   }
-
-  
 
   //end
 }
