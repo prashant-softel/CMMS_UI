@@ -285,10 +285,14 @@ class AddVegetationPlanController extends GetxController {
     switch (list.runtimeType) {
       case RxList<FrequencyModel>:
         {
-          int frequencyIndex =
-              frequencyList.indexWhere((x) => x?.name == value);
-          selectedfrequencyId = frequencyList[frequencyIndex]?.id ?? 0;
-          selectedfrequency.value = value;
+          if (value != "Please Select") {
+            int frequencyIndex =
+                frequencyList.indexWhere((x) => x?.name == value);
+            selectedfrequencyId = frequencyList[frequencyIndex]?.id ?? 0;
+            selectedfrequency.value = value;
+          } else {
+            selectedfrequencyId = 0;
+          }
         }
         break;
 
