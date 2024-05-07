@@ -5,8 +5,6 @@ import 'package:cmms/domain/usecases/type_of_obs_usecase.dart';
 
 import '../../domain/models/frequency_model.dart';
 import '../../domain/models/inventory_category_model.dart';
-import '../../domain/models/modulelist_model.dart';
-import '../../domain/usecases/module_list_usecase.dart';
 
 class TypeOfObsPresenter {
   TypeOfObsPresenter(this.typeOfObs);
