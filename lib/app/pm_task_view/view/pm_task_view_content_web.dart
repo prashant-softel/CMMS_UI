@@ -81,9 +81,9 @@ class PreventiveMaintenanceTaskViewContentWeb
                         controller.clearStoreTaskWhereUsedData();
                         controller.clearStoreTaskfromActorData();
 
-                        Get.offNamed(Routes.preventive);
+                        Get.offNamed(Routes.pmTask);
                       },
-                      child: Text(" / Preventive Maintenance".toUpperCase(),
+                      child: Text(" / PM Task list".toUpperCase(),
                           style: Styles.greyLight14),
                     ),
                     Text(" / PM TASK VIEW", style: Styles.greyLight14)

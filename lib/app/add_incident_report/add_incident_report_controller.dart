@@ -23,6 +23,8 @@ import 'package:scrollable_table_view/scrollable_table_view.dart';
 import '../../domain/models/facility_model.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
+import 'package:cmms/domain/models/incident_risk_type_model.dart';
+
 class AddIncidentReportController extends GetxController {
   AddIncidentReportController(this.incidentReportPresenter);
   AddIncidentReportPresenter incidentReportPresenter;
@@ -154,6 +156,8 @@ class AddIncidentReportController extends GetxController {
 
   ///Risk Type List
   RxList<RiskTypeModel> riskTypeList = <RiskTypeModel>[].obs;
+  RxList<IncidentRiskTypeModell> incidentrisktypeList =
+      <IncidentRiskTypeModell>[].obs;
   Rx<bool> isRiskTypeListSelected = true.obs;
   Rx<String> selectedRiskTypeList = ''.obs;
   int selectedRiskTypeId = 0;
@@ -522,6 +526,7 @@ class AddIncidentReportController extends GetxController {
           });
           Future.delayed(Duration(seconds: 1), () {
             getBlocksList(facilityId);
+            getIncidentRiskType(facilityId);
           });
         }
       });
@@ -529,12 +534,11 @@ class AddIncidentReportController extends GetxController {
       if (irId.value != 0) {
         Future.delayed(Duration(seconds: 1), () {
           getIncidentReportDetail(id: irId.value);
+          getIncidentReportHistory(id: irId.value);
         });
       }
       if (irId != 0) {
-        Future.delayed(Duration(seconds: 1), () {
-          getIncidentReportHistory(id: irId.value);
-        });
+        Future.delayed(Duration(seconds: 1), () {});
       }
       Future.delayed(Duration(seconds: 1), () {
         getFacilityPlantList();
@@ -543,7 +547,7 @@ class AddIncidentReportController extends GetxController {
       //   getuserAccessData();
       // });
       Future.delayed(Duration(seconds: 1), () {
-        getTypePermitList();
+        getTypePermitList(facilityId);
       });
       Future.delayed(Duration(seconds: 1), () {
         getInventoryList();
@@ -571,10 +575,8 @@ class AddIncidentReportController extends GetxController {
       });
       Future.delayed(Duration(seconds: 1), () {
         getBodyInjuredData();
-      });
-
-      Future.delayed(Duration(seconds: 1), () {
-        getIncidentReportHistory(id: irId.value);
+        getVictimNameList();
+        getInventoryList();
       });
     } catch (e) {}
 
@@ -1075,6 +1077,19 @@ class AddIncidentReportController extends GetxController {
     update(['riskType_list']);
   }
 
+  Future<void> getIncidentRiskType(int facilityId) async {
+    incidentrisktypeList.value = <IncidentRiskTypeModell>[];
+    final _irisktypeList = await incidentReportPresenter.getIncidentRiskType(
+      facilityId: facilityId,
+      isLoading: true,
+    );
+    if (_irisktypeList != null) {
+      for (var facilityType_list in _irisktypeList) {
+        incidentrisktypeList.add(facilityType_list);
+      }
+    }
+  }
+
   void getAssetRestorationActionTakenByList() async {
     assetRestorationActionTakenByList.value = <EmployeeListModel>[];
     final _assetRestorationActionTakenByList =
@@ -1106,9 +1121,9 @@ class AddIncidentReportController extends GetxController {
     }
   }
 
-  Future<void> getTypePermitList() async {
-    final _permitTypeList =
-        await incidentReportPresenter.getTypePermitList(facility_id: 45);
+  Future<void> getTypePermitList(int facility_id) async {
+    final _permitTypeList = await incidentReportPresenter.getTypePermitList(
+        facility_id: facility_id);
 
     if (_permitTypeList != null) {
       for (var permitType in _permitTypeList) {
@@ -1336,11 +1351,11 @@ class AddIncidentReportController extends GetxController {
               'Incident Investigation Done By Id: $selectedIncidentInvestigationDoneById');
         }
         break;
-      case RxList<RiskTypeModel>:
+      case RxList<IncidentRiskTypeModell>:
         {
           int riskTypeListIndex =
-              riskTypeList.indexWhere((x) => x.name == value);
-          selectedRiskTypeId = riskTypeList[riskTypeListIndex].id ?? 0;
+              incidentrisktypeList.indexWhere((x) => x.name == value);
+          selectedRiskTypeId = incidentrisktypeList[riskTypeListIndex].id ?? 0;
           print('Risk Type id: $selectedRiskTypeId');
         }
         break;
