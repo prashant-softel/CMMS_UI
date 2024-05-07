@@ -405,25 +405,25 @@ class TypeOfObsWeb extends GetView<TypeOfObsController> {
                                         height: 15,
                                       ),
                                       Row(
-                                        children: [
-                                          Expanded(
-                                            child: CustomRichText(
-                                                title: 'Status: '),
-                                          ),
-                                          SizedBox(
-                                            width: 4,
-                                          ),
-                                          Checkbox(
-                                            value: controller
-                                                .isCheckedRequire.value,
-                                            onChanged: (bool? value) {
-                                              controller
-                                                  .requiretoggleCheckbox();
-                                              print(
-                                                  'Checkbox:${controller.isCheckedRequire.value}');
-                                            },
-                                          ),
-                                        ],
+                                        // children: [
+                                          // Expanded(
+                                          //   child: CustomRichText(
+                                          //       title: 'Status: '),
+                                          // ),
+                                        //   SizedBox(
+                                        //     width: 4,
+                                        //   ),
+                                        //   // Checkbox(
+                                        //   //   value: controller
+                                        //   //       .isCheckedRequire.value,
+                                        //   //   onChanged: (bool? value) {
+                                        //   //     controller
+                                        //   //         .requiretoggleCheckbox();
+                                        //   //     print(
+                                        //   //         'Checkbox:${controller.isCheckedRequire.value}');
+                                        //   //   },
+                                        //   // ),
+                                        // ],
                                       ),
                                       SizedBox(
                                         height: 15,
