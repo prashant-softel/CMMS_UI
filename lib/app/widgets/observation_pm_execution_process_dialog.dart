@@ -580,7 +580,19 @@ class ObservationPmExecutionViewDialog extends GetView {
                                                                     .width,
                                                             dropdownList:
                                                                 controller
-                                                                    .cmmrsItems,
+                                                                    .cmmrsItems!
+                                                                    .where(
+                                                                        (p0) {
+                                                                      return !controller
+                                                                          .rowItem
+                                                                          .map((p0) => p0[0]
+                                                                              [
+                                                                              "value"])
+                                                                          .contains(
+                                                                              p0!.name);
+                                                                    })
+                                                                    .toList()
+                                                                    .obs,
                                                             selectedValue:
                                                                 mapData[
                                                                     "value"],
