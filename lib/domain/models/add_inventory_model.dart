@@ -36,6 +36,7 @@ class AddInventoryRequestModel {
   String? parent_equipment_no;
   int? warranty_term_type;
   String? certificate_number;
+  List<dynamic>? uplaodfile_ids;
 
   dynamic attachments;
   List<LstWarrantyDetail>? lstWarrantyDetail;
@@ -78,6 +79,7 @@ class AddInventoryRequestModel {
       this.assetdescription,
       this.lstWarrantyDetail,
       this.parent_equipment_no,
+      this.uplaodfile_ids,
       this.warranty_term_type,
       this.certificate_number});
 
@@ -94,7 +96,7 @@ class AddInventoryRequestModel {
     parentId = json['parentId'];
     categoryId = json['categoryId'];
     warranty_type = json['warranty_type'];
-
+    uplaodfile_ids = json['uploadfile_ids'];
     acCapacity = json['acCapacity'];
     dcCapacity = json['dcCapacity'];
     serialNumber = json['serialNumber'];
@@ -148,6 +150,7 @@ class AddInventoryRequestModel {
 
     data['categoryId'] = this.categoryId;
     data['warranty_type'] = this.warranty_type;
+    data['uplaodfile_ids'] = this.uplaodfile_ids;
 
     data['acCapacity'] = this.acCapacity;
     data['dcCapacity'] = this.dcCapacity;

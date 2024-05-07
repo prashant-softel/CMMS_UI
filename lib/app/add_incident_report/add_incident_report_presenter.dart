@@ -5,6 +5,7 @@ import 'package:cmms/domain/models/employee_list_model.dart';
 import 'package:cmms/domain/models/history_model.dart';
 import 'package:cmms/domain/models/incident_report_details_model.dart';
 import 'package:cmms/domain/models/incident_report_list_model.dart';
+import 'package:cmms/domain/models/incident_risk_type_model.dart';
 import 'package:cmms/domain/models/inventory_model.dart';
 import 'package:cmms/domain/models/risk_type_list_model.dart';
 import 'package:cmms/domain/models/type_permit_model.dart';
@@ -37,10 +38,9 @@ class AddIncidentReportPresenter {
     bool? isLoading,
   }) async =>
       await incidentReportUsecase.getBusinessList(
-        isLoading: isLoading ?? false,
-        businessType: businessType,
-        facilityId: facilityId
-      );
+          isLoading: isLoading ?? false,
+          businessType: businessType,
+          facilityId: facilityId);
   Future<List<BodyInjuredModel?>?> getBodyInjuredData({
     bool? isLoading,
   }) async =>
@@ -96,6 +96,14 @@ class AddIncidentReportPresenter {
     return incidentReportUsecase.getRiskTypeList(
       isLoading: isLoading,
       facility_id: facility_id,
+    );
+  }
+
+  Future<List<IncidentRiskTypeModell>> getIncidentRiskType(
+      {required bool isLoading, required int facilityId}) async {
+    return incidentReportUsecase.getIncidentRiskType(
+      isLoading: isLoading,
+      facilityId: facilityId,
     );
   }
 
