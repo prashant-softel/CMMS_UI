@@ -917,40 +917,43 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                             CrossAxisAlignment
                                                                 .start,
                                                         children: [
-                                                          Row(
-                                                            children: [
-                                                              CustomRichText(
-                                                                  title:
-                                                                      'Detail Investigation Required: '),
-                                                              SizedBox(
-                                                                width: 3,
-                                                              ),
-                                                              SizedBox(
-                                                                width: MediaQuery.of(
-                                                                            context)
-                                                                        .size
-                                                                        .width /
-                                                                    5,
-                                                                child: Obx(
-                                                                  () => Switch(
-                                                                    activeColor:
-                                                                        Colors
-                                                                            .green,
-                                                                    value: controller
-                                                                        .detailInvestigationTeamValue
-                                                                        .value,
-                                                                    onChanged:
-                                                                        (value) {
-                                                                      controller
+                                                          IgnorePointer(
+                                                            child: Row(
+                                                              children: [
+                                                                CustomRichText(
+                                                                    title:
+                                                                        'Detail Investigation Required: '),
+                                                                SizedBox(
+                                                                  width: 3,
+                                                                ),
+                                                                SizedBox(
+                                                                  width: MediaQuery.of(
+                                                                              context)
+                                                                          .size
+                                                                          .width /
+                                                                      5,
+                                                                  child: Obx(
+                                                                    () =>
+                                                                        Switch(
+                                                                      activeColor:
+                                                                          Colors
+                                                                              .green,
+                                                                      value: controller
                                                                           .detailInvestigationTeamValue
-                                                                          .value = value;
-                                                                      print(
-                                                                          'detail investigation required: ${controller.detailInvestigationTeamValue.value}');
-                                                                    },
+                                                                          .value,
+                                                                      onChanged:
+                                                                          (value) {
+                                                                        controller
+                                                                            .detailInvestigationTeamValue
+                                                                            .value = value;
+                                                                        print(
+                                                                            'detail investigation required: ${controller.detailInvestigationTeamValue.value}');
+                                                                      },
+                                                                    ),
                                                                   ),
                                                                 ),
-                                                              ),
-                                                            ],
+                                                              ],
+                                                            ),
                                                           ),
                                                           ////Investigation team
                                                           controller.detailInvestigationTeamValue ==
@@ -1116,38 +1119,42 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                                 )
                                                               : Dimens.box0,
 
-                                                          Row(
-                                                            children: [
-                                                              CustomRichText(
-                                                                  title:
-                                                                      'Why Why Analysis Required: '),
-                                                              Dimens.boxWidth10,
-                                                              SizedBox(
-                                                                width: MediaQuery.of(
-                                                                            context)
-                                                                        .size
-                                                                        .width /
-                                                                    5,
-                                                                child: Obx(
-                                                                  () => Switch(
-                                                                    activeColor:
-                                                                        Colors
-                                                                            .green,
-                                                                    value: controller
-                                                                        .whyWhyAnalysisValue
-                                                                        .value,
-                                                                    onChanged:
-                                                                        (value) {
-                                                                      controller
+                                                          IgnorePointer(
+                                                            child: Row(
+                                                              children: [
+                                                                CustomRichText(
+                                                                    title:
+                                                                        'Why Why Analysis Required: '),
+                                                                Dimens
+                                                                    .boxWidth10,
+                                                                SizedBox(
+                                                                  width: MediaQuery.of(
+                                                                              context)
+                                                                          .size
+                                                                          .width /
+                                                                      5,
+                                                                  child: Obx(
+                                                                    () =>
+                                                                        Switch(
+                                                                      activeColor:
+                                                                          Colors
+                                                                              .green,
+                                                                      value: controller
                                                                           .whyWhyAnalysisValue
-                                                                          .value = value;
-                                                                      print(
-                                                                          'Why Why Analysis required: ${controller.whyWhyAnalysisValue.value}');
-                                                                    },
+                                                                          .value,
+                                                                      onChanged:
+                                                                          (value) {
+                                                                        controller
+                                                                            .whyWhyAnalysisValue
+                                                                            .value = value;
+                                                                        print(
+                                                                            'Why Why Analysis required: ${controller.whyWhyAnalysisValue.value}');
+                                                                      },
+                                                                    ),
                                                                   ),
                                                                 ),
-                                                              ),
-                                                            ],
+                                                              ],
+                                                            ),
                                                           ),
 
                                                           ///Why Why Analysis Block
@@ -4768,60 +4775,66 @@ class DetailsOfInjuredPerson extends StatelessWidget {
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
                                             children: [
-                                              controller.selectedOption ==
-                                                      "Other"
-                                                  ? Container(
-                                                      decoration: BoxDecoration(
-                                                        boxShadow: [
-                                                          BoxShadow(
-                                                            color:
-                                                                Colors.black26,
-                                                            offset:
-                                                                const Offset(
-                                                              5.0,
-                                                              5.0,
-                                                            ),
-                                                            blurRadius: 5.0,
-                                                            spreadRadius: 1.0,
-                                                          ),
-                                                        ],
-                                                        color: ColorValues
-                                                            .whiteColor,
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(5),
+                                              // controller.selectedOption ==
+                                              //         "Other"
+                                              //     ?
+                                              Container(
+                                                decoration: BoxDecoration(
+                                                  boxShadow: [
+                                                    BoxShadow(
+                                                      color: Colors.black26,
+                                                      offset: const Offset(
+                                                        5.0,
+                                                        5.0,
                                                       ),
-                                                      child: DropdownWebStock(
-                                                        width: MediaQuery.of(
-                                                                    context)
+                                                      blurRadius: 5.0,
+                                                      spreadRadius: 1.0,
+                                                    ),
+                                                  ],
+                                                  color: ColorValues.whiteColor,
+                                                  borderRadius:
+                                                      BorderRadius.circular(5),
+                                                ),
+                                                child: Obx(
+                                                  () => DropdownWebStock(
+                                                    width:
+                                                        MediaQuery.of(context)
                                                                 .size
                                                                 .width /
                                                             4,
-                                                        dropdownList: controller
-                                                            .genderList,
+                                                    dropdownList:
+                                                        controller.genderList,
+                                                    selectedValue: controller
+                                                                .selectedOption ==
+                                                            "Other"
+                                                        ? mapData["value"]
+                                                        : controller
+                                                            .dropdownVictimNameMapperData[
+                                                                record[0]
+                                                                    ['value']]
+                                                            ?.gender,
+                                                    onValueChanged:
+                                                        (list, selectedValue) {
+                                                      print({
                                                         selectedValue:
-                                                            mapData["value"],
-                                                        onValueChanged: (list,
-                                                            selectedValue) {
-                                                          print({
-                                                            selectedValue:
-                                                                selectedValue
-                                                          });
-                                                          mapData["value"] =
-                                                              selectedValue;
-                                                          controller.dropdownGenderMapperData[
-                                                                  selectedValue] =
-                                                              list.firstWhere(
-                                                                  (element) =>
-                                                                      element
-                                                                          .name ==
-                                                                      selectedValue,
-                                                                  orElse: null);
-                                                        },
-                                                      ),
-                                                    )
-                                                  : Text(
-                                                      "${controller.dropdownVictimNameMapperData[record[0]['value']]?.gender ?? ""}")
+                                                            selectedValue
+                                                      });
+                                                      mapData["value"] =
+                                                          selectedValue;
+                                                      controller.dropdownGenderMapperData[
+                                                              selectedValue] =
+                                                          list.firstWhere(
+                                                              (element) =>
+                                                                  element
+                                                                      .name ==
+                                                                  selectedValue,
+                                                              orElse: null);
+                                                    },
+                                                  ),
+                                                ),
+                                              )
+                                              // : Text(
+                                              //     "${controller.dropdownVictimNameMapperData[record[0]['value']]?.gender ?? ""}")
                                             ],
                                           ),
                                         )
