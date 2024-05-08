@@ -230,7 +230,7 @@ class PermitTypeController extends GetxController {
       //     int equipmentIndex =
       //         equipmentCategoryList.indexWhere((x) => x?.name == value);
       //     selectedEquipmentId = equipmentCategoryList[equipmentIndex]?.id ?? 0;
-      //   }
+      //   }p
       //
       //   break;
       // case RxList<FrequencyModel>:
@@ -242,13 +242,19 @@ class PermitTypeController extends GetxController {
       //   break;
       case RxList<FacilityModel>:
         {
-          int facilityIndex = facilityList.indexWhere((x) => x?.name == value);
+          if(value != "Please Select"){
+            int facilityIndex = facilityList.indexWhere((x) => x?.name == value);
           int facilityIds = 0;
           if (facilityIndex >= 0) {
             facilityIds = facilityList[facilityIndex]?.id ?? 0;
           }
           selectedFacilityId = facilityIds;
           getTypePermitList(selectedFacilityId!);
+        }
+
+          else{
+            selectedFacilityId=0;
+          }
         }
         break;
       default:

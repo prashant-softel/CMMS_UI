@@ -577,13 +577,19 @@ class PreventiveMaintenanceExecutionController extends GetxController {
     switch (list.runtimeType) {
       case RxList<ScheduleCheckPoint?>:
         {
-          int assetsIndex =
+          if (value != "Please Select") {
+            int assetsIndex =
               scheduleCheckPoints.indexWhere((x) => x.name == value);
           selectedAssetsId = scheduleCheckPoints[assetsIndex].schedule_id ?? 0;
           if (selectedAssetsId > 0) {
             isAssetsSelected.value = true;
           }
           selectedasset.value = scheduleCheckPoints[assetsIndex].name ?? "";
+            
+          }else{
+            selectedAssetsId=0;
+
+          }
         }
         break;
     }

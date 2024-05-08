@@ -377,17 +377,22 @@ class AddJobController extends GetxController {
   }
 
   ///Value changed in any of the dropdowns - single select
-  void onDropdownValueChanged(dynamic list, dynamic value) {
+  void onFValueChanged(dynamic list, dynamic value) {
     switch (list.runtimeType) {
       case RxList<FacilityModel>:
         {
-          int facilityIndex = facilityList.indexWhere((x) => x?.name == value);
+         if (value != "Please Select") {
+           int facilityIndex = facilityList.indexWhere((x) => x?.name == value);
           selectedFacilityId = facilityList[facilityIndex]?.id ?? 0;
           if (selectedFacilityId != 0) {
             isFacilitySelected.value = true;
           }
           selectedFacility.value = value;
           getBlocksList(selectedFacilityId);
+           
+         }else{
+          selectedFacilityId=0;
+         }
         }
         break;
 

@@ -354,21 +354,33 @@ class ReceiveGoodsOrdersController extends GetxController {
     switch (list.runtimeType) {
       case RxList<CurrencyListModel>:
         {
-          int currencyIndex =
+         if (value != "Please Select") {
+            int currencyIndex =
               unitCurrencyList.indexWhere((x) => x?.name == value);
           selectedUnitCurrencyId = unitCurrencyList[currencyIndex]?.id ?? 0;
+         } else {
+           selectedUnitCurrencyId=0;
+         }
         }
         break;
       case RxList<BusinessTypeModel>:
         {
-          int equipmentIndex = ownerList.indexWhere((x) => x?.name == value);
+          if (value != "Please Select") {
+            int equipmentIndex = ownerList.indexWhere((x) => x?.name == value);
           selectedBusinessTypeId = ownerList[equipmentIndex]?.id ?? 0;
+          } else {
+            selectedBusinessTypeId=0;
+          }
         }
         break;
       case RxList<PaiedModel>:
         {
-          int paidIndex = paid.indexWhere((x) => x!.name == value);
+          if (value != "Please Select") {
+            int paidIndex = paid.indexWhere((x) => x!.name == value);
           paidId = paid[paidIndex]!.id ?? 0;
+          } else {
+            paidId=0;
+          }
         }
         break;
     }

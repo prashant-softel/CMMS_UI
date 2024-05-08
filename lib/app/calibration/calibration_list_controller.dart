@@ -114,9 +114,14 @@ class CalibrationListController extends GetxController {
     switch (list.runtimeType) {
       case RxList<BusinessListModel>:
         {
-          int facilityIndex =
+          if (value != "Please Select") {
+            int facilityIndex =
               venderNameList.indexWhere((x) => x?.name == value);
           selectedvenderId = venderNameList[facilityIndex]?.id ?? 0;
+            
+          }else{
+            selectedvenderId=0;
+          }
         }
         break;
 

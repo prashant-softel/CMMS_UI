@@ -225,9 +225,15 @@ class WasteDataController extends GetxController {
     switch (list.runtimeType) {
       case RxList<WasteSource>:
         {
-          int typeOfWaterIndex =
+          if (value != "Please Select") {
+            int typeOfWaterIndex =
               typeOfWasteList.indexWhere((x) => x?.name == value);
           selectedTypeOfWasteId = typeOfWasteList[typeOfWaterIndex]?.id ?? 0;
+            
+          }else{
+            selectedTypeOfWasteId=0;
+
+          }
         }
         break;
     }

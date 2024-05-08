@@ -60,11 +60,15 @@ class RoleNotificationController extends GetxController {
     switch (list.runtimeType) {
       case RxList<RoleModel>:
         {
-          int roleIndex = roleList.indexWhere((x) => x?.name == value);
+        if (value != "Please Select") {
+            int roleIndex = roleList.indexWhere((x) => x?.name == value);
           selectedRoleId = roleList[roleIndex]?.id ?? 0;
           selectedRole.value = roleList[0]?.name ?? '';
 
           getRoleNotificationList(roleId: selectedRoleId, isloading: true);
+        }else{
+          selectedRoleId=0;
+        }
         }
         break;
       default:

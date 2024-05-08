@@ -514,7 +514,8 @@ class AddUserController extends GetxController {
     switch (list.runtimeType) {
       case RxList<CountryModel>:
         {
-          int countryIndex = countryList.indexWhere((x) => x?.name == value);
+         if (value != "Please Select") {
+           int countryIndex = countryList.indexWhere((x) => x?.name == value);
           selectedCountryId = countryList[countryIndex]?.id ?? 0;
           cityList.clear();
           stateList.clear();
@@ -524,6 +525,10 @@ class AddUserController extends GetxController {
           selectedStateId = 0;
 
           getStateList(selectedCountryId);
+           
+         }else{
+          selectedCountryId=0;
+         }
         }
 
         break;

@@ -101,9 +101,14 @@ class WorkTypeController extends GetxController {
     switch (list.runtimeType) {
       case RxList<InventoryCategoryModel>:
         {
-          int equipmentIndex =
+          if (value != "Please Select") {
+            int equipmentIndex =
               equipmentCategoryList.indexWhere((x) => x?.name == value);
           selectedEquipmentId = equipmentCategoryList[equipmentIndex]?.id ?? 0;
+            
+          }else{
+            selectedEquipmentId=0;
+          }
         }
 
         break;

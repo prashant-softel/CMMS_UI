@@ -314,44 +314,65 @@ class ViewWarrantyClaimController extends GetxController {
     switch (list.runtimeType) {
       case RxList<FacilityModel>:
         {
-          int facilityIndex = facilityList.indexWhere((x) => x?.name == value);
+          if (value != "Please Select") {
+            int facilityIndex = facilityList.indexWhere((x) => x?.name == value);
 
           _facilityId.add(facilityList[facilityIndex]?.id ?? 0);
+          } else {
+            // facilityId=0;
+          }
         }
         break;
       case RxList<InventoryModel>:
         {
-          for (var workAreaName in selectedWorkAreaNameList) {
+          if (value != "Please Select") {
+            for (var workAreaName in selectedWorkAreaNameList) {
             int workAreaIndex =
                 workAreaList.indexWhere((x) => x?.name == workAreaName);
             selectedWorkAreaIdList.add(workAreaIndex);
+          }
+          } else {
+            // selectedWorkAreaIdList=0;
           }
         }
         break;
       case RxList<BusinessListModel>:
         {
-          for (var supplierName in selectedSupplierNameList) {
+          if (value != "Please Select") {
+            for (var supplierName in selectedSupplierNameList) {
             int supplierNameIndex =
                 supplierNameList.indexWhere((x) => x?.name == supplierName);
             selectedSupplierNameIdList.add(supplierNameIndex);
+          }
+          } else {
+            // selectedSupplierNameIdList=0;
           }
         }
         break;
       case RxList<CurrencyListModel>:
         {
-          for (var unitCurrency in selectedUnitCurrencyList) {
+         if (value != "Please Select") {
+            for (var unitCurrency in selectedUnitCurrencyList) {
             int unitCurrencyIndex =
                 unitCurrencyList.indexWhere((x) => x?.code == unitCurrency);
             selectedUnitCurrencyIdList.add(unitCurrencyIndex);
           }
+         } else {
+          //  selectedUnitCurrencyIdList=0;
+         }
         }
         break;
       case RxList<EmployeeListModel>:
         {
+          if (value != "Please Select") {
+            
           for (var employeeDataList in selectedEmployeeDataList) {
             int employeeListIndex =
                 employeeList.indexWhere((x) => x.name == employeeDataList);
             selectedEmployeeIdList.add(employeeListIndex);
+          }
+          } else {
+            // selectedEmployeeIdList=0;
           }
         }
         break;

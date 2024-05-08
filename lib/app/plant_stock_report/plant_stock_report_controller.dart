@@ -208,7 +208,8 @@ class PlantStockReportController extends GetxController {
     switch (list.runtimeType) {
       case RxList<GetAssetDataModel>:
         {
-          if (value != null) {
+          if (value != "Please Select") {
+            if (value != null) {
             for (var selectedItem in value) {
               int equipCatIndex =
                   assetList.indexWhere((x) => x?.name == selectedItem);
@@ -223,6 +224,14 @@ class PlantStockReportController extends GetxController {
 
           getPlantStockList(facilityId, formattedTodate1, formattedFromdate1,
                false, selectedAssetsNameIdList.value);
+            
+          }else{
+            
+            // selectedAssetsNameIdList=0;
+
+          
+
+          }
         }
         break;
     }
