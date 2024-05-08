@@ -377,7 +377,7 @@ class AddJobController extends GetxController {
   }
 
   ///Value changed in any of the dropdowns - single select
-  void onFValueChanged(dynamic list, dynamic value) {
+  void onDropdownValueChanged(dynamic list, dynamic value) {
     switch (list.runtimeType) {
       case RxList<FacilityModel>:
         {
