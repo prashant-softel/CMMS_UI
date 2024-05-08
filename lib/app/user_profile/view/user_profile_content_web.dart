@@ -578,6 +578,17 @@ class UserProfileContentWeb extends GetView<UserProfileController> {
                                                                             15,
                                                                       ),
                                                                     )),
+                                                                     DataColumn2(
+                                                                        // fixedWidth: 75,
+                                                                        label:
+                                                                            Text(
+                                                                      "Self View",
+                                                                      style:
+                                                                          TextStyle(
+                                                                        fontSize:
+                                                                            15,
+                                                                      ),
+                                                                    )),
                                                                     DataColumn2(
                                                                         // fixedWidth: 75,
                                                                         label:
@@ -601,17 +612,7 @@ class UserProfileContentWeb extends GetView<UserProfileController> {
                                                                         ),
                                                                       ),
                                                                     ),
-                                                                    DataColumn2(
-                                                                        // fixedWidth: 75,
-                                                                        label:
-                                                                            Text(
-                                                                      "Self View",
-                                                                      style:
-                                                                          TextStyle(
-                                                                        fontSize:
-                                                                            15,
-                                                                      ),
-                                                                    ))
+                                                                   
                                                                   ],
                                                                   rows: controller
                                                                       .accessList
@@ -633,15 +634,16 @@ class UserProfileContentWeb extends GetView<UserProfileController> {
                                                                         DataCell(_rowItem(getAccesslevelDetails
                                                                             ?.view
                                                                             .value)),
+                                                                            DataCell(_rowItem(getAccesslevelDetails
+                                                                            ?.selfView
+                                                                            .value)),
                                                                         DataCell(_rowItem(getAccesslevelDetails
                                                                             ?.issue
                                                                             .value)),
                                                                         DataCell(_rowItem(getAccesslevelDetails
                                                                             ?.approve
                                                                             .value)),
-                                                                        DataCell(_rowItem(getAccesslevelDetails
-                                                                            ?.selfView
-                                                                            .value))
+                                                                        
                                                                       ],
                                                                     );
                                                                   }).toList(),
