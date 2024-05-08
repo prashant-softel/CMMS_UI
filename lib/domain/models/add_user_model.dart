@@ -52,9 +52,9 @@ class AddUserModel {
   Credentials? credentials;
   List<AddAccessList>? add_access_list;
   List<UserResponbility>? user_responsibility_list;
-  List<IsEmployeeFacilityModel>? facilities;
+  // List<IsEmployeeFacilityModel>? facilities;
 
-  // List<int>? facilities;
+  List<int>? facilities;
 
   factory AddUserModel.fromJson(Map<String, dynamic> json) => AddUserModel(
         id: json["id"],
@@ -75,16 +75,16 @@ class AddUserModel {
         zipcode: json["zipcode"],
         role_id: json["role_id"],
         isEmployee: json["isEmployee"],
-        // facilities: List<int>.from(json["facilities"].map((x) => x)),
+        facilities: List<int>.from(json["facilities"].map((x) => x)),
         credentials: Credentials.fromJson(json['credentials']),
         add_access_list: List<AddAccessList>.from(
             json["access_list"].map((x) => AddAccessList.fromJson(x))),
         user_responsibility_list: List<UserResponbility>.from(
             json["user_responsibility_list"]
                 .map((x) => UserResponbility.fromJson(x))),
-        facilities: List<IsEmployeeFacilityModel>.from(
-            json["facilities"]
-                .map((x) => IsEmployeeFacilityModel.fromJson(x))),
+        // facilities: List<IsEmployeeFacilityModel>.from(
+        //     json["facilities"]
+        //         .map((x) => IsEmployeeFacilityModel.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -107,9 +107,9 @@ class AddUserModel {
         "role_id": role_id,
         "isEmployee": isEmployee,
         "credentials": credentials!.toJson(),
-        // "facilities": List<dynamic>.from(facilities!.map((x) => x)),
-        "facilities":
-            List<dynamic>.from(facilities!.map((x) => x.toJson())),
+        "facilities": List<dynamic>.from(facilities!.map((x) => x)),
+        // "facilities":
+        //     List<dynamic>.from(facilities!.map((x) => x.toJson())),
         "access_list":
             List<dynamic>.from(add_access_list!.map((x) => x.toJson())),
         "user_responsibility_list": List<dynamic>.from(
