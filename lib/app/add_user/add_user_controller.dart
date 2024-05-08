@@ -758,7 +758,8 @@ class AddUserController extends GetxController {
         role_id: selectedRoleId,
         zipcode: int.parse(_zipcode),
         isEmployee: 1,
-        facilities: isEmployeeFacilityList,
+        facilities: selectedfacilityNameIdList,
+        // facilities: isEmployeeFacilityList,
         user_responsibility_list: reslist,
         credentials: credentials);
     var adduserJsonString = [adduser.toJson()];
@@ -823,7 +824,8 @@ class AddUserController extends GetxController {
         photo_id: photoId,
         role_id: selectedRoleId,
         zipcode: int.parse(_zipcode),
-        facilities: isEmployeeFacilityList,
+        facilities: selectedfacilityNameIdList,
+        // facilities: isEmployeeFacilityList,
         isEmployee: 1,
         user_responsibility_list: reslist,
         credentials: credentials);
