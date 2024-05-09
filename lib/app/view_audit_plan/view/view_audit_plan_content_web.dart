@@ -184,7 +184,7 @@ class _ViewAuditPlanWebState extends State<ViewAuditPlanWeb> {
                                                 '${controller.auditPlanDetailModel.value?.plan_number ?? ''}', //  "Block 2 all Inverter maintenance plan",
                                                 style: Styles.blue17),
                                             Text(
-                                                '${controller.auditPlanDetailModel.value?.description ?? ""}',
+                                                '${controller.auditPlanDetailModel.value?.created_by ?? ""}',
                                                 style: Styles.blue17),
                                             Text(
                                                 '${controller.auditPlanDetailModel.value?.auditee_Emp_Name ?? ''}',
@@ -226,10 +226,10 @@ class _ViewAuditPlanWebState extends State<ViewAuditPlanWeb> {
                                               CrossAxisAlignment.end,
                                           children: [
                                             Text(
-                                                '${controller.auditPlanDetailModel.value?.schedule_Date ?? ''}',
+                                                '${controller.auditPlanDetailModel.value?.created_at ?? ''}',
                                                 style: Styles.blue17),
                                             Text(
-                                                '${controller.auditPlanDetailModel.value?.schedule_Date ?? ''}',
+                                                "", // '${controller.auditPlanDetailModel.value?.schedule_Date ?? ''}',
                                                 style: Styles.blue17),
                                             Text(
                                                 '${controller.auditPlanDetailModel.value?.schedule_Date ?? ''}',

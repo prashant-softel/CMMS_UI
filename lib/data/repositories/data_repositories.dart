@@ -943,6 +943,46 @@ class DataRepository extends DomainRepository {
         pmPlanRejectJsonString: pmPlanRejectJsonString,
         isLoading: isLoading ?? false,
       );
+  Future<ResponseModel> auditTaskApprovedButton({
+    required String auth,
+    auditTaskApproveJsonString,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.auditTaskApprovedButton(
+        auth: auth,
+        auditTaskApproveJsonString: auditTaskApproveJsonString,
+        isLoading: isLoading ?? false,
+      );
+  Future<ResponseModel> auditTaskSkipButton({
+    required String auth,
+    auditTaskSkipJsonString,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.auditTaskSkipButton(
+        auth: auth,
+        auditTaskSkipJsonString: auditTaskSkipJsonString,
+        isLoading: isLoading ?? false,
+      );
+  Future<ResponseModel> auditTaskCloseButton({
+    required String auth,
+    auditTaskCloseJsonString,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.auditTaskCloseButton(
+        auth: auth,
+        auditTaskCloseJsonString: auditTaskCloseJsonString,
+        isLoading: isLoading ?? false,
+      );
+  Future<ResponseModel> auditTaskRejectButton({
+    required String auth,
+    auditTaskRejectJsonString,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.auditTaskRejectButton(
+        auth: auth,
+        auditTaskRejectJsonString: auditTaskRejectJsonString,
+        isLoading: isLoading ?? false,
+      );
   Future<ResponseModel> getAuditTaskDetails({
     String? auth,
     int? auditTaskId,
@@ -4737,7 +4777,7 @@ class DataRepository extends DomainRepository {
         facilityId: facilityId,
         isLoading: isLoading ?? false,
       );
-       Future<ResponseModel> getSourceObservationList({
+  Future<ResponseModel> getSourceObservationList({
     required bool isLoading,
     required String auth,
   }) async {
@@ -4746,8 +4786,9 @@ class DataRepository extends DomainRepository {
       auth: auth,
     );
   }
+
   //create
-   Future<ResponseModel> createSourceOfObslist({
+  Future<ResponseModel> createSourceOfObslist({
     auth,
     bool? isLoading,
     businesslistJsonString,
@@ -4758,6 +4799,7 @@ class DataRepository extends DomainRepository {
         businesslistJsonString: businesslistJsonString);
     return response;
   }
+
   //update
   Future<ResponseModel> updatesourceOfObs({
     auth,
@@ -4772,7 +4814,7 @@ class DataRepository extends DomainRepository {
     return response;
   }
 
-  //delete 
+  //delete
   Future<ResponseModel> deleteSourceOfObs({
     auth,
     bool? isLoading,
