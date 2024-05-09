@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:cmms/app/edit_mrs/edit_mrs_presenter.dart';
+import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/domain/models/create_mrs_model.dart';
 import 'package:cmms/domain/models/get_asset_items_model.dart';
 import 'package:flutter/material.dart';
@@ -30,6 +31,7 @@ class EditMrsController extends GetxController {
   var setTemlateCtrlr = TextEditingController();
 
   Rx<int> mrsId = 0.obs;
+  Rx<int> type = 0.obs;
   var isSetTemplate = false.obs;
   int whereUsedId = 0;
   void setTemplatetoggle() {
@@ -68,13 +70,17 @@ class EditMrsController extends GetxController {
   Future<void> setMrsId() async {
     try {
       final _mrsId = await editMrsPresenter.getValue();
+      final _type = await editMrsPresenter.getValue();
       if (_mrsId == null || _mrsId == '' || _mrsId == "null") {
         var dataFromPreviousScreen = Get.arguments;
 
         mrsId.value = dataFromPreviousScreen['mrsId'];
+        type.value = dataFromPreviousScreen['type'];
         editMrsPresenter.saveValue(mrsId: mrsId.value.toString());
+        editMrsPresenter.saveValuee(type: type.value.toString());
       } else {
         mrsId.value = int.tryParse(_mrsId) ?? 0;
+        type.value = int.tryParse(_type!) ?? 0;
       }
       //  await _flutterSecureStorage.delete(key: "mrsId");
     } catch (e) {
@@ -185,6 +191,10 @@ class EditMrsController extends GetxController {
       isLoading: true,
     );
     if (responseEditMrs == null) {
-    } else {}
+    } else {
+      Get.offAllNamed(
+        Routes.mrsListScreen,
+      );
+    }
   }
 }

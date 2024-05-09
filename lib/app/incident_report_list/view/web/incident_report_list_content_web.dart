@@ -929,7 +929,10 @@ class IncidentReportListDataSource extends DataTableSource {
       //   ],
       onSelectChanged: (_) {
         controller.clearStoreData();
-        controller.viewIncidentReport(id: incidentReportListDetails?.id);
+        Get.toNamed(
+          Routes.viewIncidentReportScreen,
+          arguments: {'irId': incidentReportListDetails?.id},
+        );
       },
     );
   }

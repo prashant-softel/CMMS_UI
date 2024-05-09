@@ -86,6 +86,7 @@ class IncidentReportDetailsModel {
     this.is_why_why_required,
     this.is_investigation_required,
     this.injured_person,
+    this.fileList,
 
     // this.additionalEmailEmployees,
     // this.externalEmails,
@@ -167,6 +168,7 @@ class IncidentReportDetailsModel {
   int? is_why_why_required;
   int? is_investigation_required;
   List<DetailsOfInjuredPersonUpdate?>? injured_person;
+  List<FileList?>? fileList;
 
   // List<ExternalsEmailsList?>? externalEmails;
   // List<SuppliersActionsList?>? supplierActions;
@@ -276,6 +278,10 @@ class IncidentReportDetailsModel {
             ? List<DetailsOfInjuredPersonUpdate>.from(json["injured_person"]
                 ?.map((x) => DetailsOfInjuredPersonUpdate.fromJson(x)))
             : [],
+        fileList: json['file_list'] != null
+            ? List<FileList>.from(
+                json["file_list"]?.map((x) => FileList.fromJson(x)))
+            : [],
       );
 
   Map<String, dynamic> toJson() => {
@@ -356,6 +362,7 @@ class IncidentReportDetailsModel {
         "investigation_team":
             List<dynamic>.from(investigation_team!.map((x) => x)),
         "injured_person": List<dynamic>.from(injured_person!.map((x) => x)),
+        "file_list": List<dynamic>.from(fileList!.map((x) => x)),
 
         // "externalEmails": List<dynamic>.from(externalEmails!.map((x) => x)),
         // "supplierActions": List<dynamic>.from(supplierActions!.map((x) => x)),
@@ -421,7 +428,6 @@ class DetailsOfInjuredPersonUpdate {
         "plant_equipment_involved": plant_equipment_involved,
         "location_of_incident": location_of_incident
       };
-      
 }
 
 //Investigation team
@@ -458,6 +464,26 @@ class InvestigationTeamUpdate {
         "name": name,
         "designation": designation,
         "investigation_date": investigation_date
+      };
+}
+
+class FileList {
+  int? id;
+  String? fileName;
+  String? description;
+
+  FileList({this.id, this.fileName, this.description});
+
+  factory FileList.fromJson(Map<String, dynamic> json) => FileList(
+        id: json['id'],
+        fileName: json['fileName'],
+        description: json['description'],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "fileName": fileName,
+        "description": description,
       };
 }
 

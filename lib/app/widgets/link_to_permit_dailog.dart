@@ -119,6 +119,7 @@ class LinkToPermitDialog extends GetView {
                       "whereUsedId": taskId,
                       "activity": activity,
                       "whereUsed": 27,
+                      "type": 2,
                       "fromActorTypeId": 2,
                       "to_actor_type_id": 3
                     });

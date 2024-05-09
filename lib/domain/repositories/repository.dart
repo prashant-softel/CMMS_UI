@@ -79,6 +79,7 @@ import 'package:cmms/domain/models/stock_management_update_goods_orders_model.da
 import 'package:cmms/domain/models/supplier_name_model.dart';
 import 'package:cmms/domain/models/tools_model.dart';
 import 'package:cmms/domain/models/transaction_report_list_model.dart';
+import 'package:cmms/domain/models/type_of_obs_list_model.dart';
 import 'package:cmms/domain/models/type_of_waste_model.dart';
 import 'package:cmms/domain/models/type_of_water_model.dart';
 import 'package:cmms/domain/models/type_permit_model.dart';
@@ -12768,6 +12769,7 @@ class Repository {
       if (!res.hasError) {
         var Sourcetype = sourceofobservationFromJson(res.data);
         return Sourcetype;
+        return Sourcetype;
       }
       return [];
     } catch (error) {
@@ -12777,6 +12779,7 @@ class Repository {
   }
 
   //create
+
   Future<bool> createSourceOfObslist(
       {bool? isLoading, businesslistJsonString}) async {
     try {
@@ -12800,6 +12803,7 @@ class Repository {
   }
 
   //update
+
   Future<bool> updatesourceOfObs({
     bool? isLoading,
     modulelistJsonString,
@@ -12840,6 +12844,104 @@ class Repository {
       } else {
         Utility.showDialog(
             res.errorCode.toString(), 'delete Source of observation');
+        Utility.showDialog(
+            res.errorCode.toString(), 'delete Source of observation');
+      }
+    } catch (error) {
+      print(error.toString());
+    }
+  }
+
+  //Type_of_oservation
+  //get
+  Future<List<TypeOfObsListModel>> getTypeOfObservationList({
+    required bool isLoading,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+
+      log(auth);
+      final res = await _dataRepository.getTypeOfObservationList(
+        isLoading: isLoading,
+        auth: auth,
+      );
+      print('Type Of Obervation: ${res.data}');
+
+      if (!res.hasError) {
+        var Sourcetype = TypeofobservationFromJson(res.data);
+        return Sourcetype;
+      }
+      return [];
+    } catch (error) {
+      log(error.toString());
+      return [];
+    }
+  }
+
+  //create
+  Future<bool> createTypeOfObslist(
+      {bool? isLoading, businesslistJsonString}) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.createTypeOfObslist(
+          auth: auth,
+          isLoading: isLoading,
+          businesslistJsonString: businesslistJsonString);
+
+      if (!res.hasError) {
+        return true;
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString(), ' createCheckListNumber');
+        return false;
+      }
+    } catch (error) {
+      print(error.toString());
+      return false;
+    }
+  }
+
+  //update
+  Future<bool> updatetypeOfObs({
+    bool? isLoading,
+    modulelistJsonString,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.updatetypeOfObs(
+        auth: auth,
+        isLoading: isLoading,
+        modulelistJsonString: modulelistJsonString,
+      );
+      print(res.data);
+      if (!res.hasError) {
+        return true;
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString(), 'updateBusinesslist');
+        return false;
+      }
+    } catch (error) {
+      print(error.toString());
+      return false;
+    }
+  }
+
+  //delete
+  Future<void> deleteTypeOfObs(Object business_id, bool isLoading) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.deleteTypeOfObs(
+        auth: auth,
+        business_id: business_id,
+        isLoading: isLoading,
+      );
+
+      if (!res.hasError) {
+        //get delete response back from API
+      } else {
+        Utility.showDialog(
+            res.errorCode.toString(), 'delete Type of observation');
       }
     } catch (error) {
       print(error.toString());

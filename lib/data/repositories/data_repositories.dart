@@ -4824,5 +4824,52 @@ class DataRepository extends DomainRepository {
         auth: auth, isLoading: isLoading, business_id: business_id);
     return response;
   }
+
+  //Type Of Observation
+       Future<ResponseModel> getTypeOfObservationList({
+    required bool isLoading,
+    required String auth,
+  }) async {
+    return await connectHelper.getTypeOfObservationList(
+      isLoading: isLoading,
+      auth: auth,
+    );
+  }
+  //create
+   Future<ResponseModel> createTypeOfObslist({
+    auth,
+    bool? isLoading,
+    businesslistJsonString,
+  }) async {
+    var response = await connectHelper.createTypeOfObslist(
+        auth: auth,
+        isLoading: isLoading,
+        businesslistJsonString: businesslistJsonString);
+    return response;
+  }
+   //update
+  Future<ResponseModel> updatetypeOfObs({
+    auth,
+    bool? isLoading,
+    modulelistJsonString,
+  }) async {
+    var response = await connectHelper.updatetypeOfObs(
+      auth: auth,
+      isLoading: isLoading,
+      modulelistJsonString: modulelistJsonString,
+    );
+    return response;
+  }
+
+  //delete 
+  Future<ResponseModel> deleteTypeOfObs({
+    auth,
+    bool? isLoading,
+    business_id,
+  }) async {
+    var response = await connectHelper.deleteTypeOfObs(
+        auth: auth, isLoading: isLoading, business_id: business_id);
+    return response;
+  }
 //end
 }

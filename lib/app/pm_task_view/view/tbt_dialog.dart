@@ -104,6 +104,7 @@ class TbtDonePMTaskDialog extends GetView {
                           Get.toNamed(Routes.createPermit, arguments: {
                             'permitId': ptw_id,
                             'isChecked': false,
+                            'type': 2,
                             "jobModel": controller.jobDetailsModel.value,
                             "pmTaskModel": controller.pmtaskViewModel.value
                           });

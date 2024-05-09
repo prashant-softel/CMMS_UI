@@ -68,7 +68,7 @@ class TypeOfObsWeb extends GetView<TypeOfObsController> {
                       },
                       child: Text(" / MIS", style: Styles.greyLight14),
                     ),
-                    Text(" / OBSERVATION LIST", style: Styles.greyLight14),
+                    Text(" / TYPE OF OBSERVATION", style: Styles.greyLight14),
                     // Text(" / CREATE CHECKLIST NUMBER",
                     //     style: Styles.greyMediumLight12)
                   ],
@@ -84,8 +84,8 @@ class TypeOfObsWeb extends GetView<TypeOfObsController> {
                   child: Obx(() {
                     return Text(
                       controller.isContainerVisible.value
-                          ? 'Close Create Observation'
-                          : 'Open Create Observation',
+                          ? 'Close  Type Of Observation'
+                          : 'Open  Type Of Observation',
                     );
                   }),
                 ),
@@ -123,7 +123,7 @@ class TypeOfObsWeb extends GetView<TypeOfObsController> {
                                         CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        "Create Observation",
+                                        "Create Type Of Observation",
                                         style: Styles.blackBold16,
                                       ),
                                       SizedBox(
@@ -136,8 +136,8 @@ class TypeOfObsWeb extends GetView<TypeOfObsController> {
                                             children: [
                                               Text(
                                                 controller.selectedItem == null
-                                                    ? "ObservationList added Successfully in the List."
-                                                    : "ObservationList updated Successfully in the List.",
+                                                    ? "Type Of Observation added Successfully in the List."
+                                                    : "Type Of Observation updated Successfully in the List.",
                                                 style: TextStyle(
                                                     fontSize: 16,
                                                     color: Color.fromARGB(
@@ -156,7 +156,8 @@ class TypeOfObsWeb extends GetView<TypeOfObsController> {
                                         children: [
                                           Expanded(
                                             child: CustomRichText(
-                                                title: 'Observation Name: '),
+                                                title:
+                                                    'Type Of Observation Name: '),
                                           ),
                                           Container(
                                             width: (MediaQuery.of(context)
@@ -192,8 +193,7 @@ class TypeOfObsWeb extends GetView<TypeOfObsController> {
                                                   fontSize: 14.0,
                                                   height: 1.0,
                                                   color: Colors.black),
-                                              controller: controller
-                                                  .modulelistNumberCtrlr,
+                                              controller: controller.titleCtrlr,
                                               focusNode: controller.rnameFocus,
                                               scrollController:
                                                   controller.rnameScroll,
@@ -322,7 +322,7 @@ class TypeOfObsWeb extends GetView<TypeOfObsController> {
                                                   height: 1.0,
                                                   color: Colors.black),
                                               controller:
-                                                  controller.featureCtrlr,
+                                                  controller.descriptionCtrlr,
                                               focusNode: controller.rdescFocus,
                                               scrollController:
                                                   controller.rdescScroll,
@@ -405,25 +405,25 @@ class TypeOfObsWeb extends GetView<TypeOfObsController> {
                                         height: 15,
                                       ),
                                       Row(
-                                        children: [
-                                          Expanded(
-                                            child: CustomRichText(
-                                                title: 'Status: '),
-                                          ),
-                                          SizedBox(
-                                            width: 4,
-                                          ),
-                                          Checkbox(
-                                            value: controller
-                                                .isCheckedRequire.value,
-                                            onChanged: (bool? value) {
-                                              controller
-                                                  .requiretoggleCheckbox();
-                                              print(
-                                                  'Checkbox:${controller.isCheckedRequire.value}');
-                                            },
-                                          ),
-                                        ],
+                                        // children: [
+                                          // Expanded(
+                                          //   child: CustomRichText(
+                                          //       title: 'Status: '),
+                                          // ),
+                                        //   SizedBox(
+                                        //     width: 4,
+                                        //   ),
+                                        //   // Checkbox(
+                                        //   //   value: controller
+                                        //   //       .isCheckedRequire.value,
+                                        //   //   onChanged: (bool? value) {
+                                        //   //     controller
+                                        //   //         .requiretoggleCheckbox();
+                                        //   //     print(
+                                        //   //         'Checkbox:${controller.isCheckedRequire.value}');
+                                        //   //   },
+                                        //   // ),
+                                        // ],
                                       ),
                                       SizedBox(
                                         height: 15,
@@ -455,7 +455,7 @@ class TypeOfObsWeb extends GetView<TypeOfObsController> {
                                                   ColorValues.appDarkBlueColor,
                                               onPressed: () {
                                                 controller
-                                                    .createModuleListNumber()
+                                                    .createTypeOfObservationList()
                                                     .then((value) {
                                                   print("value,$value");
                                                   if (value == true)
@@ -463,15 +463,14 @@ class TypeOfObsWeb extends GetView<TypeOfObsController> {
                                                         .issuccessCreatemodulelist();
                                                 });
                                               },
-                                              text: 'Create Observation')
+                                              text: 'Create Type Of Obs')
                                           : CustomElevatedButton(
                                               backgroundColor:
                                                   ColorValues.appDarkBlueColor,
                                               onPressed: () {
                                                 controller
-                                                    .updateModulelistNumber(
-                                                        controller
-                                                            .selectedItem?.id)
+                                                    .updatetypeOfObs(controller
+                                                        .selectedItem?.id)
                                                     .then((value) {
                                                   print("value,$value");
                                                   if (value == true)
@@ -510,7 +509,7 @@ class TypeOfObsWeb extends GetView<TypeOfObsController> {
                               Padding(
                                 padding: const EdgeInsets.all(10.0),
                                 child: Text(
-                                  "Observation List",
+                                  "Type Of Observation List",
                                   style: Styles.blackBold16,
                                 ),
                               ),
@@ -524,7 +523,7 @@ class TypeOfObsWeb extends GetView<TypeOfObsController> {
                                   //           ColorValues.appLightBlueColor,
                                   //       onPressed: () {
                                   //         FlutterClipboard.copy(controller
-                                  //                 .moduleList![0]
+                                  //                 .TypeOfObsList![0]
                                   //                 .toString())
                                   //             .then((value) {
                                   //           print("copy data");
@@ -565,122 +564,131 @@ class TypeOfObsWeb extends GetView<TypeOfObsController> {
                               SizedBox(
                                 height: 20,
                               ),
-                              controller.moduleList!.isEmpty == true && controller.isLoading == false
-                              ? Center(child: Text("No Data"))
-                              : controller.isLoading.value == true
-                              ? Center(child: Text("Data Loading......"))
-                                  : Expanded(
-                                      child: DataTable2(
-                                        key: UniqueKey(),
-                                        dataRowHeight: 50,
-                                        columnSpacing: 10,
-                                        border: TableBorder.all(
-                                            color: Color.fromARGB(
-                                                255, 206, 229, 234)),
-                                        columns: [
-                                          DataColumn2(
-                                              fixedWidth: 100,
-                                              label: Text(
-                                                "Id",
+                              controller.TypeOfObsList!.isEmpty == true &&
+                                      controller.isLoading == false
+                                  ? Center(child: Text("No Data"))
+                                  : controller.isLoading.value == true
+                                      ? Center(
+                                          child: Text("Data Loading......"))
+                                      : Expanded(
+                                          child: DataTable2(
+                                            key: UniqueKey(),
+                                            dataRowHeight: 50,
+                                            columnSpacing: 10,
+                                            border: TableBorder.all(
+                                                color: Color.fromARGB(
+                                                    255, 206, 229, 234)),
+                                            columns: [
+                                              DataColumn2(
+                                                  fixedWidth: 100,
+                                                  label: Text(
+                                                    "Id",
+                                                    style: TextStyle(
+                                                        fontSize: 15,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  )),
+                                              DataColumn2(
+                                                  // fixedWidth: 700,
+                                                  label: Text(
+                                                "Name",
                                                 style: TextStyle(
                                                     fontSize: 15,
                                                     fontWeight:
                                                         FontWeight.bold),
                                               )),
-                                          DataColumn2(
-                                              // fixedWidth: 700,
-                                              label: Text(
-                                            "Observation name",
-                                            style: TextStyle(
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.bold),
-                                          )),
-                                          DataColumn2(
-                                              // fixedWidth: 300,
-                                              label: Text(
-                                            "Description",
-                                            style: TextStyle(
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.bold),
-                                          )),
-                                          DataColumn2(
-                                              fixedWidth: 200,
-                                              label: Text(
-                                                "Action",
+                                              DataColumn2(
+                                                  // fixedWidth: 300,
+                                                  label: Text(
+                                                "Description",
                                                 style: TextStyle(
                                                     fontSize: 15,
                                                     fontWeight:
                                                         FontWeight.bold),
                                               )),
-                                        ],
-                                        rows: List.generate(
-                                          controller.moduleList?.length ?? 0,
-                                          (index) {
-                                            var moduleListDetails =
-                                                controller.moduleList?[index];
-                                            return DataRow(cells: [
-                                              DataCell(Text(
-                                                  '${moduleListDetails?.id}')),
-                                              DataCell(Text(
-                                                  '${moduleListDetails?.name}')),
-                                              DataCell(Text(
-                                                  '${moduleListDetails?.featureName}')),
-                                              DataCell(Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                children: [
-                                                  TableActionButton(
-                                                    color:
-                                                        ColorValues.editColor,
-                                                    icon: Icons.edit,
-                                                    message: 'Edit',
-                                                    onPress: () {
-                                                      controller.selectedItem = controller
-                                                          .moduleList!
-                                                          .firstWhere((element) =>
-                                                              "${element?.id}" ==
-                                                              '${moduleListDetails?.id}');
-                                                      controller
-                                                          .modulelistNumberCtrlr
-                                                          .text = controller
-                                                              .selectedItem
-                                                              ?.name ??
-                                                          '';
-                                                      controller.featureCtrlr
-                                                          .text = controller
-                                                              .selectedItem
-                                                              ?.featureName ??
-                                                          '';
-                                                      controller
-                                                          .isContainerVisible
-                                                          .value = true;
-                                                    },
-                                                  ),
-                                                  SizedBox(
-                                                      width:
-                                                          8), // Add space between buttons
-                                                  TableActionButton(
-                                                    color:
-                                                        ColorValues.deleteColor,
-                                                    icon: Icons.delete,
-                                                    message: 'Delete',
-                                                    onPress: () {
-                                                      print(
-                                                          '${moduleListDetails?.id}');
-                                                      controller.isDeleteDialog(
-                                                          module_id:
-                                                              '${moduleListDetails?.id}',
-                                                          module:
-                                                              '${moduleListDetails?.name}');
-                                                    },
-                                                  ),
-                                                ],
-                                              )),
-                                            ]);
-                                          },
+                                              DataColumn2(
+                                                  fixedWidth: 200,
+                                                  label: Text(
+                                                    "Action",
+                                                    style: TextStyle(
+                                                        fontSize: 15,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  )),
+                                            ],
+                                            rows: List.generate(
+                                              controller
+                                                      .TypeOfObsList?.length ??
+                                                  0,
+                                              (index) {
+                                                var TypeOfObsListDetails =
+                                                    controller
+                                                        .TypeOfObsList?[index];
+                                                return DataRow(cells: [
+                                                  DataCell(Text(
+                                                      '${TypeOfObsListDetails?.id}')),
+                                                  DataCell(Text(
+                                                      '${TypeOfObsListDetails?.name}')),
+                                                  DataCell(Text(
+                                                      '${TypeOfObsListDetails?.description}')),
+                                                  DataCell(Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
+                                                    children: [
+                                                      TableActionButton(
+                                                        color: ColorValues
+                                                            .editColor,
+                                                        icon: Icons.edit,
+                                                        message: 'Edit',
+                                                        onPress: () {
+                                                          controller
+                                                              .selectedItem = controller
+                                                                  .TypeOfObsList
+                                                              .firstWhere((element) =>
+                                                                  "${element?.id}" ==
+                                                                  '${TypeOfObsListDetails?.id}');
+                                                          controller.titleCtrlr
+                                                              .text = controller
+                                                                  .selectedItem
+                                                                  ?.name ??
+                                                              '';
+                                                          controller
+                                                              .descriptionCtrlr
+                                                              .text = controller
+                                                                  .selectedItem
+                                                                  ?.description ??
+                                                              '';
+                                                          controller
+                                                              .isContainerVisible
+                                                              .value = true;
+                                                        },
+                                                      ),
+                                                      SizedBox(
+                                                          width:
+                                                              8), // Add space between buttons
+                                                      TableActionButton(
+                                                        color: ColorValues
+                                                            .deleteColor,
+                                                        icon: Icons.delete,
+                                                        message: 'Delete',
+                                                        onPress: () {
+                                                          print(
+                                                              '${TypeOfObsListDetails?.id}');
+                                                          controller.isDeleteDialog(
+                                                              business_id:
+                                                                  '${TypeOfObsListDetails?.id}',
+                                                              business:
+                                                                  '${TypeOfObsListDetails?.name}');
+                                                        },
+                                                      ),
+                                                    ],
+                                                  )),
+                                                ]);
+                                              },
+                                            ),
+                                          ),
                                         ),
-                                      ),
-                                    ),
                             ],
                           ),
                         ),

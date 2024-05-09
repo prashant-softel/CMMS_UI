@@ -279,8 +279,12 @@ class NewPermitPresenter {
   void saveValue({String? permitId}) async {
     return newPermitUsecase.saveValue(permitId: permitId);
   }
+  void saveValuee({String? type}) async {
+    return newPermitUsecase.saveValuee(type: type);
+  }
 
   Future<String?> getValue() async => await newPermitUsecase.getValue();
+  Future<String?> getValuee() async => await newPermitUsecase.getValuee();
   void saveisCheckedValue({bool? isChecked}) async {
     return newPermitUsecase.saveisCheckedValue(isChecked: isChecked);
   }

@@ -8330,4 +8330,83 @@ class ConnectHelper {
 
     return responseModel;
   }
+
+  //Type Of Observation
+  Future<ResponseModel> getTypeOfObservationList(
+      {required bool isLoading, required String auth}) async {
+    ResponseModel responseModel = await apiWrapper.makeRequest(
+      'MISMaster/GetTypeOfObservationList',
+      Request.get,
+      null,
+      isLoading,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
+  //create
+  Future<ResponseModel> createTypeOfObslist({
+    required String auth,
+    bool? isLoading,
+    required businesslistJsonString,
+  }) async {
+    var responseModel =
+        // responseModel =
+        await apiWrapper.makeRequest(
+      'MISMaster/AddTypeOfObservation', //AddBusiness
+      Request.post,
+      businesslistJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
+  //update
+  Future<ResponseModel> updatetypeOfObs({
+    required String auth,
+    bool? isLoading,
+    required modulelistJsonString,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'MISMaster/UpdateTypeOfObservation',
+      Request.patch,
+      modulelistJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
+  //delete
+  Future<ResponseModel> deleteTypeOfObs({
+    required String auth,
+    bool? isLoading,
+    required business_id,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'MISMaster/DeleteTypeOfObservation?id=$business_id',
+      Request.delete,
+      null,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
+  //end
 }
