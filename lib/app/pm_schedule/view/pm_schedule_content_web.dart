@@ -46,14 +46,14 @@ class PmScheduleContentWeb extends GetView<PmScheduleController> {
                 color: ColorValues.greyLightColor,
               ),
               InkWell(
-            onTap: () {
-              Get.offNamed(Routes.home);
-            },
-            child: Text(
-              "DASHBOARD".toUpperCase(),
-              style: Styles.greyLight14,
-            ),
-          ),
+                onTap: () {
+                  Get.offNamed(Routes.home);
+                },
+                child: Text(
+                  "DASHBOARD".toUpperCase(),
+                  style: Styles.greyLight14,
+                ),
+              ),
               InkWell(
                 onTap: () {
                   Get.offNamed(Routes.preventive);
@@ -61,8 +61,7 @@ class PmScheduleContentWeb extends GetView<PmScheduleController> {
                 child: Text(" / Preventive Maintenance".toUpperCase(),
                     style: Styles.greyLight14),
               ),
-              Text(" / PM Schedule".toUpperCase(),
-                  style: Styles.greyLight14)
+              Text(" / PM Schedule".toUpperCase(), style: Styles.greyLight14)
             ],
           ),
         ),

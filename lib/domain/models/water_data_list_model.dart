@@ -12,7 +12,7 @@ class WaterDataList {
 
   List<PeriodData> periods;
 
-  List<Master_list> master_list;
+  List<MasterList> master_list;
 
   WaterDataList(
       {required this.periods,
@@ -21,23 +21,24 @@ class WaterDataList {
       required this.master_list});
 
   factory WaterDataList.fromJson(Map<String, dynamic> parsedJson) {
-    var list = parsedJson['periods'] as List;
+    var list = (parsedJson['period'] ?? []) as List;
     print(list.runtimeType);
     List<PeriodData> periods = list.map((i) => PeriodData.fromJson(i)).toList();
-    List<Master_list> master_list =
-        list.map((i) => Master_list.fromJson(i)).toList();
+    List<MasterList> master_list = ((parsedJson['master_list'] ?? []) as List)
+        .map((i) => MasterList.fromJson(i))
+        .toList();
 
     return WaterDataList(
       facilityID: parsedJson['facilityID'],
       facilityName: parsedJson['facilityName'],
-      periods: periods,
-      master_list: master_list,
+      periods: periods ?? [],
+      master_list: master_list ?? [],
     );
   }
   Map<String, dynamic> toJson() => {
         "facilityID": facilityID,
         "facilityName": facilityName,
-        "periods": List<dynamic>.from(periods.map((x) => x.toJson())),
+        "period": List<dynamic>.from(periods.map((x) => x.toJson())),
         "master_list": List<dynamic>.from(periods.map((x) => x.toJson())),
       };
 }
@@ -59,8 +60,8 @@ class PeriodData {
       details.add(DetailData.fromJson(detailJson));
     }
     return PeriodData(
-      monthName: json['month_name'],
-      year: json['year'],
+      monthName: "${json['month_name']}",
+      year: json['year'] ?? -1,
       details: details,
     );
   }
@@ -74,19 +75,19 @@ class PeriodData {
   }
 }
 
-class Master_list {
+class MasterList {
   String water_type;
   int show_opening;
 
-  Master_list({
+  MasterList({
     required this.show_opening,
     required this.water_type,
   });
 
-  factory Master_list.fromJson(Map<String, dynamic> json) {
-    return Master_list(
-      water_type: json['water_type'],
-      show_opening: json['show_opening'],
+  factory MasterList.fromJson(Map<String, dynamic> json) {
+    return MasterList(
+      water_type: "${json['water_type']}",
+      show_opening: json['show_opening'] ?? 0,
     );
   }
 
@@ -117,11 +118,11 @@ class DetailData {
 
   factory DetailData.fromJson(Map<String, dynamic> json) {
     return DetailData(
-      waterType: json['water_type'],
-      opening: json['opening'].toDouble(),
-      procuredQty: json['procured_qty'].toDouble(),
-      consumedQty: json['consumed_qty'].toDouble(),
-      closingQty: json['closing_qty'].toDouble(),
+      waterType: "${json['water_type']}",
+      opening: json['opening'] ?? 0.0,
+      procuredQty: json['procured_qty'] ?? 0.0,
+      consumedQty: json['consumed_qty'] ?? 0.0,
+      closingQty: json['closing_qty'] ?? 0.0,
       show_opening: json['show_opening'],
     );
   }
