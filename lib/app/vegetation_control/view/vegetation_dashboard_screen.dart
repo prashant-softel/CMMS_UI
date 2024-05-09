@@ -110,10 +110,7 @@ class VegetationDashboardScreen extends GetView<VegetationDashboardController> {
                                                           .kVegetationControlFeatureId &&
                                                   e.view ==
                                                       UserAccessConstants
-                                                          .kHaveViewAccess ||
-                                              e.add ==
-                                                  UserAccessConstants
-                                                      .kHaveAddAccess)
+                                                          .kHaveViewAccess )
                                           .length >
                                       0
                                   ? _vegetationList(
@@ -132,10 +129,7 @@ class VegetationDashboardScreen extends GetView<VegetationDashboardController> {
                                                           .kVegetationControlexeFeatureId &&
                                                   e.view ==
                                                       UserAccessConstants
-                                                          .kHaveViewAccess ||
-                                              e.add ==
-                                                  UserAccessConstants
-                                                      .kHaveAddAccess)
+                                                          .kHaveViewAccess )
                                           .length >
                                       0
                                   ? _vegetationList(
