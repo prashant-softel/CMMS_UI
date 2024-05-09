@@ -38,6 +38,7 @@ class HomeController extends GetxController {
   Rx<bool> isBlocksSelected = true.obs;
   Rx<String> selectedBlocks = ''.obs;
   Rx<bool> isstartdateFieldSelected = true.obs;
+  RxList<int> selectedFacilityIdList = <int>[].obs;
 
   var inventoryList = <InventoryModel>[];
   var blockList = <BlockModel>[];
@@ -187,6 +188,13 @@ class HomeController extends GetxController {
         blocksList.add(block);
       }
       update(["blockList"]);
+    }
+  }
+
+  void selectedMultiFacility(_selectedFacilityIds) {
+    selectedFacilityIdList.value = <int>[];
+    for (var _selectedFacilityId in _selectedFacilityIds) {
+      selectedFacilityIdList.add(_selectedFacilityId);
     }
   }
 
