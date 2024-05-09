@@ -372,19 +372,23 @@ class MastersDashboard extends GetView<MastersController> {
                                             : 5,
                                     children: <Widget>[
                                       OnHover(builder: (((isHovered) {
-                                        return
-                                            // varUserAccessModel.value.access_list!
-                                            //             .where((e) =>
-                                            //                 e.feature_id == 40 &&
-                                            //                 e.view == 1)
-                                            //             .length >
-                                            //         0
-                                            //     ?
-                                            createContentTile(
+                                        return varUserAccessModel
+                                                    .value.access_list!
+                                                    .where((e) =>
+                                                        e.feature_id ==
+                                                            UserAccessConstants
+                                                                .kUserFeatureId &&
+                                                        e.view ==
+                                                            UserAccessConstants
+                                                                .kHaveViewAccess)
+                                                    .length >
+                                                0
+                                            ? createContentTile(
                                                 title: "User List",
                                                 onTap: () {
                                                   controller.goToUserList();
-                                                });
+                                                })
+                                            : Dimens.box0;
                                         // : Dimens.box0;
                                       }))),
                                       OnHover(builder: (((isHovered) {
