@@ -180,9 +180,10 @@ class CreateMrsReturnContentWeb extends GetView<CreateMrsReturnController> {
                                         ignoring: true,
                                         child: LoginCustomTextfield(
                                           // enabled: false,
-                                          width:
-                                              (MediaQuery.of(context).size.width *
-                                                  .2),
+                                          width: (MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              .2),
                                           textController:
                                               controller.whereUsedCtrlr,
                                         ),
@@ -271,7 +272,15 @@ class CreateMrsReturnContentWeb extends GetView<CreateMrsReturnController> {
                                                                 .width /
                                                             4,
                                                         dropdownList: controller
-                                                            .StockDetailsList,
+                                                                .StockDetailsList
+                                                            .where((p0) {
+                                                          return !controller
+                                                              .rowItem
+                                                              .map((p0) => p0[0]
+                                                                  ["value"])
+                                                              .contains(
+                                                                  p0!.name);
+                                                        }).toList().obs,
                                                         selectedValue:
                                                             mapData["value"],
                                                         onValueChanged: (list,
@@ -304,7 +313,8 @@ class CreateMrsReturnContentWeb extends GetView<CreateMrsReturnController> {
                                                                 .9),
                                                             child:
                                                                 LoginCustomTextfield(
-                                                              inputFormatters: <TextInputFormatter>[
+                                                              inputFormatters: <
+                                                                  TextInputFormatter>[
                                                                 FilteringTextInputFormatter
                                                                     .digitsOnly
                                                               ],
@@ -399,8 +409,7 @@ class CreateMrsReturnContentWeb extends GetView<CreateMrsReturnController> {
                                                                   : (mapData['key'] ==
                                                                           "is_faulty")
                                                                       ? Padding(
-                                                                          padding: const EdgeInsets
-                                                                              .only(
+                                                                          padding: const EdgeInsets.only(
                                                                               top:
                                                                                   8.0),
                                                                           child: _rowItem(

@@ -254,7 +254,7 @@ class PreventiveMaintenanceExecutionController extends GetxController {
           fromActorID: scheduleId.value,
           fromActorType: AppConstants.kTask,
           mrsID: listMrsByTaskId![0]!.mrsId ?? 0,
-          mrsItemID: listMrsByTaskId![0]!.mrsId ?? 0,
+          mrsItemID: dropdownMapperData[element[0]["value"]]?.id ?? 0,
           qty: int.tryParse(element[6]["value"] ?? '0') ?? 0,
           refID: scheduleId.value,
           refType: AppConstants.kTask,

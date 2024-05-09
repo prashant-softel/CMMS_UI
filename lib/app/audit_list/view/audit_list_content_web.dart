@@ -200,36 +200,34 @@ class _AuditListContentWebState extends State<AuditListContentWeb> {
                                             ),
                                           ),
                                         ),
-                                        itemBuilder: (BuildContext context) =>
-                                            <PopupMenuEntry<String>>[]..addAll(
-                                                  controller.columnVisibility
-                                                      .value.entries
-                                                      .map((e) {
-                                                return PopupMenuItem<String>(
-                                                    child:
-                                                        ValueListenableBuilder(
-                                                            valueListenable:
-                                                                controller
-                                                                    .columnVisibility,
-                                                            builder: (context,
-                                                                value, child) {
-                                                              return Row(
-                                                                children: [
-                                                                  Checkbox(
-                                                                    value: value[
-                                                                        e.key],
-                                                                    onChanged:
-                                                                        (newValue) {
-                                                                      controller.setColumnVisibility(
-                                                                          e.key,
-                                                                          newValue!);
-                                                                    },
-                                                                  ),
-                                                                  Text(e.key),
-                                                                ],
-                                                              );
-                                                            }));
-                                              })),
+                                        itemBuilder: (BuildContext context) => <
+                                            PopupMenuEntry<String>>[]..addAll(
+                                              controller.columnVisibility.value
+                                                  .entries
+                                                  .map((e) {
+                                            return PopupMenuItem<String>(
+                                                child: ValueListenableBuilder(
+                                                    valueListenable: controller
+                                                        .columnVisibility,
+                                                    builder: (context, value,
+                                                        child) {
+                                                      return Row(
+                                                        children: [
+                                                          Checkbox(
+                                                            value: value[e.key],
+                                                            onChanged:
+                                                                (newValue) {
+                                                              controller
+                                                                  .setColumnVisibility(
+                                                                      e.key,
+                                                                      newValue!);
+                                                            },
+                                                          ),
+                                                          Text(e.key),
+                                                        ],
+                                                      );
+                                                    }));
+                                          })),
                                         onSelected: (String value) {
                                           // Handle column selection
                                         },
@@ -319,57 +317,61 @@ class _AuditListContentWebState extends State<AuditListContentWeb> {
                                   SizedBox(
                                     height: 20,
                                   ),
-                                  controller.auditPlanList.isEmpty == true && controller.isLoading== false
+                                  controller.auditPlanList.isEmpty == true &&
+                                          controller.isLoading == false
                                       ? Center(child: Text('No data'))
                                       : controller.isLoading == true
-                                      ? Center(child: Text("Data Loading......"))
-                                      : Expanded(
-                                          child: ValueListenableBuilder(
-                                              valueListenable:
-                                                  controller.columnVisibility,
-                                              builder: (context, value, child) {
-                                                final dataSource =
-                                                    AuditListListDataSource(
-                                                        controller);
+                                          ? Center(
+                                              child: Text("Data Loading......"))
+                                          : Expanded(
+                                              child: ValueListenableBuilder(
+                                                  valueListenable: controller
+                                                      .columnVisibility,
+                                                  builder:
+                                                      (context, value, child) {
+                                                    final dataSource =
+                                                        AuditListListDataSource(
+                                                            controller);
 
-                                                return PaginatedDataTable2(
-                                                  columnSpacing: 10,
-                                                  dataRowHeight: 70,
-                                                  source:
-                                                      dataSource, // Custom DataSource class
-                                                  // headingRowHeight:
-                                                  //     Get.height * 0.12,
-                                                  minWidth: Get.width * 0.7,
-                                                  showCheckboxColumn: false,
-                                                  rowsPerPage:
-                                                      10, // Number of rows per page
-                                                  availableRowsPerPage: [
-                                                    10,
-                                                    20,
-                                                    30,
-                                                    50
-                                                  ],
-                                                  columns: [
-                                                    for (var entry
-                                                        in value.entries)
-                                                      if (entry.value)
+                                                    return PaginatedDataTable2(
+                                                      columnSpacing: 10,
+                                                      dataRowHeight: 70,
+                                                      source:
+                                                          dataSource, // Custom DataSource class
+                                                      // headingRowHeight:
+                                                      //     Get.height * 0.12,
+                                                      minWidth: Get.width * 0.7,
+                                                      showCheckboxColumn: false,
+                                                      rowsPerPage:
+                                                          10, // Number of rows per page
+                                                      availableRowsPerPage: [
+                                                        10,
+                                                        20,
+                                                        30,
+                                                        50
+                                                      ],
+                                                      columns: [
+                                                        for (var entry
+                                                            in value.entries)
+                                                          if (entry.value)
+                                                            buildDataColumn(
+                                                              entry.key,
+                                                              controller
+                                                                      .filterText[
+                                                                  entry.key]!,
+                                                              // controller.columnwidth[
+                                                              //     entry.key],
+                                                            ),
                                                         buildDataColumn(
-                                                          entry.key,
-                                                          controller.filterText[
-                                                              entry.key]!,
-                                                          // controller.columnwidth[
-                                                          //     entry.key],
+                                                          'Actions',
+                                                          controller
+                                                              .planIdFilterText,
+                                                          // 150,
                                                         ),
-                                                    buildDataColumn(
-                                                      'Actions',
-                                                      controller
-                                                          .planIdFilterText,
-                                                      // 150,
-                                                    ),
-                                                  ],
-                                                );
-                                              }),
-                                        ),
+                                                      ],
+                                                    );
+                                                  }),
+                                            ),
                                 ],
                               ),
                             ),
@@ -570,7 +572,7 @@ class AuditListListDataSource extends DataTableSource {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        '${AuditPlanPlanningListDetails?.id}',
+                        'AUD${AuditPlanPlanningListDetails?.id}',
                       ),
                       Dimens.boxHeight10,
                       Align(

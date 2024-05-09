@@ -1,4 +1,5 @@
 import 'dart:convert';
+import '../../app/utils/utility.dart';
 
 AuditPlanDetailModel auditPlanDetailModelFromJson(String str) =>
     AuditPlanDetailModel.fromJson(json.decode(str));
@@ -17,6 +18,9 @@ class AuditPlanDetailModel {
   String? description;
   String? checklist_name;
   String? schedule_Date;
+  String? created_at;
+  String? created_by;
+
   AuditPlanDetailModel(
       {this.auditee_Emp_Name,
       this.auditor_Emp_Name,
@@ -30,13 +34,21 @@ class AuditPlanDetailModel {
       this.schedule_Date,
       this.short_status,
       this.status,
-      this.checklist_name});
+      this.checklist_name,
+      this.created_by,
+      this.created_at});
 
   factory AuditPlanDetailModel.fromJson(Map<String, dynamic> json) {
     return AuditPlanDetailModel(
       status: json['status'],
+      created_by: json['created_by'],
       short_status: json['short_status'],
-      schedule_Date: json['schedule_Date'],
+      created_at: json['created_at'] == null
+          ? json['created_at']
+          : Utility.getFormatedyearMonthDay(json['created_at']),
+      schedule_Date: json['schedule_Date'] == null
+          ? json['schedule_Date']
+          : Utility.getFormatedyearMonthDay(json['schedule_Date']),
       plan_number: json['plan_number'],
       id: json['id'],
       frequencyApplicable: json['frequencyApplicable'],
