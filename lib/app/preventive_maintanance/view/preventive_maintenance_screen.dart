@@ -102,14 +102,11 @@ class PreventiveScreen extends GetView<PreventiveController> {
                             varUserAccessModel.value.access_list!
                                         .where((e) =>
                                             e.feature_id ==
-                                                    UserAccessConstants
-                                                        .kPmPlanFeatureId &&
-                                                e.view ==
-                                                    UserAccessConstants
-                                                        .kHaveViewAccess ||
-                                            e.add ==
                                                 UserAccessConstants
-                                                    .kHaveAddAccess)
+                                                    .kPmPlanFeatureId &&
+                                            e.view ==
+                                                UserAccessConstants
+                                                    .kHaveViewAccess)
                                         .length >
                                     0
                                 ? _priventiveList(
@@ -141,10 +138,7 @@ class PreventiveScreen extends GetView<PreventiveController> {
                                                     .kPmTaskFeatureId &&
                                             e.view ==
                                                 UserAccessConstants
-                                                    .kHaveViewAccess ||
-                                            e.add ==
-                                                UserAccessConstants
-                                                    .kHaveAddAccess)
+                                                    .kHaveViewAccess)
                                         .length >
                                     0
                                 ? _priventiveList(
@@ -214,14 +208,11 @@ class PreventiveScreen extends GetView<PreventiveController> {
                             varUserAccessModel.value.access_list!
                                         .where((e) =>
                                             e.feature_id ==
-                                                    UserAccessConstants
-                                                        .kPMchecklistFeatureId &&
-                                                e.view ==
-                                                    UserAccessConstants
-                                                        .kHaveViewAccess ||
-                                            e.add ==
                                                 UserAccessConstants
-                                                    .kHaveAddAccess)
+                                                    .kPMchecklistFeatureId &&
+                                            e.view ==
+                                                UserAccessConstants
+                                                    .kHaveViewAccess)
                                         .length >
                                     0
                                 ? _priventiveList(
@@ -233,14 +224,11 @@ class PreventiveScreen extends GetView<PreventiveController> {
                             varUserAccessModel.value.access_list!
                                         .where((e) =>
                                             e.feature_id ==
-                                                    UserAccessConstants
-                                                        .kPMcheckpointFeatureId &&
-                                                e.view ==
-                                                    UserAccessConstants
-                                                        .kHaveViewAccess ||
-                                            e.add ==
                                                 UserAccessConstants
-                                                    .kHaveAddAccess)
+                                                    .kPMcheckpointFeatureId &&
+                                            e.view ==
+                                                UserAccessConstants
+                                                    .kHaveViewAccess)
                                         .length >
                                     0
                                 ? _priventiveList(
