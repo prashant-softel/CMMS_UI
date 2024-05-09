@@ -864,7 +864,8 @@ class JobDetailsWebView extends GetView<JobDetailsController> {
                                                                     arguments: {
                                                                       'mrsId': int
                                                                           .tryParse(
-                                                                              "$mrsId")
+                                                                              "$mrsId"),
+                                                                      'type': 1
                                                                     });
                                                               }),
                                                           TableActionButton(
