@@ -4,6 +4,7 @@ import 'package:cmms/app/view_audit_task/view_audit_task_presenter.dart';
 import 'package:cmms/domain/models/audit_plan_detail_model.dart';
 import 'package:cmms/domain/models/comment_model.dart';
 import 'package:cmms/domain/models/history_model.dart';
+import 'package:cmms/domain/models/pm_task_view_list_model.dart';
 import 'package:cmms/domain/models/view_audit_task_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -25,12 +26,16 @@ class ViewAuditTaskController extends GetxController {
   TextEditingController rejectCommentTextFieldCtrlr = TextEditingController();
   Rx<int> auditTaskId = 0.obs;
   RxInt selectedValue = 1.obs;
-  Rx<AuditTaskViewModel?> auditTasknDetailModel = AuditTaskViewModel().obs;
+  Rx<PmtaskViewModel?> auditTasknDetailModel = PmtaskViewModel().obs;
   RxList<HistoryModel?>? historyList = <HistoryModel?>[].obs;
   void onRadioValueChanged(int value) {
     selectedValue.value = value;
   }
 
+  var isToggleokOn = false.obs;
+
+  Rx<List<List<Map<String, String>>>> rowItemAuditobs =
+      Rx<List<List<Map<String, String>>>>([]);
   RxString startresponseMessage = ''.obs;
 
   @override
@@ -97,21 +102,21 @@ class ViewAuditTaskController extends GetxController {
     if (_auditTasknDetailModel != null) {
       auditTasknDetailModel.value = _auditTasknDetailModel;
     }
-    print({"auditPlandetailss", auditTasknDetailModel.value?.plan_id});
+    print({"auditPlandetailss", auditTasknDetailModel.value?.id});
   }
 
-  void pmPlanApprovedButton({int? id}) async {
+  void auditTaskApprovedButton({int? id}) async {
     {
       String _comment = approveCommentTextFieldCtrlr.text.trim();
 
-      CommentModel commentpmPlanAproveModel =
+      CommentModel commentauditTaskAproveModel =
           CommentModel(id: id, comment: _comment);
 
-      var pmPlanApproveJsonString = commentpmPlanAproveModel.toJson();
+      var auditTaskApproveJsonString = commentauditTaskAproveModel.toJson();
 
       Map<String, dynamic>? response =
-          await viewAuditTaskPresenter.pmPlanApprovedButton(
-        pmPlanApproveJsonString: pmPlanApproveJsonString,
+          await viewAuditTaskPresenter.auditTaskApprovedButton(
+        auditTaskApproveJsonString: auditTaskApproveJsonString,
         isLoading: true,
       );
       if (response == true) {
@@ -120,18 +125,58 @@ class ViewAuditTaskController extends GetxController {
     }
   }
 
-  void pmPlanRejectButton({int? id}) async {
+  void auditTaskRejectButton({int? id}) async {
     {
-      String _comment = rejectCommentTextFieldCtrlr.text.trim();
+      String _comment = approveCommentTextFieldCtrlr.text.trim();
 
-      CommentModel commentpmPlanRejectModel =
+      CommentModel commentauditTaskRejectModel =
           CommentModel(id: id, comment: _comment);
 
-      var pmPlanRejectJsonString = commentpmPlanRejectModel.toJson();
+      var auditTaskRejectJsonString = commentauditTaskRejectModel.toJson();
 
       Map<String, dynamic>? response =
-          await viewAuditTaskPresenter.pmPlanRejectButton(
-        pmPlanRejectJsonString: pmPlanRejectJsonString,
+          await viewAuditTaskPresenter.auditTaskRejectButton(
+        auditTaskRejectJsonString: auditTaskRejectJsonString,
+        isLoading: true,
+      );
+      if (response == true) {
+        //getCalibrationList(facilityId, true);
+      }
+    }
+  }
+
+  void auditTaskSkipButton({int? id}) async {
+    {
+      String _comment = approveCommentTextFieldCtrlr.text.trim();
+
+      CommentModel commentauditTaskSkipModel =
+          CommentModel(id: id, comment: _comment);
+
+      var auditTaskSkipJsonString = commentauditTaskSkipModel.toJson();
+
+      Map<String, dynamic>? response =
+          await viewAuditTaskPresenter.auditTaskSkipButton(
+        auditTaskSkipJsonString: auditTaskSkipJsonString,
+        isLoading: true,
+      );
+      if (response == true) {
+        //getCalibrationList(facilityId, true);
+      }
+    }
+  }
+
+  void auditTaskCloseButton({int? id}) async {
+    {
+      String _comment = approveCommentTextFieldCtrlr.text.trim();
+
+      CommentModel commentauditTaskCloseModel =
+          CommentModel(id: id, comment: _comment);
+
+      var auditTaskCloseJsonString = commentauditTaskCloseModel.toJson();
+
+      Map<String, dynamic>? response =
+          await viewAuditTaskPresenter.auditTaskCloseButton(
+        auditTaskCloseJsonString: auditTaskCloseJsonString,
         isLoading: true,
       );
       if (response == true) {

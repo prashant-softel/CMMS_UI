@@ -1,6 +1,7 @@
 import 'package:cmms/app/home/views/custom_ui_dash.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/home/widgets/header_widget_all_dash.dart';
+import 'package:cmms/app/widgets/date_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:cmms/app/app.dart';
@@ -13,6 +14,9 @@ import 'package:percent_indicator/circular_percent_indicator.dart';
 // import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:pie_chart/pie_chart.dart';
 import 'package:semicircle_indicator/semicircle_indicator.dart';
+import 'package:syncfusion_flutter_datepicker/datepicker.dart';
+
+import '../../widgets/custom_richtext.dart';
 
 class DashBoardHomeWeb extends StatefulWidget {
   DashBoardHomeWeb({
@@ -23,187 +27,101 @@ class DashBoardHomeWeb extends StatefulWidget {
   State<DashBoardHomeWeb> createState() => _DashBoardHomeWebState();
 }
 
-final List<Map<String, dynamic>> statutoryData = [
-  {
-    "Site name": "Alote",
-    'WO number': '123456',
-    'WO description': 'Preventive maintenance',
-    'Status': 'Under Progress ',
-    'Asset category': 'Inverter',
-    'Asset Id': 'ICR1_Inv1',
-    'Schedule start date': '01-04-2023 18:00',
-    'Schedule end date': '01-04-2023 19:00',
-  },
-  {
-    "Site name": "Aurad",
-    'WO number': '123456',
-    'WO description': 'Preventive maintenance',
-    'Status': 'Under Progress ',
-    'Asset category': 'Inverter',
-    'Asset Id': 'ICR1_Inv1',
-    'Schedule start date': '01-04-2023 18:00',
-    'Schedule end date': '01-04-2023 19:00',
-  },
-  {
-    "Site name": "Barod",
-    'WO number': '123456',
-    'WO description': 'Preventive maintenance',
-    'Status': 'Under Progress ',
-    'Asset category': 'Inverter',
-    'Asset Id': 'ICR1_Inv1',
-    'Schedule start date': '01-04-2023 18:00',
-    'Schedule end date': '01-04-2023 19:00',
-  },
-  {
-    "Site name": "Bellary",
-    'WO number': '123456',
-    'WO description': 'Preventive maintenance',
-    'Status': 'Under Progress ',
-    'Asset category': 'Inverter',
-    'Asset Id': 'ICR1_Inv1',
-    'Schedule start date': '01-04-2023 18:00',
-    'Schedule end date': '01-04-2023 19:00',
-  },
-  {
-    "Site name": "Alote",
-    'WO number': '123456',
-    'WO description': 'Corrective maintenance',
-    'Status': 'Under Progress ',
-    'Asset category': 'Inverter',
-    'Asset Id': 'ICR1_Inv1',
-    'Schedule start date': '01-04-2023 18:00',
-    'Schedule end date': '01-04-2023 19:00',
-  },
-  {
-    "Site name": "Aurad",
-    'WO number': '123456',
-    'WO description': 'Corrective maintenance',
-    'Status': 'Under Progress ',
-    'Asset category': 'Inverter',
-    'Asset Id': 'ICR1_Inv1',
-    'Schedule start date': '01-04-2023 18:00',
-    'Schedule end date': '01-04-2023 19:00',
-  },
-  {
-    "Site name": "Alote",
-    'WO number': '123456',
-    'WO description': 'Preventive maintenance',
-    'Status': 'Under Progress ',
-    'Asset category': 'Inverter',
-    'Asset Id': 'ICR1_Inv1',
-    'Schedule start date': '01-04-2023 18:00',
-    'Schedule end date': '01-04-2023 19:00',
-  },
-  {
-    "Site name": "Alote",
-    'WO number': '123456',
-    'WO description': 'Preventive maintenance',
-    'Status': 'Under Progress ',
-    'Asset category': 'Inverter',
-    'Asset Id': 'ICR1_Inv1',
-    'Schedule start date': '01-04-2023 18:00',
-    'Schedule end date': '01-04-2023 19:00',
-  },
-  {
-    "Site name": "Alote",
-    'WO number': '123456',
-    'WO description': 'Preventive maintenance',
-    'Status': 'Under Progress ',
-    'Asset category': 'Inverter',
-    'Asset Id': 'ICR1_Inv1',
-    'Schedule start date': '01-04-2023 18:00',
-    'Schedule end date': '01-04-2023 19:00',
-  },
-];
-
 class _DashBoardHomeWebState extends State<DashBoardHomeWeb> {
   final screenWidth = Get.width;
   final HomeController controller = Get.find();
 
   @override
   Widget build(BuildContext context) {
-    return SelectionArea(
-      child: Container(
-          color: ColorValues.appBackgroundColor,
-          child: DefaultTabController(
-            length: 6,
-            child: Column(children: [
-              // HeaderWidgetAllDash(),
-              HeaderWidget(),
-              Container(
-                height: 45,
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    color: Color.fromARGB(255, 227, 224, 224),
-                    width: 1,
-                  ),
-                  boxShadow: [
-                    BoxShadow(
-                      color:
-                          Color.fromARGB(255, 236, 234, 234).withOpacity(0.5),
-                      spreadRadius: 2,
-                      blurRadius: 5,
-                      offset: Offset(0, 2),
-                    ),
-                  ],
-                ),
-                child: Row(
-                  children: [
-                    Icon(
-                      Icons.home,
-                      color: ColorValues.greyLightColor,
-                    ),
-                    Text(
-                      "DASHBOARD",
-                      style: Styles.greyLight14,
-                    ),
-                  ],
-                ),
-              ),
+    return GetBuilder<HomeController>(
+        id: 'dashboard',
+        builder: (controller) {
+          return SelectionArea(
+            child: Container(
+                color: ColorValues.appBackgroundColor,
+                child: DefaultTabController(
+                  length: 6,
+                  child: Column(children: [
+                    HeaderWidgetAllDash(),
 
-              Align(
-                alignment: Alignment.center,
-                child: Container(
-                  child: TabBar(
-                    indicatorColor: Color(0xFF363A40),
-                    isScrollable: true,
-                    tabs: [
-                      CustomTabBar(
-                        label: "All Module".tr,
+                    Container(
+                      height: 45,
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: Color.fromARGB(255, 227, 224, 224),
+                          width: 1,
+                        ),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Color.fromARGB(255, 236, 234, 234)
+                                .withOpacity(0.5),
+                            spreadRadius: 2,
+                            blurRadius: 5,
+                            offset: Offset(0, 2),
+                          ),
+                        ],
                       ),
-                      CustomTabBar(
-                        label: 'Breakdown Maintenance'.tr,
-                        // icon: Icons.menu,
+                      child: Row(
+                        children: [
+                          Icon(
+                            Icons.home,
+                            color: ColorValues.greyLightColor,
+                          ),
+                          Text(
+                            "DASHBOARD",
+                            style: Styles.greyLight14,
+                          ),
+                        ],
                       ),
-                      CustomTabBar(
-                        label: 'Preventive Maintenance'.tr,
-                        // icon: Icons.account_tree_sharp,
-                      ),
-                      CustomTabBar(
-                        label: 'Module Cleaning'.tr,
-                        // icon: Icons.location_on,
-                      ),
-                      CustomTabBar(
-                        label: 'Incident Report'.tr,
-                        // icon: Icons.location_on,
-                      ),
-                      CustomTabBar(
-                        label: 'Stock Management'.tr,
-                        // icon: Icons.location_on,
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              Expanded(
-                child: TabBarView(
-                  children: [
-                    // alll.............
-                    GetBuilder<HomeController>(
-                        id: 'dashboard',
-                        builder: (controller) {
-                          return Stack(
+                    ),
+                    Expanded(
+                      child: Stack(
+                        children: [
+                          Align(
+                            alignment: Alignment.center,
+                            child: Container(
+                              child: TabBar(
+                                indicatorColor: Color(0xFF363A40),
+                                isScrollable: true,
+                                tabs: [
+                                  CustomTabBar(
+                                    label: "All Module".tr,
+                                  ),
+                                  CustomTabBar(
+                                    label: 'Breakdown Maintenance'.tr,
+                                    // icon: Icons.menu,
+                                  ),
+                                  CustomTabBar(
+                                    label: 'Preventive Maintenance'.tr,
+                                    // icon: Icons.account_tree_sharp,
+                                  ),
+                                  CustomTabBar(
+                                    label: 'Module Cleaning'.tr,
+                                    // icon: Icons.location_on,
+                                  ),
+                                  CustomTabBar(
+                                    label: 'Incident Report'.tr,
+                                    // icon: Icons.location_on,
+                                  ),
+                                  CustomTabBar(
+                                    label: 'Stock Management'.tr,
+                                    // icon: Icons.location_on,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          Container(
+                            margin:
+                                EdgeInsets.only(left: 20, right: 20, top: 10),
+                            child: Row(
+                              children: [Text("data"), Spacer(), Text("data")],
+                            ),
+                          ),
+                          TabBarView(
                             children: [
+                              // alll.............
+
                               Obx(
                                 () => Container(
                                   margin: EdgeInsets.only(
@@ -802,15 +720,9 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb> {
                                   ),
                                 ),
                               ),
-                            ],
-                          );
-                        }),
-                    //bm............................
-                    GetBuilder<HomeController>(
-                        id: 'dashboard',
-                        builder: (controller) {
-                          return Stack(
-                            children: [
+
+                              //bm............................
+
                               Obx(
                                 () => Container(
                                   margin: EdgeInsets.only(
@@ -1415,15 +1327,8 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb> {
                                   ),
                                 ),
                               ),
-                            ],
-                          );
-                        }),
-                    //pm......................
-                    GetBuilder<HomeController>(
-                        id: 'dashboard',
-                        builder: (controller) {
-                          return Stack(
-                            children: [
+
+                              //pm......................
                               Obx(
                                 () => Container(
                                   margin: EdgeInsets.only(
@@ -2028,15 +1933,8 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb> {
                                   ),
                                 ),
                               ),
-                            ],
-                          );
-                        }),
-                    // mc......................
-                    GetBuilder<HomeController>(
-                        id: 'dashboard',
-                        builder: (controller) {
-                          return Stack(
-                            children: [
+
+                              // mc......................
                               Obx(
                                 () => Container(
                                   margin: EdgeInsets.only(
@@ -2641,16 +2539,8 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb> {
                                   ),
                                 ),
                               ),
-                            ],
-                          );
-                        }),
 
-                    ///ir...............................
-                    GetBuilder<HomeController>(
-                        id: 'dashboard',
-                        builder: (controller) {
-                          return Stack(
-                            children: [
+                              ///ir...............................
                               Obx(
                                 () => Container(
                                   margin: EdgeInsets.only(
@@ -3255,15 +3145,8 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb> {
                                   ),
                                 ),
                               ),
-                            ],
-                          );
-                        }),
-                    //sm.................................
-                    GetBuilder<HomeController>(
-                        id: 'dashboard',
-                        builder: (controller) {
-                          return Stack(
-                            children: [
+
+                              //sm.................................
                               Obx(
                                 () => Container(
                                   margin: EdgeInsets.only(
@@ -3869,18 +3752,61 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb> {
                                 ),
                               ),
                             ],
-                          );
-                        }),
-                  ],
-                ),
-              ),
+                          ),
+                          if (controller.openFromDateToStartDatePicker)
+                            Positioned(
+                              right: 0,
+                              top: 0,
+                              child: DatePickerWidget(
+                                selectionMode:
+                                    DateRangePickerSelectionMode.range,
+                                monthCellStyle: DateRangePickerMonthCellStyle(
+                                  todayCellDecoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      color: ColorValues.appDarkBlueColor),
+                                ), // last date of this year
+                                // controller: DateRangePickerController(),
+                                initialSelectedRange: PickerDateRange(
+                                  controller.fromDate.value,
+                                  controller.toDate.value,
+                                ),
 
-              ///
+                                onSubmit: (value) {
+                                  print('po valu ${value.toString()}');
+                                  PickerDateRange? data =
+                                      value as PickerDateRange;
 
-              ///
-            ]),
-          )),
-    );
+                                  var pickUpDate =
+                                      DateTime.parse(data.startDate.toString());
+                                  controller.fromDate.value = pickUpDate;
+                                  var dropDate =
+                                      DateTime.parse(data.endDate.toString());
+                                  dropDate != null
+                                      ? controller.toDate.value = dropDate
+                                      : controller.toDate.value = pickUpDate;
+
+                                  //  controller.getPmTaskListByDate();
+                                  controller.openFromDateToStartDatePicker =
+                                      !controller.openFromDateToStartDatePicker;
+                                  controller.update(['dashboard']);
+
+                                  // Get.toNamed(
+                                  //   Routes.stockManagementGoodsOrdersScreen,
+                                  // );
+                                },
+                              ),
+                            ),
+                        ],
+                      ),
+                    )
+
+                    ///
+
+                    ///
+                  ]),
+                )),
+          );
+        });
   }
 
   _gridList({

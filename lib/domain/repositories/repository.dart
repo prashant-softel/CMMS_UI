@@ -2954,6 +2954,142 @@ class Repository {
     }
   }
 
+  Future<Map<String, dynamic>> auditTaskApprovedButton(
+    auditTaskApproveJsonString,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.auditTaskApprovedButton(
+        auth: auth,
+        auditTaskApproveJsonString: auditTaskApproveJsonString,
+        isLoading: isLoading ?? false,
+      );
+
+      var resourceData = res.data;
+
+      print('Response Goods Order Approve: ${resourceData}');
+
+      if (!res.hasError) {
+        if (res.errorCode == 200) {
+          var responseMap = json.decode(res.data);
+          return responseMap;
+        } else {
+          // Get.dialog<void>(WarrantyClaimErrorDialog());
+        }
+      } else {
+        Utility.showDialog(res.errorCode.toString(), 'pmPlanRejectButton');
+        //return '';
+      }
+      return Map();
+    } catch (error) {
+      print(error.toString());
+      return Map();
+    }
+  }
+
+  Future<Map<String, dynamic>> auditTaskCloseButton(
+    auditTaskCloseJsonString,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.auditTaskCloseButton(
+        auth: auth,
+        auditTaskCloseJsonString: auditTaskCloseJsonString,
+        isLoading: isLoading ?? false,
+      );
+
+      var resourceData = res.data;
+
+      print('Response Goods Order Approve: ${resourceData}');
+
+      if (!res.hasError) {
+        if (res.errorCode == 200) {
+          var responseMap = json.decode(res.data);
+          return responseMap;
+        } else {
+          // Get.dialog<void>(WarrantyClaimErrorDialog());
+        }
+      } else {
+        Utility.showDialog(res.errorCode.toString(), 'auditTaskCloseButton');
+        //return '';
+      }
+      return Map();
+    } catch (error) {
+      print(error.toString());
+      return Map();
+    }
+  }
+
+  Future<Map<String, dynamic>> auditTaskRejectButton(
+    auditTaskRejectJsonString,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.auditTaskRejectButton(
+        auth: auth,
+        auditTaskRejectJsonString: auditTaskRejectJsonString,
+        isLoading: isLoading ?? false,
+      );
+
+      var resourceData = res.data;
+
+      print('Response Goods Order Approve: ${resourceData}');
+
+      if (!res.hasError) {
+        if (res.errorCode == 200) {
+          var responseMap = json.decode(res.data);
+          return responseMap;
+        } else {
+          // Get.dialog<void>(WarrantyClaimErrorDialog());
+        }
+      } else {
+        Utility.showDialog(res.errorCode.toString(), 'auditTaskRejectButton');
+        //return '';
+      }
+      return Map();
+    } catch (error) {
+      print(error.toString());
+      return Map();
+    }
+  }
+
+  Future<Map<String, dynamic>> auditTaskSkipButton(
+    auditTaskSkipJsonString,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.auditTaskSkipButton(
+        auth: auth,
+        auditTaskSkipJsonString: auditTaskSkipJsonString,
+        isLoading: isLoading ?? false,
+      );
+
+      var resourceData = res.data;
+
+      print('Response Goods Order Approve: ${resourceData}');
+
+      if (!res.hasError) {
+        if (res.errorCode == 200) {
+          var responseMap = json.decode(res.data);
+          return responseMap;
+        } else {
+          // Get.dialog<void>(WarrantyClaimErrorDialog());
+        }
+      } else {
+        Utility.showDialog(res.errorCode.toString(), 'auditTaskSkipButton');
+        //return '';
+      }
+      return Map();
+    } catch (error) {
+      print(error.toString());
+      return Map();
+    }
+  }
+
   Future<Map<String, dynamic>> startAuditTask(
     auditTaskId,
     bool? isLoading,
@@ -2984,7 +3120,7 @@ class Repository {
     }
   }
 
-  Future<AuditTaskViewModel?> getAuditTaskDetails(
+  Future<PmtaskViewModel?> getAuditTaskDetails(
     int? auditTaskId,
     bool? isLoading,
   ) async {
@@ -2996,8 +3132,8 @@ class Repository {
         isLoading: isLoading,
       );
       if (!res.hasError) {
-        final AuditTaskViewModel _auditTaskViewModel =
-            auditTaskViewModelFromJson(res.data);
+        final PmtaskViewModel _auditTaskViewModel =
+            pmtaskViewModelFromJson(res.data);
         return _auditTaskViewModel;
       } //
       else {
@@ -12615,7 +12751,8 @@ class Repository {
       return null;
     }
   }
-   Future<List<SourceOfObservationListModel>> getSourceObservationList({
+
+  Future<List<SourceOfObservationListModel>> getSourceObservationList({
     required bool isLoading,
   }) async {
     try {
@@ -12629,9 +12766,8 @@ class Repository {
       print('Source Of Obervation: ${res.data}');
 
       if (!res.hasError) {
- 
         var Sourcetype = sourceofobservationFromJson(res.data);
-        return  Sourcetype;
+        return Sourcetype;
       }
       return [];
     } catch (error) {
@@ -12639,8 +12775,10 @@ class Repository {
       return [];
     }
   }
+
   //create
-  Future<bool> createSourceOfObslist({bool? isLoading, businesslistJsonString}) async {
+  Future<bool> createSourceOfObslist(
+      {bool? isLoading, businesslistJsonString}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.createSourceOfObslist(
@@ -12660,8 +12798,9 @@ class Repository {
       return false;
     }
   }
+
   //update
-   Future<bool> updatesourceOfObs({
+  Future<bool> updatesourceOfObs({
     bool? isLoading,
     modulelistJsonString,
   }) async {
@@ -12685,6 +12824,7 @@ class Repository {
       return false;
     }
   }
+
   //delete
   Future<void> deleteSourceOfObs(Object business_id, bool isLoading) async {
     try {
@@ -12698,7 +12838,8 @@ class Repository {
       if (!res.hasError) {
         //get delete response back from API
       } else {
-        Utility.showDialog(res.errorCode.toString(), 'delete Source of observation');
+        Utility.showDialog(
+            res.errorCode.toString(), 'delete Source of observation');
       }
     } catch (error) {
       print(error.toString());

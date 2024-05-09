@@ -1,5 +1,6 @@
 import 'package:cmms/domain/models/audit_plan_detail_model.dart';
 import 'package:cmms/domain/models/history_model.dart';
+import 'package:cmms/domain/models/pm_task_view_list_model.dart';
 import 'package:cmms/domain/models/view_audit_task_model.dart';
 import 'package:cmms/domain/repositories/repository.dart';
 
@@ -9,12 +10,36 @@ class ViewAuditTaskUsecase {
   ViewAuditTaskUsecase(this.repository);
   Repository repository;
 
-  Future<Map<String, dynamic>> pmPlanApprovedButton({
-    pmPlanApproveJsonString,
+  Future<Map<String, dynamic>> auditTaskApprovedButton({
+    auditTaskApproveJsonString,
     bool? isLoading,
   }) async =>
-      await repository.pmPlanApprovedButton(
-        pmPlanApproveJsonString,
+      await repository.auditTaskApprovedButton(
+        auditTaskApproveJsonString,
+        isLoading,
+      );
+  Future<Map<String, dynamic>> auditTaskCloseButton({
+    auditTaskCloseJsonString,
+    bool? isLoading,
+  }) async =>
+      await repository.auditTaskCloseButton(
+        auditTaskCloseJsonString,
+        isLoading,
+      );
+  Future<Map<String, dynamic>> auditTaskRejectButton({
+    auditTaskRejectJsonString,
+    bool? isLoading,
+  }) async =>
+      await repository.auditTaskRejectButton(
+        auditTaskRejectJsonString,
+        isLoading,
+      );
+  Future<Map<String, dynamic>> auditTaskSkipButton({
+    auditTaskSkipJsonString,
+    bool? isLoading,
+  }) async =>
+      await repository.auditTaskSkipButton(
+        auditTaskSkipJsonString,
         isLoading,
       );
   Future<Map<String, dynamic>> pmPlanRejectButton({
@@ -44,7 +69,7 @@ class ViewAuditTaskUsecase {
         auditTaskId,
         isLoading,
       );
-  Future<AuditTaskViewModel?> getAuditTaskDetails({
+  Future<PmtaskViewModel?> getAuditTaskDetails({
     int? auditTaskId,
     bool? isLoading,
   }) async =>

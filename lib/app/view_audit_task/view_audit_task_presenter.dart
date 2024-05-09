@@ -2,18 +2,49 @@ import 'package:cmms/domain/models/audit_plan_detail_model.dart';
 import 'package:cmms/domain/models/view_audit_task_model.dart';
 
 import '../../domain/models/history_model.dart';
+import '../../domain/models/pm_task_view_list_model.dart';
 import '../../domain/usecases/view_audit_task_usecase.dart';
 
 class ViewAuditTaskPresenter {
   ViewAuditTaskPresenter(this.viewAuditTaskUsecase);
   ViewAuditTaskUsecase viewAuditTaskUsecase;
 
-  Future<Map<String, dynamic>?> pmPlanApprovedButton({
-    pmPlanApproveJsonString,
+  Future<Map<String, dynamic>?> auditTaskApprovedButton({
+    auditTaskApproveJsonString,
     required bool isLoading,
   }) async {
-    return viewAuditTaskUsecase.pmPlanApprovedButton(
-      pmPlanApproveJsonString: pmPlanApproveJsonString,
+    return viewAuditTaskUsecase.auditTaskApprovedButton(
+      auditTaskApproveJsonString: auditTaskApproveJsonString,
+      isLoading: isLoading,
+    );
+  }
+
+  Future<Map<String, dynamic>?> auditTaskCloseButton({
+    auditTaskCloseJsonString,
+    required bool isLoading,
+  }) async {
+    return viewAuditTaskUsecase.auditTaskCloseButton(
+      auditTaskCloseJsonString: auditTaskCloseJsonString,
+      isLoading: isLoading,
+    );
+  }
+
+  Future<Map<String, dynamic>?> auditTaskRejectButton({
+    auditTaskRejectJsonString,
+    required bool isLoading,
+  }) async {
+    return viewAuditTaskUsecase.auditTaskRejectButton(
+      auditTaskRejectJsonString: auditTaskRejectJsonString,
+      isLoading: isLoading,
+    );
+  }
+
+  Future<Map<String, dynamic>?> auditTaskSkipButton({
+    auditTaskSkipJsonString,
+    required bool isLoading,
+  }) async {
+    return viewAuditTaskUsecase.auditTaskSkipButton(
+      auditTaskSkipJsonString: auditTaskSkipJsonString,
       isLoading: isLoading,
     );
   }
@@ -46,7 +77,7 @@ class ViewAuditTaskPresenter {
         auditTaskId: auditTaskId,
         isLoading: isLoading,
       );
-  Future<AuditTaskViewModel?> getAuditTaskDetails({
+  Future<PmtaskViewModel?> getAuditTaskDetails({
     int? auditTaskId,
     bool? isLoading,
   }) async =>

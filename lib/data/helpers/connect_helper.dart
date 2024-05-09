@@ -76,6 +76,7 @@ import 'package:get/get.dart';
 
 import '../../app/job_card_details/views/widgets/approve_jc_dailog.dart';
 import '../../app/job_card_details/views/widgets/reject_jc_dialog.dart';
+import '../../app/widgets/audit_task_msg_receive_dialog.dart';
 import '../../app/widgets/pm_plan_approve_msg_dialog.dart';
 
 /// The helper class which will connect to the world to get the data.
@@ -1424,6 +1425,102 @@ class ConnectHelper {
     var parsedJson = json.decode(res);
     Get.dialog<void>(PMPlanMsgReceiveDialog(
         data: parsedJson['message'], id: parsedJson['id']));
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> auditTaskApprovedButton({
+    required String auth,
+    auditTaskApproveJsonString,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'AuditPlan/ApproveAuditSkip',
+      Request.post,
+      auditTaskApproveJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    print('goodsOrderApproveResponse: ${responseModel.data}');
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    Get.dialog<void>(AuditTaskViewMsgReceiveDialog(
+        type: 1, data: parsedJson['message'], id: parsedJson['id']));
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> auditTaskSkipButton({
+    required String auth,
+    auditTaskSkipJsonString,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'AuditPlan/CreateAuditSkip',
+      Request.post,
+      auditTaskSkipJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    print('goodsOrderApproveResponse: ${responseModel.data}');
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    Get.dialog<void>(AuditTaskViewMsgReceiveDialog(
+        type: 3, data: parsedJson['message'], id: parsedJson['id']));
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> auditTaskCloseButton({
+    required String auth,
+    auditTaskCloseJsonString,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'AuditPlan/ApproveAuditSkip',
+      Request.post,
+      auditTaskCloseJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    print('goodsOrderApproveResponse: ${responseModel.data}');
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    Get.dialog<void>(AuditTaskViewMsgReceiveDialog(
+        type: 4, data: parsedJson['message'], id: parsedJson['id']));
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> auditTaskRejectButton({
+    required String auth,
+    auditTaskRejectJsonString,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'AuditPlan/RejectAuditSkip',
+      Request.post,
+      auditTaskRejectJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    print('goodsOrderApproveResponse: ${responseModel.data}');
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    Get.dialog<void>(AuditTaskViewMsgReceiveDialog(
+        type: 2, data: parsedJson['message'], id: parsedJson['id']));
 
     return responseModel;
   }
@@ -7495,7 +7592,7 @@ class ConnectHelper {
     bool? isLoading,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
-      'AuditPlan/GetPlanDetail?planId=$auditTaskId',
+      'AuditPlan/GetTaskDetail?task_id=$auditTaskId',
       Request.get,
       null,
       isLoading ?? true,
@@ -8158,7 +8255,6 @@ class ConnectHelper {
     return responseModel;
   }
 
-
   Future<ResponseModel> getSourceObservationList(
       {required bool isLoading, required String auth}) async {
     ResponseModel responseModel = await apiWrapper.makeRequest(
@@ -8174,7 +8270,7 @@ class ConnectHelper {
   }
 
   //create
-   Future<ResponseModel> createSourceOfOb({
+  Future<ResponseModel> createSourceOfOb({
     required String auth,
     bool? isLoading,
     required businesslistJsonString,
@@ -8194,8 +8290,9 @@ class ConnectHelper {
 
     return responseModel;
   }
+
   //update
-   Future<ResponseModel> updatesourceOfObs({
+  Future<ResponseModel> updatesourceOfObs({
     required String auth,
     bool? isLoading,
     required modulelistJsonString,
@@ -8221,7 +8318,7 @@ class ConnectHelper {
     required business_id,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
-     'MISMaster/DeleteSourceOfObservation?id=$business_id',
+      'MISMaster/DeleteSourceOfObservation?id=$business_id',
       Request.delete,
       business_id,
       isLoading ?? false,
