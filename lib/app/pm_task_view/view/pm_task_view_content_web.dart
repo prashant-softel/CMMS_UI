@@ -863,7 +863,7 @@ class PreventiveMaintenanceTaskViewContentWeb
 
                                                                               Get.toNamed(Routes.mrsViewScreen, arguments: {
                                                                                 'mrsId': int.tryParse("$mrsId"),
-                                                                                'type': 1
+                                                                                'type': 2
                                                                               });
                                                                             }),
                                                                         controller.pmtaskViewModel.value?.status ==
@@ -1067,7 +1067,7 @@ class PreventiveMaintenanceTaskViewContentWeb
                                         .where((e) =>
                                             e.feature_id ==
                                                 UserAccessConstants
-                                                    .kPmTaskFeatureId &&
+                                                    .kPmExecutionFeatureId &&
                                             e.add ==
                                                 UserAccessConstants
                                                     .kHaveAddAccess)

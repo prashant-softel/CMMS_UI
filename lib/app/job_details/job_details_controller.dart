@@ -342,7 +342,7 @@ class JobDetailsController extends GetxController {
     int? jobId,
   }) async {
     Get.toNamed(Routes.viewPermitScreen,
-        arguments: {"permitId": permitId, "jobId": jobId});
+        arguments: {"permitId": permitId, "jobId": jobId, "type": 1});
     print({"Permit", permitId, jobId});
   }
 

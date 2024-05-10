@@ -19,5 +19,9 @@ class MrsViewPresenter {
     return mrsViewUsecase.saveValue(mrsId: mrsId);
   }
 
+  void saveValuee({String? type}) async {
+    return mrsViewUsecase.saveValuee(type: type);
+  }
   Future<String?> getValue() async => await mrsViewUsecase.getValue();
+  Future<String?> getValuee() async => await mrsViewUsecase.getValuee();
 }

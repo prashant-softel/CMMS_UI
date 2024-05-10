@@ -54,7 +54,7 @@ class InventoryListController extends GetxController {
     "Assets Name": true,
     "Serial No": true,
     "Parent Asset": true,
-    "Catergory": true,
+    "Category": true,
     "Asset Facility Name": true,
 
     // "search": true,
@@ -64,7 +64,7 @@ class InventoryListController extends GetxController {
     "Assets Name": 320,
     "Serial No": 120,
     "Parent Asset": 200,
-    "Catergory": 223,
+    "Category": 223,
     "Asset Facility Name": 153,
   };
   Map<String, RxString> filterText = {};
@@ -83,7 +83,7 @@ class InventoryListController extends GetxController {
       "Assets Name": assetsNameFilterText,
       "Serial No": serialNoFilterText,
       "Parent Asset": parrentAssetFilterText,
-      "Catergory": catergoryFilterText,
+      "Category": catergoryFilterText,
       "Asset Facility Name": assetFacilityNameFilterText,
     };
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {

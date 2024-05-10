@@ -19,6 +19,7 @@ class MrsViewController extends GetxController {
   Rx<bool> isFacilitySelected = true.obs;
 
   Rx<int> mrsId = 0.obs;
+  Rx<int> type = 0.obs;
   Rx<MrsDetailsModel?> mrsDetailsModel = MrsDetailsModel().obs;
   String whereUsedType = "";
 
@@ -51,13 +52,17 @@ class MrsViewController extends GetxController {
   Future<void> setMrsId() async {
     try {
       final _mrsId = await mrsViewPresenter.getValue();
+      final _type = await mrsViewPresenter.getValuee();
       if (_mrsId == null || _mrsId == '' || _mrsId == "null") {
         var dataFromPreviousScreen = Get.arguments;
 
         mrsId.value = dataFromPreviousScreen['mrsId'];
+        type.value = dataFromPreviousScreen['type'];
         mrsViewPresenter.saveValue(mrsId: mrsId.value.toString());
+        mrsViewPresenter.saveValuee(type: type.value.toString());
       } else {
         mrsId.value = int.tryParse(_mrsId) ?? 0;
+        type.value = int.tryParse(_type!) ?? 0;
       }
     } catch (e) {
       Utility.showDialog(e.toString(), 'mrsId');
