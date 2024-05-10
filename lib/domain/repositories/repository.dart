@@ -12807,5 +12807,35 @@ class Repository {
     }
   }
 
+  Future<bool> addAttendance(
+    jsonEmployeeAttendance,
+    isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.addAttendance(
+        auth: auth,
+        jsonEmployeeAttendance: jsonEmployeeAttendance,
+        isLoading: isLoading,
+      );
+
+      var resourceData = res.data;
+      print('Response Create Permit For Job: ${resourceData}');
+
+      if (!res.hasError) {
+        if (res.errorCode == 200) {
+          print('attendance error');
+          return true;
+        }
+      } else {
+        Utility.showDialog(res.errorCode.toString(), 'createNewPermitForJOb');
+      }
+      return false;
+    } catch (error) {
+      print(error.toString());
+      return false;
+    }
+  }
+
   //end
 }

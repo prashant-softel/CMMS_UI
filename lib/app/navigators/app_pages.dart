@@ -21,7 +21,11 @@ import 'package:cmms/app/add_waste_data/add_waste_data_binding.dart';
 import 'package:cmms/app/add_waste_data/view/add_waste_data_screen.dart';
 import 'package:cmms/app/add_water_data_per_day/add_water_data_binding.dart';
 import 'package:cmms/app/add_water_data_per_day/view/add_water_data_screen.dart';
+import 'package:cmms/app/administration_dashboard_screen/admin_dash_binding.dart';
+import 'package:cmms/app/administration_dashboard_screen/view/admin_dash_screen.dart';
 import 'package:cmms/app/app.dart';
+import 'package:cmms/app/attendance_screen/attendance_binding.dart';
+import 'package:cmms/app/attendance_screen/view/attendance_screen.dart';
 import 'package:cmms/app/audit/audit_binding.dart';
 import 'package:cmms/app/audit/view/audit_screen.dart';
 import 'package:cmms/app/audit_list/audit_list_binding.dart';
@@ -1247,6 +1251,16 @@ class AppPages {
       name: _Paths.wasteTypeMaster,
       page: WasteTypeMasterScreen.new,
       binding: WasteTypeMasterBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.admin_dashboard,
+      page: AdminDashboardScreen.new,
+      binding: AdminDashboardBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.attendanceScreen,
+      page: AttendanceScreen.new,
+      binding: AttendanceBinding(),
     ),
   ];
 }
