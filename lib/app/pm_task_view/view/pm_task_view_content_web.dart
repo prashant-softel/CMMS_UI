@@ -866,10 +866,10 @@ class PreventiveMaintenanceTaskViewContentWeb
                                                                                 'type': 2
                                                                               });
                                                                             }),
-                                                                        controller.pmtaskViewModel.value?.status ==
-                                                                                169
-                                                                            ? Dimens.box0
-                                                                            : TableActionButton(
+                                                                        controller.pmtaskViewModel.value?.status != 169 &&
+                                                                                controller.pmtaskViewModel.value?.status != 165 &&
+                                                                                varUserAccessModel.value.access_list!.where((e) => e.feature_id == UserAccessConstants.kMrsFeatureId && e.edit == UserAccessConstants.kHaveEditAccess).length > 0
+                                                                            ? TableActionButton(
                                                                                 color: ColorValues.editColor,
                                                                                 icon: Icons.edit,
                                                                                 message: "Edit MRS",
@@ -885,6 +885,7 @@ class PreventiveMaintenanceTaskViewContentWeb
                                                                                     'type': 2
                                                                                   });
                                                                                 })
+                                                                            : Dimens.box0
                                                                       ],
                                                                     )),
                                                                   ]),

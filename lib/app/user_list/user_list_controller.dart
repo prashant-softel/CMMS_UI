@@ -37,6 +37,7 @@ class UserListController extends GetxController {
   RxString contractFilterText = ''.obs;
   RxString createdOnFilterText = ''.obs;
   RxString updatedOnFilterText = ''.obs;
+  RxString facilitiesFilterText = ''.obs;
   RxString userDateFilterText = ''.obs;
 
   Rx<int> userId = 0.obs;
@@ -47,6 +48,7 @@ class UserListController extends GetxController {
     "Contact Number": true,
     "Created On": true,
     "Updated On": true,
+    "Facilities": true,
     // "search": true,
   });
   final Map<String, double> columnwidth = {
@@ -56,6 +58,7 @@ class UserListController extends GetxController {
     "Contact Number": 200,
     "Created On": 123,
     "Updated On": 123,
+    "Facilities" :200
   };
   Map<String, RxString> filterText = {};
   void setColumnVisibility(String columnName, bool isVisible) {
@@ -102,6 +105,8 @@ class UserListController extends GetxController {
       "Contact Number": contractFilterText,
       "Created On": createdOnFilterText,
       "Updated On": updatedOnFilterText,
+      "Facilities": facilitiesFilterText,
+
     };
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
       facilityId = event;
