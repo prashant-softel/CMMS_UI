@@ -49,8 +49,13 @@ class ComplianceController extends GetxController {
     switch (list.runtimeType) {
       case RxList<BusinessTypeModel>:
         {
-          int equipmentIndex = ownerList.indexWhere((x) => x?.name == value);
+         if (value != "Please Select") {
+           int equipmentIndex = ownerList.indexWhere((x) => x?.name == value);
           selectedBusinessTypeId = ownerList[equipmentIndex]?.id ?? 0;
+           
+         }else{
+          selectedBusinessTypeId=0;
+         }
         }
         break;
     }

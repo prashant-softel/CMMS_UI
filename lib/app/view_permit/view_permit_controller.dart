@@ -1210,7 +1210,8 @@ class ViewPermitController extends GetxController {
     switch (list.runtimeType) {
       case RxList<FacilityModel>:
         {
-          int facilityIndex = facilityList.indexWhere((x) => x?.name == value);
+        if (value != "Please Select") {
+            int facilityIndex = facilityList.indexWhere((x) => x?.name == value);
           selectedFacilityId = facilityList[facilityIndex]?.id ?? 0;
           print('FacilityId:$selectedFacilityId');
           _facilityId.add(facilityList[facilityIndex]?.id ?? 0);
@@ -1220,6 +1221,10 @@ class ViewPermitController extends GetxController {
           }
           selectedFacility.value = value;
           getBlocksList(selectedFacilityId!);
+          
+        }else{
+          selectedFacilityId=0;
+        }
         }
         break;
 

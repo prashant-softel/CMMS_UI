@@ -193,31 +193,47 @@ class AddEscalationMatrixController extends GetxController {
     switch (list.runtimeType) {
       case RxList<FacilityModel>:
         {
-          int facilityIndex = facilityList.indexWhere((x) => x?.name == value);
+          if (value != "Please Select") {
+            int facilityIndex = facilityList.indexWhere((x) => x?.name == value);
 
           _facilityId.add(facilityList[facilityIndex]?.id ?? 0);
+          } else {
+            facilityId=0;
+          }
         }
         break;
       case RxList<ModuleListModel>:
         {
-          int moduleListIndex = moduleList.indexWhere((x) => x?.name == value);
+         if (value != "Please Select") {
+            int moduleListIndex = moduleList.indexWhere((x) => x?.name == value);
           selectedModuleListId = moduleList[moduleListIndex]?.id ?? 0;
           print('Module List Id: $selectedModuleListId');
+         } else {
+           selectedModuleListId=0;
+         }
         }
         break;
       case RxList<RoleModel>:
         {
-          int roleModelListIndex = roleList.indexWhere((x) => x?.name == value);
+          if (value != "Please Select") {
+            int roleModelListIndex = roleList.indexWhere((x) => x?.name == value);
           selectedRoleListId = roleList[roleModelListIndex]?.id ?? 0;
           print('Role List Id: $selectedRoleListId');
+          } else {
+            selectedRoleListId=0;
+          }
         }
         break;
       case RxList<TypePermitModel>:
         {
-          int prmitTypeIndex =
+          if (value != "Please Select") {
+            int prmitTypeIndex =
               typePermitList.indexWhere((x) => x?.name == value);
           selectedTypePermitId = typePermitList[prmitTypeIndex]?.id ?? 0;
           print('Type Permit Id: $selectedTypePermitId');
+          } else {
+            selectedTypePermitId=0;
+          }
         }
         break;
 

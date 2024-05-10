@@ -58,11 +58,17 @@ class RoleAccessController extends GetxController {
     switch (list.runtimeType) {
       case RxList<RoleModel>:
         {
+          if (value != "Please Select") {
+            
           int roleIndex = roleList.indexWhere((x) => x?.name == value);
           selectedRoleId = roleList[roleIndex]?.id ?? 0;
           selectedRole.value = roleList[0]?.name ?? '';
 
           getRoleAccessList(roleId: selectedRoleId, isloading: true);
+            
+          }else{
+            selectedRoleId=0;
+          }
         }
         break;
       default:

@@ -413,13 +413,19 @@ class PreventiveCheckPointController extends GetxController {
     switch (list.runtimeType) {
       case RxList<PreventiveCheckListModel>:
         {
-          int checklistIndex = checkList.indexWhere((x) => x?.name == value);
+          if(value != "Please Select"){
+            int checklistIndex = checkList.indexWhere((x) => x?.name == value);
           selectedchecklistId.value =
               checkList[checklistIndex]?.id.toString() ?? "";
           cleardata();
           getCheckPointlist(
               selectedchecklistId: selectedchecklistId.value,
               facilityId: facilityId);
+
+          }else{
+            // selectedchecklistId=0;
+
+          }
         }
 
         break;

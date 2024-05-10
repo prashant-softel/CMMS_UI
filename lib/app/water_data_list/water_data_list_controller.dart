@@ -420,9 +420,14 @@ class WaterDataListController extends GetxController {
     switch (list.runtimeType) {
       case RxList<WaterSource>:
         {
-          int typeOfWaterIndex =
+          if(value != "Please Select"){
+            int typeOfWaterIndex =
               typeOfWaterList.indexWhere((x) => x?.name == value);
           selectedTypeOfWaterId = typeOfWaterList[typeOfWaterIndex]?.id ?? 0;
+
+          }else{
+            selectedTypeOfWaterId=0;
+          }
         }
         break;
     }

@@ -715,64 +715,96 @@ class ViewAddInventoryController extends GetxController {
     switch (list.runtimeType) {
       case RxList<FacilityModel>:
         {
-          int facilityIndex = facilityList.indexWhere((x) => x?.name == value);
+          if (value != "Please Select") {
+            int facilityIndex = facilityList.indexWhere((x) => x?.name == value);
 
           _facilityId.add(facilityList[facilityIndex]?.id ?? 0);
+          } else {
+            facilityId=0;
+          }
         }
         break;
 
       case RxList<FrequencyModel>:
         {
-          int frequencyIndex =
+         if (value != "Please Select") {
+            int frequencyIndex =
               frequencyList.indexWhere((x) => x?.name == value);
           selectedfrequencyId = frequencyList[frequencyIndex]?.id ?? 0;
+         } else {
+            selectedfrequencyId=0;
+         }
         }
         break;
       case RxList<ManufacturerModel>:
         {
-          int manufacturerIndex =
+          if (value != "Please Select") {
+            int manufacturerIndex =
               manufacturerModelNameList.indexWhere((x) => x?.name == value);
           selectedmanufacturerNameId =
               manufacturerModelNameList[manufacturerIndex]?.id ?? 0;
+          } else {
+            selectedmanufacturerNameId=0;
+          }
         }
         break;
       case RxList<WarrantyTypeModel>:
         {
-          int warrantyIndex =
+          if (value != "Please Select") {
+            int warrantyIndex =
               warrantyNameList.indexWhere((x) => x?.name == value);
           selectedWarrentyNameId = warrantyNameList[warrantyIndex]?.id ?? 0;
+          } else {
+            selectedWarrentyNameId=0;
+          }
         }
         break;
       case RxList<SupplierNameModel>:
         {
-          int supplierIndex =
+          if (value != "Please Select") {
+            int supplierIndex =
               supplierNameModelNameList.indexWhere((x) => x?.name == value);
           selectedsupplierrNameId =
               supplierNameModelNameList[supplierIndex]?.id ?? 0;
+          } else {
+            selectedsupplierrNameId=0;
+          }
         }
         break;
       case RxList<WarrantyUsageTermListModel>:
         {
-          int warrantyUsageTermIndex =
+          if (value != "Please Select") {
+            int warrantyUsageTermIndex =
               warrantyUsageTermNameList.indexWhere((x) => x?.name == value);
           selectedwarrantyUsageTermNameId =
               warrantyNameList[warrantyUsageTermIndex]?.id ?? 0;
+          } else {
+            selectedwarrantyUsageTermNameId=0;
+          }
         }
         break;
       case RxList<WarrantyUsageTermListModel>:
         {
-          int warrantyUsageIndex =
+          if (value != "Please Select") {
+            int warrantyUsageIndex =
               warrantyUsageTermNameList.indexWhere((x) => x?.name == value);
 
           selectedwarrantyUsageTermNameId =
               warrantyUsageTermNameList[warrantyUsageIndex]?.id ?? 0;
+          } else {
+            selectedwarrantyUsageTermNameId=0;
+          }
         }
         break;
       case RxList<BlockModel>:
         {
-          int blockIndex = blocksList.indexWhere((x) => x?.name == value);
+          if (value != "Please Select") {
+            int blockIndex = blocksList.indexWhere((x) => x?.name == value);
 
           selectedBlockListId = blocksList[blockIndex]?.id ?? 0;
+          } else {
+            selectedBlockListId=0;
+          }
         }
         break;
       case RxList<InventoryModel>:
@@ -784,11 +816,15 @@ class ViewAddInventoryController extends GetxController {
           // }
           // int workAreaIndex = workAreaList.indexWhere((x) => x?.name == value);
           // selectedWarrentyNameId = frequencyList[workAreaIndex]?.id ?? 0;
-          int eqipmentNameListIndex =
+         if (value != "Please Select") {
+            int eqipmentNameListIndex =
               eqipmentNameList.indexWhere((x) => x?.name == value);
           selectedEquipmentnameId =
               eqipmentNameList[eqipmentNameListIndex]?.id ?? 0;
           print({"selectedEquipmentnameId", selectedEquipmentnameId});
+         } else {
+           selectedEquipmentnameId=0;
+         }
         }
         break;
       case RxList<InventoryCategoryModel>:
@@ -800,10 +836,14 @@ class ViewAddInventoryController extends GetxController {
           //   // selectedInventoryCategoryId = equipmentCategoryList[equipCatIndex]?.id ?? 0;
           //   print('First Category Id:$selectedEquipmentCategoryList');
           // }
-          int equipCatIndex =
+         if (value != "Please Select") {
+            int equipCatIndex =
               equipmentCategoryList.indexWhere((x) => x?.name == value);
           selectedEquipmentCategoryNameId =
               equipmentCategoryList[equipCatIndex]?.id ?? 0;
+         } else {
+           selectedEquipmentCategoryNameId=0;
+         }
         }
         break;
       case RxList<InventoryStatusListModel>:
@@ -813,8 +853,12 @@ class ViewAddInventoryController extends GetxController {
           //       statusNameList.indexWhere((x) => x?.name == statusName);
           //   selectedWorkAreaIdList.add(statusIndex);
           // }
-          int statusIndex = statusNameList.indexWhere((x) => x?.name == value);
+         if (value != "Please Select") {
+            int statusIndex = statusNameList.indexWhere((x) => x?.name == value);
           selectedStatusNameId = statusNameList[statusIndex]?.id ?? 0;
+         } else {
+           selectedStatusNameId=0;
+         }
         }
         break;
       case RxList<InventoryTypeListModel>:
@@ -824,8 +868,12 @@ class ViewAddInventoryController extends GetxController {
           //       typeNameList.indexWhere((x) => x?.name == typeName);
           //   selectedWorkAreaIdList.add(typeNameIndex);
           // }
-          int typeNameIndex = typeNameList.indexWhere((x) => x?.name == value);
+         if (value != "Please Select") {
+            int typeNameIndex = typeNameList.indexWhere((x) => x?.name == value);
           selectedTypeNameId = typeNameList[typeNameIndex]?.id ?? 0;
+         } else {
+           selectedTypeNameId=0;
+         }
         }
         break;
 

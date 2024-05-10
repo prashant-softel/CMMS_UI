@@ -118,9 +118,13 @@ class EscalationMatrixListController extends GetxController {
     switch (list.runtimeType) {
       case RxList<FacilityModel>:
         {
-          int facilityIndex = facilityList.indexWhere((x) => x?.name == value);
+          if (value != "Please Select") {
+            int facilityIndex = facilityList.indexWhere((x) => x?.name == value);
 
           _facilityId.add(facilityList[facilityIndex]?.id ?? 0);
+          } else {
+            facilityId=0;
+          }
         }
         break;
 

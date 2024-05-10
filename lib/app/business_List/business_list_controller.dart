@@ -293,18 +293,23 @@ class BusinessListController extends GetxController {
     switch (list.runtimeType) {
       case RxList<BusinessTypeModel>:
         {
-          int equipmentIndex =
+         if (value != "Please Select") {
+            int equipmentIndex =
               businessCategoryList.indexWhere((x) => x?.name == value);
           selectedBusinessTypeId =
               businessCategoryList[equipmentIndex]?.id ?? 0;
           selectedBusinessType.value = value;
           getBusinessList(selectedBusinessTypeId!, facilityId);
+         } else {
+           selectedBusinessTypeId=0;
+         }
         }
 
         break;
       case RxList<CountryModel>:
         {
-          int frequencyIndex = countryList.indexWhere((x) => x?.name == value);
+      if (value != "Please Select") {
+            int frequencyIndex = countryList.indexWhere((x) => x?.name == value);
           selectedCountryId = countryList[frequencyIndex]?.id ?? 0;
           if (selectedCountryId! > 0) {
             isSelectedCountryType.value = true;
@@ -319,11 +324,16 @@ class BusinessListController extends GetxController {
             getStateList(selectedCountryId!);
             getCityList(selectedStateId);
           }
+        
+      } else {
+        selectedCountryId=0;
+      }
         }
         break;
       case RxList<CountryState>:
         {
-          int frequencyIndex = stateList.indexWhere((x) => x?.name == value);
+         if (value != "Please Select") {
+            int frequencyIndex = stateList.indexWhere((x) => x?.name == value);
           selectedStateId = stateList[frequencyIndex]?.id ?? 0;
           if (selectedStateId > 0) {
             isSelectedStateType.value = true;
@@ -338,13 +348,21 @@ class BusinessListController extends GetxController {
             // getStateList(selectedCountryId);
             getCityList(selectedStateId);
           }
+         } else {
+          selectedStateId=0;
+           
+         }
         }
         break;
       case RxList<CityModel>:
         {
-          int frequencyIndex = cityList.indexWhere((x) => x?.name == value);
+          if (value != "Please Select") {
+            int frequencyIndex = cityList.indexWhere((x) => x?.name == value);
           selectedCityId = cityList[frequencyIndex]?.id ?? 0;
           selectedCity.value = value;
+          } else {
+            selectedCityId=0;
+          }
         }
         break;
       default:

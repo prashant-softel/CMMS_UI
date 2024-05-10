@@ -381,19 +381,25 @@ class AddJobController extends GetxController {
     switch (list.runtimeType) {
       case RxList<FacilityModel>:
         {
-          int facilityIndex = facilityList.indexWhere((x) => x?.name == value);
+         if (value != "Please Select") {
+           int facilityIndex = facilityList.indexWhere((x) => x?.name == value);
           selectedFacilityId = facilityList[facilityIndex]?.id ?? 0;
           if (selectedFacilityId != 0) {
             isFacilitySelected.value = true;
           }
           selectedFacility.value = value;
           getBlocksList(selectedFacilityId);
+           
+         }else{
+          selectedFacilityId=0;
+         }
         }
         break;
 
       case RxList<BlockModel>:
         {
-          int blockIndex = blockList.indexWhere((x) => x?.name == value);
+          if (value != "Please Select") {
+            int blockIndex = blockList.indexWhere((x) => x?.name == value);
           selectedBlockId = blockList[blockIndex]?.id ?? 0;
           if (selectedBlockId > 0) {
             isBlockSelected.value = true;
@@ -408,46 +414,65 @@ class AddJobController extends GetxController {
           getInventoryCategoryList(selectedBlockId.toString());
           getWorkTypeList();
           getInventoryList(facilityId: facilityId, blockId: selectedBlockId);
+          } else {
+            selectedBlockId=0;
+          }
 
           // getToolsRequiredToWorkTypeList();
         }
         break;
       case RxList<EquipmentModel>:
         {
-          int equipmentIndex =
+          if (value != "Please Select") {
+            int equipmentIndex =
               equipmentList.indexWhere((x) => x?.name == value);
           int selectedEquipmentId = equipmentList[equipmentIndex]?.id ?? 0;
           print(selectedEquipmentId);
+          } else {
+            // selectedEquipmentId=0;
+          }
         }
         break;
       case RxList<InventoryModel>:
         {
-          for (var workAreaName in selectedWorkAreaNameList) {
+         if (value != "Please Select") {
+            for (var workAreaName in selectedWorkAreaNameList) {
             int workAreaIndex =
                 workAreaList.indexWhere((x) => x?.name == workAreaName);
             selectedWorkAreaIdList.add(workAreaIndex);
           }
+         } else {
+           
+         }
         }
         break;
       case RxList<InventoryCategoryModel>:
         {
-          for (var equipCat in selectedEquipmentCategoryList) {
+          if (value != "Please Select") {
+            for (var equipCat in selectedEquipmentCategoryList) {
             int equipCatIndex = selectedEquipmentCategoryList
                 .indexWhere((x) => x?.name == equipCat);
             selectedEquipmentCategoryIdList.add(equipCatIndex);
+          }
+          } else {
+            
           }
         }
         break;
 
       case RxList<EmployeeModel>:
         {
-          int assignedToIndex =
+          if (value != "Please Select") {
+            int assignedToIndex =
               assignedToList.indexWhere((x) => x?.name == value);
           selectedAssignedToId = assignedToList[assignedToIndex]?.id ?? 0;
           if (selectedAssignedToId != 0) {
             isAssignedToSelected.value = true;
           }
           selectedAssignedTo.value = value;
+          } else {
+            selectedAssignedToId=0;
+          }
         }
         break;
       default:
