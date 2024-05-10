@@ -318,20 +318,6 @@ class _ScheduleCourseWebState extends State<ScheduleCourseWeb> {
                                                                     onPress:
                                                                         () {},
                                                                   ),
-                                                                  TableActionButton(
-                                                                    color: Colors
-                                                                        .lightGreen,
-                                                                    icon: Icons
-                                                                        .calendar_month_outlined,
-                                                                    message:
-                                                                        "Schedule",
-                                                                    onPress:
-                                                                        () {
-                                                                      Get.toNamed(
-                                                                          Routes
-                                                                              .scheduleCourse);
-                                                                    },
-                                                                  ),
                                                                 ],
                                                               ),
                                                             ),

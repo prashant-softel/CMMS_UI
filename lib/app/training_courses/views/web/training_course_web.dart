@@ -24,6 +24,24 @@ final List<Map<dynamic, dynamic>> courseData = [
     "Duration in Minutes": "test",
     "MaxCapacity": "20"
   },
+  {
+    "id": "1",
+    "topic": "test",
+    "Desc": "test",
+    "Category": "test",
+    "Targatted Group": "test",
+    "Duration in Minutes": "test",
+    "MaxCapacity": "20"
+  },
+  {
+    "id": "1",
+    "topic": "test",
+    "Desc": "test",
+    "Category": "test",
+    "Targatted Group": "test",
+    "Duration in Minutes": "test",
+    "MaxCapacity": "20"
+  },
 ];
 
 class _TrainingCourseWebState extends State<TrainingCourseWeb> {
@@ -264,6 +282,20 @@ class _TrainingCourseWebState extends State<TrainingCourseWeb> {
                                                                         'Edit',
                                                                     onPress:
                                                                         () {},
+                                                                  ),
+                                                                  TableActionButton(
+                                                                    color: Colors
+                                                                        .lightGreen,
+                                                                    icon: Icons
+                                                                        .calendar_month_outlined,
+                                                                    message:
+                                                                        "Schedule",
+                                                                    onPress:
+                                                                        () {
+                                                                      Get.toNamed(
+                                                                          Routes
+                                                                              .scheduleCourse);
+                                                                    },
                                                                   ),
                                                                 ],
                                                               ),

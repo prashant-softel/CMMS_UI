@@ -392,7 +392,7 @@ class AddUserController extends GetxController {
               ))
           .toList();
       await getUserAccessListById(userId: userId.value, isloading: true);
-      // await getUserNotificationListById(userId: userId.value, isloading: true);
+      await getUserNotificationListById(userId: userId.value, isloading: true);
     }
     // if (_responsList != null) {
     //   responsList.value = _responsList;
@@ -744,29 +744,30 @@ class AddUserController extends GetxController {
         Credentials(password: _password, user_name: _loginId);
 
     AddUserModel adduser = AddUserModel(
-        id: 0,
-        secondaryEmail: _secandoryId,
-        first_name: _firstname,
-        landline_number: _landline,
-        last_name: _lastname,
-        add_access_list: [], //add_accessList,
-        gender_id: selectedGenderId,
-        DOB: _dob,
-        company_id: selectedBusinessTypeId,
-        city_id: selectedCityId,
-        contact_no: _mobileno,
-        country_id: selectedCountryId,
-        joiningDate: _joiningdate,
-        blood_group_id: selectedBloodId,
-        state_id: selectedStateId,
-        photo_id: photoId,
-        role_id: selectedRoleId,
-        zipcode: int.parse(_zipcode),
-        isEmployee: 1,
-        facilities: selectedfacilityNameIdList,
-        // facilities: isEmployeeFacilityList,
-        user_responsibility_list: reslist,
-        credentials: credentials);
+      id: 0,
+      secondaryEmail: _secandoryId,
+      first_name: _firstname,
+      landline_number: _landline,
+      last_name: _lastname,
+      add_access_list: [], //add_accessList,
+      gender_id: selectedGenderId,
+      DOB: _dob,
+      company_id: selectedBusinessTypeId,
+      city_id: selectedCityId,
+      contact_no: _mobileno,
+      country_id: selectedCountryId,
+      joiningDate: _joiningdate,
+      blood_group_id: selectedBloodId,
+      state_id: selectedStateId,
+      photo_id: photoId,
+      role_id: selectedRoleId,
+      zipcode: int.parse(_zipcode),
+      isEmployee: 1,
+      // facilities: selectedfacilityNameIdList,
+      facilities: isEmployeeFacilityList,
+      user_responsibility_list: reslist,
+      credentials: credentials,
+    );
     var adduserJsonString = [adduser.toJson()];
 
     print({"adduserJsonString", adduserJsonString});
@@ -811,29 +812,30 @@ class AddUserController extends GetxController {
         Credentials(password: _password, user_name: _loginId);
 
     AddUserModel adduser = AddUserModel(
-        id: userDetailModel.value?.id ?? 0,
-        secondaryEmail: _secandoryId,
-        first_name: _firstname,
-        landline_number: _landline,
-        last_name: _lastname,
-        add_access_list: [], //add_accessList,
-        gender_id: selectedGenderId,
-        DOB: _dob,
-        city_id: selectedCityId,
-        contact_no: _mobileno,
-        company_id: selectedBusinessTypeId,
-        country_id: selectedCountryId,
-        joiningDate: _joiningdate,
-        blood_group_id: selectedBloodId,
-        state_id: selectedStateId,
-        photo_id: photoId,
-        role_id: selectedRoleId,
-        zipcode: int.parse(_zipcode),
-        facilities: selectedfacilityNameIdList,
-        // facilities: isEmployeeFacilityList,
-        isEmployee: 1,
-        user_responsibility_list: reslist,
-        credentials: credentials);
+      id: userDetailModel.value?.id ?? 0,
+      secondaryEmail: _secandoryId,
+      first_name: _firstname,
+      landline_number: _landline,
+      last_name: _lastname,
+      add_access_list: [], //add_accessList,
+      gender_id: selectedGenderId,
+      DOB: _dob,
+      city_id: selectedCityId,
+      contact_no: _mobileno,
+      company_id: selectedBusinessTypeId,
+      country_id: selectedCountryId,
+      joiningDate: _joiningdate,
+      blood_group_id: selectedBloodId,
+      state_id: selectedStateId,
+      photo_id: photoId,
+      role_id: selectedRoleId,
+      zipcode: int.parse(_zipcode),
+      // facilities: selectedfacilityNameIdList,
+      facilities: isEmployeeFacilityList,
+      isEmployee: 1,
+      user_responsibility_list: reslist,
+      credentials: credentials,
+    );
     var adduserJsonString = adduser.toJson();
 
     print({"adduserJsonString", adduserJsonString});

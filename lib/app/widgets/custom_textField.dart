@@ -25,6 +25,7 @@ class LoginCustomTextfield extends GetView {
   List<TextInputFormatter>? inputFormatters;
   final bool readOnly;
   double? width;
+  ScrollController? scrollController;
 
   LoginCustomTextfield({
     Key? key,
@@ -46,6 +47,7 @@ class LoginCustomTextfield extends GetView {
     this.ontap,
     this.readOnly = false,
     this.width,
+    this.scrollController,
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -67,7 +69,7 @@ class LoginCustomTextfield extends GetView {
         onChanged: onChanged,
         controller: textController,
         focusNode: focusNode,
-        scrollController: scroll,
+        scrollController: scrollController,
         obscureText: obscureText,
         keyboardType: keyboardType,
         inputFormatters: inputFormatters,
