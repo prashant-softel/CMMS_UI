@@ -97,10 +97,7 @@ class DropdownWebStock extends StatelessWidget {
             showSearchBox: true,
             showSelectedItems: true,
           ),
-          items: [
-            'Please Select',
-            ...?dropdownList?.map<String>((item) => item.name).toList()
-          ],
+          items: dropdownList?.map<String>((item) => item.name).toList() ?? [],
           dropdownDecoratorProps: DropDownDecoratorProps(
             dropdownSearchDecoration: InputDecoration(
               border: InputBorder.none,
@@ -118,7 +115,7 @@ class DropdownWebStock extends StatelessWidget {
             selectedValue = _selectedValue ?? '';
             onValueChanged(dropdownList, selectedValue);
           },
-          selectedItem: selectedValue ?? "Please Select",
+          selectedItem: selectedValue,
         ),
       ),
     );

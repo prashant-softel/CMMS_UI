@@ -13,11 +13,11 @@ class AttendaceModel {
 
   factory AttendaceModel.fromJson(Map<String, dynamic> json) => AttendaceModel(
         date: json["date"],
-        hfeAttendance: json["hfeAttendance"]!= null
-           ? [HFEEmployeeAttendance.fromJson(json["hfeAttendance"])]
+        hfeAttendance: json["hfeAttendance"] != null
+            ? [HFEEmployeeAttendance.fromJson(json["hfeAttendance"])]
             : [],
-        contractAttendance: json["contractAttendance"]!= null
-           ? ContractLabourAttendance.fromJson(json["contractAttendance"])
+        contractAttendance: json["contractAttendance"] != null
+            ? ContractLabourAttendance.fromJson(json["contractAttendance"])
             : null,
       );
 
@@ -32,7 +32,6 @@ class HFEEmployeeAttendance {
   int? id;
   String? name;
   RxBool present;
-  String? date;
   String? inTime;
   String? outTime;
 
@@ -40,7 +39,6 @@ class HFEEmployeeAttendance {
     this.id,
     this.name,
     required this.present,
-    this.date,
     this.inTime,
     this.outTime,
   });
@@ -50,7 +48,6 @@ class HFEEmployeeAttendance {
         id: json["id"],
         name: json["name"],
         present: json["present"],
-        date: json["date"],
         inTime: json["inTime"],
         outTime: json["outTime"],
       );
@@ -58,8 +55,7 @@ class HFEEmployeeAttendance {
   Map<String, dynamic> toJson() => {
         "id": id,
         "name": name,
-        "present": present,
-        "date": date,
+        "present": present.value,
         "inTime": inTime,
         "outTime": outTime,
       };

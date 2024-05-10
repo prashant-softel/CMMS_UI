@@ -58,8 +58,7 @@ class AttendanceController extends GetxController {
     if (_employeeList != null) {
       employeeList.value = _employeeList;
       attendanceModel.value = List.generate(
-        // employeeList.length,
-        2,
+        employeeList.length,
         (index) => HFEEmployeeAttendance(
           id: employeeList[index]?.id,
           name: employeeList[index]?.name,
@@ -137,7 +136,6 @@ class AttendanceController extends GetxController {
     );
 
     final jsonEmployeeAttendance = employeeAttendance.toJson();
-
     final _attendance = await attendancePresenter.addAttendance(
       jsonEmployeeAttendance: jsonEmployeeAttendance,
       isLoading: isLoading,
