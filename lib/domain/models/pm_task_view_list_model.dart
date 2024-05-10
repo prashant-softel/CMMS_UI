@@ -36,6 +36,25 @@ class PmtaskViewModel {
   String? status_short_ptw;
   String? permit_type;
   int? ptw_tbt_done;
+  int? started_by_id;
+  String? started_by_name;
+  String? started_at;
+  int? closed_by_id;
+  String? closed_by_name;
+  String? closed_at;
+  int? cancelled_by_id;
+  String? cancelled_by_name;
+  String? cancelled_at;
+  int? approved_by_id;
+  String? approved_by_name;
+  String? approved_at;
+  int? rejected_by_id;
+  String? rejected_by_name;
+  String? rejected_at;
+  int? updated_by_id;
+  String? updated_by_name;
+  String? updated_at;
+  String? status_long;
   List<ScheduleCheckPoint>? schedules;
 
   PmtaskViewModel(
@@ -60,11 +79,49 @@ class PmtaskViewModel {
       this.status_short_ptw,
       this.ptw_status,
       this.permit_type,
-      this.ptw_tbt_done});
+      this.ptw_tbt_done,
+      this.approved_at,
+      this.approved_by_id,
+      this.approved_by_name,
+      this.cancelled_at,
+      this.cancelled_by_id,
+      this.cancelled_by_name,
+      this.closed_at,
+      this.closed_by_id,
+      this.closed_by_name,
+      this.rejected_at,
+      this.rejected_by_id,
+      this.rejected_by_name,
+      this.started_at,
+      this.started_by_id,
+      this.started_by_name,
+      this.status_long,
+      this.updated_at,
+      this.updated_by_id,
+      this.updated_by_name});
 
   factory PmtaskViewModel.fromJson(Map<String, dynamic> json) =>
       PmtaskViewModel(
         status_short_ptw: json["status_short_ptw"] ?? "",
+        updated_by_name: json["updated_by_name"] ?? "",
+        updated_by_id: json["updated_by_id"] ?? "",
+        updated_at: json["updated_at"] ?? "",
+        status_long: json["status_long"] ?? "",
+        started_by_name: json["started_by_name"] ?? "",
+        started_by_id: json["started_by_id"] ?? "",
+        started_at: json["started_at"] ?? "",
+        rejected_by_name: json["rejected_by_name"] ?? "",
+        rejected_by_id: json["rejected_by_id"] ?? "",
+        rejected_at: json["rejected_at"] ?? "",
+        closed_by_name: json["closed_by_name"] ?? "",
+        closed_by_id: json["closed_by_id"] ?? "",
+        closed_at: json["closed_at"] ?? "",
+        cancelled_by_name: json["cancelled_by_name"] ?? "",
+        cancelled_by_id: json["cancelled_by_id"] ?? "",
+        cancelled_at: json["cancelled_at"] ?? "",
+        approved_by_name: json["approved_by_name"] ?? "",
+        approved_by_id: json["approved_by_id"] ?? "",
+        approved_at: json["approved_at"] ?? "",
         ptw_status: json["ptw_status"] ?? 0,
         ptw_tbt_done: json["ptw_tbt_done"] ?? 0,
         assigned_to_name: json["assigned_to_name"] ?? "",
@@ -97,6 +154,25 @@ class PmtaskViewModel {
 
   Map<String, dynamic> toJson() => {
         "ptw_status": ptw_status,
+        "updated_by_name": updated_by_name,
+        "updated_by_id": updated_by_id,
+        "updated_at": updated_at,
+        "status_long": status_long,
+        "started_by_name": started_by_name,
+        "started_by_id": started_by_id,
+        "started_at": started_at,
+        "rejected_by_name": rejected_by_name,
+        "rejected_by_id": rejected_by_id,
+        "rejected_at": rejected_at,
+        "closed_by_name": closed_by_name,
+        "closed_by_id": closed_by_id,
+        "closed_at": closed_at,
+        "cancelled_by_name": cancelled_by_name,
+        "cancelled_by_id": cancelled_by_id,
+        "cancelled_at": cancelled_at,
+        "approved_by_name": approved_by_name,
+        "approved_by_id": approved_by_id,
+        "approved_at": approved_at,
         "ptw_tbt_done": ptw_tbt_done,
         "status_short_ptw": status_short_ptw,
         "assigned_to_name": assigned_to_name,

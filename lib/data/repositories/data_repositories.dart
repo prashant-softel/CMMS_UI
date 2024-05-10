@@ -943,6 +943,46 @@ class DataRepository extends DomainRepository {
         pmPlanRejectJsonString: pmPlanRejectJsonString,
         isLoading: isLoading ?? false,
       );
+  Future<ResponseModel> auditTaskApprovedButton({
+    required String auth,
+    auditTaskApproveJsonString,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.auditTaskApprovedButton(
+        auth: auth,
+        auditTaskApproveJsonString: auditTaskApproveJsonString,
+        isLoading: isLoading ?? false,
+      );
+  Future<ResponseModel> auditTaskSkipButton({
+    required String auth,
+    auditTaskSkipJsonString,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.auditTaskSkipButton(
+        auth: auth,
+        auditTaskSkipJsonString: auditTaskSkipJsonString,
+        isLoading: isLoading ?? false,
+      );
+  Future<ResponseModel> auditTaskCloseButton({
+    required String auth,
+    auditTaskCloseJsonString,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.auditTaskCloseButton(
+        auth: auth,
+        auditTaskCloseJsonString: auditTaskCloseJsonString,
+        isLoading: isLoading ?? false,
+      );
+  Future<ResponseModel> auditTaskRejectButton({
+    required String auth,
+    auditTaskRejectJsonString,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.auditTaskRejectButton(
+        auth: auth,
+        auditTaskRejectJsonString: auditTaskRejectJsonString,
+        isLoading: isLoading ?? false,
+      );
   Future<ResponseModel> getAuditTaskDetails({
     String? auth,
     int? auditTaskId,

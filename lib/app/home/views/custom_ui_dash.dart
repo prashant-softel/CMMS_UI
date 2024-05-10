@@ -377,119 +377,122 @@ class CustomDashboardButton extends GetView {
                             child: Padding(
                               padding: const EdgeInsets.all(16),
                               child: DataTable2(
-                                headingRowHeight: 40,
-                                dataRowHeight: 35,
-                                columnSpacing: 12,
-                                // horizontalMargin: 5,
-                                headingRowColor: MaterialStateColor.resolveWith(
-                                  (states) {
-                                    return ColorValues.lightGreyColor;
-                                  },
-                                ),
-                                minWidth: 1000,
-                                columns: [
-                                  DataColumn2(
-                                    fixedWidth: 100,
-                                    label: Text(
-                                      'Site name',
-                                      style: Styles.blackBold14,
-                                    ),
-                                    // size: ColumnSize.L,
+                                  headingRowHeight: 40,
+                                  dataRowHeight: 35,
+                                  columnSpacing: 12,
+                                  // horizontalMargin: 5,
+                                  headingRowColor:
+                                      MaterialStateColor.resolveWith(
+                                    (states) {
+                                      return ColorValues.lightGreyColor;
+                                    },
                                   ),
-                                  DataColumn2(
-                                    fixedWidth: 120,
-                                    label: Text(
-                                      'WO number',
-                                      style: Styles.blackBold14,
+                                  minWidth: 1000,
+                                  columns: [
+                                    DataColumn2(
+                                      fixedWidth: 100,
+                                      label: Text(
+                                        'Site name',
+                                        style: Styles.blackBold14,
+                                      ),
+                                      // size: ColumnSize.L,
                                     ),
-                                    // size: ColumnSize.L,
-                                  ),
-                                  DataColumn2(
-                                    fixedWidth: 200,
-                                    label: Text(
-                                      'WO description',
-                                      style: Styles.blackBold14,
+                                    DataColumn2(
+                                      fixedWidth: 120,
+                                      label: Text(
+                                        'WO number',
+                                        style: Styles.blackBold14,
+                                      ),
+                                      // size: ColumnSize.L,
                                     ),
-                                    // size: ColumnSize.L,
-                                  ),
-                                  DataColumn2(
-                                    fixedWidth: 120,
-                                    label: Text(
-                                      'Status',
-                                      style: Styles.blackBold14,
+                                    DataColumn2(
+                                      fixedWidth: 200,
+                                      label: Text(
+                                        'WO description',
+                                        style: Styles.blackBold14,
+                                      ),
+                                      // size: ColumnSize.L,
                                     ),
-                                    // size: ColumnSize.L,
-                                  ),
-                                  DataColumn2(
-                                    fixedWidth: 140,
-                                    label: Text(
-                                      'Asset category',
-                                      style: Styles.blackBold14,
+                                    DataColumn2(
+                                      fixedWidth: 120,
+                                      label: Text(
+                                        'Status',
+                                        style: Styles.blackBold14,
+                                      ),
+                                      // size: ColumnSize.L,
                                     ),
-                                    // size: ColumnSize.L,
-                                  ),
-                                  DataColumn2(
-                                    fixedWidth: 100,
-                                    label: Text(
-                                      'Asset Id',
-                                      style: Styles.blackBold14,
+                                    DataColumn2(
+                                      fixedWidth: 140,
+                                      label: Text(
+                                        'Asset category',
+                                        style: Styles.blackBold14,
+                                      ),
+                                      // size: ColumnSize.L,
                                     ),
-                                    // size: ColumnSize.L,
-                                  ),
-                                  DataColumn2(
-                                    fixedWidth: 170,
-                                    label: Text(
-                                      'Schedule start date',
-                                      style: Styles.blackBold14,
+                                    DataColumn2(
+                                      fixedWidth: 100,
+                                      label: Text(
+                                        'Asset Id',
+                                        style: Styles.blackBold14,
+                                      ),
+                                      // size: ColumnSize.L,
                                     ),
-                                    // size: ColumnSize.L,
-                                  ),
-                                  DataColumn2(
-                                    // fixedWidth: 150,
-                                    label: Text(
-                                      'Schedule end date',
-                                      style: Styles.blackBold14,
+                                    DataColumn2(
+                                      fixedWidth: 170,
+                                      label: Text(
+                                        'Schedule start date',
+                                        style: Styles.blackBold14,
+                                      ),
+                                      // size: ColumnSize.L,
                                     ),
-                                    // size: ColumnSize.L,
-                                  ),
-                                  DataColumn2(
-                                    label: Text(
-                                      'Action',
-                                      style: Styles.blackBold14,
+                                    DataColumn2(
+                                      // fixedWidth: 150,
+                                      label: Text(
+                                        'Schedule end date',
+                                        style: Styles.blackBold14,
+                                      ),
+                                      // size: ColumnSize.L,
                                     ),
+                                    DataColumn2(
+                                      label: Text(
+                                        'Action',
+                                        style: Styles.blackBold14,
+                                      ),
+                                    ),
+                                  ],
+                                  rows: []
+                                  //  statutoryData.map(
+                                  //   (data) {
+                                  //     return DataRow(
+                                  //       cells: [
+                                  //         DataCell(Text(data['Site name'])),
+                                  //         DataCell(Text(data['WO number'])),
+                                  //         DataCell(Text(data['WO description'])),
+                                  //         DataCell(Text(data['Status'])),
+                                  //         DataCell(Text(data['Asset category'])),
+                                  //         DataCell(Text(data['Asset Id'])),
+                                  //         DataCell(
+                                  //             Text(data['Schedule start date'])),
+                                  //         DataCell(
+                                  //             Text(data['Schedule end date'])),
+                                  //         DataCell(
+                                  //           Row(
+                                  //             children: [
+                                  //               TableActionButton(
+                                  //                 color: ColorValues.viewColor,
+                                  //                 icon: Icons
+                                  //                     .remove_red_eye_outlined,
+                                  //                 message: 'View',
+                                  //               ),
+                                  //             ],
+                                  //           ),
+                                  //         ),
+                                  //       ],
+                                  //     );
+                                  //   },
+                                  // ).toList(),
+
                                   ),
-                                ],
-                                rows: statutoryData.map(
-                                  (data) {
-                                    return DataRow(
-                                      cells: [
-                                        DataCell(Text(data['Site name'])),
-                                        DataCell(Text(data['WO number'])),
-                                        DataCell(Text(data['WO description'])),
-                                        DataCell(Text(data['Status'])),
-                                        DataCell(Text(data['Asset category'])),
-                                        DataCell(Text(data['Asset Id'])),
-                                        DataCell(
-                                            Text(data['Schedule start date'])),
-                                        DataCell(
-                                            Text(data['Schedule end date'])),
-                                        DataCell(
-                                          Row(
-                                            children: [
-                                              TableActionButton(
-                                                color: ColorValues.viewColor,
-                                                icon: Icons
-                                                    .remove_red_eye_outlined,
-                                                message: 'View',
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ],
-                                    );
-                                  },
-                                ).toList(),
-                              ),
                             ),
                           ),
                         ),

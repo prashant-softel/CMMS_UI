@@ -1,6 +1,8 @@
 import 'package:cmms/app/home/views/custom_ui_dash.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/home/widgets/header_widget_all_dash.dart';
+import 'package:cmms/app/widgets/custom_multiselect_dialog_field.dart';
+import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:cmms/app/app.dart';
@@ -9,6 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:cmms/app/app.dart';
+import 'package:multi_select_flutter/multi_select_flutter.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 // import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:pie_chart/pie_chart.dart';
@@ -23,99 +26,6 @@ class DashBoardHomeWeb extends StatefulWidget {
   State<DashBoardHomeWeb> createState() => _DashBoardHomeWebState();
 }
 
-final List<Map<String, dynamic>> statutoryData = [
-  {
-    "Site name": "Alote",
-    'WO number': '123456',
-    'WO description': 'Preventive maintenance',
-    'Status': 'Under Progress ',
-    'Asset category': 'Inverter',
-    'Asset Id': 'ICR1_Inv1',
-    'Schedule start date': '01-04-2023 18:00',
-    'Schedule end date': '01-04-2023 19:00',
-  },
-  {
-    "Site name": "Aurad",
-    'WO number': '123456',
-    'WO description': 'Preventive maintenance',
-    'Status': 'Under Progress ',
-    'Asset category': 'Inverter',
-    'Asset Id': 'ICR1_Inv1',
-    'Schedule start date': '01-04-2023 18:00',
-    'Schedule end date': '01-04-2023 19:00',
-  },
-  {
-    "Site name": "Barod",
-    'WO number': '123456',
-    'WO description': 'Preventive maintenance',
-    'Status': 'Under Progress ',
-    'Asset category': 'Inverter',
-    'Asset Id': 'ICR1_Inv1',
-    'Schedule start date': '01-04-2023 18:00',
-    'Schedule end date': '01-04-2023 19:00',
-  },
-  {
-    "Site name": "Bellary",
-    'WO number': '123456',
-    'WO description': 'Preventive maintenance',
-    'Status': 'Under Progress ',
-    'Asset category': 'Inverter',
-    'Asset Id': 'ICR1_Inv1',
-    'Schedule start date': '01-04-2023 18:00',
-    'Schedule end date': '01-04-2023 19:00',
-  },
-  {
-    "Site name": "Alote",
-    'WO number': '123456',
-    'WO description': 'Corrective maintenance',
-    'Status': 'Under Progress ',
-    'Asset category': 'Inverter',
-    'Asset Id': 'ICR1_Inv1',
-    'Schedule start date': '01-04-2023 18:00',
-    'Schedule end date': '01-04-2023 19:00',
-  },
-  {
-    "Site name": "Aurad",
-    'WO number': '123456',
-    'WO description': 'Corrective maintenance',
-    'Status': 'Under Progress ',
-    'Asset category': 'Inverter',
-    'Asset Id': 'ICR1_Inv1',
-    'Schedule start date': '01-04-2023 18:00',
-    'Schedule end date': '01-04-2023 19:00',
-  },
-  {
-    "Site name": "Alote",
-    'WO number': '123456',
-    'WO description': 'Preventive maintenance',
-    'Status': 'Under Progress ',
-    'Asset category': 'Inverter',
-    'Asset Id': 'ICR1_Inv1',
-    'Schedule start date': '01-04-2023 18:00',
-    'Schedule end date': '01-04-2023 19:00',
-  },
-  {
-    "Site name": "Alote",
-    'WO number': '123456',
-    'WO description': 'Preventive maintenance',
-    'Status': 'Under Progress ',
-    'Asset category': 'Inverter',
-    'Asset Id': 'ICR1_Inv1',
-    'Schedule start date': '01-04-2023 18:00',
-    'Schedule end date': '01-04-2023 19:00',
-  },
-  {
-    "Site name": "Alote",
-    'WO number': '123456',
-    'WO description': 'Preventive maintenance',
-    'Status': 'Under Progress ',
-    'Asset category': 'Inverter',
-    'Asset Id': 'ICR1_Inv1',
-    'Schedule start date': '01-04-2023 18:00',
-    'Schedule end date': '01-04-2023 19:00',
-  },
-];
-
 class _DashBoardHomeWebState extends State<DashBoardHomeWeb> {
   final screenWidth = Get.width;
   final HomeController controller = Get.find();
@@ -128,8 +38,8 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb> {
           child: DefaultTabController(
             length: 6,
             child: Column(children: [
-              // HeaderWidgetAllDash(),
-              HeaderWidget(),
+              HeaderWidgetAllDash(),
+              // HeaderWidget(),
               Container(
                 height: 45,
                 decoration: BoxDecoration(
@@ -193,6 +103,59 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb> {
                       ),
                     ],
                   ),
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.only(left: 20, right: 20, top: 10),
+                child: Row(
+                  children: [
+                    Obx(
+                      () => SizedBox(
+                        width: MediaQuery.of(context).size.width / 3,
+                        child: CustomMultiSelectDialogField(
+                          title: 'Select Facilty',
+                          // buttonText:
+                          //     'Equipment Category',
+                          initialValue:
+                              ((controller.selectedFacilityIdList.isNotEmpty)
+                                  ? controller.selectedFacilityIdList
+                                  : []),
+                          items: controller.facilityList
+                              .map(
+                                (facility) => MultiSelectItem(
+                                  facility?.id,
+                                  facility?.name ?? '',
+                                ),
+                              )
+                              .toList(),
+                          onConfirm: (selectedOptionsList) => {
+                            controller
+                                .selectedMultiFacility(selectedOptionsList),
+                            print(
+                                'Equipment list ${controller.selectedFacilityIdList}')
+                          },
+                        ),
+                      ),
+                    ),
+                    Spacer(),
+                    Row(
+                      children: [
+                        CustomRichText(title: 'Date Range'),
+                        Dimens.boxWidth10,
+                        CustomTextFieldForStock(
+                          width: MediaQuery.of(context).size.width / 5,
+                          numberTextField: true,
+                          onTap: () {
+                            controller.openFromDateToStartDatePicker =
+                                !controller.openFromDateToStartDatePicker;
+                            controller.update(['PreventiveMaintenanceTask']);
+                          },
+                          hintText:
+                              '${controller.formattedFromdate.toString()} To ${controller.formattedTodate.toString()}',
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
               ),
               Expanded(

@@ -180,9 +180,10 @@ class CreateMrsReturnContentWeb extends GetView<CreateMrsReturnController> {
                                         ignoring: true,
                                         child: LoginCustomTextfield(
                                           // enabled: false,
-                                          width:
-                                              (MediaQuery.of(context).size.width *
-                                                  .2),
+                                          width: (MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              .2),
                                           textController:
                                               controller.whereUsedCtrlr,
                                         ),
@@ -270,16 +271,24 @@ class CreateMrsReturnContentWeb extends GetView<CreateMrsReturnController> {
                                                                 .size
                                                                 .width /
                                                             4,
-                                                        dropdownList: controller
-                                                            .StockDetailsList,
+                                                        dropdownList: (controller
+                                                                    .StockDetailsList
+                                                                .where((p0) {
+                                                          return !controller
+                                                                  .rowItem
+                                                                  .map((p0) => p0[
+                                                                          0]
+                                                                      ["value"])
+                                                                  .contains(p0!
+                                                                      .name) &&
+                                                              p0!.consumed_qty !=
+                                                                  p0.issued_qty;
+                                                        }).toList())
+                                                            .obs,
                                                         selectedValue:
                                                             mapData["value"],
                                                         onValueChanged: (list,
                                                             selectedValue) {
-                                                          // print({
-                                                          //   selectedValue:
-                                                          //       selectedValue
-                                                          // });
                                                           mapData["value"] =
                                                               selectedValue;
                                                           controller.dropdownMapperData[
@@ -292,6 +301,43 @@ class CreateMrsReturnContentWeb extends GetView<CreateMrsReturnController> {
                                                                   orElse: null);
                                                         },
                                                       ),
+
+                                                      // DropdownWebWidget(
+                                                      //   width: MediaQuery.of(
+                                                      //               context)
+                                                      //           .size
+                                                      //           .width /
+                                                      //       4,
+                                                      //   dropdownList: controller
+                                                      //           .StockDetailsList
+                                                      //       .where((p0) {
+                                                      //     return !controller
+                                                      //         .rowItem
+                                                      //         .map((p0) => p0[0]
+                                                      //             ["value"])
+                                                      //         .contains(
+                                                      //             p0!.name);
+                                                      //   }).toList().obs,
+                                                      //   selectedValue:
+                                                      //       mapData["value"],
+                                                      //   onValueChanged: (list,
+                                                      //       selectedValue) {
+                                                      //     // print({
+                                                      //     //   selectedValue:
+                                                      //     //       selectedValue
+                                                      //     // });
+                                                      //     mapData["value"] =
+                                                      //         selectedValue;
+                                                      //     controller.dropdownMapperData[
+                                                      //             selectedValue] =
+                                                      //         list.firstWhere(
+                                                      //             (element) =>
+                                                      //                 element
+                                                      //                     .name ==
+                                                      //                 selectedValue,
+                                                      //             orElse: null);
+                                                      //   },
+                                                      // ),
                                                     )
                                                   : (mapData['key'] ==
                                                           "Return_Qty")

@@ -112,10 +112,7 @@ class ModuleCleaningDashboardScreen
                                                           .kModuleCleaningplanFeatureId &&
                                                   e.view ==
                                                       UserAccessConstants
-                                                          .kHaveViewAccess ||
-                                              e.add ==
-                                                  UserAccessConstants
-                                                      .kHaveAddAccess)
+                                                          .kHaveViewAccess )
                                           .length >
                                       0
                                   ? _moduleCleaningList(
@@ -134,10 +131,7 @@ class ModuleCleaningDashboardScreen
                                                           .kModuleCleaningexeFeatureId &&
                                                   e.view ==
                                                       UserAccessConstants
-                                                          .kHaveViewAccess ||
-                                              e.add ==
-                                                  UserAccessConstants
-                                                      .kHaveAddAccess)
+                                                          .kHaveViewAccess )
                                           .length >
                                       0
                                   ? _moduleCleaningList(

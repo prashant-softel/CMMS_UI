@@ -5,6 +5,7 @@ import 'package:cmms/app/water_data_list/water_data_list_controller.dart';
 import 'package:cmms/app/widgets/add_dialog.dart';
 import 'package:cmms/app/widgets/date_picker.dart';
 import 'package:cmms/app/widgets/minus_dialog.dart';
+import 'package:cmms/domain/models/water_data_list_model.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -46,6 +47,48 @@ final List<Map<String, dynamic>> statutoryData = [
 ];
 
 class _WaterDataListWebState extends State<WaterDataListWeb> {
+  TableCell headerCell(String text, {bool isHeader = false}) => TableCell(
+        child: Container(
+          padding: EdgeInsets.all(8),
+          // color: Colors.white, // Background color for header cells
+          child: Center(
+              child: Text(text, style: TextStyle(fontWeight: FontWeight.bold))),
+          decoration: isHeader
+              ? BoxDecoration(
+                  border: Border(
+                    right: BorderSide(width: 1.0, color: Colors.white),
+                  ), // Custom border color for header cells
+                )
+              : BoxDecoration(
+                  // border: Border.all(
+                  //     color: Colors.blue,
+                  //     width: 2), // Custom border color for header cells
+                  ),
+        ),
+      );
+
+  TableCell dataCell(String text) => TableCell(
+        child: Center(child: Text(text)),
+      );
+
+  _CellData(DetailData data, String type) {
+    switch (type) {
+      case 'consumedQty':
+        return '${data.consumedQty}';
+      case 'procuredQty':
+        return '${data.procuredQty}';
+
+      case 'opening':
+        return '${data.opening}';
+
+      case 'closingQty':
+        return '${data.closingQty}';
+
+      default:
+        return '';
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return GetBuilder<WaterDataListController>(
@@ -217,230 +260,121 @@ class _WaterDataListWebState extends State<WaterDataListWeb> {
                                             height: Get.height,
                                             child: Padding(
                                               padding: const EdgeInsets.all(16),
-                                              child: DataTable2(
-                                                fixedLeftColumns: 1,
-                                                headingRowHeight: 130,
-                                                columnSpacing: 12,
-                                                horizontalMargin: 12,
-                                                headingRowColor:
-                                                    MaterialStateColor
-                                                        .resolveWith(
-                                                  (states) {
-                                                    return ColorValues
-                                                        .lightGreyColor;
+                                              child: SingleChildScrollView(
+                                                child: Table(
+                                                  border: TableBorder.all(
+                                                      color: Colors.grey,
+                                                      width:
+                                                          1), // Default border color for the table
+                                                  columnWidths: const <int,
+                                                      TableColumnWidth>{
+                                                    0: FlexColumnWidth(),
+                                                    1: FlexColumnWidth(),
+                                                    2: FlexColumnWidth(),
+                                                    3: FlexColumnWidth(),
                                                   },
+                                                  children: [
+                                                    // Main Headers
+                                                    TableRow(
+                                                        children: [
+                                                      // headerCell('Header1', isHeader: true),
+                                                      // TableCell(
+                                                      //     child: Container(
+                                                      //   decoration: BoxDecoration(
+                                                      //     border: Border.all(
+                                                      //         color: Colors.transparent,
+                                                      //         width: 1), // Custom border color for header cells
+                                                      //   ),
+                                                      // )), // Empty container to maintain the structure
+                                                      // headerCell('Header2', isHeader: true),
+                                                      // TableCell(
+                                                      //     child: Container(
+                                                      //   decoration: BoxDecoration(
+                                                      //     border: Border.all(
+                                                      //         color: Colors.transparent,
+                                                      //         width: 1), // Custom border color for header cells
+                                                      //   ),
+                                                      // )), // Empty container to maintain the structure
+                                                    ]..addAll(controller
+                                                              .headerList
+                                                              .map((e) {
+                                                            return e['isShow'] ==
+                                                                    true
+                                                                ? headerCell(
+                                                                    e['label'])
+                                                                : TableCell(
+                                                                    child:
+                                                                        Container(
+                                                                    decoration:
+                                                                        BoxDecoration(
+                                                                      border: Border.all(
+                                                                          color: Colors
+                                                                              .transparent,
+                                                                          width:
+                                                                              1), // Custom border color for header cells
+                                                                    ),
+                                                                  ));
+                                                          }))),
+                                                    // Sub-Headers
+                                                    TableRow(
+                                                        children: [
+                                                      // headerCell('SubHeader1.1'),
+                                                      // headerCell('SubHeader1.2'),
+                                                      // headerCell('SubHeader2.1'),
+                                                      // headerCell('SubHeader2.2'),
+                                                    ]..addAll(controller
+                                                              .headerList
+                                                              .map((e) {
+                                                            return headerCell(
+                                                                e['subHeader']);
+                                                          }))),
+                                                    // Data Rows
+                                                    ...List<TableRow>.generate(
+                                                        controller.waterDataList
+                                                                    .length >
+                                                                0
+                                                            ? controller
+                                                                    .waterDataList[
+                                                                        0]
+                                                                    .periods
+                                                                    ?.length ??
+                                                                0
+                                                            : 0,
+                                                        (index) => TableRow(
+                                                                children: [
+                                                              // dataCell('1'),
+                                                              // dataCell('1'),
+                                                              // dataCell('1'),
+                                                              // dataCell('1'),
+                                                            ]..addAll(controller
+                                                                      .headerList
+                                                                      .map((e) {
+                                                                    if (e['dataKey'] ==
+                                                                        'Month') {
+                                                                      return dataCell(
+                                                                          '${controller.waterDataList[0].periods[index].monthName}');
+                                                                    }
+                                                                    DetailData? data = controller
+                                                                        .waterDataList[
+                                                                            0]
+                                                                        .periods[
+                                                                            index]
+                                                                        .details
+                                                                        .firstWhereOrNull((element) =>
+                                                                            element.waterType ==
+                                                                            e['label']);
+                                                                    if (data ==
+                                                                        null) {
+                                                                      return dataCell(
+                                                                          '');
+                                                                    }
+                                                                    return dataCell(
+                                                                        _CellData(
+                                                                            data,
+                                                                            e['dataKey']));
+                                                                  })))),
+                                                  ],
                                                 ),
-                                                fixedColumnsColor:
-                                                    ColorValues.appYellowColor,
-                                                minWidth: 2300,
-                                                columns: [
-                                                  DataColumn2(
-                                                    fixedWidth: 70,
-                                                    label: Text(
-                                                      'Month',
-                                                      style: Styles.blackBold14,
-                                                    ),
-                                                    // size: ColumnSize.L,
-                                                  ),
-                                                  DataColumn2(
-                                                    fixedWidth: 100,
-                                                    label: Text(
-                                                      'Ground\nWater',
-                                                      style: Styles.blackBold14,
-                                                    ),
-                                                    // size: ColumnSize.L,
-                                                  ),
-                                                  DataColumn2(
-                                                    fixedWidth: 150,
-                                                    label: Text(
-                                                      'Opening\nbalance of\nModule cleaning\nwater',
-                                                      style: Styles.blackBold14,
-                                                    ),
-                                                    // size: ColumnSize.L,
-                                                  ),
-                                                  DataColumn2(
-                                                    fixedWidth: 190,
-                                                    label: Text(
-                                                      'Water Procured from\nThird Party for\nModule cleaning',
-                                                      style: Styles.blackBold14,
-                                                    ),
-                                                    // size: ColumnSize.L,
-                                                  ),
-                                                  DataColumn2(
-                                                    fixedWidth: 190,
-                                                    label: Text(
-                                                      'Water Consumption\nfrom Third Party\nfor Module cleaning',
-                                                      style: Styles.blackBold14,
-                                                    ),
-                                                    // size: ColumnSize.L,
-                                                  ),
-                                                  DataColumn2(
-                                                    fixedWidth: 150,
-                                                    label: Text(
-                                                      'Closing\nbalance of\nModule cleaning\nwater',
-                                                      style: Styles.blackBold14,
-                                                    ),
-                                                    // size: ColumnSize.L,
-                                                  ),
-                                                  DataColumn2(
-                                                    fixedWidth: 190,
-                                                    label: Text(
-                                                      'Water Procured from\nThird Party for\nDrinking',
-                                                      style: Styles.blackBold14,
-                                                    ),
-                                                    // size: ColumnSize.L,
-                                                  ),
-                                                  DataColumn2(
-                                                    fixedWidth: 150,
-                                                    label: Text(
-                                                      'Water Procured\nfrom Third Party\nfor Domestic and\nothers purposes',
-                                                      style: Styles.blackBold14,
-                                                    ),
-                                                    // size: ColumnSize.L,
-                                                  ),
-                                                  DataColumn2(
-                                                    fixedWidth: 150,
-                                                    label: Text(
-                                                      'water used for\ndrinking',
-                                                      style: Styles.blackBold14,
-                                                    ),
-                                                    // size: ColumnSize.L,
-                                                  ),
-                                                  DataColumn2(
-                                                    fixedWidth: 150,
-                                                    label: Text(
-                                                      'Water used for\nModule cleaning',
-                                                      style: Styles.blackBold14,
-                                                    ),
-                                                    // size: ColumnSize.L,
-                                                  ),
-                                                  DataColumn2(
-                                                    fixedWidth: 180,
-                                                    label: Text(
-                                                      'Water used for\ndomestic and other\npurpos',
-                                                      style: Styles.blackBold14,
-                                                    ),
-                                                    // size: ColumnSize.L,
-                                                  ),
-                                                  DataColumn2(
-                                                    label: Text(
-                                                      'Total Water\nWithdrawal',
-                                                      style: Styles.blackBold14,
-                                                    ),
-                                                    // size: ColumnSize.L,
-                                                  ),
-                                                  DataColumn2(
-                                                    label: Text(
-                                                      'Total Water\nconsumed',
-                                                      style: Styles.blackBold14,
-                                                    ),
-                                                    // size: ColumnSize.L,
-                                                  ),
-                                                  DataColumn2(
-                                                    label: Text(
-                                                      'Total Water\nwithdrawal\nyearly limit as\nper NO',
-                                                      style: Styles.blackBold14,
-                                                    ),
-                                                  ),
-                                                  DataColumn2(
-                                                    label: Text(
-                                                      'Total\nGroundwater\nWithdrawal\nLimit left',
-                                                      style: Styles.blackBold14,
-                                                    ),
-                                                    // size: ColumnSize.L,
-                                                  ),
-                                                  DataColumn2(
-                                                    label: Text(
-                                                      'Action',
-                                                      style: Styles.blackBold14,
-                                                    ),
-                                                  ),
-                                                ],
-                                                rows: statutoryData.map(
-                                                  (data) {
-                                                    return DataRow(
-                                                      cells: [
-                                                        DataCell(Text(
-                                                            data['Month'])),
-                                                        DataCell(Text(data[
-                                                            'Ground Water in KL units'])),
-                                                        DataCell(Text(data[
-                                                            'opening balance of MC water'])),
-                                                        DataCell(Text(data[
-                                                            'Water Procured from Third Party for Module cleaning in KL units'])),
-                                                        DataCell(Text(data[
-                                                            'Water Consumption  from Third Party for Module cleaning in KL units'])),
-                                                        DataCell(Text(data[
-                                                            'closing balance of MC water'])),
-                                                        DataCell(Text(data[
-                                                            'Water Procured from Third Party for Drinking in KL units'])),
-                                                        DataCell(Text(data[
-                                                            'Water Procured from Third Party for Domestic and others purposes in KL units'])),
-                                                        DataCell(Text(data[
-                                                            'water used for drinking in KL units'])),
-                                                        DataCell(Text(data[
-                                                            'Water used for Module cleaning in KL units'])),
-                                                        DataCell(Text(data[
-                                                            'Water used for domestic and other purpose in KL units'])),
-                                                        DataCell(Text(data[
-                                                            'Total Water Withdrawal in KL units'])),
-                                                        DataCell(Text(data[
-                                                            'Total Water consumed in KL units'])),
-                                                        DataCell(Text(data[
-                                                            'Total Water withdrawal yearly limit as per NOC in KL units'])),
-                                                        DataCell(Text(data[
-                                                            'Total Groundwater Withdrawal Limit left in KL units'])),
-                                                        DataCell(
-                                                          Row(
-                                                            children: [
-                                                              TableActionButton(
-                                                                color: ColorValues
-                                                                    .viewColor,
-                                                                icon: Icons
-                                                                    .remove_red_eye_outlined,
-                                                                message: 'View',
-                                                                onPress: () {
-                                                                  Get.toNamed(Routes
-                                                                      .viewWaterData, arguments: {"monthId": controller.selectedMonth, "year": controller.selectedYear});
-                                                                },
-                                                              ),
-                                                              // TableActionButton(
-                                                              //   color: ColorValues
-                                                              //       .editColor,
-                                                              //   icon: Icons.edit,
-                                                              //   message: 'Edit',
-                                                              //   onPress: () {
-                                                              //     Get.toNamed(Routes
-                                                              //         .waterDataScreen);
-                                                              //   },
-                                                              // ),
-                                                              // TableActionButton(
-                                                              //   color: Color
-                                                              //       .fromARGB(
-                                                              //           255,
-                                                              //           156,
-                                                              //           210,
-                                                              //           156),
-                                                              //   icon:
-                                                              //       Icons.replay,
-                                                              //   message: 'Re-New',
-                                                              //   onPress: () {},
-                                                              // ),
-                                                              // TableActionButton(
-                                                              //   color: ColorValues
-                                                              //       .deleteColor,
-                                                              //   icon:
-                                                              //       Icons.delete,
-                                                              //   message: 'Delete',
-                                                              //   onPress: () {},
-                                                              // ),
-                                                            ],
-                                                          ),
-                                                        ),
-                                                      ],
-                                                    );
-                                                  },
-                                                ).toList(),
                                               ),
                                             ),
                                           ),

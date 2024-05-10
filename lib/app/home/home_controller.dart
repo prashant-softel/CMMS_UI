@@ -8,6 +8,7 @@ import 'package:cmms/domain/models/inventory_category_model.dart';
 import 'package:cmms/domain/models/type_permit_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:rxdart/subjects.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 import '../../domain/models/dashboard_model.dart';
@@ -37,6 +38,7 @@ class HomeController extends GetxController {
   Rx<bool> isBlocksSelected = true.obs;
   Rx<String> selectedBlocks = ''.obs;
   Rx<bool> isstartdateFieldSelected = true.obs;
+  RxList<int> selectedFacilityIdList = <int>[].obs;
 
   var inventoryList = <InventoryModel>[];
   var blockList = <BlockModel>[];
@@ -94,6 +96,14 @@ class HomeController extends GetxController {
   Rx<int> selectedIndex = 0.obs;
   var isExpanded = false.obs;
   RxBool menuButton = false.obs;
+  RxList<FacilityModel?> selectedFacilityNameList = <FacilityModel>[].obs;
+  bool openFromDateToStartDatePicker = false;
+  Rx<DateTime> fromDate = DateTime.now().subtract(Duration(days: 7)).obs;
+  Rx<DateTime> toDate = DateTime.now().obs;
+
+  String get formattedFromdate =>
+      DateFormat('dd/MM/yyyy').format(fromDate.value);
+  String get formattedTodate => DateFormat('dd/MM/yyyy').format(toDate.value);
 
   Map<String, double> getDataMap() {
     return {
@@ -178,6 +188,13 @@ class HomeController extends GetxController {
         blocksList.add(block);
       }
       update(["blockList"]);
+    }
+  }
+
+  void selectedMultiFacility(_selectedFacilityIds) {
+    selectedFacilityIdList.value = <int>[];
+    for (var _selectedFacilityId in _selectedFacilityIds) {
+      selectedFacilityIdList.add(_selectedFacilityId);
     }
   }
 
