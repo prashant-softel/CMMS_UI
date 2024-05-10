@@ -642,7 +642,8 @@ class ObservationPMTaskViewDialog extends GetView {
                                                             arguments: {
                                                               'mrsId':
                                                                   int.tryParse(
-                                                                      "$mrsId")
+                                                                      "$mrsId"),
+                                                              'type':2
                                                             });
                                                       }),
                                                   // controller.pmtaskViewModel

@@ -93,12 +93,37 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                                     //       )
                                     //     :
                                     InkWell(
-                                      onTap: () {
-                                        Get.offAllNamed(Routes.newPermitList);
-                                      },
-                                      child: Text(" / PERMIT LIST",
-                                          style: Styles.greyLight14),
-                                    ),
+                                        onTap: () {
+                                          var taskId;
+                                          var jobId;
+                                          controller.type.value == 1
+                                              ? Get.offAllNamed(
+                                                  Routes.jobDetails,
+                                                  arguments: {'jobId': jobId})
+                                              : controller.type.value == 2
+                                                  ? Get.offAllNamed(
+                                                      Routes.pmTaskView,
+                                                      arguments: {
+                                                          'pmTaskId': taskId
+                                                        })
+                                                  : Get.offNamed(
+                                                      Routes.newPermitList);
+                                        },
+                                        child: controller.type.value == 1
+                                            ? Text(
+                                                "/ JOB",
+                                                style: Styles.greyLight14,
+                                              )
+                                            : controller.type.value == 2
+                                                ? Text(
+                                                    "/ PM TASK",
+                                                    style: Styles.greyLight14,
+                                                  )
+                                                : Text(
+                                                    "/ PERMIT LIST",
+                                                    style: Styles.greyLight14,
+                                                  )),
+
                                     Text(" / VIEW PERMIT",
                                         style: Styles.greyLight14)
                                   ],

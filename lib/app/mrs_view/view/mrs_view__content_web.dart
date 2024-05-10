@@ -56,12 +56,40 @@ class MrsViewContentWeb extends GetView<MrsViewController> {
                     ),
                     InkWell(
                       onTap: () {
-                        Get.offNamed(Routes.mrsListScreen);
+                        Get.offNamed(Routes.stockManagementDashboardScreen);
                       },
-                      child: Text(" / STOCK MANAGEMENT ",
-                          style: Styles.greyLight14),
+                      child: Text(
+                        " /STOCK MANAGEMENT",
+                        style: Styles.greyLight14,
+                      ),
                     ),
-                    Text(" / MATERIAL REQUISITION SLIP  VIEW",
+                    InkWell(
+                      onTap: () {
+                        var taskId;
+                        var jobId;
+                        controller.type.value == 1
+                            ? Get.offAllNamed(Routes.jobDetails,
+                                arguments: {'jobId': jobId})
+                            : controller.type.value == 2
+                                ? Get.offAllNamed(Routes.pmTaskView,
+                                    arguments: {'pmTaskId': taskId})
+                                : Get.offNamed(Routes.mrsListScreen);
+                      },
+                      child: controller.type.value == 1
+                            ? Text(
+                                "/ JOB",
+                                style: Styles.greyLight14,
+                              )
+                            : controller.type.value == 2
+                                ? Text(
+                                    "/ PM TASK",
+                                    style: Styles.greyLight14,
+                                  )
+                                : Text(
+                                    "/ MRS LIST",
+                                    style: Styles.greyLight14,
+                                  )),
+                    Text(" / MATERIAL REQUISITION SLIP VIEW",
                         style: Styles.greyLight14)
                   ],
                 ),

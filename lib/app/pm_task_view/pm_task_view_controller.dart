@@ -553,7 +553,7 @@ class PreventiveMaintenanceTaskViewController extends GetxController {
     int? jobId,
   }) async {
     Get.toNamed(Routes.viewPermitScreen,
-        arguments: {"permitId": permitId, "jobId": jobId, "type": 1});
+        arguments: {"permitId": permitId, "jobId": jobId, "type": 2});
     print({"Permit", permitId, jobId});
   }
 }
