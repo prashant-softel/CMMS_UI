@@ -391,11 +391,15 @@ class SafetyQuestionsListController extends GetxController {
         break;
       case RxList<TypePermitModel>:
         {
-          int typePermitIndex =
+        if (value != "Please Select") {
+            int typePermitIndex =
               typePermitList.indexWhere((x) => x?.name == value);
           selectedTypePermitId = typePermitList[typePermitIndex]?.id ?? 0;
           getSafetyMeasureList(selectedTypePermitId!);
           print('Permit Type Id:$selectedTypePermitId');
+        } else {
+          selectedTypePermitId=0;
+        }
         }
         break;
       default:

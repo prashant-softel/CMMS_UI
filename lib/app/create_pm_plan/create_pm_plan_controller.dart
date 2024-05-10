@@ -293,7 +293,8 @@ class CreatePmPlanController extends GetxController {
     switch (list.runtimeType) {
       case RxList<InventoryCategoryModel>:
         {
-          int equipCatIndex =
+          if (value != "Please Select") {
+            int equipCatIndex =
               equipmentCategoryList.indexWhere((x) => x?.name == value);
           selectedInventoryCategoryId =
               equipmentCategoryList[equipCatIndex]?.id ?? 0;
@@ -320,11 +321,15 @@ class CreatePmPlanController extends GetxController {
                   selectedInventoryCategoryId);
             }
           });
+          } else {
+            selectedInventoryCategoryId=0;
+          }
         }
         break;
       case RxList<InventoryModel>:
         {
-          filteredInventoryNameList.value = <InventoryModel>[];
+        if (value != "Please Select") {
+            filteredInventoryNameList.value = <InventoryModel>[];
           // inventoryNameList.value = <InventoryModel>[];
           // selectedInventoryNameIdList.value = [];
           bufferRowItem.value = rowItem.value;
@@ -349,6 +354,9 @@ class CreatePmPlanController extends GetxController {
 
             facilityNameSelected(selectedInventoryNameIdList);
           }
+        } else {
+          // selectedInventoryNameIdList=0;
+        }
         }
         break;
       case RxList<FrequencyModel>:

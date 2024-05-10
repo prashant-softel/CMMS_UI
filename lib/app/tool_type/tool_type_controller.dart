@@ -262,12 +262,18 @@ class ToolTypeController extends GetxController {
     switch (list.runtimeType) {
       case RxList<InventoryCategoryModel>:
         {
-          int equipmentIndex =
+          if (value != "Please Select") {
+            int equipmentIndex =
               equipmentCategoryList.indexWhere((x) => x?.name == value);
           selectedEquipmentId = equipmentCategoryList[equipmentIndex]?.id ?? 0;
           assetc.value = '';
 
           getWorkTypeList();
+            
+          }else{
+            selectedEquipmentId=0;
+            
+          }
         }
 
         break;

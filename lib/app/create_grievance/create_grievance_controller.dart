@@ -194,7 +194,8 @@ class CreateGrievanceController extends GetxController {
     switch (list.runtimeType) {
       case RxList<GrievanceTypeModel>:
         {
-          int grievanceTypeIndex =
+          if (value != "Please Select") {
+            int grievanceTypeIndex =
               grievanceType.indexWhere((x) => x?.name == value);
           // selectedTypePermitId = facilityList[grievanceTypeIndex]?.id ?? 0;
           selectedGrievanceTypeId = grievanceType[grievanceTypeIndex]?.id ?? 0;
@@ -203,6 +204,10 @@ class CreateGrievanceController extends GetxController {
             isGrievanceTypeSelected.value = true;
           }
           selectedGrievanceType.value = value;
+            
+          }else{
+            selectedGrievanceTypeId=0;
+          }
         }
         break;
     }

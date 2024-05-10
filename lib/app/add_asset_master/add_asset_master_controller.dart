@@ -204,37 +204,57 @@ class AddAssetMasterController extends GetxController {
     switch (list.runtimeType) {
       case RxList<UnitMeasurementModel>:
         {
-          int Index = unitMeasurementList.indexWhere((x) => x?.name == value);
+          if (value != "Please Select") {
+            int Index = unitMeasurementList.indexWhere((x) => x?.name == value);
           selectedUnitOfMeasurementId = unitMeasurementList[Index]?.id ?? 0;
           selectedUnitOfMeasurement.value = value;
+          } else {
+            selectedUnitOfMeasurementId=0;
+          }
         }
         break;
       case RxList<AssetCategoryModel>:
         {
-          int Index = materialCategoryList.indexWhere((x) => x?.name == value);
+          if (value != "Please Select") {
+            int Index = materialCategoryList.indexWhere((x) => x?.name == value);
           selectedMaterialCategoryId = unitMeasurementList[Index]?.id ?? 0;
           selectedMaterialCategory.value = value;
+          } else {
+            selectedMaterialCategoryId=0;
+          }
         }
         break;
       case RxList<ACDCModel>:
         {
-          int Index = acdclist.indexWhere((x) => x?.name == value);
+          if (value != "Please Select") {
+            int Index = acdclist.indexWhere((x) => x?.name == value);
           selectedACDCId = unitMeasurementList[Index]?.id ?? 0;
           selectedACDC.value = value;
+          } else {
+            selectedACDCId=0;
+          }
         }
         break;
       case RxList<AssetTypeListSMModel>:
         {
-          int Index = materialList.indexWhere((x) => x?.name == value);
+          if (value != "Please Select") {
+            int Index = materialList.indexWhere((x) => x?.name == value);
           selectedMaterialTypeId = unitMeasurementList[Index]?.id ?? 0;
           selectedMaterialType.value = value;
+          } else {
+            selectedMaterialTypeId=0;
+          }
         }
         break;
       case RxList<ACDCModel>:
         {
-          int Index = acdclist.indexWhere((x) => x?.name == value);
+          if (value != "Please Select") {
+            int Index = acdclist.indexWhere((x) => x?.name == value);
           selectedACDCId = acdclist[Index]?.id ?? 0;
           selectedACDC.value = value;
+          } else {
+            selectedACDCId=0;
+          }
         }
         break;
       default:

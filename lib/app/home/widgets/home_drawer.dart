@@ -250,6 +250,19 @@ class HomeDrawer extends GetView<HomeController> {
                                 width: 40,
                                 height: 16,
                                 color: Color(0xffD2D0D0),
+                                title: "Administration",
+                                icon: "assets/files/admin.png",
+                                press: () {
+                                  Get.offAllNamed(Routes.admin_dashboard);
+                                },
+                              ),
+                              MenuItem(
+                                isexpand: controller.isExpanded.value,
+                                menuButton: controller.menuButton.value,
+                                fontSize: 14,
+                                width: 40,
+                                height: 16,
+                                color: Color(0xffD2D0D0),
                                 title: "Settings",
                                 icon: "assets/files/setting.png",
                                 press: () {

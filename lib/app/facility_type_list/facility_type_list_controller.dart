@@ -431,14 +431,18 @@ class FacilityTypeListController extends GetxController {
     print("onValueChangeOwner function. list : $list and value is :");
     String newValue = list.toString();
     print(" Selected Facility : ");
-
-    int indexId = ownerList.indexWhere((x) => x?.name == newValue);
+//change for check
+   if (value != "Please Select") {
+      int indexId = ownerList.indexWhere((x) => x?.name == newValue);
     //  if (indexId > 0) {
     ownerId = ownerList[indexId]?.id ?? 0;
     //  }
     selectedOwner.value = list;
     isSelectedOwner.value = true;
     print("index received is : $indexId & owner id  : $ownerId");
+   } else {
+     ownerId=0;
+   }
   }
 
   dynamic onValueChangedCustomer(
@@ -447,13 +451,17 @@ class FacilityTypeListController extends GetxController {
     String newValue = list.toString();
     print(" Selected Facility : ");
 
-    int indexId = customerList.indexWhere((x) => x?.name == newValue);
+    if (value != "Please Select") {
+      int indexId = customerList.indexWhere((x) => x?.name == newValue);
     // if (indexId > 0) {
     customerId = customerList[indexId]?.id ?? 0;
     // }
     selectedCustomer.value = list;
     isSelectedCustomer.value = true;
     print("index received is : $indexId & customer id  : $customerId");
+    } else {
+      customerId=0;
+    }
   }
 
   dynamic onValueChangedOperator(
@@ -462,13 +470,18 @@ class FacilityTypeListController extends GetxController {
     String newValue = list.toString();
     print(" Selected Facility : ");
 
-    int indexId = operatorList.indexWhere((x) => x?.name == newValue);
+    if (value != "Please Select") {
+      int indexId = operatorList.indexWhere((x) => x?.name == newValue);
     // if (indexId > 0) {
     operatorId = operatorList[indexId]?.id ?? 0;
     // }
     selectedOperator.value = list;
     isSelectedOperator.value = true;
     print("index received is : $indexId & operator id  : $operatorId");
+    } else {
+      operatorId=0;
+      
+    }
   }
 
   dynamic onValueChangedSpv(RxList<SPVListModel?> value, dynamic list) {
@@ -476,13 +489,18 @@ class FacilityTypeListController extends GetxController {
     String newValue = list.toString();
     print(" Selected Facility : ");
 
-    int indexId = SpvList.indexWhere((x) => x?.name == newValue);
+    if (value != "Please Select") {
+      int indexId = SpvList.indexWhere((x) => x?.name == newValue);
     // if (indexId > 0) {
     SpvId = SpvList[indexId]?.id ?? 0;
     // }
     selectedSpv.value = list;
     isSelectedSpv.value = true;
     print("index received is : $indexId & SPV id  : $SpvId");
+    } else {
+      SpvId=0;
+      
+    }
   }
 
   void checkForm() {

@@ -4826,7 +4826,7 @@ class DataRepository extends DomainRepository {
   }
 
   //Type Of Observation
-       Future<ResponseModel> getTypeOfObservationList({
+  Future<ResponseModel> getTypeOfObservationList({
     required bool isLoading,
     required String auth,
   }) async {
@@ -4835,8 +4835,9 @@ class DataRepository extends DomainRepository {
       auth: auth,
     );
   }
+
   //create
-   Future<ResponseModel> createTypeOfObslist({
+  Future<ResponseModel> createTypeOfObslist({
     auth,
     bool? isLoading,
     businesslistJsonString,
@@ -4847,7 +4848,8 @@ class DataRepository extends DomainRepository {
         businesslistJsonString: businesslistJsonString);
     return response;
   }
-   //update
+
+  //update
   Future<ResponseModel> updatetypeOfObs({
     auth,
     bool? isLoading,
@@ -4861,7 +4863,7 @@ class DataRepository extends DomainRepository {
     return response;
   }
 
-  //delete 
+  //delete
   Future<ResponseModel> deleteTypeOfObs({
     auth,
     bool? isLoading,
@@ -4869,6 +4871,19 @@ class DataRepository extends DomainRepository {
   }) async {
     var response = await connectHelper.deleteTypeOfObs(
         auth: auth, isLoading: isLoading, business_id: business_id);
+    return response;
+  }
+
+  Future<ResponseModel> addAttendance({
+    auth,
+    jsonEmployeeAttendance,
+    isLoading,
+  }) async {
+    var response = await connectHelper.addAttendance(
+      auth: auth,
+      jsonEmployeeAttendance: jsonEmployeeAttendance,
+      isLoading: isLoading,
+    );
     return response;
   }
 //end

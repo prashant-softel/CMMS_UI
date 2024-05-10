@@ -263,7 +263,8 @@ class TransactionReportListController extends GetxController {
     switch (list.runtimeType) {
       case RxList<TypeModel>:
         {
-          int userIndex = actorType.indexWhere((x) => x.name == value);
+          if (value != "Please Select") {
+            int userIndex = actorType.indexWhere((x) => x.name == value);
           selectedactorTypeId =
               int.tryParse(actorType[userIndex].id ?? "") ?? 0;
           selectedActorType.value = actorType[userIndex].name;
@@ -282,11 +283,15 @@ class TransactionReportListController extends GetxController {
           } else if (selectedactorTypeId == AppConstants.kScrap) {
             //  getBusinessList();
           }
+          } else {
+            selectedactorTypeId=0;
+          }
         }
         break;
       case RxList<PmTaskListModel?>:
         {
-          int pmtaskIndex = pmTaskList.indexWhere((x) => x!.name == value);
+          if (value != "Please Select") {
+            int pmtaskIndex = pmTaskList.indexWhere((x) => x!.name == value);
           selectedpmtaskId = pmTaskList[pmtaskIndex]!.id ?? 0;
           actorId = selectedpmtaskId;
           selectedpmtask.value = value;
@@ -297,11 +302,15 @@ class TransactionReportListController extends GetxController {
               actorID: actorId,
               endDate: formattedFromdate1,
               isLoading: true);
+          } else {
+            selectedpmtaskId=0;
+          }
         }
         break;
       case RxList<FacilityModel?>:
         {
-          int facilityIndex =
+          if (value != "Please Select") {
+            int facilityIndex =
               facilityNameList.indexWhere((x) => x!.name == value);
           selectedfacilityId = facilityNameList[facilityIndex]!.id;
           actorId = selectedfacilityId;
@@ -313,11 +322,15 @@ class TransactionReportListController extends GetxController {
               actorID: actorId,
               endDate: formattedFromdate1,
               isLoading: true);
+          } else {
+            selectedfacilityId=0;
+          }
         }
         break;
       case RxList<UserListModel?>:
         {
-          int userIndex = userList.indexWhere((x) => x!.name == value);
+          if (value != "Please Select") {
+            int userIndex = userList.indexWhere((x) => x!.name == value);
           selectedUserId = userList[userIndex]!.id ?? 0;
           selectedUser.value = value;
           actorId = selectedUserId;
@@ -328,11 +341,15 @@ class TransactionReportListController extends GetxController {
               actorID: actorId,
               endDate: formattedFromdate1,
               isLoading: true);
+          } else {
+            selectedUserId=0;
+          }
         }
         break;
       case RxList<InventoryModel?>:
         {
-          int inventoryIndex =
+          if (value != "Please Select") {
+            int inventoryIndex =
               inventoryNameList.indexWhere((x) => x!.name == value);
           selectedInventoryId = inventoryNameList[inventoryIndex]!.id ?? 0;
           selectedInventory.value = value;
@@ -344,11 +361,15 @@ class TransactionReportListController extends GetxController {
               actorID: actorId,
               endDate: formattedFromdate1,
               isLoading: true);
+          } else {
+            selectedInventoryId=0;
+          }
         }
         break;
       case RxList<JobCardModel?>:
         {
-          int jobIndex = jobList.indexWhere((x) => x!.name == value);
+          if (value != "Please Select") {
+            int jobIndex = jobList.indexWhere((x) => x!.name == value);
           selectedJobId = jobList[jobIndex]!.id ?? 0;
           selectedJob.value = value;
           actorId = selectedJobId;
@@ -359,6 +380,9 @@ class TransactionReportListController extends GetxController {
               actorID: actorId,
               endDate: formattedFromdate1,
               isLoading: true);
+          } else {
+            selectedJobId=0;
+          }
         }
         break;
       default:

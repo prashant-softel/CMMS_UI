@@ -219,7 +219,8 @@ class BlockTypeListController extends GetxController {
     // String newValue = list.toString();
     print(" Selected Facility : ");
 
-    int indexId = facilityTypeList.indexWhere((x) => x.name == list);
+    if(value != "Please Select"){
+      int indexId = facilityTypeList.indexWhere((x) => x.name == list);
     int facilityIds = 0;
     if (indexId >= 0) {
       facilityIds = facilityTypeList[indexId].id ?? 0;
@@ -229,6 +230,9 @@ class BlockTypeListController extends GetxController {
     selectedFacilityId = facilityIds;
 
     getBlockTypeList(facilityId);
+    }else{
+      selectedFacilityId=0;
+    }
   }
 
   Future<bool> updateBlock(int? businessId) async {

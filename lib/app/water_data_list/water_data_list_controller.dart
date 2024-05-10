@@ -32,7 +32,17 @@ class WaterDataListController extends GetxController {
   String get formattedTodate1 => DateFormat('yyyy-MM-dd').format(toDate.value);
   String get formattedFromdate1 =>
       DateFormat('yyyy-MM-dd').format(fromDate.value);
+  RxList<MasterList> masterDataList = <MasterList>[].obs;
   RxList<WaterDataList> waterDataList = <WaterDataList>[].obs;
+  RxList<String> masterDataListName = <String>[].obs;
+
+  RxList<dynamic> headerList = [
+    // {"label": 'Headersdhfgd1', "isShow": true, 'key': "open"},
+    // {"label": 'Headersdhfgd1', "isShow": false, 'key': "close"},
+    // {"label": 'Headervgwdv2', "isShow": true, 'key': "open"},
+    // {"label": 'Headervgwdv2', "isShow": false, 'key': "close"}
+  ].obs;
+
   RxList<WaterDataList> filteredData = <WaterDataList>[].obs;
   WaterDataList? waterDataListModel;
   RxList<String> waterDataListTableColumns = <String>[].obs;
@@ -106,6 +116,7 @@ class WaterDataListController extends GetxController {
       int facilityId, dynamic startDate, dynamic endDate, bool isExport) async {
     waterDataList.value = <WaterDataList>[];
     filteredData.value = <WaterDataList>[];
+    masterDataList.value = <MasterList>[];
 
     final _waterDataList = await waterDataListPresenter.getWaterDataList(
         isLoading: isLoading.value,
@@ -115,6 +126,67 @@ class WaterDataListController extends GetxController {
         isExport: isExport);
     if (_waterDataList != null) {
       waterDataList.value = _waterDataList;
+      for (var masterdata in _waterDataList) {
+        masterDataList.value = masterdata.master_list;
+      }
+      if (masterDataList.value != null) {
+        masterDataListName.value = [];
+        headerList = [].obs;
+        headerList.add(
+          {
+            "label": 'Month',
+            "isShow": true,
+            'subHeader': "Month",
+            "dataKey": 'Month'
+          },
+        );
+        masterDataListName.add('Month');
+        print({"masterDataList.value": masterDataList.value});
+
+        for (var _dataList in masterDataList.value) {
+          // {"label": 'Headersdhfgd1', "isShow": true, 'key': "open"},
+          print({"_dataList": _dataList});
+
+          headerList.add(
+            {
+              "label": _dataList.water_type,
+              "isShow": true,
+              'subHeader': "consmption",
+              "dataKey": 'consumedQty'
+            },
+          );
+          headerList.add(
+            {
+              "label": _dataList.water_type,
+              "isShow": false,
+              'subHeader': "procrument",
+              "dataKey": 'procuredQty'
+            },
+          );
+          if (_dataList.show_opening == 1) {
+            headerList.add(
+              {
+                "label": _dataList.water_type,
+                "isShow": false,
+                'subHeader': "open",
+                "dataKey": 'opening'
+              },
+            );
+            headerList.add(
+              {
+                "label": _dataList.water_type,
+                "isShow": false,
+                'subHeader': "close",
+                "dataKey": 'closingQty'
+              },
+            );
+          }
+
+          masterDataListName.add(_dataList!.water_type ?? '');
+        }
+        print({"headerList.length": headerList.length});
+      }
+
       isLoading.value = false;
       paginationController = PaginationController(
         rowCount: waterDataList.length,
@@ -125,7 +197,7 @@ class WaterDataListController extends GetxController {
         waterDataListModel = waterDataList[0];
         var newPermitListJson = waterDataListModel?.toJson();
         waterDataListTableColumns.value = <String>[];
-        // for (var key in newPermitListJson?.keys.toList() ?? []) {
+        // for (var key in newPermit.vListJson?.keys.toList() ?? []) {
         //   waterDataListTableColumns.add(key);
         // }
       }
@@ -193,7 +265,7 @@ class WaterDataListController extends GetxController {
     String formattedDate =
         DateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'").format(procurementTime);
 
-    CreateWaterData updateWaterData= CreateWaterData(
+    CreateWaterData updateWaterData = CreateWaterData(
       id: _id,
       consumeType: 1,
       facilityId: facilityId,
@@ -348,9 +420,14 @@ class WaterDataListController extends GetxController {
     switch (list.runtimeType) {
       case RxList<WaterSource>:
         {
-          int typeOfWaterIndex =
+          if(value != "Please Select"){
+            int typeOfWaterIndex =
               typeOfWaterList.indexWhere((x) => x?.name == value);
           selectedTypeOfWaterId = typeOfWaterList[typeOfWaterIndex]?.id ?? 0;
+
+          }else{
+            selectedTypeOfWaterId=0;
+          }
         }
         break;
     }

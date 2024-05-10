@@ -183,11 +183,17 @@ class EmployeeStockReportController extends GetxController {
     switch (list.runtimeType) {
       case RxList<UserListModel>:
         {
-          int userIndex = userList.indexWhere((x) => x.name == value);
+          if(value != "Please Select"){
+                 int userIndex = userList.indexWhere((x) => x.name == value);
           selectedUserId = userList[userIndex].id ?? 0;
           selectedUser.value = userList[userIndex].name ?? '';
           getEmployeeStockReportList(facilityId, selectedUserId,
               formattedTodate1, formattedFromdate1, false);
+
+          }else{
+            selectedUserId=0;
+
+          }
         }
         break;
       default:

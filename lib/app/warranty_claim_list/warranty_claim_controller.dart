@@ -681,14 +681,20 @@ class WarrantyClaimController extends GetxController {
     switch (list.runtimeType) {
       case RxList<FacilityModel>:
         {
-          int facilityIndex = facilityList.indexWhere((x) => x?.name == value);
+          if (value != "Please Select") {
+            int facilityIndex = facilityList.indexWhere((x) => x?.name == value);
 
           _facilityId.add(facilityList[facilityIndex]?.id ?? 0);
+          } else 
+          {
+          facilityId=0;  
+          }
         }
         break;
       case RxList<InventoryModel>:
         {
-          // for (var workAreaName in selectedWorkAreaNameList) {
+         if (value != "Please Select") {
+            // for (var workAreaName in selectedWorkAreaNameList) {
           int equipmentNameIndex =
               eqipmentNameList.indexWhere((x) => x?.name == value);
           selectedEquipmentnameId =
@@ -703,12 +709,16 @@ class WarrantyClaimController extends GetxController {
           print('Equipment name Id: $selectedEquipmentnameId');
 
           // }
+         } else {
+           selectedEquipmentnameId=0;
+         }
         }
         break;
 
       case RxList<InventoryCategoryModel2>:
         {
-          // for (var workAreaName in selectedWorkAreaNameList) {
+        if (value != "Please Select") {
+            // for (var workAreaName in selectedWorkAreaNameList) {
           int affectedPartIndex =
               affectedPartEqipmentNameList.indexWhere((x) => x?.name == value);
           selectedAffectedPartId =
@@ -722,31 +732,46 @@ class WarrantyClaimController extends GetxController {
           selectedAffectedPart.value = value;
           print('Affected part Id: $selectedAffectedPartId');
           print('Affected part name : $selectedAffectedPartName');
+        } else {
+          selectedAffectedPartId=0;
+          
+        }
         }
         break;
       case RxList<InventoryCategoryModel>:
         {
-          int invCatListIndex =
+          if (value != "Please Select") {
+            int invCatListIndex =
               equipmentCategoryList.indexWhere((x) => x!.name == value);
           selectedInventoryCategoryId =
               equipmentCategoryList[invCatListIndex]!.id ?? 0;
           getInventoryList();
+          } else {
+            selectedInventoryCategoryId=0;
+          }
           //}
         }
         break;
       case RxList<BusinessListModel>:
         {
+          if (value != "Please Select") {
+            
           for (var supplierName in selectedSupplierNameList) {
             int supplierNameIndex =
                 supplierNameList.indexWhere((x) => x?.name == supplierName);
             selectedSupplierNameIdList.add(supplierNameIndex);
+          }
+          } else {
+            //  selectedSupplierNameIdList = 0;
+            
           }
         }
         break;
       case RxList<CurrencyListModel>:
         {
           // for (var unitCurrency in selectedUnitCurrencyList) {
-          int unitCurrencyIndex =
+         if (value != "Please Select") {
+            int unitCurrencyIndex =
               unitCurrencyList.indexWhere((x) => x?.name == value);
           selectedCurrencyId = unitCurrencyList[unitCurrencyIndex]?.id ?? 0;
 
@@ -756,13 +781,17 @@ class WarrantyClaimController extends GetxController {
           selectedUnitCurrency.value = value;
           print('Unit Currency Id :$selectedCurrencyId');
 
+         } else {
+           selectedCurrencyId=0;
+         }
           // }
         }
         break;
       case RxList<EmployeeListModel>:
         {
           // for (var employeeDataList in selectedEmployeeDataList) {
-          int employeeListIndex =
+         if (value != "Please Select") {
+            int employeeListIndex =
               employeeList.indexWhere((x) => x.name == value);
           selectedApproverId = employeeList[employeeListIndex].id ?? 0;
 
@@ -771,13 +800,18 @@ class WarrantyClaimController extends GetxController {
           }
           selectedEmployeeList.value = value;
           print('Approver Id: $selectedApproverId');
+         } else {
+           selectedApproverId=0;
+         }
 
           // }
         }
         break;
       case RxList<EmployeeListModel2>:
         {
-          // for (var employeeDataList in selectedEmployeeDataList) {
+         if (value != "Please Select") {
+           
+           // for (var employeeDataList in selectedEmployeeDataList) {
           int employeesListIndex =
               employeesList.indexWhere((x) => x.name == value);
           selectedEmployeesId = employeesList[employeesListIndex].id ?? 0;
@@ -789,6 +823,9 @@ class WarrantyClaimController extends GetxController {
           print('Additional Email Employees Id: $selectedEmployeesId');
 
           // }
+         } else {
+           selectedEmployeesId=0;
+         }
         }
         break;
 

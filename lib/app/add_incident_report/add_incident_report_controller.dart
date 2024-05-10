@@ -258,7 +258,6 @@ class AddIncidentReportController extends GetxController {
   // Map<String, GenderModel> dropdownStatusMapperData = {};
 
   RxList<GenderModel> genderList = <GenderModel>[
-    GenderModel(name: "Please Select", id: 0),
     GenderModel(name: 'Male', id: 1),
     GenderModel(name: 'Female', id: 2),
     GenderModel(name: 'TransGender', id: 3),
@@ -267,7 +266,6 @@ class AddIncidentReportController extends GetxController {
   Map<String, StatusModel> statusDropDownMapperData = {};
 
   RxList<StatusModel> statusList = <StatusModel>[
-    StatusModel(name: "Please Select", id: 0),
     StatusModel(name: 'Open', id: 1),
     StatusModel(name: 'Close', id: 2),
   ].obs;
@@ -814,6 +812,10 @@ class AddIncidentReportController extends GetxController {
           incidentReportDetailsModel.value?.is_why_why_required == 1
               ? true
               : false;
+      insuranceApplicableValue.value =
+          incidentReportDetailsModel.value?.insurance_name != null
+              ? true
+              : false;
       if (whyWhyAnalysisValue == true) {
         // addWhyWhyAnalysisRowItem();
         // addWhyWhyAnalysisRowItem();
@@ -842,6 +844,14 @@ class AddIncidentReportController extends GetxController {
           incidentReportDetailsModel.value?.unsafe_act_cause ?? '';
       investigationTeamList?.value =
           incidentReportDetailsModel.value?.investigation_team ?? [];
+      esiApplicabilityValue.value =
+          incidentReportDetailsModel.value?.esi_applicability == 1
+              ? true
+              : false;
+      legalApplicabilityValue.value =
+          incidentReportDetailsModel.value?.legal_applicability == 1
+              ? true
+              : false;
 
       ///why why Analysis
       rowWhyWhyAnalysisItem.value = [];
@@ -871,6 +881,7 @@ class AddIncidentReportController extends GetxController {
         ]);
       });
 
+      
       ///proposed action plan
       rowItem.value = [];
       _incidentReportDetails.proposed_action_plan?.forEach((element) {
@@ -1607,11 +1618,11 @@ class AddIncidentReportController extends GetxController {
           person_type: 1,
           age: 30,
           sex: selectedOption == "Other"
-              ? dropdownGenderMapperData[element[2]["value"]]?.id
-              : dropdownVictimNameMapperData[element[2]["value"]]?.gender ==
+              ? dropdownGenderMapperData[element[0]["value"]]?.id
+              : dropdownVictimNameMapperData[element[0]["value"]]?.gender ==
                       "Male"
                   ? 1
-                  : dropdownVictimNameMapperData[element[2]["value"]]?.gender ==
+                  : dropdownVictimNameMapperData[element[0]["value"]]?.gender ==
                           "Female"
                       ? 2
                       : 3,

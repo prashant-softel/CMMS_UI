@@ -335,10 +335,14 @@ class ModuleCleaningPlanningController extends GetxController {
     switch (list.runtimeType) {
       case RxList<FrequencyModel>:
         {
-          int frequencyIndex =
+          if(value != "Please Select"){
+            int frequencyIndex =
               frequencyList.indexWhere((x) => x?.name == value);
           selectedfrequencyId = frequencyList[frequencyIndex]?.id ?? 0;
           selectedfrequency.value = value;
+          }else{
+            selectedfrequencyId=0;
+          }
         }
         break;
 

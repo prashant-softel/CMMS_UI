@@ -90,18 +90,26 @@ class CreateAuditController extends GetxController {
     switch (list.runtimeType) {
       case RxList<FrequencyModel>:
         {
-          int frequencyIndex =
+          if (value != "Please Select") {
+            int frequencyIndex =
               frequencyList.indexWhere((x) => x?.name == value);
           selectedfrequencyId = frequencyList[frequencyIndex]?.id ?? 0;
           selectedfrequency.value = value;
           getPreventiveCheckList(facilityId, type.value, selectedfrequencyId);
+          } else {
+            selectedfrequencyId=0;
+          }
         }
         break;
       case RxList<PreventiveCheckListModel>:
         {
-          int checklistIndex = checkList.indexWhere((x) => x?.name == value);
+         if (value != "Please Select") {
+            int checklistIndex = checkList.indexWhere((x) => x?.name == value);
           selectedchecklistId.value =
               checkList[checklistIndex]?.id.toString() ?? "";
+         } else {
+          //  selectedchecklistId=0;
+         }
         }
 
         break;

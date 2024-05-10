@@ -8408,5 +8408,22 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> addAttendance({
+    auth,
+    jsonEmployeeAttendance,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'sefs', //AddBusiness
+      Request.post,
+      jsonEmployeeAttendance,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
   //end
 }

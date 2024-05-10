@@ -969,10 +969,16 @@ class NewPermitController extends GetxController {
   void onValueTbtConductedChanged(dynamic list, dynamic value) {
     print('Value Tbt Conducted By:${value}');
 
-    int tbtConductedIndex =
+    if (value != "Please Select") {
+      int tbtConductedIndex =
         employeeNameList.indexWhere((x) => x?.name == value);
     selectedTbtConductedId = employeeNameList[tbtConductedIndex]?.id ?? 0;
     print('Tbt Conducted Id: $selectedTbtConductedId');
+      
+    }else{
+
+      selectedTbtConductedId=0;
+    }
   }
 
   void onValueChanged(dynamic list, dynamic value) {
@@ -980,7 +986,8 @@ class NewPermitController extends GetxController {
     switch (list.runtimeType) {
       case RxList<FacilityModel>:
         {
-          int facilityIndex = facilityList.indexWhere((x) => x?.name == value);
+          if (value != "Please Select") {
+            int facilityIndex = facilityList.indexWhere((x) => x?.name == value);
           selectedFacilityId = facilityList[facilityIndex]?.id ?? 0;
           _facilityId.add(facilityList[facilityIndex]?.id ?? 0);
 
@@ -990,6 +997,9 @@ class NewPermitController extends GetxController {
           selectedFacility.value = value;
           getBlocksList(selectedFacilityId!);
           getTypePermitList(selectedFacilityId!);
+          }else{
+            selectedFacilityId=0;
+          }
         }
         break;
 

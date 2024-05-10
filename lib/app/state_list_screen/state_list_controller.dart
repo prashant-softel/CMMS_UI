@@ -92,13 +92,18 @@ class StateListController extends GetxController {
     switch (list.runtimeType) {
       case RxList<CountryModel>:
         {
-          int equipmentIndex =
+          if (value != "Please Select") {
+                 int equipmentIndex =
               countryList.indexWhere((x) => x?.name == value);
           selectedCountryId = countryList[equipmentIndex]?.id ?? 0;
           getStateList(
             selectedCountryId,
           );
           // debugPrint('Selected Value: $value'); // Print the selected value
+            
+          }else{
+            selectedCountryId=0;
+          }
 
         }
 
