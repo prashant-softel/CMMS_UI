@@ -4873,5 +4873,18 @@ class DataRepository extends DomainRepository {
         auth: auth, isLoading: isLoading, business_id: business_id);
     return response;
   }
+
+  Future<ResponseModel> addAttendance({
+    auth,
+    jsonEmployeeAttendance,
+    isLoading,
+  }) async {
+    var response = await connectHelper.addAttendance(
+      auth: auth,
+      jsonEmployeeAttendance: jsonEmployeeAttendance,
+      isLoading: isLoading,
+    );
+    return response;
+  }
 //end
 }

@@ -209,6 +209,8 @@ abstract class Routes {
   static const importDsmChargesScreen = _Paths.importDsmChargesScreen;
   static const waterTypeMaster = _Paths.waterTypeMaster;
   static const wasteTypeMaster = _Paths.wasteTypeMaster;
+  static const admin_dashboard = _Paths.admin_dashboard;
+  static const attendanceScreen = _Paths.attendanceScreen;
 }
 
 abstract class _Paths {
@@ -415,4 +417,6 @@ abstract class _Paths {
   static const importDsmChargesScreen = '/importDsmChargesScreen';
   static const waterTypeMaster = '/water-type-master';
   static const wasteTypeMaster = '/waste-type-master';
+  static const admin_dashboard = '/admin-dashboard';
+  static const attendanceScreen = '/attendance-screen';
 }

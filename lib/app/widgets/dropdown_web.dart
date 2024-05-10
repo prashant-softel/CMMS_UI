@@ -18,7 +18,6 @@ class DropdownWebWidget extends StatelessWidget {
       this.focusNode,
       this.width,
       this.margin,
-      this.selectedId,
       this.boxShadow});
 
   String? selectedValue;
@@ -31,7 +30,6 @@ class DropdownWebWidget extends StatelessWidget {
   double? width;
   EdgeInsetsGeometry? margin;
   List<BoxShadow>? boxShadow;
-  int? selectedId;
 
   ///
   @override
@@ -107,10 +105,7 @@ class DropdownWebWidget extends StatelessWidget {
             showSearchBox: true,
             showSelectedItems: true,
           ),
-          items: [
-            'Please Select',
-            ...?dropdownList?.map<String>((item) => item.name).toList()
-          ],
+          items: dropdownList?.map<String>((item) => item.name).toList() ?? [],
           dropdownDecoratorProps: DropDownDecoratorProps(
             textAlign: TextAlign.left,
             dropdownSearchDecoration: InputDecoration(
@@ -131,7 +126,7 @@ class DropdownWebWidget extends StatelessWidget {
             selectedValue = _selectedValue ?? '';
             onValueChanged(dropdownList, selectedValue);
           },
-          selectedItem: selectedValue ?? 'Please Select',
+          selectedItem: selectedValue,
         ),
       ),
     );
