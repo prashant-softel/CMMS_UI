@@ -461,6 +461,8 @@ class UserDataSource extends DataTableSource {
   DataRow? getRow(int index) {
     // print({"getRow call"});
     final UserDetails = filteredUserList[index];
+    String facilitiesAsString =
+        UserDetails?.facilities?.map((f) => f.name ?? '').join(', ') ?? '';
 
     controller.userId.value = UserDetails?.id ?? 0;
     var cellsBuffer = [
@@ -468,8 +470,9 @@ class UserDataSource extends DataTableSource {
       '${UserDetails?.name ?? ''}',
       '${UserDetails?.role_name ?? ''}',
       '${UserDetails?.contact_no ?? ''}',
-      "2023-03-26",
-      "2023-05-26",
+      "${UserDetails?.created_at ?? ''}",
+      "${UserDetails?.updated_at ?? ''}",
+      facilitiesAsString,
       'Actions',
     ];
     var cells = [];
