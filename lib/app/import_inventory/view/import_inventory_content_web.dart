@@ -27,7 +27,7 @@ class ImportInventoryContentWeb extends GetView<ImportInventoryController> {
       () => SelectionArea(
         child: Column(
           children: [
-            HeaderWidgetAllDash(),
+            HeaderWidget(),
             Container(
                 height: 45,
                 decoration: BoxDecoration(
