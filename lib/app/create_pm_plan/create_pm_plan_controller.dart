@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:cmms/app/create_pm_plan/create_pm_plan_presenter.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
+import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/domain/models/create_pm_plan_model.dart';
 import 'package:cmms/domain/models/employee_model.dart';
 import 'package:cmms/domain/models/frequency_model.dart';
@@ -174,8 +175,9 @@ class CreatePmPlanController extends GetxController {
 
   Future<void> getAssignedToList() async {
     assignedToList.clear();
-    final _assignedToList = await createPmPlanPresenter.getAssignedToList(
+    final _assignedToList = await createPmPlanPresenter.getAssignedToEmployee(
       facilityId: facilityId,
+      featureId: UserAccessConstants.kPmPlanFeatureId,
     );
 
     if (_assignedToList != null) {

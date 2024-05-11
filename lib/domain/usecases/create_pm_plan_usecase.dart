@@ -61,14 +61,16 @@ class CreatePmPlanUsecase {
           isLoading: isLoading,
           categoryId: categoryId,
           frequencyid: frequencyid);
-  Future<List<EmployeeModel?>?> getAssignedToList({
+  Future<List<EmployeeModel?>?> getAssignedToEmployee({
     String? auth,
     int? facilityId,
+    int? featureId,
     bool? isLoading,
   }) async =>
-      await repository.getAssignedToList(
+      await repository.getAssignedToEmployee(
         auth,
         facilityId,
+        featureId,
         isLoading,
       );
   Future<PMPlanDetail?> getPmPlanDetails({

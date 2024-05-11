@@ -47,14 +47,16 @@ class EditJobPresenter {
       );
 
   ///
-  Future<List<EmployeeModel?>?> getAssignedToList({
+  Future<List<EmployeeModel?>?> getAssignedToEmployee({
     String? auth,
     int? facilityId,
+    int? featureId,
     bool? isLoading,
   }) async =>
-      await editJobUsecase.getAssignedToList(
+      await editJobUsecase.getAssignedToEmployee(
         auth: auth ?? "",
         facilityId: facilityId ?? 0,
+        featureId: featureId,
         isLoading: isLoading ?? false,
       );
 

@@ -28,9 +28,9 @@ class ScheduleController extends GetxController {
   Rx<String> selectedEmployeeName = ''.obs;
   Rx<int> selectedTrainingAgencyId = 0.obs;
   Rx<String> selectedTrainingAgencyName = ''.obs;
-  RxBool isTrainingCourseSelected = false.obs;
-  RxBool isTrainingAgencySelected = false.obs;
-  RxBool isEmployeeSelected = false.obs;
+  RxBool isTrainingCourseSelected = true.obs;
+  RxBool isTrainingAgencySelected = true.obs;
+  RxBool isEmployeeSelected = true.obs;
 
   RxList<ScheduleTrainingCourse> scheduleTrainingCourse =
       <ScheduleTrainingCourse>[].obs;

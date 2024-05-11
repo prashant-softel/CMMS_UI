@@ -35,14 +35,16 @@ class EditJobUsecase {
         isLoading,
       );
 
-  Future<List<EmployeeModel?>?> getAssignedToList({
+  Future<List<EmployeeModel?>?> getAssignedToEmployee({
     String? auth,
     int? facilityId,
+    int? featureId,
     bool? isLoading,
   }) async =>
-      await repository.getAssignedToList(
+      await repository.getAssignedToEmployee(
         auth,
         facilityId,
+        featureId,
         isLoading,
       );
 
