@@ -44,6 +44,25 @@ class _WaterDataListWebState extends State<WaterDataListWeb> {
         ),
       );
 
+  TableCell _actonData(PeriodData data) => TableCell(
+        child: Center(
+            child: Row(
+          children: [
+            TableActionButton(
+              color: ColorValues.viewColor,
+              icon: Icons.remove_red_eye_outlined,
+              message: 'view',
+              onPress: () {},
+            ),
+            TableActionButton(
+              color: ColorValues.editColor,
+              icon: Icons.edit,
+              message: 'Edit',
+              onPress: () {},
+            ),
+          ],
+        )),
+      );
   TableCell dataCell(String text) => TableCell(
         child: Center(child: Text(text)),
       );
@@ -319,6 +338,10 @@ class _WaterDataListWebState extends State<WaterDataListWeb> {
                                                                           if (e['dataKey'] ==
                                                                               'Month') {
                                                                             return dataCell('${controller.waterDataList[0].periods[index].monthName}');
+                                                                          }
+                                                                          if (e['dataKey'] ==
+                                                                              'action') {
+                                                                            return _actonData(controller.waterDataList[0].periods[index]);
                                                                           }
                                                                           DetailData? data = controller
                                                                               .waterDataList[0]
