@@ -1,7 +1,9 @@
 import 'package:cmms/app/app.dart';
+import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/tbt_type_list/tbt_type_list_controller.dart';
+import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/app/widgets/dropdown_web.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
@@ -68,22 +70,30 @@ class TBTTypeListContentWeb extends GetView<TBTTypeListController> {
                 ],
               ),
             ),
-            Padding(
-              padding: EdgeInsets.only(left: 10, top: 10),
-              child: ElevatedButton(
-                style: Styles.navyBlueElevatedButtonStyle,
-                onPressed: () {
-                  controller.toggleContainer();
-                },
-                child: Obx(() {
-                  return Text(
-                    controller.isContainerVisible.value
-                        ? 'Close Job Type'
-                        : 'Open Job Type',
-                  );
-                }),
-              ),
-            ),
+            varUserAccessModel.value.access_list!
+                        .where((e) =>
+                            e.feature_id ==
+                                UserAccessConstants.kMasterFeatureId &&
+                            e.add == UserAccessConstants.kHaveAddAccess)
+                        .length >
+                    0
+                ? Padding(
+                    padding: EdgeInsets.only(left: 10, top: 10),
+                    child: ElevatedButton(
+                      style: Styles.navyBlueElevatedButtonStyle,
+                      onPressed: () {
+                        controller.toggleContainer();
+                      },
+                      child: Obx(() {
+                        return Text(
+                          controller.isContainerVisible.value
+                              ? 'Close Job Type'
+                              : 'Open Job Type',
+                        );
+                      }),
+                    ),
+                  )
+                : Dimens.box0,
             Expanded(
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -450,7 +460,7 @@ class TBTTypeListContentWeb extends GetView<TBTTypeListController> {
                                             onChanged: (bool? value) {
                                               controller
                                                   .requiretoggleCheckbox();
-                                                  print(
+                                              print(
                                                   'Checkbox:${controller.isCheckedRequire.value}');
                                             },
                                           ),
@@ -472,6 +482,8 @@ class TBTTypeListContentWeb extends GetView<TBTTypeListController> {
                                               ColorValues.appRedColor,
                                           onPressed: () {
                                             controller.clearData();
+                                            controller.isContainerVisible
+                                                .value = false;
                                           },
                                           text: 'Cancel')),
                                   SizedBox(
@@ -510,7 +522,7 @@ class TBTTypeListContentWeb extends GetView<TBTTypeListController> {
                                                   if (value == true)
                                                     controller
                                                         .issuccessCreatechecklist();
-                                                    controller.toggleContainer();
+                                                  controller.toggleContainer();
                                                 });
                                               },
                                               text: 'Update')),
@@ -668,12 +680,11 @@ class TBTTypeListContentWeb extends GetView<TBTTypeListController> {
                                                     .description
                                                     .toString())),
                                                 DataCell(Checkbox(
-                                                   value:
-                                                      jobTypeListDetails
-                                                                  .isRequired ==
-                                                              1
-                                                          ? true
-                                                          : false,
+                                                  value: jobTypeListDetails
+                                                              .isRequired ==
+                                                          1
+                                                      ? true
+                                                      : false,
                                                   onChanged: (val) {
                                                     controller.isChecked.value =
                                                         val!;
@@ -683,56 +694,81 @@ class TBTTypeListContentWeb extends GetView<TBTTypeListController> {
                                                   alignment:
                                                       WrapAlignment.center,
                                                   children: [
-                                                    TableActionButton(
-                                                      color:
-                                                          ColorValues.editColor,
-                                                      icon: Icons.edit,
-                                                      message: 'Edit',
-                                                      onPress: () {
-                                                        controller.selectedItem = controller
-                                                            .jobTypeList
-                                                            .firstWhere((element) =>
-                                                                "${element.id}" ==
-                                                                '${jobTypeListDetails.id}');
-                                                        controller.titleCtrlr
-                                                            .text = controller
-                                                                .selectedItem
-                                                                ?.name ??
-                                                            '';
-                                                        controller
-                                                            .descriptionCtrlr
-                                                            .text = controller
-                                                                .selectedItem
-                                                                ?.description ??
-                                                            '';
-                                                            controller
-                                                            .isCheckedRequire
-                                                            .value = controller
-                                                                    .selectedItem
-                                                                    ?.isRequired ==
-                                                                1
-                                                            ? true
-                                                            : false;
-                                                        controller
-                                                            .isContainerVisible
-                                                            .value = true;
-                                                      },
-                                                    ),
-                                                    TableActionButton(
-                                                      color: ColorValues
-                                                          .deleteColor,
-                                                      icon: Icons.delete,
-                                                      message: 'Delete',
-                                                      onPress: () {
-                                                        controller
-                                                            .isDeleteDialog(
-                                                          business_id:
-                                                              '${jobTypeListDetails.id}',
-                                                          business:
-                                                              '${jobTypeListDetails.name}',
-                                                        );
-                                                      },
-                                                    ),
+                                                    varUserAccessModel.value
+                                                                .access_list!
+                                                                .where((e) =>
+                                                                    e.feature_id ==
+                                                                        UserAccessConstants
+                                                                            .kMasterFeatureId &&
+                                                                    e.edit ==
+                                                                        UserAccessConstants
+                                                                            .kHaveEditAccess)
+                                                                .length >
+                                                            0
+                                                        ? TableActionButton(
+                                                            color: ColorValues
+                                                                .editColor,
+                                                            icon: Icons.edit,
+                                                            message: 'Edit',
+                                                            onPress: () {
+                                                              controller.selectedItem = controller
+                                                                  .jobTypeList
+                                                                  .firstWhere((element) =>
+                                                                      "${element.id}" ==
+                                                                      '${jobTypeListDetails.id}');
+                                                              controller
+                                                                  .titleCtrlr
+                                                                  .text = controller
+                                                                      .selectedItem
+                                                                      ?.name ??
+                                                                  '';
+                                                              controller
+                                                                  .descriptionCtrlr
+                                                                  .text = controller
+                                                                      .selectedItem
+                                                                      ?.description ??
+                                                                  '';
+                                                              controller
+                                                                  .isCheckedRequire
+                                                                  .value = controller
+                                                                          .selectedItem
+                                                                          ?.isRequired ==
+                                                                      1
+                                                                  ? true
+                                                                  : false;
+                                                              controller
+                                                                  .isContainerVisible
+                                                                  .value = true;
+                                                            },
+                                                          )
+                                                        : Dimens.box0,
+                                                    varUserAccessModel.value
+                                                                .access_list!
+                                                                .where((e) =>
+                                                                    e.feature_id ==
+                                                                        UserAccessConstants
+                                                                            .kMasterFeatureId &&
+                                                                    e.delete ==
+                                                                        UserAccessConstants
+                                                                            .kHaveDeleteAccess)
+                                                                .length >
+                                                            0
+                                                        ? TableActionButton(
+                                                            color: ColorValues
+                                                                .deleteColor,
+                                                            icon: Icons.delete,
+                                                            message: 'Delete',
+                                                            onPress: () {
+                                                              controller
+                                                                  .isDeleteDialog(
+                                                                business_id:
+                                                                    '${jobTypeListDetails.id}',
+                                                                business:
+                                                                    '${jobTypeListDetails.name}',
+                                                              );
+                                                            },
+                                                          )
+                                                        : Dimens.box0
                                                   ],
                                                 )),
                                               ]);

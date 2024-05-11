@@ -1,7 +1,9 @@
 import 'package:cmms/app/app.dart';
+import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/role_List/role_list_controller.dart';
+import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -74,22 +76,30 @@ class RoleListContentWeb extends GetView<RoleListController> {
                   ],
                 ),
               ),
-              Padding(
-                padding: EdgeInsets.only(left: 10, top: 10),
-                child: ElevatedButton(
-                  style: Styles.navyBlueElevatedButtonStyle,
-                  onPressed: () {
-                    controller.toggleContainer();
-                  },
-                  child: Obx(() {
-                    return Text(
-                      controller.isContainerVisible.value
-                          ? 'Close Create Role'
-                          : 'Open Create Role',
-                    );
-                  }),
-                ),
-              ),
+              varUserAccessModel.value.access_list!
+                          .where((e) =>
+                              e.feature_id ==
+                                  UserAccessConstants.kMasterFeatureId &&
+                              e.add == UserAccessConstants.kHaveAddAccess)
+                          .length >
+                      0
+                  ? Padding(
+                      padding: EdgeInsets.only(left: 10, top: 10),
+                      child: ElevatedButton(
+                        style: Styles.navyBlueElevatedButtonStyle,
+                        onPressed: () {
+                          controller.toggleContainer();
+                        },
+                        child: Obx(() {
+                          return Text(
+                            controller.isContainerVisible.value
+                                ? 'Close Create Role'
+                                : 'Open Create Role',
+                          );
+                        }),
+                      ),
+                    )
+                  : Dimens.box0,
               Expanded(
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -304,6 +314,8 @@ class RoleListContentWeb extends GetView<RoleListController> {
                                             ColorValues.appRedColor,
                                         onPressed: () {
                                           controller.cleardata();
+                                          controller.isContainerVisible.value =
+                                              false;
                                         },
                                         text: 'Cancel'),
                                   ),
@@ -478,53 +490,74 @@ class RoleListContentWeb extends GetView<RoleListController> {
                                                     '')),
                                                 DataCell(Row(
                                                   children: [
-                                                    TableActionButton(
-                                                        color: ColorValues
-                                                            .editColor,
-                                                        icon: Icons.edit,
-                                                        message: 'Edit',
-                                                        onPress: () {
-                                                          controller.selectedItem = controller
-                                                              .roleList
-                                                              ?.firstWhere((element) =>
-                                                                  "${element?.id}" ==
-                                                                  controller
+                                                    varUserAccessModel.value
+                                                                .access_list!
+                                                                .where((e) =>
+                                                                    e.feature_id ==
+                                                                        UserAccessConstants
+                                                                            .kMasterFeatureId &&
+                                                                    e.edit ==
+                                                                        UserAccessConstants
+                                                                            .kHaveEditAccess)
+                                                                .length >
+                                                            0
+                                                        ? TableActionButton(
+                                                            color: ColorValues
+                                                                .editColor,
+                                                            icon: Icons.edit,
+                                                            message: 'Edit',
+                                                            onPress: () {
+                                                              controller.selectedItem = controller
+                                                                  .roleList
+                                                                  ?.firstWhere((element) =>
+                                                                      "${element?.id}" ==
+                                                                      controller
+                                                                          .roleList?[
+                                                                              index]
+                                                                          ?.id
+                                                                          .toString());
+
+                                                              controller
+                                                                  .rolelistNumberCtrlr
+                                                                  .text = controller
+                                                                      .selectedItem
+                                                                      ?.name ??
+                                                                  '';
+                                                              controller
+                                                                  .isContainerVisible
+                                                                  .value = true;
+                                                            })
+                                                        : Dimens.box0,
+                                                    varUserAccessModel.value
+                                                                .access_list!
+                                                                .where((e) =>
+                                                                    e.feature_id ==
+                                                                        UserAccessConstants
+                                                                            .kMasterFeatureId &&
+                                                                    e.delete ==
+                                                                        UserAccessConstants
+                                                                            .kHaveDeleteAccess)
+                                                                .length >
+                                                            0
+                                                        ? TableActionButton(
+                                                            color: ColorValues
+                                                                .deleteColor,
+                                                            icon: Icons.delete,
+                                                            message: 'Delete',
+                                                            onPress: () {
+                                                              controller.isDeleteDialog(
+                                                                  module_id: controller
                                                                       .roleList?[
                                                                           index]
                                                                       ?.id
-                                                                      .toString());
-
-                                                          controller
-                                                              .rolelistNumberCtrlr
-                                                              .text = controller
-                                                                  .selectedItem
-                                                                  ?.name ??
-                                                              '';
-                                                          controller
-                                                              .isContainerVisible
-                                                              .value = true;
-                                                        })
-                                                    // : Container(),
-                                                    ,
-                                                    TableActionButton(
-                                                      color: ColorValues
-                                                          .deleteColor,
-                                                      icon: Icons.delete,
-                                                      message: 'Delete',
-                                                      onPress: () {
-                                                        controller.isDeleteDialog(
-                                                            module_id:
-                                                                controller
-                                                                    .roleList?[
-                                                                        index]
-                                                                    ?.id
-                                                                    .toString(),
-                                                            module: controller
-                                                                .roleList?[
-                                                                    index]
-                                                                ?.name);
-                                                      },
-                                                    ),
+                                                                      .toString(),
+                                                                  module: controller
+                                                                      .roleList?[
+                                                                          index]
+                                                                      ?.name);
+                                                            },
+                                                          )
+                                                        : Dimens.box0
                                                   ],
                                                 )),
                                               ]),

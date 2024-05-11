@@ -1,7 +1,9 @@
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/competency_list/competency_list_controller.dart';
+import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
+import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -35,7 +37,8 @@ class CompetencyListContentWeb extends GetView<CompetencyListController> {
                   ),
                   boxShadow: [
                     BoxShadow(
-                      color: Color.fromARGB(255, 236, 234, 234).withOpacity(0.5),
+                      color:
+                          Color.fromARGB(255, 236, 234, 234).withOpacity(0.5),
                       spreadRadius: 2,
                       blurRadius: 5,
                       offset: Offset(0, 2),
@@ -73,22 +76,30 @@ class CompetencyListContentWeb extends GetView<CompetencyListController> {
                   ],
                 ),
               ),
-              Padding(
-                padding: EdgeInsets.only(left: 10, top: 10),
-                child: ElevatedButton(
-                  style: Styles.navyBlueElevatedButtonStyle,
-                  onPressed: () {
-                    controller.toggleContainer();
-                  },
-                  child: Obx(() {
-                    return Text(
-                      controller.isContainerVisible.value
-                          ? 'Close Create Competency'
-                          : 'Open Create Competency',
-                    );
-                  }),
-                ),
-              ),
+              varUserAccessModel.value.access_list!
+                          .where((e) =>
+                              e.feature_id ==
+                                  UserAccessConstants.kMasterFeatureId &&
+                              e.add == UserAccessConstants.kHaveAddAccess)
+                          .length >
+                      0
+                  ? Padding(
+                      padding: EdgeInsets.only(left: 10, top: 10),
+                      child: ElevatedButton(
+                        style: Styles.navyBlueElevatedButtonStyle,
+                        onPressed: () {
+                          controller.toggleContainer();
+                        },
+                        child: Obx(() {
+                          return Text(
+                            controller.isContainerVisible.value
+                                ? 'Close Create Competency'
+                                : 'Open Create Competency',
+                          );
+                        }),
+                      ),
+                    )
+                  : Dimens.box0,
               Expanded(
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -157,7 +168,7 @@ class CompetencyListContentWeb extends GetView<CompetencyListController> {
                                             //   "Title",
                                             //   style: Styles.blackBold16,
                                             // ),
-      
+
                                             Expanded(
                                                 child: CustomRichText(
                                                     title: 'Competency Name')),
@@ -179,7 +190,8 @@ class CompetencyListContentWeb extends GetView<CompetencyListController> {
                                                     spreadRadius: 1.0,
                                                   ),
                                                   BoxShadow(
-                                                    color: ColorValues.whiteColor,
+                                                    color:
+                                                        ColorValues.whiteColor,
                                                     offset:
                                                         const Offset(0.0, 0.0),
                                                     blurRadius: 0.0,
@@ -195,7 +207,8 @@ class CompetencyListContentWeb extends GetView<CompetencyListController> {
                                                     fontSize: 14.0,
                                                     height: 1.0,
                                                     color: Colors.black),
-                                                controller: controller.nameCtrlr,
+                                                controller:
+                                                    controller.nameCtrlr,
                                                 focusNode: controller.nameFocus,
                                                 scrollController:
                                                     controller.nameScroll,
@@ -206,8 +219,9 @@ class CompetencyListContentWeb extends GetView<CompetencyListController> {
                                                   fillColor:
                                                       ColorValues.whiteColor,
                                                   filled: true,
-                                                  contentPadding: EdgeInsets.only(
-                                                      left: 5, right: 5),
+                                                  contentPadding:
+                                                      EdgeInsets.only(
+                                                          left: 5, right: 5),
                                                   border: InputBorder.none,
                                                   enabledBorder:
                                                       OutlineInputBorder(
@@ -233,7 +247,8 @@ class CompetencyListContentWeb extends GetView<CompetencyListController> {
                                                           borderRadius:
                                                               BorderRadius
                                                                   .circular(5),
-                                                          borderSide: BorderSide(
+                                                          borderSide:
+                                                              BorderSide(
                                                             color: ColorValues
                                                                 .redColorDark,
                                                           ),
@@ -245,7 +260,8 @@ class CompetencyListContentWeb extends GetView<CompetencyListController> {
                                                           borderRadius:
                                                               BorderRadius
                                                                   .circular(5),
-                                                          borderSide: BorderSide(
+                                                          borderSide:
+                                                              BorderSide(
                                                             color: ColorValues
                                                                 .redColorDark,
                                                           ),
@@ -304,7 +320,8 @@ class CompetencyListContentWeb extends GetView<CompetencyListController> {
                                                     spreadRadius: 1.0,
                                                   ),
                                                   BoxShadow(
-                                                    color: ColorValues.whiteColor,
+                                                    color:
+                                                        ColorValues.whiteColor,
                                                     offset:
                                                         const Offset(0.0, 0.0),
                                                     blurRadius: 0.0,
@@ -332,8 +349,9 @@ class CompetencyListContentWeb extends GetView<CompetencyListController> {
                                                   fillColor:
                                                       ColorValues.whiteColor,
                                                   filled: true,
-                                                  contentPadding: EdgeInsets.only(
-                                                      left: 5, right: 5),
+                                                  contentPadding:
+                                                      EdgeInsets.only(
+                                                          left: 5, right: 5),
                                                   border: InputBorder.none,
                                                   enabledBorder:
                                                       OutlineInputBorder(
@@ -360,7 +378,8 @@ class CompetencyListContentWeb extends GetView<CompetencyListController> {
                                                           borderRadius:
                                                               BorderRadius
                                                                   .circular(5),
-                                                          borderSide: BorderSide(
+                                                          borderSide:
+                                                              BorderSide(
                                                             color: ColorValues
                                                                 .redColorDark,
                                                           ),
@@ -373,7 +392,8 @@ class CompetencyListContentWeb extends GetView<CompetencyListController> {
                                                           borderRadius:
                                                               BorderRadius
                                                                   .circular(5),
-                                                          borderSide: BorderSide(
+                                                          borderSide:
+                                                              BorderSide(
                                                             color: ColorValues
                                                                 .redColorDark,
                                                           ),
@@ -413,9 +433,12 @@ class CompetencyListContentWeb extends GetView<CompetencyListController> {
                                     width: (Get.width * .1),
                                     height: 40,
                                     child: CustomElevatedButton(
-                                        backgroundColor: ColorValues.appRedColor,
+                                        backgroundColor:
+                                            ColorValues.appRedColor,
                                         onPressed: () {
                                           controller.cleardata();
+                                          controller.isContainerVisible.value =
+                                              false;
                                         },
                                         text: 'Cancel'),
                                   ),
@@ -503,19 +526,22 @@ class CompetencyListContentWeb extends GetView<CompetencyListController> {
                                         onChanged: (value) =>
                                             controller.search(value),
                                         decoration: InputDecoration(
-                                          enabledBorder: const OutlineInputBorder(
+                                          enabledBorder:
+                                              const OutlineInputBorder(
                                             borderSide: const BorderSide(
                                               color: Colors.grey,
                                               width: 0.0,
                                             ),
                                           ),
-                                          focusedBorder: const OutlineInputBorder(
+                                          focusedBorder:
+                                              const OutlineInputBorder(
                                             borderSide: const BorderSide(
                                               color: Colors.grey,
                                               width: 0.0,
                                             ),
                                           ),
-                                          contentPadding: Dimens.edgeInsets05_10,
+                                          contentPadding:
+                                              Dimens.edgeInsets05_10,
                                           hintText: 'search'.tr,
                                           hintStyle: Styles.grey16,
                                         ),
@@ -524,128 +550,166 @@ class CompetencyListContentWeb extends GetView<CompetencyListController> {
                                   ],
                                 ),
                               ),
-      
+
                               // Row(
                               //   children: [
                               //     Spacer(),
-      
+
                               //   ],
                               // ),
                               SizedBox(
                                 height: 20,
                               ),
                               controller.competencyList!.isEmpty == true &&
-                                    controller.isLoading == false
-                                ? Center(child: Text("No Data"))
-                                : controller.isLoading.value == true
-                                    ? Center(child: Text("Data Loading......"))
-                              : Expanded(
-                                child:
-                                  DataTable2(
-                                    key: UniqueKey(),
-                                    dataRowHeight: 50,
-                                    columnSpacing: 10,
-                                    border: TableBorder.all(
-                                        color:
-                                            Color.fromARGB(255, 206, 229, 234)),
-                                    columns: [
-                                      DataColumn2(
-                                          fixedWidth: 100,
-                                          label: Text(
-                                            "Sr No",
-                                            style: TextStyle(
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.bold),
-                                          )),
-                                      DataColumn2(
-                                          // fixedWidth: 150,
-                                          label: Text(
-                                        "Competency Name",
-                                        style: TextStyle(
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.bold),
-                                      )),
-                                      DataColumn2(
-                                          // fixedWidth: 300,
-                                          label: Text(
-                                        "Description",
-                                        style: TextStyle(
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.bold),
-                                      )),
-                                      DataColumn2(
-                                          fixedWidth: 100,
-                                          label: Text(
-                                            'Action',
-                                            style: TextStyle(
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.bold),
-                                          )),
-                                    ],
-                                    rows: List<DataRow>.generate(
-                                      controller.competencyList?.length ?? 0,
-                                      (index) => DataRow(cells: [
-                                        DataCell(Text((index + 1).toString())),
-                                        DataCell(Text(controller
-                                                .competencyList?[index]?.name
-                                                .toString() ??
-                                            '')),
-                                        DataCell(Text(controller
-                                                .competencyList?[index]
-                                                ?.description ??
-                                            '')),
-                                        DataCell(Row(
-                                          children: [
-                                            TableActionButton(
-                                                color: ColorValues.editColor,
-                                                icon: Icons.edit,
-                                                message: 'Edit',
-                                                onPress: () {
-                                                  controller.selectedItem =
-                                                      controller
-                                                          .competencyList
-                                                          ?.firstWhere((element) =>
-                                                              "${element?.id}" ==
+                                      controller.isLoading == false
+                                  ? Center(child: Text("No Data"))
+                                  : controller.isLoading.value == true
+                                      ? Center(
+                                          child: Text("Data Loading......"))
+                                      : Expanded(
+                                          child: DataTable2(
+                                            key: UniqueKey(),
+                                            dataRowHeight: 50,
+                                            columnSpacing: 10,
+                                            border: TableBorder.all(
+                                                color: Color.fromARGB(
+                                                    255, 206, 229, 234)),
+                                            columns: [
+                                              DataColumn2(
+                                                  fixedWidth: 100,
+                                                  label: Text(
+                                                    "Sr No",
+                                                    style: TextStyle(
+                                                        fontSize: 15,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  )),
+                                              DataColumn2(
+                                                  // fixedWidth: 150,
+                                                  label: Text(
+                                                "Competency Name",
+                                                style: TextStyle(
+                                                    fontSize: 15,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              )),
+                                              DataColumn2(
+                                                  // fixedWidth: 300,
+                                                  label: Text(
+                                                "Description",
+                                                style: TextStyle(
+                                                    fontSize: 15,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              )),
+                                              DataColumn2(
+                                                  fixedWidth: 100,
+                                                  label: Text(
+                                                    'Action',
+                                                    style: TextStyle(
+                                                        fontSize: 15,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  )),
+                                            ],
+                                            rows: List<DataRow>.generate(
+                                              controller
+                                                      .competencyList?.length ??
+                                                  0,
+                                              (index) => DataRow(cells: [
+                                                DataCell(Text(
+                                                    (index + 1).toString())),
+                                                DataCell(Text(controller
+                                                        .competencyList?[index]
+                                                        ?.name
+                                                        .toString() ??
+                                                    '')),
+                                                DataCell(Text(controller
+                                                        .competencyList?[index]
+                                                        ?.description ??
+                                                    '')),
+                                                DataCell(Row(
+                                                  children: [
+                                                    varUserAccessModel.value
+                                                                .access_list!
+                                                                .where((e) =>
+                                                                    e.feature_id ==
+                                                                        UserAccessConstants
+                                                                            .kMasterFeatureId &&
+                                                                    e.edit ==
+                                                                        UserAccessConstants
+                                                                            .kHaveEditAccess)
+                                                                .length >
+                                                            0
+                                                        ? TableActionButton(
+                                                            color: ColorValues
+                                                                .editColor,
+                                                            icon: Icons.edit,
+                                                            message: 'Edit',
+                                                            onPress: () {
+                                                              controller.selectedItem = controller
+                                                                  .competencyList
+                                                                  ?.firstWhere((element) =>
+                                                                      "${element?.id}" ==
+                                                                      controller
+                                                                          .competencyList?[
+                                                                              index]
+                                                                          ?.id
+                                                                          .toString());
+
                                                               controller
-                                                                  .competencyList?[
-                                                                      index]
-                                                                  ?.id
-                                                                  .toString());
-      
-                                                  controller.nameCtrlr.text =
-                                                      controller.selectedItem
-                                                              ?.name ??
-                                                          '';
-                                                  controller.descriptionCtrlr
-                                                      .text = controller
-                                                          .selectedItem
-                                                          ?.description ??
-                                                      '';
-                                                  controller.isContainerVisible
-                                                      .value = true;
-                                                }),
-                                            TableActionButton(
-                                              color: ColorValues.deleteColor,
-                                              icon: Icons.delete,
-                                              message: 'Delete',
-                                              onPress: () {
-                                                controller.isDeleteDialog(
-                                                    checklist_id: controller
-                                                        .competencyList?[index]
-                                                        ?.id
-                                                        .toString(),
-                                                    checklist: controller
-                                                        .competencyList?[index]
-                                                        ?.name);
-                                              },
+                                                                  .nameCtrlr
+                                                                  .text = controller
+                                                                      .selectedItem
+                                                                      ?.name ??
+                                                                  '';
+                                                              controller
+                                                                  .descriptionCtrlr
+                                                                  .text = controller
+                                                                      .selectedItem
+                                                                      ?.description ??
+                                                                  '';
+                                                              controller
+                                                                  .isContainerVisible
+                                                                  .value = true;
+                                                            })
+                                                        : Dimens.box0,
+                                                    varUserAccessModel.value
+                                                                .access_list!
+                                                                .where((e) =>
+                                                                    e.feature_id ==
+                                                                        UserAccessConstants
+                                                                            .kMasterFeatureId &&
+                                                                    e.delete ==
+                                                                        UserAccessConstants
+                                                                            .kHaveDeleteAccess)
+                                                                .length >
+                                                            0
+                                                        ? TableActionButton(
+                                                            color: ColorValues
+                                                                .deleteColor,
+                                                            icon: Icons.delete,
+                                                            message: 'Delete',
+                                                            onPress: () {
+                                                              controller.isDeleteDialog(
+                                                                  checklist_id: controller
+                                                                      .competencyList?[
+                                                                          index]
+                                                                      ?.id
+                                                                      .toString(),
+                                                                  checklist: controller
+                                                                      .competencyList?[
+                                                                          index]
+                                                                      ?.name);
+                                                            },
+                                                          )
+                                                        : Dimens.box0
+                                                  ],
+                                                )),
+                                              ]),
                                             ),
-                                          ],
-                                        )),
-                                      ]),
-                                    ),
-                                  ),
-                                
-                              ),
+                                          ),
+                                        ),
                             ],
                           ),
                         ),

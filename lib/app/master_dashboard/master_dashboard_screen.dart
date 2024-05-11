@@ -132,54 +132,62 @@ class MastersDashboard extends GetView<MastersController> {
                                             ? (itemWidth / itemHeight)
                                             : 5,
                                     children: <Widget>[
-                                      OnHover(builder: (((isHovered) {
-                                        return
-                                            // varUserAccessModel.value.access_list!
-                                            //             .where((e) =>
-                                            //                 e.feature_id == 5 && e.add == 0)
-                                            //             .length >
-                                            //         0
-                                            //     ?
-                                            createContentTile(
-                                                title: "SPV List",
-                                                onTap: () {
-                                                  controller.goToSPVList();
-                                                });
-                                        // : Dimens.box0;
-                                      }))),
-                                      OnHover(builder: (((isHovered) {
-                                        return
-                                            //  varUserAccessModel.value.access_list!
-                                            //             .where((e) =>
-                                            //                 e.feature_id == 5 && e.add == 0)
-                                            //             .length >
-                                            //         0
-                                            //     ?
-                                            createContentTile(
-                                                title: "Facility List",
-                                                onTap: () {
-                                                  controller
-                                                      .goToFacilityTypeList();
-                                                });
-                                        // : Dimens.box0;
-                                      }))),
-                                      OnHover(builder: (((isHovered) {
-                                        return
-                                            //  varUserAccessModel.value.access_list!
-                                            //             .where((e) =>
-                                            //                 e.feature_id == 5 && e.add == 0)
-                                            //             .length >
-                                            //         0
-                                            //     ?
-                                            createContentTile(
-                                                title: "Block List",
-                                                onTap: () {
-                                                  controller
-                                                      .goToBlockTypeList();
-                                                });
-
-                                        // : Dimens.box0;
-                                      }))), // : Dimens.box0;
+                                      varUserAccessModel.value.access_list!
+                                                  .where((e) =>
+                                                      e.feature_id ==
+                                                          UserAccessConstants
+                                                              .kMasterFeatureId &&
+                                                      e.view ==
+                                                          UserAccessConstants
+                                                              .kHaveViewAccess)
+                                                  .length >
+                                              0
+                                          ? OnHover(builder: (((isHovered) {
+                                              return createContentTile(
+                                                  title: "SPV List",
+                                                  onTap: () {
+                                                    controller.goToSPVList();
+                                                  });
+                                            })))
+                                          : Dimens.box0,
+                                      varUserAccessModel.value.access_list!
+                                                  .where((e) =>
+                                                      e.feature_id ==
+                                                          UserAccessConstants
+                                                              .kMasterFeatureId &&
+                                                      e.view ==
+                                                          UserAccessConstants
+                                                              .kHaveViewAccess)
+                                                  .length >
+                                              0
+                                          ? OnHover(builder: (((isHovered) {
+                                              return createContentTile(
+                                                  title: "Facility List",
+                                                  onTap: () {
+                                                    controller
+                                                        .goToFacilityTypeList();
+                                                  });
+                                            })))
+                                          : Dimens.box0,
+                                      varUserAccessModel.value.access_list!
+                                                  .where((e) =>
+                                                      e.feature_id ==
+                                                          UserAccessConstants
+                                                              .kMasterFeatureId &&
+                                                      e.view ==
+                                                          UserAccessConstants
+                                                              .kHaveViewAccess)
+                                                  .length >
+                                              0
+                                          ? OnHover(builder: (((isHovered) {
+                                              return createContentTile(
+                                                  title: "Block List",
+                                                  onTap: () {
+                                                    controller
+                                                        .goToBlockTypeList();
+                                                  });
+                                            })))
+                                          : Dimens.box0,
                                     ],
                                   ),
                                   // Container(
@@ -308,27 +316,63 @@ class MastersDashboard extends GetView<MastersController> {
                                             ? (itemWidth / itemHeight)
                                             : 5,
                                     children: <Widget>[
-                                      OnHover(builder: (((isHovered) {
-                                        return createContentTile(
-                                            title: "Business Type List",
-                                            onTap: () {
-                                              controller.goToBusinessTypeList();
-                                            });
-                                      }))),
-                                      OnHover(builder: (((isHovered) {
-                                        return createContentTile(
-                                            title: "Business List",
-                                            onTap: () {
-                                              controller.goToBusinessList();
-                                            });
-                                      }))),
-                                      OnHover(builder: (((isHovered) {
-                                        return createContentTile(
-                                            title: "Business List Import",
-                                            onTap: () {
-                                              controller.goToImportBusiness();
-                                            });
-                                      }))),
+                                      varUserAccessModel.value.access_list!
+                                                  .where((e) =>
+                                                      e.feature_id ==
+                                                          UserAccessConstants
+                                                              .kMasterFeatureId &&
+                                                      e.view ==
+                                                          UserAccessConstants
+                                                              .kHaveViewAccess)
+                                                  .length >
+                                              0
+                                          ? OnHover(builder: (((isHovered) {
+                                              return createContentTile(
+                                                  title: "Business Type List",
+                                                  onTap: () {
+                                                    controller
+                                                        .goToBusinessTypeList();
+                                                  });
+                                            })))
+                                          : Dimens.box0,
+                                      varUserAccessModel.value.access_list!
+                                                  .where((e) =>
+                                                      e.feature_id ==
+                                                          UserAccessConstants
+                                                              .kMasterFeatureId &&
+                                                      e.view ==
+                                                          UserAccessConstants
+                                                              .kHaveViewAccess)
+                                                  .length >
+                                              0
+                                          ? OnHover(builder: (((isHovered) {
+                                              return createContentTile(
+                                                  title: "Business List",
+                                                  onTap: () {
+                                                    controller
+                                                        .goToBusinessList();
+                                                  });
+                                            })))
+                                          : Dimens.box0,
+                                      varUserAccessModel.value.access_list!
+                                                  .where((e) =>
+                                                      e.feature_id ==
+                                                          UserAccessConstants
+                                                              .kMasterFeatureId &&
+                                                      e.add ==
+                                                          UserAccessConstants
+                                                              .kHaveAddAccess)
+                                                  .length >
+                                              0
+                                          ? OnHover(builder: (((isHovered) {
+                                              return createContentTile(
+                                                  title: "Business List Import",
+                                                  onTap: () {
+                                                    controller
+                                                        .goToImportBusiness();
+                                                  });
+                                            })))
+                                          : Dimens.box0,
                                     ],
                                   ),
                                   Container(
@@ -371,53 +415,50 @@ class MastersDashboard extends GetView<MastersController> {
                                             ? (itemWidth / itemHeight)
                                             : 5,
                                     children: <Widget>[
-                                      OnHover(builder: (((isHovered) {
-                                        return varUserAccessModel
-                                                    .value.access_list!
-                                                    .where((e) =>
-                                                        e.feature_id ==
-                                                            UserAccessConstants
-                                                                .kUserFeatureId &&
-                                                        e.view ==
-                                                            UserAccessConstants
-                                                                .kHaveViewAccess)
-                                                    .length >
-                                                0
-                                            ? createContentTile(
-                                                title: "User List",
-                                                onTap: () {
-                                                  controller.goToUserList();
-                                                })
-                                            : Dimens.box0;
-                                        // : Dimens.box0;
-                                      }))),
-                                      OnHover(builder: (((isHovered) {
-                                        return varUserAccessModel
-                                                    .value.access_list!
-                                                    .where((e) =>
-                                                        e.feature_id ==
-                                                            UserAccessConstants
-                                                                .kUserFeatureId &&
-                                                        e.add ==
-                                                            UserAccessConstants
-                                                                .kHaveAddAccess)
-                                                    .length >
-                                                0
-                                            ? createContentTile(
-                                                title: "Add User",
-                                                onTap: () {
-                                                  controller
-                                                      .clearStoreUserIdData();
-
-                                                  controller.goToAddUser();
-                                                })
-                                            : Dimens.box0;
-                                      }))),
                                       varUserAccessModel.value.access_list!
                                                   .where((e) =>
                                                       e.feature_id ==
                                                           UserAccessConstants
                                                               .kUserFeatureId &&
+                                                      e.view ==
+                                                          UserAccessConstants
+                                                              .kHaveViewAccess)
+                                                  .length >
+                                              0
+                                          ? OnHover(builder: (((isHovered) {
+                                              return createContentTile(
+                                                  title: "User List",
+                                                  onTap: () {
+                                                    controller.goToUserList();
+                                                  });
+                                            })))
+                                          : Dimens.box0,
+                                      varUserAccessModel.value.access_list!
+                                                  .where((e) =>
+                                                      e.feature_id ==
+                                                          UserAccessConstants
+                                                              .kUserFeatureId &&
+                                                      e.add ==
+                                                          UserAccessConstants
+                                                              .kHaveAddAccess)
+                                                  .length >
+                                              0
+                                          ? OnHover(builder: (((isHovered) {
+                                              return createContentTile(
+                                                  title: "Add User",
+                                                  onTap: () {
+                                                    controller
+                                                        .clearStoreUserIdData();
+
+                                                    controller.goToAddUser();
+                                                  });
+                                            })))
+                                          : Dimens.box0,
+                                      varUserAccessModel.value.access_list!
+                                                  .where((e) =>
+                                                      e.feature_id ==
+                                                          UserAccessConstants
+                                                              .kMasterFeatureId &&
                                                       e.add ==
                                                           UserAccessConstants
                                                               .kHaveAddAccess)
@@ -431,15 +472,27 @@ class MastersDashboard extends GetView<MastersController> {
                                                   });
                                             })))
                                           : Dimens.box0,
-                                      OnHover(builder: (((isHovered) {
-                                        return createContentTile(
-                                            title: "Responsibility",
-                                            onTap: () {
-                                              // controller.clearStoreUserIdData();
+                                      varUserAccessModel.value.access_list!
+                                                  .where((e) =>
+                                                      e.feature_id ==
+                                                          UserAccessConstants
+                                                              .kMasterFeatureId &&
+                                                      e.view ==
+                                                          UserAccessConstants
+                                                              .kHaveViewAccess)
+                                                  .length >
+                                              0
+                                          ? OnHover(builder: (((isHovered) {
+                                              return createContentTile(
+                                                  title: "Responsibility",
+                                                  onTap: () {
+                                                    // controller.clearStoreUserIdData();
 
-                                              controller.goToResponsibility();
-                                            });
-                                      }))),
+                                                    controller
+                                                        .goToResponsibility();
+                                                  });
+                                            })))
+                                          : Dimens.box0
                                       // OnHover(builder: (((isHovered) {
                                       //   return createContentTile(
                                       //       title: "Designation",
@@ -476,36 +529,83 @@ class MastersDashboard extends GetView<MastersController> {
                                             ? (itemWidth / itemHeight)
                                             : 5,
                                     children: <Widget>[
-                                      OnHover(
-                                        builder: ((isHovered) {
-                                          return createContentTile(
-                                              title: "Modules List",
-                                              onTap: () {
-                                                controller.goToFeatureList();
-                                              });
-                                        }),
-                                      ),
-                                      OnHover(builder: (((isHovered) {
-                                        return createContentTile(
-                                            title: "Roles",
-                                            onTap: () {
-                                              controller.goToRoleTypeList();
-                                            });
-                                      }))),
-                                      OnHover(builder: (((isHovered) {
-                                        return createContentTile(
-                                            title: "Role Access",
-                                            onTap: () {
-                                              controller.goToRoleAccess();
-                                            });
-                                      }))),
-                                      OnHover(builder: (((isHovered) {
-                                        return createContentTile(
-                                            title: "Role Notifications",
-                                            onTap: () {
-                                              controller.goToRoleNotification();
-                                            });
-                                      }))),
+                                      varUserAccessModel.value.access_list!
+                                                  .where((e) =>
+                                                      e.feature_id ==
+                                                          UserAccessConstants
+                                                              .kMasterFeatureId &&
+                                                      e.view ==
+                                                          UserAccessConstants
+                                                              .kHaveViewAccess)
+                                                  .length >
+                                              0
+                                          ? OnHover(
+                                              builder: ((isHovered) {
+                                                return createContentTile(
+                                                    title: "Modules List",
+                                                    onTap: () {
+                                                      controller
+                                                          .goToFeatureList();
+                                                    });
+                                              }),
+                                            )
+                                          : Dimens.box0,
+                                      varUserAccessModel.value.access_list!
+                                                  .where((e) =>
+                                                      e.feature_id ==
+                                                          UserAccessConstants
+                                                              .kMasterFeatureId &&
+                                                      e.view ==
+                                                          UserAccessConstants
+                                                              .kHaveViewAccess)
+                                                  .length >
+                                              0
+                                          ? OnHover(builder: (((isHovered) {
+                                              return createContentTile(
+                                                  title: "Roles",
+                                                  onTap: () {
+                                                    controller
+                                                        .goToRoleTypeList();
+                                                  });
+                                            })))
+                                          : Dimens.box0,
+                                      varUserAccessModel.value.access_list!
+                                                  .where((e) =>
+                                                      e.feature_id ==
+                                                          UserAccessConstants
+                                                              .kMasterFeatureId &&
+                                                      e.view ==
+                                                          UserAccessConstants
+                                                              .kHaveViewAccess)
+                                                  .length >
+                                              0
+                                          ? OnHover(builder: (((isHovered) {
+                                              return createContentTile(
+                                                  title: "Role Access",
+                                                  onTap: () {
+                                                    controller.goToRoleAccess();
+                                                  });
+                                            })))
+                                          : Dimens.box0,
+                                      varUserAccessModel.value.access_list!
+                                                  .where((e) =>
+                                                      e.feature_id ==
+                                                          UserAccessConstants
+                                                              .kMasterFeatureId &&
+                                                      e.view ==
+                                                          UserAccessConstants
+                                                              .kHaveViewAccess)
+                                                  .length >
+                                              0
+                                          ? OnHover(builder: (((isHovered) {
+                                              return createContentTile(
+                                                  title: "Role Notifications",
+                                                  onTap: () {
+                                                    controller
+                                                        .goToRoleNotification();
+                                                  });
+                                            })))
+                                          : Dimens.box0
                                     ],
                                   ),
                                   GridView.count(
@@ -521,29 +621,63 @@ class MastersDashboard extends GetView<MastersController> {
                                             ? (itemWidth / itemHeight)
                                             : 5,
                                     children: <Widget>[
-                                      OnHover(builder: (((isHovered) {
-                                        return createContentTile(
-                                            title: "Designation",
-                                            onTap: () {
-                                              controller
-                                                  .goToDesignationScreen();
-                                            });
-                                      }))),
-                                      OnHover(builder: (((isHovered) {
-                                        return createContentTile(
-                                            title: "Competencies",
-                                            onTap: () {
-                                              controller.goToCompetencyScreen();
-                                            });
-                                      }))),
-                                      OnHover(builder: (((isHovered) {
-                                        return createContentTile(
-                                            title: "Escalation Matrix",
-                                            onTap: () {
-                                              controller
-                                                  .goToEscalationMatrixScreen();
-                                            });
-                                      }))),
+                                      varUserAccessModel.value.access_list!
+                                                  .where((e) =>
+                                                      e.feature_id ==
+                                                          UserAccessConstants
+                                                              .kMasterFeatureId &&
+                                                      e.view ==
+                                                          UserAccessConstants
+                                                              .kHaveViewAccess)
+                                                  .length >
+                                              0
+                                          ? OnHover(builder: (((isHovered) {
+                                              return createContentTile(
+                                                  title: "Designation",
+                                                  onTap: () {
+                                                    controller
+                                                        .goToDesignationScreen();
+                                                  });
+                                            })))
+                                          : Dimens.box0,
+                                      varUserAccessModel.value.access_list!
+                                                  .where((e) =>
+                                                      e.feature_id ==
+                                                          UserAccessConstants
+                                                              .kMasterFeatureId &&
+                                                      e.view ==
+                                                          UserAccessConstants
+                                                              .kHaveViewAccess)
+                                                  .length >
+                                              0
+                                          ? OnHover(builder: (((isHovered) {
+                                              return createContentTile(
+                                                  title: "Competencies",
+                                                  onTap: () {
+                                                    controller
+                                                        .goToCompetencyScreen();
+                                                  });
+                                            })))
+                                          : Dimens.box0,
+                                      varUserAccessModel.value.access_list!
+                                                  .where((e) =>
+                                                      e.feature_id ==
+                                                          UserAccessConstants
+                                                              .kMasterFeatureId &&
+                                                      e.view ==
+                                                          UserAccessConstants
+                                                              .kHaveViewAccess)
+                                                  .length >
+                                              0
+                                          ? OnHover(builder: (((isHovered) {
+                                              return createContentTile(
+                                                  title: "Escalation Matrix",
+                                                  onTap: () {
+                                                    controller
+                                                        .goToEscalationMatrixScreen();
+                                                  });
+                                            })))
+                                          : Dimens.box0
                                     ],
                                   ),
                                   Container(
@@ -586,34 +720,82 @@ class MastersDashboard extends GetView<MastersController> {
                                             ? (itemWidth / itemHeight)
                                             : 5,
                                     children: <Widget>[
-                                      OnHover(builder: (((isHovered) {
-                                        return createContentTile(
-                                            title: "Blood List",
-                                            onTap: () {
-                                              controller.goToBloodTypeList();
-                                            });
-                                      }))),
-                                      OnHover(builder: (((isHovered) {
-                                        return createContentTile(
-                                            title: "Country List",
-                                            onTap: () {
-                                              controller.goToCountryTypeList();
-                                            });
-                                      }))),
-                                      OnHover(builder: (((isHovered) {
-                                        return createContentTile(
-                                            title: "State List",
-                                            onTap: () {
-                                              controller.goToStateTypeList();
-                                            });
-                                      }))),
-                                      OnHover(builder: (((isHovered) {
-                                        return createContentTile(
-                                            title: "City List",
-                                            onTap: () {
-                                              controller.goToStateTypeList();
-                                            });
-                                      }))),
+                                      varUserAccessModel.value.access_list!
+                                                  .where((e) =>
+                                                      e.feature_id ==
+                                                          UserAccessConstants
+                                                              .kMasterFeatureId &&
+                                                      e.view ==
+                                                          UserAccessConstants
+                                                              .kHaveViewAccess)
+                                                  .length >
+                                              0
+                                          ? OnHover(builder: (((isHovered) {
+                                              return createContentTile(
+                                                  title: "Blood List",
+                                                  onTap: () {
+                                                    controller
+                                                        .goToBloodTypeList();
+                                                  });
+                                            })))
+                                          : Dimens.box0,
+                                      varUserAccessModel.value.access_list!
+                                                  .where((e) =>
+                                                      e.feature_id ==
+                                                          UserAccessConstants
+                                                              .kMasterFeatureId &&
+                                                      e.view ==
+                                                          UserAccessConstants
+                                                              .kHaveViewAccess)
+                                                  .length >
+                                              0
+                                          ? OnHover(builder: (((isHovered) {
+                                              return createContentTile(
+                                                  title: "Country List",
+                                                  onTap: () {
+                                                    controller
+                                                        .goToCountryTypeList();
+                                                  });
+                                            })))
+                                          : Dimens.box0,
+                                      varUserAccessModel.value.access_list!
+                                                  .where((e) =>
+                                                      e.feature_id ==
+                                                          UserAccessConstants
+                                                              .kMasterFeatureId &&
+                                                      e.view ==
+                                                          UserAccessConstants
+                                                              .kHaveViewAccess)
+                                                  .length >
+                                              0
+                                          ? OnHover(builder: (((isHovered) {
+                                              return createContentTile(
+                                                  title: "State List",
+                                                  onTap: () {
+                                                    controller
+                                                        .goToStateTypeList();
+                                                  });
+                                            })))
+                                          : Dimens.box0,
+                                      varUserAccessModel.value.access_list!
+                                                  .where((e) =>
+                                                      e.feature_id ==
+                                                          UserAccessConstants
+                                                              .kMasterFeatureId &&
+                                                      e.view ==
+                                                          UserAccessConstants
+                                                              .kHaveViewAccess)
+                                                  .length >
+                                              0
+                                          ? OnHover(builder: (((isHovered) {
+                                              return createContentTile(
+                                                  title: "City List",
+                                                  onTap: () {
+                                                    controller
+                                                        .goToStateTypeList();
+                                                  });
+                                            })))
+                                          : Dimens.box0,
                                     ],
                                   ),
                                   GridView.count(
@@ -629,13 +811,25 @@ class MastersDashboard extends GetView<MastersController> {
                                             ? (itemWidth / itemHeight)
                                             : 5,
                                     children: <Widget>[
-                                      OnHover(builder: (((isHovered) {
-                                        return createContentTile(
-                                            title: "Frequency List",
-                                            onTap: () {
-                                              controller.goToFrequencyList();
-                                            });
-                                      }))),
+                                      varUserAccessModel.value.access_list!
+                                                  .where((e) =>
+                                                      e.feature_id ==
+                                                          UserAccessConstants
+                                                              .kMasterFeatureId &&
+                                                      e.view ==
+                                                          UserAccessConstants
+                                                              .kHaveViewAccess)
+                                                  .length >
+                                              0
+                                          ? OnHover(builder: (((isHovered) {
+                                              return createContentTile(
+                                                  title: "Frequency List",
+                                                  onTap: () {
+                                                    controller
+                                                        .goToFrequencyList();
+                                                  });
+                                            })))
+                                          : Dimens.box0
                                     ],
                                   ),
                                   Container(
@@ -678,31 +872,65 @@ class MastersDashboard extends GetView<MastersController> {
                                             ? (itemWidth / itemHeight)
                                             : 5,
                                     children: <Widget>[
-                                      _inventoryList(
-                                          tittle: "Assets List",
-                                          ontap: () {
-                                            Get.toNamed(
-                                              Routes.inventoryList,
-                                            );
-                                            //  controller.createChecklist();
-                                          }),
-                                      _inventoryList(
-                                          tittle: "Add Assets",
-                                          ontap: () {
-                                            Get.toNamed(
-                                              Routes.addInventoryScreen,
-                                            );
-                                          }),
-                                      _inventoryList(
-                                          tittle: "Import Assets",
-                                          ontap: () {
-                                            controller.clearStoreData();
-                                            Get.toNamed(Routes.importInventory,
-                                                arguments: {
-                                                  "importType":
-                                                      AppConstants.kImportAsset
-                                                });
-                                          }),
+                                      varUserAccessModel.value.access_list!
+                                                  .where((e) =>
+                                                      e.feature_id ==
+                                                          UserAccessConstants
+                                                              .kMasterFeatureId &&
+                                                      e.view ==
+                                                          UserAccessConstants
+                                                              .kHaveViewAccess)
+                                                  .length >
+                                              0
+                                          ? _inventoryList(
+                                              tittle: "Assets List",
+                                              ontap: () {
+                                                Get.toNamed(
+                                                  Routes.inventoryList,
+                                                );
+                                                //  controller.createChecklist();
+                                              })
+                                          : Dimens.box0,
+                                      varUserAccessModel.value.access_list!
+                                                  .where((e) =>
+                                                      e.feature_id ==
+                                                          UserAccessConstants
+                                                              .kMasterFeatureId &&
+                                                      e.add ==
+                                                          UserAccessConstants
+                                                              .kHaveAddAccess)
+                                                  .length >
+                                              0
+                                          ? _inventoryList(
+                                              tittle: "Add Assets",
+                                              ontap: () {
+                                                Get.toNamed(
+                                                  Routes.addInventoryScreen,
+                                                );
+                                              })
+                                          : Dimens.box0,
+                                      varUserAccessModel.value.access_list!
+                                                  .where((e) =>
+                                                      e.feature_id ==
+                                                          UserAccessConstants
+                                                              .kMasterFeatureId &&
+                                                      e.add ==
+                                                          UserAccessConstants
+                                                              .kHaveAddAccess)
+                                                  .length >
+                                              0
+                                          ? _inventoryList(
+                                              tittle: "Import Assets",
+                                              ontap: () {
+                                                controller.clearStoreData();
+                                                Get.toNamed(
+                                                    Routes.importInventory,
+                                                    arguments: {
+                                                      "importType": AppConstants
+                                                          .kImportAsset
+                                                    });
+                                              })
+                                          : Dimens.box0,
                                     ],
                                   ),
                                   GridView.count(
@@ -718,25 +946,60 @@ class MastersDashboard extends GetView<MastersController> {
                                             ? (itemWidth / itemHeight)
                                             : 5,
                                     children: <Widget>[
-                                      _inventoryList(
-                                          tittle: "Assets Category",
-                                          ontap: () {
-                                            Get.toNamed(
-                                              Routes.inventoryCategory,
-                                            );
-                                          }),
-                                      _inventoryList(
-                                          tittle: "Assets Type",
-                                          ontap: () {
-                                            Get.toNamed(
-                                              Routes.inventoryTypeListScreen,
-                                            );
-                                          }),
-                                      _inventoryList(
-                                          tittle: "Assets Status",
-                                          ontap: () {
-                                            controller.inventoryStatusScreen();
-                                          }),
+                                      varUserAccessModel.value.access_list!
+                                                  .where((e) =>
+                                                      e.feature_id ==
+                                                          UserAccessConstants
+                                                              .kMasterFeatureId &&
+                                                      e.view ==
+                                                          UserAccessConstants
+                                                              .kHaveViewAccess)
+                                                  .length >
+                                              0
+                                          ? _inventoryList(
+                                              tittle: "Assets Category",
+                                              ontap: () {
+                                                Get.toNamed(
+                                                  Routes.inventoryCategory,
+                                                );
+                                              })
+                                          : Dimens.box0,
+                                      varUserAccessModel.value.access_list!
+                                                  .where((e) =>
+                                                      e.feature_id ==
+                                                          UserAccessConstants
+                                                              .kMasterFeatureId &&
+                                                      e.view ==
+                                                          UserAccessConstants
+                                                              .kHaveViewAccess)
+                                                  .length >
+                                              0
+                                          ? _inventoryList(
+                                              tittle: "Assets Type",
+                                              ontap: () {
+                                                Get.toNamed(
+                                                  Routes
+                                                      .inventoryTypeListScreen,
+                                                );
+                                              })
+                                          : Dimens.box0,
+                                      varUserAccessModel.value.access_list!
+                                                  .where((e) =>
+                                                      e.feature_id ==
+                                                          UserAccessConstants
+                                                              .kMasterFeatureId &&
+                                                      e.view ==
+                                                          UserAccessConstants
+                                                              .kHaveViewAccess)
+                                                  .length >
+                                              0
+                                          ? _inventoryList(
+                                              tittle: "Assets Status",
+                                              ontap: () {
+                                                controller
+                                                    .inventoryStatusScreen();
+                                              })
+                                          : Dimens.box0,
                                     ],
                                   ),
                                   Container(
@@ -779,13 +1042,25 @@ class MastersDashboard extends GetView<MastersController> {
                                             ? (itemWidth / itemHeight)
                                             : 5,
                                     children: <Widget>[
-                                      OnHover(builder: (((isHovered) {
-                                        return createContentTile(
-                                            title: "Document Manager",
-                                            onTap: () {
-                                              controller.goToDocumentManager();
-                                            });
-                                      }))),
+                                      varUserAccessModel.value.access_list!
+                                                  .where((e) =>
+                                                      e.feature_id ==
+                                                          UserAccessConstants
+                                                              .kMasterFeatureId &&
+                                                      e.view ==
+                                                          UserAccessConstants
+                                                              .kHaveViewAccess)
+                                                  .length >
+                                              0
+                                          ? OnHover(builder: (((isHovered) {
+                                              return createContentTile(
+                                                  title: "Document Manager",
+                                                  onTap: () {
+                                                    controller
+                                                        .goToDocumentManager();
+                                                  });
+                                            })))
+                                          : Dimens.box0
                                     ],
                                   ),
                                   Container(
@@ -828,30 +1103,76 @@ class MastersDashboard extends GetView<MastersController> {
                                             ? (itemWidth / itemHeight)
                                             : 5,
                                     children: <Widget>[
-                                      _inventoryList(
-                                          tittle: "New Warranty Claim",
-                                          ontap: () {
-                                            controller.newWarrantyClaimList();
-                                          }),
-                                      _inventoryList(
-                                          tittle: "Calibration List",
-                                          ontap: () {
-                                            Get.toNamed(
-                                              Routes.calibrationList,
-                                            );
-                                          }),
-                                      _inventoryList(
-                                          tittle: "WC Certificates List",
-                                          ontap: () {
-                                            Get.toNamed(
-                                              Routes.warrantyCertificatesList,
-                                            );
-                                          }),
-                                      _inventoryList(
-                                        tittle: "Warranty Claims List",
-                                        ontap: () =>
-                                            controller.breakdownMaintenance(),
-                                      )
+                                      varUserAccessModel.value.access_list!
+                                                  .where((e) =>
+                                                      e.feature_id ==
+                                                          UserAccessConstants
+                                                              .kWarrantyClaimFeatureId &&
+                                                      e.add ==
+                                                          UserAccessConstants
+                                                              .kHaveAddAccess)
+                                                  .length >
+                                              0
+                                          ? _inventoryList(
+                                              tittle: "New Warranty Claim",
+                                              ontap: () {
+                                                controller
+                                                    .newWarrantyClaimList();
+                                              })
+                                          : Dimens.box0,
+                                      varUserAccessModel.value.access_list!
+                                                  .where((e) =>
+                                                      e.feature_id ==
+                                                          UserAccessConstants
+                                                              .kCalibrationFeatureId &&
+                                                      e.view ==
+                                                          UserAccessConstants
+                                                              .kHaveViewAccess)
+                                                  .length >
+                                              0
+                                          ? _inventoryList(
+                                              tittle: "Calibration List",
+                                              ontap: () {
+                                                Get.toNamed(
+                                                  Routes.calibrationList,
+                                                );
+                                              })
+                                          : Dimens.box0,
+                                      varUserAccessModel.value.access_list!
+                                                  .where((e) =>
+                                                      e.feature_id ==
+                                                          UserAccessConstants
+                                                              .kWarrantyClaimcertiFeatureId &&
+                                                      e.view ==
+                                                          UserAccessConstants
+                                                              .kHaveViewAccess)
+                                                  .length >
+                                              0
+                                          ? _inventoryList(
+                                              tittle: "WC Certificates List",
+                                              ontap: () {
+                                                Get.toNamed(
+                                                  Routes
+                                                      .warrantyCertificatesList,
+                                                );
+                                              })
+                                          : Dimens.box0,
+                                      varUserAccessModel.value.access_list!
+                                                  .where((e) =>
+                                                      e.feature_id ==
+                                                          UserAccessConstants
+                                                              .kWarrantyClaimFeatureId &&
+                                                      e.view ==
+                                                          UserAccessConstants
+                                                              .kHaveViewAccess)
+                                                  .length >
+                                              0
+                                          ? _inventoryList(
+                                              tittle: "Warranty Claims List",
+                                              ontap: () => controller
+                                                  .breakdownMaintenance(),
+                                            )
+                                          : Dimens.box0
                                     ],
                                   ),
                                   Container(
@@ -894,21 +1215,54 @@ class MastersDashboard extends GetView<MastersController> {
                                             ? (itemWidth / itemHeight)
                                             : 5,
                                     children: <Widget>[
-                                      _inventoryList(
-                                          tittle: "Grievance Type",
-                                          ontap: () {
-                                            controller.grievanceType();
-                                          }),
-                                      _inventoryList(
-                                          tittle: "Water Type",
-                                          ontap: () {
-                                            controller.waterTypeMaster();
-                                          }),
-                                      _inventoryList(
-                                          tittle: "Waste Type",
-                                          ontap: () {
-                                            controller.wasteTypeMaster();
-                                          }),
+                                      varUserAccessModel.value.access_list!
+                                                  .where((e) =>
+                                                      e.feature_id ==
+                                                          UserAccessConstants
+                                                              .kMasterFeatureId &&
+                                                      e.view ==
+                                                          UserAccessConstants
+                                                              .kHaveViewAccess)
+                                                  .length >
+                                              0
+                                          ? _inventoryList(
+                                              tittle: "Grievance Type",
+                                              ontap: () {
+                                                controller.grievanceType();
+                                              })
+                                          : Dimens.box0,
+                                      varUserAccessModel.value.access_list!
+                                                  .where((e) =>
+                                                      e.feature_id ==
+                                                          UserAccessConstants
+                                                              .kMasterFeatureId &&
+                                                      e.view ==
+                                                          UserAccessConstants
+                                                              .kHaveViewAccess)
+                                                  .length >
+                                              0
+                                          ? _inventoryList(
+                                              tittle: "Water Type",
+                                              ontap: () {
+                                                controller.waterTypeMaster();
+                                              })
+                                          : Dimens.box0,
+                                      varUserAccessModel.value.access_list!
+                                                  .where((e) =>
+                                                      e.feature_id ==
+                                                          UserAccessConstants
+                                                              .kMasterFeatureId &&
+                                                      e.view ==
+                                                          UserAccessConstants
+                                                              .kHaveViewAccess)
+                                                  .length >
+                                              0
+                                          ? _inventoryList(
+                                              tittle: "Waste Type",
+                                              ontap: () {
+                                                controller.wasteTypeMaster();
+                                              })
+                                          : Dimens.box0,
                                     ],
                                   ),
                                 ],

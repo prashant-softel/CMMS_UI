@@ -1,7 +1,9 @@
 import 'package:cmms/app/app.dart';
+import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/role_access/rele_access_controller.dart';
+import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/dropdown_web.dart';
 import 'package:flutter/material.dart';
@@ -390,7 +392,6 @@ class RoleAccessContentWeb extends GetView<RoleAccessController> {
                                                                     : 0;
                                                           });
                                                         })),
-                                                        
                                                       ]))
                                               .toList())
                                       : Dimens.box0),
@@ -399,39 +400,53 @@ class RoleAccessContentWeb extends GetView<RoleAccessController> {
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Container(
-                                      height: 35,
-                                      child: CustomElevatedButton(
-                                        backgroundColor: ColorValues.greenColor,
-                                        text: 'Submit',
-                                        onPressed: () {
-                                          //controller.addUser();
-                                          controller.saveRoleAccess();
-                                          showDialog(
-                                            context: context,
-                                            builder: (BuildContext context) {
-                                              return AlertDialog(
-                                                title:
-                                                    Text("Success"),
-                                                content: Text(
-                                                    "Role updated successfully!"),
-                                                actions: <Widget>[
-                                                  TextButton(
-                                                    onPressed: () {
-                                                      Navigator.of(context)
-                                                          .popUntil((route) =>
-                                                              route.isFirst);
-                                                      controller.update();
-                                                    },
-                                                    child: Text("OK"),
-                                                  ),
-                                                ],
-                                              );
-                                            },
-                                          );
-                                        },
-                                      ),
-                                    ),
+                                    varUserAccessModel.value.access_list!
+                                                .where((e) =>
+                                                    e.feature_id ==
+                                                        UserAccessConstants
+                                                            .kMasterFeatureId &&
+                                                    e.edit ==
+                                                        UserAccessConstants
+                                                            .kHaveEditAccess)
+                                                .length >
+                                            0
+                                        ? Container(
+                                            height: 35,
+                                            child: CustomElevatedButton(
+                                              backgroundColor:
+                                                  ColorValues.greenColor,
+                                              text: 'Submit',
+                                              onPressed: () {
+                                                //controller.addUser();
+                                                controller.saveRoleAccess();
+                                                showDialog(
+                                                  context: context,
+                                                  builder:
+                                                      (BuildContext context) {
+                                                    return AlertDialog(
+                                                      title: Text("Success"),
+                                                      content: Text(
+                                                          "Role updated successfully!"),
+                                                      actions: <Widget>[
+                                                        TextButton(
+                                                          onPressed: () {
+                                                            Navigator.of(
+                                                                    context)
+                                                                .popUntil((route) =>
+                                                                    route
+                                                                        .isFirst);
+                                                            controller.update();
+                                                          },
+                                                          child: Text("OK"),
+                                                        ),
+                                                      ],
+                                                    );
+                                                  },
+                                                );
+                                              },
+                                            ),
+                                          )
+                                        : Dimens.box0,
                                     Dimens.boxWidth20,
                                     Container(
                                       height: 35,
