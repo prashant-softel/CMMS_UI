@@ -2,7 +2,6 @@ import 'package:cmms/app/home/home_controller.dart';
 import 'package:cmms/app/home/widgets/home_drawer.dart';
 import 'package:cmms/app/schedule_course/View/schedule_course_web.dart';
 import 'package:cmms/app/schedule_course/schedule_course_controller.dart';
-import 'package:cmms/app/theme/dimens.dart';
 import 'package:cmms/app/utils/responsive.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

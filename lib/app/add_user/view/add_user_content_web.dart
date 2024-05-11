@@ -1439,186 +1439,186 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                                                             crossAxisAlignment:
                                                                                 CrossAxisAlignment.start,
                                                                             children: [
-                                                                              // Container(
-                                                                              //   margin: EdgeInsets.symmetric(horizontal: 30, vertical: 30),
-                                                                              //   child: Row(
-                                                                              //     children: [
-                                                                              //       Spacer(),
-                                                                              //       Text("Select Facility: "),
-                                                                              //       Obx(
-                                                                              //         () => Container(
-                                                                              //           width: Get.width * .2,
-                                                                              //           height: 35,
-                                                                              //           child: DropdownWebWidget(
-                                                                              //             controller: controller,
-                                                                              //             dropdownList: controller.facilityNameList,
-                                                                              //             isValueSelected: controller.isFacilitySelected.value,
-                                                                              //             selectedValue: controller.selectedFacility.value,
-                                                                              //             onValueChanged: controller.onValueChanged,
-                                                                              //           ),
-                                                                              //         ),
-                                                                              //       ),
-                                                                              //       Spacer(),
-                                                                              //       Text("Is Employee"),
-                                                                              //       Checkbox(
-                                                                              //         value: controller.isEmployee.value,
-                                                                              //         onChanged: (bool? value) {
-                                                                              //           controller.toggleIsEmployee();
-                                                                              //         },
-                                                                              //       ),
-                                                                              //       Spacer(),
-                                                                              //       CustomElevatedButton(
-                                                                              //         text: "Add",
-                                                                              //         onPressed: () {
-                                                                              //           controller.updateFacilityList(
-                                                                              //             id: controller.selectedFacilityId.value,
-                                                                              //             name: controller.selectedFacility.value,
-                                                                              //             address: controller.address.value,
-                                                                              //             isEmployee: controller.isEmployee.value,
-                                                                              //           );
-                                                                              //           controller.selectedFacilityId.value = 0;
-                                                                              //           controller.selectedFacility.value = "";
-                                                                              //           controller.address.value = "";
-                                                                              //           controller.isEmployee.value = false;
-                                                                              //         },
-                                                                              //       ),
-                                                                              //       Spacer(),
-                                                                              //     ],
-                                                                              //   ),
-                                                                              // ),
-                                                                              // SizedBox(
-                                                                              //   height: Get.height * 0.7,
-                                                                              //   child: DataTable2(
-                                                                              //     dataRowHeight: 60,
-                                                                              //     border: TableBorder.all(color: Colors.black),
-                                                                              //     columns: [
-                                                                              //       DataColumn2(
-                                                                              //         label: Text("Facility ID"),
-                                                                              //         size: ColumnSize.S,
-                                                                              //       ),
-                                                                              //       DataColumn2(
-                                                                              //         label: Text("Facility Name"),
-                                                                              //         size: ColumnSize.S,
-                                                                              //       ),
-                                                                              //       DataColumn2(
-                                                                              //         label: Text("Is Employee"),
-                                                                              //         size: ColumnSize.S,
-                                                                              //       ),
-                                                                              //       DataColumn2(
-                                                                              //         label: Text("Location"),
-                                                                              //         size: ColumnSize.L,
-                                                                              //       ),
-                                                                              //       DataColumn2(
-                                                                              //         label: Text("Action"),
-                                                                              //         size: ColumnSize.S,
-                                                                              //       ),
-                                                                              //     ],
-                                                                              //     rows: controller.isEmployeeFacilityList
-                                                                              //         .map(
-                                                                              //           (facility) => DataRow(
-                                                                              //             cells: [
-                                                                              //               DataCell(
-                                                                              //                 Text("${facility.id}"),
-                                                                              //               ),
-                                                                              //               DataCell(
-                                                                              //                 Text("${facility.name}"),
-                                                                              //               ),
-                                                                              //               DataCell(
-                                                                              //                 Checkbox(
-                                                                              //                   value: facility.isEmployee,
-                                                                              //                   onChanged: null,
-                                                                              //                 ),
-                                                                              //               ),
-                                                                              //               DataCell(
-                                                                              //                 Text("${facility.address}"),
-                                                                              //               ),
-                                                                              //               DataCell(
-                                                                              //                 Wrap(
-                                                                              //                   children: [
-                                                                              //                     TableActionButton(
-                                                                              //                       message: 'delete',
-                                                                              //                       color: ColorValues.deleteColor,
-                                                                              //                       icon: Icons.delete_outlined,
-                                                                              //                       onPress: () {
-                                                                              //                         controller.isEmployeeFacilityList.remove(facility);
-                                                                              //                       },
-                                                                              //                     ),
-                                                                              //                   ],
-                                                                              //                 ),
-                                                                              //               ),
-                                                                              //             ],
-                                                                              //           ),
-                                                                              //         )
-                                                                              //         .toList(),
-                                                                              //   ),
-                                                                              // ),
-                                                                              SizedBox(
-                                                                                width: MediaQuery.of(context).size.width / 9,
-                                                                                child: ActionButton(
-                                                                                  label: 'Add Facility',
-                                                                                  icon: Icons.add,
-                                                                                  onPressed: () {
-                                                                                    Get.dialog<void>(controller.AddfacilityListAlertBox());
-
-                                                                                    //     void>(
-                                                                                    // AddfacilityListAlertBox());
-                                                                                  },
-                                                                                  color: Colors.green,
-                                                                                ),
-                                                                              ),
                                                                               Container(
-                                                                                width: MediaQuery.of(context).size.height * 1.5,
-                                                                                height: Get.height - 70,
-                                                                                child: Column(
-                                                                                  //
+                                                                                margin: EdgeInsets.symmetric(horizontal: 30, vertical: 30),
+                                                                                child: Row(
                                                                                   children: [
-                                                                                    Expanded(
-                                                                                      child: ScrollableTableView(
-                                                                                        columns: [
-                                                                                          "Facility Id",
-                                                                                          'Facility name',
-                                                                                          'Location',
-                                                                                        ].map((column) {
-                                                                                          return TableViewColumn(minWidth: Get.width * 0.20, label: column);
-                                                                                        }).toList(),
-                                                                                        rows: //
-                                                                                            [
-                                                                                          ...List.generate(
-                                                                                            controller.filteredfacilityNameList.length,
-                                                                                            (index) {
-                                                                                              var facilityNameDetails = controller.filteredfacilityNameList[index];
-
-                                                                                              return [
-                                                                                                '${facilityNameDetails?.id ?? ''}',
-                                                                                                '${facilityNameDetails?.name ?? ''}',
-                                                                                                '${facilityNameDetails?.address ?? ''}',
-                                                                                              ];
-                                                                                            },
-                                                                                          ),
-                                                                                        ].map(
-                                                                                          (_inventoryDetailList) {
-                                                                                            return TableViewRow(
-                                                                                              onTap: () => {
-                                                                                                //  print('ZERO = ${_inventoryDetailList[0]}')
-                                                                                              },
-                                                                                              height: 60,
-                                                                                              cells: _inventoryDetailList.map(
-                                                                                                (value) {
-                                                                                                  return TableViewCell(
-                                                                                                    //key: ,
-                                                                                                    child: Text(value.toString()),
-                                                                                                  );
-                                                                                                },
-                                                                                              ).toList(),
-                                                                                            );
-                                                                                          },
-                                                                                        ).toList(),
+                                                                                    Spacer(),
+                                                                                    Text("Select Facility: "),
+                                                                                    Obx(
+                                                                                      () => Container(
+                                                                                        width: Get.width * .2,
+                                                                                        height: 35,
+                                                                                        child: DropdownWebWidget(
+                                                                                          controller: controller,
+                                                                                          dropdownList: controller.facilityNameList,
+                                                                                          isValueSelected: controller.isFacilitySelected.value,
+                                                                                          selectedValue: controller.selectedFacility.value,
+                                                                                          onValueChanged: controller.onValueChanged,
+                                                                                        ),
                                                                                       ),
                                                                                     ),
-                                                                                    Dimens.boxHeight10,
+                                                                                    Spacer(),
+                                                                                    Text("Is Employee"),
+                                                                                    Checkbox(
+                                                                                      value: controller.isEmployee.value,
+                                                                                      onChanged: (bool? value) {
+                                                                                        controller.toggleIsEmployee();
+                                                                                      },
+                                                                                    ),
+                                                                                    Spacer(),
+                                                                                    CustomElevatedButton(
+                                                                                      text: "Add",
+                                                                                      onPressed: () {
+                                                                                        controller.updateFacilityList(
+                                                                                          id: controller.selectedFacilityId.value,
+                                                                                          name: controller.selectedFacility.value,
+                                                                                          address: controller.address.value,
+                                                                                          isEmployee: controller.isEmployee.value,
+                                                                                        );
+                                                                                        controller.selectedFacilityId.value = 0;
+                                                                                        controller.selectedFacility.value = "";
+                                                                                        controller.address.value = "";
+                                                                                        controller.isEmployee.value = false;
+                                                                                      },
+                                                                                    ),
+                                                                                    Spacer(),
                                                                                   ],
                                                                                 ),
                                                                               ),
+                                                                              SizedBox(
+                                                                                height: Get.height * 0.7,
+                                                                                child: DataTable2(
+                                                                                  dataRowHeight: 60,
+                                                                                  border: TableBorder.all(color: Colors.black),
+                                                                                  columns: [
+                                                                                    DataColumn2(
+                                                                                      label: Text("Facility ID"),
+                                                                                      size: ColumnSize.S,
+                                                                                    ),
+                                                                                    DataColumn2(
+                                                                                      label: Text("Facility Name"),
+                                                                                      size: ColumnSize.S,
+                                                                                    ),
+                                                                                    DataColumn2(
+                                                                                      label: Text("Is Employee"),
+                                                                                      size: ColumnSize.S,
+                                                                                    ),
+                                                                                    DataColumn2(
+                                                                                      label: Text("Location"),
+                                                                                      size: ColumnSize.L,
+                                                                                    ),
+                                                                                    DataColumn2(
+                                                                                      label: Text("Action"),
+                                                                                      size: ColumnSize.S,
+                                                                                    ),
+                                                                                  ],
+                                                                                  rows: controller.isEmployeeFacilityList
+                                                                                      .map(
+                                                                                        (facility) => DataRow(
+                                                                                          cells: [
+                                                                                            DataCell(
+                                                                                              Text("${facility.id}"),
+                                                                                            ),
+                                                                                            DataCell(
+                                                                                              Text("${facility.name}"),
+                                                                                            ),
+                                                                                            DataCell(
+                                                                                              Checkbox(
+                                                                                                value: facility.isEmployee,
+                                                                                                onChanged: null,
+                                                                                              ),
+                                                                                            ),
+                                                                                            DataCell(
+                                                                                              Text("${facility.address}"),
+                                                                                            ),
+                                                                                            DataCell(
+                                                                                              Wrap(
+                                                                                                children: [
+                                                                                                  TableActionButton(
+                                                                                                    message: 'delete',
+                                                                                                    color: ColorValues.deleteColor,
+                                                                                                    icon: Icons.delete_outlined,
+                                                                                                    onPress: () {
+                                                                                                      controller.isEmployeeFacilityList.remove(facility);
+                                                                                                    },
+                                                                                                  ),
+                                                                                                ],
+                                                                                              ),
+                                                                                            ),
+                                                                                          ],
+                                                                                        ),
+                                                                                      )
+                                                                                      .toList(),
+                                                                                ),
+                                                                              ),
+                                                                              // SizedBox(
+                                                                              //   width: MediaQuery.of(context).size.width / 9,
+                                                                              //   child: ActionButton(
+                                                                              //     label: 'Add Facility',
+                                                                              //     icon: Icons.add,
+                                                                              //     onPressed: () {
+                                                                              //       Get.dialog<void>(controller.AddfacilityListAlertBox());
+
+                                                                              //       //     void>(
+                                                                              //       // AddfacilityListAlertBox());
+                                                                              //     },
+                                                                              //     color: Colors.green,
+                                                                              //   ),
+                                                                              // ),
+                                                                              // Container(
+                                                                              //   width: MediaQuery.of(context).size.height * 1.5,
+                                                                              //   height: Get.height - 70,
+                                                                              //   child: Column(
+                                                                              //     //
+                                                                              //     children: [
+                                                                              //       Expanded(
+                                                                              //         child: ScrollableTableView(
+                                                                              //           columns: [
+                                                                              //             "Facility Id",
+                                                                              //             'Facility name',
+                                                                              //             'Location',
+                                                                              //           ].map((column) {
+                                                                              //             return TableViewColumn(minWidth: Get.width * 0.20, label: column);
+                                                                              //           }).toList(),
+                                                                              //           rows: //
+                                                                              //               [
+                                                                              //             ...List.generate(
+                                                                              //               controller.filteredfacilityNameList.length,
+                                                                              //               (index) {
+                                                                              //                 var facilityNameDetails = controller.filteredfacilityNameList[index];
+
+                                                                              //                 return [
+                                                                              //                   '${facilityNameDetails?.id ?? ''}',
+                                                                              //                   '${facilityNameDetails?.name ?? ''}',
+                                                                              //                   '${facilityNameDetails?.address ?? ''}',
+                                                                              //                 ];
+                                                                              //               },
+                                                                              //             ),
+                                                                              //           ].map(
+                                                                              //             (_inventoryDetailList) {
+                                                                              //               return TableViewRow(
+                                                                              //                 onTap: () => {
+                                                                              //                   //  print('ZERO = ${_inventoryDetailList[0]}')
+                                                                              //                 },
+                                                                              //                 height: 60,
+                                                                              //                 cells: _inventoryDetailList.map(
+                                                                              //                   (value) {
+                                                                              //                     return TableViewCell(
+                                                                              //                       //key: ,
+                                                                              //                       child: Text(value.toString()),
+                                                                              //                     );
+                                                                              //                   },
+                                                                              //                 ).toList(),
+                                                                              //               );
+                                                                              //             },
+                                                                              //           ).toList(),
+                                                                              //         ),
+                                                                              //       ),
+                                                                              //       Dimens.boxHeight10,
+                                                                              //     ],
+                                                                              //   ),
+                                                                              // ),
                                                                             ],
                                                                           ),
                                                                         ),
