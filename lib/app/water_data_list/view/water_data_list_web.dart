@@ -97,320 +97,327 @@ class _WaterDataListWebState extends State<WaterDataListWeb> {
         // final dataSource = AuditPlanPlanListDataSource(controller);
         return SelectionArea(
           child: SingleChildScrollView(
-            child: Column(
-              children: [
-                HeaderWidget(),
-                Container(
-                  height: 45,
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      color: Color.fromARGB(255, 227, 224, 224),
-                      width: 1,
-                    ),
-                    boxShadow: [
-                      BoxShadow(
-                        color:
-                            Color.fromARGB(255, 236, 234, 234).withOpacity(0.5),
-                        spreadRadius: 2,
-                        blurRadius: 5,
-                        offset: Offset(0, 2),
+            child: Obx(
+              () => Column(
+                children: [
+                  HeaderWidget(),
+                  Container(
+                    height: 45,
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: Color.fromARGB(255, 227, 224, 224),
+                        width: 1,
                       ),
-                    ],
-                  ),
-                  child: Row(
-                    children: [
-                      Icon(
-                        Icons.home,
-                        color: ColorValues.greyLightColor,
-                      ),
-                      InkWell(
-                        onTap: () {
-                          Get.offNamed(Routes.home);
-                        },
-                        child: Text(
-                          "DASHBOARD",
-                          style: Styles.greyLight14,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Color.fromARGB(255, 236, 234, 234)
+                              .withOpacity(0.5),
+                          spreadRadius: 2,
+                          blurRadius: 5,
+                          offset: Offset(0, 2),
                         ),
-                      ),
-                      InkWell(
-                        onTap: () {
-                          Get.offNamed(Routes.misDashboard);
-                        },
-                        child: Text(" / MIS", style: Styles.greyLight14),
-                      ),
-                      Text(" / WATER DATA LIST", style: Styles.greyLight14)
-                    ],
+                      ],
+                    ),
+                    child: Row(
+                      children: [
+                        Icon(
+                          Icons.home,
+                          color: ColorValues.greyLightColor,
+                        ),
+                        InkWell(
+                          onTap: () {
+                            Get.offNamed(Routes.home);
+                          },
+                          child: Text(
+                            "DASHBOARD",
+                            style: Styles.greyLight14,
+                          ),
+                        ),
+                        InkWell(
+                          onTap: () {
+                            Get.offNamed(Routes.misDashboard);
+                          },
+                          child: Text(" / MIS", style: Styles.greyLight14),
+                        ),
+                        Text(" / WATER DATA LIST", style: Styles.greyLight14)
+                      ],
+                    ),
                   ),
-                ),
-                Stack(
-                  children: [
-                    Container(
-                      width: Get.width * 7,
-                      margin: EdgeInsets.only(left: 10, top: 20, right: 10),
-                      height: Get.height,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Expanded(
-                            child: SingleChildScrollView(
-                              child: Container(
-                                margin: EdgeInsets.only(
-                                    left: 10, top: 10, right: 10),
-                                child: Column(
-                                  children: [
-                                    Card(
-                                      color: Color.fromARGB(255, 245, 248, 250),
-                                      elevation: 10,
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(10.0),
-                                      ),
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Row(
-                                            children: [
-                                              Padding(
-                                                padding: EdgeInsets.only(
-                                                  left: 20,
-                                                  top: 20,
+                  Stack(
+                    children: [
+                      Container(
+                        width: Get.width * 7,
+                        margin: EdgeInsets.only(left: 10, top: 20, right: 10),
+                        height: Get.height,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Expanded(
+                              child: SingleChildScrollView(
+                                child: Container(
+                                  margin: EdgeInsets.only(
+                                      left: 10, top: 10, right: 10),
+                                  child: Column(
+                                    children: [
+                                      Card(
+                                        color:
+                                            Color.fromARGB(255, 245, 248, 250),
+                                        elevation: 10,
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(10.0),
+                                        ),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Row(
+                                              children: [
+                                                Padding(
+                                                  padding: EdgeInsets.only(
+                                                    left: 20,
+                                                    top: 20,
+                                                  ),
+                                                  child: Text(
+                                                    "Water Data List",
+                                                    style: Styles.blackBold16,
+                                                  ),
                                                 ),
-                                                child: Text(
-                                                  "Water Data List",
-                                                  style: Styles.blackBold16,
+                                                Spacer(),
+                                                Padding(
+                                                  padding: EdgeInsets.only(
+                                                    top: 20,
+                                                  ),
+                                                  child: Text(
+                                                    "All the data in KL units",
+                                                    style: Styles.blackBold16,
+                                                  ),
                                                 ),
-                                              ),
-                                              Spacer(),
-                                              Padding(
-                                                padding: EdgeInsets.only(
-                                                  top: 20,
+                                                Spacer(),
+                                                Padding(
+                                                  padding: EdgeInsets.only(
+                                                    top: 20,
+                                                    right: 20,
+                                                  ),
+                                                  child: Row(
+                                                    children: [
+                                                      Text('Year :'),
+                                                      Dimens.boxWidth10,
+                                                      CustomTextFieldForStock(
+                                                        width: MediaQuery.of(
+                                                                    context)
+                                                                .size
+                                                                .width /
+                                                            8,
+                                                        numberTextField: true,
+                                                        onTap: () {
+                                                          _showYearPicker(
+                                                              context,
+                                                              controller);
+                                                        },
+                                                        textController:
+                                                            controller
+                                                                .waterDateTc,
+                                                      ),
+                                                    ],
+                                                  ),
                                                 ),
-                                                child: Text(
-                                                  "All the data in KL units",
-                                                  style: Styles.blackBold16,
+                                                Padding(
+                                                  padding: EdgeInsets.only(
+                                                    top: 20,
+                                                    right: 20,
+                                                  ),
+                                                  child: ActionButton(
+                                                    icon: Icons.add,
+                                                    label: "Procurements",
+                                                    onPressed: () {
+                                                      Get.dialog(AddDialog());
+                                                    },
+                                                    color:
+                                                        ColorValues.addNewColor,
+                                                  ),
                                                 ),
-                                              ),
-                                              Spacer(),
-                                              Padding(
-                                                padding: EdgeInsets.only(
-                                                  top: 20,
-                                                  right: 20,
-                                                ),
-                                                child: Row(
-                                                  children: [
-                                                    Text('Year :'),
-                                                    Dimens.boxWidth10,
-                                                    CustomTextFieldForStock(
-                                                      width:
-                                                          MediaQuery.of(context)
-                                                                  .size
-                                                                  .width /
-                                                              8,
-                                                      numberTextField: true,
-                                                      onTap: () {
-                                                        _showYearPicker(context,
-                                                            controller);
-                                                      },
-                                                      textController: controller
-                                                          .waterDateTc,
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                              Padding(
-                                                padding: EdgeInsets.only(
-                                                  top: 20,
-                                                  right: 20,
-                                                ),
-                                                child: ActionButton(
-                                                  icon: Icons.add,
-                                                  label: "Procurements",
-                                                  onPressed: () {
-                                                    Get.dialog(AddDialog());
-                                                  },
-                                                  color:
-                                                      ColorValues.addNewColor,
-                                                ),
-                                              ),
-                                              Padding(
-                                                padding: EdgeInsets.only(
-                                                  top: 20,
-                                                  right: 5,
-                                                ),
-                                                child: ActionButton(
-                                                  icon: Icons.minimize_sharp,
-                                                  label: "Consumption",
-                                                  onPressed: () {
-                                                    Get.dialog(MinusDialog());
-                                                  },
-                                                  color:
-                                                      ColorValues.appRedColor,
-                                                ),
-                                              )
-                                            ],
-                                          ),
-                                          Divider(
-                                            color: ColorValues.greyLightColour,
-                                          ),
-                                          Container(
-                                            color: Color.fromARGB(
-                                                255, 245, 248, 250),
-                                            width: Get.width,
-                                            height: Get.height,
-                                            child: Padding(
-                                              padding: const EdgeInsets.all(16),
-                                              child: SingleChildScrollView(
-                                                child: Table(
-                                                  border: TableBorder.all(
-                                                      color: Colors.grey,
-                                                      width:
-                                                          1), // Default border color for the table
-                                                  columnWidths: const <int,
-                                                      TableColumnWidth>{
-                                                    0: FlexColumnWidth(),
-                                                    1: FlexColumnWidth(),
-                                                    2: FlexColumnWidth(),
-                                                    3: FlexColumnWidth(),
-                                                  },
-                                                  children: [
-                                                    // Main Headers
-                                                    TableRow(
-                                                        children: [
-                                                      // headerCell('Header1', isHeader: true),
-                                                      // TableCell(
-                                                      //     child: Container(
-                                                      //   decoration: BoxDecoration(
-                                                      //     border: Border.all(
-                                                      //         color: Colors.transparent,
-                                                      //         width: 1), // Custom border color for header cells
-                                                      //   ),
-                                                      // )), // Empty container to maintain the structure
-                                                      // headerCell('Header2', isHeader: true),
-                                                      // TableCell(
-                                                      //     child: Container(
-                                                      //   decoration: BoxDecoration(
-                                                      //     border: Border.all(
-                                                      //         color: Colors.transparent,
-                                                      //         width: 1), // Custom border color for header cells
-                                                      //   ),
-                                                      // )), // Empty container to maintain the structure
-                                                    ]..addAll(controller
-                                                              .headerList
-                                                              .map((e) {
-                                                            return e['isShow'] ==
-                                                                    true
-                                                                ? headerCell(
-                                                                    e['label'])
-                                                                : TableCell(
-                                                                    child:
-                                                                        Container(
-                                                                    decoration:
-                                                                        BoxDecoration(
-                                                                      border: Border.all(
-                                                                          color: Colors
-                                                                              .transparent,
-                                                                          width:
-                                                                              1), // Custom border color for header cells
-                                                                    ),
-                                                                  ));
-                                                          }))),
-                                                    // Sub-Headers
-                                                    TableRow(
-                                                        children: [
-                                                      // headerCell('SubHeader1.1'),
-                                                      // headerCell('SubHeader1.2'),
-                                                      // headerCell('SubHeader2.1'),
-                                                      // headerCell('SubHeader2.2'),
-                                                    ]..addAll(controller
-                                                              .headerList
-                                                              .map((e) {
-                                                            return headerCell(
-                                                                e['subHeader']);
-                                                          }))),
-                                                    // Data Rows
-                                                    ...List<TableRow>.generate(
-                                                        controller.waterDataList
-                                                                    .length >
-                                                                0
-                                                            ? controller
-                                                                    .waterDataList[
-                                                                        0]
-                                                                    .periods
-                                                                    ?.length ??
-                                                                0
-                                                            : 0,
-                                                        (index) => TableRow(
-                                                                children: [
-                                                              // dataCell('1'),
-                                                              // dataCell('1'),
-                                                              // dataCell('1'),
-                                                              // dataCell('1'),
-                                                            ]..addAll(controller
-                                                                      .headerList
-                                                                      .map((e) {
-                                                                    if (e['dataKey'] ==
-                                                                        'Month') {
-                                                                      return dataCell(
-                                                                          '${controller.waterDataList[0].periods[index].monthName}');
-                                                                    }
-                                                                    DetailData? data = controller
-                                                                        .waterDataList[
-                                                                            0]
-                                                                        .periods[
-                                                                            index]
-                                                                        .details
-                                                                        .firstWhereOrNull((element) =>
-                                                                            element.waterType ==
-                                                                            e['label']);
-                                                                    if (data ==
-                                                                        null) {
-                                                                      return dataCell(
-                                                                          '');
-                                                                    }
-                                                                    return dataCell(
-                                                                        _CellData(
-                                                                            data,
-                                                                            e['dataKey']));
-                                                                  })))),
-                                                  ],
+                                                Padding(
+                                                  padding: EdgeInsets.only(
+                                                    top: 20,
+                                                    right: 5,
+                                                  ),
+                                                  child: ActionButton(
+                                                    icon: Icons.minimize_sharp,
+                                                    label: "Consumption",
+                                                    onPressed: () {
+                                                      Get.dialog(MinusDialog());
+                                                    },
+                                                    color:
+                                                        ColorValues.appRedColor,
+                                                  ),
+                                                )
+                                              ],
+                                            ),
+                                            Divider(
+                                              color:
+                                                  ColorValues.greyLightColour,
+                                            ),
+                                            Container(
+                                              color: Color.fromARGB(
+                                                  255, 245, 248, 250),
+                                              width: Get.width,
+                                              height: Get.height,
+                                              child: Padding(
+                                                padding:
+                                                    const EdgeInsets.all(16),
+                                                child: SingleChildScrollView(
+                                                  child: Table(
+                                                    border: TableBorder.all(
+                                                        color: Colors.grey,
+                                                        width:
+                                                            1), // Default border color for the table
+                                                    columnWidths: const <int,
+                                                        TableColumnWidth>{
+                                                      0: FlexColumnWidth(),
+                                                      1: FlexColumnWidth(),
+                                                      2: FlexColumnWidth(),
+                                                      3: FlexColumnWidth(),
+                                                    },
+                                                    children: [
+                                                      // Main Headers
+                                                      TableRow(
+                                                          children: [
+                                                        // headerCell('Header1', isHeader: true),
+                                                        // TableCell(
+                                                        //     child: Container(
+                                                        //   decoration: BoxDecoration(
+                                                        //     border: Border.all(
+                                                        //         color: Colors.transparent,
+                                                        //         width: 1), // Custom border color for header cells
+                                                        //   ),
+                                                        // )), // Empty container to maintain the structure
+                                                        // headerCell('Header2', isHeader: true),
+                                                        // TableCell(
+                                                        //     child: Container(
+                                                        //   decoration: BoxDecoration(
+                                                        //     border: Border.all(
+                                                        //         color: Colors.transparent,
+                                                        //         width: 1), // Custom border color for header cells
+                                                        //   ),
+                                                        // )), // Empty container to maintain the structure
+                                                      ]..addAll(controller
+                                                                .headerList
+                                                                .map((e) {
+                                                              return e['isShow'] ==
+                                                                      true
+                                                                  ? headerCell(e[
+                                                                      'label'])
+                                                                  : TableCell(
+                                                                      child:
+                                                                          Container(
+                                                                      decoration:
+                                                                          BoxDecoration(
+                                                                        border: Border.all(
+                                                                            color:
+                                                                                Colors.transparent,
+                                                                            width: 1), // Custom border color for header cells
+                                                                      ),
+                                                                    ));
+                                                            }))),
+                                                      // Sub-Headers
+                                                      TableRow(
+                                                          children: [
+                                                        // headerCell('SubHeader1.1'),
+                                                        // headerCell('SubHeader1.2'),
+                                                        // headerCell('SubHeader2.1'),
+                                                        // headerCell('SubHeader2.2'),
+                                                      ]..addAll(controller
+                                                                .headerList
+                                                                .map((e) {
+                                                              return headerCell(
+                                                                  e['subHeader']);
+                                                            }))),
+                                                      // Data Rows
+                                                      ...List<
+                                                              TableRow>.generate(
+                                                          controller.waterDataList
+                                                                      .length >
+                                                                  0
+                                                              ? controller
+                                                                      .waterDataList[
+                                                                          0]
+                                                                      .periods
+                                                                      ?.length ??
+                                                                  0
+                                                              : 0,
+                                                          (index) => TableRow(
+                                                                  children: [
+                                                                // dataCell('1'),
+                                                                // dataCell('1'),
+                                                                // dataCell('1'),
+                                                                // dataCell('1'),
+                                                              ]..addAll(controller
+                                                                        .headerList
+                                                                        .map(
+                                                                            (e) {
+                                                                      if (e['dataKey'] ==
+                                                                          'Month') {
+                                                                        return dataCell(
+                                                                            '${controller.waterDataList[0].periods[index].monthName}');
+                                                                      }
+                                                                      DetailData? data = controller
+                                                                          .waterDataList[
+                                                                              0]
+                                                                          .periods[
+                                                                              index]
+                                                                          .details
+                                                                          .firstWhereOrNull((element) =>
+                                                                              element.waterType ==
+                                                                              e['label']);
+                                                                      if (data ==
+                                                                          null) {
+                                                                        return dataCell(
+                                                                            '');
+                                                                      }
+                                                                      return dataCell(_CellData(
+                                                                          data,
+                                                                          e['dataKey']));
+                                                                    })))),
+                                                    ],
+                                                  ),
                                                 ),
                                               ),
                                             ),
-                                          ),
-                                        ],
+                                          ],
+                                        ),
                                       ),
-                                    ),
-                                  ],
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    if (controller.openFromDateToStartDatePicker)
-                      Positioned(
-                        right: 120,
-                        top: 100,
-                        child: DatePickerWidget(
-                          minDate: DateTime(DateTime.now().year),
-                          maxDate: DateTime(DateTime.now().year, 13,
-                              0), // last date of this year
-                          controller: DateRangePickerController(),
-                          selectionChanges: (p0) {
-                            print('po valu ${p0.value.toString()}');
-                            controller.waterDateTc.text =
-                                DateFormat('yyyy-MM-dd').format(p0.value);
-                            controller.openFromDateToStartDatePicker =
-                                !controller.openFromDateToStartDatePicker;
-                            controller.update(['stock_Mangement_Date']);
-                          },
+                          ],
                         ),
                       ),
-                  ],
-                ),
-              ],
+                      if (controller.openFromDateToStartDatePicker)
+                        Positioned(
+                          right: 120,
+                          top: 100,
+                          child: DatePickerWidget(
+                            minDate: DateTime(DateTime.now().year),
+                            maxDate: DateTime(DateTime.now().year, 13,
+                                0), // last date of this year
+                            controller: DateRangePickerController(),
+                            selectionChanges: (p0) {
+                              print('po valu ${p0.value.toString()}');
+                              controller.waterDateTc.text =
+                                  DateFormat('yyyy-MM-dd').format(p0.value);
+                              controller.openFromDateToStartDatePicker =
+                                  !controller.openFromDateToStartDatePicker;
+                              controller.update(['stock_Mangement_Date']);
+                            },
+                          ),
+                        ),
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
         );
