@@ -1,7 +1,9 @@
 import 'package:cmms/app/app.dart';
+import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/tool_type/tool_type_controller.dart';
+import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:cmms/app/widgets/dropdown_web.dart';
@@ -75,22 +77,30 @@ class ToolTypeWeb extends GetView<ToolTypeController> {
                   ],
                 ),
               ),
-              Padding(
-                padding: EdgeInsets.only(left: 10, top: 10),
-                child: ElevatedButton(
-                  style: Styles.navyBlueElevatedButtonStyle,
-                  onPressed: () {
-                    controller.toggleContainer();
-                  },
-                  child: Obx(() {
-                    return Text(
-                      controller.isContainerVisible.value
-                          ? 'Close Create Tool Type'
-                          : 'Open Create Tool Type',
-                    );
-                  }),
-                ),
-              ),
+              varUserAccessModel.value.access_list!
+                          .where((e) =>
+                              e.feature_id ==
+                                  UserAccessConstants.kMasterFeatureId &&
+                              e.add == UserAccessConstants.kHaveAddAccess)
+                          .length >
+                      0
+                  ? Padding(
+                      padding: EdgeInsets.only(left: 10, top: 10),
+                      child: ElevatedButton(
+                        style: Styles.navyBlueElevatedButtonStyle,
+                        onPressed: () {
+                          controller.toggleContainer();
+                        },
+                        child: Obx(() {
+                          return Text(
+                            controller.isContainerVisible.value
+                                ? 'Close Create Tool Type'
+                                : 'Open Create Tool Type',
+                          );
+                        }),
+                      ),
+                    )
+                  : Dimens.box0,
               Expanded(
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -476,6 +486,8 @@ class ToolTypeWeb extends GetView<ToolTypeController> {
                                             ColorValues.appRedColor,
                                         onPressed: () {
                                           controller.cleardata();
+                                          controller.isContainerVisible.value =
+                                              false;
                                         },
                                         text: 'Cancel'),
                                   ),
@@ -683,83 +695,106 @@ class ToolTypeWeb extends GetView<ToolTypeController> {
                                                     "${controller.toolsRequiredToWorkTypeList![index]?.workTypeName}")),
                                                 DataCell(Row(
                                                   children: [
-                                                    TableActionButton(
-                                                      color:
-                                                          ColorValues.editColor,
-                                                      icon: Icons.edit,
-                                                      message: 'Edit',
-                                                      onPress: () {
-                                                        controller
-                                                                .selectedItem =
-                                                            controller
-                                                                .toolsRequiredToWorkTypeList!
-                                                                .firstWhere(
-                                                          (element) =>
-                                                              "${element!.id}" ==
+                                                    varUserAccessModel.value
+                                                                .access_list!
+                                                                .where((e) =>
+                                                                    e.feature_id ==
+                                                                        UserAccessConstants
+                                                                            .kMasterFeatureId &&
+                                                                    e.edit ==
+                                                                        UserAccessConstants
+                                                                            .kHaveEditAccess)
+                                                                .length >
+                                                            0
+                                                        ? TableActionButton(
+                                                            color: ColorValues
+                                                                .editColor,
+                                                            icon: Icons.edit,
+                                                            message: 'Edit',
+                                                            onPress: () {
                                                               controller
-                                                                  .toolsRequiredToWorkTypeList![
-                                                                      index]!
-                                                                  .id
-                                                                  .toString(),
-                                                        );
+                                                                      .selectedItem =
+                                                                  controller
+                                                                      .toolsRequiredToWorkTypeList!
+                                                                      .firstWhere(
+                                                                (element) =>
+                                                                    "${element!.id}" ==
+                                                                    controller
+                                                                        .toolsRequiredToWorkTypeList![
+                                                                            index]!
+                                                                        .id
+                                                                        .toString(),
+                                                              );
 
-                                                        controller.titleCtrlr
-                                                            .text = controller
-                                                                .selectedItem
-                                                                ?.linkedToolName ??
-                                                            '';
-                                                        controller.assetc
-                                                            .value = controller
-                                                                .selectedItem
-                                                                ?.workTypeName ??
-                                                            '';
-                                                        controller
-                                                            .selectedassetcategory
-                                                            .value = controller
-                                                                .selectedItem
-                                                                ?.Equipment_name ??
-                                                            '';
-                                                        controller
-                                                                .selectedEquipmentId =
-                                                            controller
-                                                                    .selectedItem
-                                                                    ?.equipmentCategoryId ??
-                                                                0;
-                                                        controller
-                                                                .selectedWorkTypeId =
-                                                            controller
-                                                                    .selectedItem
-                                                                    ?.WorkTypeId ??
-                                                                0;
-                                                        if (controller
-                                                                .selectedEquipmentId >
-                                                            0) {
-                                                          controller
-                                                              .getWorkTypeList();
-                                                        }
-                                                        controller
-                                                            .isContainerVisible
-                                                            .value = true;
-                                                      },
-                                                    ),
-                                                    TableActionButton(
-                                                      color: ColorValues
-                                                          .deleteColor,
-                                                      icon: Icons.delete,
-                                                      message: 'Delete',
-                                                      onPress: () {
-                                                        controller.isDeleteDialog(
-                                                            worktype_id: controller
-                                                                .toolsRequiredToWorkTypeList![
-                                                                    index]!
-                                                                .id
-                                                                .toString(),
-                                                            worktype: controller
-                                                                .toolsRequiredToWorkTypeList![
-                                                                    index]!
-                                                                .linkedToolName);
-                                                      },
-                                                    ),
+                                                              controller
+                                                                  .titleCtrlr
+                                                                  .text = controller
+                                                                      .selectedItem
+                                                                      ?.linkedToolName ??
+                                                                  '';
+                                                              controller.assetc
+                                                                  .value = controller
+                                                                      .selectedItem
+                                                                      ?.workTypeName ??
+                                                                  '';
+                                                              controller
+                                                                  .selectedassetcategory
+                                                                  .value = controller
+                                                                      .selectedItem
+                                                                      ?.Equipment_name ??
+                                                                  '';
+                                                              controller
+                                                                  .selectedEquipmentId = controller
+                                                                      .selectedItem
+                                                                      ?.equipmentCategoryId ??
+                                                                  0;
+                                                              controller
+                                                                  .selectedWorkTypeId = controller
+                                                                      .selectedItem
+                                                                      ?.WorkTypeId ??
+                                                                  0;
+                                                              if (controller
+                                                                      .selectedEquipmentId >
+                                                                  0) {
+                                                                controller
+                                                                    .getWorkTypeList();
+                                                              }
+                                                              controller
+                                                                  .isContainerVisible
+                                                                  .value = true;
+                                                            },
+                                                          )
+                                                        : Dimens.box0,
+                                                    varUserAccessModel.value
+                                                                .access_list!
+                                                                .where((e) =>
+                                                                    e.feature_id ==
+                                                                        UserAccessConstants
+                                                                            .kMasterFeatureId &&
+                                                                    e.delete ==
+                                                                        UserAccessConstants
+                                                                            .kHaveDeleteAccess)
+                                                                .length >
+                                                            0
+                                                        ? TableActionButton(
+                                                            color: ColorValues
+                                                                .deleteColor,
+                                                            icon: Icons.delete,
+                                                            message: 'Delete',
+                                                            onPress: () {
+                                                              controller.isDeleteDialog(
+                                                                  worktype_id: controller
+                                                                      .toolsRequiredToWorkTypeList![
+                                                                          index]!
+                                                                      .id
+                                                                      .toString(),
+                                                                  worktype: controller
+                                                                      .toolsRequiredToWorkTypeList![
+                                                                          index]!
+                                                                      .linkedToolName);
+                                                            },
+                                                          )
+                                                        : Dimens.box0
                                                   ],
                                                 )),
                                               ]),

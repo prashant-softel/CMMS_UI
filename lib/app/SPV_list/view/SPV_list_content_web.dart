@@ -1,7 +1,9 @@
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/SPV_list/SPV_list_controller.dart';
+import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
+import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -74,22 +76,30 @@ class SPVListContentWeb extends GetView<SPVListController> {
                   ],
                 ),
               ),
-              Padding(
-                padding: EdgeInsets.only(left: 10, top: 10),
-                child: ElevatedButton(
-                  style: Styles.navyBlueElevatedButtonStyle,
-                  onPressed: () {
-                    controller.toggleContainer();
-                  },
-                  child: Obx(() {
-                    return Text(
-                      controller.isContainerVisible.value
-                          ? 'Close Create SPV'
-                          : 'Open Create SPV',
-                    );
-                  }),
-                ),
-              ),
+              varUserAccessModel.value.access_list!
+                          .where((e) =>
+                              e.feature_id ==
+                                  UserAccessConstants.kMasterFeatureId &&
+                              e.add == UserAccessConstants.kHaveAddAccess)
+                          .length >
+                      0
+                  ? Padding(
+                      padding: EdgeInsets.only(left: 10, top: 10),
+                      child: ElevatedButton(
+                        style: Styles.navyBlueElevatedButtonStyle,
+                        onPressed: () {
+                          controller.toggleContainer();
+                        },
+                        child: Obx(() {
+                          return Text(
+                            controller.isContainerVisible.value
+                                ? 'Close Create SPV'
+                                : 'Open Create SPV',
+                          );
+                        }),
+                      ),
+                    )
+                  : Dimens.box0,
               Expanded(
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -438,6 +448,8 @@ class SPVListContentWeb extends GetView<SPVListController> {
                                             ColorValues.appRedColor,
                                         onPressed: () {
                                           controller.cleardata();
+                                          controller.isContainerVisible.value =
+                                              false;
                                         },
                                         text: 'Cancel'),
                                   ),
@@ -573,115 +585,160 @@ class SPVListContentWeb extends GetView<SPVListController> {
                                 height: 20,
                               ),
                               controller.SPVList.isEmpty == true &&
-                                    controller.isLoading == false
-                                ? Center(child: Text("No Data"))
-                                : controller.isLoading.value == true
-                                    ? Center(child: Text("Data Loading......"))
-                              :Expanded(
-                                child: Obx(
-                                  () => DataTable2(
-                                    key: UniqueKey(),
-                                    dataRowHeight: 50,
-                                    columnSpacing: 10,
-                                    border: TableBorder.all(
-                                        color:
-                                            Color.fromARGB(255, 206, 229, 234)),
-                                    columns: [
-                                      DataColumn2(
-                                          fixedWidth: 100,
-                                          label: Text(
-                                            "Sr No",
-                                            style: TextStyle(
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.bold),
-                                          )),
-                                      DataColumn2(
-                                          // fixedWidth: 150,
-                                          label: Text(
-                                        "SPV Name",
-                                        style: TextStyle(
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.bold),
-                                      )),
-                                      DataColumn2(
-                                          // fixedWidth: 300,
-                                          label: Text(
-                                        "Description",
-                                        style: TextStyle(
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.bold),
-                                      )),
-                                      DataColumn2(
-                                          fixedWidth: 100,
-                                          label: Text(
-                                            'Action',
-                                            style: TextStyle(
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.bold),
-                                          )),
-                                    ],
-                                    rows: List<DataRow>.generate(
-                                      controller.SPVList.length ?? 0,
-                                      (index) => DataRow(cells: [
-                                        DataCell(Text((index + 1).toString())),
-                                        DataCell(Text(controller
-                                                .SPVList[index].name
-                                                .toString() ??
-                                            '')),
-                                        DataCell(Text(controller
-                                                .SPVList[index].description ??
-                                            '')),
-                                        DataCell(Row(
-                                          children: [
-                                            TableActionButton(
-                                              color: ColorValues.editColor,
-                                              icon: Icons.edit,
-                                              message: 'Edit',
-                                              onPress: () {
-                                                controller.selectedItem =
-                                                    controller.SPVList
-                                                        .firstWhere(
-                                                  (element) =>
-                                                      "${element.id}" ==
-                                                      controller
-                                                          .SPVList[index].id
-                                                          .toString(),
-                                                );
+                                      controller.isLoading == false
+                                  ? Center(child: Text("No Data"))
+                                  : controller.isLoading.value == true
+                                      ? Center(
+                                          child: Text("Data Loading......"))
+                                      : Expanded(
+                                          child: Obx(
+                                            () => DataTable2(
+                                              key: UniqueKey(),
+                                              dataRowHeight: 50,
+                                              columnSpacing: 10,
+                                              border: TableBorder.all(
+                                                  color: Color.fromARGB(
+                                                      255, 206, 229, 234)),
+                                              columns: [
+                                                DataColumn2(
+                                                    fixedWidth: 100,
+                                                    label: Text(
+                                                      "Sr No",
+                                                      style: TextStyle(
+                                                          fontSize: 15,
+                                                          fontWeight:
+                                                              FontWeight.bold),
+                                                    )),
+                                                DataColumn2(
+                                                    // fixedWidth: 150,
+                                                    label: Text(
+                                                  "SPV Name",
+                                                  style: TextStyle(
+                                                      fontSize: 15,
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                )),
+                                                DataColumn2(
+                                                    // fixedWidth: 300,
+                                                    label: Text(
+                                                  "Description",
+                                                  style: TextStyle(
+                                                      fontSize: 15,
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                )),
+                                                DataColumn2(
+                                                    fixedWidth: 100,
+                                                    label: Text(
+                                                      'Action',
+                                                      style: TextStyle(
+                                                          fontSize: 15,
+                                                          fontWeight:
+                                                              FontWeight.bold),
+                                                    )),
+                                              ],
+                                              rows: List<DataRow>.generate(
+                                                controller.SPVList.length ?? 0,
+                                                (index) => DataRow(cells: [
+                                                  DataCell(Text(
+                                                      (index + 1).toString())),
+                                                  DataCell(Text(controller
+                                                          .SPVList[index].name
+                                                          .toString() ??
+                                                      '')),
+                                                  DataCell(Text(controller
+                                                          .SPVList[index]
+                                                          .description ??
+                                                      '')),
+                                                  DataCell(Row(
+                                                    children: [
+                                                      varUserAccessModel.value
+                                                                  .access_list!
+                                                                  .where((e) =>
+                                                                      e.feature_id ==
+                                                                          UserAccessConstants
+                                                                              .kMasterFeatureId &&
+                                                                      e.edit ==
+                                                                          UserAccessConstants
+                                                                              .kHaveEditAccess)
+                                                                  .length >
+                                                              0
+                                                          ? TableActionButton(
+                                                              color: ColorValues
+                                                                  .editColor,
+                                                              icon: Icons.edit,
+                                                              message: 'Edit',
+                                                              onPress: () {
+                                                                controller
+                                                                    .selectedItem = controller
+                                                                        .SPVList
+                                                                    .firstWhere(
+                                                                  (element) =>
+                                                                      "${element.id}" ==
+                                                                      controller
+                                                                          .SPVList[
+                                                                              index]
+                                                                          .id
+                                                                          .toString(),
+                                                                );
 
-                                                controller.titleCtrlr.text =
-                                                    controller.selectedItem
-                                                            ?.name ??
-                                                        '';
-                                                controller.descriptionCtrlr
-                                                    .text = controller
-                                                        .selectedItem
-                                                        ?.description ??
-                                                    '';
+                                                                controller
+                                                                    .titleCtrlr
+                                                                    .text = controller
+                                                                        .selectedItem
+                                                                        ?.name ??
+                                                                    '';
+                                                                controller
+                                                                    .descriptionCtrlr
+                                                                    .text = controller
+                                                                        .selectedItem
+                                                                        ?.description ??
+                                                                    '';
 
-                                                controller.isContainerVisible
-                                                    .value = true;
-                                              },
+                                                                controller
+                                                                    .isContainerVisible
+                                                                    .value = true;
+                                                              },
+                                                            )
+                                                          : Dimens.box0,
+                                                      varUserAccessModel.value
+                                                                  .access_list!
+                                                                  .where((e) =>
+                                                                      e.feature_id ==
+                                                                          UserAccessConstants
+                                                                              .kMasterFeatureId &&
+                                                                      e.delete ==
+                                                                          UserAccessConstants
+                                                                              .kHaveDeleteAccess)
+                                                                  .length >
+                                                              0
+                                                          ? TableActionButton(
+                                                              color: ColorValues
+                                                                  .deleteColor,
+                                                              icon:
+                                                                  Icons.delete,
+                                                              message: 'Delete',
+                                                              onPress: () {
+                                                                controller.isDeleteDialog(
+                                                                    business_id: controller
+                                                                        .SPVList[
+                                                                            index]
+                                                                        .id
+                                                                        .toString(),
+                                                                    business: controller
+                                                                        .SPVList[
+                                                                            index]
+                                                                        .name);
+                                                              },
+                                                            )
+                                                          : Dimens.box0
+                                                    ],
+                                                  )),
+                                                ]),
+                                              ),
                                             ),
-                                            TableActionButton(
-                                              color: ColorValues.deleteColor,
-                                              icon: Icons.delete,
-                                              message: 'Delete',
-                                              onPress: () {
-                                                controller.isDeleteDialog(
-                                                    business_id: controller
-                                                        .SPVList[index].id
-                                                        .toString(),
-                                                    business: controller
-                                                        .SPVList[index].name);
-                                              },
-                                            ),
-                                          ],
-                                        )),
-                                      ]),
-                                    ),
-                                  ),
-                                ),
-                              ),
+                                          ),
+                                        ),
                             ],
                           ),
                         ),

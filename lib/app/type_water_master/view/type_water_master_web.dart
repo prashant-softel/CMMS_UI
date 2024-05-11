@@ -1,7 +1,9 @@
 import 'package:cmms/app/app.dart';
+import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/type_water_master/type_water_master_controller.dart';
+import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:data_table_2/data_table_2.dart';
@@ -73,22 +75,30 @@ class WaterTypeMasterWeb extends GetView<WaterTypeMasterController> {
                   ],
                 ),
               ),
-              Padding(
-                padding: EdgeInsets.only(left: 10, top: 10),
-                child: ElevatedButton(
-                  style: Styles.navyBlueElevatedButtonStyle,
-                  onPressed: () {
-                    controller.toggleContainer();
-                  },
-                  child: Obx(() {
-                    return Text(
-                      controller.isContainerVisible.value
-                          ? 'Close Create Water Type'
-                          : 'Open Create Water Type',
-                    );
-                  }),
-                ),
-              ),
+              varUserAccessModel.value.access_list!
+                          .where((e) =>
+                              e.feature_id ==
+                                  UserAccessConstants.kMasterFeatureId &&
+                              e.add == UserAccessConstants.kHaveAddAccess)
+                          .length >
+                      0
+                  ? Padding(
+                      padding: EdgeInsets.only(left: 10, top: 10),
+                      child: ElevatedButton(
+                        style: Styles.navyBlueElevatedButtonStyle,
+                        onPressed: () {
+                          controller.toggleContainer();
+                        },
+                        child: Obx(() {
+                          return Text(
+                            controller.isContainerVisible.value
+                                ? 'Close Create Water Type'
+                                : 'Open Create Water Type',
+                          );
+                        }),
+                      ),
+                    )
+                  : Dimens.box0,
               Expanded(
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -423,6 +433,8 @@ class WaterTypeMasterWeb extends GetView<WaterTypeMasterController> {
                                             ColorValues.appRedColor,
                                         onPressed: () {
                                           controller.cleardata();
+                                          controller.isContainerVisible.value =
+                                              false;
                                         },
                                         text: 'Cancel'),
                                   ),
@@ -653,44 +665,72 @@ class WaterTypeMasterWeb extends GetView<WaterTypeMasterController> {
                                                     DataCell(
                                                       Row(
                                                         children: [
-                                                          TableActionButton(
-                                                            color: ColorValues
-                                                                .editColor,
-                                                            icon: Icons.edit,
-                                                            message: 'Edit',
-                                                            onPress: () {
-                                                              int? waterTypeId =
-                                                                  controller
-                                                                      .waterTypeMasterList?[
-                                                                          index]!
-                                                                      .id;
-                                                              controller.getWaterTypeById(
-                                                                  waterTypeId:
-                                                                      waterTypeId);
-                                                              controller
-                                                                  .isContainerVisible
-                                                                  .value = true;
-                                                            },
-                                                          ),
-                                                          TableActionButton(
-                                                            color: ColorValues
-                                                                .deleteColor,
-                                                            icon: Icons.delete,
-                                                            message: 'Delete',
-                                                            onPress: () {
-                                                              controller
-                                                                  .isDeleteDialog(
-                                                                waterTypeId: controller
-                                                                    .waterTypeMasterList?[
-                                                                        index]!
-                                                                    .id,
-                                                                name: controller
-                                                                    .waterTypeMasterList?[
-                                                                        index]!
-                                                                    .name,
-                                                              );
-                                                            },
-                                                          ),
+                                                          varUserAccessModel
+                                                                      .value
+                                                                      .access_list!
+                                                                      .where((e) =>
+                                                                          e.feature_id ==
+                                                                              UserAccessConstants
+                                                                                  .kMasterFeatureId &&
+                                                                          e.edit ==
+                                                                              UserAccessConstants.kHaveEditAccess)
+                                                                      .length >
+                                                                  0
+                                                              ? TableActionButton(
+                                                                  color: ColorValues
+                                                                      .editColor,
+                                                                  icon: Icons
+                                                                      .edit,
+                                                                  message:
+                                                                      'Edit',
+                                                                  onPress: () {
+                                                                    int?
+                                                                        waterTypeId =
+                                                                        controller
+                                                                            .waterTypeMasterList?[index]!
+                                                                            .id;
+                                                                    controller.getWaterTypeById(
+                                                                        waterTypeId:
+                                                                            waterTypeId);
+                                                                    controller
+                                                                        .isContainerVisible
+                                                                        .value = true;
+                                                                  },
+                                                                )
+                                                              : Dimens.box0,
+                                                          varUserAccessModel
+                                                                      .value
+                                                                      .access_list!
+                                                                      .where((e) =>
+                                                                          e.feature_id ==
+                                                                              UserAccessConstants
+                                                                                  .kMasterFeatureId &&
+                                                                          e.delete ==
+                                                                              UserAccessConstants.kHaveDeleteAccess)
+                                                                      .length >
+                                                                  0
+                                                              ? TableActionButton(
+                                                                  color: ColorValues
+                                                                      .deleteColor,
+                                                                  icon: Icons
+                                                                      .delete,
+                                                                  message:
+                                                                      'Delete',
+                                                                  onPress: () {
+                                                                    controller
+                                                                        .isDeleteDialog(
+                                                                      waterTypeId: controller
+                                                                          .waterTypeMasterList?[
+                                                                              index]!
+                                                                          .id,
+                                                                      name: controller
+                                                                          .waterTypeMasterList?[
+                                                                              index]!
+                                                                          .name,
+                                                                    );
+                                                                  },
+                                                                )
+                                                              : Dimens.box0
                                                         ],
                                                       ),
                                                     ),

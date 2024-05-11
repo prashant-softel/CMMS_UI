@@ -1,7 +1,9 @@
 import 'package:cmms/app/app.dart';
+import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/module_List/module_list_controller.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
+import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/app/widgets/custom_swich_toggle.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
@@ -75,22 +77,30 @@ class ModuleListContentWeb extends GetView<ModuleListController> {
                   ],
                 ),
               ),
-              Padding(
-                padding: EdgeInsets.only(left: 10, top: 10),
-                child: ElevatedButton(
-                  style: Styles.navyBlueElevatedButtonStyle,
-                  onPressed: () {
-                    controller.toggleContainer();
-                  },
-                  child: Obx(() {
-                    return Text(
-                      controller.isContainerVisible.value
-                          ? 'Close Create Modulelist'
-                          : 'Open Create Modulelist',
-                    );
-                  }),
-                ),
-              ),
+              varUserAccessModel.value.access_list!
+                          .where((e) =>
+                              e.feature_id ==
+                                  UserAccessConstants.kMasterFeatureId &&
+                              e.add == UserAccessConstants.kHaveAddAccess)
+                          .length >
+                      0
+                  ? Padding(
+                      padding: EdgeInsets.only(left: 10, top: 10),
+                      child: ElevatedButton(
+                        style: Styles.navyBlueElevatedButtonStyle,
+                        onPressed: () {
+                          controller.toggleContainer();
+                        },
+                        child: Obx(() {
+                          return Text(
+                            controller.isContainerVisible.value
+                                ? 'Close Create Modulelist'
+                                : 'Open Create Modulelist',
+                          );
+                        }),
+                      ),
+                    )
+                  : Dimens.box0,
               Expanded(
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -638,6 +648,8 @@ class ModuleListContentWeb extends GetView<ModuleListController> {
                                             ColorValues.appRedColor,
                                         onPressed: () {
                                           controller.cleardata();
+                                          controller.isContainerVisible.value =
+                                              false;
                                         },
                                         text: 'Cancel'),
                                   ),
@@ -921,127 +933,155 @@ class ModuleListContentWeb extends GetView<ModuleListController> {
                                                     "")),
                                                 DataCell(Row(
                                                   children: [
-                                                    TableActionButton(
-                                                        color: ColorValues
-                                                            .editColor,
-                                                        icon: Icons.edit,
-                                                        message: 'Edit',
-                                                        onPress: () {
-                                                          controller.selectedItem = controller
-                                                              .moduleList
-                                                              .firstWhere((element) =>
-                                                                  "${element.id}" ==
-                                                                  controller
+                                                    varUserAccessModel.value
+                                                                .access_list!
+                                                                .where((e) =>
+                                                                    e.feature_id ==
+                                                                        UserAccessConstants
+                                                                            .kMasterFeatureId &&
+                                                                    e.edit ==
+                                                                        UserAccessConstants
+                                                                            .kHaveEditAccess)
+                                                                .length >
+                                                            0
+                                                        ? TableActionButton(
+                                                            color: ColorValues
+                                                                .editColor,
+                                                            icon: Icons.edit,
+                                                            message: 'Edit',
+                                                            onPress: () {
+                                                              controller.selectedItem = controller
+                                                                  .moduleList
+                                                                  .firstWhere((element) =>
+                                                                      "${element.id}" ==
+                                                                      controller
+                                                                          .moduleList[
+                                                                              index]
+                                                                          .id
+                                                                          .toString());
+
+                                                              controller
+                                                                  .featureCtrlr
+                                                                  .text = controller
+                                                                      .selectedItem
+                                                                      ?.featureName ??
+                                                                  '';
+                                                              controller
+                                                                  .modulelistNumberCtrlr
+                                                                  .text = controller
+                                                                      .selectedItem
+                                                                      ?.name ??
+                                                                  '';
+                                                              controller
+                                                                  .isToggleOn
+                                                                  .value = controller
+                                                                          .selectedItem
+                                                                          ?.add ==
+                                                                      1
+                                                                  ? true
+                                                                  : false;
+                                                              controller
+                                                                  .isToggle1On
+                                                                  .value = controller
+                                                                          .selectedItem
+                                                                          ?.edit ==
+                                                                      1
+                                                                  ? true
+                                                                  : false;
+                                                              controller
+                                                                  .isToggle2On
+                                                                  .value = controller
+                                                                          .selectedItem
+                                                                          ?.delete ==
+                                                                      1
+                                                                  ? true
+                                                                  : false;
+                                                              controller
+                                                                  .isToggle3On
+                                                                  .value = controller
+                                                                          .selectedItem
+                                                                          ?.view ==
+                                                                      1
+                                                                  ? true
+                                                                  : false;
+                                                              controller
+                                                                  .isToggle4On
+                                                                  .value = controller
+                                                                          .selectedItem
+                                                                          ?.approve ==
+                                                                      1
+                                                                  ? true
+                                                                  : false;
+                                                              controller
+                                                                  .isToggle5On
+                                                                  .value = controller
+                                                                          .selectedItem
+                                                                          ?.issue ==
+                                                                      1
+                                                                  ? true
+                                                                  : false;
+                                                              controller
+                                                                  .isToggle6On
+                                                                  .value = controller
+                                                                          .selectedItem
+                                                                          ?.selfView ==
+                                                                      1
+                                                                  ? true
+                                                                  : false;
+                                                              controller
+                                                                  .isContainerVisible
+                                                                  .value = true;
+                                                              // int spvId = int.tryParse(
+                                                              //         moduleList?.name ??
+                                                              //             "") ??
+                                                              //     0;
+                                                              // if (spvId != 0) {
+                                                              //   Get.toNamed(
+                                                              //       Routes.moduleListScreen,
+                                                              //       arguments: {"spvId": spvId});
+                                                              // }
+                                                              // controller.selectedItem =
+                                                              //     controller.moduleList.firstWhere(
+                                                              //         (element) =>
+                                                              //             "${element.id}" ==
+                                                              //             _permitTypeList[0]);
+                                                              // controller.selectedItem =
+                                                              //     controller.moduleList.firstWhere(
+                                                              //         (element) =>
+                                                              //             "${element.id}" ==
+                                                              //             _permitTypeList[0]);
+                                                            })
+                                                        : Dimens.box0,
+                                                    varUserAccessModel.value
+                                                                .access_list!
+                                                                .where((e) =>
+                                                                    e.feature_id ==
+                                                                        UserAccessConstants
+                                                                            .kMasterFeatureId &&
+                                                                    e.delete ==
+                                                                        UserAccessConstants
+                                                                            .kHaveDeleteAccess)
+                                                                .length >
+                                                            0
+                                                        ? TableActionButton(
+                                                            color: ColorValues
+                                                                .deleteColor,
+                                                            icon: Icons.delete,
+                                                            message: 'Delete',
+                                                            onPress: () {
+                                                              controller.isDeleteDialog(
+                                                                  module_id: controller
                                                                       .moduleList[
                                                                           index]
                                                                       .id
-                                                                      .toString());
-
-                                                          controller
-                                                              .featureCtrlr
-                                                              .text = controller
-                                                                  .selectedItem
-                                                                  ?.featureName ??
-                                                              '';
-                                                          controller
-                                                              .modulelistNumberCtrlr
-                                                              .text = controller
-                                                                  .selectedItem
-                                                                  ?.name ??
-                                                              '';
-                                                          controller.isToggleOn
-                                                              .value = controller
-                                                                      .selectedItem
-                                                                      ?.add ==
-                                                                  1
-                                                              ? true
-                                                              : false;
-                                                          controller.isToggle1On
-                                                              .value = controller
-                                                                      .selectedItem
-                                                                      ?.edit ==
-                                                                  1
-                                                              ? true
-                                                              : false;
-                                                          controller.isToggle2On
-                                                              .value = controller
-                                                                      .selectedItem
-                                                                      ?.delete ==
-                                                                  1
-                                                              ? true
-                                                              : false;
-                                                          controller.isToggle3On
-                                                              .value = controller
-                                                                      .selectedItem
-                                                                      ?.view ==
-                                                                  1
-                                                              ? true
-                                                              : false;
-                                                          controller.isToggle4On
-                                                              .value = controller
-                                                                      .selectedItem
-                                                                      ?.approve ==
-                                                                  1
-                                                              ? true
-                                                              : false;
-                                                          controller.isToggle5On
-                                                              .value = controller
-                                                                      .selectedItem
-                                                                      ?.issue ==
-                                                                  1
-                                                              ? true
-                                                              : false;
-                                                          controller.isToggle6On
-                                                              .value = controller
-                                                                      .selectedItem
-                                                                      ?.selfView ==
-                                                                  1
-                                                              ? true
-                                                              : false;
-                                                          controller
-                                                              .isContainerVisible
-                                                              .value = true;
-                                                          // int spvId = int.tryParse(
-                                                          //         moduleList?.name ??
-                                                          //             "") ??
-                                                          //     0;
-                                                          // if (spvId != 0) {
-                                                          //   Get.toNamed(
-                                                          //       Routes.moduleListScreen,
-                                                          //       arguments: {"spvId": spvId});
-                                                          // }
-                                                          // controller.selectedItem =
-                                                          //     controller.moduleList.firstWhere(
-                                                          //         (element) =>
-                                                          //             "${element.id}" ==
-                                                          //             _permitTypeList[0]);
-                                                          // controller.selectedItem =
-                                                          //     controller.moduleList.firstWhere(
-                                                          //         (element) =>
-                                                          //             "${element.id}" ==
-                                                          //             _permitTypeList[0]);
-                                                        })
-                                                    // : Container(),
-                                                    ,
-                                                    TableActionButton(
-                                                      color: ColorValues
-                                                          .deleteColor,
-                                                      icon: Icons.delete,
-                                                      message: 'Delete',
-                                                      onPress: () {
-                                                        controller.isDeleteDialog(
-                                                            module_id:
-                                                                controller
-                                                                    .moduleList[
-                                                                        index]
-                                                                    .id
-                                                                    .toString(),
-                                                            module: controller
-                                                                .moduleList[
-                                                                    index]
-                                                                .name);
-                                                      },
-                                                    ),
+                                                                      .toString(),
+                                                                  module: controller
+                                                                      .moduleList[
+                                                                          index]
+                                                                      .name);
+                                                            },
+                                                          )
+                                                        : Dimens.box0
                                                   ],
                                                 )),
                                               ]),

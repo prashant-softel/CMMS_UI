@@ -43,7 +43,7 @@ class UserListModel {
         full_name: json['full_name'],
         contact_no: json['contact_no'],
         role_name: json['role_name'],
-        created_at: json['CreatedAt'],
+        created_at: json['createdAt'],
         updated_at: json['updatedAt'],
         name: json['user_name'],
         photoId: json['photoId'],

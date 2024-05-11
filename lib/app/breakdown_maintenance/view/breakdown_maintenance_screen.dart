@@ -325,34 +325,38 @@ class BreakdownMaintenanceScreen
                                         controller.gotToSafetyQuestionsList();
                                       })
                                   : Dimens.box0,
-                              // varUserAccessModel.value.access_list!
-                              //             .where((e) =>
-                              //                 e.feature_id == 5 &&
-                              //                     e.view == 1 ||
-                              //                 e.add == 1)
-                              //             .length >
-                              //         0
-                              //     ?
-                              createContentTile(
-                                  title: "JOB Type",
-                                  onTap: () {
-                                    controller.goToJobTypeList();
-                                  }),
-                              // : Dimens.box0,
-                              // varUserAccessModel.value.access_list!
-                              //             .where((e) =>
-                              //                 e.feature_id == 5 &&
-                              //                     e.view == 1 ||
-                              //                 e.add == 1)
-                              //             .length >
-                              //         0
-                              //     ?
-                              createContentTile(
-                                  title: "TBT SOP List",
-                                  onTap: () {
-                                    controller.goToJobSOPList();
-                                  })
-                              // : Dimens.box0
+                              varUserAccessModel.value.access_list!
+                                          .where((e) =>
+                                              e.feature_id ==
+                                                  UserAccessConstants
+                                                      .kMasterFeatureId &&
+                                              e.view ==
+                                                  UserAccessConstants
+                                                      .kHaveViewAccess)
+                                          .length >
+                                      0
+                                  ? createContentTile(
+                                      title: "JOB Type",
+                                      onTap: () {
+                                        controller.goToJobTypeList();
+                                      })
+                                  : Dimens.box0,
+                              varUserAccessModel.value.access_list!
+                                          .where((e) =>
+                                              e.feature_id ==
+                                                  UserAccessConstants
+                                                      .kMasterFeatureId &&
+                                              e.view ==
+                                                  UserAccessConstants
+                                                      .kHaveViewAccess)
+                                          .length >
+                                      0
+                                  ? createContentTile(
+                                      title: "TBT SOP List",
+                                      onTap: () {
+                                        controller.goToJobSOPList();
+                                      })
+                                  : Dimens.box0
                             ],
                           ),
                           GridView.count(
@@ -367,51 +371,38 @@ class BreakdownMaintenanceScreen
                                 ? (itemWidth / itemHeight)
                                 : 5,
                             children: <Widget>[
-                              // OnHover(builder: (((isHovered) {
-                              //   return
-                              //  varUserAccessModel.value.access_list!
-                              //             .where((e) =>
-                              //                 e.feature_id == 5 && e.add == 0)
-                              //             .length >
-                              //         0
-                              //     ?
-                              createContentTile(
-                                  title: "Fault",
-                                  onTap: () {
-                                    controller.goToWorkTypeList();
-                                  }),
-                              // }))),
-                              // OnHover(builder: (((isHovered) {
-                              //   return
-                              //  varUserAccessModel.value.access_list!
-                              //             .where((e) =>
-                              //                 e.feature_id == 5 && e.add == 0)
-                              //             .length >
-                              //         0
-                              //     ?
-                              createContentTile(
-                                  title: "Tool Type",
-                                  onTap: () {
-                                    controller.goToToolTypeList();
-                                  }),
-
-                              // : Dimens.box0;
-                              // }))),
-                              // OnHover(builder: (((isHovered) {
-                              //   return
-                              //       // varUserAccessModel.value.access_list!
-                              //       //             .where((e) =>
-                              //       //                 e.feature_id == 5 && e.add == 0)
-                              //       //             .length >
-                              //       //         0
-                              //       //     ?
-                              //       createContentTile(
-                              //           title: "Body Injured",
-                              //           onTap: () {
-                              // controller.goToBodyinjured();
-                              //           });
-                              //   // : Dimens.box0;
-                              // }))),
+                              varUserAccessModel.value.access_list!
+                                          .where((e) =>
+                                              e.feature_id ==
+                                                  UserAccessConstants
+                                                      .kMasterFeatureId &&
+                                              e.view ==
+                                                  UserAccessConstants
+                                                      .kHaveViewAccess)
+                                          .length >
+                                      0
+                                  ? createContentTile(
+                                      title: "Fault",
+                                      onTap: () {
+                                        controller.goToWorkTypeList();
+                                      })
+                                  : Dimens.box0,
+                              varUserAccessModel.value.access_list!
+                                          .where((e) =>
+                                              e.feature_id ==
+                                                  UserAccessConstants
+                                                      .kMasterFeatureId &&
+                                              e.view ==
+                                                  UserAccessConstants
+                                                      .kHaveViewAccess)
+                                          .length >
+                                      0
+                                  ? createContentTile(
+                                      title: "Tool Type",
+                                      onTap: () {
+                                        controller.goToToolTypeList();
+                                      })
+                                  : Dimens.box0,
                             ],
                           ),
                         ]),

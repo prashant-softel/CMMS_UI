@@ -1,7 +1,9 @@
 import 'package:cmms/app/app.dart';
+import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/designation_List/designation_list_controller.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
+import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -73,22 +75,30 @@ class DesignationListContentWeb extends GetView<DesignationListController> {
                   ],
                 ),
               ),
-              Padding(
-                padding: EdgeInsets.only(left: 10, top: 10),
-                child: ElevatedButton(
-                  style: Styles.navyBlueElevatedButtonStyle,
-                  onPressed: () {
-                    controller.toggleContainer();
-                  },
-                  child: Obx(() {
-                    return Text(
-                      controller.isContainerVisible.value
-                          ? 'Close Create Designation'
-                          : 'Open Create Designation',
-                    );
-                  }),
-                ),
-              ),
+              varUserAccessModel.value.access_list!
+                          .where((e) =>
+                              e.feature_id ==
+                                  UserAccessConstants.kMasterFeatureId &&
+                              e.add == UserAccessConstants.kHaveAddAccess)
+                          .length >
+                      0
+                  ? Padding(
+                      padding: EdgeInsets.only(left: 10, top: 10),
+                      child: ElevatedButton(
+                        style: Styles.navyBlueElevatedButtonStyle,
+                        onPressed: () {
+                          controller.toggleContainer();
+                        },
+                        child: Obx(() {
+                          return Text(
+                            controller.isContainerVisible.value
+                                ? 'Close Create Designation'
+                                : 'Open Create Designation',
+                          );
+                        }),
+                      ),
+                    )
+                  : Dimens.box0,
               Expanded(
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -426,6 +436,8 @@ class DesignationListContentWeb extends GetView<DesignationListController> {
                                             ColorValues.appRedColor,
                                         onPressed: () {
                                           controller.cleardata();
+                                          controller.isContainerVisible.value =
+                                              false;
                                         },
                                         text: 'Cancel'),
                                   ),
@@ -545,136 +557,174 @@ class DesignationListContentWeb extends GetView<DesignationListController> {
                                 height: 20,
                               ),
                               controller.designationList!.isEmpty == true &&
-                                    controller.isLoading == false
-                                ? Center(child: Text("No Data"))
-                                : controller.isLoading.value == true
-                                    ? Center(child: Text("Data Loading......"))
-                              : Expanded(
-                                child: DataTable2(
-                                    key: UniqueKey(),
-                                    dataRowHeight: 50,
-                                    columnSpacing: 10,
-                                    border: TableBorder.all(
-                                        color:
-                                            Color.fromARGB(255, 206, 229, 234)),
-                                    columns: [
-                                      DataColumn2(
-                                          fixedWidth: 100,
-                                          label: Text(
-                                            "Sr No",
-                                            style: TextStyle(
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.bold),
-                                          )),
-                                      DataColumn2(
-                                          // fixedWidth: 150,
-                                          label: Text(
-                                        "Name",
-                                        style: TextStyle(
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.bold),
-                                      )),
-                                      DataColumn2(
-                                          // fixedWidth: 150,
-                                          label: Text(
-                                        "Designation Description",
-                                        style: TextStyle(
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.bold),
-                                      )),
-                                      DataColumn2(
-                                          fixedWidth: 100,
-                                          label: Text(
-                                            'Action',
-                                            style: TextStyle(
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.bold),
-                                          )),
-                                    ],
-                                    rows: List<DataRow>.generate(
-                                      controller.designationList?.length ?? 0,
-                                      (index) => DataRow(cells: [
-                                        DataCell(Text((index + 1).toString())),
-                                        DataCell(Text(controller
-                                                .designationList?[index]?.name
-                                                .toString() ??
-                                            '')),
-                                        DataCell(Text(controller
-                                                .designationList?[index]
-                                                ?.description ??
-                                            '')),
-                                        DataCell(Row(
-                                          children: [
-                                            TableActionButton(
-                                                color: ColorValues.editColor,
-                                                icon: Icons.edit,
-                                                message: 'Edit',
-                                                onPress: () {
-                                                  controller.selectedItem = controller
-                                                      .designationList
-                                                      ?.firstWhere((element) =>
-                                                          "${element?.id}" ==
-                                                          controller
-                                                              .designationList?[
-                                                                  index]
-                                                              ?.id
-                                                              .toString());
+                                      controller.isLoading == false
+                                  ? Center(child: Text("No Data"))
+                                  : controller.isLoading.value == true
+                                      ? Center(
+                                          child: Text("Data Loading......"))
+                                      : Expanded(
+                                          child: DataTable2(
+                                            key: UniqueKey(),
+                                            dataRowHeight: 50,
+                                            columnSpacing: 10,
+                                            border: TableBorder.all(
+                                                color: Color.fromARGB(
+                                                    255, 206, 229, 234)),
+                                            columns: [
+                                              DataColumn2(
+                                                  fixedWidth: 100,
+                                                  label: Text(
+                                                    "Sr No",
+                                                    style: TextStyle(
+                                                        fontSize: 15,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  )),
+                                              DataColumn2(
+                                                  // fixedWidth: 150,
+                                                  label: Text(
+                                                "Name",
+                                                style: TextStyle(
+                                                    fontSize: 15,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              )),
+                                              DataColumn2(
+                                                  // fixedWidth: 150,
+                                                  label: Text(
+                                                "Description",
+                                                style: TextStyle(
+                                                    fontSize: 15,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              )),
+                                              DataColumn2(
+                                                  fixedWidth: 100,
+                                                  label: Text(
+                                                    'Action',
+                                                    style: TextStyle(
+                                                        fontSize: 15,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  )),
+                                            ],
+                                            rows: List<DataRow>.generate(
+                                              controller.designationList
+                                                      ?.length ??
+                                                  0,
+                                              (index) => DataRow(cells: [
+                                                DataCell(Text(
+                                                    (index + 1).toString())),
+                                                DataCell(Text(controller
+                                                        .designationList?[index]
+                                                        ?.name
+                                                        .toString() ??
+                                                    '')),
+                                                DataCell(Text(controller
+                                                        .designationList?[index]
+                                                        ?.description ??
+                                                    '')),
+                                                DataCell(Row(
+                                                  children: [
+                                                    varUserAccessModel.value
+                                                                .access_list!
+                                                                .where((e) =>
+                                                                    e.feature_id ==
+                                                                        UserAccessConstants
+                                                                            .kMasterFeatureId &&
+                                                                    e.edit ==
+                                                                        UserAccessConstants
+                                                                            .kHaveEditAccess)
+                                                                .length >
+                                                            0
+                                                        ? TableActionButton(
+                                                            color: ColorValues
+                                                                .editColor,
+                                                            icon: Icons.edit,
+                                                            message: 'Edit',
+                                                            onPress: () {
+                                                              controller.selectedItem = controller
+                                                                  .designationList
+                                                                  ?.firstWhere((element) =>
+                                                                      "${element?.id}" ==
+                                                                      controller
+                                                                          .designationList?[
+                                                                              index]
+                                                                          ?.id
+                                                                          .toString());
 
-                                                  controller.nameCtrlr.text =
-                                                      controller.selectedItem
-                                                              ?.name ??
-                                                          '';
-                                                  controller.descriptionCtrlr
-                                                      .text = controller
-                                                          .selectedItem
-                                                          ?.description ??
-                                                      '';
-                                                  controller.isContainerVisible
-                                                      .value = true;
-                                                  // int spvId = int.tryParse(
-                                                  //         designationList?.name ??
-                                                  //             "") ??
-                                                  //     0;
-                                                  // if (spvId != 0) {
-                                                  //   Get.toNamed(
-                                                  //       Routes.designationListScreen,
-                                                  //       arguments: {"spvId": spvId});
-                                                  // }
-                                                  // controller.selectedItem =
-                                                  //     controller.designationList.firstWhere(
-                                                  //         (element) =>
-                                                  //             "${element.id}" ==
-                                                  //             _permitTypeList[0]);
-                                                  // controller.selectedItem =
-                                                  //     controller.designationList.firstWhere(
-                                                  //         (element) =>
-                                                  //             "${element.id}" ==
-                                                  //             _permitTypeList[0]);
-                                                })
-                                            // : Container(),
-                                            ,
-                                            TableActionButton(
-                                              color: ColorValues.deleteColor,
-                                              icon: Icons.delete,
-                                              message: 'Delete',
-                                              onPress: () {
-                                                controller.isDeleteDialog(
-                                                    module_id: controller
-                                                        .designationList?[index]
-                                                        ?.id
-                                                        .toString(),
-                                                    module: controller
-                                                        .designationList?[index]
-                                                        ?.name);
-                                              },
+                                                              controller
+                                                                  .nameCtrlr
+                                                                  .text = controller
+                                                                      .selectedItem
+                                                                      ?.name ??
+                                                                  '';
+                                                              controller
+                                                                  .descriptionCtrlr
+                                                                  .text = controller
+                                                                      .selectedItem
+                                                                      ?.description ??
+                                                                  '';
+                                                              controller
+                                                                  .isContainerVisible
+                                                                  .value = true;
+                                                              // int spvId = int.tryParse(
+                                                              //         designationList?.name ??
+                                                              //             "") ??
+                                                              //     0;
+                                                              // if (spvId != 0) {
+                                                              //   Get.toNamed(
+                                                              //       Routes.designationListScreen,
+                                                              //       arguments: {"spvId": spvId});
+                                                              // }
+                                                              // controller.selectedItem =
+                                                              //     controller.designationList.firstWhere(
+                                                              //         (element) =>
+                                                              //             "${element.id}" ==
+                                                              //             _permitTypeList[0]);
+                                                              // controller.selectedItem =
+                                                              //     controller.designationList.firstWhere(
+                                                              //         (element) =>
+                                                              //             "${element.id}" ==
+                                                              //             _permitTypeList[0]);
+                                                            })
+                                                        : Dimens.box0,
+                                                    varUserAccessModel.value
+                                                                .access_list!
+                                                                .where((e) =>
+                                                                    e.feature_id ==
+                                                                        UserAccessConstants
+                                                                            .kMasterFeatureId &&
+                                                                    e.delete ==
+                                                                        UserAccessConstants
+                                                                            .kHaveDeleteAccess)
+                                                                .length >
+                                                            0
+                                                        ? TableActionButton(
+                                                            color: ColorValues
+                                                                .deleteColor,
+                                                            icon: Icons.delete,
+                                                            message: 'Delete',
+                                                            onPress: () {
+                                                              controller.isDeleteDialog(
+                                                                  module_id: controller
+                                                                      .designationList?[
+                                                                          index]
+                                                                      ?.id
+                                                                      .toString(),
+                                                                  module: controller
+                                                                      .designationList?[
+                                                                          index]
+                                                                      ?.name);
+                                                            },
+                                                          )
+                                                        : Dimens.box0
+                                                  ],
+                                                )),
+                                              ]),
                                             ),
-                                          ],
-                                        )),
-                                      ]),
-                                    ),
-                                  
-                                ),
-                              ),
+                                          ),
+                                        ),
                             ],
                           ),
                         ),

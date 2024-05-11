@@ -1,7 +1,9 @@
 import 'package:cmms/app/app.dart';
+import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/facility_type_list/facility_type_list_controller.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
+import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/app/widgets/dropdown_web.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
@@ -69,22 +71,30 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                   ],
                 ),
               ),
-              Padding(
-                padding: EdgeInsets.only(left: 10, top: 10),
-                child: ElevatedButton(
-                  style: Styles.navyBlueElevatedButtonStyle,
-                  onPressed: () {
-                    controller.toggleContainer();
-                  },
-                  child: Obx(() {
-                    return Text(
-                      controller.isContainerVisible.value
-                          ? 'Close Create Facility'
-                          : 'Open Create Facility',
-                    );
-                  }),
-                ),
-              ),
+              varUserAccessModel.value.access_list!
+                          .where((e) =>
+                              e.feature_id ==
+                                  UserAccessConstants.kMasterFeatureId &&
+                              e.add == UserAccessConstants.kHaveAddAccess)
+                          .length >
+                      0
+                  ? Padding(
+                      padding: EdgeInsets.only(left: 10, top: 10),
+                      child: ElevatedButton(
+                        style: Styles.navyBlueElevatedButtonStyle,
+                        onPressed: () {
+                          controller.toggleContainer();
+                        },
+                        child: Obx(() {
+                          return Text(
+                            controller.isContainerVisible.value
+                                ? 'Close Create Facility'
+                                : 'Open Create Facility',
+                          );
+                        }),
+                      ),
+                    )
+                  : Dimens.box0,
               Expanded(
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -1282,6 +1292,8 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                                 ColorValues.appRedColor,
                                             onPressed: () {
                                               controller.cleardata();
+                                              controller.isContainerVisible
+                                                  .value = false;
                                             },
                                             text: 'Cancel')),
                                     SizedBox(
@@ -1552,169 +1564,191 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                                     '')),
                                                 DataCell(Row(
                                                   children: [
-                                                    TableActionButton(
-                                                        color: ColorValues
-                                                            .editColor,
-                                                        icon: Icons.edit,
-                                                        message: 'Edit',
-                                                        onPress: () {
-                                                          controller.selectedItem = controller
-                                                              .facilityTypeList
-                                                              .firstWhere((element) =>
-                                                                  "${element.id}" ==
-                                                                  controller
-                                                                      .facilityTypeList[
-                                                                          index]
-                                                                      .id
-                                                                      .toString());
+                                                    varUserAccessModel.value
+                                                                .access_list!
+                                                                .where((e) =>
+                                                                    e.feature_id ==
+                                                                        UserAccessConstants
+                                                                            .kMasterFeatureId &&
+                                                                    e.edit ==
+                                                                        UserAccessConstants
+                                                                            .kHaveEditAccess)
+                                                                .length >
+                                                            0
+                                                        ? TableActionButton(
+                                                            color: ColorValues
+                                                                .editColor,
+                                                            icon: Icons.edit,
+                                                            message: 'Edit',
+                                                            onPress: () {
+                                                              controller.selectedItem = controller
+                                                                  .facilityTypeList
+                                                                  .firstWhere((element) =>
+                                                                      "${element.id}" ==
+                                                                      controller
+                                                                          .facilityTypeList[
+                                                                              index]
+                                                                          .id
+                                                                          .toString());
 
-                                                          controller.titleCtrlr
-                                                              .text = controller
-                                                                  .selectedItem
-                                                                  ?.name ??
-                                                              '';
-                                                          controller
-                                                              .descriptionCtrlr
-                                                              .text = controller
-                                                                  .selectedItem
-                                                                  ?.description ??
-                                                              '';
-                                                          controller
-                                                              .addressCtrlr
-                                                              .text = controller
-                                                                  .selectedItem
-                                                                  ?.address ??
-                                                              '';
-                                                          controller
-                                                              .zipcodeCtrlr
-                                                              .text = controller
-                                                                  .selectedItem
-                                                                  ?.pin
-                                                                  .toString() ??
-                                                              '';
-
-                                                          controller.selectedSpv
-                                                              .value = controller
-                                                                  .selectedItem
-                                                                  ?.spv ??
-                                                              '';
-                                                          controller
-                                                              .selectedOwner
-                                                              .value = controller
-                                                                  .selectedItem
-                                                                  ?.owner ??
-                                                              '';
-                                                          controller
-                                                              .selectedOperator
-                                                              .value = controller
-                                                                  .selectedItem
-                                                                  ?.customer ??
-                                                              '';
-                                                          controller
-                                                              .selectedCustomer
-                                                              .value = controller
-                                                                  .selectedItem
-                                                                  ?.operator ??
-                                                              '';
-                                                          controller
-                                                              .selectedCity
-                                                              .value = controller
-                                                                  .selectedItem
-                                                                  ?.city ??
-                                                              '';
-                                                          controller
-                                                              .selectedState
-                                                              .value = controller
-                                                                  .selectedItem
-                                                                  ?.state ??
-                                                              '';
-                                                          controller
-                                                                  .selectedStateId =
                                                               controller
+                                                                  .titleCtrlr
+                                                                  .text = controller
+                                                                      .selectedItem
+                                                                      ?.name ??
+                                                                  '';
+                                                              controller
+                                                                  .descriptionCtrlr
+                                                                  .text = controller
+                                                                      .selectedItem
+                                                                      ?.description ??
+                                                                  '';
+                                                              controller
+                                                                  .addressCtrlr
+                                                                  .text = controller
+                                                                      .selectedItem
+                                                                      ?.address ??
+                                                                  '';
+                                                              controller
+                                                                  .zipcodeCtrlr
+                                                                  .text = controller
+                                                                      .selectedItem
+                                                                      ?.pin
+                                                                      .toString() ??
+                                                                  '';
+
+                                                              controller
+                                                                  .selectedSpv
+                                                                  .value = controller
+                                                                      .selectedItem
+                                                                      ?.spv ??
+                                                                  '';
+                                                              controller
+                                                                  .selectedOwner
+                                                                  .value = controller
+                                                                      .selectedItem
+                                                                      ?.owner ??
+                                                                  '';
+                                                              controller
+                                                                  .selectedOperator
+                                                                  .value = controller
+                                                                      .selectedItem
+                                                                      ?.customer ??
+                                                                  '';
+                                                              controller
+                                                                  .selectedCustomer
+                                                                  .value = controller
+                                                                      .selectedItem
+                                                                      ?.operator ??
+                                                                  '';
+                                                              controller
+                                                                  .selectedCity
+                                                                  .value = controller
+                                                                      .selectedItem
+                                                                      ?.city ??
+                                                                  '';
+                                                              controller
+                                                                  .selectedState
+                                                                  .value = controller
+                                                                      .selectedItem
+                                                                      ?.state ??
+                                                                  '';
+                                                              controller
+                                                                  .selectedStateId = controller
                                                                       .selectedItem
                                                                       ?.stateid ??
                                                                   0;
-                                                          if (controller
-                                                                  .selectedStateId >
-                                                              0) {
-                                                            controller.getCityList(
-                                                                controller
-                                                                    .selectedStateId);
-                                                          }
-                                                          controller
-                                                              .selectedCountry
-                                                              .value = controller
-                                                                  .selectedItem
-                                                                  ?.country ??
-                                                              '';
-                                                          controller
-                                                              .selectedCountryId = controller
-                                                                  .selectedItem
-                                                                  ?.countryid ??
-                                                              0;
-                                                          if (controller
-                                                                  .selectedCountryId >
-                                                              0) {
-                                                            controller.getStateList(
-                                                                controller
-                                                                    .selectedCountryId);
-                                                          }
-                                                          controller
-                                                                  .selectedCityId =
+                                                              if (controller
+                                                                      .selectedStateId >
+                                                                  0) {
+                                                                controller.getCityList(
+                                                                    controller
+                                                                        .selectedStateId);
+                                                              }
                                                               controller
+                                                                  .selectedCountry
+                                                                  .value = controller
+                                                                      .selectedItem
+                                                                      ?.country ??
+                                                                  '';
+                                                              controller
+                                                                  .selectedCountryId = controller
+                                                                      .selectedItem
+                                                                      ?.countryid ??
+                                                                  0;
+                                                              if (controller
+                                                                      .selectedCountryId >
+                                                                  0) {
+                                                                controller.getStateList(
+                                                                    controller
+                                                                        .selectedCountryId);
+                                                              }
+                                                              controller
+                                                                  .selectedCityId = controller
                                                                       .selectedItem
                                                                       ?.cityId ??
                                                                   0;
-                                                          controller
-                                                              .isContainerVisible
-                                                              .value = true;
+                                                              controller
+                                                                  .isContainerVisible
+                                                                  .value = true;
 
-                                                          // controller.descriptionCtrlr
-                                                          //     .text = controller
-                                                          //         .selectedItem
-                                                          //         ?. ??
-                                                          //     '';
+                                                              // controller.descriptionCtrlr
+                                                              //     .text = controller
+                                                              //         .selectedItem
+                                                              //         ?. ??
+                                                              //     '';
 
-                                                          // int spvId = int.tryParse(
-                                                          //         facilityTypeList?.name ??
-                                                          //             "") ??
-                                                          //     0;
-                                                          // if (spvId != 0) {
-                                                          //   Get.toNamed(
-                                                          //       Routes.SPVListScreen,
-                                                          //       arguments: {"spvId": spvId});
-                                                          // }
-                                                          // controller.selectedItem =
-                                                          //     controller.facilityTypeList.firstWhere(
-                                                          //         (element) =>
-                                                          //             "${element.id}" ==
-                                                          //             _permitTypeList[0]);
-                                                          // controller.selectedItem =
-                                                          //     controller.facilityTypeList.firstWhere(
-                                                          //         (element) =>
-                                                          //             "${element.id}" ==
-                                                          //             _permitTypeList[0]);
-                                                        })
-                                                    // : Container(),
-                                                    ,
-                                                    TableActionButton(
-                                                      color: ColorValues
-                                                          .deleteColor,
-                                                      icon: Icons.delete,
-                                                      message: 'Delete',
-                                                      onPress: () {
-                                                        controller.isDeleteDialog(
-                                                            business_id: controller
-                                                                .facilityTypeList[
-                                                                    index]
-                                                                .id
-                                                                .toString(),
-                                                            business: controller
-                                                                .facilityTypeList[
-                                                                    index]
-                                                                .name);
-                                                      },
-                                                    ),
+                                                              // int spvId = int.tryParse(
+                                                              //         facilityTypeList?.name ??
+                                                              //             "") ??
+                                                              //     0;
+                                                              // if (spvId != 0) {
+                                                              //   Get.toNamed(
+                                                              //       Routes.SPVListScreen,
+                                                              //       arguments: {"spvId": spvId});
+                                                              // }
+                                                              // controller.selectedItem =
+                                                              //     controller.facilityTypeList.firstWhere(
+                                                              //         (element) =>
+                                                              //             "${element.id}" ==
+                                                              //             _permitTypeList[0]);
+                                                              // controller.selectedItem =
+                                                              //     controller.facilityTypeList.firstWhere(
+                                                              //         (element) =>
+                                                              //             "${element.id}" ==
+                                                              //             _permitTypeList[0]);
+                                                            })
+                                                        : Dimens.box0,
+                                                    varUserAccessModel.value
+                                                                .access_list!
+                                                                .where((e) =>
+                                                                    e.feature_id ==
+                                                                        UserAccessConstants
+                                                                            .kMasterFeatureId &&
+                                                                    e.delete ==
+                                                                        UserAccessConstants
+                                                                            .kHaveDeleteAccess)
+                                                                .length >
+                                                            0
+                                                        ? TableActionButton(
+                                                            color: ColorValues
+                                                                .deleteColor,
+                                                            icon: Icons.delete,
+                                                            message: 'Delete',
+                                                            onPress: () {
+                                                              controller.isDeleteDialog(
+                                                                  business_id: controller
+                                                                      .facilityTypeList[
+                                                                          index]
+                                                                      .id
+                                                                      .toString(),
+                                                                  business: controller
+                                                                      .facilityTypeList[
+                                                                          index]
+                                                                      .name);
+                                                            },
+                                                          )
+                                                        : Dimens.box0,
                                                   ],
                                                 )),
                                               ]),

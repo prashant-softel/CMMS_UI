@@ -81,7 +81,7 @@ class _WarrantyClaimListWebState extends State<WarrantyClaimListWeb> {
                               child:
                                   Text(" / MASTERS", style: Styles.greyLight14),
                             ),
-                            Text(" / Warranty Claim List",
+                            Text(" / Warranty Claim List".toUpperCase(),
                                 style: Styles.greyLight14)
                           ],
                         ),
