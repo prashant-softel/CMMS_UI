@@ -415,7 +415,7 @@ class UserProfileContentWeb extends GetView<UserProfileController> {
                                                                   color: ColorValues
                                                                       .whiteColor,
                                                                   child: Container(
-                                                                      height: Get.height * 0.5,
+                                                                      height: Get.height,
                                                                       margin: Dimens.edgeInsets15,
                                                                       decoration: BoxDecoration(
                                                                         border:
@@ -439,46 +439,98 @@ class UserProfileContentWeb extends GetView<UserProfileController> {
                                                                         ],
                                                                       ),
                                                                       child: controller.plantListModel.length > 0
-                                                                          ? DataTable2(
-                                                                              dataRowHeight: 40,
-                                                                              columnSpacing: 50,
-                                                                              columns: [
-                                                                                DataColumn2(
-                                                                                    size: ColumnSize.L,
-                                                                                    // fixedWidth: 180,
-                                                                                    // columnWidth: FlexColumnWidth(3),
-                                                                                    label: Text(
-                                                                                      "Plant Name",
-                                                                                      style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
-                                                                                    )),
-                                                                                DataColumn2(
-                                                                                    size: ColumnSize.M,
-                                                                                    // fixedWidth: 100,
-                                                                                    // columnWidth: FlexColumnWidth(3),
-                                                                                    label: Text(
-                                                                                      "SPV",
-                                                                                      style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
-                                                                                    )),
-                                                                                DataColumn2(
+                                                                          ? SizedBox(
+                                                                              height: Get.height * 0.6,
+                                                                              child: DataTable2(
+                                                                                dataRowHeight: 70,
+                                                                                // border: TableBorder.all(
+                                                                                //     color:
+                                                                                //         Colors.black),
+                                                                                columns: [
+                                                                                  DataColumn2(
+                                                                                    label: Text("Facility ID"),
                                                                                     size: ColumnSize.S,
-                                                                                    // fixedWidth: 180,
-                                                                                    // columnWidth: FlexColumnWidth(3),
-                                                                                    label: Text(
-                                                                                      "Location",
-                                                                                      style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
-                                                                                    )),
-                                                                              ].toList(),
-                                                                              rows: controller.plantListModel.map<DataRow>((plants) {
-                                                                                return DataRow(
-                                                                                  cells: [
-                                                                                    DataCell(Text("${plants?.name ?? ""}")),
-                                                                                    DataCell(Text("${plants?.spv ?? ""}")),
-                                                                                    DataCell(Text("----")),
-                                                                                  ],
-                                                                                  // Additional properties can be set for each DataRow if needed
-                                                                                );
-                                                                              }).toList(),
+                                                                                  ),
+                                                                                  DataColumn2(
+                                                                                    label: Text("Facility Name"),
+                                                                                    size: ColumnSize.S,
+                                                                                  ),
+                                                                                  DataColumn2(
+                                                                                    label: Text("Is Employee"),
+                                                                                    size: ColumnSize.S,
+                                                                                  ),
+                                                                                  DataColumn2(
+                                                                                    label: Text("Location"),
+                                                                                    size: ColumnSize.L,
+                                                                                  ),
+                                                                                ],
+                                                                                rows: controller.plantListModel
+                                                                                    .map(
+                                                                                      (facility) => DataRow(
+                                                                                        cells: [
+                                                                                          DataCell(
+                                                                                            Text("${facility?.id}"),
+                                                                                          ),
+                                                                                          DataCell(
+                                                                                            Text("${facility?.name}"),
+                                                                                          ),
+                                                                                          DataCell(
+                                                                                            Checkbox(
+                                                                                              value: facility?.isEmployees,
+                                                                                              onChanged: null,
+                                                                                            ),
+                                                                                          ),
+                                                                                          DataCell(
+                                                                                            Text("${facility?.location}"),
+                                                                                          ),
+                                                                                        ],
+                                                                                      ),
+                                                                                    )
+                                                                                    .toList(),
+                                                                              ),
                                                                             )
+
+                                                                          // DataTable2(
+                                                                          //     dataRowHeight: 40,
+                                                                          //     columnSpacing: 50,
+                                                                          //     columns: [
+                                                                          //       DataColumn2(
+                                                                          //           size: ColumnSize.L,
+                                                                          //           // fixedWidth: 180,
+                                                                          //           // columnWidth: FlexColumnWidth(3),
+                                                                          //           label: Text(
+                                                                          //             "Plant Name",
+                                                                          //             style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                                                                          //           )),
+                                                                          //       DataColumn2(
+                                                                          //           size: ColumnSize.M,
+                                                                          //           // fixedWidth: 100,
+                                                                          //           // columnWidth: FlexColumnWidth(3),
+                                                                          //           label: Text(
+                                                                          //             "SPV",
+                                                                          //             style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                                                                          //           )),
+                                                                          //       DataColumn2(
+                                                                          //           size: ColumnSize.S,
+                                                                          //           // fixedWidth: 180,
+                                                                          //           // columnWidth: FlexColumnWidth(3),
+                                                                          //           label: Text(
+                                                                          //             "Location",
+                                                                          //             style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                                                                          //           )),
+                                                                          //     ].toList(),
+                                                                          //     rows: controller.plantListModel.map<DataRow>((plants) {
+                                                                          //       return DataRow(
+                                                                          //         cells: [
+                                                                          //           DataCell(Text("${plants?.name ?? ""}")),
+                                                                          //           DataCell(Text("${plants?.spv ?? ""}")),
+                                                                          //           DataCell(Text("${plants?.location ?? ""}")),
+                                                                          //         ],
+                                                                          //         // Additional properties can be set for each DataRow if needed
+                                                                          //       );
+                                                                          //     }).toList(),
+                                                                          //   )
+
                                                                           : Container())),
                                                             ],
                                                           ),
@@ -578,7 +630,7 @@ class UserProfileContentWeb extends GetView<UserProfileController> {
                                                                             15,
                                                                       ),
                                                                     )),
-                                                                     DataColumn2(
+                                                                    DataColumn2(
                                                                         // fixedWidth: 75,
                                                                         label:
                                                                             Text(
@@ -612,7 +664,6 @@ class UserProfileContentWeb extends GetView<UserProfileController> {
                                                                         ),
                                                                       ),
                                                                     ),
-                                                                   
                                                                   ],
                                                                   rows: controller
                                                                       .accessList
@@ -634,7 +685,7 @@ class UserProfileContentWeb extends GetView<UserProfileController> {
                                                                         DataCell(_rowItem(getAccesslevelDetails
                                                                             ?.view
                                                                             .value)),
-                                                                            DataCell(_rowItem(getAccesslevelDetails
+                                                                        DataCell(_rowItem(getAccesslevelDetails
                                                                             ?.selfView
                                                                             .value)),
                                                                         DataCell(_rowItem(getAccesslevelDetails
@@ -643,7 +694,6 @@ class UserProfileContentWeb extends GetView<UserProfileController> {
                                                                         DataCell(_rowItem(getAccesslevelDetails
                                                                             ?.approve
                                                                             .value)),
-                                                                        
                                                                       ],
                                                                     );
                                                                   }).toList(),

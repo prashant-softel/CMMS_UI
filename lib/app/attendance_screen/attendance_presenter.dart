@@ -5,13 +5,11 @@ class AttendancePresenter {
   AttendancePresenter(this.attendanceUsecase);
   AttendanceUsecase attendanceUsecase;
 
-  Future<List<EmployeeModel?>?> getAssignedToList({
-    String? auth,
+  Future<List<EmployeeModel>?>? getEmployeeListByFacilityId({
     int? facilityId,
     bool? isLoading,
   }) async =>
-      await attendanceUsecase.getAssignedToList(
-        auth: auth ?? "",
+      await attendanceUsecase.getEmployeeListByFacilityId(
         facilityId: facilityId,
         isLoading: isLoading,
       );

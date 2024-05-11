@@ -100,7 +100,7 @@ class AddUserController extends GetxController {
   var gender = 'Select Gender'.obs;
   AccessLevel? selectedItem;
   Rx<UserDetailsModel?> userDetailModel = UserDetailsModel().obs;
-  RxList<FacilityModel?> plantListModel = <FacilityModel?>[].obs;
+  RxList<PlantAccess?> plantListModel = <PlantAccess?>[].obs;
   // RxList<Responsibility?> responsibilitymodel = <Responsibility>[].obs;
   var loginIdCtrlr = TextEditingController();
   FocusNode loginIdFocus = FocusNode();
@@ -375,11 +375,12 @@ class AddUserController extends GetxController {
       selectedBusinessTypeId = userDetailModel.value?.company_id ?? 0;
       plantListModel.value = _userDetailModel.plant_list ?? [];
       responsList.value = _userDetailModel.responsibility ?? [];
-      filteredfacilityNameList.value = _userDetailModel.plant_list!
-          .map((e) => FacilityModel(
+      isEmployeeFacilityList.value = _userDetailModel.plant_list!
+          .map((e) => IsEmployeeFacilityModel(
                 id: e.id ?? 0,
                 name: e.name ?? "",
-                spv: e.spv ?? "",
+                address: e.location ?? "",
+                isEmployee: e.isEmployees,
               ))
           .toList();
       selectedfacilityNameIdList.value =
@@ -514,21 +515,20 @@ class AddUserController extends GetxController {
     switch (list.runtimeType) {
       case RxList<CountryModel>:
         {
-         if (value != "Please Select") {
-           int countryIndex = countryList.indexWhere((x) => x?.name == value);
-          selectedCountryId = countryList[countryIndex]?.id ?? 0;
-          cityList.clear();
-          stateList.clear();
-          selectedCity.value = "Please Select";
-          selectedCityId = 0;
-          selectedState.value = "Please Select";
-          selectedStateId = 0;
+          if (value != "Please Select") {
+            int countryIndex = countryList.indexWhere((x) => x?.name == value);
+            selectedCountryId = countryList[countryIndex]?.id ?? 0;
+            cityList.clear();
+            stateList.clear();
+            selectedCity.value = "Please Select";
+            selectedCityId = 0;
+            selectedState.value = "Please Select";
+            selectedStateId = 0;
 
-          getStateList(selectedCountryId);
-           
-         }else{
-          selectedCountryId=0;
-         }
+            getStateList(selectedCountryId);
+          } else {
+            selectedCountryId = 0;
+          }
         }
 
         break;

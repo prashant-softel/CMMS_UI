@@ -52,7 +52,7 @@ class AttendanceController extends GetxController {
   }
 
   Future<void> getEmployeeList(int facilityId) async {
-    final _employeeList = await attendancePresenter.getAssignedToList(
+    final _employeeList = await attendancePresenter.getEmployeeListByFacilityId(
       facilityId: facilityId,
     );
     if (_employeeList != null) {

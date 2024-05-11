@@ -3332,6 +3332,32 @@ class Repository {
     }
   }
 
+  Future<List<EmployeeModel>?>? getEmployeeListByFacilityId({
+    required int? facility_id,
+    bool? isLoading,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+
+      log(auth);
+      final res = await _dataRepository.getEmployeeListByFacilityId(
+        facility_id: facility_id,
+        isLoading: isLoading,
+        auth: auth,
+      );
+      print('Employee List Data: ${res.data}');
+
+      if (!res.hasError) {
+        var employeeList = employeeModelFromJson(res.data);
+        return employeeList;
+      }
+      return [];
+    } catch (error) {
+      log(error.toString());
+      return [];
+    }
+  }
+
   Future<List<EmployeeListModel>> getEmployeePermitList({
     required int? facility_id,
     // int? blockId,
