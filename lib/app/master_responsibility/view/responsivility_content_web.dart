@@ -1,7 +1,9 @@
 import 'package:cmms/app/app.dart';
+import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/master_responsibility/responsivility_controller.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
+import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -74,22 +76,30 @@ class ResponsibilityListContentWeb
                   ],
                 ),
               ),
-              Padding(
-                padding: EdgeInsets.only(left: 10, top: 10),
-                child: ElevatedButton(
-                  style: Styles.navyBlueElevatedButtonStyle,
-                  onPressed: () {
-                    controller.toggleContainer();
-                  },
-                  child: Obx(() {
-                    return Text(
-                      controller.isContainerVisible.value
-                          ? 'Close Create Responsbility'
-                          : 'Open Create Responsbility',
-                    );
-                  }),
-                ),
-              ),
+              varUserAccessModel.value.access_list!
+                          .where((e) =>
+                              e.feature_id ==
+                                  UserAccessConstants.kMasterFeatureId &&
+                              e.add == UserAccessConstants.kHaveAddAccess)
+                          .length >
+                      0
+                  ? Padding(
+                      padding: EdgeInsets.only(left: 10, top: 10),
+                      child: ElevatedButton(
+                        style: Styles.navyBlueElevatedButtonStyle,
+                        onPressed: () {
+                          controller.toggleContainer();
+                        },
+                        child: Obx(() {
+                          return Text(
+                            controller.isContainerVisible.value
+                                ? 'Close Create Responsbility'
+                                : 'Open Create Responsbility',
+                          );
+                        }),
+                      ),
+                    )
+                  : Dimens.box0,
               Expanded(
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -427,6 +437,8 @@ class ResponsibilityListContentWeb
                                             ColorValues.appRedColor,
                                         onPressed: () {
                                           controller.cleardata();
+                                          controller.isContainerVisible.value =
+                                              false;
                                         },
                                         text: 'Cancel'),
                                   ),
@@ -617,76 +629,99 @@ class ResponsibilityListContentWeb
                                                     '')),
                                                 DataCell(Row(
                                                   children: [
-                                                    TableActionButton(
-                                                        color: ColorValues
-                                                            .editColor,
-                                                        icon: Icons.edit,
-                                                        message: 'Edit',
-                                                        onPress: () {
-                                                          controller.selectedItem = controller
-                                                              .responsibilityList
-                                                              ?.firstWhere((element) =>
-                                                                  "${element?.id}" ==
-                                                                  controller
+                                                    varUserAccessModel.value
+                                                                .access_list!
+                                                                .where((e) =>
+                                                                    e.feature_id ==
+                                                                        UserAccessConstants
+                                                                            .kMasterFeatureId &&
+                                                                    e.edit ==
+                                                                        UserAccessConstants
+                                                                            .kHaveEditAccess)
+                                                                .length >
+                                                            0
+                                                        ? TableActionButton(
+                                                            color: ColorValues
+                                                                .editColor,
+                                                            icon: Icons.edit,
+                                                            message: 'Edit',
+                                                            onPress: () {
+                                                              controller.selectedItem = controller
+                                                                  .responsibilityList
+                                                                  ?.firstWhere((element) =>
+                                                                      "${element?.id}" ==
+                                                                      controller
+                                                                          .responsibilityList?[
+                                                                              index]
+                                                                          ?.id
+                                                                          .toString());
+
+                                                              controller
+                                                                  .nameCtrlr
+                                                                  .text = controller
+                                                                      .selectedItem
+                                                                      ?.name ??
+                                                                  '';
+                                                              controller
+                                                                  .descriptionCtrlr
+                                                                  .text = controller
+                                                                      .selectedItem
+                                                                      ?.description ??
+                                                                  '';
+                                                              controller
+                                                                  .isContainerVisible
+                                                                  .value = true;
+                                                              // int spvId = int.tryParse(
+                                                              //        .responsibilityList?.name ??
+                                                              //             "") ??
+                                                              //     0;
+                                                              // if (spvId != 0) {
+                                                              //   Get.toNamed(
+                                                              //       Routes.responsibilityListScreen,
+                                                              //       arguments: {"spvId": spvId});
+                                                              // }
+                                                              // controller.selectedItem =
+                                                              //     controller.responsibilityList.firstWhere(
+                                                              //         (element) =>
+                                                              //             "${element.id}" ==
+                                                              //             _permitTypeList[0]);
+                                                              // controller.selectedItem =
+                                                              //     controller.responsibilityList.firstWhere(
+                                                              //         (element) =>
+                                                              //             "${element.id}" ==
+                                                              //             _permitTypeList[0]);
+                                                            })
+                                                        : Dimens.box0,
+                                                    varUserAccessModel.value
+                                                                .access_list!
+                                                                .where((e) =>
+                                                                    e.feature_id ==
+                                                                        UserAccessConstants
+                                                                            .kMasterFeatureId &&
+                                                                    e.delete ==
+                                                                        UserAccessConstants
+                                                                            .kHaveDeleteAccess)
+                                                                .length >
+                                                            0
+                                                        ? TableActionButton(
+                                                            color: ColorValues
+                                                                .deleteColor,
+                                                            icon: Icons.delete,
+                                                            message: 'Delete',
+                                                            onPress: () {
+                                                              controller.isDeleteDialog(
+                                                                  module_id: controller
                                                                       .responsibilityList?[
                                                                           index]
                                                                       ?.id
-                                                                      .toString());
-
-                                                          controller.nameCtrlr
-                                                              .text = controller
-                                                                  .selectedItem
-                                                                  ?.name ??
-                                                              '';
-                                                          controller
-                                                              .descriptionCtrlr
-                                                              .text = controller
-                                                                  .selectedItem
-                                                                  ?.description ??
-                                                              '';
-                                                          controller
-                                                              .isContainerVisible
-                                                              .value = true;
-                                                          // int spvId = int.tryParse(
-                                                          //        .responsibilityList?.name ??
-                                                          //             "") ??
-                                                          //     0;
-                                                          // if (spvId != 0) {
-                                                          //   Get.toNamed(
-                                                          //       Routes.responsibilityListScreen,
-                                                          //       arguments: {"spvId": spvId});
-                                                          // }
-                                                          // controller.selectedItem =
-                                                          //     controller.responsibilityList.firstWhere(
-                                                          //         (element) =>
-                                                          //             "${element.id}" ==
-                                                          //             _permitTypeList[0]);
-                                                          // controller.selectedItem =
-                                                          //     controller.responsibilityList.firstWhere(
-                                                          //         (element) =>
-                                                          //             "${element.id}" ==
-                                                          //             _permitTypeList[0]);
-                                                        })
-                                                    // : Container(),
-                                                    ,
-                                                    TableActionButton(
-                                                      color: ColorValues
-                                                          .deleteColor,
-                                                      icon: Icons.delete,
-                                                      message: 'Delete',
-                                                      onPress: () {
-                                                        controller.isDeleteDialog(
-                                                            module_id: controller
-                                                                .responsibilityList?[
-                                                                    index]
-                                                                ?.id
-                                                                .toString(),
-                                                            module: controller
-                                                                .responsibilityList?[
-                                                                    index]
-                                                                ?.name);
-                                                      },
-                                                    ),
+                                                                      .toString(),
+                                                                  module: controller
+                                                                      .responsibilityList?[
+                                                                          index]
+                                                                      ?.name);
+                                                            },
+                                                          )
+                                                        : Dimens.box0,
                                                   ],
                                                 )),
                                               ]),

@@ -30,6 +30,10 @@ abstract class UserAccessConstants {
   static int kWarrantyClaimFeatureId = 30;
   static String kFeatureWarrantyClaimName = "Warranty Claim";
 
+  ///WARRANTY CLAIM ACCESS
+  static int kWarrantyClaimcertiFeatureId = 29;
+  static String kFeatureWarrantyClaimcertiName = "Warranty Claim Certificate";
+
   ///INCIDENT REPORT ACCESS
   static int kIncidentReportFeatureId = 34;
   static String kFeatureIncidentReportName = "Incident Report";
@@ -115,6 +119,10 @@ abstract class UserAccessConstants {
   static int kUserFeatureId = 40;
   static String kFeatureUserName = "User Management";
 
+  /// MASTERS
+  static int kMasterFeatureId = 50;
+  static String kFeatureMasterName = "Masters";
+  
   ///USER ACCESS
   static int kHaveAddAccess = 1;
   static int kNotHaveAddAccess = 0;

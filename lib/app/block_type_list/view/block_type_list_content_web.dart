@@ -1,5 +1,6 @@
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/block_type_list/block_type_list_controller.dart';
+import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:data_table_2/data_table_2.dart';
@@ -7,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../../utils/user_access_constants.dart';
 import '../../widgets/custom_elevated_button.dart';
 import '../../widgets/custom_richtext.dart';
 
@@ -74,22 +76,30 @@ class BlockTypeListContentWeb extends GetView<BlockTypeListController> {
                   ],
                 ),
               ),
-              Padding(
-                padding: EdgeInsets.only(left: 10, top: 10),
-                child: ElevatedButton(
-                  style: Styles.navyBlueElevatedButtonStyle,
-                  onPressed: () {
-                    controller.toggleContainer();
-                  },
-                  child: Obx(() {
-                    return Text(
-                      controller.isContainerVisible.value
-                          ? 'Close Create Block'
-                          : 'Open Create Block',
-                    );
-                  }),
-                ),
-              ),
+              varUserAccessModel.value.access_list!
+                          .where((e) =>
+                              e.feature_id ==
+                                  UserAccessConstants.kMasterFeatureId &&
+                              e.add == UserAccessConstants.kHaveAddAccess)
+                          .length >
+                      0
+                  ? Padding(
+                      padding: EdgeInsets.only(left: 10, top: 10),
+                      child: ElevatedButton(
+                        style: Styles.navyBlueElevatedButtonStyle,
+                        onPressed: () {
+                          controller.toggleContainer();
+                        },
+                        child: Obx(() {
+                          return Text(
+                            controller.isContainerVisible.value
+                                ? 'Close Create Block'
+                                : 'Open Create Block',
+                          );
+                        }),
+                      ),
+                    )
+                  : Dimens.box0,
               Expanded(
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -418,6 +428,8 @@ class BlockTypeListContentWeb extends GetView<BlockTypeListController> {
                                             ColorValues.appRedColor,
                                         onPressed: () {
                                           controller.cleardata();
+                                          controller.isContainerVisible.value =
+                                              false;
                                         },
                                         text: 'Cancel'),
                                   ),
@@ -608,75 +620,98 @@ class BlockTypeListContentWeb extends GetView<BlockTypeListController> {
                                                     '')),
                                                 DataCell(Row(
                                                   children: [
-                                                    TableActionButton(
-                                                        color: ColorValues
-                                                            .editColor,
-                                                        icon: Icons.edit,
-                                                        message: 'Edit',
-                                                        onPress: () {
-                                                          controller.selectedItem = controller
-                                                              .blockTypeList
-                                                              .firstWhere((element) =>
-                                                                  "${element.id}" ==
-                                                                  controller
+                                                    varUserAccessModel.value
+                                                                .access_list!
+                                                                .where((e) =>
+                                                                    e.feature_id ==
+                                                                        UserAccessConstants
+                                                                            .kMasterFeatureId &&
+                                                                    e.edit ==
+                                                                        UserAccessConstants
+                                                                            .kHaveEditAccess)
+                                                                .length >
+                                                            0
+                                                        ? TableActionButton(
+                                                            color: ColorValues
+                                                                .editColor,
+                                                            icon: Icons.edit,
+                                                            message: 'Edit',
+                                                            onPress: () {
+                                                              controller.selectedItem = controller
+                                                                  .blockTypeList
+                                                                  .firstWhere((element) =>
+                                                                      "${element.id}" ==
+                                                                      controller
+                                                                          .blockTypeList[
+                                                                              index]
+                                                                          .id
+                                                                          .toString());
+
+                                                              controller
+                                                                  .titleCtrlr
+                                                                  .text = controller
+                                                                      .selectedItem
+                                                                      ?.name ??
+                                                                  '';
+                                                              controller
+                                                                  .isContainerVisible
+                                                                  .value = true;
+                                                              // controller.descriptionCtrlr
+                                                              //     .text = controller
+                                                              //         .selectedItem
+                                                              //         ?.description ??
+                                                              //     '';
+                                                              // int spvId = int.tryParse(
+                                                              //         blockTypeList?.name ??
+                                                              //             "") ??
+                                                              //     0;
+                                                              // if (spvId != 0) {
+                                                              //   Get.toNamed(
+                                                              //       Routes.blockTypeListScreen,
+                                                              //       arguments: {"spvId": spvId});
+                                                              // }
+                                                              // controller.selectedItem =
+                                                              //     controller.blockTypeList.firstWhere(
+                                                              //         (element) =>
+                                                              //             "${element.id}" ==
+                                                              //             _permitTypeList[0]);
+                                                              // controller.selectedItem =
+                                                              //     controller.blockTypeList.firstWhere(
+                                                              //         (element) =>
+                                                              //             "${element.id}" ==
+                                                              //             _permitTypeList[0]);
+                                                            })
+                                                        : Dimens.box0,
+                                                    varUserAccessModel.value
+                                                                .access_list!
+                                                                .where((e) =>
+                                                                    e.feature_id ==
+                                                                        UserAccessConstants
+                                                                            .kMasterFeatureId &&
+                                                                    e.delete ==
+                                                                        UserAccessConstants
+                                                                            .kHaveDeleteAccess)
+                                                                .length >
+                                                            0
+                                                        ? TableActionButton(
+                                                            color: ColorValues
+                                                                .deleteColor,
+                                                            icon: Icons.delete,
+                                                            message: 'Delete',
+                                                            onPress: () {
+                                                              controller.isDeleteDialog(
+                                                                  business_id: controller
                                                                       .blockTypeList[
                                                                           index]
                                                                       .id
-                                                                      .toString());
-
-                                                          controller.titleCtrlr
-                                                              .text = controller
-                                                                  .selectedItem
-                                                                  ?.name ??
-                                                              '';
-                                                          controller
-                                                              .isContainerVisible
-                                                              .value = true;
-                                                          // controller.descriptionCtrlr
-                                                          //     .text = controller
-                                                          //         .selectedItem
-                                                          //         ?.description ??
-                                                          //     '';
-                                                          // int spvId = int.tryParse(
-                                                          //         blockTypeList?.name ??
-                                                          //             "") ??
-                                                          //     0;
-                                                          // if (spvId != 0) {
-                                                          //   Get.toNamed(
-                                                          //       Routes.blockTypeListScreen,
-                                                          //       arguments: {"spvId": spvId});
-                                                          // }
-                                                          // controller.selectedItem =
-                                                          //     controller.blockTypeList.firstWhere(
-                                                          //         (element) =>
-                                                          //             "${element.id}" ==
-                                                          //             _permitTypeList[0]);
-                                                          // controller.selectedItem =
-                                                          //     controller.blockTypeList.firstWhere(
-                                                          //         (element) =>
-                                                          //             "${element.id}" ==
-                                                          //             _permitTypeList[0]);
-                                                        })
-                                                    // : Container(),
-                                                    ,
-                                                    TableActionButton(
-                                                      color: ColorValues
-                                                          .deleteColor,
-                                                      icon: Icons.delete,
-                                                      message: 'Delete',
-                                                      onPress: () {
-                                                        controller.isDeleteDialog(
-                                                            business_id: controller
-                                                                .blockTypeList[
-                                                                    index]
-                                                                .id
-                                                                .toString(),
-                                                            business: controller
-                                                                .blockTypeList[
-                                                                    index]
-                                                                .name);
-                                                      },
-                                                    ),
+                                                                      .toString(),
+                                                                  business: controller
+                                                                      .blockTypeList[
+                                                                          index]
+                                                                      .name);
+                                                            },
+                                                          )
+                                                        : Dimens.box0
                                                   ],
                                                 )),
                                               ]),

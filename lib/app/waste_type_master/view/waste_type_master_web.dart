@@ -1,6 +1,8 @@
 import 'package:cmms/app/app.dart';
+import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
+import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/app/waste_type_master/waste_type_master_controller.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
@@ -73,22 +75,30 @@ class WasteTypeMasterWeb extends GetView<WasteTypeMasterController> {
                   ],
                 ),
               ),
-              Padding(
-                padding: EdgeInsets.only(left: 10, top: 10),
-                child: ElevatedButton(
-                  style: Styles.navyBlueElevatedButtonStyle,
-                  onPressed: () {
-                    controller.toggleContainer();
-                  },
-                  child: Obx(() {
-                    return Text(
-                      controller.isContainerVisible.value
-                          ? 'Close Create Waste Type'
-                          : 'Open Create Waste Type',
-                    );
-                  }),
-                ),
-              ),
+              varUserAccessModel.value.access_list!
+                          .where((e) =>
+                              e.feature_id ==
+                                  UserAccessConstants.kMasterFeatureId &&
+                              e.add == UserAccessConstants.kHaveAddAccess)
+                          .length >
+                      0
+                  ? Padding(
+                      padding: EdgeInsets.only(left: 10, top: 10),
+                      child: ElevatedButton(
+                        style: Styles.navyBlueElevatedButtonStyle,
+                        onPressed: () {
+                          controller.toggleContainer();
+                        },
+                        child: Obx(() {
+                          return Text(
+                            controller.isContainerVisible.value
+                                ? 'Close Create Waste Type'
+                                : 'Open Create Waste Type',
+                          );
+                        }),
+                      ),
+                    )
+                  : Dimens.box0,
               Expanded(
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -421,6 +431,8 @@ class WasteTypeMasterWeb extends GetView<WasteTypeMasterController> {
                                             ColorValues.appRedColor,
                                         onPressed: () {
                                           controller.cleardata();
+                                          controller.isContainerVisible.value =
+                                              false;
                                         },
                                         text: 'Cancel'),
                                   ),
@@ -650,62 +662,89 @@ class WasteTypeMasterWeb extends GetView<WasteTypeMasterController> {
                                                     DataCell(
                                                       Row(
                                                         children: [
-                                                          TableActionButton(
-                                                            color: ColorValues
-                                                                .editColor,
-                                                            icon: Icons.edit,
-                                                            message: 'Edit',
-                                                            onPress: () {
-                                                              controller
-                                                                      .selectedItem =
-                                                                  controller
-                                                                      .wasteTypeMasterList!
-                                                                      .firstWhere(
-                                                                (element) =>
-                                                                    "${element!.id}" ==
+                                                          varUserAccessModel
+                                                                      .value
+                                                                      .access_list!
+                                                                      .where((e) =>
+                                                                          e.feature_id ==
+                                                                              UserAccessConstants
+                                                                                  .kMasterFeatureId &&
+                                                                          e.edit ==
+                                                                              UserAccessConstants.kHaveEditAccess)
+                                                                      .length >
+                                                                  0
+                                                              ? TableActionButton(
+                                                                  color: ColorValues
+                                                                      .editColor,
+                                                                  icon: Icons
+                                                                      .edit,
+                                                                  message:
+                                                                      'Edit',
+                                                                  onPress: () {
                                                                     controller
-                                                                        .wasteTypeMasterList![
-                                                                            index]!
-                                                                        .id
-                                                                        .toString(),
-                                                              );
+                                                                            .selectedItem =
+                                                                        controller
+                                                                            .wasteTypeMasterList!
+                                                                            .firstWhere(
+                                                                      (element) =>
+                                                                          "${element!.id}" ==
+                                                                          controller
+                                                                              .wasteTypeMasterList![index]!
+                                                                              .id
+                                                                              .toString(),
+                                                                    );
 
-                                                              controller
-                                                                  .titleCtrlr
-                                                                  .text = controller
-                                                                      .selectedItem
-                                                                      ?.name ??
-                                                                  '';
-                                                              controller
-                                                                  .descriptionCtrlr
-                                                                  .text = controller
-                                                                      .selectedItem
-                                                                      ?.description ??
-                                                                  '';
-                                                              controller
-                                                                  .isContainerVisible
-                                                                  .value = true;
-                                                            },
-                                                          ),
-                                                          TableActionButton(
-                                                            color: ColorValues
-                                                                .deleteColor,
-                                                            icon: Icons.delete,
-                                                            message: 'Delete',
-                                                            onPress: () {
-                                                              controller
-                                                                  .isDeleteDialog(
-                                                                wasteTypeId: controller
-                                                                    .wasteTypeMasterList?[
-                                                                        index]!
-                                                                    .id,
-                                                                name: controller
-                                                                    .wasteTypeMasterList?[
-                                                                        index]!
-                                                                    .name,
-                                                              );
-                                                            },
-                                                          ),
+                                                                    controller
+                                                                        .titleCtrlr
+                                                                        .text = controller
+                                                                            .selectedItem
+                                                                            ?.name ??
+                                                                        '';
+                                                                    controller
+                                                                        .descriptionCtrlr
+                                                                        .text = controller
+                                                                            .selectedItem
+                                                                            ?.description ??
+                                                                        '';
+                                                                    controller
+                                                                        .isContainerVisible
+                                                                        .value = true;
+                                                                  },
+                                                                )
+                                                              : Dimens.box0,
+                                                          varUserAccessModel
+                                                                      .value
+                                                                      .access_list!
+                                                                      .where((e) =>
+                                                                          e.feature_id ==
+                                                                              UserAccessConstants
+                                                                                  .kMasterFeatureId &&
+                                                                          e.add ==
+                                                                              UserAccessConstants.kHaveAddAccess)
+                                                                      .length >
+                                                                  0
+                                                              ? TableActionButton(
+                                                                  color: ColorValues
+                                                                      .deleteColor,
+                                                                  icon: Icons
+                                                                      .delete,
+                                                                  message:
+                                                                      'Delete',
+                                                                  onPress: () {
+                                                                    controller
+                                                                        .isDeleteDialog(
+                                                                      wasteTypeId: controller
+                                                                          .wasteTypeMasterList?[
+                                                                              index]!
+                                                                          .id,
+                                                                      name: controller
+                                                                          .wasteTypeMasterList?[
+                                                                              index]!
+                                                                          .name,
+                                                                    );
+                                                                  },
+                                                                )
+                                                              : Dimens.box0
                                                         ],
                                                       ),
                                                     ),

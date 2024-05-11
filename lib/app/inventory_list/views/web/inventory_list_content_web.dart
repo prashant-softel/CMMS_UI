@@ -1,5 +1,7 @@
+import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
+import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/domain/models/inventory_model.dart';
 import 'package:data_table_2/data_table_2.dart';
@@ -121,30 +123,55 @@ class _InventoryWebState extends State<InventoryListContentWeb> {
                                         //     ),
                                         //   ],
                                         // ),
-
-                                        ActionButton(
-                                          icon: Icons.upload,
-                                          label: 'importAsset'.tr,
-                                          onPressed: () {
-                                            controller.clearValueimportType();
-                                            Get.toNamed(Routes.importInventory,
-                                                arguments: {
-                                                  'importType':
-                                                      AppConstants.kImportAsset
-                                                });
-                                          },
-                                          color: ColorValues.appDarkBlueColor,
-                                        ),
+                                        varUserAccessModel.value.access_list!
+                                                    .where((e) =>
+                                                        e.feature_id ==
+                                                            UserAccessConstants
+                                                                .kMasterFeatureId &&
+                                                        e.add ==
+                                                            UserAccessConstants
+                                                                .kHaveAddAccess)
+                                                    .length >
+                                                0
+                                            ? ActionButton(
+                                                icon: Icons.upload,
+                                                label: 'importAsset'.tr,
+                                                onPressed: () {
+                                                  controller
+                                                      .clearValueimportType();
+                                                  Get.toNamed(
+                                                      Routes.importInventory,
+                                                      arguments: {
+                                                        'importType':
+                                                            AppConstants
+                                                                .kImportAsset
+                                                      });
+                                                },
+                                                color: ColorValues
+                                                    .appDarkBlueColor,
+                                              )
+                                            : Dimens.box0,
                                         Dimens.boxWidth10,
-                                        ActionButton(
-                                          icon: Icons.add,
-                                          label: "Add New",
-                                          onPressed: () {
-                                            Get.offNamed(
-                                                Routes.addInventoryScreen);
-                                          },
-                                          color: ColorValues.addNewColor,
-                                        )
+                                        varUserAccessModel.value.access_list!
+                                                    .where((e) =>
+                                                        e.feature_id ==
+                                                            UserAccessConstants
+                                                                .kMasterFeatureId &&
+                                                        e.add ==
+                                                            UserAccessConstants
+                                                                .kHaveAddAccess)
+                                                    .length >
+                                                0
+                                            ? ActionButton(
+                                                icon: Icons.add,
+                                                label: "Add New",
+                                                onPressed: () {
+                                                  Get.offNamed(Routes
+                                                      .addInventoryScreen);
+                                                },
+                                                color: ColorValues.addNewColor,
+                                              )
+                                            : Dimens.box0,
                                       ],
                                     ),
                                   ),
@@ -281,58 +308,62 @@ class _InventoryWebState extends State<InventoryListContentWeb> {
                                   SizedBox(
                                     height: 20,
                                   ),
-                                  controller.inventoryList.isEmpty == true && controller.isLoading == false
+                                  controller.inventoryList.isEmpty == true &&
+                                          controller.isLoading == false
                                       ? Center(child: Text('No data'))
                                       : controller.isLoading.value == true
-                                      ? Center(child: Text('Data Loading......'))
-                                      : Expanded(
-                                          child: ValueListenableBuilder(
-                                              valueListenable:
-                                                  controller.columnVisibility,
-                                              builder: (context, value, child) {
-                                                final dataSource =
-                                                    InventoryListDataSource(
-                                                        controller);
+                                          ? Center(
+                                              child: Text('Data Loading......'))
+                                          : Expanded(
+                                              child: ValueListenableBuilder(
+                                                  valueListenable: controller
+                                                      .columnVisibility,
+                                                  builder:
+                                                      (context, value, child) {
+                                                    final dataSource =
+                                                        InventoryListDataSource(
+                                                            controller);
 
-                                                return PaginatedDataTable2(
-                                                  columnSpacing: 10,
-                                                  dataRowHeight: 70,
-                                                  source:
-                                                      dataSource, // Custom DataSource class
-                                                  // headingRowHeight:
-                                                  //     Get.height * 0.1\,
-                                                  minWidth: Get.width * 1.2,
-                                                  showCheckboxColumn: false,
-                                                  rowsPerPage:
-                                                      10, // Number of rows per page
-                                                  availableRowsPerPage: [
-                                                    10,
-                                                    20,
-                                                    30,
-                                                    50
-                                                  ],
-                                                  columns: [
-                                                    for (var entry
-                                                        in value.entries)
-                                                      if (entry.value)
+                                                    return PaginatedDataTable2(
+                                                      columnSpacing: 10,
+                                                      dataRowHeight: 70,
+                                                      source:
+                                                          dataSource, // Custom DataSource class
+                                                      // headingRowHeight:
+                                                      //     Get.height * 0.1\,
+                                                      minWidth: Get.width * 1.2,
+                                                      showCheckboxColumn: false,
+                                                      rowsPerPage:
+                                                          10, // Number of rows per page
+                                                      availableRowsPerPage: [
+                                                        10,
+                                                        20,
+                                                        30,
+                                                        50
+                                                      ],
+                                                      columns: [
+                                                        for (var entry
+                                                            in value.entries)
+                                                          if (entry.value)
+                                                            buildDataColumn(
+                                                              entry.key,
+                                                              controller
+                                                                      .filterText[
+                                                                  entry.key]!,
+                                                              controller
+                                                                      .columnwidth[
+                                                                  entry.key],
+                                                            ),
                                                         buildDataColumn(
-                                                          entry.key,
-                                                          controller.filterText[
-                                                              entry.key]!,
+                                                          'Actions',
                                                           controller
-                                                                  .columnwidth[
-                                                              entry.key],
+                                                              .userDateFilterText,
+                                                          150,
                                                         ),
-                                                    buildDataColumn(
-                                                      'Actions',
-                                                      controller
-                                                          .userDateFilterText,
-                                                      150,
-                                                    ),
-                                                  ],
-                                                );
-                                              }),
-                                        ),
+                                                      ],
+                                                    );
+                                                  }),
+                                            ),
                                 ],
                               ),
                             ),
@@ -559,26 +590,36 @@ class InventoryListDataSource extends DataTableSource {
                           // },
                         ),
                         //),p
-
-                        TableActionButton(
-                          color: ColorValues.editColor,
-                          icon: Icons.edit,
-                          message: 'Edit',
-                          onPress: () {
-                            int inventoryId = InventoryListDetails?.id ?? 0;
-                            if (inventoryId != 0) {
-                              Get.toNamed(Routes.addInventoryScreen,
-                                  arguments: {
-                                    'inventoryId': inventoryId,
-                                  });
-                            }
-                          },
-                          // onPress: () {
-                          //   // controller.showAddInventoryDetails(
-                          //   //     id: int.tryParse('${record[2]}'));
-                          //   // print('AddInV:${record[2]}');
-                          // },
-                        ),
+                        varUserAccessModel.value.access_list!
+                                    .where((e) =>
+                                        e.feature_id ==
+                                            UserAccessConstants
+                                                .kMasterFeatureId &&
+                                        e.edit ==
+                                            UserAccessConstants.kHaveEditAccess)
+                                    .length >
+                                0
+                            ? TableActionButton(
+                                color: ColorValues.editColor,
+                                icon: Icons.edit,
+                                message: 'Edit',
+                                onPress: () {
+                                  int inventoryId =
+                                      InventoryListDetails?.id ?? 0;
+                                  if (inventoryId != 0) {
+                                    Get.toNamed(Routes.addInventoryScreen,
+                                        arguments: {
+                                          'inventoryId': inventoryId,
+                                        });
+                                  }
+                                },
+                                // onPress: () {
+                                //   // controller.showAddInventoryDetails(
+                                //   //     id: int.tryParse('${record[2]}'));
+                                //   // print('AddInV:${record[2]}');
+                                // },
+                              )
+                            : Dimens.box0
                         //),
                       ])
                     : Text(value.toString()),

@@ -1,7 +1,9 @@
 import 'package:cmms/app/app.dart';
+import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/tbt_list_sop/tbt_list_sop_controller.dart';
+import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
@@ -67,26 +69,34 @@ class TBTSOPListContentWeb extends GetView<TBTSOPListController> {
                     child: Text(" / BREAKDOWN MAINTENANCE",
                         style: Styles.greyLight14),
                   ),
-                  Text(" / TBT SOP List", style: Styles.greyLight14)
+                  Text(" / TBT SOP LIST", style: Styles.greyLight14)
                 ],
               ),
             ),
-            Padding(
-              padding: EdgeInsets.only(left: 10, top: 10),
-              child: ElevatedButton(
-                style: Styles.navyBlueElevatedButtonStyle,
-                onPressed: () {
-                  controller.toggleContainer();
-                },
-                child: Obx(() {
-                  return Text(
-                    controller.isContainerVisible.value
-                        ? 'Close TBT SOP'
-                        : 'Open TBT SOP',
-                  );
-                }),
-              ),
-            ),
+            varUserAccessModel.value.access_list!
+                        .where((e) =>
+                            e.feature_id ==
+                                UserAccessConstants.kMasterFeatureId &&
+                            e.add == UserAccessConstants.kHaveAddAccess)
+                        .length >
+                    0
+                ? Padding(
+                    padding: EdgeInsets.only(left: 10, top: 10),
+                    child: ElevatedButton(
+                      style: Styles.navyBlueElevatedButtonStyle,
+                      onPressed: () {
+                        controller.toggleContainer();
+                      },
+                      child: Obx(() {
+                        return Text(
+                          controller.isContainerVisible.value
+                              ? 'Close TBT SOP'
+                              : 'Open TBT SOP',
+                        );
+                      }),
+                    ),
+                  )
+                : Dimens.box0,
             Expanded(
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -633,6 +643,8 @@ class TBTSOPListContentWeb extends GetView<TBTSOPListController> {
                                               ColorValues.appRedColor,
                                           onPressed: () {
                                             controller.cleardata();
+                                            controller.isContainerVisible
+                                                .value = false;
                                           },
                                           text: 'Cancel')),
                                   SizedBox(
@@ -744,112 +756,145 @@ class TBTSOPListContentWeb extends GetView<TBTSOPListController> {
                             // SizedBox(
                             //   height: 20,
                             // ),
-                            controller.sopPermitList.isEmpty == true && controller.isLoading == false
-                            ? Center(child: Text("No Data"))
-                            : controller.isLoading.value == true
-                            ? Center(child: Text("Data Loading......."))
-                                : Expanded(
-                                    child: DataTable2(
-                                      columns: [
-                                        DataColumn2(
-                                          label: Text(
-                                            "Sr.No.",
-                                            style: TextStyle(
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                          size: ColumnSize.S,
-                                        ),
-                                        DataColumn2(
-                                          label: Text(
-                                            "Title",
-                                            style: TextStyle(
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                          size: ColumnSize.L,
-                                        ),
-                                        DataColumn2(
-                                          label: Text(
-                                            "Job Type Name",
-                                            style: TextStyle(
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                          size: ColumnSize.L,
-                                        ),
-                                        DataColumn2(
-                                          label: Text(
-                                            "Action",
-                                            style: TextStyle(
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                          size: ColumnSize.S,
-                                        ),
-                                      ],
-                                      rows: controller.sopPermitList
-                                          .map((jobSOPListDetails) {
-                                        return DataRow2(
-                                          cells: [
-                                            DataCell(Text(
-                                                '${jobSOPListDetails.id}')),
-                                            DataCell(Text(
-                                                '${jobSOPListDetails.name}')),
-                                            DataCell(Text(
-                                                '${jobSOPListDetails.jobTypeName}')),
-                                            DataCell(
-                                              Wrap(
-                                                alignment: WrapAlignment.center,
-                                                children: [
-                                                  TableActionButton(
-                                                    color:
-                                                        ColorValues.editColor,
-                                                    icon: Icons.edit,
-                                                    message: 'Edit',
-                                                    onPress: () {
-                                                      controller.selectedItem =
-                                                          jobSOPListDetails;
-                                                      controller
-                                                          .titleTextFieldCtrlr
-                                                          .text = controller
-                                                              .selectedItem
-                                                              ?.name ??
-                                                          '';
-                                                      controller
-                                                          .descriptionTextFieldCtrlr
-                                                          .text = controller
-                                                              .selectedItem
-                                                              ?.description ??
-                                                          '';
-                                                      controller
-                                                          .isContainerVisible
-                                                          .value = true;
-                                                    },
-                                                  ),
-                                                  TableActionButton(
-                                                    color:
-                                                        ColorValues.deleteColor,
-                                                    icon: Icons.delete,
-                                                    message: 'Delete',
-                                                    onPress: () {
-                                                      controller.isDeleteDialog(
-                                                        business_id:
-                                                            '${jobSOPListDetails.id}',
-                                                        business:
-                                                            jobSOPListDetails
-                                                                .name,
-                                                      );
-                                                    },
-                                                  ),
-                                                ],
+                            controller.sopPermitList.isEmpty == true &&
+                                    controller.isLoading == false
+                                ? Center(child: Text("No Data"))
+                                : controller.isLoading.value == true
+                                    ? Center(child: Text("Data Loading......."))
+                                    : Expanded(
+                                        child: DataTable2(
+                                          columns: [
+                                            DataColumn2(
+                                              label: Text(
+                                                "Sr.No.",
+                                                style: TextStyle(
+                                                    fontSize: 15,
+                                                    fontWeight:
+                                                        FontWeight.bold),
                                               ),
+                                              size: ColumnSize.S,
+                                            ),
+                                            DataColumn2(
+                                              label: Text(
+                                                "Title",
+                                                style: TextStyle(
+                                                    fontSize: 15,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              ),
+                                              size: ColumnSize.L,
+                                            ),
+                                            DataColumn2(
+                                              label: Text(
+                                                "Job Type Name",
+                                                style: TextStyle(
+                                                    fontSize: 15,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              ),
+                                              size: ColumnSize.L,
+                                            ),
+                                            DataColumn2(
+                                              label: Text(
+                                                "Action",
+                                                style: TextStyle(
+                                                    fontSize: 15,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              ),
+                                              size: ColumnSize.S,
                                             ),
                                           ],
-                                        );
-                                      }).toList(),
-                                    ),
-                                  ),
+                                          rows: controller.sopPermitList
+                                              .map((jobSOPListDetails) {
+                                            return DataRow2(
+                                              cells: [
+                                                DataCell(Text(
+                                                    '${jobSOPListDetails.id}')),
+                                                DataCell(Text(
+                                                    '${jobSOPListDetails.name}')),
+                                                DataCell(Text(
+                                                    '${jobSOPListDetails.jobTypeName}')),
+                                                DataCell(
+                                                  Wrap(
+                                                    alignment:
+                                                        WrapAlignment.center,
+                                                    children: [
+                                                      varUserAccessModel.value
+                                                                  .access_list!
+                                                                  .where((e) =>
+                                                                      e.feature_id ==
+                                                                          UserAccessConstants
+                                                                              .kMasterFeatureId &&
+                                                                      e.edit ==
+                                                                          UserAccessConstants
+                                                                              .kHaveEditAccess)
+                                                                  .length >
+                                                              0
+                                                          ? TableActionButton(
+                                                              color: ColorValues
+                                                                  .editColor,
+                                                              icon: Icons.edit,
+                                                              message: 'Edit',
+                                                              onPress: () {
+                                                                controller
+                                                                        .selectedItem =
+                                                                    jobSOPListDetails;
+                                                                controller
+                                                                    .titleTextFieldCtrlr
+                                                                    .text = controller
+                                                                        .selectedItem
+                                                                        ?.name ??
+                                                                    '';
+                                                                controller
+                                                                    .descriptionTextFieldCtrlr
+                                                                    .text = controller
+                                                                        .selectedItem
+                                                                        ?.description ??
+                                                                    '';
+                                                                controller
+                                                                    .isContainerVisible
+                                                                    .value = true;
+                                                              },
+                                                            )
+                                                          : Dimens.box0,
+                                                      varUserAccessModel.value
+                                                                  .access_list!
+                                                                  .where((e) =>
+                                                                      e.feature_id ==
+                                                                          UserAccessConstants
+                                                                              .kMasterFeatureId &&
+                                                                      e.delete ==
+                                                                          UserAccessConstants
+                                                                              .kHaveDeleteAccess)
+                                                                  .length >
+                                                              0
+                                                          ? TableActionButton(
+                                                              color: ColorValues
+                                                                  .deleteColor,
+                                                              icon:
+                                                                  Icons.delete,
+                                                              message: 'Delete',
+                                                              onPress: () {
+                                                                controller
+                                                                    .isDeleteDialog(
+                                                                  business_id:
+                                                                      '${jobSOPListDetails.id}',
+                                                                  business:
+                                                                      jobSOPListDetails
+                                                                          .name,
+                                                                );
+                                                              },
+                                                            )
+                                                          : Dimens.box0
+                                                    ],
+                                                  ),
+                                                ),
+                                              ],
+                                            );
+                                          }).toList(),
+                                        ),
+                                      ),
                           ],
                         ),
                       ),

@@ -2,6 +2,7 @@ import 'package:cmms/app/app.dart';
 import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
+import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -71,22 +72,30 @@ class FrequencyListContentWeb extends GetView<FrequencyListController> {
                   ],
                 ),
               ),
-              Padding(
-                padding: EdgeInsets.only(left: 10, top: 10),
-                child: ElevatedButton(
-                  style: Styles.navyBlueElevatedButtonStyle,
-                  onPressed: () {
-                    controller.toggleContainer();
-                  },
-                  child: Obx(() {
-                    return Text(
-                      controller.isContainerVisible.value
-                          ? 'Close Create Frequency'
-                          : 'Open Create Frequency',
-                    );
-                  }),
-                ),
-              ),
+              varUserAccessModel.value.access_list!
+                          .where((e) =>
+                              e.feature_id ==
+                                  UserAccessConstants.kMasterFeatureId &&
+                              e.add == UserAccessConstants.kHaveAddAccess)
+                          .length >
+                      0
+                  ? Padding(
+                      padding: EdgeInsets.only(left: 10, top: 10),
+                      child: ElevatedButton(
+                        style: Styles.navyBlueElevatedButtonStyle,
+                        onPressed: () {
+                          controller.toggleContainer();
+                        },
+                        child: Obx(() {
+                          return Text(
+                            controller.isContainerVisible.value
+                                ? 'Close Create Frequency'
+                                : 'Open Create Frequency',
+                          );
+                        }),
+                      ),
+                    )
+                  : Dimens.box0,
               Expanded(
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -619,63 +628,87 @@ class FrequencyListContentWeb extends GetView<FrequencyListController> {
                                                         '${frequencyListModelListDetails?.days}')),
                                                     DataCell(Row(
                                                       children: [
-                                                        TableActionButton(
-                                                          color: ColorValues
-                                                              .editColor,
-                                                          icon: Icons.edit,
-                                                          message: 'Edit',
-                                                          onPress: () {
-                                                            controller
-                                                                    .selectedItem =
-                                                                controller
-                                                                    .frequencyList!
-                                                                    .firstWhere(
-                                                              (element) =>
-                                                                  "${element!.id}" ==
+                                                        varUserAccessModel.value
+                                                                    .access_list!
+                                                                    .where((e) =>
+                                                                        e.feature_id ==
+                                                                            UserAccessConstants
+                                                                                .kMasterFeatureId &&
+                                                                        e.edit ==
+                                                                            UserAccessConstants.kHaveEditAccess)
+                                                                    .length >
+                                                                0
+                                                            ? TableActionButton(
+                                                                color: ColorValues
+                                                                    .editColor,
+                                                                icon:
+                                                                    Icons.edit,
+                                                                message: 'Edit',
+                                                                onPress: () {
                                                                   controller
-                                                                      .frequencyList![
-                                                                          index]!
-                                                                      .id
-                                                                      .toString(),
-                                                            );
+                                                                          .selectedItem =
+                                                                      controller
+                                                                          .frequencyList!
+                                                                          .firstWhere(
+                                                                    (element) =>
+                                                                        "${element!.id}" ==
+                                                                        controller
+                                                                            .frequencyList![index]!
+                                                                            .id
+                                                                            .toString(),
+                                                                  );
 
-                                                            controller
-                                                                .freqNameCtrlr
-                                                                .text = controller
-                                                                    .selectedItem
-                                                                    ?.name ??
-                                                                '';
-                                                            controller
-                                                                .manpowerCtrlr
-                                                                .text = controller
-                                                                    .selectedItem
-                                                                    ?.days
-                                                                    .toString() ??
-                                                                '';
+                                                                  controller
+                                                                      .freqNameCtrlr
+                                                                      .text = controller
+                                                                          .selectedItem
+                                                                          ?.name ??
+                                                                      '';
+                                                                  controller
+                                                                      .manpowerCtrlr
+                                                                      .text = controller
+                                                                          .selectedItem
+                                                                          ?.days
+                                                                          .toString() ??
+                                                                      '';
 
-                                                            controller
-                                                                .isContainerVisible
-                                                                .value = true;
-                                                          },
-                                                        ),
-                                                        TableActionButton(
-                                                          color: ColorValues
-                                                              .deleteColor,
-                                                          icon: Icons.delete,
-                                                          message: 'Delete',
-                                                          onPress: () {
-                                                            // controller.isDeleteDialog(
-                                                            //     business_id: controller
-                                                            //         .riskTypeList[
-                                                            //             index]
-                                                            //         .id
-                                                            //         .toString(),
-                                                            //     business: controller
-                                                            //         .riskTypeList[
-                                                            //             index]
-                                                            //         .name);
-                                                          },
-                                                        ),
+                                                                  controller
+                                                                      .isContainerVisible
+                                                                      .value = true;
+                                                                },
+                                                              )
+                                                            : Dimens.box0,
+                                                        varUserAccessModel.value
+                                                                    .access_list!
+                                                                    .where((e) =>
+                                                                        e.feature_id ==
+                                                                            UserAccessConstants
+                                                                                .kMasterFeatureId &&
+                                                                        e.delete ==
+                                                                            UserAccessConstants.kHaveDeleteAccess)
+                                                                    .length >
+                                                                0
+                                                            ? TableActionButton(
+                                                                color: ColorValues
+                                                                    .deleteColor,
+                                                                icon: Icons
+                                                                    .delete,
+                                                                message:
+                                                                    'Delete',
+                                                                onPress: () {
+                                                                  // controller.isDeleteDialog(
+                                                                  //     business_id: controller
+                                                                  //         .riskTypeList[
+                                                                  //             index]
+                                                                  //         .id
+                                                                  //         .toString(),
+                                                                  //     business: controller
+                                                                  //         .riskTypeList[
+                                                                  //             index]
+                                                                  //         .name);
+                                                                },
+                                                              )
+                                                            : Dimens.box0
                                                       ],
                                                     )),
                                                   ],

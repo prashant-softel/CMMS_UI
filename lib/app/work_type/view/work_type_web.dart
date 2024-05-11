@@ -1,6 +1,8 @@
 import 'package:cmms/app/app.dart';
+import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
+import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/app/work_type/work_type_controller.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
@@ -75,22 +77,30 @@ class WorkTypeWeb extends GetView<WorkTypeController> {
                   ],
                 ),
               ),
-              Padding(
-                padding: EdgeInsets.only(left: 10, top: 10),
-                child: ElevatedButton(
-                  style: Styles.navyBlueElevatedButtonStyle,
-                  onPressed: () {
-                    controller.toggleContainer();
-                  },
-                  child: Obx(() {
-                    return Text(
-                      controller.isContainerVisible.value
-                          ? 'Close Create Fault'
-                          : 'Open Create Fault',
-                    );
-                  }),
-                ),
-              ),
+              varUserAccessModel.value.access_list!
+                          .where((e) =>
+                              e.feature_id ==
+                                  UserAccessConstants.kMasterFeatureId &&
+                              e.add == UserAccessConstants.kHaveAddAccess)
+                          .length >
+                      0
+                  ? Padding(
+                      padding: EdgeInsets.only(left: 10, top: 10),
+                      child: ElevatedButton(
+                        style: Styles.navyBlueElevatedButtonStyle,
+                        onPressed: () {
+                          controller.toggleContainer();
+                        },
+                        child: Obx(() {
+                          return Text(
+                            controller.isContainerVisible.value
+                                ? 'Close Create Fault'
+                                : 'Open Create Fault',
+                          );
+                        }),
+                      ),
+                    )
+                  : Dimens.box0,
               Expanded(
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -391,6 +401,8 @@ class WorkTypeWeb extends GetView<WorkTypeController> {
                                             ColorValues.appRedColor,
                                         onPressed: () {
                                           controller.cleardata();
+                                          controller.isContainerVisible.value =
+                                              false;
                                         },
                                         text: 'Cancel'),
                                   ),
@@ -585,67 +597,91 @@ class WorkTypeWeb extends GetView<WorkTypeController> {
                                                     '')),
                                                 DataCell(Row(
                                                   children: [
-                                                    TableActionButton(
-                                                      color:
-                                                          ColorValues.editColor,
-                                                      icon: Icons.edit,
-                                                      message: 'Edit',
-                                                      onPress: () {
-                                                        controller
-                                                                .selectedItem =
-                                                            controller
-                                                                .worktypeList
-                                                                .firstWhere(
-                                                          (element) =>
-                                                              "${element!.id}" ==
+                                                    varUserAccessModel.value
+                                                                .access_list!
+                                                                .where((e) =>
+                                                                    e.feature_id ==
+                                                                        UserAccessConstants
+                                                                            .kMasterFeatureId &&
+                                                                    e.edit ==
+                                                                        UserAccessConstants
+                                                                            .kHaveEditAccess)
+                                                                .length >
+                                                            0
+                                                        ? TableActionButton(
+                                                            color: ColorValues
+                                                                .editColor,
+                                                            icon: Icons.edit,
+                                                            message: 'Edit',
+                                                            onPress: () {
                                                               controller
-                                                                  .worktypeList[
-                                                                      index]!
-                                                                  .id
-                                                                  .toString(),
-                                                        );
+                                                                      .selectedItem =
+                                                                  controller
+                                                                      .worktypeList
+                                                                      .firstWhere(
+                                                                (element) =>
+                                                                    "${element!.id}" ==
+                                                                    controller
+                                                                        .worktypeList[
+                                                                            index]!
+                                                                        .id
+                                                                        .toString(),
+                                                              );
 
-                                                        controller.titleCtrlr
-                                                            .text = controller
-                                                                .selectedItem
-                                                                ?.name ??
-                                                            '';
-                                                        controller
-                                                            .selectedassetcategory
-                                                            .value = controller
-                                                                .selectedItem
-                                                                ?.categoryName ??
-                                                            '';
-                                                        controller
-                                                                .selectedEquipmentId =
-                                                            controller
-                                                                .selectedItem!
-                                                                .categoryid!;
+                                                              controller
+                                                                  .titleCtrlr
+                                                                  .text = controller
+                                                                      .selectedItem
+                                                                      ?.name ??
+                                                                  '';
+                                                              controller
+                                                                  .selectedassetcategory
+                                                                  .value = controller
+                                                                      .selectedItem
+                                                                      ?.categoryName ??
+                                                                  '';
+                                                              controller
+                                                                      .selectedEquipmentId =
+                                                                  controller
+                                                                      .selectedItem!
+                                                                      .categoryid!;
 
-                                                        controller
-                                                            .isContainerVisible
-                                                            .value = true;
-                                                      },
-                                                    ),
-                                                    TableActionButton(
-                                                      color: ColorValues
-                                                          .deleteColor,
-                                                      icon: Icons.delete,
-                                                      message: 'Delete',
-                                                      onPress: () {
-                                                        controller.isDeleteDialog(
-                                                            worktype_id:
-                                                                controller
-                                                                    .worktypeList[
-                                                                        index]!
-                                                                    .id
-                                                                    .toString(),
-                                                            worktype: controller
-                                                                .worktypeList[
-                                                                    index]!
-                                                                .name);
-                                                      },
-                                                    ),
+                                                              controller
+                                                                  .isContainerVisible
+                                                                  .value = true;
+                                                            },
+                                                          )
+                                                        : Dimens.box0,
+                                                    varUserAccessModel.value
+                                                                .access_list!
+                                                                .where((e) =>
+                                                                    e.feature_id ==
+                                                                        UserAccessConstants
+                                                                            .kMasterFeatureId &&
+                                                                    e.delete ==
+                                                                        UserAccessConstants
+                                                                            .kHaveDeleteAccess)
+                                                                .length >
+                                                            0
+                                                        ? TableActionButton(
+                                                            color: ColorValues
+                                                                .deleteColor,
+                                                            icon: Icons.delete,
+                                                            message: 'Delete',
+                                                            onPress: () {
+                                                              controller.isDeleteDialog(
+                                                                  worktype_id: controller
+                                                                      .worktypeList[
+                                                                          index]!
+                                                                      .id
+                                                                      .toString(),
+                                                                  worktype: controller
+                                                                      .worktypeList[
+                                                                          index]!
+                                                                      .name);
+                                                            },
+                                                          )
+                                                        : Dimens.box0
                                                   ],
                                                 )),
                                               ]),

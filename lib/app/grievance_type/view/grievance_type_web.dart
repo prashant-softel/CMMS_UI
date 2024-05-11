@@ -1,7 +1,9 @@
 import 'package:cmms/app/app.dart';
+import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/grievance_type/grievance_type_controller.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
+import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:data_table_2/data_table_2.dart';
@@ -73,22 +75,30 @@ class GrievanceTypeWeb extends GetView<GrievanceTypeController> {
                   ],
                 ),
               ),
-              Padding(
-                padding: EdgeInsets.only(left: 10, top: 10),
-                child: ElevatedButton(
-                  style: Styles.navyBlueElevatedButtonStyle,
-                  onPressed: () {
-                    controller.toggleContainer();
-                  },
-                  child: Obx(() {
-                    return Text(
-                      controller.isContainerVisible.value
-                          ? 'Close Create Grievance Type'
-                          : 'Open Create Grievance Type',
-                    );
-                  }),
-                ),
-              ),
+              varUserAccessModel.value.access_list!
+                          .where((e) =>
+                              e.feature_id ==
+                                  UserAccessConstants.kMasterFeatureId &&
+                              e.add == UserAccessConstants.kHaveAddAccess)
+                          .length >
+                      0
+                  ? Padding(
+                      padding: EdgeInsets.only(left: 10, top: 10),
+                      child: ElevatedButton(
+                        style: Styles.navyBlueElevatedButtonStyle,
+                        onPressed: () {
+                          controller.toggleContainer();
+                        },
+                        child: Obx(() {
+                          return Text(
+                            controller.isContainerVisible.value
+                                ? 'Close Create Grievance Type'
+                                : 'Open Create Grievance Type',
+                          );
+                        }),
+                      ),
+                    )
+                  : Dimens.box0,
               Expanded(
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -424,6 +434,8 @@ class GrievanceTypeWeb extends GetView<GrievanceTypeController> {
                                             ColorValues.appRedColor,
                                         onPressed: () {
                                           controller.cleardata();
+                                          controller.isContainerVisible.value =
+                                              false;
                                         },
                                         text: 'Cancel'),
                                   ),
@@ -634,44 +646,69 @@ class GrievanceTypeWeb extends GetView<GrievanceTypeController> {
                                                     DataCell(
                                                       Row(
                                                         children: [
-                                                          TableActionButton(
-                                                            color: ColorValues
-                                                                .editColor,
-                                                            icon: Icons.edit,
-                                                            message: 'Edit',
-                                                            onPress: () {
-                                                              int?
-                                                                  grievanceTypeId =
-                                                                  controller
-                                                                      .grievanceTypeList?[
-                                                                          index]!
-                                                                      .id;
-                                                              controller.getGrievanceTypeById(
-                                                                  grievanceTypeId:
-                                                                      grievanceTypeId);
-                                                              controller
-                                                                  .isContainerVisible
-                                                                  .value = true;
-                                                            },
-                                                          ),
-                                                          TableActionButton(
-                                                            color: ColorValues
-                                                                .deleteColor,
-                                                            icon: Icons.delete,
-                                                            message: 'Delete',
-                                                            onPress: () {
-                                                              controller.isDeleteDialog(
-                                                                  grievanceTypeId:
-                                                                      controller
-                                                                          .grievanceTypeList?[
-                                                                              index]!
-                                                                          .id,
-                                                                  name: controller
-                                                                      .grievanceTypeList?[
-                                                                          index]!
-                                                                      .name);
-                                                            },
-                                                          ),
+                                                          varUserAccessModel
+                                                                      .value
+                                                                      .access_list!
+                                                                      .where((e) =>
+                                                                          e.feature_id ==
+                                                                              UserAccessConstants
+                                                                                  .kMasterFeatureId &&
+                                                                          e.edit ==
+                                                                              UserAccessConstants.kHaveEditAccess)
+                                                                      .length >
+                                                                  0
+                                                              ? TableActionButton(
+                                                                  color: ColorValues
+                                                                      .editColor,
+                                                                  icon: Icons
+                                                                      .edit,
+                                                                  message:
+                                                                      'Edit',
+                                                                  onPress: () {
+                                                                    int?
+                                                                        grievanceTypeId =
+                                                                        controller
+                                                                            .grievanceTypeList?[index]!
+                                                                            .id;
+                                                                    controller.getGrievanceTypeById(
+                                                                        grievanceTypeId:
+                                                                            grievanceTypeId);
+                                                                    controller
+                                                                        .isContainerVisible
+                                                                        .value = true;
+                                                                  },
+                                                                )
+                                                              : Dimens.box0,
+                                                          varUserAccessModel
+                                                                      .value
+                                                                      .access_list!
+                                                                      .where((e) =>
+                                                                          e.feature_id ==
+                                                                              UserAccessConstants
+                                                                                  .kMasterFeatureId &&
+                                                                          e.delete ==
+                                                                              UserAccessConstants.kHaveDeleteAccess)
+                                                                      .length >
+                                                                  0
+                                                              ? TableActionButton(
+                                                                  color: ColorValues
+                                                                      .deleteColor,
+                                                                  icon: Icons
+                                                                      .delete,
+                                                                  message:
+                                                                      'Delete',
+                                                                  onPress: () {
+                                                                    controller.isDeleteDialog(
+                                                                        grievanceTypeId: controller
+                                                                            .grievanceTypeList?[
+                                                                                index]!
+                                                                            .id,
+                                                                        name: controller
+                                                                            .grievanceTypeList?[index]!
+                                                                            .name);
+                                                                  },
+                                                                )
+                                                              : Dimens.box0,
                                                         ],
                                                       ),
                                                     ),
