@@ -6,11 +6,11 @@ import 'package:cmms/app/widgets/add_dialog.dart';
 import 'package:cmms/app/widgets/date_picker.dart';
 import 'package:cmms/app/widgets/minus_dialog.dart';
 import 'package:cmms/domain/models/water_data_list_model.dart';
-import 'package:data_table_2/data_table_2.dart';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
+
 import 'package:intl/intl.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
@@ -251,8 +251,11 @@ class _WaterDataListWebState extends State<WaterDataListWeb> {
                                                             .mainHeaderList
                                                             .map((element) =>
                                                                 Container(
+                                                                    height: 50,
                                                                     decoration:
                                                                         BoxDecoration(
+                                                                      color: ColorValues
+                                                                          .lightGreyColor,
                                                                       border:
                                                                           Border(
                                                                         left: BorderSide(
@@ -377,67 +380,6 @@ class _WaterDataListWebState extends State<WaterDataListWeb> {
       },
     );
   }
-}
-
-DataColumn2 buildDataColumn(
-  // String columnName,
-  String header,
-
-  /// ColumnSize columnSize,
-  RxString filterText,
-  double? fixedWidth,
-  //  {required Function(String) onSearchCallBack}
-) {
-  return //
-      DataColumn2(
-    // size: columnSize,
-    fixedWidth: fixedWidth,
-
-    label: //
-        Column(
-            mainAxisAlignment: MainAxisAlignment.center, //
-            children: [
-          SizedBox(
-            height: Get.height * 0.05,
-            child: TextField(
-              style: GoogleFonts.lato(
-                textStyle:
-                    TextStyle(fontSize: 16.0, height: 1.0, color: Colors.black),
-              ),
-              onChanged: (value) {
-                filterText.value = value;
-                //   onSearchCallBack(value);
-              },
-              textAlign: TextAlign.left,
-              decoration: InputDecoration(
-                hintText: 'Filter',
-                contentPadding:
-                    EdgeInsets.fromLTRB(5, 0, 5, 0), // Reduced vertical padding
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(5),
-                  borderSide: BorderSide(color: Colors.black),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(5),
-                  borderSide: BorderSide(color: Colors.black),
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(5),
-                  borderSide: BorderSide(color: Colors.black),
-                ),
-              ),
-            ),
-          ),
-          Align(
-            alignment: Alignment.centerLeft,
-            child: Text(
-              header,
-              style: Styles.black16W500,
-            ),
-          ),
-        ]),
-    // ),\
-  );
 }
 
 _showYearPicker(BuildContext context, WaterDataListController controller) {
