@@ -119,7 +119,7 @@ class DetailData {
   factory DetailData.fromJson(Map<String, dynamic> json) {
     return DetailData(
       waterType: "${json['water_type']}",
-      opening: json['opening'] ?? 0.0,
+      opening: json['opening_qty'] ?? 0.0,
       procuredQty: json['procured_qty'] ?? 0.0,
       consumedQty: json['consumed_qty'] ?? 0.0,
       closingQty: json['closing_qty'] ?? 0.0,

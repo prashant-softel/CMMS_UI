@@ -161,31 +161,34 @@ class WaterDataListController extends GetxController {
               "colSpan": _dataList.show_opening == 1 ? 4 : 2
             },
           );
+          if (_dataList.show_opening == 1) {
+            headerList.add(
+              {
+                "label": _dataList.water_type,
+                "isShow": true,
+                'subHeader': "open",
+                "dataKey": 'opening'
+              },
+            );
+          }
           headerList.add(
             {
               "label": _dataList.water_type,
-              "isShow": true,
-              'subHeader': "consmption",
-              "dataKey": 'consumedQty'
+              "isShow": _dataList.show_opening == 1 ? false : true,
+              'subHeader': "procrument",
+              "dataKey": 'procuredQty'
             },
           );
           headerList.add(
             {
               "label": _dataList.water_type,
               "isShow": false,
-              'subHeader': "procrument",
-              "dataKey": 'procuredQty'
+              'subHeader': "consmption",
+              "dataKey": 'consumedQty'
             },
           );
+
           if (_dataList.show_opening == 1) {
-            headerList.add(
-              {
-                "label": _dataList.water_type,
-                "isShow": false,
-                'subHeader': "open",
-                "dataKey": 'opening'
-              },
-            );
             headerList.add(
               {
                 "label": _dataList.water_type,
@@ -198,6 +201,23 @@ class WaterDataListController extends GetxController {
 
           masterDataListName.add(_dataList!.water_type ?? '');
         }
+        headerList.add(
+          {
+            "label": 'Action',
+            "isShow": true,
+            'subHeader': "",
+            "dataKey": 'action'
+          },
+        );
+        mainHeaderList.add(
+          {
+            "label": 'Action',
+            "isShow": true,
+            'subHeader': "",
+            "dataKey": 'action',
+            "colSpan": 1
+          },
+        );
         print({"headerList.length": headerList.length});
       }
 
