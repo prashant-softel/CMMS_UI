@@ -5816,6 +5816,39 @@ class Repository {
     }
   }
 
+  Future<List<EmployeeModel?>?> getAssignedToEmployee(
+    String? auth,
+    int? facilityId,
+    int? featureId,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getAssignedToEmployee(
+        auth: auth,
+        isLoading: isLoading,
+        featureId: featureId,
+        facilityId: facilityId,
+      );
+
+      if (!res.hasError) {
+        final jsonEmployeeModels = jsonDecode(res.data);
+        final List<EmployeeModel> _employeeModelList = jsonEmployeeModels
+            .map<EmployeeModel>(
+              (m) => EmployeeModel.fromJson(Map<String, dynamic>.from(m)),
+            )
+            .toList();
+        return _employeeModelList;
+      } else {
+        Utility.showDialog(res.errorCode.toString(), 'feature id edit access employees');
+        return null;
+      }
+    } catch (error) {
+      print(error.toString());
+      return [];
+    }
+  }
+
   Future<List<ToolsModel?>?> getToolsRequiredToWorkTypeList(
     String? workTypeIds,
     String? auth,

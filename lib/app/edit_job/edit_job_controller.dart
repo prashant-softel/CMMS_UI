@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'package:cmms/app/app.dart';
+import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/domain/models/facility_model.dart';
 import 'package:cmms/domain/models/models.dart';
 import 'package:flutter/material.dart';
@@ -235,8 +236,9 @@ class EditJobController extends GetxController {
 
   Future<void> getAssignedToList() async {
     assignedToList.clear();
-    final _assignedToList = await editJobPresenter.getAssignedToList(
+    final _assignedToList = await editJobPresenter.getAssignedToEmployee(
       facilityId: selectedFacilityId,
+      featureId: UserAccessConstants.kJobFeatureId,
     );
 
     if (_assignedToList != null) {
