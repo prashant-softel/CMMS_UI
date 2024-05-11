@@ -23,29 +23,6 @@ class WaterDataListWeb extends StatefulWidget {
   State<WaterDataListWeb> createState() => _WaterDataListWebState();
 }
 
-final List<Map<String, dynamic>> statutoryData = [
-  {
-    "Month": "April",
-    'Ground Water in KL units': '200',
-    'opening balance of MC water': '100',
-    'Water Procured from Third Party for Module cleaning in KL units': '1220',
-    'Water Consumption  from Third Party for Module cleaning in KL units':
-        '200',
-    'closing balance of MC water': '1000',
-    'validity': '590',
-    'Water Procured from Third Party for Drinking in KL units': '566',
-    'Water Procured from Third Party for Domestic and others purposes in KL units':
-        '5777',
-    'water used for drinking in KL units': '45',
-    'Water used for Module cleaning in KL units': '78',
-    'Water used for domestic and other purpose in KL units': '768',
-    'Total Water Withdrawal in KL units': '6778',
-    'Total Water consumed in KL units': '672',
-    'Total Water withdrawal yearly limit as per NOC in KL units': '333',
-    'Total Groundwater Withdrawal Limit left in KL units': '622',
-  },
-];
-
 class _WaterDataListWebState extends State<WaterDataListWeb> {
   TableCell headerCell(String text, {bool isHeader = false}) => TableCell(
         child: Container(
@@ -267,118 +244,94 @@ class _WaterDataListWebState extends State<WaterDataListWeb> {
                                                 padding:
                                                     const EdgeInsets.all(16),
                                                 child: SingleChildScrollView(
-                                                  child: Table(
-                                                    border: TableBorder.all(
-                                                        color: Colors.grey,
-                                                        width:
-                                                            1), // Default border color for the table
-                                                    columnWidths: const <int,
-                                                        TableColumnWidth>{
-                                                      0: FlexColumnWidth(),
-                                                      1: FlexColumnWidth(),
-                                                      2: FlexColumnWidth(),
-                                                      3: FlexColumnWidth(),
-                                                    },
+                                                  child: Column(
                                                     children: [
-                                                      // Main Headers
-                                                      TableRow(
-                                                          children: [
-                                                        // headerCell('Header1', isHeader: true),
-                                                        // TableCell(
-                                                        //     child: Container(
-                                                        //   decoration: BoxDecoration(
-                                                        //     border: Border.all(
-                                                        //         color: Colors.transparent,
-                                                        //         width: 1), // Custom border color for header cells
-                                                        //   ),
-                                                        // )), // Empty container to maintain the structure
-                                                        // headerCell('Header2', isHeader: true),
-                                                        // TableCell(
-                                                        //     child: Container(
-                                                        //   decoration: BoxDecoration(
-                                                        //     border: Border.all(
-                                                        //         color: Colors.transparent,
-                                                        //         width: 1), // Custom border color for header cells
-                                                        //   ),
-                                                        // )), // Empty container to maintain the structure
-                                                      ]..addAll(controller
-                                                                .headerList
-                                                                .map((e) {
-                                                              return e['isShow'] ==
-                                                                      true
-                                                                  ? headerCell(e[
-                                                                      'label'])
-                                                                  : TableCell(
-                                                                      child:
-                                                                          Container(
-                                                                      decoration:
-                                                                          BoxDecoration(
-                                                                        border: Border.all(
+                                                      Row(
+                                                        children: []..addAll(controller
+                                                            .mainHeaderList
+                                                            .map((element) =>
+                                                                Container(
+                                                                    decoration:
+                                                                        BoxDecoration(
+                                                                      border:
+                                                                          Border(
+                                                                        left: BorderSide(
                                                                             color:
-                                                                                Colors.transparent,
-                                                                            width: 1), // Custom border color for header cells
+                                                                                Colors.grey,
+                                                                            width: 1),
+                                                                        right: BorderSide(
+                                                                            color:
+                                                                                Colors.grey,
+                                                                            width: 1),
+                                                                        top: BorderSide(
+                                                                            color:
+                                                                                Colors.grey,
+                                                                            width: 1),
                                                                       ),
-                                                                    ));
-                                                            }))),
-                                                      // Sub-Headers
-                                                      TableRow(
-                                                          children: [
-                                                        // headerCell('SubHeader1.1'),
-                                                        // headerCell('SubHeader1.2'),
-                                                        // headerCell('SubHeader2.1'),
-                                                        // headerCell('SubHeader2.2'),
-                                                      ]..addAll(controller
-                                                                .headerList
-                                                                .map((e) {
-                                                              return headerCell(
-                                                                  e['subHeader']);
-                                                            }))),
-                                                      // Data Rows
-                                                      ...List<
-                                                              TableRow>.generate(
-                                                          controller.waterDataList
-                                                                      .length >
-                                                                  0
-                                                              ? controller
-                                                                      .waterDataList[
-                                                                          0]
-                                                                      .periods
-                                                                      ?.length ??
-                                                                  0
-                                                              : 0,
-                                                          (index) => TableRow(
-                                                                  children: [
-                                                                // dataCell('1'),
-                                                                // dataCell('1'),
-                                                                // dataCell('1'),
-                                                                // dataCell('1'),
-                                                              ]..addAll(controller
-                                                                        .headerList
-                                                                        .map(
-                                                                            (e) {
-                                                                      if (e['dataKey'] ==
-                                                                          'Month') {
-                                                                        return dataCell(
-                                                                            '${controller.waterDataList[0].periods[index].monthName}');
-                                                                      }
-                                                                      DetailData? data = controller
+                                                                    ),
+                                                                    width: ((MediaQuery.of(context).size.width - 150) / controller.headerList.length) *
+                                                                        element[
+                                                                            'colSpan'],
+                                                                    child: headerCell(
+                                                                        element['label'])))),
+                                                      ),
+                                                      Table(
+                                                        border: TableBorder.all(
+                                                            color: Colors.grey,
+                                                            width: 1),
+                                                        columnWidths: const <int,
+                                                            TableColumnWidth>{
+                                                          0: FlexColumnWidth(),
+                                                          1: FlexColumnWidth(),
+                                                          2: FlexColumnWidth(),
+                                                          3: FlexColumnWidth(),
+                                                        },
+                                                        children: [
+                                                          TableRow(
+                                                              children: []
+                                                                ..addAll(controller
+                                                                    .headerList
+                                                                    .map((e) {
+                                                                  return headerCell(
+                                                                      e['subHeader']);
+                                                                }))),
+                                                          ...List<
+                                                                  TableRow>.generate(
+                                                              controller.waterDataList
+                                                                          .length >
+                                                                      0
+                                                                  ? controller
                                                                           .waterDataList[
                                                                               0]
-                                                                          .periods[
-                                                                              index]
-                                                                          .details
-                                                                          .firstWhereOrNull((element) =>
-                                                                              element.waterType ==
-                                                                              e['label']);
-                                                                      if (data ==
-                                                                          null) {
-                                                                        return dataCell(
-                                                                            '');
-                                                                      }
-                                                                      return dataCell(_CellData(
-                                                                          data,
-                                                                          e['dataKey']));
-                                                                    })))),
+                                                                          .periods
+                                                                          ?.length ??
+                                                                      0
+                                                                  : 0,
+                                                              (index) =>
+                                                                  TableRow(
+                                                                      children: []
+                                                                        ..addAll(controller
+                                                                            .headerList
+                                                                            .map((e) {
+                                                                          if (e['dataKey'] ==
+                                                                              'Month') {
+                                                                            return dataCell('${controller.waterDataList[0].periods[index].monthName}');
+                                                                          }
+                                                                          DetailData? data = controller
+                                                                              .waterDataList[0]
+                                                                              .periods[index]
+                                                                              .details
+                                                                              .firstWhereOrNull((element) => element.waterType == e['label']);
+                                                                          if (data ==
+                                                                              null) {
+                                                                            return dataCell('');
+                                                                          }
+                                                                          return dataCell(_CellData(
+                                                                              data,
+                                                                              e['dataKey']));
+                                                                        })))),
+                                                        ],
+                                                      ),
                                                     ],
                                                   ),
                                                 ),

@@ -36,12 +36,8 @@ class WaterDataListController extends GetxController {
   RxList<WaterDataList> waterDataList = <WaterDataList>[].obs;
   RxList<String> masterDataListName = <String>[].obs;
 
-  RxList<dynamic> headerList = [
-    // {"label": 'Headersdhfgd1', "isShow": true, 'key': "open"},
-    // {"label": 'Headersdhfgd1', "isShow": false, 'key': "close"},
-    // {"label": 'Headervgwdv2', "isShow": true, 'key': "open"},
-    // {"label": 'Headervgwdv2', "isShow": false, 'key': "close"}
-  ].obs;
+  RxList<dynamic> headerList = [].obs;
+  RxList<dynamic> mainHeaderList = [].obs;
 
   RxList<WaterDataList> filteredData = <WaterDataList>[].obs;
   WaterDataList? waterDataListModel;
@@ -132,6 +128,16 @@ class WaterDataListController extends GetxController {
       if (masterDataList.value != null) {
         masterDataListName.value = [];
         headerList = [].obs;
+        mainHeaderList = [].obs;
+        mainHeaderList.add(
+          {
+            "label": 'Month',
+            "isShow": true,
+            'subHeader': "Month",
+            "dataKey": 'Month',
+            "colSpan": 1
+          },
+        );
         headerList.add(
           {
             "label": 'Month',
@@ -146,7 +152,15 @@ class WaterDataListController extends GetxController {
         for (var _dataList in masterDataList.value) {
           // {"label": 'Headersdhfgd1', "isShow": true, 'key': "open"},
           print({"_dataList": _dataList});
-
+          mainHeaderList.add(
+            {
+              "label": _dataList.water_type,
+              "isShow": true,
+              'subHeader': "Month",
+              "dataKey": 'Month',
+              "colSpan": _dataList.show_opening == 1 ? 4 : 2
+            },
+          );
           headerList.add(
             {
               "label": _dataList.water_type,
@@ -420,13 +434,12 @@ class WaterDataListController extends GetxController {
     switch (list.runtimeType) {
       case RxList<WaterSource>:
         {
-          if(value != "Please Select"){
+          if (value != "Please Select") {
             int typeOfWaterIndex =
-              typeOfWaterList.indexWhere((x) => x?.name == value);
-          selectedTypeOfWaterId = typeOfWaterList[typeOfWaterIndex]?.id ?? 0;
-
-          }else{
-            selectedTypeOfWaterId=0;
+                typeOfWaterList.indexWhere((x) => x?.name == value);
+            selectedTypeOfWaterId = typeOfWaterList[typeOfWaterIndex]?.id ?? 0;
+          } else {
+            selectedTypeOfWaterId = 0;
           }
         }
         break;
