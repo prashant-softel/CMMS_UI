@@ -1,6 +1,7 @@
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/view_user_detail/view_user_detail_controller.dart';
+import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
@@ -446,33 +447,97 @@ class ViewUserDetailContentWeb extends GetView<ViewUserDetailController> {
                                                                           .plantListModel
                                                                           .length >
                                                                       0
-                                                                  ? Center(
+                                                                  ? SizedBox(
+                                                                      height:
+                                                                          Get.height *
+                                                                              0.6,
                                                                       child:
-                                                                          ScrollableTableView(
-                                                                        columns:
-                                                                            [
-                                                                          "Plant Name",
-                                                                          "SPV",
-                                                                          "Location",
-                                                                        ].map((column) {
-                                                                          return TableViewColumn(
+                                                                          DataTable2(
+                                                                        dataRowHeight:
+                                                                            70,
+                                                                        // border: TableBorder.all(
+                                                                        //     color:
+                                                                        //         Colors.black),
+                                                                        columns: [
+                                                                          DataColumn2(
                                                                             label:
-                                                                                column,
-                                                                            minWidth:
-                                                                                Get.width * 0.20,
-                                                                          );
-                                                                        }).toList(),
-                                                                        rows: true
-                                                                            ? controller.plantListModel
-                                                                                .map((plants) => TableViewRow(height: 90, cells: [
-                                                                                      TableViewCell(child: Text("${plants?.name ?? ""}")),
-                                                                                      TableViewCell(child: Text("${plants?.spv ?? ""}")),
-                                                                                      TableViewCell(child: Text("----")),
-                                                                                    ]))
-                                                                                .toList()
-                                                                            : [],
+                                                                                Text("Facility ID"),
+                                                                            size:
+                                                                                ColumnSize.S,
+                                                                          ),
+                                                                          DataColumn2(
+                                                                            label:
+                                                                                Text("Facility Name"),
+                                                                            size:
+                                                                                ColumnSize.S,
+                                                                          ),
+                                                                          DataColumn2(
+                                                                            label:
+                                                                                Text("Is Employee"),
+                                                                            size:
+                                                                                ColumnSize.S,
+                                                                          ),
+                                                                          DataColumn2(
+                                                                            label:
+                                                                                Text("Location"),
+                                                                            size:
+                                                                                ColumnSize.L,
+                                                                          ),
+                                                                        ],
+                                                                        rows: controller
+                                                                            .plantListModel
+                                                                            .map(
+                                                                              (facility) => DataRow(
+                                                                                cells: [
+                                                                                  DataCell(
+                                                                                    Text("${facility?.id}"),
+                                                                                  ),
+                                                                                  DataCell(
+                                                                                    Text("${facility?.name}"),
+                                                                                  ),
+                                                                                  DataCell(
+                                                                                    Checkbox(
+                                                                                      value: facility?.isEmployees,
+                                                                                      onChanged: null,
+                                                                                    ),
+                                                                                  ),
+                                                                                  DataCell(
+                                                                                    Text("${facility?.location}"),
+                                                                                  ),
+                                                                                ],
+                                                                              ),
+                                                                            )
+                                                                            .toList(),
                                                                       ),
                                                                     )
+
+                                                                  // Center(
+                                                                  //     child:
+                                                                  //         ScrollableTableView(
+                                                                  //       columns:
+                                                                  //           [
+                                                                  //         "Plant Name",
+                                                                  //         "SPV",
+                                                                  //         "Location",
+                                                                  //       ].map((column) {
+                                                                  //         return TableViewColumn(
+                                                                  //           label:
+                                                                  //               column,
+                                                                  //           minWidth:
+                                                                  //               Get.width * 0.20,
+                                                                  //         );
+                                                                  //       }).toList(),
+                                                                  //       rows: true
+                                                                  //           ? controller.plantListModel
+                                                                  //               .map((plants) => TableViewRow(height: 90, cells: [
+                                                                  //                     TableViewCell(child: Text("${plants?.name ?? ""}")),
+                                                                  //                     TableViewCell(child: Text("${plants?.spv ?? ""}")),
+                                                                  //                     TableViewCell(child: Text("${plants?.location ?? ""}")),
+                                                                  //                   ]))
+                                                                  //               .toList()
+                                                                  //           : [],
+                                                                  //     ),
+                                                                  //   )
                                                                   : Container())),
                                                     ],
                                                   ),
@@ -541,8 +606,7 @@ class ViewUserDetailContentWeb extends GetView<ViewUserDetailController> {
                                                                               .accessList
                                                                               .map((getAccesslevelDetails) => TableViewRow(height: 40, cells: [
                                                                                     TableViewCell(child: Obx(() {
-                                                                                      return 
-                                                                                      Row(
+                                                                                      return Row(
                                                                                         children: [
                                                                                           Dimens.boxWidth5,
                                                                                           Expanded(child: Text("${getAccesslevelDetails?.feature_name ?? ""}")),

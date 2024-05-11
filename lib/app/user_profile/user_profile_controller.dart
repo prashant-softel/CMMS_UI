@@ -1,6 +1,5 @@
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/user_profile/user_profile_presenter.dart';
-import 'package:cmms/domain/models/facility_model.dart';
 import 'package:cmms/domain/models/get_notification_by_userid_model.dart';
 import 'package:cmms/domain/models/getuser_access_byId_model.dart';
 import 'package:get/get.dart';
@@ -14,7 +13,7 @@ class UserProfileController extends GetxController {
   UserProfilePresenter userProfilePresenter;
   Rx<int> userId = 0.obs;
   Rx<UserDetailsModel?> userDetailModel = UserDetailsModel().obs;
-  RxList<FacilityModel?> plantListModel = <FacilityModel?>[].obs;
+  RxList<PlantAccess?> plantListModel = <PlantAccess?>[].obs;
   Rx<GetAccessLevelByIdModel?> accessListModel = GetAccessLevelByIdModel().obs;
   RxList<GetAccessLevel?> accessList = <GetAccessLevel>[].obs;
   Rx<GetNotificationByUserIdModel?> notificationByUserIdModel =
