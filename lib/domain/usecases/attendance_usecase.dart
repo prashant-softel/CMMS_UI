@@ -5,15 +5,14 @@ class AttendanceUsecase {
   AttendanceUsecase(this.repository);
   Repository repository;
 
-  Future<List<EmployeeModel?>?> getAssignedToList({
+  Future<List<EmployeeModel>?>? getEmployeeListByFacilityId({
     String? auth,
     int? facilityId,
     bool? isLoading,
   }) async =>
-      await repository.getAssignedToList(
-        auth,
-        facilityId,
-        isLoading,
+      await repository.getEmployeeListByFacilityId(
+        facility_id: facilityId,
+        isLoading: isLoading,
       );
 
   Future<bool> addAttendance({

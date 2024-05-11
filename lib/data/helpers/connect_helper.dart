@@ -437,6 +437,20 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> getEmployeeListByFacilityId(
+      {bool? isLoading, required String auth, int? facility_id}) async {
+    ResponseModel responseModel = await apiWrapper.makeRequest(
+      'Facility/GetFacilityListEmployee?facility_id=$facility_id',
+      Request.getMultiparts,
+      null,
+      isLoading ?? true,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
   ///Risk Type List
   Future<ResponseModel> getRiskTypeList(
       {required bool isLoading, required String auth, int? facility_id}) async {
@@ -453,12 +467,12 @@ class ConnectHelper {
   }
 
   Future<ResponseModel> getEmployeePermitList(
-      {required bool isLoading, required String auth, int? facility_id}) async {
+      {bool? isLoading, required String auth, int? facility_id}) async {
     ResponseModel responseModel = await apiWrapper.makeRequest(
       'CMMS/GetEmployeeList?facility_id=$facility_id',
       Request.getMultiparts,
       null,
-      isLoading,
+      isLoading ?? true,
       {
         'Authorization': 'Bearer $auth',
       },

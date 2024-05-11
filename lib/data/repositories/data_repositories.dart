@@ -330,6 +330,18 @@ class DataRepository extends DomainRepository {
     );
   }
 
+  Future<ResponseModel> getEmployeeListByFacilityId({
+    int? facility_id,
+    bool? isLoading,
+    required String auth,
+  }) async {
+    return await connectHelper.getEmployeeListByFacilityId(
+      isLoading: isLoading,
+      auth: auth,
+      facility_id: facility_id,
+    );
+  }
+
   @override
   Future<ResponseModel> getPermitIssuerList({
     int? facility_id,
