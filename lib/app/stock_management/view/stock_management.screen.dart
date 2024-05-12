@@ -260,7 +260,7 @@ class StockManagementDashboardScreen
                                         .where((e) =>
                                             e.feature_id ==
                                                 UserAccessConstants
-                                                    .kempstockrepFeatureId &&
+                                                    .kplantstockrepFeatureId &&
                                             e.view ==
                                                 UserAccessConstants
                                                     .kHaveViewAccess)
@@ -276,7 +276,7 @@ class StockManagementDashboardScreen
                                         .where((e) =>
                                             e.feature_id ==
                                                 UserAccessConstants
-                                                    .ktransactionrepFeatureId &&
+                                                    .kplantstockrepFeatureId &&
                                             e.view ==
                                                 UserAccessConstants
                                                     .kHaveViewAccess)
@@ -292,7 +292,7 @@ class StockManagementDashboardScreen
                                         .where((e) =>
                                             e.feature_id ==
                                                 UserAccessConstants
-                                                    .kfaultystockrepFeatureId &&
+                                                    .kplantstockrepFeatureId &&
                                             e.view ==
                                                 UserAccessConstants
                                                     .kHaveViewAccess)
