@@ -113,13 +113,8 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb> {
                             () => SizedBox(
                               width: MediaQuery.of(context).size.width / 3,
                               child: CustomMultiSelectDialogField(
-                                title: 'Select Facilty',
-                                // buttonText:
-                                //     'Equipment Category',
-                                initialValue: ((controller
-                                        .selectedFacilityIdList.isNotEmpty)
-                                    ? controller.selectedFacilityIdList
-                                    : []),
+                                title: 'Select Facility',
+                                initialValue: controller.selectedFacilityIdList,
                                 items: controller.facilityList
                                     .map(
                                       (facility) => MultiSelectItem(
@@ -128,11 +123,11 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb> {
                                       ),
                                     )
                                     .toList(),
-                                onConfirm: (selectedOptionsList) => {
+                                onConfirm: (selectedOptionsList) {
                                   controller.selectedMultiFacility(
-                                      selectedOptionsList),
+                                      selectedOptionsList);
                                   print(
-                                      'Equipment list ${controller.selectedFacilityIdList}')
+                                      'Equipment list ${controller.selectedFacilityIdList}');
                                 },
                               ),
                             ),
