@@ -71,6 +71,7 @@ class HomeController extends GetxController {
   RxList<int> selectedEquipmentCategoryIdList = <int>[].obs;
   RxList<InventoryCategoryModel?> equipmentCategoryList =
       <InventoryCategoryModel>[].obs;
+  var challanDateTc = TextEditingController();
 
   RxList<FacilityModel?> facilityList = <FacilityModel>[].obs;
   Rx<bool> isFacilitySelected = true.obs;
@@ -259,6 +260,10 @@ class HomeController extends GetxController {
       rowsPerPage: 10,
     );
     update(['inventory_list']);
+  }
+
+  void getDashBordListByDate() {
+    // getdashboardList(facilityId, formattedFromdate1, formattedTodate1, false);
   }
 
   Future<void> getTypePermitList() async {
