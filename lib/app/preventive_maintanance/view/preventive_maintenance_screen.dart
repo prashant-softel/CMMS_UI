@@ -119,7 +119,7 @@ class PreventiveScreen extends GetView<PreventiveController> {
                                         .where((e) =>
                                             e.feature_id ==
                                                 UserAccessConstants
-                                                    .kPmPlanFeatureId &&
+                                                    .kMasterFeatureId &&
                                             e.add ==
                                                 UserAccessConstants
                                                     .kHaveAddAccess)
@@ -241,7 +241,7 @@ class PreventiveScreen extends GetView<PreventiveController> {
                                         .where((e) =>
                                             e.feature_id ==
                                                 UserAccessConstants
-                                                    .kPMchecklistFeatureId &&
+                                                    .kMasterFeatureId &&
                                             e.add ==
                                                 UserAccessConstants
                                                     .kHaveAddAccess)
