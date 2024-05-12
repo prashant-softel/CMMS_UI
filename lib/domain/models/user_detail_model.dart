@@ -140,7 +140,7 @@ class PlantAccess {
       id: parsedJson['id'],
       name: parsedJson['name'],
       spv_id: parsedJson['spv_id'],
-      isEmployees: parsedJson['isEmployees'] == 'true',
+      isEmployees: parsedJson['isEmployees'],
       spv: parsedJson['spv'],
       location: parsedJson['location'],
     );

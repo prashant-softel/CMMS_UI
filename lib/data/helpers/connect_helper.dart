@@ -2612,6 +2612,25 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> getAssignedToEmployee({
+    required String auth,
+    bool? isLoading,
+    int? facilityId,
+    int? featureId,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Facility/GetEmployeeListbyFeatureId?facility_id=$facilityId&featureid=$featureId',
+      Request.get,
+      null,
+      isLoading ?? false,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
   Future<ResponseModel> getWorkTypeList({
     String? categoryIds,
     bool? isLoading,

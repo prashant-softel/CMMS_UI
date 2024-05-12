@@ -1558,6 +1558,18 @@ class DataRepository extends DomainRepository {
         userId: userId,
         isLoading: isLoading,
       );
+  Future<ResponseModel> getAssignedToEmployee({
+    required String auth,
+    int? facilityId,
+    int? featureId,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.getAssignedToEmployee(
+        auth: auth,
+        facilityId: facilityId,
+        featureId: featureId,
+        isLoading: isLoading,
+      );
 
   Future<ResponseModel> getToolsRequiredToWorkTypeList({
     required String auth,

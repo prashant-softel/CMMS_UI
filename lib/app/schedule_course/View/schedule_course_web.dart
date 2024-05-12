@@ -103,38 +103,75 @@ class ScheduleWeb extends GetView<ScheduleController> {
                           color: ColorValues.greyLightColour,
                         ),
                         Container(
-                          margin: Dimens.edgeInsets40,
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
+                          margin: EdgeInsets.all(40),
+                          child: Column(
                             children: [
-                              Container(
-                                margin: Dimens.edgeInsets40,
-                                child: Row(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.end,
-                                      children: [
-                                        Row(
-                                          children: [
-                                            CustomRichText(
-                                                title: "Training Course: "),
-                                            Dimens.boxWidth10,
-                                            Container(
-                                              width: (MediaQuery.of(context)
-                                                      .size
-                                                      .width *
-                                                  .2),
-                                              height: 30,
-                                              decoration: BoxDecoration(
+                              Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Column(
+                                    crossAxisAlignment: CrossAxisAlignment.end,
+                                    children: [
+                                      Row(
+                                        children: [
+                                          CustomRichText(
+                                              title: "Training Course: "),
+                                          Dimens.boxWidth10,
+                                          Container(
+                                            width: (MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                .2),
+                                            height: 30,
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                              border: Border.all(
+                                                color: Color.fromARGB(
+                                                    255, 227, 224, 244),
+                                                width: 1,
+                                              ),
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: Color.fromARGB(
+                                                          255, 236, 234, 234)
+                                                      .withOpacity(0.5),
+                                                  spreadRadius: 2,
+                                                  blurRadius: 5,
+                                                  offset: Offset(0, 2),
+                                                )
+                                              ],
+                                            ),
+                                            child: Obx(
+                                              () => DropdownWebWidget(
+                                                dropdownList: controller
+                                                    .trainingCourseList,
+                                                isValueSelected: controller
+                                                    .isTrainingCourseSelected
+                                                    .value,
+                                                selectedValue: controller
+                                                    .selectedCourseName.value,
+                                                onValueChanged:
+                                                    controller.onValueChanged,
+                                              ),
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                      Dimens.boxHeight10,
+                                      Row(
+                                        children: [
+                                          CustomRichText(
+                                              title: "Training Agency: "),
+                                          Dimens.boxWidth10,
+                                          Container(
+                                            decoration: BoxDecoration(
                                                 borderRadius:
                                                     BorderRadius.circular(10),
                                                 border: Border.all(
-                                                  color: Color.fromARGB(
-                                                      255, 227, 224, 244),
-                                                  width: 1,
-                                                ),
+                                                    color: Color.fromARGB(
+                                                        255, 227, 224, 244),
+                                                    width: 1),
                                                 boxShadow: [
                                                   BoxShadow(
                                                     color: Color.fromARGB(
@@ -144,184 +181,148 @@ class ScheduleWeb extends GetView<ScheduleController> {
                                                     blurRadius: 5,
                                                     offset: Offset(0, 2),
                                                   )
-                                                ],
-                                              ),
-                                              child: Obx(
-                                                () => DropdownWebWidget(
-                                                  dropdownList: controller
-                                                      .trainingCourseList,
-                                                  isValueSelected: controller
-                                                      .isTrainingCourseSelected
-                                                      .value,
-                                                  selectedValue: controller
-                                                      .selectedCourseName.value,
-                                                  onValueChanged:
-                                                      controller.onValueChanged,
-                                                ),
-                                              ),
-                                            )
-                                          ],
-                                        ),
-                                        Dimens.boxHeight10,
-                                        Row(
-                                          children: [
-                                            CustomRichText(
-                                                title: "Training Agency: "),
-                                            Dimens.boxWidth10,
-                                            Container(
-                                              decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(10),
-                                                  border: Border.all(
-                                                      color: Color.fromARGB(
-                                                          255, 227, 224, 244),
-                                                      width: 1),
-                                                  boxShadow: [
-                                                    BoxShadow(
-                                                      color: Color.fromARGB(255,
-                                                              236, 234, 234)
-                                                          .withOpacity(0.5),
-                                                      spreadRadius: 2,
-                                                      blurRadius: 5,
-                                                      offset: Offset(0, 2),
-                                                    )
-                                                  ]),
-                                              width: (MediaQuery.of(context)
-                                                      .size
-                                                      .width *
-                                                  .2),
-                                              height: 30,
-                                              child: Obx(
-                                                () => DropdownWebWidget(
-                                                  dropdownList:
-                                                      controller.trainingAgency,
-                                                  isValueSelected: controller
-                                                      .isTrainingAgencySelected
-                                                      .value,
-                                                  selectedValue: controller
-                                                      .selectedTrainingAgencyName
-                                                      .value,
-                                                  onValueChanged:
-                                                      controller.onValueChanged,
-                                                ),
+                                                ]),
+                                            width: (MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                .2),
+                                            height: 30,
+                                            child: Obx(
+                                              () => DropdownWebWidget(
+                                                dropdownList:
+                                                    controller.trainingAgency,
+                                                isValueSelected: controller
+                                                    .isTrainingAgencySelected
+                                                    .value,
+                                                selectedValue: controller
+                                                    .selectedTrainingAgencyName
+                                                    .value,
+                                                onValueChanged:
+                                                    controller.onValueChanged,
                                               ),
                                             ),
-                                          ],
-                                        ),
-                                        Row(
-                                          children: [
-                                            CustomRichText(title: "Venue: "),
-                                            Dimens.boxWidth10,
-                                            Container(
-                                              decoration: BoxDecoration(
+                                          ),
+                                        ],
+                                      ),
+                                      Dimens.boxHeight10,
+                                      Row(
+                                        children: [
+                                          CustomRichText(title: "Venue: "),
+                                          Dimens.boxWidth10,
+                                          Container(
+                                            decoration: BoxDecoration(
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: Colors.black26,
+                                                  offset: const Offset(
+                                                    5.0,
+                                                    5.0,
+                                                  ),
+                                                  blurRadius: 5.0,
+                                                  spreadRadius: 1.0,
+                                                ),
+                                              ],
+                                              color: ColorValues.whiteColor,
+                                              borderRadius:
+                                                  BorderRadius.circular(5),
+                                            ),
+                                            child: LoginCustomTextfield(
+                                              width: (Get.width * .2),
+                                              keyboardType: TextInputType.text,
+                                              maxLine: 1,
+                                              textController: controller.venue,
+                                              focusNode: controller.venueFocus,
+                                              scrollController:
+                                                  controller.venueScroll,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      Dimens.boxHeight30,
+                                    ],
+                                  ),
+                                  Spacer(),
+                                  Column(
+                                    crossAxisAlignment: CrossAxisAlignment.end,
+                                    children: [
+                                      Row(
+                                        children: [
+                                          CustomRichText(
+                                              title: 'Date Of Training: '),
+                                          Dimens.boxWidth10,
+                                          _buildDateTimeField_web(
+                                            context,
+                                            controller.dateOfTraining,
+                                          ),
+                                        ],
+                                      ),
+                                      Dimens.boxHeight10,
+                                      Row(
+                                        children: [
+                                          CustomRichText(
+                                              title: 'Trainer Name: '),
+                                          Dimens.boxWidth10,
+                                          Container(
+                                            decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(10),
+                                                border: Border.all(
+                                                    color: Color.fromARGB(
+                                                        255, 227, 224, 244),
+                                                    width: 1),
                                                 boxShadow: [
                                                   BoxShadow(
-                                                    color: Colors.black26,
-                                                    offset: const Offset(
-                                                      5.0,
-                                                      5.0,
-                                                    ),
-                                                    blurRadius: 5.0,
-                                                    spreadRadius: 1.0,
-                                                  ),
-                                                ],
-                                                color: ColorValues.whiteColor,
-                                                borderRadius:
-                                                    BorderRadius.circular(5),
-                                              ),
-                                              child: LoginCustomTextfield(
-                                                width: (Get.width * .2),
-                                                keyboardType:
-                                                    TextInputType.text,
-                                                maxLine: 1,
-                                                textController:
-                                                    controller.venue,
-                                                focusNode:
-                                                    controller.venueFocus,
-                                                scrollController:
-                                                    controller.venueScroll,
+                                                    color: Color.fromARGB(
+                                                            255, 236, 234, 234)
+                                                        .withOpacity(0.5),
+                                                    spreadRadius: 2,
+                                                    blurRadius: 5,
+                                                    offset: Offset(0, 2),
+                                                  )
+                                                ]),
+                                            width: (MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                .2),
+                                            height: 30,
+                                            child: Obx(
+                                              () => DropdownWebWidget(
+                                                dropdownList:
+                                                    controller.employees,
+                                                isValueSelected: controller
+                                                    .isEmployeeSelected.value,
+                                                selectedValue: controller
+                                                    .selectedEmployeeName.value,
+                                                onValueChanged:
+                                                    controller.onValueChanged,
                                               ),
                                             ),
-                                          ],
-                                        ),
-                                        Dimens.boxHeight10,
-                                      ],
-                                    ),
-                                    Spacer(),
-                                    Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.end,
-                                      children: [
-                                        Row(
-                                          children: [
-                                            CustomRichText(
-                                                title: 'Date Of Training: '),
-                                            Dimens.boxWidth10,
-                                            _buildDateTimeField_web(
-                                              context,
-                                              controller.dateOfTraining,
-                                            ),
-                                          ],
-                                        ),
-                                        Dimens.boxHeight10,
-                                        Row(
-                                          children: [
-                                            CustomRichText(
-                                                title: 'Trainer Name: '),
-                                            Dimens.boxWidth10,
-                                            Container(
-                                              decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(10),
-                                                  border: Border.all(
-                                                      color: Color.fromARGB(
-                                                          255, 227, 224, 244),
-                                                      width: 1),
-                                                  boxShadow: [
-                                                    BoxShadow(
-                                                      color: Color.fromARGB(255,
-                                                              236, 234, 234)
-                                                          .withOpacity(0.5),
-                                                      spreadRadius: 2,
-                                                      blurRadius: 5,
-                                                      offset: Offset(0, 2),
-                                                    )
-                                                  ]),
-                                              width: (MediaQuery.of(context)
-                                                      .size
-                                                      .width *
-                                                  .2),
-                                              height: 30,
-                                              child: Obx(
-                                                () => DropdownWebWidget(
-                                                  dropdownList:
-                                                      controller.employees,
-                                                  isValueSelected: controller
-                                                      .isEmployeeSelected.value,
-                                                  selectedValue: controller
-                                                      .selectedEmployeeName
-                                                      .value,
-                                                  onValueChanged:
-                                                      controller.onValueChanged,
-                                                ),
-                                              ),
-                                            )
-                                          ],
-                                        ),
-                                        Dimens.boxHeight10,
-                                        Row(
-                                          children: [
-                                            CustomRichText(
-                                                title: "Training Agency: "),
-                                            Dimens.boxWidth10,
-                                            _buildCommentFieldWeb(context),
-                                          ],
-                                        ),
-                                      ],
-                                    ),
+                                          )
+                                        ],
+                                      ),
+                                      Dimens.boxHeight10,
+                                      Row(
+                                        children: [
+                                          CustomRichText(
+                                              title: "Training Agency: "),
+                                          Dimens.boxWidth10,
+                                        ],
+                                      ),
+                                      Dimens.boxHeight30,
+                                    ],
+                                  ),
+                                ],
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(left: 20),
+                                child: Row(
+                                  children: [
+                                    CustomRichText(title: "Comments: "),
+                                    Dimens.boxWidth10,
+                                    _buildCommentFieldWeb(context),
                                   ],
                                 ),
-                              ),
+                              )
                             ],
                           ),
                         ),
@@ -438,7 +439,7 @@ class ScheduleWeb extends GetView<ScheduleController> {
             borderRadius: BorderRadius.circular(5),
           ),
           child: SizedBox(
-            width: Get.width * 0.2,
+            width: Get.width * 0.7,
             child: TextField(
               style: GoogleFonts.lato(
                 textStyle: TextStyle(
