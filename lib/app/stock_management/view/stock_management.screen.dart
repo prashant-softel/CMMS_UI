@@ -382,7 +382,7 @@ class StockManagementDashboardScreen
                                         .where((e) =>
                                             e.feature_id ==
                                                 UserAccessConstants
-                                                    .kassetmasterFeatureId &&
+                                                    .kMasterFeatureId &&
                                             e.add ==
                                                 UserAccessConstants
                                                     .kHaveAddAccess)
