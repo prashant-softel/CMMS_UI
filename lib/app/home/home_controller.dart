@@ -152,9 +152,10 @@ class HomeController extends GetxController {
 
   Future<void> getdashboardList() async {
     dashboardList.value = <DashboardModel>[];
+    String lststrFacilityIds = selectedFacilityIdList.join(',');
     // filteredData.value = <DashboardModel>[];
-    String lststrFacilityIds =
-        selectedFacilityIdList.join(', ').toString() ?? '';
+    // String lststrFacilityIds =
+    //     selectedFacilityIdList.join(', ').toString() ?? '';
     print({"facilityData1": lststrFacilityIds});
 
     final _dashboardList = await homePresenter.getdashboardList(
@@ -202,6 +203,7 @@ class HomeController extends GetxController {
     for (var _selectedFacilityId in _selectedFacilityIds) {
       selectedFacilityIdList.add(_selectedFacilityId);
     }
+    getdashboardList();
   }
 
   Future<void> getFacilityListByUserId() async {
