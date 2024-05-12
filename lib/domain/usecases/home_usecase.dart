@@ -46,7 +46,7 @@ class HomeUsecase {
         isLoading,
       );
   Future<List<DashboardModel?>?> getdashboardList({
-    int? facilityId,
+    String? facilityId,
     bool? isLoading,
   }) async =>
       await _repository.getdashboardList(

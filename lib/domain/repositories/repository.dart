@@ -6227,14 +6227,14 @@ class Repository {
   }
 
   Future<List<DashboardModel?>?> getdashboardList({
-    int? facilityId,
+    String? facilityId,
     bool? isLoading,
   }) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.getdashboardList(
         auth: auth,
-        facilityId: facilityId ?? 0,
+        facilityId: facilityId ?? "",
         isLoading: isLoading ?? false,
       );
 

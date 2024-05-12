@@ -30,6 +30,8 @@ class CmDashboadDetails {
       this.wo_backlog,
       this.wo_delay,
       this.wo_on_time,
+      this.low_stock_items,
+      this.po_items_awaited,
       this.item_list});
   int? created;
   int? submitted;
@@ -43,11 +45,15 @@ class CmDashboadDetails {
   int? wo_on_time;
   int? wo_delay;
   int? wo_backlog;
+  int? low_stock_items;
+  int? po_items_awaited;
   List<Itemlist>? item_list;
 
   factory CmDashboadDetails.fromJson(Map<String, dynamic> parsedJson) =>
       CmDashboadDetails(
         created: parsedJson['created'],
+        low_stock_items: parsedJson['low_stock_items'],
+        po_items_awaited: parsedJson['po_items_awaited'],
         wo_on_time: parsedJson['wo_on_time'],
         wo_delay: parsedJson['wo_delay'],
         wo_backlog: parsedJson['wo_backlog'],
@@ -65,6 +71,8 @@ class CmDashboadDetails {
 
   Map<String, dynamic> toJson() => {
         "created": created,
+        "low_stock_items": low_stock_items,
+        "po_items_awaited": po_items_awaited,
         "wo_on_time": wo_on_time,
         "wo_delay": wo_delay,
         "wo_backlog": wo_backlog,

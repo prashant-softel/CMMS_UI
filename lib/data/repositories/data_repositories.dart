@@ -1324,12 +1324,12 @@ class DataRepository extends DomainRepository {
           frequencyid: frequencyid);
   Future<ResponseModel> getdashboardList({
     required String auth,
-    int? facilityId,
+    String? facilityId,
     bool? isLoading,
   }) async =>
       await connectHelper.getdashboardList(
         auth: auth,
-        facilityId: facilityId ?? 0,
+        facilityId: facilityId ?? "",
         isLoading: isLoading ?? false,
       );
   Future<ResponseModel> getPreventiveCheckListForPm(
