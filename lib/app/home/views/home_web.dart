@@ -1,16 +1,10 @@
-import 'package:cmms/app/home/views/custom_ui_dash.dart';
-import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/home/widgets/header_widget_all_dash.dart';
 import 'package:cmms/app/widgets/custom_multiselect_dialog_field.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:cmms/app/app.dart';
-import 'package:cmms/domain/models/dashboard_model.dart';
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:data_table_2/data_table_2.dart';
-import 'package:cmms/app/app.dart';
 import 'package:multi_select_flutter/multi_select_flutter.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 // import 'package:percent_indicator/circular_percent_indicator.dart';
@@ -551,21 +545,23 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb> {
                                           _gridList(
                                               tittle: "WO on-time",
                                               percent:
-                                                  '${controller.percentage}%'),
+                                                  '${((controller.dashboardBmList.value?.cmDashboadDetails?.wo_on_time ?? 0) / (controller.dashboardBmList.value?.cmDashboadDetails?.total ?? 1) * 100).toString()}%'),
                                           _gridList(
                                               tittle: "WO delay",
                                               percent:
-                                                  '${controller.dashboardBmList.value?.cmDashboadDetails?.wo_delay}%'),
+                                                  '${((controller.dashboardBmList.value?.cmDashboadDetails?.wo_delay ?? 0) / (controller.dashboardBmList.value?.cmDashboadDetails?.total ?? 1) * 100).toString()}%'),
                                           _gridList(
                                               tittle: "WO backlog",
                                               percent:
-                                                  '${controller.dashboardBmList.value?.cmDashboadDetails?.wo_backlog}%'),
+                                                  '${((controller.dashboardBmList.value?.cmDashboadDetails?.wo_backlog ?? 0) / (controller.dashboardBmList.value?.cmDashboadDetails?.total ?? 1) * 100).toString()}%'),
                                           _gridList(
                                               tittle: "Low stock items",
-                                              percent: "03%"),
+                                              percent:
+                                                  '${controller.dashboardBmList.value?.cmDashboadDetails?.low_stock_items}%'),
                                           _gridList(
                                               tittle: "PO Items Awaited",
-                                              percent: "05%"),
+                                              percent:
+                                                  '${controller.dashboardBmList.value?.cmDashboadDetails?.po_items_awaited}%'),
                                         ],
                                       ),
                                     ),
