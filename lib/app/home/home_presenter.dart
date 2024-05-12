@@ -44,11 +44,11 @@ class HomePresenter {
         isLoading: isLoading ?? false,
       );
   Future<List<DashboardModel?>?> getdashboardList({
-    int? facilityId,
+    String? facilityId,
     bool? isLoading,
   }) async =>
       await homeUsecase.getdashboardList(
-        facilityId: facilityId ?? 0,
+        facilityId: facilityId ?? "",
         isLoading: isLoading ?? false,
       );
   Future<List<TypePermitModel?>?> getTypePermitList(

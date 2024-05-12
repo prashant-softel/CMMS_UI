@@ -104,7 +104,7 @@ class HomeController extends GetxController {
   String get formattedFromdate =>
       DateFormat('dd/MM/yyyy').format(fromDate.value);
   String get formattedTodate => DateFormat('dd/MM/yyyy').format(toDate.value);
-
+  double percentage = 0.0;
   Map<String, double> getDataMap() {
     return {
       "BM": 5,
@@ -150,13 +150,15 @@ class HomeController extends GetxController {
     super.onInit();
   }
 
-  Future<void> getdashboardList(
-    int facilityId,
-  ) async {
+  Future<void> getdashboardList() async {
     dashboardList.value = <DashboardModel>[];
     // filteredData.value = <DashboardModel>[];
+    String lststrFacilityIds =
+        selectedFacilityIdList.join(', ').toString() ?? '';
+    print({"facilityData1": lststrFacilityIds});
+
     final _dashboardList = await homePresenter.getdashboardList(
-        facilityId: facilityId, isLoading: true);
+        facilityId: lststrFacilityIds, isLoading: true);
     if (_dashboardList != null) {
       dashboardList.value = _dashboardList;
       dashboardBmList.value = _dashboardList[0];
@@ -164,7 +166,11 @@ class HomeController extends GetxController {
       dashboardMcList.value = _dashboardList[2];
       dashboardIrList.value = _dashboardList[3];
       dashboardSmList.value = _dashboardList[4];
+      dynamic onTime = dashboardBmList.value?.cmDashboadDetails?.wo_on_time;
+      dynamic total = dashboardBmList
+          .value?.cmDashboadDetails?.total; // Avoid division by zero
 
+      percentage = (onTime / total) * 100;
       // BufferdashboardList = dashboardList.value;
       update(['pmPlan_list']);
     }
@@ -204,18 +210,20 @@ class HomeController extends GetxController {
     if (_facilityList != null) {
       for (var facility in _facilityList) {
         facilityList.add(facility);
+        selectedFacilityIdList.add(facility?.id ?? 0);
       }
       getuserAccessData();
 
       final facilityData = await homePresenter.getValue();
-      print({"facilityData": facilityData});
+      print({"facilityData": selectedFacilityIdList});
       Map<String, dynamic> savaData =
           facilityData != '' ? jsonDecode(facilityData ?? '{}') : {};
       selectedFacility.value = savaData['name'] ?? facilityList[0]?.name ?? '';
       print({"selected facality": selectedFacility});
       _facilityId.sink.add(savaData['id'] ?? facilityList[0]?.id ?? 0);
       _facilityName.sink.add(savaData['name'] ?? facilityList[0]?.name ?? '');
-      await getdashboardList(facilityList[0]?.id ?? 0);
+
+      await getdashboardList();
     }
   }
 
