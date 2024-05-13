@@ -1,6 +1,7 @@
 import 'package:cmms/app/add_user/add_user_controller.dart';
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
+import 'package:cmms/app/home/widgets/header_widget_all_dash.dart';
 import 'package:cmms/app/widgets/date_picker.dart';
 import 'package:cmms/app/widgets/dropdown_web.dart';
 import 'package:data_table_2/data_table_2.dart';
@@ -43,7 +44,7 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                 child: Stack(children: [
                   Column(
                     children: [
-                      HeaderWidget(),
+                      HeaderWidgetAllDash(),
                       Container(
                         height: 45,
                         decoration: BoxDecoration(

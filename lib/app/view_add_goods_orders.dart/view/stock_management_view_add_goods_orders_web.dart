@@ -1271,7 +1271,7 @@ class _ViewAddGoodsOrdersWebState extends State<ViewAddGoodsOrdersWeb> {
                                                   (index) => DataRow(cells: [
                                                     DataCell(Text(controller
                                                             .historyList?[index]
-                                                            ?.createdAt
+                                                            ?.createdAt?.result
                                                             .toString() ??
                                                         '')),
                                                     DataCell(Text(controller
