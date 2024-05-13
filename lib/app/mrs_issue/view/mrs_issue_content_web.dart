@@ -263,7 +263,7 @@ class MrsIssueContentWeb extends GetView<MrsIssueController> {
                                             )),
                                             DataColumn(
                                                 label: Text(
-                                              "Available Qyt.",
+                                              "Available Qty.",
                                               style: TextStyle(
                                                   fontSize: 15,
                                                   fontWeight: FontWeight.bold),
@@ -381,7 +381,7 @@ class MrsIssueContentWeb extends GetView<MrsIssueController> {
                                                                   )),
                                                             ),
                                                           )
-                                                        : DataCell(Text("")),
+                                                        : DataCell(Text("NA")),
                                                     DataCell(
                                                       Padding(
                                                         padding:
