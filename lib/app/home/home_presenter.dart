@@ -18,6 +18,9 @@ class HomePresenter {
   }
 
   void clearValue() async => homeUsecase.clearValue();
+  void jobclearValue() async => homeUsecase.jobclearValue();
+  void pmclearValue() async => homeUsecase.pmclearValue();
+  void iRclearValue() async => homeUsecase.iRclearValue();
 
   Future<List<InventoryModel>> getInventoryList({
     required bool isLoading,
@@ -45,10 +48,14 @@ class HomePresenter {
       );
   Future<List<DashboardModel?>?> getdashboardList({
     String? facilityId,
+    dynamic endDate,
+    dynamic startDate,
     bool? isLoading,
   }) async =>
       await homeUsecase.getdashboardList(
         facilityId: facilityId ?? "",
+        endDate: endDate,
+        startDate: startDate,
         isLoading: isLoading ?? false,
       );
   Future<List<TypePermitModel?>?> getTypePermitList(

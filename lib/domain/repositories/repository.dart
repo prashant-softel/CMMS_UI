@@ -5840,7 +5840,8 @@ class Repository {
             .toList();
         return _employeeModelList;
       } else {
-        Utility.showDialog(res.errorCode.toString(), 'feature id edit access employees');
+        Utility.showDialog(
+            res.errorCode.toString(), 'feature id edit access employees');
         return null;
       }
     } catch (error) {
@@ -6228,15 +6229,18 @@ class Repository {
 
   Future<List<DashboardModel?>?> getdashboardList({
     String? facilityId,
+    dynamic startDate,
+    dynamic endDate,
     bool? isLoading,
   }) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.getdashboardList(
-        auth: auth,
-        facilityId: facilityId ?? "",
-        isLoading: isLoading ?? false,
-      );
+          auth: auth,
+          facilityId: facilityId ?? "",
+          isLoading: isLoading ?? false,
+          startDate: startDate,
+          endDate: endDate);
 
       if (!res.hasError) {
         final jsonDashboardModelModels = jsonDecode(res.data);

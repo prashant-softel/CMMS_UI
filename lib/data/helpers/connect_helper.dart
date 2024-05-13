@@ -2186,13 +2186,14 @@ class ConnectHelper {
     return responseModel;
   }
 
-  Future<ResponseModel> getdashboardList({
-    required String auth,
-    bool? isLoading,
-    String? facilityId,
-  }) async {
+  Future<ResponseModel> getdashboardList(
+      {required String auth,
+      bool? isLoading,
+      String? facilityId,
+      dynamic startDate,
+      dynamic endDate}) async {
     var responseModel = await apiWrapper.makeRequest(
-      'CMMS/getDashboadDetails?facilityId=$facilityId&fromDate=2024-04-10&toDate=2024-06-28',
+      'CMMS/getDashboadDetails?facilityId=$facilityId&fromDate=$startDate&toDate=$endDate',
       // 'CMMS/getDashboadDetails?facilityId=$facilityId',
       Request.get,
       null,

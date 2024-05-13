@@ -20,6 +20,9 @@ class HomeUsecase {
   }
 
   void clearValue() async => _repository.clearData(LocalKeys.userDetailId);
+  void jobclearValue() async => _repository.clearData(LocalKeys.jobId);
+  void pmclearValue() async => _repository.clearData(LocalKeys.pmTaskId);
+  void iRclearValue() async => _repository.clearData(LocalKeys.irId);
 
   Future<List<InventoryModel>> getInventoryList({
     required bool isLoading,
@@ -47,10 +50,14 @@ class HomeUsecase {
       );
   Future<List<DashboardModel?>?> getdashboardList({
     String? facilityId,
+    dynamic endDate,
+    dynamic startDate,
     bool? isLoading,
   }) async =>
       await _repository.getdashboardList(
         facilityId: facilityId,
+        endDate: endDate,
+        startDate: startDate,
         isLoading: isLoading,
       );
   Future<List<TypePermitModel?>?> getTypePermitList(
