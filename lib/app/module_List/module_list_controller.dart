@@ -206,6 +206,7 @@ class ModuleListController extends GetxController {
         moduleName: _moduleListNumber,
         featureName: _featureNumber,
         menuImage: null,
+        softwareId: 0,
         add: isToggleOn.value ? 1 : 0,
         edit: isToggle1On.value ? 1 : 0,
         delete: isToggle2On.value ? 1 : 0,

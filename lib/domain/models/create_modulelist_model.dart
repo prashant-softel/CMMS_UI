@@ -8,10 +8,10 @@ String CreateModuleListModelToJson(List<CreateModuleListModel> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
 class CreateModuleListModel {
-  
   String? moduleName;
   String? featureName;
   String? menuImage;
+  int? softwareId;
   int? add;
   int? edit;
   int? delete;
@@ -25,6 +25,7 @@ class CreateModuleListModel {
     this.moduleName,
     this.featureName,
     this.menuImage,
+    this.softwareId,
     this.add,
     this.edit,
     this.delete,
@@ -40,6 +41,7 @@ class CreateModuleListModel {
         moduleName: json['moduleName'],
         featureName: json['featureName'],
         menuImage: json['menuImage'],
+        softwareId: json['software_id'],
         add: json['add'],
         edit: json['edit'],
         delete: json['delete'],
@@ -54,6 +56,7 @@ class CreateModuleListModel {
         "moduleName": moduleName,
         "featureName": featureName,
         "menuImage": menuImage,
+        "software_id":softwareId,
         "add": add,
         "edit": edit,
         "delete": delete,
@@ -61,6 +64,5 @@ class CreateModuleListModel {
         "approve": approve,
         "issue": issue,
         "selfView": selfView,
-
       };
 }
