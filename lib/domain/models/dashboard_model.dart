@@ -32,6 +32,9 @@ class CmDashboadDetails {
       this.wo_on_time,
       this.low_stock_items,
       this.po_items_awaited,
+      this.schedule_compliance_completed,
+      this.schedule_compliance_pending,
+      this.schedule_compliance_total,
       this.item_list});
   int? created;
   int? submitted;
@@ -47,11 +50,18 @@ class CmDashboadDetails {
   int? wo_backlog;
   int? low_stock_items;
   int? po_items_awaited;
+  int? schedule_compliance_total;
+  int? schedule_compliance_completed;
+  int? schedule_compliance_pending;
   List<Itemlist>? item_list;
 
   factory CmDashboadDetails.fromJson(Map<String, dynamic> parsedJson) =>
       CmDashboadDetails(
         created: parsedJson['created'],
+        schedule_compliance_total: parsedJson['schedule_compliance_total'],
+        schedule_compliance_completed:
+            parsedJson['schedule_compliance_completed'],
+        schedule_compliance_pending: parsedJson['schedule_compliance_pending'],
         low_stock_items: parsedJson['low_stock_items'],
         po_items_awaited: parsedJson['po_items_awaited'],
         wo_on_time: parsedJson['wo_on_time'],
@@ -71,6 +81,9 @@ class CmDashboadDetails {
 
   Map<String, dynamic> toJson() => {
         "created": created,
+        "schedule_compliance_total": schedule_compliance_total,
+        "schedule_compliance_completed": schedule_compliance_completed,
+        "schedule_compliance_pending": schedule_compliance_pending,
         "low_stock_items": low_stock_items,
         "po_items_awaited": po_items_awaited,
         "wo_on_time": wo_on_time,
@@ -103,6 +116,7 @@ class Itemlist {
       this.start_date,
       this.status,
       this.status_long,
+      this.wo_decription,
       this.wo_number});
   int? facility_id;
   String? facility_name;
@@ -114,6 +128,7 @@ class Itemlist {
   String? start_date;
   String? end_date;
   int? ptw_id;
+  String? wo_decription;
   int? latestJCStatus;
   int? latestJCid;
   int? latestJCPTWStatus;
@@ -121,6 +136,7 @@ class Itemlist {
 
   factory Itemlist.fromJson(Map<String, dynamic> parsedJson) => Itemlist(
         facility_id: parsedJson['facility_id'],
+        wo_decription: parsedJson['wo_decription'],
         facility_name: parsedJson['facility_name'],
         wo_number: parsedJson['wo_number'],
         status: parsedJson['status'],
@@ -138,6 +154,7 @@ class Itemlist {
 
   Map<String, dynamic> toJson() => {
         "facility_id": facility_id,
+        "wo_decription": wo_decription,
         "facility_name": facility_name,
         "wo_number": wo_number,
         "status": status,

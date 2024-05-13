@@ -105,7 +105,9 @@ class HomeController extends GetxController {
   String get formattedFromdate =>
       DateFormat('dd/MM/yyyy').format(fromDate.value);
   String get formattedTodate => DateFormat('dd/MM/yyyy').format(toDate.value);
-  double percentage = 0.0;
+  String get formattedTodate1 => DateFormat('yyyy-MM-dd').format(toDate.value);
+  String get formattedFromdate1 =>
+      DateFormat('yyyy-MM-dd').format(fromDate.value);
   Map<String, double> getDataMap() {
     return {
       "BM": 5,
@@ -160,7 +162,10 @@ class HomeController extends GetxController {
     print({"facilityData1": lststrFacilityIds});
 
     final _dashboardList = await homePresenter.getdashboardList(
-        facilityId: lststrFacilityIds, isLoading: true);
+        facilityId: lststrFacilityIds,
+        endDate: formattedTodate1,
+        startDate: formattedFromdate1,
+        isLoading: true);
     if (_dashboardList != null) {
       dashboardList.value = _dashboardList;
       dashboardBmList.value = _dashboardList[0];
@@ -168,18 +173,25 @@ class HomeController extends GetxController {
       dashboardMcList.value = _dashboardList[2];
       dashboardIrList.value = _dashboardList[3];
       dashboardSmList.value = _dashboardList[4];
-      dynamic onTime = dashboardBmList.value?.cmDashboadDetails?.wo_on_time;
-      dynamic total = dashboardBmList
-          .value?.cmDashboadDetails?.total; // Avoid division by zero
 
-      percentage = (onTime / total) * 100;
-      // BufferdashboardList = dashboardList.value;
       update(['pmPlan_list']);
     }
   }
 
   void clearStoreData() {
     homePresenter.clearValue();
+  }
+
+  void clearStoreJobData() {
+    homePresenter.jobclearValue();
+  }
+
+  void clearStorePmData() {
+    homePresenter.pmclearValue();
+  }
+
+  void clearStoreIrData() {
+    homePresenter.iRclearValue();
   }
 
   void onChartTapped(int index) {
@@ -263,7 +275,7 @@ class HomeController extends GetxController {
   }
 
   void getDashBordListByDate() {
-    // getdashboardList(facilityId, formattedFromdate1, formattedTodate1, false);
+    getdashboardList();
   }
 
   Future<void> getTypePermitList() async {

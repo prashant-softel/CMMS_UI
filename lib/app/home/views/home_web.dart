@@ -14,6 +14,8 @@ import 'package:pie_chart/pie_chart.dart';
 import 'package:semicircle_indicator/semicircle_indicator.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
+import '../../navigators/app_pages.dart';
+
 class DashBoardHomeWeb extends StatefulWidget {
   DashBoardHomeWeb({
     Key? key,
@@ -294,7 +296,7 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb> {
                                                       percent: 50 /
                                                           100, //vercentage value: 0.6 for 60% (60/100 = 0.6)
                                                       center: Text(
-                                                        "50.0%",
+                                                        '${((controller.dashboardBmList.value?.cmDashboadDetails?.completed ?? 0) / (controller.dashboardBmList.value?.cmDashboadDetails?.total ?? 1) * 100).toStringAsFixed(1)}%',
                                                         style: TextStyle(
                                                             fontWeight:
                                                                 FontWeight.bold,
@@ -368,7 +370,7 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb> {
                                                                 bottomPadding:
                                                                     0,
                                                                 child: Text(
-                                                                  '75%',
+                                                                  '${((controller.dashboardBmList.value?.cmDashboadDetails?.schedule_compliance_completed ?? 0) / (controller.dashboardBmList.value?.cmDashboadDetails?.schedule_compliance_total ?? 1) * 100).toString()}%',
                                                                   style: TextStyle(
                                                                       fontWeight:
                                                                           FontWeight
@@ -425,7 +427,7 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb> {
                                                                 ),
                                                                 Spacer(),
                                                                 Text(
-                                                                  "100",
+                                                                  '${controller.dashboardBmList.value?.cmDashboadDetails?.schedule_compliance_total}',
                                                                   style: TextStyle(
                                                                       fontSize:
                                                                           Get.width * 0.009 -
@@ -445,7 +447,7 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb> {
                                                                 ),
                                                                 Spacer(),
                                                                 Text(
-                                                                  "51",
+                                                                  '${controller.dashboardBmList.value?.cmDashboadDetails?.schedule_compliance_completed}',
                                                                   style: TextStyle(
                                                                       fontSize:
                                                                           Get.width * 0.009 -
@@ -465,7 +467,7 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb> {
                                                                 ),
                                                                 Spacer(),
                                                                 Text(
-                                                                  "49",
+                                                                  '${controller.dashboardBmList.value?.cmDashboadDetails?.schedule_compliance_pending}',
                                                                   style: TextStyle(
                                                                       fontSize:
                                                                           Get.width * 0.009 -
@@ -702,14 +704,13 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb> {
                                                       '')),
                                                   DataCell(Text(
                                                       'BM${controller.dashboardBmList.value?.cmDashboadDetails?.item_list?[index].wo_number.toString() ?? ''}')),
-                                                  DataCell(Text(
-                                                      // controller
-                                                      //       .dashboardBmList
-                                                      //       .value
-                                                      //       ?.cmDashboadDetails
-                                                      //       ?.item_list?[index]
-                                                      //       ?.status_long ??
-                                                      'Wo des harcode')),
+                                                  DataCell(Text(controller
+                                                          .dashboardBmList
+                                                          .value
+                                                          ?.cmDashboadDetails
+                                                          ?.item_list?[index]
+                                                          .wo_decription ??
+                                                      "")),
                                                   DataCell(Text(controller
                                                           .dashboardBmList
                                                           .value
@@ -754,6 +755,30 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb> {
                                                           icon: Icons
                                                               .remove_red_eye_outlined,
                                                           message: 'View',
+                                                          onPress: () {
+                                                            controller
+                                                                .clearStoreJobData();
+                                                            // controller
+                                                            //     .clearStoreDatatype();
+
+                                                            int jobId = controller
+                                                                    .dashboardBmList
+                                                                    .value
+                                                                    ?.cmDashboadDetails
+                                                                    ?.item_list?[
+                                                                        index]
+                                                                    .wo_number ??
+                                                                0;
+                                                            if (jobId != 0) {
+                                                              Get.toNamed(
+                                                                  Routes
+                                                                      .jobDetails,
+                                                                  arguments: {
+                                                                    'jobId':
+                                                                        jobId
+                                                                  });
+                                                            }
+                                                          },
                                                         ),
                                                       ],
                                                     ),
@@ -903,7 +928,7 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb> {
                                                       percent: 50 /
                                                           100, //vercentage value: 0.6 for 60% (60/100 = 0.6)
                                                       center: Text(
-                                                        "50.0%",
+                                                        '${((controller.dashboardPmList.value?.cmDashboadDetails?.completed ?? 0) / (controller.dashboardPmList.value?.cmDashboadDetails?.total ?? 1) * 100).toStringAsFixed(1)}%',
                                                         style: TextStyle(
                                                             fontWeight:
                                                                 FontWeight.bold,
@@ -977,7 +1002,7 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb> {
                                                                 bottomPadding:
                                                                     0,
                                                                 child: Text(
-                                                                  '75%',
+                                                                  '${((controller.dashboardPmList.value?.cmDashboadDetails?.schedule_compliance_completed ?? 0) / (controller.dashboardPmList.value?.cmDashboadDetails?.schedule_compliance_total ?? 1) * 100).toString()}%',
                                                                   style: TextStyle(
                                                                       fontWeight:
                                                                           FontWeight
@@ -1034,7 +1059,7 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb> {
                                                                 ),
                                                                 Spacer(),
                                                                 Text(
-                                                                  "100",
+                                                                  '${controller.dashboardPmList.value?.cmDashboadDetails?.schedule_compliance_total}',
                                                                   style: TextStyle(
                                                                       fontSize:
                                                                           Get.width * 0.009 -
@@ -1054,7 +1079,7 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb> {
                                                                 ),
                                                                 Spacer(),
                                                                 Text(
-                                                                  "51",
+                                                                  '${controller.dashboardPmList.value?.cmDashboadDetails?.schedule_compliance_completed}',
                                                                   style: TextStyle(
                                                                       fontSize:
                                                                           Get.width * 0.009 -
@@ -1074,7 +1099,7 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb> {
                                                                 ),
                                                                 Spacer(),
                                                                 Text(
-                                                                  "49",
+                                                                  '${controller.dashboardPmList.value?.cmDashboadDetails?.schedule_compliance_pending}',
                                                                   style: TextStyle(
                                                                       fontSize:
                                                                           Get.width * 0.009 -
@@ -1175,21 +1200,23 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb> {
                                               _gridList(
                                                   tittle: "WO on-time",
                                                   percent:
-                                                      '${controller.dashboardPmList.value?.cmDashboadDetails?.wo_on_time}%'),
+                                                      '${((controller.dashboardPmList.value?.cmDashboadDetails?.wo_on_time ?? 0) / (controller.dashboardPmList.value?.cmDashboadDetails?.total ?? 1) * 100).toString()}%'),
                                               _gridList(
                                                   tittle: "WO delay",
                                                   percent:
-                                                      '${controller.dashboardPmList.value?.cmDashboadDetails?.wo_delay}%'),
+                                                      '${((controller.dashboardPmList.value?.cmDashboadDetails?.wo_delay ?? 0) / (controller.dashboardPmList.value?.cmDashboadDetails?.total ?? 1) * 100).toString()}%'),
                                               _gridList(
                                                   tittle: "WO backlog",
                                                   percent:
-                                                      '${controller.dashboardPmList.value?.cmDashboadDetails?.wo_backlog}%'),
+                                                      '${((controller.dashboardPmList.value?.cmDashboadDetails?.wo_backlog ?? 0) / (controller.dashboardPmList.value?.cmDashboadDetails?.total ?? 1) * 100).toString()}%'),
                                               _gridList(
                                                   tittle: "Low stock items",
-                                                  percent: "03%"),
+                                                  percent:
+                                                      '${controller.dashboardPmList.value?.cmDashboadDetails?.low_stock_items}%'),
                                               _gridList(
                                                   tittle: "PO Items Awaited",
-                                                  percent: "05%"),
+                                                  percent:
+                                                      '${controller.dashboardPmList.value?.cmDashboadDetails?.po_items_awaited ?? 0}%'),
                                             ],
                                           ),
                                         ),
@@ -1309,14 +1336,13 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb> {
                                                       '')),
                                                   DataCell(Text(
                                                       'PM${controller.dashboardPmList.value?.cmDashboadDetails?.item_list?[index].wo_number.toString() ?? ''}')),
-                                                  DataCell(Text(
-                                                      // controller
-                                                      //       .dashboardPmList
-                                                      //       .value
-                                                      //       ?.cmDashboadDetails
-                                                      //       ?.item_list?[index]
-                                                      //       ?.status_long ??
-                                                      'Wo des harcode')),
+                                                  DataCell(Text(controller
+                                                          .dashboardPmList
+                                                          .value
+                                                          ?.cmDashboadDetails
+                                                          ?.item_list?[index]
+                                                          .wo_decription ??
+                                                      '')),
                                                   DataCell(Text(controller
                                                           .dashboardPmList
                                                           .value
@@ -1361,6 +1387,30 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb> {
                                                           icon: Icons
                                                               .remove_red_eye_outlined,
                                                           message: 'View',
+                                                          onPress: () {
+                                                            controller
+                                                                .clearStorePmData();
+                                                            // controller
+                                                            //     .clearStoreDatatype();
+
+                                                            int pmTaskId = controller
+                                                                    .dashboardPmList
+                                                                    .value
+                                                                    ?.cmDashboadDetails
+                                                                    ?.item_list?[
+                                                                        index]
+                                                                    .wo_number ??
+                                                                0;
+                                                            if (pmTaskId != 0) {
+                                                              Get.toNamed(
+                                                                  Routes
+                                                                      .pmTaskView,
+                                                                  arguments: {
+                                                                    'pmTaskId':
+                                                                        pmTaskId
+                                                                  });
+                                                            }
+                                                          },
                                                         ),
                                                       ],
                                                     ),
@@ -1510,7 +1560,7 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb> {
                                                       percent: 50 /
                                                           100, //vercentage value: 0.6 for 60% (60/100 = 0.6)
                                                       center: Text(
-                                                        "50.0%",
+                                                        '${((controller.dashboardMcList.value?.cmDashboadDetails?.completed ?? 0) / (controller.dashboardMcList.value?.cmDashboadDetails?.total ?? 1) * 100).toStringAsFixed(1)}%',
                                                         style: TextStyle(
                                                             fontWeight:
                                                                 FontWeight.bold,
@@ -1584,7 +1634,7 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb> {
                                                                 bottomPadding:
                                                                     0,
                                                                 child: Text(
-                                                                  '75%',
+                                                                  '${((controller.dashboardMcList.value?.cmDashboadDetails?.schedule_compliance_completed ?? 0) / (controller.dashboardMcList.value?.cmDashboadDetails?.schedule_compliance_total ?? 1) * 100).toString()}%',
                                                                   style: TextStyle(
                                                                       fontWeight:
                                                                           FontWeight
@@ -1641,7 +1691,7 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb> {
                                                                 ),
                                                                 Spacer(),
                                                                 Text(
-                                                                  "100",
+                                                                  '${controller.dashboardMcList.value?.cmDashboadDetails?.schedule_compliance_total}',
                                                                   style: TextStyle(
                                                                       fontSize:
                                                                           Get.width * 0.009 -
@@ -1661,7 +1711,7 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb> {
                                                                 ),
                                                                 Spacer(),
                                                                 Text(
-                                                                  "51",
+                                                                  '${controller.dashboardMcList.value?.cmDashboadDetails?.schedule_compliance_completed}',
                                                                   style: TextStyle(
                                                                       fontSize:
                                                                           Get.width * 0.009 -
@@ -1681,7 +1731,7 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb> {
                                                                 ),
                                                                 Spacer(),
                                                                 Text(
-                                                                  "49",
+                                                                  '${controller.dashboardMcList.value?.cmDashboadDetails?.schedule_compliance_pending}',
                                                                   style: TextStyle(
                                                                       fontSize:
                                                                           Get.width * 0.009 -
@@ -1780,23 +1830,30 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb> {
                                                 MainAxisAlignment.spaceAround,
                                             children: [
                                               _gridList(
-                                                  tittle: "WO on-time",
-                                                  percent:
-                                                      '${controller.dashboardMcList.value?.cmDashboadDetails?.wo_on_time}%'),
+                                                tittle: "WO on-time",
+                                                percent:
+                                                    '${((controller.dashboardMcList.value?.cmDashboadDetails?.wo_on_time ?? 0) / (controller.dashboardMcList.value?.cmDashboadDetails?.total ?? 1) * 100).toString()}%',
+                                              ),
                                               _gridList(
-                                                  tittle: "WO delay",
-                                                  percent:
-                                                      '${controller.dashboardMcList.value?.cmDashboadDetails?.wo_delay}%'),
+                                                tittle: "WO delay",
+                                                percent:
+                                                    '${((controller.dashboardMcList.value?.cmDashboadDetails?.wo_delay ?? 0) / (controller.dashboardMcList.value?.cmDashboadDetails?.total ?? 1) * 100).toString()}%',
+                                              ),
                                               _gridList(
-                                                  tittle: "WO backlog",
-                                                  percent:
-                                                      '${controller.dashboardMcList.value?.cmDashboadDetails?.wo_backlog}%'),
+                                                tittle: "WO backlog",
+                                                percent:
+                                                    '${((controller.dashboardMcList.value?.cmDashboadDetails?.wo_backlog ?? 0) / (controller.dashboardMcList.value?.cmDashboadDetails?.total ?? 1) * 100).toString()}%',
+                                              ),
                                               _gridList(
-                                                  tittle: "Low stock items",
-                                                  percent: "03%"),
+                                                tittle: "Low stock items",
+                                                percent:
+                                                    '${controller.dashboardMcList.value?.cmDashboadDetails?.low_stock_items} %',
+                                              ),
                                               _gridList(
-                                                  tittle: "PO Items Awaited",
-                                                  percent: "05%"),
+                                                tittle: "PO Items Awaited",
+                                                percent:
+                                                    '${controller.dashboardMcList.value?.cmDashboadDetails?.po_items_awaited}%',
+                                              ),
                                             ],
                                           ),
                                         ),
@@ -1916,14 +1973,13 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb> {
                                                       '')),
                                                   DataCell(Text(
                                                       'MC${controller.dashboardMcList.value?.cmDashboadDetails?.item_list?[index].wo_number.toString() ?? ''}')),
-                                                  DataCell(Text(
-                                                      // controller
-                                                      //       .dashboardMcList
-                                                      //       .value
-                                                      //       ?.cmDashboadDetails
-                                                      //       ?.item_list?[index]
-                                                      //       ?.status_long ??
-                                                      'Wo des harcode')),
+                                                  DataCell(Text(controller
+                                                          .dashboardMcList
+                                                          .value
+                                                          ?.cmDashboadDetails
+                                                          ?.item_list?[index]
+                                                          .wo_decription ??
+                                                      '')),
                                                   DataCell(Text(controller
                                                           .dashboardMcList
                                                           .value
@@ -1968,6 +2024,30 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb> {
                                                           icon: Icons
                                                               .remove_red_eye_outlined,
                                                           message: 'View',
+                                                          onPress: () {
+                                                            // controller
+                                                            //     .clearStoreData();
+                                                            // controller
+                                                            //     .clearStoreDatatype();
+
+                                                            int pmTaskId = controller
+                                                                    .dashboardMcList
+                                                                    .value
+                                                                    ?.cmDashboadDetails
+                                                                    ?.item_list?[
+                                                                        index]
+                                                                    .wo_number ??
+                                                                0;
+                                                            if (pmTaskId != 0) {
+                                                              Get.toNamed(
+                                                                  Routes
+                                                                      .pmTaskView,
+                                                                  arguments: {
+                                                                    'pmTaskId':
+                                                                        pmTaskId
+                                                                  });
+                                                            }
+                                                          },
                                                         ),
                                                       ],
                                                     ),
@@ -2117,7 +2197,7 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb> {
                                                       percent: 50 /
                                                           100, //vercentage value: 0.6 for 60% (60/100 = 0.6)
                                                       center: Text(
-                                                        "50.0%",
+                                                        '${((controller.dashboardIrList.value?.cmDashboadDetails?.completed ?? 0) / (controller.dashboardIrList.value?.cmDashboadDetails?.total ?? 1) * 100).toStringAsFixed(1)}%',
                                                         style: TextStyle(
                                                             fontWeight:
                                                                 FontWeight.bold,
@@ -2191,7 +2271,7 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb> {
                                                                 bottomPadding:
                                                                     0,
                                                                 child: Text(
-                                                                  '75%',
+                                                                  '${((controller.dashboardIrList.value?.cmDashboadDetails?.schedule_compliance_completed ?? 0) / (controller.dashboardIrList.value?.cmDashboadDetails?.schedule_compliance_total ?? 1) * 100).toString()}%',
                                                                   style: TextStyle(
                                                                       fontWeight:
                                                                           FontWeight
@@ -2248,7 +2328,7 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb> {
                                                                 ),
                                                                 Spacer(),
                                                                 Text(
-                                                                  "100",
+                                                                  '${controller.dashboardIrList.value?.cmDashboadDetails?.schedule_compliance_total}',
                                                                   style: TextStyle(
                                                                       fontSize:
                                                                           Get.width * 0.009 -
@@ -2268,7 +2348,7 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb> {
                                                                 ),
                                                                 Spacer(),
                                                                 Text(
-                                                                  "51",
+                                                                  '${controller.dashboardIrList.value?.cmDashboadDetails?.schedule_compliance_completed}',
                                                                   style: TextStyle(
                                                                       fontSize:
                                                                           Get.width * 0.009 -
@@ -2288,7 +2368,7 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb> {
                                                                 ),
                                                                 Spacer(),
                                                                 Text(
-                                                                  "49",
+                                                                  '${controller.dashboardIrList.value?.cmDashboadDetails?.schedule_compliance_pending}',
                                                                   style: TextStyle(
                                                                       fontSize:
                                                                           Get.width * 0.009 -
@@ -2387,23 +2467,28 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb> {
                                                 MainAxisAlignment.spaceAround,
                                             children: [
                                               _gridList(
-                                                  tittle: "WO on-time",
-                                                  percent:
-                                                      '${controller.dashboardIrList.value?.cmDashboadDetails?.wo_on_time}%'),
+                                                tittle: "WO on-time",
+                                                percent:
+                                                    '${((controller.dashboardIrList.value?.cmDashboadDetails?.wo_on_time ?? 0) / (controller.dashboardIrList.value?.cmDashboadDetails?.total ?? 1) * 100).toString()}%',
+                                              ),
                                               _gridList(
-                                                  tittle: "WO delay",
-                                                  percent:
-                                                      '${controller.dashboardIrList.value?.cmDashboadDetails?.wo_delay}%'),
+                                                tittle: "WO delay",
+                                                percent:
+                                                    '${((controller.dashboardIrList.value?.cmDashboadDetails?.wo_delay ?? 0) / (controller.dashboardIrList.value?.cmDashboadDetails?.total ?? 1) * 100).toString()}%',
+                                              ),
                                               _gridList(
-                                                  tittle: "WO backlog",
-                                                  percent:
-                                                      '${controller.dashboardIrList.value?.cmDashboadDetails?.wo_backlog}%'),
+                                                tittle: "WO backlog",
+                                                percent:
+                                                    '${((controller.dashboardIrList.value?.cmDashboadDetails?.wo_backlog ?? 0) / (controller.dashboardIrList.value?.cmDashboadDetails?.total ?? 1) * 100).toString()}%',
+                                              ),
                                               _gridList(
                                                   tittle: "Low stock items",
-                                                  percent: "03%"),
+                                                  percent:
+                                                      '${controller.dashboardIrList.value?.cmDashboadDetails?.low_stock_items}%'),
                                               _gridList(
                                                   tittle: "PO Items Awaited",
-                                                  percent: "05%"),
+                                                  percent:
+                                                      '${controller.dashboardIrList.value?.cmDashboadDetails?.po_items_awaited}%'),
                                             ],
                                           ),
                                         ),
@@ -2523,14 +2608,13 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb> {
                                                       '')),
                                                   DataCell(Text(
                                                       'IR${controller.dashboardIrList.value?.cmDashboadDetails?.item_list?[index].wo_number.toString() ?? ''}')),
-                                                  DataCell(Text(
-                                                      // controller
-                                                      //       .dashboardIrList
-                                                      //       .value
-                                                      //       ?.cmDashboadDetails
-                                                      //       ?.item_list?[index]
-                                                      //       ?.status_long ??
-                                                      'Wo des harcode')),
+                                                  DataCell(Text(controller
+                                                          .dashboardIrList
+                                                          .value
+                                                          ?.cmDashboadDetails
+                                                          ?.item_list?[index]
+                                                          .wo_decription ??
+                                                      '')),
                                                   DataCell(Text(controller
                                                           .dashboardIrList
                                                           .value
@@ -2575,6 +2659,29 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb> {
                                                           icon: Icons
                                                               .remove_red_eye_outlined,
                                                           message: 'View',
+                                                          onPress: () {
+                                                            controller
+                                                                .clearStoreIrData();
+                                                            // controller
+                                                            //     .clearStoreDatatype();
+
+                                                            int iRId = controller
+                                                                    .dashboardIrList
+                                                                    .value
+                                                                    ?.cmDashboadDetails
+                                                                    ?.item_list?[
+                                                                        index]
+                                                                    .wo_number ??
+                                                                0;
+                                                            if (iRId != 0) {
+                                                              Get.toNamed(
+                                                                  Routes
+                                                                      .viewIncidentReportScreen,
+                                                                  arguments: {
+                                                                    'irId': iRId
+                                                                  });
+                                                            }
+                                                          },
                                                         ),
                                                       ],
                                                     ),
@@ -2724,7 +2831,7 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb> {
                                                       percent: 50 /
                                                           100, //vercentage value: 0.6 for 60% (60/100 = 0.6)
                                                       center: Text(
-                                                        "50.0%",
+                                                        '${((controller.dashboardSmList.value?.cmDashboadDetails?.completed ?? 0) / (controller.dashboardSmList.value?.cmDashboadDetails?.total ?? 1) * 100).toStringAsFixed(1)}%',
                                                         style: TextStyle(
                                                             fontWeight:
                                                                 FontWeight.bold,
@@ -2798,7 +2905,7 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb> {
                                                                 bottomPadding:
                                                                     0,
                                                                 child: Text(
-                                                                  '75%',
+                                                                  '${((controller.dashboardSmList.value?.cmDashboadDetails?.schedule_compliance_completed ?? 0) / (controller.dashboardSmList.value?.cmDashboadDetails?.schedule_compliance_total ?? 1) * 100).toString()}%',
                                                                   style: TextStyle(
                                                                       fontWeight:
                                                                           FontWeight
@@ -2855,7 +2962,7 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb> {
                                                                 ),
                                                                 Spacer(),
                                                                 Text(
-                                                                  "100",
+                                                                  '${controller.dashboardSmList.value?.cmDashboadDetails?.schedule_compliance_total}',
                                                                   style: TextStyle(
                                                                       fontSize:
                                                                           Get.width * 0.009 -
@@ -2875,7 +2982,7 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb> {
                                                                 ),
                                                                 Spacer(),
                                                                 Text(
-                                                                  "51",
+                                                                  '${controller.dashboardSmList.value?.cmDashboadDetails?.schedule_compliance_completed}',
                                                                   style: TextStyle(
                                                                       fontSize:
                                                                           Get.width * 0.009 -
@@ -2895,7 +3002,7 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb> {
                                                                 ),
                                                                 Spacer(),
                                                                 Text(
-                                                                  "49",
+                                                                  '${controller.dashboardSmList.value?.cmDashboadDetails?.schedule_compliance_pending}',
                                                                   style: TextStyle(
                                                                       fontSize:
                                                                           Get.width * 0.009 -
@@ -2994,23 +3101,28 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb> {
                                                 MainAxisAlignment.spaceAround,
                                             children: [
                                               _gridList(
-                                                  tittle: "WO on-time",
-                                                  percent:
-                                                      '${controller.dashboardMcList.value?.cmDashboadDetails?.wo_on_time}%'),
+                                                tittle: "WO on-time",
+                                                percent:
+                                                    '${((controller.dashboardBmList.value?.cmDashboadDetails?.completed ?? 0) / (controller.dashboardBmList.value?.cmDashboadDetails?.total ?? 1) * 100).toString()}%',
+                                              ),
                                               _gridList(
-                                                  tittle: "WO delay",
-                                                  percent:
-                                                      '${controller.dashboardSmList.value?.cmDashboadDetails?.wo_delay}%'),
+                                                tittle: "WO delay",
+                                                percent:
+                                                    '${((controller.dashboardBmList.value?.cmDashboadDetails?.wo_delay ?? 0) / (controller.dashboardBmList.value?.cmDashboadDetails?.total ?? 1) * 100).toString()}%',
+                                              ),
                                               _gridList(
-                                                  tittle: "WO backlog",
-                                                  percent:
-                                                      '${controller.dashboardSmList.value?.cmDashboadDetails?.wo_backlog}%'),
+                                                tittle: "WO backlog",
+                                                percent:
+                                                    '${((controller.dashboardBmList.value?.cmDashboadDetails?.wo_backlog ?? 0) / (controller.dashboardBmList.value?.cmDashboadDetails?.total ?? 1) * 100).toString()}%',
+                                              ),
                                               _gridList(
                                                   tittle: "Low stock items",
-                                                  percent: "03%"),
+                                                  percent:
+                                                      '${controller.dashboardSmList.value?.cmDashboadDetails?.low_stock_items}%'),
                                               _gridList(
                                                   tittle: "PO Items Awaited",
-                                                  percent: "05%"),
+                                                  percent:
+                                                      '${controller.dashboardSmList.value?.cmDashboadDetails?.po_items_awaited}%'),
                                             ],
                                           ),
                                         ),
@@ -3130,14 +3242,13 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb> {
                                                       '')),
                                                   DataCell(Text(
                                                       'SM${controller.dashboardSmList.value?.cmDashboadDetails?.item_list?[index].wo_number.toString() ?? ''}')),
-                                                  DataCell(Text(
-                                                      // controller
-                                                      //       .dashboardSmList
-                                                      //       .value
-                                                      //       ?.cmDashboadDetails
-                                                      //       ?.item_list?[index]
-                                                      //       ?.status_long ??
-                                                      'Wo des harcode')),
+                                                  DataCell(Text(controller
+                                                          .dashboardSmList
+                                                          .value
+                                                          ?.cmDashboadDetails
+                                                          ?.item_list?[index]
+                                                          .wo_decription ??
+                                                      '')),
                                                   DataCell(Text(controller
                                                           .dashboardSmList
                                                           .value
@@ -3182,6 +3293,30 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb> {
                                                           icon: Icons
                                                               .remove_red_eye_outlined,
                                                           message: 'View',
+                                                          onPress: () {
+                                                            // controller
+                                                            //     .clearStoreData();
+                                                            // controller
+                                                            //     .clearStoreDatatype();
+
+                                                            int pmTaskId = controller
+                                                                    .dashboardSmList
+                                                                    .value
+                                                                    ?.cmDashboadDetails
+                                                                    ?.item_list?[
+                                                                        index]
+                                                                    .wo_number ??
+                                                                0;
+                                                            if (pmTaskId != 0) {
+                                                              Get.toNamed(
+                                                                  Routes
+                                                                      .pmTaskView,
+                                                                  arguments: {
+                                                                    'pmTaskId':
+                                                                        pmTaskId
+                                                                  });
+                                                            }
+                                                          },
                                                         ),
                                                       ],
                                                     ),
@@ -3234,7 +3369,6 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb> {
                       dropDate != null
                           ? controller.toDate.value = dropDate
                           : controller.toDate.value = pickUpDate;
-
                       controller.getDashBordListByDate();
                       controller.openFromDateToStartDatePicker =
                           !controller.openFromDateToStartDatePicker;
