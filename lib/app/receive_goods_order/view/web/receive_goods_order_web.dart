@@ -1699,7 +1699,7 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                                         DataCell(Text(controller
                                                                 .historyList?[
                                                                     index]
-                                                                ?.createdAt
+                                                                ?.createdAt?.result
                                                                 .toString() ??
                                                             '')),
                                                         DataCell(Text(controller
