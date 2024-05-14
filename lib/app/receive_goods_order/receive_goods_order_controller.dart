@@ -12,6 +12,7 @@ import 'package:cmms/domain/models/history_model.dart';
 
 import 'package:cmms/domain/models/paiyed_model.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:rxdart/subjects.dart';
@@ -33,25 +34,28 @@ class ReceiveGoodsOrdersController extends GetxController {
   Rx<String> selectedUnitCurrency = ''.obs;
   RxList<String?> selectedUnitCurrencyList = <String>[].obs;
   int selectedUnitCurrencyId = 0;
-  Rx<bool>isVehicalInvalid = false.obs;
-  Rx<bool>isPOInvalid = false.obs;
-  Rx<bool>isInvoiceInvalid = false.obs;
-  Rx<bool>isDeliveryChallanInvalid= false.obs;
-  Rx<bool>isCountInvalid= false.obs;
-  Rx<bool>isFreightInvalid= false.obs;
-  Rx<bool>isGRNInvalid= false.obs;
-  Rx<bool>isEwayInvalid= false.obs;
-  Rx<bool>isInspectionInvalid= false.obs;
+  Rx<bool> isVehicalInvalid = false.obs;
+  Rx<bool> isPOInvalid = false.obs;
+  Rx<bool> isInvoiceInvalid = false.obs;
+  Rx<bool> isDeliveryChallanInvalid = false.obs;
+  Rx<bool> isCountInvalid = false.obs;
+  Rx<bool> isFreightInvalid = false.obs;
+  Rx<bool> isGRNInvalid = false.obs;
+  Rx<bool> isEwayInvalid = false.obs;
+  Rx<bool> isInspectionInvalid = false.obs;
+  Rx<bool> isFormInvalid = false.obs;
 
-   Rx<bool>isLRInvalid= false.obs;
-   
+  Rx<bool> isLRInvalid = false.obs;
 
-  
-  
- Rx<bool>  isInwardInvalid= false.obs;
- 
-Rx<bool>isAmountInvalid= false.obs;
- 
+  Rx<String> selectedBlock = ''.obs;
+  Rx<bool> isBlockSelected = true.obs;
+  int selectedBlockId = 0;
+  RxList<int?> selectedBlockIdList = <int>[].obs;
+
+  Rx<bool> isInwardInvalid = false.obs;
+
+  Rx<bool> isAmountInvalid = false.obs;
+
   RxList<int?> selectedUnitCurrencyIdList = <int>[].obs;
   BehaviorSubject<int> _facilityId = BehaviorSubject.seeded(0);
   StreamSubscription<int>? facilityIdStreamSubscription;
@@ -98,8 +102,8 @@ Rx<bool>isAmountInvalid= false.obs;
   var amountCtrlr = TextEditingController();
   var freightValueCtrlr = TextEditingController();
   var inspectionReportCtrlr = TextEditingController();
-   FocusNode VehicalFocus = FocusNode();
-  ScrollController  VehicalScroll = ScrollController();
+  FocusNode VehicalFocus = FocusNode();
+  ScrollController VehicalScroll = ScrollController();
 
   var purchaseDateTc = TextEditingController();
   var challanDateTc = TextEditingController();
@@ -375,22 +379,22 @@ Rx<bool>isAmountInvalid= false.obs;
     switch (list.runtimeType) {
       case RxList<CurrencyListModel>:
         {
-         if (value != "Please Select") {
+          if (value != "Please Select") {
             int currencyIndex =
-              unitCurrencyList.indexWhere((x) => x?.name == value);
-          selectedUnitCurrencyId = unitCurrencyList[currencyIndex]?.id ?? 0;
-         } else {
-           selectedUnitCurrencyId=0;
-         }
+                unitCurrencyList.indexWhere((x) => x?.name == value);
+            selectedUnitCurrencyId = unitCurrencyList[currencyIndex]?.id ?? 0;
+          } else {
+            selectedUnitCurrencyId = 0;
+          }
         }
         break;
       case RxList<BusinessTypeModel>:
         {
           if (value != "Please Select") {
             int equipmentIndex = ownerList.indexWhere((x) => x?.name == value);
-          selectedBusinessTypeId = ownerList[equipmentIndex]?.id ?? 0;
+            selectedBusinessTypeId = ownerList[equipmentIndex]?.id ?? 0;
           } else {
-            selectedBusinessTypeId=0;
+            selectedBusinessTypeId = 0;
           }
         }
         break;
@@ -398,9 +402,9 @@ Rx<bool>isAmountInvalid= false.obs;
         {
           if (value != "Please Select") {
             int paidIndex = paid.indexWhere((x) => x!.name == value);
-          paidId = paid[paidIndex]!.id ?? 0;
+            paidId = paid[paidIndex]!.id ?? 0;
           } else {
-            paidId=0;
+            paidId = 0;
           }
         }
         break;
@@ -468,6 +472,10 @@ Rx<bool>isAmountInvalid= false.obs;
   }
 
   void createGoodsOrder() async {
+    checkForm();
+    if (isFormInvalid.value) {
+      return ; 
+    }
     String _challanNoCtrlr = challanNoCtrlr.text.trim();
     String _pOCtrlr = pOCtrlr.text.trim();
     String _frieghtToPayPaidCtrlr = frieghtToPayPaidCtrlr.text.trim();
@@ -549,8 +557,78 @@ Rx<bool>isAmountInvalid= false.obs;
       }
     }
   }
+    //validation check from
+    void checkForm() {
+      if (selectedBlock.value == '') {
+        isBlockSelected.value = false;
+      }
+      //  if (selectedWorkTypeList.length < 1) {
+      //   isWorkTypeSelected.value = false;
+      // }
+      // if (selectedEquipmentCategoryIdList.length < 1) {
+      //   isEquipmentCategorySelected.value = false;
+      // }
+      // if (selectedWorkAreaList.length < 1) {
+      //   isWorkAreaSelected.value = false;
+      // }
+
+      // if (challanNoCtrlr.text.trim().length < 3) {
+      //   // isCountInvalid.value = true;
+      // }
+      if (amountCtrlr.text.trim().length < 3) {
+        isAmountInvalid.value = true;
+      }
+      if (frieghtToPayPaidCtrlr.text.trim().length < 3) {
+        isInvoiceInvalid.value = true;
+      }
+      // if (noOfPackagesReceivedCtrlr.text.trim().length < 3) {
+      //   isCountInvalid.value = true;
+      // }
+      if (vehicleNoCtrlr.text.trim().length < 3) {
+        isVehicalInvalid.value = true;
+      }
+      if (amountCtrlr.text.trim().length < 3) {
+        isInwardInvalid.value = true;
+      }
+      if (freightValueCtrlr.text.trim().length < 3) {
+        isFreightInvalid.value = true;
+      }
+      if (girNoCtrlr.text.trim().length < 3) {
+        isGRNInvalid.value = true;
+      }
+      if (lrNoCtrlr.text.trim().length < 3) {
+        isLRInvalid.value = true;
+      }
+      if (jobRefCtrlr.text.trim().length < 3) {
+        isEwayInvalid.value = true;
+      }
+      if (inspectionReportCtrlr.text.trim().length < 3) {
+        isInspectionInvalid.value = true;
+      }
+
+      if (isPOInvalid.value == true ||
+          isAmountInvalid.value == true ||
+          isInvoiceInvalid.value == true ||
+          isDeliveryChallanInvalid.value == true ||
+          isCountInvalid.value == true ||
+          isVehicalInvalid.value == true ||
+          isInwardInvalid.value == true ||
+          isFreightInvalid.value == true ||
+          isGRNInvalid.value == true ||
+          isLRInvalid.value == true ||
+          isEwayInvalid.value == true ||
+          isInspectionInvalid.value == true) {
+        isFormInvalid.value = true;
+      } else {
+        isFormInvalid.value = false;
+      }
+    }
 
   void updateGOReceive() async {
+    checkForm();
+    if (isFormInvalid.value) {
+      return ; 
+    }
     String _challanNoCtrlr = challanNoCtrlr.text.trim();
     String _pOCtrlr = pOCtrlr.text.trim();
     String _frieghtToPayPaidCtrlr = frieghtToPayPaidCtrlr.text.trim();
@@ -599,6 +677,8 @@ Rx<bool>isAmountInvalid= false.obs;
       ;
       items.add(item);
     });
+  
+
     CreateGoModel createGoModel = CreateGoModel(
         id: goId.value,
         facility_id: facilityId,
@@ -640,6 +720,10 @@ Rx<bool>isAmountInvalid= false.obs;
   }
 
   void updateGOReceiveIsSubmit0() async {
+    checkForm();
+    if (isFormInvalid.value) {
+      return ; 
+    }
     String _challanNoCtrlr = challanNoCtrlr.text.trim();
     String _pOCtrlr = pOCtrlr.text.trim();
     String _frieghtToPayPaidCtrlr = frieghtToPayPaidCtrlr.text.trim();
