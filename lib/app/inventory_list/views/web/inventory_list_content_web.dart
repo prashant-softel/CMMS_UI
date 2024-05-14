@@ -485,6 +485,7 @@ class InventoryListDataSource extends DataTableSource {
               .toLowerCase()
               .toUpperCase()
               .toString());
+           
 
       // Add other filter conditions as needed
     }).toList();
@@ -507,6 +508,7 @@ class InventoryListDataSource extends DataTableSource {
       '${InventoryListDetails?.parentName ?? ''}',
       '${InventoryListDetails?.categoryName ?? ''}',
       '${InventoryListDetails?.blockName ?? ''}',
+      // '${InventoryListDetails?.description ?? ''}',
       'Actions',
     ];
     var cells = [];

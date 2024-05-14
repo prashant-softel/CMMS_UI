@@ -295,7 +295,7 @@ class ViewAddInventoryScreen extends GetView<ViewAddInventoryController> {
                                                     minWidth: 100,
                                                   ),
                                                   child: LoginCustomTextfield(
-                                                    enabled: false,
+                                                    // enabled: false,
                                                     textController: controller
                                                         .assesDiscriptionCtrlr,
                                                   ),
