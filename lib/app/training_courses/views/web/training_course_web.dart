@@ -25,7 +25,7 @@ final List<Map<dynamic, dynamic>> courseData = [
     "MaxCapacity": "20"
   },
   {
-    "id": "1",
+    "id": "2",
     "topic": "test",
     "Desc": "test",
     "Category": "test",
@@ -34,7 +34,7 @@ final List<Map<dynamic, dynamic>> courseData = [
     "MaxCapacity": "20"
   },
   {
-    "id": "1",
+    "id": "3",
     "topic": "test",
     "Desc": "test",
     "Category": "test",

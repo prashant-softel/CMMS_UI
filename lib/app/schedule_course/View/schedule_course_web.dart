@@ -273,6 +273,44 @@ class ScheduleWeb extends GetView<ScheduleController> {
                                           Dimens.boxWidth10,
                                           Container(
                                             decoration: BoxDecoration(
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: Colors.black26,
+                                                  offset: const Offset(
+                                                    5.0,
+                                                    5.0,
+                                                  ),
+                                                  blurRadius: 5.0,
+                                                  spreadRadius: 1.0,
+                                                ),
+                                              ],
+                                              color: ColorValues.whiteColor,
+                                              borderRadius:
+                                                  BorderRadius.circular(5),
+                                            ),
+                                            child: LoginCustomTextfield(
+                                              width: (Get.width * .2),
+                                              keyboardType: TextInputType.text,
+                                              maxLine: 1,
+                                              textController:
+                                                  controller.trainerName,
+                                              focusNode:
+                                                  controller.trainerFocus,
+                                              scrollController:
+                                                  controller.trainerScroll,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      
+                                      Dimens.boxHeight10,
+                                      Row(
+                                        children: [
+                                          CustomRichText(
+                                              title: "HFE Employee: "),
+                                          Dimens.boxWidth10,
+                                          Container(
+                                            decoration: BoxDecoration(
                                                 borderRadius:
                                                     BorderRadius.circular(10),
                                                 border: Border.all(
@@ -306,7 +344,7 @@ class ScheduleWeb extends GetView<ScheduleController> {
                                                     controller.onValueChanged,
                                               ),
                                             ),
-                                          )
+                                          ),
                                         ],
                                       ),
                                       Dimens.boxHeight10,
@@ -374,7 +412,7 @@ class ScheduleWeb extends GetView<ScheduleController> {
                                         child: Column(
                                           children: [
                                             CustomAppBar(
-                                              title: 'No Of Attendees'.tr,
+                                              title: 'Employees'.tr,
                                               action: Row(
                                                 children: [
                                                   ActionButton(
@@ -391,7 +429,6 @@ class ScheduleWeb extends GetView<ScheduleController> {
                                                 ],
                                               ),
                                             ),
-                                            Dimens.boxHeight10,
                                             Wrap(
                                               children: [
                                                 Column(
@@ -412,7 +449,8 @@ class ScheduleWeb extends GetView<ScheduleController> {
                                                             border:
                                                                 TableBorder.all(
                                                               color: Colors.grey
-                                                                  .withOpacity(0.3),
+                                                                  .withOpacity(
+                                                                      0.3),
                                                             ),
                                                             columns: [
                                                               DataColumn(
@@ -511,7 +549,7 @@ class ScheduleWeb extends GetView<ScheduleController> {
                                         child: Column(
                                           children: [
                                             CustomAppBar(
-                                              title: 'External Employee'.tr,
+                                              title: 'External People'.tr,
                                               action: Row(
                                                 children: [
                                                   ActionButton(
@@ -528,7 +566,6 @@ class ScheduleWeb extends GetView<ScheduleController> {
                                                 ],
                                               ),
                                             ),
-                                            Dimens.boxHeight10,
                                             Wrap(
                                               children: [
                                                 Column(
@@ -547,6 +584,12 @@ class ScheduleWeb extends GetView<ScheduleController> {
                                                         child:
                                                             SingleChildScrollView(
                                                           child: DataTable(
+                                                            border:
+                                                                TableBorder.all(
+                                                              color: Colors.grey
+                                                                  .withOpacity(
+                                                                      0.3),
+                                                            ),
                                                             columns: [
                                                               DataColumn(
                                                                 label: Text(

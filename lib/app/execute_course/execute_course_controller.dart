@@ -1,7 +1,7 @@
 import 'dart:async';
 
+import 'package:cmms/app/execute_course/execute_course_presenter.dart';
 import 'package:cmms/app/home/home_controller.dart';
-import 'package:cmms/app/schedule_course/schedule_course_presenter.dart';
 import 'package:cmms/domain/models/employee_list_model.dart';
 import 'package:cmms/domain/models/employee_model.dart';
 import 'package:cmms/domain/models/schedule_course_model.dart';
@@ -11,10 +11,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rxdart/subjects.dart';
 
-class ScheduleController extends GetxController {
-  ScheduleController(this.schedulePresenter);
+class ExecuteCourseController extends GetxController {
+  ExecuteCourseController(this.schedulePresenter);
 
-  SchedulePresenter schedulePresenter;
+  ExecuteCoursePresenter schedulePresenter;
   HomeController homeController = Get.find();
   RxInt facilityId = 0.obs;
   StreamSubscription<int>? facilityIdStreamSubscription;
@@ -62,10 +62,45 @@ class ScheduleController extends GetxController {
       <ScheduleTrainingCourse>[].obs;
   RxList<int> selectedEmployeeIdList = <int>[].obs;
   RxList<EmployeeListModel?> employeeNameList = <EmployeeListModel>[].obs;
-  RxList<EmployeeListModel?> filteredEmployeeNameList =
-      <EmployeeListModel>[].obs;
+  RxList<EmployeeListModel?> filteredEmployeeNameList = <EmployeeListModel>[
+    EmployeeListModel(
+      id: 35,
+      name: "Stella Coleman",
+      mobileNumber: "(764) 598-3992",
+    ),
+    EmployeeListModel(
+      id: 42,
+      name: "Genevieve Hansen",
+      mobileNumber: "(668) 832-6583",
+    ),
+    EmployeeListModel(
+      id: 42,
+      name: "Genevieve Hansen",
+      mobileNumber: "(668) 832-6583",
+    ),
+  ].obs;
   RxList<InternalEmployee> internalEmployees = <InternalEmployee>[].obs;
-  RxList<ExternalEmployees> externalEmployees = <ExternalEmployees>[].obs;
+  List<TextEditingController> noteListInternal =
+      List.generate(3, (index) => TextEditingController());
+  List<TextEditingController> noteListExternal =
+      List.generate(3, (index) => TextEditingController());
+  RxList<ExternalEmployees> externalEmployees = <ExternalEmployees>[
+    ExternalEmployees(
+      employeeName: "Cody Little",
+      employeeEmail: "lima@lim.mz",
+      employeeNumber: "(832) 948-5333",
+    ),
+    ExternalEmployees(
+      employeeName: "Virginia Underwood",
+      employeeEmail: "uc@upopo.tn",
+      employeeNumber: "(567) 396-8452",
+    ),
+    ExternalEmployees(
+      employeeName: "Daisy Parsons",
+      employeeEmail: "wemko@wo.cz",
+      employeeNumber: "(384) 437-1540",
+    ),
+  ].obs;
   RxList<GenderModel> mode = <GenderModel>[
     GenderModel(id: 1, name: 'Online'),
     GenderModel(id: 2, name: 'Offline'),
@@ -80,12 +115,12 @@ class ScheduleController extends GetxController {
       name: 'Tanmay',
     ),
   ].obs;
-  RxList<EmployeeModel> trainingAgency = <EmployeeModel>[
-    EmployeeModel(
+  RxList<StatusModel> trainingAgency = <StatusModel>[
+    StatusModel(
       id: 1,
       name: 'Softel Technologies',
     ),
-    EmployeeModel(
+    StatusModel(
       id: 2,
       name: 'Hero Future Energies',
     ),
@@ -133,11 +168,6 @@ class ScheduleController extends GetxController {
     employeeNumberFocus.addListener(() {
       if (!employeeNumberFocus.hasFocus) {
         employeeNumberScroll.jumpTo(0.0);
-      }
-    });
-    trainerFocus.addListener(() {
-      if (!trainerFocus.hasFocus) {
-        trainerScroll.jumpTo(0.0);
       }
     });
     super.onInit();
@@ -211,11 +241,10 @@ class ScheduleController extends GetxController {
           print("facility selected $selectedCourseName, $selectedCourseId");
         }
         break;
-      case RxList<EmployeeModel>:
+      case RxList<StatusModel>:
         {
           int agencyIndex = trainingAgency.indexWhere((x) => x.name == value);
-          selectedTrainingAgencyName.value =
-              trainingAgency[agencyIndex].name ?? '';
+          selectedTrainingAgencyName.value = trainingAgency[agencyIndex].name;
           selectedTrainingAgencyId.value = trainingAgency[agencyIndex].id ?? 0;
           print(
               "facility selected $selectedTrainingAgencyId, $selectedTrainingAgencyName");

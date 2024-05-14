@@ -75,266 +75,278 @@ class _ScheduleCourseWebState extends State<ScheduleCourseWeb> {
       builder: (controller) {
         return SelectionArea(
           child: SingleChildScrollView(
-            child: Column(children: [
-              HeaderWidget(),
-              Container(
-                height: 45,
-                decoration: BoxDecoration(
-                    border: Border.all(
-                        color: Color.fromARGB(255, 227, 224, 224), width: 1),
-                    boxShadow: [
-                      BoxShadow(
-                        color:
-                            Color.fromARGB(255, 236, 234, 234).withOpacity(0.5),
-                        spreadRadius: 2,
-                        blurRadius: 5,
-                        offset: Offset(0, 2),
-                      )
-                    ]),
-                child: Row(
-                  children: [
-                    Icon(
-                      Icons.home,
-                      color: ColorValues.greyLightColor,
-                    ),
-                    InkWell(
-                      onTap: () {
-                        Get.offNamed(Routes.home);
-                      },
-                      child: Text(
-                        "DASHBOARD",
-                        style: Styles.greyLight14,
-                      ),
-                    ),
-                    InkWell(
-                      onTap: () {
-                        Get.offNamed(Routes.misDashboard);
-                      },
-                      child: Text(
-                        " / MIS",
-                        style: Styles.greyLight14,
-                      ),
-                    ),
-                    Text(
-                      " / SCHEDULE COURSE LIST",
-                      style: Styles.greyLight14,
-                    )
-                  ],
-                ),
-              ),
-              Stack(children: [
+            child: Column(
+              children: [
+                HeaderWidget(),
                 Container(
-                    width: Get.width * 7,
-                    margin: EdgeInsets.only(left: 10, top: 20, right: 10),
-                    height: Get.height,
-                    child: Column(
+                  height: 45,
+                  decoration: BoxDecoration(
+                      border: Border.all(
+                          color: Color.fromARGB(255, 227, 224, 224), width: 1),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Color.fromARGB(255, 236, 234, 234)
+                              .withOpacity(0.5),
+                          spreadRadius: 2,
+                          blurRadius: 5,
+                          offset: Offset(0, 2),
+                        )
+                      ]),
+                  child: Row(
+                    children: [
+                      Icon(
+                        Icons.home,
+                        color: ColorValues.greyLightColor,
+                      ),
+                      InkWell(
+                        onTap: () {
+                          Get.offNamed(Routes.home);
+                        },
+                        child: Text(
+                          "DASHBOARD",
+                          style: Styles.greyLight14,
+                        ),
+                      ),
+                      InkWell(
+                        onTap: () {
+                          Get.offNamed(Routes.misDashboard);
+                        },
+                        child: Text(
+                          " / MIS",
+                          style: Styles.greyLight14,
+                        ),
+                      ),
+                      Text(
+                        " / SCHEDULE COURSE LIST",
+                        style: Styles.greyLight14,
+                      )
+                    ],
+                  ),
+                ),
+                Stack(
+                  children: [
+                    Container(
+                      width: Get.width * 7,
+                      margin: EdgeInsets.only(left: 10, top: 20, right: 10),
+                      height: Get.height,
+                      child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Expanded(
-                              child: SingleChildScrollView(
-                            child: Container(
+                            child: SingleChildScrollView(
+                              child: Container(
                                 margin: EdgeInsets.only(
                                     left: 10, top: 10, right: 10),
                                 child: Column(
                                   children: [
                                     Card(
-                                        color:
-                                            Color.fromARGB(255, 245, 248, 250),
-                                        elevation: 10,
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(10.0),
-                                        ),
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Row(children: [
-                                              Padding(
-                                                padding: EdgeInsets.only(
-                                                  left: 20,
-                                                  top: 20,
-                                                ),
-                                                child: Text(
-                                                  "Schedule Course List",
-                                                  style: Styles.blackBold16,
-                                                ),
+                                      color: Color.fromARGB(255, 245, 248, 250),
+                                      elevation: 10,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(10.0),
+                                      ),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Row(children: [
+                                            Padding(
+                                              padding: EdgeInsets.only(
+                                                left: 20,
+                                                top: 20,
                                               ),
-                                              Spacer(),
-                                              // Padding(
-                                              //     padding: EdgeInsets.only(
-                                              //         top: 20, right: 20),
-                                              //     child: Row(
-                                              //       children: [
-                                              //         ActionButton(
-                                              //           icon: Icons.add,
-                                              //           label: "Schedule Course",
-                                              //           onPressed: () {
-                                              //             Get.offNamed(Routes
-                                              //                 .scheduleCourse);
-                                              //           },
-                                              //           color: ColorValues
-                                              //               .addNewColor,
-                                              //         ),
-                                              //       ],
-                                              //     ))
-                                            ]),
-                                            Divider(
-                                              color: ColorValues.greyLightColor,
+                                              child: Text(
+                                                "Schedule Course List",
+                                                style: Styles.blackBold16,
+                                              ),
                                             ),
-                                            Container(
-                                              color: Color.fromARGB(
-                                                  255, 245, 248, 250),
-                                              width: Get.width,
-                                              height: Get.height,
-                                              child: Padding(
-                                                  padding:
-                                                      const EdgeInsets.all(16),
-                                                  child: DataTable2(
-                                                    // fixedLeftColumns: 1,
-                                                    headingRowHeight: 70,
-                                                    columnSpacing: 12,
-                                                    horizontalMargin: 12,
-                                                    headingRowColor:
-                                                        MaterialStateColor
-                                                            .resolveWith(
-                                                      (states) {
-                                                        return ColorValues
-                                                            .lightGreyColor;
-                                                      },
+                                            Spacer(),
+                                            // Padding(
+                                            //     padding: EdgeInsets.only(
+                                            //         top: 20, right: 20),
+                                            //     child: Row(
+                                            //       children: [
+                                            //         ActionButton(
+                                            //           icon: Icons.add,
+                                            //           label: "Schedule Course",
+                                            //           onPressed: () {
+                                            //             Get.offNamed(Routes
+                                            //                 .scheduleCourse);
+                                            //           },
+                                            //           color: ColorValues
+                                            //               .addNewColor,
+                                            //         ),
+                                            //       ],
+                                            //     ))
+                                          ]),
+                                          Divider(
+                                            color: ColorValues.greyLightColor,
+                                          ),
+                                          Container(
+                                            color: Color.fromARGB(
+                                                255, 245, 248, 250),
+                                            width: Get.width,
+                                            height: Get.height,
+                                            child: Padding(
+                                              padding: const EdgeInsets.all(16),
+                                              child: DataTable2(
+                                                // fixedLeftColumns: 1,
+                                                headingRowHeight: 70,
+                                                columnSpacing: 12,
+                                                horizontalMargin: 12,
+                                                headingRowColor:
+                                                    MaterialStateColor
+                                                        .resolveWith(
+                                                  (states) {
+                                                    return ColorValues
+                                                        .lightGreyColor;
+                                                  },
+                                                ),
+                                                // fixedColumnsColor: ColorValues
+                                                //     .appYellowColor,
+                                                // minWidth: 2350,
+                                                columns: [
+                                                  DataColumn2(
+                                                    // fixedWidth: 70,
+                                                    label: Text(
+                                                      "Schedule ID",
+                                                      style: Styles.blackBold14,
                                                     ),
-                                                    // fixedColumnsColor: ColorValues
-                                                    //     .appYellowColor,
-                                                    // minWidth: 2350,
-                                                    columns: [
-                                                      DataColumn2(
-                                                        // fixedWidth: 70,
-                                                        label: Text(
-                                                          "Schedule ID",
+                                                    // size: ColumnSize.L,
+                                                  ),
+                                                  DataColumn2(
+                                                    // fixedWidth: 110,
+                                                    label: Text(
+                                                      "Course ID",
+                                                      style: Styles.blackBold14,
+                                                    ),
+                                                    // size: ColumnSize.L,
+                                                  ),
+                                                  DataColumn2(
+                                                    // fixedWidth: 110,
+                                                    label: Text(
+                                                      "Schedule Date",
+                                                      style: Styles.blackBold14,
+                                                    ),
+                                                    // size: ColumnSize.L,
+                                                  ),
+                                                  DataColumn2(
+                                                    // fixedWidth: 160,
+                                                    label: Text(
+                                                      "Training Company",
+                                                      style: Styles.blackBold14,
+                                                    ),
+                                                    size: ColumnSize.L,
+                                                  ),
+                                                  DataColumn2(
+                                                    // fixedWidth: 110,
+                                                    label: Text(
+                                                      "Trainer",
+                                                      style: Styles.blackBold14,
+                                                    ),
+                                                    // size: ColumnSize.L,
+                                                  ),
+                                                  DataColumn2(
+                                                    // fixedWidth: 90,
+                                                    label: Text(
+                                                      "Mode",
+                                                      style: Styles.blackBold14,
+                                                    ),
+                                                    // size: ColumnSize.L,
+                                                  ),
+                                                  DataColumn2(
+                                                    // fixedWidth: 90,
+                                                    label: Text(
+                                                      "Venue",
+                                                      style: Styles.blackBold14,
+                                                    ),
+                                                    // size: ColumnSize.L,
+                                                  ),
+                                                  DataColumn2(
+                                                    // fixedWidth: 90,
+                                                    label: Text(
+                                                      "Status",
+                                                      style: Styles.blackBold14,
+                                                    ),
+                                                    // size: ColumnSize.L,
+                                                  ),
+                                                  DataColumn2(
+                                                      label: Text("Action",
                                                           style: Styles
-                                                              .blackBold14,
-                                                        ),
-                                                        // size: ColumnSize.L,
-                                                      ),
-                                                      DataColumn2(
-                                                        // fixedWidth: 110,
-                                                        label: Text(
-                                                          "Course ID",
-                                                          style: Styles
-                                                              .blackBold14,
-                                                        ),
-                                                        // size: ColumnSize.L,
-                                                      ),
-                                                      DataColumn2(
-                                                        // fixedWidth: 110,
-                                                        label: Text(
-                                                          "Schedule Date",
-                                                          style: Styles
-                                                              .blackBold14,
-                                                        ),
-                                                        // size: ColumnSize.L,
-                                                      ),
-                                                      DataColumn2(
-                                                        // fixedWidth: 160,
-                                                        label: Text(
-                                                          "Training Company",
-                                                          style: Styles
-                                                              .blackBold14,
-                                                        ),
-                                                        size: ColumnSize.L,
-                                                      ),
-                                                      DataColumn2(
-                                                        // fixedWidth: 110,
-                                                        label: Text(
-                                                          "Trainer",
-                                                          style: Styles
-                                                              .blackBold14,
-                                                        ),
-                                                        // size: ColumnSize.L,
-                                                      ),
-                                                      DataColumn2(
-                                                        // fixedWidth: 90,
-                                                        label: Text(
-                                                          "Mode",
-                                                          style: Styles
-                                                              .blackBold14,
-                                                        ),
-                                                        // size: ColumnSize.L,
-                                                      ),
-                                                      DataColumn2(
-                                                        // fixedWidth: 90,
-                                                        label: Text(
-                                                          "Venue",
-                                                          style: Styles
-                                                              .blackBold14,
-                                                        ),
-                                                        // size: ColumnSize.L,
-                                                      ),
-                                                      DataColumn2(
-                                                        // fixedWidth: 90,
-                                                        label: Text(
-                                                          "Status",
-                                                          style: Styles
-                                                              .blackBold14,
-                                                        ),
-                                                        // size: ColumnSize.L,
-                                                      ),
-                                                      DataColumn2(
-                                                          label: Text("Action",
-                                                              style: Styles
-                                                                  .blackBold14))
-                                                    ],
-                                                    rows: scheduleData.map(
-                                                      (data) {
-                                                        return DataRow(
-                                                          cells: [
-                                                            DataCell(Text(data[
-                                                                "Schedule ID"
-                                                                    .toString()])),
-                                                            DataCell(Text(data[
-                                                                "Course ID"])),
-                                                            DataCell(Text(data[
-                                                                "Schedule Date"])),
-                                                            DataCell(Text(data[
-                                                                "Training Company"])),
-                                                            DataCell(Text(data[
-                                                                "Trainer"])),
-                                                            DataCell(Text(
-                                                                data["Mode"])),
-                                                            DataCell(Text(
-                                                                data["Venue"])),
-                                                            DataCell(Text(data[
-                                                                "Status"])),
-                                                            DataCell(
-                                                              Row(
-                                                                children: [
-                                                                  TableActionButton(
-                                                                    color: ColorValues
-                                                                        .editColor,
-                                                                    icon: Icons
-                                                                        .edit,
-                                                                    message:
-                                                                        "Edit",
-                                                                    onPress:
-                                                                        () {},
-                                                                  ),
-                                                                ],
+                                                              .blackBold14))
+                                                ],
+                                                rows: scheduleData.map(
+                                                  (data) {
+                                                    return DataRow(
+                                                      cells: [
+                                                        DataCell(Text(data[
+                                                            "Schedule ID"
+                                                                .toString()])),
+                                                        DataCell(Text(
+                                                            data["Course ID"])),
+                                                        DataCell(Text(data[
+                                                            "Schedule Date"])),
+                                                        DataCell(Text(data[
+                                                            "Training Company"])),
+                                                        DataCell(Text(
+                                                            data["Trainer"])),
+                                                        DataCell(
+                                                            Text(data["Mode"])),
+                                                        DataCell(Text(
+                                                            data["Venue"])),
+                                                        DataCell(Text(
+                                                            data["Status"])),
+                                                        DataCell(
+                                                          Row(
+                                                            children: [
+                                                              TableActionButton(
+                                                                color: ColorValues
+                                                                    .executeColor,
+                                                                icon: Icons
+                                                                    .done_outlined,
+                                                                message:
+                                                                    "Execute",
+                                                                onPress: () {
+                                                                  Get.toNamed(
+                                                                    Routes
+                                                                        .executeCourse,
+                                                                  );
+                                                                },
                                                               ),
-                                                            ),
-                                                          ],
-                                                        );
-                                                      },
-                                                    ).toList(),
-                                                  )),
-                                            )
-                                          ],
-                                        ))
+                                                              TableActionButton(
+                                                                color: ColorValues
+                                                                    .viewColor,
+                                                                icon: Icons
+                                                                    .visibility_outlined,
+                                                                message: "View",
+                                                                onPress: () {},
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    );
+                                                  },
+                                                ).toList(),
+                                              ),
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                    )
                                   ],
-                                )),
-                          ))
-                        ]))
-              ]),
-            ]),
+                                ),
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+              ],
+            ),
           ),
         );
       },
@@ -358,47 +370,46 @@ DataColumn2 buildDataColumn(
 
     label: //
         Column(
-            mainAxisAlignment: MainAxisAlignment.center, //
-            children: [
-          SizedBox(
-            height: Get.height * 0.05,
-            child: TextField(
-              style: GoogleFonts.lato(
-                textStyle:
-                    TextStyle(fontSize: 16.0, height: 1.0, color: Colors.black),
+      mainAxisAlignment: MainAxisAlignment.center, //
+      children: [
+        SizedBox(
+          height: Get.height * 0.05,
+          child: TextField(
+            style: GoogleFonts.lato(
+              textStyle:
+                  TextStyle(fontSize: 16.0, height: 1.0, color: Colors.black),
+            ),
+            onChanged: (value) {
+              filterText.value = value;
+            },
+            textAlign: TextAlign.left,
+            decoration: InputDecoration(
+              hintText: 'Filter',
+              contentPadding:
+                  EdgeInsets.fromLTRB(5, 0, 5, 0), // Reduced vertical padding
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(5),
+                borderSide: BorderSide(color: Colors.black),
               ),
-              onChanged: (value) {
-                filterText.value = value;
-                //   onSearchCallBack(value);
-              },
-              textAlign: TextAlign.left,
-              decoration: InputDecoration(
-                hintText: 'Filter',
-                contentPadding:
-                    EdgeInsets.fromLTRB(5, 0, 5, 0), // Reduced vertical padding
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(5),
-                  borderSide: BorderSide(color: Colors.black),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(5),
-                  borderSide: BorderSide(color: Colors.black),
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(5),
-                  borderSide: BorderSide(color: Colors.black),
-                ),
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(5),
+                borderSide: BorderSide(color: Colors.black),
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(5),
+                borderSide: BorderSide(color: Colors.black),
               ),
             ),
           ),
-          Align(
-            alignment: Alignment.centerLeft,
-            child: Text(
-              header,
-              style: Styles.black16W500,
-            ),
+        ),
+        Align(
+          alignment: Alignment.centerLeft,
+          child: Text(
+            header,
+            style: Styles.black16W500,
           ),
-        ]),
-    // ),
+        ),
+      ],
+    ),
   );
 }
