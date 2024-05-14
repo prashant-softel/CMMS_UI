@@ -2,6 +2,7 @@ import 'package:cmms/app/app.dart';
 import 'package:flutter/material.dart';
 
 ThemeData themeData(BuildContext context) => ThemeData(
+      useMaterial3: false,
       // primarySwatch: Colors.black,
       shadowColor: const Color(0xFFDDE3FD),
       checkboxTheme: CheckboxThemeData(
