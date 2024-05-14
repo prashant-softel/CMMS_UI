@@ -326,7 +326,7 @@ class _WaterDataListWebState extends State<WaterDataListWeb> {
                                                                           .waterDataList[
                                                                               0]
                                                                           .periods
-                                                                          ?.length ??
+                                                                          .length ??
                                                                       0
                                                                   : 0,
                                                               (index) =>

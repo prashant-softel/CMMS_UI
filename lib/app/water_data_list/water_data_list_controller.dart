@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'package:cmms/app/home/home_controller.dart';
 import 'package:cmms/app/water_data_list/water_data_list_presenter.dart';
-import 'package:cmms/domain/models/audit_plan_list_model.dart';
 import 'package:cmms/domain/models/create_water_data_model.dart';
 import 'package:cmms/domain/models/type_of_water_model.dart';
 import 'package:cmms/domain/models/water_data_list_model.dart';
@@ -120,123 +119,119 @@ class WaterDataListController extends GetxController {
         end_date: endDate,
         facility_id: facilityId,
         isExport: isExport);
-    if (_waterDataList != null) {
-      waterDataList.value = _waterDataList;
-      for (var masterdata in _waterDataList) {
-        masterDataList.value = masterdata.master_list;
-      }
-      if (masterDataList.value != null) {
-        masterDataListName.value = [];
-        headerList = [].obs;
-        mainHeaderList = [].obs;
-        mainHeaderList.add(
-          {
-            "label": 'Month',
-            "isShow": true,
-            'subHeader': "Month",
-            "dataKey": 'Month',
-            "colSpan": 1
-          },
-        );
-        headerList.add(
-          {
-            "label": 'Month',
-            "isShow": true,
-            'subHeader': "Month",
-            "dataKey": 'Month'
-          },
-        );
-        masterDataListName.add('Month');
-        print({"masterDataList.value": masterDataList.value});
-
-        for (var _dataList in masterDataList.value) {
-          // {"label": 'Headersdhfgd1', "isShow": true, 'key': "open"},
-          print({"_dataList": _dataList});
-          mainHeaderList.add(
-            {
-              "label": _dataList.water_type,
-              "isShow": true,
-              'subHeader': "Month",
-              "dataKey": 'Month',
-              "colSpan": _dataList.show_opening == 1 ? 4 : 2
-            },
-          );
-          if (_dataList.show_opening == 1) {
-            headerList.add(
-              {
-                "label": _dataList.water_type,
-                "isShow": true,
-                'subHeader': "open",
-                "dataKey": 'opening'
-              },
-            );
-          }
-          headerList.add(
-            {
-              "label": _dataList.water_type,
-              "isShow": _dataList.show_opening == 1 ? false : true,
-              'subHeader': "procrument",
-              "dataKey": 'procuredQty'
-            },
-          );
-          headerList.add(
-            {
-              "label": _dataList.water_type,
-              "isShow": false,
-              'subHeader': "consmption",
-              "dataKey": 'consumedQty'
-            },
-          );
-
-          if (_dataList.show_opening == 1) {
-            headerList.add(
-              {
-                "label": _dataList.water_type,
-                "isShow": false,
-                'subHeader': "close",
-                "dataKey": 'closingQty'
-              },
-            );
-          }
-
-          masterDataListName.add(_dataList!.water_type ?? '');
-        }
-        headerList.add(
-          {
-            "label": 'Action',
-            "isShow": true,
-            'subHeader': "",
-            "dataKey": 'action'
-          },
-        );
-        mainHeaderList.add(
-          {
-            "label": 'Action',
-            "isShow": true,
-            'subHeader': "",
-            "dataKey": 'action',
-            "colSpan": 1
-          },
-        );
-        print({"headerList.length": headerList.length});
-      }
-
-      isLoading.value = false;
-      paginationController = PaginationController(
-        rowCount: waterDataList.length,
-        rowsPerPage: 10,
-      );
-      if (waterDataList.isNotEmpty) {
-        filteredData.value = waterDataList.value;
-        waterDataListModel = waterDataList[0];
-        var newPermitListJson = waterDataListModel?.toJson();
-        waterDataListTableColumns.value = <String>[];
-        // for (var key in newPermit.vListJson?.keys.toList() ?? []) {
-        //   waterDataListTableColumns.add(key);
-        // }
-      }
+    waterDataList.value = _waterDataList;
+    for (var masterdata in _waterDataList) {
+      masterDataList.value = masterdata.master_list;
     }
-  }
+    masterDataListName.value = [];
+    headerList = [].obs;
+    mainHeaderList = [].obs;
+    mainHeaderList.add(
+      {
+        "label": 'Month',
+        "isShow": true,
+        'subHeader': "Month",
+        "dataKey": 'Month',
+        "colSpan": 1
+      },
+    );
+    headerList.add(
+      {
+        "label": 'Month',
+        "isShow": true,
+        'subHeader': "Month",
+        "dataKey": 'Month'
+      },
+    );
+    masterDataListName.add('Month');
+    print({"masterDataList.value": masterDataList.value});
+
+    for (var _dataList in masterDataList.value) {
+      // {"label": 'Headersdhfgd1', "isShow": true, 'key': "open"},
+      print({"_dataList": _dataList});
+      mainHeaderList.add(
+        {
+          "label": _dataList.water_type,
+          "isShow": true,
+          'subHeader': "Month",
+          "dataKey": 'Month',
+          "colSpan": _dataList.show_opening == 1 ? 4 : 2
+        },
+      );
+      if (_dataList.show_opening == 1) {
+        headerList.add(
+          {
+            "label": _dataList.water_type,
+            "isShow": true,
+            'subHeader': "open",
+            "dataKey": 'opening'
+          },
+        );
+      }
+      headerList.add(
+        {
+          "label": _dataList.water_type,
+          "isShow": _dataList.show_opening == 1 ? false : true,
+          'subHeader': "procrument",
+          "dataKey": 'procuredQty'
+        },
+      );
+      headerList.add(
+        {
+          "label": _dataList.water_type,
+          "isShow": false,
+          'subHeader': "consmption",
+          "dataKey": 'consumedQty'
+        },
+      );
+
+      if (_dataList.show_opening == 1) {
+        headerList.add(
+          {
+            "label": _dataList.water_type,
+            "isShow": false,
+            'subHeader': "close",
+            "dataKey": 'closingQty'
+          },
+        );
+      }
+
+      masterDataListName.add(_dataList.water_type ?? '');
+    }
+    headerList.add(
+      {
+        "label": 'Action',
+        "isShow": true,
+        'subHeader': "",
+        "dataKey": 'action'
+      },
+    );
+    mainHeaderList.add(
+      {
+        "label": 'Action',
+        "isShow": true,
+        'subHeader': "",
+        "dataKey": 'action',
+        "colSpan": 1
+      },
+    );
+    print({"headerList.length": headerList.length});
+  
+    isLoading.value = false;
+    paginationController = PaginationController(
+      rowCount: waterDataList.length,
+      rowsPerPage: 10,
+    );
+    if (waterDataList.isNotEmpty) {
+      filteredData.value = waterDataList.value;
+      waterDataListModel = waterDataList[0];
+      var newPermitListJson = waterDataListModel?.toJson();
+      waterDataListTableColumns.value = <String>[];
+      // for (var key in newPermit.vListJson?.keys.toList() ?? []) {
+      //   waterDataListTableColumns.add(key);
+      // }
+    }
+    }
 
   void clearData() {
     detailId = 0;

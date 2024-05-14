@@ -151,14 +151,12 @@ class BlockTypeListController extends GetxController {
       job_type_id: selectedFacilityId,
       // job_type_id: 36,
     );
-    if (_blockTypePermitList != null) {
-      isLoading.value = false;
-      for (var blockType_list in _blockTypePermitList) {
-        blockTypeList.add(blockType_list);
-        bufferblockTypeList.add(blockType_list);
-      }
+    isLoading.value = false;
+    for (var blockType_list in _blockTypePermitList) {
+      blockTypeList.add(blockType_list);
+      bufferblockTypeList.add(blockType_list);
     }
-
+  
     update(['block_type_list']);
   }
 

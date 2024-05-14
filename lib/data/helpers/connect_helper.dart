@@ -69,7 +69,6 @@ import 'package:cmms/domain/models/add_inventory_model.dart';
 import 'package:cmms/domain/models/add_user_model.dart';
 import 'package:cmms/domain/models/create_sop_model.dart';
 import 'package:cmms/domain/models/update_pm_task_execution_model.dart';
-import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 import 'package:get/get.dart';
@@ -4569,6 +4568,7 @@ class ConnectHelper {
 
       return files;
     }
+    return null;
   }
 
   Future<ResponseModel> importInventory(

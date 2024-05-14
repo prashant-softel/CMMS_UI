@@ -135,14 +135,12 @@ class TBTTypeListController extends GetxController {
       isLoading: isLoading.value,
       // categoryIds: cPategoryIds,
     );
-    if (_jobTypeList != null) {
-      jobTypeList.clear();
-      isLoading.value = false;
-      for (var jobType_list in _jobTypeList) {
-        jobTypeList.add(jobType_list);
-      }
+    jobTypeList.clear();
+    isLoading.value = false;
+    for (var jobType_list in _jobTypeList) {
+      jobTypeList.add(jobType_list);
     }
-    // selectedJobType.value = _jobTypeList[0].name ?? '';
+      // selectedJobType.value = _jobTypeList[0].name ?? '';
 
     // supplierNameList = _supplierNameList;
     jobTypeListPaginationController = PaginationController(

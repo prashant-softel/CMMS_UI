@@ -155,14 +155,12 @@ class BodyInjuredController extends GetxController {
     final _bodypartList = await bodyinjuredpresenter.getBodyInjuredList(
       isLoading: isLoading.value,
     );
-    if (_bodypartList != null) {
-      isLoading.value = false;
-      for (var facilityType_list in _bodypartList) {
-        bodyinjuredList.add(facilityType_list);
-        BufferBodyInjuredList.add(facilityType_list);
-      }
+    isLoading.value = false;
+    for (var facilityType_list in _bodypartList) {
+      bodyinjuredList.add(facilityType_list);
+      BufferBodyInjuredList.add(facilityType_list);
     }
-
+  
     BodyInjuredListPaginationController = PaginationController(
       rowCount: bodyinjuredList.length,
       rowsPerPage: 10,

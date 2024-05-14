@@ -156,14 +156,12 @@ class SPVListController extends GetxController {
       job_type_id: selectedJobSOPId,
       // job_type_id: 36,
     );
-    if(_spvList != null) {
-      isLoading.value = false;
-      for (var facilityType_list in _spvList) {
-      SPVList.add(facilityType_list);
-      BufferSPVList.add(facilityType_list);
-    }
-    }
-    // selectedSopPermit.value = _SPVList[0].name ?? '';
+    isLoading.value = false;
+    for (var facilityType_list in _spvList) {
+    SPVList.add(facilityType_list);
+    BufferSPVList.add(facilityType_list);
+  }
+      // selectedSopPermit.value = _SPVList[0].name ?? '';
 
     // supplierNameList = _supplierNameList;
     SPVListPaginationController = PaginationController(

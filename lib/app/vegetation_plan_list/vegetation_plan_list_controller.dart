@@ -107,26 +107,24 @@ class VegetationPlanListController extends GetxController {
             isExport: isExport);
     
 
-    if (_vegetationPlanList != null) {
-      vegetationPlanList.value = _vegetationPlanList;
-      isLoading.value = false;
     vegetationPlanList.value = _vegetationPlanList;
-    if (vegetationPlanList.isNotEmpty) {
-      filteredData.value = vegetationPlanList.value;
-      vegetationPlanListModel = vegetationPlanList[0];
-      var newPermitListJson = vegetationPlanListModel?.toJson();
-      vegetationPlanListTableColumns.value = <String>[];
-      for (var key in newPermitListJson?.keys.toList() ?? []) {
-        vegetationPlanListTableColumns.add(key);
-      }
+    isLoading.value = false;
+  vegetationPlanList.value = _vegetationPlanList;
+  if (vegetationPlanList.isNotEmpty) {
+    filteredData.value = vegetationPlanList.value;
+    vegetationPlanListModel = vegetationPlanList[0];
+    var newPermitListJson = vegetationPlanListModel?.toJson();
+    vegetationPlanListTableColumns.value = <String>[];
+    for (var key in newPermitListJson?.keys.toList() ?? []) {
+      vegetationPlanListTableColumns.add(key);
     }
-    paginationController = PaginationController(
-      rowCount: vegetationPlanList.length,
-      rowsPerPage: 10,
-    );
+  }
+  paginationController = PaginationController(
+    rowCount: vegetationPlanList.length,
+    rowsPerPage: 10,
+  );
 
-    }
-    
+      
   }
 
   void onValueChanged(dynamic list, dynamic value) {

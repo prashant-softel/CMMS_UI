@@ -58,7 +58,7 @@ class ObservationViewDialog extends GetView {
                               ),
                               Expanded(
                                 child: Text(
-                                    'CP${pmTaskModel?.check_point_id}'
+                                    'CP${pmTaskModel.check_point_id}'
                                     '',
                                     style: Styles.appDarkBlue12),
                               ),
@@ -70,7 +70,7 @@ class ObservationViewDialog extends GetView {
                                 width: 5,
                               ),
                               Expanded(
-                                child: Text(pmTaskModel?.check_point_name ?? '',
+                                child: Text(pmTaskModel.check_point_name ?? '',
                                     style: Styles.appDarkBlue12),
                               )
                             ]),
@@ -81,7 +81,7 @@ class ObservationViewDialog extends GetView {
                                 width: 5,
                               ),
                               Expanded(
-                                child: Text("${pmTaskModel?.requirement ?? ''}",
+                                child: Text("${pmTaskModel.requirement ?? ''}",
                                     style: Styles.appDarkBlue12),
                               )
                             ]),
@@ -92,7 +92,7 @@ class ObservationViewDialog extends GetView {
                               ),
                               Expanded(
                                 child: Text(
-                                    "${pmTaskModel?.failure_waightage ?? ''}",
+                                    "${pmTaskModel.failure_waightage ?? ''}",
                                     style: Styles.appDarkBlue12),
                               )
                             ]),
@@ -158,7 +158,7 @@ class ObservationViewDialog extends GetView {
                                 width: 5,
                               ),
                               Expanded(
-                                child: Text("${pmTaskModel?.observation ?? ''}",
+                                child: Text("${pmTaskModel.observation ?? ''}",
                                     style: Styles.appDarkBlue12),
                               )
                             ]),
@@ -169,7 +169,7 @@ class ObservationViewDialog extends GetView {
                               ),
                               Expanded(
                                 child: Text(
-                                    "${pmTaskModel?.linked_job_id ?? ''}",
+                                    "${pmTaskModel.linked_job_id ?? ''}",
                                     style: Styles.appDarkBlue12),
                               )
                             ]),

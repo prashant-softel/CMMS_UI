@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:cmms/app/utils/utility.dart';
 import 'package:cmms/domain/models/get_asset_items_model.dart';
 
 MrsDetailsModel mrsDetailsModelFromJson(String str) =>

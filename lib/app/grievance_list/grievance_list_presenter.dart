@@ -1,5 +1,4 @@
 import 'package:cmms/domain/models/grievance_List_model.dart';
-import 'package:cmms/domain/models/grievance_model.dart';
 import 'package:cmms/domain/usecases/grievance_list_usecase.dart';
 
 class GrievanceListPresenter {

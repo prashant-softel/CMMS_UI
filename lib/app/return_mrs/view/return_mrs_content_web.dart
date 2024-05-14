@@ -527,7 +527,7 @@ class ReturnMrsListDataSource extends DataTableSource {
                                 },
                               )
                             : Dimens.box0,
-                        controller.mrsList!
+                        controller.mrsList
                                         .firstWhere(
                                           (e) => e?.id == MrsDetails!.id,
                                           orElse: () =>
@@ -535,7 +535,7 @@ class ReturnMrsListDataSource extends DataTableSource {
                                         )
                                         ?.status ==
                                     321 &&
-                                controller.mrsList!
+                                controller.mrsList
                                         .firstWhere(
                                           (e) => e?.id == MrsDetails!.id,
                                           orElse: () =>
@@ -593,7 +593,7 @@ class ReturnMrsListDataSource extends DataTableSource {
                         //   },
                         // ),
                         //     : Dimens.box0,
-                        controller.mrsList!
+                        controller.mrsList
                                         .firstWhere(
                                           (e) => e?.id == MrsDetails!.id,
                                           orElse: () =>
@@ -601,7 +601,7 @@ class ReturnMrsListDataSource extends DataTableSource {
                                         )
                                         ?.status ==
                                     321 &&
-                                controller.mrsList!
+                                controller.mrsList
                                         .firstWhere(
                                           (e) => e?.id == MrsDetails!.id,
                                           orElse: () =>

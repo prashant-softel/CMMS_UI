@@ -13,7 +13,6 @@ import 'package:cmms/domain/models/block_model.dart';
 import 'package:cmms/domain/models/cancel_permit_request_model.dart';
 import 'package:cmms/domain/models/close_permit_model.dart';
 import 'package:cmms/domain/models/comment_model.dart';
-import 'package:cmms/domain/models/create_permit_model.dart';
 import 'package:cmms/domain/models/create_sop_model.dart';
 import 'package:cmms/domain/models/employee_list_model.dart';
 import 'package:cmms/domain/models/employee_list_model2.dart';
@@ -849,9 +848,9 @@ class ViewPermitController extends GetxController {
         (element) {
           rowTBTTrainingOtherPersonItem.value.add(
             [
-              {'key': "Employee Name", "value": '${element?.employee_name}'},
-              {'key': "Contact Number", "value": '${element?.contact_number}'},
-              {'key': "Responsibility", "value": '${element?.responsibility}'},
+              {'key': "Employee Name", "value": '${element.employee_name}'},
+              {'key': "Contact Number", "value": '${element.contact_number}'},
+              {'key': "Responsibility", "value": '${element.responsibility}'},
               {'key': "Action ", "value": ''},
             ],
           );

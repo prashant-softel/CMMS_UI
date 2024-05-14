@@ -1,16 +1,12 @@
 import 'package:cmms/app/app.dart';
-import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:cmms/app/widgets/custom_textfield.dart';
-import 'package:scrollable_table_view/scrollable_table_view.dart';
 import '../../widgets/custom_elevated_button.dart';
 import '../../widgets/custom_richtext.dart';
-import '../../widgets/custom_swich_toggle.dart';
 import '../type_of_obs_controller.dart';
 // import '../preventive_list_controller.dart';
 
@@ -564,7 +560,7 @@ class TypeOfObsWeb extends GetView<TypeOfObsController> {
                               SizedBox(
                                 height: 20,
                               ),
-                              controller.TypeOfObsList!.isEmpty == true &&
+                              controller.TypeOfObsList.isEmpty == true &&
                                       controller.isLoading == false
                                   ? Center(child: Text("No Data"))
                                   : controller.isLoading.value == true
@@ -618,12 +614,12 @@ class TypeOfObsWeb extends GetView<TypeOfObsController> {
                                             ],
                                             rows: List.generate(
                                               controller
-                                                      .TypeOfObsList?.length ??
+                                                      .TypeOfObsList.length ??
                                                   0,
                                               (index) {
                                                 var TypeOfObsListDetails =
                                                     controller
-                                                        .TypeOfObsList?[index];
+                                                        .TypeOfObsList[index];
                                                 return DataRow(cells: [
                                                   DataCell(Text(
                                                       '${TypeOfObsListDetails?.id}')),

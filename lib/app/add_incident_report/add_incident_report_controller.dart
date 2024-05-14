@@ -1094,12 +1094,10 @@ class AddIncidentReportController extends GetxController {
       facilityId: facilityId,
       isLoading: true,
     );
-    if (_irisktypeList != null) {
-      for (var facilityType_list in _irisktypeList) {
-        incidentrisktypeList.add(facilityType_list);
-      }
+    for (var facilityType_list in _irisktypeList) {
+      incidentrisktypeList.add(facilityType_list);
     }
-  }
+    }
 
   void getAssetRestorationActionTakenByList() async {
     assetRestorationActionTakenByList.value = <EmployeeListModel>[];

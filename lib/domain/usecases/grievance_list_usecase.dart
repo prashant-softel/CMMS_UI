@@ -1,5 +1,4 @@
 import 'package:cmms/domain/models/grievance_List_model.dart';
-import 'package:cmms/domain/models/grievance_model.dart';
 import 'package:cmms/domain/repositories/local_storage_keys.dart';
 import 'package:cmms/domain/repositories/repository.dart';
 

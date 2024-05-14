@@ -1,5 +1,3 @@
-import 'package:cmms/domain/models/audit_plan_detail_model.dart';
-import 'package:cmms/domain/models/view_audit_task_model.dart';
 
 import '../../domain/models/history_model.dart';
 import '../../domain/models/pm_task_view_list_model.dart';

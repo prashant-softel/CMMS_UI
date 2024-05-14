@@ -1,23 +1,13 @@
 import 'package:cmms/app/app.dart';
-import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/job_details/views/widgets/job_detail_field.dart';
 import 'package:cmms/app/mrs_approve/mrs_approve_controller.dart';
-import 'package:cmms/app/mrs_view/mrs_view_controller.dart';
-import 'package:cmms/app/navigators/app_pages.dart';
-import 'package:cmms/app/pm_task_view/pm_task_view_controller.dart';
-import 'package:cmms/app/pm_task_view/view/observation_view_dialog.dart';
-import 'package:cmms/app/widgets/assign_to_pm_task_dialog.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/custom_textField.dart';
-import 'package:cmms/app/widgets/execution_approve_dialog.dart';
-import 'package:cmms/domain/models/mrs_list_by_jobId.dart';
-import 'package:cmms/domain/models/pm_task_view_list_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../domain/models/get_asset_items_model.dart';
-import '../../utils/user_access_constants.dart';
 
 class MrsViewApproveContentMobile extends GetView<MrsApproveController> {
   MrsViewApproveContentMobile({Key? key}) : super(key: key);
@@ -181,7 +171,7 @@ class MrsViewApproveContentMobile extends GetView<MrsApproveController> {
                                             ),
                                             Expanded(
                                               child: Text(
-                                                  '${mrsViewModel?.asset_name}'
+                                                  '${mrsViewModel.asset_name}'
                                                   '',
                                                   style: Styles.appDarkBlue12),
                                             ),
@@ -195,7 +185,7 @@ class MrsViewApproveContentMobile extends GetView<MrsApproveController> {
                                             ),
                                             Expanded(
                                               child: Text(
-                                                  mrsViewModel?.asset_type ??
+                                                  mrsViewModel.asset_type ??
                                                       '',
                                                   style: Styles.appDarkBlue12),
                                             )
@@ -208,7 +198,7 @@ class MrsViewApproveContentMobile extends GetView<MrsApproveController> {
                                             ),
                                             Expanded(
                                               child: Text(
-                                                  mrsViewModel?.requested_qty
+                                                  mrsViewModel.requested_qty
                                                           .toString() ??
                                                       '',
                                                   style: Styles.appDarkBlue12),
@@ -222,7 +212,7 @@ class MrsViewApproveContentMobile extends GetView<MrsApproveController> {
                                             ),
                                             Expanded(
                                               child: Text(
-                                                  mrsViewModel?.issued_qty
+                                                  mrsViewModel.issued_qty
                                                           .toString() ??
                                                       '',
                                                   style: Styles.appDarkBlue12),
@@ -236,7 +226,7 @@ class MrsViewApproveContentMobile extends GetView<MrsApproveController> {
                                             ),
                                             Expanded(
                                               child: Text(
-                                                  mrsViewModel?.used_qty
+                                                  mrsViewModel.used_qty
                                                           .toString() ??
                                                       '',
                                                   style: Styles.appDarkBlue12),

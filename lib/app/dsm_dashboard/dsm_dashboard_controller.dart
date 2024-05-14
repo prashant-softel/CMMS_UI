@@ -1,7 +1,6 @@
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/dsm_dashboard/dsm_dashboard_presenter.dart';
 import 'package:cmms/app/job_list/job_list_controller.dart';
-import 'package:cmms/app/master_dashboard/master_presenter.dart';
 import 'package:cmms/app/navigators/navigators.dart';
 // import 'package:cmms/app/preventive_maintanance/preventive.dart';
 // import 'package:cmms/breakdown_maintenance/breakdown_presenter.dart';

@@ -1,4 +1,3 @@
-import 'package:cmms/app/new_permit/new_permit_controller.dart';
 import 'package:cmms/app/pm_task_view/pm_task_view_controller.dart';
 import 'package:cmms/app/theme/color_values.dart';
 import 'package:flutter/material.dart';

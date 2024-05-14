@@ -1,4 +1,3 @@
-import 'package:cmms/domain/models/source_of_obs_list_model.dart';
 import 'package:cmms/domain/models/type_of_obs_list_model.dart';
 import 'package:cmms/domain/repositories/repository.dart';
 

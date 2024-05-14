@@ -24,11 +24,11 @@ class TypeOfObsMobile extends GetView<TypeOfObsController> {
                     //physics: const NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
                     itemCount: controller.TypeOfObsList != null
-                        ? controller.TypeOfObsList?.length
+                        ? controller.TypeOfObsList.length
                         : 0,
                     itemBuilder: (context, index) {
                       final moduleModel = (controller.TypeOfObsList != null)
-                          ? controller.TypeOfObsList![index]
+                          ? controller.TypeOfObsList[index]
                           : ModuleListModel();
                       return Container(
                         margin: EdgeInsets.only(left: 10, right: 10),

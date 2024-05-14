@@ -105,26 +105,24 @@ class PurchaseGoodsorderListController extends GetxController {
             end_date: endDate,
             facility_id: facilityId,
             isExport: isExport);
-    if (_goodsordersList != null) {
-      goodsOrdersList.value = _goodsordersList;
-      isLoading.value = false;
-      paginationController = PaginationController(
-        rowCount: goodsOrdersList.length ?? 0,
-        rowsPerPage: 10,
-      );
+    goodsOrdersList.value = _goodsordersList;
+    isLoading.value = false;
+    paginationController = PaginationController(
+      rowCount: goodsOrdersList.length ?? 0,
+      rowsPerPage: 10,
+    );
 
-      if (goodsOrdersList.isNotEmpty) {
-        filteredData.value = goodsOrdersList.value;
+    if (goodsOrdersList.isNotEmpty) {
+      filteredData.value = goodsOrdersList.value;
 
-        goodsOrdersListModel = goodsOrdersList[0];
-        var newPermitListJson = goodsOrdersListModel?.toJson();
-        goodsOrdersListTableColumns.value = <String>[];
-        for (var key in newPermitListJson?.keys.toList() ?? []) {
-          goodsOrdersListTableColumns.add(key);
-        }
+      goodsOrdersListModel = goodsOrdersList[0];
+      var newPermitListJson = goodsOrdersListModel?.toJson();
+      goodsOrdersListTableColumns.value = <String>[];
+      for (var key in newPermitListJson?.keys.toList() ?? []) {
+        goodsOrdersListTableColumns.add(key);
       }
     }
-  }
+    }
 
   void onValueChanged(dynamic list, dynamic value) {
     switch (list.runtimeType) {}

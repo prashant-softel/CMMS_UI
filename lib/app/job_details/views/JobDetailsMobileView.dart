@@ -7,7 +7,6 @@ import '../../utils/responsive.dart';
 import '../../widgets/custom_elevated_button.dart';
 import 'widgets/job_detail_field.dart';
 import 'widgets/job_detail_multi_value_field.dart';
-import 'widgets/ptw.dart';
 
 class JobDetailsMobileView extends GetView<JobDetailsController> {
   JobDetailsMobileView({

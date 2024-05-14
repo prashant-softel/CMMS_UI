@@ -142,7 +142,7 @@ class SafetyQuestionsListController extends GetxController {
       safetyMeasureList.value = BufferPreventiveseff.value;
       return;
     }
-    List<SafetyMeasureListModel> filteredList = BufferPreventiveseff!
+    List<SafetyMeasureListModel> filteredList = BufferPreventiveseff
         .where((item) =>
             (item.id
                     ?.toString()
@@ -336,14 +336,12 @@ class SafetyQuestionsListController extends GetxController {
       permit_type_id: selectedTypePermitId,
       // job_type_id: 36,
     );
-    if (_safetyMeasureList != null) {
-      isLoading.value = false;
-      for (var safetyMeasure_list in _safetyMeasureList) {
-        safetyMeasureList.add(safetyMeasure_list);
-      }
-      BufferPreventiveseff.value = safetyMeasureList.value;
+    isLoading.value = false;
+    for (var safetyMeasure_list in _safetyMeasureList) {
+      safetyMeasureList.add(safetyMeasure_list);
     }
-
+    BufferPreventiveseff.value = safetyMeasureList.value;
+  
     // supplierNameList = _supplierNameList;
     safetyQuestionListPaginationController = PaginationController(
       rowCount: safetyMeasureList.length,
