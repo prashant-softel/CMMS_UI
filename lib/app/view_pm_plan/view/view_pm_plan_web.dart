@@ -74,6 +74,13 @@ class _ViewPmPlanWebState extends State<ViewPmPlanWeb> {
                           child: Text(" / PREVENTIVE MAINTENANCE",
                               style: Styles.greyMediumLight12),
                         ),
+                        InkWell(
+                          onTap: () {
+                            Get.offNamed(Routes.pmPlanList);
+                          },
+                          child: Text(" / PM PLAN LIST",
+                              style: Styles.greyMediumLight12),
+                        ),
                         Text(" / VIEW PM PLAN", style: Styles.greyMediumLight12)
                       ],
                     ),
