@@ -115,8 +115,8 @@ class WaterDataListController extends GetxController {
 
     final _waterDataList = await waterDataListPresenter.getWaterDataList(
         isLoading: isLoading.value,
-        start_date: startDate,
-        end_date: endDate,
+        start_date: selectedYear.toString(),
+        end_date: (selectedYear - 1).toString(),
         facility_id: facilityId,
         isExport: isExport);
     waterDataList.value = _waterDataList;
@@ -199,12 +199,7 @@ class WaterDataListController extends GetxController {
       masterDataListName.add(_dataList.water_type ?? '');
     }
     headerList.add(
-      {
-        "label": 'Action',
-        "isShow": true,
-        'subHeader': "",
-        "dataKey": 'action'
-      },
+      {"label": 'Action', "isShow": true, 'subHeader': "", "dataKey": 'action'},
     );
     mainHeaderList.add(
       {
@@ -216,7 +211,7 @@ class WaterDataListController extends GetxController {
       },
     );
     print({"headerList.length": headerList.length});
-  
+
     isLoading.value = false;
     paginationController = PaginationController(
       rowCount: waterDataList.length,
@@ -231,7 +226,7 @@ class WaterDataListController extends GetxController {
       //   waterDataListTableColumns.add(key);
       // }
     }
-    }
+  }
 
   void clearData() {
     detailId = 0;
@@ -459,5 +454,9 @@ class WaterDataListController extends GetxController {
         }
         break;
     }
+  }
+
+  void goWaterDataList() {
+    getWaterDataList(facilityId, formattedFromdate, formattedFromdate1, false);
   }
 }
