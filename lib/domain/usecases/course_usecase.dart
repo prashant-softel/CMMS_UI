@@ -1,30 +1,21 @@
+import 'package:cmms/domain/models/employee_list_model.dart';
 import 'package:cmms/domain/models/facility_model.dart';
-import 'package:cmms/domain/models/job_model.dart';
-import 'package:cmms/domain/repositories/local_storage_keys.dart';
 import 'package:cmms/domain/repositories/repository.dart';
 
 class CourseUsecase {
   CourseUsecase(this.repository);
   Repository repository;
 
-  ///
+  Future<List<EmployeeListModel>> getEmployeeList(
+      {required bool isLoading, required int? facility_id}) async {
+    return repository.getEmployeePermitList(
+      isLoading: isLoading,
+      facility_id: facility_id,
+    );
+  }
 
   Future<List<FacilityModel?>?> getFacilityList({bool? isLoading}) async =>
-      await repository.getFacilityList(isLoading);
-
-  Future<List<JobModel?>?> getJobList({
-    required String auth,
-    int? facilityId,
-    bool? self_view,
-    bool? isLoading,
-    bool? isExport
-  }) async =>
-      await repository.getJobList(
-        auth,
-        facilityId,
-        self_view,
+      await repository.getFacilityList(
         isLoading,
-        isExport
       );
-  void clearValue() async => repository.clearData(LocalKeys.jobId);
 }
