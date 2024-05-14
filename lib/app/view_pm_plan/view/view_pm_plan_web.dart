@@ -185,6 +185,10 @@ class _ViewPmPlanWebState extends State<ViewPmPlanWeb> {
                                             'Frequency : ',
                                             style: Styles.black17,
                                           ),
+                                          Text(
+                                            'Assigned To : ',
+                                            style: Styles.black17,
+                                          ),
                                         ],
                                       ),
                                       Column(
@@ -196,6 +200,9 @@ class _ViewPmPlanWebState extends State<ViewPmPlanWeb> {
                                               style: Styles.blue17),
                                           Text(
                                               '${controller.pmPlanDetailsModel.value?.plan_freq_name ?? ''}',
+                                              style: Styles.blue17),
+                                          Text(
+                                              '${controller.pmPlanDetailsModel.value?.assign_to_name ?? ''}',
                                               style: Styles.blue17),
                                         ],
                                       ),
