@@ -97,6 +97,7 @@ abstract class Routes {
   static const mrsListScreen = _Paths.mrsListScreen;
   static const scheduleCourseList = _Paths.scheduleCourseList;
   static const scheduleCourse = _Paths.scheduleCourse;
+  static const executeCourse = _Paths.executeCourse;
 
   static const updateGoodsOrdersDetailsScreen =
       _Paths.updateGoodsOrdersDetailsScreen;
@@ -250,6 +251,7 @@ abstract class _Paths {
   static const misDashboard = '/misDashboard';
   static const scheduleCourseList = '/scheduleCourseList';
   static const scheduleCourse = '/scheduleCourse';
+  static const executeCourse = '/execute-course';
 
   static const newPermit = '/new-permit';
   static const createPermit = '/new-permit-add';

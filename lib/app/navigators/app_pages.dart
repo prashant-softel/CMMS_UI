@@ -73,6 +73,8 @@ import 'package:cmms/app/edit_warranty_claim/view/edit_warranty_claim_content_we
 import 'package:cmms/app/employee_stock_report/view/employee_stock_report_screen.dart';
 import 'package:cmms/app/escalation_matrix_list/escalation_matrix_list_binding.dart';
 import 'package:cmms/app/escalation_matrix_list/escalation_matrix_list_screen.dart';
+import 'package:cmms/app/execute_course/execute_course_binding.dart';
+import 'package:cmms/app/execute_course/view/execute_course_screen.dart';
 import 'package:cmms/app/faulty_material_report/faulty_material_report_binding.dart';
 import 'package:cmms/app/faulty_material_report/view/faulty_material_report_screen.dart';
 import 'package:cmms/app/grievance_list/grievance_list_binding.dart';
@@ -405,6 +407,11 @@ class AppPages {
         name: _Paths.scheduleCourse,
         page: ScheduleScreen.new,
         binding: ScheduleBinding()),
+    GetPage<dynamic>(
+      name: _Paths.executeCourse,
+      page: ExecuteCourseScreen.new,
+      binding: ExecuteCourseBinding(),
+    ),
     GetPage<dynamic>(
       name: _Paths.editJob,
       page: EditJobScreen.new,
