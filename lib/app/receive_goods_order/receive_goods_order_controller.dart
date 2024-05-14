@@ -33,6 +33,25 @@ class ReceiveGoodsOrdersController extends GetxController {
   Rx<String> selectedUnitCurrency = ''.obs;
   RxList<String?> selectedUnitCurrencyList = <String>[].obs;
   int selectedUnitCurrencyId = 0;
+  Rx<bool>isVehicalInvalid = false.obs;
+  Rx<bool>isPOInvalid = false.obs;
+  Rx<bool>isInvoiceInvalid = false.obs;
+  Rx<bool>isDeliveryChallanInvalid= false.obs;
+  Rx<bool>isCountInvalid= false.obs;
+  Rx<bool>isFreightInvalid= false.obs;
+  Rx<bool>isGRNInvalid= false.obs;
+  Rx<bool>isEwayInvalid= false.obs;
+  Rx<bool>isInspectionInvalid= false.obs;
+
+   Rx<bool>isLRInvalid= false.obs;
+   
+
+  
+  
+ Rx<bool>  isInwardInvalid= false.obs;
+ 
+Rx<bool>isAmountInvalid= false.obs;
+ 
   RxList<int?> selectedUnitCurrencyIdList = <int>[].obs;
   BehaviorSubject<int> _facilityId = BehaviorSubject.seeded(0);
   StreamSubscription<int>? facilityIdStreamSubscription;
@@ -79,6 +98,8 @@ class ReceiveGoodsOrdersController extends GetxController {
   var amountCtrlr = TextEditingController();
   var freightValueCtrlr = TextEditingController();
   var inspectionReportCtrlr = TextEditingController();
+   FocusNode VehicalFocus = FocusNode();
+  ScrollController  VehicalScroll = ScrollController();
 
   var purchaseDateTc = TextEditingController();
   var challanDateTc = TextEditingController();
