@@ -159,7 +159,7 @@ class MrsIssueContentMobile extends GetView<MrsIssueController> {
                                               ),
                                               Expanded(
                                                 child: Text(
-                                                    '${mrsViewModel?.asset_name}'
+                                                    '${mrsViewModel.asset_name}'
                                                     '',
                                                     style:
                                                         Styles.appDarkBlue12),
@@ -174,7 +174,7 @@ class MrsIssueContentMobile extends GetView<MrsIssueController> {
                                               ),
                                               Expanded(
                                                 child: Text(
-                                                    mrsViewModel?.asset_type ??
+                                                    mrsViewModel.asset_type ??
                                                         '',
                                                     style:
                                                         Styles.appDarkBlue12),
@@ -188,7 +188,7 @@ class MrsIssueContentMobile extends GetView<MrsIssueController> {
                                               ),
                                               Expanded(
                                                 child: Text(
-                                                    mrsViewModel?.available_qty
+                                                    mrsViewModel.available_qty
                                                             .toString() ??
                                                         '',
                                                     style:
@@ -203,7 +203,7 @@ class MrsIssueContentMobile extends GetView<MrsIssueController> {
                                               ),
                                               Expanded(
                                                 child: Text(
-                                                    mrsViewModel?.requested_qty
+                                                    mrsViewModel.requested_qty
                                                             .toString() ??
                                                         '',
                                                     style:
@@ -218,7 +218,7 @@ class MrsIssueContentMobile extends GetView<MrsIssueController> {
                                               ),
                                               Expanded(
                                                 child: Text(
-                                                    mrsViewModel?.requested_qty
+                                                    mrsViewModel.requested_qty
                                                             .toString() ??
                                                         '',
                                                     style:

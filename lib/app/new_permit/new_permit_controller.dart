@@ -645,9 +645,9 @@ class NewPermitController extends GetxController {
         (element) {
           rowTBTTrainingOtherPersonItem.value.add(
             [
-              {'key': "Employee Name", "value": '${element?.employee_name}'},
-              {'key': "Contact Number", "value": '${element?.contact_number}'},
-              {'key': "Responsibility", "value": '${element?.responsibility}'},
+              {'key': "Employee Name", "value": '${element.employee_name}'},
+              {'key': "Contact Number", "value": '${element.contact_number}'},
+              {'key': "Responsibility", "value": '${element.responsibility}'},
               {'key': "Action ", "value": ''},
             ],
           );

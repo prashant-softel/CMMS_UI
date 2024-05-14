@@ -7,22 +7,22 @@ String mrslistModelToJson(List<MrsListModel> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
 class MrsListModel {
-  dynamic? id;
-  dynamic? requested_by_emp_ID;
+  dynamic id;
+  dynamic requested_by_emp_ID;
   dynamic approver_name;
   String? requestd_date;
   dynamic returnDate;
   String? approval_date;
-  dynamic? approval_status;
+  dynamic approval_status;
   dynamic approval_comment;
   dynamic remarks;
   dynamic requested_by_name;
-  dynamic? status;
+  dynamic status;
   String? status_short;
   String? status_long;
   String? activity;
   String? whereUsedType;
-  dynamic? whereUsedTypeId;
+  dynamic whereUsedTypeId;
   List<CmmsItems>? cmmrsItems;
 
   MrsListModel(

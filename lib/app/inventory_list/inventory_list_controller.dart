@@ -145,25 +145,23 @@ class InventoryListController extends GetxController {
         isLoading: isLoading.value,
         facility_id: facilityId,
         isExport: isExport);
-    if (inventoryList != null) {
-      inventoryList.value = _inventoryList;
-      filteredData.value = inventoryList.value;
-      isLoading.value = false;
-      paginationController = PaginationController(
-        rowCount: inventoryList.length,
-        rowsPerPage: 10,
-      );
+    inventoryList.value = _inventoryList;
+    filteredData.value = inventoryList.value;
+    isLoading.value = false;
+    paginationController = PaginationController(
+      rowCount: inventoryList.length,
+      rowsPerPage: 10,
+    );
 
-      if (inventoryList.isNotEmpty) {
-        inventoryListModel = inventoryList[0];
-        var inventoryListJson = inventoryListModel?.toJson();
-        inventoryListTableColumns.value = <String>[];
-        for (var key in inventoryListJson?.keys.toList() ?? []) {
-          inventoryListTableColumns.add(key);
-        }
+    if (inventoryList.isNotEmpty) {
+      inventoryListModel = inventoryList[0];
+      var inventoryListJson = inventoryListModel?.toJson();
+      inventoryListTableColumns.value = <String>[];
+      for (var key in inventoryListJson?.keys.toList() ?? []) {
+        inventoryListTableColumns.add(key);
       }
     }
-  }
+    }
 
   void export() {
     getInventoryAssetsList(facilityId,  true);

@@ -1,12 +1,8 @@
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/constant/constant.dart';
-import 'package:cmms/app/home/home_controller.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/home/widgets/header_widget_all_dash.dart';
-import 'package:cmms/app/home/widgets/home_drawer.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
-import 'package:cmms/app/theme/color_values.dart';
-import 'package:cmms/app/utils/responsive.dart';
 import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/app/vegetation_control/vegetation_controller.dart';
 import 'package:flutter/material.dart';

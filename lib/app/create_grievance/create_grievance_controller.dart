@@ -13,7 +13,6 @@ import 'package:cmms/domain/models/req_order_details_by_id_model.dart';
 import 'package:cmms/domain/models/type_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
 import 'package:rxdart/subjects.dart';
 import '../home/home_controller.dart';
 import 'package:cmms/app/create_grievance/widgets/grievance_created_dialog.dart';
@@ -288,21 +287,19 @@ class CreateGrievanceController extends GetxController {
         isLoading: true,
       );
 
-      if (responseMapGrievanceUpdate != null) {
-        // var _grievanceId = 0;
-        var _message = '';
-        if (responseMapGrievanceUpdate["grievanceType"] != null &&
-            responseMapGrievanceUpdate["grievanceType"].isNotEmpty) {
-          // _grievanceId = responseMapGrievanceUpdate["grievanceType"][0];
-        }
-        if (responseMapGrievanceUpdate["message"] != null) {
-          _message = responseMapGrievanceUpdate["message"];
-        }
-        grievanceId.value = 0;
-        clearStoreData();
-        showAlertDialog(grievanceId: grievanceId.value, message: _message);
+      // var _grievanceId = 0;
+      var _message = '';
+      if (responseMapGrievanceUpdate["grievanceType"] != null &&
+          responseMapGrievanceUpdate["grievanceType"].isNotEmpty) {
+        // _grievanceId = responseMapGrievanceUpdate["grievanceType"][0];
       }
-    } catch (e) {
+      if (responseMapGrievanceUpdate["message"] != null) {
+        _message = responseMapGrievanceUpdate["message"];
+      }
+      grievanceId.value = 0;
+      clearStoreData();
+      showAlertDialog(grievanceId: grievanceId.value, message: _message);
+        } catch (e) {
       print(e.toString());
     }
   }

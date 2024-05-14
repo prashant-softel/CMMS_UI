@@ -148,7 +148,7 @@ class GoodsOrdersReqDetailController extends GetxController {
 
   Future<void> getRoDetailsByID(
       {required int requestID, required int facilityId}) async {
-    getPurchaseDetailsByIDModelList?.value = <GetRODetailsByIDModel>[];
+    getPurchaseDetailsByIDModelList.value = <GetRODetailsByIDModel>[];
 
     final _getPurchaseDetailsById = await goodsOrdersReqDetailPresenter
         .getRoDetailsByID(requestID: requestID, facilityId: facilityId);

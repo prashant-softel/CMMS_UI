@@ -5,7 +5,6 @@ import 'package:cmms/app/home/home_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../home/widgets/home_drawer.dart';
-import '../../theme/dimens.dart';
 import '../../utils/responsive.dart';
 
 class CreateGrievancesScreen extends GetView<CreateGrievanceController> {

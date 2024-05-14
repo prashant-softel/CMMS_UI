@@ -11,9 +11,7 @@ import 'package:cmms/domain/models/mrs_list_by_jobId.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../domain/models/pm_task_view_list_model.dart';
 import '../../widgets/custom_textfield.dart';
-import '../../widgets/observation_pm_execution_process_dialog.dart';
 
 class PreventiveMaintenanceExecutionContentMobile
     extends GetView<PreventiveMaintenanceExecutionController> {

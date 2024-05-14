@@ -1,7 +1,5 @@
-import 'package:cmms/domain/models/audit_plan_detail_model.dart';
 import 'package:cmms/domain/models/history_model.dart';
 import 'package:cmms/domain/models/pm_task_view_list_model.dart';
-import 'package:cmms/domain/models/view_audit_task_model.dart';
 import 'package:cmms/domain/repositories/repository.dart';
 
 import '../repositories/local_storage_keys.dart';

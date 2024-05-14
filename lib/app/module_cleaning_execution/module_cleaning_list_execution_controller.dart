@@ -189,13 +189,11 @@ class ModuleCleaningListExecutionController extends GetxController {
         end_date: endDate,
         facility_id: facilityId);
 
-    if (list != null) {
-      isLoading.value = false;
-      for (var mc_task_list in list) {
-        mcTaskList.add(mc_task_list);
-      }
+    isLoading.value = false;
+    for (var mc_task_list in list) {
+      mcTaskList.add(mc_task_list);
     }
-
+  
     mcTaskList.value = list;
     filteredData.value = mcTaskList.value;
     paginationController = PaginationController(

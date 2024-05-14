@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:cmms/app/utils/utility.dart';
 
 List<UserListModel> userListModelFromJson(String str) =>
     List<UserListModel>.from(

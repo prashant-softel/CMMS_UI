@@ -120,7 +120,7 @@ class AssetMasterController extends GetxController {
     if (_moduleList != null) {
       moduleList!.value = _moduleList;
       buffermodulelist.value =
-          _moduleList?.whereType<AssetMasterModel>().toList() ??
+          _moduleList.whereType<AssetMasterModel>().toList() ??
               <AssetMasterModel>[];
 
       paginationController = PaginationController(
@@ -146,7 +146,7 @@ class AssetMasterController extends GetxController {
       moduleList!.value = buffermodulelist.toList();
     } else {
       List<AssetMasterModel> filteredList = buffermodulelist
-          .where((item) => (item?.asset_name?.toString()?.toLowerCase() ?? '')
+          .where((item) => (item.asset_name?.toString().toLowerCase() ?? '')
               .contains(keyword.toLowerCase()))
           .toList();
 

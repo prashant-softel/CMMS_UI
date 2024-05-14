@@ -315,7 +315,7 @@ class AddInventoryController extends GetxController {
       selectedStatusNameId = editAddInventoryDetailsModel.value?.statusId ?? 0;
       selectedStatusName.value =
           editAddInventoryDetailsModel.value?.status ?? '';
-      selectedWarrantyName?.value =
+      selectedWarrantyName.value =
           editAddInventoryDetailsModel.value?.warrantyType ?? '';
 
       selectedEquipmentCategoryNameId.value =

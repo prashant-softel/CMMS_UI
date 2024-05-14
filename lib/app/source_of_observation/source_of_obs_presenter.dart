@@ -1,10 +1,6 @@
 import 'package:cmms/domain/models/source_of_obs_list_model.dart';
 import 'package:cmms/domain/usecases/sourceofobervationusecase.dart';
 
-import '../../domain/models/frequency_model.dart';
-import '../../domain/models/inventory_category_model.dart';
-import '../../domain/models/modulelist_model.dart';
-import '../../domain/usecases/module_list_usecase.dart';
 
 class SourceOfObsPresenter {
   SourceOfObsPresenter(this.sourecObs);

@@ -4,16 +4,11 @@ import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/view_audit_task/view_audit_task_controller.dart';
 import 'package:cmms/app/widgets/audit_execution_process_dialog.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
-import 'package:cmms/app/widgets/custom_swich_toggle.dart';
-import 'package:cmms/app/widgets/mis_execution_process_dialog.dart';
-import 'package:cmms/app/widgets/pm_plan_approve_dialog.dart';
-import 'package:cmms/app/widgets/reject_pm_plan_dialog.dart';
 import 'package:data_table_2/data_table_2.dart';
 
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:scrollable_table_view/scrollable_table_view.dart';
 
 import '../../widgets/audit_task_approve_reject.dart';
 import '../../widgets/history_table_widget_web.dart';

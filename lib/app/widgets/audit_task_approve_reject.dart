@@ -7,7 +7,6 @@ import 'package:get/get.dart';
 // import '../theme/colors_value.dart';
 import '../theme/dimens.dart';
 import '../theme/styles.dart';
-import '../view_audit_plan/view_audit_plan_controller.dart';
 
 class AuditTaskApprovedRejectDialog extends GetView {
   int? type;

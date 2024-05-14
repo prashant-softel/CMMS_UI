@@ -59,9 +59,9 @@ class WorkTypeController extends GetxController {
     }
 
     List<WorkTypeModel> filteredList = BufferworktypeList.where((item) =>
-        (item?.name?.toString().toLowerCase().contains(keyword.toLowerCase()) ??
+        (item.name?.toString().toLowerCase().contains(keyword.toLowerCase()) ??
             false) ||
-        (item?.categoryName
+        (item.categoryName
                 ?.toString()
                 .toLowerCase()
                 .contains(keyword.toLowerCase()) ??
@@ -172,7 +172,7 @@ class WorkTypeController extends GetxController {
     );
     worktypeList.value = _workTypeList ?? <WorkTypeModel>[];
     BufferworktypeList.value =
-        _workTypeList?.whereType<WorkTypeModel>()?.toList() ??
+        _workTypeList?.whereType<WorkTypeModel>().toList() ??
             <WorkTypeModel>[];
     isLoading.value = false;
 

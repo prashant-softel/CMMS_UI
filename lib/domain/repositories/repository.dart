@@ -41,7 +41,6 @@ import 'package:cmms/domain/models/get_purchase_details_model.dart';
 import 'package:cmms/domain/models/get_return_mrs_detail.dart';
 import 'package:cmms/domain/models/get_return_mrs_list.dart';
 import 'package:cmms/domain/models/getuser_access_byId_model.dart';
-import 'package:cmms/domain/models/grievance_model.dart';
 import 'package:cmms/domain/models/history_model.dart';
 import 'package:cmms/domain/models/incident_report_details_model.dart';
 import 'package:cmms/domain/models/incident_report_list_model.dart';
@@ -90,7 +89,6 @@ import 'package:cmms/domain/models/veg_plan_detail_model.dart';
 import 'package:cmms/domain/models/veg_task_list_model.dart';
 import 'package:cmms/domain/models/vegetation_equipment_model.dart';
 import 'package:cmms/domain/models/vegetation_list_plan_model.dart';
-import 'package:cmms/domain/models/view_audit_task_model.dart';
 import 'package:cmms/domain/models/view_warranty_claim_model.dart';
 import 'package:cmms/domain/models/warranty_claim_model.dart';
 import 'package:cmms/domain/models/warranty_type_model.dart';
@@ -7662,15 +7660,9 @@ class Repository {
           importType: importType ?? 0,
           isLoading: isLoading,
           facilityId: facilityId);
-      if (res != null) {
-        print("file upload:${res}");
-        return res;
-      } //
-      else {
-        // Utility.showDialog(res.errorCode.toString() + 'getPmtaskViewList');
-        return null;
-      }
-    } //
+      print("file upload:${res}");
+      return res;
+        } //
     catch (error) {
       print(error.toString());
       return null;
@@ -8518,15 +8510,9 @@ class Repository {
         fileName: fileName,
         isLoading: isLoading,
       );
-      if (res != null) {
-        print("file upload");
-        return res;
-      } //
-      else {
-        // Utility.showDialog(res.errorCode.toString() + 'getPmtaskViewList');
-        return null;
-      }
-    } //
+      print("file upload");
+      return res;
+        } //
     catch (error) {
       print(error.toString());
       return null;
@@ -8543,15 +8529,9 @@ class Repository {
         fileName: fileName,
         isLoading: isLoading,
       );
-      if (res != null) {
-        print("file upload");
-        return res;
-      } //
-      else {
-        // Utility.showDialog(res.errorCode.toString() + 'getPmtaskViewList');
-        return null;
-      }
-    } //
+      print("file upload");
+      return res;
+        } //
     catch (error) {
       print(error.toString());
       return null;
