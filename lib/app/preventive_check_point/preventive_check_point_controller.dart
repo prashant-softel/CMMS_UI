@@ -361,7 +361,7 @@ class PreventiveCheckPointController extends GetxController {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text("${check_point}", style: Styles.blackBold16),
+              Text("Delete Checkpoint", style: Styles.blackBold16),
               Divider(
                 color: ColorValues.appLightGreyColor,
               ),

@@ -359,7 +359,7 @@ class PreventiveListController extends GetxController {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
             children: [
-              Text("${checklist}", style: Styles.blackBold16),
+              Text("Delete Checklist", style: Styles.blackBold16),
               Divider(
                 color: ColorValues.appLightGreyColor,
               ),

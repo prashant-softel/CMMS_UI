@@ -38,7 +38,6 @@ abstract class UserAccessConstants {
   static int kIncidentReportFeatureId = 34;
   static String kFeatureIncidentReportName = "Incident Report";
 
-
   //GOODS ORDER ACCESS
   static int kGoodsFeatureId = 35;
   static String kFeatureGoodsOrderName = "Goods Order";
@@ -95,8 +94,8 @@ abstract class UserAccessConstants {
   static int kVegetationControlexeFeatureId = 44;
   static String kFeatureVegetationControlexe = "Vegetation Execution";
 // plant stock report
-  static int kplantstockrepFeatureId = 51;
-  static String kFeeatureplantstockrepName = "Stock Report";
+  static int kplantstockrepFeatureId = 45;
+  static String kFeeatureplantstockrepName = "SM Stock Report";
 
   /// Grievance ACCESS
   static int kGrievanceFeatureId = 49;
@@ -113,7 +112,7 @@ abstract class UserAccessConstants {
   /// MASTERS
   static int kMasterFeatureId = 50;
   static String kFeatureMasterName = "Masters";
-  
+
   ///USER ACCESS
   static int kHaveAddAccess = 1;
   static int kNotHaveAddAccess = 0;

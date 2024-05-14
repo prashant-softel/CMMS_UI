@@ -193,7 +193,7 @@ class PmPlanListController extends GetxController {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text("${planName}", style: Styles.blackBold16),
+              Text("Delete Plan", style: Styles.blackBold16),
               Divider(
                 color: ColorValues.appLightGreyColor,
               ),
@@ -204,7 +204,7 @@ class PmPlanListController extends GetxController {
                     style: Styles.blackBold16,
                     children: [
                       TextSpan(
-                        text: planName,
+                        text: "${planName}",
                         style: TextStyle(
                           color: ColorValues.orangeColor,
                           fontWeight: FontWeight.bold,
