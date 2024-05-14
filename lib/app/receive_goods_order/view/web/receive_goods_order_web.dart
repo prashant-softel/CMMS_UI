@@ -333,7 +333,7 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                                           textController:
                                                               controller
                                                                   .challanNoCtrlr,
-                                                                  // validate
+                                                           // validate
                                                                   errorController:controller
                                                                 .isPOInvalid
                                                                 .value
