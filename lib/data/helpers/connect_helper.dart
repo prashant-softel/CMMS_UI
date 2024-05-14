@@ -945,7 +945,7 @@ class ConnectHelper {
     required String end_date,
   }) async {
     ResponseModel responseModel = await apiWrapper.makeRequest(
-      'MISMaster/GetWaterDataListMonthWise?facility_id=$facility_id&fromDate=2024-04-10&toDate=2024-06-28',
+      'MISMaster/GetWaterDataListMonthWise?facility_id=$facility_id&fromDate=$end_date-04-01&toDate=$start_date-04-01',
       Request.getMultiparts,
       null,
       isLoading,
