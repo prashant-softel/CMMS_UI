@@ -85,7 +85,7 @@ class ScheduleWeb extends GetView<ScheduleController> {
                   width: Get.width * 7,
                   margin: EdgeInsets.only(left: 10, top: 10, right: 10),
                   child: Card(
-                    margin: Dimens.edgeInsets20,
+                    margin: Dimens.edgeInsets12,
                     color: ColorValues.cardColor,
                     elevation: 10,
                     shape: RoundedRectangleBorder(
@@ -302,7 +302,6 @@ class ScheduleWeb extends GetView<ScheduleController> {
                                           ),
                                         ],
                                       ),
-                                      
                                       Dimens.boxHeight10,
                                       Row(
                                         children: [
@@ -713,42 +712,7 @@ class ScheduleWeb extends GetView<ScheduleController> {
                                   ],
                                 ),
                               ),
-                              Center(
-                                child: Padding(
-                                  padding: const EdgeInsets.all(10.0),
-                                  child: Container(
-                                    margin:
-                                        EdgeInsets.only(bottom: 20, top: 10),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Container(
-                                          height: 35,
-                                          child: CustomElevatedButton(
-                                            backgroundColor:
-                                                ColorValues.greenColor,
-                                            text: 'Shedule',
-                                            onPressed: () {},
-                                          ),
-                                        ),
-                                        Dimens.boxWidth20,
-                                        Container(
-                                          height: 35,
-                                          child: CustomElevatedButton(
-                                            backgroundColor:
-                                                ColorValues.redColor,
-                                            text: "Cancel",
-                                            onPressed: () {
-                                              Get.back();
-                                            },
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ),
+                              Dimens.boxHeight20
                             ],
                           ),
                         ),
@@ -760,6 +724,41 @@ class ScheduleWeb extends GetView<ScheduleController> {
             ),
           ],
         ),
+      ),
+      floatingActionButton: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Spacer(),
+          Container(
+            height: 35,
+            child: CustomElevatedButton(
+              backgroundColor: ColorValues.addNewColor,
+              text: 'Send Invitation',
+              onPressed: () {},
+            ),
+          ),
+          Dimens.boxWidth20,
+          Container(
+            height: 35,
+            child: CustomElevatedButton(
+              backgroundColor: ColorValues.addNewColor,
+              text: 'Schedule',
+              onPressed: () {},
+            ),
+          ),
+          Dimens.boxWidth20,
+          Container(
+            height: 35,
+            child: CustomElevatedButton(
+              backgroundColor: ColorValues.redColor,
+              text: "Cancel",
+              onPressed: () {
+                Get.back();
+              },
+            ),
+          ),
+          Spacer(),
+        ],
       ),
     );
   }
@@ -943,7 +942,7 @@ class ScheduleWeb extends GetView<ScheduleController> {
                         child: CustomMultiSelectDialogField(
                           buttonText: 'Add Employee',
                           title: 'Select Employee',
-                          initialValue: controller.selectedEmployeeIdList.value,
+                          initialValue: controller.selectedEmployeeIdList,
                           items: controller.employeeNameList
                               .map(
                                 (employeeName) => MultiSelectItem(
@@ -1134,6 +1133,7 @@ class ScheduleWeb extends GetView<ScheduleController> {
                   Container(
                     height: 35,
                     child: CustomElevatedButton(
+                      backgroundColor: ColorValues.addNewColor,
                       text: "Add",
                       onPressed: () {
                         controller.addExternalEmployee();
