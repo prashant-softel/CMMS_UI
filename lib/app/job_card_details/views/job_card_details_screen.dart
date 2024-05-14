@@ -2,7 +2,6 @@ import 'package:cmms/app/home/home_controller.dart';
 import 'package:cmms/app/home/widgets/mobile_drawer.dart';
 import 'package:cmms/app/job_card_details/views/web/job_card_details_content_web.dart';
 import 'package:cmms/app/job_card_details/job_card_details_controller.dart';
-import 'package:cmms/app/job_details/job_details_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../home/widgets/home_drawer.dart';

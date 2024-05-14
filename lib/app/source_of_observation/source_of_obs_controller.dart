@@ -125,28 +125,26 @@ class SourceOfObsController extends GetxController {
   }
 
   Future<void> getSourceObservationList() async {
-    sourceObsList?.value = <SourceOfObservationListModel>[];
+    sourceObsList.value = <SourceOfObservationListModel>[];
     final _sourceObsList = await moduleListPresenter.getSourceObservationList(
         isLoading: isLoading.value);
 
-    if (_sourceObsList != null) {
-      sourceObsList.value = _sourceObsList;
-      isLoading.value = false;
-      paginationController = PaginationController(
-        rowCount: moduleList?.length ?? 0,
-        rowsPerPage: 10,
-      );
+    sourceObsList.value = _sourceObsList;
+    isLoading.value = false;
+    paginationController = PaginationController(
+      rowCount: moduleList?.length ?? 0,
+      rowsPerPage: 10,
+    );
 
-      if (sourceObsList != null && sourceObsList!.isNotEmpty) {
-        sourceObsModel = sourceObsList![0];
-        var preventiveCheckListJson = sourceObsModel?.toJson();
-        sourceCloumn.value = <String>[];
-        for (var key in preventiveCheckListJson?.keys.toList() ?? []) {
-          sourceCloumn.add(key);
-        }
+    if (sourceObsList.isNotEmpty) {
+      sourceObsModel = sourceObsList[0];
+      var preventiveCheckListJson = sourceObsModel?.toJson();
+      sourceCloumn.value = <String>[];
+      for (var key in preventiveCheckListJson?.keys.toList() ?? []) {
+        sourceCloumn.add(key);
       }
     }
-    update(['Source_Of_Obs_list']);
+      update(['Source_Of_Obs_list']);
   }
 
 

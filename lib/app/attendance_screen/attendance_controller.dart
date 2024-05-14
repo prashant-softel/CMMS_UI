@@ -141,11 +141,7 @@ class AttendanceController extends GetxController {
       isLoading: isLoading,
     );
     isLoading = false;
-    if (_attendance != null) {
-      // Get.back();
-      return true;
-    } else {
-      return false;
+    // Get.back();
+    return true;
     }
-  }
 }

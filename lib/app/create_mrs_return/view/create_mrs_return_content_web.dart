@@ -281,7 +281,7 @@ class CreateMrsReturnContentWeb extends GetView<CreateMrsReturnController> {
                                                                       ["value"])
                                                                   .contains(p0!
                                                                       .name) &&
-                                                              p0!.consumed_qty !=
+                                                              p0.consumed_qty !=
                                                                   p0.issued_qty;
                                                         }).toList())
                                                             .obs,

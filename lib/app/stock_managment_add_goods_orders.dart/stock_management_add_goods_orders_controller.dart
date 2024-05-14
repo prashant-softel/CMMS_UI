@@ -744,8 +744,8 @@ class StockManagementAddGoodsOrdersController extends GetxController {
       goodsOrdersList.add(requ);
     }
     if (filteredOrders.isNotEmpty) {
-      selectedReqOrderId = int.tryParse(filteredOrders[0]?.name ?? "") ?? 0;
-      selectedReqOrder.value = filteredOrders[0]?.name ?? "";
+      selectedReqOrderId = int.tryParse(filteredOrders[0].name ?? "") ?? 0;
+      selectedReqOrder.value = filteredOrders[0].name ?? "";
       getRoDetailsByID(requestID: selectedReqOrderId, facilityId: facilityId);
     }
 

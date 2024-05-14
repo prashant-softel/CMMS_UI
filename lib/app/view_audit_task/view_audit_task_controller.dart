@@ -1,12 +1,9 @@
 import 'package:cmms/app/theme/color_values.dart';
 import 'package:cmms/app/utils/utility.dart';
 import 'package:cmms/app/view_audit_task/view_audit_task_presenter.dart';
-import 'package:cmms/domain/models/audit_plan_detail_model.dart';
 import 'package:cmms/domain/models/comment_model.dart';
 import 'package:cmms/domain/models/history_model.dart';
 import 'package:cmms/domain/models/pm_task_view_list_model.dart';
-import 'package:cmms/domain/models/view_audit_task_model.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../home/home_controller.dart';

@@ -173,7 +173,7 @@ class ApproveReturnMrsViewContentMobile
                                             ),
                                             Expanded(
                                               child: Text(
-                                                  '${mrsViewModel?.asset_name}'
+                                                  '${mrsViewModel.asset_name}'
                                                   '',
                                                   style: Styles.appDarkBlue12),
                                             ),
@@ -187,7 +187,7 @@ class ApproveReturnMrsViewContentMobile
                                             ),
                                             Expanded(
                                               child: Text(
-                                                  mrsViewModel?.asset_type ??
+                                                  mrsViewModel.asset_type ??
                                                       '',
                                                   style: Styles.appDarkBlue12),
                                             )
@@ -200,7 +200,7 @@ class ApproveReturnMrsViewContentMobile
                                             ),
                                             Expanded(
                                               child: Text(
-                                                  mrsViewModel?.issued_qty
+                                                  mrsViewModel.issued_qty
                                                           .toString() ??
                                                       '',
                                                   style: Styles.appDarkBlue12),
@@ -214,7 +214,7 @@ class ApproveReturnMrsViewContentMobile
                                             ),
                                             Expanded(
                                               child: Text(
-                                                  mrsViewModel?.issued_date
+                                                  mrsViewModel.issued_date
                                                           .toString() ??
                                                       '',
                                                   style: Styles.appDarkBlue12),
@@ -228,7 +228,7 @@ class ApproveReturnMrsViewContentMobile
                                             ),
                                             Expanded(
                                               child: Text(
-                                                  mrsViewModel?.returned_qty
+                                                  mrsViewModel.returned_qty
                                                           .toString() ??
                                                       '',
                                                   style: Styles.appDarkBlue12),

@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:multi_select_flutter/multi_select_flutter.dart';
 import '../../../theme/color_values.dart';
 import '../../../theme/dimens.dart';
-import '../../../theme/styles.dart';
 import '../../add_job_controller.dart';
 
 class WorkTypeWidget extends StatefulWidget {

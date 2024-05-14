@@ -103,26 +103,24 @@ class ModuleCleaningListPlanController extends GetxController {
             isLoading: isLoading.value,
             facility_id: facilityId,
             isExport: isExport);
-    if (moduleCleaningListPlan != null) {
-      moduleCleaningListPlan.value = _moduleCleaningListPlan;
-      isLoading.value = false; 
-    paginationController = PaginationController(
-      rowCount: moduleCleaningListPlan.length,
-      rowsPerPage: 10,
-    );
+    moduleCleaningListPlan.value = _moduleCleaningListPlan;
+    isLoading.value = false; 
+  paginationController = PaginationController(
+    rowCount: moduleCleaningListPlan.length,
+    rowsPerPage: 10,
+  );
 
-    if (moduleCleaningListPlan.isNotEmpty) {
-      filteredData.value = moduleCleaningListPlan.value;
+  if (moduleCleaningListPlan.isNotEmpty) {
+    filteredData.value = moduleCleaningListPlan.value;
 
-      moduleCleaningListModel = moduleCleaningListPlan[0];
-      var newPermitListJson = moduleCleaningListModel?.toJson();
-      moduleCleaningListTableColumns.value = <String>[];
-      for (var key in newPermitListJson?.keys.toList() ?? []) {
-        moduleCleaningListTableColumns.add(key);
-      }
-    }
+    moduleCleaningListModel = moduleCleaningListPlan[0];
+    var newPermitListJson = moduleCleaningListModel?.toJson();
+    moduleCleaningListTableColumns.value = <String>[];
+    for (var key in newPermitListJson?.keys.toList() ?? []) {
+      moduleCleaningListTableColumns.add(key);
     }
   }
+    }
 
   void onValueChanged(dynamic list, dynamic value) {
     switch (list.runtimeType) {}

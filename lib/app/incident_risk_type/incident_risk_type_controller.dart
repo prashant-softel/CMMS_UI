@@ -153,14 +153,12 @@ class IncidentRiskTypeController extends GetxController {
       facilityId: facilityId,
       isLoading: true,
     );
-    if (_irisktypeList != null) {
-      isLoading.value = false;
-      for (var facilityType_list in _irisktypeList) {
-        incidentrisktypeList.add(facilityType_list);
-        BufferincidentrisktypeList.add(facilityType_list);
-      }
+    isLoading.value = false;
+    for (var facilityType_list in _irisktypeList) {
+      incidentrisktypeList.add(facilityType_list);
+      BufferincidentrisktypeList.add(facilityType_list);
     }
-
+  
     IncidentRiskTypeListPaginationController = PaginationController(
       rowCount: incidentrisktypeList.length,
       rowsPerPage: 10,

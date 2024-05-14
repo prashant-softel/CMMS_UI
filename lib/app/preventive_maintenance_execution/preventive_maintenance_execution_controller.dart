@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:convert';
 
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
@@ -13,7 +12,6 @@ import 'package:cmms/domain/repositories/repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -21,7 +19,6 @@ import '../../domain/models/file_upload_model.dart';
 import '../../domain/models/pm_task_view_list_model.dart';
 import '../../domain/models/update_pm_task_execution_model.dart';
 import 'preventive_maintenance_execution_presenter.dart';
-import 'package:http/http.dart' as http;
 
 class PreventiveMaintenanceExecutionController extends GetxController {
   ///
@@ -273,7 +270,6 @@ class PreventiveMaintenanceExecutionController extends GetxController {
       transferItemJsonString: transferItemJsonString,
       isLoading: true,
     );
-    if (responsetransferItem == null) {}
   }
 
   Future<bool> browseFiles({

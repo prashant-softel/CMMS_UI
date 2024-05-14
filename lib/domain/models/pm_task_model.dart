@@ -27,7 +27,7 @@ class PmTaskListModel {
   String? permit_code;
   int? status;
   int? ptwstat;
-  dynamic? status_short;
+  dynamic status_short;
   int? ptw_tbt_done;
   String? ptw_shortstatus;
   PmTaskListModel(

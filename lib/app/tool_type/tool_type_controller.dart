@@ -64,16 +64,16 @@ class ToolTypeController extends GetxController {
     List<ToolsModel?> filteredList = BufferworktypetoolList!
         .where((item) =>
             (item!.linkedToolName
-                    ?.toString()
+                    .toString()
                     .toLowerCase()
                     .contains(keyword.toLowerCase()) ??
                 false) ||
-            (item.Equipment_name?.toString()
+            (item.Equipment_name.toString()
                     .toLowerCase()
                     .contains(keyword.toLowerCase()) ??
                 false) ||
             (item.workTypeName
-                    ?.toString()
+                    .toString()
                     .toLowerCase()
                     .contains(keyword.toLowerCase()) ??
                 false))

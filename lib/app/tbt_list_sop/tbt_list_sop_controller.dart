@@ -175,13 +175,11 @@ class TBTSOPListController extends GetxController {
       // categoryIds: cPategoryIds,
       facility_id: facilityId,
     );
-    if (_jobTypeList != null) {
-      isLoading.value = false;
-      for (var jobType_list in _jobTypeList) {
-        jobTypeList.add(jobType_list);
-      }
+    isLoading.value = false;
+    for (var jobType_list in _jobTypeList) {
+      jobTypeList.add(jobType_list);
     }
-    selectedJobType.value = jobTypeList[0].name ?? '';
+      selectedJobType.value = jobTypeList[0].name ?? '';
     selectedJobTypesId = jobTypeList[0].id ?? 0;
     getSopPermitList(selectedJobTypesId);
     // supplierNameList = _supplierNameList;

@@ -89,28 +89,26 @@ class TypeOfObsController extends GetxController {
   }
 
   Future<void> getTypeOfObservationList() async {
-    TypeOfObsList?.value = <TypeOfObsListModel>[];
+    TypeOfObsList.value = <TypeOfObsListModel>[];
     final _TypeOfObsList = await moduleListPresenter.getTypeOfObservationList(
         isLoading: isLoading.value);
 
-    if (_TypeOfObsList != null) {
-      TypeOfObsList.value = _TypeOfObsList;
-      isLoading.value = false;
-      paginationController = PaginationController(
-        rowCount: TypeOfObsList?.length ?? 0,
-        rowsPerPage: 10,
-      );
+    TypeOfObsList.value = _TypeOfObsList;
+    isLoading.value = false;
+    paginationController = PaginationController(
+      rowCount: TypeOfObsList.length ?? 0,
+      rowsPerPage: 10,
+    );
 
-      if (TypeOfObsList != null && TypeOfObsList!.isNotEmpty) {
-        typeOfObsModel = TypeOfObsList![0];
-        var preventiveCheckListJson = typeOfObsListModel?.toJson();
-        sourceCloumn.value = <String>[];
-        for (var key in preventiveCheckListJson?.keys.toList() ?? []) {
-          sourceCloumn.add(key);
-        }
+    if (TypeOfObsList.isNotEmpty) {
+      typeOfObsModel = TypeOfObsList[0];
+      var preventiveCheckListJson = typeOfObsListModel?.toJson();
+      sourceCloumn.value = <String>[];
+      for (var key in preventiveCheckListJson?.keys.toList() ?? []) {
+        sourceCloumn.add(key);
       }
     }
-    update(['Type_of_Observation_list']);
+      update(['Type_of_Observation_list']);
   }
 
   Future<void> createModulelist() async {

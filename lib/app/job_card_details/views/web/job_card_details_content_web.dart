@@ -1,4 +1,3 @@
-import 'dart:convert';
 
 import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
@@ -8,7 +7,6 @@ import 'package:cmms/app/widgets/custom_textField.dart';
 import 'package:cmms/app/widgets/dropdown_web.dart';
 import 'package:cmms/app/widgets/job_card_approve_dialog.dart';
 import 'package:cmms/app/widgets/job_card_reject_dialog.dart';
-import 'package:cmms/app/widgets/stock_dropdown.dart';
 import 'package:cmms/app/widgets/table_action_button.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
@@ -26,7 +24,6 @@ import '../../../widgets/file_upload_details_widget_web.dart';
 import '../../../widgets/file_upload_with_dropzone_widget.dart';
 import '../../../widgets/history_table_widget_web.dart';
 import '../../job_card_details_controller.dart';
-import '../widgets/employee_table_widget.dart';
 import '../widgets/isolated_assets_widget.dart';
 import '../widgets/loto_applied_assets_widget.dart';
 import '../widgets/transposed_table.dart';

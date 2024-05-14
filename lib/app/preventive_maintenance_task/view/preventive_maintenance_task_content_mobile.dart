@@ -2,7 +2,6 @@ import 'package:cmms/app/app.dart';
 import 'package:cmms/app/home/widgets/mobile_header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/preventive_maintenance_task/preventive_maintenance_task_controller.dart';
-import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/domain/models/pm_task_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
