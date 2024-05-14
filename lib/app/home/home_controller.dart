@@ -174,7 +174,7 @@ class HomeController extends GetxController {
       dashboardIrList.value = _dashboardList[3];
       dashboardSmList.value = _dashboardList[4];
 
-      update(['pmPlan_list']);
+      update(['dashboard']);
     }
   }
 

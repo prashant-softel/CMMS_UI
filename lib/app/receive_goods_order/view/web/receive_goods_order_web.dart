@@ -34,7 +34,7 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
   Widget build(BuildContext context) {
     return GetBuilder<ReceiveGoodsOrdersController>(
       id: 'stock_Mangement',
-      builder: (controller) {
+      builder: (  controller) {
         return Obx(
           () => SelectionArea(
             child: Scaffold(
@@ -254,37 +254,175 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.end,
                                               children: [
-                                                IgnorePointer(
-                                                  child: Row(
-                                                    children: [
-                                                      Dimens.boxWidth10,
-                                                      CustomRichText(
-                                                          title: 'Vendor: '),
-                                                      Dimens.boxWidth10,
-                                                      SizedBox(
-                                                        child: DropdownWebStock(
-                                                          width: MediaQuery.of(
-                                                                      context)
-                                                                  .size
-                                                                  .width /
-                                                              5,
-                                                          dropdownList:
-                                                              controller
-                                                                  .ownerList,
-                                                          isValueSelected:
-                                                              controller
-                                                                  .isSelectedBusinessType
-                                                                  .value,
-                                                          selectedValue: controller
-                                                              .selectedBusinessType
-                                                              .value,
-                                                          onValueChanged:
-                                                              controller
-                                                                  .onValueChanged,
-                                                        ),
+                                                Row(
+                                                  children: [
+                                                    Dimens.boxWidth10,
+                                                    CustomRichText(
+                                                        title: 'Vendor: '),
+                                                    Dimens.boxWidth10,
+                                                    SizedBox(
+                                                      child: DropdownWebStock(
+                                                        width: MediaQuery.of(
+                                                                    context)
+                                                                .size
+                                                                .width /
+                                                            5,
+                                                        dropdownList:
+                                                            controller
+                                                                .ownerList,
+                                                        isValueSelected:
+                                                            controller
+                                                                .isSelectedBusinessType
+                                                                .value,
+                                                        selectedValue: controller
+                                                            .selectedBusinessType
+                                                            .value,
+                                                        onValueChanged:
+                                                            controller
+                                                                .onValueChanged,
                                                       ),
-                                                    ],
-                                                  ),
+                                                    ),
+                                                  ],
+                                                ),
+                                                Dimens.boxHeight5,
+                                                Row(
+                                                  children: [
+                                                    CustomRichText(
+                                                        title:
+                                                            'P.O. No.'),
+                                                    Dimens.boxWidth10,
+                                                    Container(
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(10),
+                                                          border: Border.all(
+                                                            color:
+                                                                Color.fromARGB(
+                                                                    255,
+                                                                    227,
+                                                                    224,
+                                                                    224),
+                                                            width: 1,
+                                                          ),
+                                                          boxShadow: [
+                                                            BoxShadow(
+                                                              color: Color
+                                                                      .fromARGB(
+                                                                          255,
+                                                                          236,
+                                                                          234,
+                                                                          234)
+                                                                  .withOpacity(
+                                                                      0.5),
+                                                              spreadRadius: 2,
+                                                              blurRadius: 5,
+                                                              offset:
+                                                                  Offset(0, 2),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                        width: (MediaQuery.of(
+                                                                    context)
+                                                                .size
+                                                                .width *
+                                                            .2),
+                                                        child:
+                                                            LoginCustomTextfield(
+                                                          textController:
+                                                              controller
+                                                                  .challanNoCtrlr,
+                                                                  // validate
+                                                                  errorController:controller
+                                                                .isPOInvalid
+                                                                .value
+                                                            ? "Required field"
+                                                            : null,
+                                                       
+                                                             onChanged: (value) {
+                                                        if (value.trim().length >0) {
+                                                          controller
+                                                              .isPOInvalid
+                                                              .value = false;
+                                                        } else {
+                                                          controller
+                                                              .isPOInvalid
+                                                              .value = true;
+                                                        }
+                                                      },
+                                                        )),
+                                                  ],
+                                                ),
+                                                Dimens.boxHeight5,
+                                                Row(
+                                                  children: [
+                                                    CustomRichText(
+                                                        title: 'Amount '),
+                                                    Dimens.boxWidth10,
+                                                    Container(
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(
+                                                                      10),
+                                                          border: Border.all(
+                                                            color: Color
+                                                                .fromARGB(
+                                                                    255,
+                                                                    227,
+                                                                    224,
+                                                                    224),
+                                                            width: 1,
+                                                          ),
+                                                          boxShadow: [
+                                                            BoxShadow(
+                                                              color: Color
+                                                                      .fromARGB(
+                                                                          255,
+                                                                          236,
+                                                                          234,
+                                                                          234)
+                                                                  .withOpacity(
+                                                                      0.5),
+                                                              spreadRadius: 2,
+                                                              blurRadius: 5,
+                                                              offset: Offset(
+                                                                  0, 2),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                        width: (MediaQuery.of(
+                                                                    context)
+                                                                .size
+                                                                .width *
+                                                            .2),
+                                                        child:
+                                                            LoginCustomTextfield(
+                                                          textController:
+                                                              controller
+                                                                  .pOCtrlr,
+                                                                  //validate
+                                                                  errorController:controller
+                                                                .isAmountInvalid
+                                                                .value
+                                                            ? "Required field"
+                                                            : null,
+                                                       
+                                                             onChanged: (value) {
+                                                        if (value.trim().length >0) {
+                                                          controller
+                                                              .isAmountInvalid
+                                                              .value = false;
+                                                        } else {
+                                                          controller
+                                                              .isAmountInvalid
+                                                              .value = true;
+                                                        }
+                                                      },
+                                                        )),
+                                                  ],
                                                 ),
                                                 Dimens.boxHeight5,
                                                 Row(
@@ -332,114 +470,26 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                                             .2),
                                                         child:
                                                             LoginCustomTextfield(
-                                                          textController:
-                                                              controller
-                                                                  .challanNoCtrlr,
-                                                        )),
-                                                  ],
-                                                ),
-                                                Dimens.boxHeight5,
-                                                IgnorePointer(
-                                                  child: Row(
-                                                    children: [
-                                                      CustomRichText(
-                                                          title: 'P.O: '),
-                                                      Dimens.boxWidth10,
-                                                      Container(
-                                                          decoration:
-                                                              BoxDecoration(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        10),
-                                                            border: Border.all(
-                                                              color: Color
-                                                                  .fromARGB(
-                                                                      255,
-                                                                      227,
-                                                                      224,
-                                                                      224),
-                                                              width: 1,
-                                                            ),
-                                                            boxShadow: [
-                                                              BoxShadow(
-                                                                color: Color
-                                                                        .fromARGB(
-                                                                            255,
-                                                                            236,
-                                                                            234,
-                                                                            234)
-                                                                    .withOpacity(
-                                                                        0.5),
-                                                                spreadRadius: 2,
-                                                                blurRadius: 5,
-                                                                offset: Offset(
-                                                                    0, 2),
-                                                              ),
-                                                            ],
-                                                          ),
-                                                          width: (MediaQuery.of(
-                                                                      context)
-                                                                  .size
-                                                                  .width *
-                                                              .2),
-                                                          child:
-                                                              LoginCustomTextfield(
-                                                            textController:
-                                                                controller
-                                                                    .pOCtrlr,
-                                                          )),
-                                                    ],
-                                                  ),
-                                                ),
-                                                Dimens.boxHeight5,
-                                                Row(
-                                                  children: [
-                                                    CustomRichText(
-                                                        title:
-                                                            'Delivery Challan : '),
-                                                    Dimens.boxWidth10,
-                                                    Container(
-                                                        decoration:
-                                                            BoxDecoration(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(10),
-                                                          border: Border.all(
-                                                            color:
-                                                                Color.fromARGB(
-                                                                    255,
-                                                                    227,
-                                                                    224,
-                                                                    224),
-                                                            width: 1,
-                                                          ),
-                                                          boxShadow: [
-                                                            BoxShadow(
-                                                              color: Color
-                                                                      .fromARGB(
-                                                                          255,
-                                                                          236,
-                                                                          234,
-                                                                          234)
-                                                                  .withOpacity(
-                                                                      0.5),
-                                                              spreadRadius: 2,
-                                                              blurRadius: 5,
-                                                              offset:
-                                                                  Offset(0, 2),
-                                                            ),
-                                                          ],
-                                                        ),
-                                                        width: (MediaQuery.of(
-                                                                    context)
-                                                                .size
-                                                                .width *
-                                                            .2),
-                                                        child:
-                                                            LoginCustomTextfield(
                                                           textController: controller
                                                               .frieghtToPayPaidCtrlr,
+                                                              //validate
+                                                              errorController:controller
+                                                                .isInvoiceInvalid
+                                                                .value
+                                                            ? "Required field"
+                                                            : null,
+                                                       
+                                                             onChanged: (value) {
+                                                        if (value.trim().length >0) {
+                                                          controller
+                                                              .isInvoiceInvalid
+                                                              .value = false;
+                                                        } else {
+                                                          controller
+                                                              .isInvoiceInvalid
+                                                              .value = true;
+                                                        }
+                                                      },
                                                         )),
                                                   ],
                                                 ),
@@ -448,7 +498,7 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                                   children: [
                                                     CustomRichText(
                                                         title:
-                                                            'Count of Package received :'),
+                                                            'Delivery Challan :'),
                                                     Dimens.boxWidth10,
                                                     Container(
                                                         decoration:
@@ -491,6 +541,94 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                                             LoginCustomTextfield(
                                                           textController: controller
                                                               .noOfPackagesReceivedCtrlr,
+                                                              //validate
+                                                              errorController:controller
+                                                                .isDeliveryChallanInvalid
+                                                                .value
+                                                            ? "Required field"
+                                                            : null,
+                                                       
+                                                             onChanged: (value) {
+                                                        if (value.trim().length >0) {
+                                                          controller
+                                                              .isDeliveryChallanInvalid
+                                                              .value = false;
+                                                        } else {
+                                                          controller
+                                                              .isDeliveryChallanInvalid
+                                                              .value = true;
+                                                        }
+                                                      },
+                                                        )),
+                                                  ],
+                                                ),
+                                                Dimens.boxHeight5,
+                                                Row(
+                                                  children: [
+                                                    CustomRichText(
+                                                        title:
+                                                            ' Count of Package received :'),
+                                                    Dimens.boxWidth10,
+                                                    Container(
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(10),
+                                                          border: Border.all(
+                                                            color:
+                                                                Color.fromARGB(
+                                                                    255,
+                                                                    227,
+                                                                    224,
+                                                                    224),
+                                                            width: 1,
+                                                          ),
+                                                          boxShadow: [
+                                                            BoxShadow(
+                                                              color: Color
+                                                                      .fromARGB(
+                                                                          255,
+                                                                          236,
+                                                                          234,
+                                                                          234)
+                                                                  .withOpacity(
+                                                                      0.5),
+                                                              spreadRadius: 2,
+                                                              blurRadius: 5,
+                                                              offset:
+                                                                  Offset(0, 2),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                        width: (MediaQuery.of(
+                                                                    context)
+                                                                .size
+                                                                .width *
+                                                            .2),
+                                                        child:
+                                                            LoginCustomTextfield(
+                                                          textController:
+                                                              controller
+                                                                  .vehicleNoCtrlr,
+                                                              //validate
+                                                              errorController:controller
+                                                                .isCountInvalid
+                                                                .value
+                                                            ? "Required field"
+                                                            : null,
+                                                       
+                                                             onChanged: (value) {
+                                                        if (value.trim().length >0) {
+                                                          controller
+                                                              .isCountInvalid
+                                                              .value = false;
+                                                        } else {
+                                                          controller
+                                                              .isCountInvalid
+                                                              .value = true;
+                                                        }
+                                                      },
                                                         )),
                                                   ],
                                                 ),
@@ -540,67 +678,32 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                                             .2),
                                                         child:
                                                             LoginCustomTextfield(
-                                                          textController:
-                                                              controller
-                                                                  .vehicleNoCtrlr,
-                                                        )),
-                                                  ],
-                                                ),
-                                                Dimens.boxHeight5,
-                                                Row(
-                                                  children: [
-                                                    CustomRichText(
-                                                        title:
-                                                            'Gate Inward Register number : '),
-                                                    Dimens.boxWidth10,
-                                                    Container(
-                                                        decoration:
-                                                            BoxDecoration(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(10),
-                                                          border: Border.all(
-                                                            color:
-                                                                Color.fromARGB(
-                                                                    255,
-                                                                    227,
-                                                                    224,
-                                                                    224),
-                                                            width: 1,
-                                                          ),
-                                                          boxShadow: [
-                                                            BoxShadow(
-                                                              color: Color
-                                                                      .fromARGB(
-                                                                          255,
-                                                                          236,
-                                                                          234,
-                                                                          234)
-                                                                  .withOpacity(
-                                                                      0.5),
-                                                              spreadRadius: 2,
-                                                              blurRadius: 5,
-                                                              offset:
-                                                                  Offset(0, 2),
-                                                            ),
-                                                          ],
-                                                        ),
-                                                        width: (MediaQuery.of(
-                                                                    context)
-                                                                .size
-                                                                .width *
-                                                            .2),
-                                                        child:
-                                                            LoginCustomTextfield(
                                                           textController: controller
                                                               .conditionOfPackagesReceivedCtrlr,
+                                                               errorController:controller
+                                                                .isVehicalInvalid
+                                                                .value
+                                                            ? "Required field"
+                                                            : null,
+                                                       
+                                                             onChanged: (value) {
+                                                        if (value.trim().length >0) {
+                                                          controller
+                                                              .isVehicalInvalid
+                                                              .value = false;
+                                                        } else {
+                                                          controller
+                                                              .isVehicalInvalid
+                                                              .value = true;
+                                                        }
+                                                      },
                                                         )),
                                                   ],
                                                 ),
                                                 Dimens.boxHeight5,
                                                 Row(children: [
                                                   CustomRichText(
-                                                      title: 'Amount : '),
+                                                      title: 'Gate Inward Register number : '),
                                                   Dimens.boxWidth10,
                                                   Container(
                                                       decoration: BoxDecoration(
@@ -642,6 +745,24 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                                         textController:
                                                             controller
                                                                 .amountCtrlr,
+                                                                //validate
+                                                                errorController:controller
+                                                                .isInwardInvalid
+                                                                .value
+                                                            ? "Required field"
+                                                            : null,
+                                                       
+                                                             onChanged: (value) {
+                                                        if (value.trim().length >0) {
+                                                          controller
+                                                              .isInwardInvalid
+                                                              .value = false;
+                                                        } else {
+                                                          controller
+                                                              .isInwardInvalid
+                                                              .value = true;
+                                                        }
+                                                      },
                                                       )),
                                                 ]),
                                                   Dimens.boxHeight5,
@@ -688,6 +809,24 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                                           LoginCustomTextfield(
                                                         textController: controller
                                                             .freightValueCtrlr,
+                                                            //validate
+                                                            errorController:controller
+                                                                .isFreightInvalid
+                                                                .value
+                                                            ? "Required field"
+                                                            : null,
+                                                       
+                                                             onChanged: (value) {
+                                                        if (value.trim().length >0) {
+                                                          controller
+                                                              .isFreightInvalid
+                                                              .value = false;
+                                                        } else {
+                                                          controller
+                                                              .isFreightInvalid
+                                                              .value = true;
+                                                        }
+                                                      },
                                                       )),
                                                 ]),
                                            
@@ -698,6 +837,70 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.end,
                                               children: [
+                                                
+                                                IgnorePointer(
+                                                  child: Row(
+                                                    children: [
+                                                      CustomRichText(
+                                                          title: 'PO Date  : '),
+                                                      Dimens.boxWidth10,
+                                                      CustomTextFieldForStock(
+                                                        width: MediaQuery.of(
+                                                                    context)
+                                                                .size
+                                                                .width /
+                                                            5.1,
+                                                        numberTextField: true,
+                                                        onTap: () {
+                                                          controller
+                                                                  .openPODatePicker =
+                                                              !controller
+                                                                  .openPODatePicker;
+                                                          controller.update([
+                                                            'stock_Mangement'
+                                                          ]);
+                                                        },
+                                                        textController:
+                                                            controller
+                                                                .poDateDateTc,
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                                Dimens.boxHeight5,
+                                               
+                                                IgnorePointer(
+                                                  child: Row(
+                                                    children: [
+                                                      Dimens.boxWidth10,
+                                                      CustomRichText(
+                                                          title: 'Currency: '),
+                                                      Dimens.boxWidth10,
+                                                      SizedBox(
+                                                        child: DropdownWebStock(
+                                                          width: MediaQuery.of(
+                                                                      context)
+                                                                  .size
+                                                                  .width /
+                                                              5,
+                                                          dropdownList: controller
+                                                              .unitCurrencyList,
+                                                          isValueSelected:
+                                                              controller
+                                                                  .isUnitCurrencySelected
+                                                                  .value,
+                                                          selectedValue: controller
+                                                              .selectedUnitCurrency
+                                                              .value,
+                                                          onValueChanged:
+                                                              controller
+                                                                  .onValueChanged,
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                                 Dimens.boxHeight5,
                                                 Row(
                                                   children: [
                                                     CustomRichText(
@@ -745,6 +948,24 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                                           textController:
                                                               controller
                                                                   .girNoCtrlr,
+                                                                  //validate
+                                                                  errorController:controller
+                                                                .isGRNInvalid
+                                                                .value
+                                                            ? "Required field"
+                                                            : null,
+                                                       
+                                                             onChanged: (value) {
+                                                        if (value.trim().length >0) {
+                                                          controller
+                                                              .isGRNInvalid
+                                                              .value = false;
+                                                        } else {
+                                                          controller
+                                                              .isGRNInvalid
+                                                              .value = true;
+                                                        }
+                                                      },
                                                         )),
                                                   ],
                                                 ),
@@ -804,37 +1025,8 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                                 //     ),
                                                 //   ],
                                                 // ),
-                                                Dimens.boxHeight5,
-                                                IgnorePointer(
-                                                  child: Row(
-                                                    children: [
-                                                      CustomRichText(
-                                                          title: 'PO Date  : '),
-                                                      Dimens.boxWidth10,
-                                                      CustomTextFieldForStock(
-                                                        width: MediaQuery.of(
-                                                                    context)
-                                                                .size
-                                                                .width /
-                                                            5.1,
-                                                        numberTextField: true,
-                                                        onTap: () {
-                                                          controller
-                                                                  .openPODatePicker =
-                                                              !controller
-                                                                  .openPODatePicker;
-                                                          controller.update([
-                                                            'stock_Mangement'
-                                                          ]);
-                                                        },
-                                                        textController:
-                                                            controller
-                                                                .poDateDateTc,
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                                Dimens.boxHeight5,
+                                               
+                                                 Dimens.boxHeight5,
                                                 Row(
                                                   children: [
                                                     CustomRichText(
@@ -938,6 +1130,25 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                                           textController:
                                                               controller
                                                                   .lrNoCtrlr,
+                                                                  //validate
+                                                                  errorController:controller
+                                                                .isLRInvalid
+                                                                .value
+                                                            ? "Required field"
+                                                            : null,
+                                                       
+                                                             onChanged: (value) {
+                                                        if (value.trim().length >0) {
+                                                          controller
+                                                              .isLRInvalid
+                                                              .value = false;
+                                                        } else {
+                                                          controller
+                                                              .isLRInvalid
+                                                              .value = true;
+                                                        }
+                                                      },
+                                                                  
                                                         )),
                                                   ],
                                                 ),
@@ -989,41 +1200,28 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                                           textController:
                                                               controller
                                                                   .jobRefCtrlr,
+                                                                  //validate
+                                                                  errorController:controller
+                                                                .isEwayInvalid
+                                                                .value
+                                                            ? "Required field"
+                                                            : null,
+                                                       
+                                                             onChanged: (value) {
+                                                        if (value.trim().length >0) {
+                                                          controller
+                                                              .isEwayInvalid
+                                                              .value = false;
+                                                        } else {
+                                                          controller
+                                                              .isEwayInvalid
+                                                              .value = true;
+                                                        }
+                                                      },
                                                         )),
                                                   ],
                                                 ),
-                                                Dimens.boxHeight5,
-                                                IgnorePointer(
-                                                  child: Row(
-                                                    children: [
-                                                      Dimens.boxWidth10,
-                                                      CustomRichText(
-                                                          title: 'Currency: '),
-                                                      Dimens.boxWidth10,
-                                                      SizedBox(
-                                                        child: DropdownWebStock(
-                                                          width: MediaQuery.of(
-                                                                      context)
-                                                                  .size
-                                                                  .width /
-                                                              5,
-                                                          dropdownList: controller
-                                                              .unitCurrencyList,
-                                                          isValueSelected:
-                                                              controller
-                                                                  .isUnitCurrencySelected
-                                                                  .value,
-                                                          selectedValue: controller
-                                                              .selectedUnitCurrency
-                                                              .value,
-                                                          onValueChanged:
-                                                              controller
-                                                                  .onValueChanged,
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
+                                                
                                                Dimens.boxHeight5,
                                                 Row(children: [
                                                   CustomRichText(
@@ -1068,6 +1266,24 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                                           LoginCustomTextfield(
                                                         textController: controller
                                                             .inspectionReportCtrlr,
+                                                            //validate
+                                                            errorController:controller
+                                                                .isInspectionInvalid
+                                                                .value
+                                                            ? "Required field"
+                                                            : null,
+                                                       
+                                                             onChanged: (value) {
+                                                        if (value.trim().length >0) {
+                                                          controller
+                                                              .isInspectionInvalid
+                                                              .value = false;
+                                                        } else {
+                                                          controller
+                                                              .isInspectionInvalid
+                                                              .value = true;
+                                                        }
+                                                      },
                                                       )),
                                                 ]),
                                            

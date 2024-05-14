@@ -26,12 +26,16 @@ class LoginCustomTextfield extends GetView {
   final bool readOnly;
   double? width;
   ScrollController? scrollController;
+  InputDecoration? decoration;
+  
 
   LoginCustomTextfield({
     Key? key,
     this.ishint,
     this.numberTextField = false,
     this.focusNode,
+// this.autofocus = false,
+    this.decoration,
     this.scroll,
     this.autofillHints,
     this.obscureText = false,

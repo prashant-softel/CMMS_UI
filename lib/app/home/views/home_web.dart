@@ -3371,7 +3371,7 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb> {
                       controller.getDashBordListByDate();
                       controller.openFromDateToStartDatePicker =
                           !controller.openFromDateToStartDatePicker;
-                      controller.update(['stock_Mangement_Date']);
+                      controller.update(['dashboard']);
 
                       // Get.toNamed(
                       //   Routes.stockManagementGoodsOrdersScreen,
