@@ -205,11 +205,11 @@ class PreventiveMaintenanceTaskController extends GetxController {
           ),
           RichText(
             text: TextSpan(
-                text: 'Are you sure you want to delete the user?',
+                text: 'Are you sure you want to delete the task: ',
                 style: Styles.blackBold16,
                 children: [
                   TextSpan(
-                    text: "[$task]",
+                    text: task,
                     style: TextStyle(
                       color: ColorValues.orangeColor,
                       fontWeight: FontWeight.bold,
