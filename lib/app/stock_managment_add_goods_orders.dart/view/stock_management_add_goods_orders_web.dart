@@ -46,7 +46,54 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                 child: Column(
                   children: [
                     HeaderWidget(),
-                    AppBarGoodsOrder(),
+                    Container(
+                      height: 45,
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: Color.fromARGB(255, 227, 224, 224),
+                          width: 1,
+                        ),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Color.fromARGB(255, 236, 234, 234)
+                                .withOpacity(0.5),
+                            spreadRadius: 2,
+                            blurRadius: 5,
+                            offset: Offset(0, 2),
+                          ),
+                        ],
+                      ),
+                      child: Row(
+                        children: [
+                          Icon(
+                            Icons.home,
+                            color: ColorValues.greyLightColor,
+                          ),
+                          InkWell(
+                            onTap: () {
+                              Get.offNamed(Routes.home);
+                            },
+                            child: Text(
+                              "DASHBOARD",
+                              style: Styles.greyLight14,
+                            ),
+                          ),
+                          InkWell(
+                            onTap: () {
+                              Get.offNamed(
+                                  Routes.stockManagementGoodsOrdersScreen);
+                            },
+                            child: Text(" / STOCK MANAGEMENT",
+                                style: Styles.greyLight14),
+                          ),
+                          controller.goId == null || controller.goId == 0
+                              ? Text(" / EDIT GOODS ORDER DETAILS",
+                                  style: Styles.greyLight14)
+                              : Text(" / ADD GOODS ORDER DETAILS",
+                                  style: Styles.greyLight14),
+                        ],
+                      ),
+                    ),
                     Expanded(
                       child: SingleChildScrollView(
                         child: Stack(
@@ -201,7 +248,8 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                                 GoodsOrderTextField(
                                                   keyboardType:
                                                       TextInputType.number,
-                                                  inputFormatters: <TextInputFormatter>[
+                                                  inputFormatters: <
+                                                      TextInputFormatter>[
                                                     FilteringTextInputFormatter
                                                         .digitsOnly
                                                   ],
@@ -307,7 +355,8 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                                 GoodsOrderTextField(
                                                   keyboardType:
                                                       TextInputType.number,
-                                                  inputFormatters: <TextInputFormatter>[
+                                                  inputFormatters: <
+                                                      TextInputFormatter>[
                                                     FilteringTextInputFormatter
                                                         .digitsOnly
                                                   ],
@@ -1112,7 +1161,8 @@ class AddRowInGoodsOrder extends StatelessWidget {
                                                     width: (Get.width * .4),
                                                     keyboardType:
                                                         TextInputType.number,
-                                                    inputFormatters: <TextInputFormatter>[
+                                                    inputFormatters: <
+                                                        TextInputFormatter>[
                                                       FilteringTextInputFormatter
                                                           .digitsOnly
                                                     ],
@@ -1166,7 +1216,8 @@ class AddRowInGoodsOrder extends StatelessWidget {
                                                         keyboardType:
                                                             TextInputType
                                                                 .number,
-                                                        inputFormatters: <TextInputFormatter>[
+                                                        inputFormatters: <
+                                                            TextInputFormatter>[
                                                           FilteringTextInputFormatter
                                                               .digitsOnly
                                                         ],
@@ -1235,57 +1286,6 @@ class GoodsOrderTextField extends StatelessWidget {
           textController: textController,
           scroll: scroll,
           focusNode: focusnode),
-    );
-  }
-}
-
-class AppBarGoodsOrder extends StatelessWidget {
-  const AppBarGoodsOrder({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 45,
-      decoration: BoxDecoration(
-        border: Border.all(
-          color: Color.fromARGB(255, 227, 224, 224),
-          width: 1,
-        ),
-        boxShadow: [
-          BoxShadow(
-            color: Color.fromARGB(255, 236, 234, 234).withOpacity(0.5),
-            spreadRadius: 2,
-            blurRadius: 5,
-            offset: Offset(0, 2),
-          ),
-        ],
-      ),
-      child: Row(
-        children: [
-          Icon(
-            Icons.home,
-            color: ColorValues.greyLightColor,
-          ),
-          InkWell(
-            onTap: () {
-              Get.offNamed(Routes.home);
-            },
-            child: Text(
-              "DASHBOARD",
-              style: Styles.greyLight14,
-            ),
-          ),
-          InkWell(
-            onTap: () {
-              Get.offNamed(Routes.stockManagementGoodsOrdersScreen);
-            },
-            child: Text(" / STOCK MANAGEMENT", style: Styles.greyLight14),
-          ),
-          Text(" / ADD GOODS ORDER DETAILS", style: Styles.greyLight14),
-        ],
-      ),
     );
   }
 }
