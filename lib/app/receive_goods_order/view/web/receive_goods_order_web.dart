@@ -335,6 +335,27 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                                           textController:
                                                               controller
                                                                   .challanNoCtrlr,
+                                                          // validate
+                                                          errorController: controller
+                                                                  .isInvoiceNumberInvalid
+                                                                  .value
+                                                              ? "Required field"
+                                                              : null,
+
+                                                          onChanged: (value) {
+                                                            if (value
+                                                                    .trim()
+                                                                    .length >
+                                                                0) {
+                                                              controller
+                                                                  .isInvoiceNumberInvalid
+                                                                  .value = false;
+                                                            } else {
+                                                              controller
+                                                                  .isInvoiceNumberInvalid
+                                                                  .value = true;
+                                                            }
+                                                          },
                                                         )),
                                                   ],
                                                 ),
@@ -440,6 +461,25 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                                             LoginCustomTextfield(
                                                           textController: controller
                                                               .frieghtToPayPaidCtrlr,
+                                                          errorController: controller
+                                                                  .isDeliverChalanInvalid
+                                                                  .value
+                                                              ? "Required field"
+                                                              : null,
+                                                          onChanged: (value) {
+                                                            if (value
+                                                                    .trim()
+                                                                    .length >
+                                                                0) {
+                                                              controller
+                                                                  .isDeliverChalanInvalid
+                                                                  .value = false;
+                                                            } else {
+                                                              controller
+                                                                  .isDeliverChalanInvalid
+                                                                  .value = true;
+                                                            }
+                                                          },
                                                         )),
                                                   ],
                                                 ),
@@ -491,6 +531,25 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                                             LoginCustomTextfield(
                                                           textController: controller
                                                               .noOfPackagesReceivedCtrlr,
+                                                          errorController: controller
+                                                                  .isCountOfPackageReceivedInvalid
+                                                                  .value
+                                                              ? "Required field"
+                                                              : null,
+                                                          onChanged: (value) {
+                                                            if (value
+                                                                    .trim()
+                                                                    .length >
+                                                                0) {
+                                                              controller
+                                                                  .isCountOfPackageReceivedInvalid
+                                                                  .value = false;
+                                                            } else {
+                                                              controller
+                                                                  .isCountOfPackageReceivedInvalid
+                                                                  .value = true;
+                                                            }
+                                                          },
                                                         )),
                                                   ],
                                                 ),
@@ -543,6 +602,25 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                                           textController:
                                                               controller
                                                                   .vehicleNoCtrlr,
+                                                          errorController: controller
+                                                                  .isVehicalInvalid
+                                                                  .value
+                                                              ? "Required field"
+                                                              : null,
+                                                          onChanged: (value) {
+                                                            if (value
+                                                                    .trim()
+                                                                    .length >
+                                                                0) {
+                                                              controller
+                                                                  .isVehicalInvalid
+                                                                  .value = false;
+                                                            } else {
+                                                              controller
+                                                                  .isVehicalInvalid
+                                                                  .value = true;
+                                                            }
+                                                          },
                                                         )),
                                                   ],
                                                 ),
@@ -594,6 +672,25 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                                             LoginCustomTextfield(
                                                           textController: controller
                                                               .conditionOfPackagesReceivedCtrlr,
+                                                          errorController: controller
+                                                                  .isGateInwardRegisterInvalid
+                                                                  .value
+                                                              ? "Required field"
+                                                              : null,
+                                                          onChanged: (value) {
+                                                            if (value
+                                                                    .trim()
+                                                                    .length >
+                                                                0) {
+                                                              controller
+                                                                  .isGateInwardRegisterInvalid
+                                                                  .value = false;
+                                                            } else {
+                                                              controller
+                                                                  .isGateInwardRegisterInvalid
+                                                                  .value = true;
+                                                            }
+                                                          },
                                                         )),
                                                   ],
                                                 ),
@@ -688,6 +785,25 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                                           LoginCustomTextfield(
                                                         textController: controller
                                                             .freightValueCtrlr,
+                                                        errorController: controller
+                                                                .isFreightInvalid
+                                                                .value
+                                                            ? "Required field"
+                                                            : null,
+                                                        onChanged: (value) {
+                                                          if (value
+                                                                  .trim()
+                                                                  .length >
+                                                              0) {
+                                                            controller
+                                                                .isFreightInvalid
+                                                                .value = false;
+                                                          } else {
+                                                            controller
+                                                                .isFreightInvalid
+                                                                .value = true;
+                                                          }
+                                                        },
                                                       )),
                                                 ]),
                                               ],
@@ -741,10 +857,30 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                                             .2),
                                                         child:
                                                             LoginCustomTextfield(
-                                                          textController:
-                                                              controller
-                                                                  .girNoCtrlr,
-                                                        )),
+                                                                textController:
+                                                                    controller
+                                                                        .girNoCtrlr,
+                                                                errorController:
+                                                                    controller
+                                                                            .isGrnNoInvalid
+                                                                            .value
+                                                                        ? "Required field"
+                                                                        : null,
+                                                                onChanged:
+                                                                    (value) {
+                                                                  if (value
+                                                                          .trim()
+                                                                          .length >
+                                                                      0) {
+                                                                    controller
+                                                                        .isGrnNoInvalid
+                                                                        .value = false;
+                                                                  } else {
+                                                                    controller
+                                                                        .isGrnNoInvalid
+                                                                        .value = true;
+                                                                  }
+                                                                })),
                                                   ],
                                                 ),
                                                 Dimens.boxHeight5,
@@ -772,6 +908,25 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                                       },
                                                       textController: controller
                                                           .purchaseDateTc,
+                                                      errorController: controller
+                                                              .isInvoiceDateInvalid
+                                                              .value
+                                                          ? "Required field"
+                                                          : null,
+                                                      onChanged: (value) {
+                                                        if (value
+                                                                .trim()
+                                                                .length >
+                                                            0) {
+                                                          controller
+                                                              .isInvoiceDateInvalid
+                                                              .value = false;
+                                                        } else {
+                                                          controller
+                                                              .isInvoiceDateInvalid
+                                                              .value = true;
+                                                        }
+                                                      },
                                                     ),
                                                   ],
                                                 ),
@@ -858,6 +1013,25 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                                       },
                                                       textController: controller
                                                           .challanDateTc,
+                                                      errorController: controller
+                                                              .isDeliveryChallanDateInvalid
+                                                              .value
+                                                          ? "Required field"
+                                                          : null,
+                                                      onChanged: (value) {
+                                                        if (value
+                                                                .trim()
+                                                                .length >
+                                                            0) {
+                                                          controller
+                                                              .isDeliveryChallanDateInvalid
+                                                              .value = false;
+                                                        } else {
+                                                          controller
+                                                              .isDeliveryChallanDateInvalid
+                                                              .value = true;
+                                                        }
+                                                      },
                                                     ),
                                                   ],
                                                 ),
@@ -886,6 +1060,25 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                                       },
                                                       textController: controller
                                                           .receivedDateTc,
+                                                      errorController: controller
+                                                              .isMaterialReciveDateInvalid
+                                                              .value
+                                                          ? "Required field"
+                                                          : null,
+                                                      onChanged: (value) {
+                                                        if (value
+                                                                .trim()
+                                                                .length >
+                                                            0) {
+                                                          controller
+                                                              .isMaterialReciveDateInvalid
+                                                              .value = false;
+                                                        } else {
+                                                          controller
+                                                              .isMaterialReciveDateInvalid
+                                                              .value = true;
+                                                        }
+                                                      },
                                                     ),
                                                   ],
                                                 ),
@@ -937,6 +1130,25 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                                           textController:
                                                               controller
                                                                   .lrNoCtrlr,
+                                                          errorController: controller
+                                                                  .isLrNoInvalid
+                                                                  .value
+                                                              ? "Required field"
+                                                              : null,
+                                                          onChanged: (value) {
+                                                            if (value
+                                                                    .trim()
+                                                                    .length >
+                                                                0) {
+                                                              controller
+                                                                  .isLrNoInvalid
+                                                                  .value = false;
+                                                            } else {
+                                                              controller
+                                                                  .isLrNoInvalid
+                                                                  .value = true;
+                                                            }
+                                                          },
                                                         )),
                                                   ],
                                                 ),
@@ -988,6 +1200,25 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                                           textController:
                                                               controller
                                                                   .jobRefCtrlr,
+                                                          errorController: controller
+                                                                  .isEWayBillInvalid
+                                                                  .value
+                                                              ? "Required field"
+                                                              : null,
+                                                          onChanged: (value) {
+                                                            if (value
+                                                                    .trim()
+                                                                    .length >
+                                                                0) {
+                                                              controller
+                                                                  .isEWayBillInvalid
+                                                                  .value = false;
+                                                            } else {
+                                                              controller
+                                                                  .isEWayBillInvalid
+                                                                  .value = true;
+                                                            }
+                                                          },
                                                         )),
                                                   ],
                                                 ),
@@ -1018,6 +1249,7 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                                           onValueChanged:
                                                               controller
                                                                   .onValueChanged,
+                                                                  
                                                         ),
                                                       ),
                                                     ],
@@ -1068,6 +1300,25 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                                           LoginCustomTextfield(
                                                         textController: controller
                                                             .inspectionReportCtrlr,
+                                                        errorController: controller
+                                                                .isInspectionReportInvalid
+                                                                .value
+                                                            ? "Required field"
+                                                            : null,
+                                                        onChanged: (value) {
+                                                          if (value
+                                                                  .trim()
+                                                                  .length >
+                                                              0) {
+                                                            controller
+                                                                .isInspectionReportInvalid
+                                                                .value = false;
+                                                          } else {
+                                                            controller
+                                                                .isInspectionReportInvalid
+                                                                .value = true;
+                                                          }
+                                                        },
                                                       )),
                                                 ]),
                                               ],
@@ -1205,7 +1456,7 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                                         ? Padding(
                                                             padding:
                                                                 const EdgeInsets
-                                                                        .only(
+                                                                    .only(
                                                                     left: 10,
                                                                     right: 10,
                                                                     top: 10),
@@ -1282,7 +1533,7 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                                             ? Padding(
                                                                 padding:
                                                                     const EdgeInsets
-                                                                            .only(
+                                                                        .only(
                                                                         left:
                                                                             10,
                                                                         right:

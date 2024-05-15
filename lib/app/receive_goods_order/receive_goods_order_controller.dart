@@ -34,28 +34,27 @@ class ReceiveGoodsOrdersController extends GetxController {
   Rx<String> selectedUnitCurrency = ''.obs;
   RxList<String?> selectedUnitCurrencyList = <String>[].obs;
   int selectedUnitCurrencyId = 0;
+  Rx<bool> isInvoiceNumberInvalid = false.obs;
+  Rx<bool> isDeliverChalanInvalid = false.obs;
+  Rx<bool> isGrnNoInvalid = false.obs;
+  Rx<bool> isCountOfPackageReceivedInvalid = false.obs;
   Rx<bool> isVehicalInvalid = false.obs;
-  Rx<bool> isPOInvalid = false.obs;
-  Rx<bool> isInvoiceInvalid = false.obs;
-  Rx<bool> isDeliveryChallanInvalid = false.obs;
-  Rx<bool> isCountInvalid = false.obs;
+  Rx<bool> isGateInwardRegisterInvalid = false.obs;
   Rx<bool> isFreightInvalid = false.obs;
-  Rx<bool> isGRNInvalid = false.obs;
-  Rx<bool> isEwayInvalid = false.obs;
-  Rx<bool> isInspectionInvalid = false.obs;
+  Rx<bool> isLrNoInvalid = false.obs;
+  Rx<bool> isMaterialReciveDateInvalid = false.obs;
+  Rx<bool> isDeliveryChallanDateInvalid = false.obs;
+
+  Rx<bool> isInvoiceDateInvalid = false.obs;
+
+  Rx<bool> isEWayBillInvalid = false.obs;
+  Rx<bool> isInspectionReportInvalid = false.obs;
+
   Rx<bool> isFormInvalid = false.obs;
-
-  Rx<bool> isLRInvalid = false.obs;
-
   Rx<String> selectedBlock = ''.obs;
   Rx<bool> isBlockSelected = true.obs;
   int selectedBlockId = 0;
   RxList<int?> selectedBlockIdList = <int>[].obs;
-
-  Rx<bool> isInwardInvalid = false.obs;
-
-  Rx<bool> isAmountInvalid = false.obs;
-
   RxList<int?> selectedUnitCurrencyIdList = <int>[].obs;
   BehaviorSubject<int> _facilityId = BehaviorSubject.seeded(0);
   StreamSubscription<int>? facilityIdStreamSubscription;
@@ -560,65 +559,100 @@ class ReceiveGoodsOrdersController extends GetxController {
 
   //validation check from
   void checkForm() {
-    if (selectedBlock.value == '') {
-      isBlockSelected.value = false;
+    if (challanNoCtrlr.text.trim().length < 3) {
+      isInvoiceNumberInvalid.value = true;
     }
-    //  if (selectedWorkTypeList.length < 1) {
-    //   isWorkTypeSelected.value = false;
-    // }
-    // if (selectedEquipmentCategoryIdList.length < 1) {
-    //   isEquipmentCategorySelected.value = false;
-    // }
-    // if (selectedWorkAreaList.length < 1) {
-    //   isWorkAreaSelected.value = false;
-    // }
-
-    // if (challanNoCtrlr.text.trim().length < 3) {
-    //   // isCountInvalid.value = true;
-    // }
-    if (amountCtrlr.text.trim().length < 3) {
-      isAmountInvalid.value = true;
+    if (isInvoiceNumberInvalid.value == true) {
+      isFormInvalid.value = true;
     }
     if (frieghtToPayPaidCtrlr.text.trim().length < 3) {
-      isInvoiceInvalid.value = true;
+      isDeliverChalanInvalid.value = true;
     }
-    // if (noOfPackagesReceivedCtrlr.text.trim().length < 3) {
-    //   isCountInvalid.value = true;
-    // }
+
+    if (isDeliverChalanInvalid.value == true) {
+      isFormInvalid.value = true;
+    }
+
+    ///
+    if (noOfPackagesReceivedCtrlr.text.trim().length < 3) {
+      isCountOfPackageReceivedInvalid.value = true;
+    }
+
+    if (isCountOfPackageReceivedInvalid.value == true) {
+      isFormInvalid.value = true;
+    }
+
     if (vehicleNoCtrlr.text.trim().length < 3) {
       isVehicalInvalid.value = true;
     }
-    if (amountCtrlr.text.trim().length < 3) {
-      isInwardInvalid.value = true;
+
+    if (isVehicalInvalid.value == true) {
+      isFormInvalid.value = true;
     }
+    if (conditionOfPackagesReceivedCtrlr.text.trim().length < 3) {
+      isGateInwardRegisterInvalid.value = true;
+    }
+
+    if (isGateInwardRegisterInvalid.value == true) {
+      isFormInvalid.value = true;
+    }
+
     if (freightValueCtrlr.text.trim().length < 3) {
       isFreightInvalid.value = true;
     }
-    if (girNoCtrlr.text.trim().length < 3) {
-      isGRNInvalid.value = true;
+
+    if (isFreightInvalid.value == true) {
+      isFormInvalid.value = true;
     }
     if (lrNoCtrlr.text.trim().length < 3) {
-      isLRInvalid.value = true;
-    }
-    if (jobRefCtrlr.text.trim().length < 3) {
-      isEwayInvalid.value = true;
-    }
-    if (inspectionReportCtrlr.text.trim().length < 3) {
-      isInspectionInvalid.value = true;
+      isLrNoInvalid.value = true;
     }
 
-    if (isPOInvalid.value == true ||
-        isAmountInvalid.value == true ||
-        isInvoiceInvalid.value == true ||
-        isDeliveryChallanInvalid.value == true ||
-        isCountInvalid.value == true ||
-        isVehicalInvalid.value == true ||
-        isInwardInvalid.value == true ||
-        isFreightInvalid.value == true ||
-        isGRNInvalid.value == true ||
-        isLRInvalid.value == true ||
-        isEwayInvalid.value == true ||
-        isInspectionInvalid.value == true) {
+    if (isLrNoInvalid.value == true) {
+      isFormInvalid.value = true;
+    }
+    if (receivedDateTc.text.trim().length < 3) {
+      isMaterialReciveDateInvalid.value = true;
+    }
+
+    if (isMaterialReciveDateInvalid.value == true) {
+      isFormInvalid.value = true;
+    }
+
+    if (challanDateTc.text.trim().length < 3) {
+      isDeliveryChallanDateInvalid.value = true;
+    }
+
+    if (isDeliveryChallanDateInvalid.value == true) {
+      isFormInvalid.value = true;
+    }
+    if (purchaseDateTc.text.trim().length < 3) {
+      isInvoiceDateInvalid.value = true;
+    }
+
+    if (isInvoiceDateInvalid.value == true) {
+      isFormInvalid.value = true;
+    }
+
+    if (jobRefCtrlr.text.trim().length < 3) {
+      isEWayBillInvalid.value = true;
+    }
+
+    if (isEWayBillInvalid.value == true) {
+      isFormInvalid.value = true;
+    }
+    if (inspectionReportCtrlr.text.trim().length < 3) {
+      isInspectionReportInvalid.value = true;
+    }
+
+    if (isInspectionReportInvalid.value == true) {
+      isFormInvalid.value = true;
+    }
+    if (girNoCtrlr.text.trim().length < 3) {
+      isGrnNoInvalid.value = true;
+    }
+
+    if (isGrnNoInvalid.value == true) {
       isFormInvalid.value = true;
     } else {
       isFormInvalid.value = false;
@@ -626,10 +660,10 @@ class ReceiveGoodsOrdersController extends GetxController {
   }
 
   void updateGOReceive() async {
-    // checkForm();
-    // if (isFormInvalid.value) {
-    //   return ;
-    // }
+    checkForm();
+    if (isFormInvalid.value) {
+      return;
+    }
     String _challanNoCtrlr = challanNoCtrlr.text.trim();
     String _pOCtrlr = pOCtrlr.text.trim();
     String _frieghtToPayPaidCtrlr = frieghtToPayPaidCtrlr.text.trim();
