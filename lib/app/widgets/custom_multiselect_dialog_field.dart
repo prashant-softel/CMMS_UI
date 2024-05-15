@@ -54,12 +54,40 @@ class _CustomMultiSelectDialogFieldState
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           ListTile(
-            title: Responsive.isMobile(context) || Responsive.isTablet(context)
-                ? Text(
-                    widget.title!,
-                    style: Styles.black13,
-                  )
-                : Text(widget.title!),
+            title: widget.initialValue == []
+                ? Responsive.isMobile(context) || Responsive.isTablet(context)
+                    ? Text(
+                        widget.title!,
+                        style: Styles.black13,
+                      )
+                    : Text(widget.title!)
+                : SizedBox(
+                    height: 40,
+                    child: Scrollbar(
+                      thumbVisibility: true,
+                      controller: _firstController,
+                      child: ListView.builder(
+                        controller: _firstController,
+                        itemCount: _selectedItems.length,
+                        itemBuilder: (context, index) {
+                          final item = _selectedItems[index];
+                          return Chip(
+                            label: Text(widget.items!
+                                .firstWhere((element) => element.value == item)
+                                .label), // Displaying the name of the selected item
+                            deleteIcon: Icon(Icons.cancel),
+                            onDeleted: () {
+                              setState(() {
+                                _selectedItems.remove(item);
+                              });
+                              widget.onConfirm(_selectedItems);
+                            },
+                          );
+                        },
+                        scrollDirection: Axis.horizontal,
+                      ),
+                    ),
+                  ),
             trailing: IconButton(
               icon: Icon(Icons.arrow_drop_down),
               onPressed: () async {
@@ -81,36 +109,36 @@ class _CustomMultiSelectDialogFieldState
               },
             ),
           ),
-          SizedBox(
-            height: _selectedItems.isNotEmpty ? 60 : 0,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 4),
-              child: Scrollbar(
-                thumbVisibility: true,
-                controller: _firstController,
-                child: ListView.builder(
-                  controller: _firstController,
-                  itemCount: _selectedItems.length,
-                  itemBuilder: (context, index) {
-                    final item = _selectedItems[index];
-                    return Chip(
-                      label: Text(widget.items!
-                          .firstWhere((element) => element.value == item)
-                          .label), // Displaying the name of the selected item
-                      deleteIcon: Icon(Icons.cancel),
-                      onDeleted: () {
-                        setState(() {
-                          _selectedItems.remove(item);
-                        });
-                        widget.onConfirm(_selectedItems);
-                      },
-                    );
-                  },
-                  scrollDirection: Axis.horizontal,
-                ),
-              ),
-            ),
-          ),
+          // SizedBox(
+          //   height: _selectedItems.isNotEmpty ? 60 : 0,
+          //   child: Padding(
+          //     padding: const EdgeInsets.symmetric(horizontal: 4),
+          //     child: Scrollbar(
+          //       thumbVisibility: true,
+          //       controller: _firstController,
+          //       child: ListView.builder(
+          //         controller: _firstController,
+          //         itemCount: _selectedItems.length,
+          //         itemBuilder: (context, index) {
+          //           final item = _selectedItems[index];
+          //           return Chip(
+          //             label: Text(widget.items!
+          //                 .firstWhere((element) => element.value == item)
+          //                 .label), // Displaying the name of the selected item
+          //             deleteIcon: Icon(Icons.cancel),
+          //             onDeleted: () {
+          //               setState(() {
+          //                 _selectedItems.remove(item);
+          //               });
+          //               widget.onConfirm(_selectedItems);
+          //             },
+          //           );
+          //         },
+          //         scrollDirection: Axis.horizontal,
+          //       ),
+          //     ),
+          //   ),
+          // ),
         ],
       ),
     );

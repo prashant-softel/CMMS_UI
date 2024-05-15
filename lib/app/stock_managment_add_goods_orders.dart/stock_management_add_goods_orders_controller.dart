@@ -58,7 +58,7 @@ class StockManagementAddGoodsOrdersController extends GetxController {
   Rx<bool> ispaidSelected = true.obs;
   Rx<String> selectedReqOrder = ''.obs;
   Rx<String> selectedpaid = ''.obs;
-  int selectedReqOrderId = 0;
+  List<int> selectedReqOrderId = [];
   Rx<int> roId = 0.obs;
 
   var commentCtrlr = TextEditingController();
@@ -438,7 +438,7 @@ class StockManagementAddGoodsOrdersController extends GetxController {
   }
 
   Future<void> getRoDetailsByID(
-      {required int requestID, required int facilityId}) async {
+      {required List<int> requestID, required int facilityId}) async {
     goDetailsList?.value = [];
 
     final _getRoDetailsById = await stockManagementAddGoodsOrdersPresenter
@@ -521,13 +521,13 @@ class StockManagementAddGoodsOrdersController extends GetxController {
               // rowItem.remove();
               selectedReqOrder.value =
                   filteredOrders[reqOrderIndex]?.name ?? "";
-              selectedReqOrderId =
-                  int.tryParse(filteredOrders[reqOrderIndex]?.name ?? "") ?? 0;
+              selectedReqOrderId.add(
+                  int.tryParse(filteredOrders[reqOrderIndex]?.name ?? "") ?? 0);
               getRoDetailsByID(
                   requestID: selectedReqOrderId, facilityId: facilityId);
             }
           } else {
-            selectedReqOrderId = 0;
+            selectedReqOrderId = [];
           }
         }
         break;
@@ -747,11 +747,13 @@ class StockManagementAddGoodsOrdersController extends GetxController {
         _goodsordersList.where((order) => order.status == 344).toList();
     for (var requ in filteredOrders) {
       goodsOrdersList.add(requ);
+      selectedReqOrderId.add(int.tryParse(requ.name ?? "") ?? 0);
     }
     if (filteredOrders.isNotEmpty) {
-      selectedReqOrderId = int.tryParse(filteredOrders[0].name ?? "") ?? 0;
-      selectedReqOrder.value = filteredOrders[0].name ?? "";
-      getRoDetailsByID(requestID: selectedReqOrderId, facilityId: facilityId);
+      // selectedReqOrderId.add(int.tryParse(filteredOrders[0].name ?? "") ?? 0);
+      // selectedReqOrder.value = filteredOrders[0].name ?? "";
+      await getRoDetailsByID(
+          requestID: selectedReqOrderId, facilityId: facilityId);
     }
 
     update(['requ']);
