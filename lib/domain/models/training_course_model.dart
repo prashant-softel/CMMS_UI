@@ -10,6 +10,8 @@ class TrainingCourse {
     this.duration,
     this.maximumCapicity,
     this.description,
+    this.shortStatus,
+    this.status,
   });
 
   int? id;
@@ -22,6 +24,8 @@ class TrainingCourse {
   int? duration;
   int? maximumCapicity;
   String? description;
+  String? shortStatus;
+  int? status;
 
   factory TrainingCourse.fromJson(Map<String, dynamic> json) => TrainingCourse(
         id: json["id"],
@@ -34,18 +38,22 @@ class TrainingCourse {
         duration: json["duration"],
         maximumCapicity: json["maximumCapicity"],
         description: json["description"],
+        shortStatus: json["shortStatus"],
+        status: json["status"],
       );
 
   Map<String, dynamic> toJson() => {
-    "id": id,
-    "name": name,
-    "categoryId": categoryId,
-    "categoryName": categoryName,
-    "groupId": groupId,
-    "groupName": groupName,
-    "numberOfDays": numberOfDays,
-    "duration": duration,
-    "maximumCapicity": maximumCapicity,
-    "description": description,
-  };
+        "id": id,
+        "name": name,
+        "categoryId": categoryId,
+        "categoryName": categoryName,
+        "groupId": groupId,
+        "groupName": groupName,
+        "numberOfDays": numberOfDays,
+        "duration": duration,
+        "maximumCapicity": maximumCapicity,
+        "description": description,
+        "shortStatus": shortStatus,
+        "status": status,
+      };
 }

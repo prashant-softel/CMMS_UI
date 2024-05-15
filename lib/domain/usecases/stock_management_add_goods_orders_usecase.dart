@@ -126,9 +126,9 @@ class StockManagementAddGoodsOrdersUsecase {
   Future<List<GetRODetailsByIDModel?>?> getRoDetailsByID({
     bool? isLoading,
     required int facilityId,
-    required int requestID,
+    required List<int> requestID,
   }) async =>
-      await _repository.getRoDetailsByID(
+      await _repository.getRoDetailsByIDs(
         requestID: requestID,
         facilityId:facilityId,
         isLoading: isLoading ?? false,

@@ -144,6 +144,8 @@ import 'package:cmms/app/vegetation_execution_plan_list/view/veg_execution_list_
 import 'package:cmms/app/vegetation_plan_list/vegetation_plan_list_binding.dart';
 import 'package:cmms/app/vegetation_plan_list/view/vegetation_plan_list_screen.dart';
 import 'package:cmms/app/view_audit_plan/view_audit_plan_binding.dart';
+import 'package:cmms/app/view_course/view/view_course_screen.dart';
+import 'package:cmms/app/view_course/view_course_binding.dart';
 import 'package:cmms/app/view_haz_waste_data.dart/view/view_haz_waste_data_screen.dart';
 import 'package:cmms/app/view_haz_waste_data.dart/view_haz_waste_data_binding.dart';
 import 'package:cmms/app/view_mc_plan/view/view_mc_planning_screen.dart';
@@ -396,17 +398,30 @@ class AppPages {
       binding: AddJobBinding(),
     ),
     GetPage<dynamic>(
-        name: _Paths.trainingCouse,
-        page: TrainingCourseScreen.new,
-        binding: TrainingBinding()),
+      name: _Paths.trainingCouse,
+      page: TrainingCourseScreen.new,
+      binding: TrainingBinding(),
+    ),
     GetPage<dynamic>(
-        name: _Paths.scheduleCourseList,
-        page: ScheduleCourseScreen.new,
-        binding: ScheduleCourseListBinding()),
+      name: _Paths.viewCourse,
+      page: ViewCourseScreen.new,
+      binding: ViewCourseBinding(),
+    ),
     GetPage<dynamic>(
-        name: _Paths.scheduleCourse,
-        page: ScheduleScreen.new,
-        binding: ScheduleBinding()),
+      name: _Paths.trainingCouse,
+      page: TrainingCourseScreen.new,
+      binding: TrainingBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.scheduleCourseList,
+      page: ScheduleCourseScreen.new,
+      binding: ScheduleCourseListBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.scheduleCourse,
+      page: ScheduleScreen.new,
+      binding: ScheduleBinding(),
+    ),
     GetPage<dynamic>(
       name: _Paths.executeCourse,
       page: ExecuteCourseScreen.new,

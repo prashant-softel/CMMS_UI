@@ -3670,6 +3670,28 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> getRoDetailsByIDs({
+    required String auth,
+    required int facilityId,
+    bool? isLoading,
+    required List<int> requestID,
+  }) async {
+    final requestIdString = requestID.join(',');
+    print("${requestID}");
+    print("${requestIdString}");
+    var responseModel = await apiWrapper.makeRequest(
+      "RequestOrder/GetRODetailsByID?IDs=${requestIdString}&facility_id=$facilityId",
+      Request.get,
+      null,
+      isLoading ?? false,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    print('getRoDetailsByID${responseModel.data}');
+    return responseModel;
+  }
+
   Future<ResponseModel> getInventoryDetail({
     required String auth,
     bool? isLoading,

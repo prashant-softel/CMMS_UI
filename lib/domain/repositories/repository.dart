@@ -2150,6 +2150,42 @@ class Repository {
     }
   }
 
+  Future<List<GetRODetailsByIDModel?>?> getRoDetailsByIDs({
+    bool? isLoading,
+    required int facilityId,
+    required List<int> requestID,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getRoDetailsByIDs(
+        auth: auth,
+        requestID: requestID,
+        facilityId: facilityId,
+        isLoading: isLoading ?? false,
+      );
+
+      print({"getRoDetailsByID", res.data});
+
+      if (!res.hasError) {
+        if (res.errorCode == 200) {
+          var _getPurchaseDetailsByIDModelFromJson =
+              getRODetailsByIDModelFromJson(res.data);
+
+          // var responseMap = _getPurchaseDetailsByIDModelFromJson;
+          print({"getRoDetailsByID", _getPurchaseDetailsByIDModelFromJson});
+          return _getPurchaseDetailsByIDModelFromJson;
+        }
+      } else {
+        Utility.showDialog(res.errorCode.toString(), 'GetPurchaseDetailsByID');
+        //return '';
+      }
+      return null;
+    } catch (error) {
+      print(error.toString());
+      return null;
+    }
+  }
+
   /// Inventory Details
   Future<InventoryDetailsModel?> getInventoryDetail({
     bool? isLoading,
@@ -7662,7 +7698,7 @@ class Repository {
           facilityId: facilityId);
       print("file upload:${res}");
       return res;
-        } //
+    } //
     catch (error) {
       print(error.toString());
       return null;
@@ -8512,7 +8548,7 @@ class Repository {
       );
       print("file upload");
       return res;
-        } //
+    } //
     catch (error) {
       print(error.toString());
       return null;
@@ -8531,7 +8567,7 @@ class Repository {
       );
       print("file upload");
       return res;
-        } //
+    } //
     catch (error) {
       print(error.toString());
       return null;
