@@ -52,7 +52,10 @@ class _WaterDataListWebState extends State<WaterDataListWeb> {
               color: ColorValues.viewColor,
               icon: Icons.remove_red_eye_outlined,
               message: 'view',
-              onPress: () {},
+              onPress: () {
+                Get.toNamed(Routes.viewWaterData,
+                    arguments: {"monthId": data.month_id, "year": data.year});
+              },
             ),
             TableActionButton(
               color: ColorValues.editColor,
@@ -60,7 +63,7 @@ class _WaterDataListWebState extends State<WaterDataListWeb> {
               message: 'Edit',
               onPress: () {
                 Get.toNamed(Routes.viewWaterData,
-                    arguments: {"monthId": data.monthName, "year": data.year});
+                    arguments: {"monthId": data.month_id, "year": data.year});
               },
             ),
           ],
