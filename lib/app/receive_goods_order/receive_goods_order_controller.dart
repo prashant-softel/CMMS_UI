@@ -37,6 +37,11 @@ class ReceiveGoodsOrdersController extends GetxController {
   Rx<bool> isInvoiceNumberInvalid = false.obs;
   Rx<bool> isDeliverChalanInvalid = false.obs;
   Rx<bool> isGrnNoInvalid = false.obs;
+  Rx<bool> isCountOfPackageReceivedInvalid = false.obs;
+  Rx<bool> isVehicalInvalid = false.obs;
+  Rx<bool> isGateInwardRegisterInvalid = false.obs;
+  Rx<bool> isFreightInvalid = false.obs;
+  Rx<bool> isLrNoInvalid = false.obs;
 
   Rx<bool> isFormInvalid = false.obs;
   Rx<String> selectedBlock = ''.obs;
@@ -562,7 +567,44 @@ class ReceiveGoodsOrdersController extends GetxController {
     }
 
     ///
-    ///
+    if (noOfPackagesReceivedCtrlr.text.trim().length < 3) {
+      isCountOfPackageReceivedInvalid.value = true;
+    }
+
+    if (isCountOfPackageReceivedInvalid.value == true) {
+      isFormInvalid.value = true;
+    }
+
+    if (vehicleNoCtrlr.text.trim().length < 3) {
+      isVehicalInvalid.value = true;
+    }
+
+    if (isVehicalInvalid.value == true) {
+      isFormInvalid.value = true;
+    }
+    if (conditionOfPackagesReceivedCtrlr.text.trim().length < 3) {
+      isGateInwardRegisterInvalid.value = true;
+    }
+
+    if (isGateInwardRegisterInvalid.value == true) {
+      isFormInvalid.value = true;
+    }
+
+    if (freightValueCtrlr.text.trim().length < 3) {
+      isFreightInvalid.value = true;
+    }
+
+    if (isFreightInvalid.value == true) {
+      isFormInvalid.value = true;
+    }
+    if (lrNoCtrlr.text.trim().length < 3) {
+      isLrNoInvalid.value = true;
+    }
+
+    if (isLrNoInvalid.value == true) {
+      isFormInvalid.value = true;
+    }
+
     if (girNoCtrlr.text.trim().length < 3) {
       isGrnNoInvalid.value = true;
     }
