@@ -45,12 +45,16 @@ class WaterDataList {
 
 class PeriodData {
   String monthName;
+  int month_id;
+
   int year;
+
   List<DetailData> details;
 
   PeriodData({
     required this.monthName,
     required this.year,
+    required this.month_id,
     required this.details,
   });
 
@@ -60,6 +64,7 @@ class PeriodData {
       details.add(DetailData.fromJson(detailJson));
     }
     return PeriodData(
+      month_id: json['month_id'],
       monthName: "${json['month_name']}",
       year: json['year'] ?? -1,
       details: details,
@@ -69,6 +74,7 @@ class PeriodData {
   Map<String, dynamic> toJson() {
     return {
       'month_name': monthName,
+      'month_id': month_id,
       'year': year,
       'details': details.map((detail) => detail.toJson()).toList(),
     };
