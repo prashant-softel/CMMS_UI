@@ -450,21 +450,24 @@ class AddRowInReqGoodsOrder extends StatelessWidget {
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  DropdownWebStock(
-                                    width:
-                                        MediaQuery.of(context).size.width / 4,
-                                    dropdownList: controller.assetList,
-                                    selectedValue: mapData["value"],
-                                    onValueChanged: (list, selectedValue) {
-                                      print({selectedValue: selectedValue});
-                                      mapData["value"] = selectedValue;
-                                      controller.dropdownMapperData[
-                                              selectedValue] =
-                                          list.firstWhere(
-                                              (element) =>
-                                                  element.name == selectedValue,
-                                              orElse: null);
-                                    },
+                                  IgnorePointer(
+                                    child: DropdownWebStock(
+                                      width:
+                                          MediaQuery.of(context).size.width / 4,
+                                      dropdownList: controller.assetList,
+                                      selectedValue: mapData["value"],
+                                      onValueChanged: (list, selectedValue) {
+                                        print({selectedValue: selectedValue});
+                                        mapData["value"] = selectedValue;
+                                        controller.dropdownMapperData[
+                                                selectedValue] =
+                                            list.firstWhere(
+                                                (element) =>
+                                                    element.name ==
+                                                    selectedValue,
+                                                orElse: null);
+                                      },
+                                    ),
                                   ),
                                   Row(
                                     children: [
@@ -516,20 +519,24 @@ class AddRowInReqGoodsOrder extends StatelessWidget {
                                             borderRadius:
                                                 BorderRadius.circular(5),
                                           ),
-                                          child: LoginCustomTextfield(
-                                            keyboardType: TextInputType.number,
-                                            inputFormatters: <TextInputFormatter>[
-                                              FilteringTextInputFormatter
-                                                  .digitsOnly
-                                            ],
-                                            maxLine: 1,
-                                            textController:
-                                                new TextEditingController(
-                                                    text:
-                                                        mapData["value"] ?? ''),
-                                            onChanged: (txt) {
-                                              mapData["value"] = txt;
-                                            },
+                                          child: IgnorePointer(
+                                            child: LoginCustomTextfield(
+                                              keyboardType:
+                                                  TextInputType.number,
+                                              inputFormatters: <
+                                                  TextInputFormatter>[
+                                                FilteringTextInputFormatter
+                                                    .digitsOnly
+                                              ],
+                                              maxLine: 1,
+                                              textController:
+                                                  new TextEditingController(
+                                                      text: mapData["value"] ??
+                                                          ''),
+                                              onChanged: (txt) {
+                                                mapData["value"] = txt;
+                                              },
+                                            ),
                                           )),
                                     ],
                                   ),
@@ -560,16 +567,18 @@ class AddRowInReqGoodsOrder extends StatelessWidget {
                                                 borderRadius:
                                                     BorderRadius.circular(5),
                                               ),
-                                              child: LoginCustomTextfield(
-                                                maxLine: 1,
-                                                textController:
-                                                    new TextEditingController(
-                                                        text:
-                                                            mapData["value"] ??
-                                                                ''),
-                                                onChanged: (txt) {
-                                                  mapData["value"] = txt;
-                                                },
+                                              child: IgnorePointer(
+                                                child: LoginCustomTextfield(
+                                                  maxLine: 1,
+                                                  textController:
+                                                      new TextEditingController(
+                                                          text: mapData[
+                                                                  "value"] ??
+                                                              ''),
+                                                  onChanged: (txt) {
+                                                    mapData["value"] = txt;
+                                                  },
+                                                ),
                                               )),
                                         ],
                                       ),
