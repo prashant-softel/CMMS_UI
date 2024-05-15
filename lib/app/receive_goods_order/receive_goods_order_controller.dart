@@ -474,7 +474,7 @@ class ReceiveGoodsOrdersController extends GetxController {
   void createGoodsOrder() async {
     checkForm();
     if (isFormInvalid.value) {
-      return ; 
+      return;
     }
     String _challanNoCtrlr = challanNoCtrlr.text.trim();
     String _pOCtrlr = pOCtrlr.text.trim();
@@ -557,78 +557,79 @@ class ReceiveGoodsOrdersController extends GetxController {
       }
     }
   }
-    //validation check from
-    void checkForm() {
-      if (selectedBlock.value == '') {
-        isBlockSelected.value = false;
-      }
-      //  if (selectedWorkTypeList.length < 1) {
-      //   isWorkTypeSelected.value = false;
-      // }
-      // if (selectedEquipmentCategoryIdList.length < 1) {
-      //   isEquipmentCategorySelected.value = false;
-      // }
-      // if (selectedWorkAreaList.length < 1) {
-      //   isWorkAreaSelected.value = false;
-      // }
 
-      // if (challanNoCtrlr.text.trim().length < 3) {
-      //   // isCountInvalid.value = true;
-      // }
-      if (amountCtrlr.text.trim().length < 3) {
-        isAmountInvalid.value = true;
-      }
-      if (frieghtToPayPaidCtrlr.text.trim().length < 3) {
-        isInvoiceInvalid.value = true;
-      }
-      // if (noOfPackagesReceivedCtrlr.text.trim().length < 3) {
-      //   isCountInvalid.value = true;
-      // }
-      if (vehicleNoCtrlr.text.trim().length < 3) {
-        isVehicalInvalid.value = true;
-      }
-      if (amountCtrlr.text.trim().length < 3) {
-        isInwardInvalid.value = true;
-      }
-      if (freightValueCtrlr.text.trim().length < 3) {
-        isFreightInvalid.value = true;
-      }
-      if (girNoCtrlr.text.trim().length < 3) {
-        isGRNInvalid.value = true;
-      }
-      if (lrNoCtrlr.text.trim().length < 3) {
-        isLRInvalid.value = true;
-      }
-      if (jobRefCtrlr.text.trim().length < 3) {
-        isEwayInvalid.value = true;
-      }
-      if (inspectionReportCtrlr.text.trim().length < 3) {
-        isInspectionInvalid.value = true;
-      }
-
-      if (isPOInvalid.value == true ||
-          isAmountInvalid.value == true ||
-          isInvoiceInvalid.value == true ||
-          isDeliveryChallanInvalid.value == true ||
-          isCountInvalid.value == true ||
-          isVehicalInvalid.value == true ||
-          isInwardInvalid.value == true ||
-          isFreightInvalid.value == true ||
-          isGRNInvalid.value == true ||
-          isLRInvalid.value == true ||
-          isEwayInvalid.value == true ||
-          isInspectionInvalid.value == true) {
-        isFormInvalid.value = true;
-      } else {
-        isFormInvalid.value = false;
-      }
+  //validation check from
+  void checkForm() {
+    if (selectedBlock.value == '') {
+      isBlockSelected.value = false;
     }
+    //  if (selectedWorkTypeList.length < 1) {
+    //   isWorkTypeSelected.value = false;
+    // }
+    // if (selectedEquipmentCategoryIdList.length < 1) {
+    //   isEquipmentCategorySelected.value = false;
+    // }
+    // if (selectedWorkAreaList.length < 1) {
+    //   isWorkAreaSelected.value = false;
+    // }
+
+    // if (challanNoCtrlr.text.trim().length < 3) {
+    //   // isCountInvalid.value = true;
+    // }
+    if (amountCtrlr.text.trim().length < 3) {
+      isAmountInvalid.value = true;
+    }
+    if (frieghtToPayPaidCtrlr.text.trim().length < 3) {
+      isInvoiceInvalid.value = true;
+    }
+    // if (noOfPackagesReceivedCtrlr.text.trim().length < 3) {
+    //   isCountInvalid.value = true;
+    // }
+    if (vehicleNoCtrlr.text.trim().length < 3) {
+      isVehicalInvalid.value = true;
+    }
+    if (amountCtrlr.text.trim().length < 3) {
+      isInwardInvalid.value = true;
+    }
+    if (freightValueCtrlr.text.trim().length < 3) {
+      isFreightInvalid.value = true;
+    }
+    if (girNoCtrlr.text.trim().length < 3) {
+      isGRNInvalid.value = true;
+    }
+    if (lrNoCtrlr.text.trim().length < 3) {
+      isLRInvalid.value = true;
+    }
+    if (jobRefCtrlr.text.trim().length < 3) {
+      isEwayInvalid.value = true;
+    }
+    if (inspectionReportCtrlr.text.trim().length < 3) {
+      isInspectionInvalid.value = true;
+    }
+
+    if (isPOInvalid.value == true ||
+        isAmountInvalid.value == true ||
+        isInvoiceInvalid.value == true ||
+        isDeliveryChallanInvalid.value == true ||
+        isCountInvalid.value == true ||
+        isVehicalInvalid.value == true ||
+        isInwardInvalid.value == true ||
+        isFreightInvalid.value == true ||
+        isGRNInvalid.value == true ||
+        isLRInvalid.value == true ||
+        isEwayInvalid.value == true ||
+        isInspectionInvalid.value == true) {
+      isFormInvalid.value = true;
+    } else {
+      isFormInvalid.value = false;
+    }
+  }
 
   void updateGOReceive() async {
-    checkForm();
-    if (isFormInvalid.value) {
-      return ; 
-    }
+    // checkForm();
+    // if (isFormInvalid.value) {
+    //   return ;
+    // }
     String _challanNoCtrlr = challanNoCtrlr.text.trim();
     String _pOCtrlr = pOCtrlr.text.trim();
     String _frieghtToPayPaidCtrlr = frieghtToPayPaidCtrlr.text.trim();
@@ -677,7 +678,6 @@ class ReceiveGoodsOrdersController extends GetxController {
       ;
       items.add(item);
     });
-  
 
     CreateGoModel createGoModel = CreateGoModel(
         id: goId.value,
@@ -722,7 +722,7 @@ class ReceiveGoodsOrdersController extends GetxController {
   void updateGOReceiveIsSubmit0() async {
     checkForm();
     if (isFormInvalid.value) {
-      return ; 
+      return;
     }
     String _challanNoCtrlr = challanNoCtrlr.text.trim();
     String _pOCtrlr = pOCtrlr.text.trim();
