@@ -42,6 +42,10 @@ class ReceiveGoodsOrdersController extends GetxController {
   Rx<bool> isGateInwardRegisterInvalid = false.obs;
   Rx<bool> isFreightInvalid = false.obs;
   Rx<bool> isLrNoInvalid = false.obs;
+  Rx<bool> isMaterialReciveDateInvalid = false.obs;
+  Rx<bool> isDeliveryChallanDateInvalid = false.obs;
+
+  Rx<bool> isInvoiceDateInvalid = false.obs;
 
   Rx<bool> isEWayBillInvalid = false.obs;
   Rx<bool> isInspectionReportInvalid = false.obs;
@@ -607,6 +611,29 @@ class ReceiveGoodsOrdersController extends GetxController {
     if (isLrNoInvalid.value == true) {
       isFormInvalid.value = true;
     }
+    if (receivedDateTc.text.trim().length < 3) {
+      isMaterialReciveDateInvalid.value = true;
+    }
+
+    if (isMaterialReciveDateInvalid.value == true) {
+      isFormInvalid.value = true;
+    }
+
+    if (challanDateTc.text.trim().length < 3) {
+      isDeliveryChallanDateInvalid.value = true;
+    }
+
+    if (isDeliveryChallanDateInvalid.value == true) {
+      isFormInvalid.value = true;
+    }
+    if (purchaseDateTc.text.trim().length < 3) {
+      isInvoiceDateInvalid.value = true;
+    }
+
+    if (isInvoiceDateInvalid.value == true) {
+      isFormInvalid.value = true;
+    }
+
     if (jobRefCtrlr.text.trim().length < 3) {
       isEWayBillInvalid.value = true;
     }
