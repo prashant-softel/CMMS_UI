@@ -3358,8 +3358,8 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb> {
               ),
               if (controller.openFromDateToStartDatePicker)
                 Positioned(
-                  right: 40,
-                  top: 220,
+                  right: 80,
+                  top: 55,
                   child: DatePickerWidget(
                     selectionMode: DateRangePickerSelectionMode.range,
                     monthCellStyle: DateRangePickerMonthCellStyle(
