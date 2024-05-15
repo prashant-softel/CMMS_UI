@@ -1143,6 +1143,25 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                                           textController:
                                                               controller
                                                                   .jobRefCtrlr,
+                                                          errorController: controller
+                                                                  .isEWayBillInvalid
+                                                                  .value
+                                                              ? "Required field"
+                                                              : null,
+                                                          onChanged: (value) {
+                                                            if (value
+                                                                    .trim()
+                                                                    .length >
+                                                                0) {
+                                                              controller
+                                                                  .isEWayBillInvalid
+                                                                  .value = false;
+                                                            } else {
+                                                              controller
+                                                                  .isEWayBillInvalid
+                                                                  .value = true;
+                                                            }
+                                                          },
                                                         )),
                                                   ],
                                                 ),
@@ -1223,6 +1242,25 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                                           LoginCustomTextfield(
                                                         textController: controller
                                                             .inspectionReportCtrlr,
+                                                        errorController: controller
+                                                                .isInspectionReportInvalid
+                                                                .value
+                                                            ? "Required field"
+                                                            : null,
+                                                        onChanged: (value) {
+                                                          if (value
+                                                                  .trim()
+                                                                  .length >
+                                                              0) {
+                                                            controller
+                                                                .isInspectionReportInvalid
+                                                                .value = false;
+                                                          } else {
+                                                            controller
+                                                                .isInspectionReportInvalid
+                                                                .value = true;
+                                                          }
+                                                        },
                                                       )),
                                                 ]),
                                               ],
@@ -1360,7 +1398,7 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                                         ? Padding(
                                                             padding:
                                                                 const EdgeInsets
-                                                                        .only(
+                                                                    .only(
                                                                     left: 10,
                                                                     right: 10,
                                                                     top: 10),
@@ -1437,7 +1475,7 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                                             ? Padding(
                                                                 padding:
                                                                     const EdgeInsets
-                                                                            .only(
+                                                                        .only(
                                                                         left:
                                                                             10,
                                                                         right:
