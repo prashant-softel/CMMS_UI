@@ -566,6 +566,40 @@ class _ViewAuditTaskWebState extends State<ViewAuditTaskWeb> {
                                           ),
                                         ),
                                         Dimens.boxWidth20,
+
+                                        Container(
+                                          height: 45,
+                                          child: CustomElevatedButton(
+                                            backgroundColor:
+                                                ColorValues.approveColor,
+                                            text: "C Approve",
+                                            icon: Icons.close,
+                                            onPressed: () {
+                                              Get.dialog(
+                                                  AuditTaskApprovedRejectDialog(
+                                                type: 5,
+                                              ));
+                                            },
+                                          ),
+                                        ),
+                                        Dimens.boxWidth20,
+
+                                        Container(
+                                          height: 45,
+                                          child: CustomElevatedButton(
+                                            backgroundColor:
+                                                ColorValues.rejectColor,
+                                            text: "C Reject",
+                                            icon: Icons.close,
+                                            onPressed: () {
+                                              Get.dialog(
+                                                  AuditTaskApprovedRejectDialog(
+                                                type: 6,
+                                              ));
+                                            },
+                                          ),
+                                        ),
+                                        Dimens.boxWidth20,
                                         Container(
                                           height: 45,
                                           child: CustomElevatedButton(
