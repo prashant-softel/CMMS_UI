@@ -43,6 +43,9 @@ class ReceiveGoodsOrdersController extends GetxController {
   Rx<bool> isFreightInvalid = false.obs;
   Rx<bool> isLrNoInvalid = false.obs;
 
+  Rx<bool> isEWayBillInvalid = false.obs;
+  Rx<bool> isInspectionReportInvalid = false.obs;
+
   Rx<bool> isFormInvalid = false.obs;
   Rx<String> selectedBlock = ''.obs;
   Rx<bool> isBlockSelected = true.obs;
@@ -604,7 +607,20 @@ class ReceiveGoodsOrdersController extends GetxController {
     if (isLrNoInvalid.value == true) {
       isFormInvalid.value = true;
     }
+    if (jobRefCtrlr.text.trim().length < 3) {
+      isEWayBillInvalid.value = true;
+    }
 
+    if (isEWayBillInvalid.value == true) {
+      isFormInvalid.value = true;
+    }
+    if (inspectionReportCtrlr.text.trim().length < 3) {
+      isInspectionReportInvalid.value = true;
+    }
+
+    if (isInspectionReportInvalid.value == true) {
+      isFormInvalid.value = true;
+    }
     if (girNoCtrlr.text.trim().length < 3) {
       isGrnNoInvalid.value = true;
     }
