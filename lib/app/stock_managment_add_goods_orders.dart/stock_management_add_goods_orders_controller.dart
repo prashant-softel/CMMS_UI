@@ -203,6 +203,10 @@ class StockManagementAddGoodsOrdersController extends GetxController {
           });
         }
       });
+      if (goId.value == 0 || goId.value == null) {
+        addRowItem();
+      }
+
       delchfocus.addListener(() {
         if (!delchfocus.hasFocus) {
           delchscroll.jumpTo(0.0);
@@ -431,7 +435,6 @@ class StockManagementAddGoodsOrdersController extends GetxController {
       }
       update(["AssetList"]);
     }
-    addRowItem();
   }
 
   Future<void> getRoDetailsByID(
@@ -451,7 +454,6 @@ class StockManagementAddGoodsOrdersController extends GetxController {
         goDetailsList!.add(asset);
       }
     }
-    addRowItem();
   }
 
   Future<void> updatePaidBy() async {
