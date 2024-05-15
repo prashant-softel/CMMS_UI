@@ -3,6 +3,7 @@ import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/utils/user_access_constants.dart';
+import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -500,6 +501,18 @@ class AssetMasterWeb extends GetView<AssetMasterController> {
                                 title: 'Material Master',
                                 action: Row(children: [
                                   Dimens.boxWidth10,
+                                  Container(
+                                    height: 35,
+                                    margin: EdgeInsets.only(left: 10),
+                                    child: CustomElevatedButton(
+                                        backgroundColor:
+                                            ColorValues.appLightBlueColor,
+                                        onPressed: () {
+                                          controller.export();
+                                        },
+                                        text: 'Excel'),
+                                  ),
+                                  Dimens.boxWidth14,
                                   Container(
                                     width: 300,
                                     height: 40,

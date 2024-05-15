@@ -18,11 +18,13 @@ class AssetMasterPresenter {
     int? facilityId,
     int? type,
     bool? isLoading,
+    bool? isExport,
   }) async =>
       await moduleUsecase.getAssetMasterList(
         facilityId: facilityId ?? 0,
         type: type,
         isLoading: isLoading ?? false,
+        isExport: isExport
       );
 
   Future<List<FrequencyModel?>?> getFrequencyList({

@@ -1,10 +1,10 @@
 import 'dart:convert';
 
-List<AssetMasterModel> moduleListModelFromJson(String str) =>
+List<AssetMasterModel> assetmasterListModelFromJson(String str) =>
     List<AssetMasterModel>.from(
         json.decode(str).map((x) => AssetMasterModel.fromJson(x)));
 
-String moduleListModelToJson(List<AssetMasterModel> data) =>
+String assetmasterListModelToJson(List<AssetMasterModel> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
 class AssetMasterModel {
