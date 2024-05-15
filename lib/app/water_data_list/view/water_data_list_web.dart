@@ -99,163 +99,160 @@ class _WaterDataListWebState extends State<WaterDataListWeb> {
         // final dataSource = AuditPlanPlanListDataSource(controller);
         return SelectionArea(
           child: SingleChildScrollView(
-            child: Obx(
-              () => Column(
-                children: [
-                  HeaderWidget(),
-                  Container(
-                    height: 45,
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        color: Color.fromARGB(255, 227, 224, 224),
-                        width: 1,
+            child: Column(
+              children: [
+                HeaderWidget(),
+                Container(
+                  height: 45,
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: Color.fromARGB(255, 227, 224, 224),
+                      width: 1,
+                    ),
+                    boxShadow: [
+                      BoxShadow(
+                        color:
+                            Color.fromARGB(255, 236, 234, 234).withOpacity(0.5),
+                        spreadRadius: 2,
+                        blurRadius: 5,
+                        offset: Offset(0, 2),
                       ),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Color.fromARGB(255, 236, 234, 234)
-                              .withOpacity(0.5),
-                          spreadRadius: 2,
-                          blurRadius: 5,
-                          offset: Offset(0, 2),
-                        ),
-                      ],
-                    ),
-                    child: Row(
-                      children: [
-                        Icon(
-                          Icons.home,
-                          color: ColorValues.greyLightColor,
-                        ),
-                        InkWell(
-                          onTap: () {
-                            Get.offNamed(Routes.home);
-                          },
-                          child: Text(
-                            "DASHBOARD",
-                            style: Styles.greyLight14,
-                          ),
-                        ),
-                        InkWell(
-                          onTap: () {
-                            Get.offNamed(Routes.misDashboard);
-                          },
-                          child: Text(" / MIS", style: Styles.greyLight14),
-                        ),
-                        Text(" / WATER DATA LIST", style: Styles.greyLight14)
-                      ],
-                    ),
+                    ],
                   ),
-                  Stack(
+                  child: Row(
                     children: [
-                      Container(
-                        width: Get.width * 7,
-                        margin: EdgeInsets.only(left: 10, top: 20, right: 10),
-                        height: Get.height,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            SingleChildScrollView(
-                              child: Container(
-                                margin: EdgeInsets.only(
-                                    left: 10, top: 10, right: 10),
-                                child: Column(
-                                  children: [
-                                    Card(
-                                      color: Color.fromARGB(255, 245, 248, 250),
-                                      elevation: 10,
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(10.0),
-                                      ),
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Row(
-                                            children: [
-                                              Padding(
-                                                padding: EdgeInsets.only(
-                                                  left: 20,
-                                                  top: 20,
-                                                ),
-                                                child: Text(
-                                                  "Water Data List",
-                                                  style: Styles.blackBold16,
-                                                ),
+                      Icon(
+                        Icons.home,
+                        color: ColorValues.greyLightColor,
+                      ),
+                      InkWell(
+                        onTap: () {
+                          Get.offNamed(Routes.home);
+                        },
+                        child: Text(
+                          "DASHBOARD",
+                          style: Styles.greyLight14,
+                        ),
+                      ),
+                      InkWell(
+                        onTap: () {
+                          Get.offNamed(Routes.misDashboard);
+                        },
+                        child: Text(" / MIS", style: Styles.greyLight14),
+                      ),
+                      Text(" / WATER DATA LIST", style: Styles.greyLight14)
+                    ],
+                  ),
+                ),
+                Stack(
+                  children: [
+                    Container(
+                      width: Get.width * 7,
+                      margin: EdgeInsets.only(left: 10, top: 20, right: 10),
+                      height: Get.height,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          SingleChildScrollView(
+                            child: Container(
+                              margin:
+                                  EdgeInsets.only(left: 10, top: 10, right: 10),
+                              child: Column(
+                                children: [
+                                  Card(
+                                    color: Color.fromARGB(255, 245, 248, 250),
+                                    elevation: 10,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(10.0),
+                                    ),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Row(
+                                          children: [
+                                            Padding(
+                                              padding: EdgeInsets.only(
+                                                left: 20,
+                                                top: 20,
                                               ),
-                                              Spacer(),
-                                              Padding(
-                                                padding: EdgeInsets.only(
-                                                  top: 20,
-                                                ),
-                                                child: Text(
-                                                  "All the data in KL units",
-                                                  style: Styles.blackBold16,
-                                                ),
+                                              child: Text(
+                                                "Water Data List",
+                                                style: Styles.blackBold16,
                                               ),
-                                              Spacer(),
-                                              Padding(
-                                                padding: EdgeInsets.only(
-                                                  top: 20,
-                                                  right: 20,
-                                                ),
-                                                child: Row(
-                                                  children: [
-                                                    Text('Year :'),
-                                                    Dimens.boxWidth10,
-                                                    CustomTextFieldForStock(
-                                                      width:
-                                                          MediaQuery.of(context)
-                                                                  .size
-                                                                  .width /
-                                                              8,
-                                                      numberTextField: true,
-                                                      onTap: () {
-                                                        _showYearPicker(context,
-                                                            controller);
-                                                      },
-                                                      textController: controller
-                                                          .waterDateTc,
-                                                    ),
-                                                  ],
-                                                ),
+                                            ),
+                                            Spacer(),
+                                            Padding(
+                                              padding: EdgeInsets.only(
+                                                top: 20,
                                               ),
-                                              Padding(
-                                                padding: EdgeInsets.only(
-                                                  top: 20,
-                                                  right: 20,
-                                                ),
-                                                child: ActionButton(
-                                                  icon: Icons.add,
-                                                  label: "Procurements",
-                                                  onPressed: () {
-                                                    Get.dialog(AddDialog());
-                                                  },
-                                                  color:
-                                                      ColorValues.addNewColor,
-                                                ),
+                                              child: Text(
+                                                "All the data in KL units",
+                                                style: Styles.blackBold16,
                                               ),
-                                              Padding(
-                                                padding: EdgeInsets.only(
-                                                  top: 20,
-                                                  right: 5,
-                                                ),
-                                                child: ActionButton(
-                                                  icon: Icons.minimize_sharp,
-                                                  label: "Consumption",
-                                                  onPressed: () {
-                                                    Get.dialog(MinusDialog());
-                                                  },
-                                                  color:
-                                                      ColorValues.appRedColor,
-                                                ),
-                                              )
-                                            ],
-                                          ),
-                                          Divider(
-                                            color: ColorValues.greyLightColour,
-                                          ),
-                                          Container(
+                                            ),
+                                            Spacer(),
+                                            Padding(
+                                              padding: EdgeInsets.only(
+                                                top: 20,
+                                                right: 20,
+                                              ),
+                                              child: Row(
+                                                children: [
+                                                  Text('Year :'),
+                                                  Dimens.boxWidth10,
+                                                  CustomTextFieldForStock(
+                                                    width:
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .width /
+                                                            8,
+                                                    numberTextField: true,
+                                                    onTap: () {
+                                                      _showYearPicker(
+                                                          context, controller);
+                                                    },
+                                                    textController:
+                                                        controller.waterDateTc,
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                            Padding(
+                                              padding: EdgeInsets.only(
+                                                top: 20,
+                                                right: 20,
+                                              ),
+                                              child: ActionButton(
+                                                icon: Icons.add,
+                                                label: "Procurements",
+                                                onPressed: () {
+                                                  Get.dialog(AddDialog());
+                                                },
+                                                color: ColorValues.addNewColor,
+                                              ),
+                                            ),
+                                            Padding(
+                                              padding: EdgeInsets.only(
+                                                top: 20,
+                                                right: 5,
+                                              ),
+                                              child: ActionButton(
+                                                icon: Icons.minimize_sharp,
+                                                label: "Consumption",
+                                                onPressed: () {
+                                                  Get.dialog(MinusDialog());
+                                                },
+                                                color: ColorValues.appRedColor,
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                        Divider(
+                                          color: ColorValues.greyLightColour,
+                                        ),
+                                        Obx(
+                                          () => Container(
                                             color: Color.fromARGB(
                                                 255, 245, 248, 250),
                                             width: Get.width,
@@ -375,39 +372,39 @@ class _WaterDataListWebState extends State<WaterDataListWeb> {
                                               ),
                                             ),
                                           ),
-                                        ],
-                                      ),
+                                        ),
+                                      ],
                                     ),
-                                  ],
-                                ),
+                                  ),
+                                ],
                               ),
                             ),
-                          ],
+                          ),
+                        ],
+                      ),
+                    ),
+                    if (controller.openFromDateToStartDatePicker)
+                      Positioned(
+                        right: 120,
+                        top: 100,
+                        child: DatePickerWidget(
+                          minDate: DateTime(DateTime.now().year),
+                          maxDate: DateTime(DateTime.now().year, 13,
+                              0), // last date of this year
+                          controller: DateRangePickerController(),
+                          selectionChanges: (p0) {
+                            print('po valu ${p0.value.toString()}');
+                            controller.waterDateTc.text =
+                                DateFormat('yyyy-MM-dd').format(p0.value);
+                            controller.openFromDateToStartDatePicker =
+                                !controller.openFromDateToStartDatePicker;
+                            controller.update(['stock_Mangement_Date']);
+                          },
                         ),
                       ),
-                      if (controller.openFromDateToStartDatePicker)
-                        Positioned(
-                          right: 120,
-                          top: 100,
-                          child: DatePickerWidget(
-                            minDate: DateTime(DateTime.now().year),
-                            maxDate: DateTime(DateTime.now().year, 13,
-                                0), // last date of this year
-                            controller: DateRangePickerController(),
-                            selectionChanges: (p0) {
-                              print('po valu ${p0.value.toString()}');
-                              controller.waterDateTc.text =
-                                  DateFormat('yyyy-MM-dd').format(p0.value);
-                              controller.openFromDateToStartDatePicker =
-                                  !controller.openFromDateToStartDatePicker;
-                              controller.update(['stock_Mangement_Date']);
-                            },
-                          ),
-                        ),
-                    ],
-                  ),
-                ],
-              ),
+                  ],
+                ),
+              ],
             ),
           ),
         );
