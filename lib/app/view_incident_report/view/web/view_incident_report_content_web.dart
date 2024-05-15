@@ -201,48 +201,62 @@ class ViewIncidentReportContentWeb
                                                       children: [
                                                         CustomRichText(
                                                             title: 'Id: '),
+                                                        Dimens.boxHeight5,
                                                         CustomRichText(
                                                             title: 'Plant: '),
+                                                        Dimens.boxHeight5,
                                                         CustomRichText(
                                                             title: 'Block: '),
+                                                        Dimens.boxHeight5,
                                                         CustomRichText(
                                                             title:
                                                                 'Incident Date & Time: '),
+                                                        Dimens.boxHeight5,
                                                         CustomRichText(
                                                             title:
                                                                 'Incident Description: '),
+                                                        Dimens.boxHeight5,
                                                         CustomRichText(
                                                             title:
                                                                 'Victim Name: '),
+                                                        Dimens.boxHeight5,
                                                         CustomRichText(
                                                             title:
                                                                 'Incident Investigation Done By: '),
+                                                        Dimens.boxHeight5,
                                                         CustomRichText(
                                                             title:
                                                                 'Risk Type: '),
+                                                        Dimens.boxHeight5,
                                                         CustomRichText(
                                                             title:
                                                                 'Legal Applicability: '),
+                                                        Dimens.boxHeight5,
                                                         CustomRichText(
                                                             title:
                                                                 'Damaged Assets cost approx.: '),
+                                                        Dimens.boxHeight5,
                                                         CustomRichText(
                                                             title:
                                                                 'Asset Restoration action taken by: '),
+                                                        Dimens.boxHeight5,
                                                         CustomRichText(
                                                             title:
                                                                 'Insurance Available: '),
+                                                        Dimens.boxHeight5,
                                                         CustomRichText(
                                                             title:
                                                                 'Insurance Status: '),
+                                                        Dimens.boxHeight5,
                                                         CustomRichText(
                                                             title:
                                                                 'Insurance Remarks: '),
+                                                        Dimens.boxHeight5,
                                                       ],
                                                     ),
                                                   ),
                                                   SizedBox(
-                                                    width: 20,
+                                                    width: 10,
                                                   ),
                                                   Column(
                                                     crossAxisAlignment:
@@ -259,6 +273,7 @@ class ViewIncidentReportContentWeb
                                                                     92,
                                                                     163)),
                                                       ),
+                                                      Dimens.boxHeight5,
                                                       Text(
                                                         '${controller.incidentReportDetailsModel.value?.facility_name}',
                                                         style: TextStyle(
@@ -269,6 +284,7 @@ class ViewIncidentReportContentWeb
                                                                     92,
                                                                     163)),
                                                       ),
+                                                      Dimens.boxHeight5,
                                                       Text(
                                                         '${controller.incidentReportDetailsModel.value?.block_name}',
                                                         style: TextStyle(
@@ -279,6 +295,7 @@ class ViewIncidentReportContentWeb
                                                                     92,
                                                                     163)),
                                                       ),
+                                                      Dimens.boxHeight5,
                                                       Text(
                                                         '${controller.incidentDateTimeCtrlrWeb.text}',
                                                         style: TextStyle(
@@ -289,6 +306,7 @@ class ViewIncidentReportContentWeb
                                                                     92,
                                                                     163)),
                                                       ),
+                                                      Dimens.boxHeight4,
                                                       SizedBox(
                                                         width: 150,
                                                         child: Text(
@@ -304,6 +322,7 @@ class ViewIncidentReportContentWeb
                                                                       163)),
                                                         ),
                                                       ),
+                                                      Dimens.boxHeight5,
                                                       Text(
                                                         '${controller.incidentReportDetailsModel.value?.victim_name}',
                                                         style: TextStyle(
@@ -314,6 +333,7 @@ class ViewIncidentReportContentWeb
                                                                     92,
                                                                     163)),
                                                       ),
+                                                      Dimens.boxHeight5,
                                                       Text(
                                                         '${controller.incidentReportDetailsModel.value?.inverstigated_by_name}',
                                                         style: TextStyle(
@@ -324,6 +344,7 @@ class ViewIncidentReportContentWeb
                                                                     92,
                                                                     163)),
                                                       ),
+                                                      Dimens.boxHeight5,
                                                       Text(
                                                         '${controller.incidentReportDetailsModel.value?.risk_type_name}',
                                                         style: TextStyle(
@@ -344,6 +365,7 @@ class ViewIncidentReportContentWeb
                                                                     92,
                                                                     163)),
                                                       ),
+                                                      Dimens.boxHeight5,
                                                       Text(
                                                         '${controller.incidentReportDetailsModel.value?.damaged_cost} INR',
                                                         style: TextStyle(
@@ -354,6 +376,7 @@ class ViewIncidentReportContentWeb
                                                                     92,
                                                                     163)),
                                                       ),
+                                                      Dimens.boxHeight4,
                                                       Text(
                                                         '${controller.incidentReportDetailsModel.value?.action_taken_by_name}',
                                                         style: TextStyle(
@@ -364,6 +387,7 @@ class ViewIncidentReportContentWeb
                                                                     92,
                                                                     163)),
                                                       ),
+                                                      Dimens.boxHeight5,
                                                       Text(
                                                         '${controller.incidentReportDetailsModel.value?.is_insurance_applicable_name}',
                                                         style: TextStyle(
@@ -374,6 +398,7 @@ class ViewIncidentReportContentWeb
                                                                     92,
                                                                     163)),
                                                       ),
+                                                      Dimens.boxHeight4,
                                                       Text(
                                                         '${controller.incidentReportDetailsModel.value?.insurance_status_name}',
                                                         style: TextStyle(
@@ -384,6 +409,7 @@ class ViewIncidentReportContentWeb
                                                                     92,
                                                                     163)),
                                                       ),
+                                                      Dimens.boxHeight4,
                                                       SizedBox(
                                                         width: 300,
                                                         child: Text(
@@ -408,35 +434,43 @@ class ViewIncidentReportContentWeb
                                                     children: [
                                                       CustomRichText(
                                                           title: 'Title: '),
+                                                      Dimens.boxHeight5,
                                                       CustomRichText(
                                                           title:
                                                               'Equipment Categories: '),
+                                                      Dimens.boxHeight5,
                                                       CustomRichText(
                                                           title:
                                                               'Reporting Date & Time: '),
+                                                      Dimens.boxHeight5,
                                                       CustomRichText(
                                                           title:
                                                               'Incident Severity: '),
+                                                      Dimens.boxHeight5,
                                                       CustomRichText(
                                                           title:
                                                               'Action Taken Date & Time: '),
+                                                      Dimens.boxHeight5,
                                                       CustomRichText(
                                                           title:
                                                               'Incident Investigation Verification done by: '),
+                                                      Dimens.boxHeight5,
                                                       CustomRichText(
                                                           title:
                                                               'ESI Applicability: '),
+                                                      Dimens.boxHeight5,
                                                       CustomRichText(
                                                           title:
                                                               'RCA Upload Required: '),
-                                                      Dimens.boxHeight10,
+                                                      Dimens.boxHeight5,
                                                       CustomRichText(
                                                           title:
                                                               'Gen loss due to asset damage: '),
+                                                      Dimens.boxHeight5,
                                                     ],
                                                   ),
                                                   SizedBox(
-                                                    width: 20,
+                                                    width: 10,
                                                   ),
                                                   Column(
                                                     crossAxisAlignment:
@@ -453,6 +487,7 @@ class ViewIncidentReportContentWeb
                                                                     92,
                                                                     163)),
                                                       ),
+                                                      Dimens.boxHeight4,
                                                       Text(
                                                         '${controller.incidentReportDetailsModel.value?.equipment_name}',
                                                         style: TextStyle(
@@ -463,6 +498,7 @@ class ViewIncidentReportContentWeb
                                                                     92,
                                                                     163)),
                                                       ),
+                                                      Dimens.boxHeight5,
                                                       Text(
                                                         '${controller.reportingDateTimeCtrlrWeb.text}',
                                                         style: TextStyle(
@@ -473,11 +509,13 @@ class ViewIncidentReportContentWeb
                                                                     92,
                                                                     163)),
                                                       ),
+                                                      Dimens.boxHeight5,
                                                       Text(
                                                         '${controller.incidentReportDetailsModel.value?.severity}',
                                                         style: TextStyle(
                                                             color: Colors.red),
                                                       ),
+                                                      Dimens.boxHeight5,
                                                       Text(
                                                         '${controller.actionTakenDateTimeCtrlrWeb.text}',
                                                         style: TextStyle(
@@ -488,6 +526,7 @@ class ViewIncidentReportContentWeb
                                                                     92,
                                                                     163)),
                                                       ),
+                                                      Dimens.boxHeight4,
                                                       Text(
                                                         '${controller.incidentReportDetailsModel.value?.verified_by_name}',
                                                         style: TextStyle(
@@ -498,6 +537,7 @@ class ViewIncidentReportContentWeb
                                                                     92,
                                                                     163)),
                                                       ),
+                                                      Dimens.boxHeight5,
                                                       Text(
                                                         '${controller.incidentReportDetailsModel.value?.esi_applicability_name}',
                                                         style: TextStyle(
@@ -508,6 +548,7 @@ class ViewIncidentReportContentWeb
                                                                     92,
                                                                     163)),
                                                       ),
+                                                      // Dimens.boxHeight4,
                                                       Row(
                                                         children: [
                                                           Text(
@@ -520,24 +561,25 @@ class ViewIncidentReportContentWeb
                                                                         92,
                                                                         163)),
                                                           ),
-                                                          SizedBox(
-                                                            width: 10,
-                                                          ),
-                                                          TableActionButton(
-                                                            color: ColorValues
-                                                                .appDarkBlueColor,
-                                                            icon: Icons
-                                                                .visibility,
-                                                            message: 'RCA',
-                                                            onPress: () {
-                                                              // controller.viewIncidentReport(
-                                                              //     id: int.tryParse(
-                                                              //         '${record[0]}'));
-                                                              // print('record:${int.tryParse('${record[0]}')}');
-                                                            },
-                                                          ),
+                                                          // SizedBox(
+                                                          //   width: 10,
+                                                          // ),
+                                                          // TableActionButton(
+                                                          //   color: ColorValues
+                                                          //       .appDarkBlueColor,
+                                                          //   icon: Icons
+                                                          //       .visibility,
+                                                          //   message: 'RCA',
+                                                          //   onPress: () {
+                                                          //     // controller.viewIncidentReport(
+                                                          //     //     id: int.tryParse(
+                                                          //     //         '${record[0]}'));
+                                                          //     // print('record:${int.tryParse('${record[0]}')}');
+                                                          //   },
+                                                          // ),
                                                         ],
                                                       ),
+                                                      Dimens.boxHeight5,
                                                       Text(
                                                         '${controller.incidentReportDetailsModel.value?.generation_loss} INR',
                                                         style: TextStyle(
