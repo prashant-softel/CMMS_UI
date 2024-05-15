@@ -131,128 +131,171 @@ class ViewCourseWeb extends GetView<ViewCourseController> {
                               Row(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Container(
-                                    width: Get.width * .43,
-                                    child: Row(
+                                  Expanded(
+                                    flex: 4,
+                                    child: Column(
                                       children: [
-                                        SizedBox(
-                                          child: Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                "Topic: ",
-                                                style: Styles.black17,
-                                              ),
-                                              Dimens.boxHeight5,
-                                              Text(
-                                                "Category: ",
-                                                style: Styles.black17,
-                                              ),
-                                              Dimens.boxHeight5,
-                                              Text(
-                                                "Targatted Group: ",
-                                                style: Styles.black17,
-                                              ),
-                                            ],
-                                          ),
+                                        TitleAndInfo(
+                                          "Topic: ",
+                                          "${controller.trainingCourse.name}",
                                         ),
-                                        Spacer(),
-                                        SizedBox(
-                                          child: Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                "${controller.trainingCourse.name}",
-                                                style: Styles.blue17,
-                                              ),
-                                              Dimens.boxHeight5,
-                                              Text(
-                                                "${controller.trainingCourse.categoryName}",
-                                                style: Styles.blue17,
-                                              ),
-                                              Dimens.boxHeight5,
-                                              Text(
-                                                "${controller.trainingCourse.groupName}",
-                                                style: Styles.blue17,
-                                              ),
-                                            ],
-                                          ),
+                                        Dimens.boxHeight10,
+                                        TitleAndInfo(
+                                          "Category: ",
+                                          "${controller.trainingCourse.categoryName}",
                                         ),
-                                        Spacer(),
+                                        Dimens.boxHeight10,
+                                        TitleAndInfo(
+                                          "Targatted Group: ",
+                                          "${controller.trainingCourse.groupName}",
+                                        ),
                                       ],
                                     ),
                                   ),
                                   Spacer(),
-                                  Container(
-                                    width: Get.width * .4,
-                                    child: Row(
+                                  Expanded(
+                                    flex: 3,
+                                    child: Column(
                                       children: [
-                                        SizedBox(
-                                          child: Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                "No of Days: ",
-                                                style: Styles.black17,
-                                              ),
-                                              Dimens.boxHeight5,
-                                              Text(
-                                                "Duration In Minutes: ",
-                                                style: Styles.black17,
-                                              ),
-                                              Dimens.boxHeight5,
-                                              Text(
-                                                "Maximum Capacity: ",
-                                                style: Styles.black17,
-                                              ),
-                                            ],
-                                          ),
+                                        TitleAndInfo(
+                                          "No of Days: ",
+                                          "${controller.trainingCourse.numberOfDays}",
                                         ),
-                                        Spacer(),
-                                        SizedBox(
-                                          child: Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              SizedBox(
-                                                child: Text(
-                                                  "${controller.trainingCourse.numberOfDays}",
-                                                  style: Styles.blue17,
-                                                ),
-                                              ),
-                                              Dimens.boxHeight5,
-                                              SizedBox(
-                                                child: Text(
-                                                  "${controller.trainingCourse.duration}",
-                                                  style: Styles.blue17,
-                                                ),
-                                              ),
-                                              Dimens.boxHeight5,
-                                              SizedBox(
-                                                child: Text(
-                                                  "${controller.trainingCourse.maximumCapicity}",
-                                                  style: Styles.blue17,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
+                                        Dimens.boxHeight10,
+                                        TitleAndInfo(
+                                          "Duration In Minutes: ",
+                                          "${controller.trainingCourse.duration}",
                                         ),
-                                        Spacer(),
-                                        Spacer(),
+                                        Dimens.boxHeight10,
+                                        TitleAndInfo(
+                                          "Maximum Capacity: ",
+                                          "${controller.trainingCourse.maximumCapicity}",
+                                        ),
                                       ],
                                     ),
                                   ),
+                                  // Container(
+                                  //   width: Get.width * .43,
+                                  //   child: Row(
+                                  //     children: [
+                                  //       SizedBox(
+                                  //         child: Column(
+                                  //           mainAxisAlignment:
+                                  //               MainAxisAlignment.start,
+                                  //           crossAxisAlignment:
+                                  //               CrossAxisAlignment.start,
+                                  //           children: [
+                                  //             Text(
+                                  //               "Topic: ",
+                                  //               style: Styles.black17,
+                                  //             ),
+                                  //             Dimens.boxHeight5,
+                                  //             Text(
+                                  //               "Category: ",
+                                  //               style: Styles.black17,
+                                  //             ),
+                                  //             Dimens.boxHeight5,
+                                  //             Text(
+                                  //               "Targatted Group: ",
+                                  //               style: Styles.black17,
+                                  //             ),
+                                  //           ],
+                                  //         ),
+                                  //       ),
+                                  //       Spacer(),
+                                  //       SizedBox(
+                                  //         child: Column(
+                                  //           mainAxisAlignment:
+                                  //               MainAxisAlignment.start,
+                                  //           crossAxisAlignment:
+                                  //               CrossAxisAlignment.start,
+                                  //           children: [
+                                  //             Text(
+                                  //               "${controller.trainingCourse.name}",
+                                  //               style: Styles.blue17,
+                                  //             ),
+                                  //             Dimens.boxHeight5,
+                                  //             Text(
+                                  //               "${controller.trainingCourse.categoryName}",
+                                  //               style: Styles.blue17,
+                                  //             ),
+                                  //             Dimens.boxHeight5,
+                                  //             Text(
+                                  //               "${controller.trainingCourse.groupName}",
+                                  //               style: Styles.blue17,
+                                  //             ),
+                                  //           ],
+                                  //         ),
+                                  //       ),
+                                  //       Spacer(),
+                                  //     ],
+                                  //   ),
+                                  // ),
+                                  // Spacer(),
+                                  // Container(
+                                  //   width: Get.width * .4,
+                                  //   child: Row(
+                                  //     children: [
+                                  //       SizedBox(
+                                  //         child: Column(
+                                  //           mainAxisAlignment:
+                                  //               MainAxisAlignment.start,
+                                  //           crossAxisAlignment:
+                                  //               CrossAxisAlignment.start,
+                                  //           children: [
+                                  //             Text(
+                                  //               "No of Days: ",
+                                  //               style: Styles.black17,
+                                  //             ),
+                                  //             Dimens.boxHeight5,
+                                  //             Text(
+                                  //               "Duration In Minutes: ",
+                                  //               style: Styles.black17,
+                                  //             ),
+                                  //             Dimens.boxHeight5,
+                                  //             Text(
+                                  //               "Maximum Capacity: ",
+                                  //               style: Styles.black17,
+                                  //             ),
+                                  //           ],
+                                  //         ),
+                                  //       ),
+                                  //       Spacer(),
+                                  //       SizedBox(
+                                  //         child: Column(
+                                  //           mainAxisAlignment:
+                                  //               MainAxisAlignment.start,
+                                  //           crossAxisAlignment:
+                                  //               CrossAxisAlignment.start,
+                                  //           children: [
+                                  //             SizedBox(
+                                  //               child: Text(
+                                  //                 "${controller.trainingCourse.numberOfDays}",
+                                  //                 style: Styles.blue17,
+                                  //               ),
+                                  //             ),
+                                  //             Dimens.boxHeight5,
+                                  //             SizedBox(
+                                  //               child: Text(
+                                  //                 "${controller.trainingCourse.duration}",
+                                  //                 style: Styles.blue17,
+                                  //               ),
+                                  //             ),
+                                  //             Dimens.boxHeight5,
+                                  //             SizedBox(
+                                  //               child: Text(
+                                  //                 "${controller.trainingCourse.maximumCapicity}",
+                                  //                 style: Styles.blue17,
+                                  //               ),
+                                  //             ),
+                                  //           ],
+                                  //         ),
+                                  //       ),
+                                  //       Spacer(),
+                                  //       Spacer(),
+                                  //     ],
+                                  //   ),
+                                  // ),
                                 ],
                               ),
                               Dimens.boxHeight20,
@@ -308,6 +351,35 @@ class ViewCourseWeb extends GetView<ViewCourseController> {
           Spacer(),
         ],
       ),
+    );
+  }
+}
+
+class TitleAndInfo extends StatelessWidget {
+  final String title;
+  final String info;
+
+  TitleAndInfo(this.title, this.info);
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Expanded(
+          child: Text(
+            title,
+            style: Styles.black17,
+          ),
+        ),
+        Expanded(
+          child: Text(
+            info,
+            style: Styles.blue17,
+          ),
+        ),
+      ],
     );
   }
 }

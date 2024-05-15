@@ -304,7 +304,7 @@ class _ScheduleCourseWebState extends State<ScheduleCourseWeb> {
                                                                 color: ColorValues
                                                                     .executeColor,
                                                                 icon: Icons
-                                                                    .done_outlined,
+                                                                    .arrow_forward,
                                                                 message:
                                                                     "Execute",
                                                                 onPress: () {
@@ -320,7 +320,12 @@ class _ScheduleCourseWebState extends State<ScheduleCourseWeb> {
                                                                 icon: Icons
                                                                     .visibility_outlined,
                                                                 message: "View",
-                                                                onPress: () {},
+                                                                onPress: () {
+                                                                  Get.toNamed(
+                                                                    Routes
+                                                                        .executeCourse,
+                                                                  );
+                                                                },
                                                               ),
                                                             ],
                                                           ),
