@@ -908,6 +908,25 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                                       },
                                                       textController: controller
                                                           .purchaseDateTc,
+                                                      errorController: controller
+                                                              .isInvoiceDateInvalid
+                                                              .value
+                                                          ? "Required field"
+                                                          : null,
+                                                      onChanged: (value) {
+                                                        if (value
+                                                                .trim()
+                                                                .length >
+                                                            0) {
+                                                          controller
+                                                              .isInvoiceDateInvalid
+                                                              .value = false;
+                                                        } else {
+                                                          controller
+                                                              .isInvoiceDateInvalid
+                                                              .value = true;
+                                                        }
+                                                      },
                                                     ),
                                                   ],
                                                 ),
@@ -994,6 +1013,25 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                                       },
                                                       textController: controller
                                                           .challanDateTc,
+                                                      errorController: controller
+                                                              .isDeliveryChallanDateInvalid
+                                                              .value
+                                                          ? "Required field"
+                                                          : null,
+                                                      onChanged: (value) {
+                                                        if (value
+                                                                .trim()
+                                                                .length >
+                                                            0) {
+                                                          controller
+                                                              .isDeliveryChallanDateInvalid
+                                                              .value = false;
+                                                        } else {
+                                                          controller
+                                                              .isDeliveryChallanDateInvalid
+                                                              .value = true;
+                                                        }
+                                                      },
                                                     ),
                                                   ],
                                                 ),
@@ -1022,6 +1060,25 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                                       },
                                                       textController: controller
                                                           .receivedDateTc,
+                                                      errorController: controller
+                                                              .isMaterialReciveDateInvalid
+                                                              .value
+                                                          ? "Required field"
+                                                          : null,
+                                                      onChanged: (value) {
+                                                        if (value
+                                                                .trim()
+                                                                .length >
+                                                            0) {
+                                                          controller
+                                                              .isMaterialReciveDateInvalid
+                                                              .value = false;
+                                                        } else {
+                                                          controller
+                                                              .isMaterialReciveDateInvalid
+                                                              .value = true;
+                                                        }
+                                                      },
                                                     ),
                                                   ],
                                                 ),
@@ -1192,6 +1249,7 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                                           onValueChanged:
                                                               controller
                                                                   .onValueChanged,
+                                                                  
                                                         ),
                                                       ),
                                                     ],
