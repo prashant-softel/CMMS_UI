@@ -33,7 +33,11 @@ class AuditTaskViewMsgReceiveDialog extends GetView {
                   ? 'Reject Audit Plan'
                   : type == 3
                       ? "Skip Audit Plan"
-                      : "Close Audit Plan",
+                      : type == 4
+                          ? "Close Audit Plan"
+                          : type == 5
+                              ? "Approve Close Audit Plan"
+                              : "Reject Close Audit Plan",
           textAlign: TextAlign.center,
           style: TextStyle(color: Colors.black),
         ),

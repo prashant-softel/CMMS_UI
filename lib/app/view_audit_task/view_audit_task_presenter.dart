@@ -1,4 +1,3 @@
-
 import '../../domain/models/history_model.dart';
 import '../../domain/models/pm_task_view_list_model.dart';
 import '../../domain/usecases/view_audit_task_usecase.dart';
@@ -23,6 +22,36 @@ class ViewAuditTaskPresenter {
   }) async {
     return viewAuditTaskUsecase.auditTaskCloseButton(
       auditTaskCloseJsonString: auditTaskCloseJsonString,
+      isLoading: isLoading,
+    );
+  }
+
+  Future<Map<String, dynamic>?> auditTaskCloseApproveButton({
+    auditTaskCloseApproveJsonString,
+    required bool isLoading,
+  }) async {
+    return viewAuditTaskUsecase.auditTaskCloseApproveButton(
+      auditTaskCloseApproveJsonString: auditTaskCloseApproveJsonString,
+      isLoading: isLoading,
+    );
+  }
+
+  Future<Map<String, dynamic>?> auditTaskCloseRejectButton({
+    auditTaskCloseRejectJsonString,
+    required bool isLoading,
+  }) async {
+    return viewAuditTaskUsecase.auditTaskCloseRejectButton(
+      auditTaskCloseRejectJsonString: auditTaskCloseRejectJsonString,
+      isLoading: isLoading,
+    );
+  }
+
+  Future<List<dynamic>> updatePmExecution({
+    pmExecutionJsonString,
+    required bool isLoading,
+  }) async {
+    return viewAuditTaskUsecase.updatePmExecution(
+      pmExecutionJsonString: pmExecutionJsonString,
       isLoading: isLoading,
     );
   }

@@ -4,6 +4,7 @@ import 'package:cmms/app/view_audit_task/view_audit_task_presenter.dart';
 import 'package:cmms/domain/models/comment_model.dart';
 import 'package:cmms/domain/models/history_model.dart';
 import 'package:cmms/domain/models/pm_task_view_list_model.dart';
+import 'package:cmms/domain/models/update_pm_task_execution_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../home/home_controller.dart';
@@ -182,6 +183,46 @@ class ViewAuditTaskController extends GetxController {
     }
   }
 
+  void auditTaskCloseApproveButton({int? id}) async {
+    {
+      String _comment = approveCommentTextFieldCtrlr.text.trim();
+
+      CommentModel commentauditTaskCloseModel =
+          CommentModel(id: id, comment: _comment);
+
+      var auditTaskCloseApproveJsonString = commentauditTaskCloseModel.toJson();
+
+      Map<String, dynamic>? response =
+          await viewAuditTaskPresenter.auditTaskCloseApproveButton(
+        auditTaskCloseApproveJsonString: auditTaskCloseApproveJsonString,
+        isLoading: true,
+      );
+      if (response == true) {
+        //getCalibrationList(facilityId, true);
+      }
+    }
+  }
+
+  void auditTaskCloseRejectButton({int? id}) async {
+    {
+      String _comment = approveCommentTextFieldCtrlr.text.trim();
+
+      CommentModel commentauditTaskCloseModel =
+          CommentModel(id: id, comment: _comment);
+
+      var auditTaskCloseRejectJsonString = commentauditTaskCloseModel.toJson();
+
+      Map<String, dynamic>? response =
+          await viewAuditTaskPresenter.auditTaskCloseRejectButton(
+        auditTaskCloseRejectJsonString: auditTaskCloseRejectJsonString,
+        isLoading: true,
+      );
+      if (response == true) {
+        //getCalibrationList(facilityId, true);
+      }
+    }
+  }
+
   void startAuditTask() async {
     Map<String, dynamic>? responseMapStart =
         await viewAuditTaskPresenter.startAuditTask(
@@ -311,5 +352,44 @@ class ViewAuditTaskController extends GetxController {
       }),
       actions: [],
     ));
+  }
+
+  void updatePmExecution() async {
+    PmFiles fil = PmFiles(file_id: 0, pm_event: 0);
+    List<PmFiles> pmfile = <PmFiles>[fil];
+
+    List<AddObservations> addObservations = <AddObservations>[];
+    rowItemAuditobs.value.forEach((element) {
+      AddObservations item = AddObservations(
+          execution_id: int.tryParse(element[0]["id"] ?? '0'),
+          observation: element[4]["value"] ?? "",
+          job_create: int.tryParse(element[7]["job_value"] ?? '0'),
+          text: element[6]["value"] ?? '',
+          cp_ok: int.tryParse(element[3]["value"] ?? '0'),
+          pm_files: pmfile);
+      addObservations.add(item);
+    });
+    // });
+    List<Schedules> schedule = <Schedules>[];
+    // checklistObservations?.forEach((e) {
+    schedule.add(Schedules(
+        schedule_id:
+            auditTasknDetailModel.value?.schedules![0].schedule_id ?? 0,
+        add_observations: addObservations));
+    // });
+
+    UpdatePmExecutionMdel updatePmExecutionMdel = UpdatePmExecutionMdel(
+        task_id: auditTaskId.value,
+        comment: "", // commentCtrlr.text,
+        schedules: schedule);
+    var pmExecutionJsonString = updatePmExecutionMdel.toJson();
+    print({"pmExecutionJsonString", pmExecutionJsonString});
+    var responsePmScheduleCreated =
+        await viewAuditTaskPresenter.updatePmExecution(
+      pmExecutionJsonString: pmExecutionJsonString,
+      isLoading: true,
+    );
+    _updatedailog();
+    // Get.back();
   }
 }

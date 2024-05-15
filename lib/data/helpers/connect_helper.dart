@@ -1496,7 +1496,7 @@ class ConnectHelper {
     bool? isLoading,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
-      'AuditPlan/ApproveAuditSkip',
+      'AuditPlan/CloseAuditPlan',
       Request.post,
       auditTaskCloseJsonString,
       isLoading ?? false,
@@ -1510,6 +1510,54 @@ class ConnectHelper {
     var parsedJson = json.decode(res);
     Get.dialog<void>(AuditTaskViewMsgReceiveDialog(
         type: 4, data: parsedJson['message'], id: parsedJson['id']));
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> auditTaskCloseApproveButton({
+    required String auth,
+    auditTaskCloseApproveJsonString,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'AuditPlan/ApproveClosedAuditPlan',
+      Request.post,
+      auditTaskCloseApproveJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    print('goodsOrderApproveResponse: ${responseModel.data}');
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    Get.dialog<void>(AuditTaskViewMsgReceiveDialog(
+        type: 5, data: parsedJson['message'], id: parsedJson['id']));
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> auditTaskCloseRejectButton({
+    required String auth,
+    auditTaskCloseRejectJsonString,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'AuditPlan/RejectCloseAuditPlan',
+      Request.post,
+      auditTaskCloseRejectJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    print('goodsOrderApproveResponse: ${responseModel.data}');
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    Get.dialog<void>(AuditTaskViewMsgReceiveDialog(
+        type: 6, data: parsedJson['message'], id: parsedJson['id']));
 
     return responseModel;
   }

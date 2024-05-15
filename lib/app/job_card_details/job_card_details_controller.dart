@@ -1,7 +1,10 @@
 import 'dart:async';
 import 'package:cmms/app/home/home_controller.dart';
+import 'package:cmms/app/utils/app_constants.dart';
 import 'package:cmms/domain/models/employee_model.dart';
+import 'package:cmms/domain/models/mrs_list_by_jobId.dart';
 import 'package:cmms/domain/models/permit_details_model.dart';
+import 'package:cmms/domain/models/transferItems_model.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -67,6 +70,8 @@ class JobCardDetailsController extends GetxController {
   int? permitId = 0;
   RxMap permitDetails = {}.obs;
   RxList<LstPermitDetailList>? permitList = <LstPermitDetailList>[].obs;
+  RxList<List<Map<String, String>>> rowItem = <List<Map<String, String>>>[].obs;
+  Map<String, CmmrsItems> dropdownMapperData = {};
 
   /// Job Details
   Rx<int?> jobId = 0.obs;
@@ -104,6 +109,8 @@ class JobCardDetailsController extends GetxController {
   final unescape = HtmlUnescape();
   var descriptionOfWorkDoneCtrlr = TextEditingController();
   RxMap<dynamic, dynamic> deployedEmployeeMapperData = {}.obs;
+  RxList<MRSListByJobIdModel?>? listMrsByTaskId = <MRSListByJobIdModel?>[].obs;
+  RxList<CmmrsItems?>? cmmrsItems = <CmmrsItems?>[].obs;
 
   RxString selectedOption = ''.obs;
   RxList<List<Map<String, String>>> employeesDeployed =
@@ -128,6 +135,19 @@ class JobCardDetailsController extends GetxController {
 
   void updateSelectedOption(String newValue) {
     selectedOption.value = newValue;
+  }
+
+  void addRowItem() {
+    rowItem.add([
+      {"key": "Drop_down", "value": 'Please Select'},
+      {'key': "Sr_No", "value": ''},
+      {'key': "code", "value": ''},
+      {'key': "Material_Type", "value": ''},
+      {'key': "Issued_Qty", "value": ''},
+      {'key': "Used_Qty", "value": ''},
+      {'key': "Consumed_Qty", "value": ''},
+      {'key': "Action ", "value": ''},
+    ]);
   }
 
   ///
@@ -194,6 +214,24 @@ class JobCardDetailsController extends GetxController {
     } catch (e) {
       print(e);
     }
+  }
+
+  Future<void> getMrsListByModule({required int jobId}) async {
+    rowItem.value = [];
+    cmmrsItems!.value = <CmmrsItems>[];
+
+    listMrsByTaskId?.value = await jobCardDetailsPresenter.getMrsListByModule(
+          jobId,
+          facilityId,
+          false,
+        ) ??
+        [];
+    var _assetsList = listMrsByTaskId![0]!.cmmrsItems;
+    for (var asset in _assetsList!) {
+      cmmrsItems!.add(asset);
+    }
+    print({"mrsit", cmmrsItems});
+    addRowItem();
   }
 
   Future<void> setJcId() async {
@@ -267,6 +305,36 @@ class JobCardDetailsController extends GetxController {
     allFiles.addAll(file_list_new);
   }
 
+  Future<void> transferItem() async {
+    List<TranferItems> items = [];
+    rowItem.forEach((element) {
+      TranferItems item = TranferItems(
+          assetItemID:
+              dropdownMapperData[element[0]["value"]]?.asset_item_ID ?? 0,
+          facilityID: facilityId,
+          fromActorID: jobCardId.value,
+          fromActorType: AppConstants.kJobCard,
+          mrsID: listMrsByTaskId![0]!.mrsId ?? 0,
+          mrsItemID: dropdownMapperData[element[0]["value"]]?.id ?? 0,
+          qty: int.tryParse(element[6]["value"] ?? '0') ?? 0,
+          refID: jobCardId.value,
+          refType: AppConstants.kJobCard,
+          remarks: "remarks",
+          toActorID: 0, // selectedItem?.assetsID ?? 0,
+          // dropdownMapperData[element[0]["value"]]?.asset_item_ID ?? 0,
+          toActorType: AppConstants.kInventory);
+
+      items.add(item);
+    });
+    var transferItemJsonString = items;
+    print({"transferItemJsonString", transferItemJsonString});
+
+    var responsetransferItem = await jobCardDetailsPresenter.transferItem(
+      transferItemJsonString: transferItemJsonString,
+      isLoading: true,
+    );
+  }
+
   void createJobDetailsTableData() {
     print({'status to start job', jobCardList[0]!.status});
 
@@ -327,15 +395,15 @@ class JobCardDetailsController extends GetxController {
           "Job ID": jobCardDetailsModel.value?.jobId.toString(),
           "Job Title": jobCardDetailsModel.value?.title,
           "Job Description": jobCardDetailsModel.value?.description,
-          "Job Assigned To":
-              strAssignName.value, //jobCardDetailsModel.value?.,
+          "Job Assigned To": strAssignName.value, //jobCardDetailsModel.value?.,
           // "Work Area / Equipments": strWorkAreasOrEquipments.value,
           "Fault": strWorkTypes.value,
           "Linked Tool To Fault": strToolsRequired.value,
           "Job Created By": jobCardDetailsModel.value?.created_by,
           "Job Status": jobCardDetailsModel.value?.status_short,
         };
-            } //
+        getMrsListByModule(jobId: jobCardDetailsModel.value?.jobId ?? 0);
+      } //
     } catch (e) {
       print(e);
     }

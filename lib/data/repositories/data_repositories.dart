@@ -985,6 +985,26 @@ class DataRepository extends DomainRepository {
         auditTaskCloseJsonString: auditTaskCloseJsonString,
         isLoading: isLoading ?? false,
       );
+  Future<ResponseModel> auditTaskCloseApproveButton({
+    required String auth,
+    auditTaskCloseApproveJsonString,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.auditTaskCloseApproveButton(
+        auth: auth,
+        auditTaskCloseApproveJsonString: auditTaskCloseApproveJsonString,
+        isLoading: isLoading ?? false,
+      );
+  Future<ResponseModel> auditTaskCloseRejectButton({
+    required String auth,
+    auditTaskCloseRejectJsonString,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.auditTaskCloseRejectButton(
+        auth: auth,
+        auditTaskCloseRejectJsonString: auditTaskCloseRejectJsonString,
+        isLoading: isLoading ?? false,
+      );
   Future<ResponseModel> auditTaskRejectButton({
     required String auth,
     auditTaskRejectJsonString,

@@ -595,11 +595,11 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb> {
                                               _gridList(
                                                   tittle: "Low stock items",
                                                   percent:
-                                                      '${controller.dashboardBmList.value?.cmDashboadDetails?.low_stock_items}%'),
+                                                      '${controller.dashboardBmList.value?.cmDashboadDetails?.low_stock_items}'),
                                               _gridList(
                                                   tittle: "PO Items Awaited",
                                                   percent:
-                                                      '${controller.dashboardBmList.value?.cmDashboadDetails?.po_items_awaited}%'),
+                                                      '${controller.dashboardBmList.value?.cmDashboadDetails?.po_items_awaited}'),
                                             ],
                                           ),
                                         ),
@@ -1227,7 +1227,7 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb> {
                                               _gridList(
                                                   tittle: "Low stock items",
                                                   percent:
-                                                      '${controller.dashboardPmList.value?.cmDashboadDetails?.low_stock_items}%'),
+                                                      '${controller.dashboardPmList.value?.cmDashboadDetails?.low_stock_items}'),
                                               _gridList(
                                                   tittle: "PO Items Awaited",
                                                   percent:
@@ -1867,7 +1867,7 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb> {
                                               _gridList(
                                                 tittle: "PO Items Awaited",
                                                 percent:
-                                                    '${controller.dashboardMcList.value?.cmDashboadDetails?.po_items_awaited}%',
+                                                    '${controller.dashboardMcList.value?.cmDashboadDetails?.po_items_awaited}',
                                               ),
                                             ],
                                           ),
@@ -2499,11 +2499,11 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb> {
                                               _gridList(
                                                   tittle: "Low stock items",
                                                   percent:
-                                                      '${controller.dashboardIrList.value?.cmDashboadDetails?.low_stock_items}%'),
+                                                      '${controller.dashboardIrList.value?.cmDashboadDetails?.low_stock_items}'),
                                               _gridList(
                                                   tittle: "PO Items Awaited",
                                                   percent:
-                                                      '${controller.dashboardIrList.value?.cmDashboadDetails?.po_items_awaited}%'),
+                                                      '${controller.dashboardIrList.value?.cmDashboadDetails?.po_items_awaited}'),
                                             ],
                                           ),
                                         ),
@@ -3133,11 +3133,11 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb> {
                                               _gridList(
                                                   tittle: "Low stock items",
                                                   percent:
-                                                      '${controller.dashboardSmList.value?.cmDashboadDetails?.low_stock_items}%'),
+                                                      '${controller.dashboardSmList.value?.cmDashboadDetails?.low_stock_items}'),
                                               _gridList(
                                                   tittle: "PO Items Awaited",
                                                   percent:
-                                                      '${controller.dashboardSmList.value?.cmDashboadDetails?.po_items_awaited}%'),
+                                                      '${controller.dashboardSmList.value?.cmDashboadDetails?.po_items_awaited}'),
                                             ],
                                           ),
                                         ),
