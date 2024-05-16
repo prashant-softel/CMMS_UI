@@ -1,5 +1,6 @@
 import 'package:cmms/domain/models/employee_model.dart';
 import 'package:cmms/domain/models/history_model.dart';
+import 'package:cmms/domain/models/mrs_list_by_jobId.dart';
 import 'package:cmms/domain/repositories/local_storage_keys.dart';
 import 'package:cmms/domain/repositories/repository.dart';
 
@@ -53,6 +54,24 @@ class JobCardDetailsUsecase {
   }) async =>
       await repository.getJobCardDetails(
         jobCardId,
+        isLoading,
+      );
+  Future<bool> transferItem({
+    transferItemJsonString,
+    bool? isLoading,
+  }) async =>
+      await repository.transferItem(
+        isLoading: isLoading,
+        transferItemJsonString: transferItemJsonString,
+      );
+  Future<List<MRSListByJobIdModel>?> getMrsListByModule({
+    jobId,
+    required int facilityId,
+    bool? isLoading,
+  }) async =>
+      await repository.getMrsListByModule(
+        jobId,
+        facilityId,
         isLoading,
       );
 

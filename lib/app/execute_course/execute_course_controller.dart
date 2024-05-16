@@ -64,17 +64,17 @@ class ExecuteCourseController extends GetxController {
   RxList<EmployeeListModel?> employeeNameList = <EmployeeListModel>[].obs;
   RxList<EmployeeListModel?> filteredEmployeeNameList = <EmployeeListModel>[
     EmployeeListModel(
-      id: 35,
+      login_id: "gapufi@mof.za",
       name: "Stella Coleman",
       mobileNumber: "(764) 598-3992",
     ),
     EmployeeListModel(
-      id: 42,
+      login_id: "ekeevmuj@fo.au",
       name: "Genevieve Hansen",
       mobileNumber: "(668) 832-6583",
     ),
     EmployeeListModel(
-      id: 42,
+      login_id: "vi@roon.de",
       name: "Genevieve Hansen",
       mobileNumber: "(668) 832-6583",
     ),

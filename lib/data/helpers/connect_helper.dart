@@ -1496,7 +1496,7 @@ class ConnectHelper {
     bool? isLoading,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
-      'AuditPlan/ApproveAuditSkip',
+      'AuditPlan/CloseAuditPlan',
       Request.post,
       auditTaskCloseJsonString,
       isLoading ?? false,
@@ -1510,6 +1510,54 @@ class ConnectHelper {
     var parsedJson = json.decode(res);
     Get.dialog<void>(AuditTaskViewMsgReceiveDialog(
         type: 4, data: parsedJson['message'], id: parsedJson['id']));
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> auditTaskCloseApproveButton({
+    required String auth,
+    auditTaskCloseApproveJsonString,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'AuditPlan/ApproveClosedAuditPlan',
+      Request.post,
+      auditTaskCloseApproveJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    print('goodsOrderApproveResponse: ${responseModel.data}');
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    Get.dialog<void>(AuditTaskViewMsgReceiveDialog(
+        type: 5, data: parsedJson['message'], id: parsedJson['id']));
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> auditTaskCloseRejectButton({
+    required String auth,
+    auditTaskCloseRejectJsonString,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'AuditPlan/RejectCloseAuditPlan',
+      Request.post,
+      auditTaskCloseRejectJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    print('goodsOrderApproveResponse: ${responseModel.data}');
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    Get.dialog<void>(AuditTaskViewMsgReceiveDialog(
+        type: 6, data: parsedJson['message'], id: parsedJson['id']));
 
     return responseModel;
   }
@@ -3659,6 +3707,28 @@ class ConnectHelper {
   }) async {
     var responseModel = await apiWrapper.makeRequest(
       "RequestOrder/GetRODetailsByID?IDs=$requestID&facility_id=$facilityId",
+      Request.get,
+      null,
+      isLoading ?? false,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    print('getRoDetailsByID${responseModel.data}');
+    return responseModel;
+  }
+
+  Future<ResponseModel> getRoDetailsByIDs({
+    required String auth,
+    required int facilityId,
+    bool? isLoading,
+    required List<int> requestID,
+  }) async {
+    final requestIdString = requestID.join(',');
+    print("${requestID}");
+    print("${requestIdString}");
+    var responseModel = await apiWrapper.makeRequest(
+      "RequestOrder/GetRODetailsByID?IDs=${requestIdString}&facility_id=$facilityId",
       Request.get,
       null,
       isLoading ?? false,

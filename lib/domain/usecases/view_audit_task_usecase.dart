@@ -24,6 +24,30 @@ class ViewAuditTaskUsecase {
         auditTaskCloseJsonString,
         isLoading,
       );
+  Future<Map<String, dynamic>> auditTaskCloseApproveButton({
+    auditTaskCloseApproveJsonString,
+    bool? isLoading,
+  }) async =>
+      await repository.auditTaskCloseApproveButton(
+        auditTaskCloseApproveJsonString,
+        isLoading,
+      );
+  Future<Map<String, dynamic>> auditTaskCloseRejectButton({
+    auditTaskCloseRejectJsonString,
+    bool? isLoading,
+  }) async =>
+      await repository.auditTaskCloseRejectButton(
+        auditTaskCloseRejectJsonString,
+        isLoading,
+      );
+  Future<List<dynamic>> updatePmExecution({
+    pmExecutionJsonString,
+    bool? isLoading,
+  }) async =>
+      await repository.updatePmExecution(
+        pmExecutionJsonString,
+        isLoading,
+      );
   Future<Map<String, dynamic>> auditTaskRejectButton({
     auditTaskRejectJsonString,
     bool? isLoading,
