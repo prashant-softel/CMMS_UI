@@ -58,7 +58,7 @@ class StockManagementAddGoodsOrdersController extends GetxController {
   Rx<bool> ispaidSelected = true.obs;
   Rx<String> selectedReqOrder = ''.obs;
   Rx<String> selectedpaid = ''.obs;
-  List<int> selectedReqOrderId = [];
+  RxList<int> selectedReqOrderId = <int>[].obs;
   Rx<int> roId = 0.obs;
 
   var commentCtrlr = TextEditingController();
@@ -527,7 +527,7 @@ class StockManagementAddGoodsOrdersController extends GetxController {
                   requestID: selectedReqOrderId, facilityId: facilityId);
             }
           } else {
-            selectedReqOrderId = [];
+            selectedReqOrderId.value = [];
           }
         }
         break;
@@ -753,9 +753,18 @@ class StockManagementAddGoodsOrdersController extends GetxController {
       // selectedReqOrderId.add(int.tryParse(filteredOrders[0].name ?? "") ?? 0);
       // selectedReqOrder.value = filteredOrders[0].name ?? "";
       await getRoDetailsByID(
-          requestID: selectedReqOrderId, facilityId: facilityId);
+          requestID: selectedReqOrderId.value, facilityId: facilityId);
     }
 
     update(['requ']);
+  }
+
+  void goodsOrderIds(_selectedGoIds) async {
+    selectedReqOrderId.value = <int>[];
+    for (var _selectedCategoryId in _selectedGoIds) {
+      selectedReqOrderId.add(_selectedCategoryId);
+    }
+    await getRoDetailsByID(
+        requestID: selectedReqOrderId.value, facilityId: facilityId);
   }
 }
