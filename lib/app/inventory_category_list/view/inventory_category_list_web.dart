@@ -460,10 +460,10 @@ class InventoryCategoryListContentWeb
                                                   if (value == true)
                                                     controller
                                                         .issuccessCreatechecklist();
-                                                  // controller.toggleContainer();
+                                                  controller.toggleContainer();
                                                 });
                                               },
-                                              text: 'Create Assets')
+                                              text: 'Create Category')
                                           : CustomElevatedButton(
                                               backgroundColor:
                                                   ColorValues.appDarkBlueColor,
