@@ -90,7 +90,9 @@ class ApproveIncidentReportDialog extends GetView {
             ElevatedButton(
               style: Styles.greenElevatedButtonStyle,
               onPressed: () {
-                _controller.approveIncidentReportButton(id: id);
+                _controller.incidentReportDetailsModel.value?.status == 184
+                    ? _controller.approveIncidentReportButton2ndStep(id: id)
+                    : _controller.approveIncidentReportButton(id: id);
                 print('Goods order id:$id');
                 Get.back();
               },

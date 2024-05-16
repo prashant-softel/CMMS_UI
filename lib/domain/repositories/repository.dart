@@ -2507,6 +2507,40 @@ class Repository {
       return Map();
     }
   }
+  Future<Map<String, dynamic>> approveIncidentReportButton2ndStep(
+    incidentReportApproveJsonString,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.approveIncidentReportButton2ndStep(
+        auth: auth,
+        incidentReportApproveJsonString: incidentReportApproveJsonString,
+        isLoading: isLoading ?? false,
+      );
+
+      var resourceData = res.data;
+
+      print('Response Incident Report Approve: ${resourceData}');
+
+      if (!res.hasError) {
+        if (res.errorCode == 200) {
+          var responseMap = json.decode(res.data);
+          return responseMap;
+        } else {
+          // Get.dialog<void>(WarrantyClaimErrorDialog());
+        }
+      } else {
+        Utility.showDialog(
+            res.errorCode.toString(), 'approveIncidentReportButton');
+        //return '';
+      }
+      return Map();
+    } catch (error) {
+      print(error.toString());
+      return Map();
+    }
+  }
 
   Future<Map<String, dynamic>> approveIrButton(
     incidentReportApproveJsonString,
@@ -9209,6 +9243,7 @@ class Repository {
     int? type,
     int? facilityId,
     bool? isLoading,
+    bool? isExport,
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
@@ -9227,10 +9262,44 @@ class Repository {
                 .map<AssetMasterModel>((m) =>
                     AssetMasterModel.fromJson(Map<String, dynamic>.from(m)))
                 .toList();
+        String jsonData = assetmasterListModelToJson(_ModuleListModelList);
+        if (isExport == true) {
+          List<dynamic> jsonDataList = jsonDecode(jsonData);
+          List<List<dynamic>> data = [
+            [
+              'id',
+              'asset_type_id',
+              'asset_type',
+              'asset_code',
+              'asset_name',
+              'asset_description',
+              'category',
+              'approval_required'
+              'measurement',
+              'decimal_status'
+            ],
+            ...jsonDataList
+                .map((assetmasterjson) => [
+                      assetmasterjson['id'],
+                      assetmasterjson['asset_type_id'],
+                      assetmasterjson['asset_type'],
+                      assetmasterjson['asset_code'],
+                      assetmasterjson['asset_name'],
+                      assetmasterjson['asset_description'],
+                      assetmasterjson['category'],
+                      assetmasterjson['approval_required'],
+                      assetmasterjson['measurement'],
+                      assetmasterjson['decimal_status']
+                    ])
+                .toList(),
+          ];
+          Map<String, List<List<dynamic>>> assetmasterData = {'Sheet1': data};
+          exportToExcel(assetmasterData, "AssetMaster.xlsx");
+        }
 
         return _ModuleListModelList;
       } else {
-        Utility.showDialog(res.errorCode.toString(), ' getPreventiveCheckList');
+        Utility.showDialog(res.errorCode.toString(), ' getAssetmasterList');
         return [];
       }
     } catch (error) {

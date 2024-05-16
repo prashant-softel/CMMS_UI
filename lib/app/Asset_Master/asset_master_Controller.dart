@@ -100,17 +100,17 @@ class AssetMasterController extends GetxController {
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
       facilityId = event;
       Future.delayed(Duration(seconds: 2), () {
-        getAssetMasterList(facilityId, type, true);
+        getAssetMasterList(facilityId, type, true, false);
       });
     });
     super.onInit();
   }
 
   Future<void> getAssetMasterList(
-      int facilityId, int type, bool isLoading) async {
+      int facilityId, int type, bool isLoading, bool? isExport) async {
     moduleList?.value = <AssetMasterModel>[];
     final _moduleList = await moduleListPresenter.getAssetMasterList(
-        facilityId: facilityId, type: type, isLoading: isLoading);
+        facilityId: facilityId, type: type, isLoading: isLoading,isExport:isExport);
     buffermodulelist.value = <AssetMasterModel>[];
     // moduleList!.value = _moduleList ?? <AssetMasterModel>[];
     buffermodulelist.value =
@@ -197,7 +197,7 @@ class AssetMasterController extends GetxController {
       );
       return true;
     }
-    getAssetMasterList(facilityId, type, true);
+    getAssetMasterList(facilityId, type, true, false);
     return true;
   }
 
@@ -220,7 +220,7 @@ class AssetMasterController extends GetxController {
     isToggle5On.value = false;
     isToggle6On.value = false;
     Future.delayed(Duration(seconds: 1), () {
-      getAssetMasterList(facilityId, type, true);
+      getAssetMasterList(facilityId, type, true, false);
     });
     Future.delayed(Duration(seconds: 5), () {
       isSuccess.value = false;
@@ -264,7 +264,7 @@ class AssetMasterController extends GetxController {
                 onPressed: () {
                   deleteModulelist(module_id).then((value) {
                     Get.back();
-                    getAssetMasterList(facilityId, type, true);
+                    getAssetMasterList(facilityId, type, true, false);
                   });
                 },
                 child: Text('YES'),
@@ -312,4 +312,7 @@ class AssetMasterController extends GetxController {
   //   );
   //   return true;
   // }
+  void export() {
+    getAssetMasterList(facilityId, type, true, true);
+  }
 }

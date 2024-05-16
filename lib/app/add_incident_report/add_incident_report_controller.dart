@@ -1044,7 +1044,7 @@ class AddIncidentReportController extends GetxController {
     /// TODO: CHANGE THESE VALUES
     int moduleType = 131;
     // int tempModuleType = 21;
-    int id = Get.arguments;
+    // int id = Get.arguments["irId"];
     //
     historyList?.value = await incidentReportPresenter.getIncidentReportHistory(
           // tempModuleType,

@@ -1151,6 +1151,29 @@ class ConnectHelper {
 
     return responseModel;
   }
+  Future<ResponseModel> approveIncidentReportButton2ndStep({
+    required String auth,
+    incidentReportApproveJsonString,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'IncidentReport/ApproveIncidentReportforSecondStep',
+      Request.post,
+      incidentReportApproveJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    print('goodsOrderApproveResponse: ${responseModel.data}');
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    Get.dialog<void>(IncidentMessageApproveDialog(
+        data: parsedJson['message'], id: parsedJson['id']));
+
+    return responseModel;
+  }
 
   Future<ResponseModel> approveIrButton({
     required String auth,

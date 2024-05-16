@@ -24,11 +24,13 @@ class AssetMasterUsecase {
     int? type,
     int? facilityId,
     bool? isLoading,
+    bool? isExport,
   }) async =>
       await repository.getAssetMasterList(
         type,
         facilityId,
         isLoading,
+        isExport
       );
 
   // Future<List<ModuleListModel?>?> getModuleList({

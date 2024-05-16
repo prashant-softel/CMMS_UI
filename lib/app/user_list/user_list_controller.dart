@@ -58,7 +58,7 @@ class UserListController extends GetxController {
     "Contact Number": 200,
     "Created On": 123,
     "Updated On": 123,
-    "Facilities" :200
+    "Facilities": 200
   };
   Map<String, RxString> filterText = {};
   void setColumnVisibility(String columnName, bool isVisible) {
@@ -90,6 +90,13 @@ class UserListController extends GetxController {
                     ?.toString()
                     .toLowerCase()
                     .contains(keyword.toLowerCase()) ??
+                false) ||
+            (item.facilities?.any((facility) =>
+                    facility.name
+                        ?.toString()
+                        .toLowerCase()
+                        .contains(keyword.toLowerCase()) ??
+                    false) ??
                 false))
         .toList();
     userList.value = filteredList;
@@ -106,12 +113,11 @@ class UserListController extends GetxController {
       "Created On": createdOnFilterText,
       "Updated On": updatedOnFilterText,
       "Facilities": facilitiesFilterText,
-
     };
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
       facilityId = event;
       Future.delayed(Duration(seconds: 1), () {
-        getUserList(facilityId,  false);
+        getUserList(facilityId, false);
       });
     });
 
@@ -174,7 +180,7 @@ class UserListController extends GetxController {
                 onPressed: () {
                   deleteUser(user_id).then((value) {
                     Get.back();
-                    getUserList(facilityId,  false);
+                    getUserList(facilityId, false);
                   });
                 },
                 child: Text('YES'),
@@ -196,6 +202,6 @@ class UserListController extends GetxController {
   }
 
   void export() {
-    getUserList(facilityId,  true);
+    getUserList(facilityId, true);
   }
 }
