@@ -899,10 +899,7 @@ class AddRowInGoodsOrder extends StatelessWidget {
                                 child: CustomMultiSelectDialogField(
                                   title: 'Please Select',
                                   buttonText: 'Equipment Category',
-                                  initialValue:
-                                      (controller.selectedReqOrderId.isNotEmpty)
-                                          ? controller.selectedReqOrderId
-                                          : [],
+                                  initialValue: controller.selectedReqOrderId,
                                   items: controller.goodsOrdersList
                                       .map(
                                         (goodsOrder) => MultiSelectItem(
