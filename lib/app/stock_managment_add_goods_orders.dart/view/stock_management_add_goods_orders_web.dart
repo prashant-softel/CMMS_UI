@@ -2,6 +2,7 @@ import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/utils/user_access_constants.dart';
+import 'package:cmms/app/widgets/custom_multiselect_dialog_field.dart';
 import 'package:cmms/app/widgets/history_table_widget_web.dart';
 import 'package:cmms/app/widgets/multipule_dropdown_web.dart';
 import 'package:data_table_2/data_table_2.dart';
@@ -9,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:multi_select_flutter/util/multi_select_item.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
 import 'package:cmms/app/app.dart';
@@ -255,8 +257,7 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                                     GoodsOrderTextField(
                                                       keyboardType:
                                                           TextInputType.number,
-                                                      inputFormatters: <
-                                                          TextInputFormatter>[
+                                                      inputFormatters: <TextInputFormatter>[
                                                         FilteringTextInputFormatter
                                                             .digitsOnly
                                                       ],
@@ -363,8 +364,7 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                                     GoodsOrderTextField(
                                                       keyboardType:
                                                           TextInputType.number,
-                                                      inputFormatters: <
-                                                          TextInputFormatter>[
+                                                      inputFormatters: <TextInputFormatter>[
                                                         FilteringTextInputFormatter
                                                             .digitsOnly
                                                       ],
@@ -893,21 +893,45 @@ class AddRowInGoodsOrder extends StatelessWidget {
                             ),
                             // CustomRichText(title: 'Req Order: '),
                             Dimens.boxWidth10,
-                            SizedBox(
-                              child: Obx(
-                                () => MultipDropdownWebWidget(
-                                  controller: controller,
-                                  width:
-                                      MediaQuery.of(context).size.width * .15,
-                                  dropdownList: controller.goodsOrdersList,
-                                  isValueSelected:
-                                      controller.isReqOrderSelected.value,
-                                  selectedItems:
-                                      controller.goodsOrdersList.value,
-                                  onValueChanged: controller.onValueChanged,
+                            Obx(
+                              () => SizedBox(
+                                width: Get.width * .2,
+                                child: CustomMultiSelectDialogField(
+                                  title: 'Please Select',
+                                  buttonText: 'Equipment Category',
+                                  initialValue: controller.selectedReqOrderId,
+                                  items: controller.goodsOrdersList
+                                      .map(
+                                        (goodsOrder) => MultiSelectItem(
+                                          int.tryParse(
+                                                  goodsOrder?.name ?? "") ??
+                                              0,
+                                          goodsOrder?.name ?? '',
+                                        ),
+                                      )
+                                      .toList(),
+                                  onConfirm: (selectedOptionsList) => {
+                                    controller
+                                        .goodsOrderIds(selectedOptionsList),
+                                  },
                                 ),
                               ),
                             ),
+                            // SizedBox(
+                            //   child: Obx(
+                            //     () => MultipDropdownWebWidget(
+                            //       controller: controller,
+                            //       width:
+                            //           MediaQuery.of(context).size.width * .15,
+                            //       dropdownList: controller.goodsOrdersList,
+                            //       isValueSelected:
+                            //           controller.isReqOrderSelected.value,
+                            //       selectedItems:
+                            //           controller.goodsOrdersList.value,
+                            //       onValueChanged: controller.onValueChanged,
+                            //     ),
+                            //   ),
+                            // ),
                           ],
                         ),
                       ),
@@ -1097,8 +1121,7 @@ class AddRowInGoodsOrder extends StatelessWidget {
                                                       width: (Get.width * .4),
                                                       keyboardType:
                                                           TextInputType.number,
-                                                      inputFormatters: <
-                                                          TextInputFormatter>[
+                                                      inputFormatters: <TextInputFormatter>[
                                                         FilteringTextInputFormatter
                                                             .digitsOnly
                                                       ],
@@ -1154,8 +1177,7 @@ class AddRowInGoodsOrder extends StatelessWidget {
                                                           keyboardType:
                                                               TextInputType
                                                                   .number,
-                                                          inputFormatters: <
-                                                              TextInputFormatter>[
+                                                          inputFormatters: <TextInputFormatter>[
                                                             FilteringTextInputFormatter
                                                                 .digitsOnly
                                                           ],

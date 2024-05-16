@@ -1347,7 +1347,8 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                               DataCell(Text(controller
                                                                       .historyList?[
                                                                           index]
-                                                                      ?.createdAt!.result
+                                                                      ?.createdAt!
+                                                                      .result
                                                                       .toString() ??
                                                                   '')),
                                                               DataCell(Text(controller
@@ -3484,7 +3485,7 @@ class AddPrposedAction extends StatelessWidget {
                                                       .width /
                                                   4,
                                               dropdownList:
-                                                  controller.eqipmentNameList,
+                                                  controller.responsbilityList,
                                               selectedValue: mapData["value"],
                                               onValueChanged:
                                                   (list, selectedValue) {
@@ -3493,7 +3494,7 @@ class AddPrposedAction extends StatelessWidget {
                                                 });
                                                 mapData["value"] =
                                                     selectedValue;
-                                                controller.dropdownEquipmentNameMapperData[
+                                                controller.dropdownMapperData[
                                                         selectedValue] =
                                                     list.firstWhere(
                                                         (element) =>
