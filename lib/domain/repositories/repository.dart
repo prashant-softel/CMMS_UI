@@ -8570,6 +8570,33 @@ class Repository {
     }
   }
 
+  Future<List<dynamic>> updateAuditTaskExecution(
+    auditExecutionJsonString,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.updateAuditTaskExecution(
+        auth: auth,
+        auditExecutionJsonString: auditExecutionJsonString,
+        isLoading: isLoading ?? false,
+      );
+      if (!res.hasError) {
+        if (res.errorCode == 200) {
+          var responseMap = json.decode(res.data);
+          return responseMap;
+        }
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString(), 'updatePmExecution');
+      }
+      return [];
+    } catch (error) {
+      print(error.toString());
+      return [];
+    }
+  }
+
   Future<AddUserModel?> uploadImge(
       Uint8List? fileBytes, String fileName, bool isLoading) async {
     try {

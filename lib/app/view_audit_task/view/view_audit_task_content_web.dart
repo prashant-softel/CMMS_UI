@@ -1,6 +1,8 @@
 import 'package:cmms/app/app.dart';
+import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
+import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/app/view_audit_task/view_audit_task_controller.dart';
 import 'package:cmms/app/widgets/audit_execution_process_dialog.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
@@ -120,7 +122,7 @@ class _ViewAuditTaskWebState extends State<ViewAuditTaskWeb> {
                                                   ColorValues.appLightBlueColor,
                                               onPressed: () async {},
                                               text:
-                                                  "${controller.auditTasknDetailModel.value?.status ?? ""}",
+                                                  "${controller.auditTasknDetailModel.value?.status ?? ""}${controller.auditTasknDetailModel.value?.status_short ?? ""}",
                                             ),
                                           ),
                                         ],
@@ -244,168 +246,179 @@ class _ViewAuditTaskWebState extends State<ViewAuditTaskWeb> {
                                         ],
                                       ),
                                     ),
-                                    Container(
-                                      height: 400,
-                                      child: DataTable2(
-                                        minWidth: 2000,
-                                        border: TableBorder.all(
-                                            color: Color.fromARGB(
-                                                255, 206, 229, 234)),
-                                        columns: [
-                                          DataColumn2(
-                                              fixedWidth: 100,
-                                              label: Text(
-                                                "Sr.No.",
-                                                style: TextStyle(
-                                                    fontSize: 15,
-                                                    fontWeight:
-                                                        FontWeight.bold),
-                                              )),
-                                          DataColumn2(
-                                              fixedWidth: 150,
-                                              label: Text(
-                                                "Check Point No.",
-                                                style: TextStyle(
-                                                    fontSize: 15,
-                                                    fontWeight:
-                                                        FontWeight.bold),
-                                              )),
-                                          DataColumn2(
-                                              fixedWidth: 300,
-                                              label: Text(
-                                                "Check Point",
-                                                style: TextStyle(
-                                                    fontSize: 15,
-                                                    fontWeight:
-                                                        FontWeight.bold),
-                                              )),
-                                          DataColumn2(
-                                              fixedWidth: 300,
-                                              label: Text(
-                                                "Requirement",
-                                                style: TextStyle(
-                                                    fontSize: 15,
-                                                    fontWeight:
-                                                        FontWeight.bold),
-                                              )),
+                                    controller
+                                                .auditTasknDetailModel
+                                                .value
+                                                ?.schedules![0]
+                                                .checklist_observation!
+                                                .length ==
+                                            0
+                                        ? Dimens.box0
+                                        : Container(
+                                            height: 400,
+                                            child: DataTable2(
+                                              minWidth: 2000,
+                                              border: TableBorder.all(
+                                                  color: Color.fromARGB(
+                                                      255, 206, 229, 234)),
+                                              columns: [
+                                                DataColumn2(
+                                                    fixedWidth: 100,
+                                                    label: Text(
+                                                      "Sr.No.",
+                                                      style: TextStyle(
+                                                          fontSize: 15,
+                                                          fontWeight:
+                                                              FontWeight.bold),
+                                                    )),
+                                                DataColumn2(
+                                                    fixedWidth: 170,
+                                                    label: Text(
+                                                      "Check Point No.",
+                                                      style: TextStyle(
+                                                          fontSize: 15,
+                                                          fontWeight:
+                                                              FontWeight.bold),
+                                                    )),
+                                                DataColumn2(
+                                                    fixedWidth: 300,
+                                                    label: Text(
+                                                      "Check Point",
+                                                      style: TextStyle(
+                                                          fontSize: 15,
+                                                          fontWeight:
+                                                              FontWeight.bold),
+                                                    )),
+                                                DataColumn2(
+                                                    fixedWidth: 300,
+                                                    label: Text(
+                                                      "Requirement",
+                                                      style: TextStyle(
+                                                          fontSize: 15,
+                                                          fontWeight:
+                                                              FontWeight.bold),
+                                                    )),
 
-                                          DataColumn2(
-                                              fixedWidth: 200,
-                                              label: Text(
-                                                "Uploaded Image",
-                                                style: TextStyle(
-                                                    fontSize: 15,
-                                                    fontWeight:
-                                                        FontWeight.bold),
-                                              )),
-                                          DataColumn2(
-                                              fixedWidth: 180,
-                                              label: Text(
-                                                "Type",
-                                                style: TextStyle(
-                                                    fontSize: 15,
-                                                    fontWeight:
-                                                        FontWeight.bold),
-                                              )),
-                                          // DataColumn2(
-                                          //     fixedWidth: 200,
-                                          //     label: Text(
-                                          //       "Upload Images",
-                                          //       style: TextStyle(
-                                          //           fontSize: 15,
-                                          //           fontWeight: FontWeight.bold),
-                                          //     )),
-                                          DataColumn2(
-                                              fixedWidth: 300,
-                                              label: Text(
-                                                "Observation",
-                                                style: TextStyle(
-                                                    fontSize: 15,
-                                                    fontWeight:
-                                                        FontWeight.bold),
-                                              )),
-                                        ],
-                                        rows: List<DataRow>.generate(
-                                          controller
-                                                  .auditTasknDetailModel
-                                                  .value
-                                                  ?.schedules![0]
-                                                  .checklist_observation
-                                                  ?.length ??
-                                              0,
-                                          (index) => DataRow(
-                                            cells: [
-                                              DataCell(Text('${index + 1}')),
-                                              DataCell(Text(controller
-                                                      .auditTasknDetailModel
-                                                      .value
-                                                      ?.schedules![0]
-                                                      .checklist_observation?[
-                                                          index]
-                                                      .check_point_id
-                                                      .toString() ??
-                                                  '')),
-                                              DataCell(Text(controller
-                                                      .auditTasknDetailModel
-                                                      .value
-                                                      ?.schedules![0]
-                                                      .checklist_observation?[
-                                                          index]
-                                                      .check_point_name ??
-                                                  '')),
-                                              DataCell(Text(controller
-                                                      .auditTasknDetailModel
-                                                      .value
-                                                      ?.schedules![0]
-                                                      .checklist_observation?[
-                                                          index]
-                                                      .requirement ??
-                                                  '')),
-                                              DataCell(
-                                                Center(
-                                                  child: TableActionButton(
-                                                    color:
-                                                        ColorValues.viewColor,
-                                                    icon: Icons.remove_red_eye,
-                                                    message: "View",
-                                                    // onPress: () async {
-                                                    //   String baseUrl =
-                                                    //       'http://65.0.20.19/CMMS_API/';
-                                                    //   // 'http://172.20.43.18:82/';
-                                                    //   String imageUrl =
-                                                    //       "${controller.selectedItem?.checklist_observation![index].files?[index].file_path}";
-                                                    //   String fullUrl =
-                                                    //       baseUrl + imageUrl;
-                                                    //   if (await canLaunch(
-                                                    //       fullUrl)) {
-                                                    //     await launch(fullUrl);
-                                                    //   }
-                                                    //   print(
-                                                    //       "${controller.selectedItem?.checklist_observation![index].files?[index].file_path}");
-                                                    // String imagePath = html.window
-                                                    //         .location.origin +
-                                                    //     '/' +
-                                                    //     imageUrl;
-                                                    // html.window.open(
-                                                    //     imagePath, '_blank');
-                                                    // },
-                                                  ),
+                                                DataColumn2(
+                                                    fixedWidth: 200,
+                                                    label: Text(
+                                                      "Uploaded Image",
+                                                      style: TextStyle(
+                                                          fontSize: 15,
+                                                          fontWeight:
+                                                              FontWeight.bold),
+                                                    )),
+                                                DataColumn2(
+                                                    fixedWidth: 180,
+                                                    label: Text(
+                                                      "Type",
+                                                      style: TextStyle(
+                                                          fontSize: 15,
+                                                          fontWeight:
+                                                              FontWeight.bold),
+                                                    )),
+                                                // DataColumn2(
+                                                //     fixedWidth: 200,
+                                                //     label: Text(
+                                                //       "Upload Images",
+                                                //       style: TextStyle(
+                                                //           fontSize: 15,
+                                                //           fontWeight: FontWeight.bold),
+                                                //     )),
+                                                DataColumn2(
+                                                    fixedWidth: 300,
+                                                    label: Text(
+                                                      "Observation",
+                                                      style: TextStyle(
+                                                          fontSize: 15,
+                                                          fontWeight:
+                                                              FontWeight.bold),
+                                                    )),
+                                              ],
+                                              rows: List<DataRow>.generate(
+                                                controller
+                                                        .auditTasknDetailModel
+                                                        .value
+                                                        ?.schedules![0]
+                                                        .checklist_observation
+                                                        ?.length ??
+                                                    0,
+                                                (index) => DataRow(
+                                                  cells: [
+                                                    DataCell(
+                                                        Text('${index + 1}')),
+                                                    DataCell(Text(controller
+                                                            .auditTasknDetailModel
+                                                            .value
+                                                            ?.schedules![0]
+                                                            .checklist_observation?[
+                                                                index]
+                                                            .check_point_id
+                                                            .toString() ??
+                                                        '')),
+                                                    DataCell(Text(controller
+                                                            .auditTasknDetailModel
+                                                            .value
+                                                            ?.schedules![0]
+                                                            .checklist_observation?[
+                                                                index]
+                                                            .check_point_name ??
+                                                        '')),
+                                                    DataCell(Text(controller
+                                                            .auditTasknDetailModel
+                                                            .value
+                                                            ?.schedules![0]
+                                                            .checklist_observation?[
+                                                                index]
+                                                            .requirement ??
+                                                        '')),
+                                                    DataCell(
+                                                      Center(
+                                                        child:
+                                                            TableActionButton(
+                                                          color: ColorValues
+                                                              .viewColor,
+                                                          icon: Icons
+                                                              .remove_red_eye,
+                                                          message: "View",
+                                                          // onPress: () async {
+                                                          //   String baseUrl =
+                                                          //       'http://65.0.20.19/CMMS_API/';
+                                                          //   // 'http://172.20.43.18:82/';
+                                                          //   String imageUrl =
+                                                          //       "${controller.selectedItem?.checklist_observation![index].files?[index].file_path}";
+                                                          //   String fullUrl =
+                                                          //       baseUrl + imageUrl;
+                                                          //   if (await canLaunch(
+                                                          //       fullUrl)) {
+                                                          //     await launch(fullUrl);
+                                                          //   }
+                                                          //   print(
+                                                          //       "${controller.selectedItem?.checklist_observation![index].files?[index].file_path}");
+                                                          // String imagePath = html.window
+                                                          //         .location.origin +
+                                                          //     '/' +
+                                                          //     imageUrl;
+                                                          // html.window.open(
+                                                          //     imagePath, '_blank');
+                                                          // },
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    DataCell(Text('Text')),
+                                                    DataCell(Text(controller
+                                                            .auditTasknDetailModel
+                                                            .value
+                                                            ?.schedules![0]
+                                                            .checklist_observation?[
+                                                                index]
+                                                            .observation ??
+                                                        '')),
+                                                  ],
                                                 ),
                                               ),
-                                              DataCell(Text('Text')),
-                                              DataCell(Text(controller
-                                                      .auditTasknDetailModel
-                                                      .value
-                                                      ?.schedules![0]
-                                                      .checklist_observation?[
-                                                          index]
-                                                      .observation ??
-                                                  '')),
-                                            ],
+                                            ),
                                           ),
-                                        ),
-                                      ),
-                                    ),
                                     Dimens.boxHeight15,
                                     (controller.historyList != null &&
                                             controller.historyList!.isNotEmpty)
@@ -469,85 +482,106 @@ class _ViewAuditTaskWebState extends State<ViewAuditTaskWeb> {
                                         //   ),
                                         // ),
                                         //  Dimens.boxWidth10,
-                                        // controller.auditPlanDetailModel.value
-                                        //                 ?.status ==
-                                        //             401 &&
-                                        //         varUserAccessModel
-                                        //                 .value.access_list!
-                                        //                 .where((e) =>
-                                        //                     e.feature_id ==
-                                        //                         UserAccessConstants
-                                        //                             .kPmPlanFeatureId &&
-                                        //                     e.approve ==
-                                        //                         UserAccessConstants
-                                        //                             .kHaveApproveAccess)
-                                        //                 .length >
-                                        //             0
-                                        //     ?
-                                        Container(
-                                          height: 45,
-                                          child: CustomElevatedButton(
-                                            backgroundColor:
-                                                ColorValues.appGreenColor,
-                                            text: "Approve",
-                                            icon: Icons.check,
-                                            onPressed: () {
-                                              Get.dialog(
-                                                  AuditTaskApprovedRejectDialog(
-                                                type: 1,
-                                              ));
-                                            },
-                                          ),
-                                        ),
+                                        controller.auditTasknDetailModel.value
+                                                    ?.status ==
+                                                426
+                                            ?
+                                            //         varUserAccessModel
+                                            //                 .value.access_list!
+                                            //                 .where((e) =>
+                                            //                     e.feature_id ==
+                                            //                         UserAccessConstants
+                                            //                             .kPmPlanFeatureId &&
+                                            //                     e.approve ==
+                                            //                         UserAccessConstants
+                                            //                             .kHaveApproveAccess)
+                                            //                 .length >
+                                            //             0
+                                            //     ?
+                                            Container(
+                                                height: 45,
+                                                child: CustomElevatedButton(
+                                                  backgroundColor:
+                                                      ColorValues.appGreenColor,
+                                                  text: "Approve",
+                                                  icon: Icons.check,
+                                                  onPressed: () {
+                                                    Get.dialog(
+                                                        AuditTaskApprovedRejectDialog(
+                                                      type: 1,
+                                                    ));
+                                                  },
+                                                ),
+                                              )
+                                            : Dimens.box0,
                                         //  : Dimens.box0,
                                         Dimens.boxWidth20,
-                                        // controller.auditPlanDetailModel.value
-                                        //                 ?.status ==
-                                        //             401 &&
-                                        //         varUserAccessModel
-                                        //                 .value.access_list!
-                                        //                 .where((e) =>
-                                        //                     e.feature_id ==
-                                        //                         UserAccessConstants
-                                        //                             .kPmPlanFeatureId &&
-                                        //                     e.approve ==
-                                        //                         UserAccessConstants
-                                        //                             .kHaveApproveAccess)
-                                        //                 .length >
-                                        //             0
-                                        //     ?
-                                        Container(
-                                          height: 45,
-                                          child: CustomElevatedButton(
-                                            backgroundColor:
-                                                ColorValues.rejectColor,
-                                            text: "Reject",
-                                            icon: Icons.close,
-                                            onPressed: () {
-                                              Get.dialog(
-                                                  AuditTaskApprovedRejectDialog(
-                                                type: 2,
-                                              ));
-                                            },
-                                          ),
-                                        ),
+                                        controller.auditTasknDetailModel.value
+                                                    ?.status ==
+                                                426
+                                            ?
+                                            // &&
+                                            //         varUserAccessModel
+                                            //                 .value.access_list!
+                                            //                 .where((e) =>
+                                            //                     e.feature_id ==
+                                            //                         UserAccessConstants
+                                            //                             .kPmPlanFeatureId &&
+                                            //                     e.approve ==
+                                            //                         UserAccessConstants
+                                            //                             .kHaveApproveAccess)
+                                            //                 .length >
+                                            //             0
+                                            //     ?
+                                            Container(
+                                                height: 45,
+                                                child: CustomElevatedButton(
+                                                  backgroundColor:
+                                                      ColorValues.rejectColor,
+                                                  text: "Reject",
+                                                  icon: Icons.close,
+                                                  onPressed: () {
+                                                    Get.dialog(
+                                                        AuditTaskApprovedRejectDialog(
+                                                      type: 2,
+                                                    ));
+                                                  },
+                                                ),
+                                              )
+                                            : Dimens.box0,
                                         //: Dimens.box0,
                                         Dimens.boxWidth20,
-                                        Container(
-                                          height: 45,
-                                          child: CustomElevatedButton(
-                                            backgroundColor:
-                                                ColorValues.addNewColor,
-                                            text: "Skip",
-                                            icon: Icons.skip_next_sharp,
-                                            onPressed: () {
-                                              Get.dialog(
-                                                  AuditTaskApprovedRejectDialog(
-                                                type: 3,
-                                              ));
-                                            },
-                                          ),
-                                        ),
+                                        controller.auditTasknDetailModel.value
+                                                    ?.status ==
+                                                425
+                                            //     &&
+                                            // varUserAccessModel
+                                            //         .value.access_list!
+                                            //         .where((e) =>
+                                            //             e.feature_id ==
+                                            //                 UserAccessConstants
+                                            //                     .kPmPlanFeatureId &&
+                                            //             e.approve ==
+                                            //                 UserAccessConstants
+                                            //                     .kHaveApproveAccess)
+                                            //         .length >
+                                            //     0
+                                            ? Container(
+                                                height: 45,
+                                                child: CustomElevatedButton(
+                                                  backgroundColor:
+                                                      ColorValues.addNewColor,
+                                                  text: "Skip",
+                                                  icon: Icons.skip_next_sharp,
+                                                  onPressed: () {
+                                                    Get.dialog(
+                                                        AuditTaskApprovedRejectDialog(
+                                                      type: 3,
+                                                    ));
+                                                  },
+                                                ),
+                                              )
+                                            : Dimens.box0,
                                         Dimens.boxWidth20,
 
                                         Container(
@@ -600,18 +634,22 @@ class _ViewAuditTaskWebState extends State<ViewAuditTaskWeb> {
                                           ),
                                         ),
                                         Dimens.boxWidth20,
-                                        Container(
-                                          height: 45,
-                                          child: CustomElevatedButton(
-                                            backgroundColor:
-                                                ColorValues.startColor,
-                                            text: "Start",
-                                            icon: Icons.start,
-                                            onPressed: () {
-                                              controller.startAuditTask();
-                                            },
-                                          ),
-                                        ),
+                                        controller.auditTasknDetailModel.value
+                                                    ?.status ==
+                                                425
+                                            ? Container(
+                                                height: 45,
+                                                child: CustomElevatedButton(
+                                                  backgroundColor:
+                                                      ColorValues.startColor,
+                                                  text: "Start",
+                                                  icon: Icons.start,
+                                                  onPressed: () {
+                                                    controller.startAuditTask();
+                                                  },
+                                                ),
+                                              )
+                                            : Dimens.box0,
                                         Dimens.boxWidth20,
 
                                         Container(

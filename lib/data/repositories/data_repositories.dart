@@ -2920,6 +2920,16 @@ class DataRepository extends DomainRepository {
         pmExecutionJsonString: pmExecutionJsonString,
         isLoading: isLoading ?? false,
       );
+  Future<ResponseModel> updateAuditTaskExecution({
+    required String auth,
+    auditExecutionJsonString,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.updateAuditTaskExecution(
+        auth: auth,
+        auditExecutionJsonString: auditExecutionJsonString,
+        isLoading: isLoading ?? false,
+      );
   Future<AddUserModel> uploadImge(
       {required String auth,
       Uint8List? fileBytes,

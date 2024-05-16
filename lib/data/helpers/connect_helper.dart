@@ -5090,6 +5090,30 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> updateAuditTaskExecution({
+    required String auth,
+    auditExecutionJsonString,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'AuditScheduleView/ExecuteAuditSchedule',
+      Request.post,
+      auditExecutionJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    print('goodsOrderApproveResponse: ${responseModel.data}');
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    Get.dialog<void>(AuditTaskViewMsgReceiveDialog(
+        type: 7, data: parsedJson['message'], id: parsedJson['id']));
+
+    return responseModel;
+  }
+
   Future<ResponseModel> getWarrantyTypeList({
     String? auth,
     bool? isLoading,
@@ -6736,6 +6760,12 @@ class ConnectHelper {
         'Authorization': 'Bearer $auth',
       },
     );
+    print('goodsOrderApproveResponse: ${responseModel.data}');
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    Get.dialog<void>(AuditTaskViewMsgReceiveDialog(
+        type: 8, data: parsedJson['message'], id: parsedJson['id']));
+
     return responseModel;
   }
 
