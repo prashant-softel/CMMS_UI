@@ -58,7 +58,7 @@ class StockManagementAddGoodsOrdersController extends GetxController {
   Rx<bool> ispaidSelected = true.obs;
   Rx<String> selectedReqOrder = ''.obs;
   Rx<String> selectedpaid = ''.obs;
-  int selectedReqOrderId = 0;
+  List<int> selectedReqOrderId = [];
   Rx<int> roId = 0.obs;
 
   var commentCtrlr = TextEditingController();
@@ -203,6 +203,10 @@ class StockManagementAddGoodsOrdersController extends GetxController {
           });
         }
       });
+      if (goId.value == 0 || goId.value == null) {
+        addRowItem();
+      }
+
       delchfocus.addListener(() {
         if (!delchfocus.hasFocus) {
           delchscroll.jumpTo(0.0);
@@ -352,12 +356,13 @@ class StockManagementAddGoodsOrdersController extends GetxController {
               "value": '${element.ordered_qty}',
               // 'id': '${element.assetMasterItemID}'
             },
+            {'key': "Action ", "value": ''},
           ],
         );
 
-        dropdownMapperData[element.assetItem_Name ?? ""] = goDetailsList!
-            .firstWhere((e) => e?.name == element.assetItem_Name,
-                orElse: null)!;
+        // dropdownMapperData[element.assetItem_Name ?? ""] = goDetails!
+        //     .firstWhere((e) => e?.assetItem_Name == element.assetItem_Name,
+        //         orElse: null)!;
       });
 
       challanDateTc.text =
@@ -430,11 +435,10 @@ class StockManagementAddGoodsOrdersController extends GetxController {
       }
       update(["AssetList"]);
     }
-    addRowItem();
   }
 
   Future<void> getRoDetailsByID(
-      {required int requestID, required int facilityId}) async {
+      {required List<int> requestID, required int facilityId}) async {
     goDetailsList?.value = [];
 
     final _getRoDetailsById = await stockManagementAddGoodsOrdersPresenter
@@ -443,13 +447,13 @@ class StockManagementAddGoodsOrdersController extends GetxController {
 
     if (_getRoDetailsById != null) {
       getRoDetailsByIDModelList?.value = _getRoDetailsById;
-      getRoDetailsByIDModel.value = getRoDetailsByIDModelList!.firstWhere((element) => element?.request_order_id != null);
+      getRoDetailsByIDModel.value = getRoDetailsByIDModelList!
+          .firstWhere((element) => element?.request_order_id != null);
       var _godetail = getRoDetailsByIDModel.value?.request_order_items;
       for (var asset in _godetail!) {
         goDetailsList!.add(asset);
       }
     }
-    addRowItem();
   }
 
   Future<void> updatePaidBy() async {
@@ -497,10 +501,10 @@ class StockManagementAddGoodsOrdersController extends GetxController {
         {
           if (value != "Please Select") {
             int currencyIndex =
-              unitCurrencyList.indexWhere((x) => x?.name == value);
-          selectedUnitCurrencyId = unitCurrencyList[currencyIndex]?.id ?? 0;
+                unitCurrencyList.indexWhere((x) => x?.name == value);
+            selectedUnitCurrencyId = unitCurrencyList[currencyIndex]?.id ?? 0;
           } else {
-            selectedUnitCurrencyId=0;
+            selectedUnitCurrencyId = 0;
           }
         }
         break;
@@ -509,20 +513,21 @@ class StockManagementAddGoodsOrdersController extends GetxController {
         {
           if (value != "Please Select") {
             final filteredOrders =
-              goodsOrdersList.where((order) => order?.status == 344).toList();
-          if (filteredOrders.isNotEmpty) {
-            int reqOrderIndex =
-                filteredOrders.indexWhere((x) => x?.name == value);
-            rowItem.value = <List<Map<String, String>>>[].obs;
-            // rowItem.remove();
-            selectedReqOrder.value = filteredOrders[reqOrderIndex]?.name ?? "";
-            selectedReqOrderId =
-                int.tryParse(filteredOrders[reqOrderIndex]?.name ?? "") ?? 0;
-            getRoDetailsByID(
-                requestID: selectedReqOrderId, facilityId: facilityId);
-          }
+                goodsOrdersList.where((order) => order?.status == 344).toList();
+            if (filteredOrders.isNotEmpty) {
+              int reqOrderIndex =
+                  filteredOrders.indexWhere((x) => x?.name == value);
+              rowItem.value = <List<Map<String, String>>>[].obs;
+              // rowItem.remove();
+              selectedReqOrder.value =
+                  filteredOrders[reqOrderIndex]?.name ?? "";
+              selectedReqOrderId.add(
+                  int.tryParse(filteredOrders[reqOrderIndex]?.name ?? "") ?? 0);
+              getRoDetailsByID(
+                  requestID: selectedReqOrderId, facilityId: facilityId);
+            }
           } else {
-            selectedReqOrderId=0;
+            selectedReqOrderId = [];
           }
         }
         break;
@@ -530,9 +535,9 @@ class StockManagementAddGoodsOrdersController extends GetxController {
         {
           if (value != "Please Select") {
             int equipmentIndex = ownerList.indexWhere((x) => x?.name == value);
-          selectedBusinessTypeId = ownerList[equipmentIndex]?.id ?? 0;
+            selectedBusinessTypeId = ownerList[equipmentIndex]?.id ?? 0;
           } else {
-            selectedBusinessTypeId=0;
+            selectedBusinessTypeId = 0;
           }
         }
         break;
@@ -540,9 +545,9 @@ class StockManagementAddGoodsOrdersController extends GetxController {
         {
           if (value != "Please Select") {
             int paidIndex = paid.indexWhere((x) => x!.name == value);
-          paidId = paid[paidIndex]!.id ?? 0;
+            paidId = paid[paidIndex]!.id ?? 0;
           } else {
-            paidId=0;
+            paidId = 0;
           }
         }
         break;
@@ -742,11 +747,13 @@ class StockManagementAddGoodsOrdersController extends GetxController {
         _goodsordersList.where((order) => order.status == 344).toList();
     for (var requ in filteredOrders) {
       goodsOrdersList.add(requ);
+      selectedReqOrderId.add(int.tryParse(requ.name ?? "") ?? 0);
     }
     if (filteredOrders.isNotEmpty) {
-      selectedReqOrderId = int.tryParse(filteredOrders[0].name ?? "") ?? 0;
-      selectedReqOrder.value = filteredOrders[0].name ?? "";
-      getRoDetailsByID(requestID: selectedReqOrderId, facilityId: facilityId);
+      // selectedReqOrderId.add(int.tryParse(filteredOrders[0].name ?? "") ?? 0);
+      // selectedReqOrder.value = filteredOrders[0].name ?? "";
+      await getRoDetailsByID(
+          requestID: selectedReqOrderId, facilityId: facilityId);
     }
 
     update(['requ']);

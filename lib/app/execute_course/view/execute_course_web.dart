@@ -5,8 +5,6 @@ import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
-import 'package:cmms/app/widgets/custom_textField.dart';
-import 'package:cmms/app/widgets/dropdown_web.dart';
 import 'package:cmms/app/widgets/file_upload_widget_web2.dart';
 import 'package:cmms/app/widgets/file_upload_with_dropzone_widget.dart';
 import 'package:data_table_2/data_table_2.dart';
@@ -113,284 +111,338 @@ class ExecuteCourseWeb extends GetView<ExecuteCourseController> {
                           ),
                           child: Column(
                             children: [
-                              Row(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Column(
-                                    crossAxisAlignment: CrossAxisAlignment.end,
-                                    children: [
-                                      Row(
+                              Center(
+                                child: Row(
+                                  children: [
+                                    Expanded(
+                                      child: Column(
                                         children: [
-                                          CustomRichText(
-                                              title: "Training Course: "),
-                                          Dimens.boxWidth10,
-                                          Container(
-                                            width: (MediaQuery.of(context)
-                                                    .size
-                                                    .width *
-                                                .2),
-                                            height: 30,
-                                            decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(10),
-                                              border: Border.all(
-                                                color: Color.fromARGB(
-                                                    255, 227, 224, 244),
-                                                width: 1,
-                                              ),
-                                              boxShadow: [
-                                                BoxShadow(
-                                                  color: Color.fromARGB(
-                                                          255, 236, 234, 234)
-                                                      .withOpacity(0.5),
-                                                  spreadRadius: 2,
-                                                  blurRadius: 5,
-                                                  offset: Offset(0, 2),
-                                                )
-                                              ],
-                                            ),
-                                            child: Obx(
-                                              () => DropdownWebWidget(
-                                                dropdownList: controller
-                                                    .trainingCourseList,
-                                                isValueSelected: controller
-                                                    .isTrainingCourseSelected
-                                                    .value,
-                                                selectedValue: controller
-                                                    .selectedCourseName.value,
-                                                onValueChanged:
-                                                    controller.onValueChanged,
-                                              ),
-                                            ),
-                                          )
-                                        ],
-                                      ),
-                                      Dimens.boxHeight10,
-                                      Row(
-                                        children: [
-                                          CustomRichText(
-                                              title: "Training Agency: "),
-                                          Dimens.boxWidth10,
-                                          Container(
-                                            decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(10),
-                                                border: Border.all(
-                                                    color: Color.fromARGB(
-                                                        255, 227, 224, 244),
-                                                    width: 1),
-                                                boxShadow: [
-                                                  BoxShadow(
-                                                    color: Color.fromARGB(
-                                                            255, 236, 234, 234)
-                                                        .withOpacity(0.5),
-                                                    spreadRadius: 2,
-                                                    blurRadius: 5,
-                                                    offset: Offset(0, 2),
-                                                  )
-                                                ]),
-                                            width: (MediaQuery.of(context)
-                                                    .size
-                                                    .width *
-                                                .2),
-                                            height: 30,
-                                            child: Obx(
-                                              () => DropdownWebWidget(
-                                                dropdownList:
-                                                    controller.trainingAgency,
-                                                isValueSelected: controller
-                                                    .isTrainingAgencySelected
-                                                    .value,
-                                                selectedValue: controller
-                                                    .selectedTrainingAgencyName
-                                                    .value,
-                                                onValueChanged:
-                                                    controller.onValueChanged,
-                                              ),
-                                            ),
+                                          TitleAndInfo(
+                                            "Training Course:",
+                                            "Java SpringBoot",
+                                          ),
+                                          Dimens.boxHeight10,
+                                          TitleAndInfo(
+                                            "Training Agency:",
+                                            "Softel Technologies Inc",
+                                          ),
+                                          Dimens.boxHeight10,
+                                          TitleAndInfo(
+                                            "Venu:",
+                                            "Microsoft Teams",
                                           ),
                                         ],
                                       ),
-                                      Dimens.boxHeight10,
-                                      Row(
+                                    ),
+                                    Spacer(),
+                                    Expanded(
+                                      child: Column(
                                         children: [
-                                          CustomRichText(title: "Venue: "),
-                                          Dimens.boxWidth10,
-                                          Container(
-                                            decoration: BoxDecoration(
-                                              boxShadow: [
-                                                BoxShadow(
-                                                  color: Colors.black26,
-                                                  offset: const Offset(
-                                                    5.0,
-                                                    5.0,
-                                                  ),
-                                                  blurRadius: 5.0,
-                                                  spreadRadius: 1.0,
-                                                ),
-                                              ],
-                                              color: ColorValues.whiteColor,
-                                              borderRadius:
-                                                  BorderRadius.circular(5),
-                                            ),
-                                            child: LoginCustomTextfield(
-                                              width: (Get.width * .2),
-                                              keyboardType: TextInputType.text,
-                                              maxLine: 1,
-                                              textController: controller.venue,
-                                              focusNode: controller.venueFocus,
-                                              scrollController:
-                                                  controller.venueScroll,
-                                            ),
+                                          TitleAndInfo(
+                                            "Date of Training:",
+                                            "2024-05-11 10:00",
+                                          ),
+                                          Dimens.boxHeight10,
+                                          TitleAndInfo(
+                                            "Trainer:",
+                                            "Leonard Pope",
+                                          ),
+                                          Dimens.boxHeight10,
+                                          TitleAndInfo(
+                                            "HFE Employee:",
+                                            "Derek Norton",
+                                          ),
+                                          Dimens.boxHeight10,
+                                          TitleAndInfo(
+                                            "Mode:",
+                                            "Online",
                                           ),
                                         ],
                                       ),
-                                      Dimens.boxHeight30,
-                                    ],
-                                  ),
-                                  Spacer(),
-                                  Column(
-                                    crossAxisAlignment: CrossAxisAlignment.end,
-                                    children: [
-                                      Row(
-                                        children: [
-                                          CustomRichText(
-                                              title: 'Date Of Training: '),
-                                          Dimens.boxWidth10,
-                                          _buildDateTimeField_web(
-                                            context,
-                                            controller.dateOfTraining,
-                                          ),
-                                        ],
-                                      ),
-                                      Dimens.boxHeight10,
-                                      Row(
-                                        children: [
-                                          CustomRichText(
-                                              title: 'Trainer Name: '),
-                                          Dimens.boxWidth10,
-                                          Container(
-                                            decoration: BoxDecoration(
-                                              boxShadow: [
-                                                BoxShadow(
-                                                  color: Colors.black26,
-                                                  offset: const Offset(
-                                                    5.0,
-                                                    5.0,
-                                                  ),
-                                                  blurRadius: 5.0,
-                                                  spreadRadius: 1.0,
-                                                ),
-                                              ],
-                                              color: ColorValues.whiteColor,
-                                              borderRadius:
-                                                  BorderRadius.circular(5),
-                                            ),
-                                            child: LoginCustomTextfield(
-                                              width: (Get.width * .2),
-                                              keyboardType: TextInputType.text,
-                                              maxLine: 1,
-                                              textController:
-                                                  controller.trainerName,
-                                              focusNode:
-                                                  controller.trainerFocus,
-                                              scrollController:
-                                                  controller.trainerScroll,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      Dimens.boxHeight10,
-                                      Row(
-                                        children: [
-                                          CustomRichText(
-                                              title: "HFE Employee: "),
-                                          Dimens.boxWidth10,
-                                          Container(
-                                            decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(10),
-                                                border: Border.all(
-                                                    color: Color.fromARGB(
-                                                        255, 227, 224, 244),
-                                                    width: 1),
-                                                boxShadow: [
-                                                  BoxShadow(
-                                                    color: Color.fromARGB(
-                                                            255, 236, 234, 234)
-                                                        .withOpacity(0.5),
-                                                    spreadRadius: 2,
-                                                    blurRadius: 5,
-                                                    offset: Offset(0, 2),
-                                                  )
-                                                ]),
-                                            width: (MediaQuery.of(context)
-                                                    .size
-                                                    .width *
-                                                .2),
-                                            height: 30,
-                                            child: Obx(
-                                              () => DropdownWebWidget(
-                                                dropdownList:
-                                                    controller.employees,
-                                                isValueSelected: controller
-                                                    .isEmployeeSelected.value,
-                                                selectedValue: controller
-                                                    .selectedEmployeeName.value,
-                                                onValueChanged:
-                                                    controller.onValueChanged,
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      Dimens.boxHeight10,
-                                      Row(
-                                        children: [
-                                          CustomRichText(title: "Mode: "),
-                                          Dimens.boxWidth10,
-                                          Container(
-                                            decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(10),
-                                                border: Border.all(
-                                                    color: Color.fromARGB(
-                                                        255, 227, 224, 244),
-                                                    width: 1),
-                                                boxShadow: [
-                                                  BoxShadow(
-                                                    color: Color.fromARGB(
-                                                            255, 236, 234, 234)
-                                                        .withOpacity(0.5),
-                                                    spreadRadius: 2,
-                                                    blurRadius: 5,
-                                                    offset: Offset(0, 2),
-                                                  )
-                                                ]),
-                                            width: (MediaQuery.of(context)
-                                                    .size
-                                                    .width *
-                                                .2),
-                                            height: 30,
-                                            child: Obx(
-                                              () => DropdownWebWidget(
-                                                dropdownList: controller.mode,
-                                                isValueSelected: controller
-                                                    .isModeSelected.value,
-                                                selectedValue: controller
-                                                    .selectedModeName.value,
-                                                onValueChanged:
-                                                    controller.onValueChanged,
-                                              ),
-                                            ),
-                                          )
-                                        ],
-                                      ),
-                                      Dimens.boxHeight30,
-                                    ],
-                                  ),
-                                ],
+                                    ),
+                                  ],
+                                ),
                               ),
+                              Dimens.boxHeight20,
+                              // Row(
+                              //   crossAxisAlignment: CrossAxisAlignment.start,
+                              //   children: [
+                              //     Column(
+                              //       crossAxisAlignment: CrossAxisAlignment.end,
+                              //       children: [
+                              //         Row(
+                              //           children: [
+                              //             CustomRichText(
+                              //                 title: "Training Course: "),
+                              //             Dimens.boxWidth10,
+                              //             Container(
+                              //               width: (MediaQuery.of(context)
+                              //                       .size
+                              //                       .width *
+                              //                   .2),
+                              //               height: 30,
+                              //               decoration: BoxDecoration(
+                              //                 borderRadius:
+                              //                     BorderRadius.circular(10),
+                              //                 border: Border.all(
+                              //                   color: Color.fromARGB(
+                              //                       255, 227, 224, 244),
+                              //                   width: 1,
+                              //                 ),
+                              //                 boxShadow: [
+                              //                   BoxShadow(
+                              //                     color: Color.fromARGB(
+                              //                             255, 236, 234, 234)
+                              //                         .withOpacity(0.5),
+                              //                     spreadRadius: 2,
+                              //                     blurRadius: 5,
+                              //                     offset: Offset(0, 2),
+                              //                   )
+                              //                 ],
+                              //               ),
+                              //               child: Obx(
+                              //                 () => DropdownWebWidget(
+                              //                   dropdownList: controller
+                              //                       .trainingCourseList,
+                              //                   isValueSelected: controller
+                              //                       .isTrainingCourseSelected
+                              //                       .value,
+                              //                   selectedValue: controller
+                              //                       .selectedCourseName.value,
+                              //                   onValueChanged:
+                              //                       controller.onValueChanged,
+                              //                 ),
+                              //               ),
+                              //             )
+                              //           ],
+                              //         ),
+                              //         Dimens.boxHeight10,
+                              //         Row(
+                              //           children: [
+                              //             CustomRichText(
+                              //                 title: "Training Agency: "),
+                              //             Dimens.boxWidth10,
+                              //             Container(
+                              //               decoration: BoxDecoration(
+                              //                   borderRadius:
+                              //                       BorderRadius.circular(10),
+                              //                   border: Border.all(
+                              //                       color: Color.fromARGB(
+                              //                           255, 227, 224, 244),
+                              //                       width: 1),
+                              //                   boxShadow: [
+                              //                     BoxShadow(
+                              //                       color: Color.fromARGB(
+                              //                               255, 236, 234, 234)
+                              //                           .withOpacity(0.5),
+                              //                       spreadRadius: 2,
+                              //                       blurRadius: 5,
+                              //                       offset: Offset(0, 2),
+                              //                     )
+                              //                   ]),
+                              //               width: (MediaQuery.of(context)
+                              //                       .size
+                              //                       .width *
+                              //                   .2),
+                              //               height: 30,
+                              //               child: Obx(
+                              //                 () => DropdownWebWidget(
+                              //                   dropdownList:
+                              //                       controller.trainingAgency,
+                              //                   isValueSelected: controller
+                              //                       .isTrainingAgencySelected
+                              //                       .value,
+                              //                   selectedValue: controller
+                              //                       .selectedTrainingAgencyName
+                              //                       .value,
+                              //                   onValueChanged:
+                              //                       controller.onValueChanged,
+                              //                 ),
+                              //               ),
+                              //             ),
+                              //           ],
+                              //         ),
+                              //         Dimens.boxHeight10,
+                              //         Row(
+                              //           children: [
+                              //             CustomRichText(title: "Venue: "),
+                              //             Dimens.boxWidth10,
+                              //             Container(
+                              //               decoration: BoxDecoration(
+                              //                 boxShadow: [
+                              //                   BoxShadow(
+                              //                     color: Colors.black26,
+                              //                     offset: const Offset(
+                              //                       5.0,
+                              //                       5.0,
+                              //                     ),
+                              //                     blurRadius: 5.0,
+                              //                     spreadRadius: 1.0,
+                              //                   ),
+                              //                 ],
+                              //                 color: ColorValues.whiteColor,
+                              //                 borderRadius:
+                              //                     BorderRadius.circular(5),
+                              //               ),
+                              //               child: LoginCustomTextfield(
+                              //                 width: (Get.width * .2),
+                              //                 keyboardType: TextInputType.text,
+                              //                 maxLine: 1,
+                              //                 textController: controller.venue,
+                              //                 focusNode: controller.venueFocus,
+                              //                 scrollController:
+                              //                     controller.venueScroll,
+                              //               ),
+                              //             ),
+                              //           ],
+                              //         ),
+                              //         Dimens.boxHeight30,
+                              //       ],
+                              //     ),
+                              //     Spacer(),
+                              //     Column(
+                              //       crossAxisAlignment: CrossAxisAlignment.end,
+                              //       children: [
+                              //         Row(
+                              //           children: [
+                              //             CustomRichText(
+                              //                 title: 'Date Of Training: '),
+                              //             Dimens.boxWidth10,
+                              //             _buildDateTimeField_web(
+                              //               context,
+                              //               controller.dateOfTraining,
+                              //             ),
+                              //           ],
+                              //         ),
+                              //         Dimens.boxHeight10,
+                              //         Row(
+                              //           children: [
+                              //             CustomRichText(
+                              //                 title: 'Trainer Name: '),
+                              //             Dimens.boxWidth10,
+                              //             Container(
+                              //               decoration: BoxDecoration(
+                              //                 boxShadow: [
+                              //                   BoxShadow(
+                              //                     color: Colors.black26,
+                              //                     offset: const Offset(
+                              //                       5.0,
+                              //                       5.0,
+                              //                     ),
+                              //                     blurRadius: 5.0,
+                              //                     spreadRadius: 1.0,
+                              //                   ),
+                              //                 ],
+                              //                 color: ColorValues.whiteColor,
+                              //                 borderRadius:
+                              //                     BorderRadius.circular(5),
+                              //               ),
+                              //               child: LoginCustomTextfield(
+                              //                 width: (Get.width * .2),
+                              //                 keyboardType: TextInputType.text,
+                              //                 maxLine: 1,
+                              //                 textController:
+                              //                     controller.trainerName,
+                              //                 focusNode:
+                              //                     controller.trainerFocus,
+                              //                 scrollController:
+                              //                     controller.trainerScroll,
+                              //               ),
+                              //             ),
+                              //           ],
+                              //         ),
+                              //         Dimens.boxHeight10,
+                              //         Row(
+                              //           children: [
+                              //             CustomRichText(
+                              //                 title: "HFE Employee: "),
+                              //             Dimens.boxWidth10,
+                              //             Container(
+                              //               decoration: BoxDecoration(
+                              //                   borderRadius:
+                              //                       BorderRadius.circular(10),
+                              //                   border: Border.all(
+                              //                       color: Color.fromARGB(
+                              //                           255, 227, 224, 244),
+                              //                       width: 1),
+                              //                   boxShadow: [
+                              //                     BoxShadow(
+                              //                       color: Color.fromARGB(
+                              //                               255, 236, 234, 234)
+                              //                           .withOpacity(0.5),
+                              //                       spreadRadius: 2,
+                              //                       blurRadius: 5,
+                              //                       offset: Offset(0, 2),
+                              //                     )
+                              //                   ]),
+                              //               width: (MediaQuery.of(context)
+                              //                       .size
+                              //                       .width *
+                              //                   .2),
+                              //               height: 30,
+                              //               child: Obx(
+                              //                 () => DropdownWebWidget(
+                              //                   dropdownList:
+                              //                       controller.employees,
+                              //                   isValueSelected: controller
+                              //                       .isEmployeeSelected.value,
+                              //                   selectedValue: controller
+                              //                       .selectedEmployeeName.value,
+                              //                   onValueChanged:
+                              //                       controller.onValueChanged,
+                              //                 ),
+                              //               ),
+                              //             ),
+                              //           ],
+                              //         ),
+                              //         Dimens.boxHeight10,
+                              //         Row(
+                              //           children: [
+                              //             CustomRichText(title: "Mode: "),
+                              //             Dimens.boxWidth10,
+                              //             Container(
+                              //               decoration: BoxDecoration(
+                              //                   borderRadius:
+                              //                       BorderRadius.circular(10),
+                              //                   border: Border.all(
+                              //                       color: Color.fromARGB(
+                              //                           255, 227, 224, 244),
+                              //                       width: 1),
+                              //                   boxShadow: [
+                              //                     BoxShadow(
+                              //                       color: Color.fromARGB(
+                              //                               255, 236, 234, 234)
+                              //                           .withOpacity(0.5),
+                              //                       spreadRadius: 2,
+                              //                       blurRadius: 5,
+                              //                       offset: Offset(0, 2),
+                              //                     )
+                              //                   ]),
+                              //               width: (MediaQuery.of(context)
+                              //                       .size
+                              //                       .width *
+                              //                   .2),
+                              //               height: 30,
+                              //               child: Obx(
+                              //                 () => DropdownWebWidget(
+                              //                   dropdownList: controller.mode,
+                              //                   isValueSelected: controller
+                              //                       .isModeSelected.value,
+                              //                   selectedValue: controller
+                              //                       .selectedModeName.value,
+                              //                   onValueChanged:
+                              //                       controller.onValueChanged,
+                              //                 ),
+                              //               ),
+                              //             )
+                              //           ],
+                              //         ),
+                              //         Dimens.boxHeight30,
+                              //       ],
+                              //     ),
+                              //   ],
+                              // ),
+
                               Center(
                                 child: Container(
                                   height:
@@ -434,12 +486,6 @@ class ExecuteCourseWeb extends GetView<ExecuteCourseController> {
                                         ),
                                         columns: [
                                           DataColumn2(
-                                            size: ColumnSize.S,
-                                            label: Text(
-                                              "Employee ID",
-                                            ),
-                                          ),
-                                          DataColumn2(
                                             size: ColumnSize.L,
                                             label: Text(
                                               "Employee Name",
@@ -449,6 +495,12 @@ class ExecuteCourseWeb extends GetView<ExecuteCourseController> {
                                             size: ColumnSize.M,
                                             label: Text(
                                               "Contact No",
+                                            ),
+                                          ),
+                                          DataColumn2(
+                                            size: ColumnSize.M,
+                                            label: Text(
+                                              "Email",
                                             ),
                                           ),
                                           DataColumn2(
@@ -481,17 +533,17 @@ class ExecuteCourseWeb extends GetView<ExecuteCourseController> {
                                               cells: [
                                                 DataCell(
                                                   Text(
-                                                    '${employeeNameDetails?.id ?? ''}',
-                                                  ),
-                                                ),
-                                                DataCell(
-                                                  Text(
                                                     '${employeeNameDetails?.name ?? ''}',
                                                   ),
                                                 ),
                                                 DataCell(
                                                   Text(
                                                     '${employeeNameDetails?.mobileNumber ?? ''}',
+                                                  ),
+                                                ),
+                                                DataCell(
+                                                  Text(
+                                                    '${employeeNameDetails?.login_id ?? ''}',
                                                   ),
                                                 ),
                                                 DataCell(
@@ -534,10 +586,7 @@ class ExecuteCourseWeb extends GetView<ExecuteCourseController> {
                               Dimens.boxHeight15,
                               Center(
                                 child: Container(
-                                  height:
-                                      ((controller.externalEmployees.length) *
-                                              50) +
-                                          115,
+                                  height: 60,
                                   width:
                                       MediaQuery.of(context).size.width / 1.2,
                                   decoration: BoxDecoration(
@@ -547,130 +596,123 @@ class ExecuteCourseWeb extends GetView<ExecuteCourseController> {
                                   constraints: BoxConstraints(
                                     maxWidth: 1400,
                                   ),
-                                  child: Column(
-                                    children: [
-                                      CustomAppBar(
-                                        title: 'External People'.tr,
+                                  child: CustomAppBar(
+                                    title: 'External People'.tr,
+                                  ),
+                                ),
+                              ),
+                              Center(
+                                child: Wrap(
+                                  children: [
+                                    Container(
+                                      height:
+                                          (controller.externalEmployees.length *
+                                                  50) +
+                                              55,
+                                      width: MediaQuery.of(context).size.width /
+                                          1.2,
+                                      constraints: BoxConstraints(
+                                        maxWidth: 1400,
+                                        minHeight: 60,
                                       ),
-                                      Wrap(
-                                        children: [
-                                          Container(
-                                            height: (controller
-                                                        .externalEmployees
-                                                        .length *
-                                                    50) +
-                                                55,
-                                            width: MediaQuery.of(context)
-                                                    .size
-                                                    .width *
-                                                2,
-                                            constraints: BoxConstraints(
-                                              minHeight: 60,
+                                      child: DataTable2(
+                                        border: TableBorder.all(
+                                          color: Colors.grey.withOpacity(0.3),
+                                        ),
+                                        columns: [
+                                          DataColumn2(
+                                            size: ColumnSize.L,
+                                            label: Text(
+                                              "Name",
                                             ),
-                                            child: DataTable2(
-                                              border: TableBorder.all(
-                                                color: Colors.grey
-                                                    .withOpacity(0.3),
-                                              ),
-                                              columns: [
-                                                DataColumn2(
-                                                  size: ColumnSize.L,
-                                                  label: Text(
-                                                    "Name",
-                                                  ),
-                                                ),
-                                                DataColumn2(
-                                                  size: ColumnSize.M,
-                                                  label: Text(
-                                                    "Email",
-                                                  ),
-                                                ),
-                                                DataColumn2(
-                                                  size: ColumnSize.M,
-                                                  label: Text(
-                                                    "Number",
-                                                  ),
-                                                ),
-                                                DataColumn2(
-                                                  size: ColumnSize.S,
-                                                  label: Text(
-                                                    "RSVP",
-                                                  ),
-                                                ),
-                                                DataColumn2(
-                                                  size: ColumnSize.S,
-                                                  label: Text(
-                                                    "Attended",
-                                                  ),
-                                                ),
-                                                DataColumn2(
-                                                  size: ColumnSize.L,
-                                                  label: Text(
-                                                    "Note",
-                                                  ),
-                                                ),
-                                              ],
-                                              rows: List<DataRow>.generate(
-                                                controller
-                                                    .externalEmployees.length,
-                                                (index) {
-                                                  var employee = controller
-                                                      .externalEmployees[index];
-                                                  return DataRow(
-                                                    cells: [
-                                                      DataCell(
-                                                        Text(
-                                                          '${employee.employeeName ?? ''}',
-                                                        ),
-                                                      ),
-                                                      DataCell(
-                                                        Text(
-                                                          '${employee.employeeEmail ?? ''}',
-                                                        ),
-                                                      ),
-                                                      DataCell(
-                                                        Text(
-                                                          '${employee.employeeNumber ?? ''}',
-                                                        ),
-                                                      ),
-                                                      DataCell(
-                                                        Checkbox(
-                                                          value: false,
-                                                          onChanged: (value) {
-                                                            value == true
-                                                                ? false
-                                                                : true;
-                                                          },
-                                                        ),
-                                                      ),
-                                                      DataCell(
-                                                        Checkbox(
-                                                          value: false,
-                                                          onChanged: (value) {
-                                                            value == true
-                                                                ? false
-                                                                : true;
-                                                          },
-                                                        ),
-                                                      ),
-                                                      DataCell(
-                                                        _buildTextField_web(
-                                                          context,
-                                                          controller
-                                                                  .noteListExternal[
-                                                              index],
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  );
-                                                },
-                                              ),
+                                          ),
+                                          DataColumn2(
+                                            size: ColumnSize.M,
+                                            label: Text(
+                                              "Email",
+                                            ),
+                                          ),
+                                          DataColumn2(
+                                            size: ColumnSize.M,
+                                            label: Text(
+                                              "Number",
+                                            ),
+                                          ),
+                                          DataColumn2(
+                                            size: ColumnSize.S,
+                                            label: Text(
+                                              "RSVP",
+                                            ),
+                                          ),
+                                          DataColumn2(
+                                            size: ColumnSize.S,
+                                            label: Text(
+                                              "Attended",
+                                            ),
+                                          ),
+                                          DataColumn2(
+                                            size: ColumnSize.L,
+                                            label: Text(
+                                              "Note",
                                             ),
                                           ),
                                         ],
+                                        rows: List<DataRow>.generate(
+                                          controller.externalEmployees.length,
+                                          (index) {
+                                            var employee = controller
+                                                .externalEmployees[index];
+                                            return DataRow(
+                                              cells: [
+                                                DataCell(
+                                                  Text(
+                                                    '${employee.employeeName ?? ''}',
+                                                  ),
+                                                ),
+                                                DataCell(
+                                                  Text(
+                                                    '${employee.employeeEmail ?? ''}',
+                                                  ),
+                                                ),
+                                                DataCell(
+                                                  Text(
+                                                    '${employee.employeeNumber ?? ''}',
+                                                  ),
+                                                ),
+                                                DataCell(
+                                                  Checkbox(
+                                                    value: false,
+                                                    onChanged: (value) {
+                                                      value == true
+                                                          ? false
+                                                          : true;
+                                                    },
+                                                  ),
+                                                ),
+                                                DataCell(
+                                                  Checkbox(
+                                                    value: false,
+                                                    onChanged: (value) {
+                                                      value == true
+                                                          ? false
+                                                          : true;
+                                                    },
+                                                  ),
+                                                ),
+                                                DataCell(
+                                                  _buildTextField_web(
+                                                    context,
+                                                    controller.noteListExternal[
+                                                        index],
+                                                  ),
+                                                ),
+                                              ],
+                                            );
+                                          },
+                                        ),
                                       ),
-                                    ],
-                                  ),
+                                    ),
+                                  ],
                                 ),
                               ),
                               Center(
@@ -949,6 +991,35 @@ class ExecuteCourseWeb extends GetView<ExecuteCourseController> {
               ),
               textAlignVertical: TextAlignVertical.top,
             ),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class TitleAndInfo extends StatelessWidget {
+  final String title;
+  final String info;
+
+  TitleAndInfo(this.title, this.info);
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Expanded(
+          child: Text(
+            title,
+            style: Styles.black17,
+          ),
+        ),
+        Expanded(
+          child: Text(
+            info,
+            style: Styles.blue17,
           ),
         ),
       ],

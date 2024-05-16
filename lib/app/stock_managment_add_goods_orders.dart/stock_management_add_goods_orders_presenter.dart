@@ -129,7 +129,7 @@ class StockManagementAddGoodsOrdersPresenter {
 
   Future<List<GetRODetailsByIDModel?>?> getRoDetailsByID({
     bool? isLoading,
-    required int requestID,
+    required List<int> requestID,
     required int facilityId
   }) async {
     return stockManagementAddGoodsOrdersUsecase.getRoDetailsByID(

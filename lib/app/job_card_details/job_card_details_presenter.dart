@@ -1,4 +1,5 @@
 import 'package:cmms/domain/models/history_model.dart';
+import 'package:cmms/domain/models/mrs_list_by_jobId.dart';
 import 'package:cmms/domain/usecases/job_card_details_usecase.dart';
 
 import '../../domain/models/employee_model.dart';
@@ -54,6 +55,26 @@ class JobCardDetailsPresenter {
         jobCardId: jobCardId,
         isLoading: isLoading,
       );
+  Future<bool> transferItem({
+    transferItemJsonString,
+    required bool isLoading,
+  }) async {
+    return jobCardDetailsUsecase.transferItem(
+      transferItemJsonString: transferItemJsonString,
+      isLoading: isLoading,
+    );
+  }
+
+  Future<List<MRSListByJobIdModel>?> getMrsListByModule(
+    jobId,
+    int facilityId,
+    isLoading,
+  ) async =>
+      await jobCardDetailsUsecase.getMrsListByModule(
+        jobId: jobId,
+        facilityId: facilityId,
+        isLoading: isLoading,
+      );
 
   ///
   Future<PermitDetailsModel?> getPermitDetails({
@@ -63,7 +84,7 @@ class JobCardDetailsPresenter {
   }) async =>
       await jobCardDetailsUsecase.getPermitDetails(
         permitId: permitId,
-        facilityId:facilityId,
+        facilityId: facilityId,
         isLoading: isLoading,
       );
 
@@ -103,7 +124,7 @@ class JobCardDetailsPresenter {
       await jobCardDetailsUsecase.getJobCardHistory(
         moduleType: moduleType,
         jobCardId: jobCardId,
-        facilityId:facilityId,
+        facilityId: facilityId,
         isLoading: isLoading,
       );
 

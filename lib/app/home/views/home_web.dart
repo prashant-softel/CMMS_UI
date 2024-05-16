@@ -41,10 +41,8 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb> {
                     child: DefaultTabController(
                       length: 5,
                       child: Column(children: [
-                        HeaderWidgetAllDash(),
-                        // HeaderWidget(),
                         Container(
-                          height: 45,
+                          height: 73,
                           decoration: BoxDecoration(
                             border: Border.all(
                               color: Color.fromARGB(255, 227, 224, 224),
@@ -70,6 +68,76 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb> {
                                 "DASHBOARD",
                                 style: Styles.greyLight14,
                               ),
+                              Spacer(),
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                    left: 50, top: 10, bottom: 10),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    CustomRichText(title: 'Select Plant'),
+                                    Dimens.boxWidth10,
+                                    Obx(
+                                      () => SizedBox(
+                                        width:
+                                            MediaQuery.of(context).size.width /
+                                                3,
+                                        child: CustomMultiSelectDialogField(
+                                          title: 'Select Facility',
+                                          initialValue:
+                                              controller.selectedFacilityIdList,
+                                          items: controller.facilityList
+                                              .map(
+                                                (facility) => MultiSelectItem(
+                                                  facility?.id,
+                                                  facility?.name ?? '',
+                                                ),
+                                              )
+                                              .toList(),
+                                          onConfirm: (selectedOptionsList) {
+                                            controller.selectedMultiFacility(
+                                                selectedOptionsList);
+                                            print(
+                                                'Equipment list ${controller.selectedFacilityIdList}');
+                                          },
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Spacer(),
+                              Container(
+                                margin: EdgeInsets.only(
+                                    left: 20, top: 10, bottom: 10),
+                                child: Row(
+                                  children: [
+                                    Row(
+                                      children: [
+                                        CustomRichText(title: 'Date Range'),
+                                        Dimens.boxWidth10,
+                                        CustomTextFieldForStock(
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width /
+                                              5,
+                                          numberTextField: true,
+                                          onTap: () {
+                                            controller
+                                                    .openFromDateToStartDatePicker =
+                                                !controller
+                                                    .openFromDateToStartDatePicker;
+                                            controller.update(['dashboard']);
+                                          },
+                                          hintText:
+                                              '${controller.formattedFromdate.toString()} To ${controller.formattedTodate.toString()}',
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Spacer(),
                             ],
                           ),
                         ),
@@ -103,58 +171,6 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb> {
                                 ),
                               ],
                             ),
-                          ),
-                        ),
-
-                        Container(
-                          margin: EdgeInsets.only(left: 20, right: 20, top: 10),
-                          child: Row(
-                            children: [
-                              Obx(
-                                () => SizedBox(
-                                  width: MediaQuery.of(context).size.width / 3,
-                                  child: CustomMultiSelectDialogField(
-                                    title: 'Select Facility',
-                                    initialValue:
-                                        controller.selectedFacilityIdList,
-                                    items: controller.facilityList
-                                        .map(
-                                          (facility) => MultiSelectItem(
-                                            facility?.id,
-                                            facility?.name ?? '',
-                                          ),
-                                        )
-                                        .toList(),
-                                    onConfirm: (selectedOptionsList) {
-                                      controller.selectedMultiFacility(
-                                          selectedOptionsList);
-                                      print(
-                                          'Equipment list ${controller.selectedFacilityIdList}');
-                                    },
-                                  ),
-                                ),
-                              ),
-                              Spacer(),
-                              Row(
-                                children: [
-                                  CustomRichText(title: 'Date Range'),
-                                  Dimens.boxWidth10,
-                                  CustomTextFieldForStock(
-                                    width:
-                                        MediaQuery.of(context).size.width / 5,
-                                    numberTextField: true,
-                                    onTap: () {
-                                      controller.openFromDateToStartDatePicker =
-                                          !controller
-                                              .openFromDateToStartDatePicker;
-                                      controller.update(['dashboard']);
-                                    },
-                                    hintText:
-                                        '${controller.formattedFromdate.toString()} To ${controller.formattedTodate.toString()}',
-                                  ),
-                                ],
-                              ),
-                            ],
                           ),
                         ),
 
@@ -579,11 +595,11 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb> {
                                               _gridList(
                                                   tittle: "Low stock items",
                                                   percent:
-                                                      '${controller.dashboardBmList.value?.cmDashboadDetails?.low_stock_items}%'),
+                                                      '${controller.dashboardBmList.value?.cmDashboadDetails?.low_stock_items}'),
                                               _gridList(
                                                   tittle: "PO Items Awaited",
                                                   percent:
-                                                      '${controller.dashboardBmList.value?.cmDashboadDetails?.po_items_awaited}%'),
+                                                      '${controller.dashboardBmList.value?.cmDashboadDetails?.po_items_awaited}'),
                                             ],
                                           ),
                                         ),
@@ -1211,7 +1227,7 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb> {
                                               _gridList(
                                                   tittle: "Low stock items",
                                                   percent:
-                                                      '${controller.dashboardPmList.value?.cmDashboadDetails?.low_stock_items}%'),
+                                                      '${controller.dashboardPmList.value?.cmDashboadDetails?.low_stock_items}'),
                                               _gridList(
                                                   tittle: "PO Items Awaited",
                                                   percent:
@@ -1851,7 +1867,7 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb> {
                                               _gridList(
                                                 tittle: "PO Items Awaited",
                                                 percent:
-                                                    '${controller.dashboardMcList.value?.cmDashboadDetails?.po_items_awaited}%',
+                                                    '${controller.dashboardMcList.value?.cmDashboadDetails?.po_items_awaited}',
                                               ),
                                             ],
                                           ),
@@ -2483,11 +2499,11 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb> {
                                               _gridList(
                                                   tittle: "Low stock items",
                                                   percent:
-                                                      '${controller.dashboardIrList.value?.cmDashboadDetails?.low_stock_items}%'),
+                                                      '${controller.dashboardIrList.value?.cmDashboadDetails?.low_stock_items}'),
                                               _gridList(
                                                   tittle: "PO Items Awaited",
                                                   percent:
-                                                      '${controller.dashboardIrList.value?.cmDashboadDetails?.po_items_awaited}%'),
+                                                      '${controller.dashboardIrList.value?.cmDashboadDetails?.po_items_awaited}'),
                                             ],
                                           ),
                                         ),
@@ -3117,11 +3133,11 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb> {
                                               _gridList(
                                                   tittle: "Low stock items",
                                                   percent:
-                                                      '${controller.dashboardSmList.value?.cmDashboadDetails?.low_stock_items}%'),
+                                                      '${controller.dashboardSmList.value?.cmDashboadDetails?.low_stock_items}'),
                                               _gridList(
                                                   tittle: "PO Items Awaited",
                                                   percent:
-                                                      '${controller.dashboardSmList.value?.cmDashboadDetails?.po_items_awaited}%'),
+                                                      '${controller.dashboardSmList.value?.cmDashboadDetails?.po_items_awaited}'),
                                             ],
                                           ),
                                         ),
@@ -3342,8 +3358,8 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb> {
               ),
               if (controller.openFromDateToStartDatePicker)
                 Positioned(
-                  right: 40,
-                  top: 220,
+                  right: 80,
+                  top: 55,
                   child: DatePickerWidget(
                     selectionMode: DateRangePickerSelectionMode.range,
                     monthCellStyle: DateRangePickerMonthCellStyle(

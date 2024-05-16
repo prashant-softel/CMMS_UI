@@ -271,7 +271,11 @@ class _TrainingCourseWebState extends State<TrainingCourseWeb> {
                                                                     message:
                                                                         'View',
                                                                     onPress:
-                                                                        () {},
+                                                                        () {
+                                                                      Get.toNamed(
+                                                                          Routes
+                                                                              .viewCourse);
+                                                                    },
                                                                   ),
                                                                   TableActionButton(
                                                                     color: ColorValues
@@ -281,7 +285,11 @@ class _TrainingCourseWebState extends State<TrainingCourseWeb> {
                                                                     message:
                                                                         'Edit',
                                                                     onPress:
-                                                                        () {},
+                                                                        () {
+                                                                      Get.toNamed(
+                                                                          Routes
+                                                                              .addCourse);
+                                                                    },
                                                                   ),
                                                                   TableActionButton(
                                                                     color: Colors

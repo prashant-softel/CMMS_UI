@@ -26,12 +26,16 @@ class AuditTaskApprovedRejectDialog extends GetView {
           contentPadding: EdgeInsets.zero,
           title: Text(
             type == 1
-                ? "Audit Plan Approve"
+                ? "Skip Audit Plan Approve"
                 : type == 2
-                    ? 'Audit Plan Reject'
+                    ? 'Skip Audit Plan Reject'
                     : type == 3
                         ? "Audit Plan Skip"
-                        : "Audit Plan Close",
+                        : type == 4
+                            ? "Audit Plan Close"
+                            : type == 5
+                                ? "Audit Plan Approve"
+                                : "Audit Plan Reject",
             textAlign: TextAlign.center,
             // style: TextStyle(color: Colors.green),
           ),
@@ -100,8 +104,14 @@ class AuditTaskApprovedRejectDialog extends GetView {
                           : type == 3
                               ? controller.auditTaskSkipButton(
                                   id: controller.auditTaskId.value)
-                              : controller.auditTaskCloseButton(
-                                  id: controller.auditTaskId.value);
+                              : type == 4
+                                  ? controller.auditTaskCloseButton(
+                                      id: controller.auditTaskId.value)
+                                  : type == 5
+                                      ? controller.auditTaskCloseApproveButton(
+                                          id: controller.auditTaskId.value)
+                                      : controller.auditTaskCloseRejectButton(
+                                          id: controller.auditTaskId.value);
 
                   // // print('Goods order id:$id');
                   Get.back();
@@ -113,7 +123,11 @@ class AuditTaskApprovedRejectDialog extends GetView {
                           ? 'Reject Audit Plan'
                           : type == 3
                               ? "Skip Audit Plan"
-                              : "Close Audit Plan",
+                              : type == 4
+                                  ? "Close Audit Plan"
+                                  : type == 5
+                                      ? "Approve Audit Plan"
+                                      : "Reject Audit Plan",
                 ),
               ),
             ]),

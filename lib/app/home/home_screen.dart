@@ -235,7 +235,7 @@ class CustomTextField extends StatelessWidget {
 }
 
 class CustomTextFieldForStock extends StatelessWidget {
-  const CustomTextFieldForStock({
+  CustomTextFieldForStock({
     Key? key,
     this.label,
     this.maxLine = 1,
@@ -244,19 +244,24 @@ class CustomTextFieldForStock extends StatelessWidget {
     this.readOnly = false,
     this.onTap,
     this.suffixIcon,
+    this.errorController,
     this.hintText,
     this.decoration,
+    this.onChanged,
     this.alignment,
     this.numberTextField = false,
   }) : super(key: key);
 
   final String? label;
+  String? errorController;
+
   final int? maxLine;
   final double? width;
   final bool readOnly;
   final Icon? suffixIcon;
   final String? hintText;
   final Function()? onTap;
+  Function(dynamic value)? onChanged;
   final InputDecoration? decoration;
   final Alignment? alignment;
   final bool numberTextField;
@@ -276,11 +281,27 @@ class CustomTextFieldForStock extends StatelessWidget {
           Expanded(
             child: Container(
               child: TextFormField(
+                onChanged: onChanged,
                 onTap: onTap,
                 readOnly: readOnly,
                 controller: textController,
                 maxLines: maxLine,
                 decoration: InputDecoration(
+                  errorBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(5),
+                      borderSide: BorderSide(
+                        color: ColorValues.greyBorderColor,
+                      )),
+                  border: InputBorder.none,
+                  focusedErrorBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(5),
+                      borderSide: BorderSide(
+                        color: ColorValues.greyBorderColor,
+                      )),
+                  errorStyle: TextStyle(
+                    height: 0,
+                  ),
+                  errorText: errorController,
                   suffixIcon: Icon(Icons.date_range),
                   contentPadding:
                       EdgeInsets.symmetric(vertical: 8.0, horizontal: 5),
