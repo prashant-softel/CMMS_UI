@@ -881,7 +881,6 @@ class AddIncidentReportController extends GetxController {
         ]);
       });
 
-      
       ///proposed action plan
       rowItem.value = [];
       _incidentReportDetails.proposed_action_plan?.forEach((element) {
@@ -1097,7 +1096,7 @@ class AddIncidentReportController extends GetxController {
     for (var facilityType_list in _irisktypeList) {
       incidentrisktypeList.add(facilityType_list);
     }
-    }
+  }
 
   void getAssetRestorationActionTakenByList() async {
     assetRestorationActionTakenByList.value = <EmployeeListModel>[];

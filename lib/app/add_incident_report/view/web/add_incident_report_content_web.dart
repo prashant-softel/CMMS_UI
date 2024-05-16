@@ -166,740 +166,725 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.start,
                                               children: [
-                                                IgnorePointer(
-                                                  ignoring: controller
-                                                              .incidentReportDetailsModel
-                                                              .value
-                                                              ?.status ==
-                                                          183
-                                                      ? true
-                                                      : false,
-                                                  child: Column(
-                                                    children: [
-                                                      Row(
+                                                Column(
+                                                  children: [
+                                                    IgnorePointer(
+                                                      ignoring: controller
+                                                                  .incidentReportDetailsModel
+                                                                  .value
+                                                                  ?.status ==
+                                                              183
+                                                          ? true
+                                                          : false,
+                                                      child: Column(
                                                         children: [
-                                                          Container(
-                                                            margin:
-                                                                EdgeInsets.only(
-                                                                    left: 50),
-                                                            child: CustomRichText(
-                                                                title:
-                                                                    'Incident Title: '),
-                                                          ),
-                                                          Expanded(
-                                                            child:
-                                                                _buildIncidentReportTitleTextField_web(
-                                                                    context),
-                                                          ),
-                                                        ],
-                                                      ),
-
-                                                      Dimens.boxHeight10,
-                                                      Row(
-                                                        children: [
-                                                          CustomRichText(
-                                                              title:
-                                                                  'Incident Description: '),
-                                                          Expanded(
-                                                            child:
-                                                                _buildIncidentReportDescriptionField_web(
-                                                                    context),
-                                                          ),
-                                                        ],
-                                                      ),
-
-                                                      Row(
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
-                                                        children: [
-                                                          Column(
-                                                            crossAxisAlignment:
-                                                                CrossAxisAlignment
-                                                                    .end,
+                                                          Row(
                                                             children: [
-                                                              Dimens
-                                                                  .boxHeight10,
-                                                              Row(
-                                                                children: [
-                                                                  CustomRichText(
-                                                                      title:
-                                                                          'Type of Incident: '),
-                                                                  Dimens
-                                                                      .boxWidth10,
-                                                                  SizedBox(
-                                                                    width: MediaQuery.of(context)
-                                                                            .size
-                                                                            .width /
-                                                                        5,
-                                                                    child: Obx(
-                                                                      () =>
-                                                                          DropdownWebWidget(
-                                                                        dropdownList:
-                                                                            controller.incidentrisktypeList,
-                                                                        isValueSelected: controller
-                                                                            .isRiskTypeListSelected
-                                                                            .value,
-                                                                        selectedValue: controller
-                                                                            .selectedRiskTypeList
-                                                                            .value,
-                                                                        onValueChanged:
-                                                                            controller.onValueChanged,
-                                                                      ),
-                                                                    ),
-                                                                  ),
-                                                                ],
+                                                              Container(
+                                                                margin: EdgeInsets
+                                                                    .only(
+                                                                        left:
+                                                                            50),
+                                                                child: CustomRichText(
+                                                                    title:
+                                                                        'Incident Title: '),
                                                               ),
-                                                              Dimens.boxHeight5,
-                                                              Row(
-                                                                children: [
-                                                                  CustomRichText(
-                                                                      title:
-                                                                          'Incident date & Time: '),
-                                                                  Dimens
-                                                                      .boxWidth10,
-                                                                  SizedBox(
-                                                                    width: MediaQuery.of(context)
-                                                                            .size
-                                                                            .width /
-                                                                        5,
-                                                                    child:
-                                                                        _buildIncidentDateTimeField_web(
-                                                                      context,
-                                                                    ),
-                                                                  ),
-                                                                ],
-                                                              ),
-                                                              // Dimens.boxHeight5,
-                                                              // Row(
-                                                              //   children: [
-                                                              //     SizedBox(
-                                                              //       width: 140,
-                                                              //       child: CustomRichText(
-                                                              //           title:
-                                                              //               'Incident Investigation Team: '),
-                                                              //     ),
-                                                              //     Dimens.boxWidth10,
-                                                              //     SizedBox(
-                                                              //       width: MediaQuery.of(
-                                                              //                   context)
-                                                              //               .size
-                                                              //               .width /
-                                                              //           5,
-                                                              //       child: Obx(
-                                                              //         () =>
-                                                              //             DropdownWebWidget(
-                                                              //           dropdownList:
-                                                              //               controller
-                                                              //                   .incidentInvestigationDoneByList,
-                                                              //           isValueSelected:
-                                                              //               controller
-                                                              //                   .isincidentInvestigationDoneByListSelected
-                                                              //                   .value,
-                                                              //           selectedValue:
-                                                              //               controller
-                                                              //                   .selectedIncidentInvestigationDoneByList
-                                                              //                   .value,
-                                                              //           onValueChanged:
-                                                              //               controller
-                                                              //                   .onValueChanged,
-                                                              //         ),
-                                                              //       ),
-                                                              //     ),
-                                                              //   ],
-                                                              // ),
-                                                              Dimens.boxHeight5,
-                                                              Row(
-                                                                children: [
-                                                                  SizedBox(
-                                                                    width: 140,
-                                                                    child: CustomRichText(
-                                                                        title:
-                                                                            'Asset Restoration Action Taken By: '),
-                                                                  ),
-                                                                  Dimens
-                                                                      .boxWidth10,
-                                                                  SizedBox(
-                                                                    width: MediaQuery.of(context)
-                                                                            .size
-                                                                            .width /
-                                                                        5,
-                                                                    child: Obx(
-                                                                      () =>
-                                                                          DropdownWebWidget(
-                                                                        dropdownList:
-                                                                            controller.assetRestorationActionTakenByList,
-                                                                        isValueSelected: controller
-                                                                            .isAssetRestorationActionTakenByListSelected
-                                                                            .value,
-                                                                        selectedValue: controller
-                                                                            .selectedAssetRestorationActionTakenByList
-                                                                            .value,
-                                                                        onValueChanged:
-                                                                            controller.onValueAssetRestorationActionTakenByChanged,
-                                                                      ),
-                                                                    ),
-                                                                  ),
-                                                                ],
-                                                              ),
-                                                              Dimens.boxHeight5,
-                                                              Row(
-                                                                children: [
-                                                                  SizedBox(
-                                                                    width: 140,
-                                                                    child: CustomRichText(
-                                                                        title:
-                                                                            'Damaged Asset Cost Approx: '),
-                                                                  ),
-                                                                  Dimens
-                                                                      .boxWidth10,
-                                                                  SizedBox(
-                                                                      width: MediaQuery.of(context)
-                                                                              .size
-                                                                              .width /
-                                                                          5,
-                                                                      child: _buildDamagedAssetsCostTextField_web(
-                                                                          context)),
-                                                                ],
-                                                              ),
-                                                              Dimens.boxHeight5,
-                                                              Row(
-                                                                children: [
-                                                                  SizedBox(
-                                                                      width:
-                                                                          150,
-                                                                      child: CustomRichText(
-                                                                          title:
-                                                                              'Gen Loss Due To Asset Damage')),
-                                                                  Dimens
-                                                                      .boxWidth10,
-                                                                  SizedBox(
-                                                                      width: MediaQuery.of(context)
-                                                                              .size
-                                                                              .width /
-                                                                          5,
-                                                                      child: _buildGenLossAssetDamageTextField_web(
-                                                                          context)),
-                                                                ],
+                                                              Expanded(
+                                                                child:
+                                                                    _buildIncidentReportTitleTextField_web(
+                                                                        context),
                                                               ),
                                                             ],
                                                           ),
-
-                                                          ////Changes from here top for left Column
-
-                                                          ///Changes from here below for right Column
-                                                          Spacer(),
-                                                          // Dimens.boxWidth50,
-                                                          Padding(
-                                                            padding:
-                                                                const EdgeInsets
-                                                                    .only(
-                                                                    right: 20),
-                                                            child: Column(
-                                                              crossAxisAlignment:
-                                                                  CrossAxisAlignment
-                                                                      .end,
-                                                              children: [
-                                                                Dimens
-                                                                    .boxHeight10,
-                                                                Row(
-                                                                  children: [
-                                                                    CustomRichText(
-                                                                        title:
-                                                                            'Location: '),
-                                                                    Dimens
-                                                                        .boxWidth10,
-                                                                    SizedBox(
-                                                                      width: MediaQuery.of(context)
-                                                                              .size
-                                                                              .width /
-                                                                          5,
-                                                                      child:
-                                                                          Obx(
-                                                                        () =>
-                                                                            DropdownWebWidget(
-                                                                          // margin: Dimens.edgeInsets5,
-                                                                          dropdownList:
-                                                                              controller.blockList,
-                                                                          isValueSelected: controller
-                                                                              .isBlockSelected
-                                                                              .value,
-                                                                          selectedValue: controller
-                                                                              .selectedBlock
-                                                                              .value,
-                                                                          onValueChanged:
-                                                                              controller.onValueChanged,
-                                                                        ),
-                                                                      ),
-                                                                    ),
-                                                                  ],
-                                                                ),
-                                                                Dimens
-                                                                    .boxHeight10,
-                                                                Row(
-                                                                  children: [
-                                                                    CustomRichText(
-                                                                        title:
-                                                                            'Incident Severity: '),
-                                                                    Column(
-                                                                      children: [
-                                                                        buildRadioButton(
-                                                                            'Critical',
-                                                                            Colors.red,
-                                                                            Colors.white,
-                                                                            context),
-                                                                        buildRadioButton(
-                                                                            'High',
-                                                                            Colors.orange,
-                                                                            Colors.white,
-                                                                            context),
-                                                                      ],
-                                                                    ),
-                                                                    Dimens
-                                                                        .boxWidth10,
-                                                                    Column(
-                                                                      children: [
-                                                                        buildRadioButton(
-                                                                            'Medium',
-                                                                            Colors.yellow,
-                                                                            Colors.white,
-                                                                            context),
-                                                                        buildRadioButton(
-                                                                            'Low',
-                                                                            Colors.green,
-                                                                            Colors.white,
-                                                                            context),
-                                                                      ],
-                                                                    )
-                                                                  ],
-                                                                ),
-
-                                                                Dimens
-                                                                    .boxHeight10,
-                                                                Row(
-                                                                  children: [
-                                                                    CustomRichText(
-                                                                        title:
-                                                                            'Asset Restoration Date & Time: '),
-                                                                    Dimens
-                                                                        .boxWidth10,
-                                                                    SizedBox(
+                                                          Dimens.boxHeight10,
+                                                          Row(
+                                                            children: [
+                                                              CustomRichText(
+                                                                  title:
+                                                                      'Incident Description: '),
+                                                              Expanded(
+                                                                child:
+                                                                    _buildIncidentReportDescriptionField_web(
+                                                                        context),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                          Row(
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .start,
+                                                            children: [
+                                                              Column(
+                                                                crossAxisAlignment:
+                                                                    CrossAxisAlignment
+                                                                        .end,
+                                                                children: [
+                                                                  Dimens
+                                                                      .boxHeight10,
+                                                                  Row(
+                                                                    children: [
+                                                                      CustomRichText(
+                                                                          title:
+                                                                              'Type of Incident: '),
+                                                                      Dimens
+                                                                          .boxWidth10,
+                                                                      SizedBox(
                                                                         width:
                                                                             MediaQuery.of(context).size.width /
                                                                                 5,
-                                                                        child: _buildActionTakenDateTimeField_web(
-                                                                            context)),
-                                                                  ],
-                                                                ),
-                                                                Dimens
-                                                                    .boxHeight5,
-
-                                                                Dimens
-                                                                    .boxHeight20,
-                                                                Row(
-                                                                  children: [
-                                                                    CustomRichText(
-                                                                        title:
-                                                                            'ESI Applicability: '),
-                                                                    Dimens
-                                                                        .boxWidth10,
-                                                                    SizedBox(
-                                                                      width: MediaQuery.of(context)
-                                                                              .size
-                                                                              .width /
-                                                                          5,
-                                                                      child:
-                                                                          // controller
-                                                                          //             .id !=
-                                                                          //         null
-                                                                          //     ? controller.incidentReportDetailsModel.value?.esi_applicability_name ==
-                                                                          //             "YES"
-                                                                          //         ? Obx(
-                                                                          //             () =>
-                                                                          //                 Switch(
-                                                                          //               activeColor: Colors.green,
-                                                                          //               value: controller.esiApplicabilityDetailValue.value,
-                                                                          //               onChanged: (value) {
-                                                                          //                 controller.esiApplicabilityDetailValue.value = value;
-                                                                          //                 print('ESI Detail applicability: ${controller.esiApplicabilityDetailValue.value}');
-                                                                          //               },
-                                                                          //             ),
-                                                                          //           )
-                                                                          //         : Obx(
-                                                                          //             () =>
-                                                                          //                 Switch(
-                                                                          //               activeColor: Colors.green,
-                                                                          //               value: controller.esiApplicabilityDetailFalseValue.value,
-                                                                          //               onChanged: (value) {
-                                                                          //                 controller.esiApplicabilityDetailFalseValue.value = value;
-                                                                          //                 print('ESI Detail False applicability: ${controller.esiApplicabilityDetailFalseValue.value}');
-                                                                          //               },
-                                                                          //             ),
-                                                                          //           )
-                                                                          //     :
-                                                                          Obx(
-                                                                        () =>
-                                                                            Switch(
-                                                                          activeColor:
-                                                                              Colors.green,
-                                                                          value: controller
-                                                                              .esiApplicabilityValue
-                                                                              .value,
-                                                                          onChanged:
-                                                                              (value) {
-                                                                            controller.esiApplicabilityValue.value =
-                                                                                value;
-                                                                          },
+                                                                        child:
+                                                                            Obx(
+                                                                          () =>
+                                                                              DropdownWebWidget(
+                                                                            dropdownList:
+                                                                                controller.incidentrisktypeList,
+                                                                            isValueSelected:
+                                                                                controller.isRiskTypeListSelected.value,
+                                                                            selectedValue:
+                                                                                controller.selectedRiskTypeList.value,
+                                                                            onValueChanged:
+                                                                                controller.onValueChanged,
+                                                                          ),
                                                                         ),
                                                                       ),
-                                                                    ),
-                                                                  ],
-                                                                ),
-
-                                                                Dimens
-                                                                    .boxHeight5,
-                                                                // controller
-                                                                //             .incidentReportDetailsModel
-                                                                //             .value
-                                                                //             ?.esi_applicability_name ==
-                                                                //         "YES"
-                                                                //     ? Text('Hello')
-                                                                //     : Dimens.box0,
-
-                                                                Row(
-                                                                  children: [
-                                                                    controller.esiApplicabilityValue ==
-                                                                            true
-                                                                        ? CustomRichText(
-                                                                            title:
-                                                                                'ESI Applicability Remark: ')
-                                                                        : Container(),
-                                                                    Dimens
-                                                                        .boxWidth10,
-                                                                    controller.esiApplicabilityValue ==
-                                                                            true
-                                                                        ? SizedBox(
-                                                                            width: MediaQuery.of(context).size.width /
+                                                                    ],
+                                                                  ),
+                                                                  Dimens
+                                                                      .boxHeight5,
+                                                                  Row(
+                                                                    children: [
+                                                                      CustomRichText(
+                                                                          title:
+                                                                              'Incident date & Time: '),
+                                                                      Dimens
+                                                                          .boxWidth10,
+                                                                      SizedBox(
+                                                                        width:
+                                                                            MediaQuery.of(context).size.width /
                                                                                 5,
-                                                                            child:
-                                                                                _buildESIApplicabilityRemarkTextField_web(context))
-                                                                        : Container(),
-                                                                  ],
-                                                                ),
-
-                                                                Dimens
-                                                                    .boxHeight15,
-                                                                Row(
-                                                                  children: [
-                                                                    CustomRichText(
-                                                                        title:
-                                                                            'Legal Applicability: '),
-                                                                    Dimens
-                                                                        .boxWidth10,
-                                                                    SizedBox(
-                                                                      width: MediaQuery.of(context)
-                                                                              .size
-                                                                              .width /
-                                                                          5,
-                                                                      child:
-                                                                          Obx(
-                                                                        () =>
-                                                                            Switch(
-                                                                          activeColor:
-                                                                              Colors.green,
-                                                                          value: controller
-                                                                              .legalApplicabilityValue
-                                                                              .value,
-                                                                          onChanged:
-                                                                              (value) {
-                                                                            controller.legalApplicabilityValue.value =
-                                                                                value;
-                                                                            print('Legal applicability: ${controller.legalApplicabilityValue.value}');
-                                                                          },
+                                                                        child:
+                                                                            _buildIncidentDateTimeField_web(
+                                                                          context,
                                                                         ),
                                                                       ),
-                                                                    ),
-                                                                  ],
-                                                                ),
-                                                                Dimens
-                                                                    .boxHeight5,
-                                                                Row(
-                                                                  children: [
-                                                                    controller.legalApplicabilityValue ==
-                                                                            true
-                                                                        ? CustomRichText(
+                                                                    ],
+                                                                  ),
+                                                                  // Dimens.boxHeight5,
+                                                                  // Row(
+                                                                  //   children: [
+                                                                  //     SizedBox(
+                                                                  //       width: 140,
+                                                                  //       child: CustomRichText(
+                                                                  //           title:
+                                                                  //               'Incident Investigation Team: '),
+                                                                  //     ),
+                                                                  //     Dimens.boxWidth10,
+                                                                  //     SizedBox(
+                                                                  //       width: MediaQuery.of(
+                                                                  //                   context)
+                                                                  //               .size
+                                                                  //               .width /
+                                                                  //           5,
+                                                                  //       child: Obx(
+                                                                  //         () =>
+                                                                  //             DropdownWebWidget(
+                                                                  //           dropdownList:
+                                                                  //               controller
+                                                                  //                   .incidentInvestigationDoneByList,
+                                                                  //           isValueSelected:
+                                                                  //               controller
+                                                                  //                   .isincidentInvestigationDoneByListSelected
+                                                                  //                   .value,
+                                                                  //           selectedValue:
+                                                                  //               controller
+                                                                  //                   .selectedIncidentInvestigationDoneByList
+                                                                  //                   .value,
+                                                                  //           onValueChanged:
+                                                                  //               controller
+                                                                  //                   .onValueChanged,
+                                                                  //         ),
+                                                                  //       ),
+                                                                  //     ),
+                                                                  //   ],
+                                                                  // ),
+                                                                  Dimens
+                                                                      .boxHeight5,
+                                                                  Row(
+                                                                    children: [
+                                                                      SizedBox(
+                                                                        width:
+                                                                            140,
+                                                                        child: CustomRichText(
                                                                             title:
-                                                                                'Legal Applicability Remark: ')
-                                                                        : Container(),
-                                                                    Dimens
-                                                                        .boxWidth10,
-                                                                    controller.legalApplicabilityValue ==
-                                                                            true
-                                                                        ? SizedBox(
-                                                                            width: MediaQuery.of(context).size.width /
+                                                                                'Asset Restoration Action Taken By: '),
+                                                                      ),
+                                                                      Dimens
+                                                                          .boxWidth10,
+                                                                      SizedBox(
+                                                                        width:
+                                                                            MediaQuery.of(context).size.width /
                                                                                 5,
-                                                                            child:
-                                                                                _buildLegalApplicabilityRemarkTextField_web(context))
-                                                                        : Container(),
-                                                                  ],
-                                                                ),
-                                                              ],
-                                                            ),
-                                                          ),
-                                                        ],
-                                                      ),
-
-                                                      Dimens.boxHeight5,
-                                                      Row(
-                                                        children: [
-                                                          CustomRichText(
-                                                              title:
-                                                                  ' Insurance Applicable: '),
-                                                          Dimens.boxWidth10,
-                                                          Obx(
-                                                            () => SizedBox(
-                                                              width: MediaQuery.of(
-                                                                          context)
-                                                                      .size
-                                                                      .width /
-                                                                  5,
-                                                              child: Switch(
-                                                                activeColor:
-                                                                    Colors
-                                                                        .green,
-                                                                value: controller
-                                                                    .insuranceApplicableValue
-                                                                    .value,
-                                                                onChanged:
-                                                                    (value) {
-                                                                  controller
-                                                                      .insuranceApplicableValue
-                                                                      .value = value;
-                                                                },
+                                                                        child:
+                                                                            Obx(
+                                                                          () =>
+                                                                              DropdownWebWidget(
+                                                                            dropdownList:
+                                                                                controller.assetRestorationActionTakenByList,
+                                                                            isValueSelected:
+                                                                                controller.isAssetRestorationActionTakenByListSelected.value,
+                                                                            selectedValue:
+                                                                                controller.selectedAssetRestorationActionTakenByList.value,
+                                                                            onValueChanged:
+                                                                                controller.onValueAssetRestorationActionTakenByChanged,
+                                                                          ),
+                                                                        ),
+                                                                      ),
+                                                                    ],
+                                                                  ),
+                                                                  Dimens
+                                                                      .boxHeight5,
+                                                                  Row(
+                                                                    children: [
+                                                                      SizedBox(
+                                                                        width:
+                                                                            140,
+                                                                        child: CustomRichText(
+                                                                            title:
+                                                                                'Damaged Asset Cost Approx: '),
+                                                                      ),
+                                                                      Dimens
+                                                                          .boxWidth10,
+                                                                      SizedBox(
+                                                                          width: MediaQuery.of(context).size.width /
+                                                                              5,
+                                                                          child:
+                                                                              _buildDamagedAssetsCostTextField_web(context)),
+                                                                    ],
+                                                                  ),
+                                                                  Dimens
+                                                                      .boxHeight5,
+                                                                  Row(
+                                                                    children: [
+                                                                      SizedBox(
+                                                                          width:
+                                                                              150,
+                                                                          child:
+                                                                              CustomRichText(title: 'Gen Loss Due To Asset Damage')),
+                                                                      Dimens
+                                                                          .boxWidth10,
+                                                                      SizedBox(
+                                                                          width: MediaQuery.of(context).size.width /
+                                                                              5,
+                                                                          child:
+                                                                              _buildGenLossAssetDamageTextField_web(context)),
+                                                                    ],
+                                                                  ),
+                                                                ],
                                                               ),
-                                                            ),
+
+                                                              ////Changes from here top for left Column
+
+                                                              ///Changes from here below for right Column
+                                                              Spacer(),
+                                                              // Dimens.boxWidth50,
+                                                              Padding(
+                                                                padding:
+                                                                    const EdgeInsets
+                                                                        .only(
+                                                                        right:
+                                                                            20),
+                                                                child: Column(
+                                                                  crossAxisAlignment:
+                                                                      CrossAxisAlignment
+                                                                          .end,
+                                                                  children: [
+                                                                    Dimens
+                                                                        .boxHeight10,
+                                                                    Row(
+                                                                      children: [
+                                                                        CustomRichText(
+                                                                            title:
+                                                                                'Location: '),
+                                                                        Dimens
+                                                                            .boxWidth10,
+                                                                        SizedBox(
+                                                                          width:
+                                                                              MediaQuery.of(context).size.width / 5,
+                                                                          child:
+                                                                              Obx(
+                                                                            () =>
+                                                                                DropdownWebWidget(
+                                                                              // margin: Dimens.edgeInsets5,
+                                                                              dropdownList: controller.blockList,
+                                                                              isValueSelected: controller.isBlockSelected.value,
+                                                                              selectedValue: controller.selectedBlock.value,
+                                                                              onValueChanged: controller.onValueChanged,
+                                                                            ),
+                                                                          ),
+                                                                        ),
+                                                                      ],
+                                                                    ),
+                                                                    Dimens
+                                                                        .boxHeight10,
+                                                                    Row(
+                                                                      children: [
+                                                                        CustomRichText(
+                                                                            title:
+                                                                                'Incident Severity: '),
+                                                                        Column(
+                                                                          children: [
+                                                                            buildRadioButton(
+                                                                                'Critical',
+                                                                                Colors.red,
+                                                                                Colors.white,
+                                                                                context),
+                                                                            buildRadioButton(
+                                                                                'High',
+                                                                                Colors.orange,
+                                                                                Colors.white,
+                                                                                context),
+                                                                          ],
+                                                                        ),
+                                                                        Dimens
+                                                                            .boxWidth10,
+                                                                        Column(
+                                                                          children: [
+                                                                            buildRadioButton(
+                                                                                'Medium',
+                                                                                Colors.yellow,
+                                                                                Colors.white,
+                                                                                context),
+                                                                            buildRadioButton(
+                                                                                'Low',
+                                                                                Colors.green,
+                                                                                Colors.white,
+                                                                                context),
+                                                                          ],
+                                                                        )
+                                                                      ],
+                                                                    ),
+
+                                                                    Dimens
+                                                                        .boxHeight10,
+                                                                    Row(
+                                                                      children: [
+                                                                        CustomRichText(
+                                                                            title:
+                                                                                'Asset Restoration Date & Time: '),
+                                                                        Dimens
+                                                                            .boxWidth10,
+                                                                        SizedBox(
+                                                                            width: MediaQuery.of(context).size.width /
+                                                                                5,
+                                                                            child:
+                                                                                _buildActionTakenDateTimeField_web(context)),
+                                                                      ],
+                                                                    ),
+                                                                    Dimens
+                                                                        .boxHeight5,
+
+                                                                    Dimens
+                                                                        .boxHeight20,
+                                                                    Row(
+                                                                      children: [
+                                                                        CustomRichText(
+                                                                            title:
+                                                                                'ESI Applicability: '),
+                                                                        Dimens
+                                                                            .boxWidth10,
+                                                                        SizedBox(
+                                                                          width:
+                                                                              MediaQuery.of(context).size.width / 5,
+                                                                          child:
+                                                                              // controller
+                                                                              //             .id !=
+                                                                              //         null
+                                                                              //     ? controller.incidentReportDetailsModel.value?.esi_applicability_name ==
+                                                                              //             "YES"
+                                                                              //         ? Obx(
+                                                                              //             () =>
+                                                                              //                 Switch(
+                                                                              //               activeColor: Colors.green,
+                                                                              //               value: controller.esiApplicabilityDetailValue.value,
+                                                                              //               onChanged: (value) {
+                                                                              //                 controller.esiApplicabilityDetailValue.value = value;
+                                                                              //                 print('ESI Detail applicability: ${controller.esiApplicabilityDetailValue.value}');
+                                                                              //               },
+                                                                              //             ),
+                                                                              //           )
+                                                                              //         : Obx(
+                                                                              //             () =>
+                                                                              //                 Switch(
+                                                                              //               activeColor: Colors.green,
+                                                                              //               value: controller.esiApplicabilityDetailFalseValue.value,
+                                                                              //               onChanged: (value) {
+                                                                              //                 controller.esiApplicabilityDetailFalseValue.value = value;
+                                                                              //                 print('ESI Detail False applicability: ${controller.esiApplicabilityDetailFalseValue.value}');
+                                                                              //               },
+                                                                              //             ),
+                                                                              //           )
+                                                                              //     :
+                                                                              Obx(
+                                                                            () =>
+                                                                                Switch(
+                                                                              activeColor: Colors.green,
+                                                                              value: controller.esiApplicabilityValue.value,
+                                                                              onChanged: (value) {
+                                                                                controller.esiApplicabilityValue.value = value;
+                                                                              },
+                                                                            ),
+                                                                          ),
+                                                                        ),
+                                                                      ],
+                                                                    ),
+
+                                                                    Dimens
+                                                                        .boxHeight5,
+                                                                    // controller
+                                                                    //             .incidentReportDetailsModel
+                                                                    //             .value
+                                                                    //             ?.esi_applicability_name ==
+                                                                    //         "YES"
+                                                                    //     ? Text('Hello')
+                                                                    //     : Dimens.box0,
+
+                                                                    Row(
+                                                                      children: [
+                                                                        controller.esiApplicabilityValue ==
+                                                                                true
+                                                                            ? CustomRichText(title: 'ESI Applicability Remark: ')
+                                                                            : Container(),
+                                                                        Dimens
+                                                                            .boxWidth10,
+                                                                        controller.esiApplicabilityValue ==
+                                                                                true
+                                                                            ? SizedBox(
+                                                                                width: MediaQuery.of(context).size.width / 5,
+                                                                                child: _buildESIApplicabilityRemarkTextField_web(context))
+                                                                            : Container(),
+                                                                      ],
+                                                                    ),
+
+                                                                    Dimens
+                                                                        .boxHeight15,
+                                                                    Row(
+                                                                      children: [
+                                                                        CustomRichText(
+                                                                            title:
+                                                                                'Legal Applicability: '),
+                                                                        Dimens
+                                                                            .boxWidth10,
+                                                                        SizedBox(
+                                                                          width:
+                                                                              MediaQuery.of(context).size.width / 5,
+                                                                          child:
+                                                                              Obx(
+                                                                            () =>
+                                                                                Switch(
+                                                                              activeColor: Colors.green,
+                                                                              value: controller.legalApplicabilityValue.value,
+                                                                              onChanged: (value) {
+                                                                                controller.legalApplicabilityValue.value = value;
+                                                                                print('Legal applicability: ${controller.legalApplicabilityValue.value}');
+                                                                              },
+                                                                            ),
+                                                                          ),
+                                                                        ),
+                                                                      ],
+                                                                    ),
+                                                                    Dimens
+                                                                        .boxHeight5,
+                                                                    Row(
+                                                                      children: [
+                                                                        controller.legalApplicabilityValue ==
+                                                                                true
+                                                                            ? CustomRichText(title: 'Legal Applicability Remark: ')
+                                                                            : Container(),
+                                                                        Dimens
+                                                                            .boxWidth10,
+                                                                        controller.legalApplicabilityValue ==
+                                                                                true
+                                                                            ? SizedBox(
+                                                                                width: MediaQuery.of(context).size.width / 5,
+                                                                                child: _buildLegalApplicabilityRemarkTextField_web(context))
+                                                                            : Container(),
+                                                                      ],
+                                                                    ),
+                                                                  ],
+                                                                ),
+                                                              ),
+                                                            ],
                                                           ),
-                                                        ],
-                                                      ),
-                                                      Dimens.boxHeight5,
-                                                      Row(
-                                                        children: [
-                                                          controller.insuranceApplicableValue ==
-                                                                  true
-                                                              ? CustomRichText(
+                                                          Dimens.boxHeight5,
+                                                          Row(
+                                                            children: [
+                                                              CustomRichText(
                                                                   title:
-                                                                      '    Insurance Available: ')
-                                                              : Container(),
-                                                          Dimens.boxWidth10,
-                                                          controller.insuranceApplicableValue ==
-                                                                  true
-                                                              ? SizedBox(
+                                                                      ' Insurance Applicable: '),
+                                                              Dimens.boxWidth10,
+                                                              Obx(
+                                                                () => SizedBox(
                                                                   width: MediaQuery.of(
                                                                               context)
                                                                           .size
                                                                           .width /
                                                                       5,
-                                                                  child: _buildInsuranceAvailableTextField_web(
-                                                                      context))
-                                                              : Container(),
-                                                        ],
-                                                      ),
-                                                      Dimens.boxHeight20,
-
-                                                      ///Personal Details
-                                                      DetailsOfInjuredPerson(),
-
-                                                      ///Investigation Block
-                                                      Dimens.boxHeight5,
-
-                                                      ///Investigation
-                                                      Container(
-                                                        margin:
-                                                            EdgeInsets.all(20),
-                                                        decoration:
-                                                            BoxDecoration(
-                                                          border: Border.all(
-                                                              color: Colors.grey
-                                                                  .withOpacity(
-                                                                      .3)),
-                                                        ),
-                                                        child: Container(
-                                                          color: Color.fromARGB(
-                                                              255,
-                                                              237,
-                                                              240,
-                                                              242),
-                                                          padding:
-                                                              const EdgeInsets
-                                                                  .all(8.0),
-                                                          child: Column(
-                                                            crossAxisAlignment:
-                                                                CrossAxisAlignment
-                                                                    .start,
-                                                            children: [
-                                                              Padding(
-                                                                padding:
-                                                                    const EdgeInsets
-                                                                        .only(
-                                                                        left:
-                                                                            20),
-                                                                child: Text(
-                                                                  "Investigation",
-                                                                  style: Styles
-                                                                      .blue700,
-                                                                ),
-                                                              ),
-                                                              Dimens
-                                                                  .boxHeight10,
-                                                              Row(
-                                                                crossAxisAlignment:
-                                                                    CrossAxisAlignment
-                                                                        .start,
-                                                                children: [
-                                                                  Padding(
-                                                                    padding: const EdgeInsets
-                                                                        .only(
-                                                                        left:
-                                                                            20),
-                                                                    child:
-                                                                        Column(
-                                                                      crossAxisAlignment:
-                                                                          CrossAxisAlignment
-                                                                              .start,
-                                                                      children: [
-                                                                        Column(
-                                                                          crossAxisAlignment:
-                                                                              CrossAxisAlignment.start,
-                                                                          children: [
-                                                                            Text(
-                                                                              'What task or type of job was being performed? ',
-                                                                              style: Styles.black15,
-                                                                            ),
-                                                                            Dimens.boxHeight3,
-                                                                            investigationTextfields(context,
-                                                                                1)
-                                                                          ],
-                                                                        ),
-                                                                        Dimens
-                                                                            .boxHeight10,
-                                                                        Column(
-                                                                          crossAxisAlignment:
-                                                                              CrossAxisAlignment.start,
-                                                                          children: [
-                                                                            Text(
-                                                                              'Was the person involved in these activities trained and if so, when? ',
-                                                                              style: Styles.black15,
-                                                                            ),
-                                                                            Dimens.boxHeight3,
-                                                                            investigationTextfields(context,
-                                                                                2)
-                                                                          ],
-                                                                        ),
-                                                                        Dimens
-                                                                            .boxHeight10,
-                                                                        Column(
-                                                                          crossAxisAlignment:
-                                                                              CrossAxisAlignment.start,
-                                                                          children: [
-                                                                            Text(
-                                                                              'Was the person authorized/licensed to carry out that type of work / use machinery? ',
-                                                                              style: Styles.black15,
-                                                                            ),
-                                                                            Dimens.boxHeight3,
-                                                                            investigationTextfields(context,
-                                                                                3)
-                                                                          ],
-                                                                        ),
-                                                                        Dimens
-                                                                            .boxHeight10,
-                                                                        Column(
-                                                                          crossAxisAlignment:
-                                                                              CrossAxisAlignment.start,
-                                                                          children: [
-                                                                            Text(
-                                                                              'What instructions had been given? By Whom? ',
-                                                                              style: Styles.black15,
-                                                                            ),
-                                                                            Dimens.boxHeight3,
-                                                                            investigationTextfields(context,
-                                                                                4)
-                                                                          ],
-                                                                        ),
-                                                                        Dimens
-                                                                            .boxHeight10,
-                                                                        Column(
-                                                                          crossAxisAlignment:
-                                                                              CrossAxisAlignment.start,
-                                                                          children: [
-                                                                            Text(
-                                                                              'What safety equipment and /protection was used/ available? ',
-                                                                              style: Styles.black15,
-                                                                            ),
-                                                                            Dimens.boxHeight3,
-                                                                            investigationTextfields(context,
-                                                                                5)
-                                                                          ],
-                                                                        ),
-                                                                        Dimens
-                                                                            .boxHeight10,
-                                                                        Column(
-                                                                          crossAxisAlignment:
-                                                                              CrossAxisAlignment.start,
-                                                                          children: [
-                                                                            Text(
-                                                                              'Were correct safe procedures being observed? ',
-                                                                              style: Styles.black15,
-                                                                            ),
-                                                                            Dimens.boxHeight3,
-                                                                            investigationTextfields(context,
-                                                                                6)
-                                                                          ],
-                                                                        ),
-                                                                        Dimens
-                                                                            .boxHeight10,
-                                                                        Column(
-                                                                          crossAxisAlignment:
-                                                                              CrossAxisAlignment.start,
-                                                                          children: [
-                                                                            Text(
-                                                                              'What unsafe condition contributed to the incident? ',
-                                                                              style: Styles.black15,
-                                                                            ),
-                                                                            Dimens.boxHeight3,
-                                                                            investigationTextfields(context,
-                                                                                7)
-                                                                          ],
-                                                                        ),
-                                                                        Dimens
-                                                                            .boxHeight10,
-                                                                        Column(
-                                                                          crossAxisAlignment:
-                                                                              CrossAxisAlignment.start,
-                                                                          children: [
-                                                                            Text(
-                                                                              'Did unsafe act/s cause the incident? If yes. Mention the same ',
-                                                                              style: Styles.black15,
-                                                                            ),
-                                                                            Dimens.boxHeight3,
-                                                                            investigationTextfields(context,
-                                                                                8)
-                                                                          ],
-                                                                        ),
-                                                                        Dimens
-                                                                            .boxHeight10,
-                                                                      ],
-                                                                    ),
+                                                                  child: Switch(
+                                                                    activeColor:
+                                                                        Colors
+                                                                            .green,
+                                                                    value: controller
+                                                                        .insuranceApplicableValue
+                                                                        .value,
+                                                                    onChanged:
+                                                                        (value) {
+                                                                      controller
+                                                                          .insuranceApplicableValue
+                                                                          .value = value;
+                                                                    },
                                                                   ),
-                                                                ],
+                                                                ),
                                                               ),
                                                             ],
                                                           ),
+                                                          Dimens.boxHeight5,
+                                                          Row(
+                                                            children: [
+                                                              controller.insuranceApplicableValue ==
+                                                                      true
+                                                                  ? CustomRichText(
+                                                                      title:
+                                                                          '    Insurance Available: ')
+                                                                  : Container(),
+                                                              Dimens.boxWidth10,
+                                                              controller.insuranceApplicableValue ==
+                                                                      true
+                                                                  ? SizedBox(
+                                                                      width: MediaQuery.of(context)
+                                                                              .size
+                                                                              .width /
+                                                                          5,
+                                                                      child: _buildInsuranceAvailableTextField_web(
+                                                                          context))
+                                                                  : Container(),
+                                                            ],
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                    Dimens.boxHeight20,
+
+                                                    ///Personal Details
+                                                    DetailsOfInjuredPerson(),
+
+                                                    ///Investigation Block
+                                                    Dimens.boxHeight5,
+
+                                                    ///Investigation
+                                                    Container(
+                                                      margin:
+                                                          EdgeInsets.all(20),
+                                                      decoration: BoxDecoration(
+                                                        border: Border.all(
+                                                            color: Colors.grey
+                                                                .withOpacity(
+                                                                    .3)),
+                                                      ),
+                                                      child: Container(
+                                                        color: Color.fromARGB(
+                                                            255, 237, 240, 242),
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(8.0),
+                                                        child: Column(
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .start,
+                                                          children: [
+                                                            Padding(
+                                                              padding:
+                                                                  const EdgeInsets
+                                                                      .only(
+                                                                      left: 20),
+                                                              child: Text(
+                                                                "Investigation",
+                                                                style: Styles
+                                                                    .blue700,
+                                                              ),
+                                                            ),
+                                                            Dimens.boxHeight10,
+                                                            Row(
+                                                              crossAxisAlignment:
+                                                                  CrossAxisAlignment
+                                                                      .start,
+                                                              children: [
+                                                                Padding(
+                                                                  padding:
+                                                                      const EdgeInsets
+                                                                          .only(
+                                                                          left:
+                                                                              20),
+                                                                  child: Column(
+                                                                    crossAxisAlignment:
+                                                                        CrossAxisAlignment
+                                                                            .start,
+                                                                    children: [
+                                                                      Column(
+                                                                        crossAxisAlignment:
+                                                                            CrossAxisAlignment.start,
+                                                                        children: [
+                                                                          Text(
+                                                                            'What task or type of job was being performed? ',
+                                                                            style:
+                                                                                Styles.black15,
+                                                                          ),
+                                                                          Dimens
+                                                                              .boxHeight3,
+                                                                          investigationTextfields(
+                                                                              context,
+                                                                              1)
+                                                                        ],
+                                                                      ),
+                                                                      Dimens
+                                                                          .boxHeight10,
+                                                                      Column(
+                                                                        crossAxisAlignment:
+                                                                            CrossAxisAlignment.start,
+                                                                        children: [
+                                                                          Text(
+                                                                            'Was the person involved in these activities trained and if so, when? ',
+                                                                            style:
+                                                                                Styles.black15,
+                                                                          ),
+                                                                          Dimens
+                                                                              .boxHeight3,
+                                                                          investigationTextfields(
+                                                                              context,
+                                                                              2)
+                                                                        ],
+                                                                      ),
+                                                                      Dimens
+                                                                          .boxHeight10,
+                                                                      Column(
+                                                                        crossAxisAlignment:
+                                                                            CrossAxisAlignment.start,
+                                                                        children: [
+                                                                          Text(
+                                                                            'Was the person authorized/licensed to carry out that type of work / use machinery? ',
+                                                                            style:
+                                                                                Styles.black15,
+                                                                          ),
+                                                                          Dimens
+                                                                              .boxHeight3,
+                                                                          investigationTextfields(
+                                                                              context,
+                                                                              3)
+                                                                        ],
+                                                                      ),
+                                                                      Dimens
+                                                                          .boxHeight10,
+                                                                      Column(
+                                                                        crossAxisAlignment:
+                                                                            CrossAxisAlignment.start,
+                                                                        children: [
+                                                                          Text(
+                                                                            'What instructions had been given? By Whom? ',
+                                                                            style:
+                                                                                Styles.black15,
+                                                                          ),
+                                                                          Dimens
+                                                                              .boxHeight3,
+                                                                          investigationTextfields(
+                                                                              context,
+                                                                              4)
+                                                                        ],
+                                                                      ),
+                                                                      Dimens
+                                                                          .boxHeight10,
+                                                                      Column(
+                                                                        crossAxisAlignment:
+                                                                            CrossAxisAlignment.start,
+                                                                        children: [
+                                                                          Text(
+                                                                            'What safety equipment and /protection was used/ available? ',
+                                                                            style:
+                                                                                Styles.black15,
+                                                                          ),
+                                                                          Dimens
+                                                                              .boxHeight3,
+                                                                          investigationTextfields(
+                                                                              context,
+                                                                              5)
+                                                                        ],
+                                                                      ),
+                                                                      Dimens
+                                                                          .boxHeight10,
+                                                                      Column(
+                                                                        crossAxisAlignment:
+                                                                            CrossAxisAlignment.start,
+                                                                        children: [
+                                                                          Text(
+                                                                            'Were correct safe procedures being observed? ',
+                                                                            style:
+                                                                                Styles.black15,
+                                                                          ),
+                                                                          Dimens
+                                                                              .boxHeight3,
+                                                                          investigationTextfields(
+                                                                              context,
+                                                                              6)
+                                                                        ],
+                                                                      ),
+                                                                      Dimens
+                                                                          .boxHeight10,
+                                                                      Column(
+                                                                        crossAxisAlignment:
+                                                                            CrossAxisAlignment.start,
+                                                                        children: [
+                                                                          Text(
+                                                                            'What unsafe condition contributed to the incident? ',
+                                                                            style:
+                                                                                Styles.black15,
+                                                                          ),
+                                                                          Dimens
+                                                                              .boxHeight3,
+                                                                          investigationTextfields(
+                                                                              context,
+                                                                              7)
+                                                                        ],
+                                                                      ),
+                                                                      Dimens
+                                                                          .boxHeight10,
+                                                                      Column(
+                                                                        crossAxisAlignment:
+                                                                            CrossAxisAlignment.start,
+                                                                        children: [
+                                                                          Text(
+                                                                            'Did unsafe act/s cause the incident? If yes. Mention the same ',
+                                                                            style:
+                                                                                Styles.black15,
+                                                                          ),
+                                                                          Dimens
+                                                                              .boxHeight3,
+                                                                          investigationTextfields(
+                                                                              context,
+                                                                              8)
+                                                                        ],
+                                                                      ),
+                                                                      Dimens
+                                                                          .boxHeight10,
+                                                                    ],
+                                                                  ),
+                                                                ),
+                                                              ],
+                                                            ),
+                                                          ],
                                                         ),
                                                       ),
+                                                    ),
 
-                                                      Dimens.boxHeight20,
-                                                    ],
-                                                  ),
+                                                    Dimens.boxHeight20,
+                                                  ],
                                                 ),
                                                 controller
                                                                 .incidentReportDetailsModel.value?.status ==
@@ -4653,31 +4638,41 @@ class DetailsOfInjuredPerson extends StatelessWidget {
                                           borderRadius:
                                               BorderRadius.circular(5),
                                         ),
-                                        child: DropdownWebStock(
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width /
-                                              4,
-                                          dropdownList:
-                                              controller.victimNameList,
-                                          selectedValue: mapData["value"],
-                                          onValueChanged:
-                                              (list, selectedValue) {
-                                            print(
-                                                {selectedValue: selectedValue});
-                                            if (selectedValue != null) {
-                                              controller.updateSelectedOption(
-                                                  selectedValue);
-                                            }
-                                            mapData["value"] = selectedValue;
-                                            controller.dropdownVictimNameMapperData[
-                                                    selectedValue] =
-                                                list.firstWhere(
-                                                    (element) =>
-                                                        element.name ==
-                                                        selectedValue,
-                                                    orElse: null);
-                                          },
+                                        child: IgnorePointer(
+                                          ignoring: controller
+                                                      .incidentReportDetailsModel
+                                                      .value
+                                                      ?.status ==
+                                                  183
+                                              ? true
+                                              : false,
+                                          child: DropdownWebStock(
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width /
+                                                4,
+                                            dropdownList:
+                                                controller.victimNameList,
+                                            selectedValue: mapData["value"],
+                                            onValueChanged:
+                                                (list, selectedValue) {
+                                              print({
+                                                selectedValue: selectedValue
+                                              });
+                                              if (selectedValue != null) {
+                                                controller.updateSelectedOption(
+                                                    selectedValue);
+                                              }
+                                              mapData["value"] = selectedValue;
+                                              controller.dropdownVictimNameMapperData[
+                                                      selectedValue] =
+                                                  list.firstWhere(
+                                                      (element) =>
+                                                          element.name ==
+                                                          selectedValue,
+                                                      orElse: null);
+                                            },
+                                          ),
                                         ),
                                       ),
                                     ],
@@ -4735,28 +4730,38 @@ class DetailsOfInjuredPerson extends StatelessWidget {
                                                                           5),
                                                             ),
                                                             child:
-                                                                LoginCustomTextfield(
-                                                              // ishint:
-                                                              //     mapData["value"] =
-                                                              //         "",
-                                                              keyboardType:
-                                                                  TextInputType
-                                                                      .text,
-                                                              // inputFormatters: <
-                                                              //     TextInputFormatter>[
-                                                              //   FilteringTextInputFormatter
-                                                              //       .digitsOnly
-                                                              // ],
-                                                              maxLine: 1,
-                                                              textController:
-                                                                  new TextEditingController(
-                                                                      text: mapData[
-                                                                              "value"] ??
-                                                                          ''),
-                                                              onChanged: (txt) {
-                                                                mapData["value"] =
-                                                                    txt;
-                                                              },
+                                                                IgnorePointer(
+                                                              ignoring: controller
+                                                                          .incidentReportDetailsModel
+                                                                          .value
+                                                                          ?.status ==
+                                                                      183
+                                                                  ? true
+                                                                  : false,
+                                                              child:
+                                                                  LoginCustomTextfield(
+                                                                // ishint:
+                                                                //     mapData["value"] =
+                                                                //         "",
+                                                                keyboardType:
+                                                                    TextInputType
+                                                                        .text,
+                                                                // inputFormatters: <
+                                                                //     TextInputFormatter>[
+                                                                //   FilteringTextInputFormatter
+                                                                //       .digitsOnly
+                                                                // ],
+                                                                maxLine: 1,
+                                                                textController:
+                                                                    new TextEditingController(
+                                                                        text: mapData["value"] ??
+                                                                            ''),
+                                                                onChanged:
+                                                                    (txt) {
+                                                                  mapData["value"] =
+                                                                      txt;
+                                                                },
+                                                              ),
                                                             )),
                                                       ],
                                                     ),
@@ -4796,40 +4801,49 @@ class DetailsOfInjuredPerson extends StatelessWidget {
                                                       BorderRadius.circular(5),
                                                 ),
                                                 child: Obx(
-                                                  () => DropdownWebStock(
-                                                    width:
-                                                        MediaQuery.of(context)
-                                                                .size
-                                                                .width /
-                                                            4,
-                                                    dropdownList:
-                                                        controller.genderList,
-                                                    selectedValue: controller
-                                                                .selectedOption ==
-                                                            "Other"
-                                                        ? mapData["value"]
-                                                        : controller
-                                                            .dropdownVictimNameMapperData[
-                                                                record[0]
-                                                                    ['value']]
-                                                            ?.gender,
-                                                    onValueChanged:
-                                                        (list, selectedValue) {
-                                                      print({
-                                                        selectedValue:
-                                                            selectedValue
-                                                      });
-                                                      mapData["value"] =
-                                                          selectedValue;
-                                                      controller.dropdownGenderMapperData[
-                                                              selectedValue] =
-                                                          list.firstWhere(
-                                                              (element) =>
-                                                                  element
-                                                                      .name ==
-                                                                  selectedValue,
-                                                              orElse: null);
-                                                    },
+                                                  () => IgnorePointer(
+                                                    ignoring: controller
+                                                                .incidentReportDetailsModel
+                                                                .value
+                                                                ?.status ==
+                                                            183
+                                                        ? true
+                                                        : false,
+                                                    child: DropdownWebStock(
+                                                      width:
+                                                          MediaQuery.of(context)
+                                                                  .size
+                                                                  .width /
+                                                              4,
+                                                      dropdownList:
+                                                          controller.genderList,
+                                                      selectedValue: controller
+                                                                  .selectedOption ==
+                                                              "Other"
+                                                          ? mapData["value"]
+                                                          : controller
+                                                              .dropdownVictimNameMapperData[
+                                                                  record[0]
+                                                                      ['value']]
+                                                              ?.gender,
+                                                      onValueChanged: (list,
+                                                          selectedValue) {
+                                                        print({
+                                                          selectedValue:
+                                                              selectedValue
+                                                        });
+                                                        mapData["value"] =
+                                                            selectedValue;
+                                                        controller.dropdownGenderMapperData[
+                                                                selectedValue] =
+                                                            list.firstWhere(
+                                                                (element) =>
+                                                                    element
+                                                                        .name ==
+                                                                    selectedValue,
+                                                                orElse: null);
+                                                      },
+                                                    ),
                                                   ),
                                                 ),
                                               )
@@ -4868,25 +4882,35 @@ class DetailsOfInjuredPerson extends StatelessWidget {
                                                             BorderRadius
                                                                 .circular(5),
                                                       ),
-                                                      child:
-                                                          LoginCustomTextfield(
-                                                        keyboardType:
-                                                            TextInputType.text,
-                                                        // inputFormatters: <
-                                                        //     TextInputFormatter>[
-                                                        //   FilteringTextInputFormatter
-                                                        //       .digitsOnly
-                                                        // ],
-                                                        maxLine: 1,
-                                                        textController:
-                                                            new TextEditingController(
-                                                                text: mapData[
-                                                                        "value"] ??
-                                                                    ''),
-                                                        onChanged: (txt) {
-                                                          mapData["value"] =
-                                                              txt;
-                                                        },
+                                                      child: IgnorePointer(
+                                                        ignoring: controller
+                                                                    .incidentReportDetailsModel
+                                                                    .value
+                                                                    ?.status ==
+                                                                183
+                                                            ? true
+                                                            : false,
+                                                        child:
+                                                            LoginCustomTextfield(
+                                                          keyboardType:
+                                                              TextInputType
+                                                                  .text,
+                                                          // inputFormatters: <
+                                                          //     TextInputFormatter>[
+                                                          //   FilteringTextInputFormatter
+                                                          //       .digitsOnly
+                                                          // ],
+                                                          maxLine: 1,
+                                                          textController:
+                                                              new TextEditingController(
+                                                                  text: mapData[
+                                                                          "value"] ??
+                                                                      ''),
+                                                          onChanged: (txt) {
+                                                            mapData["value"] =
+                                                                txt;
+                                                          },
+                                                        ),
                                                       )),
                                                 ],
                                               ),
@@ -4926,26 +4950,35 @@ class DetailsOfInjuredPerson extends StatelessWidget {
                                                                     .circular(
                                                                         5),
                                                           ),
-                                                          child:
-                                                              LoginCustomTextfield(
-                                                            keyboardType:
-                                                                TextInputType
-                                                                    .text,
-                                                            // inputFormatters: <
-                                                            //     TextInputFormatter>[
-                                                            //   FilteringTextInputFormatter
-                                                            //       .digitsOnly
-                                                            // ],
-                                                            maxLine: 1,
-                                                            textController:
-                                                                new TextEditingController(
-                                                                    text: mapData[
-                                                                            "value"] ??
-                                                                        ''),
-                                                            onChanged: (txt) {
-                                                              mapData["value"] =
-                                                                  txt;
-                                                            },
+                                                          child: IgnorePointer(
+                                                            ignoring: controller
+                                                                        .incidentReportDetailsModel
+                                                                        .value
+                                                                        ?.status ==
+                                                                    183
+                                                                ? true
+                                                                : false,
+                                                            child:
+                                                                LoginCustomTextfield(
+                                                              keyboardType:
+                                                                  TextInputType
+                                                                      .text,
+                                                              // inputFormatters: <
+                                                              //     TextInputFormatter>[
+                                                              //   FilteringTextInputFormatter
+                                                              //       .digitsOnly
+                                                              // ],
+                                                              maxLine: 1,
+                                                              textController:
+                                                                  new TextEditingController(
+                                                                      text: mapData[
+                                                                              "value"] ??
+                                                                          ''),
+                                                              onChanged: (txt) {
+                                                                mapData["value"] =
+                                                                    txt;
+                                                              },
+                                                            ),
                                                           )),
                                                     ],
                                                   ),
@@ -4992,35 +5025,45 @@ class DetailsOfInjuredPerson extends StatelessWidget {
                                                                           5),
                                                             ),
                                                             child:
-                                                                DropdownWebStock(
-                                                              width: MediaQuery.of(
-                                                                          context)
-                                                                      .size
-                                                                      .width /
-                                                                  4,
-                                                              dropdownList:
-                                                                  controller
-                                                                      .businessList,
-                                                              selectedValue:
-                                                                  mapData[
-                                                                      "value"],
-                                                              onValueChanged: (list,
-                                                                  selectedValue) {
-                                                                print({
-                                                                  selectedValue:
-                                                                      selectedValue
-                                                                });
-                                                                mapData["value"] =
-                                                                    selectedValue;
-                                                                controller.dropdownBusinessListMapperData[
-                                                                        selectedValue] =
-                                                                    list.firstWhere(
-                                                                        (element) =>
-                                                                            element.name ==
-                                                                            selectedValue,
-                                                                        orElse:
-                                                                            null);
-                                                              },
+                                                                IgnorePointer(
+                                                              ignoring: controller
+                                                                          .incidentReportDetailsModel
+                                                                          .value
+                                                                          ?.status ==
+                                                                      183
+                                                                  ? true
+                                                                  : false,
+                                                              child:
+                                                                  DropdownWebStock(
+                                                                width: MediaQuery.of(
+                                                                            context)
+                                                                        .size
+                                                                        .width /
+                                                                    4,
+                                                                dropdownList:
+                                                                    controller
+                                                                        .businessList,
+                                                                selectedValue:
+                                                                    mapData[
+                                                                        "value"],
+                                                                onValueChanged:
+                                                                    (list,
+                                                                        selectedValue) {
+                                                                  print({
+                                                                    selectedValue:
+                                                                        selectedValue
+                                                                  });
+                                                                  mapData["value"] =
+                                                                      selectedValue;
+                                                                  controller.dropdownBusinessListMapperData[selectedValue] = list.firstWhere(
+                                                                      (element) =>
+                                                                          element
+                                                                              .name ==
+                                                                          selectedValue,
+                                                                      orElse:
+                                                                          null);
+                                                                },
+                                                              ),
                                                             ),
                                                           ),
                                                         ],
@@ -5069,34 +5112,43 @@ class DetailsOfInjuredPerson extends StatelessWidget {
                                                                               5),
                                                                 ),
                                                                 child:
-                                                                    DropdownWebStock(
-                                                                  width: MediaQuery.of(
-                                                                              context)
-                                                                          .size
-                                                                          .width /
-                                                                      4,
-                                                                  dropdownList:
-                                                                      controller
-                                                                          .bodyinjuredList,
-                                                                  selectedValue:
-                                                                      mapData[
-                                                                          "value"],
-                                                                  onValueChanged:
-                                                                      (list,
-                                                                          selectedValue) {
-                                                                    print({
-                                                                      selectedValue:
-                                                                          selectedValue
-                                                                    });
-                                                                    mapData["value"] =
-                                                                        selectedValue;
-                                                                    controller.dropdownBodyinjuredListMapperData[selectedValue] = list.firstWhere(
-                                                                        (element) =>
-                                                                            element.name ==
-                                                                            selectedValue,
-                                                                        orElse:
-                                                                            null);
-                                                                  },
+                                                                    IgnorePointer(
+                                                                  ignoring: controller
+                                                                              .incidentReportDetailsModel
+                                                                              .value
+                                                                              ?.status ==
+                                                                          183
+                                                                      ? true
+                                                                      : false,
+                                                                  child:
+                                                                      DropdownWebStock(
+                                                                    width: MediaQuery.of(context)
+                                                                            .size
+                                                                            .width /
+                                                                        4,
+                                                                    dropdownList:
+                                                                        controller
+                                                                            .bodyinjuredList,
+                                                                    selectedValue:
+                                                                        mapData[
+                                                                            "value"],
+                                                                    onValueChanged:
+                                                                        (list,
+                                                                            selectedValue) {
+                                                                      print({
+                                                                        selectedValue:
+                                                                            selectedValue
+                                                                      });
+                                                                      mapData["value"] =
+                                                                          selectedValue;
+                                                                      controller.dropdownBodyinjuredListMapperData[selectedValue] = list.firstWhere(
+                                                                          (element) =>
+                                                                              element.name ==
+                                                                              selectedValue,
+                                                                          orElse:
+                                                                              null);
+                                                                    },
+                                                                  ),
                                                                 ),
                                                               ),
                                                             ],
@@ -5140,22 +5192,28 @@ class DetailsOfInjuredPerson extends StatelessWidget {
                                                                             BorderRadius.circular(5),
                                                                       ),
                                                                       child:
-                                                                          LoginCustomTextfield(
-                                                                        keyboardType:
-                                                                            TextInputType.text,
-                                                                        inputFormatters: <TextInputFormatter>[
-                                                                          FilteringTextInputFormatter
-                                                                              .digitsOnly
-                                                                        ],
-                                                                        maxLine:
-                                                                            1,
-                                                                        textController:
-                                                                            new TextEditingController(text: mapData["value"] ?? ''),
-                                                                        onChanged:
-                                                                            (txt) {
-                                                                          mapData["value"] =
-                                                                              txt;
-                                                                        },
+                                                                          IgnorePointer(
+                                                                        ignoring: controller.incidentReportDetailsModel.value?.status ==
+                                                                                183
+                                                                            ? true
+                                                                            : false,
+                                                                        child:
+                                                                            LoginCustomTextfield(
+                                                                          keyboardType:
+                                                                              TextInputType.text,
+                                                                          inputFormatters: <TextInputFormatter>[
+                                                                            FilteringTextInputFormatter.digitsOnly
+                                                                          ],
+                                                                          maxLine:
+                                                                              1,
+                                                                          textController:
+                                                                              new TextEditingController(text: mapData["value"] ?? ''),
+                                                                          onChanged:
+                                                                              (txt) {
+                                                                            mapData["value"] =
+                                                                                txt;
+                                                                          },
+                                                                        ),
                                                                       )),
                                                                 ],
                                                               ),
@@ -5200,23 +5258,27 @@ class DetailsOfInjuredPerson extends StatelessWidget {
                                                                               BorderRadius.circular(5),
                                                                         ),
                                                                         child:
-                                                                            DropdownWebStock(
-                                                                          width:
-                                                                              MediaQuery.of(context).size.width / 4,
-                                                                          dropdownList:
-                                                                              controller.eqipmentNameList,
-                                                                          selectedValue:
-                                                                              mapData["value"],
-                                                                          onValueChanged:
-                                                                              (list, selectedValue) {
-                                                                            print({
-                                                                              selectedValue: selectedValue
-                                                                            });
-                                                                            mapData["value"] =
-                                                                                selectedValue;
-                                                                            controller.dropdownEquipmentNameMapperData[selectedValue] =
-                                                                                list.firstWhere((element) => element.name == selectedValue, orElse: null);
-                                                                          },
+                                                                            IgnorePointer(
+                                                                          ignoring: controller.incidentReportDetailsModel.value?.status == 183
+                                                                              ? true
+                                                                              : false,
+                                                                          child:
+                                                                              DropdownWebStock(
+                                                                            width:
+                                                                                MediaQuery.of(context).size.width / 4,
+                                                                            dropdownList:
+                                                                                controller.eqipmentNameList,
+                                                                            selectedValue:
+                                                                                mapData["value"],
+                                                                            onValueChanged:
+                                                                                (list, selectedValue) {
+                                                                              print({
+                                                                                selectedValue: selectedValue
+                                                                              });
+                                                                              mapData["value"] = selectedValue;
+                                                                              controller.dropdownEquipmentNameMapperData[selectedValue] = list.firstWhere((element) => element.name == selectedValue, orElse: null);
+                                                                            },
+                                                                          ),
                                                                         ),
                                                                       ),
                                                                     ],
@@ -5251,18 +5313,21 @@ class DetailsOfInjuredPerson extends StatelessWidget {
                                                                                 color: ColorValues.whiteColor,
                                                                                 borderRadius: BorderRadius.circular(5),
                                                                               ),
-                                                                              child: LoginCustomTextfield(
-                                                                                keyboardType: TextInputType.text,
-                                                                                // inputFormatters: <
-                                                                                //     TextInputFormatter>[
-                                                                                //   FilteringTextInputFormatter
-                                                                                //       .digitsOnly
-                                                                                // ],
-                                                                                maxLine: 1,
-                                                                                textController: new TextEditingController(text: mapData["value"] ?? ''),
-                                                                                onChanged: (txt) {
-                                                                                  mapData["value"] = txt;
-                                                                                },
+                                                                              child: IgnorePointer(
+                                                                                ignoring: controller.incidentReportDetailsModel.value?.status == 183 ? true : false,
+                                                                                child: LoginCustomTextfield(
+                                                                                  keyboardType: TextInputType.text,
+                                                                                  // inputFormatters: <
+                                                                                  //     TextInputFormatter>[
+                                                                                  //   FilteringTextInputFormatter
+                                                                                  //       .digitsOnly
+                                                                                  // ],
+                                                                                  maxLine: 1,
+                                                                                  textController: new TextEditingController(text: mapData["value"] ?? ''),
+                                                                                  onChanged: (txt) {
+                                                                                    mapData["value"] = txt;
+                                                                                  },
+                                                                                ),
                                                                               )),
                                                                         ],
                                                                       ),
@@ -5279,14 +5344,17 @@ class DetailsOfInjuredPerson extends StatelessWidget {
                                                                             crossAxisAlignment:
                                                                                 CrossAxisAlignment.start,
                                                                             children: [
-                                                                              TableActionButton(
-                                                                                color: ColorValues.appRedColor,
-                                                                                icon: Icons.delete,
-                                                                                label: '',
-                                                                                message: '',
-                                                                                onPress: () {
-                                                                                  controller.rowInjuredPersonItem.remove(record);
-                                                                                },
+                                                                              IgnorePointer(
+                                                                                ignoring: controller.incidentReportDetailsModel.value?.status == 183 ? true : false,
+                                                                                child: TableActionButton(
+                                                                                  color: ColorValues.appRedColor,
+                                                                                  icon: Icons.delete,
+                                                                                  label: '',
+                                                                                  message: '',
+                                                                                  onPress: () {
+                                                                                    controller.rowInjuredPersonItem.remove(record);
+                                                                                  },
+                                                                                ),
                                                                               )
                                                                             ],
                                                                           ),
