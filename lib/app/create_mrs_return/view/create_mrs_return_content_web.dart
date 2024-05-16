@@ -350,50 +350,54 @@ class CreateMrsReturnContentWeb extends GetView<CreateMrsReturnController> {
                                                                 .9),
                                                             child:
                                                                 LoginCustomTextfield(
-                                                              inputFormatters: <TextInputFormatter>[
-                                                                FilteringTextInputFormatter
-                                                                    .digitsOnly
-                                                              ],
-                                                              maxLine: 1,
-                                                              textController:
-                                                                  new TextEditingController(
-                                                                      text: mapData[
-                                                                              "value"] ??
-                                                                          ''),
-                                                              onChanged: (txt) {
-                                                                int? issueQty = int.tryParse(controller
-                                                                        .dropdownMapperData
-                                                                        .value[record[0]
-                                                                            [
-                                                                            'value']]
-                                                                        ?.issued_qty ??
-                                                                    "");
-                                                                num? usedQty = int.tryParse(controller
-                                                                        .dropdownMapperData
-                                                                        .value[record[0]
-                                                                            [
-                                                                            'value']]
-                                                                        ?.consumed_qty ??
-                                                                    "");
-                                                                int? returnQty =
-                                                                    int.tryParse(
-                                                                        txt);
-                                                                if
-                                                                    (returnQty! <=
-                                                                        (issueQty! -
-                                                                            usedQty!)) {
-                                                                  mapData["value"] =
-                                                                      txt;
-                                                                } else {
-                                                                  // Show an error message if the return qty is greater than (issue - used) qty
-                                                                  Fluttertoast
-                                                                      .showToast(
-                                                                    msg:
-                                                                        "Please enter appropriate qty!",
-                                                                  );
-                                                                }
-                                                              },
-                                                            ),
+                                                                    inputFormatters: <TextInputFormatter>[
+                                                                  FilteringTextInputFormatter
+                                                                      .digitsOnly
+                                                                ],
+                                                                    maxLine: 1,
+                                                                    textController:
+                                                                        new TextEditingController(
+                                                                            text: mapData["value"] ??
+                                                                                ''),
+                                                                    onChanged:
+                                                                        (txt) {
+                                                                      // int? issueQty = int.tryParse(controller
+                                                                      //         .dropdownMapperData
+                                                                      //         .value[record[0]
+                                                                      //             [
+                                                                      //             'value']]
+                                                                      //         ?.issued_qty ??
+                                                                      //     "");
+                                                                      // int? usedQty = int.tryParse(controller
+                                                                      //         .dropdownMapperData
+                                                                      //         .value[record[0]
+                                                                      //             [
+                                                                      //             'value']]
+                                                                      //         ?.consumed_qty ??
+                                                                      //     "");
+                                                                      // int? returnQty =
+                                                                      //     int.tryParse(
+                                                                      //         txt);
+                                                                      // if (returnQty !=
+                                                                      //         null &&
+                                                                      //     issueQty !=
+                                                                      //         null &&
+                                                                      //     usedQty !=
+                                                                      //         null &&
+                                                                      //     returnQty <=
+                                                                      //         (issueQty -
+                                                                      //             usedQty))
+                                                                      //  {
+                                                                      mapData["value"] =
+                                                                          txt;
+                                                                      //  } else {
+                                                                      // Show an error message if the return qty is greater than (issue - used) qty
+                                                                      //   Fluttertoast
+                                                                      //       .showToast(
+                                                                      //     msg:
+                                                                      //         "Please enter appropriate qty!",
+                                                                      //   );
+                                                                    }),
                                                           ),
                                                         )
                                                       : (mapData['key'] ==
