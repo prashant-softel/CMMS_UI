@@ -2507,6 +2507,40 @@ class Repository {
       return Map();
     }
   }
+  Future<Map<String, dynamic>> approveIncidentReportButton2ndStep(
+    incidentReportApproveJsonString,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.approveIncidentReportButton2ndStep(
+        auth: auth,
+        incidentReportApproveJsonString: incidentReportApproveJsonString,
+        isLoading: isLoading ?? false,
+      );
+
+      var resourceData = res.data;
+
+      print('Response Incident Report Approve: ${resourceData}');
+
+      if (!res.hasError) {
+        if (res.errorCode == 200) {
+          var responseMap = json.decode(res.data);
+          return responseMap;
+        } else {
+          // Get.dialog<void>(WarrantyClaimErrorDialog());
+        }
+      } else {
+        Utility.showDialog(
+            res.errorCode.toString(), 'approveIncidentReportButton');
+        //return '';
+      }
+      return Map();
+    } catch (error) {
+      print(error.toString());
+      return Map();
+    }
+  }
 
   Future<Map<String, dynamic>> approveIrButton(
     incidentReportApproveJsonString,

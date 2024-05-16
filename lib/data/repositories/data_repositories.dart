@@ -827,6 +827,16 @@ class DataRepository extends DomainRepository {
         incidentReportApproveJsonString: incidentReportApproveJsonString,
         isLoading: isLoading ?? false,
       );
+  Future<ResponseModel> approveIncidentReportButton2ndStep({
+    required String auth,
+    incidentReportApproveJsonString,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.approveIncidentReportButton2ndStep(
+        auth: auth,
+        incidentReportApproveJsonString: incidentReportApproveJsonString,
+        isLoading: isLoading ?? false,
+      );
   Future<ResponseModel> approveIrButton({
     required String auth,
     incidentReportApproveJsonString,

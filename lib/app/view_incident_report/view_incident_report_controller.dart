@@ -367,6 +367,31 @@ class ViewIncidentReportController extends GetxController {
       }
     }
   }
+  void approveIncidentReportButton2ndStep({int? id}) async {
+    {
+      String _comment = approveCommentTextFieldCtrlr.text.trim();
+
+      CommentModelWithFlag approveIncidentReportAproveModel =
+          CommentModelWithFlag(
+              id: id,
+              comment: _comment,
+              is_investigation_required:
+                  detailInvestigationTeamValue.value ? 1 : 0,
+              is_why_why_required: whyWhyAnalysisValue.value ? 1 : 0);
+
+      var incidentReportApproveJsonString =
+          approveIncidentReportAproveModel.toJson();
+
+      Map<String, dynamic>? response =
+          await viewIncidentReportPresenter.approveIncidentReportButton2ndStep(
+        incidentReportApproveJsonString: incidentReportApproveJsonString,
+        isLoading: true,
+      );
+      if (response == true) {
+        //getCalibrationList(facilityId, true);
+      }
+    }
+  }
 
   void approveIrButton({int? id}) async {
     {

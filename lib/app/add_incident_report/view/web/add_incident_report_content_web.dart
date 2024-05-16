@@ -1347,7 +1347,7 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                               DataCell(Text(controller
                                                                       .historyList?[
                                                                           index]
-                                                                      ?.createdAt
+                                                                      ?.createdAt!.result
                                                                       .toString() ??
                                                                   '')),
                                                               DataCell(Text(controller
