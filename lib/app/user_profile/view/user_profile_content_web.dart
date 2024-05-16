@@ -148,7 +148,7 @@ class UserProfileContentWeb extends GetView<UserProfileController> {
                                         style: Styles.black17,
                                       ),
                                       Text(
-                                        'City: ',
+                                        'State: ',
                                         style: Styles.black17,
                                       ),
                                       // Text(
@@ -216,7 +216,7 @@ class UserProfileContentWeb extends GetView<UserProfileController> {
                                         style: Styles.black17,
                                       ),
                                       Text(
-                                        'State: ',
+                                        'City: ',
                                         style: Styles.black17,
                                       ),
                                       Text(
@@ -253,7 +253,7 @@ class UserProfileContentWeb extends GetView<UserProfileController> {
                                           style: Styles.blue17),
                                       Text(
                                           controller.userDetailModel.value
-                                                  ?.contact_no ??
+                                                  ?.landline_number ??
                                               "",
                                           style: Styles.blue17),
                                       Text(
