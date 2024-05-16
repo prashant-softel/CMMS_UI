@@ -8,6 +8,7 @@ import 'package:cmms/domain/domain.dart';
 import 'package:cmms/domain/models/body_injured_model.dart';
 import 'package:cmms/domain/models/business_list_model.dart';
 import 'package:cmms/domain/models/create_incident_report_model.dart';
+import 'package:cmms/domain/models/designation_model.dart';
 import 'package:cmms/domain/models/employee_list_model.dart';
 import 'package:cmms/domain/models/history_model.dart';
 import 'package:cmms/domain/models/incident_report_details_model.dart';
@@ -105,9 +106,10 @@ class AddIncidentReportController extends GetxController {
   RxList<int?> selectedIncidentInvestigationVerificationDoneByIdList =
       <int>[].obs;
   int selectedIncidentInvestigationVerificationDoneById = 0;
-
+  RxList<DesignationModel?> responsbilityList = <DesignationModel>[].obs;
+  // var blockList = <BlockModel>[];
   ///Business List
-
+  RxMap<dynamic, dynamic> dropdownMapperData = {}.obs;
   RxList<BusinessListModel> businessList = <BusinessListModel>[].obs;
   RxList<BodyInjuredModel?> bodyinjuredList = <BodyInjuredModel>[].obs;
 
@@ -541,9 +543,14 @@ class AddIncidentReportController extends GetxController {
       Future.delayed(Duration(seconds: 1), () {
         getFacilityPlantList();
       });
+
       // Future.delayed(Duration(seconds: 1), () {
       //   getuserAccessData();
       // });
+      Future.delayed(Duration(seconds: 1), () {
+        getResponsibilityList(facilityId);
+      });
+      ;
       Future.delayed(Duration(seconds: 1), () {
         getTypePermitList(facilityId);
       });
@@ -710,6 +717,19 @@ class AddIncidentReportController extends GetxController {
 
       selectedFacility.value = facilityList[0]?.name ?? '';
       _facilityId.sink.add(facilityList[0]?.id ?? 0);
+    }
+  }
+
+  Future<void> getResponsibilityList(int _facilityId) async {
+    responsbilityList.value = <DesignationModel>[];
+    final _responsbilityList =
+        await incidentReportPresenter.getResponsibilityList();
+    // print('jkncejknce:$facilityId');
+    if (_responsbilityList != null) {
+      for (var asset in _responsbilityList) {
+        responsbilityList.add(asset);
+      }
+      update(["Respon"]);
     }
   }
 
