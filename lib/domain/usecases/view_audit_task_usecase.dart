@@ -40,12 +40,12 @@ class ViewAuditTaskUsecase {
         auditTaskCloseRejectJsonString,
         isLoading,
       );
-  Future<List<dynamic>> updatePmExecution({
-    pmExecutionJsonString,
+  Future<List<dynamic>> updateAuditTaskExecution({
+    auditExecutionJsonString,
     bool? isLoading,
   }) async =>
-      await repository.updatePmExecution(
-        pmExecutionJsonString,
+      await repository.updateAuditTaskExecution(
+        auditExecutionJsonString,
         isLoading,
       );
   Future<Map<String, dynamic>> auditTaskRejectButton({

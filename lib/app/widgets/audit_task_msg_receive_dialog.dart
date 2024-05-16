@@ -15,7 +15,7 @@ class AuditTaskViewMsgReceiveDialog extends GetView {
 
   AuditTaskViewMsgReceiveDialog(
       {super.key, this.data, this.id, required this.type});
-  final ViewAuditTaskController _controller = Get.find();
+  final ViewAuditTaskController controller = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +37,11 @@ class AuditTaskViewMsgReceiveDialog extends GetView {
                           ? "Close Audit Plan"
                           : type == 5
                               ? "Approve Close Audit Plan"
-                              : "Reject Close Audit Plan",
+                              : type == 6
+                                  ? "Reject Close Audit Plan"
+                                  : type == 8
+                                      ? "Audit Plan Start"
+                                      : "Execute Audit Plan",
           textAlign: TextAlign.center,
           style: TextStyle(color: Colors.black),
         ),
@@ -48,57 +52,58 @@ class AuditTaskViewMsgReceiveDialog extends GetView {
             padding: Dimens.edgeInsets05_0_5_0,
             height: 80,
             width: double.infinity,
-            child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  Divider(
-                    color: ColorValues.greyLightColour,
-                    thickness: 1,
-                  ),
-                  Text('${data}',
-                      style: TextStyle(color: Colors.green),
-                      textAlign: TextAlign.center),
-                  Text('${id}',
-                      style: TextStyle(color: Colors.green),
-                      textAlign: TextAlign.center),
-                ]),
+            child:
+                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+              Divider(
+                color: ColorValues.greyLightColour,
+                thickness: 1,
+              ),
+              Text('${data}',
+                  style: TextStyle(color: Colors.green),
+                  textAlign: TextAlign.center),
+              Text('${id}',
+                  style: TextStyle(color: Colors.green),
+                  textAlign: TextAlign.center),
+            ]),
           );
         }),
         actions: [
-          Row(
-            children: [
-              Dimens.boxWidth10,
-              Center(
-                child: ElevatedButton(
-                  style: Styles.darkBlueElevatedButtonStyle,
-                  onPressed: () {
-                    Get.offAllNamed(Routes.pmPlanList);
-                  },
-                  child: const Text('Audit Task List'),
+          Center(
+            child: Row(
+              children: [
+                Spacer(),
+                Center(
+                  child: ElevatedButton(
+                    style: Styles.darkBlueElevatedButtonStyle,
+                    onPressed: () {
+                      Get.offAllNamed(Routes.auditTask);
+                    },
+                    child: const Text('Audit Task List'),
+                  ),
                 ),
-              ),
-              Dimens.boxWidth10,
-              Center(
-                child: ElevatedButton(
-                  style: Styles.yellowElevatedButtonStyle,
-                  onPressed: () async {
-                    Get.back();
-                    await controller.setauditTaskId();
-                    controller.getHistory();
+                Spacer(),
+                Center(
+                  child: ElevatedButton(
+                    style: Styles.yellowElevatedButtonStyle,
+                    onPressed: () async {
+                      await controller.setauditTaskId();
+                      controller.getHistory();
 
-                    if (controller.auditTaskId != 0) {
-                      print({"fghvjbggjhjgk", controller.auditTaskId});
+                      if (controller.auditTaskId != 0) {
+                        print({"fghvjbggjhjgk", controller.auditTaskId});
 
-                      await controller.getAuditTaskDetails(
-                          auditTaskId: controller.auditTaskId.value,
-                          isloading: true);
-                    }
-                  },
-                  child: const Text('View Audit Task'),
+                        await controller.getAuditTaskDetails(
+                            auditTaskId: controller.auditTaskId.value,
+                            isloading: true);
+                      }
+                      Get.back();
+                    },
+                    child: const Text('View Audit Task'),
+                  ),
                 ),
-              ),
-              Dimens.boxWidth10,
-            ],
+                Spacer(),
+              ],
+            ),
           )
         ],
       );

@@ -97,21 +97,26 @@ class AuditTaskApprovedRejectDialog extends GetView {
                 onPressed: () {
                   type == 1
                       ? controller.auditTaskApprovedButton(
-                          id: controller.auditTaskId.value)
+                          id: controller.auditTasknDetailModel.value?.plan_id)
                       : type == 2
                           ? controller.auditTaskRejectButton(
-                              id: controller.auditTaskId.value)
+                              id: controller
+                                  .auditTasknDetailModel.value?.plan_id)
                           : type == 3
                               ? controller.auditTaskSkipButton(
-                                  id: controller.auditTaskId.value)
+                                  id: controller
+                                      .auditTasknDetailModel.value?.plan_id)
                               : type == 4
                                   ? controller.auditTaskCloseButton(
-                                      id: controller.auditTaskId.value)
+                                      id: controller
+                                          .auditTasknDetailModel.value?.plan_id)
                                   : type == 5
                                       ? controller.auditTaskCloseApproveButton(
-                                          id: controller.auditTaskId.value)
+                                          id: controller.auditTasknDetailModel
+                                              .value?.plan_id)
                                       : controller.auditTaskCloseRejectButton(
-                                          id: controller.auditTaskId.value);
+                                          id: controller.auditTasknDetailModel
+                                              .value?.plan_id);
 
                   // // print('Goods order id:$id');
                   Get.back();
