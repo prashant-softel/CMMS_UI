@@ -690,7 +690,7 @@ class ObservationPmExecutionViewDialog extends GetView {
                                                                                               num usedQty = controller.dropdownMapperData[record[0]['value']]?.used_qty ?? 0;
                                                                                               int consumedQty = int.tryParse(txt) ?? 0;
 
-                                                                                              if (consumedQty<=(issuedQty - usedQty)) {
+                                                                                              if (consumedQty <= (issuedQty - usedQty)) {
                                                                                                 mapData["value"] = txt;
                                                                                               } else {
                                                                                                 // If the entered quantity exceeds the issued quantity, show an error message or handle it accordingly
