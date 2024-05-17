@@ -356,7 +356,7 @@ class _ViewAuditPlanWebState extends State<ViewAuditPlanWeb> {
                                                     .where((e) =>
                                                         e.feature_id ==
                                                             UserAccessConstants
-                                                                .kPmPlanFeatureId &&
+                                                                .kAuditPlanFeatureId &&
                                                         e.approve ==
                                                             UserAccessConstants
                                                                 .kHaveApproveAccess)
@@ -386,7 +386,7 @@ class _ViewAuditPlanWebState extends State<ViewAuditPlanWeb> {
                                                     .where((e) =>
                                                         e.feature_id ==
                                                             UserAccessConstants
-                                                                .kPmPlanFeatureId &&
+                                                                .kAuditPlanFeatureId &&
                                                         e.approve ==
                                                             UserAccessConstants
                                                                 .kHaveApproveAccess)

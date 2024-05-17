@@ -538,7 +538,7 @@ class _ViewAuditTaskWebState extends State<ViewAuditTaskWeb> {
                                             ),
                                           )
                                         //  )
-                                        : //
+                                        : 
                                         Dimens.box0,
                                     Dimens.boxHeight35,
                                     Row(
@@ -560,22 +560,20 @@ class _ViewAuditTaskWebState extends State<ViewAuditTaskWeb> {
                                         // ),
                                         //  Dimens.boxWidth10,
                                         controller.auditTasknDetailModel.value
-                                                    ?.status ==
-                                                426
-                                            ?
-                                            //         varUserAccessModel
-                                            //                 .value.access_list!
-                                            //                 .where((e) =>
-                                            //                     e.feature_id ==
-                                            //                         UserAccessConstants
-                                            //                             .kPmPlanFeatureId &&
-                                            //                     e.approve ==
-                                            //                         UserAccessConstants
-                                            //                             .kHaveApproveAccess)
-                                            //                 .length >
-                                            //             0
-                                            //     ?
-                                            Container(
+                                                        ?.status ==
+                                                    426 &&
+                                                varUserAccessModel
+                                                        .value.access_list!
+                                                        .where((e) =>
+                                                            e.feature_id ==
+                                                                UserAccessConstants
+                                                                    .kAuditExecutionFeatureId &&
+                                                            e.approve ==
+                                                                UserAccessConstants
+                                                                    .kHaveApproveAccess)
+                                                        .length >
+                                                    0
+                                            ? Container(
                                                 height: 45,
                                                 child: CustomElevatedButton(
                                                   backgroundColor:
@@ -594,23 +592,20 @@ class _ViewAuditTaskWebState extends State<ViewAuditTaskWeb> {
                                         //  : Dimens.box0,
                                         Dimens.boxWidth20,
                                         controller.auditTasknDetailModel.value
-                                                    ?.status ==
-                                                426
-                                            ?
-                                            // &&
-                                            //         varUserAccessModel
-                                            //                 .value.access_list!
-                                            //                 .where((e) =>
-                                            //                     e.feature_id ==
-                                            //                         UserAccessConstants
-                                            //                             .kPmPlanFeatureId &&
-                                            //                     e.approve ==
-                                            //                         UserAccessConstants
-                                            //                             .kHaveApproveAccess)
-                                            //                 .length >
-                                            //             0
-                                            //     ?
-                                            Container(
+                                                        ?.status ==
+                                                    426 &&
+                                                varUserAccessModel
+                                                        .value.access_list!
+                                                        .where((e) =>
+                                                            e.feature_id ==
+                                                                UserAccessConstants
+                                                                    .kAuditExecutionFeatureId &&
+                                                            e.approve ==
+                                                                UserAccessConstants
+                                                                    .kHaveApproveAccess)
+                                                        .length >
+                                                    0
+                                            ? Container(
                                                 height: 45,
                                                 child: CustomElevatedButton(
                                                   backgroundColor:
@@ -632,20 +627,19 @@ class _ViewAuditTaskWebState extends State<ViewAuditTaskWeb> {
                                                         ?.status ==
                                                     425 ||
                                                 controller.auditTasknDetailModel
-                                                        .value?.status ==
-                                                    427
-                                            //     &&
-                                            // varUserAccessModel
-                                            //         .value.access_list!
-                                            //         .where((e) =>
-                                            //             e.feature_id ==
-                                            //                 UserAccessConstants
-                                            //                     .kPmPlanFeatureId &&
-                                            //             e.approve ==
-                                            //                 UserAccessConstants
-                                            //                     .kHaveApproveAccess)
-                                            //         .length >
-                                            //     0
+                                                            .value?.status ==
+                                                        427 &&
+                                                    varUserAccessModel
+                                                            .value.access_list!
+                                                            .where((e) =>
+                                                                e.feature_id ==
+                                                                    UserAccessConstants
+                                                                        .kAuditExecutionFeatureId &&
+                                                                e.approve ==
+                                                                    UserAccessConstants
+                                                                        .kHaveAddAccess)
+                                                            .length >
+                                                        0
                                             ? Container(
                                                 height: 45,
                                                 child: CustomElevatedButton(
@@ -664,12 +658,28 @@ class _ViewAuditTaskWebState extends State<ViewAuditTaskWeb> {
                                             : Dimens.box0,
                                         Dimens.boxWidth20,
 
-                                        controller.auditTasknDetailModel.value
-                                                        .status ==
-                                                    422 ||
+                                        controller.auditTasknDetailModel.value.status == 422 &&
+                                                    varUserAccessModel.value.access_list!
+                                                            .where((e) =>
+                                                                e.feature_id ==
+                                                                    UserAccessConstants
+                                                                        .kAuditExecutionFeatureId &&
+                                                                e.approve ==
+                                                                    UserAccessConstants
+                                                                        .kHaveAddAccess)
+                                                            .length >
+                                                        0 ||
                                                 controller.auditTasknDetailModel
-                                                        .value.status ==
-                                                    430
+                                                            .value.status ==
+                                                        430 &&
+                                                    varUserAccessModel
+                                                            .value.access_list!
+                                                            .where((e) =>
+                                                                e.feature_id ==
+                                                                    UserAccessConstants.kAuditExecutionFeatureId &&
+                                                                e.approve == UserAccessConstants.kHaveAddAccess)
+                                                            .length >
+                                                        0
                                             ? Container(
                                                 height: 45,
                                                 child: CustomElevatedButton(
@@ -689,8 +699,19 @@ class _ViewAuditTaskWebState extends State<ViewAuditTaskWeb> {
                                         Dimens.boxWidth20,
 
                                         controller.auditTasknDetailModel.value
-                                                    .status ==
-                                                429
+                                                        .status ==
+                                                    429 &&
+                                                varUserAccessModel
+                                                        .value.access_list!
+                                                        .where((e) =>
+                                                            e.feature_id ==
+                                                                UserAccessConstants
+                                                                    .kAuditExecutionFeatureId &&
+                                                            e.approve ==
+                                                                UserAccessConstants
+                                                                    .kHaveApproveAccess)
+                                                        .length >
+                                                    0
                                             ? Container(
                                                 height: 45,
                                                 child: CustomElevatedButton(
@@ -710,8 +731,19 @@ class _ViewAuditTaskWebState extends State<ViewAuditTaskWeb> {
                                         Dimens.boxWidth20,
 
                                         controller.auditTasknDetailModel.value
-                                                    .status ==
-                                                429
+                                                        .status ==
+                                                    429 &&
+                                                varUserAccessModel
+                                                        .value.access_list!
+                                                        .where((e) =>
+                                                            e.feature_id ==
+                                                                UserAccessConstants
+                                                                    .kAuditExecutionFeatureId &&
+                                                            e.approve ==
+                                                                UserAccessConstants
+                                                                    .kHaveApproveAccess)
+                                                        .length >
+                                                    0
                                             ? Container(
                                                 height: 45,
                                                 child: CustomElevatedButton(
@@ -729,12 +761,28 @@ class _ViewAuditTaskWebState extends State<ViewAuditTaskWeb> {
                                               )
                                             : Dimens.box0,
                                         Dimens.boxWidth20,
-                                        controller.auditTasknDetailModel.value
-                                                        .status ==
-                                                    425 ||
+                                        controller.auditTasknDetailModel.value.status == 425 &&
+                                                    varUserAccessModel.value.access_list!
+                                                            .where((e) =>
+                                                                e.feature_id ==
+                                                                    UserAccessConstants
+                                                                        .kAuditExecutionFeatureId &&
+                                                                e.approve ==
+                                                                    UserAccessConstants
+                                                                        .kHaveAddAccess)
+                                                            .length >
+                                                        0 ||
                                                 controller.auditTasknDetailModel
-                                                        .value.status ==
-                                                    427
+                                                            .value.status ==
+                                                        427 &&
+                                                    varUserAccessModel
+                                                            .value.access_list!
+                                                            .where((e) =>
+                                                                e.feature_id ==
+                                                                    UserAccessConstants.kAuditExecutionFeatureId &&
+                                                                e.approve == UserAccessConstants.kHaveAddAccess)
+                                                            .length >
+                                                        0
                                             ? Container(
                                                 height: 45,
                                                 child: CustomElevatedButton(
@@ -750,12 +798,28 @@ class _ViewAuditTaskWebState extends State<ViewAuditTaskWeb> {
                                             : Dimens.box0,
                                         Dimens.boxWidth20,
 
-                                        controller.auditTasknDetailModel.value
-                                                        .status ==
-                                                    422 ||
+                                        controller.auditTasknDetailModel.value.status == 422 &&
+                                                    varUserAccessModel.value.access_list!
+                                                            .where((e) =>
+                                                                e.feature_id ==
+                                                                    UserAccessConstants
+                                                                        .kAuditExecutionFeatureId &&
+                                                                e.approve ==
+                                                                    UserAccessConstants
+                                                                        .kHaveAddAccess)
+                                                            .length >
+                                                        0 ||
                                                 controller.auditTasknDetailModel
-                                                        .value.status ==
-                                                    430
+                                                            .value.status ==
+                                                        430 &&
+                                                    varUserAccessModel
+                                                            .value.access_list!
+                                                            .where((e) =>
+                                                                e.feature_id ==
+                                                                    UserAccessConstants.kAuditExecutionFeatureId &&
+                                                                e.approve == UserAccessConstants.kHaveAddAccess)
+                                                            .length >
+                                                        0
                                             ? Container(
                                                 height: 45,
                                                 child: CustomElevatedButton(
