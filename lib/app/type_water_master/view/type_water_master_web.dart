@@ -419,8 +419,7 @@ class WaterTypeMasterWeb extends GetView<WaterTypeMasterController> {
                                         Dimens.boxHeight10,
                                         Row(
                                           children: [
-                                            CustomRichText(
-                                                title: "Showing Header"),
+                                            Text("Showing Header"),
                                             Dimens.boxWidth10,
                                             CustomSwitchTroggle(
                                                 value:
@@ -700,11 +699,10 @@ class WaterTypeMasterWeb extends GetView<WaterTypeMasterController> {
                                                                       .value
                                                                       .access_list!
                                                                       .where((e) =>
-                                                                          e.feature_id ==
-                                                                              UserAccessConstants
-                                                                                  .kMasterFeatureId &&
+                                                                          e.feature_id == UserAccessConstants.kMasterFeatureId &&
                                                                           e.edit ==
-                                                                              UserAccessConstants.kHaveEditAccess)
+                                                                              UserAccessConstants
+                                                                                  .kHaveEditAccess)
                                                                       .length >
                                                                   0
                                                               ? TableActionButton(
@@ -715,25 +713,64 @@ class WaterTypeMasterWeb extends GetView<WaterTypeMasterController> {
                                                                   message:
                                                                       'Edit',
                                                                   onPress: () {
-                                                                    int?
-                                                                        waterTypeId =
+                                                                    controller.selectedItem = controller.waterTypeMasterList!.firstWhere((element) =>
+                                                                        "${element!.id}" ==
                                                                         controller
-                                                                            .waterTypeMasterList?[index]!
-                                                                            .id;
-                                                                    controller.getWaterTypeById(
-                                                                        waterTypeId:
-                                                                            waterTypeId);
+                                                                            .waterTypeMasterList![index]!
+                                                                            .id
+                                                                            .toString());
+
                                                                     controller
-                                                                        .isContainerVisible
-                                                                        .value = true;
+                                                                        .descriptionCtrlr
+                                                                        .text = controller
+                                                                            .selectedItem
+                                                                            ?.description ??
+                                                                        '';
+                                                                    controller
+                                                                        .titleCtrlr
+                                                                        .text = controller
+                                                                            .selectedItem
+                                                                            ?.name ??
+                                                                        '';
                                                                     controller
                                                                         .isToggleOn
                                                                         .value = controller.selectedItem?.show_opening ==
                                                                             1
                                                                         ? true
                                                                         : false;
-                                                                  },
-                                                                )
+                                                                    controller
+                                                                        .isContainerVisible
+                                                                        .value = true;
+                                                                  })
+
+                                                              //  TableActionButton(
+                                                              //     color: ColorValues
+                                                              //         .editColor,
+                                                              //     icon: Icons
+                                                              //         .edit,
+                                                              //     message:
+                                                              //         'Edit',
+                                                              //     onPress: () {
+                                                              //       int?
+                                                              //           waterTypeId =
+                                                              //           controller
+                                                              //               .waterTypeMasterList?[index]!
+                                                              //               .id;
+                                                              //       controller.getWaterTypeById(
+                                                              //           waterTypeId:
+                                                              //               waterTypeId);
+                                                              //       controller
+                                                              //           .isContainerVisible
+                                                              //           .value = true;
+                                                              //       controller
+                                                              //           .isToggleOn
+                                                              //           .value = controller.selectedItem?.show_opening ==
+                                                              //               1
+                                                              //           ? true
+                                                              //           : false;
+                                                              //     },
+                                                              //   )
+                                                              // :
                                                               : Dimens.box0,
                                                           varUserAccessModel
                                                                       .value
