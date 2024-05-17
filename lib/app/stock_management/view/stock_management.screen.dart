@@ -397,7 +397,7 @@ class StockManagementDashboardScreen
                                
                                     
                                  _importPlan(
-                                    tittle: " Material Category",
+                                    tittle: "Material Category",
                                     ontap: () {
                                       controller.materialCategory();
                                     })
