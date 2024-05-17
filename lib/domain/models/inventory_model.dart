@@ -33,6 +33,27 @@ class InventoryModel {
       this.status,
       this.linkedToBlockId,
       this.linkedToBlockName,
+      this.dccapacity,
+      this.dcRating,
+      this.acrating,
+      this.acCapacity,
+      this.descMaintenace,
+      this.warrtype,
+      this.wprovidername,
+      this.wtenure,
+      this.certinumber,
+      this.manuname,
+      this.model,
+      this.cost,
+      this.currency,
+      this.barcode,
+      this.unspcCode,
+      this.purchasecode,
+      this.califrequency,
+      this.calireminderdays,
+      this.calibrationtestdate,
+      this.startdate,
+      this.calilastdate,
       this.moduleQuantity});
 
   int? id;
@@ -41,7 +62,25 @@ class InventoryModel {
   String? blockName;
   String? description;
   String? type;
+  int? dccapacity;
+  String? dcRating;
+  String? acrating;
   int? categoryId;
+  int? acCapacity;
+  String? descMaintenace;
+  String? warrtype;
+  String? wprovidername;
+  int? wtenure;
+  String? certinumber;
+  String? manuname;
+  String? model;
+  double? cost;
+  String? currency;
+  String? barcode;
+  String? unspcCode;
+  String? purchasecode;
+  int? califrequency;
+  int? calireminderdays;
   String? categoryName;
   int? parentId;
   String? parentName;
@@ -52,8 +91,10 @@ class InventoryModel {
   int? specialTool;
   int? warrantyId;
   DateTime? calibrationDueDate;
+  DateTime? calibrationtestdate;
+  DateTime? startdate;
+  DateTime? calilastdate;
   String? status;
-
   int? linkedToBlockId;
   String? linkedToBlockName;
 
@@ -70,6 +111,24 @@ class InventoryModel {
         parentId: json["parentId"],
         parentName: json["parentName"],
         customerName: json["customerName"],
+        dccapacity: json["dccapacity"],
+        dcRating: json["dcRating"],
+        acCapacity: json["acCapacity"],
+        acrating: json["acrating"],
+        descMaintenace: json["descMaintenace"],
+        warrtype: json["warrantyType"],
+        wprovidername: json["warrantyProviderName"],
+        wtenure: json["warrantyTenture"],
+        certinumber: json["certificate_number"],
+        manuname: json["manufacturername"],
+        model: json["model"],
+        cost: json["cost"],
+        currency: json["currency"],
+        barcode: json["barcode"],
+        unspcCode: json["unspCode"],
+        purchasecode: json["purchaseCode"],
+        califrequency: json["calibrationFrequency"],
+        calireminderdays: json["calibrationReminderDays"],
         ownerName: json["ownerName"],
         operatorName: json["operatorName"],
         serialNumber: json["serialNumber"],
@@ -81,6 +140,15 @@ class InventoryModel {
         calibrationDueDate: json['calibrationDueDate'] == null
             ? null
             : DateTime.parse(json['calibrationDueDate'] as String),
+        calibrationtestdate: json['calibration_testing_date'] == null
+            ? null
+            : DateTime.parse(json['calibration_testing_date'] as String),
+        startdate: json['start_date'] == null
+            ? null
+            : DateTime.parse(json['start_date'] as String),
+        calilastdate: json['calibrationLastDate'] == null
+            ? null
+            : DateTime.parse(json['calibrationLastDate'] as String),
         status: json["status"],
       );
 
@@ -104,7 +172,28 @@ class InventoryModel {
         "serialNumber": serialNumber,
         "specialTool": specialTool,
         "warrantyId": warrantyId,
+        "dccapacity": dccapacity,
+        "dcRating": dcRating,
+        "acCapacity": acCapacity,
+        "acrating": acrating,
+        "descMaintenace": descMaintenace,
+        "warrantyType": warrtype,
+        "warrantyProviderName": wprovidername,
+        "warrantyTenture": wtenure,
+        "certificate_number": certinumber,
+        "manufacturername": manuname,
+        "model": model,
+        "cost": cost,
+        "currency": currency,
+        "barcode": barcode,
+        "unspCode": unspcCode,
+        "purchaseCode": purchasecode,
+        "calibrationFrequency": califrequency,
+        "calibrationReminderDays": calireminderdays,
         "calibrationDueDate": calibrationDueDate?.toIso8601String(),
+        "calibration_testing_date": calibrationtestdate?.toIso8601String(),
+        "start_date": startdate?.toIso8601String(),
+        "calibrationLastDate": calilastdate?.toIso8601String(),
         "status": status,
       };
 }
