@@ -662,7 +662,7 @@ class PmTaskDataSource extends DataTableSource {
                                     .where((e) =>
                                         e.feature_id ==
                                             UserAccessConstants
-                                                .kPmTaskFeatureId &&
+                                                .kAuditExecutionFeatureId &&
                                         e.view ==
                                             UserAccessConstants.kHaveViewAccess)
                                     .length >

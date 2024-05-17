@@ -112,6 +112,12 @@ abstract class UserAccessConstants {
   /// MASTERS
   static int kMasterFeatureId = 50;
   static String kFeatureMasterName = "Masters";
+  //Audit Plan
+  static int kAuditPlanFeatureId = 18;
+  static String kFeatureAuditPlanName = "Audit Plan";
+  //Audit Execution
+  static int kAuditExecutionFeatureId = 21;
+  static String kFeatureAuditExecutionName = "Audit Execution";
 
   ///USER ACCESS
   static int kHaveAddAccess = 1;
