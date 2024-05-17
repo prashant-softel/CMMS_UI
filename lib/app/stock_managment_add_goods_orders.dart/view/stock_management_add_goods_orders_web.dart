@@ -5,6 +5,7 @@ import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/app/widgets/custom_multiselect_dialog_field.dart';
 import 'package:cmms/app/widgets/history_table_widget_web.dart';
 import 'package:cmms/app/widgets/multipule_dropdown_web.dart';
+import 'package:cmms/app/widgets/custom_textField.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -229,6 +230,7 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                                 // Row(
                                                 //   children: [
                                                 //     CustomRichText(
+                                                  
                                                 //         title:
                                                 //             'Delivery Challan: '),
                                                 //     Dimens.boxWidth10,
@@ -267,6 +269,28 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                                           controller.ponofocus,
                                                       scroll:
                                                           controller.ponoscroll,
+                                                          //validate
+                                                           errorController: controller
+                                                                  .isPOInvalid
+                                                                  .value
+                                                              ? "Required field"
+                                                              : null,
+
+                                                          onChanged: (value) {
+                                                            if (value
+                                                                    .trim()
+                                                                    .length >
+                                                                0) {
+                                                              controller
+                                                                  .isPOInvalid
+                                                                  .value = false;
+                                                            } else {
+                                                              controller
+                                                                  .isPOInvalid
+                                                                  .value = true;
+                                                            }
+                                                          },
+                                                          
                                                     ),
                                                   ],
                                                 ),
@@ -374,6 +398,29 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                                           controller.amntfocus,
                                                       scroll:
                                                           controller.amntscroll,
+
+                                                          //validate
+
+                                                          errorController: controller
+                                                                  .isAmountInvalid
+                                                                  .value
+                                                              ? "Required field"
+                                                              : null,
+
+                                                          onChanged: (value) {
+                                                            if (value
+                                                                    .trim()
+                                                                    .length >
+                                                                0) {
+                                                              controller
+                                                                  .isAmountInvalid
+                                                                  .value = false;
+                                                            } else {
+                                                              controller
+                                                                  .isAmountInvalid
+                                                                  .value = true;
+                                                            }
+                                                          },
                                                     ),
                                                   ],
                                                 ),
@@ -1215,12 +1262,15 @@ class GoodsOrderTextField extends StatelessWidget {
   final TextEditingController? textController;
   FocusNode? focusnode;
   ScrollController? scroll;
+  
+  var onChanged;
   GoodsOrderTextField(
       {this.keyboardType,
       this.inputFormatters,
       this.textController,
       this.focusnode,
-      this.scroll});
+      this.onChanged,
+      this.scroll, String? errorController});
 
   @override
   Widget build(BuildContext context) {
