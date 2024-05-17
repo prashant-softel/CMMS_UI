@@ -324,13 +324,10 @@ class ImportDsmListChargesListContentWeb
                                             final dataSource =
                                                 DSMDataSource(controller);
                                             return PaginatedDataTable2(
-                                              columnSpacing: 10,
-                                              dataRowHeight: Get.height * 0.12,
+                                              dataRowHeight: 45,
                                               source: dataSource,
-                                              minWidth: 3000,
-                                              showCheckboxColumn: false,
-                                              rowsPerPage:
-                                                  10, // Number of rows per page
+                                              minWidth: Get.width * 2,
+                                              rowsPerPage: 10,
                                               availableRowsPerPage: [
                                                 10,
                                                 20,
@@ -344,6 +341,8 @@ class ImportDsmListChargesListContentWeb
                                                       entry.key,
                                                       controller.filterText[
                                                           entry.key]!,
+                                                      controller.columnwidth[
+                                                          entry.key],
                                                     ),
                                               ],
                                             );
@@ -373,7 +372,7 @@ class ImportDsmListChargesListContentWeb
           ),
           child: Container(
             padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-            height: Get.height * .55,
+            height: Get.height * .6,
             width: 460,
             constraints: BoxConstraints(maxHeight: 360),
             child: SingleChildScrollView(
@@ -498,8 +497,9 @@ class ImportDsmListChargesListContentWeb
                       ),
                     ],
                   ),
+                  Dimens.boxHeight10,
                   Container(
-                    height: 45,
+                    height: 35,
                     child: CustomElevatedButton(
                       backgroundColor: ColorValues.navyBlueColor,
                       text: "Apply",
@@ -702,12 +702,12 @@ class ImportDsmListChargesListContentWeb
     // String columnName,
     String header,
     RxString filterText,
-    // double? fixedWidth,
+    double? fixedWidth,
   ) {
     return DataColumn2(
-      // fixedWidth: fixedWidth,
+      fixedWidth: fixedWidth,
       label: Column(
-        mainAxisAlignment: MainAxisAlignment.center, //
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Align(
             alignment: Alignment.centerLeft,
@@ -747,6 +747,9 @@ class DSMDataSource extends DataTableSource {
           (dsm?.spv ?? '')
               .toLowerCase()
               .contains(controller.spv.value.toLowerCase()) &&
+          (dsm?.site ?? '')
+              .toLowerCase()
+              .contains(controller.site.value.toLowerCase()) &&
           (dsm?.dsmType ?? '')
               .toLowerCase()
               .contains(controller.dsmType.value.toLowerCase()) &&
@@ -784,6 +787,7 @@ class DSMDataSource extends DataTableSource {
       '${dsmDetails?.month ?? ''}',
       '${dsmDetails?.state ?? ''}',
       '${dsmDetails?.spv ?? ''}',
+      '${dsmDetails?.site ?? ''}',
       '${dsmDetails?.dsmType ?? ''}',
       '${dsmDetails?.forcasterName ?? ''}',
       '${dsmDetails?.category ?? ''}',

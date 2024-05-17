@@ -53,60 +53,80 @@ class _CustomMultiSelectDialogFieldState
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          ListTile(
-            title: widget.initialValue == []
-                ? Responsive.isMobile(context) || Responsive.isTablet(context)
-                    ? Text(
-                        widget.title!,
-                        style: Styles.black13,
-                      )
-                    : Text(widget.title!)
-                : SizedBox(
-                    height: 40,
-                    child: Scrollbar(
-                      thumbVisibility: true,
-                      controller: _firstController,
-                      child: ListView.builder(
+          InkWell(
+            onTap: () async {
+              final selectedItems = await Get.dialog(
+                MultiSelectDialog(
+                  height: MediaQuery.of(context).size.height * 0.4,
+                  width: MediaQuery.of(context).size.height * 0.3,
+                  searchable: true,
+                  items: widget.items!,
+                  initialValue: _selectedItems,
+                ),
+              );
+              if (selectedItems != null) {
+                setState(() {
+                  _selectedItems = selectedItems.cast<dynamic>().toList();
+                });
+                widget.onConfirm(_selectedItems);
+              }
+            },
+            child: ListTile(
+              title: widget.initialValue == []
+                  ? Responsive.isMobile(context) || Responsive.isTablet(context)
+                      ? Text(
+                          widget.title!,
+                          style: Styles.black13,
+                        )
+                      : Text(widget.title!)
+                  : SizedBox(
+                      height: 40,
+                      child: Scrollbar(
+                        thumbVisibility: true,
                         controller: _firstController,
-                        itemCount: _selectedItems.length,
-                        itemBuilder: (context, index) {
-                          final item = _selectedItems[index];
-                          return Chip(
-                            label: Text(widget.items!
-                                .firstWhere((element) => element.value == item)
-                                .label), // Displaying the name of the selected item
-                            deleteIcon: Icon(Icons.cancel),
-                            onDeleted: () {
-                              setState(() {
-                                _selectedItems.remove(item);
-                              });
-                              widget.onConfirm(_selectedItems);
-                            },
-                          );
-                        },
-                        scrollDirection: Axis.horizontal,
+                        child: ListView.builder(
+                          controller: _firstController,
+                          itemCount: _selectedItems.length,
+                          itemBuilder: (context, index) {
+                            final item = _selectedItems[index];
+                            return Chip(
+                              label: Text(widget.items!
+                                  .firstWhere(
+                                      (element) => element.value == item)
+                                  .label), // Displaying the name of the selected item
+                              deleteIcon: Icon(Icons.cancel),
+                              onDeleted: () {
+                                setState(() {
+                                  _selectedItems.remove(item);
+                                });
+                                widget.onConfirm(_selectedItems);
+                              },
+                            );
+                          },
+                          scrollDirection: Axis.horizontal,
+                        ),
                       ),
                     ),
-                  ),
-            trailing: IconButton(
-              icon: Icon(Icons.arrow_drop_down),
-              onPressed: () async {
-                final selectedItems = await Get.dialog(
-                  MultiSelectDialog(
-                    height: MediaQuery.of(context).size.height * 0.4,
-                    width: MediaQuery.of(context).size.height * 0.3,
-                    searchable: true,
-                    items: widget.items!,
-                    initialValue: _selectedItems,
-                  ),
-                );
-                if (selectedItems != null) {
-                  setState(() {
-                    _selectedItems = selectedItems.cast<dynamic>().toList();
-                  });
-                  widget.onConfirm(_selectedItems);
-                }
-              },
+              trailing: IconButton(
+                icon: Icon(Icons.arrow_drop_down),
+                onPressed: () async {
+                  final selectedItems = await Get.dialog(
+                    MultiSelectDialog(
+                      height: MediaQuery.of(context).size.height * 0.4,
+                      width: MediaQuery.of(context).size.height * 0.3,
+                      searchable: true,
+                      items: widget.items!,
+                      initialValue: _selectedItems,
+                    ),
+                  );
+                  if (selectedItems != null) {
+                    setState(() {
+                      _selectedItems = selectedItems.cast<dynamic>().toList();
+                    });
+                    widget.onConfirm(_selectedItems);
+                  }
+                },
+              ),
             ),
           ),
           // SizedBox(

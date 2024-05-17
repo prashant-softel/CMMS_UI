@@ -65,6 +65,21 @@ class ImportDsmListChargesListController extends GetxController {
     "DSM Percentage": true,
   });
 
+  final Map<String, double> columnwidth = {
+    "Financial Year": 150,
+    "Month": 110,
+    "State": 200,
+    "SPV": 150,
+    "Site": 130,
+    "DSM Type": 150,
+    "ForeCasterName": 200,
+    "Category": 150,
+    "DSM Penalty": 155,
+    "Schedule KWH": 170,
+    "Actual KWH": 150,
+    "DSM Percentage": 160,
+  };
+
   RxString fy = ''.obs;
   RxString months = ''.obs;
   RxString state = ''.obs;
