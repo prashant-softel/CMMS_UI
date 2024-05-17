@@ -35,6 +35,10 @@ class WaterTypeMasterController extends GetxController {
     rowCount: 0,
     rowsPerPage: 10,
   );
+  var isToggleOn = false.obs;
+  void toggle() {
+    isToggleOn.value = !isToggleOn.value;
+  }
 
   final isSuccess = false.obs;
   StreamSubscription<int>? facilityIdStreamSubscription;
@@ -153,6 +157,7 @@ class WaterTypeMasterController extends GetxController {
     waterTypeId = selectedItem?.id;
     titleCtrlr.text = selectedItem!.name!;
     descriptionCtrlr.text = selectedItem!.description!;
+    // isToggleOn.value = selectedItem?.show_opening != null ? true : false;
     update(['grievance_type_by_id']);
   }
 
@@ -187,6 +192,7 @@ class WaterTypeMasterController extends GetxController {
         facility_id: _facilityId,
         name: _title,
         description: _description,
+        show_opening: isToggleOn.value ? 1 : 0,
       );
 
       var waterTypeJson = waterTypeMasterJson.toJson();
@@ -211,6 +217,7 @@ class WaterTypeMasterController extends GetxController {
     waterTypeId = 0;
     titleCtrlr.clear();
     descriptionCtrlr.clear();
+    isToggleOn.value = false;
     Future.delayed(Duration(seconds: 1), () {
       getTypeOfWaterList();
     });
@@ -230,6 +237,7 @@ class WaterTypeMasterController extends GetxController {
       isFormInvalid.value = true;
       isDescriptionInvalid.value = true;
     }
+
     checkForm();
     if (isFormInvalid.value == true) {
       return false;
