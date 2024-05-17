@@ -718,7 +718,7 @@ class _ViewAuditTaskWebState extends State<ViewAuditTaskWeb> {
                                                   backgroundColor:
                                                       ColorValues.approveColor,
                                                   text: "Approve",
-                                                  icon: Icons.close,
+                                                  icon: Icons.check,
                                                   onPressed: () {
                                                     Get.dialog(
                                                         AuditTaskApprovedRejectDialog(
