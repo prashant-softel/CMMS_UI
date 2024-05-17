@@ -3,6 +3,7 @@ import 'package:cmms/app/stock_managment_add_goods_orders.dart/view/stock_manage
 import 'package:cmms/app/theme/color_values.dart';
 import 'package:cmms/app/theme/styles.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
+import 'package:cmms/app/widgets/custom_textField.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -59,7 +60,8 @@ class AddModuleCleaningExecutionDialog extends GetView {
                     SizedBox(
                       width: 5,
                     ),
-                    GoodsOrderTextField(
+                    LoginCustomTextfield(
+                      width: (MediaQuery.of(context).size.width * .2),
                       keyboardType: TextInputType.number,
                       // inputFormatters: <TextInputFormatter>[FilteringTextInputFormatter.digitsOnly],
                       textController: controller.remarkCtrlrWeb,
@@ -74,7 +76,8 @@ class AddModuleCleaningExecutionDialog extends GetView {
                       style: TextStyle(fontSize: 17),
                     ),
                     Dimens.boxWidth20,
-                    GoodsOrderTextField(
+                    LoginCustomTextfield(
+                      width: (MediaQuery.of(context).size.width * .2),
                       keyboardType: TextInputType.number,
                       inputFormatters: <TextInputFormatter>[
                         FilteringTextInputFormatter.digitsOnly

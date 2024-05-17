@@ -58,9 +58,12 @@ class StockManagementAddGoodsOrdersController extends GetxController {
   Rx<bool> ispaidSelected = true.obs;
   Rx<String> selectedReqOrder = ''.obs;
   Rx<String> selectedpaid = ''.obs;
+
+  Rx<bool> isAmountInvalid = false.obs;
+  Rx<bool> isPOInvalid = false.obs;
   RxList<int> selectedReqOrderId = <int>[].obs;
   Rx<int> roId = 0.obs;
-
+  Rx<bool> isFormInvalid = false.obs;
   var commentCtrlr = TextEditingController();
   Rx<String> selectedFacility = ''.obs;
   Rx<String> selectedUnitCurrency = ''.obs;
@@ -571,6 +574,10 @@ class StockManagementAddGoodsOrdersController extends GetxController {
   }
 
   void createGoodsOrder() async {
+    checkForm();
+    if (isFormInvalid.value) {
+      return;
+    }
     // DateTime now = DateTime.now();
     // String currentDate =
     //     DateTime.now().toString().split(' ')[0].replaceAll('-', '-');
@@ -659,6 +666,10 @@ class StockManagementAddGoodsOrdersController extends GetxController {
   }
 
   void updateGoodsOrder() async {
+    checkForm();
+    if (isFormInvalid.value) {
+      return;
+    }
     String _challanNoCtrlr = challanNoCtrlr.text.trim();
     String _pOCtrlr = pOCtrlr.text.trim();
     String _frieghtToPayPaidCtrlr = frieghtToPayPaidCtrlr.text.trim();
@@ -766,5 +777,21 @@ class StockManagementAddGoodsOrdersController extends GetxController {
     }
     await getRoDetailsByID(
         requestID: selectedReqOrderId.value, facilityId: facilityId);
+  }
+
+  //validation
+  void checkForm() {
+    if (pOCtrlr.text.trim().length < 3) {
+      isPOInvalid.value = true;
+    }
+    if (pOCtrlr.value == true) {
+      isFormInvalid.value = true;
+    }
+    if (amountCtrlr.text.trim().length < 3) {
+      isAmountInvalid.value = true;
+    }
+    if (amountCtrlr.value == true) {
+      isFormInvalid.value = true;
+    }
   }
 }

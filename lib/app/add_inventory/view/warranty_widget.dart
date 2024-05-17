@@ -100,10 +100,11 @@ class _WarrantyTabWidgetState extends State<WarrantyTabWidget> {
                             children: [
                               CustomRichText(title: "Description"),
                               SizedBox(width: 10),
-                              GoodsOrderTextField(
+                              LoginCustomTextfield(
+                                width: (MediaQuery.of(context).size.width * .2),
                                 textController:
                                     controller.warrentyDescriptionCtrlr,
-                                focusnode: controller.wdescFocus,
+                                // focusnode: controller.wdescFocus,
                                 scroll: controller.wdescScroll,
                               ),
                             ],

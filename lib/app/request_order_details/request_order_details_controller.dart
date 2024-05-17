@@ -27,6 +27,8 @@ class GoodsOrdersReqDetailController extends GetxController {
       <GetRODetailsByIDModel?>[].obs;
   Rx<GetRODetailsByIDModel?> getPurchaseDetailsByIDModel =
       GetRODetailsByIDModel().obs;
+      
+      Rx<bool> isCostInvalid = false.obs;
   RxList<HistoryModel?>? historyList = <HistoryModel?>[].obs;
   RxList<GetAssetDataModel?> assetList = <GetAssetDataModel>[].obs;
   RxMap<dynamic, dynamic> dropdownMapperData = {}.obs;

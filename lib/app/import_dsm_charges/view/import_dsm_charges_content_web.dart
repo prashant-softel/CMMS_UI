@@ -4,6 +4,7 @@ import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/stock_managment_add_goods_orders.dart/view/stock_management_add_goods_orders_web.dart';
 import 'package:cmms/app/theme/dimens.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
+import 'package:cmms/app/widgets/custom_textField.dart';
 import 'package:cmms/app/widgets/stock_dropdown.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -200,7 +201,12 @@ class _ImportDsmChargesContentWebState
                                                       .size
                                                       .width /
                                                   6,
-                                              child: GoodsOrderTextField()),
+                                              child: LoginCustomTextfield(
+                                                width: (MediaQuery.of(context)
+                                                        .size
+                                                        .width *
+                                                    .2),
+                                              )),
                                         ],
                                       ),
                                       Dimens.boxHeight20,
