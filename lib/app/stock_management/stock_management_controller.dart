@@ -60,4 +60,11 @@ class StockManagementDashboardController extends GetxController {
   void clearValueimportType() {
     stockManagementDashboardPresenter.clearValueimportType();
   }
+
+  Future<void> materialCategory() async {
+    clearValueimportType();
+    Get.toNamed(
+      Routes.materialCategory,
+    );
+  }
 }

@@ -97,6 +97,8 @@ import 'package:cmms/app/inventory_list/inventory_list_binding.dart';
 import 'package:cmms/app/issue_mrs_approve_reject/issue_mrs_approve_binding.dart';
 import 'package:cmms/app/master_responsibility/responsivility_binding.dart';
 import 'package:cmms/app/master_responsibility/view/responsivility_screen.dart';
+import 'package:cmms/app/material_category/material_category_binding.dart';
+import 'package:cmms/app/material_category/view/material_category_screen.dart';
 import 'package:cmms/app/mis/mis_dashboard_binding.dart';
 import 'package:cmms/app/mis/view/mis_dashboard_screen.dart';
 import 'package:cmms/app/mis_list_of_observation/observation_list_binding.dart';
@@ -1283,6 +1285,11 @@ class AppPages {
       name: _Paths.attendanceScreen,
       page: AttendanceScreen.new,
       binding: AttendanceBinding(),
+    ),
+     GetPage<dynamic>(
+      name: _Paths.materialCategory,
+      page: MaterialCategoryScreen.new,
+      binding: MAterialCategoryBinding(),
     ),
   ];
 }

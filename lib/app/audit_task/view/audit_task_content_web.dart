@@ -198,34 +198,36 @@ class _AuditTaskContentWebState extends State<AuditTaskContentWeb> {
                                           ),
                                         ),
                                       ),
-                                      itemBuilder: (BuildContext context) => <
-                                          PopupMenuEntry<String>>[]..addAll(
-                                            controller
-                                                .columnVisibility.value.entries
-                                                .map((e) {
-                                          return PopupMenuItem<String>(
-                                              child: ValueListenableBuilder(
-                                                  valueListenable: controller
-                                                      .columnVisibility,
-                                                  builder:
-                                                      (context, value, child) {
-                                                    return Row(
-                                                      children: [
-                                                        Checkbox(
-                                                          value: value[e.key],
-                                                          onChanged:
-                                                              (newValue) {
-                                                            controller
-                                                                .setColumnVisibility(
-                                                                    e.key,
-                                                                    newValue!);
-                                                          },
-                                                        ),
-                                                        Text(e.key),
-                                                      ],
-                                                    );
-                                                  }));
-                                        })),
+                                      itemBuilder: (BuildContext context) =>
+                                          <PopupMenuEntry<String>>[]..addAll(
+                                                controller.columnVisibility
+                                                    .value.entries
+                                                    .map((e) {
+                                              return PopupMenuItem<String>(
+                                                  child: ValueListenableBuilder(
+                                                      valueListenable:
+                                                          controller
+                                                              .columnVisibility,
+                                                      builder: (context, value,
+                                                          child) {
+                                                        return Row(
+                                                          children: [
+                                                            Checkbox(
+                                                              value:
+                                                                  value[e.key],
+                                                              onChanged:
+                                                                  (newValue) {
+                                                                controller
+                                                                    .setColumnVisibility(
+                                                                        e.key,
+                                                                        newValue!);
+                                                              },
+                                                            ),
+                                                            Text(e.key),
+                                                          ],
+                                                        );
+                                                      }));
+                                            })),
                                       onSelected: (String value) {
                                         // Handle column selection
                                       },
@@ -419,37 +421,38 @@ class _AuditTaskContentWebState extends State<AuditTaskContentWeb> {
           Column(
               mainAxisAlignment: MainAxisAlignment.center, //
               children: [
-            SizedBox(
-              height: Get.height * 0.05,
-              child: TextField(
-                style: GoogleFonts.lato(
-                  textStyle: TextStyle(
-                      fontSize: 16.0, height: 1.0, color: Colors.black),
-                ),
-                onChanged: (value) {
-                  filterText.value = value;
-                  //   onSearchCallBack(value);
-                },
-                textAlign: TextAlign.left,
-                decoration: InputDecoration(
-                  hintText: 'Filter',
-                  contentPadding: EdgeInsets.fromLTRB(
-                      5, 0, 5, 0), // Reduced vertical padding
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(5),
-                    borderSide: BorderSide(color: Colors.black),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(5),
-                    borderSide: BorderSide(color: Colors.black),
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(5),
-                    borderSide: BorderSide(color: Colors.black),
-                  ),
-                ),
-              ),
-            ),
+            // SizedBox(
+            //   height: Get.height * 0.05,
+            //   child: TextField(
+            //     style: GoogleFonts.lato(
+            //       textStyle: TextStyle(
+            //           fontSize: 16.0, height: 1.0, color: Colors.black),
+            //     ),
+            //     onChanged: (value) {
+            //       filterText.value = value;
+            //       //   onSearchCallBack(value);
+            //     },
+            //     textAlign: TextAlign.left,
+            //     decoration: InputDecoration(
+            //       hintText: 'Filter',
+            //       contentPadding: EdgeInsets.fromLTRB(
+            //           5, 0, 5, 0), // Reduced vertical padding
+            //       border: OutlineInputBorder(
+            //         borderRadius: BorderRadius.circular(5),
+            //         borderSide: BorderSide(color: Colors.black),
+            //       ),
+            //       focusedBorder: OutlineInputBorder(
+            //         borderRadius: BorderRadius.circular(5),
+            //         borderSide: BorderSide(color: Colors.black),
+            //       ),
+            //       enabledBorder: OutlineInputBorder(
+            //         borderRadius: BorderRadius.circular(5),
+            //         borderSide: BorderSide(color: Colors.black),
+            //       ),
+            //     ),
+            //   ),
+            // ),
+
             Align(
               alignment: Alignment.centerLeft,
               child: Text(
@@ -566,7 +569,7 @@ class PmTaskDataSource extends DataTableSource {
                                           orElse: () => PmTaskListModel(id: 00),
                                         )
                                         ?.status ==
-                                    164
+                                    431
                                 ? ColorValues.linktopermitColor
                                 : controller.pmTaskList
                                             .firstWhere(
@@ -575,8 +578,8 @@ class PmTaskDataSource extends DataTableSource {
                                                   PmTaskListModel(id: 00),
                                             )
                                             ?.status ==
-                                        162
-                                    ? ColorValues.appLightBlueColor
+                                        430
+                                    ? ColorValues.rejectedStatusColor
                                     : controller.pmTaskList
                                                 .firstWhere(
                                                   (e) =>
@@ -586,8 +589,8 @@ class PmTaskDataSource extends DataTableSource {
                                                       PmTaskListModel(id: 00),
                                                 )
                                                 ?.status ==
-                                            163
-                                        ? ColorValues.appYellowColor
+                                            422
+                                        ? ColorValues.startColor
                                         : controller.pmTaskList
                                                     .firstWhere(
                                                       (e) =>
@@ -598,7 +601,7 @@ class PmTaskDataSource extends DataTableSource {
                                                               id: 00),
                                                     )
                                                     ?.status ==
-                                                167
+                                                425
                                             ? ColorValues.approveStatusColor
                                             : controller.pmTaskList
                                                         .firstWhere(
@@ -610,7 +613,7 @@ class PmTaskDataSource extends DataTableSource {
                                                                   id: 00),
                                                         )
                                                         ?.status ==
-                                                    165
+                                                    429
                                                 ? ColorValues.closeColor
                                                 : controller.pmTaskList
                                                             .firstWhere(
@@ -623,9 +626,8 @@ class PmTaskDataSource extends DataTableSource {
                                                                       id: 00),
                                                             )
                                                             ?.status ==
-                                                        169
-                                                    ? ColorValues
-                                                        .approveStatusColor
+                                                        426
+                                                    ? ColorValues.skyBlueColor
                                                     : controller.pmTaskList
                                                                 .firstWhere(
                                                                   (e) =>
@@ -637,7 +639,7 @@ class PmTaskDataSource extends DataTableSource {
                                                                           id: 00),
                                                                 )
                                                                 ?.status ==
-                                                            168
+                                                            427
                                                         ? ColorValues
                                                             .rejectedStatusColor
                                                         : ColorValues
@@ -660,7 +662,7 @@ class PmTaskDataSource extends DataTableSource {
                                     .where((e) =>
                                         e.feature_id ==
                                             UserAccessConstants
-                                                .kPmTaskFeatureId &&
+                                                .kAuditExecutionFeatureId &&
                                         e.view ==
                                             UserAccessConstants.kHaveViewAccess)
                                     .length >

@@ -18,6 +18,7 @@ class WaterSource {
     this.createdBy,
     this.updatedAt,
     this.updatedBy,
+    this.show_opening,
   });
 
   int? id;
@@ -29,6 +30,7 @@ class WaterSource {
   int? createdBy;
   DateTime? updatedAt;
   int? updatedBy;
+  int? show_opening;
 
   factory WaterSource.fromJson(Map<String, dynamic> json) => WaterSource(
         id: json['id'],
@@ -38,6 +40,7 @@ class WaterSource {
         status: json['status'],
         createdAt: DateTime.parse(json['createdAt']),
         createdBy: json['createdBy'],
+        show_opening: json['show_opening'],
         updatedAt: json['updatedAt'] != null
             ? DateTime.parse(json['updatedAt'])
             : null,
@@ -49,6 +52,7 @@ class WaterSource {
         "facility_id": facility_id,
         "name": name,
         "description": description,
+        "show_opening": show_opening
         // "status": status,
         // "createdAt": createdAt,
         // "createdBy": createdBy,

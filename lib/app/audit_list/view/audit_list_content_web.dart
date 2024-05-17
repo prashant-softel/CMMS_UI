@@ -1,8 +1,10 @@
 import 'package:cmms/app/audit_list/audit_list_controller.dart';
+import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/home/home_screen.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/theme/dimens.dart';
+import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/date_picker.dart';
@@ -200,34 +202,36 @@ class _AuditListContentWebState extends State<AuditListContentWeb> {
                                             ),
                                           ),
                                         ),
-                                        itemBuilder: (BuildContext context) => <
-                                            PopupMenuEntry<String>>[]..addAll(
-                                              controller.columnVisibility.value
-                                                  .entries
-                                                  .map((e) {
-                                            return PopupMenuItem<String>(
-                                                child: ValueListenableBuilder(
-                                                    valueListenable: controller
-                                                        .columnVisibility,
-                                                    builder: (context, value,
-                                                        child) {
-                                                      return Row(
-                                                        children: [
-                                                          Checkbox(
-                                                            value: value[e.key],
-                                                            onChanged:
-                                                                (newValue) {
-                                                              controller
-                                                                  .setColumnVisibility(
-                                                                      e.key,
-                                                                      newValue!);
-                                                            },
-                                                          ),
-                                                          Text(e.key),
-                                                        ],
-                                                      );
-                                                    }));
-                                          })),
+                                        itemBuilder: (BuildContext context) =>
+                                            <PopupMenuEntry<String>>[]..addAll(
+                                                  controller.columnVisibility
+                                                      .value.entries
+                                                      .map((e) {
+                                                return PopupMenuItem<String>(
+                                                    child:
+                                                        ValueListenableBuilder(
+                                                            valueListenable:
+                                                                controller
+                                                                    .columnVisibility,
+                                                            builder: (context,
+                                                                value, child) {
+                                                              return Row(
+                                                                children: [
+                                                                  Checkbox(
+                                                                    value: value[
+                                                                        e.key],
+                                                                    onChanged:
+                                                                        (newValue) {
+                                                                      controller.setColumnVisibility(
+                                                                          e.key,
+                                                                          newValue!);
+                                                                    },
+                                                                  ),
+                                                                  Text(e.key),
+                                                                ],
+                                                              );
+                                                            }));
+                                              })),
                                         onSelected: (String value) {
                                           // Handle column selection
                                         },
@@ -580,22 +584,125 @@ class AuditListListDataSource extends DataTableSource {
                         child: Container(
                           padding: Dimens.edgeInsets8_2_8_2,
                           decoration: BoxDecoration(
-                            color:
-                                // controller.AuditPlanListPlan
-                                //         .firstWhere(
-                                //           (e) =>
-                                //               e?.planId ==
-                                //               AuditPlanPlanningListDetails!
-                                //                   .planId,
-                                //           orElse: () =>
-                                //               AuditPlanListPlanModel(
-                                //                   planId: 00),
-                                //         )
-                                //         ?.status ==
-                                //     342
-                                // ? ColorValues.approveColor
-                                // :
-                                ColorValues.addNewColor,
+                            color: controller.auditPlanList
+                                        .firstWhere(
+                                          (e) =>
+                                              e?.id ==
+                                              AuditPlanPlanningListDetails!.id,
+                                          orElse: () =>
+                                              AuditPlanListModel(id: 00),
+                                        )
+                                        .status ==
+                                    431
+                                ? ColorValues.linktopermitStatusColor
+                                : controller.auditPlanList
+                                            .firstWhere(
+                                              (e) =>
+                                                  e?.id ==
+                                                  AuditPlanPlanningListDetails!
+                                                      .id,
+                                              orElse: () =>
+                                                  AuditPlanListModel(id: 00),
+                                            )
+                                            .status ==
+                                        430
+                                    ? ColorValues.rejectedStatusColor
+                                    : controller.auditPlanList
+                                                .firstWhere(
+                                                  (e) =>
+                                                      e?.id ==
+                                                      AuditPlanPlanningListDetails!
+                                                          .id,
+                                                  orElse: () =>
+                                                      AuditPlanListModel(
+                                                          id: 00),
+                                                )
+                                                .status ==
+                                            422
+                                        ? ColorValues.startColor
+                                        : controller.auditPlanList
+                                                    .firstWhere(
+                                                      (e) =>
+                                                          e?.id ==
+                                                          AuditPlanPlanningListDetails!
+                                                              .id,
+                                                      orElse: () =>
+                                                          AuditPlanListModel(
+                                                              id: 00),
+                                                    )
+                                                    .status ==
+                                                425
+                                            ? ColorValues.approveStatusColor
+                                            : controller.auditPlanList
+                                                        .firstWhere(
+                                                          (e) =>
+                                                              e?.id ==
+                                                              AuditPlanPlanningListDetails!
+                                                                  .id,
+                                                          orElse: () =>
+                                                              AuditPlanListModel(
+                                                                  id: 00),
+                                                        )
+                                                        .status ==
+                                                    429
+                                                ? ColorValues.closeColor
+                                                : controller.auditPlanList
+                                                            .firstWhere(
+                                                              (e) =>
+                                                                  e?.id ==
+                                                                  AuditPlanPlanningListDetails!
+                                                                      .id,
+                                                              orElse: () =>
+                                                                  AuditPlanListModel(
+                                                                      id: 00),
+                                                            )
+                                                            .status ==
+                                                        426
+                                                    ? ColorValues.skyBlueColor
+                                                    : controller.auditPlanList
+                                                                .firstWhere(
+                                                                  (e) =>
+                                                                      e?.id ==
+                                                                      AuditPlanPlanningListDetails!
+                                                                          .id,
+                                                                  orElse: () =>
+                                                                      AuditPlanListModel(
+                                                                          id: 00),
+                                                                )
+                                                                .status ==
+                                                            427
+                                                        ? ColorValues
+                                                            .rejectedStatusColor
+                                                        : controller
+                                                                    .auditPlanList
+                                                                    .firstWhere(
+                                                                      (e) =>
+                                                                          e?.id ==
+                                                                          AuditPlanPlanningListDetails!
+                                                                              .id,
+                                                                      orElse: () =>
+                                                                          AuditPlanListModel(
+                                                                              id: 00),
+                                                                    )
+                                                                    .status ==
+                                                                424
+                                                            ? ColorValues
+                                                                .rejectedStatusColor
+                                                            : controller
+                                                                        .auditPlanList
+                                                                        .firstWhere(
+                                                                          (e) =>
+                                                                              e?.id ==
+                                                                              AuditPlanPlanningListDetails!.id,
+                                                                          orElse: () =>
+                                                                              AuditPlanListModel(id: 00),
+                                                                        )
+                                                                        .status ==
+                                                                    428
+                                                                ? ColorValues
+                                                                    .approveStatusColor
+                                                                : ColorValues
+                                                                    .appLightBlueColor,
                             borderRadius: BorderRadius.circular(4),
                           ),
                           child: Text(
@@ -610,35 +717,57 @@ class AuditListListDataSource extends DataTableSource {
                   )
                 : (value == 'Actions')
                     ? Wrap(children: [
-                        TableActionButton(
-                          color: ColorValues.viewColor,
-                          icon: Icons.remove_red_eye_outlined,
-                          message: 'view',
-                          onPress: () {
-                            controller.clearStoreIdData();
-                            // controller.clearValue();
-                            int auditId = AuditPlanPlanningListDetails?.id ?? 0;
-                            if (auditId != 0) {
-                              Get.toNamed(Routes.viewAuditPlan, arguments: {
-                                'auditId': auditId,
-                                'type': controller.type.value
-                              });
-                            }
-                          },
-                        ),
-                        TableActionButton(
-                          color: ColorValues.editColor,
-                          icon: Icons.edit,
-                          message: 'Edit',
-                          onPress: () {
-                            // int id =
-                            //     AuditPlanPlanningListDetails?.planId ?? 0;
-                            // if (id != 0) {
-                            //   Get.toNamed(Routes.AuditPlanPlanning,
-                            //       arguments: {"id": id});
-                            // }
-                          },
-                        ),
+                        varUserAccessModel.value.access_list!
+                                    .where((e) =>
+                                        e.feature_id ==
+                                            UserAccessConstants
+                                                .kAuditPlanFeatureId &&
+                                        e.view ==
+                                            UserAccessConstants.kHaveViewAccess)
+                                    .length >
+                                0
+                            ? TableActionButton(
+                                color: ColorValues.viewColor,
+                                icon: Icons.remove_red_eye_outlined,
+                                message: 'view',
+                                onPress: () {
+                                  controller.clearStoreIdData();
+                                  // controller.clearValue();
+                                  int auditId =
+                                      AuditPlanPlanningListDetails?.id ?? 0;
+                                  if (auditId != 0) {
+                                    Get.toNamed(Routes.viewAuditPlan,
+                                        arguments: {
+                                          'auditId': auditId,
+                                          'type': controller.type.value
+                                        });
+                                  }
+                                },
+                              )
+                            : Dimens.box0,
+                        varUserAccessModel.value.access_list!
+                                    .where((e) =>
+                                        e.feature_id ==
+                                            UserAccessConstants
+                                                .kPmExecutionFeatureId &&
+                                        e.view ==
+                                            UserAccessConstants.kHaveEditAccess)
+                                    .length >
+                                0
+                            ? TableActionButton(
+                                color: ColorValues.editColor,
+                                icon: Icons.edit,
+                                message: 'Edit',
+                                onPress: () {
+                                  // int id =
+                                  //     AuditPlanPlanningListDetails?.planId ?? 0;
+                                  // if (id != 0) {
+                                  //   Get.toNamed(Routes.AuditPlanPlanning,
+                                  //       arguments: {"id": id});
+                                  // }
+                                },
+                              )
+                            : Dimens.box0,
                         // TableActionButton(
                         //   color: ColorValues.appGreenColor,
                         //   icon: Icons.add,

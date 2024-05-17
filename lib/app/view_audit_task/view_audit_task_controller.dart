@@ -6,6 +6,7 @@ import 'package:cmms/domain/models/history_model.dart';
 import 'package:cmms/domain/models/pm_task_view_list_model.dart';
 import 'package:cmms/domain/models/update_pm_task_execution_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import '../home/home_controller.dart';
 import '../navigators/app_pages.dart';
@@ -24,7 +25,7 @@ class ViewAuditTaskController extends GetxController {
   TextEditingController rejectCommentTextFieldCtrlr = TextEditingController();
   Rx<int> auditTaskId = 0.obs;
   RxInt selectedValue = 1.obs;
-  Rx<PmtaskViewModel?> auditTasknDetailModel = PmtaskViewModel().obs;
+  Rx<PmtaskViewModel> auditTasknDetailModel = PmtaskViewModel().obs;
   RxList<HistoryModel?>? historyList = <HistoryModel?>[].obs;
   void onRadioValueChanged(int value) {
     selectedValue.value = value;
@@ -35,7 +36,9 @@ class ViewAuditTaskController extends GetxController {
   Rx<List<List<Map<String, String>>>> rowItemAuditobs =
       Rx<List<List<Map<String, String>>>>([]);
   RxString startresponseMessage = ''.obs;
-
+  Uint8List? fileBytes;
+  RxString fileName = "".obs;
+  int fileId = 0;
   @override
   void onInit() async {
     try {
@@ -98,6 +101,8 @@ class ViewAuditTaskController extends GetxController {
     );
 
     if (_auditTasknDetailModel != null) {
+      auditTasknDetailModel.value = PmtaskViewModel();
+
       auditTasknDetailModel.value = _auditTasknDetailModel;
     }
     print({"auditPlandetailss", auditTasknDetailModel.value?.id});
@@ -121,6 +126,16 @@ class ViewAuditTaskController extends GetxController {
         //getCalibrationList(facilityId, true);
       }
     }
+  }
+
+  Future<bool> browseFiles({
+    Uint8List? fileBytes,
+  }) async {
+    PmFiles? pmfile = await viewAuditTaskPresenter.browseFiles(
+        fileBytes, fileName.value, true);
+    fileId = pmfile?.file_id ?? 0;
+
+    return true;
   }
 
   void auditTaskRejectButton({int? id}) async {
@@ -355,6 +370,7 @@ class ViewAuditTaskController extends GetxController {
   }
 
   void updateAuditTaskExecution() async {
+    Get.back();
     PmFiles fil = PmFiles(file_id: 0, pm_event: 0);
     List<PmFiles> pmfile = <PmFiles>[fil];
 

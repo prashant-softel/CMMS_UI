@@ -118,11 +118,56 @@ class _ViewAuditTaskWebState extends State<ViewAuditTaskWeb> {
                                           Container(
                                             height: 30,
                                             child: CustomElevatedButton(
-                                              backgroundColor:
-                                                  ColorValues.appLightBlueColor,
+                                              backgroundColor: controller
+                                                          .auditTasknDetailModel
+                                                          .value
+                                                          .status ==
+                                                      431
+                                                  ? ColorValues.appDarkBlueColor
+                                                  : controller.auditTasknDetailModel
+                                                              .value.status ==
+                                                          430
+                                                      ? ColorValues
+                                                          .rejectedStatusColor
+                                                      : controller
+                                                                  .auditTasknDetailModel
+                                                                  .value
+                                                                  .status ==
+                                                              422
+                                                          ? ColorValues
+                                                              .startColor
+                                                          : controller
+                                                                      .auditTasknDetailModel
+                                                                      .value
+                                                                      .status ==
+                                                                  425
+                                                              ? ColorValues
+                                                                  .approveStatusColor
+                                                              : controller
+                                                                          .auditTasknDetailModel
+                                                                          .value
+                                                                          .status ==
+                                                                      429
+                                                                  ? ColorValues
+                                                                      .closeColor
+                                                                  : controller
+                                                                              .auditTasknDetailModel
+                                                                              .value
+                                                                              .status ==
+                                                                          426
+                                                                      ? ColorValues
+                                                                          .skyBlueColor
+                                                                      : controller.auditTasknDetailModel.value.status ==
+                                                                              427
+                                                                          ? ColorValues
+                                                                              .rejectedStatusColor
+                                                                          : ColorValues
+                                                                              .addNewColor,
                                               onPressed: () async {},
                                               text:
-                                                  "${controller.auditTasknDetailModel.value?.status ?? ""}${controller.auditTasknDetailModel.value?.status_short ?? ""}",
+                                                  "${controller.auditTasknDetailModel.value.status_short ?? ""}",
+
+                                              // ${controller.auditTasknDetailModel.value.status ?? ""}
                                             ),
                                           ),
                                         ],
@@ -155,10 +200,10 @@ class _ViewAuditTaskWebState extends State<ViewAuditTaskWeb> {
                                                 'Title :',
                                                 style: Styles.black17,
                                               ),
-                                              Text(
-                                                'Created By :',
-                                                style: Styles.black17,
-                                              ),
+                                              // Text(
+                                              //   'Created By :',
+                                              //   style: Styles.black17,
+                                              // ),
                                               Text(
                                                 'Approved By :',
                                                 style: Styles.black17,
@@ -187,9 +232,9 @@ class _ViewAuditTaskWebState extends State<ViewAuditTaskWeb> {
                                               Text(
                                                   '${controller.auditTasknDetailModel.value?.plan_title ?? ""}',
                                                   style: Styles.blue17),
-                                              Text(
-                                                  "hard cod", // '${controller.auditTasknDetailModel.value?.created_by_name ?? ''}',
-                                                  style: Styles.blue17),
+                                              // Text(
+                                              //     "hard cod", // '${controller.auditTasknDetailModel.value?.created_by_name ?? ''}',
+                                              //     style: Styles.blue17),
                                               Text(
                                                   '${controller.auditTasknDetailModel.value?.approved_by_name ?? ""}',
                                                   style: Styles.blue17),
@@ -206,10 +251,10 @@ class _ViewAuditTaskWebState extends State<ViewAuditTaskWeb> {
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.end,
                                             children: [
-                                              Text(
-                                                'Created At :',
-                                                style: Styles.black17,
-                                              ),
+                                              // Text(
+                                              //   'Created At :',
+                                              //   style: Styles.black17,
+                                              // ),
                                               Text(
                                                 'Approved At :',
                                                 style: Styles.black17,
@@ -229,14 +274,14 @@ class _ViewAuditTaskWebState extends State<ViewAuditTaskWeb> {
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.end,
                                             children: [
-                                              Text(
-                                                  "hard", //  '${controller.auditTasknDetailModel.value?.created_at ?? ""}',
-                                                  style: Styles.blue17),
+                                              // Text(
+                                              //     "hard", //  '${controller.auditTasknDetailModel.value?.created_at ?? ""}',
+                                              //     style: Styles.blue17),
                                               Text(
                                                   '${controller.auditTasknDetailModel.value?.approved_at ?? ""}',
                                                   style: Styles.blue17),
                                               Text(
-                                                  "hard", //'${controller.auditTasknDetailModel.value?.pl ?? ""}',
+                                                  '${controller.auditTasknDetailModel.value?.schedule_Date ?? ""}',
                                                   style: Styles.blue17),
                                               Text(
                                                   '${controller.auditTasknDetailModel.value?.frequency_name ?? ""}',
@@ -255,7 +300,16 @@ class _ViewAuditTaskWebState extends State<ViewAuditTaskWeb> {
                                             0
                                         ? Dimens.box0
                                         : Container(
-                                            height: 400,
+                                            margin: Dimens.edgeInsets20,
+                                            height: ((controller
+                                                            .auditTasknDetailModel
+                                                            .value
+                                                            .schedules![0]
+                                                            .checklist_observation!
+                                                            .length ??
+                                                        0) *
+                                                    30) +
+                                                140,
                                             child: DataTable2(
                                               minWidth: 2000,
                                               border: TableBorder.all(
@@ -298,7 +352,15 @@ class _ViewAuditTaskWebState extends State<ViewAuditTaskWeb> {
                                                           fontWeight:
                                                               FontWeight.bold),
                                                     )),
-
+                                                DataColumn2(
+                                                    fixedWidth: 150,
+                                                    label: Text(
+                                                      "CP ok?",
+                                                      style: TextStyle(
+                                                          fontSize: 15,
+                                                          fontWeight:
+                                                              FontWeight.bold),
+                                                    )),
                                                 DataColumn2(
                                                     fixedWidth: 200,
                                                     label: Text(
@@ -347,15 +409,8 @@ class _ViewAuditTaskWebState extends State<ViewAuditTaskWeb> {
                                                   cells: [
                                                     DataCell(
                                                         Text('${index + 1}')),
-                                                    DataCell(Text(controller
-                                                            .auditTasknDetailModel
-                                                            .value
-                                                            ?.schedules![0]
-                                                            .checklist_observation?[
-                                                                index]
-                                                            .check_point_id
-                                                            .toString() ??
-                                                        '')),
+                                                    DataCell(Text(
+                                                        'CP${controller.auditTasknDetailModel.value?.schedules![0].checklist_observation?[index].check_point_id.toString() ?? ''}')),
                                                     DataCell(Text(controller
                                                             .auditTasknDetailModel
                                                             .value
@@ -372,6 +427,28 @@ class _ViewAuditTaskWebState extends State<ViewAuditTaskWeb> {
                                                                 index]
                                                             .requirement ??
                                                         '')),
+                                                    DataCell(Text(
+                                                      controller
+                                                                  .auditTasknDetailModel
+                                                                  .value
+                                                                  .schedules![0]
+                                                                  .checklist_observation?[
+                                                                      index]
+                                                                  .cp_ok ==
+                                                              1
+                                                          ? "OK"
+                                                          : "Not OK",
+                                                      style: controller
+                                                                  .auditTasknDetailModel
+                                                                  .value
+                                                                  .schedules![0]
+                                                                  .checklist_observation?[
+                                                                      index]
+                                                                  .cp_ok ==
+                                                              1
+                                                          ? Styles.greencolor16
+                                                          : Styles.redcolor16,
+                                                    )),
                                                     DataCell(
                                                       Center(
                                                         child:
@@ -461,7 +538,7 @@ class _ViewAuditTaskWebState extends State<ViewAuditTaskWeb> {
                                             ),
                                           )
                                         //  )
-                                        : //
+                                        : 
                                         Dimens.box0,
                                     Dimens.boxHeight35,
                                     Row(
@@ -483,22 +560,20 @@ class _ViewAuditTaskWebState extends State<ViewAuditTaskWeb> {
                                         // ),
                                         //  Dimens.boxWidth10,
                                         controller.auditTasknDetailModel.value
-                                                    ?.status ==
-                                                426
-                                            ?
-                                            //         varUserAccessModel
-                                            //                 .value.access_list!
-                                            //                 .where((e) =>
-                                            //                     e.feature_id ==
-                                            //                         UserAccessConstants
-                                            //                             .kPmPlanFeatureId &&
-                                            //                     e.approve ==
-                                            //                         UserAccessConstants
-                                            //                             .kHaveApproveAccess)
-                                            //                 .length >
-                                            //             0
-                                            //     ?
-                                            Container(
+                                                        ?.status ==
+                                                    426 &&
+                                                varUserAccessModel
+                                                        .value.access_list!
+                                                        .where((e) =>
+                                                            e.feature_id ==
+                                                                UserAccessConstants
+                                                                    .kAuditExecutionFeatureId &&
+                                                            e.approve ==
+                                                                UserAccessConstants
+                                                                    .kHaveApproveAccess)
+                                                        .length >
+                                                    0
+                                            ? Container(
                                                 height: 45,
                                                 child: CustomElevatedButton(
                                                   backgroundColor:
@@ -517,23 +592,20 @@ class _ViewAuditTaskWebState extends State<ViewAuditTaskWeb> {
                                         //  : Dimens.box0,
                                         Dimens.boxWidth20,
                                         controller.auditTasknDetailModel.value
-                                                    ?.status ==
-                                                426
-                                            ?
-                                            // &&
-                                            //         varUserAccessModel
-                                            //                 .value.access_list!
-                                            //                 .where((e) =>
-                                            //                     e.feature_id ==
-                                            //                         UserAccessConstants
-                                            //                             .kPmPlanFeatureId &&
-                                            //                     e.approve ==
-                                            //                         UserAccessConstants
-                                            //                             .kHaveApproveAccess)
-                                            //                 .length >
-                                            //             0
-                                            //     ?
-                                            Container(
+                                                        ?.status ==
+                                                    426 &&
+                                                varUserAccessModel
+                                                        .value.access_list!
+                                                        .where((e) =>
+                                                            e.feature_id ==
+                                                                UserAccessConstants
+                                                                    .kAuditExecutionFeatureId &&
+                                                            e.approve ==
+                                                                UserAccessConstants
+                                                                    .kHaveApproveAccess)
+                                                        .length >
+                                                    0
+                                            ? Container(
                                                 height: 45,
                                                 child: CustomElevatedButton(
                                                   backgroundColor:
@@ -552,20 +624,22 @@ class _ViewAuditTaskWebState extends State<ViewAuditTaskWeb> {
                                         //: Dimens.box0,
                                         Dimens.boxWidth20,
                                         controller.auditTasknDetailModel.value
-                                                    ?.status ==
-                                                425
-                                            //     &&
-                                            // varUserAccessModel
-                                            //         .value.access_list!
-                                            //         .where((e) =>
-                                            //             e.feature_id ==
-                                            //                 UserAccessConstants
-                                            //                     .kPmPlanFeatureId &&
-                                            //             e.approve ==
-                                            //                 UserAccessConstants
-                                            //                     .kHaveApproveAccess)
-                                            //         .length >
-                                            //     0
+                                                        ?.status ==
+                                                    425 ||
+                                                controller.auditTasknDetailModel
+                                                            .value?.status ==
+                                                        427 &&
+                                                    varUserAccessModel
+                                                            .value.access_list!
+                                                            .where((e) =>
+                                                                e.feature_id ==
+                                                                    UserAccessConstants
+                                                                        .kAuditExecutionFeatureId &&
+                                                                e.approve ==
+                                                                    UserAccessConstants
+                                                                        .kHaveAddAccess)
+                                                            .length >
+                                                        0
                                             ? Container(
                                                 height: 45,
                                                 child: CustomElevatedButton(
@@ -584,59 +658,131 @@ class _ViewAuditTaskWebState extends State<ViewAuditTaskWeb> {
                                             : Dimens.box0,
                                         Dimens.boxWidth20,
 
-                                        Container(
-                                          height: 45,
-                                          child: CustomElevatedButton(
-                                            backgroundColor:
-                                                ColorValues.closeColor,
-                                            text: "Close",
-                                            icon: Icons.close,
-                                            onPressed: () {
-                                              Get.dialog(
-                                                  AuditTaskApprovedRejectDialog(
-                                                type: 4,
-                                              ));
-                                            },
-                                          ),
-                                        ),
+                                        controller.auditTasknDetailModel.value.status == 422 &&
+                                                    varUserAccessModel.value.access_list!
+                                                            .where((e) =>
+                                                                e.feature_id ==
+                                                                    UserAccessConstants
+                                                                        .kAuditExecutionFeatureId &&
+                                                                e.approve ==
+                                                                    UserAccessConstants
+                                                                        .kHaveAddAccess)
+                                                            .length >
+                                                        0 ||
+                                                controller.auditTasknDetailModel
+                                                            .value.status ==
+                                                        430 &&
+                                                    varUserAccessModel
+                                                            .value.access_list!
+                                                            .where((e) =>
+                                                                e.feature_id ==
+                                                                    UserAccessConstants.kAuditExecutionFeatureId &&
+                                                                e.approve == UserAccessConstants.kHaveAddAccess)
+                                                            .length >
+                                                        0
+                                            ? Container(
+                                                height: 45,
+                                                child: CustomElevatedButton(
+                                                  backgroundColor:
+                                                      ColorValues.closeColor,
+                                                  text: "Close",
+                                                  icon: Icons.close,
+                                                  onPressed: () {
+                                                    Get.dialog(
+                                                        AuditTaskApprovedRejectDialog(
+                                                      type: 4,
+                                                    ));
+                                                  },
+                                                ),
+                                              )
+                                            : Dimens.box0,
                                         Dimens.boxWidth20,
 
-                                        Container(
-                                          height: 45,
-                                          child: CustomElevatedButton(
-                                            backgroundColor:
-                                                ColorValues.approveColor,
-                                            text: "C Approve",
-                                            icon: Icons.close,
-                                            onPressed: () {
-                                              Get.dialog(
-                                                  AuditTaskApprovedRejectDialog(
-                                                type: 5,
-                                              ));
-                                            },
-                                          ),
-                                        ),
-                                        Dimens.boxWidth20,
-
-                                        Container(
-                                          height: 45,
-                                          child: CustomElevatedButton(
-                                            backgroundColor:
-                                                ColorValues.rejectColor,
-                                            text: "C Reject",
-                                            icon: Icons.close,
-                                            onPressed: () {
-                                              Get.dialog(
-                                                  AuditTaskApprovedRejectDialog(
-                                                type: 6,
-                                              ));
-                                            },
-                                          ),
-                                        ),
-                                        Dimens.boxWidth20,
                                         controller.auditTasknDetailModel.value
-                                                    ?.status ==
-                                                425
+                                                        .status ==
+                                                    429 &&
+                                                varUserAccessModel
+                                                        .value.access_list!
+                                                        .where((e) =>
+                                                            e.feature_id ==
+                                                                UserAccessConstants
+                                                                    .kAuditExecutionFeatureId &&
+                                                            e.approve ==
+                                                                UserAccessConstants
+                                                                    .kHaveApproveAccess)
+                                                        .length >
+                                                    0
+                                            ? Container(
+                                                height: 45,
+                                                child: CustomElevatedButton(
+                                                  backgroundColor:
+                                                      ColorValues.approveColor,
+                                                  text: "Approve",
+                                                  icon: Icons.close,
+                                                  onPressed: () {
+                                                    Get.dialog(
+                                                        AuditTaskApprovedRejectDialog(
+                                                      type: 5,
+                                                    ));
+                                                  },
+                                                ),
+                                              )
+                                            : Dimens.box0,
+                                        Dimens.boxWidth20,
+
+                                        controller.auditTasknDetailModel.value
+                                                        .status ==
+                                                    429 &&
+                                                varUserAccessModel
+                                                        .value.access_list!
+                                                        .where((e) =>
+                                                            e.feature_id ==
+                                                                UserAccessConstants
+                                                                    .kAuditExecutionFeatureId &&
+                                                            e.approve ==
+                                                                UserAccessConstants
+                                                                    .kHaveApproveAccess)
+                                                        .length >
+                                                    0
+                                            ? Container(
+                                                height: 45,
+                                                child: CustomElevatedButton(
+                                                  backgroundColor:
+                                                      ColorValues.rejectColor,
+                                                  text: "Reject",
+                                                  icon: Icons.close,
+                                                  onPressed: () {
+                                                    Get.dialog(
+                                                        AuditTaskApprovedRejectDialog(
+                                                      type: 6,
+                                                    ));
+                                                  },
+                                                ),
+                                              )
+                                            : Dimens.box0,
+                                        Dimens.boxWidth20,
+                                        controller.auditTasknDetailModel.value.status == 425 &&
+                                                    varUserAccessModel.value.access_list!
+                                                            .where((e) =>
+                                                                e.feature_id ==
+                                                                    UserAccessConstants
+                                                                        .kAuditExecutionFeatureId &&
+                                                                e.approve ==
+                                                                    UserAccessConstants
+                                                                        .kHaveAddAccess)
+                                                            .length >
+                                                        0 ||
+                                                controller.auditTasknDetailModel
+                                                            .value.status ==
+                                                        427 &&
+                                                    varUserAccessModel
+                                                            .value.access_list!
+                                                            .where((e) =>
+                                                                e.feature_id ==
+                                                                    UserAccessConstants.kAuditExecutionFeatureId &&
+                                                                e.approve == UserAccessConstants.kHaveAddAccess)
+                                                            .length >
+                                                        0
                                             ? Container(
                                                 height: 45,
                                                 child: CustomElevatedButton(
@@ -652,67 +798,91 @@ class _ViewAuditTaskWebState extends State<ViewAuditTaskWeb> {
                                             : Dimens.box0,
                                         Dimens.boxWidth20,
 
-                                        Container(
-                                          height: 45,
-                                          child: CustomElevatedButton(
-                                            backgroundColor:
-                                                ColorValues.executeColor,
-                                            text: "Execute",
-                                            icon: Icons.start,
-                                            onPressed: () {
-                                              controller
-                                                  .auditTasknDetailModel
-                                                  .value
-                                                  ?.schedules![0]
-                                                  .checklist_observation
-                                                  ?.forEach((element) {
-                                                controller.rowItemAuditobs.value
-                                                    .add([
-                                                  {
-                                                    "key": "checkpoint",
-                                                    "id":
-                                                        '${element.execution_id}',
-                                                    "value":
-                                                        '${element.check_point_name}',
+                                        controller.auditTasknDetailModel.value.status == 422 &&
+                                                    varUserAccessModel.value.access_list!
+                                                            .where((e) =>
+                                                                e.feature_id ==
+                                                                    UserAccessConstants
+                                                                        .kAuditExecutionFeatureId &&
+                                                                e.approve ==
+                                                                    UserAccessConstants
+                                                                        .kHaveAddAccess)
+                                                            .length >
+                                                        0 ||
+                                                controller.auditTasknDetailModel
+                                                            .value.status ==
+                                                        430 &&
+                                                    varUserAccessModel
+                                                            .value.access_list!
+                                                            .where((e) =>
+                                                                e.feature_id ==
+                                                                    UserAccessConstants.kAuditExecutionFeatureId &&
+                                                                e.approve == UserAccessConstants.kHaveAddAccess)
+                                                            .length >
+                                                        0
+                                            ? Container(
+                                                height: 45,
+                                                child: CustomElevatedButton(
+                                                  backgroundColor:
+                                                      ColorValues.executeColor,
+                                                  text: "Execute",
+                                                  icon: Icons.start,
+                                                  onPressed: () {
+                                                    controller
+                                                        .auditTasknDetailModel
+                                                        .value
+                                                        ?.schedules![0]
+                                                        .checklist_observation
+                                                        ?.forEach((element) {
+                                                      controller
+                                                          .rowItemAuditobs.value
+                                                          .add([
+                                                        {
+                                                          "key": "checkpoint",
+                                                          "id":
+                                                              '${element.execution_id}',
+                                                          "value":
+                                                              '${element.check_point_name}',
+                                                        },
+                                                        {
+                                                          "key": "requirement",
+                                                          "value":
+                                                              '${element.requirement}'
+                                                        },
+                                                        {
+                                                          'key': "accept",
+                                                          "value":
+                                                              '${element.cp_ok.value}'
+                                                        },
+                                                        {
+                                                          'key': "observation",
+                                                          "value":
+                                                              '${element.observation}'
+                                                        },
+                                                        {
+                                                          'key': "uploadimg",
+                                                          "value": '',
+                                                          "uploaded": ""
+                                                        },
+                                                        {
+                                                          'key': "type",
+                                                          'inpute_type':
+                                                              '${element.check_point_type}',
+                                                          "value":
+                                                              '${element.type_text}',
+                                                          "min":
+                                                              '${element.min_range}',
+                                                          "max":
+                                                              '${element.max_range}'
+                                                        },
+                                                      ]);
+                                                    });
+                                                    Get.dialog(
+                                                        AuditExecutionProcessDialog());
                                                   },
-                                                  {
-                                                    "key": "requirement",
-                                                    "value":
-                                                        '${element.requirement}'
-                                                  },
-                                                  {
-                                                    'key': "accept",
-                                                    "value":
-                                                        '${element.cp_ok.value}'
-                                                  },
-                                                  {
-                                                    'key': "observation",
-                                                    "value":
-                                                        '${element.observation}'
-                                                  },
-                                                  {
-                                                    'key': "uploadimg",
-                                                    "value": '',
-                                                    "uploaded": ""
-                                                  },
-                                                  {
-                                                    'key': "type",
-                                                    'inpute_type':
-                                                        '${element.check_point_type}',
-                                                    "value":
-                                                        '${element.type_text}',
-                                                    "min":
-                                                        '${element.min_range}',
-                                                    "max":
-                                                        '${element.max_range}'
-                                                  },
-                                                ]);
-                                              });
-                                              Get.dialog(
-                                                  AuditExecutionProcessDialog());
-                                            },
-                                          ),
-                                        ),
+                                                ),
+                                              )
+                                            : Dimens.box0,
                                         Spacer()
                                       ],
                                     ),
