@@ -1151,6 +1151,7 @@ class ConnectHelper {
 
     return responseModel;
   }
+
   Future<ResponseModel> approveIncidentReportButton2ndStep({
     required String auth,
     incidentReportApproveJsonString,
@@ -5154,7 +5155,7 @@ class ConnectHelper {
     var res = responseModel.data;
     var parsedJson = json.decode(res);
     Get.dialog<void>(AuditTaskViewMsgReceiveDialog(
-        type: 7, data: parsedJson['message'], id: parsedJson['id']));
+        type: 7, data: parsedJson[0]['message'], id: parsedJson[0]['id']));
 
     return responseModel;
   }

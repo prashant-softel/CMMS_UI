@@ -1,6 +1,8 @@
 import 'package:cmms/domain/models/history_model.dart';
 import 'package:cmms/domain/models/pm_task_view_list_model.dart';
+import 'package:cmms/domain/models/update_pm_task_execution_model.dart';
 import 'package:cmms/domain/repositories/repository.dart';
+import 'package:flutter/services.dart';
 
 import '../repositories/local_storage_keys.dart';
 
@@ -24,6 +26,16 @@ class ViewAuditTaskUsecase {
         auditTaskCloseJsonString,
         isLoading,
       );
+  Future<PmFiles?> browseFiles(
+      Uint8List? fileBytes, String fileName, bool isLoading) async {
+    return await repository.browsePmFiles(
+      fileBytes,
+      fileName,
+      isLoading,
+    );
+    // return true;
+  }
+
   Future<Map<String, dynamic>> auditTaskCloseApproveButton({
     auditTaskCloseApproveJsonString,
     bool? isLoading,

@@ -1,3 +1,6 @@
+import 'package:cmms/domain/models/update_pm_task_execution_model.dart';
+import 'package:flutter/services.dart';
+
 import '../../domain/models/history_model.dart';
 import '../../domain/models/pm_task_view_list_model.dart';
 import '../../domain/usecases/view_audit_task_usecase.dart';
@@ -24,6 +27,13 @@ class ViewAuditTaskPresenter {
       auditTaskCloseJsonString: auditTaskCloseJsonString,
       isLoading: isLoading,
     );
+  }
+
+  Future<PmFiles?> browseFiles(
+      Uint8List? fileBytes, String fileName, bool isLoading) async {
+    return await viewAuditTaskUsecase.browseFiles(
+        fileBytes, fileName, isLoading);
+    // return true;
   }
 
   Future<Map<String, dynamic>?> auditTaskCloseApproveButton({
