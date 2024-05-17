@@ -8584,5 +8584,82 @@ class ConnectHelper {
     );
     return responseModel;
   }
+  //Material Category
+  //Get
+  Future<ResponseModel> getMaterialList(
+      {required bool isLoading, required String auth}) async {
+    ResponseModel responseModel = await apiWrapper.makeRequest(
+      'SMMaster/GetMaterialCategoryList',
+      Request.get,
+      null,
+      isLoading,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
+  //create
+  Future<ResponseModel> createMaterialCategory({
+    required String auth,
+    bool? isLoading,
+     mcategorylistJsonString,
+  }) async {
+    var responseModel =
+        // responseModel =
+        await apiWrapper.makeRequest(
+      'SMMaster/AddMaterialCategory', //AddBusiness
+      Request.post,
+      mcategorylistJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
+  //update
+  Future<ResponseModel> updateMaterialCategory({
+    required String auth,
+    bool? isLoading,
+    required modulelistJsonString,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'SMMaster/UpdateMaterialCategory',
+      Request.patch,
+      modulelistJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
+  //delete
+  Future<ResponseModel> deleteMaterialCategory({
+    required String auth,
+    bool? isLoading,
+    required business_id,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'SMMaster/DeleteMaterialCategory?acID=86',
+      Request.delete,
+      null,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
   //end
 }
