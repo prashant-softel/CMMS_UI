@@ -1,8 +1,10 @@
 import 'package:cmms/app/audit_list/audit_list_controller.dart';
+import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/home/home_screen.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/theme/dimens.dart';
+import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/date_picker.dart';
@@ -715,35 +717,57 @@ class AuditListListDataSource extends DataTableSource {
                   )
                 : (value == 'Actions')
                     ? Wrap(children: [
-                        TableActionButton(
-                          color: ColorValues.viewColor,
-                          icon: Icons.remove_red_eye_outlined,
-                          message: 'view',
-                          onPress: () {
-                            controller.clearStoreIdData();
-                            // controller.clearValue();
-                            int auditId = AuditPlanPlanningListDetails?.id ?? 0;
-                            if (auditId != 0) {
-                              Get.toNamed(Routes.viewAuditPlan, arguments: {
-                                'auditId': auditId,
-                                'type': controller.type.value
-                              });
-                            }
-                          },
-                        ),
-                        TableActionButton(
-                          color: ColorValues.editColor,
-                          icon: Icons.edit,
-                          message: 'Edit',
-                          onPress: () {
-                            // int id =
-                            //     AuditPlanPlanningListDetails?.planId ?? 0;
-                            // if (id != 0) {
-                            //   Get.toNamed(Routes.AuditPlanPlanning,
-                            //       arguments: {"id": id});
-                            // }
-                          },
-                        ),
+                        varUserAccessModel.value.access_list!
+                                    .where((e) =>
+                                        e.feature_id ==
+                                            UserAccessConstants
+                                                .kAuditPlanFeatureId &&
+                                        e.view ==
+                                            UserAccessConstants.kHaveViewAccess)
+                                    .length >
+                                0
+                            ? TableActionButton(
+                                color: ColorValues.viewColor,
+                                icon: Icons.remove_red_eye_outlined,
+                                message: 'view',
+                                onPress: () {
+                                  controller.clearStoreIdData();
+                                  // controller.clearValue();
+                                  int auditId =
+                                      AuditPlanPlanningListDetails?.id ?? 0;
+                                  if (auditId != 0) {
+                                    Get.toNamed(Routes.viewAuditPlan,
+                                        arguments: {
+                                          'auditId': auditId,
+                                          'type': controller.type.value
+                                        });
+                                  }
+                                },
+                              )
+                            : Dimens.box0,
+                        varUserAccessModel.value.access_list!
+                                    .where((e) =>
+                                        e.feature_id ==
+                                            UserAccessConstants
+                                                .kPmExecutionFeatureId &&
+                                        e.view ==
+                                            UserAccessConstants.kHaveEditAccess)
+                                    .length >
+                                0
+                            ? TableActionButton(
+                                color: ColorValues.editColor,
+                                icon: Icons.edit,
+                                message: 'Edit',
+                                onPress: () {
+                                  // int id =
+                                  //     AuditPlanPlanningListDetails?.planId ?? 0;
+                                  // if (id != 0) {
+                                  //   Get.toNamed(Routes.AuditPlanPlanning,
+                                  //       arguments: {"id": id});
+                                  // }
+                                },
+                              )
+                            : Dimens.box0,
                         // TableActionButton(
                         //   color: ColorValues.appGreenColor,
                         //   icon: Icons.add,
