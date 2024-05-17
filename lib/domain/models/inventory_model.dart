@@ -21,6 +21,7 @@ class InventoryModel {
       this.type,
       this.categoryId,
       this.categoryName,
+      this.supplierName,
       this.parentId,
       this.parentName,
       this.customerName,
@@ -59,6 +60,7 @@ class InventoryModel {
   int? id;
   String? name;
   String? facilityName;
+  String? supplierName;
   String? blockName;
   String? description;
   String? type;
@@ -122,6 +124,7 @@ class InventoryModel {
         certinumber: json["certificate_number"],
         manuname: json["manufacturername"],
         model: json["model"],
+        supplierName: json["supplierName"],
         cost: json["cost"],
         currency: json["currency"],
         barcode: json["barcode"],
@@ -182,6 +185,7 @@ class InventoryModel {
         "warrantyTenture": wtenure,
         "certificate_number": certinumber,
         "manufacturername": manuname,
+        "supplierName": supplierName,
         "model": model,
         "cost": cost,
         "currency": currency,

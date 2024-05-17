@@ -1383,7 +1383,7 @@ class Repository {
                       inventoryJson['warrantyTenture'],
                       inventoryJson['certificate_number'],
                       inventoryJson['manufacturername'],
-                      "-",
+                      inventoryJson['supplierName'],
                       inventoryJson['model'],
                       inventoryJson['cost'],
                       inventoryJson['currency'],
