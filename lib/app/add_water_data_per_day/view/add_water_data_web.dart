@@ -3,6 +3,7 @@ import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/stock_managment_add_goods_orders.dart/view/stock_management_add_goods_orders_web.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
+import 'package:cmms/app/widgets/custom_textField.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -62,7 +63,8 @@ class _AddWaterDataWebState extends State<AddWaterDataWeb> {
                                 Container(
                                   margin: EdgeInsets.only(left: 20, right: 20),
                                   child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Row(
                                         crossAxisAlignment:
@@ -74,13 +76,15 @@ class _AddWaterDataWebState extends State<AddWaterDataWeb> {
                                             children: [
                                               Row(
                                                 children: [
-                                                  CustomRichText(title: 'Day: '),
+                                                  CustomRichText(
+                                                      title: 'Day: '),
                                                   Dimens.boxWidth10,
                                                   CustomTextFieldForStock(
-                                                    width: MediaQuery.of(context)
-                                                            .size
-                                                            .width /
-                                                        5,
+                                                    width:
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .width /
+                                                            5,
                                                     numberTextField: true,
                                                     onTap: () {
                                                       controller
@@ -90,8 +94,8 @@ class _AddWaterDataWebState extends State<AddWaterDataWeb> {
                                                       controller.update(
                                                           ['stock_Mangement']);
                                                     },
-                                                    textController:
-                                                        controller.purchaseDateTc,
+                                                    textController: controller
+                                                        .purchaseDateTc,
                                                   ),
                                                 ],
                                               ),
@@ -102,10 +106,15 @@ class _AddWaterDataWebState extends State<AddWaterDataWeb> {
                                                       title:
                                                           'Surface Water in KL units'),
                                                   Dimens.boxWidth10,
-                                                  GoodsOrderTextField(
+                                                  LoginCustomTextfield(
+                                                    width:
+                                                        (MediaQuery.of(context)
+                                                                .size
+                                                                .width *
+                                                            .2),
                                                     keyboardType:
                                                         TextInputType.number,
-          
+
                                                     // textController:
                                                     //     controller.girNoCtrlr,
                                                   ),
@@ -122,10 +131,15 @@ class _AddWaterDataWebState extends State<AddWaterDataWeb> {
                                                       title:
                                                           'Ground Water in KL units : '),
                                                   Dimens.boxWidth10,
-                                                  GoodsOrderTextField(
+                                                  LoginCustomTextfield(
+                                                    width:
+                                                        (MediaQuery.of(context)
+                                                                .size
+                                                                .width *
+                                                            .2),
                                                     keyboardType:
                                                         TextInputType.number,
-          
+
                                                     // textController:
                                                     //     controller.girNoCtrlr,
                                                   ),
@@ -150,8 +164,9 @@ class _AddWaterDataWebState extends State<AddWaterDataWeb> {
                                     borderRadius: BorderRadius.circular(10),
                                     boxShadow: [
                                       BoxShadow(
-                                        color: Color.fromARGB(255, 236, 234, 234)
-                                            .withOpacity(0.5),
+                                        color:
+                                            Color.fromARGB(255, 236, 234, 234)
+                                                .withOpacity(0.5),
                                         spreadRadius: 2,
                                         blurRadius: 5,
                                         offset: Offset(0, 2),
@@ -161,10 +176,12 @@ class _AddWaterDataWebState extends State<AddWaterDataWeb> {
                                   margin: EdgeInsets.only(
                                       left: 20, right: 20, bottom: 10, top: 20),
                                   child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Dimens.boxHeight10,
-                                      Text("Water Procured from Third Party for:",
+                                      Text(
+                                          "Water Procured from Third Party for:",
                                           style: Styles.blue14),
                                       Dimens.boxHeight10,
                                       Divider(
@@ -185,10 +202,15 @@ class _AddWaterDataWebState extends State<AddWaterDataWeb> {
                                                       title:
                                                           'Module cleaning in KL units'),
                                                   Dimens.boxWidth10,
-                                                  GoodsOrderTextField(
+                                                  LoginCustomTextfield(
+                                                    width:
+                                                        (MediaQuery.of(context)
+                                                                .size
+                                                                .width *
+                                                            .2),
                                                     keyboardType:
                                                         TextInputType.number,
-          
+
                                                     // textController:
                                                     //     controller.girNoCtrlr,
                                                   ),
@@ -201,10 +223,15 @@ class _AddWaterDataWebState extends State<AddWaterDataWeb> {
                                                       title:
                                                           'Domestic and others purposes in KL units'),
                                                   Dimens.boxWidth10,
-                                                  GoodsOrderTextField(
+                                                  LoginCustomTextfield(
+                                                    width:
+                                                        (MediaQuery.of(context)
+                                                                .size
+                                                                .width *
+                                                            .2),
                                                     keyboardType:
                                                         TextInputType.number,
-          
+
                                                     // textController:
                                                     //     controller.girNoCtrlr,
                                                   ),
@@ -223,10 +250,15 @@ class _AddWaterDataWebState extends State<AddWaterDataWeb> {
                                                       title:
                                                           'Drinking in KL units'),
                                                   Dimens.boxWidth10,
-                                                  GoodsOrderTextField(
+                                                  LoginCustomTextfield(
+                                                    width:
+                                                        (MediaQuery.of(context)
+                                                                .size
+                                                                .width *
+                                                            .2),
                                                     keyboardType:
                                                         TextInputType.number,
-          
+
                                                     // textController:
                                                     //     controller.girNoCtrlr,
                                                   ),
@@ -239,10 +271,15 @@ class _AddWaterDataWebState extends State<AddWaterDataWeb> {
                                                       title:
                                                           'Domestic and others purposes in KL units'),
                                                   Dimens.boxWidth10,
-                                                  GoodsOrderTextField(
+                                                  LoginCustomTextfield(
+                                                    width:
+                                                        (MediaQuery.of(context)
+                                                                .size
+                                                                .width *
+                                                            .2),
                                                     keyboardType:
                                                         TextInputType.number,
-          
+
                                                     // textController:
                                                     //     controller.girNoCtrlr,
                                                   ),
@@ -266,8 +303,9 @@ class _AddWaterDataWebState extends State<AddWaterDataWeb> {
                                     borderRadius: BorderRadius.circular(10),
                                     boxShadow: [
                                       BoxShadow(
-                                        color: Color.fromARGB(255, 236, 234, 234)
-                                            .withOpacity(0.5),
+                                        color:
+                                            Color.fromARGB(255, 236, 234, 234)
+                                                .withOpacity(0.5),
                                         spreadRadius: 2,
                                         blurRadius: 5,
                                         offset: Offset(0, 2),
@@ -277,7 +315,8 @@ class _AddWaterDataWebState extends State<AddWaterDataWeb> {
                                   margin: EdgeInsets.only(
                                       left: 20, right: 20, bottom: 10, top: 20),
                                   child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Dimens.boxHeight10,
                                       Text("Consumption  water used for:",
@@ -301,10 +340,15 @@ class _AddWaterDataWebState extends State<AddWaterDataWeb> {
                                                       title:
                                                           'Drinking in KL units'),
                                                   Dimens.boxWidth10,
-                                                  GoodsOrderTextField(
+                                                  LoginCustomTextfield(
+                                                    width:
+                                                        (MediaQuery.of(context)
+                                                                .size
+                                                                .width *
+                                                            .2),
                                                     keyboardType:
                                                         TextInputType.number,
-          
+
                                                     // textController:
                                                     //     controller.girNoCtrlr,
                                                   ),
@@ -317,10 +361,15 @@ class _AddWaterDataWebState extends State<AddWaterDataWeb> {
                                                       title:
                                                           'Module cleaning in KL unit'),
                                                   Dimens.boxWidth10,
-                                                  GoodsOrderTextField(
+                                                  LoginCustomTextfield(
+                                                    width:
+                                                        (MediaQuery.of(context)
+                                                                .size
+                                                                .width *
+                                                            .2),
                                                     keyboardType:
                                                         TextInputType.number,
-          
+
                                                     // textController:
                                                     //     controller.girNoCtrlr,
                                                   ),
@@ -339,10 +388,15 @@ class _AddWaterDataWebState extends State<AddWaterDataWeb> {
                                                       title:
                                                           'Domestic and other purpose in KL units'),
                                                   Dimens.boxWidth10,
-                                                  GoodsOrderTextField(
+                                                  LoginCustomTextfield(
+                                                    width:
+                                                        (MediaQuery.of(context)
+                                                                .size
+                                                                .width *
+                                                            .2),
                                                     keyboardType:
                                                         TextInputType.number,
-          
+
                                                     // textController:
                                                     //     controller.girNoCtrlr,
                                                   ),
@@ -366,8 +420,9 @@ class _AddWaterDataWebState extends State<AddWaterDataWeb> {
                                     borderRadius: BorderRadius.circular(10),
                                     boxShadow: [
                                       BoxShadow(
-                                        color: Color.fromARGB(255, 236, 234, 234)
-                                            .withOpacity(0.5),
+                                        color:
+                                            Color.fromARGB(255, 236, 234, 234)
+                                                .withOpacity(0.5),
                                         spreadRadius: 2,
                                         blurRadius: 5,
                                         offset: Offset(0, 2),
@@ -377,10 +432,12 @@ class _AddWaterDataWebState extends State<AddWaterDataWeb> {
                                   margin: EdgeInsets.only(
                                       left: 20, right: 20, bottom: 10, top: 20),
                                   child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Dimens.boxHeight10,
-                                      Text("Total Water:", style: Styles.blue14),
+                                      Text("Total Water:",
+                                          style: Styles.blue14),
                                       Dimens.boxHeight10,
                                       Divider(
                                         color: ColorValues.greyLightColour,
@@ -400,10 +457,15 @@ class _AddWaterDataWebState extends State<AddWaterDataWeb> {
                                                       title:
                                                           'Withdrawal in KL units'),
                                                   Dimens.boxWidth10,
-                                                  GoodsOrderTextField(
+                                                  LoginCustomTextfield(
+                                                    width:
+                                                        (MediaQuery.of(context)
+                                                                .size
+                                                                .width *
+                                                            .2),
                                                     keyboardType:
                                                         TextInputType.number,
-          
+
                                                     // textController:
                                                     //     controller.girNoCtrlr,
                                                   ),
@@ -422,10 +484,15 @@ class _AddWaterDataWebState extends State<AddWaterDataWeb> {
                                                       title:
                                                           'Consumed in KL units'),
                                                   Dimens.boxWidth10,
-                                                  GoodsOrderTextField(
+                                                  LoginCustomTextfield(
+                                                    width:
+                                                        (MediaQuery.of(context)
+                                                                .size
+                                                                .width *
+                                                            .2),
                                                     keyboardType:
                                                         TextInputType.number,
-          
+
                                                     // textController:
                                                     //     controller.girNoCtrlr,
                                                   ),
@@ -449,8 +516,9 @@ class _AddWaterDataWebState extends State<AddWaterDataWeb> {
                                     borderRadius: BorderRadius.circular(10),
                                     boxShadow: [
                                       BoxShadow(
-                                        color: Color.fromARGB(255, 236, 234, 234)
-                                            .withOpacity(0.5),
+                                        color:
+                                            Color.fromARGB(255, 236, 234, 234)
+                                                .withOpacity(0.5),
                                         spreadRadius: 2,
                                         blurRadius: 5,
                                         offset: Offset(0, 2),
@@ -460,7 +528,8 @@ class _AddWaterDataWebState extends State<AddWaterDataWeb> {
                                   margin: EdgeInsets.only(
                                       left: 20, right: 20, bottom: 10, top: 20),
                                   child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Dimens.boxHeight10,
                                       Text("Total Groundwater Withdrawal:",
@@ -484,10 +553,15 @@ class _AddWaterDataWebState extends State<AddWaterDataWeb> {
                                                       title:
                                                           'Yearly limit as per NOC in KL units'),
                                                   Dimens.boxWidth10,
-                                                  GoodsOrderTextField(
+                                                  LoginCustomTextfield(
+                                                    width:
+                                                        (MediaQuery.of(context)
+                                                                .size
+                                                                .width *
+                                                            .2),
                                                     keyboardType:
                                                         TextInputType.number,
-          
+
                                                     // textController:
                                                     //     controller.girNoCtrlr,
                                                   ),
@@ -506,10 +580,15 @@ class _AddWaterDataWebState extends State<AddWaterDataWeb> {
                                                       title:
                                                           'Limit left in KL units'),
                                                   Dimens.boxWidth10,
-                                                  GoodsOrderTextField(
+                                                  LoginCustomTextfield(
+                                                    width:
+                                                        (MediaQuery.of(context)
+                                                                .size
+                                                                .width *
+                                                            .2),
                                                     keyboardType:
                                                         TextInputType.number,
-          
+
                                                     // textController:
                                                     //     controller.girNoCtrlr,
                                                   ),

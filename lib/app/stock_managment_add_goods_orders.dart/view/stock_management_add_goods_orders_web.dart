@@ -230,7 +230,7 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                                 // Row(
                                                 //   children: [
                                                 //     CustomRichText(
-                                                  
+
                                                 //         title:
                                                 //             'Delivery Challan: '),
                                                 //     Dimens.boxWidth10,
@@ -256,7 +256,13 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                                     CustomRichText(
                                                         title: 'P.O No: '),
                                                     Dimens.boxWidth10,
-                                                    GoodsOrderTextField(
+                                                    LoginCustomTextfield(
+                                                      width: (MediaQuery.of(
+                                                                  context)
+                                                              .size
+                                                              .width *
+                                                          .2),
+
                                                       keyboardType:
                                                           TextInputType.number,
                                                       inputFormatters: <TextInputFormatter>[
@@ -265,32 +271,28 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                                       ],
                                                       textController:
                                                           controller.pOCtrlr,
-                                                      focusnode:
-                                                          controller.ponofocus,
+
                                                       scroll:
                                                           controller.ponoscroll,
-                                                          //validate
-                                                           errorController: controller
-                                                                  .isPOInvalid
+                                                      //validate
+                                                      errorController:
+                                                          controller.isPOInvalid
                                                                   .value
                                                               ? "Required field"
                                                               : null,
 
-                                                          onChanged: (value) {
-                                                            if (value
-                                                                    .trim()
-                                                                    .length >
-                                                                0) {
-                                                              controller
-                                                                  .isPOInvalid
-                                                                  .value = false;
-                                                            } else {
-                                                              controller
-                                                                  .isPOInvalid
-                                                                  .value = true;
-                                                            }
-                                                          },
-                                                          
+                                                      onChanged: (value) {
+                                                        if (value
+                                                                .trim()
+                                                                .length >
+                                                            0) {
+                                                          controller.isPOInvalid
+                                                              .value = false;
+                                                        } else {
+                                                          controller.isPOInvalid
+                                                              .value = true;
+                                                        }
+                                                      },
                                                     ),
                                                   ],
                                                 ),
@@ -385,7 +387,12 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                                     CustomRichText(
                                                         title: 'Amount : '),
                                                     Dimens.boxWidth10,
-                                                    GoodsOrderTextField(
+                                                    LoginCustomTextfield(
+                                                      width: (MediaQuery.of(
+                                                                  context)
+                                                              .size
+                                                              .width *
+                                                          .2),
                                                       keyboardType:
                                                           TextInputType.number,
                                                       inputFormatters: <TextInputFormatter>[
@@ -394,33 +401,33 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                                       ],
                                                       textController: controller
                                                           .amountCtrlr,
-                                                      focusnode:
-                                                          controller.amntfocus,
+                                                      // focusnode:
+                                                      //     controller.amntfocus,
                                                       scroll:
                                                           controller.amntscroll,
 
-                                                          //validate
+                                                      //validate
 
-                                                          errorController: controller
-                                                                  .isAmountInvalid
-                                                                  .value
-                                                              ? "Required field"
-                                                              : null,
+                                                      errorController: controller
+                                                              .isAmountInvalid
+                                                              .value
+                                                          ? "Required field"
+                                                          : null,
 
-                                                          onChanged: (value) {
-                                                            if (value
-                                                                    .trim()
-                                                                    .length >
-                                                                0) {
-                                                              controller
-                                                                  .isAmountInvalid
-                                                                  .value = false;
-                                                            } else {
-                                                              controller
-                                                                  .isAmountInvalid
-                                                                  .value = true;
-                                                            }
-                                                          },
+                                                      onChanged: (value) {
+                                                        if (value
+                                                                .trim()
+                                                                .length >
+                                                            0) {
+                                                          controller
+                                                              .isAmountInvalid
+                                                              .value = false;
+                                                        } else {
+                                                          controller
+                                                              .isAmountInvalid
+                                                              .value = true;
+                                                        }
+                                                      },
                                                     ),
                                                   ],
                                                 ),
@@ -1252,51 +1259,6 @@ class AddRowInGoodsOrder extends StatelessWidget {
           ),
         ]),
       ),
-    );
-  }
-}
-
-class GoodsOrderTextField extends StatelessWidget {
-  final TextInputType? keyboardType;
-  final List<TextInputFormatter>? inputFormatters;
-  final TextEditingController? textController;
-  FocusNode? focusnode;
-  ScrollController? scroll;
-  
-  var onChanged;
-  GoodsOrderTextField(
-      {this.keyboardType,
-      this.inputFormatters,
-      this.textController,
-      this.focusnode,
-      this.onChanged,
-      this.scroll, String? errorController});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
-        border: Border.all(
-          color: Color.fromARGB(255, 227, 224, 224),
-          width: 1,
-        ),
-        boxShadow: [
-          BoxShadow(
-            color: Color.fromARGB(255, 236, 234, 234).withOpacity(0.5),
-            spreadRadius: 2,
-            blurRadius: 5,
-            offset: Offset(0, 2),
-          ),
-        ],
-      ),
-      width: (MediaQuery.of(context).size.width * .2),
-      child: LoginCustomTextfield(
-          keyboardType: keyboardType,
-          inputFormatters: inputFormatters,
-          textController: textController,
-          scroll: scroll,
-          focusNode: focusnode),
     );
   }
 }

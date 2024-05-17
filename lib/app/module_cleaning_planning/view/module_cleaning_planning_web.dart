@@ -144,7 +144,12 @@ class _ModuleCleaningPlanningWebState extends State<ModuleCleaningPlanningWeb> {
                                                     CustomRichText(
                                                         title: 'Title :'),
                                                     Dimens.boxWidth10,
-                                                    GoodsOrderTextField(
+                                                    LoginCustomTextfield(
+                                                      width: (MediaQuery.of(
+                                                                  context)
+                                                              .size
+                                                              .width *
+                                                          .2),
                                                       textController: controller
                                                           .mcTitelCtrlr,
                                                       inputFormatters: [
