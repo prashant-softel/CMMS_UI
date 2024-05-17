@@ -205,7 +205,43 @@ class ImportInventoryContentWeb extends GetView<ImportInventoryController> {
                                                   style: Styles.greyLight14),
                                             ],
                                           )
-                                        : Dimens.box0),
+                                        : controller.importType.value ==
+                                                AppConstants.kImportDSMReport
+                                            ? Row(
+                                                children: [
+                                                  Icon(
+                                                    Icons.home,
+                                                    color: ColorValues
+                                                        .greyLightColor,
+                                                  ),
+                                                  InkWell(
+                                                    onTap: () {
+                                                      Get.offNamed(Routes.home);
+                                                    },
+                                                    child: Text(
+                                                      "DASHBOARD",
+                                                      style: Styles.greyLight14,
+                                                    ),
+                                                  ),
+                                                  InkWell(
+                                                    onTap: () {
+                                                      Get.offNamed(
+                                                        Routes
+                                                            .dsmDashboardScreen,
+                                                      );
+                                                    },
+                                                    child: Text(
+                                                        " / DSM DASHBOARD",
+                                                        style:
+                                                            Styles.greyLight14),
+                                                  ),
+                                                  Text(
+                                                    " / IMPORT DSM REPORT",
+                                                    style: Styles.greyLight14,
+                                                  ),
+                                                ],
+                                              )
+                                            : Dimens.box0),
             //  Dimens.boxHeight20,
             Flexible(
               child: SingleChildScrollView(
@@ -243,7 +279,12 @@ class ImportInventoryContentWeb extends GetView<ImportInventoryController> {
                                                         AppConstants
                                                             .kImportBussiness
                                                     ? "Import Business file"
-                                                    : "",
+                                                    : controller.importType
+                                                                .value ==
+                                                            AppConstants
+                                                                .kImportDSMReport
+                                                        ? "Import DSM Report"
+                                                        : "",
                             style: Styles.blackBold16,
                           ),
                         ),
@@ -340,7 +381,12 @@ class ImportInventoryContentWeb extends GetView<ImportInventoryController> {
                                                           AppConstants
                                                               .kImportBussiness
                                                       ? 'bussinesslist.xlsx'
-                                                      : 'example.xlsx';
+                                                      : controller.importType
+                                                                  .value ==
+                                                              AppConstants
+                                                                  .kImportDSMReport
+                                                          ? "dsmreport.xlsx"
+                                                          : 'example.xlsx';
 
                               downloadFile(assetPath, fileName);
                             },

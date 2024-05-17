@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:developer';
 import 'dart:typed_data';
 import 'package:cmms/domain/models/dashboard_model.dart';
+import 'package:cmms/domain/models/dsm_list_model.dart';
 import 'package:cmms/domain/models/get_mc_task_equipment_model.dart';
 import 'package:cmms/domain/models/grievance_type_model.dart';
 import 'package:cmms/domain/models/incident_risk_type_model.dart';
@@ -13220,6 +13221,40 @@ class Repository {
     } catch (error) {
       print(error.toString());
       return false;
+    }
+  }
+
+  Future<List<DSMData>> getDSMData({
+    List<String>? selectedYear,
+    List<String>? selectedMonth,
+    List<int>? selectedState,
+    List<int>? selectedSpv,
+    List<int>? selectedSite,
+    required bool isLoading,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getDSMData(
+        auth: auth,
+        selectedYear: selectedYear,
+        selectedMonth: selectedMonth,
+        selectedState: selectedState,
+        selectedSpv: selectedSpv,
+        selectedSite: selectedSite,
+        isLoading: isLoading,
+      );
+      if (!res.hasError) {
+        var dsmDataList = dsmDataFromJson(res.data);
+        return dsmDataList;
+      }
+//
+      else {
+        Utility.showDialog(res.errorCode.toString(), 'getdsmDataList');
+        return [];
+      }
+    } catch (error) {
+      print(error.toString());
+      return [];
     }
   }
 

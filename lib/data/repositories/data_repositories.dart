@@ -4964,5 +4964,24 @@ class DataRepository extends DomainRepository {
     );
     return response;
   }
+
+    Future<ResponseModel> getDSMData({
+    required String auth,
+    List<String>? selectedYear,
+    List<String>? selectedMonth,
+    List<int>? selectedState,
+    List<int>? selectedSpv,
+    List<int>? selectedSite,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.getDSMData(
+        auth: auth,
+        selectedYear: selectedYear,
+        selectedMonth: selectedMonth,
+        selectedState: selectedState,
+        selectedSpv: selectedSpv,
+        selectedSite: selectedSite,
+        isLoading: isLoading ?? false,
+      );
 //end
 }

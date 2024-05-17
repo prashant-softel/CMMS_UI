@@ -1151,6 +1151,7 @@ class ConnectHelper {
 
     return responseModel;
   }
+
   Future<ResponseModel> approveIncidentReportButton2ndStep({
     required String auth,
     incidentReportApproveJsonString,
@@ -4623,6 +4624,12 @@ class ConnectHelper {
             auth: auth,
             fileId: jsonResponse["id"][0].toString(),
             isLoading: true);
+      } else if (importType == AppConstants.kImportDSMReport) {
+        importDSMFile(
+          auth: auth,
+          fileId: jsonResponse["id"][0].toString(),
+          isLoading: true,
+        );
       }
     }
 
@@ -7199,6 +7206,33 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> importDSMFile({
+    required String auth,
+    required String fileId,
+    required bool isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'DSM/importDSMFile?file_id=$fileId',
+      Request.post,
+      null,
+      true,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    var importlog = parsedJson['import_log'];
+    String message = parsedJson["message"];
+    Utility.showDialog(message, '');
+    String logString = importlog.join('\n');
+    Get.dialog<void>(
+      ImportMsgDialog(data: message, importLog: logString),
+    );
+    return responseModel;
+  }
+
   Future<ResponseModel> importBusiness({
     required String auth,
     required String fileId,
@@ -8581,6 +8615,47 @@ class ConnectHelper {
         'Authorization': 'Bearer $auth',
       },
     );
+    return responseModel;
+  }
+
+  Future<ResponseModel> getDSMData({
+    required String auth,
+    List<String>? selectedYear,
+    List<String>? selectedMonth,
+    List<int>? selectedState,
+    List<int>? selectedSpv,
+    List<int>? selectedSite,
+    bool? isLoading,
+  }) async {
+    final queryParams = <String>[];
+    if (selectedYear != null || selectedYear?.length != 0) {
+      queryParams.add('fy=${selectedYear?.join(',')}');
+    }
+    if (selectedMonth != null || selectedMonth?.length != 0) {
+      queryParams.add('month=${selectedMonth?.join(',')}');
+    }
+    if (selectedState != null || selectedState?.length != 0) {
+      queryParams.add('stateId=${selectedState?.join(',')}');
+    }
+    if (selectedSpv != null || selectedSpv?.length != 0) {
+      queryParams.add('spvId=${selectedSpv?.join(',')}');
+    }
+    if (selectedSite != null || selectedSite?.length != 0) {
+      queryParams.add('siteId=${selectedSite?.join(',')}');
+    }
+    final queryString = queryParams.join('&');
+    final endpoint = 'DSM/getDSMData?$queryString';
+    var responseModel = await apiWrapper.makeRequest(
+      endpoint,
+      Request.get,
+      null,
+      isLoading ?? false,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    print('NewPermitResponse: ${responseModel.data}');
+
     return responseModel;
   }
   //end
