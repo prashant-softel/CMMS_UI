@@ -1,6 +1,7 @@
 import 'package:cmms/domain/domain.dart';
 import 'package:cmms/domain/models/body_injured_model.dart';
 import 'package:cmms/domain/models/business_list_model.dart';
+import 'package:cmms/domain/models/designation_model.dart';
 import 'package:cmms/domain/models/employee_list_model.dart';
 import 'package:cmms/domain/models/history_model.dart';
 import 'package:cmms/domain/models/incident_report_details_model.dart';
@@ -182,7 +183,12 @@ class AddIncidentReportUsecase {
 
   Future<List<FacilityModel?>?> getFacilityPlantList() async =>
       await _repository.getFacilityList(true);
-
+  Future<List<DesignationModel?>?> getResponsibilityList({
+    bool? isLoading,
+  }) async =>
+      await _repository.getResponsibilityList(
+        isLoading,
+      );
   void saveValue({String? irId}) async =>
       _repository.saveValue(LocalKeys.irId, irId);
   Future<String?> getValue() async =>

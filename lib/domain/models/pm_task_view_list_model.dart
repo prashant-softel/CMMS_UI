@@ -19,7 +19,7 @@ class PmtaskViewModel {
   String? last_done_date;
   String? due_date;
   String? done_date;
-
+  int? plan_id;
   int? category_id;
   String? category_name;
   int? frequency_id;
@@ -97,12 +97,14 @@ class PmtaskViewModel {
       this.started_by_name,
       this.status_long,
       this.updated_at,
+      this.plan_id,
       this.updated_by_id,
       this.updated_by_name});
 
   factory PmtaskViewModel.fromJson(Map<String, dynamic> json) =>
       PmtaskViewModel(
         status_short_ptw: json["status_short_ptw"] ?? "",
+        plan_id: json["plan_id"] ?? "",
         updated_by_name: json["updated_by_name"] ?? "",
         updated_by_id: json["updated_by_id"] ?? "",
         updated_at: json["updated_at"] ?? "",
@@ -154,6 +156,7 @@ class PmtaskViewModel {
 
   Map<String, dynamic> toJson() => {
         "ptw_status": ptw_status,
+        "plan_id": plan_id,
         "updated_by_name": updated_by_name,
         "updated_by_id": updated_by_id,
         "updated_at": updated_at,

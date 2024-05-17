@@ -229,13 +229,13 @@ class ViewAuditTaskController extends GetxController {
       auditTaskId: auditTaskId.value,
       isLoading: true,
     );
-    if (responseMapStart != null && responseMapStart.length > 0) {
-      // getPmtaskViewList(scheduleId: scheduleId.value, isloading: true);
-      startresponseMessage.value = responseMapStart["message"];
-      // print({"jkfdkjfd", startresponseMessage});
-      // isPermitLinked.value = true;
-      _updatedailog();
-    }
+    // if (responseMapStart != null && responseMapStart.length > 0) {
+    //   // getPmtaskViewList(scheduleId: scheduleId.value, isloading: true);
+    //   startresponseMessage.value = responseMapStart["message"];
+    //   // print({"jkfdkjfd", startresponseMessage});
+    //   // isPermitLinked.value = true;
+    // //  _updatedailog();
+    // }
   }
 
   void _updatedailog() {
@@ -354,7 +354,7 @@ class ViewAuditTaskController extends GetxController {
     ));
   }
 
-  void updatePmExecution() async {
+  void updateAuditTaskExecution() async {
     PmFiles fil = PmFiles(file_id: 0, pm_event: 0);
     List<PmFiles> pmfile = <PmFiles>[fil];
 
@@ -362,11 +362,11 @@ class ViewAuditTaskController extends GetxController {
     rowItemAuditobs.value.forEach((element) {
       AddObservations item = AddObservations(
           execution_id: int.tryParse(element[0]["id"] ?? '0'),
-          observation: element[4]["value"] ?? "",
-          job_create: int.tryParse(element[7]["job_value"] ?? '0'),
-          text: element[6]["value"] ?? '',
-          cp_ok: int.tryParse(element[3]["value"] ?? '0'),
-          pm_files: pmfile);
+          observation: element[3]["value"] ?? "",
+          job_create: 0, // int.tryParse(element[7]["job_value"] ?? '0'),
+          text: element[5]["value"] ?? '',
+          cp_ok: int.tryParse(element[2]["value"] ?? '0'),
+          pm_files: []);
       addObservations.add(item);
     });
     // });
@@ -382,14 +382,14 @@ class ViewAuditTaskController extends GetxController {
         task_id: auditTaskId.value,
         comment: "", // commentCtrlr.text,
         schedules: schedule);
-    var pmExecutionJsonString = updatePmExecutionMdel.toJson();
-    print({"pmExecutionJsonString", pmExecutionJsonString});
+    var auditExecutionJsonString = updatePmExecutionMdel.toJson();
+    print({"pmExecutionJsonString", auditExecutionJsonString});
     var responsePmScheduleCreated =
-        await viewAuditTaskPresenter.updatePmExecution(
-      pmExecutionJsonString: pmExecutionJsonString,
+        await viewAuditTaskPresenter.updateAuditTaskExecution(
+      auditExecutionJsonString: auditExecutionJsonString,
       isLoading: true,
     );
-    _updatedailog();
+    // _updatedailog();
     // Get.back();
   }
 }

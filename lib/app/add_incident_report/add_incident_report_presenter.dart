@@ -1,6 +1,7 @@
 import 'package:cmms/domain/models/block_model.dart';
 import 'package:cmms/domain/models/body_injured_model.dart';
 import 'package:cmms/domain/models/business_list_model.dart';
+import 'package:cmms/domain/models/designation_model.dart';
 import 'package:cmms/domain/models/employee_list_model.dart';
 import 'package:cmms/domain/models/history_model.dart';
 import 'package:cmms/domain/models/incident_report_details_model.dart';
@@ -200,6 +201,12 @@ class AddIncidentReportPresenter {
     return incidentReportUsecase.saveValue(irId: irId);
   }
 
+  Future<List<DesignationModel?>?> getResponsibilityList({
+    bool? isLoading,
+  }) async =>
+      await incidentReportUsecase.getResponsibilityList(
+        isLoading: isLoading ?? false,
+      );
   // Future<String?> getUserAccessList() async =>
   //     await incidentReportUsecase.getUserAccessList();
 

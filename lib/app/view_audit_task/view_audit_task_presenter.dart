@@ -46,12 +46,12 @@ class ViewAuditTaskPresenter {
     );
   }
 
-  Future<List<dynamic>> updatePmExecution({
-    pmExecutionJsonString,
+  Future<List<dynamic>> updateAuditTaskExecution({
+    auditExecutionJsonString,
     required bool isLoading,
   }) async {
-    return viewAuditTaskUsecase.updatePmExecution(
-      pmExecutionJsonString: pmExecutionJsonString,
+    return viewAuditTaskUsecase.updateAuditTaskExecution(
+      auditExecutionJsonString: auditExecutionJsonString,
       isLoading: isLoading,
     );
   }

@@ -404,9 +404,9 @@ class AuditExecutionProcessDialog extends GetView {
                                   backgroundColor: ColorValues.appDarkBlueColor,
                                   text: "Update",
                                   onPressed: () {
-                                    Get.back();
+                                    // Get.back();
                                     // controller.transferItem();
-                                    //  controller.updatePmExecution();
+                                    controller.updateAuditTaskExecution();
                                   },
                                 ),
                               )
