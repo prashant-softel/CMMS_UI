@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:cmms/app/utils/utility.dart';
+
 List<AuditPlanListModel> auditModelFromJson(String str) =>
     List<AuditPlanListModel>.from(
         json.decode(str).map((x) => AuditPlanListModel.fromJson(x)));
@@ -48,7 +50,9 @@ class AuditPlanListModel {
     return AuditPlanListModel(
       auditee_Emp_Name: parsedJson['auditee_Emp_Name'],
       checklist_name: parsedJson['checklist_name'],
-      created_at: parsedJson['created_at'],
+      created_at: parsedJson['created_at'] == null
+          ? parsedJson['created_at']
+          : Utility.getFormatedyearMonthDay(parsedJson['created_at']),
       created_by: parsedJson['created_by'],
       frequency_name: parsedJson['frequency_name'],
       auditor_Emp_Name: parsedJson['auditor_Emp_Name'],
@@ -61,7 +65,9 @@ class AuditPlanListModel {
       status: parsedJson['status'],
       checklist_id: parsedJson['checklist_id'],
       description: parsedJson['description'],
-      schedule_Date: parsedJson['schedule_Date'],
+      schedule_Date: parsedJson['schedule_Date'] == null
+          ? parsedJson['schedule_Date']
+          : Utility.getFormatedyearMonthDay(parsedJson['schedule_Date']),
     );
   }
   Map<String, dynamic> toJson() => {

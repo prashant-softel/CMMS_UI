@@ -4,6 +4,7 @@ import 'package:cmms/app/view_audit_task/view_audit_task_controller.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_textField.dart';
 import 'package:data_table_2/data_table_2.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../theme/dimens.dart';
@@ -241,22 +242,24 @@ class AuditExecutionProcessDialog extends GetView {
                                                                         onTap:
                                                                             () async {
                                                                           try {
-                                                                            // final result = await FilePicker.platform.pickFiles(
-                                                                            //   type: FileType.image,
-                                                                            // );
-                                                                            // if (result != null && result.files.single.bytes != null) {
-                                                                            //   setState(() {
-                                                                            //     mapData['uploaded'] = result.files.single.name;
-                                                                            //     controller.fileName.value = result.files.single.name;
-                                                                            //     controller.fileBytes = result.files.single.bytes;
-                                                                            //   });
-                                                                            //   controller.browseFiles(
-                                                                            //     fileBytes: controller.fileBytes,
-                                                                            //   );
-                                                                            // } else {
-                                                                            //   // Handle the case where no file is picked
-                                                                            //   print('No file selected');
-                                                                            // }
+                                                                            final result =
+                                                                                await FilePicker.platform.pickFiles(
+                                                                              type: FileType.image,
+                                                                            );
+                                                                            if (result != null &&
+                                                                                result.files.single.bytes != null) {
+                                                                              setState(() {
+                                                                                mapData['uploaded'] = result.files.single.name;
+                                                                                controller.fileName.value = result.files.single.name;
+                                                                                controller.fileBytes = result.files.single.bytes;
+                                                                              });
+                                                                              controller.browseFiles(
+                                                                                fileBytes: controller.fileBytes,
+                                                                              );
+                                                                            } else {
+                                                                              // Handle the case where no file is picked
+                                                                              print('No file selected');
+                                                                            }
                                                                           } catch (e) {
                                                                             // Handle the error scenario
                                                                             print('Error picking file: $e');
@@ -323,28 +326,31 @@ class AuditExecutionProcessDialog extends GetView {
                                                                     : (mapData['key'] ==
                                                                                 "type" &&
                                                                             mapData['inpute_type'] ==
-                                                                                "2")
-                                                                        ? Padding(
-                                                                            padding:
-                                                                                const EdgeInsets.all(8.0),
-                                                                            child: Column(
-                                                                              children: [
-                                                                                LoginCustomTextfield(
-                                                                                    width: (Get.width * .8),
-                                                                                    textController: new TextEditingController(text: mapData["value"] ?? ''),
-                                                                                    onChanged: (txt) {
-                                                                                      mapData["value"] = txt;
-                                                                                    }),
-                                                                                Row(
+                                                                                "0")
+                                                                        ? Text(
+                                                                            'Text')
+                                                                        : (mapData['key'] == "type" &&
+                                                                                mapData['inpute_type'] == "2")
+                                                                            ? Padding(
+                                                                                padding: const EdgeInsets.all(8.0),
+                                                                                child: Column(
                                                                                   children: [
-                                                                                    Text("Min:${mapData["min"]}"),
-                                                                                    Dimens.boxWidth15,
-                                                                                    Text("Max:${mapData["max"]}")
+                                                                                    LoginCustomTextfield(
+                                                                                        width: (Get.width * .8),
+                                                                                        textController: new TextEditingController(text: mapData["value"] ?? ''),
+                                                                                        onChanged: (txt) {
+                                                                                          mapData["value"] = txt;
+                                                                                        }),
+                                                                                    Row(
+                                                                                      children: [
+                                                                                        Text("Min:${mapData["min"]}"),
+                                                                                        Dimens.boxWidth15,
+                                                                                        Text("Max:${mapData["max"]}")
+                                                                                      ],
+                                                                                    )
                                                                                   ],
-                                                                                )
-                                                                              ],
-                                                                            ))
-                                                                        : Text(mapData['value'] ?? ''),
+                                                                                ))
+                                                                            : Text(mapData['value'] ?? ''),
                                               );
                                             }).toList(),
                                           );
