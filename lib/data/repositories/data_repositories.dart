@@ -4954,5 +4954,55 @@ class DataRepository extends DomainRepository {
     );
     return response;
   }
+
+   //Material category
+  Future<ResponseModel> getMaterialList({
+    required bool isLoading,
+    required String auth,
+  }) async {
+    return await connectHelper.getMaterialList(
+      isLoading: isLoading,
+      auth: auth,
+    );
+  }
+
+  //create
+  Future<ResponseModel> createMaterialCategory({
+    auth,
+    bool? isLoading,
+    mcategorylistJsonString,
+  }) async {
+    var response = await connectHelper.createMaterialCategory(
+        auth: auth,
+        isLoading: isLoading,
+        mcategorylistJsonString: mcategorylistJsonString);
+    return response;
+  }
+
+  //update
+  Future<ResponseModel> updateMaterialCategory({
+    auth,
+    bool? isLoading,
+    modulelistJsonString,
+  }) async {
+    var response = await connectHelper.updateMaterialCategory(
+      auth: auth,
+      isLoading: isLoading,
+      modulelistJsonString: modulelistJsonString,
+    );
+    return response;
+  }
+
+  //delete
+  Future<ResponseModel> deleteMaterialCategory({
+    auth,
+    bool? isLoading,
+    business_id,
+  }) async {
+    var response = await connectHelper.deleteMaterialCategory(
+        auth: auth, isLoading: isLoading, business_id: business_id);
+    return response;
+  }
+  
 //end
 }
