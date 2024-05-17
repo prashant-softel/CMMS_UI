@@ -6,6 +6,7 @@ import 'package:cmms/domain/models/get_mc_task_equipment_model.dart';
 import 'package:cmms/domain/models/grievance_type_model.dart';
 import 'package:cmms/domain/models/incident_risk_type_model.dart';
 import 'package:cmms/domain/models/grievance_List_model.dart';
+import 'package:cmms/domain/models/material_category_model.dart';
 import 'package:cmms/domain/models/module_cleaning_list_plan_model.dart';
 import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/utils/utils.dart';
@@ -13226,6 +13227,102 @@ class Repository {
     } catch (error) {
       print(error.toString());
       return false;
+    }
+  }
+
+  //Material Category
+  //get
+  Future<List<MaterialCategoryListModel>> getMaterialList({
+    required bool isLoading,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+
+      log(auth);
+      final res = await _dataRepository.getMaterialList(
+        isLoading: isLoading,
+        auth: auth,
+      );
+      print('Material Category: ${res.data}');
+
+      if (!res.hasError) {
+        var Sourcetype = MaterialCategoryFromJson(res.data);
+        return Sourcetype;
+      }
+      return [];
+    } catch (error) {
+      log(error.toString());
+      return [];
+    }
+  }
+
+  //create
+  Future<bool> createMaterialCategory(
+      {bool? isLoading, mcategorylistJsonString}) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.createMaterialCategory(
+          auth: auth,
+          isLoading: isLoading,
+          mcategorylistJsonString: mcategorylistJsonString);
+
+      if (!res.hasError) {
+        return true;
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString(), ' createCheckListNumber');
+        return false;
+      }
+    } catch (error) {
+      print(error.toString());
+      return false;
+    }
+  }
+
+  //update
+  Future<bool> updateMaterialCategory({
+    bool? isLoading,
+    modulelistJsonString,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.updateMaterialCategory(
+        auth: auth,
+        isLoading: isLoading,
+        modulelistJsonString: modulelistJsonString,
+      );
+      print(res.data);
+      if (!res.hasError) {
+        return true;
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString(), 'updateBusinesslist');
+        return false;
+      }
+    } catch (error) {
+      print(error.toString());
+      return false;
+    }
+  }
+
+  //delete
+  Future<void> deleteMaterialCategory(Object business_id, bool isLoading) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.deleteMaterialCategory(
+        auth: auth,
+        business_id: business_id,
+        isLoading: isLoading,
+      );
+
+      if (!res.hasError) {
+        //get delete response back from API
+      } else {
+        Utility.showDialog(
+            res.errorCode.toString(), 'delete Material Category');
+      }
+    } catch (error) {
+      print(error.toString());
     }
   }
 
