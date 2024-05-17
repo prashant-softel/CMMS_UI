@@ -71,7 +71,7 @@ class _ViewAuditTaskWebState extends State<ViewAuditTaskWeb> {
                         ),
                         InkWell(
                             onTap: () {
-                              Get.offNamed(Routes.misDashboard);
+                              Get.offNamed(Routes.auditTask);
                             },
                             child: Text(" / AUDIT TASK",
                                 style: Styles.greyLight14)),
@@ -538,8 +538,7 @@ class _ViewAuditTaskWebState extends State<ViewAuditTaskWeb> {
                                             ),
                                           )
                                         //  )
-                                        : 
-                                        Dimens.box0,
+                                        : Dimens.box0,
                                     Dimens.boxHeight35,
                                     Row(
                                       children: [

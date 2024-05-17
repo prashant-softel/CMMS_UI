@@ -59,24 +59,31 @@ class _ViewAuditPlanWebState extends State<ViewAuditPlanWeb> {
                           Icons.home,
                           color: ColorValues.greyLightColor,
                         ),
-                        Text(
-                          "DASHBOARD",
-                          style: Styles.greyLight14,
+                        InkWell(
+                          onTap: () {
+                            Get.offNamed(Routes.home);
+                          },
+                          child: Text(
+                            "DASHBOARD",
+                            style: Styles.greyLight14,
+                          ),
                         ),
                         InkWell(
                           onTap: () {
-                            Get.offNamed(Routes.misDashboard);
+                            controller.type.value == 3
+                                ? Get.offNamed(Routes.misDashboard)
+                                : Get.offNamed(Routes.auditListScreen);
                           },
                           child: controller.type.value == 3
-                              ? Text(" / MIS", style: Styles.greyMediumLight12)
-                              : Text(" / AUDIT",
-                                  style: Styles.greyMediumLight12),
+                              ? Text(" / MIS", style: Styles.greyLight14)
+                              : Text(" / AUDIT LIST",
+                                  style: Styles.greyLight14),
                         ),
                         controller.type.value == 3
                             ? Text(" / VIEW OBSERVATION PLAN",
-                                style: Styles.greyMediumLight12)
+                                style: Styles.greyLight14)
                             : Text(" / VIEW AUDIT PLAN",
-                                style: Styles.greyMediumLight12)
+                                style: Styles.greyLight14)
                       ],
                     ),
                   ),
