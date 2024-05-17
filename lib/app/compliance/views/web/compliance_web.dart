@@ -5,6 +5,7 @@ import 'package:cmms/app/stock_managment_add_goods_orders.dart/view/stock_manage
 import 'package:cmms/app/theme/dimens.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
+import 'package:cmms/app/widgets/custom_textField.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -65,7 +66,8 @@ class ComplianceWeb extends StatelessWidget {
                   ),
                   boxShadow: [
                     BoxShadow(
-                      color: Color.fromARGB(255, 236, 234, 234).withOpacity(0.5),
+                      color:
+                          Color.fromARGB(255, 236, 234, 234).withOpacity(0.5),
                       spreadRadius: 2,
                       blurRadius: 5,
                       offset: Offset(0, 2),
@@ -150,10 +152,16 @@ class ComplianceWeb extends StatelessWidget {
                                                     CustomRichText(
                                                         title: 'Compliance '),
                                                     Dimens.boxWidth10,
-                                                    GoodsOrderTextField(
+                                                    LoginCustomTextfield(
+                                                      width: (MediaQuery.of(
+                                                                  context)
+                                                              .size
+                                                              .width *
+                                                          .2),
+
                                                       keyboardType:
                                                           TextInputType.number,
-      
+
                                                       // textController:
                                                       //     controller.challanNoCtrlr,
                                                     ),
@@ -163,7 +171,8 @@ class ComplianceWeb extends StatelessWidget {
                                                 Row(
                                                   children: [
                                                     CustomRichText(
-                                                        title: 'Received Date '),
+                                                        title:
+                                                            'Received Date '),
                                                     Dimens.boxWidth10,
                                                     CustomTextFieldForStock(
                                                       width:
@@ -192,10 +201,15 @@ class ComplianceWeb extends StatelessWidget {
                                                         title:
                                                             'Validity (In months) '),
                                                     Dimens.boxWidth10,
-                                                    GoodsOrderTextField(
+                                                    LoginCustomTextfield(
+                                                      width: (MediaQuery.of(
+                                                                  context)
+                                                              .size
+                                                              .width *
+                                                          .2),
                                                       keyboardType:
                                                           TextInputType.number,
-      
+
                                                       // textController:
                                                       //     controller.challanNoCtrlr,
                                                     ),
@@ -207,10 +221,15 @@ class ComplianceWeb extends StatelessWidget {
                                                     CustomRichText(
                                                         title: 'Days Left '),
                                                     Dimens.boxWidth10,
-                                                    GoodsOrderTextField(
+                                                    LoginCustomTextfield(
+                                                      width: (MediaQuery.of(
+                                                                  context)
+                                                              .size
+                                                              .width *
+                                                          .2),
                                                       keyboardType:
                                                           TextInputType.number,
-      
+
                                                       // textController:
                                                       //     controller.challanNoCtrlr,
                                                     ),
@@ -256,10 +275,16 @@ class ComplianceWeb extends StatelessWidget {
                                                         title:
                                                             'Status of validity '),
                                                     Dimens.boxWidth10,
-                                                    GoodsOrderTextField(
+                                                    LoginCustomTextfield(
+                                                      width: (MediaQuery.of(
+                                                                  context)
+                                                              .size
+                                                              .width *
+                                                          .2),
+
                                                       keyboardType:
                                                           TextInputType.number,
-      
+
                                                       // textController:
                                                       //     controller.challanNoCtrlr,
                                                     ),
@@ -271,10 +296,15 @@ class ComplianceWeb extends StatelessWidget {
                                                     CustomRichText(
                                                         title: 'Expires on '),
                                                     Dimens.boxWidth10,
-                                                    GoodsOrderTextField(
+                                                    LoginCustomTextfield(
+                                                      width: (MediaQuery.of(
+                                                                  context)
+                                                              .size
+                                                              .width *
+                                                          .2),
                                                       keyboardType:
                                                           TextInputType.number,
-      
+
                                                       // textController:
                                                       //     controller.challanNoCtrlr,
                                                     ),
@@ -287,10 +317,15 @@ class ComplianceWeb extends StatelessWidget {
                                                         title:
                                                             'Status of validity '),
                                                     Dimens.boxWidth10,
-                                                    GoodsOrderTextField(
+                                                    LoginCustomTextfield(
+                                                      width: (MediaQuery.of(
+                                                                  context)
+                                                              .size
+                                                              .width *
+                                                          .2),
                                                       keyboardType:
                                                           TextInputType.number,
-      
+
                                                       // textController:
                                                       //     controller.challanNoCtrlr,
                                                     ),
@@ -400,7 +435,8 @@ class ComplianceWeb extends StatelessWidget {
                                                         style: TextStyle(
                                                             fontSize: 15,
                                                             fontWeight:
-                                                                FontWeight.bold),
+                                                                FontWeight
+                                                                    .bold),
                                                       ),
                                                     ),
                                                     DataColumn(
@@ -409,7 +445,8 @@ class ComplianceWeb extends StatelessWidget {
                                                         style: TextStyle(
                                                             fontSize: 15,
                                                             fontWeight:
-                                                                FontWeight.bold),
+                                                                FontWeight
+                                                                    .bold),
                                                       ),
                                                     ),
                                                     DataColumn(
@@ -418,7 +455,8 @@ class ComplianceWeb extends StatelessWidget {
                                                         style: TextStyle(
                                                             fontSize: 15,
                                                             fontWeight:
-                                                                FontWeight.bold),
+                                                                FontWeight
+                                                                    .bold),
                                                       ),
                                                     ),
                                                     DataColumn(
@@ -427,7 +465,8 @@ class ComplianceWeb extends StatelessWidget {
                                                         style: TextStyle(
                                                             fontSize: 15,
                                                             fontWeight:
-                                                                FontWeight.bold),
+                                                                FontWeight
+                                                                    .bold),
                                                       ),
                                                     ),
                                                     DataColumn(
@@ -436,7 +475,8 @@ class ComplianceWeb extends StatelessWidget {
                                                         style: TextStyle(
                                                             fontSize: 15,
                                                             fontWeight:
-                                                                FontWeight.bold),
+                                                                FontWeight
+                                                                    .bold),
                                                       ),
                                                     ),
                                                   ],

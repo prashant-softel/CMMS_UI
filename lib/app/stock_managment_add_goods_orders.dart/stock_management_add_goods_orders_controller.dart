@@ -58,7 +58,7 @@ class StockManagementAddGoodsOrdersController extends GetxController {
   Rx<bool> ispaidSelected = true.obs;
   Rx<String> selectedReqOrder = ''.obs;
   Rx<String> selectedpaid = ''.obs;
-  
+
   Rx<bool> isAmountInvalid = false.obs;
   Rx<bool> isPOInvalid = false.obs;
   RxList<int> selectedReqOrderId = <int>[].obs;
@@ -575,7 +575,7 @@ class StockManagementAddGoodsOrdersController extends GetxController {
 
   void createGoodsOrder() async {
     checkForm();
-     if (isFormInvalid.value) {
+    if (isFormInvalid.value) {
       return;
     }
     // DateTime now = DateTime.now();
@@ -666,7 +666,7 @@ class StockManagementAddGoodsOrdersController extends GetxController {
   }
 
   void updateGoodsOrder() async {
-     checkForm();
+    checkForm();
     if (isFormInvalid.value) {
       return;
     }
@@ -778,21 +778,20 @@ class StockManagementAddGoodsOrdersController extends GetxController {
     await getRoDetailsByID(
         requestID: selectedReqOrderId.value, facilityId: facilityId);
   }
+
   //validation
   void checkForm() {
     if (pOCtrlr.text.trim().length < 3) {
       isPOInvalid.value = true;
     }
-     if (pOCtrlr.value == true) {
+    if (pOCtrlr.value == true) {
       isFormInvalid.value = true;
     }
-      if (amountCtrlr.text.trim().length < 3) {
+    if (amountCtrlr.text.trim().length < 3) {
       isAmountInvalid.value = true;
     }
     if (amountCtrlr.value == true) {
       isFormInvalid.value = true;
     }
-  
-
   }
 }

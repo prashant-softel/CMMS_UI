@@ -3,6 +3,7 @@ import 'package:cmms/app/stock_managment_add_goods_orders.dart/view/stock_manage
 import 'package:cmms/app/waste_data/waste_data_controller.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
+import 'package:cmms/app/widgets/custom_textField.dart';
 import 'package:cmms/app/widgets/stock_dropdown.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -138,12 +139,14 @@ class WasteGeneratedAddDialog extends GetView {
                         ),
                       ),
                       Dimens.boxHeight10,
-                      GoodsOrderTextField(
+                      LoginCustomTextfield(
+                        width: (MediaQuery.of(context).size.width * .2),
                         keyboardType: TextInputType.number,
                         textController: controller.qtyCtrlr,
                       ),
                       Dimens.boxHeight10,
-                      GoodsOrderTextField(
+                      LoginCustomTextfield(
+                        width: (MediaQuery.of(context).size.width * .2),
                         textController: controller.descriptionCtrlr,
                       ),
                     ],
