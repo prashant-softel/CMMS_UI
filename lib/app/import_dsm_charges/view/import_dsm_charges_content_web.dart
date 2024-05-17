@@ -67,7 +67,7 @@ class _ImportDsmChargesContentWebState
                       ),
                       InkWell(
                         onTap: () {
-                          Get.offNamed(Routes.masterDashboard);
+                          Get.offNamed(Routes.dsmDashboardScreen);
                         },
                         child: Text(" / MASTER", style: Styles.greyLight14),
                       ),
