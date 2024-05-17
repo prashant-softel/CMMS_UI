@@ -4624,7 +4624,8 @@ class ConnectHelper {
         importPlan(
             auth: auth,
             fileId: jsonResponse["id"][0].toString(),
-            isLoading: true);
+            isLoading: true,
+            facilityId: facilityId);
       }
     }
 
@@ -7177,10 +7178,11 @@ class ConnectHelper {
   Future<ResponseModel> importPlan({
     required String auth,
     required String fileId,
+    required int facilityId,
     required bool isLoading,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
-      'PM/ImportPMPlanFile?file_id=$fileId',
+      'PM/ImportPMPlanFile?file_id=$fileId&facility_id=$facilityId',
       Request.post,
       null,
       true,
