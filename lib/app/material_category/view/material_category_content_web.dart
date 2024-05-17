@@ -467,7 +467,9 @@ class MaterialCategoryContentWeb extends GetView<MaterialCategoryController> {
                                               backgroundColor:
                                                   ColorValues.appDarkBlueColor,
                                               onPressed: () {
-                                                controller.createMaterialCategory().then(
+                                                controller
+                                                    .createMaterialCategory()
+                                                    .then(
                                                   (value) {
                                                     print("CREATE");
                                                     print("value,$value");
@@ -489,8 +491,7 @@ class MaterialCategoryContentWeb extends GetView<MaterialCategoryController> {
                                                 ColorValues.appDarkBlueColor,
                                             onPressed: () {
                                               controller
-                                                  .updateMaterialCategory(controller
-                                                      .selectedItem?.id)
+                                                  .updateMaterialCategory()
                                                   .then(
                                                 (value) {
                                                   print("UPDATE");
@@ -638,12 +639,15 @@ class MaterialCategoryContentWeb extends GetView<MaterialCategoryController> {
                                                     )),
                                               ],
                                               rows: List<DataRow>.generate(
-                                                controller.MaterialList.length ?? 0,
+                                                controller
+                                                        .MaterialList.length ??
+                                                    0,
                                                 (index) => DataRow(cells: [
                                                   DataCell(Text(
                                                       (index + 1).toString())),
                                                   DataCell(Text(controller
-                                                          .MaterialList[index].name
+                                                          .MaterialList[index]
+                                                          .name
                                                           .toString() ??
                                                       '')),
                                                   // DataCell(Text(controller

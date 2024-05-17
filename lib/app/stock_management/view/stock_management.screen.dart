@@ -351,9 +351,9 @@ class StockManagementDashboardScreen
                                                 e.view ==
                                                     UserAccessConstants
                                                         .kHaveViewAccess ||
-                                            e.add ==
+                                            e.view ==
                                                 UserAccessConstants
-                                                    .kHaveAddAccess)
+                                                    .kHaveViewAccess)
                                         .length >
                                     0
                                 ? _stockManagementList(
@@ -389,19 +389,27 @@ class StockManagementDashboardScreen
                                         .length >
                                     0
                                 ? _importPlan(
-                                    tittle: "Material Category",
+                                    tittle: "Import Material Category",
                                     ontap: () {
                                       controller.importMaterial();
                                     })
                                 : Dimens.box0,
-                               
-                                    
-                                 _importPlan(
+                            varUserAccessModel.value.access_list!
+                                        .where((e) =>
+                                            e.feature_id ==
+                                                UserAccessConstants
+                                                    .kMasterFeatureId &&
+                                            e.view ==
+                                                UserAccessConstants
+                                                    .kHaveViewAccess)
+                                        .length >
+                                    0
+                                ? _importPlan(
                                     tittle: "Material Category",
                                     ontap: () {
                                       controller.materialCategory();
                                     })
-                               
+                                : Dimens.box0,
                           ],
                         ),
                       ]),

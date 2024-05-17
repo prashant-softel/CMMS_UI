@@ -1,6 +1,3 @@
-
-
-
 // ignore_for_file: unused_import
 
 import 'dart:async';
@@ -16,65 +13,66 @@ import 'package:http/http.dart';
 import 'package:rxdart/subjects.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 
-
-class MaterialCategoryController extends GetxController{
+class MaterialCategoryController extends GetxController {
   MaterialCategoryController(
     this.materialCategoryPresenter,
   );
   MaterialCategoryPresenter materialCategoryPresenter;
 
-  final HomeController homeController=Get.find();
+  final HomeController homeController = Get.find();
   MaterialCategoryListModel? selectedItem;
   MaterialCategoryListModel? selectedItemupdate;
 
-Rx<bool> isFormInvalid=false.obs;
-Rx<bool> isCheckedRequire=false.obs;
-Rx<bool> isContainerVisible=false.obs;
+  Rx<bool> isFormInvalid = false.obs;
+  Rx<bool> isCheckedRequire = false.obs;
+  Rx<bool> isContainerVisible = false.obs;
   int facilityId = 0;
   int type = 1;
 
 //PreventiveCheckListModel? preventiveCheckListModel;
-RxList<String>preventiveCheckListTableColumns =<String>[].obs;
+  RxList<String> preventiveCheckListTableColumns = <String>[].obs;
 
-int selectedEquipmentId=0;
-int selectedfrequencyId=0;
-final isSuccess = false.obs;
-StreamSubscription<int>?facilityIdStreamSubscription;
+  int selectedEquipmentId = 0;
+  int selectedfrequencyId = 0;
+  final isSuccess = false.obs;
+  StreamSubscription<int>? facilityIdStreamSubscription;
 
 //SOP permit List
-Rx<bool> isTitleInvalid=false.obs;
-Rx<bool> isDescriptionInvalid=false.obs;
-RxList<MaterialCategoryListModel>MaterialList=<MaterialCategoryListModel>[].obs;
-  RxList<MaterialCategoryListModel> BufferMaterialList = <MaterialCategoryListModel>[].obs;
+  Rx<bool> isTitleInvalid = false.obs;
+  Rx<bool> isDescriptionInvalid = false.obs;
+  RxList<MaterialCategoryListModel> MaterialList =
+      <MaterialCategoryListModel>[].obs;
+  RxList<MaterialCategoryListModel> BufferMaterialList =
+      <MaterialCategoryListModel>[].obs;
   Rx<bool> isSPVListSelected = true.obs;
   Rx<String> selectedSopPermit = ''.obs;
   RxList<String?> selectedSopPermitDataList = <String>[].obs;
   RxList<int?> selectedSopPermitIdList = <int>[].obs;
- int selectedSOPId = 0;
+  int selectedSOPId = 0;
   int selectedJobSOPId = 0;
- PaginationController MaterialListPaginationController = PaginationController(
+  PaginationController MaterialListPaginationController = PaginationController(
     rowCount: 0,
     rowsPerPage: 10,
   );
 
-void search(String keyword){
-  print('Keyword: $keyword');
-  if(keyword.isEmpty){
-    MaterialList.value=BufferMaterialList.value;
-    return;
+  void search(String keyword) {
+    print('Keyword: $keyword');
+    if (keyword.isEmpty) {
+      MaterialList.value = BufferMaterialList.value;
+      return;
+    }
+    List<MaterialCategoryListModel> filteredList = BufferMaterialList.where(
+        (item) => (item.name
+                ?.toString()
+                .toLowerCase()
+                .contains(keyword.toLowerCase()) ??
+            false)).toList();
+    MaterialList.value = filteredList;
   }
-  List<MaterialCategoryListModel> filteredList=BufferMaterialList.where((item)=>
-  (item.name
-    ?.toString()
-    .toLowerCase()
-    .contains(keyword.toLowerCase())??
-    false)
-  ).toList();
-  MaterialList.value=filteredList;
-}
+
 //Facility list/demo plant
-RxList<FacilityModel?>facilityList=<FacilityModel>[].obs;
-Rx<bool> isFacilitySelected=true.obs;
+  RxList<FacilityModel?> facilityList = <FacilityModel>[].obs;
+  Rx<bool> isFacilitySelected = true.obs;
   Rx<String> selectedFacility = ''.obs;
   BehaviorSubject<int> _facilityId = BehaviorSubject.seeded(0);
   Stream<int> get facilityId$ => _facilityId.stream;
@@ -87,9 +85,9 @@ Rx<bool> isFacilitySelected=true.obs;
   Rx<bool> isLoading = true.obs;
 
   @override
-  void onInit() async{
+  void onInit() async {
     facilityIdStreamSubscription = homeController.facilityId$.listen((event) {
-       facilityId = event;
+      facilityId = event;
       Future.delayed(Duration(seconds: 1), () {
         getMaterialList();
       });
@@ -105,19 +103,19 @@ Rx<bool> isFacilitySelected=true.obs;
       }
     });
     super.onInit();
-
   }
-  Future<void> getMaterialList() async{
-    MaterialList.value=<MaterialCategoryListModel>[];
-    BufferMaterialList.value=<MaterialCategoryListModel>[];
-    final _materialList =await materialCategoryPresenter.getMaterialList(
+
+  Future<void> getMaterialList() async {
+    MaterialList.value = <MaterialCategoryListModel>[];
+    BufferMaterialList.value = <MaterialCategoryListModel>[];
+    final _materialList = await materialCategoryPresenter.getMaterialList(
       isLoading: isLoading.value,
       //categoryIds:categoryIds,
-      job_type_id:selectedJobSOPId,
+      job_type_id: selectedJobSOPId,
       //Job_type_id:36,
     );
-    isLoading.value=false;
-    for(var facilityType_list in _materialList){
+    isLoading.value = false;
+    for (var facilityType_list in _materialList) {
       MaterialList.add(facilityType_list);
       BufferMaterialList.add(facilityType_list);
     }
@@ -127,18 +125,20 @@ Rx<bool> isFacilitySelected=true.obs;
     );
     update(['Material_List']);
   }
-  void toggleContainer(){
+
+  void toggleContainer() {
     isContainerVisible.toggle();
   }
-  Future<bool> createMaterialCategory() async{
+
+  Future<bool> createMaterialCategory() async {
     print("CREATE CONTROLLER");
-    if(titleCtrlr.text.trim()==''){
-      isTitleInvalid.value=true;
-      isFormInvalid.value=true;
+    if (titleCtrlr.text.trim() == '') {
+      isTitleInvalid.value = true;
+      isFormInvalid.value = true;
     }
-  
+
     checkForm();
-     print("FORMVALIDITIY : $isFormInvalid.value");
+    print("FORMVALIDITIY : $isFormInvalid.value");
     print("TITLE : $isTitleInvalid.value");
     if (isFormInvalid.value == true) {
       return false;
@@ -148,7 +148,6 @@ Rx<bool> isFacilitySelected=true.obs;
           msg: "Please enter required field", fontSize: 16.0);
     } else {
       String _title = titleCtrlr.text.trim();
-    
 
       CreateMaterialCategory createCheckpoint =
           CreateMaterialCategory(name: _title);
@@ -165,38 +164,41 @@ Rx<bool> isFacilitySelected=true.obs;
     }
     return true;
   }
-   Future<void> issuccessCreatechecklist() async {
+
+  Future<void> issuccessCreatechecklist() async {
     isSuccess.toggle();
     await {cleardata()};
   }
-  cleardata(){
-    titleCtrlr.text='';
-    selectedItem=null;
 
-    Future.delayed(Duration(seconds: 1),(){
+  cleardata() {
+    titleCtrlr.text = '';
+    selectedItem = null;
+
+    Future.delayed(Duration(seconds: 1), () {
       getMaterialList();
     });
     Future.delayed(Duration(seconds: 5), () {
       isSuccess.value = false;
     });
   }
-  Future<bool> updateMaterialCategory(checklistId) async{
-    String _name=titleCtrlr.text.trim();
-    MaterialCategoryListModel createCheckList=MaterialCategoryListModel(
-      id:checklistId,
-      name:_name,
-    
+
+  Future<bool> updateMaterialCategory() async {
+    String _name = titleCtrlr.text.trim();
+    MaterialCategoryListModel createCheckList = MaterialCategoryListModel(
+      id: selectedItem!.id,
+      name: _name,
     );
     // var businessTypeJsonString=createCheckList.toJson();
-    var businessTypeJsonString=materialCategoryToJson(createCheckList);
-    print({"businessTypeJsonString",businessTypeJsonString});
+    var businessTypeJsonString = materialCategoryToJson(createCheckList);
+    print({"businessTypeJsonString", businessTypeJsonString});
     await materialCategoryPresenter.updateMaterialCategory(
       modulelistJsonString: businessTypeJsonString,
-      isLoading:true,
+      isLoading: true,
     );
     return true;
   }
- void isDeleteDialog({String? mcategory_id, String? mcatergory}) {
+
+  void isDeleteDialog({String? mcategory_id, String? mcatergory}) {
     Get.dialog(
       AlertDialog(
         content: Column(mainAxisSize: MainAxisSize.min, children: [
@@ -244,7 +246,8 @@ Rx<bool> isFacilitySelected=true.obs;
       ),
     );
   }
-    Future<void>deleteMaterialCategory (String? business_id) async {
+
+  Future<void> deleteMaterialCategory(String? business_id) async {
     {
       await materialCategoryPresenter.deleteFacility(
         business_id,
@@ -252,6 +255,7 @@ Rx<bool> isFacilitySelected=true.obs;
       );
     }
   }
+
   void checkForm() {
     if (isTitleInvalid.value == true || isDescriptionInvalid.value == true) {
       isFormInvalid.value = true;
