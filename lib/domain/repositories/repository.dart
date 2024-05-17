@@ -7562,6 +7562,7 @@ class Repository {
   Future<List<PmTaskListModel?>?> getPmTaskList(
       int? facilityId,
       bool? isLoading,
+      bool? self_view,
       dynamic startDate,
       dynamic endDate,
       bool? isExport) async {
@@ -7571,6 +7572,7 @@ class Repository {
           auth: auth,
           facilityId: facilityId ?? 0,
           isLoading: isLoading ?? false,
+          self_view: self_view,
           startDate: startDate,
           endDate: endDate);
       // print(res.data);

@@ -45,11 +45,12 @@ class TransactionReportListUsecase {
   Future<List<PmTaskListModel?>?> getPmTaskList(
           {int? facilityId,
           bool? isLoading,
+          bool? self_view,
           dynamic endDate,
           dynamic startDate,
           bool? isExport}) async =>
       await repository.getPmTaskList(
-          facilityId, isLoading, startDate, endDate, isExport);
+          facilityId, isLoading, startDate, endDate, isExport,self_view);
   Future<List<JobModel?>?> getJobList({
     required String auth,
     int? facilityId,
