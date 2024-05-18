@@ -488,19 +488,22 @@ class WaterTypeMasterWeb extends GetView<WaterTypeMasterController> {
                                             backgroundColor:
                                                 ColorValues.appDarkBlueColor,
                                             onPressed: () {
-                                              // controller
-                                              //     .updateSPV(controller
-                                              //         .selectedItem?.id)
-                                              //     .then(
-                                              //   (value) {
-                                              //     print("UPDATE");
-                                              //     print("value,$value");
-                                              //     if (value == true)
-                                              //       controller
-                                              //           .issuccessCreatechecklist();
-                                              //     controller.toggleContainer();
-                                              //   },
-                                              // );
+                                              controller
+                                                  .updateWaterType(
+                                                      waterTypeId: controller
+                                                              .selectedItem
+                                                              ?.id ??
+                                                          0)
+                                                  .then(
+                                                (value) {
+                                                  print("UPDATE");
+                                                  print("value,$value");
+                                                  if (value == true)
+                                                    controller
+                                                        .isSuccessfullyCreated();
+                                                  // controller.toggleContainer();
+                                                },
+                                              );
                                             },
                                             text: 'Update',
                                           ),
@@ -686,12 +689,16 @@ class WaterTypeMasterWeb extends GetView<WaterTypeMasterController> {
                                                             '',
                                                       ),
                                                     ),
-                                                    DataCell(Text(controller
-                                                            .waterTypeMasterList?[
-                                                                index]
-                                                            ?.show_opening
-                                                            .toString() ??
-                                                        "")),
+                                                    DataCell(
+                                                      Text(
+                                                        controller
+                                                                .waterTypeMasterList?[
+                                                                    index]
+                                                                ?.show_opening
+                                                                .toString() ??
+                                                            "",
+                                                      ),
+                                                    ),
                                                     DataCell(
                                                       Row(
                                                         children: [
@@ -699,10 +706,11 @@ class WaterTypeMasterWeb extends GetView<WaterTypeMasterController> {
                                                                       .value
                                                                       .access_list!
                                                                       .where((e) =>
-                                                                          e.feature_id == UserAccessConstants.kMasterFeatureId &&
-                                                                          e.edit ==
+                                                                          e.feature_id ==
                                                                               UserAccessConstants
-                                                                                  .kHaveEditAccess)
+                                                                                  .kMasterFeatureId &&
+                                                                          e.edit ==
+                                                                              UserAccessConstants.kHaveEditAccess)
                                                                       .length >
                                                                   0
                                                               ? TableActionButton(
@@ -741,36 +749,8 @@ class WaterTypeMasterWeb extends GetView<WaterTypeMasterController> {
                                                                     controller
                                                                         .isContainerVisible
                                                                         .value = true;
-                                                                  })
-
-                                                              //  TableActionButton(
-                                                              //     color: ColorValues
-                                                              //         .editColor,
-                                                              //     icon: Icons
-                                                              //         .edit,
-                                                              //     message:
-                                                              //         'Edit',
-                                                              //     onPress: () {
-                                                              //       int?
-                                                              //           waterTypeId =
-                                                              //           controller
-                                                              //               .waterTypeMasterList?[index]!
-                                                              //               .id;
-                                                              //       controller.getWaterTypeById(
-                                                              //           waterTypeId:
-                                                              //               waterTypeId);
-                                                              //       controller
-                                                              //           .isContainerVisible
-                                                              //           .value = true;
-                                                              //       controller
-                                                              //           .isToggleOn
-                                                              //           .value = controller.selectedItem?.show_opening ==
-                                                              //               1
-                                                              //           ? true
-                                                              //           : false;
-                                                              //     },
-                                                              //   )
-                                                              // :
+                                                                  },
+                                                                )
                                                               : Dimens.box0,
                                                           varUserAccessModel
                                                                       .value
