@@ -23,6 +23,8 @@ class PurchaseGoodsorderViewController extends GetxController {
   TextEditingController approveCommentTextFieldCtrlr = TextEditingController();
   TextEditingController rejectCommentTextFieldCtrlr = TextEditingController();
 
+   Rx<bool> isCommentInvalid = false.obs;
+ Rx<bool> isCostInvalid = false.obs;
   var commentCtrlr = TextEditingController();
   StreamSubscription<int>? facilityIdStreamSubscription;
 

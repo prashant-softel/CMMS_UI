@@ -516,6 +516,28 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                                       },
                                                       textController: controller
                                                           .poDateDateTc,
+                                                           //validate
+
+                                                      errorController: controller
+                                                              .isPOdateInvalid
+                                                              .value
+                                                          ? "Required field"
+                                                          : null,
+
+                                                      onChanged: (value) {
+                                                        if (value
+                                                                .trim()
+                                                                .length >
+                                                            0) {
+                                                          controller
+                                                              .isPOdateInvalid
+                                                              .value = false;
+                                                        } else {
+                                                          controller
+                                                              .isPOdateInvalid
+                                                              .value = true;
+                                                        }
+                                                      },
                                                     ),
                                                   ],
                                                 ),
@@ -1180,13 +1202,34 @@ class AddRowInGoodsOrder extends StatelessWidget {
                                                             .digitsOnly
                                                       ],
                                                       maxLine: 1,
+                                                      errorController:
+                                                          controller
+                                                                  .isCostInvalid
+                                                                  .value
+                                                              ? "Required field"
+                                                              : null,
+
                                                       textController:
                                                           new TextEditingController(
                                                               text: mapData[
                                                                       "value"] ??
                                                                   ''),
                                                       onChanged: (txt) {
+                                                        
                                                         mapData["value"] = txt;
+                                                        if (txt
+                                                            .trim()
+                                                            .isNotEmpty) {
+                                                          controller
+                                                              .isCostInvalid
+                                                              .value = false;
+                                                        } else {
+                                                          controller
+                                                              .isCostInvalid
+                                                              .value = true;
+                                                        }
+
+                                                   
                                                       },
                                                     )),
                                               ],
@@ -1236,6 +1279,12 @@ class AddRowInGoodsOrder extends StatelessWidget {
                                                                 .digitsOnly
                                                           ],
                                                           maxLine: 1,
+                                                          errorController:
+                                                          controller
+                                                                  .isRequestedInvalid
+                                                                  .value
+                                                              ? "Required field"
+                                                              : null,
                                                           textController:
                                                               new TextEditingController(
                                                                   text: mapData[
@@ -1244,7 +1293,21 @@ class AddRowInGoodsOrder extends StatelessWidget {
                                                           onChanged: (txt) {
                                                             mapData["value"] =
                                                                 txt;
-                                                          },
+                                                                 if (txt
+                                                            .trim()
+                                                            .isNotEmpty) {
+                                                          controller
+                                                              .isRequestedInvalid
+                                                              .value = false;
+                                                        } else {
+                                                          controller
+                                                              .isRequestedInvalid
+                                                              .value = true;
+                                                        }
+
+                                                   
+                                                      },
+                                                          
                                                         )),
                                                   ],
                                                 ),
