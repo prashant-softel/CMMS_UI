@@ -92,11 +92,13 @@ class ExternalEmployees {
   String? employeeName;
   String? employeeEmail;
   String? employeeNumber;
+  String? designation;
 
   ExternalEmployees({
     this.employeeName,
     this.employeeEmail,
     this.employeeNumber,
+    this.designation,
   });
 
   factory ExternalEmployees.fromJson(Map<String, dynamic> json) =>
@@ -104,11 +106,13 @@ class ExternalEmployees {
         employeeName: json["employeeName"],
         employeeEmail: json["employeeEmail"],
         employeeNumber: json["employeeNumber"],
+        designation: json["designation"],
       );
 
   Map<String, dynamic> toJson() => {
         "employeeName": employeeName,
         "employeeEmail": employeeEmail,
         "employeeNumber": employeeNumber,
+        "designation": designation,
       };
 }

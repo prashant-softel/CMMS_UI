@@ -2,6 +2,7 @@ import 'package:cmms/app/home/home_controller.dart';
 import 'package:cmms/app/schedule_course_list/schedule_course_list_presenter.dart';
 import 'package:cmms/domain/models/facility_model.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 class ScheduleCourseListController extends GetxController {
   ScheduleCourseListController(this.scheduleCourseListPresenter);
@@ -9,6 +10,12 @@ class ScheduleCourseListController extends GetxController {
   ScheduleCourseListPresenter scheduleCourseListPresenter;
   HomeController homeController = Get.find();
   Rx<bool> isSelectedCourse = true.obs;
+  bool openFromDateToStartDatePicker = false;
+    Rx<DateTime> fromDate = DateTime.now().subtract(Duration(days: 70)).obs;
+  Rx<DateTime> toDate = DateTime.now().obs;
+  String get formattedFromdate =>
+      DateFormat('yyyy-MM-dd').format(fromDate.value);
+  String get formattedTodate => DateFormat('yyyy-MM-dd').format(toDate.value);
 
   int selectedCorseId = 1;
   Rx<String> selectedcourse = ''.obs;

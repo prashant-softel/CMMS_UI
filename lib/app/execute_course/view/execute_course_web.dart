@@ -486,7 +486,7 @@ class ExecuteCourseWeb extends GetView<ExecuteCourseController> {
                                         ),
                                         columns: [
                                           DataColumn2(
-                                            size: ColumnSize.L,
+                                            size: ColumnSize.M,
                                             label: Text(
                                               "Employee Name",
                                             ),
@@ -494,13 +494,13 @@ class ExecuteCourseWeb extends GetView<ExecuteCourseController> {
                                           DataColumn2(
                                             size: ColumnSize.M,
                                             label: Text(
-                                              "Contact No",
+                                              "Email",
                                             ),
                                           ),
                                           DataColumn2(
                                             size: ColumnSize.M,
                                             label: Text(
-                                              "Email",
+                                              "Contact No",
                                             ),
                                           ),
                                           DataColumn2(
@@ -538,12 +538,12 @@ class ExecuteCourseWeb extends GetView<ExecuteCourseController> {
                                                 ),
                                                 DataCell(
                                                   Text(
-                                                    '${employeeNameDetails?.mobileNumber ?? ''}',
+                                                    '${employeeNameDetails?.login_id ?? ''}',
                                                   ),
                                                 ),
                                                 DataCell(
                                                   Text(
-                                                    '${employeeNameDetails?.login_id ?? ''}',
+                                                    '${employeeNameDetails?.mobileNumber ?? ''}',
                                                   ),
                                                 ),
                                                 DataCell(
@@ -621,7 +621,7 @@ class ExecuteCourseWeb extends GetView<ExecuteCourseController> {
                                         ),
                                         columns: [
                                           DataColumn2(
-                                            size: ColumnSize.L,
+                                            size: ColumnSize.M,
                                             label: Text(
                                               "Name",
                                             ),
