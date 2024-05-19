@@ -57,15 +57,29 @@ class MrsIssueController extends GetxController {
     }
   }
 
-  void validateForm() {
-    isFormValid.value = mrsDetailsModel.value!.cmmrsItems!.every((item) =>
-        item.asset_type != 'Spare' ||
-        (item.serial_number_controller!.text.isNotEmpty &&
-            item.issued_qty_controller!.text.isNotEmpty &&
-            double.tryParse(item.issued_qty_controller!.text) != null &&
-            double.parse(item.issued_qty_controller!.text) <=
-                item.requested_qty!));
-  }
+  // void validateForm() {
+  //   isFormValid.value = true; // Default to true
+  //   mrsDetailsModel.value!.cmmrsItems!.forEach((item) {
+  //     if (item.asset_type == 'Spare') {
+  //       // Validation for Spare assets
+  //       if (item.serial_number_controller!.text.isEmpty ||
+  //           item.issued_qty_controller!.text.isEmpty ||
+  //           double.tryParse(item.issued_qty_controller!.text) == null ||
+  //           double.parse(item.issued_qty_controller!.text) >
+  //               item.requested_qty!) {
+  //         isFormValid.value = false;
+  //       }
+  //     } else if (item.asset_type == 'Consumable') {
+  //       // Validation for Consumable assets
+  //       if (item.issued_qty_controller!.text.isEmpty ||
+  //           double.tryParse(item.issued_qty_controller!.text) == null ||
+  //           double.parse(item.issued_qty_controller!.text) >
+  //               item.requested_qty!) {
+  //         isFormValid.value = false;
+  //       }
+  //     }
+  //   });
+  // }
 
   Future<void> setMrsId() async {
     try {
@@ -97,7 +111,7 @@ class MrsIssueController extends GetxController {
   }
 
   issueMrs() async {
-    if (isFormValid.value) {
+    // if (isFormValid.value) {
       String _comment = commentCtrlr.text.trim();
       List<CmmrsItemsModel> cmmrsItems = <CmmrsItemsModel>[];
       cmmrsItemsDetail.forEach((element) {
@@ -121,9 +135,9 @@ class MrsIssueController extends GetxController {
         _flutterSecureStorage.delete(key: "mrsId");
         Get.offAllNamed(Routes.mrsListScreen);
       }
-    }
-    else {
-      Utility.showDialog("Issue", "Please fill all the required fields");
-    }
+    // }
+    // else {
+      // Utility.showDialog("Issue", "Please fill all the required fields");
+    // }
   }
 }

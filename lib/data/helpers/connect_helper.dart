@@ -4521,7 +4521,7 @@ class ConnectHelper {
       dynamic startDate,
       dynamic endDate}) async {
     var responseModel = await apiWrapper.makeRequest(
-      'PMScheduleView/GetPMTaskList?facility_id=${facilityId}&start_date=${endDate}&end_date=2025-03-20&self_view=$self_view',
+      'PMScheduleView/GetPMTaskList?facility_id=${facilityId}&start_date=${endDate}&end_date=${startDate}',
       Request.get,
       null,
       isLoading ?? true,

@@ -2593,14 +2593,12 @@ class DataRepository extends DomainRepository {
           {required String auth,
           int? facilityId,
           bool? isLoading,
-          bool? self_view,
           dynamic startDate,
           dynamic endDate}) async =>
       await connectHelper.getPmTaskList(
           auth: auth,
           facilityId: facilityId ?? 0,
           isLoading: isLoading ?? false,
-          self_view: self_view,
           startDate: startDate,
           endDate: endDate);
   Future<ResponseModel> getAuditTaskList(
