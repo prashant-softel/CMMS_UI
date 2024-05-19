@@ -38,6 +38,10 @@ class WasteTypeMasterController extends GetxController {
 
   final isSuccess = false.obs;
   StreamSubscription<int>? facilityIdStreamSubscription;
+  var isToggleOn = false.obs;
+  void toggle() {
+    isToggleOn.value = !isToggleOn.value;
+  }
 
   int? wasteTypeId = 0;
   Rx<bool> isTitleInvalid = false.obs;
@@ -164,11 +168,13 @@ class WasteTypeMasterController extends GetxController {
       int _facilityId = facilityId;
 
       CreateWasteSource wasteTypeMasterJson = CreateWasteSource(
-          id: _id,
-          facilityID: _facilityId,
-          name: _title,
-          description: _description,
-          type: 2);
+        id: _id,
+        facilityID: _facilityId,
+        name: _title,
+        description: _description,
+        type: 2,
+        show_opening: isToggleOn.value ? 1 : 0,
+      );
 
       var wasteTypeJson = wasteTypeMasterJson.toJson();
       print({"waste type json string", wasteTypeJson});

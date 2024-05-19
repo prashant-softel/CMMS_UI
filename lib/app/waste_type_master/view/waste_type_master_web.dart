@@ -6,6 +6,7 @@ import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/app/waste_type_master/waste_type_master_controller.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
+import 'package:cmms/app/widgets/custom_swich_toggle.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -108,8 +109,7 @@ class WasteTypeMasterWeb extends GetView<WasteTypeMasterController> {
                       child: Container(
                         width: (Get.width * .3),
                         margin: EdgeInsets.only(left: 10, top: 30),
-                        constraints:
-                            BoxConstraints(maxHeight: 240, minHeight: 220),
+                        height: 300,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
                           color: Color.fromARGB(255, 251, 252, 253),
@@ -414,6 +414,23 @@ class WasteTypeMasterWeb extends GetView<WasteTypeMasterController> {
                                             ),
                                           ],
                                         ),
+                                        Dimens.boxHeight10,
+                                        Row(
+                                          children: [
+                                            Text("Showing Header"),
+                                            Dimens.boxWidth10,
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  top: 10),
+                                              child: CustomSwitchTroggle(
+                                                  value: controller
+                                                      .isToggleOn.value,
+                                                  onChanged: (value) {
+                                                    controller.toggle();
+                                                  }),
+                                            ),
+                                          ],
+                                        ),
                                         SizedBox(
                                           height: 40,
                                         ),
@@ -618,6 +635,17 @@ class WasteTypeMasterWeb extends GetView<WasteTypeMasterController> {
                                                   ),
                                                 ),
                                                 DataColumn2(
+                                                  // fixedWidth: 300,
+                                                  label: Text(
+                                                    "Showing Header",
+                                                    style: TextStyle(
+                                                      fontSize: 15,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                    ),
+                                                  ),
+                                                ),
+                                                DataColumn2(
                                                   fixedWidth: 100,
                                                   label: Text(
                                                     'Action',
@@ -659,6 +687,12 @@ class WasteTypeMasterWeb extends GetView<WasteTypeMasterController> {
                                                             '',
                                                       ),
                                                     ),
+                                                    DataCell(Text(controller
+                                                            .wasteTypeMasterList?[
+                                                                index]
+                                                            ?.show_opening
+                                                            .toString() ??
+                                                        "")),
                                                     DataCell(
                                                       Row(
                                                         children: [

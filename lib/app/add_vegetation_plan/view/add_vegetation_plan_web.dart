@@ -163,12 +163,17 @@ class _AddVegetationPlanWebState extends State<AddVegetationPlanWeb> {
                                                           CustomRichText(
                                                               title: 'Title :'),
                                                           Dimens.boxWidth10,
-                                                          GoodsOrderTextField(
+                                                          LoginCustomTextfield(
+                                                            width: (MediaQuery.of(
+                                                                        context)
+                                                                    .size
+                                                                    .width *
+                                                                .2),
                                                             textController:
                                                                 controller
                                                                     .vegTitleController,
-                                                            focusnode: controller
-                                                                .vegTitleFocus,
+                                                            // focusnode: controller
+                                                            // .vegTitleFocus,
                                                             scroll: controller
                                                                 .vegTitleScroll,
                                                             inputFormatters: [

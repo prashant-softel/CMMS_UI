@@ -238,9 +238,15 @@ class DsmDashboardController extends GetxController {
   }
 
   Future<void> goToImportDsmChargesScreen() async {
+    clearStoreData();
     Get.toNamed(
-      Routes.importDsmChargesScreen,
+      Routes.importInventory,
+      arguments: {'importType': AppConstants.kImportDSMReport},
     );
+  }
+
+  void clearStoreData() {
+    mastersPresenter.clearValue();
   }
 
   Future<void> goToCompetencyScreen() async {

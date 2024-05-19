@@ -18,6 +18,7 @@ class WasteSource {
     this.createdBy,
     this.updatedAt,
     this.updatedBy,
+    this.show_opening,
   });
 
   int? id;
@@ -25,7 +26,7 @@ class WasteSource {
   String? name;
   int? type;
   String? description;
-
+  int? show_opening;
   DateTime? createdAt;
   int? createdBy;
   DateTime? updatedAt;
@@ -33,6 +34,7 @@ class WasteSource {
 
   factory WasteSource.fromJson(Map<String, dynamic> json) => WasteSource(
         id: json['id'],
+        show_opening: json['show_opening'],
         facilityID: json['facility_id'],
         name: json['name'],
         type: json['Type'],
@@ -47,6 +49,7 @@ class WasteSource {
 
   Map<String, dynamic> toJson() => {
         "id": id,
+        "show_opening": show_opening,
         "facility_id": facilityID,
         "name": name,
         "Type": type,
@@ -60,13 +63,19 @@ class WasteSource {
 
 class CreateWasteSource {
   CreateWasteSource(
-      {this.id, this.facilityID, this.name, this.description, this.type});
+      {this.id,
+      this.facilityID,
+      this.name,
+      this.description,
+      this.type,
+      this.show_opening});
 
   int? id;
   int? facilityID;
   String? name;
   String? description;
   int? type;
+  int? show_opening;
 
   factory CreateWasteSource.fromJson(Map<String, dynamic> json) =>
       CreateWasteSource(
@@ -74,7 +83,15 @@ class CreateWasteSource {
           facilityID: json['facility_id'],
           name: json['name'],
           type: json['Type'],
-          description: json['description']);
+          description: json['description'],
+          show_opening: json['show_opening']);
 
-  Map<String, dynamic> toJson() => {'id':id,'facility_id':facilityID,'name':name,'Type':type,'description':description};
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'facility_id': facilityID,
+        'name': name,
+        'Type': type,
+        'description': description,
+        'show_opening': show_opening
+      };
 }

@@ -4,6 +4,7 @@ import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/stock_managment_add_goods_orders.dart/view/stock_management_add_goods_orders_web.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
+import 'package:cmms/app/widgets/custom_textField.dart';
 import 'package:cmms/app/widgets/stock_dropdown.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -87,11 +88,16 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                                             title:
                                                                 'Contractor Name'),
                                                         Dimens.boxWidth10,
-                                                        GoodsOrderTextField(
+                                                        LoginCustomTextfield(
+                                                          width: (MediaQuery.of(
+                                                                      context)
+                                                                  .size
+                                                                  .width *
+                                                              .2),
                                                           keyboardType:
                                                               TextInputType
                                                                   .number,
-                                                                  inputFormatters: [
+                                                          inputFormatters: [
                                                             FilteringTextInputFormatter
                                                                 .deny(
                                                               RegExp('[\'^]'),
@@ -154,9 +160,11 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                                             // ],
                                                             borderRadius:
                                                                 BorderRadius
-                                                                    .circular(5),
+                                                                    .circular(
+                                                                        5),
                                                           ),
-                                                          child: DropdownWebStock(
+                                                          child:
+                                                              DropdownWebStock(
                                                             width: MediaQuery.of(
                                                                         context)
                                                                     .size
@@ -196,9 +204,11 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                                             // ],
                                                             borderRadius:
                                                                 BorderRadius
-                                                                    .circular(5),
+                                                                    .circular(
+                                                                        5),
                                                           ),
-                                                          child: DropdownWebStock(
+                                                          child:
+                                                              DropdownWebStock(
                                                             width: MediaQuery.of(
                                                                         context)
                                                                     .size
@@ -208,8 +218,9 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                                                 controller
                                                                     .riskType,
                                                             // selectedValue: ,
-                                                            onValueChanged: (riskType,
-                                                                selectedValue) {},
+                                                            onValueChanged:
+                                                                (riskType,
+                                                                    selectedValue) {},
                                                           ),
                                                         ),
                                                       ],
@@ -221,11 +232,16 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                                             title:
                                                                 'Corrective/Preventive Action'),
                                                         Dimens.boxWidth10,
-                                                        GoodsOrderTextField(
+                                                        LoginCustomTextfield(
+                                                          width: (MediaQuery.of(
+                                                                      context)
+                                                                  .size
+                                                                  .width *
+                                                              .2),
                                                           keyboardType:
                                                               TextInputType
                                                                   .number,
-          
+
                                                           // textController:
                                                           //     controller.challanNoCtrlr,
                                                         ),
@@ -238,11 +254,16 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                                             title:
                                                                 'Responsible Person'),
                                                         Dimens.boxWidth10,
-                                                        GoodsOrderTextField(
+                                                        LoginCustomTextfield(
+                                                          width: (MediaQuery.of(
+                                                                      context)
+                                                                  .size
+                                                                  .width *
+                                                              .2),
                                                           keyboardType:
                                                               TextInputType
                                                                   .number,
-          
+
                                                           // textController:
                                                           //     controller.challanNoCtrlr,
                                                         ),
@@ -272,9 +293,11 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                                             // ],
                                                             borderRadius:
                                                                 BorderRadius
-                                                                    .circular(5),
+                                                                    .circular(
+                                                                        5),
                                                           ),
-                                                          child: DropdownWebStock(
+                                                          child:
+                                                              DropdownWebStock(
                                                             width: MediaQuery.of(
                                                                         context)
                                                                     .size
@@ -284,13 +307,14 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                                                 controller
                                                                     .costType,
                                                             // selectedValue: ,
-                                                            onValueChanged: (costType,
-                                                                selectedValue) {},
+                                                            onValueChanged:
+                                                                (costType,
+                                                                    selectedValue) {},
                                                           ),
                                                         ),
                                                       ],
                                                     ),
-          
+
                                                     Dimens.boxHeight5,
                                                     // if (reNew == 1)
                                                     // Row(
@@ -332,11 +356,16 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                                             title:
                                                                 'Location of Observation'),
                                                         Dimens.boxWidth10,
-                                                        GoodsOrderTextField(
+                                                        LoginCustomTextfield(
+                                                          width: (MediaQuery.of(
+                                                                      context)
+                                                                  .size
+                                                                  .width *
+                                                              .2),
                                                           keyboardType:
                                                               TextInputType
                                                                   .number,
-          
+
                                                           // textController:
                                                           //     controller.challanNoCtrlr,
                                                         ),
@@ -367,9 +396,11 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                                             // ],
                                                             borderRadius:
                                                                 BorderRadius
-                                                                    .circular(5),
+                                                                    .circular(
+                                                                        5),
                                                           ),
-                                                          child: DropdownWebStock(
+                                                          child:
+                                                              DropdownWebStock(
                                                             width: MediaQuery.of(
                                                                         context)
                                                                     .size
@@ -392,11 +423,16 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                                             title:
                                                                 'Action Taken'),
                                                         Dimens.boxWidth10,
-                                                        GoodsOrderTextField(
+                                                        LoginCustomTextfield(
+                                                          width: (MediaQuery.of(
+                                                                      context)
+                                                                  .size
+                                                                  .width *
+                                                              .2),
                                                           keyboardType:
                                                               TextInputType
                                                                   .number,
-          
+
                                                           // textController:
                                                           //     controller.challanNoCtrlr,
                                                         ),
@@ -406,7 +442,8 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                                     Row(
                                                       children: [
                                                         CustomRichText(
-                                                            title: 'Target Date'),
+                                                            title:
+                                                                'Target Date'),
                                                         Dimens.boxWidth10,
                                                         CustomTextFieldForStock(
                                                           width: MediaQuery.of(
@@ -432,7 +469,8 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                                     Row(
                                                       children: [
                                                         CustomRichText(
-                                                            title: 'Closer Date'),
+                                                            title:
+                                                                'Closer Date'),
                                                         Dimens.boxWidth10,
                                                         CustomTextFieldForStock(
                                                           width: MediaQuery.of(
@@ -461,11 +499,16 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                                             title:
                                                                 'Contact Number'),
                                                         Dimens.boxWidth10,
-                                                        GoodsOrderTextField(
+                                                        LoginCustomTextfield(
+                                                          width: (MediaQuery.of(
+                                                                      context)
+                                                                  .size
+                                                                  .width *
+                                                              .2),
                                                           keyboardType:
                                                               TextInputType
                                                                   .number,
-          
+
                                                           // textController:
                                                           //     controller.challanNoCtrlr,
                                                         ),
@@ -478,10 +521,12 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                             ),
                                             Dimens.boxHeight20,
                                             Padding(
-                                              padding: const EdgeInsets.symmetric(
-                                                  horizontal: 20),
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                      horizontal: 20),
                                               child: Row(children: [
-                                                Text('Observation Description: ',
+                                                Text(
+                                                    'Observation Description: ',
                                                     style: Styles.blue14),
                                                 Expanded(
                                                   child: TextField(

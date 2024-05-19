@@ -990,7 +990,8 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                                             children: [
                                                                               CustomRichText(title: 'Name: '),
                                                                               Dimens.boxWidth10,
-                                                                              GoodsOrderTextField(
+                                                                              LoginCustomTextfield(
+                                                                                width: (MediaQuery.of(context).size.width * .2),
                                                                                 textController: controller.investigationTeamNameTextFieldController,
                                                                               ),
                                                                             ],
@@ -1001,7 +1002,8 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                                             children: [
                                                                               CustomRichText(title: 'Designation: '),
                                                                               Dimens.boxWidth10,
-                                                                              GoodsOrderTextField(
+                                                                              LoginCustomTextfield(
+                                                                                width: (MediaQuery.of(context).size.width * .2),
                                                                                 textController: controller.investigationTeamDesignationTextFieldController,
                                                                               ),
                                                                             ],

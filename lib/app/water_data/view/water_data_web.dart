@@ -3,6 +3,7 @@ import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/stock_managment_add_goods_orders.dart/view/stock_management_add_goods_orders_web.dart';
 import 'package:cmms/app/water_data/water_data_controller.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
+import 'package:cmms/app/widgets/custom_textField.dart';
 import 'package:cmms/app/widgets/stock_dropdown.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -97,7 +98,11 @@ class _WaterDataWebState extends State<WaterDataWeb> {
                                                     title:
                                                         'Surface Water in KL units'),
                                                 Dimens.boxWidth10,
-                                                GoodsOrderTextField(
+                                                LoginCustomTextfield(
+                                                  width: (MediaQuery.of(context)
+                                                          .size
+                                                          .width *
+                                                      .2),
                                                   keyboardType:
                                                       TextInputType.number,
 
@@ -117,7 +122,11 @@ class _WaterDataWebState extends State<WaterDataWeb> {
                                                     title:
                                                         'Ground Water in KL units : '),
                                                 Dimens.boxWidth10,
-                                                GoodsOrderTextField(
+                                                LoginCustomTextfield(
+                                                  width: (MediaQuery.of(context)
+                                                          .size
+                                                          .width *
+                                                      .2),
                                                   keyboardType:
                                                       TextInputType.number,
 
@@ -180,7 +189,11 @@ class _WaterDataWebState extends State<WaterDataWeb> {
                                                     title:
                                                         'Module cleaning in KL units'),
                                                 Dimens.boxWidth10,
-                                                GoodsOrderTextField(
+                                                LoginCustomTextfield(
+                                                  width: (MediaQuery.of(context)
+                                                          .size
+                                                          .width *
+                                                      .2),
                                                   keyboardType:
                                                       TextInputType.number,
 
@@ -196,7 +209,11 @@ class _WaterDataWebState extends State<WaterDataWeb> {
                                                     title:
                                                         'Domestic and others purposes in KL units'),
                                                 Dimens.boxWidth10,
-                                                GoodsOrderTextField(
+                                                LoginCustomTextfield(
+                                                  width: (MediaQuery.of(context)
+                                                          .size
+                                                          .width *
+                                                      .2),
                                                   keyboardType:
                                                       TextInputType.number,
 
@@ -218,7 +235,11 @@ class _WaterDataWebState extends State<WaterDataWeb> {
                                                     title:
                                                         'Drinking in KL units'),
                                                 Dimens.boxWidth10,
-                                                GoodsOrderTextField(
+                                                LoginCustomTextfield(
+                                                  width: (MediaQuery.of(context)
+                                                          .size
+                                                          .width *
+                                                      .2),
                                                   keyboardType:
                                                       TextInputType.number,
 
@@ -234,7 +255,11 @@ class _WaterDataWebState extends State<WaterDataWeb> {
                                                     title:
                                                         'Domestic and others purposes in KL units'),
                                                 Dimens.boxWidth10,
-                                                GoodsOrderTextField(
+                                                LoginCustomTextfield(
+                                                  width: (MediaQuery.of(context)
+                                                          .size
+                                                          .width *
+                                                      .2),
                                                   keyboardType:
                                                       TextInputType.number,
 
@@ -296,7 +321,11 @@ class _WaterDataWebState extends State<WaterDataWeb> {
                                                     title:
                                                         'Drinking in KL units'),
                                                 Dimens.boxWidth10,
-                                                GoodsOrderTextField(
+                                                LoginCustomTextfield(
+                                                  width: (MediaQuery.of(context)
+                                                          .size
+                                                          .width *
+                                                      .2),
                                                   keyboardType:
                                                       TextInputType.number,
 
@@ -312,7 +341,11 @@ class _WaterDataWebState extends State<WaterDataWeb> {
                                                     title:
                                                         'Module cleaning in KL unit'),
                                                 Dimens.boxWidth10,
-                                                GoodsOrderTextField(
+                                                LoginCustomTextfield(
+                                                  width: (MediaQuery.of(context)
+                                                          .size
+                                                          .width *
+                                                      .2),
                                                   keyboardType:
                                                       TextInputType.number,
 
@@ -334,7 +367,11 @@ class _WaterDataWebState extends State<WaterDataWeb> {
                                                     title:
                                                         'Domestic and other purpose in KL units'),
                                                 Dimens.boxWidth10,
-                                                GoodsOrderTextField(
+                                                LoginCustomTextfield(
+                                                  width: (MediaQuery.of(context)
+                                                          .size
+                                                          .width *
+                                                      .2),
                                                   keyboardType:
                                                       TextInputType.number,
 
@@ -395,7 +432,11 @@ class _WaterDataWebState extends State<WaterDataWeb> {
                                                     title:
                                                         'Withdrawal in KL units'),
                                                 Dimens.boxWidth10,
-                                                GoodsOrderTextField(
+                                                LoginCustomTextfield(
+                                                  width: (MediaQuery.of(context)
+                                                          .size
+                                                          .width *
+                                                      .2),
                                                   keyboardType:
                                                       TextInputType.number,
 
@@ -417,7 +458,11 @@ class _WaterDataWebState extends State<WaterDataWeb> {
                                                     title:
                                                         'Consumed in KL units'),
                                                 Dimens.boxWidth10,
-                                                GoodsOrderTextField(
+                                                LoginCustomTextfield(
+                                                  width: (MediaQuery.of(context)
+                                                          .size
+                                                          .width *
+                                                      .2),
                                                   keyboardType:
                                                       TextInputType.number,
 
@@ -479,7 +524,11 @@ class _WaterDataWebState extends State<WaterDataWeb> {
                                                     title:
                                                         'Yearly limit as per NOC in KL units'),
                                                 Dimens.boxWidth10,
-                                                GoodsOrderTextField(
+                                                LoginCustomTextfield(
+                                                  width: (MediaQuery.of(context)
+                                                          .size
+                                                          .width *
+                                                      .2),
                                                   keyboardType:
                                                       TextInputType.number,
 
@@ -501,7 +550,11 @@ class _WaterDataWebState extends State<WaterDataWeb> {
                                                     title:
                                                         'Limit left in KL units'),
                                                 Dimens.boxWidth10,
-                                                GoodsOrderTextField(
+                                                LoginCustomTextfield(
+                                                  width: (MediaQuery.of(context)
+                                                          .size
+                                                          .width *
+                                                      .2),
                                                   keyboardType:
                                                       TextInputType.number,
 
