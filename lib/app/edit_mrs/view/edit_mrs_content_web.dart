@@ -478,11 +478,30 @@ class EditMrsContentWeb extends GetView<EditMrsController> {
                                                                     txt; // Update only if within limit
                                                               } else {
                                                                 // Optionally, reset the text field or alert the user
-                                                                Fluttertoast
-                                                                    .showToast(
-                                                                        msg:
-                                                                            "Enter appropriate requested quantity.");
-                                                                // You might want to reset the field or revert to the last valid value
+                                                                showDialog(
+                                                                  context:
+                                                                      context,
+                                                                  builder:
+                                                                      (BuildContext
+                                                                          context) {
+                                                                    return AlertDialog(
+                                                                      title: Text(
+                                                                          "Invalid Quantity!"),
+                                                                      content: Text(
+                                                                          "Please enter appropriate quantity.\nAvailable qty is: ${availableQty}, you requested: ${requestedQty}."),
+                                                                      actions: <Widget>[
+                                                                        TextButton(
+                                                                          onPressed:
+                                                                              () {
+                                                                            Navigator.of(context).pop();
+                                                                          },
+                                                                          child:
+                                                                              Text("OK"),
+                                                                        ),
+                                                                      ],
+                                                                    );
+                                                                  },
+                                                                ); // You might want to reset the field or revert to the last valid value
                                                               }
                                                             },
                                                           ),
@@ -513,7 +532,7 @@ class EditMrsContentWeb extends GetView<EditMrsController> {
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          CustomRichText(title: "Comment:"),
+                          Text("Comment: "),
                           Dimens.boxWidth10,
                           Container(
                               width: (Get.width * .6),

@@ -521,7 +521,7 @@ class MrsListDataSource extends DataTableSource {
                                   // _flutterSecureStorage.delete(key: "mrsId");
                                   int mrsId = MrsDetails?.id ?? 0;
                                   Get.toNamed(Routes.editMrs,
-                                      arguments: {'mrsId': mrsId});
+                                      arguments: {'mrsId': mrsId, 'type': 0});
                                 })
                             : Dimens.box0,
                         controller.mrsList

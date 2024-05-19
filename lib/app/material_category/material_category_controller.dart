@@ -165,7 +165,7 @@ class MaterialCategoryController extends GetxController {
     return true;
   }
 
-  Future<void> issuccessCreatechecklist() async {
+  Future<void> issuccessCreate() async {
     isSuccess.toggle();
     await {cleardata()};
   }
@@ -182,17 +182,17 @@ class MaterialCategoryController extends GetxController {
     });
   }
 
-  Future<bool> updateMaterialCategory() async {
+  Future<bool> updateMaterialCategory(catID) async {
     String _name = titleCtrlr.text.trim();
-    MaterialCategoryListModel createCheckList = MaterialCategoryListModel(
-      id: selectedItem!.id,
+    MaterialCategoryListModel creatematcat = MaterialCategoryListModel(
+      id: catID,
       name: _name,
     );
-    // var businessTypeJsonString=createCheckList.toJson();
-    var businessTypeJsonString = materialCategoryToJson(createCheckList);
-    print({"businessTypeJsonString", businessTypeJsonString});
+    // var matcatJsonString=creatematcat.toJson();
+    var matcatJsonString = creatematcat.toJson();
+    print({"matcatJsonString", matcatJsonString});
     await materialCategoryPresenter.updateMaterialCategory(
-      modulelistJsonString: businessTypeJsonString,
+      modulelistJsonString: matcatJsonString,
       isLoading: true,
     );
     return true;
