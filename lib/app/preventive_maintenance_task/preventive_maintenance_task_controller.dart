@@ -1,8 +1,10 @@
 import 'dart:async';
 
+import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/preventive_maintenance_task/preventive_maintenance_task_presenter.dart';
 import 'package:cmms/app/theme/color_values.dart';
 import 'package:cmms/app/theme/styles.dart';
+import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -107,7 +109,7 @@ class PreventiveMaintenanceTaskController extends GetxController {
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
       facilityId = event;
       if (facilityId > 0) {
-        getPmTaskList(facilityId, formattedTodate1, formattedFromdate1, false);
+        getPmTaskList(facilityId, formattedTodate1, formattedFromdate1, false,false);
       }
 
       // isDataLoading.value = false;
@@ -167,7 +169,7 @@ class PreventiveMaintenanceTaskController extends GetxController {
   }
 
   Future<void> getPmTaskList(int facilityId, dynamic startDate, dynamic endDate,
-      bool? isExport) async {
+      bool? isExport, bool self_view) async {
     pmTaskList.value = <PmTaskListModel>[];
     // pmTaskList?.clear();
     final _pmTaskList = await preventiveMaintenanceTaskPresenter.getPmTaskList(
@@ -175,7 +177,16 @@ class PreventiveMaintenanceTaskController extends GetxController {
         isLoading: isLoading.value,
         startDate: startDate,
         endDate: endDate,
-        isExport: isExport);
+        isExport: isExport,
+        self_view: varUserAccessModel.value.access_list!
+                  .where((e) =>
+                      e.feature_id == UserAccessConstants.kPmTaskFeatureId &&
+                      e.selfView == UserAccessConstants.kHaveSelfViewAccess)
+                  .length >
+              0
+          ? true
+          : false,
+    );
     if (_pmTaskList != null) {
       pmTaskList.value = _pmTaskList;
       filteredData.value = pmTaskList.value;
@@ -184,7 +195,7 @@ class PreventiveMaintenanceTaskController extends GetxController {
   }
 
   void getPmTaskListByDate() {
-    getPmTaskList(facilityId, formattedTodate1, formattedFromdate1, false);
+    getPmTaskList(facilityId, formattedTodate1, formattedFromdate1, false,false);
   }
 
   void clearStoreData() {
@@ -233,7 +244,7 @@ class PreventiveMaintenanceTaskController extends GetxController {
                   deletePmTask(task_id).then((value) {
                     Get.back();
                     getPmTaskList(facilityId, formattedTodate1,
-                        formattedFromdate1, false);
+                        formattedFromdate1, false, false);
                   });
                 },
                 child: Text('YES'),
@@ -255,6 +266,6 @@ class PreventiveMaintenanceTaskController extends GetxController {
   }
 
   void export() {
-    getPmTaskList(facilityId, formattedTodate1, formattedFromdate1, true);
+    getPmTaskList(facilityId, formattedTodate1, formattedFromdate1, true,false);
   }
 }

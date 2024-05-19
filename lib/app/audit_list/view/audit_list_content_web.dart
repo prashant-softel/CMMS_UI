@@ -77,17 +77,18 @@ class _AuditListContentWebState extends State<AuditListContentWeb> {
                             ),
                             InkWell(
                               onTap: () {
-                                Get.back();
+                                controller.type.value == 3
+                                ? Get.offNamed(Routes.misDashboard)
+                                : Get.offNamed(Routes.audit);
                               },
                               child: controller.type.value == 3
                                   ? Text(" / MIS", style: Styles.greyLight14)
-                                  : Text(" / AUDIT LIST",
-                                      style: Styles.greyLight14),
+                                  : Text(" / AUDIT", style: Styles.greyLight14),
                             ),
                             controller.type.value == 3
                                 ? Text(" / OBSERVATION PLAN",
                                     style: Styles.greyLight14)
-                                : Text(" / AUDIT LIST SCREEN",
+                                : Text(" / AUDIT PLAN LIST",
                                     style: Styles.greyLight14)
                           ],
                         ),

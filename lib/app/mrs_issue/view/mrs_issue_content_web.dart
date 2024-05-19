@@ -475,7 +475,7 @@ class MrsIssueContentWeb extends GetView<MrsIssueController> {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      CustomRichText(title: "Comment:"),
+                                      Text("Comment :"),
                                       Dimens.boxWidth10,
                                       Container(
                                           width: (Get.width * .6),

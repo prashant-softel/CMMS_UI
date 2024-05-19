@@ -8,10 +8,11 @@ class PreventiveMaintenanceTaskUsecase {
   Future<List<PmTaskListModel?>?> getPmTaskList(
           {int? facilityId,
           bool? isLoading,
+          bool? self_view,
           dynamic endDate,
           dynamic startDate,
           bool? isExport}) async =>
-      await repository.getPmTaskList(facilityId, isLoading, startDate, endDate, isExport);
+      await repository.getPmTaskList(facilityId, isLoading, startDate, endDate, isExport,self_view);
   void clearValue() async => repository.clearData(LocalKeys.pmTaskId);
   void clearValuetype() async => repository.clearData(LocalKeys.type);
 

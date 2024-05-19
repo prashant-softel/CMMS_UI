@@ -3,7 +3,7 @@ import 'package:cmms/domain/usecases/material_category_usecase.dart';
 
 class MaterialCategoryPresenter {
   MaterialCategoryPresenter(this.materialCategoryUsecase);
-  
+
   MaterialCategoryUsecase materialCategoryUsecase;
 
   Future<List<MaterialCategoryListModel>> getMaterialList({
@@ -17,7 +17,7 @@ class MaterialCategoryPresenter {
   }
 
   Future<bool> createMaterialCategory({
-     facilitylistJsonString,
+    facilitylistJsonString,
     required bool isLoading,
   }) async {
     print("Presenter: Create Facility type function.");
@@ -27,7 +27,8 @@ class MaterialCategoryPresenter {
     );
   }
 
-  Future<bool> deleteFacility(String? business_id, {required bool isLoading}) async {
+  Future<bool> deleteFacility(String? business_id,
+      {required bool isLoading}) async {
     await materialCategoryUsecase.deleteMaterialCategory(
       business_id: business_id ?? "",
       isLoading: isLoading,
@@ -36,14 +37,15 @@ class MaterialCategoryPresenter {
   }
 
   Future<bool> updateMaterialCategory({
-    required String modulelistJsonString,
+    modulelistJsonString,
     required bool isLoading,
   }) async {
     print("Presenter: Update Material Category function.");
-    return await materialCategoryUsecase.updateMaterialCategory(
+    materialCategoryUsecase.updateMaterialCategory(
       modulelistJsonString: modulelistJsonString,
       isLoading: isLoading,
     );
-    
+    return true;
   }
+
 }

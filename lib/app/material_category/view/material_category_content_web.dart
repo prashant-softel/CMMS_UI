@@ -93,8 +93,8 @@ class MaterialCategoryContentWeb extends GetView<MaterialCategoryController> {
                         child: Obx(() {
                           return Text(
                             controller.isContainerVisible.value
-                                ? 'Close Create MATERIAL CATEGORY'
-                                : 'Open Create MATERIAL CATEGORY',
+                                ? 'Close Create Material Category'
+                                : 'Open Create Material Category',
                           );
                         }),
                       ),
@@ -104,12 +104,6 @@ class MaterialCategoryContentWeb extends GetView<MaterialCategoryController> {
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // varUserAccessModel.value.access_list!
-                    //             .where((e) => e.feature_id == 5 && e.add == 0)
-                    //             .length >
-                    //         0
-                    //     ?
-
                     Visibility(
                       visible: controller.isContainerVisible.value,
                       child: Container(
@@ -303,136 +297,9 @@ class MaterialCategoryContentWeb extends GetView<MaterialCategoryController> {
                                           ],
                                         ),
                                         Dimens.boxHeight10,
-                                        // Row(
-                                        //   mainAxisAlignment:
-                                        //       MainAxisAlignment.spaceBetween,
-                                        //   children: [
-                                        //     Expanded(
-                                        //         child: CustomRichText(
-                                        //             title: 'Description ')),
-                                        //     Container(
-                                        //       width: (MediaQuery.of(context)
-                                        //               .size
-                                        //               .width *
-                                        //           .2),
-                                        //       height: 30,
-                                        //       decoration: BoxDecoration(
-                                        //         boxShadow: [
-                                        //           BoxShadow(
-                                        //             color: Colors.black26,
-                                        //             offset: const Offset(
-                                        //               5.0,
-                                        //               5.0,
-                                        //             ),
-                                        //             blurRadius: 5.0,
-                                        //             spreadRadius: 1.0,
-                                        //           ),
-                                        //           BoxShadow(
-                                        //             color:
-                                        //                 ColorValues.whiteColor,
-                                        //             offset:
-                                        //                 const Offset(0.0, 0.0),
-                                        //             blurRadius: 0.0,
-                                        //             spreadRadius: 0.0,
-                                        //           ),
-                                        //         ],
-                                        //         color: ColorValues.whiteColor,
-                                        //         borderRadius:
-                                        //             BorderRadius.circular(5),
-                                        //       ),
-                                        //       child: TextField(
-                                        //         style: GoogleFonts.lato(
-                                        //           textStyle: TextStyle(
-                                        //               fontSize: 16.0,
-                                        //               height: 1.0,
-                                        //               color: Colors.black),
-                                        //         ),
-                                        //         controller:
-                                        //             controller.descriptionCtrlr,
-                                        //         focusNode: controller.descFocus,
-                                        //         scrollController:
-                                        //             controller.descScroll,
-                                        //         keyboardType:
-                                        //             TextInputType.multiline,
-                                        //         autofocus: false,
-                                        //         decoration: InputDecoration(
-                                        //           fillColor:
-                                        //               ColorValues.whiteColor,
-                                        //           filled: true,
-                                        //           contentPadding:
-                                        //               EdgeInsets.only(
-                                        //                   left: 5, right: 5),
-                                        //           border: InputBorder.none,
-                                        //           enabledBorder:
-                                        //               OutlineInputBorder(
-                                        //             borderRadius:
-                                        //                 BorderRadius.circular(
-                                        //                     10.0),
-                                        //             borderSide: BorderSide(
-                                        //                 color:
-                                        //                     Colors.transparent),
-                                        //           ),
-                                        //           focusedBorder:
-                                        //               OutlineInputBorder(
-                                        //             borderRadius:
-                                        //                 BorderRadius.circular(
-                                        //                     10.0),
-                                        //             borderSide: BorderSide(
-                                        //                 color:
-                                        //                     Colors.transparent),
-                                        //           ),
-                                        //           focusedErrorBorder: controller
-                                        //                   .isDescriptionInvalid
-                                        //                   .value
-                                        //               ? OutlineInputBorder(
-                                        //                   borderRadius:
-                                        //                       BorderRadius
-                                        //                           .circular(5),
-                                        //                   borderSide:
-                                        //                       BorderSide(
-                                        //                     color: ColorValues
-                                        //                         .redColorDark,
-                                        //                   ),
-                                        //                 )
-                                        //               : InputBorder.none,
-                                        //           errorBorder: controller
-                                        //                   .isDescriptionInvalid
-                                        //                   .value
-                                        //               ? OutlineInputBorder(
-                                        //                   borderRadius:
-                                        //                       BorderRadius
-                                        //                           .circular(5),
-                                        //                   borderSide:
-                                        //                       BorderSide(
-                                        //                     color: ColorValues
-                                        //                         .redColorDark,
-                                        //                   ),
-                                        //                 )
-                                        //               : null,
-                                        //           errorText: controller
-                                        //                   .isDescriptionInvalid
-                                        //                   .value
-                                        //               ? "Required field"
-                                        //               : null,
-                                        //         ),
-                                        //         onChanged: (value) {
-                                        //           if (value.trim().length > 1) {
-                                        //             controller
-                                        //                 .isDescriptionInvalid
-                                        //                 .value = false;
-                                        //           } else {
-                                        //             controller
-                                        //                 .isDescriptionInvalid
-                                        //                 .value = true;
-                                        //           }
-                                        //         },
-                                        //       ),
-                                        //     ),
-                                        //   ],
-                                        // ),
                                         SizedBox(
-                                          height: 40,
-                                        ),
+                                          height: 10,
+                                        )
                                       ]),
                                 ),
                               ),
@@ -467,13 +334,15 @@ class MaterialCategoryContentWeb extends GetView<MaterialCategoryController> {
                                               backgroundColor:
                                                   ColorValues.appDarkBlueColor,
                                               onPressed: () {
-                                                controller.createMaterialCategory().then(
+                                                controller
+                                                    .createMaterialCategory()
+                                                    .then(
                                                   (value) {
                                                     print("CREATE");
                                                     print("value,$value");
                                                     if (value == true) {
                                                       controller
-                                                          .issuccessCreatechecklist();
+                                                          .issuccessCreate();
                                                       // Close the Create Material Category container
                                                       controller
                                                           .toggleContainer();
@@ -489,15 +358,16 @@ class MaterialCategoryContentWeb extends GetView<MaterialCategoryController> {
                                                 ColorValues.appDarkBlueColor,
                                             onPressed: () {
                                               controller
-                                                  .updateMaterialCategory(controller
-                                                      .selectedItem?.id)
+                                                  .updateMaterialCategory(
+                                                      controller
+                                                          .selectedItem?.id)
                                                   .then(
                                                 (value) {
                                                   print("UPDATE");
                                                   print("value,$value");
                                                   if (value == true)
                                                     controller
-                                                        .issuccessCreatechecklist();
+                                                        .issuccessCreate();
                                                   controller.toggleContainer();
                                                 },
                                               );
@@ -512,7 +382,6 @@ class MaterialCategoryContentWeb extends GetView<MaterialCategoryController> {
                         ),
                       ),
                     ),
-
                     Expanded(
                       child: Container(
                         width: Get.width * 7,
@@ -638,12 +507,15 @@ class MaterialCategoryContentWeb extends GetView<MaterialCategoryController> {
                                                     )),
                                               ],
                                               rows: List<DataRow>.generate(
-                                                controller.MaterialList.length ?? 0,
+                                                controller
+                                                        .MaterialList.length ??
+                                                    0,
                                                 (index) => DataRow(cells: [
                                                   DataCell(Text(
                                                       (index + 1).toString())),
                                                   DataCell(Text(controller
-                                                          .MaterialList[index].name
+                                                          .MaterialList[index]
+                                                          .name
                                                           .toString() ??
                                                       '')),
                                                   // DataCell(Text(controller

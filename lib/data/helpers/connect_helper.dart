@@ -4516,11 +4516,12 @@ class ConnectHelper {
   Future<ResponseModel> getPmTaskList(
       {required String auth,
       bool? isLoading,
+      bool? self_view,
       int? facilityId,
       dynamic startDate,
       dynamic endDate}) async {
     var responseModel = await apiWrapper.makeRequest(
-      'PMScheduleView/GetPMTaskList?facility_id=${facilityId}&start_date=${endDate}&end_date=2025-03-20',
+      'PMScheduleView/GetPMTaskList?facility_id=${facilityId}&start_date=${endDate}&end_date=2025-03-20&self_view=$self_view',
       Request.get,
       null,
       isLoading ?? true,
@@ -4623,7 +4624,8 @@ class ConnectHelper {
         importPlan(
             auth: auth,
             fileId: jsonResponse["id"][0].toString(),
-            isLoading: true);
+            isLoading: true,
+            facilityId: facilityId);
       } else if (importType == AppConstants.kImportDSMReport) {
         importDSMFile(
           auth: auth,
@@ -7182,10 +7184,11 @@ class ConnectHelper {
   Future<ResponseModel> importPlan({
     required String auth,
     required String fileId,
+    required int facilityId,
     required bool isLoading,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
-      'PM/ImportPMPlanFile?file_id=$fileId',
+      'PM/ImportPMPlanFile?file_id=$fileId&facility_id=$facilityId',
       Request.post,
       null,
       true,
@@ -8700,11 +8703,11 @@ class ConnectHelper {
   Future<ResponseModel> updateMaterialCategory({
     required String auth,
     bool? isLoading,
-    required modulelistJsonString,
+     modulelistJsonString,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
       'SMMaster/UpdateMaterialCategory',
-      Request.patch,
+      Request.post,
       modulelistJsonString,
       isLoading ?? false,
       {
