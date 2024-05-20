@@ -30,6 +30,7 @@ class AddUserModel {
       this.facilities,
       this.company_id,
       this.credentials,
+      this.designationId,
       this.user_responsibility_list});
   int? id;
   int? company_id;
@@ -53,12 +54,14 @@ class AddUserModel {
   List<AddAccessList>? add_access_list;
   List<UserResponbility>? user_responsibility_list;
   List<IsEmployeeFacilityModel>? facilities;
+  int? designationId;
 
   // List<int>? facilities;
 
   factory AddUserModel.fromJson(Map<String, dynamic> json) => AddUserModel(
         id: json["id"],
         company_id: json["company_id"],
+        designationId: json["designationId"],
         secondaryEmail: json["secondaryEmail"],
         first_name: json["first_name"],
         last_name: json["last_name"],
@@ -82,14 +85,14 @@ class AddUserModel {
         user_responsibility_list: List<UserResponbility>.from(
             json["user_responsibility_list"]
                 .map((x) => UserResponbility.fromJson(x))),
-        facilities: List<IsEmployeeFacilityModel>.from(
-            json["facility_list"]
-                .map((x) => IsEmployeeFacilityModel.fromJson(x))),
+        facilities: List<IsEmployeeFacilityModel>.from(json["facility_list"]
+            .map((x) => IsEmployeeFacilityModel.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
         "id": id,
         "company_id": company_id,
+        "designationId": designationId,
         "secondaryEmail": secondaryEmail,
         "first_name": first_name,
         "last_name": last_name,
@@ -108,8 +111,7 @@ class AddUserModel {
         "isEmployee": isEmployee,
         "credentials": credentials!.toJson(),
         // "facilities": List<dynamic>.from(facilities!.map((x) => x)),
-        "facility_list":
-            List<dynamic>.from(facilities!.map((x) => x.toJson())),
+        "facility_list": List<dynamic>.from(facilities!.map((x) => x.toJson())),
         "access_list":
             List<dynamic>.from(add_access_list!.map((x) => x.toJson())),
         "user_responsibility_list": List<dynamic>.from(

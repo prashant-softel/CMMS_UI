@@ -31,26 +31,8 @@ class MrsIssueController extends GetxController {
   var commentCtrlr = TextEditingController();
   // final List<TextEditingController> _textcontrollers = [];
   // final List<String?> errorMessages = [];
-  var _textcontrollers = <TextEditingController>[].obs;
-  var errorMessages = <String?>[].obs;
 
   ///
-  @override
-  void onClose() {
-    // Dispose controllers
-    for (var controller in _textcontrollers) {
-      controller.dispose();
-    }
-    super.onClose();
-  }
-
-  void clearErrorMessage(int index) {
-    if (errorMessages[index] != null) {
-      //setState(() {
-      errorMessages[index] = null;
-      // });
-    }
-  }
 
   @override
   void onInit() async {
@@ -99,38 +81,30 @@ class MrsIssueController extends GetxController {
       mrsDetailsModel.value = _mrsDetailsModel;
       cmmrsItemsDetail.value = _mrsDetailsModel.cmmrsItems ?? [];
       // whereUsedType = mrsDetailsModel.value?.whereUsedType == 1 ? "JC" : "PM";
-      for (int i = 0; i < cmmrsItemsDetail.length; i++) {
-        // Assuming 5 rows for the example
-        _textcontrollers.add(TextEditingController());
-        errorMessages.add(null);
-        _textcontrollers[i].addListener(() => clearErrorMessage(i));
-      }
     }
     // print({"mrsdetailss", mrsDetailsModel});
   }
 
   issueMrs() async {
-    if (isFormValid.value) {
-      String _comment = commentCtrlr.text.trim();
-      List<CmmrsItemsModel> cmmrsItems = <CmmrsItemsModel>[];
-      cmmrsItemsDetail.forEach((element) {
-        cmmrsItems.add(CmmrsItemsModel(
-            mrs_item_id: element?.id ?? 0,
-            serial_number: element?.serial_number_controller?.text ?? "",
-            asset_item_ID: element?.asset_item_ID ?? 0,
-            issued_qty:
-                int.tryParse(element!.issued_qty_controller!.text) ?? 0));
-      });
-      IssueMrsModel issueMrs = IssueMrsModel(
-          issue_comment: _comment, ID: mrsId.value, cmmrsItems: cmmrsItems);
-      var issuetoJsonString = issueMrs.toJson();
-      final response = await mrsIssuePresenter.issueMrs(
-        issuetoJsonString: issuetoJsonString,
-        isLoading: true,
-      );
-      if (response == true) {
-        Get.offAllNamed(Routes.mrsListScreen);
-      }
+    // if (isFormValid.value) {
+    String _comment = commentCtrlr.text.trim();
+    List<CmmrsItemsModel> cmmrsItems = <CmmrsItemsModel>[];
+    cmmrsItemsDetail.forEach((element) {
+      cmmrsItems.add(CmmrsItemsModel(
+          mrs_item_id: element?.id ?? 0,
+          serial_number: element?.serial_number_controller?.text ?? "",
+          asset_item_ID: element?.asset_item_ID ?? 0,
+          issued_qty: int.tryParse(element!.issued_qty_controller!.text) ?? 0));
+    });
+    IssueMrsModel issueMrs = IssueMrsModel(
+        issue_comment: _comment, ID: mrsId.value, cmmrsItems: cmmrsItems);
+    var issuetoJsonString = issueMrs.toJson();
+    final response = await mrsIssuePresenter.issueMrs(
+      issuetoJsonString: issuetoJsonString,
+      isLoading: true,
+    );
+    if (response == true) {
+      Get.offAllNamed(Routes.mrsListScreen);
     } else {
       Utility.showDialog("Issue", "Please fill all the required fields");
     }

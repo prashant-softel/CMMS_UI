@@ -4,6 +4,7 @@ import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/home/widgets/header_widget_all_dash.dart';
 import 'package:cmms/app/widgets/date_picker.dart';
 import 'package:cmms/app/widgets/dropdown_web.dart';
+import 'package:cmms/app/widgets/stock_dropdown.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -1220,20 +1221,51 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                             Row(
                                               children: [
                                                 CustomRichText(
-                                                    title: 'Responsibility: '),
+                                                    title: 'Designation: '),
                                                 Dimens.boxWidth10,
-                                                MultipDropdownWebWidget(
+                                                Container(
+                                                  decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            6),
+                                                    border: Border.all(
+                                                      color: Color.fromARGB(
+                                                        255,
+                                                        227,
+                                                        224,
+                                                        224,
+                                                      ),
+                                                      width: 1,
+                                                    ),
+                                                    boxShadow: [
+                                                      BoxShadow(
+                                                        color: ColorValues
+                                                            .whiteColor,
+                                                        offset: const Offset(
+                                                            0.0, 0.0),
+                                                        blurRadius: 0.0,
+                                                        spreadRadius: 0.0,
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  height: 35,
                                                   width: (MediaQuery.of(context)
                                                           .size
                                                           .width *
                                                       .2),
-                                                  //  height: 35,
-                                                  dropdownList:
-                                                      controller.responsList,
-                                                  selectedItems: controller
-                                                      .selectedResNameList,
-                                                  onValueChanged:
-                                                      controller.onValueChanged,
+                                                  child: DropdownWebStock(
+                                                    controller: controller,
+                                                    dropdownList: controller
+                                                        .designationList,
+                                                    isValueSelected: controller
+                                                        .isDesignationSelected
+                                                        .value,
+                                                    selectedValue: controller
+                                                        .selectedDesignation
+                                                        .value,
+                                                    onValueChanged: controller
+                                                        .onValueChanged,
+                                                  ),
                                                 ),
                                               ],
                                             ),

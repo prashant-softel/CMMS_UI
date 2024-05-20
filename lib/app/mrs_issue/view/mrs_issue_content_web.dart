@@ -16,6 +16,7 @@ class MrsIssueContentWeb extends GetView<MrsIssueController> {
   final MrsIssueController controller = Get.find();
   final HomeController homecontroller = Get.find();
   final _formKey = GlobalKey<FormState>();
+  final _formKeyIssue = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -379,17 +380,9 @@ class MrsIssueContentWeb extends GetView<MrsIssueController> {
                                                                         if (value ==
                                                                                 null ||
                                                                             value.isEmpty) {
-                                                                          controller.errorMessages[index] =
-                                                                              'This field cannot be empty';
-                                                                          return controller
-                                                                              .errorMessages[index];
+                                                                          return 'Please enter';
                                                                         }
                                                                         return null;
-                                                                      },
-                                                                      onChanged:
-                                                                          (value) {
-                                                                        controller
-                                                                            .clearErrorMessage(index);
                                                                       },
                                                                       textController: controller
                                                                           .mrsDetailsModel
@@ -404,89 +397,107 @@ class MrsIssueContentWeb extends GetView<MrsIssueController> {
                                                         )
                                                       : DataCell(Text("NA")),
                                                   DataCell(
-                                                    Padding(
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                              8.0),
-                                                      child: Container(
-                                                          width:
-                                                              (Get.width * .4),
-                                                          decoration:
-                                                              BoxDecoration(
-                                                            boxShadow: [
-                                                              BoxShadow(
-                                                                color: Colors
-                                                                    .black26,
-                                                                offset:
-                                                                    const Offset(
-                                                                  5.0,
-                                                                  5.0,
+                                                    Form(
+                                                      key: _formKeyIssue,
+                                                      child: Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(8.0),
+                                                        child: Container(
+                                                            width: (Get.width *
+                                                                .4),
+                                                            decoration:
+                                                                BoxDecoration(
+                                                              boxShadow: [
+                                                                BoxShadow(
+                                                                  color: Colors
+                                                                      .black26,
+                                                                  offset:
+                                                                      const Offset(
+                                                                    5.0,
+                                                                    5.0,
+                                                                  ),
+                                                                  blurRadius:
+                                                                      5.0,
+                                                                  spreadRadius:
+                                                                      1.0,
                                                                 ),
-                                                                blurRadius: 5.0,
-                                                                spreadRadius:
-                                                                    1.0,
-                                                              ),
-                                                            ],
-                                                            color: ColorValues
-                                                                .whiteColor,
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        5),
-                                                          ),
-                                                          child:
-                                                              LoginCustomTextfield(
-                                                                  textController: controller
-                                                                      .mrsDetailsModel
-                                                                      .value!
-                                                                      .cmmrsItems![
-                                                                          index]
-                                                                      .issued_qty_controller as TextEditingController,
-                                                                  onChanged: (text) {
-                                                                    try {
-                                                                      // Validate input using a regular expression
-                                                                      if (!RegExp(
-                                                                              r'^[0-9]+(?:\.[0-9]+)?$')
-                                                                          .hasMatch(
-                                                                              text)) {
-                                                                        // Input is not a valid double
-                                                                        Fluttertoast
-                                                                            .showToast(
-                                                                          msg:
-                                                                              'Enter valid quantity in numbers',
-                                                                          fontSize:
-                                                                              16.0,
-                                                                        );
-                                                                        return; // Exit early
+                                                              ],
+                                                              color: ColorValues
+                                                                  .whiteColor,
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          5),
+                                                            ),
+                                                            child:
+                                                                LoginCustomTextfield(
+                                                                    validator:
+                                                                        (value) {
+                                                                      if (value ==
+                                                                              null ||
+                                                                          value
+                                                                              .isEmpty) {
+                                                                        // controller.errorMessages[index] =
+                                                                        return 'Please enter';
+                                                                        // return controller
+                                                                        //     .errorMessages[index];
                                                                       }
+                                                                      return null;
+                                                                    },
+                                                                    // onChanged: (value) {
+                                                                    //   controller
+                                                                    //       .clearErrorMessage(
+                                                                    //           index);
+                                                                    // },
+                                                                    textController: controller
+                                                                        .mrsDetailsModel
+                                                                        .value!
+                                                                        .cmmrsItems![
+                                                                            index]
+                                                                        .issued_qty_controller as TextEditingController,
+                                                                    onChanged: (text) {
+                                                                      try {
+                                                                        // Validate input using a regular expression
+                                                                        if (!RegExp(r'^[0-9]+(?:\.[0-9]+)?$')
+                                                                            .hasMatch(text)) {
+                                                                          // Input is not a valid double
+                                                                          Fluttertoast
+                                                                              .showToast(
+                                                                            msg:
+                                                                                'Enter valid quantity in numbers',
+                                                                            fontSize:
+                                                                                16.0,
+                                                                          );
+                                                                          return; // Exit early
+                                                                        }
 
-                                                                      double
-                                                                          parsedValue =
-                                                                          double.parse(
-                                                                              text);
-                                                                      double requestedQty = controller
-                                                                          .mrsDetailsModel
-                                                                          .value!
-                                                                          .cmmrsItems![
-                                                                              index]
-                                                                          .requested_qty!;
+                                                                        double
+                                                                            parsedValue =
+                                                                            double.parse(text);
+                                                                        double requestedQty = controller
+                                                                            .mrsDetailsModel
+                                                                            .value!
+                                                                            .cmmrsItems![index]
+                                                                            .requested_qty!;
 
-                                                                      if (parsedValue >
-                                                                          requestedQty) {
-                                                                        Fluttertoast
-                                                                            .showToast(
-                                                                          msg:
-                                                                              'Enter qty below the approved qty',
-                                                                          fontSize:
-                                                                              16.0,
-                                                                        );
+                                                                        if (parsedValue >
+                                                                            requestedQty) {
+                                                                          Fluttertoast
+                                                                              .showToast(
+                                                                            msg:
+                                                                                'Enter qty below the approved qty',
+                                                                            fontSize:
+                                                                                16.0,
+                                                                          );
+                                                                        }
+                                                                      } catch (e) {
+                                                                        // Handle the case where parsing fails
+                                                                        print(
+                                                                            'Error: $e');
                                                                       }
-                                                                    } catch (e) {
-                                                                      // Handle the case where parsing fails
-                                                                      print(
-                                                                          'Error: $e');
-                                                                    }
-                                                                  })),
+                                                                    })),
+                                                      ),
                                                     ),
                                                   ),
                                                 ])),
@@ -565,7 +576,9 @@ class MrsIssueContentWeb extends GetView<MrsIssueController> {
                                         onPressed: () {
                                           if (_formKey.currentState!
                                               .validate()) {
-                                            controller.issueMrs();
+                                            print("isssue4 123");
+
+                                            //  controller.issueMrs();
 
                                             // All validations passed
                                             // Make your API call here
