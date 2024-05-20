@@ -29,57 +29,32 @@ class MrsIssueController extends GetxController {
   RxList<GetAssetItemsModel?> cmmrsItemsDetail = <GetAssetItemsModel>[].obs;
   String whereUsedType = "";
   var commentCtrlr = TextEditingController();
+  // final List<TextEditingController> _textcontrollers = [];
+  // final List<String?> errorMessages = [];
 
   ///
+
   @override
   void onInit() async {
-    facilityIdStreamSubscription =
-        homeController.facilityId$.listen((event) async {
-      facilityId = event;
-      if (facilityId > 0) {
-        isFacilitySelected.value = true;
-      }
-      Future.delayed(Duration(seconds: 1), () {
-        getMrsDetails(
-            mrsId: mrsId.value, isloading: true, facilityId: facilityId);
-      });
-    });
     try {
       await setMrsId();
+      facilityIdStreamSubscription =
+          homeController.facilityId$.listen((event) async {
+        facilityId = event;
+        if (facilityId > 0) {
+          isFacilitySelected.value = true;
+        }
+        if (mrsId != 0) {
+          getMrsDetails(
+              mrsId: mrsId.value, isloading: true, facilityId: facilityId);
+        }
+      });
 
-      if (mrsId != 0) {
-        await getMrsDetails(
-            mrsId: mrsId.value, isloading: true, facilityId: facilityId);
-      }
       super.onInit();
     } catch (e) {
       print(e);
     }
   }
-
-  // void validateForm() {
-  //   isFormValid.value = true; // Default to true
-  //   mrsDetailsModel.value!.cmmrsItems!.forEach((item) {
-  //     if (item.asset_type == 'Spare') {
-  //       // Validation for Spare assets
-  //       if (item.serial_number_controller!.text.isEmpty ||
-  //           item.issued_qty_controller!.text.isEmpty ||
-  //           double.tryParse(item.issued_qty_controller!.text) == null ||
-  //           double.parse(item.issued_qty_controller!.text) >
-  //               item.requested_qty!) {
-  //         isFormValid.value = false;
-  //       }
-  //     } else if (item.asset_type == 'Consumable') {
-  //       // Validation for Consumable assets
-  //       if (item.issued_qty_controller!.text.isEmpty ||
-  //           double.tryParse(item.issued_qty_controller!.text) == null ||
-  //           double.parse(item.issued_qty_controller!.text) >
-  //               item.requested_qty!) {
-  //         isFormValid.value = false;
-  //       }
-  //     }
-  //   });
-  // }
 
   Future<void> setMrsId() async {
     try {
@@ -112,32 +87,26 @@ class MrsIssueController extends GetxController {
 
   issueMrs() async {
     // if (isFormValid.value) {
-      String _comment = commentCtrlr.text.trim();
-      List<CmmrsItemsModel> cmmrsItems = <CmmrsItemsModel>[];
-      cmmrsItemsDetail.forEach((element) {
-        cmmrsItems.add(CmmrsItemsModel(
-            mrs_item_id: element?.id ?? 0,
-            serial_number: element?.serial_number_controller?.text ?? "",
-            asset_item_ID: element?.asset_item_ID ?? 0,
-            issued_qty:
-                int.tryParse(element!.issued_qty_controller!.text) ?? 0));
-      });
-      IssueMrsModel issueMrs = IssueMrsModel(
-          issue_comment: _comment, ID: mrsId.value, cmmrsItems: cmmrsItems);
-      var issuetoJsonString = issueMrs.toJson();
-      final response = await mrsIssuePresenter.issueMrs(
-        issuetoJsonString: issuetoJsonString,
-        isLoading: true,
-      );
-      if (response == true) {
-        final _flutterSecureStorage = const FlutterSecureStorage();
-
-        _flutterSecureStorage.delete(key: "mrsId");
-        Get.offAllNamed(Routes.mrsListScreen);
-      }
-    // }
-    // else {
-      // Utility.showDialog("Issue", "Please fill all the required fields");
-    // }
+    String _comment = commentCtrlr.text.trim();
+    List<CmmrsItemsModel> cmmrsItems = <CmmrsItemsModel>[];
+    cmmrsItemsDetail.forEach((element) {
+      cmmrsItems.add(CmmrsItemsModel(
+          mrs_item_id: element?.id ?? 0,
+          serial_number: element?.serial_number_controller?.text ?? "",
+          asset_item_ID: element?.asset_item_ID ?? 0,
+          issued_qty: int.tryParse(element!.issued_qty_controller!.text) ?? 0));
+    });
+    IssueMrsModel issueMrs = IssueMrsModel(
+        issue_comment: _comment, ID: mrsId.value, cmmrsItems: cmmrsItems);
+    var issuetoJsonString = issueMrs.toJson();
+    final response = await mrsIssuePresenter.issueMrs(
+      issuetoJsonString: issuetoJsonString,
+      isLoading: true,
+    );
+    if (response == true) {
+      Get.offAllNamed(Routes.mrsListScreen);
+    } else {
+      Utility.showDialog("Issue", "Please fill all the required fields");
+    }
   }
 }
