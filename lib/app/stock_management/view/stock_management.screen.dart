@@ -389,7 +389,7 @@ class StockManagementDashboardScreen
                                         .length >
                                     0
                                 ? _importPlan(
-                                    tittle: "Import Material Category",
+                                    tittle: "Import Material",
                                     ontap: () {
                                       controller.importMaterial();
                                     })
