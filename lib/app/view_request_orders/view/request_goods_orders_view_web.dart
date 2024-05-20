@@ -536,6 +536,28 @@ class AddRowInReqGoodsOrder extends StatelessWidget {
                                               onChanged: (txt) {
                                                 mapData["value"] = txt;
                                               },
+                                              //validate
+
+                                                      // errorController: controller
+                                                      //         .isCostInvalid
+                                                      //         .value
+                                                      //     ? "Required field"
+                                                      //     : null,
+
+                                                      // onChanged: (value) {
+                                                      //   if (value
+                                                      //           .trim()
+                                                      //           .length >
+                                                      //       0) {
+                                                      //     controller
+                                                      //         .isCostInvalid
+                                                      //         .value = false;
+                                                      //   } else {
+                                                      //     controller
+                                                      //         .isCostInvalid
+                                                      //         .value = true;
+                                                      //   }
+                                                      // },
                                             ),
                                           )),
                                     ],
@@ -578,6 +600,29 @@ class AddRowInReqGoodsOrder extends StatelessWidget {
                                                   onChanged: (txt) {
                                                     mapData["value"] = txt;
                                                   },
+                                                   //validate
+
+                                                      // errorController: controller
+                                                      //         .isCommentInvalid
+                                                      //         .value
+                                                      //     ? "Required field"
+                                                      //     : null,
+
+                                                      // onChanged: (value) {
+                                                      //   if (value
+                                                      //           .trim()
+                                                      //           .length >
+                                                      //       0) {
+                                                      //     controller
+                                                      //         .isCommentInvalid
+                                                      //         .value = false;
+                                                      //   } else {
+                                                      //     controller
+                                                      //         .isCommentInvalid
+                                                      //         .value = true;
+                                                      //   }
+                                                      //   },
+
                                                 ),
                                               )),
                                         ],

@@ -59,7 +59,13 @@ class StockManagementAddGoodsOrdersController extends GetxController {
   Rx<String> selectedReqOrder = ''.obs;
   Rx<String> selectedpaid = ''.obs;
 
+  
+   Rx<bool> isRequestedInvalid = false.obs;
+  Rx<bool> isCostInvalid = false.obs;
+  Rx<bool> isBusinessTypeInvalid = false.obs;
   Rx<bool> isAmountInvalid = false.obs;
+  Rx<bool> isPOdateInvalid = false.obs;
+  
   Rx<bool> isPOInvalid = false.obs;
   RxList<int> selectedReqOrderId = <int>[].obs;
   Rx<int> roId = 0.obs;
@@ -781,17 +787,47 @@ class StockManagementAddGoodsOrdersController extends GetxController {
 
   //validation
   void checkForm() {
+    
+    if(selectedUnitCurrency==''){
+      isUnitCurrencySelected=false.obs;
+    }
+
+    if(selectedBusinessType==''){
+      isSelectedBusinessType=false.obs;
+    }
     if (pOCtrlr.text.trim().length < 3) {
       isPOInvalid.value = true;
     }
     if (pOCtrlr.value == true) {
       isFormInvalid.value = true;
     }
+      if (poDateDateTc.text.trim().length < 3) {
+      isPOdateInvalid.value = true;
+    }
     if (amountCtrlr.text.trim().length < 3) {
       isAmountInvalid.value = true;
     }
+    
     if (amountCtrlr.value == true) {
       isFormInvalid.value = true;
     }
+  
+    if (TextEditingController().text.isEmpty) {
+    isCostInvalid.value = true;
+  } else {
+    isCostInvalid.value = false;
   }
+  
+      if (TextEditingController().text.isEmpty) {
+    isRequestedInvalid.value = true;
+  } else {
+    isRequestedInvalid.value = false;
+  }
+    
+    // if (TextInputType.number=='') {
+    //   isFormInvalid.value = true;
+    // }
+
+   
+}
 }
