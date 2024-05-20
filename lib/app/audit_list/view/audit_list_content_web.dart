@@ -732,7 +732,7 @@ class AuditListListDataSource extends DataTableSource {
                                 message: 'view',
                                 onPress: () {
                                   controller.clearStoreIdData();
-                                  // controller.clearValue();
+                                  controller.clearValue();
                                   int auditId =
                                       AuditPlanPlanningListDetails?.id ?? 0;
                                   if (auditId != 0) {
@@ -759,15 +759,42 @@ class AuditListListDataSource extends DataTableSource {
                                 icon: Icons.edit,
                                 message: 'Edit',
                                 onPress: () {
-                                  // int id =
-                                  //     AuditPlanPlanningListDetails?.planId ?? 0;
-                                  // if (id != 0) {
-                                  //   Get.toNamed(Routes.AuditPlanPlanning,
-                                  //       arguments: {"id": id});
-                                  // }
+                                  controller.clearStoreIdData();
+                                  controller.clearValue();
+                                  int id =
+                                      AuditPlanPlanningListDetails?.id ?? 0;
+                                  if (id != 0) {
+                                    Get.toNamed(Routes.createAudit, arguments: {
+                                      "auditId": id,
+                                      'type': controller.type.value
+                                    });
+                                  }
                                 },
                               )
                             : Dimens.box0,
+                        varUserAccessModel.value.access_list!
+                                    .where((e) =>
+                                        e.feature_id ==
+                                            UserAccessConstants
+                                                .kAuditPlanFeatureId &&
+                                        e.delete ==
+                                            UserAccessConstants
+                                                .kHaveDeleteAccess)
+                                    .length >
+                                0
+                            ? TableActionButton(
+                                color: ColorValues.deleteColor,
+                                icon: Icons.delete,
+                                message: 'Delete',
+                                onPress: () {
+                                  controller.isDeleteDialog(
+                                      planName: AuditPlanPlanningListDetails
+                                          ?.plan_number,
+                                      planId: AuditPlanPlanningListDetails?.id
+                                          .toString());
+                                },
+                              )
+                            : Dimens.box0
                         // TableActionButton(
                         //   color: ColorValues.appGreenColor,
                         //   icon: Icons.add,

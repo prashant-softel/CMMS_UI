@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/controllers/file_upload_controller.dart';
 import 'package:cmms/app/theme/color_values.dart';
@@ -24,52 +26,52 @@ class ObservationPmExecutionViewDialog extends GetView {
   final PreventiveMaintenanceExecutionController controller = Get.find();
   final FileUploadController dropzoneController =
       Get.put(FileUploadController());
+  Widget _rowItem(int? defaultValue, {required Function(bool) onCheck}) {
+    return CustomSwitchTroggle(
+        value: defaultValue == 1 ? true : false,
+        onChanged: (value) {
+          print("object");
+          controller.isToggleOn.value = value!;
+          onCheck(value);
+
+          //  controller.toggle();
+        });
+  }
+
+  Widget _rowcpOkItem(int? defaultValue, {required Function(bool) onCheck}) {
+    return CustomSwitchTroggle(
+        value: defaultValue == 1 ? true : false,
+        onChanged: (value) {
+          print("object");
+          controller.isToggleokOn.value = value!;
+          onCheck(value);
+
+          //  controller.toggle();
+        });
+  }
+
+  Widget _rowBoolItem(int? defaultValue, {required Function(bool) onCheck}) {
+    return Checkbox(
+        value: defaultValue == 1 ? true : false,
+        checkColor: Colors.white,
+        activeColor: ColorValues.appGreenColor,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(2.0),
+        ),
+        side: MaterialStateBorderSide.resolveWith(
+          (states) => BorderSide(
+            width: 1.0,
+            color: ColorValues.blackColor,
+          ),
+        ),
+        onChanged: (val) {
+          controller.isToggleBoolOn.value = val!;
+          onCheck(val);
+        });
+  }
+
   @override
   Widget build(BuildContext context) {
-    Widget _rowItem(int? defaultValue, {required Function(bool) onCheck}) {
-      return CustomSwitchTroggle(
-          value: defaultValue == 1 ? true : false,
-          onChanged: (value) {
-            print("object");
-            controller.isToggleOn.value = value!;
-            onCheck(value);
-
-            //  controller.toggle();
-          });
-    }
-
-    Widget _rowcpOkItem(int? defaultValue, {required Function(bool) onCheck}) {
-      return CustomSwitchTroggle(
-          value: defaultValue == 1 ? true : false,
-          onChanged: (value) {
-            print("object");
-            controller.isToggleokOn.value = value!;
-            onCheck(value);
-
-            //  controller.toggle();
-          });
-    }
-
-    Widget _rowBoolItem(int? defaultValue, {required Function(bool) onCheck}) {
-      return Checkbox(
-          value: defaultValue == 1 ? true : false,
-          checkColor: Colors.white,
-          activeColor: ColorValues.appGreenColor,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(2.0),
-          ),
-          side: MaterialStateBorderSide.resolveWith(
-            (states) => BorderSide(
-              width: 1.0,
-              color: ColorValues.blackColor,
-            ),
-          ),
-          onChanged: (val) {
-            controller.isToggleBoolOn.value = val!;
-            onCheck(val);
-          });
-    }
-
     //  return StatefulBuilder(builder: ((context, setState) {
     return AlertDialog(
       shape: RoundedRectangleBorder(
@@ -109,6 +111,11 @@ class ObservationPmExecutionViewDialog extends GetView {
           child: Obx(
             () => Column(
               children: [
+                Column(
+                    children: []..addAll(controller.rowItemobs.value.map((e) {
+                        return Text(jsonEncode(e));
+                      }))),
+                // Text(jsonEncode(controller.dropdownMapperData)),
                 Container(
                   height: MediaQuery.of(context).size.height / 1.4,
                   child: ScrollConfiguration(
@@ -228,7 +235,7 @@ class ObservationPmExecutionViewDialog extends GetView {
                                             )),
 
                                         DataColumn2(
-                                            fixedWidth: 150,
+                                            fixedWidth: 200,
                                             label: Text(
                                               "Create Job",
                                               style: TextStyle(
@@ -240,167 +247,11 @@ class ObservationPmExecutionViewDialog extends GetView {
                                           .map((record) {
                                         return DataRow(
                                           // height: 130,
-                                          cells: record.map((mapData) {
+                                          cells: record.map((
+                                            mapData,
+                                          ) {
                                             return DataCell(
-                                              (mapData['key'] == "observation")
-                                                  ? Padding(
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                              8.0),
-                                                      child:
-                                                          LoginCustomTextfield(
-                                                        width: (Get.width * .4),
-                                                        textController:
-                                                            new TextEditingController(
-                                                                text: mapData[
-                                                                        "value"] ??
-                                                                    ''),
-                                                        onChanged: (txt) {
-                                                          mapData["value"] =
-                                                              txt;
-                                                        },
-                                                        maxLine: 5,
-                                                      ),
-                                                    )
-                                                  : (mapData['key'] ==
-                                                          "checkpoint")
-                                                      ? Text(mapData['value'] ??
-                                                          '')
-                                                      : (mapData['key'] ==
-                                                              "requirement")
-                                                          ? Text(mapData[
-                                                                  'value'] ??
-                                                              '')
-                                                          : (mapData['key'] ==
-                                                                  "weightage")
-                                                              ? Text(mapData[
-                                                                      'value'] ??
-                                                                  '')
-                                                              : (mapData['key'] ==
-                                                                      "uploadimg")
-                                                                  ? Row(
-                                                                      mainAxisAlignment:
-                                                                          MainAxisAlignment
-                                                                              .center,
-                                                                      children: [
-                                                                        InkWell(
-                                                                          onTap:
-                                                                              () async {
-                                                                            try {
-                                                                              final result = await FilePicker.platform.pickFiles(
-                                                                                type: FileType.image,
-                                                                              );
-                                                                              if (result != null && result.files.single.bytes != null) {
-                                                                                setState(() {
-                                                                                  mapData['uploaded'] = result.files.single.name;
-                                                                                  controller.fileName.value = result.files.single.name;
-                                                                                  controller.fileBytes = result.files.single.bytes;
-                                                                                });
-                                                                                controller.browseFiles(
-                                                                                  fileBytes: controller.fileBytes,
-                                                                                );
-                                                                              } else {
-                                                                                // Handle the case where no file is picked
-                                                                                print('No file selected');
-                                                                              }
-                                                                            } catch (e) {
-                                                                              // Handle the error scenario
-                                                                              print('Error picking file: $e');
-                                                                            }
-                                                                          },
-                                                                          child:
-                                                                              Container(
-                                                                            decoration:
-                                                                                BoxDecoration(
-                                                                              borderRadius: BorderRadius.circular(5),
-                                                                              color: ColorValues.appDarkBlueColor,
-                                                                              border: Border.all(
-                                                                                color: ColorValues.appDarkBlueColor,
-                                                                                width: 1,
-                                                                              ),
-                                                                            ),
-                                                                            child: Icon(Icons.upload,
-                                                                                size: 30,
-                                                                                color: ColorValues.whiteColor),
-                                                                          ),
-                                                                        ),
-                                                                        SizedBox(
-                                                                            width:
-                                                                                10), // Add some spacing between the icon and text
-                                                                        Expanded(
-                                                                          // Wrap with Expanded to handle long filenames gracefully
-                                                                          child:
-                                                                              SingleChildScrollView(
-                                                                            scrollDirection:
-                                                                                Axis.horizontal,
-                                                                            child:
-                                                                                Text(
-                                                                              "${mapData['uploaded'] ?? 'No file selected'}",
-                                                                              overflow: TextOverflow.ellipsis,
-                                                                            ),
-                                                                          ),
-                                                                        ),
-                                                                      ],
-                                                                    )
-                                                                  : (mapData['key'] ==
-                                                                          "cpok")
-                                                                      ? _rowcpOkItem(
-                                                                          int.tryParse(
-                                                                              '${mapData['value']}'),
-                                                                          onCheck:
-                                                                              (val) {
-                                                                          mapData[
-                                                                              'value'] = val ==
-                                                                                  true
-                                                                              ? "1"
-                                                                              : "0";
-                                                                          Future.delayed(
-                                                                              Duration.zero,
-                                                                              () {
-                                                                            setState(() {});
-                                                                          });
-                                                                        })
-                                                                      : (mapData['key'] == "type" &&
-                                                                              mapData['inpute_type'] == "2")
-                                                                          ? Padding(
-                                                                              padding: const EdgeInsets.all(8.0),
-                                                                              child: Column(
-                                                                                children: [
-                                                                                  LoginCustomTextfield(
-                                                                                      width: (Get.width * .8),
-                                                                                      textController: new TextEditingController(text: mapData["value"] ?? ''),
-                                                                                      onChanged: (txt) {
-                                                                                        mapData["value"] = txt;
-                                                                                      }),
-                                                                                  Row(
-                                                                                    children: [
-                                                                                      Text("Min:${mapData["min"]}"),
-                                                                                      Dimens.boxWidth15,
-                                                                                      Text("Max:${mapData["max"]}")
-                                                                                    ],
-                                                                                  )
-                                                                                ],
-                                                                              ))
-                                                                          : (mapData['key'] == "type" && mapData['inpute_type'] == "0")
-                                                                              ? Text('Text')
-                                                                              : (mapData['key'] == "job_created" && mapData['cp_ok_value'] == "0" && mapData['job_value'] == "0" || mapData['key'] == "job_created" && mapData['cp_ok_value'] == "0" && mapData['job_value'] == "1")
-                                                                                  ?
-                                                                                  // Obx(() {
-                                                                                  //     return
-                                                                                  _rowItem(int.tryParse('${mapData['job_value']}'), onCheck: (val) {
-                                                                                      mapData['job_value'] = val == true ? "1" : "0";
-                                                                                      Future.delayed(Duration.zero, () {
-                                                                                        setState(() {});
-                                                                                      });
-
-                                                                                      // Update the reactive variable
-                                                                                      //  });
-                                                                                    })
-                                                                                  : mapData['job_value'] != "1" && mapData['cp_ok_value'] != "1"
-                                                                                      ? Text('JOB${mapData['job_value']}')
-                                                                                      : Dimens.box0,
-                                              // : Text(mapData['value'] ?? ''),
-                                            );
+                                                commonUi(mapData, record));
                                           }).toList(),
                                         );
                                       }).toList(),
@@ -816,5 +667,160 @@ class ObservationPmExecutionViewDialog extends GetView {
     // );
     // }
     // ));
+  }
+
+  Widget commonUi(
+    Map<String, String> mapData,
+    List<Map<String, String>> record,
+  ) {
+    switch (mapData['key']) {
+      case 'observation':
+        return Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: LoginCustomTextfield(
+            width: (Get.width * .4),
+            textController:
+                new TextEditingController(text: mapData["value"] ?? ''),
+            onChanged: (txt) {
+              mapData["value"] = txt;
+            },
+            maxLine: 5,
+          ),
+        );
+
+      case 'type':
+        return (mapData['inpute_type'] == "2")
+            ? Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  children: [
+                    LoginCustomTextfield(
+                        width: (Get.width * .8),
+                        textController: new TextEditingController(
+                            text: mapData["value"] ?? ''),
+                        onChanged: (txt) {
+                          mapData["value"] = txt;
+                        }),
+                    Row(
+                      children: [
+                        Text("Min:${mapData["min"]}"),
+                        Dimens.boxWidth15,
+                        Text("Max:${mapData["max"]}")
+                      ],
+                    )
+                  ],
+                ))
+            : (mapData['inpute_type'] == "0")
+                ? Text('Text')
+                : _rowBoolItem(int.tryParse('${mapData['value']}'),
+                    onCheck: (val) {
+                    mapData['value'] = val == true ? "1" : "0";
+                    Future.delayed(Duration.zero, () {
+                      // setState(() {});
+                    });
+                  });
+
+      case 'job_created':
+        //record[3]['value']=cpok
+        //record[7]['cp_ok_value']=createjob
+
+        // return Text(
+        //     "${record[3]['value']},${record[7]['cp_ok_value']},${((record[7]['cp_ok_value'] == "0" && record[3]['value'] == "0") || (record[7]['cp_ok_value'] == "0" && record[3]['value'] == "1"))},${(record[3]['value'] != "1" && record[7]['cp_ok_value'] == "0")}");
+        return Row(
+          children: [
+            Text(
+                "${record[3]['value']},${record[7]['cp_ok_value']},${((record[7]['cp_ok_value'] == "0" && record[3]['value'] == "0") || (record[7]['cp_ok_value'] == "0" && record[3]['value'] == "1"))},${(record[3]['value'] != "1" && record[7]['cp_ok_value'] == "0")}"),
+            (record[3]['value'] != "1" && record[7]['cp_ok_value'] != "0")
+                ? Text('JOB${record[3]['value']}')
+                : ((record[7]['cp_ok_value'] == "0" &&
+                        record[3]['value'] == "0")
+                    //     ||
+                    // (record[7]['cp_ok_value'] == "0" && record[3]['value'] == "1")
+                    )
+                    ?
+                    // Obx(() {
+                    //     return
+                    _rowItem(int.tryParse('${record[3]['value']}'),
+                        onCheck: (val) {
+                        record[3]['value'] = val == true ? "1" : "0";
+                        Future.delayed(Duration.zero, () {
+                          //   setState(() {});
+                        });
+
+                        // Update the reactive variable
+                        //  });
+                      })
+                    : Dimens.box0
+          ],
+        );
+
+      case 'cpok':
+        return _rowcpOkItem(int.tryParse('${mapData['value']}'),
+            onCheck: (val) {
+          mapData['value'] = val == true ? "1" : "0";
+          Future.delayed(Duration.zero, () {
+            // setState(() {});
+          });
+        });
+
+      case 'uploadimg':
+        return Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            InkWell(
+              onTap: () async {
+                try {
+                  final result = await FilePicker.platform.pickFiles(
+                    type: FileType.image,
+                  );
+                  if (result != null && result.files.single.bytes != null) {
+                    // setState(() {
+                    mapData['uploaded'] = result.files.single.name;
+                    controller.fileName.value = result.files.single.name;
+                    controller.fileBytes = result.files.single.bytes;
+                    //  });
+                    controller.browseFiles(
+                      fileBytes: controller.fileBytes,
+                    );
+                  } else {
+                    // Handle the case where no file is picked
+                    print('No file selected');
+                  }
+                } catch (e) {
+                  // Handle the error scenario
+                  print('Error picking file: $e');
+                }
+              },
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(5),
+                  color: ColorValues.appDarkBlueColor,
+                  border: Border.all(
+                    color: ColorValues.appDarkBlueColor,
+                    width: 1,
+                  ),
+                ),
+                child:
+                    Icon(Icons.upload, size: 30, color: ColorValues.whiteColor),
+              ),
+            ),
+            SizedBox(width: 10), // Add some spacing between the icon and text
+            Expanded(
+              // Wrap with Expanded to handle long filenames gracefully
+              child: SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Text(
+                  "${mapData['uploaded'] ?? 'No file selected'}",
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+            ),
+          ],
+        );
+
+      default:
+        return Text(mapData['value'] ?? '');
+    }
+    // return Text("data");
   }
 }

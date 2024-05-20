@@ -2509,6 +2509,7 @@ class Repository {
       return Map();
     }
   }
+
   Future<Map<String, dynamic>> approveIncidentReportButton2ndStep(
     incidentReportApproveJsonString,
     bool? isLoading,
@@ -9304,7 +9305,7 @@ class Repository {
               'asset_description',
               'category',
               'approval_required'
-              'measurement',
+                  'measurement',
               'decimal_status'
             ],
             ...jsonDataList
@@ -11786,6 +11787,49 @@ class Repository {
     }
   }
 
+  Future<Map<String, dynamic>> updateAuditNumber(
+      {bool? isLoading, checkAuditJsonString}) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.updateAuditNumber(
+          auth: auth,
+          isLoading: isLoading,
+          checkAuditJsonString: checkAuditJsonString);
+
+      if (!res.hasError) {
+        Fluttertoast.showToast(msg: " update Successfully...", fontSize: 16.0);
+
+        return Map();
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString(), ' createAuditNumber');
+        return Map();
+      }
+    } catch (error) {
+      print(error.toString());
+      return Map();
+    }
+  }
+
+  Future<void> deleteAuditPlan(Object planId, bool isLoading) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.deleteAuditPlan(
+        auth: auth,
+        planId: planId,
+        isLoading: isLoading,
+      );
+
+      if (!res.hasError) {
+        //get delete response back from API
+      } else {
+        Utility.showDialog(res.errorCode.toString(), 'deleteAuditPlan');
+      }
+    } catch (error) {
+      print(error.toString());
+    }
+  }
+
   Future<List<AuditPlanListModel>?> getAuditPlanList(
       int? facilityId,
       bool? isLoading,
@@ -13335,7 +13379,8 @@ class Repository {
   }
 
   //delete
-  Future<void> deleteMaterialCategory(Object business_id, bool isLoading) async {
+  Future<void> deleteMaterialCategory(
+      Object business_id, bool isLoading) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.deleteMaterialCategory(
