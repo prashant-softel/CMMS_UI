@@ -111,10 +111,10 @@ class ObservationPmExecutionViewDialog extends GetView {
             child: Obx(
               () => Column(
                 children: [
-                  Column(
-                      children: []..addAll(controller.rowItemobs.value.map((e) {
-                          return Text(jsonEncode(e));
-                        }))),
+                  // Column(
+                  //     children: []..addAll(controller.rowItemobs.value.map((e) {
+                  //         return Text(jsonEncode(e));
+                  // }))),
                   // Text(jsonEncode(controller.dropdownMapperData)),
                   Container(
                     height: MediaQuery.of(context).size.height / 1.4,
