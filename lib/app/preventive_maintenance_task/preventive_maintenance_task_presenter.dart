@@ -8,14 +8,12 @@ class PreventiveMaintenanceTaskPresenter {
   Future<List<PmTaskListModel?>?> getPmTaskList(
           {int? facilityId,
           bool? isLoading,
-          bool? self_view,
           dynamic endDate,
           dynamic startDate,
           bool? isExport}) async =>
       await preventiveMaintenanceTaskUsecase.getPmTaskList(
           facilityId: facilityId ?? 0,
           isLoading: isLoading ?? false,
-          self_view: self_view,
           endDate: endDate,
           startDate: startDate,
           isExport : isExport);

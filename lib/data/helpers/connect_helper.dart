@@ -4540,7 +4540,7 @@ class ConnectHelper {
       dynamic startDate,
       dynamic endDate}) async {
     var responseModel = await apiWrapper.makeRequest(
-      'PMScheduleView/GetPMTaskList?facility_id=${facilityId}&start_date=${endDate}&end_date=2025-03-20&self_view=$self_view',
+      'PMScheduleView/GetPMTaskList?facility_id=${facilityId}&start_date=${endDate}&end_date=${startDate}',
       Request.get,
       null,
       isLoading ?? true,
@@ -4643,8 +4643,7 @@ class ConnectHelper {
         importPlan(
             auth: auth,
             fileId: jsonResponse["id"][0].toString(),
-            isLoading: true,
-            facilityId: facilityId);
+            isLoading: true);
       } else if (importType == AppConstants.kImportDSMReport) {
         importDSMFile(
           auth: auth,
@@ -7203,11 +7202,10 @@ class ConnectHelper {
   Future<ResponseModel> importPlan({
     required String auth,
     required String fileId,
-    required int facilityId,
     required bool isLoading,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
-      'PM/ImportPMPlanFile?file_id=$fileId&facility_id=$facilityId',
+      'PM/ImportPMPlanFile?file_id=$fileId',
       Request.post,
       null,
       true,
