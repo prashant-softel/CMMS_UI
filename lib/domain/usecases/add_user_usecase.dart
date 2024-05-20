@@ -70,6 +70,12 @@ class AddUserUsecase {
         // facilityId,
         isLoading,
       );
+  Future<List<DesignationModel?>?> getDesignationList({
+    bool? isLoading,
+  }) async =>
+      await repository.getDesignationList(
+        isLoading,
+      );
   Future<AccessLevelModel?> getUserAccessListById({
     int? userId,
     bool? isLoading,
@@ -101,7 +107,7 @@ class AddUserUsecase {
   }) async =>
       await repository.getBusinessList(
         businessType: type,
-        facilityId:facilityId,
+        facilityId: facilityId,
         isLoading: isLoading,
       );
   Future<bool> addUser({
