@@ -3968,6 +3968,25 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> deleteAuditPlan({
+    required String auth,
+    bool? isLoading,
+    required planId,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'AuditPlan/DeletePlan?planId=$planId',
+      Request.put,
+      planId,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
   Future<ResponseModel> deleteModulelist({
     required String auth,
     bool? isLoading,
@@ -7548,6 +7567,25 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> updateAuditNumber({
+    required String auth,
+    bool? isLoading,
+    required checkAuditJsonString,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'AuditPlan/UpdateAuditPlan',
+      Request.post,
+      checkAuditJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
   Future<ResponseModel> getAuditPlanList(
       {required String auth,
       bool? isLoading,
@@ -8661,6 +8699,7 @@ class ConnectHelper {
 
     return responseModel;
   }
+
   //Material Category
   //Get
   Future<ResponseModel> getMaterialList(
@@ -8681,7 +8720,7 @@ class ConnectHelper {
   Future<ResponseModel> createMaterialCategory({
     required String auth,
     bool? isLoading,
-     mcategorylistJsonString,
+    mcategorylistJsonString,
   }) async {
     var responseModel =
         // responseModel =
