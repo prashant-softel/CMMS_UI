@@ -2178,6 +2178,16 @@ class DataRepository extends DomainRepository {
     return response;
   }
 
+  Future<ResponseModel> deleteAuditPlan({
+    auth,
+    bool? isLoading,
+    planId,
+  }) async {
+    var response = await connectHelper.deleteAuditPlan(
+        auth: auth, isLoading: isLoading, planId: planId);
+    return response;
+  }
+
   Future<ResponseModel> getPermitDetails({
     String? auth,
     required int facilityId,
@@ -4315,6 +4325,18 @@ class DataRepository extends DomainRepository {
     return response;
   }
 
+  Future<ResponseModel> updateAuditNumber({
+    auth,
+    bool? isLoading,
+    checkAuditJsonString,
+  }) async {
+    var response = await connectHelper.updateAuditNumber(
+        auth: auth,
+        isLoading: isLoading,
+        checkAuditJsonString: checkAuditJsonString);
+    return response;
+  }
+
   Future<ResponseModel> createAssetSM({
     auth,
     bool? isLoading,
@@ -4965,7 +4987,7 @@ class DataRepository extends DomainRepository {
     return response;
   }
 
-    Future<ResponseModel> getDSMData({
+  Future<ResponseModel> getDSMData({
     required String auth,
     List<String>? selectedYear,
     List<String>? selectedMonth,
@@ -4984,7 +5006,7 @@ class DataRepository extends DomainRepository {
         isLoading: isLoading ?? false,
       );
 
-   //Material category
+  //Material category
   Future<ResponseModel> getMaterialList({
     required bool isLoading,
     required String auth,

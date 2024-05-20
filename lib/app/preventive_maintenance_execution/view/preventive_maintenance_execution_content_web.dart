@@ -80,10 +80,10 @@ class PreventiveMaintenanceExecutionContentWeb
                 InkWell(
                   onTap: () {
                     var taskId;
-                    Get.offNamed(Routes.pmTaskView,arguments: {'pmTaskId':taskId});
+                    Get.offNamed(Routes.pmTaskView,
+                        arguments: {'pmTaskId': taskId});
                   },
-                  child: Text(" / PM TASK VIEW",
-                      style: Styles.greyLight14),
+                  child: Text(" / PM TASK VIEW", style: Styles.greyLight14),
                 ),
                 Text(" / PM EXECUTION", style: Styles.greyLight14)
               ],

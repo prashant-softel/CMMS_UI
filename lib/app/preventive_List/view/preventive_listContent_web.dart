@@ -66,7 +66,11 @@ class PreventiveChecklistListContentWeb
                     ),
                     InkWell(
                       onTap: () {
-                        Get.offNamed(Routes.preventive);
+                        controller.type.value == 1
+                            ? Get.offNamed(Routes.preventive)
+                            : controller.type.value == 2
+                                ? Get.offNamed(Routes.audit)
+                                : Get.offNamed(Routes.misDashboard);
                       },
                       child: controller.type.value == 1
                           ? Text(" / PREVENTIVE MAINTENANCE",

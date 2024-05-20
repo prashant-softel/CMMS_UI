@@ -1,8 +1,10 @@
 import 'dart:async';
 
+import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/preventive_maintenance_task/preventive_maintenance_task_presenter.dart';
 import 'package:cmms/app/theme/color_values.dart';
 import 'package:cmms/app/theme/styles.dart';
+import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -175,7 +177,8 @@ class PreventiveMaintenanceTaskController extends GetxController {
         isLoading: isLoading.value,
         startDate: startDate,
         endDate: endDate,
-        isExport: isExport);
+        isExport: isExport,
+    );
     if (_pmTaskList != null) {
       pmTaskList.value = _pmTaskList;
       filteredData.value = pmTaskList.value;

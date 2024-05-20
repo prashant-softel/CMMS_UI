@@ -2,6 +2,10 @@ import 'dart:async';
 
 import 'package:cmms/app/audit_list/audit_list_presenter.dart';
 import 'package:cmms/app/home/home_controller.dart';
+import 'package:cmms/app/theme/color_values.dart';
+import 'package:cmms/app/theme/dimens.dart';
+import 'package:cmms/app/theme/styles.dart';
+import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/domain/models/audit_plan_list_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -135,8 +139,7 @@ class AuditListScreenController extends GetxController {
   }
 
   void getAuditListByDate() {
-    getAuditPlanList(
-        facilityId, formattedTodate1, formattedFromdate1,  false);
+    getAuditPlanList(facilityId, formattedTodate1, formattedFromdate1, false);
   }
 
   Future<void> clearValue() async {
@@ -148,7 +151,69 @@ class AuditListScreenController extends GetxController {
   }
 
   void export() {
-    getAuditPlanList(
-        facilityId, formattedTodate1, formattedFromdate1,  true);
+    getAuditPlanList(facilityId, formattedTodate1, formattedFromdate1, true);
+  }
+
+  void isDeleteDialog({String? planId, String? planName}) {
+    Get.dialog(
+      AlertDialog(
+        content: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text("Delete Plan", style: Styles.blackBold16),
+              Divider(
+                color: ColorValues.appLightGreyColor,
+              ),
+              Dimens.boxHeight5,
+              RichText(
+                text: TextSpan(
+                    text: 'Are you sure you want to delete the PM Plan ',
+                    style: Styles.blackBold16,
+                    children: [
+                      TextSpan(
+                        text: "${planName}",
+                        style: TextStyle(
+                          color: ColorValues.orangeColor,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ]),
+              ),
+            ]),
+        actions: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              CustomElevatedButton(
+                  backgroundColor: ColorValues.appRedColor,
+                  onPressed: () {
+                    Get.back();
+                  },
+                  text: 'No'),
+              CustomElevatedButton(
+                  backgroundColor: ColorValues.appGreenColor,
+                  onPressed: () {
+                    deleteAuditPlan(planId).then((value) {
+                      Get.back();
+                      getAuditPlanList(facilityId, formattedTodate1,
+                          formattedFromdate1, false);
+                    });
+                  },
+                  text: 'Yes'),
+            ],
+          )
+        ],
+      ),
+    );
+  }
+
+  Future<void> deleteAuditPlan(String? planId) async {
+    {
+      await auditListPresenter.deleteAuditPlan(
+        planId,
+        isLoading: true,
+      );
+    }
   }
 }

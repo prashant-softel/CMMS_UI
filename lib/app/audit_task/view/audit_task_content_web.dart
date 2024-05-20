@@ -76,7 +76,7 @@ class _AuditTaskContentWebState extends State<AuditTaskContentWeb> {
                           onTap: () {
                             Get.offNamed(Routes.audit);
                           },
-                          child: Text(" / AUDIT".toUpperCase(),
+                          child: Text(" / AUDIT",
                               style: Styles.greyLight14),
                         ),
                         Text(" /AUDIT TASK", style: Styles.greyLight14)

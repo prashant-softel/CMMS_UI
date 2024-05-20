@@ -30,7 +30,6 @@ class SPVListPresenter {
     return true;
   }
 
-
   deleteFacility(String? business_id, {required bool isLoading}) async =>
       await sPVListUsecase.deleteSPV(
         business_id: business_id ?? 0,

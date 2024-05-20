@@ -79,8 +79,7 @@ class _CreateAuditWebState extends State<CreateAuditWeb> {
                       controller.type.value == 3
                           ? Text(" / CREATE OBSERVATION PLAN",
                               style: Styles.greyLight14)
-                          : Text(" / CREATE AUDIT",
-                              style: Styles.greyLight14)
+                          : Text(" / CREATE AUDIT", style: Styles.greyLight14)
                     ],
                   ),
                 ),
@@ -364,14 +363,23 @@ class _CreateAuditWebState extends State<CreateAuditWeb> {
                                       },
                                     ),
                                     Dimens.boxWidth15,
-                                    CustomElevatedButton(
-                                      backgroundColor:
-                                          ColorValues.appGreenColor,
-                                      text: 'Submit',
-                                      onPressed: () {
-                                        controller.createAuditNumber();
-                                      },
-                                    ),
+                                    controller.auditId != 0
+                                        ? CustomElevatedButton(
+                                            backgroundColor:
+                                                ColorValues.updateColor,
+                                            text: 'Update',
+                                            onPressed: () {
+                                              controller.updateAuditNumber();
+                                            },
+                                          )
+                                        : CustomElevatedButton(
+                                            backgroundColor:
+                                                ColorValues.appGreenColor,
+                                            text: 'Submit',
+                                            onPressed: () {
+                                              controller.createAuditNumber();
+                                            },
+                                          ),
                                     Spacer(),
                                     // Dimens.boxWidth15,
                                     // CustomElevatedButton(

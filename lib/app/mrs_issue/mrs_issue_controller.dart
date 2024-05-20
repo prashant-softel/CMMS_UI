@@ -19,6 +19,8 @@ class MrsIssueController extends GetxController {
   StreamSubscription<int>? facilityIdStreamSubscription;
   HomeController homeController = Get.find<HomeController>();
   int facilityId = 0;
+  Rx<bool> isFormValid = false.obs;
+
   Rx<bool> isFacilitySelected = true.obs;
   MrsIssuePresenter mrsIssuePresenter;
   final HomeController homecontroller = Get.find();
@@ -55,6 +57,30 @@ class MrsIssueController extends GetxController {
     }
   }
 
+  // void validateForm() {
+  //   isFormValid.value = true; // Default to true
+  //   mrsDetailsModel.value!.cmmrsItems!.forEach((item) {
+  //     if (item.asset_type == 'Spare') {
+  //       // Validation for Spare assets
+  //       if (item.serial_number_controller!.text.isEmpty ||
+  //           item.issued_qty_controller!.text.isEmpty ||
+  //           double.tryParse(item.issued_qty_controller!.text) == null ||
+  //           double.parse(item.issued_qty_controller!.text) >
+  //               item.requested_qty!) {
+  //         isFormValid.value = false;
+  //       }
+  //     } else if (item.asset_type == 'Consumable') {
+  //       // Validation for Consumable assets
+  //       if (item.issued_qty_controller!.text.isEmpty ||
+  //           double.tryParse(item.issued_qty_controller!.text) == null ||
+  //           double.parse(item.issued_qty_controller!.text) >
+  //               item.requested_qty!) {
+  //         isFormValid.value = false;
+  //       }
+  //     }
+  //   });
+  // }
+
   Future<void> setMrsId() async {
     try {
       final _mrsId = await mrsIssuePresenter.getValue();
@@ -85,7 +111,7 @@ class MrsIssueController extends GetxController {
   }
 
   issueMrs() async {
-    {
+    // if (isFormValid.value) {
       String _comment = commentCtrlr.text.trim();
       List<CmmrsItemsModel> cmmrsItems = <CmmrsItemsModel>[];
       cmmrsItemsDetail.forEach((element) {
@@ -109,6 +135,9 @@ class MrsIssueController extends GetxController {
         _flutterSecureStorage.delete(key: "mrsId");
         Get.offAllNamed(Routes.mrsListScreen);
       }
-    }
+    // }
+    // else {
+      // Utility.showDialog("Issue", "Please fill all the required fields");
+    // }
   }
 }

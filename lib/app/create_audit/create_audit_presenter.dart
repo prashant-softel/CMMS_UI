@@ -1,3 +1,4 @@
+import 'package:cmms/domain/models/audit_plan_detail_model.dart';
 import 'package:cmms/domain/models/frequency_model.dart';
 import 'package:cmms/domain/models/preventive_checklist_model.dart';
 import 'package:cmms/domain/usecases/create_audit_usecase.dart';
@@ -34,9 +35,36 @@ class CreateAuditPresenter {
     return true;
   }
 
+  Future<Map<String, dynamic>?> updateAuditNumber({
+    checkAuditJsonString,
+    required bool isLoading,
+  }) async {
+    createAuditUsecase.updateAuditNumber(
+      checkAuditJsonString: checkAuditJsonString,
+      isLoading: isLoading,
+    );
+    return null;
+  }
+
+  Future<AuditPlanDetailModel?> getAuditPlanDetails({
+    int? auditPlanId,
+    required int facilityId,
+    bool? isLoading,
+  }) async =>
+      await createAuditUsecase.getAuditPlanDetails(
+        auditPlanId: auditPlanId,
+        facilityId: facilityId,
+        isLoading: isLoading,
+      );
   void saveValue({String? type}) async {
     return createAuditUsecase.saveValue(type: type);
   }
 
-  Future<String?> getValue() async => await createAuditUsecase.getValue();
+  Future<String> getValue() async => await createAuditUsecase.getValue();
+  void saveAuditIdValue({String? auditId}) async {
+    return createAuditUsecase.saveAuditIdValue(auditId: auditId);
+  }
+
+  Future<String> getAuditdValue() async =>
+      await createAuditUsecase.getAuditdValue();
 }

@@ -3968,6 +3968,25 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> deleteAuditPlan({
+    required String auth,
+    bool? isLoading,
+    required planId,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'AuditPlan/DeletePlan?planId=$planId',
+      Request.put,
+      planId,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
   Future<ResponseModel> deleteModulelist({
     required String auth,
     bool? isLoading,
@@ -4516,11 +4535,12 @@ class ConnectHelper {
   Future<ResponseModel> getPmTaskList(
       {required String auth,
       bool? isLoading,
+      bool? self_view,
       int? facilityId,
       dynamic startDate,
       dynamic endDate}) async {
     var responseModel = await apiWrapper.makeRequest(
-      'PMScheduleView/GetPMTaskList?facility_id=${facilityId}&start_date=${endDate}&end_date=2025-03-20',
+      'PMScheduleView/GetPMTaskList?facility_id=${facilityId}&start_date=${endDate}&end_date=${startDate}',
       Request.get,
       null,
       isLoading ?? true,
@@ -4623,6 +4643,7 @@ class ConnectHelper {
         importPlan(
             auth: auth,
             fileId: jsonResponse["id"][0].toString(),
+            facilityId: facilityId,
             isLoading: true);
       } else if (importType == AppConstants.kImportDSMReport) {
         importDSMFile(
@@ -7182,10 +7203,11 @@ class ConnectHelper {
   Future<ResponseModel> importPlan({
     required String auth,
     required String fileId,
+    required int facilityId,
     required bool isLoading,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
-      'PM/ImportPMPlanFile?file_id=$fileId',
+      'PM/ImportPMPlanFile?file_id=$fileId&facility_id=$facilityId',
       Request.post,
       null,
       true,
@@ -7533,6 +7555,25 @@ class ConnectHelper {
   }) async {
     var responseModel = await apiWrapper.makeRequest(
       'AuditPlan/CreateAuditPlan',
+      Request.post,
+      checkAuditJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> updateAuditNumber({
+    required String auth,
+    bool? isLoading,
+    required checkAuditJsonString,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'AuditPlan/UpdateAuditPlan',
       Request.post,
       checkAuditJsonString,
       isLoading ?? false,
@@ -8658,6 +8699,7 @@ class ConnectHelper {
 
     return responseModel;
   }
+
   //Material Category
   //Get
   Future<ResponseModel> getMaterialList(
@@ -8678,7 +8720,7 @@ class ConnectHelper {
   Future<ResponseModel> createMaterialCategory({
     required String auth,
     bool? isLoading,
-     mcategorylistJsonString,
+    mcategorylistJsonString,
   }) async {
     var responseModel =
         // responseModel =
@@ -8700,11 +8742,11 @@ class ConnectHelper {
   Future<ResponseModel> updateMaterialCategory({
     required String auth,
     bool? isLoading,
-    required modulelistJsonString,
+     modulelistJsonString,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
       'SMMaster/UpdateMaterialCategory',
-      Request.patch,
+      Request.post,
       modulelistJsonString,
       isLoading ?? false,
       {

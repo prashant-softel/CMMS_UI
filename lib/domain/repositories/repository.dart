@@ -1331,6 +1331,8 @@ class Repository {
               'Asset_Parent_Name',
               'Asset_Serial_no',
               'DC_Capacity',
+              'DC_Rating',
+              'AC_Capacity',
               'AC_Rating',
               'Quantity/Module_Quantity',
               'Asset_category_name',
@@ -1367,33 +1369,36 @@ class Repository {
                       inventoryJson['description'],
                       inventoryJson['parentName'],
                       inventoryJson['serialNumber'],
-                      "-",
-                      "-",
+                      inventoryJson['dccapacity'],
+                      inventoryJson['dcRating'],
+                      inventoryJson['acCapacity'],
+                      inventoryJson['acrating'],
                       inventoryJson['moduleQuantity'],
                       inventoryJson['categoryName'],
                       inventoryJson['type'],
                       inventoryJson['status'],
-                      "-",
-                      "-",
-                      "-",
-                      "-",
-                      "-",
-                      "-",
-                      "-",
-                      "-",
-                      "-",
-                      "-",
-                      "-",
-                      "-",
-                      "-",
+                      inventoryJson['descMaintenace'],
+                      inventoryJson['warrantyType'],
+                      inventoryJson['warrantyProviderName'],
+                      inventoryJson['start_date'],
+                      inventoryJson['warrantyTenture'],
+                      inventoryJson['certificate_number'],
+                      inventoryJson['manufacturername'],
+                      inventoryJson['supplierName'],
+                      inventoryJson['model'],
+                      inventoryJson['cost'],
+                      inventoryJson['currency'],
+                      inventoryJson['barcode'],
+                      inventoryJson['unspCode'],
+                      inventoryJson['purchaseCode'],
                       inventoryJson['customerName'],
                       inventoryJson['ownerName'],
                       inventoryJson['operatorName'],
-                      "-",
-                      "-",
-                      "-",
-                      "-",
-                      "-",
+                      inventoryJson['calibration_testing_date'],
+                      inventoryJson['calibrationFrequency'],
+                      inventoryJson['calibrationLastDate'],
+                      inventoryJson['calibrationDueDate'],
+                      inventoryJson['calibrationReminderDays'],
                     ])
                 .toList(),
           ];
@@ -2509,6 +2514,7 @@ class Repository {
       return Map();
     }
   }
+
   Future<Map<String, dynamic>> approveIncidentReportButton2ndStep(
     incidentReportApproveJsonString,
     bool? isLoading,
@@ -9304,7 +9310,7 @@ class Repository {
               'asset_description',
               'category',
               'approval_required'
-              'measurement',
+                  'measurement',
               'decimal_status'
             ],
             ...jsonDataList
@@ -11786,6 +11792,49 @@ class Repository {
     }
   }
 
+  Future<Map<String, dynamic>> updateAuditNumber(
+      {bool? isLoading, checkAuditJsonString}) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.updateAuditNumber(
+          auth: auth,
+          isLoading: isLoading,
+          checkAuditJsonString: checkAuditJsonString);
+
+      if (!res.hasError) {
+        Fluttertoast.showToast(msg: " update Successfully...", fontSize: 16.0);
+
+        return Map();
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString(), ' createAuditNumber');
+        return Map();
+      }
+    } catch (error) {
+      print(error.toString());
+      return Map();
+    }
+  }
+
+  Future<void> deleteAuditPlan(Object planId, bool isLoading) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.deleteAuditPlan(
+        auth: auth,
+        planId: planId,
+        isLoading: isLoading,
+      );
+
+      if (!res.hasError) {
+        //get delete response back from API
+      } else {
+        Utility.showDialog(res.errorCode.toString(), 'deleteAuditPlan');
+      }
+    } catch (error) {
+      print(error.toString());
+    }
+  }
+
   Future<List<AuditPlanListModel>?> getAuditPlanList(
       int? facilityId,
       bool? isLoading,
@@ -13335,7 +13384,8 @@ class Repository {
   }
 
   //delete
-  Future<void> deleteMaterialCategory(Object business_id, bool isLoading) async {
+  Future<void> deleteMaterialCategory(
+      Object business_id, bool isLoading) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.deleteMaterialCategory(

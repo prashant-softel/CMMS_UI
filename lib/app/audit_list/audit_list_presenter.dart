@@ -21,6 +21,11 @@ class AuditListScreenPresenter {
     return auditListUsecase.saveValue(type: type);
   }
 
+  deleteAuditPlan(String? planId, {required bool isLoading}) async =>
+      await auditListUsecase.deleteAuditPlan(
+        planId: planId ?? 0,
+        isLoading: isLoading,
+      );
   Future<String?> getValue() async => await auditListUsecase.getValue();
   void clearValue() async => auditListUsecase.clearValue();
   void clearStoreIdData() async => auditListUsecase.clearStoreIdData();
