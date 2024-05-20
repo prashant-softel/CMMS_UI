@@ -19,6 +19,8 @@ class MrsIssueController extends GetxController {
   StreamSubscription<int>? facilityIdStreamSubscription;
   HomeController homeController = Get.find<HomeController>();
   int facilityId = 0;
+  Rx<bool> isFormValid = false.obs;
+
   Rx<bool> isFacilitySelected = true.obs;
   MrsIssuePresenter mrsIssuePresenter;
   final HomeController homecontroller = Get.find();
@@ -55,6 +57,16 @@ class MrsIssueController extends GetxController {
     }
   }
 
+  void validateForm() {
+    isFormValid.value = mrsDetailsModel.value!.cmmrsItems!.every((item) =>
+        item.asset_type != 'Spare' ||
+        (item.serial_number_controller!.text.isNotEmpty &&
+            item.issued_qty_controller!.text.isNotEmpty &&
+            double.tryParse(item.issued_qty_controller!.text) != null &&
+            double.parse(item.issued_qty_controller!.text) <=
+                item.requested_qty!));
+  }
+
   Future<void> setMrsId() async {
     try {
       final _mrsId = await mrsIssuePresenter.getValue();
@@ -85,7 +97,7 @@ class MrsIssueController extends GetxController {
   }
 
   issueMrs() async {
-    {
+    if (isFormValid.value) {
       String _comment = commentCtrlr.text.trim();
       List<CmmrsItemsModel> cmmrsItems = <CmmrsItemsModel>[];
       cmmrsItemsDetail.forEach((element) {
@@ -109,6 +121,9 @@ class MrsIssueController extends GetxController {
         _flutterSecureStorage.delete(key: "mrsId");
         Get.offAllNamed(Routes.mrsListScreen);
       }
+    }
+    else {
+      Utility.showDialog("Issue", "Please fill all the required fields");
     }
   }
 }

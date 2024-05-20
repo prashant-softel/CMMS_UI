@@ -28,6 +28,7 @@ class PurchaseGoodsorderListController extends GetxController {
   RxString statusFilterText = ''.obs;
   RxString goDateFilterText = ''.obs;
   RxString costFilterText = ''.obs;
+  RxBool isAscending = true.obs;
 
   Rx<DateTime> fromDate = DateTime.now().subtract(Duration(days: 7)).obs;
   Rx<DateTime> toDate = DateTime.now().obs;
@@ -47,6 +48,7 @@ class PurchaseGoodsorderListController extends GetxController {
     "Status": 200,
     "Cost": 250
   };
+
   Map<String, RxString> filterText = {};
   void setColumnVisibility(String columnName, bool isVisible) {
     final newVisibility = Map<String, bool>.from(columnVisibility.value)
@@ -122,7 +124,7 @@ class PurchaseGoodsorderListController extends GetxController {
         goodsOrdersListTableColumns.add(key);
       }
     }
-    }
+  }
 
   void onValueChanged(dynamic list, dynamic value) {
     switch (list.runtimeType) {}

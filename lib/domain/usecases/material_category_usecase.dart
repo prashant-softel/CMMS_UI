@@ -26,14 +26,14 @@ class MaterialCategoryUsecase {
   }
 
   Future<bool> updateMaterialCategory({
-    required String modulelistJsonString,
+     modulelistJsonString,
     required bool? isLoading,
-  }) async {
-    return await repository.updateMaterialCategory(
+  }) async =>
+     await repository.updateMaterialCategory(
       isLoading: isLoading,
       modulelistJsonString: modulelistJsonString,
     );
-  }
+  
 
   Future<bool> createMaterialCategory({
      facilitylistJsonString,

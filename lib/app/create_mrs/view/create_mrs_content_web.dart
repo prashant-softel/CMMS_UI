@@ -261,7 +261,7 @@ class CreateMrsContentWeb extends GetView<CreateMrsController> {
                               ].map((column) {
                                 return TableViewColumn(
                                   label: column,
-                                  minWidth: Get.width * 0.18,
+                                  minWidth: Get.width * 0.15,
                                   //  height: Get.height / 2,
                                 );
                               }).toList(),

@@ -1,9 +1,10 @@
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/audit/audit_controller.dart';
+import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/home/widgets/header_widget_all_dash.dart';
+import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 
 class AuditScreen extends GetView<AuditController> {
   AuditScreen({super.key});
@@ -108,16 +109,38 @@ class AuditScreen extends GetView<AuditController> {
                                     ? (itemWidth / itemHeight)
                                     : 5,
                                 children: <Widget>[
-                                  _priventiveList(
-                                      tittle: " Audit Plan",
-                                      ontap: () {
-                                        controller.auditList();
-                                      }),
-                                  _priventiveList(
-                                      tittle: "Audits Task",
-                                      ontap: () {
-                                        controller.auditTask();
-                                      }),
+                                  varUserAccessModel.value.access_list!
+                                              .where((e) =>
+                                                  e.feature_id ==
+                                                      UserAccessConstants
+                                                          .kAuditPlanFeatureId &&
+                                                  e.view ==
+                                                      UserAccessConstants
+                                                          .kHaveViewAccess)
+                                              .length >
+                                          0
+                                      ? _priventiveList(
+                                          tittle: " Audit Plan",
+                                          ontap: () {
+                                            controller.auditList();
+                                          })
+                                      : Dimens.box0,
+                                  varUserAccessModel.value.access_list!
+                                              .where((e) =>
+                                                  e.feature_id ==
+                                                      UserAccessConstants
+                                                          .kAuditExecutionFeatureId &&
+                                                  e.view ==
+                                                      UserAccessConstants
+                                                          .kHaveViewAccess)
+                                              .length >
+                                          0
+                                      ? _priventiveList(
+                                          tittle: "Audits Task",
+                                          ontap: () {
+                                            controller.auditTask();
+                                          })
+                                      : Dimens.box0
                                   // _priventiveList(
                                   //     tittle: " Audits",
                                   //     ontap: () {
@@ -132,8 +155,8 @@ class AuditScreen extends GetView<AuditController> {
                                     Text(
                                       "Masters",
                                       style: TextStyle(
-                                        color: Color.fromARGB(
-                                            255, 159, 156, 156),
+                                        color:
+                                            Color.fromARGB(255, 159, 156, 156),
                                         fontSize: 16,
                                         fontWeight: FontWeight.w400,
                                       ),
@@ -164,20 +187,42 @@ class AuditScreen extends GetView<AuditController> {
                                     ? (itemWidth / itemHeight)
                                     : 5,
                                 children: <Widget>[
-                                  _priventiveList(
-                                      tittle: "Check List",
-                                      ontap: () {
-                                        controller.createChecklist();
-                                      }),
+                                  varUserAccessModel.value.access_list!
+                                              .where((e) =>
+                                                  e.feature_id ==
+                                                      UserAccessConstants
+                                                          .kPMchecklistFeatureId &&
+                                                  e.view ==
+                                                      UserAccessConstants
+                                                          .kHaveViewAccess)
+                                              .length >
+                                          0
+                                      ? _priventiveList(
+                                          tittle: "Check List",
+                                          ontap: () {
+                                            controller.createChecklist();
+                                          })
+                                      : Dimens.box0,
                                   //  if (Responsive.isDesktop(context))
-                                  _priventiveList(
-                                      tittle: "Check Point",
-                                      ontap: () {
-                                        // Get.toNamed(
-                                        //   Routes.preventive_checkPoint,
-                                        // );
-                                        controller.checkPoint();
-                                      }),
+                                  varUserAccessModel.value.access_list!
+                                              .where((e) =>
+                                                  e.feature_id ==
+                                                      UserAccessConstants
+                                                          .kPMcheckpointFeatureId &&
+                                                  e.view ==
+                                                      UserAccessConstants
+                                                          .kHaveViewAccess)
+                                              .length >
+                                          0
+                                      ? _priventiveList(
+                                          tittle: "Check Point",
+                                          ontap: () {
+                                            // Get.toNamed(
+                                            //   Routes.preventive_checkPoint,
+                                            // );
+                                            controller.checkPoint();
+                                          })
+                                      : Dimens.box0
                                 ],
                               ),
                             ]),

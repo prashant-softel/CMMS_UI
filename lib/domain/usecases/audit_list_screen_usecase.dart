@@ -13,11 +13,16 @@ class AuditListScreenUsecase {
           dynamic endDate,
           dynamic startDate}) async =>
       await repository.getAuditPlanList(
-          facilityId, isLoading,isExport, startDate, endDate);
+          facilityId, isLoading, isExport, startDate, endDate);
   void saveValue({String? type}) async =>
       repository.saveValue(LocalKeys.type, type);
   Future<String?> getValue() async =>
       await repository.getStringValue(LocalKeys.type);
+  deleteAuditPlan({required Object planId, required bool isLoading}) async =>
+      await repository.deleteAuditPlan(
+        planId,
+        isLoading,
+      );
   void clearValue() async => repository.clearData(LocalKeys.type);
   void clearStoreIdData() async => repository.clearData(LocalKeys.auditId);
 }

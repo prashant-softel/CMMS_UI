@@ -2,6 +2,8 @@ import 'dart:async';
 
 import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/create_audit/create_audit_presenter.dart';
+import 'package:cmms/app/navigators/app_pages.dart';
+import 'package:cmms/domain/models/audit_plan_detail_model.dart';
 import 'package:cmms/domain/models/create_audit_plan_model.dart';
 import 'package:cmms/domain/models/frequency_model.dart';
 import 'package:cmms/domain/models/preventive_checklist_model.dart';
@@ -33,7 +35,8 @@ class CreateAuditController extends GetxController {
   StreamSubscription<int>? facilityIdStreamSubscription;
   int facilityId = 0;
   Rx<int> type = 0.obs;
-
+  Rx<int> auditId = 0.obs;
+  Rx<AuditPlanDetailModel?> auditPlanDetailModel = AuditPlanDetailModel().obs;
   @override
   void onInit() async {
     try {
@@ -42,12 +45,20 @@ class CreateAuditController extends GetxController {
       Future.delayed(Duration(seconds: 1), () {
         getFrequencyList();
       });
-      facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
+      facilityIdStreamSubscription =
+          homecontroller.facilityId$.listen((event) async {
         facilityId = event;
-        // Future.delayed(Duration(seconds: 2), () {
-        //   getPreventiveCheckList(facilityId, type.value);
-        // });
+        if (facilityId > 0) {
+          if (auditId != 0) {
+            await getAuditPlanDetails(
+                auditPlanId: auditId.value,
+                isloading: true,
+                facilityId: facilityId);
+            // getHistory(facilityId);
+          }
+        }
       });
+
       super.onInit();
     } catch (e) {
       print(e);
@@ -60,19 +71,48 @@ class CreateAuditController extends GetxController {
     try {
       // Read jobId
       String? _type = await createAuditPresenter.getValue();
-      if (_type == null || _type == '' || _type == "null") {
+
+      String _auditId = await createAuditPresenter.getAuditdValue();
+      if (_auditId == null || _auditId == '' || _auditId == "null") {
         var dataFromPreviousScreen = Get.arguments;
 
         type.value = dataFromPreviousScreen['type'];
-        print({"typeeee", type.value});
+        auditId.value = dataFromPreviousScreen['auditId'];
+        print({"typeeee", auditId.value});
         createAuditPresenter.saveValue(type: type.value.toString());
       } else {
         type.value = int.tryParse(_type) ?? 0;
+        auditId.value = int.tryParse(_auditId) ?? 0;
       }
     } catch (e) {
       print(e.toString() + 'type');
       //  Utility.showDialog(e.toString() + 'type');
     }
+  }
+
+  Future<void> getAuditPlanDetails(
+      {int? auditPlanId, bool? isloading, required int facilityId}) async {
+    final _auditPlanDetailsModel =
+        await createAuditPresenter.getAuditPlanDetails(
+            auditPlanId: auditPlanId,
+            isLoading: isloading,
+            facilityId: facilityId);
+
+    if (_auditPlanDetailsModel != null) {
+      descriptionTc.text = _auditPlanDetailsModel.description ?? "";
+      startDateDateTc.text = _auditPlanDetailsModel.schedule_Date ?? "";
+      planTitleTc.text = _auditPlanDetailsModel.plan_number ?? "";
+      // selectedfrequency.value = _auditPlanDetailsModel.frequency ?? "";
+      selectedfrequencyId = _auditPlanDetailsModel.frequency ?? 0;
+      if (selectedfrequencyId > 0) {
+        getPreventiveCheckList(facilityId, type, selectedfrequencyId); //
+        selectedchecklist.value = _auditPlanDetailsModel.checklist_name ?? "";
+        selectedchecklistId.value =
+            _auditPlanDetailsModel.checklist_id.toString() ?? "";
+      }
+      //  auditPlanDetailModel.value = _auditPlanDetailsModel;
+    }
+    print({"auditPlandetailss", auditPlanDetailModel.value?.id});
   }
 
   Future<void> getFrequencyList() async {
@@ -92,24 +132,24 @@ class CreateAuditController extends GetxController {
         {
           if (value != "Please Select") {
             int frequencyIndex =
-              frequencyList.indexWhere((x) => x?.name == value);
-          selectedfrequencyId = frequencyList[frequencyIndex]?.id ?? 0;
-          selectedfrequency.value = value;
-          getPreventiveCheckList(facilityId, type.value, selectedfrequencyId);
+                frequencyList.indexWhere((x) => x?.name == value);
+            selectedfrequencyId = frequencyList[frequencyIndex]?.id ?? 0;
+            selectedfrequency.value = value;
+            getPreventiveCheckList(facilityId, type.value, selectedfrequencyId);
           } else {
-            selectedfrequencyId=0;
+            selectedfrequencyId = 0;
           }
         }
         break;
       case RxList<PreventiveCheckListModel>:
         {
-         if (value != "Please Select") {
+          if (value != "Please Select") {
             int checklistIndex = checkList.indexWhere((x) => x?.name == value);
-          selectedchecklistId.value =
-              checkList[checklistIndex]?.id.toString() ?? "";
-         } else {
-          //  selectedchecklistId=0;
-         }
+            selectedchecklistId.value =
+                checkList[checklistIndex]?.id.toString() ?? "";
+          } else {
+            //  selectedchecklistId=0;
+          }
         }
 
         break;
@@ -153,6 +193,7 @@ class CreateAuditController extends GetxController {
     String _startDate = startDateDateTc.text.trim();
 
     CreateAuditPlan createAuditPlan = CreateAuditPlan(
+      id: 0,
       plan_number: _planTitle,
       Facility_id: facilityId,
       auditee_id: varUserAccessModel.value.user_id,
@@ -172,6 +213,43 @@ class CreateAuditController extends GetxController {
     );
     return true;
   }
-  //  return true;
-  // }
+
+  Future<void> updateAuditNumber() async {
+    // if (checklistNumberCtrlr.text.trim() == '' ||
+    //     selectedEquipmentId == 0 ||
+    //     selectedfrequencyId == 0) {
+    //   Fluttertoast.showToast(
+    //       msg: "Please enter required field", fontSize: 16.0);
+    // } else {
+    String _planTitle = planTitleTc.text.trim();
+    String _description = descriptionTc.text.trim();
+    String _startDate = startDateDateTc.text.trim();
+
+    CreateAuditPlan createAuditPlan = CreateAuditPlan(
+      id: auditId.value,
+      plan_number: _planTitle,
+      Facility_id: facilityId,
+      auditee_id: varUserAccessModel.value.user_id,
+      auditor_id: facilityId,
+      Checklist_id: int.tryParse(selectedchecklistId.value),
+      Description: _description,
+      Schedule_Date: _startDate,
+      ApplyFrequency: selectedfrequencyId,
+    );
+    var checkAuditJsonString =
+        createAuditPlan.toJson(); //createCheckListToJson([createChecklist]);
+
+    print({"updateAuditNumber", checkAuditJsonString});
+    Map<String, dynamic>? responseCreatePmPlan =
+        await createAuditPresenter.updateAuditNumber(
+      checkAuditJsonString: checkAuditJsonString,
+      isLoading: true,
+    );
+    if (responseCreatePmPlan == null) {
+    } else {
+      Get.offAllNamed(
+        Routes.auditListScreen,
+      );
+    }
+  }
 }
