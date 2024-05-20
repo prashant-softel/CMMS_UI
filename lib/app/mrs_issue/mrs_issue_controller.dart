@@ -29,6 +29,8 @@ class MrsIssueController extends GetxController {
   RxList<GetAssetItemsModel?> cmmrsItemsDetail = <GetAssetItemsModel>[].obs;
   String whereUsedType = "";
   var commentCtrlr = TextEditingController();
+  var controllers = <TextEditingController>[].obs;
+  var errorMessages = <String?>[].obs;
   // final List<TextEditingController> _textcontrollers = [];
   // final List<String?> errorMessages = [];
 
@@ -49,11 +51,50 @@ class MrsIssueController extends GetxController {
               mrsId: mrsId.value, isloading: true, facilityId: facilityId);
         }
       });
+      for (int i = 0; i < 5; i++) {
+        // Assuming 5 rows for the example
+        controllers.add(TextEditingController());
+        errorMessages.add(null);
+        controllers[i].addListener(() => clearErrorMessage(i));
+      }
 
       super.onInit();
     } catch (e) {
       print(e);
     }
+  }
+
+  void clearErrorMessage(int index) {
+    if (errorMessages[index] != null) {
+      errorMessages[index] = null;
+    }
+  }
+
+  String? validateField(String? value, int index) {
+    if (value == null || value.isEmpty) {
+      errorMessages[index] = 'Please enter';
+      return errorMessages[index];
+    }
+    return null;
+  }
+
+  void validateForm(GlobalKey<FormState> formKey) {
+    if (formKey.currentState!.validate()) {
+      // All validations passed
+      // Make your API call here
+    } else {
+      // Validation failed
+      // Show an error message or handle the error
+    }
+  }
+
+  @override
+  void onClose() {
+    // Dispose controllers
+    for (var controller in controllers) {
+      controller.dispose();
+    }
+    super.onClose();
   }
 
   Future<void> setMrsId() async {
