@@ -59,6 +59,12 @@ class AddUserPresenter {
       await addUserUsecase.getResponsibilityList(
         isLoading: isLoading ?? false,
       );
+      Future<List<DesignationModel?>?> getDesignationList({
+    bool? isLoading,
+  }) async =>
+      await addUserUsecase.getDesignationList(
+        isLoading: isLoading ?? false,
+      );
   Future<GetNotificationModel?> getRoleNotificationList({
     int? roleId,
     bool? isLoading,

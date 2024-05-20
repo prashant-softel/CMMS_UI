@@ -10,6 +10,7 @@ import 'package:cmms/app/widgets/custom_textField.dart';
 import 'package:cmms/app/widgets/dropdown_web.dart';
 import 'package:cmms/app/widgets/file_upload_widget_web2.dart';
 import 'package:cmms/app/widgets/file_upload_with_dropzone_widget.dart';
+import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -393,315 +394,294 @@ class ScheduleWeb extends GetView<ScheduleController> {
                                   ),
                                 ],
                               ),
-                              Obx(
-                                () => Center(
-                                  child: SizedBox(
-                                    width:
-                                        MediaQuery.of(context).size.width / 1.2,
-                                    child: Center(
-                                      child: Container(
-                                        decoration: BoxDecoration(
-                                          border: Border.all(
-                                              color:
-                                                  Colors.grey.withOpacity(.3)),
+                              Center(
+                                child: Container(
+                                  height: 60,
+                                  width:
+                                      MediaQuery.of(context).size.width / 1.2,
+                                  decoration: BoxDecoration(
+                                    border: Border.all(
+                                      color: Colors.grey.withOpacity(.3),
+                                    ),
+                                  ),
+                                  constraints: BoxConstraints(
+                                    maxWidth: 1400,
+                                  ),
+                                  child: CustomAppBar(
+                                    title: 'Employees'.tr,
+                                    action: Row(
+                                      children: [
+                                        ActionButton(
+                                          label: 'Add New',
+                                          icon: Icons.add,
+                                          onPressed: () {
+                                            Get.dialog<void>(
+                                              addEmployeeListAlertBox(),
+                                            );
+                                          },
+                                          color: ColorValues.appGreenColor,
                                         ),
-                                        constraints: BoxConstraints(
-                                          maxWidth: 1400,
-                                        ),
-                                        child: Column(
-                                          children: [
-                                            CustomAppBar(
-                                              title: 'Employees'.tr,
-                                              action: Row(
-                                                children: [
-                                                  ActionButton(
-                                                    label: 'Add New',
-                                                    icon: Icons.add,
-                                                    onPressed: () {
-                                                      Get.dialog<void>(
-                                                        addEmployeeListAlertBox(),
-                                                      );
-                                                    },
-                                                    color: ColorValues
-                                                        .appGreenColor,
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                            Wrap(
-                                              children: [
-                                                Column(
-                                                  children: [
-                                                    SizedBox(
-                                                      width:
-                                                          MediaQuery.of(context)
-                                                                  .size
-                                                                  .width *
-                                                              2,
-                                                      child: Container(
-                                                        constraints:
-                                                            BoxConstraints(
-                                                                minHeight: 90),
-                                                        child:
-                                                            SingleChildScrollView(
-                                                          child: DataTable(
-                                                            border:
-                                                                TableBorder.all(
-                                                              color: Colors.grey
-                                                                  .withOpacity(
-                                                                      0.3),
-                                                            ),
-                                                            columns: [
-                                                              DataColumn(
-                                                                label: Text(
-                                                                  "Employee ID",
-                                                                ),
-                                                              ),
-                                                              DataColumn(
-                                                                label: Text(
-                                                                  "Employee Name",
-                                                                ),
-                                                              ),
-                                                              DataColumn(
-                                                                label: Text(
-                                                                  "Email ID",
-                                                                ),
-                                                              ),
-                                                              DataColumn(
-                                                                label: Text(
-                                                                  "Contact No",
-                                                                ),
-                                                              ),
-                                                              DataColumn(
-                                                                label: Text(
-                                                                  "Action",
-                                                                ),
-                                                              ),
-                                                            ],
-                                                            rows: List<
-                                                                DataRow>.generate(
-                                                              controller
-                                                                  .filteredEmployeeNameList
-                                                                  .length,
-                                                              (index) {
-                                                                var employeeNameDetails =
-                                                                    controller
-                                                                            .filteredEmployeeNameList[
-                                                                        index];
-                                                                return DataRow(
-                                                                  cells: [
-                                                                    DataCell(
-                                                                      Text(
-                                                                        '${employeeNameDetails?.id ?? ''}',
-                                                                      ),
-                                                                    ),
-                                                                    DataCell(
-                                                                      Text(
-                                                                        '${employeeNameDetails?.name ?? ''}',
-                                                                      ),
-                                                                    ),
-                                                                    DataCell(
-                                                                      Text(
-                                                                        '${employeeNameDetails?.login_id ?? ''}',
-                                                                      ),
-                                                                    ),
-                                                                    DataCell(
-                                                                      Text(
-                                                                        '${employeeNameDetails?.mobileNumber ?? ''}',
-                                                                      ),
-                                                                    ),
-                                                                    DataCell(
-                                                                      Wrap(
-                                                                        children: [
-                                                                          TableActionButton(
-                                                                            color:
-                                                                                Colors.red,
-                                                                            icon:
-                                                                                Icons.delete_outline,
-                                                                            message:
-                                                                                'Remove',
-                                                                            onPress:
-                                                                                () {
-                                                                              _removeRow(index);
-                                                                              print("index");
-                                                                            },
-                                                                          )
-                                                                        ],
-                                                                      ),
-                                                                    )
-                                                                  ],
-                                                                );
-                                                              },
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ],
-                                            ),
-                                          ],
-                                        ),
-                                      ),
+                                      ],
                                     ),
                                   ),
                                 ),
                               ),
-                              Dimens.boxHeight15,
                               Obx(
                                 () => Center(
-                                  child: SizedBox(
-                                    width:
-                                        MediaQuery.of(context).size.width / 1.2,
-                                    child: Center(
-                                      child: Container(
-                                        decoration: BoxDecoration(
-                                          border: Border.all(
-                                              color:
-                                                  Colors.grey.withOpacity(.3)),
-                                        ),
+                                  child: Wrap(
+                                    children: [
+                                      Container(
+                                        height: (controller
+                                                    .filteredEmployeeNameList
+                                                    .length *
+                                                50) +
+                                            55,
+                                        width:
+                                            MediaQuery.of(context).size.width /
+                                                1.2,
                                         constraints: BoxConstraints(
                                           maxWidth: 1400,
+                                          minHeight: 60,
                                         ),
-                                        child: Column(
-                                          children: [
-                                            CustomAppBar(
-                                              title: 'External People'.tr,
-                                              action: Row(
-                                                children: [
-                                                  ActionButton(
-                                                    label: 'Add New',
-                                                    icon: Icons.add,
-                                                    onPressed: () {
-                                                      Get.dialog<void>(
-                                                        addExternalEmployeeList(),
-                                                      );
-                                                    },
-                                                    color: ColorValues
-                                                        .appGreenColor,
-                                                  ),
-                                                ],
+                                        child: DataTable2(
+                                          border: TableBorder.all(
+                                            color: Colors.grey.withOpacity(0.3),
+                                          ),
+                                          columns: [
+                                            DataColumn2(
+                                              fixedWidth: 130,
+                                              label: Text(
+                                                "Employee ID",
                                               ),
                                             ),
-                                            Wrap(
-                                              children: [
-                                                Column(
-                                                  children: [
-                                                    SizedBox(
-                                                      width:
-                                                          MediaQuery.of(context)
-                                                                  .size
-                                                                  .width *
-                                                              2,
-                                                      child: Container(
-                                                        constraints:
-                                                            BoxConstraints(
-                                                          minHeight: 90,
-                                                        ),
-                                                        child:
-                                                            SingleChildScrollView(
-                                                          child: DataTable(
-                                                            border:
-                                                                TableBorder.all(
-                                                              color: Colors.grey
-                                                                  .withOpacity(
-                                                                      0.3),
-                                                            ),
-                                                            columns: [
-                                                              DataColumn(
-                                                                label: Text(
-                                                                  "Name",
-                                                                ),
-                                                              ),
-                                                              DataColumn(
-                                                                label: Text(
-                                                                  "Email",
-                                                                ),
-                                                              ),
-                                                              DataColumn(
-                                                                label: Text(
-                                                                  "Contact No",
-                                                                ),
-                                                              ),
-                                                              DataColumn(
-                                                                label: Text(
-                                                                  "Designation",
-                                                                ),
-                                                              ),
-                                                              DataColumn(
-                                                                label: Text(
-                                                                  "Action",
-                                                                ),
-                                                              ),
-                                                            ],
-                                                            rows: List<
-                                                                DataRow>.generate(
-                                                              controller
-                                                                  .externalEmployees
-                                                                  .length,
-                                                              (index) {
-                                                                var employee =
-                                                                    controller
-                                                                            .externalEmployees[
-                                                                        index];
-                                                                return DataRow(
-                                                                  cells: [
-                                                                    DataCell(
-                                                                      Text(
-                                                                        '${employee.employeeName ?? ''}',
-                                                                      ),
-                                                                    ),
-                                                                    DataCell(
-                                                                      Text(
-                                                                        '${employee.employeeEmail ?? ''}',
-                                                                      ),
-                                                                    ),
-                                                                    DataCell(
-                                                                      Text(
-                                                                        '${employee.employeeNumber ?? ''}',
-                                                                      ),
-                                                                    ),
-                                                                    DataCell(
-                                                                      Text(
-                                                                        '${employee.designation ?? ''}',
-                                                                      ),
-                                                                    ),
-                                                                    DataCell(
-                                                                      Wrap(
-                                                                        children: [
-                                                                          TableActionButton(
-                                                                            color:
-                                                                                Colors.red,
-                                                                            icon:
-                                                                                Icons.delete_outline,
-                                                                            message:
-                                                                                'Remove',
-                                                                            onPress:
-                                                                                () {
-                                                                              controller.removeItem(index);
-                                                                              print("index");
-                                                                            },
-                                                                          )
-                                                                        ],
-                                                                      ),
-                                                                    )
-                                                                  ],
-                                                                );
-                                                              },
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ],
+                                            DataColumn2(
+                                              size: ColumnSize.M,
+                                              label: Text(
+                                                "Employee Name",
+                                              ),
+                                            ),
+                                            DataColumn2(
+                                              size: ColumnSize.L,
+                                              label: Text(
+                                                "Email ID",
+                                              ),
+                                            ),
+                                            DataColumn2(
+                                              size: ColumnSize.S,
+                                              label: Text(
+                                                "Contact No",
+                                              ),
+                                            ),
+                                            DataColumn2(
+                                              fixedWidth: 100,
+                                              label: Text(
+                                                "Action",
+                                              ),
                                             ),
                                           ],
+                                          rows: List<DataRow>.generate(
+                                            controller.filteredEmployeeNameList
+                                                .length,
+                                            (index) {
+                                              var employeeNameDetails = controller
+                                                      .filteredEmployeeNameList[
+                                                  index];
+                                              return DataRow(
+                                                cells: [
+                                                  DataCell(
+                                                    Text(
+                                                      '${employeeNameDetails?.id ?? ''}',
+                                                    ),
+                                                  ),
+                                                  DataCell(
+                                                    Text(
+                                                      '${employeeNameDetails?.name ?? ''}',
+                                                    ),
+                                                  ),
+                                                  DataCell(
+                                                    Text(
+                                                      '${employeeNameDetails?.login_id ?? ''}',
+                                                    ),
+                                                  ),
+                                                  DataCell(
+                                                    Text(
+                                                      '${employeeNameDetails?.mobileNumber ?? ''}',
+                                                    ),
+                                                  ),
+                                                  DataCell(
+                                                    Wrap(
+                                                      children: [
+                                                        TableActionButton(
+                                                          color: Colors.red,
+                                                          icon: Icons
+                                                              .delete_outline,
+                                                          message: 'Remove',
+                                                          onPress: () {
+                                                            _removeRow(index);
+                                                            print("index");
+                                                          },
+                                                        )
+                                                      ],
+                                                    ),
+                                                  )
+                                                ],
+                                              );
+                                            },
+                                          ),
                                         ),
                                       ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              Dimens.boxHeight15,
+                              Center(
+                                child: Container(
+                                  height: 60,
+                                  width:
+                                      MediaQuery.of(context).size.width / 1.2,
+                                  decoration: BoxDecoration(
+                                    border: Border.all(
+                                      color: Colors.grey.withOpacity(.3),
                                     ),
+                                  ),
+                                  constraints: BoxConstraints(
+                                    maxWidth: 1400,
+                                  ),
+                                  child: CustomAppBar(
+                                    title: 'External People'.tr,
+                                    action: Row(
+                                      children: [
+                                        ActionButton(
+                                          label: 'Add New',
+                                          icon: Icons.add,
+                                          onPressed: () {
+                                            Get.dialog<void>(
+                                              addExternalEmployeeList(),
+                                            );
+                                          },
+                                          color: ColorValues.appGreenColor,
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              Obx(
+                                () => Center(
+                                  child: Wrap(
+                                    children: [
+                                      Container(
+                                        height: (controller
+                                                    .externalEmployees.length *
+                                                50) +
+                                            55,
+                                        width:
+                                            MediaQuery.of(context).size.width /
+                                                1.2,
+                                        constraints: BoxConstraints(
+                                          maxWidth: 1400,
+                                          minHeight: 60,
+                                        ),
+                                        child: DataTable2(
+                                          border: TableBorder.all(
+                                            color: Colors.grey.withOpacity(0.3),
+                                          ),
+                                          columns: [
+                                            DataColumn2(
+                                              size: ColumnSize.L,
+                                              label: Text(
+                                                "Name",
+                                              ),
+                                            ),
+                                            DataColumn2(
+                                              size: ColumnSize.L,
+                                              label: Text(
+                                                "Email",
+                                              ),
+                                            ),
+                                            DataColumn2(
+                                              size: ColumnSize.S,
+                                              label: Text(
+                                                "Contact No",
+                                              ),
+                                            ),
+                                            DataColumn2(
+                                              size: ColumnSize.S,
+                                              label: Text(
+                                                "Designation",
+                                              ),
+                                            ),
+                                            DataColumn2(
+                                              size: ColumnSize.L,
+                                              label: Text(
+                                                "Company",
+                                              ),
+                                            ),
+                                            DataColumn2(
+                                              fixedWidth: 100,
+                                              label: Text(
+                                                "Action",
+                                              ),
+                                            ),
+                                          ],
+                                          rows: List<DataRow>.generate(
+                                            controller.externalEmployees.length,
+                                            (index) {
+                                              var employee = controller
+                                                  .externalEmployees[index];
+                                              return DataRow(
+                                                cells: [
+                                                  DataCell(
+                                                    Text(
+                                                      '${employee.employeeName ?? ''}',
+                                                    ),
+                                                  ),
+                                                  DataCell(
+                                                    Text(
+                                                      '${employee.employeeEmail ?? ''}',
+                                                    ),
+                                                  ),
+                                                  DataCell(
+                                                    Text(
+                                                      '${employee.employeeNumber ?? ''}',
+                                                    ),
+                                                  ),
+                                                  DataCell(
+                                                    Text(
+                                                      '${employee.designation ?? ''}',
+                                                    ),
+                                                  ),
+                                                  DataCell(
+                                                    Text(
+                                                      '${employee.companyName ?? ''}',
+                                                    ),
+                                                  ),
+                                                  DataCell(
+                                                    Wrap(
+                                                      children: [
+                                                        TableActionButton(
+                                                          color: Colors.red,
+                                                          icon: Icons
+                                                              .delete_outline,
+                                                          message: 'Remove',
+                                                          onPress: () {
+                                                            controller
+                                                                .removeItem(
+                                                                    index);
+                                                            print("index");
+                                                          },
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ],
+                                              );
+                                            },
+                                          ),
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                 ),
                               ),
@@ -1039,7 +1019,7 @@ class ScheduleWeb extends GetView<ScheduleController> {
               return Container(
                 padding: EdgeInsets.all(15),
                 width: 430,
-                height: 220,
+                height: 255,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
@@ -1179,6 +1159,39 @@ class ScheduleWeb extends GetView<ScheduleController> {
                             focusNode: controller.employeeDesignationFocus,
                             scrollController:
                                 controller.employeeDesignationScroll,
+                          ),
+                        ),
+                      ],
+                    ),
+                    Dimens.boxHeight10,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        CustomRichText(title: "Company: "),
+                        Dimens.boxWidth10,
+                        Container(
+                          decoration: BoxDecoration(
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black26,
+                                offset: const Offset(
+                                  5.0,
+                                  5.0,
+                                ),
+                                blurRadius: 5.0,
+                                spreadRadius: 1.0,
+                              ),
+                            ],
+                            color: ColorValues.whiteColor,
+                            borderRadius: BorderRadius.circular(5),
+                          ),
+                          child: LoginCustomTextfield(
+                            width: (Get.width * .18),
+                            keyboardType: TextInputType.text,
+                            maxLine: 1,
+                            textController: controller.company,
+                            focusNode: controller.companyFocus,
+                            scrollController: controller.companyScroll,
                           ),
                         ),
                       ],
