@@ -158,7 +158,7 @@ class ImportDsmListChargesListContentWeb
                                       backgroundColor: ColorValues.approveColor,
                                       onPressed: () {
                                         controller
-                                            .goToImportDsmListChargesScreen();
+                                            .goToImportDsmChargesScreen();
                                       },
                                       text: '+ Upload Report ',
                                     ),

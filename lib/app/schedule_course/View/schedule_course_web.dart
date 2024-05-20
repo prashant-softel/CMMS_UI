@@ -464,6 +464,11 @@ class ScheduleWeb extends GetView<ScheduleController> {
                                                               ),
                                                               DataColumn(
                                                                 label: Text(
+                                                                  "Email ID",
+                                                                ),
+                                                              ),
+                                                              DataColumn(
+                                                                label: Text(
                                                                   "Contact No",
                                                                 ),
                                                               ),
@@ -485,12 +490,26 @@ class ScheduleWeb extends GetView<ScheduleController> {
                                                                         index];
                                                                 return DataRow(
                                                                   cells: [
-                                                                    DataCell(Text(
-                                                                        '${employeeNameDetails?.id ?? ''}')),
-                                                                    DataCell(Text(
-                                                                        '${employeeNameDetails?.name ?? ''}')),
-                                                                    DataCell(Text(
-                                                                        '${employeeNameDetails?.mobileNumber ?? ''}')),
+                                                                    DataCell(
+                                                                      Text(
+                                                                        '${employeeNameDetails?.id ?? ''}',
+                                                                      ),
+                                                                    ),
+                                                                    DataCell(
+                                                                      Text(
+                                                                        '${employeeNameDetails?.name ?? ''}',
+                                                                      ),
+                                                                    ),
+                                                                    DataCell(
+                                                                      Text(
+                                                                        '${employeeNameDetails?.login_id ?? ''}',
+                                                                      ),
+                                                                    ),
+                                                                    DataCell(
+                                                                      Text(
+                                                                        '${employeeNameDetails?.mobileNumber ?? ''}',
+                                                                      ),
+                                                                    ),
                                                                     DataCell(
                                                                       Wrap(
                                                                         children: [
@@ -602,7 +621,12 @@ class ScheduleWeb extends GetView<ScheduleController> {
                                                               ),
                                                               DataColumn(
                                                                 label: Text(
-                                                                  "Number",
+                                                                  "Contact No",
+                                                                ),
+                                                              ),
+                                                              DataColumn(
+                                                                label: Text(
+                                                                  "Designation",
                                                                 ),
                                                               ),
                                                               DataColumn(
@@ -636,6 +660,11 @@ class ScheduleWeb extends GetView<ScheduleController> {
                                                                     DataCell(
                                                                       Text(
                                                                         '${employee.employeeNumber ?? ''}',
+                                                                      ),
+                                                                    ),
+                                                                    DataCell(
+                                                                      Text(
+                                                                        '${employee.designation ?? ''}',
                                                                       ),
                                                                     ),
                                                                     DataCell(
@@ -938,7 +967,7 @@ class ScheduleWeb extends GetView<ScheduleController> {
                       ),
                       SizedBox(
                         width: 250,
-                        height: 120,
+                        height: 60,
                         child: CustomMultiSelectDialogField(
                           buttonText: 'Add Employee',
                           title: 'Select Employee',
@@ -1009,8 +1038,8 @@ class ScheduleWeb extends GetView<ScheduleController> {
             builder: (context) {
               return Container(
                 padding: EdgeInsets.all(15),
-                width: 400,
-                height: 200,
+                width: 430,
+                height: 220,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
@@ -1018,7 +1047,7 @@ class ScheduleWeb extends GetView<ScheduleController> {
                       color: ColorValues.greyLightColour,
                       thickness: 1,
                     ),
-                    Dimens.boxHeight30,
+                    Dimens.boxHeight20,
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -1116,6 +1145,40 @@ class ScheduleWeb extends GetView<ScheduleController> {
                             textController: controller.employeeNumber,
                             focusNode: controller.employeeNumberFocus,
                             scrollController: controller.employeeNumberScroll,
+                          ),
+                        ),
+                      ],
+                    ),
+                    Dimens.boxHeight10,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        CustomRichText(title: "Designation: "),
+                        Dimens.boxWidth10,
+                        Container(
+                          decoration: BoxDecoration(
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black26,
+                                offset: const Offset(
+                                  5.0,
+                                  5.0,
+                                ),
+                                blurRadius: 5.0,
+                                spreadRadius: 1.0,
+                              ),
+                            ],
+                            color: ColorValues.whiteColor,
+                            borderRadius: BorderRadius.circular(5),
+                          ),
+                          child: LoginCustomTextfield(
+                            width: (Get.width * .18),
+                            keyboardType: TextInputType.text,
+                            maxLine: 1,
+                            textController: controller.employeeDesignation,
+                            focusNode: controller.employeeDesignationFocus,
+                            scrollController:
+                                controller.employeeDesignationScroll,
                           ),
                         ),
                       ],

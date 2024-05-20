@@ -1,3 +1,4 @@
+import 'package:cmms/app/controllers/file_upload_controller.dart';
 import 'package:cmms/app/create_observation/create_observation_controller.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
@@ -5,6 +6,8 @@ import 'package:cmms/app/stock_managment_add_goods_orders.dart/view/stock_manage
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/custom_textField.dart';
+import 'package:cmms/app/widgets/file_upload_widget_web2.dart';
+import 'package:cmms/app/widgets/file_upload_with_dropzone_widget.dart';
 import 'package:cmms/app/widgets/stock_dropdown.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -22,6 +25,10 @@ class CreateObservationWeb extends StatefulWidget {
 }
 
 class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
+  final HomeController homecontroller = Get.find();
+  final FileUploadController dropzoneController = Get.put(
+    FileUploadController(),
+  );
   @override
   Widget build(BuildContext context) {
     return GetBuilder<CreateObservationController>(
@@ -105,78 +112,6 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                                           ],
                                                           // textController:
                                                           //     controller.challanNoCtrlr,
-                                                        ),
-                                                      ],
-                                                    ),
-                                                    Dimens.boxHeight5,
-                                                    Row(
-                                                      children: [
-                                                        CustomRichText(
-                                                            title:
-                                                                'Date of Observation'),
-                                                        Dimens.boxWidth10,
-                                                        CustomTextFieldForStock(
-                                                          width: MediaQuery.of(
-                                                                      context)
-                                                                  .size
-                                                                  .width /
-                                                              5,
-                                                          numberTextField: true,
-                                                          onTap: () {
-                                                            // controller
-                                                            //         .openReceivedPicker =
-                                                            //     !controller
-                                                            //         .openReceivedPicker;
-                                                            // controller.update(
-                                                            //     ['stock_Mangement']);
-                                                          },
-                                                          // textController:
-                                                          //     controller.receivedDateTc,
-                                                        ),
-                                                      ],
-                                                    ),
-                                                    Dimens.boxHeight5,
-                                                    Row(
-                                                      children: [
-                                                        CustomRichText(
-                                                            title:
-                                                                'Type of Observation'),
-                                                        Dimens.boxWidth10,
-                                                        Container(
-                                                          decoration:
-                                                              BoxDecoration(
-                                                            // boxShadow: [
-                                                            //   BoxShadow(
-                                                            //     color: Colors
-                                                            //         .black26,
-                                                            //     offset:
-                                                            //         const Offset(
-                                                            //       5.0,
-                                                            //       5.0,
-                                                            //     ),
-                                                            //     blurRadius: 5.0,
-                                                            //     spreadRadius: 1.0,
-                                                            //   ),
-                                                            // ],
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        5),
-                                                          ),
-                                                          child:
-                                                              DropdownWebStock(
-                                                            width: MediaQuery.of(
-                                                                        context)
-                                                                    .size
-                                                                    .width /
-                                                                5,
-                                                            dropdownList: controller
-                                                                .typeOfObservation,
-                                                            // selectedValue: ,
-                                                            onValueChanged:
-                                                                (typeOfObservation,
-                                                                    selectedValue) {},
-                                                          ),
                                                         ),
                                                       ],
                                                     ),
@@ -273,6 +208,28 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                                     Row(
                                                       children: [
                                                         CustomRichText(
+                                                            title:
+                                                                'Contact Number'),
+                                                        Dimens.boxWidth10,
+                                                        LoginCustomTextfield(
+                                                          width: (MediaQuery.of(
+                                                                      context)
+                                                                  .size
+                                                                  .width *
+                                                              .2),
+                                                          keyboardType:
+                                                              TextInputType
+                                                                  .number,
+
+                                                          // textController:
+                                                          //     controller.challanNoCtrlr,
+                                                        ),
+                                                      ],
+                                                    ),
+                                                    Dimens.boxHeight5,
+                                                    Row(
+                                                      children: [
+                                                        CustomRichText(
                                                             title: 'Cost type'),
                                                         Dimens.boxWidth10,
                                                         Container(
@@ -349,6 +306,78 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                                   crossAxisAlignment:
                                                       CrossAxisAlignment.end,
                                                   children: [
+                                                    Dimens.boxWidth5,
+                                                    Row(
+                                                      children: [
+                                                        CustomRichText(
+                                                            title:
+                                                                'Date of Observation'),
+                                                        Dimens.boxWidth10,
+                                                        CustomTextFieldForStock(
+                                                          width: MediaQuery.of(
+                                                                      context)
+                                                                  .size
+                                                                  .width /
+                                                              5,
+                                                          numberTextField: true,
+                                                          onTap: () {
+                                                            // controller
+                                                            //         .openReceivedPicker =
+                                                            //     !controller
+                                                            //         .openReceivedPicker;
+                                                            // controller.update(
+                                                            //     ['stock_Mangement']);
+                                                          },
+                                                          // textController:
+                                                          //     controller.receivedDateTc,
+                                                        ),
+                                                      ],
+                                                    ),
+                                                    Dimens.boxHeight5,
+                                                    Row(
+                                                      children: [
+                                                        CustomRichText(
+                                                            title:
+                                                                'Type of Observation'),
+                                                        Dimens.boxWidth10,
+                                                        Container(
+                                                          decoration:
+                                                              BoxDecoration(
+                                                            // boxShadow: [
+                                                            //   BoxShadow(
+                                                            //     color: Colors
+                                                            //         .black26,
+                                                            //     offset:
+                                                            //         const Offset(
+                                                            //       5.0,
+                                                            //       5.0,
+                                                            //     ),
+                                                            //     blurRadius: 5.0,
+                                                            //     spreadRadius: 1.0,
+                                                            //   ),
+                                                            // ],
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        5),
+                                                          ),
+                                                          child:
+                                                              DropdownWebStock(
+                                                            width: MediaQuery.of(
+                                                                        context)
+                                                                    .size
+                                                                    .width /
+                                                                5,
+                                                            dropdownList: controller
+                                                                .typeOfObservation,
+                                                            // selectedValue: ,
+                                                            onValueChanged:
+                                                                (typeOfObservation,
+                                                                    selectedValue) {},
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
                                                     Dimens.boxHeight5,
                                                     Row(
                                                       children: [
@@ -417,28 +446,28 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                                       ],
                                                     ),
                                                     Dimens.boxHeight5,
-                                                    Row(
-                                                      children: [
-                                                        CustomRichText(
-                                                            title:
-                                                                'Action Taken'),
-                                                        Dimens.boxWidth10,
-                                                        LoginCustomTextfield(
-                                                          width: (MediaQuery.of(
-                                                                      context)
-                                                                  .size
-                                                                  .width *
-                                                              .2),
-                                                          keyboardType:
-                                                              TextInputType
-                                                                  .number,
+                                                    // Row(
+                                                    //   children: [
+                                                    //     CustomRichText(
+                                                    //         title:
+                                                    //             'Action Taken'),
+                                                    //     Dimens.boxWidth10,
+                                                    //     LoginCustomTextfield(
+                                                    //       width: (MediaQuery.of(
+                                                    //                   context)
+                                                    //               .size
+                                                    //               .width *
+                                                    //           .2),
+                                                    //       keyboardType:
+                                                    //           TextInputType
+                                                    //               .number,
 
-                                                          // textController:
-                                                          //     controller.challanNoCtrlr,
-                                                        ),
-                                                      ],
-                                                    ),
-                                                    Dimens.boxHeight5,
+                                                    //       // textController:
+                                                    //       //     controller.challanNoCtrlr,
+                                                    //     ),
+                                                    //   ],
+                                                    // ),
+                                                    // Dimens.boxHeight5,
                                                     Row(
                                                       children: [
                                                         CustomRichText(
@@ -466,54 +495,33 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                                       ],
                                                     ),
                                                     Dimens.boxHeight5,
-                                                    Row(
-                                                      children: [
-                                                        CustomRichText(
-                                                            title:
-                                                                'Closer Date'),
-                                                        Dimens.boxWidth10,
-                                                        CustomTextFieldForStock(
-                                                          width: MediaQuery.of(
-                                                                      context)
-                                                                  .size
-                                                                  .width /
-                                                              5,
-                                                          numberTextField: true,
-                                                          onTap: () {
-                                                            // controller
-                                                            //         .openReceivedPicker =
-                                                            //     !controller
-                                                            //         .openReceivedPicker;
-                                                            // controller.update(
-                                                            //     ['stock_Mangement']);
-                                                          },
-                                                          // textController:
-                                                          //     controller.receivedDateTc,
-                                                        ),
-                                                      ],
-                                                    ),
-                                                    Dimens.boxHeight5,
-                                                    Row(
-                                                      children: [
-                                                        CustomRichText(
-                                                            title:
-                                                                'Contact Number'),
-                                                        Dimens.boxWidth10,
-                                                        LoginCustomTextfield(
-                                                          width: (MediaQuery.of(
-                                                                      context)
-                                                                  .size
-                                                                  .width *
-                                                              .2),
-                                                          keyboardType:
-                                                              TextInputType
-                                                                  .number,
-
-                                                          // textController:
-                                                          //     controller.challanNoCtrlr,
-                                                        ),
-                                                      ],
-                                                    ),
+                                                    // Row(
+                                                    //   children: [
+                                                    //     CustomRichText(
+                                                    //         title:
+                                                    //             'Closer Date'),
+                                                    //     Dimens.boxWidth10,
+                                                    //     CustomTextFieldForStock(
+                                                    //       width: MediaQuery.of(
+                                                    //                   context)
+                                                    //               .size
+                                                    //               .width /
+                                                    //           5,
+                                                    //       numberTextField: true,
+                                                    //       onTap: () {
+                                                    //         // controller
+                                                    //         //         .openReceivedPicker =
+                                                    //         //     !controller
+                                                    //         //         .openReceivedPicker;
+                                                    //         // controller.update(
+                                                    //         //     ['stock_Mangement']);
+                                                    //       },
+                                                    //       // textController:
+                                                    //       //     controller.receivedDateTc,
+                                                    //     ),
+                                                    //   ],
+                                                    // ),
+                                                    // Dimens.boxHeight5,
                                                   ],
                                                 ),
                                                 Spacer(),
@@ -569,6 +577,39 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                                   ),
                                                 ),
                                               ]),
+                                            ),
+                                            Dimens.boxHeight15,
+                                            Center(
+                                              child: Container(
+                                                height: Get.height * 0.2,
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width /
+                                                    1.2,
+                                                constraints: BoxConstraints(
+                                                    maxWidth: 1400),
+                                                padding: EdgeInsets.all(10),
+                                                child: Row(
+                                                  children: [
+                                                    Expanded(
+                                                      flex: 2,
+                                                      child:
+                                                          FileUploadWidgetWithDropzone(),
+                                                    ),
+                                                    Dimens.boxWidth10,
+                                                    Expanded(
+                                                      flex: 8,
+                                                      child: Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .only(top: 15),
+                                                        child:
+                                                            FileUploadDetailsWidgetWeb2(),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
                                             ),
                                             Dimens.boxHeight15,
                                             Row(
