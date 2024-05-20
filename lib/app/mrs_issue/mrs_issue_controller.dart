@@ -29,42 +29,49 @@ class MrsIssueController extends GetxController {
   RxList<GetAssetItemsModel?> cmmrsItemsDetail = <GetAssetItemsModel>[].obs;
   String whereUsedType = "";
   var commentCtrlr = TextEditingController();
+  // final List<TextEditingController> _textcontrollers = [];
+  // final List<String?> errorMessages = [];
+  var _textcontrollers = <TextEditingController>[].obs;
+  var errorMessages = <String?>[].obs;
 
   ///
   @override
+  void onClose() {
+    // Dispose controllers
+    for (var controller in _textcontrollers) {
+      controller.dispose();
+    }
+    super.onClose();
+  }
+
+  void clearErrorMessage(int index) {
+    if (errorMessages[index] != null) {
+      //setState(() {
+      errorMessages[index] = null;
+      // });
+    }
+  }
+
+  @override
   void onInit() async {
-    facilityIdStreamSubscription =
-        homeController.facilityId$.listen((event) async {
-      facilityId = event;
-      if (facilityId > 0) {
-        isFacilitySelected.value = true;
-      }
-      Future.delayed(Duration(seconds: 1), () {
-        getMrsDetails(
-            mrsId: mrsId.value, isloading: true, facilityId: facilityId);
-      });
-    });
     try {
       await setMrsId();
+      facilityIdStreamSubscription =
+          homeController.facilityId$.listen((event) async {
+        facilityId = event;
+        if (facilityId > 0) {
+          isFacilitySelected.value = true;
+        }
+        if (mrsId != 0) {
+          getMrsDetails(
+              mrsId: mrsId.value, isloading: true, facilityId: facilityId);
+        }
+      });
 
-      if (mrsId != 0) {
-        await getMrsDetails(
-            mrsId: mrsId.value, isloading: true, facilityId: facilityId);
-      }
       super.onInit();
     } catch (e) {
       print(e);
     }
-  }
-
-  void validateForm() {
-    isFormValid.value = mrsDetailsModel.value!.cmmrsItems!.every((item) =>
-        item.asset_type != 'Spare' ||
-        (item.serial_number_controller!.text.isNotEmpty &&
-            item.issued_qty_controller!.text.isNotEmpty &&
-            double.tryParse(item.issued_qty_controller!.text) != null &&
-            double.parse(item.issued_qty_controller!.text) <=
-                item.requested_qty!));
   }
 
   Future<void> setMrsId() async {
@@ -92,6 +99,12 @@ class MrsIssueController extends GetxController {
       mrsDetailsModel.value = _mrsDetailsModel;
       cmmrsItemsDetail.value = _mrsDetailsModel.cmmrsItems ?? [];
       // whereUsedType = mrsDetailsModel.value?.whereUsedType == 1 ? "JC" : "PM";
+      for (int i = 0; i < cmmrsItemsDetail.length; i++) {
+        // Assuming 5 rows for the example
+        _textcontrollers.add(TextEditingController());
+        errorMessages.add(null);
+        _textcontrollers[i].addListener(() => clearErrorMessage(i));
+      }
     }
     // print({"mrsdetailss", mrsDetailsModel});
   }
@@ -116,13 +129,9 @@ class MrsIssueController extends GetxController {
         isLoading: true,
       );
       if (response == true) {
-        final _flutterSecureStorage = const FlutterSecureStorage();
-
-        _flutterSecureStorage.delete(key: "mrsId");
         Get.offAllNamed(Routes.mrsListScreen);
       }
-    }
-    else {
+    } else {
       Utility.showDialog("Issue", "Please fill all the required fields");
     }
   }

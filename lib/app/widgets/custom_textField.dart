@@ -27,7 +27,7 @@ class LoginCustomTextfield extends GetView {
   double? width;
   ScrollController? scrollController;
   InputDecoration? decoration;
-  
+  String? Function(String?)? validator;
 
   LoginCustomTextfield({
     Key? key,
@@ -41,8 +41,8 @@ class LoginCustomTextfield extends GetView {
     this.obscureText = false,
     this.textController,
     this.widget,
-    this.errorController,
     this.onChanged,
+    this.errorController,
     this.onfieldSubmitted,
     this.maxLine = 1,
     this.enabled = true,
@@ -52,6 +52,7 @@ class LoginCustomTextfield extends GetView {
     this.readOnly = false,
     this.width,
     this.scrollController,
+    this.validator,
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -68,7 +69,7 @@ class LoginCustomTextfield extends GetView {
         // keyboardType:keyboardType,
         enabled: enabled,
         onFieldSubmitted: onfieldSubmitted,
-        onTap: ontap,
+        onTap: ontap, validator: validator,
         maxLines: maxLine,
         onChanged: onChanged,
         controller: textController,
