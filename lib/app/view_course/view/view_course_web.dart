@@ -5,8 +5,10 @@ import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/view_course/view_course_controller.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
+import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ViewCourseWeb extends GetView<ViewCourseController> {
   ViewCourseWeb({Key? key}) : super(key: key);
@@ -174,128 +176,6 @@ class ViewCourseWeb extends GetView<ViewCourseController> {
                                       ],
                                     ),
                                   ),
-                                  // Container(
-                                  //   width: Get.width * .43,
-                                  //   child: Row(
-                                  //     children: [
-                                  //       SizedBox(
-                                  //         child: Column(
-                                  //           mainAxisAlignment:
-                                  //               MainAxisAlignment.start,
-                                  //           crossAxisAlignment:
-                                  //               CrossAxisAlignment.start,
-                                  //           children: [
-                                  //             Text(
-                                  //               "Topic: ",
-                                  //               style: Styles.black17,
-                                  //             ),
-                                  //             Dimens.boxHeight5,
-                                  //             Text(
-                                  //               "Category: ",
-                                  //               style: Styles.black17,
-                                  //             ),
-                                  //             Dimens.boxHeight5,
-                                  //             Text(
-                                  //               "Targatted Group: ",
-                                  //               style: Styles.black17,
-                                  //             ),
-                                  //           ],
-                                  //         ),
-                                  //       ),
-                                  //       Spacer(),
-                                  //       SizedBox(
-                                  //         child: Column(
-                                  //           mainAxisAlignment:
-                                  //               MainAxisAlignment.start,
-                                  //           crossAxisAlignment:
-                                  //               CrossAxisAlignment.start,
-                                  //           children: [
-                                  //             Text(
-                                  //               "${controller.trainingCourse.name}",
-                                  //               style: Styles.blue17,
-                                  //             ),
-                                  //             Dimens.boxHeight5,
-                                  //             Text(
-                                  //               "${controller.trainingCourse.categoryName}",
-                                  //               style: Styles.blue17,
-                                  //             ),
-                                  //             Dimens.boxHeight5,
-                                  //             Text(
-                                  //               "${controller.trainingCourse.groupName}",
-                                  //               style: Styles.blue17,
-                                  //             ),
-                                  //           ],
-                                  //         ),
-                                  //       ),
-                                  //       Spacer(),
-                                  //     ],
-                                  //   ),
-                                  // ),
-                                  // Spacer(),
-                                  // Container(
-                                  //   width: Get.width * .4,
-                                  //   child: Row(
-                                  //     children: [
-                                  //       SizedBox(
-                                  //         child: Column(
-                                  //           mainAxisAlignment:
-                                  //               MainAxisAlignment.start,
-                                  //           crossAxisAlignment:
-                                  //               CrossAxisAlignment.start,
-                                  //           children: [
-                                  //             Text(
-                                  //               "No of Days: ",
-                                  //               style: Styles.black17,
-                                  //             ),
-                                  //             Dimens.boxHeight5,
-                                  //             Text(
-                                  //               "Duration In Minutes: ",
-                                  //               style: Styles.black17,
-                                  //             ),
-                                  //             Dimens.boxHeight5,
-                                  //             Text(
-                                  //               "Maximum Capacity: ",
-                                  //               style: Styles.black17,
-                                  //             ),
-                                  //           ],
-                                  //         ),
-                                  //       ),
-                                  //       Spacer(),
-                                  //       SizedBox(
-                                  //         child: Column(
-                                  //           mainAxisAlignment:
-                                  //               MainAxisAlignment.start,
-                                  //           crossAxisAlignment:
-                                  //               CrossAxisAlignment.start,
-                                  //           children: [
-                                  //             SizedBox(
-                                  //               child: Text(
-                                  //                 "${controller.trainingCourse.numberOfDays}",
-                                  //                 style: Styles.blue17,
-                                  //               ),
-                                  //             ),
-                                  //             Dimens.boxHeight5,
-                                  //             SizedBox(
-                                  //               child: Text(
-                                  //                 "${controller.trainingCourse.duration}",
-                                  //                 style: Styles.blue17,
-                                  //               ),
-                                  //             ),
-                                  //             Dimens.boxHeight5,
-                                  //             SizedBox(
-                                  //               child: Text(
-                                  //                 "${controller.trainingCourse.maximumCapicity}",
-                                  //                 style: Styles.blue17,
-                                  //               ),
-                                  //             ),
-                                  //           ],
-                                  //         ),
-                                  //       ),
-                                  //       Spacer(),
-                                  //       Spacer(),
-                                  //     ],
-                                  //   ),
-                                  // ),
                                 ],
                               ),
                               Dimens.boxHeight20,
@@ -311,6 +191,118 @@ class ViewCourseWeb extends GetView<ViewCourseController> {
                                   ),
                                 ],
                               ),
+                              Dimens.boxHeight15,
+                               Container(
+                                margin: Dimens.edgeInsets20,
+                                height:
+                                    ((controller.file_list?.length ?? 0) * 40) +
+                                        130,
+                                decoration: BoxDecoration(
+                                  border: Border.all(
+                                    color:
+                                        ColorValues.lightGreyColorWithOpacity35,
+                                    width: 1,
+                                  ),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: ColorValues.appBlueBackgroundColor,
+                                      spreadRadius: 2,
+                                      blurRadius: 5,
+                                      offset: Offset(0, 2),
+                                    ),
+                                  ],
+                                ),
+                                child: Column(
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.all(10.0),
+                                      child: Row(
+                                        children: [
+                                          Text(
+                                            'Attachments',
+                                            style: Styles.blue700,
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    Expanded(
+                                      child: DataTable2(
+                                        border: TableBorder.all(
+                                          color: Color.fromARGB(
+                                              255, 206, 229, 234),
+                                        ),
+                                        columns: [
+                                          DataColumn(
+                                            label: Text(
+                                              "File Description",
+                                              style: TextStyle(
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                          ),
+                                          DataColumn(
+                                            label: Text(
+                                              "View Image",
+                                              style: TextStyle(
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                        rows: List<DataRow>.generate(
+                                          controller.file_list?.length ?? 0,
+                                          (index) => DataRow(
+                                            cells: [
+                                              DataCell(Text(
+                                                controller.file_list![index]
+                                                        ?.description
+                                                        .toString() ??
+                                                    '',
+                                              )),
+                                              DataCell(
+                                                // Text("View Image"),
+                                                Wrap(
+                                                  children: [
+                                                    TableActionButton(
+                                                      color: ColorValues
+                                                          .appDarkBlueColor,
+                                                      icon: Icons.visibility,
+                                                      message: 'view attachment',
+                                                      onPress: () async {
+                                                        String baseUrl =
+                                                            "http://65.0.20.19/CMMS_API/";
+                                                        // String baseUrl =
+                                                        // 'http://172.20.43.9:83/';
+                                                        String fileName =
+                                                            controller
+                                                                    .file_list![
+                                                                        index]
+                                                                    ?.fileName ??
+                                                                "";
+                                                        String fullUrl =
+                                                            baseUrl + fileName;
+                                                        if (await canLaunch(
+                                                            fullUrl)) {
+                                                          await launch(fullUrl);
+                                                        } else {
+                                                          throw 'Could not launch $fullUrl';
+                                                        }
+                                                      },
+                                                    )
+                                                  ],
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              
                             ],
                           ),
                         ),

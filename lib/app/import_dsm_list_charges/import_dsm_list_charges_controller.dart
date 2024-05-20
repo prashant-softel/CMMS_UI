@@ -1,3 +1,4 @@
+import 'package:cmms/app/app.dart';
 import 'package:cmms/app/import_dsm_list_charges/import_dsm_list_charges_presenter.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/domain/models/SPV_list_model.dart';
@@ -123,6 +124,7 @@ class ImportDsmListChargesListController extends GetxController {
         getSpvList();
         getStateList(101);
         generateFinancialYears(20);
+        getDSMDataList();
       });
     } catch (e) {
       print("DSM Error: $e");
@@ -304,9 +306,11 @@ class ImportDsmListChargesListController extends GetxController {
     print("${dsmDataList.length}");
   }
 
-  Future<void> goToImportDsmListChargesScreen() async {
+    Future<void> goToImportDsmChargesScreen() async {
+    clearStoreData();
     Get.toNamed(
-      Routes.importDsmListChargesListScreen,
+      Routes.importInventory,
+      arguments: {'importType': AppConstants.kImportDSMReport},
     );
   }
 

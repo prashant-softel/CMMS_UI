@@ -1,19 +1,26 @@
 import 'package:cmms/app/add_training_course/add_course_controller.dart';
 import 'package:cmms/app/app.dart';
+import 'package:cmms/app/controllers/file_upload_controller.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/custom_textField.dart';
 import 'package:cmms/app/widgets/dropdown_web.dart';
+import 'package:cmms/app/widgets/file_upload_widget_web2.dart';
+import 'package:cmms/app/widgets/file_upload_with_dropzone_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class AddCourseWeb extends GetView<AddCourseController> {
   AddCourseWeb({Key? key}) : super(key: key);
 
   final HomeController homecontroller = Get.find();
+  final FileUploadController dropzoneController = Get.put(
+    FileUploadController(),
+  );
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -390,136 +397,164 @@ class AddCourseWeb extends GetView<AddCourseController> {
                                     ],
                                   ),
                                 ),
-                                // Row(
-                                //   crossAxisAlignment: CrossAxisAlignment.start,
-                                //   children: [
-                                //     Container(
-                                //       margin: EdgeInsets.only(left: 40),
-                                //       child: Row(
-                                //         children: [
-                                //           CustomRichText(
-                                //               title: 'Description: '),
-                                //           Dimens.boxWidth10,
-                                //           Container(
-                                //             decoration: BoxDecoration(
-                                //               borderRadius:
-                                //                   BorderRadius.circular(10),
-                                //               border: Border.all(
-                                //                 color: Color.fromARGB(
-                                //                     255, 227, 224, 224),
-                                //                 width: 1,
-                                //               ),
-                                //               boxShadow: [
-                                //                 BoxShadow(
-                                //                   color: Color.fromARGB(
-                                //                           255, 236, 234, 234)
-                                //                       .withOpacity(0.5),
-                                //                   spreadRadius: 2,
-                                //                   blurRadius: 5,
-                                //                   offset: Offset(0, 2),
-                                //                 ),
-                                //               ],
-                                //             ),
-                                //             width: (MediaQuery.of(context)
-                                //                     .size
-                                //                     .width *
-                                //                 .5),
-                                //             child: Obx(
-                                //               () => TextField(
-                                //                 style: GoogleFonts.lato(
-                                //                   textStyle: TextStyle(
-                                //                       fontSize: 16.0,
-                                //                       height: 1.0,
-                                //                       color: Colors.black),
-                                //                 ),
-                                //                 controller:
-                                //                     controller.descCtrlr,
-                                //                 scrollController:
-                                //                     controller.descScroll,
-                                //                 focusNode: controller.descFocus,
-                                //                 keyboardType:
-                                //                     TextInputType.multiline,
-                                //                 maxLines: 4,
-                                //                 autofocus: false,
-                                //                 decoration: InputDecoration(
-                                //                   fillColor:
-                                //                       ColorValues.whiteColor,
-                                //                   filled: true,
-                                //                   contentPadding:
-                                //                       Dimens.edgeInsets05_10,
-                                //                   border: InputBorder.none,
-                                //                   enabledBorder:
-                                //                       OutlineInputBorder(
-                                //                     borderRadius:
-                                //                         BorderRadius.circular(
-                                //                             10.0),
-                                //                     borderSide: BorderSide(
-                                //                         color:
-                                //                             Colors.transparent),
-                                //                   ),
-                                //                   focusedBorder:
-                                //                       OutlineInputBorder(
-                                //                     borderRadius:
-                                //                         BorderRadius.circular(
-                                //                             10.0),
-                                //                     borderSide: BorderSide(
-                                //                         color:
-                                //                             Colors.transparent),
-                                //                   ),
-                                //                   focusedErrorBorder: controller
-                                //                           .isDescriptionInvalid
-                                //                           .value
-                                //                       ? OutlineInputBorder(
-                                //                           borderRadius:
-                                //                               BorderRadius
-                                //                                   .circular(5),
-                                //                           borderSide:
-                                //                               BorderSide(
-                                //                             color: ColorValues
-                                //                                 .redColorDark,
-                                //                           ),
-                                //                         )
-                                //                       : InputBorder.none,
-                                //                   errorBorder: controller
-                                //                           .isDescriptionInvalid
-                                //                           .value
-                                //                       ? OutlineInputBorder(
-                                //                           borderRadius:
-                                //                               BorderRadius
-                                //                                   .circular(5),
-                                //                           borderSide:
-                                //                               BorderSide(
-                                //                             color: ColorValues
-                                //                                 .redColorDark,
-                                //                           ),
-                                //                         )
-                                //                       : null,
-                                //                   errorText: controller
-                                //                           .isDescriptionInvalid
-                                //                           .value
-                                //                       ? "Required field"
-                                //                       : null,
-                                //                 ),
-                                //                 onChanged: (value) {
-                                //                   if (value.trim().length >=
-                                //                       1) {
-                                //                     controller
-                                //                         .isDescriptionInvalid
-                                //                         .value = false;
-                                //                   } else {
-                                //                     controller
-                                //                         .isDescriptionInvalid
-                                //                         .value = true;
-                                //                   }
-                                //                 },
-                                //               ),
-                                //             ),
-                                //           ),
-                                //         ],
-                                //       ),
-                                //     ),
-                                //   ],
-                                // ),
+                                Row(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Container(
+                                      margin: EdgeInsets.only(left: 40),
+                                      child: Row(
+                                        children: [
+                                          CustomRichText(
+                                              title: 'Description: '),
+                                          Dimens.boxWidth10,
+                                          Container(
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                              border: Border.all(
+                                                color: Color.fromARGB(
+                                                    255, 227, 224, 224),
+                                                width: 1,
+                                              ),
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: Color.fromARGB(
+                                                          255, 236, 234, 234)
+                                                      .withOpacity(0.5),
+                                                  spreadRadius: 2,
+                                                  blurRadius: 5,
+                                                  offset: Offset(0, 2),
+                                                ),
+                                              ],
+                                            ),
+                                            width: (MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                .5),
+                                            child: Obx(
+                                              () => TextField(
+                                                style: GoogleFonts.lato(
+                                                  textStyle: TextStyle(
+                                                    fontSize: 16.0,
+                                                    height: 1.0,
+                                                    color: Colors.black,
+                                                  ),
+                                                ),
+                                                controller:
+                                                    controller.descCtrlr,
+                                                scrollController:
+                                                    controller.descScroll,
+                                                focusNode: controller.descFocus,
+                                                keyboardType:
+                                                    TextInputType.multiline,
+                                                maxLines: 4,
+                                                autofocus: false,
+                                                decoration: InputDecoration(
+                                                  fillColor:
+                                                      ColorValues.whiteColor,
+                                                  filled: true,
+                                                  contentPadding:
+                                                      Dimens.edgeInsets05_10,
+                                                  border: InputBorder.none,
+                                                  enabledBorder:
+                                                      OutlineInputBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            10.0),
+                                                    borderSide: BorderSide(
+                                                        color:
+                                                            Colors.transparent),
+                                                  ),
+                                                  focusedBorder:
+                                                      OutlineInputBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            10.0),
+                                                    borderSide: BorderSide(
+                                                        color:
+                                                            Colors.transparent),
+                                                  ),
+                                                  focusedErrorBorder: controller
+                                                          .isDescriptionInvalid
+                                                          .value
+                                                      ? OutlineInputBorder(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(5),
+                                                          borderSide:
+                                                              BorderSide(
+                                                            color: ColorValues
+                                                                .redColorDark,
+                                                          ),
+                                                        )
+                                                      : InputBorder.none,
+                                                  errorBorder: controller
+                                                          .isDescriptionInvalid
+                                                          .value
+                                                      ? OutlineInputBorder(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(5),
+                                                          borderSide:
+                                                              BorderSide(
+                                                            color: ColorValues
+                                                                .redColorDark,
+                                                          ),
+                                                        )
+                                                      : null,
+                                                  errorText: controller
+                                                          .isDescriptionInvalid
+                                                          .value
+                                                      ? "Required field"
+                                                      : null,
+                                                ),
+                                                onChanged: (value) {
+                                                  if (value.trim().length >=
+                                                      1) {
+                                                    controller
+                                                        .isDescriptionInvalid
+                                                        .value = false;
+                                                  } else {
+                                                    controller
+                                                        .isDescriptionInvalid
+                                                        .value = true;
+                                                  }
+                                                },
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                Center(
+                                  child: Container(
+                                    height: Get.height * 0.2,
+                                    width:
+                                        MediaQuery.of(context).size.width / 1.2,
+                                    constraints: BoxConstraints(maxWidth: 1400),
+                                    padding: EdgeInsets.all(10),
+                                    child: Row(
+                                      children: [
+                                        Expanded(
+                                          flex: 2,
+                                          child: FileUploadWidgetWithDropzone(),
+                                        ),
+                                        Dimens.boxWidth10,
+                                        Expanded(
+                                          flex: 8,
+                                          child: Padding(
+                                            padding:
+                                                const EdgeInsets.only(top: 15),
+                                            child:
+                                                FileUploadDetailsWidgetWeb2(),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
                               ],
                             ),
                           ),
