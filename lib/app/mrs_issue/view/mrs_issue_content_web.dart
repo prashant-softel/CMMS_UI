@@ -241,267 +241,223 @@ class MrsIssueContentWeb extends GetView<MrsIssueController> {
                                       ),
                                     ),
                                     Expanded(
-                                      //       // "Image",
-                                      child: DataTable2(
-                                        border: TableBorder.all(
-                                            color: Color.fromARGB(
-                                                255, 206, 229, 234)),
-                                        columns: [
-                                          DataColumn(
-                                              label: Text(
-                                            "Material Name",
-                                            style: TextStyle(
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.bold),
-                                          )),
-                                          DataColumn(
-                                              label: Text(
-                                            "Asset Type",
-                                            style: TextStyle(
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.bold),
-                                          )),
-                                          DataColumn(
-                                              label: Text(
-                                            "Available Qty.",
-                                            style: TextStyle(
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.bold),
-                                          )),
-                                          DataColumn(
-                                              label: Text(
-                                            "Requested Qty.",
-                                            style: TextStyle(
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.bold),
-                                          )),
-                                          DataColumn(
-                                              label: Text(
-                                            "Approved Qty.",
-                                            style: TextStyle(
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.bold),
-                                          )),
-                                          DataColumn(
-                                              label: Text(
-                                            "Serial Number",
-                                            style: TextStyle(
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.bold),
-                                          )),
-                                          DataColumn(
-                                              label: Text(
-                                            "Issued Qty.",
-                                            style: TextStyle(
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.bold),
-                                          )),
-                                        ],
-                                        rows: List<DataRow>.generate(
-                                            controller.mrsDetailsModel.value!
-                                                .cmmrsItems!.length,
-                                            (index) => DataRow(cells: [
-                                                  DataCell(Text(controller
-                                                      .mrsDetailsModel
-                                                      .value!
-                                                      .cmmrsItems![index]
-                                                      .asset_name
-                                                      .toString())),
-                                                  DataCell(Text(controller
-                                                      .mrsDetailsModel
-                                                      .value!
-                                                      .cmmrsItems![index]
-                                                      .asset_type
-                                                      .toString())),
-                                                  DataCell(Text(controller
-                                                      .mrsDetailsModel
-                                                      .value!
-                                                      .cmmrsItems![index]
-                                                      .available_qty
-                                                      .toString())),
-                                                  DataCell(Text(controller
-                                                      .mrsDetailsModel
-                                                      .value!
-                                                      .cmmrsItems![index]
-                                                      .requested_qty
-                                                      .toString())),
-                                                  DataCell(Text(controller
-                                                      .mrsDetailsModel
-                                                      .value!
-                                                      .cmmrsItems![index]
-                                                      .requested_qty
-                                                      .toString())),
-                                                  controller
-                                                              .mrsDetailsModel
-                                                              .value!
-                                                              .cmmrsItems![
-                                                                  index]
-                                                              .asset_type ==
-                                                          "Spare"
-                                                      ? DataCell(
-                                                          Form(
-                                                            key: _formKey,
-                                                            child: Padding(
-                                                              padding:
-                                                                  const EdgeInsets
-                                                                      .all(8.0),
-                                                              child: Container(
-                                                                  width:
-                                                                      (Get.width *
-                                                                          .4),
-                                                                  decoration:
-                                                                      BoxDecoration(
-                                                                    boxShadow: [
-                                                                      BoxShadow(
-                                                                        color: Colors
-                                                                            .black26,
-                                                                        offset:
-                                                                            const Offset(
-                                                                          5.0,
-                                                                          5.0,
-                                                                        ),
-                                                                        blurRadius:
-                                                                            5.0,
-                                                                        spreadRadius:
-                                                                            1.0,
-                                                                      ),
-                                                                    ],
-                                                                    color: ColorValues
-                                                                        .whiteColor,
-                                                                    borderRadius:
-                                                                        BorderRadius
-                                                                            .circular(5),
-                                                                  ),
-                                                                  child: Obx(
-                                                                    () =>
-                                                                        LoginCustomTextfield(
-                                                                      validator:
-                                                                          (value) {
-                                                                        if (value ==
-                                                                                null ||
-                                                                            value.isEmpty) {
-                                                                          return 'Please enter';
-                                                                        }
-                                                                        return null;
-                                                                      },
-                                                                      textController: controller
-                                                                          .mrsDetailsModel
-                                                                          .value!
-                                                                          .cmmrsItems![
-                                                                              index]
-                                                                          .serial_number_controller as TextEditingController,
+                                      child: Form(
+                                          key: _formKey,
+                                          child: ListView(
+                                              shrinkWrap: true,
+                                              children: [
+                                                Obx(() {
+                                                  return DataTable(
+                                                    border: TableBorder.all(
+                                                        color: Color.fromARGB(
+                                                            255,
+                                                            206,
+                                                            229,
+                                                            234)),
+                                                    columns: [
+                                                      DataColumn(
+                                                          label: Text(
+                                                              "Material Name",
+                                                              style: TextStyle(
+                                                                  fontSize: 15,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold))),
+                                                      DataColumn(
+                                                          label: Text(
+                                                              "Asset Type",
+                                                              style: TextStyle(
+                                                                  fontSize: 15,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold))),
+                                                      DataColumn(
+                                                          label: Text(
+                                                              "Available Qty.",
+                                                              style: TextStyle(
+                                                                  fontSize: 15,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold))),
+                                                      DataColumn(
+                                                          label: Text(
+                                                              "Requested Qty.",
+                                                              style: TextStyle(
+                                                                  fontSize: 15,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold))),
+                                                      DataColumn(
+                                                          label: Text(
+                                                              "Approved Qty.",
+                                                              style: TextStyle(
+                                                                  fontSize: 15,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold))),
+                                                      DataColumn(
+                                                          label: Text(
+                                                              "Serial Number",
+                                                              style: TextStyle(
+                                                                  fontSize: 15,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold))),
+                                                      DataColumn(
+                                                          label: Text(
+                                                              "Issued Qty.",
+                                                              style: TextStyle(
+                                                                  fontSize: 15,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold))),
+                                                    ],
+                                                    rows:
+                                                        List<DataRow>.generate(
+                                                            controller
+                                                                .mrsDetailsModel
+                                                                .value!
+                                                                .cmmrsItems!
+                                                                .length,
+                                                            (index) {
+                                                      var item = controller
+                                                          .mrsDetailsModel
+                                                          .value!
+                                                          .cmmrsItems![index];
+                                                      return DataRow(cells: [
+                                                        DataCell(Text(item
+                                                            .asset_name
+                                                            .toString())),
+                                                        DataCell(Text(item
+                                                            .asset_type
+                                                            .toString())),
+                                                        DataCell(Text(item
+                                                            .available_qty
+                                                            .toString())),
+                                                        DataCell(Text(item
+                                                            .requested_qty
+                                                            .toString())),
+                                                        DataCell(Text(item
+                                                            .requested_qty
+                                                            .toString())),
+                                                        item.asset_type ==
+                                                                "Spare"
+                                                            ? DataCell(
+                                                                Padding(
+                                                                  padding:
+                                                                      const EdgeInsets
+                                                                          .all(
+                                                                          8.0),
+                                                                  child:
+                                                                      LoginCustomTextfield(
+                                                                    width:
+                                                                        (Get.width /
+                                                                            9),
+                                                                    textController:
+                                                                        item.serial_number_controller,
+                                                                    decoration:
+                                                                        InputDecoration(
+                                                                      hintText:
+                                                                          'Enter Serial Number',
+                                                                      errorText:
+                                                                          controller
+                                                                              .errorMessages[index],
                                                                     ),
-                                                                  )),
-                                                            ),
-                                                          ),
-                                                        )
-                                                      : DataCell(Text("NA")),
-                                                  DataCell(
-                                                    Form(
-                                                      key: _formKeyIssue,
-                                                      child: Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .all(8.0),
-                                                        child: Container(
-                                                            width: (Get.width *
-                                                                .4),
-                                                            decoration:
-                                                                BoxDecoration(
-                                                              boxShadow: [
-                                                                BoxShadow(
-                                                                  color: Colors
-                                                                      .black26,
-                                                                  offset:
-                                                                      const Offset(
-                                                                    5.0,
-                                                                    5.0,
+                                                                    validator: (value) =>
+                                                                        controller.validateField(
+                                                                            value,
+                                                                            index),
+                                                                    onChanged:
+                                                                        (value) {
+                                                                      controller
+                                                                          .clearErrorMessage(
+                                                                              index);
+                                                                    },
                                                                   ),
-                                                                  blurRadius:
-                                                                      5.0,
-                                                                  spreadRadius:
-                                                                      1.0,
                                                                 ),
-                                                              ],
-                                                              color: ColorValues
-                                                                  .whiteColor,
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          5),
-                                                            ),
+                                                              )
+                                                            : DataCell(
+                                                                Text("NA")),
+                                                        DataCell(
+                                                          Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                    .all(8.0),
                                                             child:
                                                                 LoginCustomTextfield(
-                                                                    validator:
-                                                                        (value) {
-                                                                      if (value ==
-                                                                              null ||
-                                                                          value
-                                                                              .isEmpty) {
-                                                                        // controller.errorMessages[index] =
-                                                                        return 'Please enter';
-                                                                        // return controller
-                                                                        //     .errorMessages[index];
-                                                                      }
-                                                                      return null;
-                                                                    },
-                                                                    // onChanged: (value) {
-                                                                    //   controller
-                                                                    //       .clearErrorMessage(
-                                                                    //           index);
-                                                                    // },
-                                                                    textController: controller
-                                                                        .mrsDetailsModel
-                                                                        .value!
-                                                                        .cmmrsItems![
-                                                                            index]
-                                                                        .issued_qty_controller as TextEditingController,
-                                                                    onChanged: (text) {
-                                                                      try {
-                                                                        // Validate input using a regular expression
-                                                                        if (!RegExp(r'^[0-9]+(?:\.[0-9]+)?$')
-                                                                            .hasMatch(text)) {
-                                                                          // Input is not a valid double
-                                                                          Fluttertoast
-                                                                              .showToast(
-                                                                            msg:
-                                                                                'Enter valid quantity in numbers',
-                                                                            fontSize:
-                                                                                16.0,
-                                                                          );
-                                                                          return; // Exit early
-                                                                        }
+                                                              width:
+                                                                  (Get.width /
+                                                                      9),
+                                                              textController: item
+                                                                  .issued_qty_controller,
+                                                              decoration:
+                                                                  InputDecoration(
+                                                                hintText:
+                                                                    'Enter Issued Quantity',
+                                                                errorText:
+                                                                    controller
+                                                                            .errorMessages[
+                                                                        index],
+                                                              ),
+                                                              validator: (value) =>
+                                                                  controller
+                                                                      .validateField(
+                                                                          value,
+                                                                          index),
+                                                              onChanged:
+                                                                  (text) {
+                                                                try {
+                                                                  // Validate input using a regular expression
+                                                                  if (!RegExp(
+                                                                          r'^[0-9]+(?:\.[0-9]+)?$')
+                                                                      .hasMatch(
+                                                                          text)) {
+                                                                    // Input is not a valid double
+                                                                    Fluttertoast
+                                                                        .showToast(
+                                                                      msg:
+                                                                          'Enter valid quantity in numbers',
+                                                                      fontSize:
+                                                                          16.0,
+                                                                    );
+                                                                    return; // Exit early
+                                                                  }
 
-                                                                        double
-                                                                            parsedValue =
-                                                                            double.parse(text);
-                                                                        double requestedQty = controller
-                                                                            .mrsDetailsModel
-                                                                            .value!
-                                                                            .cmmrsItems![index]
-                                                                            .requested_qty!;
+                                                                  double
+                                                                      parsedValue =
+                                                                      double.parse(
+                                                                          text);
+                                                                  double
+                                                                      requestedQty =
+                                                                      item.requested_qty!;
 
-                                                                        if (parsedValue >
-                                                                            requestedQty) {
-                                                                          Fluttertoast
-                                                                              .showToast(
-                                                                            msg:
-                                                                                'Enter qty below the approved qty',
-                                                                            fontSize:
-                                                                                16.0,
-                                                                          );
-                                                                        }
-                                                                      } catch (e) {
-                                                                        // Handle the case where parsing fails
-                                                                        print(
-                                                                            'Error: $e');
-                                                                      }
-                                                                    })),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ])),
-                                      ),
+                                                                  if (parsedValue >
+                                                                      requestedQty) {
+                                                                    Fluttertoast
+                                                                        .showToast(
+                                                                      msg:
+                                                                          'Enter qty below the approved qty',
+                                                                      fontSize:
+                                                                          16.0,
+                                                                    );
+                                                                  }
+                                                                } catch (e) {
+                                                                  // Handle the case where parsing fails
+                                                                  print(
+                                                                      'Error: $e');
+                                                                }
+                                                                controller
+                                                                    .clearErrorMessage(
+                                                                        index);
+                                                              },
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ]);
+                                                    }),
+                                                  );
+                                                }),
+                                              ])),
                                     ),
                                   ])),
                               Container(
@@ -578,12 +534,12 @@ class MrsIssueContentWeb extends GetView<MrsIssueController> {
                                               .validate()) {
                                             print("isssue4 123");
 
-                                            //  controller.issueMrs();
+                                            controller.issueMrs();
 
                                             // All validations passed
                                             // Make your API call here
                                           } else {
-                                            // print("isssue 123");
+                                            print("isssue 123");
                                             // Validation failed
                                             // Show an error message or handle the error
                                           }
