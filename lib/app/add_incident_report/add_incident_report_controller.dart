@@ -1872,7 +1872,7 @@ class AddIncidentReportController extends GetxController {
       List<DetailsOfInjuredPerson> detailsOfInjuredPersonItems = [];
       rowInjuredPersonItem.forEach((element) {
         DetailsOfInjuredPerson item = DetailsOfInjuredPerson(
-          injured_item_id: int.tryParse('${element[0]["incidents_id"]}'),
+          injured_item_id: 1,
           incidents_id: irId.value,
           person_id: element[0]["value"],
           other_victim: element[1]["value"] ?? '0',
