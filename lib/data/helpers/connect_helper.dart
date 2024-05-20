@@ -4643,6 +4643,7 @@ class ConnectHelper {
         importPlan(
             auth: auth,
             fileId: jsonResponse["id"][0].toString(),
+            facilityId: facilityId,
             isLoading: true);
       } else if (importType == AppConstants.kImportDSMReport) {
         importDSMFile(
@@ -7202,10 +7203,11 @@ class ConnectHelper {
   Future<ResponseModel> importPlan({
     required String auth,
     required String fileId,
+    required int facilityId,
     required bool isLoading,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
-      'PM/ImportPMPlanFile?file_id=$fileId',
+      'PM/ImportPMPlanFile?file_id=$fileId&facility_id=$facilityId',
       Request.post,
       null,
       true,
