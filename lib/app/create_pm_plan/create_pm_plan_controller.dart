@@ -29,6 +29,9 @@ class CreatePmPlanController extends GetxController {
       Rx<List<List<Map<String, String>>>>([]);
   Rx<List<List<Map<String, String>>>> bufferRowItem =
       Rx<List<List<Map<String, String>>>>([]);
+
+  Rx<bool> isPMTitleInvalid = false.obs;
+  Rx<bool> isFormInvalid = false.obs;
   Map<String, GetAssetDataModel> dropdownMapperData = {};
   int selectedPurchaseID = 0;
   bool openStartDatePicker = false;
@@ -37,6 +40,8 @@ class CreatePmPlanController extends GetxController {
   RxList<FrequencyModel?> frequencyList = <FrequencyModel>[].obs;
   Rx<String> selectedfrequency = ''.obs;
   Rx<bool> isSelectedfrequency = true.obs;
+  Rx<bool> isStartdateInvalid = false.obs;
+
   int selectedfrequencyId = 0;
   Rx<String> selectedChecklist = ''.obs;
   Rx<bool> isSelectedChecklist = true.obs;
@@ -66,6 +71,7 @@ class CreatePmPlanController extends GetxController {
   RxList<EmployeeModel?> assignedToList = <EmployeeModel>[].obs;
   Rx<String> selectedAssignedTo = ''.obs;
   Rx<bool> isAssignedToSelected = true.obs;
+
   int selectedAssignedToId = 0;
   Rx<int> pmPlanId = 0.obs;
   Rx<PMPlanDetail?> pmPlanDetailsModel = PMPlanDetail().obs;
@@ -297,102 +303,114 @@ class CreatePmPlanController extends GetxController {
         {
           if (value != "Please Select") {
             int equipCatIndex =
-              equipmentCategoryList.indexWhere((x) => x?.name == value);
-          selectedInventoryCategoryId =
-              equipmentCategoryList[equipCatIndex]?.id ?? 0;
+                equipmentCategoryList.indexWhere((x) => x?.name == value);
+            selectedInventoryCategoryId =
+                equipmentCategoryList[equipCatIndex]?.id ?? 0;
 
-          // selectedInventory.value = value;
-          filteredInventoryNameList.value = <InventoryModel>[];
-          // inventoryNameList.value = <InventoryModel>[];
-          // selectedInventoryNameIdList.value = [];
-          rowItem.value = [];
-          preventiveCheckList.value = <PreventiveCheckListModel>[];
-          selectedInventoryNameIdList.value = [];
+            selectedInventory.value = value;
+            filteredInventoryNameList.value = <InventoryModel>[];
+            // inventoryNameList.value = <InventoryModel>[];
+            // selectedInventoryNameIdList.value = [];
+            rowItem.value = [];
+            preventiveCheckList.value = <PreventiveCheckListModel>[];
+            selectedInventoryNameIdList.value = [];
 
-          if (pmPlanId == 0) {
-            selectedInventoryNameList.value = [];
-          }
-          Future.delayed(Duration(seconds: 1), () {
-            inventoryList(
-                facilityId: facilityId,
-                categoryId: selectedInventoryCategoryId);
-          });
-          Future.delayed(Duration(seconds: 2), () {
-            if (selectedInventoryCategoryId > 0 && selectedfrequencyId > 0) {
-              getPreventiveCheckList(facilityId, 1, true, selectedfrequencyId,
-                  selectedInventoryCategoryId);
+            if (pmPlanId == 0) {
+              selectedInventoryNameList.value = [];
             }
-          });
+            Future.delayed(Duration(seconds: 1), () {
+              inventoryList(
+                  facilityId: facilityId,
+                  categoryId: selectedInventoryCategoryId);
+            });
+            Future.delayed(Duration(seconds: 2), () {
+              if (selectedInventoryCategoryId > 0 && selectedfrequencyId > 0) {
+                getPreventiveCheckList(facilityId, 1, true, selectedfrequencyId,
+                    selectedInventoryCategoryId);
+              }
+            });
           } else {
-            selectedInventoryCategoryId=0;
+            selectedInventoryCategoryId = 0;
           }
         }
         break;
       case RxList<InventoryModel>:
         {
-        if (value != "Please Select") {
+          if (value != "Please Select") {
             filteredInventoryNameList.value = <InventoryModel>[];
-          // inventoryNameList.value = <InventoryModel>[];
-          // selectedInventoryNameIdList.value = [];
-          bufferRowItem.value = rowItem.value;
-          rowItem.value = [];
-          // preventiveCheckList.value = <PreventiveCheckListModel>[];
-          selectedInventoryNameIdList.value = [];
+            // inventoryNameList.value = <InventoryModel>[];
+            // selectedInventoryNameIdList.value = [];
+            bufferRowItem.value = rowItem.value;
+            rowItem.value = [];
+            // preventiveCheckList.value = <PreventiveCheckListModel>[];
+            selectedInventoryNameIdList.value = [];
 
-          if (value != null) {
-            for (var selectedItem in value) {
-              int equipCatIndex =
-                  inventoryNameList.indexWhere((x) => x.name == selectedItem);
-              if (equipCatIndex >= 0) {
-                selectedInventoryNameIdList
-                    .add(inventoryNameList[equipCatIndex].id ?? 0);
+            if (value != null) {
+              for (var selectedItem in value) {
+                int equipCatIndex =
+                    inventoryNameList.indexWhere((x) => x.name == selectedItem);
+                if (equipCatIndex >= 0) {
+                  selectedInventoryNameIdList
+                      .add(inventoryNameList[equipCatIndex].id ?? 0);
+                }
               }
             }
-          }
 
-          print('First Category Id:$selectedInventoryNameIdList');
-          if (selectedInventoryNameIdList.length > 0) {
-            //  filteredInventoryNameList.value = <InventoryModel>[];
+            print('First Category Id:$selectedInventoryNameIdList');
+            if (selectedInventoryNameIdList.length > 0) {
+              //  filteredInventoryNameList.value = <InventoryModel>[];
 
-            facilityNameSelected(selectedInventoryNameIdList);
+              facilityNameSelected(selectedInventoryNameIdList);
+            }
+          } else {
+            // selectedInventoryNameIdList=0;
           }
-        } else {
-          // selectedInventoryNameIdList=0;
-        }
         }
         break;
       case RxList<FrequencyModel>:
         {
-          int frequencyIndex =
-              frequencyList.indexWhere((x) => x?.name == value);
-          selectedfrequencyId = frequencyList[frequencyIndex]?.id ?? 0;
-          selectedfrequency.value = value;
-          Future.delayed(Duration(seconds: 2), () {
-            if (selectedInventoryCategoryId > 0 && selectedfrequencyId > 0) {
-              getPreventiveCheckList(facilityId, 1, true, selectedfrequencyId,
-                  selectedInventoryCategoryId);
-            }
-          });
+          if (value != "Please Select") {
+            int frequencyIndex =
+                frequencyList.indexWhere((x) => x?.name == value);
+            selectedfrequencyId = frequencyList[frequencyIndex]?.id ?? 0;
+            selectedfrequency.value = value;
+            Future.delayed(Duration(seconds: 2), () {
+              if (selectedInventoryCategoryId > 0 && selectedfrequencyId > 0) {
+                getPreventiveCheckList(facilityId, 1, true, selectedfrequencyId,
+                    selectedInventoryCategoryId);
+              }
+            });
+          } else {
+            selectedInventoryCategoryId = 0;
+          }
         }
         break;
       case RxList<PreventiveCheckListModel>:
         {
-          int checklistIndex =
-              preventiveCheckList.indexWhere((x) => x?.name == value);
-          selectedChecklistId = preventiveCheckList[checklistIndex]?.id ?? 0;
-          selectedChecklist.value =
-              preventiveCheckList[checklistIndex]?.name ?? "";
+          if (value != "Please Select") {
+            int checklistIndex =
+                preventiveCheckList.indexWhere((x) => x?.name == value);
+            selectedChecklistId = preventiveCheckList[checklistIndex]?.id ?? 0;
+            selectedChecklist.value =
+                preventiveCheckList[checklistIndex]?.name ?? "";
+          } else {
+            selectedChecklistId = 0;
+          }
         }
         break;
       case RxList<EmployeeModel>:
         {
-          int assignedToIndex =
-              assignedToList.indexWhere((x) => x?.name == value);
-          selectedAssignedToId = assignedToList[assignedToIndex]?.id ?? 0;
-          if (selectedAssignedToId > 0) {
-            isAssignedToSelected.value = true;
+          if (value != "Please Select") {
+            int assignedToIndex =
+                assignedToList.indexWhere((x) => x?.name == value);
+            selectedAssignedToId = assignedToList[assignedToIndex]?.id ?? 0;
+            if (selectedAssignedToId > 0) {
+              isAssignedToSelected.value = true;
+            }
+            selectedAssignedTo.value = value;
+          } else {
+            selectedAssignedToId = 0;
           }
-          selectedAssignedTo.value = value;
         }
         break;
       default:
@@ -404,6 +422,10 @@ class CreatePmPlanController extends GetxController {
   }
 
   Future<void> createPmPlan() async {
+    checkFrom();
+    if (isFormInvalid.value) {
+      return;
+    }
     String _startDate = startDateDateTc.text.trim();
     String _plantitle = planTittleCtrlr.text.trim();
 
@@ -447,6 +469,10 @@ class CreatePmPlanController extends GetxController {
   }
 
   Future<void> updatePmPlan() async {
+    checkFrom();
+    if (isFormInvalid.value) {
+      return;
+    }
     String _startDate = startDateDateTc.text.trim();
     String _plantitle = planTittleCtrlr.text.trim();
 
@@ -487,6 +513,34 @@ class CreatePmPlanController extends GetxController {
       Get.offAllNamed(
         Routes.pmPlanList,
       );
+    }
+  }
+
+  void checkFrom() {
+    if (selectedInventory == '') {
+      isSelectedInventory.value = false;
+      isFormInvalid.value = true;
+    }
+    if (selectedInventoryNameList == null || selectedInventoryNameList ==[]) {
+      inventoryNameList == false.obs;
+      isFormInvalid.value = true;
+    }
+    if (selectedfrequency == '') {
+      isSelectedfrequency.value = false;
+      isFormInvalid.value = true;
+    }
+    if (selectedAssignedTo == '') {
+      isAssignedToSelected.value = false;
+      isFormInvalid.value = true;
+    }
+    if (startDateDateTc.text.trim().length < 3) {
+      isStartdateInvalid.value = true;
+      isFormInvalid.value = true;
+    }
+    
+    if (planTittleCtrlr.text.trim().length < 3) {
+      isPMTitleInvalid.value = true;
+      isFormInvalid.value = true;
     }
   }
 }

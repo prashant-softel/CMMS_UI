@@ -157,11 +157,31 @@ class _CreatePmPlanWebState extends State<CreatePmPlanWeb> {
                                                   ),
                                                   width: (MediaQuery.of(context)
                                                           .size
-                                                          .width *
+                                                         .width *
                                                       .2),
                                                   child: LoginCustomTextfield(
                                                     textController: controller
                                                         .planTittleCtrlr,
+
+                                                         //validate
+                                                      errorController:
+                                                          controller.isPMTitleInvalid
+                                                                  .value
+                                                              ? "Required field"
+                                                              : null,
+
+                                                      onChanged: (value) {
+                                                        if (value
+                                                                .trim()
+                                                                .length >
+                                                            0) {
+                                                          controller.isPMTitleInvalid
+                                                              .value = false;
+                                                        } else {
+                                                          controller.isPMTitleInvalid
+                                                              .value = true;
+                                                        }
+                                                      },
                                                     inputFormatters: [
                                                       FilteringTextInputFormatter
                                                           .deny(
@@ -177,7 +197,7 @@ class _CreatePmPlanWebState extends State<CreatePmPlanWeb> {
                                                       '   Equipment Category :'),
                                               Dimens.boxWidth5,
                                               SizedBox(
-                                                child: DropdownWebStock(
+                                                child: DropdownWebWidget(
                                                   width: (MediaQuery.of(context)
                                                           .size
                                                           .width *
@@ -271,6 +291,28 @@ class _CreatePmPlanWebState extends State<CreatePmPlanWeb> {
                                                   },
                                                   textController: controller
                                                       .startDateDateTc,
+                                                      //validate
+
+                                                      errorController: controller
+                                                              .isStartdateInvalid
+                                                              .value
+                                                          ? "Required field"
+                                                          : null,
+
+                                                      onChanged: (value) {
+                                                        if (value
+                                                                .trim()
+                                                                .length >
+                                                            0) {
+                                                          controller
+                                                              .isStartdateInvalid
+                                                              .value = false;
+                                                        } else {
+                                                          controller
+                                                              .isStartdateInvalid
+                                                              .value = true;
+                                                        }
+                                                      },
                                                 ),
                                               ],
                                             ),
