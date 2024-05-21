@@ -801,8 +801,11 @@ class _AddJobContentWebState extends State<AddJobContentWeb> {
                                             Row(
                                               children: [
                                                 CustomRichText(
-                                                    title:
-                                                        'Tools Required For Error :'),
+                                                  title:
+                                                      'Tools Required For Error :',
+                                                  includeAsterisk:
+                                                      false, // Explicitly exclude the asterisk
+                                                ),
                                                 Dimens.boxWidth10,
                                                 Container(
                                                   decoration: BoxDecoration(
@@ -850,9 +853,9 @@ class _AddJobContentWebState extends State<AddJobContentWeb> {
                                                     decoration: BoxDecoration(
                                                       border: Border.all(
                                                         color:
-                                                        //     controller.isToolRequiredToWorkTypeSelected.value == false
-                                                        //         ? Colors.red
-                                                        //         :
+                                                            //     controller.isToolRequiredToWorkTypeSelected.value == false
+                                                            //         ? Colors.red
+                                                            //         :
                                                             Colors.transparent,
                                                         width: 1.0,
                                                       ),
@@ -1152,7 +1155,8 @@ class _AddJobContentWebState extends State<AddJobContentWeb> {
                               Center(
                                 child: CustomElevatedButton(
                                   text: 'Submit',
-                                  onPressed: () => controller.saveJob(fileIds: dropzoneController.fileIds),
+                                  onPressed: () => controller.saveJob(
+                                      fileIds: dropzoneController.fileIds),
                                   backgroundColor: ColorValues.appDarkBlueColor,
                                 ),
                               ),
