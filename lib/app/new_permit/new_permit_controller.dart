@@ -1229,6 +1229,9 @@ class NewPermitController extends GetxController {
     if (selectedBlock.value == '') {
       isBlockSelected.value = false;
     }
+    if (workPermitRemarkTextCtrlr.text.trim().length < 3) {
+      isWorPermitNumberTextInvalid.value = true;
+    }
     // if (selectedJobType.value == '') {
     //   isJobTypeListSelected.value = false;
     // }
