@@ -625,7 +625,7 @@ class StockManagementAddGoodsOrdersController extends GetxController {
           lost_qty: 0,
           accepted_qty: 0,
           damaged_qty: 0,
-          requested_qty: double.tryParse(element[2]["value"] ?? '0'),
+          requested_qty: dropdownMapperData[element[0]["value"]]?.ordered_qty,
           assetMasterItemID:
               dropdownMapperData[element[0]["value"]]?.assetMasterItemID,
           cost: dropdownMapperData[element[0]["value"]]
