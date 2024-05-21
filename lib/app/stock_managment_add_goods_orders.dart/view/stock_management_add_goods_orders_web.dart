@@ -1020,13 +1020,6 @@ class AddRowInGoodsOrder extends StatelessWidget {
                     ],
                   )),
                   DataColumn2(
-                      fixedWidth: 250,
-                      label: Text(
-                        "Paid By",
-                        style: TextStyle(
-                            fontSize: 15, fontWeight: FontWeight.bold),
-                      )),
-                  DataColumn2(
                       fixedWidth: 180,
                       label: Text(
                         "Requested Qty",
@@ -1044,6 +1037,13 @@ class AddRowInGoodsOrder extends StatelessWidget {
                       fixedWidth: 130,
                       label: Text(
                         "Dispatch Qty",
+                        style: TextStyle(
+                            fontSize: 15, fontWeight: FontWeight.bold),
+                      )),
+                  DataColumn2(
+                      fixedWidth: 250,
+                      label: Text(
+                        "Paid By",
                         style: TextStyle(
                             fontSize: 15, fontWeight: FontWeight.bold),
                       )),
@@ -1170,9 +1170,7 @@ class AddRowInGoodsOrder extends StatelessWidget {
                                           ],
                                         ),
                                       )
-                                    :
-                                    // (mapData['key'] == "Order") ||
-                                    (mapData['key'] == "Cost")
+                                    : (mapData['key'] == "Order")
                                         ? Padding(
                                             padding: EdgeInsets.only(top: 10),
                                             child: Column(
@@ -1217,9 +1215,9 @@ class AddRowInGoodsOrder extends StatelessWidget {
                                                               : null,
                                                       textController:
                                                           new TextEditingController(
-                                                        text:
-                                                            "${controller.dropdownMapperData.value[record[0]['value']]?.cost ?? ""}",
-                                                      ),
+                                                              text: mapData[
+                                                                      "value"] ??
+                                                                  ''),
                                                       onChanged: (txt) {
                                                         mapData["value"] = txt;
                                                         if (txt
@@ -1238,10 +1236,12 @@ class AddRowInGoodsOrder extends StatelessWidget {
                                               ],
                                             ),
                                           )
-                                        : (mapData['key'] == "Requested")
+                                        :
+                                        // (mapData['key'] == "Order") ||
+                                        (mapData['key'] == "Cost")
                                             ? Padding(
-                                                padding: const EdgeInsets.only(
-                                                    top: 10),
+                                                padding:
+                                                    EdgeInsets.only(top: 10),
                                                 child: Column(
                                                   mainAxisAlignment:
                                                       MainAxisAlignment.start,
@@ -1283,15 +1283,15 @@ class AddRowInGoodsOrder extends StatelessWidget {
                                                           ],
                                                           maxLine: 1,
                                                           errorController: controller
-                                                                  .isRequestedInvalid
+                                                                  .isCostInvalid
                                                                   .value
                                                               ? "Required field"
                                                               : null,
                                                           textController:
                                                               new TextEditingController(
-                                                                  text: mapData[
-                                                                          "value"] ??
-                                                                      ''),
+                                                            text:
+                                                                "${controller.dropdownMapperData.value[record[0]['value']]?.cost ?? ""}",
+                                                          ),
                                                           onChanged: (txt) {
                                                             mapData["value"] =
                                                                 txt;
@@ -1299,11 +1299,11 @@ class AddRowInGoodsOrder extends StatelessWidget {
                                                                 .trim()
                                                                 .isNotEmpty) {
                                                               controller
-                                                                  .isRequestedInvalid
+                                                                  .isCostInvalid
                                                                   .value = false;
                                                             } else {
                                                               controller
-                                                                  .isRequestedInvalid
+                                                                  .isCostInvalid
                                                                   .value = true;
                                                             }
                                                           },
@@ -1311,7 +1311,88 @@ class AddRowInGoodsOrder extends StatelessWidget {
                                                   ],
                                                 ),
                                               )
-                                            : Text(mapData['key'] ?? ''),
+                                            : (mapData['key'] == "Requested")
+                                                ? Padding(
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                            top: 10),
+                                                    child: Column(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .start,
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        Container(
+                                                            decoration:
+                                                                BoxDecoration(
+                                                              boxShadow: [
+                                                                BoxShadow(
+                                                                  color: Colors
+                                                                      .black26,
+                                                                  offset:
+                                                                      const Offset(
+                                                                    5.0,
+                                                                    5.0,
+                                                                  ),
+                                                                  blurRadius:
+                                                                      5.0,
+                                                                  spreadRadius:
+                                                                      1.0,
+                                                                ),
+                                                              ],
+                                                              color: ColorValues
+                                                                  .whiteColor,
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          5),
+                                                            ),
+                                                            child:
+                                                                LoginCustomTextfield(
+                                                              width:
+                                                                  (Get.width *
+                                                                      .4),
+                                                              keyboardType:
+                                                                  TextInputType
+                                                                      .number,
+                                                              inputFormatters: <TextInputFormatter>[
+                                                                FilteringTextInputFormatter
+                                                                    .digitsOnly
+                                                              ],
+                                                              maxLine: 1,
+                                                              errorController:
+                                                                  controller
+                                                                          .isRequestedInvalid
+                                                                          .value
+                                                                      ? "Required field"
+                                                                      : null,
+                                                              textController:
+                                                                  new TextEditingController(
+                                                                text:
+                                                                    "${controller.dropdownMapperData.value[record[0]['value']]?.ordered_qty ?? ""}",
+                                                              ),
+                                                              onChanged: (txt) {
+                                                                mapData["value"] =
+                                                                    txt;
+                                                                // if (txt
+                                                                //     .trim()
+                                                                //     .isNotEmpty) {
+                                                                //   controller
+                                                                //       .isRequestedInvalid
+                                                                //       .value = false;
+                                                                // } else {
+                                                                //   controller
+                                                                //       .isRequestedInvalid
+                                                                //       .value = true;
+                                                                // }
+                                                              },
+                                                            )),
+                                                      ],
+                                                    ),
+                                                  )
+                                                : Text(mapData['key'] ?? ''),
                       );
                     }).toList(),
                   );

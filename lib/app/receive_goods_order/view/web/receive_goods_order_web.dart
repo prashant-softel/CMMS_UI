@@ -1624,11 +1624,11 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                                                                 textController: new TextEditingController(text: mapData["value"] ?? ''),
                                                                                 onChanged: (txt) {
                                                                                   mapData["value"] = txt;
-                                                                                  if (txt.trim().isNotEmpty) {
-                                                                                    controller.isCostInvalid.value = false;
-                                                                                  } else {
-                                                                                    controller.isCostInvalid.value = true;
-                                                                                  }
+                                                                                  // if (txt.trim().isNotEmpty) {
+                                                                                  //   controller.isCostInvalid.value = false;
+                                                                                  // } else {
+                                                                                  //   controller.isCostInvalid.value = true;
+                                                                                  // }
                                                                                 },
                                                                               ),
                                                                             )),
@@ -1756,11 +1756,11 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                                                                       textController: new TextEditingController(text: mapData["value"] ?? ''),
                                                                                       onChanged: (txt) {
                                                                                         mapData["value"] = txt;
-                                                                                        if (txt.trim().isNotEmpty) {
-                                                                                          controller.isAccepetedInvalid.value = false;
-                                                                                        } else {
-                                                                                          controller.isAccepetedInvalid.value = true;
-                                                                                        }
+                                                                                        // if (txt.trim().isNotEmpty) {
+                                                                                        //   controller.isAccepetedInvalid.value = false;
+                                                                                        // } else {
+                                                                                        //   controller.isAccepetedInvalid.value = true;
+                                                                                        // }
                                                                                       },
                                                                                     )),
                                                                               ],
@@ -1839,11 +1839,11 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                                                                             textController: new TextEditingController(text: mapData["value"] ?? ''),
                                                                                             onChanged: (txt) {
                                                                                               mapData["value"] = txt;
-                                                                                              if (txt.trim().isNotEmpty) {
-                                                                                                controller.isCostInvalid.value = false;
-                                                                                              } else {
-                                                                                                controller.isCostInvalid.value = true;
-                                                                                              }
+                                                                                              // if (txt.trim().isNotEmpty) {
+                                                                                              //   controller.isCostInvalid.value = false;
+                                                                                              // } else {
+                                                                                              //   controller.isCostInvalid.value = true;
+                                                                                              // }
                                                                                             },
                                                                                           ),
                                                                                         ),
