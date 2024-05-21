@@ -346,11 +346,6 @@ class StockManagementAddGoodsOrdersController extends GetxController {
               'id': '${element.id}'
             },
             {
-              'key': "Paid_By",
-              "value": '${element.paid_by_name}',
-              'id': '${element.paid_by_ID}'
-            },
-            {
               'key': "Requested",
               "value": '${element.requested_qty}',
               // 'id': '${element.assetMasterItemID}'
@@ -364,6 +359,11 @@ class StockManagementAddGoodsOrdersController extends GetxController {
               'key': "Order",
               "value": '${element.ordered_qty}',
               // 'id': '${element.assetMasterItemID}'
+            },
+            {
+              'key': "Paid_By",
+              "value": '${element.paid_by_name}',
+              'id': '${element.paid_by_ID}'
             },
             {'key': "Action ", "value": ''},
           ],
@@ -580,10 +580,10 @@ class StockManagementAddGoodsOrdersController extends GetxController {
         "assetMasterItemID": '',
         "id": ''
       },
-      {'key': "Paid_By", "value": 'Please Select', "id": ''},
       {'key': "Requested", "value": ''},
       {'key': "Cost", "value": ''},
       {'key': "Order", "value": ''},
+      {'key': "Paid_By", "value": 'Please Select', "id": ''},
       {'key': "Action ", "value": ''},
     ]);
   }
@@ -630,8 +630,8 @@ class StockManagementAddGoodsOrdersController extends GetxController {
               dropdownMapperData[element[0]["value"]]?.assetMasterItemID,
           cost: dropdownMapperData[element[0]["value"]]
               ?.cost, // double.tryParse(element[3]["value"] ?? '0'),
-          ordered_qty: double.tryParse(element[4]["value"] ?? '0'),
-          paid_by_ID: paiddropdownMapperData[element[1]["value"]]?.id,
+          ordered_qty: double.tryParse(element[3]["value"] ?? '0'),
+          paid_by_ID: paiddropdownMapperData[element[4]["value"]]?.id,
         );
         items.add(item);
       });

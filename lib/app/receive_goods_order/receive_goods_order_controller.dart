@@ -36,11 +36,11 @@ class ReceiveGoodsOrdersController extends GetxController {
   int selectedUnitCurrencyId = 0;
   Rx<bool> isInvoiceNumberInvalid = false.obs;
   Rx<bool> isCostInvalid = false.obs;
-  
+
   Rx<bool> isAccepetedInvalid = false.obs;
-  
+
   Rx<bool> isRequestedInvalid = false.obs;
-  
+
   Rx<bool> isDeliverChalanInvalid = false.obs;
   Rx<bool> isGrnNoInvalid = false.obs;
   Rx<bool> isCountOfPackageReceivedInvalid = false.obs;
@@ -663,21 +663,21 @@ class ReceiveGoodsOrdersController extends GetxController {
     } else {
       isFormInvalid.value = false;
     }
-    if(TextEditingController().text.isEmpty){
-      isCostInvalid.value=true;
-    }else{
-      isCostInvalid.value = false;
-    }
-     if(TextEditingController().text.isEmpty){
-      isRequestedInvalid.value=true;
-    }else{
-      isRequestedInvalid.value = false;
-    }
-       if(TextEditingController().text.isEmpty){
-      isAccepetedInvalid.value=true;
-    }else{
-      isAccepetedInvalid.value = false;
-    }
+    // if(TextEditingController().text.isEmpty){
+    //   isCostInvalid.value=true;
+    // }else{
+    //   isCostInvalid.value = false;
+    // }
+    //  if(TextEditingController().text.isEmpty){
+    //   isRequestedInvalid.value=true;
+    // }else{
+    //   isRequestedInvalid.value = false;
+    // }
+    //    if(TextEditingController().text.isEmpty){
+    //   isAccepetedInvalid.value=true;
+    // }else{
+    //   isAccepetedInvalid.value = false;
+    // }
   }
 
   void updateGOReceive() async {

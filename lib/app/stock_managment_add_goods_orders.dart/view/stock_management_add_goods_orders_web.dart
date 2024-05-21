@@ -1020,13 +1020,6 @@ class AddRowInGoodsOrder extends StatelessWidget {
                     ],
                   )),
                   DataColumn2(
-                      fixedWidth: 250,
-                      label: Text(
-                        "Paid By",
-                        style: TextStyle(
-                            fontSize: 15, fontWeight: FontWeight.bold),
-                      )),
-                  DataColumn2(
                       fixedWidth: 180,
                       label: Text(
                         "Requested Qty",
@@ -1044,6 +1037,13 @@ class AddRowInGoodsOrder extends StatelessWidget {
                       fixedWidth: 130,
                       label: Text(
                         "Dispatch Qty",
+                        style: TextStyle(
+                            fontSize: 15, fontWeight: FontWeight.bold),
+                      )),
+                  DataColumn2(
+                      fixedWidth: 250,
+                      label: Text(
+                        "Paid By",
                         style: TextStyle(
                             fontSize: 15, fontWeight: FontWeight.bold),
                       )),
