@@ -4,7 +4,6 @@ import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/app/widgets/custom_multiselect_dialog_field.dart';
 import 'package:cmms/app/widgets/history_table_widget_web.dart';
-import 'package:cmms/app/widgets/multipule_dropdown_web.dart';
 import 'package:cmms/app/widgets/custom_textField.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
@@ -21,7 +20,6 @@ import 'package:cmms/app/widgets/date_picker.dart';
 import 'package:cmms/app/widgets/stock_dropdown.dart';
 
 import '../../widgets/custom_richtext.dart';
-import '../../widgets/custom_textField.dart';
 
 class AddGoodsOrdersWeb extends StatefulWidget {
   AddGoodsOrdersWeb({
@@ -197,7 +195,7 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                                 Row(
                                                   children: [
                                                     CustomRichText(
-                                                        title: 'inventoryNameListdor: '),
+                                                        title: 'Vendor: '),
                                                     Dimens.boxWidth10,
                                                     SizedBox(
                                                       child: Obx(
@@ -493,53 +491,58 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                                 // SizedBox(
                                                 //   height: 6,
                                                 // ),
-                                                Row(
-                                                  children: [
-                                                    CustomRichText(
-                                                        title: 'PO Date  : '),
-                                                    Dimens.boxWidth10,
-                                                    CustomTextFieldForStock(
-                                                      width:
-                                                          MediaQuery.of(context)
-                                                                  .size
-                                                                  .width /
-                                                              5,
-                                                      numberTextField: true,
-                                                      onTap: () {
-                                                        controller
-                                                                .openPODatePicker =
-                                                            !controller
-                                                                .openPODatePicker;
-                                                        controller.update([
-                                                          'stock_Mangement'
-                                                        ]);
-                                                      },
-                                                      textController: controller
-                                                          .poDateDateTc,
-                                                           //validate
-
-                                                      errorController: controller
-                                                              .isPOdateInvalid
-                                                              .value
-                                                          ? "Required field"
-                                                          : null,
-
-                                                      onChanged: (value) {
-                                                        if (value
-                                                                .trim()
-                                                                .length >
-                                                            0) {
+                                                Obx(
+                                                  () => Row(
+                                                    children: [
+                                                      CustomRichText(
+                                                          title: 'PO Date  : '),
+                                                      Dimens.boxWidth10,
+                                                      CustomTextFieldForStock(
+                                                        width: MediaQuery.of(
+                                                                    context)
+                                                                .size
+                                                                .width /
+                                                            5,
+                                                        numberTextField: true,
+                                                        onTap: () {
                                                           controller
-                                                              .isPOdateInvalid
-                                                              .value = false;
-                                                        } else {
-                                                          controller
-                                                              .isPOdateInvalid
-                                                              .value = true;
-                                                        }
-                                                      },
-                                                    ),
-                                                  ],
+                                                                  .openPODatePicker =
+                                                              !controller
+                                                                  .openPODatePicker;
+                                                          controller.update([
+                                                            'stock_Mangement'
+                                                          ]);
+                                                        },
+                                                        textController:
+                                                            controller
+                                                                .poDateDateTc,
+                                                        //validate
+
+                                                        errorController: controller
+                                                                .isPOdateInvalid
+                                                                .value
+                                                            ? "Required field"
+                                                            : null,
+
+                                                        onChanged: (value) {
+                                                          if (controller
+                                                                  .poDateDateTc
+                                                                  .text
+                                                                  .trim()
+                                                                  .length >
+                                                              0) {
+                                                            controller
+                                                                .isPOdateInvalid
+                                                                .value = false;
+                                                          } else {
+                                                            controller
+                                                                .isPOdateInvalid
+                                                                .value = true;
+                                                          }
+                                                        },
+                                                      ),
+                                                    ],
+                                                  ),
                                                 ),
                                                 // SizedBox(
                                                 //   height: 6,
@@ -780,6 +783,8 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                                 .format(p0.value);
                                         controller.openPODatePicker =
                                             !controller.openPODatePicker;
+                                        controller.isPOdateInvalid.value =
+                                            false;
                                         controller.update(['stock_Mangement']);
                                       },
                                     ),
@@ -838,6 +843,7 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                       backgroundColor: ColorValues.submitColor,
                                       text: 'Submit',
                                       onPressed: () {
+                                        controller.isFormInvalid.value = false;
                                         controller.createGoodsOrder();
                                       },
                                     ))
@@ -1208,14 +1214,12 @@ class AddRowInGoodsOrder extends StatelessWidget {
                                                                   .value
                                                               ? "Required field"
                                                               : null,
-
                                                       textController:
                                                           new TextEditingController(
                                                               text: mapData[
                                                                       "value"] ??
                                                                   ''),
                                                       onChanged: (txt) {
-                                                        
                                                         mapData["value"] = txt;
                                                         if (txt
                                                             .trim()
@@ -1228,8 +1232,6 @@ class AddRowInGoodsOrder extends StatelessWidget {
                                                               .isCostInvalid
                                                               .value = true;
                                                         }
-
-                                                   
                                                       },
                                                     )),
                                               ],
@@ -1279,8 +1281,7 @@ class AddRowInGoodsOrder extends StatelessWidget {
                                                                 .digitsOnly
                                                           ],
                                                           maxLine: 1,
-                                                          errorController:
-                                                          controller
+                                                          errorController: controller
                                                                   .isRequestedInvalid
                                                                   .value
                                                               ? "Required field"
@@ -1293,21 +1294,18 @@ class AddRowInGoodsOrder extends StatelessWidget {
                                                           onChanged: (txt) {
                                                             mapData["value"] =
                                                                 txt;
-                                                                 if (txt
-                                                            .trim()
-                                                            .isNotEmpty) {
-                                                          controller
-                                                              .isRequestedInvalid
-                                                              .value = false;
-                                                        } else {
-                                                          controller
-                                                              .isRequestedInvalid
-                                                              .value = true;
-                                                        }
-
-                                                   
-                                                      },
-                                                          
+                                                            if (txt
+                                                                .trim()
+                                                                .isNotEmpty) {
+                                                              controller
+                                                                  .isRequestedInvalid
+                                                                  .value = false;
+                                                            } else {
+                                                              controller
+                                                                  .isRequestedInvalid
+                                                                  .value = true;
+                                                            }
+                                                          },
                                                         )),
                                                   ],
                                                 ),
