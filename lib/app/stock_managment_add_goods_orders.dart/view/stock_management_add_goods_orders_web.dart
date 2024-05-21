@@ -197,7 +197,7 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                                 Row(
                                                   children: [
                                                     CustomRichText(
-                                                        title: 'Vendor: '),
+                                                        title: 'inventoryNameListdor: '),
                                                     Dimens.boxWidth10,
                                                     SizedBox(
                                                       child: Obx(

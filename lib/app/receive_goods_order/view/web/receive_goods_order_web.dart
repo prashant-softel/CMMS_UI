@@ -287,7 +287,6 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                                   ),
                                                 ),
                                                 Dimens.boxHeight5,
-                                               
                                                 IgnorePointer(
                                                   child: Row(
                                                     children: [
@@ -341,8 +340,7 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                                     ],
                                                   ),
                                                 ),
-
-                                                 Dimens.boxHeight5,
+                                                Dimens.boxHeight5,
                                                 Row(children: [
                                                   CustomRichText(
                                                       title: 'Amount : '),
@@ -389,9 +387,8 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                                                 .amountCtrlr,
                                                       )),
                                                 ]),
-                                                
                                                 Dimens.boxHeight5,
-                                                 Row(
+                                                Row(
                                                   children: [
                                                     CustomRichText(
                                                         title:
@@ -744,7 +741,6 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                                         )),
                                                   ],
                                                 ),
-                                               
                                                 Dimens.boxHeight5,
                                                 Row(children: [
                                                   CustomRichText(
@@ -847,7 +843,7 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                                   ),
                                                 ),
                                                 Dimens.boxHeight5,
-                                                 IgnorePointer(
+                                                IgnorePointer(
                                                   child: Row(
                                                     children: [
                                                       Dimens.boxWidth10,
@@ -1025,7 +1021,7 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                                 //   ],
                                                 // ),
                                                 Dimens.boxHeight5,
-                                                
+
                                                 Row(
                                                   children: [
                                                     CustomRichText(
@@ -1260,7 +1256,7 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                                   ],
                                                 ),
                                                 Dimens.boxHeight5,
-                                               
+
                                                 Row(children: [
                                                   CustomRichText(
                                                       title:
@@ -1756,26 +1752,15 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                                                                       ],
                                                                                       enabled: controller.getPurchaseDetailsByIDModel.value?.status == 306 && varUserAccessModel.value.access_list!.where((e) => e.feature_id == UserAccessConstants.kGoodsFeatureId && e.add == UserAccessConstants.kHaveAddAccess).length > 0 || controller.getPurchaseDetailsByIDModel.value?.status == 309 && varUserAccessModel.value.access_list!.where((e) => e.feature_id == UserAccessConstants.kGoodsFeatureId && e.add == UserAccessConstants.kHaveAddAccess).length > 0 || controller.getPurchaseDetailsByIDModel.value?.status == 307 && varUserAccessModel.value.access_list!.where((e) => e.feature_id == UserAccessConstants.kGoodsFeatureId && e.add == UserAccessConstants.kHaveAddAccess).length > 0 ? true : false,
                                                                                       maxLine: 1,
-                                                                                        errorController:
-                                                          controller
-                                                                  .isAccepetedInvalid
-                                                                  .value
-                                                              ? "Required field"
-                                                              : null,
+                                                                                      errorController: controller.isAccepetedInvalid.value ? "Required field" : null,
                                                                                       textController: new TextEditingController(text: mapData["value"] ?? ''),
                                                                                       onChanged: (txt) {
                                                                                         mapData["value"] = txt;
-                                                                                         if (txt
-                                                            .trim()
-                                                            .isNotEmpty) {
-                                                          controller
-                                                              .isAccepetedInvalid
-                                                              .value = false;
-                                                        } else {
-                                                          controller
-                                                              .isAccepetedInvalid
-                                                              .value = true;
-                                                        }
+                                                                                        if (txt.trim().isNotEmpty) {
+                                                                                          controller.isAccepetedInvalid.value = false;
+                                                                                        } else {
+                                                                                          controller.isAccepetedInvalid.value = true;
+                                                                                        }
                                                                                       },
                                                                                     )),
                                                                               ],
@@ -1850,7 +1835,6 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                                                                             ],
                                                                                             enabled: controller.getPurchaseDetailsByIDModel.value?.status == 306 && varUserAccessModel.value.access_list!.where((e) => e.feature_id == UserAccessConstants.kGoodsFeatureId && e.add == UserAccessConstants.kHaveAddAccess).length > 0 || controller.getPurchaseDetailsByIDModel.value?.status == 307 && varUserAccessModel.value.access_list!.where((e) => e.feature_id == UserAccessConstants.kGoodsFeatureId && e.add == UserAccessConstants.kHaveAddAccess).length > 0 || controller.getPurchaseDetailsByIDModel.value?.status == 309 && varUserAccessModel.value.access_list!.where((e) => e.feature_id == UserAccessConstants.kGoodsFeatureId && e.add == UserAccessConstants.kHaveAddAccess).length > 0 ? true : false,
                                                                                             maxLine: 1,
-                                                                                            
                                                                                             errorController: controller.isRequestedInvalid.value ? "Required field" : null,
                                                                                             textController: new TextEditingController(text: mapData["value"] ?? ''),
                                                                                             onChanged: (txt) {
