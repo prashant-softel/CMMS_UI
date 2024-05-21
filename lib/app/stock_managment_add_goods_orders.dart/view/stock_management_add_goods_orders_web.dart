@@ -1170,8 +1170,9 @@ class AddRowInGoodsOrder extends StatelessWidget {
                                           ],
                                         ),
                                       )
-                                    : (mapData['key'] == "Order") ||
-                                            (mapData['key'] == "Cost")
+                                    :
+                                    // (mapData['key'] == "Order") ||
+                                    (mapData['key'] == "Cost")
                                         ? Padding(
                                             padding: EdgeInsets.only(top: 10),
                                             child: Column(
@@ -1216,9 +1217,9 @@ class AddRowInGoodsOrder extends StatelessWidget {
                                                               : null,
                                                       textController:
                                                           new TextEditingController(
-                                                              text: mapData[
-                                                                      "value"] ??
-                                                                  ''),
+                                                        text:
+                                                            "${controller.dropdownMapperData.value[record[0]['value']]?.cost ?? ""}",
+                                                      ),
                                                       onChanged: (txt) {
                                                         mapData["value"] = txt;
                                                         if (txt
