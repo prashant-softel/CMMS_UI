@@ -306,7 +306,7 @@ class CreatePmPlanController extends GetxController {
                 equipmentCategoryList.indexWhere((x) => x?.name == value);
             selectedInventoryCategoryId =
                 equipmentCategoryList[equipCatIndex]?.id ?? 0;
-
+            isSelectedInventory.value = true;
             selectedInventory.value = value;
             filteredInventoryNameList.value = <InventoryModel>[];
             // inventoryNameList.value = <InventoryModel>[];
@@ -374,6 +374,7 @@ class CreatePmPlanController extends GetxController {
                 frequencyList.indexWhere((x) => x?.name == value);
             selectedfrequencyId = frequencyList[frequencyIndex]?.id ?? 0;
             selectedfrequency.value = value;
+            isSelectedfrequency.value = true;
             Future.delayed(Duration(seconds: 2), () {
               if (selectedInventoryCategoryId > 0 && selectedfrequencyId > 0) {
                 getPreventiveCheckList(facilityId, 1, true, selectedfrequencyId,
@@ -393,6 +394,7 @@ class CreatePmPlanController extends GetxController {
             selectedChecklistId = preventiveCheckList[checklistIndex]?.id ?? 0;
             selectedChecklist.value =
                 preventiveCheckList[checklistIndex]?.name ?? "";
+            isSelectedChecklist.value = true;
           } else {
             selectedChecklistId = 0;
           }
@@ -521,7 +523,7 @@ class CreatePmPlanController extends GetxController {
       isSelectedInventory.value = false;
       isFormInvalid.value = true;
     }
-    if (selectedInventoryNameList == null || selectedInventoryNameList ==[]) {
+    if (selectedInventoryNameList == null || selectedInventoryNameList == []) {
       inventoryNameList == false.obs;
       isFormInvalid.value = true;
     }
@@ -537,7 +539,7 @@ class CreatePmPlanController extends GetxController {
       isStartdateInvalid.value = true;
       isFormInvalid.value = true;
     }
-    
+
     if (planTittleCtrlr.text.trim().length < 3) {
       isPMTitleInvalid.value = true;
       isFormInvalid.value = true;

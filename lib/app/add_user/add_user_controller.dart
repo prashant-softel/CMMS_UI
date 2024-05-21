@@ -558,7 +558,7 @@ class AddUserController extends GetxController {
           getCityList(selectedStateId);
         }
         break;
-      case RxList<DesignationModel>:
+      case RxList<DesignationModel?>:
         {
           int descIndex = designationList!.indexWhere((x) => x?.name == value);
           selectedDesignationId.value = designationList?[descIndex]?.id ?? 0;
@@ -830,6 +830,7 @@ class AddUserController extends GetxController {
       add_access_list: [], //add_accessList,
       gender_id: selectedGenderId,
       DOB: _dob,
+      designationId: selectedDesignationId.value,
       city_id: selectedCityId,
       contact_no: _mobileno,
       company_id: selectedBusinessTypeId,
