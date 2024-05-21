@@ -4,11 +4,13 @@ import 'package:flutter/material.dart';
 class CustomRichText extends StatefulWidget {
   final String title;
   final int? maxline;
+  final bool includeAsterisk; 
 
   CustomRichText({
     super.key,
     required this.title,
     this.maxline,
+    this.includeAsterisk = true,
   });
 
   @override
@@ -20,15 +22,21 @@ class _CustomRichTextState extends State<CustomRichText> {
   Widget build(BuildContext context) {
     return RichText(
       maxLines: widget.maxline,
-      text: TextSpan(text: widget.title, style: Styles.blackBold16, children: [
-        TextSpan(
-          text: '*',
-          style: TextStyle(
-            color: ColorValues.orangeColor,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-      ]),
+      text: TextSpan(
+        text: widget.title,
+        style: Styles.blackBold16,
+        children: widget.includeAsterisk
+            ? [
+                TextSpan(
+                  text: '*',
+                  style: TextStyle(
+                    color: ColorValues.orangeColor,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ]
+            : [],
+      ),
     );
   }
 }
@@ -53,21 +61,24 @@ class _CustomRichTextMobileState extends State<CustomRichTextMobile> {
     return RichText(
       maxLines: widget.maxline,
       text: TextSpan(
-          text: widget.title,
-          style: TextStyle(
-            color: ColorValues.blackColor,
-            fontSize: Dimens.fourteen,
-            fontFamily: 'Poppins',
-          ),
-          children: [
-            TextSpan(
-              text: '*',
-              style: TextStyle(
-                color: ColorValues.orangeColor,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ]),
+        text: widget.title,
+        style: TextStyle(
+          color: ColorValues.blackColor,
+          fontSize: Dimens.fourteen,
+          fontFamily: 'Poppins',
+        ),
+        children:
+             [
+                TextSpan(
+                  text: '*',
+                  style: TextStyle(
+                    color: ColorValues.orangeColor,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ]
+            
+      ),
     );
   }
 }
