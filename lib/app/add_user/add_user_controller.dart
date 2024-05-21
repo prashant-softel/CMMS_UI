@@ -92,7 +92,7 @@ class AddUserController extends GetxController {
       GetNotificationByUserIdModel().obs;
   RxList<NotificationListByUserId?> notificationListByUserId =
       <NotificationListByUserId>[].obs;
-
+  RxList<DesignationModel?>? designationList = <DesignationModel?>[].obs;
   RxList<String> moduleNameList = <String>[].obs;
   var selectedImageBytes = Rx<Uint8List>(Uint8List(0));
   final RxBool isChecked = false.obs;
@@ -145,6 +145,9 @@ class AddUserController extends GetxController {
   Rx<String> selectedres = 'Select Responsbility'.obs;
   Rx<bool> isSelectedres = true.obs;
   int selectedresId = 0;
+  RxBool isDesignationSelected = true.obs;
+  RxInt selectedDesignationId = 0.obs;
+  RxString selectedDesignation = ''.obs;
   RxList<int> selectedresIdsList = <int>[].obs;
   RxList<DesignationModel> selectedResNameList = <DesignationModel>[].obs;
   Rx<String> selectedFacility = ''.obs;
@@ -202,6 +205,9 @@ class AddUserController extends GetxController {
       });
       Future.delayed(Duration(seconds: 1), () {
         getResponsibilityList(true);
+      });
+      Future.delayed(Duration(seconds: 1), () {
+        getDesignationList(true);
       });
       if (userId.value != 0) {
         await getUserDetails();
@@ -262,6 +268,15 @@ class AddUserController extends GetxController {
       for (var _respList in _moduleList) {
         responsList.add(_respList);
       }
+    }
+  }
+
+  Future<void> getDesignationList(bool isLoading) async {
+    designationList?.value = <DesignationModel>[];
+    final _designaiton =
+        await addUserPresenter.getDesignationList(isLoading: isLoading);
+    if (_designaiton != null) {
+      designationList!.value = _designaiton;
     }
   }
 
@@ -512,6 +527,7 @@ class AddUserController extends GetxController {
   }
 
   void onValueChanged(dynamic list, dynamic value) {
+    print(value);
     switch (list.runtimeType) {
       case RxList<CountryModel>:
         {
@@ -542,6 +558,15 @@ class AddUserController extends GetxController {
           getCityList(selectedStateId);
         }
         break;
+      case RxList<DesignationModel>:
+        {
+          int descIndex = designationList!.indexWhere((x) => x?.name == value);
+          selectedDesignationId.value = designationList?[descIndex]?.id ?? 0;
+          print(
+            "designation id: ${selectedDesignationId.value} \ndesignation: ${selectedDesignationId.value}",
+          );
+        }
+        break;
       case RxList<CityModel>:
         {
           int cityIndex = cityList.indexWhere((x) => x?.name == value);
@@ -558,22 +583,6 @@ class AddUserController extends GetxController {
         {
           int bloodIndex = bloodList.indexWhere((x) => x?.name == value);
           selectedBloodId = bloodList[bloodIndex]?.id ?? 0;
-        }
-        break;
-      case RxList<DesignationModel>:
-        {
-          if (value != null) {
-            for (var selectedItem in value) {
-              int equipCatIndex =
-                  responsList.indexWhere((x) => x?.name == selectedItem);
-
-              if (equipCatIndex >= 0) {
-                selectedresIdsList.add(responsList[equipCatIndex]?.id ?? 0);
-              }
-            }
-          }
-          //int resIndex = responsList.indexWhere((x) => x?.name == value);
-          // selectedresId = responsList[resIndex]?.id ?? 0;
         }
         break;
       case RxList<RoleModel>:
@@ -752,6 +761,7 @@ class AddUserController extends GetxController {
       add_access_list: [], //add_accessList,
       gender_id: selectedGenderId,
       DOB: _dob,
+      designationId: selectedDesignationId.value,
       company_id: selectedBusinessTypeId,
       city_id: selectedCityId,
       contact_no: _mobileno,

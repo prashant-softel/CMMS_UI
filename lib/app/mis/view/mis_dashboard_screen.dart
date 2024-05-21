@@ -172,7 +172,7 @@ class MisDashboardScreen extends GetView<MisDashboardController> {
                                         }),
                                     //  if (Responsive.isDesktop(context))
                                     createContentTile(
-                                        title: "Check Point",
+                                        title: "MIS Check Point",
                                         onTap: () {
                                           // Get.toNamed(
                                           //   Routes.preventive_checkPoint,
@@ -227,7 +227,7 @@ class MisDashboardScreen extends GetView<MisDashboardController> {
                                       : 5,
                                   children: <Widget>[
                                     createContentTile(
-                                        title: "Checklist Plan",
+                                        title: "MIS Plan",
                                         onTap: () {
                                           controller.goToPlanListScreen();
                                         }),

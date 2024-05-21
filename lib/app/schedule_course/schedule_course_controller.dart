@@ -36,6 +36,9 @@ class ScheduleController extends GetxController {
   TextEditingController employeeDesignation = TextEditingController();
   FocusNode employeeDesignationFocus = FocusNode();
   ScrollController employeeDesignationScroll = ScrollController();
+  TextEditingController company = TextEditingController();
+  FocusNode companyFocus = FocusNode();
+  ScrollController companyScroll = ScrollController();
   TextEditingController employeeNumber = TextEditingController();
   FocusNode employeeNumberFocus = FocusNode();
   ScrollController employeeNumberScroll = ScrollController();
@@ -153,6 +156,7 @@ class ScheduleController extends GetxController {
         employeeEmail: employeeEmail.text,
         employeeNumber: employeeNumber.text,
         designation: employeeDesignation.text,
+        companyName: company.text,
       ),
     );
     clear();
@@ -162,6 +166,8 @@ class ScheduleController extends GetxController {
     employeeName.clear();
     employeeEmail.clear();
     employeeNumber.clear();
+    employeeDesignation.clear();
+    company.clear();
   }
 
   removeItem(int index) {

@@ -12,7 +12,7 @@ import '../../../domain/models/get_asset_items_model.dart';
 
 class MrsIssueContentMobile extends GetView<MrsIssueController> {
   MrsIssueContentMobile({Key? key}) : super(key: key);
-
+  final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     ///
@@ -238,46 +238,60 @@ class MrsIssueContentMobile extends GetView<MrsIssueController> {
                                                     SizedBox(
                                                       width: 5,
                                                     ),
-                                                    Padding(
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                              8.0),
-                                                      child: Container(
-                                                          width:
-                                                              (Get.width * .4),
-                                                          decoration:
-                                                              BoxDecoration(
-                                                            boxShadow: [
-                                                              BoxShadow(
-                                                                color: Colors
-                                                                    .black26,
-                                                                offset:
-                                                                    const Offset(
-                                                                  5.0,
-                                                                  5.0,
+                                                    Form(
+                                                      key: _formKey,
+                                                      child: Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(8.0),
+                                                        child: Container(
+                                                            width: (Get.width *
+                                                                .4),
+                                                            decoration:
+                                                                BoxDecoration(
+                                                              boxShadow: [
+                                                                BoxShadow(
+                                                                  color: Colors
+                                                                      .black26,
+                                                                  offset:
+                                                                      const Offset(
+                                                                    5.0,
+                                                                    5.0,
+                                                                  ),
+                                                                  blurRadius:
+                                                                      5.0,
+                                                                  spreadRadius:
+                                                                      1.0,
                                                                 ),
-                                                                blurRadius: 5.0,
-                                                                spreadRadius:
-                                                                    1.0,
-                                                              ),
-                                                            ],
-                                                            color: ColorValues
-                                                                .whiteColor,
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        5),
-                                                          ),
-                                                          child:
-                                                              LoginCustomTextfield(
-                                                            textController: controller
-                                                                    .mrsDetailsModel
-                                                                    .value!
-                                                                    .cmmrsItems![
-                                                                        index]
-                                                                    .serial_number_controller
-                                                                as TextEditingController,
-                                                          )),
+                                                              ],
+                                                              color: ColorValues
+                                                                  .whiteColor,
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          5),
+                                                            ),
+                                                            child:
+                                                                LoginCustomTextfield(
+                                                              validator:
+                                                                  (value) {
+                                                                if (value ==
+                                                                        null ||
+                                                                    value
+                                                                        .isEmpty) {
+                                                                  return 'This field cannot be empty';
+                                                                }
+                                                                return null;
+                                                              },
+                                                              textController: controller
+                                                                      .mrsDetailsModel
+                                                                      .value!
+                                                                      .cmmrsItems![
+                                                                          index]
+                                                                      .serial_number_controller
+                                                                  as TextEditingController,
+                                                            )),
+                                                      ),
                                                     ),
                                                   ])
                                                 : Dimens.box0,

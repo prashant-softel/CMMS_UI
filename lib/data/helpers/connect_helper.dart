@@ -8742,7 +8742,7 @@ class ConnectHelper {
   Future<ResponseModel> updateMaterialCategory({
     required String auth,
     bool? isLoading,
-     modulelistJsonString,
+    modulelistJsonString,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
       'SMMaster/UpdateMaterialCategory',
