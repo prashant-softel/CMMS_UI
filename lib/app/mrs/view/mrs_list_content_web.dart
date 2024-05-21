@@ -501,13 +501,22 @@ class MrsListDataSource extends DataTableSource {
                         ),
 
                         varUserAccessModel.value.access_list!
-                                    .where((e) =>
-                                        e.feature_id ==
-                                            UserAccessConstants.kMrsFeatureId &&
-                                        e.edit ==
-                                            UserAccessConstants.kHaveEditAccess)
-                                    .length >
-                                0
+                                        .where((e) =>
+                                            e.feature_id ==
+                                                UserAccessConstants
+                                                    .kMrsFeatureId &&
+                                            e.edit ==
+                                                UserAccessConstants
+                                                    .kHaveEditAccess)
+                                        .length >
+                                    0 &&
+                                controller.mrsList
+                                        .firstWhere(
+                                          (e) => e?.id == MrsDetails!.id,
+                                          orElse: () => MrsListModel(id: 00),
+                                        )
+                                        ?.status !=
+                                    324
                             ? TableActionButton(
                                 color: ColorValues.editColor,
                                 icon: Icons.edit,
