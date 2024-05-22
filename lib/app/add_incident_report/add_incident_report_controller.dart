@@ -2177,7 +2177,7 @@ class AddIncidentReportController extends GetxController {
   }
 
   Future<void> viewIncidentReport({int? id}) async {
-    Get.toNamed(Routes.viewIncidentReportScreen, arguments: id);
+    Get.toNamed(Routes.viewIncidentReportScreen, arguments: {"irId":id});
     print('Argument$id');
   }
 }
