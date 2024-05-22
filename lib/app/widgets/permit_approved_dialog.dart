@@ -172,7 +172,7 @@ class PermitApprovedDialog extends GetView {
                                           style: Styles.blackBold17,
                                         ),
                                         Text(
-                                          '${controller.viewPermitDetailsModel.value?.start_datetime}',
+                                          '${controller.viewPermitDetailsModel.value?.approve_at}',
                                           style: Styles.black17,
                                         ),
                                       ],
