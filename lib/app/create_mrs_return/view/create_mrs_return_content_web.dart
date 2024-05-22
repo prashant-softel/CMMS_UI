@@ -359,45 +359,46 @@ class CreateMrsReturnContentWeb extends GetView<CreateMrsReturnController> {
                                                                         new TextEditingController(
                                                                             text: mapData["value"] ??
                                                                                 ''),
-                                                                    onChanged:
-                                                                        (txt) {
-                                                                      // int? issueQty = int.tryParse(controller
-                                                                      //         .dropdownMapperData
-                                                                      //         .value[record[0]
-                                                                      //             [
-                                                                      //             'value']]
-                                                                      //         ?.issued_qty ??
-                                                                      //     "");
-                                                                      // int? usedQty = int.tryParse(controller
-                                                                      //         .dropdownMapperData
-                                                                      //         .value[record[0]
-                                                                      //             [
-                                                                      //             'value']]
-                                                                      //         ?.consumed_qty ??
-                                                                      //     "");
-                                                                      // int? returnQty =
-                                                                      //     int.tryParse(
-                                                                      //         txt);
-                                                                      // if (returnQty !=
-                                                                      //         null &&
-                                                                      //     issueQty !=
-                                                                      //         null &&
-                                                                      //     usedQty !=
-                                                                      //         null &&
-                                                                      //     returnQty <=
-                                                                      //         (issueQty -
-                                                                      //             usedQty))
-                                                                      //  {
-                                                                      mapData["value"] =
-                                                                          txt;
-                                                                      //  } else {
-                                                                      // Show an error message if the return qty is greater than (issue - used) qty
-                                                                      //   Fluttertoast
-                                                                      //       .showToast(
-                                                                      //     msg:
-                                                                      //         "Please enter appropriate qty!",
-                                                                      //   );
-                                                                    }),
+                                                                    onChanged: (txt) {
+                                                                // Parse issuedQty, usedQty, and returnQty
+                                                                 int? issueQty = (controller
+                                                                        .dropdownMapperData
+                                                                        .value[record[0]
+                                                                            [
+                                                                            'value']]
+                                                                        ?.issued_qty ??
+                                                                    "");
+                                                                int? usedQty = (controller
+                                                                        .dropdownMapperData
+                                                                        .value[record[0]
+                                                                            [
+                                                                            'value']]
+                                                                        ?.consumed_qty ??
+                                                                    "");
+                                                                int? returnQty =
+                                                                    int.tryParse(
+                                                                        txt);
+                                                                if (returnQty !=
+                                                                        null &&
+                                                                    issueQty !=
+                                                                        null &&
+                                                                    usedQty !=
+                                                                        null &&
+                                                                    returnQty <=
+                                                                        (issueQty -
+                                                                            usedQty)) {
+                                                                  mapData["value"] =
+                                                                      txt;
+                                                                } else {
+                                                                  // Show an error message if the return qty is greater than (issue - used) qty
+                                                                  Fluttertoast
+                                                                      .showToast(
+                                                                    msg:
+                                                                        "Enter $issueQty - $usedQty for return qty!",
+                                                                  );
+                                                                }
+                                                              },
+                                                            ),
                                                           ),
                                                         )
                                                       : (mapData['key'] ==
