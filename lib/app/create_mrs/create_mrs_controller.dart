@@ -121,18 +121,20 @@ class CreateMrsController extends GetxController {
 
   void checkform() {
     if (remarkCtrlr.text == '') {
+      Fluttertoast.showToast(msg: 'Enter Comment!');
       isFormInvalid.value = true;
-    } else {
-      isFormInvalid.value == false;
-    }
+    } 
+    // else {
+    //   isFormInvalid.value == false;
+    // }
   }
 
   Future<void> createMrs() async {
-    {
-      checkform();
-      if (isFormInvalid.value) {
-        return;
-      }
+    // try {
+      // checkform();
+      // if (isFormInvalid.value) {
+      //   return;
+      // }
       String _activity = activityCtrlr.text.trim();
       String _remark = remarkCtrlr.text.trim();
       String _setTemp = setTemlateCtrlr.text.trim();
@@ -184,6 +186,8 @@ class CreateMrsController extends GetxController {
           Routes.mrsListScreen,
         );
       }
-    }
+    // } catch (e) {
+    //   print(e);
+    // }
   }
 }

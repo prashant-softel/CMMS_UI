@@ -292,7 +292,7 @@ class CreateMrsContentWeb extends GetView<CreateMrsController> {
                                                 selectedValue: mapData["value"],
                                                 onValueChanged:
                                                     (list, selectedValue) {
-                                                  print({
+                                                  print({"web",
                                                     controller
                                                             .dropdownMapperData[
                                                         selectedValue]
