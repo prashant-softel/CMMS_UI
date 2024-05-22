@@ -8,6 +8,7 @@ import 'package:cmms/domain/models/create_waste_data_model.dart';
 import 'package:cmms/domain/models/facility_model.dart';
 import 'package:cmms/domain/models/type_model.dart';
 import 'package:cmms/domain/models/type_of_waste_model.dart';
+import 'package:cmms/domain/models/waste_data_list_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -20,12 +21,14 @@ class WasteDataController extends GetxController {
 
   final HomeController homecontroller = Get.find();
   RxList<BusinessListModel?> ownerList = <BusinessListModel>[].obs;
+  RxList<WasteDataList?> wasteDataList = <WasteDataList>[].obs;
+  RxList<WasteDataList> filteredData = <WasteDataList>[].obs;
+  RxList<MasterList> masterDataList = <MasterList>[].obs;
   Rx<bool> isSelectedBusinessType = true.obs;
 
   int selectedBusinessTypeId = 1;
   Rx<String> selectedBusinessType = ''.obs;
   RxList<FacilityModel?> facilityList = <FacilityModel>[].obs;
-
   int facilityId = 0;
   Rx<String> selectedBlock = ''.obs;
   Rx<DateTime> selectedWasteDataTime = DateTime.now().obs;
@@ -57,16 +60,37 @@ class WasteDataController extends GetxController {
     MonthModel(name: 'Haz waste oil barrel generated in No ', id: "8"),
   ].obs;
 
+  Rx<bool> isLoading = true.obs;
+  int selectedYear = 2024;
+
   ///
   @override
   void onInit() async {
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
       facilityId = event;
+      Future.delayed(Duration(seconds: 2), () async {
+        await getWasteDataList(facilityId, false);
+      });
       Future.delayed(Duration(seconds: 1), () async {
         getTypeOfWasteList();
       });
     });
     super.onInit();
+  }
+
+  Future<void> getWasteDataList(int facilityId, bool isExport) async {
+    wasteDataList.value = <WasteDataList>[];
+    filteredData.value = <WasteDataList>[];
+    masterDataList.value = <MasterList>[];
+
+    final _wasteDataList = await wasteDataPresenter.getWasteDataList(
+      isLoading: isLoading.value,
+      start_date: selectedYear.toString(),
+      end_date: (selectedYear - 1).toString(),
+      facility_id: facilityId,
+      isExport: isExport,
+    );
+    wasteDataList.value = _wasteDataList;
   }
 
   Future<void> getFacilityList({bool? isLoading}) async {
@@ -225,12 +249,10 @@ class WasteDataController extends GetxController {
         {
           if (value != "Please Select") {
             int typeOfWaterIndex =
-              typeOfWasteList.indexWhere((x) => x?.name == value);
-          selectedTypeOfWasteId = typeOfWasteList[typeOfWaterIndex]?.id ?? 0;
-            
-          }else{
-            selectedTypeOfWasteId=0;
-
+                typeOfWasteList.indexWhere((x) => x?.name == value);
+            selectedTypeOfWasteId = typeOfWasteList[typeOfWaterIndex]?.id ?? 0;
+          } else {
+            selectedTypeOfWasteId = 0;
           }
         }
         break;
