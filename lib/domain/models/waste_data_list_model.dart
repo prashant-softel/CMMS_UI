@@ -1,7 +1,8 @@
 import 'dart:convert';
 
-List<WasteDataList> wasteDataListFromJson(String str) => List<WasteDataList>.from(
-    json.decode(str).map((x) => WasteDataList.fromJson(x)));
+List<WasteDataList> wasteDataListFromJson(String str) =>
+    List<WasteDataList>.from(
+        json.decode(str).map((x) => WasteDataList.fromJson(x)));
 
 String wasteDataListToJson(List<WasteDataList> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
@@ -111,7 +112,7 @@ class DetailData {
   double procuredQty;
   double consumedQty;
   double closingQty;
-  int show_opening;
+  // int show_opening;
 
   DetailData({
     required this.waterType,
@@ -119,7 +120,7 @@ class DetailData {
     required this.procuredQty,
     required this.consumedQty,
     required this.closingQty,
-    required this.show_opening,
+    // required this.show_opening,
   });
 
   factory DetailData.fromJson(Map<String, dynamic> json) {
@@ -129,7 +130,7 @@ class DetailData {
       procuredQty: json['procured_qty'] ?? 0.0,
       consumedQty: json['consumed_qty'] ?? 0.0,
       closingQty: json['closing_qty'] ?? 0.0,
-      show_opening: json['show_opening'],
+      // show_opening: json['show_opening'],
     );
   }
 
@@ -140,7 +141,7 @@ class DetailData {
       'procured_qty': procuredQty,
       'consumed_qty': consumedQty,
       'closing_qty': closingQty,
-      'show_opening': show_opening,
+      // 'show_opening': show_opening,
     };
   }
 }
