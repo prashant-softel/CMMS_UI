@@ -6,6 +6,7 @@ import 'package:cmms/app/utils/utility.dart';
 import 'package:cmms/domain/models/mrs_detail_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import '../../domain/models/comment_model.dart';
 import '../home/home_controller.dart';
@@ -24,6 +25,7 @@ class MrsApproveController extends GetxController {
   Rx<int> mrsId = 0.obs;
   Rx<MrsDetailsModel?> mrsDetailsModel = MrsDetailsModel().obs;
   String whereUsedType = "";
+  Rx<bool> isFormInvalid = false.obs;
   var commentCtrlr = TextEditingController();
 
   ///
@@ -80,8 +82,21 @@ class MrsApproveController extends GetxController {
     // print({"mrsdetailss", mrsDetailsModel});
   }
 
+  void checkform() {
+    if (commentCtrlr.text == '') {
+      Fluttertoast.showToast(msg: 'Enter Comment!');
+      isFormInvalid.value = true;
+    } else {
+      isFormInvalid.value = false;
+    }
+  }
+
   approveMrs() async {
     {
+      checkform();
+      if (isFormInvalid.value) {
+        return;
+      }
       String _comment = commentCtrlr.text.trim();
 
       CommentModel commentModel =
