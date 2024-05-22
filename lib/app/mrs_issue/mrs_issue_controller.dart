@@ -7,6 +7,7 @@ import 'package:cmms/domain/models/issue_mrs_model.dart';
 import 'package:cmms/domain/models/mrs_detail_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import '../home/home_controller.dart';
 import '../navigators/navigators.dart';
@@ -31,6 +32,7 @@ class MrsIssueController extends GetxController {
   var commentCtrlr = TextEditingController();
   var controllers = <TextEditingController>[].obs;
   var errorMessages = <String?>[].obs;
+  Rx<bool> isFormInvalid = false.obs;
   // final List<TextEditingController> _textcontrollers = [];
   // final List<String?> errorMessages = [];
 
@@ -126,28 +128,44 @@ class MrsIssueController extends GetxController {
     // print({"mrsdetailss", mrsDetailsModel});
   }
 
-  issueMrs() async {
-    // if (isFormValid.value) {
-    String _comment = commentCtrlr.text.trim();
-    List<CmmrsItemsModel> cmmrsItems = <CmmrsItemsModel>[];
-    cmmrsItemsDetail.forEach((element) {
-      cmmrsItems.add(CmmrsItemsModel(
-          mrs_item_id: element?.id ?? 0,
-          serial_number: element?.serial_number_controller?.text ?? "",
-          asset_item_ID: element?.asset_item_ID ?? 0,
-          issued_qty: int.tryParse(element!.issued_qty_controller!.text) ?? 0));
-    });
-    IssueMrsModel issueMrs = IssueMrsModel(
-        issue_comment: _comment, ID: mrsId.value, cmmrsItems: cmmrsItems);
-    var issuetoJsonString = issueMrs.toJson();
-    final response = await mrsIssuePresenter.issueMrs(
-      issuetoJsonString: issuetoJsonString,
-      isLoading: true,
-    );
-    if (response == true) {
-      Get.offAllNamed(Routes.mrsListScreen);
+  void checkform() {
+    if (commentCtrlr.text == '') {
+      Fluttertoast.showToast(msg: 'Enter Comment!');
+      isFormInvalid.value = true;
     } else {
-      Utility.showDialog("Issue", "Please fill all the required fields");
+      isFormInvalid.value = false;
+    }
+  }
+
+  issueMrs() async {
+    {
+      checkform();
+      if (isFormInvalid.value) {
+        return;
+      }
+      // if (isFormValid.value) {
+      String _comment = commentCtrlr.text.trim();
+      List<CmmrsItemsModel> cmmrsItems = <CmmrsItemsModel>[];
+      cmmrsItemsDetail.forEach((element) {
+        cmmrsItems.add(CmmrsItemsModel(
+            mrs_item_id: element?.id ?? 0,
+            serial_number: element?.serial_number_controller?.text ?? "",
+            asset_item_ID: element?.asset_item_ID ?? 0,
+            issued_qty:
+                int.tryParse(element!.issued_qty_controller!.text) ?? 0));
+      });
+      IssueMrsModel issueMrs = IssueMrsModel(
+          issue_comment: _comment, ID: mrsId.value, cmmrsItems: cmmrsItems);
+      var issuetoJsonString = issueMrs.toJson();
+      final response = await mrsIssuePresenter.issueMrs(
+        issuetoJsonString: issuetoJsonString,
+        isLoading: true,
+      );
+      if (response == true) {
+        Get.offAllNamed(Routes.mrsListScreen);
+      } else {
+        Utility.showDialog("Issue", "Please fill all the required fields");
+      }
     }
   }
 }
