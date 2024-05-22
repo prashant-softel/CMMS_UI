@@ -34,6 +34,7 @@ class AddInventoryController extends GetxController {
   RxList<int?> selectedWorkAreaIdList = <int>[].obs;
   final HomeController homeController = Get.find();
   FocusNode nameFocus = FocusNode();
+  RxBool isFormValid = false.obs;
   ScrollController nameScroll = ScrollController();
   FocusNode wdescFocus = FocusNode();
   ScrollController wdescScroll = ScrollController();
@@ -95,6 +96,10 @@ class AddInventoryController extends GetxController {
   var parentEquipmentNoCtrlr = TextEditingController();
   var costCtrlr = TextEditingController();
   var warrentyDescriptionCtrlr = TextEditingController();
+
+  RxBool isSerialNoInvalid = false.obs;
+  RxBool isAssetsNameInvalid = false.obs;
+  RxBool isAssetDescInvalid = false.obs;
 
   int selectedEquipmentId = 0;
 //CategoryModel
@@ -378,7 +383,46 @@ class AddInventoryController extends GetxController {
     }
   }
 
+  void checkForm() {
+    if (selectedBlocks.value == "") {
+      isBlocksSelected.value = false;
+      isFormValid.value = false;
+    }
+    if (selectedEquipmentName.value == "") {
+      isEquipmentNameSelected.value = false;
+      isFormValid.value = false;
+    }
+    if (selectedTypeName.value == "") {
+      isTypeNameSelected.value = false;
+      isFormValid.value = false;
+    }
+    if (selectedEquipmentCategoryName.value == "") {
+      isEquipmentCategoryNameSelected.value = false;
+      isFormValid.value = false;
+    }
+    if (selectedStatusName.value == "") {
+      isStatusNameSelected.value = false;
+      isFormValid.value = false;
+    }
+    if (serialNoCtrlr.text.trim().length == 0) {
+      isSerialNoInvalid.value = true;
+      isFormValid.value = false;
+    }
+    if (assetsNameCtrlr.text.trim().length == 0) {
+      isAssetsNameInvalid.value = true;
+      isFormValid.value = false;
+    }
+    if (assesDiscriptionCtrlr.text.trim().length == 0) {
+      isAssetDescInvalid.value = true;
+      isFormValid.value = false;
+    }
+  }
+
   Future<bool> updateInventory({List<dynamic>? fileIds}) async {
+    checkForm();
+    if (isFormValid.value == false) {
+      return false;
+    }
     String _serialNoCtrlr = serialNoCtrlr.text.trim();
     String _assetsNameCtrlr = assetsNameCtrlr.text.trim();
     String _moduleQuantityCtrlr = moduleQuantityCtrlr.text.trim();
@@ -520,6 +564,10 @@ class AddInventoryController extends GetxController {
 
 // /add inventory
   Future<bool> AddInventory({List<dynamic>? fileIds}) async {
+    checkForm();
+    if (isFormValid.value == false) {
+      return false;
+    }
     String _serialNoCtrlr = serialNoCtrlr.text.trim();
     String _assetsNameCtrlr = assetsNameCtrlr.text.trim();
     String _moduleQuantityCtrlr = moduleQuantityCtrlr.text.trim();
@@ -745,13 +793,13 @@ class AddInventoryController extends GetxController {
     switch (list.runtimeType) {
       case RxList<FacilityModel>:
         {
-          if(value != "Please Select"){
-            int facilityIndex = facilityList.indexWhere((x) => x?.name == value);
+          if (value != "Please Select") {
+            int facilityIndex =
+                facilityList.indexWhere((x) => x?.name == value);
 
-          _facilityId.add(facilityList[facilityIndex]?.id ?? 0);
-
-          }else{
-            facilityId=0;
+            _facilityId.add(facilityList[facilityIndex]?.id ?? 0);
+          } else {
+            facilityId = 0;
           }
         }
         break;
@@ -760,12 +808,12 @@ class AddInventoryController extends GetxController {
         {
           if (value != "Please Select") {
             int frequencyIndex =
-              frequencyList.indexWhere((x) => x?.name == value);
-          selectedfrequencyId = frequencyList[frequencyIndex]?.id ?? 0;
-          selectedfrequency.value = value;
-            
-          }else{
-            selectedfrequencyId=0;
+                frequencyList.indexWhere((x) => x?.name == value);
+            selectedfrequencyId = frequencyList[frequencyIndex]?.id ?? 0;
+            selectedfrequency.value = value;
+            isSelectedfrequency.value = true;
+          } else {
+            selectedfrequencyId = 0;
           }
         }
         break;
@@ -773,13 +821,12 @@ class AddInventoryController extends GetxController {
         {
           if (value != "Please Select") {
             int manufacturerModelNameIndex =
-              manufacturerModelNameList.indexWhere((x) => x?.name == value);
-          selectedmanufacturerNameId =
-              manufacturerModelNameList[manufacturerModelNameIndex]?.id ?? 0;
-          selectedmanufacturerName.value = value;
-            
-          }else{
-            selectedmanufacturerNameId=0;
+                manufacturerModelNameList.indexWhere((x) => x?.name == value);
+            selectedmanufacturerNameId =
+                manufacturerModelNameList[manufacturerModelNameIndex]?.id ?? 0;
+            selectedmanufacturerName.value = value;
+          } else {
+            selectedmanufacturerNameId = 0;
           }
         }
         break;
@@ -787,40 +834,38 @@ class AddInventoryController extends GetxController {
         {
           if (value != "Please Select") {
             int warrantyIndex =
-              warrantyNameList.indexWhere((x) => x?.name == value);
-          selectedWarrentyNameId = warrantyNameList[warrantyIndex]?.id ?? 0;
-          selectedWarrantyName.value = value;
-            
-          }else{
-            selectedWarrentyNameId=0;
+                warrantyNameList.indexWhere((x) => x?.name == value);
+            selectedWarrentyNameId = warrantyNameList[warrantyIndex]?.id ?? 0;
+            selectedWarrantyName.value = value;
+          } else {
+            selectedWarrentyNameId = 0;
           }
         }
         break;
       case RxList<SupplierNameModel>:
         {
-         if (value != "Please Select") {
-           int supplierIndex =
-              supplierNameModelNameList.indexWhere((x) => x?.name == value);
-          selectedsupplierrNameId =
-              supplierNameModelNameList[supplierIndex]?.id ?? 0;
-          selectedsupplierrName.value = value;
-           
-         }else{
-          selectedsupplierrNameId=0;
-         }
+          if (value != "Please Select") {
+            int supplierIndex =
+                supplierNameModelNameList.indexWhere((x) => x?.name == value);
+            selectedsupplierrNameId =
+                supplierNameModelNameList[supplierIndex]?.id ?? 0;
+            selectedsupplierrName.value = value;
+          } else {
+            selectedsupplierrNameId = 0;
+          }
         }
         break;
       case RxList<CurrencyListModel>:
         {
           if (value != "Please Select") {
             int unitCurrencyListIndex =
-              unitCurrencyList.indexWhere((x) => x?.name == value);
-          selectedUnitCurrencyId =
-              unitCurrencyList[unitCurrencyListIndex]?.id ?? 0;
-          print('CurrencyId${selectedUnitCurrencyId}');
-          selectedUnitCurrency.value = value;
-          }else{
-            selectedUnitCurrencyId=0;
+                unitCurrencyList.indexWhere((x) => x?.name == value);
+            selectedUnitCurrencyId =
+                unitCurrencyList[unitCurrencyListIndex]?.id ?? 0;
+            print('CurrencyId${selectedUnitCurrencyId}');
+            selectedUnitCurrency.value = value;
+          } else {
+            selectedUnitCurrencyId = 0;
           }
         }
         break;
@@ -828,13 +873,12 @@ class AddInventoryController extends GetxController {
         {
           if (value != "Please Select") {
             int warrantyUsageTermIndex =
-              warrantyUsageTermNameList.indexWhere((x) => x?.name == value);
-          selectedwarrantyUsageTermNameId =
-              warrantyNameList[warrantyUsageTermIndex]?.id ?? 0;
-          selectedwarrantyUsageTermListName.value = value;
-            
-          }else{
-            selectedwarrantyUsageTermNameId=0;
+                warrantyUsageTermNameList.indexWhere((x) => x?.name == value);
+            selectedwarrantyUsageTermNameId =
+                warrantyNameList[warrantyUsageTermIndex]?.id ?? 0;
+            selectedwarrantyUsageTermListName.value = value;
+          } else {
+            selectedwarrantyUsageTermNameId = 0;
           }
         }
         break;
@@ -842,13 +886,12 @@ class AddInventoryController extends GetxController {
         {
           if (value != "Please Select") {
             int warrantyUsageIndex =
-              warrantyUsageTermNameList.indexWhere((x) => x?.name == value);
+                warrantyUsageTermNameList.indexWhere((x) => x?.name == value);
 
-          selectedwarrantyUsageTermNameId =
-              warrantyUsageTermNameList[warrantyUsageIndex]?.id ?? 0;
-            
+            selectedwarrantyUsageTermNameId =
+                warrantyUsageTermNameList[warrantyUsageIndex]?.id ?? 0;
           } else {
-            selectedwarrantyUsageTermNameId=0;
+            selectedwarrantyUsageTermNameId = 0;
           }
         }
         break;
@@ -857,9 +900,10 @@ class AddInventoryController extends GetxController {
           if (value != "Please Select") {
             int blockIndex = blocksList.indexWhere((x) => x?.name == value);
 
-          selectedBlockListId = blocksList[blockIndex]?.id ?? 0;
+            selectedBlockListId = blocksList[blockIndex]?.id ?? 0;
+            isBlocksSelected.value = true;
           } else {
-            selectedBlockListId=0;
+            selectedBlockListId = 0;
           }
         }
         break;
@@ -867,34 +911,38 @@ class AddInventoryController extends GetxController {
         {
           if (value != "Please Select") {
             int eqipmentNameListIndex =
-              eqipmentNameList.indexWhere((x) => x?.name == value);
-          selectedEquipmentnameId =
-              eqipmentNameList[eqipmentNameListIndex]?.id ?? 0;
-          print({"selectedEquipmentnameId", selectedEquipmentnameId});
+                eqipmentNameList.indexWhere((x) => x?.name == value);
+            selectedEquipmentnameId =
+                eqipmentNameList[eqipmentNameListIndex]?.id ?? 0;
+            isEquipmentNameSelected.value = true;
+            print({"selectedEquipmentnameId", selectedEquipmentnameId});
           } else {
-            selectedEquipmentnameId=0;
+            selectedEquipmentnameId = 0;
           }
         }
         break;
       case RxList<InventoryCategoryModel>:
         {
-         if (value != "Please Select") {
+          if (value != "Please Select") {
             int equipCatIndex =
-              equipmentCategoryList.indexWhere((x) => x?.name == value);
-          selectedEquipmentCategoryNameId.value =
-              equipmentCategoryList[equipCatIndex]?.id ?? 0;
-         } else {
-          //  selectedEquipmentCategoryNameId = 0;
-         }
+                equipmentCategoryList.indexWhere((x) => x?.name == value);
+            selectedEquipmentCategoryNameId.value =
+                equipmentCategoryList[equipCatIndex]?.id ?? 0;
+            isEquipmentCategoryNameSelected.value = true;
+          } else {
+            //  selectedEquipmentCategoryNameId = 0;
+          }
         }
         break;
       case RxList<InventoryStatusListModel>:
         {
           if (value != "Please Select") {
-            int statusIndex = statusNameList.indexWhere((x) => x?.name == value);
-          selectedStatusNameId = statusNameList[statusIndex]?.id ?? 0;
+            int statusIndex =
+                statusNameList.indexWhere((x) => x?.name == value);
+            selectedStatusNameId = statusNameList[statusIndex]?.id ?? 0;
+            isStatusNameSelected.value = true;
           } else {
-            selectedStatusNameId=0;
+            selectedStatusNameId = 0;
           }
         }
         break;
@@ -902,11 +950,12 @@ class AddInventoryController extends GetxController {
       case RxList<InventoryTypeListModel>:
         {
           if (value != "Please Select") {
-            
-          int typeNameIndex = typeNameList.indexWhere((x) => x?.name == value);
-          selectedTypeNameId = typeNameList[typeNameIndex]?.id ?? 0;
+            int typeNameIndex =
+                typeNameList.indexWhere((x) => x?.name == value);
+            selectedTypeNameId = typeNameList[typeNameIndex]?.id ?? 0;
+            isTypeNameSelected.value = true;
           } else {
-            selectedTypeNameId=0;
+            selectedTypeNameId = 0;
           }
         }
         break;
