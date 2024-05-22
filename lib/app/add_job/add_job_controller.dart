@@ -4,6 +4,7 @@ import 'package:cmms/app/app.dart';
 import 'package:cmms/domain/models/facility_model.dart';
 import 'package:cmms/domain/models/models.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import '../../domain/models/employee_model.dart';
@@ -252,6 +253,11 @@ class AddJobController extends GetxController {
     if (selectedBlock.value == '') {
       isBlockSelected.value = false;
     }
+    if(breakdownTimeCtrlr.text == '') {
+      Fluttertoast.showToast(
+          msg: 'Breakdown time cannot be empty!');
+
+    }
     //  if (selectedBlockIdList.length < 1) {
     //   isBlockSelected.value = false;
     // }
@@ -278,6 +284,7 @@ class AddJobController extends GetxController {
         isJobDescriptionInvalid == true ||
         isEquipmentCategorySelected.value == false ||
         isWorkAreaSelected.value == false ||
+        breakdownTimeCtrlr.text == ''||
         isWorkTypeSelected.value == false) //
     {
       isFormInvalid.value = true;
