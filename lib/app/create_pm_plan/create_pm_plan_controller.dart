@@ -11,6 +11,7 @@ import 'package:cmms/domain/models/get_pm_plan_detail_model.dart';
 import 'package:cmms/domain/models/inventory_model.dart';
 import 'package:cmms/domain/models/preventive_checklist_model.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import '../../domain/models/facility_model.dart';
 import '../../domain/models/inventory_category_model.dart';
@@ -69,6 +70,8 @@ class CreatePmPlanController extends GetxController {
   int selectedAssignedToId = 0;
   Rx<int> pmPlanId = 0.obs;
   Rx<PMPlanDetail?> pmPlanDetailsModel = PMPlanDetail().obs;
+  Rx<bool> isFormInvalid = false.obs;
+  Rx<bool> istitleInvalid = false.obs;
 
   @override
   void onInit() async {
@@ -297,68 +300,68 @@ class CreatePmPlanController extends GetxController {
         {
           if (value != "Please Select") {
             int equipCatIndex =
-              equipmentCategoryList.indexWhere((x) => x?.name == value);
-          selectedInventoryCategoryId =
-              equipmentCategoryList[equipCatIndex]?.id ?? 0;
+                equipmentCategoryList.indexWhere((x) => x?.name == value);
+            selectedInventoryCategoryId =
+                equipmentCategoryList[equipCatIndex]?.id ?? 0;
 
-          // selectedInventory.value = value;
-          filteredInventoryNameList.value = <InventoryModel>[];
-          // inventoryNameList.value = <InventoryModel>[];
-          // selectedInventoryNameIdList.value = [];
-          rowItem.value = [];
-          preventiveCheckList.value = <PreventiveCheckListModel>[];
-          selectedInventoryNameIdList.value = [];
+            // selectedInventory.value = value;
+            filteredInventoryNameList.value = <InventoryModel>[];
+            // inventoryNameList.value = <InventoryModel>[];
+            // selectedInventoryNameIdList.value = [];
+            rowItem.value = [];
+            preventiveCheckList.value = <PreventiveCheckListModel>[];
+            selectedInventoryNameIdList.value = [];
 
-          if (pmPlanId == 0) {
-            selectedInventoryNameList.value = [];
-          }
-          Future.delayed(Duration(seconds: 1), () {
-            inventoryList(
-                facilityId: facilityId,
-                categoryId: selectedInventoryCategoryId);
-          });
-          Future.delayed(Duration(seconds: 2), () {
-            if (selectedInventoryCategoryId > 0 && selectedfrequencyId > 0) {
-              getPreventiveCheckList(facilityId, 1, true, selectedfrequencyId,
-                  selectedInventoryCategoryId);
+            if (pmPlanId == 0) {
+              selectedInventoryNameList.value = [];
             }
-          });
+            Future.delayed(Duration(seconds: 1), () {
+              inventoryList(
+                  facilityId: facilityId,
+                  categoryId: selectedInventoryCategoryId);
+            });
+            Future.delayed(Duration(seconds: 2), () {
+              if (selectedInventoryCategoryId > 0 && selectedfrequencyId > 0) {
+                getPreventiveCheckList(facilityId, 1, true, selectedfrequencyId,
+                    selectedInventoryCategoryId);
+              }
+            });
           } else {
-            selectedInventoryCategoryId=0;
+            selectedInventoryCategoryId = 0;
           }
         }
         break;
       case RxList<InventoryModel>:
         {
-        if (value != "Please Select") {
+          if (value != "Please Select") {
             filteredInventoryNameList.value = <InventoryModel>[];
-          // inventoryNameList.value = <InventoryModel>[];
-          // selectedInventoryNameIdList.value = [];
-          bufferRowItem.value = rowItem.value;
-          rowItem.value = [];
-          // preventiveCheckList.value = <PreventiveCheckListModel>[];
-          selectedInventoryNameIdList.value = [];
+            // inventoryNameList.value = <InventoryModel>[];
+            // selectedInventoryNameIdList.value = [];
+            bufferRowItem.value = rowItem.value;
+            rowItem.value = [];
+            // preventiveCheckList.value = <PreventiveCheckListModel>[];
+            selectedInventoryNameIdList.value = [];
 
-          if (value != null) {
-            for (var selectedItem in value) {
-              int equipCatIndex =
-                  inventoryNameList.indexWhere((x) => x.name == selectedItem);
-              if (equipCatIndex >= 0) {
-                selectedInventoryNameIdList
-                    .add(inventoryNameList[equipCatIndex].id ?? 0);
+            if (value != null) {
+              for (var selectedItem in value) {
+                int equipCatIndex =
+                    inventoryNameList.indexWhere((x) => x.name == selectedItem);
+                if (equipCatIndex >= 0) {
+                  selectedInventoryNameIdList
+                      .add(inventoryNameList[equipCatIndex].id ?? 0);
+                }
               }
             }
-          }
 
-          print('First Category Id:$selectedInventoryNameIdList');
-          if (selectedInventoryNameIdList.length > 0) {
-            //  filteredInventoryNameList.value = <InventoryModel>[];
+            print('First Category Id:$selectedInventoryNameIdList');
+            if (selectedInventoryNameIdList.length > 0) {
+              //  filteredInventoryNameList.value = <InventoryModel>[];
 
-            facilityNameSelected(selectedInventoryNameIdList);
+              facilityNameSelected(selectedInventoryNameIdList);
+            }
+          } else {
+            // selectedInventoryNameIdList=0;
           }
-        } else {
-          // selectedInventoryNameIdList=0;
-        }
         }
         break;
       case RxList<FrequencyModel>:
@@ -403,46 +406,83 @@ class CreatePmPlanController extends GetxController {
     // print({"selectedfrequency": selectedfrequency});
   }
 
-  Future<void> createPmPlan() async {
-    String _startDate = startDateDateTc.text.trim();
-    String _plantitle = planTittleCtrlr.text.trim();
-
-    List<AssetChecklist> mapAssetChecklist = [];
-    // mapAssetChecklist = AssetChecklist(asset_id: 131086, checklist_id: 2988);
-    rowItem.value.forEach((element) {
-      AssetChecklist item = AssetChecklist(
-          name: "",
-          checklist_name: "",
-          module_qty: 0,
-          parent_id: 0,
-          parent_name: "",
-          asset_id: int.tryParse(element[1]["value"] ?? '0'),
-          checklist_id: checkdropdownMapperData[element[4]["value"]]?.id);
-      mapAssetChecklist.add(item);
-    });
-    CreatePmPlanModel createPmPlan = CreatePmPlanModel(
-        plan_id: 0,
-        plan_name: _plantitle,
-        plan_date: _startDate,
-        facility_id: facilityId,
-        assigned_to_id: selectedAssignedToId,
-        category_id:
-            selectedInventoryCategoryId, // selectedEquipmentCategoryIdList,
-        plan_freq_id: selectedfrequencyId,
-        mapAssetChecklist: mapAssetChecklist);
-    var createPmPlanJsonString = createPmPlan.toJson();
-
-    print({"createPmPlanJsonString", createPmPlanJsonString});
-    Map<String, dynamic>? responseCreatePmPlan =
-        await createPmPlanPresenter.createPmPlan(
-      createPmPlanJsonString: createPmPlanJsonString,
-      isLoading: true,
-    );
-    if (responseCreatePmPlan == null) {
+  void checkform() {
+    if (selectedfrequency.value == '') {
+      isSelectedfrequency.value = false;
+    }
+    if (selectedAssignedTo.value == '') {
+      isAssignedToSelected.value = false;
+    }
+    if (selectedInventory.value == '') {
+      isSelectedInventory.value = false;
+    }
+    if (startDateDateTc.text == '') {
+      Fluttertoast.showToast(msg: 'Start date cannot be empty!');
+    }
+    if (planTittleCtrlr.text == '') {
+      istitleInvalid.value = true;
+    }
+    if(selectedInventoryNameList.length < 1) {
+      Fluttertoast.showToast(msg: 'Equipments cannot be empty!');
+    }
+    if (isSelectedfrequency.value == false ||
+        isAssignedToSelected.value == false ||
+        isSelectedInventory.value == false ||
+        istitleInvalid.value == true ||
+        selectedInventoryNameList.length < 1 ||
+        startDateDateTc.text == '') {
+      isFormInvalid.value = true;
     } else {
-      Get.offAllNamed(
-        Routes.pmPlanList,
+      isFormInvalid.value = false;
+    }
+  }
+
+  Future<void> createPmPlan() async {
+    {
+      checkform();
+      if (isFormInvalid.value) {
+        return;
+      }
+      String _startDate = startDateDateTc.text.trim();
+      String _plantitle = planTittleCtrlr.text.trim();
+
+      List<AssetChecklist> mapAssetChecklist = [];
+      // mapAssetChecklist = AssetChecklist(asset_id: 131086, checklist_id: 2988);
+      rowItem.value.forEach((element) {
+        AssetChecklist item = AssetChecklist(
+            name: "",
+            checklist_name: "",
+            module_qty: 0,
+            parent_id: 0,
+            parent_name: "",
+            asset_id: int.tryParse(element[1]["value"] ?? '0'),
+            checklist_id: checkdropdownMapperData[element[4]["value"]]?.id);
+        mapAssetChecklist.add(item);
+      });
+      CreatePmPlanModel createPmPlan = CreatePmPlanModel(
+          plan_id: 0,
+          plan_name: _plantitle,
+          plan_date: _startDate,
+          facility_id: facilityId,
+          assigned_to_id: selectedAssignedToId,
+          category_id:
+              selectedInventoryCategoryId, // selectedEquipmentCategoryIdList,
+          plan_freq_id: selectedfrequencyId,
+          mapAssetChecklist: mapAssetChecklist);
+      var createPmPlanJsonString = createPmPlan.toJson();
+
+      print({"createPmPlanJsonString", createPmPlanJsonString});
+      Map<String, dynamic>? responseCreatePmPlan =
+          await createPmPlanPresenter.createPmPlan(
+        createPmPlanJsonString: createPmPlanJsonString,
+        isLoading: true,
       );
+      if (responseCreatePmPlan == null) {
+      } else {
+        Get.offAllNamed(
+          Routes.pmPlanList,
+        );
+      }
     }
   }
 
