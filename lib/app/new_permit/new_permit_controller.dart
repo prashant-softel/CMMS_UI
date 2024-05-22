@@ -1228,7 +1228,7 @@ class NewPermitController extends GetxController {
     if (selectedBlock.value == '') {
       isBlockSelected.value = false;
     }
-    if (workPermitRemarkTextCtrlr.text.trim().length < 3) {
+    if (workPermitRemarkTextCtrlr.text=='') {
       isWorPermitNumberTextInvalid.value = true;
     }
     // if (selectedJobType.value == '') {
@@ -1276,7 +1276,7 @@ class NewPermitController extends GetxController {
         // isJobTypeListSelected.value == false ||
         // isSopPermitListSelected.value == false ||
         isJobDescriptionInvalid == true ||
-        isWorPermitNumberTextInvalid.value == true) {
+        isWorPermitNumberTextInvalid.value == true||workPermitRemarkTextCtrlr.text=='') {
       isFormInvalid.value = true;
     } else {
       isFormInvalid.value = false;
