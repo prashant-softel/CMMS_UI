@@ -394,7 +394,7 @@ class CreateMrsReturnContentWeb extends GetView<CreateMrsReturnController> {
                                                                   Fluttertoast
                                                                       .showToast(
                                                                     msg:
-                                                                        "Enter $issuedQty - $usedQty for return qty!",
+                                                                        "Enter $issueQty - $usedQty for return qty!",
                                                                   );
                                                                 }
                                                               },
