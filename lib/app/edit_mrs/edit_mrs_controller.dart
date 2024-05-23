@@ -5,6 +5,7 @@ import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/domain/models/create_mrs_model.dart';
 import 'package:cmms/domain/models/get_asset_items_model.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import '../home/home_controller.dart';
 import '../utils/utility.dart';
@@ -31,6 +32,7 @@ class EditMrsController extends GetxController {
   var setTemlateCtrlr = TextEditingController();
 
   Rx<int> mrsId = 0.obs;
+  Rx<bool> isFormInvalid = false.obs;
   Rx<int> type = 0.obs;
   var isSetTemplate = false.obs;
   int whereUsedId = 0;
@@ -152,49 +154,64 @@ class EditMrsController extends GetxController {
     ]);
   }
 
-  Future<void> editMrs() async {
-    String _activity = activityCtrlr.text.trim();
-    String _remark = remarkCtrlr.text.trim();
-    String _setTemp = setTemlateCtrlr.text.trim();
-    String _wheredused = whereUsedCtrlr.text.trim();
-    List<Equipments> items = [];
-    rowItem.forEach((element) {
-      Equipments item = Equipments(
-        id: dropdownMapperData[element[0]["value"]]?.id,
-        issued_qty: dropdownMapperData[element[0]["value"]]?.issued_qty,
-        asset_code: dropdownMapperData[element[0]["value"]]?.asset_code,
-        equipmentID: dropdownMapperData[element[0]["value"]]?.asset_ID,
-        asset_type_ID: dropdownMapperData[element[0]["value"]]?.asset_type_ID,
-        requested_qty: int.tryParse(element[4]["value"] ?? '0'),
-      );
-      items.add(item);
-    });
-    CreateMrsModel editMrs = CreateMrsModel(
-        ID: mrsId.value,
-        isEditMode: 1,
-        facility_ID: facilityId,
-        setAsTemplate: _setTemp,
-        activity: _activity,
-        whereUsedType: 27,
-        whereUsedTypeId: int.tryParse(_wheredused),
-        to_actor_id: int.tryParse(_wheredused),
-        to_actor_type_id: 3,
-        from_actor_id: facilityId,
-        from_actor_type_id: 2,
-        remarks: _remark,
-        equipments: items);
-    var editMrsJsonString = editMrs.toJson();
-
-    print({"editMrsJsonString", editMrsJsonString});
-    Map<String, dynamic>? responseEditMrs = await editMrsPresenter.editMrs(
-      editMrsJsonString: editMrsJsonString,
-      isLoading: true,
-    );
-    if (responseEditMrs == null) {
+  void checkform() {
+    if (remarkCtrlr.text == '') {
+      Fluttertoast.showToast(msg: 'Enter Comment!');
+      isFormInvalid.value = true;
     } else {
-      Get.offAllNamed(
-        Routes.mrsListScreen,
+      isFormInvalid.value = false;
+    }
+  }
+
+  Future<void> editMrs() async {
+    {
+      checkform();
+      if (isFormInvalid.value) {
+        return;
+      }
+      String _activity = activityCtrlr.text.trim();
+      String _remark = remarkCtrlr.text.trim();
+      String _setTemp = setTemlateCtrlr.text.trim();
+      String _wheredused = whereUsedCtrlr.text.trim();
+      List<Equipments> items = [];
+      rowItem.forEach((element) {
+        Equipments item = Equipments(
+          id: dropdownMapperData[element[0]["value"]]?.id,
+          issued_qty: dropdownMapperData[element[0]["value"]]?.issued_qty,
+          asset_code: dropdownMapperData[element[0]["value"]]?.asset_code,
+          equipmentID: dropdownMapperData[element[0]["value"]]?.asset_ID,
+          asset_type_ID: dropdownMapperData[element[0]["value"]]?.asset_type_ID,
+          requested_qty: int.tryParse(element[4]["value"] ?? '0'),
+        );
+        items.add(item);
+      });
+      CreateMrsModel editMrs = CreateMrsModel(
+          ID: mrsId.value,
+          isEditMode: 1,
+          facility_ID: facilityId,
+          setAsTemplate: _setTemp,
+          activity: _activity,
+          whereUsedType: 27,
+          whereUsedTypeId: int.tryParse(_wheredused),
+          to_actor_id: int.tryParse(_wheredused),
+          to_actor_type_id: 3,
+          from_actor_id: facilityId,
+          from_actor_type_id: 2,
+          remarks: _remark,
+          equipments: items);
+      var editMrsJsonString = editMrs.toJson();
+
+      print({"editMrsJsonString", editMrsJsonString});
+      Map<String, dynamic>? responseEditMrs = await editMrsPresenter.editMrs(
+        editMrsJsonString: editMrsJsonString,
+        isLoading: true,
       );
+      if (responseEditMrs == null) {
+      } else {
+        Get.offAllNamed(
+          Routes.mrsListScreen,
+        );
+      }
     }
   }
 }

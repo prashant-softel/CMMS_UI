@@ -1,8 +1,7 @@
-
-
+// //web
+// import 'package:cmms/app/Course_Category/course_category_controller.dart';
 // import 'package:cmms/app/app.dart';
 // import 'package:cmms/app/constant/constant.dart';
-// import 'package:cmms/app/course_category/course_category_controller.dart';
 // import 'package:cmms/app/home/widgets/header_widget.dart';
 // import 'package:cmms/app/navigators/app_pages.dart';
 // import 'package:cmms/app/utils/user_access_constants.dart';
@@ -15,10 +14,10 @@
 // import '../../widgets/custom_richtext.dart';
 
 // class CourseCategoryContentWeb extends GetView<CourseCategoryController> {
-// CourseCategoryContentWeb({key? key}): super(key:key);
-// final CourseCategoryController controller=Get.find();
+//   CourseCategoryContentWeb({Key? key}) : super(key: key);
+//   final CourseCategoryController controller = Get.find();
 
-// @override
+//   @override
 //   Widget build(BuildContext context) {
 //     return SelectionArea(
 //       child: Obx(
@@ -64,10 +63,10 @@
 //                     ),
 //                     InkWell(
 //                       onTap: () {
-//                         Get.offNamed(Routes.masterDashboard);
+//                         Get.offNamed(Routes.courseCategory);
 //                       },
 //                       child: Text(
-//                         " /   COURSE CATEGORY",
+//                         " / COURSE CATEGORY",
 //                         style: Styles.greyLight14,
 //                       ),
 //                     ),
@@ -96,7 +95,7 @@
 //                           return Text(
 //                             controller.isContainerVisible.value
 //                                 ? 'Close Create Course Category'
-//                                 : 'Open Create Course Category',
+//                                 : 'Open Create  Course Category',
 //                           );
 //                         }),
 //                       ),
@@ -138,7 +137,7 @@
 //                                           CrossAxisAlignment.start,
 //                                       children: [
 //                                         Text(
-//                                           "Create Course C",
+//                                           "Create Course Cat",
 //                                           style: Styles.blackBold16,
 //                                         ),
 //                                         SizedBox(
@@ -469,7 +468,7 @@
 //                                               backgroundColor:
 //                                                   ColorValues.appDarkBlueColor,
 //                                               onPressed: () {
-//                                                 controller.createSPVlist().then(
+//                                                 controller.createCourseCategoryList().then(
 //                                                   (value) {
 //                                                     print("CREATE");
 //                                                     print("value,$value");
@@ -483,7 +482,7 @@
 //                                                   },
 //                                                 );
 //                                               },
-//                                               text: 'Create Course C',
+//                                               text: 'Create Course',
 //                                             ),
 //                                           )
 //                                         : CustomElevatedButton(
@@ -491,7 +490,7 @@
 //                                                 ColorValues.appDarkBlueColor,
 //                                             onPressed: () {
 //                                               controller
-//                                                   .updateSPV(controller
+//                                                   .updateCourseCategory(controller
 //                                                       .selectedItem?.id)
 //                                                   .then(
 //                                                 (value) {
@@ -534,7 +533,7 @@
 //                                 child: Row(
 //                                   children: [
 //                                     Text(
-//                                       "List of Course Category",
+//                                       "List of Course",
 //                                       style: Styles.blackBold16,
 //                                     ),
 //                                     Spacer(),
@@ -586,7 +585,7 @@
 //                               SizedBox(
 //                                 height: 20,
 //                               ),
-//                               controller.SPVList.isEmpty == true &&
+//                               controller.CourseCategoryList.isEmpty == true &&
 //                                       controller.isLoading == false
 //                                   ? Center(child: Text("No Data"))
 //                                   : controller.isLoading.value == true
@@ -614,7 +613,7 @@
 //                                                 DataColumn2(
 //                                                     // fixedWidth: 150,
 //                                                     label: Text(
-//                                                   " Name",
+//                                                   "Name",
 //                                                   style: TextStyle(
 //                                                       fontSize: 15,
 //                                                       fontWeight:
@@ -640,16 +639,16 @@
 //                                                     )),
 //                                               ],
 //                                               rows: List<DataRow>.generate(
-//                                                 controller.SPVList.length ?? 0,
+//                                                 controller.CourseCategoryList.length ?? 0,
 //                                                 (index) => DataRow(cells: [
 //                                                   DataCell(Text(
 //                                                       (index + 1).toString())),
 //                                                   DataCell(Text(controller
-//                                                           .SPVList[index].name
+//                                                           .CourseCategoryList[index].name
 //                                                           .toString() ??
 //                                                       '')),
 //                                                   DataCell(Text(controller
-//                                                           .SPVList[index]
+//                                                           .CourseCategoryList[index]
 //                                                           .description ??
 //                                                       '')),
 //                                                   DataCell(Row(
@@ -673,12 +672,12 @@
 //                                                               onPress: () {
 //                                                                 controller
 //                                                                     .selectedItem = controller
-//                                                                         .SPVList
+//                                                                         .CourseCategoryList
 //                                                                     .firstWhere(
 //                                                                   (element) =>
 //                                                                       "${element.id}" ==
 //                                                                       controller
-//                                                                           .SPVList[
+//                                                                           .CourseCategoryList[
 //                                                                               index]
 //                                                                           .id
 //                                                                           .toString(),
@@ -722,13 +721,13 @@
 //                                                               message: 'Delete',
 //                                                               onPress: () {
 //                                                                 controller.isDeleteDialog(
-//                                                                     business_id: controller
-//                                                                         .SPVList[
+//                                                                    category_id: controller
+//                                                                         .CourseCategoryList[
 //                                                                             index]
 //                                                                         .id
 //                                                                         .toString(),
-//                                                                     business: controller
-//                                                                         .SPVList[
+//                                                                     category: controller
+//                                                                         .CourseCategoryList[
 //                                                                             index]
 //                                                                         .name);
 //                                                               },

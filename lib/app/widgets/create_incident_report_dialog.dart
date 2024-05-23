@@ -10,7 +10,7 @@ import '../theme/styles.dart';
 class CreateIncidentReportDialog extends GetView {
   String? createIncidentReportData;
   String? data;
-  List<dynamic>? incidentReportId;
+  int? incidentReportId;
 
   CreateIncidentReportDialog(
       {super.key,
@@ -114,8 +114,8 @@ class CreateIncidentReportDialog extends GetView {
             ElevatedButton(
               style: Styles.yellowElevatedButtonStyle,
               onPressed: () {
-                _controller.viewIncidentReport(id: incidentReportId![0]);
-                print('Incident Report Id${incidentReportId![0]}');
+                _controller.viewIncidentReport(id: incidentReportId!);
+                print('Incident Report Id${incidentReportId!}');
               },
               child: const Text('View This Incident Report'),
             ),

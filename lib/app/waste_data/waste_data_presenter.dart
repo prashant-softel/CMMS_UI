@@ -1,10 +1,27 @@
 import 'package:cmms/domain/models/facility_model.dart';
 import 'package:cmms/domain/models/type_of_waste_model.dart';
+import 'package:cmms/domain/models/waste_data_list_model.dart';
 import 'package:cmms/domain/usecases/waste_data_usecase.dart';
 
 class WasteDataPresenter {
   WasteDataPresenter(this.wasteDataUsecase);
   WasteDataUsecase wasteDataUsecase;
+
+  Future<List<WasteDataList>> getWasteDataList({
+    required bool isLoading,
+    bool? isExport,
+    required int? facility_id,
+    String? start_date,
+    required String end_date,
+  }) async {
+    return wasteDataUsecase.getWasteDataList(
+      isLoading: isLoading,
+      facility_id: facility_id,
+      isExport: isExport,
+      start_date: start_date,
+      end_date: end_date,
+    );
+  }
 
   Future<Map<String, dynamic>?> createWasteData({
     createWasteData,

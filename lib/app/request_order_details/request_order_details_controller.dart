@@ -27,9 +27,8 @@ class GoodsOrdersReqDetailController extends GetxController {
       <GetRODetailsByIDModel?>[].obs;
   Rx<GetRODetailsByIDModel?> getPurchaseDetailsByIDModel =
       GetRODetailsByIDModel().obs;
-  Rx<bool> isFormInvalid = false.obs;
-  Rx<bool> isCommentInvalid = false.obs;
-  Rx<bool> isCostInvalid = false.obs;
+      
+      Rx<bool> isCostInvalid = false.obs;
   RxList<HistoryModel?>? historyList = <HistoryModel?>[].obs;
   RxList<GetAssetDataModel?> assetList = <GetAssetDataModel>[].obs;
   RxMap<dynamic, dynamic> dropdownMapperData = {}.obs;
@@ -189,10 +188,6 @@ class GoodsOrdersReqDetailController extends GetxController {
   }
 
   void submitPurchaseOrderData() async {
-    //  checkFrom();
-    // if (isFormInvalid.value) {
-    //   return;
-    // }
     List<SubmitItems> items = [];
     rowItem.forEach((element) {
       SubmitItems item = SubmitItems(
@@ -228,12 +223,6 @@ class GoodsOrdersReqDetailController extends GetxController {
   }
 
   void updatePurchaseOrderData() async {
-    checkFrom() {
-      if (isFormInvalid.value) {
-        return;
-      }
-    }
-
     List<SubmitItems> items = [];
     rowItem.forEach((element) {
       SubmitItems item = SubmitItems(
@@ -266,20 +255,5 @@ class GoodsOrdersReqDetailController extends GetxController {
     }
 
     print('update GO  req  data: $createGoReqModelJsonString');
-  }
-
-  void checkFrom() {
-    if (TextEditingController().text.isEmpty) {
-      isCostInvalid.value = true;
-      isFormInvalid.value = true;
-    } else {
-      isCostInvalid.value = false;
-    }
-    if (TextEditingController().text.isEmpty) {
-      isCommentInvalid.value = true;
-      isFormInvalid.value = true;
-    } else {
-      isCommentInvalid.value = false;
-    }
   }
 }

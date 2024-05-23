@@ -95,6 +95,7 @@ import 'package:cmms/domain/models/view_warranty_claim_model.dart';
 import 'package:cmms/domain/models/warranty_claim_model.dart';
 import 'package:cmms/domain/models/warranty_type_model.dart';
 import 'package:cmms/domain/models/warranty_usage_term_list_model.dart';
+import 'package:cmms/domain/models/waste_data_list_model.dart';
 import 'package:cmms/domain/models/water_data_list_model.dart';
 import 'package:cmms/domain/models/water_data_month.dart';
 import 'package:cmms/domain/models/work_type_model.dart';
@@ -836,6 +837,47 @@ class Repository {
     } catch (error) {
       print(error.toString());
       return Map();
+    }
+  }
+
+  Future<List<WasteDataList>> getWasteDataList({
+    required int? facility_id,
+    bool? isExport,
+    String? start_date,
+    required String end_date,
+    required bool isLoading,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+
+      log(auth);
+      final res = await _dataRepository.getWasteDataList(
+        facility_id: facility_id,
+        start_date: start_date,
+        end_date: end_date,
+        isLoading: isLoading,
+        auth: auth,
+      );
+      print('water data list: ${res.data}');
+
+      if (!res.hasError) {
+        final jsonWasteDataListModels = jsonDecode(res.data);
+
+        final List<WasteDataList> _WasteDataListList = jsonWasteDataListModels
+            .map<WasteDataList>(
+                (m) => WasteDataList.fromJson(Map<String, dynamic>.from(m)))
+            .toList();
+        // final List<WasteDataList> _WasteDataListList =
+        //     wasteDataListFromJson(jsonWasteDataListModels);
+        return _WasteDataListList.reversed.toList();
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString(), 'getIncidentReportList');
+        return [];
+      }
+    } catch (error) {
+      print(error.toString());
+      return [];
     }
   }
 
@@ -13312,6 +13354,7 @@ class Repository {
   //get
   Future<List<MaterialCategoryListModel>> getMaterialList({
     required bool isLoading,
+    bool? isExport,
   }) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
@@ -13324,8 +13367,34 @@ class Repository {
       print('Material Category: ${res.data}');
 
       if (!res.hasError) {
-        var Sourcetype = MaterialCategoryFromJson(res.data);
-        return Sourcetype;
+        final List<dynamic> Sourcetype = jsonDecode(res.data);
+        final List<MaterialCategoryListModel> _materialcategory =
+            Sourcetype.map<MaterialCategoryListModel>((m) =>
+                MaterialCategoryListModel.fromJson(
+                    Map<String, dynamic>.from(m))).toList();
+        String jsonData = materialCategoryToJson(_materialcategory);
+        if (isExport == true) {
+          List<dynamic> jsonDataList = jsonDecode(jsonData);
+
+          List<List<dynamic>> data = [
+            [
+              'Id',
+              'Material Category',
+            ],
+            ...jsonDataList
+                .map((matcatjson) => [
+                      matcatjson['id'],
+                      matcatjson['cat_name'],
+                    ])
+                .toList()
+          ];
+          Map<String, List<List<dynamic>>> matcatdata = {
+            "Sheet1": data,
+          };
+          exportToExcel(matcatdata, "MaterialCategory.xlsx");
+        }
+
+        return _materialcategory;
       }
       return [];
     } catch (error) {
@@ -13405,5 +13474,36 @@ class Repository {
     }
   }
 
+  // training courses
+  Future<Map<String, dynamic>> addCourse({
+    courseJson,
+    isLoading,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.addCourse(
+        auth: auth,
+        courseJson: courseJson,
+        isLoading: isLoading ?? false,
+      );
+      var resourceData = res.data;
+      print('Add Course Response: ${resourceData}');
+      if (!res.hasError) {
+        Fluttertoast.showToast(
+          msg: " paln  Add Successfully...",
+          fontSize: 16.0,
+        );
+        Get.offNamed(
+          Routes.trainingCourse,
+        );
+      } else {
+        Utility.showDialog(res.errorCode.toString(), 'Add Course');
+      }
+      return Map();
+    } catch (error) {
+      print(error.toString());
+      return Map();
+    }
+  }
   //end
 }

@@ -8,9 +8,11 @@ import 'package:cmms/domain/models/create_waste_data_model.dart';
 import 'package:cmms/domain/models/facility_model.dart';
 import 'package:cmms/domain/models/type_model.dart';
 import 'package:cmms/domain/models/type_of_waste_model.dart';
+import 'package:cmms/domain/models/waste_data_list_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:scrollable_table_view/scrollable_table_view.dart';
 
 class WasteDataController extends GetxController {
   WasteDataController(
@@ -20,12 +22,23 @@ class WasteDataController extends GetxController {
 
   final HomeController homecontroller = Get.find();
   RxList<BusinessListModel?> ownerList = <BusinessListModel>[].obs;
-  Rx<bool> isSelectedBusinessType = true.obs;
+  RxList<WasteDataList> wasteDataList = <WasteDataList>[].obs;
+  RxList<WasteDataList> filteredData = <WasteDataList>[].obs;
+  RxList<MasterList> masterDataList = <MasterList>[].obs;
+  RxList<dynamic> headerList = [].obs;
+  RxList<String> masterDataListName = <String>[].obs;
+  RxList<String> wasteDataListTableColumns = <String>[].obs;
+  WasteDataList? wasteDataListModel;
+  RxList<dynamic> mainHeaderList = [].obs;
+  PaginationController paginationController = PaginationController(
+    rowCount: 0,
+    rowsPerPage: 10,
+  );
 
   int selectedBusinessTypeId = 1;
   Rx<String> selectedBusinessType = ''.obs;
+  Rx<bool> isSelectedBusinessType = true.obs;
   RxList<FacilityModel?> facilityList = <FacilityModel>[].obs;
-
   int facilityId = 0;
   Rx<String> selectedBlock = ''.obs;
   Rx<DateTime> selectedWasteDataTime = DateTime.now().obs;
@@ -57,16 +70,144 @@ class WasteDataController extends GetxController {
     MonthModel(name: 'Haz waste oil barrel generated in No ', id: "8"),
   ].obs;
 
+  Rx<bool> isLoading = true.obs;
+  int selectedYear = 2024;
+
   ///
   @override
   void onInit() async {
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
       facilityId = event;
+      Future.delayed(Duration(seconds: 2), () async {
+        await getWasteDataList(facilityId, false);
+      });
       Future.delayed(Duration(seconds: 1), () async {
         getTypeOfWasteList();
       });
     });
     super.onInit();
+  }
+
+  Future<void> getWasteDataList(int facilityId, bool isExport) async {
+    wasteDataList.value = <WasteDataList>[];
+    filteredData.value = <WasteDataList>[];
+    masterDataList.value = <MasterList>[];
+
+    final _wasteDataList = await wasteDataPresenter.getWasteDataList(
+      isLoading: isLoading.value,
+      start_date: selectedYear.toString(),
+      end_date: (selectedYear - 1).toString(),
+      facility_id: facilityId,
+      isExport: isExport,
+    );
+    wasteDataList.value = _wasteDataList;
+
+    for (var masterdata in _wasteDataList) {
+      masterDataList.value = masterdata.master_list;
+    }
+    masterDataListName.value = [];
+    headerList = [].obs;
+    mainHeaderList = [].obs;
+    mainHeaderList.add(
+      {
+        "label": 'Month',
+        "isShow": true,
+        'subHeader': "Month",
+        "dataKey": 'Month',
+        "colSpan": 1
+      },
+    );
+    headerList.add(
+      {
+        "label": 'Month',
+        "isShow": true,
+        'subHeader': "Month",
+        "dataKey": 'Month'
+      },
+    );
+    masterDataListName.add('Month');
+    print({"masterDataList.value": masterDataList.value});
+
+    for (var _dataList in masterDataList.value) {
+      // {"label": 'Headersdhfgd1', "isShow": true, 'key': "open"},
+      print({"_dataList": _dataList});
+      mainHeaderList.add(
+        {
+          "label": _dataList.water_type,
+          "isShow": true,
+          'subHeader': "Month",
+          "dataKey": 'Month',
+          "colSpan": _dataList.show_opening == 1 ? 4 : 2
+        },
+      );
+      if (_dataList.show_opening == 1) {
+        headerList.add(
+          {
+            "label": _dataList.water_type,
+            "isShow": true,
+            'subHeader': "open",
+            "dataKey": 'opening'
+          },
+        );
+      }
+      headerList.add(
+        {
+          "label": _dataList.water_type,
+          "isShow": _dataList.show_opening == 1 ? false : true,
+          'subHeader': "procrument",
+          "dataKey": 'procuredQty'
+        },
+      );
+      headerList.add(
+        {
+          "label": _dataList.water_type,
+          "isShow": false,
+          'subHeader': "consmption",
+          "dataKey": 'consumedQty'
+        },
+      );
+
+      if (_dataList.show_opening == 1) {
+        headerList.add(
+          {
+            "label": _dataList.water_type,
+            "isShow": false,
+            'subHeader': "close",
+            "dataKey": 'closingQty'
+          },
+        );
+      }
+
+      masterDataListName.add(_dataList.water_type ?? '');
+    }
+    headerList.add(
+      {"label": 'Action', "isShow": true, 'subHeader': "", "dataKey": 'action'},
+    );
+    mainHeaderList.add(
+      {
+        "label": 'Action',
+        "isShow": true,
+        'subHeader': "",
+        "dataKey": 'action',
+        "colSpan": 1
+      },
+    );
+    print({"headerList.length": headerList.length});
+
+    isLoading.value = false;
+    paginationController = PaginationController(
+      rowCount: wasteDataList.length,
+      rowsPerPage: 10,
+    );
+    if (wasteDataList.isNotEmpty) {
+      filteredData.value = wasteDataList.value;
+      wasteDataListModel = wasteDataList[0];
+      var newPermitListJson = wasteDataListModel?.toJson();
+      wasteDataListTableColumns.value = <String>[];
+      // for (var key in newPermit.vListJson?.keys.toList() ?? []) {
+      //   wasteDataListTableColumns.add(key);
+      // }
+    }
   }
 
   Future<void> getFacilityList({bool? isLoading}) async {
@@ -225,15 +366,17 @@ class WasteDataController extends GetxController {
         {
           if (value != "Please Select") {
             int typeOfWaterIndex =
-              typeOfWasteList.indexWhere((x) => x?.name == value);
-          selectedTypeOfWasteId = typeOfWasteList[typeOfWaterIndex]?.id ?? 0;
-            
-          }else{
-            selectedTypeOfWasteId=0;
-
+                typeOfWasteList.indexWhere((x) => x?.name == value);
+            selectedTypeOfWasteId = typeOfWasteList[typeOfWaterIndex]?.id ?? 0;
+          } else {
+            selectedTypeOfWasteId = 0;
           }
         }
         break;
     }
+  }
+
+  void goWasteDataList() {
+    getWasteDataList(facilityId, false);
   }
 }

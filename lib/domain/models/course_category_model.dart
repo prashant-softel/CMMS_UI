@@ -1,3 +1,4 @@
+//model
 import 'dart:convert';
 
 List<CourseCategoryModel> CourseCategoryModelFromJson(String str) => 
