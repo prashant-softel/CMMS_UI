@@ -5055,5 +5055,17 @@ class DataRepository extends DomainRepository {
     return response;
   }
 
+  // training courses
+  Future<ResponseModel> addCourse({
+    auth,
+    courseJson,
+    isLoading,
+  }) async =>
+      await connectHelper.addCourse(
+        auth: auth,
+        courseJson: courseJson,
+        isLoading: isLoading ?? false,
+      );
+
 //end
 }

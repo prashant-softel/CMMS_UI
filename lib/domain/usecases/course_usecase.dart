@@ -14,6 +14,16 @@ class CourseUsecase {
     );
   }
 
+  Future<Map<String,dynamic>> addCourse({
+    courseJson,
+    isLoading,
+  }) async {
+    return await repository.addCourse(
+      courseJson: courseJson,
+      isLoading: isLoading,
+    );
+  }
+
   Future<List<FacilityModel?>?> getFacilityList({bool? isLoading}) async =>
       await repository.getFacilityList(
         isLoading,
