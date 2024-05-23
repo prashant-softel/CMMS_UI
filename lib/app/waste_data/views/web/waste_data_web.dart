@@ -5,7 +5,6 @@ import 'package:cmms/app/waste_data/waste_data_controller.dart';
 import 'package:cmms/app/widgets/add_waste_generated_dialog.dart';
 import 'package:cmms/app/widgets/date_picker.dart';
 import 'package:cmms/app/widgets/waste_disposed_dialog%20copy.dart';
-import 'package:cmms/domain/models/waste_data_list_model.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -303,337 +302,429 @@ final List<Map<String, dynamic>> statutoryData = [
 ];
 
 class _WasteDataWebState extends State<WasteDataWeb> {
-  TableCell headerCell(String text, {bool isHeader = false}) => TableCell(
-        child: Container(
-          padding: EdgeInsets.all(8),
-          child: Center(
-            child: Text(
-              text,
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
-          decoration: isHeader
-              ? BoxDecoration(
-                  border: Border(
-                    right: BorderSide(
-                      width: 1.0,
-                      color: Colors.white,
-                    ),
-                  ),
-                )
-              : BoxDecoration(),
-        ),
-      );
-
-  TableCell _actonData(PeriodData data) => TableCell(
-        child: Center(
-            child: Row(
-          children: [
-            TableActionButton(
-              color: ColorValues.viewColor,
-              icon: Icons.remove_red_eye_outlined,
-              message: 'view',
-              onPress: () {
-                Get.toNamed(
-                  Routes.viewWaterData,
-                  arguments: {"monthId": data.month_id, "year": data.year},
-                );
-              },
-            ),
-            TableActionButton(
-              color: ColorValues.editColor,
-              icon: Icons.edit,
-              message: 'Edit',
-              onPress: () {
-                Get.toNamed(
-                  Routes.viewWaterData,
-                  arguments: {"monthId": data.month_id, "year": data.year},
-                );
-              },
-            ),
-          ],
-        )),
-      );
-  TableCell dataCell(String text) => TableCell(
-        child: Center(child: Text(text)),
-      );
-
-  _CellData(DetailData data, String type) {
-    switch (type) {
-      case 'consumedQty':
-        return '${data.consumedQty}';
-      case 'procuredQty':
-        return '${data.procuredQty}';
-
-      case 'opening':
-        return '${data.opening}';
-
-      case 'closingQty':
-        return '${data.closingQty}';
-
-      default:
-        return '';
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return GetBuilder<WasteDataController>(
       id: 'stock_Mangement_Date',
       builder: (controller) {
+        // final dataSource = AuditPlanPlanListDataSource(controller);
         return SelectionArea(
-          child: Column(
-            children: [
-              HeaderWidget(),
-              Container(
-                height: 45,
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    color: Color.fromARGB(255, 227, 224, 224),
-                    width: 1,
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                HeaderWidget(),
+                Container(
+                  height: 45,
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: Color.fromARGB(255, 227, 224, 224),
+                      width: 1,
+                    ),
+                    boxShadow: [
+                      BoxShadow(
+                        color:
+                            Color.fromARGB(255, 236, 234, 234).withOpacity(0.5),
+                        spreadRadius: 2,
+                        blurRadius: 5,
+                        offset: Offset(0, 2),
+                      ),
+                    ],
                   ),
-                  boxShadow: [
-                    BoxShadow(
-                      color:
-                          Color.fromARGB(255, 236, 234, 234).withOpacity(0.5),
-                      spreadRadius: 2,
-                      blurRadius: 5,
-                      offset: Offset(0, 2),
-                    ),
-                  ],
-                ),
-                child: Row(
-                  children: [
-                    Icon(
-                      Icons.home,
-                      color: ColorValues.greyLightColor,
-                    ),
-                    InkWell(
-                      onTap: () {
-                        Get.offNamed(Routes.home);
-                      },
-                      child: Text(
-                        "DASHBOARD",
+                  child: Row(
+                    children: [
+                      Icon(
+                        Icons.home,
+                        color: ColorValues.greyLightColor,
+                      ),
+                      InkWell(
+                        onTap: () {
+                          Get.offNamed(Routes.home);
+                        },
+                        child: Text(
+                          "DASHBOARD",
+                          style: Styles.greyLight14,
+                        ),
+                      ),
+                      InkWell(
+                        onTap: () {
+                          Get.offNamed(Routes.misDashboard);
+                        },
+                        child: Text(" / MIS", style: Styles.greyLight14),
+                      ),
+                      Text(
+                        " / WASTE DATA",
                         style: Styles.greyLight14,
                       ),
-                    ),
-                    InkWell(
-                      onTap: () {
-                        Get.offNamed(Routes.misDashboard);
-                      },
-                      child: Text(" / MIS", style: Styles.greyLight14),
-                    ),
-                    Text(
-                      " / WASTE DATA",
-                      style: Styles.greyLight14,
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
-              Expanded(
-                child: Container(
-                  margin: EdgeInsets.all(15),
-                  child: Card(
-                    color: Color.fromARGB(255, 245, 248, 250),
-                    elevation: 10,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10.0),
-                    ),
-                    child: SingleChildScrollView(
+                Stack(
+                  children: [
+                    Container(
+                      width: Get.width * 7,
+                      margin: EdgeInsets.only(left: 10, top: 20, right: 10),
+                      height: Get.height,
                       child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Row(
-                            children: [
-                              Padding(
-                                padding: EdgeInsets.only(
-                                  left: 20,
-                                  top: 20,
-                                ),
-                                child: Text(
-                                  "Waste Data List",
-                                  style: Styles.blackBold16,
-                                ),
-                              ),
-                              Spacer(),
-                              Padding(
-                                padding: EdgeInsets.only(
-                                  top: 20,
-                                  right: 20,
-                                ),
-                                child: Row(
+                          Expanded(
+                            child: SingleChildScrollView(
+                              child: Container(
+                                margin: EdgeInsets.only(
+                                    left: 10, top: 10, right: 10),
+                                child: Column(
                                   children: [
-                                    Text('Year :'),
-                                    Dimens.boxWidth10,
-                                    CustomTextFieldForStock(
-                                      width:
-                                          MediaQuery.of(context).size.width / 5,
-                                      numberTextField: true,
-                                      onTap: () {
-                                        _showYearPicker(context, controller);
-                                      },
-                                      textController: controller.waterDateTc,
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              Padding(
-                                padding: EdgeInsets.only(
-                                  top: 20,
-                                  right: 5,
-                                ),
-                                child: ActionButton(
-                                  icon: Icons.minimize_sharp,
-                                  label: "Waste Generated",
-                                  onPressed: () {
-                                    Get.dialog(WasteGeneratedAddDialog());
-                                  },
-                                  color: ColorValues.appRedColor,
-                                ),
-                              ),
-                              Padding(
-                                padding: EdgeInsets.only(
-                                  top: 20,
-                                  right: 20,
-                                ),
-                                child: ActionButton(
-                                  icon: Icons.add,
-                                  label: "Waste  Disposed",
-                                  onPressed: () {
-                                    Get.dialog(WasteDisposedAddDialog());
-                                  },
-                                  color: ColorValues.addNewColor,
-                                ),
-                              ),
-                            ],
-                          ),
-                          Divider(
-                            color: ColorValues.greyLightColour,
-                          ),
-                          SingleChildScrollView(
-                            scrollDirection: Axis.horizontal,
-                            child: Obx(
-                              () => Container(
-                                color: Color.fromARGB(255, 245, 248, 250),
-                                width: Get.width * 7,
-                                height: Get.height,
-                                child: Padding(
-                                  padding: const EdgeInsets.all(16),
-                                  child: SingleChildScrollView(
-                                    child: Column(
-                                      children: [
-                                        Row(
-                                          children: []..addAll(
-                                              controller.mainHeaderList.map(
-                                                (element) => Container(
-                                                  height: 50,
-                                                  decoration: BoxDecoration(
-                                                    color: ColorValues
-                                                        .lightGreyColor,
-                                                    border: Border(
-                                                      left: BorderSide(
-                                                          color: Colors.grey,
-                                                          width: 1),
-                                                      right: BorderSide(
-                                                          color: Colors.grey,
-                                                          width: 1),
-                                                      top: BorderSide(
-                                                          color: Colors.grey,
-                                                          width: 1),
-                                                    ),
-                                                  ),
-                                                  width:
-                                                      ((MediaQuery.of(context)
-                                                                      .size
-                                                                      .width -
-                                                                  150) /
-                                                              controller
-                                                                  .headerList
-                                                                  .length) *
-                                                          element['colSpan'],
-                                                  child: headerCell(
-                                                    element['label'],
-                                                  ),
+                                    Card(
+                                      color: Color.fromARGB(255, 245, 248, 250),
+                                      elevation: 10,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(10.0),
+                                      ),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Row(
+                                            children: [
+                                              Padding(
+                                                padding: EdgeInsets.only(
+                                                  left: 20,
+                                                  top: 20,
+                                                ),
+                                                child: Text(
+                                                  "Waste Data List",
+                                                  style: Styles.blackBold16,
                                                 ),
                                               ),
-                                            ),
-                                        ),
-                                        Table(
-                                          border: TableBorder.all(
-                                              color: Colors.grey, width: 1),
-                                          columnWidths: const <int,
-                                              TableColumnWidth>{
-                                            0: FixedColumnWidth(100),
-                                            1: FixedColumnWidth(100),
-                                            2: FixedColumnWidth(100),
-                                            3: FixedColumnWidth(100),
-                                          },
-                                          children: [
-                                            TableRow(
-                                                children: []..addAll(controller
-                                                      .headerList
-                                                      .map((e) {
-                                                    return headerCell(
-                                                        e['subHeader']);
-                                                  }))),
-                                            ...List<TableRow>.generate(
-                                              controller.wasteDataList.length >
-                                                      0
-                                                  ? controller.wasteDataList[0]!
-                                                          .periods.length ??
-                                                      0
-                                                  : 0,
-                                              (index) => TableRow(
-                                                children: []..addAll(
-                                                    controller.headerList.map(
-                                                      (e) {
-                                                        if (e['dataKey'] ==
-                                                            'Month') {
-                                                          return dataCell(
-                                                            '${controller.wasteDataList[0]!.periods[index].monthName}',
-                                                          );
-                                                        }
-                                                        if (e['dataKey'] ==
-                                                            'action') {
-                                                          return _actonData(
-                                                            controller
-                                                                .wasteDataList[
-                                                                    0]!
-                                                                .periods[index],
-                                                          );
-                                                        }
-                                                        DetailData? data =
-                                                            controller
-                                                                .wasteDataList[
-                                                                    0]!
-                                                                .periods[index]
-                                                                .details
-                                                                .firstWhereOrNull(
-                                                          (element) =>
-                                                              element
-                                                                  .waterType ==
-                                                              e['label'],
-                                                        );
-                                                        if (data == null) {
-                                                          return dataCell('');
-                                                        }
-                                                        return dataCell(
-                                                          _CellData(
-                                                            data,
-                                                            e['dataKey'],
-                                                          ),
-                                                        );
+                                              Spacer(),
+                                              Padding(
+                                                padding: EdgeInsets.only(
+                                                  top: 20,
+                                                  right: 20,
+                                                ),
+                                                child: Row(
+                                                  children: [
+                                                    Text('Year :'),
+                                                    Dimens.boxWidth10,
+                                                    CustomTextFieldForStock(
+                                                      width:
+                                                          MediaQuery.of(context)
+                                                                  .size
+                                                                  .width /
+                                                              5,
+                                                      numberTextField: true,
+                                                      onTap: () {
+                                                        _showYearPicker(context,
+                                                            controller);
                                                       },
+                                                      textController: controller
+                                                          .waterDateTc,
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                              Padding(
+                                                padding: EdgeInsets.only(
+                                                  top: 20,
+                                                  right: 5,
+                                                ),
+                                                child: ActionButton(
+                                                  icon: Icons.minimize_sharp,
+                                                  label: "Waste Generated",
+                                                  onPressed: () {
+                                                    Get.dialog(
+                                                        WasteGeneratedAddDialog());
+                                                  },
+                                                  color:
+                                                      ColorValues.appRedColor,
+                                                ),
+                                              ),
+                                              Padding(
+                                                padding: EdgeInsets.only(
+                                                  top: 20,
+                                                  right: 20,
+                                                ),
+                                                child: ActionButton(
+                                                  icon: Icons.add,
+                                                  label: "Waste  Disposed",
+                                                  onPressed: () {
+                                                    Get.dialog(
+                                                        WasteDisposedAddDialog());
+                                                  },
+                                                  color:
+                                                      ColorValues.addNewColor,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          Divider(
+                                            color: ColorValues.greyLightColour,
+                                          ),
+                                          Container(
+                                            color: Color.fromARGB(
+                                                255, 245, 248, 250),
+                                            width: Get.width,
+                                            height: Get.height,
+                                            child: Padding(
+                                              padding: const EdgeInsets.all(16),
+                                              child: DataTable2(
+                                                fixedLeftColumns: 1,
+                                                headingRowHeight: 140,
+                                                columnSpacing: 12,
+                                                horizontalMargin: 12,
+                                                headingRowColor:
+                                                    MaterialStateColor
+                                                        .resolveWith(
+                                                  (states) {
+                                                    return ColorValues
+                                                        .lightGreyColor;
+                                                  },
+                                                ),
+                                                fixedColumnsColor:
+                                                    ColorValues.appYellowColor,
+                                                minWidth: 2350,
+                                                columns: [
+                                                  DataColumn2(
+                                                    fixedWidth: 70,
+                                                    label: Text(
+                                                      'Month',
+                                                      style: Styles.blackBold14,
+                                                    ),
+                                                    // size: ColumnSize.L,
+                                                  ),
+                                                  DataColumn2(
+                                                    fixedWidth: 110,
+                                                    label: Text(
+                                                      'Opening\nBalance Of\nWaste\nSolid waste',
+                                                      style: Styles.blackBold14,
+                                                    ),
+                                                    // size: ColumnSize.L,
+                                                  ),
+                                                  DataColumn2(
+                                                    fixedWidth: 160,
+                                                    label: Text(
+                                                      'Solid waste( Paper\nwaste, Food waste,\nPlastic waste,\nmetal, Glass etc)\nGenrate',
+                                                      style: Styles.blackBold14,
+                                                    ),
+                                                    // size: ColumnSize.L,
+                                                  ),
+                                                  DataColumn2(
+                                                    fixedWidth: 160,
+                                                    label: Text(
+                                                      'Solid waste(Paper\nwaste, Food waste,\nPlastic waste,\nmetal, Glass\netc) Disposed',
+                                                      style: Styles.blackBold14,
+                                                    ),
+                                                    // size: ColumnSize.L,
+                                                  ),
+                                                  DataColumn2(
+                                                    fixedWidth: 110,
+                                                    label: Text(
+                                                      'Closing\nBalance Of\nWaste\nSolid waste',
+                                                      style: Styles.blackBold14,
+                                                    ),
+                                                    // size: ColumnSize.L,
+                                                  ),
+                                                  DataColumn2(
+                                                    fixedWidth: 90,
+                                                    label: Text(
+                                                      'E- waste\nGenrate',
+                                                      style: Styles.blackBold14,
+                                                    ),
+                                                    // size: ColumnSize.L,
+                                                  ),
+                                                  DataColumn2(
+                                                    fixedWidth: 90,
+                                                    label: Text(
+                                                      'E- waste\nDisposed',
+                                                      style: Styles.blackBold14,
+                                                    ),
+                                                    // size: ColumnSize.L,
+                                                  ),
+                                                  DataColumn2(
+                                                    fixedWidth: 100,
+                                                    label: Text(
+                                                      'Battery\nWaste Genrate',
+                                                      style: Styles.blackBold14,
+                                                    ),
+                                                    // size: ColumnSize.L,
+                                                  ),
+                                                  DataColumn2(
+                                                    fixedWidth: 135,
+                                                    label: Text(
+                                                      'Battery Waste\nDisposed',
+                                                      style: Styles.blackBold14,
+                                                    ),
+                                                    // size: ColumnSize.L,
+                                                  ),
+                                                  DataColumn2(
+                                                    fixedWidth: 120,
+                                                    label: Text(
+                                                      'Solar Module\nwaste\nGenrate',
+                                                      style: Styles.blackBold14,
+                                                    ),
+                                                    // size: ColumnSize.L,
+                                                  ),
+                                                  DataColumn2(
+                                                    fixedWidth: 130,
+                                                    label: Text(
+                                                      'Solar module\nwaste\nDisposed',
+                                                      style: Styles.blackBold14,
+                                                    ),
+                                                    // size: ColumnSize.L,
+                                                  ),
+                                                  DataColumn2(
+                                                    fixedWidth: 130,
+                                                    label: Text(
+                                                      'Haz waste Oil\n(E.g. used\ntransformer oil)\nin litres\nGenrate',
+                                                      style: Styles.blackBold14,
+                                                    ),
+                                                    // size: ColumnSize.L,
+                                                  ),
+                                                  DataColumn2(
+                                                    fixedWidth: 110,
+                                                    label: Text(
+                                                      'Haz waste oil\nDisposed\nin litres',
+                                                      style: Styles.blackBold14,
+                                                    ),
+                                                    // size: ColumnSize.L,
+                                                  ),
+                                                  DataColumn2(
+                                                    fixedWidth: 100,
+                                                    label: Text(
+                                                      'Haz Waste\ngrease\nGenrate',
+                                                      style: Styles.blackBold14,
+                                                    ),
+                                                    // size: ColumnSize.L,
+                                                  ),
+                                                  DataColumn2(
+                                                    fixedWidth: 100,
+                                                    label: Text(
+                                                      'Haz waste\nGrease\nDisposed',
+                                                      style: Styles.blackBold14,
+                                                    ),
+                                                    // size: ColumnSize.L,
+                                                  ),
+                                                  DataColumn2(
+                                                    fixedWidth: 120,
+                                                    label: Text(
+                                                      'Haz solid\nwaste\n(e.g. used oil\ncotton)\nGenrate',
+                                                      style: Styles.blackBold14,
+                                                    ),
+                                                    // size: ColumnSize.L,
+                                                  ),
+                                                  DataColumn2(
+                                                    fixedWidth: 120,
+                                                    label: Text(
+                                                      'Haz Solid\nwaste\nDisposed ',
+                                                      style: Styles.blackBold14,
+                                                    ),
+                                                    // size: ColumnSize.L,
+                                                  ),
+                                                  DataColumn2(
+                                                    fixedWidth: 120,
+                                                    label: Text(
+                                                      'Haz waste\noil barrel\nGenerated\nin No',
+                                                      style: Styles.blackBold14,
+                                                    ),
+                                                    // size: ColumnSize.L,
+                                                  ),
+                                                  DataColumn2(
+                                                    fixedWidth: 130,
+                                                    label: Text(
+                                                      'Haz waste oil\nbarrel\nDisposed in No',
+                                                      style: Styles.blackBold14,
+                                                    ),
+                                                    // size: ColumnSize.L,
+                                                  ),
+                                                  DataColumn2(
+                                                    label: Text(
+                                                      'Action',
+                                                      style: Styles.blackBold14,
                                                     ),
                                                   ),
+                                                ],
+                                                rows: statutoryData.map(
+                                                  (data) {
+                                                    return DataRow(
+                                                      cells: [
+                                                        DataCell(Text(
+                                                            data['Month'])),
+                                                        DataCell(Text(data[
+                                                            'Opening Balance Of Waste'])),
+                                                        DataCell(Text(data[
+                                                            'Closing Balance Of Waste'])),
+                                                        DataCell(Text(data[
+                                                            'Solid waste( Paper waste, Food waste, Plastic waste, metal, Glass etc)'])),
+                                                        DataCell(Text(data[
+                                                            'E- waste in kgs '])),
+                                                        DataCell(Text(data[
+                                                            'Battery Waste in number '])),
+                                                        DataCell(Text(data[
+                                                            'Solar Module waste in number'])),
+                                                        DataCell(Text(data[
+                                                            'Haz waste Oil (E.g. used transformer oil) in litres '])),
+                                                        DataCell(Text(data[
+                                                            'Haz Waste grease in kgs'])),
+                                                        DataCell(Text(data[
+                                                            'Haz solid waste (e.g. used oil cotton) in Kgs'])),
+                                                        DataCell(Text(data[
+                                                            'Haz waste oil barrel generated in No'])),
+                                                        DataCell(Text(data[
+                                                            'Solid waste( Paper waste, Food waste, Plastic waste, metal, Glass etc)in kgs'])),
+                                                        DataCell(Text(data[
+                                                            'E- waste Disposed in kgs'])),
+                                                        DataCell(Text(data[
+                                                            'Battery Waste disposed in number'])),
+                                                        DataCell(Text(data[
+                                                            'Solar module waste in number '])),
+                                                        DataCell(Text(data[
+                                                            'Haz waste oil disposed in litres'])),
+                                                        DataCell(Text(data[
+                                                            'Haz waste Grease in Kgs'])),
+                                                        DataCell(Text(data[
+                                                            'Haz Solid waste disposed in Kgs '])),
+                                                        DataCell(Text(data[
+                                                            'Haz waste oil barrel Disposed in No'])),
+                                                        DataCell(
+                                                          Row(
+                                                            children: [
+                                                              TableActionButton(
+                                                                color: ColorValues
+                                                                    .viewColor,
+                                                                icon: Icons
+                                                                    .remove_red_eye_outlined,
+                                                                message: 'View',
+                                                                onPress: () {
+                                                                  Get.toNamed(Routes
+                                                                      .viewHazWasteData);
+                                                                },
+                                                              ),
+                                                              TableActionButton(
+                                                                color: ColorValues
+                                                                    .editColor,
+                                                                icon:
+                                                                    Icons.edit,
+                                                                message: 'Edit',
+                                                                onPress: () {
+                                                                  Get.toNamed(Routes
+                                                                      .addWasteDataScreen);
+                                                                },
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    );
+                                                  },
+                                                ).toList(),
                                               ),
                                             ),
-                                          ],
-                                        ),
-                                      ],
+                                          ),
+                                        ],
+                                      ),
                                     ),
-                                  ),
+                                  ],
                                 ),
                               ),
                             ),
@@ -641,10 +732,29 @@ class _WasteDataWebState extends State<WasteDataWeb> {
                         ],
                       ),
                     ),
-                  ),
+                    if (controller.openFromDateToStartDatePicker)
+                      Positioned(
+                        right: 120,
+                        top: 100,
+                        child: DatePickerWidget(
+                          minDate: DateTime(DateTime.now().year),
+                          maxDate: DateTime(DateTime.now().year, 13,
+                              0), // last date of this year
+                          controller: DateRangePickerController(),
+                          selectionChanges: (p0) {
+                            print('po valu ${p0.value.toString()}');
+                            controller.waterDateTc.text =
+                                DateFormat('yyyy-MM-dd').format(p0.value);
+                            controller.openFromDateToStartDatePicker =
+                                !controller.openFromDateToStartDatePicker;
+                            controller.update(['stock_Mangement_Date']);
+                          },
+                        ),
+                      ),
+                  ],
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         );
       },
@@ -714,7 +824,8 @@ DataColumn2 buildDataColumn(
 }
 
 _showYearPicker(BuildContext context, WasteDataController controller) {
-  controller.selectedYear = DateTime.now().year;
+  int selectedYear = DateTime.now().year;
+
   showDialog(
     context: context,
     builder: (BuildContext context) {
@@ -725,7 +836,7 @@ _showYearPicker(BuildContext context, WasteDataController controller) {
           child: CupertinoPicker(
             itemExtent: 40,
             onSelectedItemChanged: (int index) {
-              controller.selectedYear = DateTime.now().year - index;
+              selectedYear = DateTime.now().year - index;
             },
             children: List.generate(10, (index) {
               return Center(
@@ -746,8 +857,7 @@ _showYearPicker(BuildContext context, WasteDataController controller) {
           ActionButton(
             color: ColorValues.addNewColor,
             onPressed: () {
-              controller.waterDateTc.text = controller.selectedYear.toString();
-              controller.goWasteDataList();
+              controller.waterDateTc.text = selectedYear.toString();
               controller.update(['stock_Mangement_Date']);
               Navigator.of(context).pop();
             },

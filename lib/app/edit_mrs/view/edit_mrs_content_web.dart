@@ -532,7 +532,7 @@ class EditMrsContentWeb extends GetView<EditMrsController> {
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text("Comment: "),
+                          CustomRichText(title:"Comment:"),
                           Dimens.boxWidth10,
                           Container(
                               width: (Get.width * .6),

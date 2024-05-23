@@ -4,6 +4,7 @@ import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/app/widgets/custom_multiselect_dialog_field.dart';
 import 'package:cmms/app/widgets/history_table_widget_web.dart';
+import 'package:cmms/app/widgets/multipule_dropdown_web.dart';
 import 'package:cmms/app/widgets/custom_textField.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
@@ -20,6 +21,7 @@ import 'package:cmms/app/widgets/date_picker.dart';
 import 'package:cmms/app/widgets/stock_dropdown.dart';
 
 import '../../widgets/custom_richtext.dart';
+import '../../widgets/custom_textField.dart';
 
 class AddGoodsOrdersWeb extends StatefulWidget {
   AddGoodsOrdersWeb({
@@ -491,58 +493,53 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                                 // SizedBox(
                                                 //   height: 6,
                                                 // ),
-                                                Obx(
-                                                  () => Row(
-                                                    children: [
-                                                      CustomRichText(
-                                                          title: 'PO Date  : '),
-                                                      Dimens.boxWidth10,
-                                                      CustomTextFieldForStock(
-                                                        width: MediaQuery.of(
-                                                                    context)
-                                                                .size
-                                                                .width /
-                                                            5,
-                                                        numberTextField: true,
-                                                        onTap: () {
+                                                Row(
+                                                  children: [
+                                                    CustomRichText(
+                                                        title: 'PO Date  : '),
+                                                    Dimens.boxWidth10,
+                                                    CustomTextFieldForStock(
+                                                      width:
+                                                          MediaQuery.of(context)
+                                                                  .size
+                                                                  .width /
+                                                              5,
+                                                      numberTextField: true,
+                                                      onTap: () {
+                                                        controller
+                                                                .openPODatePicker =
+                                                            !controller
+                                                                .openPODatePicker;
+                                                        controller.update([
+                                                          'stock_Mangement'
+                                                        ]);
+                                                      },
+                                                      textController: controller
+                                                          .poDateDateTc,
+                                                           //validate
+
+                                                      errorController: controller
+                                                              .isPOdateInvalid
+                                                              .value
+                                                          ? "Required field"
+                                                          : null,
+
+                                                      onChanged: (value) {
+                                                        if (value
+                                                                .trim()
+                                                                .length >
+                                                            0) {
                                                           controller
-                                                                  .openPODatePicker =
-                                                              !controller
-                                                                  .openPODatePicker;
-                                                          controller.update([
-                                                            'stock_Mangement'
-                                                          ]);
-                                                        },
-                                                        textController:
-                                                            controller
-                                                                .poDateDateTc,
-                                                        //validate
-
-                                                        errorController: controller
-                                                                .isPOdateInvalid
-                                                                .value
-                                                            ? "Required field"
-                                                            : null,
-
-                                                        onChanged: (value) {
-                                                          if (controller
-                                                                  .poDateDateTc
-                                                                  .text
-                                                                  .trim()
-                                                                  .length >
-                                                              0) {
-                                                            controller
-                                                                .isPOdateInvalid
-                                                                .value = false;
-                                                          } else {
-                                                            controller
-                                                                .isPOdateInvalid
-                                                                .value = true;
-                                                          }
-                                                        },
-                                                      ),
-                                                    ],
-                                                  ),
+                                                              .isPOdateInvalid
+                                                              .value = false;
+                                                        } else {
+                                                          controller
+                                                              .isPOdateInvalid
+                                                              .value = true;
+                                                        }
+                                                      },
+                                                    ),
+                                                  ],
                                                 ),
                                                 // SizedBox(
                                                 //   height: 6,
@@ -783,8 +780,6 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                                 .format(p0.value);
                                         controller.openPODatePicker =
                                             !controller.openPODatePicker;
-                                        controller.isPOdateInvalid.value =
-                                            false;
                                         controller.update(['stock_Mangement']);
                                       },
                                     ),
@@ -843,7 +838,6 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                       backgroundColor: ColorValues.submitColor,
                                       text: 'Submit',
                                       onPressed: () {
-                                        controller.isFormInvalid.value = false;
                                         controller.createGoodsOrder();
                                       },
                                     ))
@@ -1020,6 +1014,13 @@ class AddRowInGoodsOrder extends StatelessWidget {
                     ],
                   )),
                   DataColumn2(
+                      fixedWidth: 250,
+                      label: Text(
+                        "Paid By",
+                        style: TextStyle(
+                            fontSize: 15, fontWeight: FontWeight.bold),
+                      )),
+                  DataColumn2(
                       fixedWidth: 180,
                       label: Text(
                         "Requested Qty",
@@ -1037,13 +1038,6 @@ class AddRowInGoodsOrder extends StatelessWidget {
                       fixedWidth: 130,
                       label: Text(
                         "Dispatch Qty",
-                        style: TextStyle(
-                            fontSize: 15, fontWeight: FontWeight.bold),
-                      )),
-                  DataColumn2(
-                      fixedWidth: 250,
-                      label: Text(
-                        "Paid By",
                         style: TextStyle(
                             fontSize: 15, fontWeight: FontWeight.bold),
                       )),
@@ -1170,7 +1164,8 @@ class AddRowInGoodsOrder extends StatelessWidget {
                                           ],
                                         ),
                                       )
-                                    : (mapData['key'] == "Order")
+                                    : (mapData['key'] == "Order") ||
+                                            (mapData['key'] == "Cost")
                                         ? Padding(
                                             padding: EdgeInsets.only(top: 10),
                                             child: Column(
@@ -1213,12 +1208,14 @@ class AddRowInGoodsOrder extends StatelessWidget {
                                                                   .value
                                                               ? "Required field"
                                                               : null,
+
                                                       textController:
                                                           new TextEditingController(
                                                               text: mapData[
                                                                       "value"] ??
                                                                   ''),
                                                       onChanged: (txt) {
+                                                        
                                                         mapData["value"] = txt;
                                                         if (txt
                                                             .trim()
@@ -1231,17 +1228,17 @@ class AddRowInGoodsOrder extends StatelessWidget {
                                                               .isCostInvalid
                                                               .value = true;
                                                         }
+
+                                                   
                                                       },
                                                     )),
                                               ],
                                             ),
                                           )
-                                        :
-                                        // (mapData['key'] == "Order") ||
-                                        (mapData['key'] == "Cost")
+                                        : (mapData['key'] == "Requested")
                                             ? Padding(
-                                                padding:
-                                                    EdgeInsets.only(top: 10),
+                                                padding: const EdgeInsets.only(
+                                                    top: 10),
                                                 child: Column(
                                                   mainAxisAlignment:
                                                       MainAxisAlignment.start,
@@ -1282,117 +1279,40 @@ class AddRowInGoodsOrder extends StatelessWidget {
                                                                 .digitsOnly
                                                           ],
                                                           maxLine: 1,
-                                                          errorController: controller
-                                                                  .isCostInvalid
+                                                          errorController:
+                                                          controller
+                                                                  .isRequestedInvalid
                                                                   .value
                                                               ? "Required field"
                                                               : null,
                                                           textController:
                                                               new TextEditingController(
-                                                            text:
-                                                                "${controller.dropdownMapperData.value[record[0]['value']]?.cost ?? ""}",
-                                                          ),
+                                                                  text: mapData[
+                                                                          "value"] ??
+                                                                      ''),
                                                           onChanged: (txt) {
                                                             mapData["value"] =
                                                                 txt;
-                                                            if (txt
-                                                                .trim()
-                                                                .isNotEmpty) {
-                                                              controller
-                                                                  .isCostInvalid
-                                                                  .value = false;
-                                                            } else {
-                                                              controller
-                                                                  .isCostInvalid
-                                                                  .value = true;
-                                                            }
-                                                          },
+                                                                 if (txt
+                                                            .trim()
+                                                            .isNotEmpty) {
+                                                          controller
+                                                              .isRequestedInvalid
+                                                              .value = false;
+                                                        } else {
+                                                          controller
+                                                              .isRequestedInvalid
+                                                              .value = true;
+                                                        }
+
+                                                   
+                                                      },
+                                                          
                                                         )),
                                                   ],
                                                 ),
                                               )
-                                            : (mapData['key'] == "Requested")
-                                                ? Padding(
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                            top: 10),
-                                                    child: Column(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .start,
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .start,
-                                                      children: [
-                                                        Container(
-                                                            decoration:
-                                                                BoxDecoration(
-                                                              boxShadow: [
-                                                                BoxShadow(
-                                                                  color: Colors
-                                                                      .black26,
-                                                                  offset:
-                                                                      const Offset(
-                                                                    5.0,
-                                                                    5.0,
-                                                                  ),
-                                                                  blurRadius:
-                                                                      5.0,
-                                                                  spreadRadius:
-                                                                      1.0,
-                                                                ),
-                                                              ],
-                                                              color: ColorValues
-                                                                  .whiteColor,
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          5),
-                                                            ),
-                                                            child:
-                                                                LoginCustomTextfield(
-                                                              width:
-                                                                  (Get.width *
-                                                                      .4),
-                                                              keyboardType:
-                                                                  TextInputType
-                                                                      .number,
-                                                              inputFormatters: <TextInputFormatter>[
-                                                                FilteringTextInputFormatter
-                                                                    .digitsOnly
-                                                              ],
-                                                              maxLine: 1,
-                                                              errorController:
-                                                                  controller
-                                                                          .isRequestedInvalid
-                                                                          .value
-                                                                      ? "Required field"
-                                                                      : null,
-                                                              textController:
-                                                                  new TextEditingController(
-                                                                text:
-                                                                    "${controller.dropdownMapperData.value[record[0]['value']]?.ordered_qty ?? ""}",
-                                                              ),
-                                                              onChanged: (txt) {
-                                                                mapData["value"] =
-                                                                    txt;
-                                                                // if (txt
-                                                                //     .trim()
-                                                                //     .isNotEmpty) {
-                                                                //   controller
-                                                                //       .isRequestedInvalid
-                                                                //       .value = false;
-                                                                // } else {
-                                                                //   controller
-                                                                //       .isRequestedInvalid
-                                                                //       .value = true;
-                                                                // }
-                                                              },
-                                                            )),
-                                                      ],
-                                                    ),
-                                                  )
-                                                : Text(mapData['key'] ?? ''),
+                                            : Text(mapData['key'] ?? ''),
                       );
                     }).toList(),
                   );

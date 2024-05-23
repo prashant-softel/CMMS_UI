@@ -104,11 +104,11 @@ class AddInventoryScreen extends GetView<AddInventoryController> {
                                               Get.offNamed(
                                                   Routes.masterDashboard);
                                             },
-                                            child: Text(" / MASTER",
+                                            child: Text(" /  MASTER",
                                                 style: Styles.greyLight14),
                                           ),
                                           Text(
-                                            " / ADD ASSETS",
+                                            "/ ADD ASSETS",
                                             style: Styles.greyLight14,
                                           ),
                                         ],
@@ -335,22 +335,22 @@ class AddInventoryScreen extends GetView<AddInventoryController> {
                                                 CustomRichText(
                                                     title: "Asset Name"),
                                                 Container(
-                                                  // decoration: BoxDecoration(
-                                                  //   boxShadow: [
-                                                  //     BoxShadow(
-                                                  //       color: Colors.black26,
-                                                  //       offset: const Offset(
-                                                  //         5.0,
-                                                  //         5.0,
-                                                  //       ),
-                                                  //       blurRadius: 5.0,
-                                                  //       spreadRadius: 1.0,
-                                                  //     ),
-                                                  //   ],
-                                                  //   borderRadius:
-                                                  //       BorderRadius.circular(
-                                                  //           5),
-                                                  // ),
+                                                  decoration: BoxDecoration(
+                                                    boxShadow: [
+                                                      BoxShadow(
+                                                        color: Colors.black26,
+                                                        offset: const Offset(
+                                                          5.0,
+                                                          5.0,
+                                                        ),
+                                                        blurRadius: 5.0,
+                                                        spreadRadius: 1.0,
+                                                      ),
+                                                    ],
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            5),
+                                                  ),
                                                   height: MediaQuery.of(context)
                                                           .size
                                                           .height *
@@ -377,23 +377,6 @@ class AddInventoryScreen extends GetView<AddInventoryController> {
                                                         RegExp('[\'^]'),
                                                       )
                                                     ],
-                                                    errorController: controller
-                                                            .isAssetsNameInvalid
-                                                            .value
-                                                        ? "Required field"
-                                                        : null,
-                                                    onChanged: (value) {
-                                                      if (value.trim().length >
-                                                          1) {
-                                                        controller
-                                                            .isAssetsNameInvalid
-                                                            .value = false;
-                                                      } else {
-                                                        controller
-                                                            .isAssetsNameInvalid
-                                                            .value = true;
-                                                      }
-                                                    },
                                                   ),
                                                 ),
                                               ],
@@ -539,22 +522,22 @@ class AddInventoryScreen extends GetView<AddInventoryController> {
                                                 CustomRichText(
                                                     title: "Serial No"),
                                                 Container(
-                                                  // decoration: BoxDecoration(
-                                                  //   boxShadow: [
-                                                  //     BoxShadow(
-                                                  //       color: Colors.black26,
-                                                  //       offset: const Offset(
-                                                  //         5.0,
-                                                  //         5.0,
-                                                  //       ),
-                                                  //       blurRadius: 5.0,
-                                                  //       spreadRadius: 1.0,
-                                                  //     ),
-                                                  //   ],
-                                                  //   borderRadius:
-                                                  //       BorderRadius.circular(
-                                                  //           5),
-                                                  // ),
+                                                  decoration: BoxDecoration(
+                                                    boxShadow: [
+                                                      BoxShadow(
+                                                        color: Colors.black26,
+                                                        offset: const Offset(
+                                                          5.0,
+                                                          5.0,
+                                                        ),
+                                                        blurRadius: 5.0,
+                                                        spreadRadius: 1.0,
+                                                      ),
+                                                    ],
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            5),
+                                                  ),
                                                   height: MediaQuery.of(context)
                                                           .size
                                                           .height *
@@ -577,23 +560,6 @@ class AddInventoryScreen extends GetView<AddInventoryController> {
                                                     ],
                                                     textController: controller
                                                         .serialNoCtrlr,
-                                                    errorController: controller
-                                                            .isSerialNoInvalid
-                                                            .value
-                                                        ? "Required field"
-                                                        : null,
-                                                    onChanged: (value) {
-                                                      if (value.trim().length >
-                                                          1) {
-                                                        controller
-                                                            .isSerialNoInvalid
-                                                            .value = false;
-                                                      } else {
-                                                        controller
-                                                            .isSerialNoInvalid
-                                                            .value = true;
-                                                      }
-                                                    },
                                                   ),
                                                 ),
                                               ],
@@ -604,22 +570,22 @@ class AddInventoryScreen extends GetView<AddInventoryController> {
                                                   title: "Asset Description",
                                                 ),
                                                 Container(
-                                                  // decoration: BoxDecoration(
-                                                  //   boxShadow: [
-                                                  //     BoxShadow(
-                                                  //       color: Colors.black26,
-                                                  //       offset: const Offset(
-                                                  //         5.0,
-                                                  //         5.0,
-                                                  //       ),
-                                                  //       blurRadius: 5.0,
-                                                  //       spreadRadius: 1.0,
-                                                  //     ),
-                                                  //   ],
-                                                  //   borderRadius:
-                                                  //       BorderRadius.circular(
-                                                  //           5),
-                                                  // ),
+                                                  decoration: BoxDecoration(
+                                                    boxShadow: [
+                                                      BoxShadow(
+                                                        color: Colors.black26,
+                                                        offset: const Offset(
+                                                          5.0,
+                                                          5.0,
+                                                        ),
+                                                        blurRadius: 5.0,
+                                                        spreadRadius: 1.0,
+                                                      ),
+                                                    ],
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            5),
+                                                  ),
                                                   height: MediaQuery.of(context)
                                                           .size
                                                           .height *
@@ -640,23 +606,6 @@ class AddInventoryScreen extends GetView<AddInventoryController> {
                                                         controller.descFocus,
                                                     scroll:
                                                         controller.descScroll,
-                                                    errorController: controller
-                                                            .isAssetDescInvalid
-                                                            .value
-                                                        ? "Required field"
-                                                        : null,
-                                                    onChanged: (value) {
-                                                      if (value.trim().length >
-                                                          1) {
-                                                        controller
-                                                            .isAssetDescInvalid
-                                                            .value = false;
-                                                      } else {
-                                                        controller
-                                                            .isAssetDescInvalid
-                                                            .value = true;
-                                                      }
-                                                    },
                                                   ),
                                                 ),
                                               ],
@@ -828,9 +777,7 @@ class AddInventoryScreen extends GetView<AddInventoryController> {
                               backgroundColor: ColorValues.appGreenColor,
                               text: 'Submit',
                               onPressed: () {
-                                controller.isFormValid.value = true;
-                                controller.AddInventory(
-                                    fileIds: dropzoneController.fileIds);
+                                controller.AddInventory(fileIds: dropzoneController.fileIds);
                               },
                             ),
                           )
@@ -840,9 +787,7 @@ class AddInventoryScreen extends GetView<AddInventoryController> {
                               backgroundColor: ColorValues.appDarkBlueColor,
                               text: 'Update',
                               onPressed: () {
-                                controller.isFormValid.value = true;
-                                controller.updateInventory(
-                                    fileIds: dropzoneController.fileIds);
+                                controller.updateInventory(fileIds: dropzoneController.fileIds);
                               },
                             ),
                           ),

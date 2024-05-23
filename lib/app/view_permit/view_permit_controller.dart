@@ -32,6 +32,7 @@ import 'package:cmms/domain/models/equipment_model.dart';
 import 'package:cmms/domain/models/facility_model.dart';
 import 'package:cmms/domain/models/inventory_model.dart';
 import 'package:cmms/domain/models/type_permit_model.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart';
 import 'package:intl/intl.dart';
@@ -545,6 +546,10 @@ class ViewPermitController extends GetxController {
   void permitApprovedButton(
       {int? permitId, String? ptwStatus, int? jobId, int? type}) async {
     {
+      if (approveCommentTextFieldCtrlr.text == '') {
+        Fluttertoast.showToast(msg: "Please Enter Comment!",timeInSecForIosWeb: 5, fontSize: 16);
+        return ;
+      }
       String _approveComment = approveCommentTextFieldCtrlr.text.trim();
 
       AproveExtendPermitModel commentRejectCancelPermitModel =
@@ -1209,21 +1214,21 @@ class ViewPermitController extends GetxController {
     switch (list.runtimeType) {
       case RxList<FacilityModel>:
         {
-        if (value != "Please Select") {
-            int facilityIndex = facilityList.indexWhere((x) => x?.name == value);
-          selectedFacilityId = facilityList[facilityIndex]?.id ?? 0;
-          print('FacilityId:$selectedFacilityId');
-          _facilityId.add(facilityList[facilityIndex]?.id ?? 0);
+          if (value != "Please Select") {
+            int facilityIndex =
+                facilityList.indexWhere((x) => x?.name == value);
+            selectedFacilityId = facilityList[facilityIndex]?.id ?? 0;
+            print('FacilityId:$selectedFacilityId');
+            _facilityId.add(facilityList[facilityIndex]?.id ?? 0);
 
-          if (selectedFacilityId != 0) {
-            isFacilitySelected.value = true;
+            if (selectedFacilityId != 0) {
+              isFacilitySelected.value = true;
+            }
+            selectedFacility.value = value;
+            getBlocksList(selectedFacilityId!);
+          } else {
+            selectedFacilityId = 0;
           }
-          selectedFacility.value = value;
-          getBlocksList(selectedFacilityId!);
-          
-        }else{
-          selectedFacilityId=0;
-        }
         }
         break;
 

@@ -1868,22 +1868,6 @@ class DataRepository extends DomainRepository {
         updateWaterData: updateWaterData,
         isLoading: isLoading ?? false,
       );
-
-  Future<ResponseModel> getWasteDataList({
-    int? facility_id,
-    String? start_date,
-    required String end_date,
-    required bool isLoading,
-    required String auth,
-  }) async {
-    return await connectHelper.getWasteDataList(
-      isLoading: isLoading,
-      auth: auth,
-      facility_id: facility_id,
-      start_date: start_date,
-      end_date: end_date,
-    );
-  }    
   Future<ResponseModel> createWasteData({
     required String auth,
     createWasteData,

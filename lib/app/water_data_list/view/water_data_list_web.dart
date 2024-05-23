@@ -251,23 +251,21 @@ class _WaterDataListWebState extends State<WaterDataListWeb> {
                                         Divider(
                                           color: ColorValues.greyLightColour,
                                         ),
-                                        SingleChildScrollView(
-                                          scrollDirection: Axis.horizontal,
-                                          child: Obx(
-                                            () => Container(
-                                              color: Color.fromARGB(
-                                                  255, 245, 248, 250),
-                                              width: Get.width,
-                                              height: Get.height * .7,
-                                              child: Padding(
-                                                padding:
-                                                    const EdgeInsets.all(16),
+                                        Obx(
+                                          () => Container(
+                                            color: Color.fromARGB(
+                                                255, 245, 248, 250),
+                                            width: Get.width,
+                                            height: Get.height,
+                                            child: Padding(
+                                              padding: const EdgeInsets.all(16),
+                                              child: SingleChildScrollView(
                                                 child: Column(
                                                   children: [
                                                     Row(
                                                       children: []..addAll(controller.mainHeaderList.map((element) =>
                                                           Container(
-                                                              height: 60,
+                                                              height: 50,
                                                               decoration:
                                                                   BoxDecoration(
                                                                 color: ColorValues

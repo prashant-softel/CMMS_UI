@@ -5,6 +5,7 @@ import 'package:cmms/app/view_pm_plan/view_pm_plan_presenter.dart';
 import 'package:cmms/domain/models/comment_model.dart';
 import 'package:cmms/domain/models/get_pm_plan_detail_model.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import '../home/home_controller.dart';
 
@@ -23,6 +24,8 @@ class ViewPmPlanController extends GetxController {
   TextEditingController approveCommentTextFieldCtrlr = TextEditingController();
   TextEditingController rejectCommentTextFieldCtrlr = TextEditingController();
   Rx<int> pmPlanId = 0.obs;
+  Rx<bool> isFormInvalid = false.obs;
+
   Rx<PMPlanDetail?> pmPlanDetailsModel = PMPlanDetail().obs;
 
   @override
@@ -87,8 +90,22 @@ class ViewPmPlanController extends GetxController {
     print({"pmPlandetailss", pmPlanDetailsModel.value?.plan_name});
   }
 
+  Future<void> checkform() async {
+    if (approveCommentTextFieldCtrlr.text == '') {
+      isFormInvalid.value = true;
+    } else {
+      isFormInvalid.value = false;
+    }
+  }
+
   void pmPlanApprovedButton({int? id}) async {
     {
+      await checkform();
+      if (isFormInvalid.value == true) {
+        Fluttertoast.showToast(msg: "Please Enter Comment!");
+
+        return;
+      }
       String _comment = approveCommentTextFieldCtrlr.text.trim();
 
       CommentModel commentpmPlanAproveModel =

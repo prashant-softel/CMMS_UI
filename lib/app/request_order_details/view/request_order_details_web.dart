@@ -504,23 +504,12 @@ class AddRowInReqGoodsOrder extends StatelessWidget {
                                                   .digitsOnly
                                             ],
                                             maxLine: 1,
-                                            errorController:
-                                                controller.isCostInvalid.value
-                                                    ? "Required field"
-                                                    : null,
                                             textController:
                                                 new TextEditingController(
                                                     text:
                                                         mapData["value"] ?? ''),
                                             onChanged: (txt) {
                                               mapData["value"] = txt;
-                                              if (txt.trim().isNotEmpty) {
-                                                controller.isCostInvalid.value =
-                                                    false;
-                                              } else {
-                                                controller.isCostInvalid.value =
-                                                    true;
-                                              }
                                             },
                                           )),
                                     ],
@@ -578,11 +567,6 @@ class AddRowInReqGoodsOrder extends StatelessWidget {
                                                   ),
                                                   child: LoginCustomTextfield(
                                                     maxLine: 1,
-                                                    errorController: controller
-                                                            .isCommentInvalid
-                                                            .value
-                                                        ? "Required field"
-                                                        : null,
                                                     textController:
                                                         new TextEditingController(
                                                             text: mapData[
@@ -590,17 +574,6 @@ class AddRowInReqGoodsOrder extends StatelessWidget {
                                                                 ''),
                                                     onChanged: (txt) {
                                                       mapData["value"] = txt;
-                                                      if (txt
-                                                          .trim()
-                                                          .isNotEmpty) {
-                                                        controller
-                                                            .isCommentInvalid
-                                                            .value = false;
-                                                      } else {
-                                                        controller
-                                                            .isCommentInvalid
-                                                            .value = true;
-                                                      }
                                                     },
                                                   )),
                                             ],

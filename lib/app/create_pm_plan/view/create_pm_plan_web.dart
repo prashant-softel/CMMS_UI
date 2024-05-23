@@ -162,32 +162,29 @@ class _CreatePmPlanWebState extends State<CreatePmPlanWeb> {
                                                   child: LoginCustomTextfield(
                                                     textController: controller
                                                         .planTittleCtrlr,
-
-                                                    //validate
-                                                    errorController: controller
-                                                            .isPMTitleInvalid
-                                                            .value
-                                                        ? "Required field"
-                                                        : null,
-
-                                                    onChanged: (value) {
-                                                      if (value.trim().length >
-                                                          0) {
-                                                        controller
-                                                            .isPMTitleInvalid
-                                                            .value = false;
-                                                      } else {
-                                                        controller
-                                                            .isPMTitleInvalid
-                                                            .value = true;
-                                                      }
-                                                    },
                                                     inputFormatters: [
                                                       FilteringTextInputFormatter
                                                           .deny(
                                                         RegExp('[\'^]'),
                                                       )
                                                     ],
+                                                    errorController: controller
+                                                            .istitleInvalid
+                                                            .value
+                                                        ? "Required field"
+                                                        : null,
+                                                    onChanged: (value) {
+                                                      if (value.trim().length >
+                                                          0) {
+                                                        controller
+                                                            .istitleInvalid
+                                                            .value = false;
+                                                      } else {
+                                                        controller
+                                                            .istitleInvalid
+                                                            .value = true;
+                                                      }
+                                                    },
                                                   )),
                                             ]),
                                             Dimens.boxHeight10,
@@ -197,7 +194,7 @@ class _CreatePmPlanWebState extends State<CreatePmPlanWeb> {
                                                       '   Equipment Category :'),
                                               Dimens.boxWidth5,
                                               SizedBox(
-                                                child: DropdownWebWidget(
+                                                child: DropdownWebStock(
                                                   width: (MediaQuery.of(context)
                                                           .size
                                                           .width *
@@ -291,26 +288,6 @@ class _CreatePmPlanWebState extends State<CreatePmPlanWeb> {
                                                   },
                                                   textController: controller
                                                       .startDateDateTc,
-                                                  //validate
-
-                                                  errorController: controller
-                                                          .isStartdateInvalid
-                                                          .value
-                                                      ? "Required field"
-                                                      : null,
-
-                                                  onChanged: (value) {
-                                                    if (value.trim().length >
-                                                        0) {
-                                                      controller
-                                                          .isStartdateInvalid
-                                                          .value = false;
-                                                    } else {
-                                                      controller
-                                                          .isStartdateInvalid
-                                                          .value = true;
-                                                    }
-                                                  },
                                                 ),
                                               ],
                                             ),
@@ -557,7 +534,6 @@ class _CreatePmPlanWebState extends State<CreatePmPlanWeb> {
                                       DateFormat('yyyy-MM-dd').format(p0.value);
                                   controller.openStartDatePicker =
                                       !controller.openStartDatePicker;
-                                  controller.isStartdateInvalid.value = false;
                                   controller.update(['stock_Mangement']);
                                 },
                               ),

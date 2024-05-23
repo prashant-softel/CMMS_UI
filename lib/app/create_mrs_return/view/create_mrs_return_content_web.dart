@@ -350,34 +350,42 @@ class CreateMrsReturnContentWeb extends GetView<CreateMrsReturnController> {
                                                                 .9),
                                                             child:
                                                                 LoginCustomTextfield(
-                                                                    inputFormatters: <TextInputFormatter>[
-                                                                  FilteringTextInputFormatter
-                                                                      .digitsOnly
-                                                                ],
-                                                                    maxLine: 1,
-                                                                    textController:
-                                                                        new TextEditingController(
-                                                                            text: mapData["value"] ??
-                                                                                ''),
-                                                                    onChanged: (txt) {
+                                                              inputFormatters: <TextInputFormatter>[
+                                                                FilteringTextInputFormatter
+                                                                    .digitsOnly
+                                                              ],
+                                                              maxLine: 1,
+                                                              textController:
+                                                                  TextEditingController(
+                                                                text: mapData[
+                                                                            "value"]
+                                                                        ?.toString() ??
+                                                                    '',
+                                                              ),
+                                                              // textController:
+                                                              //     new TextEditingController(
+                                                              //         text: mapData["value"] ??
+                                                              //             ''),
+                                                              onChanged: (txt) {
                                                                 // Parse issuedQty, usedQty, and returnQty
-                                                                 int? issueQty = (controller
+                                                                int? issueQty = int.tryParse(controller
                                                                         .dropdownMapperData
                                                                         .value[record[0]
                                                                             [
                                                                             'value']]
-                                                                        ?.issued_qty ??
+                                                                        ?.issued_qty
+                                                                        ?.toString() ??
                                                                     "");
-                                                                int? usedQty = (controller
+                                                                int? usedQty = int.tryParse(controller
                                                                         .dropdownMapperData
                                                                         .value[record[0]
                                                                             [
                                                                             'value']]
-                                                                        ?.consumed_qty ??
+                                                                        ?.consumed_qty
+                                                                        ?.toString() ??
                                                                     "");
-                                                                int? returnQty =
-                                                                    int.tryParse(
-                                                                        txt);
+                                                                int? returnQty =int.tryParse(
+                                                                    txt);
                                                                 if (returnQty !=
                                                                         null &&
                                                                     issueQty !=

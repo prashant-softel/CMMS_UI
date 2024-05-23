@@ -971,13 +971,11 @@ class NewPermitController extends GetxController {
 
     if (value != "Please Select") {
       int tbtConductedIndex =
-        employeeNameList.indexWhere((x) => x?.name == value);
-    selectedTbtConductedId = employeeNameList[tbtConductedIndex]?.id ?? 0;
-    print('Tbt Conducted Id: $selectedTbtConductedId');
-      
-    }else{
-
-      selectedTbtConductedId=0;
+          employeeNameList.indexWhere((x) => x?.name == value);
+      selectedTbtConductedId = employeeNameList[tbtConductedIndex]?.id ?? 0;
+      print('Tbt Conducted Id: $selectedTbtConductedId');
+    } else {
+      selectedTbtConductedId = 0;
     }
   }
 
@@ -987,18 +985,19 @@ class NewPermitController extends GetxController {
       case RxList<FacilityModel>:
         {
           if (value != "Please Select") {
-            int facilityIndex = facilityList.indexWhere((x) => x?.name == value);
-          selectedFacilityId = facilityList[facilityIndex]?.id ?? 0;
-          _facilityId.add(facilityList[facilityIndex]?.id ?? 0);
+            int facilityIndex =
+                facilityList.indexWhere((x) => x?.name == value);
+            selectedFacilityId = facilityList[facilityIndex]?.id ?? 0;
+            _facilityId.add(facilityList[facilityIndex]?.id ?? 0);
 
-          if (selectedFacilityId != 0) {
-            isFacilitySelected.value = true;
-          }
-          selectedFacility.value = value;
-          getBlocksList(selectedFacilityId!);
-          getTypePermitList(selectedFacilityId!);
-          }else{
-            selectedFacilityId=0;
+            if (selectedFacilityId != 0) {
+              isFacilitySelected.value = true;
+            }
+            selectedFacility.value = value;
+            getBlocksList(selectedFacilityId!);
+            getTypePermitList(selectedFacilityId!);
+          } else {
+            selectedFacilityId = 0;
           }
         }
         break;
@@ -1229,7 +1228,7 @@ class NewPermitController extends GetxController {
     if (selectedBlock.value == '') {
       isBlockSelected.value = false;
     }
-    if (workPermitRemarkTextCtrlr.text.trim().length < 3) {
+    if (workPermitRemarkTextCtrlr.text=='') {
       isWorPermitNumberTextInvalid.value = true;
     }
     // if (selectedJobType.value == '') {
@@ -1276,7 +1275,8 @@ class NewPermitController extends GetxController {
         isBlockSelected.value == false ||
         // isJobTypeListSelected.value == false ||
         // isSopPermitListSelected.value == false ||
-        isJobDescriptionInvalid == true) {
+        isJobDescriptionInvalid == true ||
+        isWorPermitNumberTextInvalid.value == true||workPermitRemarkTextCtrlr.text=='') {
       isFormInvalid.value = true;
     } else {
       isFormInvalid.value = false;

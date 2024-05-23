@@ -3225,26 +3225,6 @@ class ConnectHelper {
     return responseModel;
   }
 
-  Future<ResponseModel> getWasteDataList({
-    required bool isLoading,
-    required String auth,
-    int? facility_id,
-    String? start_date,
-    required String end_date,
-  }) async {
-    ResponseModel responseModel = await apiWrapper.makeRequest(
-      'MISMaster/GetWasteDataListMonthWise?fromDate=$end_date-04-01&toDate=$start_date-04-01&facility_id=$facility_id',
-      Request.getMultiparts,
-      null,
-      isLoading,
-      {
-        'Authorization': 'Bearer $auth',
-      },
-    );
-
-    return responseModel;
-  }
-
   Future<ResponseModel> createWasteData({
     required String auth,
     createWasteData,
