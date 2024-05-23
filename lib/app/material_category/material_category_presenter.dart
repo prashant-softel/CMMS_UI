@@ -8,10 +8,12 @@ class MaterialCategoryPresenter {
 
   Future<List<MaterialCategoryListModel>> getMaterialList({
     required bool isLoading,
+     bool? isExport,
     required int? job_type_id,
   }) async {
     return await materialCategoryUsecase.getMaterialList(
       isLoading: isLoading,
+      isExport: isExport,
       job_type_id: job_type_id,
     );
   }

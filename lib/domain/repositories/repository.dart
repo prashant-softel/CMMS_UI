@@ -13354,6 +13354,7 @@ class Repository {
   //get
   Future<List<MaterialCategoryListModel>> getMaterialList({
     required bool isLoading,
+    bool? isExport,
   }) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
@@ -13366,8 +13367,34 @@ class Repository {
       print('Material Category: ${res.data}');
 
       if (!res.hasError) {
-        var Sourcetype = MaterialCategoryFromJson(res.data);
-        return Sourcetype;
+        final List<dynamic> Sourcetype = jsonDecode(res.data);
+        final List<MaterialCategoryListModel> _materialcategory =
+            Sourcetype.map<MaterialCategoryListModel>((m) =>
+                MaterialCategoryListModel.fromJson(
+                    Map<String, dynamic>.from(m))).toList();
+        String jsonData = materialCategoryToJson(_materialcategory);
+        if (isExport == true) {
+          List<dynamic> jsonDataList = jsonDecode(jsonData);
+
+          List<List<dynamic>> data = [
+            [
+              'Id',
+              'Material Category',
+            ],
+            ...jsonDataList
+                .map((matcatjson) => [
+                      matcatjson['id'],
+                      matcatjson['cat_name'],
+                    ])
+                .toList()
+          ];
+          Map<String, List<List<dynamic>>> matcatdata = {
+            "Sheet1": data,
+          };
+          exportToExcel(matcatdata, "MaterialCategory.xlsx");
+        }
+
+        return _materialcategory;
       }
       return [];
     } catch (error) {

@@ -405,6 +405,14 @@ class MaterialCategoryContentWeb extends GetView<MaterialCategoryController> {
                                       style: Styles.blackBold16,
                                     ),
                                     Spacer(),
+                                    CustomElevatedButton(
+                                        backgroundColor:
+                                            ColorValues.appLightBlueColor,
+                                        onPressed: () {
+                                          controller.export();
+                                        },
+                                        text: 'Excel'),
+                                        Dimens.boxWidth5,
                                     Container(
                                       width: 300,
                                       height: 40,
@@ -493,7 +501,7 @@ class MaterialCategoryContentWeb extends GetView<MaterialCategoryController> {
                                                 //   "",
                                                 //   style: TextStyle(
                                                 //       fontSize: 15,
-                                                //       fontWeight:
+                                                //       fontWeightp:
                                                 //           FontWeight.bold),
                                                 // )),
                                                 DataColumn2(

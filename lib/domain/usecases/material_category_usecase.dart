@@ -8,10 +8,12 @@ class MaterialCategoryUsecase {
 
   Future<List<MaterialCategoryListModel>> getMaterialList({
     required bool isLoading,
+     bool? isExport,
     required int? job_type_id,
   }) async {
     return repository.getMaterialList(
       isLoading: isLoading,
+      isExport: isExport
     );
   }
 
