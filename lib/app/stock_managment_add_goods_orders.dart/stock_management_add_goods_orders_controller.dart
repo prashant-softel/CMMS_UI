@@ -53,23 +53,17 @@ class StockManagementAddGoodsOrdersController extends GetxController {
   RxList<CurrencyListModel?> unitCurrencyList = <CurrencyListModel>[].obs;
   RxList<GetRequestOrderListModel?> goodsOrdersList =
       <GetRequestOrderListModel>[].obs;
-  Rx<bool> isUnitCurrencySelected = true.obs;
   Rx<bool> isReqOrderSelected = true.obs;
   Rx<bool> ispaidSelected = true.obs;
   Rx<String> selectedReqOrder = ''.obs;
   Rx<String> selectedpaid = ''.obs;
 
-  
-   Rx<bool> isRequestedInvalid = false.obs;
+  Rx<bool> isRequestedInvalid = false.obs;
   Rx<bool> isCostInvalid = false.obs;
   Rx<bool> isBusinessTypeInvalid = false.obs;
-  Rx<bool> isAmountInvalid = false.obs;
-  Rx<bool> isPOdateInvalid = false.obs;
-  
-  Rx<bool> isPOInvalid = false.obs;
+
   RxList<int> selectedReqOrderId = <int>[].obs;
   Rx<int> roId = 0.obs;
-  Rx<bool> isFormInvalid = false.obs;
   var commentCtrlr = TextEditingController();
   Rx<String> selectedFacility = ''.obs;
   Rx<String> selectedUnitCurrency = ''.obs;
@@ -96,9 +90,7 @@ class StockManagementAddGoodsOrdersController extends GetxController {
   Rx<DateTime> fromDate = DateTime.now().subtract(Duration(days: 7)).obs;
   Rx<DateTime> toDate = DateTime.now().obs;
 
-  Rx<bool> isSelectedBusinessType = true.obs;
-
-  int selectedBusinessTypeId = 1;
+  int selectedBusinessTypeId = 0;
   int paidId = 0;
   RxBool showAdditionalColumn = false.obs;
   Rx<int> goId = 0.obs;
@@ -151,6 +143,14 @@ class StockManagementAddGoodsOrdersController extends GetxController {
   var vehicleNoCtrlr = TextEditingController();
   var jobRefCtrlr = TextEditingController();
   var textController = TextEditingController();
+
+  // validators
+  Rx<bool> isSelectedBusinessType = true.obs;
+  Rx<bool> isUnitCurrencySelected = true.obs;
+  Rx<bool> isPOInvalid = false.obs;
+  Rx<bool> isPOdateInvalid = false.obs;
+  Rx<bool> isAmountInvalid = false.obs;
+  Rx<bool> isFormInvalid = false.obs;
 
   /// date picker
   bool openPurchaseDatePicker = false;
@@ -346,11 +346,6 @@ class StockManagementAddGoodsOrdersController extends GetxController {
               'id': '${element.id}'
             },
             {
-              'key': "Paid_By",
-              "value": '${element.paid_by_name}',
-              'id': '${element.paid_by_ID}'
-            },
-            {
               'key': "Requested",
               "value": '${element.requested_qty}',
               // 'id': '${element.assetMasterItemID}'
@@ -364,6 +359,11 @@ class StockManagementAddGoodsOrdersController extends GetxController {
               'key': "Order",
               "value": '${element.ordered_qty}',
               // 'id': '${element.assetMasterItemID}'
+            },
+            {
+              'key': "Paid_By",
+              "value": '${element.paid_by_name}',
+              'id': '${element.paid_by_ID}'
             },
             {'key': "Action ", "value": ''},
           ],
@@ -412,9 +412,10 @@ class StockManagementAddGoodsOrdersController extends GetxController {
       isLoading: true,
     );
     if (list!.length > 0) {
-      for (var _ownerList in list) {
-        ownerList.add(_ownerList);
-      }
+      ownerList?.value = list;
+      // for (var _ownerList in list) {
+      //   ownerList.add(_ownerList);
+      // }
     }
   }
 
@@ -505,6 +506,7 @@ class StockManagementAddGoodsOrdersController extends GetxController {
   }
 
   void onValueChanged(dynamic list, dynamic value) {
+    print("$value");
     switch (list.runtimeType) {
       case RxList<CurrencyListModel>:
         {
@@ -512,6 +514,9 @@ class StockManagementAddGoodsOrdersController extends GetxController {
             int currencyIndex =
                 unitCurrencyList.indexWhere((x) => x?.name == value);
             selectedUnitCurrencyId = unitCurrencyList[currencyIndex]?.id ?? 0;
+            isUnitCurrencySelected.value = true;
+            print(
+                "selectedBusinessTypeId: ${selectedUnitCurrencyId} \n ${selectedUnitCurrency}");
           } else {
             selectedUnitCurrencyId = 0;
           }
@@ -540,11 +545,15 @@ class StockManagementAddGoodsOrdersController extends GetxController {
           }
         }
         break;
-      case RxList<BusinessTypeModel>:
+      case RxList<BusinessListModel>:
         {
           if (value != "Please Select") {
             int equipmentIndex = ownerList.indexWhere((x) => x?.name == value);
             selectedBusinessTypeId = ownerList[equipmentIndex]?.id ?? 0;
+            selectedBusinessType.value = value;
+            isSelectedBusinessType.value = true;
+            print(
+                "selectedBusinessTypeId: ${selectedBusinessType} \n ${selectedBusinessType}");
           } else {
             selectedBusinessTypeId = 0;
           }
@@ -571,104 +580,109 @@ class StockManagementAddGoodsOrdersController extends GetxController {
         "assetMasterItemID": '',
         "id": ''
       },
-      {'key': "Paid_By", "value": 'Please Select', "id": ''},
       {'key': "Requested", "value": ''},
       {'key': "Cost", "value": ''},
       {'key': "Order", "value": ''},
+      {'key': "Paid_By", "value": 'Please Select', "id": ''},
       {'key': "Action ", "value": ''},
     ]);
   }
 
   void createGoodsOrder() async {
-    checkForm();
-    if (isFormInvalid.value) {
-      return;
-    }
-    // DateTime now = DateTime.now();
-    // String currentDate =
-    //     DateTime.now().toString().split(' ')[0].replaceAll('-', '-');
-    String _challanNoCtrlr = challanNoCtrlr.text.trim();
-    String _pOCtrlr = pOCtrlr.text.trim();
-    String _frieghtToPayPaidCtrlr = frieghtToPayPaidCtrlr.text.trim();
-    String _noOfPackagesReceivedCtrlr = noOfPackagesReceivedCtrlr.text.trim();
-    String _conditionOfPackagesReceivedCtrlr =
-        conditionOfPackagesReceivedCtrlr.text.trim();
-    String _girNoCtrlr = girNoCtrlr.text.trim();
-    String _amountCtrlr = amountCtrlr.text.trim();
-    String _purchaseDateTc = purchaseDateTc.text.trim();
-    String _challanDateTc = challanDateTc.text.trim();
-    String _poDateDateTc = poDateDateTc.text.trim();
-    String _receivedDateTc = receivedDateTc.text.trim();
-    String _lrNoCtrlr = lrNoCtrlr.text.trim();
-    String _vehicleNoCtrlr = vehicleNoCtrlr.text.trim();
-    String _jobRefCtrlr = jobRefCtrlr.text.trim();
+    try {
+      checkForm();
+      if (isFormInvalid.value) {
+        return;
+      }
+      String _challanNoCtrlr = challanNoCtrlr.text.trim();
+      String _pOCtrlr = pOCtrlr.text.trim();
+      String _frieghtToPayPaidCtrlr = frieghtToPayPaidCtrlr.text.trim();
+      String _noOfPackagesReceivedCtrlr = noOfPackagesReceivedCtrlr.text.trim();
+      String _conditionOfPackagesReceivedCtrlr =
+          conditionOfPackagesReceivedCtrlr.text.trim();
+      String _girNoCtrlr = girNoCtrlr.text.trim();
+      String _amountCtrlr = amountCtrlr.text.trim();
+      String _purchaseDateTc = purchaseDateTc.text.trim();
+      String _challanDateTc = challanDateTc.text.trim();
+      String _poDateDateTc = poDateDateTc.text.trim();
+      String _receivedDateTc = receivedDateTc.text.trim();
+      String _lrNoCtrlr = lrNoCtrlr.text.trim();
+      String _vehicleNoCtrlr = vehicleNoCtrlr.text.trim();
+      String _jobRefCtrlr = jobRefCtrlr.text.trim();
 
-    // Initialize an empty list of Items
-    List<Items> items = [];
+      // DateTime now = DateTime.now();
+      // String currentDate =
+      //     DateTime.now().toString().split(' ')[0].replaceAll('-', '-');
 
-    // Iterate through rowItem.value and populate the items list
-    rowItem.value.forEach((element) {
-      Items item = Items(
-        goItemID: 0,
-        received_qty: 0,
-        lost_qty: 0,
-        accepted_qty: 0,
-        damaged_qty: 0,
-        requested_qty: double.tryParse(element[2]["value"] ?? '0'),
-        assetMasterItemID:
-            dropdownMapperData[element[0]["value"]]?.assetMasterItemID,
-        cost: double.tryParse(element[3]["value"] ?? '0'),
-        ordered_qty: double.tryParse(element[4]["value"] ?? '0'),
-        paid_by_ID: paiddropdownMapperData[element[1]["value"]]?.id,
+      // Initialize an empty list of Items
+      List<Items> items = [];
+
+      // Iterate through rowItem.value and populate the items list
+      rowItem.value.forEach((element) {
+        Items item = Items(
+          goItemID: 0,
+          received_qty: 0,
+          lost_qty: 0,
+          accepted_qty: 0,
+          damaged_qty: 0,
+          requested_qty: dropdownMapperData[element[0]["value"]]?.ordered_qty,
+          assetMasterItemID:
+              dropdownMapperData[element[0]["value"]]?.assetMasterItemID,
+          cost: dropdownMapperData[element[0]["value"]]
+              ?.cost, // double.tryParse(element[3]["value"] ?? '0'),
+          ordered_qty: double.tryParse(element[3]["value"] ?? '0'),
+          paid_by_ID: paiddropdownMapperData[element[4]["value"]]?.id,
+        );
+        items.add(item);
+      });
+
+      // Create a CreateGoModel instance
+      CreateGoModel createGoModel = CreateGoModel(
+        is_submit: 1,
+        id: 0,
+        facility_id: facilityId,
+        order_type: 1,
+        location_ID: 1,
+        vendorID: selectedBusinessTypeId,
+        purchaseDate: null,
+        challan_no: _challanNoCtrlr,
+        challan_date: null,
+        po_no: _pOCtrlr,
+        po_date: _poDateDateTc,
+        freight: _frieghtToPayPaidCtrlr,
+        receivedAt: null,
+        no_pkg_received: _noOfPackagesReceivedCtrlr,
+        lr_no: _lrNoCtrlr,
+        condition_pkg_received: _conditionOfPackagesReceivedCtrlr,
+        vehicle_no: _vehicleNoCtrlr,
+        gir_no: _girNoCtrlr,
+        job_ref: _jobRefCtrlr,
+        amount: int.tryParse(_amountCtrlr) ?? 0,
+        currencyID: selectedUnitCurrencyId,
+        items: items,
+        freight_value: "",
+        inspection_report: "",
       );
-      items.add(item);
-    });
 
-    // Create a CreateGoModel instance
-    CreateGoModel createGoModel = CreateGoModel(
-      is_submit: 1,
-      id: 0,
-      facility_id: facilityId,
-      order_type: 1,
-      location_ID: 1,
-      vendorID: selectedBusinessTypeId,
-      purchaseDate: null,
-      challan_no: _challanNoCtrlr,
-      challan_date: null,
-      po_no: _pOCtrlr,
-      po_date: _poDateDateTc,
-      freight: _frieghtToPayPaidCtrlr,
-      receivedAt: null,
-      no_pkg_received: _noOfPackagesReceivedCtrlr,
-      lr_no: _lrNoCtrlr,
-      condition_pkg_received: _conditionOfPackagesReceivedCtrlr,
-      vehicle_no: _vehicleNoCtrlr,
-      gir_no: _girNoCtrlr,
-      job_ref: _jobRefCtrlr,
-      amount: int.tryParse(_amountCtrlr) ?? 0,
-      currencyID: selectedUnitCurrencyId,
-      items: items,
-      freight_value: "",
-      inspection_report: "",
-    );
+      // Convert the CreateGoModel instance to JSON
+      var createGoModelJsonString = createGoModel.toJson();
 
-    // Convert the CreateGoModel instance to JSON
-    var createGoModelJsonString = createGoModel.toJson();
+      // Call the createGoodsOrder function from stockManagementAddGoodsOrdersPresenter
+      Map<String, dynamic>? responseCreateGoModel =
+          await stockManagementAddGoodsOrdersPresenter.createGoodsOrder(
+        createGo: createGoModelJsonString,
+        isLoading: true,
+      );
 
-    // Call the createGoodsOrder function from stockManagementAddGoodsOrdersPresenter
-    Map<String, dynamic>? responseCreateGoModel =
-        await stockManagementAddGoodsOrdersPresenter.createGoodsOrder(
-      createGo: createGoModelJsonString,
-      isLoading: true,
-    );
-
-    // Handle the response
-    if (responseCreateGoModel == null) {
-      // CreateNewPermitDialog();
-      // showAlertDialog();
+      // Handle the response
+      if (responseCreateGoModel == null) {
+        // CreateNewPermitDialog();
+        // showAlertDialog();
+      }
+      print('Create  Create GO  data: $createGoModelJsonString');
+    } catch (e) {
+      print(e);
     }
-
-    print('Create  Create GO  data: $createGoModelJsonString');
   }
 
   void updateGoodsOrder() async {
@@ -785,49 +799,68 @@ class StockManagementAddGoodsOrdersController extends GetxController {
         requestID: selectedReqOrderId.value, facilityId: facilityId);
   }
 
-  //validation
   void checkForm() {
-    
-    if(selectedUnitCurrency==''){
-      isUnitCurrencySelected=false.obs;
+    if (selectedUnitCurrencyId == 0) {
+      isUnitCurrencySelected.value = false;
+      isFormInvalid.value = true;
     }
-
-    if(selectedBusinessType==''){
-      isSelectedBusinessType=false.obs;
+    if (selectedBusinessTypeId == 0) {
+      isSelectedBusinessType.value = false;
+      isFormInvalid.value = true;
     }
-    if (pOCtrlr.text.trim().length < 3) {
+    if (pOCtrlr.text.trim().length == 0) {
       isPOInvalid.value = true;
-    }
-    if (pOCtrlr.value == true) {
       isFormInvalid.value = true;
     }
-      if (poDateDateTc.text.trim().length < 3) {
+    if (poDateDateTc.text.trim().length == 0) {
       isPOdateInvalid.value = true;
-    }
-    if (amountCtrlr.text.trim().length < 3) {
-      isAmountInvalid.value = true;
-    }
-    
-    if (amountCtrlr.value == true) {
       isFormInvalid.value = true;
     }
-  
-    if (TextEditingController().text.isEmpty) {
-    isCostInvalid.value = true;
-  } else {
-    isCostInvalid.value = false;
+    if (amountCtrlr.text.trim().length == 0) {
+      isAmountInvalid.value = true;
+      isFormInvalid.value = true;
+    }
   }
-  
-      if (TextEditingController().text.isEmpty) {
-    isRequestedInvalid.value = true;
-  } else {
-    isRequestedInvalid.value = false;
-  }
-    
-    // if (TextInputType.number=='') {
-    //   isFormInvalid.value = true;
-    // }
 
-   
-}
+  //validation
+  // void checkForm() {
+  //   if (selectedUnitCurrency == '') {
+  //     isUnitCurrencySelected = false.obs;
+  //   }
+  //   if (selectedBusinessType == '') {
+  //     isSelectedBusinessType = false.obs;
+  //   }
+  //   if (pOCtrlr.text.trim().length < 3) {
+  //     isPOInvalid.value = true;
+  //   }
+  //   if (pOCtrlr.value == true) {
+  //     isFormInvalid.value = true;
+  //   }
+  //   if (poDateDateTc.text.trim().length < 3) {
+  //     isPOdateInvalid.value = true;
+  //   }
+  //   if (amountCtrlr.text.trim().length < 3) {
+  //     isAmountInvalid.value = true;
+  //   }
+
+  //   if (amountCtrlr.value == true) {
+  //     isFormInvalid.value = true;
+  //   }
+
+  //   if (TextEditingController().text.isEmpty) {
+  //     isCostInvalid.value = true;
+  //   } else {
+  //     isCostInvalid.value = false;
+  //   }
+
+  //   if (TextEditingController().text.isEmpty) {
+  //     isRequestedInvalid.value = true;
+  //   } else {
+  //     isRequestedInvalid.value = false;
+  //   }
+
+  //   // if (TextInputType.number=='') {
+  //   //   isFormInvalid.value = true;
+  //   // }
+  // }
 }
