@@ -13447,5 +13447,36 @@ class Repository {
     }
   }
 
+  // training courses
+  Future<Map<String, dynamic>> addCourse({
+    courseJson,
+    isLoading,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.addCourse(
+        auth: auth,
+        courseJson: courseJson,
+        isLoading: isLoading ?? false,
+      );
+      var resourceData = res.data;
+      print('Add Course Response: ${resourceData}');
+      if (!res.hasError) {
+        Fluttertoast.showToast(
+          msg: " paln  Add Successfully...",
+          fontSize: 16.0,
+        );
+        Get.offNamed(
+          Routes.trainingCourse,
+        );
+      } else {
+        Utility.showDialog(res.errorCode.toString(), 'Add Course');
+      }
+      return Map();
+    } catch (error) {
+      print(error.toString());
+      return Map();
+    }
+  }
   //end
 }

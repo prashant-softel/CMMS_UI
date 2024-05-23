@@ -2651,7 +2651,9 @@ class NewPermitWeb extends GetView<NewPermitController> {
             focusNode: controller.commentFocus,
             scrollController: controller.commentScroll,
             keyboardType: TextInputType.multiline,
-            autofocus: false,
+            autofocus: controller.newPermitDetailsModel.value?.ptwStatus == 125
+                ? true
+                : false,
             maxLines: 5,
             decoration: InputDecoration(
               fillColor: ColorValues.whiteColor,
