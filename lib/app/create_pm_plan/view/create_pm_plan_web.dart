@@ -162,29 +162,31 @@ class _CreatePmPlanWebState extends State<CreatePmPlanWeb> {
                                                   child: LoginCustomTextfield(
                                                     textController: controller
                                                         .planTittleCtrlr,
+
+                                                    //validate
+                                                    // errorController: controller
+                                                    //         .isPMTitleInvalid
+                                                    //         .value
+                                                    //     ? "Required field"
+                                                    //     : null,
+                                                    onChanged: (value) {
+                                                      if (value.trim().length >
+                                                          0) {
+                                                        // controller
+                                                        //     .isPMTitleInvalid
+                                                        //     .value = false;
+                                                      } else {
+                                                        // controller
+                                                        //     .isPMTitleInvalid
+                                                        //     .value = true;
+                                                      }
+                                                    },
                                                     inputFormatters: [
                                                       FilteringTextInputFormatter
                                                           .deny(
                                                         RegExp('[\'^]'),
                                                       )
                                                     ],
-                                                    errorController: controller
-                                                            .istitleInvalid
-                                                            .value
-                                                        ? "Required field"
-                                                        : null,
-                                                    onChanged: (value) {
-                                                      if (value.trim().length >
-                                                          0) {
-                                                        controller
-                                                            .istitleInvalid
-                                                            .value = false;
-                                                      } else {
-                                                        controller
-                                                            .istitleInvalid
-                                                            .value = true;
-                                                      }
-                                                    },
                                                   )),
                                             ]),
                                             Dimens.boxHeight10,
