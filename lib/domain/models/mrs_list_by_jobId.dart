@@ -22,8 +22,11 @@ class MRSListByJobIdModel {
       this.mrsItems,
       this.status,
       this.status_short,
+      this.is_mrs_return,
+      this.mrs_return_ID,
       this.cmmrsItems});
-
+  int? is_mrs_return;
+  int? mrs_return_ID;
   int? mrsId;
   int? jobId;
   int? jobCardId;
@@ -44,11 +47,17 @@ class MRSListByJobIdModel {
         pmId: json["pmId"] == null ? 0 : json["pmId"],
         mrsItems: json["mrsItems"] == null ? '' : json["mrsItems"],
         status: json["status"] == null ? 0 : json["status"],
+        mrs_return_ID:
+            json["mrs_return_ID"] == null ? 0 : json["mrs_return_ID"],
+        is_mrs_return:
+            json["is_mrs_return"] == null ? 0 : json["is_mrs_return"],
         status_short: json['status_short'] == null ? '' : json['status_short'],
         cmmrsItems: cmmrsItems);
   }
   Map<String, dynamic> toJson() => {
         "mrsId": mrsId,
+        "is_mrs_return": is_mrs_return,
+        "mrs_return_ID": mrs_return_ID,
         "jobId": jobId,
         "jobCardId": jobCardId,
         "pmId": pmId,

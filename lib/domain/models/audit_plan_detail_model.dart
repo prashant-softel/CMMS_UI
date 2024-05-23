@@ -11,6 +11,7 @@ class AuditPlanDetailModel {
   dynamic auditee_Emp_Name;
   String? auditor_Emp_Name;
   int? frequency;
+  String? frequency_name;
   int? status;
   String? short_status;
   String? frequencyApplicable;
@@ -36,11 +37,13 @@ class AuditPlanDetailModel {
       this.status,
       this.checklist_name,
       this.created_by,
+      this.frequency_name,
       this.created_at});
 
   factory AuditPlanDetailModel.fromJson(Map<String, dynamic> json) {
     return AuditPlanDetailModel(
       status: json['status'],
+      frequency_name: json['frequency_name'],
       created_by: json['created_by'],
       short_status: json['short_status'],
       created_at: json['created_at'] == null

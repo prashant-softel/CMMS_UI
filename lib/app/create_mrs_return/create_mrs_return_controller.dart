@@ -29,6 +29,7 @@ class CreateMrsReturnController extends GetxController {
   var remarkCtrlr = TextEditingController();
   var whereUsedCtrlr = TextEditingController();
   var setTemlateCtrlr = TextEditingController();
+  var allDropdownsSelected = true.obs;
 
   Rx<int> whereUsedTypeId = 0.obs;
   Rx<String> activity = ''.obs;
@@ -131,7 +132,7 @@ class CreateMrsReturnController extends GetxController {
       {'key': "Return_Qty", "value": ''},
       {'key': "is_faulty", "value": ''},
       {'key': "Remark", "value": ''},
-      {'key': "Action ", "value": ''},
+      // {'key': "Action ", "value": ''},
     ]);
   }
 
@@ -150,7 +151,9 @@ class CreateMrsReturnController extends GetxController {
         asset_item_ID:
             dropdownMapperData.value[element[0]["value"]]?.assetItemID,
         issued_qty: dropdownMapperData.value[element[0]["value"]].issued_qty,
-        returned_qty: double.tryParse(element[3]["value"] ?? '0'),
+        returned_qty: dropdownMapperData.value[element[0]["value"]].issued_qty -
+            dropdownMapperData.value[element[0]["value"]]
+                .consumed_qty, //double.tryParse(element[3]["value"] ?? '0'),
         requested_qty: 0,
         approval_required: 0,
         is_faulty: element[4]["value"] == "" || element[4]["value"] == null

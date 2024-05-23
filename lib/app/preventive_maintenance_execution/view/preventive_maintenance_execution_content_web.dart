@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
@@ -610,42 +612,39 @@ class PreventiveMaintenanceExecutionContentWeb
                                     Container(
                                       height: 35,
                                       child: CustomElevatedButton(
-                                        //  icon: Icons.close,
-                                        backgroundColor: ColorValues.closeColor,
-                                        text: "Close",
-                                        onPressed: () {
-                                          Get.dialog(CustonApproveRejectDialog(
-                                            text: "Execution Close",
-                                            controller: controller,
-                                            buttonText: "Close",
-                                            style: Styles
-                                                .darkBlueElevatedButtonStyle,
-                                            onPressed: () {
-                                              controller.closePmTaskExecution();
-                                              Get.back();
-                                            },
-                                          ));
-                                        },
-                                      ),
+                                          //  icon: Icons.close,
+                                          backgroundColor:
+                                              ColorValues.closeColor,
+                                          text: "Close",
+                                          onPressed: () {
+                                            controller.listMrsByTaskId!.value[0]
+                                                            ?.mrs_return_ID ==
+                                                        0 &&
+                                                    controller.allTrue.value ==
+                                                        false
+                                                ? Get.defaultDialog(
+                                                    radius: 5,
+                                                    title: 'Alert',
+                                                    middleText:
+                                                        'Please return all items!',
+                                                    textConfirm: 'OK',
+                                                    onConfirm: () {
+                                                      Get.back(); // Close the dialog
+                                                    },
+                                                    buttonColor: ColorValues
+                                                        .appGreenColor,
+                                                    confirmTextColor:
+                                                        Colors.white,
+                                                  )
+                                                : controller
+                                                    .closePmTaskExecution();
+                                          }),
                                     ),
                                     Dimens.boxWidth10,
-                                    controller.listMrsByTaskId!.isNotEmpty &&
-                                            (() {
-                                              try {
-                                                final firstCmmrsItem =
-                                                    controller.cmmrsItems!
-                                                        .firstWhere(
-                                                  (element) =>
-                                                      element?.mrs_return_ID ==
-                                                      0,
-                                                  orElse: () => CmmrsItems(
-                                                      mrs_return_ID: 1),
-                                                );
-                                                return firstCmmrsItem != null;
-                                              } catch (e) {
-                                                return false;
-                                              }
-                                            }())
+                                    controller.listMrsByTaskId!.value[0]
+                                                    ?.mrs_return_ID ==
+                                                0 &&
+                                            controller.allTrue.value == false
                                         ? Container(
                                             height: 35,
                                             child: CustomElevatedButton(

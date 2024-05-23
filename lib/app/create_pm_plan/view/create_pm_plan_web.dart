@@ -438,13 +438,14 @@ class _CreatePmPlanWebState extends State<CreatePmPlanWeb> {
                                                   fontWeight: FontWeight.bold),
                                             )),
                                             DataColumn2(
-                                                // fixedWidth: 300,
+                                                fixedWidth: 200,
                                                 label: Text(
-                                              'Module Quantity',
-                                              style: TextStyle(
-                                                  fontSize: 15,
-                                                  fontWeight: FontWeight.bold),
-                                            )),
+                                                  'Module Quantity',
+                                                  style: TextStyle(
+                                                      fontSize: 15,
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                )),
                                             DataColumn2(
                                                 // fixedWidth: 300,
                                                 label: Text(
