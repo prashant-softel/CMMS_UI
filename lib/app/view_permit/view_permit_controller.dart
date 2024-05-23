@@ -547,8 +547,9 @@ class ViewPermitController extends GetxController {
       {int? permitId, String? ptwStatus, int? jobId, int? type}) async {
     {
       if (approveCommentTextFieldCtrlr.text == '') {
-        Fluttertoast.showToast(msg: "Please Enter Comment!",timeInSecForIosWeb: 5, fontSize: 16);
-        return ;
+        Fluttertoast.showToast(
+            msg: "Please Enter Comment!", timeInSecForIosWeb: 5, fontSize: 16);
+        return;
       }
       String _approveComment = approveCommentTextFieldCtrlr.text.trim();
 
@@ -633,6 +634,15 @@ class ViewPermitController extends GetxController {
     }
   }
 
+  void checkcommentcancel() {
+    if (cancelCommentRequestTextFieldCtrlr.text.trim().isEmpty) {
+      isFormInvalid.value = true;
+      Fluttertoast.showToast(msg: "Please Enter Remark!");
+    } else {
+      isFormInvalid.value = false;
+    }
+  }
+
   Future<void> permitCancelRequestButton(
       {String? permitId, List<dynamic>? fileIds, int? jobId}) async {
     // String _cancelComment = cancelCommentRequestTextFieldCtrlr.text.trim();
@@ -646,6 +656,10 @@ class ViewPermitController extends GetxController {
     // print('Cancel Request Button Data:${_cancelComment}');
     // print('Cancel Request Button Data:${permitId}');
     {
+      checkcommentcancel();
+      if (isFormInvalid.value) {
+        return;
+      }
       String _cancelComment = cancelCommentRequestTextFieldCtrlr.text.trim();
       List<int> data = [];
       permitCancelConditionList!.value.forEach((element) {
@@ -676,6 +690,15 @@ class ViewPermitController extends GetxController {
     }
   }
 
+  void checkcommentextend() {
+    if (extendReasonCommentTextFieldCtrlr.text.trim().isEmpty) {
+      isFormInvalid.value = true;
+      Fluttertoast.showToast(msg: "Please enter Remark!");
+    } else {
+      isFormInvalid.value = false;
+    }
+  }
+
   Future<void> permitExtendButton(
       {String? permitId, List<dynamic>? extendFileIds, int? jobId}) async {
     // String _reasonForExtensionComment =
@@ -694,6 +717,10 @@ class ViewPermitController extends GetxController {
     // print('Extend Button Data:${_timeForExtensionComment}');
     // print('Extend Button Data:${permitId}');
     {
+      checkcommentextend();
+      if (isFormInvalid.value) {
+        return;
+      }
       final _reasonForExtensionComment =
           extendReasonCommentTextFieldCtrlr.text.trim();
       List<int> dataExtend = [];
