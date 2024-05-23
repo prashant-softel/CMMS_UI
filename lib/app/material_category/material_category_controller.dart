@@ -89,7 +89,7 @@ class MaterialCategoryController extends GetxController {
     facilityIdStreamSubscription = homeController.facilityId$.listen((event) {
       facilityId = event;
       Future.delayed(Duration(seconds: 1), () {
-        getMaterialList();
+        getMaterialList(false);
       });
     });
     titleFocus.addListener(() {
@@ -105,11 +105,12 @@ class MaterialCategoryController extends GetxController {
     super.onInit();
   }
 
-  Future<void> getMaterialList() async {
+  Future<void> getMaterialList(bool isExport) async {
     MaterialList.value = <MaterialCategoryListModel>[];
     BufferMaterialList.value = <MaterialCategoryListModel>[];
     final _materialList = await materialCategoryPresenter.getMaterialList(
       isLoading: isLoading.value,
+      isExport:isExport,
       //categoryIds:categoryIds,
       job_type_id: selectedJobSOPId,
       //Job_type_id:36,
@@ -175,7 +176,7 @@ class MaterialCategoryController extends GetxController {
     selectedItem = null;
 
     Future.delayed(Duration(seconds: 1), () {
-      getMaterialList();
+      getMaterialList(false);
     });
     Future.delayed(Duration(seconds: 5), () {
       isSuccess.value = false;
@@ -235,7 +236,7 @@ class MaterialCategoryController extends GetxController {
                 onPressed: () {
                   deleteMaterialCategory(mcategory_id).then((value) {
                     Get.back();
-                    getMaterialList();
+                    getMaterialList(false);
                   });
                 },
                 child: Text('YES'),
@@ -262,5 +263,9 @@ class MaterialCategoryController extends GetxController {
     } else {
       isFormInvalid.value = false;
     }
+  }
+
+  void export() {
+    getMaterialList(true);
   }
 }
