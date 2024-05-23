@@ -1,18 +1,27 @@
+import 'dart:async';
+
 import 'package:cmms/app/add_training_course/add_course_presenter.dart';
 import 'package:cmms/app/home/home_controller.dart';
+import 'package:cmms/app/navigators/app_pages.dart';
+import 'package:cmms/domain/models/add_training_course_model.dart';
+import 'package:cmms/domain/models/add_training_course_model.dart';
 // import 'package:cmms/domain/models/facility_model.dart';
 import 'package:cmms/domain/models/type_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:rxdart/subjects.dart';
 
 class AddCourseController extends GetxController {
   AddCourseController(this.addCoursePresenter);
 
-  int userId = 0;
+  RxInt courseId = 0.obs;
+  RxInt facilityId = 0.obs;
 
   final HomeController homeController = Get.find();
-  late AddCoursePresenter addCoursePresenter;
-
+  AddCoursePresenter addCoursePresenter;
+  StreamSubscription<int>? facilityIdStreamSubscription;
+  BehaviorSubject<int> _facilityId = BehaviorSubject.seeded(0);
+  Stream<int> get facilityId$ => _facilityId.stream;
   var courseIdController = TextEditingController();
   FocusNode idFocus = FocusNode();
   ScrollController idScroll = ScrollController();
@@ -33,26 +42,32 @@ class AddCourseController extends GetxController {
   Rx<bool> isCodeInvalid = false.obs;
   Rx<bool> isTimeInvalid = false.obs;
   Rx<bool> isDescriptionInvalid = false.obs;
+  RxBool isMaxCapacityInvalid = false.obs;
   Rx<bool> isCategorySelected = true.obs;
   Rx<bool> isGroupSelected = true.obs;
+  RxBool isFormInvalid = false.obs;
+  RxBool isLoading = true.obs;
 
   Rx<String> selectedCategory = ''.obs;
   RxInt selectedCategoryId = 0.obs;
-  RxList<TypeModel> category = <TypeModel>[
-    TypeModel(name: "1st Course", id: "1"),
-    TypeModel(name: "2nd Course", id: "2"),
-    TypeModel(name: "3rd Course", id: "3"),
+  RxList<GenderModel> category = <GenderModel>[
+    GenderModel(name: "1st Course", id: 1),
+    GenderModel(name: "2nd Course", id: 2),
+    GenderModel(name: "3rd Course", id: 3),
   ].obs;
 
   Rx<String> selectedGroup = ''.obs;
   RxInt selectedGroupId = 0.obs;
-  RxList<TypeModel> targetGroup = <TypeModel>[
-    TypeModel(name: "Group 1", id: "1"),
-    TypeModel(name: "Group 2", id: "2"),
-    TypeModel(name: "Group 3", id: "3"),
+  RxList<StatusModel> targetGroup = <StatusModel>[
+    StatusModel(name: "Group 1", id: 1),
+    StatusModel(name: "Group 2", id: 2),
+    StatusModel(name: "Group 3", id: 3),
   ].obs;
 
   void onInit() {
+    facilityIdStreamSubscription = homeController.facilityId$.listen((event) {
+      facilityId.value = event;
+    });
     idFocus.addListener(() {
       if (!idFocus.hasFocus) {
         idScroll.jumpTo(0.0);
@@ -71,6 +86,66 @@ class AddCourseController extends GetxController {
     super.onInit();
   }
 
+  Future<void> setId() async {
+    try {
+      final _courseId = await addCoursePresenter.getValue();
+      if (_courseId == null || _courseId == "" || _courseId == 0) {
+        var dataFromPrevioursScreen = Get.arguments;
+        courseId.value = dataFromPrevioursScreen['courseId'];
+        addCoursePresenter.saveValue(courseId: courseId.value.toString());
+      } else {
+        courseId.value = int.tryParse(_courseId) ?? 0;
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
+
+   void clearStoreData() {
+    addCoursePresenter.clearValue();
+  }
+
+  Future<void> addCourse({dynamic fileIds}) async {
+    try {
+      checkForm();
+      if (isFormInvalid.value) {
+        return;
+      } else {
+        String _courseName = topic.text.trim();
+        int _categoryId = selectedCategoryId.value;
+        int _groupId = selectedGroupId.value;
+        int _numberOfDays = int.tryParse(noOfDays.text.trim()) ?? 0;
+        int _maxCap = int.tryParse(maximumCapacity.text.trim()) ?? 0;
+        int _duration = int.tryParse(minutes.text.trim()) ?? 0;
+        String _description = descCtrlr.text.trim();
+        AddTrainingCourse course = AddTrainingCourse(
+          id: courseId.value,
+          name: _courseName,
+          categoryId: _categoryId,
+          groupId: _groupId,
+          numberOfdays: _numberOfDays,
+          maxCap: _maxCap,
+          duration: _duration,
+          description: _description,
+          uploadfile_ids: fileIds,
+          facilityId: facilityId.value,
+        );
+        var trainingCourse = course.toJson();
+        var response = addCoursePresenter.addCourse(
+          courseJson: trainingCourse,
+          isLoading: isLoading.value,
+        );
+        // if (response == true) {
+        //   cleardata();
+        //   Get.toNamed(Routes.trainingCourse);
+        //   isLoading.value = false;
+        // }
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
+
   cleardata() {
     minutes.clear();
     descCtrlr.clear();
@@ -86,29 +161,70 @@ class AddCourseController extends GetxController {
     });
   }
 
+  void checkForm() {
+    if (topic.text.isEmpty) {
+      isNameInvalid.value = true;
+      isFormInvalid.value = true;
+    } else {
+      isNameInvalid.value = false;
+    }
+    if (noOfDays.text.isEmpty) {
+      isCodeInvalid.value = true;
+      isFormInvalid.value = true;
+    } else {
+      isCodeInvalid.value = false;
+    }
+    if (minutes.text.isEmpty) {
+      isTimeInvalid.value = true;
+      isFormInvalid.value = true;
+    } else {
+      isTimeInvalid.value = false;
+    }
+    if (maximumCapacity.text.isEmpty) {
+      isMaxCapacityInvalid.value = true;
+      isFormInvalid.value = true;
+    } else {
+      isMaxCapacityInvalid.value = false;
+    }
+    if (descCtrlr.text.isEmpty) {
+      isDescriptionInvalid.value = true;
+      isFormInvalid.value = true;
+    } else {
+      isDescriptionInvalid.value = false;
+    }
+    if (selectedCategory.value == '') {
+      isCategorySelected.value = false;
+      isFormInvalid.value = true;
+    } else {
+      isCategorySelected.value = true;
+    }
+    if (selectedGroup.value == '') {
+      isGroupSelected.value = false;
+      isFormInvalid.value = true;
+    } else {
+      isGroupSelected.value = true;
+    }
+  }
+
   void onValueChanged(dynamic list, dynamic value) {
     print({list, value});
     switch (list.runtimeType) {
-      // case RxList<TypeModel>:
-      //   {
-      //     int blockIndex = category.indexWhere((x) => x.name == value);
-      //     selectedCategoryId = category[blockIndex].id ?? 0;
-      //     if ((selectedCategoryId) != "0") {
-      //       isCategorySelected.value = true;
-      //     }
-      //     selectedCategory.value = value;
-      //   }
-      //   break;
-      // case RxList<TypeModel>:
-      //   {
-      //     int blockIndex = targetGroup.indexWhere((x) => x.name == value);
-      //     selectedGroupId = category[blockIndex].id ?? 0;
-      //     if (selectedGroupId > 0) {
-      //       isGroupSelected.value = true;
-      //     }
-      //     selectedGroup.value = value;
-      //   }
-      //   break;
+      case RxList<GenderModel>:
+        {
+          int blockIndex = category.indexWhere((x) => x.name == value);
+          selectedCategoryId.value = category[blockIndex].id ?? 0;
+          isCategorySelected.value = true;
+          selectedCategory.value = value;
+        }
+        break;
+      case RxList<StatusModel>:
+        {
+          int blockIndex = targetGroup.indexWhere((x) => x.name == value);
+          selectedGroupId.value = targetGroup[blockIndex].id ?? 0;
+          isGroupSelected.value = true;
+          selectedGroup.value = value;
+        }
+        break;
       default:
         {
           //statements;

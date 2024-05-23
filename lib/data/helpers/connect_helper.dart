@@ -8797,5 +8797,24 @@ class ConnectHelper {
 
     return responseModel;
   }
+
+  // training Course
+  Future<ResponseModel> addCourse({
+    auth,
+    courseJson,
+    isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      '',
+      Request.post,
+      courseJson,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
   //end
 }

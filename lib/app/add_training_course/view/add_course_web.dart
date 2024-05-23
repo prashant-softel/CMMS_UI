@@ -158,7 +158,7 @@ class AddCourseWeb extends GetView<AddCourseController> {
                                                   scrollController:
                                                       controller.topicScroll,
                                                   errorController: controller
-                                                          .isCodeInvalid.value
+                                                          .isNameInvalid.value
                                                       ? "Required field"
                                                       : null,
                                                   onChanged: (value) {
@@ -215,8 +215,8 @@ class AddCourseWeb extends GetView<AddCourseController> {
                                                         .value,
                                                     selectedValue: controller
                                                         .selectedCategory.value,
-                                                    onValueChanged: (category,
-                                                        selectedV) {},
+                                                    onValueChanged: controller
+                                                        .onValueChanged,
                                                   ),
                                                 ),
                                               )
@@ -263,8 +263,8 @@ class AddCourseWeb extends GetView<AddCourseController> {
                                                         .isGroupSelected.value,
                                                     selectedValue: controller
                                                         .selectedGroup.value,
-                                                    onValueChanged: (category,
-                                                        selectedV) {},
+                                                    onValueChanged: controller
+                                                        .onValueChanged,
                                                   ),
                                                 ),
                                               )
@@ -311,6 +311,20 @@ class AddCourseWeb extends GetView<AddCourseController> {
                                                   maxLine: 1,
                                                   textController:
                                                       controller.noOfDays,
+                                                  errorController: controller
+                                                          .isCodeInvalid.value
+                                                      ? "Required field"
+                                                      : null,
+                                                  onChanged: (value) {
+                                                    if (value.trim().length >
+                                                        1) {
+                                                      controller.isCodeInvalid
+                                                          .value = false;
+                                                    } else {
+                                                      controller.isCodeInvalid
+                                                          .value = true;
+                                                    }
+                                                  },
                                                 ),
                                               ),
                                             ],
@@ -350,6 +364,20 @@ class AddCourseWeb extends GetView<AddCourseController> {
                                                   maxLine: 1,
                                                   textController:
                                                       controller.minutes,
+                                                  errorController: controller
+                                                          .isTimeInvalid.value
+                                                      ? "Required field"
+                                                      : null,
+                                                  onChanged: (value) {
+                                                    if (value.trim().length >
+                                                        1) {
+                                                      controller.isTimeInvalid
+                                                          .value = false;
+                                                    } else {
+                                                      controller.isTimeInvalid
+                                                          .value = true;
+                                                    }
+                                                  },
                                                 ),
                                               ),
                                             ],
@@ -388,6 +416,23 @@ class AddCourseWeb extends GetView<AddCourseController> {
                                                   maxLine: 1,
                                                   textController: controller
                                                       .maximumCapacity,
+                                                  errorController: controller
+                                                          .isMaxCapacityInvalid
+                                                          .value
+                                                      ? "Required field"
+                                                      : null,
+                                                  onChanged: (value) {
+                                                    if (value.trim().length >
+                                                        1) {
+                                                      controller
+                                                          .isMaxCapacityInvalid
+                                                          .value = false;
+                                                    } else {
+                                                      controller
+                                                          .isMaxCapacityInvalid
+                                                          .value = true;
+                                                    }
+                                                  },
                                                 ),
                                               ),
                                             ],
@@ -509,8 +554,7 @@ class AddCourseWeb extends GetView<AddCourseController> {
                                                       : null,
                                                 ),
                                                 onChanged: (value) {
-                                                  if (value.trim().length >=
-                                                      1) {
+                                                  if (value.trim().length > 1) {
                                                     controller
                                                         .isDescriptionInvalid
                                                         .value = false;
@@ -576,14 +620,16 @@ class AddCourseWeb extends GetView<AddCourseController> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Spacer(),
-          controller.userId == 0
+          controller.courseId.value == 0
               ? Container(
                   height: 35,
                   child: CustomElevatedButton(
                     backgroundColor: ColorValues.greenColor,
                     text: 'Submit',
                     onPressed: () {
-                      Get.toNamed(Routes.trainingCourse);
+                      controller.isFormInvalid.value = false;
+                      controller.addCourse(fileIds: dropzoneController.fileIds);
+                      
                     },
                   ),
                 )
@@ -593,7 +639,8 @@ class AddCourseWeb extends GetView<AddCourseController> {
                     backgroundColor: ColorValues.appDarkBlueColor,
                     text: 'Update',
                     onPressed: () {
-                      Get.toNamed(Routes.trainingCourse);
+                      controller.isFormInvalid.value = false;
+                      // Get.toNamed(Routes.trainingCourse);
                     },
                   ),
                 ),
