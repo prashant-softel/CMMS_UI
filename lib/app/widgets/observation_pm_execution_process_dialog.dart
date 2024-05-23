@@ -272,9 +272,11 @@ class ObservationPmExecutionViewDialog extends GetView {
                             ),
 
                             ////Associated Job cards
-                            controller.cmmrsItems!.isEmpty
-                                ? Dimens.box0
-                                : Container(
+                            controller.listMrsByTaskId!.value[0]
+                                            ?.mrs_return_ID ==
+                                        0 &&
+                                    controller.allTrue.value == false
+                                ? Container(
                                     margin: Dimens.edgeInsets20,
                                     height: 300,
                                     width:
@@ -352,14 +354,14 @@ class ObservationPmExecutionViewDialog extends GetView {
                                                       255, 206, 229, 234)),
                                               columns: [
                                                 DataColumn2(
-                                                    //  fixedWidth: 500,
+                                                    fixedWidth: 350,
                                                     label: Text(
-                                                  "Material Name",
-                                                  style: TextStyle(
-                                                      fontSize: 15,
-                                                      fontWeight:
-                                                          FontWeight.bold),
-                                                )),
+                                                      "Material Name",
+                                                      style: TextStyle(
+                                                          fontSize: 15,
+                                                          fontWeight:
+                                                              FontWeight.bold),
+                                                    )),
                                                 DataColumn2(
                                                     fixedWidth: 100,
                                                     label: Text(
@@ -570,7 +572,8 @@ class ObservationPmExecutionViewDialog extends GetView {
                                         ),
                                       ],
                                     ),
-                                  ),
+                                  )
+                                : Dimens.box0
                           ],
                         ),
                       ),
