@@ -2,6 +2,8 @@ import 'dart:async';
 
 import 'package:cmms/app/add_training_course/add_course_presenter.dart';
 import 'package:cmms/app/home/home_controller.dart';
+import 'package:cmms/app/navigators/app_pages.dart';
+import 'package:cmms/domain/models/add_training_course_model.dart';
 import 'package:cmms/domain/models/add_training_course_model.dart';
 // import 'package:cmms/domain/models/facility_model.dart';
 import 'package:cmms/domain/models/type_model.dart';
@@ -99,7 +101,7 @@ class AddCourseController extends GetxController {
     }
   }
 
-   void clearStoreData() {
+  void clearStoreData() {
     addCoursePresenter.clearValue();
   }
 
