@@ -169,7 +169,6 @@ class _CreatePmPlanWebState extends State<CreatePmPlanWeb> {
                                                             .value
                                                         ? "Required field"
                                                         : null,
-
                                                     onChanged: (value) {
                                                       if (value.trim().length >
                                                           0) {
@@ -188,23 +187,6 @@ class _CreatePmPlanWebState extends State<CreatePmPlanWeb> {
                                                         RegExp('[\'^]'),
                                                       )
                                                     ],
-                                                    errorController: controller
-                                                            .istitleInvalid
-                                                            .value
-                                                        ? "Required field"
-                                                        : null,
-                                                    onChanged: (value) {
-                                                      if (value.trim().length >
-                                                          0) {
-                                                        controller
-                                                            .istitleInvalid
-                                                            .value = false;
-                                                      } else {
-                                                        controller
-                                                            .istitleInvalid
-                                                            .value = true;
-                                                      }
-                                                    },
                                                   )),
                                             ]),
                                             Dimens.boxHeight10,
