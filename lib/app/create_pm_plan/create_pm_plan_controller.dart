@@ -30,6 +30,9 @@ class CreatePmPlanController extends GetxController {
       Rx<List<List<Map<String, String>>>>([]);
   Rx<List<List<Map<String, String>>>> bufferRowItem =
       Rx<List<List<Map<String, String>>>>([]);
+
+  Rx<bool> isPMTitleInvalid = false.obs;
+  Rx<bool> isFormInvalid = false.obs;
   Map<String, GetAssetDataModel> dropdownMapperData = {};
   int selectedPurchaseID = 0;
   bool openStartDatePicker = false;
@@ -38,6 +41,8 @@ class CreatePmPlanController extends GetxController {
   RxList<FrequencyModel?> frequencyList = <FrequencyModel>[].obs;
   Rx<String> selectedfrequency = ''.obs;
   Rx<bool> isSelectedfrequency = true.obs;
+  Rx<bool> isStartdateInvalid = false.obs;
+
   int selectedfrequencyId = 0;
   Rx<String> selectedChecklist = ''.obs;
   Rx<bool> isSelectedChecklist = true.obs;
@@ -67,11 +72,10 @@ class CreatePmPlanController extends GetxController {
   RxList<EmployeeModel?> assignedToList = <EmployeeModel>[].obs;
   Rx<String> selectedAssignedTo = ''.obs;
   Rx<bool> isAssignedToSelected = true.obs;
+
   int selectedAssignedToId = 0;
   Rx<int> pmPlanId = 0.obs;
   Rx<PMPlanDetail?> pmPlanDetailsModel = PMPlanDetail().obs;
-  Rx<bool> isFormInvalid = false.obs;
-  Rx<bool> istitleInvalid = false.obs;
 
   @override
   void onInit() async {
@@ -303,8 +307,8 @@ class CreatePmPlanController extends GetxController {
                 equipmentCategoryList.indexWhere((x) => x?.name == value);
             selectedInventoryCategoryId =
                 equipmentCategoryList[equipCatIndex]?.id ?? 0;
-
-            // selectedInventory.value = value;
+            isSelectedInventory.value = true;
+            selectedInventory.value = value;
             filteredInventoryNameList.value = <InventoryModel>[];
             // inventoryNameList.value = <InventoryModel>[];
             // selectedInventoryNameIdList.value = [];
@@ -366,36 +370,50 @@ class CreatePmPlanController extends GetxController {
         break;
       case RxList<FrequencyModel>:
         {
-          int frequencyIndex =
-              frequencyList.indexWhere((x) => x?.name == value);
-          selectedfrequencyId = frequencyList[frequencyIndex]?.id ?? 0;
-          selectedfrequency.value = value;
-          Future.delayed(Duration(seconds: 2), () {
-            if (selectedInventoryCategoryId > 0 && selectedfrequencyId > 0) {
-              getPreventiveCheckList(facilityId, 1, true, selectedfrequencyId,
-                  selectedInventoryCategoryId);
-            }
-          });
+          if (value != "Please Select") {
+            int frequencyIndex =
+                frequencyList.indexWhere((x) => x?.name == value);
+            selectedfrequencyId = frequencyList[frequencyIndex]?.id ?? 0;
+            selectedfrequency.value = value;
+            isSelectedfrequency.value = true;
+            Future.delayed(Duration(seconds: 2), () {
+              if (selectedInventoryCategoryId > 0 && selectedfrequencyId > 0) {
+                getPreventiveCheckList(facilityId, 1, true, selectedfrequencyId,
+                    selectedInventoryCategoryId);
+              }
+            });
+          } else {
+            selectedInventoryCategoryId = 0;
+          }
         }
         break;
       case RxList<PreventiveCheckListModel>:
         {
-          int checklistIndex =
-              preventiveCheckList.indexWhere((x) => x?.name == value);
-          selectedChecklistId = preventiveCheckList[checklistIndex]?.id ?? 0;
-          selectedChecklist.value =
-              preventiveCheckList[checklistIndex]?.name ?? "";
+          if (value != "Please Select") {
+            int checklistIndex =
+                preventiveCheckList.indexWhere((x) => x?.name == value);
+            selectedChecklistId = preventiveCheckList[checklistIndex]?.id ?? 0;
+            selectedChecklist.value =
+                preventiveCheckList[checklistIndex]?.name ?? "";
+            isSelectedChecklist.value = true;
+          } else {
+            selectedChecklistId = 0;
+          }
         }
         break;
       case RxList<EmployeeModel>:
         {
-          int assignedToIndex =
-              assignedToList.indexWhere((x) => x?.name == value);
-          selectedAssignedToId = assignedToList[assignedToIndex]?.id ?? 0;
-          if (selectedAssignedToId > 0) {
-            isAssignedToSelected.value = true;
+          if (value != "Please Select") {
+            int assignedToIndex =
+                assignedToList.indexWhere((x) => x?.name == value);
+            selectedAssignedToId = assignedToList[assignedToIndex]?.id ?? 0;
+            if (selectedAssignedToId > 0) {
+              isAssignedToSelected.value = true;
+            }
+            selectedAssignedTo.value = value;
+          } else {
+            selectedAssignedToId = 0;
           }
-          selectedAssignedTo.value = value;
         }
         break;
       default:
@@ -406,87 +424,58 @@ class CreatePmPlanController extends GetxController {
     // print({"selectedfrequency": selectedfrequency});
   }
 
-  void checkform() {
-    if (selectedfrequency.value == '') {
-      isSelectedfrequency.value = false;
-    }
-    if (selectedAssignedTo.value == '') {
-      isAssignedToSelected.value = false;
-    }
-    if (selectedInventory.value == '') {
-      isSelectedInventory.value = false;
-    }
-    if (startDateDateTc.text == '') {
-      Fluttertoast.showToast(msg: 'Start date cannot be empty!');
-    }
-    if (planTittleCtrlr.text == '') {
-      istitleInvalid.value = true;
-    }
-    if(selectedInventoryNameList.length < 1) {
-      Fluttertoast.showToast(msg: 'Equipments cannot be empty!');
-    }
-    if (isSelectedfrequency.value == false ||
-        isAssignedToSelected.value == false ||
-        isSelectedInventory.value == false ||
-        istitleInvalid.value == true ||
-        selectedInventoryNameList.length < 1 ||
-        startDateDateTc.text == '') {
-      isFormInvalid.value = true;
-    } else {
-      isFormInvalid.value = false;
-    }
-  }
-
   Future<void> createPmPlan() async {
-    {
-      checkform();
-      if (isFormInvalid.value) {
-        return;
-      }
-      String _startDate = startDateDateTc.text.trim();
-      String _plantitle = planTittleCtrlr.text.trim();
+    checkFrom();
+    if (isFormInvalid.value) {
+      return;
+    }
+    String _startDate = startDateDateTc.text.trim();
+    String _plantitle = planTittleCtrlr.text.trim();
 
-      List<AssetChecklist> mapAssetChecklist = [];
-      // mapAssetChecklist = AssetChecklist(asset_id: 131086, checklist_id: 2988);
-      rowItem.value.forEach((element) {
-        AssetChecklist item = AssetChecklist(
-            name: "",
-            checklist_name: "",
-            module_qty: 0,
-            parent_id: 0,
-            parent_name: "",
-            asset_id: int.tryParse(element[1]["value"] ?? '0'),
-            checklist_id: checkdropdownMapperData[element[4]["value"]]?.id);
-        mapAssetChecklist.add(item);
-      });
-      CreatePmPlanModel createPmPlan = CreatePmPlanModel(
-          plan_id: 0,
-          plan_name: _plantitle,
-          plan_date: _startDate,
-          facility_id: facilityId,
-          assigned_to_id: selectedAssignedToId,
-          category_id:
-              selectedInventoryCategoryId, // selectedEquipmentCategoryIdList,
-          plan_freq_id: selectedfrequencyId,
-          mapAssetChecklist: mapAssetChecklist);
-      var createPmPlanJsonString = createPmPlan.toJson();
+    List<AssetChecklist> mapAssetChecklist = [];
+    // mapAssetChecklist = AssetChecklist(asset_id: 131086, checklist_id: 2988);
+    rowItem.value.forEach((element) {
+      AssetChecklist item = AssetChecklist(
+          name: "",
+          checklist_name: "",
+          module_qty: 0,
+          parent_id: 0,
+          parent_name: "",
+          asset_id: int.tryParse(element[1]["value"] ?? '0'),
+          checklist_id: checkdropdownMapperData[element[4]["value"]]?.id);
+      mapAssetChecklist.add(item);
+    });
+    CreatePmPlanModel createPmPlan = CreatePmPlanModel(
+        plan_id: 0,
+        plan_name: _plantitle,
+        plan_date: _startDate,
+        facility_id: facilityId,
+        assigned_to_id: selectedAssignedToId,
+        category_id:
+            selectedInventoryCategoryId, // selectedEquipmentCategoryIdList,
+        plan_freq_id: selectedfrequencyId,
+        mapAssetChecklist: mapAssetChecklist);
+    var createPmPlanJsonString = createPmPlan.toJson();
 
-      print({"createPmPlanJsonString", createPmPlanJsonString});
-      Map<String, dynamic>? responseCreatePmPlan =
-          await createPmPlanPresenter.createPmPlan(
-        createPmPlanJsonString: createPmPlanJsonString,
-        isLoading: true,
+    print({"createPmPlanJsonString", createPmPlanJsonString});
+    Map<String, dynamic>? responseCreatePmPlan =
+        await createPmPlanPresenter.createPmPlan(
+      createPmPlanJsonString: createPmPlanJsonString,
+      isLoading: true,
+    );
+    if (responseCreatePmPlan == null) {
+    } else {
+      Get.offAllNamed(
+        Routes.pmPlanList,
       );
-      if (responseCreatePmPlan == null) {
-      } else {
-        Get.offAllNamed(
-          Routes.pmPlanList,
-        );
-      }
     }
   }
 
   Future<void> updatePmPlan() async {
+    checkFrom();
+    if (isFormInvalid.value) {
+      return;
+    }
     String _startDate = startDateDateTc.text.trim();
     String _plantitle = planTittleCtrlr.text.trim();
 
@@ -527,6 +516,35 @@ class CreatePmPlanController extends GetxController {
       Get.offAllNamed(
         Routes.pmPlanList,
       );
+    }
+  }
+
+  void checkFrom() {
+    if (selectedInventory == '') {
+      isSelectedInventory.value = false;
+      isFormInvalid.value = true;
+    }
+    if (selectedInventoryNameList == null || selectedInventoryNameList == []) {
+      Fluttertoast.showToast(msg: "Please select the Equipments!");
+      inventoryNameList == false.obs;
+      isFormInvalid.value = true;
+    }
+    if (selectedfrequency == '') {
+      isSelectedfrequency.value = false;
+      isFormInvalid.value = true;
+    }
+    if (selectedAssignedTo == '') {
+      isAssignedToSelected.value = false;
+      isFormInvalid.value = true;
+    }
+    if (startDateDateTc.text.trim().length < 3) {
+      isStartdateInvalid.value = true;
+      isFormInvalid.value = true;
+    }
+
+    if (planTittleCtrlr.text.trim().length < 3) {
+      isPMTitleInvalid.value = true;
+      isFormInvalid.value = true;
     }
   }
 }
