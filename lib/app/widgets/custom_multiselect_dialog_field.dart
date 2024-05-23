@@ -1,3 +1,4 @@
+import 'package:cmms/app/app.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:multi_select_flutter/multi_select_flutter.dart';
@@ -34,17 +35,9 @@ class _CustomMultiSelectDialogFieldState
 
   @override
   Widget build(BuildContext context) {
-    final ScrollController _firstController =
-        ScrollController(initialScrollOffset: 0.0);
-    _firstController.addListener(() {
-      if (_firstController.position.atEdge) {
-        if (_firstController.position.pixels == 0) {
-        } else {}
-      }
-    });
+    final ScrollController _firstController = ScrollController();
 
     return Container(
-      height: 40,
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(10),
@@ -78,67 +71,94 @@ class _CustomMultiSelectDialogFieldState
                 widget.onConfirm(_selectedItems);
               }
             },
-            child: Container(
-              height: 40,
-              child: ListTile(
-                title: widget.initialValue == []
-                    ? Text(
-                        widget.title!,
-                        style: TextStyle(fontSize: 13),
-                      )
-                    : SizedBox(
-                        height: 40,
-                        child: Scrollbar(
-                          thumbVisibility: false,
+            child: ListTile(
+              title: widget.initialValue == []
+                  ? Responsive.isMobile(context) || Responsive.isTablet(context)
+                      ? Text(
+                          widget.title!,
+                          style: Styles.black13,
+                        )
+                      : Text(widget.title!)
+                  : SizedBox(
+                      height: 40,
+                      child: Scrollbar(
+                        thumbVisibility: true,
+                        controller: _firstController,
+                        child: ListView.builder(
                           controller: _firstController,
-                          child: ListView.builder(
-                            controller: _firstController,
-                            itemCount: _selectedItems.length,
-                            itemBuilder: (context, index) {
-                              final item = _selectedItems[index];
-                              return Container(
-                                child: Chip(
-                                  label: Text(widget.items!
-                                      .firstWhere(
-                                          (element) => element.value == item)
-                                      .label),
-                                  deleteIcon: Icon(Icons.cancel),
-                                  onDeleted: () {
-                                    setState(() {
-                                      _selectedItems.remove(item);
-                                    });
-                                    widget.onConfirm(_selectedItems);
-                                  },
-                                ),
-                              );
-                            },
-                            scrollDirection: Axis.horizontal,
-                          ),
+                          itemCount: _selectedItems.length,
+                          itemBuilder: (context, index) {
+                            final item = _selectedItems[index];
+                            return Chip(
+                              label: Text(widget.items!
+                                  .firstWhere(
+                                      (element) => element.value == item)
+                                  .label), // Displaying the name of the selected item
+                              deleteIcon: Icon(Icons.cancel),
+                              onDeleted: () {
+                                setState(() {
+                                  _selectedItems.remove(item);
+                                });
+                                widget.onConfirm(_selectedItems);
+                              },
+                            );
+                          },
+                          scrollDirection: Axis.horizontal,
                         ),
                       ),
-                trailing: IconButton(
-                  icon: Icon(Icons.arrow_drop_down),
-                  onPressed: () async {
-                    final selectedItems = await Get.dialog(
-                      MultiSelectDialog(
-                        height: MediaQuery.of(context).size.height * 0.4,
-                        width: MediaQuery.of(context).size.height * 0.3,
-                        searchable: true,
-                        items: widget.items!,
-                        initialValue: _selectedItems,
-                      ),
-                    );
-                    if (selectedItems != null) {
-                      setState(() {
-                        _selectedItems = selectedItems.cast<dynamic>().toList();
-                      });
-                      widget.onConfirm(_selectedItems);
-                    }
-                  },
-                ),
+                    ),
+              trailing: IconButton(
+                icon: Icon(Icons.arrow_drop_down),
+                onPressed: () async {
+                  final selectedItems = await Get.dialog(
+                    MultiSelectDialog(
+                      height: MediaQuery.of(context).size.height * 0.4,
+                      width: MediaQuery.of(context).size.height * 0.3,
+                      searchable: true,
+                      items: widget.items!,
+                      initialValue: _selectedItems,
+                    ),
+                  );
+                  if (selectedItems != null) {
+                    setState(() {
+                      _selectedItems = selectedItems.cast<dynamic>().toList();
+                    });
+                    widget.onConfirm(_selectedItems);
+                  }
+                },
               ),
             ),
           ),
+          // SizedBox(
+          //   height: _selectedItems.isNotEmpty ? 60 : 0,
+          //   child: Padding(
+          //     padding: const EdgeInsets.symmetric(horizontal: 4),
+          //     child: Scrollbar(
+          //       thumbVisibility: true,
+          //       controller: _firstController,
+          //       child: ListView.builder(
+          //         controller: _firstController,
+          //         itemCount: _selectedItems.length,
+          //         itemBuilder: (context, index) {
+          //           final item = _selectedItems[index];
+          //           return Chip(
+          //             label: Text(widget.items!
+          //                 .firstWhere((element) => element.value == item)
+          //                 .label), // Displaying the name of the selected item
+          //             deleteIcon: Icon(Icons.cancel),
+          //             onDeleted: () {
+          //               setState(() {
+          //                 _selectedItems.remove(item);
+          //               });
+          //               widget.onConfirm(_selectedItems);
+          //             },
+          //           );
+          //         },
+          //         scrollDirection: Axis.horizontal,
+          //       ),
+          //     ),
+          //   ),
+          // ),
         ],
       ),
     );
