@@ -392,7 +392,7 @@ class JobCardDetailsController extends GetxController {
         // }
 
         jobDetails.value = {
-          "Job ID": jobCardDetailsModel.value?.jobId.toString(),
+          "Job ID": "JOB"+jobCardDetailsModel.value!.jobId.toString(),
           "Job Title": jobCardDetailsModel.value?.title,
           "Job Description": jobCardDetailsModel.value?.description,
           "Job Assigned To": strAssignName.value, //jobCardDetailsModel.value?.,
@@ -423,7 +423,7 @@ class JobCardDetailsController extends GetxController {
               element.permitId != null); // Access the first element
 
           permitDetails.value = {
-            "Permit ID": permit.permitId.toString(),
+            "Permit ID": "PTW"+permit.permitId.toString(),
             // "Site Permit No.": permit.sitePermitNo.toString(),
             "Permit Type": permit.permitType,
             "Permit Description": permit.permitDescription,
