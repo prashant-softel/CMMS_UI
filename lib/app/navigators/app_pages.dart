@@ -134,6 +134,8 @@ import 'package:cmms/app/schedule_course/View/schedule_course_screen.dart';
 import 'package:cmms/app/schedule_course/schedule_course_binding.dart';
 import 'package:cmms/app/schedule_course_list/schedule_course_list_binding.dart';
 import 'package:cmms/app/schedule_course_list/view/schedule_course_list_screen.dart';
+import 'package:cmms/app/targeted_group/View/targeted_group_screen.dart';
+import 'package:cmms/app/targeted_group/targeted_group_binding.dart';
 import 'package:cmms/app/tool_type/tool_type_binding.dart';
 import 'package:cmms/app/tool_type/views/tool_type_screen.dart';
 import 'package:cmms/app/training_courses/training_course_binding.dart';
@@ -1298,5 +1300,11 @@ class AppPages {
       page: CourseCategoryScreen.new,
       binding: CourseCategoryBinding(),
     ),
+    GetPage<dynamic>(
+      name: _Paths.targetedGroup,
+      page: TargetedGroupScreen.new,
+      binding: TargetedGroupBinding(),
+    ),
+
   ];
 }

@@ -13606,5 +13606,105 @@ class Repository {
       print(error.toString());
     }
   }
+  //Targeted Group
+  //get
+  Future<List<CourseCategoryModel>> getTargetedGroup({
+    required bool isLoading,
+    int? job_type_id,
+
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+
+      log(auth);
+      final res = await _dataRepository.getTargetedGroup(
+        isLoading: isLoading,
+        auth: auth,
+      );
+      print('Course Category: ${res.data}');
+
+      if (!res.hasError) {
+        var Sourcetype = CourseCategoryModelFromJson(res.data);
+        return Sourcetype;
+
+      }
+      return [];
+    } catch (error) {
+      log(error.toString());
+      return [];
+    }
+  }
+
+
+  //create
+  Future<bool> createTargetedGroup(
+      {bool? isLoading, CourseCategoryJsonString}) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.createTargetedGroup(
+          auth: auth,
+          isLoading: isLoading,
+          CourseCategoryJsonString: CourseCategoryJsonString);
+
+      if (!res.hasError) {
+        return true;
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString(), ' createCheckListNumber');
+        return false;
+      }
+    } catch (error) {
+      print(error.toString());
+      return false;
+    }
+  }
+
+  //update
+  Future<bool> updateTargetedGroup({
+    bool? isLoading,
+    CourseCategoryJsonString,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.updateTargetedGroup(
+        auth: auth,
+        isLoading: isLoading,
+        CourseCategoryJsonString: CourseCategoryJsonString,
+      );
+      print(res.data);
+      if (!res.hasError) {
+        return true;
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString(), 'Update Course Category');
+        return false;
+      }
+    } catch (error) {
+      print(error.toString());
+      return false;
+    }
+  }
+
+  //delete
+  Future<void> deleteTargetedGroup(
+      Object category_id, bool isLoading) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.deleteTargetedGroup(
+        auth: auth,
+        category_id: category_id,
+        isLoading: isLoading,
+      );
+
+      if (!res.hasError) {
+        //get delete response back from API
+      } else {
+        Utility.showDialog(
+            res.errorCode.toString(), 'delete Targeted Group');
+      }
+    } catch (error) {
+      print(error.toString());
+    }
+  }
   //end
 }
