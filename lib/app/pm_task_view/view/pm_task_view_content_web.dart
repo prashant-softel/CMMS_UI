@@ -831,8 +831,10 @@ class PreventiveMaintenanceTaskViewContentWeb
                                                                       cells: [
                                                                     DataCell(Text(
                                                                         '${index + 1}')),
-                                                                    DataCell(Text(
-                                                                        "MRS${controller.listMrsByTaskId?[index]?.mrsId.toString() ?? ''}")),
+                                                                    DataCell(Text(controller.listMrsByTaskId?[index]?.is_mrs_return ==
+                                                                            0
+                                                                        ? "MRS${controller.listMrsByTaskId?[index]?.mrsId.toString() ?? ''}"
+                                                                        : "RMRS${controller.listMrsByTaskId?[index]?.mrs_return_ID.toString() ?? ''}")),
                                                                     DataCell(Text(controller
                                                                             .listMrsByTaskId?[index]
                                                                             ?.mrsItems ??
@@ -864,26 +866,33 @@ class PreventiveMaintenanceTaskViewContentWeb
                                                                                 'type': 2
                                                                               });
                                                                             }),
-                                                                        controller.pmtaskViewModel.value?.status != 169 &&
-                                                                                controller.pmtaskViewModel.value?.status != 165 &&
-                                                                                varUserAccessModel.value.access_list!.where((e) => e.feature_id == UserAccessConstants.kMrsFeatureId && e.edit == UserAccessConstants.kHaveEditAccess).length > 0
-                                                                            ? TableActionButton(
-                                                                                color: ColorValues.editColor,
-                                                                                icon: Icons.edit,
-                                                                                message: "Edit MRS",
-                                                                                onPress: () {
-                                                                                  controller.clearMrsStoreData();
+                                                                        // controller.pmtaskViewModel.value?.status != 169 &&
+                                                                        controller.listMrsByTaskId?[index]?.status == 323 ||
+                                                                                controller.listMrsByTaskId?[index]?.status == 324
+                                                                            ? Dimens.box0
+                                                                            : varUserAccessModel.value.access_list!.where((e) => e.feature_id == UserAccessConstants.kMrsFeatureId && e.edit == UserAccessConstants.kHaveEditAccess).length > 0
+                                                                                ? TableActionButton(
+                                                                                    color: ColorValues.editColor,
+                                                                                    icon: Icons.edit,
+                                                                                    message: "Edit MRS",
+                                                                                    onPress: () {
+                                                                                      controller.clearMrsStoreData();
 
-                                                                                  String mrsId = controller.listMrsByTaskId?[index]?.mrsId.toString() ?? "";
-                                                                                  print({
-                                                                                    "mrsId": mrsId
-                                                                                  });
-                                                                                  Get.toNamed(Routes.editMrs, arguments: {
-                                                                                    'mrsId': int.tryParse("$mrsId"),
-                                                                                    'type': 2
-                                                                                  });
-                                                                                })
-                                                                            : Dimens.box0
+                                                                                      String mrsId = controller.listMrsByTaskId?[index]?.mrsId.toString() ?? "";
+                                                                                      String rmrsId = controller.listMrsByTaskId?[index]?.mrs_return_ID.toString() ?? "";
+
+                                                                                      print({
+                                                                                        "mrsId": mrsId
+                                                                                      });
+                                                                                      rmrsId == "0"
+                                                                                          ? Get.toNamed(Routes.editMrs, arguments: {
+                                                                                              'mrsId': int.tryParse("$mrsId"),
+                                                                                              'type': 2
+                                                                                            })
+                                                                                          : Get.toNamed(Routes.editReturnMrs, arguments: int.tryParse(rmrsId));
+                                                                                      ;
+                                                                                    })
+                                                                                : Dimens.box0
                                                                       ],
                                                                     )),
                                                                   ]),

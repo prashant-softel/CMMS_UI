@@ -81,6 +81,11 @@ class PreventiveMaintenanceExecutionController extends GetxController {
   Uint8List? fileBytes;
   RxString fileName = "".obs;
   int fileId = 0;
+  // bool itemExistsWithZeroDifference = false;
+  // var cmmrsItems = <Map<String, dynamic>>[].obs;
+  var itemExistsWithZeroDifference = <bool>[].obs;
+  var returnitemExists = <int>[].obs;
+  Rx<bool> allTrue = false.obs;
 
   ///fileIDs
   int fileIds = 0;
@@ -135,12 +140,28 @@ class PreventiveMaintenanceExecutionController extends GetxController {
               false,
             ) ??
             [];
-    var _assetsList = listMrsByTaskId!.value[0]!.cmmrsItems;
+    var _assetsList = listMrsByTaskId!.value.last!.cmmrsItems;
     for (var asset in _assetsList!) {
       cmmrsItems!.add(asset);
     }
-    print({"mrsit", listMrsByTaskId});
+    _processJsonData();
+    allTrue.value = itemExistsWithZeroDifference.every((item) => item);
+
+    print({"mrsit12mrs", allTrue.value});
+    print({"mrsit12mrs", itemExistsWithZeroDifference});
+
     addRowItem();
+  }
+
+  void _processJsonData() {
+    itemExistsWithZeroDifference.value = cmmrsItems!.map((element) {
+      double issuedQty = element?.issued_qty ?? 0;
+      double usedQty = element?.used_qty ?? 0;
+      return (issuedQty - usedQty) == 0;
+    }).toList();
+    returnitemExists.value = cmmrsItems!.map((element) {
+      return element?.mrs_return_ID ?? 0;
+    }).toList();
   }
 
   Future<void> setScheduleId() async {
@@ -575,16 +596,15 @@ class PreventiveMaintenanceExecutionController extends GetxController {
         {
           if (value != "Please Select") {
             int assetsIndex =
-              scheduleCheckPoints.indexWhere((x) => x.name == value);
-          selectedAssetsId = scheduleCheckPoints[assetsIndex].schedule_id ?? 0;
-          if (selectedAssetsId > 0) {
-            isAssetsSelected.value = true;
-          }
-          selectedasset.value = scheduleCheckPoints[assetsIndex].name ?? "";
-            
-          }else{
-            selectedAssetsId=0;
-
+                scheduleCheckPoints.indexWhere((x) => x.name == value);
+            selectedAssetsId =
+                scheduleCheckPoints[assetsIndex].schedule_id ?? 0;
+            if (selectedAssetsId > 0) {
+              isAssetsSelected.value = true;
+            }
+            selectedasset.value = scheduleCheckPoints[assetsIndex].name ?? "";
+          } else {
+            selectedAssetsId = 0;
           }
         }
         break;

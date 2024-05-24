@@ -285,7 +285,7 @@ class _ViewAuditPlanWebState extends State<ViewAuditPlanWeb> {
                                               '${controller.auditPlanDetailModel.value?.schedule_Date ?? ''}',
                                               style: Styles.blue17),
                                           Text(
-                                              '${controller.auditPlanDetailModel.value?.frequency ?? ''}',
+                                              '${controller.auditPlanDetailModel.value?.frequency_name ?? ''}',
                                               style: Styles.blue17),
                                         ],
                                       ),
