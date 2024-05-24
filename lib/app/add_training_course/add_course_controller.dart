@@ -2,10 +2,7 @@ import 'dart:async';
 
 import 'package:cmms/app/add_training_course/add_course_presenter.dart';
 import 'package:cmms/app/home/home_controller.dart';
-import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/domain/models/add_training_course_model.dart';
-import 'package:cmms/domain/models/add_training_course_model.dart';
-// import 'package:cmms/domain/models/facility_model.dart';
 import 'package:cmms/domain/models/type_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -101,7 +98,7 @@ class AddCourseController extends GetxController {
     }
   }
 
-   void clearStoreData() {
+  void clearStoreData() {
     addCoursePresenter.clearValue();
   }
 
@@ -132,6 +129,47 @@ class AddCourseController extends GetxController {
         );
         var trainingCourse = course.toJson();
         var response = addCoursePresenter.addCourse(
+          courseJson: trainingCourse,
+          isLoading: isLoading.value,
+        );
+        // if (response == true) {
+        //   cleardata();
+        //   Get.toNamed(Routes.trainingCourse);
+        //   isLoading.value = false;
+        // }
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  Future<void> updateCOurse({dynamic fileIds}) async {
+    try {
+      checkForm();
+      if (isFormInvalid.value) {
+        return;
+      } else {
+        String _courseName = topic.text.trim();
+        int _categoryId = selectedCategoryId.value;
+        int _groupId = selectedGroupId.value;
+        int _numberOfDays = int.tryParse(noOfDays.text.trim()) ?? 0;
+        int _maxCap = int.tryParse(maximumCapacity.text.trim()) ?? 0;
+        int _duration = int.tryParse(minutes.text.trim()) ?? 0;
+        String _description = descCtrlr.text.trim();
+        AddTrainingCourse course = AddTrainingCourse(
+          id: courseId.value,
+          name: _courseName,
+          categoryId: _categoryId,
+          groupId: _groupId,
+          numberOfdays: _numberOfDays,
+          maxCap: _maxCap,
+          duration: _duration,
+          description: _description,
+          uploadfile_ids: fileIds,
+          facilityId: facilityId.value,
+        );
+        var trainingCourse = course.toJson();
+        var response = addCoursePresenter.updateCourse(
           courseJson: trainingCourse,
           isLoading: isLoading.value,
         );
