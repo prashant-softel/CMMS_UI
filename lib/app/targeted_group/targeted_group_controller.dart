@@ -1,21 +1,19 @@
 import 'dart:async';
-
 import 'package:cmms/app/app.dart';
-import 'package:cmms/app/course_category/course_category_presenter.dart';
+import 'package:cmms/app/targeted_group/targeted_group_presenter.dart';
 import 'package:cmms/domain/models/course_category_model.dart';
 import 'package:cmms/domain/models/facility_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rxdart/subjects.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
-import '../../domain/models/createSPVModel.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-class CourseCategoryController extends GetxController {
-  CourseCategoryController(
-    this.coursecategoryPresenter
+class TargetedGroupController extends GetxController {
+  TargetedGroupController(
+    this.targetedgroupPresenter
   );
-  CourseCategoryPresenter coursecategoryPresenter;
+  TargetedGroupPresenter targetedgroupPresenter;
   final HomeController homecontroller = Get.find();
   CourseCategoryModel? selectedItem;
   CourseCategoryModel? selectedItemupdate;
@@ -53,9 +51,9 @@ class CourseCategoryController extends GetxController {
   ///SOP Permit List
   Rx<bool> isTitleInvalid = false.obs;
   Rx<bool> isDescriptionInvalid = false.obs;
-  RxList<CourseCategoryModel> CourseCategory = <CourseCategoryModel>[].obs;
-  RxList<CourseCategoryModel> BufferCourseCategory = <CourseCategoryModel>[].obs;
-  Rx<bool> isCourseCtegorySelected = true.obs;
+  RxList<CourseCategoryModel> TargetedGroup = <CourseCategoryModel>[].obs;
+  RxList<CourseCategoryModel> BufferTargetedGroup = <CourseCategoryModel>[].obs;
+  Rx<bool> isTargetedGroupSelected = true.obs;
   Rx<String> selectedSopPermit = ''.obs;
   RxList<String?> selectedSopPermitDataList = <String>[].obs;
   RxList<int?> selectedSopPermitIdList = <int>[].obs;
@@ -71,10 +69,10 @@ class CourseCategoryController extends GetxController {
   void search(String keyword) {
     print('Keyword: $keyword');
     if (keyword.isEmpty) {
-      CourseCategory.value = BufferCourseCategory.value;
+      TargetedGroup.value = BufferTargetedGroup.value;
       return;
     }
-    List<CourseCategoryModel> filteredList = BufferCourseCategory.where((item) =>
+    List<CourseCategoryModel> filteredList = BufferTargetedGroup.where((item) =>
             (item.name
                     ?.toString()
                     .toLowerCase()
@@ -86,18 +84,18 @@ class CourseCategoryController extends GetxController {
                     .contains(keyword.toLowerCase()) ??
                 false) // Add this condition to filter by searchId
         ).toList();
-    CourseCategory.value = filteredList;
+    TargetedGroup.value = filteredList;
   }
   // void search(String keyword) {
   //   print('Keyword: $keyword');
 
   //   if (keyword.isEmpty) {
-  //     CourseCategory.value = filteredData.toList();
-  //     print('CourseCategory length (empty keyword): ${CourseCategory.length}');
+  //     TargetedGroup.value = filteredData.toList();
+  //     print('TargetedGroup length (empty keyword): ${TargetedGroup.length}');
   //     return;
   //   }
 
-  //   CourseCategory.value = filteredData
+  //   TargetedGroup.value = filteredData
   //       .where((item) =>
   //           item.name
   //               ?.toString()
@@ -106,7 +104,7 @@ class CourseCategoryController extends GetxController {
   //           false)
   //       .toList();
 
-  //   print('CourseCategory length (non-empty keyword): ${CourseCategory.length}');
+  //   print('TargetedGroup length (non-empty keyword): ${TargetedGroup.length}');
   // }
 
   //Facility list / demo plant
@@ -131,7 +129,7 @@ class CourseCategoryController extends GetxController {
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
       facilityId = event;
       Future.delayed(Duration(seconds: 1), () {
-        getCourseCategory();
+        getTargetedGroup();
       });
     });
     titleFocus.addListener(() {
@@ -147,10 +145,10 @@ class CourseCategoryController extends GetxController {
     super.onInit();
   }
 
-  Future<void> getCourseCategory() async {
-    CourseCategory.value = <CourseCategoryModel>[];
-    BufferCourseCategory.value = <CourseCategoryModel>[];
-    final _CousreCategory = await coursecategoryPresenter.getCourseCategory(
+  Future<void> getTargetedGroup() async {
+    TargetedGroup.value = <CourseCategoryModel>[];
+    BufferTargetedGroup.value = <CourseCategoryModel>[];
+    final _CousreCategory = await targetedgroupPresenter.getTargetedGroup(
       isLoading: isLoading.value,
       // categoryIds: categoryIds,
       job_type_id: selectedJobSOPId,
@@ -158,14 +156,14 @@ class CourseCategoryController extends GetxController {
     );
     isLoading.value = false;
     for (var facilityType_list in _CousreCategory) {
-    CourseCategory.add(facilityType_list);
-    BufferCourseCategory.add(facilityType_list);
+    TargetedGroup.add(facilityType_list);
+    BufferTargetedGroup.add(facilityType_list);
   }
       // selectedSopPermit.value = _SPVList[0].name ?? '';
 
     // supplierNameList = _supplierNameList;
     CourseCategoryPaginationController = PaginationController(
-      rowCount: CourseCategory.length,
+      rowCount: TargetedGroup.length,
       rowsPerPage: 10,
     );
     update(['Course_Controller']);
@@ -175,7 +173,7 @@ class CourseCategoryController extends GetxController {
     isContainerVisible.toggle();
   }
 
-  Future<bool> createCourseCategory() async {
+  Future<bool> createTargetedGroup() async {
     print("CREATE CONTROLLER");
     if (titleCtrlr.text.trim() == '') {
       isTitleInvalid.value = true;
@@ -201,14 +199,14 @@ class CourseCategoryController extends GetxController {
       String _title = titleCtrlr.text.trim();
       String _description = descriptionCtrlr.text.trim();
 
-      CreateSPVModel createCheckpoint =
-          CreateSPVModel(name: _title, description: _description);
+      CourseCategoryModel createCheckpoint =
+          CourseCategoryModel(name: _title, description: _description);
       print("OUT ");
       var CourseCategoryJsonString = createCheckpoint
           .toJson(); //createCheckPointToJson([createCheckpoint]);
 
       print({"checkpointJsonString", CourseCategoryJsonString});
-      await coursecategoryPresenter.createCourseCategory(
+      await targetedgroupPresenter.createTargetedGroup(
         CourseCategoryJsonString: CourseCategoryJsonString,
         isLoading: true,
       );
@@ -235,14 +233,14 @@ class CourseCategoryController extends GetxController {
     // SpvId = 0;
 
     Future.delayed(Duration(seconds: 1), () {
-      getCourseCategory();
+      getTargetedGroup();
     });
     Future.delayed(Duration(seconds: 5), () {
       isSuccess.value = false;
     });
   }
 
-  Future<bool> updateCourseCategory(checklistId) async {
+  Future<bool> updateTargetedGroup(checklistId) async {
     String _name = titleCtrlr.text.trim();
     String _description = descriptionCtrlr.text.trim();
 
@@ -254,7 +252,7 @@ class CourseCategoryController extends GetxController {
     var CourseCategoryJsonString = createChecklist.toJson();
 
     print({"CourseCategoryJsonString", CourseCategoryJsonString});
-    await coursecategoryPresenter.updateCourseCategory(
+    await targetedgroupPresenter.updateTargetedGroup(
       CourseCategoryJsonString: CourseCategoryJsonString,
       isLoading: true,
     );
@@ -271,7 +269,7 @@ class CourseCategoryController extends GetxController {
           ),
           RichText(
             text: TextSpan(
-                text: 'Are you sure you want to delete the Course Category ',
+                text: 'Are you sure you want to delete the Tagte ',
                 style: Styles.blackBold16,
                 children: [
                   TextSpan(
@@ -296,9 +294,9 @@ class CourseCategoryController extends GetxController {
               ),
               TextButton(
                 onPressed: () {
-                  deleteCourseCategory(category_id).then((value) {
+                  deleteTargetedGroup(category_id).then((value) {
                     Get.back();
-                    getCourseCategory();
+                    getTargetedGroup();
                   });
                 },
                 child: Text('YES'),
@@ -310,9 +308,9 @@ class CourseCategoryController extends GetxController {
     );
   }
 
-  Future<void> deleteCourseCategory(String? category_id) async {
+  Future<void> deleteTargetedGroup(String? category_id) async {
     {
-      await coursecategoryPresenter.deleteCourseCategory(
+      await targetedgroupPresenter.deleteTargetedGroup(
         category_id,
         isLoading: true,
       );

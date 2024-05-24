@@ -5171,6 +5171,53 @@ class DataRepository extends DomainRepository {
         auth: auth, isLoading: isLoading, category_id: category_id);
     return response;
   }
+  //Targeted Group
+        //get
+  Future<ResponseModel> getTargetedGroup({
+    required bool isLoading,
+    required String auth,
+  }) async {
+    return await connectHelper.getTargetedGroup(
+      isLoading: isLoading,
+      auth: auth,
+    );
+  }
+  //create
+  Future<ResponseModel> createTargetedGroup({
+    auth,
+    bool? isLoading,
+    CourseCategoryJsonString,
+  }) async {
+    var response = await connectHelper.createTargetedGroup(
+        auth: auth,
+        isLoading: isLoading,
+        CourseCategoryJsonString: CourseCategoryJsonString);
+    return response;
+  }
 
+  //update
+  Future<ResponseModel> updateTargetedGroup({
+    auth,
+    bool? isLoading,
+    CourseCategoryJsonString,
+  }) async {
+    var response = await connectHelper.updateTargetedGroup(
+      auth: auth,
+      isLoading: isLoading,
+      CourseCategoryJsonString: CourseCategoryJsonString,
+    );
+    return response;
+  }
+
+  //delete
+  Future<ResponseModel> deleteTargetedGroup({
+    auth,
+    bool? isLoading,
+    category_id,
+  }) async {
+    var response = await connectHelper.deleteTargetedGroup(
+        auth: auth, isLoading: isLoading, category_id: category_id);
+    return response;
+  }
 //end
 }
