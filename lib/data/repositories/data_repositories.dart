@@ -1883,7 +1883,8 @@ class DataRepository extends DomainRepository {
       start_date: start_date,
       end_date: end_date,
     );
-  }    
+  }
+
   Future<ResponseModel> createWasteData({
     required String auth,
     createWasteData,
@@ -5081,6 +5082,44 @@ class DataRepository extends DomainRepository {
         auth: auth,
         courseJson: courseJson,
         isLoading: isLoading ?? false,
+      );
+  Future<ResponseModel> updateCourse({
+    auth,
+    courseJson,
+    isLoading,
+  }) async =>
+      await connectHelper.updateCourse(
+        auth: auth,
+        courseJson: courseJson,
+        isLoading: isLoading ?? false,
+      );
+
+  Future<ResponseModel> deleteTrainingCourse({
+    required String auth,
+    int? courseId,
+    bool? isLoading,
+  }) async {
+    var response = await connectHelper.deleteTrainingCourse(
+      auth: auth,
+      isLoading: isLoading,
+      courseId: courseId,
+    );
+    return response;
+  }
+
+  Future<ResponseModel> getTrainingCourseList({
+    required String auth,
+    int? facilityId,
+    dynamic startDate,
+    dynamic endDate,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.getTrainingCourseList(
+        auth: auth,
+        facilityId: facilityId ?? 0,
+        isLoading: isLoading ?? false,
+        startDate: startDate,
+        endDate: endDate,
       );
 
        //Course category
