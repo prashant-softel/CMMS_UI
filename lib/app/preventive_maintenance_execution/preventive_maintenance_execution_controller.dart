@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
+import 'package:cmms/domain/models/close_permit_model.dart';
 import 'package:cmms/domain/models/comment_model.dart';
 import 'package:cmms/domain/models/history_model.dart';
 import 'package:cmms/domain/models/mrs_list_by_jobId.dart';
@@ -438,14 +439,25 @@ class PreventiveMaintenanceExecutionController extends GetxController {
   closePmTaskExecution() async {
     {
       String _comment = commentCtrlr.text.trim();
+      int ptwId = pmtaskViewModel.value?.permit_id ?? 0;
 
-      CommentModel commentModel =
-          CommentModel(id: scheduleId.value, comment: _comment);
+      CommentModel commentModel = CommentModel(
+        id: scheduleId.value,
+        comment: _comment,
+      );
+      ClosePermitModel ptwClose = ClosePermitModel(
+          id: ptwId,
+          comment: _comment,
+          conditionIds: [1, 2, 3, 4],
+          fileIds: []);
 
       var closetoJsonString = commentModel.toJson();
+      var closePtwJsonString = ptwClose.toJson();
+
       final response =
           await preventiveMaintenanceExecutionPresenter.closePmTaskExecution(
         closetoJsonString: closetoJsonString,
+        closePtwJsonString: closePtwJsonString,
         isLoading: true,
       );
       if (response == true) {

@@ -3131,7 +3131,23 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                             )),
                       )
                     : Dimens.box0,
-
+                Padding(
+                  padding: const EdgeInsets.only(left: 5),
+                  child: Container(
+                      height: 45,
+                      child: CustomElevatedButton(
+                        backgroundColor: ColorValues.appcloseRedColor,
+                        text: "Close Permit",
+                        icon: Icons.close,
+                        onPressed: () {
+                          Get.dialog(PermitCloseDialog(
+                            permitId:
+                                '${controller.viewPermitDetailsModel.value?.permitNo}',
+                            jobId: controller.jobId.value,
+                          ));
+                        },
+                      )),
+                ),
                 // Dimens.boxWidth5,
 
                 ///Reject Button

@@ -1883,7 +1883,8 @@ class DataRepository extends DomainRepository {
       start_date: start_date,
       end_date: end_date,
     );
-  }    
+  }
+
   Future<ResponseModel> createWasteData({
     required String auth,
     createWasteData,
@@ -5083,8 +5084,8 @@ class DataRepository extends DomainRepository {
         isLoading: isLoading ?? false,
       );
 
-       //Course category
-       //get
+  //Course category
+  //get
   Future<ResponseModel> getCourseCategory({
     required bool isLoading,
     required String auth,
@@ -5132,7 +5133,6 @@ class DataRepository extends DomainRepository {
         auth: auth, isLoading: isLoading, category_id: category_id);
     return response;
   }
-
 
 //end
 }

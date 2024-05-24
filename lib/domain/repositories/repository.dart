@@ -11623,7 +11623,7 @@ class Repository {
   }
 
   Future<bool> ClosePMTaskExecution(
-      {bool? isLoading, closetoJsonString}) async {
+      {bool? isLoading, closetoJsonString, closePtwJsonString}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       log(auth);
@@ -11631,10 +11631,11 @@ class Repository {
           auth: auth,
           isLoading: isLoading,
           ClosePMTaskExecutionJsonString: json.encode(closetoJsonString));
+
       print({"res.data", res.data});
       if (!res.hasError) {
         Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
-
+        permitCloseButton(closePtwJsonString, isLoading, 0);
         return true;
       } else {
         Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
@@ -13506,12 +13507,12 @@ class Repository {
       return Map();
     }
   }
+
   //Course Category
   //get
   Future<List<CourseCategoryModel>> getCourseCategory({
     required bool isLoading,
     int? job_type_id,
-
   }) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
@@ -13526,7 +13527,6 @@ class Repository {
       if (!res.hasError) {
         var Sourcetype = CourseCategoryModelFromJson(res.data);
         return Sourcetype;
-
       }
       return [];
     } catch (error) {
@@ -13534,7 +13534,6 @@ class Repository {
       return [];
     }
   }
-
 
   //create
   Future<bool> createCourseCategory(
@@ -13586,8 +13585,7 @@ class Repository {
   }
 
   //delete
-  Future<void> deleteCourseCategory(
-      Object category_id, bool isLoading) async {
+  Future<void> deleteCourseCategory(Object category_id, bool isLoading) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.deleteCourseCategory(
@@ -13599,8 +13597,7 @@ class Repository {
       if (!res.hasError) {
         //get delete response back from API
       } else {
-        Utility.showDialog(
-            res.errorCode.toString(), 'delete Course Category');
+        Utility.showDialog(res.errorCode.toString(), 'delete Course Category');
       }
     } catch (error) {
       print(error.toString());
