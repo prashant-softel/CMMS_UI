@@ -3300,17 +3300,17 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb> {
                                               _gridList(
                                                 tittle: "WO on-time",
                                                 percent:
-                                                    '${((controller.dashboardBmList.value?.cmDashboadDetails?.completed ?? 0) / (controller.dashboardBmList.value?.cmDashboadDetails?.total ?? 1) * 100).toString()}%',
+                                                    '${((controller.dashboardBmList.value?.cmDashboadDetails?.completed ?? 0) / (controller.dashboardBmList.value?.cmDashboadDetails?.total ?? 1) * 100).toStringAsFixed(1).toString()}%',
                                               ),
                                               _gridList(
                                                 tittle: "WO delay",
                                                 percent:
-                                                    '${((controller.dashboardBmList.value?.cmDashboadDetails?.wo_delay ?? 0) / (controller.dashboardBmList.value?.cmDashboadDetails?.total ?? 1) * 100).toString()}%',
+                                                    '${((controller.dashboardBmList.value?.cmDashboadDetails?.wo_delay ?? 0) / (controller.dashboardBmList.value?.cmDashboadDetails?.total ?? 1) * 100).toStringAsFixed(1).toString()}%',
                                               ),
                                               _gridList(
                                                 tittle: "WO backlog",
                                                 percent:
-                                                    '${((controller.dashboardBmList.value?.cmDashboadDetails?.wo_backlog ?? 0) / (controller.dashboardBmList.value?.cmDashboadDetails?.total ?? 1) * 100).toString()}%',
+                                                    '${((controller.dashboardBmList.value?.cmDashboadDetails?.wo_backlog ?? 0) / (controller.dashboardBmList.value?.cmDashboadDetails?.total ?? 1) * 100).toStringAsFixed(1).toString()}%',
                                               ),
                                               _gridList(
                                                   tittle: "Low stock items",
