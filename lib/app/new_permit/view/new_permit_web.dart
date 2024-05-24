@@ -10,6 +10,7 @@ import 'package:cmms/app/widgets/view_jsa_dialog.dart';
 import 'package:cmms/app/widgets/view_sop_dialog.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
@@ -1831,7 +1832,7 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                                                         cells: record
                                                                             .map((mapData) {
                                                                           return DataCell(
-                                                                            (mapData['key'] == "Employee Name") || (mapData['key'] == "Contact Number") || (mapData['key'] == "Responsibility")
+                                                                            (mapData['key'] == "Employee Name") || (mapData['key'] == "Responsibility")
                                                                                 ? Padding(
                                                                                     padding: EdgeInsets.only(top: 10),
                                                                                     child: Column(
@@ -1865,26 +1866,63 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                                                                       ],
                                                                                     ),
                                                                                   )
-                                                                                : (mapData['key'] == "Action ")
+                                                                                : (mapData['key'] == "Contact Number")
                                                                                     ? Padding(
                                                                                         padding: EdgeInsets.only(top: 10),
                                                                                         child: Column(
                                                                                           mainAxisAlignment: MainAxisAlignment.start,
                                                                                           crossAxisAlignment: CrossAxisAlignment.start,
                                                                                           children: [
-                                                                                            TableActionButton(
-                                                                                              color: ColorValues.appRedColor,
-                                                                                              icon: Icons.delete,
-                                                                                              label: '',
-                                                                                              message: '',
-                                                                                              onPress: () {
-                                                                                                controller.rowTBTTrainingOtherPersonItem.remove(record);
-                                                                                              },
-                                                                                            )
+                                                                                            Container(
+                                                                                                decoration: BoxDecoration(
+                                                                                                  boxShadow: [
+                                                                                                    BoxShadow(
+                                                                                                      color: Colors.black26,
+                                                                                                      offset: const Offset(
+                                                                                                        5.0,
+                                                                                                        5.0,
+                                                                                                      ),
+                                                                                                      blurRadius: 5.0,
+                                                                                                      spreadRadius: 1.0,
+                                                                                                    ),
+                                                                                                  ],
+                                                                                                  color: ColorValues.whiteColor,
+                                                                                                  borderRadius: BorderRadius.circular(5),
+                                                                                                ),
+                                                                                                child: LoginCustomTextfield(
+                                                                                                  keyboardType: TextInputType.number,
+                                                                                                  maxLine: 1,
+                                                                                                  inputFormatters: <TextInputFormatter>[
+                                                                                                    FilteringTextInputFormatter.digitsOnly
+                                                                                                  ],
+                                                                                                  textController: new TextEditingController(text: mapData["value"] ?? ''),
+                                                                                                  onChanged: (txt) {
+                                                                                                    mapData["value"] = txt;
+                                                                                                  },
+                                                                                                )),
                                                                                           ],
                                                                                         ),
                                                                                       )
-                                                                                    : Text(mapData['key'] ?? ''),
+                                                                                    : (mapData['key'] == "Action ")
+                                                                                        ? Padding(
+                                                                                            padding: EdgeInsets.only(top: 10),
+                                                                                            child: Column(
+                                                                                              mainAxisAlignment: MainAxisAlignment.start,
+                                                                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                                                                              children: [
+                                                                                                TableActionButton(
+                                                                                                  color: ColorValues.appRedColor,
+                                                                                                  icon: Icons.delete,
+                                                                                                  label: '',
+                                                                                                  message: '',
+                                                                                                  onPress: () {
+                                                                                                    controller.rowTBTTrainingOtherPersonItem.remove(record);
+                                                                                                  },
+                                                                                                )
+                                                                                              ],
+                                                                                            ),
+                                                                                          )
+                                                                                        : Text(mapData['key'] ?? ''),
                                                                           );
                                                                         }).toList(),
                                                                       );

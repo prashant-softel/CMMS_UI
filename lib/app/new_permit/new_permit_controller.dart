@@ -1228,7 +1228,7 @@ class NewPermitController extends GetxController {
     if (selectedBlock.value == '') {
       isBlockSelected.value = false;
     }
-    if (workPermitRemarkTextCtrlr.text=='') {
+    if (workPermitRemarkTextCtrlr.text == '') {
       isWorPermitNumberTextInvalid.value = true;
     }
     // if (selectedJobType.value == '') {
@@ -1276,7 +1276,8 @@ class NewPermitController extends GetxController {
         // isJobTypeListSelected.value == false ||
         // isSopPermitListSelected.value == false ||
         isJobDescriptionInvalid == true ||
-        isWorPermitNumberTextInvalid.value == true||workPermitRemarkTextCtrlr.text=='') {
+        isWorPermitNumberTextInvalid.value == true ||
+        workPermitRemarkTextCtrlr.text == '') {
       isFormInvalid.value = true;
     } else {
       isFormInvalid.value = false;
@@ -1811,10 +1812,16 @@ class NewPermitController extends GetxController {
 
   void resubmitPermit({List<dynamic>? fileIds}) async {
     {
+      checkForm();
+      if (isFormInvalid.value) {
+        return;
+      }
+
       String _description =
           htmlEscape.convert(permitDescriptionCtrlr.text.trim());
       String _title = htmlEscape.convert(titleTextCtrlr.text.trim());
       String _startDate = htmlEscape.convert(startDateTimeCtrlr.text.trim());
+
       String _workPermitRemark =
           htmlEscape.convert(workPermitRemarkTextCtrlr.text.trim());
 
@@ -1823,6 +1830,8 @@ class NewPermitController extends GetxController {
 
       var data = filteredEmployeeNameList
           .map((element) => element?.responsibility?.map((e) => e.name));
+
+      print('EmpoyeeData34:${data.toString()}');
 
       List<Employeelist> employee_map_list = [];
       filteredEmployeeNameList.forEach((e) {
@@ -1854,14 +1863,12 @@ class NewPermitController extends GetxController {
             ischeck: e.isChecked ? 1 : 0));
       });
 
-      CreatePermitModel updatePermitModel = CreatePermitModel(
+      CreatePermitModel createPermitModel = CreatePermitModel(
         facility_id: facilityId,
+        permit_id: permitId.value,
         blockId: selectedBlockId,
         lotoId: selectedEquipmentCategoryIdList.first,
-        permit_id: permitId.value,
         permitTypeId: selectedPermitTypeId,
-
-        ///Permit Type Id
         start_datetime: startDateTimeCtrlrBuffer,
         end_datetime: validTillTimeCtrlrBuffer,
         title: _title,
@@ -1870,34 +1877,35 @@ class NewPermitController extends GetxController {
         sop_type_id: selectedSOPId,
         issuer_id: selectedPermitIssuerTypeId,
         approver_id: selectedPermitApproverTypeId,
-        uploadfile_ids: fileIds,
         user_id: userId,
         latitude: 0,
         longitude: 0,
         block_ids: selectedEmployeeNameIdList,
         category_ids: selectedEquipmentCategoryIdList,
+        uploadfile_ids: fileIds,
         is_loto_required: isToggleOn.value,
         isolated_category_ids: selectedEquipmentIsolationIdList,
         Loto_list: loto_map_list,
+        lotoOtherDetails: [],
         employee_list: employee_map_list,
-        safety_question_list: safety_measure_map_list,
-        resubmit: true,
+        safety_question_list: safety_measure_map_list, resubmit: true,
         TBT_Done_by: selectedTbtConductedId,
         TBT_Done_at: tbtDateTimeCtrlrBuffer,
-        PHYSICAL_ISO_REMARK: _workPermitRemark, is_physical_iso_required: true,
+        PHYSICAL_ISO_REMARK: _workPermitRemark,
+        is_physical_iso_required: true,
       );
-      var jobJsonString = updatePermitModel.toJson();
-      Map<String, dynamic>? responseUpdatePermit =
+      var jobJsonString = createPermitModel.toJson();
+      Map<String, dynamic>? responseNewPermitCreated =
           await permitPresenter.resubmitPermit(
         newPermit: jobJsonString,
         resubmit: true,
         isLoading: true,
       );
-      if (responseUpdatePermit != null) {
+      if (responseNewPermitCreated != null) {
         //  CreateNewPermitDialog();
         // showAlertDialog();
       }
-      print('Update permit data: $jobJsonString');
+      print('Create permit data: $jobJsonString');
     }
   }
 

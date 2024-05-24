@@ -3131,7 +3131,7 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                             )),
                       )
                     : Dimens.box0,
-               
+
                 // Dimens.boxWidth5,
 
                 ///Reject Button
@@ -3207,37 +3207,34 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
 
                 /// Permit Cancel By approver & Permit Request
                 varUserAccessModel.value.access_list!
-                                    .where((e) =>
-                                        e.feature_id == UserAccessConstants.kPermitFeatureId &&
-                                        e.approve ==
-                                            UserAccessConstants
-                                                .kHaveApproveAccess)
-                                    .length >
-                                0 &&
-                            varUserAccessModel.value.access_list!
-                                    .where((e) =>
-                                        e.feature_id == UserAccessConstants.kPermitFeatureId &&
-                                        e.edit ==
-                                            UserAccessConstants.kHaveEditAccess)
-                                    .length >
-                                0 ||
+                                .where((e) =>
+                                    e.feature_id ==
+                                        UserAccessConstants.kPermitFeatureId &&
+                                    e.approve ==
+                                        UserAccessConstants.kHaveApproveAccess)
+                                .length >
+                            0 ||
                         varUserAccessModel.value.access_list!
                                     .where((e) =>
-                                        e.feature_id == UserAccessConstants.kPermitFeatureId &&
+                                        e.feature_id ==
+                                            UserAccessConstants
+                                                .kPermitFeatureId &&
                                         e.edit ==
-                                            UserAccessConstants.kHaveEditAccess)
+                                            UserAccessConstants.kHaveAddAccess)
                                     .length >
                                 0 &&
-                            controller.viewPermitDetailsModel.value?.ptwStatus ==
-                                PermitStatusConstants.PTW_APPROVE //125
-                        ||
-                        controller.viewPermitDetailsModel.value?.ptwStatus ==
-                            PermitStatusConstants.PTW_CREATED //121
-                        ||
-                        controller.viewPermitDetailsModel.value?.ptwStatus ==
-                            PermitStatusConstants.PTW_EXTEND_REQUEST_REJECTED ||
-                        controller.viewPermitDetailsModel.value?.ptwStatus ==
-                            PermitStatusConstants.PTW_CANCEL_REQUEST_REJECTED
+                            controller
+                                    .viewPermitDetailsModel.value?.ptwStatus !=
+                                PermitStatusConstants
+                                    .PTW_CANCEL_REQUEST_APPROVED //132
+                    // ||
+                    // controller.viewPermitDetailsModel.value?.ptwStatus ==
+                    //     PermitStatusConstants.PTW_CREATED //121
+                    // ||
+                    // controller.viewPermitDetailsModel.value?.ptwStatus ==
+                    //     PermitStatusConstants.PTW_EXTEND_REQUEST_REJECTED ||
+                    // controller.viewPermitDetailsModel.value?.ptwStatus ==
+                    // PermitStatusConstants.PTW_CANCEL_REQUEST_REJECTED
                     ? Padding(
                         padding: const EdgeInsets.only(left: 5),
                         child: Container(
