@@ -1872,7 +1872,8 @@ class AddIncidentReportController extends GetxController {
       List<DetailsOfInjuredPerson> detailsOfInjuredPersonItems = [];
       rowInjuredPersonItem.forEach((element) {
         DetailsOfInjuredPerson item = DetailsOfInjuredPerson(
-          injured_item_id: 1,
+          injured_item_id:
+              dropdownVictimNameMapperData[element[0]["value"]]?.id,
           incidents_id: irId.value,
           person_id: element[0]["value"],
           other_victim: element[1]["value"] ?? '0',
@@ -1949,7 +1950,7 @@ class AddIncidentReportController extends GetxController {
               why_why_analysis: whyWhyAnalysisItems,
               root_cause: rootCauseItems,
               immediate_correction: immediateCorrectionItems,
-              proposed_action_plan: proposedActionItems,
+              proposed_action_plan: [],
               injured_person: detailsOfInjuredPersonItems,
               investigation_team: investigation_team_list);
 
@@ -2056,7 +2057,6 @@ class AddIncidentReportController extends GetxController {
           incidents_id: irId.value,
           actions_as_per_plan: element[0]["value"] ?? '0',
           responsibility: element[1]["value"],
-          // target_date: element[2]["value"] ?? '0',
           target_date: "2023-11-26T12:00:00",
           hse_remark: element[4]["value"],
           id_Status: statusDropDownMapperData[element[5]["value"]]?.id,
@@ -2082,7 +2082,8 @@ class AddIncidentReportController extends GetxController {
       List<DetailsOfInjuredPerson> detailsOfInjuredPersonItems = [];
       rowInjuredPersonItem.forEach((element) {
         DetailsOfInjuredPerson item = DetailsOfInjuredPerson(
-          injured_item_id: 1,
+          injured_item_id:
+              dropdownVictimNameMapperData[element[0]["value"]]?.id,
           incidents_id: irId.value,
           person_id: element[0]["value"],
           other_victim: element[1]["value"] ?? '0',
@@ -2177,7 +2178,7 @@ class AddIncidentReportController extends GetxController {
   }
 
   Future<void> viewIncidentReport({int? id}) async {
-    Get.toNamed(Routes.viewIncidentReportScreen, arguments: {"irId":id});
+    Get.toNamed(Routes.viewIncidentReportScreen, arguments: {"irId": id});
     print('Argument$id');
   }
 }
