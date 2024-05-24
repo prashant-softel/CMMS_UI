@@ -8805,12 +8805,67 @@ class ConnectHelper {
     isLoading,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
-      '',
+      'Training/CreateTrainingCourse',
       Request.post,
       courseJson,
       isLoading ?? false,
       {
         'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
+  Future<ResponseModel> updateCourse({
+    auth,
+    courseJson,
+    isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Training/UpdateCourse',
+      Request.put,
+      courseJson,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
+  Future<ResponseModel> deleteTrainingCourse({
+    required String auth,
+    int? courseId,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Training/DeleteCourse?id=$courseId',
+      Request.delete,
+      courseId,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
+  Future<ResponseModel> getTrainingCourseList({
+    required String auth,
+    int? facilityId,
+    dynamic startDate,
+    dynamic endDate,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Training/GetCourseList?facility_id=$facilityId&start_date=$startDate&end_date=$endDate',
+      Request.get,
+      null,
+      isLoading ?? true,
+      {
         'Authorization': 'Bearer $auth',
       },
     );
