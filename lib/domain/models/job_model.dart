@@ -10,7 +10,7 @@ class JobModel {
   factory JobModel.fromJson(Map<String, dynamic> json) => JobModel(
         id: json['id'] == null ? 0 : json['id'],
         userId: json['userId'] == null ? 0 : json['userId'],
-        facilityId: json['facility_id'] == null ? 0 : json['facility_id'],
+        facilityId: json['facilityId'] == null ? 0 : json['facilityId'],
         facilityName:
             json['facilityName'] == null ? null : json['facilityName'],
         jobDate:
@@ -29,7 +29,7 @@ class JobModel {
             : DateTime.parse(json['breakdownTime'] as String),
         breakdownType:
             json['breakdownType'] == null ? null : json['breakdownType'] ?? '',
-        permitId: json['permitId'] == null ? null : json['permitId'] ?? '',
+        permitId: json['ptw_id'] == null ? null : json['ptw_id'] ?? '',
         assignedToName: json['assignedToName'] == null
             ? null
             : json['assignedToName'] ?? '',
@@ -102,7 +102,7 @@ class JobModel {
   Map<String, dynamic> toJson() => {
         'id': id,
         'userId': userId,
-        'facility_id': facilityId,
+        'facilityId': facilityId,
         'facilityName': facilityName,
         'jobDate': jobDate?.toIso8601String(),
         'equipmentCat': equipmentCat,
@@ -114,7 +114,7 @@ class JobModel {
         'raisedByName': raisedByName,
         'breakdownTime': breakdownTime?.toIso8601String(),
         'breakdownType': breakdownType,
-        'permitId': permitId,
+        'ptw_id': permitId,
         'assignedToName': assignedToName,
         'assignedToId': assignedToId,
         'latestJCStatusShort': latestJCStatusShort,
