@@ -232,14 +232,20 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                                       style: Styles.grey15,
                                     ),
                                     GestureDetector(
-                                      onTap: () {
+                                      onTap: () async {
                                         String pdfUrl =
-                                            "assets/files/ptwsop.pdf";
-                                        String pdfPath =
-                                            html.window.location.origin +
-                                                '/' +
-                                                pdfUrl;
-                                        html.window.open(pdfPath, '_blank');
+                                            'http://65.0.20.19/CMMS_API/Upload/1779/0/0/Ptw%20sop%20file%20pdf.pdf';
+                                        // "http://172.20.43.9:83/Upload/1/0/0/Ptw%20sop%20file%20pdf.pdf";
+                                        // String pdfPath =
+                                        //     html.window.location.origin +
+                                        //         '/' +
+                                        //         pdfUrl;
+                                        // html.window.open(pdfPath, '_blank');
+                                        if (await canLaunch(pdfUrl)) {
+                                          await launch(pdfUrl);
+                                        } else {
+                                          throw 'Could not launch $pdfUrl';
+                                        }
                                       },
                                       child: Image.asset(
                                         'assets/files/pdf2.png',
