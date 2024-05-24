@@ -1,22 +1,23 @@
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/home/widgets/mobile_header_widget.dart';
-import 'package:cmms/app/plant_stock_report/plant_stock_report_controller.dart';
-import 'package:cmms/app/widgets/multipule_dropdown_web.dart';
-import 'package:cmms/domain/models/get_plant_Stock_list.dart';
+import 'package:cmms/app/transaction_report/transaction_report_list_controller.dart';
+import 'package:cmms/app/widgets/dropdown_web.dart';
+import 'package:cmms/domain/models/transaction_report_list_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
 import '../../widgets/date_picker.dart';
 
-class PlantSockContentMobile extends GetView<PlantStockReportController> {
-  PlantSockContentMobile({Key? key}) : super(key: key);
+class TransactionReportContentMobile
+    extends GetView<TransactionReportListController> {
+  TransactionReportContentMobile({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     ///
-    return GetBuilder<PlantStockReportController>(
-        id: 'plant_Stock',
+    return GetBuilder<TransactionReportListController>(
+        id: 'stock_Mangement_Date',
         builder: (controller) {
           return //
               Scaffold(
@@ -61,7 +62,7 @@ class PlantSockContentMobile extends GetView<PlantStockReportController> {
                             //  controller.getPmTaskListByDate();
                             controller.openFromDateToStartDatePicker =
                                 !controller.openFromDateToStartDatePicker;
-                            controller.update(['plant_Stock']);
+                            controller.update(['stock_Mangement_Date']);
 
                             // Get.toNamed(
                             //   Routes.stockManagementGoodsOrdersScreen,
@@ -70,44 +71,110 @@ class PlantSockContentMobile extends GetView<PlantStockReportController> {
                         );
                       },
                     ),
+                    Dimens.boxHeight10,
                     Container(
-                      margin: EdgeInsets.only(left: 15, right: 15),
-                      height: 45,
-                      decoration: BoxDecoration(
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black26,
-                            offset: const Offset(
-                              5.0,
-                              5.0,
-                            ),
-                            blurRadius: 5.0,
-                            spreadRadius: 1.0,
+                      margin: EdgeInsets.only(
+                          left: 20, right: 20, top: 10, bottom: 10),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Actor Type: ',
+                            style: Styles.blackBold14,
                           ),
+                          Dimens.boxHeight8,
+                          DropdownWebWidget(
+                            width: Get
+                                .width, //MediaQuery.of(context).size.width * 2,
+                            dropdownList: controller.actorType,
+                            isValueSelected:
+                                controller.isSelectedactorType.value,
+                            selectedValue: controller.selectedActorType.value,
+                            onValueChanged: controller.onValueChanged,
+                          ),
+                          Dimens.boxHeight8,
+                          Text(
+                            'Task Name: ',
+                            style: Styles.blackBold14,
+                          ),
+                          Dimens.boxHeight8,
+                          controller.selectedactorTypeId == AppConstants.kTask
+                              ? DropdownWebWidget(
+                                  width: Get.width,
+                                  dropdownList: controller.pmTaskList,
+                                  isValueSelected:
+                                      controller.isSelectedpmtask.value,
+                                  selectedValue:
+                                      controller.selectedpmtask.value,
+                                  onValueChanged: controller.onValueChanged,
+                                )
+                              : controller.selectedactorTypeId ==
+                                      AppConstants.kEngineer
+                                  ? DropdownWebWidget(
+                                      width: Get.width,
+                                      dropdownList: controller.userList,
+                                      isValueSelected:
+                                          controller.isSelectedUser.value,
+                                      selectedValue:
+                                          controller.selectedUser.value,
+                                      onValueChanged: controller.onValueChanged,
+                                    )
+                                  : controller.selectedactorTypeId ==
+                                          AppConstants.kStore
+                                      ? DropdownWebWidget(
+                                          width: Get.width,
+                                          dropdownList:
+                                              controller.facilityNameList,
+                                          isValueSelected: controller
+                                              .isSelectedfacility.value,
+                                          selectedValue:
+                                              controller.selectedfacility.value,
+                                          onValueChanged:
+                                              controller.onValueChanged,
+                                        )
+                                      : controller.selectedactorTypeId ==
+                                              AppConstants.kInventory
+                                          ? DropdownWebWidget(
+                                              width: Get.width,
+                                              dropdownList:
+                                                  controller.inventoryNameList,
+                                              isValueSelected: controller
+                                                  .isSelectedInventory.value,
+                                              selectedValue: controller
+                                                  .selectedInventory.value,
+                                              onValueChanged:
+                                                  controller.onValueChanged,
+                                            )
+                                          : controller.selectedactorTypeId ==
+                                                  AppConstants.kJobCard
+                                              ? DropdownWebWidget(
+                                                  width: Get.width,
+                                                  dropdownList:
+                                                      controller.jobList,
+                                                  isValueSelected: controller
+                                                      .isSelectedJob.value,
+                                                  selectedValue: controller
+                                                      .selectedJob.value,
+                                                  onValueChanged:
+                                                      controller.onValueChanged,
+                                                )
+                                              : Dimens.box0
                         ],
-                        color: ColorValues.whiteColor,
-                        borderRadius: BorderRadius.circular(5),
-                      ),
-                      child: MultipDropdownWebWidget(
-                        width: Get.width, //  height: 35,
-                        dropdownList: controller.assetList,
-                        selectedItems: controller.selectedAssetsNameList,
-                        onValueChanged: controller.onValueChanged,
                       ),
                     ),
-                    Dimens.boxHeight10,
+                    Dimens.boxHeight8,
                     Expanded(
                       child: ListView.builder(
                           //physics: const NeverScrollableScrollPhysics(),
                           shrinkWrap: true,
-                          itemCount: controller.StockDetailsList != null
-                              ? controller.StockDetailsList.length
+                          itemCount: controller.transactionReportList != null
+                              ? controller.transactionReportList.length
                               : 0,
                           itemBuilder: (context, index) {
                             final pmTaskModel =
-                                (controller.StockDetailsList != null)
-                                    ? controller.StockDetailsList[index]
-                                    : StockDetails();
+                                (controller.transactionReportList != null)
+                                    ? controller.transactionReportList[index]
+                                    : TransactionReportListModel();
                             return GestureDetector(
                               onTap: () {},
                               child: Container(
@@ -128,7 +195,7 @@ class PlantSockContentMobile extends GetView<PlantStockReportController> {
                                           Row(
                                             children: [
                                               Text(
-                                                'Assets Name: ',
+                                                'From Actor ID: ',
                                                 style: const TextStyle(
                                                     color:
                                                         ColorValues.blackColor,
@@ -137,7 +204,7 @@ class PlantSockContentMobile extends GetView<PlantStockReportController> {
                                               ),
                                               Expanded(
                                                 child: Text(
-                                                  '${pmTaskModel?.name ?? ""}',
+                                                  '${pmTaskModel?.fromActorID ?? ""}',
                                                   style: const TextStyle(
                                                     fontWeight: FontWeight.bold,
                                                     color: ColorValues
@@ -149,7 +216,7 @@ class PlantSockContentMobile extends GetView<PlantStockReportController> {
                                           ),
                                           Row(children: [
                                             Text(
-                                              'Assets Code: ',
+                                              'From Actor Type: ',
                                               style: const TextStyle(
                                                   color: ColorValues.blackColor,
                                                   fontWeight: FontWeight.w400),
@@ -159,7 +226,7 @@ class PlantSockContentMobile extends GetView<PlantStockReportController> {
                                             ),
                                             Expanded(
                                               child: Text(
-                                                '${pmTaskModel?.asset_code}'
+                                                '${pmTaskModel?.fromActorType}'
                                                 '',
                                                 style: const TextStyle(
                                                   color:
@@ -172,7 +239,7 @@ class PlantSockContentMobile extends GetView<PlantStockReportController> {
                                           Row(//
                                               children: [
                                             Text(
-                                              'Assets Type: ',
+                                              'From Actor Name: ',
                                               style: const TextStyle(
                                                   color: ColorValues.blackColor,
                                                   fontWeight: FontWeight.w400),
@@ -182,7 +249,8 @@ class PlantSockContentMobile extends GetView<PlantStockReportController> {
                                             ),
                                             Expanded(
                                               child: Text(
-                                                pmTaskModel?.asset_type ?? '',
+                                                pmTaskModel?.fromActorName ??
+                                                    '',
                                                 style: const TextStyle(
                                                   color:
                                                       ColorValues.navyBlueColor,
@@ -193,7 +261,7 @@ class PlantSockContentMobile extends GetView<PlantStockReportController> {
                                           ]),
                                           Row(children: [
                                             Text(
-                                              'Opening: ',
+                                              'To Actor Type: ',
                                               style: const TextStyle(
                                                   color: ColorValues.blackColor,
                                                   fontWeight: FontWeight.w400),
@@ -203,7 +271,49 @@ class PlantSockContentMobile extends GetView<PlantStockReportController> {
                                             ),
                                             Expanded(
                                               child: Text(
-                                                "${pmTaskModel?.opening ?? ''}",
+                                                "${pmTaskModel?.toActorType ?? ''}",
+                                                style: const TextStyle(
+                                                  color:
+                                                      ColorValues.navyBlueColor,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                            )
+                                          ]),
+                                          Row(children: [
+                                            Text(
+                                              'To Actor Name: ',
+                                              style: const TextStyle(
+                                                  color: ColorValues.blackColor,
+                                                  fontWeight: FontWeight.w400),
+                                            ),
+                                            SizedBox(
+                                              width: 5,
+                                            ),
+                                            Expanded(
+                                              child: Text(
+                                                "${pmTaskModel?.toActorName ?? ''}",
+                                                style: const TextStyle(
+                                                  color:
+                                                      ColorValues.navyBlueColor,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                            )
+                                          ]),
+                                          Row(children: [
+                                            Text(
+                                              'Asset Item Name: ',
+                                              style: const TextStyle(
+                                                  color: ColorValues.blackColor,
+                                                  fontWeight: FontWeight.w400),
+                                            ),
+                                            SizedBox(
+                                              width: 5,
+                                            ),
+                                            Expanded(
+                                              child: Text(
+                                                "${pmTaskModel?.assetItemName ?? ''}",
                                                 style: const TextStyle(
                                                   color:
                                                       ColorValues.navyBlueColor,
@@ -218,7 +328,7 @@ class PlantSockContentMobile extends GetView<PlantStockReportController> {
                                                   CrossAxisAlignment.start,
                                               children: [
                                                 Text(
-                                                  'Inward',
+                                                  'Asset type',
                                                   style: const TextStyle(
                                                       color: ColorValues
                                                           .blackColor,
@@ -226,7 +336,7 @@ class PlantSockContentMobile extends GetView<PlantStockReportController> {
                                                           FontWeight.w400),
                                                 ),
                                                 Text(
-                                                  "${pmTaskModel?.inward ?? ''}",
+                                                  "${pmTaskModel?.assettype ?? ''}",
                                                   style: const TextStyle(
                                                     color: ColorValues
                                                         .navyBlueColor,
@@ -242,7 +352,7 @@ class PlantSockContentMobile extends GetView<PlantStockReportController> {
                                                     CrossAxisAlignment.start,
                                                 children: [
                                                   Text(
-                                                    'Outward',
+                                                    'Qty: ',
                                                     style: const TextStyle(
                                                         color: ColorValues
                                                             .blackColor,
@@ -250,7 +360,7 @@ class PlantSockContentMobile extends GetView<PlantStockReportController> {
                                                             FontWeight.w500),
                                                   ),
                                                   Text(
-                                                    "${pmTaskModel?.outward ?? ''}",
+                                                    "${pmTaskModel?.qty ?? ''}",
                                                     style: const TextStyle(
                                                       color: ColorValues
                                                           .navyBlueColor,
@@ -268,7 +378,7 @@ class PlantSockContentMobile extends GetView<PlantStockReportController> {
                                                   CrossAxisAlignment.start,
                                               children: [
                                                 Text(
-                                                  'Balance',
+                                                  'Last Updated',
                                                   style: const TextStyle(
                                                       color: ColorValues
                                                           .blackColor,
@@ -276,7 +386,7 @@ class PlantSockContentMobile extends GetView<PlantStockReportController> {
                                                           FontWeight.w400),
                                                 ),
                                                 Text(
-                                                  "${pmTaskModel?.balance ?? ''}",
+                                                  "${pmTaskModel?.lastUpdated ?? ''}",
                                                   style: const TextStyle(
                                                     color: ColorValues
                                                         .navyBlueColor,

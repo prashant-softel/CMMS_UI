@@ -237,73 +237,77 @@ class StockManagementDashboardScreen
                               ? (itemWidth / itemHeight)
                               : 5,
                           children: <Widget>[
-                            varUserAccessModel.value.access_list!
-                                        .where((e) =>
-                                            e.feature_id ==
-                                                UserAccessConstants
-                                                    .kplantstockrepFeatureId &&
-                                            e.view ==
-                                                UserAccessConstants
-                                                    .kHaveViewAccess)
-                                        .length >
-                                    0
-                                ? _stockManagementList(
-                                    tittle: "Plant Stock Report",
-                                    ontap: () {
-                                      Get.toNamed(
-                                        Routes.plantStockReport,
-                                      );
-                                      //  controller.checkPoint();
-                                    })
-                                : Dimens.box0,
-                            varUserAccessModel.value.access_list!
-                                        .where((e) =>
-                                            e.feature_id ==
-                                                UserAccessConstants
-                                                    .kplantstockrepFeatureId &&
-                                            e.view ==
-                                                UserAccessConstants
-                                                    .kHaveViewAccess)
-                                        .length >
-                                    0
-                                ? _stockManagementList(
-                                    tittle: "Employee Stock Report",
-                                    ontap: () {
-                                      Get.toNamed(Routes.employeeStockReport);
-                                    })
-                                : Dimens.box0,
-                            varUserAccessModel.value.access_list!
-                                        .where((e) =>
-                                            e.feature_id ==
-                                                UserAccessConstants
-                                                    .kplantstockrepFeatureId &&
-                                            e.view ==
-                                                UserAccessConstants
-                                                    .kHaveViewAccess)
-                                        .length >
-                                    0
-                                ? _stockManagementList(
-                                    tittle: "Transaction Report",
-                                    ontap: () {
-                                      Get.toNamed(Routes.transactionReport);
-                                    })
-                                : Dimens.box0,
-                            varUserAccessModel.value.access_list!
-                                        .where((e) =>
-                                            e.feature_id ==
-                                                UserAccessConstants
-                                                    .kplantstockrepFeatureId &&
-                                            e.view ==
-                                                UserAccessConstants
-                                                    .kHaveViewAccess)
-                                        .length >
-                                    0
-                                ? _stockManagementList(
-                                    tittle: "Faulty Material Report",
-                                    ontap: () {
-                                      Get.offNamed(Routes.faultyMaterialReport);
-                                    })
-                                : Dimens.box0,
+                            // varUserAccessModel.value.access_list!
+                            //             .where((e) =>
+                            //                 e.feature_id ==
+                            //                     UserAccessConstants
+                            //                         .kplantstockrepFeatureId &&
+                            //                 e.view ==
+                            //                     UserAccessConstants
+                            //                         .kHaveViewAccess)
+                            //             .length >
+                            //         0
+                            //     ?
+                            _stockManagementList(
+                                tittle: "Plant Stock Report",
+                                ontap: () {
+                                  Get.toNamed(
+                                    Routes.plantStockReport,
+                                  );
+                                  //  controller.checkPoint();
+                                }),
+                            // : Dimens.box0,
+                            // varUserAccessModel.value.access_list!
+                            //             .where((e) =>
+                            //                 e.feature_id ==
+                            //                     UserAccessConstants
+                            //                         .kplantstockrepFeatureId &&
+                            //                 e.view ==
+                            //                     UserAccessConstants
+                            //                         .kHaveViewAccess)
+                            //             .length >
+                            //         0
+                            //     ?
+                            _stockManagementList(
+                                tittle: "Employee Stock Report",
+                                ontap: () {
+                                  Get.toNamed(Routes.employeeStockReport);
+                                }),
+                            // : Dimens.box0,
+                            // varUserAccessModel.value.access_list!
+                            //             .where((e) =>
+                            //                 e.feature_id ==
+                            //                     UserAccessConstants
+                            //                         .kplantstockrepFeatureId &&
+                            //                 e.view ==
+                            //                     UserAccessConstants
+                            //                         .kHaveViewAccess)
+                            //             .length >
+                            //         0
+                            //     ?
+                            _stockManagementList(
+                                tittle: "Transaction Report",
+                                ontap: () {
+                                  Get.toNamed(Routes.transactionReport);
+                                }),
+                            // : Dimens.box0,
+                            // varUserAccessModel.value.access_list!
+                            //             .where((e) =>
+                            //                 e.feature_id ==
+                            //                     UserAccessConstants
+                            //                         .kplantstockrepFeatureId &&
+                            //                 e.view ==
+                            //                     UserAccessConstants
+                            //                         .kHaveViewAccess)
+                            //             .length >
+                            //         0
+                            //     ?
+                            _stockManagementList(
+                                tittle: "Faulty Material Report",
+                                ontap: () {
+                                  Get.offNamed(Routes.faultyMaterialReport);
+                                })
+                            // : Dimens.box0,
                           ],
                         ),
                         Container(

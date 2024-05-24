@@ -21,7 +21,10 @@ class HeadingProfileAppBar extends GetView<HomeController> {
         () => Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            Text(title),
+            Text(
+              title,
+              overflow: TextOverflow.clip,
+            ),
             Spacer(),
             Card(
               elevation: 5,
