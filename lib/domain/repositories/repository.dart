@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
 import 'dart:typed_data';
+import 'package:cmms/domain/models/course_category_model.dart';
 import 'package:cmms/domain/models/dashboard_model.dart';
 import 'package:cmms/domain/models/dsm_list_model.dart';
 import 'package:cmms/domain/models/get_mc_task_equipment_model.dart';
@@ -13503,6 +13504,106 @@ class Repository {
     } catch (error) {
       print(error.toString());
       return Map();
+    }
+  }
+  //Course Category
+  //get
+  Future<List<CourseCategoryModel>> getCourseCategory({
+    required bool isLoading,
+    int? job_type_id,
+
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+
+      log(auth);
+      final res = await _dataRepository.getCourseCategory(
+        isLoading: isLoading,
+        auth: auth,
+      );
+      print('Course Category: ${res.data}');
+
+      if (!res.hasError) {
+        var Sourcetype = CourseCategoryModelFromJson(res.data);
+        return Sourcetype;
+
+      }
+      return [];
+    } catch (error) {
+      log(error.toString());
+      return [];
+    }
+  }
+
+
+  //create
+  Future<bool> createCourseCategory(
+      {bool? isLoading, CourseCategoryJsonString}) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.createCourseCategory(
+          auth: auth,
+          isLoading: isLoading,
+          CourseCategoryJsonString: CourseCategoryJsonString);
+
+      if (!res.hasError) {
+        return true;
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString(), ' createCheckListNumber');
+        return false;
+      }
+    } catch (error) {
+      print(error.toString());
+      return false;
+    }
+  }
+
+  //update
+  Future<bool> updateCourseCategory({
+    bool? isLoading,
+    CourseCategoryJsonString,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.updateCourseCategory(
+        auth: auth,
+        isLoading: isLoading,
+        CourseCategoryJsonString: CourseCategoryJsonString,
+      );
+      print(res.data);
+      if (!res.hasError) {
+        return true;
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString(), 'Update Course Category');
+        return false;
+      }
+    } catch (error) {
+      print(error.toString());
+      return false;
+    }
+  }
+
+  //delete
+  Future<void> deleteCourseCategory(
+      Object category_id, bool isLoading) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.deleteCourseCategory(
+        auth: auth,
+        category_id: category_id,
+        isLoading: isLoading,
+      );
+
+      if (!res.hasError) {
+        //get delete response back from API
+      } else {
+        Utility.showDialog(
+            res.errorCode.toString(), 'delete Course Category');
+      }
+    } catch (error) {
+      print(error.toString());
     }
   }
   //end

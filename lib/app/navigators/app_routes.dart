@@ -97,6 +97,8 @@ abstract class Routes {
   static const calibrationViewScreen = _Paths.calibrationViewScreen;
   static const mrsListScreen = _Paths.mrsListScreen;
   static const scheduleCourseList = _Paths.scheduleCourseList;
+  static const courseCategory = _Paths.courseCategory;
+  
   static const scheduleCourse = _Paths.scheduleCourse;
   static const executeCourse = _Paths.executeCourse;
 
@@ -253,6 +255,8 @@ abstract class _Paths {
   static const breakdown = '/breakdown-maintenance';
   static const misDashboard = '/misDashboard';
   static const scheduleCourseList = '/scheduleCourseList';
+  
+   static const courseCategory = '/courseCategory';
   static const scheduleCourse = '/scheduleCourse';
   static const executeCourse = '/execute-course';
 

@@ -8816,5 +8816,83 @@ class ConnectHelper {
     );
     return responseModel;
   }
+  //Course Category
+  //Get
+  Future<ResponseModel> getCourseCategory(
+      {required bool isLoading, required String auth}) async {
+    ResponseModel responseModel = await apiWrapper.makeRequest(
+      '',
+      Request.get,
+      null,
+      isLoading,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
+  //create
+  Future<ResponseModel> createCourseCategory({
+    required String auth,
+    bool? isLoading,
+    CourseCategoryJsonString,
+  }) async {
+    var responseModel =
+        // responseModel =
+        await apiWrapper.makeRequest(
+      '', 
+      Request.post,
+      CourseCategoryJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
+  //update
+  Future<ResponseModel> updateCourseCategory({
+    required String auth,
+    bool? isLoading,
+    CourseCategoryJsonString,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      '',
+      Request.post,
+      CourseCategoryJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
+  //delete
+  Future<ResponseModel> deleteCourseCategory({
+    required String auth,
+    bool? isLoading,
+    required category_id,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      '',
+      Request.delete,
+      null,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
   //end
 }

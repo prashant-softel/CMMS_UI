@@ -1,4 +1,4 @@
-//model
+
 import 'dart:convert';
 
 List<CourseCategoryModel> CourseCategoryModelFromJson(String str) => 
@@ -7,8 +7,8 @@ List<CourseCategoryModel> CourseCategoryModelFromJson(String str) =>
 String CourseCategoryModelToJson(List<CourseCategoryModel> data) => 
   json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
-class CourseCategoryModel {
-  CourseCategoryModel({
+class CourseCategoryModel{
+  CourseCategoryModel({ 
     this.id,
     this.name,
     this.description,
