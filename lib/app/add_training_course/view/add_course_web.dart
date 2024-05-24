@@ -72,6 +72,7 @@ class AddCourseWeb extends GetView<AddCourseController> {
                           ),
                           InkWell(
                             onTap: () {
+                              controller.clearStoreData();
                               Get.offNamed(Routes.trainingCourse);
                             },
                             child: Text(
@@ -616,48 +617,52 @@ class AddCourseWeb extends GetView<AddCourseController> {
           ],
         ),
       ),
-      floatingActionButton: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Spacer(),
-          controller.courseId.value == 0
-              ? Container(
-                  height: 35,
-                  child: CustomElevatedButton(
-                    backgroundColor: ColorValues.greenColor,
-                    text: 'Submit',
-                    onPressed: () {
-                      controller.isFormInvalid.value = false;
-                      controller.addCourse(fileIds: dropzoneController.fileIds);
-                      
-                    },
+      floatingActionButton: Obx(
+        () => Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Spacer(),
+            controller.courseId.value == 0
+                ? Container(
+                    height: 35,
+                    child: CustomElevatedButton(
+                      backgroundColor: ColorValues.greenColor,
+                      text: 'Submit',
+                      onPressed: () {
+                        controller.isFormInvalid.value = false;
+                        controller.addCourse(
+                            fileIds: dropzoneController.fileIds);
+                      },
+                    ),
+                  )
+                : Container(
+                    height: 35,
+                    child: CustomElevatedButton(
+                      backgroundColor: ColorValues.appDarkBlueColor,
+                      text: 'Update',
+                      onPressed: () {
+                        controller.isFormInvalid.value = false;
+                        controller.updateCourse(
+                            fileIds: dropzoneController.fileIds);
+                        // Get.toNamed(Routes.trainingCourse);
+                      },
+                    ),
                   ),
-                )
-              : Container(
-                  height: 35,
-                  child: CustomElevatedButton(
-                    backgroundColor: ColorValues.appDarkBlueColor,
-                    text: 'Update',
-                    onPressed: () {
-                      controller.isFormInvalid.value = false;
-                      // Get.toNamed(Routes.trainingCourse);
-                    },
-                  ),
-                ),
-          Dimens.boxWidth20,
-          Container(
-            height: 35,
-            child: CustomElevatedButton(
-              backgroundColor: ColorValues.redColor,
-              text: "Cancel",
-              onPressed: () {
-                controller.cleardata();
-                Get.back();
-              },
+            Dimens.boxWidth20,
+            Container(
+              height: 35,
+              child: CustomElevatedButton(
+                backgroundColor: ColorValues.redColor,
+                text: "Cancel",
+                onPressed: () {
+                  controller.cleardata();
+                  Get.back();
+                },
+              ),
             ),
-          ),
-          Spacer(),
-        ],
+            Spacer(),
+          ],
+        ),
       ),
     );
   }

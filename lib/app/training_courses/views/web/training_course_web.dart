@@ -3,6 +3,7 @@ import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/training_courses/training_course_controller.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
+import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/date_picker.dart';
 import 'package:cmms/domain/models/training_course_list_model.dart';
 import 'package:data_table_2/data_table_2.dart';
@@ -108,6 +109,31 @@ class _TrainingCourseWebState extends State<TrainingCourseWeb> {
                                             style: Styles.blackBold16,
                                           ),
                                           Spacer(),
+                                          Row(
+                                            children: [
+                                              CustomRichText(
+                                                  title: 'Date Range'),
+                                              Dimens.boxWidth10,
+                                              CustomTextFieldForStock(
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width /
+                                                    5,
+                                                numberTextField: true,
+                                                onTap: () {
+                                                  controller
+                                                          .openFromDateToStartDatePicker =
+                                                      !controller
+                                                          .openFromDateToStartDatePicker;
+                                                  controller.update(
+                                                      ['stock_Mangement_Date']);
+                                                },
+                                                hintText:
+                                                    '${controller.formattedFromdate.toString()} - ${controller.formattedTodate.toString()}',
+                                              ),
+                                            ],
+                                          ),
+                                          Dimens.boxWidth10,
                                           Container(
                                             margin: EdgeInsets.only(right: 10),
                                             height: 30,
@@ -215,9 +241,10 @@ class _TrainingCourseWebState extends State<TrainingCourseWeb> {
                                           child: TextField(
                                             style: GoogleFonts.lato(
                                               textStyle: TextStyle(
-                                                  fontSize: 16.0,
-                                                  height: 1.0,
-                                                  color: Colors.black),
+                                                fontSize: 16.0,
+                                                height: 1.0,
+                                                color: Colors.black,
+                                              ),
                                             ),
                                             onChanged: (value) {
                                               controller.search(value);
@@ -272,6 +299,7 @@ class _TrainingCourseWebState extends State<TrainingCourseWeb> {
                                                       dataRowHeight: 45,
                                                       source: dataSource,
                                                       minWidth: Get.width * 2,
+                                                      showCheckboxColumn: false,
                                                       rowsPerPage: 10,
                                                       availableRowsPerPage: [
                                                         10,
@@ -284,14 +312,20 @@ class _TrainingCourseWebState extends State<TrainingCourseWeb> {
                                                             in value.entries)
                                                           if (entry.value)
                                                             buildDataColumn(
-                                                                entry.key,
-                                                                controller
-                                                                        .filterText[
-                                                                    entry.key]!
-                                                                // controller
-                                                                //         .columnwidth[
-                                                                //     entry.key],
-                                                                ),
+                                                              entry.key,
+                                                              controller
+                                                                      .filterText[
+                                                                  entry.key]!,
+                                                              controller
+                                                                      .columnwidth[
+                                                                  entry.key],
+                                                            ),
+                                                        buildDataColumn(
+                                                          'Actions',
+                                                          controller
+                                                              .ActionFilterText,
+                                                          200,
+                                                        ),
                                                       ],
                                                     );
                                                   },
@@ -316,17 +350,14 @@ class _TrainingCourseWebState extends State<TrainingCourseWeb> {
                           todayCellDecoration: BoxDecoration(
                               shape: BoxShape.circle,
                               color: ColorValues.appDarkBlueColor),
-                        ), // last date of this year
-                        // controller: DateRangePickerController(),
+                        ),
                         initialSelectedRange: PickerDateRange(
                           controller.fromDate.value,
                           controller.toDate.value,
                         ),
-
                         onSubmit: (value) {
                           print('po valu ${value.toString()}');
                           PickerDateRange? data = value as PickerDateRange;
-
                           var pickUpDate =
                               DateTime.parse(data.startDate.toString());
                           controller.fromDate.value = pickUpDate;
@@ -339,10 +370,6 @@ class _TrainingCourseWebState extends State<TrainingCourseWeb> {
                           controller.openFromDateToStartDatePicker =
                               !controller.openFromDateToStartDatePicker;
                           controller.update(['stock_Mangement_Date']);
-
-                          // Get.toNamed(
-                          //   Routes.stockManagementGoodsOrdersScreen,
-                          // );
                         },
                       ),
                     ),
@@ -359,43 +386,43 @@ class _TrainingCourseWebState extends State<TrainingCourseWeb> {
 DataColumn2 buildDataColumn(
   String header,
   RxString filterText,
-  // double? fixedWidth,
+  double? fixedWidth,
 ) {
   return DataColumn2(
-    // fixedWidth: fixedWidth,
+    fixedWidth: fixedWidth,
     label: Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        SizedBox(
-          height: Get.height * 0.05,
-          child: TextField(
-            style: GoogleFonts.lato(
-              textStyle:
-                  TextStyle(fontSize: 16.0, height: 1.0, color: Colors.black),
-            ),
-            onChanged: (value) {
-              filterText.value = value;
-              //   onSearchCallBack(value);
-            },
-            textAlign: TextAlign.left,
-            decoration: InputDecoration(
-              hintText: 'Filter',
-              contentPadding: EdgeInsets.fromLTRB(5, 0, 5, 0),
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(5),
-                borderSide: BorderSide(color: Colors.black),
-              ),
-              focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(5),
-                borderSide: BorderSide(color: Colors.black),
-              ),
-              enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(5),
-                borderSide: BorderSide(color: Colors.black),
-              ),
-            ),
-          ),
-        ),
+        // SizedBox(
+        //   height: Get.height * 0.05,
+        //   child: TextField(
+        //     style: GoogleFonts.lato(
+        //       textStyle:
+        //           TextStyle(fontSize: 16.0, height: 1.0, color: Colors.black),
+        //     ),
+        //     onChanged: (value) {
+        //       filterText.value = value;
+        //       //   onSearchCallBack(value);
+        //     },
+        //     textAlign: TextAlign.left,
+        //     decoration: InputDecoration(
+        //       hintText: 'Filter',
+        //       contentPadding: EdgeInsets.fromLTRB(5, 0, 5, 0),
+        //       border: OutlineInputBorder(
+        //         borderRadius: BorderRadius.circular(5),
+        //         borderSide: BorderSide(color: Colors.black),
+        //       ),
+        //       focusedBorder: OutlineInputBorder(
+        //         borderRadius: BorderRadius.circular(5),
+        //         borderSide: BorderSide(color: Colors.black),
+        //       ),
+        //       enabledBorder: OutlineInputBorder(
+        //         borderRadius: BorderRadius.circular(5),
+        //         borderSide: BorderSide(color: Colors.black),
+        //       ),
+        //     ),
+        //   ),
+        // ),
         Align(
           alignment: Alignment.centerLeft,
           child: Text(
@@ -428,12 +455,10 @@ class TrainingListDataSource extends DataTableSource {
               .toString()
               .toLowerCase()
               .contains(controller.CourseNameFilterText.value.toLowerCase()) &&
-          (TrainingCourse?.categoryName ?? '')
+          (TrainingCourse?.categoryId ?? '').toString().toLowerCase().contains(
+              controller.CategoryNameFilterText.value.toLowerCase()) &&
+          (TrainingCourse?.groupId ?? '')
               .toString()
-              .toLowerCase()
-              .contains(
-                  controller.CategoryNameFilterText.value.toLowerCase()) &&
-          (TrainingCourse?.groupName ?? '')
               .toLowerCase()
               .contains(controller.GroupNameFilterText.value.toLowerCase()) &&
           (TrainingCourse?.number_of_days ?? '')
@@ -444,11 +469,11 @@ class TrainingListDataSource extends DataTableSource {
           (TrainingCourse?.duration ?? '').toString().toLowerCase().contains(
               controller.DurationInMinutesFilterText.value.toLowerCase()) &&
           (TrainingCourse?.max_cap ?? '').toString().toLowerCase().contains(
-              controller.MaximumCapacityFilterText.value.toLowerCase()) &&
-          (TrainingCourse?.description ?? '')
-              .toString()
-              .toLowerCase()
-              .contains(controller.DescriptionFilterText.value.toLowerCase());
+              controller.MaximumCapacityFilterText.value.toLowerCase());
+      // (TrainingCourse?.description ?? '')
+      //     .toString()
+      //     .toLowerCase()
+      //     .contains(controller.DescriptionFilterText.value.toLowerCase());
     }).toList();
   }
 
@@ -458,12 +483,12 @@ class TrainingListDataSource extends DataTableSource {
     var cellsBuffer = [
       "id",
       '${TrainingCourse?.name ?? ''}',
-      '${TrainingCourse?.groupName ?? ''}',
-      '${TrainingCourse?.categoryName ?? ''}',
+      '${TrainingCourse?.groupId ?? ''}',
+      '${TrainingCourse?.categoryId ?? ''}',
       '${TrainingCourse?.number_of_days ?? 0}',
       '${TrainingCourse?.duration ?? 0}',
       '${TrainingCourse?.max_cap ?? ''}',
-      '${TrainingCourse?.description ?? ''}',
+      // '${TrainingCourse?.description ?? ''}',
       'Actions',
     ];
     var cells = [];
@@ -528,8 +553,7 @@ class TrainingListDataSource extends DataTableSource {
                                     onPress: () {
                                       controller.isDeleteDialog(
                                         courseName: TrainingCourse?.name,
-                                        courseId:
-                                            TrainingCourse?.id,
+                                        courseId: TrainingCourse?.id,
                                       );
                                     },
                                   ),

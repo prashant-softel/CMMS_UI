@@ -37,10 +37,21 @@ class TrainingController extends GetxController {
     "Category Name": true,
     "Group Name": true,
     "Number Of Days": true,
-    "Duration In Minutes": true,
+    "Duration": true,
     "Maximum Capacity": true,
-    "Description": true,
+    // "Description": true,
   });
+
+  final Map<String, double> columnwidth = {
+    "Course ID": 110,
+    "Course Name": 180,
+    "Category Name": 190,
+    "Group Name": 170,
+    "Number Of Days": 200,
+    "Duration": 130,
+    "Maximum Capacity": 230,
+    // "Description": 100,
+  };
 
   bool openFromDateToStartDatePicker = false;
   RxString CourseIdFilterText = ''.obs;
@@ -50,7 +61,7 @@ class TrainingController extends GetxController {
   RxString NumberOfDaysFilterText = ''.obs;
   RxString DurationInMinutesFilterText = ''.obs;
   RxString MaximumCapacityFilterText = ''.obs;
-  RxString DescriptionFilterText = ''.obs;
+  // RxString DescriptionFilterText = ''.obs;
   RxString ActionFilterText = ''.obs;
 
   Rx<DateTime> startDate = DateTime.now().obs;
@@ -89,9 +100,9 @@ class TrainingController extends GetxController {
         "Category Name": CategoryNameFilterText,
         "Group Name": GroupNameFilterText,
         "Number Of Days": NumberOfDaysFilterText,
-        "Duration In Minutes": DurationInMinutesFilterText,
+        "Duration": DurationInMinutesFilterText,
         "Maximum Capacity": MaximumCapacityFilterText,
-        "Description": DescriptionFilterText,
+        // "Description": DescriptionFilterText,
       };
 
       facilityIdStreamSubscription = homeController.facilityId$.listen(
@@ -128,11 +139,11 @@ class TrainingController extends GetxController {
                         keyword.toLowerCase(),
                       ) ??
                   false) ||
-              (item?.groupName?.toString().toLowerCase().contains(
+              (item?.groupId?.toString().toLowerCase().contains(
                         keyword.toLowerCase(),
                       ) ??
                   false) ||
-              (item?.categoryName?.toString().toLowerCase().contains(
+              (item?.categoryId?.toString().toLowerCase().contains(
                         keyword.toLowerCase(),
                       ) ??
                   false) ||

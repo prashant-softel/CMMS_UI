@@ -64,6 +64,15 @@ class CourseUsecase {
         isLoading: isLoading,
       );
 
+  Future<TrainingCourseListModel> getCourseDetails({
+    int? courseId,
+    bool? isLoading,
+  }) async =>
+      await repository.getCourseDetails(
+        courseId: courseId,
+        isLoading: isLoading,
+      );
+
   deleteTrainingCourse({
     int? courseId,
     required bool isLoading,
