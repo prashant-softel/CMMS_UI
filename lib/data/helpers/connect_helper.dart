@@ -8822,7 +8822,7 @@ class ConnectHelper {
   }) async {
     var responseModel = await apiWrapper.makeRequest(
       'Training/UpdateCourse',
-      Request.put,
+      Request.patch,
       courseJson,
       isLoading ?? false,
       {
@@ -8860,6 +8860,23 @@ class ConnectHelper {
   }) async {
     var responseModel = await apiWrapper.makeRequest(
       'Training/GetCourseList?facility_id=$facilityId&start_date=$startDate&end_date=$endDate',
+      Request.get,
+      null,
+      isLoading ?? true,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
+  Future<ResponseModel> getCourseDetails({
+    required String auth,
+    int? courseId,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Training/GetCourseDetailById?id=$courseId',
       Request.get,
       null,
       isLoading ?? true,

@@ -13497,7 +13497,7 @@ class Repository {
       print('Add Course Response: ${resourceData}');
       if (!res.hasError) {
         Fluttertoast.showToast(
-          msg: " paln  Add Successfully...",
+          msg: "Course Add Successfully",
           fontSize: 16.0,
         );
         Get.offNamed(
@@ -13528,7 +13528,7 @@ class Repository {
       print('Add Course Response: ${resourceData}');
       if (!res.hasError) {
         Fluttertoast.showToast(
-          msg: " paln  Add Successfully...",
+          msg: "Course Updated Successfully",
           fontSize: 16.0,
         );
         Get.offNamed(
@@ -13579,10 +13579,14 @@ class Repository {
       );
       print('Get Training Course List: ${res.data}');
       if (!res.hasError) {
-        final String jsonTrainingCourseListModels = res.data;
+        final jsonTrainingCourseListModels = jsonDecode(res.data);
         final List<TrainingCourseListModel> _trainingList =
-            trainingCourseListFromJson(jsonTrainingCourseListModels);
-        return _trainingList.reversed.toList();
+            jsonTrainingCourseListModels
+                .map<TrainingCourseListModel>((m) =>
+                    TrainingCourseListModel.fromJson(
+                        Map<String, dynamic>.from(m)))
+                .toList();
+        return _trainingList;
       } else {
         Utility.showDialog(res.errorCode.toString(), 'getTrainingCourseList');
         return [];
@@ -13590,6 +13594,43 @@ class Repository {
     } catch (error) {
       print(error.toString());
       return [];
+    }
+  }
+
+  Future<TrainingCourseListModel> getCourseDetails({
+    int? courseId,
+    bool? isLoading,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      log(auth);
+      final res = await _dataRepository.getCourseDetails(
+        auth: auth,
+        courseId: courseId,
+        isLoading: isLoading,
+      );
+      print('Get Training Course List: ${res.data}');
+      if (!res.hasError) {
+        final jsonTrainingCourseListModels = jsonDecode(res.data);
+        final List<TrainingCourseListModel> _trainingList =
+            jsonTrainingCourseListModels
+                .map<TrainingCourseListModel>(
+                  (m) => TrainingCourseListModel.fromJson(
+                    Map<String, dynamic>.from(m),
+                  ),
+                )
+                .toList();
+        final TrainingCourseListModel _training =
+            _trainingList.firstWhere((element) => courseId == element.id);
+        print(_training);
+        return _training;
+      } else {
+        Utility.showDialog(res.errorCode.toString(), 'getTrainingCourseList');
+        return TrainingCourseListModel();
+      }
+    } catch (error) {
+      print(error.toString());
+      return TrainingCourseListModel();
     }
   }
 

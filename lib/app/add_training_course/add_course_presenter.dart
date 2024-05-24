@@ -1,4 +1,5 @@
 import 'package:cmms/domain/models/facility_model.dart';
+import 'package:cmms/domain/models/training_course_list_model.dart';
 import 'package:cmms/domain/usecases/course_usecase.dart';
 
 class AddCoursePresenter {
@@ -24,6 +25,16 @@ class AddCoursePresenter {
       isLoading: isLoading,
     );
   }
+
+  Future<TrainingCourseListModel> getCourseDetails({
+    int? courseId,
+    bool? isLoading,
+  }) async =>
+      await trainingUsecase.getCourseDetails(
+        courseId: courseId,
+        isLoading: isLoading,
+      );
+
 
   void saveValue({String? courseId}) async {
     return trainingUsecase.saveValue(courseId: courseId);

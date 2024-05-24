@@ -20,7 +20,7 @@ class TrainingCourseListModel {
   int? facilityId;
   int? categoryId;
   String? categoryName;
-  String? groupId;
+  int? groupId;
   String? groupName;
   int? number_of_days;
   int? duration;

@@ -5122,6 +5122,17 @@ class DataRepository extends DomainRepository {
         endDate: endDate,
       );
 
+  Future<ResponseModel> getCourseDetails({
+    required String auth,
+    int? courseId,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.getCourseDetails(
+        auth: auth,
+        courseId: courseId,
+        isLoading: isLoading,
+      );
+
   //Course category
   //get
   Future<ResponseModel> getCourseCategory({
