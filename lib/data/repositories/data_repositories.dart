@@ -5122,8 +5122,8 @@ class DataRepository extends DomainRepository {
         endDate: endDate,
       );
 
-       //Course category
-       //get
+  //Course category
+  //get
   Future<ResponseModel> getCourseCategory({
     required bool isLoading,
     required String auth,
@@ -5171,7 +5171,6 @@ class DataRepository extends DomainRepository {
         auth: auth, isLoading: isLoading, category_id: category_id);
     return response;
   }
-
 
 //end
 }

@@ -7360,14 +7360,13 @@ class ConnectHelper {
 
   Future<ResponseModel> ClosePMTaskExecution({
     required String auth,
-    ClosePMTaskExecutionJsonString,
+    required ClosePMTaskExecutionJsonString,
     bool? isLoading,
+    int? jobId,
   }) async {
-    // facilityId = 45;
     var responseModel = await apiWrapper.makeRequest(
       'PMScheduleView/ClosePMTaskExecution',
       Request.put,
-      // {'comment': "$comment", 'id': id},
       ClosePMTaskExecutionJsonString,
       isLoading ?? true,
       {
@@ -7377,7 +7376,6 @@ class ConnectHelper {
     );
     var res = responseModel.data;
     var parsedJson = json.decode(res);
-    // Get.dialog<void>(PermitMessageCloseDialog(data: parsedJson['message']));
 
     return responseModel;
   }
@@ -8871,6 +8869,7 @@ class ConnectHelper {
     );
     return responseModel;
   }
+
   //Course Category
   //Get
   Future<ResponseModel> getCourseCategory(
@@ -8896,7 +8895,7 @@ class ConnectHelper {
     var responseModel =
         // responseModel =
         await apiWrapper.makeRequest(
-      '', 
+      '',
       Request.post,
       CourseCategoryJsonString,
       isLoading ?? false,
