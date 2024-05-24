@@ -1,19 +1,21 @@
-import 'package:cmms/app/schedule_course/schedule_course_controller.dart';
-import 'package:cmms/app/schedule_course/schedule_course_presenter.dart';
-import 'package:cmms/domain/usecases/course_usecase.dart';
+import 'package:cmms/app/Course_Category/course_category_controller.dart';
+import 'package:cmms/app/course_category/course_category_presenter.dart';
+import 'package:cmms/domain/usecases/course_category_usecase.dart';
 import 'package:get/get.dart';
 import '../../domain/usecases/home_usecase.dart';
 import '../home/home_controller.dart';
 import '../home/home_presenter.dart';
 
-class ScheduleBinding extends Bindings {
+class CourseCategoryBinding extends Bindings {
   @override
   void dependencies() {
-    Get.lazyPut<ScheduleController>(
-      () => ScheduleController(
-        SchedulePresenter(
-          CourseUsecase(
-            Get.find(),
+    Get.lazyPut(
+      () => CourseCategoryController(
+        Get.put(
+          CourseCategoryPresenter(
+            CourseCategoryUsecase(
+              Get.find(),
+            ),
           ),
         ),
       ),

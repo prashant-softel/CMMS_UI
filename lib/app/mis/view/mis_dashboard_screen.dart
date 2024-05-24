@@ -422,11 +422,11 @@ class MisDashboardScreen extends GetView<MisDashboardController> {
                                         onTap: () {
                                           controller.goToScheduleCourseList();
                                         }),
-                                        // createContentTile(
-                                        // title: "Course Category",
-                                        // onTap: () {
-                                        //   controller.goToCourseCategory();
-                                        // })
+                                        createContentTile(
+                                        title: "Course Category",
+                                        onTap: () {
+                                          controller.goToCourseCategory();
+                                        })
                                   ],
                                 ),
                                 Container(

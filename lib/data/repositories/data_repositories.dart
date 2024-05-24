@@ -5083,5 +5083,56 @@ class DataRepository extends DomainRepository {
         isLoading: isLoading ?? false,
       );
 
+       //Course category
+       //get
+  Future<ResponseModel> getCourseCategory({
+    required bool isLoading,
+    required String auth,
+  }) async {
+    return await connectHelper.getCourseCategory(
+      isLoading: isLoading,
+      auth: auth,
+    );
+  }
+
+  //create
+  Future<ResponseModel> createCourseCategory({
+    auth,
+    bool? isLoading,
+    CourseCategoryJsonString,
+  }) async {
+    var response = await connectHelper.createCourseCategory(
+        auth: auth,
+        isLoading: isLoading,
+        CourseCategoryJsonString: CourseCategoryJsonString);
+    return response;
+  }
+
+  //update
+  Future<ResponseModel> updateCourseCategory({
+    auth,
+    bool? isLoading,
+    CourseCategoryJsonString,
+  }) async {
+    var response = await connectHelper.updateCourseCategory(
+      auth: auth,
+      isLoading: isLoading,
+      CourseCategoryJsonString: CourseCategoryJsonString,
+    );
+    return response;
+  }
+
+  //delete
+  Future<ResponseModel> deleteCourseCategory({
+    auth,
+    bool? isLoading,
+    category_id,
+  }) async {
+    var response = await connectHelper.deleteCourseCategory(
+        auth: auth, isLoading: isLoading, category_id: category_id);
+    return response;
+  }
+
+
 //end
 }
