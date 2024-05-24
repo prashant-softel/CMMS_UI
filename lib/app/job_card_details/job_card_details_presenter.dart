@@ -162,10 +162,12 @@ class JobCardDetailsPresenter {
 
   Future<bool> approvecloseJob({
     approveJsonString,
+    closePtwJsonString,
     required bool isLoading,
   }) async {
     return jobCardDetailsUsecase.approvecloseJob(
       approveJsonString: approveJsonString,
+      closePtwJsonString: closePtwJsonString,
       isLoading: isLoading,
     );
   }

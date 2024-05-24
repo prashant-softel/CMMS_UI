@@ -143,10 +143,13 @@ class JobCardDetailsUsecase {
           rejectJsonString: rejectJsonString, isLoading: isLoading);
   Future<bool> approvecloseJob({
     approveJsonString,
+    closePtwJsonString,
     bool? isLoading,
   }) async =>
       await repository.approvecloseJob(
-          approveJsonString: approveJsonString, isLoading: isLoading);
+          approveJsonString: approveJsonString,
+          closePtwJsonString: closePtwJsonString,
+          isLoading: isLoading);
 
   ///
   Future<bool> rejectcloseJob({
