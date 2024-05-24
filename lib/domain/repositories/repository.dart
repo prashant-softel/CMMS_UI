@@ -80,6 +80,7 @@ import 'package:cmms/domain/models/source_of_obs_list_model.dart';
 import 'package:cmms/domain/models/stock_management_update_goods_orders_model.dart';
 import 'package:cmms/domain/models/supplier_name_model.dart';
 import 'package:cmms/domain/models/tools_model.dart';
+import 'package:cmms/domain/models/training_course_list_model.dart';
 import 'package:cmms/domain/models/transaction_report_list_model.dart';
 import 'package:cmms/domain/models/type_of_obs_list_model.dart';
 import 'package:cmms/domain/models/type_of_waste_model.dart';
@@ -11623,7 +11624,7 @@ class Repository {
   }
 
   Future<bool> ClosePMTaskExecution(
-      {bool? isLoading, closetoJsonString}) async {
+      {bool? isLoading, closetoJsonString, closePtwJsonString}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       log(auth);
@@ -11631,10 +11632,11 @@ class Repository {
           auth: auth,
           isLoading: isLoading,
           ClosePMTaskExecutionJsonString: json.encode(closetoJsonString));
+
       print({"res.data", res.data});
       if (!res.hasError) {
         Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
-
+        permitCloseButton(closePtwJsonString, isLoading, 0);
         return true;
       } else {
         Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
@@ -13506,12 +13508,93 @@ class Repository {
       return Map();
     }
   }
+
+  Future<Map<String, dynamic>> updateCourse({
+    courseJson,
+    isLoading,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.updateCourse(
+        auth: auth,
+        courseJson: courseJson,
+        isLoading: isLoading ?? false,
+      );
+      var resourceData = res.data;
+      print('Add Course Response: ${resourceData}');
+      if (!res.hasError) {
+        Fluttertoast.showToast(
+          msg: " paln  Add Successfully...",
+          fontSize: 16.0,
+        );
+        Get.offNamed(
+          Routes.trainingCourse,
+        );
+      } else {
+        Utility.showDialog(res.errorCode.toString(), 'Add Course');
+      }
+      return Map();
+    } catch (error) {
+      print(error.toString());
+      return Map();
+    }
+  }
+
+  Future<void> deleteTrainingCourse({int? courseId, bool? isLoading}) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.deleteTrainingCourse(
+        auth: auth,
+        courseId: courseId,
+        isLoading: isLoading,
+      );
+      if (!res.hasError) {
+      } else {
+        Utility.showDialog(res.errorCode.toString(), 'delete course');
+      }
+    } catch (error) {
+      print(error.toString());
+    }
+  }
+
+  Future<List<TrainingCourseListModel>> getTrainingCourseList({
+    int? facility_id,
+    String? start_date,
+    String? end_date,
+    bool? isLoading,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      log(auth);
+      final res = await _dataRepository.getTrainingCourseList(
+        auth: auth,
+        facilityId: facility_id,
+        startDate: start_date,
+        endDate: end_date,
+        isLoading: isLoading,
+      );
+      print('Get Training Course List: ${res.data}');
+      if (!res.hasError) {
+        final String jsonTrainingCourseListModels = res.data;
+        final List<TrainingCourseListModel> _trainingList =
+            trainingCourseListFromJson(jsonTrainingCourseListModels);
+        return _trainingList.reversed.toList();
+      } else {
+        Utility.showDialog(res.errorCode.toString(), 'getTrainingCourseList');
+        return [];
+      }
+    } catch (error) {
+      print(error.toString());
+      return [];
+    }
+  }
+
+
   //Course Category
   //get
   Future<List<CourseCategoryModel>> getCourseCategory({
     required bool isLoading,
     int? job_type_id,
-
   }) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
@@ -13526,7 +13609,6 @@ class Repository {
       if (!res.hasError) {
         var Sourcetype = CourseCategoryModelFromJson(res.data);
         return Sourcetype;
-
       }
       return [];
     } catch (error) {
@@ -13534,7 +13616,6 @@ class Repository {
       return [];
     }
   }
-
 
   //create
   Future<bool> createCourseCategory(
@@ -13586,8 +13667,7 @@ class Repository {
   }
 
   //delete
-  Future<void> deleteCourseCategory(
-      Object category_id, bool isLoading) async {
+  Future<void> deleteCourseCategory(Object category_id, bool isLoading) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.deleteCourseCategory(
@@ -13599,8 +13679,7 @@ class Repository {
       if (!res.hasError) {
         //get delete response back from API
       } else {
-        Utility.showDialog(
-            res.errorCode.toString(), 'delete Course Category');
+        Utility.showDialog(res.errorCode.toString(), 'delete Course Category');
       }
     } catch (error) {
       print(error.toString());

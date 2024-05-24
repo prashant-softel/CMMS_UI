@@ -1687,6 +1687,10 @@ class NewPermitController extends GetxController {
   ///Update New Permit
   void updateNewPermit({List<dynamic>? fileIds}) async {
     {
+      checkForm();
+      if (isFormInvalid.value) {
+        return;
+      }
       String _description =
           htmlEscape.convert(permitDescriptionCtrlr.text.trim());
       String _title = htmlEscape.convert(titleTextCtrlr.text.trim());

@@ -7360,14 +7360,13 @@ class ConnectHelper {
 
   Future<ResponseModel> ClosePMTaskExecution({
     required String auth,
-    ClosePMTaskExecutionJsonString,
+    required ClosePMTaskExecutionJsonString,
     bool? isLoading,
+    int? jobId,
   }) async {
-    // facilityId = 45;
     var responseModel = await apiWrapper.makeRequest(
       'PMScheduleView/ClosePMTaskExecution',
       Request.put,
-      // {'comment': "$comment", 'id': id},
       ClosePMTaskExecutionJsonString,
       isLoading ?? true,
       {
@@ -7377,7 +7376,6 @@ class ConnectHelper {
     );
     var res = responseModel.data;
     var parsedJson = json.decode(res);
-    // Get.dialog<void>(PermitMessageCloseDialog(data: parsedJson['message']));
 
     return responseModel;
   }
@@ -8805,7 +8803,7 @@ class ConnectHelper {
     isLoading,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
-      '',
+      'Training/CreateTrainingCourse',
       Request.post,
       courseJson,
       isLoading ?? false,
@@ -8816,6 +8814,62 @@ class ConnectHelper {
     );
     return responseModel;
   }
+
+  Future<ResponseModel> updateCourse({
+    auth,
+    courseJson,
+    isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Training/UpdateCourse',
+      Request.put,
+      courseJson,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
+  Future<ResponseModel> deleteTrainingCourse({
+    required String auth,
+    int? courseId,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Training/DeleteCourse?id=$courseId',
+      Request.delete,
+      courseId,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
+  Future<ResponseModel> getTrainingCourseList({
+    required String auth,
+    int? facilityId,
+    dynamic startDate,
+    dynamic endDate,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Training/GetCourseList?facility_id=$facilityId&start_date=$startDate&end_date=$endDate',
+      Request.get,
+      null,
+      isLoading ?? true,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
   //Course Category
   //Get
   Future<ResponseModel> getCourseCategory(
@@ -8841,7 +8895,7 @@ class ConnectHelper {
     var responseModel =
         // responseModel =
         await apiWrapper.makeRequest(
-      '', 
+      '',
       Request.post,
       CourseCategoryJsonString,
       isLoading ?? false,

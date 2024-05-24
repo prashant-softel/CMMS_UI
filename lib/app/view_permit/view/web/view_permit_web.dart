@@ -232,14 +232,20 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                                       style: Styles.grey15,
                                     ),
                                     GestureDetector(
-                                      onTap: () {
+                                      onTap: () async {
                                         String pdfUrl =
-                                            "assets/files/ptwsop.pdf";
-                                        String pdfPath =
-                                            html.window.location.origin +
-                                                '/' +
-                                                pdfUrl;
-                                        html.window.open(pdfPath, '_blank');
+                                            'http://65.0.20.19/CMMS_API/Upload/1779/0/0/Ptw%20sop%20file%20pdf.pdf';
+                                        // "http://172.20.43.9:83/Upload/1/0/0/Ptw%20sop%20file%20pdf.pdf";
+                                        // String pdfPath =
+                                        //     html.window.location.origin +
+                                        //         '/' +
+                                        //         pdfUrl;
+                                        // html.window.open(pdfPath, '_blank');
+                                        if (await canLaunch(pdfUrl)) {
+                                          await launch(pdfUrl);
+                                        } else {
+                                          throw 'Could not launch $pdfUrl';
+                                        }
                                       },
                                       child: Image.asset(
                                         'assets/files/pdf2.png',
@@ -3125,7 +3131,23 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                             )),
                       )
                     : Dimens.box0,
-
+                Padding(
+                  padding: const EdgeInsets.only(left: 5),
+                  child: Container(
+                      height: 45,
+                      child: CustomElevatedButton(
+                        backgroundColor: ColorValues.appcloseRedColor,
+                        text: "Close Permit",
+                        icon: Icons.close,
+                        onPressed: () {
+                          Get.dialog(PermitCloseDialog(
+                            permitId:
+                                '${controller.viewPermitDetailsModel.value?.permitNo}',
+                            jobId: controller.jobId.value,
+                          ));
+                        },
+                      )),
+                ),
                 // Dimens.boxWidth5,
 
                 ///Reject Button

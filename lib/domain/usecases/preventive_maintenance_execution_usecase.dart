@@ -45,10 +45,13 @@ class PreventiveMaintenanceExecutionUsecase {
       );
   Future<bool> closePmTaskExecution({
     closetoJsonString,
+    closePtwJsonString,
     bool? isLoading,
   }) async =>
       await repository.ClosePMTaskExecution(
-          closetoJsonString: closetoJsonString, isLoading: isLoading);
+          closetoJsonString: closetoJsonString,
+          closePtwJsonString: closePtwJsonString,
+          isLoading: isLoading);
   Future<bool> UpdatePMTaskExecution({
     updatePMTaskExecutionJsonString,
     bool? isLoading,

@@ -5,7 +5,7 @@ class AddCoursePresenter {
   AddCoursePresenter(this.trainingUsecase);
   CourseUsecase trainingUsecase;
 
-  Future<Map<String,dynamic>> addCourse({
+  Future<Map<String, dynamic>> addCourse({
     courseJson,
     isLoading,
   }) async {
@@ -14,15 +14,16 @@ class AddCoursePresenter {
       isLoading: isLoading,
     );
   }
-  // Future<Map<String, dynamic>> addCourse({
-  //   courseJson,
-  //   isLoading,
-  // }) async {
-  //   return await trainingUsecase.addCourse(
-  //     courseJson: courseJson,
-  //     isLoading: isLoading,
-  //   );
-  // }
+
+  Future<Map<String, dynamic>> updateCourse({
+    courseJson,
+    isLoading,
+  }) async {
+    return await trainingUsecase.updateCourse(
+      courseJson: courseJson,
+      isLoading: isLoading,
+    );
+  }
 
   void saveValue({String? courseId}) async {
     return trainingUsecase.saveValue(courseId: courseId);

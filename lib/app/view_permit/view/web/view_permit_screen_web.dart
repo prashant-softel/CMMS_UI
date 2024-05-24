@@ -597,7 +597,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                                     // / PAGINATION
                                                                     Padding(
                                                                       padding: const EdgeInsets
-                                                                              .symmetric(
+                                                                          .symmetric(
                                                                           horizontal:
                                                                               25),
                                                                       child: ValueListenableBuilder(
@@ -814,8 +814,10 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
 
                                                                       /// PAGINATION
                                                                       Padding(
-                                                                        padding:
-                                                                            const EdgeInsets.symmetric(horizontal: 25),
+                                                                        padding: const EdgeInsets
+                                                                            .symmetric(
+                                                                            horizontal:
+                                                                                25),
                                                                         child: ValueListenableBuilder(
                                                                             valueListenable: controller.employeeNamepaginationController,
                                                                             builder: (context, value, child) {
@@ -1090,7 +1092,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                             Padding(
                                                               padding:
                                                                   const EdgeInsets
-                                                                          .only(
+                                                                      .only(
                                                                       right:
                                                                           250),
                                                               child: CustomRichText(
@@ -2680,7 +2682,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                       Padding(
                                                         padding:
                                                             const EdgeInsets
-                                                                    .only(
+                                                                .only(
                                                                 left: 10,
                                                                 right: 10,
                                                                 top: 10),
@@ -2952,7 +2954,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                         Padding(
                                                           padding:
                                                               const EdgeInsets
-                                                                      .only(
+                                                                  .only(
                                                                   left: 10,
                                                                   right: 10),
                                                           child: Row(
@@ -3009,7 +3011,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                               Padding(
                                                                 padding:
                                                                     const EdgeInsets
-                                                                            .only(
+                                                                        .only(
                                                                         right:
                                                                             450),
                                                                 child: Column(
@@ -3071,7 +3073,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                               Padding(
                                                                 padding:
                                                                     const EdgeInsets
-                                                                            .all(
+                                                                        .all(
                                                                         10.0),
                                                                 child: Row(
                                                                   children: [
@@ -3217,7 +3219,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                               Padding(
                                                                 padding:
                                                                     const EdgeInsets
-                                                                            .only(
+                                                                        .only(
                                                                         left:
                                                                             10,
                                                                         right:
@@ -3387,7 +3389,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                               Padding(
                                                                 padding:
                                                                     const EdgeInsets
-                                                                            .only(
+                                                                        .only(
                                                                         left:
                                                                             10,
                                                                         right:
@@ -3550,7 +3552,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                               Padding(
                                                                 padding:
                                                                     const EdgeInsets
-                                                                            .only(
+                                                                        .only(
                                                                         left:
                                                                             10,
                                                                         right:
