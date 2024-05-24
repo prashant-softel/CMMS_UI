@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:cmms/app/home/home_controller.dart';
 import 'package:cmms/app/utils/app_constants.dart';
+import 'package:cmms/domain/models/close_permit_model.dart';
 import 'package:cmms/domain/models/employee_model.dart';
 import 'package:cmms/domain/models/mrs_list_by_jobId.dart';
 import 'package:cmms/domain/models/permit_details_model.dart';
@@ -633,6 +634,7 @@ class JobCardDetailsController extends GetxController {
     for (EmployeeModel employee in selectedEmployeeList ?? []) {
       _employeeId = employee.id ?? 0;
     }
+
     var _comment = descriptionOfWorkDoneCtrlr.text.trim();
 
     var jobCard = {
@@ -803,14 +805,17 @@ class JobCardDetailsController extends GetxController {
   void approvecloseJob() async {
     {
       String _comment = approveCommentTextFieldCtrlr.text.trim();
-
+      int ptwId = jobCardDetailsModel.value?.ptwId ?? 0;
       CommentModel commentCalibrationModel =
           CommentModel(id: jobCardId.value, comment: _comment);
-
+      ClosePermitModel ptwClose = ClosePermitModel(
+          id: ptwId, comment: comment, conditionIds: [1, 2, 3, 4], fileIds: []);
+      var closePtwJsonString = ptwClose.toJson();
       var approveJsonString = commentCalibrationModel.toJson();
       // print({"rejectCalibrationJsonString", approveCalibrationtoJsonString});
       final response = await jobCardDetailsPresenter.approvecloseJob(
         approveJsonString: approveJsonString,
+        closePtwJsonString: closePtwJsonString,
         isLoading: true,
       );
       if (response == true) {
