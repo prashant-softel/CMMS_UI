@@ -524,6 +524,8 @@ class _CreatePmPlanWebState extends State<CreatePmPlanWeb> {
                                                 ColorValues.appGreenColor,
                                             text: 'Submit',
                                             onPressed: () {
+                                              controller.isFormInvalid.value =
+                                                  false;
                                               controller.createPmPlan();
                                             },
                                           ),

@@ -220,7 +220,7 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        Text(" ${controller.jobCardId.value}",
+                                        Text(" JC${controller.jobCardId.value}",
                                             style: Styles.blue14),
                                         Container(
                                           width: 400,
@@ -230,10 +230,10 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                                               style: Styles.blue14),
                                         ),
                                         Text(
-                                            " ${controller.jobCardDetailsModel.value?.jobId ?? ""}",
+                                            " JOB${controller.jobCardDetailsModel.value?.jobId ?? ""}",
                                             style: Styles.blue14),
                                         Text(
-                                            " ${controller.jobCardDetailsModel.value?.ptwId ?? ""}",
+                                            " PTW${controller.jobCardDetailsModel.value?.ptwId ?? ""}",
                                             style: Styles.blue14),
                                         Text(
                                             " ${controller.jobCardDetailsModel.value?.created_by ?? ""}",

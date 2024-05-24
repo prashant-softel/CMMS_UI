@@ -239,6 +239,6 @@ class PurchaseGoodsorderListController extends GetxController {
   }
 
   void export() {
-    getRequestOrderList(facilityId, formattedTodate, formattedFromdate, true);
+    getRequestOrderList(facilityId, formattedTodate1, formattedFromdate1, true);
   }
 }

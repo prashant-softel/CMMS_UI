@@ -255,14 +255,14 @@ class _JobCardContentWebState extends State<JobCardContentWeb> {
                                                       controller
                                                           .JobIdFilterText,
                                                       130),
-                                                  buildDataColumn(
-                                                    'PermitId',
-                                                    'Permit Id',
-                                                    //  ColumnSize.S,
-                                                    controller
-                                                        .PermitIdFilterText,
-                                                    130,
-                                                  ),
+                                                  // buildDataColumn(
+                                                  //   'PermitId',
+                                                  //   'Permit Id',
+                                                  //   //  ColumnSize.S,
+                                                  //   controller
+                                                  //       .PermitIdFilterText,
+                                                  //   130,
+                                                  // ),
                                                   buildDataColumn(
                                                     'PermitNo',
                                                     'Permit No.',
@@ -272,8 +272,8 @@ class _JobCardContentWebState extends State<JobCardContentWeb> {
                                                     130,
                                                   ),
                                                   buildDataColumn(
-                                                      "JobAssingedTo",
-                                                      "Assinged To", // ColumnSize.L,
+                                                      "JobAssignedTo",
+                                                      "Assigned To", // ColumnSize.L,
                                                       controller
                                                           .JobAssingedToFilterText,
                                                       200),
@@ -298,13 +298,13 @@ class _JobCardContentWebState extends State<JobCardContentWeb> {
                                                       controller
                                                           .EndTimeFilterText,
                                                       200),
-                                                  buildDataColumn(
-                                                      "Status",
-                                                      "Status",
-                                                      // ColumnSize.L,
-                                                      controller
-                                                          .PermitStatusFilterText,
-                                                      100),
+                                                  // buildDataColumn(
+                                                  //     "Status",
+                                                  //     "Status",
+                                                  //     // ColumnSize.L,
+                                                  //     controller
+                                                  //         .PermitStatusFilterText,
+                                                  //     100),
                                                   buildDataColumn(
                                                       'Action'.tr,
                                                       'Actions',
@@ -430,8 +430,8 @@ class JobDataSource extends DataTableSource {
               .toString()
               .toLowerCase()
               .contains(controller.PermitIdFilterText.value.toLowerCase()) &&
-          (Job?.currentStatus ?? '').toString().toLowerCase().contains(
-              controller.PermitStatusFilterText.value.toLowerCase()) &&
+          // (Job?.currentStatus ?? '').toString().toLowerCase().contains(
+          //     controller.PermitStatusFilterText.value.toLowerCase()) &&
           (Job?.permit_no ?? '')
               .toString()
               .toLowerCase()
@@ -465,14 +465,15 @@ class JobDataSource extends DataTableSource {
         // '${JobDetails?.id ?? ''}',
         // 'JC${JobDetails?.jobCardId ?? ''}',
         "id",
-        'JOB${JobDetails?.jobId ?? ''}', '${JobDetails?.permit_id ?? ''}',
+        'JOB${JobDetails?.jobId ?? ''}', 
+        // '${JobDetails?.permit_id ?? ''}',
         '${JobDetails?.permit_no ?? ''}',
 
         '${JobDetails?.job_assinged_to ?? ''}',
         '${JobDetails?.description ?? ''}',
         '${JobDetails?.start_time ?? ''}',
         '${JobDetails?.end_time ?? ''}',
-        '${JobDetails?.currentStatus ?? ''}',
+        // '${JobDetails?.currentStatus ?? ''}',
         'Actions',
       ].map((value) {
         return DataCell(
