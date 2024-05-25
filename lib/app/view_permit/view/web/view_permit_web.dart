@@ -3213,7 +3213,11 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                             controller
                                     .viewPermitDetailsModel.value?.ptwStatus !=
                                 PermitStatusConstants
-                                    .PTW_CANCEL_REQUEST_APPROVED //132
+                                    .PTW_CANCEL_REQUEST_APPROVED &&
+                            controller
+                                    .viewPermitDetailsModel.value?.ptwStatus !=
+                                PermitStatusConstants
+                                    .PTW_EXTEND_REQUEST_REJECTED
                     // ||
                     // controller.viewPermitDetailsModel.value?.ptwStatus ==
                     //     PermitStatusConstants.PTW_CREATED //121

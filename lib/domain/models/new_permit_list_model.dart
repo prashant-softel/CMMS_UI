@@ -27,6 +27,7 @@ class NewPermitModel {
   String? current_status_short;
   int? isExpired;
   int? tbT_Done_Check;
+  String? endDate;
 
   NewPermitModel(
       {this.permitId,
@@ -46,7 +47,8 @@ class NewPermitModel {
       this.approvedDatetime,
       this.current_status_short,
       this.isExpired,
-      this.tbT_Done_Check});
+      this.tbT_Done_Check,
+      this.endDate});
 
   factory NewPermitModel.fromJson(Map<String, dynamic> json) => NewPermitModel(
         permitId: json['permitId'],
@@ -71,6 +73,7 @@ class NewPermitModel {
         current_status_short: json['current_status_short'],
         isExpired: json['isExpired'],
         tbT_Done_Check: json['tbT_Done_Check'],
+        endDate: json['endDate'],
       );
 
   Map<String, dynamic> toJson() => {
@@ -93,6 +96,7 @@ class NewPermitModel {
         'current_status_short': current_status_short,
         'isExpired': isExpired,
         "tbT_Done_Check": tbT_Done_Check,
+        "endDate": endDate
         // return data;
       };
 }
