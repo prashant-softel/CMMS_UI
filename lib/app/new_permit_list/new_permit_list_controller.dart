@@ -449,4 +449,14 @@ class NewPermitListController extends GetxController {
     getNewPermitList(facilityId, userId, formattedFromdate, formattedTodate,
         false, false, true);
   }
+   bool isOneHour(String validTill) {
+    DateTime current = DateTime.now();
+    DateTime expiryTime = DateTime.parse(validTill);
+    Duration timeDifference = expiryTime.difference(current);
+
+    if (timeDifference.inHours >= 1 && current.isBefore(expiryTime)) {
+      return true;
+    }
+    return false;
+  }
 }
