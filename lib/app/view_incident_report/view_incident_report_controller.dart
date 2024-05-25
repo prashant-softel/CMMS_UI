@@ -12,6 +12,7 @@ import 'package:cmms/domain/models/incident_report_details_model.dart';
 import 'package:cmms/domain/models/incident_report_list_model.dart';
 import 'package:cmms/domain/models/type_permit_model.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart';
 import 'package:intl/intl.dart';
@@ -344,6 +345,11 @@ class ViewIncidentReportController extends GetxController {
 
   void approveIncidentReportButton({int? id}) async {
     {
+      checkform();
+      if (isFormInvalid.value == true) {
+        Fluttertoast.showToast(msg: "Please Enter Comment!");
+        return;
+      }
       String _comment = approveCommentTextFieldCtrlr.text.trim();
 
       CommentModelWithFlag approveIncidentReportAproveModel =
@@ -367,8 +373,22 @@ class ViewIncidentReportController extends GetxController {
       }
     }
   }
+
+  void checkform() {
+    if (approveCommentTextFieldCtrlr.text == '') {
+      isFormInvalid.value = true;
+    } else {
+      isFormInvalid.value = false;
+    }
+  }
+
   void approveIncidentReportButton2ndStep({int? id}) async {
     {
+      checkform();
+      if (isFormInvalid.value == true) {
+        Fluttertoast.showToast(msg: "Please Enter Comment!");
+        return;
+      }
       String _comment = approveCommentTextFieldCtrlr.text.trim();
 
       CommentModelWithFlag approveIncidentReportAproveModel =
