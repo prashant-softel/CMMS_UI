@@ -686,10 +686,6 @@ class StockManagementAddGoodsOrdersController extends GetxController {
   }
 
   void updateGoodsOrder() async {
-    checkForm();
-    if (isFormInvalid.value) {
-      return;
-    }
     String _challanNoCtrlr = challanNoCtrlr.text.trim();
     String _pOCtrlr = pOCtrlr.text.trim();
     String _frieghtToPayPaidCtrlr = frieghtToPayPaidCtrlr.text.trim();
