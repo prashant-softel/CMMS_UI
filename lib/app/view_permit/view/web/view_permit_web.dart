@@ -2553,18 +2553,6 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                                         ],
                                       ),
                                     ),
-                              // Container(
-                              //   margin: Dimens.edgeInsets20,
-                              //   constraints: BoxConstraints(
-                              //     maxHeight: 100,
-                              //     minHeight: 100,
-                              //   ),
-                              //   child: //
-                              //       HistoryTableWidgetWeb(
-                              //     historyList:
-                              //         controller.historyList,
-                              //   ),
-                              // ),
 
                               Padding(
                                 padding: const EdgeInsets.only(left: 20),
