@@ -73,7 +73,7 @@ class _WaterDataListWebState extends State<WaterDataListWeb> {
         child: Center(child: Text(text)),
       );
 
-  _CellData(DetailData data, String type) {
+  String _CellData(DetailData data, String type) {
     switch (type) {
       case 'consumedQty':
         return '${data.consumedQty}';
@@ -352,9 +352,10 @@ class _WaterDataListWebState extends State<WaterDataListWeb> {
                                                                               null) {
                                                                             return dataCell('');
                                                                           }
-                                                                          return dataCell(_CellData(
-                                                                              data,
-                                                                              e['dataKey']));
+                                                                          // return dataCell(
+                                                                          //     "text");
+                                                                          return dataCell(_CellData(data, e['dataKey'])) ??
+                                                                              dataCell("");
                                                                         })))),
                                                         ],
                                                       ),
