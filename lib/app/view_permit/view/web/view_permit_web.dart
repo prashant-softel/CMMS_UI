@@ -3043,24 +3043,23 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
 
                 ///Extend Permit Button
 
-                controller.viewPermitDetailsModel.value?.isExpired == 1 ||
+                // controller.viewPermitDetailsModel.value?.isExpired == 1 ||
+                controller.viewPermitDetailsModel.value!.tbT_Done_Check == 1 &&
                         controller.viewPermitDetailsModel.value?.requester_id ==
-                                varUserAccessModel.value.user_id &&
-                            controller
-                                    .viewPermitDetailsModel.value?.ptwStatus ==
-                                PermitStatusConstants.PTW_APPROVE &&
-                            varUserAccessModel.value.access_list!
-                                    .where((e) =>
-                                        e.feature_id ==
-                                            UserAccessConstants
-                                                .kPermitFeatureId &&
-                                        e.edit ==
-                                            UserAccessConstants.kHaveEditAccess)
-                                    .length >
-                                0 &&
-                            controller.isOneHour(
-                                    controller.validTillTimeCtrlr.text) ==
-                                true
+                            varUserAccessModel.value.user_id &&
+                        controller.viewPermitDetailsModel.value?.ptwStatus ==
+                            PermitStatusConstants.PTW_APPROVE &&
+                        varUserAccessModel.value.access_list!
+                                .where((e) =>
+                                    e.feature_id ==
+                                        UserAccessConstants.kPermitFeatureId &&
+                                    e.edit ==
+                                        UserAccessConstants.kHaveEditAccess)
+                                .length >
+                            0 &&
+                        controller.isOneHour(
+                                controller.validTillTimeCtrlr.text) ==
+                            true
                     ? Padding(
                         padding: const EdgeInsets.only(left: 5),
                         child: Container(
