@@ -545,8 +545,9 @@ class PreventiveMaintenanceExecutionContentWeb
                                   children: [
                                     Container(
                                         margin: EdgeInsets.only(left: 20),
-                                        child:
-                                            CustomRichText(title: "Comment:")),
+                                        child: CustomRichText(
+                                            title: "Comment:",
+                                            includeAsterisk: false)),
                                     Dimens.boxWidth10,
                                     Container(
                                         width: (Get.width * .6),
