@@ -92,6 +92,24 @@ class _CalibrationTabWidgetState extends State<CalibrationTabWidget> {
                                     ],
                                     controller:
                                         controller.calibrationRemaingCtrlr,
+
+                                        //  errorController: controller
+                                        //                     .isSerialNoInvalid
+                                        //                     .value
+                                        //                 ? "Required field"
+                                        //                 : null,
+                                        //             onChanged: (value) {
+                                        //               if (value.trim().length >
+                                        //                   1) {
+                                        //                 controller
+                                        //                     .isSerialNoInvalid
+                                        //                     .value = false;
+                                        //               } else {
+                                        //                 controller
+                                        //                     .isSerialNoInvalid
+                                        //                     .value = true;
+                                        //               }
+                                        //               },
                                     focusNode: controller.calremFocus,
                                     scrollController: controller.calremScroll,
                                     decoration: InputDecoration(
@@ -134,6 +152,23 @@ class _CalibrationTabWidgetState extends State<CalibrationTabWidget> {
                                   },
                                   textController:
                                       controller.lastCalibrationDateTc,
+                                       errorController: controller
+                                                            .isReceivedDateInvalid
+                                                            .value
+                                                        ? "Required field"
+                                                        : null,
+                                                    onChanged: (value) {
+                                                      if (value.trim().length >
+                                                          1) {
+                                                        controller
+                                                            .isReceivedDateInvalid
+                                                            .value = false;
+                                                      } else {
+                                                        controller
+                                                            .isReceivedDateInvalid
+                                                            .value = true;
+                                                      }
+                                                    }
                                 ),
                               ],
                             ),

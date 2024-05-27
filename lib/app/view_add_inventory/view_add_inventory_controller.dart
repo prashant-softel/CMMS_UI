@@ -731,6 +731,7 @@ class ViewAddInventoryController extends GetxController {
             int frequencyIndex =
               frequencyList.indexWhere((x) => x?.name == value);
           selectedfrequencyId = frequencyList[frequencyIndex]?.id ?? 0;
+          isSelectedfrequency.value=true;
          } else {
             selectedfrequencyId=0;
          }

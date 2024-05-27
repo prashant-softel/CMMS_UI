@@ -8892,7 +8892,7 @@ class ConnectHelper {
   Future<ResponseModel> getCourseCategory(
       {required bool isLoading, required String auth}) async {
     ResponseModel responseModel = await apiWrapper.makeRequest(
-      '',
+      'Training/GetTrainingCategorty',
       Request.get,
       null,
       isLoading,
@@ -8912,7 +8912,7 @@ class ConnectHelper {
     var responseModel =
         // responseModel =
         await apiWrapper.makeRequest(
-      '',
+      'Training/CreateTrainingCategorty',
       Request.post,
       CourseCategoryJsonString,
       isLoading ?? false,
@@ -8932,8 +8932,8 @@ class ConnectHelper {
     CourseCategoryJsonString,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
-      '',
-      Request.post,
+      'Training/UpdateTrainingCategorty',
+      Request.put,
       CourseCategoryJsonString,
       isLoading ?? false,
       {
@@ -8952,7 +8952,7 @@ class ConnectHelper {
     required category_id,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
-      '',
+      'Training/DeleteTrainingCategorty?id=3',
       Request.delete,
       null,
       isLoading ?? false,
@@ -8970,7 +8970,7 @@ class ConnectHelper {
   Future<ResponseModel> getTargetedGroup(
       {required bool isLoading, required String auth}) async {
     ResponseModel responseModel = await apiWrapper.makeRequest(
-      '',
+      'Training/GetTargetedGroup',
       Request.get,
       null,
       isLoading,
@@ -8990,7 +8990,7 @@ class ConnectHelper {
     var responseModel =
         // responseModel =
         await apiWrapper.makeRequest(
-      '', 
+      'Training/CreateTargetedGroup', 
       Request.post,
       CourseCategoryJsonString,
       isLoading ?? false,
@@ -9010,8 +9010,8 @@ class ConnectHelper {
     CourseCategoryJsonString,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
-      '',
-      Request.post,
+      'Training/UpdateTargetedGroup',
+      Request.put,
       CourseCategoryJsonString,
       isLoading ?? false,
       {
@@ -9030,7 +9030,7 @@ class ConnectHelper {
     required category_id,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
-      '',
+      'Training/DeleteTargetedGroup?id=2',
       Request.delete,
       null,
       isLoading ?? false,
