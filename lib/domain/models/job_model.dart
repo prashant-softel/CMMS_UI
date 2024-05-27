@@ -9,6 +9,7 @@ String jobListToJson(List<JobModel> data) =>
 class JobModel {
   factory JobModel.fromJson(Map<String, dynamic> json) => JobModel(
         id: json['id'] == null ? 0 : json['id'],
+        ptw_id: json['ptw_id'] == null ? 0 : json['ptw_id'],
         userId: json['userId'] == null ? 0 : json['userId'],
         facilityId: json['facilityId'] == null ? 0 : json['facilityId'],
         facilityName:
@@ -29,7 +30,7 @@ class JobModel {
             : DateTime.parse(json['breakdownTime'] as String),
         breakdownType:
             json['breakdownType'] == null ? null : json['breakdownType'] ?? '',
-        permitId: json['ptw_id'] == null ? null : json['ptw_id'] ?? '',
+        permitId: json['permitId'] == null ? null : json['permitId'] ?? '',
         assignedToName: json['assignedToName'] == null
             ? null
             : json['assignedToName'] ?? '',
@@ -56,6 +57,7 @@ class JobModel {
   ///
   JobModel(
       {this.id,
+      this.ptw_id,
       this.userId,
       this.facilityId,
       this.facilityName,
@@ -78,6 +80,7 @@ class JobModel {
       this.latestJCStatus});
 
   int? id;
+  int? ptw_id;
   int? userId;
   int? facilityId;
   String? facilityName;
@@ -101,6 +104,7 @@ class JobModel {
   String? latestJCStatusShort;
   Map<String, dynamic> toJson() => {
         'id': id,
+        'ptw_id': ptw_id,
         'userId': userId,
         'facilityId': facilityId,
         'facilityName': facilityName,
@@ -114,7 +118,7 @@ class JobModel {
         'raisedByName': raisedByName,
         'breakdownTime': breakdownTime?.toIso8601String(),
         'breakdownType': breakdownType,
-        'ptw_id': permitId,
+        'permitId': permitId,
         'assignedToName': assignedToName,
         'assignedToId': assignedToId,
         'latestJCStatusShort': latestJCStatusShort,

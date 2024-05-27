@@ -187,7 +187,7 @@ class GoodsOrdersReqDetailsWeb extends GetView<GoodsOrdersReqDetailController> {
                                         (index) => DataRow(cells: [
                                           DataCell(Text(controller
                                                   .historyList?[index]
-                                                  ?.createdAt
+                                                  ?.createdAt!.result
                                                   .toString() ??
                                               '')),
                                           DataCell(Text(controller

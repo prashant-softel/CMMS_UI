@@ -1,5 +1,6 @@
 import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/home/home_screen.dart';
+import 'package:cmms/app/incident_report_list/incident_report_constants.dart';
 import 'package:cmms/app/incident_report_list/incident_report_list_controller.dart';
 import 'package:cmms/app/navigators/navigators.dart';
 import 'package:cmms/app/theme/color_values.dart';
@@ -615,7 +616,70 @@ class IncidentReportListDataSource extends DataTableSource {
                         child: Container(
                           padding: Dimens.edgeInsets8_2_8_2,
                           decoration: BoxDecoration(
-                              color: ColorValues.appYellowColor
+                              color: controller.incidentReportList
+                                              .firstWhere(
+                                                (e) =>
+                                                    "${e?.id}" ==
+                                                    "${incidentReportListDetails?.id}",
+                                                orElse: () =>
+                                                    IncidentReportListModel(
+                                                        id: 000),
+                                              )
+                                              ?.status ==
+                                          IncidentStatusConstants
+                                              .IR_CREATED_INITIAL ||
+                                      controller.incidentReportList
+                                              .firstWhere(
+                                                (e) =>
+                                                    "${e?.id}" ==
+                                                    "${incidentReportListDetails?.id}",
+                                                orElse: () =>
+                                                    IncidentReportListModel(
+                                                        id: 000),
+                                              )
+                                              ?.status ==
+                                          IncidentStatusConstants.IR_UPDATED
+                                  ? ColorValues.appYellowColor
+                                  : controller.incidentReportList
+                                                  .firstWhere(
+                                                    (e) =>
+                                                        "${e?.id}" ==
+                                                        "${incidentReportListDetails?.id}",
+                                                    orElse: () =>
+                                                        IncidentReportListModel(
+                                                            id: 000),
+                                                  )
+                                                  ?.status ==
+                                              IncidentStatusConstants
+                                                  .IR_APPROVED_INITIAL ||
+                                          controller.incidentReportList
+                                                  .firstWhere(
+                                                    (e) =>
+                                                        "${e?.id}" ==
+                                                        "${incidentReportListDetails?.id}",
+                                                    orElse: () =>
+                                                        IncidentReportListModel(
+                                                            id: 000),
+                                                  )
+                                                  ?.status ==
+                                              IncidentStatusConstants
+                                                  .IR_APPROVED_INVESTIGATION
+                                      ? ColorValues.greenColor
+                                      : controller.incidentReportList
+                                                  .firstWhere(
+                                                    (e) =>
+                                                        "${e?.id}" ==
+                                                        "${incidentReportListDetails?.id}",
+                                                    orElse: () =>
+                                                        IncidentReportListModel(
+                                                            id: 000),
+                                                  )
+                                                  ?.status ==
+                                              IncidentStatusConstants
+                                                  .IR_CREATED_INVESTIGATION
+                                          ? Color.fromARGB(255, 181, 129, 179)
+                                          : ColorValues.appRedColor
+                              // color: ColorValues.appYellowColor
                               // : controller.incidentReportList
                               //             .firstWhere(
                               //               (e) =>
