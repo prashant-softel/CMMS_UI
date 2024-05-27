@@ -868,6 +868,7 @@ class PreventiveMaintenanceTaskViewContentWeb
                                                                             }),
                                                                         // controller.pmtaskViewModel.value?.status != 169 &&
                                                                         controller.listMrsByTaskId?[index]?.status == 323 ||
+                                                                                controller.listMrsByTaskId?[index]?.status == 321 ||
                                                                                 controller.listMrsByTaskId?[index]?.status == 324
                                                                             ? Dimens.box0
                                                                             : varUserAccessModel.value.access_list!.where((e) => e.feature_id == UserAccessConstants.kMrsFeatureId && e.edit == UserAccessConstants.kHaveEditAccess).length > 0
