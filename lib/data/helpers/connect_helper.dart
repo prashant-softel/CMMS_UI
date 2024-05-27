@@ -8952,7 +8952,7 @@ class ConnectHelper {
     var responseModel = await apiWrapper.makeRequest(
       'Training/UpdateTrainingCategorty',
       Request.put,
-      CourseCategoryJsonString,
+      jsonEncode(CourseCategoryJsonString),
       isLoading ?? false,
       {
         'Content-Type': 'application/json',
@@ -8970,7 +8970,7 @@ class ConnectHelper {
     required category_id,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
-      'Training/DeleteTrainingCategorty?id=3',
+      'Training/DeleteTrainingCategorty?id=$category_id',
       Request.delete,
       null,
       isLoading ?? false,
@@ -9030,7 +9030,7 @@ class ConnectHelper {
     var responseModel = await apiWrapper.makeRequest(
       'Training/UpdateTargetedGroup',
       Request.put,
-      CourseCategoryJsonString,
+      jsonEncode(CourseCategoryJsonString),
       isLoading ?? false,
       {
         'Content-Type': 'application/json',
@@ -9048,7 +9048,7 @@ class ConnectHelper {
     required category_id,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
-      'Training/DeleteTargetedGroup?id=2',
+      'Training/DeleteTargetedGroup?id=$category_id',
       Request.delete,
       null,
       isLoading ?? false,

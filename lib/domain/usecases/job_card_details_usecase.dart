@@ -163,4 +163,10 @@ class JobCardDetailsUsecase {
       repository.saveValue(LocalKeys.jobCardId, jobCardId);
   Future<String?> getValue() async =>
       await repository.getStringValue(LocalKeys.jobCardId);
+
+      void clearStoreData() async => repository.clearData(LocalKeys.permitId);
+  void clearTypeValue() async => repository.clearData(LocalKeys.types);
+  void clearisCheckedValue() async => repository.clearData(LocalKeys.isChecked);
+  void clearjobmodelValue() async => repository.clearData(LocalKeys.jobModel);
+  void clearjcValue() async => repository.clearData(LocalKeys.jobCardId);
 }
