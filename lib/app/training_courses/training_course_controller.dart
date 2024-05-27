@@ -222,6 +222,11 @@ class TrainingController extends GetxController {
     Get.toNamed(Routes.addCourse, arguments: {'courseId': courseId});
   }
 
+  Future<void> scheduleCourse({required int courseId}) async {
+    clearStoreData();
+    Get.toNamed(Routes.scheduleCourse, arguments: {'courseId': courseId});
+  }
+
   void geTrainingCourseListByDate() {
     getTrainingCourseList(
       facilityId: facilityId.value,

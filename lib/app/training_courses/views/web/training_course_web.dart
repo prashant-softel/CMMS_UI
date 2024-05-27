@@ -324,7 +324,7 @@ class _TrainingCourseWebState extends State<TrainingCourseWeb> {
                                                           'Actions',
                                                           controller
                                                               .ActionFilterText,
-                                                          200,
+                                                          250,
                                                         ),
                                                       ],
                                                     );
@@ -455,9 +455,12 @@ class TrainingListDataSource extends DataTableSource {
               .toString()
               .toLowerCase()
               .contains(controller.CourseNameFilterText.value.toLowerCase()) &&
-          (TrainingCourse?.categoryId ?? '').toString().toLowerCase().contains(
-              controller.CategoryNameFilterText.value.toLowerCase()) &&
-          (TrainingCourse?.groupId ?? '')
+          (TrainingCourse?.categoryName ?? '')
+              .toString()
+              .toLowerCase()
+              .contains(
+                  controller.CategoryNameFilterText.value.toLowerCase()) &&
+          (TrainingCourse?.groupName ?? '')
               .toString()
               .toLowerCase()
               .contains(controller.GroupNameFilterText.value.toLowerCase()) &&
@@ -483,8 +486,8 @@ class TrainingListDataSource extends DataTableSource {
     var cellsBuffer = [
       "id",
       '${TrainingCourse?.name ?? ''}',
-      '${TrainingCourse?.groupId ?? ''}',
-      '${TrainingCourse?.categoryId ?? ''}',
+      '${TrainingCourse?.groupName ?? ''}',
+      '${TrainingCourse?.categoryName ?? ''}',
       '${TrainingCourse?.number_of_days ?? 0}',
       '${TrainingCourse?.duration ?? 0}',
       '${TrainingCourse?.max_cap ?? ''}',
@@ -544,6 +547,16 @@ class TrainingListDataSource extends DataTableSource {
                                     onPress: () {
                                       controller.editCourse(
                                           courseId: TrainingCourse?.id ?? 0);
+                                    },
+                                  ),
+                                  TableActionButton(
+                                    color: Colors.lightGreen,
+                                    icon: Icons.calendar_month_outlined,
+                                    message: "Schedule",
+                                    onPress: () {
+                                      controller.scheduleCourse(
+                                        courseId: TrainingCourse?.id ?? 0,
+                                      );
                                     },
                                   ),
                                   TableActionButton(

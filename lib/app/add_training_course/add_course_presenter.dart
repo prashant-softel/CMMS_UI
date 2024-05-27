@@ -1,3 +1,4 @@
+import 'package:cmms/domain/models/course_category_model.dart';
 import 'package:cmms/domain/models/facility_model.dart';
 import 'package:cmms/domain/models/training_course_list_model.dart';
 import 'package:cmms/domain/usecases/course_usecase.dart';
@@ -35,6 +36,21 @@ class AddCoursePresenter {
         isLoading: isLoading,
       );
 
+  Future<List<CourseCategoryModel>> getTargetedGroup({
+    required bool isLoading,
+  }) async {
+    return trainingUsecase.getTargetedGroup(
+      isLoading: isLoading,
+    );
+  }
+
+  Future<List<CourseCategoryModel>> getCourseCategory({
+    required bool isLoading,
+  }) async {
+    return trainingUsecase.getCourseCategory(
+      isLoading: isLoading,
+    );
+  }
 
   void saveValue({String? courseId}) async {
     return trainingUsecase.saveValue(courseId: courseId);

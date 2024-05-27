@@ -3,8 +3,8 @@ import 'dart:async';
 import 'package:cmms/app/add_training_course/add_course_presenter.dart';
 import 'package:cmms/app/home/home_controller.dart';
 import 'package:cmms/domain/models/add_training_course_model.dart';
+import 'package:cmms/domain/models/course_category_model.dart';
 import 'package:cmms/domain/models/training_course_list_model.dart';
-import 'package:cmms/domain/models/type_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rxdart/subjects.dart';
@@ -47,26 +47,24 @@ class AddCourseController extends GetxController {
   RxBool isLoading = true.obs;
 
   TrainingCourseListModel course = TrainingCourseListModel();
+  RxList<CourseCategoryModel> courseCategory = <CourseCategoryModel>[].obs;
+  RxList<CourseCategoryModel?>? targetedGroup = <CourseCategoryModel?>[].obs;
   Rx<String> selectedCategory = ''.obs;
   RxInt selectedCategoryId = 0.obs;
-  RxList<GenderModel> category = <GenderModel>[
-    GenderModel(name: "1st Course", id: 1),
-    GenderModel(name: "2nd Course", id: 2),
-    GenderModel(name: "3rd Course", id: 3),
-  ].obs;
   Rx<String> selectedGroup = ''.obs;
   RxInt selectedGroupId = 0.obs;
-  RxList<StatusModel> targetGroup = <StatusModel>[
-    StatusModel(name: "Group 1", id: 1),
-    StatusModel(name: "Group 2", id: 2),
-    StatusModel(name: "Group 3", id: 3),
-  ].obs;
 
   void onInit() async {
     try {
       await setId();
       facilityIdStreamSubscription = homeController.facilityId$.listen((event) {
         facilityId.value = event;
+        Future.delayed(Duration(seconds: 1), () async {
+          await getCourseCategory();
+        });
+        Future.delayed(Duration(seconds: 1), () async {
+          await getTargetedGroup();
+        });
       });
       if (courseId.value > 0) {
         Future.delayed(Duration(seconds: 1), () async {
@@ -134,6 +132,28 @@ class AddCourseController extends GetxController {
     maximumCapacity.text = course.max_cap.toString();
   }
 
+  Future<void> getCourseCategory() async {
+    courseCategory.value = <CourseCategoryModel>[];
+    final _cousreCategory = await addCoursePresenter.getCourseCategory(
+      isLoading: isLoading.value,
+    );
+    isLoading.value = false;
+    for (var category in _cousreCategory) {
+      courseCategory.add(category);
+    }
+  }
+
+  Future<void> getTargetedGroup() async {
+    targetedGroup?.value = <CourseCategoryModel>[];
+    final _targetGroup = await addCoursePresenter.getTargetedGroup(
+      isLoading: isLoading.value,
+    );
+    isLoading.value = false;
+    for (var targetGroup in _targetGroup) {
+      targetedGroup?.add(targetGroup);
+    }
+  }
+
   Future<void> addCourse({dynamic fileIds}) async {
     try {
       checkForm();
@@ -165,11 +185,6 @@ class AddCourseController extends GetxController {
           isLoading: isLoading.value,
         );
         print(response);
-        // if (response == true) {
-        //   cleardata();
-        //   Get.toNamed(Routes.trainingCourse);
-        //   isLoading.value = false;
-        // }
       }
     } catch (e) {
       print(e);
@@ -207,11 +222,6 @@ class AddCourseController extends GetxController {
           isLoading: isLoading.value,
         );
         print(response);
-        // if (response == true) {
-        //   cleardata();
-        //   Get.toNamed(Routes.trainingCourse);
-        //   isLoading.value = false;
-        // }
       }
     } catch (e) {
       print(e);
@@ -281,18 +291,18 @@ class AddCourseController extends GetxController {
   void onValueChanged(dynamic list, dynamic value) {
     print({list, value});
     switch (list.runtimeType) {
-      case RxList<GenderModel>:
+      case RxList<CourseCategoryModel>:
         {
-          int blockIndex = category.indexWhere((x) => x.name == value);
-          selectedCategoryId.value = category[blockIndex].id ?? 0;
+          int blockIndex = courseCategory.indexWhere((x) => x.name == value);
+          selectedCategoryId.value = courseCategory[blockIndex].id ?? 0;
           isCategorySelected.value = true;
           selectedCategory.value = value;
         }
         break;
-      case RxList<StatusModel>:
+      case RxList<CourseCategoryModel?>:
         {
-          int blockIndex = targetGroup.indexWhere((x) => x.name == value);
-          selectedGroupId.value = targetGroup[blockIndex].id ?? 0;
+          int blockIndex = targetedGroup!.indexWhere((x) => x?.name == value);
+          selectedGroupId.value = targetedGroup?[blockIndex]?.id ?? 0;
           isGroupSelected.value = true;
           selectedGroup.value = value;
         }

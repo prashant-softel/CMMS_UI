@@ -12,19 +12,22 @@ String employeeListModelToJson(List<EmployeeListModel> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
 class EmployeeListModel {
-  EmployeeListModel(
-      {this.id,
-      this.login_id,
-      this.name,
-      this.gender,
-      this.mobileNumber,
-      this.responsibility});
+  EmployeeListModel({
+    this.id,
+    this.login_id,
+    this.name,
+    this.gender,
+    this.mobileNumber,
+    this.responsibility,
+    this.designation,
+  });
 
   int? id;
   String? login_id;
   String? name;
   String? gender;
   String? mobileNumber;
+  String? designation;
   List<Responsibility>? responsibility;
 
   factory EmployeeListModel.fromJson(Map<String, dynamic> json) =>
@@ -34,6 +37,7 @@ class EmployeeListModel {
         name: json["name"],
         gender: json["gender"],
         mobileNumber: json['mobileNumber'],
+        designation: json['designation'],
         responsibility: json["responsibility"] != null
             ? List<Responsibility>.from(
                 json["responsibility"]?.map((x) => Responsibility.fromJson(x)))

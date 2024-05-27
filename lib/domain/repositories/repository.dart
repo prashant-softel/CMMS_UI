@@ -13634,6 +13634,34 @@ class Repository {
     }
   }
 
+  Future<Map<String, dynamic>> scheduleCourse({
+    scheduleCourseJson,
+    isLoading,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.scheduleCourse(
+        auth: auth,
+        scheduleCourseJson: scheduleCourseJson,
+        isLoading: isLoading ?? false,
+      );
+      var resourceData = res.data;
+      print('Add Course Response: ${resourceData}');
+      if (!res.hasError) {
+        Fluttertoast.showToast(
+          msg: "Course Scheduled Successfully",
+          fontSize: 16.0,
+        );
+      } else {
+        Utility.showDialog(res.errorCode.toString(), 'Add Course');
+      }
+      return Map();
+    } catch (error) {
+      print(error.toString());
+      return Map();
+    }
+  }
+
   //Course Category
   //get
   Future<List<CourseCategoryModel>> getCourseCategory({
