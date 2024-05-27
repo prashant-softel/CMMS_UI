@@ -838,7 +838,18 @@ class PermitListDataSource extends DataTableSource {
                                                             permitId: 000),
                                                   )
                                                   ?.tbT_Done_Check ==
-                                              0
+                                              0 &&
+                                          controller.newPermitList
+                                                  .firstWhere(
+                                                    (e) =>
+                                                        "${e?.permitId}" ==
+                                                        "${PermitDetails?.permitId}",
+                                                    orElse: () =>
+                                                        NewPermitModel(
+                                                            permitId: 000),
+                                                  )
+                                                  ?.requestById ==
+                                              varUserAccessModel.value.user_id
                                       ? TableActionButton(
                                           color: Color.fromARGB(
                                               136, 107, 152, 211),
