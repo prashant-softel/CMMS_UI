@@ -80,6 +80,24 @@ class ManufacturarTabWidget extends StatelessWidget {
                                 ),
                                 child: LoginCustomTextfield(
                                   textController: controller.modelNoCtrlr,
+                                      errorController: controller
+                                                            .isModelInvalid
+                                                            .value
+                                                        ? "Required field"
+                                                        : null,
+                                                    onChanged: (value) {
+                                                      if (value.trim().length >
+                                                          0) {
+                                                        controller
+                                                            .isModelInvalid
+                                                            .value = false;
+                                                      } else {
+                                                        controller
+                                                            .isModelInvalid
+                                                            .value = true;
+                                                      }
+                                                    }
+
                                 ),
                               ),
                             ],
@@ -122,6 +140,23 @@ class ManufacturarTabWidget extends StatelessWidget {
                                     FilteringTextInputFormatter.digitsOnly
                                   ],
                                   textController: controller.costCtrlr,
+                                      errorController: controller
+                                                            .isCostInvalid
+                                                            .value
+                                                        ? "Required field"
+                                                        : null,
+                                                    onChanged: (value) {
+                                                      if (value.trim().length >
+                                                          0) {
+                                                        controller
+                                                            .isCostInvalid
+                                                            .value = false;
+                                                      } else {
+                                                        controller
+                                                            .isCostInvalid
+                                                            .value = true;
+                                                      }
+                                                    }
                                 ),
                               ),
                             ],
@@ -181,6 +216,24 @@ class ManufacturarTabWidget extends StatelessWidget {
                                   ],
                                   textController:
                                       controller.parentEquipmentNoCtrlr,
+                                         errorController: controller
+                                                            .isParentEquipmentInvalid
+                                                            .value
+                                                        ? "Required field"
+                                                        : null,
+                                                    onChanged: (value) {
+                                                      if (value.trim().length >
+                                                          0) {
+                                                        controller
+                                                            .isParentEquipmentInvalid
+                                                            .value = false;
+                                                      } else {
+                                                        controller
+                                                            .isParentEquipmentInvalid
+                                                            .value = true;
+                                                      }
+                                                    }
+
                                 ),
                               ),
                             ],
