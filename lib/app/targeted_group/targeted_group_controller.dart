@@ -200,7 +200,7 @@ class TargetedGroupController extends GetxController {
       String _description = descriptionCtrlr.text.trim();
 
       CourseCategoryModel createCheckpoint =
-          CourseCategoryModel(name: _title, description: _description);
+          CourseCategoryModel(name: _title, description: _description,id: 0,);
       print("OUT ");
       var CourseCategoryJsonString = createCheckpoint
           .toJson(); //createCheckPointToJson([createCheckpoint]);
