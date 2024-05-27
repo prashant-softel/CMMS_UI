@@ -183,6 +183,18 @@ class JobCardDetailsPresenter {
     );
   }
 
+  void clearStoreData() async =>
+      jobCardDetailsUsecase.clearStoreData();
+  void clearTypeValue() async =>
+      jobCardDetailsUsecase.clearTypeValue();
+  void clearisCheckedValue() async =>
+      jobCardDetailsUsecase.clearisCheckedValue();
+  void clearjobmodelValue() async =>
+      jobCardDetailsUsecase.clearjobmodelValue();
+    void clearjcValue() async =>
+      jobCardDetailsUsecase.clearjcValue();
+
+
   void saveValue({String? jobCardId}) async {
     return jobCardDetailsUsecase.saveValue(jobCardId: jobCardId);
   }

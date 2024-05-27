@@ -138,6 +138,26 @@ class JobCardDetailsController extends GetxController {
     selectedOption.value = newValue;
   }
 
+   void clearStoreData() {
+    jobCardDetailsPresenter.clearStoreData();
+  }
+
+  void clearTypeStoreData() {
+    jobCardDetailsPresenter.clearTypeValue();
+  }
+
+  void clearisCheckedtoreData() {
+    jobCardDetailsPresenter.clearisCheckedValue();
+  }
+
+  void clearjobmodelValue() {
+    jobCardDetailsPresenter.clearjobmodelValue();
+  }
+    void clearjcValue() {
+    jobCardDetailsPresenter.clearjcValue();
+  }
+
+
   void addRowItem() {
     rowItem.add([
       {"key": "Drop_down", "value": 'Please Select'},
