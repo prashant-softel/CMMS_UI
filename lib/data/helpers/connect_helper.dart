@@ -7159,7 +7159,7 @@ class ConnectHelper {
     bool? isLoading,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
-      'MRS/ReturnMRS',
+      'MRS/CreateReturnMRS',
       Request.post,
       createReturnMrsJsonString,
       isLoading ?? false,
