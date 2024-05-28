@@ -12,6 +12,12 @@ class AuditTaskUsecase {
           dynamic endDate,
           dynamic startDate}) async =>
       await repository.getAuditTaskList(
-          facilityId, isLoading,isExport, startDate, endDate);
+          facilityId, isLoading, isExport, startDate, endDate);
   void clearValue() async => repository.clearData(LocalKeys.auditTaskId);
+  void clearTypeValue() async => repository.clearData(LocalKeys.type);
+
+  void saveValue({String? type}) async =>
+      repository.saveValue(LocalKeys.type, type);
+  Future<String?> getValue() async =>
+      await repository.getStringValue(LocalKeys.type);
 }

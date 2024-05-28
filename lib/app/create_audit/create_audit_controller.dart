@@ -3,8 +3,11 @@ import 'dart:async';
 import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/create_audit/create_audit_presenter.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
+import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/domain/models/audit_plan_detail_model.dart';
 import 'package:cmms/domain/models/create_audit_plan_model.dart';
+import 'package:cmms/domain/models/employee_list_model.dart';
+import 'package:cmms/domain/models/employee_model.dart';
 import 'package:cmms/domain/models/frequency_model.dart';
 import 'package:cmms/domain/models/preventive_checklist_model.dart';
 import 'package:flutter/material.dart';
@@ -36,26 +39,48 @@ class CreateAuditController extends GetxController {
   int facilityId = 0;
   Rx<int> type = 0.obs;
   Rx<int> auditId = 0.obs;
+  var isToggleOn = false.obs;
+
+  void toggle() {
+    isToggleOn.value = !isToggleOn.value;
+  }
+
+  RxList<EmployeeModel?> assignedToList = <EmployeeModel>[].obs;
+  Rx<String> selectedAssignedTo = ''.obs;
+  Rx<bool> isAssignedToSelected = true.obs;
+  int selectedAssignedToId = 0;
+  Map<dynamic, dynamic> employee_map = {};
+  RxList<EmployeeListModel?> employeeNameList = <EmployeeListModel>[].obs;
+
+  RxList<EmployeeListModel?> filteredEmployeeNameList =
+      <EmployeeListModel>[].obs;
+  RxList<int> selectedEmployeeNameIdList = <int>[].obs;
+  RxList<String> selectedEmployeeNameList = <String>[].obs;
+
   Rx<AuditPlanDetailModel?> auditPlanDetailModel = AuditPlanDetailModel().obs;
   @override
   void onInit() async {
     try {
       await setType();
 
-      Future.delayed(Duration(seconds: 1), () {
-        getFrequencyList();
-      });
       facilityIdStreamSubscription =
           homecontroller.facilityId$.listen((event) async {
         facilityId = event;
         if (facilityId > 0) {
-          if (auditId != 0) {
+          if (auditId > 0) {
             await getAuditPlanDetails(
                 auditPlanId: auditId.value,
                 isloading: true,
                 facilityId: facilityId);
             // getHistory(facilityId);
           }
+          Future.delayed(Duration(seconds: 1), () {
+            getFrequencyList();
+          });
+          Future.delayed(Duration(seconds: 1), () {
+            getAssignedToList();
+            getEmployeePermitList();
+          });
         }
       });
 
@@ -88,6 +113,37 @@ class CreateAuditController extends GetxController {
       print(e.toString() + 'type');
       //  Utility.showDialog(e.toString() + 'type');
     }
+  }
+
+  Future<void> getAssignedToList() async {
+    assignedToList.clear();
+    final _assignedToList = await createAuditPresenter.getAssignedToEmployee(
+      facilityId: facilityId,
+      featureId: UserAccessConstants.kAuditPlanFeatureId,
+    );
+
+    if (_assignedToList != null) {
+      for (var assignedTo in _assignedToList) {
+        assignedToList.add(assignedTo);
+      }
+      // selectedAssignedTo.value =
+      //     getAssignedToName(jobDetailsModel.value?.assignedId ?? 0) ?? '';
+    }
+  }
+
+  Future<void> getEmployeePermitList() async {
+    employeeNameList.value = <EmployeeListModel>[];
+    final _employeeNameList = await createAuditPresenter.getEmployeePermitList(
+      isLoading: true,
+      // categoryIds: categoryIds,
+      facility_id: facilityId,
+    );
+    for (var employee_list in _employeeNameList) {
+      employeeNameList.add(employee_list);
+    }
+    // supplierNameList = _supplierNameList;
+
+    update(['permit_employee_list']);
   }
 
   Future<void> getAuditPlanDetails(
@@ -153,13 +209,49 @@ class CreateAuditController extends GetxController {
         }
 
         break;
-
+      case RxList<EmployeeModel>:
+        {
+          if (value != "Please Select") {
+            int assignedToIndex =
+                assignedToList.indexWhere((x) => x?.name == value);
+            selectedAssignedToId = assignedToList[assignedToIndex]?.id ?? 0;
+            if (selectedAssignedToId > 0) {
+              isAssignedToSelected.value = true;
+            }
+            selectedAssignedTo.value = value;
+          } else {
+            selectedAssignedToId = 0;
+          }
+        }
+        break;
       default:
         {}
         break;
     }
 
     // print({"selectedfrequency": selectedfrequency});
+  }
+
+  void employeeNameSelected(_selectedEmployeeNameIds) {
+    selectedEmployeeNameIdList.value = <int>[];
+    filteredEmployeeNameList.value = <EmployeeListModel>[];
+    late int emp_id = 0; //late int emp_id = 0;
+
+    for (var _selectedEmployeeNameId in _selectedEmployeeNameIds) {
+      selectedEmployeeNameIdList.add(_selectedEmployeeNameId);
+      EmployeeListModel? e = employeeNameList.firstWhere((element) {
+        return element?.id == _selectedEmployeeNameId;
+      });
+      filteredEmployeeNameList.add(e);
+    }
+
+    // Populate the single list with category labels and names
+    filteredEmployeeNameList.forEach((e) {
+      selectedEmployeeNameList.add(e?.name ?? "");
+      // categorizedNames.addAll(e!.name);
+    });
+    print("selectedEmployeeNameList1232,$selectedEmployeeNameList");
+    employee_map[emp_id] = selectedEmployeeNameIdList;
   }
 
   Future<void> getPreventiveCheckList(
@@ -198,9 +290,13 @@ class CreateAuditController extends GetxController {
       Facility_id: facilityId,
       auditee_id: varUserAccessModel.value.user_id,
       auditor_id: facilityId,
+      assignedTo: selectedAssignedTo.value,
+      Employees: selectedEmployeeNameList.value,
       Checklist_id: int.tryParse(selectedchecklistId.value),
       Description: _description,
       Schedule_Date: _startDate,
+      isPTW: isToggleOn.value,
+      Module_Type_id: type.value,
       ApplyFrequency: selectedfrequencyId,
     );
     var checkAuditJsonString =

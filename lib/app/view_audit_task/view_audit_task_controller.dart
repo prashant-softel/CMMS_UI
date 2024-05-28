@@ -24,6 +24,8 @@ class ViewAuditTaskController extends GetxController {
   TextEditingController approveCommentTextFieldCtrlr = TextEditingController();
   TextEditingController rejectCommentTextFieldCtrlr = TextEditingController();
   Rx<int> auditTaskId = 0.obs;
+  Rx<int> type = 0.obs;
+
   RxInt selectedValue = 1.obs;
   Rx<PmtaskViewModel> auditTasknDetailModel = PmtaskViewModel().obs;
   RxList<HistoryModel?>? historyList = <HistoryModel?>[].obs;
@@ -75,6 +77,7 @@ class ViewAuditTaskController extends GetxController {
   Future<void> setauditTaskId() async {
     try {
       final _auditTaskId = await viewAuditTaskPresenter.getValue();
+      final _type = await viewAuditTaskPresenter.getTypeValue();
 
       if (_auditTaskId == null ||
           _auditTaskId == '' ||
@@ -82,11 +85,14 @@ class ViewAuditTaskController extends GetxController {
         var dataFromPreviousScreen = Get.arguments;
 
         auditTaskId.value = dataFromPreviousScreen['auditTaskId'];
+        type.value = dataFromPreviousScreen['type'];
 
         viewAuditTaskPresenter.saveValue(
             auditTaskId: auditTaskId.value.toString());
+        viewAuditTaskPresenter.saveTypeValue(type: type.value.toString());
       } else {
         auditTaskId.value = int.tryParse(_auditTaskId) ?? 0;
+        type.value = int.tryParse(_type ?? "") ?? 0;
       }
     } catch (e) {
       Utility.showDialog(e.toString(), 'auditTaskId');

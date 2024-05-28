@@ -70,12 +70,20 @@ class _ViewAuditTaskWebState extends State<ViewAuditTaskWeb> {
                           ),
                         ),
                         InkWell(
-                            onTap: () {
-                              Get.offNamed(Routes.auditTask);
-                            },
-                            child: Text(" / AUDIT TASK",
-                                style: Styles.greyLight14)),
-                        Text(" / VIEW AUDIT TASK", style: Styles.greyLight14)
+                          onTap: () {
+                            Get.offNamed(Routes.auditTask,
+                                arguments: {'type': controller.type});
+                          },
+                          child: controller.type.value == AppConstants.kMis
+                              ? Text(" / MIS TASK", style: Styles.greyLight14)
+                              : Text(" / AUDIT TASK",
+                                  style: Styles.greyLight14),
+                        ),
+                        controller.type.value == AppConstants.kMis
+                            ? Text(" / VIEW MIS TASK",
+                                style: Styles.greyLight14)
+                            : Text(" / VIEW AUDIT TASK",
+                                style: Styles.greyLight14)
                       ],
                     ),
                   ),
@@ -110,7 +118,10 @@ class _ViewAuditTaskWebState extends State<ViewAuditTaskWeb> {
                                             padding: const EdgeInsets.only(
                                                 top: 10, right: 10, left: 10),
                                             child: Text(
-                                              " View Audit Task",
+                                              controller.type.value ==
+                                                      AppConstants.kMis
+                                                  ? "View MIS Task"
+                                                  : "View Audit Task",
                                               style: Styles.blackBold14,
                                             ),
                                           ),
@@ -189,7 +200,10 @@ class _ViewAuditTaskWebState extends State<ViewAuditTaskWeb> {
                                                 CrossAxisAlignment.end,
                                             children: [
                                               Text(
-                                                'Audit ID :',
+                                                controller.type.value ==
+                                                        AppConstants.kMis
+                                                    ? "MIS ID :"
+                                                    : 'Audit ID :',
                                                 style: Styles.black17,
                                               ),
                                               // Text(
@@ -224,7 +238,10 @@ class _ViewAuditTaskWebState extends State<ViewAuditTaskWeb> {
                                                 CrossAxisAlignment.start,
                                             children: [
                                               Text(
-                                                  'AUD${controller.auditTasknDetailModel.value?.id ?? ''}', //  "Block 2 all Inverter maintenance plan",
+                                                  controller.type.value ==
+                                                          AppConstants.kMis
+                                                      ? 'MIS${controller.auditTasknDetailModel.value?.id ?? ''}'
+                                                      : 'AUD${controller.auditTasknDetailModel.value?.id ?? ''}', //  "Block 2 all Inverter maintenance plan",
                                                   style: Styles.blue17),
                                               // Text(
                                               //     "Mis plan", //  '${controller.auditPlanDetailModel.value?.plan_number ?? ''}', //  "Block 2 all Inverter maintenance plan",
