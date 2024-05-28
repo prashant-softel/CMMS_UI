@@ -122,6 +122,12 @@ class ViewAuditTaskPresenter {
         auditTaskId: auditTaskId,
         isLoading: isLoading,
       );
+  void saveTypeValue({String? type}) async {
+    return viewAuditTaskUsecase.saveTypeValue(type: type);
+  }
+
+  Future<String?> getTypeValue() async =>
+      await viewAuditTaskUsecase.getTypeValue();
   void saveValue({String? auditTaskId}) async {
     return viewAuditTaskUsecase.saveValue(auditTaskId: auditTaskId);
   }

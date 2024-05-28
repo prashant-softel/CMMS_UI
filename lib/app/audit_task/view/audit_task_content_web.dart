@@ -3,6 +3,7 @@ import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/home/home_screen.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/theme/dimens.dart';
+import 'package:cmms/app/utils/app_constants.dart';
 import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
@@ -74,12 +75,18 @@ class _AuditTaskContentWebState extends State<AuditTaskContentWeb> {
                         ),
                         InkWell(
                           onTap: () {
-                            Get.offNamed(Routes.audit);
+                            controller.type.value == AppConstants.kMis
+                                ? Get.offNamed(Routes.misDashboard)
+                                : Get.offNamed(Routes.audit);
                           },
-                          child: Text(" / AUDIT",
-                              style: Styles.greyLight14),
+                          child: controller.type.value == AppConstants.kMis
+                              ? Text(" / MIS", style: Styles.greyLight14)
+                              : Text(" / AUDIT", style: Styles.greyLight14),
                         ),
-                        Text(" /AUDIT TASK", style: Styles.greyLight14)
+                        controller.type.value == AppConstants.kMis
+                            ? Text(" / OBSERVATION PLAN",
+                                style: Styles.greyLight14)
+                            : Text(" / AUDIT TASK", style: Styles.greyLight14)
                       ],
                     ),
                   ),
@@ -103,10 +110,15 @@ class _AuditTaskContentWebState extends State<AuditTaskContentWeb> {
                                   padding: const EdgeInsets.all(10.0),
                                   child: Row(
                                     children: [
-                                      Text(
-                                        "Audit Tasks ",
-                                        style: Styles.blackBold16,
-                                      ),
+                                      controller.type.value == AppConstants.kMis
+                                          ? Text(
+                                              "MIS Task",
+                                              style: Styles.blackBold14,
+                                            )
+                                          : Text(
+                                              "Audit Task",
+                                              style: Styles.blackBold16,
+                                            ),
                                       Spacer(),
                                       Row(
                                         children: [
@@ -554,9 +566,13 @@ class PmTaskDataSource extends DataTableSource {
                 ? Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        'AUT${pmTaskDetails?.id}',
-                      ),
+                      controller.type.value == AppConstants.kMis
+                          ? Text(
+                              'MIS${pmTaskDetails?.id}',
+                            )
+                          : Text(
+                              'AUT${pmTaskDetails?.id}',
+                            ),
                       Dimens.boxHeight5,
                       Align(
                         alignment: Alignment.centerRight,
@@ -673,12 +689,13 @@ class PmTaskDataSource extends DataTableSource {
                                 message: 'View',
                                 onPress: () {
                                   controller.clearStoreData();
-
+                                  // controller.clearTypeValue();
                                   int auditTaskId = pmTaskDetails?.id ?? 0;
                                   if (auditTaskId != 0) {
                                     Get.toNamed(Routes.viewAuditTask,
                                         arguments: {
-                                          'auditTaskId': auditTaskId
+                                          'auditTaskId': auditTaskId,
+                                          'type': controller.type.value
                                         });
                                   }
                                 },
@@ -708,8 +725,10 @@ class PmTaskDataSource extends DataTableSource {
       //   ],
       onSelectChanged: (_) {
         controller.clearStoreData();
-        int pmTaskId = pmTaskDetails?.id ?? 0;
-        if (pmTaskId != 0) {
+        // controller.clearTypeValue();
+
+        int taskId = pmTaskDetails?.id ?? 0;
+        if (taskId != 0) {
           varUserAccessModel.value.access_list!
                       .where((e) =>
                           e.feature_id ==
@@ -717,8 +736,10 @@ class PmTaskDataSource extends DataTableSource {
                           e.view == UserAccessConstants.kHaveViewAccess)
                       .length >
                   0
-              ? Get.toNamed(Routes.viewAuditTask,
-                  arguments: {'auditTaskId': pmTaskId})
+              ? Get.toNamed(Routes.viewAuditTask, arguments: {
+                  'auditTaskId': taskId,
+                  'type': controller.type.value
+                })
               : null;
         }
       },

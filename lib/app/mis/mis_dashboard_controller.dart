@@ -54,7 +54,7 @@ class MisDashboardController extends GetxController {
   void goToPlanListScreen() {
     misDashboardPresenter.clearValue();
 
-    Get.toNamed(Routes.checklistMisPlan);
+    Get.toNamed(Routes.auditListScreen, arguments: {'type': AppConstants.kMis});
   }
 
   void goToAddCourse() {
@@ -66,21 +66,21 @@ class MisDashboardController extends GetxController {
     misDashboardPresenter.clearValue();
     Get.toNamed(Routes.scheduleCourseList);
   }
-   void goToCourseCategory() {
+
+  void goToCourseCategory() {
     misDashboardPresenter.clearValue();
     Get.toNamed(Routes.courseCategory);
   }
-  
 
   void goTocreatePlanScreen() {
     misDashboardPresenter.clearValue();
-    Get.toNamed(Routes.createAudit, arguments: {"type": 3});
+    Get.toNamed(Routes.createAudit, arguments: {"type": AppConstants.kMis});
   }
 
   void goToMisTaskScreen() {
     misDashboardPresenter.clearValue();
 
-    Get.toNamed(Routes.misTask, arguments: {"type": 3});
+    Get.toNamed(Routes.auditTask, arguments: {'type': AppConstants.kMis});
   }
 
   void goToCreateObservation() {
@@ -90,13 +90,14 @@ class MisDashboardController extends GetxController {
   Future<void> createChecklist() async {
     misDashboardPresenter.clearValue();
 
-    Get.toNamed(Routes.preventiveList, arguments: {'type': 3});
+    Get.toNamed(Routes.preventiveList, arguments: {'type': AppConstants.kMis});
   }
 
   Future<void> checkPoint() async {
     misDashboardPresenter.clearValue();
 
-    Get.toNamed(Routes.preventiveCheckPoint, arguments: {'type': 3});
+    Get.toNamed(Routes.preventiveCheckPoint,
+        arguments: {'type': AppConstants.kMis});
   }
 
   void goToCheckListOfObservation() {

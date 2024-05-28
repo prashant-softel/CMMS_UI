@@ -70,16 +70,15 @@ class _ViewAuditPlanWebState extends State<ViewAuditPlanWeb> {
                         ),
                         InkWell(
                           onTap: () {
-                            controller.type.value == 3
-                                ? Get.offNamed(Routes.misDashboard)
-                                : Get.offNamed(Routes.auditListScreen);
+                            Get.offNamed(Routes.auditListScreen,
+                                arguments: {'type': controller.type});
                           },
-                          child: controller.type.value == 3
+                          child: controller.type.value == AppConstants.kMis
                               ? Text(" / MIS", style: Styles.greyLight14)
                               : Text(" / AUDIT LIST",
                                   style: Styles.greyLight14),
                         ),
-                        controller.type.value == 3
+                        controller.type.value == AppConstants.kMis
                             ? Text(" / VIEW OBSERVATION PLAN",
                                 style: Styles.greyLight14)
                             : Text(" / VIEW AUDIT PLAN",
@@ -113,7 +112,10 @@ class _ViewAuditPlanWebState extends State<ViewAuditPlanWeb> {
                                         padding: const EdgeInsets.only(
                                             top: 10, right: 10, left: 10),
                                         child: Text(
-                                          " View PM Plan",
+                                          controller.type.value ==
+                                                  AppConstants.kMis
+                                              ? "View MIS Plan"
+                                              : " View Audit Plan",
                                           style: Styles.blackBold14,
                                         ),
                                       ),
@@ -192,7 +194,10 @@ class _ViewAuditPlanWebState extends State<ViewAuditPlanWeb> {
                                             CrossAxisAlignment.end,
                                         children: [
                                           Text(
-                                            'Audit ID :',
+                                            controller.type.value ==
+                                                    AppConstants.kMis
+                                                ? "MIS ID"
+                                                : 'Audit ID :',
                                             style: Styles.black17,
                                           ),
                                           Text(
@@ -226,7 +231,10 @@ class _ViewAuditPlanWebState extends State<ViewAuditPlanWeb> {
                                             CrossAxisAlignment.start,
                                         children: [
                                           Text(
-                                              'AUD${controller.auditPlanDetailModel.value?.id ?? ''}', //  "Block 2 all Inverter maintenance plan",
+                                              controller.type.value ==
+                                                      AppConstants.kMis
+                                                  ? 'MIS${controller.auditPlanDetailModel.value?.id ?? ''}'
+                                                  : 'AUD${controller.auditPlanDetailModel.value?.id ?? ''}', //  "Block 2 all Inverter maintenance plan",
                                               style: Styles.blue17),
                                           Text(
                                               '${controller.auditPlanDetailModel.value?.plan_number ?? ''}', //  "Block 2 all Inverter maintenance plan",
