@@ -1,5 +1,6 @@
 import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
+import 'package:cmms/app/job_card_details/views/widgets/tbt_done_dialog.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/app/widgets/custom_textField.dart';
@@ -847,24 +848,37 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                                           ?.firstWhere((element) =>
                                               element.permitId != null)
                                           .status ==
-                                      125 &&
-                                  controller.permitList
-                                          ?.firstWhere((element) =>
-                                              element.permitId != null)
-                                          .tbT_Done_Check ==
-                                      1
+                                      125
                               ? Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.center, //
                                   children: [
                                       CustomElevatedButton(
-                                        text: 'Start Job Card',
-                                        onPressed: () =>
-                                            controller.startJobCard(
-                                                jcCard:
-                                                    controller.jobCardId.value,
-                                                fileIds:
-                                                    dropzoneController.fileIds),
+                                        text: 'Start',
+                                        onPressed: () {
+                                          controller.permitList
+                                                      ?.firstWhere((element) =>
+                                                          element.permitId !=
+                                                          null)
+                                                      .tbT_Done_Check ==
+                                                  1
+                                              ? controller.startJobCard(
+                                                  jcCard: controller
+                                                      .jobCardId.value,
+                                                  fileIds: dropzoneController
+                                                      .fileIds)
+                                              : Get.dialog<void>(TbtDoneBMDialog(
+                                                  ptw_id: controller
+                                                          .jobCardDetailsModel
+                                                          .value
+                                                          ?.ptwId ??
+                                                      0,
+                                                  id: controller
+                                                          .jobCardDetailsModel
+                                                          .value
+                                                          ?.id ??
+                                                      0));
+                                        },
                                         backgroundColor:
                                             ColorValues.addNewColor,
                                       )
@@ -876,7 +890,8 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                                     ])
                               : controller.jobCardDetailsModel.value!.status ==
                                           157 ||
-                                      controller.jobCardDetailsModel.value!.status ==
+                                      controller.jobCardDetailsModel.value!
+                                              .status ==
                                           152 ||
                                       controller.jobCardDetailsModel.value!
                                               .status ==
@@ -982,7 +997,8 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                                           ),
                                           Dimens.boxWidth10,
                                         ])
-                                  : controller.jobCardDetailsModel.value!.status ==
+                                  : controller.jobCardDetailsModel.value!
+                                              .status ==
                                           153
                                       // ||
                                       //         controller.jobCardList[0]!.status ==
@@ -1149,7 +1165,8 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                                                   .status ==
                                               156
                                           ? Row(
-                                              mainAxisAlignment: MainAxisAlignment.center,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
                                               //
                                               children: [
                                                   Container(

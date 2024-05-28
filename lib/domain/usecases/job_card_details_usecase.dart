@@ -168,5 +168,5 @@ class JobCardDetailsUsecase {
   void clearTypeValue() async => repository.clearData(LocalKeys.types);
   void clearisCheckedValue() async => repository.clearData(LocalKeys.isChecked);
   void clearjobmodelValue() async => repository.clearData(LocalKeys.jobModel);
-  void clearjcValue() async => repository.clearData(LocalKeys.jobCardId);
+  void clearpmTaskValue() async => repository.clearData(LocalKeys.pmTaskModel);
 }
