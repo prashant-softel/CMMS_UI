@@ -203,6 +203,7 @@ abstract class Routes {
   static const auditTask = _Paths.auditTask;
   static const addWaterData = _Paths.addWaterData;
   static const viewWaterData = _Paths.viewWaterData;
+  static const viewWasteData = _Paths.viewWasteData;
   static const viewHazWasteData = _Paths.viewHazWasteData;
   static const dsmCharges = _Paths.dsmCharges;
   static const viewAuditTask = _Paths.viewAuditTask;
@@ -422,6 +423,7 @@ abstract class _Paths {
   static const auditTask = '/auditTask';
   static const addWaterData = '/addWaterData';
   static const viewWaterData = '/viewWaterData';
+  static const viewWasteData = '/viewWasteData';
   static const dsmCharges = '/dsm-charges';
   static const dsmDashboardScreen = '/dsm-dashboard';
   static const importDsmListChargesListScreen =

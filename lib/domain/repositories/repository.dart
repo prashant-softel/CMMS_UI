@@ -98,6 +98,7 @@ import 'package:cmms/domain/models/warranty_claim_model.dart';
 import 'package:cmms/domain/models/warranty_type_model.dart';
 import 'package:cmms/domain/models/warranty_usage_term_list_model.dart';
 import 'package:cmms/domain/models/waste_data_list_model.dart';
+import 'package:cmms/domain/models/waste_data_month_model.dart';
 import 'package:cmms/domain/models/water_data_list_model.dart';
 import 'package:cmms/domain/models/water_data_month.dart';
 import 'package:cmms/domain/models/work_type_model.dart';
@@ -13086,6 +13087,42 @@ class Repository {
               waterDataMonthDetailModelFromJson(res.data);
           print({"water data by month", waterDataMonthDetails});
           return waterDataMonthDetails;
+        }
+      } else {
+        Utility.showDialog(res.errorCode.toString(), '400 Popup issue');
+        //return '';
+      }
+      return null;
+    } catch (error) {
+      print(error.toString());
+      return null;
+    }
+  }
+
+  Future<List<WasteDataMonthModel?>?> getWasteDataMonthDetail({
+    required int month,
+    required int year,
+    required int facilityId,
+    required int hazardous,
+    bool? isLoading,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getWasteDataMonthDetail(
+        auth: auth,
+        month: month,
+        year: year,
+        facilityId: facilityId,
+        hazardous: hazardous,
+        isLoading: isLoading ?? false,
+      );
+      print({"waste data by month", res.data});
+      if (!res.hasError) {
+        if (res.errorCode == 200) {
+          var wasteDataMonthDetails =
+              wasteDataMonthDetailModelFromJson(res.data);
+          print({"water data by month", wasteDataMonthDetails});
+          return wasteDataMonthDetails;
         }
       } else {
         Utility.showDialog(res.errorCode.toString(), '400 Popup issue');

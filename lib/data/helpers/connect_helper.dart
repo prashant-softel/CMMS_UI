@@ -8506,6 +8506,27 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> getWasteDataMonthDetail({
+    required String auth,
+    required int month,
+    required int year,
+    required int facilityId,
+    required int hazardous,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'MISMASTER/GetWasteDataMonthDetail?Month=$month&Year=$year&facility_id=$facilityId&hazardous=$hazardous',
+      Request.get,
+      null,
+      isLoading ?? false,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    print('ViewResponseModel${responseModel.data}');
+    return responseModel;
+  }
+
   Future<ResponseModel> getSourceObservationList(
       {required bool isLoading, required String auth}) async {
     ResponseModel responseModel = await apiWrapper.makeRequest(
