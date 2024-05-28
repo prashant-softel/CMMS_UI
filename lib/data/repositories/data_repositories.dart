@@ -4894,6 +4894,22 @@ class DataRepository extends DomainRepository {
         facilityId: facilityId,
         isLoading: isLoading ?? false,
       );
+  Future<ResponseModel> getWasteDataMonthDetail({
+    required String auth,
+    required int month,
+    required int year,
+    required int facilityId,
+    required int hazardous,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.getWasteDataMonthDetail(
+        auth: auth,
+        month: month,
+        year: year,
+        facilityId: facilityId,
+        hazardous: hazardous,
+        isLoading: isLoading ?? false,
+      );
   Future<ResponseModel> getSourceObservationList({
     required bool isLoading,
     required String auth,

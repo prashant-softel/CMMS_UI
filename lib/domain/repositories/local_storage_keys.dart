@@ -92,5 +92,6 @@ abstract class LocalKeys {
   static const grievanceId = 'grievanceId';
   static const monthId = 'monthId';
   static const year = 'year';
+  static const hazardous ='hazardous';
   static const courseId = 'courseId';
 }

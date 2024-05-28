@@ -66,16 +66,16 @@ class MisDashboardController extends GetxController {
     misDashboardPresenter.clearValue();
     Get.toNamed(Routes.scheduleCourseList);
   }
-   void goToCourseCategory() {
+
+  void goToCourseCategory() {
     misDashboardPresenter.clearValue();
     Get.toNamed(Routes.courseCategory);
   }
-   void goToTargetedGroup() {
+
+  void goToTargetedGroup() {
     misDashboardPresenter.clearValue();
     Get.toNamed(Routes.targetedGroup);
   }
-  
-  
 
   void goTocreatePlanScreen() {
     misDashboardPresenter.clearValue();
@@ -126,6 +126,28 @@ class MisDashboardController extends GetxController {
 
   void goToWasteDataScreen() {
     Get.toNamed(Routes.wasteData);
+  }
+
+  void goToHazardousDataScreen() {
+    Get.toNamed(
+      Routes.viewWasteData,
+      arguments: {
+        'monthId': 4,
+        'year': 2024,
+        'hazardous': 1,
+      },
+    );
+  }
+
+  void goToNonHazardousDataScreen() {
+    Get.toNamed(
+      Routes.viewWasteData,
+      arguments: {
+        'monthId': 4,
+        'year': 2024,
+        'hazardous': 0,
+      },
+    );
   }
 
   void goToWaterDataScreen() {
