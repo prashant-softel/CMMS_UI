@@ -1,11 +1,9 @@
 import 'dart:async';
 
 import 'package:cmms/app/app.dart';
-import 'package:cmms/app/SPV_list/SPV_list_presenter.dart';
 import 'package:cmms/app/course_category/course_category_presenter.dart';
 import 'package:cmms/domain/models/course_category_model.dart';
 import 'package:cmms/domain/models/facility_model.dart';
-import 'package:cmms/domain/models/SPV_list_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rxdart/subjects.dart';

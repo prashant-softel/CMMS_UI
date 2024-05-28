@@ -3,7 +3,8 @@ import 'dart:async';
 import 'package:cmms/app/add_training_course/add_course_presenter.dart';
 import 'package:cmms/app/home/home_controller.dart';
 import 'package:cmms/domain/models/add_training_course_model.dart';
-import 'package:cmms/domain/models/type_model.dart';
+import 'package:cmms/domain/models/course_category_model.dart';
+import 'package:cmms/domain/models/training_course_list_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rxdart/subjects.dart';
@@ -45,26 +46,35 @@ class AddCourseController extends GetxController {
   RxBool isFormInvalid = false.obs;
   RxBool isLoading = true.obs;
 
+  TrainingCourseListModel course = TrainingCourseListModel();
+  RxList<CourseCategoryModel> courseCategory = <CourseCategoryModel>[].obs;
+  RxList<CourseCategoryModel?>? targetedGroup = <CourseCategoryModel?>[].obs;
   Rx<String> selectedCategory = ''.obs;
   RxInt selectedCategoryId = 0.obs;
-  RxList<GenderModel> category = <GenderModel>[
-    GenderModel(name: "1st Course", id: 1),
-    GenderModel(name: "2nd Course", id: 2),
-    GenderModel(name: "3rd Course", id: 3),
-  ].obs;
-
   Rx<String> selectedGroup = ''.obs;
   RxInt selectedGroupId = 0.obs;
-  RxList<StatusModel> targetGroup = <StatusModel>[
-    StatusModel(name: "Group 1", id: 1),
-    StatusModel(name: "Group 2", id: 2),
-    StatusModel(name: "Group 3", id: 3),
-  ].obs;
 
-  void onInit() {
-    facilityIdStreamSubscription = homeController.facilityId$.listen((event) {
-      facilityId.value = event;
-    });
+  void onInit() async {
+    try {
+      await setId();
+      facilityIdStreamSubscription = homeController.facilityId$.listen((event) {
+        facilityId.value = event;
+        Future.delayed(Duration(seconds: 1), () async {
+          await getCourseCategory();
+        });
+        Future.delayed(Duration(seconds: 1), () async {
+          await getTargetedGroup();
+        });
+      });
+      if (courseId.value > 0) {
+        Future.delayed(Duration(seconds: 1), () async {
+          await getCourseDetails(courseId.value);
+        });
+      }
+    } catch (e) {
+      print(e);
+    }
+
     idFocus.addListener(() {
       if (!idFocus.hasFocus) {
         idScroll.jumpTo(0.0);
@@ -102,6 +112,48 @@ class AddCourseController extends GetxController {
     addCoursePresenter.clearValue();
   }
 
+  Future<void> getCourseDetails(int courseId) async {
+    course = TrainingCourseListModel();
+    final _courseDetails = await addCoursePresenter.getCourseDetails(
+      courseId: courseId,
+      isLoading: isLoading.value,
+    );
+    course = _courseDetails;
+    isLoading.value = false;
+
+    topic.text = course.name ?? '';
+    selectedCategory.value = course.categoryName ?? '';
+    selectedGroup.value = course.groupName ?? '';
+    selectedCategoryId.value = course.categoryId ?? 0;
+    selectedGroupId.value = course.groupId ?? 0;
+    descCtrlr.text = course.description ?? '';
+    noOfDays.text = course.number_of_days.toString();
+    minutes.text = course.duration.toString();
+    maximumCapacity.text = course.max_cap.toString();
+  }
+
+  Future<void> getCourseCategory() async {
+    courseCategory.value = <CourseCategoryModel>[];
+    final _cousreCategory = await addCoursePresenter.getCourseCategory(
+      isLoading: isLoading.value,
+    );
+    isLoading.value = false;
+    for (var category in _cousreCategory) {
+      courseCategory.add(category);
+    }
+  }
+
+  Future<void> getTargetedGroup() async {
+    targetedGroup?.value = <CourseCategoryModel>[];
+    final _targetGroup = await addCoursePresenter.getTargetedGroup(
+      isLoading: isLoading.value,
+    );
+    isLoading.value = false;
+    for (var targetGroup in _targetGroup) {
+      targetedGroup?.add(targetGroup);
+    }
+  }
+
   Future<void> addCourse({dynamic fileIds}) async {
     try {
       checkForm();
@@ -132,18 +184,14 @@ class AddCourseController extends GetxController {
           courseJson: trainingCourse,
           isLoading: isLoading.value,
         );
-        // if (response == true) {
-        //   cleardata();
-        //   Get.toNamed(Routes.trainingCourse);
-        //   isLoading.value = false;
-        // }
+        print(response);
       }
     } catch (e) {
       print(e);
     }
   }
 
-  Future<void> updateCOurse({dynamic fileIds}) async {
+  Future<void> updateCourse({dynamic fileIds}) async {
     try {
       checkForm();
       if (isFormInvalid.value) {
@@ -173,11 +221,7 @@ class AddCourseController extends GetxController {
           courseJson: trainingCourse,
           isLoading: isLoading.value,
         );
-        // if (response == true) {
-        //   cleardata();
-        //   Get.toNamed(Routes.trainingCourse);
-        //   isLoading.value = false;
-        // }
+        print(response);
       }
     } catch (e) {
       print(e);
@@ -247,18 +291,18 @@ class AddCourseController extends GetxController {
   void onValueChanged(dynamic list, dynamic value) {
     print({list, value});
     switch (list.runtimeType) {
-      case RxList<GenderModel>:
+      case RxList<CourseCategoryModel>:
         {
-          int blockIndex = category.indexWhere((x) => x.name == value);
-          selectedCategoryId.value = category[blockIndex].id ?? 0;
+          int blockIndex = courseCategory.indexWhere((x) => x.name == value);
+          selectedCategoryId.value = courseCategory[blockIndex].id ?? 0;
           isCategorySelected.value = true;
           selectedCategory.value = value;
         }
         break;
-      case RxList<StatusModel>:
+      case RxList<CourseCategoryModel?>:
         {
-          int blockIndex = targetGroup.indexWhere((x) => x.name == value);
-          selectedGroupId.value = targetGroup[blockIndex].id ?? 0;
+          int blockIndex = targetedGroup!.indexWhere((x) => x?.name == value);
+          selectedGroupId.value = targetedGroup?[blockIndex]?.id ?? 0;
           isGroupSelected.value = true;
           selectedGroup.value = value;
         }

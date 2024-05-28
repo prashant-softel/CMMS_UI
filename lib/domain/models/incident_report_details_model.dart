@@ -377,6 +377,7 @@ class DetailsOfInjuredPersonUpdate {
       this.person_type,
       this.age,
       this.sex,
+      this.gender,
       this.designation,
       this.address,
       this.name_contractor,
@@ -390,6 +391,7 @@ class DetailsOfInjuredPersonUpdate {
   int? person_type;
   int? age;
   int? sex;
+  String? gender;
   String? designation;
   String? address;
   String? name_contractor;
@@ -405,6 +407,7 @@ class DetailsOfInjuredPersonUpdate {
         person_type: json['person_type'],
         age: json['age'],
         sex: json['sex'],
+        gender: json['gender_name'],
         designation: json['designation'],
         address: json['address'],
         name_contractor: json["name_contractor"],
@@ -420,6 +423,7 @@ class DetailsOfInjuredPersonUpdate {
         "person_type": person_type,
         "age": age,
         "sex": sex,
+        "gender_name": gender,
         "designation": designation,
         "address": address,
         "name_contractor": name_contractor,

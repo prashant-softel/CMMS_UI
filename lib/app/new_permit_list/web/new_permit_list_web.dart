@@ -249,34 +249,6 @@ class _NewPermitListWebState extends State<NewPermitListWeb> {
                                               // Handle column selection
                                             },
                                           ),
-
-                                          // Container(
-                                          //   height: 35,
-                                          //   margin: EdgeInsets.only(left: 10),
-                                          //   child: CustomElevatedButton(
-                                          //       backgroundColor:
-                                          //           ColorValues.appLightBlueColor,
-                                          //       onPressed: () {},
-                                          //       text: 'Copy'),
-                                          // ),
-                                          // Container(
-                                          //   height: 35,
-                                          //   margin: EdgeInsets.only(left: 10),
-                                          //   child: CustomElevatedButton(
-                                          //       backgroundColor:
-                                          //           ColorValues.appLightBlueColor,
-                                          //       onPressed: () {},
-                                          //       text: 'Excel'),
-                                          // ),
-                                          // Container(
-                                          //   height: 35,
-                                          //   margin: EdgeInsets.only(left: 10),
-                                          //   child: CustomElevatedButton(
-                                          //       backgroundColor:
-                                          //           ColorValues.appLightBlueColor,
-                                          //       onPressed: () {},
-                                          //       text: 'PDF'),
-                                          // ),
                                           Container(
                                             decoration:
                                                 BoxDecoration(boxShadow: [
@@ -392,87 +364,6 @@ class _NewPermitListWebState extends State<NewPermitListWeb> {
                                                                 .ActionFilterText,
                                                             150,
                                                           ),
-                                                          // buildDataColumn(
-                                                          //   'PermitId',
-                                                          //   'Permit Id',
-                                                          //   //  ColumnSize.S,
-                                                          //   controller
-                                                          //       .PermitIdFilterText,
-                                                          //   130,
-                                                          // ),
-
-                                                          // // buildDataColumn(
-                                                          // //     "Description",
-                                                          // //     "Description",
-                                                          // //     // ColumnSize.M,
-                                                          // //     controller
-                                                          // //         .DescriptionFilterText,
-                                                          // //     200),
-                                                          // buildDataColumn(
-                                                          //   'Description',
-                                                          //   'Title',
-                                                          //   //  ColumnSize.S,
-                                                          //   controller
-                                                          //       .DescriptionFilterText,
-                                                          //   200,
-                                                          // ),
-                                                          // buildDataColumn(
-                                                          //   'PermitTypeName',
-                                                          //   'Permit Type Name',
-                                                          //   //  ColumnSize.S,
-                                                          //   controller
-                                                          //       .PermitTypeNameFilterText,
-                                                          //   200,
-                                                          // ),
-                                                          // buildDataColumn(
-                                                          //   'EquipmentCategories',
-                                                          //   'Equipment Category',
-                                                          //   //  ColumnSize.S,
-                                                          //   controller
-                                                          //       .EquipmentCategoriesFilterText,
-                                                          //   180,
-                                                          // ),
-                                                          // buildDataColumn(
-                                                          //     "WorkingAreaName",
-                                                          //     "Working Area", // ColumnSize.L,
-                                                          //     controller
-                                                          //         .WorkingAreaNameFilterText,
-                                                          //     200),
-                                                          // buildDataColumn(
-                                                          //     "RequestByName",
-                                                          //     "Requested By",
-                                                          //     // ColumnSize.L,
-                                                          //     controller
-                                                          //         .RequestByNameFilterText,
-                                                          //     200),
-                                                          // buildDataColumn(
-                                                          //     "ApprovedByName",
-                                                          //     "Approved By",
-                                                          //     // ColumnSize.L,
-                                                          //     controller
-                                                          //         .ApprovedByNameFilterText,
-                                                          //     200),
-                                                          // buildDataColumn(
-                                                          //     "CurrentStatusShort",
-                                                          //     "Status",
-                                                          //     // ColumnSize.L,
-                                                          //     controller
-                                                          //         .CurrentStatusShortFilterText,
-                                                          //     200),
-                                                          // buildDataColumn(
-                                                          //     "PTW Status code",
-                                                          //     "Status code",
-                                                          //     // ColumnSize.L,
-                                                          //     controller
-                                                          //         .PtwStatusFilterText,
-                                                          //     200),
-                                                          // buildDataColumn(
-                                                          //     'Action'.tr,
-                                                          //     'Actions',
-                                                          //     // ColumnSize.L,
-                                                          //     controller
-                                                          //         .ActionFilterText,
-                                                          //     230),
                                                         ],
                                                       );
                                                     },
@@ -551,36 +442,6 @@ class _NewPermitListWebState extends State<NewPermitListWeb> {
           Column(
               mainAxisAlignment: MainAxisAlignment.center, //
               children: [
-            // SizedBox(
-            //   height: Get.height * 0.05,
-            //   child: TextField(
-            //     style: GoogleFonts.lato(
-            //       textStyle: TextStyle(
-            //           fontSize: 16.0, height: 1.0, color: Colors.black),
-            //     ),
-            //     onChanged: (value) {
-            //       filterText.value = value;
-            //     },
-            //     textAlign: TextAlign.left,
-            //     decoration: InputDecoration(
-            //       hintText: 'Filter',
-            //       contentPadding: EdgeInsets.fromLTRB(
-            //           5, 0, 5, 0), // Reduced vertical padding
-            //       border: OutlineInputBorder(
-            //         borderRadius: BorderRadius.circular(5),
-            //         borderSide: BorderSide(color: Colors.black),
-            //       ),
-            //       focusedBorder: OutlineInputBorder(
-            //         borderRadius: BorderRadius.circular(5),
-            //         borderSide: BorderSide(color: Colors.black),
-            //       ),
-            //       enabledBorder: OutlineInputBorder(
-            //         borderRadius: BorderRadius.circular(5),
-            //         borderSide: BorderSide(color: Colors.black),
-            //       ),
-            //     ),
-            //   ),
-            // ),
             Align(
               alignment: Alignment.centerLeft,
               child: Text(
@@ -977,7 +838,18 @@ class PermitListDataSource extends DataTableSource {
                                                             permitId: 000),
                                                   )
                                                   ?.tbT_Done_Check ==
-                                              0
+                                              0 &&
+                                          controller.newPermitList
+                                                  .firstWhere(
+                                                    (e) =>
+                                                        "${e?.permitId}" ==
+                                                        "${PermitDetails?.permitId}",
+                                                    orElse: () =>
+                                                        NewPermitModel(
+                                                            permitId: 000),
+                                                  )
+                                                  ?.requestById ==
+                                              varUserAccessModel.value.user_id
                                       ? TableActionButton(
                                           color: Color.fromARGB(
                                               136, 107, 152, 211),
@@ -1069,17 +941,43 @@ class PermitListDataSource extends DataTableSource {
                                                   varUserAccessModel
                                                       .value.user_id &&
                                               (controller.newPermitList
-                                                      .firstWhere(
-                                                        (e) =>
-                                                            "${e?.permitId}" ==
-                                                            "${PermitDetails?.permitId}",
-                                                        orElse: () =>
-                                                            NewPermitModel(
-                                                                permitId: 000),
-                                                      )
-                                                      ?.ptwStatus ==
-                                                  PermitStatusConstants
-                                                      .PTW_APPROVE //125
+                                                          .firstWhere(
+                                                            (e) =>
+                                                                "${e?.permitId}" ==
+                                                                "${PermitDetails?.permitId}",
+                                                            orElse: () =>
+                                                                NewPermitModel(
+                                                                    permitId:
+                                                                        000),
+                                                          )
+                                                          ?.ptwStatus ==
+                                                      PermitStatusConstants
+                                                          .PTW_APPROVE //125
+                                                  &&
+                                                  controller.newPermitList
+                                                          .firstWhere(
+                                                            (e) =>
+                                                                "${e?.permitId}" ==
+                                                                "${PermitDetails?.permitId}",
+                                                            orElse: () =>
+                                                                NewPermitModel(
+                                                                    permitId:
+                                                                        000),
+                                                          )
+                                                          ?.tbT_Done_Check ==
+                                                      1 &&
+                                                  controller.isOneHour(
+                                                          controller
+                                                                  .newPermitList
+                                                                  .firstWhere(
+                                                                    (e) =>
+                                                                        "${e?.permitId}" ==
+                                                                        "${PermitDetails?.permitId}",
+                                                                  )
+                                                                  ?.endDate ??
+                                                              "") ==
+                                                      true
+
                                               //||
                                               // controller.newPermitList
                                               //         .firstWhere(
@@ -1295,62 +1193,8 @@ class PermitListDataSource extends DataTableSource {
                                           },
                                         )
                                       : Dimens.box0
-
-                                  // TableActionButton(
-                                  //     color: ColorValues.appRedColor,
-                                  //     icon: Icons.close,
-                                  //     message: 'Cancel Permit',
-                                  //     onPress: () {
-                                  //       controller.cancelPermitList(
-                                  //           permitId:
-                                  //               PermitDetails?.permitId);
-                                  //       // Get.dialog(PermitCancelReQuestDialog(
-                                  //       //     permitId: PermitDetails?.permitId
-                                  //       //         .toString()));
-                                  //     },
-                                  //   ),
                                 ],
                               ),
-
-                              ///Checkbox
-                              // varUserAccessModel.value.access_list!
-                              //                 .where((e) =>
-                              //                     e.feature_id ==
-                              //                         UserAccessConstants
-                              //                             .kPermitFeatureId &&
-                              //                     e.edit ==
-                              //                         UserAccessConstants
-                              //                             .kHaveEditAccess)
-                              //                 .length >
-                              //             0
-                              // &&
-                              // controller.newPermitList
-                              //         .firstWhere(
-                              //           (e) =>
-                              //               "${e?.permitId}" ==
-                              //               "${PermitDetails?.permitId}",
-                              //           orElse: () =>
-                              //               NewPermitModel(permitId: 000),
-                              //         )
-                              //         ?.ptwStatus ==
-                              //     124
-                              // ? Row(
-                              //     children: [
-                              //       Obx(
-                              //         () => Checkbox(
-                              //           value: controller.isChecked.value,
-                              //           onChanged: (value) {
-                              //             // When the checkbox is changed, update the state using the controller
-                              //             controller.isChecked.value = value!;
-                              //             print(
-                              //                 'Checkbox Value:${controller.isChecked.value}');
-                              //           },
-                              //         ),
-                              //       ),
-                              //       Text('Re-Submit for approval'),
-                              //     ],
-                              //   )
-                              // : Container(),
                             ],
                           ),
                         ],
@@ -1365,597 +1209,6 @@ class PermitListDataSource extends DataTableSource {
       },
     );
   }
-
-  // @override
-  // DataRow? getRow(int index) {
-  //   final PermitDetails = filteredNewPermitList[index];
-
-  //   controller.permitId.value = PermitDetails?.permitId ?? 0;
-
-  //   return DataRow.byIndex(
-  //       index: index,
-  //       cells: [
-  //         DataCell(
-  //           Text(
-  //             '${PermitDetails?.permitId ?? ''}',
-  //           ),
-  //         ),
-  //         DataCell(
-  //           Column(
-  //             mainAxisAlignment: MainAxisAlignment.center,
-  //             crossAxisAlignment: CrossAxisAlignment.start,
-  //             children: [
-  //               Text(
-  //                 '${PermitDetails?.description ?? ''}',
-  //               ),
-  //               Container(
-  //                 padding: EdgeInsets.symmetric(vertical: 2, horizontal: 5),
-  //                 margin: EdgeInsets.only(top: 5),
-  //                 decoration: BoxDecoration(
-  //                   color: controller.newPermitList
-  //                                   .firstWhere(
-  //                                     (e) =>
-  //                                         "${e?.permitId}" ==
-  //                                         "${PermitDetails?.permitId}",
-  //                                     orElse: () =>
-  //                                         NewPermitModel(permitId: 000),
-  //                                   )
-  //                                   ?.ptwStatus ==
-  //                               PermitStatusConstants.PTW_CREATED //121
-  //                           ||
-  //                           controller.newPermitList
-  //                                   .firstWhere(
-  //                                     (e) =>
-  //                                         "${e?.permitId}" ==
-  //                                         "${PermitDetails?.permitId}",
-  //                                     orElse: () =>
-  //                                         NewPermitModel(permitId: 000),
-  //                                   )
-  //                                   ?.ptwStatus ==
-  //                               PermitStatusConstants.PTW_EXTEND_REQUESTED
-  //                       ? ColorValues.yellowColor
-  //                       : controller.newPermitList
-  //                                       .firstWhere(
-  //                                         (e) =>
-  //                                             "${e?.permitId}" ==
-  //                                             "${PermitDetails?.permitId}",
-  //                                         orElse: () =>
-  //                                             NewPermitModel(permitId: 000),
-  //                                       )
-  //                                       ?.ptwStatus ==
-  //                                   PermitStatusConstants.PTW_APPROVE //125
-  //                               ||
-  //                               controller.newPermitList
-  //                                       .firstWhere(
-  //                                         (e) =>
-  //                                             "${e?.permitId}" ==
-  //                                             "${PermitDetails?.permitId}",
-  //                                         orElse: () =>
-  //                                             NewPermitModel(permitId: 000),
-  //                                       )
-  //                                       ?.ptwStatus ==
-  //                                   PermitStatusConstants
-  //                                       .PTW_EXTEND_REQUEST_APPROVE //135
-
-  //                           ? ColorValues.appGreenColor
-  //                           : ColorValues.appRedColor,
-  //                   borderRadius: BorderRadius.circular(5),
-  //                 ),
-  //                 child: Text(
-  //                   //'${jobDetails?.status ?? ''}
-  //                   ' ${PermitDetails?.current_status_short ?? ''}',
-  //                   style: TextStyle(color: ColorValues.whiteColor),
-  //                 ),
-  //               ),
-  //             ],
-  //           ),
-  //         ),
-
-  //         // '${PermitDetails?.id ?? ''}',
-  //         ...[
-  //           '${PermitDetails?.permitTypeName ?? ''}',
-  //           '${PermitDetails?.equipment_categories ?? ''}',
-  //           '${PermitDetails?.workingAreaName ?? ''}',
-  //           '${PermitDetails?.requestByName ?? ''}\n${PermitDetails?.requestDatetime}',
-  //           '${PermitDetails?.approvedByName ?? ''}\n${PermitDetails?.approvedDatetime}',
-  //           '${PermitDetails?.current_status_short ?? ''}',
-  //           '${PermitDetails?.ptwStatus ?? ''}',
-  //           'Actions',
-  //         ].map((value) {
-  //           return DataCell(
-  //             Padding(
-  //               padding: EdgeInsets.zero,
-  //               child: (value == 'Actions')
-  //                   ? Column(
-  //                       mainAxisAlignment: MainAxisAlignment.start,
-  //                       children: [
-  //                         Wrap(
-  //                           children: [
-  //                             varUserAccessModel.value.access_list!
-  //                                             .where((e) =>
-  //                                                 e.feature_id ==
-  //                                                     UserAccessConstants
-  //                                                         .kPermitFeatureId &&
-  //                                                 e.view ==
-  //                                                     UserAccessConstants
-  //                                                         .kHaveViewAccess)
-  //                                             .length >
-  //                                         0 ||
-  //                                     controller.newPermitList
-  //                                             .firstWhere(
-  //                                               (e) =>
-  //                                                   "${e?.permitId}" ==
-  //                                                   "${PermitDetails?.permitId}",
-  //                                               orElse: () => NewPermitModel(
-  //                                                   permitId: 000),
-  //                                             )
-  //                                             ?.ptwStatus ==
-  //                                         PermitStatusConstants.PTW_CLOSED
-  //                                 ? TableActionButton(
-  //                                     color: ColorValues.appDarkBlueColor,
-  //                                     icon: Icons.visibility,
-  //                                     message: 'View Permit',
-  //                                     onPress: () {
-  //                                       controller.viewNewPermitList(
-  //                                           permitId: PermitDetails?.permitId);
-  //                                     },
-  //                                   )
-  //                                 : Container(),
-
-  //                             varUserAccessModel.value.access_list!
-  //                                             .where((e) =>
-  //                                                 e.feature_id ==
-  //                                                     UserAccessConstants
-  //                                                         .kPermitFeatureId &&
-  //                                                 e.approve ==
-  //                                                     UserAccessConstants
-  //                                                         .kHaveApproveAccess)
-  //                                             .length >
-  //                                         0 ||
-  //                                     controller.newPermitList
-  //                                                 .firstWhere(
-  //                                                   (e) =>
-  //                                                       "${e?.permitId}" ==
-  //                                                       "${PermitDetails?.permitId}",
-  //                                                   orElse: () =>
-  //                                                       NewPermitModel(
-  //                                                           permitId: 000),
-  //                                                 )
-  //                                                 ?.ptwStatus ==
-  //                                             PermitStatusConstants.PTW_CREATED
-  //                                         //121
-  //                                         // AppConstants.kPermitStatusCreated ///121
-  //                                         &&
-  //                                         controller.newPermitList
-  //                                                 .firstWhere(
-  //                                                   (e) =>
-  //                                                       "${e?.permitId}" ==
-  //                                                       "${PermitDetails?.permitId}",
-  //                                                   orElse: () =>
-  //                                                       NewPermitModel(
-  //                                                           permitId: 000),
-  //                                                 )
-  //                                                 ?.ptwStatus ==
-  //                                             PermitStatusConstants
-  //                                                 .PTW_EXTEND_REQUESTED //133
-
-  //                                 ? TableActionButton(
-  //                                     color: ColorValues.appGreenColor,
-  //                                     icon: Icons.add,
-  //                                     message: controller.newPermitList
-  //                                                 .firstWhere(
-  //                                                   (e) =>
-  //                                                       "${e?.permitId}" ==
-  //                                                       "${PermitDetails?.permitId}",
-  //                                                   orElse: () =>
-  //                                                       NewPermitModel(
-  //                                                           permitId: 000),
-  //                                                 )
-  //                                                 ?.ptwStatus ==
-  //                                             PermitStatusConstants
-  //                                                 .PTW_CREATED //121
-  //                                         // AppConstants.kPermitStatusCreated ///121
-  //                                         ? 'Approve/Reject Permit'
-  //                                         : "Approve/Reject Extend",
-  //                                     onPress: () {
-  //                                       controller.viewNewPermitList(
-  //                                           permitId: PermitDetails?.permitId);
-  //                                     },
-  //                                   )
-  //                                 : Dimens.box0,
-
-  //                             ///Permit Edit button
-  //                             varUserAccessModel.value.access_list!
-  //                                             .where((e) =>
-  //                                                 e.feature_id ==
-  //                                                     UserAccessConstants
-  //                                                         .kPermitFeatureId &&
-  //                                                 e.add ==
-  //                                                     UserAccessConstants
-  //                                                         .kHaveAddAccess)
-  //                                             .length >
-  //                                         0 &&
-  //                                     controller.newPermitList
-  //                                             .firstWhere(
-  //                                               (e) =>
-  //                                                   "${e?.permitId}" ==
-  //                                                   "${PermitDetails?.permitId}",
-  //                                               orElse: () => NewPermitModel(
-  //                                                   permitId: 000),
-  //                                             )
-  //                                             ?.ptwStatus ==
-  //                                         PermitStatusConstants
-  //                                             .PTW_CREATED //121
-  //                                 // ||
-  //                                 // controller.newPermitList
-  //                                 //         .firstWhere(
-  //                                 //           (e) =>
-  //                                 //               "${e?.permitId}" ==
-  //                                 //               "${PermitDetails?.permitId}",
-  //                                 //           orElse: () =>
-  //                                 //               NewPermitModel(
-  //                                 //                   permitId: 000),
-  //                                 //         )
-  //                                 //         ?.ptwStatus ==
-  //                                 //     124
-  //                                 ? TableActionButton(
-  //                                     color: ColorValues.appYellowColor,
-  //                                     icon: Icons.edit,
-  //                                     message: 'Edit Permit',
-  //                                     onPress: () {
-  //                                       controller.editNewPermit(
-  //                                           permitId: PermitDetails?.permitId,
-  //                                           isChecked:
-  //                                               controller.isChecked.value);
-  //                                       print(
-  //                                           'PermitTest:${controller.newPermitListModel?.permitId}');
-  //                                     },
-  //                                   )
-  //                                 : Dimens.box0,
-  //                             controller.newPermitList
-  //                                             .firstWhere(
-  //                                               (e) =>
-  //                                                   "${e?.permitId}" ==
-  //                                                   "${PermitDetails?.permitId}",
-  //                                               orElse: () => NewPermitModel(
-  //                                                   permitId: 000),
-  //                                             )
-  //                                             ?.ptwStatus ==
-  //                                         PermitStatusConstants
-  //                                             .PTW_REJECTED_BY_APPROVER //124
-
-  //                                     &&
-  //                                     varUserAccessModel.value.access_list!
-  //                                             .where((e) =>
-  //                                                 e.feature_id ==
-  //                                                     UserAccessConstants
-  //                                                         .kPermitFeatureId &&
-  //                                                 e.add ==
-  //                                                     UserAccessConstants
-  //                                                         .kHaveAddAccess)
-  //                                             .length >
-  //                                         0
-  //                                 ? TableActionButton(
-  //                                     color: Color.fromARGB(255, 116, 78, 130),
-  //                                     icon: Icons.ads_click,
-  //                                     message: 'Re-Submit Permit',
-  //                                     onPress: () {
-  //                                       controller.editNewPermit(
-  //                                           permitId: PermitDetails?.permitId,
-  //                                           isChecked:
-  //                                               controller.isChecked.value);
-  //                                       print(
-  //                                           'PermitTest:${controller.newPermitListModel?.permitId}');
-  //                                     },
-  //                                   )
-  //                                 : Dimens.box0,
-
-  //                             ///Extend Button
-  //                             varUserAccessModel.value.access_list!
-  //                                                 .where((e) =>
-  //                                                     e.feature_id ==
-  //                                                         UserAccessConstants
-  //                                                             .kPermitFeatureId &&
-  //                                                     e.add ==
-  //                                                         UserAccessConstants
-  //                                                             .kHaveAddAccess)
-  //                                                 .length >
-  //                                             0 &&
-  //                                         controller.newPermitList
-  //                                                 .firstWhere(
-  //                                                   (e) =>
-  //                                                       "${e?.permitId}" ==
-  //                                                       "${PermitDetails?.permitId}",
-  //                                                   orElse: () =>
-  //                                                       NewPermitModel(
-  //                                                           permitId: 000),
-  //                                                 )
-  //                                                 ?.isExpired ==
-  //                                             1 ||
-  //                                     controller.newPermitList
-  //                                                 .firstWhere(
-  //                                                   (e) =>
-  //                                                       "${e?.permitId}" ==
-  //                                                       "${PermitDetails?.permitId}",
-  //                                                   orElse: () =>
-  //                                                       NewPermitModel(
-  //                                                           permitId: 000),
-  //                                                 )
-  //                                                 ?.requestById ==
-  //                                             varUserAccessModel
-  //                                                 .value.user_id &&
-  //                                         (controller.newPermitList
-  //                                                 .firstWhere(
-  //                                                   (e) =>
-  //                                                       "${e?.permitId}" ==
-  //                                                       "${PermitDetails?.permitId}",
-  //                                                   orElse: () =>
-  //                                                       NewPermitModel(
-  //                                                           permitId: 000),
-  //                                                 )
-  //                                                 ?.ptwStatus ==
-  //                                             PermitStatusConstants
-  //                                                 .PTW_APPROVE //125
-  //                                         //||
-  //                                         // controller.newPermitList
-  //                                         //         .firstWhere(
-  //                                         //           (e) =>
-  //                                         //               "${e?.permitId}" ==
-  //                                         //               "${PermitDetails?.permitId}",
-  //                                         //           orElse: () =>
-  //                                         //               NewPermitModel(
-  //                                         //                   permitId:
-  //                                         //                       000),
-  //                                         //         )
-  //                                         //         ?.ptwStatus ==
-  //                                         //     135
-  //                                         )
-  //                                 ? TableActionButton(
-  //                                     color: ColorValues.appDarkBlueColor,
-  //                                     icon: Icons.expand_outlined,
-  //                                     message: 'Extend Permit',
-  //                                     onPress: () {
-  //                                       // Get.dialog(PermitExtendDialog(
-  //                                       //     permitId: PermitDetails?.permitId
-  //                                       //         .toString()));
-  //                                       controller.extendPermitList(
-  //                                           permitId: PermitDetails?.permitId);
-  //                                     },
-  //                                   )
-  //                                 : Container(),
-
-  //                             ////Approve button
-
-  //                             ///Close Permit
-  //                             varUserAccessModel.value.access_list!
-  //                                                 .where((e) =>
-  //                                                     e.feature_id ==
-  //                                                         UserAccessConstants
-  //                                                             .kPermitFeatureId &&
-  //                                                     e.add ==
-  //                                                         UserAccessConstants
-  //                                                             .kHaveAddAccess)
-  //                                                 .length >
-  //                                             0 &&
-  //                                         controller.newPermitList
-  //                                                 .firstWhere(
-  //                                                   (e) =>
-  //                                                       "${e?.permitId}" ==
-  //                                                       "${PermitDetails?.permitId}",
-  //                                                   orElse: () =>
-  //                                                       NewPermitModel(
-  //                                                           permitId: 000),
-  //                                                 )
-  //                                                 ?.ptwStatus ==
-  //                                             PermitStatusConstants
-  //                                                 .PTW_CANCEL_REQUEST_REJECTED //121
-  //                                     ||
-  //                                     controller.newPermitList
-  //                                             .firstWhere(
-  //                                               (e) =>
-  //                                                   "${e?.permitId}" ==
-  //                                                   "${PermitDetails?.permitId}",
-  //                                               orElse: () => NewPermitModel(
-  //                                                   permitId: 000),
-  //                                             )
-  //                                             ?.ptwStatus ==
-  //                                         PermitStatusConstants
-  //                                             .PTW_EXTEND_REQUEST_REJECTED
-  //                                 ? TableActionButton(
-  //                                     color: ColorValues.appcloseRedColor,
-  //                                     icon: Icons.close,
-  //                                     message: 'Close Permit',
-  //                                     onPress: () {
-  //                                       // Get.dialog(PermitCloseDialog(
-  //                                       //     permitId: PermitDetails?.permitId
-  //                                       //         .toString()));
-  //                                       controller.closePermitRequestList(
-  //                                           permitId: PermitDetails?.permitId);
-  //                                     },
-  //                                   )
-  //                                 : Container(),
-
-  //                             ////Permit Cancel By Approver / Cancel Permit Request
-  //                             varUserAccessModel.value.access_list!
-  //                                             .where((e) =>
-  //                                                 e.feature_id ==
-  //                                                     UserAccessConstants
-  //                                                         .kPermitFeatureId &&
-  //                                                 e.approve ==
-  //                                                     UserAccessConstants
-  //                                                         .kHaveApproveAccess)
-  //                                             .length >
-  //                                         0 ||
-  //                                     // varUserAccessModel.value.access_list!
-  //                                     //         .where((e) =>
-  //                                     //             e.feature_id ==
-  //                                     //                 UserAccessConstants
-  //                                     //                     .kPermitFeatureId &&
-  //                                     //             e.edit ==
-  //                                     //                 UserAccessConstants
-  //                                     //                     .kHaveEditAccess)
-  //                                     //         .length >
-  //                                     //     0
-  //                                     //      ||
-  //                                     controller.newPermitList
-  //                                             .firstWhere(
-  //                                               (e) =>
-  //                                                   "${e?.permitId}" ==
-  //                                                   "${PermitDetails?.permitId}",
-  //                                               orElse: () => NewPermitModel(
-  //                                                   permitId: 000),
-  //                                             )
-  //                                             ?.ptwStatus ==
-  //                                         PermitStatusConstants
-  //                                             .PTW_APPROVE //125
-  //                                     ||
-  //                                     controller.newPermitList
-  //                                             .firstWhere(
-  //                                               (e) =>
-  //                                                   "${e?.permitId}" ==
-  //                                                   "${PermitDetails?.permitId}",
-  //                                               orElse: () => NewPermitModel(
-  //                                                   permitId: 000),
-  //                                             )
-  //                                             ?.ptwStatus ==
-  //                                         PermitStatusConstants
-  //                                             .PTW_CREATED //121
-  //                                     ||
-  //                                     controller.newPermitList
-  //                                             .firstWhere(
-  //                                               (e) =>
-  //                                                   "${e?.permitId}" ==
-  //                                                   "${PermitDetails?.permitId}",
-  //                                               orElse: () => NewPermitModel(
-  //                                                   permitId: 000),
-  //                                             )
-  //                                             ?.ptwStatus ==
-  //                                         PermitStatusConstants
-  //                                             .PTW_EXTEND_REQUEST_REJECTED ||
-  //                                     controller.newPermitList
-  //                                             .firstWhere(
-  //                                               (e) =>
-  //                                                   "${e?.permitId}" ==
-  //                                                   "${PermitDetails?.permitId}",
-  //                                               orElse: () => NewPermitModel(
-  //                                                   permitId: 000),
-  //                                             )
-  //                                             ?.ptwStatus ==
-  //                                         PermitStatusConstants
-  //                                             .PTW_CANCEL_REQUEST_REJECTED
-  //                                 ? TableActionButton(
-  //                                     color: ColorValues.appRedColor,
-  //                                     icon: Icons.close,
-  //                                     message: 'Cancel Permit',
-  //                                     onPress: () {
-  //                                       controller.cancelPermitList(
-  //                                           permitId: PermitDetails?.permitId);
-  //                                       // Get.dialog(PermitCancelReQuestDialog(
-  //                                       //     permitId: PermitDetails?.permitId
-  //                                       //         .toString()));
-  //                                     },
-  //                                   )
-  //                                 : Dimens.box0,
-
-  //                             varUserAccessModel.value.access_list!
-  //                                             .where((e) =>
-  //                                                 e.feature_id ==
-  //                                                     UserAccessConstants
-  //                                                         .kPermitFeatureId &&
-  //                                                 e.approve ==
-  //                                                     UserAccessConstants
-  //                                                         .kHaveApproveAccess)
-  //                                             .length >
-  //                                         0 &&
-  //                                     controller.newPermitList
-  //                                             .firstWhere(
-  //                                               (e) =>
-  //                                                   "${e?.permitId}" ==
-  //                                                   "${PermitDetails?.permitId}",
-  //                                               orElse: () => NewPermitModel(
-  //                                                   permitId: 000),
-  //                                             )
-  //                                             ?.ptwStatus ==
-  //                                         PermitStatusConstants
-  //                                             .PTW_CANCEL_REQUESTED //130
-  //                                 ? TableActionButton(
-  //                                     color: Color.fromARGB(255, 113, 15, 149),
-  //                                     icon: Icons.approval_rounded,
-  //                                     message: ' Approve Cancel',
-  //                                     onPress: () {
-  //                                       controller.viewNewPermitList(
-  //                                           permitId: PermitDetails?.permitId);
-  //                                     },
-  //                                   )
-  //                                 : Dimens.box0
-
-  //                             // TableActionButton(
-  //                             //     color: ColorValues.appRedColor,
-  //                             //     icon: Icons.close,
-  //                             //     message: 'Cancel Permit',
-  //                             //     onPress: () {
-  //                             //       controller.cancelPermitList(
-  //                             //           permitId:
-  //                             //               PermitDetails?.permitId);
-  //                             //       // Get.dialog(PermitCancelReQuestDialog(
-  //                             //       //     permitId: PermitDetails?.permitId
-  //                             //       //         .toString()));
-  //                             //     },
-  //                             //   ),
-  //                           ],
-  //                         ),
-
-  //                         ///Checkbox
-  //                         // varUserAccessModel.value.access_list!
-  //                         //                 .where((e) =>
-  //                         //                     e.feature_id ==
-  //                         //                         UserAccessConstants
-  //                         //                             .kPermitFeatureId &&
-  //                         //                     e.edit ==
-  //                         //                         UserAccessConstants
-  //                         //                             .kHaveEditAccess)
-  //                         //                 .length >
-  //                         //             0
-  //                         // &&
-  //                         // controller.newPermitList
-  //                         //         .firstWhere(
-  //                         //           (e) =>
-  //                         //               "${e?.permitId}" ==
-  //                         //               "${PermitDetails?.permitId}",
-  //                         //           orElse: () =>
-  //                         //               NewPermitModel(permitId: 000),
-  //                         //         )
-  //                         //         ?.ptwStatus ==
-  //                         //     124
-  //                         // ? Row(
-  //                         //     children: [
-  //                         //       Obx(
-  //                         //         () => Checkbox(
-  //                         //           value: controller.isChecked.value,
-  //                         //           onChanged: (value) {
-  //                         //             // When the checkbox is changed, update the state using the controller
-  //                         //             controller.isChecked.value = value!;
-  //                         //             print(
-  //                         //                 'Checkbox Value:${controller.isChecked.value}');
-  //                         //           },
-  //                         //         ),
-  //                         //       ),
-  //                         //       Text('Re-Submit for approval'),
-  //                         //     ],
-  //                         //   )
-  //                         // : Container(),
-  //                       ],
-  //                     )
-  //                   : Text(value.toString()),
-  //             ),
-  //           );
-  //         }
-  //         ).toList(),
-  //       ],
-  //       onSelectChanged: (_) {
-  //         controller.viewNewPermitList(permitId: PermitDetails?.permitId);
-  //       });
-  // }
 
   @override
   int get rowCount => filteredNewPermitList.length;

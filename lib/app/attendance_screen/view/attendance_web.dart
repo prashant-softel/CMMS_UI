@@ -134,8 +134,9 @@ class AttendanceWeb extends GetView<AttendanceController> {
                                         60,
                                     child: Obx(
                                       () => DataTable2(
-                                        // border:
-                                        //     TableBorder.all(color: Colors.black),
+                                        // border: TableBorder.all(
+                                        //   color: ColorValues.greyLightColour,
+                                        // ),
                                         dataRowHeight: 50.0,
                                         columns: const [
                                           DataColumn2(
@@ -188,46 +189,38 @@ class AttendanceWeb extends GetView<AttendanceController> {
                                                   ),
                                                 ),
                                                 DataCell(
-                                                  employee.inTime != null
-                                                      ? Text(
-                                                          employee.inTime!,
-                                                        )
-                                                      : IgnorePointer(
-                                                          ignoring: employee
-                                                                      .present
-                                                                      .value ==
-                                                                  true
-                                                              ? false
-                                                              : true,
-                                                          child:
-                                                              _buildTimeField_web(
-                                                            context,
-                                                            controller
-                                                                    .inTimeControllers[
-                                                                index],
-                                                          ),
-                                                        ),
+                                                  IgnorePointer(
+                                                    ignoring: employee.present
+                                                                .value ==
+                                                            true
+                                                        ? false
+                                                        : true,
+                                                    child: _buildTimeField_web(
+                                                      context: context,
+                                                      index: index,
+                                                      position: 1,
+                                                      textcontroller: controller
+                                                              .inTimeControllers[
+                                                          index],
+                                                    ),
+                                                  ),
                                                 ),
                                                 DataCell(
-                                                  employee.outTime != null
-                                                      ? Text(
-                                                          employee.outTime!,
-                                                        )
-                                                      : IgnorePointer(
-                                                          ignoring: employee
-                                                                      .present
-                                                                      .value ==
-                                                                  true
-                                                              ? false
-                                                              : true,
-                                                          child:
-                                                              _buildTimeField_web(
-                                                            context,
-                                                            controller
-                                                                    .outTimeControllers[
-                                                                index],
-                                                          ),
-                                                        ),
+                                                  IgnorePointer(
+                                                    ignoring: employee.present
+                                                                .value ==
+                                                            true
+                                                        ? false
+                                                        : true,
+                                                    child: _buildTimeField_web(
+                                                      context: context,
+                                                      index: index,
+                                                      position: 2,
+                                                      textcontroller: controller
+                                                              .outTimeControllers[
+                                                          index],
+                                                    ),
+                                                  ),
                                                 ),
                                               ],
                                             );
@@ -337,6 +330,7 @@ class AttendanceWeb extends GetView<AttendanceController> {
               text: "Submit",
               onPressed: () {
                 controller.addAttendance();
+                controller.clearData();
               },
             ),
           ),
@@ -358,10 +352,12 @@ class AttendanceWeb extends GetView<AttendanceController> {
     );
   }
 
-  Widget _buildTimeField_web(
-    BuildContext context,
-    TextEditingController textcontroller,
-  ) {
+  Widget _buildTimeField_web({
+    required BuildContext context,
+    required int index,
+    required int position, // 1= in time and 2 = out time
+    required TextEditingController textcontroller,
+  }) {
     return Column(
       children: [
         Padding(
@@ -402,7 +398,8 @@ class AttendanceWeb extends GetView<AttendanceController> {
                   enabledBorder: InputBorder.none,
                   focusedBorder: InputBorder.none,
                 ),
-                onTap: () => _pickTime(context, textcontroller),
+                onTap: () =>
+                    _pickTime(context, textcontroller, index, position),
               ),
             ),
           ),
@@ -412,7 +409,11 @@ class AttendanceWeb extends GetView<AttendanceController> {
   }
 
   Future<void> _pickTime(
-      BuildContext context, TextEditingController controller) async {
+    BuildContext context,
+    TextEditingController controllertxt,
+    int index,
+    int position,
+  ) async {
     TimeOfDay? pickedTime = await showTimePicker(
       context: context,
       initialTime: TimeOfDay.now(),
@@ -425,7 +426,12 @@ class AttendanceWeb extends GetView<AttendanceController> {
     );
 
     if (pickedTime != null) {
-      controller.text = pickedTime.format(context);
+      controllertxt.text = pickedTime.format(context);
+      if (position == 1) {
+        controller.updateInTime(index, controllertxt.text);
+      } else {
+        controller.updateOutTime(index, controllertxt.text);
+      }
     }
   }
 

@@ -162,10 +162,12 @@ class JobCardDetailsPresenter {
 
   Future<bool> approvecloseJob({
     approveJsonString,
+    closePtwJsonString,
     required bool isLoading,
   }) async {
     return jobCardDetailsUsecase.approvecloseJob(
       approveJsonString: approveJsonString,
+      closePtwJsonString: closePtwJsonString,
       isLoading: isLoading,
     );
   }
@@ -180,6 +182,18 @@ class JobCardDetailsPresenter {
       isLoading: isLoading,
     );
   }
+
+  void clearStoreData() async =>
+      jobCardDetailsUsecase.clearStoreData();
+  void clearTypeValue() async =>
+      jobCardDetailsUsecase.clearTypeValue();
+  void clearisCheckedValue() async =>
+      jobCardDetailsUsecase.clearisCheckedValue();
+  void clearjobmodelValue() async =>
+      jobCardDetailsUsecase.clearjobmodelValue();
+    void clearpmTaskValue() async =>
+      jobCardDetailsUsecase.clearpmTaskValue();
+
 
   void saveValue({String? jobCardId}) async {
     return jobCardDetailsUsecase.saveValue(jobCardId: jobCardId);

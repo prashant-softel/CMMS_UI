@@ -20,13 +20,12 @@ class TrainingCourseListModel {
   int? facilityId;
   int? categoryId;
   String? categoryName;
-  String? groupId;
+  int? groupId;
   String? groupName;
   int? number_of_days;
   int? duration;
   int? max_cap;
   String? description;
-
 
   TrainingCourseListModel({
     this.id,
@@ -48,9 +47,9 @@ class TrainingCourseListModel {
         name: json["name"],
         facilityId: json["facility_id"],
         categoryId: json["category_id"],
-        categoryName: json["category_name"],
+        categoryName: json["traning_category"],
         groupId: json["group_id"],
-        groupName: json["group_name"],
+        groupName: json["targated_group"],
         number_of_days: json["number_of_days"],
         duration: json["duration"],
         max_cap: json["max_cap"],
@@ -62,9 +61,9 @@ class TrainingCourseListModel {
         "name": name,
         "facility_id": facilityId,
         "category_id": categoryId,
-        "category_name": categoryName,
+        "traning_category": categoryName,
         "group_id": groupId,
-        "group_name": groupName,
+        "targated_group": groupName,
         "number_of_days": number_of_days,
         "duration": duration,
         "max_cap": max_cap,

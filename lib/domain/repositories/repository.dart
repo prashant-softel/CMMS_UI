@@ -98,6 +98,7 @@ import 'package:cmms/domain/models/warranty_claim_model.dart';
 import 'package:cmms/domain/models/warranty_type_model.dart';
 import 'package:cmms/domain/models/warranty_usage_term_list_model.dart';
 import 'package:cmms/domain/models/waste_data_list_model.dart';
+import 'package:cmms/domain/models/waste_data_month_model.dart';
 import 'package:cmms/domain/models/water_data_list_model.dart';
 import 'package:cmms/domain/models/water_data_month.dart';
 import 'package:cmms/domain/models/work_type_model.dart';
@@ -7395,7 +7396,8 @@ class Repository {
     }
   }
 
-  Future<bool> approvecloseJob({bool? isLoading, approveJsonString}) async {
+  Future<bool> approvecloseJob(
+      {bool? isLoading, approveJsonString, closePtwJsonString}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       log(auth);
@@ -7405,6 +7407,7 @@ class Repository {
           approveJsonString: json.encode(approveJsonString));
       print({"res.data", res.data});
       if (!res.hasError) {
+        permitCloseButton(closePtwJsonString, isLoading, 0);
         Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
         // Get.offAllNamed(Routes.jobList);
         return true;
@@ -8395,23 +8398,25 @@ class Repository {
             ],
             ...jsonDataList
                 .map((userListJson) => [
-                      userListJson['name'],
+                      userListJson['user_name'].toString(),
                       "-",
-                      userListJson['full_name'].toString(),
-                      "-",
-                      "-",
-                      "-",
-                      "-",
-                      userListJson['contact_no'],
-                      "-",
-                      "-",
-                      "-",
-                      "-",
-                      "-",
-                      "Yes",
-                      "-",
-                      "-",
-                      "-",
+                      userListJson['secondaryName'].toString(),
+                      userListJson['firstName'],
+                      userListJson['lastName'],
+                      userListJson['dateOfBirth'],
+                      userListJson['gender'],
+                      userListJson['bloodGroup'],
+                      userListJson['mobileNumber'],
+                      userListJson['landlineNumber'],
+                      userListJson['country'],
+                      userListJson['state'],
+                      userListJson['city'],
+                      userListJson['zipcodes'],
+                      userListJson['role_name'],
+                      userListJson['employees'] == 1 ? 'Yes' : 'No',
+                      userListJson['joining_dates'],
+                      '-',
+                      '-'
                     ])
                 .toList(),
           ];
@@ -13094,6 +13099,42 @@ class Repository {
     }
   }
 
+  Future<List<WasteDataMonthModel?>?> getWasteDataMonthDetail({
+    required int month,
+    required int year,
+    required int facilityId,
+    required int hazardous,
+    bool? isLoading,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getWasteDataMonthDetail(
+        auth: auth,
+        month: month,
+        year: year,
+        facilityId: facilityId,
+        hazardous: hazardous,
+        isLoading: isLoading ?? false,
+      );
+      print({"waste data by month", res.data});
+      if (!res.hasError) {
+        if (res.errorCode == 200) {
+          var wasteDataMonthDetails =
+              wasteDataMonthDetailModelFromJson(res.data);
+          print({"water data by month", wasteDataMonthDetails});
+          return wasteDataMonthDetails;
+        }
+      } else {
+        Utility.showDialog(res.errorCode.toString(), '400 Popup issue');
+        //return '';
+      }
+      return null;
+    } catch (error) {
+      print(error.toString());
+      return null;
+    }
+  }
+
   Future<List<SourceOfObservationListModel>> getSourceObservationList({
     required bool isLoading,
   }) async {
@@ -13493,7 +13534,7 @@ class Repository {
       print('Add Course Response: ${resourceData}');
       if (!res.hasError) {
         Fluttertoast.showToast(
-          msg: " paln  Add Successfully...",
+          msg: "Course Add Successfully",
           fontSize: 16.0,
         );
         Get.offNamed(
@@ -13524,7 +13565,7 @@ class Repository {
       print('Add Course Response: ${resourceData}');
       if (!res.hasError) {
         Fluttertoast.showToast(
-          msg: " paln  Add Successfully...",
+          msg: "Course Updated Successfully",
           fontSize: 16.0,
         );
         Get.offNamed(
@@ -13575,10 +13616,14 @@ class Repository {
       );
       print('Get Training Course List: ${res.data}');
       if (!res.hasError) {
-        final String jsonTrainingCourseListModels = res.data;
+        final jsonTrainingCourseListModels = jsonDecode(res.data);
         final List<TrainingCourseListModel> _trainingList =
-            trainingCourseListFromJson(jsonTrainingCourseListModels);
-        return _trainingList.reversed.toList();
+            jsonTrainingCourseListModels
+                .map<TrainingCourseListModel>((m) =>
+                    TrainingCourseListModel.fromJson(
+                        Map<String, dynamic>.from(m)))
+                .toList();
+        return _trainingList;
       } else {
         Utility.showDialog(res.errorCode.toString(), 'getTrainingCourseList');
         return [];
@@ -13589,6 +13634,70 @@ class Repository {
     }
   }
 
+  Future<TrainingCourseListModel> getCourseDetails({
+    int? courseId,
+    bool? isLoading,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      log(auth);
+      final res = await _dataRepository.getCourseDetails(
+        auth: auth,
+        courseId: courseId,
+        isLoading: isLoading,
+      );
+      print('Get Training Course List: ${res.data}');
+      if (!res.hasError) {
+        final jsonTrainingCourseListModels = jsonDecode(res.data);
+        final List<TrainingCourseListModel> _trainingList =
+            jsonTrainingCourseListModels
+                .map<TrainingCourseListModel>(
+                  (m) => TrainingCourseListModel.fromJson(
+                    Map<String, dynamic>.from(m),
+                  ),
+                )
+                .toList();
+        final TrainingCourseListModel _training =
+            _trainingList.firstWhere((element) => courseId == element.id);
+        print(_training);
+        return _training;
+      } else {
+        Utility.showDialog(res.errorCode.toString(), 'getTrainingCourseList');
+        return TrainingCourseListModel();
+      }
+    } catch (error) {
+      print(error.toString());
+      return TrainingCourseListModel();
+    }
+  }
+
+  Future<Map<String, dynamic>> scheduleCourse({
+    scheduleCourseJson,
+    isLoading,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.scheduleCourse(
+        auth: auth,
+        scheduleCourseJson: scheduleCourseJson,
+        isLoading: isLoading ?? false,
+      );
+      var resourceData = res.data;
+      print('Add Course Response: ${resourceData}');
+      if (!res.hasError) {
+        Fluttertoast.showToast(
+          msg: "Course Scheduled Successfully",
+          fontSize: 16.0,
+        );
+      } else {
+        Utility.showDialog(res.errorCode.toString(), 'Add Course');
+      }
+      return Map();
+    } catch (error) {
+      print(error.toString());
+      return Map();
+    }
+  }
 
   //Course Category
   //get
@@ -13680,6 +13789,106 @@ class Repository {
         //get delete response back from API
       } else {
         Utility.showDialog(res.errorCode.toString(), 'delete Course Category');
+      }
+    } catch (error) {
+      print(error.toString());
+    }
+  }
+  //Targeted Group
+  //get
+  Future<List<CourseCategoryModel>> getTargetedGroup({
+    required bool isLoading,
+    int? job_type_id,
+
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+
+      log(auth);
+      final res = await _dataRepository.getTargetedGroup(
+        isLoading: isLoading,
+        auth: auth,
+      );
+      print('Course Category: ${res.data}');
+
+      if (!res.hasError) {
+        var Sourcetype = CourseCategoryModelFromJson(res.data);
+        return Sourcetype;
+
+      }
+      return [];
+    } catch (error) {
+      log(error.toString());
+      return [];
+    }
+  }
+
+
+  //create
+  Future<bool> createTargetedGroup(
+      {bool? isLoading, CourseCategoryJsonString}) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.createTargetedGroup(
+          auth: auth,
+          isLoading: isLoading,
+          CourseCategoryJsonString: CourseCategoryJsonString);
+
+      if (!res.hasError) {
+        return true;
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString(), ' createCheckListNumber');
+        return false;
+      }
+    } catch (error) {
+      print(error.toString());
+      return false;
+    }
+  }
+
+  //update
+  Future<bool> updateTargetedGroup({
+    bool? isLoading,
+    CourseCategoryJsonString,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.updateTargetedGroup(
+        auth: auth,
+        isLoading: isLoading,
+        CourseCategoryJsonString: CourseCategoryJsonString,
+      );
+      print(res.data);
+      if (!res.hasError) {
+        return true;
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString(), 'Update Course Category');
+        return false;
+      }
+    } catch (error) {
+      print(error.toString());
+      return false;
+    }
+  }
+
+  //delete
+  Future<void> deleteTargetedGroup(
+      Object category_id, bool isLoading) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.deleteTargetedGroup(
+        auth: auth,
+        category_id: category_id,
+        isLoading: isLoading,
+      );
+
+      if (!res.hasError) {
+        //get delete response back from API
+      } else {
+        Utility.showDialog(
+            res.errorCode.toString(), 'delete Targeted Group');
       }
     } catch (error) {
       print(error.toString());

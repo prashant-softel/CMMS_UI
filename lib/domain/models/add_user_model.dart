@@ -61,7 +61,7 @@ class AddUserModel {
   factory AddUserModel.fromJson(Map<String, dynamic> json) => AddUserModel(
         id: json["id"],
         company_id: json["company_id"],
-        designationId: json["designationId"],
+        designationId: json["designation_id"],
         secondaryEmail: json["secondaryEmail"],
         first_name: json["first_name"],
         last_name: json["last_name"],
@@ -92,7 +92,7 @@ class AddUserModel {
   Map<String, dynamic> toJson() => {
         "id": id,
         "company_id": company_id,
-        "designationId": designationId,
+        "designation_id": designationId,
         "secondaryEmail": secondaryEmail,
         "first_name": first_name,
         "last_name": last_name,

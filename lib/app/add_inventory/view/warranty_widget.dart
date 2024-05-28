@@ -104,8 +104,25 @@ class _WarrantyTabWidgetState extends State<WarrantyTabWidget> {
                                 width: (MediaQuery.of(context).size.width * .2),
                                 textController:
                                     controller.warrentyDescriptionCtrlr,
+                                     errorController: controller
+                                                            .isDescriptionInvalid
+                                                            .value
+                                                        ? "Required field"
+                                                        : null,
+                                                    onChanged: (value) {
+                                                      if (value.trim().length >
+                                                          1) {
+                                                        controller
+                                                            .isDescriptionInvalid
+                                                            .value = false;
+                                                      } else {
+                                                        controller
+                                                            .isDescriptionInvalid
+                                                            .value = true;
+                                                      }
+                                                    }
                                 // focusnode: controller.wdescFocus,
-                                scroll: controller.wdescScroll,
+                                // scroll: controller.wdescScroll,
                               ),
                             ],
                           ),
@@ -123,6 +140,24 @@ class _WarrantyTabWidgetState extends State<WarrantyTabWidget> {
                                   controller.update(['warranty_tab']);
                                 },
                                 textController: controller.startDateTc,
+                                  errorController: controller
+                                                            .isStartDateInvalid
+                                                            .value
+                                                        ? "Required field"
+                                                        : null,
+                                                    onChanged: (value) {
+                                                      if (value.trim().length >
+                                                          1) {
+                                                        controller
+                                                            .isStartDateInvalid
+                                                            .value = false;
+                                                      } else {
+                                                        controller
+                                                            .isStartDateInvalid
+                                                            .value = true;
+                                                      }
+                                                    }
+
                               ),
                             ],
                           ),
@@ -180,7 +215,25 @@ class _WarrantyTabWidgetState extends State<WarrantyTabWidget> {
                                       FilteringTextInputFormatter.digitsOnly
                                     ],
                                     textController:
-                                        controller.certificateNoCtrlr),
+                                        controller.certificateNoCtrlr,
+                                          errorController: controller
+                                                            .isCertificateNumberInvalid
+                                                            .value
+                                                        ? "Required field"
+                                                        : null,
+                                                    onChanged: (value) {
+                                                      if (value.trim().length >
+                                                          1) {
+                                                        controller
+                                                            .isCertificateNumberInvalid
+                                                            .value = false;
+                                                      } else {
+                                                        controller
+                                                            .isCertificateNumberInvalid
+                                                            .value = true;
+                                                      }
+                                                    }
+                                        ),
                               ),
                             ],
                           ),
@@ -199,6 +252,7 @@ class _WarrantyTabWidgetState extends State<WarrantyTabWidget> {
                                   onPressed: () {},
                                   icon: Icons.file_upload_outlined,
                                   color: ColorValues.appLightBlueColor,
+                                  
                                 )
                               ],
                             ),
@@ -206,7 +260,7 @@ class _WarrantyTabWidgetState extends State<WarrantyTabWidget> {
                           Dimens.boxHeight10,
                           Row(
                             children: [
-                              CustomRichText(title: '         Expire Date:'),
+                              CustomRichText(title: ' Expire Date:'),
                               SizedBox(width: 10),
                               CustomTextFieldForStock(
                                 width: MediaQuery.of(context).size.width / 5,
@@ -217,6 +271,24 @@ class _WarrantyTabWidgetState extends State<WarrantyTabWidget> {
                                   controller.update(['warranty_tab']);
                                 },
                                 textController: controller.expireDateTc,
+                                  errorController: controller
+                                                            .isExpireDateInvalid
+                                                            .value
+                                                        ? "Required field"
+                                                        : null,
+                                                    onChanged: (value) {
+                                                      if (value.trim().length >
+                                                          1) {
+                                                        controller
+                                                            .isExpireDateInvalid
+                                                            .value = false;
+                                                      } else {
+                                                        controller
+                                                            .isExpireDateInvalid
+                                                            .value = true;
+                                                      }
+                                                    }
+
                               ),
                             ],
                           ),
@@ -283,6 +355,8 @@ class _WarrantyTabWidgetState extends State<WarrantyTabWidget> {
                                           ),
                                         );
                                       } else {
+                                         controller.isStartDateInvalid.value=false;
+                                        controller.isExpireDateInvalid.value=false;
                                         controller.expireDateTc.text =
                                             selectedDate;
                                         controller.openExpiryDatePicker =

@@ -55,8 +55,8 @@ class JobCardListController extends GetxController {
                 false) ||
             (item?.jobId?.toString().toLowerCase().contains(keyword.toLowerCase()) ??
                 false) ||
-            (item?.permit_id?.toString().toLowerCase().contains(keyword.toLowerCase()) ??
-                false) ||
+            // (item?.permit_id?.toString().toLowerCase().contains(keyword.toLowerCase()) ??
+            //     false) ||
             (item?.permit_no?.toString().toLowerCase().contains(keyword.toLowerCase()) ??
                 false) ||
             (item?.description

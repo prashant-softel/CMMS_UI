@@ -7159,7 +7159,7 @@ class ConnectHelper {
     bool? isLoading,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
-      'MRS/ReturnMRS',
+      'MRS/CreateReturnMRS',
       Request.post,
       createReturnMrsJsonString,
       isLoading ?? false,
@@ -8506,6 +8506,27 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> getWasteDataMonthDetail({
+    required String auth,
+    required int month,
+    required int year,
+    required int facilityId,
+    required int hazardous,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'MISMASTER/GetWasteDataMonthDetail?Month=$month&Year=$year&facility_id=$facilityId&hazardous=$hazardous',
+      Request.get,
+      null,
+      isLoading ?? false,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    print('ViewResponseModel${responseModel.data}');
+    return responseModel;
+  }
+
   Future<ResponseModel> getSourceObservationList(
       {required bool isLoading, required String auth}) async {
     ResponseModel responseModel = await apiWrapper.makeRequest(
@@ -8665,7 +8686,7 @@ class ConnectHelper {
     bool? isLoading,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
-      'sefs', //AddBusiness
+      'Attendence/CreateAttendance', //AddBusiness
       Request.post,
       jsonEmployeeAttendance,
       isLoading ?? false,
@@ -8822,7 +8843,7 @@ class ConnectHelper {
   }) async {
     var responseModel = await apiWrapper.makeRequest(
       'Training/UpdateCourse',
-      Request.put,
+      Request.patch,
       courseJson,
       isLoading ?? false,
       {
@@ -8870,12 +8891,47 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> getCourseDetails({
+    required String auth,
+    int? courseId,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Training/GetCourseDetailById?id=$courseId',
+      Request.get,
+      null,
+      isLoading ?? true,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
+  Future<ResponseModel> scheduleCourse({
+    auth,
+    scheduleCourseJson,
+    isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      '',
+      Request.post,
+      scheduleCourseJson,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
   //Course Category
   //Get
   Future<ResponseModel> getCourseCategory(
       {required bool isLoading, required String auth}) async {
     ResponseModel responseModel = await apiWrapper.makeRequest(
-      '',
+      'Training/GetTrainingCategorty',
       Request.get,
       null,
       isLoading,
@@ -8895,7 +8951,7 @@ class ConnectHelper {
     var responseModel =
         // responseModel =
         await apiWrapper.makeRequest(
-      '',
+      'Training/CreateTrainingCategorty',
       Request.post,
       CourseCategoryJsonString,
       isLoading ?? false,
@@ -8915,9 +8971,9 @@ class ConnectHelper {
     CourseCategoryJsonString,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
-      '',
-      Request.post,
-      CourseCategoryJsonString,
+      'Training/UpdateTrainingCategorty',
+      Request.put,
+      jsonEncode(CourseCategoryJsonString),
       isLoading ?? false,
       {
         'Content-Type': 'application/json',
@@ -8935,7 +8991,85 @@ class ConnectHelper {
     required category_id,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
-      '',
+      'Training/DeleteTrainingCategorty?id=$category_id',
+      Request.delete,
+      null,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+  
+  //Targeted Group
+  //Get
+  Future<ResponseModel> getTargetedGroup(
+      {required bool isLoading, required String auth}) async {
+    ResponseModel responseModel = await apiWrapper.makeRequest(
+      'Training/GetTargetedGroup',
+      Request.get,
+      null,
+      isLoading,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
+  //create
+  Future<ResponseModel> createTargetedGroup({
+    required String auth,
+    bool? isLoading,
+    CourseCategoryJsonString,
+  }) async {
+    var responseModel =
+        // responseModel =
+        await apiWrapper.makeRequest(
+      'Training/CreateTargetedGroup', 
+      Request.post,
+      CourseCategoryJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
+  //update
+  Future<ResponseModel> updateTargetedGroup({
+    required String auth,
+    bool? isLoading,
+    CourseCategoryJsonString,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Training/UpdateTargetedGroup',
+      Request.put,
+      jsonEncode(CourseCategoryJsonString),
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
+  //delete
+  Future<ResponseModel> deleteTargetedGroup({
+    required String auth,
+    bool? isLoading,
+    required category_id,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Training/DeleteTargetedGroup?id=$category_id',
       Request.delete,
       null,
       isLoading ?? false,

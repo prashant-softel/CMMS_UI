@@ -1,12 +1,9 @@
 import 'dart:async';
-
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/waste_data/waste_data_presenter.dart';
-
 import 'package:cmms/domain/models/business_list_model.dart';
 import 'package:cmms/domain/models/create_waste_data_model.dart';
 import 'package:cmms/domain/models/facility_model.dart';
-import 'package:cmms/domain/models/type_model.dart';
 import 'package:cmms/domain/models/type_of_waste_model.dart';
 import 'package:cmms/domain/models/waste_data_list_model.dart';
 import 'package:flutter/material.dart';
@@ -40,6 +37,14 @@ class WasteDataController extends GetxController {
   Rx<bool> isSelectedBusinessType = true.obs;
   RxList<FacilityModel?> facilityList = <FacilityModel>[].obs;
   int facilityId = 0;
+  Rx<DateTime> fromDate = DateTime.now().subtract(Duration(days: 7)).obs;
+  Rx<DateTime> toDate = DateTime.now().obs;
+  String get formattedFromdate =>
+      DateFormat('dd/MM/yyyy').format(fromDate.value);
+  String get formattedTodate => DateFormat('dd/MM/yyyy').format(toDate.value);
+  String get formattedTodate1 => DateFormat('yyyy-MM-dd').format(toDate.value);
+  String get formattedFromdate1 =>
+      DateFormat('yyyy-MM-dd').format(fromDate.value);
   Rx<String> selectedBlock = ''.obs;
   Rx<DateTime> selectedWasteDataTime = DateTime.now().obs;
   var wasteDataTimeCtrlr = TextEditingController();
@@ -55,20 +60,6 @@ class WasteDataController extends GetxController {
 
   bool openFromDateToStartDatePicker = false;
   var waterDateTc = TextEditingController();
-  RxList<MonthModel> wasteData = <MonthModel>[
-    MonthModel(
-        name:
-            'Solid waste( Paper waste, Food waste, Plastic waste, metal, Glass etc)',
-        id: "1"),
-    MonthModel(name: 'E- waste in kgs ', id: "2"),
-    MonthModel(name: 'Battery Waste in number  ', id: "3"),
-    MonthModel(name: 'Solar Module waste in number  ', id: "4"),
-    MonthModel(
-        name: 'Haz waste Oil (E.g. used transformer oil) in litres ', id: "5"),
-    MonthModel(name: 'Haz Waste grease in kgs ', id: "6"),
-    MonthModel(name: 'Haz solid waste (e.g. used oil cotton) in Kgs ', id: "7"),
-    MonthModel(name: 'Haz waste oil barrel generated in No ', id: "8"),
-  ].obs;
 
   Rx<bool> isLoading = true.obs;
   int selectedYear = 2024;
@@ -79,7 +70,8 @@ class WasteDataController extends GetxController {
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
       facilityId = event;
       Future.delayed(Duration(seconds: 2), () async {
-        await getWasteDataList(facilityId, false);
+        await getWasteDataList(
+            facilityId, formattedTodate1, formattedFromdate1, false);
       });
       Future.delayed(Duration(seconds: 1), () async {
         getTypeOfWasteList();
@@ -88,7 +80,8 @@ class WasteDataController extends GetxController {
     super.onInit();
   }
 
-  Future<void> getWasteDataList(int facilityId, bool isExport) async {
+  Future<void> getWasteDataList(
+      int facilityId, dynamic startDate, dynamic endDate, bool isExport) async {
     wasteDataList.value = <WasteDataList>[];
     filteredData.value = <WasteDataList>[];
     masterDataList.value = <MasterList>[];
@@ -133,7 +126,7 @@ class WasteDataController extends GetxController {
       print({"_dataList": _dataList});
       mainHeaderList.add(
         {
-          "label": _dataList.water_type,
+          "label": _dataList.waste_type,
           "isShow": true,
           'subHeader': "Month",
           "dataKey": 'Month',
@@ -143,7 +136,7 @@ class WasteDataController extends GetxController {
       if (_dataList.show_opening == 1) {
         headerList.add(
           {
-            "label": _dataList.water_type,
+            "label": _dataList.waste_type,
             "isShow": true,
             'subHeader': "open",
             "dataKey": 'opening'
@@ -152,7 +145,7 @@ class WasteDataController extends GetxController {
       }
       headerList.add(
         {
-          "label": _dataList.water_type,
+          "label": _dataList.waste_type,
           "isShow": _dataList.show_opening == 1 ? false : true,
           'subHeader': "procrument",
           "dataKey": 'procuredQty'
@@ -160,7 +153,7 @@ class WasteDataController extends GetxController {
       );
       headerList.add(
         {
-          "label": _dataList.water_type,
+          "label": _dataList.waste_type,
           "isShow": false,
           'subHeader': "consmption",
           "dataKey": 'consumedQty'
@@ -170,7 +163,7 @@ class WasteDataController extends GetxController {
       if (_dataList.show_opening == 1) {
         headerList.add(
           {
-            "label": _dataList.water_type,
+            "label": _dataList.waste_type,
             "isShow": false,
             'subHeader': "close",
             "dataKey": 'closingQty'
@@ -178,7 +171,7 @@ class WasteDataController extends GetxController {
         );
       }
 
-      masterDataListName.add(_dataList.water_type ?? '');
+      masterDataListName.add(_dataList.waste_type ?? '');
     }
     headerList.add(
       {"label": 'Action', "isShow": true, 'subHeader': "", "dataKey": 'action'},
@@ -377,6 +370,6 @@ class WasteDataController extends GetxController {
   }
 
   void goWasteDataList() {
-    getWasteDataList(facilityId, false);
+    getWasteDataList(facilityId, formattedFromdate, formattedFromdate1, false);
   }
 }

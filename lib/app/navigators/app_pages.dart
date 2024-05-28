@@ -134,6 +134,8 @@ import 'package:cmms/app/schedule_course/View/schedule_course_screen.dart';
 import 'package:cmms/app/schedule_course/schedule_course_binding.dart';
 import 'package:cmms/app/schedule_course_list/schedule_course_list_binding.dart';
 import 'package:cmms/app/schedule_course_list/view/schedule_course_list_screen.dart';
+import 'package:cmms/app/targeted_group/View/targeted_group_screen.dart';
+import 'package:cmms/app/targeted_group/targeted_group_binding.dart';
 import 'package:cmms/app/tool_type/tool_type_binding.dart';
 import 'package:cmms/app/tool_type/views/tool_type_screen.dart';
 import 'package:cmms/app/training_courses/training_course_binding.dart';
@@ -215,6 +217,8 @@ import 'package:cmms/app/view_vegetation_plan/view/view_veg_plan_screen.dart';
 import 'package:cmms/app/view_vegetation_plan/view_veg_plan_binding.dart';
 import 'package:cmms/app/view_warranty_claim/view/view_warranty_claim_content_web.dart';
 import 'package:cmms/app/view_warranty_claim/view_warranty_claim_binding.dart';
+import 'package:cmms/app/view_waste_data/view/view_waste_data_screen.dart';
+import 'package:cmms/app/view_waste_data/view_waste_data_binding.dart';
 import 'package:cmms/app/view_water_data/view/view_water_data_screen.dart';
 import 'package:cmms/app/view_water_data/view_water_data_binding.dart';
 import 'package:cmms/app/warranty_certificates_list/warranty_certificates_list_binding.dart';
@@ -1198,6 +1202,12 @@ class AppPages {
     ),
 
     GetPage<dynamic>(
+      name: _Paths.viewWasteData,
+      page: ViewWasteDataScreen.new,
+      binding: ViewWasteDataBinding(),
+    ),
+
+    GetPage<dynamic>(
       name: _Paths.grievanceList,
       page: GrievanceListScreen.new,
       binding: GrievanceListBinding(),
@@ -1288,15 +1298,20 @@ class AppPages {
       page: AttendanceScreen.new,
       binding: AttendanceBinding(),
     ),
-     GetPage<dynamic>(
+    GetPage<dynamic>(
       name: _Paths.materialCategory,
       page: MaterialCategoryScreen.new,
       binding: MAterialCategoryBinding(),
     ),
-     GetPage<dynamic>(
+    GetPage<dynamic>(
       name: _Paths.courseCategory,
       page: CourseCategoryScreen.new,
       binding: CourseCategoryBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.targetedGroup,
+      page: TargetedGroupScreen.new,
+      binding: TargetedGroupBinding(),
     ),
   ];
 }

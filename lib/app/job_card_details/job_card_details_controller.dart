@@ -1,9 +1,12 @@
 import 'dart:async';
 import 'package:cmms/app/home/home_controller.dart';
 import 'package:cmms/app/utils/app_constants.dart';
+import 'package:cmms/domain/models/close_permit_model.dart';
 import 'package:cmms/domain/models/employee_model.dart';
+import 'package:cmms/domain/models/job_details_model.dart';
 import 'package:cmms/domain/models/mrs_list_by_jobId.dart';
 import 'package:cmms/domain/models/permit_details_model.dart';
+import 'package:cmms/domain/models/pm_task_view_list_model.dart';
 import 'package:cmms/domain/models/transferItems_model.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/foundation.dart';
@@ -57,6 +60,8 @@ class JobCardDetailsController extends GetxController {
   // Employee
   RxList<SelectedEmployee> employee = <SelectedEmployee>[].obs;
   SelectedEmployee selectedEmployees = SelectedEmployee();
+  Rx<PmtaskViewModel?> pmtaskViewModel = PmtaskViewModel().obs;
+  Rx<JobDetailsModel?> jobDetailsModel = JobDetailsModel().obs;
   int selectedEmployeeId = 0;
 
   /// Isolation and Loto Assets
@@ -135,6 +140,26 @@ class JobCardDetailsController extends GetxController {
 
   void updateSelectedOption(String newValue) {
     selectedOption.value = newValue;
+  }
+
+  void clearStoreData() {
+    jobCardDetailsPresenter.clearStoreData();
+  }
+
+  void clearTypeStoreData() {
+    jobCardDetailsPresenter.clearTypeValue();
+  }
+
+  void clearisCheckedtoreData() {
+    jobCardDetailsPresenter.clearisCheckedValue();
+  }
+
+  void clearjobmodelValue() {
+    jobCardDetailsPresenter.clearjobmodelValue();
+  }
+
+  void clearpmTaskValue() {
+    jobCardDetailsPresenter.clearpmTaskValue();
   }
 
   void addRowItem() {
@@ -392,7 +417,7 @@ class JobCardDetailsController extends GetxController {
         // }
 
         jobDetails.value = {
-          "Job ID": jobCardDetailsModel.value?.jobId.toString(),
+          "Job ID": "JOB" + jobCardDetailsModel.value!.jobId.toString(),
           "Job Title": jobCardDetailsModel.value?.title,
           "Job Description": jobCardDetailsModel.value?.description,
           "Job Assigned To": strAssignName.value, //jobCardDetailsModel.value?.,
@@ -423,7 +448,7 @@ class JobCardDetailsController extends GetxController {
               element.permitId != null); // Access the first element
 
           permitDetails.value = {
-            "Permit ID": permit.permitId.toString(),
+            "Permit ID": "PTW" + permit.permitId.toString(),
             // "Site Permit No.": permit.sitePermitNo.toString(),
             "Permit Type": permit.permitType,
             "Permit Description": permit.permitDescription,
@@ -633,6 +658,7 @@ class JobCardDetailsController extends GetxController {
     for (EmployeeModel employee in selectedEmployeeList ?? []) {
       _employeeId = employee.id ?? 0;
     }
+
     var _comment = descriptionOfWorkDoneCtrlr.text.trim();
 
     var jobCard = {
@@ -803,14 +829,17 @@ class JobCardDetailsController extends GetxController {
   void approvecloseJob() async {
     {
       String _comment = approveCommentTextFieldCtrlr.text.trim();
-
+      int ptwId = jobCardDetailsModel.value?.ptwId ?? 0;
       CommentModel commentCalibrationModel =
           CommentModel(id: jobCardId.value, comment: _comment);
-
+      ClosePermitModel ptwClose = ClosePermitModel(
+          id: ptwId, comment: comment, conditionIds: [1, 2, 3, 4], fileIds: []);
+      var closePtwJsonString = ptwClose.toJson();
       var approveJsonString = commentCalibrationModel.toJson();
       // print({"rejectCalibrationJsonString", approveCalibrationtoJsonString});
       final response = await jobCardDetailsPresenter.approvecloseJob(
         approveJsonString: approveJsonString,
+        closePtwJsonString: closePtwJsonString,
         isLoading: true,
       );
       if (response == true) {

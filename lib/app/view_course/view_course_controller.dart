@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:cmms/app/home/home_controller.dart';
 import 'package:cmms/app/view_course/view_course_presenter.dart';
 import 'package:cmms/domain/models/incident_report_details_model.dart';
-import 'package:cmms/domain/models/training_course_model.dart';
+import 'package:cmms/domain/models/training_course_list_model.dart';
 import 'package:get/get.dart';
 import 'package:rxdart/subjects.dart';
 
@@ -13,42 +13,56 @@ class ViewCourseController extends GetxController {
   ViewCoursePresenter viewCoursePresenter;
   HomeController homeController = Get.find();
   RxInt facilityId = 0.obs;
+  RxInt courseId = 0.obs;
   StreamSubscription<int>? facilityIdStreamSubscription;
   BehaviorSubject<int> _facilityId = BehaviorSubject.seeded(0);
   Stream<int> get facilityId$ => _facilityId.stream;
-  TrainingCourse trainingCourse = TrainingCourse(
-    id: 1,
-    name: "Mobile Application Development",
-    categoryId: 1,
-    categoryName: "Technical Semminar",
-    groupId: 1,
-    groupName: "IT Professionals",
-    numberOfDays: 1,
-    duration: 30,
-    maximumCapicity: 60,
-    description:
-        "Day 1: ...., Day 2: .... blah... blah... blah... blah...........",
-    shortStatus: "Created",
-  );
-  RxList<FileList?>? file_list = <FileList>[
-    FileList(
-      id: 17,
-      fileName: "Upload\\380\\0\\0\\Screenshot 2024-04-04 153313.png",
-      description: "description of image",
-    ),
-    FileList(
-      id: 0,
-      fileName: "Upload\\380\\0\\0\\jolly roger.jpeg",
-      description: "image",
-    ),
-  ].obs;
+  Rx<TrainingCourseListModel> trainingCourse = TrainingCourseListModel().obs;
+  RxBool isLoading = true.obs;
+
+  RxList<FileList?>? file_list = <FileList>[].obs;
 
   @override
-  void onInit() {
-    facilityIdStreamSubscription = homeController.facilityId$.listen((event) {
-      facilityId.value = event;
-    });
+  void onInit() async {
+    try {
+      await setId();
+      facilityIdStreamSubscription = homeController.facilityId$.listen((event) {
+        facilityId.value = event;
+      });
+      await getCourseDetails(courseId.value);
 
-    super.onInit();
+      super.onInit();
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  Future<void> setId() async {
+    try {
+      final _courseId = await viewCoursePresenter.getValue();
+      if (_courseId == null || _courseId == "" || _courseId == 0) {
+        var dataFromPrevioursScreen = Get.arguments;
+        courseId.value = dataFromPrevioursScreen['courseId'];
+        viewCoursePresenter.saveValue(courseId: courseId.value.toString());
+      } else {
+        courseId.value = int.tryParse(_courseId) ?? 0;
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  Future<void> getCourseDetails(int courseId) async {
+    trainingCourse.value = TrainingCourseListModel();
+    final _courseDetails = await viewCoursePresenter.getCourseDetails(
+      courseId: courseId,
+      isLoading: isLoading.value,
+    );
+    trainingCourse.value = _courseDetails;
+    isLoading.value = false;
+  }
+
+  void clearStoreData() {
+    viewCoursePresenter.clearValue();
   }
 }

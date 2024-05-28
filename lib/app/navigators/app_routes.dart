@@ -98,6 +98,7 @@ abstract class Routes {
   static const mrsListScreen = _Paths.mrsListScreen;
   static const scheduleCourseList = _Paths.scheduleCourseList;
   static const courseCategory = _Paths.courseCategory;
+  static const targetedGroup = _Paths.targetedGroup;
   
   static const scheduleCourse = _Paths.scheduleCourse;
   static const executeCourse = _Paths.executeCourse;
@@ -202,6 +203,7 @@ abstract class Routes {
   static const auditTask = _Paths.auditTask;
   static const addWaterData = _Paths.addWaterData;
   static const viewWaterData = _Paths.viewWaterData;
+  static const viewWasteData = _Paths.viewWasteData;
   static const viewHazWasteData = _Paths.viewHazWasteData;
   static const dsmCharges = _Paths.dsmCharges;
   static const viewAuditTask = _Paths.viewAuditTask;
@@ -257,6 +259,8 @@ abstract class _Paths {
   static const scheduleCourseList = '/scheduleCourseList';
   
    static const courseCategory = '/courseCategory';
+   static const targetedGroup = '/targetedGroup';
+   
   static const scheduleCourse = '/scheduleCourse';
   static const executeCourse = '/execute-course';
 
@@ -419,6 +423,7 @@ abstract class _Paths {
   static const auditTask = '/auditTask';
   static const addWaterData = '/addWaterData';
   static const viewWaterData = '/viewWaterData';
+  static const viewWasteData = '/viewWasteData';
   static const dsmCharges = '/dsm-charges';
   static const dsmDashboardScreen = '/dsm-dashboard';
   static const importDsmListChargesListScreen =

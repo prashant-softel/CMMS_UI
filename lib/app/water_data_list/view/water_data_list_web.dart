@@ -46,7 +46,7 @@ class _WaterDataListWebState extends State<WaterDataListWeb> {
 
   TableCell _actonData(PeriodData data) => TableCell(
         child: Center(
-            child: Row(
+            child: Wrap(
           children: [
             TableActionButton(
               color: ColorValues.viewColor,
@@ -73,7 +73,7 @@ class _WaterDataListWebState extends State<WaterDataListWeb> {
         child: Center(child: Text(text)),
       );
 
-  _CellData(DetailData data, String type) {
+  String _CellData(DetailData data, String type) {
     switch (type) {
       case 'consumedQty':
         return '${data.consumedQty}';
@@ -154,114 +154,110 @@ class _WaterDataListWebState extends State<WaterDataListWeb> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           SingleChildScrollView(
-                            child: Container(
-                              margin:
-                                  EdgeInsets.only(left: 10, top: 10, right: 10),
-                              child: Column(
-                                children: [
-                                  Card(
-                                    color: Color.fromARGB(255, 245, 248, 250),
-                                    elevation: 10,
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(10.0),
-                                    ),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Row(
-                                          children: [
-                                            Padding(
-                                              padding: EdgeInsets.only(
-                                                left: 20,
-                                                top: 20,
-                                              ),
-                                              child: Text(
-                                                "Water Data List",
-                                                style: Styles.blackBold16,
-                                              ),
+                            child: Column(
+                              children: [
+                                Card(
+                                  color: Color.fromARGB(255, 245, 248, 250),
+                                  elevation: 10,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10.0),
+                                  ),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Row(
+                                        children: [
+                                          Padding(
+                                            padding: EdgeInsets.only(
+                                              left: 20,
+                                              top: 20,
                                             ),
-                                            Spacer(),
-                                            Padding(
-                                              padding: EdgeInsets.only(
-                                                top: 20,
-                                              ),
-                                              child: Text(
-                                                "All the data in KL units",
-                                                style: Styles.blackBold16,
-                                              ),
+                                            child: Text(
+                                              "Water Data List",
+                                              style: Styles.blackBold16,
                                             ),
-                                            Spacer(),
-                                            Padding(
-                                              padding: EdgeInsets.only(
-                                                top: 20,
-                                                right: 20,
-                                              ),
-                                              child: Row(
-                                                children: [
-                                                  Text('Year :'),
-                                                  Dimens.boxWidth10,
-                                                  CustomTextFieldForStock(
-                                                    width:
-                                                        MediaQuery.of(context)
-                                                                .size
-                                                                .width /
-                                                            8,
-                                                    numberTextField: true,
-                                                    onTap: () {
-                                                      _showYearPicker(
-                                                          context, controller);
-                                                    },
-                                                    textController:
-                                                        controller.waterDateTc,
-                                                  ),
-                                                ],
-                                              ),
+                                          ),
+                                          Spacer(),
+                                          Padding(
+                                            padding: EdgeInsets.only(
+                                              top: 20,
                                             ),
-                                            Padding(
-                                              padding: EdgeInsets.only(
-                                                top: 20,
-                                                right: 20,
-                                              ),
-                                              child: ActionButton(
-                                                icon: Icons.add,
-                                                label: "Procurements",
-                                                onPressed: () {
-                                                  Get.dialog(AddDialog());
-                                                },
-                                                color: ColorValues.addNewColor,
-                                              ),
+                                            child: Text(
+                                              "All the data in KL units",
+                                              style: Styles.blackBold16,
                                             ),
-                                            Padding(
-                                              padding: EdgeInsets.only(
-                                                top: 20,
-                                                right: 5,
-                                              ),
-                                              child: ActionButton(
-                                                icon: Icons.minimize_sharp,
-                                                label: "Consumption",
-                                                onPressed: () {
-                                                  Get.dialog(MinusDialog());
-                                                },
-                                                color: ColorValues.appRedColor,
-                                              ),
-                                            )
-                                          ],
-                                        ),
-                                        Divider(
-                                          color: ColorValues.greyLightColour,
-                                        ),
-                                        SingleChildScrollView(
+                                          ),
+                                          Spacer(),
+                                          Padding(
+                                            padding: EdgeInsets.only(
+                                              top: 20,
+                                              right: 20,
+                                            ),
+                                            child: Row(
+                                              children: [
+                                                Text('Year :'),
+                                                Dimens.boxWidth10,
+                                                CustomTextFieldForStock(
+                                                  width: MediaQuery.of(context)
+                                                          .size
+                                                          .width /
+                                                      8,
+                                                  numberTextField: true,
+                                                  onTap: () {
+                                                    _showYearPicker(
+                                                        context, controller);
+                                                  },
+                                                  textController:
+                                                      controller.waterDateTc,
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          Padding(
+                                            padding: EdgeInsets.only(
+                                              top: 20,
+                                              right: 20,
+                                            ),
+                                            child: ActionButton(
+                                              icon: Icons.add,
+                                              label: "Procurements",
+                                              onPressed: () {
+                                                Get.dialog(AddDialog());
+                                              },
+                                              color: ColorValues.addNewColor,
+                                            ),
+                                          ),
+                                          Padding(
+                                            padding: EdgeInsets.only(
+                                              top: 20,
+                                              right: 5,
+                                            ),
+                                            child: ActionButton(
+                                              icon: Icons.minimize_sharp,
+                                              label: "Consumption",
+                                              onPressed: () {
+                                                Get.dialog(MinusDialog());
+                                              },
+                                              color: ColorValues.appRedColor,
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                      Divider(
+                                        color: ColorValues.greyLightColour,
+                                      ),
+                                      Obx(
+                                        () => SingleChildScrollView(
                                           scrollDirection: Axis.horizontal,
-                                          child: Obx(
-                                            () => Container(
-                                              color: Color.fromARGB(
-                                                  255, 245, 248, 250),
-                                              width: Get.width,
-                                              height: Get.height * .7,
-                                              child: Padding(
-                                                padding:
-                                                    const EdgeInsets.all(16),
+                                          child: Container(
+                                            color: Color.fromARGB(
+                                                255, 245, 248, 250),
+                                            width: Get.width,
+                                            // height: Get.height * .5,
+                                            child: Padding(
+                                              padding: const EdgeInsets.all(16),
+                                              child: SingleChildScrollView(
                                                 child: Column(
                                                   children: [
                                                     Row(
@@ -290,7 +286,7 @@ class _WaterDataListWebState extends State<WaterDataListWeb> {
                                                               width: ((MediaQuery.of(context)
                                                                               .size
                                                                               .width -
-                                                                          150) /
+                                                                          32) /
                                                                       controller
                                                                           .headerList
                                                                           .length) *
@@ -362,10 +358,14 @@ class _WaterDataListWebState extends State<WaterDataListWeb> {
                                                                       return dataCell(
                                                                           '');
                                                                     }
-                                                                    return dataCell(
-                                                                        _CellData(
+                                                                    // return dataCell(
+                                                                    //     "text");
+                                                                    return dataCell(_CellData(
                                                                             data,
-                                                                            e['dataKey']));
+                                                                            e[
+                                                                                'dataKey'])) ??
+                                                                        dataCell(
+                                                                            "");
                                                                   })))),
                                                       ],
                                                     ),
@@ -375,11 +375,11 @@ class _WaterDataListWebState extends State<WaterDataListWeb> {
                                             ),
                                           ),
                                         ),
-                                      ],
-                                    ),
+                                      ),
+                                    ],
                                   ),
-                                ],
-                              ),
+                                ),
+                              ],
                             ),
                           ),
                         ],

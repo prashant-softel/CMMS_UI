@@ -1,3 +1,4 @@
+import 'package:cmms/domain/models/course_category_model.dart';
 import 'package:cmms/domain/models/employee_list_model.dart';
 import 'package:cmms/domain/models/facility_model.dart';
 import 'package:cmms/domain/models/training_course_list_model.dart';
@@ -13,6 +14,16 @@ class CourseUsecase {
     return repository.getEmployeePermitList(
       isLoading: isLoading,
       facility_id: facility_id,
+    );
+  }
+
+  Future<Map<String, dynamic>> scheduleCourse({
+    scheduleCourseJson,
+    isLoading,
+  }) async {
+    return await repository.scheduleCourse(
+      scheduleCourseJson: scheduleCourseJson,
+      isLoading: isLoading,
     );
   }
 
@@ -63,6 +74,31 @@ class CourseUsecase {
         end_date: end_date,
         isLoading: isLoading,
       );
+
+  Future<TrainingCourseListModel> getCourseDetails({
+    int? courseId,
+    bool? isLoading,
+  }) async =>
+      await repository.getCourseDetails(
+        courseId: courseId,
+        isLoading: isLoading,
+      );
+
+  Future<List<CourseCategoryModel>> getCourseCategory({
+    required bool isLoading,
+  }) async {
+    return repository.getCourseCategory(
+      isLoading: isLoading,
+    );
+  }
+
+  Future<List<CourseCategoryModel>> getTargetedGroup({
+    required bool isLoading,
+  }) async {
+    return repository.getTargetedGroup(
+      isLoading: isLoading,
+    );
+  }
 
   deleteTrainingCourse({
     int? courseId,

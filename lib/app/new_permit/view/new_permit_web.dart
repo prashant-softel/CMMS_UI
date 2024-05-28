@@ -10,6 +10,7 @@ import 'package:cmms/app/widgets/view_jsa_dialog.dart';
 import 'package:cmms/app/widgets/view_sop_dialog.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
@@ -1831,7 +1832,7 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                                                         cells: record
                                                                             .map((mapData) {
                                                                           return DataCell(
-                                                                            (mapData['key'] == "Employee Name") || (mapData['key'] == "Contact Number") || (mapData['key'] == "Responsibility")
+                                                                            (mapData['key'] == "Employee Name") || (mapData['key'] == "Responsibility")
                                                                                 ? Padding(
                                                                                     padding: EdgeInsets.only(top: 10),
                                                                                     child: Column(
@@ -1865,26 +1866,63 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                                                                       ],
                                                                                     ),
                                                                                   )
-                                                                                : (mapData['key'] == "Action ")
+                                                                                : (mapData['key'] == "Contact Number")
                                                                                     ? Padding(
                                                                                         padding: EdgeInsets.only(top: 10),
                                                                                         child: Column(
                                                                                           mainAxisAlignment: MainAxisAlignment.start,
                                                                                           crossAxisAlignment: CrossAxisAlignment.start,
                                                                                           children: [
-                                                                                            TableActionButton(
-                                                                                              color: ColorValues.appRedColor,
-                                                                                              icon: Icons.delete,
-                                                                                              label: '',
-                                                                                              message: '',
-                                                                                              onPress: () {
-                                                                                                controller.rowTBTTrainingOtherPersonItem.remove(record);
-                                                                                              },
-                                                                                            )
+                                                                                            Container(
+                                                                                                decoration: BoxDecoration(
+                                                                                                  boxShadow: [
+                                                                                                    BoxShadow(
+                                                                                                      color: Colors.black26,
+                                                                                                      offset: const Offset(
+                                                                                                        5.0,
+                                                                                                        5.0,
+                                                                                                      ),
+                                                                                                      blurRadius: 5.0,
+                                                                                                      spreadRadius: 1.0,
+                                                                                                    ),
+                                                                                                  ],
+                                                                                                  color: ColorValues.whiteColor,
+                                                                                                  borderRadius: BorderRadius.circular(5),
+                                                                                                ),
+                                                                                                child: LoginCustomTextfield(
+                                                                                                  keyboardType: TextInputType.number,
+                                                                                                  maxLine: 1,
+                                                                                                  inputFormatters: <TextInputFormatter>[
+                                                                                                    FilteringTextInputFormatter.digitsOnly
+                                                                                                  ],
+                                                                                                  textController: new TextEditingController(text: mapData["value"] ?? ''),
+                                                                                                  onChanged: (txt) {
+                                                                                                    mapData["value"] = txt;
+                                                                                                  },
+                                                                                                )),
                                                                                           ],
                                                                                         ),
                                                                                       )
-                                                                                    : Text(mapData['key'] ?? ''),
+                                                                                    : (mapData['key'] == "Action ")
+                                                                                        ? Padding(
+                                                                                            padding: EdgeInsets.only(top: 10),
+                                                                                            child: Column(
+                                                                                              mainAxisAlignment: MainAxisAlignment.start,
+                                                                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                                                                              children: [
+                                                                                                TableActionButton(
+                                                                                                  color: ColorValues.appRedColor,
+                                                                                                  icon: Icons.delete,
+                                                                                                  label: '',
+                                                                                                  message: '',
+                                                                                                  onPress: () {
+                                                                                                    controller.rowTBTTrainingOtherPersonItem.remove(record);
+                                                                                                  },
+                                                                                                )
+                                                                                              ],
+                                                                                            ),
+                                                                                          )
+                                                                                        : Text(mapData['key'] ?? ''),
                                                                           );
                                                                         }).toList(),
                                                                       );
@@ -1904,6 +1942,121 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                   ),
                                 )
                               : Dimens.box0,
+
+                          controller.historyList!.isEmpty
+                              ? Dimens.box0
+                              : Container(
+                                  margin: Dimens.edgeInsets20,
+                                  height:
+                                      ((controller.historyList?.length ?? 0) *
+                                              50) +
+                                          125,
+                                  decoration: BoxDecoration(
+                                    border: Border.all(
+                                      color: ColorValues
+                                          .lightGreyColorWithOpacity35,
+                                      width: 1,
+                                    ),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color:
+                                            ColorValues.appBlueBackgroundColor,
+                                        spreadRadius: 2,
+                                        blurRadius: 5,
+                                        offset: Offset(0, 2),
+                                      ),
+                                    ],
+                                  ),
+                                  child: Column(
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.all(10.0),
+                                        child: Row(
+                                          children: [
+                                            Text(
+                                              "Permit History ",
+                                              style: Styles.blue700,
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      Divider(
+                                        color: ColorValues.greyLightColour,
+                                      ),
+                                      Expanded(
+                                        child: DataTable2(
+                                          border: TableBorder.all(
+                                              color: Color.fromARGB(
+                                                  255, 206, 229, 234)),
+                                          columns: [
+                                            DataColumn(
+                                                label: Text(
+                                              "Time Stamp",
+                                              style: TextStyle(
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.bold),
+                                            )),
+                                            DataColumn(
+                                                label: Text(
+                                              "Posted By",
+                                              style: TextStyle(
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.bold),
+                                            )),
+                                            DataColumn(
+                                                label: Text(
+                                              "Comment",
+                                              style: TextStyle(
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.bold),
+                                            )),
+                                            DataColumn(
+                                                label: Text(
+                                              "Location",
+                                              style: TextStyle(
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.bold),
+                                            )),
+                                            DataColumn(
+                                                label: Text(
+                                              "Status",
+                                              style: TextStyle(
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.bold),
+                                            )),
+                                          ],
+                                          rows: List<DataRow>.generate(
+                                            controller.historyList?.length ?? 0,
+                                            (index) => DataRow(cells: [
+                                              DataCell(Text(controller
+                                                      .historyList?[index]
+                                                      ?.createdAt
+                                                      ?.result
+                                                      .toString() ??
+                                                  '')),
+                                              DataCell(Text(controller
+                                                      .historyList?[index]
+                                                      ?.createdByName
+                                                      .toString() ??
+                                                  '')),
+                                              DataCell(Text(controller
+                                                      .historyList?[index]
+                                                      ?.comment
+                                                      .toString() ??
+                                                  '')),
+                                              DataCell(Text('--')),
+                                              DataCell(Text(controller
+                                                      .historyList?[index]
+                                                      ?.status_name
+                                                      .toString() ??
+                                                  '')),
+                                            ]),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
 
                           Center(
                             child: Padding(

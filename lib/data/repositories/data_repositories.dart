@@ -4894,6 +4894,22 @@ class DataRepository extends DomainRepository {
         facilityId: facilityId,
         isLoading: isLoading ?? false,
       );
+  Future<ResponseModel> getWasteDataMonthDetail({
+    required String auth,
+    required int month,
+    required int year,
+    required int facilityId,
+    required int hazardous,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.getWasteDataMonthDetail(
+        auth: auth,
+        month: month,
+        year: year,
+        facilityId: facilityId,
+        hazardous: hazardous,
+        isLoading: isLoading ?? false,
+      );
   Future<ResponseModel> getSourceObservationList({
     required bool isLoading,
     required String auth,
@@ -5122,6 +5138,28 @@ class DataRepository extends DomainRepository {
         endDate: endDate,
       );
 
+  Future<ResponseModel> getCourseDetails({
+    required String auth,
+    int? courseId,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.getCourseDetails(
+        auth: auth,
+        courseId: courseId,
+        isLoading: isLoading,
+      );
+
+  Future<ResponseModel> scheduleCourse({
+    auth,
+    scheduleCourseJson,
+    isLoading,
+  }) async =>
+      await connectHelper.scheduleCourse(
+        auth: auth,
+        scheduleCourseJson: scheduleCourseJson,
+        isLoading: isLoading ?? false,
+      );
+
   //Course category
   //get
   Future<ResponseModel> getCourseCategory({
@@ -5171,6 +5209,53 @@ class DataRepository extends DomainRepository {
         auth: auth, isLoading: isLoading, category_id: category_id);
     return response;
   }
+  //Targeted Group
+        //get
+  Future<ResponseModel> getTargetedGroup({
+    required bool isLoading,
+    required String auth,
+  }) async {
+    return await connectHelper.getTargetedGroup(
+      isLoading: isLoading,
+      auth: auth,
+    );
+  }
+  //create
+  Future<ResponseModel> createTargetedGroup({
+    auth,
+    bool? isLoading,
+    CourseCategoryJsonString,
+  }) async {
+    var response = await connectHelper.createTargetedGroup(
+        auth: auth,
+        isLoading: isLoading,
+        CourseCategoryJsonString: CourseCategoryJsonString);
+    return response;
+  }
 
+  //update
+  Future<ResponseModel> updateTargetedGroup({
+    auth,
+    bool? isLoading,
+    CourseCategoryJsonString,
+  }) async {
+    var response = await connectHelper.updateTargetedGroup(
+      auth: auth,
+      isLoading: isLoading,
+      CourseCategoryJsonString: CourseCategoryJsonString,
+    );
+    return response;
+  }
+
+  //delete
+  Future<ResponseModel> deleteTargetedGroup({
+    auth,
+    bool? isLoading,
+    category_id,
+  }) async {
+    var response = await connectHelper.deleteTargetedGroup(
+        auth: auth, isLoading: isLoading, category_id: category_id);
+    return response;
+  }
 //end
 }

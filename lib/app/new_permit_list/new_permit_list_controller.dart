@@ -381,7 +381,7 @@ class NewPermitListController extends GetxController {
     clearTypeStoreData();
     clearisCheckedtoreData();
     Get.toNamed(Routes.viewPermitScreen,
-        arguments: {"permitId": permitId, "type": 1});
+        arguments: {"permitId": permitId, "type": 3});
   }
 
   Future<void> cancelPermitList({int? permitId}) async {
@@ -448,5 +448,15 @@ class NewPermitListController extends GetxController {
   void export() {
     getNewPermitList(facilityId, userId, formattedFromdate, formattedTodate,
         false, false, true);
+  }
+   bool isOneHour(String validTill) {
+    DateTime current = DateTime.now();
+    DateTime expiryTime = DateTime.parse(validTill);
+    Duration timeDifference = expiryTime.difference(current);
+
+    if (timeDifference.inHours >= 1 && current.isBefore(expiryTime)) {
+      return true;
+    }
+    return false;
   }
 }

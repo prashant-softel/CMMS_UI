@@ -532,7 +532,8 @@ class _EditJobContentWebState extends State<EditJobContentWeb> {
                                                   children: [
                                                     CustomRichText(
                                                         title:
-                                                            'Tools Required For Fault :'),
+                                                            'Tools Required For Fault :',
+                                                            includeAsterisk: false,),
                                                     Dimens.boxWidth10,
                                                     Container(
                                                       decoration: BoxDecoration(
