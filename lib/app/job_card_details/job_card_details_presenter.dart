@@ -191,8 +191,8 @@ class JobCardDetailsPresenter {
       jobCardDetailsUsecase.clearisCheckedValue();
   void clearjobmodelValue() async =>
       jobCardDetailsUsecase.clearjobmodelValue();
-    void clearjcValue() async =>
-      jobCardDetailsUsecase.clearjcValue();
+    void clearpmTaskValue() async =>
+      jobCardDetailsUsecase.clearpmTaskValue();
 
 
   void saveValue({String? jobCardId}) async {
