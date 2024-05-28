@@ -25,6 +25,7 @@ class PlantSockContentMobile extends GetView<PlantStockReportController> {
               () => Container(
                 child: //
                     Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Dimens.boxHeight10,
                     HeaderWidgetMobile(
@@ -70,6 +71,14 @@ class PlantSockContentMobile extends GetView<PlantStockReportController> {
                         );
                       },
                     ),
+                    Container(
+                      margin: EdgeInsets.only(left: 15, right: 15),
+                      child: Text(
+                        'Select Material: ',
+                        style: Styles.blackBold14,
+                      ),
+                    ),
+                    Dimens.boxHeight8,
                     Container(
                       margin: EdgeInsets.only(left: 15, right: 15),
                       height: 45,

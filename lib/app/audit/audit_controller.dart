@@ -1,4 +1,5 @@
 import 'package:cmms/app/audit/audit_presenter.dart';
+import 'package:cmms/app/utils/app_constants.dart';
 import 'package:get/get.dart';
 
 import '../../domain/models/facility_model.dart';
@@ -44,22 +45,27 @@ class AuditController extends GetxController {
   Future<void> createChecklist() async {
     auditPresenter.clearValue();
 
-    Get.toNamed(Routes.preventiveList, arguments: {'type': 2});
+    Get.toNamed(Routes.preventiveList,
+        arguments: {'type': AppConstants.kAudit});
   }
 
   Future<void> checkPoint() async {
     auditPresenter.clearValue();
 
-    Get.toNamed(Routes.preventiveCheckPoint, arguments: {'type': 2});
+    Get.toNamed(Routes.preventiveCheckPoint,
+        arguments: {'type': AppConstants.kAudit});
   }
 
   Future<void> auditList() async {
-    Get.toNamed(Routes.auditListScreen, arguments: {'type': 2});
+    auditPresenter.clearValue();
+
+    Get.toNamed(Routes.auditListScreen,
+        arguments: {'type': AppConstants.kAudit});
   }
 
   Future<void> auditTask() async {
-    Get.toNamed(
-      Routes.auditTask,
-    );
+    auditPresenter.clearValue();
+
+    Get.toNamed(Routes.auditTask, arguments: {'type': AppConstants.kAudit});
   }
 }

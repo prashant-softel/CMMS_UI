@@ -4,6 +4,7 @@ import 'package:cmms/app/home/home_screen.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/theme/dimens.dart';
+import 'package:cmms/app/utils/app_constants.dart';
 import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
@@ -77,15 +78,15 @@ class _AuditListContentWebState extends State<AuditListContentWeb> {
                             ),
                             InkWell(
                               onTap: () {
-                                controller.type.value == 3
-                                ? Get.offNamed(Routes.misDashboard)
-                                : Get.offNamed(Routes.audit);
+                                controller.type.value == AppConstants.kMis
+                                    ? Get.offNamed(Routes.misDashboard)
+                                    : Get.offNamed(Routes.audit);
                               },
-                              child: controller.type.value == 3
+                              child: controller.type.value == AppConstants.kMis
                                   ? Text(" / MIS", style: Styles.greyLight14)
                                   : Text(" / AUDIT", style: Styles.greyLight14),
                             ),
-                            controller.type.value == 3
+                            controller.type.value == AppConstants.kMis
                                 ? Text(" / OBSERVATION PLAN",
                                     style: Styles.greyLight14)
                                 : Text(" / AUDIT PLAN LIST",
@@ -115,7 +116,8 @@ class _AuditListContentWebState extends State<AuditListContentWeb> {
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
                                       children: [
-                                        controller.type.value == 3
+                                        controller.type.value ==
+                                                AppConstants.kMis
                                             ? Text(
                                                 "Observation Plan",
                                                 style: Styles.blackBold14,
@@ -153,7 +155,7 @@ class _AuditListContentWebState extends State<AuditListContentWeb> {
                                           icon: Icons.add,
                                           label: "Add New",
                                           onPressed: () {
-                                            controller.clearValue();
+                                            // c ontroller.clearValue();
                                             Get.offNamed(Routes.createAudit,
                                                 arguments: {
                                                   'type': controller.type.value
@@ -576,9 +578,13 @@ class AuditListListDataSource extends DataTableSource {
                 ? Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        'AUD${AuditPlanPlanningListDetails?.id}',
-                      ),
+                      controller.type.value == AppConstants.kMis
+                          ? Text(
+                              'MIS${AuditPlanPlanningListDetails?.id}',
+                            )
+                          : Text(
+                              'AUT${AuditPlanPlanningListDetails?.id}',
+                            ),
                       Dimens.boxHeight10,
                       Align(
                         alignment: Alignment.centerRight,
@@ -733,7 +739,7 @@ class AuditListListDataSource extends DataTableSource {
                                 message: 'view',
                                 onPress: () {
                                   controller.clearStoreIdData();
-                                  controller.clearValue();
+                                  // controller.clearValue();
                                   int auditId =
                                       AuditPlanPlanningListDetails?.id ?? 0;
                                   if (auditId != 0) {
@@ -761,7 +767,7 @@ class AuditListListDataSource extends DataTableSource {
                                 message: 'Edit',
                                 onPress: () {
                                   controller.clearStoreIdData();
-                                  controller.clearValue();
+                                  // controller.clearValue();
                                   int id =
                                       AuditPlanPlanningListDetails?.id ?? 0;
                                   if (id != 0) {
@@ -843,7 +849,7 @@ class AuditListListDataSource extends DataTableSource {
       //   ],
       onSelectChanged: (_) {
         controller.clearStoreIdData();
-        // controller.clearValue();
+        controller.clearValue();
         int auditId = AuditPlanPlanningListDetails?.id ?? 0;
         if (auditId != 0) {
           Get.toNamed(Routes.viewAuditPlan,
