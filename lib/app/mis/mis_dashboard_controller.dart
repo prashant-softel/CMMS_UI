@@ -68,111 +68,108 @@ class MisDashboardController extends GetxController {
   }
 
   void goToCourseCategory() {
-    void goToCourseCategory() {
-      misDashboardPresenter.clearValue();
-      Get.toNamed(Routes.courseCategory);
-    }
+    misDashboardPresenter.clearValue();
+    Get.toNamed(Routes.courseCategory);
+  }
 
-    void goToTargetedGroup() {
-      misDashboardPresenter.clearValue();
-      Get.toNamed(Routes.targetedGroup);
-    }
+  void goToTargetedGroup() {
+    misDashboardPresenter.clearValue();
+    Get.toNamed(Routes.targetedGroup);
+  }
 
-    void goTocreatePlanScreen() {
-      misDashboardPresenter.clearValue();
-      Get.toNamed(Routes.createAudit, arguments: {"type": AppConstants.kMis});
-    }
+  void goTocreatePlanScreen() {
+    misDashboardPresenter.clearValue();
+    Get.toNamed(Routes.createAudit, arguments: {"type": AppConstants.kMis});
+  }
 
-    void goToMisTaskScreen() {
-      misDashboardPresenter.clearValue();
+  void goToMisTaskScreen() {
+    misDashboardPresenter.clearValue();
 
-      Get.toNamed(Routes.auditTask, arguments: {'type': AppConstants.kMis});
-    }
+    Get.toNamed(Routes.auditTask, arguments: {'type': AppConstants.kMis});
+  }
 
-    void goToCreateObservation() {
-      Get.toNamed(Routes.createObservation);
-    }
+  void goToCreateObservation() {
+    Get.toNamed(Routes.createObservation);
+  }
 
-    Future<void> createChecklist() async {
-      misDashboardPresenter.clearValue();
+  Future<void> createChecklist() async {
+    misDashboardPresenter.clearValue();
 
-      Get.toNamed(Routes.preventiveList,
-          arguments: {'type': AppConstants.kMis});
-    }
+    Get.toNamed(Routes.preventiveList, arguments: {'type': AppConstants.kMis});
+  }
 
-    Future<void> checkPoint() async {
-      misDashboardPresenter.clearValue();
+  Future<void> checkPoint() async {
+    misDashboardPresenter.clearValue();
 
-      Get.toNamed(Routes.preventiveCheckPoint,
-          arguments: {'type': AppConstants.kMis});
-    }
+    Get.toNamed(Routes.preventiveCheckPoint,
+        arguments: {'type': AppConstants.kMis});
+  }
 
-    void goToCheckListOfObservation() {
-      Get.toNamed(Routes.checkListOfObservation);
-    }
+  void goToCheckListOfObservation() {
+    Get.toNamed(Routes.checkListOfObservation);
+  }
 
-    void goToStatutoryScreen() {
-      Get.toNamed(Routes.statutory);
-    }
+  void goToStatutoryScreen() {
+    Get.toNamed(Routes.statutory);
+  }
 
-    void trainingCourse() {
-      Get.toNamed(Routes.trainingCourse);
-    }
+  void trainingCourse() {
+    Get.toNamed(Routes.trainingCourse);
+  }
 
-    void grievanceList() {
-      Get.toNamed(Routes.grievanceList);
-    }
+  void grievanceList() {
+    Get.toNamed(Routes.grievanceList);
+  }
 
-    void addGrievance() {
-      Get.toNamed(Routes.addGrievance);
-    }
+  void addGrievance() {
+    Get.toNamed(Routes.addGrievance);
+  }
 
-    void goToWasteDataScreen() {
-      Get.toNamed(Routes.wasteData);
-    }
+  void goToWasteDataScreen() {
+    Get.toNamed(Routes.wasteData);
+  }
 
-    void goToHazardousDataScreen() {
-      Get.toNamed(
-        Routes.viewWasteData,
-        arguments: {
-          'monthId': 4,
-          'year': 2024,
-          'hazardous': 1,
-        },
-      );
-    }
+  void goToHazardousDataScreen() {
+    Get.toNamed(
+      Routes.viewWasteData,
+      arguments: {
+        'monthId': 4,
+        'year': 2024,
+        'hazardous': 1,
+      },
+    );
+  }
 
-    void goToNonHazardousDataScreen() {
-      Get.toNamed(
-        Routes.viewWasteData,
-        arguments: {
-          'monthId': 4,
-          'year': 2024,
-          'hazardous': 0,
-        },
-      );
-    }
+  void goToNonHazardousDataScreen() {
+    Get.toNamed(
+      Routes.viewWasteData,
+      arguments: {
+        'monthId': 4,
+        'year': 2024,
+        'hazardous': 0,
+      },
+    );
+  }
 
-    void goToWaterDataScreen() {
-      Get.toNamed(Routes.waterDataListScreen);
-    }
+  void goToWaterDataScreen() {
+    Get.toNamed(Routes.waterDataListScreen);
+  }
 
-    Future<void> goToTypeOfObservation() async {
-      Get.toNamed(
-        Routes.typeofobservation,
-      );
-    }
+  Future<void> goToTypeOfObservation() async {
+    Get.toNamed(
+      Routes.typeofobservation,
+    );
+  }
 
-    Future<void> goToSourceOfObservation() async {
-      Get.toNamed(
-        Routes.sourceofobservation,
-      );
-    }
+  Future<void> goToSourceOfObservation() async {
+    Get.toNamed(
+      Routes.sourceofobservation,
+    );
+  }
 
-    Future<void> goToRiskType() async {
-      Get.toNamed(
-        Routes.risktypemaster,
-      );
-    }
+  Future<void> goToRiskType() async {
+    Get.toNamed(
+      Routes.risktypemaster,
+    );
   }
 }
