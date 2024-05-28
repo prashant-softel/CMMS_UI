@@ -381,7 +381,7 @@ class NewPermitListController extends GetxController {
     clearTypeStoreData();
     clearisCheckedtoreData();
     Get.toNamed(Routes.viewPermitScreen,
-        arguments: {"permitId": permitId, "type": 1});
+        arguments: {"permitId": permitId, "type": 3});
   }
 
   Future<void> cancelPermitList({int? permitId}) async {
