@@ -46,7 +46,7 @@ class _WaterDataListWebState extends State<WaterDataListWeb> {
 
   TableCell _actonData(PeriodData data) => TableCell(
         child: Center(
-            child: Row(
+            child: Wrap(
           children: [
             TableActionButton(
               color: ColorValues.viewColor,
