@@ -116,7 +116,7 @@ class WaterDataListController extends GetxController {
     final _waterDataList = await waterDataListPresenter.getWaterDataList(
         isLoading: isLoading.value,
         start_date: selectedYear.toString(),
-        end_date: (selectedYear - 1).toString(),
+        end_date: (selectedYear + 1).toString(),
         facility_id: facilityId,
         isExport: isExport);
     waterDataList.value = _waterDataList;
