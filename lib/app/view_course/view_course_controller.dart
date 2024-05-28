@@ -20,18 +20,7 @@ class ViewCourseController extends GetxController {
   Rx<TrainingCourseListModel> trainingCourse = TrainingCourseListModel().obs;
   RxBool isLoading = true.obs;
 
-  RxList<FileList?>? file_list = <FileList>[
-    FileList(
-      id: 17,
-      fileName: "Upload\\380\\0\\0\\Screenshot 2024-04-04 153313.png",
-      description: "description of image",
-    ),
-    FileList(
-      id: 0,
-      fileName: "Upload\\380\\0\\0\\jolly roger.jpeg",
-      description: "image",
-    ),
-  ].obs;
+  RxList<FileList?>? file_list = <FileList>[].obs;
 
   @override
   void onInit() async {

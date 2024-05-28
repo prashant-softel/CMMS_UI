@@ -8665,7 +8665,7 @@ class ConnectHelper {
     bool? isLoading,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
-      'sefs', //AddBusiness
+      'Attendence/CreateAttendance', //AddBusiness
       Request.post,
       jsonEmployeeAttendance,
       isLoading ?? false,
@@ -8881,6 +8881,24 @@ class ConnectHelper {
       null,
       isLoading ?? true,
       {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
+  Future<ResponseModel> scheduleCourse({
+    auth,
+    scheduleCourseJson,
+    isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      '',
+      Request.post,
+      scheduleCourseJson,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
         'Authorization': 'Bearer $auth',
       },
     );

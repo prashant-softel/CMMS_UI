@@ -4,35 +4,39 @@ class ScheduleTrainingCourse {
     this.courseName,
     this.comment,
     this.dateOfTraining,
-    this.trainerId,
     this.trainerName,
-    this.trainingAgency,
+    this.trainingAgencyId,
+    this.hfeEmployeeId,
+    this.mode,
     this.venue,
     this.internalEmployees,
     this.externalEmployees,
+    this.uploadfile_ids,
   });
 
   int? courseId;
   String? courseName;
   String? comment;
+  int? trainingAgencyId;
   String? dateOfTraining;
-  String? trainerId;
-  String? trainerName;
-  String? trainingAgency;
   String? venue;
+  String? trainerName;
+  int? hfeEmployeeId;
+  int? mode;
   List<InternalEmployee>? internalEmployees;
   List<ExternalEmployees>? externalEmployees;
+  List<dynamic>? uploadfile_ids;
 
   factory ScheduleTrainingCourse.fromJson(Map<String, dynamic> json) =>
       ScheduleTrainingCourse(
         courseId: json["courseId"],
         courseName: json["courseName"],
         comment: json["comment"],
-        dateOfTraining: json["dateOfTraining"],
-        trainerId: json["trainerId"],
+        dateOfTraining: json["date_of_training"],
         trainerName: json["trainerName"],
-        trainingAgency: json["trainingAgency"],
+        trainingAgencyId: json["trainingAgencyId"],
         venue: json["venue"],
+        hfeEmployeeId: json["hfeEmployeeId"],
         internalEmployees: json["internalEmployees"] != null
             ? List<InternalEmployee>.from(
                 json["internalEmployees"].map(
@@ -53,24 +57,29 @@ class ScheduleTrainingCourse {
         "courseId": courseId,
         "courseName": courseName,
         "comment": comment,
-        "dateOfTraining": dateOfTraining,
-        "trainerId": trainerId,
+        "date_of_training": dateOfTraining,
         "trainerName": trainerName,
-        "trainingAgency": trainingAgency,
+        "trainingAgencyId": trainingAgencyId,
+        "hfeEmployeeId": hfeEmployeeId,
         "venue": venue,
         "internalEmployees": internalEmployees,
         "externalEmployees": externalEmployees,
+        "uploadfile_ids": uploadfile_ids,
       };
 }
 
 class InternalEmployee {
   int? empId;
   String? empName;
+  String? empEmail;
+  String? empNumber;
   String? empDesignation;
 
   InternalEmployee({
     this.empId,
     this.empName,
+    this.empEmail,
+    this.empNumber,
     this.empDesignation,
   });
 
@@ -78,12 +87,16 @@ class InternalEmployee {
       InternalEmployee(
         empId: json["empId"],
         empName: json["empName"],
+        empEmail: json["empEmail"],
+        empNumber: json["empNumber"],
         empDesignation: json["empDesignation"],
       );
 
   Map<String, dynamic> toJson() => {
         "empId": empId,
         "empName": empName,
+        "empEmail": empEmail,
+        "empNumber": empNumber,
         "empDesignation": empDesignation,
       };
 }
@@ -116,6 +129,7 @@ class ExternalEmployees {
         "employeeName": employeeName,
         "employeeEmail": employeeEmail,
         "employeeNumber": employeeNumber,
+        "designation": designation,
         "companyName": companyName,
       };
 }

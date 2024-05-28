@@ -148,12 +148,12 @@ class ViewCourseWeb extends GetView<ViewCourseController> {
                                           Dimens.boxHeight10,
                                           TitleAndInfo(
                                             "Category: ",
-                                            "${controller.trainingCourse.value.categoryId == null ? "" : controller.trainingCourse.value.categoryId}",
+                                            "${controller.trainingCourse.value.categoryName == null ? "" : controller.trainingCourse.value.categoryName}",
                                           ),
                                           Dimens.boxHeight10,
                                           TitleAndInfo(
                                             "Targatted Group: ",
-                                            "${controller.trainingCourse.value.groupId == null ? "" : controller.trainingCourse.value.groupId}",
+                                            "${controller.trainingCourse.value.groupName == null ? "" : controller.trainingCourse.value.groupName}",
                                           ),
                                         ],
                                       ),

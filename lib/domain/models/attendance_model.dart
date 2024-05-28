@@ -2,17 +2,20 @@ import "package:get/get.dart";
 
 class AttendaceModel {
   String? date;
+  int? facilityId;
   List<HFEEmployeeAttendance?>? hfeAttendance;
   ContractLabourAttendance? contractAttendance;
 
   AttendaceModel({
     this.date,
+    this.facilityId,
     this.hfeAttendance,
     this.contractAttendance,
   });
 
   factory AttendaceModel.fromJson(Map<String, dynamic> json) => AttendaceModel(
         date: json["date"],
+        facilityId: json["facility_id"],
         hfeAttendance: json["hfeAttendance"] != null
             ? [HFEEmployeeAttendance.fromJson(json["hfeAttendance"])]
             : [],
@@ -23,6 +26,7 @@ class AttendaceModel {
 
   Map<String, dynamic> toJson() => {
         "date": date,
+        "facility_id": facilityId,
         "hfeAttendance": hfeAttendance?.map((e) => e?.toJson()).toList(),
         "contractAttendance": contractAttendance?.toJson(),
       };

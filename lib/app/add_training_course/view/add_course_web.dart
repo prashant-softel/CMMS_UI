@@ -209,8 +209,8 @@ class AddCourseWeb extends GetView<AddCourseController> {
                                                 ),
                                                 child: Obx(
                                                   () => DropdownWebWidget(
-                                                    dropdownList:
-                                                        controller.category,
+                                                    dropdownList: controller
+                                                        .courseCategory,
                                                     isValueSelected: controller
                                                         .isCategorySelected
                                                         .value,
@@ -220,7 +220,7 @@ class AddCourseWeb extends GetView<AddCourseController> {
                                                         .onValueChanged,
                                                   ),
                                                 ),
-                                              )
+                                              ),
                                             ],
                                           ),
                                           Dimens.boxHeight10,
@@ -258,8 +258,8 @@ class AddCourseWeb extends GetView<AddCourseController> {
                                                 height: 30,
                                                 child: Obx(
                                                   () => DropdownWebWidget(
-                                                    dropdownList:
-                                                        controller.targetGroup,
+                                                    dropdownList: controller
+                                                        .targetedGroup,
                                                     isValueSelected: controller
                                                         .isGroupSelected.value,
                                                     selectedValue: controller
@@ -318,7 +318,7 @@ class AddCourseWeb extends GetView<AddCourseController> {
                                                       : null,
                                                   onChanged: (value) {
                                                     if (value.trim().length >
-                                                        1) {
+                                                        0) {
                                                       controller.isCodeInvalid
                                                           .value = false;
                                                     } else {
@@ -371,7 +371,7 @@ class AddCourseWeb extends GetView<AddCourseController> {
                                                       : null,
                                                   onChanged: (value) {
                                                     if (value.trim().length >
-                                                        1) {
+                                                        0) {
                                                       controller.isTimeInvalid
                                                           .value = false;
                                                     } else {
@@ -424,7 +424,7 @@ class AddCourseWeb extends GetView<AddCourseController> {
                                                       : null,
                                                   onChanged: (value) {
                                                     if (value.trim().length >
-                                                        1) {
+                                                        0) {
                                                       controller
                                                           .isMaxCapacityInvalid
                                                           .value = false;

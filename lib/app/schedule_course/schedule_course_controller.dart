@@ -2,9 +2,11 @@ import 'dart:async';
 
 import 'package:cmms/app/home/home_controller.dart';
 import 'package:cmms/app/schedule_course/schedule_course_presenter.dart';
+import 'package:cmms/domain/models/business_list_model.dart';
 import 'package:cmms/domain/models/employee_list_model.dart';
 import 'package:cmms/domain/models/employee_model.dart';
 import 'package:cmms/domain/models/schedule_course_model.dart';
+import 'package:cmms/domain/models/training_course_list_model.dart';
 import 'package:cmms/domain/models/training_course_model.dart';
 import 'package:cmms/domain/models/type_model.dart';
 import 'package:flutter/material.dart';
@@ -62,19 +64,34 @@ class ScheduleController extends GetxController {
   Rx<bool> isemployeeNameListSelected = true.obs;
   Rx<String> selectedEmployeeNamesList = ''.obs;
   RxInt selectedId = 0.obs;
+  RxInt courseId = 0.obs;
+  RxBool isLoading = true.obs;
+
+  RxBool isFormInvalid = false.obs;
+  RxBool isDateInvalid = false.obs;
+  RxBool isTrainerInvalid = false.obs;
+  RxBool isVenueInvalid = false.obs;
+  RxBool isCommentInvalid = false.obs;
+  RxBool isExternalEmployeeInvalid = false.obs;
+  RxBool isEmployeeNameInvalid = false.obs;
+  RxBool isEmployeeEmailInvalid = false.obs;
+  RxBool isEmployeeNumberInvalid = false.obs;
+  RxBool isEmployeeDesignationInvalid = false.obs;
+  RxBool isCompanyInvalid = false.obs;
 
   Map<dynamic, dynamic> employee_map = {};
   RxList<ScheduleTrainingCourse> scheduleTrainingCourse =
       <ScheduleTrainingCourse>[].obs;
+  Rx<TrainingCourseListModel> trainingCourse = TrainingCourseListModel().obs;
   RxList<int> selectedEmployeeIdList = <int>[].obs;
   RxList<EmployeeListModel?> employeeNameList = <EmployeeListModel>[].obs;
   RxList<EmployeeListModel?> filteredEmployeeNameList =
       <EmployeeListModel>[].obs;
   RxList<InternalEmployee> internalEmployees = <InternalEmployee>[].obs;
   RxList<ExternalEmployees> externalEmployees = <ExternalEmployees>[].obs;
-  RxList<GenderModel> mode = <GenderModel>[
-    GenderModel(id: 1, name: 'Online'),
-    GenderModel(id: 2, name: 'Offline'),
+  RxList<StatusModel> mode = <StatusModel>[
+    StatusModel(id: 1, name: 'Online'),
+    StatusModel(id: 2, name: 'Offline'),
   ].obs;
   RxList<EmployeeModel> employees = <EmployeeModel>[
     EmployeeModel(
@@ -86,12 +103,12 @@ class ScheduleController extends GetxController {
       name: 'Tanmay',
     ),
   ].obs;
-  RxList<EmployeeModel> trainingAgency = <EmployeeModel>[
-    EmployeeModel(
+  RxList<BusinessListModel> trainingAgency = <BusinessListModel>[
+    BusinessListModel(
       id: 1,
       name: 'Softel Technologies',
     ),
-    EmployeeModel(
+    BusinessListModel(
       id: 2,
       name: 'Hero Future Energies',
     ),
@@ -111,10 +128,13 @@ class ScheduleController extends GetxController {
   ].obs;
 
   @override
-  void onInit() {
-    facilityIdStreamSubscription = homeController.facilityId$.listen((event) {
+  void onInit() async {
+    await setId();
+    facilityIdStreamSubscription =
+        homeController.facilityId$.listen((event) async {
       facilityId.value = event;
-      getEmployeeList();
+      await getEmployeeList();
+      await getCourseDetails(courseId.value);
     });
     commentFocus.addListener(() {
       if (!commentFocus.hasFocus) {
@@ -126,21 +146,6 @@ class ScheduleController extends GetxController {
         venueScroll.jumpTo(0.0);
       }
     });
-    employeeNameFocus.addListener(() {
-      if (!employeeNameFocus.hasFocus) {
-        employeeNameScroll.jumpTo(0.0);
-      }
-    });
-    employeeEmailFocus.addListener(() {
-      if (!employeeEmailFocus.hasFocus) {
-        employeeEmailScroll.jumpTo(0.0);
-      }
-    });
-    employeeNumberFocus.addListener(() {
-      if (!employeeNumberFocus.hasFocus) {
-        employeeNumberScroll.jumpTo(0.0);
-      }
-    });
     trainerFocus.addListener(() {
       if (!trainerFocus.hasFocus) {
         trainerScroll.jumpTo(0.0);
@@ -149,7 +154,40 @@ class ScheduleController extends GetxController {
     super.onInit();
   }
 
+  Future<void> setId() async {
+    try {
+      final _courseId = await schedulePresenter.getValue();
+      if (_courseId == null || _courseId == "" || _courseId == 0) {
+        var dataFromPrevioursScreen = Get.arguments;
+        courseId.value = dataFromPrevioursScreen['courseId'];
+        schedulePresenter.saveValue(courseId: courseId.value.toString());
+      } else {
+        courseId.value = int.tryParse(_courseId) ?? 0;
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  void clearStoreData() {
+    schedulePresenter.clearValue();
+  }
+
+  Future<void> getCourseDetails(int courseId) async {
+    trainingCourse.value = TrainingCourseListModel();
+    final _courseDetails = await schedulePresenter.getCourseDetails(
+      courseId: courseId,
+      isLoading: isLoading.value,
+    );
+    trainingCourse.value = _courseDetails;
+    isLoading.value = false;
+  }
+
   void addExternalEmployee() {
+    checkFormExternal();
+    if (isExternalEmployeeInvalid.value) {
+      return;
+    }
     externalEmployees.add(
       ExternalEmployees(
         employeeName: employeeName.text,
@@ -160,6 +198,7 @@ class ScheduleController extends GetxController {
       ),
     );
     clear();
+    Get.back();
   }
 
   void clear() {
@@ -189,7 +228,6 @@ class ScheduleController extends GetxController {
   void employeeNameSelected(_selectedEmployeeNameIds) {
     selectedEmployeeIdList.value = <int>[];
     filteredEmployeeNameList.value = <EmployeeListModel>[];
-    late int emp_id = 0;
     for (var _selectedEmployeeNameId in _selectedEmployeeNameIds) {
       selectedEmployeeIdList.add(_selectedEmployeeNameId);
       EmployeeListModel? e = employeeNameList.firstWhere((element) {
@@ -197,8 +235,128 @@ class ScheduleController extends GetxController {
       });
       filteredEmployeeNameList.add(e);
     }
+  }
 
-    employee_map[emp_id] = selectedEmployeeIdList;
+  void checkFormExternal() {
+    if (employeeName.text.isEmpty) {
+      isEmployeeNameInvalid.value = false;
+      isExternalEmployeeInvalid.value = true;
+    } else {
+      isEmployeeNameInvalid.value = true;
+    }
+    if (employeeEmail.text.isEmpty) {
+      isEmployeeEmailInvalid.value = false;
+      isExternalEmployeeInvalid.value = true;
+    } else {
+      isEmployeeEmailInvalid.value = true;
+    }
+    if (employeeNumber.text.isEmpty) {
+      isEmployeeNumberInvalid.value = false;
+      isExternalEmployeeInvalid.value = true;
+    } else {
+      isEmployeeNumberInvalid.value = true;
+    }
+    if (employeeDesignation.text.isEmpty) {
+      isEmployeeDesignationInvalid.value = false;
+      isExternalEmployeeInvalid.value = true;
+    } else {
+      isEmployeeDesignationInvalid.value = true;
+    }
+    if (company.text.isEmpty) {
+      isCompanyInvalid.value = false;
+      isExternalEmployeeInvalid.value = true;
+    } else {
+      isCompanyInvalid.value = true;
+    }
+  }
+
+  void checkForm() {
+    if (dateOfTraining.text.isEmpty) {
+      isDateInvalid.value = true;
+      isFormInvalid.value = true;
+    } else {
+      isDateInvalid.value = false;
+    }
+    if (trainerName.text.isEmpty) {
+      isTrainerInvalid.value = true;
+      isFormInvalid.value = true;
+    } else {
+      isTrainerInvalid.value = false;
+    }
+    if (venue.text.isEmpty) {
+      isVenueInvalid.value = true;
+      isFormInvalid.value = true;
+    } else {
+      isVenueInvalid.value = false;
+    }
+    if (comment.text.isEmpty) {
+      isCommentInvalid.value = true;
+      isFormInvalid.value = true;
+    } else {
+      isCommentInvalid.value = false;
+    }
+    if (selectedTrainingAgencyName.value == '') {
+      isTrainingAgencySelected.value = false;
+      isFormInvalid.value = true;
+    } else {
+      isTrainingAgencySelected.value = true;
+    }
+    if (selectedEmployeeName.value == '') {
+      isEmployeeSelected.value = false;
+      isFormInvalid.value = true;
+    } else {
+      isEmployeeSelected.value = true;
+    }
+    if (selectedModeName.value == '') {
+      isModeSelected.value = false;
+      isFormInvalid.value = true;
+    } else {
+      isModeSelected.value = true;
+    }
+  }
+
+  Future<void> scheduleCourse({List<dynamic>? fileIds}) async {
+    checkForm();
+    if (isFormInvalid.value) {
+      return;
+    }
+    String _venue = venue.text.trim();
+    String _trainerName = trainerName.text.trim();
+    String _dateOfTraining = dateOfTraining.text.trim();
+    String _comment = comment.text.trim();
+    filteredEmployeeNameList.forEach((e) {
+      internalEmployees.add(
+        InternalEmployee(
+          empId: e?.id,
+          empName: e?.name,
+          empEmail: e?.login_id,
+          empNumber: e?.mobileNumber,
+          empDesignation: e?.designation,
+        ),
+      );
+    });
+
+    ScheduleTrainingCourse scheduleCourse = ScheduleTrainingCourse(
+      courseId: courseId.value,
+      courseName: trainingCourse.value.name,
+      comment: _comment,
+      trainingAgencyId: selectedTrainingAgencyId.value,
+      dateOfTraining: _dateOfTraining,
+      venue: _venue,
+      trainerName: _trainerName,
+      hfeEmployeeId: selectedEmployeeId.value,
+      mode: selectedModeId.value,
+      internalEmployees: internalEmployees,
+      externalEmployees: externalEmployees,
+      uploadfile_ids: fileIds,
+    );
+    var scheduleCourseJson = scheduleCourse.toJson();
+    schedulePresenter.scheduleCourse(
+      scheduleCourseJson: scheduleCourseJson,
+      isLoading: isLoading.value,
+    );
+
+    print("Successfully scheduled");
   }
 
   void onValueChanged(dynamic list, dynamic value) {
@@ -209,45 +367,39 @@ class ScheduleController extends GetxController {
           int employeeIndex = employees.indexWhere((x) => x.name == value);
           selectedEmployeeName.value = employees[employeeIndex].name ?? '';
           selectedEmployeeId.value = employees[employeeIndex].id ?? 0;
+          isEmployeeSelected.value = true;
           print("facility selected $selectedEmployeeId, $selectedEmployeeName");
         }
         break;
-      case RxList<TrainingCourse>:
-        {
-          int courseIndex =
-              trainingCourseList.indexWhere((x) => x.name == value);
-          selectedCourseName.value = trainingCourseList[courseIndex].name ?? '';
-          selectedCourseId.value = trainingCourseList[courseIndex].id ?? 0;
-          print("facility selected $selectedCourseName, $selectedCourseId");
-        }
-        break;
-      case RxList<EmployeeModel>:
+      case RxList<BusinessListModel>:
         {
           int agencyIndex = trainingAgency.indexWhere((x) => x.name == value);
           selectedTrainingAgencyName.value =
               trainingAgency[agencyIndex].name ?? '';
+          isTrainingAgencySelected.value = true;
           selectedTrainingAgencyId.value = trainingAgency[agencyIndex].id ?? 0;
           print(
               "facility selected $selectedTrainingAgencyId, $selectedTrainingAgencyName");
         }
         break;
-      case RxList<GenderModel>:
+      case RxList<StatusModel>:
         {
           int modeIndex = mode.indexWhere((x) => x.name == value);
           selectedModeName.value = mode[modeIndex].name;
           selectedModeId.value = mode[modeIndex].id ?? 0;
+          isModeSelected.value = true;
           print("facility selected $selectedModeId, $selectedModeName");
         }
         break;
-      case RxList<EmployeeListModel>:
-        {
-          int modeIndex = employeeNameList.indexWhere((x) => x?.name == value);
-          selectedEmployeeNamesList.value =
-              employeeNameList[modeIndex]?.name ?? "";
-          selectedId.value = employeeNameList[modeIndex]?.id ?? 0;
-          print("facility selected $selectedModeId, $selectedModeName");
-        }
-        break;
+      // case RxList<EmployeeListModel>:
+      //   {
+      //     int modeIndex = employeeNameList.indexWhere((x) => x?.name == value);
+      //     selectedEmployeeNamesList.value =
+      //         employeeNameList[modeIndex]?.name ?? "";
+      //     selectedId.value = employeeNameList[modeIndex]?.id ?? 0;
+      //     print("facility selected $selectedModeId, $selectedModeName");
+      //   }
+      //   break;
 
       default:
         {

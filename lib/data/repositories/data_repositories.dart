@@ -5133,6 +5133,17 @@ class DataRepository extends DomainRepository {
         isLoading: isLoading,
       );
 
+  Future<ResponseModel> scheduleCourse({
+    auth,
+    scheduleCourseJson,
+    isLoading,
+  }) async =>
+      await connectHelper.scheduleCourse(
+        auth: auth,
+        scheduleCourseJson: scheduleCourseJson,
+        isLoading: isLoading ?? false,
+      );
+
   //Course category
   //get
   Future<ResponseModel> getCourseCategory({

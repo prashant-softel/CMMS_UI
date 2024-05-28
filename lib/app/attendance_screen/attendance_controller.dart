@@ -6,6 +6,7 @@ import 'package:cmms/domain/models/attendance_model.dart';
 import 'package:cmms/domain/models/employee_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 class AttendanceController extends GetxController {
   AttendanceController(this.attendancePresenter);
@@ -38,6 +39,7 @@ class AttendanceController extends GetxController {
           await getEmployeeList(facilityId.value);
         },
       );
+      dateController.text = DateFormat('yyyy-MM-dd').format(DateTime.now());
 
       focusPurpose.addListener(() {
         if (!focusPurpose.hasFocus) {
@@ -104,17 +106,13 @@ class AttendanceController extends GetxController {
   }
 
   void updateInTime(int index, String value) {
-    if (attendanceModel[index].inTime == null) {
-      attendanceModel[index].inTime = value;
-      inTimeControllers[index].text = value;
-    }
+    attendanceModel[index].inTime = value;
+    inTimeControllers[index].text = value;
   }
 
   void updateOutTime(int index, String value) {
-    if (attendanceModel[index].outTime == null) {
-      attendanceModel[index].outTime = value;
-      outTimeControllers[index].text = value;
-    }
+    attendanceModel[index].outTime = value;
+    outTimeControllers[index].text = value;
   }
 
   Future<bool> addAttendance() async {
@@ -131,6 +129,7 @@ class AttendanceController extends GetxController {
 
     employeeAttendance = AttendaceModel(
       date: dateController.text,
+      facilityId: facilityId.value,
       hfeAttendance: attendanceModel,
       contractAttendance: contractAttendace,
     );
@@ -143,5 +142,5 @@ class AttendanceController extends GetxController {
     isLoading = false;
     // Get.back();
     return true;
-    }
+  }
 }
