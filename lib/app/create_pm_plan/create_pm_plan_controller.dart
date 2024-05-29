@@ -425,7 +425,7 @@ class CreatePmPlanController extends GetxController {
   }
 
   Future<void> createPmPlan() async {
-    checkFrom();
+    checkForm();
     if (isFormInvalid.value) {
       return;
     }
@@ -472,7 +472,7 @@ class CreatePmPlanController extends GetxController {
   }
 
   Future<void> updatePmPlan() async {
-    checkFrom();
+    checkForm();
     if (isFormInvalid.value) {
       return;
     }
@@ -519,7 +519,7 @@ class CreatePmPlanController extends GetxController {
     }
   }
 
-  void checkFrom() {
+  void checkForm() {
     if (selectedInventory == '') {
       isSelectedInventory.value = false;
       isFormInvalid.value = true;
