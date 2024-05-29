@@ -163,7 +163,7 @@ class WaterDataListController extends GetxController {
           {
             "label": _dataList.water_type,
             "isShow": true,
-            'subHeader': "open",
+            'subHeader': "Open",
             "dataKey": 'opening'
           },
         );
@@ -172,16 +172,16 @@ class WaterDataListController extends GetxController {
         {
           "label": _dataList.water_type,
           "isShow": _dataList.show_opening == 1 ? false : true,
-          'subHeader': "procrument",
-          "dataKey": 'procuredQty'
+          'subHeader': "+",
+          "dataKey": '+'
         },
       );
       headerList.add(
         {
           "label": _dataList.water_type,
           "isShow": false,
-          'subHeader': "consmption",
-          "dataKey": 'consumedQty'
+          'subHeader': "-",
+          "dataKey": '-'
         },
       );
 
@@ -190,7 +190,7 @@ class WaterDataListController extends GetxController {
           {
             "label": _dataList.water_type,
             "isShow": false,
-            'subHeader': "close",
+            'subHeader': "Close",
             "dataKey": 'closingQty'
           },
         );

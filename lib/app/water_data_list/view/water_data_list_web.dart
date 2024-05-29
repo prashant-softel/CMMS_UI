@@ -75,9 +75,9 @@ class _WaterDataListWebState extends State<WaterDataListWeb> {
 
   String _CellData(DetailData data, String type) {
     switch (type) {
-      case 'consumedQty':
+      case '-':
         return '${data.consumedQty}';
-      case 'procuredQty':
+      case '+':
         return '${data.procuredQty}';
 
       case 'opening':
