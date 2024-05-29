@@ -6,6 +6,7 @@ import 'package:cmms/app/home/home_controller.dart';
 import 'package:cmms/app/job_list/job_list_presenter.dart';
 import 'package:cmms/app/navigators/navigators.dart';
 import 'package:cmms/app/theme/color_values.dart';
+import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/domain/models/block_model.dart';
 import 'package:cmms/domain/models/create_permit_model.dart';
 import 'package:cmms/domain/models/employee_list_model.dart';
@@ -857,6 +858,7 @@ class NewPermitController extends GetxController {
       isLoading: true,
       // categoryIds: categoryIds,
       facility_id: facilityId,
+      featureId: UserAccessConstants.kPermitFeatureId
     );
     for (var employee_list in _employeeNameList) {
       employeeNameList.add(employee_list);
