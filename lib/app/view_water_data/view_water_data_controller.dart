@@ -95,8 +95,8 @@ class ViewWaterDataController extends GetxController {
 
     if (_waterDataMonthDetail != null) {
       waterDataByMonthList.value = _waterDataMonthDetail;
-      waterDataByMonth.value =
-          waterDataByMonthList.firstWhere((element) => element?.month != null);
+      waterDataByMonth.value = waterDataByMonthList.firstWhere(
+          (element) => element?.facilityId != 0 || element?.facilityId != null);
       itemDataList?.value = waterDataByMonth.value!.itemData!;
       // detailsList?.value = itemDataList?.value?.details;
     }

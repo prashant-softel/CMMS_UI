@@ -22,7 +22,7 @@ class ScheduleTrainingCourse {
   String? venue;
   String? trainerName;
   int? hfeEmployeeId;
-  int? mode;
+  String? mode;
   List<InternalEmployee>? internalEmployees;
   List<ExternalEmployees>? externalEmployees;
   List<dynamic>? uploadfile_ids;
@@ -36,6 +36,7 @@ class ScheduleTrainingCourse {
         trainerName: json["trainerName"],
         trainingAgencyId: json["trainingAgencyId"],
         venue: json["venue"],
+        mode: json['mode'],
         hfeEmployeeId: json["hfeEmployeeId"],
         internalEmployees: json["internalEmployees"] != null
             ? List<InternalEmployee>.from(
@@ -62,6 +63,7 @@ class ScheduleTrainingCourse {
         "trainingAgencyId": trainingAgencyId,
         "hfeEmployeeId": hfeEmployeeId,
         "venue": venue,
+        'mode': mode,
         "internalEmployees": internalEmployees,
         "externalEmployees": externalEmployees,
         "uploadfile_ids": uploadfile_ids,
