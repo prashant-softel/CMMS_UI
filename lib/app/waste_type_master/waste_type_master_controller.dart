@@ -39,8 +39,13 @@ class WasteTypeMasterController extends GetxController {
   final isSuccess = false.obs;
   StreamSubscription<int>? facilityIdStreamSubscription;
   var isToggleOn = false.obs;
+  var isToggleHazOn = false.obs;
   void toggle() {
     isToggleOn.value = !isToggleOn.value;
+  }
+
+  void toggleHaz() {
+    isToggleHazOn.value = !isToggleHazOn.value;
   }
 
   int? wasteTypeId = 0;
@@ -174,6 +179,7 @@ class WasteTypeMasterController extends GetxController {
         description: _description,
         type: 2,
         show_opening: isToggleOn.value ? 1 : 0,
+        isHazardous: isToggleHazOn.value ? 1 : 0,
       );
 
       var wasteTypeJson = wasteTypeMasterJson.toJson();

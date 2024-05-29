@@ -96,7 +96,7 @@ class AddDialog extends GetView {
                       Dimens.boxHeight20,
                       CustomRichText(title: 'Quantity in KL unit:'),
                       Dimens.boxHeight20,
-                      CustomRichText(title: 'Description:'),
+                      Text("Description:", style: Styles.black15W400),
                     ],
                   ),
                   SizedBox(width: 20),
