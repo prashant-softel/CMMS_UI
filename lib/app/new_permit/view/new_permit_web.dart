@@ -2085,6 +2085,8 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                         onPressed: () {
                                           // var jobId = controller.jobModel?.id ?? 0;
                                           // print('JobId'),
+                                           controller.isFormInvalid.value =
+                                                  false;
                                           controller.isCheckedJSA.value ==
                                                       true &&
                                                   controller
@@ -2115,6 +2117,8 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                             onPressed: () {
                                               // var jobId = controller.jobModel?.id ?? 0;
                                               // print('JobId'),
+                                               controller.isFormInvalid.value =
+                                                  false;
                                               controller.isCheckedJSA
                                                               .value ==
                                                           true &&
@@ -2148,6 +2152,8 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                                       ColorValues.appGreenColor,
                                                   text: "Submit For Approval",
                                                   onPressed: () {
+                                                     controller.isFormInvalid.value =
+                                                  false;
                                                     controller.isCheckedJSA
                                                                     .value ==
                                                                 true &&
