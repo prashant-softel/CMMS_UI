@@ -2402,7 +2402,33 @@ class NewPermitWeb extends GetView<NewPermitController> {
                 border: InputBorder.none,
                 enabledBorder: InputBorder.none,
                 focusedBorder: InputBorder.none,
+                 focusedErrorBorder: controller.isstartdateInvalid.value
+                    ? OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(5),
+                        borderSide: BorderSide(
+                          color: ColorValues.redColorDark,
+                        ),
+                      )
+                    : InputBorder.none,
+                errorBorder: controller.isstartdateInvalid.value
+                    ? OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(5),
+                        borderSide: BorderSide(
+                          color: ColorValues.redColorDark,
+                        ),
+                      )
+                    : null,
+                errorText:
+                    controller.isstartdateInvalid.value ? "Required field" : null,
               ),
+               onChanged: (value) {
+                if (controller.startDateTimeCtrlrBuffer.text.trim().isNotEmpty && controller.validTillTimeCtrlr.text.trim().isNotEmpty){
+                  controller.isstartdateInvalid.value = false;
+                } else {
+                  controller.isstartdateInvalid.value = true;
+                }
+               }
+              
             ),
           ),
         ),

@@ -156,6 +156,10 @@ class NewPermitController extends GetxController {
   Rx<bool> isJobDescriptionInvalid = false.obs;
   Rx<bool> isTitleTextInvalid = false.obs;
   Rx<bool> isWorPermitNumberTextInvalid = false.obs;
+  Rx<bool> isstartdateInvalid = false.obs;
+   Rx<bool> isExpiryInvalid = false.obs;
+  
+
 
   String? ptwData = "ptwString";
   bool showColumn2 = true;
@@ -1236,9 +1240,15 @@ class NewPermitController extends GetxController {
       isWorPermitNumberTextInvalid.value = true;
       isFormValid = false.obs;
     }
-     if (  startDateTimeCtrlr.text.trim().length == 0) {
+     if (startDateTimeCtrlrBuffer.text.trim().length == 0) {
+      isstartdateInvalid.value= true;
       isFormValid = false.obs;
     }
+     if (validTillTimeCtrlr.text.trim().length == 0) {
+      isstartdateInvalid.value = true;
+      isFormValid = false.obs;
+    }
+  
   
      if (selectedTypePermit.value == '') {
       isTypePermitSelected.value = false;
