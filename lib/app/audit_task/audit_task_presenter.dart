@@ -18,4 +18,11 @@ class AuditTaskPresenter {
           endDate: endDate,
           startDate: startDate);
   void clearValue() async => auditTaskUsecase.clearValue();
+  void clearTypeValue() async => auditTaskUsecase.clearTypeValue();
+
+  void saveValue({String? type}) async {
+    return auditTaskUsecase.saveValue(type: type);
+  }
+
+  Future<String?> getValue() async => await auditTaskUsecase.getValue();
 }

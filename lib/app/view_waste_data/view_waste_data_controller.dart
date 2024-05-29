@@ -1,32 +1,27 @@
 import 'dart:async';
 import 'package:cmms/app/home/home_controller.dart';
-import 'package:cmms/app/view_water_data/view_water_data_presenter.dart';
+import 'package:cmms/app/view_waste_data/view_waste_data_presenter.dart';
 import 'package:cmms/domain/models/type_model.dart';
-import 'package:cmms/domain/models/water_data_month.dart';
-import 'package:flutter/material.dart';
+import 'package:cmms/domain/models/waste_data_month_model.dart';
 import 'package:get/get.dart';
 
-class ViewWaterDataController extends GetxController {
-  ViewWaterDataController(
-    this.viewWaterDataPresenter,
+class ViewWasteDataController extends GetxController {
+  ViewWasteDataController(
+    this.viewWasteDataPresenter,
   );
-  ViewWaterDataPresenter viewWaterDataPresenter;
+  ViewWasteDataPresenter viewWasteDataPresenter;
   final HomeController homecontroller = Get.find();
 
-  bool openPurchaseDatePicker = false;
-  var purchaseDateTc = TextEditingController();
   StreamSubscription<int>? facilityIdStreamSubscription;
   Rx<int> facilityId = 0.obs;
   Rx<int> type = 0.obs;
+  RxInt hazardous = 0.obs;
   Rx<int> selectedYear = 0.obs;
   Rx<int> selectedMonth = 0.obs;
   Rx<String> monthName = ''.obs;
-  Rx<WaterDataMonth?> waterDataByMonth = WaterDataMonth().obs;
-  RxList<WaterDataMonth?> waterDataByMonthList = <WaterDataMonth?>[].obs;
-  Rx<ItemData?> itemData = ItemData().obs;
-  RxList<ItemData?>? itemDataList = <ItemData?>[].obs;
-  Rx<Details?> details = Details().obs;
-  RxList<Details?>? detailsList = <Details?>[].obs;
+  Rx<WasteDataMonthModel?> wasteDataByMonth = WasteDataMonthModel().obs;
+  RxList<WasteDataMonthModel?> wasteDataByMonthList =
+      <WasteDataMonthModel?>[].obs;
 
   RxList<MonthModel> month = <MonthModel>[
     MonthModel(name: "Please Select", id: "0"),
@@ -49,10 +44,11 @@ class ViewWaterDataController extends GetxController {
     facilityIdStreamSubscription =
         homecontroller.facilityId$.listen((event) async {
       facilityId.value = event;
-      await getWaterDataMonthDetail(
+      await getWasteDataMonthDetail(
         month: selectedMonth.value,
         year: selectedYear.value,
         facilityId: facilityId.value,
+        hazardous: hazardous.value,
       );
     });
     super.onInit();
@@ -60,23 +56,29 @@ class ViewWaterDataController extends GetxController {
 
   Future<void> setWaterData() async {
     try {
-      String? _monthId = await viewWaterDataPresenter.getMonthValue();
-      String? _year = await viewWaterDataPresenter.getYearValue();
+      String? _monthId = await viewWasteDataPresenter.getMonthValue();
+      String? _year = await viewWasteDataPresenter.getYearValue();
+      String? _hazardous = await viewWasteDataPresenter.getHazardousValue();
       if (_monthId == null || _monthId == '' || _monthId == "null") {
         var dataFromPreviousScreen = Get.arguments;
 
         selectedMonth.value = dataFromPreviousScreen['monthId'];
         selectedYear.value = dataFromPreviousScreen['year'];
-        viewWaterDataPresenter.saveMonthValue(
+        hazardous.value = dataFromPreviousScreen['hazardous'];
+
+        viewWasteDataPresenter.saveMonthValue(
             monthId: selectedMonth.value.toString());
-        viewWaterDataPresenter.saveYearValue(
+        viewWasteDataPresenter.saveYearValue(
             year: selectedYear.value.toString());
+        viewWasteDataPresenter.saveHazardousValue(
+            hazardous: hazardous.value.toString());
 
         monthName.value =
             month.firstWhere((element) => element.id == selectedMonth).name;
       } else {
         selectedMonth.value = int.tryParse(_monthId) ?? 0;
-        selectedYear.value = int.tryParse(_year!) ?? 0;
+        selectedYear.value = int.tryParse(_year ?? "") ?? 0;
+        hazardous.value = int.tryParse(_hazardous ?? "") ?? 0;
       }
     } catch (e) {
       print(e.toString() + ' month or year');
@@ -84,26 +86,31 @@ class ViewWaterDataController extends GetxController {
     }
   }
 
-  Future<void> getWaterDataMonthDetail(
-      {required int year, required int month, required int facilityId}) async {
-    final _waterDataMonthDetail =
-        await viewWaterDataPresenter.getWaterDataMonthDetail(
+  Future<void> getWasteDataMonthDetail({
+    required int year,
+    required int month,
+    required int facilityId,
+    required int hazardous,
+  }) async {
+    final _wasteDataMonthDetail =
+        await viewWasteDataPresenter.getWasteDataMonthDetail(
       year: year,
       month: month,
       facilityId: facilityId,
+      hazardous: hazardous,
     );
 
-    if (_waterDataMonthDetail != null) {
-      waterDataByMonthList.value = _waterDataMonthDetail;
-      waterDataByMonth.value = waterDataByMonthList.firstWhere(
-          (element) => element?.facilityId != 0 || element?.facilityId != null);
-      itemDataList?.value = waterDataByMonth.value!.itemData!;
-      // detailsList?.value = itemDataList?.value?.details;
+    if (_wasteDataMonthDetail != null) {
+      wasteDataByMonthList.value = _wasteDataMonthDetail;
+      var wasteJson = wasteDataByMonthList.toJson();
+      print(wasteJson);
     }
+    update(['waste-controller']);
   }
 
   void clearStoreData() {
-    viewWaterDataPresenter.clearMonthValue();
-    viewWaterDataPresenter.clearYearValue();
+    viewWasteDataPresenter.clearMonthValue();
+    viewWasteDataPresenter.clearYearValue();
+    viewWasteDataPresenter.clearHazardousValue();
   }
 }

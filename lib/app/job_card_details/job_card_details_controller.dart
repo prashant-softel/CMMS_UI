@@ -3,8 +3,10 @@ import 'package:cmms/app/home/home_controller.dart';
 import 'package:cmms/app/utils/app_constants.dart';
 import 'package:cmms/domain/models/close_permit_model.dart';
 import 'package:cmms/domain/models/employee_model.dart';
+import 'package:cmms/domain/models/job_details_model.dart';
 import 'package:cmms/domain/models/mrs_list_by_jobId.dart';
 import 'package:cmms/domain/models/permit_details_model.dart';
+import 'package:cmms/domain/models/pm_task_view_list_model.dart';
 import 'package:cmms/domain/models/transferItems_model.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/foundation.dart';
@@ -58,6 +60,8 @@ class JobCardDetailsController extends GetxController {
   // Employee
   RxList<SelectedEmployee> employee = <SelectedEmployee>[].obs;
   SelectedEmployee selectedEmployees = SelectedEmployee();
+  Rx<PmtaskViewModel?> pmtaskViewModel = PmtaskViewModel().obs;
+  Rx<JobDetailsModel?> jobDetailsModel = JobDetailsModel().obs;
   int selectedEmployeeId = 0;
 
   /// Isolation and Loto Assets
@@ -138,7 +142,7 @@ class JobCardDetailsController extends GetxController {
     selectedOption.value = newValue;
   }
 
-   void clearStoreData() {
+  void clearStoreData() {
     jobCardDetailsPresenter.clearStoreData();
   }
 
@@ -153,10 +157,10 @@ class JobCardDetailsController extends GetxController {
   void clearjobmodelValue() {
     jobCardDetailsPresenter.clearjobmodelValue();
   }
-    void clearjcValue() {
-    jobCardDetailsPresenter.clearjcValue();
-  }
 
+  void clearpmTaskValue() {
+    jobCardDetailsPresenter.clearpmTaskValue();
+  }
 
   void addRowItem() {
     rowItem.add([
@@ -413,7 +417,7 @@ class JobCardDetailsController extends GetxController {
         // }
 
         jobDetails.value = {
-          "Job ID": "JOB"+jobCardDetailsModel.value!.jobId.toString(),
+          "Job ID": "JOB" + jobCardDetailsModel.value!.jobId.toString(),
           "Job Title": jobCardDetailsModel.value?.title,
           "Job Description": jobCardDetailsModel.value?.description,
           "Job Assigned To": strAssignName.value, //jobCardDetailsModel.value?.,
@@ -444,7 +448,7 @@ class JobCardDetailsController extends GetxController {
               element.permitId != null); // Access the first element
 
           permitDetails.value = {
-            "Permit ID": "PTW"+permit.permitId.toString(),
+            "Permit ID": "PTW" + permit.permitId.toString(),
             // "Site Permit No.": permit.sitePermitNo.toString(),
             "Permit Type": permit.permitType,
             "Permit Description": permit.permitDescription,

@@ -1,4 +1,6 @@
 import 'package:cmms/domain/models/audit_plan_detail_model.dart';
+import 'package:cmms/domain/models/employee_list_model.dart';
+import 'package:cmms/domain/models/employee_model.dart';
 import 'package:cmms/domain/models/frequency_model.dart';
 import 'package:cmms/domain/models/preventive_checklist_model.dart';
 import 'package:cmms/domain/usecases/create_audit_usecase.dart';
@@ -10,6 +12,28 @@ class CreateAuditPresenter {
     bool? isLoading,
   }) async =>
       await createAuditUsecase.getFrequencyList(
+        isLoading: isLoading ?? false,
+      );
+  Future<List<EmployeeListModel>> getEmployeePermitList({
+    required bool isLoading,
+    required int? facility_id,
+  }) async {
+    return createAuditUsecase.getEmployeePermitList(
+      isLoading: isLoading,
+      facility_id: facility_id,
+    );
+  }
+
+  Future<List<EmployeeModel?>?> getAssignedToEmployee({
+    String? auth,
+    int? facilityId,
+    int? featureId,
+    bool? isLoading,
+  }) async =>
+      await createAuditUsecase.getAssignedToEmployee(
+        auth: auth ?? "",
+        facilityId: facilityId ?? 0,
+        featureId: featureId,
         isLoading: isLoading ?? false,
       );
   Future<List<PreventiveCheckListModel?>?> getPreventiveCheckList({

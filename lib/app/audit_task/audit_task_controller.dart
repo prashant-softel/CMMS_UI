@@ -60,8 +60,8 @@ class AuditTaskController extends GetxController {
   RxString ptwFilterText = ''.obs;
 
   final columnVisibility = ValueNotifier<Map<String, bool>>({
-    "Audit Task Id": true,
-    "Audit Task Title": true,
+    "Task Id": true,
+    "Task Title": true,
     "Last Done Date": true,
     "Due Date": true,
     "Done Date": true,
@@ -72,8 +72,8 @@ class AuditTaskController extends GetxController {
   Rx<int> pmTaskId = 0.obs;
 
   final Map<String, double> columnwidth = {
-    "Audit Task Id": 150,
-    "Audit Task Title": 300,
+    "Task Id": 150,
+    "Task Title": 300,
     "Last Done Date": 200,
     "Due Date": 200,
     "Done Date": 200,
@@ -90,11 +90,15 @@ class AuditTaskController extends GetxController {
   }
 
   Rx<bool> isLoading = true.obs;
+  Rx<int> type = 0.obs;
+
   @override
   void onInit() async {
+    await setType();
+
     this.filterText = {
-      "Audit Task Id": idFilterText,
-      "Audit Task Title": titleFilterText,
+      "Task Id": idFilterText,
+      "Task Title": titleFilterText,
       "Last Done Date": lastDoneDateFilterText,
       "Due Date": dueDateFilterText,
       "Done Date": doneDateFilterText,
@@ -115,6 +119,24 @@ class AuditTaskController extends GetxController {
     });
 
     super.onInit();
+  }
+
+  Future<void> setType() async {
+    try {
+      // Read jobId
+      String? _type = await auditTaskPresenter.getValue();
+      if (_type == null || _type == '' || _type == "null") {
+        var dataFromPreviousScreen = Get.arguments;
+
+        type.value = dataFromPreviousScreen['type'];
+        auditTaskPresenter.saveValue(type: type.value.toString());
+      } else {
+        type.value = int.tryParse(_type) ?? 0;
+      }
+    } catch (e) {
+      print(e.toString() + 'type');
+      //  Utility.showDialog(e.toString() + 'type');
+    }
   }
 
   void search(String keyword) {
@@ -154,6 +176,8 @@ class AuditTaskController extends GetxController {
   void clearStoreData() {
     auditTaskPresenter.clearValue();
   }
+
+  void clearTypeValue() async => auditTaskPresenter.clearTypeValue();
 
   void export() {
     getAuditTaskList(facilityId, formattedTodate1, formattedFromdate1, true);

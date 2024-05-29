@@ -945,7 +945,7 @@ class ConnectHelper {
     required String end_date,
   }) async {
     ResponseModel responseModel = await apiWrapper.makeRequest(
-      'MISMaster/GetWaterDataListMonthWise?facility_id=$facility_id&fromDate=$end_date-04-01&toDate=$start_date-04-01',
+      'MISMaster/GetWaterDataListMonthWise?facility_id=$facility_id&fromDate=$start_date-04-01&toDate=$end_date-04-01',
       Request.getMultiparts,
       null,
       isLoading,
@@ -7159,7 +7159,7 @@ class ConnectHelper {
     bool? isLoading,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
-      'MRS/ReturnMRS',
+      'MRS/CreateReturnMRS',
       Request.post,
       createReturnMrsJsonString,
       isLoading ?? false,
@@ -8495,6 +8495,27 @@ class ConnectHelper {
   }) async {
     var responseModel = await apiWrapper.makeRequest(
       'MISMASTER/GetWaterDataMonthDetail?Month=$month&Year=$year&facility_id=$facilityId',
+      Request.get,
+      null,
+      isLoading ?? false,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    print('ViewResponseModel${responseModel.data}');
+    return responseModel;
+  }
+
+  Future<ResponseModel> getWasteDataMonthDetail({
+    required String auth,
+    required int month,
+    required int year,
+    required int facilityId,
+    required int hazardous,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'MISMASTER/GetWasteDataMonthDetail?Month=$month&Year=$year&facility_id=$facilityId&hazardous=$hazardous',
       Request.get,
       null,
       isLoading ?? false,

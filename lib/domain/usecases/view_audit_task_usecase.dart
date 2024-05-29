@@ -111,6 +111,11 @@ class ViewAuditTaskUsecase {
         auditTaskId,
         isLoading,
       );
+  void saveTypeValue({String? type}) async =>
+      repository.saveValue(LocalKeys.type, type);
+  Future<String?> getTypeValue() async =>
+      await repository.getStringValue(LocalKeys.type);
+
   void saveValue({String? auditTaskId}) async =>
       repository.saveValue(LocalKeys.auditTaskId, auditTaskId);
   Future<String?> getValue() async =>

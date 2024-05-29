@@ -31,46 +31,44 @@ class PlantStockReportScreen extends GetView<PlantStockReportController> {
           (Responsive.isMobile(context) || Responsive.isTablet(context))
               ? HomeDrawerMobile()
               : null,
-      body: Obx(
-        () => Stack(
-          children: [
-            AnimatedContainer(
-                duration: Duration(milliseconds: 450),
-                margin: EdgeInsets.only(
-                  left: Responsive.isDesktop(context)
-                      ? homecontroller.menuButton.value
-                          ? 250.0
-                          : 70.0
-                      : 0,
-                ),
-                width: Get.width,
-                height: Get.height,
-                child: Row(
-                  children: [
-                    (Responsive.isMobile(context) ||
-                            Responsive.isTablet(context))
-                        ? Dimens.box0
-                        : Container(),
-                    Expanded(
-                      child: Column(
-                        children: [
-                          if (Responsive.isMobile(context))
-                            Expanded(child: PlantSockContentMobile()),
-                          if (Responsive.isDesktop(context))
-                            Expanded(
-                              child: PlantStockReportContentWeb(),
-                            )
-                        ],
-                      ),
+      body: Stack(
+        children: [
+          AnimatedContainer(
+              duration: Duration(milliseconds: 450),
+              margin: EdgeInsets.only(
+                left: Responsive.isDesktop(context)
+                    ? homecontroller.menuButton.value
+                        ? 250.0
+                        : 70.0
+                    : 0,
+              ),
+              width: Get.width,
+              height: Get.height,
+              child: Row(
+                children: [
+                  (Responsive.isMobile(context) || Responsive.isTablet(context))
+                      ? Dimens.box0
+                      : Container(),
+                  Expanded(
+                    child: Column(
+                      children: [
+                        if (Responsive.isMobile(context))
+                          Expanded(child: PlantSockContentMobile()),
+                        if (Responsive.isDesktop(context))
+                          Expanded(
+                            child: PlantStockReportContentWeb(),
+                          )
+                      ],
                     ),
-                  ],
-                )),
-            Responsive.isDesktop(context)
-                ? AnimatedPositioned(
-                    child: HomeDrawer(), duration: Duration(milliseconds: 450))
-                : Dimens.box0
-          ],
-        ),
+                  ),
+                ],
+              )),
+          Responsive.isDesktop(context)
+              ? AnimatedPositioned(
+                  child: HomeDrawer(), duration: Duration(milliseconds: 450))
+              : Dimens.box0
+        ],
+        //  ),
       ),
     );
   }

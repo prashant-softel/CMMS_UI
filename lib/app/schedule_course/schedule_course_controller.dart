@@ -345,7 +345,7 @@ class ScheduleController extends GetxController {
       venue: _venue,
       trainerName: _trainerName,
       hfeEmployeeId: selectedEmployeeId.value,
-      mode: selectedModeId.value,
+      mode: selectedModeName.value,
       internalEmployees: internalEmployees,
       externalEmployees: externalEmployees,
       uploadfile_ids: fileIds,
