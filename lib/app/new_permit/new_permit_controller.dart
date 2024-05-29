@@ -157,9 +157,7 @@ class NewPermitController extends GetxController {
   Rx<bool> isTitleTextInvalid = false.obs;
   Rx<bool> isWorPermitNumberTextInvalid = false.obs;
   Rx<bool> isstartdateInvalid = false.obs;
-   Rx<bool> isExpiryInvalid = false.obs;
-  
-
+  Rx<bool> isExpiryInvalid = false.obs;
 
   String? ptwData = "ptwString";
   bool showColumn2 = true;
@@ -1101,6 +1099,8 @@ class NewPermitController extends GetxController {
         {
           int jobTypeListIndex = jobTypeList.indexWhere((x) => x.name == value);
           selectedJobTypesId = jobTypeList[jobTypeListIndex].id ?? 0;
+          isJobTypeListSelected.value = true;
+          selectedJobType.value = value;
           getSopPermitList();
           //}
         }
@@ -1112,6 +1112,8 @@ class NewPermitController extends GetxController {
           jsaData = sopPermitList[sopPermitListIndex].jsa_file_path ?? '';
           sopData = sopPermitList[sopPermitListIndex].sop_file_path ?? '';
           selectedSOPId = sopPermitList[sopPermitListIndex].id ?? 0;
+          isSopPermitListSelected.value = true;
+          selectedSopPermit.value = value;
           print('JsaPath:$jsaData');
           print('SopPath:$sopData');
         }
@@ -1226,90 +1228,79 @@ class NewPermitController extends GetxController {
     }
   }
 
-  void checkForm() {
+  bool checkForm() {
     if (selectedFacility.value == '') {
       isFacilitySelected.value = false;
-       isFormValid.value = false;
+      isFormValid.value = false;
     }
     if (selectedBlock.value == '') {
       isBlockSelected.value = false;
-       isFormValid.value = false;
+      isFormValid.value = false;
     }
-
     if (workPermitRemarkTextCtrlr.text == '') {
       isWorPermitNumberTextInvalid.value = true;
       isFormValid = false.obs;
     }
-     if (startDateTimeCtrlrBuffer.text.trim().length == 0) {
-      isstartdateInvalid.value= true;
+    if (permitDescriptionCtrlr.text == '') {
+      isJobDescriptionInvalid.value = true;
       isFormValid = false.obs;
     }
-     if (validTillTimeCtrlr.text.trim().length == 0) {
+    if (startDateTimeCtrlr.text.trim() == '') {
       isstartdateInvalid.value = true;
       isFormValid = false.obs;
     }
-  
-  
-     if (selectedTypePermit.value == '') {
-      isTypePermitSelected.value = false;
-    }
-    
-    // if (selectedJobType.value == '') {
-    //   isJobTypeListSelected.value = false;
-    // }
-    // if (selectedSopPermit.value == '') {
-    //   isSopPermitListSelected.value = false;
-    // }
-    // if (selectedTypePermit.value == '') {
-    //   isTypePermit.value = false;
-    // }
-    // if (selectedJobType.value == '') {
-    //   isJobTypeListSelected.value = false;
-    // }
-    // if (selectedSopPermit.value == '') {
-    //   isSopPermitListSelected.value = false;
-    // }
-    if (selectedEquipmentCategoryIdList.isEmpty) {
-      Fluttertoast.showToast(msg: "Select the equipment category");
-    }
-    if (startDateTimeCtrlr.text == '') {
-      Fluttertoast.showToast(msg: 'Start date Field cannot be empty');
-    }
-    if (validTillTimeCtrlr.text == '') {
-      Fluttertoast.showToast(msg: 'End date Field cannot be empty');
+    if (validTillTimeCtrlr.text.trim() == '') {
+      isstartdateInvalid.value = true;
+      isFormValid = false.obs;
     }
     if (selectedTypePermit.value == '') {
-      Fluttertoast.showToast(msg: 'Permit type should not be empty');
+      isTypePermitSelected.value = false;
     }
-    //title
-    if (permitDescriptionCtrlr.text.trim().length < 3) {
-      isJobDescriptionInvalid.value = true;
+    if (selectedJobType.value == '') {
+      isJobTypeListSelected.value = false;
     }
-    //    if (dateTimeCtrlr.text.trim().length < 3) {
-    //   selectedDateTime.value= ' ' as DateTime;
+    if (selectedSopPermit.value == '') {
+      isSopPermitListSelected.value = false;
+    }
+    // if (selectedEquipmentCategoryIdList.isEmpty) {
+    //   Fluttertoast.showToast(msg: "Select the equipment category");
     // }
-    
-    if (titleTextCtrlr.text.trim().length < 3) {
-      isTitleTextInvalid.value = true;
-    }
-    if (isCheckedJSA.value == false) {
-      Fluttertoast.showToast(msg: 'JSA checkbox should be checked');
-    }
-    if (isCheckedSOP.value == false) {
-      Fluttertoast.showToast(msg: 'SOP checkbox should be checked');
-    }
+    // if (startDateTimeCtrlr.text == '') {
+    //   Fluttertoast.showToast(msg: 'Start date Field cannot be empty');
+    // }
+    // if (validTillTimeCtrlr.text == '') {
+    //   Fluttertoast.showToast(msg: 'End date Field cannot be empty');
+    // }
+    // if (selectedTypePermit.value == '') {
+    //   Fluttertoast.showToast(msg: 'Permit type should not be empty');
+    // }
+    // if (permitDescriptionCtrlr.text.trim().length < 3) {
+    //   isJobDescriptionInvalid.value = true;
+    // }
+    // if (titleTextCtrlr.text.trim().length < 3) {
+    //   isTitleTextInvalid.value = true;
+    // }
+    // if (isCheckedJSA.value == false) {
+    //   Fluttertoast.showToast(msg: 'JSA checkbox should be checked');
+    // }
+    // if (isCheckedSOP.value == false) {
+    //   Fluttertoast.showToast(msg: 'SOP checkbox should be checked');
+    // }
     if (isAssignedToSelected.value == false ||
         isFacilitySelected.value == false ||
+        isstartdateInvalid.value == true ||
+        isJobTypeListSelected.value == false ||
+        isSopPermitListSelected.value == false ||
         isBlockSelected.value == false ||
-        // isJobTypeListSelected.value == false ||
-        // isSopPermitListSelected.value == false ||
         isJobDescriptionInvalid == true ||
         isWorPermitNumberTextInvalid.value == true ||
         workPermitRemarkTextCtrlr.text == '') {
       isFormInvalid.value = true;
+      return false;
     } else {
       isFormInvalid.value = false;
     }
+    return true;
   }
 
   //  int?   getAssignedBlockId(String _selectedBlockName) {
@@ -1321,10 +1312,10 @@ class NewPermitController extends GetxController {
 
   void createNewPermit({List<dynamic>? fileIds}) async {
     {
-      checkForm();
-      if (isFormInvalid.value) {
-        return;
-      }
+      // checkForm();
+      // if (isFormInvalid.value) {
+      //   return;
+      // }
       //   if(selectedBlockId <= 0){
       //   selectedBlockId = getAssignedBlockId(selectedBlock.value) ?? 0;
       //   }
@@ -1567,7 +1558,7 @@ class NewPermitController extends GetxController {
       {int? pmTaskId, String? activity, List<dynamic>? fileIds}) async {
     {
       checkForm();
-      if  (isFormInvalid.value) {
+      if (isFormInvalid.value) {
         return;
       }
       //   if(selectedBlockId <= 0){
@@ -1717,7 +1708,7 @@ class NewPermitController extends GetxController {
   void updateNewPermit({List<dynamic>? fileIds}) async {
     {
       checkForm();
-      if  (isFormInvalid.value) {
+      if (isFormInvalid.value) {
         return;
       }
       String _description =

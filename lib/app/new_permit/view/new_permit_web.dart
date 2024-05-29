@@ -2083,11 +2083,11 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                             ColorValues.appGreenColor,
                                         text: "Submit For Approval",
                                         onPressed: () {
-                                          // var jobId = controller.jobModel?.id ?? 0;
-                                          // print('JobId'),
-                                           controller.isFormInvalid.value =
-                                                  false;
-                                          controller.isCheckedJSA.value ==
+                                          controller.isFormInvalid.value =
+                                              false;
+                                          controller.checkForm() == true &&
+                                                  controller
+                                                          .isCheckedJSA.value ==
                                                       true &&
                                                   controller
                                                           .isCheckedSOP.value ==
@@ -2099,8 +2099,33 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                                       fileIds:
                                                           dropzoneController
                                                               .fileIds)
-                                              : Get.dialog<void>(
-                                                  checkboxAlertBox());
+                                              : controller.isCheckedJSA.value ==
+                                                          true &&
+                                                      controller.isCheckedSOP
+                                                              .value ==
+                                                          true
+                                                  ? print("condiation failed")
+                                                  : Get.dialog<void>(
+                                                      checkboxAlertBox(),
+                                                    );
+                                          // var jobId = controller.jobModel?.id ?? 0;
+                                          // print('JobId'),
+                                          // controller.isFormInvalid.value =
+                                          //     false;
+                                          // controller.isCheckedJSA.value ==
+                                          //             true &&
+                                          //         controller
+                                          //                 .isCheckedSOP.value ==
+                                          //             true
+                                          //     ? controller
+                                          //         .createNewPermitForJob(
+                                          //             jobId: controller
+                                          //                 .jobModel?.id,
+                                          //             fileIds:
+                                          //                 dropzoneController
+                                          //                     .fileIds)
+                                          //     : Get.dialog<void>(
+                                          //         checkboxAlertBox());
                                           // controller.linkToPermit(jobId: controller.jobModel?.id);
                                         },
                                       )),
@@ -2115,30 +2140,63 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                                 ColorValues.appGreenColor,
                                             text: "Submit For Approval",
                                             onPressed: () {
-                                              // var jobId = controller.jobModel?.id ?? 0;
-                                              // print('JobId'),
-                                               controller.isFormInvalid.value =
+                                              controller.isFormInvalid.value =
                                                   false;
-                                              controller.isCheckedJSA
-                                                              .value ==
+                                              controller.checkForm() == true &&
+                                                      controller
+                                                              .isCheckedJSA.value ==
                                                           true &&
                                                       controller.isCheckedSOP
                                                               .value ==
                                                           true
                                                   ? controller
                                                       .createNewPermitForPm(
-                                                          pmTaskId: controller
-                                                              .pmtaskViewModel
-                                                              ?.id,
-                                                          activity:
+                                                          pmTaskId:
                                                               controller
                                                                   .pmtaskViewModel
-                                                                  ?.plan_title,
+                                                                  ?.id,
+                                                          activity: controller
+                                                              .pmtaskViewModel
+                                                              ?.plan_title,
                                                           fileIds:
                                                               dropzoneController
                                                                   .fileIds)
-                                                  : Get.dialog<void>(
-                                                      checkboxAlertBox());
+                                                  : controller.isCheckedJSA
+                                                                  .value ==
+                                                              true &&
+                                                          controller
+                                                                  .isCheckedSOP
+                                                                  .value ==
+                                                              true
+                                                      ? print(
+                                                          "condiation failed")
+                                                      : Get.dialog<void>(
+                                                          checkboxAlertBox(),
+                                                        );
+                                              // var jobId = controller.jobModel?.id ?? 0;
+                                              // print('JobId'),
+                                              // controller.isFormInvalid.value =
+                                              //     false;
+                                              // controller.isCheckedJSA
+                                              //                 .value ==
+                                              //             true &&
+                                              //         controller.isCheckedSOP
+                                              //                 .value ==
+                                              //             true
+                                              //     ? controller
+                                              //         .createNewPermitForPm(
+                                              //             pmTaskId: controller
+                                              //                 .pmtaskViewModel
+                                              //                 ?.id,
+                                              //             activity:
+                                              //                 controller
+                                              //                     .pmtaskViewModel
+                                              //                     ?.plan_title,
+                                              //             fileIds:
+                                              //                 dropzoneController
+                                              //                     .fileIds)
+                                              //     : Get.dialog<void>(
+                                              //         checkboxAlertBox());
                                               // controller.linkToPermit(jobId: controller.jobModel?.id);
                                             },
                                           )),
@@ -2152,9 +2210,12 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                                       ColorValues.appGreenColor,
                                                   text: "Submit For Approval",
                                                   onPressed: () {
-                                                     controller.isFormInvalid.value =
-                                                  false;
-                                                    controller.isCheckedJSA
+                                                    controller.isFormInvalid
+                                                        .value = false;
+                                                    controller.checkForm() ==
+                                                                true &&
+                                                            controller
+                                                                    .isCheckedJSA
                                                                     .value ==
                                                                 true &&
                                                             controller
@@ -2165,12 +2226,18 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                                             fileIds:
                                                                 dropzoneController
                                                                     .fileIds)
-                                                        : Get.dialog<void>(
-                                                            checkboxAlertBox());
-
-                                                    // () {
-                                                    //   controller.isCheckedJSA.value == true && controller.isCheckedSOP.value == true ? controller.createNewPermit(fileIds: dropzoneController.fileIds) : Get.dialog<void>(checkboxAlertBox());
-                                                    // };
+                                                        : controller.isCheckedJSA
+                                                                        .value ==
+                                                                    true &&
+                                                                controller
+                                                                        .isCheckedSOP
+                                                                        .value ==
+                                                                    true
+                                                            ? print(
+                                                                "condiation failed")
+                                                            : Get.dialog<void>(
+                                                                checkboxAlertBox(),
+                                                              );
                                                   })),
                                         )
                                       : Row(
@@ -2382,54 +2449,54 @@ class NewPermitWeb extends GetView<NewPermitController> {
                 ? MediaQuery.of(context).size.width / 5
                 : MediaQuery.of(context).size.width / 1.0,
             child: TextField(
-              style: GoogleFonts.lato(
-                textStyle:
-                    TextStyle(fontSize: 16.0, height: 1.0, color: Colors.black),
-              ),
-              onTap: () {
-                position == 0
-                    ? pickDateTime_web(context, 0)
-                    : pickDateTime_web(context, 1);
-              },
-              controller: position == 0
-                  ? controller.startDateTimeCtrlr
-                  : controller.validTillTimeCtrlr,
-              autofocus: false,
-              decoration: InputDecoration(
-                fillColor: ColorValues.whiteColor,
-                filled: true,
-                contentPadding: EdgeInsets.fromLTRB(5.0, 10.0, 5.0, 10.0),
-                border: InputBorder.none,
-                enabledBorder: InputBorder.none,
-                focusedBorder: InputBorder.none,
-                 focusedErrorBorder: controller.isstartdateInvalid.value
-                    ? OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(5),
-                        borderSide: BorderSide(
-                          color: ColorValues.redColorDark,
-                        ),
-                      )
-                    : InputBorder.none,
-                errorBorder: controller.isstartdateInvalid.value
-                    ? OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(5),
-                        borderSide: BorderSide(
-                          color: ColorValues.redColorDark,
-                        ),
-                      )
-                    : null,
-                errorText:
-                    controller.isstartdateInvalid.value ? "Required field" : null,
-              ),
-               onChanged: (value) {
-                if (controller.startDateTimeCtrlrBuffer.text.trim().isNotEmpty && controller.validTillTimeCtrlr.text.trim().isNotEmpty){
-                  controller.isstartdateInvalid.value = false;
-                } else {
-                  controller.isstartdateInvalid.value = true;
-                }
-               }
-              
-            ),
+                style: GoogleFonts.lato(
+                  textStyle: TextStyle(
+                      fontSize: 16.0, height: 1.0, color: Colors.black),
+                ),
+                onTap: () {
+                  position == 0
+                      ? pickDateTime_web(context, 0)
+                      : pickDateTime_web(context, 1);
+                },
+                controller: position == 0
+                    ? controller.startDateTimeCtrlr
+                    : controller.validTillTimeCtrlr,
+                autofocus: false,
+                decoration: InputDecoration(
+                  fillColor: ColorValues.whiteColor,
+                  filled: true,
+                  contentPadding: EdgeInsets.fromLTRB(5.0, 10.0, 5.0, 10.0),
+                  border: InputBorder.none,
+                  enabledBorder: InputBorder.none,
+                  focusedBorder: InputBorder.none,
+                  focusedErrorBorder: controller.isstartdateInvalid.value
+                      ? OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(5),
+                          borderSide: BorderSide(
+                            color: ColorValues.redColorDark,
+                          ),
+                        )
+                      : InputBorder.none,
+                  errorBorder: controller.isstartdateInvalid.value
+                      ? OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(5),
+                          borderSide: BorderSide(
+                            color: ColorValues.redColorDark,
+                          ),
+                        )
+                      : null,
+                  errorText: controller.isstartdateInvalid.value
+                      ? "Required field"
+                      : null,
+                ),
+                onChanged: (value) {
+                  if (controller.startDateTimeCtrlr.text.trim() == '' &&
+                      controller.validTillTimeCtrlr.text.trim() == '') {
+                    controller.isstartdateInvalid.value = false;
+                  } else {
+                    controller.isstartdateInvalid.value = true;
+                  }
+                }),
           ),
         ),
         Dimens.boxHeight20,
@@ -2481,6 +2548,9 @@ class NewPermitWeb extends GetView<NewPermitController> {
             .format(dateTime.add(Duration(hours: 8)));
     controller.startDateTimeCtrlrBuffer =
         DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(dateTime);
+    if (controller.startDateTimeCtrlrBuffer != null) {
+      controller.isstartdateInvalid.value = false;
+    }
   }
 
   Future<DateTime?> pickDate_web(BuildContext context, int position) async {
@@ -2564,76 +2634,78 @@ class NewPermitWeb extends GetView<NewPermitController> {
   Widget _buildPermitDescriptionField_web(BuildContext context) {
     return Column(//
         children: [
-      Container(
-        margin: EdgeInsets.only(left: 10, right: 18),
-        decoration: BoxDecoration(
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black26,
-              offset: const Offset(
-                5.0,
-                5.0,
+      Obx(
+        () => Container(
+          margin: EdgeInsets.only(left: 10, right: 18),
+          decoration: BoxDecoration(
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black26,
+                offset: const Offset(
+                  5.0,
+                  5.0,
+                ),
+                blurRadius: 5.0,
+                spreadRadius: 1.0,
               ),
-              blurRadius: 5.0,
-              spreadRadius: 1.0,
+              BoxShadow(
+                color: ColorValues.whiteColor,
+                offset: const Offset(0.0, 0.0),
+                blurRadius: 0.0,
+                spreadRadius: 0.0,
+              ),
+            ],
+            color: ColorValues.whiteColor,
+            borderRadius: BorderRadius.circular(5),
+          ),
+          child: SizedBox(
+            width: MediaQuery.of(context).size.width / 1,
+            child: TextField(
+              style: GoogleFonts.lato(
+                textStyle:
+                    TextStyle(fontSize: 16.0, height: 1.0, color: Colors.black),
+              ),
+              controller: controller.permitDescriptionCtrlr,
+              focusNode: controller.descFocus,
+              scrollController: controller.descScroll,
+              keyboardType: TextInputType.multiline,
+              maxLines: 5,
+              autofocus: false,
+              decoration: InputDecoration(
+                fillColor: ColorValues.whiteColor,
+                filled: true,
+                contentPadding: Dimens.edgeInsets05_10,
+                border: InputBorder.none,
+                enabledBorder: InputBorder.none,
+                focusedBorder: InputBorder.none,
+                focusedErrorBorder: controller.isJobDescriptionInvalid.value
+                    ? OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(5),
+                        borderSide: BorderSide(
+                          color: ColorValues.redColorDark,
+                        ),
+                      )
+                    : InputBorder.none,
+                errorBorder: controller.isJobDescriptionInvalid.value
+                    ? OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(5),
+                        borderSide: BorderSide(
+                          color: ColorValues.redColorDark,
+                        ),
+                      )
+                    : null,
+                errorText: controller.isJobDescriptionInvalid.value
+                    ? "Required field"
+                    : null,
+              ),
+              onChanged: (value) {
+                if (value.trim().length > 1) {
+                  controller.isJobDescriptionInvalid.value = false;
+                } else {
+                  controller.isJobDescriptionInvalid.value = true;
+                }
+              },
             ),
-            BoxShadow(
-              color: ColorValues.whiteColor,
-              offset: const Offset(0.0, 0.0),
-              blurRadius: 0.0,
-              spreadRadius: 0.0,
-            ),
-          ],
-          color: ColorValues.whiteColor,
-          borderRadius: BorderRadius.circular(5),
-        ),
-        child: SizedBox(
-          width: MediaQuery.of(context).size.width / 1,
-          child: TextField(
-            style: GoogleFonts.lato(
-              textStyle:
-                  TextStyle(fontSize: 16.0, height: 1.0, color: Colors.black),
-            ),
-            controller: controller.permitDescriptionCtrlr,
-            focusNode: controller.descFocus,
-            scrollController: controller.descScroll,
-            keyboardType: TextInputType.multiline,
-            maxLines: 5,
-            autofocus: false,
-            decoration: InputDecoration(
-              fillColor: ColorValues.whiteColor,
-              filled: true,
-              contentPadding: Dimens.edgeInsets05_10,
-              border: InputBorder.none,
-              enabledBorder: InputBorder.none,
-              focusedBorder: InputBorder.none,
-              focusedErrorBorder: controller.isJobDescriptionInvalid.value
-                  ? OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(5),
-                      borderSide: BorderSide(
-                        color: ColorValues.redColorDark,
-                      ),
-                    )
-                  : InputBorder.none,
-              errorBorder: controller.isJobDescriptionInvalid.value
-                  ? OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(5),
-                      borderSide: BorderSide(
-                        color: ColorValues.redColorDark,
-                      ),
-                    )
-                  : null,
-              errorText: controller.isJobDescriptionInvalid.value
-                  ? "Required field"
-                  : null,
-            ),
-            onChanged: (value) {
-              if (value.trim().length > 3) {
-                controller.isJobDescriptionInvalid.value = false;
-              } else {
-                controller.isJobDescriptionInvalid.value = true;
-              }
-            },
           ),
         ),
       ),
