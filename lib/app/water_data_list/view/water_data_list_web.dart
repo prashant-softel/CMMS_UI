@@ -312,8 +312,44 @@ class _WaterDataListWebState extends State<WaterDataListWeb> {
                                                               ..addAll(controller
                                                                   .headerList
                                                                   .map((e) {
-                                                                return headerCell(
-                                                                    e['subHeader']);
+                                                                if (e['subHeader'] ==
+                                                                    '+') {
+                                                                  return Container(
+                                                                    decoration:
+                                                                        BoxDecoration(
+                                                                      color: ColorValues
+                                                                          .addNewColor,
+                                                                    ),
+                                                                    child:
+                                                                        headerCell(
+                                                                      e['subHeader'],
+                                                                      isHeader:
+                                                                          true,
+                                                                    ),
+                                                                  );
+                                                                } else if (e[
+                                                                        'subHeader'] ==
+                                                                    '-') {
+                                                                  return Container(
+                                                                    decoration:
+                                                                        BoxDecoration(
+                                                                      color: ColorValues
+                                                                          .appRedColor,
+                                                                    ),
+                                                                    child:
+                                                                        headerCell(
+                                                                      e['subHeader'],
+                                                                      isHeader:
+                                                                          true,
+                                                                    ),
+                                                                  );
+                                                                } else {
+                                                                  return headerCell(
+                                                                      e[
+                                                                          'subHeader'],
+                                                                      isHeader:
+                                                                          true);
+                                                                }
                                                               }))),
                                                         ...List<
                                                                 TableRow>.generate(
