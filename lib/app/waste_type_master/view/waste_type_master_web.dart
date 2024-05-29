@@ -109,7 +109,7 @@ class WasteTypeMasterWeb extends GetView<WasteTypeMasterController> {
                       child: Container(
                         width: (Get.width * .3),
                         margin: EdgeInsets.only(left: 10, top: 30),
-                        height: 300,
+                        height: MediaQuery.of(context).size.width * .25,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
                           color: Color.fromARGB(255, 251, 252, 253),
@@ -145,7 +145,7 @@ class WasteTypeMasterWeb extends GetView<WasteTypeMasterController> {
                                                               null
                                                           ? "Waste Type Created Successfully in the List."
                                                           : "Waste Type Updated Successfully in the List."
-                                                      : "Facility is not added.",
+                                                      : "Waste is not added.",
                                                   style: TextStyle(
                                                       fontSize: 16,
                                                       color: Color.fromARGB(
@@ -431,6 +431,19 @@ class WasteTypeMasterWeb extends GetView<WasteTypeMasterController> {
                                             ),
                                           ],
                                         ),
+                                        Dimens.boxHeight10,
+                                        Row(
+                                          children: [
+                                            Text("Showing Haz"),
+                                            Dimens.boxWidth10,
+                                            CustomSwitchTroggle(
+                                                value: controller
+                                                    .isToggleHazOn.value,
+                                                onChanged: (value) {
+                                                  controller.toggleHaz();
+                                                }),
+                                          ],
+                                        ),
                                         SizedBox(
                                           height: 40,
                                         ),
@@ -646,6 +659,17 @@ class WasteTypeMasterWeb extends GetView<WasteTypeMasterController> {
                                                   ),
                                                 ),
                                                 DataColumn2(
+                                                  // fixedWidth: 300,
+                                                  label: Text(
+                                                    "Showing Haz",
+                                                    style: TextStyle(
+                                                      fontSize: 15,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                    ),
+                                                  ),
+                                                ),
+                                                DataColumn2(
                                                   fixedWidth: 100,
                                                   label: Text(
                                                     'Action',
@@ -691,6 +715,12 @@ class WasteTypeMasterWeb extends GetView<WasteTypeMasterController> {
                                                             .wasteTypeMasterList?[
                                                                 index]
                                                             ?.show_opening
+                                                            .toString() ??
+                                                        "")),
+                                                    DataCell(Text(controller
+                                                            .wasteTypeMasterList?[
+                                                                index]
+                                                            ?.isHazardous
                                                             .toString() ??
                                                         "")),
                                                     DataCell(
