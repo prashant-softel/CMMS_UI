@@ -263,10 +263,12 @@ class WasteDataController extends GetxController {
   Future<DateTime?> pickDate(BuildContext context) async {
     DateTime? dateTime = selectedWasteDataTime.value;
 
+    DateTime fiveDaysAgo = DateTime.now().subtract(Duration(days: 5));
+
     final newDate = await showDatePicker(
       context: context,
-      initialDate: dateTime,
-      firstDate: DateTime(DateTime.now().year - 5),
+      initialDate: dateTime ?? fiveDaysAgo,
+      firstDate: fiveDaysAgo,
       lastDate: DateTime.now(),
     );
 
