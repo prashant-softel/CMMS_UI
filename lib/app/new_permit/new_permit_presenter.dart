@@ -46,10 +46,12 @@ class NewPermitPresenter {
   Future<List<EmployeeListModel>> getEmployeePermitList({
     required bool isLoading,
     required int? facility_id,
+    int? featureId
   }) async {
     return newPermitUsecase.getEmployeePermitList(
       isLoading: isLoading,
       facility_id: facility_id,
+      featureId: featureId
     );
   }
 

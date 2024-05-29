@@ -1,6 +1,8 @@
 import 'package:cmms/app/app.dart';
+import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/incident_report_dashboard/incident_report_controller.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
+import 'package:cmms/app/utils/user_access_constants.dart';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -105,34 +107,43 @@ class IncidentReportDashboardScreen
                                 ? (itemWidth / itemHeight)
                                 : 5,
                             children: <Widget>[
-                              _incidentReportList(
-                                  tittle: "Incident Report List",
-                                  ontap: () {
-                                    Get.toNamed(
-                                      Routes.incidentReportListWeb,
-                                    );
-                                  }),
-                              _incidentReportList(
-                                  tittle: "Body Injured",
-                                  ontap: () {
-                                    Get.toNamed(
-                                      Routes.Bodyinjured,
-                                    );
-                                  }),
-                              _incidentReportList(
-                                  tittle: "Incident Risk",
-                                  ontap: () {
-                                    Get.toNamed(Routes.incidentRiskType);
-                                  }),
-
-                              //  if (Responsive.isDesktop(context))
-                              // _incidentReportList(
-                              //     tittle: "Add Incident Report",
-                              //     ontap: () {
-                              //       Get.toNamed(
-                              //         Routes.addIncidentReportContentWeb,
-                              //       );
-                              //     }),
+                              varUserAccessModel.value.access_list!
+                                          .where((e) =>
+                                              e.feature_id ==
+                                                  UserAccessConstants
+                                                      .kIncidentReportFeatureId &&
+                                              e.view ==
+                                                  UserAccessConstants
+                                                      .kHaveViewAccess)
+                                          .length >
+                                      0
+                                  ? _incidentReportList(
+                                      tittle: "Incident Report List",
+                                      ontap: () {
+                                        Get.toNamed(
+                                          Routes.incidentReportListWeb,
+                                        );
+                                      })
+                                  : Dimens.box0,
+                              if (Responsive.isDesktop(context))
+                                varUserAccessModel.value.access_list!
+                                            .where((e) =>
+                                                e.feature_id ==
+                                                    UserAccessConstants
+                                                        .kIncidentReportFeatureId &&
+                                                e.view ==
+                                                    UserAccessConstants
+                                                        .kHaveViewAccess)
+                                            .length >
+                                        0
+                                    ? _incidentReportList(
+                                        tittle: "Add Incident Report",
+                                        ontap: () {
+                                          Get.toNamed(
+                                            Routes.addIncidentReportContentWeb,
+                                          );
+                                        })
+                                    : Dimens.box0
                             ],
                           )
                         ]),
