@@ -14,16 +14,12 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
-class WaterDataListWeb extends StatefulWidget {
+class WaterDataListWeb extends GetView<WaterDataListController> {
   WaterDataListWeb({
     Key? key,
   }) : super(key: key);
+  final homecontroller = Get.find<HomeController>();
 
-  @override
-  State<WaterDataListWeb> createState() => _WaterDataListWebState();
-}
-
-class _WaterDataListWebState extends State<WaterDataListWeb> {
   TableCell headerCell(String text, {bool isHeader = false}) => TableCell(
         child: Container(
           padding: EdgeInsets.all(8),
