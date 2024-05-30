@@ -164,7 +164,7 @@ class WasteTypeMasterWeb extends GetView<WasteTypeMasterController> {
                                           children: [
                                             Expanded(
                                                 child: CustomRichText(
-                                                    title: 'Waste Type Name ')),
+                                                    title: 'Waste type name')),
                                             Container(
                                               width: (MediaQuery.of(context)
                                                       .size
@@ -416,32 +416,48 @@ class WasteTypeMasterWeb extends GetView<WasteTypeMasterController> {
                                         ),
                                         Dimens.boxHeight10,
                                         Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
                                           children: [
-                                            Text("Showing Header"),
-                                            Dimens.boxWidth10,
-                                            Padding(
-                                              padding: const EdgeInsets.only(
-                                                  top: 10),
-                                              child: CustomSwitchTroggle(
-                                                  value: controller
-                                                      .isToggleOn.value,
-                                                  onChanged: (value) {
-                                                    controller.toggle();
-                                                  }),
+                                            // Dimens.boxWidth10,
+                                            Expanded(
+                                              child: CustomRichText(
+                                                  title: "Show Header",
+                                                  includeAsterisk: false),
                                             ),
+                                            Expanded(
+                                              child: Padding(
+                                                padding: const EdgeInsets.only(
+                                                    top: 10),
+                                                child: CustomSwitchTroggle(
+                                                    value: controller
+                                                        .isToggleOn.value,
+                                                    onChanged: (value) {
+                                                      controller.toggle();
+                                                    }),
+                                              ),
+                                            ),
+                                            Spacer()
                                           ],
                                         ),
                                         Dimens.boxHeight10,
                                         Row(
                                           children: [
-                                            Text("Showing Haz"),
-                                            Dimens.boxWidth10,
-                                            CustomSwitchTroggle(
-                                                value: controller
-                                                    .isToggleHazOn.value,
-                                                onChanged: (value) {
-                                                  controller.toggleHaz();
-                                                }),
+                                            Expanded(
+                                              child: CustomRichText(
+                                                  title: "Show Hazardous",
+                                                  includeAsterisk: false),
+                                            ),
+                                            // Dimens.boxWidth10,
+                                            Expanded(
+                                              child: CustomSwitchTroggle(
+                                                  value: controller
+                                                      .isToggleHazOn.value,
+                                                  onChanged: (value) {
+                                                    controller.toggleHaz();
+                                                  }),
+                                            ),
+                                            Spacer()
                                           ],
                                         ),
                                         SizedBox(
@@ -661,7 +677,7 @@ class WasteTypeMasterWeb extends GetView<WasteTypeMasterController> {
                                                 DataColumn2(
                                                   // fixedWidth: 300,
                                                   label: Text(
-                                                    "Showing Haz",
+                                                    "Showing Hazardous",
                                                     style: TextStyle(
                                                       fontSize: 15,
                                                       fontWeight:
