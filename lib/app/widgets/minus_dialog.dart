@@ -1,5 +1,4 @@
 import 'package:cmms/app/app.dart';
-import 'package:cmms/app/stock_managment_add_goods_orders.dart/view/stock_management_add_goods_orders_web.dart';
 import 'package:cmms/app/water_data_list/water_data_list_controller.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
@@ -99,60 +98,59 @@ class MinusDialog extends GetView {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Dimens.boxHeight10,
-                      GestureDetector(
-                        onTap: () {
-                          controller.pickDateTime(context);
-                        },
-                        child: Container(
-                          width: MediaQuery.of(context).size.width / 5,
-                          height: MediaQuery.of(context).size.height * 0.040,
-                          decoration: BoxDecoration(
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black26,
-                                offset: const Offset(5.0, 5.0),
-                                blurRadius: 5.0,
-                                spreadRadius: 1.0,
-                              ), //BoxShadow
-                              BoxShadow(
-                                color: ColorValues.whiteColor,
-                                offset: const Offset(0.0, 0.0),
-                                blurRadius: 0.0,
-                                spreadRadius: 0.0,
-                              ), //BoxShadow
-                            ],
-                            color: ColorValues.whiteColor,
-                            borderRadius: BorderRadius.circular(5),
-                          ),
-                          child: TextField(
-                            style: GoogleFonts.lato(
-                              textStyle: TextStyle(
-                                  fontSize: 16.0,
-                                  height: 1.0,
-                                  color: Colors.black),
-                            ),
-                            controller: controller.procurementTimeCtrlr,
-                            autofocus: false,
-                            readOnly: true,
-                            decoration: InputDecoration(
-                              fillColor: ColorValues.whiteColor,
-                              filled: true,
-                              contentPadding:
-                                  EdgeInsets.fromLTRB(5.0, 10.0, 5.0, 10.0),
-                              border: InputBorder.none,
-                              enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10.0),
-                                borderSide:
-                                    BorderSide(color: Colors.transparent),
+                      Container(
+                        width: MediaQuery.of(context).size.width / 5,
+                        height: MediaQuery.of(context).size.height * 0.040,
+                        decoration: BoxDecoration(
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black26,
+                              offset: const Offset(
+                                5.0,
+                                5.0,
                               ),
-                              focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10.0),
-                                borderSide:
-                                    BorderSide(color: Colors.transparent),
-                              ),
-                            ),
-                            onChanged: (value) {},
+                              blurRadius: 5.0,
+                              spreadRadius: 1.0,
+                            ), //BoxShadow
+                            BoxShadow(
+                              color: ColorValues.whiteColor,
+                              offset: const Offset(0.0, 0.0),
+                              blurRadius: 0.0,
+                              spreadRadius: 0.0,
+                            ), //BoxShadow
+                          ],
+                          color: ColorValues.whiteColor,
+                          borderRadius: BorderRadius.circular(5),
+                        ),
+                        child: TextField(
+                          style: GoogleFonts.lato(
+                            textStyle: TextStyle(
+                                fontSize: 16.0,
+                                height: 1.0,
+                                color: Colors.black),
                           ),
+                          onTap: () {
+                            controller.pickDateTime(context);
+                          },
+                          controller: controller.procurementTimeCtrlr,
+                          autofocus: false,
+                          readOnly: true,
+                          decoration: InputDecoration(
+                            fillColor: ColorValues.whiteColor,
+                            filled: true,
+                            contentPadding:
+                                EdgeInsets.fromLTRB(5.0, 10.0, 5.0, 10.0),
+                            border: InputBorder.none,
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10.0),
+                              borderSide: BorderSide(color: Colors.transparent),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10.0),
+                              borderSide: BorderSide(color: Colors.transparent),
+                            ),
+                          ),
+                          onChanged: (value) {},
                         ),
                       ),
                       Dimens.boxHeight10,
