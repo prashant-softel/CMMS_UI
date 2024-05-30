@@ -43,11 +43,11 @@ class NewPermitUsecase {
   //     );
 
   Future<List<EmployeeListModel>> getEmployeePermitList(
-      {required bool isLoading, required int? facility_id}) async {
+      {required bool isLoading,
+      required int? facility_id,
+      int? featureId}) async {
     return repository.getEmployeePermitList(
-      isLoading: isLoading,
-      facility_id: facility_id,
-    );
+        isLoading: isLoading, facility_id: facility_id, featureId: featureId);
   }
 
   Future<List<EmployeeListModel>> getPermitIssuerList(
@@ -220,12 +220,14 @@ class NewPermitUsecase {
       );
   Future<Map<String, dynamic>> createNewPermitForPm({
     newPermit,
-    pmTaskId,activity,
+    pmTaskId,
+    activity,
     bool? isLoading,
   }) async =>
       await repository.createNewPermitForPm(
         newPermit,
-        pmTaskId,activity,
+        pmTaskId,
+        activity,
         isLoading,
       );
   Future<Map<String, dynamic>> updateNewPermit(
@@ -243,7 +245,7 @@ class NewPermitUsecase {
   }) async =>
       await repository.getNewPermitDetail(
         permitId: permitId,
-        facilityId:facilityId,
+        facilityId: facilityId,
         isLoading: isLoading ?? false,
       );
 

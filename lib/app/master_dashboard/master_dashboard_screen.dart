@@ -1262,6 +1262,39 @@ class MastersDashboard extends GetView<MastersController> {
                                                 controller.wasteTypeMaster();
                                               })
                                           : Dimens.box0,
+                                      varUserAccessModel.value.access_list!
+                                                  .where((e) =>
+                                                      e.feature_id ==
+                                                          UserAccessConstants
+                                                              .kMasterFeatureId &&
+                                                      e.view ==
+                                                          UserAccessConstants
+                                                              .kHaveViewAccess)
+                                                  .length >
+                                              0
+                                          ? _inventoryList(
+                                              tittle: "Body Injured",
+                                              ontap: () {
+                                                Get.toNamed(Routes.Bodyinjured);
+                                              })
+                                          : Dimens.box0,
+                                      varUserAccessModel.value.access_list!
+                                                  .where((e) =>
+                                                      e.feature_id ==
+                                                          UserAccessConstants
+                                                              .kMasterFeatureId &&
+                                                      e.view ==
+                                                          UserAccessConstants
+                                                              .kHaveViewAccess)
+                                                  .length >
+                                              0
+                                          ? _inventoryList(
+                                              tittle: "Incident Risk",
+                                              ontap: () {
+                                                Get.toNamed(
+                                                    Routes.incidentRiskType);
+                                              })
+                                          : Dimens.box0,
                                     ],
                                   ),
                                 ],

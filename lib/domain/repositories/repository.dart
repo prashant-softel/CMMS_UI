@@ -3551,6 +3551,7 @@ class Repository {
 
   Future<List<EmployeeListModel>> getEmployeePermitList({
     required int? facility_id,
+    int? featureId,
     // int? blockId,
     // required String categoryIds,
     required bool isLoading,
@@ -3559,8 +3560,9 @@ class Repository {
       final auth = await getSecuredValue(LocalKeys.authToken);
 
       log(auth);
-      final res = await _dataRepository.getEmployeePermitList(
-        facility_id: facility_id,
+      final res = await _dataRepository.getAssignedToEmployee(
+        facilityId: facility_id,
+        featureId: featureId,
         isLoading: isLoading,
         auth: auth,
       );

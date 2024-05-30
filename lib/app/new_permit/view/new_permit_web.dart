@@ -2085,6 +2085,8 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                         onPressed: () {
                                           // var jobId = controller.jobModel?.id ?? 0;
                                           // print('JobId'),
+                                           controller.isFormInvalid.value =
+                                                  false;
                                           controller.isCheckedJSA.value ==
                                                       true &&
                                                   controller
@@ -2115,6 +2117,8 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                             onPressed: () {
                                               // var jobId = controller.jobModel?.id ?? 0;
                                               // print('JobId'),
+                                               controller.isFormInvalid.value =
+                                                  false;
                                               controller.isCheckedJSA
                                                               .value ==
                                                           true &&
@@ -2148,6 +2152,8 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                                       ColorValues.appGreenColor,
                                                   text: "Submit For Approval",
                                                   onPressed: () {
+                                                     controller.isFormInvalid.value =
+                                                  false;
                                                     controller.isCheckedJSA
                                                                     .value ==
                                                                 true &&
@@ -2396,7 +2402,33 @@ class NewPermitWeb extends GetView<NewPermitController> {
                 border: InputBorder.none,
                 enabledBorder: InputBorder.none,
                 focusedBorder: InputBorder.none,
+                 focusedErrorBorder: controller.isstartdateInvalid.value
+                    ? OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(5),
+                        borderSide: BorderSide(
+                          color: ColorValues.redColorDark,
+                        ),
+                      )
+                    : InputBorder.none,
+                errorBorder: controller.isstartdateInvalid.value
+                    ? OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(5),
+                        borderSide: BorderSide(
+                          color: ColorValues.redColorDark,
+                        ),
+                      )
+                    : null,
+                errorText:
+                    controller.isstartdateInvalid.value ? "Required field" : null,
               ),
+               onChanged: (value) {
+                if (controller.startDateTimeCtrlrBuffer.text.trim().isNotEmpty && controller.validTillTimeCtrlr.text.trim().isNotEmpty){
+                  controller.isstartdateInvalid.value = false;
+                } else {
+                  controller.isstartdateInvalid.value = true;
+                }
+               }
+              
             ),
           ),
         ),
