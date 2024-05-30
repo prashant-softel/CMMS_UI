@@ -44,7 +44,7 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb> {
                       length: 5,
                       child: Column(children: [
                         Container(
-                          height: 73,
+                          height: 50,
                           decoration: BoxDecoration(
                             border: Border.all(
                               color: Color.fromARGB(255, 227, 224, 224),
