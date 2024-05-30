@@ -44,7 +44,7 @@ class _DashCustomMultiSelectDialogFieldState
     });
 
     return Container(
-      height: 40,
+      height: 40, // Reduced the height
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(10),
@@ -79,15 +79,15 @@ class _DashCustomMultiSelectDialogFieldState
               }
             },
             child: Container(
-              height: 40,
+              height: 40, // Reduced the height
               child: ListTile(
                 title: widget.initialValue == []
                     ? Text(
                         widget.title!,
-                        style: TextStyle(fontSize: 13),
+                        style: TextStyle(fontSize: 12), // Reduced the font size
                       )
                     : SizedBox(
-                        height: 40,
+                        height: 40, // Reduced the height
                         child: ListView.builder(
                           controller: _firstController,
                           itemCount: _selectedItems.length,
@@ -95,11 +95,18 @@ class _DashCustomMultiSelectDialogFieldState
                             final item = _selectedItems[index];
                             return Container(
                               child: Chip(
-                                label: Text(widget.items!
-                                    .firstWhere(
-                                        (element) => element.value == item)
-                                    .label),
-                                deleteIcon: Icon(Icons.cancel),
+                                label: Text(
+                                  widget.items!
+                                      .firstWhere(
+                                          (element) => element.value == item)
+                                      .label,
+                                  style: TextStyle(
+                                      fontSize: 15), // Reduced the font size
+                                ),
+                                deleteIcon: Icon(
+                                  Icons.cancel,
+                                  size: 18,
+                                ),
                                 onDeleted: () {
                                   setState(() {
                                     _selectedItems.remove(item);

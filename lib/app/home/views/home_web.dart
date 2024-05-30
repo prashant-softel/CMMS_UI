@@ -73,18 +73,19 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb> {
                               Spacer(),
                               Padding(
                                 padding: const EdgeInsets.only(
-                                    left: 50, top: 10, bottom: 10),
+                                    left: 50,
+                                    bottom:
+                                        5), // Reduced top and bottom padding
                                 child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     Text('Select Plant',
-                                        style: Styles.black15W400),
+                                        style: Styles.black13W400),
                                     Dimens.boxWidth10,
                                     Obx(
                                       () => SizedBox(
                                         width:
                                             MediaQuery.of(context).size.width /
-                                                8,
+                                                6,
                                         child: Container(
                                           decoration: BoxDecoration(
                                             border: Border.all(
@@ -118,6 +119,12 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb> {
                                               print(
                                                   'Equipment list ${controller.selectedFacilityIdList}');
                                             },
+                                            // titleTextStyle: TextStyle(
+                                            //     fontSize:
+                                            //         12), // Reduced font size
+                                            // chipTextStyle: TextStyle(
+                                            //     fontSize:
+                                            //         12), // Reduced font size
                                           ),
                                         ),
                                       ),
@@ -134,7 +141,7 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb> {
                                     Row(
                                       children: [
                                         Text('Date Range',
-                                            style: Styles.black15W400),
+                                            style: Styles.black13W400),
                                         Dimens.boxWidth10,
                                         CustomTextFieldForStock(
                                             width:
@@ -152,7 +159,7 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb> {
                                             },
                                             hintText:
                                                 '${controller.formattedFromdate.toString()} To ${controller.formattedTodate.toString()}',
-                                            hintStyle: Styles.appDarkBlack12),
+                                            hintStyle: Styles.black13W400),
                                       ],
                                     ),
                                   ],
