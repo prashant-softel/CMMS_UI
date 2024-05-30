@@ -779,40 +779,37 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb> {
                                         ],
                                       ),
                                       Dimens.boxHeight10,
-                                      SingleChildScrollView(
-                                        scrollDirection: Axis.horizontal,
-                                        child: Container(
-                                          // height: 70,
-                                          width: Get.width * .92,
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceAround,
-                                            children: [
-                                              _gridList(
-                                                  tittle: "WO on-time",
-                                                  percent:
-                                                      '${((controller.dashboardBmList.value?.cmDashboadDetails?.wo_on_time ?? 0) / (controller.dashboardBmList.value?.cmDashboadDetails?.total ?? 1) * 100).toString()}%'),
-                                              _gridList(
-                                                  tittle: "WO delay",
-                                                  percent:
-                                                      '${((controller.dashboardBmList.value?.cmDashboadDetails?.wo_delay ?? 0) / (controller.dashboardBmList.value?.cmDashboadDetails?.total ?? 1) * 100).toString()}%'),
-                                              _gridList(
-                                                  tittle: "WO backlog",
-                                                  percent:
-                                                      '${((controller.dashboardBmList.value?.cmDashboadDetails?.wo_backlog ?? 0) / (controller.dashboardBmList.value?.cmDashboadDetails?.total ?? 1) * 100).toString()}%'),
-                                              _gridList(
-                                                  tittle: "Low stock items",
-                                                  percent:
-                                                      '${controller.dashboardBmList.value?.cmDashboadDetails?.low_stock_items}'),
-                                              _gridList(
-                                                  tittle: "PO Items Awaited",
-                                                  percent:
-                                                      '${controller.dashboardBmList.value?.cmDashboadDetails?.po_items_awaited}'),
-                                            ],
-                                          ),
+                                      Container(
+                                        // height: 70,
+                                        width: Get.width * .92,
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceAround,
+                                          children: [
+                                            _gridList(
+                                                tittle: "WO on-time",
+                                                percent:
+                                                    '${((controller.dashboardBmList.value?.cmDashboadDetails?.wo_on_time ?? 0) / (controller.dashboardBmList.value?.cmDashboadDetails?.total ?? 1) * 100).toString()}%'),
+                                            _gridList(
+                                                tittle: "WO delay",
+                                                percent:
+                                                    '${((controller.dashboardBmList.value?.cmDashboadDetails?.wo_delay ?? 0) / (controller.dashboardBmList.value?.cmDashboadDetails?.total ?? 1) * 100).toString()}%'),
+                                            _gridList(
+                                                tittle: "WO backlog",
+                                                percent:
+                                                    '${((controller.dashboardBmList.value?.cmDashboadDetails?.wo_backlog ?? 0) / (controller.dashboardBmList.value?.cmDashboadDetails?.total ?? 1) * 100).toString()}%'),
+                                            _gridList(
+                                                tittle: "Low stock items",
+                                                percent:
+                                                    '${controller.dashboardBmList.value?.cmDashboadDetails?.low_stock_items}'),
+                                            _gridList(
+                                                tittle: "PO Items Awaited",
+                                                percent:
+                                                    '${controller.dashboardBmList.value?.cmDashboadDetails?.po_items_awaited}'),
+                                          ],
                                         ),
                                       ),
-                                      // Dimens.boxHeight10,
+                                      Dimens.boxHeight10,
                                       Expanded(
                                         child: Container(
                                           color: Color.fromARGB(
@@ -820,7 +817,10 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb> {
                                           width: Get.width,
                                           height: Get.height,
                                           child: Padding(
-                                            padding: const EdgeInsets.all(16),
+                                            padding: EdgeInsets.only(
+                                              left: 16,
+                                              right: 16,
+                                            ),
                                             child: DataTable2(
                                               headingRowHeight: 40,
                                               dataRowHeight: 35,
@@ -3628,41 +3628,26 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb> {
             ],
           ),
           margin: EdgeInsets.only(left: 10, right: 10),
-          width: 180,
-          height: 60,
-          padding: EdgeInsets.only(left: 10, right: 10, top: 5),
+          width: 150,
+          height: 52,
+          padding: EdgeInsets.only(left: 10, right: 10, top: 3),
           child: Column(
             children: [
-              Align(
-                alignment: Alignment.topLeft,
-                child: Row(
-                  children: [
-                    Text(
-                      tittle,
-                      style: TextStyle(
-                          color: ColorValues.whiteColor,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w200),
-                      textAlign: TextAlign.center,
-                    ),
-                    // Dimens.boxWidth10,
-                  ],
-                ),
+              Text(
+                tittle,
+                style: TextStyle(
+                    color: ColorValues.whiteColor,
+                    fontSize: 15,
+                    fontWeight: FontWeight.w200),
+                textAlign: TextAlign.center,
               ),
-              Row(
-                children: [
-                  Dimens.boxWidth40,
-                  Spacer(),
-                  Text(
-                    percent,
-                    style: TextStyle(
-                        color: ColorValues.whiteColor,
-                        fontSize: 18,
-                        fontWeight: FontWeight.w600),
-                    textAlign: TextAlign.center,
-                  ),
-                  Spacer(),
-                ],
+              Text(
+                percent,
+                style: TextStyle(
+                    color: ColorValues.whiteColor,
+                    fontSize: 15,
+                    fontWeight: FontWeight.w200),
+                textAlign: TextAlign.center,
               ),
             ],
           ),
