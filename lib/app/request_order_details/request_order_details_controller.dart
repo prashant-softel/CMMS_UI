@@ -23,12 +23,13 @@ class GoodsOrdersReqDetailController extends GetxController {
   GoodsOrdersReqDetailPresenter goodsOrdersReqDetailPresenter;
   final HomeController homecontroller = Get.find();
   RxList<List<Map<String, String>>> rowItem = <List<Map<String, String>>>[].obs;
+  RxMap<String, bool> errorState = <String, bool>{}.obs;
   RxList<GetRODetailsByIDModel?> getPurchaseDetailsByIDModelList =
       <GetRODetailsByIDModel?>[].obs;
   Rx<GetRODetailsByIDModel?> getPurchaseDetailsByIDModel =
       GetRODetailsByIDModel().obs;
-      
-      Rx<bool> isCostInvalid = false.obs;
+
+  Rx<bool> isCostInvalid = false.obs;
   RxList<HistoryModel?>? historyList = <HistoryModel?>[].obs;
   RxList<GetAssetDataModel?> assetList = <GetAssetDataModel>[].obs;
   RxMap<dynamic, dynamic> dropdownMapperData = {}.obs;
@@ -65,6 +66,28 @@ class GoodsOrdersReqDetailController extends GetxController {
     } catch (e) {}
 
     super.onInit();
+  }
+
+  bool validateFields() {
+    bool isValid = true;
+    errorState.clear();
+    for (int i = 0; i < rowItem.length; i++) {
+      var row = rowItem[i];
+      for (var mapData in row) {
+        if ((mapData['key'] == 'Drop_down' && mapData['value'] == null) ||
+            (mapData['key'] == 'Order' &&
+                (mapData['value'] == null || mapData['value']!.isEmpty)) ||
+            (mapData['key'] == 'Cost' &&
+                (mapData['value'] == null || mapData['value']!.isEmpty)) ||
+            (mapData['key'] == 'Comment' &&
+                (mapData['value'] == null || mapData['value']!.isEmpty))) {
+          errorState['$i-${mapData['key']}'] = true;
+          isValid = false;
+        }
+      }
+    }
+    update();
+    return isValid;
   }
 
   // void onInit() async {
@@ -146,7 +169,21 @@ class GoodsOrdersReqDetailController extends GetxController {
       {'key': "Comment", "value": ''},
       {'key': "Action", "value": ''},
     ]);
+    update();
   }
+
+  // void updateValue(int rowIndex, String key, String value) {
+  //   var row = rowItem[rowIndex];
+  //   var mapData =
+  //       row.firstWhere((map) => map['key'] == key, orElse: () => null);
+  //   if (mapData != null) {
+  //     mapData['value'] = value;
+  //     if (errorState['$rowIndex-$key'] == true) {
+  //       errorState.remove('$rowIndex-$key');
+  //     }
+  //   }
+  //   update();
+  // }
 
   Future<void> getRoDetailsByID(
       {required int requestID, required int facilityId}) async {
@@ -188,6 +225,9 @@ class GoodsOrdersReqDetailController extends GetxController {
   }
 
   void submitPurchaseOrderData() async {
+    if (!validateFields()) {
+      return;
+    }
     List<SubmitItems> items = [];
     rowItem.forEach((element) {
       SubmitItems item = SubmitItems(
