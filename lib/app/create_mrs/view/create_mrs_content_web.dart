@@ -261,7 +261,7 @@ class CreateMrsContentWeb extends GetView<CreateMrsController> {
                               ].map((column) {
                                 return TableViewColumn(
                                   label: column,
-                                  minWidth: Get.width * 0.18,
+                                  minWidth: Get.width * 0.16,
                                   //  height: Get.height / 2,
                                 );
                               }).toList(),
@@ -292,7 +292,8 @@ class CreateMrsContentWeb extends GetView<CreateMrsController> {
                                                 selectedValue: mapData["value"],
                                                 onValueChanged:
                                                     (list, selectedValue) {
-                                                  print({"web",
+                                                  print({
+                                                    "web",
                                                     controller
                                                             .dropdownMapperData[
                                                         selectedValue]
@@ -450,7 +451,8 @@ class CreateMrsContentWeb extends GetView<CreateMrsController> {
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          CustomRichText(title: "Comment:"),
+                          CustomRichText(
+                              title: "Comment:", includeAsterisk: false),
                           Dimens.boxWidth10,
                           Container(
                               width: (Get.width * .6),
