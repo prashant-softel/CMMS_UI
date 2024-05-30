@@ -84,6 +84,7 @@ class NewPermitController extends GetxController {
   RxBool isChecked5 = false.obs;
   RxBool isChecked6 = false.obs;
   RxBool isChecked7 = false.obs;
+  RxBool isFormValid = false.obs;
 
   RxBool isCheckedJSA = false.obs;
   RxBool isCheckedSOP = false.obs;
@@ -156,6 +157,10 @@ class NewPermitController extends GetxController {
   Rx<bool> isJobDescriptionInvalid = false.obs;
   Rx<bool> isTitleTextInvalid = false.obs;
   Rx<bool> isWorPermitNumberTextInvalid = false.obs;
+  Rx<bool> isstartdateInvalid = false.obs;
+   Rx<bool> isExpiryInvalid = false.obs;
+  
+
 
   String? ptwData = "ptwString";
   bool showColumn2 = true;
@@ -1226,13 +1231,31 @@ class NewPermitController extends GetxController {
   void checkForm() {
     if (selectedFacility.value == '') {
       isFacilitySelected.value = false;
+       isFormValid.value = false;
     }
     if (selectedBlock.value == '') {
       isBlockSelected.value = false;
+       isFormValid.value = false;
     }
+
     if (workPermitRemarkTextCtrlr.text == '') {
       isWorPermitNumberTextInvalid.value = true;
+      isFormValid = false.obs;
     }
+     if (startDateTimeCtrlrBuffer.text.trim().length == 0) {
+      isstartdateInvalid.value= true;
+      isFormValid = false.obs;
+    }
+     if (validTillTimeCtrlr.text.trim().length == 0) {
+      isstartdateInvalid.value = true;
+      isFormValid = false.obs;
+    }
+  
+  
+     if (selectedTypePermit.value == '') {
+      isTypePermitSelected.value = false;
+    }
+    
     // if (selectedJobType.value == '') {
     //   isJobTypeListSelected.value = false;
     // }
@@ -1260,9 +1283,14 @@ class NewPermitController extends GetxController {
     if (selectedTypePermit.value == '') {
       Fluttertoast.showToast(msg: 'Permit type should not be empty');
     }
+    //title
     if (permitDescriptionCtrlr.text.trim().length < 3) {
       isJobDescriptionInvalid.value = true;
     }
+    //    if (dateTimeCtrlr.text.trim().length < 3) {
+    //   selectedDateTime.value= ' ' as DateTime;
+    // }
+    
     if (titleTextCtrlr.text.trim().length < 3) {
       isTitleTextInvalid.value = true;
     }
@@ -1541,7 +1569,7 @@ class NewPermitController extends GetxController {
       {int? pmTaskId, String? activity, List<dynamic>? fileIds}) async {
     {
       checkForm();
-      if (isFormInvalid.value) {
+      if  (isFormInvalid.value) {
         return;
       }
       //   if(selectedBlockId <= 0){
@@ -1691,7 +1719,7 @@ class NewPermitController extends GetxController {
   void updateNewPermit({List<dynamic>? fileIds}) async {
     {
       checkForm();
-      if (isFormInvalid.value) {
+      if  (isFormInvalid.value) {
         return;
       }
       String _description =

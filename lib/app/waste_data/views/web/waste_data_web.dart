@@ -255,10 +255,14 @@ class _WasteDataWebState extends State<WasteDataWeb> {
                                           () => SingleChildScrollView(
                                             scrollDirection: Axis.horizontal,
                                             child: Container(
+                                              constraints: BoxConstraints(
+                                                minWidth: Get.width,
+                                                maxWidth: Get.width * 5,
+                                              ),
                                               color: Color.fromARGB(
                                                   255, 245, 248, 250),
-                                              width: Get.width,
-                                              height: Get.height,
+                                              // width: Get.width * 2,
+                                              // height: Get.height,
                                               child: Padding(
                                                 padding:
                                                     const EdgeInsets.all(16),
@@ -291,11 +295,15 @@ class _WasteDataWebState extends State<WasteDataWeb> {
                                                                             width: 1),
                                                                       ),
                                                                     ),
-                                                                    width: ((MediaQuery.of(context).size.width - 32) / controller.headerList.length) *
-                                                                        element[
-                                                                            'colSpan'],
+                                                                    width: element[
+                                                                            'colSpan'] *
+                                                                        191.2,
+                                                                    // width: ((MediaQuery.of(context).size.width - 32) / controller.headerList.length) *
+                                                                    //     element[
+                                                                    //         'colSpan'],
                                                                     child: headerCell(
-                                                                        element['label'])))),
+                                                                        element[
+                                                                            'label'])))),
                                                       ),
                                                       Table(
                                                         border: TableBorder.all(
