@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:multi_select_flutter/multi_select_flutter.dart';
+import 'package:flutter/material.dart';
 
 class DashCustomMultiSelectDialogField extends StatefulWidget {
   final List<dynamic>? initialValue;
@@ -34,17 +35,8 @@ class _DashCustomMultiSelectDialogFieldState
 
   @override
   Widget build(BuildContext context) {
-    final ScrollController _firstController =
-        ScrollController(initialScrollOffset: 0.0);
-    _firstController.addListener(() {
-      if (_firstController.position.atEdge) {
-        if (_firstController.position.pixels == 0) {
-        } else {}
-      }
-    });
-
     return Container(
-      height: 40,
+      height: 35,
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(10),
@@ -57,11 +49,81 @@ class _DashCustomMultiSelectDialogFieldState
           ),
         ],
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          InkWell(
-            onTap: () async {
+          Expanded(
+            child: InkWell(
+              onTap: () async {
+                final selectedItems = await Get.dialog(
+                  MultiSelectDialog(
+                    height: MediaQuery.of(context).size.height * 0.4,
+                    width: MediaQuery.of(context).size.height * 0.3,
+                    searchable: true,
+                    items: widget.items!,
+                    initialValue: _selectedItems,
+                  ),
+                );
+                if (selectedItems != null) {
+                  setState(() {
+                    _selectedItems = selectedItems.cast<dynamic>().toList();
+                  });
+                  widget.onConfirm(_selectedItems);
+                }
+              },
+              child: Container(
+                height: 35,
+                padding: EdgeInsets.symmetric(horizontal: 10),
+                child: Row(
+                  children: _selectedItems.isEmpty
+                      ? [
+                          Text(
+                            widget.title!,
+                            style: TextStyle(fontSize: 12),
+                          ),
+                        ]
+                      : [
+                          Flexible(
+                            child: ListView.builder(
+                              shrinkWrap: true,
+                              scrollDirection: Axis.horizontal,
+                              itemCount: _selectedItems.length,
+                              itemBuilder: (context, index) {
+                                final item = _selectedItems[index];
+                                return Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 5.0),
+                                  child: Chip(
+                                    label: Text(
+                                      widget.items!
+                                          .firstWhere((element) =>
+                                              element.value == item)
+                                          .label,
+                                      style: TextStyle(fontSize: 15),
+                                    ),
+                                    deleteIcon: Icon(
+                                      Icons.cancel,
+                                      size: 18,
+                                    ),
+                                    onDeleted: () {
+                                      setState(() {
+                                        _selectedItems.remove(item);
+                                      });
+                                      widget.onConfirm(_selectedItems);
+                                    },
+                                  ),
+                                );
+                              },
+                            ),
+                          ),
+                        ],
+                ),
+              ),
+            ),
+          ),
+          IconButton(
+            icon: Icon(Icons.arrow_drop_down),
+            onPressed: () async {
               final selectedItems = await Get.dialog(
                 MultiSelectDialog(
                   height: MediaQuery.of(context).size.height * 0.4,
@@ -78,62 +140,6 @@ class _DashCustomMultiSelectDialogFieldState
                 widget.onConfirm(_selectedItems);
               }
             },
-            child: Container(
-              height: 40,
-              child: ListTile(
-                title: widget.initialValue == []
-                    ? Text(
-                        widget.title!,
-                        style: TextStyle(fontSize: 13),
-                      )
-                    : SizedBox(
-                        height: 40,
-                        child: ListView.builder(
-                          controller: _firstController,
-                          itemCount: _selectedItems.length,
-                          itemBuilder: (context, index) {
-                            final item = _selectedItems[index];
-                            return Container(
-                              child: Chip(
-                                label: Text(widget.items!
-                                    .firstWhere(
-                                        (element) => element.value == item)
-                                    .label),
-                                deleteIcon: Icon(Icons.cancel),
-                                onDeleted: () {
-                                  setState(() {
-                                    _selectedItems.remove(item);
-                                  });
-                                  widget.onConfirm(_selectedItems);
-                                },
-                              ),
-                            );
-                          },
-                          scrollDirection: Axis.horizontal,
-                        ),
-                      ),
-                trailing: IconButton(
-                  icon: Icon(Icons.arrow_drop_down),
-                  onPressed: () async {
-                    final selectedItems = await Get.dialog(
-                      MultiSelectDialog(
-                        height: MediaQuery.of(context).size.height * 0.4,
-                        width: MediaQuery.of(context).size.height * 0.3,
-                        searchable: true,
-                        items: widget.items!,
-                        initialValue: _selectedItems,
-                      ),
-                    );
-                    if (selectedItems != null) {
-                      setState(() {
-                        _selectedItems = selectedItems.cast<dynamic>().toList();
-                      });
-                      widget.onConfirm(_selectedItems);
-                    }
-                  },
-                ),
-              ),
-            ),
           ),
         ],
       ),
