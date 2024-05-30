@@ -502,6 +502,20 @@ class PermitListDataSource extends DataTableSource {
     final PermitDetails = filteredNewPermitList[index];
 
     controller.permitId.value = PermitDetails?.permitId ?? 0;
+    String requestDatetime = PermitDetails?.requestDatetime != null
+        ? PermitDetails!.requestDatetime.toString()
+        : '';
+    if (requestDatetime.length > 0) {
+      requestDatetime =
+          requestDatetime.substring(0, requestDatetime.length - 7);
+    }
+    String approvedDatetime = PermitDetails?.approvedDatetime != null
+        ? PermitDetails!.approvedDatetime.toString()
+        : '';
+    if (approvedDatetime.length > 0) {
+      approvedDatetime =
+          approvedDatetime.substring(0, approvedDatetime.length - 7);
+    }
     var cellsBuffer = [
       // '${McExcutionListDetails?.id ?? ''}',
       "id",
@@ -509,8 +523,8 @@ class PermitListDataSource extends DataTableSource {
       '${PermitDetails?.permitTypeName ?? ''}',
       '${PermitDetails?.equipment_categories ?? ''}',
       '${PermitDetails?.workingAreaName ?? ''}',
-      '${PermitDetails?.requestByName ?? ''}\n${PermitDetails?.requestDatetime}',
-      '${PermitDetails?.approvedByName ?? ''}\n${PermitDetails?.approvedDatetime}',
+      '${PermitDetails?.requestByName ?? ''}\n${requestDatetime}',
+      '${PermitDetails?.approvedByName ?? ''}\n${approvedDatetime}',
       '${PermitDetails?.ptwStatus ?? ''}',
       '${PermitDetails?.ptwStatus ?? ''}',
 
