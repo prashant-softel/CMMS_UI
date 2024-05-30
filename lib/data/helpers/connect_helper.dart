@@ -5142,6 +5142,10 @@ class ConnectHelper {
         'Authorization': 'Bearer $auth',
       },
     );
+       var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    String message = parsedJson["message"];
+    Utility.showDialog(message, '');
 
     return responseModel;
   }
