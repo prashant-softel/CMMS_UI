@@ -246,6 +246,7 @@ class CustomTextFieldForStock extends StatelessWidget {
     this.suffixIcon,
     this.errorController,
     this.hintText,
+    this.hintStyle,
     this.decoration,
     this.onChanged,
     this.alignment,
@@ -260,6 +261,7 @@ class CustomTextFieldForStock extends StatelessWidget {
   final bool readOnly;
   final Icon? suffixIcon;
   final String? hintText;
+  final TextStyle? hintStyle;
   final Function()? onTap;
   Function(dynamic value)? onChanged;
   final InputDecoration? decoration;
@@ -314,7 +316,7 @@ class CustomTextFieldForStock extends StatelessWidget {
                     borderRadius: BorderRadius.circular(2),
                   ),
                   hintText: hintText,
-                  hintStyle: TextStyle(),
+                  hintStyle: hintStyle,
                   enabledBorder: OutlineInputBorder(
                     borderSide: BorderSide(width: .2),
                     borderRadius: BorderRadius.circular(2),
