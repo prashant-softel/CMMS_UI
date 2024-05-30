@@ -255,7 +255,7 @@ class PreventiveMaintenanceExecutionController extends GetxController {
           scheduleCheckPoints.add(_frequencyList);
         }
       }
-      getMrsListByModuleTask(taskId: scheduleId ?? 0);
+      await getMrsListByModuleTask(taskId: scheduleId ?? 0);
     }
     // selectedasset.value = scheduleCheckPoints[0].name ?? "";
     update(["getPmtaskViewList"]);

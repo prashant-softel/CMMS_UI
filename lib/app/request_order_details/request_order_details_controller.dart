@@ -74,7 +74,8 @@ class GoodsOrdersReqDetailController extends GetxController {
     for (int i = 0; i < rowItem.length; i++) {
       var row = rowItem[i];
       for (var mapData in row) {
-        if ((mapData['key'] == 'Drop_down' && mapData['value'] == null) ||
+        if ((mapData['key'] == 'Drop_down' &&
+                mapData['value'] == 'Please Select') ||
             (mapData['key'] == 'Order' &&
                 (mapData['value'] == null || mapData['value']!.isEmpty)) ||
             (mapData['key'] == 'Cost' &&

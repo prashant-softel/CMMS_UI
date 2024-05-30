@@ -4462,7 +4462,7 @@ class DetailsOfInjuredPerson extends StatelessWidget {
       () => Container(
         margin: Dimens.edgeInsets0,
         //  height: 300,
-        height: ((controller.rowInjuredPersonItem.value.length) * 90) + 170,
+        height: ((controller.rowInjuredPersonItem.value.length) * 60) + 110,
         decoration: BoxDecoration(
           border: Border.all(
             color: ColorValues.lightGreyColorWithOpacity35,
@@ -4481,7 +4481,7 @@ class DetailsOfInjuredPerson extends StatelessWidget {
           children: [
             Column(children: [
               // Column(
-              //     children: []..addAll(controller.rowItem.value.map((e) {
+              // children: []..addAll(controller.rowItem.value.map((e) {
               //         return Text(jsonEncode(e));
               //       }))),
               // Text(jsonEncode(controller.dropdownMapperData)),
@@ -4527,7 +4527,7 @@ class DetailsOfInjuredPerson extends StatelessWidget {
               Expanded(
                 child: DataTable2(
                   minWidth: 2000,
-                  dataRowHeight: 105,
+                  dataRowHeight: 60,
                   columnSpacing: 10,
                   border: TableBorder.all(
                       color: Color.fromARGB(255, 206, 229, 234)),
@@ -4536,13 +4536,6 @@ class DetailsOfInjuredPerson extends StatelessWidget {
                         // fixedWidth: 300,
                         label: Text(
                       "Name of Injured\nPerson ",
-                      style:
-                          TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
-                    )),
-                    DataColumn2(
-                        // fixedWidth: 300,
-                        label: Text(
-                      "Other Victim ",
                       style:
                           TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
                     )),
@@ -4681,99 +4674,23 @@ class DetailsOfInjuredPerson extends StatelessWidget {
                                     ],
                                   ),
                                 )
-                              : (mapData['key'] == "Other Victim ")
+                              : (mapData['key'] == "Gender ")
                                   ? Padding(
-                                      padding: EdgeInsets.only(top: 10),
+                                      padding: const EdgeInsets.only(
+                                          left: 10, right: 10, top: 10),
                                       child: Column(
                                         mainAxisAlignment:
                                             MainAxisAlignment.start,
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
-                                          controller.selectedOption == "Other"
-                                              ? SizedBox(
-                                                  width: MediaQuery.of(context)
-                                                          .size
-                                                          .width /
-                                                      5,
-                                                  child: Padding(
-                                                    padding:
-                                                        EdgeInsets.only(top: 1),
-                                                    child: Column(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .start,
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .start,
-                                                      children: [
-                                                        Container(
-                                                            decoration:
-                                                                BoxDecoration(
-                                                              boxShadow: [
-                                                                BoxShadow(
-                                                                  color: Colors
-                                                                      .black26,
-                                                                  offset:
-                                                                      const Offset(
-                                                                    5.0,
-                                                                    5.0,
-                                                                  ),
-                                                                  blurRadius:
-                                                                      5.0,
-                                                                  spreadRadius:
-                                                                      1.0,
-                                                                ),
-                                                              ],
-                                                              color: ColorValues
-                                                                  .whiteColor,
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          5),
-                                                            ),
-                                                            child:
-                                                                IgnorePointer(
-                                                              ignoring: controller
-                                                                          .incidentReportDetailsModel
-                                                                          .value
-                                                                          ?.status ==
-                                                                      183
-                                                                  ? true
-                                                                  : false,
-                                                              child:
-                                                                  LoginCustomTextfield(
-                                                                // ishint:
-                                                                //     mapData["value"] =
-                                                                //         "",
-                                                                keyboardType:
-                                                                    TextInputType
-                                                                        .text,
-                                                                // inputFormatters: <
-                                                                //     TextInputFormatter>[
-                                                                //   FilteringTextInputFormatter
-                                                                //       .digitsOnly
-                                                                // ],
-                                                                maxLine: 1,
-                                                                textController:
-                                                                    new TextEditingController(
-                                                                        text: mapData["value"] ??
-                                                                            ''),
-                                                                onChanged:
-                                                                    (txt) {
-                                                                  mapData["value"] =
-                                                                      txt;
-                                                                },
-                                                              ),
-                                                            )),
-                                                      ],
-                                                    ),
-                                                  ))
-                                              : Text('No Victim !!'),
+                                          Text(
+                                            "${controller.dropdownVictimNameMapperData[record[0]['value']]?.gender ?? "Select Employee"}",
+                                          ),
                                         ],
                                       ),
                                     )
-                                  : (mapData['key'] == "Gender ")
+                                  : (mapData['key'] == "Trade/Designation ")
                                       ? Padding(
                                           padding: const EdgeInsets.only(
                                               left: 10, right: 10, top: 10),
@@ -4783,145 +4700,36 @@ class DetailsOfInjuredPerson extends StatelessWidget {
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
                                             children: [
-                                              // controller.selectedOption ==
-                                              //         "Other"
-                                              //     ?
-                                              Container(
-                                                decoration: BoxDecoration(
-                                                  boxShadow: [
-                                                    BoxShadow(
-                                                      color: Colors.black26,
-                                                      offset: const Offset(
-                                                        5.0,
-                                                        5.0,
-                                                      ),
-                                                      blurRadius: 5.0,
-                                                      spreadRadius: 1.0,
-                                                    ),
-                                                  ],
-                                                  color: ColorValues.whiteColor,
-                                                  borderRadius:
-                                                      BorderRadius.circular(5),
-                                                ),
-                                                child: Obx(
-                                                  () => IgnorePointer(
-                                                    ignoring: controller
-                                                                .incidentReportDetailsModel
-                                                                .value
-                                                                ?.status ==
-                                                            183
-                                                        ? true
-                                                        : false,
-                                                    child: DropdownWebStock(
-                                                      width:
-                                                          MediaQuery.of(context)
-                                                                  .size
-                                                                  .width /
-                                                              4,
-                                                      dropdownList:
-                                                          controller.genderList,
-                                                      selectedValue: controller
-                                                                  .selectedOption ==
-                                                              "Other"
-                                                          ? mapData["value"]
-                                                          : controller
-                                                              .dropdownVictimNameMapperData[
-                                                                  record[0]
-                                                                      ['value']]
-                                                              ?.gender,
-                                                      onValueChanged: (list,
-                                                          selectedValue) {
-                                                        print({
-                                                          selectedValue:
-                                                              selectedValue
-                                                        });
-                                                        mapData["value"] =
-                                                            selectedValue;
-                                                        controller.dropdownGenderMapperData[
-                                                                selectedValue] =
-                                                            list.firstWhere(
-                                                                (element) =>
-                                                                    element
-                                                                        .name ==
-                                                                    selectedValue,
-                                                                orElse: null);
-                                                      },
-                                                    ),
-                                                  ),
-                                                ),
-                                              )
-                                              // : Text(
-                                              //     "${controller.dropdownVictimNameMapperData[record[0]['value']]?.gender ?? ""}")
+                                              Text(
+                                                "${controller.dropdownVictimNameMapperData[record[0]['value']]?.designation ?? "Select Employee"}",
+                                              ),
                                             ],
                                           ),
                                         )
-                                      : (mapData['key'] == "Trade/Designation ")
+                                      : (mapData['key'] == "Address ")
                                           ? Padding(
-                                              padding: EdgeInsets.only(top: 10),
+                                              padding: const EdgeInsets.only(
+                                                  left: 10, right: 10, top: 10),
                                               child: Column(
                                                 mainAxisAlignment:
                                                     MainAxisAlignment.start,
                                                 crossAxisAlignment:
                                                     CrossAxisAlignment.start,
                                                 children: [
-                                                  Container(
-                                                      decoration: BoxDecoration(
-                                                        boxShadow: [
-                                                          BoxShadow(
-                                                            color:
-                                                                Colors.black26,
-                                                            offset:
-                                                                const Offset(
-                                                              5.0,
-                                                              5.0,
-                                                            ),
-                                                            blurRadius: 5.0,
-                                                            spreadRadius: 1.0,
-                                                          ),
-                                                        ],
-                                                        color: ColorValues
-                                                            .whiteColor,
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(5),
-                                                      ),
-                                                      child: IgnorePointer(
-                                                        ignoring: controller
-                                                                    .incidentReportDetailsModel
-                                                                    .value
-                                                                    ?.status ==
-                                                                183
-                                                            ? true
-                                                            : false,
-                                                        child:
-                                                            LoginCustomTextfield(
-                                                          keyboardType:
-                                                              TextInputType
-                                                                  .text,
-                                                          // inputFormatters: <
-                                                          //     TextInputFormatter>[
-                                                          //   FilteringTextInputFormatter
-                                                          //       .digitsOnly
-                                                          // ],
-                                                          maxLine: 1,
-                                                          textController:
-                                                              new TextEditingController(
-                                                                  text: mapData[
-                                                                          "value"] ??
-                                                                      ''),
-                                                          onChanged: (txt) {
-                                                            mapData["value"] =
-                                                                txt;
-                                                          },
-                                                        ),
-                                                      )),
+                                                  Text(
+                                                    "${controller.dropdownVictimNameMapperData[record[0]['value']]?.city ?? "Select Employee"}",
+                                                  ),
                                                 ],
                                               ),
                                             )
-                                          : (mapData['key'] == "Address ")
+                                          : (mapData['key'] ==
+                                                  "Name of Contractor ")
                                               ? Padding(
                                                   padding:
-                                                      EdgeInsets.only(top: 10),
+                                                      const EdgeInsets.only(
+                                                          left: 10,
+                                                          right: 10,
+                                                          top: 10),
                                                   child: Column(
                                                     mainAxisAlignment:
                                                         MainAxisAlignment.start,
@@ -4930,64 +4738,74 @@ class DetailsOfInjuredPerson extends StatelessWidget {
                                                             .start,
                                                     children: [
                                                       Container(
-                                                          decoration:
-                                                              BoxDecoration(
-                                                            boxShadow: [
-                                                              BoxShadow(
-                                                                color: Colors
-                                                                    .black26,
-                                                                offset:
-                                                                    const Offset(
-                                                                  5.0,
-                                                                  5.0,
-                                                                ),
-                                                                blurRadius: 5.0,
-                                                                spreadRadius:
-                                                                    1.0,
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          boxShadow: [
+                                                            BoxShadow(
+                                                              color: Colors
+                                                                  .black26,
+                                                              offset:
+                                                                  const Offset(
+                                                                5.0,
+                                                                5.0,
                                                               ),
-                                                            ],
-                                                            color: ColorValues
-                                                                .whiteColor,
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        5),
-                                                          ),
-                                                          child: IgnorePointer(
-                                                            ignoring: controller
-                                                                        .incidentReportDetailsModel
-                                                                        .value
-                                                                        ?.status ==
-                                                                    183
-                                                                ? true
-                                                                : false,
-                                                            child:
-                                                                LoginCustomTextfield(
-                                                              keyboardType:
-                                                                  TextInputType
-                                                                      .text,
-                                                              // inputFormatters: <
-                                                              //     TextInputFormatter>[
-                                                              //   FilteringTextInputFormatter
-                                                              //       .digitsOnly
-                                                              // ],
-                                                              maxLine: 1,
-                                                              textController:
-                                                                  new TextEditingController(
-                                                                      text: mapData[
-                                                                              "value"] ??
-                                                                          ''),
-                                                              onChanged: (txt) {
-                                                                mapData["value"] =
-                                                                    txt;
-                                                              },
+                                                              blurRadius: 5.0,
+                                                              spreadRadius: 1.0,
                                                             ),
-                                                          )),
+                                                          ],
+                                                          color: ColorValues
+                                                              .whiteColor,
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(5),
+                                                        ),
+                                                        child: IgnorePointer(
+                                                          ignoring: controller
+                                                                      .incidentReportDetailsModel
+                                                                      .value
+                                                                      ?.status ==
+                                                                  183
+                                                              ? true
+                                                              : false,
+                                                          child:
+                                                              DropdownWebStock(
+                                                            width: MediaQuery.of(
+                                                                        context)
+                                                                    .size
+                                                                    .width /
+                                                                4,
+                                                            dropdownList:
+                                                                controller
+                                                                    .businessList,
+                                                            selectedValue:
+                                                                mapData[
+                                                                    "value"],
+                                                            onValueChanged: (list,
+                                                                selectedValue) {
+                                                              print({
+                                                                selectedValue:
+                                                                    selectedValue
+                                                              });
+                                                              mapData["value"] =
+                                                                  selectedValue;
+                                                              controller.dropdownBusinessListMapperData[
+                                                                      selectedValue] =
+                                                                  list.firstWhere(
+                                                                      (element) =>
+                                                                          element
+                                                                              .name ==
+                                                                          selectedValue,
+                                                                      orElse:
+                                                                          null);
+                                                            },
+                                                          ),
+                                                        ),
+                                                      ),
                                                     ],
                                                   ),
                                                 )
                                               : (mapData['key'] ==
-                                                      "Name of Contractor ")
+                                                      "Body part injured ")
                                                   ? Padding(
                                                       padding:
                                                           const EdgeInsets.only(
@@ -5045,7 +4863,7 @@ class DetailsOfInjuredPerson extends StatelessWidget {
                                                                     4,
                                                                 dropdownList:
                                                                     controller
-                                                                        .businessList,
+                                                                        .bodyinjuredList,
                                                                 selectedValue:
                                                                     mapData[
                                                                         "value"],
@@ -5058,7 +4876,7 @@ class DetailsOfInjuredPerson extends StatelessWidget {
                                                                   });
                                                                   mapData["value"] =
                                                                       selectedValue;
-                                                                  controller.dropdownBusinessListMapperData[selectedValue] = list.firstWhere(
+                                                                  controller.dropdownBodyinjuredListMapperData[selectedValue] = list.firstWhere(
                                                                       (element) =>
                                                                           element
                                                                               .name ==
@@ -5073,7 +4891,7 @@ class DetailsOfInjuredPerson extends StatelessWidget {
                                                       ),
                                                     )
                                                   : (mapData['key'] ==
-                                                          "Body part injured ")
+                                                          "work experience ")
                                                       ? Padding(
                                                           padding:
                                                               const EdgeInsets
@@ -5089,79 +4907,20 @@ class DetailsOfInjuredPerson extends StatelessWidget {
                                                                 CrossAxisAlignment
                                                                     .start,
                                                             children: [
-                                                              Container(
-                                                                decoration:
-                                                                    BoxDecoration(
-                                                                  boxShadow: [
-                                                                    BoxShadow(
-                                                                      color: Colors
-                                                                          .black26,
-                                                                      offset:
-                                                                          const Offset(
-                                                                        5.0,
-                                                                        5.0,
-                                                                      ),
-                                                                      blurRadius:
-                                                                          5.0,
-                                                                      spreadRadius:
-                                                                          1.0,
-                                                                    ),
-                                                                  ],
-                                                                  color: ColorValues
-                                                                      .whiteColor,
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              5),
-                                                                ),
-                                                                child:
-                                                                    IgnorePointer(
-                                                                  ignoring: controller
-                                                                              .incidentReportDetailsModel
-                                                                              .value
-                                                                              ?.status ==
-                                                                          183
-                                                                      ? true
-                                                                      : false,
-                                                                  child:
-                                                                      DropdownWebStock(
-                                                                    width: MediaQuery.of(context)
-                                                                            .size
-                                                                            .width /
-                                                                        4,
-                                                                    dropdownList:
-                                                                        controller
-                                                                            .bodyinjuredList,
-                                                                    selectedValue:
-                                                                        mapData[
-                                                                            "value"],
-                                                                    onValueChanged:
-                                                                        (list,
-                                                                            selectedValue) {
-                                                                      print({
-                                                                        selectedValue:
-                                                                            selectedValue
-                                                                      });
-                                                                      mapData["value"] =
-                                                                          selectedValue;
-                                                                      controller.dropdownBodyinjuredListMapperData[selectedValue] = list.firstWhere(
-                                                                          (element) =>
-                                                                              element.name ==
-                                                                              selectedValue,
-                                                                          orElse:
-                                                                              null);
-                                                                    },
-                                                                  ),
-                                                                ),
+                                                              Text(
+                                                                "${controller.dropdownVictimNameMapperData[record[0]['value']]?.experince ?? "Select Employee"}",
                                                               ),
                                                             ],
                                                           ),
                                                         )
                                                       : (mapData['key'] ==
-                                                              "work experience ")
+                                                              "Plant & Equipment ")
                                                           ? Padding(
-                                                              padding: EdgeInsets
-                                                                  .only(
+                                                              padding:
+                                                                  const EdgeInsets
+                                                                      .only(
+                                                                      left: 10,
+                                                                      right: 10,
                                                                       top: 10),
                                                               child: Column(
                                                                 mainAxisAlignment:
@@ -5172,67 +4931,70 @@ class DetailsOfInjuredPerson extends StatelessWidget {
                                                                         .start,
                                                                 children: [
                                                                   Container(
-                                                                      decoration:
-                                                                          BoxDecoration(
-                                                                        boxShadow: [
-                                                                          BoxShadow(
-                                                                            color:
-                                                                                Colors.black26,
-                                                                            offset:
-                                                                                const Offset(
-                                                                              5.0,
-                                                                              5.0,
-                                                                            ),
-                                                                            blurRadius:
-                                                                                5.0,
-                                                                            spreadRadius:
-                                                                                1.0,
+                                                                    decoration:
+                                                                        BoxDecoration(
+                                                                      boxShadow: [
+                                                                        BoxShadow(
+                                                                          color:
+                                                                              Colors.black26,
+                                                                          offset:
+                                                                              const Offset(
+                                                                            5.0,
+                                                                            5.0,
                                                                           ),
-                                                                        ],
-                                                                        color: ColorValues
-                                                                            .whiteColor,
-                                                                        borderRadius:
-                                                                            BorderRadius.circular(5),
-                                                                      ),
-                                                                      child:
-                                                                          IgnorePointer(
-                                                                        ignoring: controller.incidentReportDetailsModel.value?.status ==
-                                                                                183
-                                                                            ? true
-                                                                            : false,
-                                                                        child:
-                                                                            LoginCustomTextfield(
-                                                                          keyboardType:
-                                                                              TextInputType.text,
-                                                                          inputFormatters: <TextInputFormatter>[
-                                                                            FilteringTextInputFormatter.digitsOnly
-                                                                          ],
-                                                                          maxLine:
-                                                                              1,
-                                                                          textController:
-                                                                              new TextEditingController(text: mapData["value"] ?? ''),
-                                                                          onChanged:
-                                                                              (txt) {
-                                                                            mapData["value"] =
-                                                                                txt;
-                                                                          },
+                                                                          blurRadius:
+                                                                              5.0,
+                                                                          spreadRadius:
+                                                                              1.0,
                                                                         ),
-                                                                      )),
+                                                                      ],
+                                                                      color: ColorValues
+                                                                          .whiteColor,
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(
+                                                                              5),
+                                                                    ),
+                                                                    child:
+                                                                        IgnorePointer(
+                                                                      ignoring: controller.incidentReportDetailsModel.value?.status ==
+                                                                              183
+                                                                          ? true
+                                                                          : false,
+                                                                      child:
+                                                                          DropdownWebStock(
+                                                                        width:
+                                                                            MediaQuery.of(context).size.width /
+                                                                                4,
+                                                                        dropdownList:
+                                                                            controller.eqipmentNameList,
+                                                                        selectedValue:
+                                                                            mapData["value"],
+                                                                        onValueChanged:
+                                                                            (list,
+                                                                                selectedValue) {
+                                                                          print({
+                                                                            selectedValue:
+                                                                                selectedValue
+                                                                          });
+                                                                          mapData["value"] =
+                                                                              selectedValue;
+                                                                          controller.dropdownEquipmentNameMapperData[selectedValue] = list.firstWhere(
+                                                                              (element) => element.name == selectedValue,
+                                                                              orElse: null);
+                                                                        },
+                                                                      ),
+                                                                    ),
+                                                                  ),
                                                                 ],
                                                               ),
                                                             )
                                                           : (mapData['key'] ==
-                                                                  "Plant & Equipment ")
+                                                                  "Exact Location ")
                                                               ? Padding(
                                                                   padding:
-                                                                      const EdgeInsets
+                                                                      EdgeInsets
                                                                           .only(
-                                                                          left:
-                                                                              10,
-                                                                          right:
-                                                                              10,
-                                                                          top:
-                                                                              10),
+                                                                              top: 10),
                                                                   child: Column(
                                                                     mainAxisAlignment:
                                                                         MainAxisAlignment
@@ -5242,53 +5004,49 @@ class DetailsOfInjuredPerson extends StatelessWidget {
                                                                             .start,
                                                                     children: [
                                                                       Container(
-                                                                        decoration:
-                                                                            BoxDecoration(
-                                                                          boxShadow: [
-                                                                            BoxShadow(
-                                                                              color: Colors.black26,
-                                                                              offset: const Offset(
-                                                                                5.0,
-                                                                                5.0,
+                                                                          decoration:
+                                                                              BoxDecoration(
+                                                                            boxShadow: [
+                                                                              BoxShadow(
+                                                                                color: Colors.black26,
+                                                                                offset: const Offset(
+                                                                                  5.0,
+                                                                                  5.0,
+                                                                                ),
+                                                                                blurRadius: 5.0,
+                                                                                spreadRadius: 1.0,
                                                                               ),
-                                                                              blurRadius: 5.0,
-                                                                              spreadRadius: 1.0,
-                                                                            ),
-                                                                          ],
-                                                                          color:
-                                                                              ColorValues.whiteColor,
-                                                                          borderRadius:
-                                                                              BorderRadius.circular(5),
-                                                                        ),
-                                                                        child:
-                                                                            IgnorePointer(
-                                                                          ignoring: controller.incidentReportDetailsModel.value?.status == 183
-                                                                              ? true
-                                                                              : false,
-                                                                          child:
-                                                                              DropdownWebStock(
-                                                                            width:
-                                                                                MediaQuery.of(context).size.width / 4,
-                                                                            dropdownList:
-                                                                                controller.eqipmentNameList,
-                                                                            selectedValue:
-                                                                                mapData["value"],
-                                                                            onValueChanged:
-                                                                                (list, selectedValue) {
-                                                                              print({
-                                                                                selectedValue: selectedValue
-                                                                              });
-                                                                              mapData["value"] = selectedValue;
-                                                                              controller.dropdownEquipmentNameMapperData[selectedValue] = list.firstWhere((element) => element.name == selectedValue, orElse: null);
-                                                                            },
+                                                                            ],
+                                                                            color:
+                                                                                ColorValues.whiteColor,
+                                                                            borderRadius:
+                                                                                BorderRadius.circular(5),
                                                                           ),
-                                                                        ),
-                                                                      ),
+                                                                          child:
+                                                                              IgnorePointer(
+                                                                            ignoring: controller.incidentReportDetailsModel.value?.status == 183
+                                                                                ? true
+                                                                                : false,
+                                                                            child:
+                                                                                LoginCustomTextfield(
+                                                                              keyboardType: TextInputType.text,
+                                                                              // inputFormatters: <
+                                                                              //     TextInputFormatter>[
+                                                                              //   FilteringTextInputFormatter
+                                                                              //       .digitsOnly
+                                                                              // ],
+                                                                              maxLine: 1,
+                                                                              textController: new TextEditingController(text: mapData["value"] ?? ''),
+                                                                              onChanged: (txt) {
+                                                                                mapData["value"] = txt;
+                                                                              },
+                                                                            ),
+                                                                          )),
                                                                     ],
                                                                   ),
                                                                 )
                                                               : (mapData['key'] ==
-                                                                      "Exact Location ")
+                                                                      "Action ")
                                                                   ? Padding(
                                                                       padding: EdgeInsets
                                                                           .only(
@@ -5300,71 +5058,27 @@ class DetailsOfInjuredPerson extends StatelessWidget {
                                                                         crossAxisAlignment:
                                                                             CrossAxisAlignment.start,
                                                                         children: [
-                                                                          Container(
-                                                                              decoration: BoxDecoration(
-                                                                                boxShadow: [
-                                                                                  BoxShadow(
-                                                                                    color: Colors.black26,
-                                                                                    offset: const Offset(
-                                                                                      5.0,
-                                                                                      5.0,
-                                                                                    ),
-                                                                                    blurRadius: 5.0,
-                                                                                    spreadRadius: 1.0,
-                                                                                  ),
-                                                                                ],
-                                                                                color: ColorValues.whiteColor,
-                                                                                borderRadius: BorderRadius.circular(5),
-                                                                              ),
-                                                                              child: IgnorePointer(
-                                                                                ignoring: controller.incidentReportDetailsModel.value?.status == 183 ? true : false,
-                                                                                child: LoginCustomTextfield(
-                                                                                  keyboardType: TextInputType.text,
-                                                                                  // inputFormatters: <
-                                                                                  //     TextInputFormatter>[
-                                                                                  //   FilteringTextInputFormatter
-                                                                                  //       .digitsOnly
-                                                                                  // ],
-                                                                                  maxLine: 1,
-                                                                                  textController: new TextEditingController(text: mapData["value"] ?? ''),
-                                                                                  onChanged: (txt) {
-                                                                                    mapData["value"] = txt;
-                                                                                  },
-                                                                                ),
-                                                                              )),
+                                                                          IgnorePointer(
+                                                                            ignoring: controller.incidentReportDetailsModel.value?.status == 183
+                                                                                ? true
+                                                                                : false,
+                                                                            child:
+                                                                                TableActionButton(
+                                                                              color: ColorValues.appRedColor,
+                                                                              icon: Icons.delete,
+                                                                              label: '',
+                                                                              message: '',
+                                                                              onPress: () {
+                                                                                controller.rowInjuredPersonItem.remove(record);
+                                                                              },
+                                                                            ),
+                                                                          )
                                                                         ],
                                                                       ),
                                                                     )
-                                                                  : (mapData['key'] ==
-                                                                          "Action ")
-                                                                      ? Padding(
-                                                                          padding:
-                                                                              EdgeInsets.only(top: 10),
-                                                                          child:
-                                                                              Column(
-                                                                            mainAxisAlignment:
-                                                                                MainAxisAlignment.start,
-                                                                            crossAxisAlignment:
-                                                                                CrossAxisAlignment.start,
-                                                                            children: [
-                                                                              IgnorePointer(
-                                                                                ignoring: controller.incidentReportDetailsModel.value?.status == 183 ? true : false,
-                                                                                child: TableActionButton(
-                                                                                  color: ColorValues.appRedColor,
-                                                                                  icon: Icons.delete,
-                                                                                  label: '',
-                                                                                  message: '',
-                                                                                  onPress: () {
-                                                                                    controller.rowInjuredPersonItem.remove(record);
-                                                                                  },
-                                                                                ),
-                                                                              )
-                                                                            ],
-                                                                          ),
-                                                                        )
-                                                                      : Text(mapData[
-                                                                              'key'] ??
-                                                                          ''),
+                                                                  : Text(mapData[
+                                                                          'key'] ??
+                                                                      ''),
                         );
                       }).toList(),
                     );
