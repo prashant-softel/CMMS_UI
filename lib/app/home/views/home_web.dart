@@ -113,9 +113,8 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb> {
                                                 .toList(),
                                             onConfirm: (selectedOptionsList) {
                                               controller.selectedMultiFacility(
-                                                  selectedOptionsList.cast<
-                                                      int>() // Ensure the list is cast to List<int>
-                                                  );
+                                                  selectedOptionsList
+                                                      .cast<int>());
                                               print(
                                                   'Equipment list ${controller.selectedFacilityIdList}');
                                             },
@@ -138,21 +137,22 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb> {
                                             style: Styles.black15W400),
                                         Dimens.boxWidth10,
                                         CustomTextFieldForStock(
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width /
-                                              8,
-                                          numberTextField: true,
-                                          onTap: () {
-                                            controller
-                                                    .openFromDateToStartDatePicker =
-                                                !controller
-                                                    .openFromDateToStartDatePicker;
-                                            controller.update(['dashboard']);
-                                          },
-                                          hintText:
-                                              '${controller.formattedFromdate.toString()} To ${controller.formattedTodate.toString()}',
-                                        ),
+                                            width:
+                                                MediaQuery.of(context)
+                                                        .size
+                                                        .width /
+                                                    8,
+                                            numberTextField: true,
+                                            onTap: () {
+                                              controller
+                                                      .openFromDateToStartDatePicker =
+                                                  !controller
+                                                      .openFromDateToStartDatePicker;
+                                              controller.update(['dashboard']);
+                                            },
+                                            hintText:
+                                                '${controller.formattedFromdate.toString()} To ${controller.formattedTodate.toString()}',
+                                            hintStyle: Styles.appDarkBlack12),
                                       ],
                                     ),
                                   ],
