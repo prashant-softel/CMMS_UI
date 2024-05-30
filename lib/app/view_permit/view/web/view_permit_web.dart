@@ -1441,7 +1441,13 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                                                                     ),
 
                                                                     Text(
-                                                                      '${controller.viewPermitDetailsModel.value?.tbT_Done_At}',
+                                                                      controller.viewPermitDetailsModel.value?.tbT_Done_At !=
+                                                                              null
+                                                                          ? DateFormat('yyyy-MM-dd HH:mm').format(controller
+                                                                              .viewPermitDetailsModel
+                                                                              .value!
+                                                                              .tbT_Done_At!)
+                                                                          : '',
                                                                       style: Styles
                                                                           .black17,
                                                                     ),
@@ -2524,12 +2530,24 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                                                         .historyList?.length ??
                                                     0,
                                                 (index) => DataRow(cells: [
-                                                  DataCell(Text(controller
-                                                          .historyList?[index]
-                                                          ?.createdAt
-                                                          ?.result
-                                                          .toString() ??
-                                                      '')),
+                                                  DataCell(
+                                                    Text(
+                                                      controller
+                                                                  .historyList?[
+                                                                      index]
+                                                                  ?.createdAt
+                                                                  ?.result !=
+                                                              null
+                                                          ? DateFormat(
+                                                                  'yyyy-MM-dd HH:mm')
+                                                              .format(controller
+                                                                  .historyList![
+                                                                      index]!
+                                                                  .createdAt!
+                                                                  .result!)
+                                                          : '',
+                                                    ),
+                                                  ),
                                                   DataCell(Text(controller
                                                           .historyList?[index]
                                                           ?.createdByName
@@ -2742,7 +2760,19 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                                           CrossAxisAlignment.start,
                                       children: [
                                         Text(
-                                          '${controller.viewPermitDetailsModel.value?.request_datetime}',
+                                          controller
+                                                      .viewPermitDetailsModel
+                                                      .value
+                                                      ?.request_datetime !=
+                                                  null
+                                              ? DateFormat(
+                                                      'yyyy-MM-dd HH:mm')
+                                                  .format(controller
+                                                      .viewPermitDetailsModel
+                                                      .value!
+                                                      .request_datetime!)
+                                              : '',
+                                          style: Styles.black17,
                                         ),
                                         // Text(
                                         //   '${controller.viewPermitDetailsModel.value?.issue_at}',
@@ -2765,8 +2795,19 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                                                         ?.ptwStatus ==
                                                     PermitStatusConstants
                                                         .PTW_CANCELLED_BY_APPROVER //129
+
                                             ? Text(
-                                                '${controller.viewPermitDetailsModel.value?.approve_at}',
+                                                controller.viewPermitDetailsModel
+                                                            .value?.approve_at !=
+                                                        null
+                                                    ? DateFormat(
+                                                            'yyyy-MM-dd HH:mm')
+                                                        .format(controller
+                                                            .viewPermitDetailsModel
+                                                            .value!
+                                                            .approve_at!)
+                                                    : '',
+                                                style: Styles.black17,
                                               )
                                             : Dimens.box0,
                                         controller.viewPermitDetailsModel.value
@@ -2781,7 +2822,17 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                                                     PermitStatusConstants
                                                         .PTW_CLOSED //126
                                             ? Text(
-                                                '${controller.viewPermitDetailsModel.value?.cancel_at}',
+                                                controller.viewPermitDetailsModel
+                                                            .value?.cancel_at !=
+                                                        null
+                                                    ? DateFormat(
+                                                            'yyyy-MM-dd HH:mm')
+                                                        .format(controller
+                                                            .viewPermitDetailsModel
+                                                            .value!
+                                                            .cancel_at!)
+                                                    : '',
+                                                style: Styles.black17,
                                               )
                                             : Dimens.box0,
 
