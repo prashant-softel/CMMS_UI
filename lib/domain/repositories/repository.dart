@@ -823,7 +823,7 @@ class Repository {
         Fluttertoast.showToast(
             msg: "Submit Water Data  Successfully...", fontSize: 16.0);
         Get.offAllNamed(
-          Routes.waterDataListScreen,
+          Routes.viewWaterData,
         );
 
         // if (res.errorCode == 200) {
@@ -13796,12 +13796,12 @@ class Repository {
       print(error.toString());
     }
   }
+
   //Targeted Group
   //get
   Future<List<CourseCategoryModel>> getTargetedGroup({
     required bool isLoading,
     int? job_type_id,
-
   }) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
@@ -13816,7 +13816,6 @@ class Repository {
       if (!res.hasError) {
         var Sourcetype = CourseCategoryModelFromJson(res.data);
         return Sourcetype;
-
       }
       return [];
     } catch (error) {
@@ -13824,7 +13823,6 @@ class Repository {
       return [];
     }
   }
-
 
   //create
   Future<bool> createTargetedGroup(
@@ -13876,8 +13874,7 @@ class Repository {
   }
 
   //delete
-  Future<void> deleteTargetedGroup(
-      Object category_id, bool isLoading) async {
+  Future<void> deleteTargetedGroup(Object category_id, bool isLoading) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.deleteTargetedGroup(
@@ -13889,8 +13886,7 @@ class Repository {
       if (!res.hasError) {
         //get delete response back from API
       } else {
-        Utility.showDialog(
-            res.errorCode.toString(), 'delete Targeted Group');
+        Utility.showDialog(res.errorCode.toString(), 'delete Targeted Group');
       }
     } catch (error) {
       print(error.toString());
