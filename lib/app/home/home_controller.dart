@@ -156,9 +156,7 @@ class HomeController extends GetxController {
   Future<void> getdashboardList() async {
     dashboardList.value = <DashboardModel>[];
     String lststrFacilityIds = selectedFacilityIdList.join(',');
-    // filteredData.value = <DashboardModel>[];
-    // String lststrFacilityIds =
-    //     selectedFacilityIdList.join(', ').toString() ?? '';
+
     print({"facilityData1": lststrFacilityIds});
 
     final _dashboardList = await homePresenter.getdashboardList(
@@ -211,11 +209,11 @@ class HomeController extends GetxController {
     }
   }
 
-  void selectedMultiFacility(_selectedFacilityIds) {
-    selectedFacilityIdList.value = <int>[];
-    for (var _selectedFacilityId in _selectedFacilityIds) {
-      selectedFacilityIdList.add(_selectedFacilityId);
-    }
+  void selectedMultiFacility(List<int> _selectedFacilityIds) {
+    selectedFacilityIdList.clear(); // Clear the existing list
+    selectedFacilityIdList
+        .addAll(_selectedFacilityIds); // Add the new selections
+    print('Selected facility IDs: ${selectedFacilityIdList}');
     getdashboardList();
   }
 
