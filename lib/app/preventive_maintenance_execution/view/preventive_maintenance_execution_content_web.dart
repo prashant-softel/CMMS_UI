@@ -642,7 +642,9 @@ class PreventiveMaintenanceExecutionContentWeb
                                           }),
                                     ),
                                     Dimens.boxWidth10,
-                                    controller.listMrsByTaskId!.value[0]
+                                    controller.listMrsByTaskId!.value
+                                                    .firstWhere((element) =>
+                                                        element?.mrsId != 0)
                                                     ?.mrs_return_ID ==
                                                 0 &&
                                             controller.allTrue.value == false
