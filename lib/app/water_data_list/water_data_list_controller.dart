@@ -199,7 +199,12 @@ class WaterDataListController extends GetxController {
       masterDataListName.add(_dataList.water_type ?? '');
     }
     headerList.add(
-      {"label": 'Action', "isShow": true, 'subHeader': "", "dataKey": 'action'},
+      {
+        "label": 'Action',
+        "isShow": true,
+        'subHeader': "Action",
+        "dataKey": 'action'
+      },
     );
     mainHeaderList.add(
       {

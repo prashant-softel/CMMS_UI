@@ -270,40 +270,43 @@ class _WasteDataWebState extends State<WasteDataWeb> {
                                                   child: Column(
                                                     children: [
                                                       Row(
-                                                        children: []..addAll(controller
-                                                            .mainHeaderList
-                                                            .map((element) =>
-                                                                Container(
-                                                                    height: 60,
-                                                                    decoration:
-                                                                        BoxDecoration(
-                                                                      color: ColorValues
-                                                                          .lightGreyColor,
-                                                                      border:
-                                                                          Border(
-                                                                        left: BorderSide(
-                                                                            color:
-                                                                                Colors.grey,
-                                                                            width: 1),
-                                                                        right: BorderSide(
-                                                                            color:
-                                                                                Colors.grey,
-                                                                            width: 1),
-                                                                        top: BorderSide(
-                                                                            color:
-                                                                                Colors.grey,
-                                                                            width: 1),
-                                                                      ),
-                                                                    ),
-                                                                    width: element[
-                                                                            'colSpan'] *
-                                                                        191.2,
-                                                                    // width: ((MediaQuery.of(context).size.width - 32) / controller.headerList.length) *
-                                                                    //     element[
-                                                                    //         'colSpan'],
-                                                                    child: headerCell(
-                                                                        element[
-                                                                            'label'])))),
+                                                        children: []..addAll(controller.mainHeaderList.map((element) =>
+                                                            Container(
+                                                                height: 60,
+                                                                decoration:
+                                                                    BoxDecoration(
+                                                                  color: ColorValues
+                                                                      .lightGreyColor,
+                                                                  border:
+                                                                      Border(
+                                                                    left: BorderSide(
+                                                                        color: Colors
+                                                                            .grey,
+                                                                        width:
+                                                                            1),
+                                                                    right: BorderSide(
+                                                                        color: Colors
+                                                                            .grey,
+                                                                        width:
+                                                                            1),
+                                                                    top: BorderSide(
+                                                                        color: Colors
+                                                                            .grey,
+                                                                        width:
+                                                                            1),
+                                                                  ),
+                                                                ),
+                                                                width: element[
+                                                                        'colSpan'] *
+                                                                    (Get.width /
+                                                                            9 +
+                                                                        3),
+                                                                // width: ((MediaQuery.of(context).size.width - 32) / controller.headerList.length) *
+                                                                //     element[
+                                                                //         'colSpan'],
+                                                                child: headerCell(
+                                                                    element[
+                                                                        'label'])))),
                                                       ),
                                                       Table(
                                                         border: TableBorder.all(
