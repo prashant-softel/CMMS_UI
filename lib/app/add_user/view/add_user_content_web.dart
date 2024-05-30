@@ -319,6 +319,25 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                                       ishint: 'Enter Email ID',
                                                       textController: controller
                                                           .loginIdCtrlr,
+                                                          //validation
+                                                           errorController: controller
+                                                          .isLoginIDInvalid
+                                                          .value
+                                                      ? "Required field"
+                                                      : null,
+
+                                                  onChanged: (value) {
+                                                    if (value.trim().length >
+                                                        0) {
+                                                      controller
+                                                          .isLoginIDInvalid
+                                                          .value = false;
+                                                    } else {
+                                                      controller
+                                                          .isLoginIDInvalid
+                                                          .value = true;
+                                                    }
+                                                  }
                                                     )),
                                               ],
                                             ),
@@ -368,6 +387,25 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                                           'Enter First Name',
                                                       textController: controller
                                                           .firstNameCtrlr,
+                                                           //validation
+                                                           errorController: controller
+                                                          .isFirstNameInvalid
+                                                          .value
+                                                      ? "Required field"
+                                                      : null,
+
+                                                  onChanged: (value) {
+                                                    if (value.trim().length >
+                                                        0) {
+                                                      controller
+                                                          .isFirstNameInvalid
+                                                          .value = false;
+                                                    } else {
+                                                      controller
+                                                          .isFirstNameInvalid
+                                                          .value = true;
+                                                    }
+                                                  }
                                                     )),
                                               ],
                                             ),
@@ -422,6 +460,26 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                                       ishint: 'Enter Email ID',
                                                       textController: controller
                                                           .secandoryIdCtrlr,
+
+                                                           //validation
+                                                           errorController: controller
+                                                          .isSecondaryEmailInvalid
+                                                          .value
+                                                      ? "Required field"
+                                                      : null,
+
+                                                  onChanged: (value) {
+                                                    if (value.trim().length >
+                                                        0) {
+                                                      controller
+                                                          .isSecondaryEmailInvalid
+                                                          .value = false;
+                                                    } else {
+                                                      controller
+                                                          .isSecondaryEmailInvalid
+                                                          .value = true;
+                                                    }
+                                                  }
                                                     )),
                                               ],
                                             ),
@@ -558,6 +616,25 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                                           'Enter Mobile Number',
                                                       textController: controller
                                                           .mobileNoCtrlr,
+                                                                    //validation
+                                                           errorController: controller
+                                                          .isMobileNumberInvalid
+                                                          .value
+                                                      ? "Required field"
+                                                      : null,
+
+                                                  onChanged: (value) {
+                                                    if (value.trim().length >
+                                                        0) {
+                                                      controller
+                                                          .isMobileNumberInvalid
+                                                          .value = false;
+                                                    } else {
+                                                      controller
+                                                          .isMobileNumberInvalid
+                                                          .value = true;
+                                                    }
+                                                  }
                                                     )),
                                               ],
                                             ),
@@ -827,9 +904,29 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                                       ishint: 'Enter Password',
                                                       textController: controller
                                                           .passwordCtrlr,
-                                                      onChanged: (value) {
-                                                        // controller.validatePassword(value);
-                                                      },
+                                                                     //validation
+                                                           errorController: controller
+                                                          .isPasswordInvalid
+                                                          .value
+                                                      ? "Required field"
+                                                      : null,
+
+                                                  onChanged: (value) {
+                                                    if (value.trim().length >
+                                                        0) {
+                                                      controller
+                                                          .isPasswordInvalid
+                                                          .value = false;
+                                                    } else {
+                                                      controller
+                                                          .isPasswordInvalid
+                                                          .value = true;
+                                                    }
+                                                  },
+
+                                                      // onChanged: (value) {
+                                                      //   // controller.validatePassword(value);
+                                                      // },
                                                       autofillHints: const [],
                                                     )),
                                               ],
@@ -879,6 +976,25 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                                       ishint: 'Enter Last Name',
                                                       textController: controller
                                                           .lastNameCtrlr,
+                                                                     //validation
+                                                           errorController: controller
+                                                          .isLastNameInvalid
+                                                          .value
+                                                      ? "Required field"
+                                                      : null,
+
+                                                  onChanged: (value) {
+                                                    if (value.trim().length >
+                                                        0) {
+                                                      controller
+                                                          .isLastNameInvalid
+                                                          .value = false;
+                                                    } else {
+                                                      controller
+                                                          .isLastNameInvalid
+                                                          .value = true;
+                                                    }
+                                                  }
                                                     )),
                                               ],
                                             ),
@@ -944,6 +1060,25 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                                     },
                                                     textController:
                                                         controller.dobCtrlr,
+                                                            //validation
+                                                           errorController: controller
+                                                          .isdobInvalid
+                                                          .value
+                                                      ? "Required field"
+                                                      : null,
+
+                                                  onChanged: (value) {
+                                                    if (value.trim().length >
+                                                        0) {
+                                                      controller
+                                                          .isdobInvalid
+                                                          .value = false;
+                                                    } else {
+                                                      controller
+                                                          .isdobInvalid
+                                                          .value = true;
+                                                    }
+                                                  }
                                                   ),
                                                 ),
                                               ],
@@ -999,6 +1134,25 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                                           'Enter Date of Joining',
                                                       textController: controller
                                                           .joingdateCtrlr,
+                                                              //validation
+                                                           errorController: controller
+                                                          .isDateofJoiningInvalid
+                                                          .value
+                                                      ? "Required field"
+                                                      : null,
+
+                                                  onChanged: (value) {
+                                                    if (value.trim().length >
+                                                        0) {
+                                                      controller
+                                                          .isDateofJoiningInvalid
+                                                          .value = false;
+                                                    } else {
+                                                      controller
+                                                          .isDateofJoiningInvalid
+                                                          .value = true;
+                                                    }
+                                                  },
                                                       ontap: () {
                                                         controller
                                                                 .openDoJDatePicker =
@@ -1075,6 +1229,25 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                                           'Enter Landline Number',
                                                       textController: controller
                                                           .landlineCtrlr,
+                                                             //validation
+                                                           errorController: controller
+                                                          .isLandlineInvalid
+                                                          .value
+                                                      ? "Required field"
+                                                      : null,
+
+                                                  onChanged: (value) {
+                                                    if (value.trim().length >
+                                                        0) {
+                                                      controller
+                                                          .isLandlineInvalid
+                                                          .value = false;
+                                                    } else {
+                                                      controller
+                                                          .isLandlineInvalid
+                                                          .value = true;
+                                                    }
+                                                  },
                                                     )),
                                               ],
                                             ),
@@ -1171,6 +1344,25 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                                     ishint: 'Enter Zip Code',
                                                     textController:
                                                         controller.zipcodeCtrlr,
+                                                         //validation
+                                                           errorController: controller
+                                                          .isZipCodeInvalid
+                                                          .value
+                                                      ? "Required field"
+                                                      : null,
+
+                                                  onChanged: (value) {
+                                                    if (value.trim().length >
+                                                        0) {
+                                                      controller
+                                                          .isZipCodeInvalid
+                                                          .value = false;
+                                                    } else {
+                                                      controller
+                                                          .isZipCodeInvalid
+                                                          .value = true;
+                                                    }
+                                                  },
                                                   )),
                                             ]),
                                             Dimens.boxHeight8,
@@ -1936,8 +2128,10 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                                   text: 'Submit',
                                                   onPressed: () async {
                                                     try {
+                                                      controller.isFormInvalid.value=false;
                                                       await controller
                                                           .addUser();
+
                                                     } catch (e) {
                                                       Fluttertoast.showToast(
                                                           msg: e.toString(),
@@ -2014,6 +2208,7 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                               DateFormat('yyyy-MM-dd').format(p0.value);
                           controller.openDobDatePicker =
                               !controller.openDobDatePicker;
+                               controller.isdobInvalid.value = false;
                           controller.update(['stock_Mangement']);
                         },
                       ),
@@ -2033,6 +2228,7 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                               DateFormat('yyyy-MM-dd').format(p0.value);
                           controller.openDoJDatePicker =
                               !controller.openDoJDatePicker;
+                               controller.isDateofJoiningInvalid.value = false;
                           controller.update(['stock_Mangement']);
                         },
                       ),
