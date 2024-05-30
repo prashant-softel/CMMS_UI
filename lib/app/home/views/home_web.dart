@@ -2,6 +2,7 @@ import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/home/widgets/header_widget_all_dash.dart';
 import 'package:cmms/app/widgets/custom_multiselect_dialog_field.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
+import 'package:cmms/app/widgets/dash_multiselect_dialog_field.dart';
 import 'package:cmms/app/widgets/date_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -76,34 +77,52 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb> {
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    CustomRichText(title: 'Select Plant'),
+                                    Text('Select Plant',
+                                        style: Styles.black15W400),
                                     Dimens.boxWidth10,
                                     Obx(
                                       () => SizedBox(
                                         width:
                                             MediaQuery.of(context).size.width /
-                                                5,
-                                        child: CustomMultiSelectDialogField(
-                                          title: 'Select Facility',
-                                          initialValue:
-                                              controller.selectedFacilityIdList,
-                                          items: controller.facilityList
-                                              .map(
-                                                (facility) => MultiSelectItem(
-                                                  facility?.id,
-                                                  facility?.name ?? '',
-                                                ),
-                                              )
-                                              .toList(),
-                                          onConfirm: (selectedOptionsList) {
-                                            controller.selectedMultiFacility(
-                                                selectedOptionsList);
-                                            print(
-                                                'Equipment list ${controller.selectedFacilityIdList}');
-                                          },
+                                                8,
+                                        child: Container(
+                                          decoration: BoxDecoration(
+                                            border: Border.all(
+                                                color: Colors.transparent),
+                                            borderRadius:
+                                                BorderRadius.circular(5),
+                                          ),
+                                          child:
+                                              DashCustomMultiSelectDialogField(
+                                            title: 'Select Facility',
+                                            initialValue: controller
+                                                .facilityList
+                                                .where((facility) =>
+                                                    facility != null)
+                                                .map((facility) => facility!.id)
+                                                .toList(),
+                                            items: controller.facilityList
+                                                .where((facility) =>
+                                                    facility != null)
+                                                .map(
+                                                  (facility) => MultiSelectItem(
+                                                    facility!.id,
+                                                    facility.name ?? '',
+                                                  ),
+                                                )
+                                                .toList(),
+                                            onConfirm: (selectedOptionsList) {
+                                              controller.selectedMultiFacility(
+                                                  selectedOptionsList.cast<
+                                                      int>() // Ensure the list is cast to List<int>
+                                                  );
+                                              print(
+                                                  'Equipment list ${controller.selectedFacilityIdList}');
+                                            },
+                                          ),
                                         ),
                                       ),
-                                    ),
+                                    )
                                   ],
                                 ),
                               ),
@@ -115,13 +134,14 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb> {
                                   children: [
                                     Row(
                                       children: [
-                                        CustomRichText(title: 'Date Range'),
+                                        Text('Date Range',
+                                            style: Styles.black15W400),
                                         Dimens.boxWidth10,
                                         CustomTextFieldForStock(
                                           width: MediaQuery.of(context)
                                                   .size
                                                   .width /
-                                              5,
+                                              8,
                                           numberTextField: true,
                                           onTap: () {
                                             controller
@@ -138,7 +158,6 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb> {
                                   ],
                                 ),
                               ),
-                              Spacer(),
                               Dimens.boxWidth10,
                               if (Responsive.isDesktop(context))
                                 Icon(Icons.notifications_active,
