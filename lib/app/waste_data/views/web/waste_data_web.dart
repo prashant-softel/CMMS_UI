@@ -47,21 +47,27 @@ class _WasteDataWebState extends State<WasteDataWeb> {
             child: Row(
           children: [
             TableActionButton(
-              color: ColorValues.viewColor,
-              icon: Icons.remove_red_eye_outlined,
-              message: 'view',
+              color: ColorValues.appGreenColor,
+              icon: Icons.compost,
+              message: 'Non-Hazardous',
               onPress: () {
-                Get.toNamed(Routes.viewWaterData,
-                    arguments: {"monthId": data.month_id, "year": data.year});
+                Get.toNamed(Routes.viewWasteData, arguments: {
+                  "monthId": data.month_id,
+                  "hazardous": 0,
+                  "year": data.year
+                });
               },
             ),
             TableActionButton(
-              color: ColorValues.editColor,
-              icon: Icons.edit,
-              message: 'Edit',
+              color: ColorValues.appRedColor,
+              icon: Icons.warning,
+              message: 'Hazardous',
               onPress: () {
-                Get.toNamed(Routes.viewWaterData,
-                    arguments: {"monthId": data.month_id, "year": data.year});
+                Get.toNamed(Routes.viewWasteData, arguments: {
+                  "monthId": data.month_id,
+                  "hazardous": 1,
+                  "year": data.year
+                });
               },
             ),
           ],

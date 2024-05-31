@@ -30,11 +30,27 @@ class WasteDataUsecase {
         createWasteData,
         isLoading,
       );
+  Future<Map<String, dynamic>> updateWasteData({
+    createWasteData,
+    bool? isLoading,
+  }) async =>
+      await repository.updateWasteData(
+        createWasteData,
+        isLoading,
+      );
   Future<Map<String, dynamic>> createWasteDataDisposed({
     createWasteData,
     bool? isLoading,
   }) async =>
       await repository.createWasteData(
+        createWasteData,
+        isLoading,
+      );
+  Future<Map<String, dynamic>> updateWasteDataDisposed({
+    createWasteData,
+    bool? isLoading,
+  }) async =>
+      await repository.updateWasteData(
         createWasteData,
         isLoading,
       );

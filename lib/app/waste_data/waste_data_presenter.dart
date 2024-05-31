@@ -32,12 +32,30 @@ class WasteDataPresenter {
       isLoading: isLoading,
     );
   }
+  Future<Map<String, dynamic>?> updateWasteData({
+    createWasteData,
+    required bool isLoading,
+  }) async {
+    return wasteDataUsecase.updateWasteData(
+      createWasteData: createWasteData,
+      isLoading: isLoading,
+    );
+  }
 
   Future<Map<String, dynamic>?> createWasteDataDisposed({
     createWasteData,
     required bool isLoading,
   }) async {
     return wasteDataUsecase.createWasteDataDisposed(
+      createWasteData: createWasteData,
+      isLoading: isLoading,
+    );
+  }
+  Future<Map<String, dynamic>?> updateWasteDataDisposed({
+    createWasteData,
+    required bool isLoading,
+  }) async {
+    return wasteDataUsecase.updateWasteDataDisposed(
       createWasteData: createWasteData,
       isLoading: isLoading,
     );
