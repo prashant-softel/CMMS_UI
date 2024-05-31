@@ -248,31 +248,37 @@ class ToolTypeController extends GetxController {
     }
   }
 
-  // void checkForm() {
-  //   if (selectedassetcategory.value == '') {
-  //     isselectedassetc.value = false;
-  //   }
-  //   if (isTitleInvalid.value == true) {
-  //     isFormInvalid.value = true;
-  //   } else {
-  //     isFormInvalid.value = false;
-  //   }
-  // }
+  void checkForm() {
+    if (selectedassetcategory.value == '') {
+      isselectedassetc.value = false;
+      isFormInvalid.value = true;
+    }
+    if (assetc.value == '') {
+      isworktypeListSelected.value = false;
+      isFormInvalid.value = true;
+    }
+    if (titleCtrlr.text.trim() == '') {
+      isTitleInvalid.value = true;
+      isFormInvalid.value = true;
+    } else {
+      isFormInvalid.value = false;
+    }
+  }
+
   void onValueChanged(dynamic list, dynamic value) {
     switch (list.runtimeType) {
       case RxList<InventoryCategoryModel>:
         {
           if (value != "Please Select") {
             int equipmentIndex =
-              equipmentCategoryList.indexWhere((x) => x?.name == value);
-          selectedEquipmentId = equipmentCategoryList[equipmentIndex]?.id ?? 0;
-          assetc.value = '';
+                equipmentCategoryList.indexWhere((x) => x?.name == value);
+            selectedEquipmentId =
+                equipmentCategoryList[equipmentIndex]?.id ?? 0;
+            assetc.value = '';
 
-          getWorkTypeList();
-            
-          }else{
-            selectedEquipmentId=0;
-            
+            getWorkTypeList();
+          } else {
+            selectedEquipmentId = 0;
           }
         }
 
@@ -296,6 +302,22 @@ class ToolTypeController extends GetxController {
 
   Future<bool> createWorkTypeTool() async {
     print("CREATE CONTROLLER");
+    if (selectedassetcategory.value == '') {
+      isselectedassetc.value = false;
+      isFormInvalid.value = true;
+    }
+    if (assetc.value == '') {
+      isworktypeListSelected.value = false;
+      isFormInvalid.value = true;
+    }
+    if (titleCtrlr.text.trim() == '') {
+      isTitleInvalid.value = true;
+      isFormInvalid.value = true;
+    }
+    checkForm();
+    if (isFormInvalid.value == true) {
+      return false;
+    }
     String _title = titleCtrlr.text.trim();
     print(_title);
     WorkTypeToolModel workTypeTool = WorkTypeToolModel(
@@ -316,6 +338,23 @@ class ToolTypeController extends GetxController {
   }
 
   Future<bool> updateWorkTypeTool(toolId) async {
+    if (selectedassetcategory.value == '') {
+      isselectedassetc.value = false;
+      isFormInvalid.value = true;
+    }
+    if (assetc.value == '') {
+      isworktypeListSelected.value = false;
+      isFormInvalid.value = true;
+    }
+    if (titleCtrlr.text.trim() == '') {
+      isTitleInvalid.value = true;
+      isFormInvalid.value = true;
+    }
+    checkForm();
+    if (isFormInvalid.value == true) {
+      return false;
+    }
+
     String _title = titleCtrlr.text.trim();
     print(_title);
     WorkTypeToolModel workTypeTool = WorkTypeToolModel(
