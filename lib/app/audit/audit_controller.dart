@@ -46,7 +46,7 @@ class AuditController extends GetxController {
     auditPresenter.clearValue();
 
     Get.toNamed(Routes.preventiveList,
-        arguments: {'type': AppConstants.kAudit});
+        arguments: {'type': 2});
   }
 
   Future<void> checkPoint() async {
