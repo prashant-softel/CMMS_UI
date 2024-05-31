@@ -43,8 +43,7 @@ import 'package:cmms/app/calibration_history/view/calibration_history_screen.dar
 import 'package:cmms/app/calibration_view/calibration_view_binding.dart';
 import 'package:cmms/app/check_list_of_observation/checklist_of_observation_binding.dart';
 import 'package:cmms/app/check_list_of_observation/views/checklist_of_observation_screen.dart';
-import 'package:cmms/app/checklist_mis_plan/checklist_mis_plan_binding.dart';
-import 'package:cmms/app/checklist_mis_plan/view/checklist_mis_plan_screen.dart';
+
 import 'package:cmms/app/compliance/compliance_binding.dart';
 import 'package:cmms/app/compliance/views/compliance_screen.dart';
 import 'package:cmms/app/compliance_history/compliance_history_binding.dart';
@@ -1140,11 +1139,7 @@ class AppPages {
       page: MisTaskScreen.new,
       binding: MisTaskBinding(),
     ),
-    GetPage<dynamic>(
-      name: _Paths.checklistMisPlan,
-      page: ChecklistMisPlanScreen.new,
-      binding: ChecklistMisPlanBinding(),
-    ),
+
     GetPage<dynamic>(
       name: _Paths.createMisPlan,
       page: CreateMisPlanScreen.new,

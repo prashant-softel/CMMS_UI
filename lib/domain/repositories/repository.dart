@@ -11892,7 +11892,7 @@ class Repository {
       bool? isLoading,
       bool? isExport,
       dynamic startDate,
-      dynamic endDate) async {
+      dynamic endDate,int? type) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.getAuditPlanList(
@@ -11900,7 +11900,7 @@ class Repository {
           facilityId: facilityId ?? 0,
           isLoading: isLoading ?? false,
           startDate: startDate,
-          endDate: endDate);
+          endDate: endDate,type:type);
       print({"res.data", res.data});
       if (!res.hasError) {
         final jsonAuditPlanListModelModels = jsonDecode(res.data);
