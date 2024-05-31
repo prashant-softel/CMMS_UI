@@ -144,7 +144,7 @@ class AddIncidentReportController extends GetxController {
 
   /// Victim Name List
   RxList<EmployeeListModel> victimNameList = <EmployeeListModel>[].obs;
-  Map<String, EmployeeListModel> dropdownVictimNameMapperData = {};
+  RxMap<dynamic, dynamic> dropdownVictimNameMapperData = {}.obs;
 
   RxList<EmployeeListModel?> filteredVictimNameList = <EmployeeListModel>[].obs;
   Map<dynamic, dynamic> employee_map = {};
@@ -532,53 +532,53 @@ class AddIncidentReportController extends GetxController {
       });
 
       if (irId.value != 0) {
-        Future.delayed(Duration(seconds: 1), () {
-          getIncidentReportDetail(id: irId.value);
-          getIncidentReportHistory(id: irId.value);
+        Future.delayed(Duration(seconds: 1), () async {
+          await getIncidentReportDetail(id: irId.value);
+          await getIncidentReportHistory(id: irId.value);
         });
       }
       if (irId != 0) {
         Future.delayed(Duration(seconds: 1), () {});
       }
-      Future.delayed(Duration(seconds: 1), () {
-        getFacilityPlantList();
+      Future.delayed(Duration(seconds: 1), () async {
+        await getFacilityPlantList();
       });
 
       // Future.delayed(Duration(seconds: 1), () {
       //   getuserAccessData();
       // });
-      Future.delayed(Duration(seconds: 1), () {
-        getResponsibilityList(facilityId);
+      Future.delayed(Duration(seconds: 1), () async {
+        await getResponsibilityList(facilityId);
       });
       ;
-      Future.delayed(Duration(seconds: 1), () {
+      Future.delayed(Duration(seconds: 1), () async {
         getTypePermitList(facilityId);
       });
-      Future.delayed(Duration(seconds: 1), () {
+      Future.delayed(Duration(seconds: 1), () async {
         getInventoryList();
       });
-      Future.delayed(Duration(seconds: 1), () {
+      Future.delayed(Duration(seconds: 1), () async {
         getIncidentInvestigationDoneByList();
       });
-      Future.delayed(Duration(seconds: 1), () {
+      Future.delayed(Duration(seconds: 1), () async {
         getIncidentInvestigationVerificationDoneByList();
       });
-      Future.delayed(Duration(seconds: 1), () {
+      Future.delayed(Duration(seconds: 1), () async {
         getVictimNameList();
       });
-      Future.delayed(Duration(seconds: 1), () {
+      Future.delayed(Duration(seconds: 1), () async {
         getAssetRestorationActionTakenByList();
       });
-      Future.delayed(Duration(seconds: 1), () {
+      Future.delayed(Duration(seconds: 1), () async {
         getRiskTypeList();
       });
-      Future.delayed(Duration(seconds: 1), () {
+      Future.delayed(Duration(seconds: 1), () async {
         getBusinessList(facilityId);
       });
-      Future.delayed(Duration(seconds: 1), () {
+      Future.delayed(Duration(seconds: 1), () async {
         addOneMoreData();
       });
-      Future.delayed(Duration(seconds: 1), () {
+      Future.delayed(Duration(seconds: 1), () async {
         getBodyInjuredData();
         getVictimNameList();
         getInventoryList();
@@ -941,11 +941,9 @@ class AddIncidentReportController extends GetxController {
             "key": "Name of Injured Person ",
             "value": '${element?.person_id}',
           },
-          {'key': "Other Victim ", "value": ''},
           {
             "key": "Gender ",
-            "value":
-                '${element?.sex == 1 ? "Male" : element?.sex == 2 ? "Female" : element?.sex == 3 ? "TransGender" : "Please Select"}',
+            "value": '${element?.gender}',
           },
           {'key': "Trade/Designation ", "value": '${element?.designation}'},
           {'key': "Address ", "value": '${element?.address}'},
@@ -971,10 +969,9 @@ class AddIncidentReportController extends GetxController {
           },
           {'key': "Action ", "value": ''},
         ]);
-        // dropdownEquipmentNameMapperData[element!.responsibility ?? ""] =
-        //     eqipmentNameList.firstWhere(
-        //         (e) => e?.name == element.responsibility,
-        //         orElse: null)!;
+        dropdownEquipmentNameMapperData[element!.person_id ?? ""] =
+            eqipmentNameList.firstWhere((e) => e?.name == element.person_id,
+                orElse: null)!;
       });
     }
   }
@@ -1162,7 +1159,12 @@ class AddIncidentReportController extends GetxController {
   }
 
   void getInventoryList() async {
-    eqipmentNameList.value = <InventoryModel>[];
+    eqipmentNameList.value = <InventoryModel>[
+      InventoryModel(
+        id: 0,
+        name: "NA",
+      ),
+    ];
     final _inventoryList = await incidentReportPresenter.getInventoryList(
       isLoading: true,
       categoryIds: categoryIds,
@@ -1210,7 +1212,6 @@ class AddIncidentReportController extends GetxController {
         "key": "Name of Injured Person ",
         "value": 'Please Select',
       },
-      {'key': "Other Victim ", "value": ''},
       {
         "key": "Gender ",
         "value": 'Please Select',
@@ -1634,15 +1635,13 @@ class AddIncidentReportController extends GetxController {
               selectedOption.value == "Other" ? element[1]["value"] ?? '0' : "",
           person_type: 1,
           age: 30,
-          sex: selectedOption == "Other"
-              ? dropdownGenderMapperData[element[0]["value"]]?.id
+          sex: dropdownVictimNameMapperData[element[0]["value"]]?.gender ==
+                  "Male"
+              ? 1
               : dropdownVictimNameMapperData[element[0]["value"]]?.gender ==
-                      "Male"
-                  ? 1
-                  : dropdownVictimNameMapperData[element[0]["value"]]?.gender ==
-                          "Female"
-                      ? 2
-                      : 3,
+                      "Female"
+                  ? 2
+                  : 3,
           designation: element[3]["value"] ?? '0',
           address: element[4]["value"] ?? '0',
           name_contractor:

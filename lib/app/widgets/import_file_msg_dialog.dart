@@ -44,13 +44,15 @@ class ImportMsgDialog extends GetView {
                       color: ColorValues.greyLightColour,
                       thickness: 1,
                     ),
-                    importLog == null
-                        ? Center(
+                    // importLog == null
+                    //     ? 
+                        Center(
                             child: Text('${data}',
                                 style: TextStyle(color: Colors.green),
                                 textAlign: TextAlign.center),
-                          )
-                        : Center(
+                          ),
+                        // : 
+                        Center(
                             child: Text('${importLog}',
                                 style: TextStyle(color: Colors.red),
                                 textAlign: TextAlign.center),

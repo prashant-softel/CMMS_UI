@@ -90,6 +90,11 @@ abstract class Styles {
     fontWeight: FontWeight.w400,
     fontSize: Dimens.fifteen,
   );
+  static TextStyle black13W400 = TextStyle(
+    color: ColorValues.blackColor,
+    fontWeight: FontWeight.w400,
+    fontSize: Dimens.thirteen,
+  );
   static TextStyle black15W600 = TextStyle(
     color: ColorValues.blackColor,
     fontWeight: FontWeight.w600,
@@ -672,6 +677,11 @@ abstract class Styles {
   );
   static TextStyle appDarkBlue12 = TextStyle(
     color: ColorValues.navyBlueColor,
+    fontWeight: FontWeight.normal,
+    fontSize: Dimens.twelve,
+  );
+  static TextStyle appDarkBlack12 = TextStyle(
+    color: ColorValues.blackColor,
     fontWeight: FontWeight.normal,
     fontSize: Dimens.twelve,
   );

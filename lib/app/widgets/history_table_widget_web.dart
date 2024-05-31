@@ -2,6 +2,7 @@ import 'package:cmms/app/utils/responsive.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 import '../../domain/models/history_model.dart';
 
@@ -71,7 +72,13 @@ class HistoryTableWidgetWeb extends StatelessWidget {
         historyList?.length ?? 0,
         (index) => DataRow(cells: [
           DataCell(
-              Text(historyList?[index]?.createdAt?.result.toString() ?? '')),
+              Text(
+              historyList?[index]?.createdAt?.result != null
+                  ? DateFormat('yyyy-MM-dd HH:mm')
+                      .format(historyList![index]!.createdAt!.result!)
+                  : '',
+            )
+          ),
           DataCell(Text(historyList?[index]?.createdByName.toString() ?? '')),
           DataCell(Text(historyList?[index]?.comment.toString() ?? '')),
           DataCell(Text(historyList?[index]?.status_name.toString() ?? '')),

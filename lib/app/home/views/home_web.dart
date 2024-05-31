@@ -2,6 +2,7 @@ import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/home/widgets/header_widget_all_dash.dart';
 import 'package:cmms/app/widgets/custom_multiselect_dialog_field.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
+import 'package:cmms/app/widgets/dash_multiselect_dialog_field.dart';
 import 'package:cmms/app/widgets/date_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -43,7 +44,7 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb> {
                       length: 5,
                       child: Column(children: [
                         Container(
-                          height: 73,
+                          height: 50,
                           decoration: BoxDecoration(
                             border: Border.all(
                               color: Color.fromARGB(255, 227, 224, 224),
@@ -72,38 +73,62 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb> {
                               Spacer(),
                               Padding(
                                 padding: const EdgeInsets.only(
-                                    left: 50, top: 10, bottom: 10),
+                                    left: 50,
+                                    bottom:
+                                        5), // Reduced top and bottom padding
                                 child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    CustomRichText(title: 'Select Plant'),
+                                    Text('Select Plant',
+                                        style: Styles.black13W400),
                                     Dimens.boxWidth10,
                                     Obx(
                                       () => SizedBox(
                                         width:
                                             MediaQuery.of(context).size.width /
-                                                5,
-                                        child: CustomMultiSelectDialogField(
-                                          title: 'Select Facility',
-                                          initialValue:
-                                              controller.selectedFacilityIdList,
-                                          items: controller.facilityList
-                                              .map(
-                                                (facility) => MultiSelectItem(
-                                                  facility?.id,
-                                                  facility?.name ?? '',
-                                                ),
-                                              )
-                                              .toList(),
-                                          onConfirm: (selectedOptionsList) {
-                                            controller.selectedMultiFacility(
-                                                selectedOptionsList);
-                                            print(
-                                                'Equipment list ${controller.selectedFacilityIdList}');
-                                          },
+                                                6,
+                                        child: Container(
+                                          decoration: BoxDecoration(
+                                            border: Border.all(
+                                                color: Colors.transparent),
+                                            borderRadius:
+                                                BorderRadius.circular(5),
+                                          ),
+                                          child:
+                                              DashCustomMultiSelectDialogField(
+                                            title: 'Select Facility',
+                                            initialValue: controller
+                                                .facilityList
+                                                .where((facility) =>
+                                                    facility != null)
+                                                .map((facility) => facility!.id)
+                                                .toList(),
+                                            items: controller.facilityList
+                                                .where((facility) =>
+                                                    facility != null)
+                                                .map(
+                                                  (facility) => MultiSelectItem(
+                                                    facility!.id,
+                                                    facility.name ?? '',
+                                                  ),
+                                                )
+                                                .toList(),
+                                            onConfirm: (selectedOptionsList) {
+                                              controller.selectedMultiFacility(
+                                                  selectedOptionsList
+                                                      .cast<int>());
+                                              print(
+                                                  'Equipment list ${controller.selectedFacilityIdList}');
+                                            },
+                                            // titleTextStyle: TextStyle(
+                                            //     fontSize:
+                                            //         12), // Reduced font size
+                                            // chipTextStyle: TextStyle(
+                                            //     fontSize:
+                                            //         12), // Reduced font size
+                                          ),
                                         ),
                                       ),
-                                    ),
+                                    )
                                   ],
                                 ),
                               ),
@@ -115,30 +140,31 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb> {
                                   children: [
                                     Row(
                                       children: [
-                                        CustomRichText(title: 'Date Range'),
+                                        Text('Date Range',
+                                            style: Styles.black13W400),
                                         Dimens.boxWidth10,
                                         CustomTextFieldForStock(
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width /
-                                              5,
-                                          numberTextField: true,
-                                          onTap: () {
-                                            controller
-                                                    .openFromDateToStartDatePicker =
-                                                !controller
-                                                    .openFromDateToStartDatePicker;
-                                            controller.update(['dashboard']);
-                                          },
-                                          hintText:
-                                              '${controller.formattedFromdate.toString()} To ${controller.formattedTodate.toString()}',
-                                        ),
+                                            width:
+                                                MediaQuery.of(context)
+                                                        .size
+                                                        .width /
+                                                    8,
+                                            numberTextField: true,
+                                            onTap: () {
+                                              controller
+                                                      .openFromDateToStartDatePicker =
+                                                  !controller
+                                                      .openFromDateToStartDatePicker;
+                                              controller.update(['dashboard']);
+                                            },
+                                            hintText:
+                                                '${controller.formattedFromdate.toString()} To ${controller.formattedTodate.toString()}',
+                                            hintStyle: Styles.black13W400),
                                       ],
                                     ),
                                   ],
                                 ),
                               ),
-                              Spacer(),
                               Dimens.boxWidth10,
                               if (Responsive.isDesktop(context))
                                 Icon(Icons.notifications_active,
@@ -753,40 +779,37 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb> {
                                         ],
                                       ),
                                       Dimens.boxHeight10,
-                                      SingleChildScrollView(
-                                        scrollDirection: Axis.horizontal,
-                                        child: Container(
-                                          // height: 70,
-                                          width: Get.width * .92,
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceAround,
-                                            children: [
-                                              _gridList(
-                                                  tittle: "WO on-time",
-                                                  percent:
-                                                      '${((controller.dashboardBmList.value?.cmDashboadDetails?.wo_on_time ?? 0) / (controller.dashboardBmList.value?.cmDashboadDetails?.total ?? 1) * 100).toString()}%'),
-                                              _gridList(
-                                                  tittle: "WO delay",
-                                                  percent:
-                                                      '${((controller.dashboardBmList.value?.cmDashboadDetails?.wo_delay ?? 0) / (controller.dashboardBmList.value?.cmDashboadDetails?.total ?? 1) * 100).toString()}%'),
-                                              _gridList(
-                                                  tittle: "WO backlog",
-                                                  percent:
-                                                      '${((controller.dashboardBmList.value?.cmDashboadDetails?.wo_backlog ?? 0) / (controller.dashboardBmList.value?.cmDashboadDetails?.total ?? 1) * 100).toString()}%'),
-                                              _gridList(
-                                                  tittle: "Low stock items",
-                                                  percent:
-                                                      '${controller.dashboardBmList.value?.cmDashboadDetails?.low_stock_items}'),
-                                              _gridList(
-                                                  tittle: "PO Items Awaited",
-                                                  percent:
-                                                      '${controller.dashboardBmList.value?.cmDashboadDetails?.po_items_awaited}'),
-                                            ],
-                                          ),
+                                      Container(
+                                        // height: 70,
+                                        width: Get.width * .92,
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceAround,
+                                          children: [
+                                            _gridList(
+                                                tittle: "WO on-time",
+                                                percent:
+                                                    '${((controller.dashboardBmList.value?.cmDashboadDetails?.wo_on_time ?? 0) / (controller.dashboardBmList.value?.cmDashboadDetails?.total ?? 1) * 100).toString()}%'),
+                                            _gridList(
+                                                tittle: "WO delay",
+                                                percent:
+                                                    '${((controller.dashboardBmList.value?.cmDashboadDetails?.wo_delay ?? 0) / (controller.dashboardBmList.value?.cmDashboadDetails?.total ?? 1) * 100).toString()}%'),
+                                            _gridList(
+                                                tittle: "WO backlog",
+                                                percent:
+                                                    '${((controller.dashboardBmList.value?.cmDashboadDetails?.wo_backlog ?? 0) / (controller.dashboardBmList.value?.cmDashboadDetails?.total ?? 1) * 100).toString()}%'),
+                                            _gridList(
+                                                tittle: "Low stock items",
+                                                percent:
+                                                    '${controller.dashboardBmList.value?.cmDashboadDetails?.low_stock_items}'),
+                                            _gridList(
+                                                tittle: "PO Items Awaited",
+                                                percent:
+                                                    '${controller.dashboardBmList.value?.cmDashboadDetails?.po_items_awaited}'),
+                                          ],
                                         ),
                                       ),
-                                      // Dimens.boxHeight10,
+                                      Dimens.boxHeight10,
                                       Expanded(
                                         child: Container(
                                           color: Color.fromARGB(
@@ -794,7 +817,10 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb> {
                                           width: Get.width,
                                           height: Get.height,
                                           child: Padding(
-                                            padding: const EdgeInsets.all(16),
+                                            padding: EdgeInsets.only(
+                                              left: 16,
+                                              right: 16,
+                                            ),
                                             child: DataTable2(
                                               headingRowHeight: 40,
                                               dataRowHeight: 35,
@@ -3602,41 +3628,26 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb> {
             ],
           ),
           margin: EdgeInsets.only(left: 10, right: 10),
-          width: 180,
-          height: 60,
-          padding: EdgeInsets.only(left: 10, right: 10, top: 5),
+          width: 150,
+          height: 52,
+          padding: EdgeInsets.only(left: 10, right: 10, top: 3),
           child: Column(
             children: [
-              Align(
-                alignment: Alignment.topLeft,
-                child: Row(
-                  children: [
-                    Text(
-                      tittle,
-                      style: TextStyle(
-                          color: ColorValues.whiteColor,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w200),
-                      textAlign: TextAlign.center,
-                    ),
-                    // Dimens.boxWidth10,
-                  ],
-                ),
+              Text(
+                tittle,
+                style: TextStyle(
+                    color: ColorValues.whiteColor,
+                    fontSize: 15,
+                    fontWeight: FontWeight.w200),
+                textAlign: TextAlign.center,
               ),
-              Row(
-                children: [
-                  Dimens.boxWidth40,
-                  Spacer(),
-                  Text(
-                    percent,
-                    style: TextStyle(
-                        color: ColorValues.whiteColor,
-                        fontSize: 18,
-                        fontWeight: FontWeight.w600),
-                    textAlign: TextAlign.center,
-                  ),
-                  Spacer(),
-                ],
+              Text(
+                percent,
+                style: TextStyle(
+                    color: ColorValues.whiteColor,
+                    fontSize: 15,
+                    fontWeight: FontWeight.w200),
+                textAlign: TextAlign.center,
               ),
             ],
           ),

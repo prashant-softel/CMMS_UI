@@ -109,7 +109,7 @@ class WasteTypeMasterWeb extends GetView<WasteTypeMasterController> {
                       child: Container(
                         width: (Get.width * .3),
                         margin: EdgeInsets.only(left: 10, top: 30),
-                        height: 300,
+                        height: MediaQuery.of(context).size.width * .25,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
                           color: Color.fromARGB(255, 251, 252, 253),
@@ -145,7 +145,7 @@ class WasteTypeMasterWeb extends GetView<WasteTypeMasterController> {
                                                               null
                                                           ? "Waste Type Created Successfully in the List."
                                                           : "Waste Type Updated Successfully in the List."
-                                                      : "Facility is not added.",
+                                                      : "Waste is not added.",
                                                   style: TextStyle(
                                                       fontSize: 16,
                                                       color: Color.fromARGB(
@@ -164,7 +164,7 @@ class WasteTypeMasterWeb extends GetView<WasteTypeMasterController> {
                                           children: [
                                             Expanded(
                                                 child: CustomRichText(
-                                                    title: 'Waste Type Name ')),
+                                                    title: 'Waste type name')),
                                             Container(
                                               width: (MediaQuery.of(context)
                                                       .size
@@ -416,19 +416,48 @@ class WasteTypeMasterWeb extends GetView<WasteTypeMasterController> {
                                         ),
                                         Dimens.boxHeight10,
                                         Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
                                           children: [
-                                            Text("Showing Header"),
-                                            Dimens.boxWidth10,
-                                            Padding(
-                                              padding: const EdgeInsets.only(
-                                                  top: 10),
+                                            // Dimens.boxWidth10,
+                                            Expanded(
+                                              child: CustomRichText(
+                                                  title: "Show Header",
+                                                  includeAsterisk: false),
+                                            ),
+                                            Expanded(
+                                              child: Padding(
+                                                padding: const EdgeInsets.only(
+                                                    top: 10),
+                                                child: CustomSwitchTroggle(
+                                                    value: controller
+                                                        .isToggleOn.value,
+                                                    onChanged: (value) {
+                                                      controller.toggle();
+                                                    }),
+                                              ),
+                                            ),
+                                            Spacer()
+                                          ],
+                                        ),
+                                        Dimens.boxHeight10,
+                                        Row(
+                                          children: [
+                                            Expanded(
+                                              child: CustomRichText(
+                                                  title: "Show Hazardous",
+                                                  includeAsterisk: false),
+                                            ),
+                                            // Dimens.boxWidth10,
+                                            Expanded(
                                               child: CustomSwitchTroggle(
                                                   value: controller
-                                                      .isToggleOn.value,
+                                                      .isToggleHazOn.value,
                                                   onChanged: (value) {
-                                                    controller.toggle();
+                                                    controller.toggleHaz();
                                                   }),
                                             ),
+                                            Spacer()
                                           ],
                                         ),
                                         SizedBox(
@@ -646,6 +675,17 @@ class WasteTypeMasterWeb extends GetView<WasteTypeMasterController> {
                                                   ),
                                                 ),
                                                 DataColumn2(
+                                                  // fixedWidth: 300,
+                                                  label: Text(
+                                                    "Showing Hazardous",
+                                                    style: TextStyle(
+                                                      fontSize: 15,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                    ),
+                                                  ),
+                                                ),
+                                                DataColumn2(
                                                   fixedWidth: 100,
                                                   label: Text(
                                                     'Action',
@@ -691,6 +731,12 @@ class WasteTypeMasterWeb extends GetView<WasteTypeMasterController> {
                                                             .wasteTypeMasterList?[
                                                                 index]
                                                             ?.show_opening
+                                                            .toString() ??
+                                                        "")),
+                                                    DataCell(Text(controller
+                                                            .wasteTypeMasterList?[
+                                                                index]
+                                                            ?.isHazardous
                                                             .toString() ??
                                                         "")),
                                                     DataCell(

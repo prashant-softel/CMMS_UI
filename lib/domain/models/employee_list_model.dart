@@ -20,6 +20,11 @@ class EmployeeListModel {
     this.mobileNumber,
     this.responsibility,
     this.designation,
+    this.city,
+    this.state,
+    this.country,
+    this.pin,
+    this.experince,
   });
 
   int? id;
@@ -28,6 +33,11 @@ class EmployeeListModel {
   String? gender;
   String? mobileNumber;
   String? designation;
+  String? city;
+  String? state;
+  String? country;
+  int? pin;
+  int? experince;
   List<Responsibility>? responsibility;
 
   factory EmployeeListModel.fromJson(Map<String, dynamic> json) =>
@@ -38,6 +48,11 @@ class EmployeeListModel {
         gender: json["gender"],
         mobileNumber: json['mobileNumber'],
         designation: json['designation'],
+        city: json['city'],
+        state: json['state'],
+        country: json['country'],
+        pin: json['pin'],
+        experince: json['experince'],
         responsibility: json["responsibility"] != null
             ? List<Responsibility>.from(
                 json["responsibility"]?.map((x) => Responsibility.fromJson(x)))
