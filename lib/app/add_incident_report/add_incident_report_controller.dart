@@ -1159,7 +1159,12 @@ class AddIncidentReportController extends GetxController {
   }
 
   void getInventoryList() async {
-    eqipmentNameList.value = <InventoryModel>[];
+    eqipmentNameList.value = <InventoryModel>[
+      InventoryModel(
+        id: 0,
+        name: "NA",
+      ),
+    ];
     final _inventoryList = await incidentReportPresenter.getInventoryList(
       isLoading: true,
       categoryIds: categoryIds,
