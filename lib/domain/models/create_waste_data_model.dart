@@ -4,6 +4,7 @@ CreateWasteData createWasteDataModelFromJson(String str) =>
     CreateWasteData.fromJson(json.decode(str));
 
 class CreateWasteData {
+  int? id;
   int? facilityId;
   String? date;
   int? wasteTypeId;
@@ -12,17 +13,20 @@ class CreateWasteData {
   double? debitQty;
   double? creditQty;
 
-  CreateWasteData(
-      {this.facilityId,
-      this.date,
-      this.wasteTypeId,
-      this.description,
-      this.consumeType,
-      this.debitQty,
-      this.creditQty});
+  CreateWasteData({
+    this.id,
+    this.facilityId,
+    this.date,
+    this.wasteTypeId,
+    this.description,
+    this.consumeType,
+    this.debitQty,
+    this.creditQty,
+  });
 
   factory CreateWasteData.fromJson(Map<String, dynamic> json) {
     return CreateWasteData(
+      id: json['id'],
       facilityId: json['facilityId'],
       date: json['date'],
       wasteTypeId: json['wasteTypeId'],
@@ -33,6 +37,7 @@ class CreateWasteData {
     );
   }
   Map<String, dynamic> toJson() => {
+        "id": id,
         "facilityId": facilityId,
         "date": date,
         "wasteTypeId": wasteTypeId,

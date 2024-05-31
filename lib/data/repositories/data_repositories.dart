@@ -1895,6 +1895,16 @@ class DataRepository extends DomainRepository {
         createWasteData: createWasteData,
         isLoading: isLoading ?? false,
       );
+  Future<ResponseModel> updateWasteData({
+    required String auth,
+    createWasteData,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.updateWasteData(
+        auth: auth,
+        createWasteData: createWasteData,
+        isLoading: isLoading ?? false,
+      );
   Future<ResponseModel> submitPurchaseOrderData({
     required String auth,
     createGoReq,

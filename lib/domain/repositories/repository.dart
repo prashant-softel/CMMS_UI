@@ -923,6 +923,38 @@ class Repository {
       return Map();
     }
   }
+  Future<Map<String, dynamic>> updateWasteData(
+    createWasteData,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.updateWasteData(
+        auth: auth,
+        createWasteData: createWasteData,
+        isLoading: isLoading ?? false,
+      );
+
+      var resourceData = res.data;
+
+      print('Response Create Water data : ${resourceData}');
+
+      if (!res.hasError) {
+        Fluttertoast.showToast(
+            msg: "Submit Water Data  Successfully...", fontSize: 16.0);
+        Get.offAllNamed(
+          Routes.wasteData,
+        );
+      } else {
+        Utility.showDialog(res.errorCode.toString(), 'Craete Waste Data');
+        //return '';
+      }
+      return Map();
+    } catch (error) {
+      print(error.toString());
+      return Map();
+    }
+  }
 
   Future<Map<String, dynamic>> submitPurchaseOrderData(
     createGoReq,
@@ -13101,7 +13133,7 @@ class Repository {
     }
   }
 
-  Future<List<WasteDataMonthModel?>?> getWasteDataMonthDetail({
+  Future<WasteDataMonthModel> getWasteDataMonthDetail({
     required int month,
     required int year,
     required int facilityId,
@@ -13121,19 +13153,20 @@ class Repository {
       print({"waste data by month", res.data});
       if (!res.hasError) {
         if (res.errorCode == 200) {
-          var wasteDataMonthDetails =
+          List<WasteDataMonthModel> wasteDataMonthDetails =
               wasteDataMonthDetailModelFromJson(res.data);
+          var wasteMonthData = wasteDataMonthDetails
+              .firstWhere((element) => element.facility_id != 0);
           print({"water data by month", wasteDataMonthDetails});
-          return wasteDataMonthDetails;
+          return wasteMonthData;
         }
       } else {
         Utility.showDialog(res.errorCode.toString(), '400 Popup issue');
-        //return '';
       }
-      return null;
+      return WasteDataMonthModel();
     } catch (error) {
       print(error.toString());
-      return null;
+      return WasteDataMonthModel();
     }
   }
 
@@ -13152,7 +13185,6 @@ class Repository {
 
       if (!res.hasError) {
         var Sourcetype = sourceofobservationFromJson(res.data);
-        return Sourcetype;
         return Sourcetype;
       }
       return [];

@@ -1,5 +1,5 @@
 import 'package:cmms/app/app.dart';
-import 'package:cmms/app/stock_managment_add_goods_orders.dart/view/stock_management_add_goods_orders_web.dart';
+import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/waste_data/waste_data_controller.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
@@ -10,10 +10,24 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class WasteDisposedAddDialog extends GetView {
-  final WasteDataController controller = Get.find();
+  final int? id;
+  final String? date;
+  final int? wasteTypeId;
+  final String? wasteTypeName;
+  final String? quantity;
+  final String? description;
 
-  DateTime selectedDate =
-      DateTime.now(); // Add this line to store the selected date
+  WasteDisposedAddDialog({
+    this.id,
+    this.date,
+    this.wasteTypeId,
+    this.wasteTypeName,
+    this.quantity,
+    this.description,
+  });
+  final DateTime selectedDate =
+      DateTime.now();
+  final WasteDataController controller = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +44,25 @@ class WasteDisposedAddDialog extends GetView {
         ),
         content: Builder(builder: (context) {
           var height = MediaQuery.of(context).size.height;
-
+          if (id != null) {
+            controller.detailId = id!;
+          }
+          if (date != null) {
+            controller.wasteDataTimeCtrlr.text = date!;
+            controller.selectedWasteDataTime.value = DateTime.parse(date!);
+          }
+          if (quantity != null) {
+            controller.qtyCtrlr.text = quantity.toString();
+          }
+          if (description != null) {
+            controller.descriptionCtrlr.text = description!;
+          }
+          if (wasteTypeId != null) {
+            controller.selectedTypeOfWasteId = wasteTypeId!;
+          }
+          if (wasteTypeName != null) {
+            controller.selectedtypeOfWaste.value = wasteTypeName!;
+          }
           return Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
@@ -72,70 +104,78 @@ class WasteDisposedAddDialog extends GetView {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Dimens.boxHeight10,
-                      Container(
-                        width: MediaQuery.of(context).size.width / 5,
-                        height: MediaQuery.of(context).size.height * 0.040,
-                        decoration: BoxDecoration(
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black26,
-                              offset: const Offset(
-                                5.0,
-                                5.0,
+                      IgnorePointer(
+                        ignoring: id == 0 || id == null ? false : true,
+                        child: Container(
+                          width: MediaQuery.of(context).size.width / 5,
+                          height: MediaQuery.of(context).size.height * 0.040,
+                          decoration: BoxDecoration(
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black26,
+                                offset: const Offset(
+                                  5.0,
+                                  5.0,
+                                ),
+                                blurRadius: 5.0,
+                                spreadRadius: 1.0,
+                              ), //BoxShadow
+                              BoxShadow(
+                                color: ColorValues.whiteColor,
+                                offset: const Offset(0.0, 0.0),
+                                blurRadius: 0.0,
+                                spreadRadius: 0.0,
+                              ), //BoxShadow
+                            ],
+                            color: ColorValues.whiteColor,
+                            borderRadius: BorderRadius.circular(5),
+                          ),
+                          child: TextField(
+                            style: GoogleFonts.lato(
+                              textStyle: TextStyle(
+                                  fontSize: 16.0,
+                                  height: 1.0,
+                                  color: Colors.black),
+                            ),
+                            onTap: () {
+                              controller.pickDateTime(context);
+                            },
+                            controller: controller.wasteDataTimeCtrlr,
+                            autofocus: false,
+                            readOnly: true,
+                            decoration: InputDecoration(
+                              fillColor: ColorValues.whiteColor,
+                              filled: true,
+                              contentPadding:
+                                  EdgeInsets.fromLTRB(5.0, 10.0, 5.0, 10.0),
+                              border: InputBorder.none,
+                              enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10.0),
+                                borderSide:
+                                    BorderSide(color: Colors.transparent),
                               ),
-                              blurRadius: 5.0,
-                              spreadRadius: 1.0,
-                            ), //BoxShadow
-                            BoxShadow(
-                              color: ColorValues.whiteColor,
-                              offset: const Offset(0.0, 0.0),
-                              blurRadius: 0.0,
-                              spreadRadius: 0.0,
-                            ), //BoxShadow
-                          ],
-                          color: ColorValues.whiteColor,
-                          borderRadius: BorderRadius.circular(5),
-                        ),
-                        child: TextField(
-                          style: GoogleFonts.lato(
-                            textStyle: TextStyle(
-                                fontSize: 16.0,
-                                height: 1.0,
-                                color: Colors.black),
-                          ),
-                          onTap: () {
-                            controller.pickDateTime(context);
-                          },
-                          controller: controller.wasteDataTimeCtrlr,
-                          autofocus: false,
-                          readOnly: true,
-                          decoration: InputDecoration(
-                            fillColor: ColorValues.whiteColor,
-                            filled: true,
-                            contentPadding:
-                                EdgeInsets.fromLTRB(5.0, 10.0, 5.0, 10.0),
-                            border: InputBorder.none,
-                            enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10.0),
-                              borderSide: BorderSide(color: Colors.transparent),
+                              focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10.0),
+                                borderSide:
+                                    BorderSide(color: Colors.transparent),
+                              ),
                             ),
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10.0),
-                              borderSide: BorderSide(color: Colors.transparent),
-                            ),
+                            onChanged: (value) {},
                           ),
-                          onChanged: (value) {},
                         ),
                       ),
                       Dimens.boxHeight10,
-                      SizedBox(
-                        child: DropdownWebStock(
-                          width: MediaQuery.of(context).size.width / 5,
-                          dropdownList: controller.typeOfWasteList,
-                          isValueSelected:
-                              controller.istypeOfWasteListSelected.value,
-                          selectedValue: controller.selectedtypeOfWaste.value,
-                          onValueChanged: controller.onValueChanged,
+                      IgnorePointer(
+                        ignoring: id == 0 || id == null ? false : true,
+                        child: SizedBox(
+                          child: DropdownWebStock(
+                            width: MediaQuery.of(context).size.width / 5,
+                            dropdownList: controller.typeOfWasteList,
+                            isValueSelected:
+                                controller.istypeOfWasteListSelected.value,
+                            selectedValue: controller.selectedtypeOfWaste.value,
+                            onValueChanged: controller.onValueChanged,
+                          ),
                         ),
                       ),
                       Dimens.boxHeight10,
@@ -145,9 +185,12 @@ class WasteDisposedAddDialog extends GetView {
                         textController: controller.qtyCtrlr,
                       ),
                       Dimens.boxHeight10,
-                      LoginCustomTextfield(
-                        width: (MediaQuery.of(context).size.width * .2),
-                        textController: controller.descriptionCtrlr,
+                      IgnorePointer(
+                        ignoring: id == 0 || id == null ? false : true,
+                        child: LoginCustomTextfield(
+                          width: (MediaQuery.of(context).size.width * .2),
+                          textController: controller.descriptionCtrlr,
+                        ),
                       ),
                     ],
                   ),
@@ -166,20 +209,31 @@ class WasteDisposedAddDialog extends GetView {
                   backgroundColor: ColorValues.redColor,
                   text: "Cancel",
                   onPressed: () {
-                    Get.back();
+                    controller.clearData();
+                    Get.toNamed(Routes.viewWasteData);
                   },
                 ),
               ),
               Dimens.boxWidth20,
               Container(
                 height: 35,
-                child: CustomElevatedButton(
-                  backgroundColor: ColorValues.greenColor,
-                  text: 'Submit',
-                  onPressed: () {
-                    controller.createWasteDataDisposed();
-                  },
-                ),
+                child: id == 0 || id == null
+                    ? CustomElevatedButton(
+                        backgroundColor: ColorValues.greenColor,
+                        text: 'Submit',
+                        onPressed: () {
+                          controller.createWasteDataDisposed();
+                          Get.toNamed(Routes.viewWasteData);
+                        },
+                      )
+                    : CustomElevatedButton(
+                        backgroundColor: ColorValues.greenColor,
+                        text: 'Update',
+                        onPressed: () {
+                          controller.updateWasteDataDisposed();
+                          Get.toNamed(Routes.viewWasteData);
+                        },
+                      ),
               ),
             ],
           )

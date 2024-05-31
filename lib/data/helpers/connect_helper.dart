@@ -3233,7 +3233,7 @@ class ConnectHelper {
     required String end_date,
   }) async {
     ResponseModel responseModel = await apiWrapper.makeRequest(
-      'MISMaster/GetWasteDataListMonthWise?fromDate=$end_date-04-01&toDate=$start_date-04-01&facility_id=$facility_id',
+      'MISMaster/GetWasteDataListMonthWise?fromDate=$start_date-04-01&toDate=$end_date-04-01&facility_id=$facility_id',
       Request.getMultiparts,
       null,
       isLoading,
@@ -3252,6 +3252,29 @@ class ConnectHelper {
   }) async {
     var responseModel = await apiWrapper.makeRequest(
       'MISMaster/CreateWasteData',
+      Request.post,
+      createWasteData,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    print('Submit Waste Orders Response:${responseModel.data}');
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> updateWasteData({
+    required String auth,
+    createWasteData,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'MISMaster/UpdateWasteData',
       Request.post,
       createWasteData,
       isLoading ?? false,
