@@ -1,4 +1,5 @@
 import 'package:cmms/domain/models/history_model.dart';
+import 'package:cmms/domain/models/job_details_model.dart';
 import 'package:cmms/domain/models/mrs_list_by_jobId.dart';
 import 'package:cmms/domain/usecases/job_card_details_usecase.dart';
 
@@ -11,6 +12,20 @@ class JobCardDetailsPresenter {
   JobCardDetailsUsecase jobCardDetailsUsecase;
 
   ///
+  Future<List<JobDetailsModel?>?> getJobDetails({
+    String? auth,
+    int? jobId,
+    required int facilityId,
+    int? userId,
+    bool? isLoading,
+  }) async =>
+      await jobCardDetailsUsecase.getJobDetails(
+        auth: auth ?? "",
+        jobId: jobId ?? 0,
+        facilityId: facilityId,
+        userId: userId,
+        isLoading: isLoading,
+      );
   Future<List<EmployeeModel?>?> getAssignedToList({
     String? auth,
     int? facilityId,
@@ -183,17 +198,12 @@ class JobCardDetailsPresenter {
     );
   }
 
-  void clearStoreData() async =>
-      jobCardDetailsUsecase.clearStoreData();
-  void clearTypeValue() async =>
-      jobCardDetailsUsecase.clearTypeValue();
+  void clearStoreData() async => jobCardDetailsUsecase.clearStoreData();
+  void clearTypeValue() async => jobCardDetailsUsecase.clearTypeValue();
   void clearisCheckedValue() async =>
       jobCardDetailsUsecase.clearisCheckedValue();
-  void clearjobmodelValue() async =>
-      jobCardDetailsUsecase.clearjobmodelValue();
-    void clearpmTaskValue() async =>
-      jobCardDetailsUsecase.clearpmTaskValue();
-
+  void clearjobmodelValue() async => jobCardDetailsUsecase.clearjobmodelValue();
+  void clearpmTaskValue() async => jobCardDetailsUsecase.clearpmTaskValue();
 
   void saveValue({String? jobCardId}) async {
     return jobCardDetailsUsecase.saveValue(jobCardId: jobCardId);
