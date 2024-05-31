@@ -103,11 +103,12 @@ class WorkTypeController extends GetxController {
         {
           if (value != "Please Select") {
             int equipmentIndex =
-              equipmentCategoryList.indexWhere((x) => x?.name == value);
-          selectedEquipmentId = equipmentCategoryList[equipmentIndex]?.id ?? 0;
-            
-          }else{
-            selectedEquipmentId=0;
+                equipmentCategoryList.indexWhere((x) => x?.name == value);
+            selectedEquipmentId =
+                equipmentCategoryList[equipmentIndex]?.id ?? 0;
+            isselectedassetc.value = true;
+          } else {
+            selectedEquipmentId = 0;
           }
         }
 
@@ -121,6 +122,18 @@ class WorkTypeController extends GetxController {
   }
 
   Future<bool> updateWorkType(id) async {
+    if (titleCtrlr.text.trim() == '') {
+      isTitleInvalid.value = true;
+      isFormInvalid.value = true;
+    }
+    if (selectedassetcategory.value.isEmpty) {
+      isselectedassetc.value = true;
+      isFormInvalid.value = true;
+    }
+    checkForm();
+    if (isFormInvalid.value == true) {
+      return false;
+    }
     String _name = titleCtrlr.text.trim();
     int _catId = selectedEquipmentId;
     UpdateWorkTypeModel createChecklist = UpdateWorkTypeModel(
@@ -144,6 +157,18 @@ class WorkTypeController extends GetxController {
 
   Future<bool> createWorkType() async {
     print("CREATE CONTROLLER");
+    if (titleCtrlr.text.trim() == '') {
+      isTitleInvalid.value = true;
+      isFormInvalid.value = true;
+    }
+    if (selectedassetcategory.value.isEmpty) {
+      isselectedassetc.value = true;
+      isFormInvalid.value = true;
+    }
+    checkForm();
+    if (isFormInvalid.value == true) {
+      return false;
+    }
     String _title = titleCtrlr.text.trim();
     print(_title);
     WorkTypeModel name =
@@ -172,8 +197,7 @@ class WorkTypeController extends GetxController {
     );
     worktypeList.value = _workTypeList ?? <WorkTypeModel>[];
     BufferworktypeList.value =
-        _workTypeList?.whereType<WorkTypeModel>().toList() ??
-            <WorkTypeModel>[];
+        _workTypeList?.whereType<WorkTypeModel>().toList() ?? <WorkTypeModel>[];
     isLoading.value = false;
 
     // BufferworktypeList.value = worktypeList.value
@@ -199,13 +223,13 @@ class WorkTypeController extends GetxController {
 
   cleardata() {
     titleCtrlr.text = '';
-    selectedEquipmentId = 0;
+    selectedassetcategory.value = '';
     selectedItem = null;
 
     Future.delayed(Duration(seconds: 1), () {
       getWorkTypeList();
     });
-    Future.delayed(Duration(seconds: 5), () {
+    Future.delayed(Duration(seconds: 3), () {
       isSuccess.value = false;
     });
   }
