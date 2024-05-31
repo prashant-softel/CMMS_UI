@@ -10,13 +10,15 @@ class AuditListScreenPresenter {
           bool? isLoading,
           bool? isExport,
           dynamic endDate,
-          dynamic startDate}) async =>
+          dynamic startDate,
+          int? type}) async =>
       await auditListUsecase.getAuditPlanList(
           facilityId: facilityId ?? 0,
           isLoading: isLoading ?? false,
           isExport: isExport,
           endDate: endDate,
-          startDate: startDate);
+          startDate: startDate,
+          type: type);
   deleteAuditPlan(String? planId, {required bool isLoading}) async =>
       await auditListUsecase.deleteAuditPlan(
         planId: planId ?? 0,

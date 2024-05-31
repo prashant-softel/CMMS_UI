@@ -1,4 +1,3 @@
-import 'package:cmms/app/checklist_mis_plan/checklist_mis_plan_controller.dart';
 import 'package:cmms/app/home/home_screen.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/mis_task/mis_task_controller.dart';
@@ -636,200 +635,200 @@ DataColumn2 buildDataColumn(
   );
 }
 
-class ChecklistMisPlanListDataSource extends DataTableSource {
-  final ChecklistMisPlanController controller;
+// class ChecklistMisPlanListDataSource extends DataTableSource {
+//   final ChecklistMisPlanController controller;
 
-  late List<AuditPlanListModel?> filteredAuditPlanList;
+//   late List<AuditPlanListModel?> filteredAuditPlanList;
 
-  ChecklistMisPlanListDataSource(this.controller) {
-    filtersModuleCliningPlan();
-  }
+//   ChecklistMisPlanListDataSource(this.controller) {
+//     filtersModuleCliningPlan();
+//   }
 
-  ///
-  void filtersModuleCliningPlan() {
-    filteredAuditPlanList = <AuditPlanListModel?>[];
-    filteredAuditPlanList = controller.auditPlanList.where((auditList) {
-      return (auditList.id ?? '')
-              .toString()
-              .contains(controller.planIdFilterText.value.toLowerCase()) &&
-          (auditList.plan_number ?? '')
-              .toString()
-              .contains(controller.planTitleFilterText.value.toLowerCase()) &&
-          (auditList.plan_number ?? '')
-              .toString()
-              .contains(controller.noOfDaysFilterText.value.toLowerCase()) &&
-          (auditList.plan_number ?? '')
-              .toString()
-              .contains(controller.createdByFilterText.value.toLowerCase()) &&
-          (auditList.facility_name ?? '')
-              .toString()
-              .contains(controller.frequencyFilterText.value.toLowerCase()) &&
-          (auditList.status ?? '')
-              .toString()
-              .contains(controller.statusFilterText.value.toLowerCase());
+//   ///
+//   void filtersModuleCliningPlan() {
+//     filteredAuditPlanList = <AuditPlanListModel?>[];
+//     filteredAuditPlanList = controller.auditPlanList.where((auditList) {
+//       return (auditList.id ?? '')
+//               .toString()
+//               .contains(controller.planIdFilterText.value.toLowerCase()) &&
+//           (auditList.plan_number ?? '')
+//               .toString()
+//               .contains(controller.planTitleFilterText.value.toLowerCase()) &&
+//           (auditList.plan_number ?? '')
+//               .toString()
+//               .contains(controller.noOfDaysFilterText.value.toLowerCase()) &&
+//           (auditList.plan_number ?? '')
+//               .toString()
+//               .contains(controller.createdByFilterText.value.toLowerCase()) &&
+//           (auditList.facility_name ?? '')
+//               .toString()
+//               .contains(controller.frequencyFilterText.value.toLowerCase()) &&
+//           (auditList.status ?? '')
+//               .toString()
+//               .contains(controller.statusFilterText.value.toLowerCase());
 
-      // Add other filter conditions as needed
-    }).toList();
-    // print({"filteredAuditPlanList": filteredAuditPlanList});
-  }
+//       // Add other filter conditions as needed
+//     }).toList();
+//     // print({"filteredAuditPlanList": filteredAuditPlanList});
+//   }
 
-  @override
-  DataRow? getRow(int index) {
-    // print({"getRow call"});
-    final AuditPlanPlanningListDetails = filteredAuditPlanList[index];
+//   @override
+//   DataRow? getRow(int index) {
+//     // print({"getRow call"});
+//     final AuditPlanPlanningListDetails = filteredAuditPlanList[index];
 
-    // controller.PlanId.value = AuditPlanPlanningListDetails?.planId ?? 0;
-    var cellsBuffer = [
-      "planId",
-      "S1234590", // '${AuditPlanPlanningListDetails?.plan_number ?? ''}',
-      "CheckLIst001", // '${AuditPlanPlanningListDetails?.status ?? ''}',
-      // "", // '${AuditPlanPlanningListDetails?.status ?? ''}',
-      "22-11-2023", // '${AuditPlanPlanningListDetails?.status ?? ''}',
-      "Weekly", // '${AuditPlanPlanningListDetails?.frequency ?? ''}',
-      'Actions',
-    ];
+//     // controller.PlanId.value = AuditPlanPlanningListDetails?.planId ?? 0;
+//     var cellsBuffer = [
+//       "planId",
+//       "S1234590", // '${AuditPlanPlanningListDetails?.plan_number ?? ''}',
+//       "CheckLIst001", // '${AuditPlanPlanningListDetails?.status ?? ''}',
+//       // "", // '${AuditPlanPlanningListDetails?.status ?? ''}',
+//       "22-11-2023", // '${AuditPlanPlanningListDetails?.status ?? ''}',
+//       "Weekly", // '${AuditPlanPlanningListDetails?.frequency ?? ''}',
+//       'Actions',
+//     ];
 
-    var cells = [];
-    int i = 0;
+//     var cells = [];
+//     int i = 0;
 
-    for (var entry in controller.columnVisibility.value.entries) {
-      // print({"entry.value entry": entry});
-      if (entry.key == "search") {
-        return null;
-      }
-      if (entry.value) {
-        // print({"entry.value removed": entry.key});
-        cells.add(cellsBuffer[i]);
-      }
-      i++;
-    }
-    cells.add('Actions');
+//     for (var entry in controller.columnVisibility.value.entries) {
+//       // print({"entry.value entry": entry});
+//       if (entry.key == "search") {
+//         return null;
+//       }
+//       if (entry.value) {
+//         // print({"entry.value removed": entry.key});
+//         cells.add(cellsBuffer[i]);
+//       }
+//       i++;
+//     }
+//     cells.add('Actions');
 
-    // print({"cell": cells});
-    return DataRow.byIndex(
-      index: index,
-      cells: cells.map((value) {
-        return DataCell(
-          Padding(
-            padding: EdgeInsets.zero,
-            child: (value == 'planId')
-                ? Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        '${AuditPlanPlanningListDetails?.id}',
-                      ),
-                      Dimens.boxHeight10,
-                      Align(
-                        alignment: Alignment.centerRight,
-                        child: Container(
-                          padding: Dimens.edgeInsets8_2_8_2,
-                          decoration: BoxDecoration(
-                            color:
-                                // controller.AuditPlanListPlan
-                                //         .firstWhere(
-                                //           (e) =>
-                                //               e?.planId ==
-                                //               AuditPlanPlanningListDetails!
-                                //                   .planId,
-                                //           orElse: () =>
-                                //               AuditPlanListPlanModel(
-                                //                   planId: 00),
-                                //         )
-                                //         ?.status ==
-                                //     342
-                                // ? ColorValues.approveColor
-                                // :
-                                ColorValues.addNewColor,
-                            borderRadius: BorderRadius.circular(4),
-                          ),
-                          child: Text(
-                            '${AuditPlanPlanningListDetails?.short_status}',
-                            style: Styles.white10.copyWith(
-                              color: Colors.white,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  )
-                : (value == 'Actions')
-                    ? Wrap(children: [
-                        TableActionButton(
-                          color: ColorValues.viewColor,
-                          icon: Icons.remove_red_eye_outlined,
-                          message: 'view',
-                          onPress: () {
-                            controller.clearStoreIdData();
-                            // controller.clearValue();
-                            int auditId = AuditPlanPlanningListDetails?.id ?? 0;
-                            if (auditId != 0) {
-                              Get.toNamed(
-                                Routes.viewMisPlan,
-                                //  arguments: {
-                                //   'auditId': auditId,
-                                // 'type': controller.type.value
-                                // }
-                              );
-                            }
-                          },
-                        ),
-                        TableActionButton(
-                          color: ColorValues.editColor,
-                          icon: Icons.edit,
-                          message: 'Edit',
-                          onPress: () {
-                            // int id =
-                            //     AuditPlanPlanningListDetails?.planId ?? 0;
-                            // if (id != 0) {
-                            //   Get.toNamed(Routes.AuditPlanPlanning,
-                            //       arguments: {"id": id});
-                            // }
-                          },
-                        ),
-                        TableActionButton(
-                          color: ColorValues.appGreenColor,
-                          icon: Icons.check,
-                          message: 'Approve/Reject',
-                          onPress: () {
-                            // int id =
-                            //     AuditPlanPlanningListDetails?.planId ?? 0;
-                            // if (id != 0) {
-                            //   Get.toNamed(
-                            //     Routes.viewMcPlaning,
-                            //     arguments: {'id': id, "type": 1},
-                            //   );
-                            // }
-                          },
-                        ),
-                      ])
-                    : Text(value.toString()),
-          ),
-        );
-      }).toList(),
-      //   ],
-      onSelectChanged: (_) {
-        controller.clearStoreIdData();
-        // controller.clearValue();
-        int auditId = AuditPlanPlanningListDetails?.id ?? 0;
-        if (auditId != 0) {
-          Get.toNamed(
-            Routes.viewMisPlan,
-            // arguments: {
-            //   'auditId': auditId,
-            // }
-          );
-        }
-      },
-    );
-  }
+//     // print({"cell": cells});
+//     return DataRow.byIndex(
+//       index: index,
+//       cells: cells.map((value) {
+//         return DataCell(
+//           Padding(
+//             padding: EdgeInsets.zero,
+//             child: (value == 'planId')
+//                 ? Column(
+//                     crossAxisAlignment: CrossAxisAlignment.start,
+//                     children: [
+//                       Text(
+//                         '${AuditPlanPlanningListDetails?.id}',
+//                       ),
+//                       Dimens.boxHeight10,
+//                       Align(
+//                         alignment: Alignment.centerRight,
+//                         child: Container(
+//                           padding: Dimens.edgeInsets8_2_8_2,
+//                           decoration: BoxDecoration(
+//                             color:
+//                                 // controller.AuditPlanListPlan
+//                                 //         .firstWhere(
+//                                 //           (e) =>
+//                                 //               e?.planId ==
+//                                 //               AuditPlanPlanningListDetails!
+//                                 //                   .planId,
+//                                 //           orElse: () =>
+//                                 //               AuditPlanListPlanModel(
+//                                 //                   planId: 00),
+//                                 //         )
+//                                 //         ?.status ==
+//                                 //     342
+//                                 // ? ColorValues.approveColor
+//                                 // :
+//                                 ColorValues.addNewColor,
+//                             borderRadius: BorderRadius.circular(4),
+//                           ),
+//                           child: Text(
+//                             '${AuditPlanPlanningListDetails?.short_status}',
+//                             style: Styles.white10.copyWith(
+//                               color: Colors.white,
+//                             ),
+//                           ),
+//                         ),
+//                       ),
+//                     ],
+//                   )
+//                 : (value == 'Actions')
+//                     ? Wrap(children: [
+//                         TableActionButton(
+//                           color: ColorValues.viewColor,
+//                           icon: Icons.remove_red_eye_outlined,
+//                           message: 'view',
+//                           onPress: () {
+//                             controller.clearStoreIdData();
+//                             // controller.clearValue();
+//                             int auditId = AuditPlanPlanningListDetails?.id ?? 0;
+//                             if (auditId != 0) {
+//                               Get.toNamed(
+//                                 Routes.viewMisPlan,
+//                                 //  arguments: {
+//                                 //   'auditId': auditId,
+//                                 // 'type': controller.type.value
+//                                 // }
+//                               );
+//                             }
+//                           },
+//                         ),
+//                         TableActionButton(
+//                           color: ColorValues.editColor,
+//                           icon: Icons.edit,
+//                           message: 'Edit',
+//                           onPress: () {
+//                             // int id =
+//                             //     AuditPlanPlanningListDetails?.planId ?? 0;
+//                             // if (id != 0) {
+//                             //   Get.toNamed(Routes.AuditPlanPlanning,
+//                             //       arguments: {"id": id});
+//                             // }
+//                           },
+//                         ),
+//                         TableActionButton(
+//                           color: ColorValues.appGreenColor,
+//                           icon: Icons.check,
+//                           message: 'Approve/Reject',
+//                           onPress: () {
+//                             // int id =
+//                             //     AuditPlanPlanningListDetails?.planId ?? 0;
+//                             // if (id != 0) {
+//                             //   Get.toNamed(
+//                             //     Routes.viewMcPlaning,
+//                             //     arguments: {'id': id, "type": 1},
+//                             //   );
+//                             // }
+//                           },
+//                         ),
+//                       ])
+//                     : Text(value.toString()),
+//           ),
+//         );
+//       }).toList(),
+//       //   ],
+//       onSelectChanged: (_) {
+//         controller.clearStoreIdData();
+//         // controller.clearValue();
+//         int auditId = AuditPlanPlanningListDetails?.id ?? 0;
+//         if (auditId != 0) {
+//           Get.toNamed(
+//             Routes.viewMisPlan,
+//             // arguments: {
+//             //   'auditId': auditId,
+//             // }
+//           );
+//         }
+//       },
+//     );
+//   }
 
-  @override
-  int get rowCount => filteredAuditPlanList.length;
+//   @override
+//   int get rowCount => filteredAuditPlanList.length;
 
-  @override
-  bool get isRowCountApproximate => false;
+//   @override
+//   bool get isRowCountApproximate => false;
 
-  @override
-  int get selectedRowCount => 0;
-}
+//   @override
+//   int get selectedRowCount => 0;
+// }

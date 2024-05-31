@@ -35,7 +35,7 @@ class JobCardDetailsController extends GetxController {
   JobCardDetailsPresenter jobCardDetailsPresenter;
 
   ///
-  late JobDetailsPresenter jobDetailsPresenter;
+  // late JobDetailsPresenter jobDetailsPresenter;
 
   /// History
   var historyController = Get.put(HistoryController());
@@ -43,6 +43,8 @@ class JobCardDetailsController extends GetxController {
   RxList<FilesModel?> file_list = <FilesModel?>[].obs;
   RxList<FilesModel?> file_list_new = <FilesModel?>[].obs;
   RxList<FilesModel?> allFiles = <FilesModel?>[].obs;
+  RxList<WorkingAreaList>? workingAreaList = <WorkingAreaList>[].obs;
+  // RxList<JobDetailsModel>? jobDetailsList = <JobDetailsModel>[].obs;
 
   /// Employee Table
   Rx<String> selectedEmployeeName = ''.obs;
@@ -76,7 +78,8 @@ class JobCardDetailsController extends GetxController {
   RxMap permitDetails = {}.obs;
   RxList<LstPermitDetailList>? permitList = <LstPermitDetailList>[].obs;
   RxList<List<Map<String, String>>> rowItem = <List<Map<String, String>>>[].obs;
-  Map<String, CmmrsItems> dropdownMapperData = {};
+  RxMap<dynamic, dynamic> dropdownMapperData = {}.obs;
+  RxMap<dynamic, dynamic> dropdownMapperDataworkingArea = {}.obs;
 
   /// Job Details
   Rx<int?> jobId = 0.obs;
@@ -165,6 +168,7 @@ class JobCardDetailsController extends GetxController {
   void addRowItem() {
     rowItem.add([
       {"key": "Drop_down", "value": 'Please Select'},
+      {"key": "Drop_down_eq", "value": 'Please Select'},
       {'key': "Sr_No", "value": ''},
       {'key': "code", "value": ''},
       {'key': "Material_Type", "value": ''},
@@ -206,6 +210,7 @@ class JobCardDetailsController extends GetxController {
         getHistory(facilityId);
         jobCardDetailsModel.value =
             jobCardList.value.firstWhere((element) => element?.id != null);
+
         jobCardDetailsModel.value?.lstCmjcEmpList?.forEach((element) {
           employeesDeployed.value.add([
             {
@@ -341,12 +346,13 @@ class JobCardDetailsController extends GetxController {
           fromActorType: AppConstants.kJobCard,
           mrsID: listMrsByTaskId![0]!.mrsId ?? 0,
           mrsItemID: dropdownMapperData[element[0]["value"]]?.id ?? 0,
-          qty: int.tryParse(element[6]["value"] ?? '0') ?? 0,
+          qty: int.tryParse(element[7]["value"] ?? '0') ?? 0,
           refID: jobCardId.value,
           refType: AppConstants.kJobCard,
           remarks: "remarks",
-          toActorID: 0, // selectedItem?.assetsID ?? 0,
-          // dropdownMapperData[element[0]["value"]]?.asset_item_ID ?? 0,
+          toActorID: dropdownMapperDataworkingArea[element[1]["value"]]
+                  .workingAreaId ??
+              0,
           toActorType: AppConstants.kInventory);
 
       items.add(item);
@@ -365,6 +371,7 @@ class JobCardDetailsController extends GetxController {
 
     try {
       if (jobCardList.isNotEmpty) {
+        getJobDetails(jobCardList[0]!.jobId, facilityId);
         //   // jobCardDetailsModel.value = jobCardList[0];
 
         //   // Convert tools required to comma separated list
@@ -431,6 +438,21 @@ class JobCardDetailsController extends GetxController {
       } //
     } catch (e) {
       print(e);
+    }
+  }
+
+  void getJobDetails(int? jobId, int facilityId) async {
+    try {
+      final _jobDetailsList = await jobCardDetailsPresenter.getJobDetails(
+          facilityId: facilityId, jobId: jobId, isLoading: false);
+
+      if (_jobDetailsList != null && _jobDetailsList.isNotEmpty) {
+        jobDetailsModel.value = _jobDetailsList[0];
+        workingAreaList?.value = jobDetailsModel.value?.workingAreaList ?? [];
+        update(["jobDetailsModel"]);
+      }
+    } catch (e) {
+      Utility.showDialog(e.toString(), 'getJobDetails');
     }
   }
 

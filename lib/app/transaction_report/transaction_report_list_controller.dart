@@ -49,7 +49,7 @@ class TransactionReportListController extends GetxController {
   );
   StreamSubscription<int>? facilityIdStreamSubscription;
   int facilityId = 0;
-  RxList<BusinessListModel?>? businessNameList = <BusinessListModel?>[].obs;
+  RxList<BusinessListModel?>? businessNameList = <BusinessListModel>[].obs;
   Rx<int> fromActorID = 0.obs;
   RxList<TypeModel> actorType = <TypeModel>[
     TypeModel(name: 'Vendor', id: "1"),
@@ -80,7 +80,7 @@ class TransactionReportListController extends GetxController {
   int selectedInventoryId = 0;
   Rx<String> selectedInventory = ''.obs;
   RxString userDateFilterText = ''.obs;
-  RxList<PmTaskListModel?> pmTaskList = <PmTaskListModel?>[].obs;
+  RxList<PmTaskListModel?> pmTaskList = <PmTaskListModel>[].obs;
   Rx<bool> isSelectedpmtask = true.obs;
   int selectedpmtaskId = 0;
   Rx<String> selectedpmtask = ''.obs;
@@ -88,11 +88,11 @@ class TransactionReportListController extends GetxController {
   Rx<bool> isSelectedfacility = true.obs;
   int selectedfacilityId = 0;
   Rx<String> selectedfacility = ''.obs;
-  RxList<UserListModel?> userList = <UserListModel?>[].obs;
+  RxList<UserListModel?> userList = <UserListModel>[].obs;
   Rx<bool> isSelectedUser = true.obs;
   int selectedUserId = 0;
   Rx<String> selectedUser = ''.obs;
-  RxList<JobModel?> jobList = <JobModel?>[].obs;
+  RxList<JobModel?> jobList = <JobModel>[].obs;
   Rx<bool> isSelectedJob = true.obs;
   int selectedJobId = 0;
   Rx<String> selectedJob = ''.obs;
@@ -153,11 +153,13 @@ class TransactionReportListController extends GetxController {
     };
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
       facilityId = event;
-      Future.delayed(Duration(seconds: 1), () async {
-        if (selectedactorTypeId == 3) {
-          getPmTaskList(facilityId, formattedTodate1, formattedFromdate1);
-        }
-      });
+      if (facilityId > 0) {
+        Future.delayed(Duration(seconds: 1), () async {
+          if (selectedactorTypeId == 3) {
+            getPmTaskList(facilityId, formattedTodate1, formattedFromdate1);
+          }
+        });
+      }
     });
     super.onInit();
   }
@@ -216,12 +218,14 @@ class TransactionReportListController extends GetxController {
     pmTaskList.value = <PmTaskListModel>[];
     // pmTaskList?.clear();
     final _pmTaskList = await transactionReportListPresenter.getPmTaskList(
-        facilityId: facilityId,
-        isLoading: isLoading.value,
-        startDate: startDate,
-        endDate: endDate);
-    if (_pmTaskList != null) {
-      isLoading.value = false;
+      facilityId: facilityId,
+      isLoading: isLoading.value,
+      startDate: startDate,
+      endDate: endDate,
+    );
+    isLoading.value = false;
+
+    if (_pmTaskList!.isNotEmpty) {
       for (var taskName in _pmTaskList) {
         pmTaskList.add(taskName);
       }
@@ -260,11 +264,12 @@ class TransactionReportListController extends GetxController {
   }
 
   void onValueChanged(dynamic list, dynamic value) {
+    print(value);
+
     switch (list.runtimeType) {
       case RxList<TypeModel>:
         {
-          if (value != "Please Select") {
-            int userIndex = actorType.indexWhere((x) => x.name == value);
+          int userIndex = actorType.indexWhere((x) => x.name == value);
           selectedactorTypeId =
               int.tryParse(actorType[userIndex].id ?? "") ?? 0;
           selectedActorType.value = actorType[userIndex].name;
@@ -273,7 +278,7 @@ class TransactionReportListController extends GetxController {
           } else if (selectedactorTypeId == AppConstants.kStore) {
             getFacilityList();
           } else if (selectedactorTypeId == AppConstants.kJobCard) {
-            jobCardList(facilityId, true);
+            jobCardList(facilityId);
           } else if (selectedactorTypeId == AppConstants.kEngineer) {
             getUserList(facilityId, true);
           } else if (selectedactorTypeId == AppConstants.kInventory) {
@@ -283,15 +288,11 @@ class TransactionReportListController extends GetxController {
           } else if (selectedactorTypeId == AppConstants.kScrap) {
             //  getBusinessList();
           }
-          } else {
-            selectedactorTypeId=0;
-          }
         }
         break;
-      case RxList<PmTaskListModel?>:
+      case RxList<PmTaskListModel>:
         {
-          if (value != "Please Select") {
-            int pmtaskIndex = pmTaskList.indexWhere((x) => x!.name == value);
+          int pmtaskIndex = pmTaskList.indexWhere((x) => x!.name == value);
           selectedpmtaskId = pmTaskList[pmtaskIndex]!.id ?? 0;
           actorId = selectedpmtaskId;
           selectedpmtask.value = value;
@@ -301,16 +302,12 @@ class TransactionReportListController extends GetxController {
               actorType: selectedactorTypeId,
               actorID: actorId,
               endDate: formattedFromdate1,
-              isLoading: true);
-          } else {
-            selectedpmtaskId=0;
-          }
+              isLoading: isLoading.value);
         }
         break;
-      case RxList<FacilityModel?>:
+      case RxList<FacilityModel>:
         {
-          if (value != "Please Select") {
-            int facilityIndex =
+          int facilityIndex =
               facilityNameList.indexWhere((x) => x!.name == value);
           selectedfacilityId = facilityNameList[facilityIndex]!.id;
           actorId = selectedfacilityId;
@@ -321,16 +318,12 @@ class TransactionReportListController extends GetxController {
               actorType: selectedactorTypeId,
               actorID: actorId,
               endDate: formattedFromdate1,
-              isLoading: true);
-          } else {
-            selectedfacilityId=0;
-          }
+              isLoading: isLoading.value);
         }
         break;
-      case RxList<UserListModel?>:
+      case RxList<UserListModel>:
         {
-          if (value != "Please Select") {
-            int userIndex = userList.indexWhere((x) => x!.name == value);
+          int userIndex = userList.indexWhere((x) => x!.name == value);
           selectedUserId = userList[userIndex]!.id ?? 0;
           selectedUser.value = value;
           actorId = selectedUserId;
@@ -340,16 +333,12 @@ class TransactionReportListController extends GetxController {
               actorType: selectedactorTypeId,
               actorID: actorId,
               endDate: formattedFromdate1,
-              isLoading: true);
-          } else {
-            selectedUserId=0;
-          }
+              isLoading: isLoading.value);
         }
         break;
-      case RxList<InventoryModel?>:
+      case RxList<InventoryModel>:
         {
-          if (value != "Please Select") {
-            int inventoryIndex =
+          int inventoryIndex =
               inventoryNameList.indexWhere((x) => x!.name == value);
           selectedInventoryId = inventoryNameList[inventoryIndex]!.id ?? 0;
           selectedInventory.value = value;
@@ -360,16 +349,12 @@ class TransactionReportListController extends GetxController {
               actorType: selectedactorTypeId,
               actorID: actorId,
               endDate: formattedFromdate1,
-              isLoading: true);
-          } else {
-            selectedInventoryId=0;
-          }
+              isLoading: isLoading.value);
         }
         break;
-      case RxList<JobCardModel?>:
+      case RxList<JobModel>:
         {
-          if (value != "Please Select") {
-            int jobIndex = jobList.indexWhere((x) => x!.name == value);
+          int jobIndex = jobList.indexWhere((x) => x!.name == value);
           selectedJobId = jobList[jobIndex]!.id ?? 0;
           selectedJob.value = value;
           actorId = selectedJobId;
@@ -379,10 +364,7 @@ class TransactionReportListController extends GetxController {
               actorType: selectedactorTypeId,
               actorID: actorId,
               endDate: formattedFromdate1,
-              isLoading: true);
-          } else {
-            selectedJobId=0;
-          }
+              isLoading: isLoading.value);
         }
         break;
       default:
@@ -454,13 +436,28 @@ class TransactionReportListController extends GetxController {
   }
 
   void getTransactionListByDate() {
-    transactionReport(
-        facilityId: facilityId,
-        startDate: formattedTodate1,
-        actorType: selectedactorTypeId,
-        actorID: actorId,
-        endDate: formattedFromdate1,
-        isLoading: true);
+    if (selectedactorTypeId == AppConstants.kTask) {
+      getPmTaskList(facilityId, formattedTodate1, formattedFromdate1);
+    } else if (selectedactorTypeId == AppConstants.kStore) {
+      getFacilityList();
+    } else if (selectedactorTypeId == AppConstants.kJobCard) {
+      jobCardList(facilityId);
+    } else if (selectedactorTypeId == AppConstants.kEngineer) {
+      getUserList(facilityId, true);
+    } else if (selectedactorTypeId == AppConstants.kInventory) {
+      inventoryList(facilityId: facilityId);
+    } else if (selectedactorTypeId == AppConstants.kVendor) {
+      //  getBusinessList();
+    } else if (selectedactorTypeId == AppConstants.kScrap) {
+      //  getBusinessList();
+    }
+    // transactionReport(
+    //     facilityId: facilityId,
+    //     startDate: formattedTodate1,
+    //     actorType: selectedactorTypeId,
+    //     actorID: actorId,
+    //     endDate: formattedFromdate1,
+    //     isLoading: true);
   }
 
   Future<void> getFacilityList() async {
@@ -486,7 +483,7 @@ class TransactionReportListController extends GetxController {
     update(['permit_facility_list']);
   }
 
-  Future<void> jobCardList(int facilityId, bool isLoading) async {
+  Future<void> jobCardList(int facilityId) async {
     jobList.value = <JobModel>[];
     if (facilityId > 0) {
       final _jobList = await transactionReportListPresenter.getJobList(

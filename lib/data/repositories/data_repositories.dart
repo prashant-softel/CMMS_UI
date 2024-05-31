@@ -4229,13 +4229,15 @@ class DataRepository extends DomainRepository {
           int? facilityId,
           bool? isLoading,
           dynamic startDate,
-          dynamic endDate}) async =>
+          dynamic endDate,
+          int? type}) async =>
       await connectHelper.getAuditPlanList(
           auth: auth,
           facilityId: facilityId ?? 0,
           isLoading: isLoading ?? false,
           startDate: startDate,
-          endDate: endDate);
+          endDate: endDate,
+          type: type);
   Future<ResponseModel> ClosePMTaskExecution({
     required String auth,
     ClosePMTaskExecutionJsonString,
@@ -5219,8 +5221,9 @@ class DataRepository extends DomainRepository {
         auth: auth, isLoading: isLoading, category_id: category_id);
     return response;
   }
+
   //Targeted Group
-        //get
+  //get
   Future<ResponseModel> getTargetedGroup({
     required bool isLoading,
     required String auth,
@@ -5230,6 +5233,7 @@ class DataRepository extends DomainRepository {
       auth: auth,
     );
   }
+
   //create
   Future<ResponseModel> createTargetedGroup({
     auth,
