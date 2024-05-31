@@ -142,7 +142,7 @@ class _ModuleCleaningPlanningWebState extends State<ModuleCleaningPlanningWeb> {
                                                 Row(
                                                   children: [
                                                     CustomRichText(
-                                                        title: 'Title :'),
+                                                        title: 'Title:'),
                                                     Dimens.boxWidth10,
                                                     LoginCustomTextfield(
                                                       width: (MediaQuery.of(
@@ -152,6 +152,24 @@ class _ModuleCleaningPlanningWebState extends State<ModuleCleaningPlanningWeb> {
                                                           .2),
                                                       textController: controller
                                                           .mcTitelCtrlr,
+                                                             //validate
+                                                    errorController: controller
+                                                            .isTitleInvalid
+                                                            .value
+                                                        ? "Required field"
+                                                        : null,
+                                                    onChanged: (value) {
+                                                      if (value.trim().length >
+                                                          0) {
+                                                        controller
+                                                            .isTitleInvalid
+                                                            .value = false;
+                                                      } else {
+                                                        controller
+                                                            .isTitleInvalid
+                                                            .value = true;
+                                                      }
+                                                    },
                                                       inputFormatters: [
                                                         FilteringTextInputFormatter
                                                             .deny(
@@ -260,6 +278,24 @@ class _ModuleCleaningPlanningWebState extends State<ModuleCleaningPlanningWeb> {
                                                         ],
                                                         textController: controller
                                                             .durationInDayCtrlr,
+                                                               //validate
+                                                    errorController: controller
+                                                            .isEstimatedInvalid
+                                                            .value
+                                                        ? "Required field"
+                                                        : null,
+                                                    onChanged: (value) {
+                                                      if (value.trim().length >
+                                                          0) {
+                                                        controller
+                                                            .isEstimatedInvalid
+                                                            .value = false;
+                                                      } else {
+                                                        controller
+                                                            .isEstimatedInvalid
+                                                            .value = true;
+                                                      }
+                                                    },
                                                         width: MediaQuery.of(
                                                                     context)
                                                                 .size
@@ -368,6 +404,7 @@ class _ModuleCleaningPlanningWebState extends State<ModuleCleaningPlanningWeb> {
                                                         Spacer(),
                                                         GestureDetector(
                                                           onTap: () {
+                                                            
                                                             var selectedEqp =
                                                                 [];
                                                             controller
@@ -782,6 +819,14 @@ class _ModuleCleaningPlanningWebState extends State<ModuleCleaningPlanningWeb> {
                 enabledBorder: InputBorder.none,
                 focusedBorder: InputBorder.none,
               ),
+                   onChanged: (value) {
+                if (controller.startDateTimeCtrlrBuffer.text.trim().isNotEmpty && controller.validTillTimeCtrlr.text.trim().isNotEmpty){
+                  controller.isstartdateInvalid.value = false;
+                } else {
+                  controller.isstartdateInvalid.value = true;
+                }
+               }
+
             ),
           ),
         ),
