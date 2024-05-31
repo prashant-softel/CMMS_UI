@@ -939,7 +939,7 @@ class AddIncidentReportController extends GetxController {
         rowInjuredPersonItem.value.add([
           {
             "key": "Name of Injured Person ",
-            "value": '${element?.person_id}',
+            "value": '${element?.name}',
           },
           {
             "key": "Gender ",
@@ -969,9 +969,8 @@ class AddIncidentReportController extends GetxController {
           },
           {'key': "Action ", "value": ''},
         ]);
-        dropdownEquipmentNameMapperData[element!.person_id ?? ""] =
-            eqipmentNameList.firstWhere((e) => e?.name == element.person_id,
-                orElse: null)!;
+        dropdownVictimNameMapperData[element!.name ?? ""] = victimNameList
+            .firstWhere((e) => e.name == element.name, orElse: null);
       });
     }
   }
@@ -1159,7 +1158,12 @@ class AddIncidentReportController extends GetxController {
   }
 
   void getInventoryList() async {
-    eqipmentNameList.value = <InventoryModel>[];
+    eqipmentNameList.value = <InventoryModel>[
+      InventoryModel(
+        id: 0,
+        name: "NA",
+      ),
+    ];
     final _inventoryList = await incidentReportPresenter.getInventoryList(
       isLoading: true,
       categoryIds: categoryIds,
@@ -1625,7 +1629,7 @@ class AddIncidentReportController extends GetxController {
         DetailsOfInjuredPerson item = DetailsOfInjuredPerson(
           injured_item_id: 0,
           incidents_id: 0,
-          person_id: dropdownVictimNameMapperData[element[0]["value"]]?.name,
+          name: dropdownVictimNameMapperData[element[0]["value"]]?.name,
           other_victim:
               selectedOption.value == "Other" ? element[1]["value"] ?? '0' : "",
           person_type: 1,
@@ -1869,7 +1873,7 @@ class AddIncidentReportController extends GetxController {
           injured_item_id:
               dropdownVictimNameMapperData[element[0]["value"]]?.id,
           incidents_id: irId.value,
-          person_id: element[0]["value"],
+          name: element[0]["value"],
           other_victim: element[1]["value"] ?? '0',
           person_type: 1,
           age: 30,
@@ -2079,7 +2083,7 @@ class AddIncidentReportController extends GetxController {
           injured_item_id:
               dropdownVictimNameMapperData[element[0]["value"]]?.id,
           incidents_id: irId.value,
-          person_id: element[0]["value"],
+          name: element[0]["value"],
           other_victim: element[1]["value"] ?? '0',
           person_type: 1,
           age: 30,

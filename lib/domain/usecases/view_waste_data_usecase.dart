@@ -7,7 +7,7 @@ class ViewWasteDataUsecase {
 
   ViewWasteDataUsecase(this.repository);
 
-  Future<List<WasteDataMonthModel?>?> getWasteDataMonthDetail({
+  Future<WasteDataMonthModel> getWasteDataMonthDetail({
     required int month,
     required int year,
     required int facilityId,

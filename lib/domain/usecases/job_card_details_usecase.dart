@@ -1,5 +1,6 @@
 import 'package:cmms/domain/models/employee_model.dart';
 import 'package:cmms/domain/models/history_model.dart';
+import 'package:cmms/domain/models/job_details_model.dart';
 import 'package:cmms/domain/models/mrs_list_by_jobId.dart';
 import 'package:cmms/domain/repositories/local_storage_keys.dart';
 import 'package:cmms/domain/repositories/repository.dart';
@@ -12,6 +13,20 @@ class JobCardDetailsUsecase {
   Repository repository;
 
   ///
+  Future<List<JobDetailsModel?>?> getJobDetails({
+    required String auth,
+    required int jobId,
+    required int facilityId,
+    int? userId,
+    bool? isLoading,
+  }) async =>
+      await repository.getJobDetails(
+        auth,
+        jobId,
+        facilityId,
+        userId,
+        isLoading,
+      );
   Future<List<EmployeeModel?>?> getAssignedToList({
     String? auth,
     int? facilityId,
@@ -164,7 +179,7 @@ class JobCardDetailsUsecase {
   Future<String?> getValue() async =>
       await repository.getStringValue(LocalKeys.jobCardId);
 
-      void clearStoreData() async => repository.clearData(LocalKeys.permitId);
+  void clearStoreData() async => repository.clearData(LocalKeys.permitId);
   void clearTypeValue() async => repository.clearData(LocalKeys.types);
   void clearisCheckedValue() async => repository.clearData(LocalKeys.isChecked);
   void clearjobmodelValue() async => repository.clearData(LocalKeys.jobModel);

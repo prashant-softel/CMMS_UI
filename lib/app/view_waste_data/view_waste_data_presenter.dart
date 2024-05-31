@@ -5,7 +5,7 @@ class ViewWasteDataPresenter {
   ViewWasteDataPresenter(this.viewWasteDataUsecase);
   ViewWasteDataUsecase viewWasteDataUsecase;
 
-  Future<List<WasteDataMonthModel?>?> getWasteDataMonthDetail({
+  Future<WasteDataMonthModel> getWasteDataMonthDetail({
     required int month,
     required int year,
     required int facilityId,

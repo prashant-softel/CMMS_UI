@@ -11,9 +11,10 @@ class AuditListScreenUsecase {
           bool? isLoading,
           bool? isExport,
           dynamic endDate,
-          dynamic startDate}) async =>
+          dynamic startDate,
+          int? type}) async =>
       await repository.getAuditPlanList(
-          facilityId, isLoading, isExport, startDate, endDate);
+          facilityId, isLoading, isExport, startDate, endDate, type);
   void saveValue({String? type}) async =>
       repository.saveValue(LocalKeys.type, type);
   Future<String?> getValue() async =>

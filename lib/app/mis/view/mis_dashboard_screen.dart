@@ -481,18 +481,18 @@ class MisDashboardScreen extends GetView<MisDashboardController> {
                                     onTap: () {
                                       controller.goToWasteDataScreen();
                                     }),
-                                createContentTile(
-                                  title: 'Hazardous Waste',
-                                  onTap: () {
-                                    controller.goToHazardousDataScreen();
-                                  },
-                                ),
-                                createContentTile(
-                                  title: 'Non-Hazardous Waste',
-                                  onTap: () {
-                                    controller.goToNonHazardousDataScreen();
-                                  },
-                                ),
+                                // createContentTile(
+                                //   title: 'Hazardous Waste',
+                                //   onTap: () {
+                                //     controller.goToHazardousDataScreen();
+                                //   },
+                                // ),
+                                // createContentTile(
+                                //   title: 'Non-Hazardous Waste',
+                                //   onTap: () {
+                                //     controller.goToNonHazardousDataScreen();
+                                //   },
+                                // ),
                               ],
                             ),
                             Container(

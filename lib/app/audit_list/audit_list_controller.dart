@@ -94,16 +94,18 @@ class AuditListScreenController extends GetxController {
     };
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
       facilityId = event;
-      Future.delayed(Duration(seconds: 2), () async {
-        getAuditPlanList(
-            facilityId, formattedTodate1, formattedFromdate1, false);
-      });
+      if (type.value > 0) {
+        Future.delayed(Duration(seconds: 2), () async {
+          getAuditPlanList(facilityId, formattedTodate1, formattedFromdate1,
+              false, type.value);
+        });
+      }
     });
     super.onInit();
   }
 
   Future<void> getAuditPlanList(int facilityId, dynamic startDate,
-      dynamic endDate, bool? isExport) async {
+      dynamic endDate, bool? isExport, int type) async {
     auditPlanList.value = <AuditPlanListModel>[];
     // pmPlanList?.clear();
     final _auditPlanList = await auditListPresenter.getAuditPlanList(
@@ -111,7 +113,8 @@ class AuditListScreenController extends GetxController {
         isLoading: isLoading.value,
         isExport: isExport,
         startDate: startDate,
-        endDate: endDate);
+        endDate: endDate,
+        type: type);
     if (_auditPlanList != null) {
       auditPlanList.value = _auditPlanList;
       isLoading.value = false;
@@ -139,7 +142,8 @@ class AuditListScreenController extends GetxController {
   }
 
   void getAuditListByDate() {
-    getAuditPlanList(facilityId, formattedTodate1, formattedFromdate1, false);
+    getAuditPlanList(
+        facilityId, formattedTodate1, formattedFromdate1, false, type.value);
   }
 
   Future<void> clearValue() async {
@@ -151,7 +155,8 @@ class AuditListScreenController extends GetxController {
   }
 
   void export() {
-    getAuditPlanList(facilityId, formattedTodate1, formattedFromdate1, true);
+    getAuditPlanList(
+        facilityId, formattedTodate1, formattedFromdate1, true, type.value);
   }
 
   void isDeleteDialog({String? planId, String? planName}) {
@@ -197,7 +202,7 @@ class AuditListScreenController extends GetxController {
                     deleteAuditPlan(planId).then((value) {
                       Get.back();
                       getAuditPlanList(facilityId, formattedTodate1,
-                          formattedFromdate1, false);
+                          formattedFromdate1, false, type.value);
                     });
                   },
                   text: 'Yes'),

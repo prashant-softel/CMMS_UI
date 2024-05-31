@@ -373,7 +373,7 @@ class IncidentReportDetailsModel {
 class DetailsOfInjuredPersonUpdate {
   DetailsOfInjuredPersonUpdate(
       {this.incidents_id,
-      this.person_id,
+      this.name,
       this.person_type,
       this.age,
       this.sex,
@@ -387,7 +387,7 @@ class DetailsOfInjuredPersonUpdate {
       this.location_of_incident});
 
   int? incidents_id;
-  String? person_id;
+  String? name;
   int? person_type;
   int? age;
   int? sex;
@@ -403,7 +403,7 @@ class DetailsOfInjuredPersonUpdate {
   factory DetailsOfInjuredPersonUpdate.fromJson(Map<String, dynamic> json) =>
       DetailsOfInjuredPersonUpdate(
         incidents_id: json['incidents_id'],
-        person_id: json['person_id'],
+        name: json['name'],
         person_type: json['person_type'],
         age: json['age'],
         sex: json['sex'],
@@ -419,7 +419,7 @@ class DetailsOfInjuredPersonUpdate {
 
   Map<String, dynamic> toJson() => {
         "incidents_id": incidents_id,
-        "person_id": person_id,
+        "name": name,
         "person_type": person_type,
         "age": age,
         "sex": sex,

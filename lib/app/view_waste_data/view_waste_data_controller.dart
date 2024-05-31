@@ -25,18 +25,18 @@ class ViewWasteDataController extends GetxController {
 
   RxList<MonthModel> month = <MonthModel>[
     MonthModel(name: "Please Select", id: "0"),
-    MonthModel(name: 'Jan', id: "1"),
-    MonthModel(name: 'Feb', id: "2"),
+    MonthModel(name: 'January', id: "1"),
+    MonthModel(name: 'February', id: "2"),
     MonthModel(name: 'March', id: "3"),
     MonthModel(name: 'April', id: "4"),
     MonthModel(name: 'May', id: "5"),
     MonthModel(name: 'June', id: "6"),
     MonthModel(name: 'July', id: "7"),
-    MonthModel(name: 'Aug', id: "8"),
-    MonthModel(name: 'Sept', id: "9"),
-    MonthModel(name: 'Oct', id: "10"),
-    MonthModel(name: 'Nov', id: "11"),
-    MonthModel(name: 'Dec', id: "12"),
+    MonthModel(name: 'August', id: "8"),
+    MonthModel(name: 'September', id: "9"),
+    MonthModel(name: 'October', id: "10"),
+    MonthModel(name: 'November', id: "11"),
+    MonthModel(name: 'December', id: "12"),
   ].obs;
   @override
   void onInit() async {
@@ -101,9 +101,7 @@ class ViewWasteDataController extends GetxController {
     );
 
     if (_wasteDataMonthDetail != null) {
-      wasteDataByMonthList.value = _wasteDataMonthDetail;
-      var wasteJson = wasteDataByMonthList.toJson();
-      print(wasteJson);
+      wasteDataByMonth.value = _wasteDataMonthDetail;
     }
     update(['waste-controller']);
   }
