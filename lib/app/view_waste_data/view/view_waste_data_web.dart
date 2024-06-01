@@ -113,7 +113,7 @@ class _WasteDataWebState extends State<ViewWasteDataWeb> {
                                       child: Row(
                                         children: [
                                           Text(
-                                            "View Waste Data For ${controller.monthName.value} Month",
+                                            "View Waste Data For ${controller.wasteDataByMonth.value?.month ?? ""} Month",
                                             style: Styles.blackBold16,
                                           ),
                                         ],
@@ -127,7 +127,8 @@ class _WasteDataWebState extends State<ViewWasteDataWeb> {
                                       child: ListView.builder(
                                         shrinkWrap: true,
                                         itemCount: controller.wasteDataByMonth
-                                            .value?.item_data?.length,
+                                                .value?.item_data?.length ??
+                                            0,
                                         itemBuilder: (context, index) {
                                           final item = controller
                                               .wasteDataByMonth
@@ -169,7 +170,7 @@ class _WasteDataWebState extends State<ViewWasteDataWeb> {
                                                   padding:
                                                       const EdgeInsets.all(15),
                                                   child: Text(
-                                                    "${controller.wasteDataByMonth.value?.item_data?[index]?.waste_type ?? "This Water Type has been deleted from master"}",
+                                                    "${controller.wasteDataByMonth.value?.item_data?[index]?.waste_type ?? ""}",
                                                     style: Styles.blue17,
                                                   ),
                                                 ),

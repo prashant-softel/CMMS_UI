@@ -56,6 +56,9 @@ class WasteDataController extends GetxController {
   RxList<WasteSource?> hazWasteList = <WasteSource>[].obs;
   RxList<WasteSource?> nonHazWasteList = <WasteSource>[].obs;
   Rx<bool> istypeOfWasteListSelected = true.obs;
+  Rx<bool> isFormInvalid = false.obs;
+  Rx<bool> isQtyInvalid = false.obs;
+  RxBool isDateInvalid = false.obs;
   Rx<String> selectedtypeOfWaste = ''.obs;
   int selectedTypeOfWasteId = 0;
 
@@ -67,6 +70,21 @@ class WasteDataController extends GetxController {
 
   Rx<bool> isLoading = true.obs;
   int selectedYear = 2024;
+
+  void checkForm() {
+    if (selectedTypeOfWasteId == 0) {
+      istypeOfWasteListSelected.value = false;
+      isFormInvalid.value = true;
+    }
+    if (qtyCtrlr.text.trim().length == 0) {
+      isQtyInvalid.value = true;
+      isFormInvalid.value = true;
+    }
+    if (wasteDataTimeCtrlr.text.trim().length == 0) {
+      isDateInvalid.value = true;
+      isFormInvalid.value = true;
+    }
+  }
 
   ///
   // @override
@@ -315,6 +333,7 @@ class WasteDataController extends GetxController {
     );
 
     selectedWasteDataTime.value = selectedDateTime;
+    isDateInvalid.value = false;
     wasteDataTimeCtrlr
       ..text = DateFormat("yyyy-MM-dd HH:mm").format(selectedDateTime)
       ..selection = TextSelection.fromPosition(
@@ -372,6 +391,10 @@ class WasteDataController extends GetxController {
   }
 
   void createWasteData() async {
+    checkForm();
+    if (isFormInvalid.value) {
+      return;
+    }
     String _descriptionCtrlr = descriptionCtrlr.text.trim();
     String _qtCtrlr = qtyCtrlr.text.trim();
     DateTime procurementTime = selectedWasteDataTime.value;
@@ -380,9 +403,9 @@ class WasteDataController extends GetxController {
     CreateWasteData createWasteData = CreateWasteData(
         consumeType: 1,
         facilityId: facilityId,
-        creditQty: 0,
+        creditQty: double.tryParse(_qtCtrlr) ?? 0,
         date: formattedDate,
-        debitQty: double.tryParse(_qtCtrlr) ?? 0,
+        debitQty: 0,
         description: _descriptionCtrlr,
         wasteTypeId: selectedTypeOfWasteId,
         id: 0);
@@ -409,9 +432,9 @@ class WasteDataController extends GetxController {
       id: detailId,
       consumeType: 1,
       facilityId: facilityId,
-      creditQty: 0,
+      creditQty: double.tryParse(_qtCtrlr) ?? 0,
       date: formattedDate,
-      debitQty: double.tryParse(_qtCtrlr) ?? 0,
+      debitQty: 0,
       description: _descriptionCtrlr,
       wasteTypeId: selectedTypeOfWasteId,
     );
@@ -429,6 +452,10 @@ class WasteDataController extends GetxController {
   }
 
   void createWasteDataDisposed() async {
+    checkForm();
+    if (isFormInvalid.value) {
+      return;
+    }
     String _descriptionCtrlr = descriptionCtrlr.text.trim();
     String _qtCtrlr = qtyCtrlr.text.trim();
     DateTime procurementTime = selectedWasteDataTime.value;
@@ -438,9 +465,9 @@ class WasteDataController extends GetxController {
       id: detailId,
       consumeType: 1,
       facilityId: facilityId,
-      creditQty: double.tryParse(_qtCtrlr) ?? 0,
+      creditQty: 0,
       date: formattedDate,
-      debitQty: 0,
+      debitQty: double.tryParse(_qtCtrlr) ?? 0,
       description: _descriptionCtrlr,
       wasteTypeId: selectedTypeOfWasteId,
     );
@@ -467,9 +494,9 @@ class WasteDataController extends GetxController {
       id: detailId,
       consumeType: 1,
       facilityId: facilityId,
-      creditQty: double.tryParse(_qtCtrlr) ?? 0,
+      creditQty: 0,
       date: formattedDate,
-      debitQty: 0,
+      debitQty: double.tryParse(_qtCtrlr) ?? 0,
       description: _descriptionCtrlr,
       wasteTypeId: selectedTypeOfWasteId,
     );
@@ -494,6 +521,7 @@ class WasteDataController extends GetxController {
             int typeOfWaterIndex =
                 typeOfWasteList.indexWhere((x) => x?.name == value);
             selectedTypeOfWasteId = typeOfWasteList[typeOfWaterIndex]?.id ?? 0;
+            istypeOfWasteListSelected.value = true;
           } else {
             selectedTypeOfWasteId = 0;
           }
