@@ -1,3 +1,4 @@
+import 'package:cmms/domain/models/get_asset_data_list_model.dart';
 import 'package:cmms/domain/models/get_plant_Stock_list.dart';
 
 import '../../domain/usecases/create_mrs_return_usecase.dart';
@@ -27,6 +28,16 @@ class CreateMrsReturnPresenter {
     );
   }
 
+  Future<List<GetAssetDataModel?>?> getAssetList({
+    String? auth,
+    int? facilityId,
+    bool? isLoading,
+  }) async =>
+      await craetemrsReturnUsecase.getAssetList(
+        auth: auth ?? "",
+        facilityId: facilityId ?? 0,
+        isLoading: isLoading ?? false,
+      );
   void saveValue({String? whereUsedTypeId}) async {
     return craetemrsReturnUsecase.saveValue(whereUsedTypeId: whereUsedTypeId);
   }

@@ -612,8 +612,8 @@ class JobCardDetailsController extends GetxController {
     });
 
     var jobCard = {
-      "uploadfile_ids": fileIds,
-      "LstCMJCEmpList": employees,
+      "jc_id": jcCard,
+      "request": {"uploadfile_ids": fileIds, "LstCMJCEmpList": employees}
     };
 
     print("filesids: ${fileIds}");

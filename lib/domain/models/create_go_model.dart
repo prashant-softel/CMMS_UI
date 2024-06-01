@@ -119,30 +119,32 @@ class CreateGoModel {
 }
 
 class Items {
-  Items({
-    this.goItemID,
-    this.assetMasterItemID,
-    this.cost,
-    this.ordered_qty,
-    this.paid_by_ID,
-    this.requested_qty,
-    this.accepted_qty,
-    this.received_qty,
-    this.lost_qty,
-    this.damaged_qty,
-    this.id,
-    this.assetItem_Name,
-    // this.locationID,
-    this.spare_status,
-    this.remarks,
-    this.receive_later,
-    this.asset_type_ID,
-    this.paid_by_name,
-    this.cat_name,
-    this.asset_type,
-    this.asset_code,
-    this.sr_no,
-  });
+  Items(
+      {this.goItemID,
+      this.assetMasterItemID,
+      this.cost,
+      this.ordered_qty,
+      this.paid_by_ID,
+      this.requested_qty,
+      this.accepted_qty,
+      this.received_qty,
+      this.lost_qty,
+      this.damaged_qty,
+      this.id,
+      this.assetItem_Name,
+      // this.locationID,
+      this.spare_status,
+      this.remarks,
+      this.receive_later,
+      this.asset_type_ID,
+      this.paid_by_name,
+      this.cat_name,
+      this.asset_type,
+      this.asset_code,
+      this.sr_no,
+      this.storage_column_no,
+      this.storage_rack_no,
+      this.storage_row_no});
   int? id;
   int? assetMasterItemID;
   String? assetItem_Name;
@@ -165,8 +167,15 @@ class Items {
   String? asset_code;
   int? goItemID;
   String? sr_no;
+  int? storage_rack_no;
+  int? storage_row_no;
+  int? storage_column_no;
   factory Items.fromJson(Map<String, dynamic> json) => Items(
         assetMasterItemID: json["assetMasterItemID"],
+        storage_rack_no: json["storage_rack_no"],
+        storage_row_no: json["storage_row_no"],
+        storage_column_no: json["storage_column_no"],
+
         goItemID: json["goItemID"],
         cost: json["cost"],
         requested_qty: json["requested_qty"],
@@ -192,6 +201,10 @@ class Items {
 
   Map<String, dynamic> toJson() => {
         "assetMasterItemID": assetMasterItemID,
+        "storage_rack_no": storage_rack_no,
+        "storage_row_no": storage_row_no,
+        "storage_column_no": storage_column_no,
+
         "goItemID": goItemID,
         "cost": cost,
         "ordered_qty": ordered_qty,
