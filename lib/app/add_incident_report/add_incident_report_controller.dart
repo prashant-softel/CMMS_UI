@@ -530,10 +530,12 @@ class AddIncidentReportController extends GetxController {
           });
         }
       });
-
+      Future.delayed(Duration(seconds: 1), () async {
+        getVictimNameList();
+      });
       if (irId.value != 0) {
         Future.delayed(Duration(seconds: 1), () async {
-          await getIncidentReportDetail(id: irId.value);
+          await getIncidentReportDetail(id: irId.value); //code
           await getIncidentReportHistory(id: irId.value);
         });
       }
@@ -563,9 +565,7 @@ class AddIncidentReportController extends GetxController {
       Future.delayed(Duration(seconds: 1), () async {
         getIncidentInvestigationVerificationDoneByList();
       });
-      Future.delayed(Duration(seconds: 1), () async {
-        getVictimNameList();
-      });
+
       Future.delayed(Duration(seconds: 1), () async {
         getAssetRestorationActionTakenByList();
       });
