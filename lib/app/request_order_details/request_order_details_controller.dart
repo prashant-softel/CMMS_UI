@@ -264,6 +264,9 @@ class GoodsOrdersReqDetailController extends GetxController {
   }
 
   void updatePurchaseOrderData() async {
+    if (!validateFields()) {
+      return;
+    }
     List<SubmitItems> items = [];
     rowItem.forEach((element) {
       SubmitItems item = SubmitItems(
