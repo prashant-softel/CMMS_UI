@@ -268,6 +268,24 @@ class PreventiveCheckPointContentWeb
                                                     ishint: 'Enter Check Point',
                                                     textController: controller
                                                         .checkPointCtrlr,
+                                                                     //validate
+                                                    errorController: controller
+                                                            .isCheckPointInvalid
+                                                            .value
+                                                        ? "Required field"
+                                                        : null,
+                                                    onChanged: (value) {
+                                                      if (value.trim().length >
+                                                          0) {
+                                                        controller
+                                                            .isCheckPointInvalid
+                                                            .value = false;
+                                                      } else {
+                                                        controller
+                                                            .isCheckPointInvalid
+                                                            .value = true;
+                                                      }
+                                                    },
                                                     focusNode:
                                                         controller.chckFocus,
                                                     scroll:
@@ -328,6 +346,24 @@ class PreventiveCheckPointContentWeb
                                                     ishint: 'Enter Requirement',
                                                     textController: controller
                                                         .requirementCtrlr,
+                                                                     //validate
+                                                    errorController: controller
+                                                            .isRequiremetInvalid
+                                                            .value
+                                                        ? "Required field"
+                                                        : null,
+                                                    onChanged: (value) {
+                                                      if (value.trim().length >
+                                                          0) {
+                                                        controller
+                                                            .isRequiremetInvalid
+                                                            .value = false;
+                                                      } else {
+                                                        controller
+                                                            .isRequiremetInvalid
+                                                            .value = true;
+                                                      }
+                                                    },
                                                     focusNode:
                                                         controller.reqFocus,
                                                     scroll:
@@ -395,6 +431,25 @@ class PreventiveCheckPointContentWeb
                                                   // ishint: 'Enter Check Point',
                                                   textController: controller
                                                       .failurewtgCtrlr,
+
+                                                                   //validate
+                                                    errorController: controller
+                                                            .isFailureInvalid
+                                                            .value
+                                                        ? "Required field"
+                                                        : null,
+                                                    onChanged: (value) {
+                                                      if (value.trim().length >
+                                                          0) {
+                                                        controller
+                                                            .isFailureInvalid
+                                                            .value = false;
+                                                      } else {
+                                                        controller
+                                                            .isFailureInvalid
+                                                            .value = true;
+                                                      }
+                                                    },
                                                 )),
                                           ],
                                         ),

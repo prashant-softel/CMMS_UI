@@ -27,6 +27,9 @@ class PreventiveListController extends GetxController {
       <InventoryCategoryModel>[].obs;
   Rx<String> selectedequipment = ''.obs;
   Rx<bool> isSelectedequipment = true.obs;
+  Rx<bool> ischecklistNumberInvalid = false.obs;
+ Rx<bool> isFormInvalid = false.obs;
+  
   RxList<int> selectedEquipmentCategoryIdList = <int>[].obs;
   RxList<PreventiveCheckListModel?>? preventiveCheckList =
       <PreventiveCheckListModel?>[].obs;
@@ -257,6 +260,7 @@ class PreventiveListController extends GetxController {
             int equipmentIndex =
               equipmentCategoryList.indexWhere((x) => x?.name == value);
           selectedEquipmentId = equipmentCategoryList[equipmentIndex]?.id ?? 0;
+          isSelectedequipment.value=true;
           } else {
             selectedEquipmentId=0;
           }
@@ -269,6 +273,7 @@ class PreventiveListController extends GetxController {
             int frequencyIndex =
               frequencyList.indexWhere((x) => x?.name == value);
           selectedfrequencyId = frequencyList[frequencyIndex]?.id ?? 0;
+          isSelectedfrequency.value=true;
           } else {
             selectedfrequencyId=0;
           }
@@ -286,8 +291,8 @@ class PreventiveListController extends GetxController {
     if (checklistNumberCtrlr.text.trim() == '' ||
         selectedEquipmentId == 0 ||
         selectedfrequencyId == 0) {
-      Fluttertoast.showToast(
-          msg: "Please enter required field", fontSize: 16.0);
+      // Fluttertoast.showToast(
+      //     msg: "Please enter required field", fontSize: 16.0);
     } else {
       String _checklistNumber = checklistNumberCtrlr.text.trim();
       String _duration = durationCtrlr.text.trim();
@@ -318,6 +323,10 @@ class PreventiveListController extends GetxController {
   }
 
   Future<void> issuccessCreatechecklist() async {
+    checkFormCheckList();
+    if(isFormInvalid.value){
+      return;
+    }
     isSuccess.toggle();
 
     await {_cleardata()};
@@ -443,5 +452,21 @@ class PreventiveListController extends GetxController {
 
   void export() {
     getPreventiveCheckList(facilityId, type.value, true);
+  }
+
+  void checkFormCheckList(){
+
+      if (checklistNumberCtrlr.text.trim().length < 3) {
+      ischecklistNumberInvalid.value = true;
+      isFormInvalid.value = true;
+    }
+       if (selectedequipment == '') {
+      isSelectedequipment.value = false;
+      isFormInvalid.value = true;
+    }
+        if (selectedfrequency == '') {
+      isSelectedfrequency.value = false;
+      isFormInvalid.value = true;
+    }
   }
 }

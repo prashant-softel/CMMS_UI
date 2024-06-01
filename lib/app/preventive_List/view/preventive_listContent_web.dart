@@ -247,6 +247,26 @@ class PreventiveChecklistListContentWeb
                                                           LoginCustomTextfield(
                                                         textController: controller
                                                             .checklistNumberCtrlr,
+
+                                                              //validate
+                                                    errorController: controller
+                                                            .ischecklistNumberInvalid
+                                                            .value
+                                                        ? "Required field"
+                                                        : null,
+                                                    onChanged: (value) {
+                                                      if (value.trim().length >
+                                                          0) {
+                                                        controller
+                                                            .ischecklistNumberInvalid
+                                                            .value = false;
+                                                      } else {
+                                                        controller
+                                                            .ischecklistNumberInvalid
+                                                            .value = true;
+                                                      }
+                                                    },
+
                                                         focusNode: controller
                                                             .checklistFocus,
                                                         scroll: controller
