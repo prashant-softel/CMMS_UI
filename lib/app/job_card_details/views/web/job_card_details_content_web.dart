@@ -917,8 +917,6 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                                       CustomElevatedButton(
                                         text: 'Start',
                                         onPressed: () {
-                                          controller.transferItem();
-
                                           controller.permitList
                                                       ?.firstWhere((element) =>
                                                           element.permitId !=

@@ -36,11 +36,11 @@ class ReceiveGoodsOrdersController extends GetxController {
   int selectedUnitCurrencyId = 0;
   Rx<bool> isInvoiceNumberInvalid = false.obs;
   Rx<bool> isCostInvalid = false.obs;
-  
+
   Rx<bool> isAccepetedInvalid = false.obs;
-  
+
   Rx<bool> isRequestedInvalid = false.obs;
-  
+
   Rx<bool> isDeliverChalanInvalid = false.obs;
   Rx<bool> isGrnNoInvalid = false.obs;
   Rx<bool> isCountOfPackageReceivedInvalid = false.obs;
@@ -267,6 +267,21 @@ class ReceiveGoodsOrdersController extends GetxController {
             "value": '${element.damaged_qty}',
             // 'id': '${element.assetMasterItemID}'
           },
+          {
+            'key': "storage_rack_no",
+            "value": '',
+            // 'id': '${element.assetMasterItemID}'
+          },
+          {
+            'key': "storage_row_no",
+            "value": '',
+            // 'id': '${element.assetMasterItemID}'
+          },
+          {
+            'key': "storage_column_no",
+            "value": '',
+            // 'id': '${element.assetMasterItemID}'
+          },
         ]);
         dropdownMapperData[element.assetItem_Name ?? ""] = assetList.firstWhere(
             (e) => e?.name == element.assetItem_Name,
@@ -431,7 +446,10 @@ class ReceiveGoodsOrdersController extends GetxController {
       {'key': "Order", "value": ''},
       {'key': "Received", "value": '', "sr_no": '0'},
       {'key': "Accepted", "value": ''},
-      {'key': "Damaged", "value": ''},
+      {'key': "Damaged", "value": ''}, {'key': "storage_rack_no", "value": ''},
+      {'key': "storage_row_no", "value": ''},
+      {'key': "storage_column_no", "value": ''},
+
       // {'key': "Pending", "value": ''},
     ]);
   }
@@ -663,19 +681,19 @@ class ReceiveGoodsOrdersController extends GetxController {
     } else {
       isFormInvalid.value = false;
     }
-    if(TextEditingController().text.isEmpty){
-      isCostInvalid.value=true;
-    }else{
+    if (TextEditingController().text.isEmpty) {
+      isCostInvalid.value = true;
+    } else {
       isCostInvalid.value = false;
     }
-     if(TextEditingController().text.isEmpty){
-      isRequestedInvalid.value=true;
-    }else{
+    if (TextEditingController().text.isEmpty) {
+      isRequestedInvalid.value = true;
+    } else {
       isRequestedInvalid.value = false;
     }
-       if(TextEditingController().text.isEmpty){
-      isAccepetedInvalid.value=true;
-    }else{
+    if (TextEditingController().text.isEmpty) {
+      isAccepetedInvalid.value = true;
+    } else {
       isAccepetedInvalid.value = false;
     }
   }
@@ -727,6 +745,9 @@ class ReceiveGoodsOrdersController extends GetxController {
         accepted_qty: double.tryParse(element[6]["value"] ?? '0'),
         damaged_qty: double.tryParse(element[7]["value"] ?? '0'),
         requested_qty: double.tryParse(element[2]["value"] ?? '0'),
+        storage_column_no: int.tryParse('${element[10]["value"]}'),
+        storage_rack_no: int.tryParse('${element[8]["value"]}'),
+        storage_row_no: int.tryParse('${element[0]["value"]}'),
       );
 
       // poID: paiddropdownMapperData[element[1]["value"]]?.id)

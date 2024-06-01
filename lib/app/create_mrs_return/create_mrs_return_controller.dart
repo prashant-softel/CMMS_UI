@@ -1,11 +1,12 @@
 import 'dart:async';
 
 import 'package:cmms/app/create_mrs_return/create_mrs_return_presenter.dart';
-import 'package:cmms/domain/models/create_return_mrs_model.dart';
+import 'package:cmms/domain/models/get_asset_data_list_model.dart';
 import 'package:cmms/domain/models/get_plant_Stock_list.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import '../../domain/models/create_return_mrs_model.dart';
 import '../constant/constant.dart';
 import '../home/home_controller.dart';
 import '../navigators/app_pages.dart';
@@ -40,6 +41,10 @@ class CreateMrsReturnController extends GetxController {
   var isToggleOn = false.obs;
 
   var isSetTemplate = false.obs;
+  RxList<GetAssetDataModel?> assetList = <GetAssetDataModel>[].obs;
+  RxList<List<Map<String, String>>> rowFaultyItem =
+      <List<Map<String, String>>>[].obs;
+  RxMap<dynamic, dynamic> dropdownFaultyMapperData = {}.obs;
 
   void setTemplatetoggle() {
     isSetTemplate.value = !isSetTemplate.value;
@@ -61,6 +66,7 @@ class CreateMrsReturnController extends GetxController {
           getCmmsItemList(
             facilityId,
           );
+          getAssetList(facilityId);
         });
       }
     });
@@ -124,13 +130,42 @@ class CreateMrsReturnController extends GetxController {
     addRowItem();
   }
 
+  Future<void> getAssetList(int _facilityId) async {
+    assetList.value = <GetAssetDataModel>[];
+    final _assetList =
+        await createmrsReturnPresenter.getAssetList(facilityId: facilityId);
+    // print('jkncejknce:$facilityId');
+    if (_assetList != null) {
+      for (var asset in _assetList) {
+        assetList.add(asset);
+      }
+      update(["AssetList"]);
+    }
+    addRowFaultyItem();
+  }
+
+  void addRowFaultyItem() {
+    rowFaultyItem.add([
+      {"key": "Drop_down", "value": 'Please Select'},
+      {'key': "code", "value": ''},
+      {'key': "Material_Type", "value": ''},
+      {'key': "Material_Category", "value": ''},
+      {'key': "Sr_no", "value": ''},
+      {'key': "Return_Qty", "value": ''},
+      {'key': "Remark", "value": ''},
+      {'key': "Action ", "value": ''},
+    ]);
+  }
+
   void addRowItem() {
     rowItem.add([
       {"key": "Drop_down", "value": 'Please Select'},
+      {'key': "Sr_No", "value": ''},
+      {'key': "code", "value": ''},
+      {'key': "Material_Type", "value": ''},
       {'key': "Issue_Qty", "value": ''},
       {'key': "Used_Qty", "value": ''},
       {'key': "Return_Qty", "value": ''},
-      {'key': "is_faulty", "value": ''},
       {'key': "Remark", "value": ''},
       // {'key': "Action ", "value": ''},
     ]);
@@ -146,6 +181,8 @@ class CreateMrsReturnController extends GetxController {
         DateFormat('yyyy-MM-dd').format(requestd_date.value);
 
     List<CmmsItem> items = [];
+    List<FaultyItemsCmms> FaultyItems = [];
+
     rowItem.forEach((element) {
       CmmsItem item = CmmsItem(
         asset_item_ID:
@@ -156,12 +193,22 @@ class CreateMrsReturnController extends GetxController {
                 .consumed_qty, //double.tryParse(element[3]["value"] ?? '0'),
         requested_qty: 0,
         approval_required: 0,
-        is_faulty: element[4]["value"] == "" || element[4]["value"] == null
-            ? 0
-            : int.tryParse(element[4]["value"] ?? "0"),
-        return_remarks: element[5]["value"] ?? '0',
+        is_faulty: 0,
+        return_remarks: element[7]["value"] ?? '0',
       );
       items.add(item);
+    });
+    rowFaultyItem.forEach((element) {
+      FaultyItemsCmms item = FaultyItemsCmms(
+        assetMasterItemID:
+            dropdownFaultyMapperData.value[element[0]["value"]]?.id,
+        mrsItemID: 0,
+        // dropdownFaultyMapperData.value[element[0]["value"]].issued_qty,
+        sr_no: element[7]["value"] ?? '0',
+        returned_qty: int.tryParse(element[7]["value"] ?? '0'),
+        return_remarks: element[7]["value"] ?? '0',
+      );
+      FaultyItems.add(item);
     });
     CreateReturnMrsModel createMrs = CreateReturnMrsModel(
         ID: 0,
