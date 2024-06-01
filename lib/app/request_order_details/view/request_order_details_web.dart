@@ -442,14 +442,19 @@ class AddRowInReqGoodsOrder extends StatelessWidget {
                                               4,
                                           dropdownList: controller.assetList,
                                           isValueSelected: controller
-                                                  .errorState[
-                                              '$rowIndex-${mapData['key']}'],
+                                                          .errorState[
+                                                      '$rowIndex-${mapData['key']}'] ==
+                                                  true
+                                              ? false
+                                              : true,
                                           selectedValue: mapData["value"],
                                           onValueChanged:
                                               (list, selectedValue) {
                                             print(
                                                 {selectedValue: selectedValue});
                                             mapData["value"] = selectedValue;
+                                            controller.validateSpecificField(
+                                                rowIndex);
                                             controller.dropdownMapperData[
                                                     selectedValue] =
                                                 list.firstWhere(
