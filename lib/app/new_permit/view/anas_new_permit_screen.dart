@@ -1904,7 +1904,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                                               crossAxisAlignment: CrossAxisAlignment.start,
                                                                                               children: [
                                                                                                 Text(
-                                                                                                  "${element?.workingAreaName}",
+                                                                                                  "${element?.name}",
                                                                                                 ),
                                                                                                 //  Text(
                                                                                                 //   "${element?.workingAreaName}",
@@ -2626,9 +2626,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                                       SizedBox(
                                                                                         width: MediaQuery.of(context).size.width * 2,
                                                                                         child: Container(
-                                                                                          constraints: BoxConstraints(
-                                                                                            minHeight: 90
-                                                                                          ),
+                                                                                          constraints: BoxConstraints(minHeight: 90),
                                                                                           // height: ((controller.filteredEquipmentNameList.length) * 25) + 90,
                                                                                           child: Column(
                                                                                               //

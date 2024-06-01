@@ -243,7 +243,7 @@ class ObservationPmExecutionViewDialog extends GetView {
                                               )),
 
                                           DataColumn2(
-                                              fixedWidth: 200,
+                                              fixedWidth: 150,
                                               label: Text(
                                                 "Create Job",
                                                 style: TextStyle(
@@ -256,11 +256,159 @@ class ObservationPmExecutionViewDialog extends GetView {
                                             .map((record) {
                                           return DataRow(
                                             // height: 130,
-                                            cells: record.map((
-                                              mapData,
-                                            ) {
-                                              return DataCell(commonUi(
-                                                  setState, mapData, record));
+                                            cells: record.map((mapData) {
+                                              return DataCell(
+                                                (mapData['key'] ==
+                                                        "observation")
+                                                    ? Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(8.0),
+                                                        child:
+                                                            LoginCustomTextfield(
+                                                          width:
+                                                              (Get.width * .4),
+                                                          textController:
+                                                              new TextEditingController(
+                                                                  text: mapData[
+                                                                          "value"] ??
+                                                                      ''),
+                                                          onChanged: (txt) {
+                                                            mapData["value"] =
+                                                                txt;
+                                                          },
+                                                          maxLine: 5,
+                                                        ),
+                                                      )
+                                                    : (mapData['key'] ==
+                                                            "checkpoint")
+                                                        ? Text(
+                                                            mapData['value'] ??
+                                                                '')
+                                                        : (mapData['key'] ==
+                                                                "requirement")
+                                                            ? Text(mapData[
+                                                                    'value'] ??
+                                                                '')
+                                                            : (mapData['key'] ==
+                                                                    "weightage")
+                                                                ? Text(mapData[
+                                                                        'value'] ??
+                                                                    '')
+                                                                : (mapData['key'] ==
+                                                                        "uploadimg")
+                                                                    ? Row(
+                                                                        mainAxisAlignment:
+                                                                            MainAxisAlignment.center,
+                                                                        children: [
+                                                                          InkWell(
+                                                                            onTap:
+                                                                                () async {
+                                                                              try {
+                                                                                final result = await FilePicker.platform.pickFiles(
+                                                                                  type: FileType.image,
+                                                                                );
+                                                                                if (result != null && result.files.single.bytes != null) {
+                                                                                  setState(() {
+                                                                                    mapData['uploaded'] = result.files.single.name;
+                                                                                    controller.fileName.value = result.files.single.name;
+                                                                                    controller.fileBytes = result.files.single.bytes;
+                                                                                  });
+                                                                                  controller.browseFiles(
+                                                                                    fileBytes: controller.fileBytes,
+                                                                                  );
+                                                                                } else {
+                                                                                  // Handle the case where no file is picked
+                                                                                  print('No file selected');
+                                                                                }
+                                                                              } catch (e) {
+                                                                                // Handle the error scenario
+                                                                                print('Error picking file: $e');
+                                                                              }
+                                                                            },
+                                                                            child:
+                                                                                Container(
+                                                                              decoration: BoxDecoration(
+                                                                                borderRadius: BorderRadius.circular(5),
+                                                                                color: ColorValues.appDarkBlueColor,
+                                                                                border: Border.all(
+                                                                                  color: ColorValues.appDarkBlueColor,
+                                                                                  width: 1,
+                                                                                ),
+                                                                              ),
+                                                                              child: Icon(Icons.upload, size: 30, color: ColorValues.whiteColor),
+                                                                            ),
+                                                                          ),
+                                                                          SizedBox(
+                                                                              width: 10), // Add some spacing between the icon and text
+                                                                          Expanded(
+                                                                            // Wrap with Expanded to handle long filenames gracefully
+                                                                            child:
+                                                                                SingleChildScrollView(
+                                                                              scrollDirection: Axis.horizontal,
+                                                                              child: Text(
+                                                                                "${mapData['uploaded'] ?? 'No file selected'}",
+                                                                                overflow: TextOverflow.ellipsis,
+                                                                              ),
+                                                                            ),
+                                                                          ),
+                                                                        ],
+                                                                      )
+                                                                    : (mapData['key'] ==
+                                                                            "cpok")
+                                                                        ? _rowcpOkItem(
+                                                                            int.tryParse('${mapData['value']}'),
+                                                                            onCheck:
+                                                                                (val) {
+                                                                            mapData['value'] = val == true
+                                                                                ? "1"
+                                                                                : "0";
+                                                                            Future.delayed(Duration.zero,
+                                                                                () {
+                                                                              setState(() {});
+                                                                            });
+                                                                          })
+                                                                        : (mapData['key'] == "type" &&
+                                                                                mapData['inpute_type'] == "2")
+                                                                            ? Padding(
+                                                                                padding: const EdgeInsets.all(8.0),
+                                                                                child: Column(
+                                                                                  children: [
+                                                                                    LoginCustomTextfield(
+                                                                                        width: (Get.width * .8),
+                                                                                        textController: new TextEditingController(text: mapData["value"] ?? ''),
+                                                                                        onChanged: (txt) {
+                                                                                          mapData["value"] = txt;
+                                                                                        }),
+                                                                                    Row(
+                                                                                      children: [
+                                                                                        Text("Min:${mapData["min"]}"),
+                                                                                        Dimens.boxWidth15,
+                                                                                        Text("Max:${mapData["max"]}")
+                                                                                      ],
+                                                                                    )
+                                                                                  ],
+                                                                                ))
+                                                                            : (mapData['key'] == "type" && mapData['inpute_type'] == "0")
+                                                                                ? Text('Text')
+                                                                                : (mapData['key'] == "job_created" && mapData['cp_ok_value'] == "0" && mapData['job_value'] == "0" || mapData['key'] == "job_created" && mapData['cp_ok_value'] == "0" && mapData['job_value'] == "1")
+                                                                                    ?
+                                                                                    // Obx(() {
+                                                                                    //     return
+                                                                                    _rowItem(int.tryParse('${mapData['job_value']}'), onCheck: (val) {
+                                                                                        mapData['job_value'] = val == true ? "1" : "0";
+                                                                                        Future.delayed(Duration.zero, () {
+                                                                                          setState(() {});
+                                                                                        });
+
+                                                                                        // Update the reactive variable
+                                                                                        //  });
+                                                                                      })
+                                                                                    : mapData['job_value'] != "1" && mapData['cp_ok_value'] != "1"
+                                                                                        ? Text('JOB${mapData['job_value']}')
+                                                                                        : Dimens.box0,
+                                                // : Text(mapData['value'] ?? ''),
+                                              );
                                             }).toList(),
                                           );
                                         }).toList(),

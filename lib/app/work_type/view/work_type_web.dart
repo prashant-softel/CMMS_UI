@@ -634,12 +634,29 @@ class WorkTypeWeb extends GetView<WorkTypeController> {
                                                                       .selectedItem
                                                                       ?.name ??
                                                                   '';
+                                                              if (controller
+                                                                      .selectedItem
+                                                                      ?.name !=
+                                                                  "") {
+                                                                controller
+                                                                    .isTitleInvalid
+                                                                    .value = false;
+                                                              }
+
                                                               controller
                                                                   .selectedassetcategory
                                                                   .value = controller
                                                                       .selectedItem
                                                                       ?.categoryName ??
                                                                   '';
+                                                              if (controller
+                                                                      .selectedItem
+                                                                      ?.categoryName !=
+                                                                  "") {
+                                                                controller
+                                                                    .isselectedassetc
+                                                                    .value = true;
+                                                              }
                                                               controller
                                                                       .selectedEquipmentId =
                                                                   controller

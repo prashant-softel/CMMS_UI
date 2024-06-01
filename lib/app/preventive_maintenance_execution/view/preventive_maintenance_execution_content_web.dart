@@ -618,7 +618,12 @@ class PreventiveMaintenanceExecutionContentWeb
                                               ColorValues.closeColor,
                                           text: "Close",
                                           onPressed: () {
-                                            controller.listMrsByTaskId!.value[0]
+                                            controller.listMrsByTaskId!.value
+                                                            .firstWhere((element) =>
+                                                                element?.jobCardId !=
+                                                                    0 ||
+                                                                element?.pmId !=
+                                                                    0)
                                                             ?.mrs_return_ID ==
                                                         0 &&
                                                     controller.allTrue.value ==
@@ -644,7 +649,9 @@ class PreventiveMaintenanceExecutionContentWeb
                                     Dimens.boxWidth10,
                                     controller.listMrsByTaskId!.value
                                                     .firstWhere((element) =>
-                                                        element?.mrsId != 0)
+                                                        element?.jobCardId !=
+                                                            0 ||
+                                                        element?.pmId != 0)
                                                     ?.mrs_return_ID ==
                                                 0 &&
                                             controller.allTrue.value == false
@@ -687,8 +694,12 @@ class PreventiveMaintenanceExecutionContentWeb
                                                           .value
                                                           ?.plan_title,
                                                       "mrsId": controller
-                                                              .listMrsByTaskId![
-                                                                  0]!
+                                                              .listMrsByTaskId!
+                                                              .firstWhere(
+                                                                  (element) =>
+                                                                      element
+                                                                          ?.mrsId !=
+                                                                      0)!
                                                               .mrsId ??
                                                           0
                                                     });

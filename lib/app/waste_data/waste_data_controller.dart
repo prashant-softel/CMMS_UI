@@ -33,6 +33,7 @@ class WasteDataController extends GetxController {
   );
 
   int selectedBusinessTypeId = 1;
+  int detailId = 0;
   Rx<String> selectedBusinessType = ''.obs;
   Rx<bool> isSelectedBusinessType = true.obs;
   RxList<FacilityModel?> facilityList = <FacilityModel>[].obs;
@@ -89,7 +90,7 @@ class WasteDataController extends GetxController {
     final _wasteDataList = await wasteDataPresenter.getWasteDataList(
       isLoading: isLoading.value,
       start_date: selectedYear.toString(),
-      end_date: (selectedYear - 1).toString(),
+      end_date: (selectedYear + 1).toString(),
       facility_id: facilityId,
       isExport: isExport,
     );
@@ -297,6 +298,15 @@ class WasteDataController extends GetxController {
     return newTime;
   }
 
+  void clearData() {
+    detailId = 0;
+    wasteDataTimeCtrlr.clear();
+    qtyCtrlr.clear();
+    descriptionCtrlr.clear();
+    selectedTypeOfWasteId = 0;
+    selectedtypeOfWaste.value = '';
+  }
+
   void createWasteData() async {
     String _descriptionCtrlr = descriptionCtrlr.text.trim();
     String _qtCtrlr = qtyCtrlr.text.trim();
@@ -326,6 +336,36 @@ class WasteDataController extends GetxController {
     print('Create Water data: $createWaterDataModelJsonString');
   }
 
+  void updateWasteData() async {
+    String _descriptionCtrlr = descriptionCtrlr.text.trim();
+    String _qtCtrlr = qtyCtrlr.text.trim();
+    DateTime procurementTime = selectedWasteDataTime.value;
+    String formattedDate =
+        DateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'").format(procurementTime);
+
+    CreateWasteData createWasteData = CreateWasteData(
+      id: detailId,
+      consumeType: 1,
+      facilityId: facilityId,
+      creditQty: 0,
+      date: formattedDate,
+      debitQty: double.tryParse(_qtCtrlr) ?? 0,
+      description: _descriptionCtrlr,
+      wasteTypeId: selectedTypeOfWasteId,
+    );
+    var createWaterDataModelJsonString = createWasteData.toJson();
+    Map<String, dynamic>? responseCreateWaterDataModel =
+        await wasteDataPresenter.updateWasteData(
+      createWasteData: createWaterDataModelJsonString,
+      isLoading: true,
+    );
+
+    // Handle the response
+    if (responseCreateWaterDataModel == null) {}
+
+    print('Create Water data: $createWaterDataModelJsonString');
+  }
+
   void createWasteDataDisposed() async {
     String _descriptionCtrlr = descriptionCtrlr.text.trim();
     String _qtCtrlr = qtyCtrlr.text.trim();
@@ -345,6 +385,34 @@ class WasteDataController extends GetxController {
     var createWaterDataModelJsonString = createWasteData.toJson();
     Map<String, dynamic>? responseCreateWaterDataModel =
         await wasteDataPresenter.createWasteDataDisposed(
+      createWasteData: createWaterDataModelJsonString,
+      isLoading: true,
+    );
+
+    // Handle the response
+    if (responseCreateWaterDataModel == null) {}
+
+    print('Create Water data: $createWaterDataModelJsonString');
+  }
+  void updateWasteDataDisposed() async {
+    String _descriptionCtrlr = descriptionCtrlr.text.trim();
+    String _qtCtrlr = qtyCtrlr.text.trim();
+    DateTime procurementTime = selectedWasteDataTime.value;
+    String formattedDate =
+        DateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'").format(procurementTime);
+
+    CreateWasteData createWasteData = CreateWasteData(
+      consumeType: 1,
+      facilityId: facilityId,
+      creditQty: double.tryParse(_qtCtrlr) ?? 0,
+      date: formattedDate,
+      debitQty: 0,
+      description: _descriptionCtrlr,
+      wasteTypeId: selectedTypeOfWasteId,
+    );
+    var createWaterDataModelJsonString = createWasteData.toJson();
+    Map<String, dynamic>? responseCreateWaterDataModel =
+        await wasteDataPresenter.updateWasteDataDisposed(
       createWasteData: createWaterDataModelJsonString,
       isLoading: true,
     );

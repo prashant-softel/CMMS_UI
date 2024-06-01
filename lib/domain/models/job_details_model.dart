@@ -258,21 +258,21 @@ class EquipmentCatList {
 class WorkingAreaList {
   WorkingAreaList({
     required this.workingAreaId,
-    required this.workingAreaName,
+    required this.name,
   });
 
   int workingAreaId;
-  String workingAreaName;
+  String name;
 
   factory WorkingAreaList.fromJson(Map<String, dynamic> json) =>
       WorkingAreaList(
         workingAreaId: json["workingArea_id"],
-        workingAreaName: json["workingArea_name"],
+        name: json["workingArea_name"],
       );
 
   Map<String, dynamic> toJson() => {
         "workingArea_id": workingAreaId,
-        "workingArea_name": workingAreaName,
+        "workingArea_name": name,
       };
 
   ///

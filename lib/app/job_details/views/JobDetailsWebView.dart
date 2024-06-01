@@ -369,7 +369,7 @@ class JobDetailsWebView extends GetView<JobDetailsController> {
                                                     Container(
                                                       width: Get.width * 0.3,
                                                       child: Text(
-                                                        "${"${controller.jobDetailsModel.value?.workingAreaList != null ? controller.jobDetailsModel.value?.workingAreaList?.map<String>((item) => item.workingAreaName.toString()).toList() : []}"}",
+                                                        "${"${controller.jobDetailsModel.value?.workingAreaList != null ? controller.jobDetailsModel.value?.workingAreaList?.map<String>((item) => item.name.toString()).toList() : []}"}",
                                                         maxLines: 2,
                                                       ),
                                                     ),

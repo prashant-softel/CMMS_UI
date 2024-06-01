@@ -14,19 +14,19 @@ String employeeModelToJson(List<EmployeeModel> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
 class EmployeeModel {
-  EmployeeModel({
-    this.id,
-    this.loginId,
-    this.name,
-    this.birthdate,
-    this.gender,
-    this.mobileNumber,
-    this.city,
-    this.state,
-    this.country,
-    this.pin,
-    this.responsibility,
-  });
+  EmployeeModel(
+      {this.id,
+      this.loginId,
+      this.name,
+      this.birthdate,
+      this.gender,
+      this.mobileNumber,
+      this.city,
+      this.state,
+      this.country,
+      this.pin,
+      this.responsibility,
+      this.designation});
 
   int? id;
   String? loginId;
@@ -39,6 +39,7 @@ class EmployeeModel {
   String? country;
   int? pin;
   String? responsibility;
+  String? designation;
 
   factory EmployeeModel.fromJson(Map<String, dynamic> json) => EmployeeModel(
         id: json["id"] == null ? null : json["id"],
@@ -51,12 +52,14 @@ class EmployeeModel {
         mobileNumber: json["mobileNumber"],
         city: json["city"],
         state: json["state"],
+        designation: json["designation"],
         country: json["country"]!,
         pin: json["pin"],
       );
 
   Map<String, dynamic> toJson() => {
         "id": id,
+        "designation": designation,
         "login_id": loginId ?? 0,
         "name": name,
         "birthdate": birthdate?.toIso8601String(),

@@ -3233,7 +3233,7 @@ class ConnectHelper {
     required String end_date,
   }) async {
     ResponseModel responseModel = await apiWrapper.makeRequest(
-      'MISMaster/GetWasteDataListMonthWise?fromDate=$end_date-04-01&toDate=$start_date-04-01&facility_id=$facility_id',
+      'MISMaster/GetWasteDataListMonthWise?fromDate=$start_date-04-01&toDate=$end_date-04-01&facility_id=$facility_id',
       Request.getMultiparts,
       null,
       isLoading,
@@ -3252,6 +3252,29 @@ class ConnectHelper {
   }) async {
     var responseModel = await apiWrapper.makeRequest(
       'MISMaster/CreateWasteData',
+      Request.post,
+      createWasteData,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    print('Submit Waste Orders Response:${responseModel.data}');
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> updateWasteData({
+    required String auth,
+    createWasteData,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'MISMaster/UpdateWasteData',
       Request.post,
       createWasteData,
       isLoading ?? false,
@@ -4579,7 +4602,7 @@ class ConnectHelper {
       dynamic startDate,
       dynamic endDate}) async {
     var responseModel = await apiWrapper.makeRequest(
-      'AuditPlan/GetTaskList?facility_id=${facilityId}&start_date=${endDate}&end_date=${startDate}',
+      'AuditPlan/GetTaskList?facility_id=${facilityId}&start_date=${endDate}&end_date=${startDate}&module_type_id=3',
       Request.get,
       null,
       isLoading ?? true,
@@ -5142,7 +5165,7 @@ class ConnectHelper {
         'Authorization': 'Bearer $auth',
       },
     );
-       var res = responseModel.data;
+    var res = responseModel.data;
     var parsedJson = json.decode(res);
     String message = parsedJson["message"];
     Utility.showDialog(message, '');
@@ -7613,10 +7636,11 @@ class ConnectHelper {
       bool? isLoading,
       int? facilityId,
       dynamic startDate,
-      dynamic endDate}) async {
+      dynamic endDate,
+      int? type}) async {
     var responseModel = await apiWrapper.makeRequest(
       // 'AuditPlan/GetAuditPlanList?facility_id=45&fromDate=2023-07-01&toDate=2023-10-21',
-      'AuditPlan/GetAuditPlanList?facility_id=${facilityId}&fromDate=${endDate}&toDate=${startDate}',
+      'AuditPlan/GetAuditPlanList?facility_id=${facilityId}&fromDate=${endDate}&toDate=${startDate}&module_type_id=$type',
       Request.get,
       null,
       isLoading ?? true,
@@ -9007,7 +9031,7 @@ class ConnectHelper {
 
     return responseModel;
   }
-  
+
   //Targeted Group
   //Get
   Future<ResponseModel> getTargetedGroup(
@@ -9033,7 +9057,7 @@ class ConnectHelper {
     var responseModel =
         // responseModel =
         await apiWrapper.makeRequest(
-      'Training/CreateTargetedGroup', 
+      'Training/CreateTargetedGroup',
       Request.post,
       CourseCategoryJsonString,
       isLoading ?? false,

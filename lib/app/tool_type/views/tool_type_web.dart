@@ -732,17 +732,43 @@ class ToolTypeWeb extends GetView<ToolTypeController> {
                                                                       .selectedItem
                                                                       ?.linkedToolName ??
                                                                   '';
+                                                              if (controller
+                                                                      .selectedItem!
+                                                                      .linkedToolName !=
+                                                                  '') {
+                                                                controller
+                                                                    .isTitleInvalid
+                                                                    .value = false;
+                                                              }
+
                                                               controller.assetc
                                                                   .value = controller
                                                                       .selectedItem
                                                                       ?.workTypeName ??
                                                                   '';
+                                                              if (controller
+                                                                      .selectedItem!
+                                                                      .workTypeName !=
+                                                                  '') {
+                                                                controller
+                                                                    .isworktypeListSelected
+                                                                    .value = true;
+                                                              }
                                                               controller
                                                                   .selectedassetcategory
                                                                   .value = controller
                                                                       .selectedItem
                                                                       ?.Equipment_name ??
                                                                   '';
+                                                              if (controller
+                                                                      .selectedItem!
+                                                                      .Equipment_name !=
+                                                                  '') {
+                                                                controller
+                                                                    .isselectedassetc
+                                                                    .value = true;
+                                                              }
+
                                                               controller
                                                                   .selectedEquipmentId = controller
                                                                       .selectedItem

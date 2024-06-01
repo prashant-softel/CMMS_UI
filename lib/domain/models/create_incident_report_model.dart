@@ -219,7 +219,7 @@ class DetailsOfInjuredPerson {
   DetailsOfInjuredPerson(
       {this.injured_item_id,
       this.incidents_id,
-      this.person_id,
+      this.name,
       this.person_type,
       this.other_victim,
       this.age,
@@ -235,7 +235,7 @@ class DetailsOfInjuredPerson {
   int? injured_item_id;
   int? incidents_id;
 
-  String? person_id;
+  String? name;
   int? person_type;
   String? other_victim;
   int? age;
@@ -252,7 +252,7 @@ class DetailsOfInjuredPerson {
       DetailsOfInjuredPerson(
         injured_item_id: json['injured_item_id'],
         incidents_id: json['incidents_id'],
-        person_id: json['person_id'],
+        name: json['name'],
         person_type: json['person_type'],
         other_victim: json['other_victim'],
         age: json['age'],
@@ -269,7 +269,7 @@ class DetailsOfInjuredPerson {
   Map<String, dynamic> toJson() => {
         "injured_item_id": injured_item_id,
         "incidents_id": incidents_id,
-        "person_id": person_id,
+        "name": name,
         "person_type": person_type,
         "other_victim": other_victim,
         "age": age,

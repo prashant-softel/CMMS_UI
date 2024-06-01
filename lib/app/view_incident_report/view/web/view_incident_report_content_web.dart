@@ -762,7 +762,7 @@ class ViewIncidentReportContentWeb
                                                                         cells: [
                                                                       DataCell(Text(controller
                                                                               .detailsOfInjuredPersonList?[index]
-                                                                              ?.person_id
+                                                                              ?.name
                                                                               .toString() ??
                                                                           '')),
                                                                       DataCell(Text(
@@ -2154,14 +2154,14 @@ class ViewIncidentReportContentWeb
                                                         )
                                                       : Row(
                                                           children: [
-                                                          //   controller.incidentReportDetailsModel.value
-                                                          //                   ?.status ==
-                                                          //               185 ||
-                                                                    controller
-                                                                            .incidentReportDetailsModel
-                                                                            .value
-                                                                            ?.status ==
-                                                                        184
+                                                            //   controller.incidentReportDetailsModel.value
+                                                            //                   ?.status ==
+                                                            //               185 ||
+                                                            controller
+                                                                        .incidentReportDetailsModel
+                                                                        .value
+                                                                        ?.status ==
+                                                                    184
                                                                 ? Row(
                                                                     children: [
                                                                       Container(
