@@ -167,6 +167,11 @@ class PurchaseGoodsorderListController extends GetxController {
                     ?.toString()
                     .toLowerCase()
                     .contains(keyword.toLowerCase()) ??
+                false) ||
+            (item.status_short
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
                 false))
         .toList();
     goodsOrdersList.value = filteredList;
