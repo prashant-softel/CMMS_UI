@@ -1385,7 +1385,7 @@ class DeployedTeam extends StatelessWidget {
                     label: Text("Employee Name"),
                   ),
                   DataColumn2(
-                    label: Text("Responsibility"),
+                    label: Text("Designation"),
                   ),
                   DataColumn2(
                     label: Text("Action"),
@@ -1443,41 +1443,9 @@ class DeployedTeam extends StatelessWidget {
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
                                           children: [
-                                            Container(
-                                                decoration: BoxDecoration(
-                                                  boxShadow: [
-                                                    BoxShadow(
-                                                      color: Colors.black26,
-                                                      offset: const Offset(
-                                                        5.0,
-                                                        5.0,
-                                                      ),
-                                                      blurRadius: 5.0,
-                                                      spreadRadius: 1.0,
-                                                    ),
-                                                  ],
-                                                  color: ColorValues.whiteColor,
-                                                  borderRadius:
-                                                      BorderRadius.circular(5),
-                                                ),
-                                                child: LoginCustomTextfield(
-                                                  keyboardType:
-                                                      TextInputType.text,
-                                                  // inputFormatters: <
-                                                  //     TextInputFormatter>[
-                                                  //   FilteringTextInputFormatter
-                                                  //       .digitsOnly
-                                                  // ],
-                                                  maxLine: 1,
-                                                  textController:
-                                                      new TextEditingController(
-                                                          text: mapData[
-                                                                  "value"] ??
-                                                              ''),
-                                                  onChanged: (txt) {
-                                                    mapData["value"] = txt;
-                                                  },
-                                                )),
+                                            Text(
+                                              "${controller.deployedEmployeeMapperData[record[0]['value']]?.designation ?? "Select Designation"}",
+                                            ),
                                           ],
                                         ),
                                       )
