@@ -831,7 +831,7 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                 backgroundColor: ColorValues.cancelColor,
                                 text: 'Cancel',
                                 onPressed: () {
-                                  Get.back();
+                                  Get.toNamed(Routes.stockManagementGoodsOrdersScreen);
                                 },
                               ),
                             ),

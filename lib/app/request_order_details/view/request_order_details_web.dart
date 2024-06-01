@@ -268,6 +268,7 @@ class GoodsOrdersReqDetailsWeb extends GetView<GoodsOrdersReqDetailController> {
                             backgroundColor: ColorValues.appRedColor,
                             text: 'cancel',
                             onPressed: () {
+                              Get.toNamed(Routes.purchaseGoodsorder);
                               // controller.AddInventory();
                             },
                           ),
