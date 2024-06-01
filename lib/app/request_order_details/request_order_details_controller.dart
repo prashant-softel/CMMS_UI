@@ -75,16 +75,30 @@ class GoodsOrdersReqDetailController extends GetxController {
       var row = rowItem[i];
       for (var mapData in row) {
         if ((mapData['key'] == 'Drop_down' &&
-                mapData['value'] == 'Please Select') ||
+                (mapData['value'] == null ||
+                    mapData['value'] == 'Please Select')) ||
             (mapData['key'] == 'Order' &&
                 (mapData['value'] == null || mapData['value']!.isEmpty)) ||
             (mapData['key'] == 'Cost' &&
-                (mapData['value'] == null || mapData['value']!.isEmpty)) ||
-            (mapData['key'] == 'Comment' &&
                 (mapData['value'] == null || mapData['value']!.isEmpty))) {
           errorState['$i-${mapData['key']}'] = true;
           isValid = false;
         }
+      }
+    }
+    update();
+    return isValid;
+  }
+
+  bool validateSpecificField(int index) {
+    bool isValid = true;
+    errorState.removeWhere((key, value) => key == '$index-Drop_down');
+    var row = rowItem[index];
+    for (var mapData in row) {
+      if ((mapData['key'] == 'Drop_down' &&
+          (mapData['value'] == null || mapData['value'] == 'Please Select'))) {
+        // errorState['$index-${mapData['key']}'] = true;
+        isValid = false;
       }
     }
     update();
