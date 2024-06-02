@@ -163,6 +163,7 @@ class AddAssetMasterWeb extends GetView<AddAssetMasterController> {
                                                   color: Colors.black),
                                             ),
                                             controller: controller.matNameCtrlr,
+                                            
                                             focusNode: controller.nameFocus,
                                             scrollController:
                                                 controller.nameScroll,
@@ -526,6 +527,7 @@ class AddAssetMasterWeb extends GetView<AddAssetMasterController> {
                                                   color: Colors.black),
                                             ),
                                             controller: controller.mdmcodeCtrlr,
+                                            
                                             focusNode: controller.mdmFocus,
                                             scrollController:
                                                 controller.mdmScroll,

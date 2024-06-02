@@ -67,7 +67,7 @@ class AssetMasterWeb extends GetView<AssetMasterController> {
                           style: Styles.greyLight14),
                     ),
                     Text(" / ASSET MASTER LIST", style: Styles.greyLight14),
-                    // Text(" / CREATE CHECKLIST NUMBER",
+                    // Text(" / ST NUMBER",
                     //     style: Styles.greyMediumLight12)
                   ],
                 ),

@@ -167,6 +167,26 @@ class CreateAuditWeb extends GetView<CreateAuditController> {
                                             child: LoginCustomTextfield(
                                               textController:
                                                   controller.planTitleTc,
+
+                                                   //validate
+                                                    errorController: controller
+                                                            .isTitleInvalid
+                                                            .value
+                                                        ? "Required field"
+                                                        : null,
+                                                    onChanged: (value) {
+                                                      if (value.trim().length >
+                                                          0) {
+                                                        controller
+                                                            .isTitleInvalid
+                                                            .value = false;
+                                                      } else {
+                                                        controller
+                                                            .isTitleInvalid
+                                                            .value = true;
+                                                      }
+                                                    },
+
                                               inputFormatters: [
                                                 FilteringTextInputFormatter
                                                     .deny(
@@ -312,6 +332,24 @@ class CreateAuditWeb extends GetView<CreateAuditController> {
                                       },
                                       textController:
                                           controller.startDateDateTc,
+                                           //validate
+                                                    errorController: controller
+                                                            .isScheduleDateInvalid
+                                                            .value
+                                                        ? "Required field"
+                                                        : null,
+                                                    onChanged: (value) {
+                                                      if (value.trim().length >
+                                                          0) {
+                                                        controller
+                                                            .isScheduleDateInvalid
+                                                            .value = false;
+                                                      } else {
+                                                        controller
+                                                            .isScheduleDateInvalid
+                                                            .value = true;
+                                                      }
+                                                    },
                                     ),
                                     Spacer(),
                                   ],
@@ -354,6 +392,24 @@ class CreateAuditWeb extends GetView<CreateAuditController> {
                                         maxLine: 3,
                                         textController:
                                             controller.descriptionTc,
+                                             //validate
+                                                    errorController: controller
+                                                            .isDescriptionInvalid
+                                                            .value
+                                                        ? "Required field"
+                                                        : null,
+                                                    onChanged: (value) {
+                                                      if (value.trim().length >
+                                                          0) {
+                                                        controller
+                                                            .isDescriptionInvalid
+                                                            .value = false;
+                                                      } else {
+                                                        controller
+                                                            .isDescriptionInvalid
+                                                            .value = true;
+                                                      }
+                                                    },
                                       ),
                                     ),
                                     Spacer(),
@@ -614,6 +670,9 @@ class CreateAuditWeb extends GetView<CreateAuditController> {
                                     DateFormat('yyyy-MM-dd').format(p0.value);
                                 controller.openStartDatePicker =
                                     !controller.openStartDatePicker;
+                                    controller.isScheduleDateInvalid.value=false;
+
+
                                 controller.update(['stock_Mangement']);
                               },
                             ),

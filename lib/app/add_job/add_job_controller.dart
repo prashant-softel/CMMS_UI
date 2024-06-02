@@ -88,6 +88,7 @@ class AddJobController extends GetxController {
   int facilityId = 0;
   int blockId = 72;
 
+ Rx<bool> isBreakdownInvalid = false.obs;
   Rx<bool> isFormInvalid = false.obs;
   Rx<bool> isJobTitleInvalid = false.obs;
   Rx<bool> isJobDescriptionInvalid = false.obs;
@@ -277,6 +278,12 @@ class AddJobController extends GetxController {
     if (jobDescriptionCtrlr.text.trim().length < 3) {
       isJobDescriptionInvalid.value = true;
     }
+        if (breakdownTimeCtrlr.text.trim().length < 3) {
+      isBreakdownInvalid.value = true;
+    }
+
+
+    
 
     if (isFacilitySelected.value == false ||
         isBlockSelected.value == false ||
