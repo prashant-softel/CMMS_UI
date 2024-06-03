@@ -27,7 +27,7 @@ class PreventiveMaintenanceExecutionContentWeb
   PreventiveMaintenanceExecutionContentWeb({super.key});
 
   ///
-  var controller = Get.find<PreventiveMaintenanceExecutionController>();
+  // var controller = Get.find<PreventiveMaintenanceExecutionController>();
   @override
   Widget build(BuildContext context) {
     Widget _rowItem(int? defaultValue, {required Function(bool) onCheck}) {
@@ -327,17 +327,17 @@ class PreventiveMaintenanceExecutionContentWeb
                                                                           "Clone",
                                                                       onPressed:
                                                                           () {
-                                                                        controller.selectedItem = controller.scheduleCheckPoints.firstWhere((element) =>
-                                                                            "${element.name}" ==
-                                                                            record[0]['value'].toString());
+                                                                        controller.selectedItem = controller.scheduleCheckPoints.firstWhere(
+                                                                            (element) =>
+                                                                                "${element.name}" ==
+                                                                                record[0]['value'].toString(),
+                                                                            orElse: null);
 
-                                                                        var select = controller
-                                                                            .scheduleCheckPoints
-                                                                            .firstWhere(
-                                                                          (element) =>
-                                                                              element.name ==
-                                                                              controller.selectedasset.value,
-                                                                        );
+                                                                        var select = controller.scheduleCheckPoints.firstWhere(
+                                                                            (element) =>
+                                                                                element.name ==
+                                                                                controller.selectedasset.value,
+                                                                            orElse: null);
                                                                         select.schedule_link_job!.isNotEmpty
                                                                             ? controller.cloneAlertDialog()
                                                                             : controller.cloneDialog(controller.selectedasset.value);
@@ -619,11 +619,13 @@ class PreventiveMaintenanceExecutionContentWeb
                                           text: "Close",
                                           onPressed: () {
                                             controller.listMrsByTaskId!.value
-                                                            .firstWhere((element) =>
-                                                                element?.jobCardId !=
-                                                                    0 ||
-                                                                element?.pmId !=
-                                                                    0)
+                                                            .firstWhereOrNull(
+                                                              (element) =>
+                                                                  element?.jobCardId !=
+                                                                      0 ||
+                                                                  element?.pmId !=
+                                                                      0,
+                                                            )
                                                             ?.mrs_return_ID ==
                                                         0 &&
                                                     controller.allTrue.value ==
@@ -648,10 +650,12 @@ class PreventiveMaintenanceExecutionContentWeb
                                     ),
                                     Dimens.boxWidth10,
                                     controller.listMrsByTaskId!.value
-                                                    .firstWhere((element) =>
-                                                        element?.jobCardId !=
-                                                            0 ||
-                                                        element?.pmId != 0)
+                                                    .firstWhereOrNull(
+                                                      (element) =>
+                                                          element?.jobCardId !=
+                                                              0 ||
+                                                          element?.pmId != 0,
+                                                    )
                                                     ?.mrs_return_ID ==
                                                 0 &&
                                             controller.allTrue.value == false
@@ -699,7 +703,8 @@ class PreventiveMaintenanceExecutionContentWeb
                                                                   (element) =>
                                                                       element
                                                                           ?.mrsId !=
-                                                                      0)!
+                                                                      0,
+                                                                  orElse: null)!
                                                               .mrsId ??
                                                           0
                                                     });
