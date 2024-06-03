@@ -208,6 +208,7 @@ class AddAssetMasterController extends GetxController {
             int Index = unitMeasurementList.indexWhere((x) => x?.name == value);
           selectedUnitOfMeasurementId = unitMeasurementList[Index]?.id ?? 0;
           selectedUnitOfMeasurement.value = value;
+          isSelectedUnitOfMeasurement.value=true;
           } else {
             selectedUnitOfMeasurementId=0;
           }
@@ -219,6 +220,7 @@ class AddAssetMasterController extends GetxController {
             int Index = materialCategoryList.indexWhere((x) => x?.name == value);
           selectedMaterialCategoryId = unitMeasurementList[Index]?.id ?? 0;
           selectedMaterialCategory.value = value;
+          isSelectedMaterialCategory.value=true;
           } else {
             selectedMaterialCategoryId=0;
           }
@@ -230,6 +232,7 @@ class AddAssetMasterController extends GetxController {
             int Index = acdclist.indexWhere((x) => x?.name == value);
           selectedACDCId = unitMeasurementList[Index]?.id ?? 0;
           selectedACDC.value = value;
+          isSelectedACDC.value=true;
           } else {
             selectedACDCId=0;
           }
@@ -241,6 +244,7 @@ class AddAssetMasterController extends GetxController {
             int Index = materialList.indexWhere((x) => x?.name == value);
           selectedMaterialTypeId = unitMeasurementList[Index]?.id ?? 0;
           selectedMaterialType.value = value;
+          isSelectedMaterialType.value= true;
           } else {
             selectedMaterialTypeId=0;
           }
@@ -252,6 +256,7 @@ class AddAssetMasterController extends GetxController {
             int Index = acdclist.indexWhere((x) => x?.name == value);
           selectedACDCId = acdclist[Index]?.id ?? 0;
           selectedACDC.value = value;
+          isSelectedACDC.value=true;
           } else {
             selectedACDCId=0;
           }
@@ -306,6 +311,10 @@ class AddAssetMasterController extends GetxController {
     //   Fluttertoast.showToast(
     //       msg: "Please enter required field", fontSize: 16.0);
     // } else {
+      checkForm();
+      if(isFormInvalid.value){
+        return true;
+      }
     String _name = matNameCtrlr.text.trim();
     String _mdmcode = mdmcodeCtrlr.text.trim();
     String _reorderQty = reorderQty.text.trim();
@@ -346,6 +355,8 @@ class AddAssetMasterController extends GetxController {
   }
 
   Future<void> issuccessCreateAssetlist() async {
+
+    
     isSuccess.toggle();
 
     // isToggleOn.value = false;
@@ -355,16 +366,48 @@ class AddAssetMasterController extends GetxController {
   void checkForm() {
     if (selectedMaterialType.value == '') {
       isSelectedMaterialType.value = false;
+      isFormInvalid.value = true;
     }
     if (selectedMaterialCategory.value == '') {
       isSelectedMaterialCategory.value = false;
+      isFormInvalid.value = true;
     }
     if (selectedUnitOfMeasurement.value == '') {
       isSelectedUnitOfMeasurement.value = false;
+      isFormInvalid.value = true;
     }
     if (selectedACDC.value == '') {
       isSelectedACDC.value = false;
+      isFormInvalid.value = true;
     }
+    if(matNameCtrlr.text.trim().length < 3){
+      isNameInvalid.value=true;
+      isFormInvalid.value = true;
+
+ if(reqQty.text.trim().length < 3){
+      isRequiredInvalid.value=true;
+      isFormInvalid.value = true;
+
+    }
+     if(mdmcodeCtrlr.text.trim().length < 3){
+      isCodeInvalid.value=true;
+      isFormInvalid.value = true;
+
+    }
+      if(reorderQty.text.trim().length < 3){
+      isReorderInvalid.value=true;
+      isFormInvalid.value = true;
+
+    }
+       if(descCtrlr.text.trim().length < 3){
+      isDescriptionInvalid.value=true;
+      isFormInvalid.value = true;
+
+    }
+
+
+    }
+    
 
     if (isNameInvalid.value == true ||
         isSelectedMaterialType.value == false ||

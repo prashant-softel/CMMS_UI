@@ -2847,8 +2847,8 @@ class ConnectHelper {
   }) async {
     final body = jsonEncode(jobCard);
     var responseModel = await apiWrapper.makeRequest(
-      'JC/StartJC?jc_id=$jcCard',
-      Request.put,
+      'JC/StartJC',
+      Request.post,
       body,
       isLoading ?? false,
       {

@@ -582,10 +582,36 @@ class _AddJobContentWebState extends State<AddJobContentWeb> {
                                                             color: Colors
                                                                 .transparent),
                                                       ),
+                                            errorBorder: controller
+                                                    .isBreakdownInvalid.value
+                                                ? OutlineInputBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(5),
+                                                    borderSide: BorderSide(
+                                                      color: ColorValues
+                                                          .redColorDark,
                                                     ),
-                                                    onChanged: (value) {},
+                                                  )
+                                                : null,
+                                            errorText: controller
+                                                    .isBreakdownInvalid.value
+                                                ? "Required field"
+                                                : null,
+                                          ),
+                                          onChanged: (value) {
+                                            if (value.trim().length >= 1) {
+                                              controller.isBreakdownInvalid
+                                                  .value = false;
+                                            } else {
+                                              controller.isBreakdownInvalid
+                                                  .value = true;
+                                            }
+                                          },
+                                              
+
+                                                    ),
                                                   ),
-                                                ),
+                                                // ),
 
                                                 // CustomTextFieldForStock(
                                                 //   width: MediaQuery.of(context)

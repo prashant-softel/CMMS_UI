@@ -1,3 +1,4 @@
+import 'package:cmms/domain/models/get_asset_data_list_model.dart';
 import 'package:cmms/domain/models/get_plant_Stock_list.dart';
 import 'package:cmms/domain/repositories/repository.dart';
 
@@ -21,6 +22,16 @@ class CreateMrsReturnUsecase {
   }) async =>
       await repository.createReturnMrs(
         createReturnMrsJsonString,
+        isLoading,
+      );
+  Future<List<GetAssetDataModel?>?> getAssetList({
+    String? auth,
+    int? facilityId,
+    bool? isLoading,
+  }) async =>
+      await repository.getAssetList(
+        auth,
+        facilityId,
         isLoading,
       );
   void saveValue({String? whereUsedTypeId}) async =>

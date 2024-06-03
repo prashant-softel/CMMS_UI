@@ -34,6 +34,14 @@ class CreateAuditController extends GetxController {
       <PreventiveCheckListModel>[].obs;
   Rx<String> selectedchecklist = ''.obs;
   Rx<bool> isSelectedchecklist = true.obs;
+ Rx<bool> isFormInvalid = false.obs;
+  Rx<bool> isTitleInvalid = false.obs;
+   Rx<bool> isDescriptionInvalid = false.obs;
+
+  
+  Rx<bool> isScheduleDateInvalid = false.obs;
+
+  
   Rx<String> selectedchecklistId = "".obs;
   StreamSubscription<int>? facilityIdStreamSubscription;
   int facilityId = 0;
@@ -191,6 +199,7 @@ class CreateAuditController extends GetxController {
                 frequencyList.indexWhere((x) => x?.name == value);
             selectedfrequencyId = frequencyList[frequencyIndex]?.id ?? 0;
             selectedfrequency.value = value;
+            isSelectedfrequency.value=true;
             getPreventiveCheckList(facilityId, type.value, selectedfrequencyId);
           } else {
             selectedfrequencyId = 0;
@@ -203,6 +212,7 @@ class CreateAuditController extends GetxController {
             int checklistIndex = checkList.indexWhere((x) => x?.name == value);
             selectedchecklistId.value =
                 checkList[checklistIndex]?.id.toString() ?? "";
+                isSelectedchecklist.value = true;
           } else {
             //  selectedchecklistId=0;
           }
@@ -280,6 +290,11 @@ class CreateAuditController extends GetxController {
     //   Fluttertoast.showToast(
     //       msg: "Please enter required field", fontSize: 16.0);
     // } else {
+
+    checkFormAduit();
+    if(isFormInvalid.value){
+      return true;
+    }
     String _planTitle = planTitleTc.text.trim();
     String _description = descriptionTc.text.trim();
     String _startDate = startDateDateTc.text.trim();
@@ -317,6 +332,11 @@ class CreateAuditController extends GetxController {
     //   Fluttertoast.showToast(
     //       msg: "Please enter required field", fontSize: 16.0);
     // } else {
+
+     checkFormAduit();
+    if(isFormInvalid.value){
+      return ;
+    }
     String _planTitle = planTitleTc.text.trim();
     String _description = descriptionTc.text.trim();
     String _startDate = startDateDateTc.text.trim();
@@ -347,5 +367,35 @@ class CreateAuditController extends GetxController {
         Routes.auditListScreen,
       );
     }
+  }
+  void checkFormAduit(){
+    
+      if(planTitleTc.text.trim().length==0){
+      isTitleInvalid.value=true;
+      isFormInvalid.value = true;
+    }
+    if(selectedfrequency==''){
+      isSelectedfrequency.value=false;
+      isFormInvalid.value=true;
+    }
+    if(selectedchecklist==''){
+      isSelectedchecklist.value=false;
+      isFormInvalid.value=true;
+
+    }
+       if(startDateDateTc.text.trim().length==0){
+      isScheduleDateInvalid.value=true;
+      isFormInvalid.value = true;
+    }
+     if(descriptionTc.text.trim().length==0){
+      isDescriptionInvalid.value=true;
+      isFormInvalid.value = true;
+    }
+     if(selectedAssignedTo==''){
+      isAssignedToSelected.value=false;
+      isFormInvalid.value=true;
+
+    }
+ 
   }
 }

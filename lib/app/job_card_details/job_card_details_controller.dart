@@ -201,6 +201,7 @@ class JobCardDetailsController extends GetxController {
       // jobCardId.value = Get.arguments["JcId"];
 
       await setJcId();
+      await getEmployeeList();
       if (jobCardId.value != 0) {
         jobCardList.value = await jobCardDetailsPresenter.getJobCardDetails(
               jobCardId: jobCardId.value,
@@ -227,6 +228,8 @@ class JobCardDetailsController extends GetxController {
               "value": "",
             }
           ]);
+          deployedEmployeeMapperData[element!.name ?? ""] = employeeList
+              .firstWhere((e) => e!.name == element.name, orElse: null);
         });
       }
       // await getHistory(facilityId);
@@ -234,7 +237,7 @@ class JobCardDetailsController extends GetxController {
       createJobDetailsTableData();
       createPermitDetailsTableData();
       //  createJcDetailsTableData();
-      await getEmployeeList();
+
       //  getPermitDetails();
 
       responsibilityCtrlrs.add(TextEditingController());
@@ -612,8 +615,8 @@ class JobCardDetailsController extends GetxController {
     });
 
     var jobCard = {
-      "uploadfile_ids": fileIds,
-      "LstCMJCEmpList": employees,
+      "jc_id": jcCard,
+      "request": {"uploadfile_ids": fileIds, "LstCMJCEmpList": employees}
     };
 
     print("filesids: ${fileIds}");

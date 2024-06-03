@@ -33,13 +33,19 @@ class ModuleCleaningPlanningController extends GetxController {
   RxList<EmployeeModel?> assignedToList = <EmployeeModel>[].obs;
   RxList<Schedules?> schedules = <Schedules>[].obs;
   Rx<DateTime> selectedStartTime = DateTime.now().obs;
+  Rx<bool> isTitleInvalid = false.obs;
+  Rx<bool> isEstimatedInvalid = false.obs;
+   Rx<bool> isstartdateInvalid = false.obs;
 
+  
   Rx<bool> isAssignedToSelected = true.obs;
   Rx<String> selectedAssignedTo = ''.obs;
   int selectedAssignedToId = 0;
   bool openStartDatePicker = false;
   var startDateTc = TextEditingController();
   // var mcTitelCtrlr = TextEditingController();
+
+   Rx<bool> isFormInvalid = false.obs;
   TextEditingController mcTitelCtrlr = TextEditingController();
 
   var durationInDayCtrlr = TextEditingController();
@@ -340,6 +346,7 @@ class ModuleCleaningPlanningController extends GetxController {
               frequencyList.indexWhere((x) => x?.name == value);
           selectedfrequencyId = frequencyList[frequencyIndex]?.id ?? 0;
           selectedfrequency.value = value;
+           isSelectedfrequency.value=true;
           }else{
             selectedfrequencyId=0;
           }
@@ -415,5 +422,28 @@ class ModuleCleaningPlanningController extends GetxController {
     }
 
     return newTime;
+  }
+  void checkFromModule(){
+    if(mcTitelCtrlr.text.trim().length==0){
+      isTitleInvalid.value=true;
+      isFormInvalid.value = true;
+    }
+ if (selectedfrequency == '') {
+      isSelectedfrequency.value = false;
+      isFormInvalid.value = true;
+    }
+      if(durationInDayCtrlr.text.trim().length==0){
+      isEstimatedInvalid.value=true;
+      isFormInvalid.value = true;
+    }
+  
+     if (startDateTimeCtrlrBuffer.text.trim().length == 0) {
+      isstartdateInvalid.value= true;
+       isFormInvalid = false.obs;;
+    }
+     if (validTillTimeCtrlr.text.trim().length == 0) {
+      isstartdateInvalid.value = true;
+      isFormInvalid = false.obs;;
+    }
   }
 }

@@ -4,6 +4,7 @@ import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_textField.dart';
+import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -250,27 +251,67 @@ class CreateMrsContentWeb extends GetView<CreateMrsController> {
                           // Text(jsonEncode(controller.dropdownMapperData)),
                           Container(
                             height: 300,
-                            child: ScrollableTableView(
+                            margin: EdgeInsets.only(left: 10, right: 10),
+                            child: DataTable2(
+                              columnSpacing: 10,
+                              border: TableBorder.all(
+                                  color: Color.fromARGB(255, 206, 229, 234)),
                               columns: [
-                                "Material Name",
-                                "Material Type",
-                                "Image",
-                                "Available Qty",
-                                "Requested Qty",
-                                "Action"
-                              ].map((column) {
-                                return TableViewColumn(
-                                  label: column,
-                                  minWidth: Get.width * 0.16,
-                                  //  height: Get.height / 2,
-                                );
-                              }).toList(),
+                                DataColumn2(
+                                    // fixedWidth: 400,
+                                    label: Text(
+                                  "Material Name",
+                                  style: TextStyle(
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.bold),
+                                )),
+                                DataColumn2(
+                                    fixedWidth: 200,
+                                    label: Text(
+                                      "Material Type",
+                                      style: TextStyle(
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.bold),
+                                    )),
+                                // DataColumn2(
+                                //     fixedWidth: 250,
+                                //     label: Text(
+                                //       "Image",
+                                //       style: TextStyle(
+                                //           fontSize: 15,
+                                //           fontWeight: FontWeight.bold),
+                                //     )),
+                                DataColumn2(
+                                    fixedWidth: 200,
+                                    label: Text(
+                                      "Available Qty",
+                                      style: TextStyle(
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.bold),
+                                    )),
+                                DataColumn2(
+                                    fixedWidth: 200,
+                                    label: Text(
+                                      "Requested Qty",
+                                      style: TextStyle(
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.bold),
+                                    )),
+                                DataColumn2(
+                                    fixedWidth: 100,
+                                    label: Text(
+                                      "Action",
+                                      style: TextStyle(
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.bold),
+                                    )),
+                              ],
                               rows: controller.rowItem.value.map((record) {
-                                return TableViewRow(
-                                  height: 50,
+                                return DataRow(
+                                  // height: 50,
                                   cells: record.map((mapData) {
-                                    return TableViewCell(
-                                      child: (mapData['key'] == "Drop_down")
+                                    return DataCell(
+                                      (mapData['key'] == "Drop_down")
                                           ? Padding(
                                               padding:
                                                   const EdgeInsets.all(5.0),
