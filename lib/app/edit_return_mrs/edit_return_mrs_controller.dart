@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:cmms/app/edit_return_mrs/edit_return_mrs_presenter.dart';
 import 'package:cmms/domain/models/create_return_mrs_model.dart';
+import 'package:cmms/domain/models/get_plant_Stock_list.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -19,16 +20,21 @@ class EditMrsReturnController extends GetxController {
   final HomeController homecontroller = Get.find();
   StreamSubscription<int>? facilityIdStreamSubscription;
   int facilityId = 0;
-  RxList<CmmrsItemsModel?> assetItemList = <CmmrsItemsModel?>[].obs;
+  RxList<PlantStockListModel?> assetItemList = <PlantStockListModel?>[].obs;
+  RxList<StockDetails?> StockDetailsList = <StockDetails?>[].obs;
+  var allDropdownsSelected = true.obs;
 
-  Rx<List<List<Map<String, String>>>> rowItem =
-      Rx<List<List<Map<String, String>>>>([]);
-  Map<String, CmmrsItemsModel> dropdownMapperData = {};
+  // RxList<CmmrsItemsModel?> assetItemList = <CmmrsItemsModel?>[].obs;
+  RxList<List<Map<String, String>>> rowItem = <List<Map<String, String>>>[].obs;
+
+  RxMap<dynamic, dynamic> dropdownMapperData = {}.obs;
   var activityCtrlr = TextEditingController();
   var remarkCtrlr = TextEditingController();
   var whereUsedCtrlr = TextEditingController();
   var setTemlateCtrlr = TextEditingController();
-
+  RxList<List<Map<String, String>>> rowFaultyItem =
+      <List<Map<String, String>>>[].obs;
+  RxMap<dynamic, dynamic> dropdownFaultyMapperData = {}.obs;
   int mrsId = 0;
   var isSetTemplate = false.obs;
 
@@ -40,16 +46,10 @@ class EditMrsReturnController extends GetxController {
   @override
   void onInit() async {
     mrsId = Get.arguments;
-    if (mrsId != 0) {
-      await getReturnMrsDetails(
-          mrsId: mrsId, isloading: true, facilityId: facilityId);
-    }
+
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
       facilityId = event;
       Future.delayed(Duration(seconds: 1), () {
-        getCmmsItemList(
-          facilityId,
-        );
         getReturnMrsDetails(
             mrsId: mrsId, isloading: true, facilityId: facilityId);
       });
@@ -64,13 +64,15 @@ class EditMrsReturnController extends GetxController {
             mrsId: mrsId, isLoading: isloading, facilityId: facilityId);
 
     if (_returnMrsrsDetailsModel != null) {
+      getCmmsItemList(
+        facilityId,
+      );
       rowItem.value = [];
       _returnMrsrsDetailsModel.cmmrsItems?.forEach((element) {
         rowItem.value.add([
           {"key": "Drop_down", "value": '${element.asset_name}'},
           {'key': "Issue_Qty", "value": '${element.issued_qty}'},
           {'key': "Return_Qty", "value": '${element.returned_qty}'},
-          {'key': "is_faulty", "value": '0'},
           {'key': "Remark", "value": 'remark'},
         ]);
         // dropdownMapperData = element.approval_required;
@@ -79,7 +81,7 @@ class EditMrsReturnController extends GetxController {
       activityCtrlr.text = _returnMrsrsDetailsModel.activity ?? "";
       // activityCtrlr.text = _mrsDetailsModel. ?? "";
       remarkCtrlr.text = _returnMrsrsDetailsModel.remarks ?? "";
-      whereUsedCtrlr.text = _returnMrsrsDetailsModel.whereUsedType.toString();
+      whereUsedCtrlr.text = _returnMrsrsDetailsModel.whereUsedTypeId.toString();
     }
     // print({"mrsdetailss", returnMrsDetailsModel.value});
   }
@@ -90,7 +92,7 @@ class EditMrsReturnController extends GetxController {
     final _assetList = await editmrsReturnPresenter.getCmmsItemList(
         facilityId: facilityId, userId: userId);
     if (_assetList != null) {
-      assetItemList.value = _assetList.cmmrsItems ?? [];
+      //   assetItemList.value = _assetList.cmmrsItems ?? [];
       //
 
       update(["AssetList"]);
@@ -104,8 +106,20 @@ class EditMrsReturnController extends GetxController {
       {"key": "Drop_down", "value": 'Please Select'},
       {'key': "Issue_Qty", "value": ''},
       {'key': "Return_Qty", "value": ''},
-      {'key': "is_faulty", "value": ''},
       {'key': "Remark", "value": ''},
+    ]);
+  }
+
+  void addRowFaultyItem() {
+    rowFaultyItem.add([
+      {"key": "Drop_down", "value": 'Please Select'},
+      {'key': "code", "value": ''},
+      {'key': "Material_Type", "value": ''},
+      {'key': "Material_Category", "value": ''},
+      {'key': "Sr_no", "value": ''},
+      {'key': "Return_Qty", "value": ''},
+      {'key': "Remark", "value": ''},
+      {'key': "Action ", "value": ''},
     ]);
   }
 
@@ -119,17 +133,29 @@ class EditMrsReturnController extends GetxController {
         DateFormat('yyyy-MM-dd').format(requestd_date.value);
 
     List<CmmsItem> items = [];
+    List<FaultyItemsCmms> faultyItems = [];
     rowItem.value.forEach((element) {
       CmmsItem item = CmmsItem(
-        asset_item_ID: dropdownMapperData[element[0]["value"]]?.id,
-        issued_qty: dropdownMapperData[element[0]["value"]]?.quantity ?? 0,
-        returned_qty: int.tryParse(element[2]["value"] ?? '0'),
-        requested_qty: 0,
-        approval_required: 0,
-        is_faulty: 0, // int.tryParse(element[3]["value"] ?? '0'),
-        return_remarks: element[4]["value"] ?? '0',
+        mrs_item_ID: dropdownMapperData.value[element[0]["value"]]?.id,
+        returned_qty: dropdownMapperData.value[element[0]["value"]].issued_qty -
+            dropdownMapperData.value[element[0]["value"]]
+                .consumed_qty, //double.tryParse(element[3]["value"] ?? '0'),
+
+        return_remarks: element[7]["value"] ?? '0',
       );
       items.add(item);
+    });
+    rowFaultyItem.forEach((element) {
+      FaultyItemsCmms item = FaultyItemsCmms(
+        assetMasterItemID:
+            dropdownFaultyMapperData.value[element[0]["value"]]?.id,
+        mrsItemID: 0,
+        // dropdownFaultyMapperData.value[element[0]["value"]].issued_qty,
+        sr_no: element[4]["value"] ?? '0',
+        returned_qty: int.tryParse(element[5]["value"] ?? '0'),
+        return_remarks: element[6]["value"] ?? '0',
+      );
+      faultyItems.add(item);
     });
     CreateReturnMrsModel createMrs = CreateReturnMrsModel(
         ID: mrsId,
@@ -142,26 +168,6 @@ class EditMrsReturnController extends GetxController {
         remarks: _remark,
         cmmrsItems: items);
     var createReturnMrsJsonString = createMrs.toJson();
-    // var createReturnMrsJsonString = {
-    //   "ID": 0,
-    //   "facility_ID": 45,
-    //   "setAsTemplate": "T140",
-    //   "whereUsedType": 1,
-    //   "whereUsedTypeId": 9999,
-    //   "remarks": "Testing on live",
-    //   "activity": "return activity",
-    //   "cmmrsItems": [
-    //     {
-    //       "asset_item_ID": 12,
-    //       "approval_required": 1,
-    //       "return_remarks": "Test remarks",
-    //       "requested_qty": 99,
-    //       "issued_qty": 65,
-    //       "returned_qty": 10,
-    //       "is_faulty": 0
-    //     }
-    //   ]
-    // };
 
     print({"createReturnMrsJsonString", createReturnMrsJsonString});
     Map<String, dynamic>? responseCreateReturnMrs =

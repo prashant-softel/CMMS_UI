@@ -5,6 +5,7 @@ import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/custom_textField.dart';
+import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
@@ -124,7 +125,7 @@ class EditMrsReturnContentWeb extends GetView<EditMrsReturnController> {
                                   textController: controller.activityCtrlr,
                                 )),
                             Spacer(),
-                            Text('Where Used: '),
+                            Text('Task ID: '),
                             Dimens.boxWidth10,
                             Container(
                                 decoration: BoxDecoration(
@@ -153,7 +154,8 @@ class EditMrsReturnContentWeb extends GetView<EditMrsReturnController> {
                                 ),
                                 child: LoginCustomTextfield(
                                   // enabled: false,
-                                  width: (MediaQuery.of(context).size.width * .2),
+                                  width:
+                                      (MediaQuery.of(context).size.width * .2),
                                   textController: controller.whereUsedCtrlr,
                                 )),
                           ],
@@ -189,10 +191,33 @@ class EditMrsReturnContentWeb extends GetView<EditMrsReturnController> {
                                   ),
                                   Spacer(),
                                   GestureDetector(
-                                      onTap: () {
-                                        controller.addRowItem();
-                                      },
-                                      child: Icon(Icons.add)),
+                                    onTap: () {
+                                      controller.addRowItem();
+                                    },
+                                    child: Container(
+                                      height: 25,
+                                      width: 70,
+                                      decoration: BoxDecoration(
+                                        color: ColorValues.addNewColor,
+                                        border: Border.all(
+                                          color: ColorValues
+                                              .lightGreyColorWithOpacity35,
+                                          width: 1,
+                                        ),
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(5)),
+                                      ),
+                                      child: Center(
+                                        child: Text(
+                                          " + Add ",
+                                          style: TextStyle(
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.w100,
+                                              color: Colors.white),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
                                 ],
                               ),
                             ),
@@ -203,177 +228,276 @@ class EditMrsReturnContentWeb extends GetView<EditMrsReturnController> {
                             //       }))),
                             // Text(jsonEncode(controller.dropdownMapperData)),
                             Container(
-                              height: 300,
-                              child: ScrollableTableView(
+                              // height: 300,
+                              height:
+                                  ((controller.StockDetailsList?.length ?? 0) *
+                                          80) +
+                                      60,
+                              child: DataTable2(
+                                minWidth: 1600,
+                                border: TableBorder.all(
+                                    color: Color.fromARGB(255, 206, 229, 234)),
                                 columns: [
-                                  "Equipment Name",
-                                  "Issue Qty",
-                                  "Return Qty",
-                                  "Is Faulty?",
-                                  "Remark",
-                                ].map((column) {
-                                  return TableViewColumn(
-                                    label: column,
-                                    minWidth: Get.width * 0.18,
-                                    //  height: Get.height / 2,
-                                  );
-                                }).toList(),
+                                  DataColumn2(
+                                      // fixedWidth: 250,
+                                      label: Text(
+                                    "Material Name",
+                                    style: TextStyle(
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.bold),
+                                  )),
+                                  DataColumn2(
+                                      fixedWidth: 100,
+                                      label: Text(
+                                        "Sr No",
+                                        style: TextStyle(
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.bold),
+                                      )),
+                                  DataColumn2(
+                                      fixedWidth: 150,
+                                      label: Text(
+                                        "Code",
+                                        style: TextStyle(
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.bold),
+                                      )),
+                                  DataColumn2(
+                                      fixedWidth: 170,
+                                      label: Text(
+                                        "Material Type",
+                                        style: TextStyle(
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.bold),
+                                      )),
+                                  DataColumn2(
+                                      fixedWidth: 130,
+                                      label: Text(
+                                        "Issue Qty",
+                                        style: TextStyle(
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.bold),
+                                      )),
+                                  DataColumn2(
+                                      fixedWidth: 130,
+                                      label: Text(
+                                        "Used Qty",
+                                        style: TextStyle(
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.bold),
+                                      )),
+                                  DataColumn2(
+                                      fixedWidth: 150,
+                                      label: Text(
+                                        "Return Qty",
+                                        style: TextStyle(
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.bold),
+                                      )),
+                                  DataColumn2(
+                                      // fixedWidth: 150,
+                                      label: Text(
+                                    "Remark",
+                                    style: TextStyle(
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.bold),
+                                  )),
+                                ],
                                 rows: controller.rowItem.value.map((record) {
-                                  return TableViewRow(
-                                    height: 60,
+                                  return DataRow(
+                                    // height: 60,
                                     cells: record.map((mapData) {
-                                      return TableViewCell(
-                                        child: (mapData['key'] == "Drop_down")
-                                            ? Padding(
-                                                padding:
-                                                    const EdgeInsets.all(5.0),
-                                                child: DropdownWebWidget(
-                                                  width: MediaQuery.of(context)
-                                                          .size
-                                                          .width /
-                                                      4,
-                                                  dropdownList:
-                                                      controller.assetItemList,
-                                                  selectedValue: mapData["value"],
-                                                  onValueChanged:
-                                                      (list, selectedValue) {
-                                                    // print({
-                                                    //   selectedValue:
-                                                    //       selectedValue
-                                                    // });
-                                                    mapData["value"] =
-                                                        selectedValue;
-                                                    controller.dropdownMapperData[
-                                                            selectedValue] =
-                                                        list.firstWhere(
-                                                            (element) =>
-                                                                element.name ==
-                                                                selectedValue,
-                                                            orElse: null);
-                                                  },
-                                                ),
+                                      return DataCell(
+                                        (mapData['key'] == "Drop_down")
+                                            ? Column(
+                                                children: [
+                                                  Padding(
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            6.0),
+                                                    child: DropdownWebWidget(
+                                                      width:
+                                                          MediaQuery.of(context)
+                                                                  .size
+                                                                  .width *
+                                                              0.9,
+                                                      dropdownList: (controller
+                                                                  .StockDetailsList
+                                                              .where((p0) {
+                                                        return !controller
+                                                                .rowItem
+                                                                .map((p0) => p0[
+                                                                    0]["value"])
+                                                                .contains(
+                                                                    p0!.name) &&
+                                                            p0.consumed_qty !=
+                                                                p0.issued_qty;
+                                                      }).toList())
+                                                          .obs,
+                                                      selectedValue:
+                                                          mapData["value"],
+                                                      onValueChanged: (list,
+                                                          selectedValue) {
+                                                        mapData["value"] =
+                                                            selectedValue;
+                                                        controller.dropdownMapperData[
+                                                                selectedValue] =
+                                                            list.firstWhere(
+                                                                (element) =>
+                                                                    element
+                                                                        .name ==
+                                                                    selectedValue,
+                                                                orElse: null);
+
+                                                        // Check if all relevant dropdowns are selected
+                                                        var relevantItems = controller
+                                                                .StockDetailsList
+                                                            .where((item) =>
+                                                                item!
+                                                                    .consumed_qty !=
+                                                                item.issued_qty).toList();
+                                                        controller
+                                                                .allDropdownsSelected
+                                                                .value =
+                                                            relevantItems.every(
+                                                                (item) => controller
+                                                                    .dropdownMapperData
+                                                                    .containsKey(
+                                                                        item!
+                                                                            .name));
+                                                      },
+                                                    ),
+                                                  ), // Obx(() {
+                                                  //   return controller
+                                                  //           .allDropdownsSelected
+                                                  //           .value
+                                                  //       ? Container()
+                                                  //       : Text(
+                                                  //           'Please select all dropdown values!',
+                                                  //           style: TextStyle(
+                                                  //               color: Colors
+                                                  //                   .red),
+                                                  //         );
+                                                  // }),
+                                                ],
                                               )
                                             : (mapData['key'] == "Return_Qty")
                                                 ? Padding(
                                                     padding:
-                                                        const EdgeInsets.all(8.0),
+                                                        const EdgeInsets.all(
+                                                            8.0),
                                                     child: Container(
-                                                        width: (Get.width * .4),
-                                                        // padding: EdgeInsets.all(value),
-                                                        decoration: BoxDecoration(
-                                                          boxShadow: [
-                                                            BoxShadow(
-                                                              color:
-                                                                  Colors.black26,
-                                                              offset:
-                                                                  const Offset(
-                                                                5.0,
-                                                                5.0,
-                                                              ),
-                                                              blurRadius: 5.0,
-                                                              spreadRadius: 1.0,
-                                                            ),
-                                                          ],
-                                                          color: ColorValues
-                                                              .whiteColor,
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(5),
+                                                      width: (Get.width / 8),
+                                                      child:
+                                                          LoginCustomTextfield(
+                                                        inputFormatters: <TextInputFormatter>[
+                                                          FilteringTextInputFormatter
+                                                              .digitsOnly
+                                                        ],
+                                                        maxLine: 1,
+                                                        enabled: false,
+                                                        textController:
+                                                            TextEditingController(
+                                                          text: _calculateDifference(
+                                                              record[0][
+                                                                      'value'] ??
+                                                                  ""),
                                                         ),
-                                                        child:
-                                                            LoginCustomTextfield(
-                                                          inputFormatters: <TextInputFormatter>[
-                                                            FilteringTextInputFormatter
-                                                                .digitsOnly
-                                                          ],
-                                                          maxLine: 1,
-                                                          textController:
-                                                              new TextEditingController(
-                                                                  text: mapData[
-                                                                          "value"] ??
-                                                                      ''),
-                                                          onChanged: (txt) {
-                                                            mapData["value"] =
-                                                                txt;
-                                                          },
-                                                        )),
+                                                        onChanged: (txt) {
+                                                          //  _handleTextChanged(txt, record[0]['value']);
+                                                        },
+                                                      ),
+                                                    ),
                                                   )
-                                                : (mapData['key'] == "Issue_Qty")
+                                                // : (mapData['key'] ==
+                                                //         "Action ")
+                                                //     ? Padding(
+                                                //         padding: EdgeInsets
+                                                //             .only(
+                                                //                 top: 10),
+                                                //         child: Column(
+                                                //           mainAxisAlignment:
+                                                //               MainAxisAlignment
+                                                //                   .start,
+                                                //           crossAxisAlignment:
+                                                //               CrossAxisAlignment
+                                                //                   .start,
+                                                //           children: [
+                                                //             TableActionButton(
+                                                //               color: ColorValues
+                                                //                   .appRedColor,
+                                                //               icon: Icons
+                                                //                   .delete,
+                                                //               label: '',
+                                                //               message: '',
+                                                //               onPress:
+                                                //                   () {
+                                                //                 controller
+                                                //                     .rowItem
+                                                //                     .remove(
+                                                //                         record);
+                                                //               },
+                                                //             )
+                                                //           ],
+                                                //         ),
+                                                //       )
+
+                                                : (mapData['key'] == "Sr_No")
                                                     ? Text(
-                                                        "${controller.dropdownMapperData[record[0]['value']]?.quantity ?? ""}")
-                                                    : (mapData['key'] ==
-                                                            "is_faulty")
-                                                        ? Padding(
-                                                            padding:
-                                                                const EdgeInsets
-                                                                    .only(
-                                                                    top: 8.0),
-                                                            child:
-                                                                CustomSwitchTroggle(
-                                                                    value: controller
-                                                                        .isSetTemplate
-                                                                        .value,
-                                                                    onChanged:
-                                                                        (value) {
-                                                                      controller
-                                                                          .setTemplatetoggle();
-                                                                    }))
+                                                        "${controller.dropdownMapperData.value[record[0]['value']]?.serial_no ?? ""}")
+                                                    : (mapData['key'] == "code")
+                                                        ? Text(
+                                                            "${controller.dropdownMapperData.value[record[0]['value']]?.asset_code ?? ""}")
                                                         : (mapData['key'] ==
-                                                                "Remark")
-                                                            ? Padding(
-                                                                padding:
-                                                                    const EdgeInsets
-                                                                        .all(8.0),
-                                                                child: Container(
-                                                                    width:
-                                                                        (Get.width *
-                                                                            .4),
-                                                                    // padding: EdgeInsets.all(value),
-                                                                    decoration:
-                                                                        BoxDecoration(
-                                                                      boxShadow: [
-                                                                        BoxShadow(
-                                                                          color: Colors
-                                                                              .black26,
-                                                                          offset:
-                                                                              const Offset(
-                                                                            5.0,
-                                                                            5.0,
-                                                                          ),
-                                                                          blurRadius:
-                                                                              5.0,
-                                                                          spreadRadius:
-                                                                              1.0,
-                                                                        ),
-                                                                      ],
-                                                                      color: ColorValues
-                                                                          .whiteColor,
-                                                                      borderRadius:
-                                                                          BorderRadius
-                                                                              .circular(5),
-                                                                    ),
-                                                                    child:
-                                                                        LoginCustomTextfield(
-                                                                      // inputFormatters: <
-                                                                      //     TextInputFormatter>[
-                                                                      //   FilteringTextInputFormatter
-                                                                      //       .digitsOnly
-                                                                      // ],
-                                                                      maxLine: 1,
-                                                                      textController:
-                                                                          new TextEditingController(
-                                                                              text:
-                                                                                  mapData["value"] ?? ''),
-                                                                      onChanged:
-                                                                          (txt) {
-                                                                        mapData["value"] =
-                                                                            txt;
-                                                                      },
-                                                                    )),
-                                                              )
-                                                            : Text(
-                                                                mapData['key'] ??
-                                                                    ''),
+                                                                "Material_Type")
+                                                            ? Text(
+                                                                "${controller.dropdownMapperData.value[record[0]['value']]?.asset_type ?? ""}")
+                                                            : (mapData['key'] ==
+                                                                    "Issue_Qty")
+                                                                ? Text(
+                                                                    "${controller.dropdownMapperData.value[record[0]['value']]?.issued_qty ?? ""}")
+                                                                : (mapData['key'] ==
+                                                                        "Used_Qty")
+                                                                    ? Text(
+                                                                        "${controller.dropdownMapperData.value[record[0]['value']]?.consumed_qty ?? ""}")
+                                                                    : (mapData['key'] ==
+                                                                            "Remark")
+                                                                        ? Padding(
+                                                                            padding:
+                                                                                const EdgeInsets.all(8.0),
+                                                                            child: Container(
+                                                                                width: (Get.width * .5),
+                                                                                // padding: EdgeInsets.all(value),
+                                                                                decoration: BoxDecoration(
+                                                                                  boxShadow: [
+                                                                                    BoxShadow(
+                                                                                      color: Colors.black26,
+                                                                                      offset: const Offset(
+                                                                                        5.0,
+                                                                                        5.0,
+                                                                                      ),
+                                                                                      blurRadius: 5.0,
+                                                                                      spreadRadius: 1.0,
+                                                                                    ),
+                                                                                  ],
+                                                                                  color: ColorValues.whiteColor,
+                                                                                  borderRadius: BorderRadius.circular(5),
+                                                                                ),
+                                                                                child: LoginCustomTextfield(
+                                                                                  // inputFormatters: <
+                                                                                  //     TextInputFormatter>[
+                                                                                  //   FilteringTextInputFormatter
+                                                                                  //       .digitsOnly
+                                                                                  // ],
+                                                                                  maxLine: 1,
+                                                                                  textController: new TextEditingController(text: mapData["value"] ?? ''),
+                                                                                  onChanged: (txt) {
+                                                                                    mapData["value"] = txt;
+                                                                                  },
+                                                                                )),
+                                                                          )
+                                                                        : Text(mapData['key'] ??
+                                                                            ''),
                                       );
                                     }).toList(),
                                   );
@@ -500,5 +624,12 @@ class EditMrsReturnContentWeb extends GetView<EditMrsReturnController> {
         ),
       ),
     );
+  }
+
+  String _calculateDifference(String key) {
+    final issuedQty = controller.dropdownMapperData[key]?.issued_qty ?? 0;
+    final consumedQty = controller.dropdownMapperData[key]?.consumed_qty ?? 0;
+    final difference = issuedQty - consumedQty;
+    return difference.toString();
   }
 }

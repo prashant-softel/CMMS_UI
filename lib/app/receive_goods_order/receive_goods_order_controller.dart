@@ -269,17 +269,17 @@ class ReceiveGoodsOrdersController extends GetxController {
           },
           {
             'key': "storage_rack_no",
-            "value": '',
+            "value": '${element.storage_rack_no}',
             // 'id': '${element.assetMasterItemID}'
           },
           {
             'key': "storage_row_no",
-            "value": '',
+            "value": '${element.storage_row_no}',
             // 'id': '${element.assetMasterItemID}'
           },
           {
             'key': "storage_column_no",
-            "value": '',
+            "value": '${element.storage_column_no}',
             // 'id': '${element.assetMasterItemID}'
           },
         ]);
@@ -495,10 +495,10 @@ class ReceiveGoodsOrdersController extends GetxController {
   }
 
   void createGoodsOrder() async {
-    checkForm();
-    if (isFormInvalid.value) {
-      return;
-    }
+    // checkForm();
+    // if (isFormInvalid.value) {
+    //   return;
+    // }
     String _challanNoCtrlr = challanNoCtrlr.text.trim();
     String _pOCtrlr = pOCtrlr.text.trim();
     String _frieghtToPayPaidCtrlr = frieghtToPayPaidCtrlr.text.trim();
@@ -517,11 +517,12 @@ class ReceiveGoodsOrdersController extends GetxController {
     List<Items> items = [];
     rowItem.value.forEach((element) {
       Items item = Items(
-          goItemID: 0,
-          assetMasterItemID: dropdownMapperData[element[0]["value"]]?.id,
-          cost: double.tryParse(element[2]["value"] ?? '0'),
-          ordered_qty: double.tryParse(element[3]["value"] ?? '0'),
-          paid_by_ID: paiddropdownMapperData[element[1]["value"]]?.id);
+        goItemID: 0,
+        assetMasterItemID: dropdownMapperData[element[0]["value"]]?.id,
+        cost: double.tryParse(element[2]["value"] ?? '0'),
+        ordered_qty: double.tryParse(element[3]["value"] ?? '0'),
+        paid_by_ID: paiddropdownMapperData[element[1]["value"]]?.id,
+      );
       items.add(item);
     });
     CreateGoModel createGoModel = CreateGoModel(
@@ -582,127 +583,127 @@ class ReceiveGoodsOrdersController extends GetxController {
   }
 
   //validation check from
-  void checkForm() {
-    if (challanNoCtrlr.text.trim().length < 3) {
-      isInvoiceNumberInvalid.value = true;
-    }
-    if (isInvoiceNumberInvalid.value == true) {
-      isFormInvalid.value = true;
-    }
-    if (frieghtToPayPaidCtrlr.text.trim().length < 3) {
-      isDeliverChalanInvalid.value = true;
-    }
+  // void checkForm() {
+  //   if (challanNoCtrlr.text.trim().length < 3) {
+  //     isInvoiceNumberInvalid.value = true;
+  //   }
+  //   if (isInvoiceNumberInvalid.value == true) {
+  //     isFormInvalid.value = true;
+  //   }
+  //   if (frieghtToPayPaidCtrlr.text.trim().length < 3) {
+  //     isDeliverChalanInvalid.value = true;
+  //   }
 
-    if (isDeliverChalanInvalid.value == true) {
-      isFormInvalid.value = true;
-    }
+  //   if (isDeliverChalanInvalid.value == true) {
+  //     isFormInvalid.value = true;
+  //   }
 
-    ///
-    if (noOfPackagesReceivedCtrlr.text.trim().length < 3) {
-      isCountOfPackageReceivedInvalid.value = true;
-    }
+  //   ///
+  //   if (noOfPackagesReceivedCtrlr.text.trim().length < 3) {
+  //     isCountOfPackageReceivedInvalid.value = true;
+  //   }
 
-    if (isCountOfPackageReceivedInvalid.value == true) {
-      isFormInvalid.value = true;
-    }
+  //   if (isCountOfPackageReceivedInvalid.value == true) {
+  //     isFormInvalid.value = true;
+  //   }
 
-    if (vehicleNoCtrlr.text.trim().length < 3) {
-      isVehicalInvalid.value = true;
-    }
+  //   if (vehicleNoCtrlr.text.trim().length < 3) {
+  //     isVehicalInvalid.value = true;
+  //   }
 
-    if (isVehicalInvalid.value == true) {
-      isFormInvalid.value = true;
-    }
-    if (conditionOfPackagesReceivedCtrlr.text.trim().length < 3) {
-      isGateInwardRegisterInvalid.value = true;
-    }
+  //   if (isVehicalInvalid.value == true) {
+  //     isFormInvalid.value = true;
+  //   }
+  //   if (conditionOfPackagesReceivedCtrlr.text.trim().length < 3) {
+  //     isGateInwardRegisterInvalid.value = true;
+  //   }
 
-    if (isGateInwardRegisterInvalid.value == true) {
-      isFormInvalid.value = true;
-    }
+  //   if (isGateInwardRegisterInvalid.value == true) {
+  //     isFormInvalid.value = true;
+  //   }
 
-    if (freightValueCtrlr.text.trim().length < 3) {
-      isFreightInvalid.value = true;
-    }
+  //   if (freightValueCtrlr.text.trim().length < 3) {
+  //     isFreightInvalid.value = true;
+  //   }
 
-    if (isFreightInvalid.value == true) {
-      isFormInvalid.value = true;
-    }
-    if (lrNoCtrlr.text.trim().length < 3) {
-      isLrNoInvalid.value = true;
-    }
+  //   if (isFreightInvalid.value == true) {
+  //     isFormInvalid.value = true;
+  //   }
+  //   if (lrNoCtrlr.text.trim().length < 3) {
+  //     isLrNoInvalid.value = true;
+  //   }
 
-    if (isLrNoInvalid.value == true) {
-      isFormInvalid.value = true;
-    }
-    if (receivedDateTc.text.trim().length < 3) {
-      isMaterialReciveDateInvalid.value = true;
-    }
+  //   if (isLrNoInvalid.value == true) {
+  //     isFormInvalid.value = true;
+  //   }
+  //   if (receivedDateTc.text.trim().length < 3) {
+  //     isMaterialReciveDateInvalid.value = true;
+  //   }
 
-    if (isMaterialReciveDateInvalid.value == true) {
-      isFormInvalid.value = true;
-    }
+  //   if (isMaterialReciveDateInvalid.value == true) {
+  //     isFormInvalid.value = true;
+  //   }
 
-    if (challanDateTc.text.trim().length < 3) {
-      isDeliveryChallanDateInvalid.value = true;
-    }
+  //   if (challanDateTc.text.trim().length < 3) {
+  //     isDeliveryChallanDateInvalid.value = true;
+  //   }
 
-    if (isDeliveryChallanDateInvalid.value == true) {
-      isFormInvalid.value = true;
-    }
-    if (purchaseDateTc.text.trim().length < 3) {
-      isInvoiceDateInvalid.value = true;
-    }
+  //   if (isDeliveryChallanDateInvalid.value == true) {
+  //     isFormInvalid.value = true;
+  //   }
+  //   if (purchaseDateTc.text.trim().length < 3) {
+  //     isInvoiceDateInvalid.value = true;
+  //   }
 
-    if (isInvoiceDateInvalid.value == true) {
-      isFormInvalid.value = true;
-    }
+  //   if (isInvoiceDateInvalid.value == true) {
+  //     isFormInvalid.value = true;
+  //   }
 
-    if (jobRefCtrlr.text.trim().length < 3) {
-      isEWayBillInvalid.value = true;
-    }
+  //   if (jobRefCtrlr.text.trim().length < 3) {
+  //     isEWayBillInvalid.value = true;
+  //   }
 
-    if (isEWayBillInvalid.value == true) {
-      isFormInvalid.value = true;
-    }
-    if (inspectionReportCtrlr.text.trim().length < 3) {
-      isInspectionReportInvalid.value = true;
-    }
+  //   if (isEWayBillInvalid.value == true) {
+  //     isFormInvalid.value = true;
+  //   }
+  //   if (inspectionReportCtrlr.text.trim().length < 3) {
+  //     isInspectionReportInvalid.value = true;
+  //   }
 
-    if (isInspectionReportInvalid.value == true) {
-      isFormInvalid.value = true;
-    }
-    if (girNoCtrlr.text.trim().length < 3) {
-      isGrnNoInvalid.value = true;
-    }
+  //   if (isInspectionReportInvalid.value == true) {
+  //     isFormInvalid.value = true;
+  //   }
+  //   if (girNoCtrlr.text.trim().length < 3) {
+  //     isGrnNoInvalid.value = true;
+  //   }
 
-    if (isGrnNoInvalid.value == true) {
-      isFormInvalid.value = true;
-    } else {
-      isFormInvalid.value = false;
-    }
-    if (TextEditingController().text.isEmpty) {
-      isCostInvalid.value = true;
-    } else {
-      isCostInvalid.value = false;
-    }
-    if (TextEditingController().text.isEmpty) {
-      isRequestedInvalid.value = true;
-    } else {
-      isRequestedInvalid.value = false;
-    }
-    if (TextEditingController().text.isEmpty) {
-      isAccepetedInvalid.value = true;
-    } else {
-      isAccepetedInvalid.value = false;
-    }
-  }
+  //   if (isGrnNoInvalid.value == true) {
+  //     isFormInvalid.value = true;
+  //   } else {
+  //     isFormInvalid.value = false;
+  //   }
+  //   if (TextEditingController().text.isEmpty) {
+  //     isCostInvalid.value = true;
+  //   } else {
+  //     isCostInvalid.value = false;
+  //   }
+  //   if (TextEditingController().text.isEmpty) {
+  //     isRequestedInvalid.value = true;
+  //   } else {
+  //     isRequestedInvalid.value = false;
+  //   }
+  //   if (TextEditingController().text.isEmpty) {
+  //     isAccepetedInvalid.value = true;
+  //   } else {
+  //     isAccepetedInvalid.value = false;
+  //   }
+  // }
 
   void updateGOReceive() async {
-    checkForm();
-    if (isFormInvalid.value) {
-      return;
-    }
+    // checkForm();
+    // if (isFormInvalid.value) {
+    //   return;
+    // }
     String _challanNoCtrlr = challanNoCtrlr.text.trim();
     String _pOCtrlr = pOCtrlr.text.trim();
     String _frieghtToPayPaidCtrlr = frieghtToPayPaidCtrlr.text.trim();
@@ -745,12 +746,12 @@ class ReceiveGoodsOrdersController extends GetxController {
         accepted_qty: double.tryParse(element[6]["value"] ?? '0'),
         damaged_qty: double.tryParse(element[7]["value"] ?? '0'),
         requested_qty: double.tryParse(element[2]["value"] ?? '0'),
-        storage_column_no: int.tryParse('${element[10]["value"]}'),
-        storage_rack_no: int.tryParse('${element[8]["value"]}'),
-        storage_row_no: int.tryParse('${element[0]["value"]}'),
+        storage_column_no: '${element[10]["value"]}',
+        storage_rack_no: '${element[8]["value"]}',
+        storage_row_no: '${element[9]["value"]}',
       );
 
-      // poID: paiddropdownMapperData[element[1]["value"]]?.id)
+      // poID: paiddrpdownMapperData[element[1]["value"]]?.id)
       ;
       items.add(item);
     });
@@ -796,10 +797,10 @@ class ReceiveGoodsOrdersController extends GetxController {
   }
 
   void updateGOReceiveIsSubmit0() async {
-    checkForm();
-    if (isFormInvalid.value) {
-      return;
-    }
+    // checkForm();
+    // if (isFormInvalid.value) {
+    //   return;
+    // }
     String _challanNoCtrlr = challanNoCtrlr.text.trim();
     String _pOCtrlr = pOCtrlr.text.trim();
     String _frieghtToPayPaidCtrlr = frieghtToPayPaidCtrlr.text.trim();

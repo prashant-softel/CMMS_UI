@@ -67,40 +67,21 @@ class CreateReturnMrsModel {
 }
 
 class CmmsItem {
-  CmmsItem(
-      {this.approval_required,
-      this.asset_item_ID,
-      this.issued_qty,
-      this.requested_qty,
-      this.is_faulty,
-      this.return_remarks,
-      this.returned_qty});
+  CmmsItem({this.mrs_item_ID, this.return_remarks, this.returned_qty});
 
-  int? asset_item_ID;
-  int? approval_required;
-  dynamic issued_qty;
   String? return_remarks;
-  dynamic requested_qty;
   dynamic returned_qty;
 
-  int? is_faulty;
+  int? mrs_item_ID;
 
   factory CmmsItem.fromJson(Map<String, dynamic> json) => CmmsItem(
-        asset_item_ID: json["asset_item_ID"],
-        approval_required: json["approval_required"],
-        requested_qty: json["requested_qty"],
-        issued_qty: json["issued_qty"],
-        is_faulty: json["is_faulty"],
+        mrs_item_ID: json["mrs_item_ID"],
         return_remarks: json["return_remarks"],
         returned_qty: json["returned_qty"],
       );
 
   Map<String, dynamic> toJson() => {
-        "issued_qty": issued_qty,
-        "requested_qty": requested_qty,
-        "asset_item_ID": asset_item_ID,
-        "approval_required": approval_required,
-        "is_faulty": is_faulty,
+        "mrs_item_ID": mrs_item_ID,
         "return_remarks": return_remarks,
         "returned_qty": returned_qty,
       };
