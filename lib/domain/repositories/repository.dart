@@ -4,6 +4,7 @@ import 'dart:typed_data';
 import 'package:cmms/domain/models/course_category_model.dart';
 import 'package:cmms/domain/models/dashboard_model.dart';
 import 'package:cmms/domain/models/dsm_list_model.dart';
+import 'package:cmms/domain/models/escalation_matrix_list_model.dart';
 import 'package:cmms/domain/models/get_mc_task_equipment_model.dart';
 import 'package:cmms/domain/models/grievance_type_model.dart';
 import 'package:cmms/domain/models/incident_risk_type_model.dart';
@@ -721,6 +722,32 @@ class Repository {
       return Map();
     }
   }
+
+  // escalation matrix list
+    Future<List<EscalationMatListModel>> getEscalationMatrixList({
+    required bool isLoading,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+
+      log(auth);
+      final res = await _dataRepository.getEscalationMatrixList(
+        isLoading: isLoading,
+        auth: auth,
+      );
+      print('Escalation Matrix List Data: ${res.data}');
+
+      if (!res.hasError) {
+        var matrixlist = escalationMatListModelFromJson(res.data);
+        return matrixlist;
+      }
+      return [];
+    } catch (error) {
+      log(error.toString());
+      return [];
+    }
+  }
+
 
   //Create or  add Goods order
   Future<Map<String, dynamic>> createGoodsOrder(
