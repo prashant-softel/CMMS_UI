@@ -1079,7 +1079,7 @@ class GoodsOrderListDataSource extends DataTableSource {
                                         0
                             ? TableActionButton(
                                 color: ColorValues.approveColor,
-                                icon: Icons.approval_rounded,
+                                icon: Icons.check,
                                 message: 'Approve/Reject GO',
                                 onPress: () {
                                   controller.clearStoreData();

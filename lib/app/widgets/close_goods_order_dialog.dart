@@ -1,3 +1,4 @@
+import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/theme/color_values.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:flutter/material.dart';
@@ -81,7 +82,7 @@ class GoodsOrderCloseDialog extends GetView {
           Row(mainAxisAlignment: MainAxisAlignment.center, children: [
             Dimens.boxWidth10,
             ElevatedButton(
-              style: Styles.darkRedElevatedButtonStyle,
+              style: Styles.yellowElevatedButtonStyle,
               onPressed: () {
                 Get.back();
               },
@@ -93,7 +94,7 @@ class GoodsOrderCloseDialog extends GetView {
               onPressed: () {
                 _controller.goodsOrderCloseButton(id: id);
                 print('Goods order id:$id');
-                Get.back();
+                Get.toNamed(Routes.stockManagementGoodsOrdersScreen);
               },
               child: Text('Close Goods'),
             ),
