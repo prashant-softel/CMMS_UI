@@ -167,9 +167,9 @@ class Items {
   String? asset_code;
   int? goItemID;
   String? sr_no;
-  int? storage_rack_no;
-  int? storage_row_no;
-  int? storage_column_no;
+  String? storage_rack_no;
+  String? storage_row_no;
+  String? storage_column_no;
   factory Items.fromJson(Map<String, dynamic> json) => Items(
         assetMasterItemID: json["assetMasterItemID"],
         storage_rack_no: json["storage_rack_no"],
@@ -201,9 +201,9 @@ class Items {
 
   Map<String, dynamic> toJson() => {
         "assetMasterItemID": assetMasterItemID,
-        "storage_rack_no": storage_rack_no,
-        "storage_row_no": storage_row_no,
-        "storage_column_no": storage_column_no,
+        "storage_rack_no": storage_rack_no == null ? "" : storage_rack_no,
+        "storage_row_no": storage_row_no == null ? "" : storage_row_no,
+        "storage_column_no": storage_column_no == null ? "" : storage_column_no,
 
         "goItemID": goItemID,
         "cost": cost,
