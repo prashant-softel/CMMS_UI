@@ -153,7 +153,7 @@ class CreateMrsController extends GetxController {
         equipmentID: dropdownMapperData.value[element[0]["value"]]?.asset_ID,
         asset_type_ID:
             dropdownMapperData.value[element[0]["value"]]?.asset_type_ID,
-        requested_qty: int.tryParse(element[4]["value"] ?? '0'),
+        requested_qty: int.tryParse(element[3]["value"] ?? '0'),
       );
       items.add(item);
     });
