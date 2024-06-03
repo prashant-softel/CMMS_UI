@@ -2,8 +2,10 @@ import 'package:cmms/domain/domain.dart';
 import 'package:cmms/domain/models/history_model.dart';
 import 'package:cmms/domain/models/incident_report_details_model.dart';
 import 'package:cmms/domain/models/incident_report_list_model.dart';
+import 'package:cmms/domain/models/module_model.dart';
 import 'package:cmms/domain/models/modulelist_model.dart';
 import 'package:cmms/domain/models/role_model.dart';
+import 'package:cmms/domain/models/status_list_model.dart';
 import 'package:cmms/domain/models/type_permit_model.dart';
 
 import '../models/facility_model.dart';
@@ -74,15 +76,23 @@ class AddEscalationMatrixUsecase {
         facility_id
         );
     
-   Future<List<ModuleListModel?>?> getModuleList({
+   Future<List<ModuleModel?>?> getModuleList({
     int? type,
     int? facilityId,
     bool? isLoading,
   }) async =>
-      await _repository.getModuleList(
+      await _repository.getModule(
         type,
         facilityId,
         isLoading,
+      );
+   Future<StatusList?> getStatusList({
+    int? moduleId,
+    bool? isLoading,
+  }) async =>
+      await _repository.getStatusList(
+        moduleId: moduleId,
+        isLoading: isLoading ?? false,
       );
 
    Future<List<RoleModel?>?> getRoleList({

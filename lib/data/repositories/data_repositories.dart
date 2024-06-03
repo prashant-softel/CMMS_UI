@@ -1405,6 +1405,16 @@ class DataRepository extends DomainRepository {
         type: type,
         isLoading: isLoading ?? false,
       );
+  Future<ResponseModel> getStatusList({
+    required String auth,
+    int? moduleId,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.getStatusList(
+        auth: auth,
+        moduleId: moduleId ?? 0,
+        isLoading: isLoading ?? false,
+      );
 
   Future<ResponseModel> getInventoryTypeList({
     required String auth,

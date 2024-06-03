@@ -2347,6 +2347,24 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> getStatusList({
+    required String auth,
+    int? moduleId,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'CMMS/GetStatusbymodule?module=$moduleId',
+      Request.get,
+      null,
+      isLoading ?? false,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
   Future<ResponseModel> getInventoryTypeList({
     required String auth,
     bool? isLoading,
@@ -8714,7 +8732,7 @@ class ConnectHelper {
     bool? isLoading,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
-      'Attendence/CreateAttendance', //AddBusiness
+      'Attendence/CreateAttendance',
       Request.post,
       jsonEmployeeAttendance,
       isLoading ?? false,
