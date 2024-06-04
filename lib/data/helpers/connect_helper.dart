@@ -3169,6 +3169,24 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> getEscalationDetail({
+    required String auth,
+    required int? moduleId,
+    required int? statusId,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'EM/GetEscalationMatrixbystatusId?module=$moduleId&status_id=$statusId',
+      Request.get,
+      null,
+      isLoading ?? false,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
   //Create WarraGoods order
 
   Future<ResponseModel> createGoodsOrder({

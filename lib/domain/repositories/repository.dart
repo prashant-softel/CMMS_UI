@@ -724,6 +724,41 @@ class Repository {
     }
   }
 
+  Future<NewPermitDetailModel?> getEscalationDetail({
+    int? moduleId,
+    int? statusId,
+    bool? isLoading,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getEscalationDetail(
+        auth: auth,
+        moduleId: moduleId,
+        statusId: statusId,
+        isLoading: isLoading ?? false,
+      );
+
+      print({"permitdetail", res.data});
+
+      if (!res.hasError) {
+        if (res.errorCode == 200) {
+          final NewPermitDetailModel _newPermitDetailModel =
+              newPermitDetailModelFromJson(res.data);
+
+          var responseMap = _newPermitDetailModel;
+          print({"responsedata", responseMap});
+          return responseMap;
+        }
+      } else {
+        Utility.showDialog(res.errorCode.toString(), 'escalation');
+      }
+      return null;
+    } catch (error) {
+      print(error.toString());
+      return null;
+    }
+  }
+
   //Create or  add Goods order
   Future<Map<String, dynamic>> createGoodsOrder(
     createGo,
