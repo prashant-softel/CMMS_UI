@@ -64,14 +64,14 @@ class StatutoryController extends GetxController {
     // "search": true,
   });
   final Map<String, double> columnwidth = {
-    "ID": 153,
-    "Compliance": 220,
-    "Status OF Application": 120,
+    "ID": 100,
+    "Compliance": 150,
+    "Status OF Application": 250,
     "Date of received": 200,
-    "Validity": 223,
-    "Days Left": 153,
-    "Expires on": 130,
-    "Status Code": 100
+    "Validity": 153,
+    "Days Left": 120,
+    "Expires on": 140,
+    "Status Code": 150
   };
   Map<String, RxString> filterText = {};
   void setColumnVisibility(String columnName, bool isVisible) {
@@ -96,10 +96,12 @@ class StatutoryController extends GetxController {
     };
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
       facilityId = event;
-      Future.delayed(Duration(seconds: 2), () async {
-        await getStatutoryDataList(
-            facilityId, formattedTodate1, formattedFromdate1, false);
-      });
+      if (facilityId > 0) {
+        Future.delayed(Duration(seconds: 2), () async {
+          await getStatutoryDataList(
+              facilityId, formattedTodate1, formattedFromdate1, false);
+        });
+      }
     });
     super.onInit();
   }
@@ -172,6 +174,10 @@ class StatutoryController extends GetxController {
         getStatutoryListTableColumns.add(key);
       }
     }
+  }
+
+  void clearStoreData() {
+    statutoryPresenter.clearValue();
   }
 
   void onValueChanged(dynamic list, dynamic value) {
