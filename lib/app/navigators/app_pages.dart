@@ -26,6 +26,8 @@ import 'package:cmms/app/add_water_data_per_day/view/add_water_data_screen.dart'
 import 'package:cmms/app/administration_dashboard_screen/admin_dash_binding.dart';
 import 'package:cmms/app/administration_dashboard_screen/view/admin_dash_screen.dart';
 import 'package:cmms/app/app.dart';
+import 'package:cmms/app/attendance_list/attendance_list_binding.dart';
+import 'package:cmms/app/attendance_list/view/attendance_list_screen.dart';
 import 'package:cmms/app/attendance_screen/attendance_binding.dart';
 import 'package:cmms/app/attendance_screen/view/attendance_screen.dart';
 import 'package:cmms/app/audit/audit_binding.dart';
@@ -1292,6 +1294,11 @@ class AppPages {
       name: _Paths.attendanceScreen,
       page: AttendanceScreen.new,
       binding: AttendanceBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.attendanceListScreen,
+      page: AttendanceListScreen.new,
+      binding: AttendanceListBinding(),
     ),
     GetPage<dynamic>(
       name: _Paths.materialCategory,
