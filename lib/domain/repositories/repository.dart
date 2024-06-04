@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
 import 'dart:typed_data';
+import 'package:cmms/domain/models/Statutory_Compliance_model.dart';
 import 'package:cmms/domain/models/course_category_model.dart';
 import 'package:cmms/domain/models/dashboard_model.dart';
 import 'package:cmms/domain/models/dsm_list_model.dart';
@@ -13919,6 +13920,102 @@ class Repository {
         //get delete response back from API
       } else {
         Utility.showDialog(res.errorCode.toString(), 'delete Targeted Group');
+      }
+    } catch (error) {
+      print(error.toString());
+    }
+  }
+
+  //StatutoryCompliance
+  //get
+  Future<List<StatutoryComplianceModel>> getStatutoryCompliance({
+    required bool isLoading,
+    int? job_type_id,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+
+      log(auth);
+      final res = await _dataRepository.getStatutoryCompliance(
+        isLoading: isLoading,
+        auth: auth,
+      );
+      print('Statutory Compliance ${res.data}');
+
+      if (!res.hasError) {
+        var Sourcetype = statutoryComplianceModelFromJson(res.data);
+        return Sourcetype;
+      }
+      return [];
+    } catch (error) {
+      log(error.toString());
+      return [];
+    }
+  }
+
+  //create
+  Future<bool> createStatutoryCompliance(
+      {bool? isLoading, StatutoryComplianceJsonString}) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.createStatutoryCompliance(
+          auth: auth,
+          isLoading: isLoading,
+          StatutoryComplianceJsonString: StatutoryComplianceJsonString);
+
+      if (!res.hasError) {
+        return true;
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString(), ' createCheckListNumber');
+        return false;
+      }
+    } catch (error) {
+      print(error.toString());
+      return false;
+    }
+  }
+
+  //update
+  Future<bool> updateStatutoryCompliance({
+    bool? isLoading,
+    StatutoryComplianceJsonString,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.updateStatutoryCompliance(
+        auth: auth,
+        isLoading: isLoading,
+        StatutoryComplianceJsonString: StatutoryComplianceJsonString,
+      );
+      print(res.data);
+      if (!res.hasError) {
+        return true;
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString(), 'Update Statutory Compliance');
+        return false;
+      }
+    } catch (error) {
+      print(error.toString());
+      return false;
+    }
+  }
+
+  //delete
+  Future<void> deleteStatutoryCompliance(Object StatutoryCompliance_id, bool isLoading) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.deleteStatutoryCompliance(
+        auth: auth,
+        StatutoryCompliance_id: StatutoryCompliance_id,
+        isLoading: isLoading,
+      );
+
+      if (!res.hasError) {
+        //get delete response back from API
+      } else {
+        Utility.showDialog(res.errorCode.toString(), 'delete Statutory Compliance');
       }
     } catch (error) {
       print(error.toString());
