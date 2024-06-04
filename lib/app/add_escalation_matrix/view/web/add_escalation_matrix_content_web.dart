@@ -8,463 +8,409 @@ import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/custom_textField.dart';
 import 'package:cmms/app/widgets/dropdown_web.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:scrollable_table_view/scrollable_table_view.dart';
 
 class AddEscalationMatrixContentWeb
     extends GetView<AddEscalationMatrixController> {
   AddEscalationMatrixContentWeb({super.key});
-
-  // final homeController = Get.find<HomeController>();
   final AddEscalationMatrixController controller = Get.find();
   final HomeController homecontroller = Get.find();
 
   @override
   Widget build(BuildContext context) => SelectionArea(
-        child: SelectionArea(
-          child: Scaffold(
-            body: Obx(
-              () => Stack(
-                children: [
-                  AnimatedContainer(
-                    duration: Duration(milliseconds: 450),
-                    margin: EdgeInsets.only(
-                        left: homecontroller.menuButton.value ? 250.0 : 70.0),
-                    // width: Get.width,
-                    // height: Get.height,
-                    child: Column(
-                      children: [
-                        Expanded(
-                          child: Center(
-                            child: Container(
-                              // margin: Dimens.edgeInsets16,
-                              width: MediaQuery.of(context).size.width,
-                              height: MediaQuery.of(context).size.height,
-                              decoration: BoxDecoration(
-                                border: Border.all(
-                                    color: Colors.grey.withOpacity(.3)),
+        child: Scaffold(
+          body: Obx(
+            () => Stack(
+              children: [
+                AnimatedContainer(
+                  duration: Duration(milliseconds: 450),
+                  margin: EdgeInsets.only(
+                    left: Responsive.isDesktop(context)
+                        ? homecontroller.menuButton.value
+                            ? 250.0
+                            : 70.0
+                        : 0,
+                  ),
+                  color: Color.fromARGB(255, 234, 236, 238),
+                  width: Get.width,
+                  height: Get.height,
+                  child: Column(
+                    children: [
+                      HeaderWidget(),
+                      Container(
+                        height: 55,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(0),
+                          border: Border.all(
+                            color: Color.fromARGB(255, 227, 224, 224),
+                            width: 1,
+                          ),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Color.fromARGB(255, 236, 234, 234)
+                                  .withOpacity(0.5),
+                              spreadRadius: 2,
+                              blurRadius: 5,
+                              offset: Offset(0, 2),
+                            ),
+                          ],
+                        ),
+                        child: Row(
+                          children: [
+                            Icon(
+                              Icons.home,
+                              color: ColorValues.greyLightColor,
+                            ),
+                            InkWell(
+                              onTap: () {
+                                Get.offNamed(Routes.home);
+                              },
+                              child: Text(
+                                "Dashboard",
+                                style: Styles.greyLight14,
                               ),
-                              // constraints: BoxConstraints(
-                              //   maxWidth: 1100,
-                              // ),
-                              child: SingleChildScrollView(
-                                child: Column(
-                                  children: [
-                                    HeaderWidget(),
-                                    Container(
-                                      height: 55,
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(0),
-                                        border: Border.all(
-                                          color: Color.fromARGB(
-                                              255, 227, 224, 224),
-                                          width: 1,
-                                        ),
-                                        boxShadow: [
-                                          BoxShadow(
-                                            color: Color.fromARGB(
-                                                    255, 236, 234, 234)
-                                                .withOpacity(0.5),
-                                            spreadRadius: 2,
-                                            blurRadius: 5,
-                                            offset: Offset(0, 2),
-                                          ),
-                                        ],
-                                      ),
-                                      child: Row(
-                                        children: [
-                                          Icon(
-                                            Icons.home,
-                                            color: ColorValues.greyLightColor,
-                                          ),
-                                          InkWell(
-                                            onTap: () {
-                                              Get.offNamed(Routes.home);
-                                            },
-                                            child: Text(
-                                              "Dashboard",
-                                              style: Styles.greyLight14,
-                                            ),
-                                          ),
-                                          InkWell(
-                                            onTap: () {
-                                              Get.offNamed(Routes
-                                                  .escalationMatrixListWeb);
-                                            },
-                                            child: Text(
-                                                " / Escalation Matrix List",
-                                                style:
-                                                    Styles.greyMediumLight12),
-                                          ),
-                                          Text(" / Create Escalation Matrix",
-                                              style: Styles.greyMediumLight12)
-                                        ],
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      height: 10,
-                                    ),
-                                    SizedBox(
-                                      width:
-                                          MediaQuery.of(context).size.width / 1,
-                                      // height: MediaQuery.of(context).size.height / 1,
-                                      child: Card(
-                                        color: Colors.lightBlue.shade50,
-                                        child: Wrap(
-                                          children: [
-                                            GetBuilder<
-                                                    AddEscalationMatrixController>(
-                                                id: 'escalation-matrix',
-                                                builder: (controller) {
-                                                  return Obx(
-                                                    () => Column(
-                                                      children: [
-                                                        CustomAppBar(
-                                                          title:
-                                                              'Create Escalation Matrix'
-                                                                  .tr,
-                                                        ),
-                                                        Dimens.boxHeight20,
-                                                        Row(
-                                                          mainAxisAlignment:
-                                                              MainAxisAlignment
-                                                                  .center,
-                                                          children: [
-                                                            CustomRichText(
-                                                                title:
-                                                                    'Module'),
-                                                            Dimens.boxWidth5,
-                                                            SizedBox(
-                                                              width: MediaQuery.of(
-                                                                          context)
-                                                                      .size
-                                                                      .width /
-                                                                  5,
-                                                              child:
-                                                                  DropdownWebWidget(
-                                                                dropdownList:
-                                                                    controller
-                                                                        .moduleList,
-                                                                isValueSelected:
-                                                                    controller
-                                                                        .isModuleListSelected
-                                                                        .value,
-                                                                selectedValue:
-                                                                    controller
-                                                                        .selectedModuleList
-                                                                        .value,
-                                                                onValueChanged:
-                                                                    controller
-                                                                        .onValueChanged,
-                                                              ),
-                                                            ),
-                                                            Dimens.boxWidth30,
-                                                            CustomRichText(
-                                                                title:
-                                                                    'Status'),
-                                                            Dimens.boxWidth5,
-                                                            SizedBox(
-                                                              width: MediaQuery.of(
-                                                                          context)
-                                                                      .size
-                                                                      .width /
-                                                                  5,
-                                                              child:
-                                                                  DropdownWebWidget(
-                                                                dropdownList:
-                                                                    controller
-                                                                        .typePermitList,
-                                                                isValueSelected:
-                                                                    controller
-                                                                        .isTypePermitSelected
-                                                                        .value,
-                                                                selectedValue:
-                                                                    controller
-                                                                        .selectedTypePermit
-                                                                        .value,
-                                                                onValueChanged:
-                                                                    controller
-                                                                        .onValueChanged,
-                                                              ),
-                                                            ),
-                                                          ],
-                                                        ),
-                                                        Dimens.boxHeight50,
-
-                                                        ///Escalation Matrix Roles
-                                                        Obx(
-                                                          () => Wrap(
-                                                            children: [
-                                                              Container(
-                                                                height: 350,
-                                                                width: MediaQuery.of(
-                                                                            context)
-                                                                        .size
-                                                                        .width /
-                                                                    1.5,
-                                                                decoration:
-                                                                    BoxDecoration(
-                                                                  border: Border
-                                                                      .all(
-                                                                    color: ColorValues
-                                                                        .lightGreyColorWithOpacity35,
-                                                                    width: 1,
-                                                                  ),
-                                                                  boxShadow: [
-                                                                    BoxShadow(
-                                                                      color: ColorValues
-                                                                          .appBlueBackgroundColor,
-                                                                      spreadRadius:
-                                                                          2,
-                                                                      blurRadius:
-                                                                          5,
-                                                                      offset:
-                                                                          Offset(
-                                                                              0,
-                                                                              2),
-                                                                    ),
-                                                                  ],
-                                                                ),
-                                                                child: Column(
-                                                                  children: [
-                                                                    Padding(
-                                                                      padding: const EdgeInsets
-                                                                          .symmetric(
-                                                                          horizontal:
-                                                                              20,
-                                                                          vertical:
-                                                                              5),
-                                                                      child:
-                                                                          Row(
-                                                                        children: [
-                                                                          Text(
-                                                                              "Escalation Levels"),
-                                                                          Spacer(),
-                                                                          GestureDetector(
-                                                                              onTap: () {
-                                                                                controller.addRowItem();
-                                                                              },
-                                                                              child: Icon(Icons.exposure_plus_1)),
-                                                                        ],
-                                                                      ),
-                                                                    ),
-                                                                    // Column(
-                                                                    //     children: []
-                                                                    //       ..addAll(
-                                                                    //           controller
-                                                                    //               .rowItem
-                                                                    //               .value
-                                                                    //               .map(
-                                                                    //                   (e) {
-                                                                    //         return Text(
-                                                                    //             jsonEncode(
-                                                                    //                 e));
-                                                                    //       }))),
-                                                                    // Text(jsonEncode(controller
-                                                                    //     .dropdownMapperData)),
-                                                                    Container(
-                                                                      height:
-                                                                          300,
-                                                                      child:
-                                                                          ScrollableTableView(
-                                                                        columns:
-                                                                            [
-                                                                          "Duration (Days)",
-                                                                          "Escalation Roles and Levels",
-                                                                        ].map((column) {
-                                                                          return TableViewColumn(
-                                                                            label:
-                                                                                column,
-                                                                            minWidth:
-                                                                                Get.width * 0.35,
-                                                                            height:
-                                                                                Get.height / 2,
-                                                                          );
-                                                                        }).toList(),
-                                                                        rows: controller
-                                                                            .rowItem
-                                                                            .value
-                                                                            .map((record) {
-                                                                          return TableViewRow(
-                                                                            height:
-                                                                                200,
-                                                                            cells:
-                                                                                record.map((mapData) {
-                                                                              return TableViewCell(
-                                                                                child: (mapData['key'] == "Duration (Days)")
-                                                                                    ? Padding(
-                                                                                        padding: const EdgeInsets.only(left: 20, right: 20, top: 10),
-                                                                                        child: Column(
-                                                                                          mainAxisAlignment: MainAxisAlignment.center,
-                                                                                          crossAxisAlignment: CrossAxisAlignment.center,
-                                                                                          children: [
-                                                                                            SizedBox(
-                                                                                                width: MediaQuery.of(context).size.width / 5,
-                                                                                                child: LoginCustomTextfield(
-                                                                                                  keyboardType: TextInputType.number,
-                                                                                                  inputFormatters: <TextInputFormatter>[
-                                                                                                    FilteringTextInputFormatter.digitsOnly
-                                                                                                  ],
-                                                                                                  maxLine: 1,
-                                                                                                  textController: new TextEditingController(text: mapData["value"] ?? ''),
-                                                                                                  onChanged: (txt) {
-                                                                                                    mapData["value"] = txt;
-                                                                                                  },
-                                                                                                )),
-                                                                                            SizedBox(
-                                                                                              height: 5,
-                                                                                            ),
-                                                                                          ],
-                                                                                        ),
-                                                                                      )
-                                                                                    : (mapData['key'] == "Escalation Roles and Levels")
-                                                                                        ? SizedBox(
-                                                                                            width: MediaQuery.of(context).size.width / 5,
-                                                                                            child: DropdownWebWidget(
-                                                                                              dropdownList: controller.roleList,
-                                                                                              isValueSelected: controller.isSelectedRole.value,
-                                                                                              selectedValue: mapData["value"],
-                                                                                              onValueChanged: (list, selectedValue) {
-                                                                                                print("dropdownData:${{
-                                                                                                  selectedValue: selectedValue
-                                                                                                }}");
-                                                                                                mapData["value"] = selectedValue;
-                                                                                                controller.dropdownMapperData[selectedValue] = list.firstWhere((element) => element.name == selectedValue, orElse: null);
-                                                                                              },
-                                                                                            ),
-                                                                                          )
-                                                                                        : Text(mapData['key'] ?? ''),
-                                                                              );
-                                                                            }).toList(),
-                                                                          );
-                                                                        }).toList(),
-                                                                      ),
-                                                                    ),
-                                                                  ],
-                                                                ),
-                                                              ),
-                                                            ],
-                                                          ),
-                                                        ),
-                                                        // Container(
-                                                        //   height: 28,
-                                                        //   child: CustomElevatedButton(
-                                                        //     backgroundColor:
-                                                        //         ColorValues.appGreenColor,
-                                                        //     text: "Add Data",
-                                                        //     onPressed: () {
-                                                        //       controller
-                                                        //           .addStatusEscalationData(
-                                                        //               controller
-                                                        //                   .selectedTypePermitId);
-                                                        //       controller.addEscalationData(
-                                                        //           int.tryParse(
-                                                        //               '${controller.durationDaysTextCtrlr.text}'),
-                                                        //           controller
-                                                        //               .selectedRoleListId);
-                                                        //       print(
-                                                        //           'Controller:${controller.durationDaysTextCtrlr.text}');
-                                                        //       print(
-                                                        //           'Controller:${controller.selectedTypePermitId}');
-                                                        //       controller
-                                                        //           .durationDaysTextCtrlr
-                                                        //           .clear();
-                                                        //       controller.selectedRole
-                                                        //           .value = "";
-                                                        //     },
-                                                        //   ),
-                                                        // ),
-
-                                                        Row(
-                                                          mainAxisAlignment:
-                                                              MainAxisAlignment
-                                                                  .center,
-                                                          children: [
-                                                            SizedBox(
-                                                              height: 150,
-                                                            ),
-
-                                                            SizedBox(
-                                                              width: 15,
-                                                            ),
-                                                            CustomElevatedButton(
-                                                              backgroundColor:
-                                                                  Colors.red,
-                                                              onPressed: () {
-                                                                // controller.saveAsDraft();
-                                                              },
-                                                              text: 'Cancel',
-                                                            ),
-                                                            SizedBox(
-                                                              width: 20,
-                                                            ),
-                                                            Container(
-                                                              height: 28,
-                                                              child:
-                                                                  CustomElevatedButton(
-                                                                backgroundColor:
-                                                                    ColorValues
-                                                                        .appGreenColor,
-                                                                text: "Submit",
-                                                                onPressed: () {
-                                                                  controller
-                                                                      .createEscalationMatrix();
-                                                                },
-                                                              ),
-                                                            ),
-
-                                                            //           varUserAccessModel.value.access_list!
-                                                            // .where((e) => e.feature_id == 3 && e.edit == 1)
-                                                            // .length > 0
-                                                            // &&
-                                                            // controller.incidentReportDetailsModel
-                                                            //             .value?.id !=
-                                                            //         null
-                                                            //     ? CustomElevatedButton(
-                                                            //         icon: Icons.edit,
-                                                            //         backgroundColor: Colors.green,
-                                                            //         onPressed: () {
-                                                            //           // controller.saveAsDraft();
-                                                            //           controller.editIncidentReport(
-                                                            //               id: controller
-                                                            //                   .incidentReportDetailsModel
-                                                            //                   .value
-                                                            //                   ?.id);
-                                                            //         },
-                                                            //         text: 'Edit',
-                                                            //       )
-                                                            //     : Container()
-                                                          ],
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  );
-                                                }),
-                                          ],
+                            ),
+                            InkWell(
+                              onTap: () {
+                                Get.offNamed(Routes.escalationMatrixListWeb);
+                              },
+                              child: Text(
+                                " / Escalation Matrix List",
+                                style: Styles.greyLight14,
+                              ),
+                            ),
+                            Text(
+                              " / Create Escalation Matrix",
+                              style: Styles.greyLight14,
+                            )
+                          ],
+                        ),
+                      ),
+                      Expanded(
+                        child: Container(
+                          margin: EdgeInsets.all(10),
+                          child: Card(
+                            // color: Colors.lightBlue.shade50,
+                            color: ColorValues.cardColor,
+                            elevation: 10,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10.0),
+                            ),
+                            child: SingleChildScrollView(
+                              child: Column(
+                                children: [
+                                  Row(
+                                    children: [
+                                      Container(
+                                        padding: EdgeInsets.all(15),
+                                        child: Text(
+                                          'Create Escalation Matrix',
+                                          style: Styles.blue17,
                                         ),
                                       ),
-                                    ),
-                                  ],
-                                ),
+                                      Spacer(),
+                                    ],
+                                  ),
+                                  Divider(
+                                    color: ColorValues.greyLightColour,
+                                  ),
+                                  Dimens.boxHeight10,
+                                  Row(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      CustomRichText(
+                                        title: 'Module',
+                                      ),
+                                      Dimens.boxWidth5,
+                                      SizedBox(
+                                        width:
+                                            MediaQuery.of(context).size.width /
+                                                5,
+                                        child: DropdownWebWidget(
+                                          dropdownList: controller.moduleList,
+                                          isValueSelected: controller
+                                              .isModuleListSelected.value,
+                                          selectedValue: controller
+                                              .selectedModuleList.value,
+                                          onValueChanged:
+                                              controller.onValueChanged,
+                                        ),
+                                      ),
+                                      Dimens.boxWidth30,
+                                      CustomRichText(
+                                        title: 'Status',
+                                      ),
+                                      Dimens.boxWidth5,
+                                      SizedBox(
+                                        width:
+                                            MediaQuery.of(context).size.width /
+                                                5,
+                                        child: DropdownWebWidget(
+                                          dropdownList: controller.status,
+                                          isValueSelected: controller
+                                              .isTypePermitSelected.value,
+                                          selectedValue: controller
+                                              .selectedTypePermit.value,
+                                          onValueChanged:
+                                              controller.onValueChanged,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  Center(
+                                    child: AddRowInEscalation(),
+                                  ),
+                                ],
                               ),
                             ),
                           ),
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
-                  AnimatedPositioned(
-                      child: HomeDrawer(),
-                      duration: Duration(milliseconds: 450))
-                ],
-              ),
+                ),
+                AnimatedPositioned(
+                  child: HomeDrawer(),
+                  duration: Duration(milliseconds: 450),
+                )
+              ],
             ),
-
-            // ),
+          ),
+          floatingActionButton: Row(
+            children: [
+              Spacer(),
+              Container(
+                height: 30,
+                child: CustomElevatedButton(
+                  backgroundColor: Colors.red,
+                  onPressed: () {
+                    // controller.saveAsDraft();
+                  },
+                  text: 'Cancel',
+                ),
+              ),
+              SizedBox(
+                width: 20,
+              ),
+              Container(
+                height: 30,
+                child: CustomElevatedButton(
+                  backgroundColor: ColorValues.appGreenColor,
+                  text: "Submit",
+                  onPressed: () {
+                    controller.createEscalationMatrix();
+                  },
+                ),
+              ),
+              Spacer(),
+            ],
           ),
         ),
       );
+}
+
+class AddRowInEscalation extends StatelessWidget {
+  final AddEscalationMatrixController controller = Get.find();
+  AddRowInEscalation({super.key});
+  @override
+  Widget build(BuildContext context) {
+    return Obx(
+      () => Container(
+        margin: Dimens.edgeInsets20,
+        height: Get.height * .6,
+        width: MediaQuery.of(context).size.width / 1.5,
+        decoration: BoxDecoration(
+          border: Border.all(
+            color: ColorValues.lightGreyColorWithOpacity35,
+            width: 1,
+          ),
+        ),
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "Escalation Levels",
+                      style: Styles.blue700,
+                    ),
+                    InkWell(
+                      onTap: () {
+                        controller.addRowItem();
+                        controller.update();
+                      },
+                      child: Container(
+                        height: 25,
+                        width: 70,
+                        decoration: BoxDecoration(
+                          color: ColorValues.addNewColor,
+                          border: Border.all(
+                            color: ColorValues.lightGreyColorWithOpacity35,
+                            width: 1,
+                          ),
+                          borderRadius: BorderRadius.all(Radius.circular(5)),
+                        ),
+                        child: Center(
+                          child: Text(
+                            " + Add ",
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.w100,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Container(
+                width: 1000,
+                child: SingleChildScrollView(
+                  child: DataTable(
+                    border: TableBorder.all(
+                        color: Color.fromARGB(255, 206, 229, 234)),
+                    columns: [
+                      DataColumn(
+                        label: Text(
+                          "Duration (Days)",
+                          style: TextStyle(
+                              fontSize: 15, fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                      DataColumn(
+                        label: Text(
+                          "Escalation Roles and Levels",
+                          style: TextStyle(
+                              fontSize: 15, fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                      DataColumn(
+                        label: Text(
+                          "Action",
+                          style: TextStyle(
+                              fontSize: 15, fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                    ],
+                    rows: List.generate(
+                      controller.rowItem.length,
+                      (rowIndex) {
+                        var row = controller.rowItem[rowIndex];
+                        return DataRow(
+                          cells: row.map(
+                            (mapData) {
+                              return DataCell(
+                                (mapData['key'] == "Duration (Days)")
+                                    ? Padding(
+                                        padding: const EdgeInsets.only(
+                                            left: 20, right: 20, top: 5),
+                                        child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          children: [
+                                            SizedBox(
+                                              width: Get.width * .2,
+                                              child: LoginCustomTextfield(
+                                                keyboardType:
+                                                    TextInputType.number,
+                                                inputFormatters: <TextInputFormatter>[
+                                                  FilteringTextInputFormatter
+                                                      .digitsOnly
+                                                ],
+                                                maxLine: 1,
+                                                textController:
+                                                    new TextEditingController(
+                                                        text:
+                                                            mapData["value"] ??
+                                                                ''),
+                                                onChanged: (txt) {
+                                                  mapData["value"] = txt;
+                                                },
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      )
+                                    : (mapData['key'] ==
+                                            "Escalation Roles and Levels")
+                                        ? SizedBox(
+                                            width: Get.width * .2,
+                                            child: DropdownWebWidget(
+                                              dropdownList: controller.roleList,
+                                              isValueSelected: controller
+                                                  .isSelectedRole.value,
+                                              selectedValue: mapData["value"],
+                                              onValueChanged:
+                                                  (list, selectedValue) {
+                                                print(
+                                                  "dropdownData:${{
+                                                    selectedValue: selectedValue
+                                                  }}",
+                                                );
+                                                mapData["value"] =
+                                                    selectedValue;
+                                                controller.dropdownMapperData[
+                                                        selectedValue] =
+                                                    list.firstWhere(
+                                                  (element) =>
+                                                      element.name ==
+                                                      selectedValue,
+                                                  orElse: null,
+                                                );
+                                              },
+                                            ),
+                                          )
+                                        : (mapData['key'] == "Action")
+                                            ? Padding(
+                                                padding:
+                                                    EdgeInsets.only(top: 5),
+                                                child: Column(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.start,
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    TableActionButton(
+                                                      color: ColorValues
+                                                          .appRedColor,
+                                                      icon:
+                                                          Icons.delete_outlined,
+                                                      label: '',
+                                                      message: '',
+                                                      onPress: () {
+                                                        controller.rowItem
+                                                            .remove(row);
+                                                        controller.update();
+                                                      },
+                                                    )
+                                                  ],
+                                                ),
+                                              )
+                                            : Text(mapData['key'] ?? ''),
+                              );
+                            },
+                          ).toList(),
+                        );
+                      },
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
 }

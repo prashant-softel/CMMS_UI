@@ -59,6 +59,7 @@ import 'package:cmms/domain/models/manufacturer_model.dart';
 import 'package:cmms/domain/models/mc_details_plan_model.dart';
 import 'package:cmms/domain/models/mc_task_list_model.dart';
 import 'package:cmms/domain/models/models.dart';
+import 'package:cmms/domain/models/module_model.dart';
 import 'package:cmms/domain/models/mrs_list_by_jobId.dart';
 import 'package:cmms/domain/models/new_permit_details_model.dart';
 import 'package:cmms/domain/models/new_permit_list_model.dart';
@@ -78,6 +79,7 @@ import 'package:cmms/domain/models/facility_type_list_model.dart';
 import 'package:cmms/domain/models/block_type_list_model.dart';
 import 'package:cmms/domain/models/set_pm_schedule_model.dart';
 import 'package:cmms/domain/models/source_of_obs_list_model.dart';
+import 'package:cmms/domain/models/status_list_model.dart';
 import 'package:cmms/domain/models/stock_management_update_goods_orders_model.dart';
 import 'package:cmms/domain/models/supplier_name_model.dart';
 import 'package:cmms/domain/models/tools_model.dart';
@@ -723,6 +725,41 @@ class Repository {
     }
   }
 
+  Future<NewPermitDetailModel?> getEscalationDetail({
+    int? moduleId,
+    int? statusId,
+    bool? isLoading,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getEscalationDetail(
+        auth: auth,
+        moduleId: moduleId,
+        statusId: statusId,
+        isLoading: isLoading ?? false,
+      );
+
+      print({"permitdetail", res.data});
+
+      if (!res.hasError) {
+        if (res.errorCode == 200) {
+          final NewPermitDetailModel _newPermitDetailModel =
+              newPermitDetailModelFromJson(res.data);
+
+          var responseMap = _newPermitDetailModel;
+          print({"responsedata", responseMap});
+          return responseMap;
+        }
+      } else {
+        Utility.showDialog(res.errorCode.toString(), 'escalation');
+      }
+      return null;
+    } catch (error) {
+      print(error.toString());
+      return null;
+    }
+  }
+
   // escalation matrix list
     Future<List<EscalationMatListModel>> getEscalationMatrixList({
     required bool isLoading,
@@ -950,6 +987,7 @@ class Repository {
       return Map();
     }
   }
+
   Future<Map<String, dynamic>> updateWasteData(
     createWasteData,
     bool? isLoading,
@@ -6548,6 +6586,63 @@ class Repository {
     }
   }
 
+  Future<List<ModuleModel?>?> getModule(
+    int? type,
+    int? facilityId,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getModuleList(
+        auth: auth,
+        facilityId: facilityId ?? 0,
+        type: type,
+        isLoading: isLoading ?? false,
+      );
+
+      if (!res.hasError) {
+        final jsonModuleListModelModels = jsonDecode(res.data);
+        // print(res.data);
+        final List<ModuleModel> _ModuleModelList = jsonModuleListModelModels
+            .map<ModuleModel>(
+                (m) => ModuleModel.fromJson(Map<String, dynamic>.from(m)))
+            .toList();
+
+        return _ModuleModelList;
+      } else {
+        Utility.showDialog(res.errorCode.toString(), ' getPreventiveCheckList');
+        return [];
+      }
+    } catch (error) {
+      print(error.toString());
+      return [];
+    }
+  }
+
+  Future<StatusList?> getStatusList({
+    int? moduleId,
+    bool? isLoading,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getStatusList(
+        auth: auth,
+        moduleId: moduleId,
+        isLoading: isLoading ?? false,
+      );
+      if (!res.hasError) {
+        final StatusList _statusList = statusListFromJson(res.data);
+        return _statusList;
+      } else {
+        Utility.showDialog(res.errorCode.toString(), ' getStatusList');
+        return StatusList();
+      }
+    } catch (error) {
+      print(error.toString());
+      return StatusList();
+    }
+  }
+
   Future<List<InventoryTypeListModel?>?> getInventoryTypeList(
     // int? type,
     int? facilityId,
@@ -11951,7 +12046,8 @@ class Repository {
       bool? isLoading,
       bool? isExport,
       dynamic startDate,
-      dynamic endDate,int? type) async {
+      dynamic endDate,
+      int? type) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.getAuditPlanList(
@@ -11959,7 +12055,8 @@ class Repository {
           facilityId: facilityId ?? 0,
           isLoading: isLoading ?? false,
           startDate: startDate,
-          endDate: endDate,type:type);
+          endDate: endDate,
+          type: type);
       print({"res.data", res.data});
       if (!res.hasError) {
         final jsonAuditPlanListModelModels = jsonDecode(res.data);

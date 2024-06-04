@@ -163,7 +163,7 @@ class WaterDataListController extends GetxController {
           {
             "label": _dataList.water_type,
             "isShow": true,
-            'subHeader': "Open",
+            'subHeader': "Opening",
             "dataKey": 'opening'
           },
         );
@@ -190,7 +190,7 @@ class WaterDataListController extends GetxController {
           {
             "label": _dataList.water_type,
             "isShow": false,
-            'subHeader': "Close",
+            'subHeader': "Closing",
             "dataKey": 'closingQty'
           },
         );

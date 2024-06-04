@@ -181,19 +181,15 @@ class CreateMrsReturnController extends GetxController {
         DateFormat('yyyy-MM-dd').format(requestd_date.value);
 
     List<CmmsItem> items = [];
-    List<FaultyItemsCmms> FaultyItems = [];
+    List<FaultyItemsCmms> faultyItems = [];
 
     rowItem.forEach((element) {
       CmmsItem item = CmmsItem(
-        asset_item_ID:
-            dropdownMapperData.value[element[0]["value"]]?.assetItemID,
-        issued_qty: dropdownMapperData.value[element[0]["value"]].issued_qty,
+        mrs_item_ID: dropdownMapperData.value[element[0]["value"]]?.mrs_item_id,
         returned_qty: dropdownMapperData.value[element[0]["value"]].issued_qty -
             dropdownMapperData.value[element[0]["value"]]
                 .consumed_qty, //double.tryParse(element[3]["value"] ?? '0'),
-        requested_qty: 0,
-        approval_required: 0,
-        is_faulty: 0,
+
         return_remarks: element[7]["value"] ?? '0',
       );
       items.add(item);
@@ -204,11 +200,11 @@ class CreateMrsReturnController extends GetxController {
             dropdownFaultyMapperData.value[element[0]["value"]]?.id,
         mrsItemID: 0,
         // dropdownFaultyMapperData.value[element[0]["value"]].issued_qty,
-        sr_no: element[7]["value"] ?? '0',
-        returned_qty: int.tryParse(element[7]["value"] ?? '0'),
-        return_remarks: element[7]["value"] ?? '0',
+        sr_no: element[4]["value"] ?? '0',
+        returned_qty: int.tryParse(element[5]["value"] ?? '0'),
+        return_remarks: element[6]["value"] ?? '0',
       );
-      FaultyItems.add(item);
+      faultyItems.add(item);
     });
     CreateReturnMrsModel createMrs = CreateReturnMrsModel(
         ID: 0,
@@ -223,7 +219,8 @@ class CreateMrsReturnController extends GetxController {
         from_actor_type_id: fromActorTypeId.value,
         from_actor_id: whereUsedTypeId.value,
         remarks: _remark,
-        cmmrsItems: items);
+        cmmrsItems: items,
+        faultyItems: faultyItems);
     var createReturnMrsJsonString = createMrs.toJson();
 
     print({"createReturnMrsJsonString", createReturnMrsJsonString});

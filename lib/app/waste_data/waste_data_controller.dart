@@ -139,7 +139,7 @@ class WasteDataController extends GetxController {
           {
             "label": _dataList.waste_type,
             "isShow": true,
-            'subHeader': "open",
+            'subHeader': "Opening",
             "dataKey": 'opening'
           },
         );
@@ -148,16 +148,16 @@ class WasteDataController extends GetxController {
         {
           "label": _dataList.waste_type,
           "isShow": _dataList.show_opening == 1 ? false : true,
-          'subHeader': "procrument",
-          "dataKey": 'procuredQty'
+          'subHeader': "+",
+          "dataKey": '+'
         },
       );
       headerList.add(
         {
           "label": _dataList.waste_type,
           "isShow": false,
-          'subHeader': "consmption",
-          "dataKey": 'consumedQty'
+          'subHeader': "-",
+          "dataKey": '-'
         },
       );
 
@@ -166,7 +166,7 @@ class WasteDataController extends GetxController {
           {
             "label": _dataList.waste_type,
             "isShow": false,
-            'subHeader': "close",
+            'subHeader': "Closing",
             "dataKey": 'closingQty'
           },
         );
@@ -175,7 +175,12 @@ class WasteDataController extends GetxController {
       masterDataListName.add(_dataList.waste_type ?? '');
     }
     headerList.add(
-      {"label": 'Action', "isShow": true, 'subHeader': "", "dataKey": 'action'},
+      {
+        "label": 'Action',
+        "isShow": true,
+        'subHeader': "Action",
+        "dataKey": 'action'
+      },
     );
     mainHeaderList.add(
       {
@@ -394,6 +399,7 @@ class WasteDataController extends GetxController {
 
     print('Create Water data: $createWaterDataModelJsonString');
   }
+
   void updateWasteDataDisposed() async {
     String _descriptionCtrlr = descriptionCtrlr.text.trim();
     String _qtCtrlr = qtyCtrlr.text.trim();

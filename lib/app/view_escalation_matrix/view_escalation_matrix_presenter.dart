@@ -1,57 +1,23 @@
-
 import 'package:cmms/domain/usecases/view_escalation_matrix_usecase.dart';
-
-
-
-import '../../domain/models/facility_model.dart';
 
 class ViewEscalationMatrixPresenter {
   ViewEscalationMatrixPresenter(this.viewIncidentReportUsecase);
   ViewEscalationMatrixUsecase viewIncidentReportUsecase;
 
- 
+  void saveStatusValue({String? statusId}) async {
+    return viewIncidentReportUsecase.saveStatusValue(statusId: statusId);
+  }
 
-  // Future<IncidentReportDetailsModel?> getIncidentReportDetail({
-  //   bool? isLoading,  
-  //   required int id,
-  // }) async {
-  //     return viewIncidentReportUsecase.getIncidentReportDetail(
-  //       id: id,
-  //       isLoading: isLoading ?? false,
-  //     );
-  // }
+  void clearStatusValue() async => viewIncidentReportUsecase.clearStatusValue();
 
-  //  Future<List<TypePermitModel?>?> getTypePermitList(
-  //   {required int facility_id}
-  //  ) async =>
-  //     await viewIncidentReportUsecase.getTypePermitList(
-  //       true,
-  //       facility_id
-  //       );
+  Future<String?> getStatusValue() async =>
+      await viewIncidentReportUsecase.getStatusValue();
+  void saveModuleValue({String? moduleId}) async {
+    return viewIncidentReportUsecase.saveModuleValue(moduleId: moduleId);
+  }
 
-  //  Future<List<HistoryModel>?> getIncidentReportHistory(
-  //   moduleType,
-  //   id,
-  //   isLoading,
-  // ) async =>
-  //     await viewIncidentReportUsecase.getIncidentReportHistory(
-  //       moduleType: moduleType,
-  //       id: id,
-  //       isLoading: isLoading,
-  //     );
+  void clearModuleValue() async => viewIncidentReportUsecase.clearModuleValue();
 
- 
-
-
-
-
-  Future<List<FacilityModel?>?> getFacilityList() async =>
-      await viewIncidentReportUsecase.getFacilityList();
-
- 
-
-  Future<String?> getUserAccessList() async =>
-      await viewIncidentReportUsecase.getUserAccessList();
-
-  ///
+  Future<String?> getModuleValue() async =>
+      await viewIncidentReportUsecase.getModuleValue();
 }
