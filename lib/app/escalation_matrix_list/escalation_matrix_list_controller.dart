@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/escalation_matrix_list/escalation_matrix_list_presenter.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
+import 'package:cmms/domain/models/escalation_matrix_list_model.dart';
 import 'package:cmms/domain/models/incident_report_list_model.dart';
 import 'package:get/get.dart';
 import 'package:rxdart/subjects.dart';
@@ -14,22 +15,10 @@ class EscalationMatrixListController extends GetxController {
   EscalationMatrixListPresenter escalationMatrixPresenter;
 
   final HomeController homeController = Get.find();
-
- 
-
-
-
-
-
-// //Escalation Matrix List
+  RxList<EscalationMatListModel> matrixlist = <EscalationMatListModel>[].obs;
+  RxList<EscalationMatListModel> Buffermatrixlist =
+      <EscalationMatListModel>[].obs;
   var incidentReportList = <IncidentReportListModel>[];
-
-
-// ///Escalation Matrix List
-  // RxList<EscalationMatrixListModel?> escalationMatrixList =
-  //     <EscalationMatrixListModel>[].obs;
-
-
 
   RxList<FacilityModel?> facilityList = <FacilityModel>[].obs;
   Rx<bool> isFacilitySelected = true.obs;
@@ -45,15 +34,12 @@ class EscalationMatrixListController extends GetxController {
     rowsPerPage: 10,
   );
 
-
-
   BehaviorSubject<int> _facilityId = BehaviorSubject.seeded(0);
   Stream<int> get facilityId$ => _facilityId.stream;
   int get facilityId1 => _facilityId.value;
 
   StreamSubscription<int>? facilityIdStreamSubscription;
   int facilityId = 0;
-
 
   ///
 // int? wc_id = 0;
@@ -64,16 +50,31 @@ class EscalationMatrixListController extends GetxController {
     facilityIdStreamSubscription = homeController.facilityId$.listen((event) {
       facilityId = event;
       Future.delayed(Duration(seconds: 2), () {
-        // getEscalationMatrixList(false);
+        getEscalationMatrixList();
       });
     });
 
     Future.delayed(Duration(seconds: 1), () {
       getFacilityList();
     });
-    
 
     super.onInit();
+  }
+
+  void search(String keyword) {
+    print('Keyword: $keyword');
+    if (keyword.isEmpty) {
+      matrixlist.value = Buffermatrixlist.value;
+      return;
+    }
+    List<EscalationMatListModel> filteredList = Buffermatrixlist.where((item) =>
+        (item.moduleName.toString().contains(keyword.toLowerCase()) ?? false) ||
+        (item.statusName
+                .toString()
+                .toLowerCase()
+                .contains(keyword.toLowerCase()) ??
+            false)).toList();
+    matrixlist.value == filteredList;
   }
 
   Future<void> getFacilityList() async {
@@ -89,10 +90,19 @@ class EscalationMatrixListController extends GetxController {
     }
   }
 
- 
+  Future<void> getEscalationMatrixList() async {
+    matrixlist.value.clear();
+    matrixlist.value = <EscalationMatListModel>[];
+    Buffermatrixlist.value = <EscalationMatListModel>[];
+    final _matrixlist = await escalationMatrixPresenter.getEscalationMatrixList(
+        isLoading: true);
+    for (var matrix_list in _matrixlist) {
+      matrixlist.add(matrix_list);
+      Buffermatrixlist.add(matrix_list);
+    }
+  }
 
-  
-  // Future<void> getEscalationMatrixList( 
+  // Future<void> getEscalationMatrixList(
   //     bool isLoading) async {
   //   escalationMatrixList.value = <EscalationMatrixListModel>[];
 
@@ -100,7 +110,7 @@ class EscalationMatrixListController extends GetxController {
   //       isLoading: isLoading,
   //       module: "JOB"
   //       );
-  
+
   //   print('Escalation Matrix List:$list');
   //   for (var escalation_list in list) {
   //     escalationMatrixList.add(escalation_list);
@@ -119,11 +129,12 @@ class EscalationMatrixListController extends GetxController {
       case RxList<FacilityModel>:
         {
           if (value != "Please Select") {
-            int facilityIndex = facilityList.indexWhere((x) => x?.name == value);
+            int facilityIndex =
+                facilityList.indexWhere((x) => x?.name == value);
 
-          _facilityId.add(facilityList[facilityIndex]?.id ?? 0);
+            _facilityId.add(facilityList[facilityIndex]?.id ?? 0);
           } else {
-            facilityId=0;
+            facilityId = 0;
           }
         }
         break;
@@ -178,8 +189,6 @@ class EscalationMatrixListController extends GetxController {
   //   }
 
   // }
-
- 
 
   Future<void> viewEscalationMatrix({int? id}) async {
     Get.toNamed(Routes.viewEscalatiomMatrixContentWeb, arguments: id);

@@ -1278,6 +1278,21 @@ class MastersDashboard extends GetView<MastersController> {
                                                 Get.toNamed(Routes.Bodyinjured);
                                               })
                                           : Dimens.box0,
+                                    ],
+                                  ),
+                                  GridView.count(
+                                    shrinkWrap: true,
+                                    primary: false,
+                                    padding: Dimens.edgeInsets15,
+                                    crossAxisSpacing: 70,
+                                    mainAxisSpacing: 6,
+                                    crossAxisCount:
+                                        Responsive.isMobile(context) ? 2 : 5,
+                                    childAspectRatio:
+                                        Responsive.isMobile(context)
+                                            ? (itemWidth / itemHeight)
+                                            : 5,
+                                    children: <Widget>[
                                       varUserAccessModel.value.access_list!
                                                   .where((e) =>
                                                       e.feature_id ==

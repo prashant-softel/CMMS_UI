@@ -1,3 +1,4 @@
+import 'package:cmms/domain/models/escalation_matrix_list_model.dart';
 import 'package:cmms/domain/usecases/escalation_matrix_list_usecase.dart';
 
 import '../../domain/models/facility_model.dart';
@@ -10,19 +11,13 @@ class EscalationMatrixListPresenter {
     return await escalationMatrixListUsecase.generateToken();
   }
 
-  // Future<List<IncidentReportListModel>> getEscalationMatrixList({
-  //   required bool isLoading,
-  //   required int? facility_id,
-  //   String? start_date,
-  //   required String end_date,
-  // }) async {
-  //   return escalationMatrixListUsecase.getEscalationMatrixList(
-  //     isLoading: isLoading,
-  //     facility_id: facility_id,
-  //     start_date: start_date,
-  //     end_date: end_date,
-  //   );
-  // }
+  Future<List<EscalationMatListModel>> getEscalationMatrixList({
+    required bool isLoading,
+  }) async {
+    return escalationMatrixListUsecase.getEscalationMatrixList(
+      isLoading: isLoading,
+    );
+  }
 
   // Future<void> incidentReportRejectButton({
   //   String? comment,

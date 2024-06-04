@@ -1839,6 +1839,16 @@ class DataRepository extends DomainRepository {
         isLoading: isLoading ?? false,
       );
 
+    Future<ResponseModel> getEscalationMatrixList({
+    required bool isLoading,
+    required String auth,
+  }) async {
+    return await connectHelper.getEscalationMatrixList(
+      isLoading: isLoading,
+      auth: auth,
+    );
+  }
+
   Future<ResponseModel> createMcPlan({
     required String auth,
     createMcPlans,

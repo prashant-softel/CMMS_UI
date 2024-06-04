@@ -3187,6 +3187,24 @@ class ConnectHelper {
     return responseModel;
   }
 
+  //get escalation matrix list
+  Future<ResponseModel> getEscalationMatrixList({
+    required bool isLoading,
+    required String auth,
+    //  int? facility_id
+  }) async {
+    ResponseModel responseModel = await apiWrapper.makeRequest(
+      'EM/GetEscalationMatrix',
+      Request.getMultiparts,
+      null,
+      isLoading,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
   //Create WarraGoods order
 
   Future<ResponseModel> createGoodsOrder({
