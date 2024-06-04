@@ -313,7 +313,7 @@ class PreventiveMaintenanceExecutionController extends GetxController {
       AddObservations item = AddObservations(
           execution_id: int.tryParse(element[0]["id"] ?? '0'),
           observation: element[4]["value"] ?? "",
-          job_create: int.tryParse(element[7]["job_value"] ?? '0'),
+          job_create: int.tryParse(element[7]["value"] ?? '0'),
           text: element[6]["value"] ?? '',
           cp_ok: int.tryParse(element[3]["value"] ?? '0'),
           pm_files: pmfile);
