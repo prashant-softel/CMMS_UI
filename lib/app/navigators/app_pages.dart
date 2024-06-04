@@ -2,6 +2,8 @@
 
 import 'package:cmms/app/Course_Category/View/course_category_screen.dart';
 import 'package:cmms/app/Course_Category/course_category_binding.dart';
+import 'package:cmms/app/Statutory-Compliance/Statutory_Compliance_binding.dart';
+import 'package:cmms/app/Statutory-Compliance/view/Statutory_Compliance_screen.dart';
 import 'package:cmms/app/Statutory/statutory_binding.dart';
 import 'package:cmms/app/Statutory/views/statutory_screen.dart';
 import 'package:cmms/app/add_escalation_matrix/add_escalation_matrix_binding.dart';
@@ -1314,6 +1316,11 @@ class AppPages {
       name: _Paths.targetedGroup,
       page: TargetedGroupScreen.new,
       binding: TargetedGroupBinding(),
+    ),
+     GetPage<dynamic>(
+      name: _Paths.StatutoryCompliance,
+      page: StatutoryComplianceScreen.new,
+      binding: StatutoryComplianceBinding(),
     ),
   ];
 }

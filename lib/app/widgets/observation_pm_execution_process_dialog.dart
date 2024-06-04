@@ -739,8 +739,10 @@ class ObservationPmExecutionViewDialog extends GetView {
         //     "${record[3]['value']},${record[7]['cp_ok_value']},${((record[7]['cp_ok_value'] == "0" && record[3]['value'] == "0") || (record[7]['cp_ok_value'] == "0" && record[3]['value'] == "1"))},${(record[3]['value'] != "1" && record[7]['cp_ok_value'] == "0")}");
         return Row(
           children: [
-            (mapData['job_value'] != "0")
-                ? Text('JOB${mapData['job_value']}')
+            (record[7]['value'] != "1" &&
+                    record[7]['value'] != "0" &&
+                    mapData['cp_ok_value'] != "1")
+                ? Text('JOB${(record[7]['value'])}')
                 : ((record[3]['value'] == "0")
                     //     ||
                     // (record[7]['cp_ok_value'] == "0" && record[3]['value'] == "1")
