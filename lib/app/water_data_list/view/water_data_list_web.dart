@@ -9,6 +9,7 @@ import 'package:cmms/domain/models/water_data_list_model.dart';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
 
 import 'package:intl/intl.dart';
@@ -20,24 +21,22 @@ class WaterDataListWeb extends GetView<WaterDataListController> {
   }) : super(key: key);
   final homecontroller = Get.find<HomeController>();
 
-  TableCell headerCell(String text, {bool isHeader = false}) => TableCell(
-        child: Container(
-          padding: EdgeInsets.all(8),
-          // color: Colors.white, // Background color for header cells
-          child: Center(
-              child: Text(text, style: TextStyle(fontWeight: FontWeight.bold))),
-          decoration: isHeader
-              ? BoxDecoration(
-                  border: Border(
-                    right: BorderSide(width: 1.0, color: Colors.white),
-                  ), // Custom border color for header cells
-                )
-              : BoxDecoration(
-                  // border: Border.all(
-                  //     color: Colors.blue,
-                  //     width: 2), // Custom border color for header cells
-                  ),
-        ),
+  Widget headerCell(String text, {bool isHeader = false}) => Container(
+        padding: EdgeInsets.all(8),
+        // color: Colors.white, // Background color for header cells
+        child: Center(
+            child: Text(text, style: TextStyle(fontWeight: FontWeight.bold))),
+        decoration: isHeader
+            ? BoxDecoration(
+                border: Border(
+                  right: BorderSide(width: 1.0, color: Colors.white),
+                ), // Custom border color for header cells
+              )
+            : BoxDecoration(
+                // border: Border.all(
+                //     color: Colors.blue,
+                //     width: 2), // Custom border color for header cells
+                ),
       );
 
   TableCell _actonData(PeriodData data) => TableCell(
@@ -85,6 +84,11 @@ class WaterDataListWeb extends GetView<WaterDataListController> {
       default:
         return '';
     }
+  }
+
+  Map<int, TableColumnWidth> generateColumnWidths(int numColumns) {
+    return Map.fromIterable(List.generate(numColumns, (index) => index),
+        key: (item) => item as int, value: (item) => FixedColumnWidth(150));
   }
 
   @override
@@ -254,54 +258,53 @@ class WaterDataListWeb extends GetView<WaterDataListController> {
                                             child: Padding(
                                               padding: const EdgeInsets.all(16),
                                               child: SingleChildScrollView(
+                                                scrollDirection:
+                                                    Axis.horizontal,
                                                 child: Column(
                                                   children: [
                                                     Row(
-                                                      children: []..addAll(controller.mainHeaderList.map((element) =>
-                                                          Container(
-                                                              height: 60,
-                                                              decoration:
-                                                                  BoxDecoration(
-                                                                color: ColorValues
-                                                                    .lightGreyColor,
-                                                                border: Border(
-                                                                  left: BorderSide(
-                                                                      color: Colors
-                                                                          .grey,
-                                                                      width: 1),
-                                                                  right: BorderSide(
-                                                                      color: Colors
-                                                                          .grey,
-                                                                      width: 1),
-                                                                  top: BorderSide(
-                                                                      color: Colors
-                                                                          .grey,
-                                                                      width: 1),
-                                                                ),
-                                                              ),
-                                                              width: ((MediaQuery.of(context)
-                                                                              .size
-                                                                              .width -
-                                                                          32) /
-                                                                      controller
-                                                                          .headerList
-                                                                          .length) *
-                                                                  element[
-                                                                      'colSpan'],
-                                                              child: headerCell(
-                                                                  element['label'])))),
+                                                      children: []..addAll(controller
+                                                          .mainHeaderList
+                                                          .map((element) =>
+                                                              Container(
+                                                                  height: 60,
+                                                                  decoration:
+                                                                      BoxDecoration(
+                                                                    color: ColorValues
+                                                                        .lightGreyColor,
+                                                                    border:
+                                                                        Border(
+                                                                      left: BorderSide(
+                                                                          color: Colors
+                                                                              .grey,
+                                                                          width:
+                                                                              1),
+                                                                      right: BorderSide(
+                                                                          color: Colors
+                                                                              .grey,
+                                                                          width:
+                                                                              1),
+                                                                      top: BorderSide(
+                                                                          color: Colors
+                                                                              .grey,
+                                                                          width:
+                                                                              1),
+                                                                    ),
+                                                                  ),
+                                                                  width: 150.0 *
+                                                                      element[
+                                                                          'colSpan'],
+                                                                  child: headerCell(
+                                                                      element[
+                                                                          'label'])))),
                                                     ),
                                                     Table(
                                                       border: TableBorder.all(
                                                           color: Colors.grey,
                                                           width: 1),
-                                                      columnWidths: const <int,
-                                                          TableColumnWidth>{
-                                                        0: FlexColumnWidth(),
-                                                        1: FlexColumnWidth(),
-                                                        2: FlexColumnWidth(),
-                                                        3: FlexColumnWidth(),
-                                                      },
+                                                      columnWidths:
+                                                          generateColumnWidths(
+                                                              150),
                                                       children: [
                                                         TableRow(
                                                             children: []
