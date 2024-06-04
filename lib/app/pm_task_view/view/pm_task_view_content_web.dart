@@ -1081,6 +1081,7 @@ class PreventiveMaintenanceTaskViewContentWeb
                             ),
                           )
                         : Dimens.box0,
+
                     Dimens.boxWidth10,
                     controller.pmtaskViewModel.value?.status == 162 &&
                             varUserAccessModel.value.access_list!

@@ -24,6 +24,7 @@ class ReturnMrsDetailsModel {
   String? issued_name;
   dynamic returned_qty;
   List<CmmsItems>? cmmrsItems;
+  List<CmmsItems>? cmmrsFaultyItems;
 
   ReturnMrsDetailsModel(
       {this.activity,
@@ -45,14 +46,18 @@ class ReturnMrsDetailsModel {
       this.issued_date,
       this.issued_name,
       this.status_long,
-      this.returned_qty});
+      this.returned_qty,
+      this.cmmrsFaultyItems});
 
   factory ReturnMrsDetailsModel.fromJson(Map<String, dynamic> parsedJson) {
     var list = parsedJson['cmmrsItems'] as List;
+    var faultylist = parsedJson['cmmrsFaultyItems'] as List;
+
     print(list.runtimeType);
     List<CmmsItems> cmmrsItems =
         list.map((i) => CmmsItems.fromJson(i)).toList();
-
+    List<CmmsItems> cmmrsFaultyItems =
+        faultylist.map((i) => CmmsItems.fromJson(i)).toList();
     return ReturnMrsDetailsModel(
       activity: parsedJson['activity'],
       returned_qty: parsedJson['returned_qty'],
@@ -70,6 +75,7 @@ class ReturnMrsDetailsModel {
       status_short: parsedJson['status_short'],
       whereUsedTypeId: parsedJson['whereUsedRefID'],
       cmmrsItems: cmmrsItems,
+      cmmrsFaultyItems: cmmrsFaultyItems,
       status: parsedJson['status'],
       whereUsedType: parsedJson['whereUsedTypeName'],
       remarks: parsedJson['remarks'],
@@ -98,11 +104,14 @@ class ReturnMrsDetailsModel {
         "status_long": status_long,
         "cmmrsItems":
             List<dynamic>.from(cmmrsItems?.map((x) => x.toJson()) ?? []),
+        "cmmrsFaultyItems":
+            List<dynamic>.from(cmmrsFaultyItems?.map((x) => x.toJson()) ?? []),
       };
 }
 
 class CmmsItems {
   int? id;
+  int? original_mrs_ID;
   int? mrs_return_ID;
   int? asset_item_ID;
   dynamic asset_MDM_code;
@@ -120,7 +129,7 @@ class CmmsItems {
   int? status;
   String? status_short;
   String? status_long;
-
+  dynamic serial_number;
   CmmsItems(
       {this.approval_required,
       this.approved_date,
@@ -138,11 +147,14 @@ class CmmsItems {
       this.returned_qty,
       this.status,
       this.status_short,
-      this.used_qty});
+      this.original_mrs_ID,
+      this.used_qty,
+      this.serial_number});
 
   factory CmmsItems.fromJson(Map<String, dynamic> parsedJson) {
     return CmmsItems(
         approval_required: parsedJson['approval_required'],
+        original_mrs_ID: parsedJson['original_mrs_ID'],
         approved_date: parsedJson['approved_date'],
         asset_MDM_code: parsedJson['asset_MDM_code'],
         asset_item_ID: parsedJson['asset_item_ID'],
@@ -151,6 +163,7 @@ class CmmsItems {
         asset_type_ID: parsedJson['asset_type_ID'],
         available_qty: parsedJson['available_qty'],
         id: parsedJson['id'],
+        serial_number: parsedJson['serial_number'],
         issued_date: parsedJson['issued_date'],
         issued_qty: parsedJson['issued_qty'],
         mrs_return_ID: parsedJson['mrs_return_ID'],
@@ -162,6 +175,8 @@ class CmmsItems {
   }
   Map<String, dynamic> toJson() => {
         "used_qty": used_qty,
+        "serial_number": serial_number,
+        "original_mrs_ID": original_mrs_ID,
         "status_short": status_short,
         "status": status,
         "returned_qty": returned_qty,

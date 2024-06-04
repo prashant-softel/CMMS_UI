@@ -62,12 +62,14 @@ class CreateMrsReturnController extends GetxController {
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
       facilityId = event;
       if (mrsId > 0) {
-        Future.delayed(Duration(seconds: 1), () {
-          getCmmsItemList(
-            facilityId,
-          );
-          getAssetList(facilityId);
-        });
+        if (facilityId > 0) {
+          Future.delayed(Duration(seconds: 1), () {
+            getCmmsItemList(
+              facilityId,
+            );
+            getAssetList(facilityId);
+          });
+        }
       }
     });
     super.onInit();
@@ -136,9 +138,9 @@ class CreateMrsReturnController extends GetxController {
         await createmrsReturnPresenter.getAssetList(facilityId: facilityId);
     // print('jkncejknce:$facilityId');
     if (_assetList != null) {
-      for (var asset in _assetList) {
-        assetList.add(asset);
-      }
+      //for (var asset in _assetList) {
+      assetList.value = _assetList;
+      //  }
       update(["AssetList"]);
     }
     addRowFaultyItem();
