@@ -46,11 +46,7 @@ class StatutoryMobile extends GetView<StatutoryController> {
                         child: Obx(
                           () => DropdownWebStock(
                             width: MediaQuery.of(context).size.width,
-                            dropdownList: controller.ownerList,
-                            isValueSelected:
-                                controller.isSelectedBusinessType.value,
-                            selectedValue:
-                                controller.selectedBusinessType.value,
+                            dropdownList: [],
                             onValueChanged: controller.onValueChanged,
                           ),
                         ),

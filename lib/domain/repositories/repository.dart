@@ -6,6 +6,7 @@ import 'package:cmms/domain/models/dashboard_model.dart';
 import 'package:cmms/domain/models/dsm_list_model.dart';
 import 'package:cmms/domain/models/escalation_matrix_list_model.dart';
 import 'package:cmms/domain/models/get_mc_task_equipment_model.dart';
+import 'package:cmms/domain/models/get_statutory_list_model.dart';
 import 'package:cmms/domain/models/grievance_type_model.dart';
 import 'package:cmms/domain/models/incident_risk_type_model.dart';
 import 'package:cmms/domain/models/grievance_List_model.dart';
@@ -761,7 +762,7 @@ class Repository {
   }
 
   // escalation matrix list
-    Future<List<EscalationMatListModel>> getEscalationMatrixList({
+  Future<List<EscalationMatListModel>> getEscalationMatrixList({
     required bool isLoading,
   }) async {
     try {
@@ -784,7 +785,6 @@ class Repository {
       return [];
     }
   }
-
 
   //Create or  add Goods order
   Future<Map<String, dynamic>> createGoodsOrder(
@@ -1646,6 +1646,100 @@ class Repository {
       } //
       else {
         Utility.showDialog(res.errorCode.toString(), 'getIncidentReportList');
+        return [];
+      }
+    } catch (error) {
+      print(error.toString());
+      return [];
+    }
+  }
+
+  Future<List<GetStatutoryList>> getStatutoryDataList({
+    required int? facility_id,
+    bool? isExport,
+    // String? start_date,
+    // required String end_date,
+    required bool isLoading,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+
+      log(auth);
+      final res = await _dataRepository.getStatutoryDataList(
+        facility_id: facility_id,
+        // start_date: start_date,
+        // end_date: end_date,
+        isLoading: isLoading,
+        auth: auth,
+      );
+      print('getStatutoryDataList: ${res.data}');
+
+      if (!res.hasError) {
+        final jsonStatutoryListModels = jsonDecode(res.data);
+        // print(res.data); `6
+        final List<GetStatutoryList> _getStatutoryModelList =
+            jsonStatutoryListModels
+                .map<GetStatutoryList>((m) =>
+                    GetStatutoryList.fromJson(Map<String, dynamic>.from(m)))
+                .toList();
+        String jsonData = getStatutoryListModelToJson(_getStatutoryModelList);
+
+        // if (isExport == true) {
+        //   List<dynamic> jsonDataList = jsonDecode(jsonData);
+
+        //   // List<List<dynamic>> data = [
+        //   //   [
+        //   //     'id',
+        //   //     'facility_id',
+        //   //     'facility_name',
+        //   //     'vendor_id',
+        //   //     'vendor_name',
+        //   //     'asset_type_id',
+        //   //     'accepted_qty',
+        //   //     'amount',
+        //   //     'received_at',
+        //   //     'challan_date',
+        //   //     'challan_no',
+        //   //     'purchase_date',
+        //   //     'cost',
+        //   //     'currency',
+        //   //     'generated_by',
+        //   //     'short_status',
+        //   //     'long_status'
+        //   //   ],
+        //   //   ...jsonDataList
+        //   //       .map((Statutoryjson) => [
+        //   //             Statutoryjson['id'],
+        //   //             Statutoryjson['facility_id'],
+        //   //             Statutoryjson['facilityName'],
+        //   //             Statutoryjson['vendorID'],
+        //   //             Statutoryjson['vendor_name'],
+        //   //             Statutoryjson['asset_type_ID'],
+        //   //             Statutoryjson['accepted_qty'],
+        //   //             Statutoryjson['amount'],
+        //   //             Statutoryjson['receivedAt'],
+        //   //             Statutoryjson['challan_date'],
+        //   //             Statutoryjson['challan_no'],
+        //   //             Statutoryjson['purchaseDate'],
+        //   //             Statutoryjson['cost'],
+        //   //             Statutoryjson['currency'],
+        //   //             Statutoryjson['generatedBy'],
+        //   //             Statutoryjson['status_short'],
+        //   //             Statutoryjson['status_long'],
+        //   //           ])
+        //   //       .toList(),
+        //   // ];
+
+        //   // Map<String, List<List<dynamic>>> statutoryData = {
+        //   //   'Sheet1': data,
+        //   // };
+        //   // exportToExcel(statutoryData, 'statutoryData.xlsx');
+        // }
+
+        return _getStatutoryModelList.reversed.toList();
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString(), 'GetstatutoryDataList');
         return [];
       }
     } catch (error) {
