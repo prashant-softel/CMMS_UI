@@ -937,6 +937,26 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> getStatutoryDataList({
+    required bool isLoading,
+    required String auth,
+    int? facility_id,
+    // String? start_date,
+    // required String end_date,
+  }) async {
+    ResponseModel responseModel = await apiWrapper.makeRequest(
+      'MISMaster/GetStatutoryList?facility_id=$facility_id',
+      Request.getMultiparts,
+      null,
+      isLoading,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
   Future<ResponseModel> getWaterDataList({
     required bool isLoading,
     required String auth,
