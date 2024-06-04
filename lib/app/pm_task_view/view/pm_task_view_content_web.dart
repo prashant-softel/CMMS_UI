@@ -1094,6 +1094,17 @@ class PreventiveMaintenanceTaskViewContentWeb
                             ),
                           )
                         : Dimens.box0,
+                    Container(
+                      height: 35,
+                      child: CustomElevatedButton(
+                        icon: Icons.remove_red_eye_outlined,
+                        backgroundColor: ColorValues.linktopermitColor,
+                        text: "Execute",
+                        onPressed: () {
+                          controller.gotoexecution();
+                        },
+                      ),
+                    ),
                     Dimens.boxWidth10,
                     controller.pmtaskViewModel.value?.status == 162 &&
                             varUserAccessModel.value.access_list!

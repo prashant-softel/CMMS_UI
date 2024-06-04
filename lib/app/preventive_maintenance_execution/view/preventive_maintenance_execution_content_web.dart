@@ -647,66 +647,62 @@ class PreventiveMaintenanceExecutionContentWeb
                                           }),
                                     ),
                                     Dimens.boxWidth10,
-                                    controller.listMrsByTaskId!.value
-                                                    .firstWhere((element) =>
-                                                        element?.jobCardId !=
-                                                            0 ||
-                                                        element?.pmId != 0)
-                                                    ?.mrs_return_ID ==
-                                                0 &&
-                                            controller.allTrue.value == false
-                                        ? Container(
-                                            height: 35,
-                                            child: CustomElevatedButton(
-                                              icon: Icons
-                                                  .keyboard_return_outlined,
-                                              backgroundColor:
-                                                  ColorValues.linktopermitColor,
-                                              text: "Return Mrs",
-                                              onPressed: () {
-                                                controller
-                                                    .getMrsListByModuleTask(
-                                                        taskId: controller
-                                                            .scheduleId.value);
-                                                // controller.clearStoreTaskData();
-                                                // controller
-                                                //     .clearStoreTaskActivityData();
-                                                // controller
-                                                //     .clearStoreTasktoActorData();
-                                                // controller
-                                                //     .clearStoreTaskWhereUsedData();
-                                                // controller
-                                                //     .clearStoreTaskfromActorData();
+                                    // controller.listMrsByTaskId!.value
+                                    //                 .firstWhere((element) =>
+                                    //                     element?.jobCardId !=
+                                    //                         0 ||
+                                    //                     element?.pmId != 0)
+                                    //                 ?.mrs_return_ID ==
+                                    //             0 &&
+                                    //         controller.allTrue.value == false
+                                    //     ?
+                                    Container(
+                                      height: 35,
+                                      child: CustomElevatedButton(
+                                        icon: Icons.keyboard_return_outlined,
+                                        backgroundColor:
+                                            ColorValues.linktopermitColor,
+                                        text: "Return Mrs",
+                                        onPressed: () {
+                                          controller.getMrsListByModuleTask(
+                                              taskId:
+                                                  controller.scheduleId.value);
+                                          // controller.clearStoreTaskData();
+                                          // controller
+                                          //     .clearStoreTaskActivityData();
+                                          // controller
+                                          //     .clearStoreTasktoActorData();
+                                          // controller
+                                          //     .clearStoreTaskWhereUsedData();
+                                          // controller
+                                          //     .clearStoreTaskfromActorData();
 
-                                                Get.toNamed(
-                                                    Routes.mrsReturnScreen,
-                                                    arguments: {
-                                                      "whereUsed": 27,
-                                                      "fromActorTypeId": 3,
-                                                      "to_actor_type_id": 2,
-                                                      "pmTaskId": controller
-                                                              .pmtaskViewModel
-                                                              .value
-                                                              ?.id ??
-                                                          0,
-                                                      "activity": controller
-                                                          .pmtaskViewModel
-                                                          .value
-                                                          ?.plan_title,
-                                                      "mrsId": controller
-                                                              .listMrsByTaskId!
-                                                              .firstWhere(
-                                                                  (element) =>
-                                                                      element
-                                                                          ?.mrsId !=
-                                                                      0)!
-                                                              .mrsId ??
-                                                          0
-                                                    });
-                                              },
-                                            ),
-                                          )
-                                        : Dimens.box0
+                                          Get.toNamed(Routes.mrsReturnScreen,
+                                              arguments: {
+                                                "whereUsed": 27,
+                                                "fromActorTypeId": 3,
+                                                "to_actor_type_id": 2,
+                                                "pmTaskId": controller
+                                                        .pmtaskViewModel
+                                                        .value
+                                                        ?.id ??
+                                                    0,
+                                                "activity": controller
+                                                    .pmtaskViewModel
+                                                    .value
+                                                    ?.plan_title,
+                                                "mrsId": controller
+                                                        .listMrsByTaskId!
+                                                        .firstWhere((element) =>
+                                                            element?.mrsId !=
+                                                            0)!
+                                                        .mrsId ??
+                                                    0
+                                              });
+                                        },
+                                      ),
+                                    )
+                                    //    : Dimens.box0
                                   ],
                                 ),
                                 Dimens.boxHeight20

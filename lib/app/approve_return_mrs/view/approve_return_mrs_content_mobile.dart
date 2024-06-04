@@ -49,7 +49,7 @@ class ApproveReturnMrsViewContentMobile
                                         //
                                         children: [
                                       JobDetailField(
-                                        title: 'MRS Id',
+                                        title: 'MRS Id1',
                                         value: (controller.returnMrsDetailsModel
                                                     .value?.id !=
                                                 null)
@@ -187,8 +187,7 @@ class ApproveReturnMrsViewContentMobile
                                             ),
                                             Expanded(
                                               child: Text(
-                                                  mrsViewModel.asset_type ??
-                                                      '',
+                                                  mrsViewModel.asset_type ?? '',
                                                   style: Styles.appDarkBlue12),
                                             )
                                           ]),

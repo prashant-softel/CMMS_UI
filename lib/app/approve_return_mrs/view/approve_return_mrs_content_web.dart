@@ -59,7 +59,7 @@ class ApproveReturnMrsContentWeb extends GetView<ApproveReturnMrsController> {
                     child: Text(" / STOCK MANAGEMENT ",
                         style: Styles.greyMediumLight12),
                   ),
-                  Text(" / RETURN EQUIPMENT DETAILS",
+                  Text(" / RETURN EQUIPMENT DETAILS22",
                       style: Styles.greyMediumLight12)
                 ],
               ),
@@ -223,7 +223,7 @@ class ApproveReturnMrsContentWeb extends GetView<ApproveReturnMrsController> {
                           ),
                         ),
                         Container(
-                            margin: Dimens.edgeInsets20,
+                            margin: Dimens.edgeInsets0_0_16_16,
                             height: ((controller.returnMrsDetailsModel.value!
                                             .cmmrsItems?.length ??
                                         0) *
@@ -249,7 +249,7 @@ class ApproveReturnMrsContentWeb extends GetView<ApproveReturnMrsController> {
                                 child: Row(
                                   children: [
                                     Text(
-                                      "Material  ",
+                                      "Issued Return Material  ",
                                       style: Styles.blue700,
                                     ),
                                   ],
@@ -329,6 +329,119 @@ class ApproveReturnMrsContentWeb extends GetView<ApproveReturnMrsController> {
                                                 .returnMrsDetailsModel
                                                 .value!
                                                 .cmmrsItems![index]
+                                                .returned_qty
+                                                .toString())),
+                                          ])),
+                                ),
+                              ),
+                            ])),
+                        Container(
+                            margin: Dimens.edgeInsets20,
+                            height: ((controller.returnMrsDetailsModel.value!
+                                            .cmmrsItems?.length ??
+                                        0) *
+                                    40) +
+                                120,
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                color: ColorValues.lightGreyColorWithOpacity35,
+                                width: 1,
+                              ),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: ColorValues.appBlueBackgroundColor,
+                                  spreadRadius: 2,
+                                  blurRadius: 5,
+                                  offset: Offset(0, 2),
+                                ),
+                              ],
+                            ),
+                            child: Column(children: [
+                              Padding(
+                                padding: const EdgeInsets.all(10.0),
+                                child: Row(
+                                  children: [
+                                    Text(
+                                      "Faulty Return Material  ",
+                                      style: Styles.blue700,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Expanded(
+                                child: DataTable2(
+                                  border: TableBorder.all(
+                                      color:
+                                          Color.fromARGB(255, 206, 229, 234)),
+                                  columns: [
+                                    DataColumn(
+                                        label: Text(
+                                      "Material Name",
+                                      style: TextStyle(
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.bold),
+                                    )),
+                                    DataColumn(
+                                        label: Text(
+                                      "Asset Type",
+                                      style: TextStyle(
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.bold),
+                                    )),
+                                    DataColumn(
+                                        label: Text(
+                                      "Material Code",
+                                      style: TextStyle(
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.bold),
+                                    )),
+                                    DataColumn(
+                                        label: Text(
+                                      "Serial No.",
+                                      style: TextStyle(
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.bold),
+                                    )),
+                                    DataColumn(
+                                        label: Text(
+                                      "Return Qty.",
+                                      style: TextStyle(
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.bold),
+                                    )),
+                                  ],
+                                  rows: List<DataRow>.generate(
+                                      controller.returnMrsDetailsModel.value!
+                                          .cmmrsFaultyItems!.length,
+                                      (index) => DataRow(cells: [
+                                            DataCell(Text(controller
+                                                .returnMrsDetailsModel
+                                                .value!
+                                                .cmmrsFaultyItems![index]
+                                                .asset_name
+                                                .toString())),
+                                            DataCell(Text(controller
+                                                .returnMrsDetailsModel
+                                                .value!
+                                                .cmmrsFaultyItems![index]
+                                                .asset_type
+                                                .toString())),
+                                            DataCell(Text(controller
+                                                .returnMrsDetailsModel
+                                                .value!
+                                                .cmmrsFaultyItems![index]
+                                                .asset_MDM_code
+                                                .toString())),
+                                            DataCell(Text(controller
+                                                .returnMrsDetailsModel
+                                                .value!
+                                                .cmmrsFaultyItems![index]
+                                                .serial_number
+                                                .toString())),
+                                            DataCell(Text(controller
+                                                .returnMrsDetailsModel
+                                                .value!
+                                                .cmmrsFaultyItems![index]
                                                 .returned_qty
                                                 .toString())),
                                           ])),
