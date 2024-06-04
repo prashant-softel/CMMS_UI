@@ -25,4 +25,6 @@ class StatutoryPresenter {
       // end_date: end_date,
     );
   }
+
+  void clearValue() async => statutoryUsecase.clearValue();
 }
