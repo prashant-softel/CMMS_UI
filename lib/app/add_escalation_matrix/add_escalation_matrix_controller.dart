@@ -2,12 +2,12 @@ import 'dart:async';
 
 import 'package:cmms/app/add_escalation_matrix/add_escalation_matrix_presenter.dart';
 import 'package:cmms/app/app.dart';
-import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/domain/domain.dart';
 import 'package:cmms/domain/models/create_escalation_matrix_model.dart';
-import 'package:cmms/domain/models/modulelist_model.dart';
+import 'package:cmms/domain/models/module_model.dart';
 import 'package:cmms/domain/models/paiyed_model.dart';
 import 'package:cmms/domain/models/role_model.dart';
+import 'package:cmms/domain/models/status_list_model.dart';
 import 'package:cmms/domain/models/type_permit_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -22,47 +22,29 @@ class AddEscalationMatrixController extends GetxController {
   final HomeController homeController = Get.find();
 
   RxList<int> dayList = <int>[].obs;
-
-  // var status_Escalation = <Status_escalation>[].obs;
-  // void addStatusEscalationData(
-  //   int status_id,
-  // ) {
-  //   status_Escalation.value = [];
-  //   status_Escalation
-  //       .add(Status_escalation(status_id: status_id, escalation: escalationa));
-  // }
-
-  // var escalationa = <Escalation>[].obs;
-  // void addEscalationData(
-  //   int? days,
-  //   int? role_id,
-  // ) {
-  //   escalationa.add(Escalation(
-  //       days: int.tryParse('${durationDaysTextCtrlr.text}'),
-  //       role_id: selectedRoleListId));
-  // }
-
-  ///Print Global key
   final GlobalKey<State<StatefulWidget>> printKey = GlobalKey();
 
-  Rx<List<List<Map<String, String>>>> rowItem =
-      Rx<List<List<Map<String, String>>>>([]);
+  RxList<List<Map<String, String>>> rowItem = <List<Map<String, String>>>[].obs;
   List<Escalation> days = [];
   Map<String, RoleModel> dropdownMapperData = {};
   Map<String, PaiedModel> paiddropdownMapperData = {};
 
   void addRowItem() {
-    rowItem.value.add([
+    rowItem.add([
       {"key": "Duration (Days)", "value": ''},
       {'key': "Escalation Roles and Levels", "value": 'Please Select'},
+      {'key': "Action", "value": ''},
     ]);
   }
 
-  RxList<ModuleListModel?> moduleList = <ModuleListModel>[].obs;
+  RxList<ModuleModel?> moduleList = <ModuleModel>[].obs;
+  Rx<StatusList?> statusList = StatusList().obs;
+  RxList<Status?> status = <Status>[].obs;
   Rx<bool> isModuleListSelected = true.obs;
   Rx<String> selectedModuleList = ''.obs;
   int? selectedModuleListId = 0;
   int type = 1;
+  int statusId = 0;
 
   ///Permit Type
   RxList<TypePermitModel?> typePermitList = <TypePermitModel>[].obs;
@@ -98,11 +80,6 @@ class AddEscalationMatrixController extends GetxController {
   Rx<String> selectedEquipmentName = ''.obs;
   Rx<bool> isEquipmentNameSelected = true.obs;
   int selectedEquipmentnameId = 0;
-
-  ///duration in days
-  // Rx<bool> isDurationDaysTextInvalid = false.obs;
-  // var durationDaysTextCtrlr = TextEditingController();
-
   RxList<RoleModel?> roleList = <RoleModel>[].obs;
   Rx<String> selectedRole = ''.obs;
   Rx<bool> isSelectedRole = true.obs;
@@ -127,16 +104,13 @@ class AddEscalationMatrixController extends GetxController {
         getFacilityList();
       });
     });
-
-    Future.delayed(Duration(seconds: 1), () {
-      getTypePermitList();
-    });
     Future.delayed(Duration(seconds: 1), () {
       getModuleList(facilityId, type, true);
     });
     Future.delayed(Duration(seconds: 1), () {
       getRoleList();
     });
+    addRowItem();
     // await getIncidentReportHistory(id: id!);
 
     super.onInit();
@@ -165,21 +139,8 @@ class AddEscalationMatrixController extends GetxController {
     }
   }
 
-  Future<void> getTypePermitList() async {
-    final _permitTypeList =
-        await addEscalationPresenter.getTypePermitList(facility_id: 45);
-
-    if (_permitTypeList != null) {
-      for (var permitType in _permitTypeList) {
-        typePermitList.add(permitType);
-      }
-      // selectedTypePermit.value = typePermitList[0]?.name ?? '';
-    }
-    addRowItem();
-  }
-
   Future<void> getModuleList(int facilityId, int type, bool isLoading) async {
-    moduleList.value = <ModuleListModel>[];
+    moduleList.value = <ModuleModel>[];
     final _moduleList = await addEscalationPresenter.getModuleList(
         facilityId: facilityId, type: type, isLoading: isLoading);
 
@@ -188,51 +149,55 @@ class AddEscalationMatrixController extends GetxController {
     }
   }
 
+  Future<void> getStatusList({int? moduleId}) async {
+    statusList.value = StatusList();
+    final _statusList = await addEscalationPresenter.getStatusList(
+      moduleId: moduleId,
+      isLoading: true,
+    );
+
+    if (_statusList != null) {
+      statusList.value = _statusList;
+      status.value = statusList.value!.status!;
+    }
+  }
+
   void onValueChanged(dynamic list, dynamic value) {
     print('Valuesd:${value}');
     switch (list.runtimeType) {
-      case RxList<FacilityModel>:
+      case RxList<ModuleModel>:
         {
           if (value != "Please Select") {
-            int facilityIndex = facilityList.indexWhere((x) => x?.name == value);
-
-          _facilityId.add(facilityList[facilityIndex]?.id ?? 0);
+            int moduleListIndex =
+                moduleList.indexWhere((x) => x?.name == value);
+            selectedModuleListId = moduleList[moduleListIndex]?.id ?? 0;
+            getStatusList(moduleId: selectedModuleListId);
+            print('Module List Id: $selectedModuleListId');
           } else {
-            facilityId=0;
+            selectedModuleListId = 0;
           }
-        }
-        break;
-      case RxList<ModuleListModel>:
-        {
-         if (value != "Please Select") {
-            int moduleListIndex = moduleList.indexWhere((x) => x?.name == value);
-          selectedModuleListId = moduleList[moduleListIndex]?.id ?? 0;
-          print('Module List Id: $selectedModuleListId');
-         } else {
-           selectedModuleListId=0;
-         }
         }
         break;
       case RxList<RoleModel>:
         {
           if (value != "Please Select") {
-            int roleModelListIndex = roleList.indexWhere((x) => x?.name == value);
-          selectedRoleListId = roleList[roleModelListIndex]?.id ?? 0;
-          print('Role List Id: $selectedRoleListId');
+            int roleModelListIndex =
+                roleList.indexWhere((x) => x?.name == value);
+            selectedRoleListId = roleList[roleModelListIndex]?.id ?? 0;
+            print('Role List Id: $selectedRoleListId');
           } else {
-            selectedRoleListId=0;
+            selectedRoleListId = 0;
           }
         }
         break;
-      case RxList<TypePermitModel>:
+      case RxList<Status>:
         {
           if (value != "Please Select") {
-            int prmitTypeIndex =
-              typePermitList.indexWhere((x) => x?.name == value);
-          selectedTypePermitId = typePermitList[prmitTypeIndex]?.id ?? 0;
-          print('Type Permit Id: $selectedTypePermitId');
+            int statusIndex = status.indexWhere((x) => x?.name == value);
+            statusId = status[statusIndex]?.id ?? 0;
+            selectedTypePermit.value = value;
           } else {
-            selectedTypePermitId=0;
+            statusId = 0;
           }
         }
         break;
@@ -260,7 +225,7 @@ class AddEscalationMatrixController extends GetxController {
     late List<Status_escalation> state_escalation_list = [];
 
     state_escalation_list
-        .add(Status_escalation(status_id: 102, escalation: days));
+        .add(Status_escalation(status_id: statusId, escalation: days));
 
     CreateEscalationMatrixModel createEscalationMatrixModel =
         CreateEscalationMatrixModel(
@@ -275,55 +240,7 @@ class AddEscalationMatrixController extends GetxController {
       isLoading: true,
     );
 
-    if (responseCreateEscalationMatrixModel == null) {
-      //  CreateNewPermitDialog();
-      // showAlertDialog();
-    }
+    if (responseCreateEscalationMatrixModel == null) {}
     print('Add Escalation Matrix   data: $escalationMatrixJsonString');
-  }
-
-  // void createEscalationMatrix() async {
-  //   {
-  //     List<Escalation> days = [];
-  //     rowItem.value.forEach((element) {
-  //       Escalation day = Escalation(
-  //         role_id: dropdownMapperData[element[1]["value"]]?.role_id,
-  //         days: int.tryParse(element[0]["value"] ?? '0'),
-  //       );
-  //       days.add(day);
-  //     });
-
-  //     late List<Status_escalation> status_escalation = [];
-
-  //     status_Escalation.forEach((e) {
-  //       status_escalation.add(
-  //           Status_escalation(status_id: e.status_id, escalation: e.escalation
-  //               // is_required: e.is_required
-  //               ));
-  //     });
-
-  //     CreateEscalationMatrixModel createEscalationMatrixModel =
-  //         CreateEscalationMatrixModel();
-
-  //     var escalationMatrixJsonString = [
-  //       {
-  //         "module_id": selectedModuleListId,
-  //         "status_escalation": status_escalation
-  //       }
-  //     ];
-  //     Map<String, dynamic>? responseCreateEscalationMatrix =
-  //         await viewIncidentReportPresenter.createEscalationMatrix(
-  //       createEscalationMatrix: escalationMatrixJsonString,
-  //       isLoading: true,
-  //     );
-
-  //     if (responseCreateEscalationMatrix == null) {}
-  //     print('Create Escalation Matrix data: $escalationMatrixJsonString');
-  //   }
-  // }
-
-  Future<void> editIncidentReport({int? id}) async {
-    Get.toNamed(Routes.addIncidentReportContentWeb, arguments: id);
-    print('Argument$id');
   }
 }

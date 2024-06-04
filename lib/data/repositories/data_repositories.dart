@@ -1405,6 +1405,16 @@ class DataRepository extends DomainRepository {
         type: type,
         isLoading: isLoading ?? false,
       );
+  Future<ResponseModel> getStatusList({
+    required String auth,
+    int? moduleId,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.getStatusList(
+        auth: auth,
+        moduleId: moduleId ?? 0,
+        isLoading: isLoading ?? false,
+      );
 
   Future<ResponseModel> getInventoryTypeList({
     required String auth,
@@ -1815,6 +1825,29 @@ class DataRepository extends DomainRepository {
         createEscalationMatrix: createEscalationMatrix,
         isLoading: isLoading ?? false,
       );
+
+  Future<ResponseModel> getEscalationDetail({
+    required String auth,
+    required int? moduleId,
+    required int? statusId,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.getEscalationDetail(
+        auth: auth,
+        moduleId: moduleId,
+        statusId: statusId,
+        isLoading: isLoading ?? false,
+      );
+
+    Future<ResponseModel> getEscalationMatrixList({
+    required bool isLoading,
+    required String auth,
+  }) async {
+    return await connectHelper.getEscalationMatrixList(
+      isLoading: isLoading,
+      auth: auth,
+    );
+  }
 
   Future<ResponseModel> createMcPlan({
     required String auth,

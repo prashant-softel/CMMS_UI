@@ -11,7 +11,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class AdminDashboardScreen extends GetView<AdminDashboardController> {
-  ///
   AdminDashboardScreen({super.key});
 
   final AdminDashboardController controller = Get.find();
@@ -19,26 +18,19 @@ class AdminDashboardScreen extends GetView<AdminDashboardController> {
 
   @override
   Widget build(BuildContext context) {
-    ///
     var size = Get;
     final double itemHeight = (size.height - kToolbarHeight - 50) / 9;
     final double itemWidth = size.width / 2;
 
-    return //
-        Scaffold(
-      appBar: //
-          Responsive.isMobile(context)
-              ? AppBar(
-                  title: HeaderWidget(),
-                  elevation: 0,
-                  toolbarHeight: 60,
-                  automaticallyImplyLeading: false,
-                )
-              : null,
-      // drawer: //
-      //     (Responsive.isMobile(context) || Responsive.isTablet(context))
-      //         ? HomeDrawer() //ResponsiveSideMenu()
-      //         : null,
+    return Scaffold(
+      appBar: Responsive.isMobile(context)
+          ? AppBar(
+              title: HeaderWidget(),
+              elevation: 0,
+              toolbarHeight: 60,
+              automaticallyImplyLeading: false,
+            )
+          : null,
       body: Obx(
         () => Stack(
           children: [
@@ -99,6 +91,12 @@ class AdminDashboardScreen extends GetView<AdminDashboardController> {
                                 ? (itemWidth / itemHeight)
                                 : 5,
                             children: <Widget>[
+                              createContentTile(
+                                title: "Attendace List",
+                                onTap: () {
+                                  Get.offNamed(Routes.attendanceListScreen);
+                                },
+                              ),
                               createContentTile(
                                 title: "Attendace",
                                 onTap: () {
