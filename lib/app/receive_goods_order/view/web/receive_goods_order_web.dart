@@ -106,7 +106,7 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                       child: Row(
                                         children: [
                                           Text(
-                                            "Receive Goods Order1",
+                                            "Receive Goods Order",
                                             style: Styles.blackBold16,
                                           ),
                                           Spacer(),
@@ -1647,15 +1647,15 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                                                                   FilteringTextInputFormatter.digitsOnly
                                                                                 ],
                                                                                 maxLine: 1,
-                                                                                errorController: controller.isCostInvalid.value ? "Required field" : null,
+                                                                                // errorController: controller.isCostInvalid.value ? "Required field" : null,
                                                                                 textController: new TextEditingController(text: mapData["value"] ?? ''),
                                                                                 onChanged: (txt) {
                                                                                   mapData["value"] = txt;
-                                                                                  if (txt.trim().isNotEmpty) {
-                                                                                    controller.isCostInvalid.value = false;
-                                                                                  } else {
-                                                                                    controller.isCostInvalid.value = true;
-                                                                                  }
+                                                                                  // if (txt.trim().isNotEmpty) {
+                                                                                  //   controller.isCostInvalid.value = false;
+                                                                                  // } else {
+                                                                                  //   controller.isCostInvalid.value = true;
+                                                                                  // }
                                                                                 },
                                                                               ),
                                                                             )),
@@ -1932,15 +1932,15 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                                                                                   ],
                                                                                                   enabled: controller.getPurchaseDetailsByIDModel.value?.status == 306 && varUserAccessModel.value.access_list!.where((e) => e.feature_id == UserAccessConstants.kGoodsFeatureId && e.add == UserAccessConstants.kHaveAddAccess).length > 0 || controller.getPurchaseDetailsByIDModel.value?.status == 309 && varUserAccessModel.value.access_list!.where((e) => e.feature_id == UserAccessConstants.kGoodsFeatureId && e.add == UserAccessConstants.kHaveAddAccess).length > 0 || controller.getPurchaseDetailsByIDModel.value?.status == 307 && varUserAccessModel.value.access_list!.where((e) => e.feature_id == UserAccessConstants.kGoodsFeatureId && e.add == UserAccessConstants.kHaveAddAccess).length > 0 ? true : false,
                                                                                                   maxLine: 1,
-                                                                                                  errorController: controller.isAccepetedInvalid.value ? "Required field" : null,
+                                                                                                  // errorController: controller.isAccepetedInvalid.value ? "Required field" : null,
                                                                                                   textController: new TextEditingController(text: mapData["value"] ?? ''),
                                                                                                   onChanged: (txt) {
                                                                                                     mapData["value"] = txt;
-                                                                                                    if (txt.trim().isNotEmpty) {
-                                                                                                      controller.isAccepetedInvalid.value = false;
-                                                                                                    } else {
-                                                                                                      controller.isAccepetedInvalid.value = true;
-                                                                                                    }
+                                                                                                    // if (txt.trim().isNotEmpty) {
+                                                                                                    //   controller.isAccepetedInvalid.value = false;
+                                                                                                    // } else {
+                                                                                                    //   controller.isAccepetedInvalid.value = true;
+                                                                                                    // }
                                                                                                   },
                                                                                                 )),
                                                                                           ],
@@ -2014,15 +2014,15 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                                                                                         ],
                                                                                                         enabled: controller.getPurchaseDetailsByIDModel.value?.status == 306 && varUserAccessModel.value.access_list!.where((e) => e.feature_id == UserAccessConstants.kGoodsFeatureId && e.add == UserAccessConstants.kHaveAddAccess).length > 0 || controller.getPurchaseDetailsByIDModel.value?.status == 307 && varUserAccessModel.value.access_list!.where((e) => e.feature_id == UserAccessConstants.kGoodsFeatureId && e.add == UserAccessConstants.kHaveAddAccess).length > 0 || controller.getPurchaseDetailsByIDModel.value?.status == 309 && varUserAccessModel.value.access_list!.where((e) => e.feature_id == UserAccessConstants.kGoodsFeatureId && e.add == UserAccessConstants.kHaveAddAccess).length > 0 ? true : false,
                                                                                                         maxLine: 1,
-                                                                                                        errorController: controller.isRequestedInvalid.value ? "Required field" : null,
+                                                                                                        // errorController: controller.isRequestedInvalid.value ? "Required field" : null,
                                                                                                         textController: new TextEditingController(text: mapData["value"] ?? ''),
                                                                                                         onChanged: (txt) {
                                                                                                           mapData["value"] = txt;
-                                                                                                          if (txt.trim().isNotEmpty) {
-                                                                                                            controller.isCostInvalid.value = false;
-                                                                                                          } else {
-                                                                                                            controller.isCostInvalid.value = true;
-                                                                                                          }
+                                                                                                          // if (txt.trim().isNotEmpty) {
+                                                                                                          //   controller.isCostInvalid.value = false;
+                                                                                                          // } else {
+                                                                                                          //   controller.isCostInvalid.value = true;
+                                                                                                          // }
                                                                                                         },
                                                                                                       ),
                                                                                                     ),
@@ -2196,6 +2196,9 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                               .format(p0.value);
                                       controller.openPurchaseDatePicker =
                                           !controller.openPurchaseDatePicker;
+                                      controller.isInvoiceDateInvalid.value =
+                                          false;
+
                                       controller.update(['stock_Mangement']);
                                     },
                                   ),
@@ -2216,6 +2219,8 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                               .format(p0.value);
                                       controller.openChallanDatePicker =
                                           !controller.openChallanDatePicker;
+                                      controller.isDeliveryChallanDateInvalid
+                                          .value = false;
                                       controller.update(['stock_Mangement']);
                                     },
                                   ),
@@ -2236,6 +2241,7 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                               .format(p0.value);
                                       controller.openPODatePicker =
                                           !controller.openPODatePicker;
+
                                       controller.update(['stock_Mangement']);
                                     },
                                   ),
@@ -2254,6 +2260,8 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                               .format(p0.value);
                                       controller.openReceivedPicker =
                                           !controller.openReceivedPicker;
+                                      controller.isMaterialReciveDateInvalid
+                                          .value = false;
                                       controller.update(['stock_Mangement']);
                                     },
                                   ),

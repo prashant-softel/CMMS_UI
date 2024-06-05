@@ -11,6 +11,7 @@ abstract class LocalKeys {
   static const goId = 'goId';
   static const inventoryId = 'inventoryId';
   static const irId = 'irId';
+  static const srId = 'srId';
 
   static const goType = 'goType';
   static const roType = 'roType';
@@ -92,7 +93,7 @@ abstract class LocalKeys {
   static const grievanceId = 'grievanceId';
   static const monthId = 'monthId';
   static const year = 'year';
-  static const hazardous ='hazardous';
+  static const hazardous = 'hazardous';
   static const courseId = 'courseId';
   static const statusId = 'statusId';
   static const moduleId = 'moduleId';

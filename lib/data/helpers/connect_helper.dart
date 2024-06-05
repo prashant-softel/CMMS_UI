@@ -9202,5 +9202,87 @@ class ConnectHelper {
     return responseModel;
   }
 
+   //Statutory Compliance
+  //Get
+  Future<ResponseModel> getStatutoryCompliance(
+      {required bool isLoading, required String auth}) async {
+    ResponseModel responseModel = await apiWrapper.makeRequest(
+      'MISMaster/GetStatutoryComplianceMasterList',
+      Request.get,
+      null,
+      isLoading,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
+  //create
+  Future<ResponseModel> createStatutoryCompliance({
+    required String auth,
+    bool? isLoading,
+    StatutoryComplianceJsonString,
+  }) async {
+    var responseModel =
+        // responseModel =
+        await apiWrapper.makeRequest(
+      'MISMaster/CreateStatutoryComplianceMaster',
+      Request.post,
+      StatutoryComplianceJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
+  //update
+  Future<ResponseModel> updateStatutoryCompliance({
+    required String auth,
+    bool? isLoading,
+    StatutoryComplianceJsonString,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'MISMaster/UpdateStatutoryComplianceMaster',
+      Request.post,
+      StatutoryComplianceJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
+  //delete
+  Future<ResponseModel> deleteStatutoryCompliance({
+    required String auth,
+    bool? isLoading,
+    required StatutoryCompliance_id,
+  }) async {
+
+     final requestBody = {
+    'id': int.tryParse(StatutoryCompliance_id),
+  };
+    var responseModel = await apiWrapper.makeRequest(
+      'MISMaster/DeleteStatutoryComplianceMaster',
+      Request.post,
+      requestBody,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
   //end
 }

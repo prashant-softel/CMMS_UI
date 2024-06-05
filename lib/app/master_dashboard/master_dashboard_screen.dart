@@ -1310,6 +1310,23 @@ class MastersDashboard extends GetView<MastersController> {
                                                     Routes.incidentRiskType);
                                               })
                                           : Dimens.box0,
+                                            varUserAccessModel.value.access_list!
+                                                  .where((e) =>
+                                                      e.feature_id ==
+                                                          UserAccessConstants
+                                                              .kMasterFeatureId &&
+                                                      e.view ==
+                                                          UserAccessConstants
+                                                              .kHaveViewAccess)
+                                                  .length >
+                                              0
+                                           ? _inventoryList(
+                                              tittle: "Statutory Compliance",
+                                              ontap: () {
+                                                Get.toNamed(
+                                                    Routes.StatutoryCompliance);
+                                              })
+                                          : Dimens.box0,
                                     ],
                                   ),
                                 ],

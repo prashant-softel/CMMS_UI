@@ -1,5 +1,6 @@
 import 'package:cmms/app/Statutory/statutory_controller.dart';
 import 'package:cmms/app/constant/constant.dart';
+import 'package:cmms/app/home/home_screen.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/theme/color_values.dart';
@@ -8,6 +9,7 @@ import 'package:cmms/app/theme/styles.dart';
 import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/app/widgets/action_button.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
+import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/date_picker.dart';
 import 'package:cmms/domain/models/get_statutory_list_model.dart';
 import 'package:data_table_2/data_table_2.dart';
@@ -111,37 +113,36 @@ class _StatutoryWebState extends State<StatutoryWeb> {
                                           style: Styles.blackBold16,
                                         ),
                                         Spacer(),
-                                        // Row(
-                                        //   children: [
-                                        //     CustomRichText(title: 'Date Range'),
-                                        //     Dimens.boxWidth10,
-                                        //     CustomTextFieldForStock(
-                                        //       width: MediaQuery.of(context)
-                                        //               .size
-                                        //               .width /
-                                        //           5,
-                                        //       numberTextField: true,
-                                        //       onTap: () {
-                                        //         controller
-                                        //                 .openFromDateToStartDatePicker =
-                                        //             !controller
-                                        //                 .openFromDateToStartDatePicker;
-                                        //         controller.update(
-                                        //             ['stock_Mangement_Date']);
-                                        //       },
-                                        //       hintText:
-                                        //           '${controller.formattedFromdate} - ${controller.formattedTodate}',
-                                        //     ),
-                                        //   ],
-                                        // ),
-
+                                        Row(
+                                          children: [
+                                            CustomRichText(title: 'Date Range'),
+                                            Dimens.boxWidth10,
+                                            CustomTextFieldForStock(
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width /
+                                                  5,
+                                              numberTextField: true,
+                                              onTap: () {
+                                                controller
+                                                        .openFromDateToStartDatePicker =
+                                                    !controller
+                                                        .openFromDateToStartDatePicker;
+                                                controller.update(
+                                                    ['stock_Mangement_Date']);
+                                              },
+                                              hintText:
+                                                  '${controller.formattedFromdate} - ${controller.formattedTodate}',
+                                            ),
+                                          ],
+                                        ),
+                                        Dimens.boxWidth10,
                                         ActionButton(
                                           icon: Icons.add,
                                           label: "Add New",
                                           onPressed: () {
-                                            // controller.clearStoreData();
-                                            // controller
-                                            //     .clearTypeStoreData();
+                                            controller.clearStoreData();
+
                                             Get.offNamed(
                                                 Routes.complianceScreen);
                                           },
@@ -223,34 +224,6 @@ class _StatutoryWebState extends State<StatutoryWeb> {
                                           // Handle column selection
                                         },
                                       ),
-
-                                      // Container(
-                                      //   height: 35,
-                                      //   margin: EdgeInsets.only(left: 10),
-                                      //   child: CustomElevatedButton(
-                                      //       backgroundColor:
-                                      //           ColorValues.appLightBlueColor,
-                                      //       onPressed: () {},
-                                      //       text: 'Copy'),
-                                      // ),
-                                      // Container(
-                                      //   height: 35,
-                                      //   margin: EdgeInsets.only(left: 10),
-                                      //   child: CustomElevatedButton(
-                                      //       backgroundColor:
-                                      //           ColorValues.appLightBlueColor,
-                                      //       onPressed: () {},
-                                      //       text: 'Excel'),
-                                      // ),
-                                      // Container(
-                                      //   height: 35,
-                                      //   margin: EdgeInsets.only(left: 10),
-                                      //   child: CustomElevatedButton(
-                                      //       backgroundColor:
-                                      //           ColorValues.appLightBlueColor,
-                                      //       onPressed: () {},
-                                      //       text: 'PDF'),
-                                      // ),
                                       Container(
                                         decoration: BoxDecoration(boxShadow: [
                                           BoxShadow(
@@ -361,7 +334,7 @@ class _StatutoryWebState extends State<StatutoryWeb> {
                                                           'Actions',
                                                           controller
                                                               .userDateFilterText,
-                                                          150,
+                                                          230,
                                                         ),
                                                       ],
                                                     );
@@ -427,54 +400,16 @@ class _StatutoryWebState extends State<StatutoryWeb> {
 }
 
 DataColumn2 buildDataColumn(
-  // String columnName,
   String header,
-
-  /// ColumnSize columnSize,
   RxString filterText,
   double? fixedWidth,
-  //  {required Function(String) onSearchCallBack}
 ) {
   return //
       DataColumn2(
-    // size: columnSize,
     fixedWidth: fixedWidth,
-
-    label: //
-        Column(
-            mainAxisAlignment: MainAxisAlignment.center, //
-            children: [
-          // SizedBox(
-          //   height: Get.height * 0.05,
-          //   child: TextField(
-          //     style: GoogleFonts.lato(
-          //       textStyle:
-          //           TextStyle(fontSize: 16.0, height: 1.0, color: Colors.black),
-          //     ),
-          //     onChanged: (value) {
-          //       filterText.value = value;
-          //       //   onSearchCallBack(value);
-          //     },
-          //     textAlign: TextAlign.left,
-          //     decoration: InputDecoration(
-          //       hintText: 'Filter',
-          //       contentPadding:
-          //           EdgeInsets.fromLTRB(5, 0, 5, 0), // Reduced vertical padding
-          //       border: OutlineInputBorder(
-          //         borderRadius: BorderRadius.circular(5),
-          //         borderSide: BorderSide(color: Colors.black),
-          //       ),
-          //       focusedBorder: OutlineInputBorder(
-          //         borderRadius: BorderRadius.circular(5),
-          //         borderSide: BorderSide(color: Colors.black),
-          //       ),
-          //       enabledBorder: OutlineInputBorder(
-          //         borderRadius: BorderRadius.circular(5),
-          //         borderSide: BorderSide(color: Colors.black),
-          //       ),
-          //     ),
-          //   ),
-          // ),
+    label: Column(
+        mainAxisAlignment: MainAxisAlignment.center, //
+        children: [
           Align(
             alignment: Alignment.centerLeft,
             child: Text(
@@ -483,7 +418,6 @@ DataColumn2 buildDataColumn(
             ),
           ),
         ]),
-    // ),
   );
 }
 
@@ -501,10 +435,7 @@ class StatutoryListDataSource extends DataTableSource {
     filteredGetStatutoryList = <GetStatutoryList?>[];
     filteredGetStatutoryList =
         controller.getStatutoryList.where((GoodsOrderList) {
-      return (GoodsOrderList.id ?? '')
-              .toString()
-              .contains(controller.complianceFilterText.value.toLowerCase()) &&
-          (GoodsOrderList.complianceId ?? '')
+      return (GoodsOrderList.complianceId ?? '')
               .toString()
               .contains(controller.validityFilterText.value.toLowerCase()) &&
           (GoodsOrderList.approvedAt ?? '')
@@ -536,12 +467,12 @@ class StatutoryListDataSource extends DataTableSource {
     var cellsBuffer = [
       // '${StatutoryListDetails?.id ?? ''}',
       "id",
-      '${StatutoryListDetails?.complianceId ?? ''}',
       '${StatutoryListDetails?.createdAt ?? ''}',
       '${StatutoryListDetails?.createdBy ?? ''}',
       '${StatutoryListDetails?.expiresOn ?? ''}',
       '${StatutoryListDetails?.issueDate ?? ''}',
       '${StatutoryListDetails?.statusShort ?? ''}',
+      '${StatutoryListDetails?.status ?? ''}',
       '${StatutoryListDetails?.status ?? ''}',
 
       'Actions',
@@ -574,7 +505,7 @@ class StatutoryListDataSource extends DataTableSource {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        ' GO ${StatutoryListDetails?.id}',
+                        ' SR ${StatutoryListDetails?.complianceId}',
                       ),
                       Dimens.boxHeight10,
                       Align(
@@ -601,90 +532,9 @@ class StatutoryListDataSource extends DataTableSource {
                                                   GetStatutoryList(id: 00),
                                             )
                                             .status ==
-                                        304
-                                    ? ColorValues.closeColor
-                                    : controller.getStatutoryList
-                                                .firstWhere(
-                                                  (e) =>
-                                                      e.id ==
-                                                      StatutoryListDetails!.id,
-                                                  orElse: () =>
-                                                      GetStatutoryList(id: 00),
-                                                )
-                                                .status ==
-                                            305
-                                        ? ColorValues.rejectColor
-                                        : controller.getStatutoryList
-                                                    .firstWhere(
-                                                      (e) =>
-                                                          e.id ==
-                                                          StatutoryListDetails!
-                                                              .id,
-                                                      orElse: () =>
-                                                          GetStatutoryList(
-                                                              id: 00),
-                                                    )
-                                                    .status ==
-                                                309
-                                            ? ColorValues.rejectColor
-                                            : controller.getStatutoryList
-                                                        .firstWhere(
-                                                          (e) =>
-                                                              e.id ==
-                                                              StatutoryListDetails!
-                                                                  .id,
-                                                          orElse: () =>
-                                                              GetStatutoryList(
-                                                                  id: 00),
-                                                        )
-                                                        .status ==
-                                                    306
-                                                ? ColorValues.approveStatusColor
-                                                : controller.getStatutoryList
-                                                            .firstWhere(
-                                                              (e) =>
-                                                                  e.id ==
-                                                                  StatutoryListDetails!
-                                                                      .id,
-                                                              orElse: () =>
-                                                                  GetStatutoryList(
-                                                                      id: 00),
-                                                            )
-                                                            .status ==
-                                                        301
-                                                    ? Color.fromARGB(
-                                                        255, 44, 230, 230)
-                                                    : controller
-                                                                .getStatutoryList
-                                                                .firstWhere(
-                                                                  (e) =>
-                                                                      e.id ==
-                                                                      StatutoryListDetails!
-                                                                          .id,
-                                                                  orElse: () =>
-                                                                      GetStatutoryList(
-                                                                          id: 00),
-                                                                )
-                                                                .status ==
-                                                            304
-                                                        ? ColorValues.closeColor
-                                                        : controller
-                                                                    .getStatutoryList
-                                                                    .firstWhere(
-                                                                      (e) =>
-                                                                          e.id ==
-                                                                          StatutoryListDetails!
-                                                                              .id,
-                                                                      orElse: () =>
-                                                                          GetStatutoryList(
-                                                                              id: 00),
-                                                                    )
-                                                                    .status ==
-                                                                301
-                                                            ? ColorValues
-                                                                .approveColor
-                                                            : ColorValues
-                                                                .addNewColor,
+                                        301
+                                    ? ColorValues.approveColor
+                                    : ColorValues.addNewColor,
                             borderRadius: BorderRadius.circular(4),
                           ),
                           child: Text(
@@ -698,517 +548,60 @@ class StatutoryListDataSource extends DataTableSource {
                     ],
                   )
                 : (value == 'Actions')
-                    ? Wrap(children: [
-                        varUserAccessModel.value.access_list!
-                                        .where((e) =>
-                                            e.feature_id ==
-                                                UserAccessConstants
-                                                    .kGoodsFeatureId &&
-                                            e.add ==
-                                                UserAccessConstants
-                                                    .kHaveAddAccess)
-                                        .length >
-                                    0 &&
-                                StatutoryListDetails?.status == 308
-                            ? TableActionButton(
-                                color: ColorValues.viewColor,
-                                icon: Icons.remove_red_eye_outlined,
-                                message: 'View RO',
-                                onPress: () {
-                                  // controller.clearStoreData();
-                                  int goId = StatutoryListDetails?.id ?? 0;
-                                  if (goId != 0) {
-                                    Get.toNamed(Routes.receiveGoodsOrders,
-                                        arguments: {
-                                          'goId': StatutoryListDetails?.id,
-                                          "goType": 1
-                                        });
-                                  }
-                                },
-                              )
-                            : varUserAccessModel.value.access_list!
-                                            .where((e) =>
-                                                e.feature_id ==
-                                                    UserAccessConstants
-                                                        .kGoodsFeatureId &&
-                                                e.add ==
-                                                    UserAccessConstants
-                                                        .kHaveAddAccess)
-                                            .length >
-                                        0 &&
-                                    StatutoryListDetails?.status == 304
-                                ? TableActionButton(
-                                    color: ColorValues.viewColor,
-                                    icon: Icons.remove_red_eye_outlined,
-                                    message: 'View RO',
-                                    onPress: () {
-                                      // controller.clearStoreData();
-                                      int goId = StatutoryListDetails?.id ?? 0;
-                                      if (goId != 0) {
-                                        Get.toNamed(Routes.receiveGoodsOrders,
-                                            arguments: {
-                                              'goId': StatutoryListDetails?.id,
-                                              "goType": 1
-                                            });
-                                      }
-                                    },
-                                  )
-                                : varUserAccessModel.value.access_list!
-                                            .where((e) =>
-                                                e.feature_id ==
-                                                    UserAccessConstants
-                                                        .kGoodsFeatureId &&
-                                                e.view ==
-                                                    UserAccessConstants
-                                                        .kHaveApproveAccess)
-                                            .length >
-                                        0
-                                    ? TableActionButton(
-                                        color: ColorValues.viewColor,
-                                        icon: Icons.remove_red_eye_outlined,
-                                        message: 'View',
-                                        onPress: () {
-                                          // controller.clearStoreData();
-                                          int goId =
-                                              StatutoryListDetails?.id ?? 0;
-                                          if (goId != 0) {
-                                            Get.toNamed(Routes.viewGoodsOrders,
-                                                arguments: {
-                                                  'goId': goId,
-                                                  "goType": 1
-                                                });
-                                          }
-                                        },
-                                      )
-                                    : Dimens.box0,
-                        controller.getStatutoryList
-                                        .firstWhere(
-                                          (e) =>
-                                              e.id == StatutoryListDetails!.id,
-                                          orElse: () =>
-                                              GetStatutoryList(id: 00),
-                                        )
-                                        .status ==
-                                    310 ||
-                                controller.getStatutoryList
-                                        .firstWhere(
-                                          (e) =>
-                                              e.id == StatutoryListDetails!.id,
-                                          orElse: () =>
-                                              GetStatutoryList(id: 00),
-                                        )
-                                        .status ==
-                                    304
-                            ? Dimens.box0
-                            : controller.getStatutoryList
-                                            .firstWhere(
-                                              (e) =>
-                                                  e.id ==
-                                                  StatutoryListDetails!.id,
-                                              orElse: () =>
-                                                  GetStatutoryList(id: 00),
-                                            )
-                                            .status ==
-                                        302 &&
-                                    varUserAccessModel.value.access_list!
-                                            .where((e) =>
-                                                e.feature_id ==
-                                                    UserAccessConstants
-                                                        .kGoodsFeatureId &&
-                                                e.edit ==
-                                                    UserAccessConstants
-                                                        .kHaveApproveAccess)
-                                            .length >
-                                        0
-                                ? TableActionButton(
-                                    color: ColorValues.editColor,
-                                    icon: Icons.edit,
-                                    message: 'Edit',
-                                    onPress: () {
-                                      // controller.clearStoreData();
-                                      int goId = StatutoryListDetails?.id ?? 0;
-                                      if (goId != 0) {
-                                        Get.toNamed(
-                                            Routes
-                                                .updateGoodsOrdersDetailsScreen,
-                                            arguments: {"goId": goId});
-                                      }
-                                    },
-                                  )
-                                : Dimens.box0,
-                        controller.getStatutoryList
-                                        .firstWhere(
-                                          (e) =>
-                                              e.id == StatutoryListDetails!.id,
-                                          orElse: () =>
-                                              GetStatutoryList(id: 00),
-                                        )
-                                        .status ==
-                                    310 &&
-                                varUserAccessModel.value.access_list!
-                                        .where((e) =>
-                                            e.feature_id ==
-                                                UserAccessConstants
-                                                    .kGoodsFeatureId &&
-                                            e.edit ==
-                                                UserAccessConstants
-                                                    .kHaveEditAccess)
-                                        .length >
-                                    0
-                            ? TableActionButton(
-                                color: ColorValues.closeColor,
-                                icon: Icons.close,
-                                message: 'Close',
-                                onPress: () {
-                                  // controller.clearStoreData();
-                                  int goId = StatutoryListDetails?.id ?? 0;
-                                  if (goId != 0) {
-                                    Get.toNamed(
-                                      Routes.receiveGoodsOrders,
-                                      arguments: {
-                                        'goId': StatutoryListDetails?.id,
-                                        "goType": 1
-                                      },
-                                    );
-                                  }
-                                },
-                              )
-                            : Dimens.box0,
-                        controller.getStatutoryList
-                                            .firstWhere(
-                                              (e) =>
-                                                  e.id ==
-                                                  StatutoryListDetails!.id,
-                                              orElse: () =>
-                                                  GetStatutoryList(id: 00),
-                                            )
-                                            .status ==
-                                        306 &&
-                                    varUserAccessModel.value.access_list!
-                                            .where((e) =>
-                                                e.feature_id ==
-                                                    UserAccessConstants
-                                                        .kGoodsFeatureId &&
-                                                e.add ==
-                                                    UserAccessConstants
-                                                        .kHaveAddAccess)
-                                            .length >
-                                        0 ||
-                                controller.getStatutoryList
-                                            .firstWhere(
-                                              (e) =>
-                                                  e.id ==
-                                                  StatutoryListDetails!.id,
-                                              orElse: () =>
-                                                  GetStatutoryList(id: 00),
-                                            )
-                                            .status ==
-                                        307 &&
-                                    varUserAccessModel.value.access_list!
-                                            .where((e) =>
-                                                e.feature_id ==
-                                                    UserAccessConstants
-                                                        .kGoodsFeatureId &&
-                                                e.add ==
-                                                    UserAccessConstants
-                                                        .kHaveAddAccess)
-                                            .length >
-                                        0 ||
-                                controller.getStatutoryList
-                                            .firstWhere(
-                                              (e) =>
-                                                  e.id ==
-                                                  StatutoryListDetails!.id,
-                                              orElse: () =>
-                                                  GetStatutoryList(id: 00),
-                                            )
-                                            .status ==
-                                        308 &&
-                                    varUserAccessModel.value.access_list!
-                                            .where((e) =>
-                                                e.feature_id ==
-                                                    UserAccessConstants
-                                                        .kGoodsFeatureId &&
-                                                e.approve ==
-                                                    UserAccessConstants
-                                                        .kHaveApproveAccess)
-                                            .length >
-                                        0 ||
-                                controller.getStatutoryList
-                                            .firstWhere(
-                                              (e) =>
-                                                  e.id ==
-                                                  StatutoryListDetails!.id,
-                                              orElse: () =>
-                                                  GetStatutoryList(id: 00),
-                                            )
-                                            .status ==
-                                        309 &&
-                                    varUserAccessModel.value.access_list!
-                                            .where((e) =>
-                                                e.feature_id ==
-                                                    UserAccessConstants
-                                                        .kGoodsFeatureId &&
-                                                e.approve ==
-                                                    UserAccessConstants
-                                                        .kHaveAddAccess)
-                                            .length >
-                                        0
-                            ? TableActionButton(
-                                color: ColorValues.approveColor,
-                                icon: Icons.shopping_cart,
-                                message: 'Receive GO',
-                                onPress: () {
-                                  // controller.clearStoreData();
-                                  int goId = StatutoryListDetails?.id ?? 0;
-                                  if (goId != 0) {
-                                    Get.toNamed(Routes.receiveGoodsOrders,
-                                        arguments: {'goId': goId, "goType": 1});
-                                  }
-                                },
-                              )
-                            : Dimens.box0,
+                    ? Row(
+                        children: [
+                          TableActionButton(
+                            color: ColorValues.viewColor,
+                            icon: Icons.remove_red_eye_outlined,
+                            message: 'View',
+                            onPress: () {
+                              int viewStatutory = 1;
 
-                        controller.getStatutoryList
-                                        .firstWhere(
-                                          (e) =>
-                                              e.id == StatutoryListDetails!.id,
-                                          orElse: () =>
-                                              GetStatutoryList(id: 00),
-                                        )
-                                        .status ==
-                                    309 &&
-                                varUserAccessModel.value.access_list!
-                                        .where((e) =>
-                                            e.feature_id ==
-                                                UserAccessConstants
-                                                    .kGoodsFeatureId &&
-                                            e.add ==
-                                                UserAccessConstants
-                                                    .kHaveAddAccess)
-                                        .length >
-                                    0
-                            ? TableActionButton(
-                                color: Color.fromARGB(255, 116, 78, 130),
-                                icon: Icons.ads_click,
-                                message: 'Re-Submit Receive GO',
-                                onPress: () {
-                                  // controller.clearStoreData();
-                                  // controller.clearTypeStoreData();
-
-                                  int goId = StatutoryListDetails?.id ?? 0;
-                                  if (goId != 0) {
-                                    Get.toNamed(Routes.receiveGoodsOrders,
-                                        arguments: {'goId': goId, "goType": 1});
-                                  }
-                                },
-                              )
-                            : Dimens.box0,
-                        // TableActionButton(
-                        //   color: ColorValues.approveColor,
-                        //   icon: Icons.approval_outlined,
-                        //   message: 'Approve/Reject GO Receive',
-                        //   onPress: () {
-                        //     int id = StatutoryListDetails?.id ?? 0;
-                        //     if (id != 0) {
-                        //       Get.toNamed(Routes.receiveGoodsOrders,
-                        //           arguments: {'id': id, "type": 1});
-                        //     }
-                        //   },
-                        // ),
-                        //   : Dimens.box0,
-                        // :
-                        controller.getStatutoryList
-                                            .firstWhere(
-                                              (e) =>
-                                                  e.id ==
-                                                  StatutoryListDetails!.id,
-                                              orElse: () =>
-                                                  GetStatutoryList(id: 00),
-                                            )
-                                            .status ==
-                                        302 &&
-                                    varUserAccessModel.value.access_list!
-                                            .where((e) =>
-                                                e.feature_id ==
-                                                    UserAccessConstants
-                                                        .kGoodsFeatureId &&
-                                                e.approve ==
-                                                    UserAccessConstants
-                                                        .kHaveApproveAccess)
-                                            .length >
-                                        0 ||
-                                controller.getStatutoryList
-                                            .firstWhere(
-                                              (e) =>
-                                                  e.id ==
-                                                  StatutoryListDetails!.id,
-                                              orElse: () =>
-                                                  GetStatutoryList(id: 00),
-                                            )
-                                            .status ==
-                                        301 &&
-                                    varUserAccessModel.value.access_list!
-                                            .where((e) =>
-                                                e.feature_id ==
-                                                    UserAccessConstants
-                                                        .kGoodsFeatureId &&
-                                                e.approve ==
-                                                    UserAccessConstants
-                                                        .kHaveApproveAccess)
-                                            .length >
-                                        0
-                            ? TableActionButton(
-                                color: ColorValues.approveColor,
-                                icon: Icons.check,
-                                message: 'Approve/Reject GO',
-                                onPress: () {
-                                  // controller.clearStoreData();
-                                  // controller.clearTypeStoreData();
-                                  int goId = StatutoryListDetails?.id ?? 0;
-                                  if (goId != 0) {
-                                    Get.toNamed(Routes.viewGoodsOrders,
-                                        arguments: {'goId': goId, "goType": 1});
-                                  }
-                                },
-                              )
-                            : Dimens.box0,
-
-                        controller.getStatutoryList
-                                        .firstWhere(
-                                          (e) =>
-                                              e.id == StatutoryListDetails!.id,
-                                          orElse: () =>
-                                              GetStatutoryList(id: 00),
-                                        )
-                                        .status ==
-                                    305 &&
-                                varUserAccessModel.value.access_list!
-                                        .where((e) =>
-                                            e.feature_id ==
-                                                UserAccessConstants
-                                                    .kGoodsFeatureId &&
-                                            e.add ==
-                                                UserAccessConstants
-                                                    .kHaveAddAccess)
-                                        .length >
-                                    0
-                            ? TableActionButton(
-                                color: ColorValues.purpleColor,
-                                icon: Icons.ads_click,
-                                message: 'Re-Submit GO',
-                                onPress: () {
-                                  // controller.clearStoreData();
-                                  // controller.clearTypeStoreData();
-
-                                  int goId = StatutoryListDetails?.id ?? 0;
-                                  if (goId != 0) {
-                                    Get.toNamed(
-                                      Routes.updateGoodsOrdersDetailsScreen,
-                                      arguments: {"goId": goId, 'goType': 1},
-                                    );
-                                  }
-                                },
-                              )
-                            : Dimens.box0
-
-                        // TableActionButton(
-                        //   color: ColorValues.deleteColor,
-                        //   icon: Icons.delete,
-                        //   message: 'Delete',
-                        //   onPress: () {},
-                        // )
-                      ])
+                              Get.toNamed(
+                                Routes.complianceScreen,
+                                arguments: {'viewStatutory': viewStatutory},
+                              );
+                            },
+                          ),
+                          TableActionButton(
+                            color: ColorValues.editColor,
+                            icon: Icons.edit,
+                            message: 'Edit',
+                            onPress: () {
+                              Get.toNamed(
+                                Routes.complianceScreen,
+                              );
+                            },
+                          ),
+                          TableActionButton(
+                            color: Color.fromARGB(255, 116, 78, 130),
+                            icon: Icons.ads_click,
+                            message: 'Re-New',
+                            onPress: () {
+                              int reNew = 1;
+                              Get.toNamed(
+                                Routes.complianceScreen,
+                                arguments: {'reNew': reNew},
+                              );
+                            },
+                          ),
+                          TableActionButton(
+                            color: Color.fromARGB(255, 120, 110, 123),
+                            icon: Icons.history,
+                            message: 'Hostory',
+                            onPress: () {
+                              Get.toNamed(
+                                Routes.complianceHistoryScreen,
+                              );
+                            },
+                          ),
+                        ],
+                      )
                     : Text(value.toString()),
           ),
         );
       }).toList(),
-      //   ],
-      onSelectChanged: (_) {
-        // controller.clearStoreData();
-        // controller.clearTypeStoreData();
-        StatutoryListDetails?.status == 302
-            ? Get.toNamed(Routes.viewGoodsOrders,
-                arguments: {'goId': StatutoryListDetails?.id, "goType": 1})
-            : StatutoryListDetails?.status == 309
-                ? Get.toNamed(Routes.receiveGoodsOrders,
-                    arguments: {'goId': StatutoryListDetails?.id, "goType": 1})
-                : StatutoryListDetails?.status == 302
-                    ? Get.toNamed(Routes.updateGoodsOrdersDetailsScreen,
-                        arguments: {'goId': StatutoryListDetails?.id})
-                    : StatutoryListDetails?.status == 306 &&
-                            varUserAccessModel.value.access_list!
-                                    .where((e) =>
-                                        e.feature_id == UserAccessConstants.kGoodsFeatureId &&
-                                        e.approve ==
-                                            UserAccessConstants
-                                                .kHaveApproveAccess)
-                                    .length >
-                                0
-                        ? Get.toNamed(
-                            Routes.viewGoodsOrders,
-                            arguments: {
-                              'goId': StatutoryListDetails?.id,
-                              "goType": 1
-                            },
-                          )
-                        : StatutoryListDetails?.status == 306 &&
-                                varUserAccessModel.value.access_list!.where((e) => e.feature_id == UserAccessConstants.kGoodsFeatureId && e.add == UserAccessConstants.kHaveAddAccess).length >
-                                    0
-                            ? Get.toNamed(Routes.receiveGoodsOrders,
-                                arguments: {'goId': StatutoryListDetails?.id, "goType": 1})
-                            : StatutoryListDetails?.status == 310 &&
-                                    varUserAccessModel.value.access_list!
-                                            .where((e) => e.feature_id == UserAccessConstants.kGoodsFeatureId && e.approve == UserAccessConstants.kHaveApproveAccess)
-                                            .length >
-                                        0
-                                ? Get.toNamed(
-                                    Routes.receiveGoodsOrders,
-                                    arguments: {
-                                      'goId': StatutoryListDetails?.id,
-                                      "goType": 1
-                                    },
-                                  )
-                                : StatutoryListDetails?.status == 306 && varUserAccessModel.value.access_list!.where((e) => e.feature_id == UserAccessConstants.kGoodsFeatureId && e.add == UserAccessConstants.kHaveAddAccess).length > 0
-                                    ? Get.toNamed(Routes.receiveGoodsOrders, arguments: {'goId': StatutoryListDetails?.id, "goType": 1})
-                                    : StatutoryListDetails?.status == 305
-                                        ? Get.toNamed(
-                                            Routes
-                                                .updateGoodsOrdersDetailsScreen,
-                                            arguments: {
-                                              'goId': StatutoryListDetails?.id,
-                                              "goType": 0
-                                            },
-                                          )
-                                        : StatutoryListDetails?.status == 308
-                                            ? Get.toNamed(
-                                                Routes.receiveGoodsOrders,
-                                                arguments: {
-                                                  'goId':
-                                                      StatutoryListDetails?.id,
-                                                  "goType": 1
-                                                },
-                                              )
-                                            : StatutoryListDetails?.status == 304
-                                                ? Get.toNamed(
-                                                    Routes.receiveGoodsOrders,
-                                                    arguments: {
-                                                      'goId':
-                                                          StatutoryListDetails
-                                                              ?.id,
-                                                      "goType": 1
-                                                    },
-                                                  )
-                                                : Get.toNamed(
-                                                    Routes.viewGoodsOrders,
-                                                    arguments: {
-                                                      "goId":
-                                                          StatutoryListDetails
-                                                              ?.id,
-                                                      "goType": 0
-                                                    },
-                                                  );
-      },
+      onSelectChanged: (_) {},
     );
   }
 

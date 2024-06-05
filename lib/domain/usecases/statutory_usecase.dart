@@ -1,6 +1,7 @@
 import 'package:cmms/domain/models/facility_model.dart';
 import 'package:cmms/domain/models/get_statutory_list_model.dart';
 import 'package:cmms/domain/models/stock_management_update_goods_orders_model.dart';
+import 'package:cmms/domain/repositories/local_storage_keys.dart';
 import 'package:cmms/domain/repositories/repository.dart';
 
 class StatutoryUsecase {
@@ -24,4 +25,7 @@ class StatutoryUsecase {
         // end_date: end_date,
         isExport: isExport);
   }
+
+  void clearValue() async => repository.clearData(LocalKeys.srId);
+ 
 }
