@@ -27,7 +27,8 @@ class ViewWaterDataController extends GetxController {
   RxList<ItemData?>? itemDataList = <ItemData?>[].obs;
   Rx<Details?> details = Details().obs;
   RxList<Details?>? detailsList = <Details?>[].obs;
-
+  RxList<double> totalColumn = <double>[].obs;
+  MonthModel? monthModel = MonthModel(name: '');
   RxList<MonthModel> month = <MonthModel>[
     MonthModel(name: "Please Select", id: "0"),
     MonthModel(name: 'Jan', id: "1"),
@@ -64,7 +65,6 @@ class ViewWaterDataController extends GetxController {
       String? _year = await viewWaterDataPresenter.getYearValue();
       if (_monthId == null || _monthId == '' || _monthId == "null") {
         var dataFromPreviousScreen = Get.arguments;
-
         selectedMonth.value = dataFromPreviousScreen['monthId'];
         selectedYear.value = dataFromPreviousScreen['year'];
         viewWaterDataPresenter.saveMonthValue(
@@ -72,8 +72,9 @@ class ViewWaterDataController extends GetxController {
         viewWaterDataPresenter.saveYearValue(
             year: selectedYear.value.toString());
 
-        monthName.value =
-            month.firstWhere((element) => element.id == selectedMonth).name;
+        monthModel =
+            month.firstWhereOrNull((element) => selectedMonth == element.id);
+        monthName.value = monthModel?.name ?? '';
       } else {
         selectedMonth.value = int.tryParse(_monthId) ?? 0;
         selectedYear.value = int.tryParse(_year!) ?? 0;
@@ -95,7 +96,7 @@ class ViewWaterDataController extends GetxController {
 
     if (_waterDataMonthDetail != null) {
       waterDataByMonthList.value = _waterDataMonthDetail;
-      waterDataByMonth.value = waterDataByMonthList.firstWhere(
+      waterDataByMonth.value = waterDataByMonthList.firstWhereOrNull(
           (element) => element?.facilityId != 0 || element?.facilityId != null);
       itemDataList?.value = waterDataByMonth.value!.itemData!;
       // detailsList?.value = itemDataList?.value?.details;
