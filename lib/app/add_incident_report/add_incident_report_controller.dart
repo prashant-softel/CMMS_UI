@@ -1472,22 +1472,19 @@ class AddIncidentReportController extends GetxController {
     if (selectedBlock.value == '') {
       isBlockSelected.value = false;
     }
-    // if (selectedEquipmentName.value == '') {
-    //   isEquipmentNameSelected.value = false;
-    // }
     if (startDateTimeCtrlr.text == '') {
       Fluttertoast.showToast(
           msg: 'Incident Date & Time Field cannot be empty',
           timeInSecForIosWeb: 5);
     }
-    // if (reportingDateTimeCtrlr.text == '') {
-    //   Fluttertoast.showToast(
-    //       msg: 'Reporting Date & Time Field cannot be empty',
-    //       timeInSecForIosWeb: 5);
-    // }
-    // if (selectedVictimNameIdList.length < 1) {
-    //   isVictimNameListSelected.value = false;
-    // }
+    if (selectedRiskTypeList.value == '') {
+      isRiskTypeListSelected.value = false;
+    }
+    if (selectedSeverity.value == '') {
+      Fluttertoast.showToast(
+          msg: 'Please select severity of incident',
+          timeInSecForIosWeb: 5);
+    }
     if (actionTakenDateTimeCtrlr.text == '') {
       Fluttertoast.showToast(
           msg: 'Action Taken By Date & Time Field cannot be empty',
@@ -1496,50 +1493,38 @@ class AddIncidentReportController extends GetxController {
     if (selectedAssetRestorationActionTakenByList.value == '') {
       isAssetRestorationActionTakenByListSelected.value = false;
     }
-    // if (selectedIncidentInvestigationVerificationDoneByList.value == '') {
-    //   isincidentInvestigationVerificationDoneByListSelected.value = false;
-    // }
     if (damagedAssetCostTextCtrlr.text == '') {
+      isDamagedAssetCostTextInvalid.value = false;
       Fluttertoast.showToast(
           msg: 'Damaged cost Field cannot be empty', timeInSecForIosWeb: 5);
     }
     if (genLossAssetDamageTextCtrlr.text == '') {
+      isGenLossAssetDamageTextInvalid.value = false;
       Fluttertoast.showToast(
           msg: 'Generation Loss Field cannot be empty', timeInSecForIosWeb: 5);
     }
     if (titleTextCtrlr.text == '') {
+      isTitleTextInvalid.value = false;
       Fluttertoast.showToast(
           msg: 'Title Field cannot be empty', timeInSecForIosWeb: 5);
     }
     if (incidentreportDescriptionCtrlr.text == '') {
+      isIncidentDescriptionInvalid.value = false;
       Fluttertoast.showToast(
           msg: 'Incident Description Field cannot be empty',
           timeInSecForIosWeb: 5);
     }
-    // if (insuranceAvailableTextCtrlr.text == '') {
-    //   Fluttertoast.showToast(
-    //       msg: 'Insurance Available Field cannot be empty',
-    //       timeInSecForIosWeb: 5);
-    // }
-    // if (insuranceRemarkTextCtrlr.text == '') {
-    //   Fluttertoast.showToast(
-    //       msg: 'Insurance Remark Field cannot be empty', timeInSecForIosWeb: 5);
-    // }
-    // if (immediateCorrectiveActionTextController.text == '') {
-    //   Fluttertoast.showToast(
-    //       msg: 'Corrective Action Field cannot be empty',
-    //       timeInSecForIosWeb: 5);
-    // }
-    // if (requestManufactureTextController.text == '') {
-    //   Fluttertoast.showToast(
-    //       msg: 'Request Field cannot be empty', timeInSecForIosWeb: 5);
-    // }
     if (isBlockSelected.value == false ||
-            // isEquipmentNameSelected.value == false ||
-            // isVictimNameListSelected.value == false ||
+            startDateTimeCtrlr.text == '' ||
+            isTitleTextInvalid.value == false ||
+            actionTakenDateTimeCtrlr.text == '' ||
+            selectedSeverity.value == '' ||
+            incidentreportDescriptionCtrlr.value == false ||
+            isRiskTypeListSelected.value == false||
+            isDamagedAssetCostTextInvalid.value == false ||
+            isGenLossAssetDamageTextInvalid.value == false ||
             isAssetRestorationActionTakenByListSelected.value == false ||
             isincidentInvestigationDoneByListSelected.value == false
-        // isincidentInvestigationVerificationDoneByListSelected.value == false
         ) {
       isFormInvalid.value = true;
     } else {
