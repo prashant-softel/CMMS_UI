@@ -1,6 +1,4 @@
 import 'dart:async';
-
-import 'package:cmms/domain/models/business_type_model.dart';
 import 'package:cmms/domain/models/create_go_model.dart';
 import 'package:cmms/domain/models/currency_list_model.dart';
 import 'package:cmms/domain/models/facility_model.dart';
@@ -114,7 +112,7 @@ class StockManagementAddGoodsOrdersController extends GetxController {
   // final rowItem = Rx<List<List<Map<String, String>>>>([]);
   // Map<String, GetAssetDataModel> dropdownMapperData = {};
   RxMap<dynamic, dynamic> dropdownMapperData = {}.obs;
-
+  RxMap<String, bool> errorState = <String, bool>{}.obs;
   RxMap<dynamic, dynamic> paiddropdownMapperData = {}.obs;
   RxList<GetPurchaseDetailsByIDModel?>? getPurchaseDetailsByIDModelList =
       <GetPurchaseDetailsByIDModel?>[].obs;
@@ -162,6 +160,35 @@ class StockManagementAddGoodsOrdersController extends GetxController {
   Rx<String> asscat = ''.obs;
   int assetNameId = 0;
   List<int?> idList = [];
+
+  bool validateFields() {
+    bool isValid = true;
+    errorState.clear();
+    for (int i = 0; i < rowItem.length; i++) {
+      var row = rowItem[i];
+      for (var mapData in row) {
+        if ((mapData['key'] == 'Drop_down' &&
+                (mapData['value'] == null ||
+                    mapData['value'] == 'Please Select')) ||
+            (mapData['key'] == 'Paid_By' &&
+                (mapData['value'] == null ||
+                    mapData['value'] == 'Please Select')) ||
+            (mapData['key'] == 'Order' &&
+                (mapData['value'] == null || mapData['value'] == '')) ||
+            // (mapData['key'] == 'Requested' &&
+            //     (mapData['value'] == null || mapData['value'] == '')) ||
+            // (mapData['key'] == 'Cost' &&
+            //     (mapData['value'] == null || mapData['value'] == '')) ||
+            (mapData['key'] == 'Order' &&
+                (mapData['value'] == null || mapData['value'] == ''))) {
+          errorState['$i-${mapData['key']}'] = true;
+          isValid = false;
+        }
+      }
+    }
+    update();
+    return isValid;
+  }
 
   // var paid = <PaiedModel>[
   //   PaiedModel(name: "Please Select", id: 0),
@@ -814,6 +841,9 @@ class StockManagementAddGoodsOrdersController extends GetxController {
     }
     if (amountCtrlr.text.trim().length == 0) {
       isAmountInvalid.value = true;
+      isFormInvalid.value = true;
+    }
+    if (!validateFields()) {
       isFormInvalid.value = true;
     }
   }
