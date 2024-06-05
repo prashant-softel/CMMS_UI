@@ -828,6 +828,46 @@ class Repository {
     }
   }
 
+  Future<Map<String, dynamic>> createCompliance(
+    createCompliance,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.createCompliance(
+        auth: auth,
+        createCompliance: createCompliance,
+        isLoading: isLoading ?? false,
+      );
+
+      var resourceData = res.data;
+
+      print('Response create Statutory Compliance order : ${resourceData}');
+
+      if (!res.hasError) {
+        Fluttertoast.showToast(
+            msg: "Statutory Compliance Add Successfully...", fontSize: 16.0);
+        Get.offNamed(
+          Routes.statutory,
+        );
+
+        // if (res.errorCode == 200) {
+        //   var responseMap = json.decode(res.data);
+        //   return responseMap;
+        // }
+
+        // Fluttertoast.showToast(msg: "Data add successfully...", fontSize: 16.0);
+      } else {
+        Utility.showDialog(res.errorCode.toString(), 'Statutory Compliance');
+        //return '';
+      }
+      return Map();
+    } catch (error) {
+      print(error.toString());
+      return Map();
+    }
+  }
+
   Future<Map<String, dynamic>> createWaterData(
     createWaterData,
     bool? isLoading,

@@ -22,4 +22,14 @@ class CompliancePresenter {
       facilityId: facilityId,
     );
   }
+
+  Future<Map<String, dynamic>?> createCompliance({
+    createCompliance,
+    required bool isLoading,
+  }) async {
+    return complianceUsecase.createCompliance(
+      createCompliance: createCompliance,
+      isLoading: isLoading,
+    );
+  }
 }

@@ -1909,6 +1909,16 @@ class DataRepository extends DomainRepository {
         createGo: createGo,
         isLoading: isLoading ?? false,
       );
+  Future<ResponseModel> createCompliance({
+    required String auth,
+    createCompliance,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.createCompliance(
+        auth: auth,
+        createCompliance: createCompliance,
+        isLoading: isLoading ?? false,
+      );
   Future<ResponseModel> createWaterData({
     required String auth,
     createWaterData,

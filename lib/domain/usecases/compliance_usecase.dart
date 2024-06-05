@@ -20,4 +20,13 @@ class ComplianceUsecase {
       facilityId: facilityId,
     );
   }
+
+  Future<Map<String, dynamic>> createCompliance({
+    createCompliance,
+    bool? isLoading,
+  }) async =>
+      await repository.createCompliance(
+        createCompliance,
+        isLoading,
+      );
 }
