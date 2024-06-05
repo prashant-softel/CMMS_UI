@@ -489,7 +489,9 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                                       children: [
                                                                         CustomRichText(
                                                                             title:
-                                                                                'ESI Applicability: '),
+                                                                                'ESI Applicability: ',
+                                                                            includeAsterisk:
+                                                                                false),
                                                                         Dimens
                                                                             .boxWidth10,
                                                                         SizedBox(
@@ -552,7 +554,9 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                                       children: [
                                                                         controller.esiApplicabilityValue ==
                                                                                 true
-                                                                            ? CustomRichText(title: 'ESI Applicability Remark: ')
+                                                                            ? CustomRichText(
+                                                                                title: 'ESI Applicability Remark: ',
+                                                                                includeAsterisk: false)
                                                                             : Container(),
                                                                         Dimens
                                                                             .boxWidth10,
@@ -570,8 +574,11 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                                     Row(
                                                                       children: [
                                                                         CustomRichText(
-                                                                            title:
-                                                                                'Legal Applicability: '),
+                                                                          title:
+                                                                              'Legal Applicability: ',
+                                                                          includeAsterisk:
+                                                                              false,
+                                                                        ),
                                                                         Dimens
                                                                             .boxWidth10,
                                                                         SizedBox(
@@ -598,7 +605,9 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                                       children: [
                                                                         controller.legalApplicabilityValue ==
                                                                                 true
-                                                                            ? CustomRichText(title: 'Legal Applicability Remark: ')
+                                                                            ? CustomRichText(
+                                                                                title: 'Legal Applicability Remark: ',
+                                                                                includeAsterisk: false)
                                                                             : Container(),
                                                                         Dimens
                                                                             .boxWidth10,
@@ -620,7 +629,9 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                             children: [
                                                               CustomRichText(
                                                                   title:
-                                                                      ' Insurance Applicable: '),
+                                                                      ' Insurance Applicable: ',
+                                                                  includeAsterisk:
+                                                                      false),
                                                               Dimens.boxWidth10,
                                                               Obx(
                                                                 () => SizedBox(
@@ -654,7 +665,9 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                                       true
                                                                   ? CustomRichText(
                                                                       title:
-                                                                          '    Insurance Available: ')
+                                                                          'Insurance Available: ',
+                                                                      includeAsterisk:
+                                                                          false)
                                                                   : Container(),
                                                               Dimens.boxWidth10,
                                                               controller.insuranceApplicableValue ==
