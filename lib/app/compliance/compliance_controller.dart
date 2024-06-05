@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'package:cmms/app/compliance/compliance_presenter.dart';
 import 'package:cmms/domain/models/Statutory_Compliance_model.dart';
+import 'package:cmms/domain/models/createStatutory_model.dart';
+import 'package:cmms/domain/models/create_go_model.dart';
 import 'package:cmms/domain/models/currency_list_model.dart';
 import 'package:cmms/domain/models/facility_model.dart';
 import 'package:flutter/material.dart';
@@ -27,7 +29,11 @@ class ComplianceController extends GetxController {
   Rx<String> selectedStatutoryCompliance = ''.obs;
   int selectedStatutoryComplianceId = 0;
   bool openIssueDatePicker = false;
+  bool openExpireOnFDatePicker = false;
+
   var issueDateTc = TextEditingController();
+  var expireOnDateTc = TextEditingController();
+  var commentsCtrl = TextEditingController();
 
   int paidId = 0;
   int facilityId = 0;
@@ -95,6 +101,46 @@ class ComplianceController extends GetxController {
     }
 
     update(['statutory_Compliance_List']);
+  }
+
+  void createCompliance() async {
+    try {
+      // checkForm();
+      // if (isFormInvalid.value) {
+      //   return;
+      // }
+      String _issueDateTc = issueDateTc.text.trim();
+      String _expireOnDateTc = expireOnDateTc.text.trim();
+      String _commentsCtrl = commentsCtrl.text.trim();
+
+      CreateStatutoryModel createStatutoryModel = CreateStatutoryModel(
+        facility_id: facilityId,
+        Comment: _commentsCtrl,
+        compliance_id: selectedStatutoryComplianceId,
+        issue_date: _issueDateTc,
+        expires_on: _expireOnDateTc,
+      );
+
+      // Convert the CreateStatutoryModel instance to JSON
+      var createComplianceModelJsonString = createStatutoryModel.toJson();
+
+      // Call the createCompliance function from stockManagementAddGoodsOrdersPresenter
+      Map<String, dynamic>? responseCreateComplianceModel =
+          await compliancePresenter.createCompliance(
+        createCompliance: createComplianceModelJsonString,
+        isLoading: true,
+      );
+
+      // Handle the response
+      if (responseCreateComplianceModel == null) {
+        // CreateNewPermitDialog();
+        // showAlertDialog();
+      }
+      print(
+          'Create  create Compliance  data: $createComplianceModelJsonString');
+    } catch (e) {
+      print(e);
+    }
   }
 
   void onValueChanged(dynamic list, dynamic value) {

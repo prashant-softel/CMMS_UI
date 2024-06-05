@@ -3267,6 +3267,32 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> createCompliance({
+    required String auth,
+    createCompliance,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'MISMaster/CreateStatutory',
+      Request.post,
+      createCompliance,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    print('Create Create Statutory Response:${responseModel.data}');
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    // if (res.e != null) {
+    //   Get.dialog<void>(WarrantyClaimErrorDialog());
+    // } else {
+
+    return responseModel;
+  }
+
   Future<ResponseModel> createWaterData({
     required String auth,
     createWaterData,
