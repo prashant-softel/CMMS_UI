@@ -77,7 +77,7 @@ class _StatutoryWebState extends State<StatutoryWeb> {
                               onTap: () {
                                 Get.offAllNamed(Routes.misDashboard);
                               },
-                              child: Text(" / STOCK MANAGEMENT",
+                              child: Text(" / HSE REPORT",
                                   style: Styles.greyLight14),
                             ),
                             Text(" / STATUTORY", style: Styles.greyLight14)
