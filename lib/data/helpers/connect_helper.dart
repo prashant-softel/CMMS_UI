@@ -293,6 +293,20 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> getStatutoryComplianceDropDown(
+      {required bool isLoading, required String auth, int? facilityId}) async {
+    ResponseModel responseModel = await apiWrapper.makeRequest(
+      'MISMaster/GetStatutoryComplianceMasterList',
+      Request.getMultiparts,
+      null,
+      isLoading,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
   Future<ResponseModel> getTypeOfWaterList(
       {required bool isLoading, required String auth, int? facilityId}) async {
     ResponseModel responseModel = await apiWrapper.makeRequest(
@@ -9202,7 +9216,7 @@ class ConnectHelper {
     return responseModel;
   }
 
-   //Statutory Compliance
+  //Statutory Compliance
   //Get
   Future<ResponseModel> getStatutoryCompliance(
       {required bool isLoading, required String auth}) async {
@@ -9266,10 +9280,9 @@ class ConnectHelper {
     bool? isLoading,
     required StatutoryCompliance_id,
   }) async {
-
-     final requestBody = {
-    'id': int.tryParse(StatutoryCompliance_id),
-  };
+    final requestBody = {
+      'id': int.tryParse(StatutoryCompliance_id),
+    };
     var responseModel = await apiWrapper.makeRequest(
       'MISMaster/DeleteStatutoryComplianceMaster',
       Request.post,
