@@ -2527,6 +2527,33 @@ class Repository {
     }
   }
 
+  Future<List<StatutoryComplianceModel>> getStatutoryComplianceDropDown({
+    required int? facilityId,
+    required bool isLoading,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+
+      log(auth);
+      final res = await _dataRepository.getStatutoryComplianceDropDown(
+        facilityId: facilityId,
+        isLoading: isLoading,
+        auth: auth,
+      );
+      print('Unit Statutory ComplianceList Data: ${res.data}');
+
+      if (!res.hasError) {
+        var statutoryComplianceList =
+            statutoryComplianceModelFromJson(res.data);
+        return statutoryComplianceList;
+      }
+      return [];
+    } catch (error) {
+      log(error.toString());
+      return [];
+    }
+  }
+
   Future<List<WaterSource>> getTypeOfWaterList({
     required int? facilityId,
     // int? blockId,
@@ -14211,7 +14238,8 @@ class Repository {
         return true;
       } //
       else {
-        Utility.showDialog(res.errorCode.toString(), 'Update Statutory Compliance');
+        Utility.showDialog(
+            res.errorCode.toString(), 'Update Statutory Compliance');
         return false;
       }
     } catch (error) {
@@ -14221,7 +14249,8 @@ class Repository {
   }
 
   //delete
-  Future<void> deleteStatutoryCompliance(Object StatutoryCompliance_id, bool isLoading) async {
+  Future<void> deleteStatutoryCompliance(
+      Object StatutoryCompliance_id, bool isLoading) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.deleteStatutoryCompliance(
@@ -14233,7 +14262,8 @@ class Repository {
       if (!res.hasError) {
         //get delete response back from API
       } else {
-        Utility.showDialog(res.errorCode.toString(), 'delete Statutory Compliance');
+        Utility.showDialog(
+            res.errorCode.toString(), 'delete Statutory Compliance');
       }
     } catch (error) {
       print(error.toString());

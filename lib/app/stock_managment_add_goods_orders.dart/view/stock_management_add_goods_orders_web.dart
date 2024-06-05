@@ -1291,7 +1291,7 @@ class AddRowInGoodsOrder extends StatelessWidget {
                                             // (mapData['key'] == "Order") ||
                                             (mapData['key'] == "Cost")
                                                 ? IgnorePointer(
-                                                  child: Padding(
+                                                    child: Padding(
                                                       padding: EdgeInsets.only(
                                                           top: 10),
                                                       child: Column(
@@ -1326,8 +1326,7 @@ class AddRowInGoodsOrder extends StatelessWidget {
                                                                     BorderRadius
                                                                         .circular(
                                                                             5),
-                                                                border: controller
-                                                                                .errorState[
+                                                                border: controller.errorState[
                                                                             '$rowIndex-${"Drop_down"}'] ==
                                                                         true
                                                                     ? Border.all(
@@ -1365,7 +1364,8 @@ class AddRowInGoodsOrder extends StatelessWidget {
                                                                   text:
                                                                       "${controller.dropdownMapperData.value[row[0]['value']]?.cost ?? ""}",
                                                                 ),
-                                                                onChanged: (txt) {
+                                                                onChanged:
+                                                                    (txt) {
                                                                   mapData["value"] =
                                                                       txt;
                                                                   if (controller
@@ -1382,14 +1382,15 @@ class AddRowInGoodsOrder extends StatelessWidget {
                                                         ],
                                                       ),
                                                     ),
-                                                )
+                                                  )
                                                 : (mapData['key'] ==
                                                         "Requested")
                                                     ? IgnorePointer(
-                                                      child: Padding(
+                                                        child: Padding(
                                                           padding:
                                                               const EdgeInsets
-                                                                  .only(top: 10),
+                                                                  .only(
+                                                                  top: 10),
                                                           child: Column(
                                                             mainAxisAlignment:
                                                                 MainAxisAlignment
@@ -1420,10 +1421,8 @@ class AddRowInGoodsOrder extends StatelessWidget {
                                                                         .whiteColor,
                                                                     borderRadius:
                                                                         BorderRadius
-                                                                            .circular(
-                                                                                5),
-                                                                    border: controller.errorState[
-                                                                                '$rowIndex-${"Drop_down"}'] ==
+                                                                            .circular(5),
+                                                                    border: controller.errorState['$rowIndex-${"Drop_down"}'] ==
                                                                             true
                                                                         ? Border.all(
                                                                             color: Colors
@@ -1431,10 +1430,9 @@ class AddRowInGoodsOrder extends StatelessWidget {
                                                                             width:
                                                                                 2.0)
                                                                         : Border.all(
-                                                                            color: ColorValues
-                                                                                .appLightBlueColor,
-                                                                            width:
-                                                                                1.0),
+                                                                            color:
+                                                                                ColorValues.appLightBlueColor,
+                                                                            width: 1.0),
                                                                   ),
                                                                   child:
                                                                       LoginCustomTextfield(
@@ -1468,15 +1466,14 @@ class AddRowInGoodsOrder extends StatelessWidget {
                                                                           true) {
                                                                         controller
                                                                             .errorState
-                                                                            .remove(
-                                                                                '$rowIndex-${mapData['key']}');
+                                                                            .remove('$rowIndex-${mapData['key']}');
                                                                       }
                                                                     },
                                                                   )),
                                                             ],
                                                           ),
                                                         ),
-                                                    )
+                                                      )
                                                     : Text(
                                                         mapData['key'] ?? ''),
                           );
