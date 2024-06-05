@@ -3,7 +3,6 @@ import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/view_water_data/view_water_data_controller.dart';
 import 'package:cmms/app/widgets/add_dialog.dart';
 import 'package:cmms/app/widgets/minus_dialog.dart';
-import 'package:cmms/domain/models/water_data_month.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -83,15 +82,13 @@ class _WaterDataWebState extends State<ViewWaterDataWeb> {
                               InkWell(
                                 onTap: () {
                                   controller.clearStoreData();
-                                  Get.offNamed(Routes.waterDataListScreen);
+                                  Get.offNamed(Routes.misDashboard);
                                 },
-                                child: Text(" / WATER DATA LIST",
-                                    style: Styles.greyLight14),
+                                child:
+                                    Text(" / MIS", style: Styles.greyLight14),
                               ),
-                              Text(
-                                " / VIEW WATER DATA",
-                                style: Styles.greyLight14,
-                              ),
+                              Text(" / VIEW WATER DATA",
+                                  style: Styles.greyLight14),
                             ],
                           ),
                         ),
@@ -114,7 +111,7 @@ class _WaterDataWebState extends State<ViewWaterDataWeb> {
                                       child: Row(
                                         children: [
                                           Text(
-                                            "View Water Data For ${controller.monthName} Month",
+                                            "View Water Data For ${controller.waterDataByMonth.value?.month ?? ''} Month",
                                             style: Styles.blackBold16,
                                           ),
                                         ],
@@ -155,9 +152,9 @@ class _WaterDataWebState extends State<ViewWaterDataWeb> {
                                                 ),
                                               ],
                                             ),
+                                            // height: 194,
                                             height:
-                                                (((item?.details?.length ?? 0) +
-                                                            2) *
+                                                ((item?.details?.length ?? 0) *
                                                         50 +
                                                     155),
                                             margin: EdgeInsets.all(15),
@@ -180,60 +177,129 @@ class _WaterDataWebState extends State<ViewWaterDataWeb> {
                                                 Expanded(
                                                   child: DataTable2(
                                                     columns: [
-                                                      DataColumn2(
-                                                        size: ColumnSize.M,
+                                                      DataColumn(
                                                         label: Text(
                                                           "Date",
                                                           style: Styles.blue17,
                                                         ),
                                                       ),
-                                                      DataColumn2(
-                                                        size: ColumnSize.L,
+                                                      DataColumn(
                                                         label: Text(
                                                           "Description",
                                                           style: Styles.blue17,
                                                         ),
                                                       ),
-                                                      DataColumn2(
-                                                        size: ColumnSize.L,
+                                                      DataColumn(
                                                         label: Text(
                                                           "Transaction Type",
                                                           style: Styles.blue17,
                                                         ),
                                                       ),
-                                                      DataColumn2(
-                                                        size: ColumnSize.M,
+                                                      DataColumn(
                                                         label: Text(
                                                           "Procurment",
                                                           style: Styles.green17,
                                                         ),
                                                       ),
-                                                      DataColumn2(
-                                                        size: ColumnSize.M,
+                                                      DataColumn(
                                                         label: Text(
                                                           "Consumption",
                                                           style: Styles.red17,
                                                         ),
                                                       ),
-                                                      DataColumn2(
-                                                        size: ColumnSize.M,
-                                                        label: Text(
-                                                          "Total",
-                                                          style: Styles.blue17,
-                                                        ),
-                                                      ),
-                                                      DataColumn2(
-                                                        fixedWidth: 90,
+                                                      DataColumn(
                                                         label: Text(
                                                           "Action",
                                                           style: Styles.blue17,
                                                         ),
                                                       ),
                                                     ],
-                                                    rows: _buildTableRows(
-                                                      item,
-                                                      item?.details,
-                                                    ),
+                                                    rows: item?.details
+                                                            ?.map(
+                                                              (detail) =>
+                                                                  DataRow(
+                                                                cells: [
+                                                                  DataCell(
+                                                                    Text(
+                                                                        detail.date ??
+                                                                            '',
+                                                                        style: Styles
+                                                                            .black14),
+                                                                  ),
+                                                                  DataCell(
+                                                                    Text(
+                                                                        detail.description ??
+                                                                            '',
+                                                                        style: Styles
+                                                                            .black14),
+                                                                  ),
+                                                                  DataCell(
+                                                                    Text(
+                                                                        detail.transactionType ??
+                                                                            '',
+                                                                        style: Styles
+                                                                            .black14),
+                                                                  ),
+                                                                  DataCell(
+                                                                    Text(
+                                                                      "${detail.procuredQty}",
+                                                                      style: Styles
+                                                                          .green700,
+                                                                    ),
+                                                                  ),
+                                                                  DataCell(
+                                                                    Text(
+                                                                      "${detail.consumedQty}",
+                                                                      style: Styles
+                                                                          .Red700,
+                                                                    ),
+                                                                  ),
+                                                                  DataCell(
+                                                                    TableActionButton(
+                                                                      color: ColorValues
+                                                                          .editColor,
+                                                                      icon: Icons
+                                                                          .edit_outlined,
+                                                                      message:
+                                                                          "edit",
+                                                                      onPress:
+                                                                          () {
+                                                                        if (detail.transactionType ==
+                                                                            "Procurement") {
+                                                                          Get.dialog(
+                                                                            AddDialog(
+                                                                              id: detail.id,
+                                                                              date: detail.date,
+                                                                              description: detail.description,
+                                                                              quantity: detail.procuredQty.toString(),
+                                                                              waterTypeId: item.waterTypeId,
+                                                                              waterTypeName: item.waterType,
+                                                                            ),
+                                                                            barrierDismissible:
+                                                                                false,
+                                                                          );
+                                                                        } else {
+                                                                          Get.dialog(
+                                                                            MinusDialog(
+                                                                              id: detail.id,
+                                                                              date: detail.date,
+                                                                              description: detail.description,
+                                                                              quantity: detail.consumedQty.toString(),
+                                                                              waterTypeId: item.waterTypeId,
+                                                                              waterTypeName: item.waterType,
+                                                                            ),
+                                                                            barrierDismissible:
+                                                                                false,
+                                                                          );
+                                                                        }
+                                                                      },
+                                                                    ),
+                                                                  ), // Add this line
+                                                                ],
+                                                              ),
+                                                            )
+                                                            .toList() ??
+                                                        [],
                                                   ),
                                                 ),
                                                 Dimens.boxHeight20,
@@ -285,186 +351,5 @@ class _WaterDataWebState extends State<ViewWaterDataWeb> {
         // );
       },
     );
-  }
-
-  List<DataRow> _buildTableRows(ItemData? item, List<Details>? details) {
-    double opening = item?.opening ?? 0;
-    double total = opening;
-    double newTotal = 0;
-    double totalProcurement = 0;
-    double totalConsumption = 0;
-
-    List<DataRow> rows = [];
-
-    rows.add(
-      DataRow(
-        cells: [
-          DataCell(Text('', style: Styles.black14)),
-          DataCell(Text('Opening Balance', style: Styles.green700)),
-          DataCell(Text('', style: Styles.black14)),
-          DataCell(Text('', style: Styles.green700)),
-          DataCell(Text('', style: Styles.Red700)),
-          DataCell(Text('${opening}', style: Styles.black14)),
-          DataCell(Text('', style: Styles.black14)),
-        ],
-      ),
-    );
-    if (details != null) {
-      for (int i = 0; i < details.length; i++) {
-        double procurement = details[i].procuredQty ?? 0.0;
-        double consumption = details[i].consumedQty ?? 0.0;
-        newTotal = (total + procurement) - consumption;
-        rows.add(
-          DataRow(
-            cells: [
-              DataCell(
-                Text(details[i].date ?? '', style: Styles.black14),
-              ),
-              DataCell(
-                Text(details[i].description ?? '', style: Styles.black14),
-              ),
-              DataCell(
-                Text(details[i].transactionType ?? '', style: Styles.black14),
-              ),
-              DataCell(
-                Text("${details[i].procuredQty}", style: Styles.green700),
-              ),
-              DataCell(
-                Text("${details[i].consumedQty}", style: Styles.Red700),
-              ),
-              DataCell(
-                Text("$newTotal", style: Styles.black14),
-              ),
-              DataCell(
-                TableActionButton(
-                  color: ColorValues.editColor,
-                  icon: Icons.edit_outlined,
-                  message: "edit",
-                  onPress: () {
-                    if (details[i].transactionType == "Procurement") {
-                      Get.dialog(
-                        AddDialog(
-                          id: details[i].id,
-                          date: details[i].date,
-                          description: details[i].description,
-                          quantity: details[i].procuredQty.toString(),
-                          waterTypeId: item?.waterTypeId,
-                          waterTypeName: item?.waterType,
-                        ),
-                        barrierDismissible: false,
-                      );
-                    } else {
-                      Get.dialog(
-                        MinusDialog(
-                          id: details[i].id,
-                          date: details[i].date,
-                          description: details[i].description,
-                          quantity: details[i].consumedQty.toString(),
-                          waterTypeId: item?.waterTypeId,
-                          waterTypeName: item?.waterType,
-                        ),
-                        barrierDismissible: false,
-                      );
-                    }
-                  },
-                ),
-              ),
-            ],
-          ),
-        );
-        total = newTotal;
-        totalProcurement = totalProcurement + procurement;
-        totalConsumption = totalConsumption + consumption;
-      }
-      // rows.addAll(details
-      //     .map(
-      //       (detail) => DataRow(
-      //         cells: [
-      //           DataCell(
-      //             Text(detail.date ?? '', style: Styles.black14),
-      //           ),
-      //           DataCell(
-      //             Text(detail.description ?? '', style: Styles.black14),
-      //           ),
-      //           DataCell(
-      //             Text(detail.transactionType ?? '', style: Styles.black14),
-      //           ),
-      //           DataCell(
-      //             Text("${detail.procuredQty}", style: Styles.green700),
-      //           ),
-      //           DataCell(
-      //             Text("${detail.consumedQty}", style: Styles.Red700),
-      //           ),
-      //           DataCell(
-      //             Text("", style: Styles.black14),
-      //           ),
-      //           DataCell(
-      //             TableActionButton(
-      //               color: ColorValues.editColor,
-      //               icon: Icons.edit_outlined,
-      //               message: "edit",
-      //               onPress: () {
-      //                 if (detail.transactionType == "Procurement") {
-      //                   Get.dialog(
-      //                     AddDialog(
-      //                       id: detail.id,
-      //                       date: detail.date,
-      //                       description: detail.description,
-      //                       quantity: detail.procuredQty.toString(),
-      //                       waterTypeId: item?.waterTypeId,
-      //                       waterTypeName: item?.waterType,
-      //                     ),
-      //                     barrierDismissible: false,
-      //                   );
-      //                 } else {
-      //                   Get.dialog(
-      //                     MinusDialog(
-      //                       id: detail.id,
-      //                       date: detail.date,
-      //                       description: detail.description,
-      //                       quantity: detail.consumedQty.toString(),
-      //                       waterTypeId: item?.waterTypeId,
-      //                       waterTypeName: item?.waterType,
-      //                     ),
-      //                     barrierDismissible: false,
-      //                   );
-      //                 }
-      //               },
-      //             ),
-      //           ),
-      //         ],
-      //       ),
-      //     )
-      //     .toList());
-    }
-
-    rows.add(
-      DataRow(
-        cells: [
-          DataCell(
-            Text('', style: Styles.black14),
-          ),
-          DataCell(
-            Text('Closing Balance', style: Styles.Red700),
-          ),
-          DataCell(
-            Text('', style: Styles.black14),
-          ),
-          DataCell(
-            Text('Total: $totalProcurement', style: Styles.green700),
-          ),
-          DataCell(
-            Text('Total: $totalConsumption', style: Styles.Red700),
-          ),
-          DataCell(
-            Text("$total"),
-          ),
-          DataCell(
-            Text('', style: Styles.black14),
-          ),
-        ],
-      ),
-    );
-    return rows;
   }
 }
