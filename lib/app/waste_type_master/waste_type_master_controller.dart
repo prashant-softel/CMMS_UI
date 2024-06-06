@@ -7,7 +7,6 @@ import 'package:cmms/app/waste_type_master/waste_type_master_presenter.dart';
 import 'package:cmms/domain/models/type_of_waste_model.dart';
 
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 

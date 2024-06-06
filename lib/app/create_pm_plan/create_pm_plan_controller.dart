@@ -524,7 +524,7 @@ class CreatePmPlanController extends GetxController {
       isSelectedInventory.value = false;
       isFormInvalid.value = true;
     }
-    if (selectedInventoryNameList == null || selectedInventoryNameList == []) {
+    if (selectedInventoryNameList == []) {
       Fluttertoast.showToast(msg: "Please select the Equipments!");
       inventoryNameList == false.obs;
       isFormInvalid.value = true;

@@ -235,7 +235,7 @@ class EditMrsReturnContentWeb extends GetView<EditMrsReturnController> {
                                 Container(
                                   // height: 300,
                                   height:
-                                      ((controller.StockDetailsList?.length ??
+                                      ((controller.StockDetailsList.length ??
                                                   0) *
                                               80) +
                                           60,

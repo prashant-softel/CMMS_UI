@@ -106,7 +106,7 @@ class CreateAuditController extends GetxController {
       String? _type = await createAuditPresenter.getValue();
 
       String _auditId = await createAuditPresenter.getAuditdValue();
-      if (_auditId == null || _auditId == '' || _auditId == "null") {
+      if (_auditId == '' || _auditId == "null") {
         var dataFromPreviousScreen = Get.arguments;
 
         type.value = dataFromPreviousScreen['type'];

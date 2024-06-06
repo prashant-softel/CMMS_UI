@@ -237,23 +237,23 @@ class _ViewAuditTaskWebState extends State<ViewAuditTaskWeb> {
                                               Text(
                                                   controller.type.value ==
                                                           AppConstants.kMis
-                                                      ? 'MIS${controller.auditTasknDetailModel.value?.id ?? ''}'
-                                                      : 'AUD${controller.auditTasknDetailModel.value?.id ?? ''}', //  "Block 2 all Inverter maintenance plan",
+                                                      ? 'MIS${controller.auditTasknDetailModel.value.id ?? ''}'
+                                                      : 'AUD${controller.auditTasknDetailModel.value.id ?? ''}', //  "Block 2 all Inverter maintenance plan",
                                                   style: Styles.blue17),
                                               // Text(
                                               //     "Mis plan", //  '${controller.auditPlanDetailModel.value?.plan_number ?? ''}', //  "Block 2 all Inverter maintenance plan",
                                               //     style: Styles.blue17),
                                               Text(
-                                                  '${controller.auditTasknDetailModel.value?.plan_title ?? ""}',
+                                                  '${controller.auditTasknDetailModel.value.plan_title ?? ""}',
                                                   style: Styles.blue17),
                                               // Text(
                                               //     "hard cod", // '${controller.auditTasknDetailModel.value?.created_by_name ?? ''}',
                                               //     style: Styles.blue17),
                                               Text(
-                                                  '${controller.auditTasknDetailModel.value?.approved_by_name ?? ""}',
+                                                  '${controller.auditTasknDetailModel.value.approved_by_name ?? ""}',
                                                   style: Styles.blue17),
                                               Text(
-                                                  '${controller.auditTasknDetailModel.value?.schedules![0].checklist_name ?? ""}',
+                                                  '${controller.auditTasknDetailModel.value.schedules![0].checklist_name ?? ""}',
                                                   style: Styles.blue17),
                                               // Text(
                                               //     "S1234590 hard coded", //   '${controller.auditPlanDetailModel.value?.frequencyApplicable ?? ""}',
@@ -292,13 +292,13 @@ class _ViewAuditTaskWebState extends State<ViewAuditTaskWeb> {
                                               //     "hard", //  '${controller.auditTasknDetailModel.value?.created_at ?? ""}',
                                               //     style: Styles.blue17),
                                               Text(
-                                                  '${controller.auditTasknDetailModel.value?.approved_at ?? ""}',
+                                                  '${controller.auditTasknDetailModel.value.approved_at ?? ""}',
                                                   style: Styles.blue17),
                                               Text(
-                                                  '${controller.auditTasknDetailModel.value?.schedule_Date ?? ""}',
+                                                  '${controller.auditTasknDetailModel.value.schedule_Date ?? ""}',
                                                   style: Styles.blue17),
                                               Text(
-                                                  '${controller.auditTasknDetailModel.value?.frequency_name ?? ""}',
+                                                  '${controller.auditTasknDetailModel.value.frequency_name ?? ""}',
                                                   style: Styles.blue17),
                                             ],
                                           ),
@@ -308,7 +308,7 @@ class _ViewAuditTaskWebState extends State<ViewAuditTaskWeb> {
                                     controller
                                                 .auditTasknDetailModel
                                                 .value
-                                                ?.schedules![0]
+                                                .schedules![0]
                                                 .checklist_observation!
                                                 .length ==
                                             0
@@ -415,7 +415,7 @@ class _ViewAuditTaskWebState extends State<ViewAuditTaskWeb> {
                                                 controller
                                                         .auditTasknDetailModel
                                                         .value
-                                                        ?.schedules![0]
+                                                        .schedules![0]
                                                         .checklist_observation
                                                         ?.length ??
                                                     0,
@@ -424,11 +424,11 @@ class _ViewAuditTaskWebState extends State<ViewAuditTaskWeb> {
                                                     DataCell(
                                                         Text('${index + 1}')),
                                                     DataCell(Text(
-                                                        'CP${controller.auditTasknDetailModel.value?.schedules![0].checklist_observation?[index].check_point_id.toString() ?? ''}')),
+                                                        'CP${controller.auditTasknDetailModel.value.schedules![0].checklist_observation?[index].check_point_id.toString() ?? ''}')),
                                                     DataCell(Text(controller
                                                             .auditTasknDetailModel
                                                             .value
-                                                            ?.schedules![0]
+                                                            .schedules![0]
                                                             .checklist_observation?[
                                                                 index]
                                                             .check_point_name ??
@@ -436,7 +436,7 @@ class _ViewAuditTaskWebState extends State<ViewAuditTaskWeb> {
                                                     DataCell(Text(controller
                                                             .auditTasknDetailModel
                                                             .value
-                                                            ?.schedules![0]
+                                                            .schedules![0]
                                                             .checklist_observation?[
                                                                 index]
                                                             .requirement ??
@@ -500,7 +500,7 @@ class _ViewAuditTaskWebState extends State<ViewAuditTaskWeb> {
                                                     DataCell(Text(controller
                                                             .auditTasknDetailModel
                                                             .value
-                                                            ?.schedules![0]
+                                                            .schedules![0]
                                                             .checklist_observation?[
                                                                 index]
                                                             .observation ??
@@ -573,7 +573,7 @@ class _ViewAuditTaskWebState extends State<ViewAuditTaskWeb> {
                                         // ),
                                         //  Dimens.boxWidth10,
                                         controller.auditTasknDetailModel.value
-                                                        ?.status ==
+                                                        .status ==
                                                     426 &&
                                                 varUserAccessModel
                                                         .value.access_list!
@@ -605,7 +605,7 @@ class _ViewAuditTaskWebState extends State<ViewAuditTaskWeb> {
                                         //  : Dimens.box0,
                                         Dimens.boxWidth20,
                                         controller.auditTasknDetailModel.value
-                                                        ?.status ==
+                                                        .status ==
                                                     426 &&
                                                 varUserAccessModel
                                                         .value.access_list!
@@ -637,10 +637,10 @@ class _ViewAuditTaskWebState extends State<ViewAuditTaskWeb> {
                                         //: Dimens.box0,
                                         Dimens.boxWidth20,
                                         controller.auditTasknDetailModel.value
-                                                        ?.status ==
+                                                        .status ==
                                                     425 ||
                                                 controller.auditTasknDetailModel
-                                                            .value?.status ==
+                                                            .value.status ==
                                                         427 &&
                                                     varUserAccessModel
                                                             .value.access_list!
@@ -844,7 +844,7 @@ class _ViewAuditTaskWebState extends State<ViewAuditTaskWeb> {
                                                     controller
                                                         .auditTasknDetailModel
                                                         .value
-                                                        ?.schedules![0]
+                                                        .schedules![0]
                                                         .checklist_observation
                                                         ?.forEach((element) {
                                                       controller

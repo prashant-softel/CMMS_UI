@@ -10,7 +10,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter/services.dart';
 
-import '../../widgets/custom_swich_toggle.dart';
 import '../../widgets/dropdown_web.dart';
 
 class CreateMrsReturnContentWeb extends GetView<CreateMrsReturnController> {
@@ -248,7 +247,7 @@ class CreateMrsReturnContentWeb extends GetView<CreateMrsReturnController> {
                                   Container(
                                     // height: 300,
                                     height:
-                                        ((controller.StockDetailsList?.length ??
+                                        ((controller.StockDetailsList.length ??
                                                     0) *
                                                 80) +
                                             60,

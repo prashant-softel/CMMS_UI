@@ -594,7 +594,7 @@ class AuditListListDataSource extends DataTableSource {
                             color: controller.auditPlanList
                                         .firstWhere(
                                           (e) =>
-                                              e?.id ==
+                                              e.id ==
                                               AuditPlanPlanningListDetails!.id,
                                           orElse: () =>
                                               AuditPlanListModel(id: 00),
@@ -605,7 +605,7 @@ class AuditListListDataSource extends DataTableSource {
                                 : controller.auditPlanList
                                             .firstWhere(
                                               (e) =>
-                                                  e?.id ==
+                                                  e.id ==
                                                   AuditPlanPlanningListDetails!
                                                       .id,
                                               orElse: () =>
@@ -617,7 +617,7 @@ class AuditListListDataSource extends DataTableSource {
                                     : controller.auditPlanList
                                                 .firstWhere(
                                                   (e) =>
-                                                      e?.id ==
+                                                      e.id ==
                                                       AuditPlanPlanningListDetails!
                                                           .id,
                                                   orElse: () =>
@@ -630,7 +630,7 @@ class AuditListListDataSource extends DataTableSource {
                                         : controller.auditPlanList
                                                     .firstWhere(
                                                       (e) =>
-                                                          e?.id ==
+                                                          e.id ==
                                                           AuditPlanPlanningListDetails!
                                                               .id,
                                                       orElse: () =>
@@ -643,7 +643,7 @@ class AuditListListDataSource extends DataTableSource {
                                             : controller.auditPlanList
                                                         .firstWhere(
                                                           (e) =>
-                                                              e?.id ==
+                                                              e.id ==
                                                               AuditPlanPlanningListDetails!
                                                                   .id,
                                                           orElse: () =>
@@ -656,7 +656,7 @@ class AuditListListDataSource extends DataTableSource {
                                                 : controller.auditPlanList
                                                             .firstWhere(
                                                               (e) =>
-                                                                  e?.id ==
+                                                                  e.id ==
                                                                   AuditPlanPlanningListDetails!
                                                                       .id,
                                                               orElse: () =>
@@ -669,7 +669,7 @@ class AuditListListDataSource extends DataTableSource {
                                                     : controller.auditPlanList
                                                                 .firstWhere(
                                                                   (e) =>
-                                                                      e?.id ==
+                                                                      e.id ==
                                                                       AuditPlanPlanningListDetails!
                                                                           .id,
                                                                   orElse: () =>
@@ -684,7 +684,7 @@ class AuditListListDataSource extends DataTableSource {
                                                                     .auditPlanList
                                                                     .firstWhere(
                                                                       (e) =>
-                                                                          e?.id ==
+                                                                          e.id ==
                                                                           AuditPlanPlanningListDetails!
                                                                               .id,
                                                                       orElse: () =>
@@ -699,7 +699,7 @@ class AuditListListDataSource extends DataTableSource {
                                                                         .auditPlanList
                                                                         .firstWhere(
                                                                           (e) =>
-                                                                              e?.id ==
+                                                                              e.id ==
                                                                               AuditPlanPlanningListDetails!.id,
                                                                           orElse: () =>
                                                                               AuditPlanListModel(id: 00),

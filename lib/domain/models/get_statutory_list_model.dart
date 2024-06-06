@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:cmms/app/utils/utility.dart';
 
 List<GetStatutoryList> getStatutoryListModelFromJson(String str) =>
     List<GetStatutoryList>.from(

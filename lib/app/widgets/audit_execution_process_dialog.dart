@@ -41,7 +41,7 @@ class AuditExecutionProcessDialog extends GetView {
         // contentPadding: EdgeInsets.zero,
         title: Center(
           child: Text(
-            "Observation of  ${controller.auditTasknDetailModel.value?.plan_title ?? ""}",
+            "Observation of  ${controller.auditTasknDetailModel.value.plan_title ?? ""}",
             style: Styles.blue700,
           ),
         ),
@@ -84,7 +84,7 @@ class AuditExecutionProcessDialog extends GetView {
                               height: ((controller
                                               .auditTasknDetailModel
                                               .value
-                                              ?.schedules![0]
+                                              .schedules![0]
                                               .checklist_observation
                                               ?.length ??
                                           0) *
@@ -113,7 +113,7 @@ class AuditExecutionProcessDialog extends GetView {
                                     child: Row(
                                       children: [
                                         Text(
-                                          "  ${controller.auditTasknDetailModel.value?.schedules![0].checklist_name ?? ""}",
+                                          "  ${controller.auditTasknDetailModel.value.schedules![0].checklist_name ?? ""}",
                                           style: Styles.blue700,
                                         ),
                                       ],

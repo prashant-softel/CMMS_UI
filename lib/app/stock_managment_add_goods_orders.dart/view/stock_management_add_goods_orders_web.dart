@@ -83,7 +83,7 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                 child: Text(" / STOCK MANAGEMENT",
                                     style: Styles.greyLight14),
                               ),
-                              controller.goId == null || controller.goId == 0
+                              controller.goId == 0
                                   ? Text(" / ADD GOODS ORDER DETAILS",
                                       style: Styles.greyLight14)
                                   : Text(" / EDIT GOODS ORDER DETAILS",
