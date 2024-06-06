@@ -37,6 +37,8 @@ class UserDetailsModel {
   String? photoPath;
   String? company_name;
   int? company_id;
+  int? designation_id;
+  String? designation_name;
 
   // List<FacilityModel>? plant_list;
   List<PlantAccess>? plant_list;
@@ -73,6 +75,8 @@ class UserDetailsModel {
       this.status,
       this.company_name,
       this.company_id,
+      this.designation_id,
+      this.designation_name,
       this.zipcode});
 
   factory UserDetailsModel.fromJson(Map<String, dynamic> parsedJson) {
@@ -114,6 +118,8 @@ class UserDetailsModel {
         status: parsedJson['status'],
         zipcode: parsedJson['zipcode'],
         plant_list: plantList,
+        designation_id: parsedJson['designation_id'],
+        designation_name: parsedJson['designation'],
         responsibility: responsibility);
   }
 }
