@@ -1,6 +1,5 @@
 // import 'package:cmms/app/add_job/views/widgets/work_area_widget.dart';
 import 'package:cmms/app/app.dart';
-import 'package:cmms/app/controllers/file_upload_controller.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/view_escalation_matrix/view_escalation_matrix_controller.dart';

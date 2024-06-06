@@ -10,7 +10,6 @@ import 'package:scrollable_table_view/scrollable_table_view.dart';
 import '../../domain/models/frequency_model.dart';
 import '../../domain/models/inventory_category_model.dart';
 import '../navigators/app_pages.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 
 import '../widgets/custom_elevated_button.dart';
 

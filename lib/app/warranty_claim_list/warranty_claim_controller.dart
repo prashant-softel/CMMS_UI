@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:convert';
-
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/warranty_claim_list/warranty_claim_presenter.dart';

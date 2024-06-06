@@ -1,15 +1,11 @@
-// ignore_for_file: unused_import
-
 import 'dart:async';
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/material_category/material_category_presenter.dart';
 import 'package:cmms/domain/models/facility_model.dart';
 import 'package:cmms/domain/models/material_category_model.dart';
-import 'package:cmms/domain/models/pm_mapping_list_model.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
-import 'package:http/http.dart';
 import 'package:rxdart/subjects.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 

@@ -1,7 +1,5 @@
 import 'package:cmms/app/add_inventory/add_inventory_controller.dart';
-
 import 'package:cmms/app/app.dart';
-import 'package:cmms/app/stock_managment_add_goods_orders.dart/view/stock_management_add_goods_orders_web.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/custom_textField.dart';
 

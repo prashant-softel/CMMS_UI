@@ -1,12 +1,10 @@
 import 'dart:async';
-
 import 'package:cmms/app/theme/color_values.dart';
 import 'package:cmms/app/theme/styles.dart';
 import 'package:cmms/app/user_list/user_list_presenter.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
-
 import '../../domain/models/user_list_model.dart';
 import '../home/home_controller.dart';
 

@@ -6,7 +6,6 @@ import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
-
 import '../../widgets/custom_swich_toggle.dart';
 import '../../widgets/dropdown_web.dart';
 

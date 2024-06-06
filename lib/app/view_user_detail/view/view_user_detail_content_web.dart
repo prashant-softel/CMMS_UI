@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
-
 import '../../navigators/app_pages.dart';
 
 class ViewUserDetailContentWeb extends GetView<ViewUserDetailController> {

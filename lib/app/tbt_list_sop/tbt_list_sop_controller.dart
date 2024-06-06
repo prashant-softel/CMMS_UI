@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:convert';
-
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/tbt_list_sop/tbt_list_sop_presenter.dart';
 import 'package:cmms/domain/models/create_sop_model.dart';

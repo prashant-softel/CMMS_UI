@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:convert';
-
 import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/home/home_controller.dart';
 import 'package:cmms/app/job_list/job_list_presenter.dart';
@@ -22,7 +21,6 @@ import 'package:cmms/domain/models/safety_measure_list_model.dart';
 import 'package:cmms/domain/models/sop_list_model.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:cmms/domain/models/equipment_model.dart';
 import 'package:cmms/domain/models/facility_model.dart';
 import 'package:cmms/domain/models/inventory_model.dart';

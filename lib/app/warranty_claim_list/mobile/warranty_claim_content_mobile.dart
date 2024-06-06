@@ -6,10 +6,7 @@ import 'package:cmms/app/new_permit_list/widgets/facility_selection_dropdown_wid
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-
 import '../../constant/constant.dart';
-// import '../../job_list_controller.dart';
-// import '../widgets/facility_selection_dropdown_widget.dart';
 
 class WarrantyClaimMobile extends GetView<WarrantyClaimController> {
   WarrantyClaimMobile({Key? key, this.newPermitListModel}) : super(key: key);

@@ -12,9 +12,7 @@ import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
-
 import '../../theme/color_values.dart';
 import '../../theme/styles.dart';
 import '../../widgets/action_button.dart';

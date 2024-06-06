@@ -6,7 +6,6 @@ import 'package:cmms/domain/models/transaction_report_list_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
-
 import '../../widgets/date_picker.dart';
 
 class TransactionReportContentMobile

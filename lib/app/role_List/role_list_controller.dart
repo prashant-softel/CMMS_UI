@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/role_List/role_list_presenter.dart';
 import 'package:flutter/material.dart';

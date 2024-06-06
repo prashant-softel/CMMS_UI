@@ -1,7 +1,6 @@
 import 'package:filesize/filesize.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../controllers/file_upload_controller.dart';
 import '../theme/color_values.dart';
 import '../theme/dimens.dart';

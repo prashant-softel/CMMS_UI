@@ -3,8 +3,6 @@ import 'package:cmms/app/view_audit_task/view_audit_task_controller.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-// import '../theme/colors_value.dart';
 import '../theme/dimens.dart';
 import '../theme/styles.dart';
 

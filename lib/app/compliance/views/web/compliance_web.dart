@@ -4,7 +4,6 @@ import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
-import 'package:cmms/app/widgets/custom_textField.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';

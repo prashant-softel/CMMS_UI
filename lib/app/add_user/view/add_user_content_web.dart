@@ -1,6 +1,5 @@
 import 'package:cmms/app/add_user/add_user_controller.dart';
 import 'package:cmms/app/app.dart';
-import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/home/widgets/header_widget_all_dash.dart';
 import 'package:cmms/app/widgets/date_picker.dart';
 import 'package:cmms/app/widgets/dropdown_web.dart';
@@ -20,7 +19,6 @@ import '../../navigators/app_pages.dart';
 import '../../widgets/custom_elevated_button.dart';
 import '../../widgets/custom_richtext.dart';
 import '../../widgets/custom_textField.dart';
-import '../../widgets/multipule_dropdown_web.dart';
 
 class AddUserContentWeb extends StatefulWidget {
   AddUserContentWeb({

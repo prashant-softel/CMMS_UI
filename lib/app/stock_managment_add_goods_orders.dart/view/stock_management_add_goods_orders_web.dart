@@ -12,13 +12,11 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:multi_select_flutter/util/multi_select_item.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
-
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/stock_managment_add_goods_orders.dart/stock_management_add_goods_orders_controller.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/date_picker.dart';
 import 'package:cmms/app/widgets/stock_dropdown.dart';
-
 import '../../widgets/custom_richtext.dart';
 
 class AddGoodsOrdersWeb extends StatefulWidget {

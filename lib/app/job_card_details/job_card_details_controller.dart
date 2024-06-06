@@ -19,7 +19,6 @@ import '../../domain/models/history_model.dart';
 import '../../domain/models/job_card_details_model.dart';
 import '../controllers/file_upload_controller.dart';
 import '../controllers/history_controller.dart';
-import '../job_details/job_details_presenter.dart';
 import '../navigators/app_pages.dart';
 import '../utils/utility.dart';
 import 'job_card_details_presenter.dart';

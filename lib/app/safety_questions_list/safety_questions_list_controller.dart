@@ -1,16 +1,12 @@
 import 'dart:async';
-
 import 'package:cmms/app/app.dart';
-
 import 'package:cmms/app/safety_questions_list/safety_questions_presenter.dart';
 import 'package:cmms/domain/models/create_safety_measure_model.dart';
-
 import 'package:cmms/domain/models/safety_measure_list_model.dart';
 import 'package:cmms/domain/models/type_model.dart';
 import 'package:cmms/domain/models/type_permit_model.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-
 import 'package:get/get.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 import '../../domain/models/frequency_model.dart';

@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/risk_type/risk_type_presenter.dart';
 import 'package:cmms/domain/models/facility_model.dart';
@@ -44,10 +43,8 @@ class RiskTypeController extends GetxController {
     rowCount: 0,
     rowsPerPage: 10,
   );
-  // PreventiveCheckListModel? preventiveCheckListModel;
 
   RxList<String> preventiveCheckListTableColumns = <String>[].obs;
-  // RxList<FrequencyModel?> frequencyList = <FrequencyModel>[].obs;
 
   int selectedEquipmentId = 0;
   int selectedfrequencyId = 0;
@@ -92,26 +89,6 @@ class RiskTypeController extends GetxController {
         ).toList();
     riskTypeList.value = filteredList;
   }
-  // void search(String keyword) {
-  //   print('Keyword: $keyword');
-
-  //   if (keyword.isEmpty) {
-  //     SPVList.value = filteredData.toList();
-  //     print('SPVList length (empty keyword): ${SPVList.length}');
-  //     return;
-  //   }
-
-  //   SPVList.value = filteredData
-  //       .where((item) =>
-  //           item.name
-  //               ?.toString()
-  //               .toLowerCase()
-  //               .contains(keyword.toLowerCase()) ??
-  //           false)
-  //       .toList();
-
-  //   print('SPVList length (non-empty keyword): ${SPVList.length}');
-  // }
 
   //Facility list / demo plant
   RxList<FacilityModel?> facilityList = <FacilityModel>[].obs;
@@ -151,17 +128,13 @@ class RiskTypeController extends GetxController {
     BufferRiskTypeList.value = <RiskTypeModel>[];
     final _risktypeList = await riskTypeListPresenter.getRiskTypeList(
       isLoading: true,
-      // categoryIds: categoryIds,
       facility_id: selectedJobSOPId,
-      // job_type_id: 36,
     );
     for (var facilityType_list in _risktypeList) {
       riskTypeList.add(facilityType_list);
       BufferRiskTypeList.add(facilityType_list);
     }
-    //   // selectedSopPermit.value = _SPVList[0].name ?? '';
 
-    //   // supplierNameList = _supplierNameList;
     RiskTypeListPaginationController = PaginationController(
       rowCount: riskTypeList.length,
       rowsPerPage: 10,
@@ -223,14 +196,7 @@ class RiskTypeController extends GetxController {
   cleardata() {
     titleCtrlr.text = '';
     descriptionCtrlr.text = '';
-    // selectedStateId = 0;
-    // selectedCountryId = 0;
-    // selectedCityId = 0;
-    // ownerId = 0;
     selectedItem = null;
-    // customerId = 0;
-    // operatorId = 0;
-    // SpvId = 0;
 
     Future.delayed(Duration(seconds: 1), () {
       getRiskTypeList();
