@@ -8,6 +8,7 @@ import 'package:cmms/domain/models/get_asset_data_list_model.dart';
 import 'package:cmms/domain/models/history_model.dart';
 import 'package:cmms/domain/models/req_order_details_by_id_model.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 
 class PurchaseGoodsorderViewController extends GetxController {
@@ -23,8 +24,9 @@ class PurchaseGoodsorderViewController extends GetxController {
   TextEditingController approveCommentTextFieldCtrlr = TextEditingController();
   TextEditingController rejectCommentTextFieldCtrlr = TextEditingController();
 
-   Rx<bool> isCommentInvalid = false.obs;
- Rx<bool> isCostInvalid = false.obs;
+  Rx<bool> isCommentInvalid = false.obs;
+  Rx<bool> isCostInvalid = false.obs;
+  Rx<bool> isFormInvalid = false.obs;
   var commentCtrlr = TextEditingController();
   StreamSubscription<int>? facilityIdStreamSubscription;
 
@@ -96,6 +98,11 @@ class PurchaseGoodsorderViewController extends GetxController {
 
   void approveGoodsOrder({int? id}) async {
     {
+      checkform();
+      if (isFormInvalid.value == true) {
+        Fluttertoast.showToast(msg: "Please Enter Comment!");
+        return;
+      }
       String _comment = approveCommentTextFieldCtrlr.text.trim();
 
       CommentModel commentGoodsOrderAproveModel =
@@ -111,6 +118,14 @@ class PurchaseGoodsorderViewController extends GetxController {
       if (response == true) {
         //getCalibrationList(facilityId, true);
       }
+    }
+  }
+
+  void checkform() {
+    if (approveCommentTextFieldCtrlr.text == '') {
+      isFormInvalid.value = true;
+    } else {
+      isFormInvalid.value = false;
     }
   }
 
@@ -203,12 +218,14 @@ class PurchaseGoodsorderViewController extends GetxController {
 
     if (_getPurchaseDetailsById != null) {
       getPurchaseDetailsByIDModelList?.value = _getPurchaseDetailsById;
-      getPurchaseDetailsByIDModel.value = getPurchaseDetailsByIDModelList?.firstWhere((element) => element?.request_order_id != null);
+      getPurchaseDetailsByIDModel.value = getPurchaseDetailsByIDModelList
+          ?.firstWhere((element) => element?.request_order_id != null);
 
       print(
           'Additioanl Email Employees${getPurchaseDetailsByIDModel.value?.request_order_items?.length ?? 0}');
       rowItem.value = [];
-      getPurchaseDetailsByIDModel.value?.request_order_items?.forEach((element) {
+      getPurchaseDetailsByIDModel.value?.request_order_items
+          ?.forEach((element) {
         rowItem.value.add([
           {"key": "Drop_down", "value": '${element.name}'},
           // {'key': "Paid_By", "value": '${element.assetItem_Name}'},

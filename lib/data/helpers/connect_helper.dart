@@ -293,6 +293,20 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> getStatutoryComplianceDropDown(
+      {required bool isLoading, required String auth, int? facilityId}) async {
+    ResponseModel responseModel = await apiWrapper.makeRequest(
+      'MISMaster/GetStatutoryComplianceMasterList',
+      Request.getMultiparts,
+      null,
+      isLoading,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
   Future<ResponseModel> getTypeOfWaterList(
       {required bool isLoading, required String auth, int? facilityId}) async {
     ResponseModel responseModel = await apiWrapper.makeRequest(
@@ -3244,6 +3258,32 @@ class ConnectHelper {
     );
 
     print('Create Goods Orders Response:${responseModel.data}');
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    // if (res.e != null) {
+    //   Get.dialog<void>(WarrantyClaimErrorDialog());
+    // } else {
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> createCompliance({
+    required String auth,
+    createCompliance,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'MISMaster/CreateStatutory',
+      Request.post,
+      createCompliance,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    print('Create Create Statutory Response:${responseModel.data}');
     var res = responseModel.data;
     var parsedJson = json.decode(res);
     // if (res.e != null) {
@@ -8800,6 +8840,24 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> getAttendanceList({
+    required String auth,
+    required int facilityId,
+    required int year,
+    required bool isLoading,
+  }) async {
+    ResponseModel responseModel = await apiWrapper.makeRequest(
+      'Attendence/GetAttendanceList?facility_id=$facilityId&year=$year',
+      Request.get,
+      null,
+      isLoading,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
   Future<ResponseModel> getDSMData({
     required String auth,
     List<String>? selectedYear,
@@ -9184,7 +9242,7 @@ class ConnectHelper {
     return responseModel;
   }
 
-   //Statutory Compliance
+  //Statutory Compliance
   //Get
   Future<ResponseModel> getStatutoryCompliance(
       {required bool isLoading, required String auth}) async {
@@ -9248,10 +9306,9 @@ class ConnectHelper {
     bool? isLoading,
     required StatutoryCompliance_id,
   }) async {
-
-     final requestBody = {
-    'id': int.tryParse(StatutoryCompliance_id),
-  };
+    final requestBody = {
+      'id': int.tryParse(StatutoryCompliance_id),
+    };
     var responseModel = await apiWrapper.makeRequest(
       'MISMaster/DeleteStatutoryComplianceMaster',
       Request.post,

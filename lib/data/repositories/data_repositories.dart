@@ -192,6 +192,18 @@ class DataRepository extends DomainRepository {
     );
   }
 
+  Future<ResponseModel> getStatutoryComplianceDropDown({
+    int? facilityId,
+    required bool isLoading,
+    required String auth,
+  }) async {
+    return await connectHelper.getStatutoryComplianceDropDown(
+      isLoading: isLoading,
+      auth: auth,
+      facilityId: facilityId,
+    );
+  }
+
   Future<ResponseModel> getTypeOfWaterList({
     int? facilityId,
     required bool isLoading,
@@ -1895,6 +1907,16 @@ class DataRepository extends DomainRepository {
       await connectHelper.createGoodsOrder(
         auth: auth,
         createGo: createGo,
+        isLoading: isLoading ?? false,
+      );
+  Future<ResponseModel> createCompliance({
+    required String auth,
+    createCompliance,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.createCompliance(
+        auth: auth,
+        createCompliance: createCompliance,
         isLoading: isLoading ?? false,
       );
   Future<ResponseModel> createWaterData({
@@ -5081,6 +5103,19 @@ class DataRepository extends DomainRepository {
     return response;
   }
 
+  Future<ResponseModel> getAttendanceList({
+    required String auth,
+    required int facilityId,
+    required int year,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.getAttendanceList(
+        auth: auth,
+        facilityId: facilityId,
+        year: year,
+        isLoading: isLoading ?? false,
+      );
+
   Future<ResponseModel> getDSMData({
     required String auth,
     List<String>? selectedYear,
@@ -5367,7 +5402,9 @@ class DataRepository extends DomainRepository {
     StatutoryCompliance_id,
   }) async {
     var response = await connectHelper.deleteStatutoryCompliance(
-        auth: auth, isLoading: isLoading, StatutoryCompliance_id: StatutoryCompliance_id);
+        auth: auth,
+        isLoading: isLoading,
+        StatutoryCompliance_id: StatutoryCompliance_id);
     return response;
   }
 //end

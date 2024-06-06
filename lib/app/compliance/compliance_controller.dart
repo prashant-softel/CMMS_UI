@@ -1,61 +1,164 @@
 import 'dart:async';
-
-import 'package:cmms/app/app.dart';
 import 'package:cmms/app/compliance/compliance_presenter.dart';
-
-import 'package:cmms/domain/models/business_list_model.dart';
-import 'package:cmms/domain/models/business_type_model.dart';
+import 'package:cmms/domain/models/Statutory_Compliance_model.dart';
+import 'package:cmms/domain/models/createStatutory_model.dart';
+import 'package:cmms/domain/models/create_go_model.dart';
+import 'package:cmms/domain/models/currency_list_model.dart';
 import 'package:cmms/domain/models/facility_model.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:rxdart/subjects.dart';
+import '../home/home_controller.dart';
 
 class ComplianceController extends GetxController {
+  ///
   ComplianceController(
     this.compliancePresenter,
   );
   CompliancePresenter compliancePresenter;
-  HomeController homeController = Get.find();
-  RxList<BusinessListModel?> ownerList = <BusinessListModel>[].obs;
-  Rx<bool> isSelectedBusinessType = true.obs;
 
-  int selectedBusinessTypeId = 1;
-  Rx<String> selectedBusinessType = ''.obs;
-  RxList<FacilityModel?> facilityList = <FacilityModel>[].obs;
-
-  Rx<String> selectedBlock = ''.obs;
-
+  final HomeController homeController = Get.find();
+  Rx<String> selectedFacility = ''.obs;
+  BehaviorSubject<int> _facilityId = BehaviorSubject.seeded(0);
   StreamSubscription<int>? facilityIdStreamSubscription;
-  StreamSubscription<String>? facilityNameStreamSubscription;
+  Stream<int> get facilityId$ => _facilityId.stream;
+  RxList<FacilityModel?> facilityList = <FacilityModel>[].obs;
+  RxList<StatutoryComplianceModel?> statutoryComplianceList =
+      <StatutoryComplianceModel>[].obs;
+  Rx<bool> isStatutoryComplianceSelected = true.obs;
+  Rx<String> selectedStatutoryCompliance = ''.obs;
+  int selectedStatutoryComplianceId = 0;
+  bool openIssueDatePicker = false;
+  bool openExpireOnFDatePicker = false;
 
-  ///
+  var issueDateTc = TextEditingController();
+  var expireOnDateTc = TextEditingController();
+  var commentsCtrl = TextEditingController();
+
+  int paidId = 0;
+  int facilityId = 0;
+  RxBool showAdditionalColumn = false.obs;
+  Rx<int> srId = 0.obs;
+
   @override
   void onInit() async {
+    try {
+      await setUserId();
+      facilityIdStreamSubscription = homeController.facilityId$.listen((event) {
+        facilityId = event;
+        Future.delayed(Duration(seconds: 1), () {
+          getFacilityList();
+        });
+        Future.delayed(Duration(seconds: 1), () {
+          getStatutoryComplianceDropDown();
+        });
+      });
+    } catch (e) {}
+
     super.onInit();
   }
 
-  Future<void> getFacilityList({bool? isLoading}) async {
-    facilityList.value = <FacilityModel>[];
-    List<FacilityModel?>? _facilityList = <FacilityModel?>[];
+  Future<void> setUserId() async {
+    try {
+      final _srId = await compliancePresenter.getValue();
+      if (_srId == null || _srId == '' || _srId == "null") {
+        var dataFromPreviousScreen = Get.arguments;
 
-    _facilityList = await compliancePresenter.getFacilityList();
-    if (_facilityList != null && _facilityList.isNotEmpty) {
-      facilityList.value = _facilityList;
+        srId.value = dataFromPreviousScreen['srId'];
+        compliancePresenter.saveValue(srId: srId.value.toString());
+      } else {
+        srId.value = int.tryParse(_srId) ?? 0;
+      }
+    } catch (e) {
+      print(e.toString() + 'srId');
+      //  Utility.showDialog(e.toString() + 'userId');
     }
-    if (facilityList.isNotEmpty) {
-      selectedBlock.value = facilityList[0]?.name ?? '';
+  }
+
+  Future<void> getFacilityList() async {
+    final _facilityList = await compliancePresenter.getFacilityList();
+
+    if (_facilityList != null) {
+      for (var facility in _facilityList) {
+        facilityList.add(facility);
+      }
+
+      selectedFacility.value = facilityList[0]?.name ?? '';
+      _facilityId.sink.add(facilityList[0]?.id ?? 0);
+    }
+  }
+
+  void getStatutoryComplianceDropDown() async {
+    statutoryComplianceList.value = <StatutoryComplianceModel>[];
+    final _statutoryComplianceList =
+        await compliancePresenter.getStatutoryComplianceDropDown(
+      isLoading: true,
+      facilityId: facilityId,
+    );
+    print('Unit Currency List:$statutoryComplianceList');
+    for (var statutory_Compliance_List in _statutoryComplianceList) {
+      statutoryComplianceList.add(statutory_Compliance_List);
+    }
+
+    update(['statutory_Compliance_List']);
+  }
+
+  void createCompliance() async {
+    try {
+      // checkForm();
+      // if (isFormInvalid.value) {
+      //   return;
+      // }
+      String _issueDateTc = issueDateTc.text.trim();
+      String _expireOnDateTc = expireOnDateTc.text.trim();
+      String _commentsCtrl = commentsCtrl.text.trim();
+
+      CreateStatutoryModel createStatutoryModel = CreateStatutoryModel(
+        facility_id: facilityId,
+        Comment: _commentsCtrl,
+        compliance_id: selectedStatutoryComplianceId,
+        issue_date: _issueDateTc,
+        expires_on: _expireOnDateTc,
+      );
+
+      // Convert the CreateStatutoryModel instance to JSON
+      var createComplianceModelJsonString = createStatutoryModel.toJson();
+
+      // Call the createCompliance function from stockManagementAddGoodsOrdersPresenter
+      Map<String, dynamic>? responseCreateComplianceModel =
+          await compliancePresenter.createCompliance(
+        createCompliance: createComplianceModelJsonString,
+        isLoading: true,
+      );
+
+      // Handle the response
+      if (responseCreateComplianceModel == null) {
+        // CreateNewPermitDialog();
+        // showAlertDialog();
+      }
+      print(
+          'Create  create Compliance  data: $createComplianceModelJsonString');
+    } catch (e) {
+      print(e);
     }
   }
 
   void onValueChanged(dynamic list, dynamic value) {
+    print("$value");
     switch (list.runtimeType) {
-      case RxList<BusinessTypeModel>:
+      case RxList<StatutoryComplianceModel>:
         {
-         if (value != "Please Select") {
-           int equipmentIndex = ownerList.indexWhere((x) => x?.name == value);
-          selectedBusinessTypeId = ownerList[equipmentIndex]?.id ?? 0;
-           
-         }else{
-          selectedBusinessTypeId=0;
-         }
+          if (value != "Please Select") {
+            int currencyIndex =
+                statutoryComplianceList.indexWhere((x) => x?.name == value);
+            selectedStatutoryComplianceId =
+                statutoryComplianceList[currencyIndex]?.id ?? 0;
+            isStatutoryComplianceSelected.value = true;
+            print(
+                "selectedBusinessTypeId: ${selectedStatutoryComplianceId} \n ${selectedStatutoryCompliance}");
+          } else {
+            selectedStatutoryComplianceId = 0;
+          }
         }
         break;
     }

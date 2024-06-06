@@ -831,7 +831,8 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                 backgroundColor: ColorValues.cancelColor,
                                 text: 'Cancel',
                                 onPressed: () {
-                                  Get.toNamed(Routes.stockManagementGoodsOrdersScreen);
+                                  Get.toNamed(
+                                      Routes.stockManagementGoodsOrdersScreen);
                                 },
                               ),
                             ),
@@ -1055,190 +1056,160 @@ class AddRowInGoodsOrder extends StatelessWidget {
                             fontSize: 15, fontWeight: FontWeight.bold),
                       )),
                 ],
-                rows: controller.rowItem.value.map((record) {
-                  return DataRow(
-                    // height: 130,
-                    cells: record.map((mapData) {
-                      return DataCell(
-                        (mapData['key'] == "Drop_down")
-                            ? Padding(
-                                padding: const EdgeInsets.only(
-                                  left: 10,
-                                  right: 10,
-                                  top: 10,
-                                ),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    DropdownWebStock(
-                                      width: MediaQuery.of(context).size.width,
-                                      dropdownList: controller.goDetailsList,
-                                      selectedValue: mapData["value"],
-                                      onValueChanged: (list, selectedValue) {
-                                        // print('paifcghb:${controller.assetList}');
-                                        // print({selectedValue: selectedValue});
-                                        mapData["value"] = selectedValue;
-                                        controller.dropdownMapperData[
-                                                selectedValue] =
-                                            list.firstWhere(
-                                                (element) =>
-                                                    element.name ==
-                                                    selectedValue,
-                                                orElse: null);
-                                      },
-                                    ),
-                                    Row(
-                                      children: [
-                                        Text("Assets Code :"),
-                                        Text(
-                                            "${controller.dropdownMapperData[mapData['value']]?.asset_code ?? ''}")
-                                      ],
-                                    ),
-                                    Row(
-                                      children: [
-                                        Text("Assets type :"),
-                                        Text(
-                                            "${controller.dropdownMapperData[mapData['value']]?.asset_type ?? ''}")
-                                      ],
-                                    ),
-                                    Row(
-                                      children: [
-                                        Text("Assets Category :"),
-                                        Text(
-                                            "${controller.dropdownMapperData[mapData['value']]?.asset_cat ?? ''}")
-                                      ],
-                                    )
-                                  ],
-                                ),
-                              )
-                            : (mapData['key'] == "Action ")
+                rows: List.generate(
+                  controller.rowItem.length,
+                  (rowIndex) {
+                    var row = controller.rowItem[rowIndex];
+                    return DataRow(
+                      cells: row.map(
+                        (mapData) {
+                          return DataCell(
+                            (mapData['key'] == "Drop_down")
                                 ? Padding(
-                                    padding: EdgeInsets.only(top: 10),
+                                    padding: const EdgeInsets.only(
+                                      left: 10,
+                                      right: 10,
+                                      top: 10,
+                                    ),
                                     child: Column(
                                       mainAxisAlignment:
                                           MainAxisAlignment.start,
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        TableActionButton(
-                                          color: ColorValues.appRedColor,
-                                          icon: Icons.delete,
-                                          label: '',
-                                          message: '',
-                                          onPress: () {
-                                            controller.rowItem.remove(record);
+                                        DropdownWebStock(
+                                          width:
+                                              MediaQuery.of(context).size.width,
+                                          dropdownList:
+                                              controller.goDetailsList,
+                                          isValueSelected: controller
+                                                          .errorState[
+                                                      '$rowIndex-${mapData['key']}'] ==
+                                                  true
+                                              ? false
+                                              : true,
+                                          selectedValue: mapData["value"],
+                                          onValueChanged:
+                                              (list, selectedValue) {
+                                            mapData["value"] = selectedValue;
+                                            controller.errorState.removeWhere(
+                                                (key, value) =>
+                                                    key ==
+                                                    '$rowIndex-Drop_down');
+                                            controller.errorState.removeWhere(
+                                                (key, value) =>
+                                                    key == '$rowIndex-Cost');
+                                            controller.errorState.removeWhere(
+                                                (key, value) =>
+                                                    key ==
+                                                    '$rowIndex-Requested');
+                                            controller.dropdownMapperData[
+                                                    selectedValue] =
+                                                list.firstWhere(
+                                              (element) =>
+                                                  element.name == selectedValue,
+                                              orElse: null,
+                                            );
                                           },
+                                        ),
+                                        Row(
+                                          children: [
+                                            Text("Assets Code :"),
+                                            Text(
+                                                "${controller.dropdownMapperData[mapData['value']]?.asset_code ?? ''}")
+                                          ],
+                                        ),
+                                        Row(
+                                          children: [
+                                            Text("Assets type :"),
+                                            Text(
+                                                "${controller.dropdownMapperData[mapData['value']]?.asset_type ?? ''}")
+                                          ],
+                                        ),
+                                        Row(
+                                          children: [
+                                            Text("Assets Category :"),
+                                            Text(
+                                                "${controller.dropdownMapperData[mapData['value']]?.asset_cat ?? ''}")
+                                          ],
                                         )
                                       ],
                                     ),
                                   )
-                                : (mapData['key'] == "Paid_By")
+                                : (mapData['key'] == "Action ")
                                     ? Padding(
-                                        padding: const EdgeInsets.only(
-                                            left: 10, right: 10, top: 10),
+                                        padding: EdgeInsets.only(top: 10),
                                         child: Column(
                                           mainAxisAlignment:
                                               MainAxisAlignment.start,
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
                                           children: [
-                                            DropdownWebStock(
-                                              width: MediaQuery.of(context)
-                                                  .size
-                                                  .width,
-                                              dropdownList: controller.paid,
-                                              selectedValue: mapData["value"],
-                                              onValueChanged:
-                                                  (list, selectedValue) {
-                                                print(
-                                                    'paifcghb:${controller.paid}');
-                                                print({
-                                                  selectedValue: selectedValue
-                                                });
-                                                mapData["value"] =
-                                                    selectedValue;
-                                                controller.paiddropdownMapperData[
-                                                        selectedValue] =
-                                                    list.firstWhere(
-                                                        (element) =>
-                                                            element.name ==
-                                                            selectedValue,
-                                                        orElse: null);
+                                            TableActionButton(
+                                              color: ColorValues.appRedColor,
+                                              icon: Icons.delete,
+                                              label: '',
+                                              message: '',
+                                              onPress: () {
+                                                controller.rowItem.remove(row);
+                                                // controller.errorState.remove(rowIndex);
+                                                controller.update();
                                               },
-                                            ),
+                                            )
                                           ],
                                         ),
                                       )
-                                    : (mapData['key'] == "Order")
+                                    : (mapData['key'] == "Paid_By")
                                         ? Padding(
-                                            padding: EdgeInsets.only(top: 10),
+                                            padding: const EdgeInsets.only(
+                                                left: 10, right: 10, top: 10),
                                             child: Column(
                                               mainAxisAlignment:
                                                   MainAxisAlignment.start,
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.start,
                                               children: [
-                                                Container(
-                                                    decoration: BoxDecoration(
-                                                      boxShadow: [
-                                                        BoxShadow(
-                                                          color: Colors.black26,
-                                                          offset: const Offset(
-                                                            5.0,
-                                                            5.0,
-                                                          ),
-                                                          blurRadius: 5.0,
-                                                          spreadRadius: 1.0,
-                                                        ),
-                                                      ],
-                                                      color: ColorValues
-                                                          .whiteColor,
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              5),
-                                                    ),
-                                                    child: LoginCustomTextfield(
-                                                      width: (Get.width * .4),
-                                                      keyboardType:
-                                                          TextInputType.number,
-                                                      inputFormatters: <TextInputFormatter>[
-                                                        FilteringTextInputFormatter
-                                                            .digitsOnly
-                                                      ],
-                                                      maxLine: 1,
-                                                      errorController:
-                                                          controller
-                                                                  .isCostInvalid
-                                                                  .value
-                                                              ? "Required field"
-                                                              : null,
-                                                      textController:
-                                                          new TextEditingController(
-                                                              text: mapData[
-                                                                      "value"] ??
-                                                                  ''),
-                                                      onChanged: (txt) {
-                                                        mapData["value"] = txt;
-                                                        if (txt
-                                                            .trim()
-                                                            .isNotEmpty) {
-                                                          controller
-                                                              .isCostInvalid
-                                                              .value = false;
-                                                        } else {
-                                                          controller
-                                                              .isCostInvalid
-                                                              .value = true;
-                                                        }
-                                                      },
-                                                    )),
+                                                DropdownWebStock(
+                                                  width: MediaQuery.of(context)
+                                                      .size
+                                                      .width,
+                                                  dropdownList: controller.paid,
+                                                  isValueSelected: controller
+                                                                  .errorState[
+                                                              '$rowIndex-${mapData['key']}'] ==
+                                                          true
+                                                      ? false
+                                                      : true,
+                                                  selectedValue:
+                                                      mapData["value"],
+                                                  onValueChanged:
+                                                      (list, selectedValue) {
+                                                    print(
+                                                        'paifcghb:${controller.paid}');
+                                                    print({
+                                                      selectedValue:
+                                                          selectedValue
+                                                    });
+                                                    mapData["value"] =
+                                                        selectedValue;
+                                                    controller.errorState
+                                                        .removeWhere((key,
+                                                                value) =>
+                                                            key ==
+                                                            '$rowIndex-Paid_By');
+                                                    controller.paiddropdownMapperData[
+                                                            selectedValue] =
+                                                        list.firstWhere(
+                                                            (element) =>
+                                                                element.name ==
+                                                                selectedValue,
+                                                            orElse: null);
+                                                  },
+                                                ),
                                               ],
                                             ),
                                           )
-                                        :
-                                        // (mapData['key'] == "Order") ||
-                                        (mapData['key'] == "Cost")
+                                        : (mapData['key'] == "Order")
                                             ? Padding(
                                                 padding:
                                                     EdgeInsets.only(top: 10),
@@ -1269,6 +1240,18 @@ class AddRowInGoodsOrder extends StatelessWidget {
                                                           borderRadius:
                                                               BorderRadius
                                                                   .circular(5),
+                                                          border: controller
+                                                                          .errorState[
+                                                                      '$rowIndex-${mapData['key']}'] ==
+                                                                  true
+                                                              ? Border.all(
+                                                                  color: Colors
+                                                                      .red,
+                                                                  width: 2.0)
+                                                              : Border.all(
+                                                                  color: ColorValues
+                                                                      .appLightBlueColor,
+                                                                  width: 1.0),
                                                         ),
                                                         child:
                                                             LoginCustomTextfield(
@@ -1282,121 +1265,223 @@ class AddRowInGoodsOrder extends StatelessWidget {
                                                                 .digitsOnly
                                                           ],
                                                           maxLine: 1,
-                                                          errorController: controller
-                                                                  .isCostInvalid
-                                                                  .value
-                                                              ? "Required field"
-                                                              : null,
                                                           textController:
                                                               new TextEditingController(
-                                                            text:
-                                                                "${controller.dropdownMapperData.value[record[0]['value']]?.cost ?? ""}",
-                                                          ),
+                                                                  text: mapData[
+                                                                          "value"] ??
+                                                                      ''),
                                                           onChanged: (txt) {
                                                             mapData["value"] =
                                                                 txt;
-                                                            if (txt
-                                                                .trim()
-                                                                .isNotEmpty) {
+                                                            if (controller
+                                                                        .errorState[
+                                                                    '$rowIndex-${mapData['key']}'] ==
+                                                                true) {
                                                               controller
-                                                                  .isCostInvalid
-                                                                  .value = false;
-                                                            } else {
-                                                              controller
-                                                                  .isCostInvalid
-                                                                  .value = true;
+                                                                  .errorState
+                                                                  .remove(
+                                                                      '$rowIndex-${mapData['key']}');
                                                             }
                                                           },
                                                         )),
                                                   ],
                                                 ),
                                               )
-                                            : (mapData['key'] == "Requested")
-                                                ? Padding(
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                            top: 10),
-                                                    child: Column(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .start,
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .start,
-                                                      children: [
-                                                        Container(
-                                                            decoration:
-                                                                BoxDecoration(
-                                                              boxShadow: [
-                                                                BoxShadow(
-                                                                  color: Colors
-                                                                      .black26,
-                                                                  offset:
-                                                                      const Offset(
-                                                                    5.0,
-                                                                    5.0,
-                                                                  ),
-                                                                  blurRadius:
+                                            :
+                                            // (mapData['key'] == "Order") ||
+                                            (mapData['key'] == "Cost")
+                                                ? IgnorePointer(
+                                                    child: Padding(
+                                                      padding: EdgeInsets.only(
+                                                          top: 10),
+                                                      child: Column(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .start,
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          Container(
+                                                              decoration:
+                                                                  BoxDecoration(
+                                                                boxShadow: [
+                                                                  BoxShadow(
+                                                                    color: Colors
+                                                                        .black26,
+                                                                    offset:
+                                                                        const Offset(
                                                                       5.0,
-                                                                  spreadRadius:
-                                                                      1.0,
-                                                                ),
-                                                              ],
-                                                              color: ColorValues
-                                                                  .whiteColor,
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          5),
-                                                            ),
-                                                            child:
-                                                                LoginCustomTextfield(
-                                                              width:
-                                                                  (Get.width *
-                                                                      .4),
-                                                              keyboardType:
-                                                                  TextInputType
-                                                                      .number,
-                                                              inputFormatters: <TextInputFormatter>[
-                                                                FilteringTextInputFormatter
-                                                                    .digitsOnly
-                                                              ],
-                                                              maxLine: 1,
-                                                              errorController:
-                                                                  controller
-                                                                          .isRequestedInvalid
-                                                                          .value
-                                                                      ? "Required field"
-                                                                      : null,
-                                                              textController:
-                                                                  new TextEditingController(
-                                                                text:
-                                                                    "${controller.dropdownMapperData.value[record[0]['value']]?.ordered_qty ?? ""}",
+                                                                      5.0,
+                                                                    ),
+                                                                    blurRadius:
+                                                                        5.0,
+                                                                    spreadRadius:
+                                                                        1.0,
+                                                                  ),
+                                                                ],
+                                                                color: ColorValues
+                                                                    .whiteColor,
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            5),
+                                                                border: controller.errorState[
+                                                                            '$rowIndex-${"Drop_down"}'] ==
+                                                                        true
+                                                                    ? Border.all(
+                                                                        color: Colors
+                                                                            .red,
+                                                                        width:
+                                                                            2.0)
+                                                                    : Border.all(
+                                                                        color: ColorValues
+                                                                            .appLightBlueColor,
+                                                                        width:
+                                                                            1.0),
                                                               ),
-                                                              onChanged: (txt) {
-                                                                mapData["value"] =
-                                                                    txt;
-                                                                // if (txt
-                                                                //     .trim()
-                                                                //     .isNotEmpty) {
-                                                                //   controller
-                                                                //       .isRequestedInvalid
-                                                                //       .value = false;
-                                                                // } else {
-                                                                //   controller
-                                                                //       .isRequestedInvalid
-                                                                //       .value = true;
-                                                                // }
-                                                              },
-                                                            )),
-                                                      ],
+                                                              child:
+                                                                  LoginCustomTextfield(
+                                                                width:
+                                                                    (Get.width *
+                                                                        .4),
+                                                                keyboardType:
+                                                                    TextInputType
+                                                                        .number,
+                                                                inputFormatters: <TextInputFormatter>[
+                                                                  FilteringTextInputFormatter
+                                                                      .digitsOnly
+                                                                ],
+                                                                maxLine: 1,
+                                                                errorController:
+                                                                    controller
+                                                                            .isCostInvalid
+                                                                            .value
+                                                                        ? "Required field"
+                                                                        : null,
+                                                                textController:
+                                                                    new TextEditingController(
+                                                                  text:
+                                                                      "${controller.dropdownMapperData.value[row[0]['value']]?.cost ?? ""}",
+                                                                ),
+                                                                onChanged:
+                                                                    (txt) {
+                                                                  mapData["value"] =
+                                                                      txt;
+                                                                  if (controller
+                                                                              .errorState[
+                                                                          '$rowIndex-${mapData['key']}'] ==
+                                                                      true) {
+                                                                    controller
+                                                                        .errorState
+                                                                        .remove(
+                                                                            '$rowIndex-${mapData['key']}');
+                                                                  }
+                                                                },
+                                                              )),
+                                                        ],
+                                                      ),
                                                     ),
                                                   )
-                                                : Text(mapData['key'] ?? ''),
-                      );
-                    }).toList(),
-                  );
-                }).toList(),
+                                                : (mapData['key'] ==
+                                                        "Requested")
+                                                    ? IgnorePointer(
+                                                        child: Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .only(
+                                                                  top: 10),
+                                                          child: Column(
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .start,
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .start,
+                                                            children: [
+                                                              Container(
+                                                                  decoration:
+                                                                      BoxDecoration(
+                                                                    boxShadow: [
+                                                                      BoxShadow(
+                                                                        color: Colors
+                                                                            .black26,
+                                                                        offset:
+                                                                            const Offset(
+                                                                          5.0,
+                                                                          5.0,
+                                                                        ),
+                                                                        blurRadius:
+                                                                            5.0,
+                                                                        spreadRadius:
+                                                                            1.0,
+                                                                      ),
+                                                                    ],
+                                                                    color: ColorValues
+                                                                        .whiteColor,
+                                                                    borderRadius:
+                                                                        BorderRadius
+                                                                            .circular(5),
+                                                                    border: controller.errorState['$rowIndex-${"Drop_down"}'] ==
+                                                                            true
+                                                                        ? Border.all(
+                                                                            color: Colors
+                                                                                .red,
+                                                                            width:
+                                                                                2.0)
+                                                                        : Border.all(
+                                                                            color:
+                                                                                ColorValues.appLightBlueColor,
+                                                                            width: 1.0),
+                                                                  ),
+                                                                  child:
+                                                                      LoginCustomTextfield(
+                                                                    width:
+                                                                        (Get.width *
+                                                                            .4),
+                                                                    keyboardType:
+                                                                        TextInputType
+                                                                            .number,
+                                                                    inputFormatters: <TextInputFormatter>[
+                                                                      FilteringTextInputFormatter
+                                                                          .digitsOnly
+                                                                    ],
+                                                                    maxLine: 1,
+                                                                    errorController: controller
+                                                                            .isRequestedInvalid
+                                                                            .value
+                                                                        ? "Required field"
+                                                                        : null,
+                                                                    textController:
+                                                                        new TextEditingController(
+                                                                      text:
+                                                                          "${controller.dropdownMapperData.value[row[0]['value']]?.ordered_qty ?? ""}",
+                                                                    ),
+                                                                    onChanged:
+                                                                        (txt) {
+                                                                      mapData["value"] =
+                                                                          txt;
+                                                                      if (controller
+                                                                              .errorState['$rowIndex-${mapData['key']}'] ==
+                                                                          true) {
+                                                                        controller
+                                                                            .errorState
+                                                                            .remove('$rowIndex-${mapData['key']}');
+                                                                      }
+                                                                    },
+                                                                  )),
+                                                            ],
+                                                          ),
+                                                        ),
+                                                      )
+                                                    : Text(
+                                                        mapData['key'] ?? ''),
+                          );
+                        },
+                      ).toList(),
+                    );
+                  },
+                ),
               ),
             ),
           ),

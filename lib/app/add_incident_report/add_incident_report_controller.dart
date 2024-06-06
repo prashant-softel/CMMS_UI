@@ -760,6 +760,7 @@ class AddIncidentReportController extends GetxController {
       selectedBlock.value = incidentReportDetailsModel.value?.block_name ?? '';
       selectedEquipmentName.value =
           incidentReportDetailsModel.value?.equipment_name ?? '';
+      setSelectedSeverity(_incidentReportDetails.severity ?? '');
 
       startDateTimeCtrlr.text =
           '${DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.parse('${incidentReportDetailsModel.value?.incident_datetime}'))}';
@@ -1471,22 +1472,19 @@ class AddIncidentReportController extends GetxController {
     if (selectedBlock.value == '') {
       isBlockSelected.value = false;
     }
-    // if (selectedEquipmentName.value == '') {
-    //   isEquipmentNameSelected.value = false;
-    // }
     if (startDateTimeCtrlr.text == '') {
       Fluttertoast.showToast(
           msg: 'Incident Date & Time Field cannot be empty',
           timeInSecForIosWeb: 5);
     }
-    // if (reportingDateTimeCtrlr.text == '') {
-    //   Fluttertoast.showToast(
-    //       msg: 'Reporting Date & Time Field cannot be empty',
-    //       timeInSecForIosWeb: 5);
-    // }
-    // if (selectedVictimNameIdList.length < 1) {
-    //   isVictimNameListSelected.value = false;
-    // }
+    if (selectedRiskTypeList.value == '') {
+      isRiskTypeListSelected.value = false;
+    }
+    if (selectedSeverity.value == '') {
+      Fluttertoast.showToast(
+          msg: 'Please select severity of incident',
+          timeInSecForIosWeb: 5);
+    }
     if (actionTakenDateTimeCtrlr.text == '') {
       Fluttertoast.showToast(
           msg: 'Action Taken By Date & Time Field cannot be empty',
@@ -1495,50 +1493,38 @@ class AddIncidentReportController extends GetxController {
     if (selectedAssetRestorationActionTakenByList.value == '') {
       isAssetRestorationActionTakenByListSelected.value = false;
     }
-    // if (selectedIncidentInvestigationVerificationDoneByList.value == '') {
-    //   isincidentInvestigationVerificationDoneByListSelected.value = false;
-    // }
     if (damagedAssetCostTextCtrlr.text == '') {
+      isDamagedAssetCostTextInvalid.value = false;
       Fluttertoast.showToast(
           msg: 'Damaged cost Field cannot be empty', timeInSecForIosWeb: 5);
     }
     if (genLossAssetDamageTextCtrlr.text == '') {
+      isGenLossAssetDamageTextInvalid.value = false;
       Fluttertoast.showToast(
           msg: 'Generation Loss Field cannot be empty', timeInSecForIosWeb: 5);
     }
     if (titleTextCtrlr.text == '') {
+      isTitleTextInvalid.value = false;
       Fluttertoast.showToast(
           msg: 'Title Field cannot be empty', timeInSecForIosWeb: 5);
     }
     if (incidentreportDescriptionCtrlr.text == '') {
+      isIncidentDescriptionInvalid.value = false;
       Fluttertoast.showToast(
           msg: 'Incident Description Field cannot be empty',
           timeInSecForIosWeb: 5);
     }
-    // if (insuranceAvailableTextCtrlr.text == '') {
-    //   Fluttertoast.showToast(
-    //       msg: 'Insurance Available Field cannot be empty',
-    //       timeInSecForIosWeb: 5);
-    // }
-    // if (insuranceRemarkTextCtrlr.text == '') {
-    //   Fluttertoast.showToast(
-    //       msg: 'Insurance Remark Field cannot be empty', timeInSecForIosWeb: 5);
-    // }
-    // if (immediateCorrectiveActionTextController.text == '') {
-    //   Fluttertoast.showToast(
-    //       msg: 'Corrective Action Field cannot be empty',
-    //       timeInSecForIosWeb: 5);
-    // }
-    // if (requestManufactureTextController.text == '') {
-    //   Fluttertoast.showToast(
-    //       msg: 'Request Field cannot be empty', timeInSecForIosWeb: 5);
-    // }
     if (isBlockSelected.value == false ||
-            // isEquipmentNameSelected.value == false ||
-            // isVictimNameListSelected.value == false ||
+            startDateTimeCtrlr.text == '' ||
+            isTitleTextInvalid.value == false ||
+            actionTakenDateTimeCtrlr.text == '' ||
+            selectedSeverity.value == '' ||
+            incidentreportDescriptionCtrlr.value == false ||
+            isRiskTypeListSelected.value == false||
+            isDamagedAssetCostTextInvalid.value == false ||
+            isGenLossAssetDamageTextInvalid.value == false ||
             isAssetRestorationActionTakenByListSelected.value == false ||
             isincidentInvestigationDoneByListSelected.value == false
-        // isincidentInvestigationVerificationDoneByListSelected.value == false
         ) {
       isFormInvalid.value = true;
     } else {
@@ -1634,23 +1620,23 @@ class AddIncidentReportController extends GetxController {
               selectedOption.value == "Other" ? element[1]["value"] ?? '0' : "",
           person_type: 1,
           age: 30,
-          sex: dropdownVictimNameMapperData[element[0]["value"]]?.gender ==
+          sex: dropdownVictimNameMapperData[element[1]["value"]]?.gender ==
                   "Male"
               ? 1
-              : dropdownVictimNameMapperData[element[0]["value"]]?.gender ==
+              : dropdownVictimNameMapperData[element[1]["value"]]?.gender ==
                       "Female"
                   ? 2
                   : 3,
-          designation: element[3]["value"] ?? '0',
-          address: element[4]["value"] ?? '0',
+          designation: element[2]["value"] ?? '0',
+          address: element[3]["value"] ?? '0',
           name_contractor:
-              dropdownBusinessListMapperData[element[5]["value"]]?.name,
+              dropdownBusinessListMapperData[element[4]["value"]]?.name,
           body_part_and_nature_of_injury:
-              dropdownBodyinjuredListMapperData[element[6]["value"]]?.name,
-          work_experience_years: int.tryParse('${element[7]["value"] ?? '0'}'),
+              dropdownBodyinjuredListMapperData[element[5]["value"]]?.name,
+          work_experience_years: int.tryParse('${element[6]["value"] ?? '0'}'),
           plant_equipment_involved:
-              dropdownEquipmentNameMapperData[element[8]["value"]]?.name,
-          location_of_incident: element[9]["value"] ?? '0',
+              dropdownEquipmentNameMapperData[element[7]["value"]]?.name,
+          location_of_incident: element[8]["value"] ?? '0',
         );
 
         detailsOfInjuredPersonItems.add(item);
@@ -1878,14 +1864,14 @@ class AddIncidentReportController extends GetxController {
           person_type: 1,
           age: 30,
           sex: int.tryParse(
-              '${element[2]["value"] == "Male" ? 1 : element[2]["value"] == "Female" ? 2 : element[2]["value"] == "TransGender" ? 3 : 0}'),
-          designation: element[3]["value"] ?? '0',
-          address: element[4]["value"] ?? '0',
-          name_contractor: element[5]["value"],
-          body_part_and_nature_of_injury: element[6]["value"],
-          work_experience_years: int.tryParse('${element[7]["value"] ?? '0'}'),
-          plant_equipment_involved: element[8]["value"],
-          location_of_incident: element[9]["value"] ?? '0',
+              '${element[1]["value"] == "Male" ? 1 : element[1]["value"] == "Female" ? 2 : element[1]["value"] == "TransGender" ? 3 : 0}'),
+          designation: element[2]["value"] ?? '0',
+          address: element[3]["value"] ?? '0',
+          name_contractor: element[4]["value"],
+          body_part_and_nature_of_injury: element[5]["value"],
+          work_experience_years: int.tryParse('${element[6]["value"] ?? '0'}'),
+          plant_equipment_involved: element[7]["value"],
+          location_of_incident: element[8]["value"] ?? '0',
         );
 
         detailsOfInjuredPersonItems.add(item);

@@ -70,7 +70,7 @@ class ApproveReturnMrsContentWeb extends GetView<ApproveReturnMrsController> {
                     ScrollConfiguration.of(context).copyWith(scrollbars: false),
                 child: SingleChildScrollView(
                   child: Container(
-                    height: Get.height,
+                    // height: Get.height,
                     // margin: Dimens.edgeInsets20,
                     color: Color.fromARGB(255, 245, 248, 250),
                     child: Column(
