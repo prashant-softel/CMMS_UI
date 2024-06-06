@@ -107,7 +107,7 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                         child: Row(
                                           children: [
                                             Text(
-                                              "Add  Goods Order Details",
+                                              "Add Goods Order Details",
                                               style: Styles.blackBold16,
                                             ),
                                             Spacer(),
