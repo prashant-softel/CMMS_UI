@@ -4,7 +4,6 @@ import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-// import '../theme/colors_value.dart';
 import '../theme/dimens.dart';
 import '../theme/styles.dart';
 

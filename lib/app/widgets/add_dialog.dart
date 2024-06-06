@@ -1,6 +1,5 @@
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
-import 'package:cmms/app/stock_managment_add_goods_orders.dart/view/stock_management_add_goods_orders_web.dart';
 import 'package:cmms/app/water_data_list/water_data_list_controller.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';

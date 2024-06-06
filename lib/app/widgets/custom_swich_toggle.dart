@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../theme/color_values.dart';
 
 class CustomSwitchTroggle extends GetView {

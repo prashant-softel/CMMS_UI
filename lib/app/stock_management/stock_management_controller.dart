@@ -1,7 +1,6 @@
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/stock_management/stock_management_presenter.dart';
 import 'package:get/get.dart';
-
 import '../navigators/app_pages.dart';
 
 class StockManagementDashboardController extends GetxController {

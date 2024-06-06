@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:typed_data';
-
 import 'package:cmms/app/home/home_controller.dart';
 import 'package:cmms/app/job_list/job_list_presenter.dart';
 import 'package:cmms/app/navigators/navigators.dart';

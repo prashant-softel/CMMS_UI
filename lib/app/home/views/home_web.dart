@@ -1,7 +1,4 @@
 import 'package:cmms/app/constant/constant.dart';
-import 'package:cmms/app/home/widgets/header_widget_all_dash.dart';
-import 'package:cmms/app/widgets/custom_multiselect_dialog_field.dart';
-import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/dash_multiselect_dialog_field.dart';
 import 'package:cmms/app/widgets/date_picker.dart';
 import 'package:flutter/material.dart';
@@ -10,7 +7,6 @@ import 'package:cmms/app/app.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:multi_select_flutter/multi_select_flutter.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
-// import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:pie_chart/pie_chart.dart';
 import 'package:semicircle_indicator/semicircle_indicator.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';

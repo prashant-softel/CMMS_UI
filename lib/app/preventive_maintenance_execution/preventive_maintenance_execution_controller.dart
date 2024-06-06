@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
@@ -15,7 +14,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-
 import '../../domain/models/file_upload_model.dart';
 import '../../domain/models/pm_task_view_list_model.dart';
 import '../../domain/models/update_pm_task_execution_model.dart';

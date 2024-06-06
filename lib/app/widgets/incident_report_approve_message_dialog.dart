@@ -2,9 +2,7 @@ import 'package:cmms/app/incident_report_list/incident_report_list_controller.da
 import 'package:cmms/app/theme/color_values.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../navigators/app_pages.dart';
-// import '../theme/colors_value.dart';
 import '../theme/dimens.dart';
 import '../theme/styles.dart';
 

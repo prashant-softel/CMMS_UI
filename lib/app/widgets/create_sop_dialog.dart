@@ -2,9 +2,7 @@ import 'package:cmms/app/app.dart';
 import 'package:cmms/app/tbt_list_sop/tbt_list_sop_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../navigators/app_pages.dart';
-// import '../theme/colors_value.dart';
 
 class CreateSopDialog extends GetView {
   String? createSopData;

@@ -10,11 +10,8 @@ import 'package:cmms/app/widgets/mc_reject_dialog.dart';
 import 'package:cmms/app/widgets/stock_dropdown.dart';
 import 'package:cmms/app/widgets/view_set_eqp_dialog.dart';
 import 'package:data_table_2/data_table_2.dart';
-
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
-
 import '../../constant/constant.dart';
 
 class ViewMcPlaningWeb extends StatefulWidget {

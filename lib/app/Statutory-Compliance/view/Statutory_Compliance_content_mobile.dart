@@ -2,7 +2,6 @@ import 'package:cmms/app/app.dart';
 import 'package:cmms/domain/models/Statutory_Compliance_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../../domain/models/SPV_list_model.dart';
 import '../Statutory_Compliance_controller.dart';
 
 class StatutoryComplianceContentMobile

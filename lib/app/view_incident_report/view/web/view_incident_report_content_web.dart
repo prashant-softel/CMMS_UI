@@ -1,5 +1,3 @@
-// import 'package:cmms/app/add_job/views/widgets/work_area_widget.dart';
-
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/controllers/file_upload_controller.dart';
@@ -13,7 +11,6 @@ import 'package:cmms/app/widgets/incident_report_approve_dialog.dart';
 import 'package:cmms/app/widgets/incident_report_reject_dialog.dart';
 import 'package:cmms/app/widgets/ir_reject_part2_dialog.dart';
 import 'package:data_table_2/data_table_2.dart';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';

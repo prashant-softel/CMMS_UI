@@ -2,9 +2,7 @@ import 'package:cmms/app/module_cleaning_execution/module_cleaning_list_executio
 import 'package:cmms/app/theme/color_values.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../navigators/app_pages.dart';
-// import '../theme/colors_value.dart';
 import '../theme/dimens.dart';
 import '../theme/styles.dart';
 

@@ -14,7 +14,6 @@ import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 import 'package:cmms/app/widgets/table_action_button.dart';
 

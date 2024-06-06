@@ -3,11 +3,9 @@ import 'package:cmms/app/escalation_matrix_list/escalation_matrix_list_controlle
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
-import 'package:cmms/domain/models/escalation_matrix_list_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:scrollable_table_view/scrollable_table_view.dart';
 import 'package:data_table_2/data_table_2.dart';
 
 class EscalationMatrixListWeb extends GetView<EscalationMatrixListController> {

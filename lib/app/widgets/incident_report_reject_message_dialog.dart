@@ -3,8 +3,6 @@ import 'package:cmms/app/theme/color_values.dart';
 import 'package:cmms/app/view_incident_report/view_incident_report_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-// import '../theme/colors_value.dart';
 import '../theme/dimens.dart';
 import '../theme/styles.dart';
 

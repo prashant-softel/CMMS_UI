@@ -1,7 +1,6 @@
 import 'package:cmms/app/edit_vegetation_plan/edit_vegetation_plan_controller.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
-import 'package:cmms/app/stock_managment_add_goods_orders.dart/view/stock_management_add_goods_orders_web.dart';
 import 'package:cmms/app/theme/color_values.dart';
 import 'package:cmms/app/theme/dimens.dart';
 import 'package:cmms/app/theme/styles.dart';

@@ -1,6 +1,5 @@
 import 'package:cmms/app/job_card_details/job_card_details_controller.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
-import 'package:cmms/app/pm_task_view/pm_task_view_controller.dart';
 import 'package:cmms/app/theme/color_values.dart';
 import 'package:cmms/app/theme/dimens.dart';
 import 'package:cmms/app/theme/styles.dart';

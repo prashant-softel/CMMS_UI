@@ -2,10 +2,8 @@ import 'package:cmms/app/app.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/waste_data/waste_data_controller.dart';
-import 'package:cmms/app/widgets/add_dialog.dart';
 import 'package:cmms/app/widgets/add_waste_generated_dialog.dart';
 import 'package:cmms/app/widgets/date_picker.dart';
-import 'package:cmms/app/widgets/minus_dialog.dart';
 import 'package:cmms/app/widgets/waste_disposed_dialog%20copy.dart';
 import 'package:cmms/domain/models/waste_data_list_model.dart';
 

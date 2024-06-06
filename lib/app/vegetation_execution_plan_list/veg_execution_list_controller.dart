@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:cmms/app/home/home_controller.dart';
 import 'package:cmms/app/vegetation_execution_plan_list/veg_execution_list_presenter.dart';
 import 'package:cmms/domain/models/veg_task_list_model.dart';

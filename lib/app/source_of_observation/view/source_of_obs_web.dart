@@ -8,7 +8,6 @@ import 'package:get/get.dart';
 import '../../widgets/custom_elevated_button.dart';
 import '../../widgets/custom_richtext.dart';
 import '../source_of_obs_controller.dart';
-// import '../preventive_list_controller.dart';
 
 class SourceOfObsWeb extends GetView<SourceOfObsController> {
   SourceOfObsWeb({Key? key}) : super(key: key);

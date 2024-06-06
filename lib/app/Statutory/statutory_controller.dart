@@ -1,9 +1,7 @@
 import 'dart:async';
-
 import 'package:cmms/app/Statutory/statutory_presenter.dart';
 import 'package:cmms/app/home/home_controller.dart';
 import 'package:cmms/domain/models/get_statutory_list_model.dart';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -183,7 +181,6 @@ class StatutoryController extends GetxController {
   void onValueChanged(dynamic list, dynamic value) {
     switch (list.runtimeType) {}
   }
-
 
   void export() {
     getStatutoryDataList(
