@@ -8,6 +8,7 @@ import 'package:cmms/app/widgets/stock_dropdown.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 
 class MinusDialog extends GetView {
   final int? id;
@@ -43,7 +44,8 @@ class MinusDialog extends GetView {
         var height = MediaQuery.of(context).size.height;
         if (date != null) {
           controller.procurementTimeCtrlr.text = date!;
-          controller.selectedProcurementTime.value = DateTime.parse(date!);
+          controller.selectedProcurementTime.value =
+              DateFormat("yyyy-mm-dd").parse(date!);
         }
         if (quantity != null) {
           controller.qtyCtrlr.text = quantity.toString();
@@ -192,7 +194,7 @@ class MinusDialog extends GetView {
                 text: "Cancel",
                 onPressed: () {
                   controller.clearData();
-                  Get.offAllNamed(Routes.viewWaterData);
+                  Get.offNamed(Routes.viewWaterData);
                 },
               ),
             ),
@@ -205,7 +207,7 @@ class MinusDialog extends GetView {
                       text: 'Submit',
                       onPressed: () {
                         controller.createWaterDataConsumption();
-                        Get.offAllNamed(Routes.waterDataListScreen);
+                        Get.offNamed(Routes.waterDataListScreen);
                       },
                     )
                   : CustomElevatedButton(
@@ -213,7 +215,7 @@ class MinusDialog extends GetView {
                       text: 'update',
                       onPressed: () {
                         controller.updateWaterDataConsumption();
-                        Get.offAllNamed(Routes.viewWaterData);
+                        Get.offNamed(Routes.viewWaterData);
                       },
                     ),
             ),

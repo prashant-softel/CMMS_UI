@@ -316,8 +316,7 @@ class WasteDataController extends GetxController {
     String _descriptionCtrlr = descriptionCtrlr.text.trim();
     String _qtCtrlr = qtyCtrlr.text.trim();
     DateTime procurementTime = selectedWasteDataTime.value;
-    String formattedDate =
-        DateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'").format(procurementTime);
+    String formattedDate = DateFormat("yyyy-MM-dd").format(procurementTime);
 
     CreateWasteData createWasteData = CreateWasteData(
       consumeType: 1,
@@ -345,8 +344,7 @@ class WasteDataController extends GetxController {
     String _descriptionCtrlr = descriptionCtrlr.text.trim();
     String _qtCtrlr = qtyCtrlr.text.trim();
     DateTime procurementTime = selectedWasteDataTime.value;
-    String formattedDate =
-        DateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'").format(procurementTime);
+    String formattedDate = DateFormat("yyyy-MM-dd").format(procurementTime);
 
     CreateWasteData createWasteData = CreateWasteData(
       id: detailId,
@@ -375,10 +373,10 @@ class WasteDataController extends GetxController {
     String _descriptionCtrlr = descriptionCtrlr.text.trim();
     String _qtCtrlr = qtyCtrlr.text.trim();
     DateTime procurementTime = selectedWasteDataTime.value;
-    String formattedDate =
-        DateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'").format(procurementTime);
+    String formattedDate = DateFormat("yyyy-MM-dd").format(procurementTime);
 
     CreateWasteData createWasteData = CreateWasteData(
+      id: detailId,
       consumeType: 1,
       facilityId: facilityId,
       creditQty: double.tryParse(_qtCtrlr) ?? 0,
@@ -404,10 +402,10 @@ class WasteDataController extends GetxController {
     String _descriptionCtrlr = descriptionCtrlr.text.trim();
     String _qtCtrlr = qtyCtrlr.text.trim();
     DateTime procurementTime = selectedWasteDataTime.value;
-    String formattedDate =
-        DateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'").format(procurementTime);
+    String formattedDate = DateFormat("yyyy-MM-dd").format(procurementTime);
 
     CreateWasteData createWasteData = CreateWasteData(
+      id: detailId,
       consumeType: 1,
       facilityId: facilityId,
       creditQty: double.tryParse(_qtCtrlr) ?? 0,

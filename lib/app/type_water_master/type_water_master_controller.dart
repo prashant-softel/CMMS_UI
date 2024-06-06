@@ -166,43 +166,34 @@ class WaterTypeMasterController extends GetxController {
     if (titleCtrlr.text.trim() == '') {
       isTitleInvalid.value = true;
       isFormInvalid.value = true;
-      // isDescriptionInvalid.value = true;
     }
     if (descriptionCtrlr.text.trim() == '') {
-      // isTitleInvalid.value = true;
       isFormInvalid.value = true;
       isDescriptionInvalid.value = true;
     }
-
-    checkForm();
     if (isFormInvalid.value == true) {
       return false;
     }
-    if (titleCtrlr.text.trim() == '' || descriptionCtrlr.text.trim() == '') {
-      Fluttertoast.showToast(
-          msg: "Please enter required field", fontSize: 16.0);
-    } else {
-      int? _id = waterTypeId;
-      String _title = titleCtrlr.text.trim();
-      String _description = descriptionCtrlr.text.trim();
-      int _facilityId = facilityId;
 
-      WaterSource waterTypeMasterJson = WaterSource(
-        id: _id,
-        facility_id: _facilityId,
-        name: _title,
-        description: _description,
-        show_opening: isToggleOn.value ? 1 : 0,
-      );
+    int? _id = waterTypeId;
+    String _title = titleCtrlr.text.trim();
+    String _description = descriptionCtrlr.text.trim();
+    int _facilityId = facilityId;
 
-      var waterTypeJson = waterTypeMasterJson.toJson();
-      print({"water type json string", waterTypeJson});
-      await waterTypeMasterPresenter.createWaterType(
-        waterTypeJson: waterTypeJson,
-        isLoading: true,
-      );
-      return true;
-    }
+    WaterSource waterTypeMasterJson = WaterSource(
+      id: _id,
+      facility_id: _facilityId,
+      name: _title,
+      description: _description,
+      show_opening: isToggleOn.value ? 1 : 0,
+    );
+
+    var waterTypeJson = waterTypeMasterJson.toJson();
+    print({"water type json string", waterTypeJson});
+    await waterTypeMasterPresenter.createWaterType(
+      waterTypeJson: waterTypeJson,
+      isLoading: true,
+    );
     return true;
   }
 
@@ -230,43 +221,34 @@ class WaterTypeMasterController extends GetxController {
     if (titleCtrlr.text.trim() == '') {
       isTitleInvalid.value = true;
       isFormInvalid.value = true;
-      // isDescriptionInvalid.value = true;
     }
     if (descriptionCtrlr.text.trim() == '') {
-      // isTitleInvalid.value = true;
       isFormInvalid.value = true;
       isDescriptionInvalid.value = true;
     }
-
-    checkForm();
     if (isFormInvalid.value == true) {
       return false;
     }
+    int _id = waterTypeId;
+    String _name = titleCtrlr.text.trim();
+    String _description = descriptionCtrlr.text.trim();
+    int _facilityId = facilityId;
 
-    if (titleCtrlr.text.trim() == '' || descriptionCtrlr.text.trim() == '') {
-      Fluttertoast.showToast(
-          msg: "Please enter required field", fontSize: 16.0);
-    } else {
-      int _id = waterTypeId;
-      String _name = titleCtrlr.text.trim();
-      String _description = descriptionCtrlr.text.trim();
-      int _facilityId = facilityId;
+    WaterSource waterTypeMasterJson = WaterSource(
+      id: _id,
+      name: _name,
+      description: _description,
+      facility_id: _facilityId,
+      show_opening: isToggleOn.value ? 1 : 0,
+    );
 
-      WaterSource waterTypeMasterJson = WaterSource(
-        id: _id,
-        name: _name,
-        description: _description,
-        facility_id: _facilityId,
-      );
+    var waterTypeJson = waterTypeMasterJson.toJson();
+    print({"water type update", waterTypeJson});
+    await waterTypeMasterPresenter.updateWaterType(
+      waterTypeJson: waterTypeJson,
+      isLoading: true,
+    );
 
-      var waterTypeJson = waterTypeMasterJson.toJson();
-      print({"water type update", waterTypeJson});
-      await waterTypeMasterPresenter.updateWaterType(
-        waterTypeJson: waterTypeJson,
-        isLoading: true,
-      );
-      return true;
-    }
     return true;
   }
 
@@ -327,14 +309,6 @@ class WaterTypeMasterController extends GetxController {
         waterTypeId: waterTypeId,
         isLoading: true,
       );
-    }
-  }
-
-  void checkForm() {
-    if (isTitleInvalid.value == true || isDescriptionInvalid.value == true) {
-      isFormInvalid.value = true;
-    } else {
-      isFormInvalid.value = false;
     }
   }
 }
