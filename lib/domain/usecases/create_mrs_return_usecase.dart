@@ -10,12 +10,9 @@ class CreateMrsReturnUsecase {
   Future<List<PlantStockListModel?>?> getCmmsItemList({
     int? facilityId,
     bool? isLoading,
-    int? actorID,
-    int? actorType,
     int? mrsId,
   }) async =>
-      await repository.getPlantStockListReturn(
-          facilityId, isLoading, actorID, actorType, mrsId);
+      await repository.getPlantStockListReturn(facilityId, isLoading, mrsId);
   Future<Map<String, dynamic>> createReturnMrs({
     createReturnMrsJsonString,
     bool? isLoading,

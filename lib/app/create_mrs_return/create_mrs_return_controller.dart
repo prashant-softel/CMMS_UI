@@ -110,11 +110,7 @@ class CreateMrsReturnController extends GetxController {
     int userId = varUserAccessModel.value.user_id ?? 0;
 
     final _assetList = await createmrsReturnPresenter.getCmmsItemList(
-        facilityId: facilityId,
-        actorType: fromActorTypeId.value,
-        actorID: whereUsedTypeId.value,
-        isLoading: false,
-        mrsId: mrsId.value);
+        facilityId: facilityId, isLoading: false, mrsId: mrsId.value);
     if (_assetList != null) {
       for (var facility in _assetList) {
         for (var stockDetail in facility!.stockDetails) {

@@ -3632,16 +3632,12 @@ class DataRepository extends DomainRepository {
     required String auth,
     int? facilityId,
     bool? isLoading,
-    int? actorID,
-    int? actorType,
     int? mrsId,
   }) async =>
       await connectHelper.getPlantStockListReturn(
           auth: auth,
           facilityId: facilityId ?? 0,
           isLoading: isLoading ?? false,
-          actorID: actorID,
-          actorType: actorType,
           mrsId: mrsId);
 
   Future<ResponseModel> getFaultyMaterialReportList({
