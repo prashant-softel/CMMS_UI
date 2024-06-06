@@ -11,6 +11,8 @@ import 'package:cmms/domain/models/history_model.dart';
 import 'package:cmms/domain/models/paiyed_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+
 import 'package:get/get.dart';
 import 'package:rxdart/subjects.dart';
 import '../../domain/models/business_list_model.dart';
@@ -450,8 +452,22 @@ class ReceiveGoodsOrdersController extends GetxController {
     ]);
   }
 
+    Future<void> checkform() async {
+    if (approveCommentTextFieldCtrlr.text == '') {
+      isFormInvalid.value = true;
+    } else {
+      isFormInvalid.value = false;
+    }
+  }
+
   void approveGOReceiveButton({int? id}) async {
     {
+         await checkform();
+      if (isFormInvalid.value == true) {
+        Fluttertoast.showToast(msg: "Please Enter Comment!");
+
+        return;
+      }
       String _comment = approveCommentTextFieldCtrlr.text.trim();
 
       CommentModel commentGoodsOrderAproveModel =

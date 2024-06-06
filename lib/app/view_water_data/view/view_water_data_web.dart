@@ -22,7 +22,6 @@ class ViewWaterDataWeb extends StatefulWidget {
 }
 
 class _WaterDataWebState extends State<ViewWaterDataWeb> {
-  final HomeController homeController = Get.find();
   @override
   Widget build(BuildContext context) {
     return GetBuilder<ViewWaterDataController>(
@@ -33,231 +32,210 @@ class _WaterDataWebState extends State<ViewWaterDataWeb> {
             body: Obx(
               () => Stack(
                 children: [
-                  AnimatedContainer(
-                    duration: Duration(milliseconds: 450),
-                    margin: EdgeInsets.only(
-                      left: Responsive.isDesktop(context)
-                          ? homeController.menuButton.value
-                              ? 250.0
-                              : 70.0
-                          : 0,
-                    ),
-                    color: Color.fromARGB(255, 234, 236, 238),
-                    width: Get.width,
-                    height: Get.height,
-                    child: Column(
-                      children: [
-                        HeaderWidget(),
-                        Container(
-                          height: 45,
-                          decoration: BoxDecoration(
-                            border: Border.all(
-                              color: Color.fromARGB(255, 227, 224, 224),
-                              width: 1,
-                            ),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Color.fromARGB(255, 236, 234, 234)
-                                    .withOpacity(0.5),
-                                spreadRadius: 2,
-                                blurRadius: 5,
-                                offset: Offset(0, 2),
-                              ),
-                            ],
+                  Column(
+                    children: [
+                      HeaderWidget(),
+                      Container(
+                        height: 45,
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            color: Color.fromARGB(255, 227, 224, 224),
+                            width: 1,
                           ),
-                          child: Row(
-                            children: [
-                              Icon(
-                                Icons.home,
-                                color: ColorValues.greyLightColor,
-                              ),
-                              InkWell(
-                                onTap: () {
-                                  Get.offNamed(Routes.home);
-                                },
-                                child: Text(
-                                  "DASHBOARD",
-                                  style: Styles.greyLight14,
-                                ),
-                              ),
-                              InkWell(
-                                onTap: () {
-                                  controller.clearStoreData();
-                                  Get.offNamed(Routes.waterDataListScreen);
-                                },
-                                child: Text(" / WATER DATA LIST",
-                                    style: Styles.greyLight14),
-                              ),
-                              Text(
-                                " / VIEW WATER DATA",
+                          boxShadow: [
+                            BoxShadow(
+                              color: Color.fromARGB(255, 236, 234, 234)
+                                  .withOpacity(0.5),
+                              spreadRadius: 2,
+                              blurRadius: 5,
+                              offset: Offset(0, 2),
+                            ),
+                          ],
+                        ),
+                        child: Row(
+                          children: [
+                            Icon(
+                              Icons.home,
+                              color: ColorValues.greyLightColor,
+                            ),
+                            InkWell(
+                              onTap: () {
+                                Get.offNamed(Routes.home);
+                              },
+                              child: Text(
+                                "DASHBOARD",
                                 style: Styles.greyLight14,
                               ),
-                            ],
-                          ),
+                            ),
+                            InkWell(
+                              onTap: () {
+                                controller.clearStoreData();
+                                Get.offNamed(Routes.waterDataListScreen);
+                              },
+                              child: Text(" / WATER DATA LIST",
+                                  style: Styles.greyLight14),
+                            ),
+                            Text(
+                              " / VIEW WATER DATA",
+                              style: Styles.greyLight14,
+                            ),
+                          ],
                         ),
-                        Expanded(
-                          child: Container(
-                            margin: EdgeInsets.all(15),
-                            child: Card(
-                              color: Color.fromARGB(255, 245, 248, 250),
-                              elevation: 10,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10.0),
-                              ),
-                              child: SingleChildScrollView(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.only(
-                                          left: 20, top: 20),
-                                      child: Row(
-                                        children: [
-                                          Text(
-                                            "View Water Data For ${controller.monthName} Month",
-                                            style: Styles.blackBold16,
-                                          ),
-                                        ],
-                                      ),
+                      ),
+                      Expanded(
+                        child: Container(
+                          margin: EdgeInsets.all(15),
+                          child: Card(
+                            color: Color.fromARGB(255, 245, 248, 250),
+                            elevation: 10,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10.0),
+                            ),
+                            child: SingleChildScrollView(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                        left: 20, top: 20),
+                                    child: Row(
+                                      children: [
+                                        Text(
+                                          "View Water Data For ${controller.monthName} Month",
+                                          style: Styles.blackBold16,
+                                        ),
+                                      ],
                                     ),
-                                    Dimens.boxHeight20,
-                                    Container(
-                                      color: Color.fromARGB(255, 245, 248, 250),
-                                      height: Get.height * .7,
-                                      width: Get.width * .92,
-                                      child: ListView.builder(
-                                        shrinkWrap: true,
-                                        itemCount: controller.waterDataByMonth
-                                            .value?.itemData?.length,
-                                        itemBuilder: (context, index) {
-                                          final item = controller
-                                              .waterDataByMonth
-                                              .value
-                                              ?.itemData?[index];
-                                          return Container(
-                                            alignment: Alignment.center,
-                                            decoration: BoxDecoration(
-                                              border: Border.all(
+                                  ),
+                                  Dimens.boxHeight20,
+                                  Container(
+                                    color: Color.fromARGB(255, 245, 248, 250),
+                                    height: Get.height * .7,
+                                    width: Get.width * .92,
+                                    child: ListView.builder(
+                                      shrinkWrap: true,
+                                      itemCount: controller.waterDataByMonth
+                                          .value?.itemData?.length,
+                                      itemBuilder: (context, index) {
+                                        final item = controller.waterDataByMonth
+                                            .value?.itemData?[index];
+                                        return Container(
+                                          alignment: Alignment.center,
+                                          decoration: BoxDecoration(
+                                            border: Border.all(
+                                              color: Color.fromARGB(
+                                                  255, 227, 224, 224),
+                                              width: 1,
+                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(10),
+                                            boxShadow: [
+                                              BoxShadow(
                                                 color: Color.fromARGB(
-                                                    255, 227, 224, 224),
-                                                width: 1,
+                                                        255, 236, 234, 234)
+                                                    .withOpacity(0.5),
+                                                spreadRadius: 2,
+                                                blurRadius: 5,
+                                                offset: Offset(0, 2),
                                               ),
-                                              borderRadius:
-                                                  BorderRadius.circular(10),
-                                              boxShadow: [
-                                                BoxShadow(
-                                                  color: Color.fromARGB(
-                                                          255, 236, 234, 234)
-                                                      .withOpacity(0.5),
-                                                  spreadRadius: 2,
-                                                  blurRadius: 5,
-                                                  offset: Offset(0, 2),
+                                            ],
+                                          ),
+                                          height:
+                                              (((item?.details?.length ?? 0) +
+                                                          2) *
+                                                      50 +
+                                                  155),
+                                          margin: EdgeInsets.all(15),
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Padding(
+                                                padding:
+                                                    const EdgeInsets.all(15),
+                                                child: Text(
+                                                  "${controller.waterDataByMonth.value?.itemData?[index].waterType ?? "This Water Type has been deleted from master"}",
+                                                  style: Styles.blue17,
                                                 ),
-                                              ],
-                                            ),
-                                            height:
-                                                (((item?.details?.length ?? 0) +
-                                                            2) *
-                                                        50 +
-                                                    155),
-                                            margin: EdgeInsets.all(15),
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Padding(
-                                                  padding:
-                                                      const EdgeInsets.all(15),
-                                                  child: Text(
-                                                    "${controller.waterDataByMonth.value?.itemData?[index].waterType ?? "This Water Type has been deleted from master"}",
-                                                    style: Styles.blue17,
-                                                  ),
-                                                ),
-                                                Divider(
-                                                  color: ColorValues
-                                                      .greyLightColour,
-                                                ),
-                                                Expanded(
-                                                  child: DataTable2(
-                                                    columns: [
-                                                      DataColumn2(
-                                                        size: ColumnSize.M,
-                                                        label: Text(
-                                                          "Date",
-                                                          style: Styles.blue17,
-                                                        ),
+                                              ),
+                                              Divider(
+                                                color:
+                                                    ColorValues.greyLightColour,
+                                              ),
+                                              Expanded(
+                                                child: DataTable2(
+                                                  columns: [
+                                                    DataColumn2(
+                                                      size: ColumnSize.M,
+                                                      label: Text(
+                                                        "Date",
+                                                        style: Styles.blue17,
                                                       ),
-                                                      DataColumn2(
-                                                        size: ColumnSize.L,
-                                                        label: Text(
-                                                          "Description",
-                                                          style: Styles.blue17,
-                                                        ),
-                                                      ),
-                                                      DataColumn2(
-                                                        size: ColumnSize.L,
-                                                        label: Text(
-                                                          "Transaction Type",
-                                                          style: Styles.blue17,
-                                                        ),
-                                                      ),
-                                                      DataColumn2(
-                                                        size: ColumnSize.M,
-                                                        label: Text(
-                                                          "Procurment",
-                                                          style: Styles.green17,
-                                                        ),
-                                                      ),
-                                                      DataColumn2(
-                                                        size: ColumnSize.M,
-                                                        label: Text(
-                                                          "Consumption",
-                                                          style: Styles.red17,
-                                                        ),
-                                                      ),
-                                                      DataColumn2(
-                                                        size: ColumnSize.M,
-                                                        label: Text(
-                                                          "Total",
-                                                          style: Styles.blue17,
-                                                        ),
-                                                      ),
-                                                      DataColumn2(
-                                                        fixedWidth: 90,
-                                                        label: Text(
-                                                          "Action",
-                                                          style: Styles.blue17,
-                                                        ),
-                                                      ),
-                                                    ],
-                                                    rows: _buildTableRows(
-                                                      item,
-                                                      item?.details,
                                                     ),
+                                                    DataColumn2(
+                                                      size: ColumnSize.L,
+                                                      label: Text(
+                                                        "Description",
+                                                        style: Styles.blue17,
+                                                      ),
+                                                    ),
+                                                    DataColumn2(
+                                                      size: ColumnSize.L,
+                                                      label: Text(
+                                                        "Transaction Type",
+                                                        style: Styles.blue17,
+                                                      ),
+                                                    ),
+                                                    DataColumn2(
+                                                      size: ColumnSize.M,
+                                                      label: Text(
+                                                        "Procurment",
+                                                        style: Styles.green17,
+                                                      ),
+                                                    ),
+                                                    DataColumn2(
+                                                      size: ColumnSize.M,
+                                                      label: Text(
+                                                        "Consumption",
+                                                        style: Styles.red17,
+                                                      ),
+                                                    ),
+                                                    DataColumn2(
+                                                      size: ColumnSize.M,
+                                                      label: Text(
+                                                        "Total",
+                                                        style: Styles.blue17,
+                                                      ),
+                                                    ),
+                                                    DataColumn2(
+                                                      fixedWidth: 90,
+                                                      label: Text(
+                                                        "Action",
+                                                        style: Styles.blue17,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                  rows: _buildTableRows(
+                                                    item,
+                                                    item?.details,
                                                   ),
                                                 ),
-                                                Dimens.boxHeight20,
-                                              ],
-                                            ),
-                                          );
-                                        },
-                                      ),
+                                              ),
+                                              Dimens.boxHeight20,
+                                            ],
+                                          ),
+                                        );
+                                      },
                                     ),
-                                  ],
-                                ),
+                                  ),
+                                ],
                               ),
                             ),
                           ),
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
-                  Responsive.isDesktop(context)
-                      ? AnimatedPositioned(
-                          duration: Duration(milliseconds: 450),
-                          child: HomeDrawer(),
-                        )
-                      : Dimens.box0,
                   if (controller.openPurchaseDatePicker)
                     Positioned(
                       right: 65,

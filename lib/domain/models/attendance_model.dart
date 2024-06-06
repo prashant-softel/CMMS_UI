@@ -49,7 +49,7 @@ class HFEEmployeeAttendance {
 
   factory HFEEmployeeAttendance.fromJson(Map<String, dynamic> json) =>
       HFEEmployeeAttendance(
-        id: json["id"],
+        id: json["employee_id"],
         name: json["name"],
         present: json["present"],
         inTime: json["inTime"],
@@ -57,7 +57,7 @@ class HFEEmployeeAttendance {
       );
 
   Map<String, dynamic> toJson() => {
-        "id": id,
+        "employee_id": id,
         "name": name,
         "present": present.value,
         "inTime": inTime,
@@ -66,12 +66,14 @@ class HFEEmployeeAttendance {
 }
 
 class ContractLabourAttendance {
+  int? contractor_id;
   int? lessThan35;
   int? between35to50;
   int? greaterThan50;
   String? purpose;
 
   ContractLabourAttendance({
+    this.contractor_id = 0,
     this.lessThan35,
     this.between35to50,
     this.greaterThan50,
@@ -80,6 +82,7 @@ class ContractLabourAttendance {
 
   factory ContractLabourAttendance.fromJson(Map<String, dynamic> json) =>
       ContractLabourAttendance(
+        contractor_id: json["contractor_id"],
         lessThan35: json["lessThan35"],
         between35to50: json["between35to50"],
         greaterThan50: json["greaterThan50"],
@@ -87,6 +90,7 @@ class ContractLabourAttendance {
       );
 
   Map<String, dynamic> toJson() => {
+        "contractor_id": contractor_id,
         "lessThan35": lessThan35,
         "between35to50": between35to50,
         "greaterThan50": greaterThan50,

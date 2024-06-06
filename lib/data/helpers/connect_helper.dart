@@ -6318,8 +6318,6 @@ class ConnectHelper {
       {required String auth,
       bool? isLoading,
       int? facilityId,
-      int? actorID,
-      int? actorType,
       int? mrsId}) async {
     var responseModel = await apiWrapper.makeRequest(
       // 'SMReports/GetStockReport?facility_id=$facilityId&actorTypeID=$actorType&actorID=$actorID',

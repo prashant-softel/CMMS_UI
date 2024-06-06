@@ -59,7 +59,7 @@ class ApproveReturnMrsContentWeb extends GetView<ApproveReturnMrsController> {
                     child: Text(" / STOCK MANAGEMENT ",
                         style: Styles.greyMediumLight12),
                   ),
-                  Text(" / RETURN EQUIPMENT DETAILS22",
+                  Text(" / RETURN EQUIPMENT DETAILS",
                       style: Styles.greyMediumLight12)
                 ],
               ),
@@ -305,7 +305,7 @@ class ApproveReturnMrsContentWeb extends GetView<ApproveReturnMrsController> {
                                                 .returnMrsDetailsModel
                                                 .value!
                                                 .cmmrsItems![index]
-                                                .asset_name
+                                                .name
                                                 .toString())),
                                             DataCell(Text(controller
                                                 .returnMrsDetailsModel
@@ -418,7 +418,7 @@ class ApproveReturnMrsContentWeb extends GetView<ApproveReturnMrsController> {
                                                 .returnMrsDetailsModel
                                                 .value!
                                                 .cmmrsFaultyItems![index]
-                                                .asset_name
+                                                .name
                                                 .toString())),
                                             DataCell(Text(controller
                                                 .returnMrsDetailsModel
@@ -430,7 +430,7 @@ class ApproveReturnMrsContentWeb extends GetView<ApproveReturnMrsController> {
                                                 .returnMrsDetailsModel
                                                 .value!
                                                 .cmmrsFaultyItems![index]
-                                                .asset_MDM_code
+                                                .asset_code
                                                 .toString())),
                                             DataCell(Text(controller
                                                 .returnMrsDetailsModel

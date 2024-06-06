@@ -1,8 +1,11 @@
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/view_waste_data/view_waste_data_controller.dart';
 import 'package:cmms/app/view_waste_data/view_waste_data_presenter.dart';
+import 'package:cmms/app/waste_data/waste_data_controller.dart';
+import 'package:cmms/app/waste_data/waste_data_presenter.dart';
 import 'package:cmms/domain/domain.dart';
 import 'package:cmms/domain/usecases/view_waste_data_usecase.dart';
+import 'package:cmms/domain/usecases/waste_data_usecase.dart';
 import 'package:get/get.dart';
 
 class ViewWasteDataBinding extends Bindings {
@@ -26,6 +29,15 @@ class ViewWasteDataBinding extends Bindings {
             HomeUsecase(
               Get.find(),
             ),
+          ),
+        ),
+      ),
+    );
+    Get.lazyPut<WasteDataController>(
+      () => WasteDataController(
+        WasteDataPresenter(
+          WasteDataUsecase(
+            Get.find(),
           ),
         ),
       ),

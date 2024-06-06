@@ -103,68 +103,76 @@ class AddDialog extends GetView {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Dimens.boxHeight10,
-                    Container(
-                      width: MediaQuery.of(context).size.width / 5,
-                      height: MediaQuery.of(context).size.height * 0.040,
-                      decoration: BoxDecoration(
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black26,
-                            offset: const Offset(
-                              5.0,
-                              5.0,
+                    IgnorePointer(
+                      ignoring: id == 0 || id == null ? true : false,
+                      child: Container(
+                        width: MediaQuery.of(context).size.width / 5,
+                        height: MediaQuery.of(context).size.height * 0.040,
+                        decoration: BoxDecoration(
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black26,
+                              offset: const Offset(
+                                5.0,
+                                5.0,
+                              ),
+                              blurRadius: 5.0,
+                              spreadRadius: 1.0,
+                            ), //BoxShadow
+                            BoxShadow(
+                              color: ColorValues.whiteColor,
+                              offset: const Offset(0.0, 0.0),
+                              blurRadius: 0.0,
+                              spreadRadius: 0.0,
+                            ), //BoxShadow
+                          ],
+                          color: ColorValues.whiteColor,
+                          borderRadius: BorderRadius.circular(5),
+                        ),
+                        child: TextField(
+                          style: GoogleFonts.lato(
+                            textStyle: TextStyle(
+                                fontSize: 16.0,
+                                height: 1.0,
+                                color: Colors.black),
+                          ),
+                          onTap: () {
+                            controller.pickDateTime(context);
+                          },
+                          controller: controller.procurementTimeCtrlr,
+                          autofocus: false,
+                          readOnly: true,
+                          decoration: InputDecoration(
+                            fillColor: ColorValues.whiteColor,
+                            filled: true,
+                            contentPadding:
+                                EdgeInsets.fromLTRB(5.0, 10.0, 5.0, 10.0),
+                            border: InputBorder.none,
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10.0),
+                              borderSide: BorderSide(color: Colors.transparent),
                             ),
-                            blurRadius: 5.0,
-                            spreadRadius: 1.0,
-                          ), //BoxShadow
-                          BoxShadow(
-                            color: ColorValues.whiteColor,
-                            offset: const Offset(0.0, 0.0),
-                            blurRadius: 0.0,
-                            spreadRadius: 0.0,
-                          ), //BoxShadow
-                        ],
-                        color: ColorValues.whiteColor,
-                        borderRadius: BorderRadius.circular(5),
-                      ),
-                      child: TextField(
-                        style: GoogleFonts.lato(
-                          textStyle: TextStyle(
-                              fontSize: 16.0, height: 1.0, color: Colors.black),
-                        ),
-                        onTap: () {
-                          controller.pickDateTime(context);
-                        },
-                        controller: controller.procurementTimeCtrlr,
-                        autofocus: false,
-                        readOnly: true,
-                        decoration: InputDecoration(
-                          fillColor: ColorValues.whiteColor,
-                          filled: true,
-                          contentPadding:
-                              EdgeInsets.fromLTRB(5.0, 10.0, 5.0, 10.0),
-                          border: InputBorder.none,
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10.0),
-                            borderSide: BorderSide(color: Colors.transparent),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10.0),
+                              borderSide: BorderSide(color: Colors.transparent),
+                            ),
                           ),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10.0),
-                            borderSide: BorderSide(color: Colors.transparent),
-                          ),
+                          onChanged: (value) {},
                         ),
-                        onChanged: (value) {},
                       ),
                     ),
                     Dimens.boxHeight10,
-                    SizedBox(
-                      child: DropdownWebStock(
-                        width: MediaQuery.of(context).size.width / 5,
-                        dropdownList: controller.typeOfWaterList,
-                        isValueSelected:
-                            controller.istypeOfWaterListSelected.value,
-                        selectedValue: controller.selectedtypeOfWater.value,
-                        onValueChanged: controller.onValueChanged,
+                    IgnorePointer(
+                      ignoring: id == 0 || id == null ? true : false,
+                      child: SizedBox(
+                        child: DropdownWebStock(
+                          width: MediaQuery.of(context).size.width / 5,
+                          dropdownList: controller.typeOfWaterList,
+                          isValueSelected:
+                              controller.istypeOfWaterListSelected.value,
+                          selectedValue: controller.selectedtypeOfWater.value,
+                          onValueChanged: controller.onValueChanged,
+                        ),
                       ),
                     ),
                     Dimens.boxHeight10,
@@ -174,9 +182,12 @@ class AddDialog extends GetView {
                       textController: controller.qtyCtrlr,
                     ),
                     Dimens.boxHeight10,
-                    LoginCustomTextfield(
-                      width: (MediaQuery.of(context).size.width * .2),
-                      textController: controller.descriptionCtrlr,
+                    IgnorePointer(
+                      ignoring: id == 0 || id == null ? true : false,
+                      child: LoginCustomTextfield(
+                        width: (MediaQuery.of(context).size.width * .2),
+                        textController: controller.descriptionCtrlr,
+                      ),
                     ),
                   ],
                 ),
@@ -196,7 +207,7 @@ class AddDialog extends GetView {
                 text: "Cancel",
                 onPressed: () {
                   controller.clearData();
-                  Get.offAllNamed(Routes.viewWaterData);
+                  Get.offNamed(Routes.viewWaterData);
                 },
               ),
             ),
@@ -210,7 +221,7 @@ class AddDialog extends GetView {
                       onPressed: () {
                         controller.createWaterData();
 
-                        Get.offAllNamed(Routes.waterDataListScreen);
+                        Get.offNamed(Routes.waterDataListScreen);
                       },
                     )
                   : CustomElevatedButton(
@@ -218,7 +229,7 @@ class AddDialog extends GetView {
                       text: 'Update',
                       onPressed: () {
                         controller.updateWaterData();
-                        Get.offAllNamed(Routes.viewWaterData);
+                        Get.offNamed(Routes.viewWaterData);
                       },
                     ),
             ),

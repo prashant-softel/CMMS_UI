@@ -2,7 +2,9 @@ import 'dart:async';
 
 import 'package:cmms/app/edit_return_mrs/edit_return_mrs_presenter.dart';
 import 'package:cmms/domain/models/create_return_mrs_model.dart';
+import 'package:cmms/domain/models/get_asset_data_list_model.dart';
 import 'package:cmms/domain/models/get_plant_Stock_list.dart';
+import 'package:cmms/domain/models/get_return_mrs_detail.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -36,6 +38,9 @@ class EditMrsReturnController extends GetxController {
   RxMap<dynamic, dynamic> dropdownFaultyMapperData = {}.obs;
   int mrsId = 0;
   var isSetTemplate = false.obs;
+  RxList<GetAssetDataModel?> assetList = <GetAssetDataModel>[].obs;
+  Rx<ReturnMrsDetailsModel?> returnMrsDetailsModel =
+      ReturnMrsDetailsModel().obs;
 
   void setTemplatetoggle() {
     isSetTemplate.value = !isSetTemplate.value;
@@ -51,6 +56,7 @@ class EditMrsReturnController extends GetxController {
       Future.delayed(Duration(seconds: 1), () {
         getReturnMrsDetails(
             mrsId: mrsId, isloading: true, facilityId: facilityId);
+        getAssetList(facilityId);
       });
     });
     super.onInit();
@@ -63,49 +69,102 @@ class EditMrsReturnController extends GetxController {
             mrsId: mrsId, isLoading: isloading, facilityId: facilityId);
 
     if (_returnMrsrsDetailsModel != null) {
+      returnMrsDetailsModel.value = _returnMrsrsDetailsModel;
+
       getCmmsItemList(
-        facilityId,
+        _returnMrsrsDetailsModel.mrs_id ?? 0,
       );
-      rowItem.value = [];
-      _returnMrsrsDetailsModel.cmmrsItems?.forEach((element) {
-        rowItem.value.add([
-          {"key": "Drop_down", "value": '${element.asset_name}'},
-          {'key': "Issue_Qty", "value": '${element.issued_qty}'},
-          {'key': "Return_Qty", "value": '${element.returned_qty}'},
-          {'key': "Remark", "value": 'remark'},
-        ]);
-        // dropdownMapperData = element.approval_required;
-      });
-      // whereUsedId = _mrsDetailsModel.whereUsedTypeId ?? 0;
-      activityCtrlr.text = _returnMrsrsDetailsModel.activity ?? "";
-      // activityCtrlr.text = _mrsDetailsModel. ?? "";
-      remarkCtrlr.text = _returnMrsrsDetailsModel.remarks ?? "";
-      whereUsedCtrlr.text = _returnMrsrsDetailsModel.whereUsedTypeId.toString();
     }
     // print({"mrsdetailss", returnMrsDetailsModel.value});
   }
 
-  Future<void> getCmmsItemList(int _facilityId) async {
-    int userId = varUserAccessModel.value.user_id ?? 0;
-
+  Future<void> getCmmsItemList(int orginmrsId) async {
     final _assetList = await editmrsReturnPresenter.getCmmsItemList(
-        facilityId: facilityId, userId: userId);
+        facilityId: facilityId, isLoading: false, mrsId: orginmrsId);
     if (_assetList != null) {
-      //   assetItemList.value = _assetList.cmmrsItems ?? [];
+      for (var facility in _assetList) {
+        for (var stockDetail in facility!.stockDetails) {
+          StockDetailsList.add(stockDetail);
+          //  StockDetailsList.value = facility?.stockDetails ?? [];
+        }
+      }
+
+      rowItem.value = [];
+      returnMrsDetailsModel.value!.cmmrsItems?.forEach((element) {
+        rowItem.value.add([
+          {"key": "Drop_down", "value": '${element.name}'},
+          {'key': "Sr_No", "value": ''},
+          {'key': "code", "value": ''},
+          {'key': "Material_Type", "value": ''},
+          {'key': "Issue_Qty", "value": ''},
+          {'key': "Used_Qty", "value": ''},
+          {'key': "Return_Qty", "value": '${element.returned_qty}'},
+          {'key': "Remark", "value": ''},
+          // {'key': "Action ", "value": ''},
+        ]);
+        dropdownMapperData[element.name] = StockDetailsList.firstWhere(
+            (e) => e!.asset_type == element.asset_type,
+            orElse: null);
+        // dropdownMapperData = element.approval_required;
+      });
+      // whereUsedId = _mrsDetailsModel.whereUsedTypeId ?? 0;
+      activityCtrlr.text = returnMrsDetailsModel.value?.activity ?? "";
+      // activityCtrlr.text = _mrsDetailsModel. ?? "";
+      remarkCtrlr.text = returnMrsDetailsModel.value?.remarks ?? "";
+      whereUsedCtrlr.text =
+          returnMrsDetailsModel.value!.whereUsedTypeId.toString();
+      // assetItemList.value = _assetList.s ?? [];
       //
 
       update(["AssetList"]);
     }
 
-    addRowItem();
+    // addRowItem();
+  }
+
+  Future<void> getAssetList(int _facilityId) async {
+    assetList.value = <GetAssetDataModel>[];
+    final _assetList =
+        await editmrsReturnPresenter.getAssetList(facilityId: facilityId);
+    // print('jkncejknce:$facilityId');
+    if (_assetList != null) {
+      //for (var asset in _assetList) {
+      assetList.value = _assetList;
+      //  }
+
+      rowFaultyItem.value = [];
+      returnMrsDetailsModel.value!.cmmrsFaultyItems?.forEach((element) {
+        rowFaultyItem.value.add([
+          {"key": "Drop_down", "value": '${element.name}'},
+          {'key': "code", "value": ''},
+          {'key': "Material_Type", "value": ''},
+          {'key': "Material_Category", "value": ''},
+          {'key': "Sr_no", "value": ''},
+          {'key': "Return_Qty", "value": '${element.returned_qty}'},
+          {'key': "Remark", "value": ''},
+          {'key': "Action ", "value": ''},
+          // {'key': "Action ", "value": ''},
+        ]);
+        dropdownFaultyMapperData[element.name] = assetList.firstWhere(
+            (e) => e!.asset_type == element.asset_type,
+            orElse: null);
+      });
+      update(["AssetList"]);
+    }
+    // addRowFaultyItem();
   }
 
   void addRowItem() {
-    rowItem.value.add([
+    rowItem.add([
       {"key": "Drop_down", "value": 'Please Select'},
+      {'key': "Sr_No", "value": ''},
+      {'key': "code", "value": ''},
+      {'key': "Material_Type", "value": ''},
       {'key': "Issue_Qty", "value": ''},
+      {'key': "Used_Qty", "value": ''},
       {'key': "Return_Qty", "value": ''},
       {'key': "Remark", "value": ''},
+      // {'key': "Action ", "value": ''},
     ]);
   }
 
@@ -162,10 +221,15 @@ class EditMrsReturnController extends GetxController {
         setAsTemplate: "", //isSetTemplate == true ? 1 : 0,
         activity: _activity,
         //1 is job,2 is pm
-        whereUsedType: 2,
-        whereUsedTypeId: 0,
+        whereUsedType: 27,
+        whereUsedTypeId: returnMrsDetailsModel.value?.whereUsedTypeId,
+        to_actor_id: facilityId, //
+        to_actor_type_id: 2, // to_actor_type_id.value,
+        from_actor_type_id: 3, // fromActorTypeId.value,
+        from_actor_id: returnMrsDetailsModel.value?.whereUsedTypeId,
         remarks: _remark,
-        cmmrsItems: items);
+        cmmrsItems: items,
+        faultyItems: faultyItems);
     var createReturnMrsJsonString = createMrs.toJson();
 
     print({"createReturnMrsJsonString", createReturnMrsJsonString});

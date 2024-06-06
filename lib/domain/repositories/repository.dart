@@ -10485,16 +10485,14 @@ class Repository {
     }
   }
 
-  Future<List<PlantStockListModel?>?> getPlantStockListReturn(int? facilityId,
-      bool? isLoading, int? actorID, int? actorType, int? mrsId) async {
+  Future<List<PlantStockListModel?>?> getPlantStockListReturn(
+      int? facilityId, bool? isLoading, int? mrsId) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.getPlantStockListReturn(
           auth: auth,
           facilityId: facilityId ?? 0,
           isLoading: isLoading ?? false,
-          actorID: actorID,
-          actorType: actorType,
           mrsId: mrsId);
 
       if (!res.hasError) {
