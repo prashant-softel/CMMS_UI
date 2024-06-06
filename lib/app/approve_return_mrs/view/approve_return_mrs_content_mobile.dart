@@ -2,6 +2,7 @@ import 'package:cmms/app/app.dart';
 import 'package:cmms/app/approve_return_mrs/approve_return_mrs_controller.dart';
 import 'package:cmms/app/job_details/views/widgets/job_detail_field.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
+import 'package:cmms/domain/models/get_plant_Stock_list.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -144,7 +145,7 @@ class ApproveReturnMrsViewContentMobile
                                       null)
                                   ? controller.returnMrsDetailsModel.value!
                                       .cmmrsItems![index]
-                                  : CmmsItems();
+                                  : StockDetails();
                               return GestureDetector(
                                 onTap: () {
                                   // var _taskId =
@@ -173,7 +174,7 @@ class ApproveReturnMrsViewContentMobile
                                             ),
                                             Expanded(
                                               child: Text(
-                                                  '${mrsViewModel.asset_name}'
+                                                  '${mrsViewModel.name}'
                                                   '',
                                                   style: Styles.appDarkBlue12),
                                             ),

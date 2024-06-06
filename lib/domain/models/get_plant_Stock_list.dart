@@ -38,9 +38,11 @@ class PlantStockListModel {
 class StockDetails {
   int? mrs_item_id;
   dynamic serial_no;
+  String? issued_date;
   dynamic available_qty;
   dynamic requested_qty;
   dynamic consumed_qty;
+  dynamic returned_qty;
   dynamic issued_qty;
   dynamic approved_qty;
   int? facility_Is_Block;
@@ -63,6 +65,8 @@ class StockDetails {
       this.asset_type_ID,
       this.asset_type,
       this.balance,
+      this.issued_date,
+      this.returned_qty,
       this.facility_Is_Block,
       this.facility_Is_Block_of_name,
       this.inward,
@@ -79,16 +83,18 @@ class StockDetails {
     return StockDetails(
       assetItemID: parsedJson['assetItemID'],
       mrs_item_id: parsedJson['mrs_item_id'],
+      returned_qty: parsedJson['returned_qty'],
       approved_qty: parsedJson['approved_qty'],
       available_qty: parsedJson['available_qty'],
       consumed_qty: parsedJson['consumed_qty'],
       issued_qty: parsedJson['issued_qty'],
       requested_qty: parsedJson['requested_qty'],
-      serial_no: parsedJson['serial_no'],
+      serial_no: parsedJson['serial_number'],
       asset_code: parsedJson['asset_code'],
       asset_type_ID: parsedJson['asset_type_ID'],
       asset_type: parsedJson['asset_type'],
       balance: parsedJson['balance'],
+      issued_date: parsedJson['issued_date'],
       facility_Is_Block: parsedJson['facility_Is_Block'],
       facility_Is_Block_of_name: parsedJson['facility_Is_Block_of_name'],
       name: parsedJson['asset_name'],
@@ -98,14 +104,16 @@ class StockDetails {
     );
   }
   Map<String, dynamic> toJson() => {
+        "returned_qty": returned_qty,
         "mrs_item_id": mrs_item_id,
+        "issued_date": issued_date,
         "assetItemID": assetItemID,
         "approved_qty": approved_qty,
         "available_qty": available_qty,
         "consumed_qty": consumed_qty,
         "issued_qty": issued_qty,
         "requested_qty": requested_qty,
-        "serial_no": serial_no,
+        "serial_number": serial_no,
         "asset_code": asset_code,
         "asset_type_ID": asset_type_ID,
         "balance": balance,

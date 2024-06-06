@@ -20,18 +20,6 @@ class CreateMrsReturnContentWeb extends GetView<CreateMrsReturnController> {
   final CreateMrsReturnController controller = Get.find();
   @override
   Widget build(BuildContext context) {
-    Widget _rowItem(int? defaultValue, {required Function(bool) onCheck}) {
-      return CustomSwitchTroggle(
-          value: defaultValue == 1 ? true : false,
-          onChanged: (value) {
-            print("object");
-            controller.isToggleOn.value = value!;
-            onCheck(value);
-
-            //  controller.toggle();
-          });
-    }
-
     return StatefulBuilder(
         builder: (BuildContext context, StateSetter setState) {
       return Obx(
@@ -82,7 +70,7 @@ class CreateMrsReturnContentWeb extends GetView<CreateMrsReturnController> {
                             child: Text(" / STOCK MANAGEMENT ",
                                 style: Styles.greyLight14),
                           ),
-                          Text(" / NEW RETURN MATERIAL SLIP11 ",
+                          Text(" / NEW RETURN MATERIAL SLIP",
                               style: Styles.greyLight14)
                         ],
                       ),

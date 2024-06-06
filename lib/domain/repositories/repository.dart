@@ -10418,16 +10418,14 @@ class Repository {
     }
   }
 
-  Future<List<PlantStockListModel?>?> getPlantStockListReturn(int? facilityId,
-      bool? isLoading, int? actorID, int? actorType, int? mrsId) async {
+  Future<List<PlantStockListModel?>?> getPlantStockListReturn(
+      int? facilityId, bool? isLoading, int? mrsId) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.getPlantStockListReturn(
           auth: auth,
           facilityId: facilityId ?? 0,
           isLoading: isLoading ?? false,
-          actorID: actorID,
-          actorType: actorType,
           mrsId: mrsId);
 
       if (!res.hasError) {
@@ -14211,7 +14209,8 @@ class Repository {
         return true;
       } //
       else {
-        Utility.showDialog(res.errorCode.toString(), 'Update Statutory Compliance');
+        Utility.showDialog(
+            res.errorCode.toString(), 'Update Statutory Compliance');
         return false;
       }
     } catch (error) {
@@ -14221,7 +14220,8 @@ class Repository {
   }
 
   //delete
-  Future<void> deleteStatutoryCompliance(Object StatutoryCompliance_id, bool isLoading) async {
+  Future<void> deleteStatutoryCompliance(
+      Object StatutoryCompliance_id, bool isLoading) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.deleteStatutoryCompliance(
@@ -14233,7 +14233,8 @@ class Repository {
       if (!res.hasError) {
         //get delete response back from API
       } else {
-        Utility.showDialog(res.errorCode.toString(), 'delete Statutory Compliance');
+        Utility.showDialog(
+            res.errorCode.toString(), 'delete Statutory Compliance');
       }
     } catch (error) {
       print(error.toString());
