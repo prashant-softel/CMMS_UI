@@ -8841,7 +8841,7 @@ class ConnectHelper {
   Future<ResponseModel> getAttendanceList({
     required String auth,
     required int facilityId,
-    required int year,
+    required String year,
     required bool isLoading,
   }) async {
     ResponseModel responseModel = await apiWrapper.makeRequest(
