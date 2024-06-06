@@ -773,7 +773,6 @@ class WasteTypeMasterWeb extends GetView<WasteTypeMasterController> {
                                                                               .id
                                                                               .toString(),
                                                                     );
-
                                                                     controller
                                                                         .titleCtrlr
                                                                         .text = controller
@@ -786,6 +785,18 @@ class WasteTypeMasterWeb extends GetView<WasteTypeMasterController> {
                                                                             .selectedItem
                                                                             ?.description ??
                                                                         '';
+                                                                    controller
+                                                                        .isToggleOn
+                                                                        .value = controller.selectedItem?.show_opening ==
+                                                                            1
+                                                                        ? true
+                                                                        : false;
+                                                                    controller
+                                                                        .isToggleHazOn
+                                                                        .value = controller.selectedItem?.isHazardous ==
+                                                                            1
+                                                                        ? true
+                                                                        : false;
                                                                     controller
                                                                         .isContainerVisible
                                                                         .value = true;

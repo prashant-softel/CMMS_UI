@@ -151,45 +151,36 @@ class WasteTypeMasterController extends GetxController {
     if (titleCtrlr.text.trim() == '') {
       isTitleInvalid.value = true;
       isFormInvalid.value = true;
-      // isDescriptionInvalid.value = true;
     }
     if (descriptionCtrlr.text.trim() == '') {
-      // isTitleInvalid.value = true;
-      isFormInvalid.value = true;
       isDescriptionInvalid.value = true;
+      isFormInvalid.value = true;
     }
-
-    checkForm();
     if (isFormInvalid.value == true) {
       return false;
     }
-    if (titleCtrlr.text.trim() == '' || descriptionCtrlr.text.trim() == '') {
-      Fluttertoast.showToast(
-          msg: "Please enter required field", fontSize: 16.0);
-    } else {
-      int? _id = wasteTypeId;
-      String _title = titleCtrlr.text.trim();
-      String _description = descriptionCtrlr.text.trim();
-      int _facilityId = facilityId;
 
-      CreateWasteSource wasteTypeMasterJson = CreateWasteSource(
-        id: _id,
-        facilityID: _facilityId,
-        name: _title,
-        description: _description,
-        type: 2,
-        show_opening: isToggleOn.value ? 1 : 0,
-        isHazardous: isToggleHazOn.value ? 1 : 0,
-      );
+    int? _id = wasteTypeId;
+    String _title = titleCtrlr.text.trim();
+    String _description = descriptionCtrlr.text.trim();
+    int _facilityId = facilityId;
 
-      var wasteTypeJson = wasteTypeMasterJson.toJson();
-      print({"waste type json string", wasteTypeJson});
-      await wasteTypeMasterPresenter.createWasteType(
-        wasteTypeJson: wasteTypeJson,
-        isLoading: true,
-      );
-      return true;
-    }
+    CreateWasteSource wasteTypeMasterJson = CreateWasteSource(
+      id: _id,
+      facilityID: _facilityId,
+      name: _title,
+      description: _description,
+      type: 2,
+      show_opening: isToggleOn.value ? 1 : 0,
+      isHazardous: isToggleHazOn.value ? 1 : 0,
+    );
+
+    var wasteTypeJson = wasteTypeMasterJson.toJson();
+    print({"waste type json string", wasteTypeJson});
+    await wasteTypeMasterPresenter.createWasteType(
+      wasteTypeJson: wasteTypeJson,
+      isLoading: true,
+    );
     return true;
   }
 
@@ -220,42 +211,35 @@ class WasteTypeMasterController extends GetxController {
     if (titleCtrlr.text.trim() == '') {
       isTitleInvalid.value = true;
       isFormInvalid.value = true;
-      // isDescriptionInvalid.value = true;
     }
     if (descriptionCtrlr.text.trim() == '') {
-      // isTitleInvalid.value = true;
-      isFormInvalid.value = true;
       isDescriptionInvalid.value = true;
+      isFormInvalid.value = true;
     }
-    checkForm();
     if (isFormInvalid.value == true) {
       return false;
     }
+    int? _id = wastetypeid;
+    String _name = titleCtrlr.text.trim();
+    String _description = descriptionCtrlr.text.trim();
+    int _facilityId = facilityId;
 
-    if (titleCtrlr.text.trim() == '' || descriptionCtrlr.text.trim() == '') {
-      Fluttertoast.showToast(
-          msg: "Please enter required field", fontSize: 16.0);
-    } else {
-      int? _id = wastetypeid;
-      String _name = titleCtrlr.text.trim();
-      String _description = descriptionCtrlr.text.trim();
-      int _facilityId = facilityId;
+    CreateWasteSource wasteTypeMasterJson = CreateWasteSource(
+      id: _id,
+      name: _name,
+      description: _description,
+      facilityID: _facilityId,
+      type: 2,
+      show_opening: isToggleOn.value ? 1 : 0,
+      isHazardous: isToggleHazOn.value ? 1 : 0,
+    );
 
-      CreateWasteSource wasteTypeMasterJson = CreateWasteSource(
-          id: _id,
-          name: _name,
-          description: _description,
-          facilityID: _facilityId,
-          type: 2);
-
-      var wasteTypeJson = wasteTypeMasterJson.toJson();
-      print({"waste type updated", wasteTypeJson});
-      await wasteTypeMasterPresenter.updateWasteType(
-        wasteTypeJson: wasteTypeJson,
-        isLoading: true,
-      );
-      return true;
-    }
+    var wasteTypeJson = wasteTypeMasterJson.toJson();
+    print({"waste type updated", wasteTypeJson});
+    await wasteTypeMasterPresenter.updateWasteType(
+      wasteTypeJson: wasteTypeJson,
+      isLoading: true,
+    );
     return true;
   }
 
