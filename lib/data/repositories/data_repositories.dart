@@ -5102,7 +5102,7 @@ class DataRepository extends DomainRepository {
   Future<ResponseModel> getAttendanceList({
     required String auth,
     required int facilityId,
-    required int year,
+    required String year,
     bool? isLoading,
   }) async =>
       await connectHelper.getAttendanceList(
