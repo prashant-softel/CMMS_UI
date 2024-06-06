@@ -227,7 +227,7 @@ class JobCardDetailsController extends GetxController {
               "value": "",
             }
           ]);
-          deployedEmployeeMapperData[element!.name ?? ""] = employeeList
+          deployedEmployeeMapperData[element.name ?? ""] = employeeList
               .firstWhere((e) => e!.name == element.name, orElse: null);
         });
       }

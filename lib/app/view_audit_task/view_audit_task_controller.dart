@@ -111,7 +111,7 @@ class ViewAuditTaskController extends GetxController {
 
       auditTasknDetailModel.value = _auditTasknDetailModel;
     }
-    print({"auditPlandetailss", auditTasknDetailModel.value?.id});
+    print({"auditPlandetailss", auditTasknDetailModel.value.id});
   }
 
   void auditTaskApprovedButton({int? id}) async {
@@ -396,7 +396,7 @@ class ViewAuditTaskController extends GetxController {
     // checklistObservations?.forEach((e) {
     schedule.add(Schedules(
         schedule_id:
-            auditTasknDetailModel.value?.schedules![0].schedule_id ?? 0,
+            auditTasknDetailModel.value.schedules![0].schedule_id ?? 0,
         add_observations: addObservations));
     // });
 

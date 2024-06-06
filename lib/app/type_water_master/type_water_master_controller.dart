@@ -7,7 +7,6 @@ import 'package:cmms/app/theme/styles.dart';
 import 'package:cmms/app/type_water_master/type_water_master_presenter.dart';
 import 'package:cmms/domain/models/type_of_water_model.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 

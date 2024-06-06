@@ -707,7 +707,7 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                                                                           return !controller
                                                                               .rowItem
                                                                               .map((p0) => p0[0]["value"])
-                                                                              .contains(p0!.name);
+                                                                              .contains(p0.name);
                                                                         })
                                                                         .toList()
                                                                         .obs,

@@ -100,10 +100,8 @@ class ViewWasteDataController extends GetxController {
       hazardous: hazardous,
     );
 
-    if (_wasteDataMonthDetail != null) {
-      wasteDataByMonth.value = _wasteDataMonthDetail;
-    }
-    update(['waste-controller']);
+    wasteDataByMonth.value = _wasteDataMonthDetail;
+      update(['waste-controller']);
   }
 
   void clearStoreData() {

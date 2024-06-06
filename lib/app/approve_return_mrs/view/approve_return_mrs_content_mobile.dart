@@ -6,7 +6,6 @@ import 'package:cmms/domain/models/get_plant_Stock_list.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../domain/models/get_return_mrs_detail.dart';
 import '../../widgets/custom_richtext.dart';
 import '../../widgets/custom_textfield.dart';
 

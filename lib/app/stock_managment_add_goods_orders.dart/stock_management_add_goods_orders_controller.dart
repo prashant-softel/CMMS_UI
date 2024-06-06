@@ -237,7 +237,7 @@ class StockManagementAddGoodsOrdersController extends GetxController {
           });
         }
       });
-      if (goId.value == 0 || goId.value == null) {
+      if (goId.value == 0) {
         addRowItem();
       }
 
@@ -437,7 +437,7 @@ class StockManagementAddGoodsOrdersController extends GetxController {
       isLoading: true,
     );
     if (list!.length > 0) {
-      ownerList?.value = list;
+      ownerList.value = list;
       // for (var _ownerList in list) {
       //   ownerList.add(_ownerList);
       // }
