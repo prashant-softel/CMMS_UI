@@ -24,6 +24,13 @@ class ComplianceController extends GetxController {
   RxList<StatutoryComplianceModel?> statutoryComplianceList =
       <StatutoryComplianceModel>[].obs;
   Rx<bool> isStatutoryComplianceSelected = true.obs;
+  Rx<bool> isIssueDateInvalid = false.obs;
+  Rx<bool> isExpiresonInvalid = false.obs;
+
+  
+
+  
+   RxBool isFormInvalid = false.obs;
   Rx<String> selectedStatutoryCompliance = ''.obs;
   int selectedStatutoryComplianceId = 0;
   bool openIssueDatePicker = false;
@@ -53,7 +60,7 @@ class ComplianceController extends GetxController {
       });
     } catch (e) {}
 
-    super.onInit();
+super.onInit();
   }
 
   Future<void> setUserId() async {
@@ -102,6 +109,10 @@ class ComplianceController extends GetxController {
   }
 
   void createCompliance() async {
+    checkCompiliace();
+    if (isFormInvalid.value) {
+      return;
+    }
     try {
       // checkForm();
       // if (isFormInvalid.value) {
@@ -152,6 +163,8 @@ class ComplianceController extends GetxController {
             selectedStatutoryComplianceId =
                 statutoryComplianceList[currencyIndex]?.id ?? 0;
             isStatutoryComplianceSelected.value = true;
+             selectedStatutoryCompliance.value = value;
+
             print(
                 "selectedBusinessTypeId: ${selectedStatutoryComplianceId} \n ${selectedStatutoryCompliance}");
           } else {
@@ -161,4 +174,22 @@ class ComplianceController extends GetxController {
         break;
     }
   }
+  void checkCompiliace(){
+    
+
+       if (selectedStatutoryCompliance.value == '') {
+        isStatutoryComplianceSelected.value=false;
+      isFormInvalid.value = true;
+    }
+        if (issueDateTc.text.trim().length < 3) {
+          isIssueDateInvalid.value=true;
+         isFormInvalid.value = true;
+    }
+
+       if (expireOnDateTc.text.trim().length < 3) {
+          isExpiresonInvalid.value=true;
+         isFormInvalid.value = true;
+    }
+    
+}
 }
