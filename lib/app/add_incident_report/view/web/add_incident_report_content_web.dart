@@ -242,7 +242,7 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                                             selectedValue:
                                                                                 controller.selectedRiskTypeList.value,
                                                                             onValueChanged:
-                                                                                controller.onValueChanged,
+                                                                                controller.onValuetypeincidentChanged,
                                                                           ),
                                                                         ),
                                                                       ),
