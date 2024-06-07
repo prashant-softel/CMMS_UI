@@ -1227,25 +1227,25 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                                           'Enter Landline Number',
                                                       textController: controller
                                                           .landlineCtrlr,
-                                                             //validation
-                                                           errorController: controller
-                                                          .isLandlineInvalid
-                                                          .value
-                                                      ? "Required field"
-                                                      : null,
+                                                  //            //validation
+                                                  //          errorController: controller
+                                                  //         .isLandlineInvalid
+                                                  //         .value
+                                                  //     ? "Required field"
+                                                  //     : null,
 
-                                                  onChanged: (value) {
-                                                    if (value.trim().length >
-                                                        0) {
-                                                      controller
-                                                          .isLandlineInvalid
-                                                          .value = false;
-                                                    } else {
-                                                      controller
-                                                          .isLandlineInvalid
-                                                          .value = true;
-                                                    }
-                                                  },
+                                                  // onChanged: (value) {
+                                                  //   if (value.trim().length >
+                                                  //       0) {
+                                                  //     controller
+                                                  //         .isLandlineInvalid
+                                                  //         .value = false;
+                                                  //   } else {
+                                                  //     controller
+                                                  //         .isLandlineInvalid
+                                                  //         .value = true;
+                                                  //   }
+                                                  // },
                                                     )),
                                               ],
                                             ),

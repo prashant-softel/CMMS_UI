@@ -1054,10 +1054,10 @@ class AddUserController extends GetxController {
       isDateofJoiningInvalid.value = true;
         isFormInvalid.value = true;
     }
-          if (landlineCtrlr.text.trim().length < 3) {
-      isLandlineInvalid.value = true;
-        isFormInvalid.value = true;
-    }
+    //       if (landlineCtrlr.text.trim().length < 3) {
+    //   isLandlineInvalid.value = true;
+    //     isFormInvalid.value = true;
+    // }
      if (selectedStateId == 0) {
       isSelectedState.value = false;
        isFormInvalid.value = true;
