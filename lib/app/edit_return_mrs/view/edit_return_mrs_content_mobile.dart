@@ -284,8 +284,7 @@ class CreateMrsReturnContentWeb extends GetView<CreateMrsReturnController> {
                                                         ),
                                                         child:
                                                             LoginCustomTextfield(
-                                                          inputFormatters: <
-                                                              TextInputFormatter>[
+                                                          inputFormatters: <TextInputFormatter>[
                                                             FilteringTextInputFormatter
                                                                 .digitsOnly
                                                           ],
@@ -310,7 +309,7 @@ class CreateMrsReturnContentWeb extends GetView<CreateMrsReturnController> {
                                                         ? Padding(
                                                             padding:
                                                                 const EdgeInsets
-                                                                        .only(
+                                                                    .only(
                                                                     top: 8.0),
                                                             child:
                                                                 CustomSwitchTroggle(
@@ -327,7 +326,7 @@ class CreateMrsReturnContentWeb extends GetView<CreateMrsReturnController> {
                                                             ? Padding(
                                                                 padding:
                                                                     const EdgeInsets
-                                                                            .all(
+                                                                        .all(
                                                                         8.0),
                                                                 child: Container(
                                                                     width: (Get.width * .4),
@@ -389,7 +388,8 @@ class CreateMrsReturnContentWeb extends GetView<CreateMrsReturnController> {
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            CustomRichText(title: "Comment:"),
+                            CustomRichText(
+                                title: "Comment:", includeAsterisk: false),
                             Dimens.boxWidth10,
                             Container(
                                 width: (Get.width * .6),

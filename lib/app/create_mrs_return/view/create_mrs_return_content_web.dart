@@ -937,7 +937,9 @@ class CreateMrsReturnContentWeb extends GetView<CreateMrsReturnController> {
                               child: Row(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  CustomRichText(title: "Comment:"),
+                                  CustomRichText(
+                                      title: "Comment:",
+                                      includeAsterisk: false),
                                   Dimens.boxWidth10,
                                   Container(
                                       width: (Get.width * .6),

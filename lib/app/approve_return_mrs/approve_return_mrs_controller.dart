@@ -5,6 +5,7 @@ import 'package:cmms/app/utils/utility.dart';
 import 'package:cmms/domain/models/get_return_mrs_detail.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import '../../domain/models/comment_model.dart';
 import '../home/home_controller.dart';
@@ -26,6 +27,7 @@ class ApproveReturnMrsController extends GetxController {
       ReturnMrsDetailsModel().obs;
   String whereUsedType = "";
   var commentCtrlr = TextEditingController();
+  Rx<bool> isFormInvalid = false.obs;
 
   ///
   @override
@@ -40,7 +42,8 @@ class ApproveReturnMrsController extends GetxController {
       });
       await setMrsId();
       if (mrsId != 0) {
-        await getReturnMrsDetails(mrsId: mrsId.value, isloading: true, facilityId: facilityId);
+        await getReturnMrsDetails(
+            mrsId: mrsId.value, isloading: true, facilityId: facilityId);
       }
       super.onInit();
     } catch (e) {
@@ -64,9 +67,11 @@ class ApproveReturnMrsController extends GetxController {
     }
   }
 
-  Future<void> getReturnMrsDetails({int? mrsId, bool? isloading,required int facilityId}) async {
-    final _returnMrsrsDetailsModel = await approveReturnMrsPresenter
-        .getReturnMrsDetails(mrsId: mrsId, isLoading: isloading, facilityId: facilityId);
+  Future<void> getReturnMrsDetails(
+      {int? mrsId, bool? isloading, required int facilityId}) async {
+    final _returnMrsrsDetailsModel =
+        await approveReturnMrsPresenter.getReturnMrsDetails(
+            mrsId: mrsId, isLoading: isloading, facilityId: facilityId);
 
     if (_returnMrsrsDetailsModel != null) {
       returnMrsDetailsModel.value = _returnMrsrsDetailsModel;
@@ -81,6 +86,11 @@ class ApproveReturnMrsController extends GetxController {
 
   approveReturnMrs() async {
     {
+      checkform();
+      if (isFormInvalid.value == true) {
+        Fluttertoast.showToast(msg: "Please Enter Comment!");
+        return;
+      }
       String _comment = commentCtrlr.text.trim();
 
       CommentModel commentModel =
@@ -97,8 +107,21 @@ class ApproveReturnMrsController extends GetxController {
     }
   }
 
+  void checkform() {
+    if (commentCtrlr.text == '') {
+      isFormInvalid.value = true;
+    } else {
+      isFormInvalid.value = false;
+    }
+  }
+
   rejectRetrunMrs() async {
     {
+      checkform();
+      if (isFormInvalid.value == true) {
+        Fluttertoast.showToast(msg: "Please Enter Comment!");
+        return;
+      }
       String _comment = commentCtrlr.text.trim();
 
       CommentModel commentModel =
