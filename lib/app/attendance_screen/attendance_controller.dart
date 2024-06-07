@@ -90,8 +90,8 @@ class AttendanceController extends GetxController {
     }
     for (int i = 0; i < attendanceModel.length; i++) {
       attendanceModel[i].present.value = false;
-      attendanceModel[i].inTime = null;
-      attendanceModel[i].outTime = null;
+      attendanceModel[i].inTime = "";
+      attendanceModel[i].outTime = "";
     }
     lessThan35.clear();
     between35To50.clear();
@@ -116,9 +116,18 @@ class AttendanceController extends GetxController {
   }
 
   Future<bool> addAttendance() async {
-    int _lessThan35 = int.parse(lessThan35.text);
-    int _between35To50 = int.parse(between35To50.text);
-    int _greaterThan50 = int.parse(greaterThan50.text);
+    int _lessThan35 = 0;
+    int _between35To50 = 0;
+    int _greaterThan50 = 0;
+    if (lessThan35.text != "") {
+      _lessThan35 = int.parse(lessThan35.text);
+    }
+    if (between35To50.text != "") {
+      _between35To50 = int.parse(between35To50.text);
+    }
+    if (greaterThan50.text != "") {
+      _greaterThan50 = int.parse(greaterThan50.text);
+    }
     String _purpose = purposeCtrl.text;
     ContractLabourAttendance contractAttendace = ContractLabourAttendance(
       lessThan35: _lessThan35,
@@ -139,8 +148,10 @@ class AttendanceController extends GetxController {
       jsonEmployeeAttendance: jsonEmployeeAttendance,
       isLoading: isLoading,
     );
+    if (_attendance) {
+      clearData();
+    }
     isLoading = false;
-    // Get.back();
     return true;
   }
 }

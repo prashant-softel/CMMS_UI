@@ -50,25 +50,23 @@ class AddUserController extends GetxController {
 
   Rx<bool> isSelectedCountry = true.obs;
   Rx<bool> isSelectedGender = true.obs;
-  
+
   Rx<bool> isLoginIDInvalid = false.obs;
-  
+
   Rx<bool> isPasswordInvalid = false.obs;
   Rx<bool> isLastNameInvalid = false.obs;
   Rx<bool> isDateofJoiningInvalid = false.obs;
   Rx<bool> isZipCodeInvalid = false.obs;
-  
+
   Rx<bool> isLandlineInvalid = false.obs;
-  
-  
+
   Rx<bool> isdobInvalid = false.obs;
 
-  
-  Rx<bool>isFirstNameInvalid= false.obs;
-  Rx<bool>isMobileNumberInvalid= false.obs;
-  
-  Rx<bool>isSecondaryEmailInvalid= false.obs;
-  
+  Rx<bool> isFirstNameInvalid = false.obs;
+  Rx<bool> isMobileNumberInvalid = false.obs;
+
+  Rx<bool> isSecondaryEmailInvalid = false.obs;
+
   Rx<bool> isFormInvalid = false.obs;
 
   int selectedCountryId = 0;
@@ -410,6 +408,8 @@ class AddUserController extends GetxController {
       selectedBusinessTypeId = userDetailModel.value?.company_id ?? 0;
       plantListModel.value = _userDetailModel.plant_list ?? [];
       responsList.value = _userDetailModel.responsibility ?? [];
+      selectedDesignation.value = _userDetailModel.designation_name ?? "";
+      selectedDesignationId.value = userDetailModel.value?.designation_id ?? 0;
       isEmployeeFacilityList.value = _userDetailModel.plant_list!
           .map((e) => IsEmployeeFacilityModel(
                 id: e.id ?? 0,
@@ -560,8 +560,8 @@ class AddUserController extends GetxController {
             selectedCityId = 0;
             selectedState.value = "Please Select";
             selectedStateId = 0;
-            isSelectedCountry.value=true;
-            selectedCountry.value=value;
+            isSelectedCountry.value = true;
+            selectedCountry.value = value;
 
             getStateList(selectedCountryId);
           } else {
@@ -577,7 +577,7 @@ class AddUserController extends GetxController {
           cityList.clear();
           selectedCity.value = "Please Select";
           selectedCityId = 0;
-          isSelectedState.value=true;
+          isSelectedState.value = true;
           getCityList(selectedStateId);
         }
         break;
@@ -585,8 +585,8 @@ class AddUserController extends GetxController {
         {
           int descIndex = designationList!.indexWhere((x) => x?.name == value);
           selectedDesignationId.value = designationList?[descIndex]?.id ?? 0;
-          isDesignationSelected.value=true;
-          selectedDesignation.value=value;
+          isDesignationSelected.value = true;
+          selectedDesignation.value = value;
           print(
             "designation id: ${selectedDesignationId.value} \ndesignation: ${selectedDesignationId.value}",
           );
@@ -596,7 +596,7 @@ class AddUserController extends GetxController {
         {
           int cityIndex = cityList.indexWhere((x) => x?.name == value);
           selectedCityId = cityList[cityIndex]?.id ?? 0;
-          isSelectedCity.value=true;
+          isSelectedCity.value = true;
         }
 
         break;
@@ -604,24 +604,24 @@ class AddUserController extends GetxController {
         {
           int genderIndex = genderList.indexWhere((x) => x?.name == value);
           selectedGenderId = genderList[genderIndex]?.id ?? 0;
-          isSelectedGender.value=true;
-          selectedGender.value=value;
+          isSelectedGender.value = true;
+          selectedGender.value = value;
         }
         break;
       case RxList<BloodModel>:
         {
           int bloodIndex = bloodList.indexWhere((x) => x?.name == value);
           selectedBloodId = bloodList[bloodIndex]?.id ?? 0;
-          isSelectedBlood.value=true;
-          selectedBlood.value=value;
+          isSelectedBlood.value = true;
+          selectedBlood.value = value;
         }
         break;
       case RxList<RoleModel>:
         {
           int roleIndex = roleList.indexWhere((x) => x?.name == value);
           selectedRoleId = roleList[roleIndex]?.id ?? 0;
-          isSelectedRole.value=true;
-          selectedRole.value=value;
+          isSelectedRole.value = true;
+          selectedRole.value = value;
           getRoleAccessList(roleId: selectedRoleId, isloading: true);
           getRoleNotificationList(roleId: selectedRoleId, isloading: true);
         }
@@ -630,7 +630,7 @@ class AddUserController extends GetxController {
         {
           int equipmentIndex = businessList.indexWhere((x) => x?.name == value);
           selectedBusinessTypeId = businessList[equipmentIndex]?.id ?? 0;
-           isBusinessListSelected.value = true;
+          isBusinessListSelected.value = true;
         }
         break;
       case RxList<FacilityModel>:
@@ -643,8 +643,8 @@ class AddUserController extends GetxController {
           selectedFacility.value = facilityNameList[facilityIndex]?.name ?? '';
           address.value = facilityNameList[facilityIndex]?.address ?? '';
           selectedFacilityId.value = facilityNameList[facilityIndex]?.id ?? 0;
-      isFacilitySelected.value = true;
-          
+          isFacilitySelected.value = true;
+
           print({"selected facality11": selectedFacility});
           print("facility selected $selectedFacilityId, $selectedFacility");
         }
@@ -743,11 +743,11 @@ class AddUserController extends GetxController {
   }
 
   Future<bool> addUser() async {
-       checkForm();
+    checkForm();
     if (isFormInvalid.value) {
-      return  true;
+      return true;
     }
-    
+
     List<AddAccessList> add_accessList = <AddAccessList>[];
     List<UserResponbility> reslist = <UserResponbility>[];
     List<DesignationModel> newselectedResNameList = []; // Copied list
@@ -830,10 +830,10 @@ class AddUserController extends GetxController {
   }
 
   Future<bool> updateUser() async {
-        checkForm();
-    if (isFormInvalid.value) {
-      return true;
-    }
+    // checkForm();
+    // if (isFormInvalid.value) {
+    //   return true;
+    // }
     List<UserResponbility> reslist = <UserResponbility>[];
     List<DesignationModel> newselectedResNameList = []; // Copied list
 
@@ -996,96 +996,84 @@ class AddUserController extends GetxController {
           onCheck(val);
         });
   }
-  void checkForm(){
-     if (loginIdCtrlr.text.trim().length < 3) {
+
+  void checkForm() {
+    if (loginIdCtrlr.text.trim().length < 3) {
       isLoginIDInvalid.value = true;
       isFormInvalid.value = true;
     }
-    if(firstNameCtrlr.text.trim().length<3){
-      isFirstNameInvalid.value=true;
-      isFormInvalid.value=true;
+    if (firstNameCtrlr.text.trim().length < 3) {
+      isFirstNameInvalid.value = true;
+      isFormInvalid.value = true;
     }
-    if(secandoryIdCtrlr.text.trim().length<3){
-      isSecondaryEmailInvalid.value=true;
-      isFormInvalid.value=true;
-
+    if (secandoryIdCtrlr.text.trim().length < 3) {
+      isSecondaryEmailInvalid.value = true;
+      isFormInvalid.value = true;
     }
-      if (selectedGenderId == 0) {
+    if (selectedGenderId == 0) {
       isSelectedGender.value = false;
-      isFormInvalid.value=true;
+      isFormInvalid.value = true;
     }
-       if (mobileNoCtrlr.text.trim().length < 3) {
+    if (mobileNoCtrlr.text.trim().length < 3) {
       isMobileNumberInvalid.value = true;
       isFormInvalid.value = true;
     }
-       if (selectedCountryId == 0) {
+    if (selectedCountryId == 0) {
       isSelectedCountry.value = false;
-       isFormInvalid.value = true;
-    
-  }
-         if (selectedCityId == 0) {
+      isFormInvalid.value = true;
+    }
+    if (selectedCityId == 0) {
       isSelectedCity.value = false;
-       isFormInvalid.value = true;
-    
-  }
-          if (selectedRoleId == 0) {
+      isFormInvalid.value = true;
+    }
+    if (selectedRoleId == 0) {
       isSelectedRole.value = false;
-       isFormInvalid.value = true;
-    
-  }
-       if (selectedBusinessTypeId == 0) {
+      isFormInvalid.value = true;
+    }
+    if (selectedBusinessTypeId == 0) {
       isBusinessListSelected.value = false;
-       isFormInvalid.value = true;
-    
-  }
-       if (passwordCtrlr.text.trim().length < 3) {
+      isFormInvalid.value = true;
+    }
+    if (passwordCtrlr.text.trim().length < 3) {
       isPasswordInvalid.value = true;
-        isFormInvalid.value = true;
+      isFormInvalid.value = true;
     }
-       if (lastNameCtrlr.text.trim().length < 3) {
+    if (lastNameCtrlr.text.trim().length < 3) {
       isLastNameInvalid.value = true;
-        isFormInvalid.value = true;
+      isFormInvalid.value = true;
     }
-         if (dobCtrlr.text.trim().length < 3) {
+    if (dobCtrlr.text.trim().length < 3) {
       isdobInvalid.value = true;
-        isFormInvalid.value = true;
+      isFormInvalid.value = true;
     }
-          if (joingdateCtrlr.text.trim().length < 3) {
+    if (joingdateCtrlr.text.trim().length < 3) {
       isDateofJoiningInvalid.value = true;
-        isFormInvalid.value = true;
+      isFormInvalid.value = true;
     }
-          if (landlineCtrlr.text.trim().length < 3) {
+    if (landlineCtrlr.text.trim().length < 3) {
       isLandlineInvalid.value = true;
-        isFormInvalid.value = true;
+      isFormInvalid.value = true;
     }
-     if (selectedStateId == 0) {
+    if (selectedStateId == 0) {
       isSelectedState.value = false;
-       isFormInvalid.value = true;
-    
-  }
-         if (zipcodeCtrlr.text.trim().length < 3) {
+      isFormInvalid.value = true;
+    }
+    if (zipcodeCtrlr.text.trim().length < 3) {
       isZipCodeInvalid.value = true;
-         isFormInvalid.value = true;
-    
-  }
-           if (selectedBloodId == 0 ) {
+      isFormInvalid.value = true;
+    }
+    if (selectedBloodId == 0) {
       isSelectedBlood.value = false;
-         isFormInvalid.value = true;
-    
-  }
-            if (selectedDesignationId ==0 ) {
+      isFormInvalid.value = true;
+    }
+    if (selectedDesignationId == 0) {
       isDesignationSelected.value = false;
-         isFormInvalid.value = true;
-    
+      isFormInvalid.value = true;
+    }
+    //            if (selectedFacility.value =="" ) {
+    //     isFacilitySelected.value = false;
+    //        isFormInvalid.value = true;
+
+    // }
   }
-  //            if (selectedFacility.value =="" ) {
-  //     isFacilitySelected.value = false;
-  //        isFormInvalid.value = true;
-    
-  // }
-  
-
-
-
-}
 }

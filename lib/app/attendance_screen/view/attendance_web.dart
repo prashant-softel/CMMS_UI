@@ -330,7 +330,6 @@ class AttendanceWeb extends GetView<AttendanceController> {
               text: "Submit",
               onPressed: () {
                 controller.addAttendance();
-                controller.clearData();
               },
             ),
           ),
