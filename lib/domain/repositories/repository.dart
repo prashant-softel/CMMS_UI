@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:developer';
 import 'dart:typed_data';
 import 'package:cmms/domain/models/Statutory_Compliance_model.dart';
+import 'package:cmms/domain/models/attendance_list_model.dart';
 import 'package:cmms/domain/models/course_category_model.dart';
 import 'package:cmms/domain/models/dashboard_model.dart';
 import 'package:cmms/domain/models/dsm_list_model.dart';
@@ -13678,6 +13679,32 @@ class Repository {
     }
   }
 
+  Future<List<AttendanceListModel>> getAttendanceList({
+    required int facilityId,
+    required String year,
+    bool? isLoading,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getAttendanceList(
+        auth: auth,
+        facilityId: facilityId,
+        year: year,
+        isLoading: isLoading,
+      );
+      if (!res.hasError) {
+        var attendanceDataList = AttendanceListModelFromJson(res.data);
+        return attendanceDataList;
+      } else {
+        Utility.showDialog(res.errorCode.toString(), 'getdsmDataList');
+        return [];
+      }
+    } catch (error) {
+      print(error.toString());
+      return [];
+    }
+  }
+
   Future<List<DSMData>> getDSMData({
     List<String>? selectedYear,
     List<String>? selectedMonth,
@@ -13700,9 +13727,7 @@ class Repository {
       if (!res.hasError) {
         var dsmDataList = dsmDataFromJson(res.data);
         return dsmDataList;
-      }
-//
-      else {
+      } else {
         Utility.showDialog(res.errorCode.toString(), 'getdsmDataList');
         return [];
       }
