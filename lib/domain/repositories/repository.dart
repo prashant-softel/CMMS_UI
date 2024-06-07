@@ -13666,7 +13666,7 @@ class Repository {
 
       if (!res.hasError) {
         if (res.errorCode == 200) {
-          print('attendance error');
+          Get.toNamed(Routes.admin_dashboard);
           return true;
         }
       } else {
