@@ -1,7 +1,9 @@
 import 'package:cmms/app/app.dart';
+import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/incident_risk_type/incident_risk_type_controller.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
+import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -60,10 +62,10 @@ class IncidentRiskTypeWeb extends GetView<IncidentRiskTypeController> {
                     ),
                     InkWell(
                       onTap: () {
-                        Get.offNamed(Routes.incidentReportDashboard);
+                        Get.offNamed(Routes.masterDashboard);
                       },
                       child: Text(
-                        " / INCIDENT REPORT",
+                        " / MASTERS",
                         style: Styles.greyLight14,
                       ),
                     ),
@@ -74,22 +76,30 @@ class IncidentRiskTypeWeb extends GetView<IncidentRiskTypeController> {
                   ],
                 ),
               ),
-              Padding(
-                padding: EdgeInsets.only(left: 10, top: 10),
-                child: ElevatedButton(
-                  style: Styles.navyBlueElevatedButtonStyle,
-                  onPressed: () {
-                    controller.toggleContainer();
-                  },
-                  child: Obx(() {
-                    return Text(
-                      controller.isContainerVisible.value
-                          ? 'Close Incident Risk Type'
-                          : 'Open Create Incident Risk',
-                    );
-                  }),
-                ),
-              ),
+              varUserAccessModel.value.access_list!
+                          .where((e) =>
+                              e.feature_id ==
+                                  UserAccessConstants.kMasterFeatureId &&
+                              e.add == UserAccessConstants.kHaveAddAccess)
+                          .length >
+                      0
+                  ? Padding(
+                      padding: EdgeInsets.only(left: 10, top: 10),
+                      child: ElevatedButton(
+                        style: Styles.navyBlueElevatedButtonStyle,
+                        onPressed: () {
+                          controller.toggleContainer();
+                        },
+                        child: Obx(() {
+                          return Text(
+                            controller.isContainerVisible.value
+                                ? 'Close Incident Risk Type'
+                                : 'Open Create Incident Risk',
+                          );
+                        }),
+                      ),
+                    )
+                  : Dimens.box0,
               Expanded(
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -289,132 +299,6 @@ class IncidentRiskTypeWeb extends GetView<IncidentRiskTypeController> {
                                           ],
                                         ),
                                         Dimens.boxHeight10,
-                                        // Row(
-                                        //   mainAxisAlignment:
-                                        //       MainAxisAlignment.spaceBetween,
-                                        //   children: [
-                                        //     Expanded(
-                                        //         child: CustomRichText(
-                                        //             title: 'Description ')),
-                                        //     Container(
-                                        //       width: (MediaQuery.of(context)
-                                        //               .size
-                                        //               .width *
-                                        //           .2),
-                                        //       height: 30,
-                                        //       decoration: BoxDecoration(
-                                        //         boxShadow: [
-                                        //           BoxShadow(
-                                        //             color: Colors.black26,
-                                        //             offset: const Offset(
-                                        //               5.0,
-                                        //               5.0,
-                                        //             ),
-                                        //             blurRadius: 5.0,
-                                        //             spreadRadius: 1.0,
-                                        //           ),
-                                        //           BoxShadow(
-                                        //             color:
-                                        //                 ColorValues.whiteColor,
-                                        //             offset:
-                                        //                 const Offset(0.0, 0.0),
-                                        //             blurRadius: 0.0,
-                                        //             spreadRadius: 0.0,
-                                        //           ),
-                                        //         ],
-                                        //         color: ColorValues.whiteColor,
-                                        //         borderRadius:
-                                        //             BorderRadius.circular(5),
-                                        //       ),
-                                        //       child: TextField(
-                                        //         style: TextStyle(
-                                        //             fontSize: 14.0,
-                                        //             height: 1.0,
-                                        //             color: Colors.black),
-                                        //         controller:
-                                        //             controller.descriptionCtrlr,
-                                        //         focusNode:
-                                        //             controller.bodypdescFocus,
-                                        //         scrollController:
-                                        //             controller.bodypdescScroll,
-                                        //         keyboardType:
-                                        //             TextInputType.multiline,
-                                        //         autofocus: false,
-                                        //         decoration: InputDecoration(
-                                        //           fillColor:
-                                        //               ColorValues.whiteColor,
-                                        //           filled: true,
-                                        //           contentPadding:
-                                        //               EdgeInsets.only(
-                                        //                   left: 5, right: 5),
-                                        //           border: InputBorder.none,
-                                        //           enabledBorder:
-                                        //               OutlineInputBorder(
-                                        //             borderRadius:
-                                        //                 BorderRadius.circular(
-                                        //                     10.0),
-                                        //             borderSide: BorderSide(
-                                        //                 color:
-                                        //                     Colors.transparent),
-                                        //           ),
-                                        //           focusedBorder:
-                                        //               OutlineInputBorder(
-                                        //             borderRadius:
-                                        //                 BorderRadius.circular(
-                                        //                     10.0),
-                                        //             borderSide: BorderSide(
-                                        //                 color:
-                                        //                     Colors.transparent),
-                                        //           ),
-                                        //           focusedErrorBorder: controller
-                                        //                   .isDescriptionInvalid
-                                        //                   .value
-                                        //               ? OutlineInputBorder(
-                                        //                   borderRadius:
-                                        //                       BorderRadius
-                                        //                           .circular(5),
-                                        //                   borderSide:
-                                        //                       BorderSide(
-                                        //                     color: ColorValues
-                                        //                         .redColorDark,
-                                        //                   ),
-                                        //                 )
-                                        //               : InputBorder.none,
-                                        //           errorBorder: controller
-                                        //                   .isDescriptionInvalid
-                                        //                   .value
-                                        //               ? OutlineInputBorder(
-                                        //                   borderRadius:
-                                        //                       BorderRadius
-                                        //                           .circular(5),
-                                        //                   borderSide:
-                                        //                       BorderSide(
-                                        //                     color: ColorValues
-                                        //                         .redColorDark,
-                                        //                   ),
-                                        //                 )
-                                        //               : null,
-                                        //           errorText: controller
-                                        //                   .isDescriptionInvalid
-                                        //                   .value
-                                        //               ? "Required field"
-                                        //               : null,
-                                        //         ),
-                                        //         onChanged: (value) {
-                                        //           if (value.trim().length > 1) {
-                                        //             controller
-                                        //                 .isDescriptionInvalid
-                                        //                 .value = false;
-                                        //           } else {
-                                        //             controller
-                                        //                 .isDescriptionInvalid
-                                        //                 .value = true;
-                                        //           }
-                                        //         },
-                                        //       ),
-                                        //     ),
-                                        //   ],
-                                        // ),
                                         SizedBox(
                                           height: 40,
                                         ),
@@ -433,6 +317,8 @@ class IncidentRiskTypeWeb extends GetView<IncidentRiskTypeController> {
                                             ColorValues.appRedColor,
                                         onPressed: () {
                                           controller.cleardata();
+                                          controller.isContainerVisible.value =
+                                              false;
                                         },
                                         text: 'Cancel'),
                                   ),
@@ -571,120 +457,143 @@ class IncidentRiskTypeWeb extends GetView<IncidentRiskTypeController> {
                                 height: 20,
                               ),
                               controller.incidentrisktypeList.isEmpty == true &&
-                                    controller.isLoading == false
-                                ? Center(child: Text("No Data"))
-                                : controller.isLoading.value == true
-                                    ? Center(child: Text("Data Loading......"))
-                              :Expanded(
-                                child: Obx(
-                                  () => DataTable2(
-                                    key: UniqueKey(),
-                                    dataRowHeight: 50,
-                                    columnSpacing: 10,
-                                    border: TableBorder.all(
-                                        color:
-                                            Color.fromARGB(255, 206, 229, 234)),
-                                    columns: [
-                                      DataColumn2(
-                                          fixedWidth: 100,
-                                          label: Text(
-                                            "Sr No",
-                                            style: TextStyle(
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.bold),
-                                          )),
-                                      DataColumn2(
-                                          // fixedWidth: 150,
-                                          label: Text(
-                                        "Risk Name",
-                                        style: TextStyle(
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.bold),
-                                      )),
-                                      // DataColumn2(
-                                      //     // fixedWidth: 300,
-                                      //     label: Text(
-                                      //   "Description",
-                                      //   style: TextStyle(
-                                      //       fontSize: 15,
-                                      //       fontWeight: FontWeight.bold),
-                                      // )),
-                                      DataColumn2(
-                                          fixedWidth: 100,
-                                          label: Text(
-                                            'Action',
-                                            style: TextStyle(
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.bold),
-                                          )),
-                                    ],
-                                    rows: List<DataRow>.generate(
-                                      controller.incidentrisktypeList.length,
-                                      (index) => DataRow(cells: [
-                                        DataCell(Text((index + 1).toString())),
-                                        DataCell(Text(controller
-                                            .incidentrisktypeList[index].name
-                                            .toString())),
-                                        // DataCell(Text(controller
-                                        //         .incidentrisktypeList[index]
-                                        //         .description ??
-                                        //     '')),
-                                        DataCell(Row(
-                                          children: [
-                                            TableActionButton(
-                                              color: ColorValues.editColor,
-                                              icon: Icons.edit,
-                                              message: 'Edit',
-                                              onPress: () {
-                                                controller.selectedItem =
-                                                    controller
-                                                        .incidentrisktypeList
-                                                        .firstWhere(
-                                                  (element) =>
-                                                      "${element.id}" ==
-                                                      controller
-                                                          .incidentrisktypeList[
-                                                              index]
-                                                          .id
-                                                          .toString(),
-                                                );
+                                      controller.isLoading == false
+                                  ? Center(child: Text("No Data"))
+                                  : controller.isLoading.value == true
+                                      ? Center(
+                                          child: Text("Data Loading......"))
+                                      : Expanded(
+                                          child: Obx(
+                                            () => DataTable2(
+                                              key: UniqueKey(),
+                                              dataRowHeight: 50,
+                                              columnSpacing: 10,
+                                              border: TableBorder.all(
+                                                  color: Color.fromARGB(
+                                                      255, 206, 229, 234)),
+                                              columns: [
+                                                DataColumn2(
+                                                    fixedWidth: 100,
+                                                    label: Text(
+                                                      "Sr No",
+                                                      style: TextStyle(
+                                                          fontSize: 15,
+                                                          fontWeight:
+                                                              FontWeight.bold),
+                                                    )),
+                                                DataColumn2(
+                                                    // fixedWidth: 150,
+                                                    label: Text(
+                                                  "Risk Name",
+                                                  style: TextStyle(
+                                                      fontSize: 15,
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                )),
+                                                DataColumn2(
+                                                    fixedWidth: 100,
+                                                    label: Text(
+                                                      'Action',
+                                                      style: TextStyle(
+                                                          fontSize: 15,
+                                                          fontWeight:
+                                                              FontWeight.bold),
+                                                    )),
+                                              ],
+                                              rows: List<DataRow>.generate(
+                                                controller.incidentrisktypeList
+                                                    .length,
+                                                (index) => DataRow(cells: [
+                                                  DataCell(Text(
+                                                      (index + 1).toString())),
+                                                  DataCell(Text(controller
+                                                      .incidentrisktypeList[
+                                                          index]
+                                                      .name
+                                                      .toString())),
+                                                  DataCell(Row(
+                                                    children: [
+                                                      varUserAccessModel.value
+                                                                  .access_list!
+                                                                  .where((e) =>
+                                                                      e.feature_id ==
+                                                                          UserAccessConstants
+                                                                              .kMasterFeatureId &&
+                                                                      e.edit ==
+                                                                          UserAccessConstants
+                                                                              .kHaveEditAccess)
+                                                                  .length >
+                                                              0
+                                                          ? TableActionButton(
+                                                              color: ColorValues
+                                                                  .editColor,
+                                                              icon: Icons.edit,
+                                                              message: 'Edit',
+                                                              onPress: () {
+                                                                controller
+                                                                        .selectedItem =
+                                                                    controller
+                                                                        .incidentrisktypeList
+                                                                        .firstWhere(
+                                                                  (element) =>
+                                                                      "${element.id}" ==
+                                                                      controller
+                                                                          .incidentrisktypeList[
+                                                                              index]
+                                                                          .id
+                                                                          .toString(),
+                                                                );
 
-                                                controller.titleCtrlr.text =
-                                                    controller.selectedItem
-                                                            ?.name ??
-                                                        '';
-                                                // controller.descriptionCtrlr
-                                                //     .text = controller
-                                                //         .selectedItem
-                                                //         ?.description ??
-                                                //     '';
-
-                                                controller.isContainerVisible
-                                                    .value = true;
-                                              },
+                                                                controller
+                                                                    .titleCtrlr
+                                                                    .text = controller
+                                                                        .selectedItem
+                                                                        ?.name ??
+                                                                    '';
+                                                                controller
+                                                                    .isContainerVisible
+                                                                    .value = true;
+                                                              },
+                                                            )
+                                                          : Dimens.box0,
+                                                      varUserAccessModel.value
+                                                                  .access_list!
+                                                                  .where((e) =>
+                                                                      e.feature_id ==
+                                                                          UserAccessConstants
+                                                                              .kMasterFeatureId &&
+                                                                      e.delete ==
+                                                                          UserAccessConstants
+                                                                              .kHaveDeleteAccess)
+                                                                  .length >
+                                                              0
+                                                          ? TableActionButton(
+                                                              color: ColorValues
+                                                                  .deleteColor,
+                                                              icon:
+                                                                  Icons.delete,
+                                                              message: 'Delete',
+                                                              onPress: () {
+                                                                controller.isDeleteDialog(
+                                                                    risktype_id: controller
+                                                                        .incidentrisktypeList[
+                                                                            index]
+                                                                        .id
+                                                                        .toString(),
+                                                                    irisktype: controller
+                                                                        .incidentrisktypeList[
+                                                                            index]
+                                                                        .name);
+                                                              },
+                                                            )
+                                                          : Dimens.box0
+                                                    ],
+                                                  )),
+                                                ]),
+                                              ),
                                             ),
-                                            TableActionButton(
-                                              color: ColorValues.deleteColor,
-                                              icon: Icons.delete,
-                                              message: 'Delete',
-                                              onPress: () {
-                                                controller.isDeleteDialog(
-                                                    risktype_id: controller
-                                                        .incidentrisktypeList[index]
-                                                        .id
-                                                        .toString(),
-                                                    irisktype: controller
-                                                        .incidentrisktypeList[index]
-                                                        .name);
-                                              },
-                                            ),
-                                          ],
-                                        )),
-                                      ]),
-                                    ),
-                                  ),
-                                ),
-                              ),
+                                          ),
+                                        ),
                             ],
                           ),
                         ),
