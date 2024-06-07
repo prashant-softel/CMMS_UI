@@ -103,7 +103,6 @@ class ViewPmPlanController extends GetxController {
       await checkform();
       if (isFormInvalid.value == true) {
         Fluttertoast.showToast(msg: "Please Enter Comment!");
-
         return;
       }
       String _comment = approveCommentTextFieldCtrlr.text.trim();
