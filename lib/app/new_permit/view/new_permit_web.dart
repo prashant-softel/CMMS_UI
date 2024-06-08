@@ -2074,7 +2074,8 @@ class NewPermitWeb extends GetView<NewPermitController> {
                             ),
                           ),
                           Dimens.boxHeight20,
-                          controller.jobModel?.id != null
+                          controller.jobModel?.id != null &&
+                                  controller.permitId.value == 0
                               ? Center(
                                   child: Container(
                                       height: 45,
