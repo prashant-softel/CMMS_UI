@@ -169,7 +169,9 @@ class WasteDisposedAddDialog extends GetView {
                       child: SizedBox(
                         child: DropdownWebStock(
                           width: MediaQuery.of(context).size.width / 5,
-                          dropdownList: controller.typeOfWasteList,
+                          dropdownList: controller.hazardous == 1
+                              ? controller.hazWasteList
+                              : controller.nonHazWasteList,
                           isValueSelected:
                               controller.istypeOfWasteListSelected.value,
                           selectedValue: controller.selectedtypeOfWaste.value,

@@ -1945,6 +1945,7 @@ class DataRepository extends DomainRepository {
     String? start_date,
     required String end_date,
     required bool isLoading,
+    required int isHazardous,
     required String auth,
   }) async {
     return await connectHelper.getWasteDataList(
@@ -1953,6 +1954,7 @@ class DataRepository extends DomainRepository {
       facility_id: facility_id,
       start_date: start_date,
       end_date: end_date,
+      isHazardous: isHazardous,
     );
   }
 

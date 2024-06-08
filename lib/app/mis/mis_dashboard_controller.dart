@@ -131,10 +131,8 @@ class MisDashboardController extends GetxController {
 
   void goToHazardousDataScreen() {
     Get.toNamed(
-      Routes.viewWasteData,
+      Routes.wasteData,
       arguments: {
-        'monthId': 4,
-        'year': 2024,
         'hazardous': 1,
       },
     );
@@ -142,10 +140,8 @@ class MisDashboardController extends GetxController {
 
   void goToNonHazardousDataScreen() {
     Get.toNamed(
-      Routes.viewWasteData,
+      Routes.wasteData,
       arguments: {
-        'monthId': 4,
-        'year': 2024,
         'hazardous': 0,
       },
     );
