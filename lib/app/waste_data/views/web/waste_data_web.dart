@@ -42,28 +42,57 @@ class WasteDataWeb extends GetView<WasteDataController> {
         child: Center(
             child: Wrap(
           children: [
+            // TableActionButton(
+            //   color: ColorValues.appGreenColor,
+            //   icon: Icons.compost,
+            //   message: 'Non-Hazardous',
+            //   onPress: () {
+            //     Get.toNamed(Routes.viewWasteData, arguments: {
+            //       "monthId": data.month_id,
+            //       "hazardous": 0,
+            //       "year": data.year
+            //     });
+            //   },
+            // ),
             TableActionButton(
-              color: ColorValues.appGreenColor,
-              icon: Icons.compost,
-              message: 'Non-Hazardous',
+              color: ColorValues.viewColor,
+              icon: Icons.remove_red_eye_outlined,
+              message: 'view',
               onPress: () {
-                Get.toNamed(Routes.viewWasteData, arguments: {
-                  "monthId": data.month_id,
-                  "hazardous": 0,
-                  "year": data.year
-                });
+                Get.toNamed(
+                  Routes.viewWasteData,
+                  arguments: {
+                    "monthId": data.month_id,
+                    "year": data.year,
+                  },
+                );
               },
             ),
+            // TableActionButton(
+            //   color: ColorValues.appRedColor,
+            //   icon: Icons.warning,
+            //   message: 'Hazardous',
+            //   onPress: () {
+            //     Get.toNamed(Routes.viewWasteData, arguments: {
+            //       "monthId": data.month_id,
+            //       "hazardous": 1,
+            //       "year": data.year
+            //     });
+            //   },
+            // ),
             TableActionButton(
-              color: ColorValues.appRedColor,
-              icon: Icons.warning,
-              message: 'Hazardous',
+              color: ColorValues.editColor,
+              icon: Icons.edit,
+              message: 'Edit',
               onPress: () {
-                Get.toNamed(Routes.viewWasteData, arguments: {
-                  "monthId": data.month_id,
-                  "hazardous": 1,
-                  "year": data.year
-                });
+                Get.toNamed(
+                  Routes.viewWasteData,
+                  arguments: {
+                    "monthId": data.month_id,
+                    "hazardous": controller.hazardous.value,
+                    "year": data.year
+                  },
+                );
               },
             ),
           ],
@@ -124,29 +153,40 @@ class WasteDataWeb extends GetView<WasteDataController> {
                       ),
                     ],
                   ),
-                  child: Row(
-                    children: [
-                      Icon(
-                        Icons.home,
-                        color: ColorValues.greyLightColor,
-                      ),
-                      InkWell(
-                        onTap: () {
-                          Get.offNamed(Routes.home);
-                        },
-                        child: Text(
-                          "DASHBOARD",
-                          style: Styles.greyLight14,
+                  child: Obx(
+                    () => Row(
+                      children: [
+                        Icon(
+                          Icons.home,
+                          color: ColorValues.greyLightColor,
                         ),
-                      ),
-                      InkWell(
-                        onTap: () {
-                          Get.offNamed(Routes.misDashboard);
-                        },
-                        child: Text(" / MIS", style: Styles.greyLight14),
-                      ),
-                      Text(" / WASTE DATA LIST", style: Styles.greyLight14)
-                    ],
+                        InkWell(
+                          onTap: () {
+                            Get.offNamed(Routes.home);
+                          },
+                          child: Text(
+                            "DASHBOARD",
+                            style: Styles.greyLight14,
+                          ),
+                        ),
+                        InkWell(
+                          onTap: () {
+                            controller.clearStoreData();
+                            Get.offNamed(Routes.misDashboard);
+                          },
+                          child: Text(" / MIS", style: Styles.greyLight14),
+                        ),
+                        controller.hazardous.value == 0
+                            ? Text(
+                                " / NON-HAZARDOUS WASTE",
+                                style: Styles.greyLight14,
+                              )
+                            : Text(
+                                " / HAZARDOUS WASTE",
+                                style: Styles.greyLight14,
+                              ),
+                      ],
+                    ),
                   ),
                 ),
                 Stack(

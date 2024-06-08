@@ -183,415 +183,535 @@ class ViewIncidentReportContentWeb
                                                 ),
                                               ),
                                               Dimens.boxHeight10,
-                                              Row(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  Padding(
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                            left: 10),
-                                                    child: Column(
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .end,
-                                                      children: [
-                                                        CustomRichText(
-                                                            title: 'Id: '),
-                                                        Dimens.boxHeight5,
-                                                        CustomRichText(
-                                                            title: 'Plant: '),
-                                                        Dimens.boxHeight5,
-                                                        CustomRichText(
-                                                            title: 'Block: '),
-                                                        Dimens.boxHeight5,
-                                                        CustomRichText(
-                                                            title:
-                                                                'Incident Date & Time: '),
-                                                        Dimens.boxHeight5,
-                                                        CustomRichText(
-                                                            title:
-                                                                'Incident Description: '),
-                                                        Dimens.boxHeight5,
-                                                        CustomRichText(
-                                                            title:
-                                                                'Victim Name: '),
-                                                        Dimens.boxHeight5,
-                                                        CustomRichText(
-                                                            title:
-                                                                'Incident Investigation Done By: '),
-                                                        Dimens.boxHeight5,
-                                                        CustomRichText(
-                                                            title:
-                                                                'Risk Type: '),
-                                                        Dimens.boxHeight5,
-                                                        CustomRichText(
-                                                            title:
-                                                                'Legal Applicability: '),
-                                                        Dimens.boxHeight5,
-                                                        CustomRichText(
-                                                            title:
-                                                                'Damaged Assets cost approx.: '),
-                                                        Dimens.boxHeight5,
-                                                        CustomRichText(
-                                                            title:
-                                                                'Asset Restoration action taken by: '),
-                                                        Dimens.boxHeight5,
-                                                        CustomRichText(
-                                                            title:
-                                                                'Insurance Available: '),
-                                                        Dimens.boxHeight5,
-                                                        CustomRichText(
-                                                            title:
-                                                                'Insurance Status: '),
-                                                        Dimens.boxHeight5,
-                                                        CustomRichText(
-                                                            title:
-                                                                'Insurance Remarks: '),
-                                                        Dimens.boxHeight5,
-                                                      ],
-                                                    ),
-                                                  ),
-                                                  SizedBox(
-                                                    width: 10,
-                                                  ),
-                                                  Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      Text(
-                                                        '${controller.incidentReportDetailsModel.value?.id}',
-                                                        style: TextStyle(
-                                                            color:
-                                                                Color.fromARGB(
-                                                                    255,
-                                                                    5,
-                                                                    92,
-                                                                    163)),
-                                                      ),
-                                                      Dimens.boxHeight5,
-                                                      Text(
-                                                        '${controller.incidentReportDetailsModel.value?.facility_name}',
-                                                        style: TextStyle(
-                                                            color:
-                                                                Color.fromARGB(
-                                                                    255,
-                                                                    5,
-                                                                    92,
-                                                                    163)),
-                                                      ),
-                                                      Dimens.boxHeight5,
-                                                      Text(
-                                                        '${controller.incidentReportDetailsModel.value?.block_name}',
-                                                        style: TextStyle(
-                                                            color:
-                                                                Color.fromARGB(
-                                                                    255,
-                                                                    5,
-                                                                    92,
-                                                                    163)),
-                                                      ),
-                                                      Dimens.boxHeight5,
-                                                      Text(
-                                                        '${controller.incidentDateTimeCtrlrWeb.text}',
-                                                        style: TextStyle(
-                                                            color:
-                                                                Color.fromARGB(
-                                                                    255,
-                                                                    5,
-                                                                    92,
-                                                                    163)),
-                                                      ),
-                                                      Dimens.boxHeight4,
-                                                      SizedBox(
-                                                        width: 150,
-                                                        child: Text(
-                                                          '${controller.incidentReportDetailsModel.value?.description}',
-                                                          overflow: TextOverflow
-                                                              .ellipsis,
-                                                          style: TextStyle(
-                                                              color: Color
-                                                                  .fromARGB(
-                                                                      255,
-                                                                      5,
-                                                                      92,
-                                                                      163)),
-                                                        ),
-                                                      ),
-                                                      Dimens.boxHeight5,
-                                                      Text(
-                                                        '${controller.incidentReportDetailsModel.value?.victim_name}',
-                                                        style: TextStyle(
-                                                            color:
-                                                                Color.fromARGB(
-                                                                    255,
-                                                                    5,
-                                                                    92,
-                                                                    163)),
-                                                      ),
-                                                      Dimens.boxHeight5,
-                                                      Text(
-                                                        '${controller.incidentReportDetailsModel.value?.inverstigated_by_name}',
-                                                        style: TextStyle(
-                                                            color:
-                                                                Color.fromARGB(
-                                                                    255,
-                                                                    5,
-                                                                    92,
-                                                                    163)),
-                                                      ),
-                                                      Dimens.boxHeight5,
-                                                      Text(
-                                                        '${controller.incidentReportDetailsModel.value?.risk_type_name}',
-                                                        style: TextStyle(
-                                                            color:
-                                                                Color.fromARGB(
-                                                                    255,
-                                                                    5,
-                                                                    92,
-                                                                    163)),
-                                                      ),
-                                                      Text(
-                                                        '${controller.incidentReportDetailsModel.value?.legal_applicability_name}',
-                                                        style: TextStyle(
-                                                            color:
-                                                                Color.fromARGB(
-                                                                    255,
-                                                                    5,
-                                                                    92,
-                                                                    163)),
-                                                      ),
-                                                      Dimens.boxHeight5,
-                                                      Text(
-                                                        '${controller.incidentReportDetailsModel.value?.damaged_cost} INR',
-                                                        style: TextStyle(
-                                                            color:
-                                                                Color.fromARGB(
-                                                                    255,
-                                                                    5,
-                                                                    92,
-                                                                    163)),
-                                                      ),
-                                                      Dimens.boxHeight4,
-                                                      Text(
-                                                        '${controller.incidentReportDetailsModel.value?.action_taken_by_name}',
-                                                        style: TextStyle(
-                                                            color:
-                                                                Color.fromARGB(
-                                                                    255,
-                                                                    5,
-                                                                    92,
-                                                                    163)),
-                                                      ),
-                                                      Dimens.boxHeight5,
-                                                      Text(
-                                                        '${controller.incidentReportDetailsModel.value?.is_insurance_applicable_name}',
-                                                        style: TextStyle(
-                                                            color:
-                                                                Color.fromARGB(
-                                                                    255,
-                                                                    5,
-                                                                    92,
-                                                                    163)),
-                                                      ),
-                                                      Dimens.boxHeight4,
-                                                      Text(
-                                                        '${controller.incidentReportDetailsModel.value?.insurance_status_name}',
-                                                        style: TextStyle(
-                                                            color:
-                                                                Color.fromARGB(
-                                                                    255,
-                                                                    5,
-                                                                    92,
-                                                                    163)),
-                                                      ),
-                                                      Dimens.boxHeight4,
-                                                      SizedBox(
-                                                        width: 300,
-                                                        child: Text(
-                                                          '${controller.incidentReportDetailsModel.value?.insurance_remark}',
-                                                          style: TextStyle(
-                                                              color: Color
-                                                                  .fromARGB(
-                                                                      255,
-                                                                      5,
-                                                                      92,
-                                                                      163)),
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
-
-                                                  /////
-                                                  Spacer(),
-                                                  Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment.end,
-                                                    children: [
-                                                      CustomRichText(
-                                                          title: 'Title: '),
-                                                      Dimens.boxHeight5,
-                                                      CustomRichText(
-                                                          title:
-                                                              'Equipment Categories: '),
-                                                      Dimens.boxHeight5,
-                                                      CustomRichText(
-                                                          title:
-                                                              'Reporting Date & Time: '),
-                                                      Dimens.boxHeight5,
-                                                      CustomRichText(
-                                                          title:
-                                                              'Incident Severity: '),
-                                                      Dimens.boxHeight5,
-                                                      CustomRichText(
-                                                          title:
-                                                              'Action Taken Date & Time: '),
-                                                      Dimens.boxHeight5,
-                                                      CustomRichText(
-                                                          title:
-                                                              'Incident Investigation Verification done by: '),
-                                                      Dimens.boxHeight5,
-                                                      CustomRichText(
-                                                          title:
-                                                              'ESI Applicability: '),
-                                                      Dimens.boxHeight5,
-                                                      CustomRichText(
-                                                          title:
-                                                              'RCA Upload Required: '),
-                                                      Dimens.boxHeight5,
-                                                      CustomRichText(
-                                                          title:
-                                                              'Gen loss due to asset damage: '),
-                                                      Dimens.boxHeight5,
-                                                    ],
-                                                  ),
-                                                  SizedBox(
-                                                    width: 10,
-                                                  ),
-                                                  Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      Text(
-                                                        '${controller.incidentReportDetailsModel.value?.title}',
-                                                        style: TextStyle(
-                                                            color:
-                                                                Color.fromARGB(
-                                                                    255,
-                                                                    5,
-                                                                    92,
-                                                                    163)),
-                                                      ),
-                                                      Dimens.boxHeight4,
-                                                      Text(
-                                                        '${controller.incidentReportDetailsModel.value?.equipment_name}',
-                                                        style: TextStyle(
-                                                            color:
-                                                                Color.fromARGB(
-                                                                    255,
-                                                                    5,
-                                                                    92,
-                                                                    163)),
-                                                      ),
-                                                      Dimens.boxHeight5,
-                                                      Text(
-                                                        '${controller.reportingDateTimeCtrlrWeb.text}',
-                                                        style: TextStyle(
-                                                            color:
-                                                                Color.fromARGB(
-                                                                    255,
-                                                                    5,
-                                                                    92,
-                                                                    163)),
-                                                      ),
-                                                      Dimens.boxHeight5,
-                                                      Text(
-                                                        '${controller.incidentReportDetailsModel.value?.severity}',
-                                                        style: TextStyle(
-                                                            color: Colors.red),
-                                                      ),
-                                                      Dimens.boxHeight5,
-                                                      Text(
-                                                        '${controller.actionTakenDateTimeCtrlrWeb.text}',
-                                                        style: TextStyle(
-                                                            color:
-                                                                Color.fromARGB(
-                                                                    255,
-                                                                    5,
-                                                                    92,
-                                                                    163)),
-                                                      ),
-                                                      Dimens.boxHeight4,
-                                                      Text(
-                                                        '${controller.incidentReportDetailsModel.value?.verified_by_name}',
-                                                        style: TextStyle(
-                                                            color:
-                                                                Color.fromARGB(
-                                                                    255,
-                                                                    5,
-                                                                    92,
-                                                                    163)),
-                                                      ),
-                                                      Dimens.boxHeight5,
-                                                      Text(
-                                                        '${controller.incidentReportDetailsModel.value?.esi_applicability_name}',
-                                                        style: TextStyle(
-                                                            color:
-                                                                Color.fromARGB(
-                                                                    255,
-                                                                    5,
-                                                                    92,
-                                                                    163)),
-                                                      ),
-                                                      // Dimens.boxHeight4,
-                                                      Row(
+                                              Container(
+                                                margin: EdgeInsets.symmetric(
+                                                  horizontal: 20,
+                                                  vertical: 10,
+                                                ),
+                                                child: Row(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Expanded(
+                                                      flex: 3,
+                                                      child: Column(
                                                         children: [
-                                                          Text(
-                                                            '${controller.incidentReportDetailsModel.value?.rca_required_name}',
-                                                            style: TextStyle(
-                                                                color: Color
-                                                                    .fromARGB(
-                                                                        255,
-                                                                        5,
-                                                                        92,
-                                                                        163)),
+                                                          TitleAndInfo(
+                                                            "Id: ",
+                                                            "${controller.incidentReportDetailsModel.value?.id}",
                                                           ),
-                                                          // SizedBox(
-                                                          //   width: 10,
-                                                          // ),
-                                                          // TableActionButton(
-                                                          //   color: ColorValues
-                                                          //       .appDarkBlueColor,
-                                                          //   icon: Icons
-                                                          //       .visibility,
-                                                          //   message: 'RCA',
-                                                          //   onPress: () {
-                                                          //     // controller.viewIncidentReport(
-                                                          //     //     id: int.tryParse(
-                                                          //     //         '${record[0]}'));
-                                                          //     // print('record:${int.tryParse('${record[0]}')}');
-                                                          //   },
-                                                          // ),
+                                                          TitleAndInfo(
+                                                            "Plant: ",
+                                                            "${controller.incidentReportDetailsModel.value?.facility_name}",
+                                                          ),
+                                                          TitleAndInfo(
+                                                            "Block: ",
+                                                            "${controller.incidentReportDetailsModel.value?.block_name}",
+                                                          ),
+                                                          TitleAndInfo(
+                                                            "Incident Date & Time: ",
+                                                            "${controller.incidentDateTimeCtrlrWeb.text}",
+                                                          ),
+                                                          TitleAndInfo(
+                                                            "Incident Description: ",
+                                                            "${controller.incidentReportDetailsModel.value?.description}",
+                                                          ),
+                                                          TitleAndInfo(
+                                                            "Victim Name: ",
+                                                            "${controller.incidentReportDetailsModel.value?.victim_name}",
+                                                          ),
+                                                          TitleAndInfo(
+                                                            "Incident Investigation Done By: ",
+                                                            "${controller.incidentReportDetailsModel.value?.inverstigated_by_name}",
+                                                          ),
+                                                          TitleAndInfo(
+                                                            "Risk Type: ",
+                                                            "${controller.incidentReportDetailsModel.value?.risk_type_name}",
+                                                          ),
+                                                          TitleAndInfo(
+                                                            "Legal Applicability: ",
+                                                            "${controller.incidentReportDetailsModel.value?.legal_applicability_name}",
+                                                          ),
+                                                          TitleAndInfo(
+                                                            "Damaged Assets Cost Approx: ",
+                                                            "${controller.incidentReportDetailsModel.value?.damaged_cost} INR",
+                                                          ),
+                                                          TitleAndInfo(
+                                                            "Asset Restoration Action Taken By: ",
+                                                            "${controller.incidentReportDetailsModel.value?.action_taken_by_name}",
+                                                          ),
+                                                          TitleAndInfo(
+                                                            "Insurance Available: ",
+                                                            "${controller.incidentReportDetailsModel.value?.is_insurance_applicable_name}",
+                                                          ),
+                                                          TitleAndInfo(
+                                                            "Insurance Status: ",
+                                                            "${controller.incidentReportDetailsModel.value?.insurance_status_name}",
+                                                          ),
+                                                          TitleAndInfo(
+                                                            "Insurance Remarks: ",
+                                                            "${controller.incidentReportDetailsModel.value?.insurance_remark}",
+                                                          ),
                                                         ],
                                                       ),
-                                                      Dimens.boxHeight5,
-                                                      Text(
-                                                        '${controller.incidentReportDetailsModel.value?.generation_loss} INR',
-                                                        style: TextStyle(
-                                                            color:
-                                                                Color.fromARGB(
-                                                                    255,
-                                                                    5,
-                                                                    92,
-                                                                    163)),
+                                                    ),
+                                                    Spacer(),
+                                                    Spacer(),
+                                                    Expanded(
+                                                      flex: 3,
+                                                      child: Column(
+                                                        children: [
+                                                          TitleAndInfo(
+                                                            "Title: ",
+                                                            "${controller.incidentReportDetailsModel.value?.title}",
+                                                          ),
+                                                          TitleAndInfo(
+                                                            "Equipment Categories: ",
+                                                            "${controller.incidentReportDetailsModel.value?.equipment_name}",
+                                                          ),
+                                                          TitleAndInfo(
+                                                            "Reporting Date & Time: ",
+                                                            "${controller.reportingDateTimeCtrlrWeb.text}",
+                                                          ),
+                                                          TitleAndInfo(
+                                                            "Incident Severity: ",
+                                                            "${controller.incidentReportDetailsModel.value?.severity}",
+                                                          ),
+                                                          TitleAndInfo(
+                                                            "Action Taken Date & Time: ",
+                                                            "${controller.actionTakenDateTimeCtrlrWeb.text}",
+                                                          ),
+                                                          TitleAndInfo(
+                                                            "Incident Investigation Verification Done By: ",
+                                                            "${controller.incidentReportDetailsModel.value?.verified_by_name}",
+                                                          ),
+                                                          TitleAndInfo(
+                                                            "ESI Applicability: ",
+                                                            "${controller.incidentReportDetailsModel.value?.esi_applicability_name}",
+                                                          ),
+                                                          TitleAndInfo(
+                                                            "RCA Upload Required: ",
+                                                            "${controller.incidentReportDetailsModel.value?.rca_required_name}",
+                                                          ),
+                                                          TitleAndInfo(
+                                                            "Gen Loss Due To Asset Damage: ",
+                                                            "${controller.incidentReportDetailsModel.value?.generation_loss} INR",
+                                                          ),
+                                                        ],
                                                       ),
-                                                    ],
-                                                  ),
-                                                ],
+                                                    ),
+                                                  ],
+                                                ),
                                               ),
 
+                                              // Row(
+                                              //   crossAxisAlignment:
+                                              //       CrossAxisAlignment.start,
+                                              //   children: [
+                                              //     Padding(
+                                              //       padding:
+                                              //           const EdgeInsets.only(
+                                              //               left: 10),
+                                              //       child: Column(
+                                              //         crossAxisAlignment:
+                                              //             CrossAxisAlignment
+                                              //                 .end,
+                                              //         children: [
+                                              //           CustomRichText(
+                                              //               title: 'Id: '),
+                                              //           Dimens.boxHeight5,
+                                              //           CustomRichText(
+                                              //               title: 'Plant: '),
+                                              //           Dimens.boxHeight5,
+                                              //           CustomRichText(
+                                              //               title: 'Block: '),
+                                              //           Dimens.boxHeight5,
+                                              //           CustomRichText(
+                                              //               title:
+                                              //                   'Incident Date & Time: '),
+                                              //           Dimens.boxHeight5,
+                                              //           CustomRichText(
+                                              //               title:
+                                              //                   'Incident Description: '),
+                                              //           Dimens.boxHeight5,
+                                              //           CustomRichText(
+                                              //               title:
+                                              //                   'Victim Name: '),
+                                              //           Dimens.boxHeight5,
+                                              //           CustomRichText(
+                                              //               title:
+                                              //                   'Incident Investigation Done By: '),
+                                              //           Dimens.boxHeight5,
+                                              //           CustomRichText(
+                                              //               title:
+                                              //                   'Risk Type: '),
+                                              //           Dimens.boxHeight5,
+                                              //           CustomRichText(
+                                              //               title:
+                                              //                   'Legal Applicability: '),
+                                              //           Dimens.boxHeight5,
+                                              //           CustomRichText(
+                                              //               title:
+                                              //                   'Damaged Assets cost approx.: '),
+                                              //           Dimens.boxHeight5,
+                                              //           CustomRichText(
+                                              //               title:
+                                              //                   'Asset Restoration action taken by: '),
+                                              //           Dimens.boxHeight5,
+                                              //           CustomRichText(
+                                              //               title:
+                                              //                   'Insurance Available: '),
+                                              //           Dimens.boxHeight5,
+                                              //           CustomRichText(
+                                              //               title:
+                                              //                   'Insurance Status: '),
+                                              //           Dimens.boxHeight5,
+                                              //           CustomRichText(
+                                              //               title:
+                                              //                   'Insurance Remarks: '),
+                                              //           Dimens.boxHeight5,
+                                              //         ],
+                                              //       ),
+                                              //     ),
+                                              //     SizedBox(
+                                              //       width: 10,
+                                              //     ),
+                                              //     Column(
+                                              //       crossAxisAlignment:
+                                              //           CrossAxisAlignment
+                                              //               .start,
+                                              //       children: [
+                                              //         Text(
+                                              //           '${controller.incidentReportDetailsModel.value?.id}',
+                                              //           style: TextStyle(
+                                              //               color:
+                                              //                   Color.fromARGB(
+                                              //                       255,
+                                              //                       5,
+                                              //                       92,
+                                              //                       163)),
+                                              //         ),
+                                              //         Dimens.boxHeight5,
+                                              //         Text(
+                                              //           '${controller.incidentReportDetailsModel.value?.facility_name}',
+                                              //           style: TextStyle(
+                                              //               color:
+                                              //                   Color.fromARGB(
+                                              //                       255,
+                                              //                       5,
+                                              //                       92,
+                                              //                       163)),
+                                              //         ),
+                                              //         Dimens.boxHeight5,
+                                              //         Text(
+                                              //           '${controller.incidentReportDetailsModel.value?.block_name}',
+                                              //           style: TextStyle(
+                                              //               color:
+                                              //                   Color.fromARGB(
+                                              //                       255,
+                                              //                       5,
+                                              //                       92,
+                                              //                       163)),
+                                              //         ),
+                                              //         Dimens.boxHeight5,
+                                              //         Text(
+                                              //           '${controller.incidentDateTimeCtrlrWeb.text}',
+                                              //           style: TextStyle(
+                                              //               color:
+                                              //                   Color.fromARGB(
+                                              //                       255,
+                                              //                       5,
+                                              //                       92,
+                                              //                       163)),
+                                              //         ),
+                                              //         Dimens.boxHeight4,
+                                              //         SizedBox(
+                                              //           width: 150,
+                                              //           child: Text(
+                                              //             '${controller.incidentReportDetailsModel.value?.description}',
+                                              //             overflow: TextOverflow
+                                              //                 .ellipsis,
+                                              //             style: TextStyle(
+                                              //                 color: Color
+                                              //                     .fromARGB(
+                                              //                         255,
+                                              //                         5,
+                                              //                         92,
+                                              //                         163)),
+                                              //           ),
+                                              //         ),
+                                              //         Dimens.boxHeight5,
+                                              //         Text(
+                                              //           '${controller.incidentReportDetailsModel.value?.victim_name}',
+                                              //           style: TextStyle(
+                                              //               color:
+                                              //                   Color.fromARGB(
+                                              //                       255,
+                                              //                       5,
+                                              //                       92,
+                                              //                       163)),
+                                              //         ),
+                                              //         Dimens.boxHeight5,
+                                              //         Text(
+                                              //           '${controller.incidentReportDetailsModel.value?.inverstigated_by_name}',
+                                              //           style: TextStyle(
+                                              //               color:
+                                              //                   Color.fromARGB(
+                                              //                       255,
+                                              //                       5,
+                                              //                       92,
+                                              //                       163)),
+                                              //         ),
+                                              //         Dimens.boxHeight5,
+                                              //         Text(
+                                              //           '${controller.incidentReportDetailsModel.value?.risk_type_name}',
+                                              //           style: TextStyle(
+                                              //               color:
+                                              //                   Color.fromARGB(
+                                              //                       255,
+                                              //                       5,
+                                              //                       92,
+                                              //                       163)),
+                                              //         ),
+                                              //         Text(
+                                              //           '${controller.incidentReportDetailsModel.value?.legal_applicability_name}',
+                                              //           style: TextStyle(
+                                              //               color:
+                                              //                   Color.fromARGB(
+                                              //                       255,
+                                              //                       5,
+                                              //                       92,
+                                              //                       163)),
+                                              //         ),
+                                              //         Dimens.boxHeight5,
+                                              //         Text(
+                                              //           '${controller.incidentReportDetailsModel.value?.damaged_cost} INR',
+                                              //           style: TextStyle(
+                                              //               color:
+                                              //                   Color.fromARGB(
+                                              //                       255,
+                                              //                       5,
+                                              //                       92,
+                                              //                       163)),
+                                              //         ),
+                                              //         Dimens.boxHeight4,
+                                              //         Text(
+                                              //           '${controller.incidentReportDetailsModel.value?.action_taken_by_name}',
+                                              //           style: TextStyle(
+                                              //               color:
+                                              //                   Color.fromARGB(
+                                              //                       255,
+                                              //                       5,
+                                              //                       92,
+                                              //                       163)),
+                                              //         ),
+                                              //         Dimens.boxHeight5,
+                                              //         Text(
+                                              //           '${controller.incidentReportDetailsModel.value?.is_insurance_applicable_name}',
+                                              //           style: TextStyle(
+                                              //               color:
+                                              //                   Color.fromARGB(
+                                              //                       255,
+                                              //                       5,
+                                              //                       92,
+                                              //                       163)),
+                                              //         ),
+                                              //         Dimens.boxHeight4,
+                                              //         Text(
+                                              //           '${controller.incidentReportDetailsModel.value?.insurance_status_name}',
+                                              //           style: TextStyle(
+                                              //               color:
+                                              //                   Color.fromARGB(
+                                              //                       255,
+                                              //                       5,
+                                              //                       92,
+                                              //                       163)),
+                                              //         ),
+                                              //         Dimens.boxHeight4,
+                                              //         SizedBox(
+                                              //           width: 300,
+                                              //           child: Text(
+                                              //             '${controller.incidentReportDetailsModel.value?.insurance_remark}',
+                                              //             style: TextStyle(
+                                              //                 color: Color
+                                              //                     .fromARGB(
+                                              //                         255,
+                                              //                         5,
+                                              //                         92,
+                                              //                         163)),
+                                              //           ),
+                                              //         ),
+                                              //       ],
+                                              //     ),
+
+                                              //     /////
+                                              //     Spacer(),
+                                              //     Column(
+                                              //       crossAxisAlignment:
+                                              //           CrossAxisAlignment.end,
+                                              //       children: [
+                                              //         CustomRichText(
+                                              //             title: 'Title: '),
+                                              //         Dimens.boxHeight5,
+                                              //         CustomRichText(
+                                              //             title:
+                                              //                 'Equipment Categories: '),
+                                              //         Dimens.boxHeight5,
+                                              //         CustomRichText(
+                                              //             title:
+                                              //                 'Reporting Date & Time: '),
+                                              //         Dimens.boxHeight5,
+                                              //         CustomRichText(
+                                              //             title:
+                                              //                 'Incident Severity: '),
+                                              //         Dimens.boxHeight5,
+                                              //         CustomRichText(
+                                              //             title:
+                                              //                 'Action Taken Date & Time: '),
+                                              //         Dimens.boxHeight5,
+                                              //         CustomRichText(
+                                              //             title:
+                                              //                 'Incident Investigation Verification done by: '),
+                                              //         Dimens.boxHeight5,
+                                              //         CustomRichText(
+                                              //             title:
+                                              //                 'ESI Applicability: '),
+                                              //         Dimens.boxHeight5,
+                                              //         CustomRichText(
+                                              //             title:
+                                              //                 'RCA Upload Required: '),
+                                              //         Dimens.boxHeight5,
+                                              //         CustomRichText(
+                                              //             title:
+                                              //                 'Gen loss due to asset damage: '),
+                                              //         Dimens.boxHeight5,
+                                              //       ],
+                                              //     ),
+                                              //     SizedBox(
+                                              //       width: 10,
+                                              //     ),
+                                              //     Column(
+                                              //       crossAxisAlignment:
+                                              //           CrossAxisAlignment
+                                              //               .start,
+                                              //       children: [
+                                              //         Text(
+                                              //           '${controller.incidentReportDetailsModel.value?.title}',
+                                              //           style: TextStyle(
+                                              //               color:
+                                              //                   Color.fromARGB(
+                                              //                       255,
+                                              //                       5,
+                                              //                       92,
+                                              //                       163)),
+                                              //         ),
+                                              //         Dimens.boxHeight4,
+                                              //         Text(
+                                              //           '${controller.incidentReportDetailsModel.value?.equipment_name}',
+                                              //           style: TextStyle(
+                                              //               color:
+                                              //                   Color.fromARGB(
+                                              //                       255,
+                                              //                       5,
+                                              //                       92,
+                                              //                       163)),
+                                              //         ),
+                                              //         Dimens.boxHeight5,
+                                              //         Text(
+                                              //           '${controller.reportingDateTimeCtrlrWeb.text}',
+                                              //           style: TextStyle(
+                                              //               color:
+                                              //                   Color.fromARGB(
+                                              //                       255,
+                                              //                       5,
+                                              //                       92,
+                                              //                       163)),
+                                              //         ),
+                                              //         Dimens.boxHeight5,
+                                              //         Text(
+                                              //           '${controller.incidentReportDetailsModel.value?.severity}',
+                                              //           style: TextStyle(
+                                              //               color: Colors.red),
+                                              //         ),
+                                              //         Dimens.boxHeight5,
+                                              //         Text(
+                                              //           '${controller.actionTakenDateTimeCtrlrWeb.text}',
+                                              //           style: TextStyle(
+                                              //               color:
+                                              //                   Color.fromARGB(
+                                              //                       255,
+                                              //                       5,
+                                              //                       92,
+                                              //                       163)),
+                                              //         ),
+                                              //         Dimens.boxHeight4,
+                                              //         Text(
+                                              //           '${controller.incidentReportDetailsModel.value?.verified_by_name}',
+                                              //           style: TextStyle(
+                                              //               color:
+                                              //                   Color.fromARGB(
+                                              //                       255,
+                                              //                       5,
+                                              //                       92,
+                                              //                       163)),
+                                              //         ),
+                                              //         Dimens.boxHeight5,
+                                              //         Text(
+                                              //           '${controller.incidentReportDetailsModel.value?.esi_applicability_name}',
+                                              //           style: TextStyle(
+                                              //               color:
+                                              //                   Color.fromARGB(
+                                              //                       255,
+                                              //                       5,
+                                              //                       92,
+                                              //                       163)),
+                                              //         ),
+                                              //         // Dimens.boxHeight4,
+                                              //         Row(
+                                              //           children: [
+                                              //             Text(
+                                              //               '${controller.incidentReportDetailsModel.value?.rca_required_name}',
+                                              //               style: TextStyle(
+                                              //                   color: Color
+                                              //                       .fromARGB(
+                                              //                           255,
+                                              //                           5,
+                                              //                           92,
+                                              //                           163)),
+                                              //             ),
+                                              //             // SizedBox(
+                                              //             //   width: 10,
+                                              //             // ),
+                                              //             // TableActionButton(
+                                              //             //   color: ColorValues
+                                              //             //       .appDarkBlueColor,
+                                              //             //   icon: Icons
+                                              //             //       .visibility,
+                                              //             //   message: 'RCA',
+                                              //             //   onPress: () {
+                                              //             //     // controller.viewIncidentReport(
+                                              //             //     //     id: int.tryParse(
+                                              //             //     //         '${record[0]}'));
+                                              //             //     // print('record:${int.tryParse('${record[0]}')}');
+                                              //             //   },
+                                              //             // ),
+                                              //           ],
+                                              //         ),
+                                              //         Dimens.boxHeight5,
+                                              //         Text(
+                                              //           '${controller.incidentReportDetailsModel.value?.generation_loss} INR',
+                                              //           style: TextStyle(
+                                              //               color:
+                                              //                   Color.fromARGB(
+                                              //                       255,
+                                              //                       5,
+                                              //                       92,
+                                              //                       163)),
+                                              //         ),
+                                              //       ],
+                                              //     ),
+                                              //   ],
+                                              // ),
                                               ///Details Of Injured Person
                                               controller
                                                       .detailsOfInjuredPersonList!
@@ -925,9 +1045,8 @@ class ViewIncidentReportContentWeb
                                                                                 'View Permit',
                                                                             onPress:
                                                                                 () async {
-                                                                              String baseUrl = "http://65.0.20.19/CMMS_API/";
-                                                                              // String baseUrl =
-                                                                              // 'http://172.20.43.9:83/';
+                                                                              // String baseUrl = "http://65.0.20.19/CMMS_API/";
+                                                                              String baseUrl = 'http://172.20.43.9:83/';
                                                                               String fileName = controller.file_list![index]?.fileName ?? "";
                                                                               String fullUrl = baseUrl + fileName;
                                                                               if (await canLaunch(fullUrl)) {
@@ -3209,5 +3328,35 @@ class ViewIncidentReportContentWeb
       ),
       Dimens.boxHeight10,
     ]);
+  }
+}
+
+class TitleAndInfo extends StatelessWidget {
+  final String title;
+  final String info;
+
+  TitleAndInfo(this.title, this.info);
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Expanded(
+          child: CustomRichText(
+            title: title,
+          ),
+        ),
+        Expanded(
+          child: Text(
+            info,
+            style: TextStyle(
+              color: Color.fromARGB(255, 5, 92, 163),
+            ),
+          ),
+        ),
+      ],
+    );
   }
 }

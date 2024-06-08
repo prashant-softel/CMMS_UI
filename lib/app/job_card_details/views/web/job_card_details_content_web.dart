@@ -442,10 +442,10 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                                                         icon: Icons.visibility,
                                                         message: 'View Permit',
                                                         onPress: () async {
-                                                          String baseUrl =
-                                                              "http://65.0.20.19/CMMS_API/";
                                                           // String baseUrl =
-                                                          // 'http://172.20.43.9:83/';
+                                                          //     "http://65.0.20.19/CMMS_API/";
+                                                          String baseUrl =
+                                                          'http://172.20.43.9:83/';
                                                           String fileName =
                                                               controller
                                                                       .allFiles[

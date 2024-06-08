@@ -13,6 +13,7 @@ class WasteDataPresenter {
     required int? facility_id,
     String? start_date,
     required String end_date,
+    required int isHazardous,
   }) async {
     return wasteDataUsecase.getWasteDataList(
       isLoading: isLoading,
@@ -20,6 +21,7 @@ class WasteDataPresenter {
       isExport: isExport,
       start_date: start_date,
       end_date: end_date,
+      isHazardous: isHazardous,
     );
   }
 
@@ -32,6 +34,7 @@ class WasteDataPresenter {
       isLoading: isLoading,
     );
   }
+
   Future<Map<String, dynamic>?> updateWasteData({
     createWasteData,
     required bool isLoading,
@@ -51,6 +54,7 @@ class WasteDataPresenter {
       isLoading: isLoading,
     );
   }
+
   Future<Map<String, dynamic>?> updateWasteDataDisposed({
     createWasteData,
     required bool isLoading,
@@ -70,6 +74,14 @@ class WasteDataPresenter {
       facilityId: facilityId,
     );
   }
+
+  void saveHazardousValue({String? hazardous}) async {
+    return wasteDataUsecase.saveHazardousValue(hazardous: hazardous);
+  }
+
+  Future<String?> getHazardousValue() async =>
+      await wasteDataUsecase.getHazardousValue();
+  void clearHazardousValue() async => wasteDataUsecase.clearHazardousValue();
 
   Future<List<FacilityModel?>?> getFacilityList({bool? isLoading}) async =>
       await wasteDataUsecase.getFacilityList(isLoading: isLoading);
