@@ -43,7 +43,7 @@ class AddDialog extends GetView {
       content: Builder(builder: (context) {
         var height = MediaQuery.of(context).size.height;
         if (id != null) {
-          controller.detailId = id!;
+          controller.detailId.value = id!;
         }
         if (date != null) {
           controller.procurementTimeCtrlr.text = date!;
@@ -104,7 +104,7 @@ class AddDialog extends GetView {
                   children: [
                     Dimens.boxHeight10,
                     IgnorePointer(
-                      ignoring: id == 0 || id == null ? true : false,
+                      ignoring: controller.detailId.value != 0 ? true : false,
                       child: Container(
                         width: MediaQuery.of(context).size.width / 5,
                         height: MediaQuery.of(context).size.height * 0.040,
@@ -163,7 +163,7 @@ class AddDialog extends GetView {
                     ),
                     Dimens.boxHeight10,
                     IgnorePointer(
-                      ignoring: id == 0 || id == null ? true : false,
+                      ignoring: controller.detailId != 0 ? true : false,
                       child: SizedBox(
                         child: DropdownWebStock(
                           width: MediaQuery.of(context).size.width / 5,
@@ -180,10 +180,20 @@ class AddDialog extends GetView {
                       width: (MediaQuery.of(context).size.width * .2),
                       keyboardType: TextInputType.number,
                       textController: controller.qtyCtrlr,
+                      errorController: controller.isQtyInvalid.value
+                          ? "Required field"
+                          : null,
+                      onChanged: (value) {
+                        if (controller.qtyCtrlr.text.trim().length > 0) {
+                          controller.isQtyInvalid.value = false;
+                        } else {
+                          controller.isQtyInvalid.value = true;
+                        }
+                      },
                     ),
                     Dimens.boxHeight10,
                     IgnorePointer(
-                      ignoring: id == 0 || id == null ? true : false,
+                      ignoring: controller.detailId != 0 ? true : false,
                       child: LoginCustomTextfield(
                         width: (MediaQuery.of(context).size.width * .2),
                         textController: controller.descriptionCtrlr,
@@ -219,8 +229,8 @@ class AddDialog extends GetView {
                       backgroundColor: ColorValues.greenColor,
                       text: 'Submit',
                       onPressed: () {
+                        controller.isFormInvalid.value = false;
                         controller.createWaterData();
-
                         Get.offNamed(Routes.waterDataListScreen);
                       },
                     )

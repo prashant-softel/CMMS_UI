@@ -415,7 +415,9 @@ class AttendanceWeb extends GetView<AttendanceController> {
   ) async {
     TimeOfDay? pickedTime = await showTimePicker(
       context: context,
-      initialTime: TimeOfDay.now(),
+      initialTime: position == 1
+          ? TimeOfDay(hour: 10, minute: 00)
+          : TimeOfDay(hour: 18, minute: 00),
       builder: (BuildContext context, Widget? child) {
         return Theme(
           data: ThemeData.light(),
