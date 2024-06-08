@@ -2901,7 +2901,7 @@ class ConnectHelper {
     var responseModel = await apiWrapper.makeRequest(
       'JC/StartJC',
       Request.post,
-      body,
+      jobCard,
       isLoading ?? false,
       {
         'Content-Type': 'application/json',

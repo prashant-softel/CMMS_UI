@@ -1025,10 +1025,37 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                                                       'Are you sure you want to Close Job ?',
                                                     );
                                                     if (confirmed == true) {
-                                                      controller.closeJob(
-                                                          fileIds:
-                                                              dropzoneController
-                                                                  .fileIds);
+                                                      controller.listMrsByTaskId!
+                                                                      .value
+                                                                      .firstWhereOrNull((element) =>
+                                                                          element!.jobCardId !=
+                                                                              0 ||
+                                                                          element.pmId !=
+                                                                              0)!
+                                                                      .mrs_return_ID ==
+                                                                  0 &&
+                                                              controller.allTrue
+                                                                      .value ==
+                                                                  false
+                                                          ? Get.defaultDialog(
+                                                              radius: 5,
+                                                              title: 'Alert',
+                                                              middleText:
+                                                                  'Please return all items first!',
+                                                              textConfirm: 'OK',
+                                                              onConfirm: () {
+                                                                Get.back(); // Close the dialog
+                                                              },
+                                                              buttonColor:
+                                                                  ColorValues
+                                                                      .appGreenColor,
+                                                              confirmTextColor:
+                                                                  Colors.white,
+                                                            )
+                                                          : controller.closeJob(
+                                                              fileIds:
+                                                                  dropzoneController
+                                                                      .fileIds);
 
                                                       Text(
                                                           'Are you sure you want to Close Job ?');
@@ -1048,9 +1075,37 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                                                 'Are you sure you want to Carry Forward Job ?',
                                               );
                                               if (confirmed == true) {
-                                                controller.carryForwardJob(
-                                                    fileIds: dropzoneController
-                                                        .fileIds);
+                                                controller.listMrsByTaskId!
+                                                                .value
+                                                                .firstWhereOrNull(
+                                                                    (element) =>
+                                                                        element!.jobCardId !=
+                                                                            0 ||
+                                                                        element.pmId !=
+                                                                            0)!
+                                                                .mrs_return_ID ==
+                                                            0 &&
+                                                        controller.allTrue
+                                                                .value ==
+                                                            false
+                                                    ? Get.defaultDialog(
+                                                        radius: 5,
+                                                        title: 'Alert',
+                                                        middleText:
+                                                            'Please return all items first!',
+                                                        textConfirm: 'OK',
+                                                        onConfirm: () {
+                                                          Get.back(); // Close the dialog
+                                                        },
+                                                        buttonColor: ColorValues
+                                                            .appGreenColor,
+                                                        confirmTextColor:
+                                                            Colors.white,
+                                                      )
+                                                    : controller.carryForwardJob(
+                                                        fileIds:
+                                                            dropzoneController
+                                                                .fileIds);
 
                                                 Text(
                                                     'Are you sure you want to Carry Forward Job ?');
