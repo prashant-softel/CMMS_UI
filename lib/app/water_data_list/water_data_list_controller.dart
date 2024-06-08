@@ -16,7 +16,7 @@ class WaterDataListController extends GetxController {
   WaterDataListPresenter waterDataListPresenter;
   final HomeController homecontroller = Get.find();
 
-Rx<bool> isFormInvalid = false.obs;
+  Rx<bool> isFormInvalid = false.obs;
   Rx<bool> isQtyInvalid = false.obs;
   Rx<DateTime> selectedProcurementTime = DateTime.now().obs;
   var procurementTimeCtrlr = TextEditingController();
@@ -33,6 +33,7 @@ Rx<bool> isFormInvalid = false.obs;
   String get formattedTodate1 => DateFormat('yyyy-MM-dd').format(toDate.value);
   String get formattedFromdate1 =>
       DateFormat('yyyy-MM-dd').format(fromDate.value);
+  RxBool isDateInvalid = false.obs;
   RxList<MasterList> masterDataList = <MasterList>[].obs;
   RxList<WaterDataList> waterDataList = <WaterDataList>[].obs;
   RxList<String> masterDataListName = <String>[].obs;
@@ -324,9 +325,12 @@ Rx<bool> isFormInvalid = false.obs;
       istypeOfWaterListSelected.value = false;
       isFormInvalid.value = true;
     }
-
     if (qtyCtrlr.text.trim().length == 0) {
       isQtyInvalid.value = true;
+      isFormInvalid.value = true;
+    }
+    if (procurementTimeCtrlr.text.trim().length == 0) {
+      isDateInvalid.value = true;
       isFormInvalid.value = true;
     }
   }
@@ -370,6 +374,10 @@ Rx<bool> isFormInvalid = false.obs;
   }
 
   void createWaterDataConsumption() async {
+    checkForm();
+    if (isFormInvalid.value) {
+      return;
+    }
     int _id = detailId.value;
     String _descriptionCtrlr = descriptionCtrlr.text.trim();
     String _qtCtrlr = qtyCtrlr.text.trim();
@@ -452,6 +460,7 @@ Rx<bool> isFormInvalid = false.obs;
     );
 
     selectedProcurementTime.value = selectedDateTime;
+    isDateInvalid.value = false;
     procurementTimeCtrlr
       ..text = DateFormat("yyyy-MM-dd HH:mm").format(selectedDateTime)
       ..selection = TextSelection.fromPosition(
