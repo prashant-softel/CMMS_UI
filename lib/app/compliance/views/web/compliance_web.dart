@@ -189,6 +189,29 @@ class _ComplianceWebState extends State<ComplianceWeb> {
                                                               textController:
                                                                   controller
                                                                       .issueDateTc,
+                                                              // validate
+                                                              errorController:
+                                                                  controller
+                                                                          .isIssueDateInvalid
+                                                                          .value
+                                                                      ? "Required field"
+                                                                      : null,
+
+                                                              onChanged:
+                                                                  (value) {
+                                                                if (value
+                                                                        .trim()
+                                                                        .length >
+                                                                    0) {
+                                                                  controller
+                                                                      .isIssueDateInvalid
+                                                                      .value = false;
+                                                                } else {
+                                                                  controller
+                                                                      .isIssueDateInvalid
+                                                                      .value = true;
+                                                                }
+                                                              },
                                                             ),
                                                           ],
                                                         ),
@@ -301,6 +324,27 @@ class _ComplianceWebState extends State<ComplianceWeb> {
                                                               textController:
                                                                   controller
                                                                       .expireOnDateTc,
+                                                              errorController:
+                                                                  controller
+                                                                          .isExpiresonInvalid
+                                                                          .value
+                                                                      ? "Required field"
+                                                                      : null,
+                                                              onChanged:
+                                                                  (value) {
+                                                                if (value
+                                                                        .trim()
+                                                                        .length >
+                                                                    0) {
+                                                                  controller
+                                                                      .isExpiresonInvalid
+                                                                      .value = false;
+                                                                } else {
+                                                                  controller
+                                                                      .isExpiresonInvalid
+                                                                      .value = true;
+                                                                }
+                                                              },
                                                             ),
                                                           ],
                                                         ),
@@ -462,6 +506,8 @@ class _ComplianceWebState extends State<ComplianceWeb> {
                                                 .format(p0.value);
                                         controller.openIssueDatePicker =
                                             !controller.openIssueDatePicker;
+                                        controller.isIssueDateInvalid.value =
+                                            false;
                                         controller.update(['stock_Mangement']);
                                       },
                                     ),
@@ -482,6 +528,8 @@ class _ComplianceWebState extends State<ComplianceWeb> {
                                                 .format(p0.value);
                                         controller.openExpireOnFDatePicker =
                                             !controller.openExpireOnFDatePicker;
+                                        controller.isExpiresonInvalid.value =
+                                            false;
                                         controller.update(['stock_Mangement']);
                                       },
                                     ),
