@@ -102,6 +102,17 @@ class AttendanceController extends GetxController {
   void isPresent(int index) {
     attendanceModel[index].present.value =
         !attendanceModel[index].present.value;
+    if (attendanceModel[index].present.value == true) {
+      attendanceModel[index].inTime = "10:00 AM";
+      inTimeControllers[index].text = "10:00 AM";
+      attendanceModel[index].outTime = "6:00 PM";
+      outTimeControllers[index].text = "6:00 PM";
+    } else {
+      attendanceModel[index].inTime = "";
+      inTimeControllers[index].clear();
+      attendanceModel[index].outTime = "";
+      outTimeControllers[index].clear();
+    }
     update();
   }
 
