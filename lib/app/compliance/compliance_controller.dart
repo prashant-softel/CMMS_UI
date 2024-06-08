@@ -28,7 +28,9 @@ class ComplianceController extends GetxController {
   int selectedStatutoryComplianceId = 0;
   bool openIssueDatePicker = false;
   bool openExpireOnFDatePicker = false;
-
+  Rx<bool> isIssueDateInvalid = false.obs;
+  Rx<bool> isExpiresonInvalid = false.obs;
+  RxBool isFormInvalid = false.obs;
   var issueDateTc = TextEditingController();
   var expireOnDateTc = TextEditingController();
   var commentsCtrl = TextEditingController();
@@ -103,11 +105,12 @@ class ComplianceController extends GetxController {
 
   void createCompliance() async {
     try {
-      // checkForm();
-      // if (isFormInvalid.value) {
-      //   return;
-      // }
+      checkCompiliace();
+      if (isFormInvalid.value) {
+        return;
+      }
       String _issueDateTc = issueDateTc.text.trim();
+
       String _expireOnDateTc = expireOnDateTc.text.trim();
       String _commentsCtrl = commentsCtrl.text.trim();
 
@@ -141,6 +144,22 @@ class ComplianceController extends GetxController {
     }
   }
 
+  void checkCompiliace() {
+    if (selectedStatutoryCompliance.value == '') {
+      isStatutoryComplianceSelected.value = false;
+      isFormInvalid.value = true;
+    }
+    if (issueDateTc.text.trim().length < 3) {
+      isIssueDateInvalid.value = true;
+      isFormInvalid.value = true;
+    }
+
+    if (expireOnDateTc.text.trim().length < 3) {
+      isExpiresonInvalid.value = true;
+      isFormInvalid.value = true;
+    }
+  }
+
   void onValueChanged(dynamic list, dynamic value) {
     print("$value");
     switch (list.runtimeType) {
@@ -151,6 +170,7 @@ class ComplianceController extends GetxController {
                 statutoryComplianceList.indexWhere((x) => x?.name == value);
             selectedStatutoryComplianceId =
                 statutoryComplianceList[currencyIndex]?.id ?? 0;
+            selectedStatutoryCompliance.value = value;
             isStatutoryComplianceSelected.value = true;
             print(
                 "selectedBusinessTypeId: ${selectedStatutoryComplianceId} \n ${selectedStatutoryCompliance}");
