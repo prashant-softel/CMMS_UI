@@ -69,8 +69,28 @@ class WasteDataController extends GetxController {
   int selectedYear = 2024;
 
   ///
-  @override
-  void onInit() async {
+  // @override
+  // void onInit() async {
+  //   await setId();
+  //   facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
+  //     facilityId = event;
+  //     Future.delayed(Duration(seconds: 2), () async {
+  //       await getWasteDataList(
+  //         hazardous.value,
+  //         facilityId,
+  //         formattedTodate1,
+  //         formattedFromdate1,
+  //         false,
+  //       );
+  //     });
+  //     Future.delayed(Duration(seconds: 1), () async {
+  //       getTypeOfWasteList();
+  //     });
+  //   });
+  //   super.onInit();
+  // }
+
+  void onReady() async {
     await setId();
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
       facilityId = event;
@@ -85,23 +105,6 @@ class WasteDataController extends GetxController {
       });
       Future.delayed(Duration(seconds: 1), () async {
         getTypeOfWasteList();
-      });
-    });
-    super.onInit();
-  }
-
-  void onReady() async {
-    await setId();
-    facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
-      facilityId = event;
-      Future.delayed(Duration(seconds: 2), () async {
-        await getWasteDataList(
-          hazardous.value,
-          facilityId,
-          formattedTodate1,
-          formattedFromdate1,
-          false,
-        );
       });
     });
     super.onReady();
