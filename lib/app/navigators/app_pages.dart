@@ -65,6 +65,8 @@ import 'package:cmms/app/create_observation/views/create_observation_screen.dart
 import 'package:cmms/app/create_pm_plan/create_pm_plan_binding.dart';
 import 'package:cmms/app/create_pm_plan/view/create_pm_plan_screen.dart';
 import 'package:cmms/app/create_preventive_checklist/view/create_preventive_screen.dart';
+import 'package:cmms/app/document_upload/document_upload_binding.dart';
+import 'package:cmms/app/document_upload/view/document_upload_screen.dart';
 import 'package:cmms/app/dsm_charges/dsm_charges_binding.dart';
 import 'package:cmms/app/dsm_charges/view/dsm_charges_screen.dart';
 import 'package:cmms/app/dsm_dashboard/dsm_dashboard_binding.dart';
@@ -1317,10 +1319,15 @@ class AppPages {
       page: TargetedGroupScreen.new,
       binding: TargetedGroupBinding(),
     ),
-     GetPage<dynamic>(
+    GetPage<dynamic>(
       name: _Paths.StatutoryCompliance,
       page: StatutoryComplianceScreen.new,
       binding: StatutoryComplianceBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.documentUploadScreen,
+      page: DocumentUploadScreen.new,
+      binding: DocumentUploadBinding(),
     ),
   ];
 }

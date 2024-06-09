@@ -168,4 +168,10 @@ class MisDashboardController extends GetxController {
       Routes.risktypemaster,
     );
   }
+
+  Future<void> documentUpload() async {
+    Get.toNamed(
+      Routes.documentUploadScreen,
+    );
+  }
 }

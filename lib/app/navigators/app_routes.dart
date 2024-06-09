@@ -99,7 +99,7 @@ abstract class Routes {
   static const scheduleCourseList = _Paths.scheduleCourseList;
   static const courseCategory = _Paths.courseCategory;
   static const targetedGroup = _Paths.targetedGroup;
-  
+
   static const scheduleCourse = _Paths.scheduleCourse;
   static const executeCourse = _Paths.executeCourse;
 
@@ -124,9 +124,9 @@ abstract class Routes {
   static const roleAccess = _Paths.roleAccess;
   static const createMrs = _Paths.createMrs;
   static const incidentRiskType = _Paths.incidentRiskType;
-   static const StatutoryCompliance = _Paths.StatutoryCompliance;
+  static const StatutoryCompliance = _Paths.StatutoryCompliance;
+  static const documentUploadScreen = _Paths.documentUploadScreen;
 
-  
   static const escalationMatrixListWeb = _Paths.escalationMatrixListWeb;
   static const addEscalatiomMatrixContentWeb =
       _Paths.addEscalatiomMatrixContentWeb;
@@ -221,7 +221,7 @@ abstract class Routes {
   static const admin_dashboard = _Paths.admin_dashboard;
   static const attendanceScreen = _Paths.attendanceScreen;
   static const attendanceListScreen = _Paths.attendanceListScreen;
-  static const  materialCategory = _Paths. materialCategory;
+  static const materialCategory = _Paths.materialCategory;
 }
 
 abstract class _Paths {
@@ -261,10 +261,10 @@ abstract class _Paths {
   static const breakdown = '/breakdown-maintenance';
   static const misDashboard = '/misDashboard';
   static const scheduleCourseList = '/scheduleCourseList';
-  
-   static const courseCategory = '/courseCategory';
-   static const targetedGroup = '/targetedGroup';
-   
+
+  static const courseCategory = '/courseCategory';
+  static const targetedGroup = '/targetedGroup';
+
   static const scheduleCourse = '/scheduleCourse';
   static const executeCourse = '/execute-course';
 
@@ -347,8 +347,8 @@ abstract class _Paths {
   static const createMrs = '/Create-mrs';
   static const incidentRiskType = '/Incident-Risk-Type';
   static const StatutoryCompliance = '/Statutory-Compliance';
+  static const documentUploadScreen = '/documentUploadScreen';
 
-  
   static const escalationMatrixListWeb = '/escalation-matrix-list';
   static const addEscalatiomMatrixContentWeb = '/add-escalation-matrix';
   static const viewEscalatiomMatrixContentWeb = '/view-escalation-matrix';

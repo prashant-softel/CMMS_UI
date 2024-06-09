@@ -594,6 +594,13 @@ class MisDashboardScreen extends GetView<MisDashboardController> {
                                         controller.goToRiskType();
                                       });
                                 }))),
+                                OnHover(builder: (((isHovered) {
+                                  return createContentTile(
+                                      title: "Document Upload",
+                                      onTap: () {
+                                        controller.documentUpload();
+                                      });
+                                }))),
                               ],
                             ),
                           ]),
