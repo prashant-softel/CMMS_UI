@@ -378,14 +378,14 @@ class WasteDataController extends GetxController {
     String formattedDate = DateFormat("yyyy-MM-dd").format(procurementTime);
 
     CreateWasteData createWasteData = CreateWasteData(
-      consumeType: 1,
-      facilityId: facilityId,
-      creditQty: 0,
-      date: formattedDate,
-      debitQty: double.tryParse(_qtCtrlr) ?? 0,
-      description: _descriptionCtrlr,
-      wasteTypeId: selectedTypeOfWasteId,
-    );
+        consumeType: 1,
+        facilityId: facilityId,
+        creditQty: 0,
+        date: formattedDate,
+        debitQty: double.tryParse(_qtCtrlr) ?? 0,
+        description: _descriptionCtrlr,
+        wasteTypeId: selectedTypeOfWasteId,
+        id: 0);
     var createWaterDataModelJsonString = createWasteData.toJson();
     Map<String, dynamic>? responseCreateWaterDataModel =
         await wasteDataPresenter.createWasteData(
