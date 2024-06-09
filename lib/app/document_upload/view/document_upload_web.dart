@@ -1,13 +1,17 @@
+import 'package:cmms/app/controllers/file_upload_controller.dart';
 import 'package:cmms/app/document_upload/document_upload_controller.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/custom_textField.dart';
 import 'package:cmms/app/widgets/date_picker.dart';
+import 'package:cmms/app/widgets/file_upload_details_widget_web.dart';
+import 'package:cmms/app/widgets/file_upload_with_dropzone_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
@@ -15,6 +19,8 @@ class DocumentUploadWeb extends StatefulWidget {
   DocumentUploadWeb({
     Key? key,
   }) : super(key: key);
+  final FileUploadController dropzoneController =
+      Get.put(FileUploadController());
 
   @override
   State<DocumentUploadWeb> createState() => _DocumentUploadWebState();
@@ -102,79 +108,152 @@ class _DocumentUploadWebState extends State<DocumentUploadWeb> {
                                 Divider(
                                   color: ColorValues.greyLightColour,
                                 ),
-                                Container(
-                                  margin: Dimens.edgeInsets20,
-                                  child: Row(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Spacer(),
-                                      Column(
+                                Column(
+                                  children: [
+                                    Container(
+                                      margin: Dimens.edgeInsets20,
+                                      child: Row(
                                         crossAxisAlignment:
-                                            CrossAxisAlignment.end,
+                                            CrossAxisAlignment.start,
                                         children: [
-                                          Row(
+                                          Spacer(),
+                                          Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.end,
                                             children: [
-                                              CustomRichText(
-                                                  title: 'Document Name: '),
-                                              Dimens.boxWidth10,
-                                              LoginCustomTextfield(
-                                                width: (MediaQuery.of(context)
-                                                        .size
-                                                        .width *
-                                                    .2),
-                                                keyboardType:
-                                                    TextInputType.number,
-                                                onChanged: (value) {},
+                                              Row(
+                                                children: [
+                                                  CustomRichText(
+                                                      title: 'Document Name: '),
+                                                  Dimens.boxWidth10,
+                                                  LoginCustomTextfield(
+                                                    width:
+                                                        (MediaQuery.of(context)
+                                                                .size
+                                                                .width *
+                                                            .2),
+                                                    keyboardType:
+                                                        TextInputType.number,
+                                                    onChanged: (value) {},
+                                                  ),
+                                                ],
                                               ),
+                                              Dimens.boxHeight5,
                                             ],
                                           ),
-                                          Dimens.boxHeight5,
-                                        ],
-                                      ),
-                                      Spacer(),
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.end,
-                                        children: [
-                                          SizedBox(
-                                            height: 6,
-                                          ),
-                                          Row(
+                                          Spacer(),
+                                          Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.end,
                                             children: [
-                                              CustomRichText(
-                                                  title: 'PO Date  : '),
-                                              Dimens.boxWidth10,
-                                              CustomTextFieldForStock(
-                                                width: MediaQuery.of(context)
-                                                        .size
-                                                        .width /
-                                                    5,
-                                                numberTextField: true,
-                                                onTap: () {
-                                                  controller
-                                                          .openUploadDocDateTcDatePicker =
-                                                      !controller
-                                                          .openUploadDocDateTcDatePicker;
-                                                  controller.update(
-                                                      ['stock_Mangement']);
-                                                },
-                                                textController:
-                                                    controller.uploadDocDateTc,
-                                                //validate
+                                              SizedBox(
+                                                height: 6,
+                                              ),
+                                              Row(
+                                                children: [
+                                                  CustomRichText(
+                                                      title: 'PO Date  : '),
+                                                  Dimens.boxWidth10,
+                                                  CustomTextFieldForStock(
+                                                    width:
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .width /
+                                                            5,
+                                                    numberTextField: true,
+                                                    onTap: () {
+                                                      controller
+                                                              .openUploadDocDateTcDatePicker =
+                                                          !controller
+                                                              .openUploadDocDateTcDatePicker;
+                                                      controller.update(
+                                                          ['stock_Mangement']);
+                                                    },
+                                                    textController: controller
+                                                        .uploadDocDateTc,
+                                                    //validate
 
-                                                onChanged: (value) {},
+                                                    onChanged: (value) {},
+                                                  ),
+                                                ],
+                                              ),
+                                              SizedBox(
+                                                height: 6,
                                               ),
                                             ],
                                           ),
-                                          SizedBox(
-                                            height: 6,
-                                          ),
+                                          Spacer(),
                                         ],
                                       ),
-                                      Spacer(),
-                                    ],
-                                  ),
+                                    ),
+                                    Container(
+                                      margin: EdgeInsets.only(
+                                          top: 10, right: 20, left: 20),
+                                      height: Get.height * 0.2,
+                                      width: Get.width,
+                                      child: Row(
+                                          //
+                                          children: [
+                                            Expanded(
+                                              flex: 2,
+                                              child:
+                                                  FileUploadWidgetWithDropzone(),
+                                            ),
+                                            Dimens.boxWidth10,
+                                            Expanded(
+                                                flex: 8,
+                                                child:
+                                                    FileUploadDetailsWidgetWeb()),
+                                          ]),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 20),
+                                      child: Row(children: [
+                                        CustomRichText(title: 'Description: '),
+                                        Expanded(
+                                          child: TextField(
+                                            style: GoogleFonts.lato(
+                                              textStyle: TextStyle(
+                                                  fontSize: 16.0,
+                                                  height: 1.0,
+                                                  color: Colors.black),
+                                            ),
+                                            // controller: controller.commentCtrlr,
+                                            // enabled: controller.isJobCardStarted.value,
+                                            decoration: InputDecoration(
+                                              disabledBorder:
+                                                  OutlineInputBorder(
+                                                borderSide: BorderSide(
+                                                  color: ColorValues
+                                                      .appLightGreyColor,
+                                                  width: 1.0,
+                                                ),
+                                              ),
+                                              enabledBorder: OutlineInputBorder(
+                                                borderSide: BorderSide(
+                                                  color: ColorValues
+                                                      .appLightBlueColor,
+                                                  width: 1.0,
+                                                ),
+                                              ),
+                                              focusedBorder: OutlineInputBorder(
+                                                borderSide: BorderSide(
+                                                  color: ColorValues
+                                                      .appLightBlueColor,
+                                                  width: 1.0,
+                                                ),
+                                              ),
+                                            ),
+                                            keyboardType:
+                                                TextInputType.multiline,
+                                            minLines: 5,
+                                            maxLines: null,
+                                          ),
+                                        ),
+                                      ]),
+                                    ),
+                                  ],
                                 ),
                               ],
                             ),
