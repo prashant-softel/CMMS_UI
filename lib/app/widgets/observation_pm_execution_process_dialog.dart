@@ -1,4 +1,3 @@
-
 import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/controllers/file_upload_controller.dart';
 import 'package:cmms/app/theme/color_values.dart';
@@ -271,7 +270,9 @@ class ObservationPmExecutionViewDialog extends GetView {
                             ),
 
                             ////Associated Job cards
-                            controller.listMrsByTaskId!.value[0]
+                            (controller.listMrsByTaskId?.value.isNotEmpty ??
+                                        false) &&
+                                    controller.listMrsByTaskId!.value[0]
                                             ?.mrs_return_ID ==
                                         0 &&
                                     controller.allTrue.value == false

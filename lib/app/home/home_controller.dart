@@ -85,7 +85,7 @@ class HomeController extends GetxController {
   Rx<DashboardModel?> dashboardIrList = DashboardModel().obs;
   Rx<DashboardModel?> dashboardSmList = DashboardModel().obs;
   Rx<DashboardModel?> dashboardMcList = DashboardModel().obs;
-  RxList<DashboardModel?> allItems = <DashboardModel?>[].obs;
+  RxList<Itemlist?> allItems = <Itemlist?>[].obs;
 
   RxList<DashboardModel?> filteredData = <DashboardModel>[].obs;
   List<DashboardModel?>? BufferdashboardList = <DashboardModel?>[].obs;
@@ -167,6 +167,8 @@ class HomeController extends GetxController {
 
   Future<void> getdashboardList() async {
     dashboardList.value = <DashboardModel>[];
+    allItems.value = <Itemlist>[];
+
     String lststrFacilityIds = selectedFacilityIdList.join(',');
 
     print({"facilityData1": lststrFacilityIds});
@@ -178,7 +180,6 @@ class HomeController extends GetxController {
         isLoading: true);
     if (_dashboardList != null) {
       dashboardList.value = _dashboardList;
-      // List<dynamic> allItems = [];
 
       int totalSumTemp = 0;
       int completedSumTemp = 0;
@@ -208,6 +209,7 @@ class HomeController extends GetxController {
         woBacklogSumTemp += details?.wo_backlog ?? 0;
         lowStockItemsSumTemp += details?.low_stock_items ?? 0;
         poItemsAwaitedSumTemp += details?.po_items_awaited ?? 0;
+        allItems.addAll(details?.item_list ?? []);
       }
 
       totalSum.value = totalSumTemp;
@@ -221,13 +223,7 @@ class HomeController extends GetxController {
       woBacklogSum.value = woBacklogSumTemp;
       lowStockItemsSum.value = lowStockItemsSumTemp;
       poItemsAwaitedSum.value = poItemsAwaitedSumTemp;
-      // }
-      //}
-      // for (var module in dashboardList) {
-      //   allItems.addAll(module?.cmDashboadDetails ?? []);
-      // }
 
-      // print({"allItems", allItems});
       dashboardBmList.value = _dashboardList[0];
       dashboardPmList.value = _dashboardList[1];
       dashboardMcList.value = _dashboardList[2];

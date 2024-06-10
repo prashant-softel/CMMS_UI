@@ -139,17 +139,18 @@ class PreventiveMaintenanceExecutionController extends GetxController {
               false,
             ) ??
             [];
-    var _assetsList = listMrsByTaskId!.value.last!.cmmrsItems;
-    for (var asset in _assetsList!) {
-      cmmrsItems!.add(asset);
+    if (listMrsByTaskId!.value.isNotEmpty) {
+      var _assetsList = listMrsByTaskId!.value.last!.cmmrsItems;
+      for (var asset in _assetsList!) {
+        cmmrsItems!.add(asset);
+      }
+      _processJsonData();
+      allTrue.value = itemExistsWithZeroDifference.every((item) => item);
+      addRowItem();
     }
-    _processJsonData();
-    allTrue.value = itemExistsWithZeroDifference.every((item) => item);
 
     print({"mrsit12mrs", allTrue.value});
     print({"mrsit12mrs", itemExistsWithZeroDifference});
-
-    addRowItem();
   }
 
   void _processJsonData() {
