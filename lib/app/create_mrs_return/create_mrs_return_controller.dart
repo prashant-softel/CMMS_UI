@@ -33,6 +33,7 @@ class CreateMrsReturnController extends GetxController {
   var allDropdownsSelected = true.obs;
 
   Rx<int> whereUsedTypeId = 0.obs;
+  Rx<int> type = 0.obs;
   Rx<String> activity = ''.obs;
   Rx<int> whereUsed = 0.obs;
   Rx<int> fromActorTypeId = 0.obs;
@@ -86,6 +87,7 @@ class CreateMrsReturnController extends GetxController {
       var dataFromPreviousScreen = Get.arguments;
 
       activity.value = dataFromPreviousScreen['activity'];
+      type.value = dataFromPreviousScreen['type'];
       whereUsedTypeId.value = dataFromPreviousScreen['pmTaskId'];
       whereUsed.value = dataFromPreviousScreen['whereUsed'];
       fromActorTypeId.value = dataFromPreviousScreen['fromActorTypeId'];
@@ -94,6 +96,7 @@ class CreateMrsReturnController extends GetxController {
 
       createmrsReturnPresenter.saveValue(
           whereUsedTypeId: whereUsedTypeId.value.toString());
+      createmrsReturnPresenter.saveValuee(type: type.value.toString());
       createmrsReturnPresenter.saveactivityValue(
           activity: activity.value.toString());
       // } else {
