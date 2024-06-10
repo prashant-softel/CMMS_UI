@@ -1017,7 +1017,7 @@ class EditMrsReturnContentWeb extends GetView<EditMrsReturnController> {
                                   text: 'Update',
                                   onPressed: () {
                                     // controller.addUser();
-                                    controller.createReturnMrs();
+                                    controller.updateReturnMrs();
                                   },
                                 ),
                               ),

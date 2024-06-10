@@ -2850,10 +2850,10 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                                       () async {
                                                                     // final url = '${_controller.jsaData}';
                                                                     // "https://www.w3.org/1999/xhtml/"
-                                                                    String
-                                                                        baseUrl =
-                                                                        'http://65.0.20.19/CMMS_API/';
-                                                                    // String baseUrl = 'http://172.20.43.9:83/';
+                                                                    // String
+                                                                    //     baseUrl =
+                                                                    //     'http://65.0.20.19/CMMS_API/';
+                                                                    String baseUrl = 'http://172.20.43.9:83/';
                                                                     String
                                                                         endpoint =
                                                                         '${_controller.sopData}';
@@ -2888,10 +2888,10 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                                     "View JSA",
                                                                 onPressed:
                                                                     () async {
-                                                                  String
-                                                                      baseUrl =
-                                                                      'http://65.0.20.19/CMMS_API/';
-                                                                  // String baseUrl = 'http://172.20.43.9:83/';
+                                                                  // String
+                                                                  //     baseUrl =
+                                                                  //     'http://65.0.20.19/CMMS_API/';
+                                                                  String baseUrl = 'http://172.20.43.9:83/';
                                                                   String
                                                                       endpoint =
                                                                       '${_controller.jsaData}';

@@ -55,7 +55,7 @@ class EditMrsReturnController extends GetxController {
       Future.delayed(Duration(seconds: 1), () {
         getReturnMrsDetails(
             mrsId: mrsId, isloading: true, facilityId: facilityId);
-        getAssetList(facilityId);
+        // getAssetList(facilityId);
       });
     });
     super.onInit();
@@ -73,6 +73,7 @@ class EditMrsReturnController extends GetxController {
       getCmmsItemList(
         _returnMrsrsDetailsModel.mrs_id ?? 0,
       );
+      getAssetList(facilityId);
     }
     // print({"mrsdetailss", returnMrsDetailsModel.value});
   }
@@ -91,14 +92,17 @@ class EditMrsReturnController extends GetxController {
       rowItem.value = [];
       returnMrsDetailsModel.value!.cmmrsItems?.forEach((element) {
         rowItem.value.add([
-          {"key": "Drop_down", "value": '${element.name}'},
+          {
+            "key": "Drop_down",
+            "value": '${element.name}',
+          },
           {'key': "Sr_No", "value": ''},
           {'key': "code", "value": ''},
           {'key': "Material_Type", "value": ''},
           {'key': "Issue_Qty", "value": ''},
           {'key': "Used_Qty", "value": ''},
           {'key': "Return_Qty", "value": '${element.returned_qty}'},
-          {'key': "Remark", "value": ''},
+          {'key': "Remark", "value": '${element.return_remarks}'},
           // {'key': "Action ", "value": ''},
         ]);
         dropdownMapperData[element.name] = StockDetailsList.firstWhere(
@@ -138,9 +142,9 @@ class EditMrsReturnController extends GetxController {
           {'key': "code", "value": ''},
           {'key': "Material_Type", "value": ''},
           {'key': "Material_Category", "value": ''},
-          {'key': "Sr_no", "value": ''},
+          {'key': "Sr_no", "value": '${element.serial_number}'},
           {'key': "Return_Qty", "value": '${element.returned_qty}'},
-          {'key': "Remark", "value": ''},
+          {'key': "Remark", "value": '${element.return_remarks}'},
           {'key': "Action ", "value": ''},
           // {'key': "Action ", "value": ''},
         ]);
@@ -180,22 +184,16 @@ class EditMrsReturnController extends GetxController {
     ]);
   }
 
-  Future<void> createReturnMrs() async {
+  Future<void> updateReturnMrs() async {
     String _activity = activityCtrlr.text.trim();
     String _remark = remarkCtrlr.text.trim();
-    String _setTemp = setTemlateCtrlr.text.trim();
-
-    Rx<DateTime> requestd_date = DateTime.now().obs;
-    String formattedFromdate =
-        DateFormat('yyyy-MM-dd').format(requestd_date.value);
-
     List<CmmsItem> items = [];
     List<FaultyItemsCmms> faultyItems = [];
-    rowItem.value.forEach((element) {
+    rowItem.forEach((element) {
       CmmsItem item = CmmsItem(
-        mrs_item_ID: dropdownMapperData.value[element[0]["value"]]?.id,
-        returned_qty: dropdownMapperData.value[element[0]["value"]].issued_qty -
-            dropdownMapperData.value[element[0]["value"]]
+        mrs_item_ID: dropdownMapperData[element[0]["value"]]?.mrs_item_id,
+        returned_qty: dropdownMapperData[element[0]["value"]].issued_qty -
+            dropdownMapperData[element[0]["value"]]
                 .consumed_qty, //double.tryParse(element[3]["value"] ?? '0'),
 
         return_remarks: element[7]["value"] ?? '0',
@@ -233,7 +231,7 @@ class EditMrsReturnController extends GetxController {
 
     print({"createReturnMrsJsonString", createReturnMrsJsonString});
     Map<String, dynamic>? responseCreateReturnMrs =
-        await editmrsReturnPresenter.createReturnMrs(
+        await editmrsReturnPresenter.updateReturnMrs(
       createReturnMrsJsonString: createReturnMrsJsonString,
       isLoading: true,
     );

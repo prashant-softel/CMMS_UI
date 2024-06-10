@@ -954,6 +954,7 @@ class Repository {
     bool? isExport,
     String? start_date,
     required String end_date,
+    required int isHazardous,
     required bool isLoading,
   }) async {
     try {
@@ -965,6 +966,7 @@ class Repository {
         start_date: start_date,
         end_date: end_date,
         isLoading: isLoading,
+        isHazardous: isHazardous,
         auth: auth,
       );
       print('water data list: ${res.data}');
@@ -11647,6 +11649,41 @@ class Repository {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.createReturnMrs(
+        auth: auth,
+        createReturnMrsJsonString: createReturnMrsJsonString,
+        isLoading: isLoading ?? false,
+      );
+
+      var resourceData = res.data;
+
+      print('Response Create Goods order : ${resourceData}');
+
+      if (!res.hasError) {
+        if (res.errorCode == 200) {
+          var responseMap = json.decode(res.data);
+          Fluttertoast.showToast(
+              msg: " Mrs Return Add Successfully...", fontSize: 16.0);
+
+          return responseMap;
+        }
+      } else {
+        Utility.showDialog(res.errorCode.toString(), 'createReturnMrs');
+        //return '';
+      }
+      return Map();
+    } catch (error) {
+      print(error.toString());
+      return Map();
+    }
+  }
+
+  Future<Map<String, dynamic>> updateReturnMrs(
+    createReturnMrsJsonString,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.updateReturnMrs(
         auth: auth,
         createReturnMrsJsonString: createReturnMrsJsonString,
         isLoading: isLoading ?? false,

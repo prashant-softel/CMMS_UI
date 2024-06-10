@@ -1344,11 +1344,11 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                                                 message: 'view',
                                                                 onPress:
                                                                     () async {
-                                                                  String
-                                                                      baseUrl =
-                                                                      "http://65.0.20.19/CMMS_API/";
-                                                                  // String baseUrl =
-                                                                  // 'http://172.20.43.9:83/';
+                                                                  // String
+                                                                  //     baseUrl =
+                                                                  //     "http://65.0.20.19/CMMS_API/";
+                                                                  String baseUrl =
+                                                                  'http://172.20.43.9:83/';
                                                                   String
                                                                       fileName =
                                                                       controller
@@ -2074,7 +2074,8 @@ class NewPermitWeb extends GetView<NewPermitController> {
                             ),
                           ),
                           Dimens.boxHeight20,
-                          controller.jobModel?.id != null
+                          controller.jobModel?.id != null &&
+                                  controller.permitId.value == 0
                               ? Center(
                                   child: Container(
                                       height: 45,

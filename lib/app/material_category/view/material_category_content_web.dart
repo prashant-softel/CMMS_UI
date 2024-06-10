@@ -62,7 +62,7 @@ class MaterialCategoryContentWeb extends GetView<MaterialCategoryController> {
                     ),
                     InkWell(
                       onTap: () {
-                        Get.offNamed(Routes.masterDashboard);
+                        Get.offNamed(Routes.stockManagementDashboardScreen);
                       },
                       child: Text(
                         " / STOCK MANAGEMENT",

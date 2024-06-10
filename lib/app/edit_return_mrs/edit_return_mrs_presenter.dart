@@ -13,11 +13,11 @@ class EditMrsReturnPresenter {
           facilityId: facilityId ?? 0,
           isLoading: isLoading ?? false,
           mrsId: mrsId);
-  Future<Map<String, dynamic>?> createReturnMrs({
+  Future<Map<String, dynamic>?> updateReturnMrs({
     createReturnMrsJsonString,
     required bool isLoading,
   }) async {
-    return editmrsReturnUsecase.createReturnMrs(
+    return editmrsReturnUsecase.updateReturnMrs(
       createReturnMrsJsonString: createReturnMrsJsonString,
       isLoading: isLoading,
     );

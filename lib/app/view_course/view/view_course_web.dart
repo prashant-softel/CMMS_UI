@@ -279,10 +279,10 @@ class ViewCourseWeb extends GetView<ViewCourseController> {
                                                         message:
                                                             'view attachment',
                                                         onPress: () async {
-                                                          String baseUrl =
-                                                              "http://65.0.20.19/CMMS_API/";
                                                           // String baseUrl =
-                                                          // 'http://172.20.43.9:83/';
+                                                          //     "http://65.0.20.19/CMMS_API/";
+                                                          String baseUrl =
+                                                          'http://172.20.43.9:83/';
                                                           String fileName =
                                                               controller
                                                                       .file_list![

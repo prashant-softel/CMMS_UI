@@ -27,6 +27,7 @@ class WasteDataController extends GetxController {
   RxList<String> wasteDataListTableColumns = <String>[].obs;
   WasteDataList? wasteDataListModel;
   RxList<dynamic> mainHeaderList = [].obs;
+  RxInt hazardous = 0.obs;
   PaginationController paginationController = PaginationController(
     rowCount: 0,
     rowsPerPage: 10,
@@ -52,6 +53,8 @@ class WasteDataController extends GetxController {
   var qtyCtrlr = TextEditingController();
   var descriptionCtrlr = TextEditingController();
   RxList<WasteSource?> typeOfWasteList = <WasteSource>[].obs;
+  RxList<WasteSource?> hazWasteList = <WasteSource>[].obs;
+  RxList<WasteSource?> nonHazWasteList = <WasteSource>[].obs;
   Rx<bool> istypeOfWasteListSelected = true.obs;
   Rx<String> selectedtypeOfWaste = ''.obs;
   int selectedTypeOfWasteId = 0;
@@ -66,23 +69,75 @@ class WasteDataController extends GetxController {
   int selectedYear = 2024;
 
   ///
-  @override
-  void onInit() async {
+  // @override
+  // void onInit() async {
+  //   await setId();
+  //   facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
+  //     facilityId = event;
+  //     Future.delayed(Duration(seconds: 2), () async {
+  //       await getWasteDataList(
+  //         hazardous.value,
+  //         facilityId,
+  //         formattedTodate1,
+  //         formattedFromdate1,
+  //         false,
+  //       );
+  //     });
+  //     Future.delayed(Duration(seconds: 1), () async {
+  //       getTypeOfWasteList();
+  //     });
+  //   });
+  //   super.onInit();
+  // }
+
+  void onReady() async {
+    await setId();
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
       facilityId = event;
       Future.delayed(Duration(seconds: 2), () async {
         await getWasteDataList(
-            facilityId, formattedTodate1, formattedFromdate1, false);
+          hazardous.value,
+          facilityId,
+          formattedTodate1,
+          formattedFromdate1,
+          false,
+        );
       });
       Future.delayed(Duration(seconds: 1), () async {
         getTypeOfWasteList();
       });
     });
-    super.onInit();
+    super.onReady();
+  }
+
+  void clearStoreData() {
+    wasteDataPresenter.clearHazardousValue();
+  }
+
+  Future<void> setId() async {
+    try {
+      String? _hazardous = await wasteDataPresenter.getHazardousValue();
+      if (_hazardous == null || _hazardous == '' || _hazardous == "null") {
+        var dataFromPreviousScreen = Get.arguments;
+        hazardous.value = dataFromPreviousScreen['hazardous'];
+        wasteDataPresenter.saveHazardousValue(
+            hazardous: hazardous.value.toString());
+      } else {
+        hazardous.value = int.tryParse(_hazardous) ?? 0;
+      }
+    } catch (e) {
+      print(e.toString() + ' month or year');
+      //  Utility.showDialog(e.toString() + 'type');
+    }
   }
 
   Future<void> getWasteDataList(
-      int facilityId, dynamic startDate, dynamic endDate, bool isExport) async {
+    int isHazardous,
+    int facilityId,
+    dynamic startDate,
+    dynamic endDate,
+    bool isExport,
+  ) async {
     wasteDataList.value = <WasteDataList>[];
     filteredData.value = <WasteDataList>[];
     masterDataList.value = <MasterList>[];
@@ -93,6 +148,7 @@ class WasteDataController extends GetxController {
       end_date: (selectedYear + 1).toString(),
       facility_id: facilityId,
       isExport: isExport,
+      isHazardous: isHazardous,
     );
     wasteDataList.value = _wasteDataList;
 
@@ -232,7 +288,10 @@ class WasteDataController extends GetxController {
     for (var waste_data_list in _typeOfWaterList) {
       typeOfWasteList.add(waste_data_list);
     }
-
+    hazWasteList.value =
+        typeOfWasteList.where((element) => element?.isHazardous == 1).toList();
+    nonHazWasteList.value =
+        typeOfWasteList.where((element) => element?.isHazardous == 0).toList();
     update(['unit_currency_list']);
   }
 
@@ -319,14 +378,14 @@ class WasteDataController extends GetxController {
     String formattedDate = DateFormat("yyyy-MM-dd").format(procurementTime);
 
     CreateWasteData createWasteData = CreateWasteData(
-      consumeType: 1,
-      facilityId: facilityId,
-      creditQty: 0,
-      date: formattedDate,
-      debitQty: double.tryParse(_qtCtrlr) ?? 0,
-      description: _descriptionCtrlr,
-      wasteTypeId: selectedTypeOfWasteId,
-    );
+        consumeType: 1,
+        facilityId: facilityId,
+        creditQty: 0,
+        date: formattedDate,
+        debitQty: double.tryParse(_qtCtrlr) ?? 0,
+        description: _descriptionCtrlr,
+        wasteTypeId: selectedTypeOfWasteId,
+        id: 0);
     var createWaterDataModelJsonString = createWasteData.toJson();
     Map<String, dynamic>? responseCreateWaterDataModel =
         await wasteDataPresenter.createWasteData(
@@ -444,6 +503,7 @@ class WasteDataController extends GetxController {
   }
 
   void goWasteDataList() {
-    getWasteDataList(facilityId, formattedFromdate, formattedFromdate1, false);
+    getWasteDataList(hazardous.value, facilityId, formattedFromdate,
+        formattedFromdate1, false);
   }
 }
