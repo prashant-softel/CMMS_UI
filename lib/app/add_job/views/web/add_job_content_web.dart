@@ -599,7 +599,7 @@ class _AddJobContentWebState extends State<AddJobContentWeb> {
                                                 : null,
                                           ),
                                           onChanged: (value) {
-                                            if (value.trim().length >= 1) {
+                                            if (value.trim().isNotEmpty) {
                                               controller.isBreakdownInvalid
                                                   .value = false;
                                             } else {
