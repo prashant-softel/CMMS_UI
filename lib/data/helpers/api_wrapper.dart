@@ -15,8 +15,8 @@ class ApiWrapper {
   final String _baseUrl = //(appFlavor == AppFlavor.PROD)
       //? 'https://api.cmms.in/v1/'
       //:
-      'http://65.0.20.19/CMMS_API/api/';
-  // 'http://172.20.43.9:83/api/';
+      // 'http://65.0.20.19/CMMS_API/api/';
+  'http://172.20.43.9:83/api/';
 
   /// Method to make all the requests inside the app like GET, POST, PUT, Delete
   Future<ResponseModel> makeRequest(

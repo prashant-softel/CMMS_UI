@@ -233,8 +233,8 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                                     GestureDetector(
                                       onTap: () async {
                                         String pdfUrl =
-                                            'http://65.0.20.19/CMMS_API/Upload/1779/0/0/Ptw%20sop%20file%20pdf.pdf';
-                                        // "http://172.20.43.9:83/Upload/1/0/0/Ptw%20sop%20file%20pdf.pdf";
+                                            // 'http://65.0.20.19/CMMS_API/Upload/1779/0/0/Ptw%20sop%20file%20pdf.pdf';
+                                        "http://172.20.43.9:83/Upload/1/0/0/Ptw%20sop%20file%20pdf.pdf";
                                         // String pdfPath =
                                         //     html.window.location.origin +
                                         //         '/' +
@@ -1262,10 +1262,10 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                                                         onPressed: () async {
                                                           // final url = '${controller.jsaData}';
                                                           // "https://www.w3.org/1999/xhtml/"
-                                                          String baseUrl =
-                                                              'http://65.0.20.19/CMMS_API/';
                                                           // String baseUrl =
-                                                          //     'http://172.20.43.18:82/';
+                                                          //     'http://65.0.20.19/CMMS_API/';
+                                                          String baseUrl =
+                                                              'http://172.20.43.18:82/';
                                                           String endpoint =
                                                               '${controller.sopData}';
 
@@ -1295,10 +1295,10 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                                                               .navyBlueColor,
                                                       text: "View JSA",
                                                       onPressed: () async {
-                                                        String baseUrl =
-                                                            'http://65.0.20.19/CMMS_API/';
                                                         // String baseUrl =
-                                                        //     'http://172.20.43.18:82/';
+                                                        //     'http://65.0.20.19/CMMS_API/';
+                                                        String baseUrl =
+                                                            'http://172.20.43.18:82/';
                                                         String endpoint =
                                                             '${controller.jsaData}';
                                                         String fullUrl =
@@ -2364,10 +2364,10 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                                                       icon: Icons.visibility,
                                                       message: 'View Permit',
                                                       onPress: () async {
-                                                        String baseUrl =
-                                                            "http://65.0.20.19/CMMS_API/";
                                                         // String baseUrl =
-                                                        // 'http://172.20.43.9:83/';
+                                                        //     "http://65.0.20.19/CMMS_API/";
+                                                        String baseUrl =
+                                                        'http://172.20.43.9:83/';
                                                         String fileName =
                                                             controller
                                                                     .file_list![

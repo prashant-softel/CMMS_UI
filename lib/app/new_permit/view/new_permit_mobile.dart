@@ -510,10 +510,10 @@ class NewPermitMobile extends GetView<NewPermitController> {
                                                     icon: Icons.visibility,
                                                     message: 'view',
                                                     onPress: () async {
-                                                      String baseUrl =
-                                                          "http://65.0.20.19/CMMS_API/";
                                                       // String baseUrl =
-                                                      // 'http://172.20.43.9:83/';
+                                                      //     "http://65.0.20.19/CMMS_API/";
+                                                      String baseUrl =
+                                                      'http://172.20.43.9:83/';
                                                       String fileName =
                                                           controller
                                                                   .file_list![

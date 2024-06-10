@@ -2901,7 +2901,7 @@ class ConnectHelper {
     var responseModel = await apiWrapper.makeRequest(
       'JC/StartJC',
       Request.post,
-      body,
+      jobCard,
       isLoading ?? false,
       {
         'Content-Type': 'application/json',
@@ -3344,10 +3344,11 @@ class ConnectHelper {
     required String auth,
     int? facility_id,
     String? start_date,
+    required int isHazardous,
     required String end_date,
   }) async {
     ResponseModel responseModel = await apiWrapper.makeRequest(
-      'MISMaster/GetWasteDataListMonthWise?fromDate=$start_date-04-01&toDate=$end_date-04-01&facility_id=$facility_id',
+      'MISMaster/GetWasteDataListMonthWise?fromDate=$start_date-04-01&toDate=$end_date-04-01&facility_id=$facility_id&hazardous=$isHazardous',
       Request.getMultiparts,
       null,
       isLoading,
@@ -4754,9 +4755,10 @@ class ConnectHelper {
       required int importType,
       bool? isLoading,
       required int facilityId}) async {
-    final request = http.MultipartRequest('POST',
-        Uri.parse('http://65.0.20.19/CMMS_API/api/FileUpload/UploadFile'));
-    // Uri.parse('http://172.20.43.9:83/api/FileUpload/UploadFile'));
+    final request = http.MultipartRequest(
+        'POST',
+        // Uri.parse('http://65.0.20.19/CMMS_API/api/FileUpload/UploadFile'));
+        Uri.parse('http://172.20.43.9:83/api/FileUpload/UploadFile'));
 
     request.files.add(
         http.MultipartFile.fromBytes('files', fileBytes!, filename: fileName));
@@ -4826,9 +4828,10 @@ class ConnectHelper {
     required String fileName,
     bool? isLoading,
   }) async {
-    final request = http.MultipartRequest('POST',
-        Uri.parse('http://65.0.20.19/CMMS_API/api/FileUpload/UploadFile'));
-    // Uri.parse('http://172.20.43.9:83/api/FileUpload/UploadFile'));
+    final request = http.MultipartRequest(
+        'POST',
+        // Uri.parse('http://65.0.20.19/CMMS_API/api/FileUpload/UploadFile'));
+        Uri.parse('http://172.20.43.9:83/api/FileUpload/UploadFile'));
 
     request.files.add(
         http.MultipartFile.fromBytes('files', fileBytes!, filename: fileName));
@@ -5367,9 +5370,10 @@ class ConnectHelper {
     required String fileName,
     bool? isLoading,
   }) async {
-    final request = http.MultipartRequest('POST',
-        Uri.parse('http://65.0.20.19/CMMS_API/api/FileUpload/UploadFile'));
-    // Uri.parse('http://172.20.43.9:83/api/FileUpload/UploadFile'));
+    final request = http.MultipartRequest(
+        'POST',
+        // Uri.parse('http://65.0.20.19/CMMS_API/api/FileUpload/UploadFile'));
+        Uri.parse('http://172.20.43.9:83/api/FileUpload/UploadFile'));
 
     request.files.add(
         http.MultipartFile.fromBytes('files', fileBytes!, filename: fileName));
@@ -5396,9 +5400,10 @@ class ConnectHelper {
     required String fileName,
     bool? isLoading,
   }) async {
-    final request = http.MultipartRequest('POST',
-        Uri.parse('http://65.0.20.19/CMMS_API/api/FileUpload/UploadFile'));
-    // Uri.parse('http://172.20.43.9:83/api/FileUpload/UploadFile'));
+    final request = http.MultipartRequest(
+        'POST',
+        // Uri.parse('http://65.0.20.19/CMMS_API/api/FileUpload/UploadFile'));
+        Uri.parse('http://172.20.43.9:83/api/FileUpload/UploadFile'));
 
     request.files.add(
         http.MultipartFile.fromBytes('files', fileBytes!, filename: fileName));

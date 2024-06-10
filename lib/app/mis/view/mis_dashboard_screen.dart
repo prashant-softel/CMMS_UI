@@ -465,33 +465,22 @@ class MisDashboardScreen extends GetView<MisDashboardController> {
                                   : 5,
                               children: <Widget>[
                                 // createContentTile(
-                                //   title: 'CheckList Inspection',
-                                //   onTap: () {
-                                //     controller.goToCheckListOfObservation();
-                                //   },
-                                // ),
-                                // createContentTile(
-                                //     title: 'Waste Data List',
+                                //     title: 'Waste Data Report',
                                 //     onTap: () {
-                                //       // controller.goToWasteDataScreen();
+                                //       controller.goToWasteDataScreen();
                                 //     }),
                                 createContentTile(
-                                    title: 'Waste Data Report',
-                                    onTap: () {
-                                      controller.goToWasteDataScreen();
-                                    }),
-                                // createContentTile(
-                                //   title: 'Hazardous Waste',
-                                //   onTap: () {
-                                //     controller.goToHazardousDataScreen();
-                                //   },
-                                // ),
-                                // createContentTile(
-                                //   title: 'Non-Hazardous Waste',
-                                //   onTap: () {
-                                //     controller.goToNonHazardousDataScreen();
-                                //   },
-                                // ),
+                                  title: 'Hazardous Waste',
+                                  onTap: () {
+                                    controller.goToHazardousDataScreen();
+                                  },
+                                ),
+                                createContentTile(
+                                  title: 'Non-Hazardous Waste',
+                                  onTap: () {
+                                    controller.goToNonHazardousDataScreen();
+                                  },
+                                ),
                               ],
                             ),
                             Container(
@@ -603,6 +592,13 @@ class MisDashboardScreen extends GetView<MisDashboardController> {
                                       title: "Risk Type",
                                       onTap: () {
                                         controller.goToRiskType();
+                                      });
+                                }))),
+                                OnHover(builder: (((isHovered) {
+                                  return createContentTile(
+                                      title: "Document Upload",
+                                      onTap: () {
+                                        controller.documentUpload();
                                       });
                                 }))),
                               ],

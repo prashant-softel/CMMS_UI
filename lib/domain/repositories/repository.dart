@@ -954,6 +954,7 @@ class Repository {
     bool? isExport,
     String? start_date,
     required String end_date,
+    required int isHazardous,
     required bool isLoading,
   }) async {
     try {
@@ -965,6 +966,7 @@ class Repository {
         start_date: start_date,
         end_date: end_date,
         isLoading: isLoading,
+        isHazardous: isHazardous,
         auth: auth,
       );
       print('water data list: ${res.data}');

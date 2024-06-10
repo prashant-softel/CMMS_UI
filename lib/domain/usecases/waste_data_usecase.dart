@@ -1,6 +1,7 @@
 import 'package:cmms/domain/models/facility_model.dart';
 import 'package:cmms/domain/models/type_of_waste_model.dart';
 import 'package:cmms/domain/models/waste_data_list_model.dart';
+import 'package:cmms/domain/repositories/local_storage_keys.dart';
 import 'package:cmms/domain/repositories/repository.dart';
 
 class WasteDataUsecase {
@@ -13,13 +14,16 @@ class WasteDataUsecase {
     String? start_date,
     bool? isExport,
     required String end_date,
+    required int isHazardous,
   }) async {
     return repository.getWasteDataList(
-        isLoading: isLoading,
-        facility_id: facility_id,
-        start_date: start_date,
-        end_date: end_date,
-        isExport: isExport);
+      isLoading: isLoading,
+      facility_id: facility_id,
+      start_date: start_date,
+      end_date: end_date,
+      isExport: isExport,
+      isHazardous: isHazardous,
+    );
   }
 
   Future<Map<String, dynamic>> createWasteData({
@@ -62,6 +66,12 @@ class WasteDataUsecase {
       facilityId: facilityId,
     );
   }
+
+  void saveHazardousValue({String? hazardous}) async =>
+      repository.saveValue(LocalKeys.hazardous, hazardous);
+  Future<String?> getHazardousValue() async =>
+      await repository.getStringValue(LocalKeys.hazardous);
+  void clearHazardousValue() async => repository.clearData(LocalKeys.hazardous);
 
   Future<List<FacilityModel?>?> getFacilityList({bool? isLoading}) async =>
       await repository.getFacilityList(isLoading);

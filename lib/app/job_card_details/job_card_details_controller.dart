@@ -118,6 +118,9 @@ class JobCardDetailsController extends GetxController {
   RxMap<dynamic, dynamic> deployedEmployeeMapperData = {}.obs;
   RxList<MRSListByJobIdModel?>? listMrsByTaskId = <MRSListByJobIdModel?>[].obs;
   RxList<CmmrsItems?>? cmmrsItems = <CmmrsItems?>[].obs;
+  Rx<bool> allTrue = false.obs;
+  var returnitemExists = <int>[].obs;
+  var itemExistsWithZeroDifference = <bool>[].obs;
 
   RxString selectedOption = ''.obs;
   RxList<List<Map<String, String>>> employeesDeployed =
@@ -262,8 +265,22 @@ class JobCardDetailsController extends GetxController {
     for (var asset in _assetsList!) {
       cmmrsItems!.add(asset);
     }
-    print({"mrsit", cmmrsItems});
+    _processJsonData();
+    allTrue.value = itemExistsWithZeroDifference.every((element) => element);
+    print({"mrsit", allTrue});
+    print({"mrsit", itemExistsWithZeroDifference});
     addRowItem();
+  }
+
+  void _processJsonData() {
+    itemExistsWithZeroDifference.value = cmmrsItems!.map((element) {
+      double issued_qty = element!.issued_qty ?? 0;
+      double used_qty = element.used_qty ?? 0;
+      return (issued_qty - used_qty) == 0;
+    }).toList();
+    returnitemExists.value = cmmrsItems!.map((element) {
+      return element!.mrs_return_ID ?? 0;
+    }).toList();
   }
 
   Future<void> setJcId() async {

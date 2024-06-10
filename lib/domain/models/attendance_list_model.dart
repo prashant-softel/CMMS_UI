@@ -38,7 +38,6 @@ class MonthData {
   int? less_than_35;
   int? between_30_to_50;
   int? greater_than_50;
-  // ContractLabour? contract_labour;
 
   MonthData({
     this.date,
@@ -46,7 +45,6 @@ class MonthData {
     this.less_than_35,
     this.between_30_to_50,
     this.greater_than_50,
-    // this.contract_labour,
   });
 
   factory MonthData.fromJson(Map<String, dynamic> json) => MonthData(
@@ -55,6 +53,5 @@ class MonthData {
         less_than_35: json['less_than_35'],
         between_30_to_50: json['between_30_to_50'],
         greater_than_50: json['greater_than_50'],
-        // contract_labour: json['contract_labour'],
       );
 }
