@@ -1,4 +1,3 @@
-
 import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
@@ -682,6 +681,7 @@ class PreventiveMaintenanceExecutionContentWeb
                                                 Get.toNamed(
                                                     Routes.mrsReturnScreen,
                                                     arguments: {
+                                                      'type': 2,
                                                       "whereUsed": 27,
                                                       "fromActorTypeId": 3,
                                                       "to_actor_type_id": 2,
