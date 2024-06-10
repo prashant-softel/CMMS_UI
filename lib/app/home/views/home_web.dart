@@ -737,6 +737,8 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb> {
                                                       alignment:
                                                           Alignment.centerLeft,
                                                       child: PieChart(
+                                                        totalValue:
+                                                            20.0, //double.tryParse(controller.dashboardBmList.value!.category_total_count.toString()),
                                                         dataMap: controller
                                                             .getDataMap(),
                                                         chartType:

@@ -15,7 +15,7 @@ class GetAssetDataModel {
   String? cat_name;
   dynamic serial_number;
   dynamic returned_qty;
-  // int? status;
+  String? return_remarks;
 
   GetAssetDataModel(
       {this.id,
@@ -24,7 +24,8 @@ class GetAssetDataModel {
       this.asset_code,
       this.cat_name,
       this.serial_number,
-      this.returned_qty
+      this.returned_qty,
+      this.return_remarks
       // this.status,
       });
 
@@ -35,7 +36,7 @@ class GetAssetDataModel {
     name = json['asset_name'];
     asset_code = json['asset_code'];
     cat_name = json['cat_name'];
-
+    return_remarks = json['return_remarks'];
     returned_qty = json['returned_qty'];
   }
 
@@ -46,6 +47,7 @@ class GetAssetDataModel {
         "asset_name": name,
         "asset_code": asset_code,
         "cat_name": cat_name,
+        "return_remarks": return_remarks,
         "returned_qty": returned_qty,
       };
 }

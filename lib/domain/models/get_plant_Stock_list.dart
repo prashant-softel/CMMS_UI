@@ -56,7 +56,7 @@ class StockDetails {
   double? inward;
   double? outward;
   double? balance;
-
+  String? return_remarks;
   StockDetails(
       {this.assetItemID,
       this.asset_code,
@@ -77,11 +77,13 @@ class StockDetails {
       this.consumed_qty,
       this.issued_qty,
       this.requested_qty,
+      this.return_remarks,
       this.serial_no});
 
   factory StockDetails.fromJson(Map<String, dynamic> parsedJson) {
     return StockDetails(
       assetItemID: parsedJson['assetItemID'],
+      return_remarks: parsedJson['return_remarks'],
       mrs_item_id: parsedJson['mrs_item_id'],
       returned_qty: parsedJson['returned_qty'],
       approved_qty: parsedJson['approved_qty'],
@@ -104,6 +106,7 @@ class StockDetails {
     );
   }
   Map<String, dynamic> toJson() => {
+        "return_remarks": return_remarks,
         "returned_qty": returned_qty,
         "mrs_item_id": mrs_item_id,
         "issued_date": issued_date,
