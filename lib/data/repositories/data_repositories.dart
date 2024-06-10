@@ -4262,7 +4262,16 @@ class DataRepository extends DomainRepository {
         createReturnMrsJsonString: createReturnMrsJsonString,
         isLoading: isLoading ?? false,
       );
-
+  Future<ResponseModel> updateReturnMrs({
+    required String auth,
+    createReturnMrsJsonString,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.updateReturnMrs(
+        auth: auth,
+        createReturnMrsJsonString: createReturnMrsJsonString,
+        isLoading: isLoading ?? false,
+      );
   Future<ResponseModel> getEmployeeStockReportList(
       {String? auth,
       bool? isLoading,

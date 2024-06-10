@@ -7310,6 +7310,24 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> updateReturnMrs({
+    required String auth,
+    createReturnMrsJsonString,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'MRS/UpdateReturnMRS',
+      Request.post,
+      createReturnMrsJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
   Future<ResponseModel> importCheckpoint({
     required String auth,
     required String fileId,
