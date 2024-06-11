@@ -841,7 +841,7 @@ class ObservationPmExecutionViewDialog extends GetView {
     var inputNumber = int.tryParse(record[6]["value"] ?? "0") ?? 0;
     if (((record[3]['value'] == "1") &&
         !(min <= inputNumber && inputNumber <= max))) {
-      Fluttertoast.showToast(msg: 'within Range', timeInSecForIosWeb: 5);
+      Fluttertoast.showToast(msg: 'Not within range', timeInSecForIosWeb: 5);
     } else if (!(min <= inputNumber && inputNumber <= max)) {
       record[7]['value'] = "1";
     } else if (((record[3]['value'] == "0") ||

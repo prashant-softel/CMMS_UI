@@ -1614,7 +1614,7 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                                                             return DataRow(cells: [
                                                                               DataCell(Text('${employeeNameDetails?.name ?? ''}')),
                                                                               DataCell(Text('${employeeNameDetails?.mobileNumber ?? ''}')),
-                                                                              DataCell(Text('${employeeNameDetails?.responsibility?.map((e) => e.name) ?? ''}')),
+                                                                              DataCell(Text('${employeeNameDetails?.designation ?? ''}')),
                                                                               DataCell(
                                                                                 Wrap(
                                                                                   children: [
