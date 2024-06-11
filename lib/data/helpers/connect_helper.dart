@@ -8897,6 +8897,24 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> getAttendanceDetail({
+    required String auth,
+    required int facilityId,
+    required String date,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Attendence/GetAttendanceByDetails?facility_id=$facilityId&date=$date',
+      Request.get,
+      null,
+      isLoading ?? false,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
   Future<ResponseModel> getDSMData({
     required String auth,
     List<String>? selectedYear,

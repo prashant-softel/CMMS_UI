@@ -5132,6 +5132,18 @@ class DataRepository extends DomainRepository {
         year: year,
         isLoading: isLoading ?? false,
       );
+  Future<ResponseModel> getAttendanceDetail({
+    required String auth,
+    required int facilityId,
+    required String date,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.getAttendanceDetail(
+        auth: auth,
+        facilityId: facilityId,
+        date: date,
+        isLoading: isLoading ?? false,
+      );
 
   Future<ResponseModel> getDSMData({
     required String auth,

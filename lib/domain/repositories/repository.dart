@@ -1,8 +1,10 @@
 import 'dart:convert';
 import 'dart:developer';
 import 'dart:typed_data';
+import 'package:cmms/app/widgets/attendance_popup.dart';
 import 'package:cmms/domain/models/Statutory_Compliance_model.dart';
 import 'package:cmms/domain/models/attendance_list_model.dart';
+import 'package:cmms/domain/models/attendance_model.dart';
 import 'package:cmms/domain/models/course_category_model.dart';
 import 'package:cmms/domain/models/dashboard_model.dart';
 import 'package:cmms/domain/models/dsm_list_model.dart';
@@ -932,13 +934,6 @@ class Repository {
         Get.offAllNamed(
           Routes.viewWaterData,
         );
-
-        // if (res.errorCode == 200) {
-        //   var responseMap = json.decode(res.data);
-        //   return responseMap;
-        // }
-
-        // Fluttertoast.showToast(msg: "Data add successfully...", fontSize: 16.0);
       } else {
         Utility.showDialog(res.errorCode.toString(), 'update Water Data');
         //return '';
@@ -13725,7 +13720,13 @@ class Repository {
 
       if (!res.hasError) {
         if (res.errorCode == 200) {
-          Get.toNamed(Routes.admin_dashboard);
+          var json = jsonDecode(resourceData);
+          String message = json['message'];
+          Get.dialog<void>(
+            AttendancePopup(
+              message: message,
+            ),
+          );
           return true;
         }
       } else {
@@ -13761,6 +13762,33 @@ class Repository {
     } catch (error) {
       print(error.toString());
       return [];
+    }
+  }
+
+  Future<AttendaceModel?> getAttendanceDetail({
+    required int facilityId,
+    required String date,
+    bool? isLoading,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getAttendanceDetail(
+        auth: auth,
+        facilityId: facilityId,
+        date: date,
+        isLoading: isLoading,
+      );
+      if (!res.hasError) {
+        var response = json.decode(res.data);
+        AttendaceModel attendanceModel = AttendaceModel.fromJson(response);
+        return null;
+      } else {
+        Utility.showDialog(res.errorCode.toString(), 'getdsmDataList');
+        return null;
+      }
+    } catch (error) {
+      print(error.toString());
+      return null;
     }
   }
 
