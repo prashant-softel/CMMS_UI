@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:cmms/app/home/home_controller.dart';
 import 'package:cmms/domain/models/Statutory_Compliance_model.dart';
+import 'package:cmms/domain/models/comment_model.dart';
 import 'package:cmms/domain/models/createStatutory_model.dart';
 import 'package:cmms/domain/models/facility_model.dart';
 import 'package:cmms/domain/models/get_statutory_by_id_model.dart';
@@ -26,7 +27,7 @@ class ViewComplianceController extends GetxController {
   RxList<StatutoryComplianceModel?> statutoryComplianceList =
       <StatutoryComplianceModel>[].obs;
   RxList<HistoryModel?>? historyList = <HistoryModel?>[].obs;
-
+  TextEditingController approveCommentTextFieldCtrlr = TextEditingController();
   Rx<GetStatutoryById?> getStatutoryById = GetStatutoryById().obs;
   Rx<bool> isStatutoryComplianceSelected = true.obs;
   Rx<String> selectedStatutoryCompliance = ''.obs;
@@ -53,9 +54,6 @@ class ViewComplianceController extends GetxController {
         facilityId = event;
         Future.delayed(Duration(seconds: 1), () {
           getFacilityList();
-        });
-        Future.delayed(Duration(seconds: 1), () {
-          getStatutoryComplianceDropDown();
         });
       });
       if (srId.value != 0) {
@@ -127,75 +125,24 @@ class ViewComplianceController extends GetxController {
     }
   }
 
-  void getStatutoryComplianceDropDown() async {
-    statutoryComplianceList.value = <StatutoryComplianceModel>[];
-    final _statutoryComplianceList =
-        await viewCompliancePresenter.getStatutoryComplianceDropDown(
-      isLoading: true,
-      facilityId: facilityId,
-    );
-    print('Unit Currency List:$statutoryComplianceList');
-    for (var statutory_Compliance_List in _statutoryComplianceList) {
-      statutoryComplianceList.add(statutory_Compliance_List);
-    }
+  void complianceApprovedButton({int? id}) async {
+    {
+      String _comment = approveCommentTextFieldCtrlr.text.trim();
 
-    update(['statutory_Compliance_List']);
-  }
+      CommentModel commentComplianceApprovedModel =
+          CommentModel(id: id, comment: _comment);
 
-  void createCompliance() async {
-    try {
-      checkCompiliace();
-      if (isFormInvalid.value) {
-        return;
-      }
-      String _issueDateTc = issueDateTc.text.trim();
+      var complianceApprovedJsonString =
+          commentComplianceApprovedModel.toJson();
 
-      String _expireOnDateTc = expireOnDateTc.text.trim();
-      String _commentsCtrl = commentsCtrl.text.trim();
-
-      CreateStatutoryModel createStatutoryModel = CreateStatutoryModel(
-        facility_id: facilityId,
-        Comment: _commentsCtrl,
-        compliance_id: selectedStatutoryComplianceId,
-        issue_date: _issueDateTc,
-        expires_on: _expireOnDateTc,
-      );
-
-      // Convert the CreateStatutoryModel instance to JSON
-      var createComplianceModelJsonString = createStatutoryModel.toJson();
-
-      // Call the createCompliance function from stockManagementAddGoodsOrdersPresenter
-      Map<String, dynamic>? responseCreateComplianceModel =
-          await viewCompliancePresenter.createCompliance(
-        createCompliance: createComplianceModelJsonString,
+      Map<String, dynamic>? response =
+          await viewCompliancePresenter.complianceApprovedButton(
+        complianceApprovedJsonString: complianceApprovedJsonString,
         isLoading: true,
       );
-
-      // Handle the response
-      if (responseCreateComplianceModel == null) {
-        // CreateNewPermitDialog();
-        // showAlertDialog();
+      if (response == true) {
+        //getCalibrationList(facilityId, true);
       }
-      print(
-          'Create  create Compliance  data: $createComplianceModelJsonString');
-    } catch (e) {
-      print(e);
-    }
-  }
-
-  void checkCompiliace() {
-    if (selectedStatutoryCompliance.value == '') {
-      isStatutoryComplianceSelected.value = false;
-      isFormInvalid.value = true;
-    }
-    if (issueDateTc.text.trim().length < 3) {
-      isIssueDateInvalid.value = true;
-      isFormInvalid.value = true;
-    }
-
-    if (expireOnDateTc.text.trim().length < 3) {
-      isExpiresonInvalid.value = true;
-      isFormInvalid.value = true;
     }
   }
 

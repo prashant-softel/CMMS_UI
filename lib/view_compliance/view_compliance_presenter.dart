@@ -25,6 +25,16 @@ class ViewCompliancePresenter {
     );
   }
 
+  Future<Map<String, dynamic>?> complianceApprovedButton({
+    complianceApprovedJsonString,
+    required bool isLoading,
+  }) async {
+    return viewComplianceUsecase.complianceApprovedButton(
+      complianceApprovedJsonString: complianceApprovedJsonString,
+      isLoading: isLoading,
+    );
+  }
+
   Future<List<HistoryModel>?> getHistory(
     moduleType,
     id,
