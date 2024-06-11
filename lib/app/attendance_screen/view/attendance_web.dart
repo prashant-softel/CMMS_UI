@@ -53,7 +53,7 @@ class AttendanceWeb extends GetView<AttendanceController> {
                   ),
                   InkWell(
                     onTap: () {
-                      Get.toNamed(Routes.admin_dashboard);
+                      Get.offNamed(Routes.admin_dashboard);
                     },
                     child: Text(
                       "/ ADMINISTRATION",
@@ -170,18 +170,18 @@ class AttendanceWeb extends GetView<AttendanceController> {
                                               cells: [
                                                 DataCell(
                                                   Text(
-                                                    "EMP ${employee.id}",
+                                                    "EMP ${employee?.id}",
                                                   ),
                                                 ),
                                                 DataCell(
                                                   Text(
-                                                    "${employee.name}",
+                                                    "${employee?.name}",
                                                   ),
                                                 ),
                                                 DataCell(
                                                   Checkbox(
                                                     value:
-                                                        employee.present.value,
+                                                        employee?.present.value,
                                                     onChanged: (bool? value) {
                                                       controller
                                                           .isPresent(index);
@@ -190,7 +190,7 @@ class AttendanceWeb extends GetView<AttendanceController> {
                                                 ),
                                                 DataCell(
                                                   IgnorePointer(
-                                                    ignoring: employee.present
+                                                    ignoring: employee?.present
                                                                 .value ==
                                                             true
                                                         ? false
@@ -207,7 +207,7 @@ class AttendanceWeb extends GetView<AttendanceController> {
                                                 ),
                                                 DataCell(
                                                   IgnorePointer(
-                                                    ignoring: employee.present
+                                                    ignoring: employee?.present
                                                                 .value ==
                                                             true
                                                         ? false

@@ -6,7 +6,6 @@ import 'package:cmms/domain/models/attendance_model.dart';
 import 'package:cmms/domain/models/employee_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
 
 class AttendanceController extends GetxController {
   AttendanceController(this.attendancePresenter);
@@ -21,36 +20,156 @@ class AttendanceController extends GetxController {
   RxList<EmployeeModel?> employeeList = <EmployeeModel>[].obs;
   AttendaceModel employeeAttendance = AttendaceModel();
   ContractLabourAttendance contractAttendace = ContractLabourAttendance();
-  RxList<HFEEmployeeAttendance> attendanceModel = <HFEEmployeeAttendance>[].obs;
+  RxList<HFEEmployeeAttendance?> attendanceModel =
+      <HFEEmployeeAttendance>[].obs;
   TextEditingController lessThan35 = TextEditingController();
   TextEditingController between35To50 = TextEditingController();
   TextEditingController greaterThan50 = TextEditingController();
   TextEditingController purposeCtrl = TextEditingController();
+  DateTime currentDate = DateTime.now();
   FocusNode focusPurpose = FocusNode();
   ScrollController scrollPurpose = ScrollController();
   bool isLoading = true;
+  // Rx<AttendaceModel?>? getAttendanceDetails = Rx<AttendaceModel?>(null);
+
+  Rx<AttendaceModel>? getAttendanceDetails = AttendaceModel(
+    date: "2024-06-11",
+    facilityId: 1,
+    hfeAttendance: [
+      HFEEmployeeAttendance(
+        id: 27,
+        name: "Test Engineer",
+        present: true.obs,
+        inTime: "10:00 AM",
+        outTime: "6:00 PM",
+      ),
+      HFEEmployeeAttendance(
+        id: 32,
+        name: "Majid Shaikh",
+        present: true.obs,
+        inTime: "10:00 AM",
+        outTime: "6:00 PM",
+      ),
+      HFEEmployeeAttendance(
+        id: 48,
+        name: "Shiva Kumar",
+        present: false.obs,
+        inTime: "",
+        outTime: "",
+      ),
+      HFEEmployeeAttendance(
+        id: 50,
+        name: "Guru Kumar",
+        present: false.obs,
+        inTime: "",
+        outTime: "",
+      ),
+      HFEEmployeeAttendance(
+        id: 50,
+        name: "Naresh D",
+        present: true.obs,
+        inTime: "10:00 AM",
+        outTime: "6:00 PM",
+      ),
+    ],
+    contractAttendance: ContractLabourAttendance(
+      between35to50: 10,
+      lessThan35: 10,
+      greaterThan50: 10,
+      purpose: "I dont Remember",
+    ),
+  ).obs;
 
   @override
   void onInit() async {
     try {
+      await setId();
       facilityIdStreamSubscription = homeController.facilityId$.listen(
         (event) async {
           facilityId.value = event;
-          await getEmployeeList(facilityId.value);
+          // await getEmployeeList(facilityId.value);
+          await getAttendanceData(date: dateController.text);
         },
       );
-      dateController.text = DateFormat('yyyy-MM-dd').format(DateTime.now());
-
       focusPurpose.addListener(() {
         if (!focusPurpose.hasFocus) {
           scrollPurpose.jumpTo(0.0);
         }
       });
-
       super.onInit();
     } catch (e) {
-      print(e);
+      print("error: $e");
     }
+  }
+
+  Future<void> setId() async {
+    try {
+      String? _date = await attendancePresenter.getDate();
+      if (_date == null || _date == "" || _date == "null") {
+        var dataFromPreviousScreen = Get.arguments;
+        dateController.text = dataFromPreviousScreen['date'];
+        currentDate = DateTime.parse(dateController.text);
+        attendancePresenter.saveDate(date: dateController.text);
+      } else {
+        dateController.text = _date;
+        currentDate = DateTime.parse(dateController.text);
+      }
+    } catch (e) {
+      print("Attendance Date Exception: $e");
+    }
+  }
+
+  void clearStoreData() {
+    attendancePresenter.clearDateValue();
+  }
+
+  Future<void> getAttendanceData({required String date}) async {
+    // try {
+    final _attendanceDetails = await attendancePresenter.getAttendanceDetail(
+      facilityId: facilityId.value,
+      date: date,
+      isLoading: isLoading,
+    );
+    if (getAttendanceDetails != null) {
+      // getAttendanceDetails?.value = _attendanceDetails;
+      final contractAttendance =
+          getAttendanceDetails?.value?.contractAttendance;
+      lessThan35.text = contractAttendance?.lessThan35?.toString() ?? '';
+      between35To50.text = contractAttendance?.between35to50?.toString() ?? '';
+      greaterThan50.text = contractAttendance?.greaterThan50?.toString() ?? '';
+      purposeCtrl.text = contractAttendance?.purpose ?? '';
+
+      attendanceModel.value = List<HFEEmployeeAttendance>.generate(
+        getAttendanceDetails!.value!.hfeAttendance!.length,
+        (index) {
+          var hfe = getAttendanceDetails!.value!.hfeAttendance![index];
+          return HFEEmployeeAttendance(
+            id: hfe?.id,
+            name: hfe?.name,
+            present: hfe!.present,
+            inTime: hfe.inTime,
+            outTime: hfe.outTime,
+          );
+        },
+      );
+      inTimeControllers = List.generate(
+        attendanceModel.length,
+        (index) => TextEditingController(),
+      );
+      outTimeControllers = List.generate(
+        attendanceModel.length,
+        (index) => TextEditingController(),
+      );
+      for (int i = 0; i < attendanceModel.length; i++) {
+        inTimeControllers[i].text = attendanceModel[i]!.inTime!;
+        outTimeControllers[i].text = attendanceModel[i]!.outTime!;
+      }
+    } else {
+      await getEmployeeList(facilityId.value);
+    }
+    // } catch (e) {
+    //   print('Error in getAttendanceData: $e');
+    // }
   }
 
   Future<void> getEmployeeList(int facilityId) async {
@@ -59,7 +178,7 @@ class AttendanceController extends GetxController {
     );
     if (_employeeList != null) {
       employeeList.value = _employeeList;
-      attendanceModel.value = List.generate(
+      attendanceModel.value = List<HFEEmployeeAttendance>.generate(
         employeeList.length,
         (index) => HFEEmployeeAttendance(
           id: employeeList[index]?.id,
@@ -89,9 +208,9 @@ class AttendanceController extends GetxController {
       outTimeControllers[i].clear();
     }
     for (int i = 0; i < attendanceModel.length; i++) {
-      attendanceModel[i].present.value = false;
-      attendanceModel[i].inTime = "";
-      attendanceModel[i].outTime = "";
+      attendanceModel[i]?.present.value = false;
+      attendanceModel[i]?.inTime = "";
+      attendanceModel[i]?.outTime = "";
     }
     lessThan35.clear();
     between35To50.clear();
@@ -100,29 +219,29 @@ class AttendanceController extends GetxController {
   }
 
   void isPresent(int index) {
-    attendanceModel[index].present.value =
-        !attendanceModel[index].present.value;
-    if (attendanceModel[index].present.value == true) {
-      attendanceModel[index].inTime = "10:00 AM";
+    attendanceModel[index]?.present.value =
+        !attendanceModel[index]!.present.value;
+    if (attendanceModel[index]?.present.value == true) {
+      attendanceModel[index]?.inTime = "10:00 AM";
       inTimeControllers[index].text = "10:00 AM";
-      attendanceModel[index].outTime = "6:00 PM";
+      attendanceModel[index]?.outTime = "6:00 PM";
       outTimeControllers[index].text = "6:00 PM";
     } else {
-      attendanceModel[index].inTime = "";
+      attendanceModel[index]?.inTime = "";
       inTimeControllers[index].clear();
-      attendanceModel[index].outTime = "";
+      attendanceModel[index]?.outTime = "";
       outTimeControllers[index].clear();
     }
     update();
   }
 
   void updateInTime(int index, String value) {
-    attendanceModel[index].inTime = value;
+    attendanceModel[index]?.inTime = value;
     inTimeControllers[index].text = value;
   }
 
   void updateOutTime(int index, String value) {
-    attendanceModel[index].outTime = value;
+    attendanceModel[index]?.outTime = value;
     outTimeControllers[index].text = value;
   }
 
@@ -160,7 +279,7 @@ class AttendanceController extends GetxController {
       isLoading: isLoading,
     );
     if (_attendance) {
-      clearData();
+      // clearData();
     }
     isLoading = false;
     return true;
