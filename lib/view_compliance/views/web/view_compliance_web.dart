@@ -3,13 +3,13 @@ import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/app/view_course/view/view_course_web.dart';
-import 'package:cmms/app/widgets/custom_richtext.dart';
+import 'package:cmms/app/widgets/compliance_approve_dialog.dart';
+import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/history_table_widget_web.dart';
 import 'package:cmms/view_compliance/view_compliance_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:cmms/app/app.dart';
-import 'package:cmms/app/widgets/custom_elevated_button.dart';
 
 class ViewComplianceWeb extends StatefulWidget {
   ViewComplianceWeb({
@@ -261,17 +261,20 @@ class _ViewComplianceWebState extends State<ViewComplianceWeb> {
                       ? Row(
                           children: [
                             Spacer(),
-                            // Container(
-                            //   height: 40,
-                            //   child: CustomElevatedButton(
-                            //     backgroundColor: ColorValues.cancelColor,
-                            //     text: 'Cancel',
-                            //     onPressed: () {
-                            //       Get.toNamed(Routes.competencyScreen);
-                            //     },
-                            //   ),
-                            // ),
-                            Dimens.boxWidth15,
+                            Container(
+                              height: 45,
+                              child: CustomElevatedButton(
+                                backgroundColor: ColorValues.appGreenColor,
+                                text: "Approve",
+                                icon: Icons.check,
+                                onPressed: () {
+                                  Get.dialog(ComplianceApprovedDialog(
+                                    id: controller.srId.value,
+                                  ));
+                                },
+                              ),
+                            ),
+                            // Dimens.boxWidth15,
                             // controller.goId == 0
                             //     ?
                             // Container(

@@ -15,6 +15,7 @@ import 'package:cmms/app/widgets/abandon_veg_execution_dialog.dart';
 import 'package:cmms/app/widgets/approve_wc_message_dialog.dart';
 import 'package:cmms/app/widgets/audit_plan_approve_msg_dialog.dart';
 import 'package:cmms/app/widgets/audit_plan_reject_msg_dialog.dart';
+import 'package:cmms/app/widgets/compliance_message_approve_dialog.dart';
 import 'package:cmms/app/widgets/create_escalation_matrix_dialog.dart';
 import 'package:cmms/app/widgets/create_incident_report_dialog.dart';
 import 'package:cmms/app/widgets/create_jc_success_message_dialog.dart';
@@ -1157,6 +1158,30 @@ class ConnectHelper {
     var res = responseModel.data;
     var parsedJson = json.decode(res);
     Get.dialog<void>(GoodsOrderMessageApproveDialog(
+        data: parsedJson['message'], id: parsedJson['id']));
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> complianceApprovedButton({
+    required String auth,
+    complianceApprovedJsonString,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'MISMaster/ApproveStatutory',
+      Request.post,
+      complianceApprovedJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    print('Approve Statutory: ${responseModel.data}');
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    Get.dialog<void>(ComplianceMessageApproveDialog(
         data: parsedJson['message'], id: parsedJson['id']));
 
     return responseModel;
