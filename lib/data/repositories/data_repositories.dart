@@ -2206,6 +2206,16 @@ class DataRepository extends DomainRepository {
         isLoading: isLoading ?? false,
       );
 
+  Future<ResponseModel> getStatutoryDetail({
+    required String auth,
+    bool? isLoading,
+    int? id,
+  }) async =>
+      await connectHelper.getStatutoryDetail(
+        auth: auth,
+        id: id,
+        isLoading: isLoading ?? false,
+      );
   Future<ResponseModel> getHistory({
     String? auth,
     int? moduleType,

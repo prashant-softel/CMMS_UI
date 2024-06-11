@@ -1,5 +1,6 @@
 import 'package:cmms/domain/models/Statutory_Compliance_model.dart';
 import 'package:cmms/domain/models/facility_model.dart';
+import 'package:cmms/domain/models/get_statutory_by_id_model.dart';
 import 'package:cmms/domain/usecases/compliance_usecase.dart';
 
 class CompliancePresenter {
@@ -20,6 +21,14 @@ class CompliancePresenter {
     return complianceUsecase.getStatutoryComplianceDropDown(
       isLoading: isLoading,
       facilityId: facilityId,
+    );
+  }
+
+  Future<GetStatutoryById?> getStatutoryDetail(
+      {bool? isLoading, required int id}) async {
+    return complianceUsecase.getStatutoryDetail(
+      id: id,
+      isLoading: isLoading ?? false,
     );
   }
 
