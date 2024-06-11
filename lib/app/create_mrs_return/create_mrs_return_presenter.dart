@@ -35,8 +35,11 @@ class CreateMrsReturnPresenter {
   void saveValue({String? whereUsedTypeId}) async {
     return craetemrsReturnUsecase.saveValue(whereUsedTypeId: whereUsedTypeId);
   }
-
+  void saveValuee({String? type}) async {
+    return craetemrsReturnUsecase.saveValuee(type: type);
+  }
   Future<String?> getValue() async => await craetemrsReturnUsecase.getValue();
+  Future<String?> getValuee() async => await craetemrsReturnUsecase.getValuee();
   void saveactivityValue({String? activity}) async {
     return craetemrsReturnUsecase.saveactivityValue(activity: activity);
   }

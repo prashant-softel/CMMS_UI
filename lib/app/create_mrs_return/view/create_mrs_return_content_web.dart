@@ -60,13 +60,31 @@ class CreateMrsReturnContentWeb extends GetView<CreateMrsReturnController> {
                             ),
                           ),
                           InkWell(
-                            onTap: () {
-                              Get.offNamed(
-                                  Routes.stockManagementDashboardScreen);
-                            },
-                            child: Text(" / STOCK MANAGEMENT ",
-                                style: Styles.greyLight14),
-                          ),
+                              onTap: () {
+                                var taskId;
+                                var jobId;
+                                controller.type.value == 1
+                                    ? Get.offAllNamed(Routes.jobDetails,
+                                        arguments: {'jobId': jobId})
+                                    : controller.type.value == 2
+                                        ? Get.offAllNamed(Routes.pmExecution,
+                                            arguments: {'pmTaskId': taskId})
+                                        : Get.offNamed(Routes.stockManagementDashboardScreen);
+                              },
+                              child: controller.type.value == 1
+                                  ? Text(
+                                      "/ JOB",
+                                      style: Styles.greyLight14,
+                                    )
+                                  : controller.type.value == 2
+                                      ? Text(
+                                          "/ PM TASK",
+                                          style: Styles.greyLight14,
+                                        )
+                                      : Text(
+                                          "/ STOCK MANAGEMENT",
+                                          style: Styles.greyLight14,
+                                        )),
                           Text(" / NEW RETURN MATERIAL SLIP",
                               style: Styles.greyLight14)
                         ],

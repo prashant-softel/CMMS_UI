@@ -848,14 +848,20 @@ class PreventiveMaintenanceTaskViewContentWeb
                                                                           onPress:
                                                                               () {
                                                                             controller.clearMrsStoreData();
+                                                                            int?
+                                                                                rmrsId =
+                                                                                controller.listMrsByTaskId?[index]?.mrs_return_ID;
                                                                             String
                                                                                 mrsId =
                                                                                 controller.listMrsByTaskId?[index]?.mrsId.toString() ?? "";
-
-                                                                            Get.toNamed(Routes.mrsViewScreen, arguments: {
-                                                                              'mrsId': int.tryParse("$mrsId"),
-                                                                              'type': 2
-                                                                            });
+                                                                            controller.listMrsByTaskId?[index]?.is_mrs_return == 0
+                                                                                ? Get.toNamed(Routes.mrsViewScreen, arguments: {
+                                                                                    'mrsId': int.tryParse("$mrsId"),
+                                                                                    'type': 2
+                                                                                  })
+                                                                                : Get.toNamed(Routes.approverReturnMrs, arguments: {
+                                                                                    'mrsId': rmrsId
+                                                                                  });
                                                                           }),
                                                                       // controller.pmtaskViewModel.value?.status != 169 &&
                                                                       controller.listMrsByTaskId?[index]?.status == 323 ||

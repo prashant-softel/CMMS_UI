@@ -33,8 +33,12 @@ class CreateMrsReturnUsecase {
       );
   void saveValue({String? whereUsedTypeId}) async =>
       repository.saveValue(LocalKeys.pmTaskId, whereUsedTypeId);
+  void saveValuee({String? type}) async =>
+      repository.saveValue(LocalKeys.type, type);
   Future<String?> getValue() async =>
       await repository.getStringValue(LocalKeys.pmTaskId);
+  Future<String?> getValuee() async =>
+      await repository.getStringValue(LocalKeys.type);
   void saveactivityValue({String? activity}) async =>
       repository.saveValue(LocalKeys.activity, activity);
   Future<String?> getactivityValue() async =>
