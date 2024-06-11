@@ -432,21 +432,21 @@ class StatutoryListDataSource extends DataTableSource {
     filteredGetStatutoryList = <GetStatutoryList?>[];
     filteredGetStatutoryList =
         controller.getStatutoryList.where((GoodsOrderList) {
-      return (GoodsOrderList.complianceId ?? '')
+      return (GoodsOrderList.id ?? '')
               .toString()
               .contains(controller.validityFilterText.value.toLowerCase()) &&
-          (GoodsOrderList.approvedAt ?? '')
+          (GoodsOrderList.activation_status ?? '')
               .toString()
               .contains(controller.validityFilterText.value.toLowerCase()) &&
-          (GoodsOrderList.approvedBy ?? '')
+          (GoodsOrderList.activation_status ?? '')
               .toString()
               .contains(controller.validityFilterText.value.toLowerCase()) &&
-          (GoodsOrderList.createdAt ?? '')
+          (GoodsOrderList.activation_status ?? '')
               .toString()
               .contains(controller.validityFilterText.value.toLowerCase()) &&
-          (GoodsOrderList.expiresOn ?? '')
+          (GoodsOrderList.activation_status ?? '')
               .contains(controller.validityFilterText.value.toLowerCase()) &&
-          (GoodsOrderList.issueDate ?? '')
+          (GoodsOrderList.activation_status ?? '')
               .toString()
               .contains(controller.statusCodeFilterText.value.toLowerCase());
 
@@ -464,13 +464,13 @@ class StatutoryListDataSource extends DataTableSource {
     var cellsBuffer = [
       // '${StatutoryListDetails?.id ?? ''}',
       "id",
-      '${StatutoryListDetails?.createdAt ?? ''}',
-      '${StatutoryListDetails?.createdBy ?? ''}',
-      '${StatutoryListDetails?.expiresOn ?? ''}',
-      '${StatutoryListDetails?.issueDate ?? ''}',
-      '${StatutoryListDetails?.statusShort ?? ''}',
-      '${StatutoryListDetails?.status ?? ''}',
-      '${StatutoryListDetails?.status ?? ''}',
+      '${StatutoryListDetails?.compilanceName ?? ''}',
+      '${StatutoryListDetails?.current_status ?? ''}',
+      '${StatutoryListDetails?.created_at ?? ''}',
+      '${StatutoryListDetails?.validity_month ?? ''}',
+      '${StatutoryListDetails?.daysLeft ?? ''}',
+      '${StatutoryListDetails?.end_date ?? ''}',
+      '${StatutoryListDetails?.status_id ?? ''}',
 
       'Actions',
     ];
@@ -502,7 +502,7 @@ class StatutoryListDataSource extends DataTableSource {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        ' SR ${StatutoryListDetails?.complianceId}',
+                        ' SR ${StatutoryListDetails?.id}',
                       ),
                       Dimens.boxHeight10,
                       Align(
@@ -517,7 +517,7 @@ class StatutoryListDataSource extends DataTableSource {
                                           orElse: () =>
                                               GetStatutoryList(id: 00),
                                         )
-                                        .status ==
+                                        .status_short ==
                                     302
                                 ? ColorValues.yellowColor
                                 : controller.getStatutoryList
@@ -528,14 +528,14 @@ class StatutoryListDataSource extends DataTableSource {
                                               orElse: () =>
                                                   GetStatutoryList(id: 00),
                                             )
-                                            .status ==
+                                            .status_id ==
                                         301
                                     ? ColorValues.approveColor
                                     : ColorValues.addNewColor,
                             borderRadius: BorderRadius.circular(4),
                           ),
                           child: Text(
-                            '${StatutoryListDetails?.statusShort}',
+                            '${StatutoryListDetails?.status_short}',
                             style: Styles.white10.copyWith(
                               color: Colors.white,
                             ),
