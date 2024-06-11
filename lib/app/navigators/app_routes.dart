@@ -126,6 +126,7 @@ abstract class Routes {
   static const incidentRiskType = _Paths.incidentRiskType;
   static const StatutoryCompliance = _Paths.StatutoryCompliance;
   static const documentUploadScreen = _Paths.documentUploadScreen;
+  static const viewComplianceScreen = _Paths.viewComplianceScreen;
 
   static const escalationMatrixListWeb = _Paths.escalationMatrixListWeb;
   static const addEscalatiomMatrixContentWeb =
@@ -348,6 +349,7 @@ abstract class _Paths {
   static const incidentRiskType = '/Incident-Risk-Type';
   static const StatutoryCompliance = '/Statutory-Compliance';
   static const documentUploadScreen = '/documentUploadScreen';
+  static const viewComplianceScreen = '/viewComplianceScreen';
 
   static const escalationMatrixListWeb = '/escalation-matrix-list';
   static const addEscalatiomMatrixContentWeb = '/add-escalation-matrix';
