@@ -85,6 +85,7 @@ class HomeController extends GetxController {
   Rx<DashboardModel?> dashboardIrList = DashboardModel().obs;
   Rx<DashboardModel?> dashboardSmList = DashboardModel().obs;
   Rx<DashboardModel?> dashboardMcList = DashboardModel().obs;
+  RxList<Itemlist?> allItems = <Itemlist?>[].obs;
 
   RxList<DashboardModel?> filteredData = <DashboardModel>[].obs;
   List<DashboardModel?>? BufferdashboardList = <DashboardModel?>[].obs;
@@ -108,21 +109,32 @@ class HomeController extends GetxController {
   String get formattedTodate1 => DateFormat('yyyy-MM-dd').format(toDate.value);
   String get formattedFromdate1 =>
       DateFormat('yyyy-MM-dd').format(fromDate.value);
-  Map<String, double> getDataMap() {
+  Map<String, double> getDataMap //= {};
+      () {
     return {
       "BM": 5,
       "PM": 3,
       "MC": 2,
-      "PTW": 7,
+      // "PTW": 7,
     };
   }
 
+  RxInt totalSum = 0.obs;
+  RxInt completedSum = 0.obs;
+  RxInt pendingSum = 0.obs;
+  RxInt scheduleComplianceTotalSum = 0.obs;
+  RxInt scheduleComplianceCompletedSum = 0.obs;
+  RxInt scheduleCompliancePendingSum = 0.obs;
+  RxInt woOnTimeSum = 0.obs;
+  RxInt woDelaySum = 0.obs;
+  RxInt woBacklogSum = 0.obs;
+  RxInt lowStockItemsSum = 0.obs;
+  RxInt poItemsAwaitedSum = 0.obs;
   List<Color> getColorList() {
     return [
       Colors.blue,
       Colors.green,
       Colors.orange,
-      Colors.red,
     ];
   }
 
@@ -155,6 +167,8 @@ class HomeController extends GetxController {
 
   Future<void> getdashboardList() async {
     dashboardList.value = <DashboardModel>[];
+    allItems.value = <Itemlist>[];
+
     String lststrFacilityIds = selectedFacilityIdList.join(',');
 
     print({"facilityData1": lststrFacilityIds});
@@ -166,6 +180,50 @@ class HomeController extends GetxController {
         isLoading: true);
     if (_dashboardList != null) {
       dashboardList.value = _dashboardList;
+
+      int totalSumTemp = 0;
+      int completedSumTemp = 0;
+      int pendingSumTemp = 0;
+      int scheduleComplianceTotalSumTemp = 0;
+      int scheduleComplianceCompletedSumTemp = 0;
+      int scheduleCompliancePendingSumTemp = 0;
+      int woOnTimeSumTemp = 0;
+      int woDelaySumTemp = 0;
+      int woBacklogSumTemp = 0;
+      int lowStockItemsSumTemp = 0;
+      int poItemsAwaitedSumTemp = 0;
+
+      for (var module in dashboardList) {
+        var details = module?.cmDashboadDetails;
+        totalSumTemp += details?.total ?? 0;
+        completedSumTemp += details?.completed ?? 0;
+        pendingSumTemp += details?.pending ?? 0;
+        scheduleComplianceTotalSumTemp +=
+            details?.schedule_compliance_total ?? 0;
+        scheduleComplianceCompletedSumTemp +=
+            details?.schedule_compliance_completed ?? 0;
+        scheduleCompliancePendingSumTemp +=
+            details?.schedule_compliance_pending ?? 0;
+        woOnTimeSumTemp += details?.wo_on_time ?? 0;
+        woDelaySumTemp += details?.wo_delay ?? 0;
+        woBacklogSumTemp += details?.wo_backlog ?? 0;
+        lowStockItemsSumTemp += details?.low_stock_items ?? 0;
+        poItemsAwaitedSumTemp += details?.po_items_awaited ?? 0;
+        allItems.addAll(details?.item_list ?? []);
+      }
+
+      totalSum.value = totalSumTemp;
+      completedSum.value = completedSumTemp;
+      pendingSum.value = pendingSumTemp;
+      scheduleComplianceTotalSum.value = scheduleComplianceTotalSumTemp;
+      scheduleComplianceCompletedSum.value = scheduleComplianceCompletedSumTemp;
+      scheduleCompliancePendingSum.value = scheduleCompliancePendingSumTemp;
+      woOnTimeSum.value = woOnTimeSumTemp;
+      woDelaySum.value = woDelaySumTemp;
+      woBacklogSum.value = woBacklogSumTemp;
+      lowStockItemsSum.value = lowStockItemsSumTemp;
+      poItemsAwaitedSum.value = poItemsAwaitedSumTemp;
+
       dashboardBmList.value = _dashboardList[0];
       dashboardPmList.value = _dashboardList[1];
       dashboardMcList.value = _dashboardList[2];

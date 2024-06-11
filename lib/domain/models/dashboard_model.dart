@@ -1,16 +1,33 @@
 class DashboardModel {
   String? module_name;
-
+  int? category_mc_count;
+  int? category_pm_count;
+  int? category_bm_count;
+  int? category_total_count;
   CmDashboadDetails? cmDashboadDetails;
-  DashboardModel({this.module_name, this.cmDashboadDetails});
+  DashboardModel(
+      {this.module_name,
+      this.cmDashboadDetails,
+      this.category_bm_count,
+      this.category_mc_count,
+      this.category_pm_count,
+      this.category_total_count});
 
   factory DashboardModel.fromJson(Map<String, dynamic> json) => DashboardModel(
         module_name: json["module_name"],
+        category_bm_count: json["category_bm_count"],
+        category_mc_count: json["category_mc_count"],
+        category_pm_count: json["category_pm_count"],
+        category_total_count: json["category_total_count"],
         cmDashboadDetails:
             CmDashboadDetails.fromJson(json['cmDashboadDetails']),
       );
 
   Map<String, dynamic> toJson() => {
+        "category_total_count": category_total_count,
+        "category_bm_count": category_bm_count,
+        "category_mc_count": category_mc_count,
+        "category_pm_count": category_pm_count,
         "module_name": module_name,
         "cmDashboadDetails": cmDashboadDetails!.toJson(),
       };

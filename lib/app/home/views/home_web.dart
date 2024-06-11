@@ -37,7 +37,7 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb> {
                 child: Container(
                     color: ColorValues.appBackgroundColor,
                     child: DefaultTabController(
-                      length: 5,
+                      length: 6,
                       child: Column(children: [
                         Container(
                           height: 50,
@@ -354,6 +354,10 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb> {
                               isScrollable: true,
                               tabs: [
                                 CustomTabBar(
+                                  label: 'All'.tr,
+                                  // icon: Icons.menu,
+                                ),
+                                CustomTabBar(
                                   label: 'Breakdown Maintenance'.tr,
                                   // icon: Icons.menu,
                                 ),
@@ -381,6 +385,618 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb> {
                         Expanded(
                           child: TabBarView(
                             children: [
+                              //alll..........................
+                              Obx(
+                                () => Container(
+                                  margin: EdgeInsets.only(
+                                      left: 20, right: 20, top: 10),
+                                  height: Get.height,
+                                  width: Get.width,
+                                  decoration: BoxDecoration(
+                                    color: Color.fromARGB(255, 245, 248, 250),
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                  child: Column(
+                                    children: [
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceEvenly,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: [
+                                          Expanded(
+                                            flex: 2,
+                                            child: Container(
+                                                margin:
+                                                    EdgeInsets.only(left: 20),
+                                                padding: EdgeInsets.only(
+                                                    left: 20, top: 10),
+                                                decoration: BoxDecoration(
+                                                  color: ColorValues
+                                                      .lightBlueColor,
+                                                  borderRadius:
+                                                      BorderRadius.circular(10),
+                                                  boxShadow: [
+                                                    BoxShadow(
+                                                      color: Colors.grey,
+                                                      offset: Offset(0.0, 1.0),
+                                                      blurRadius: 6.0,
+                                                    ),
+                                                  ],
+                                                ),
+                                                height: 150,
+                                                child: Row(
+                                                  children: [
+                                                    Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        Text("Overview",
+                                                            style:
+                                                                Styles.black15),
+                                                        // Dimens.boxHeight20,
+                                                        // Spacer(),
+                                                        Center(
+                                                          child: Row(
+                                                            children: [
+                                                              Container(
+                                                                  margin: EdgeInsets
+                                                                      .only(
+                                                                          top:
+                                                                              10),
+                                                                  height: 100,
+                                                                  width: 150,
+                                                                  child: Column(
+                                                                    children: [
+                                                                      Row(
+                                                                        mainAxisAlignment:
+                                                                            MainAxisAlignment.center,
+                                                                        children: [
+                                                                          Text(
+                                                                            "Total",
+                                                                            style:
+                                                                                Styles.black13,
+                                                                          ),
+                                                                          Spacer(),
+
+                                                                          Text(
+                                                                              '${controller.totalSum}'),
+                                                                          //  '${dashbo?.module_name}'),
+                                                                        ],
+                                                                      ),
+                                                                      Dimens
+                                                                          .boxHeight5,
+                                                                      Row(
+                                                                        children: [
+                                                                          Text(
+                                                                            "Completed",
+                                                                            style:
+                                                                                Styles.black13,
+                                                                          ),
+                                                                          Spacer(),
+                                                                          Text(
+                                                                              '${controller.completedSum}'),
+                                                                        ],
+                                                                      ),
+                                                                      Dimens
+                                                                          .boxHeight5,
+                                                                      Row(
+                                                                        children: [
+                                                                          Text(
+                                                                            "Pending",
+                                                                            style:
+                                                                                Styles.black13,
+                                                                          ),
+                                                                          Spacer(),
+                                                                          Text(
+                                                                              '${controller.pendingSum}'),
+                                                                        ],
+                                                                      ),
+                                                                    ],
+                                                                  )),
+                                                            ],
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                    Dimens.boxWidth20,
+                                                    Container(
+                                                        // padding: EdgeInsets.only(
+                                                        //     top: 30,
+                                                        //     right: 20,
+                                                        //     left: 10),
+                                                        child:
+                                                            CircularPercentIndicator(
+                                                      //circular progress indicator
+                                                      radius:
+                                                          50.0, //radius for circle
+                                                      lineWidth:
+                                                          15.0, //width of circle line
+                                                      animation:
+                                                          true, //animate when it shows progress indicator first
+                                                      percent: (controller
+                                                              .completedSum
+                                                              .value) /
+                                                          (controller.totalSum
+                                                              .value), //vercentage value: 0.6 for 60% (60/100 = 0.6)
+                                                      center: Text(
+                                                        '${((controller.completedSum.value) / (controller.totalSum.value) * 100).toStringAsFixed(1)}%',
+                                                        style: TextStyle(
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                            fontSize: 20.0),
+                                                      ), //center text, you can set Icon as well
+                                                      footer: Text(
+                                                        "Order this Month",
+                                                        style: Styles.black13,
+                                                      ), //footer text
+                                                      backgroundColor: Colors
+                                                          .redAccent, //backround of progress bar
+                                                      circularStrokeCap:
+                                                          CircularStrokeCap
+                                                              .round, //corner shape of progress bar at start/end
+                                                      progressColor: ColorValues
+                                                          .addNewColor, //progress bar color
+                                                    )),
+                                                  ],
+                                                )),
+                                          ),
+                                          Expanded(
+                                            flex: 2,
+                                            child: Container(
+                                              margin: EdgeInsets.only(left: 20),
+                                              padding: EdgeInsets.only(
+                                                  left: 20, top: 10),
+                                              decoration: BoxDecoration(
+                                                color:
+                                                    ColorValues.lightBlueColor,
+                                                borderRadius:
+                                                    BorderRadius.circular(10),
+                                                boxShadow: [
+                                                  BoxShadow(
+                                                    color: Colors.grey,
+                                                    offset: Offset(0.0, 1.0),
+                                                    blurRadius: 6.0,
+                                                  ),
+                                                ],
+                                              ),
+                                              height: 150,
+                                              child: Column(
+                                                children: [
+                                                  Row(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      Align(
+                                                          alignment:
+                                                              Alignment.topLeft,
+                                                          child: Column(
+                                                            children: [
+                                                              Text(
+                                                                  "Schedule Compliance",
+                                                                  style: Styles
+                                                                      .black15),
+                                                              Dimens
+                                                                  .boxHeight10,
+                                                              SemicircularIndicator(
+                                                                radius: 60,
+                                                                color: Color
+                                                                    .fromARGB(
+                                                                        255,
+                                                                        195,
+                                                                        146,
+                                                                        230),
+                                                                backgroundColor:
+                                                                    Colors
+                                                                        .lightGreen,
+                                                                strokeWidth: 13,
+                                                                bottomPadding:
+                                                                    0,
+                                                                child: Text(
+                                                                  '${((controller.scheduleComplianceCompletedSum.value) / (controller.scheduleComplianceTotalSum.value) * 100).toString()}%',
+                                                                  style: TextStyle(
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold,
+                                                                      fontSize:
+                                                                          20.0,
+                                                                      color: Colors
+                                                                          .redAccent),
+                                                                ),
+                                                              ),
+                                                            ],
+                                                          )),
+                                                      Spacer(),
+                                                      Container(
+                                                        height:
+                                                            Get.height * 0.09,
+                                                        width: Get.width * 0.09,
+                                                        margin: EdgeInsets.only(
+                                                            left: 20,
+                                                            right: 10),
+                                                        padding:
+                                                            EdgeInsets.only(
+                                                                left: 10,
+                                                                top: 10,
+                                                                right: 10),
+                                                        decoration: BoxDecoration(
+                                                            color: Colors.white,
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        10),
+                                                            boxShadow: [
+                                                              BoxShadow(
+                                                                color:
+                                                                    Colors.grey,
+                                                                offset: Offset(
+                                                                    0.0, 1.0),
+                                                                blurRadius: 6.0,
+                                                              ),
+                                                            ]),
+                                                        child: Column(
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .start,
+                                                          children: [
+                                                            Row(
+                                                              children: [
+                                                                Text(
+                                                                  "Total",
+                                                                  style: TextStyle(
+                                                                      fontSize:
+                                                                          Get.width * 0.009 -
+                                                                              1),
+                                                                ),
+                                                                Spacer(),
+                                                                Text(
+                                                                  '${controller.scheduleComplianceTotalSum}',
+                                                                  style: TextStyle(
+                                                                      fontSize:
+                                                                          Get.width * 0.009 -
+                                                                              1),
+                                                                ),
+                                                              ],
+                                                            ),
+                                                            // Dimens.boxHeight2,
+                                                            Row(
+                                                              children: [
+                                                                Text(
+                                                                  "Completed",
+                                                                  style: TextStyle(
+                                                                      fontSize:
+                                                                          Get.width * 0.009 -
+                                                                              1),
+                                                                ),
+                                                                Spacer(),
+                                                                Text(
+                                                                  '${controller.scheduleComplianceCompletedSum}',
+                                                                  style: TextStyle(
+                                                                      fontSize:
+                                                                          Get.width * 0.009 -
+                                                                              1),
+                                                                ),
+                                                              ],
+                                                            ),
+                                                            // Dimens.boxHeight5,
+                                                            Row(
+                                                              children: [
+                                                                Text(
+                                                                  "Pending",
+                                                                  style: TextStyle(
+                                                                      fontSize:
+                                                                          Get.width * 0.009 -
+                                                                              1),
+                                                                ),
+                                                                Spacer(),
+                                                                Text(
+                                                                  '${controller.scheduleCompliancePendingSum}',
+                                                                  style: TextStyle(
+                                                                      fontSize:
+                                                                          Get.width * 0.009 -
+                                                                              1),
+                                                                ),
+                                                              ],
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  // Dimens.boxHeight20,
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                          Expanded(
+                                            flex: 2,
+                                            child: Container(
+                                                margin: EdgeInsets.only(
+                                                    left: 20, right: 20),
+                                                padding: EdgeInsets.only(
+                                                    left: 20, top: 10),
+                                                decoration: BoxDecoration(
+                                                  color: ColorValues
+                                                      .lightBlueColor,
+                                                  borderRadius:
+                                                      BorderRadius.circular(10),
+                                                  boxShadow: [
+                                                    BoxShadow(
+                                                      color: Colors.grey,
+                                                      offset: Offset(0.0, 1.0),
+                                                      blurRadius: 6.0,
+                                                    ),
+                                                  ],
+                                                ),
+                                                height: 150,
+                                                child: Row(
+                                                  children: [
+                                                    Align(
+                                                        alignment:
+                                                            Alignment.topLeft,
+                                                        child: Text("Category",
+                                                            style: Styles
+                                                                .black15)),
+                                                    Align(
+                                                      alignment:
+                                                          Alignment.centerLeft,
+                                                      child: PieChart(
+                                                        totalValue:
+                                                            20.0, //double.tryParse(controller.dashboardBmList.value!.category_total_count.toString()),
+                                                        dataMap: controller
+                                                            .getDataMap(),
+                                                        chartType:
+                                                            ChartType.ring,
+                                                        chartRadius: 100,
+                                                        colorList: controller
+                                                            .getColorList(),
+                                                        // centerText: "Pie Chart",
+                                                        legendOptions:
+                                                            LegendOptions(
+                                                          showLegendsInRow:
+                                                              false,
+                                                          // legendPosition:
+                                                          //     LegendPosition.left,
+                                                          showLegends: true,
+                                                        ),
+                                                        chartValuesOptions:
+                                                            ChartValuesOptions(
+                                                          showChartValueBackground:
+                                                              false,
+                                                          showChartValues: true,
+                                                          showChartValuesInPercentage:
+                                                              true,
+                                                          showChartValuesOutside:
+                                                              false,
+                                                        ),
+                                                        // onTapCallback: (index) {
+                                                        //   chartController
+                                                        //       .onChartTapped(index);
+                                                        // },
+                                                      ),
+                                                    )
+                                                  ],
+                                                )),
+                                          ),
+                                        ],
+                                      ),
+                                      Dimens.boxHeight10,
+                                      Container(
+                                        // height: 70,
+                                        width: Get.width * .92,
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceAround,
+                                          children: [
+                                            _gridList(
+                                              tittle: "WO on-time",
+                                              percent:
+                                                  '${((controller.woOnTimeSum.value) / (controller.totalSum.value) * 100).toStringAsFixed(1)}%',
+                                            ),
+                                            _gridList(
+                                              tittle: "WO delay",
+                                              percent:
+                                                  '${((controller.woDelaySum.value) / (controller.totalSum.value) * 100).toStringAsFixed(1)}%',
+                                            ),
+                                            _gridList(
+                                              tittle: "WO backlog",
+                                              percent:
+                                                  '${((controller.woBacklogSum.value) / (controller.totalSum.value) * 100).toStringAsFixed(1)}%',
+                                            ),
+                                            _gridList(
+                                                tittle: "Low stock items",
+                                                percent:
+                                                    '${controller.lowStockItemsSum}'),
+                                            _gridList(
+                                                tittle: "PO Items Awaited",
+                                                percent:
+                                                    '${controller.poItemsAwaitedSum}'),
+                                          ],
+                                        ),
+                                      ),
+                                      Dimens.boxHeight10,
+                                      Expanded(
+                                        child: Container(
+                                          color: Color.fromARGB(
+                                              255, 245, 248, 250),
+                                          width: Get.width,
+                                          height: Get.height,
+                                          child: Padding(
+                                            padding: EdgeInsets.only(
+                                              left: 16,
+                                              right: 16,
+                                            ),
+                                            child: DataTable2(
+                                              headingRowHeight: 40,
+                                              dataRowHeight: 35,
+                                              columnSpacing: 12,
+                                              // horizontalMargin: 5,
+                                              headingRowColor:
+                                                  MaterialStateColor
+                                                      .resolveWith(
+                                                (states) {
+                                                  return ColorValues
+                                                      .lightGreyColor;
+                                                },
+                                              ),
+                                              minWidth: 2500,
+                                              columns: [
+                                                DataColumn2(
+                                                  fixedWidth: 100,
+                                                  label: Text(
+                                                    'Site name',
+                                                    style: Styles.blackBold14,
+                                                  ),
+                                                  // size: ColumnSize.L,
+                                                ),
+                                                DataColumn2(
+                                                  fixedWidth: 120,
+                                                  label: Text(
+                                                    'WO number',
+                                                    style: Styles.blackBold14,
+                                                  ),
+                                                  // size: ColumnSize.L,
+                                                ),
+                                                DataColumn2(
+                                                  fixedWidth: 200,
+                                                  label: Text(
+                                                    'WO description',
+                                                    style: Styles.blackBold14,
+                                                  ),
+                                                  // size: ColumnSize.L,
+                                                ),
+                                                DataColumn2(
+                                                  fixedWidth: 300,
+                                                  label: Text(
+                                                    'Status',
+                                                    style: Styles.blackBold14,
+                                                  ),
+                                                  // size: ColumnSize.L,
+                                                ),
+                                                DataColumn2(
+                                                  fixedWidth: 250,
+                                                  label: Text(
+                                                    'Asset category',
+                                                    style: Styles.blackBold14,
+                                                  ),
+                                                  // size: ColumnSize.L,
+                                                ),
+                                                DataColumn2(
+                                                  fixedWidth: 400,
+                                                  label: Text(
+                                                    'Asset name',
+                                                    style: Styles.blackBold14,
+                                                  ),
+                                                  // size: ColumnSize.L,
+                                                ),
+                                                DataColumn2(
+                                                  fixedWidth: 250,
+                                                  label: Text(
+                                                    'Schedule start date',
+                                                    style: Styles.blackBold14,
+                                                  ),
+                                                  // size: ColumnSize.L,
+                                                ),
+                                                DataColumn2(
+                                                  fixedWidth: 250,
+                                                  label: Text(
+                                                    'Schedule end date',
+                                                    style: Styles.blackBold14,
+                                                  ),
+                                                  // size: ColumnSize.L,
+                                                ),
+                                                DataColumn2(
+                                                  fixedWidth: 100,
+                                                  label: Text(
+                                                    'Action',
+                                                    style: Styles.blackBold14,
+                                                  ),
+                                                ),
+                                              ],
+                                              rows: List<DataRow>.generate(
+                                                controller.allItems.length ?? 0,
+                                                (index) => DataRow(cells: [
+                                                  DataCell(Text(controller
+                                                          .allItems[index]
+                                                          ?.facility_name
+                                                          .toString() ??
+                                                      '')),
+                                                  DataCell(Text(
+                                                      '${controller.allItems[index]?.wo_number.toString() ?? ''}')),
+                                                  DataCell(Text(controller
+                                                          .allItems[index]
+                                                          ?.wo_decription ??
+                                                      "")),
+                                                  DataCell(Text(controller
+                                                          .allItems[index]
+                                                          ?.status_long ??
+                                                      '')),
+                                                  DataCell(Text(controller
+                                                          .allItems[index]
+                                                          ?.asset_category ??
+                                                      '')),
+                                                  DataCell(Text(controller
+                                                          .allItems[index]
+                                                          ?.asset_name ??
+                                                      '')),
+                                                  DataCell(Text(controller
+                                                          .allItems[index]
+                                                          ?.start_date ??
+                                                      '')),
+                                                  DataCell(Text(controller
+                                                          .allItems[index]
+                                                          ?.end_date ??
+                                                      '')),
+                                                  DataCell(
+                                                    Row(
+                                                      children: [
+                                                        TableActionButton(
+                                                          color: ColorValues
+                                                              .viewColor,
+                                                          icon: Icons
+                                                              .remove_red_eye_outlined,
+                                                          message: 'View',
+                                                          onPress: () {
+                                                            controller
+                                                                .clearStoreJobData();
+                                                            // controller
+                                                            //     .clearStoreDatatype();
+
+                                                            int jobId = controller
+                                                                    .dashboardBmList
+                                                                    .value
+                                                                    ?.cmDashboadDetails
+                                                                    ?.item_list?[
+                                                                        index]
+                                                                    .wo_number ??
+                                                                0;
+                                                            if (jobId != 0) {
+                                                              Get.toNamed(
+                                                                  Routes
+                                                                      .jobDetails,
+                                                                  arguments: {
+                                                                    'jobId':
+                                                                        jobId
+                                                                  });
+                                                            }
+                                                          },
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ]),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+
                               //bm............................
 
                               Obx(
@@ -512,10 +1128,20 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb> {
                                                           15.0, //width of circle line
                                                       animation:
                                                           true, //animate when it shows progress indicator first
-                                                      percent: 50 /
-                                                          100, //vercentage value: 0.6 for 60% (60/100 = 0.6)
+                                                      percent: (controller
+                                                                  .dashboardBmList
+                                                                  .value
+                                                                  ?.cmDashboadDetails
+                                                                  ?.completed ??
+                                                              0) /
+                                                          (controller
+                                                                  .dashboardBmList
+                                                                  .value
+                                                                  ?.cmDashboadDetails
+                                                                  ?.total ??
+                                                              0), //vercentage value: 0.6 for 60% (60/100 = 0.6)
                                                       center: Text(
-                                                        '${((controller.dashboardBmList.value?.cmDashboadDetails?.completed ?? 0) / (controller.dashboardBmList.value?.cmDashboadDetails?.total ?? 1) * 100).toStringAsFixed(1)}%',
+                                                        '${((controller.dashboardBmList.value?.cmDashboadDetails?.completed ?? 0) / (controller.dashboardBmList.value?.cmDashboadDetails?.total ?? 0) * 100).toStringAsFixed(1)}%',
                                                         style: TextStyle(
                                                             fontWeight:
                                                                 FontWeight.bold,
@@ -737,6 +1363,8 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb> {
                                                       alignment:
                                                           Alignment.centerLeft,
                                                       child: PieChart(
+                                                        totalValue:
+                                                            20.0, //double.tryParse(controller.dashboardBmList.value!.category_total_count.toString()),
                                                         dataMap: controller
                                                             .getDataMap(),
                                                         chartType:
@@ -1144,8 +1772,18 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb> {
                                                           15.0, //width of circle line
                                                       animation:
                                                           true, //animate when it shows progress indicator first
-                                                      percent: 50 /
-                                                          100, //vercentage value: 0.6 for 60% (60/100 = 0.6)
+                                                      percent: (controller
+                                                                  .dashboardPmList
+                                                                  .value
+                                                                  ?.cmDashboadDetails
+                                                                  ?.completed ??
+                                                              0) /
+                                                          (controller
+                                                                  .dashboardPmList
+                                                                  .value
+                                                                  ?.cmDashboadDetails
+                                                                  ?.total ??
+                                                              0), //vercentage value: 0.6 for 60% (60/100 = 0.6)
                                                       center: Text(
                                                         '${((controller.dashboardPmList.value?.cmDashboadDetails?.completed ?? 0) / (controller.dashboardPmList.value?.cmDashboadDetails?.total ?? 1) * 100).toStringAsFixed(1)}%',
                                                         style: TextStyle(
@@ -1776,8 +2414,18 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb> {
                                                           15.0, //width of circle line
                                                       animation:
                                                           true, //animate when it shows progress indicator first
-                                                      percent: 50 /
-                                                          100, //vercentage value: 0.6 for 60% (60/100 = 0.6)
+                                                      percent: (controller
+                                                                  .dashboardMcList
+                                                                  .value
+                                                                  ?.cmDashboadDetails
+                                                                  ?.completed ??
+                                                              0) /
+                                                          (controller
+                                                                  .dashboardMcList
+                                                                  .value
+                                                                  ?.cmDashboadDetails
+                                                                  ?.total ??
+                                                              0),
                                                       center: Text(
                                                         '${((controller.dashboardMcList.value?.cmDashboadDetails?.completed ?? 0) / (controller.dashboardMcList.value?.cmDashboadDetails?.total ?? 1) * 100).toStringAsFixed(1)}%',
                                                         style: TextStyle(
@@ -2413,8 +3061,18 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb> {
                                                           15.0, //width of circle line
                                                       animation:
                                                           true, //animate when it shows progress indicator first
-                                                      percent: 50 /
-                                                          100, //vercentage value: 0.6 for 60% (60/100 = 0.6)
+                                                      percent: (controller
+                                                                  .dashboardIrList
+                                                                  .value
+                                                                  ?.cmDashboadDetails
+                                                                  ?.completed ??
+                                                              0) /
+                                                          (controller
+                                                                  .dashboardIrList
+                                                                  .value
+                                                                  ?.cmDashboadDetails
+                                                                  ?.total ??
+                                                              0),
                                                       center: Text(
                                                         '${((controller.dashboardIrList.value?.cmDashboadDetails?.completed ?? 0) / (controller.dashboardIrList.value?.cmDashboadDetails?.total ?? 1) * 100).toStringAsFixed(1)}%',
                                                         style: TextStyle(
@@ -3047,8 +3705,18 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb> {
                                                           15.0, //width of circle line
                                                       animation:
                                                           true, //animate when it shows progress indicator first
-                                                      percent: 50 /
-                                                          100, //vercentage value: 0.6 for 60% (60/100 = 0.6)
+                                                      percent: (controller
+                                                                  .dashboardSmList
+                                                                  .value
+                                                                  ?.cmDashboadDetails
+                                                                  ?.completed ??
+                                                              0) /
+                                                          (controller
+                                                                  .dashboardSmList
+                                                                  .value
+                                                                  ?.cmDashboadDetails
+                                                                  ?.total ??
+                                                              0),
                                                       center: Text(
                                                         '${((controller.dashboardSmList.value?.cmDashboadDetails?.completed ?? 0) / (controller.dashboardSmList.value?.cmDashboadDetails?.total ?? 1) * 100).toStringAsFixed(1)}%',
                                                         style: TextStyle(

@@ -3,7 +3,6 @@ import 'package:cmms/domain/models/get_plant_Stock_list.dart';
 import 'package:cmms/domain/models/get_return_mrs_detail.dart';
 import 'package:cmms/domain/repositories/repository.dart';
 
-
 class EditMrsReturnUsecase {
   EditMrsReturnUsecase(this.repository);
   Repository repository;
@@ -14,11 +13,11 @@ class EditMrsReturnUsecase {
   }) async =>
       await repository.getPlantStockListReturn(facilityId, isLoading, mrsId);
 
-  Future<Map<String, dynamic>> createReturnMrs({
+  Future<Map<String, dynamic>> updateReturnMrs({
     createReturnMrsJsonString,
     bool? isLoading,
   }) async =>
-      await repository.createReturnMrs(
+      await repository.updateReturnMrs(
         createReturnMrsJsonString,
         isLoading,
       );
