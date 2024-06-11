@@ -4,6 +4,7 @@ import 'package:cmms/domain/models/Statutory_Compliance_model.dart';
 import 'package:cmms/domain/models/createStatutory_model.dart';
 import 'package:cmms/domain/models/facility_model.dart';
 import 'package:cmms/domain/models/get_statutory_by_id_model.dart';
+import 'package:cmms/domain/models/history_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rxdart/subjects.dart';
@@ -24,6 +25,8 @@ class ComplianceController extends GetxController {
   RxList<FacilityModel?> facilityList = <FacilityModel>[].obs;
   RxList<StatutoryComplianceModel?> statutoryComplianceList =
       <StatutoryComplianceModel>[].obs;
+  RxList<HistoryModel?>? historyList = <HistoryModel?>[].obs;
+
   Rx<GetStatutoryById?> getStatutoryById = GetStatutoryById().obs;
   Rx<bool> isStatutoryComplianceSelected = true.obs;
   Rx<String> selectedStatutoryCompliance = ''.obs;
@@ -58,7 +61,7 @@ class ComplianceController extends GetxController {
       if (srId.value != 0) {
         Future.delayed(Duration(seconds: 1), () {
           getStatutoryDetail(id: srId.value);
-          // getGoHistory(id: srId.value);
+          getSRHistory(id: srId.value);
         });
       }
     } catch (e) {}
@@ -95,7 +98,20 @@ class ComplianceController extends GetxController {
 
       issueDateTc.text = getStatutoryById.value?.created_at ?? '';
       expireOnDateTc.text = getStatutoryById.value?.end_date ?? "";
+      commentsCtrl.text = getStatutoryById.value?.description ?? "";
     }
+  }
+
+  Future<void> getSRHistory({required int id}) async {
+    int moduleType = 406;
+
+    historyList?.value = await compliancePresenter.getHistory(
+          moduleType,
+          id,
+          true,
+        ) ??
+        [];
+    update(["historyList"]);
   }
 
   Future<void> getFacilityList() async {
