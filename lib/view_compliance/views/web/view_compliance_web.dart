@@ -270,23 +270,25 @@ class _ViewComplianceWebState extends State<ViewComplianceWeb> {
                                 onPressed: () {
                                   Get.dialog(ComplianceApprovedDialog(
                                     id: controller.srId.value,
+                                    position: 1,
                                   ));
                                 },
                               ),
                             ),
-                            // Dimens.boxWidth15,
-                            // controller.goId == 0
-                            //     ?
-                            // Container(
-                            //     height: 40,
-                            //     child: CustomElevatedButton(
-                            //       backgroundColor: ColorValues.submitColor,
-                            //       text: 'Submit',
-                            //       onPressed: () {
-                            //         // controller.isFormInvalid.value = false;
-                            //         controller.createCompliance();
-                            //       },
-                            //     )),
+                            Container(
+                              height: 45,
+                              child: CustomElevatedButton(
+                                backgroundColor: ColorValues.rejectColor,
+                                text: "Reject",
+                                icon: Icons.close,
+                                onPressed: () {
+                                  Get.dialog(ComplianceApprovedDialog(
+                                    id: controller.srId.value,
+                                    position: 2,
+                                  ));
+                                },
+                              ),
+                            ),
                             Spacer(),
                           ],
                         )

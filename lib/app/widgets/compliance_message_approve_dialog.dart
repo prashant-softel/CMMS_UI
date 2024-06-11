@@ -9,8 +9,10 @@ import '../theme/styles.dart';
 class ComplianceMessageApproveDialog extends GetView {
   String? data;
   List<dynamic>? id;
+  int? position;
 
-  ComplianceMessageApproveDialog({super.key, this.data, this.id});
+  ComplianceMessageApproveDialog(
+      {super.key, this.data, this.id, this.position});
   final ViewComplianceController controller = Get.find();
 
   @override
@@ -24,7 +26,7 @@ class ComplianceMessageApproveDialog extends GetView {
           insetPadding: Dimens.edgeInsets10_0_10_0,
           contentPadding: EdgeInsets.zero,
           title: Text(
-            'Compliance Approval',
+            position == 1 ? 'Compliance Approval' : 'Compliance Reject',
             textAlign: TextAlign.center,
             style: TextStyle(color: Colors.black),
           ),

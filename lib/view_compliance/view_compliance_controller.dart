@@ -125,7 +125,28 @@ class ViewComplianceController extends GetxController {
     }
   }
 
-  void complianceApprovedButton({int? id}) async {
+  void complianceApprovedButton({int? id, int? position}) async {
+    {
+      String _comment = approveCommentTextFieldCtrlr.text.trim();
+
+      CommentModel commentComplianceApprovedModel =
+          CommentModel(id: id, comment: _comment);
+
+      var complianceApprovedJsonString =
+          commentComplianceApprovedModel.toJson();
+
+      Map<String, dynamic>? response =
+          await viewCompliancePresenter.complianceApprovedButton(
+              complianceApprovedJsonString: complianceApprovedJsonString,
+              isLoading: true,
+              position: position);
+      if (response == true) {
+        //getCalibrationList(facilityId, true);
+      }
+    }
+  }
+
+  void complianceRejectButton({int? id, int? position}) async {
     {
       String _comment = approveCommentTextFieldCtrlr.text.trim();
 
@@ -139,6 +160,7 @@ class ViewComplianceController extends GetxController {
           await viewCompliancePresenter.complianceApprovedButton(
         complianceApprovedJsonString: complianceApprovedJsonString,
         isLoading: true,
+        position: position,
       );
       if (response == true) {
         //getCalibrationList(facilityId, true);
