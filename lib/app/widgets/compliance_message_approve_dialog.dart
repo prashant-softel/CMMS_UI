@@ -86,7 +86,7 @@ class ComplianceMessageApproveDialog extends GetView {
                   child: ElevatedButton(
                     style: Styles.darkBlueElevatedButtonStyle,
                     onPressed: () {
-                      Get.offAllNamed(Routes.stockManagementGoodsOrdersScreen);
+                      Get.offAllNamed(Routes.statutory);
                     },
                     child: const Text('Compliance List'),
                   ),
@@ -96,22 +96,12 @@ class ComplianceMessageApproveDialog extends GetView {
                   child: ElevatedButton(
                     style: Styles.yellowElevatedButtonStyle,
                     onPressed: () {
-                      // Get.back();
-                      // Future.delayed(Duration(seconds: 1), () {
-                      //   controller.getUnitCurrencyList();
-                      // });
-                      // Future.delayed(Duration(seconds: 1), () {
-                      //   controller.getBusinessList(4, controller.facilityId);
-                      // });
-                      // Future.delayed(Duration(seconds: 1), () {
-                      //   controller.getAssetList(controller.facilityId);
-                      //   if (id != null) {
-                      //     Future.delayed(Duration(seconds: 1), () {
-                      //       controller.getPurchaseDetailsById(
-                      //           id: controller.goId.value);
-                      //     });
-                      //   }
-                      // });
+                      Get.back();
+                      Future.delayed(Duration(seconds: 1), () {
+                        controller.getStatutoryDetail(
+                            id: controller.srId.value);
+                        controller.getSRHistory(id: controller.srId.value);
+                      });
                     },
                     child: const Text('View Compliance'),
                   ),
