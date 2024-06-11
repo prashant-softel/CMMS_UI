@@ -37,6 +37,10 @@ class ApproveReturnMrsPresenter {
   void saveValue({String? mrsId}) async {
     return approveReturnMrsUsecase.saveValue(mrsId: mrsId);
   }
-
+  void saveValuee({String? type}) async {
+    return approveReturnMrsUsecase.saveValuee(type: type);
+  }
   Future<String?> getValue() async => await approveReturnMrsUsecase.getValue();
+  Future<String?> getValuee() async => await approveReturnMrsUsecase.getValuee();
+
 }

@@ -53,14 +53,34 @@ class ApproveReturnMrsContentWeb extends GetView<ApproveReturnMrsController> {
                     ),
                   ),
                   InkWell(
-                    onTap: () {
-                      Get.offNamed(Routes.stockManagementDashboardScreen);
-                    },
-                    child: Text(" / STOCK MANAGEMENT ",
-                        style: Styles.greyMediumLight12),
-                  ),
+                      onTap: () {
+                        var taskId;
+                        var jobId;
+                        controller.type.value == 1
+                            ? Get.offAllNamed(Routes.jobDetails,
+                                arguments: {'jobId': jobId})
+                            : controller.type.value == 2
+                                ? Get.offAllNamed(Routes.pmTaskView,
+                                    arguments: {'pmTaskId': taskId})
+                                : Get.offNamed(Routes.returnMrsList);
+                      },
+                      child: controller.type.value == 1
+                          ? Text(
+                              "/ JOB",
+                              style: Styles.greyLight14,
+                            )
+                          : controller.type.value == 2
+                              ? Text(
+                                  "/ PM TASK",
+                                  style: Styles.greyLight14,
+                                )
+                              : Text(
+                                  "/ RETURN MRS LIST",
+                                  style: Styles.greyLight14,
+                                )),
                   Text(" / RETURN EQUIPMENT DETAILS",
-                      style: Styles.greyMediumLight12)
+                      style: Styles.greyLight14,
+                  )
                 ],
               ),
             ),

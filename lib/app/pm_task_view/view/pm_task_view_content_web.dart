@@ -860,7 +860,8 @@ class PreventiveMaintenanceTaskViewContentWeb
                                                                                     'type': 2
                                                                                   })
                                                                                 : Get.toNamed(Routes.approverReturnMrs, arguments: {
-                                                                                    'mrsId': rmrsId
+                                                                                    'mrsId': rmrsId,
+                                                                                    'type' : 2
                                                                                   });
                                                                           }),
                                                                       // controller.pmtaskViewModel.value?.status != 169 &&
