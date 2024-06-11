@@ -1721,14 +1721,14 @@ class NewPermitController extends GetxController {
       //UserId
       int userId = varUserAccessModel.value.user_id ?? 0;
 
-      var data = filteredEmployeeNameList
-          .map((element) => element?.responsibility?.map((e) => e.name));
+      // var data = filteredEmployeeNameList
+      //     .map((element) => element?.responsibility?.map((e) => e.name));
 
       List<Employeelist> employee_map_list = [];
 
       filteredEmployeeNameList.forEach((e) {
         employee_map_list.add(
-            Employeelist(employeeId: e?.id, responsibility: data.toString()));
+            Employeelist(employeeId: e?.id, responsibility: e!.designation));
       });
 
       List<LotoOtherDetails> rowTBTTrainingOtherPersonItems = [];
