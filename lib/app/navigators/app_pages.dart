@@ -239,6 +239,8 @@ import 'package:cmms/app/water_data_list/view/water_data_list_screen.dart';
 import 'package:cmms/app/water_data_list/water_data_list_binding.dart';
 import 'package:cmms/app/work_type/view/work_type_screen.dart';
 import 'package:cmms/app/work_type/work_type_binding.dart';
+import 'package:cmms/view_compliance/view_compliance_binding.dart';
+import 'package:cmms/view_compliance/views/view_compliance_screen.dart';
 import '../approve_return_mrs/approve_return_mrs_binding.dart';
 import '../approve_return_mrs/view/approve_return_mrs_screen.dart';
 import '../body_injured/body_injured_binding.dart';
@@ -1328,6 +1330,11 @@ class AppPages {
       name: _Paths.documentUploadScreen,
       page: DocumentUploadScreen.new,
       binding: DocumentUploadBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.viewComplianceScreen,
+      page: ViewComplianceScreen.new,
+      binding: ViewComplianceBinding(),
     ),
   ];
 }
