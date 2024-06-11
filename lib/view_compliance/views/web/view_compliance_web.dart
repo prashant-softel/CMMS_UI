@@ -275,6 +275,7 @@ class _ViewComplianceWebState extends State<ViewComplianceWeb> {
                                 },
                               ),
                             ),
+                            Dimens.boxWidth10,
                             Container(
                               height: 45,
                               child: CustomElevatedButton(
