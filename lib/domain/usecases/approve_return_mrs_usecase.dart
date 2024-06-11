@@ -29,10 +29,6 @@ class ApproveReturnMrsUsecase {
           rejecttoJsonString: rejecttoJsonString, isLoading: isLoading);
   void saveValue({String? mrsId}) async =>
       repository.saveValue(LocalKeys.mrsId, mrsId);
-  void saveValuee({String? type}) async =>
-      repository.saveValue(LocalKeys.type, type);
   Future<String?> getValue() async =>
       await repository.getStringValue(LocalKeys.mrsId);
-  Future<String?> getValuee() async =>
-      await repository.getStringValue(LocalKeys.type);
 }

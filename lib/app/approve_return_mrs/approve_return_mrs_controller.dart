@@ -22,7 +22,6 @@ class ApproveReturnMrsController extends GetxController {
   ApproveReturnMrsPresenter approveReturnMrsPresenter;
   final HomeController homecontroller = Get.find();
   Rx<int> mrsId = 0.obs;
-  Rx<int> type = 0.obs;
 
   Rx<ReturnMrsDetailsModel?> returnMrsDetailsModel =
       ReturnMrsDetailsModel().obs;
@@ -59,9 +58,7 @@ class ApproveReturnMrsController extends GetxController {
         var dataFromPreviousScreen = Get.arguments;
 
         mrsId.value = dataFromPreviousScreen['mrsId'];
-        type.value = dataFromPreviousScreen['type'];
         approveReturnMrsPresenter.saveValue(mrsId: mrsId.value.toString());
-        approveReturnMrsPresenter.saveValuee(type: type.value.toString());
       } else {
         mrsId.value = int.tryParse(_mrsId) ?? 0;
       }
