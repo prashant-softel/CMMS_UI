@@ -26,11 +26,10 @@ class ViewComplianceUsecase {
   Future<Map<String, dynamic>> complianceApprovedButton({
     complianceApprovedJsonString,
     bool? isLoading,
+    int? position,
   }) async =>
       await repository.complianceApprovedButton(
-        complianceApprovedJsonString,
-        isLoading,
-      );
+          complianceApprovedJsonString, isLoading, position);
   Future<List<HistoryModel>?> getHistory({
     moduleType,
     id,

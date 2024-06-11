@@ -956,11 +956,11 @@ class ConnectHelper {
     required bool isLoading,
     required String auth,
     int? facility_id,
-    // String? start_date,
-    // required String end_date,
+    String? start_date,
+    required String end_date,
   }) async {
     ResponseModel responseModel = await apiWrapper.makeRequest(
-      'MISMaster/GetStatutoryList?facility_id=$facility_id',
+      'MISMaster/GetStatutoryList?facility_id=$facility_id&start_date=$end_date&end_date=$start_date',
       Request.getMultiparts,
       null,
       isLoading,
@@ -1167,9 +1167,12 @@ class ConnectHelper {
     required String auth,
     complianceApprovedJsonString,
     bool? isLoading,
+    int? position,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
-      'MISMaster/ApproveStatutory',
+      position == 1
+          ? 'MISMaster/ApproveStatutory'
+          : 'MISMaster/RejectStatutory',
       Request.post,
       complianceApprovedJsonString,
       isLoading ?? false,
@@ -1182,7 +1185,7 @@ class ConnectHelper {
     var res = responseModel.data;
     var parsedJson = json.decode(res);
     Get.dialog<void>(ComplianceMessageApproveDialog(
-        data: parsedJson['message'], id: parsedJson['id']));
+        data: parsedJson['message'], id: parsedJson['id'], position: position));
 
     return responseModel;
   }

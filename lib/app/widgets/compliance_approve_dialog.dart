@@ -10,8 +10,8 @@ import '../theme/styles.dart';
 
 class ComplianceApprovedDialog extends GetView {
   int? id;
-
-  ComplianceApprovedDialog({super.key, this.id});
+  int? position;
+  ComplianceApprovedDialog({super.key, this.id, this.position});
   final ViewComplianceController _controller = Get.find();
 
   @override
@@ -24,7 +24,8 @@ class ComplianceApprovedDialog extends GetView {
         insetPadding: Dimens.edgeInsets10_0_10_0,
         contentPadding: EdgeInsets.zero,
         title: Text(
-          "Compliance Approve",
+          position == 1 ? "Compliance Approve" : "Compliance Reject",
+
           textAlign: TextAlign.center,
           // style: TextStyle(color: Colors.green),
         ),
@@ -90,11 +91,16 @@ class ComplianceApprovedDialog extends GetView {
             ElevatedButton(
               style: Styles.greenElevatedButtonStyle,
               onPressed: () {
-                _controller.complianceApprovedButton(id: id);
+                position == 1
+                    ? _controller.complianceApprovedButton(
+                        id: id, position: position)
+                    : _controller.complianceRejectButton(
+                        id: id, position: position);
                 print('Goods order id:$id');
                 Get.back();
               },
-              child: Text('Approve Compliance'),
+              child: Text(
+                  position == 1 ? 'Approve Compliance' : "Reject Compliance"),
             ),
           ]),
         ],

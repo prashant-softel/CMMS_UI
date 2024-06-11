@@ -1688,8 +1688,8 @@ class Repository {
   Future<List<GetStatutoryList>> getStatutoryDataList({
     required int? facility_id,
     bool? isExport,
-    // String? start_date,
-    // required String end_date,
+    String? start_date,
+    required String end_date,
     required bool isLoading,
   }) async {
     try {
@@ -1698,8 +1698,8 @@ class Repository {
       log(auth);
       final res = await _dataRepository.getStatutoryDataList(
         facility_id: facility_id,
-        // start_date: start_date,
-        // end_date: end_date,
+        start_date: start_date,
+        end_date: end_date,
         isLoading: isLoading,
         auth: auth,
       );
@@ -2807,6 +2807,7 @@ class Repository {
   Future<Map<String, dynamic>> complianceApprovedButton(
     complianceApprovedJsonString,
     bool? isLoading,
+    int? position,
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
@@ -2814,6 +2815,7 @@ class Repository {
         auth: auth,
         complianceApprovedJsonString: complianceApprovedJsonString,
         isLoading: isLoading ?? false,
+        position: position,
       );
 
       var resourceData = res.data;
