@@ -42,18 +42,6 @@ class WasteDataWeb extends GetView<WasteDataController> {
         child: Center(
             child: Wrap(
           children: [
-            // TableActionButton(
-            //   color: ColorValues.appGreenColor,
-            //   icon: Icons.compost,
-            //   message: 'Non-Hazardous',
-            //   onPress: () {
-            //     Get.toNamed(Routes.viewWasteData, arguments: {
-            //       "monthId": data.month_id,
-            //       "hazardous": 0,
-            //       "year": data.year
-            //     });
-            //   },
-            // ),
             TableActionButton(
               color: ColorValues.viewColor,
               icon: Icons.remove_red_eye_outlined,
@@ -63,23 +51,12 @@ class WasteDataWeb extends GetView<WasteDataController> {
                   Routes.viewWasteData,
                   arguments: {
                     "monthId": data.month_id,
+                    "hazardous": controller.hazardous.value,
                     "year": data.year,
                   },
                 );
               },
             ),
-            // TableActionButton(
-            //   color: ColorValues.appRedColor,
-            //   icon: Icons.warning,
-            //   message: 'Hazardous',
-            //   onPress: () {
-            //     Get.toNamed(Routes.viewWasteData, arguments: {
-            //       "monthId": data.month_id,
-            //       "hazardous": 1,
-            //       "year": data.year
-            //     });
-            //   },
-            // ),
             TableActionButton(
               color: ColorValues.editColor,
               icon: Icons.edit,
@@ -172,7 +149,7 @@ class WasteDataWeb extends GetView<WasteDataController> {
                         InkWell(
                           onTap: () {
                             controller.clearStoreData();
-                            Get.offNamed(Routes.misDashboard);
+                            Get.offAllNamed(Routes.misDashboard);
                           },
                           child: Text(" / MIS", style: Styles.greyLight14),
                         ),
@@ -265,13 +242,13 @@ class WasteDataWeb extends GetView<WasteDataController> {
                                               right: 20,
                                             ),
                                             child: ActionButton(
-                                              icon: Icons.minimize_sharp,
+                                              icon: Icons.add,
                                               label: "Waste Generated",
                                               onPressed: () {
                                                 Get.dialog(
                                                     WasteGeneratedAddDialog());
                                               },
-                                              color: ColorValues.appRedColor,
+                                              color: ColorValues.addNewColor,
                                             ),
                                           ),
                                           Padding(
@@ -280,14 +257,13 @@ class WasteDataWeb extends GetView<WasteDataController> {
                                               right: 5,
                                             ),
                                             child: ActionButton(
-                                              icon: Icons.add,
-                                              label: "Waste  Disposed",
-                                              onPressed: () {
-                                                Get.dialog(
-                                                    WasteDisposedAddDialog());
-                                              },
-                                              color: ColorValues.addNewColor,
-                                            ),
+                                                icon: Icons.minimize_sharp,
+                                                label: "Waste  Disposed",
+                                                onPressed: () {
+                                                  Get.dialog(
+                                                      WasteDisposedAddDialog());
+                                                },
+                                                color: ColorValues.appRedColor),
                                           )
                                         ],
                                       ),

@@ -14,7 +14,7 @@ String wasteDataMonthDetailModelToJson(WasteDataMonthModel data) => json.encode(
 class WasteDataMonthModel {
   int? facility_id;
   String? facility_name;
-  int? month;
+  String? month;
   int? year;
   String? waste_type;
   int? waste_type_id;

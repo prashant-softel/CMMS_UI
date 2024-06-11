@@ -1011,17 +1011,9 @@ class Repository {
 
       if (!res.hasError) {
         Fluttertoast.showToast(
-            msg: "Submit Water Data  Successfully...", fontSize: 16.0);
-        Get.offAllNamed(
-          Routes.wasteData,
+          msg: "Submit Waste Data Successfully...",
+          fontSize: 16.0,
         );
-
-        // if (res.errorCode == 200) {
-        //   var responseMap = json.decode(res.data);
-        //   return responseMap;
-        // }
-
-        // Fluttertoast.showToast(msg: "Data add successfully...", fontSize: 16.0);
       } else {
         Utility.showDialog(res.errorCode.toString(), 'Craete Waste Data');
         //return '';
@@ -1051,9 +1043,8 @@ class Repository {
 
       if (!res.hasError) {
         Fluttertoast.showToast(
-            msg: "Submit Water Data  Successfully...", fontSize: 16.0);
-        Get.offAllNamed(
-          Routes.wasteData,
+          msg: "Waste Data Updated Successfully...",
+          fontSize: 16.0,
         );
       } else {
         Utility.showDialog(res.errorCode.toString(), 'Craete Waste Data');
