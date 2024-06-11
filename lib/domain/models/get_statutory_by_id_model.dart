@@ -30,6 +30,7 @@ class GetStatutoryById {
   int? expiry_year;
   int? daysLeft;
   String? activation_status;
+  String? description;
 
   GetStatutoryById(
       {this.id,
@@ -55,7 +56,8 @@ class GetStatutoryById {
       this.updatedByName,
       this.updated_at,
       this.updated_by,
-      this.validity_month});
+      this.validity_month,
+      this.description});
 
   // Factory method to create a GetStatutoryById instance from JSON
   factory GetStatutoryById.fromJson(Map<String, dynamic> json) {
@@ -84,6 +86,7 @@ class GetStatutoryById {
       expiry_year: json['expiry_year'],
       daysLeft: json['daysLeft'],
       activation_status: json['activation_status'],
+      description: json['description'],
     );
   }
 }

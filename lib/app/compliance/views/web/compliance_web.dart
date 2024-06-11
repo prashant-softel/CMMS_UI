@@ -4,6 +4,7 @@ import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
+import 'package:cmms/app/widgets/history_table_widget_web.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -77,10 +78,15 @@ class _ComplianceWebState extends State<ComplianceWeb> {
                                 child:
                                     Text(" / MIS", style: Styles.greyLight14),
                               ),
-                              Text(
-                                " / ADD STATUTORY COMPLIANCE",
-                                style: Styles.greyLight14,
-                              ),
+                              controller.srId == 0
+                                  ? Text(
+                                      " / ADD STATUTORY COMPLIANCE",
+                                      style: Styles.greyLight14,
+                                    )
+                                  : Text(
+                                      " / UPDATE STATUTORY COMPLIANCE",
+                                      style: Styles.greyLight14,
+                                    ),
                             ],
                           ),
                         ),
@@ -452,7 +458,57 @@ class _ComplianceWebState extends State<ComplianceWeb> {
                                                     ),
                                                   ]),
                                                 ),
-
+                                                Dimens.boxHeight15,
+                                                (controller.historyList !=
+                                                            null &&
+                                                        controller.historyList!
+                                                            .isNotEmpty)
+                                                    ? Container(
+                                                        margin:
+                                                            Dimens.edgeInsets20,
+                                                        height: ((controller
+                                                                        .historyList
+                                                                        ?.length ??
+                                                                    0) *
+                                                                40) +
+                                                            120,
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          border: Border.all(
+                                                            color: ColorValues
+                                                                .lightGreyColorWithOpacity35,
+                                                            width: 1,
+                                                          ),
+                                                        ),
+                                                        child: //
+                                                            Column(
+                                                          children: [
+                                                            Padding(
+                                                              padding:
+                                                                  const EdgeInsets
+                                                                      .all(8.0),
+                                                              child: Row(
+                                                                children: [
+                                                                  Text(
+                                                                    "Statutory Compliance  History ",
+                                                                    style: Styles
+                                                                        .blue700,
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                            ),
+                                                            Expanded(
+                                                              child:
+                                                                  HistoryTableWidgetWeb(
+                                                                historyList:
+                                                                    controller
+                                                                        .historyList,
+                                                              ),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      )
+                                                    : Dimens.box0,
                                                 // if (viewStatutory == 0)
 
                                                 // Row(
