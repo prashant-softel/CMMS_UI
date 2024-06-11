@@ -3958,6 +3958,24 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> getStatutoryDetail({
+    required String auth,
+    bool? isLoading,
+    int? id,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'MISMaster/GetStatutoryById?id=$id',
+      Request.get,
+      null,
+      isLoading ?? false,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    print('GetStatutoryById${responseModel.data}');
+    return responseModel;
+  }
+
   Future<ResponseModel> getHistory({
     String? auth,
     int? moduleType,

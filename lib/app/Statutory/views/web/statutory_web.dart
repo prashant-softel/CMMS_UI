@@ -552,12 +552,16 @@ class StatutoryListDataSource extends DataTableSource {
                             icon: Icons.remove_red_eye_outlined,
                             message: 'View',
                             onPress: () {
-                              int viewStatutory = 1;
-
-                              Get.toNamed(
-                                Routes.complianceScreen,
-                                arguments: {'viewStatutory': viewStatutory},
-                              );
+                              controller.clearStoreData();
+                              int srId = StatutoryListDetails?.id ?? 0;
+                              if (srId != 0) {
+                                Get.toNamed(
+                                  Routes.complianceScreen,
+                                  arguments: {
+                                    'srId': StatutoryListDetails?.id,
+                                  },
+                                );
+                              }
                             },
                           ),
                           TableActionButton(
@@ -565,9 +569,9 @@ class StatutoryListDataSource extends DataTableSource {
                             icon: Icons.edit,
                             message: 'Edit',
                             onPress: () {
-                              Get.toNamed(
-                                Routes.complianceScreen,
-                              );
+                              // Get.toNamed(
+                              //   // Routes.complianceScreen,
+                              // );
                             },
                           ),
                           TableActionButton(
@@ -576,21 +580,21 @@ class StatutoryListDataSource extends DataTableSource {
                             message: 'Re-New',
                             onPress: () {
                               int reNew = 1;
-                              Get.toNamed(
-                                Routes.complianceScreen,
-                                arguments: {'reNew': reNew},
-                              );
+                              // Get.toNamed(
+                              //   Routes.complianceScreen,
+                              //   arguments: {'reNew': reNew},
+                              // );
                             },
                           ),
                           TableActionButton(
                             color: Color.fromARGB(255, 120, 110, 123),
                             icon: Icons.history,
                             message: 'Hostory',
-                            onPress: () {
-                              Get.toNamed(
-                                Routes.complianceHistoryScreen,
-                              );
-                            },
+                            // onPress: () {
+                            //   Get.toNamed(
+                            //     Routes.complianceHistoryScreen,
+                            //   );
+                            // },
                           ),
                         ],
                       )

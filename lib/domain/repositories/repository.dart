@@ -8,6 +8,7 @@ import 'package:cmms/domain/models/dashboard_model.dart';
 import 'package:cmms/domain/models/dsm_list_model.dart';
 import 'package:cmms/domain/models/escalation_matrix_list_model.dart';
 import 'package:cmms/domain/models/get_mc_task_equipment_model.dart';
+import 'package:cmms/domain/models/get_statutory_by_id_model.dart';
 import 'package:cmms/domain/models/get_statutory_list_model.dart';
 import 'package:cmms/domain/models/grievance_type_model.dart';
 import 'package:cmms/domain/models/incident_risk_type_model.dart';
@@ -2534,6 +2535,36 @@ class Repository {
       } else {
         Utility.showDialog(res.errorCode.toString(), 'AddInventoryDetail');
         //return '';
+      }
+      return null;
+    } catch (error) {
+      print(error.toString());
+      return null;
+    }
+  }
+
+  Future<GetStatutoryById?> getStatutoryDetail({
+    bool? isLoading,
+    int? id,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getStatutoryDetail(
+        auth: auth,
+        id: id,
+        isLoading: isLoading ?? false,
+      );
+
+      print({"GetStatutoryById", res.data});
+
+      if (!res.hasError) {
+        final GetStatutoryById __getStatutoryDetailModel =
+            getStatutoryByIdModelFromJson(res.data);
+
+        print({"get Statutory Detail", __getStatutoryDetailModel});
+        return __getStatutoryDetailModel;
+      } else {
+        Utility.showDialog(res.errorCode.toString(), 'get Statutory Detail');
       }
       return null;
     } catch (error) {

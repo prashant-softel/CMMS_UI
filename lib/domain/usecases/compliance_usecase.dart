@@ -1,5 +1,6 @@
 import 'package:cmms/domain/models/Statutory_Compliance_model.dart';
 import 'package:cmms/domain/models/facility_model.dart';
+import 'package:cmms/domain/models/get_statutory_by_id_model.dart';
 import 'package:cmms/domain/repositories/local_storage_keys.dart';
 import 'package:cmms/domain/repositories/repository.dart';
 
@@ -21,6 +22,14 @@ class ComplianceUsecase {
     );
   }
 
+  Future<GetStatutoryById?> getStatutoryDetail({
+    bool? isLoading,
+    required int id,
+  }) async =>
+      await repository.getStatutoryDetail(
+        id: id,
+        isLoading: isLoading ?? false,
+      );
   Future<Map<String, dynamic>> createCompliance({
     createCompliance,
     bool? isLoading,
