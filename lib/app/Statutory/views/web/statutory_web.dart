@@ -556,7 +556,7 @@ class StatutoryListDataSource extends DataTableSource {
                               int srId = StatutoryListDetails?.id ?? 0;
                               if (srId != 0) {
                                 Get.toNamed(
-                                  Routes.complianceScreen,
+                                  Routes.viewComplianceScreen,
                                   arguments: {
                                     'srId': StatutoryListDetails?.id,
                                   },
@@ -569,9 +569,16 @@ class StatutoryListDataSource extends DataTableSource {
                             icon: Icons.edit,
                             message: 'Edit',
                             onPress: () {
-                              // Get.toNamed(
-                              //   // Routes.complianceScreen,
-                              // );
+                              controller.clearStoreData();
+                              int srId = StatutoryListDetails?.id ?? 0;
+                              if (srId != 0) {
+                                Get.toNamed(
+                                  Routes.complianceScreen,
+                                  arguments: {
+                                    'srId': StatutoryListDetails?.id,
+                                  },
+                                );
+                              }
                             },
                           ),
                           TableActionButton(

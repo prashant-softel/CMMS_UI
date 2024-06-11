@@ -157,8 +157,8 @@ class StatutoryController extends GetxController {
 
     final _getStatutoryList = await statutoryPresenter.getStatutoryDataList(
         isLoading: isLoading.value,
-        // start_date: startDate,
-        // end_date: endDate,
+        start_date: startDate,
+        end_date: endDate,
         facility_id: facilityId,
         isExport: isExport);
     getStatutoryList.value = _getStatutoryList;

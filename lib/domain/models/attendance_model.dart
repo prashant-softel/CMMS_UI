@@ -17,7 +17,8 @@ class AttendaceModel {
         date: json["date"],
         facilityId: json["facility_id"],
         hfeAttendance: json["hfeAttendance"] != null
-            ? [HFEEmployeeAttendance.fromJson(json["hfeAttendance"])]
+            ? List<HFEEmployeeAttendance>.from(json["hfeAttendance"]
+                .map((x) => HFEEmployeeAttendance.fromJson(x)))
             : [],
         contractAttendance: json["contractAttendance"] != null
             ? ContractLabourAttendance.fromJson(json["contractAttendance"])
@@ -51,7 +52,7 @@ class HFEEmployeeAttendance {
       HFEEmployeeAttendance(
         id: json["employee_id"],
         name: json["name"],
-        present: json["present"],
+        present: RxBool(json["present"]),
         inTime: json["inTime"],
         outTime: json["outTime"],
       );

@@ -5,8 +5,8 @@ import 'package:cmms/domain/models/history_model.dart';
 import 'package:cmms/domain/repositories/local_storage_keys.dart';
 import 'package:cmms/domain/repositories/repository.dart';
 
-class ComplianceUsecase {
-  ComplianceUsecase(this.repository);
+class ViewComplianceUsecase {
+  ViewComplianceUsecase(this.repository);
   Repository repository;
 
   Future<List<FacilityModel?>?> getFacilityList({bool? isLoading}) async =>
@@ -23,6 +23,13 @@ class ComplianceUsecase {
     );
   }
 
+  Future<Map<String, dynamic>> complianceApprovedButton({
+    complianceApprovedJsonString,
+    bool? isLoading,
+    int? position,
+  }) async =>
+      await repository.complianceApprovedButton(
+          complianceApprovedJsonString, isLoading, position);
   Future<List<HistoryModel>?> getHistory({
     moduleType,
     id,

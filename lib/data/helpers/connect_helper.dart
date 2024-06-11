@@ -15,6 +15,7 @@ import 'package:cmms/app/widgets/abandon_veg_execution_dialog.dart';
 import 'package:cmms/app/widgets/approve_wc_message_dialog.dart';
 import 'package:cmms/app/widgets/audit_plan_approve_msg_dialog.dart';
 import 'package:cmms/app/widgets/audit_plan_reject_msg_dialog.dart';
+import 'package:cmms/app/widgets/compliance_message_approve_dialog.dart';
 import 'package:cmms/app/widgets/create_escalation_matrix_dialog.dart';
 import 'package:cmms/app/widgets/create_incident_report_dialog.dart';
 import 'package:cmms/app/widgets/create_jc_success_message_dialog.dart';
@@ -955,11 +956,11 @@ class ConnectHelper {
     required bool isLoading,
     required String auth,
     int? facility_id,
-    // String? start_date,
-    // required String end_date,
+    String? start_date,
+    required String end_date,
   }) async {
     ResponseModel responseModel = await apiWrapper.makeRequest(
-      'MISMaster/GetStatutoryList?facility_id=$facility_id',
+      'MISMaster/GetStatutoryList?facility_id=$facility_id&start_date=$end_date&end_date=$start_date',
       Request.getMultiparts,
       null,
       isLoading,
@@ -1158,6 +1159,33 @@ class ConnectHelper {
     var parsedJson = json.decode(res);
     Get.dialog<void>(GoodsOrderMessageApproveDialog(
         data: parsedJson['message'], id: parsedJson['id']));
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> complianceApprovedButton({
+    required String auth,
+    complianceApprovedJsonString,
+    bool? isLoading,
+    int? position,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      position == 1
+          ? 'MISMaster/ApproveStatutory'
+          : 'MISMaster/RejectStatutory',
+      Request.post,
+      complianceApprovedJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    print('Approve Statutory: ${responseModel.data}');
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    Get.dialog<void>(ComplianceMessageApproveDialog(
+        data: parsedJson['message'], id: parsedJson['id'], position: position));
 
     return responseModel;
   }
@@ -8890,6 +8918,24 @@ class ConnectHelper {
       Request.get,
       null,
       isLoading,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
+  Future<ResponseModel> getAttendanceDetail({
+    required String auth,
+    required int facilityId,
+    required String date,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Attendence/GetAttendanceByDetails?facility_id=$facilityId&date=$date',
+      Request.get,
+      null,
+      isLoading ?? false,
       {
         'Authorization': 'Bearer $auth',
       },

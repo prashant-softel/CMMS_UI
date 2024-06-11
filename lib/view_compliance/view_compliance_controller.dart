@@ -1,21 +1,22 @@
 import 'dart:async';
-import 'package:cmms/app/compliance/compliance_presenter.dart';
+import 'package:cmms/app/home/home_controller.dart';
 import 'package:cmms/domain/models/Statutory_Compliance_model.dart';
+import 'package:cmms/domain/models/comment_model.dart';
 import 'package:cmms/domain/models/createStatutory_model.dart';
 import 'package:cmms/domain/models/facility_model.dart';
 import 'package:cmms/domain/models/get_statutory_by_id_model.dart';
 import 'package:cmms/domain/models/history_model.dart';
+import 'package:cmms/view_compliance/view_compliance_presenter.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rxdart/subjects.dart';
-import '../home/home_controller.dart';
 
-class ComplianceController extends GetxController {
+class ViewComplianceController extends GetxController {
   ///
-  ComplianceController(
-    this.compliancePresenter,
+  ViewComplianceController(
+    this.viewCompliancePresenter,
   );
-  CompliancePresenter compliancePresenter;
+  ViewCompliancePresenter viewCompliancePresenter;
 
   final HomeController homeController = Get.find();
   Rx<String> selectedFacility = ''.obs;
@@ -26,7 +27,7 @@ class ComplianceController extends GetxController {
   RxList<StatutoryComplianceModel?> statutoryComplianceList =
       <StatutoryComplianceModel>[].obs;
   RxList<HistoryModel?>? historyList = <HistoryModel?>[].obs;
-
+  TextEditingController approveCommentTextFieldCtrlr = TextEditingController();
   Rx<GetStatutoryById?> getStatutoryById = GetStatutoryById().obs;
   Rx<bool> isStatutoryComplianceSelected = true.obs;
   Rx<String> selectedStatutoryCompliance = ''.obs;
@@ -54,9 +55,6 @@ class ComplianceController extends GetxController {
         Future.delayed(Duration(seconds: 1), () {
           getFacilityList();
         });
-        Future.delayed(Duration(seconds: 1), () {
-          getStatutoryComplianceDropDown();
-        });
       });
       if (srId.value != 0) {
         Future.delayed(Duration(seconds: 1), () {
@@ -71,12 +69,12 @@ class ComplianceController extends GetxController {
 
   Future<void> setUserId() async {
     try {
-      final _srId = await compliancePresenter.getValue();
+      final _srId = await viewCompliancePresenter.getValue();
       if (_srId == null || _srId == '' || _srId == "null") {
         var dataFromPreviousScreen = Get.arguments;
 
         srId.value = dataFromPreviousScreen['srId'];
-        compliancePresenter.saveValue(srId: srId.value.toString());
+        viewCompliancePresenter.saveValue(srId: srId.value.toString());
       } else {
         srId.value = int.tryParse(_srId) ?? 0;
       }
@@ -88,7 +86,7 @@ class ComplianceController extends GetxController {
 
   Future<void> getStatutoryDetail({required int id}) async {
     final _getStatutoryDetail =
-        await compliancePresenter.getStatutoryDetail(id: id);
+        await viewCompliancePresenter.getStatutoryDetail(id: id);
     print('Add Statutory Detail:$_getStatutoryDetail');
 
     if (_getStatutoryDetail != null) {
@@ -105,7 +103,7 @@ class ComplianceController extends GetxController {
   Future<void> getSRHistory({required int id}) async {
     int moduleType = 406;
 
-    historyList?.value = await compliancePresenter.getHistory(
+    historyList?.value = await viewCompliancePresenter.getHistory(
           moduleType,
           id,
           true,
@@ -115,7 +113,7 @@ class ComplianceController extends GetxController {
   }
 
   Future<void> getFacilityList() async {
-    final _facilityList = await compliancePresenter.getFacilityList();
+    final _facilityList = await viewCompliancePresenter.getFacilityList();
 
     if (_facilityList != null) {
       for (var facility in _facilityList) {
@@ -127,75 +125,46 @@ class ComplianceController extends GetxController {
     }
   }
 
-  void getStatutoryComplianceDropDown() async {
-    statutoryComplianceList.value = <StatutoryComplianceModel>[];
-    final _statutoryComplianceList =
-        await compliancePresenter.getStatutoryComplianceDropDown(
-      isLoading: true,
-      facilityId: facilityId,
-    );
-    print('Unit Currency List:$statutoryComplianceList');
-    for (var statutory_Compliance_List in _statutoryComplianceList) {
-      statutoryComplianceList.add(statutory_Compliance_List);
-    }
+  void complianceApprovedButton({int? id, int? position}) async {
+    {
+      String _comment = approveCommentTextFieldCtrlr.text.trim();
 
-    update(['statutory_Compliance_List']);
+      CommentModel commentComplianceApprovedModel =
+          CommentModel(id: id, comment: _comment);
+
+      var complianceApprovedJsonString =
+          commentComplianceApprovedModel.toJson();
+
+      Map<String, dynamic>? response =
+          await viewCompliancePresenter.complianceApprovedButton(
+              complianceApprovedJsonString: complianceApprovedJsonString,
+              isLoading: true,
+              position: position);
+      if (response == true) {
+        //getCalibrationList(facilityId, true);
+      }
+    }
   }
 
-  void createCompliance() async {
-    try {
-      checkCompiliace();
-      if (isFormInvalid.value) {
-        return;
-      }
-      String _issueDateTc = issueDateTc.text.trim();
+  void complianceRejectButton({int? id, int? position}) async {
+    {
+      String _comment = approveCommentTextFieldCtrlr.text.trim();
 
-      String _expireOnDateTc = expireOnDateTc.text.trim();
-      String _commentsCtrl = commentsCtrl.text.trim();
+      CommentModel commentComplianceApprovedModel =
+          CommentModel(id: id, comment: _comment);
 
-      CreateStatutoryModel createStatutoryModel = CreateStatutoryModel(
-        facility_id: facilityId,
-        Comment: _commentsCtrl,
-        compliance_id: selectedStatutoryComplianceId,
-        issue_date: _issueDateTc,
-        expires_on: _expireOnDateTc,
-      );
+      var complianceApprovedJsonString =
+          commentComplianceApprovedModel.toJson();
 
-      // Convert the CreateStatutoryModel instance to JSON
-      var createComplianceModelJsonString = createStatutoryModel.toJson();
-
-      // Call the createCompliance function from stockManagementAddGoodsOrdersPresenter
-      Map<String, dynamic>? responseCreateComplianceModel =
-          await compliancePresenter.createCompliance(
-        createCompliance: createComplianceModelJsonString,
+      Map<String, dynamic>? response =
+          await viewCompliancePresenter.complianceApprovedButton(
+        complianceApprovedJsonString: complianceApprovedJsonString,
         isLoading: true,
+        position: position,
       );
-
-      // Handle the response
-      if (responseCreateComplianceModel == null) {
-        // CreateNewPermitDialog();
-        // showAlertDialog();
+      if (response == true) {
+        //getCalibrationList(facilityId, true);
       }
-      print(
-          'Create  create Compliance  data: $createComplianceModelJsonString');
-    } catch (e) {
-      print(e);
-    }
-  }
-
-  void checkCompiliace() {
-    if (selectedStatutoryCompliance.value == '') {
-      isStatutoryComplianceSelected.value = false;
-      isFormInvalid.value = true;
-    }
-    if (issueDateTc.text.trim().length < 3) {
-      isIssueDateInvalid.value = true;
-      isFormInvalid.value = true;
-    }
-
-    if (expireOnDateTc.text.trim().length < 3) {
-      isExpiresonInvalid.value = true;
-      isFormInvalid.value = true;
     }
   }
 
