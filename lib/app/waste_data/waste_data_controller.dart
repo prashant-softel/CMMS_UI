@@ -86,29 +86,8 @@ class WasteDataController extends GetxController {
     }
   }
 
-  ///
-  // @override
-  // void onInit() async {
-  //   await setId();
-  //   facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
-  //     facilityId = event;
-  //     Future.delayed(Duration(seconds: 2), () async {
-  //       await getWasteDataList(
-  //         hazardous.value,
-  //         facilityId,
-  //         formattedTodate1,
-  //         formattedFromdate1,
-  //         false,
-  //       );
-  //     });
-  //     Future.delayed(Duration(seconds: 1), () async {
-  //       getTypeOfWasteList();
-  //     });
-  //   });
-  //   super.onInit();
-  // }
-
-  void onReady() async {
+  @override
+  void onInit() async {
     await setId();
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
       facilityId = event;
@@ -125,8 +104,28 @@ class WasteDataController extends GetxController {
         getTypeOfWasteList();
       });
     });
-    super.onReady();
+    super.onInit();
   }
+
+  // void onReady() async {
+  //   await setId();
+  //   facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
+  //     facilityId = event;
+  //     Future.delayed(Duration(seconds: 2), () async {
+  //       await getWasteDataList(
+  //         hazardous.value,
+  //         facilityId,
+  //         formattedTodate1,
+  //         formattedFromdate1,
+  //         false,
+  //       );
+  //     });
+  //     Future.delayed(Duration(seconds: 1), () async {
+  //       getTypeOfWasteList();
+  //     });
+  //   });
+  //   super.onReady();
+  // }
 
   void clearStoreData() {
     wasteDataPresenter.clearHazardousValue();

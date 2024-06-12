@@ -150,19 +150,24 @@ class _ViewComplianceWebState extends State<ViewComplianceWeb> {
                                                 child: Column(
                                                   children: [
                                                     TitleAndInfo(
+                                                      "ID:",
+                                                      "${controller.getStatutoryById.value!.id == null ? "" : controller.getStatutoryById.value!.id}",
+                                                    ),
+                                                    Dimens.boxHeight10,
+                                                    TitleAndInfo(
                                                       "Compliance:",
                                                       "${controller.getStatutoryById.value!.compilanceName == null ? "" : controller.getStatutoryById.value!.compilanceName}",
                                                     ),
                                                     Dimens.boxHeight10,
                                                     TitleAndInfo(
-                                                      "Re-New Date:",
-                                                      "${controller.getStatutoryById.value!.renew_from == null ? "" : controller.getStatutoryById.value!.renew_from}",
+                                                      "Activation Status:",
+                                                      "${controller.getStatutoryById.value!.activation_status == null ? "" : controller.getStatutoryById.value!.activation_status}",
                                                     ),
-                                                    // Dimens.boxHeight10,
-                                                    // TitleAndInfo(
-                                                    //   "Expires on:",
-                                                    //   "${controller.getStatutoryById.value!.end_date == null ? "" : controller.getStatutoryById.value!.end_date}",
-                                                    // ),
+                                                    Dimens.boxHeight10,
+                                                    TitleAndInfo(
+                                                      "Validity In Month:",
+                                                      "${controller.getStatutoryById.value!.validity_month == null ? "" : controller.getStatutoryById.value!.validity_month}",
+                                                    ),
                                                   ],
                                                 ),
                                               ),
@@ -170,11 +175,11 @@ class _ViewComplianceWebState extends State<ViewComplianceWeb> {
                                               Expanded(
                                                 child: Column(
                                                   children: [
-                                                    // TitleAndInfo(
-                                                    //   "Compliance:",
-                                                    //   "${controller.getStatutoryById.value!.compilanceName == null ? "" : controller.getStatutoryById.value!.compilanceName}",
-                                                    // ),
-                                                    // Dimens.boxHeight10,
+                                                    TitleAndInfo(
+                                                      "Re-New Date:",
+                                                      "${controller.getStatutoryById.value!.renew_from == null ? "" : controller.getStatutoryById.value!.renew_from}",
+                                                    ),
+                                                    Dimens.boxHeight10,
                                                     TitleAndInfo(
                                                       "Issue Date:",
                                                       "${controller.getStatutoryById.value!.created_at == null ? "" : controller.getStatutoryById.value!.created_at}",
@@ -184,11 +189,21 @@ class _ViewComplianceWebState extends State<ViewComplianceWeb> {
                                                       "Expires on:",
                                                       "${controller.getStatutoryById.value!.end_date == null ? "" : controller.getStatutoryById.value!.end_date}",
                                                     ),
+                                                    Dimens.boxHeight10,
+                                                    TitleAndInfo(
+                                                      "Days Left:",
+                                                      "${controller.getStatutoryById.value!.daysLeft == null ? "" : controller.getStatutoryById.value!.daysLeft}",
+                                                    ),
                                                   ],
                                                 ),
                                               ),
                                               Spacer(),
                                             ],
+                                          ),
+                                          Dimens.boxHeight10,
+                                          TitleAndInfo(
+                                            "description:",
+                                            "${controller.getStatutoryById.value!.description == null ? "" : controller.getStatutoryById.value!.description}",
                                           ),
                                           Dimens.boxHeight20,
                                           (controller.historyList != null &&

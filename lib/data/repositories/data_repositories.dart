@@ -690,7 +690,7 @@ class DataRepository extends DomainRepository {
   Future<ResponseModel> getStatutoryDataList({
     int? facility_id,
     String? start_date,
-    required String end_date,
+    String? end_date,
     required bool isLoading,
     required String auth,
   }) async {
