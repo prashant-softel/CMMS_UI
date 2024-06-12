@@ -30,6 +30,8 @@ import 'package:cmms/app/administration_dashboard_screen/view/admin_dash_screen.
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/attendance_list/attendance_list_binding.dart';
 import 'package:cmms/app/attendance_list/view/attendance_list_screen.dart';
+import 'package:cmms/app/attendance_list_monthwise/attendance_monthwise_bindings.dart';
+import 'package:cmms/app/attendance_list_monthwise/view/attendance_monthwise_screen.dart';
 import 'package:cmms/app/attendance_screen/attendance_binding.dart';
 import 'package:cmms/app/attendance_screen/view/attendance_screen.dart';
 import 'package:cmms/app/audit/audit_binding.dart';
@@ -1305,6 +1307,11 @@ class AppPages {
       name: _Paths.attendanceListScreen,
       page: AttendanceListScreen.new,
       binding: AttendanceListBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.attendanceListMonthwise,
+      page: AttendanceListMonthScreen.new,
+      binding: AttendanceListMonthBinding(),
     ),
     GetPage<dynamic>(
       name: _Paths.materialCategory,
