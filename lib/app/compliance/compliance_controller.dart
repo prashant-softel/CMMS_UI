@@ -4,6 +4,7 @@ import 'package:cmms/domain/models/Statutory_Compliance_model.dart';
 import 'package:cmms/domain/models/createStatutory_model.dart';
 import 'package:cmms/domain/models/facility_model.dart';
 import 'package:cmms/domain/models/get_statutory_by_id_model.dart';
+import 'package:cmms/domain/models/get_statutory_list_model.dart';
 import 'package:cmms/domain/models/history_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -33,11 +34,19 @@ class ComplianceController extends GetxController {
   int selectedStatutoryComplianceId = 0;
   bool openIssueDatePicker = false;
   bool openExpireOnFDatePicker = false;
+  bool openReNewOnDatePicker = false;
   Rx<bool> isIssueDateInvalid = false.obs;
+
+  Rx<bool> isLoading = true.obs;
   Rx<bool> isExpiresonInvalid = false.obs;
   RxBool isFormInvalid = false.obs;
+  RxList<GetStatutoryList> getStatutoryList = <GetStatutoryList>[].obs;
+  RxBool isStatutoryPresent = false.obs;
+
   var issueDateTc = TextEditingController();
   var expireOnDateTc = TextEditingController();
+  var reNewOnDateTc = TextEditingController();
+
   var commentsCtrl = TextEditingController();
 
   int paidId = 0;
@@ -56,6 +65,9 @@ class ComplianceController extends GetxController {
         });
         Future.delayed(Duration(seconds: 1), () {
           getStatutoryComplianceDropDown();
+        });
+        Future.delayed(Duration(seconds: 2), () async {
+          await getStatutoryDataList(facilityId);
         });
       });
       if (srId.value != 0) {
@@ -183,6 +195,15 @@ class ComplianceController extends GetxController {
     }
   }
 
+  Future<void> getStatutoryDataList(int facilityId) async {
+    getStatutoryList.value = <GetStatutoryList>[];
+
+    final _getStatutoryList = await compliancePresenter.getStatutoryDataList(
+        isLoading: isLoading.value, facility_id: facilityId, isExport: false);
+    getStatutoryList.value = _getStatutoryList;
+    isLoading.value = false;
+  }
+
   void checkCompiliace() {
     if (selectedStatutoryCompliance.value == '') {
       isStatutoryComplianceSelected.value = false;
@@ -210,9 +231,31 @@ class ComplianceController extends GetxController {
             selectedStatutoryComplianceId =
                 statutoryComplianceList[currencyIndex]?.id ?? 0;
             selectedStatutoryCompliance.value = value;
+            isStatutoryPresent.value = getStatutoryList.any((element) =>
+                element.compilanceName == selectedStatutoryCompliance.value);
             isStatutoryComplianceSelected.value = true;
             print(
-                "selectedBusinessTypeId: ${selectedStatutoryComplianceId} \n ${selectedStatutoryCompliance}");
+                "selectedBusinessTypeId: ${isStatutoryPresent} \n ${selectedStatutoryCompliance}");
+
+            if (isStatutoryPresent.value) {
+              selectedStatutoryCompliance.value = "";
+              selectedStatutoryComplianceId = 0;
+
+              Get.dialog(
+                AlertDialog(
+                  title: Text("Compliance Already Exists"),
+                  content: Text("This compliance is already in existence."),
+                  actions: <Widget>[
+                    ElevatedButton(
+                      child: Text("OK"),
+                      onPressed: () {
+                        Get.back();
+                      },
+                    ),
+                  ],
+                ),
+              );
+            }
           } else {
             selectedStatutoryComplianceId = 0;
           }
