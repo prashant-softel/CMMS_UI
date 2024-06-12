@@ -957,7 +957,7 @@ class ConnectHelper {
     required String auth,
     int? facility_id,
     String? start_date,
-    required String end_date,
+    String? end_date,
   }) async {
     ResponseModel responseModel = await apiWrapper.makeRequest(
       'MISMaster/GetStatutoryList?facility_id=$facility_id&start_date=$end_date&end_date=$start_date',

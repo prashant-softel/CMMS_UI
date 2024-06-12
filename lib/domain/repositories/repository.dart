@@ -1689,7 +1689,7 @@ class Repository {
     required int? facility_id,
     bool? isExport,
     String? start_date,
-    required String end_date,
+    String? end_date,
     required bool isLoading,
   }) async {
     try {

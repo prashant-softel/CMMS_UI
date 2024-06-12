@@ -166,7 +166,6 @@ class _ComplianceWebState extends State<ComplianceWeb> {
                                                             ),
                                                           ],
                                                         ),
-
                                                         Dimens.boxHeight10,
                                                         Row(
                                                           children: [
@@ -221,57 +220,64 @@ class _ComplianceWebState extends State<ComplianceWeb> {
                                                             ),
                                                           ],
                                                         ),
-                                                        Dimens.boxHeight5,
-                                                        // Row(
-                                                        //   children: [
-                                                        //     CustomRichText(
-                                                        //         title:
-                                                        //             'Validity (In months) '),
-                                                        //     Dimens.boxWidth10,
-                                                        //     LoginCustomTextfield(
-                                                        //       width: (MediaQuery.of(
-                                                        //                   context)
-                                                        //               .size
-                                                        //               .width *
-                                                        //           .2),
-                                                        //       keyboardType:
-                                                        //           TextInputType
-                                                        //               .number,
-
-                                                        //       // textController:
-                                                        //       //     controller.challanNoCtrlr,
-                                                        //     ),
-                                                        //   ],
-                                                        // ),
-                                                        Dimens.boxHeight5,
-
-                                                        Dimens.boxHeight5,
-                                                        // if (reNew == 1)
-                                                        // Row(
-                                                        //   children: [
-                                                        //     CustomRichText(
-                                                        //         title: 'ReNew Date '),
-                                                        //     Dimens.boxWidth10,
-                                                        //     CustomTextFieldForStock(
-                                                        //       width:
-                                                        //           MediaQuery.of(context)
-                                                        //                   .size
-                                                        //                   .width /
-                                                        //               5,
-                                                        //       numberTextField: true,
-                                                        //       onTap: () {
-                                                        //         // controller
-                                                        //         //         .openReceivedPicker =
-                                                        //         //     !controller
-                                                        //         //         .openReceivedPicker;
-                                                        //         // controller.update(
-                                                        //         //     ['stock_Mangement']);
-                                                        //       },
-                                                        //       // textController:
-                                                        //       //     controller.receivedDateTc,
-                                                        //     ),
-                                                        //   ],
-                                                        // ),
+                                                        Dimens.boxHeight10,
+                                                        controller
+                                                                    .getStatutoryById
+                                                                    .value!
+                                                                    .daysLeft ==
+                                                                0
+                                                            ? Dimens.box0
+                                                            : Row(
+                                                                children: [
+                                                                  CustomRichText(
+                                                                      title:
+                                                                          'Re-New on '),
+                                                                  Dimens
+                                                                      .boxWidth10,
+                                                                  CustomTextFieldForStock(
+                                                                    width: MediaQuery.of(context)
+                                                                            .size
+                                                                            .width /
+                                                                        5,
+                                                                    numberTextField:
+                                                                        true,
+                                                                    onTap: () {
+                                                                      controller
+                                                                              .openReNewOnDatePicker =
+                                                                          !controller
+                                                                              .openReNewOnDatePicker;
+                                                                      controller
+                                                                          .update([
+                                                                        'stock_Mangement'
+                                                                      ]);
+                                                                    },
+                                                                    textController:
+                                                                        controller
+                                                                            .reNewOnDateTc,
+                                                                    // errorController:
+                                                                    //     controller
+                                                                    //             .isExpiresonInvalid
+                                                                    //             .value
+                                                                    //         ? "Required field"
+                                                                    //         : null,
+                                                                    // onChanged:
+                                                                    //     (value) {
+                                                                    //   if (value
+                                                                    //           .trim()
+                                                                    //           .length >
+                                                                    //       0) {
+                                                                    //     controller
+                                                                    //         .isExpiresonInvalid
+                                                                    //         .value = false;
+                                                                    //   } else {
+                                                                    //     controller
+                                                                    //         .isExpiresonInvalid
+                                                                    //         .value = true;
+                                                                    //   }
+                                                                    // },
+                                                                  ),
+                                                                ],
+                                                              ),
                                                       ],
                                                     ),
                                                     Spacer(),
@@ -280,29 +286,41 @@ class _ComplianceWebState extends State<ComplianceWeb> {
                                                           CrossAxisAlignment
                                                               .end,
                                                       children: [
-                                                        // Row(
-                                                        //   children: [
-                                                        //     CustomRichText(
-                                                        //         title:
-                                                        //             'Status of validity '),
-                                                        //     Dimens.boxWidth10,
-                                                        //     LoginCustomTextfield(
-                                                        //       width: (MediaQuery.of(
-                                                        //                   context)
-                                                        //               .size
-                                                        //               .width *
-                                                        //           .2),
-
-                                                        //       keyboardType:
-                                                        //           TextInputType
-                                                        //               .number,
-
-                                                        //       // textController:
-                                                        //       //     controller.challanNoCtrlr,
-                                                        //     ),
-                                                        //   ],
-                                                        // ),
-                                                        // Dimens.boxHeight8,
+                                                        Dimens.boxHeight5,
+                                                        Row(
+                                                          children: [
+                                                            Dimens.boxWidth5,
+                                                            CustomRichText(
+                                                                title:
+                                                                    'Status OF Application: '),
+                                                            Dimens.boxWidth10,
+                                                            SizedBox(
+                                                              child:
+                                                                  DropdownWebStock(
+                                                                width: MediaQuery.of(
+                                                                            context)
+                                                                        .size
+                                                                        .width /
+                                                                    5,
+                                                                dropdownList:
+                                                                    controller
+                                                                        .statutoryComplianceList,
+                                                                isValueSelected:
+                                                                    controller
+                                                                        .isStatutoryComplianceSelected
+                                                                        .value,
+                                                                selectedValue:
+                                                                    controller
+                                                                        .selectedStatutoryCompliance
+                                                                        .value,
+                                                                onValueChanged:
+                                                                    controller
+                                                                        .onValueChanged,
+                                                              ),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                        Dimens.boxHeight10,
                                                         Row(
                                                           children: [
                                                             CustomRichText(
@@ -354,48 +372,6 @@ class _ComplianceWebState extends State<ComplianceWeb> {
                                                             ),
                                                           ],
                                                         ),
-                                                        Dimens.boxHeight5,
-                                                        // Row(
-                                                        //   children: [
-                                                        //     CustomRichText(
-                                                        //         title:
-                                                        //             'Days Left '),
-                                                        //     Dimens.boxWidth10,
-                                                        //     LoginCustomTextfield(
-                                                        //       width: (MediaQuery.of(
-                                                        //                   context)
-                                                        //               .size
-                                                        //               .width *
-                                                        //           .2),
-                                                        //       keyboardType:
-                                                        //           TextInputType
-                                                        //               .number,
-
-                                                        //       // textController:
-                                                        //       //     controller.challanNoCtrlr,
-                                                        //     ),
-                                                        //   ],
-                                                        // ),
-                                                        // Row(
-                                                        //   children: [
-                                                        //     CustomRichText(
-                                                        //         title:
-                                                        //             'Status of validity '),
-                                                        //     Dimens.boxWidth10,
-                                                        //     LoginCustomTextfield(
-                                                        //       width:
-                                                        //           (MediaQuery.of(context)
-                                                        //                   .size
-                                                        //                   .width *
-                                                        //               .2),
-                                                        //       keyboardType:
-                                                        //           TextInputType.number,
-
-                                                        //       // textController:
-                                                        //       //     controller.challanNoCtrlr,
-                                                        //     ),
-                                                        //   ],
-                                                        // ),
                                                       ],
                                                     ),
                                                     Spacer(),
@@ -509,35 +485,6 @@ class _ComplianceWebState extends State<ComplianceWeb> {
                                                         ),
                                                       )
                                                     : Dimens.box0,
-
-                                                // if (viewStatutory == 0)
-
-                                                // Row(
-                                                //   children: [
-                                                //     Spacer(),
-                                                //     CustomElevatedButton(
-                                                //       backgroundColor:
-                                                //           ColorValues
-                                                //               .appRedColor,
-                                                //       text: 'cancel',
-                                                //       onPressed: () {
-                                                //         // controller.AddInventory();
-                                                //       },
-                                                //     ),
-                                                //     Dimens.boxWidth15,
-                                                //     CustomElevatedButton(
-                                                //       backgroundColor:
-                                                //           ColorValues
-                                                //               .appGreenColor,
-                                                //       text: 'Submit',
-                                                //       onPressed: () {
-                                                //         controller
-                                                //             .createCompliance();
-                                                //       },
-                                                //     ),
-                                                //     Spacer()
-                                                //   ],
-                                                // ),
                                                 Dimens.boxHeight15,
                                               ],
                                             ),
@@ -587,6 +534,28 @@ class _ComplianceWebState extends State<ComplianceWeb> {
                                             !controller.openExpireOnFDatePicker;
                                         controller.isExpiresonInvalid.value =
                                             false;
+                                        controller.update(['stock_Mangement']);
+                                      },
+                                    ),
+                                  ),
+                                if (controller.openReNewOnDatePicker)
+                                  Positioned(
+                                    left: 320,
+                                    top: 220,
+                                    child: DatePickerWidget(
+                                      minDate: DateTime(DateTime.now().year),
+                                      maxDate: DateTime(DateTime.now().year, 13,
+                                          0), // last date of this year
+                                      controller: DateRangePickerController(),
+                                      selectionChanges: (p0) {
+                                        print('po valu ${p0.value.toString()}');
+                                        controller.reNewOnDateTc.text =
+                                            DateFormat('yyyy-MM-dd')
+                                                .format(p0.value);
+                                        controller.openReNewOnDatePicker =
+                                            !controller.openReNewOnDatePicker;
+                                        // controller.isIssueDateInvalid.value =
+                                        //     false;
                                         controller.update(['stock_Mangement']);
                                       },
                                     ),

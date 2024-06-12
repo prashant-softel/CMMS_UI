@@ -1,6 +1,7 @@
 import 'package:cmms/domain/models/Statutory_Compliance_model.dart';
 import 'package:cmms/domain/models/facility_model.dart';
 import 'package:cmms/domain/models/get_statutory_by_id_model.dart';
+import 'package:cmms/domain/models/get_statutory_list_model.dart';
 import 'package:cmms/domain/models/history_model.dart';
 import 'package:cmms/domain/usecases/compliance_usecase.dart';
 
@@ -50,6 +51,18 @@ class CompliancePresenter {
     return complianceUsecase.createCompliance(
       createCompliance: createCompliance,
       isLoading: isLoading,
+    );
+  }
+
+  Future<List<GetStatutoryList>> getStatutoryDataList({
+    required bool isLoading,
+    bool? isExport,
+    required int? facility_id,
+  }) async {
+    return complianceUsecase.getStatutoryDataList(
+      isLoading: isLoading,
+      facility_id: facility_id,
+      isExport: isExport,
     );
   }
 }
