@@ -3295,13 +3295,13 @@ class ConnectHelper {
     return responseModel;
   }
 
-  Future<ResponseModel> createCompliance({
-    required String auth,
-    createCompliance,
-    bool? isLoading,
-  }) async {
+  Future<ResponseModel> createCompliance(
+      {required String auth,
+      createCompliance,
+      bool? isLoading,
+      int? position}) async {
     var responseModel = await apiWrapper.makeRequest(
-      'MISMaster/CreateStatutory',
+      position == 1 ? 'MISMaster/CreateStatutory' : 'MISMaster/UpdateStatutory',
       Request.post,
       createCompliance,
       isLoading ?? false,

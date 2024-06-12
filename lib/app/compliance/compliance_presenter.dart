@@ -9,11 +9,21 @@ class CompliancePresenter {
   CompliancePresenter(this.complianceUsecase);
   ComplianceUsecase complianceUsecase;
 
-  void saveValue({String? srId}) async {
+  void saveValue({
+    String? srId,
+  }) async {
     return complianceUsecase.saveValue(srId: srId);
   }
 
+  void saveRenewValue({
+    String? reNew,
+  }) async {
+    return complianceUsecase.saveRenewValue(reNew: reNew);
+  }
+
   Future<String?> getValue() async => await complianceUsecase.getValue();
+  Future<String?> getRewValue() async => await complianceUsecase.getRewValue();
+
   Future<List<FacilityModel?>?> getFacilityList({bool? isLoading}) async =>
       await complianceUsecase.getFacilityList(isLoading: isLoading);
   Future<List<StatutoryComplianceModel>> getStatutoryComplianceDropDown({
@@ -44,13 +54,12 @@ class CompliancePresenter {
     );
   }
 
-  Future<Map<String, dynamic>?> createCompliance({
-    createCompliance,
-    required bool isLoading,
-  }) async {
+  Future<Map<String, dynamic>?> createCompliance(
+      {createCompliance, required bool isLoading, int? position}) async {
     return complianceUsecase.createCompliance(
       createCompliance: createCompliance,
       isLoading: isLoading,
+      position: position,
     );
   }
 
@@ -65,4 +74,7 @@ class CompliancePresenter {
       isExport: isExport,
     );
   }
+
+  void clearRenewValue() async => complianceUsecase.clearRenewValue();
+  void clearValue() async => complianceUsecase.clearValue();
 }

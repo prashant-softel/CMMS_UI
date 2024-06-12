@@ -53,6 +53,7 @@ class ComplianceController extends GetxController {
   int facilityId = 0;
   RxBool showAdditionalColumn = false.obs;
   Rx<int> srId = 0.obs;
+  Rx<int> reNew = 0.obs;
 
   @override
   void onInit() async {
@@ -84,13 +85,20 @@ class ComplianceController extends GetxController {
   Future<void> setUserId() async {
     try {
       final _srId = await compliancePresenter.getValue();
+      final _reNew = await compliancePresenter.getRewValue();
+
       if (_srId == null || _srId == '' || _srId == "null") {
         var dataFromPreviousScreen = Get.arguments;
 
         srId.value = dataFromPreviousScreen['srId'];
+
+        reNew.value = dataFromPreviousScreen['reNew'];
+        print('Add Statutory Detail:$reNew');
         compliancePresenter.saveValue(srId: srId.value.toString());
+        compliancePresenter.saveRenewValue(reNew: reNew.value.toString());
       } else {
         srId.value = int.tryParse(_srId) ?? 0;
+        reNew.value = int.tryParse(_reNew!) ?? 0;
       }
     } catch (e) {
       print(e.toString() + 'srId');
@@ -154,7 +162,50 @@ class ComplianceController extends GetxController {
     update(['statutory_Compliance_List']);
   }
 
-  void createCompliance() async {
+  void createCompliance(int? position) async {
+    try {
+      checkCompiliace();
+      if (isFormInvalid.value) {
+        return;
+      }
+      String _issueDateTc = issueDateTc.text.trim();
+      String _expireOnDateTc = expireOnDateTc.text.trim();
+      String _commentsCtrl = commentsCtrl.text.trim();
+
+      CreateStatutoryModel createStatutoryModel = CreateStatutoryModel(
+          facility_id: facilityId,
+          Comment: _commentsCtrl,
+          compliance_id: selectedStatutoryComplianceId,
+          issue_date: _issueDateTc,
+          expires_on: _expireOnDateTc,
+          renewFlag: 0,
+          renew_date: "",
+          status_of_aplication_id: 1);
+
+      // Convert the CreateStatutoryModel instance to JSON
+      var createComplianceModelJsonString = createStatutoryModel.toJson();
+
+      // Call the createCompliance function from stockManagementAddGoodsOrdersPresenter
+      Map<String, dynamic>? responseCreateComplianceModel =
+          await compliancePresenter.createCompliance(
+        createCompliance: createComplianceModelJsonString,
+        isLoading: true,
+        position: position,
+      );
+
+      // Handle the response
+      if (responseCreateComplianceModel == null) {
+        // CreateNewPermitDialog();
+        // showAlertDialog();
+      }
+      print(
+          'Create  create Compliance  data: $createComplianceModelJsonString');
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  void updateCompliance(int? postion) async {
     try {
       checkCompiliace();
       if (isFormInvalid.value) {
@@ -257,6 +308,11 @@ class ComplianceController extends GetxController {
       isExpiresonInvalid.value = true;
       isFormInvalid.value = true;
     }
+  }
+
+  void clearStoreData() {
+    compliancePresenter.clearValue();
+    compliancePresenter.clearRenewValue();
   }
 
   void onValueChanged(dynamic list, dynamic value) {

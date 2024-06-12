@@ -12,6 +12,7 @@ abstract class LocalKeys {
   static const inventoryId = 'inventoryId';
   static const irId = 'irId';
   static const srId = 'srId';
+  static const reNew = 'reNew';
 
   static const goType = 'goType';
   static const roType = 'roType';

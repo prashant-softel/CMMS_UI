@@ -55,13 +55,5 @@ class ViewCompliancePresenter {
     );
   }
 
-  Future<Map<String, dynamic>?> createCompliance({
-    createCompliance,
-    required bool isLoading,
-  }) async {
-    return viewComplianceUsecase.createCompliance(
-      createCompliance: createCompliance,
-      isLoading: isLoading,
-    );
-  }
+  
 }

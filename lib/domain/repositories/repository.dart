@@ -833,15 +833,14 @@ class Repository {
   }
 
   Future<Map<String, dynamic>> createCompliance(
-    createCompliance,
-    bool? isLoading,
-  ) async {
+      createCompliance, bool? isLoading, int? position) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.createCompliance(
         auth: auth,
         createCompliance: createCompliance,
         isLoading: isLoading ?? false,
+        position: position,
       );
 
       var resourceData = res.data;
