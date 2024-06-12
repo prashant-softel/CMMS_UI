@@ -222,12 +222,14 @@ class _ComplianceWebState extends State<ComplianceWeb> {
                                                         ),
                                                         Dimens.boxHeight10,
                                                         controller
-                                                                    .getStatutoryById
-                                                                    .value!
-                                                                    .daysLeft ==
-                                                                0
-                                                            ? Dimens.box0
-                                                            : Row(
+                                                                        .getStatutoryById
+                                                                        .value!
+                                                                        .activation_status ==
+                                                                    "inactive" &&
+                                                                controller
+                                                                        .srId >
+                                                                    0
+                                                            ? Row(
                                                                 children: [
                                                                   CustomRichText(
                                                                       title:
@@ -277,7 +279,8 @@ class _ComplianceWebState extends State<ComplianceWeb> {
                                                                     // },
                                                                   ),
                                                                 ],
-                                                              ),
+                                                              )
+                                                            : Dimens.box0
                                                       ],
                                                     ),
                                                     Spacer(),
@@ -590,18 +593,45 @@ class _ComplianceWebState extends State<ComplianceWeb> {
                               ),
                             ),
                             Dimens.boxWidth15,
-                            // controller.goId == 0
-                            //     ?
-                            Container(
-                                height: 40,
-                                child: CustomElevatedButton(
-                                  backgroundColor: ColorValues.submitColor,
-                                  text: 'Submit',
-                                  onPressed: () {
-                                    // controller.isFormInvalid.value = false;
-                                    controller.createCompliance();
-                                  },
-                                )),
+                            controller.srId == 0
+                                ? Container(
+                                    height: 40,
+                                    child: CustomElevatedButton(
+                                      backgroundColor: ColorValues.submitColor,
+                                      text: 'Submit',
+                                      onPressed: () {
+                                        // controller.isFormInvalid.value = false;
+                                        controller.createCompliance();
+                                      },
+                                    ),
+                                  )
+                                : Container(
+                                    height: 40,
+                                    child: CustomElevatedButton(
+                                      backgroundColor: ColorValues.submitColor,
+                                      text: 'Update',
+                                      onPressed: () {
+                                        // controller.isFormInvalid.value = false;
+                                        controller.createCompliance();
+                                      },
+                                    ),
+                                  ),
+                            controller.getStatutoryById.value!
+                                            .activation_status ==
+                                        "inactive" &&
+                                    controller.srId > 0
+                                ? Container(
+                                    height: 40,
+                                    child: CustomElevatedButton(
+                                      backgroundColor: ColorValues.submitColor,
+                                      text: 'Re-New',
+                                      onPressed: () {
+                                        // controller.isFormInvalid.value = false;
+                                        controller.reNewCompliance();
+                                      },
+                                    ),
+                                  )
+                                : Dimens.box0,
                             Spacer(),
                           ],
                         )
