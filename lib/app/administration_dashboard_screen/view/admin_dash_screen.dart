@@ -101,7 +101,7 @@ class AdminDashboardScreen extends GetView<AdminDashboardController> {
                               createContentTile(
                                 title: "Attendace List MonthWise",
                                 onTap: () {
-                                  Get.offNamed(Routes.attendanceListScreen);
+                                  Get.offNamed(Routes.attendanceListMonthwise);
                                 },
                               ),
                               createContentTile(

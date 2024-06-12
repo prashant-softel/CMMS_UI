@@ -222,6 +222,7 @@ abstract class Routes {
   static const admin_dashboard = _Paths.admin_dashboard;
   static const attendanceScreen = _Paths.attendanceScreen;
   static const attendanceListScreen = _Paths.attendanceListScreen;
+  static const attendanceListMonthwise = _Paths.attendanceListMonthwise;
   static const materialCategory = _Paths.materialCategory;
 }
 
@@ -443,6 +444,7 @@ abstract class _Paths {
   static const admin_dashboard = '/admin-dashboard';
   static const attendanceScreen = '/attendance-screen';
   static const attendanceListScreen = '/attendance-list-screen';
+  static const attendanceListMonthwise = '/attendance-list-monthwise';
 
   static const materialCategory = '/material-category';
 }
