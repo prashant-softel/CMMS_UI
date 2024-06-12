@@ -161,17 +161,18 @@ class ComplianceController extends GetxController {
         return;
       }
       String _issueDateTc = issueDateTc.text.trim();
-
       String _expireOnDateTc = expireOnDateTc.text.trim();
       String _commentsCtrl = commentsCtrl.text.trim();
 
       CreateStatutoryModel createStatutoryModel = CreateStatutoryModel(
-        facility_id: facilityId,
-        Comment: _commentsCtrl,
-        compliance_id: selectedStatutoryComplianceId,
-        issue_date: _issueDateTc,
-        expires_on: _expireOnDateTc,
-      );
+          facility_id: facilityId,
+          Comment: _commentsCtrl,
+          compliance_id: selectedStatutoryComplianceId,
+          issue_date: _issueDateTc,
+          expires_on: _expireOnDateTc,
+          renewFlag: 0,
+          renew_date: "",
+          status_of_aplication_id: 1);
 
       // Convert the CreateStatutoryModel instance to JSON
       var createComplianceModelJsonString = createStatutoryModel.toJson();
@@ -188,6 +189,44 @@ class ComplianceController extends GetxController {
         // CreateNewPermitDialog();
         // showAlertDialog();
       }
+      print(
+          'Create  create Compliance  data: $createComplianceModelJsonString');
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  void reNewCompliance() async {
+    try {
+      // checkCompiliace();
+      // if (isFormInvalid.value) {
+      //   return;
+      // }
+      String _issueDateTc = issueDateTc.text.trim();
+      String _reNewOnDateTc = reNewOnDateTc.text.trim();
+
+      String _expireOnDateTc = expireOnDateTc.text.trim();
+      String _commentsCtrl = commentsCtrl.text.trim();
+
+      CreateStatutoryModel createStatutoryModel = CreateStatutoryModel(
+          facility_id: facilityId,
+          Comment: _commentsCtrl,
+          compliance_id: selectedStatutoryComplianceId,
+          issue_date: _issueDateTc,
+          expires_on: _expireOnDateTc,
+          renewFlag: 1,
+          renew_date: _reNewOnDateTc,
+          status_of_aplication_id: selectedStatutoryComplianceId);
+
+      var createComplianceModelJsonString = createStatutoryModel.toJson();
+
+      Map<String, dynamic>? responseCreateComplianceModel =
+          await compliancePresenter.createCompliance(
+        createCompliance: createComplianceModelJsonString,
+        isLoading: true,
+      );
+
+      if (responseCreateComplianceModel == null) {}
       print(
           'Create  create Compliance  data: $createComplianceModelJsonString');
     } catch (e) {
