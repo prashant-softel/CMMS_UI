@@ -19,6 +19,7 @@ import 'package:intl/intl.dart';
 
 class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
   AddIncidentReportContentWeb({super.key});
+  final AddIncidentReportController _controller = Get.find();
 
   final FileUploadController dropzoneController =
       Get.put(FileUploadController());
@@ -688,6 +689,36 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
 
                                                     ///Personal Details
                                                     DetailsOfInjuredPerson(),
+                                                    Row(
+                                                      children: [
+                                                        CustomRichText(
+                                                            title:
+                                                                'Other Injured Person '),
+                                                        Switch(
+                                                          value: _controller
+                                                              .isToggleOn.value,
+                                                          onChanged: (value) {
+                                                            _controller
+                                                                .toggle();
+                                                            controller
+                                                                .isToggleOn
+                                                                .value = value;
+                                                          },
+                                                          activeColor:
+                                                              Colors.white,
+                                                          activeTrackColor:
+                                                              Colors.green,
+                                                          inactiveThumbColor:
+                                                              Colors.white,
+                                                          inactiveTrackColor:
+                                                              Colors.red,
+                                                        )
+                                                      ],
+                                                    ),
+                                                    //other Details
+                                                    controller.isToggleOn.value
+                                                        ? DetailsOfOtherPerson()
+                                                        : Container(),
 
                                                     ///Investigation Block
                                                     Dimens.boxHeight5,
@@ -5082,6 +5113,815 @@ class DetailsOfInjuredPerson extends StatelessWidget {
                                                                               message: '',
                                                                               onPress: () {
                                                                                 controller.rowInjuredPersonItem.remove(record);
+                                                                              },
+                                                                            ),
+                                                                          )
+                                                                        ],
+                                                                      ),
+                                                                    )
+                                                                  : Text(mapData[
+                                                                          'key'] ??
+                                                                      ''),
+                        );
+                      }).toList(),
+                    );
+                  }).toList(),
+                ),
+              ),
+            ]),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+///Details of Other Injured person
+class DetailsOfOtherPerson extends StatelessWidget {
+  final AddIncidentReportController controller = Get.find();
+  DetailsOfOtherPerson({
+    super.key,
+  });
+
+  @override
+  Widget build(
+    BuildContext context,
+  ) {
+    return Obx(
+      () => Container(
+        margin: Dimens.edgeInsets0,
+        //  height: 300,
+        height:
+            ((controller.rowOtherInjuredPersonItem.value.length) * 60) + 110,
+        decoration: BoxDecoration(
+          border: Border.all(
+            color: ColorValues.lightGreyColorWithOpacity35,
+            width: 1,
+          ),
+          boxShadow: [
+            BoxShadow(
+              color: Color.fromARGB(255, 237, 240, 242),
+              spreadRadius: 2,
+              blurRadius: 5,
+              offset: Offset(0, 2),
+            ),
+          ],
+        ),
+        child: Stack(
+          children: [
+            Column(children: [
+              // Column(
+              // children: []..addAll(controller.rowItem.value.map((e) {
+              //         return Text(jsonEncode(e));
+              //       }))),
+              // Text(jsonEncode(controller.dropdownMapperData)),
+              Padding(
+                padding: const EdgeInsets.only(
+                    top: 10, bottom: 10, left: 10, right: 10),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "Details of Other Injured Person",
+                      style: Styles.blue700,
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        controller.addDetailsOfOtherInjuredPersonRowItem();
+                      },
+                      child: Container(
+                        height: 25,
+                        width: 90,
+                        decoration: BoxDecoration(
+                          color: ColorValues.addNewColor,
+                          border: Border.all(
+                            color: ColorValues.lightGreyColorWithOpacity35,
+                            width: 1,
+                          ),
+                          borderRadius: BorderRadius.all(Radius.circular(5)),
+                        ),
+                        child: Center(
+                          child: Text(
+                            " + Add ",
+                            style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.w100,
+                                color: Colors.white),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Expanded(
+                child: DataTable2(
+                  minWidth: 2000,
+                  dataRowHeight: 60,
+                  columnSpacing: 10,
+                  border: TableBorder.all(
+                      color: Color.fromARGB(255, 206, 229, 234)),
+                  columns: [
+                    DataColumn2(
+                        // fixedWidth: 300,
+                        label: Text(
+                      "Name of Injured\nPerson ",
+                      style:
+                          TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+                    )),
+                    DataColumn2(
+                        // fixedWidth: 300,
+                        label: Text(
+                      "Gender ",
+                      style:
+                          TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+                    )),
+                    DataColumn2(
+                        // fixedWidth: 220,
+                        label: Text(
+                      "Trade/Designation ",
+                      style:
+                          TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+                    )),
+                    DataColumn2(
+                        // fixedWidth: 220,
+                        label: Text(
+                      "Address ",
+                      style:
+                          TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+                    )),
+                    DataColumn2(
+                        // fixedWidth: 220,
+                        label: Text(
+                      "Name of Contractor ",
+                      style:
+                          TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+                    )),
+                    DataColumn2(
+                        // fixedWidth: 220,
+                        label: Text(
+                      "Body part injured ",
+                      style:
+                          TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+                    )),
+                    DataColumn2(
+                        // fixedWidth: 220,
+                        label: Text(
+                      "work experience ",
+                      style:
+                          TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+                    )),
+                    DataColumn2(
+                        // fixedWidth: 220,
+                        label: Text(
+                      "Plant & Equipment ",
+                      style:
+                          TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+                    )),
+                    DataColumn2(
+                        // fixedWidth: 220,
+                        label: Text(
+                      "Exact Location ",
+                      style:
+                          TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+                    )),
+                    DataColumn2(
+                        fixedWidth: 60,
+                        label: Text(
+                          "Action ",
+                          style: TextStyle(
+                              fontSize: 15, fontWeight: FontWeight.bold),
+                        )),
+                  ],
+                  rows:
+                      controller.rowOtherInjuredPersonItem.value.map((record) {
+                    return DataRow(
+                      // height: 130,
+                      cells: record.map((mapData) {
+                        return DataCell(
+                          (mapData['key'] == "Name of Injured Person ")
+                              ? Padding(
+                                  padding: const EdgeInsets.only(
+                                      left: 10, right: 10, top: 10),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Container(
+                                        decoration: BoxDecoration(
+                                          boxShadow: [
+                                            BoxShadow(
+                                              color: Colors.black26,
+                                              offset: const Offset(
+                                                5.0,
+                                                5.0,
+                                              ),
+                                              blurRadius: 5.0,
+                                              spreadRadius: 1.0,
+                                            ),
+                                          ],
+                                          color: ColorValues.whiteColor,
+                                          borderRadius:
+                                              BorderRadius.circular(5),
+                                        ),
+                                        child: IgnorePointer(
+                                          ignoring: controller
+                                                      .incidentReportDetailsModel
+                                                      .value
+                                                      ?.status ==
+                                                  183
+                                              ? true
+                                              : false,
+                                          child: LoginCustomTextfield(
+                                            keyboardType: TextInputType.text,
+                                            maxLine: 1,
+                                            textController:
+                                                new TextEditingController(
+                                                    text:
+                                                        mapData["value"] ?? ''),
+                                            onChanged: (txt) {
+                                              mapData["value"] = txt;
+                                            },
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                )
+                              : (mapData['key'] == "Gender ")
+                                  ? Padding(
+                                      padding: const EdgeInsets.only(
+                                          left: 10, right: 10, top: 10),
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Container(
+                                              decoration: BoxDecoration(
+                                                boxShadow: [
+                                                  BoxShadow(
+                                                    color: Colors.black26,
+                                                    offset:
+                                                        const Offset(5.0, 5.0),
+                                                    blurRadius: 5.0,
+                                                    spreadRadius: 1.0,
+                                                  ),
+                                                ],
+                                                color: ColorValues.whiteColor,
+                                                borderRadius:
+                                                    BorderRadius.circular(5),
+                                              ),
+                                              child: Obx(
+                                                () => IgnorePointer(
+                                                    ignoring: controller
+                                                                .incidentReportDetailsModel
+                                                                .value
+                                                                ?.status ==
+                                                            183
+                                                        ? true
+                                                        : false,
+                                                    child: DropdownWebStock(
+                                                      width:
+                                                          MediaQuery.of(context)
+                                                                  .size
+                                                                  .width /
+                                                              4,
+                                                      dropdownList:
+                                                          controller.genderList,
+                                                      selectedValue: controller
+                                                                  .selectedOption ==
+                                                              "Other"
+                                                          ? mapData["value"]
+                                                          : controller
+                                                              .dropdownVictimNameMapperData[
+                                                                  record[0]
+                                                                      ['value']]
+                                                              ?.gender,
+                                                      onValueChanged: (list,
+                                                          selectedValue) {
+                                                        print({
+                                                          selectedValue:
+                                                              selectedValue
+                                                        });
+                                                        mapData["value"] =
+                                                            selectedValue;
+                                                        controller.dropdownGenderMapperData[
+                                                                selectedValue] =
+                                                            list.firstWhere(
+                                                                (element) =>
+                                                                    element
+                                                                        .name ==
+                                                                    selectedValue,
+                                                                orElse: null);
+                                                      },
+                                                    )),
+                                              )),
+                                        ],
+                                      ),
+                                    )
+                                  : (mapData['key'] == "Trade/Designation ")
+                                      ? Padding(
+                                          padding: const EdgeInsets.only(
+                                              left: 10, right: 10, top: 10),
+                                          child: Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Container(
+                                                decoration: BoxDecoration(
+                                                  boxShadow: [
+                                                    BoxShadow(
+                                                      color: Colors.black26,
+                                                      offset: const Offset(
+                                                          5.0, 5.0),
+                                                      blurRadius: 5.0,
+                                                      spreadRadius: 1.0,
+                                                    ),
+                                                  ],
+                                                  color: ColorValues.whiteColor,
+                                                  borderRadius:
+                                                      BorderRadius.circular(5),
+                                                ),
+                                                child: Obx(() => IgnorePointer(
+                                                      ignoring: controller
+                                                                  .incidentReportDetailsModel
+                                                                  .value
+                                                                  ?.status ==
+                                                              183
+                                                          ? true
+                                                          : false,
+                                                      child:
+                                                          LoginCustomTextfield(
+                                                        keyboardType:
+                                                            TextInputType.text,
+                                                        maxLine: 1,
+                                                        textController:
+                                                            new TextEditingController(
+                                                                text: mapData[
+                                                                        "value"] ??
+                                                                    ''),
+                                                        onChanged: (txt) {
+                                                          mapData["value"] =
+                                                              txt;
+                                                        },
+                                                      ),
+                                                    )),
+                                              ),
+                                            ],
+                                          ),
+                                        )
+                                      : (mapData['key'] == "Address ")
+                                          ? Padding(
+                                              padding: const EdgeInsets.only(
+                                                  left: 10, right: 10, top: 10),
+                                              child: Column(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.start,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Container(
+                                                    decoration: BoxDecoration(
+                                                      boxShadow: [
+                                                        BoxShadow(
+                                                          color: Colors.black26,
+                                                          offset: const Offset(
+                                                              5.0, 5.0),
+                                                          blurRadius: 5.0,
+                                                          spreadRadius: 1.0,
+                                                        ),
+                                                      ],
+                                                      color: ColorValues
+                                                          .whiteColor,
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              5),
+                                                    ),
+                                                    child:
+                                                        Obx(() => IgnorePointer(
+                                                              ignoring: controller
+                                                                          .incidentReportDetailsModel
+                                                                          .value
+                                                                          ?.status ==
+                                                                      183
+                                                                  ? true
+                                                                  : false,
+                                                              child:
+                                                                  LoginCustomTextfield(
+                                                                keyboardType:
+                                                                    TextInputType
+                                                                        .text,
+                                                                maxLine: 1,
+                                                                textController:
+                                                                    new TextEditingController(
+                                                                        text: mapData["value"] ??
+                                                                            ''),
+                                                                onChanged:
+                                                                    (txt) {
+                                                                  mapData["value"] =
+                                                                      txt;
+                                                                },
+                                                              ),
+                                                            )),
+                                                  ),
+                                                ],
+                                              ),
+                                            )
+                                          : (mapData['key'] ==
+                                                  "Name of Contractor ")
+                                              ? Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          left: 10,
+                                                          right: 10,
+                                                          top: 10),
+                                                  child: Column(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment.start,
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      Container(
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          boxShadow: [
+                                                            BoxShadow(
+                                                              color: Colors
+                                                                  .black26,
+                                                              offset:
+                                                                  const Offset(
+                                                                5.0,
+                                                                5.0,
+                                                              ),
+                                                              blurRadius: 5.0,
+                                                              spreadRadius: 1.0,
+                                                            ),
+                                                          ],
+                                                          color: ColorValues
+                                                              .whiteColor,
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(5),
+                                                        ),
+                                                        child: IgnorePointer(
+                                                          ignoring: controller
+                                                                      .incidentReportDetailsModel
+                                                                      .value
+                                                                      ?.status ==
+                                                                  183
+                                                              ? true
+                                                              : false,
+                                                          child:
+                                                              DropdownWebStock(
+                                                            width: MediaQuery.of(
+                                                                        context)
+                                                                    .size
+                                                                    .width /
+                                                                4,
+                                                            dropdownList:
+                                                                controller
+                                                                    .businessList,
+                                                            selectedValue:
+                                                                mapData[
+                                                                    "value"],
+                                                            onValueChanged: (list,
+                                                                selectedValue) {
+                                                              print({
+                                                                selectedValue:
+                                                                    selectedValue
+                                                              });
+                                                              mapData["value"] =
+                                                                  selectedValue;
+                                                              controller.dropdownBusinessListMapperData[
+                                                                      selectedValue] =
+                                                                  list.firstWhere(
+                                                                      (element) =>
+                                                                          element
+                                                                              .name ==
+                                                                          selectedValue,
+                                                                      orElse:
+                                                                          null);
+                                                            },
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                )
+                                              : (mapData['key'] ==
+                                                      "Body part injured ")
+                                                  ? Padding(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              left: 10,
+                                                              right: 10,
+                                                              top: 10),
+                                                      child: Column(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .start,
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          Container(
+                                                            decoration:
+                                                                BoxDecoration(
+                                                              boxShadow: [
+                                                                BoxShadow(
+                                                                  color: Colors
+                                                                      .black26,
+                                                                  offset:
+                                                                      const Offset(
+                                                                    5.0,
+                                                                    5.0,
+                                                                  ),
+                                                                  blurRadius:
+                                                                      5.0,
+                                                                  spreadRadius:
+                                                                      1.0,
+                                                                ),
+                                                              ],
+                                                              color: ColorValues
+                                                                  .whiteColor,
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          5),
+                                                            ),
+                                                            child:
+                                                                IgnorePointer(
+                                                              ignoring: controller
+                                                                          .incidentReportDetailsModel
+                                                                          .value
+                                                                          ?.status ==
+                                                                      183
+                                                                  ? true
+                                                                  : false,
+                                                              child:
+                                                                  DropdownWebStock(
+                                                                width: MediaQuery.of(
+                                                                            context)
+                                                                        .size
+                                                                        .width /
+                                                                    4,
+                                                                dropdownList:
+                                                                    controller
+                                                                        .bodyinjuredList,
+                                                                selectedValue:
+                                                                    mapData[
+                                                                        "value"],
+                                                                onValueChanged:
+                                                                    (list,
+                                                                        selectedValue) {
+                                                                  print({
+                                                                    selectedValue:
+                                                                        selectedValue
+                                                                  });
+                                                                  mapData["value"] =
+                                                                      selectedValue;
+                                                                  controller.dropdownBodyinjuredListMapperData[selectedValue] = list.firstWhere(
+                                                                      (element) =>
+                                                                          element
+                                                                              .name ==
+                                                                          selectedValue,
+                                                                      orElse:
+                                                                          null);
+                                                                },
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    )
+                                                  : (mapData['key'] ==
+                                                          "work experience ")
+                                                      ? Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .only(
+                                                                  left: 10,
+                                                                  right: 10,
+                                                                  top: 10),
+                                                          child: Column(
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .start,
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .start,
+                                                            children: [
+                                                              Container(
+                                                                decoration:
+                                                                    BoxDecoration(
+                                                                  boxShadow: [
+                                                                    BoxShadow(
+                                                                      color: Colors
+                                                                          .black26,
+                                                                      offset: const Offset(
+                                                                          5.0,
+                                                                          5.0),
+                                                                      blurRadius:
+                                                                          5.0,
+                                                                      spreadRadius:
+                                                                          1.0,
+                                                                    ),
+                                                                  ],
+                                                                  color: ColorValues
+                                                                      .whiteColor,
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              5),
+                                                                ),
+                                                                child: Obx(() =>
+                                                                    IgnorePointer(
+                                                                      ignoring: controller.incidentReportDetailsModel.value?.status ==
+                                                                              183
+                                                                          ? true
+                                                                          : false,
+                                                                      child:
+                                                                          LoginCustomTextfield(
+                                                                        keyboardType:
+                                                                            TextInputType.text,
+                                                                        maxLine:
+                                                                            1,
+                                                                        textController:
+                                                                            new TextEditingController(text: mapData["value"] ?? ''),
+                                                                        onChanged:
+                                                                            (txt) {
+                                                                          mapData["value"] =
+                                                                              txt;
+                                                                        },
+                                                                      ),
+                                                                    )),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        )
+                                                      : (mapData['key'] ==
+                                                              "Plant & Equipment ")
+                                                          ? Padding(
+                                                              padding:
+                                                                  const EdgeInsets
+                                                                      .only(
+                                                                      left: 10,
+                                                                      right: 10,
+                                                                      top: 10),
+                                                              child: Column(
+                                                                mainAxisAlignment:
+                                                                    MainAxisAlignment
+                                                                        .start,
+                                                                crossAxisAlignment:
+                                                                    CrossAxisAlignment
+                                                                        .start,
+                                                                children: [
+                                                                  Container(
+                                                                    decoration:
+                                                                        BoxDecoration(
+                                                                      boxShadow: [
+                                                                        BoxShadow(
+                                                                          color:
+                                                                              Colors.black26,
+                                                                          offset:
+                                                                              const Offset(
+                                                                            5.0,
+                                                                            5.0,
+                                                                          ),
+                                                                          blurRadius:
+                                                                              5.0,
+                                                                          spreadRadius:
+                                                                              1.0,
+                                                                        ),
+                                                                      ],
+                                                                      color: ColorValues
+                                                                          .whiteColor,
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(
+                                                                              5),
+                                                                    ),
+                                                                    child:
+                                                                        IgnorePointer(
+                                                                      ignoring: controller.incidentReportDetailsModel.value?.status ==
+                                                                              183
+                                                                          ? true
+                                                                          : false,
+                                                                      child:
+                                                                          DropdownWebStock(
+                                                                        width:
+                                                                            MediaQuery.of(context).size.width /
+                                                                                4,
+                                                                        dropdownList:
+                                                                            controller.eqipmentNameList,
+                                                                        selectedValue:
+                                                                            mapData["value"],
+                                                                        onValueChanged:
+                                                                            (list,
+                                                                                selectedValue) {
+                                                                          print({
+                                                                            selectedValue:
+                                                                                selectedValue
+                                                                          });
+                                                                          mapData["value"] =
+                                                                              selectedValue;
+                                                                          controller.dropdownEquipmentNameMapperData[selectedValue] = list.firstWhere(
+                                                                              (element) => element.name == selectedValue,
+                                                                              orElse: null);
+                                                                        },
+                                                                      ),
+                                                                    ),
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                            )
+                                                          : (mapData['key'] ==
+                                                                  "Exact Location ")
+                                                              ? Padding(
+                                                                  padding:
+                                                                      EdgeInsets
+                                                                          .only(
+                                                                              top: 10),
+                                                                  child: Column(
+                                                                    mainAxisAlignment:
+                                                                        MainAxisAlignment
+                                                                            .start,
+                                                                    crossAxisAlignment:
+                                                                        CrossAxisAlignment
+                                                                            .start,
+                                                                    children: [
+                                                                      Container(
+                                                                          decoration:
+                                                                              BoxDecoration(
+                                                                            boxShadow: [
+                                                                              BoxShadow(
+                                                                                color: Colors.black26,
+                                                                                offset: const Offset(
+                                                                                  5.0,
+                                                                                  5.0,
+                                                                                ),
+                                                                                blurRadius: 5.0,
+                                                                                spreadRadius: 1.0,
+                                                                              ),
+                                                                            ],
+                                                                            color:
+                                                                                ColorValues.whiteColor,
+                                                                            borderRadius:
+                                                                                BorderRadius.circular(5),
+                                                                          ),
+                                                                          child:
+                                                                              IgnorePointer(
+                                                                            ignoring: controller.incidentReportDetailsModel.value?.status == 183
+                                                                                ? true
+                                                                                : false,
+                                                                            child:
+                                                                                LoginCustomTextfield(
+                                                                              keyboardType: TextInputType.text,
+                                                                              // inputFormatters: <
+                                                                              //     TextInputFormatter>[
+                                                                              //   FilteringTextInputFormatter
+                                                                              //       .digitsOnly
+                                                                              // ],
+                                                                              maxLine: 1,
+                                                                              textController: new TextEditingController(text: mapData["value"] ?? ''),
+                                                                              onChanged: (txt) {
+                                                                                mapData["value"] = txt;
+                                                                              },
+                                                                            ),
+                                                                          )),
+                                                                    ],
+                                                                  ),
+                                                                )
+                                                              : (mapData['key'] ==
+                                                                      "Action ")
+                                                                  ? Padding(
+                                                                      padding: EdgeInsets
+                                                                          .only(
+                                                                              top: 10),
+                                                                      child:
+                                                                          Column(
+                                                                        mainAxisAlignment:
+                                                                            MainAxisAlignment.start,
+                                                                        crossAxisAlignment:
+                                                                            CrossAxisAlignment.start,
+                                                                        children: [
+                                                                          IgnorePointer(
+                                                                            ignoring: controller.incidentReportDetailsModel.value?.status == 183
+                                                                                ? true
+                                                                                : false,
+                                                                            child:
+                                                                                TableActionButton(
+                                                                              color: ColorValues.appRedColor,
+                                                                              icon: Icons.delete,
+                                                                              label: '',
+                                                                              message: '',
+                                                                              onPress: () {
+                                                                                controller.rowOtherInjuredPersonItem.remove(record);
                                                                               },
                                                                             ),
                                                                           )

@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:developer';
 import 'dart:typed_data';
 import 'package:cmms/app/widgets/attendance_popup.dart';
+import 'package:cmms/domain/models/Compliance_Status_model.dart';
 import 'package:cmms/domain/models/Statutory_Compliance_model.dart';
 import 'package:cmms/domain/models/attendance_list_model.dart';
 import 'package:cmms/domain/models/attendance_model.dart';
@@ -8998,6 +8999,7 @@ class Repository {
           adduserJsonString: adduserJsonString);
       print({"resp", res.data});
       if (!res.hasError) {
+        Get.offAllNamed(Routes.userList);
         return true;
       } //
       else {
@@ -14450,6 +14452,104 @@ class Repository {
       } else {
         Utility.showDialog(
             res.errorCode.toString(), 'delete Statutory Compliance');
+      }
+    } catch (error) {
+      print(error.toString());
+    }
+  }
+  //Compliance Status
+  //get
+  Future<List<ComplianceStatusModel>> getComplianceStatus({
+    required bool isLoading,
+    int? job_type_id,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+
+      log(auth);
+      final res = await _dataRepository.getComplianceStatus(
+        isLoading: isLoading,
+        auth: auth,
+      );
+      print('Compliance Status ${res.data}');
+
+      if (!res.hasError) {
+        var Sourcetype = ComplianceStatusModelFromJson(res.data);
+        return Sourcetype;
+      }
+      return [];
+    } catch (error) {
+      log(error.toString());
+      return [];
+    }
+  }
+
+  //create
+  Future<bool> createComplianceStatus(
+      {bool? isLoading, ComplianceStatusJsonString}) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.createComplianceStatus(
+          auth: auth,
+          isLoading: isLoading,
+          ComplianceStatusJsonString: ComplianceStatusJsonString);
+
+      if (!res.hasError) {
+        return true;
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString(), ' createCheckListNumber');
+        return false;
+      }
+    } catch (error) {
+      print(error.toString());
+      return false;
+    }
+  }
+
+  //update
+  Future<bool> updateComplianceStatus({
+    bool? isLoading,
+    ComplianceStatusJsonString,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.updateComplianceStatus(
+        auth: auth,
+        isLoading: isLoading,
+        ComplianceStatusJsonString: ComplianceStatusJsonString,
+      );
+      print(res.data);
+      if (!res.hasError) {
+        return true;
+      } //
+      else {
+        Utility.showDialog(
+            res.errorCode.toString(), 'Update Compliance Status');
+        return false;
+      }
+    } catch (error) {
+      print(error.toString());
+      return false;
+    }
+  }
+
+  //delete
+  Future<void> deleteComplianceStatus(
+      Object ComplianceStatus_id, bool isLoading) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.deleteComplianceStatus(
+        auth: auth,
+        ComplianceStatus_id: ComplianceStatus_id,
+        isLoading: isLoading,
+      );
+
+      if (!res.hasError) {
+        //get delete response back from API
+      } else {
+        Utility.showDialog(
+            res.errorCode.toString(), 'delete ComplianceStatus ');
       }
     } catch (error) {
       print(error.toString());
