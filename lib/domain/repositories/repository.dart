@@ -2615,6 +2615,32 @@ class Repository {
     }
   }
 
+  Future<List<ComplianceStatusModel>> statusOfAplication({
+    required int? facilityId,
+    required bool isLoading,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+
+      log(auth);
+      final res = await _dataRepository.statusOfAplication(
+        facilityId: facilityId,
+        isLoading: isLoading,
+        auth: auth,
+      );
+      print('Unit Compliance Status Data: ${res.data}');
+
+      if (!res.hasError) {
+        var statusOfAplicationList = ComplianceStatusModelFromJson(res.data);
+        return statusOfAplicationList;
+      }
+      return [];
+    } catch (error) {
+      log(error.toString());
+      return [];
+    }
+  }
+
   Future<List<WaterSource>> getTypeOfWaterList({
     required int? facilityId,
     // int? blockId,
@@ -14478,6 +14504,7 @@ class Repository {
       print(error.toString());
     }
   }
+
   //Compliance Status
   //get
   Future<List<ComplianceStatusModel>> getComplianceStatus({

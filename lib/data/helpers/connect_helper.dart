@@ -308,6 +308,20 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> statusOfAplication(
+      {required bool isLoading, required String auth, int? facilityId}) async {
+    ResponseModel responseModel = await apiWrapper.makeRequest(
+      'MISMaster/GetStatsofAppliaction',
+      Request.getMultiparts,
+      null,
+      isLoading,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
   Future<ResponseModel> getTypeOfWaterList(
       {required bool isLoading, required String auth, int? facilityId}) async {
     ResponseModel responseModel = await apiWrapper.makeRequest(

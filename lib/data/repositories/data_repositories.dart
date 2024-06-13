@@ -204,6 +204,18 @@ class DataRepository extends DomainRepository {
     );
   }
 
+  Future<ResponseModel> statusOfAplication({
+    int? facilityId,
+    required bool isLoading,
+    required String auth,
+  }) async {
+    return await connectHelper.statusOfAplication(
+      isLoading: isLoading,
+      auth: auth,
+      facilityId: facilityId,
+    );
+  }
+
   Future<ResponseModel> getTypeOfWaterList({
     int? facilityId,
     required bool isLoading,
