@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:cmms/app/compliance/compliance_presenter.dart';
+import 'package:cmms/domain/models/Compliance_Status_model.dart';
 import 'package:cmms/domain/models/Statutory_Compliance_model.dart';
 import 'package:cmms/domain/models/createStatutory_model.dart';
 import 'package:cmms/domain/models/facility_model.dart';
@@ -26,12 +27,20 @@ class ComplianceController extends GetxController {
   RxList<FacilityModel?> facilityList = <FacilityModel>[].obs;
   RxList<StatutoryComplianceModel?> statutoryComplianceList =
       <StatutoryComplianceModel>[].obs;
+  RxList<ComplianceStatusModel?> statusOfAplicationList =
+      <ComplianceStatusModel>[].obs;
   RxList<HistoryModel?>? historyList = <HistoryModel?>[].obs;
 
   Rx<GetStatutoryById?> getStatutoryById = GetStatutoryById().obs;
   Rx<bool> isStatutoryComplianceSelected = true.obs;
+  Rx<bool> isStatusOfAplicationSelected = true.obs;
+
   Rx<String> selectedStatutoryCompliance = ''.obs;
+  Rx<String> selectedStatusOfAplication = ''.obs;
+
   int selectedStatutoryComplianceId = 0;
+  int selectedStatusOfAplicationId = 0;
+
   bool openIssueDatePicker = false;
   bool openExpireOnFDatePicker = false;
   bool openReNewOnDatePicker = false;
@@ -66,6 +75,9 @@ class ComplianceController extends GetxController {
         });
         Future.delayed(Duration(seconds: 1), () {
           getStatutoryComplianceDropDown();
+        });
+        Future.delayed(Duration(seconds: 1), () {
+          statusOfAplication();
         });
         Future.delayed(Duration(seconds: 2), () async {
           await getStatutoryDataList(facilityId);
@@ -160,6 +172,21 @@ class ComplianceController extends GetxController {
     }
 
     update(['statutory_Compliance_List']);
+  }
+
+  void statusOfAplication() async {
+    statusOfAplicationList.value = <ComplianceStatusModel>[];
+    final _statusOfAplicationList =
+        await compliancePresenter.statusOfAplication(
+      isLoading: true,
+      facilityId: facilityId,
+    );
+    print('Unit status Of Aplication List:$statusOfAplicationList');
+    for (var status_Of_Aplication_List in _statusOfAplicationList) {
+      statusOfAplicationList.add(status_Of_Aplication_List);
+    }
+
+    update(['statusOfAplicationList']);
   }
 
   void createCompliance(int? position) async {
@@ -300,6 +327,10 @@ class ComplianceController extends GetxController {
       isStatutoryComplianceSelected.value = false;
       isFormInvalid.value = true;
     }
+    if (selectedStatusOfAplication.value == '') {
+      isStatusOfAplicationSelected.value = false;
+      isFormInvalid.value = true;
+    }
     if (issueDateTc.text.trim().length < 3) {
       isIssueDateInvalid.value = true;
       isFormInvalid.value = true;
@@ -354,6 +385,23 @@ class ComplianceController extends GetxController {
             }
           } else {
             selectedStatutoryComplianceId = 0;
+          }
+        }
+        break;
+
+      case RxList<ComplianceStatusModel>:
+        {
+          if (value != "Please Select") {
+            int statusIndex =
+                statusOfAplicationList.indexWhere((x) => x?.name == value);
+            selectedStatusOfAplicationId =
+                statusOfAplicationList[statusIndex]?.id ?? 0;
+            selectedStatusOfAplication.value = value;
+            isStatusOfAplicationSelected.value = true;
+            print(
+                "selectedBusinessTypeId: ${selectedStatusOfAplicationId} \n ${selectedStatusOfAplication}");
+          } else {
+            selectedStatusOfAplicationId = 0;
           }
         }
         break;
