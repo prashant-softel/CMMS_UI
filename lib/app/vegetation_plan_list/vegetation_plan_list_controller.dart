@@ -4,6 +4,7 @@ import 'dart:async';
 
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/vegetation_plan_list/vegetation_plan_list_presenter.dart';
+import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/domain/models/vegetation_list_plan_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -43,14 +44,6 @@ class VegetationPlanListController extends GetxController {
     // "search": true,
   });
 
-  // final Map<String, double> columnwidth = {
-  //   'Plan Id': 153,
-  //   'Plan Title': 320,
-  //   'No of Days': 220,
-  //   'Created By': 200,
-  //   'frequency': 250,
-  // };
-
   Map<String, RxString> filterText = {};
   void setColumnVisibility(String columnName, bool isVisible) {
     final newVisibility = Map<String, bool>.from(columnVisibility.value)
@@ -81,13 +74,11 @@ class VegetationPlanListController extends GetxController {
       'Frequency': frequencyFilterText,
       "Status": statusFilterText,
     };
-    // facilityIdStreamSubscription?.cancel();
     facilityIdStreamSubscription = homeController.facilityId$.listen((event) {
       facilityId = event;
       if (facilityId > 0) {
         Future.delayed(Duration(seconds: 0), () async {
           getVegetationPlanList(facilityId, false);
-          // facilityIdStreamSubscription!.cancel();
         });
         print("get plan called");
       }
@@ -105,26 +96,27 @@ class VegetationPlanListController extends GetxController {
             isLoading: isLoading.value,
             facility_id: facilityId,
             isExport: isExport);
-    
 
     vegetationPlanList.value = _vegetationPlanList;
     isLoading.value = false;
-  vegetationPlanList.value = _vegetationPlanList;
-  if (vegetationPlanList.isNotEmpty) {
-    filteredData.value = vegetationPlanList.value;
-    vegetationPlanListModel = vegetationPlanList[0];
-    var newPermitListJson = vegetationPlanListModel?.toJson();
-    vegetationPlanListTableColumns.value = <String>[];
-    for (var key in newPermitListJson?.keys.toList() ?? []) {
-      vegetationPlanListTableColumns.add(key);
+    vegetationPlanList.value = _vegetationPlanList;
+    if (vegetationPlanList.isNotEmpty) {
+      filteredData.value = vegetationPlanList.value;
+      vegetationPlanListModel = vegetationPlanList[0];
+      var newPermitListJson = vegetationPlanListModel?.toJson();
+      vegetationPlanListTableColumns.value = <String>[];
+      for (var key in newPermitListJson?.keys.toList() ?? []) {
+        vegetationPlanListTableColumns.add(key);
+      }
     }
+    paginationController = PaginationController(
+      rowCount: vegetationPlanList.length,
+      rowsPerPage: 10,
+    );
   }
-  paginationController = PaginationController(
-    rowCount: vegetationPlanList.length,
-    rowsPerPage: 10,
-  );
 
-      
+  void clearStoreData() {
+    vegetationPlanListPresenter.clearValue();
   }
 
   void onValueChanged(dynamic list, dynamic value) {
@@ -175,6 +167,69 @@ class VegetationPlanListController extends GetxController {
 
   void export() {
     getVegetationPlanList(facilityId, true);
+  }
+
+  Future<void> deleteVegPlan(int? planId) async {
+    await vegetationPlanListPresenter.deleteVegPlan(
+      planId: planId ?? 0,
+      isLoading: true,
+    );
+  }
+
+  void isDeleteDialog({int? planId, String? planName}) {
+    Get.dialog(
+      AlertDialog(
+        content: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text("Delete Plan", style: Styles.blackBold16),
+              Divider(
+                color: ColorValues.appLightGreyColor,
+              ),
+              Dimens.boxHeight5,
+              RichText(
+                text: TextSpan(
+                    text:
+                        'Are you sure you want to delete the Vegetation Plan ',
+                    style: Styles.blackBold16,
+                    children: [
+                      TextSpan(
+                        text: "${planName}",
+                        style: TextStyle(
+                          color: ColorValues.orangeColor,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ]),
+              ),
+            ]),
+        actions: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              CustomElevatedButton(
+                backgroundColor: ColorValues.appRedColor,
+                onPressed: () {
+                  Get.back();
+                },
+                text: 'No',
+              ),
+              CustomElevatedButton(
+                backgroundColor: ColorValues.appGreenColor,
+                onPressed: () {
+                  deleteVegPlan(planId).then((value) {
+                    Get.back();
+                    getVegetationPlanList(facilityId, false);
+                  });
+                },
+                text: 'Yes',
+              ),
+            ],
+          )
+        ],
+      ),
+    );
   }
 
   // @override

@@ -8262,6 +8262,25 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> deleteVegPlan({
+    required String auth,
+    bool? isLoading,
+    required planId,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Vegetation/DeleteVegetationplan?planId=$planId',
+      Request.put,
+      null,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
   Future<ResponseModel> deleteUser({
     required String auth,
     bool? isLoading,

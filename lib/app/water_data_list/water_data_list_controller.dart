@@ -413,8 +413,8 @@ class WaterDataListController extends GetxController {
     String _descriptionCtrlr = descriptionCtrlr.text.trim();
     String _qtCtrlr = qtyCtrlr.text.trim();
     DateTime procurementTime = selectedProcurementTime.value;
-    String formattedDate =
-        DateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'").format(procurementTime);
+    String formattedDate = procurementTimeCtrlr.text;
+    // DateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'").format(procurementTime);
 
     CreateWaterData updateWaterData = CreateWaterData(
       id: _id,

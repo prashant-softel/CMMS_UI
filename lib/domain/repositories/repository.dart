@@ -12889,6 +12889,27 @@ class Repository {
     }
   }
 
+  Future<void> deleteVegPlan({
+    bool? isLoading,
+    required int planId,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.deleteVegPlan(
+        auth: auth,
+        planId: planId,
+        isLoading: isLoading,
+      );
+
+      if (!res.hasError) {
+      } else {
+        Utility.showDialog(res.errorCode.toString(), 'deleteVegPlan');
+      }
+    } catch (error) {
+      print(error.toString());
+    }
+  }
+
   Future<void> deleteUser(Object user_id, bool isLoading) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
