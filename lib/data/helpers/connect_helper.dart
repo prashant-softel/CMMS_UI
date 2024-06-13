@@ -9487,6 +9487,85 @@ class ConnectHelper {
 
     return responseModel;
   }
+ // DocumentMaster
+  //Get
+  Future<ResponseModel> getDocumentMaster(
+      {required bool isLoading, required String auth}) async {
+    ResponseModel responseModel = await apiWrapper.makeRequest(
+      'MISMaster/GetDocument',
+      Request.get,
+      null,
+      isLoading,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
 
+  //create
+  Future<ResponseModel> createDocumentMaster({
+    required String auth,
+    bool? isLoading,
+    DocumentMasterJsonString,
+  }) async {
+    var responseModel =
+        // responseModel =
+        await apiWrapper.makeRequest(
+      'MISMaster/CreateDocument',
+      Request.post,
+      DocumentMasterJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
+  //update
+  Future<ResponseModel> updateDocumentMaster({
+    required String auth,
+    bool? isLoading,
+    DocumentMasterJsonString,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'MISMaster/UpdateDocument',
+      Request.post,
+      DocumentMasterJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
+  //delete
+  Future<ResponseModel> deleteDocumentMaster({
+    required String auth,
+    bool? isLoading,
+    required DocumentMaster_id,
+  }) async {
+    final requestBody = {
+      'id': int.tryParse(DocumentMaster_id),
+    };
+    var responseModel = await apiWrapper.makeRequest(
+      'MISMaster/DeleteDocument?id=$DocumentMaster_id',
+      Request.delete,
+      requestBody,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
   //end
 }
