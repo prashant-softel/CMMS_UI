@@ -109,15 +109,22 @@ class HomeController extends GetxController {
   String get formattedTodate1 => DateFormat('yyyy-MM-dd').format(toDate.value);
   String get formattedFromdate1 =>
       DateFormat('yyyy-MM-dd').format(fromDate.value);
-  Map<String, double> getDataMap //= {};
-      () {
-    return {
-      "BM": 5,
-      "PM": 3,
-      "MC": 2,
-      // "PTW": 7,
-    };
-  }
+  RxMap<String, double> getDataMap = <String, double>{}.obs;
+
+  // Map<String, double> getDataMap // = {};
+  //     () {
+  //   return {
+  //     "BM": 5,
+  //     "PM": 3,
+  //     "MC": 2,
+  //     // "PTW": 7,
+  //   };
+  // }
+
+  RxInt totalSumMcCount = 0.obs;
+  RxInt totalSumBmCount = 0.obs;
+  RxInt totalSumPmCount = 0.obs;
+  RxInt totalSumCount = 0.obs;
 
   RxInt totalSum = 0.obs;
   RxInt completedSum = 0.obs;
@@ -180,6 +187,10 @@ class HomeController extends GetxController {
         isLoading: true);
     if (_dashboardList != null) {
       dashboardList.value = _dashboardList;
+      int totalSumMcCountTemp = 0;
+      int totalSumPmCountTemp = 0;
+      int totalSumBmcCountTemp = 0;
+      int totalSumCountTemp = 0;
 
       int totalSumTemp = 0;
       int completedSumTemp = 0;
@@ -194,6 +205,11 @@ class HomeController extends GetxController {
       int poItemsAwaitedSumTemp = 0;
 
       for (var module in dashboardList) {
+        totalSumMcCountTemp += module?.category_mc_count ?? 0;
+        totalSumBmcCountTemp += module?.category_bm_count ?? 0;
+        totalSumPmCountTemp += module?.category_pm_count ?? 0;
+        totalSumCountTemp += module?.category_total_count ?? 0;
+
         var details = module?.cmDashboadDetails;
         totalSumTemp += details?.total ?? 0;
         completedSumTemp += details?.completed ?? 0;
@@ -212,7 +228,21 @@ class HomeController extends GetxController {
         allItems.addAll(details?.item_list ?? []);
       }
 
+      totalSumMcCount.value = totalSumMcCountTemp;
+      totalSumPmCount.value = totalSumPmCountTemp;
+      totalSumBmCount.value = totalSumBmcCountTemp;
+      totalSumCount.value = totalSumCountTemp;
       totalSum.value = totalSumTemp;
+      Map<String, double> dataMap() {
+        return {
+          "BM": double.tryParse(totalSumBmcCountTemp.toString()) ?? 0.0,
+          "PM": double.tryParse(totalSumPmCountTemp.toString()) ?? 0.0,
+          "MC": double.tryParse(totalSumMcCountTemp.toString()) ?? 0.0,
+        };
+      }
+
+      getDataMap.value = dataMap();
+
       completedSum.value = completedSumTemp;
       pendingSum.value = pendingSumTemp;
       scheduleComplianceTotalSum.value = scheduleComplianceTotalSumTemp;
