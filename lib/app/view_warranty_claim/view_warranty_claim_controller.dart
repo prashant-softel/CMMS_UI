@@ -115,6 +115,9 @@ class ViewWarrantyClaimController extends GetxController {
   ///External Emails list from api
   RxList<ExternalsEmailsList?>? externalEmailsList =
       <ExternalsEmailsList?>[].obs;
+  RxList<AdditionalEmailsEmployeesList?>? additionalEmailEmployees =
+      <AdditionalEmailsEmployeesList?>[].obs;
+  RxList<AffectedParts?>? affectedParts = <AffectedParts?>[].obs;
 
   ///Supplier ACtion
   RxList<SuppliersActionsList?>? supplierActionsList =
@@ -256,8 +259,8 @@ class ViewWarrantyClaimController extends GetxController {
           viewWarrantyClaimDetailsModel.value?.request_to_supplier ?? '';
       approverNametextController.text =
           viewWarrantyClaimDetailsModel.value?.approver_name ?? '';
-      externalEmailsList?.value =
-          viewWarrantyClaimDetailsModel.value?.externalEmails ?? [];
+      additionalEmailEmployees?.value =
+          viewWarrantyClaimDetailsModel.value?.additionalEmailEmployees ?? [];
       supplierActionsList?.value =
           viewWarrantyClaimDetailsModel.value?.supplierActions ?? [];
     }
@@ -315,9 +318,10 @@ class ViewWarrantyClaimController extends GetxController {
       case RxList<FacilityModel>:
         {
           if (value != "Please Select") {
-            int facilityIndex = facilityList.indexWhere((x) => x?.name == value);
+            int facilityIndex =
+                facilityList.indexWhere((x) => x?.name == value);
 
-          _facilityId.add(facilityList[facilityIndex]?.id ?? 0);
+            _facilityId.add(facilityList[facilityIndex]?.id ?? 0);
           } else {
             // facilityId=0;
           }
@@ -327,10 +331,10 @@ class ViewWarrantyClaimController extends GetxController {
         {
           if (value != "Please Select") {
             for (var workAreaName in selectedWorkAreaNameList) {
-            int workAreaIndex =
-                workAreaList.indexWhere((x) => x?.name == workAreaName);
-            selectedWorkAreaIdList.add(workAreaIndex);
-          }
+              int workAreaIndex =
+                  workAreaList.indexWhere((x) => x?.name == workAreaName);
+              selectedWorkAreaIdList.add(workAreaIndex);
+            }
           } else {
             // selectedWorkAreaIdList=0;
           }
@@ -340,10 +344,10 @@ class ViewWarrantyClaimController extends GetxController {
         {
           if (value != "Please Select") {
             for (var supplierName in selectedSupplierNameList) {
-            int supplierNameIndex =
-                supplierNameList.indexWhere((x) => x?.name == supplierName);
-            selectedSupplierNameIdList.add(supplierNameIndex);
-          }
+              int supplierNameIndex =
+                  supplierNameList.indexWhere((x) => x?.name == supplierName);
+              selectedSupplierNameIdList.add(supplierNameIndex);
+            }
           } else {
             // selectedSupplierNameIdList=0;
           }
@@ -351,26 +355,25 @@ class ViewWarrantyClaimController extends GetxController {
         break;
       case RxList<CurrencyListModel>:
         {
-         if (value != "Please Select") {
+          if (value != "Please Select") {
             for (var unitCurrency in selectedUnitCurrencyList) {
-            int unitCurrencyIndex =
-                unitCurrencyList.indexWhere((x) => x?.code == unitCurrency);
-            selectedUnitCurrencyIdList.add(unitCurrencyIndex);
+              int unitCurrencyIndex =
+                  unitCurrencyList.indexWhere((x) => x?.code == unitCurrency);
+              selectedUnitCurrencyIdList.add(unitCurrencyIndex);
+            }
+          } else {
+            //  selectedUnitCurrencyIdList=0;
           }
-         } else {
-          //  selectedUnitCurrencyIdList=0;
-         }
         }
         break;
       case RxList<EmployeeListModel>:
         {
           if (value != "Please Select") {
-            
-          for (var employeeDataList in selectedEmployeeDataList) {
-            int employeeListIndex =
-                employeeList.indexWhere((x) => x.name == employeeDataList);
-            selectedEmployeeIdList.add(employeeListIndex);
-          }
+            for (var employeeDataList in selectedEmployeeDataList) {
+              int employeeListIndex =
+                  employeeList.indexWhere((x) => x.name == employeeDataList);
+              selectedEmployeeIdList.add(employeeListIndex);
+            }
           } else {
             // selectedEmployeeIdList=0;
           }
