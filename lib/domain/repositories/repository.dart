@@ -6,6 +6,7 @@ import 'package:cmms/domain/models/Compliance_Status_model.dart';
 import 'package:cmms/domain/models/Statutory_Compliance_model.dart';
 import 'package:cmms/domain/models/attendance_list_model.dart';
 import 'package:cmms/domain/models/attendance_model.dart';
+import 'package:cmms/domain/models/complicance_history_model.dart';
 import 'package:cmms/domain/models/course_category_model.dart';
 import 'package:cmms/domain/models/dashboard_model.dart';
 import 'package:cmms/domain/models/dsm_list_model.dart';
@@ -14573,6 +14574,32 @@ class Repository {
       }
     } catch (error) {
       print(error.toString());
+    }
+  }
+
+  Future<List<StatutoryHistory>> getStatutoryHistory({
+    required int compliance_id,
+    required bool isLoading,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+
+      log(auth);
+      final res = await _dataRepository.getStatutoryHistory(
+        auth: auth,
+        compliance_id: compliance_id,
+        isLoading: isLoading,
+      );
+      print('Compliance Status ${res.data}');
+
+      if (!res.hasError) {
+        var Sourcetype = statutoryHistoryFromJson(res.data);
+        return Sourcetype;
+      }
+      return [];
+    } catch (error) {
+      log(error.toString());
+      return [];
     }
   }
   //end
