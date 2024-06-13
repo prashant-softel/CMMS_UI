@@ -14,8 +14,13 @@ class ComplianceUsecase {
       await repository.getFacilityList(isLoading);
   void saveValue({String? srId}) async =>
       repository.saveValue(LocalKeys.srId, srId);
+  void saveRenewValue({String? reNew}) async =>
+      repository.saveValue(LocalKeys.reNew, reNew);
   Future<String?> getValue() async =>
       await repository.getStringValue(LocalKeys.srId);
+  Future<String?> getRewValue() async =>
+      await repository.getStringValue(LocalKeys.reNew);
+
   Future<List<StatutoryComplianceModel>> getStatutoryComplianceDropDown(
       {required bool isLoading, required int? facilityId}) async {
     return repository.getStatutoryComplianceDropDown(
@@ -47,10 +52,12 @@ class ComplianceUsecase {
   Future<Map<String, dynamic>> createCompliance({
     createCompliance,
     bool? isLoading,
+    int? position,
   }) async =>
       await repository.createCompliance(
         createCompliance,
         isLoading,
+        position,
       );
   Future<List<GetStatutoryList>> getStatutoryDataList({
     required bool isLoading,
@@ -60,4 +67,11 @@ class ComplianceUsecase {
     return repository.getStatutoryDataList(
         isLoading: isLoading, facility_id: facility_id, isExport: isExport);
   }
+
+  void clearValue() async => repository.clearData(
+        LocalKeys.srId,
+      );
+  void clearRenewValue() async => repository.clearData(
+        LocalKeys.reNew,
+      );
 }
