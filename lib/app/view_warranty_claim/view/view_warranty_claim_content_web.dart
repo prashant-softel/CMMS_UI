@@ -1104,7 +1104,7 @@ class ViewWarrantyClaimWeb extends GetView<ViewWarrantyClaimController> {
                                                         controller.historyList?[
                                                             index];
                                                     return [
-                                                      '${getHistoryListDetails?.createdAt}',
+                                                      '${getHistoryListDetails?.createdAt?.result}',
                                                       '${getHistoryListDetails?.moduleRefId ?? ''}',
                                                       '${getHistoryListDetails?.comment ?? ''}',
                                                       '${getHistoryListDetails?.moduleType ?? ''}',
