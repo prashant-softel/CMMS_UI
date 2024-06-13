@@ -48,6 +48,8 @@ class CreateIncidentReportModel {
   List<RootCause?>? root_cause;
   List<ImmediateCorrection?>? immediate_correction;
   List<DetailsOfInjuredPerson?>? injured_person;
+  List<DetailsOfOtherInjuredPerson?>? Otherinjured_person;
+
   List<ProposedActionPlan?>? proposed_action_plan;
   List<InvestigationTeam?>? investigation_team;
 
@@ -93,6 +95,7 @@ class CreateIncidentReportModel {
     this.root_cause,
     this.immediate_correction,
     this.injured_person,
+    this.Otherinjured_person,
     this.proposed_action_plan,
     this.investigation_team,
   });
@@ -154,6 +157,11 @@ class CreateIncidentReportModel {
             ? List<DetailsOfInjuredPerson>.from(json["injured_person"]
                 ?.map((x) => DetailsOfInjuredPerson.fromJson(x)))
             : [],
+            //Otherinjured_person
+             Otherinjured_person: json['Otherinjured_person'] != null
+            ? List<DetailsOfOtherInjuredPerson>.from(json["Otherinjured_person"]
+                ?.map((x) => DetailsOfOtherInjuredPerson.fromJson(x)))
+            : [],
         proposed_action_plan: json['proposed_action_plan'] != null
             ? List<ProposedActionPlan>.from(json["proposed_action_plan"]
                 ?.map((x) => ProposedActionPlan.fromJson(x)))
@@ -207,6 +215,7 @@ class CreateIncidentReportModel {
         "immediate_correction":
             List<dynamic>.from(immediate_correction!.map((x) => x)),
         "injured_person": List<dynamic>.from(injured_person!.map((x) => x)),
+        "Otherinjured_person": List<dynamic>.from(Otherinjured_person!.map((x) => x)),
         "proposed_action_plan":
             List<dynamic>.from(proposed_action_plan!.map((x) => x)),
         "investigation_team":
@@ -250,6 +259,78 @@ class DetailsOfInjuredPerson {
 
   factory DetailsOfInjuredPerson.fromJson(Map<String, dynamic> json) =>
       DetailsOfInjuredPerson(
+        injured_item_id: json['injured_item_id'],
+        incidents_id: json['incidents_id'],
+        name: json['name'],
+        person_type: json['person_type'],
+        other_victim: json['other_victim'],
+        age: json['age'],
+        sex: json['sex'],
+        designation: json['designation'],
+        address: json['address'],
+        name_contractor: json["name_contractor"],
+        body_part_and_nature_of_injury: json['body_part_and_nature_of_injury'],
+        work_experience_years: json['work_experience_years'],
+        plant_equipment_involved: json['plant_equipment_involved'],
+        location_of_incident: json['location_of_incident'],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "injured_item_id": injured_item_id,
+        "incidents_id": incidents_id,
+        "name": name,
+        "person_type": person_type,
+        "other_victim": other_victim,
+        "age": age,
+        "sex": sex,
+        "designation": designation,
+        "address": address,
+        "name_contractor": name_contractor,
+        "body_part_and_nature_of_injury": body_part_and_nature_of_injury,
+        "work_experience_years": work_experience_years,
+        "plant_equipment_involved": plant_equipment_involved,
+        "location_of_incident": location_of_incident
+      };
+}
+
+///Details of other Injured Person
+class DetailsOfOtherInjuredPerson {
+  DetailsOfOtherInjuredPerson(
+      {this.injured_item_id,
+      this.Otherinjured_item_id,
+      this.incidents_id,
+      this.name,
+      this.person_type,
+      this.other_victim,
+      this.age,
+      this.sex,
+      this.designation,
+      this.address,
+      this.name_contractor,
+      this.body_part_and_nature_of_injury,
+      this.work_experience_years,
+      this.plant_equipment_involved,
+      this.location_of_incident});
+
+  int? injured_item_id;
+  int? Otherinjured_item_id;
+  int? incidents_id;
+
+  String? name;
+  int? person_type;
+  String? other_victim;
+  int? age;
+  String? sex;
+  String? designation;
+  String? address;
+  String? name_contractor;
+  String? body_part_and_nature_of_injury;
+  int? work_experience_years;
+  String? plant_equipment_involved;
+  String? location_of_incident;
+
+  factory DetailsOfOtherInjuredPerson.fromJson(Map<String, dynamic> json) =>
+      DetailsOfOtherInjuredPerson(
         injured_item_id: json['injured_item_id'],
         incidents_id: json['incidents_id'],
         name: json['name'],

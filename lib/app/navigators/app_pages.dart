@@ -1,5 +1,7 @@
 // coverage:ignore-file
 
+import 'package:cmms/app/Compliance_Status/Compliance_Status_binding.dart';
+import 'package:cmms/app/Compliance_Status/view/Compliance_Status_screen.dart';
 import 'package:cmms/app/Course_Category/View/course_category_screen.dart';
 import 'package:cmms/app/Course_Category/course_category_binding.dart';
 import 'package:cmms/app/Statutory-Compliance/Statutory_Compliance_binding.dart';
@@ -1342,6 +1344,11 @@ class AppPages {
       name: _Paths.viewComplianceScreen,
       page: ViewComplianceScreen.new,
       binding: ViewComplianceBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.ComplianceStatus,
+      page: ComplianceStatusScreen.new,
+      binding: ComplianceStatusBinding(),
     ),
   ];
 }

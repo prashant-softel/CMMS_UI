@@ -5447,5 +5447,56 @@ class DataRepository extends DomainRepository {
         StatutoryCompliance_id: StatutoryCompliance_id);
     return response;
   }
+   // Compliance Status
+  //get
+  Future<ResponseModel> getComplianceStatus({
+    required bool isLoading,
+    required String auth,
+  }) async {
+    return await connectHelper.getComplianceStatus(
+      isLoading: isLoading,
+      auth: auth,
+    );
+  }
+
+  //create
+  Future<ResponseModel> createComplianceStatus({
+    auth,
+    bool? isLoading,
+    ComplianceStatusJsonString,
+  }) async {
+    var response = await connectHelper.createComplianceStatus(
+        auth: auth,
+        isLoading: isLoading,
+        ComplianceStatusJsonString: ComplianceStatusJsonString);
+    return response;
+  }
+
+  //update
+  Future<ResponseModel> updateComplianceStatus({
+    auth,
+    bool? isLoading,
+    ComplianceStatusJsonString,
+  }) async {
+    var response = await connectHelper.updateComplianceStatus(
+      auth: auth,
+      isLoading: isLoading,
+      ComplianceStatusJsonString: ComplianceStatusJsonString,
+    );
+    return response;
+  }
+
+  //delete
+  Future<ResponseModel> deleteComplianceStatus({
+    auth,
+    bool? isLoading,
+    ComplianceStatus_id,
+  }) async {
+    var response = await connectHelper.deleteComplianceStatus(
+        auth: auth,
+        isLoading: isLoading,
+        ComplianceStatus_id: ComplianceStatus_id);
+    return response;
+  }
 //end
 }

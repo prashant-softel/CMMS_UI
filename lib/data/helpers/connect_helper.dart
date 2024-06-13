@@ -9407,6 +9407,86 @@ class ConnectHelper {
 
     return responseModel;
   }
+   // Compliance Status
+  //Get
+  Future<ResponseModel> getComplianceStatus(
+      {required bool isLoading, required String auth}) async {
+    ResponseModel responseModel = await apiWrapper.makeRequest(
+      'MISMaster/GetStatsofAppliaction',
+      Request.get,
+      null,
+      isLoading,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
+  //create
+  Future<ResponseModel> createComplianceStatus({
+    required String auth,
+    bool? isLoading,
+    ComplianceStatusJsonString,
+  }) async {
+    var responseModel =
+        // responseModel =
+        await apiWrapper.makeRequest(
+      'MISMaster/CreateStatusofAppliaction',
+      Request.post,
+      ComplianceStatusJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
+  //update
+  Future<ResponseModel> updateComplianceStatus({
+    required String auth,
+    bool? isLoading,
+    ComplianceStatusJsonString,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'MISMaster/UpdateStatsofAppliaction',
+      Request.post,
+      ComplianceStatusJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
+  //delete
+  Future<ResponseModel> deleteComplianceStatus({
+    required String auth,
+    bool? isLoading,
+    required ComplianceStatus_id,
+  }) async {
+    final requestBody = {
+      'id': int.tryParse(ComplianceStatus_id),
+    };
+    var responseModel = await apiWrapper.makeRequest(
+      'MISMaster/DeleteStatsofAppliaction?id=$ComplianceStatus_id',
+      Request.post,
+      requestBody,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
 
   //end
 }

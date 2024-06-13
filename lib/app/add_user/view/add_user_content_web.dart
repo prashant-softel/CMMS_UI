@@ -2163,8 +2163,8 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                                     controller
                                                         .updateUser()
                                                         .then((value) {
-                                                      Get.toNamed(
-                                                          Routes.userList);
+                                                      // Get.toNamed(
+                                                          // Routes.userList);
                                                       if (value == true) {
                                                         // controller.userId.value = 0;
                                                         controller
