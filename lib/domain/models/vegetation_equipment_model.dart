@@ -9,68 +9,79 @@ String getVegetationEquipmentModelToJson(List<VegetationEquipmentModel> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
 class VegetationEquipmentModel {
-  int? blockId;
-  String? blockName;
-  int? area;
+  int? invId;
+  String? invName;
+  int? moduleQuantity;
   bool isExpanded;
-  List<Invs> invs;
+  int? area;
+  List<SMBS>? smbs;
   String? selectedDay;
 
-  VegetationEquipmentModel(
-      {this.blockId,
-      this.blockName,
-      this.area,
-      this.invs = const [],
-      this.isExpanded = false,
-      this.selectedDay});
+  VegetationEquipmentModel({
+    this.invId,
+    this.invName,
+    this.moduleQuantity,
+    this.isExpanded = false,
+    this.area,
+    this.smbs,
+    this.selectedDay,
+  });
 
   factory VegetationEquipmentModel.fromJson(Map<String, dynamic> json) =>
       VegetationEquipmentModel(
-        blockId: json['blockId'],
-        blockName: json['blockName'],
+        invId: json['invId'],
+        invName: json['invName'],
+        moduleQuantity: json['moduleQuantity'],
         area: json['area'],
-        invs: json['invs'] != null
-            ? List<Invs>.from(json['invs'].map((x) => Invs.fromJson(x)))
+        smbs: json['smbs'] != null
+            ? List<SMBS>.from(
+                json['smbs'].map(
+                  (x) => SMBS.fromJson(x),
+                ),
+              )
             : [],
       );
 
   Map<String, dynamic> toJson() => {
-        "blockId": blockId,
-        "blockName": blockName,
-        "area": area,
-        "invs": List<dynamic>.from(invs.map((x) => x))
+        'invId': invId,
+        'invName': invName,
+        'moduleQuantity': moduleQuantity,
+        'area': area,
+        'smbs': smbs != null
+            ? List<dynamic>.from(smbs!.map((x) => x.toJson()))
+            : [],
       };
 }
 
-class Invs {
-  int? blockId;
-  int? invId;
-  String? invName;
+class SMBS {
+  int? parentId;
+  int? smbId;
+  String? smbName;
+  int? moduleQuantity;
   int? area;
   String? selectedDay;
-
-  Invs({
-    this.blockId,
-    this.invId,
-    this.invName,
+  SMBS({
+    this.parentId,
+    this.smbId,
+    this.smbName,
+    this.moduleQuantity,
     this.area,
     this.selectedDay,
   });
 
-  factory Invs.fromJson(Map<String, dynamic> json) => Invs(
-      blockId: json['blockId'],
-      invId: json['invId'],
-      invName: json['invName'],
-      area: json['area'],
-      selectedDay: json['selectedDay']);
+  factory SMBS.fromJson(Map<String, dynamic> json) => SMBS(
+        parentId: json['parentId'],
+        smbId: json['smbId'],
+        smbName: json['smbName'],
+        moduleQuantity: json['moduleQuantity'],
+        area: json['area'],
+      );
 
   Map<String, dynamic> toJson() => {
-        "blockId": blockId,
-        "invId": invId,
-        "invName": invName,
-        "area": area,
-        "selectedDay": selectedDay,
+        'parentId': parentId,
+        'smbId': smbId,
+        'smbName': smbName,
+        'moduleQuantity': moduleQuantity,
+        'area': area,
       };
 }
-
-String invsModelToJson(Invs data) => json.encode(data.toJson());

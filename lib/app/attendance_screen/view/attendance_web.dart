@@ -338,10 +338,10 @@ class AttendanceWeb extends GetView<AttendanceController> {
             height: 45,
             child: CustomElevatedButton(
               backgroundColor: ColorValues.cancelColor,
-              text: "Cancel",
+              text: "Close",
               onPressed: () {
                 controller.clearData();
-                Get.back();
+                Get.offNamed(Routes.admin_dashboard);
               },
             ),
           ),

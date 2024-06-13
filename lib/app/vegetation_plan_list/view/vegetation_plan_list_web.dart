@@ -32,7 +32,6 @@ class _VegetationPlanListWebState extends State<VegetationPlanListWeb> {
         builder: (controller) {
           return Obx(
             () {
-              // final dataSource = VegetationPlanListDataSource(controller);
               return SelectionArea(
                 child: SingleChildScrollView(
                   child: Column(
@@ -124,6 +123,7 @@ class _VegetationPlanListWebState extends State<VegetationPlanListWeb> {
                                                 icon: Icons.add,
                                                 label: "Add New",
                                                 onPressed: () {
+                                                  controller.clearStoreData();
                                                   Get.offNamed(Routes
                                                       .addVegetationPlanScreen);
                                                 },
@@ -266,12 +266,13 @@ class _VegetationPlanListWebState extends State<VegetationPlanListWeb> {
                                   SizedBox(
                                     height: 20,
                                   ),
-                                  controller.vegetationPlanList.isEmpty == true &&
-                                        controller.isLoading == false
-                                    ? Center(child: Text('No data'))
-                                    : controller.isLoading.value == true
-                                        ? Center(
-                                            child: Text('Data Loading......'))
+                                  controller.vegetationPlanList.isEmpty ==
+                                              true &&
+                                          controller.isLoading == false
+                                      ? Center(child: Text('No data'))
+                                      : controller.isLoading.value == true
+                                          ? Center(
+                                              child: Text('Data Loading......'))
                                           : Expanded(
                                               child: ValueListenableBuilder(
                                                   valueListenable: controller
@@ -475,10 +476,13 @@ class VegetationPlanListDataSource extends DataTableSource {
                             icon: Icons.remove_red_eye_outlined,
                             message: 'view',
                             onPress: () {
+                              controller.clearStoreData();
                               int id = VegetationListDetails?.planId ?? 0;
                               if (id != 0) {
-                                Get.toNamed(Routes.viewVegetationPlanScreen,
-                                    arguments: {'id': id});
+                                Get.toNamed(
+                                  Routes.viewVegetationPlanScreen,
+                                  arguments: {'vegid': id},
+                                );
                               }
                             },
                           ),
@@ -508,51 +512,51 @@ class VegetationPlanListDataSource extends DataTableSource {
                                   icon: Icons.edit,
                                   message: 'Edit',
                                   onPress: () {
+                                    controller.clearStoreData();
                                     int id = VegetationListDetails?.planId ?? 0;
                                     if (id != 0) {
                                       Get.toNamed(
-                                          Routes.editVegetationPlanScreen,
-                                          arguments: {"vegPlanId": id});
+                                        Routes.addVegetationPlanScreen,
+                                        arguments: {"vegid": id},
+                                      );
                                     }
                                   },
                                 )
                               : Dimens.box0,
-                          // varUserAccessModel.value.access_list!
-                          //                 .where((e) =>
-                          //                     e.feature_id ==
-                          //                         UserAccessConstants
-                          //                             .kVegetationControlFeatureId &&
-                          //                     e.delete ==
-                          //                         UserAccessConstants
-                          //                             .kHaveEditAccess)
-                          //                 .length >
-                          //             0 &&
-                          //         controller.vegetationPlanList
-                          //                 .firstWhere(
-                          //                   (e) =>
-                          //                       e.planId ==
-                          //                       VegetationListDetails!.planId,
-                          //                   orElse: () =>
-                          //                       VegetationPlanListModel(
-                          //                           planId: 00),
-                          //                 )
-                          //                 .status ==
-                          //             371
-                          //     ? TableActionButton(
-                          //         color: ColorValues.deleteColor,
-                          //         icon: Icons.delete,
-                          //         message: 'Delete',
-                          //         onPress: () {
-                          //           int id = VegetationListDetails?.planId ?? 0;
-                          //           if (id != 0) {
-                          //             Get.toNamed(
-
-                          //                 Routes.vegetationPlanListScreen,
-                          //                );
-                          //           }
-                          //         },
-                          //       )
-                          //     : Dimens.box0,
+                          varUserAccessModel.value.access_list!
+                                          .where((e) =>
+                                              e.feature_id ==
+                                                  UserAccessConstants
+                                                      .kVegetationControlFeatureId &&
+                                              e.delete ==
+                                                  UserAccessConstants
+                                                      .kHaveEditAccess)
+                                          .length >
+                                      0 &&
+                                  controller.vegetationPlanList
+                                          .firstWhere(
+                                            (e) =>
+                                                e.planId ==
+                                                VegetationListDetails!.planId,
+                                            orElse: () =>
+                                                VegetationPlanListModel(
+                                                    planId: 00),
+                                          )
+                                          .status ==
+                                      371
+                              ? TableActionButton(
+                                  color: ColorValues.deleteColor,
+                                  icon: Icons.delete,
+                                  message: 'Delete',
+                                  onPress: () {
+                                    controller.clearStoreData();
+                                    controller.isDeleteDialog(
+                                      planName: VegetationListDetails?.title,
+                                      planId: VegetationListDetails?.planId,
+                                    );
+                                  },
+                                )
+                              : Dimens.box0,
                           varUserAccessModel.value.access_list!
                                           .where((e) =>
                                               e.feature_id ==
@@ -579,14 +583,13 @@ class VegetationPlanListDataSource extends DataTableSource {
                                   icon: Icons.ads_click,
                                   message: 'Resubmit',
                                   onPress: () {
+                                    controller.clearStoreData();
                                     int id = VegetationListDetails?.planId ?? 0;
                                     if (id != 0) {
                                       Get.toNamed(
                                           Routes.addVegetationPlanScreen,
                                           arguments: {
-                                            "veg_id": id,
-                                            "planId":
-                                                VegetationListDetails?.planId
+                                            "vegid": id,
                                           });
                                     }
                                   },
@@ -624,7 +627,7 @@ class VegetationPlanListDataSource extends DataTableSource {
                                     if (id != 0) {
                                       Get.toNamed(
                                         Routes.viewVegetationPlanScreen,
-                                        arguments: {'id': id, "type": 1},
+                                        arguments: {'vegid': id, "type": 1},
                                       );
                                     }
                                   },

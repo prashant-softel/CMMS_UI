@@ -69,13 +69,7 @@ class _ViewMcPlaningWebState extends State<ViewVegPlanWeb> {
                         ),
                         InkWell(
                           onTap: () {
-                            Get.offNamed(Routes.vegetationDashboard);
-                          },
-                          child: Text(" / VEGETATION CONTROL",
-                              style: Styles.greyLight14),
-                        ),
-                        InkWell(
-                          onTap: () {
+                            controller.clearStoreData();
                             Get.offNamed(Routes.vegetationPlanListScreen);
                           },
                           child: Text(" / VEGETATION PLAN LIST",
@@ -91,7 +85,6 @@ class _ViewMcPlaningWebState extends State<ViewVegPlanWeb> {
                       child: Column(
                         children: [
                           Container(
-                            // height: Get.height,
                             child: Card(
                               margin: EdgeInsets.all(20),
                               color: Color.fromARGB(255, 245, 248, 250),
@@ -271,117 +264,6 @@ class _ViewMcPlaningWebState extends State<ViewVegPlanWeb> {
                                                 style: Styles.blue700,
                                               ),
                                               Spacer(),
-                                              // GestureDetector(
-                                              //   onTap: () {
-                                              //     var selectedEqp = [];
-                                              //     controller.vegPlanDetailsModel
-                                              //         .value!.schedules!
-                                              //         .forEach((schedule) {
-                                              //       schedule.equipments
-                                              //           ?.forEach((element) {
-                                              //         var ee = element;
-                                              //         ee!.scheduledCleaningDate =
-                                              //             schedule.schedule;
-                                              //         ;
-                                              //         selectedEqp.add(element);
-                                              //         print(element?.toJson());
-                                              //       });
-                                              //     });
-                                              //     selectedEqp.forEach((element) {
-                                              //       try {
-                                              //         var selectedParentIndex =
-                                              //             controller
-                                              //                 .vegEquipmentList.value
-                                              //                 .indexWhere((eqp) =>
-                                              //                     eqp?.invId ==
-                                              //                     element
-                                              //                         .parentId);
-                                              //         print({
-                                              //           "selectedParentIndex":
-                                              //               selectedParentIndex
-                                              //         });
-                                              //         if (selectedParentIndex >
-                                              //             -1) {
-                                              //           var selectedChildIndex = controller
-                                              //                   .vegEquipmentList
-                                              //                   .value[
-                                              //                       selectedParentIndex]
-                                              //                   ?.blockId
-                                              //                   .indexWhere((smb) =>
-                                              //                       smb.smbId ==
-                                              //                       element.id) ??
-                                              //               -1;
-
-                                              //           if (selectedChildIndex >
-                                              //               -1) {
-                                              //             var ss = controller
-                                              //                     .vegEquipmentList
-                                              //                     .value[
-                                              //                         selectedParentIndex]
-                                              //                     ?.smbs[
-                                              //                 selectedChildIndex];
-                                              //             ss?.selectedDay =
-                                              //                 "${element.cleaningDay}";
-                                              //             controller
-                                              //                     .vegEquipmentList
-                                              //                     .value[
-                                              //                         selectedParentIndex]
-                                              //                     ?.smbs[
-                                              //                 selectedChildIndex] = ss!;
-                                              //           }
-                                              //           print({
-                                              //             "selectedChildIndex":
-                                              //                 selectedChildIndex
-                                              //           });
-                                              //         }
-                                              //       } catch (e) {
-                                              //         print({"eadfds": e});
-                                              //       }
-                                              //     });
-                                              //     // controller
-                                              //     //     .vegEquipmentList
-                                              //     //     .value
-                                              //     //     .forEach(
-                                              //     //         (element) {
-
-                                              //     //         });
-
-                                              //     // print(
-                                              //     //     'MC plan Detail:${controller.schedules.toJson()}');
-                                              //     Get.dialog(
-                                              //         ViewSetEquipmentDialog());
-                                              //   },
-                                              //   // color: ColorValues.appDarkBlueColor,
-                                              //   // onTap: () {
-                                              //   //   controller.addRowItem();
-                                              //   // },
-                                              //   child: Container(
-                                              //     height: 30,
-                                              //     width: 150,
-                                              //     decoration: BoxDecoration(
-                                              //       color:
-                                              //           ColorValues.addNewColor,
-                                              //       border: Border.all(
-                                              //         color: ColorValues
-                                              //             .lightGreyColorWithOpacity35,
-                                              //         width: 1,
-                                              //       ),
-                                              //       borderRadius:
-                                              //           BorderRadius.all(
-                                              //               Radius.circular(5)),
-                                              //     ),
-                                              //     child: Center(
-                                              //       child: Text(
-                                              //         "Set Equipments",
-                                              //         style: TextStyle(
-                                              //             fontSize: 18,
-                                              //             fontWeight:
-                                              //                 FontWeight.w100,
-                                              //             color: Colors.white),
-                                              //       ),
-                                              //     ),
-                                              //   ),
-                                              // )
                                             ],
                                           ),
                                         ),
@@ -472,8 +354,6 @@ class _ViewMcPlaningWebState extends State<ViewVegPlanWeb> {
                                                                     onValueChanged:
                                                                         (list,
                                                                             selectedValue) {
-                                                                      // print('paifcghb:${controller.assetList}');
-                                                                      // print({selectedValue: selectedValue});
                                                                       mapData["value"] =
                                                                           selectedValue;
                                                                       controller.typedropdownMapperData[selectedValue] = list.firstWhere(
@@ -504,183 +384,6 @@ class _ViewMcPlaningWebState extends State<ViewVegPlanWeb> {
                                       ],
                                     ),
                                   ),
-                                  // controller.historyList!.isEmpty
-                                  //     ? Dimens.box0
-                                  //     : Container(
-                                  //         margin: Dimens.edgeInsets20,
-                                  //         height:
-                                  //             ((controller.historyList?.length ??
-                                  //                         0) *
-                                  //                     50) +
-                                  //                 125,
-                                  //         decoration: BoxDecoration(
-                                  //           border: Border.all(
-                                  //             color: ColorValues
-                                  //                 .lightGreyColorWithOpacity35,
-                                  //             width: 1,
-                                  //           ),
-                                  //           boxShadow: [
-                                  //             BoxShadow(
-                                  //               color: ColorValues
-                                  //                   .appBlueBackgroundColor,
-                                  //               spreadRadius: 2,
-                                  //               blurRadius: 5,
-                                  //               offset: Offset(0, 2),
-                                  //             ),
-                                  //           ],
-                                  //         ),
-                                  //         child: Column(
-                                  //           children: [
-                                  //             Padding(
-                                  //               padding:
-                                  //                   const EdgeInsets.all(10.0),
-                                  //               child: Row(
-                                  //                 children: [
-                                  //                   Text(
-                                  //                     "MC Plan History ",
-                                  //                     style: Styles.blue700,
-                                  //                   ),
-                                  //                 ],
-                                  //               ),
-                                  //             ),
-                                  //             Divider(
-                                  //               color:
-                                  //                   ColorValues.greyLightColour,
-                                  //             ),
-                                  //             Expanded(
-                                  //               child: DataTable2(
-                                  //                 border: TableBorder.all(
-                                  //                     color: Color.fromARGB(
-                                  //                         255, 206, 229, 234)),
-                                  //                 columns: [
-                                  //                   DataColumn(
-                                  //                       label: Text(
-                                  //                     "Time Stamp",
-                                  //                     style: TextStyle(
-                                  //                         fontSize: 15,
-                                  //                         fontWeight:
-                                  //                             FontWeight.bold),
-                                  //                   )),
-                                  //                   DataColumn(
-                                  //                       label: Text(
-                                  //                     "Posted By",
-                                  //                     style: TextStyle(
-                                  //                         fontSize: 15,
-                                  //                         fontWeight:
-                                  //                             FontWeight.bold),
-                                  //                   )),
-                                  //                   DataColumn(
-                                  //                       label: Text(
-                                  //                     "Comment",
-                                  //                     style: TextStyle(
-                                  //                         fontSize: 15,
-                                  //                         fontWeight:
-                                  //                             FontWeight.bold),
-                                  //                   )),
-                                  //                   DataColumn(
-                                  //                       label: Text(
-                                  //                     "Location",
-                                  //                     style: TextStyle(
-                                  //                         fontSize: 15,
-                                  //                         fontWeight:
-                                  //                             FontWeight.bold),
-                                  //                   )),
-                                  //                   DataColumn(
-                                  //                       label: Text(
-                                  //                     "Status",
-                                  //                     style: TextStyle(
-                                  //                         fontSize: 15,
-                                  //                         fontWeight:
-                                  //                             FontWeight.bold),
-                                  //                   )),
-                                  //                 ],
-                                  //                 rows: List<DataRow>.generate(
-                                  //                   controller.historyList
-                                  //                           ?.length ??
-                                  //                       0,
-                                  //                   (index) => DataRow(cells: [
-                                  //                     DataCell(Text(controller
-                                  //                             .historyList?[index]
-                                  //                             ?.createdAt
-                                  //                             .toString() ??
-                                  //                         '')),
-                                  //                     DataCell(Text(controller
-                                  //                             .historyList?[index]
-                                  //                             ?.createdByName
-                                  //                             .toString() ??
-                                  //                         '')),
-                                  //                     DataCell(Text(controller
-                                  //                             .historyList?[index]
-                                  //                             ?.comment
-                                  //                             .toString() ??
-                                  //                         '')),
-                                  //                     DataCell(Text('--')),
-                                  //                     DataCell(Text(controller
-                                  //                             .historyList?[index]
-                                  //                             ?.status_name
-                                  //                             .toString() ??
-                                  //                         '')),
-                                  //                   ]),
-                                  //                 ),
-                                  //               ),
-                                  //             ),
-                                  //           ],
-                                  //         ),
-                                  //       ),
-
-                                  // Dimens.boxHeight12,
-                                  // controller.vegPlanDetailsModel.value
-                                  //                 ?.status ==
-                                  //             371 &&
-                                  //         varUserAccessModel.value.access_list!
-                                  //                 .where((e) =>
-                                  //                     e.feature_id ==
-                                  //                         UserAccessConstants
-                                  //                             .kVegetationControlFeatureId &&
-                                  //                     e.approve ==
-                                  //                         UserAccessConstants
-                                  //                             .kHaveApproveAccess)
-                                  //                 .length >
-                                  //             0
-                                  //     ? Row(
-                                  //         children: [
-                                  //           Spacer(),
-                                  //           Container(
-                                  //             height: 45,
-                                  //             child: CustomElevatedButton(
-                                  //               backgroundColor:
-                                  //                   ColorValues.rejectColor,
-                                  //               text: "Reject",
-                                  //               icon: Icons.close,
-                                  //               onPressed: () {
-                                  //                 controller
-                                  //                     .vegPlanRejectButton(
-                                  //                   id: controller.id.value,
-                                  //                 );
-                                  //               },
-                                  //             ),
-                                  //           ),
-                                  //           Dimens.boxWidth10,
-                                  //           Container(
-                                  //             height: 45,
-                                  //             child: CustomElevatedButton(
-                                  //               backgroundColor:
-                                  //                   ColorValues.appGreenColor,
-                                  //               text: "Approve",
-                                  //               icon: Icons.add,
-                                  //               onPressed: () {
-                                  //                 controller
-                                  //                     .vegPlanApprovedButton(
-                                  //                   id: controller.id.value,
-                                  //                 );
-                                  //               },
-                                  //             ),
-                                  //           ),
-                                  //           Spacer(),
-                                  //         ],
-                                  //       )
-                                  //     : Dimens.box0,
-                                  // Dimens.boxHeight12,
                                 ],
                               ),
                             ),
@@ -689,7 +392,6 @@ class _ViewMcPlaningWebState extends State<ViewVegPlanWeb> {
                       ),
                     ),
                   ),
-                  // Dimens.boxHeight40,
                 ],
               ),
               floatingActionButton:

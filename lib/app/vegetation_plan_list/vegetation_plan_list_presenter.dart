@@ -14,9 +14,17 @@ class VegetationPlanListPresenter {
     bool? isExport,
   }) async {
     return vegetationlistUsecase.getVegetationPlanList(
-      isLoading: isLoading,
-      facility_id: facility_id,
-      isExport: isExport
-    );
+        isLoading: isLoading, facility_id: facility_id, isExport: isExport);
   }
+
+  deleteVegPlan({
+    required int planId,
+    bool? isLoading,
+  }) async =>
+      await vegetationlistUsecase.deleteVegPlan(
+        planId: planId,
+        isLoading: isLoading,
+      );
+
+  void clearValue() async => vegetationlistUsecase.clearValue();
 }

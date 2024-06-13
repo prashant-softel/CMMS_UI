@@ -77,8 +77,6 @@ import 'package:cmms/app/dsm_dashboard/dsm_dashboard_binding.dart';
 import 'package:cmms/app/edit_mrs/view/edit_mrs_screen.dart';
 import 'package:cmms/app/edit_return_mrs/edit_return_mrs_binding.dart';
 import 'package:cmms/app/edit_return_mrs/view/edit_return_mrs_screen.dart';
-import 'package:cmms/app/edit_vegetation_plan/edit_vegetation_plan_binding.dart';
-import 'package:cmms/app/edit_vegetation_plan/view/edit_vegetation_plan_screen.dart';
 import 'package:cmms/app/edit_warranty_claim/edit_%20warranty_claim_binding.dart';
 import 'package:cmms/app/edit_warranty_claim/view/edit_warranty_claim_content_web.dart';
 import 'package:cmms/app/employee_stock_report/view/employee_stock_report_screen.dart';
@@ -640,11 +638,6 @@ class AppPages {
       name: _Paths.addVegetationPlanScreen,
       page: AddVegetationPlanScreen.new,
       binding: AddVegetationPlanBinding(),
-    ),
-    GetPage<dynamic>(
-      name: _Paths.editVegetationPlanScreen,
-      page: EditVegetationPlanScreen.new,
-      binding: EditVegetationPlanBinding(),
     ),
     GetPage<dynamic>(
       name: _Paths.viewVegetationPlanScreen,

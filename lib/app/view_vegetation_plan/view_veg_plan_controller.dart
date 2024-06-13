@@ -88,15 +88,30 @@ class ViewVegPlanController extends GetxController {
   }
 
   Future<void> setUserId() async {
-    try {
-      var dataFromPreviousScreen = Get.arguments;
+    // try {
+    //   var dataFromPreviousScreen = Get.arguments;
 
-      id.value = dataFromPreviousScreen['id'];
-      // id= Get.arguments;
-      print('AddStock:$id');
+    //   id.value = dataFromPreviousScreen['vegid'];
+    //   print('AddStock:$id');
+    // } catch (e) {
+    //   print(e.toString() + 'userId');
+    // }
+    try {
+      final _vegid = await viewVegPlanPresenter.getValue();
+      if (_vegid == null || _vegid == '' || _vegid == "null") {
+        var dataFromPreviousScreen = Get.arguments;
+        id.value = dataFromPreviousScreen['vegid'];
+        viewVegPlanPresenter.saveValue(vegid: id.value.toString());
+      } else {
+        id.value = int.tryParse(_vegid) ?? 0;
+      }
     } catch (e) {
-      print(e.toString() + 'userId');
+      print(e);
     }
+  }
+
+  void clearStoreData() {
+    viewVegPlanPresenter.clearValue();
   }
 
   Future<void> getVegEquipmentModelList(int facilityId, bool isLoading) async {
@@ -123,9 +138,10 @@ class ViewVegPlanController extends GetxController {
   //   update(["historyList"]);
   // }
 
-  Future<void> getVegPlanDetail({required int planId,required int facilityId}) async {
-    final _vegPlanDetail = await viewVegPlanPresenter.getVegPlanDetail(facilityId:facilityId,
-        planId: planId, isLoading: true);
+  Future<void> getVegPlanDetail(
+      {required int planId, required int facilityId}) async {
+    final _vegPlanDetail = await viewVegPlanPresenter.getVegPlanDetail(
+        facilityId: facilityId, planId: planId, isLoading: true);
     print('Veg plan Detail:$_vegPlanDetail');
 
     if (_vegPlanDetail != null) {
