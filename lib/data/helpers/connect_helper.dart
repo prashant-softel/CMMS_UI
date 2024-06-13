@@ -9476,7 +9476,7 @@ class ConnectHelper {
     };
     var responseModel = await apiWrapper.makeRequest(
       'MISMaster/DeleteStatsofAppliaction?id=$ComplianceStatus_id',
-      Request.post,
+      Request.delete,
       requestBody,
       isLoading ?? false,
       {
