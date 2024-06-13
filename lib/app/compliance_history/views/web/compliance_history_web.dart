@@ -2,6 +2,7 @@ import 'package:cmms/app/compliance_history/compliance_history_controller.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/theme/dimens.dart';
+import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../theme/color_values.dart';
@@ -128,144 +129,161 @@ class ComplianceHistoryWeb extends GetView<ComplianceHistoryController> {
                               Divider(
                                 color: ColorValues.greyLightColour,
                               ),
-                              DataTable(
-                                border: TableBorder.all(
-                                  color: Color.fromARGB(255, 206, 229, 234),
-                                ),
-                                columns: [
-                                  DataColumn(
-                                    label: Text(
-                                      "Id",
-                                      style: TextStyle(
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
+                              Container(
+                                height:
+                                    (controller.historyStatutory.length * 40) +
+                                        60,
+                                width: Get.width * .9,
+                                child: DataTable2(
+                                  headingRowHeight: 60,
+                                  dataRowHeight: 40,
+                                  border: TableBorder.all(
+                                    color: Color.fromARGB(255, 206, 229, 234),
                                   ),
-                                  DataColumn(
-                                    label: Text(
-                                      "Facility ",
-                                      style: TextStyle(
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                  ),
-                                  DataColumn(
-                                    label: Text(
-                                      "Start Date",
-                                      style: TextStyle(
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                  ),
-                                  DataColumn(
-                                    label: Text(
-                                      "End Date",
-                                      style: TextStyle(
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                  ),
-                                  DataColumn(
-                                    label: Text(
-                                      "Created At",
-                                      style: TextStyle(
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                  ),
-                                  DataColumn(
-                                    label: Text(
-                                      "Current Status",
-                                      style: TextStyle(
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                  ),
-                                  DataColumn(
-                                    label: Text(
-                                      "Updated By",
-                                      style: TextStyle(
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                  ),
-                                  DataColumn(
-                                    label: Text(
-                                      "Updated At",
-                                      style: TextStyle(
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                                rows: List<DataRow>.generate(
-                                  controller.historyStatutory.length,
-                                  (index) => DataRow(
-                                    cells: [
-                                      DataCell(
-                                        Text(
-                                          controller.historyStatutory[index].id
-                                              .toString(),
+                                  columns: [
+                                    DataColumn2(
+                                      fixedWidth: 50,
+                                      label: Text(
+                                        "Id",
+                                        style: TextStyle(
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.bold,
                                         ),
                                       ),
-                                      DataCell(
-                                        Text(
-                                          controller.historyStatutory[index]
-                                                  .facility_name ??
-                                              "",
+                                    ),
+                                    DataColumn2(
+                                      size: ColumnSize.M,
+                                      label: Text(
+                                        "Facility ",
+                                        style: TextStyle(
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.bold,
                                         ),
                                       ),
-                                      DataCell(
-                                        Text(
-                                          controller.historyStatutory[index]
-                                                  .start_date ??
-                                              "",
+                                    ),
+                                    DataColumn2(
+                                      size: ColumnSize.M,
+                                      label: Text(
+                                        "Start Date",
+                                        style: TextStyle(
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.bold,
                                         ),
                                       ),
-                                      DataCell(
-                                        Text(
-                                          controller.historyStatutory[index]
-                                                  .end_date ??
-                                              "",
+                                    ),
+                                    DataColumn2(
+                                      size: ColumnSize.M,
+                                      label: Text(
+                                        "End Date",
+                                        style: TextStyle(
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.bold,
                                         ),
                                       ),
-                                      DataCell(
-                                        Text(
-                                          controller.historyStatutory[index]
-                                                  .created_at ??
-                                              "",
+                                    ),
+                                    DataColumn2(
+                                      size: ColumnSize.L,
+                                      label: Text(
+                                        "Created At",
+                                        style: TextStyle(
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.bold,
                                         ),
                                       ),
-                                      DataCell(
-                                        Text(
-                                          controller.historyStatutory[index]
-                                                  .current_status_short ??
-                                              "",
+                                    ),
+                                    DataColumn2(
+                                      size: ColumnSize.M,
+                                      label: Text(
+                                        "Current Status",
+                                        style: TextStyle(
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.bold,
                                         ),
                                       ),
-                                      DataCell(
-                                        Text(
-                                          controller.historyStatutory[index]
-                                                  .updated_by ??
-                                              "",
+                                    ),
+                                    DataColumn2(
+                                      size: ColumnSize.L,
+                                      label: Text(
+                                        "Updated By",
+                                        style: TextStyle(
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.bold,
                                         ),
                                       ),
-                                      DataCell(
-                                        Text(
-                                          controller.historyStatutory[index]
-                                                  .updated_at ??
-                                              "",
+                                    ),
+                                    DataColumn2(
+                                      size: ColumnSize.L,
+                                      label: Text(
+                                        "Updated At",
+                                        style: TextStyle(
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.bold,
                                         ),
                                       ),
-                                    ],
+                                    ),
+                                  ],
+                                  rows: List<DataRow>.generate(
+                                    controller.historyStatutory.length,
+                                    (index) => DataRow(
+                                      cells: [
+                                        DataCell(
+                                          Text(
+                                            controller
+                                                .historyStatutory[index].id
+                                                .toString(),
+                                          ),
+                                        ),
+                                        DataCell(
+                                          Text(
+                                            controller.historyStatutory[index]
+                                                    .facility_name ??
+                                                "",
+                                          ),
+                                        ),
+                                        DataCell(
+                                          Text(
+                                            controller.historyStatutory[index]
+                                                    .start_date ??
+                                                "",
+                                          ),
+                                        ),
+                                        DataCell(
+                                          Text(
+                                            controller.historyStatutory[index]
+                                                    .end_date ??
+                                                "",
+                                          ),
+                                        ),
+                                        DataCell(
+                                          Text(
+                                            controller.historyStatutory[index]
+                                                    .created_at ??
+                                                "",
+                                          ),
+                                        ),
+                                        DataCell(
+                                          Text(
+                                            controller.historyStatutory[index]
+                                                    .current_status_short ??
+                                                "",
+                                          ),
+                                        ),
+                                        DataCell(
+                                          Text(
+                                            controller.historyStatutory[index]
+                                                    .updated_by ??
+                                                "",
+                                          ),
+                                        ),
+                                        DataCell(
+                                          Text(
+                                            controller.historyStatutory[index]
+                                                    .updated_at ??
+                                                "",
+                                          ),
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                 ),
                               ),
