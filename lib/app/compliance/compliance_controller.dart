@@ -247,7 +247,7 @@ class ComplianceController extends GetxController {
     }
   }
 
-  void reNewCompliance() async {
+  void reNewCompliance(int? position) async {
     try {
       // checkCompiliace();
       // if (isFormInvalid.value) {
@@ -275,6 +275,7 @@ class ComplianceController extends GetxController {
           await compliancePresenter.createCompliance(
         createCompliance: createComplianceModelJsonString,
         isLoading: true,
+        position: position,
       );
 
       if (responseCreateComplianceModel == null) {}

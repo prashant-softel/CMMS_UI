@@ -636,7 +636,7 @@ class _ComplianceWebState extends State<ComplianceWeb> {
                                       text: 'Re-New',
                                       onPressed: () {
                                         // controller.isFormInvalid.value = false;
-                                        controller.reNewCompliance();
+                                        controller.reNewCompliance(1);
                                       },
                                     ),
                                   )
