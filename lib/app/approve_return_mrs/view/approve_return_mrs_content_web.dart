@@ -57,10 +57,17 @@ class ApproveReturnMrsContentWeb extends GetView<ApproveReturnMrsController> {
                       Get.offNamed(Routes.stockManagementDashboardScreen);
                     },
                     child: Text(" / STOCK MANAGEMENT ",
-                        style: Styles.greyMediumLight12),
+                        style: Styles.greyLight14),
+                  ),
+                  InkWell(
+                    onTap: () {
+                      Get.offNamed(Routes.returnMrsList);
+                    },
+                    child: Text(" / RETURN MRS LIST ",
+                        style: Styles.greyLight14),
                   ),
                   Text(" / RETURN EQUIPMENT DETAILS",
-                      style: Styles.greyMediumLight12)
+                      style: Styles.greyLight14)
                 ],
               ),
             ),
@@ -296,6 +303,13 @@ class ApproveReturnMrsContentWeb extends GetView<ApproveReturnMrsController> {
                                           fontSize: 15,
                                           fontWeight: FontWeight.bold),
                                     )),
+                                    DataColumn(
+                                        label: Text(
+                                      "Remarks",
+                                      style: TextStyle(
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.bold),
+                                    ))
                                   ],
                                   rows: List<DataRow>.generate(
                                       controller.returnMrsDetailsModel.value!
@@ -331,6 +345,12 @@ class ApproveReturnMrsContentWeb extends GetView<ApproveReturnMrsController> {
                                                 .cmmrsItems![index]
                                                 .returned_qty
                                                 .toString())),
+                                            DataCell(Text(controller
+                                                .returnMrsDetailsModel
+                                                .value!
+                                                .cmmrsItems![index]
+                                                .return_remarks
+                                                .toString()))
                                           ])),
                                 ),
                               ),
@@ -409,6 +429,13 @@ class ApproveReturnMrsContentWeb extends GetView<ApproveReturnMrsController> {
                                           fontSize: 15,
                                           fontWeight: FontWeight.bold),
                                     )),
+                                    DataColumn(
+                                        label: Text(
+                                      "Remarks",
+                                      style: TextStyle(
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.bold),
+                                    )),
                                   ],
                                   rows: List<DataRow>.generate(
                                       controller.returnMrsDetailsModel.value!
@@ -443,6 +470,12 @@ class ApproveReturnMrsContentWeb extends GetView<ApproveReturnMrsController> {
                                                 .value!
                                                 .cmmrsFaultyItems![index]
                                                 .returned_qty
+                                                .toString())),
+                                            DataCell(Text(controller
+                                                .returnMrsDetailsModel
+                                                .value!
+                                                .cmmrsFaultyItems![index]
+                                                .return_remarks
                                                 .toString())),
                                           ])),
                                 ),

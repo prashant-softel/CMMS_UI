@@ -12,6 +12,7 @@ import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:html_unescape/html_unescape.dart';
 import '../../domain/models/comment_model.dart';
@@ -119,6 +120,7 @@ class JobCardDetailsController extends GetxController {
   RxList<MRSListByJobIdModel?>? listMrsByTaskId = <MRSListByJobIdModel?>[].obs;
   RxList<CmmrsItems?>? cmmrsItems = <CmmrsItems?>[].obs;
   Rx<bool> allTrue = false.obs;
+  Rx<bool> isformInvalid = false.obs;
   var returnitemExists = <int>[].obs;
   var itemExistsWithZeroDifference = <bool>[].obs;
 
@@ -725,6 +727,13 @@ class JobCardDetailsController extends GetxController {
     // print('update  Create GO  data: $carryForwardJCModelJsonString');
   }
 
+  void commentcheckform() {
+    if (approveCommentTextFieldCtrlr.text == '') {
+      Fluttertoast.showToast(msg: "Please enter Comment!");
+      isformInvalid.value = true;
+    }
+  }
+
   void carryForwardJob({List<dynamic>? fileIds}) async {
     int isolationId = 0;
     for (IsolationAssetsCategory isolationAssetsCategory
@@ -802,6 +811,10 @@ class JobCardDetailsController extends GetxController {
   // // }
   void approveJobCards() async {
     {
+      commentcheckform();
+      if (isformInvalid.value) {
+        return;
+      }
       String _comment = approveCommentTextFieldCtrlr.text.trim();
 
       CommentModel commentCalibrationModel =
@@ -869,6 +882,10 @@ class JobCardDetailsController extends GetxController {
 
   void approvecloseJob() async {
     {
+      commentcheckform();
+      if (isformInvalid.value) {
+        return;
+      }
       String _comment = approveCommentTextFieldCtrlr.text.trim();
       int ptwId = jobCardDetailsModel.value?.ptwId ?? 0;
       CommentModel commentCalibrationModel =
