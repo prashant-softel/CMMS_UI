@@ -689,8 +689,8 @@ class DataRepository extends DomainRepository {
 
   Future<ResponseModel> getStatutoryDataList({
     int? facility_id,
-    // String? start_date,
-    // required String end_date,
+    String? start_date,
+    String? end_date,
     required bool isLoading,
     required String auth,
   }) async {
@@ -698,8 +698,8 @@ class DataRepository extends DomainRepository {
       isLoading: isLoading,
       auth: auth,
       facility_id: facility_id,
-      // start_date: start_date,
-      // end_date: end_date,
+      start_date: start_date,
+      end_date: end_date,
     );
   }
 
@@ -845,6 +845,17 @@ class DataRepository extends DomainRepository {
         goodsOrderApproveJsonString: goodsOrderApproveJsonString,
         isLoading: isLoading ?? false,
       );
+  Future<ResponseModel> complianceApprovedButton({
+    required String auth,
+    complianceApprovedJsonString,
+    bool? isLoading,
+    int? position,
+  }) async =>
+      await connectHelper.complianceApprovedButton(
+          auth: auth,
+          complianceApprovedJsonString: complianceApprovedJsonString,
+          isLoading: isLoading ?? false,
+          position: position);
   Future<ResponseModel> approveIncidentReportButton({
     required String auth,
     incidentReportApproveJsonString,
@@ -2206,6 +2217,16 @@ class DataRepository extends DomainRepository {
         isLoading: isLoading ?? false,
       );
 
+  Future<ResponseModel> getStatutoryDetail({
+    required String auth,
+    bool? isLoading,
+    int? id,
+  }) async =>
+      await connectHelper.getStatutoryDetail(
+        auth: auth,
+        id: id,
+        isLoading: isLoading ?? false,
+      );
   Future<ResponseModel> getHistory({
     String? auth,
     int? moduleType,
@@ -5120,6 +5141,18 @@ class DataRepository extends DomainRepository {
         auth: auth,
         facilityId: facilityId,
         year: year,
+        isLoading: isLoading ?? false,
+      );
+  Future<ResponseModel> getAttendanceDetail({
+    required String auth,
+    required int facilityId,
+    required String date,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.getAttendanceDetail(
+        auth: auth,
+        facilityId: facilityId,
+        date: date,
         isLoading: isLoading ?? false,
       );
 

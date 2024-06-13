@@ -9,6 +9,9 @@ class CreateStatutoryModel {
   String? expires_on;
   String? issue_date;
   String? Comment;
+  int? renewFlag;
+  int? status_of_aplication_id;
+  String? renew_date;
 
   CreateStatutoryModel({
     this.facility_id,
@@ -16,6 +19,9 @@ class CreateStatutoryModel {
     this.issue_date,
     this.compliance_id,
     this.Comment,
+    this.renewFlag,
+    this.renew_date,
+    this.status_of_aplication_id,
   });
 
   factory CreateStatutoryModel.fromJson(Map<String, dynamic> json) {
@@ -25,6 +31,9 @@ class CreateStatutoryModel {
       issue_date: json['issue_date'],
       compliance_id: json['compliance_id'],
       Comment: json['Comment'],
+      renewFlag: json['renewFlag'],
+      renew_date: json['renew_date'],
+      status_of_aplication_id: json['status_of_aplication_id'],
     );
   }
   Map<String, dynamic> toJson() => {
@@ -33,5 +42,8 @@ class CreateStatutoryModel {
         "issue_date": issue_date,
         "compliance_id": compliance_id,
         "Comment": Comment,
+        "renewFlag": renewFlag,
+        "renew_date": renew_date,
+        "status_of_aplication_id": status_of_aplication_id,
       };
 }

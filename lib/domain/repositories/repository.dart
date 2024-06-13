@@ -1,13 +1,16 @@
 import 'dart:convert';
 import 'dart:developer';
 import 'dart:typed_data';
+import 'package:cmms/app/widgets/attendance_popup.dart';
 import 'package:cmms/domain/models/Statutory_Compliance_model.dart';
 import 'package:cmms/domain/models/attendance_list_model.dart';
+import 'package:cmms/domain/models/attendance_model.dart';
 import 'package:cmms/domain/models/course_category_model.dart';
 import 'package:cmms/domain/models/dashboard_model.dart';
 import 'package:cmms/domain/models/dsm_list_model.dart';
 import 'package:cmms/domain/models/escalation_matrix_list_model.dart';
 import 'package:cmms/domain/models/get_mc_task_equipment_model.dart';
+import 'package:cmms/domain/models/get_statutory_by_id_model.dart';
 import 'package:cmms/domain/models/get_statutory_list_model.dart';
 import 'package:cmms/domain/models/grievance_type_model.dart';
 import 'package:cmms/domain/models/incident_risk_type_model.dart';
@@ -931,13 +934,6 @@ class Repository {
         Get.offAllNamed(
           Routes.viewWaterData,
         );
-
-        // if (res.errorCode == 200) {
-        //   var responseMap = json.decode(res.data);
-        //   return responseMap;
-        // }
-
-        // Fluttertoast.showToast(msg: "Data add successfully...", fontSize: 16.0);
       } else {
         Utility.showDialog(res.errorCode.toString(), 'update Water Data');
         //return '';
@@ -1010,17 +1006,9 @@ class Repository {
 
       if (!res.hasError) {
         Fluttertoast.showToast(
-            msg: "Submit Water Data  Successfully...", fontSize: 16.0);
-        Get.offAllNamed(
-          Routes.wasteData,
+          msg: "Submit Waste Data Successfully...",
+          fontSize: 16.0,
         );
-
-        // if (res.errorCode == 200) {
-        //   var responseMap = json.decode(res.data);
-        //   return responseMap;
-        // }
-
-        // Fluttertoast.showToast(msg: "Data add successfully...", fontSize: 16.0);
       } else {
         Utility.showDialog(res.errorCode.toString(), 'Craete Waste Data');
         //return '';
@@ -1050,9 +1038,8 @@ class Repository {
 
       if (!res.hasError) {
         Fluttertoast.showToast(
-            msg: "Submit Water Data  Successfully...", fontSize: 16.0);
-        Get.offAllNamed(
-          Routes.wasteData,
+          msg: "Waste Data Updated Successfully...",
+          fontSize: 16.0,
         );
       } else {
         Utility.showDialog(res.errorCode.toString(), 'Craete Waste Data');
@@ -1701,8 +1688,8 @@ class Repository {
   Future<List<GetStatutoryList>> getStatutoryDataList({
     required int? facility_id,
     bool? isExport,
-    // String? start_date,
-    // required String end_date,
+    String? start_date,
+    String? end_date,
     required bool isLoading,
   }) async {
     try {
@@ -1711,8 +1698,8 @@ class Repository {
       log(auth);
       final res = await _dataRepository.getStatutoryDataList(
         facility_id: facility_id,
-        // start_date: start_date,
-        // end_date: end_date,
+        start_date: start_date,
+        end_date: end_date,
         isLoading: isLoading,
         auth: auth,
       );
@@ -2542,6 +2529,36 @@ class Repository {
     }
   }
 
+  Future<GetStatutoryById?> getStatutoryDetail({
+    bool? isLoading,
+    int? id,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getStatutoryDetail(
+        auth: auth,
+        id: id,
+        isLoading: isLoading ?? false,
+      );
+
+      print({"GetStatutoryById", res.data});
+
+      if (!res.hasError) {
+        final GetStatutoryById __getStatutoryDetailModel =
+            getStatutoryByIdModelFromJson(res.data);
+
+        print({"get Statutory Detail", __getStatutoryDetailModel});
+        return __getStatutoryDetailModel;
+      } else {
+        Utility.showDialog(res.errorCode.toString(), 'get Statutory Detail');
+      }
+      return null;
+    } catch (error) {
+      print(error.toString());
+      return null;
+    }
+  }
+
   Future<List<CurrencyListModel>> getUnitCurrencyList({
     required int? facilityId,
     // int? blockId,
@@ -2778,6 +2795,42 @@ class Repository {
       } else {
         Utility.showDialog(
             res.errorCode.toString(), 'goodsOrderApprovedButton');
+        //return '';
+      }
+      return Map();
+    } catch (error) {
+      print(error.toString());
+      return Map();
+    }
+  }
+
+  Future<Map<String, dynamic>> complianceApprovedButton(
+    complianceApprovedJsonString,
+    bool? isLoading,
+    int? position,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.complianceApprovedButton(
+        auth: auth,
+        complianceApprovedJsonString: complianceApprovedJsonString,
+        isLoading: isLoading ?? false,
+        position: position,
+      );
+
+      var resourceData = res.data;
+
+      print('compliance Approved Json : ${resourceData}');
+
+      if (!res.hasError) {
+        if (res.errorCode == 200) {
+          var responseMap = json.decode(res.data);
+          return responseMap;
+        } else {
+          // Get.dialog<void>(WarrantyClaimErrorDialog());
+        }
+      } else {
+        Utility.showDialog(res.errorCode.toString(), 'compliance Approved');
         //return '';
       }
       return Map();
@@ -13703,7 +13756,13 @@ class Repository {
 
       if (!res.hasError) {
         if (res.errorCode == 200) {
-          Get.toNamed(Routes.admin_dashboard);
+          var json = jsonDecode(resourceData);
+          String message = json['message'];
+          Get.dialog<void>(
+            AttendancePopup(
+              message: message,
+            ),
+          );
           return true;
         }
       } else {
@@ -13739,6 +13798,33 @@ class Repository {
     } catch (error) {
       print(error.toString());
       return [];
+    }
+  }
+
+  Future<AttendaceModel?> getAttendanceDetail({
+    required int facilityId,
+    required String date,
+    bool? isLoading,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getAttendanceDetail(
+        auth: auth,
+        facilityId: facilityId,
+        date: date,
+        isLoading: isLoading,
+      );
+      if (!res.hasError) {
+        var response = json.decode(res.data);
+        AttendaceModel attendanceModel = AttendaceModel.fromJson(response);
+        return null;
+      } else {
+        Utility.showDialog(res.errorCode.toString(), 'getdsmDataList');
+        return null;
+      }
+    } catch (error) {
+      print(error.toString());
+      return null;
     }
   }
 

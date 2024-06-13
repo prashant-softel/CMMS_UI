@@ -3,6 +3,9 @@ import 'package:cmms/app/compliance/compliance_presenter.dart';
 import 'package:cmms/domain/models/Statutory_Compliance_model.dart';
 import 'package:cmms/domain/models/createStatutory_model.dart';
 import 'package:cmms/domain/models/facility_model.dart';
+import 'package:cmms/domain/models/get_statutory_by_id_model.dart';
+import 'package:cmms/domain/models/get_statutory_list_model.dart';
+import 'package:cmms/domain/models/history_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rxdart/subjects.dart';
@@ -23,16 +26,27 @@ class ComplianceController extends GetxController {
   RxList<FacilityModel?> facilityList = <FacilityModel>[].obs;
   RxList<StatutoryComplianceModel?> statutoryComplianceList =
       <StatutoryComplianceModel>[].obs;
+  RxList<HistoryModel?>? historyList = <HistoryModel?>[].obs;
+
+  Rx<GetStatutoryById?> getStatutoryById = GetStatutoryById().obs;
   Rx<bool> isStatutoryComplianceSelected = true.obs;
   Rx<String> selectedStatutoryCompliance = ''.obs;
   int selectedStatutoryComplianceId = 0;
   bool openIssueDatePicker = false;
   bool openExpireOnFDatePicker = false;
+  bool openReNewOnDatePicker = false;
   Rx<bool> isIssueDateInvalid = false.obs;
+
+  Rx<bool> isLoading = true.obs;
   Rx<bool> isExpiresonInvalid = false.obs;
   RxBool isFormInvalid = false.obs;
+  RxList<GetStatutoryList> getStatutoryList = <GetStatutoryList>[].obs;
+  RxBool isStatutoryPresent = false.obs;
+
   var issueDateTc = TextEditingController();
   var expireOnDateTc = TextEditingController();
+  var reNewOnDateTc = TextEditingController();
+
   var commentsCtrl = TextEditingController();
 
   int paidId = 0;
@@ -52,7 +66,16 @@ class ComplianceController extends GetxController {
         Future.delayed(Duration(seconds: 1), () {
           getStatutoryComplianceDropDown();
         });
+        Future.delayed(Duration(seconds: 2), () async {
+          await getStatutoryDataList(facilityId);
+        });
       });
+      if (srId.value != 0) {
+        Future.delayed(Duration(seconds: 1), () {
+          getStatutoryDetail(id: srId.value);
+          getSRHistory(id: srId.value);
+        });
+      }
     } catch (e) {}
 
     super.onInit();
@@ -73,6 +96,34 @@ class ComplianceController extends GetxController {
       print(e.toString() + 'srId');
       //  Utility.showDialog(e.toString() + 'userId');
     }
+  }
+
+  Future<void> getStatutoryDetail({required int id}) async {
+    final _getStatutoryDetail =
+        await compliancePresenter.getStatutoryDetail(id: id);
+    print('Add Statutory Detail:$_getStatutoryDetail');
+
+    if (_getStatutoryDetail != null) {
+      getStatutoryById.value = _getStatutoryDetail;
+      selectedStatutoryCompliance.value =
+          getStatutoryById.value?.compilanceName ?? '';
+
+      issueDateTc.text = getStatutoryById.value?.created_at ?? '';
+      expireOnDateTc.text = getStatutoryById.value?.end_date ?? "";
+      commentsCtrl.text = getStatutoryById.value?.description ?? "";
+    }
+  }
+
+  Future<void> getSRHistory({required int id}) async {
+    int moduleType = 406;
+
+    historyList?.value = await compliancePresenter.getHistory(
+          moduleType,
+          id,
+          true,
+        ) ??
+        [];
+    update(["historyList"]);
   }
 
   Future<void> getFacilityList() async {
@@ -110,17 +161,18 @@ class ComplianceController extends GetxController {
         return;
       }
       String _issueDateTc = issueDateTc.text.trim();
-
       String _expireOnDateTc = expireOnDateTc.text.trim();
       String _commentsCtrl = commentsCtrl.text.trim();
 
       CreateStatutoryModel createStatutoryModel = CreateStatutoryModel(
-        facility_id: facilityId,
-        Comment: _commentsCtrl,
-        compliance_id: selectedStatutoryComplianceId,
-        issue_date: _issueDateTc,
-        expires_on: _expireOnDateTc,
-      );
+          facility_id: facilityId,
+          Comment: _commentsCtrl,
+          compliance_id: selectedStatutoryComplianceId,
+          issue_date: _issueDateTc,
+          expires_on: _expireOnDateTc,
+          renewFlag: 0,
+          renew_date: "",
+          status_of_aplication_id: 1);
 
       // Convert the CreateStatutoryModel instance to JSON
       var createComplianceModelJsonString = createStatutoryModel.toJson();
@@ -142,6 +194,53 @@ class ComplianceController extends GetxController {
     } catch (e) {
       print(e);
     }
+  }
+
+  void reNewCompliance() async {
+    try {
+      // checkCompiliace();
+      // if (isFormInvalid.value) {
+      //   return;
+      // }
+      String _issueDateTc = issueDateTc.text.trim();
+      String _reNewOnDateTc = reNewOnDateTc.text.trim();
+
+      String _expireOnDateTc = expireOnDateTc.text.trim();
+      String _commentsCtrl = commentsCtrl.text.trim();
+
+      CreateStatutoryModel createStatutoryModel = CreateStatutoryModel(
+          facility_id: facilityId,
+          Comment: _commentsCtrl,
+          compliance_id: selectedStatutoryComplianceId,
+          issue_date: _issueDateTc,
+          expires_on: _expireOnDateTc,
+          renewFlag: 1,
+          renew_date: _reNewOnDateTc,
+          status_of_aplication_id: selectedStatutoryComplianceId);
+
+      var createComplianceModelJsonString = createStatutoryModel.toJson();
+
+      Map<String, dynamic>? responseCreateComplianceModel =
+          await compliancePresenter.createCompliance(
+        createCompliance: createComplianceModelJsonString,
+        isLoading: true,
+      );
+
+      if (responseCreateComplianceModel == null) {}
+      print(
+          'Create  create Compliance  data: $createComplianceModelJsonString');
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  Future<void> getStatutoryDataList(int facilityId) async {
+    getStatutoryList.value = <GetStatutoryList>[];
+
+    final _getStatutoryList = await compliancePresenter.getStatutoryDataList(
+        isLoading: isLoading.value, facility_id: facilityId, isExport: false);
+    getStatutoryList.value = _getStatutoryList;
+    isLoading.value = false;
   }
 
   void checkCompiliace() {
@@ -171,9 +270,31 @@ class ComplianceController extends GetxController {
             selectedStatutoryComplianceId =
                 statutoryComplianceList[currencyIndex]?.id ?? 0;
             selectedStatutoryCompliance.value = value;
+            isStatutoryPresent.value = getStatutoryList.any((element) =>
+                element.compilanceName == selectedStatutoryCompliance.value);
             isStatutoryComplianceSelected.value = true;
             print(
-                "selectedBusinessTypeId: ${selectedStatutoryComplianceId} \n ${selectedStatutoryCompliance}");
+                "selectedBusinessTypeId: ${isStatutoryPresent} \n ${selectedStatutoryCompliance}");
+
+            if (isStatutoryPresent.value) {
+              selectedStatutoryCompliance.value = "";
+              selectedStatutoryComplianceId = 0;
+
+              Get.dialog(
+                AlertDialog(
+                  title: Text("Compliance Already Exists"),
+                  content: Text("This compliance is already in existence."),
+                  actions: <Widget>[
+                    ElevatedButton(
+                      child: Text("OK"),
+                      onPressed: () {
+                        Get.back();
+                      },
+                    ),
+                  ],
+                ),
+              );
+            }
           } else {
             selectedStatutoryComplianceId = 0;
           }

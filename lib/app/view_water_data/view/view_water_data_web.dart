@@ -101,7 +101,7 @@ class _WaterDataWebState extends State<ViewWaterDataWeb> {
                                     child: Row(
                                       children: [
                                         Text(
-                                          "View Water Data For ${controller.monthName} Month",
+                                          "View Water Data For ${controller.waterDataByMonth.value?.month ?? ""} Month",
                                           style: Styles.blackBold16,
                                         ),
                                       ],
@@ -154,7 +154,7 @@ class _WaterDataWebState extends State<ViewWaterDataWeb> {
                                                 padding:
                                                     const EdgeInsets.all(15),
                                                 child: Text(
-                                                  "${controller.waterDataByMonth.value?.itemData?[index].waterType ?? "This Water Type has been deleted from master"}",
+                                                  "${controller.waterDataByMonth.value?.itemData?[index].waterType ?? ""}",
                                                   style: Styles.blue17,
                                                 ),
                                               ),

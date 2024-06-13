@@ -9,6 +9,7 @@ import 'package:cmms/app/theme/dimens.dart';
 import 'package:cmms/app/utils/responsive.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 class AdminDashboardScreen extends GetView<AdminDashboardController> {
   AdminDashboardScreen({super.key});
@@ -98,9 +99,20 @@ class AdminDashboardScreen extends GetView<AdminDashboardController> {
                                 },
                               ),
                               createContentTile(
+                                title: "Attendace List MonthWise",
+                                onTap: () {
+                                  Get.offNamed(Routes.attendanceListMonthwise);
+                                },
+                              ),
+                              createContentTile(
                                 title: "Attendace",
                                 onTap: () {
-                                  Get.offNamed(Routes.attendanceScreen);
+                                  DateTime date = DateTime.now();
+                                  String currentDate =
+                                      DateFormat("yyyy-MM-dd").format(date);
+                                  print("current date : ${currentDate}");
+                                  Get.offNamed(Routes.attendanceScreen,
+                                      arguments: {"date": currentDate});
                                 },
                               ),
                             ],

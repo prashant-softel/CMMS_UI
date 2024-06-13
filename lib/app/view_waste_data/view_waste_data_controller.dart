@@ -101,12 +101,12 @@ class ViewWasteDataController extends GetxController {
     );
 
     wasteDataByMonth.value = _wasteDataMonthDetail;
-      update(['waste-controller']);
+    update(['waste-controller']);
   }
 
   void clearStoreData() {
     viewWasteDataPresenter.clearMonthValue();
     viewWasteDataPresenter.clearYearValue();
-    viewWasteDataPresenter.clearHazardousValue();
+    // viewWasteDataPresenter.clearHazardousValue();
   }
 }

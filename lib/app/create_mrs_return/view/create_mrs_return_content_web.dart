@@ -7,6 +7,7 @@ import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/custom_textField.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:flutter/services.dart';
 
@@ -60,13 +61,32 @@ class CreateMrsReturnContentWeb extends GetView<CreateMrsReturnController> {
                             ),
                           ),
                           InkWell(
-                            onTap: () {
-                              Get.offNamed(
-                                  Routes.stockManagementDashboardScreen);
-                            },
-                            child: Text(" / STOCK MANAGEMENT ",
-                                style: Styles.greyLight14),
-                          ),
+                              onTap: () {
+                                var taskId;
+                                var jobId;
+                                controller.type.value == 1
+                                    ? Get.offAllNamed(Routes.jobDetails,
+                                        arguments: {'jobId': jobId})
+                                    : controller.type.value == 2
+                                        ? Get.offAllNamed(Routes.pmExecution,
+                                            arguments: {'pmTaskId': taskId})
+                                        : Get.offNamed(Routes
+                                            .stockManagementDashboardScreen);
+                              },
+                              child: controller.type.value == 1
+                                  ? Text(
+                                      "/ JOB",
+                                      style: Styles.greyLight14,
+                                    )
+                                  : controller.type.value == 2
+                                      ? Text(
+                                          "/ PM TASK",
+                                          style: Styles.greyLight14,
+                                        )
+                                      : Text(
+                                          "/ STOCK MANAGEMENT",
+                                          style: Styles.greyLight14,
+                                        )),
                           Text(" / NEW RETURN MATERIAL SLIP",
                               style: Styles.greyLight14)
                         ],
@@ -785,8 +805,26 @@ class CreateMrsReturnContentWeb extends GetView<CreateMrsReturnController> {
                                                                             ''),
                                                                 onChanged:
                                                                     (txt) {
-                                                                  mapData["value"] =
-                                                                      txt;
+                                                                  int return_qty =
+                                                                      int.tryParse(
+                                                                              txt) ??
+                                                                          0;
+                                                                  if (return_qty <=
+                                                                      1) {
+                                                                    mapData["value"] =
+                                                                        txt;
+                                                                  } else {
+                                                                    Fluttertoast
+                                                                        .showToast(
+                                                                            msg:
+                                                                                "You can only add 1 qty!");
+                                                                    setState(
+                                                                        () {
+                                                                      mapData["value"] =
+                                                                          mapData[
+                                                                              'value']!;
+                                                                    });
+                                                                  }
                                                                 },
                                                               )),
                                                         )

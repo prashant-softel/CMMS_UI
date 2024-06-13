@@ -126,6 +126,7 @@ abstract class Routes {
   static const incidentRiskType = _Paths.incidentRiskType;
   static const StatutoryCompliance = _Paths.StatutoryCompliance;
   static const documentUploadScreen = _Paths.documentUploadScreen;
+  static const viewComplianceScreen = _Paths.viewComplianceScreen;
 
   static const escalationMatrixListWeb = _Paths.escalationMatrixListWeb;
   static const addEscalatiomMatrixContentWeb =
@@ -221,6 +222,7 @@ abstract class Routes {
   static const admin_dashboard = _Paths.admin_dashboard;
   static const attendanceScreen = _Paths.attendanceScreen;
   static const attendanceListScreen = _Paths.attendanceListScreen;
+  static const attendanceListMonthwise = _Paths.attendanceListMonthwise;
   static const materialCategory = _Paths.materialCategory;
 }
 
@@ -348,6 +350,7 @@ abstract class _Paths {
   static const incidentRiskType = '/Incident-Risk-Type';
   static const StatutoryCompliance = '/Statutory-Compliance';
   static const documentUploadScreen = '/documentUploadScreen';
+  static const viewComplianceScreen = '/viewComplianceScreen';
 
   static const escalationMatrixListWeb = '/escalation-matrix-list';
   static const addEscalatiomMatrixContentWeb = '/add-escalation-matrix';
@@ -441,6 +444,7 @@ abstract class _Paths {
   static const admin_dashboard = '/admin-dashboard';
   static const attendanceScreen = '/attendance-screen';
   static const attendanceListScreen = '/attendance-list-screen';
+  static const attendanceListMonthwise = '/attendance-list-monthwise';
 
   static const materialCategory = '/material-category';
 }

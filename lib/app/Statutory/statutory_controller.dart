@@ -62,7 +62,7 @@ class StatutoryController extends GetxController {
     // "search": true,
   });
   final Map<String, double> columnwidth = {
-    "ID": 100,
+    "ID": 150,
     "Compliance": 150,
     "Status OF Application": 250,
     "Date of received": 200,
@@ -113,35 +113,39 @@ class StatutoryController extends GetxController {
     List<GetStatutoryList> filteredList = filteredData
         .where((item) =>
             (item.id?.toString().toLowerCase().contains(keyword.toLowerCase()) ?? false) ||
-            (item.complianceId
+            (item.id?.toString().toLowerCase().contains(keyword.toLowerCase()) ??
+                false) ||
+            (item.activation_status?.toString().toLowerCase().contains(keyword.toLowerCase()) ??
+                false) ||
+            (item.activation_status
                     ?.toString()
                     .toLowerCase()
                     .contains(keyword.toLowerCase()) ??
                 false) ||
-            (item.approvedAt?.toString().toLowerCase().contains(keyword.toLowerCase()) ??
+            (item.activation_status
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
                 false) ||
-            (item.approvedBy?.toString().toLowerCase().contains(keyword.toLowerCase()) ??
+            (item.activation_status
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
                 false) ||
-            (item.createdAt?.toString().toLowerCase().contains(keyword.toLowerCase()) ??
-                false) ||
-            (item.createdBy?.toString().toLowerCase().contains(keyword.toLowerCase()) ??
-                false) ||
-            (item.expiresOn?.toString().toLowerCase().contains(keyword.toLowerCase()) ??
+            (item.activation_status
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
                 false) ||
             (item.id?.toString().toLowerCase().contains(keyword.toLowerCase()) ??
                 false) ||
-            (item.issueDate?.toString().toLowerCase().contains(keyword.toLowerCase()) ??
-                false) ||
-            (item.renewFrom
+            (item.activation_status
                     ?.toString()
                     .toLowerCase()
                     .contains(keyword.toLowerCase()) ??
                 false) ||
-            (item.renewFromId
-                    ?.toString()
-                    .toLowerCase()
-                    .contains(keyword.toLowerCase()) ??
-                false))
+            (item.activation_status?.toString().toLowerCase().contains(keyword.toLowerCase()) ?? false) ||
+            (item.activation_status?.toString().toLowerCase().contains(keyword.toLowerCase()) ?? false))
         .toList();
     getStatutoryList.value = filteredList;
   }
@@ -153,8 +157,8 @@ class StatutoryController extends GetxController {
 
     final _getStatutoryList = await statutoryPresenter.getStatutoryDataList(
         isLoading: isLoading.value,
-        // start_date: startDate,
-        // end_date: endDate,
+        start_date: startDate,
+        end_date: endDate,
         facility_id: facilityId,
         isExport: isExport);
     getStatutoryList.value = _getStatutoryList;

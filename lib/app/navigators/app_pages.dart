@@ -30,6 +30,8 @@ import 'package:cmms/app/administration_dashboard_screen/view/admin_dash_screen.
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/attendance_list/attendance_list_binding.dart';
 import 'package:cmms/app/attendance_list/view/attendance_list_screen.dart';
+import 'package:cmms/app/attendance_list_monthwise/attendance_monthwise_bindings.dart';
+import 'package:cmms/app/attendance_list_monthwise/view/attendance_monthwise_screen.dart';
 import 'package:cmms/app/attendance_screen/attendance_binding.dart';
 import 'package:cmms/app/attendance_screen/view/attendance_screen.dart';
 import 'package:cmms/app/audit/audit_binding.dart';
@@ -239,6 +241,8 @@ import 'package:cmms/app/water_data_list/view/water_data_list_screen.dart';
 import 'package:cmms/app/water_data_list/water_data_list_binding.dart';
 import 'package:cmms/app/work_type/view/work_type_screen.dart';
 import 'package:cmms/app/work_type/work_type_binding.dart';
+import 'package:cmms/view_compliance/view_compliance_binding.dart';
+import 'package:cmms/view_compliance/views/view_compliance_screen.dart';
 import '../approve_return_mrs/approve_return_mrs_binding.dart';
 import '../approve_return_mrs/view/approve_return_mrs_screen.dart';
 import '../body_injured/body_injured_binding.dart';
@@ -1305,6 +1309,11 @@ class AppPages {
       binding: AttendanceListBinding(),
     ),
     GetPage<dynamic>(
+      name: _Paths.attendanceListMonthwise,
+      page: AttendanceListMonthScreen.new,
+      binding: AttendanceListMonthBinding(),
+    ),
+    GetPage<dynamic>(
       name: _Paths.materialCategory,
       page: MaterialCategoryScreen.new,
       binding: MAterialCategoryBinding(),
@@ -1328,6 +1337,11 @@ class AppPages {
       name: _Paths.documentUploadScreen,
       page: DocumentUploadScreen.new,
       binding: DocumentUploadBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.viewComplianceScreen,
+      page: ViewComplianceScreen.new,
+      binding: ViewComplianceBinding(),
     ),
   ];
 }
