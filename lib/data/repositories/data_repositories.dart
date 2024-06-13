@@ -5460,7 +5460,8 @@ class DataRepository extends DomainRepository {
         StatutoryCompliance_id: StatutoryCompliance_id);
     return response;
   }
-   // Compliance Status
+
+  // Compliance Status
   //get
   Future<ResponseModel> getComplianceStatus({
     required bool isLoading,
@@ -5510,6 +5511,18 @@ class DataRepository extends DomainRepository {
         isLoading: isLoading,
         ComplianceStatus_id: ComplianceStatus_id);
     return response;
+  }
+
+  Future<ResponseModel> getStatutoryHistory({
+    required String auth,
+    required int compliance_id,
+    required bool isLoading,
+  }) async {
+    return await connectHelper.getStatutoryHistory(
+      auth: auth,
+      compliance_id: compliance_id,
+      isLoading: isLoading,
+    );
   }
 //end
 }

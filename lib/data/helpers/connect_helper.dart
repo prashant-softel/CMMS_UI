@@ -9426,7 +9426,8 @@ class ConnectHelper {
 
     return responseModel;
   }
-   // Compliance Status
+
+  // Compliance Status
   //Get
   Future<ResponseModel> getComplianceStatus(
       {required bool isLoading, required String auth}) async {
@@ -9504,6 +9505,23 @@ class ConnectHelper {
       },
     );
 
+    return responseModel;
+  }
+
+  Future<ResponseModel> getStatutoryHistory({
+    required String auth,
+    required int compliance_id,
+    required bool isLoading,
+  }) async {
+    ResponseModel responseModel = await apiWrapper.makeRequest(
+      'MISMaster/GetStatutoryHistoryById?compliance_id=$compliance_id',
+      Request.get,
+      null,
+      isLoading,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
     return responseModel;
   }
 
