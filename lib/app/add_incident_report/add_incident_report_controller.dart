@@ -120,6 +120,7 @@ class AddIncidentReportController extends GetxController {
   Rx<String> selectedIBusinessList = ''.obs;
   Rx<bool> isBodyinjuredListSelected = true.obs;
   Rx<String> selectedIBodyinjuredList = ''.obs;
+   RxBool isDateInvalid = false.obs;
 
   int selectedBusinessListId = 0;
   int selectedBodyinjuredListId = 0;
@@ -206,7 +207,7 @@ class AddIncidentReportController extends GetxController {
       IncidentReportDetailsModel().obs;
   RxList<IncidentReportDetailsModel?>? incidentReportDetailsList =
       <IncidentReportDetailsModel?>[].obs;
-
+var isToggleOn = false.obs;
 //Incident Report List
   var incidentReportList = <IncidentReportListModel>[];
 
@@ -238,6 +239,11 @@ class AddIncidentReportController extends GetxController {
     rowCount: 0,
     rowsPerPage: 10,
   );
+  //switch toggle
+   final isSuccess = false.obs;
+    void toggle() {
+    isToggleOn.value = !isToggleOn.value;
+  }
 
   ///Block
   RxList<BlockModel?> blockList = <BlockModel>[].obs;
@@ -321,6 +327,9 @@ class AddIncidentReportController extends GetxController {
   ///Details of njured Person
   RxList<List<Map<String, String>>> rowInjuredPersonItem =
       <List<Map<String, String>>>[].obs;
+  // Details of other injured person
+  RxList<List<Map<String,String>>>rowOtherInjuredPersonItem=
+  <List<Map<String, String>>>[].obs;
 
   //why why analysis
   RxList<List<Map<String, String>>> rowWhyWhyAnalysisItem =
@@ -972,7 +981,59 @@ class AddIncidentReportController extends GetxController {
             .firstWhere((e) => e.name == element.name, orElse: null);
       });
     }
+    ///Details of other Injured person
+
+     rowOtherInjuredPersonItem.value = [];
+_incidentReportDetails?.Otherinjured_person?.forEach((element) {
+  rowOtherInjuredPersonItem.value.add([
+    {
+      "key": "Name of Other Injured Person ",
+      "value": '${element?.name}',
+    },
+    {
+      "key": "Gender ",
+      "value": '${element?.gender}',
+    },
+    {
+      "key": "Trade/Designation ",
+      "value": '${element?.designation}',
+    },
+    {
+      "key": "Address ",
+      "value": '${element?.address}',
+    },
+    {
+      "key": "Name of Contractor ",
+      "value": '${element?.name_contractor}',
+    },
+    {
+      "key": "Body part injured ",
+      "value": '${element?.body_part_and_nature_of_injury}',
+    },
+    {
+      'key': "Work experience ",
+      "value": '${element?.work_experience_years}',
+    },
+    {
+      "key": "Plant & Equipment ",
+      "value": '${element?.plant_equipment_involved}',
+    },
+    {
+      'key': "Exact Location ",
+      "value": '${element?.location_of_incident}',
+    },
+    {
+      'key': "Action ",
+      "value": '',
+    },
+  ]);
+
+  dropdownVictimNameMapperData[element!.name ?? ""] = victimNameList
+      .firstWhere((e) => e.name == element.name, orElse:null);
+});
+
   }
+  
 
   void victimNameSelected(_selectedVictimNameIds) {
     selectedVictimNameIdList.value = <int>[];
@@ -1209,6 +1270,37 @@ class AddIncidentReportController extends GetxController {
       {
         "key": "Name of Injured Person ",
         "value": 'Please Select',
+      },
+      {
+        "key": "Gender ",
+        "value": 'Please Select',
+      },
+      {'key': "Trade/Designation ", "value": ''},
+      {'key': "Address ", "value": ''},
+      {
+        "key": "Name of Contractor ",
+        "value": 'Please Select',
+      },
+      {
+        "key": "Body part injured ",
+        "value": 'Please Select',
+      },
+      {'key': "work experience ", "value": ''},
+      {
+        "key": "Plant & Equipment ",
+        "value": 'Please Select',
+      },
+      {'key': "Exact Location ", "value": ''},
+      {'key': "Action ", "value": ''},
+    ]);
+  }
+
+  //addDetailsOfOtherInjuredPersonItem
+  void addDetailsOfOtherInjuredPersonRowItem() {
+    rowOtherInjuredPersonItem.add([
+      {
+        "key": "Name of Injured Person ",
+        "value": '',
       },
       {
         "key": "Gender ",
@@ -1485,21 +1577,19 @@ class AddIncidentReportController extends GetxController {
       isBlockSelected.value = false;
     }
     if (startDateTimeCtrlr.text == '') {
-      Fluttertoast.showToast(
-          msg: 'Incident Date & Time Field cannot be empty',
-          timeInSecForIosWeb: 5);
+      
     }
     if (selectedRiskTypeList.value == '') {
       isRiskTypeListSelected.value = false;
     }
     if (selectedSeverity.value == '') {
-      Fluttertoast.showToast(
-          msg: 'Please select severity of incident', timeInSecForIosWeb: 5);
+      // Fluttertoast.showToast(
+      //     msg: 'Please select severity of incident', timeInSecForIosWeb: 5);
     }
     if (actionTakenDateTimeCtrlr.text == '') {
-      Fluttertoast.showToast(
-          msg: 'Action Taken By Date & Time Field cannot be empty',
-          timeInSecForIosWeb: 5);
+      // Fluttertoast.showToast(
+      //     msg: 'Action Taken By Date & Time Field cannot be empty',
+      //     timeInSecForIosWeb: 5);
     }
     if (selectedAssetRestorationActionTakenByList.value == '') {
       isAssetRestorationActionTakenByListSelected.value = false;
@@ -1643,7 +1733,32 @@ class AddIncidentReportController extends GetxController {
 
         detailsOfInjuredPersonItems.add(item);
       });
+  ///Details of other Injured Person
+      List<DetailsOfOtherInjuredPerson> detailsOfOtherInjuredPersonItems = [];
+      rowOtherInjuredPersonItem.forEach((element) {
+        DetailsOfOtherInjuredPerson item = DetailsOfOtherInjuredPerson(
+          Otherinjured_item_id: 0,
+          incidents_id: 0,
+          name: element[0]["value"] ?? '0',
+          other_victim:
+              selectedOption.value == "Other" ? element[1]["value"] ?? '0' : "",
+          person_type: 1,
+          age: 30,
+          sex: element[1]["value"] ?? '0',
+          designation: element[2]["value"] ?? '0',
+          address: element[3]["value"] ?? '0',
+          name_contractor:
+              dropdownBusinessListMapperData[element[4]["value"]]?.name,
+          body_part_and_nature_of_injury:
+              dropdownBodyinjuredListMapperData[element[5]["value"]]?.name,
+          work_experience_years: int.tryParse('${element[6]["value"] ?? '0'}'),
+          plant_equipment_involved:
+              dropdownEquipmentNameMapperData[element[7]["value"]]?.name,
+          location_of_incident: element[8]["value"] ?? '0',
+        );
 
+        detailsOfOtherInjuredPersonItems.add(item);
+      });
       ///Proposed Action Plan
       List<ProposedActionPlan> proposedActionItems = [];
       rowItem.forEach((element) {
@@ -1724,6 +1839,7 @@ class AddIncidentReportController extends GetxController {
               immediate_correction: immediateCorrectionItems,
               proposed_action_plan: proposedActionItems,
               injured_person: detailsOfInjuredPersonItems,
+              Otherinjured_person:detailsOfOtherInjuredPersonItems,
               investigation_team: investigation_team_list);
 
       var incidentReportJsonString = createIncidentReportModel.toJson();
@@ -1879,6 +1995,30 @@ class AddIncidentReportController extends GetxController {
         detailsOfInjuredPersonItems.add(item);
       });
 
+        ///Details of Injured other Person for update
+      List<DetailsOfOtherInjuredPerson> detailsOfOtherInjuredPersonItems = [];
+      rowOtherInjuredPersonItem.forEach((element) {
+        DetailsOfOtherInjuredPerson item = DetailsOfOtherInjuredPerson(
+          Otherinjured_item_id:
+              dropdownVictimNameMapperData[element[0]["value"]]?.id,
+          incidents_id: irId.value,
+          name: element[0]["value"],
+          other_victim: element[1]["value"] ?? '0',
+          person_type: 1,
+          age: 30,
+          sex: element[1]["value"] ?? '0',
+          designation: element[2]["value"] ?? '0',
+          address: element[3]["value"] ?? '0',
+          name_contractor: element[4]["value"],
+          body_part_and_nature_of_injury: element[5]["value"],
+          work_experience_years: int.tryParse('${element[6]["value"] ?? '0'}'),
+          plant_equipment_involved: element[7]["value"],
+          location_of_incident: element[8]["value"] ?? '0',
+        );
+
+        detailsOfOtherInjuredPersonItems.add(item);
+      });
+
       CreateIncidentReportModel updateIncidentReportModel =
           CreateIncidentReportModel(
               id: irId.value,
@@ -1938,6 +2078,7 @@ class AddIncidentReportController extends GetxController {
               immediate_correction: immediateCorrectionItems,
               proposed_action_plan: [],
               injured_person: detailsOfInjuredPersonItems,
+              Otherinjured_person:detailsOfOtherInjuredPersonItems,
               investigation_team: investigation_team_list);
 
       var updateIncidentReportJsonString = updateIncidentReportModel.toJson();
@@ -2089,6 +2230,30 @@ class AddIncidentReportController extends GetxController {
         detailsOfInjuredPersonItems.add(item);
       });
 
+       ///Details of Other Injured Person for update
+      List<DetailsOfOtherInjuredPerson> detailsOfOtherInjuredPersonItems = [];
+      rowOtherInjuredPersonItem.forEach((element) {
+        DetailsOfOtherInjuredPerson item = DetailsOfOtherInjuredPerson(
+          Otherinjured_item_id:
+              dropdownVictimNameMapperData[element[0]["value"]]?.id,
+          incidents_id: irId.value,
+          name: element[0]["value"],
+          other_victim: element[1]["value"] ?? '0',
+          person_type: 1,
+          age: 30,
+          sex: element[1]["value"] ?? '0',
+          designation: element[3]["value"] ?? '0',
+          address: element[4]["value"] ?? '0',
+          name_contractor: element[5]["value"],
+          body_part_and_nature_of_injury: element[6]["value"],
+          work_experience_years: int.tryParse('${element[7]["value"] ?? '0'}'),
+          plant_equipment_involved: element[8]["value"],
+          location_of_incident: element[9]["value"] ?? '0',
+        );
+
+        detailsOfOtherInjuredPersonItems.add(item);
+      });
+
       CreateIncidentReportModel updateIncidentReportModel =
           CreateIncidentReportModel(
               id: irId.value,
@@ -2147,6 +2312,7 @@ class AddIncidentReportController extends GetxController {
               immediate_correction: immediateCorrectionItems,
               proposed_action_plan: proposedActionItems,
               injured_person: detailsOfInjuredPersonItems,
+              Otherinjured_person:detailsOfOtherInjuredPersonItems,
               investigation_team: investigation_team_list);
 
       var updateIncidentReportJsonString = updateIncidentReportModel.toJson();
@@ -2168,3 +2334,6 @@ class AddIncidentReportController extends GetxController {
     print('Argument$id');
   }
 }
+
+
+

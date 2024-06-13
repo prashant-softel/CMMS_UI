@@ -125,6 +125,9 @@ abstract class Routes {
   static const createMrs = _Paths.createMrs;
   static const incidentRiskType = _Paths.incidentRiskType;
   static const StatutoryCompliance = _Paths.StatutoryCompliance;
+  static const ComplianceStatus = _Paths.ComplianceStatus;
+
+  
   static const documentUploadScreen = _Paths.documentUploadScreen;
   static const viewComplianceScreen = _Paths.viewComplianceScreen;
 
@@ -349,6 +352,8 @@ abstract class _Paths {
   static const createMrs = '/Create-mrs';
   static const incidentRiskType = '/Incident-Risk-Type';
   static const StatutoryCompliance = '/Statutory-Compliance';
+  static const ComplianceStatus = '/Compliance-Status';
+
   static const documentUploadScreen = '/documentUploadScreen';
   static const viewComplianceScreen = '/viewComplianceScreen';
 

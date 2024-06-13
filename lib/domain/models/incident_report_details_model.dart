@@ -168,6 +168,7 @@ class IncidentReportDetailsModel {
   int? is_why_why_required;
   int? is_investigation_required;
   List<DetailsOfInjuredPersonUpdate?>? injured_person;
+  List<DetailsOfOtherInjuredPersonUpdate?>? Otherinjured_person;
   List<FileList?>? fileList;
 
   // List<ExternalsEmailsList?>? externalEmails;
@@ -433,6 +434,73 @@ class DetailsOfInjuredPersonUpdate {
         "location_of_incident": location_of_incident
       };
 }
+// Details Of Other injured Person
+class DetailsOfOtherInjuredPersonUpdate {
+  DetailsOfOtherInjuredPersonUpdate(
+      {this.incidents_id,
+      this.name,
+      this.person_type,
+      this.age,
+      this.sex,
+      this.gender,
+      this.designation,
+      this.address,
+      this.name_contractor,
+      this.body_part_and_nature_of_injury,
+      this.work_experience_years,
+      this.plant_equipment_involved,
+      this.location_of_incident});
+
+  int? incidents_id;
+  String? name;
+  int? person_type;
+  int? age;
+  int? sex;
+  String? gender;
+  String? designation;
+  String? address;
+  String? name_contractor;
+  String? body_part_and_nature_of_injury;
+  int? work_experience_years;
+  String? plant_equipment_involved;
+  String? location_of_incident;
+
+  factory DetailsOfOtherInjuredPersonUpdate.fromJson(Map<String, dynamic> json) =>
+      DetailsOfOtherInjuredPersonUpdate(
+        incidents_id: json['incidents_id'],
+        name: json['name'],
+        person_type: json['person_type'],
+        age: json['age'],
+        sex: json['sex'],
+        gender: json['gender_name'],
+        designation: json['designation'],
+        address: json['address'],
+        name_contractor: json["name_contractor"],
+        body_part_and_nature_of_injury: json['body_part_and_nature_of_injury'],
+        work_experience_years: json['work_experience_years'],
+        plant_equipment_involved: json['plant_equipment_involved'],
+        location_of_incident: json['location_of_incident'],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "incidents_id": incidents_id,
+        "name": name,
+        "person_type": person_type,
+        "age": age,
+        "sex": sex,
+        "gender_name": gender,
+        "designation": designation,
+        "address": address,
+        "name_contractor": name_contractor,
+        "body_part_and_nature_of_injury": body_part_and_nature_of_injury,
+        "work_experience_years": work_experience_years,
+        "plant_equipment_involved": plant_equipment_involved,
+        "location_of_incident": location_of_incident
+      };
+}
+
+
+
 
 //Investigation team
 class InvestigationTeamUpdate {

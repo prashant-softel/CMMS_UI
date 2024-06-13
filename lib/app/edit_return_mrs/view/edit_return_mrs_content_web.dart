@@ -61,10 +61,17 @@ class EditMrsReturnContentWeb extends GetView<EditMrsReturnController> {
                           Get.offNamed(Routes.stockManagementDashboardScreen);
                         },
                         child: Text(" / STOCK MANAGEMENT ",
-                            style: Styles.greyMediumLight12),
+                            style: Styles.greyLight14),
+                      ),
+                      InkWell(
+                        onTap: () {
+                          Get.offNamed(Routes.returnMrsList);
+                        },
+                        child: Text(" / RETURN MRS LIST ",
+                            style: Styles.greyLight14),
                       ),
                       Text(" / EDIT RETURN MATERIAL SLIP ",
-                          style: Styles.greyMediumLight12)
+                          style: Styles.greyLight14)
                     ],
                   ),
                 ),

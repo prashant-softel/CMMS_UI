@@ -254,9 +254,10 @@ class AddJobController extends GetxController {
     if (selectedBlock.value == '') {
       isBlockSelected.value = false;
     }
-    if(breakdownTimeCtrlr.text == '') {
-      Fluttertoast.showToast(
-          msg: 'Breakdown time cannot be empty!');
+    if(breakdownTimeCtrlr.text.trim().length < 3) {
+      isBreakdownInvalid.value=true;
+      isFormInvalid.value=true;
+     
 
     }
     //  if (selectedBlockIdList.length < 1) {
@@ -595,7 +596,9 @@ class AddJobController extends GetxController {
       time.minute,
     );
     selectedBreakdownTime.value = dateTime;
+      isBreakdownInvalid.value = false;
     breakdownTimeCtrlr
+    
       ..text = DateFormat("dd-MM-yyyy HH:mm").format(dateTime)
       ..selection = TextSelection.fromPosition(
         TextPosition(
@@ -616,7 +619,7 @@ class AddJobController extends GetxController {
     );
 
     if (newDate == null) return null;
-
+  
     return newDate;
   }
 
