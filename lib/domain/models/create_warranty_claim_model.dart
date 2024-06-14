@@ -24,6 +24,7 @@ class CreateWarrantyClaimModel {
   String? correctiveActionByBuyer;
   String? severity;
   int? approverId;
+  int? approxdailyloss;
   String? failureTime;
 
   List<int?>? additionalEmailEmployees;
@@ -56,6 +57,7 @@ class CreateWarrantyClaimModel {
     this.supplierActions,
     this.affectedParts,
     this.status,
+    this.approxdailyloss
   });
 
   factory CreateWarrantyClaimModel.fromJson(Map<String, dynamic> json) =>
@@ -68,6 +70,7 @@ class CreateWarrantyClaimModel {
         affectedSrNo: json['affectedSrNo'],
         costOfReplacement: json['costOfReplacement'],
         currencyId: json['currencyId'],
+        approxdailyloss: json['approxdailyloss'],
         severity: json['severity'],
         requestToSupplier: json['requestToSupplier'],
         warrantyStartAt: json['warrantyStartAt'],
@@ -105,6 +108,7 @@ class CreateWarrantyClaimModel {
         "severity": severity,
         "costOfReplacement": costOfReplacement,
         "currencyId": currencyId,
+        "approxdailyloss": approxdailyloss,
         "requestToSupplier": requestToSupplier,
         "warrantyStartAt": warrantyStartAt,
         "warrantyEndAt": warrantyEndAt,

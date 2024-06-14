@@ -220,6 +220,7 @@ class WarrantyClaimController extends GetxController {
   final orderReferenceNoTextController = TextEditingController();
   final affectedSerialNoTextController = TextEditingController();
   final manufacturerNameTextController = TextEditingController();
+  final approxdailylosstxtcontroller = TextEditingController();
 
   final blockTextController = TextEditingController();
   final parentEquipmentTextController = TextEditingController();
@@ -932,6 +933,8 @@ class WarrantyClaimController extends GetxController {
 
       int costOfReplacement =
           int.parse(costOfReplacementTextController.text.trim());
+      int approxdailyloss =
+          int.parse(approxdailylosstxtcontroller.text.trim());
 
       // int? sopFileId = createSOPModel2.sop_fileId;
       // // int? jsaFileId = data.jsa_fileId;
@@ -946,6 +949,7 @@ class WarrantyClaimController extends GetxController {
 
       supplierActions.forEach((e) {
         supplier_action_list.add(SupplierActions(
+          srNumber: e.srNumber,
           name: e.name,
           required_by_date: e.required_by_date,
           // is_required: e.is_required
@@ -969,6 +973,7 @@ class WarrantyClaimController extends GetxController {
               affectedSrNo: _affectedSerialNo,
               costOfReplacement: costOfReplacement,
               currencyId: selectedCurrencyId,
+              approxdailyloss:approxdailyloss,
               severity: selectedSeverity.value,
               warrantyStartAt: warrantyStartDateTimeCtrlrWebBuffer,
               warrantyEndAt: warrantyEndDateTimeCtrlrWebBuffer,
