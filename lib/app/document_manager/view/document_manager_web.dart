@@ -204,6 +204,7 @@ class DocumentManagerWeb extends GetView<DocumentManagerController> {
                                             columns: [
                                               "Document ID ",
                                               "Document Type",
+                                              "Re- New Date",
                                               "Status",
                                               "Action"
                                             ].map((column) {
@@ -231,7 +232,7 @@ class DocumentManagerWeb extends GetView<DocumentManagerController> {
                                                   return [
                                                     '${userListModelListDetails?.user_name}',
                                                     '${userListModelListDetails?.role_name}',
-                                                    // '${userListModelListDetails?.contact_no}',
+                                                    '${userListModelListDetails?.contact_no}',
                                                     '${userListModelListDetails?.status}',
                                                     "Action"
                                                   ];
