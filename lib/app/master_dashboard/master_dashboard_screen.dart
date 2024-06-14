@@ -1058,7 +1058,24 @@ class MastersDashboard extends GetView<MastersController> {
                                                         .goToDocumentManager();
                                                   });
                                             })))
-                                          : Dimens.box0
+                                          : Dimens.box0,
+                                      varUserAccessModel.value.access_list!
+                                                  .where((e) =>
+                                                      e.feature_id ==
+                                                          UserAccessConstants
+                                                              .kMasterFeatureId &&
+                                                      e.view ==
+                                                          UserAccessConstants
+                                                              .kHaveViewAccess)
+                                                  .length >
+                                              0
+                                          ? _inventoryList(
+                                              tittle: "Document Type",
+                                              ontap: () {
+                                                Get.toNamed(
+                                                    Routes.DocumentMaster);
+                                              })
+                                          : Dimens.box0,
                                     ],
                                   ),
                                   Container(
@@ -1309,7 +1326,7 @@ class MastersDashboard extends GetView<MastersController> {
                                                     Routes.incidentRiskType);
                                               })
                                           : Dimens.box0,
-                                            varUserAccessModel.value.access_list!
+                                      varUserAccessModel.value.access_list!
                                                   .where((e) =>
                                                       e.feature_id ==
                                                           UserAccessConstants
@@ -1319,15 +1336,14 @@ class MastersDashboard extends GetView<MastersController> {
                                                               .kHaveViewAccess)
                                                   .length >
                                               0
-                                           ? _inventoryList(
+                                          ? _inventoryList(
                                               tittle: "Statutory Compliance",
                                               ontap: () {
                                                 Get.toNamed(
                                                     Routes.StatutoryCompliance);
                                               })
                                           : Dimens.box0,
-
-                                            varUserAccessModel.value.access_list!
+                                      varUserAccessModel.value.access_list!
                                                   .where((e) =>
                                                       e.feature_id ==
                                                           UserAccessConstants
@@ -1337,28 +1353,11 @@ class MastersDashboard extends GetView<MastersController> {
                                                               .kHaveViewAccess)
                                                   .length >
                                               0
-                                           ? _inventoryList(
+                                          ? _inventoryList(
                                               tittle: "Compliance Status",
                                               ontap: () {
                                                 Get.toNamed(
                                                     Routes.ComplianceStatus);
-                                              })
-                                          : Dimens.box0,
-                                             varUserAccessModel.value.access_list!
-                                                  .where((e) =>
-                                                      e.feature_id ==
-                                                          UserAccessConstants
-                                                              .kMasterFeatureId &&
-                                                      e.view ==
-                                                          UserAccessConstants
-                                                              .kHaveViewAccess)
-                                                  .length >
-                                              0
-                                           ? _inventoryList(
-                                              tittle: "Document",
-                                              ontap: () {
-                                                Get.toNamed(
-                                                    Routes.DocumentMaster);
                                               })
                                           : Dimens.box0,
                                     ],

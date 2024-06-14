@@ -92,7 +92,7 @@ class DocumentManagerWeb extends GetView<DocumentManagerController> {
                               icon: Icons.add,
                               label: "Upload Document",
                               onPressed: () {
-                                Get.offNamed(Routes.addUser);
+                                Get.offNamed(Routes.documentUploadScreen);
                               },
                               color: ColorValues.addNewColor,
                             ),
@@ -203,8 +203,7 @@ class DocumentManagerWeb extends GetView<DocumentManagerController> {
                                                 controller.paginationController,
                                             columns: [
                                               "Document ID ",
-                                              "Site Name",
-                                              "Category Name",
+                                              "Document Type",
                                               "Status",
                                               "Action"
                                             ].map((column) {
@@ -232,7 +231,7 @@ class DocumentManagerWeb extends GetView<DocumentManagerController> {
                                                   return [
                                                     '${userListModelListDetails?.user_name}',
                                                     '${userListModelListDetails?.role_name}',
-                                                    '${userListModelListDetails?.contact_no}',
+                                                    // '${userListModelListDetails?.contact_no}',
                                                     '${userListModelListDetails?.status}',
                                                     "Action"
                                                   ];
