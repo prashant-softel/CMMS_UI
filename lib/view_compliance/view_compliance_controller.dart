@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:cmms/app/home/home_controller.dart';
+import 'package:cmms/domain/models/Compliance_Status_model.dart';
 import 'package:cmms/domain/models/Statutory_Compliance_model.dart';
 import 'package:cmms/domain/models/comment_model.dart';
 import 'package:cmms/domain/models/createStatutory_model.dart';
@@ -40,7 +41,12 @@ class ViewComplianceController extends GetxController {
   var issueDateTc = TextEditingController();
   var expireOnDateTc = TextEditingController();
   var commentsCtrl = TextEditingController();
+  Rx<String> selectedStatusOfAplication = ''.obs;
+  RxList<ComplianceStatusModel?> statusOfAplicationList =
+      <ComplianceStatusModel>[].obs;
 
+  int selectedStatusOfAplicationId = 0;
+  Rx<bool> isStatusOfAplicationSelected = true.obs;
   int paidId = 0;
   int facilityId = 0;
   RxBool showAdditionalColumn = false.obs;
@@ -93,6 +99,8 @@ class ViewComplianceController extends GetxController {
       getStatutoryById.value = _getStatutoryDetail;
       selectedStatutoryCompliance.value =
           getStatutoryById.value?.compilanceName ?? '';
+      selectedStatusOfAplication.value =
+          getStatutoryById.value?.status_of_application ?? '';
 
       issueDateTc.text = getStatutoryById.value?.created_at ?? '';
       expireOnDateTc.text = getStatutoryById.value?.end_date ?? "";
@@ -187,6 +195,21 @@ class ViewComplianceController extends GetxController {
           }
         }
         break;
+      case RxList<ComplianceStatusModel>:
+        {
+          if (value != "Please Select") {
+            int statusIndex =
+                statusOfAplicationList.indexWhere((x) => x?.name == value);
+            selectedStatusOfAplicationId =
+                statusOfAplicationList[statusIndex]?.id ?? 0;
+            selectedStatusOfAplication.value = value;
+            isStatusOfAplicationSelected.value = true;
+            print(
+                "selectedBusinessTypeId: ${selectedStatusOfAplicationId} \n ${selectedStatusOfAplication}");
+          } else {
+            selectedStatusOfAplicationId = 0;
+          }
+        }
     }
   }
 }

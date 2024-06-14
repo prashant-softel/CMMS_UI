@@ -10,6 +10,7 @@ class GetStatutoryById {
   int? facility_id;
   int? compliance_id;
   String? compilanceName;
+  String? status_of_application;
   String? start_date;
   String? end_date;
   int? status_id;
@@ -36,6 +37,7 @@ class GetStatutoryById {
       {this.id,
       this.activation_status,
       this.approvedByName,
+      this.status_of_application,
       this.approved_at,
       this.approved_by,
       this.compilanceName,
@@ -66,6 +68,7 @@ class GetStatutoryById {
       facility_id: json['facility_id'],
       compliance_id: json['compliance_id'],
       compilanceName: json['compilanceName'],
+      status_of_application: json['status_of_application'],
       start_date: json['start_date'],
       end_date: Utility.getFormatedyearMonthDay(json['end_date']),
       status_id: json['status_id'],

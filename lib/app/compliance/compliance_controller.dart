@@ -127,7 +127,8 @@ class ComplianceController extends GetxController {
       getStatutoryById.value = _getStatutoryDetail;
       selectedStatutoryCompliance.value =
           getStatutoryById.value?.compilanceName ?? '';
-
+      selectedStatusOfAplication.value =
+          getStatutoryById.value?.status_of_application ?? '';
       issueDateTc.text = getStatutoryById.value?.created_at ?? '';
       expireOnDateTc.text = getStatutoryById.value?.end_date ?? "";
       commentsCtrl.text = getStatutoryById.value?.description ?? "";
@@ -207,7 +208,7 @@ class ComplianceController extends GetxController {
           expires_on: _expireOnDateTc,
           renewFlag: 0,
           renew_date: "",
-          status_of_aplication_id: 1);
+          status_of_aplication_id: selectedStatusOfAplicationId);
 
       // Convert the CreateStatutoryModel instance to JSON
       var createComplianceModelJsonString = createStatutoryModel.toJson();
@@ -250,7 +251,7 @@ class ComplianceController extends GetxController {
           expires_on: _expireOnDateTc,
           renewFlag: 0,
           renew_date: "",
-          status_of_aplication_id: 1);
+          status_of_aplication_id: selectedStatusOfAplicationId);
 
       // Convert the CreateStatutoryModel instance to JSON
       var createComplianceModelJsonString = createStatutoryModel.toJson();

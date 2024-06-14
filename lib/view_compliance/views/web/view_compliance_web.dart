@@ -168,6 +168,10 @@ class _ViewComplianceWebState extends State<ViewComplianceWeb> {
                                                       "Validity In Month:",
                                                       "${controller.getStatutoryById.value!.validity_month == null ? "" : controller.getStatutoryById.value!.validity_month}",
                                                     ),
+                                                    TitleAndInfo(
+                                                      "description:",
+                                                      "${controller.getStatutoryById.value!.description == null ? "" : controller.getStatutoryById.value!.description}",
+                                                    ),
                                                   ],
                                                 ),
                                               ),
@@ -194,16 +198,15 @@ class _ViewComplianceWebState extends State<ViewComplianceWeb> {
                                                       "Days Left:",
                                                       "${controller.getStatutoryById.value!.daysLeft == null ? "" : controller.getStatutoryById.value!.daysLeft}",
                                                     ),
+                                                    TitleAndInfo(
+                                                      "Status Of Aplication:",
+                                                      "${controller.getStatutoryById.value!.status_of_application == null ? "" : controller.getStatutoryById.value!.status_of_application}",
+                                                    ),
                                                   ],
                                                 ),
                                               ),
                                               Spacer(),
                                             ],
-                                          ),
-                                          Dimens.boxHeight10,
-                                          TitleAndInfo(
-                                            "description:",
-                                            "${controller.getStatutoryById.value!.description == null ? "" : controller.getStatutoryById.value!.description}",
                                           ),
                                           Dimens.boxHeight20,
                                           (controller.historyList != null &&
