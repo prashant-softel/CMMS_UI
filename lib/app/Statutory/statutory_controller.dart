@@ -180,6 +180,7 @@ class StatutoryController extends GetxController {
 
   void clearStoreData() {
     statutoryPresenter.clearValue();
+    statutoryPresenter.clearComplianceValue();
   }
 
   void onValueChanged(dynamic list, dynamic value) {

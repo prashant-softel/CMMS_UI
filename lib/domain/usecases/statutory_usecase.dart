@@ -25,4 +25,7 @@ class StatutoryUsecase {
   }
 
   void clearValue() async => repository.clearData(LocalKeys.srId);
+  void clearComplianceValue() async => repository.clearData(
+        LocalKeys.compliance_id,
+      );
 }

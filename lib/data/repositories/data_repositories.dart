@@ -5524,6 +5524,57 @@ class DataRepository extends DomainRepository {
         ComplianceStatus_id: ComplianceStatus_id);
     return response;
   }
+   // DocumentMaster
+  //get
+  Future<ResponseModel> getDocumentMaster({
+    required bool isLoading,
+    required String auth,
+  }) async {
+    return await connectHelper.getDocumentMaster(
+      isLoading: isLoading,
+      auth: auth,
+    );
+  }
+
+  //create
+  Future<ResponseModel> createDocumentMaster({
+    auth,
+    bool? isLoading,
+    DocumentMasterJsonString,
+  }) async {
+    var response = await connectHelper.createDocumentMaster(
+        auth: auth,
+        isLoading: isLoading,
+        DocumentMasterJsonString: DocumentMasterJsonString);
+    return response;
+  }
+
+  //update
+  Future<ResponseModel> updateDocumentMaster({
+    auth,
+    bool? isLoading,
+    DocumentMasterJsonString,
+  }) async {
+    var response = await connectHelper.updateDocumentMaster(
+      auth: auth,
+      isLoading: isLoading,
+      DocumentMasterJsonString: DocumentMasterJsonString,
+    );
+    return response;
+  }
+
+  //delete
+  Future<ResponseModel> deleteDocumentMaster({
+    auth,
+    bool? isLoading,
+    DocumentMaster_id,
+  }) async {
+    var response = await connectHelper.deleteDocumentMaster(
+        auth: auth,
+        isLoading: isLoading,
+        DocumentMaster_id: DocumentMaster_id);
+    return response;
+  }
 
   Future<ResponseModel> getStatutoryHistory({
     required String auth,
