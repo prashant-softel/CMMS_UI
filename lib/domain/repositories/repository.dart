@@ -9,6 +9,7 @@ import 'package:cmms/domain/models/attendance_model.dart';
 import 'package:cmms/domain/models/complicance_history_model.dart';
 import 'package:cmms/domain/models/course_category_model.dart';
 import 'package:cmms/domain/models/dashboard_model.dart';
+import 'package:cmms/domain/models/documentmaster_model.dart';
 import 'package:cmms/domain/models/dsm_list_model.dart';
 import 'package:cmms/domain/models/escalation_matrix_list_model.dart';
 import 'package:cmms/domain/models/get_mc_task_equipment_model.dart';
@@ -2607,6 +2608,32 @@ class Repository {
         var statutoryComplianceList =
             statutoryComplianceModelFromJson(res.data);
         return statutoryComplianceList;
+      }
+      return [];
+    } catch (error) {
+      log(error.toString());
+      return [];
+    }
+  }
+
+  Future<List<ComplianceStatusModel>> statusOfAplication({
+    required int? facilityId,
+    required bool isLoading,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+
+      log(auth);
+      final res = await _dataRepository.statusOfAplication(
+        facilityId: facilityId,
+        isLoading: isLoading,
+        auth: auth,
+      );
+      print('Unit Compliance Status Data: ${res.data}');
+
+      if (!res.hasError) {
+        var statusOfAplicationList = ComplianceStatusModelFromJson(res.data);
+        return statusOfAplicationList;
       }
       return [];
     } catch (error) {
@@ -14478,6 +14505,7 @@ class Repository {
       print(error.toString());
     }
   }
+
   //Compliance Status
   //get
   Future<List<ComplianceStatusModel>> getComplianceStatus({
@@ -14571,6 +14599,105 @@ class Repository {
       } else {
         Utility.showDialog(
             res.errorCode.toString(), 'delete ComplianceStatus ');
+      }
+    } catch (error) {
+      print(error.toString());
+    }
+  }
+
+  //Document Master
+  //get
+  Future<List<DocumentMasterModel>> getDocumentMaster({
+    required bool isLoading,
+    int? job_type_id,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+
+      log(auth);
+      final res = await _dataRepository.getDocumentMaster(
+        isLoading: isLoading,
+        auth: auth,
+      );
+      print('Compliance Status ${res.data}');
+
+      if (!res.hasError) {
+        var Sourcetype = DocumentMasterModelFromJson(res.data);
+        return Sourcetype;
+      }
+      return [];
+    } catch (error) {
+      log(error.toString());
+      return [];
+    }
+  }
+
+  //create
+  Future<bool> createDocumentMaster(
+      {bool? isLoading, DocumentMasterJsonString}) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.createDocumentMaster(
+          auth: auth,
+          isLoading: isLoading,
+          DocumentMasterJsonString: DocumentMasterJsonString);
+
+      if (!res.hasError) {
+        return true;
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString(), ' createDocumentMaster');
+        return false;
+      }
+    } catch (error) {
+      print(error.toString());
+      return false;
+    }
+  }
+
+  //update
+  Future<bool> updateDocumentMaster({
+    bool? isLoading,
+    DocumentMasterJsonString,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.updateDocumentMaster(
+        auth: auth,
+        isLoading: isLoading,
+        DocumentMasterJsonString: DocumentMasterJsonString,
+      );
+      print(res.data);
+      if (!res.hasError) {
+        return true;
+      } //
+      else {
+        Utility.showDialog(
+            res.errorCode.toString(), 'Update Document Master');
+        return false;
+      }
+    } catch (error) {
+      print(error.toString());
+      return false;
+    }
+  }
+
+  //delete
+  Future<void> deleteDocumentMaster(
+      Object DocumentMaster_id, bool isLoading) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.deleteDocumentMaster(
+        auth: auth,
+        DocumentMaster_id: DocumentMaster_id,
+        isLoading: isLoading,
+      );
+
+      if (!res.hasError) {
+        //get delete response back from API
+      } else {
+        Utility.showDialog(
+            res.errorCode.toString(), 'delete DocumentMaster ');
       }
     } catch (error) {
       print(error.toString());

@@ -311,14 +311,14 @@ class _ComplianceWebState extends State<ComplianceWeb> {
                                                                     5,
                                                                 dropdownList:
                                                                     controller
-                                                                        .statutoryComplianceList,
+                                                                        .statusOfAplicationList,
                                                                 isValueSelected:
                                                                     controller
-                                                                        .isStatutoryComplianceSelected
+                                                                        .isStatusOfAplicationSelected
                                                                         .value,
                                                                 selectedValue:
                                                                     controller
-                                                                        .selectedStatutoryCompliance
+                                                                        .selectedStatusOfAplication
                                                                         .value,
                                                                 onValueChanged:
                                                                     controller

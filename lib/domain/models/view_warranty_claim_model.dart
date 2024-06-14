@@ -13,11 +13,13 @@ String viewWarrantyClaimDetailModelToJson(ViewWarrantyClaimModel data) =>
 class ViewWarrantyClaimModel {
   ViewWarrantyClaimModel({
     this.wc_id,
+    this.approxdailyloss,
     this.facility_id,
     this.facility_name,
     this.site_wc_number,
     this.warranty_claim_title,
-    this.date_of_claim,
+    this.wstart_date,
+    this.wend_date,
     this.equipment_category,
     this.equipment_name,
     this.equipment_sr_no,
@@ -46,14 +48,17 @@ class ViewWarrantyClaimModel {
     this.additionalEmailEmployees,
     this.externalEmails,
     this.supplierActions,
+    this.severity
   });
 
   int? wc_id;
+  int? approxdailyloss;
   int? facility_id;
   String? facility_name;
   int? site_wc_number;
   String? warranty_claim_title;
-  DateTime? date_of_claim;
+  DateTime? wstart_date;
+  DateTime? wend_date;
   String? equipment_category;
   String? equipment_name;
   String? equipment_sr_no;
@@ -61,6 +66,7 @@ class ViewWarrantyClaimModel {
   String? good_order_id;
   String? order_reference_number;
   String? warranty_description;
+  String? severity;
 
   String? affected_sr_no;
   DateTime? failure_time;
@@ -88,13 +94,18 @@ class ViewWarrantyClaimModel {
   factory ViewWarrantyClaimModel.fromJson(Map<String, dynamic> json) =>
       ViewWarrantyClaimModel(
         wc_id: json["wc_id"],
+        approxdailyloss: json["approxdailyloss"],
+        severity: json["severity"],
         facility_id: json["facility_id"],
         facility_name: json["facility_name"],
         site_wc_number: json['site_wc_number'],
         warranty_claim_title: json["warranty_claim_title"],
-        date_of_claim: json['date_of_claim'] == null
+        wstart_date: json['warrantyStartDate'] == null
             ? null
-            : DateTime.parse(json['date_of_claim'] as String),
+            : DateTime.parse(json['warrantyStartDate'] as String),
+        wend_date: json['warrantyEndDate'] == null
+            ? null
+            : DateTime.parse(json['warrantyEndDate'] as String),
         equipment_category: json["equipment_category"],
         equipment_name: json["equipment_name"],
         equipment_sr_no: json["equipment_sr_no"],
@@ -145,11 +156,14 @@ class ViewWarrantyClaimModel {
 
   Map<String, dynamic> toJson() => {
         "wc_id": wc_id,
+        "approxdailyloss": approxdailyloss,
+        "severity": severity,
         "facility_id": facility_id,
         "facility_name": facility_name,
         "site_wc_number": site_wc_number,
         "warranty_claim_title": warranty_claim_title,
-        "date_of_claim": date_of_claim?.toIso8601String(),
+        "warrantyStartDate": wstart_date?.toIso8601String(),
+        "warrantyEndDate": wend_date?.toIso8601String(),
         "equipment_category": equipment_category,
         "equipment_name": equipment_name,
         "equipment_sr_no": equipment_sr_no,
@@ -247,23 +261,27 @@ class AffectedParts {
 
 class SuppliersActionsList {
   SuppliersActionsList({
+    this.srNumber,
     this.name,
     this.is_required,
     this.required_by_date,
   });
 
+  String? srNumber;
   String? name;
   int? is_required;
   String? required_by_date;
 
   factory SuppliersActionsList.fromJson(Map<String, dynamic> json) =>
       SuppliersActionsList(
+        srNumber: json["srNumber"],
         name: json["name"],
         is_required: json["is_required"],
         required_by_date: json["required_by_date"],
       );
 
   Map<String, dynamic> toJson() => {
+        "srNumber": srNumber,
         "name": name,
         "is_required": is_required,
         "required_by_date": required_by_date,
