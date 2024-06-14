@@ -571,6 +571,8 @@ class NewWarrantyClaimWeb extends GetView<WarrantyClaimController> {
                                                     CustomTextField(
                                                       label:
                                                           'Approximate Daily Loss: ',
+                                                      numberTextField: true,
+                                                      textController: controller.approxdailylosstxtcontroller,
                                                     ),
                                                     Row(
                                                       mainAxisAlignment:
@@ -1627,21 +1629,21 @@ class NewWarrantyClaimWeb extends GetView<WarrantyClaimController> {
       return;
     }
 
-    final time = await pickTime2_web(context);
-    if (time == null) {
-      return;
-    }
+    // final time = await pickTime2_web(context);
+    // if (time == null) {
+    //   return;
+    // }
 
     dateTime = DateTime(
       date.year,
       date.month,
       date.day,
-      time.hour,
-      time.minute,
+      // time.hour,
+      // time.minute,
     );
     controller.selectedWarrantyStartDateTime.value = dateTime;
     controller.warrantyStartDateTimeCtrlrWeb
-      ..text = DateFormat('yyyy-MM-dd HH:mm').format(dateTime)
+      ..text = DateFormat('yyyy-MM-dd').format(dateTime)
       ..selection = TextSelection.fromPosition(
         TextPosition(
           offset: controller.warrantyStartDateTimeCtrlrWeb.text.length,
@@ -1699,21 +1701,21 @@ class NewWarrantyClaimWeb extends GetView<WarrantyClaimController> {
       return;
     }
 
-    final time = await pickTime3_web(context);
-    if (time == null) {
-      return;
-    }
+    // final time = await pickTime3_web(context);
+    // if (time == null) {
+    //   return;
+    // }
 
     dateTime = DateTime(
       date.year,
       date.month,
       date.day,
-      time.hour,
-      time.minute,
+      // time.hour,
+      // time.minute,
     );
     controller.selectedWarrantyEndDateTime.value = dateTime;
     controller.warrantyEndDateTimeCtrlrWeb
-      ..text = DateFormat('yyyy-MM-dd HH:mm').format(dateTime)
+      ..text = DateFormat('yyyy-MM-dd').format(dateTime)
       ..selection = TextSelection.fromPosition(
         TextPosition(
           offset: controller.warrantyEndDateTimeCtrlrWeb.text.length,

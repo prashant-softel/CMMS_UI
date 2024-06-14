@@ -13,7 +13,7 @@ class ViewVegPlanUsecase {
   }) async =>
       await repository.getVegPlanDetail(
         planId: planId,
-        facilityId:facilityId,
+        facilityId: facilityId,
         isLoading: isLoading ?? false,
       );
   Future<Map<String, dynamic>> vegPlanApprovedButton({
@@ -51,5 +51,12 @@ class ViewVegPlanUsecase {
       await repository.vegPlanRejectButton(
         vegRejectJsonString,
         isLoading,
+      );
+  void saveValue({String? vegid}) async =>
+      repository.saveValue(LocalKeys.vegid, vegid);
+  Future<String?> getValue() async =>
+      await repository.getStringValue(LocalKeys.vegid);
+  void clearValue() async => repository.clearData(
+        LocalKeys.vegid,
       );
 }

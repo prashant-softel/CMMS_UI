@@ -204,6 +204,18 @@ class DataRepository extends DomainRepository {
     );
   }
 
+  Future<ResponseModel> statusOfAplication({
+    int? facilityId,
+    required bool isLoading,
+    required String auth,
+  }) async {
+    return await connectHelper.statusOfAplication(
+      isLoading: isLoading,
+      auth: auth,
+      facilityId: facilityId,
+    );
+  }
+
   Future<ResponseModel> getTypeOfWaterList({
     int? facilityId,
     required bool isLoading,
@@ -1920,15 +1932,16 @@ class DataRepository extends DomainRepository {
         createGo: createGo,
         isLoading: isLoading ?? false,
       );
-  Future<ResponseModel> createCompliance({
-    required String auth,
-    createCompliance,
-    bool? isLoading,
-  }) async =>
+  Future<ResponseModel> createCompliance(
+          {required String auth,
+          createCompliance,
+          bool? isLoading,
+          int? position}) async =>
       await connectHelper.createCompliance(
         auth: auth,
         createCompliance: createCompliance,
         isLoading: isLoading ?? false,
+        position: position,
       );
   Future<ResponseModel> createWaterData({
     required String auth,
@@ -4735,6 +4748,18 @@ class DataRepository extends DomainRepository {
         vegRejectJsonString: vegRejectJsonString,
         isLoading: isLoading ?? false,
       );
+  Future<ResponseModel> deleteVegPlan({
+    required String auth,
+    bool? isLoading,
+    required int planId,
+  }) async {
+    var response = await connectHelper.deleteVegPlan(
+      auth: auth,
+      isLoading: isLoading,
+      planId: planId,
+    );
+    return response;
+  }
 
   Future<ResponseModel> deleteUser({
     auth,
@@ -5447,7 +5472,8 @@ class DataRepository extends DomainRepository {
         StatutoryCompliance_id: StatutoryCompliance_id);
     return response;
   }
-   // Compliance Status
+
+  // Compliance Status
   //get
   Future<ResponseModel> getComplianceStatus({
     required bool isLoading,
@@ -5548,6 +5574,18 @@ class DataRepository extends DomainRepository {
         isLoading: isLoading,
         DocumentMaster_id: DocumentMaster_id);
     return response;
+  }
+
+  Future<ResponseModel> getStatutoryHistory({
+    required String auth,
+    required int compliance_id,
+    required bool isLoading,
+  }) async {
+    return await connectHelper.getStatutoryHistory(
+      auth: auth,
+      compliance_id: compliance_id,
+      isLoading: isLoading,
+    );
   }
 //end
 }

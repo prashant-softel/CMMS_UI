@@ -581,32 +581,40 @@ class StatutoryListDataSource extends DataTableSource {
                               }
                             },
                           ),
-                          TableActionButton(
-                            color: Color.fromARGB(255, 116, 78, 130),
-                            icon: Icons.ads_click,
-                            message: 'Re-New',
-                            onPress: () {
-                              controller.clearStoreData();
-                              int srId = StatutoryListDetails?.id ?? 0;
-                              if (srId != 0) {
-                                Get.toNamed(
-                                  Routes.complianceScreen,
-                                  arguments: {
-                                    'srId': StatutoryListDetails?.id,
+                          StatutoryListDetails?.activation_status == 'inactive'
+                              ? TableActionButton(
+                                  color: Color.fromARGB(255, 116, 78, 130),
+                                  icon: Icons.ads_click,
+                                  message: 'Re-New',
+                                  onPress: () {
+                                    controller.clearStoreData();
+                                    int srId = StatutoryListDetails?.id ?? 0;
+                                    int reNew = 1;
+                                    if (srId != 0) {
+                                      Get.toNamed(
+                                        Routes.complianceScreen,
+                                        arguments: {
+                                          'srId': StatutoryListDetails?.id,
+                                          'reNew': reNew,
+                                        },
+                                      );
+                                    }
                                   },
-                                );
-                              }
-                            },
-                          ),
+                                )
+                              : Dimens.box0,
                           TableActionButton(
                             color: Color.fromARGB(255, 120, 110, 123),
                             icon: Icons.history,
-                            message: 'Hostory',
-                            // onPress: () {
-                            //   Get.toNamed(
-                            //     Routes.complianceHistoryScreen,
-                            //   );
-                            // },
+                            message: 'History',
+                            onPress: () {
+                              Get.toNamed(
+                                Routes.complianceHistoryScreen,
+                                arguments: {
+                                  "compliance_id":
+                                      StatutoryListDetails?.compliance_id
+                                },
+                              );
+                            },
                           ),
                         ],
                       )

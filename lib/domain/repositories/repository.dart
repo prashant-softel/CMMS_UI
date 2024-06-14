@@ -6,6 +6,7 @@ import 'package:cmms/domain/models/Compliance_Status_model.dart';
 import 'package:cmms/domain/models/Statutory_Compliance_model.dart';
 import 'package:cmms/domain/models/attendance_list_model.dart';
 import 'package:cmms/domain/models/attendance_model.dart';
+import 'package:cmms/domain/models/complicance_history_model.dart';
 import 'package:cmms/domain/models/course_category_model.dart';
 import 'package:cmms/domain/models/dashboard_model.dart';
 import 'package:cmms/domain/models/documentmaster_model.dart';
@@ -835,15 +836,14 @@ class Repository {
   }
 
   Future<Map<String, dynamic>> createCompliance(
-    createCompliance,
-    bool? isLoading,
-  ) async {
+      createCompliance, bool? isLoading, int? position) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.createCompliance(
         auth: auth,
         createCompliance: createCompliance,
         isLoading: isLoading ?? false,
+        position: position,
       );
 
       var resourceData = res.data;
@@ -2608,6 +2608,32 @@ class Repository {
         var statutoryComplianceList =
             statutoryComplianceModelFromJson(res.data);
         return statutoryComplianceList;
+      }
+      return [];
+    } catch (error) {
+      log(error.toString());
+      return [];
+    }
+  }
+
+  Future<List<ComplianceStatusModel>> statusOfAplication({
+    required int? facilityId,
+    required bool isLoading,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+
+      log(auth);
+      final res = await _dataRepository.statusOfAplication(
+        facilityId: facilityId,
+        isLoading: isLoading,
+        auth: auth,
+      );
+      print('Unit Compliance Status Data: ${res.data}');
+
+      if (!res.hasError) {
+        var statusOfAplicationList = ComplianceStatusModelFromJson(res.data);
+        return statusOfAplicationList;
       }
       return [];
     } catch (error) {
@@ -12891,6 +12917,27 @@ class Repository {
     }
   }
 
+  Future<void> deleteVegPlan({
+    bool? isLoading,
+    required int planId,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.deleteVegPlan(
+        auth: auth,
+        planId: planId,
+        isLoading: isLoading,
+      );
+
+      if (!res.hasError) {
+      } else {
+        Utility.showDialog(res.errorCode.toString(), 'deleteVegPlan');
+      }
+    } catch (error) {
+      print(error.toString());
+    }
+  }
+
   Future<void> deleteUser(Object user_id, bool isLoading) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
@@ -14458,6 +14505,7 @@ class Repository {
       print(error.toString());
     }
   }
+
   //Compliance Status
   //get
   Future<List<ComplianceStatusModel>> getComplianceStatus({
@@ -14653,6 +14701,32 @@ class Repository {
       }
     } catch (error) {
       print(error.toString());
+    }
+  }
+
+  Future<List<StatutoryHistory>> getStatutoryHistory({
+    required int compliance_id,
+    required bool isLoading,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+
+      log(auth);
+      final res = await _dataRepository.getStatutoryHistory(
+        auth: auth,
+        compliance_id: compliance_id,
+        isLoading: isLoading,
+      );
+      print('Compliance Status ${res.data}');
+
+      if (!res.hasError) {
+        var Sourcetype = statutoryHistoryFromJson(res.data);
+        return Sourcetype;
+      }
+      return [];
+    } catch (error) {
+      log(error.toString());
+      return [];
     }
   }
   //end

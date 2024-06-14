@@ -246,7 +246,6 @@ class viewModuleCleaningExecutionController extends GetxController {
 
   Future<void> getMCExecutionHistory(
       {required int id, required int facilityId}) async {
-    /// TODO: CHANGE THESE VALUES
     int moduleType = 82;
     // int tempModuleType = 21;
     // int id = Get.arguments;

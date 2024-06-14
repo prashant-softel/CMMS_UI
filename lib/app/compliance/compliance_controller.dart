@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:cmms/app/compliance/compliance_presenter.dart';
+import 'package:cmms/domain/models/Compliance_Status_model.dart';
 import 'package:cmms/domain/models/Statutory_Compliance_model.dart';
 import 'package:cmms/domain/models/createStatutory_model.dart';
 import 'package:cmms/domain/models/facility_model.dart';
@@ -26,12 +27,20 @@ class ComplianceController extends GetxController {
   RxList<FacilityModel?> facilityList = <FacilityModel>[].obs;
   RxList<StatutoryComplianceModel?> statutoryComplianceList =
       <StatutoryComplianceModel>[].obs;
+  RxList<ComplianceStatusModel?> statusOfAplicationList =
+      <ComplianceStatusModel>[].obs;
   RxList<HistoryModel?>? historyList = <HistoryModel?>[].obs;
 
   Rx<GetStatutoryById?> getStatutoryById = GetStatutoryById().obs;
   Rx<bool> isStatutoryComplianceSelected = true.obs;
+  Rx<bool> isStatusOfAplicationSelected = true.obs;
+
   Rx<String> selectedStatutoryCompliance = ''.obs;
+  Rx<String> selectedStatusOfAplication = ''.obs;
+
   int selectedStatutoryComplianceId = 0;
+  int selectedStatusOfAplicationId = 0;
+
   bool openIssueDatePicker = false;
   bool openExpireOnFDatePicker = false;
   bool openReNewOnDatePicker = false;
@@ -53,6 +62,7 @@ class ComplianceController extends GetxController {
   int facilityId = 0;
   RxBool showAdditionalColumn = false.obs;
   Rx<int> srId = 0.obs;
+  Rx<int> reNew = 0.obs;
 
   @override
   void onInit() async {
@@ -65,6 +75,9 @@ class ComplianceController extends GetxController {
         });
         Future.delayed(Duration(seconds: 1), () {
           getStatutoryComplianceDropDown();
+        });
+        Future.delayed(Duration(seconds: 1), () {
+          statusOfAplication();
         });
         Future.delayed(Duration(seconds: 2), () async {
           await getStatutoryDataList(facilityId);
@@ -84,13 +97,20 @@ class ComplianceController extends GetxController {
   Future<void> setUserId() async {
     try {
       final _srId = await compliancePresenter.getValue();
+      final _reNew = await compliancePresenter.getRewValue();
+
       if (_srId == null || _srId == '' || _srId == "null") {
         var dataFromPreviousScreen = Get.arguments;
 
         srId.value = dataFromPreviousScreen['srId'];
+
+        reNew.value = dataFromPreviousScreen['reNew'];
+        print('Add Statutory Detail:$reNew');
         compliancePresenter.saveValue(srId: srId.value.toString());
+        compliancePresenter.saveRenewValue(reNew: reNew.value.toString());
       } else {
         srId.value = int.tryParse(_srId) ?? 0;
+        reNew.value = int.tryParse(_reNew!) ?? 0;
       }
     } catch (e) {
       print(e.toString() + 'srId');
@@ -154,7 +174,65 @@ class ComplianceController extends GetxController {
     update(['statutory_Compliance_List']);
   }
 
-  void createCompliance() async {
+  void statusOfAplication() async {
+    statusOfAplicationList.value = <ComplianceStatusModel>[];
+    final _statusOfAplicationList =
+        await compliancePresenter.statusOfAplication(
+      isLoading: true,
+      facilityId: facilityId,
+    );
+    print('Unit status Of Aplication List:$statusOfAplicationList');
+    for (var status_Of_Aplication_List in _statusOfAplicationList) {
+      statusOfAplicationList.add(status_Of_Aplication_List);
+    }
+
+    update(['statusOfAplicationList']);
+  }
+
+  void createCompliance(int? position) async {
+    try {
+      checkCompiliace();
+      if (isFormInvalid.value) {
+        return;
+      }
+      String _issueDateTc = issueDateTc.text.trim();
+      String _expireOnDateTc = expireOnDateTc.text.trim();
+      String _commentsCtrl = commentsCtrl.text.trim();
+
+      CreateStatutoryModel createStatutoryModel = CreateStatutoryModel(
+          facility_id: facilityId,
+          Comment: _commentsCtrl,
+          compliance_id: selectedStatutoryComplianceId,
+          issue_date: _issueDateTc,
+          expires_on: _expireOnDateTc,
+          renewFlag: 0,
+          renew_date: "",
+          status_of_aplication_id: 1);
+
+      // Convert the CreateStatutoryModel instance to JSON
+      var createComplianceModelJsonString = createStatutoryModel.toJson();
+
+      // Call the createCompliance function from stockManagementAddGoodsOrdersPresenter
+      Map<String, dynamic>? responseCreateComplianceModel =
+          await compliancePresenter.createCompliance(
+        createCompliance: createComplianceModelJsonString,
+        isLoading: true,
+        position: position,
+      );
+
+      // Handle the response
+      if (responseCreateComplianceModel == null) {
+        // CreateNewPermitDialog();
+        // showAlertDialog();
+      }
+      print(
+          'Create  create Compliance  data: $createComplianceModelJsonString');
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  void updateCompliance(int? postion) async {
     try {
       checkCompiliace();
       if (isFormInvalid.value) {
@@ -196,7 +274,7 @@ class ComplianceController extends GetxController {
     }
   }
 
-  void reNewCompliance() async {
+  void reNewCompliance(int? position) async {
     try {
       // checkCompiliace();
       // if (isFormInvalid.value) {
@@ -224,6 +302,7 @@ class ComplianceController extends GetxController {
           await compliancePresenter.createCompliance(
         createCompliance: createComplianceModelJsonString,
         isLoading: true,
+        position: position,
       );
 
       if (responseCreateComplianceModel == null) {}
@@ -248,6 +327,10 @@ class ComplianceController extends GetxController {
       isStatutoryComplianceSelected.value = false;
       isFormInvalid.value = true;
     }
+    if (selectedStatusOfAplication.value == '') {
+      isStatusOfAplicationSelected.value = false;
+      isFormInvalid.value = true;
+    }
     if (issueDateTc.text.trim().length < 3) {
       isIssueDateInvalid.value = true;
       isFormInvalid.value = true;
@@ -257,6 +340,11 @@ class ComplianceController extends GetxController {
       isExpiresonInvalid.value = true;
       isFormInvalid.value = true;
     }
+  }
+
+  void clearStoreData() {
+    compliancePresenter.clearValue();
+    compliancePresenter.clearRenewValue();
   }
 
   void onValueChanged(dynamic list, dynamic value) {
@@ -297,6 +385,23 @@ class ComplianceController extends GetxController {
             }
           } else {
             selectedStatutoryComplianceId = 0;
+          }
+        }
+        break;
+
+      case RxList<ComplianceStatusModel>:
+        {
+          if (value != "Please Select") {
+            int statusIndex =
+                statusOfAplicationList.indexWhere((x) => x?.name == value);
+            selectedStatusOfAplicationId =
+                statusOfAplicationList[statusIndex]?.id ?? 0;
+            selectedStatusOfAplication.value = value;
+            isStatusOfAplicationSelected.value = true;
+            print(
+                "selectedBusinessTypeId: ${selectedStatusOfAplicationId} \n ${selectedStatusOfAplication}");
+          } else {
+            selectedStatusOfAplicationId = 0;
           }
         }
         break;

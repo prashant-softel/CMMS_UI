@@ -14,7 +14,7 @@ class ViewVegPlanPresenter {
   }) async {
     return viewVegPlanUsecase.getVegPlanDetail(
       planId: planId,
-      facilityId:facilityId,
+      facilityId: facilityId,
       isLoading: isLoading ?? false,
     );
   }
@@ -48,4 +48,13 @@ class ViewVegPlanPresenter {
       isLoading: isLoading,
     );
   }
+
+  void saveValue({String? vegid}) async {
+    return viewVegPlanUsecase.saveValue(vegid: vegid);
+  }
+
+  Future<String?> getValue() async => await viewVegPlanUsecase.getValue();
+  void clearValue() async => viewVegPlanUsecase.clearValue();
+
+  
 }
