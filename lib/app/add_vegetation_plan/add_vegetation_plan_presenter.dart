@@ -25,6 +25,19 @@ class AddVegetationPresenter {
     );
   }
 
+  Future<List<EmployeeModel?>?> getAssignedToEmployee({
+    String? auth,
+    int? facilityId,
+    int? featureId,
+    bool? isLoading,
+  }) async =>
+      await vegetationlistUsecase.getAssignedToEmployee(
+        auth: auth ?? "",
+        facilityId: facilityId ?? 0,
+        featureId: featureId,
+        isLoading: isLoading ?? false,
+      );
+
   Future<List<EmployeeModel?>?> getAssignedToList({
     String? auth,
     int? facilityId,
@@ -34,9 +47,9 @@ class AddVegetationPresenter {
         auth: auth ?? "",
         facilityId: facilityId ?? 0,
         isLoading: isLoading ?? false,
-      ); 
+      );
 
-   Future<List<VegetationEquipmentModel>> getVegEquipmentModelList({
+  Future<List<VegetationEquipmentModel>> getVegEquipmentModelList({
     required bool isLoading,
     required int? facilityId,
   }) async {
@@ -53,7 +66,7 @@ class AddVegetationPresenter {
   }) async {
     return vegetationlistUsecase.getVegPlanDetail(
       planId: planId,
-      facilityId:facilityId,
+      facilityId: facilityId,
       isLoading: isLoading ?? false,
     );
   }
@@ -68,9 +81,10 @@ class AddVegetationPresenter {
     );
   }
 
-  void saveValue({String? vegPlanId}) async {
-    return vegetationlistUsecase.saveValue(vegPlanId: vegPlanId);
+  void saveValue({String? vegid}) async {
+    return vegetationlistUsecase.saveValue(vegid: vegid);
   }
 
   Future<String?> getValue() async => await vegetationlistUsecase.getValue();
+  void clearValue() async => vegetationlistUsecase.clearValue();
 }

@@ -7,8 +7,8 @@ import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class VegSetEquipment extends GetView {
-  int? estimateDurationDays;
+class VegSetEquipment extends GetView<AddVegetationPlanController> {
+  final int? estimateDurationDays;
   VegSetEquipment({required this.estimateDurationDays});
   final AddVegetationPlanController controller = Get.find();
 
@@ -61,7 +61,7 @@ class VegSetEquipment extends GetView {
                         Expanded(
                           flex: 4,
                           child: Text(
-                            "Blocks",
+                            "Inverters",
                             style: TextStyle(color: Color(0xff31576D)),
                           ),
                         ),
@@ -80,7 +80,7 @@ class VegSetEquipment extends GetView {
                   Divider(
                     thickness: 2,
                   )
-                ]..addAll(controller.equipmentList.value.map((e) {
+                ]..addAll(controller.equipmentList.map((e) {
                         return Padding(
                           padding: const EdgeInsets.only(left: 20, right: 20),
                           child: Column(
@@ -100,7 +100,7 @@ class VegSetEquipment extends GetView {
                                       child: Row(
                                         children: [
                                           Text(
-                                            "${e?.blockName}",
+                                            "${e?.invName}",
                                             style: TextStyle(
                                                 fontSize: 12.0,
                                                 fontWeight: FontWeight.bold),
@@ -128,7 +128,7 @@ class VegSetEquipment extends GetView {
                                       onChanged: (newValue) {
                                         setState(() {
                                           e.selectedDay = newValue!;
-                                          e.invs.forEach((element) {
+                                          e.smbs?.forEach((element) {
                                             element.selectedDay = newValue;
                                           });
                                         });
@@ -148,14 +148,14 @@ class VegSetEquipment extends GetView {
                               e.isExpanded
                                   ? Column(
                                       children: []..addAll(
-                                          e.invs.map(
+                                          e.smbs!.map(
                                             (invs) {
                                               return Row(
                                                 children: [
                                                   Expanded(
                                                       flex: 4,
                                                       child: Text(
-                                                          invs.invName ?? "")),
+                                                          invs.smbName ?? "")),
                                                   Expanded(
                                                       flex: 2,
                                                       child:
@@ -201,7 +201,7 @@ class VegSetEquipment extends GetView {
               ));
         }),
         actions: [
-          controller.vegPlanId == 0
+          controller.vegid == 0
               ? Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [

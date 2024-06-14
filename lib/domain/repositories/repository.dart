@@ -2,9 +2,11 @@ import 'dart:convert';
 import 'dart:developer';
 import 'dart:typed_data';
 import 'package:cmms/app/widgets/attendance_popup.dart';
+import 'package:cmms/domain/models/Compliance_Status_model.dart';
 import 'package:cmms/domain/models/Statutory_Compliance_model.dart';
 import 'package:cmms/domain/models/attendance_list_model.dart';
 import 'package:cmms/domain/models/attendance_model.dart';
+import 'package:cmms/domain/models/complicance_history_model.dart';
 import 'package:cmms/domain/models/course_category_model.dart';
 import 'package:cmms/domain/models/dashboard_model.dart';
 import 'package:cmms/domain/models/dsm_list_model.dart';
@@ -833,15 +835,14 @@ class Repository {
   }
 
   Future<Map<String, dynamic>> createCompliance(
-    createCompliance,
-    bool? isLoading,
-  ) async {
+      createCompliance, bool? isLoading, int? position) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.createCompliance(
         auth: auth,
         createCompliance: createCompliance,
         isLoading: isLoading ?? false,
+        position: position,
       );
 
       var resourceData = res.data;
@@ -2606,6 +2607,32 @@ class Repository {
         var statutoryComplianceList =
             statutoryComplianceModelFromJson(res.data);
         return statutoryComplianceList;
+      }
+      return [];
+    } catch (error) {
+      log(error.toString());
+      return [];
+    }
+  }
+
+  Future<List<ComplianceStatusModel>> statusOfAplication({
+    required int? facilityId,
+    required bool isLoading,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+
+      log(auth);
+      final res = await _dataRepository.statusOfAplication(
+        facilityId: facilityId,
+        isLoading: isLoading,
+        auth: auth,
+      );
+      print('Unit Compliance Status Data: ${res.data}');
+
+      if (!res.hasError) {
+        var statusOfAplicationList = ComplianceStatusModelFromJson(res.data);
+        return statusOfAplicationList;
       }
       return [];
     } catch (error) {
@@ -8998,6 +9025,7 @@ class Repository {
           adduserJsonString: adduserJsonString);
       print({"resp", res.data});
       if (!res.hasError) {
+        Get.offAllNamed(Routes.userList);
         return true;
       } //
       else {
@@ -12888,6 +12916,27 @@ class Repository {
     }
   }
 
+  Future<void> deleteVegPlan({
+    bool? isLoading,
+    required int planId,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.deleteVegPlan(
+        auth: auth,
+        planId: planId,
+        isLoading: isLoading,
+      );
+
+      if (!res.hasError) {
+      } else {
+        Utility.showDialog(res.errorCode.toString(), 'deleteVegPlan');
+      }
+    } catch (error) {
+      print(error.toString());
+    }
+  }
+
   Future<void> deleteUser(Object user_id, bool isLoading) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
@@ -14453,6 +14502,131 @@ class Repository {
       }
     } catch (error) {
       print(error.toString());
+    }
+  }
+
+  //Compliance Status
+  //get
+  Future<List<ComplianceStatusModel>> getComplianceStatus({
+    required bool isLoading,
+    int? job_type_id,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+
+      log(auth);
+      final res = await _dataRepository.getComplianceStatus(
+        isLoading: isLoading,
+        auth: auth,
+      );
+      print('Compliance Status ${res.data}');
+
+      if (!res.hasError) {
+        var Sourcetype = ComplianceStatusModelFromJson(res.data);
+        return Sourcetype;
+      }
+      return [];
+    } catch (error) {
+      log(error.toString());
+      return [];
+    }
+  }
+
+  //create
+  Future<bool> createComplianceStatus(
+      {bool? isLoading, ComplianceStatusJsonString}) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.createComplianceStatus(
+          auth: auth,
+          isLoading: isLoading,
+          ComplianceStatusJsonString: ComplianceStatusJsonString);
+
+      if (!res.hasError) {
+        return true;
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString(), ' createCheckListNumber');
+        return false;
+      }
+    } catch (error) {
+      print(error.toString());
+      return false;
+    }
+  }
+
+  //update
+  Future<bool> updateComplianceStatus({
+    bool? isLoading,
+    ComplianceStatusJsonString,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.updateComplianceStatus(
+        auth: auth,
+        isLoading: isLoading,
+        ComplianceStatusJsonString: ComplianceStatusJsonString,
+      );
+      print(res.data);
+      if (!res.hasError) {
+        return true;
+      } //
+      else {
+        Utility.showDialog(
+            res.errorCode.toString(), 'Update Compliance Status');
+        return false;
+      }
+    } catch (error) {
+      print(error.toString());
+      return false;
+    }
+  }
+
+  //delete
+  Future<void> deleteComplianceStatus(
+      Object ComplianceStatus_id, bool isLoading) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.deleteComplianceStatus(
+        auth: auth,
+        ComplianceStatus_id: ComplianceStatus_id,
+        isLoading: isLoading,
+      );
+
+      if (!res.hasError) {
+        //get delete response back from API
+      } else {
+        Utility.showDialog(
+            res.errorCode.toString(), 'delete ComplianceStatus ');
+      }
+    } catch (error) {
+      print(error.toString());
+    }
+  }
+
+  Future<List<StatutoryHistory>> getStatutoryHistory({
+    required int compliance_id,
+    required bool isLoading,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+
+      log(auth);
+      final res = await _dataRepository.getStatutoryHistory(
+        auth: auth,
+        compliance_id: compliance_id,
+        isLoading: isLoading,
+      );
+      print('Compliance Status ${res.data}');
+
+      if (!res.hasError) {
+        var Sourcetype = statutoryHistoryFromJson(res.data);
+        return Sourcetype;
+      }
+      return [];
+    } catch (error) {
+      log(error.toString());
+      return [];
     }
   }
   //end

@@ -162,6 +162,7 @@ class AttendanceMonthWiseWeb extends GetView<AttendanceListMonthController> {
                                       maxWidth: Get.width * 5,
                                     ),
                                     child: DataTable2(
+                                      minWidth: Get.width * 1.2,
                                       border:
                                           TableBorder.all(color: Colors.black),
                                       dataRowHeight: 40,

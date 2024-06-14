@@ -8,18 +8,21 @@ class CreateVegPlanModel {
   int? planId;
   String? title;
   int? noOfCleaningDays;
+  int? assignedTo;
   int? frequencyId;
   String? startDate;
   List<Schedule>? schedules;
 
-  CreateVegPlanModel(
-      {this.facilityId,
-      this.planId,
-      this.title,
-      this.noOfCleaningDays,
-      this.frequencyId,
-      this.startDate,
-      this.schedules});
+  CreateVegPlanModel({
+    this.facilityId,
+    this.planId,
+    this.title,
+    this.noOfCleaningDays,
+    this.assignedTo,
+    this.frequencyId,
+    this.startDate,
+    this.schedules,
+  });
 
   factory CreateVegPlanModel.fromJson(Map<String, dynamic> json) =>
       CreateVegPlanModel(
@@ -27,6 +30,7 @@ class CreateVegPlanModel {
         title: json['title'],
         planId: json['planId'],
         noOfCleaningDays: json['noOfCleaningDays'],
+        assignedTo: json['assignedToId'],
         frequencyId: json['frequencyId'],
         startDate: json['startDate'],
         schedules: json["schedules"] != null
@@ -37,9 +41,10 @@ class CreateVegPlanModel {
 
   Map<String, dynamic> toJson() => {
         "title": title,
-        "planId" : planId,
+        "planId": planId,
         "facilityId": facilityId,
         "startDate": startDate,
+        "assignedToId": assignedTo,
         "frequencyId": frequencyId,
         "noOfCleaningDays": noOfCleaningDays,
         "schedules": List<dynamic>.from(schedules!.map((x) => x.toJson())),

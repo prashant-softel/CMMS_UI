@@ -50,12 +50,4 @@ class ViewComplianceUsecase {
         id: id,
         isLoading: isLoading ?? false,
       );
-  Future<Map<String, dynamic>> createCompliance({
-    createCompliance,
-    bool? isLoading,
-  }) async =>
-      await repository.createCompliance(
-        createCompliance,
-        isLoading,
-      );
 }

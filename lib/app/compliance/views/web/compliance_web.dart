@@ -74,6 +74,7 @@ class _ComplianceWebState extends State<ComplianceWeb> {
                               InkWell(
                                 onTap: () {
                                   Get.offNamed(Routes.statutory);
+                                  controller.clearStoreData();
                                 },
                                 child:
                                     Text(" / MIS", style: Styles.greyLight14),
@@ -228,7 +229,10 @@ class _ComplianceWebState extends State<ComplianceWeb> {
                                                                     "inactive" &&
                                                                 controller
                                                                         .srId >
-                                                                    0
+                                                                    0 &&
+                                                                controller
+                                                                        .reNew ==
+                                                                    1
                                                             ? Row(
                                                                 children: [
                                                                   CustomRichText(
@@ -307,14 +311,14 @@ class _ComplianceWebState extends State<ComplianceWeb> {
                                                                     5,
                                                                 dropdownList:
                                                                     controller
-                                                                        .statutoryComplianceList,
+                                                                        .statusOfAplicationList,
                                                                 isValueSelected:
                                                                     controller
-                                                                        .isStatutoryComplianceSelected
+                                                                        .isStatusOfAplicationSelected
                                                                         .value,
                                                                 selectedValue:
                                                                     controller
-                                                                        .selectedStatutoryCompliance
+                                                                        .selectedStatusOfAplication
                                                                         .value,
                                                                 onValueChanged:
                                                                     controller
@@ -601,21 +605,26 @@ class _ComplianceWebState extends State<ComplianceWeb> {
                                       text: 'Submit',
                                       onPressed: () {
                                         // controller.isFormInvalid.value = false;
-                                        controller.createCompliance();
+                                        controller.createCompliance(1);
                                       },
                                     ),
                                   )
-                                : Container(
-                                    height: 40,
-                                    child: CustomElevatedButton(
-                                      backgroundColor: ColorValues.submitColor,
-                                      text: 'Update',
-                                      onPressed: () {
-                                        // controller.isFormInvalid.value = false;
-                                        controller.createCompliance();
-                                      },
-                                    ),
-                                  ),
+                                : controller.getStatutoryById.value!
+                                            .activation_status ==
+                                        "active"
+                                    ? Container(
+                                        height: 40,
+                                        child: CustomElevatedButton(
+                                          backgroundColor:
+                                              ColorValues.submitColor,
+                                          text: 'Update',
+                                          onPressed: () {
+                                            // controller.isFormInvalid.value = false;
+                                            controller.createCompliance(0);
+                                          },
+                                        ),
+                                      )
+                                    : Dimens.box0,
                             controller.getStatutoryById.value!
                                             .activation_status ==
                                         "inactive" &&
@@ -627,7 +636,7 @@ class _ComplianceWebState extends State<ComplianceWeb> {
                                       text: 'Re-New',
                                       onPressed: () {
                                         // controller.isFormInvalid.value = false;
-                                        controller.reNewCompliance();
+                                        controller.reNewCompliance(1);
                                       },
                                     ),
                                   )

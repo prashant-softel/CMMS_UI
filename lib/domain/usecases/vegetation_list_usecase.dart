@@ -16,12 +16,12 @@ class VegetationlistUsecase {
   Future<List<VegetationPlanListModel>> getVegetationPlanList({
     required bool isLoading,
     required int? facility_id,
-    bool? isExport
+    bool? isExport,
   }) async {
     return repository.getVegetationPlanList(
       isLoading: isLoading,
       facility_id: facility_id,
-      isExport: isExport
+      isExport: isExport,
     );
   }
 
@@ -62,6 +62,19 @@ class VegetationlistUsecase {
     );
   }
 
+  Future<List<EmployeeModel?>?> getAssignedToEmployee({
+    String? auth,
+    int? facilityId,
+    int? featureId,
+    bool? isLoading,
+  }) async =>
+      await repository.getAssignedToEmployee(
+        auth,
+        facilityId,
+        featureId,
+        isLoading,
+      );
+
   Future<VegPlanDetailModel?> getVegPlanDetail({
     bool? isLoading,
     required int planId,
@@ -69,7 +82,7 @@ class VegetationlistUsecase {
   }) async =>
       await repository.getVegPlanDetail(
         planId: planId,
-        facilityId:facilityId,
+        facilityId: facilityId,
         isLoading: isLoading ?? false,
       );
 
@@ -82,8 +95,20 @@ class VegetationlistUsecase {
         isLoading,
       );
 
-      void saveValue({String? vegPlanId}) async =>
-      repository.saveValue(LocalKeys.vegplanId, vegPlanId);
+  deleteVegPlan({
+    required int planId,
+    bool? isLoading,
+  }) async =>
+      await repository.deleteVegPlan(
+        planId: planId,
+        isLoading: isLoading,
+      );
+
+  void saveValue({String? vegid}) async =>
+      repository.saveValue(LocalKeys.vegid, vegid);
   Future<String?> getValue() async =>
-      await repository.getStringValue(LocalKeys.vegplanId);
+      await repository.getStringValue(LocalKeys.vegid);
+  void clearValue() async => repository.clearData(
+        LocalKeys.vegid,
+      );
 }

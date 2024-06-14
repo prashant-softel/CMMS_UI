@@ -308,6 +308,20 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> statusOfAplication(
+      {required bool isLoading, required String auth, int? facilityId}) async {
+    ResponseModel responseModel = await apiWrapper.makeRequest(
+      'MISMaster/GetStatsofAppliaction',
+      Request.getMultiparts,
+      null,
+      isLoading,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
   Future<ResponseModel> getTypeOfWaterList(
       {required bool isLoading, required String auth, int? facilityId}) async {
     ResponseModel responseModel = await apiWrapper.makeRequest(
@@ -3295,13 +3309,13 @@ class ConnectHelper {
     return responseModel;
   }
 
-  Future<ResponseModel> createCompliance({
-    required String auth,
-    createCompliance,
-    bool? isLoading,
-  }) async {
+  Future<ResponseModel> createCompliance(
+      {required String auth,
+      createCompliance,
+      bool? isLoading,
+      int? position}) async {
     var responseModel = await apiWrapper.makeRequest(
-      'MISMaster/CreateStatutory',
+      position == 1 ? 'MISMaster/CreateStatutory' : 'MISMaster/UpdateStatutory',
       Request.post,
       createCompliance,
       isLoading ?? false,
@@ -8262,6 +8276,25 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> deleteVegPlan({
+    required String auth,
+    bool? isLoading,
+    required planId,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Vegetation/DeleteVegetationplan?planId=$planId',
+      Request.put,
+      null,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
   Future<ResponseModel> deleteUser({
     required String auth,
     bool? isLoading,
@@ -9405,6 +9438,104 @@ class ConnectHelper {
       },
     );
 
+    return responseModel;
+  }
+
+  // Compliance Status
+  //Get
+  Future<ResponseModel> getComplianceStatus(
+      {required bool isLoading, required String auth}) async {
+    ResponseModel responseModel = await apiWrapper.makeRequest(
+      'MISMaster/GetStatsofAppliaction',
+      Request.get,
+      null,
+      isLoading,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
+  //create
+  Future<ResponseModel> createComplianceStatus({
+    required String auth,
+    bool? isLoading,
+    ComplianceStatusJsonString,
+  }) async {
+    var responseModel =
+        // responseModel =
+        await apiWrapper.makeRequest(
+      'MISMaster/CreateStatusofAppliaction',
+      Request.post,
+      ComplianceStatusJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
+  //update
+  Future<ResponseModel> updateComplianceStatus({
+    required String auth,
+    bool? isLoading,
+    ComplianceStatusJsonString,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'MISMaster/UpdateStatsofAppliaction',
+      Request.post,
+      ComplianceStatusJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
+  //delete
+  Future<ResponseModel> deleteComplianceStatus({
+    required String auth,
+    bool? isLoading,
+    required ComplianceStatus_id,
+  }) async {
+    final requestBody = {
+      'id': int.tryParse(ComplianceStatus_id),
+    };
+    var responseModel = await apiWrapper.makeRequest(
+      'MISMaster/DeleteStatsofAppliaction?id=$ComplianceStatus_id',
+      Request.delete,
+      requestBody,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> getStatutoryHistory({
+    required String auth,
+    required int compliance_id,
+    required bool isLoading,
+  }) async {
+    ResponseModel responseModel = await apiWrapper.makeRequest(
+      'MISMaster/GetStatutoryHistoryById?compliance_id=$compliance_id',
+      Request.get,
+      null,
+      isLoading,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
     return responseModel;
   }
 

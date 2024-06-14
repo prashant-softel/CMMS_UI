@@ -30,55 +30,55 @@ class AttendanceController extends GetxController {
   FocusNode focusPurpose = FocusNode();
   ScrollController scrollPurpose = ScrollController();
   bool isLoading = true;
-  // Rx<AttendaceModel?>? getAttendanceDetails = Rx<AttendaceModel?>(null);
+  Rx<AttendaceModel?>? getAttendanceDetails = Rx<AttendaceModel?>(null);
 
-  Rx<AttendaceModel>? getAttendanceDetails = AttendaceModel(
-    date: "2024-06-11",
-    facilityId: 1,
-    hfeAttendance: [
-      HFEEmployeeAttendance(
-        id: 27,
-        name: "Test Engineer",
-        present: true.obs,
-        inTime: "10:00 AM",
-        outTime: "6:00 PM",
-      ),
-      HFEEmployeeAttendance(
-        id: 32,
-        name: "Majid Shaikh",
-        present: true.obs,
-        inTime: "10:00 AM",
-        outTime: "6:00 PM",
-      ),
-      HFEEmployeeAttendance(
-        id: 48,
-        name: "Shiva Kumar",
-        present: false.obs,
-        inTime: "",
-        outTime: "",
-      ),
-      HFEEmployeeAttendance(
-        id: 50,
-        name: "Guru Kumar",
-        present: false.obs,
-        inTime: "",
-        outTime: "",
-      ),
-      HFEEmployeeAttendance(
-        id: 50,
-        name: "Naresh D",
-        present: true.obs,
-        inTime: "10:00 AM",
-        outTime: "6:00 PM",
-      ),
-    ],
-    contractAttendance: ContractLabourAttendance(
-      between35to50: 10,
-      lessThan35: 10,
-      greaterThan50: 10,
-      purpose: "I dont Remember",
-    ),
-  ).obs;
+  // Rx<AttendaceModel>? getAttendanceDetails = AttendaceModel(
+  //   date: "2024-06-11",
+  //   facilityId: 1,
+  //   hfeAttendance: [
+  //     HFEEmployeeAttendance(
+  //       id: 27,
+  //       name: "Test Engineer",
+  //       present: true.obs,
+  //       inTime: "10:00 AM",
+  //       outTime: "6:00 PM",
+  //     ),
+  //     HFEEmployeeAttendance(
+  //       id: 32,
+  //       name: "Majid Shaikh",
+  //       present: true.obs,
+  //       inTime: "10:00 AM",
+  //       outTime: "6:00 PM",
+  //     ),
+  //     HFEEmployeeAttendance(
+  //       id: 48,
+  //       name: "Shiva Kumar",
+  //       present: false.obs,
+  //       inTime: "",
+  //       outTime: "",
+  //     ),
+  //     HFEEmployeeAttendance(
+  //       id: 50,
+  //       name: "Guru Kumar",
+  //       present: false.obs,
+  //       inTime: "",
+  //       outTime: "",
+  //     ),
+  //     HFEEmployeeAttendance(
+  //       id: 50,
+  //       name: "Naresh D",
+  //       present: true.obs,
+  //       inTime: "10:00 AM",
+  //       outTime: "6:00 PM",
+  //     ),
+  //   ],
+  //   contractAttendance: ContractLabourAttendance(
+  //     between35to50: 10,
+  //     lessThan35: 10,
+  //     greaterThan50: 10,
+  //     purpose: "I dont Remember",
+  //   ),
+  // ).obs;
 
   @override
   void onInit() async {
@@ -130,8 +130,8 @@ class AttendanceController extends GetxController {
       date: date,
       isLoading: isLoading,
     );
-    if (getAttendanceDetails != null) {
-      // getAttendanceDetails?.value = _attendanceDetails;
+    if (_attendanceDetails != null) {
+      getAttendanceDetails?.value = _attendanceDetails;
       final contractAttendance =
           getAttendanceDetails?.value?.contractAttendance;
       lessThan35.text = contractAttendance?.lessThan35?.toString() ?? '';

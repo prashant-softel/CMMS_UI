@@ -13,19 +13,12 @@ import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
 import '../../navigators/app_pages.dart';
 
-class DashBoardHomeWeb extends StatefulWidget {
+class DashBoardHomeWeb extends GetView<HomeController> {
   DashBoardHomeWeb({
     Key? key,
   }) : super(key: key);
 
-  @override
-  State<DashBoardHomeWeb> createState() => _DashBoardHomeWebState();
-}
-
-class _DashBoardHomeWebState extends State<DashBoardHomeWeb> {
   final screenWidth = Get.width;
-  final HomeController controller = Get.find();
-
   @override
   Widget build(BuildContext context) {
     return GetBuilder<HomeController>(
@@ -386,165 +379,26 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb> {
                           child: TabBarView(
                             children: [
                               //alll..........................
-                              Obx(
-                                () => Container(
-                                  margin: EdgeInsets.only(
-                                      left: 20, right: 20, top: 10),
-                                  height: Get.height,
-                                  width: Get.width,
-                                  decoration: BoxDecoration(
-                                    color: Color.fromARGB(255, 245, 248, 250),
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  child: Column(
-                                    children: [
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceEvenly,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        children: [
-                                          Expanded(
-                                            flex: 2,
-                                            child: Container(
-                                                margin:
-                                                    EdgeInsets.only(left: 20),
-                                                padding: EdgeInsets.only(
-                                                    left: 20, top: 10),
-                                                decoration: BoxDecoration(
-                                                  color: ColorValues
-                                                      .lightBlueColor,
-                                                  borderRadius:
-                                                      BorderRadius.circular(10),
-                                                  boxShadow: [
-                                                    BoxShadow(
-                                                      color: Colors.grey,
-                                                      offset: Offset(0.0, 1.0),
-                                                      blurRadius: 6.0,
-                                                    ),
-                                                  ],
-                                                ),
-                                                height: 150,
-                                                child: Row(
-                                                  children: [
-                                                    Column(
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .start,
-                                                      children: [
-                                                        Text("Overview",
-                                                            style:
-                                                                Styles.black15),
-                                                        // Dimens.boxHeight20,
-                                                        // Spacer(),
-                                                        Center(
-                                                          child: Row(
-                                                            children: [
-                                                              Container(
-                                                                  margin: EdgeInsets
-                                                                      .only(
-                                                                          top:
-                                                                              10),
-                                                                  height: 100,
-                                                                  width: 150,
-                                                                  child: Column(
-                                                                    children: [
-                                                                      Row(
-                                                                        mainAxisAlignment:
-                                                                            MainAxisAlignment.center,
-                                                                        children: [
-                                                                          Text(
-                                                                            "Total",
-                                                                            style:
-                                                                                Styles.black13,
-                                                                          ),
-                                                                          Spacer(),
-
-                                                                          Text(
-                                                                              '${controller.totalSum}'),
-                                                                          //  '${dashbo?.module_name}'),
-                                                                        ],
-                                                                      ),
-                                                                      Dimens
-                                                                          .boxHeight5,
-                                                                      Row(
-                                                                        children: [
-                                                                          Text(
-                                                                            "Completed",
-                                                                            style:
-                                                                                Styles.black13,
-                                                                          ),
-                                                                          Spacer(),
-                                                                          Text(
-                                                                              '${controller.completedSum}'),
-                                                                        ],
-                                                                      ),
-                                                                      Dimens
-                                                                          .boxHeight5,
-                                                                      Row(
-                                                                        children: [
-                                                                          Text(
-                                                                            "Pending",
-                                                                            style:
-                                                                                Styles.black13,
-                                                                          ),
-                                                                          Spacer(),
-                                                                          Text(
-                                                                              '${controller.pendingSum}'),
-                                                                        ],
-                                                                      ),
-                                                                    ],
-                                                                  )),
-                                                            ],
-                                                          ),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                    Dimens.boxWidth20,
-                                                    Container(
-                                                        // padding: EdgeInsets.only(
-                                                        //     top: 30,
-                                                        //     right: 20,
-                                                        //     left: 10),
-                                                        child:
-                                                            CircularPercentIndicator(
-                                                      //circular progress indicator
-                                                      radius:
-                                                          50.0, //radius for circle
-                                                      lineWidth:
-                                                          15.0, //width of circle line
-                                                      animation:
-                                                          true, //animate when it shows progress indicator first
-                                                      percent: (controller
-                                                              .completedSum
-                                                              .value) /
-                                                          (controller.totalSum
-                                                              .value), //vercentage value: 0.6 for 60% (60/100 = 0.6)
-                                                      center: Text(
-                                                        '${((controller.completedSum.value) / (controller.totalSum.value) * 100).toStringAsFixed(1)}%',
-                                                        style: TextStyle(
-                                                            fontWeight:
-                                                                FontWeight.bold,
-                                                            fontSize: 20.0),
-                                                      ), //center text, you can set Icon as well
-                                                      footer: Text(
-                                                        "Order this Month",
-                                                        style: Styles.black13,
-                                                      ), //footer text
-                                                      backgroundColor: Colors
-                                                          .redAccent, //backround of progress bar
-                                                      circularStrokeCap:
-                                                          CircularStrokeCap
-                                                              .round, //corner shape of progress bar at start/end
-                                                      progressColor: ColorValues
-                                                          .addNewColor, //progress bar color
-                                                    )),
-                                                  ],
-                                                )),
-                                          ),
-                                          Expanded(
-                                            flex: 2,
-                                            child: Container(
+                              Container(
+                                margin: EdgeInsets.only(
+                                    left: 20, right: 20, top: 10),
+                                height: Get.height,
+                                width: Get.width,
+                                decoration: BoxDecoration(
+                                  color: Color.fromARGB(255, 245, 248, 250),
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                child: Column(
+                                  children: [
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        Expanded(
+                                          flex: 2,
+                                          child: Container(
                                               margin: EdgeInsets.only(left: 20),
                                               padding: EdgeInsets.only(
                                                   left: 20, top: 10),
@@ -562,203 +416,341 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb> {
                                                 ],
                                               ),
                                               height: 150,
-                                              child: Column(
+                                              child: Row(
                                                 children: [
-                                                  Row(
+                                                  Column(
                                                     crossAxisAlignment:
                                                         CrossAxisAlignment
                                                             .start,
                                                     children: [
-                                                      Align(
-                                                          alignment:
-                                                              Alignment.topLeft,
-                                                          child: Column(
-                                                            children: [
-                                                              Text(
-                                                                  "Schedule Compliance",
-                                                                  style: Styles
-                                                                      .black15),
-                                                              Dimens
-                                                                  .boxHeight10,
-                                                              SemicircularIndicator(
-                                                                radius: 60,
-                                                                color: Color
-                                                                    .fromARGB(
-                                                                        255,
-                                                                        195,
-                                                                        146,
-                                                                        230),
-                                                                backgroundColor:
-                                                                    Colors
-                                                                        .lightGreen,
-                                                                strokeWidth: 13,
-                                                                bottomPadding:
-                                                                    0,
-                                                                child: Text(
-                                                                  '${((controller.scheduleComplianceCompletedSum.value) / (controller.scheduleComplianceTotalSum.value) * 100).toString()}%',
-                                                                  style: TextStyle(
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .bold,
-                                                                      fontSize:
-                                                                          20.0,
-                                                                      color: Colors
-                                                                          .redAccent),
-                                                                ),
-                                                              ),
-                                                            ],
-                                                          )),
-                                                      Spacer(),
-                                                      Container(
-                                                        height:
-                                                            Get.height * 0.09,
-                                                        width: Get.width * 0.09,
-                                                        margin: EdgeInsets.only(
-                                                            left: 20,
-                                                            right: 10),
-                                                        padding:
-                                                            EdgeInsets.only(
-                                                                left: 10,
-                                                                top: 10,
-                                                                right: 10),
-                                                        decoration: BoxDecoration(
-                                                            color: Colors.white,
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        10),
-                                                            boxShadow: [
-                                                              BoxShadow(
-                                                                color:
-                                                                    Colors.grey,
-                                                                offset: Offset(
-                                                                    0.0, 1.0),
-                                                                blurRadius: 6.0,
-                                                              ),
-                                                            ]),
-                                                        child: Column(
-                                                          crossAxisAlignment:
-                                                              CrossAxisAlignment
-                                                                  .start,
+                                                      Text("Overview",
+                                                          style:
+                                                              Styles.black15),
+                                                      // Dimens.boxHeight20,
+                                                      // Spacer(),
+                                                      Center(
+                                                        child: Row(
                                                           children: [
-                                                            Row(
-                                                              children: [
-                                                                Text(
-                                                                  "Total",
-                                                                  style: TextStyle(
-                                                                      fontSize:
-                                                                          Get.width * 0.009 -
-                                                                              1),
-                                                                ),
-                                                                Spacer(),
-                                                                Text(
-                                                                  '${controller.scheduleComplianceTotalSum}',
-                                                                  style: TextStyle(
-                                                                      fontSize:
-                                                                          Get.width * 0.009 -
-                                                                              1),
-                                                                ),
-                                                              ],
-                                                            ),
-                                                            // Dimens.boxHeight2,
-                                                            Row(
-                                                              children: [
-                                                                Text(
-                                                                  "Completed",
-                                                                  style: TextStyle(
-                                                                      fontSize:
-                                                                          Get.width * 0.009 -
-                                                                              1),
-                                                                ),
-                                                                Spacer(),
-                                                                Text(
-                                                                  '${controller.scheduleComplianceCompletedSum}',
-                                                                  style: TextStyle(
-                                                                      fontSize:
-                                                                          Get.width * 0.009 -
-                                                                              1),
-                                                                ),
-                                                              ],
-                                                            ),
-                                                            // Dimens.boxHeight5,
-                                                            Row(
-                                                              children: [
-                                                                Text(
-                                                                  "Pending",
-                                                                  style: TextStyle(
-                                                                      fontSize:
-                                                                          Get.width * 0.009 -
-                                                                              1),
-                                                                ),
-                                                                Spacer(),
-                                                                Text(
-                                                                  '${controller.scheduleCompliancePendingSum}',
-                                                                  style: TextStyle(
-                                                                      fontSize:
-                                                                          Get.width * 0.009 -
-                                                                              1),
-                                                                ),
-                                                              ],
-                                                            ),
+                                                            Container(
+                                                                margin: EdgeInsets
+                                                                    .only(
+                                                                        top:
+                                                                            10),
+                                                                height: 100,
+                                                                width: 150,
+                                                                child: Column(
+                                                                  children: [
+                                                                    Row(
+                                                                      mainAxisAlignment:
+                                                                          MainAxisAlignment
+                                                                              .center,
+                                                                      children: [
+                                                                        Text(
+                                                                          "Total",
+                                                                          style:
+                                                                              Styles.black13,
+                                                                        ),
+                                                                        Spacer(),
+
+                                                                        Text(
+                                                                            '${controller.totalSum}'),
+                                                                        //  '${dashbo?.module_name}'),
+                                                                      ],
+                                                                    ),
+                                                                    Dimens
+                                                                        .boxHeight5,
+                                                                    Row(
+                                                                      children: [
+                                                                        Text(
+                                                                          "Completed",
+                                                                          style:
+                                                                              Styles.black13,
+                                                                        ),
+                                                                        Spacer(),
+                                                                        Text(
+                                                                            '${controller.completedSum}'),
+                                                                      ],
+                                                                    ),
+                                                                    Dimens
+                                                                        .boxHeight5,
+                                                                    Row(
+                                                                      children: [
+                                                                        Text(
+                                                                          "Pending",
+                                                                          style:
+                                                                              Styles.black13,
+                                                                        ),
+                                                                        Spacer(),
+                                                                        Text(
+                                                                            '${controller.pendingSum}'),
+                                                                      ],
+                                                                    ),
+                                                                  ],
+                                                                )),
                                                           ],
                                                         ),
                                                       ),
                                                     ],
                                                   ),
-                                                  // Dimens.boxHeight20,
+                                                  Dimens.boxWidth20,
+                                                  Container(
+                                                      // padding: EdgeInsets.only(
+                                                      //     top: 30,
+                                                      //     right: 20,
+                                                      //     left: 10),
+                                                      child:
+                                                          CircularPercentIndicator(
+                                                    //circular progress indicator
+                                                    radius:
+                                                        50.0, //radius for circle
+                                                    lineWidth:
+                                                        15.0, //width of circle line
+                                                    animation:
+                                                        true, //animate when it shows progress indicator first
+                                                    percent: (controller
+                                                            .completedSum
+                                                            .value) /
+                                                        (controller.totalSum
+                                                            .value), //vercentage value: 0.6 for 60% (60/100 = 0.6)
+                                                    center: Text(
+                                                      '${((controller.completedSum.value) / (controller.totalSum.value) * 100).toStringAsFixed(1)}%',
+                                                      style: TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          fontSize: 20.0),
+                                                    ), //center text, you can set Icon as well
+                                                    footer: Text(
+                                                      "Order this Month",
+                                                      style: Styles.black13,
+                                                    ), //footer text
+                                                    backgroundColor: Colors
+                                                        .redAccent, //backround of progress bar
+                                                    circularStrokeCap:
+                                                        CircularStrokeCap
+                                                            .round, //corner shape of progress bar at start/end
+                                                    progressColor: ColorValues
+                                                        .addNewColor, //progress bar color
+                                                  )),
                                                 ],
-                                              ),
-                                            ),
-                                          ),
-                                          Expanded(
-                                            flex: 2,
-                                            child: Container(
-                                                margin: EdgeInsets.only(
-                                                    left: 20, right: 20),
-                                                padding: EdgeInsets.only(
-                                                    left: 20, top: 10),
-                                                decoration: BoxDecoration(
-                                                  color: ColorValues
-                                                      .lightBlueColor,
-                                                  borderRadius:
-                                                      BorderRadius.circular(10),
-                                                  boxShadow: [
-                                                    BoxShadow(
-                                                      color: Colors.grey,
-                                                      offset: Offset(0.0, 1.0),
-                                                      blurRadius: 6.0,
-                                                    ),
-                                                  ],
+                                              )),
+                                        ),
+                                        Expanded(
+                                          flex: 2,
+                                          child: Container(
+                                            margin: EdgeInsets.only(left: 20),
+                                            padding: EdgeInsets.only(
+                                                left: 20, top: 10),
+                                            decoration: BoxDecoration(
+                                              color: ColorValues.lightBlueColor,
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: Colors.grey,
+                                                  offset: Offset(0.0, 1.0),
+                                                  blurRadius: 6.0,
                                                 ),
-                                                height: 150,
-                                                child: Row(
+                                              ],
+                                            ),
+                                            height: 150,
+                                            child: Column(
+                                              children: [
+                                                Row(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
                                                   children: [
                                                     Align(
                                                         alignment:
                                                             Alignment.topLeft,
-                                                        child: Text("Category",
-                                                            style: Styles
-                                                                .black15)),
-                                                    Align(
+                                                        child: Column(
+                                                          children: [
+                                                            Text(
+                                                                "Schedule Compliance",
+                                                                style: Styles
+                                                                    .black15),
+                                                            Dimens.boxHeight10,
+                                                            SemicircularIndicator(
+                                                              radius: 60,
+                                                              color: Color
+                                                                  .fromARGB(
+                                                                      255,
+                                                                      195,
+                                                                      146,
+                                                                      230),
+                                                              backgroundColor:
+                                                                  Colors
+                                                                      .lightGreen,
+                                                              strokeWidth: 13,
+                                                              bottomPadding: 0,
+                                                              child: Text(
+                                                                '${((controller.scheduleComplianceCompletedSum.value) / (controller.scheduleComplianceTotalSum.value) * 100).toString()}%',
+                                                                style: TextStyle(
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .bold,
+                                                                    fontSize:
+                                                                        20.0,
+                                                                    color: Colors
+                                                                        .redAccent),
+                                                              ),
+                                                            ),
+                                                          ],
+                                                        )),
+                                                    Spacer(),
+                                                    Container(
+                                                      height: Get.height * 0.09,
+                                                      width: Get.width * 0.09,
+                                                      margin: EdgeInsets.only(
+                                                          left: 20, right: 10),
+                                                      padding: EdgeInsets.only(
+                                                          left: 10,
+                                                          top: 10,
+                                                          right: 10),
+                                                      decoration: BoxDecoration(
+                                                          color: Colors.white,
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(10),
+                                                          boxShadow: [
+                                                            BoxShadow(
+                                                              color:
+                                                                  Colors.grey,
+                                                              offset: Offset(
+                                                                  0.0, 1.0),
+                                                              blurRadius: 6.0,
+                                                            ),
+                                                          ]),
+                                                      child: Column(
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          Row(
+                                                            children: [
+                                                              Text(
+                                                                "Total",
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        Get.width *
+                                                                                0.009 -
+                                                                            1),
+                                                              ),
+                                                              Spacer(),
+                                                              Text(
+                                                                '${controller.scheduleComplianceTotalSum}',
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        Get.width *
+                                                                                0.009 -
+                                                                            1),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                          // Dimens.boxHeight2,
+                                                          Row(
+                                                            children: [
+                                                              Text(
+                                                                "Completed",
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        Get.width *
+                                                                                0.009 -
+                                                                            1),
+                                                              ),
+                                                              Spacer(),
+                                                              Text(
+                                                                '${controller.scheduleComplianceCompletedSum}',
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        Get.width *
+                                                                                0.009 -
+                                                                            1),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                          // Dimens.boxHeight5,
+                                                          Row(
+                                                            children: [
+                                                              Text(
+                                                                "Pending",
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        Get.width *
+                                                                                0.009 -
+                                                                            1),
+                                                              ),
+                                                              Spacer(),
+                                                              Text(
+                                                                '${controller.scheduleCompliancePendingSum}',
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        Get.width *
+                                                                                0.009 -
+                                                                            1),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                                // Dimens.boxHeight20,
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                        Expanded(
+                                          flex: 2,
+                                          child: Container(
+                                              margin: EdgeInsets.only(
+                                                  left: 20, right: 20),
+                                              padding: EdgeInsets.only(
+                                                  left: 20, top: 10),
+                                              decoration: BoxDecoration(
+                                                color:
+                                                    ColorValues.lightBlueColor,
+                                                borderRadius:
+                                                    BorderRadius.circular(10),
+                                                boxShadow: [
+                                                  BoxShadow(
+                                                    color: Colors.grey,
+                                                    offset: Offset(0.0, 1.0),
+                                                    blurRadius: 6.0,
+                                                  ),
+                                                ],
+                                              ),
+                                              height: 150,
+                                              child: Row(
+                                                children: [
+                                                  Align(
                                                       alignment:
-                                                          Alignment.centerLeft,
-                                                      child: PieChart(
-                                                        totalValue:
-                                                            20.0, //double.tryParse(controller.dashboardBmList.value!.category_total_count.toString()),
-                                                        dataMap: controller
-                                                            .getDataMap(),
+                                                          Alignment.topLeft,
+                                                      child: Text("Category",
+                                                          style:
+                                                              Styles.black15)),
+                                                  Align(
+                                                    alignment:
+                                                        Alignment.centerLeft,
+                                                    child: Obx(() {
+                                                      // Access the dataMap from the controller
+                                                      Map<String, double> data =
+                                                          controller.getDataMap;
+                                                      return PieChart(
+                                                        dataMap: data,
+                                                        totalValue: data.values
+                                                            .reduce((a, b) =>
+                                                                a +
+                                                                b), // Sum of all values in the map
                                                         chartType:
                                                             ChartType.ring,
                                                         chartRadius: 100,
                                                         colorList: controller
                                                             .getColorList(),
-                                                        // centerText: "Pie Chart",
                                                         legendOptions:
                                                             LegendOptions(
                                                           showLegendsInRow:
                                                               false,
-                                                          // legendPosition:
-                                                          //     LegendPosition.left,
                                                           showLegends: true,
                                                         ),
                                                         chartValuesOptions:
@@ -771,19 +763,1905 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb> {
                                                           showChartValuesOutside:
                                                               false,
                                                         ),
-                                                        // onTapCallback: (index) {
-                                                        //   chartController
-                                                        //       .onChartTapped(index);
-                                                        // },
-                                                      ),
-                                                    )
-                                                  ],
-                                                )),
+                                                      );
+                                                    }),
+                                                  )
+                                                ],
+                                              )),
+                                        ),
+                                      ],
+                                    ),
+                                    Dimens.boxHeight10,
+                                    Container(
+                                      // height: 70,
+                                      width: Get.width * .92,
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceAround,
+                                        children: [
+                                          _gridList(
+                                            tittle: "WO on-time",
+                                            percent:
+                                                '${((controller.woOnTimeSum.value) / (controller.totalSum.value) * 100).toStringAsFixed(1)}%',
                                           ),
+                                          _gridList(
+                                            tittle: "WO delay",
+                                            percent:
+                                                '${((controller.woDelaySum.value) / (controller.totalSum.value) * 100).toStringAsFixed(1)}%',
+                                          ),
+                                          _gridList(
+                                            tittle: "WO backlog",
+                                            percent:
+                                                '${((controller.woBacklogSum.value) / (controller.totalSum.value) * 100).toStringAsFixed(1)}%',
+                                          ),
+                                          _gridList(
+                                              tittle: "Low stock items",
+                                              percent:
+                                                  '${controller.lowStockItemsSum}'),
+                                          _gridList(
+                                              tittle: "PO Items Awaited",
+                                              percent:
+                                                  '${controller.poItemsAwaitedSum}'),
                                         ],
                                       ),
-                                      Dimens.boxHeight10,
-                                      Container(
+                                    ),
+                                    Dimens.boxHeight10,
+                                    Expanded(
+                                      child: Container(
+                                        color:
+                                            Color.fromARGB(255, 245, 248, 250),
+                                        width: Get.width,
+                                        height: Get.height,
+                                        child: Padding(
+                                          padding: EdgeInsets.only(
+                                            left: 16,
+                                            right: 16,
+                                          ),
+                                          child: DataTable2(
+                                            headingRowHeight: 40,
+                                            dataRowHeight: 35,
+                                            columnSpacing: 12,
+                                            // horizontalMargin: 5,
+                                            headingRowColor:
+                                                MaterialStateColor.resolveWith(
+                                              (states) {
+                                                return ColorValues
+                                                    .lightGreyColor;
+                                              },
+                                            ),
+                                            minWidth: 2500,
+                                            columns: [
+                                              DataColumn2(
+                                                fixedWidth: 100,
+                                                label: Text(
+                                                  'Site name',
+                                                  style: Styles.blackBold14,
+                                                ),
+                                                // size: ColumnSize.L,
+                                              ),
+                                              DataColumn2(
+                                                fixedWidth: 120,
+                                                label: Text(
+                                                  'WO number',
+                                                  style: Styles.blackBold14,
+                                                ),
+                                                // size: ColumnSize.L,
+                                              ),
+                                              DataColumn2(
+                                                fixedWidth: 200,
+                                                label: Text(
+                                                  'WO description',
+                                                  style: Styles.blackBold14,
+                                                ),
+                                                // size: ColumnSize.L,
+                                              ),
+                                              DataColumn2(
+                                                fixedWidth: 300,
+                                                label: Text(
+                                                  'Status',
+                                                  style: Styles.blackBold14,
+                                                ),
+                                                // size: ColumnSize.L,
+                                              ),
+                                              DataColumn2(
+                                                fixedWidth: 250,
+                                                label: Text(
+                                                  'Asset category',
+                                                  style: Styles.blackBold14,
+                                                ),
+                                                // size: ColumnSize.L,
+                                              ),
+                                              DataColumn2(
+                                                fixedWidth: 400,
+                                                label: Text(
+                                                  'Asset name',
+                                                  style: Styles.blackBold14,
+                                                ),
+                                                // size: ColumnSize.L,
+                                              ),
+                                              DataColumn2(
+                                                fixedWidth: 250,
+                                                label: Text(
+                                                  'Schedule start date',
+                                                  style: Styles.blackBold14,
+                                                ),
+                                                // size: ColumnSize.L,
+                                              ),
+                                              DataColumn2(
+                                                fixedWidth: 250,
+                                                label: Text(
+                                                  'Schedule end date',
+                                                  style: Styles.blackBold14,
+                                                ),
+                                                // size: ColumnSize.L,
+                                              ),
+                                              DataColumn2(
+                                                fixedWidth: 100,
+                                                label: Text(
+                                                  'Action',
+                                                  style: Styles.blackBold14,
+                                                ),
+                                              ),
+                                            ],
+                                            rows: List<DataRow>.generate(
+                                              controller.allItems.length ?? 0,
+                                              (index) => DataRow(cells: [
+                                                DataCell(Text(controller
+                                                        .allItems[index]
+                                                        ?.facility_name
+                                                        .toString() ??
+                                                    '')),
+                                                DataCell(Text(
+                                                    '${controller.allItems[index]?.wo_number.toString() ?? ''}')),
+                                                DataCell(Text(controller
+                                                        .allItems[index]
+                                                        ?.wo_decription ??
+                                                    "")),
+                                                DataCell(Text(controller
+                                                        .allItems[index]
+                                                        ?.status_long ??
+                                                    '')),
+                                                DataCell(Text(controller
+                                                        .allItems[index]
+                                                        ?.asset_category ??
+                                                    '')),
+                                                DataCell(Text(controller
+                                                        .allItems[index]
+                                                        ?.asset_name ??
+                                                    '')),
+                                                DataCell(Text(controller
+                                                        .allItems[index]
+                                                        ?.start_date ??
+                                                    '')),
+                                                DataCell(Text(controller
+                                                        .allItems[index]
+                                                        ?.end_date ??
+                                                    '')),
+                                                DataCell(
+                                                  Row(
+                                                    children: [
+                                                      TableActionButton(
+                                                        color: ColorValues
+                                                            .viewColor,
+                                                        icon: Icons
+                                                            .remove_red_eye_outlined,
+                                                        message: 'View',
+                                                        onPress: () {
+                                                          controller
+                                                              .clearStoreJobData();
+                                                          // controller
+                                                          //     .clearStoreDatatype();
+
+                                                          int jobId = controller
+                                                                  .dashboardBmList
+                                                                  .value
+                                                                  ?.cmDashboadDetails
+                                                                  ?.item_list?[
+                                                                      index]
+                                                                  .wo_number ??
+                                                              0;
+                                                          if (jobId != 0) {
+                                                            Get.toNamed(
+                                                                Routes
+                                                                    .jobDetails,
+                                                                arguments: {
+                                                                  'jobId': jobId
+                                                                });
+                                                          }
+                                                        },
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ]),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+
+                              //bm............................
+                              Container(
+                                margin: EdgeInsets.only(
+                                    left: 20, right: 20, top: 10),
+                                height: Get.height,
+                                width: Get.width,
+                                decoration: BoxDecoration(
+                                  color: Color.fromARGB(255, 245, 248, 250),
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                child: Column(
+                                  children: [
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        Expanded(
+                                          flex: 2,
+                                          child: Container(
+                                              margin: EdgeInsets.only(left: 20),
+                                              padding: EdgeInsets.only(
+                                                  left: 20, top: 10),
+                                              decoration: BoxDecoration(
+                                                color:
+                                                    ColorValues.lightBlueColor,
+                                                borderRadius:
+                                                    BorderRadius.circular(10),
+                                                boxShadow: [
+                                                  BoxShadow(
+                                                    color: Colors.grey,
+                                                    offset: Offset(0.0, 1.0),
+                                                    blurRadius: 6.0,
+                                                  ),
+                                                ],
+                                              ),
+                                              height: 150,
+                                              child: Row(
+                                                children: [
+                                                  Column(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      Text("Overview",
+                                                          style:
+                                                              Styles.black15),
+                                                      // Dimens.boxHeight20,
+                                                      // Spacer(),
+                                                      Center(
+                                                        child: Row(
+                                                          children: [
+                                                            Container(
+                                                                margin: EdgeInsets
+                                                                    .only(
+                                                                        top:
+                                                                            10),
+                                                                height: 100,
+                                                                width: 150,
+                                                                child: Column(
+                                                                  children: [
+                                                                    Row(
+                                                                      mainAxisAlignment:
+                                                                          MainAxisAlignment
+                                                                              .center,
+                                                                      children: [
+                                                                        Text(
+                                                                          "Total",
+                                                                          style:
+                                                                              Styles.black13,
+                                                                        ),
+                                                                        Spacer(),
+
+                                                                        Text(
+                                                                            '${controller.dashboardBmList.value?.cmDashboadDetails?.total}'),
+                                                                        //  '${dashbo?.module_name}'),
+                                                                      ],
+                                                                    ),
+                                                                    Dimens
+                                                                        .boxHeight5,
+                                                                    Row(
+                                                                      children: [
+                                                                        Text(
+                                                                          "Completed",
+                                                                          style:
+                                                                              Styles.black13,
+                                                                        ),
+                                                                        Spacer(),
+                                                                        Text(
+                                                                            '${controller.dashboardBmList.value?.cmDashboadDetails?.completed}'),
+                                                                      ],
+                                                                    ),
+                                                                    Dimens
+                                                                        .boxHeight5,
+                                                                    Row(
+                                                                      children: [
+                                                                        Text(
+                                                                          "Pending",
+                                                                          style:
+                                                                              Styles.black13,
+                                                                        ),
+                                                                        Spacer(),
+                                                                        Text(
+                                                                            '${controller.dashboardBmList.value?.cmDashboadDetails?.pending}'),
+                                                                      ],
+                                                                    ),
+                                                                  ],
+                                                                )),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  Dimens.boxWidth20,
+                                                  Container(
+                                                      // padding: EdgeInsets.only(
+                                                      //     top: 30,
+                                                      //     right: 20,
+                                                      //     left: 10),
+                                                      child:
+                                                          CircularPercentIndicator(
+                                                    //circular progress indicator
+                                                    radius:
+                                                        50.0, //radius for circle
+                                                    lineWidth:
+                                                        15.0, //width of circle line
+                                                    animation:
+                                                        true, //animate when it shows progress indicator first
+                                                    percent: (controller
+                                                                .dashboardBmList
+                                                                .value
+                                                                ?.cmDashboadDetails
+                                                                ?.completed ??
+                                                            0) /
+                                                        (controller
+                                                                .dashboardBmList
+                                                                .value
+                                                                ?.cmDashboadDetails
+                                                                ?.total ??
+                                                            0), //vercentage value: 0.6 for 60% (60/100 = 0.6)
+                                                    center: Text(
+                                                      '${((controller.dashboardBmList.value?.cmDashboadDetails?.completed ?? 0) / (controller.dashboardBmList.value?.cmDashboadDetails?.total ?? 0) * 100).toStringAsFixed(1)}%',
+                                                      style: TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          fontSize: 20.0),
+                                                    ), //center text, you can set Icon as well
+                                                    footer: Text(
+                                                      "Order this Month",
+                                                      style: Styles.black13,
+                                                    ), //footer text
+                                                    backgroundColor: ColorValues
+                                                        .addNewColor, //backround of progress bar
+                                                    circularStrokeCap:
+                                                        CircularStrokeCap
+                                                            .round, //corner shape of progress bar at start/end
+                                                    progressColor: Colors
+                                                        .redAccent, //progress bar color
+                                                  )),
+                                                ],
+                                              )),
+                                        ),
+                                        Expanded(
+                                          flex: 2,
+                                          child: Container(
+                                            margin: EdgeInsets.only(left: 20),
+                                            padding: EdgeInsets.only(
+                                                left: 20, top: 10),
+                                            decoration: BoxDecoration(
+                                              color: ColorValues.lightBlueColor,
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: Colors.grey,
+                                                  offset: Offset(0.0, 1.0),
+                                                  blurRadius: 6.0,
+                                                ),
+                                              ],
+                                            ),
+                                            height: 150,
+                                            child: Column(
+                                              children: [
+                                                Row(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Align(
+                                                        alignment:
+                                                            Alignment.topLeft,
+                                                        child: Column(
+                                                          children: [
+                                                            Text(
+                                                                "Schedule Compliance",
+                                                                style: Styles
+                                                                    .black15),
+                                                            Dimens.boxHeight10,
+                                                            SemicircularIndicator(
+                                                              radius: 60,
+                                                              color: Color
+                                                                  .fromARGB(
+                                                                      255,
+                                                                      195,
+                                                                      146,
+                                                                      230),
+                                                              backgroundColor:
+                                                                  Colors
+                                                                      .lightGreen,
+                                                              strokeWidth: 13,
+                                                              bottomPadding: 0,
+                                                              child: Text(
+                                                                '${((controller.dashboardBmList.value?.cmDashboadDetails?.schedule_compliance_completed ?? 0) / (controller.dashboardBmList.value?.cmDashboadDetails?.schedule_compliance_total ?? 1) * 100).toString()}%',
+                                                                style: TextStyle(
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .bold,
+                                                                    fontSize:
+                                                                        20.0,
+                                                                    color: Colors
+                                                                        .redAccent),
+                                                              ),
+                                                            ),
+                                                          ],
+                                                        )),
+                                                    Spacer(),
+                                                    Container(
+                                                      height: Get.height * 0.09,
+                                                      width: Get.width * 0.09,
+                                                      margin: EdgeInsets.only(
+                                                          left: 20, right: 10),
+                                                      padding: EdgeInsets.only(
+                                                          left: 10,
+                                                          top: 10,
+                                                          right: 10),
+                                                      decoration: BoxDecoration(
+                                                          color: Colors.white,
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(10),
+                                                          boxShadow: [
+                                                            BoxShadow(
+                                                              color:
+                                                                  Colors.grey,
+                                                              offset: Offset(
+                                                                  0.0, 1.0),
+                                                              blurRadius: 6.0,
+                                                            ),
+                                                          ]),
+                                                      child: Column(
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          Row(
+                                                            children: [
+                                                              Text(
+                                                                "Total",
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        Get.width *
+                                                                                0.009 -
+                                                                            1),
+                                                              ),
+                                                              Spacer(),
+                                                              Text(
+                                                                '${controller.dashboardBmList.value?.cmDashboadDetails?.schedule_compliance_total}',
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        Get.width *
+                                                                                0.009 -
+                                                                            1),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                          // Dimens.boxHeight2,
+                                                          Row(
+                                                            children: [
+                                                              Text(
+                                                                "Completed",
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        Get.width *
+                                                                                0.009 -
+                                                                            1),
+                                                              ),
+                                                              Spacer(),
+                                                              Text(
+                                                                '${controller.dashboardBmList.value?.cmDashboadDetails?.schedule_compliance_completed}',
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        Get.width *
+                                                                                0.009 -
+                                                                            1),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                          // Dimens.boxHeight5,
+                                                          Row(
+                                                            children: [
+                                                              Text(
+                                                                "Pending",
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        Get.width *
+                                                                                0.009 -
+                                                                            1),
+                                                              ),
+                                                              Spacer(),
+                                                              Text(
+                                                                '${controller.dashboardBmList.value?.cmDashboadDetails?.schedule_compliance_pending}',
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        Get.width *
+                                                                                0.009 -
+                                                                            1),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                                // Dimens.boxHeight20,
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                        Expanded(
+                                          flex: 2,
+                                          child: Container(
+                                              margin: EdgeInsets.only(
+                                                  left: 20, right: 20),
+                                              padding: EdgeInsets.only(
+                                                  left: 20, top: 10),
+                                              decoration: BoxDecoration(
+                                                color:
+                                                    ColorValues.lightBlueColor,
+                                                borderRadius:
+                                                    BorderRadius.circular(10),
+                                                boxShadow: [
+                                                  BoxShadow(
+                                                    color: Colors.grey,
+                                                    offset: Offset(0.0, 1.0),
+                                                    blurRadius: 6.0,
+                                                  ),
+                                                ],
+                                              ),
+                                              height: 150,
+                                              child: Row(
+                                                children: [
+                                                  Align(
+                                                      alignment:
+                                                          Alignment.topLeft,
+                                                      child: Text("Category",
+                                                          style:
+                                                              Styles.black15)),
+                                                  Align(
+                                                    alignment:
+                                                        Alignment.centerLeft,
+                                                    child: Obx(() {
+                                                      // Access the dataMap from the controller
+                                                      Map<String, double> data =
+                                                          controller.getDataMap;
+                                                      return PieChart(
+                                                        dataMap: data,
+                                                        totalValue: data.values
+                                                            .reduce((a, b) =>
+                                                                a +
+                                                                b), // Sum of all values in the map
+                                                        chartType:
+                                                            ChartType.ring,
+                                                        chartRadius: 100,
+                                                        colorList: controller
+                                                            .getColorList(),
+                                                        legendOptions:
+                                                            LegendOptions(
+                                                          showLegendsInRow:
+                                                              false,
+                                                          showLegends: true,
+                                                        ),
+                                                        chartValuesOptions:
+                                                            ChartValuesOptions(
+                                                          showChartValueBackground:
+                                                              false,
+                                                          showChartValues: true,
+                                                          showChartValuesInPercentage:
+                                                              true,
+                                                          showChartValuesOutside:
+                                                              false,
+                                                        ),
+                                                      );
+                                                    }),
+                                                  )
+                                                ],
+                                              )),
+                                        ),
+                                      ],
+                                    ),
+                                    Dimens.boxHeight10,
+                                    Container(
+                                      // height: 70,
+                                      width: Get.width * .92,
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceAround,
+                                        children: [
+                                          _gridList(
+                                              tittle: "WO on-time",
+                                              percent:
+                                                  '${((controller.dashboardBmList.value?.cmDashboadDetails?.wo_on_time ?? 0) / (controller.dashboardBmList.value?.cmDashboadDetails?.total ?? 1) * 100).toString()}%'),
+                                          _gridList(
+                                              tittle: "WO delay",
+                                              percent:
+                                                  '${((controller.dashboardBmList.value?.cmDashboadDetails?.wo_delay ?? 0) / (controller.dashboardBmList.value?.cmDashboadDetails?.total ?? 1) * 100).toString()}%'),
+                                          _gridList(
+                                              tittle: "WO backlog",
+                                              percent:
+                                                  '${((controller.dashboardBmList.value?.cmDashboadDetails?.wo_backlog ?? 0) / (controller.dashboardBmList.value?.cmDashboadDetails?.total ?? 1) * 100).toString()}%'),
+                                          _gridList(
+                                              tittle: "Low stock items",
+                                              percent:
+                                                  '${controller.dashboardBmList.value?.cmDashboadDetails?.low_stock_items}'),
+                                          _gridList(
+                                              tittle: "PO Items Awaited",
+                                              percent:
+                                                  '${controller.dashboardBmList.value?.cmDashboadDetails?.po_items_awaited}'),
+                                        ],
+                                      ),
+                                    ),
+                                    Dimens.boxHeight10,
+                                    Expanded(
+                                      child: Container(
+                                        color:
+                                            Color.fromARGB(255, 245, 248, 250),
+                                        width: Get.width,
+                                        height: Get.height,
+                                        child: Padding(
+                                          padding: EdgeInsets.only(
+                                            left: 16,
+                                            right: 16,
+                                          ),
+                                          child: DataTable2(
+                                            headingRowHeight: 40,
+                                            dataRowHeight: 35,
+                                            columnSpacing: 12,
+                                            // horizontalMargin: 5,
+                                            headingRowColor:
+                                                MaterialStateColor.resolveWith(
+                                              (states) {
+                                                return ColorValues
+                                                    .lightGreyColor;
+                                              },
+                                            ),
+                                            minWidth: 2500,
+                                            columns: [
+                                              DataColumn2(
+                                                fixedWidth: 100,
+                                                label: Text(
+                                                  'Site name',
+                                                  style: Styles.blackBold14,
+                                                ),
+                                                // size: ColumnSize.L,
+                                              ),
+                                              DataColumn2(
+                                                fixedWidth: 120,
+                                                label: Text(
+                                                  'WO number',
+                                                  style: Styles.blackBold14,
+                                                ),
+                                                // size: ColumnSize.L,
+                                              ),
+                                              DataColumn2(
+                                                fixedWidth: 200,
+                                                label: Text(
+                                                  'WO description',
+                                                  style: Styles.blackBold14,
+                                                ),
+                                                // size: ColumnSize.L,
+                                              ),
+                                              DataColumn2(
+                                                fixedWidth: 300,
+                                                label: Text(
+                                                  'Status',
+                                                  style: Styles.blackBold14,
+                                                ),
+                                                // size: ColumnSize.L,
+                                              ),
+                                              DataColumn2(
+                                                fixedWidth: 250,
+                                                label: Text(
+                                                  'Asset category',
+                                                  style: Styles.blackBold14,
+                                                ),
+                                                // size: ColumnSize.L,
+                                              ),
+                                              DataColumn2(
+                                                fixedWidth: 400,
+                                                label: Text(
+                                                  'Asset name',
+                                                  style: Styles.blackBold14,
+                                                ),
+                                                // size: ColumnSize.L,
+                                              ),
+                                              DataColumn2(
+                                                fixedWidth: 250,
+                                                label: Text(
+                                                  'Schedule start date',
+                                                  style: Styles.blackBold14,
+                                                ),
+                                                // size: ColumnSize.L,
+                                              ),
+                                              DataColumn2(
+                                                fixedWidth: 250,
+                                                label: Text(
+                                                  'Schedule end date',
+                                                  style: Styles.blackBold14,
+                                                ),
+                                                // size: ColumnSize.L,
+                                              ),
+                                              DataColumn2(
+                                                fixedWidth: 100,
+                                                label: Text(
+                                                  'Action',
+                                                  style: Styles.blackBold14,
+                                                ),
+                                              ),
+                                            ],
+                                            rows: List<DataRow>.generate(
+                                              controller
+                                                      .dashboardBmList
+                                                      .value
+                                                      ?.cmDashboadDetails
+                                                      ?.item_list
+                                                      ?.length ??
+                                                  0,
+                                              (index) => DataRow(cells: [
+                                                DataCell(Text(controller
+                                                        .dashboardBmList
+                                                        .value
+                                                        ?.cmDashboadDetails
+                                                        ?.item_list?[index]
+                                                        .facility_name
+                                                        .toString() ??
+                                                    '')),
+                                                DataCell(Text(
+                                                    'BM${controller.dashboardBmList.value?.cmDashboadDetails?.item_list?[index].wo_number.toString() ?? ''}')),
+                                                DataCell(Text(controller
+                                                        .dashboardBmList
+                                                        .value
+                                                        ?.cmDashboadDetails
+                                                        ?.item_list?[index]
+                                                        .wo_decription ??
+                                                    "")),
+                                                DataCell(Text(controller
+                                                        .dashboardBmList
+                                                        .value
+                                                        ?.cmDashboadDetails
+                                                        ?.item_list?[index]
+                                                        .status_long ??
+                                                    '')),
+                                                DataCell(Text(controller
+                                                        .dashboardBmList
+                                                        .value
+                                                        ?.cmDashboadDetails
+                                                        ?.item_list?[index]
+                                                        .asset_category ??
+                                                    '')),
+                                                DataCell(Text(controller
+                                                        .dashboardBmList
+                                                        .value
+                                                        ?.cmDashboadDetails
+                                                        ?.item_list?[index]
+                                                        .asset_name ??
+                                                    '')),
+                                                DataCell(Text(controller
+                                                        .dashboardBmList
+                                                        .value
+                                                        ?.cmDashboadDetails
+                                                        ?.item_list?[index]
+                                                        .start_date ??
+                                                    '')),
+                                                DataCell(Text(controller
+                                                        .dashboardBmList
+                                                        .value
+                                                        ?.cmDashboadDetails
+                                                        ?.item_list?[index]
+                                                        .end_date ??
+                                                    '')),
+                                                DataCell(
+                                                  Row(
+                                                    children: [
+                                                      TableActionButton(
+                                                        color: ColorValues
+                                                            .viewColor,
+                                                        icon: Icons
+                                                            .remove_red_eye_outlined,
+                                                        message: 'View',
+                                                        onPress: () {
+                                                          controller
+                                                              .clearStoreJobData();
+                                                          // controller
+                                                          //     .clearStoreDatatype();
+
+                                                          int jobId = controller
+                                                                  .dashboardBmList
+                                                                  .value
+                                                                  ?.cmDashboadDetails
+                                                                  ?.item_list?[
+                                                                      index]
+                                                                  .wo_number ??
+                                                              0;
+                                                          if (jobId != 0) {
+                                                            Get.toNamed(
+                                                                Routes
+                                                                    .jobDetails,
+                                                                arguments: {
+                                                                  'jobId': jobId
+                                                                });
+                                                          }
+                                                        },
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ]),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+
+                              //pm......................
+
+                              Container(
+                                margin: EdgeInsets.only(
+                                    left: 20, right: 20, top: 10),
+                                height: Get.height,
+                                width: Get.width,
+                                decoration: BoxDecoration(
+                                  color: Color.fromARGB(255, 245, 248, 250),
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                child: Column(
+                                  children: [
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        Expanded(
+                                          flex: 2,
+                                          child: Container(
+                                              margin: EdgeInsets.only(left: 20),
+                                              padding: EdgeInsets.only(
+                                                  left: 20, top: 10),
+                                              decoration: BoxDecoration(
+                                                color:
+                                                    ColorValues.lightBlueColor,
+                                                borderRadius:
+                                                    BorderRadius.circular(10),
+                                                boxShadow: [
+                                                  BoxShadow(
+                                                    color: Colors.grey,
+                                                    offset: Offset(0.0, 1.0),
+                                                    blurRadius: 6.0,
+                                                  ),
+                                                ],
+                                              ),
+                                              height: 150,
+                                              child: Row(
+                                                children: [
+                                                  Column(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      Text("Overview",
+                                                          style:
+                                                              Styles.black15),
+                                                      // Dimens.boxHeight20,
+                                                      // Spacer(),
+                                                      Center(
+                                                        child: Row(
+                                                          children: [
+                                                            Container(
+                                                                margin: EdgeInsets
+                                                                    .only(
+                                                                        top:
+                                                                            10),
+                                                                height: 100,
+                                                                width: 150,
+                                                                child: Column(
+                                                                  children: [
+                                                                    Row(
+                                                                      mainAxisAlignment:
+                                                                          MainAxisAlignment
+                                                                              .center,
+                                                                      children: [
+                                                                        Text(
+                                                                          "Total",
+                                                                          style:
+                                                                              Styles.black13,
+                                                                        ),
+                                                                        Spacer(),
+
+                                                                        Text(
+                                                                            '${controller.dashboardPmList.value?.cmDashboadDetails?.total}'),
+                                                                        //  '${dashbo?.module_name}'),
+                                                                      ],
+                                                                    ),
+                                                                    Dimens
+                                                                        .boxHeight5,
+                                                                    Row(
+                                                                      children: [
+                                                                        Text(
+                                                                          "Completed",
+                                                                          style:
+                                                                              Styles.black13,
+                                                                        ),
+                                                                        Spacer(),
+                                                                        Text(
+                                                                            '${controller.dashboardPmList.value?.cmDashboadDetails?.completed}'),
+                                                                      ],
+                                                                    ),
+                                                                    Dimens
+                                                                        .boxHeight5,
+                                                                    Row(
+                                                                      children: [
+                                                                        Text(
+                                                                          "Pending",
+                                                                          style:
+                                                                              Styles.black13,
+                                                                        ),
+                                                                        Spacer(),
+                                                                        Text(
+                                                                            '${controller.dashboardPmList.value?.cmDashboadDetails?.pending}'),
+                                                                      ],
+                                                                    ),
+                                                                  ],
+                                                                )),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  Dimens.boxWidth20,
+                                                  Container(
+                                                      // padding: EdgeInsets.only(
+                                                      //     top: 30,
+                                                      //     right: 20,
+                                                      //     left: 10),
+                                                      child:
+                                                          CircularPercentIndicator(
+                                                    //circular progress indicator
+                                                    radius:
+                                                        50.0, //radius for circle
+                                                    lineWidth:
+                                                        15.0, //width of circle line
+                                                    animation:
+                                                        true, //animate when it shows progress indicator first
+                                                    percent: (controller
+                                                                .dashboardPmList
+                                                                .value
+                                                                ?.cmDashboadDetails
+                                                                ?.completed ??
+                                                            0) /
+                                                        (controller
+                                                                .dashboardPmList
+                                                                .value
+                                                                ?.cmDashboadDetails
+                                                                ?.total ??
+                                                            0), //vercentage value: 0.6 for 60% (60/100 = 0.6)
+                                                    center: Text(
+                                                      '${((controller.dashboardPmList.value?.cmDashboadDetails?.completed ?? 0) / (controller.dashboardPmList.value?.cmDashboadDetails?.total ?? 1) * 100).toStringAsFixed(1)}%',
+                                                      style: TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          fontSize: 20.0),
+                                                    ), //center text, you can set Icon as well
+                                                    footer: Text(
+                                                      "Order this Month",
+                                                      style: Styles.black13,
+                                                    ), //footer text
+                                                    backgroundColor: ColorValues
+                                                        .addNewColor, //backround of progress bar
+                                                    circularStrokeCap:
+                                                        CircularStrokeCap
+                                                            .round, //corner shape of progress bar at start/end
+                                                    progressColor: Colors
+                                                        .redAccent, //progress bar color
+                                                  )),
+                                                ],
+                                              )),
+                                        ),
+                                        Expanded(
+                                          flex: 2,
+                                          child: Container(
+                                            margin: EdgeInsets.only(left: 20),
+                                            padding: EdgeInsets.only(
+                                                left: 20, top: 10),
+                                            decoration: BoxDecoration(
+                                              color: ColorValues.lightBlueColor,
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: Colors.grey,
+                                                  offset: Offset(0.0, 1.0),
+                                                  blurRadius: 6.0,
+                                                ),
+                                              ],
+                                            ),
+                                            height: 150,
+                                            child: Column(
+                                              children: [
+                                                Row(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Align(
+                                                        alignment:
+                                                            Alignment.topLeft,
+                                                        child: Column(
+                                                          children: [
+                                                            Text(
+                                                                "Schedule Compliance",
+                                                                style: Styles
+                                                                    .black15),
+                                                            Dimens.boxHeight10,
+                                                            SemicircularIndicator(
+                                                              radius: 60,
+                                                              color: Color
+                                                                  .fromARGB(
+                                                                      255,
+                                                                      195,
+                                                                      146,
+                                                                      230),
+                                                              backgroundColor:
+                                                                  Colors
+                                                                      .lightGreen,
+                                                              strokeWidth: 13,
+                                                              bottomPadding: 0,
+                                                              child: Text(
+                                                                '${((controller.dashboardPmList.value?.cmDashboadDetails?.schedule_compliance_completed ?? 0) / (controller.dashboardPmList.value?.cmDashboadDetails?.schedule_compliance_total ?? 1) * 100).toString()}%',
+                                                                style: TextStyle(
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .bold,
+                                                                    fontSize:
+                                                                        20.0,
+                                                                    color: Colors
+                                                                        .redAccent),
+                                                              ),
+                                                            ),
+                                                          ],
+                                                        )),
+                                                    Spacer(),
+                                                    Container(
+                                                      height: Get.height * 0.09,
+                                                      width: Get.width * 0.09,
+                                                      margin: EdgeInsets.only(
+                                                          left: 20, right: 10),
+                                                      padding: EdgeInsets.only(
+                                                          left: 10,
+                                                          top: 10,
+                                                          right: 10),
+                                                      decoration: BoxDecoration(
+                                                          color: Colors.white,
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(10),
+                                                          boxShadow: [
+                                                            BoxShadow(
+                                                              color:
+                                                                  Colors.grey,
+                                                              offset: Offset(
+                                                                  0.0, 1.0),
+                                                              blurRadius: 6.0,
+                                                            ),
+                                                          ]),
+                                                      child: Column(
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          Row(
+                                                            children: [
+                                                              Text(
+                                                                "Total",
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        Get.width *
+                                                                                0.009 -
+                                                                            1),
+                                                              ),
+                                                              Spacer(),
+                                                              Text(
+                                                                '${controller.dashboardPmList.value?.cmDashboadDetails?.schedule_compliance_total}',
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        Get.width *
+                                                                                0.009 -
+                                                                            1),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                          // Dimens.boxHeight2,
+                                                          Row(
+                                                            children: [
+                                                              Text(
+                                                                "Completed",
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        Get.width *
+                                                                                0.009 -
+                                                                            1),
+                                                              ),
+                                                              Spacer(),
+                                                              Text(
+                                                                '${controller.dashboardPmList.value?.cmDashboadDetails?.schedule_compliance_completed}',
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        Get.width *
+                                                                                0.009 -
+                                                                            1),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                          // Dimens.boxHeight5,
+                                                          Row(
+                                                            children: [
+                                                              Text(
+                                                                "Pending",
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        Get.width *
+                                                                                0.009 -
+                                                                            1),
+                                                              ),
+                                                              Spacer(),
+                                                              Text(
+                                                                '${controller.dashboardPmList.value?.cmDashboadDetails?.schedule_compliance_pending}',
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        Get.width *
+                                                                                0.009 -
+                                                                            1),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                                // Dimens.boxHeight20,
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                        Expanded(
+                                          flex: 2,
+                                          child: Container(
+                                              margin: EdgeInsets.only(
+                                                  left: 20, right: 20),
+                                              padding: EdgeInsets.only(
+                                                  left: 20, top: 10),
+                                              decoration: BoxDecoration(
+                                                color:
+                                                    ColorValues.lightBlueColor,
+                                                borderRadius:
+                                                    BorderRadius.circular(10),
+                                                boxShadow: [
+                                                  BoxShadow(
+                                                    color: Colors.grey,
+                                                    offset: Offset(0.0, 1.0),
+                                                    blurRadius: 6.0,
+                                                  ),
+                                                ],
+                                              ),
+                                              height: 150,
+                                              child: Row(
+                                                children: [
+                                                  Align(
+                                                      alignment:
+                                                          Alignment.topLeft,
+                                                      child: Text("Category",
+                                                          style:
+                                                              Styles.black15)),
+                                                  Align(
+                                                    alignment:
+                                                        Alignment.centerLeft,
+                                                    child: Obx(() {
+                                                      // Access the dataMap from the controller
+                                                      Map<String, double> data =
+                                                          controller.getDataMap;
+                                                      return PieChart(
+                                                        dataMap: data,
+                                                        totalValue: data.values
+                                                            .reduce((a, b) =>
+                                                                a +
+                                                                b), // Sum of all values in the map
+                                                        chartType:
+                                                            ChartType.ring,
+                                                        chartRadius: 100,
+                                                        colorList: controller
+                                                            .getColorList(),
+                                                        legendOptions:
+                                                            LegendOptions(
+                                                          showLegendsInRow:
+                                                              false,
+                                                          showLegends: true,
+                                                        ),
+                                                        chartValuesOptions:
+                                                            ChartValuesOptions(
+                                                          showChartValueBackground:
+                                                              false,
+                                                          showChartValues: true,
+                                                          showChartValuesInPercentage:
+                                                              true,
+                                                          showChartValuesOutside:
+                                                              false,
+                                                        ),
+                                                      );
+                                                    }),
+                                                  )
+                                                ],
+                                              )),
+                                        ),
+                                      ],
+                                    ),
+                                    Dimens.boxHeight10,
+                                    SingleChildScrollView(
+                                      scrollDirection: Axis.horizontal,
+                                      child: Container(
+                                        // height: 70,
+                                        width: Get.width * .92,
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceAround,
+                                          children: [
+                                            _gridList(
+                                                tittle: "WO on-time",
+                                                percent:
+                                                    '${((controller.dashboardPmList.value?.cmDashboadDetails?.wo_on_time ?? 0) / (controller.dashboardPmList.value?.cmDashboadDetails?.total ?? 1) * 100).toString()}%'),
+                                            _gridList(
+                                                tittle: "WO delay",
+                                                percent:
+                                                    '${((controller.dashboardPmList.value?.cmDashboadDetails?.wo_delay ?? 0) / (controller.dashboardPmList.value?.cmDashboadDetails?.total ?? 1) * 100).toString()}%'),
+                                            _gridList(
+                                                tittle: "WO backlog",
+                                                percent:
+                                                    '${((controller.dashboardPmList.value?.cmDashboadDetails?.wo_backlog ?? 0) / (controller.dashboardPmList.value?.cmDashboadDetails?.total ?? 1) * 100).toString()}%'),
+                                            _gridList(
+                                                tittle: "Low stock items",
+                                                percent:
+                                                    '${controller.dashboardPmList.value?.cmDashboadDetails?.low_stock_items}'),
+                                            _gridList(
+                                                tittle: "PO Items Awaited",
+                                                percent:
+                                                    '${controller.dashboardPmList.value?.cmDashboadDetails?.po_items_awaited ?? 0}%'),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                    // Dimens.boxHeight10,
+                                    Expanded(
+                                      child: Container(
+                                        color:
+                                            Color.fromARGB(255, 245, 248, 250),
+                                        width: Get.width,
+                                        height: Get.height,
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(16),
+                                          child: DataTable2(
+                                            headingRowHeight: 40,
+                                            dataRowHeight: 35,
+                                            columnSpacing: 12,
+                                            // horizontalMargin: 5,
+                                            headingRowColor:
+                                                MaterialStateColor.resolveWith(
+                                              (states) {
+                                                return ColorValues
+                                                    .lightGreyColor;
+                                              },
+                                            ),
+                                            minWidth: 2500,
+                                            columns: [
+                                              DataColumn2(
+                                                fixedWidth: 100,
+                                                label: Text(
+                                                  'Site name',
+                                                  style: Styles.blackBold14,
+                                                ),
+                                                // size: ColumnSize.L,
+                                              ),
+                                              DataColumn2(
+                                                fixedWidth: 120,
+                                                label: Text(
+                                                  'WO number',
+                                                  style: Styles.blackBold14,
+                                                ),
+                                                // size: ColumnSize.L,
+                                              ),
+                                              DataColumn2(
+                                                fixedWidth: 200,
+                                                label: Text(
+                                                  'WO description',
+                                                  style: Styles.blackBold14,
+                                                ),
+                                                // size: ColumnSize.L,
+                                              ),
+                                              DataColumn2(
+                                                fixedWidth: 300,
+                                                label: Text(
+                                                  'Status',
+                                                  style: Styles.blackBold14,
+                                                ),
+                                                // size: ColumnSize.L,
+                                              ),
+                                              DataColumn2(
+                                                fixedWidth: 250,
+                                                label: Text(
+                                                  'Asset category',
+                                                  style: Styles.blackBold14,
+                                                ),
+                                                // size: ColumnSize.L,
+                                              ),
+                                              DataColumn2(
+                                                fixedWidth: 400,
+                                                label: Text(
+                                                  'Asset name',
+                                                  style: Styles.blackBold14,
+                                                ),
+                                                // size: ColumnSize.L,
+                                              ),
+                                              DataColumn2(
+                                                fixedWidth: 250,
+                                                label: Text(
+                                                  'Schedule start date',
+                                                  style: Styles.blackBold14,
+                                                ),
+                                                // size: ColumnSize.L,
+                                              ),
+                                              DataColumn2(
+                                                fixedWidth: 250,
+                                                label: Text(
+                                                  'Schedule end date',
+                                                  style: Styles.blackBold14,
+                                                ),
+                                                // size: ColumnSize.L,
+                                              ),
+                                              DataColumn2(
+                                                fixedWidth: 100,
+                                                label: Text(
+                                                  'Action',
+                                                  style: Styles.blackBold14,
+                                                ),
+                                              ),
+                                            ],
+                                            rows: List<DataRow>.generate(
+                                              controller
+                                                      .dashboardPmList
+                                                      .value
+                                                      ?.cmDashboadDetails
+                                                      ?.item_list
+                                                      ?.length ??
+                                                  0,
+                                              (index) => DataRow(cells: [
+                                                DataCell(Text(controller
+                                                        .dashboardPmList
+                                                        .value
+                                                        ?.cmDashboadDetails
+                                                        ?.item_list?[index]
+                                                        .facility_name
+                                                        .toString() ??
+                                                    '')),
+                                                DataCell(Text(
+                                                    'PM${controller.dashboardPmList.value?.cmDashboadDetails?.item_list?[index].wo_number.toString() ?? ''}')),
+                                                DataCell(Text(controller
+                                                        .dashboardPmList
+                                                        .value
+                                                        ?.cmDashboadDetails
+                                                        ?.item_list?[index]
+                                                        .wo_decription ??
+                                                    '')),
+                                                DataCell(Text(controller
+                                                        .dashboardPmList
+                                                        .value
+                                                        ?.cmDashboadDetails
+                                                        ?.item_list?[index]
+                                                        .status_long ??
+                                                    '')),
+                                                DataCell(Text(controller
+                                                        .dashboardPmList
+                                                        .value
+                                                        ?.cmDashboadDetails
+                                                        ?.item_list?[index]
+                                                        .asset_category ??
+                                                    '')),
+                                                DataCell(Text(controller
+                                                        .dashboardPmList
+                                                        .value
+                                                        ?.cmDashboadDetails
+                                                        ?.item_list?[index]
+                                                        .asset_name ??
+                                                    '')),
+                                                DataCell(Text(controller
+                                                        .dashboardPmList
+                                                        .value
+                                                        ?.cmDashboadDetails
+                                                        ?.item_list?[index]
+                                                        .start_date ??
+                                                    '')),
+                                                DataCell(Text(controller
+                                                        .dashboardPmList
+                                                        .value
+                                                        ?.cmDashboadDetails
+                                                        ?.item_list?[index]
+                                                        .end_date ??
+                                                    '')),
+                                                DataCell(
+                                                  Row(
+                                                    children: [
+                                                      TableActionButton(
+                                                        color: ColorValues
+                                                            .viewColor,
+                                                        icon: Icons
+                                                            .remove_red_eye_outlined,
+                                                        message: 'View',
+                                                        onPress: () {
+                                                          controller
+                                                              .clearStorePmData();
+                                                          // controller
+                                                          //     .clearStoreDatatype();
+
+                                                          int pmTaskId = controller
+                                                                  .dashboardPmList
+                                                                  .value
+                                                                  ?.cmDashboadDetails
+                                                                  ?.item_list?[
+                                                                      index]
+                                                                  .wo_number ??
+                                                              0;
+                                                          if (pmTaskId != 0) {
+                                                            Get.toNamed(
+                                                                Routes
+                                                                    .pmTaskView,
+                                                                arguments: {
+                                                                  'pmTaskId':
+                                                                      pmTaskId
+                                                                });
+                                                          }
+                                                        },
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ]),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+
+                              // mc......................
+
+                              Container(
+                                margin: EdgeInsets.only(
+                                    left: 20, right: 20, top: 10),
+                                height: Get.height,
+                                width: Get.width,
+                                decoration: BoxDecoration(
+                                  color: Color.fromARGB(255, 245, 248, 250),
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                child: Column(
+                                  children: [
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        Expanded(
+                                          flex: 2,
+                                          child: Container(
+                                              margin: EdgeInsets.only(left: 20),
+                                              padding: EdgeInsets.only(
+                                                  left: 20, top: 10),
+                                              decoration: BoxDecoration(
+                                                color:
+                                                    ColorValues.lightBlueColor,
+                                                borderRadius:
+                                                    BorderRadius.circular(10),
+                                                boxShadow: [
+                                                  BoxShadow(
+                                                    color: Colors.grey,
+                                                    offset: Offset(0.0, 1.0),
+                                                    blurRadius: 6.0,
+                                                  ),
+                                                ],
+                                              ),
+                                              height: 150,
+                                              child: Row(
+                                                children: [
+                                                  Column(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      Text("Overview",
+                                                          style:
+                                                              Styles.black15),
+                                                      // Dimens.boxHeight20,
+                                                      // Spacer(),
+                                                      Center(
+                                                        child: Row(
+                                                          children: [
+                                                            Container(
+                                                                margin: EdgeInsets
+                                                                    .only(
+                                                                        top:
+                                                                            10),
+                                                                height: 100,
+                                                                width: 150,
+                                                                child: Column(
+                                                                  children: [
+                                                                    Row(
+                                                                      mainAxisAlignment:
+                                                                          MainAxisAlignment
+                                                                              .center,
+                                                                      children: [
+                                                                        Text(
+                                                                          "Total",
+                                                                          style:
+                                                                              Styles.black13,
+                                                                        ),
+                                                                        Spacer(),
+
+                                                                        Text(
+                                                                            '${controller.dashboardMcList.value?.cmDashboadDetails?.total}'),
+                                                                        //  '${dashbo?.module_name}'),
+                                                                      ],
+                                                                    ),
+                                                                    Dimens
+                                                                        .boxHeight5,
+                                                                    Row(
+                                                                      children: [
+                                                                        Text(
+                                                                          "Completed",
+                                                                          style:
+                                                                              Styles.black13,
+                                                                        ),
+                                                                        Spacer(),
+                                                                        Text(
+                                                                            '${controller.dashboardMcList.value?.cmDashboadDetails?.completed}'),
+                                                                      ],
+                                                                    ),
+                                                                    Dimens
+                                                                        .boxHeight5,
+                                                                    Row(
+                                                                      children: [
+                                                                        Text(
+                                                                          "Pending",
+                                                                          style:
+                                                                              Styles.black13,
+                                                                        ),
+                                                                        Spacer(),
+                                                                        Text(
+                                                                            '${controller.dashboardMcList.value?.cmDashboadDetails?.pending}'),
+                                                                      ],
+                                                                    ),
+                                                                  ],
+                                                                )),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  Dimens.boxWidth20,
+                                                  Container(
+                                                      // padding: EdgeInsets.only(
+                                                      //     top: 30,
+                                                      //     right: 20,
+                                                      //     left: 10),
+                                                      child:
+                                                          CircularPercentIndicator(
+                                                    //circular progress indicator
+                                                    radius:
+                                                        50.0, //radius for circle
+                                                    lineWidth:
+                                                        15.0, //width of circle line
+                                                    animation:
+                                                        true, //animate when it shows progress indicator first
+                                                    percent: (controller
+                                                                .dashboardMcList
+                                                                .value
+                                                                ?.cmDashboadDetails
+                                                                ?.completed ??
+                                                            0) /
+                                                        (controller
+                                                                .dashboardMcList
+                                                                .value
+                                                                ?.cmDashboadDetails
+                                                                ?.total ??
+                                                            0),
+                                                    center: Text(
+                                                      '${((controller.dashboardMcList.value?.cmDashboadDetails?.completed ?? 0) / (controller.dashboardMcList.value?.cmDashboadDetails?.total ?? 1) * 100).toStringAsFixed(1)}%',
+                                                      style: TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          fontSize: 20.0),
+                                                    ), //center text, you can set Icon as well
+                                                    footer: Text(
+                                                      "Order this Month",
+                                                      style: Styles.black13,
+                                                    ), //footer text
+                                                    backgroundColor: ColorValues
+                                                        .addNewColor, //backround of progress bar
+                                                    circularStrokeCap:
+                                                        CircularStrokeCap
+                                                            .round, //corner shape of progress bar at start/end
+                                                    progressColor: Colors
+                                                        .redAccent, //progress bar color
+                                                  )),
+                                                ],
+                                              )),
+                                        ),
+                                        Expanded(
+                                          flex: 2,
+                                          child: Container(
+                                            margin: EdgeInsets.only(left: 20),
+                                            padding: EdgeInsets.only(
+                                                left: 20, top: 10),
+                                            decoration: BoxDecoration(
+                                              color: ColorValues.lightBlueColor,
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: Colors.grey,
+                                                  offset: Offset(0.0, 1.0),
+                                                  blurRadius: 6.0,
+                                                ),
+                                              ],
+                                            ),
+                                            height: 150,
+                                            child: Column(
+                                              children: [
+                                                Row(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Align(
+                                                        alignment:
+                                                            Alignment.topLeft,
+                                                        child: Column(
+                                                          children: [
+                                                            Text(
+                                                                "Schedule Compliance",
+                                                                style: Styles
+                                                                    .black15),
+                                                            Dimens.boxHeight10,
+                                                            SemicircularIndicator(
+                                                              radius: 60,
+                                                              color: Color
+                                                                  .fromARGB(
+                                                                      255,
+                                                                      195,
+                                                                      146,
+                                                                      230),
+                                                              backgroundColor:
+                                                                  Colors
+                                                                      .lightGreen,
+                                                              strokeWidth: 13,
+                                                              bottomPadding: 0,
+                                                              child: Text(
+                                                                '${((controller.dashboardMcList.value?.cmDashboadDetails?.schedule_compliance_completed ?? 0) / (controller.dashboardMcList.value?.cmDashboadDetails?.schedule_compliance_total ?? 1) * 100).toString()}%',
+                                                                style: TextStyle(
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .bold,
+                                                                    fontSize:
+                                                                        20.0,
+                                                                    color: Colors
+                                                                        .redAccent),
+                                                              ),
+                                                            ),
+                                                          ],
+                                                        )),
+                                                    Spacer(),
+                                                    Container(
+                                                      height: Get.height * 0.09,
+                                                      width: Get.width * 0.09,
+                                                      margin: EdgeInsets.only(
+                                                          left: 20, right: 10),
+                                                      padding: EdgeInsets.only(
+                                                          left: 10,
+                                                          top: 10,
+                                                          right: 10),
+                                                      decoration: BoxDecoration(
+                                                          color: Colors.white,
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(10),
+                                                          boxShadow: [
+                                                            BoxShadow(
+                                                              color:
+                                                                  Colors.grey,
+                                                              offset: Offset(
+                                                                  0.0, 1.0),
+                                                              blurRadius: 6.0,
+                                                            ),
+                                                          ]),
+                                                      child: Column(
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          Row(
+                                                            children: [
+                                                              Text(
+                                                                "Total",
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        Get.width *
+                                                                                0.009 -
+                                                                            1),
+                                                              ),
+                                                              Spacer(),
+                                                              Text(
+                                                                '${controller.dashboardMcList.value?.cmDashboadDetails?.schedule_compliance_total}',
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        Get.width *
+                                                                                0.009 -
+                                                                            1),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                          // Dimens.boxHeight2,
+                                                          Row(
+                                                            children: [
+                                                              Text(
+                                                                "Completed",
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        Get.width *
+                                                                                0.009 -
+                                                                            1),
+                                                              ),
+                                                              Spacer(),
+                                                              Text(
+                                                                '${controller.dashboardMcList.value?.cmDashboadDetails?.schedule_compliance_completed}',
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        Get.width *
+                                                                                0.009 -
+                                                                            1),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                          // Dimens.boxHeight5,
+                                                          Row(
+                                                            children: [
+                                                              Text(
+                                                                "Pending",
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        Get.width *
+                                                                                0.009 -
+                                                                            1),
+                                                              ),
+                                                              Spacer(),
+                                                              Text(
+                                                                '${controller.dashboardMcList.value?.cmDashboadDetails?.schedule_compliance_pending}',
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        Get.width *
+                                                                                0.009 -
+                                                                            1),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                                // Dimens.boxHeight20,
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                        Expanded(
+                                          flex: 2,
+                                          child: Container(
+                                              margin: EdgeInsets.only(
+                                                  left: 20, right: 20),
+                                              padding: EdgeInsets.only(
+                                                  left: 20, top: 10),
+                                              decoration: BoxDecoration(
+                                                color:
+                                                    ColorValues.lightBlueColor,
+                                                borderRadius:
+                                                    BorderRadius.circular(10),
+                                                boxShadow: [
+                                                  BoxShadow(
+                                                    color: Colors.grey,
+                                                    offset: Offset(0.0, 1.0),
+                                                    blurRadius: 6.0,
+                                                  ),
+                                                ],
+                                              ),
+                                              height: 150,
+                                              child: Row(
+                                                children: [
+                                                  Align(
+                                                      alignment:
+                                                          Alignment.topLeft,
+                                                      child: Text("Category",
+                                                          style:
+                                                              Styles.black15)),
+                                                  Align(
+                                                    alignment:
+                                                        Alignment.centerLeft,
+                                                    child: Obx(() {
+                                                      // Access the dataMap from the controller
+                                                      Map<String, double> data =
+                                                          controller.getDataMap;
+                                                      return PieChart(
+                                                        dataMap: data,
+                                                        totalValue: data.values
+                                                            .reduce((a, b) =>
+                                                                a +
+                                                                b), // Sum of all values in the map
+                                                        chartType:
+                                                            ChartType.ring,
+                                                        chartRadius: 100,
+                                                        colorList: controller
+                                                            .getColorList(),
+                                                        legendOptions:
+                                                            LegendOptions(
+                                                          showLegendsInRow:
+                                                              false,
+                                                          showLegends: true,
+                                                        ),
+                                                        chartValuesOptions:
+                                                            ChartValuesOptions(
+                                                          showChartValueBackground:
+                                                              false,
+                                                          showChartValues: true,
+                                                          showChartValuesInPercentage:
+                                                              true,
+                                                          showChartValuesOutside:
+                                                              false,
+                                                        ),
+                                                      );
+                                                    }),
+                                                  )
+                                                ],
+                                              )),
+                                        ),
+                                      ],
+                                    ),
+                                    Dimens.boxHeight10,
+                                    SingleChildScrollView(
+                                      scrollDirection: Axis.horizontal,
+                                      child: Container(
                                         // height: 70,
                                         width: Get.width * .92,
                                         child: Row(
@@ -793,378 +2671,257 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb> {
                                             _gridList(
                                               tittle: "WO on-time",
                                               percent:
-                                                  '${((controller.woOnTimeSum.value) / (controller.totalSum.value) * 100).toStringAsFixed(1)}%',
+                                                  '${((controller.dashboardMcList.value?.cmDashboadDetails?.wo_on_time ?? 0) / (controller.dashboardMcList.value?.cmDashboadDetails?.total ?? 1) * 100).toString()}%',
                                             ),
                                             _gridList(
                                               tittle: "WO delay",
                                               percent:
-                                                  '${((controller.woDelaySum.value) / (controller.totalSum.value) * 100).toStringAsFixed(1)}%',
+                                                  '${((controller.dashboardMcList.value?.cmDashboadDetails?.wo_delay ?? 0) / (controller.dashboardMcList.value?.cmDashboadDetails?.total ?? 1) * 100).toString()}%',
                                             ),
                                             _gridList(
                                               tittle: "WO backlog",
                                               percent:
-                                                  '${((controller.woBacklogSum.value) / (controller.totalSum.value) * 100).toStringAsFixed(1)}%',
+                                                  '${((controller.dashboardMcList.value?.cmDashboadDetails?.wo_backlog ?? 0) / (controller.dashboardMcList.value?.cmDashboadDetails?.total ?? 1) * 100).toString()}%',
                                             ),
                                             _gridList(
-                                                tittle: "Low stock items",
-                                                percent:
-                                                    '${controller.lowStockItemsSum}'),
+                                              tittle: "Low stock items",
+                                              percent:
+                                                  '${controller.dashboardMcList.value?.cmDashboadDetails?.low_stock_items} %',
+                                            ),
                                             _gridList(
-                                                tittle: "PO Items Awaited",
-                                                percent:
-                                                    '${controller.poItemsAwaitedSum}'),
+                                              tittle: "PO Items Awaited",
+                                              percent:
+                                                  '${controller.dashboardMcList.value?.cmDashboadDetails?.po_items_awaited}',
+                                            ),
                                           ],
                                         ),
                                       ),
-                                      Dimens.boxHeight10,
-                                      Expanded(
-                                        child: Container(
-                                          color: Color.fromARGB(
-                                              255, 245, 248, 250),
-                                          width: Get.width,
-                                          height: Get.height,
-                                          child: Padding(
-                                            padding: EdgeInsets.only(
-                                              left: 16,
-                                              right: 16,
+                                    ),
+                                    // Dimens.boxHeight10,
+                                    Expanded(
+                                      child: Container(
+                                        color:
+                                            Color.fromARGB(255, 245, 248, 250),
+                                        width: Get.width,
+                                        height: Get.height,
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(16),
+                                          child: DataTable2(
+                                            headingRowHeight: 40,
+                                            dataRowHeight: 35,
+                                            columnSpacing: 12,
+                                            // horizontalMargin: 5,
+                                            headingRowColor:
+                                                MaterialStateColor.resolveWith(
+                                              (states) {
+                                                return ColorValues
+                                                    .lightGreyColor;
+                                              },
                                             ),
-                                            child: DataTable2(
-                                              headingRowHeight: 40,
-                                              dataRowHeight: 35,
-                                              columnSpacing: 12,
-                                              // horizontalMargin: 5,
-                                              headingRowColor:
-                                                  MaterialStateColor
-                                                      .resolveWith(
-                                                (states) {
-                                                  return ColorValues
-                                                      .lightGreyColor;
-                                                },
+                                            minWidth: 2500,
+                                            columns: [
+                                              DataColumn2(
+                                                fixedWidth: 100,
+                                                label: Text(
+                                                  'Site name',
+                                                  style: Styles.blackBold14,
+                                                ),
+                                                // size: ColumnSize.L,
                                               ),
-                                              minWidth: 2500,
-                                              columns: [
-                                                DataColumn2(
-                                                  fixedWidth: 100,
-                                                  label: Text(
-                                                    'Site name',
-                                                    style: Styles.blackBold14,
-                                                  ),
-                                                  // size: ColumnSize.L,
+                                              DataColumn2(
+                                                fixedWidth: 120,
+                                                label: Text(
+                                                  'WO number',
+                                                  style: Styles.blackBold14,
                                                 ),
-                                                DataColumn2(
-                                                  fixedWidth: 120,
-                                                  label: Text(
-                                                    'WO number',
-                                                    style: Styles.blackBold14,
-                                                  ),
-                                                  // size: ColumnSize.L,
+                                                // size: ColumnSize.L,
+                                              ),
+                                              DataColumn2(
+                                                fixedWidth: 200,
+                                                label: Text(
+                                                  'WO description',
+                                                  style: Styles.blackBold14,
                                                 ),
-                                                DataColumn2(
-                                                  fixedWidth: 200,
-                                                  label: Text(
-                                                    'WO description',
-                                                    style: Styles.blackBold14,
-                                                  ),
-                                                  // size: ColumnSize.L,
+                                                // size: ColumnSize.L,
+                                              ),
+                                              DataColumn2(
+                                                fixedWidth: 300,
+                                                label: Text(
+                                                  'Status',
+                                                  style: Styles.blackBold14,
                                                 ),
-                                                DataColumn2(
-                                                  fixedWidth: 300,
-                                                  label: Text(
-                                                    'Status',
-                                                    style: Styles.blackBold14,
-                                                  ),
-                                                  // size: ColumnSize.L,
+                                                // size: ColumnSize.L,
+                                              ),
+                                              DataColumn2(
+                                                fixedWidth: 250,
+                                                label: Text(
+                                                  'Asset category',
+                                                  style: Styles.blackBold14,
                                                 ),
-                                                DataColumn2(
-                                                  fixedWidth: 250,
-                                                  label: Text(
-                                                    'Asset category',
-                                                    style: Styles.blackBold14,
-                                                  ),
-                                                  // size: ColumnSize.L,
+                                                // size: ColumnSize.L,
+                                              ),
+                                              DataColumn2(
+                                                fixedWidth: 400,
+                                                label: Text(
+                                                  'Asset name',
+                                                  style: Styles.blackBold14,
                                                 ),
-                                                DataColumn2(
-                                                  fixedWidth: 400,
-                                                  label: Text(
-                                                    'Asset name',
-                                                    style: Styles.blackBold14,
-                                                  ),
-                                                  // size: ColumnSize.L,
+                                                // size: ColumnSize.L,
+                                              ),
+                                              DataColumn2(
+                                                fixedWidth: 250,
+                                                label: Text(
+                                                  'Schedule start date',
+                                                  style: Styles.blackBold14,
                                                 ),
-                                                DataColumn2(
-                                                  fixedWidth: 250,
-                                                  label: Text(
-                                                    'Schedule start date',
-                                                    style: Styles.blackBold14,
-                                                  ),
-                                                  // size: ColumnSize.L,
+                                                // size: ColumnSize.L,
+                                              ),
+                                              DataColumn2(
+                                                fixedWidth: 250,
+                                                label: Text(
+                                                  'Schedule end date',
+                                                  style: Styles.blackBold14,
                                                 ),
-                                                DataColumn2(
-                                                  fixedWidth: 250,
-                                                  label: Text(
-                                                    'Schedule end date',
-                                                    style: Styles.blackBold14,
-                                                  ),
-                                                  // size: ColumnSize.L,
+                                                // size: ColumnSize.L,
+                                              ),
+                                              DataColumn2(
+                                                fixedWidth: 100,
+                                                label: Text(
+                                                  'Action',
+                                                  style: Styles.blackBold14,
                                                 ),
-                                                DataColumn2(
-                                                  fixedWidth: 100,
-                                                  label: Text(
-                                                    'Action',
-                                                    style: Styles.blackBold14,
-                                                  ),
-                                                ),
-                                              ],
-                                              rows: List<DataRow>.generate(
-                                                controller.allItems.length ?? 0,
-                                                (index) => DataRow(cells: [
-                                                  DataCell(Text(controller
-                                                          .allItems[index]
-                                                          ?.facility_name
-                                                          .toString() ??
-                                                      '')),
-                                                  DataCell(Text(
-                                                      '${controller.allItems[index]?.wo_number.toString() ?? ''}')),
-                                                  DataCell(Text(controller
-                                                          .allItems[index]
-                                                          ?.wo_decription ??
-                                                      "")),
-                                                  DataCell(Text(controller
-                                                          .allItems[index]
-                                                          ?.status_long ??
-                                                      '')),
-                                                  DataCell(Text(controller
-                                                          .allItems[index]
-                                                          ?.asset_category ??
-                                                      '')),
-                                                  DataCell(Text(controller
-                                                          .allItems[index]
-                                                          ?.asset_name ??
-                                                      '')),
-                                                  DataCell(Text(controller
-                                                          .allItems[index]
-                                                          ?.start_date ??
-                                                      '')),
-                                                  DataCell(Text(controller
-                                                          .allItems[index]
-                                                          ?.end_date ??
-                                                      '')),
-                                                  DataCell(
-                                                    Row(
-                                                      children: [
-                                                        TableActionButton(
-                                                          color: ColorValues
-                                                              .viewColor,
-                                                          icon: Icons
-                                                              .remove_red_eye_outlined,
-                                                          message: 'View',
-                                                          onPress: () {
-                                                            controller
-                                                                .clearStoreJobData();
-                                                            // controller
-                                                            //     .clearStoreDatatype();
+                                              ),
+                                            ],
+                                            rows: List<DataRow>.generate(
+                                              controller
+                                                      .dashboardMcList
+                                                      .value
+                                                      ?.cmDashboadDetails
+                                                      ?.item_list
+                                                      ?.length ??
+                                                  0,
+                                              (index) => DataRow(cells: [
+                                                DataCell(Text(controller
+                                                        .dashboardMcList
+                                                        .value
+                                                        ?.cmDashboadDetails
+                                                        ?.item_list?[index]
+                                                        .facility_name
+                                                        .toString() ??
+                                                    '')),
+                                                DataCell(Text(
+                                                    'MC${controller.dashboardMcList.value?.cmDashboadDetails?.item_list?[index].wo_number.toString() ?? ''}')),
+                                                DataCell(Text(controller
+                                                        .dashboardMcList
+                                                        .value
+                                                        ?.cmDashboadDetails
+                                                        ?.item_list?[index]
+                                                        .wo_decription ??
+                                                    '')),
+                                                DataCell(Text(controller
+                                                        .dashboardMcList
+                                                        .value
+                                                        ?.cmDashboadDetails
+                                                        ?.item_list?[index]
+                                                        .status_long ??
+                                                    '')),
+                                                DataCell(Text(controller
+                                                        .dashboardMcList
+                                                        .value
+                                                        ?.cmDashboadDetails
+                                                        ?.item_list?[index]
+                                                        .asset_category ??
+                                                    '')),
+                                                DataCell(Text(controller
+                                                        .dashboardMcList
+                                                        .value
+                                                        ?.cmDashboadDetails
+                                                        ?.item_list?[index]
+                                                        .asset_name ??
+                                                    '')),
+                                                DataCell(Text(controller
+                                                        .dashboardMcList
+                                                        .value
+                                                        ?.cmDashboadDetails
+                                                        ?.item_list?[index]
+                                                        .start_date ??
+                                                    '')),
+                                                DataCell(Text(controller
+                                                        .dashboardMcList
+                                                        .value
+                                                        ?.cmDashboadDetails
+                                                        ?.item_list?[index]
+                                                        .end_date ??
+                                                    '')),
+                                                DataCell(
+                                                  Row(
+                                                    children: [
+                                                      TableActionButton(
+                                                        color: ColorValues
+                                                            .viewColor,
+                                                        icon: Icons
+                                                            .remove_red_eye_outlined,
+                                                        message: 'View',
+                                                        onPress: () {
+                                                          // controller
+                                                          //     .clearStoreData();
+                                                          // controller
+                                                          //     .clearStoreDatatype();
 
-                                                            int jobId = controller
-                                                                    .dashboardBmList
-                                                                    .value
-                                                                    ?.cmDashboadDetails
-                                                                    ?.item_list?[
-                                                                        index]
-                                                                    .wo_number ??
-                                                                0;
-                                                            if (jobId != 0) {
-                                                              Get.toNamed(
-                                                                  Routes
-                                                                      .jobDetails,
-                                                                  arguments: {
-                                                                    'jobId':
-                                                                        jobId
-                                                                  });
-                                                            }
-                                                          },
-                                                        ),
-                                                      ],
-                                                    ),
+                                                          int pmTaskId = controller
+                                                                  .dashboardMcList
+                                                                  .value
+                                                                  ?.cmDashboadDetails
+                                                                  ?.item_list?[
+                                                                      index]
+                                                                  .wo_number ??
+                                                              0;
+                                                          if (pmTaskId != 0) {
+                                                            Get.toNamed(
+                                                                Routes
+                                                                    .pmTaskView,
+                                                                arguments: {
+                                                                  'pmTaskId':
+                                                                      pmTaskId
+                                                                });
+                                                          }
+                                                        },
+                                                      ),
+                                                    ],
                                                   ),
-                                                ]),
-                                              ),
+                                                ),
+                                              ]),
                                             ),
                                           ),
                                         ),
                                       ),
-                                    ],
-                                  ),
+                                    ),
+                                  ],
                                 ),
                               ),
 
-                              //bm............................
+                              ///ir...............................
 
-                              Obx(
-                                () => Container(
-                                  margin: EdgeInsets.only(
-                                      left: 20, right: 20, top: 10),
-                                  height: Get.height,
-                                  width: Get.width,
-                                  decoration: BoxDecoration(
-                                    color: Color.fromARGB(255, 245, 248, 250),
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  child: Column(
-                                    children: [
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceEvenly,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        children: [
-                                          Expanded(
-                                            flex: 2,
-                                            child: Container(
-                                                margin:
-                                                    EdgeInsets.only(left: 20),
-                                                padding: EdgeInsets.only(
-                                                    left: 20, top: 10),
-                                                decoration: BoxDecoration(
-                                                  color: ColorValues
-                                                      .lightBlueColor,
-                                                  borderRadius:
-                                                      BorderRadius.circular(10),
-                                                  boxShadow: [
-                                                    BoxShadow(
-                                                      color: Colors.grey,
-                                                      offset: Offset(0.0, 1.0),
-                                                      blurRadius: 6.0,
-                                                    ),
-                                                  ],
-                                                ),
-                                                height: 150,
-                                                child: Row(
-                                                  children: [
-                                                    Column(
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .start,
-                                                      children: [
-                                                        Text("Overview",
-                                                            style:
-                                                                Styles.black15),
-                                                        // Dimens.boxHeight20,
-                                                        // Spacer(),
-                                                        Center(
-                                                          child: Row(
-                                                            children: [
-                                                              Container(
-                                                                  margin: EdgeInsets
-                                                                      .only(
-                                                                          top:
-                                                                              10),
-                                                                  height: 100,
-                                                                  width: 150,
-                                                                  child: Column(
-                                                                    children: [
-                                                                      Row(
-                                                                        mainAxisAlignment:
-                                                                            MainAxisAlignment.center,
-                                                                        children: [
-                                                                          Text(
-                                                                            "Total",
-                                                                            style:
-                                                                                Styles.black13,
-                                                                          ),
-                                                                          Spacer(),
-
-                                                                          Text(
-                                                                              '${controller.dashboardBmList.value?.cmDashboadDetails?.total}'),
-                                                                          //  '${dashbo?.module_name}'),
-                                                                        ],
-                                                                      ),
-                                                                      Dimens
-                                                                          .boxHeight5,
-                                                                      Row(
-                                                                        children: [
-                                                                          Text(
-                                                                            "Completed",
-                                                                            style:
-                                                                                Styles.black13,
-                                                                          ),
-                                                                          Spacer(),
-                                                                          Text(
-                                                                              '${controller.dashboardBmList.value?.cmDashboadDetails?.completed}'),
-                                                                        ],
-                                                                      ),
-                                                                      Dimens
-                                                                          .boxHeight5,
-                                                                      Row(
-                                                                        children: [
-                                                                          Text(
-                                                                            "Pending",
-                                                                            style:
-                                                                                Styles.black13,
-                                                                          ),
-                                                                          Spacer(),
-                                                                          Text(
-                                                                              '${controller.dashboardBmList.value?.cmDashboadDetails?.pending}'),
-                                                                        ],
-                                                                      ),
-                                                                    ],
-                                                                  )),
-                                                            ],
-                                                          ),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                    Dimens.boxWidth20,
-                                                    Container(
-                                                        // padding: EdgeInsets.only(
-                                                        //     top: 30,
-                                                        //     right: 20,
-                                                        //     left: 10),
-                                                        child:
-                                                            CircularPercentIndicator(
-                                                      //circular progress indicator
-                                                      radius:
-                                                          50.0, //radius for circle
-                                                      lineWidth:
-                                                          15.0, //width of circle line
-                                                      animation:
-                                                          true, //animate when it shows progress indicator first
-                                                      percent: (controller
-                                                                  .dashboardBmList
-                                                                  .value
-                                                                  ?.cmDashboadDetails
-                                                                  ?.completed ??
-                                                              0) /
-                                                          (controller
-                                                                  .dashboardBmList
-                                                                  .value
-                                                                  ?.cmDashboadDetails
-                                                                  ?.total ??
-                                                              0), //vercentage value: 0.6 for 60% (60/100 = 0.6)
-                                                      center: Text(
-                                                        '${((controller.dashboardBmList.value?.cmDashboadDetails?.completed ?? 0) / (controller.dashboardBmList.value?.cmDashboadDetails?.total ?? 0) * 100).toStringAsFixed(1)}%',
-                                                        style: TextStyle(
-                                                            fontWeight:
-                                                                FontWeight.bold,
-                                                            fontSize: 20.0),
-                                                      ), //center text, you can set Icon as well
-                                                      footer: Text(
-                                                        "Order this Month",
-                                                        style: Styles.black13,
-                                                      ), //footer text
-                                                      backgroundColor: ColorValues
-                                                          .addNewColor, //backround of progress bar
-                                                      circularStrokeCap:
-                                                          CircularStrokeCap
-                                                              .round, //corner shape of progress bar at start/end
-                                                      progressColor: Colors
-                                                          .redAccent, //progress bar color
-                                                    )),
-                                                  ],
-                                                )),
-                                          ),
-                                          Expanded(
-                                            flex: 2,
-                                            child: Container(
+                              Container(
+                                margin: EdgeInsets.only(
+                                    left: 20, right: 20, top: 10),
+                                height: Get.height,
+                                width: Get.width,
+                                decoration: BoxDecoration(
+                                  color: Color.fromARGB(255, 245, 248, 250),
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                child: Column(
+                                  children: [
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        Expanded(
+                                          flex: 2,
+                                          child: Container(
                                               margin: EdgeInsets.only(left: 20),
                                               padding: EdgeInsets.only(
                                                   left: 20, top: 10),
@@ -1182,203 +2939,348 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb> {
                                                 ],
                                               ),
                                               height: 150,
-                                              child: Column(
+                                              child: Row(
                                                 children: [
-                                                  Row(
+                                                  Column(
                                                     crossAxisAlignment:
                                                         CrossAxisAlignment
                                                             .start,
                                                     children: [
-                                                      Align(
-                                                          alignment:
-                                                              Alignment.topLeft,
-                                                          child: Column(
-                                                            children: [
-                                                              Text(
-                                                                  "Schedule Compliance",
-                                                                  style: Styles
-                                                                      .black15),
-                                                              Dimens
-                                                                  .boxHeight10,
-                                                              SemicircularIndicator(
-                                                                radius: 60,
-                                                                color: Color
-                                                                    .fromARGB(
-                                                                        255,
-                                                                        195,
-                                                                        146,
-                                                                        230),
-                                                                backgroundColor:
-                                                                    Colors
-                                                                        .lightGreen,
-                                                                strokeWidth: 13,
-                                                                bottomPadding:
-                                                                    0,
-                                                                child: Text(
-                                                                  '${((controller.dashboardBmList.value?.cmDashboadDetails?.schedule_compliance_completed ?? 0) / (controller.dashboardBmList.value?.cmDashboadDetails?.schedule_compliance_total ?? 1) * 100).toString()}%',
-                                                                  style: TextStyle(
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .bold,
-                                                                      fontSize:
-                                                                          20.0,
-                                                                      color: Colors
-                                                                          .redAccent),
-                                                                ),
-                                                              ),
-                                                            ],
-                                                          )),
-                                                      Spacer(),
-                                                      Container(
-                                                        height:
-                                                            Get.height * 0.09,
-                                                        width: Get.width * 0.09,
-                                                        margin: EdgeInsets.only(
-                                                            left: 20,
-                                                            right: 10),
-                                                        padding:
-                                                            EdgeInsets.only(
-                                                                left: 10,
-                                                                top: 10,
-                                                                right: 10),
-                                                        decoration: BoxDecoration(
-                                                            color: Colors.white,
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        10),
-                                                            boxShadow: [
-                                                              BoxShadow(
-                                                                color:
-                                                                    Colors.grey,
-                                                                offset: Offset(
-                                                                    0.0, 1.0),
-                                                                blurRadius: 6.0,
-                                                              ),
-                                                            ]),
-                                                        child: Column(
-                                                          crossAxisAlignment:
-                                                              CrossAxisAlignment
-                                                                  .start,
+                                                      Text("Overview",
+                                                          style:
+                                                              Styles.black15),
+                                                      // Dimens.boxHeight20,
+                                                      // Spacer(),
+                                                      Center(
+                                                        child: Row(
                                                           children: [
-                                                            Row(
-                                                              children: [
-                                                                Text(
-                                                                  "Total",
-                                                                  style: TextStyle(
-                                                                      fontSize:
-                                                                          Get.width * 0.009 -
-                                                                              1),
-                                                                ),
-                                                                Spacer(),
-                                                                Text(
-                                                                  '${controller.dashboardBmList.value?.cmDashboadDetails?.schedule_compliance_total}',
-                                                                  style: TextStyle(
-                                                                      fontSize:
-                                                                          Get.width * 0.009 -
-                                                                              1),
-                                                                ),
-                                                              ],
-                                                            ),
-                                                            // Dimens.boxHeight2,
-                                                            Row(
-                                                              children: [
-                                                                Text(
-                                                                  "Completed",
-                                                                  style: TextStyle(
-                                                                      fontSize:
-                                                                          Get.width * 0.009 -
-                                                                              1),
-                                                                ),
-                                                                Spacer(),
-                                                                Text(
-                                                                  '${controller.dashboardBmList.value?.cmDashboadDetails?.schedule_compliance_completed}',
-                                                                  style: TextStyle(
-                                                                      fontSize:
-                                                                          Get.width * 0.009 -
-                                                                              1),
-                                                                ),
-                                                              ],
-                                                            ),
-                                                            // Dimens.boxHeight5,
-                                                            Row(
-                                                              children: [
-                                                                Text(
-                                                                  "Pending",
-                                                                  style: TextStyle(
-                                                                      fontSize:
-                                                                          Get.width * 0.009 -
-                                                                              1),
-                                                                ),
-                                                                Spacer(),
-                                                                Text(
-                                                                  '${controller.dashboardBmList.value?.cmDashboadDetails?.schedule_compliance_pending}',
-                                                                  style: TextStyle(
-                                                                      fontSize:
-                                                                          Get.width * 0.009 -
-                                                                              1),
-                                                                ),
-                                                              ],
-                                                            ),
+                                                            Container(
+                                                                margin: EdgeInsets
+                                                                    .only(
+                                                                        top:
+                                                                            10),
+                                                                height: 100,
+                                                                width: 150,
+                                                                child: Column(
+                                                                  children: [
+                                                                    Row(
+                                                                      mainAxisAlignment:
+                                                                          MainAxisAlignment
+                                                                              .center,
+                                                                      children: [
+                                                                        Text(
+                                                                          "Total",
+                                                                          style:
+                                                                              Styles.black13,
+                                                                        ),
+                                                                        Spacer(),
+
+                                                                        Text(
+                                                                            '${controller.dashboardIrList.value?.cmDashboadDetails?.total}'),
+                                                                        //  '${dashbo?.module_name}'),
+                                                                      ],
+                                                                    ),
+                                                                    Dimens
+                                                                        .boxHeight5,
+                                                                    Row(
+                                                                      children: [
+                                                                        Text(
+                                                                          "Completed",
+                                                                          style:
+                                                                              Styles.black13,
+                                                                        ),
+                                                                        Spacer(),
+                                                                        Text(
+                                                                            '${controller.dashboardIrList.value?.cmDashboadDetails?.completed}'),
+                                                                      ],
+                                                                    ),
+                                                                    Dimens
+                                                                        .boxHeight5,
+                                                                    Row(
+                                                                      children: [
+                                                                        Text(
+                                                                          "Pending",
+                                                                          style:
+                                                                              Styles.black13,
+                                                                        ),
+                                                                        Spacer(),
+                                                                        Text(
+                                                                            '${controller.dashboardIrList.value?.cmDashboadDetails?.pending}'),
+                                                                      ],
+                                                                    ),
+                                                                  ],
+                                                                )),
                                                           ],
                                                         ),
                                                       ),
                                                     ],
                                                   ),
-                                                  // Dimens.boxHeight20,
+                                                  Dimens.boxWidth20,
+                                                  Container(
+                                                      // padding: EdgeInsets.only(
+                                                      //     top: 30,
+                                                      //     right: 20,
+                                                      //     left: 10),
+                                                      child:
+                                                          CircularPercentIndicator(
+                                                    //circular progress indicator
+                                                    radius:
+                                                        50.0, //radius for circle
+                                                    lineWidth:
+                                                        15.0, //width of circle line
+                                                    animation:
+                                                        true, //animate when it shows progress indicator first
+                                                    percent: (controller
+                                                                .dashboardIrList
+                                                                .value
+                                                                ?.cmDashboadDetails
+                                                                ?.completed ??
+                                                            0) /
+                                                        (controller
+                                                                .dashboardIrList
+                                                                .value
+                                                                ?.cmDashboadDetails
+                                                                ?.total ??
+                                                            0),
+                                                    center: Text(
+                                                      '${((controller.dashboardIrList.value?.cmDashboadDetails?.completed ?? 0) / (controller.dashboardIrList.value?.cmDashboadDetails?.total ?? 1) * 100).toStringAsFixed(1)}%',
+                                                      style: TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          fontSize: 20.0),
+                                                    ), //center text, you can set Icon as well
+                                                    footer: Text(
+                                                      "Order this Month",
+                                                      style: Styles.black13,
+                                                    ), //footer text
+                                                    backgroundColor: ColorValues
+                                                        .addNewColor, //backround of progress bar
+                                                    circularStrokeCap:
+                                                        CircularStrokeCap
+                                                            .round, //corner shape of progress bar at start/end
+                                                    progressColor: Colors
+                                                        .redAccent, //progress bar color
+                                                  )),
                                                 ],
-                                              ),
-                                            ),
-                                          ),
-                                          Expanded(
-                                            flex: 2,
-                                            child: Container(
-                                                margin: EdgeInsets.only(
-                                                    left: 20, right: 20),
-                                                padding: EdgeInsets.only(
-                                                    left: 20, top: 10),
-                                                decoration: BoxDecoration(
-                                                  color: ColorValues
-                                                      .lightBlueColor,
-                                                  borderRadius:
-                                                      BorderRadius.circular(10),
-                                                  boxShadow: [
-                                                    BoxShadow(
-                                                      color: Colors.grey,
-                                                      offset: Offset(0.0, 1.0),
-                                                      blurRadius: 6.0,
-                                                    ),
-                                                  ],
+                                              )),
+                                        ),
+                                        Expanded(
+                                          flex: 2,
+                                          child: Container(
+                                            margin: EdgeInsets.only(left: 20),
+                                            padding: EdgeInsets.only(
+                                                left: 20, top: 10),
+                                            decoration: BoxDecoration(
+                                              color: ColorValues.lightBlueColor,
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: Colors.grey,
+                                                  offset: Offset(0.0, 1.0),
+                                                  blurRadius: 6.0,
                                                 ),
-                                                height: 150,
-                                                child: Row(
+                                              ],
+                                            ),
+                                            height: 150,
+                                            child: Column(
+                                              children: [
+                                                Row(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
                                                   children: [
                                                     Align(
                                                         alignment:
                                                             Alignment.topLeft,
-                                                        child: Text("Category",
-                                                            style: Styles
-                                                                .black15)),
-                                                    Align(
+                                                        child: Column(
+                                                          children: [
+                                                            Text(
+                                                                "Schedule Compliance",
+                                                                style: Styles
+                                                                    .black15),
+                                                            Dimens.boxHeight10,
+                                                            SemicircularIndicator(
+                                                              radius: 60,
+                                                              color: Color
+                                                                  .fromARGB(
+                                                                      255,
+                                                                      195,
+                                                                      146,
+                                                                      230),
+                                                              backgroundColor:
+                                                                  Colors
+                                                                      .lightGreen,
+                                                              strokeWidth: 13,
+                                                              bottomPadding: 0,
+                                                              child: Text(
+                                                                '${((controller.dashboardIrList.value?.cmDashboadDetails?.schedule_compliance_completed ?? 0) / (controller.dashboardIrList.value?.cmDashboadDetails?.schedule_compliance_total ?? 1) * 100).toString()}%',
+                                                                style: TextStyle(
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .bold,
+                                                                    fontSize:
+                                                                        20.0,
+                                                                    color: Colors
+                                                                        .redAccent),
+                                                              ),
+                                                            ),
+                                                          ],
+                                                        )),
+                                                    Spacer(),
+                                                    Container(
+                                                      height: Get.height * 0.09,
+                                                      width: Get.width * 0.09,
+                                                      margin: EdgeInsets.only(
+                                                          left: 20, right: 10),
+                                                      padding: EdgeInsets.only(
+                                                          left: 10,
+                                                          top: 10,
+                                                          right: 10),
+                                                      decoration: BoxDecoration(
+                                                          color: Colors.white,
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(10),
+                                                          boxShadow: [
+                                                            BoxShadow(
+                                                              color:
+                                                                  Colors.grey,
+                                                              offset: Offset(
+                                                                  0.0, 1.0),
+                                                              blurRadius: 6.0,
+                                                            ),
+                                                          ]),
+                                                      child: Column(
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          Row(
+                                                            children: [
+                                                              Text(
+                                                                "Total",
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        Get.width *
+                                                                                0.009 -
+                                                                            1),
+                                                              ),
+                                                              Spacer(),
+                                                              Text(
+                                                                '${controller.dashboardIrList.value?.cmDashboadDetails?.schedule_compliance_total}',
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        Get.width *
+                                                                                0.009 -
+                                                                            1),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                          // Dimens.boxHeight2,
+                                                          Row(
+                                                            children: [
+                                                              Text(
+                                                                "Completed",
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        Get.width *
+                                                                                0.009 -
+                                                                            1),
+                                                              ),
+                                                              Spacer(),
+                                                              Text(
+                                                                '${controller.dashboardIrList.value?.cmDashboadDetails?.schedule_compliance_completed}',
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        Get.width *
+                                                                                0.009 -
+                                                                            1),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                          // Dimens.boxHeight5,
+                                                          Row(
+                                                            children: [
+                                                              Text(
+                                                                "Pending",
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        Get.width *
+                                                                                0.009 -
+                                                                            1),
+                                                              ),
+                                                              Spacer(),
+                                                              Text(
+                                                                '${controller.dashboardIrList.value?.cmDashboadDetails?.schedule_compliance_pending}',
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        Get.width *
+                                                                                0.009 -
+                                                                            1),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                                // Dimens.boxHeight20,
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                        Expanded(
+                                          flex: 2,
+                                          child: Container(
+                                              margin: EdgeInsets.only(
+                                                  left: 20, right: 20),
+                                              padding: EdgeInsets.only(
+                                                  left: 20, top: 10),
+                                              decoration: BoxDecoration(
+                                                color:
+                                                    ColorValues.lightBlueColor,
+                                                borderRadius:
+                                                    BorderRadius.circular(10),
+                                                boxShadow: [
+                                                  BoxShadow(
+                                                    color: Colors.grey,
+                                                    offset: Offset(0.0, 1.0),
+                                                    blurRadius: 6.0,
+                                                  ),
+                                                ],
+                                              ),
+                                              height: 150,
+                                              child: Row(
+                                                children: [
+                                                  Align(
                                                       alignment:
-                                                          Alignment.centerLeft,
-                                                      child: PieChart(
-                                                        totalValue:
-                                                            20.0, //double.tryParse(controller.dashboardBmList.value!.category_total_count.toString()),
-                                                        dataMap: controller
-                                                            .getDataMap(),
+                                                          Alignment.topLeft,
+                                                      child: Text("Category",
+                                                          style:
+                                                              Styles.black15)),
+                                                  Align(
+                                                    alignment:
+                                                        Alignment.centerLeft,
+                                                    child: Obx(() {
+                                                      // Access the dataMap from the controller
+                                                      Map<String, double> data =
+                                                          controller.getDataMap;
+                                                      return PieChart(
+                                                        dataMap: data,
+                                                        totalValue: data.values
+                                                            .reduce((a, b) =>
+                                                                a +
+                                                                b), // Sum of all values in the map
                                                         chartType:
                                                             ChartType.ring,
                                                         chartRadius: 100,
                                                         colorList: controller
                                                             .getColorList(),
-                                                        // centerText: "Pie Chart",
                                                         legendOptions:
                                                             LegendOptions(
                                                           showLegendsInRow:
                                                               false,
-                                                          // legendPosition:
-                                                          //     LegendPosition.left,
                                                           showLegends: true,
                                                         ),
                                                         chartValuesOptions:
@@ -1391,19 +3293,18 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb> {
                                                           showChartValuesOutside:
                                                               false,
                                                         ),
-                                                        // onTapCallback: (index) {
-                                                        //   chartController
-                                                        //       .onChartTapped(index);
-                                                        // },
-                                                      ),
-                                                    )
-                                                  ],
-                                                )),
-                                          ),
-                                        ],
-                                      ),
-                                      Dimens.boxHeight10,
-                                      Container(
+                                                      );
+                                                    }),
+                                                  )
+                                                ],
+                                              )),
+                                        ),
+                                      ],
+                                    ),
+                                    Dimens.boxHeight10,
+                                    SingleChildScrollView(
+                                      scrollDirection: Axis.horizontal,
+                                      child: Container(
                                         // height: 70,
                                         width: Get.width * .92,
                                         child: Row(
@@ -1411,2337 +3312,256 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb> {
                                               MainAxisAlignment.spaceAround,
                                           children: [
                                             _gridList(
-                                                tittle: "WO on-time",
-                                                percent:
-                                                    '${((controller.dashboardBmList.value?.cmDashboadDetails?.wo_on_time ?? 0) / (controller.dashboardBmList.value?.cmDashboadDetails?.total ?? 1) * 100).toString()}%'),
+                                              tittle: "WO on-time",
+                                              percent:
+                                                  '${((controller.dashboardIrList.value?.cmDashboadDetails?.wo_on_time ?? 0) / (controller.dashboardIrList.value?.cmDashboadDetails?.total ?? 1) * 100).toString()}%',
+                                            ),
                                             _gridList(
-                                                tittle: "WO delay",
-                                                percent:
-                                                    '${((controller.dashboardBmList.value?.cmDashboadDetails?.wo_delay ?? 0) / (controller.dashboardBmList.value?.cmDashboadDetails?.total ?? 1) * 100).toString()}%'),
+                                              tittle: "WO delay",
+                                              percent:
+                                                  '${((controller.dashboardIrList.value?.cmDashboadDetails?.wo_delay ?? 0) / (controller.dashboardIrList.value?.cmDashboadDetails?.total ?? 1) * 100).toString()}%',
+                                            ),
                                             _gridList(
-                                                tittle: "WO backlog",
-                                                percent:
-                                                    '${((controller.dashboardBmList.value?.cmDashboadDetails?.wo_backlog ?? 0) / (controller.dashboardBmList.value?.cmDashboadDetails?.total ?? 1) * 100).toString()}%'),
+                                              tittle: "WO backlog",
+                                              percent:
+                                                  '${((controller.dashboardIrList.value?.cmDashboadDetails?.wo_backlog ?? 0) / (controller.dashboardIrList.value?.cmDashboadDetails?.total ?? 1) * 100).toString()}%',
+                                            ),
                                             _gridList(
                                                 tittle: "Low stock items",
                                                 percent:
-                                                    '${controller.dashboardBmList.value?.cmDashboadDetails?.low_stock_items}'),
+                                                    '${controller.dashboardIrList.value?.cmDashboadDetails?.low_stock_items}'),
                                             _gridList(
                                                 tittle: "PO Items Awaited",
                                                 percent:
-                                                    '${controller.dashboardBmList.value?.cmDashboadDetails?.po_items_awaited}'),
+                                                    '${controller.dashboardIrList.value?.cmDashboadDetails?.po_items_awaited}'),
                                           ],
                                         ),
                                       ),
-                                      Dimens.boxHeight10,
-                                      Expanded(
-                                        child: Container(
-                                          color: Color.fromARGB(
-                                              255, 245, 248, 250),
-                                          width: Get.width,
-                                          height: Get.height,
-                                          child: Padding(
-                                            padding: EdgeInsets.only(
-                                              left: 16,
-                                              right: 16,
+                                    ),
+                                    // Dimens.boxHeight10,
+                                    Expanded(
+                                      child: Container(
+                                        color:
+                                            Color.fromARGB(255, 245, 248, 250),
+                                        width: Get.width,
+                                        height: Get.height,
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(16),
+                                          child: DataTable2(
+                                            headingRowHeight: 40,
+                                            dataRowHeight: 35,
+                                            columnSpacing: 12,
+                                            // horizontalMargin: 5,
+                                            headingRowColor:
+                                                MaterialStateColor.resolveWith(
+                                              (states) {
+                                                return ColorValues
+                                                    .lightGreyColor;
+                                              },
                                             ),
-                                            child: DataTable2(
-                                              headingRowHeight: 40,
-                                              dataRowHeight: 35,
-                                              columnSpacing: 12,
-                                              // horizontalMargin: 5,
-                                              headingRowColor:
-                                                  MaterialStateColor
-                                                      .resolveWith(
-                                                (states) {
-                                                  return ColorValues
-                                                      .lightGreyColor;
-                                                },
+                                            minWidth: 2500,
+                                            columns: [
+                                              DataColumn2(
+                                                fixedWidth: 100,
+                                                label: Text(
+                                                  'Site name',
+                                                  style: Styles.blackBold14,
+                                                ),
+                                                // size: ColumnSize.L,
                                               ),
-                                              minWidth: 2500,
-                                              columns: [
-                                                DataColumn2(
-                                                  fixedWidth: 100,
-                                                  label: Text(
-                                                    'Site name',
-                                                    style: Styles.blackBold14,
-                                                  ),
-                                                  // size: ColumnSize.L,
+                                              DataColumn2(
+                                                fixedWidth: 120,
+                                                label: Text(
+                                                  'WO number',
+                                                  style: Styles.blackBold14,
                                                 ),
-                                                DataColumn2(
-                                                  fixedWidth: 120,
-                                                  label: Text(
-                                                    'WO number',
-                                                    style: Styles.blackBold14,
-                                                  ),
-                                                  // size: ColumnSize.L,
-                                                ),
-                                                DataColumn2(
-                                                  fixedWidth: 200,
-                                                  label: Text(
-                                                    'WO description',
-                                                    style: Styles.blackBold14,
-                                                  ),
-                                                  // size: ColumnSize.L,
-                                                ),
-                                                DataColumn2(
-                                                  fixedWidth: 300,
-                                                  label: Text(
-                                                    'Status',
-                                                    style: Styles.blackBold14,
-                                                  ),
-                                                  // size: ColumnSize.L,
-                                                ),
-                                                DataColumn2(
-                                                  fixedWidth: 250,
-                                                  label: Text(
-                                                    'Asset category',
-                                                    style: Styles.blackBold14,
-                                                  ),
-                                                  // size: ColumnSize.L,
-                                                ),
-                                                DataColumn2(
-                                                  fixedWidth: 400,
-                                                  label: Text(
-                                                    'Asset name',
-                                                    style: Styles.blackBold14,
-                                                  ),
-                                                  // size: ColumnSize.L,
-                                                ),
-                                                DataColumn2(
-                                                  fixedWidth: 250,
-                                                  label: Text(
-                                                    'Schedule start date',
-                                                    style: Styles.blackBold14,
-                                                  ),
-                                                  // size: ColumnSize.L,
-                                                ),
-                                                DataColumn2(
-                                                  fixedWidth: 250,
-                                                  label: Text(
-                                                    'Schedule end date',
-                                                    style: Styles.blackBold14,
-                                                  ),
-                                                  // size: ColumnSize.L,
-                                                ),
-                                                DataColumn2(
-                                                  fixedWidth: 100,
-                                                  label: Text(
-                                                    'Action',
-                                                    style: Styles.blackBold14,
-                                                  ),
-                                                ),
-                                              ],
-                                              rows: List<DataRow>.generate(
-                                                controller
-                                                        .dashboardBmList
-                                                        .value
-                                                        ?.cmDashboadDetails
-                                                        ?.item_list
-                                                        ?.length ??
-                                                    0,
-                                                (index) => DataRow(cells: [
-                                                  DataCell(Text(controller
-                                                          .dashboardBmList
-                                                          .value
-                                                          ?.cmDashboadDetails
-                                                          ?.item_list?[index]
-                                                          .facility_name
-                                                          .toString() ??
-                                                      '')),
-                                                  DataCell(Text(
-                                                      'BM${controller.dashboardBmList.value?.cmDashboadDetails?.item_list?[index].wo_number.toString() ?? ''}')),
-                                                  DataCell(Text(controller
-                                                          .dashboardBmList
-                                                          .value
-                                                          ?.cmDashboadDetails
-                                                          ?.item_list?[index]
-                                                          .wo_decription ??
-                                                      "")),
-                                                  DataCell(Text(controller
-                                                          .dashboardBmList
-                                                          .value
-                                                          ?.cmDashboadDetails
-                                                          ?.item_list?[index]
-                                                          .status_long ??
-                                                      '')),
-                                                  DataCell(Text(controller
-                                                          .dashboardBmList
-                                                          .value
-                                                          ?.cmDashboadDetails
-                                                          ?.item_list?[index]
-                                                          .asset_category ??
-                                                      '')),
-                                                  DataCell(Text(controller
-                                                          .dashboardBmList
-                                                          .value
-                                                          ?.cmDashboadDetails
-                                                          ?.item_list?[index]
-                                                          .asset_name ??
-                                                      '')),
-                                                  DataCell(Text(controller
-                                                          .dashboardBmList
-                                                          .value
-                                                          ?.cmDashboadDetails
-                                                          ?.item_list?[index]
-                                                          .start_date ??
-                                                      '')),
-                                                  DataCell(Text(controller
-                                                          .dashboardBmList
-                                                          .value
-                                                          ?.cmDashboadDetails
-                                                          ?.item_list?[index]
-                                                          .end_date ??
-                                                      '')),
-                                                  DataCell(
-                                                    Row(
-                                                      children: [
-                                                        TableActionButton(
-                                                          color: ColorValues
-                                                              .viewColor,
-                                                          icon: Icons
-                                                              .remove_red_eye_outlined,
-                                                          message: 'View',
-                                                          onPress: () {
-                                                            controller
-                                                                .clearStoreJobData();
-                                                            // controller
-                                                            //     .clearStoreDatatype();
-
-                                                            int jobId = controller
-                                                                    .dashboardBmList
-                                                                    .value
-                                                                    ?.cmDashboadDetails
-                                                                    ?.item_list?[
-                                                                        index]
-                                                                    .wo_number ??
-                                                                0;
-                                                            if (jobId != 0) {
-                                                              Get.toNamed(
-                                                                  Routes
-                                                                      .jobDetails,
-                                                                  arguments: {
-                                                                    'jobId':
-                                                                        jobId
-                                                                  });
-                                                            }
-                                                          },
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  ),
-                                                ]),
+                                                // size: ColumnSize.L,
                                               ),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-
-                              //pm......................
-
-                              Obx(
-                                () => Container(
-                                  margin: EdgeInsets.only(
-                                      left: 20, right: 20, top: 10),
-                                  height: Get.height,
-                                  width: Get.width,
-                                  decoration: BoxDecoration(
-                                    color: Color.fromARGB(255, 245, 248, 250),
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  child: Column(
-                                    children: [
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceEvenly,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        children: [
-                                          Expanded(
-                                            flex: 2,
-                                            child: Container(
-                                                margin:
-                                                    EdgeInsets.only(left: 20),
-                                                padding: EdgeInsets.only(
-                                                    left: 20, top: 10),
-                                                decoration: BoxDecoration(
-                                                  color: ColorValues
-                                                      .lightBlueColor,
-                                                  borderRadius:
-                                                      BorderRadius.circular(10),
-                                                  boxShadow: [
-                                                    BoxShadow(
-                                                      color: Colors.grey,
-                                                      offset: Offset(0.0, 1.0),
-                                                      blurRadius: 6.0,
-                                                    ),
-                                                  ],
+                                              DataColumn2(
+                                                fixedWidth: 200,
+                                                label: Text(
+                                                  'WO description',
+                                                  style: Styles.blackBold14,
                                                 ),
-                                                height: 150,
-                                                child: Row(
-                                                  children: [
-                                                    Column(
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .start,
-                                                      children: [
-                                                        Text("Overview",
-                                                            style:
-                                                                Styles.black15),
-                                                        // Dimens.boxHeight20,
-                                                        // Spacer(),
-                                                        Center(
-                                                          child: Row(
-                                                            children: [
-                                                              Container(
-                                                                  margin: EdgeInsets
-                                                                      .only(
-                                                                          top:
-                                                                              10),
-                                                                  height: 100,
-                                                                  width: 150,
-                                                                  child: Column(
-                                                                    children: [
-                                                                      Row(
-                                                                        mainAxisAlignment:
-                                                                            MainAxisAlignment.center,
-                                                                        children: [
-                                                                          Text(
-                                                                            "Total",
-                                                                            style:
-                                                                                Styles.black13,
-                                                                          ),
-                                                                          Spacer(),
-
-                                                                          Text(
-                                                                              '${controller.dashboardPmList.value?.cmDashboadDetails?.total}'),
-                                                                          //  '${dashbo?.module_name}'),
-                                                                        ],
-                                                                      ),
-                                                                      Dimens
-                                                                          .boxHeight5,
-                                                                      Row(
-                                                                        children: [
-                                                                          Text(
-                                                                            "Completed",
-                                                                            style:
-                                                                                Styles.black13,
-                                                                          ),
-                                                                          Spacer(),
-                                                                          Text(
-                                                                              '${controller.dashboardPmList.value?.cmDashboadDetails?.completed}'),
-                                                                        ],
-                                                                      ),
-                                                                      Dimens
-                                                                          .boxHeight5,
-                                                                      Row(
-                                                                        children: [
-                                                                          Text(
-                                                                            "Pending",
-                                                                            style:
-                                                                                Styles.black13,
-                                                                          ),
-                                                                          Spacer(),
-                                                                          Text(
-                                                                              '${controller.dashboardPmList.value?.cmDashboadDetails?.pending}'),
-                                                                        ],
-                                                                      ),
-                                                                    ],
-                                                                  )),
-                                                            ],
-                                                          ),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                    Dimens.boxWidth20,
-                                                    Container(
-                                                        // padding: EdgeInsets.only(
-                                                        //     top: 30,
-                                                        //     right: 20,
-                                                        //     left: 10),
-                                                        child:
-                                                            CircularPercentIndicator(
-                                                      //circular progress indicator
-                                                      radius:
-                                                          50.0, //radius for circle
-                                                      lineWidth:
-                                                          15.0, //width of circle line
-                                                      animation:
-                                                          true, //animate when it shows progress indicator first
-                                                      percent: (controller
-                                                                  .dashboardPmList
-                                                                  .value
-                                                                  ?.cmDashboadDetails
-                                                                  ?.completed ??
-                                                              0) /
-                                                          (controller
-                                                                  .dashboardPmList
-                                                                  .value
-                                                                  ?.cmDashboadDetails
-                                                                  ?.total ??
-                                                              0), //vercentage value: 0.6 for 60% (60/100 = 0.6)
-                                                      center: Text(
-                                                        '${((controller.dashboardPmList.value?.cmDashboadDetails?.completed ?? 0) / (controller.dashboardPmList.value?.cmDashboadDetails?.total ?? 1) * 100).toStringAsFixed(1)}%',
-                                                        style: TextStyle(
-                                                            fontWeight:
-                                                                FontWeight.bold,
-                                                            fontSize: 20.0),
-                                                      ), //center text, you can set Icon as well
-                                                      footer: Text(
-                                                        "Order this Month",
-                                                        style: Styles.black13,
-                                                      ), //footer text
-                                                      backgroundColor: ColorValues
-                                                          .addNewColor, //backround of progress bar
-                                                      circularStrokeCap:
-                                                          CircularStrokeCap
-                                                              .round, //corner shape of progress bar at start/end
-                                                      progressColor: Colors
-                                                          .redAccent, //progress bar color
-                                                    )),
-                                                  ],
-                                                )),
-                                          ),
-                                          Expanded(
-                                            flex: 2,
-                                            child: Container(
-                                              margin: EdgeInsets.only(left: 20),
-                                              padding: EdgeInsets.only(
-                                                  left: 20, top: 10),
-                                              decoration: BoxDecoration(
-                                                color:
-                                                    ColorValues.lightBlueColor,
-                                                borderRadius:
-                                                    BorderRadius.circular(10),
-                                                boxShadow: [
-                                                  BoxShadow(
-                                                    color: Colors.grey,
-                                                    offset: Offset(0.0, 1.0),
-                                                    blurRadius: 6.0,
-                                                  ),
-                                                ],
+                                                // size: ColumnSize.L,
                                               ),
-                                              height: 150,
-                                              child: Column(
-                                                children: [
-                                                  Row(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      Align(
-                                                          alignment:
-                                                              Alignment.topLeft,
-                                                          child: Column(
-                                                            children: [
-                                                              Text(
-                                                                  "Schedule Compliance",
-                                                                  style: Styles
-                                                                      .black15),
-                                                              Dimens
-                                                                  .boxHeight10,
-                                                              SemicircularIndicator(
-                                                                radius: 60,
-                                                                color: Color
-                                                                    .fromARGB(
-                                                                        255,
-                                                                        195,
-                                                                        146,
-                                                                        230),
-                                                                backgroundColor:
-                                                                    Colors
-                                                                        .lightGreen,
-                                                                strokeWidth: 13,
-                                                                bottomPadding:
-                                                                    0,
-                                                                child: Text(
-                                                                  '${((controller.dashboardPmList.value?.cmDashboadDetails?.schedule_compliance_completed ?? 0) / (controller.dashboardPmList.value?.cmDashboadDetails?.schedule_compliance_total ?? 1) * 100).toString()}%',
-                                                                  style: TextStyle(
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .bold,
-                                                                      fontSize:
-                                                                          20.0,
-                                                                      color: Colors
-                                                                          .redAccent),
-                                                                ),
-                                                              ),
-                                                            ],
-                                                          )),
-                                                      Spacer(),
-                                                      Container(
-                                                        height:
-                                                            Get.height * 0.09,
-                                                        width: Get.width * 0.09,
-                                                        margin: EdgeInsets.only(
-                                                            left: 20,
-                                                            right: 10),
-                                                        padding:
-                                                            EdgeInsets.only(
-                                                                left: 10,
-                                                                top: 10,
-                                                                right: 10),
-                                                        decoration: BoxDecoration(
-                                                            color: Colors.white,
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        10),
-                                                            boxShadow: [
-                                                              BoxShadow(
-                                                                color:
-                                                                    Colors.grey,
-                                                                offset: Offset(
-                                                                    0.0, 1.0),
-                                                                blurRadius: 6.0,
-                                                              ),
-                                                            ]),
-                                                        child: Column(
-                                                          crossAxisAlignment:
-                                                              CrossAxisAlignment
-                                                                  .start,
-                                                          children: [
-                                                            Row(
-                                                              children: [
-                                                                Text(
-                                                                  "Total",
-                                                                  style: TextStyle(
-                                                                      fontSize:
-                                                                          Get.width * 0.009 -
-                                                                              1),
-                                                                ),
-                                                                Spacer(),
-                                                                Text(
-                                                                  '${controller.dashboardPmList.value?.cmDashboadDetails?.schedule_compliance_total}',
-                                                                  style: TextStyle(
-                                                                      fontSize:
-                                                                          Get.width * 0.009 -
-                                                                              1),
-                                                                ),
-                                                              ],
-                                                            ),
-                                                            // Dimens.boxHeight2,
-                                                            Row(
-                                                              children: [
-                                                                Text(
-                                                                  "Completed",
-                                                                  style: TextStyle(
-                                                                      fontSize:
-                                                                          Get.width * 0.009 -
-                                                                              1),
-                                                                ),
-                                                                Spacer(),
-                                                                Text(
-                                                                  '${controller.dashboardPmList.value?.cmDashboadDetails?.schedule_compliance_completed}',
-                                                                  style: TextStyle(
-                                                                      fontSize:
-                                                                          Get.width * 0.009 -
-                                                                              1),
-                                                                ),
-                                                              ],
-                                                            ),
-                                                            // Dimens.boxHeight5,
-                                                            Row(
-                                                              children: [
-                                                                Text(
-                                                                  "Pending",
-                                                                  style: TextStyle(
-                                                                      fontSize:
-                                                                          Get.width * 0.009 -
-                                                                              1),
-                                                                ),
-                                                                Spacer(),
-                                                                Text(
-                                                                  '${controller.dashboardPmList.value?.cmDashboadDetails?.schedule_compliance_pending}',
-                                                                  style: TextStyle(
-                                                                      fontSize:
-                                                                          Get.width * 0.009 -
-                                                                              1),
-                                                                ),
-                                                              ],
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                  // Dimens.boxHeight20,
-                                                ],
+                                              DataColumn2(
+                                                fixedWidth: 300,
+                                                label: Text(
+                                                  'Status',
+                                                  style: Styles.blackBold14,
+                                                ),
+                                                // size: ColumnSize.L,
                                               ),
-                                            ),
-                                          ),
-                                          Expanded(
-                                            flex: 2,
-                                            child: Container(
-                                                margin: EdgeInsets.only(
-                                                    left: 20, right: 20),
-                                                padding: EdgeInsets.only(
-                                                    left: 20, top: 10),
-                                                decoration: BoxDecoration(
-                                                  color: ColorValues
-                                                      .lightBlueColor,
-                                                  borderRadius:
-                                                      BorderRadius.circular(10),
-                                                  boxShadow: [
-                                                    BoxShadow(
-                                                      color: Colors.grey,
-                                                      offset: Offset(0.0, 1.0),
-                                                      blurRadius: 6.0,
-                                                    ),
-                                                  ],
+                                              DataColumn2(
+                                                fixedWidth: 250,
+                                                label: Text(
+                                                  'Asset category',
+                                                  style: Styles.blackBold14,
                                                 ),
-                                                height: 150,
-                                                child: Row(
-                                                  children: [
-                                                    Align(
-                                                        alignment:
-                                                            Alignment.topLeft,
-                                                        child: Text("Category",
-                                                            style: Styles
-                                                                .black15)),
-                                                    Align(
-                                                      alignment:
-                                                          Alignment.centerLeft,
-                                                      child: PieChart(
-                                                        dataMap: controller
-                                                            .getDataMap(),
-                                                        chartType:
-                                                            ChartType.ring,
-                                                        chartRadius: 100,
-                                                        colorList: controller
-                                                            .getColorList(),
-                                                        // centerText: "Pie Chart",
-                                                        legendOptions:
-                                                            LegendOptions(
-                                                          showLegendsInRow:
-                                                              false,
-                                                          // legendPosition:
-                                                          //     LegendPosition.left,
-                                                          showLegends: true,
-                                                        ),
-                                                        chartValuesOptions:
-                                                            ChartValuesOptions(
-                                                          showChartValueBackground:
-                                                              false,
-                                                          showChartValues: true,
-                                                          showChartValuesInPercentage:
-                                                              true,
-                                                          showChartValuesOutside:
-                                                              false,
-                                                        ),
-                                                        // onTapCallback: (index) {
-                                                        //   chartController
-                                                        //       .onChartTapped(index);
-                                                        // },
-                                                      ),
-                                                    )
-                                                  ],
-                                                )),
-                                          ),
-                                        ],
-                                      ),
-                                      Dimens.boxHeight10,
-                                      SingleChildScrollView(
-                                        scrollDirection: Axis.horizontal,
-                                        child: Container(
-                                          // height: 70,
-                                          width: Get.width * .92,
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceAround,
-                                            children: [
-                                              _gridList(
-                                                  tittle: "WO on-time",
-                                                  percent:
-                                                      '${((controller.dashboardPmList.value?.cmDashboadDetails?.wo_on_time ?? 0) / (controller.dashboardPmList.value?.cmDashboadDetails?.total ?? 1) * 100).toString()}%'),
-                                              _gridList(
-                                                  tittle: "WO delay",
-                                                  percent:
-                                                      '${((controller.dashboardPmList.value?.cmDashboadDetails?.wo_delay ?? 0) / (controller.dashboardPmList.value?.cmDashboadDetails?.total ?? 1) * 100).toString()}%'),
-                                              _gridList(
-                                                  tittle: "WO backlog",
-                                                  percent:
-                                                      '${((controller.dashboardPmList.value?.cmDashboadDetails?.wo_backlog ?? 0) / (controller.dashboardPmList.value?.cmDashboadDetails?.total ?? 1) * 100).toString()}%'),
-                                              _gridList(
-                                                  tittle: "Low stock items",
-                                                  percent:
-                                                      '${controller.dashboardPmList.value?.cmDashboadDetails?.low_stock_items}'),
-                                              _gridList(
-                                                  tittle: "PO Items Awaited",
-                                                  percent:
-                                                      '${controller.dashboardPmList.value?.cmDashboadDetails?.po_items_awaited ?? 0}%'),
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                      // Dimens.boxHeight10,
-                                      Expanded(
-                                        child: Container(
-                                          color: Color.fromARGB(
-                                              255, 245, 248, 250),
-                                          width: Get.width,
-                                          height: Get.height,
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(16),
-                                            child: DataTable2(
-                                              headingRowHeight: 40,
-                                              dataRowHeight: 35,
-                                              columnSpacing: 12,
-                                              // horizontalMargin: 5,
-                                              headingRowColor:
-                                                  MaterialStateColor
-                                                      .resolveWith(
-                                                (states) {
-                                                  return ColorValues
-                                                      .lightGreyColor;
-                                                },
+                                                // size: ColumnSize.L,
                                               ),
-                                              minWidth: 2500,
-                                              columns: [
-                                                DataColumn2(
-                                                  fixedWidth: 100,
-                                                  label: Text(
-                                                    'Site name',
-                                                    style: Styles.blackBold14,
-                                                  ),
-                                                  // size: ColumnSize.L,
+                                              DataColumn2(
+                                                fixedWidth: 400,
+                                                label: Text(
+                                                  'Asset name',
+                                                  style: Styles.blackBold14,
                                                 ),
-                                                DataColumn2(
-                                                  fixedWidth: 120,
-                                                  label: Text(
-                                                    'WO number',
-                                                    style: Styles.blackBold14,
-                                                  ),
-                                                  // size: ColumnSize.L,
-                                                ),
-                                                DataColumn2(
-                                                  fixedWidth: 200,
-                                                  label: Text(
-                                                    'WO description',
-                                                    style: Styles.blackBold14,
-                                                  ),
-                                                  // size: ColumnSize.L,
-                                                ),
-                                                DataColumn2(
-                                                  fixedWidth: 300,
-                                                  label: Text(
-                                                    'Status',
-                                                    style: Styles.blackBold14,
-                                                  ),
-                                                  // size: ColumnSize.L,
-                                                ),
-                                                DataColumn2(
-                                                  fixedWidth: 250,
-                                                  label: Text(
-                                                    'Asset category',
-                                                    style: Styles.blackBold14,
-                                                  ),
-                                                  // size: ColumnSize.L,
-                                                ),
-                                                DataColumn2(
-                                                  fixedWidth: 400,
-                                                  label: Text(
-                                                    'Asset name',
-                                                    style: Styles.blackBold14,
-                                                  ),
-                                                  // size: ColumnSize.L,
-                                                ),
-                                                DataColumn2(
-                                                  fixedWidth: 250,
-                                                  label: Text(
-                                                    'Schedule start date',
-                                                    style: Styles.blackBold14,
-                                                  ),
-                                                  // size: ColumnSize.L,
-                                                ),
-                                                DataColumn2(
-                                                  fixedWidth: 250,
-                                                  label: Text(
-                                                    'Schedule end date',
-                                                    style: Styles.blackBold14,
-                                                  ),
-                                                  // size: ColumnSize.L,
-                                                ),
-                                                DataColumn2(
-                                                  fixedWidth: 100,
-                                                  label: Text(
-                                                    'Action',
-                                                    style: Styles.blackBold14,
-                                                  ),
-                                                ),
-                                              ],
-                                              rows: List<DataRow>.generate(
-                                                controller
-                                                        .dashboardPmList
-                                                        .value
-                                                        ?.cmDashboadDetails
-                                                        ?.item_list
-                                                        ?.length ??
-                                                    0,
-                                                (index) => DataRow(cells: [
-                                                  DataCell(Text(controller
-                                                          .dashboardPmList
-                                                          .value
-                                                          ?.cmDashboadDetails
-                                                          ?.item_list?[index]
-                                                          .facility_name
-                                                          .toString() ??
-                                                      '')),
-                                                  DataCell(Text(
-                                                      'PM${controller.dashboardPmList.value?.cmDashboadDetails?.item_list?[index].wo_number.toString() ?? ''}')),
-                                                  DataCell(Text(controller
-                                                          .dashboardPmList
-                                                          .value
-                                                          ?.cmDashboadDetails
-                                                          ?.item_list?[index]
-                                                          .wo_decription ??
-                                                      '')),
-                                                  DataCell(Text(controller
-                                                          .dashboardPmList
-                                                          .value
-                                                          ?.cmDashboadDetails
-                                                          ?.item_list?[index]
-                                                          .status_long ??
-                                                      '')),
-                                                  DataCell(Text(controller
-                                                          .dashboardPmList
-                                                          .value
-                                                          ?.cmDashboadDetails
-                                                          ?.item_list?[index]
-                                                          .asset_category ??
-                                                      '')),
-                                                  DataCell(Text(controller
-                                                          .dashboardPmList
-                                                          .value
-                                                          ?.cmDashboadDetails
-                                                          ?.item_list?[index]
-                                                          .asset_name ??
-                                                      '')),
-                                                  DataCell(Text(controller
-                                                          .dashboardPmList
-                                                          .value
-                                                          ?.cmDashboadDetails
-                                                          ?.item_list?[index]
-                                                          .start_date ??
-                                                      '')),
-                                                  DataCell(Text(controller
-                                                          .dashboardPmList
-                                                          .value
-                                                          ?.cmDashboadDetails
-                                                          ?.item_list?[index]
-                                                          .end_date ??
-                                                      '')),
-                                                  DataCell(
-                                                    Row(
-                                                      children: [
-                                                        TableActionButton(
-                                                          color: ColorValues
-                                                              .viewColor,
-                                                          icon: Icons
-                                                              .remove_red_eye_outlined,
-                                                          message: 'View',
-                                                          onPress: () {
-                                                            controller
-                                                                .clearStorePmData();
-                                                            // controller
-                                                            //     .clearStoreDatatype();
-
-                                                            int pmTaskId = controller
-                                                                    .dashboardPmList
-                                                                    .value
-                                                                    ?.cmDashboadDetails
-                                                                    ?.item_list?[
-                                                                        index]
-                                                                    .wo_number ??
-                                                                0;
-                                                            if (pmTaskId != 0) {
-                                                              Get.toNamed(
-                                                                  Routes
-                                                                      .pmTaskView,
-                                                                  arguments: {
-                                                                    'pmTaskId':
-                                                                        pmTaskId
-                                                                  });
-                                                            }
-                                                          },
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  ),
-                                                ]),
+                                                // size: ColumnSize.L,
                                               ),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-
-                              // mc......................
-
-                              Obx(
-                                () => Container(
-                                  margin: EdgeInsets.only(
-                                      left: 20, right: 20, top: 10),
-                                  height: Get.height,
-                                  width: Get.width,
-                                  decoration: BoxDecoration(
-                                    color: Color.fromARGB(255, 245, 248, 250),
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  child: Column(
-                                    children: [
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceEvenly,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        children: [
-                                          Expanded(
-                                            flex: 2,
-                                            child: Container(
-                                                margin:
-                                                    EdgeInsets.only(left: 20),
-                                                padding: EdgeInsets.only(
-                                                    left: 20, top: 10),
-                                                decoration: BoxDecoration(
-                                                  color: ColorValues
-                                                      .lightBlueColor,
-                                                  borderRadius:
-                                                      BorderRadius.circular(10),
-                                                  boxShadow: [
-                                                    BoxShadow(
-                                                      color: Colors.grey,
-                                                      offset: Offset(0.0, 1.0),
-                                                      blurRadius: 6.0,
-                                                    ),
-                                                  ],
+                                              DataColumn2(
+                                                fixedWidth: 250,
+                                                label: Text(
+                                                  'Schedule start date',
+                                                  style: Styles.blackBold14,
                                                 ),
-                                                height: 150,
-                                                child: Row(
-                                                  children: [
-                                                    Column(
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .start,
-                                                      children: [
-                                                        Text("Overview",
-                                                            style:
-                                                                Styles.black15),
-                                                        // Dimens.boxHeight20,
-                                                        // Spacer(),
-                                                        Center(
-                                                          child: Row(
-                                                            children: [
-                                                              Container(
-                                                                  margin: EdgeInsets
-                                                                      .only(
-                                                                          top:
-                                                                              10),
-                                                                  height: 100,
-                                                                  width: 150,
-                                                                  child: Column(
-                                                                    children: [
-                                                                      Row(
-                                                                        mainAxisAlignment:
-                                                                            MainAxisAlignment.center,
-                                                                        children: [
-                                                                          Text(
-                                                                            "Total",
-                                                                            style:
-                                                                                Styles.black13,
-                                                                          ),
-                                                                          Spacer(),
-
-                                                                          Text(
-                                                                              '${controller.dashboardMcList.value?.cmDashboadDetails?.total}'),
-                                                                          //  '${dashbo?.module_name}'),
-                                                                        ],
-                                                                      ),
-                                                                      Dimens
-                                                                          .boxHeight5,
-                                                                      Row(
-                                                                        children: [
-                                                                          Text(
-                                                                            "Completed",
-                                                                            style:
-                                                                                Styles.black13,
-                                                                          ),
-                                                                          Spacer(),
-                                                                          Text(
-                                                                              '${controller.dashboardMcList.value?.cmDashboadDetails?.completed}'),
-                                                                        ],
-                                                                      ),
-                                                                      Dimens
-                                                                          .boxHeight5,
-                                                                      Row(
-                                                                        children: [
-                                                                          Text(
-                                                                            "Pending",
-                                                                            style:
-                                                                                Styles.black13,
-                                                                          ),
-                                                                          Spacer(),
-                                                                          Text(
-                                                                              '${controller.dashboardMcList.value?.cmDashboadDetails?.pending}'),
-                                                                        ],
-                                                                      ),
-                                                                    ],
-                                                                  )),
-                                                            ],
-                                                          ),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                    Dimens.boxWidth20,
-                                                    Container(
-                                                        // padding: EdgeInsets.only(
-                                                        //     top: 30,
-                                                        //     right: 20,
-                                                        //     left: 10),
-                                                        child:
-                                                            CircularPercentIndicator(
-                                                      //circular progress indicator
-                                                      radius:
-                                                          50.0, //radius for circle
-                                                      lineWidth:
-                                                          15.0, //width of circle line
-                                                      animation:
-                                                          true, //animate when it shows progress indicator first
-                                                      percent: (controller
-                                                                  .dashboardMcList
-                                                                  .value
-                                                                  ?.cmDashboadDetails
-                                                                  ?.completed ??
-                                                              0) /
-                                                          (controller
-                                                                  .dashboardMcList
-                                                                  .value
-                                                                  ?.cmDashboadDetails
-                                                                  ?.total ??
-                                                              0),
-                                                      center: Text(
-                                                        '${((controller.dashboardMcList.value?.cmDashboadDetails?.completed ?? 0) / (controller.dashboardMcList.value?.cmDashboadDetails?.total ?? 1) * 100).toStringAsFixed(1)}%',
-                                                        style: TextStyle(
-                                                            fontWeight:
-                                                                FontWeight.bold,
-                                                            fontSize: 20.0),
-                                                      ), //center text, you can set Icon as well
-                                                      footer: Text(
-                                                        "Order this Month",
-                                                        style: Styles.black13,
-                                                      ), //footer text
-                                                      backgroundColor: ColorValues
-                                                          .addNewColor, //backround of progress bar
-                                                      circularStrokeCap:
-                                                          CircularStrokeCap
-                                                              .round, //corner shape of progress bar at start/end
-                                                      progressColor: Colors
-                                                          .redAccent, //progress bar color
-                                                    )),
-                                                  ],
-                                                )),
-                                          ),
-                                          Expanded(
-                                            flex: 2,
-                                            child: Container(
-                                              margin: EdgeInsets.only(left: 20),
-                                              padding: EdgeInsets.only(
-                                                  left: 20, top: 10),
-                                              decoration: BoxDecoration(
-                                                color:
-                                                    ColorValues.lightBlueColor,
-                                                borderRadius:
-                                                    BorderRadius.circular(10),
-                                                boxShadow: [
-                                                  BoxShadow(
-                                                    color: Colors.grey,
-                                                    offset: Offset(0.0, 1.0),
-                                                    blurRadius: 6.0,
-                                                  ),
-                                                ],
+                                                // size: ColumnSize.L,
                                               ),
-                                              height: 150,
-                                              child: Column(
-                                                children: [
-                                                  Row(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      Align(
-                                                          alignment:
-                                                              Alignment.topLeft,
-                                                          child: Column(
-                                                            children: [
-                                                              Text(
-                                                                  "Schedule Compliance",
-                                                                  style: Styles
-                                                                      .black15),
-                                                              Dimens
-                                                                  .boxHeight10,
-                                                              SemicircularIndicator(
-                                                                radius: 60,
-                                                                color: Color
-                                                                    .fromARGB(
-                                                                        255,
-                                                                        195,
-                                                                        146,
-                                                                        230),
-                                                                backgroundColor:
-                                                                    Colors
-                                                                        .lightGreen,
-                                                                strokeWidth: 13,
-                                                                bottomPadding:
-                                                                    0,
-                                                                child: Text(
-                                                                  '${((controller.dashboardMcList.value?.cmDashboadDetails?.schedule_compliance_completed ?? 0) / (controller.dashboardMcList.value?.cmDashboadDetails?.schedule_compliance_total ?? 1) * 100).toString()}%',
-                                                                  style: TextStyle(
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .bold,
-                                                                      fontSize:
-                                                                          20.0,
-                                                                      color: Colors
-                                                                          .redAccent),
-                                                                ),
-                                                              ),
-                                                            ],
-                                                          )),
-                                                      Spacer(),
-                                                      Container(
-                                                        height:
-                                                            Get.height * 0.09,
-                                                        width: Get.width * 0.09,
-                                                        margin: EdgeInsets.only(
-                                                            left: 20,
-                                                            right: 10),
-                                                        padding:
-                                                            EdgeInsets.only(
-                                                                left: 10,
-                                                                top: 10,
-                                                                right: 10),
-                                                        decoration: BoxDecoration(
-                                                            color: Colors.white,
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        10),
-                                                            boxShadow: [
-                                                              BoxShadow(
-                                                                color:
-                                                                    Colors.grey,
-                                                                offset: Offset(
-                                                                    0.0, 1.0),
-                                                                blurRadius: 6.0,
-                                                              ),
-                                                            ]),
-                                                        child: Column(
-                                                          crossAxisAlignment:
-                                                              CrossAxisAlignment
-                                                                  .start,
-                                                          children: [
-                                                            Row(
-                                                              children: [
-                                                                Text(
-                                                                  "Total",
-                                                                  style: TextStyle(
-                                                                      fontSize:
-                                                                          Get.width * 0.009 -
-                                                                              1),
-                                                                ),
-                                                                Spacer(),
-                                                                Text(
-                                                                  '${controller.dashboardMcList.value?.cmDashboadDetails?.schedule_compliance_total}',
-                                                                  style: TextStyle(
-                                                                      fontSize:
-                                                                          Get.width * 0.009 -
-                                                                              1),
-                                                                ),
-                                                              ],
-                                                            ),
-                                                            // Dimens.boxHeight2,
-                                                            Row(
-                                                              children: [
-                                                                Text(
-                                                                  "Completed",
-                                                                  style: TextStyle(
-                                                                      fontSize:
-                                                                          Get.width * 0.009 -
-                                                                              1),
-                                                                ),
-                                                                Spacer(),
-                                                                Text(
-                                                                  '${controller.dashboardMcList.value?.cmDashboadDetails?.schedule_compliance_completed}',
-                                                                  style: TextStyle(
-                                                                      fontSize:
-                                                                          Get.width * 0.009 -
-                                                                              1),
-                                                                ),
-                                                              ],
-                                                            ),
-                                                            // Dimens.boxHeight5,
-                                                            Row(
-                                                              children: [
-                                                                Text(
-                                                                  "Pending",
-                                                                  style: TextStyle(
-                                                                      fontSize:
-                                                                          Get.width * 0.009 -
-                                                                              1),
-                                                                ),
-                                                                Spacer(),
-                                                                Text(
-                                                                  '${controller.dashboardMcList.value?.cmDashboadDetails?.schedule_compliance_pending}',
-                                                                  style: TextStyle(
-                                                                      fontSize:
-                                                                          Get.width * 0.009 -
-                                                                              1),
-                                                                ),
-                                                              ],
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                  // Dimens.boxHeight20,
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                          Expanded(
-                                            flex: 2,
-                                            child: Container(
-                                                margin: EdgeInsets.only(
-                                                    left: 20, right: 20),
-                                                padding: EdgeInsets.only(
-                                                    left: 20, top: 10),
-                                                decoration: BoxDecoration(
-                                                  color: ColorValues
-                                                      .lightBlueColor,
-                                                  borderRadius:
-                                                      BorderRadius.circular(10),
-                                                  boxShadow: [
-                                                    BoxShadow(
-                                                      color: Colors.grey,
-                                                      offset: Offset(0.0, 1.0),
-                                                      blurRadius: 6.0,
-                                                    ),
-                                                  ],
+                                              DataColumn2(
+                                                fixedWidth: 250,
+                                                label: Text(
+                                                  'Schedule end date',
+                                                  style: Styles.blackBold14,
                                                 ),
-                                                height: 150,
-                                                child: Row(
-                                                  children: [
-                                                    Align(
-                                                        alignment:
-                                                            Alignment.topLeft,
-                                                        child: Text("Category",
-                                                            style: Styles
-                                                                .black15)),
-                                                    Align(
-                                                      alignment:
-                                                          Alignment.centerLeft,
-                                                      child: PieChart(
-                                                        dataMap: controller
-                                                            .getDataMap(),
-                                                        chartType:
-                                                            ChartType.ring,
-                                                        chartRadius: 100,
-                                                        colorList: controller
-                                                            .getColorList(),
-                                                        // centerText: "Pie Chart",
-                                                        legendOptions:
-                                                            LegendOptions(
-                                                          showLegendsInRow:
-                                                              false,
-                                                          // legendPosition:
-                                                          //     LegendPosition.left,
-                                                          showLegends: true,
-                                                        ),
-                                                        chartValuesOptions:
-                                                            ChartValuesOptions(
-                                                          showChartValueBackground:
-                                                              false,
-                                                          showChartValues: true,
-                                                          showChartValuesInPercentage:
-                                                              true,
-                                                          showChartValuesOutside:
-                                                              false,
-                                                        ),
-                                                        // onTapCallback: (index) {
-                                                        //   chartController
-                                                        //       .onChartTapped(index);
-                                                        // },
-                                                      ),
-                                                    )
-                                                  ],
-                                                )),
-                                          ),
-                                        ],
-                                      ),
-                                      Dimens.boxHeight10,
-                                      SingleChildScrollView(
-                                        scrollDirection: Axis.horizontal,
-                                        child: Container(
-                                          // height: 70,
-                                          width: Get.width * .92,
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceAround,
-                                            children: [
-                                              _gridList(
-                                                tittle: "WO on-time",
-                                                percent:
-                                                    '${((controller.dashboardMcList.value?.cmDashboadDetails?.wo_on_time ?? 0) / (controller.dashboardMcList.value?.cmDashboadDetails?.total ?? 1) * 100).toString()}%',
+                                                // size: ColumnSize.L,
                                               ),
-                                              _gridList(
-                                                tittle: "WO delay",
-                                                percent:
-                                                    '${((controller.dashboardMcList.value?.cmDashboadDetails?.wo_delay ?? 0) / (controller.dashboardMcList.value?.cmDashboadDetails?.total ?? 1) * 100).toString()}%',
-                                              ),
-                                              _gridList(
-                                                tittle: "WO backlog",
-                                                percent:
-                                                    '${((controller.dashboardMcList.value?.cmDashboadDetails?.wo_backlog ?? 0) / (controller.dashboardMcList.value?.cmDashboadDetails?.total ?? 1) * 100).toString()}%',
-                                              ),
-                                              _gridList(
-                                                tittle: "Low stock items",
-                                                percent:
-                                                    '${controller.dashboardMcList.value?.cmDashboadDetails?.low_stock_items} %',
-                                              ),
-                                              _gridList(
-                                                tittle: "PO Items Awaited",
-                                                percent:
-                                                    '${controller.dashboardMcList.value?.cmDashboadDetails?.po_items_awaited}',
+                                              DataColumn2(
+                                                fixedWidth: 100,
+                                                label: Text(
+                                                  'Action',
+                                                  style: Styles.blackBold14,
+                                                ),
                                               ),
                                             ],
-                                          ),
-                                        ),
-                                      ),
-                                      // Dimens.boxHeight10,
-                                      Expanded(
-                                        child: Container(
-                                          color: Color.fromARGB(
-                                              255, 245, 248, 250),
-                                          width: Get.width,
-                                          height: Get.height,
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(16),
-                                            child: DataTable2(
-                                              headingRowHeight: 40,
-                                              dataRowHeight: 35,
-                                              columnSpacing: 12,
-                                              // horizontalMargin: 5,
-                                              headingRowColor:
-                                                  MaterialStateColor
-                                                      .resolveWith(
-                                                (states) {
-                                                  return ColorValues
-                                                      .lightGreyColor;
-                                                },
-                                              ),
-                                              minWidth: 2500,
-                                              columns: [
-                                                DataColumn2(
-                                                  fixedWidth: 100,
-                                                  label: Text(
-                                                    'Site name',
-                                                    style: Styles.blackBold14,
-                                                  ),
-                                                  // size: ColumnSize.L,
-                                                ),
-                                                DataColumn2(
-                                                  fixedWidth: 120,
-                                                  label: Text(
-                                                    'WO number',
-                                                    style: Styles.blackBold14,
-                                                  ),
-                                                  // size: ColumnSize.L,
-                                                ),
-                                                DataColumn2(
-                                                  fixedWidth: 200,
-                                                  label: Text(
-                                                    'WO description',
-                                                    style: Styles.blackBold14,
-                                                  ),
-                                                  // size: ColumnSize.L,
-                                                ),
-                                                DataColumn2(
-                                                  fixedWidth: 300,
-                                                  label: Text(
-                                                    'Status',
-                                                    style: Styles.blackBold14,
-                                                  ),
-                                                  // size: ColumnSize.L,
-                                                ),
-                                                DataColumn2(
-                                                  fixedWidth: 250,
-                                                  label: Text(
-                                                    'Asset category',
-                                                    style: Styles.blackBold14,
-                                                  ),
-                                                  // size: ColumnSize.L,
-                                                ),
-                                                DataColumn2(
-                                                  fixedWidth: 400,
-                                                  label: Text(
-                                                    'Asset name',
-                                                    style: Styles.blackBold14,
-                                                  ),
-                                                  // size: ColumnSize.L,
-                                                ),
-                                                DataColumn2(
-                                                  fixedWidth: 250,
-                                                  label: Text(
-                                                    'Schedule start date',
-                                                    style: Styles.blackBold14,
-                                                  ),
-                                                  // size: ColumnSize.L,
-                                                ),
-                                                DataColumn2(
-                                                  fixedWidth: 250,
-                                                  label: Text(
-                                                    'Schedule end date',
-                                                    style: Styles.blackBold14,
-                                                  ),
-                                                  // size: ColumnSize.L,
-                                                ),
-                                                DataColumn2(
-                                                  fixedWidth: 100,
-                                                  label: Text(
-                                                    'Action',
-                                                    style: Styles.blackBold14,
-                                                  ),
-                                                ),
-                                              ],
-                                              rows: List<DataRow>.generate(
-                                                controller
-                                                        .dashboardMcList
-                                                        .value
-                                                        ?.cmDashboadDetails
-                                                        ?.item_list
-                                                        ?.length ??
-                                                    0,
-                                                (index) => DataRow(cells: [
-                                                  DataCell(Text(controller
-                                                          .dashboardMcList
-                                                          .value
-                                                          ?.cmDashboadDetails
-                                                          ?.item_list?[index]
-                                                          .facility_name
-                                                          .toString() ??
-                                                      '')),
-                                                  DataCell(Text(
-                                                      'MC${controller.dashboardMcList.value?.cmDashboadDetails?.item_list?[index].wo_number.toString() ?? ''}')),
-                                                  DataCell(Text(controller
-                                                          .dashboardMcList
-                                                          .value
-                                                          ?.cmDashboadDetails
-                                                          ?.item_list?[index]
-                                                          .wo_decription ??
-                                                      '')),
-                                                  DataCell(Text(controller
-                                                          .dashboardMcList
-                                                          .value
-                                                          ?.cmDashboadDetails
-                                                          ?.item_list?[index]
-                                                          .status_long ??
-                                                      '')),
-                                                  DataCell(Text(controller
-                                                          .dashboardMcList
-                                                          .value
-                                                          ?.cmDashboadDetails
-                                                          ?.item_list?[index]
-                                                          .asset_category ??
-                                                      '')),
-                                                  DataCell(Text(controller
-                                                          .dashboardMcList
-                                                          .value
-                                                          ?.cmDashboadDetails
-                                                          ?.item_list?[index]
-                                                          .asset_name ??
-                                                      '')),
-                                                  DataCell(Text(controller
-                                                          .dashboardMcList
-                                                          .value
-                                                          ?.cmDashboadDetails
-                                                          ?.item_list?[index]
-                                                          .start_date ??
-                                                      '')),
-                                                  DataCell(Text(controller
-                                                          .dashboardMcList
-                                                          .value
-                                                          ?.cmDashboadDetails
-                                                          ?.item_list?[index]
-                                                          .end_date ??
-                                                      '')),
-                                                  DataCell(
-                                                    Row(
-                                                      children: [
-                                                        TableActionButton(
-                                                          color: ColorValues
-                                                              .viewColor,
-                                                          icon: Icons
-                                                              .remove_red_eye_outlined,
-                                                          message: 'View',
-                                                          onPress: () {
-                                                            // controller
-                                                            //     .clearStoreData();
-                                                            // controller
-                                                            //     .clearStoreDatatype();
-
-                                                            int pmTaskId = controller
-                                                                    .dashboardMcList
-                                                                    .value
-                                                                    ?.cmDashboadDetails
-                                                                    ?.item_list?[
-                                                                        index]
-                                                                    .wo_number ??
-                                                                0;
-                                                            if (pmTaskId != 0) {
-                                                              Get.toNamed(
-                                                                  Routes
-                                                                      .pmTaskView,
-                                                                  arguments: {
-                                                                    'pmTaskId':
-                                                                        pmTaskId
-                                                                  });
-                                                            }
-                                                          },
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  ),
-                                                ]),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-
-                              ///ir...............................
-
-                              Obx(
-                                () => Container(
-                                  margin: EdgeInsets.only(
-                                      left: 20, right: 20, top: 10),
-                                  height: Get.height,
-                                  width: Get.width,
-                                  decoration: BoxDecoration(
-                                    color: Color.fromARGB(255, 245, 248, 250),
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  child: Column(
-                                    children: [
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceEvenly,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        children: [
-                                          Expanded(
-                                            flex: 2,
-                                            child: Container(
-                                                margin:
-                                                    EdgeInsets.only(left: 20),
-                                                padding: EdgeInsets.only(
-                                                    left: 20, top: 10),
-                                                decoration: BoxDecoration(
-                                                  color: ColorValues
-                                                      .lightBlueColor,
-                                                  borderRadius:
-                                                      BorderRadius.circular(10),
-                                                  boxShadow: [
-                                                    BoxShadow(
-                                                      color: Colors.grey,
-                                                      offset: Offset(0.0, 1.0),
-                                                      blurRadius: 6.0,
-                                                    ),
-                                                  ],
-                                                ),
-                                                height: 150,
-                                                child: Row(
-                                                  children: [
-                                                    Column(
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .start,
-                                                      children: [
-                                                        Text("Overview",
-                                                            style:
-                                                                Styles.black15),
-                                                        // Dimens.boxHeight20,
-                                                        // Spacer(),
-                                                        Center(
-                                                          child: Row(
-                                                            children: [
-                                                              Container(
-                                                                  margin: EdgeInsets
-                                                                      .only(
-                                                                          top:
-                                                                              10),
-                                                                  height: 100,
-                                                                  width: 150,
-                                                                  child: Column(
-                                                                    children: [
-                                                                      Row(
-                                                                        mainAxisAlignment:
-                                                                            MainAxisAlignment.center,
-                                                                        children: [
-                                                                          Text(
-                                                                            "Total",
-                                                                            style:
-                                                                                Styles.black13,
-                                                                          ),
-                                                                          Spacer(),
-
-                                                                          Text(
-                                                                              '${controller.dashboardIrList.value?.cmDashboadDetails?.total}'),
-                                                                          //  '${dashbo?.module_name}'),
-                                                                        ],
-                                                                      ),
-                                                                      Dimens
-                                                                          .boxHeight5,
-                                                                      Row(
-                                                                        children: [
-                                                                          Text(
-                                                                            "Completed",
-                                                                            style:
-                                                                                Styles.black13,
-                                                                          ),
-                                                                          Spacer(),
-                                                                          Text(
-                                                                              '${controller.dashboardIrList.value?.cmDashboadDetails?.completed}'),
-                                                                        ],
-                                                                      ),
-                                                                      Dimens
-                                                                          .boxHeight5,
-                                                                      Row(
-                                                                        children: [
-                                                                          Text(
-                                                                            "Pending",
-                                                                            style:
-                                                                                Styles.black13,
-                                                                          ),
-                                                                          Spacer(),
-                                                                          Text(
-                                                                              '${controller.dashboardIrList.value?.cmDashboadDetails?.pending}'),
-                                                                        ],
-                                                                      ),
-                                                                    ],
-                                                                  )),
-                                                            ],
-                                                          ),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                    Dimens.boxWidth20,
-                                                    Container(
-                                                        // padding: EdgeInsets.only(
-                                                        //     top: 30,
-                                                        //     right: 20,
-                                                        //     left: 10),
-                                                        child:
-                                                            CircularPercentIndicator(
-                                                      //circular progress indicator
-                                                      radius:
-                                                          50.0, //radius for circle
-                                                      lineWidth:
-                                                          15.0, //width of circle line
-                                                      animation:
-                                                          true, //animate when it shows progress indicator first
-                                                      percent: (controller
-                                                                  .dashboardIrList
-                                                                  .value
-                                                                  ?.cmDashboadDetails
-                                                                  ?.completed ??
-                                                              0) /
-                                                          (controller
-                                                                  .dashboardIrList
-                                                                  .value
-                                                                  ?.cmDashboadDetails
-                                                                  ?.total ??
-                                                              0),
-                                                      center: Text(
-                                                        '${((controller.dashboardIrList.value?.cmDashboadDetails?.completed ?? 0) / (controller.dashboardIrList.value?.cmDashboadDetails?.total ?? 1) * 100).toStringAsFixed(1)}%',
-                                                        style: TextStyle(
-                                                            fontWeight:
-                                                                FontWeight.bold,
-                                                            fontSize: 20.0),
-                                                      ), //center text, you can set Icon as well
-                                                      footer: Text(
-                                                        "Order this Month",
-                                                        style: Styles.black13,
-                                                      ), //footer text
-                                                      backgroundColor: ColorValues
-                                                          .addNewColor, //backround of progress bar
-                                                      circularStrokeCap:
-                                                          CircularStrokeCap
-                                                              .round, //corner shape of progress bar at start/end
-                                                      progressColor: Colors
-                                                          .redAccent, //progress bar color
-                                                    )),
-                                                  ],
-                                                )),
-                                          ),
-                                          Expanded(
-                                            flex: 2,
-                                            child: Container(
-                                              margin: EdgeInsets.only(left: 20),
-                                              padding: EdgeInsets.only(
-                                                  left: 20, top: 10),
-                                              decoration: BoxDecoration(
-                                                color:
-                                                    ColorValues.lightBlueColor,
-                                                borderRadius:
-                                                    BorderRadius.circular(10),
-                                                boxShadow: [
-                                                  BoxShadow(
-                                                    color: Colors.grey,
-                                                    offset: Offset(0.0, 1.0),
-                                                    blurRadius: 6.0,
-                                                  ),
-                                                ],
-                                              ),
-                                              height: 150,
-                                              child: Column(
-                                                children: [
-                                                  Row(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      Align(
-                                                          alignment:
-                                                              Alignment.topLeft,
-                                                          child: Column(
-                                                            children: [
-                                                              Text(
-                                                                  "Schedule Compliance",
-                                                                  style: Styles
-                                                                      .black15),
-                                                              Dimens
-                                                                  .boxHeight10,
-                                                              SemicircularIndicator(
-                                                                radius: 60,
-                                                                color: Color
-                                                                    .fromARGB(
-                                                                        255,
-                                                                        195,
-                                                                        146,
-                                                                        230),
-                                                                backgroundColor:
-                                                                    Colors
-                                                                        .lightGreen,
-                                                                strokeWidth: 13,
-                                                                bottomPadding:
-                                                                    0,
-                                                                child: Text(
-                                                                  '${((controller.dashboardIrList.value?.cmDashboadDetails?.schedule_compliance_completed ?? 0) / (controller.dashboardIrList.value?.cmDashboadDetails?.schedule_compliance_total ?? 1) * 100).toString()}%',
-                                                                  style: TextStyle(
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .bold,
-                                                                      fontSize:
-                                                                          20.0,
-                                                                      color: Colors
-                                                                          .redAccent),
-                                                                ),
-                                                              ),
-                                                            ],
-                                                          )),
-                                                      Spacer(),
-                                                      Container(
-                                                        height:
-                                                            Get.height * 0.09,
-                                                        width: Get.width * 0.09,
-                                                        margin: EdgeInsets.only(
-                                                            left: 20,
-                                                            right: 10),
-                                                        padding:
-                                                            EdgeInsets.only(
-                                                                left: 10,
-                                                                top: 10,
-                                                                right: 10),
-                                                        decoration: BoxDecoration(
-                                                            color: Colors.white,
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        10),
-                                                            boxShadow: [
-                                                              BoxShadow(
-                                                                color:
-                                                                    Colors.grey,
-                                                                offset: Offset(
-                                                                    0.0, 1.0),
-                                                                blurRadius: 6.0,
-                                                              ),
-                                                            ]),
-                                                        child: Column(
-                                                          crossAxisAlignment:
-                                                              CrossAxisAlignment
-                                                                  .start,
-                                                          children: [
-                                                            Row(
-                                                              children: [
-                                                                Text(
-                                                                  "Total",
-                                                                  style: TextStyle(
-                                                                      fontSize:
-                                                                          Get.width * 0.009 -
-                                                                              1),
-                                                                ),
-                                                                Spacer(),
-                                                                Text(
-                                                                  '${controller.dashboardIrList.value?.cmDashboadDetails?.schedule_compliance_total}',
-                                                                  style: TextStyle(
-                                                                      fontSize:
-                                                                          Get.width * 0.009 -
-                                                                              1),
-                                                                ),
-                                                              ],
-                                                            ),
-                                                            // Dimens.boxHeight2,
-                                                            Row(
-                                                              children: [
-                                                                Text(
-                                                                  "Completed",
-                                                                  style: TextStyle(
-                                                                      fontSize:
-                                                                          Get.width * 0.009 -
-                                                                              1),
-                                                                ),
-                                                                Spacer(),
-                                                                Text(
-                                                                  '${controller.dashboardIrList.value?.cmDashboadDetails?.schedule_compliance_completed}',
-                                                                  style: TextStyle(
-                                                                      fontSize:
-                                                                          Get.width * 0.009 -
-                                                                              1),
-                                                                ),
-                                                              ],
-                                                            ),
-                                                            // Dimens.boxHeight5,
-                                                            Row(
-                                                              children: [
-                                                                Text(
-                                                                  "Pending",
-                                                                  style: TextStyle(
-                                                                      fontSize:
-                                                                          Get.width * 0.009 -
-                                                                              1),
-                                                                ),
-                                                                Spacer(),
-                                                                Text(
-                                                                  '${controller.dashboardIrList.value?.cmDashboadDetails?.schedule_compliance_pending}',
-                                                                  style: TextStyle(
-                                                                      fontSize:
-                                                                          Get.width * 0.009 -
-                                                                              1),
-                                                                ),
-                                                              ],
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                  // Dimens.boxHeight20,
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                          Expanded(
-                                            flex: 2,
-                                            child: Container(
-                                                margin: EdgeInsets.only(
-                                                    left: 20, right: 20),
-                                                padding: EdgeInsets.only(
-                                                    left: 20, top: 10),
-                                                decoration: BoxDecoration(
-                                                  color: ColorValues
-                                                      .lightBlueColor,
-                                                  borderRadius:
-                                                      BorderRadius.circular(10),
-                                                  boxShadow: [
-                                                    BoxShadow(
-                                                      color: Colors.grey,
-                                                      offset: Offset(0.0, 1.0),
-                                                      blurRadius: 6.0,
-                                                    ),
-                                                  ],
-                                                ),
-                                                height: 150,
-                                                child: Row(
-                                                  children: [
-                                                    Align(
-                                                        alignment:
-                                                            Alignment.topLeft,
-                                                        child: Text("Category",
-                                                            style: Styles
-                                                                .black15)),
-                                                    Align(
-                                                      alignment:
-                                                          Alignment.centerLeft,
-                                                      child: PieChart(
-                                                        dataMap: controller
-                                                            .getDataMap(),
-                                                        chartType:
-                                                            ChartType.ring,
-                                                        chartRadius: 100,
-                                                        colorList: controller
-                                                            .getColorList(),
-                                                        // centerText: "Pie Chart",
-                                                        legendOptions:
-                                                            LegendOptions(
-                                                          showLegendsInRow:
-                                                              false,
-                                                          // legendPosition:
-                                                          //     LegendPosition.left,
-                                                          showLegends: true,
-                                                        ),
-                                                        chartValuesOptions:
-                                                            ChartValuesOptions(
-                                                          showChartValueBackground:
-                                                              false,
-                                                          showChartValues: true,
-                                                          showChartValuesInPercentage:
-                                                              true,
-                                                          showChartValuesOutside:
-                                                              false,
-                                                        ),
-                                                        // onTapCallback: (index) {
-                                                        //   chartController
-                                                        //       .onChartTapped(index);
-                                                        // },
-                                                      ),
-                                                    )
-                                                  ],
-                                                )),
-                                          ),
-                                        ],
-                                      ),
-                                      Dimens.boxHeight10,
-                                      SingleChildScrollView(
-                                        scrollDirection: Axis.horizontal,
-                                        child: Container(
-                                          // height: 70,
-                                          width: Get.width * .92,
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceAround,
-                                            children: [
-                                              _gridList(
-                                                tittle: "WO on-time",
-                                                percent:
-                                                    '${((controller.dashboardIrList.value?.cmDashboadDetails?.wo_on_time ?? 0) / (controller.dashboardIrList.value?.cmDashboadDetails?.total ?? 1) * 100).toString()}%',
-                                              ),
-                                              _gridList(
-                                                tittle: "WO delay",
-                                                percent:
-                                                    '${((controller.dashboardIrList.value?.cmDashboadDetails?.wo_delay ?? 0) / (controller.dashboardIrList.value?.cmDashboadDetails?.total ?? 1) * 100).toString()}%',
-                                              ),
-                                              _gridList(
-                                                tittle: "WO backlog",
-                                                percent:
-                                                    '${((controller.dashboardIrList.value?.cmDashboadDetails?.wo_backlog ?? 0) / (controller.dashboardIrList.value?.cmDashboadDetails?.total ?? 1) * 100).toString()}%',
-                                              ),
-                                              _gridList(
-                                                  tittle: "Low stock items",
-                                                  percent:
-                                                      '${controller.dashboardIrList.value?.cmDashboadDetails?.low_stock_items}'),
-                                              _gridList(
-                                                  tittle: "PO Items Awaited",
-                                                  percent:
-                                                      '${controller.dashboardIrList.value?.cmDashboadDetails?.po_items_awaited}'),
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                      // Dimens.boxHeight10,
-                                      Expanded(
-                                        child: Container(
-                                          color: Color.fromARGB(
-                                              255, 245, 248, 250),
-                                          width: Get.width,
-                                          height: Get.height,
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(16),
-                                            child: DataTable2(
-                                              headingRowHeight: 40,
-                                              dataRowHeight: 35,
-                                              columnSpacing: 12,
-                                              // horizontalMargin: 5,
-                                              headingRowColor:
-                                                  MaterialStateColor
-                                                      .resolveWith(
-                                                (states) {
-                                                  return ColorValues
-                                                      .lightGreyColor;
-                                                },
-                                              ),
-                                              minWidth: 2500,
-                                              columns: [
-                                                DataColumn2(
-                                                  fixedWidth: 100,
-                                                  label: Text(
-                                                    'Site name',
-                                                    style: Styles.blackBold14,
-                                                  ),
-                                                  // size: ColumnSize.L,
-                                                ),
-                                                DataColumn2(
-                                                  fixedWidth: 120,
-                                                  label: Text(
-                                                    'WO number',
-                                                    style: Styles.blackBold14,
-                                                  ),
-                                                  // size: ColumnSize.L,
-                                                ),
-                                                DataColumn2(
-                                                  fixedWidth: 200,
-                                                  label: Text(
-                                                    'WO description',
-                                                    style: Styles.blackBold14,
-                                                  ),
-                                                  // size: ColumnSize.L,
-                                                ),
-                                                DataColumn2(
-                                                  fixedWidth: 300,
-                                                  label: Text(
-                                                    'Status',
-                                                    style: Styles.blackBold14,
-                                                  ),
-                                                  // size: ColumnSize.L,
-                                                ),
-                                                DataColumn2(
-                                                  fixedWidth: 250,
-                                                  label: Text(
-                                                    'Asset category',
-                                                    style: Styles.blackBold14,
-                                                  ),
-                                                  // size: ColumnSize.L,
-                                                ),
-                                                DataColumn2(
-                                                  fixedWidth: 400,
-                                                  label: Text(
-                                                    'Asset name',
-                                                    style: Styles.blackBold14,
-                                                  ),
-                                                  // size: ColumnSize.L,
-                                                ),
-                                                DataColumn2(
-                                                  fixedWidth: 250,
-                                                  label: Text(
-                                                    'Schedule start date',
-                                                    style: Styles.blackBold14,
-                                                  ),
-                                                  // size: ColumnSize.L,
-                                                ),
-                                                DataColumn2(
-                                                  fixedWidth: 250,
-                                                  label: Text(
-                                                    'Schedule end date',
-                                                    style: Styles.blackBold14,
-                                                  ),
-                                                  // size: ColumnSize.L,
-                                                ),
-                                                DataColumn2(
-                                                  fixedWidth: 100,
-                                                  label: Text(
-                                                    'Action',
-                                                    style: Styles.blackBold14,
-                                                  ),
-                                                ),
-                                              ],
-                                              rows: List<DataRow>.generate(
-                                                controller
+                                            rows: List<DataRow>.generate(
+                                              controller
+                                                      .dashboardIrList
+                                                      .value
+                                                      ?.cmDashboadDetails
+                                                      ?.item_list
+                                                      ?.length ??
+                                                  0,
+                                              (index) => DataRow(cells: [
+                                                DataCell(Text(controller
                                                         .dashboardIrList
                                                         .value
                                                         ?.cmDashboadDetails
-                                                        ?.item_list
-                                                        ?.length ??
-                                                    0,
-                                                (index) => DataRow(cells: [
-                                                  DataCell(Text(controller
-                                                          .dashboardIrList
-                                                          .value
-                                                          ?.cmDashboadDetails
-                                                          ?.item_list?[index]
-                                                          .facility_name
-                                                          .toString() ??
-                                                      '')),
-                                                  DataCell(Text(
-                                                      'IR${controller.dashboardIrList.value?.cmDashboadDetails?.item_list?[index].wo_number.toString() ?? ''}')),
-                                                  DataCell(Text(controller
-                                                          .dashboardIrList
-                                                          .value
-                                                          ?.cmDashboadDetails
-                                                          ?.item_list?[index]
-                                                          .wo_decription ??
-                                                      '')),
-                                                  DataCell(Text(controller
-                                                          .dashboardIrList
-                                                          .value
-                                                          ?.cmDashboadDetails
-                                                          ?.item_list?[index]
-                                                          .status_long ??
-                                                      '')),
-                                                  DataCell(Text(controller
-                                                          .dashboardIrList
-                                                          .value
-                                                          ?.cmDashboadDetails
-                                                          ?.item_list?[index]
-                                                          .asset_category ??
-                                                      '')),
-                                                  DataCell(Text(controller
-                                                          .dashboardIrList
-                                                          .value
-                                                          ?.cmDashboadDetails
-                                                          ?.item_list?[index]
-                                                          .asset_name ??
-                                                      '')),
-                                                  DataCell(Text(controller
-                                                          .dashboardIrList
-                                                          .value
-                                                          ?.cmDashboadDetails
-                                                          ?.item_list?[index]
-                                                          .start_date ??
-                                                      '')),
-                                                  DataCell(Text(controller
-                                                          .dashboardIrList
-                                                          .value
-                                                          ?.cmDashboadDetails
-                                                          ?.item_list?[index]
-                                                          .end_date ??
-                                                      '')),
-                                                  DataCell(
-                                                    Row(
-                                                      children: [
-                                                        TableActionButton(
-                                                          color: ColorValues
-                                                              .viewColor,
-                                                          icon: Icons
-                                                              .remove_red_eye_outlined,
-                                                          message: 'View',
-                                                          onPress: () {
-                                                            controller
-                                                                .clearStoreIrData();
-                                                            // controller
-                                                            //     .clearStoreDatatype();
+                                                        ?.item_list?[index]
+                                                        .facility_name
+                                                        .toString() ??
+                                                    '')),
+                                                DataCell(Text(
+                                                    'IR${controller.dashboardIrList.value?.cmDashboadDetails?.item_list?[index].wo_number.toString() ?? ''}')),
+                                                DataCell(Text(controller
+                                                        .dashboardIrList
+                                                        .value
+                                                        ?.cmDashboadDetails
+                                                        ?.item_list?[index]
+                                                        .wo_decription ??
+                                                    '')),
+                                                DataCell(Text(controller
+                                                        .dashboardIrList
+                                                        .value
+                                                        ?.cmDashboadDetails
+                                                        ?.item_list?[index]
+                                                        .status_long ??
+                                                    '')),
+                                                DataCell(Text(controller
+                                                        .dashboardIrList
+                                                        .value
+                                                        ?.cmDashboadDetails
+                                                        ?.item_list?[index]
+                                                        .asset_category ??
+                                                    '')),
+                                                DataCell(Text(controller
+                                                        .dashboardIrList
+                                                        .value
+                                                        ?.cmDashboadDetails
+                                                        ?.item_list?[index]
+                                                        .asset_name ??
+                                                    '')),
+                                                DataCell(Text(controller
+                                                        .dashboardIrList
+                                                        .value
+                                                        ?.cmDashboadDetails
+                                                        ?.item_list?[index]
+                                                        .start_date ??
+                                                    '')),
+                                                DataCell(Text(controller
+                                                        .dashboardIrList
+                                                        .value
+                                                        ?.cmDashboadDetails
+                                                        ?.item_list?[index]
+                                                        .end_date ??
+                                                    '')),
+                                                DataCell(
+                                                  Row(
+                                                    children: [
+                                                      TableActionButton(
+                                                        color: ColorValues
+                                                            .viewColor,
+                                                        icon: Icons
+                                                            .remove_red_eye_outlined,
+                                                        message: 'View',
+                                                        onPress: () {
+                                                          controller
+                                                              .clearStoreIrData();
+                                                          // controller
+                                                          //     .clearStoreDatatype();
 
-                                                            int iRId = controller
-                                                                    .dashboardIrList
-                                                                    .value
-                                                                    ?.cmDashboadDetails
-                                                                    ?.item_list?[
-                                                                        index]
-                                                                    .wo_number ??
-                                                                0;
-                                                            if (iRId != 0) {
-                                                              Get.toNamed(
-                                                                  Routes
-                                                                      .viewIncidentReportScreen,
-                                                                  arguments: {
-                                                                    'irId': iRId
-                                                                  });
-                                                            }
-                                                          },
-                                                        ),
-                                                      ],
-                                                    ),
+                                                          int iRId = controller
+                                                                  .dashboardIrList
+                                                                  .value
+                                                                  ?.cmDashboadDetails
+                                                                  ?.item_list?[
+                                                                      index]
+                                                                  .wo_number ??
+                                                              0;
+                                                          if (iRId != 0) {
+                                                            Get.toNamed(
+                                                                Routes
+                                                                    .viewIncidentReportScreen,
+                                                                arguments: {
+                                                                  'irId': iRId
+                                                                });
+                                                          }
+                                                        },
+                                                      ),
+                                                    ],
                                                   ),
-                                                ]),
-                                              ),
+                                                ),
+                                              ]),
                                             ),
                                           ),
                                         ),
                                       ),
-                                    ],
-                                  ),
+                                    ),
+                                  ],
                                 ),
                               ),
 
                               //sm.................................
 
-                              Obx(
-                                () => Container(
-                                  margin: EdgeInsets.only(
-                                      left: 20, right: 20, top: 10),
-                                  height: Get.height,
-                                  width: Get.width,
-                                  decoration: BoxDecoration(
-                                    color: Color.fromARGB(255, 245, 248, 250),
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  child: Column(
-                                    children: [
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceEvenly,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        children: [
-                                          Expanded(
-                                            flex: 2,
-                                            child: Container(
-                                                margin:
-                                                    EdgeInsets.only(left: 20),
-                                                padding: EdgeInsets.only(
-                                                    left: 20, top: 10),
-                                                decoration: BoxDecoration(
-                                                  color: ColorValues
-                                                      .lightBlueColor,
-                                                  borderRadius:
-                                                      BorderRadius.circular(10),
-                                                  boxShadow: [
-                                                    BoxShadow(
-                                                      color: Colors.grey,
-                                                      offset: Offset(0.0, 1.0),
-                                                      blurRadius: 6.0,
-                                                    ),
-                                                  ],
-                                                ),
-                                                height: 150,
-                                                child: Row(
-                                                  children: [
-                                                    Column(
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .start,
-                                                      children: [
-                                                        Text("Overview",
-                                                            style:
-                                                                Styles.black15),
-                                                        // Dimens.boxHeight20,
-                                                        // Spacer(),
-                                                        Center(
-                                                          child: Row(
-                                                            children: [
-                                                              Container(
-                                                                  margin: EdgeInsets
-                                                                      .only(
-                                                                          top:
-                                                                              10),
-                                                                  height: 100,
-                                                                  width: 150,
-                                                                  child: Column(
-                                                                    children: [
-                                                                      Row(
-                                                                        mainAxisAlignment:
-                                                                            MainAxisAlignment.center,
-                                                                        children: [
-                                                                          Text(
-                                                                            "Total",
-                                                                            style:
-                                                                                Styles.black13,
-                                                                          ),
-                                                                          Spacer(),
-
-                                                                          Text(
-                                                                              '${controller.dashboardSmList.value?.cmDashboadDetails?.total}'),
-                                                                          //  '${dashbo?.module_name}'),
-                                                                        ],
-                                                                      ),
-                                                                      Dimens
-                                                                          .boxHeight5,
-                                                                      Row(
-                                                                        children: [
-                                                                          Text(
-                                                                            "Completed",
-                                                                            style:
-                                                                                Styles.black13,
-                                                                          ),
-                                                                          Spacer(),
-                                                                          Text(
-                                                                              '${controller.dashboardSmList.value?.cmDashboadDetails?.completed}'),
-                                                                        ],
-                                                                      ),
-                                                                      Dimens
-                                                                          .boxHeight5,
-                                                                      Row(
-                                                                        children: [
-                                                                          Text(
-                                                                            "Pending",
-                                                                            style:
-                                                                                Styles.black13,
-                                                                          ),
-                                                                          Spacer(),
-                                                                          Text(
-                                                                              '${controller.dashboardSmList.value?.cmDashboadDetails?.pending}'),
-                                                                        ],
-                                                                      ),
-                                                                    ],
-                                                                  )),
-                                                            ],
-                                                          ),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                    Dimens.boxWidth20,
-                                                    Container(
-                                                        // padding: EdgeInsets.only(
-                                                        //     top: 30,
-                                                        //     right: 20,
-                                                        //     left: 10),
-                                                        child:
-                                                            CircularPercentIndicator(
-                                                      //circular progress indicator
-                                                      radius:
-                                                          50.0, //radius for circle
-                                                      lineWidth:
-                                                          15.0, //width of circle line
-                                                      animation:
-                                                          true, //animate when it shows progress indicator first
-                                                      percent: (controller
-                                                                  .dashboardSmList
-                                                                  .value
-                                                                  ?.cmDashboadDetails
-                                                                  ?.completed ??
-                                                              0) /
-                                                          (controller
-                                                                  .dashboardSmList
-                                                                  .value
-                                                                  ?.cmDashboadDetails
-                                                                  ?.total ??
-                                                              0),
-                                                      center: Text(
-                                                        '${((controller.dashboardSmList.value?.cmDashboadDetails?.completed ?? 0) / (controller.dashboardSmList.value?.cmDashboadDetails?.total ?? 1) * 100).toStringAsFixed(1)}%',
-                                                        style: TextStyle(
-                                                            fontWeight:
-                                                                FontWeight.bold,
-                                                            fontSize: 20.0),
-                                                      ), //center text, you can set Icon as well
-                                                      footer: Text(
-                                                        "Order this Month",
-                                                        style: Styles.black13,
-                                                      ), //footer text
-                                                      backgroundColor: ColorValues
-                                                          .addNewColor, //backround of progress bar
-                                                      circularStrokeCap:
-                                                          CircularStrokeCap
-                                                              .round, //corner shape of progress bar at start/end
-                                                      progressColor: Colors
-                                                          .redAccent, //progress bar color
-                                                    )),
-                                                  ],
-                                                )),
-                                          ),
-                                          Expanded(
-                                            flex: 2,
-                                            child: Container(
+                              Container(
+                                margin: EdgeInsets.only(
+                                    left: 20, right: 20, top: 10),
+                                height: Get.height,
+                                width: Get.width,
+                                decoration: BoxDecoration(
+                                  color: Color.fromARGB(255, 245, 248, 250),
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                child: Column(
+                                  children: [
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        Expanded(
+                                          flex: 2,
+                                          child: Container(
                                               margin: EdgeInsets.only(left: 20),
                                               padding: EdgeInsets.only(
                                                   left: 20, top: 10),
@@ -3759,201 +3579,348 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb> {
                                                 ],
                                               ),
                                               height: 150,
-                                              child: Column(
+                                              child: Row(
                                                 children: [
-                                                  Row(
+                                                  Column(
                                                     crossAxisAlignment:
                                                         CrossAxisAlignment
                                                             .start,
                                                     children: [
-                                                      Align(
-                                                          alignment:
-                                                              Alignment.topLeft,
-                                                          child: Column(
-                                                            children: [
-                                                              Text(
-                                                                  "Schedule Compliance",
-                                                                  style: Styles
-                                                                      .black15),
-                                                              Dimens
-                                                                  .boxHeight10,
-                                                              SemicircularIndicator(
-                                                                radius: 60,
-                                                                color: Color
-                                                                    .fromARGB(
-                                                                        255,
-                                                                        195,
-                                                                        146,
-                                                                        230),
-                                                                backgroundColor:
-                                                                    Colors
-                                                                        .lightGreen,
-                                                                strokeWidth: 13,
-                                                                bottomPadding:
-                                                                    0,
-                                                                child: Text(
-                                                                  '${((controller.dashboardSmList.value?.cmDashboadDetails?.schedule_compliance_completed ?? 0) / (controller.dashboardSmList.value?.cmDashboadDetails?.schedule_compliance_total ?? 1) * 100).toString()}%',
-                                                                  style: TextStyle(
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .bold,
-                                                                      fontSize:
-                                                                          20.0,
-                                                                      color: Colors
-                                                                          .redAccent),
-                                                                ),
-                                                              ),
-                                                            ],
-                                                          )),
-                                                      Spacer(),
-                                                      Container(
-                                                        height:
-                                                            Get.height * 0.09,
-                                                        width: Get.width * 0.09,
-                                                        margin: EdgeInsets.only(
-                                                            left: 20,
-                                                            right: 10),
-                                                        padding:
-                                                            EdgeInsets.only(
-                                                                left: 10,
-                                                                top: 10,
-                                                                right: 10),
-                                                        decoration: BoxDecoration(
-                                                            color: Colors.white,
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        10),
-                                                            boxShadow: [
-                                                              BoxShadow(
-                                                                color:
-                                                                    Colors.grey,
-                                                                offset: Offset(
-                                                                    0.0, 1.0),
-                                                                blurRadius: 6.0,
-                                                              ),
-                                                            ]),
-                                                        child: Column(
-                                                          crossAxisAlignment:
-                                                              CrossAxisAlignment
-                                                                  .start,
+                                                      Text("Overview",
+                                                          style:
+                                                              Styles.black15),
+                                                      // Dimens.boxHeight20,
+                                                      // Spacer(),
+                                                      Center(
+                                                        child: Row(
                                                           children: [
-                                                            Row(
-                                                              children: [
-                                                                Text(
-                                                                  "Total",
-                                                                  style: TextStyle(
-                                                                      fontSize:
-                                                                          Get.width * 0.009 -
-                                                                              1),
-                                                                ),
-                                                                Spacer(),
-                                                                Text(
-                                                                  '${controller.dashboardSmList.value?.cmDashboadDetails?.schedule_compliance_total}',
-                                                                  style: TextStyle(
-                                                                      fontSize:
-                                                                          Get.width * 0.009 -
-                                                                              1),
-                                                                ),
-                                                              ],
-                                                            ),
-                                                            // Dimens.boxHeight2,
-                                                            Row(
-                                                              children: [
-                                                                Text(
-                                                                  "Completed",
-                                                                  style: TextStyle(
-                                                                      fontSize:
-                                                                          Get.width * 0.009 -
-                                                                              1),
-                                                                ),
-                                                                Spacer(),
-                                                                Text(
-                                                                  '${controller.dashboardSmList.value?.cmDashboadDetails?.schedule_compliance_completed}',
-                                                                  style: TextStyle(
-                                                                      fontSize:
-                                                                          Get.width * 0.009 -
-                                                                              1),
-                                                                ),
-                                                              ],
-                                                            ),
-                                                            // Dimens.boxHeight5,
-                                                            Row(
-                                                              children: [
-                                                                Text(
-                                                                  "Pending",
-                                                                  style: TextStyle(
-                                                                      fontSize:
-                                                                          Get.width * 0.009 -
-                                                                              1),
-                                                                ),
-                                                                Spacer(),
-                                                                Text(
-                                                                  '${controller.dashboardSmList.value?.cmDashboadDetails?.schedule_compliance_pending}',
-                                                                  style: TextStyle(
-                                                                      fontSize:
-                                                                          Get.width * 0.009 -
-                                                                              1),
-                                                                ),
-                                                              ],
-                                                            ),
+                                                            Container(
+                                                                margin: EdgeInsets
+                                                                    .only(
+                                                                        top:
+                                                                            10),
+                                                                height: 100,
+                                                                width: 150,
+                                                                child: Column(
+                                                                  children: [
+                                                                    Row(
+                                                                      mainAxisAlignment:
+                                                                          MainAxisAlignment
+                                                                              .center,
+                                                                      children: [
+                                                                        Text(
+                                                                          "Total",
+                                                                          style:
+                                                                              Styles.black13,
+                                                                        ),
+                                                                        Spacer(),
+
+                                                                        Text(
+                                                                            '${controller.dashboardSmList.value?.cmDashboadDetails?.total}'),
+                                                                        //  '${dashbo?.module_name}'),
+                                                                      ],
+                                                                    ),
+                                                                    Dimens
+                                                                        .boxHeight5,
+                                                                    Row(
+                                                                      children: [
+                                                                        Text(
+                                                                          "Completed",
+                                                                          style:
+                                                                              Styles.black13,
+                                                                        ),
+                                                                        Spacer(),
+                                                                        Text(
+                                                                            '${controller.dashboardSmList.value?.cmDashboadDetails?.completed}'),
+                                                                      ],
+                                                                    ),
+                                                                    Dimens
+                                                                        .boxHeight5,
+                                                                    Row(
+                                                                      children: [
+                                                                        Text(
+                                                                          "Pending",
+                                                                          style:
+                                                                              Styles.black13,
+                                                                        ),
+                                                                        Spacer(),
+                                                                        Text(
+                                                                            '${controller.dashboardSmList.value?.cmDashboadDetails?.pending}'),
+                                                                      ],
+                                                                    ),
+                                                                  ],
+                                                                )),
                                                           ],
                                                         ),
                                                       ),
                                                     ],
                                                   ),
-                                                  // Dimens.boxHeight20,
+                                                  Dimens.boxWidth20,
+                                                  Container(
+                                                      // padding: EdgeInsets.only(
+                                                      //     top: 30,
+                                                      //     right: 20,
+                                                      //     left: 10),
+                                                      child:
+                                                          CircularPercentIndicator(
+                                                    //circular progress indicator
+                                                    radius:
+                                                        50.0, //radius for circle
+                                                    lineWidth:
+                                                        15.0, //width of circle line
+                                                    animation:
+                                                        true, //animate when it shows progress indicator first
+                                                    percent: (controller
+                                                                .dashboardSmList
+                                                                .value
+                                                                ?.cmDashboadDetails
+                                                                ?.completed ??
+                                                            0) /
+                                                        (controller
+                                                                .dashboardSmList
+                                                                .value
+                                                                ?.cmDashboadDetails
+                                                                ?.total ??
+                                                            0),
+                                                    center: Text(
+                                                      '${((controller.dashboardSmList.value?.cmDashboadDetails?.completed ?? 0) / (controller.dashboardSmList.value?.cmDashboadDetails?.total ?? 1) * 100).toStringAsFixed(1)}%',
+                                                      style: TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          fontSize: 20.0),
+                                                    ), //center text, you can set Icon as well
+                                                    footer: Text(
+                                                      "Order this Month",
+                                                      style: Styles.black13,
+                                                    ), //footer text
+                                                    backgroundColor: ColorValues
+                                                        .addNewColor, //backround of progress bar
+                                                    circularStrokeCap:
+                                                        CircularStrokeCap
+                                                            .round, //corner shape of progress bar at start/end
+                                                    progressColor: Colors
+                                                        .redAccent, //progress bar color
+                                                  )),
                                                 ],
-                                              ),
-                                            ),
-                                          ),
-                                          Expanded(
-                                            flex: 2,
-                                            child: Container(
-                                                margin: EdgeInsets.only(
-                                                    left: 20, right: 20),
-                                                padding: EdgeInsets.only(
-                                                    left: 20, top: 10),
-                                                decoration: BoxDecoration(
-                                                  color: ColorValues
-                                                      .lightBlueColor,
-                                                  borderRadius:
-                                                      BorderRadius.circular(10),
-                                                  boxShadow: [
-                                                    BoxShadow(
-                                                      color: Colors.grey,
-                                                      offset: Offset(0.0, 1.0),
-                                                      blurRadius: 6.0,
-                                                    ),
-                                                  ],
+                                              )),
+                                        ),
+                                        Expanded(
+                                          flex: 2,
+                                          child: Container(
+                                            margin: EdgeInsets.only(left: 20),
+                                            padding: EdgeInsets.only(
+                                                left: 20, top: 10),
+                                            decoration: BoxDecoration(
+                                              color: ColorValues.lightBlueColor,
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: Colors.grey,
+                                                  offset: Offset(0.0, 1.0),
+                                                  blurRadius: 6.0,
                                                 ),
-                                                height: 150,
-                                                child: Row(
+                                              ],
+                                            ),
+                                            height: 150,
+                                            child: Column(
+                                              children: [
+                                                Row(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
                                                   children: [
                                                     Align(
                                                         alignment:
                                                             Alignment.topLeft,
-                                                        child: Text("Category",
-                                                            style: Styles
-                                                                .black15)),
-                                                    Align(
+                                                        child: Column(
+                                                          children: [
+                                                            Text(
+                                                                "Schedule Compliance",
+                                                                style: Styles
+                                                                    .black15),
+                                                            Dimens.boxHeight10,
+                                                            SemicircularIndicator(
+                                                              radius: 60,
+                                                              color: Color
+                                                                  .fromARGB(
+                                                                      255,
+                                                                      195,
+                                                                      146,
+                                                                      230),
+                                                              backgroundColor:
+                                                                  Colors
+                                                                      .lightGreen,
+                                                              strokeWidth: 13,
+                                                              bottomPadding: 0,
+                                                              child: Text(
+                                                                '${((controller.dashboardSmList.value?.cmDashboadDetails?.schedule_compliance_completed ?? 0) / (controller.dashboardSmList.value?.cmDashboadDetails?.schedule_compliance_total ?? 1) * 100).toString()}%',
+                                                                style: TextStyle(
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .bold,
+                                                                    fontSize:
+                                                                        20.0,
+                                                                    color: Colors
+                                                                        .redAccent),
+                                                              ),
+                                                            ),
+                                                          ],
+                                                        )),
+                                                    Spacer(),
+                                                    Container(
+                                                      height: Get.height * 0.09,
+                                                      width: Get.width * 0.09,
+                                                      margin: EdgeInsets.only(
+                                                          left: 20, right: 10),
+                                                      padding: EdgeInsets.only(
+                                                          left: 10,
+                                                          top: 10,
+                                                          right: 10),
+                                                      decoration: BoxDecoration(
+                                                          color: Colors.white,
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(10),
+                                                          boxShadow: [
+                                                            BoxShadow(
+                                                              color:
+                                                                  Colors.grey,
+                                                              offset: Offset(
+                                                                  0.0, 1.0),
+                                                              blurRadius: 6.0,
+                                                            ),
+                                                          ]),
+                                                      child: Column(
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          Row(
+                                                            children: [
+                                                              Text(
+                                                                "Total",
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        Get.width *
+                                                                                0.009 -
+                                                                            1),
+                                                              ),
+                                                              Spacer(),
+                                                              Text(
+                                                                '${controller.dashboardSmList.value?.cmDashboadDetails?.schedule_compliance_total}',
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        Get.width *
+                                                                                0.009 -
+                                                                            1),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                          // Dimens.boxHeight2,
+                                                          Row(
+                                                            children: [
+                                                              Text(
+                                                                "Completed",
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        Get.width *
+                                                                                0.009 -
+                                                                            1),
+                                                              ),
+                                                              Spacer(),
+                                                              Text(
+                                                                '${controller.dashboardSmList.value?.cmDashboadDetails?.schedule_compliance_completed}',
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        Get.width *
+                                                                                0.009 -
+                                                                            1),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                          // Dimens.boxHeight5,
+                                                          Row(
+                                                            children: [
+                                                              Text(
+                                                                "Pending",
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        Get.width *
+                                                                                0.009 -
+                                                                            1),
+                                                              ),
+                                                              Spacer(),
+                                                              Text(
+                                                                '${controller.dashboardSmList.value?.cmDashboadDetails?.schedule_compliance_pending}',
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        Get.width *
+                                                                                0.009 -
+                                                                            1),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                                // Dimens.boxHeight20,
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                        Expanded(
+                                          flex: 2,
+                                          child: Container(
+                                              margin: EdgeInsets.only(
+                                                  left: 20, right: 20),
+                                              padding: EdgeInsets.only(
+                                                  left: 20, top: 10),
+                                              decoration: BoxDecoration(
+                                                color:
+                                                    ColorValues.lightBlueColor,
+                                                borderRadius:
+                                                    BorderRadius.circular(10),
+                                                boxShadow: [
+                                                  BoxShadow(
+                                                    color: Colors.grey,
+                                                    offset: Offset(0.0, 1.0),
+                                                    blurRadius: 6.0,
+                                                  ),
+                                                ],
+                                              ),
+                                              height: 150,
+                                              child: Row(
+                                                children: [
+                                                  Align(
                                                       alignment:
-                                                          Alignment.centerLeft,
-                                                      child: PieChart(
-                                                        dataMap: controller
-                                                            .getDataMap(),
+                                                          Alignment.topLeft,
+                                                      child: Text("Category",
+                                                          style:
+                                                              Styles.black15)),
+                                                  Align(
+                                                    alignment:
+                                                        Alignment.centerLeft,
+                                                    child: Obx(() {
+                                                      // Access the dataMap from the controller
+                                                      Map<String, double> data =
+                                                          controller.getDataMap;
+                                                      return PieChart(
+                                                        dataMap: data,
+                                                        totalValue: data.values
+                                                            .reduce((a, b) =>
+                                                                a +
+                                                                b), // Sum of all values in the map
                                                         chartType:
                                                             ChartType.ring,
                                                         chartRadius: 100,
                                                         colorList: controller
                                                             .getColorList(),
-                                                        // centerText: "Pie Chart",
                                                         legendOptions:
                                                             LegendOptions(
                                                           showLegendsInRow:
                                                               false,
-                                                          // legendPosition:
-                                                          //     LegendPosition.left,
                                                           showLegends: true,
                                                         ),
                                                         chartValuesOptions:
@@ -3966,256 +3933,251 @@ class _DashBoardHomeWebState extends State<DashBoardHomeWeb> {
                                                           showChartValuesOutside:
                                                               false,
                                                         ),
-                                                        // onTapCallback: (index) {
-                                                        //   chartController
-                                                        //       .onChartTapped(index);
-                                                        // },
-                                                      ),
-                                                    )
-                                                  ],
-                                                )),
-                                          ),
-                                        ],
-                                      ),
-                                      Dimens.boxHeight10,
-                                      SingleChildScrollView(
-                                        scrollDirection: Axis.horizontal,
-                                        child: Container(
-                                          // height: 70,
-                                          width: Get.width * .92,
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceAround,
-                                            children: [
-                                              _gridList(
-                                                tittle: "WO on-time",
+                                                      );
+                                                    }),
+                                                  )
+                                                ],
+                                              )),
+                                        ),
+                                      ],
+                                    ),
+                                    Dimens.boxHeight10,
+                                    SingleChildScrollView(
+                                      scrollDirection: Axis.horizontal,
+                                      child: Container(
+                                        // height: 70,
+                                        width: Get.width * .92,
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceAround,
+                                          children: [
+                                            _gridList(
+                                              tittle: "WO on-time",
+                                              percent:
+                                                  '${((controller.dashboardBmList.value?.cmDashboadDetails?.completed ?? 0) / (controller.dashboardBmList.value?.cmDashboadDetails?.total ?? 1) * 100).toStringAsFixed(1).toString()}%',
+                                            ),
+                                            _gridList(
+                                              tittle: "WO delay",
+                                              percent:
+                                                  '${((controller.dashboardBmList.value?.cmDashboadDetails?.wo_delay ?? 0) / (controller.dashboardBmList.value?.cmDashboadDetails?.total ?? 1) * 100).toStringAsFixed(1).toString()}%',
+                                            ),
+                                            _gridList(
+                                              tittle: "WO backlog",
+                                              percent:
+                                                  '${((controller.dashboardBmList.value?.cmDashboadDetails?.wo_backlog ?? 0) / (controller.dashboardBmList.value?.cmDashboadDetails?.total ?? 1) * 100).toStringAsFixed(1).toString()}%',
+                                            ),
+                                            _gridList(
+                                                tittle: "Low stock items",
                                                 percent:
-                                                    '${((controller.dashboardBmList.value?.cmDashboadDetails?.completed ?? 0) / (controller.dashboardBmList.value?.cmDashboadDetails?.total ?? 1) * 100).toStringAsFixed(1).toString()}%',
-                                              ),
-                                              _gridList(
-                                                tittle: "WO delay",
+                                                    '${controller.dashboardSmList.value?.cmDashboadDetails?.low_stock_items}'),
+                                            _gridList(
+                                                tittle: "PO Items Awaited",
                                                 percent:
-                                                    '${((controller.dashboardBmList.value?.cmDashboadDetails?.wo_delay ?? 0) / (controller.dashboardBmList.value?.cmDashboadDetails?.total ?? 1) * 100).toStringAsFixed(1).toString()}%',
-                                              ),
-                                              _gridList(
-                                                tittle: "WO backlog",
-                                                percent:
-                                                    '${((controller.dashboardBmList.value?.cmDashboadDetails?.wo_backlog ?? 0) / (controller.dashboardBmList.value?.cmDashboadDetails?.total ?? 1) * 100).toStringAsFixed(1).toString()}%',
-                                              ),
-                                              _gridList(
-                                                  tittle: "Low stock items",
-                                                  percent:
-                                                      '${controller.dashboardSmList.value?.cmDashboadDetails?.low_stock_items}'),
-                                              _gridList(
-                                                  tittle: "PO Items Awaited",
-                                                  percent:
-                                                      '${controller.dashboardSmList.value?.cmDashboadDetails?.po_items_awaited}'),
-                                            ],
-                                          ),
+                                                    '${controller.dashboardSmList.value?.cmDashboadDetails?.po_items_awaited}'),
+                                          ],
                                         ),
                                       ),
-                                      // Dimens.boxHeight10,
-                                      Expanded(
-                                        child: Container(
-                                          color: Color.fromARGB(
-                                              255, 245, 248, 250),
-                                          width: Get.width,
-                                          height: Get.height,
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(16),
-                                            child: DataTable2(
-                                              headingRowHeight: 40,
-                                              dataRowHeight: 35,
-                                              columnSpacing: 12,
-                                              // horizontalMargin: 5,
-                                              headingRowColor:
-                                                  MaterialStateColor
-                                                      .resolveWith(
-                                                (states) {
-                                                  return ColorValues
-                                                      .lightGreyColor;
-                                                },
+                                    ),
+                                    // Dimens.boxHeight10,
+                                    Expanded(
+                                      child: Container(
+                                        color:
+                                            Color.fromARGB(255, 245, 248, 250),
+                                        width: Get.width,
+                                        height: Get.height,
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(16),
+                                          child: DataTable2(
+                                            headingRowHeight: 40,
+                                            dataRowHeight: 35,
+                                            columnSpacing: 12,
+                                            // horizontalMargin: 5,
+                                            headingRowColor:
+                                                MaterialStateColor.resolveWith(
+                                              (states) {
+                                                return ColorValues
+                                                    .lightGreyColor;
+                                              },
+                                            ),
+                                            minWidth: 2500,
+                                            columns: [
+                                              DataColumn2(
+                                                fixedWidth: 100,
+                                                label: Text(
+                                                  'Site name',
+                                                  style: Styles.blackBold14,
+                                                ),
+                                                // size: ColumnSize.L,
                                               ),
-                                              minWidth: 2500,
-                                              columns: [
-                                                DataColumn2(
-                                                  fixedWidth: 100,
-                                                  label: Text(
-                                                    'Site name',
-                                                    style: Styles.blackBold14,
-                                                  ),
-                                                  // size: ColumnSize.L,
+                                              DataColumn2(
+                                                fixedWidth: 120,
+                                                label: Text(
+                                                  'WO number',
+                                                  style: Styles.blackBold14,
                                                 ),
-                                                DataColumn2(
-                                                  fixedWidth: 120,
-                                                  label: Text(
-                                                    'WO number',
-                                                    style: Styles.blackBold14,
-                                                  ),
-                                                  // size: ColumnSize.L,
+                                                // size: ColumnSize.L,
+                                              ),
+                                              DataColumn2(
+                                                fixedWidth: 200,
+                                                label: Text(
+                                                  'WO description',
+                                                  style: Styles.blackBold14,
                                                 ),
-                                                DataColumn2(
-                                                  fixedWidth: 200,
-                                                  label: Text(
-                                                    'WO description',
-                                                    style: Styles.blackBold14,
-                                                  ),
-                                                  // size: ColumnSize.L,
+                                                // size: ColumnSize.L,
+                                              ),
+                                              DataColumn2(
+                                                fixedWidth: 300,
+                                                label: Text(
+                                                  'Status',
+                                                  style: Styles.blackBold14,
                                                 ),
-                                                DataColumn2(
-                                                  fixedWidth: 300,
-                                                  label: Text(
-                                                    'Status',
-                                                    style: Styles.blackBold14,
-                                                  ),
-                                                  // size: ColumnSize.L,
+                                                // size: ColumnSize.L,
+                                              ),
+                                              DataColumn2(
+                                                fixedWidth: 250,
+                                                label: Text(
+                                                  'Asset category',
+                                                  style: Styles.blackBold14,
                                                 ),
-                                                DataColumn2(
-                                                  fixedWidth: 250,
-                                                  label: Text(
-                                                    'Asset category',
-                                                    style: Styles.blackBold14,
-                                                  ),
-                                                  // size: ColumnSize.L,
+                                                // size: ColumnSize.L,
+                                              ),
+                                              DataColumn2(
+                                                fixedWidth: 400,
+                                                label: Text(
+                                                  'Asset name',
+                                                  style: Styles.blackBold14,
                                                 ),
-                                                DataColumn2(
-                                                  fixedWidth: 400,
-                                                  label: Text(
-                                                    'Asset name',
-                                                    style: Styles.blackBold14,
-                                                  ),
-                                                  // size: ColumnSize.L,
+                                                // size: ColumnSize.L,
+                                              ),
+                                              DataColumn2(
+                                                fixedWidth: 250,
+                                                label: Text(
+                                                  'Schedule start date',
+                                                  style: Styles.blackBold14,
                                                 ),
-                                                DataColumn2(
-                                                  fixedWidth: 250,
-                                                  label: Text(
-                                                    'Schedule start date',
-                                                    style: Styles.blackBold14,
-                                                  ),
-                                                  // size: ColumnSize.L,
+                                                // size: ColumnSize.L,
+                                              ),
+                                              DataColumn2(
+                                                fixedWidth: 250,
+                                                label: Text(
+                                                  'Schedule end date',
+                                                  style: Styles.blackBold14,
                                                 ),
-                                                DataColumn2(
-                                                  fixedWidth: 250,
-                                                  label: Text(
-                                                    'Schedule end date',
-                                                    style: Styles.blackBold14,
-                                                  ),
-                                                  // size: ColumnSize.L,
+                                                // size: ColumnSize.L,
+                                              ),
+                                              DataColumn2(
+                                                fixedWidth: 100,
+                                                label: Text(
+                                                  'Action',
+                                                  style: Styles.blackBold14,
                                                 ),
-                                                DataColumn2(
-                                                  fixedWidth: 100,
-                                                  label: Text(
-                                                    'Action',
-                                                    style: Styles.blackBold14,
-                                                  ),
-                                                ),
-                                              ],
-                                              rows: List<DataRow>.generate(
-                                                controller
+                                              ),
+                                            ],
+                                            rows: List<DataRow>.generate(
+                                              controller
+                                                      .dashboardSmList
+                                                      .value
+                                                      ?.cmDashboadDetails
+                                                      ?.item_list
+                                                      ?.length ??
+                                                  0,
+                                              (index) => DataRow(cells: [
+                                                DataCell(Text(controller
                                                         .dashboardSmList
                                                         .value
                                                         ?.cmDashboadDetails
-                                                        ?.item_list
-                                                        ?.length ??
-                                                    0,
-                                                (index) => DataRow(cells: [
-                                                  DataCell(Text(controller
-                                                          .dashboardSmList
-                                                          .value
-                                                          ?.cmDashboadDetails
-                                                          ?.item_list?[index]
-                                                          .facility_name
-                                                          .toString() ??
-                                                      '')),
-                                                  DataCell(Text(
-                                                      'SM${controller.dashboardSmList.value?.cmDashboadDetails?.item_list?[index].wo_number.toString() ?? ''}')),
-                                                  DataCell(Text(controller
-                                                          .dashboardSmList
-                                                          .value
-                                                          ?.cmDashboadDetails
-                                                          ?.item_list?[index]
-                                                          .wo_decription ??
-                                                      '')),
-                                                  DataCell(Text(controller
-                                                          .dashboardSmList
-                                                          .value
-                                                          ?.cmDashboadDetails
-                                                          ?.item_list?[index]
-                                                          .status_long ??
-                                                      '')),
-                                                  DataCell(Text(controller
-                                                          .dashboardSmList
-                                                          .value
-                                                          ?.cmDashboadDetails
-                                                          ?.item_list?[index]
-                                                          .asset_category ??
-                                                      '')),
-                                                  DataCell(Text(controller
-                                                          .dashboardSmList
-                                                          .value
-                                                          ?.cmDashboadDetails
-                                                          ?.item_list?[index]
-                                                          .asset_name ??
-                                                      '')),
-                                                  DataCell(Text(controller
-                                                          .dashboardSmList
-                                                          .value
-                                                          ?.cmDashboadDetails
-                                                          ?.item_list?[index]
-                                                          .start_date ??
-                                                      '')),
-                                                  DataCell(Text(controller
-                                                          .dashboardSmList
-                                                          .value
-                                                          ?.cmDashboadDetails
-                                                          ?.item_list?[index]
-                                                          .end_date ??
-                                                      '')),
-                                                  DataCell(
-                                                    Row(
-                                                      children: [
-                                                        TableActionButton(
-                                                          color: ColorValues
-                                                              .viewColor,
-                                                          icon: Icons
-                                                              .remove_red_eye_outlined,
-                                                          message: 'View',
-                                                          onPress: () {
-                                                            // controller
-                                                            //     .clearStoreData();
-                                                            // controller
-                                                            //     .clearStoreDatatype();
+                                                        ?.item_list?[index]
+                                                        .facility_name
+                                                        .toString() ??
+                                                    '')),
+                                                DataCell(Text(
+                                                    'SM${controller.dashboardSmList.value?.cmDashboadDetails?.item_list?[index].wo_number.toString() ?? ''}')),
+                                                DataCell(Text(controller
+                                                        .dashboardSmList
+                                                        .value
+                                                        ?.cmDashboadDetails
+                                                        ?.item_list?[index]
+                                                        .wo_decription ??
+                                                    '')),
+                                                DataCell(Text(controller
+                                                        .dashboardSmList
+                                                        .value
+                                                        ?.cmDashboadDetails
+                                                        ?.item_list?[index]
+                                                        .status_long ??
+                                                    '')),
+                                                DataCell(Text(controller
+                                                        .dashboardSmList
+                                                        .value
+                                                        ?.cmDashboadDetails
+                                                        ?.item_list?[index]
+                                                        .asset_category ??
+                                                    '')),
+                                                DataCell(Text(controller
+                                                        .dashboardSmList
+                                                        .value
+                                                        ?.cmDashboadDetails
+                                                        ?.item_list?[index]
+                                                        .asset_name ??
+                                                    '')),
+                                                DataCell(Text(controller
+                                                        .dashboardSmList
+                                                        .value
+                                                        ?.cmDashboadDetails
+                                                        ?.item_list?[index]
+                                                        .start_date ??
+                                                    '')),
+                                                DataCell(Text(controller
+                                                        .dashboardSmList
+                                                        .value
+                                                        ?.cmDashboadDetails
+                                                        ?.item_list?[index]
+                                                        .end_date ??
+                                                    '')),
+                                                DataCell(
+                                                  Row(
+                                                    children: [
+                                                      TableActionButton(
+                                                        color: ColorValues
+                                                            .viewColor,
+                                                        icon: Icons
+                                                            .remove_red_eye_outlined,
+                                                        message: 'View',
+                                                        onPress: () {
+                                                          // controller
+                                                          //     .clearStoreData();
+                                                          // controller
+                                                          //     .clearStoreDatatype();
 
-                                                            int pmTaskId = controller
-                                                                    .dashboardSmList
-                                                                    .value
-                                                                    ?.cmDashboadDetails
-                                                                    ?.item_list?[
-                                                                        index]
-                                                                    .wo_number ??
-                                                                0;
-                                                            if (pmTaskId != 0) {
-                                                              Get.toNamed(
-                                                                  Routes
-                                                                      .pmTaskView,
-                                                                  arguments: {
-                                                                    'pmTaskId':
-                                                                        pmTaskId
-                                                                  });
-                                                            }
-                                                          },
-                                                        ),
-                                                      ],
-                                                    ),
+                                                          int pmTaskId = controller
+                                                                  .dashboardSmList
+                                                                  .value
+                                                                  ?.cmDashboadDetails
+                                                                  ?.item_list?[
+                                                                      index]
+                                                                  .wo_number ??
+                                                              0;
+                                                          if (pmTaskId != 0) {
+                                                            Get.toNamed(
+                                                                Routes
+                                                                    .pmTaskView,
+                                                                arguments: {
+                                                                  'pmTaskId':
+                                                                      pmTaskId
+                                                                });
+                                                          }
+                                                        },
+                                                      ),
+                                                    ],
                                                   ),
-                                                ]),
-                                              ),
+                                                ),
+                                              ]),
                                             ),
                                           ),
                                         ),
                                       ),
-                                    ],
-                                  ),
+                                    ),
+                                  ],
                                 ),
                               ),
                             ],
