@@ -42,6 +42,10 @@ abstract class UserAccessConstants {
   static int kGoodsFeatureId = 35;
   static String kFeatureGoodsOrderName = "Goods Order";
 
+  /// statury report list
+  static int kSatutoryFeatureId = 501;
+  static String kFeatureSatutoryName = "Satutory";
+
   //REQ Order
   static int kReqOrderFeatureId = 36;
   static String kFeatureReqOrderName = "Request Order";
