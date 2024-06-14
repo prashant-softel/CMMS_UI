@@ -26,7 +26,7 @@ class _AttendanceListWebState extends State<AttendanceListWeb> {
           uniqueDates.add(data.date ?? 0);
         });
       });
-      final sortedDates = uniqueDates.toList()..sort();
+      final sortedDates = uniqueDates.toList().sort();
       return Scaffold(
         body: Stack(
           children: [
@@ -197,8 +197,8 @@ class _AttendanceListWebState extends State<AttendanceListWeb> {
     });
   }
 
-  bool _sortAscending = true;
-  int _sortColumnIndex = 0;
+  // bool _sortAscending = true;
+  // int _sortColumnIndex = 0;
   Widget _buildSection(
     AttendanceListModel attendance,
   ) {
@@ -220,51 +220,51 @@ class _AttendanceListWebState extends State<AttendanceListWeb> {
               scrollDirection: Axis.horizontal,
               child: DataTable(
                 dataRowMinHeight: 6,
-                sortAscending: _sortAscending,
-                sortColumnIndex: _sortColumnIndex,
+                // sortAscending: _sortAscending,
+                // sortColumnIndex: _sortColumnIndex,
                 columns: [
                   DataColumn(
                     label: Text('Date'),
-                    onSort: (columnIndex, ascending) => _onSort(
-                        columnIndex,
-                        ascending,
-                        attendance.month_data ?? [],
-                        (d) => d.date ?? 0),
+                    // onSort: (columnIndex, ascending) => _onSort(
+                    //     columnIndex,
+                    //     ascending,
+                    //     attendance.month_data ?? [],
+                    //     (d) => d.date ?? 0),
                   ),
                   DataColumn(
                     label: Text('HFE'),
-                    onSort: (columnIndex, ascending) => _onSort(
-                        columnIndex,
-                        ascending,
-                        attendance.month_data ?? [],
-                        (d) => d.hfe_employees ?? 0),
+                    // onSort: (columnIndex, ascending) => _onSort(
+                    //     columnIndex,
+                    //     ascending,
+                    //     attendance.month_data ?? [],
+                    //     (d) => d.hfe_employees ?? 0),
                   ),
                   DataColumn(
                     label: Text('< 35'),
-                    onSort: (columnIndex, ascending) => _onSort(
-                      columnIndex,
-                      ascending,
-                      attendance.month_data ?? [],
-                      (d) => d.less_than_35 ?? 0,
-                    ),
+                    // onSort: (columnIndex, ascending) => _onSort(
+                    //   columnIndex,
+                    //   ascending,
+                    //   attendance.month_data ?? [],
+                    //   (d) => d.less_than_35 ?? 0,
+                    // ),
                   ),
                   DataColumn(
                     label: Text('30-50'),
-                    onSort: (columnIndex, ascending) => _onSort(
-                      columnIndex,
-                      ascending,
-                      attendance.month_data ?? [],
-                      (d) => d.between_30_to_50 ?? 0,
-                    ),
+                    // onSort: (columnIndex, ascending) => _onSort(
+                    //   columnIndex,
+                    //   ascending,
+                    //   attendance.month_data ?? [],
+                    //   (d) => d.between_30_to_50 ?? 0,
+                    // ),
                   ),
                   DataColumn(
                     label: Text('> 50'),
-                    onSort: (columnIndex, ascending) => _onSort(
-                      columnIndex,
-                      ascending,
-                      attendance.month_data ?? [],
-                      (d) => d.greater_than_50 ?? 0,
-                    ),
+                    // onSort: (columnIndex, ascending) => _onSort(
+                    //   columnIndex,
+                    //   ascending,
+                    //   attendance.month_data ?? [],
+                    //   (d) => d.greater_than_50 ?? 0,
+                    // ),
                   ),
                 ],
                 rows: attendance.month_data!.map((data) {
@@ -284,19 +284,19 @@ class _AttendanceListWebState extends State<AttendanceListWeb> {
     );
   }
 
-  void _onSort<T>(int columnIndex, bool ascending, List<MonthData> data,
-      Comparable<T> Function(MonthData) getField) {
-    setState(() {
-      _sortColumnIndex = columnIndex;
-      _sortAscending = ascending;
+  // void _onSort<T>(int columnIndex, bool ascending, List<MonthData> data,
+  //     Comparable<T> Function(MonthData) getField) {
+  //   setState(() {
+  //     _sortColumnIndex = columnIndex;
+  //     _sortAscending = ascending;
 
-      data.sort((a, b) {
-        final aValue = getField(a);
-        final bValue = getField(b);
-        return ascending
-            ? Comparable.compare(aValue, bValue)
-            : Comparable.compare(bValue, aValue);
-      });
-    });
-  }
+  //     data.sort((a, b) {
+  //       final aValue = getField(a);
+  //       final bValue = getField(b);
+  //       return ascending
+  //           ? Comparable.compare(aValue, bValue)
+  //           : Comparable.compare(bValue, aValue);
+  //     });
+  //   });
+  // }
 }

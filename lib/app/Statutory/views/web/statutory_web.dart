@@ -607,6 +607,7 @@ class StatutoryListDataSource extends DataTableSource {
                             icon: Icons.history,
                             message: 'History',
                             onPress: () {
+                              controller.clearStoreData();
                               Get.toNamed(
                                 Routes.complianceHistoryScreen,
                                 arguments: {

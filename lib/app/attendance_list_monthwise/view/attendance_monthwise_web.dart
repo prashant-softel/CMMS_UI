@@ -17,6 +17,13 @@ class AttendanceMonthWiseWeb extends GetView<AttendanceListMonthController> {
     return GetBuilder<AttendanceListMonthController>(
         id: "attendance-list-month",
         builder: (controller) {
+          final uniqueDates = <String>{};
+          controller.attendanceMonthModel.value.attendance?.forEach((employee) {
+            employee.details?.forEach((data) {
+              uniqueDates.add(data.date ?? "");
+            });
+          });
+          final List<String> sortedDates = uniqueDates.toList()..sort();
           return Scaffold(
             body: Obx(
               () => Stack(
@@ -167,7 +174,7 @@ class AttendanceMonthWiseWeb extends GetView<AttendanceListMonthController> {
                                           TableBorder.all(color: Colors.black),
                                       dataRowHeight: 40,
                                       headingRowHeight: 90,
-                                      columns: _buildColumns(),
+                                      columns: _buildColumns(sortedDates),
                                       rows: _buildRows(),
                                     ),
                                   ),
@@ -218,7 +225,7 @@ class AttendanceMonthWiseWeb extends GetView<AttendanceListMonthController> {
         });
   }
 
-  List<DataColumn> _buildColumns() {
+  List<DataColumn> _buildColumns(sortedDates) {
     List<DataColumn> columns = [
       DataColumn2(
         fixedWidth: 200,
@@ -227,15 +234,13 @@ class AttendanceMonthWiseWeb extends GetView<AttendanceListMonthController> {
         ),
       ),
     ];
-    for (var detail
-        in controller.attendanceMonthModel.value.attendance?.first.details ??
-            []) {
+    for (var detail in sortedDates) {
       columns.add(DataColumn2(
         fixedWidth: 75,
         label: RotatedBox(
           quarterTurns: 3,
           child: Text(
-            detail.date,
+            detail,
           ),
         ),
       ));

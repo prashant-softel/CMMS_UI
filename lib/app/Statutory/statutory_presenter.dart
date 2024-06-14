@@ -27,4 +27,5 @@ class StatutoryPresenter {
   }
 
   void clearValue() async => statutoryUsecase.clearValue();
+  void clearComplianceValue() async => statutoryUsecase.clearComplianceValue();
 }

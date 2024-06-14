@@ -620,193 +620,191 @@ class _AddVegetationPlanWebState extends State<AddVegetationPlanWeb> {
                                                     ),
                                                   )
                                                 : Dimens.box0,
-                                            // controller.vegid == 0
-                                            //     ? Dimens.box0
-                                            //     : Container(
-                                            //         margin: Dimens.edgeInsets20,
-                                            //         height: ((controller
-                                            //                     .schedules
-                                            //                     .length) *
-                                            //                 40) +
-                                            //             200,
-                                            //         decoration: BoxDecoration(
-                                            //           border: Border.all(
-                                            //             color: ColorValues
-                                            //                 .lightGreyColorWithOpacity35,
-                                            //             width: 1,
-                                            //           ),
-                                            //           boxShadow: [
-                                            //             BoxShadow(
-                                            //               color: ColorValues
-                                            //                   .appBlueBackgroundColor,
-                                            //               spreadRadius: 2,
-                                            //               blurRadius: 5,
-                                            //               offset: Offset(0, 2),
-                                            //             ),
-                                            //           ],
-                                            //         ),
-                                            //         child: Column(
-                                            //           children: [
-                                            //             Padding(
-                                            //               padding:
-                                            //                   const EdgeInsets
-                                            //                       .all(10.0),
-                                            //               child: Row(
-                                            //                 children: [
-                                            //                   Text(
-                                            //                     "Schedule",
-                                            //                     style: Styles
-                                            //                         .blue700,
-                                            //                   ),
-                                            //                   Spacer(),
-                                            //                   GestureDetector(
-                                            //                     onTap: () {},
-                                            //                     child:
-                                            //                         Container(
-                                            //                       height: 30,
-                                            //                       width: 150,
-                                            //                       decoration:
-                                            //                           BoxDecoration(
-                                            //                         color: ColorValues
-                                            //                             .addNewColor,
-                                            //                         border:
-                                            //                             Border
-                                            //                                 .all(
-                                            //                           color: ColorValues
-                                            //                               .lightGreyColorWithOpacity35,
-                                            //                           width: 1,
-                                            //                         ),
-                                            //                         borderRadius:
-                                            //                             BorderRadius.all(
-                                            //                                 Radius.circular(5)),
-                                            //                       ),
-                                            //                       child: Center(
-                                            //                         child: Text(
-                                            //                           "Set Equipments",
-                                            //                           style: TextStyle(
-                                            //                               fontSize:
-                                            //                                   18,
-                                            //                               fontWeight: FontWeight
-                                            //                                   .w100,
-                                            //                               color:
-                                            //                                   Colors.white),
-                                            //                         ),
-                                            //                       ),
-                                            //                     ),
-                                            //                   )
-                                            //                 ],
-                                            //               ),
-                                            //             ),
-                                            //             Expanded(
-                                            //               child: DataTable2(
-                                            //                 border: TableBorder.all(
-                                            //                     color: Color
-                                            //                         .fromARGB(
-                                            //                             255,
-                                            //                             206,
-                                            //                             229,
-                                            //                             234)),
-                                            //                 columns: [
-                                            //                   DataColumn2(
-                                            //                     fixedWidth: 100,
-                                            //                     label: Text(
-                                            //                       "Day",
-                                            //                       style: TextStyle(
-                                            //                           fontSize:
-                                            //                               15,
-                                            //                           fontWeight:
-                                            //                               FontWeight
-                                            //                                   .bold),
-                                            //                     ),
-                                            //                   ),
-                                            //                   DataColumn2(
-                                            //                     //fixedWidth: 150,
-                                            //                     label: Text(
-                                            //                       'No. of Inverters',
-                                            //                       style: TextStyle(
-                                            //                           fontSize:
-                                            //                               15,
-                                            //                           fontWeight:
-                                            //                               FontWeight
-                                            //                                   .bold),
-                                            //                     ),
-                                            //                   ),
-                                            //                   DataColumn2(
-                                            //                     fixedWidth: 150,
-                                            //                     label: Text(
-                                            //                       'No. of SMBs',
-                                            //                       style: TextStyle(
-                                            //                           fontSize:
-                                            //                               15,
-                                            //                           fontWeight:
-                                            //                               FontWeight
-                                            //                                   .bold),
-                                            //                     ),
-                                            //                   ),
-                                            //                   DataColumn2(
-                                            //                     // fixedWidth: 300,
-                                            //                     label: Text(
-                                            //                       'No of modules',
-                                            //                       style: TextStyle(
-                                            //                           fontSize:
-                                            //                               15,
-                                            //                           fontWeight:
-                                            //                               FontWeight
-                                            //                                   .bold),
-                                            //                     ),
-                                            //                   ),
-                                            //                   DataColumn2(
-                                            //                     // fixedWidth: 300,
-                                            //                     label: Text(
-                                            //                       'Type',
-                                            //                       style: TextStyle(
-                                            //                           fontSize:
-                                            //                               15,
-                                            //                           fontWeight:
-                                            //                               FontWeight
-                                            //                                   .bold),
-                                            //                     ),
-                                            //                   ),
-                                            //                 ],
-                                            //                 rows: controller
-                                            //                     .rowItem.value
-                                            //                     .map((record) {
-                                            //                   return DataRow(
-                                            //                     // height: 130,
-                                            //                     cells: record.map(
-                                            //                         (mapData) {
-                                            //                       return DataCell(
-                                            //                         (mapData['key'] ==
-                                            //                                 "cleaningType")
-                                            //                             ? Padding(
-                                            //                                 padding:
-                                            //                                     const EdgeInsets.only(
-                                            //                                   left: 10,
-                                            //                                   right: 10,
-                                            //                                   top: 10,
-                                            //                                 ),
-                                            //                                 child:
-                                            //                                     Column(
-                                            //                                   mainAxisAlignment: MainAxisAlignment.start,
-                                            //                                   crossAxisAlignment: CrossAxisAlignment.start,
-                                            //                                   children: [],
-                                            //                                 ),
-                                            //                               )
-                                            //                             : (mapData['key'] ==
-                                            //                                     "")
-                                            //                                 ? Text(mapData['value'] ??
-                                            //                                     "")
-                                            //                                 : Text(mapData['value'] ??
-                                            //                                     ''),
-                                            //                       );
-                                            //                     }).toList(),
-                                            //                   );
-                                            //                 }).toList(),
-                                            //               ),
-                                            //             ),
-                                            //           ],
-                                            //         ),
-                                            //       ),
+                                            controller.vegid == 0
+                                                ? Dimens.box0
+                                                : Container(
+                                                    margin: Dimens.edgeInsets20,
+                                                    height: ((controller
+                                                                .schedules
+                                                                .length) *
+                                                            40) +
+                                                        200,
+                                                    decoration: BoxDecoration(
+                                                      border: Border.all(
+                                                        color: ColorValues
+                                                            .lightGreyColorWithOpacity35,
+                                                        width: 1,
+                                                      ),
+                                                      boxShadow: [
+                                                        BoxShadow(
+                                                          color: ColorValues
+                                                              .appBlueBackgroundColor,
+                                                          spreadRadius: 2,
+                                                          blurRadius: 5,
+                                                          offset: Offset(0, 2),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                    child: Column(
+                                                      children: [
+                                                        Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .all(10.0),
+                                                          child: Row(
+                                                            children: [
+                                                              Text(
+                                                                "Schedule",
+                                                                style: Styles
+                                                                    .blue700,
+                                                              ),
+                                                              Spacer(),
+                                                              GestureDetector(
+                                                                onTap: () {},
+                                                                child:
+                                                                    Container(
+                                                                  height: 30,
+                                                                  width: 150,
+                                                                  decoration:
+                                                                      BoxDecoration(
+                                                                    color: ColorValues
+                                                                        .addNewColor,
+                                                                    border:
+                                                                        Border
+                                                                            .all(
+                                                                      color: ColorValues
+                                                                          .lightGreyColorWithOpacity35,
+                                                                      width: 1,
+                                                                    ),
+                                                                    borderRadius:
+                                                                        BorderRadius.all(
+                                                                            Radius.circular(5)),
+                                                                  ),
+                                                                  child: Center(
+                                                                    child: Text(
+                                                                      "Set Equipments",
+                                                                      style: TextStyle(
+                                                                          fontSize:
+                                                                              18,
+                                                                          fontWeight: FontWeight
+                                                                              .w100,
+                                                                          color:
+                                                                              Colors.white),
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                              )
+                                                            ],
+                                                          ),
+                                                        ),
+                                                        Expanded(
+                                                          child: DataTable(
+                                                            border: TableBorder.all(
+                                                                color: Color
+                                                                    .fromARGB(
+                                                                        255,
+                                                                        206,
+                                                                        229,
+                                                                        234)),
+                                                            columns: [
+                                                              DataColumn(
+                                                                label: Text(
+                                                                  "Day",
+                                                                  style: TextStyle(
+                                                                      fontSize:
+                                                                          15,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold),
+                                                                ),
+                                                              ),
+                                                              DataColumn(
+                                                                //fixedWidth: 150,
+                                                                label: Text(
+                                                                  'No. of Inverters',
+                                                                  style: TextStyle(
+                                                                      fontSize:
+                                                                          15,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold),
+                                                                ),
+                                                              ),
+                                                              DataColumn(
+                                                                label: Text(
+                                                                  'No. of SMBs',
+                                                                  style: TextStyle(
+                                                                      fontSize:
+                                                                          15,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold),
+                                                                ),
+                                                              ),
+                                                              DataColumn(
+                                                                // fixedWidth: 300,
+                                                                label: Text(
+                                                                  'No of modules',
+                                                                  style: TextStyle(
+                                                                      fontSize:
+                                                                          15,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold),
+                                                                ),
+                                                              ),
+                                                              DataColumn(
+                                                                // fixedWidth: 300,
+                                                                label: Text(
+                                                                  'Type',
+                                                                  style: TextStyle(
+                                                                      fontSize:
+                                                                          15,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold),
+                                                                ),
+                                                              ),
+                                                            ],
+                                                            rows: controller
+                                                                .rowItem.value
+                                                                .map((record) {
+                                                              return DataRow(
+                                                                // height: 130,
+                                                                cells: record.map(
+                                                                    (mapData) {
+                                                                  return DataCell(
+                                                                    (mapData['key'] ==
+                                                                            "cleaningType")
+                                                                        ? Padding(
+                                                                            padding:
+                                                                                const EdgeInsets.only(
+                                                                              left: 10,
+                                                                              right: 10,
+                                                                              top: 10,
+                                                                            ),
+                                                                            child:
+                                                                                Column(
+                                                                              mainAxisAlignment: MainAxisAlignment.start,
+                                                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                                                              children: [],
+                                                                            ),
+                                                                          )
+                                                                        : (mapData['key'] ==
+                                                                                "")
+                                                                            ? Text(mapData['value'] ??
+                                                                                "")
+                                                                            : Text(mapData['value'] ??
+                                                                                ''),
+                                                                  );
+                                                                }).toList(),
+                                                              );
+                                                            }).toList(),
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
                                           ],
                                         ),
                                       ),
