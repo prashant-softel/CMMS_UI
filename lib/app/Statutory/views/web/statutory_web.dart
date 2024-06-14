@@ -1,10 +1,12 @@
 import 'package:cmms/app/Statutory/statutory_controller.dart';
+import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/home/home_screen.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/theme/color_values.dart';
 import 'package:cmms/app/theme/dimens.dart';
 import 'package:cmms/app/theme/styles.dart';
+import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/app/widgets/action_button.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
@@ -564,23 +566,44 @@ class StatutoryListDataSource extends DataTableSource {
                               }
                             },
                           ),
-                          TableActionButton(
-                            color: ColorValues.editColor,
-                            icon: Icons.edit,
-                            message: 'Edit',
-                            onPress: () {
-                              controller.clearStoreData();
-                              int srId = StatutoryListDetails?.id ?? 0;
-                              if (srId != 0) {
-                                Get.toNamed(
-                                  Routes.complianceScreen,
-                                  arguments: {
-                                    'srId': StatutoryListDetails?.id,
+                          controller.getStatutoryList
+                                          .firstWhere(
+                                            (e) =>
+                                                e.id ==
+                                                StatutoryListDetails!.id,
+                                            orElse: () =>
+                                                GetStatutoryList(id: 00),
+                                          )
+                                          .status_id ==
+                                      504 &&
+                                  varUserAccessModel.value.access_list!
+                                          .where((e) =>
+                                              e.feature_id ==
+                                                  UserAccessConstants
+                                                      .kSatutoryFeatureId &&
+                                              e.edit ==
+                                                  UserAccessConstants
+                                                      .kHaveAddAccess)
+                                          .length >
+                                      0
+                              ? TableActionButton(
+                                  color: ColorValues.editColor,
+                                  icon: Icons.edit,
+                                  message: 'Edit',
+                                  onPress: () {
+                                    controller.clearStoreData();
+                                    int srId = StatutoryListDetails?.id ?? 0;
+                                    if (srId != 0) {
+                                      Get.toNamed(
+                                        Routes.complianceScreen,
+                                        arguments: {
+                                          'srId': StatutoryListDetails?.id,
+                                        },
+                                      );
+                                    }
                                   },
-                                );
-                              }
-                            },
-                          ),
+                                )
+                              : Dimens.box0,
                           StatutoryListDetails?.activation_status == 'inactive'
                               ? TableActionButton(
                                   color: Color.fromARGB(255, 116, 78, 130),
