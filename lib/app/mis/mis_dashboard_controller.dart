@@ -174,4 +174,10 @@ class MisDashboardController extends GetxController {
       Routes.documentUploadScreen,
     );
   }
+
+  Future<void> documentManager() async {
+    Get.toNamed(
+      Routes.documentManager,
+    );
+  }
 }
