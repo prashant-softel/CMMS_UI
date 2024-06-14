@@ -98,6 +98,11 @@ class WarrantyClaimController extends GetxController {
   final TextEditingController mobileTextFieldController =
       TextEditingController();
 
+  /// default date controller
+  Rx<DateTime> dateController = DateTime.now().obs;
+  var currentStartDateCtrlrWeb = TextEditingController();
+  var currentStartDateCtrlrWebBuffer;
+  Rx<DateTime> selectedcurrentStartDate = DateTime.now().obs;
   ///Failure Date Time For Web
   var failureDateTimeCtrlrWeb = TextEditingController();
   var failureDateTimeCtrlrWebBuffer;
@@ -228,7 +233,7 @@ class WarrantyClaimController extends GetxController {
   //WC Grid
 
   final columnVisibility = ValueNotifier<Map<String, bool>>({
-    "WC Id": true,
+    "Id": true,
     "Warranty Claim Title": true,
     "Date Of Claim": true,
 
@@ -241,7 +246,7 @@ class WarrantyClaimController extends GetxController {
     // "search": true,
   });
   final Map<String, double> columnwidth = {
-    "WC Id": 153,
+    "Id": 153,
     "Warranty Claim Title": 220,
     "Date Of Claim": 320,
     "Equipment Serial No.": 200,
@@ -310,7 +315,7 @@ class WarrantyClaimController extends GetxController {
   @override
   void onInit() async {
     this.filterText = {
-      "WC Id": warrantyClaimIdFilterText,
+      "Id": warrantyClaimIdFilterText,
       "Warranty Claim Title": wcTitleFilterText,
       "Date Of Claim": dateOfClaimFilterText,
       "Equipment Serial No.": equipmentSrNoFilterText,
@@ -682,72 +687,71 @@ class WarrantyClaimController extends GetxController {
       case RxList<FacilityModel>:
         {
           if (value != "Please Select") {
-            int facilityIndex = facilityList.indexWhere((x) => x?.name == value);
+            int facilityIndex =
+                facilityList.indexWhere((x) => x?.name == value);
 
-          _facilityId.add(facilityList[facilityIndex]?.id ?? 0);
-          } else 
-          {
-          facilityId=0;  
+            _facilityId.add(facilityList[facilityIndex]?.id ?? 0);
+          } else {
+            facilityId = 0;
           }
         }
         break;
       case RxList<InventoryModel>:
         {
-         if (value != "Please Select") {
+          if (value != "Please Select") {
             // for (var workAreaName in selectedWorkAreaNameList) {
-          int equipmentNameIndex =
-              eqipmentNameList.indexWhere((x) => x?.name == value);
-          selectedEquipmentnameId =
-              eqipmentNameList[equipmentNameIndex]?.id ?? 0;
-          getInventoryDetail();
+            int equipmentNameIndex =
+                eqipmentNameList.indexWhere((x) => x?.name == value);
+            selectedEquipmentnameId =
+                eqipmentNameList[equipmentNameIndex]?.id ?? 0;
+            getInventoryDetail();
 
-          if (selectedEquipmentnameId > 0) {
-            isEquipmentNameSelected.value = true;
+            if (selectedEquipmentnameId > 0) {
+              isEquipmentNameSelected.value = true;
+            }
+            selectedEquipmentName.value = value;
+
+            print('Equipment name Id: $selectedEquipmentnameId');
+
+            // }
+          } else {
+            selectedEquipmentnameId = 0;
           }
-          selectedEquipmentName.value = value;
-
-          print('Equipment name Id: $selectedEquipmentnameId');
-
-          // }
-         } else {
-           selectedEquipmentnameId=0;
-         }
         }
         break;
 
       case RxList<InventoryCategoryModel2>:
         {
-        if (value != "Please Select") {
+          if (value != "Please Select") {
             // for (var workAreaName in selectedWorkAreaNameList) {
-          int affectedPartIndex =
-              affectedPartEqipmentNameList.indexWhere((x) => x?.name == value);
-          selectedAffectedPartId =
-              affectedPartEqipmentNameList[affectedPartIndex]?.id ?? 0;
-          selectedAffectedPartName =
-              affectedPartEqipmentNameList[affectedPartIndex]?.name ?? '';
+            int affectedPartIndex = affectedPartEqipmentNameList
+                .indexWhere((x) => x?.name == value);
+            selectedAffectedPartId =
+                affectedPartEqipmentNameList[affectedPartIndex]?.id ?? 0;
+            selectedAffectedPartName =
+                affectedPartEqipmentNameList[affectedPartIndex]?.name ?? '';
 
-          if (selectedAffectedPartId > 0) {
-            isAffectedPartSelected.value = true;
+            if (selectedAffectedPartId > 0) {
+              isAffectedPartSelected.value = true;
+            }
+            selectedAffectedPart.value = value;
+            print('Affected part Id: $selectedAffectedPartId');
+            print('Affected part name : $selectedAffectedPartName');
+          } else {
+            selectedAffectedPartId = 0;
           }
-          selectedAffectedPart.value = value;
-          print('Affected part Id: $selectedAffectedPartId');
-          print('Affected part name : $selectedAffectedPartName');
-        } else {
-          selectedAffectedPartId=0;
-          
-        }
         }
         break;
       case RxList<InventoryCategoryModel>:
         {
           if (value != "Please Select") {
             int invCatListIndex =
-              equipmentCategoryList.indexWhere((x) => x!.name == value);
-          selectedInventoryCategoryId =
-              equipmentCategoryList[invCatListIndex]!.id ?? 0;
-          getInventoryList();
+                equipmentCategoryList.indexWhere((x) => x!.name == value);
+            selectedInventoryCategoryId =
+                equipmentCategoryList[invCatListIndex]!.id ?? 0;
+            getInventoryList();
           } else {
-            selectedInventoryCategoryId=0;
+            selectedInventoryCategoryId = 0;
           }
           //}
         }
@@ -755,77 +759,73 @@ class WarrantyClaimController extends GetxController {
       case RxList<BusinessListModel>:
         {
           if (value != "Please Select") {
-            
-          for (var supplierName in selectedSupplierNameList) {
-            int supplierNameIndex =
-                supplierNameList.indexWhere((x) => x?.name == supplierName);
-            selectedSupplierNameIdList.add(supplierNameIndex);
-          }
+            for (var supplierName in selectedSupplierNameList) {
+              int supplierNameIndex =
+                  supplierNameList.indexWhere((x) => x?.name == supplierName);
+              selectedSupplierNameIdList.add(supplierNameIndex);
+            }
           } else {
             //  selectedSupplierNameIdList = 0;
-            
           }
         }
         break;
       case RxList<CurrencyListModel>:
         {
           // for (var unitCurrency in selectedUnitCurrencyList) {
-         if (value != "Please Select") {
+          if (value != "Please Select") {
             int unitCurrencyIndex =
-              unitCurrencyList.indexWhere((x) => x?.name == value);
-          selectedCurrencyId = unitCurrencyList[unitCurrencyIndex]?.id ?? 0;
+                unitCurrencyList.indexWhere((x) => x?.name == value);
+            selectedCurrencyId = unitCurrencyList[unitCurrencyIndex]?.id ?? 0;
 
-          if (selectedCurrencyId > 0) {
-            isUnitCurrencySelected.value = true;
+            if (selectedCurrencyId > 0) {
+              isUnitCurrencySelected.value = true;
+            }
+            selectedUnitCurrency.value = value;
+            print('Unit Currency Id :$selectedCurrencyId');
+          } else {
+            selectedCurrencyId = 0;
           }
-          selectedUnitCurrency.value = value;
-          print('Unit Currency Id :$selectedCurrencyId');
-
-         } else {
-           selectedCurrencyId=0;
-         }
           // }
         }
         break;
       case RxList<EmployeeListModel>:
         {
           // for (var employeeDataList in selectedEmployeeDataList) {
-         if (value != "Please Select") {
+          if (value != "Please Select") {
             int employeeListIndex =
-              employeeList.indexWhere((x) => x.name == value);
-          selectedApproverId = employeeList[employeeListIndex].id ?? 0;
+                employeeList.indexWhere((x) => x.name == value);
+            selectedApproverId = employeeList[employeeListIndex].id ?? 0;
 
-          if (selectedApproverId > 0) {
-            isemployeeListSelected.value = true;
+            if (selectedApproverId > 0) {
+              isemployeeListSelected.value = true;
+            }
+            selectedEmployeeList.value = value;
+            print('Approver Id: $selectedApproverId');
+          } else {
+            selectedApproverId = 0;
           }
-          selectedEmployeeList.value = value;
-          print('Approver Id: $selectedApproverId');
-         } else {
-           selectedApproverId=0;
-         }
 
           // }
         }
         break;
       case RxList<EmployeeListModel2>:
         {
-         if (value != "Please Select") {
-           
-           // for (var employeeDataList in selectedEmployeeDataList) {
-          int employeesListIndex =
-              employeesList.indexWhere((x) => x.name == value);
-          selectedEmployeesId = employeesList[employeesListIndex].id ?? 0;
+          if (value != "Please Select") {
+            // for (var employeeDataList in selectedEmployeeDataList) {
+            int employeesListIndex =
+                employeesList.indexWhere((x) => x.name == value);
+            selectedEmployeesId = employeesList[employeesListIndex].id ?? 0;
 
-          // if (selectedApproverId > 0) {
-          //   isemployeeListSelected.value = true;
-          // }
-          // selectedEmployeeList.value = value;
-          print('Additional Email Employees Id: $selectedEmployeesId');
+            // if (selectedApproverId > 0) {
+            //   isemployeeListSelected.value = true;
+            // }
+            // selectedEmployeeList.value = value;
+            print('Additional Email Employees Id: $selectedEmployeesId');
 
-          // }
-         } else {
-           selectedEmployeesId=0;
-         }
+            // }
+          } else {
+            selectedEmployeesId = 0;
+          }
         }
         break;
 
@@ -933,8 +933,7 @@ class WarrantyClaimController extends GetxController {
 
       int costOfReplacement =
           int.parse(costOfReplacementTextController.text.trim());
-      int approxdailyloss =
-          int.parse(approxdailylosstxtcontroller.text.trim());
+      int approxdailyloss = int.parse(approxdailylosstxtcontroller.text.trim());
 
       // int? sopFileId = createSOPModel2.sop_fileId;
       // // int? jsaFileId = data.jsa_fileId;
@@ -942,7 +941,8 @@ class WarrantyClaimController extends GetxController {
       late List<ExternalEmails> external_emails_list = [];
 
       externalEmails.forEach((e) {
-        external_emails_list.add(ExternalEmails(name: e.name, email: e.email));
+        external_emails_list.add(
+            ExternalEmails(name: e.name, email: e.email, mobile: e.mobile));
       });
 
       late List<SupplierActions> supplier_action_list = [];
@@ -960,7 +960,7 @@ class WarrantyClaimController extends GetxController {
       rowItems.forEach((element) {
         AffectedParts item = AffectedParts(name: element[0]["value"] ?? '0');
         affectedPart.add(item);
-        print('Create req  order  data: $item');
+        print('Affected parts: $item');
       });
 
       CreateWarrantyClaimModel createwarrantyClaimModel =
@@ -973,8 +973,9 @@ class WarrantyClaimController extends GetxController {
               affectedSrNo: _affectedSerialNo,
               costOfReplacement: costOfReplacement,
               currencyId: selectedCurrencyId,
-              approxdailyloss:approxdailyloss,
+              approxdailyloss: approxdailyloss,
               severity: selectedSeverity.value,
+              currentTime: currentStartDateCtrlrWebBuffer,
               warrantyStartAt: warrantyStartDateTimeCtrlrWebBuffer,
               warrantyEndAt: warrantyEndDateTimeCtrlrWebBuffer,
               warrantyClaimTitle: _warrantyClaimTitle,
@@ -1101,7 +1102,7 @@ class WarrantyClaimController extends GetxController {
           htmlEscape.convert(orderReferenceNoTextController.text.trim());
       String _affectedSerialNo =
           htmlEscape.convert(affectedSerialNoTextController.text.trim());
-
+      int approxdailyloss = int.parse(approxdailylosstxtcontroller.text.trim());
       int costOfReplacement =
           int.parse(costOfReplacementTextController.text.trim());
 
@@ -1111,13 +1112,14 @@ class WarrantyClaimController extends GetxController {
       late List<ExternalEmails> external_emails_list = [];
 
       externalEmails.forEach((e) {
-        external_emails_list.add(ExternalEmails(name: e.name, email: e.email));
+        external_emails_list.add(
+            ExternalEmails(name: e.name, email: e.email, mobile: e.mobile));
       });
       late List<AffectedParts> affectedParts = [];
 
       rowItems.forEach((element) {
-        AffectedParts item = AffectedParts(name: element[1]["value"] ?? '0');
-
+        AffectedParts item = AffectedParts(name: element[0]["value"] ?? '0');
+        print('Affected parts: $item');
         affectedParts.add(item);
 
         print('Create req  order  data: $item');
@@ -1127,6 +1129,7 @@ class WarrantyClaimController extends GetxController {
 
       supplierActions.forEach((e) {
         supplier_action_list.add(SupplierActions(
+          srNumber: e.srNumber,
           name: e.name,
           required_by_date: e.required_by_date,
           // is_required: e.is_required
@@ -1143,6 +1146,7 @@ class WarrantyClaimController extends GetxController {
               affectedSrNo: _affectedSerialNo,
               costOfReplacement: costOfReplacement,
               currencyId: selectedCurrencyId,
+              approxdailyloss: approxdailyloss,
               severity: selectedSeverity.value,
               warrantyStartAt: warrantyStartDateTimeCtrlrWebBuffer,
               warrantyEndAt: warrantyEndDateTimeCtrlrWebBuffer,

@@ -48,7 +48,8 @@ class ViewWarrantyClaimModel {
     this.additionalEmailEmployees,
     this.externalEmails,
     this.supplierActions,
-    this.severity
+    this.severity,
+    this.current_time
   });
 
   int? wc_id;
@@ -58,6 +59,7 @@ class ViewWarrantyClaimModel {
   int? site_wc_number;
   String? warranty_claim_title;
   DateTime? wstart_date;
+  DateTime? current_time;
   DateTime? wend_date;
   String? equipment_category;
   String? equipment_name;
@@ -94,6 +96,7 @@ class ViewWarrantyClaimModel {
   factory ViewWarrantyClaimModel.fromJson(Map<String, dynamic> json) =>
       ViewWarrantyClaimModel(
         wc_id: json["wc_id"],
+        current_time: json["date_of_claim"],
         approxdailyloss: json["approxdailyloss"],
         severity: json["severity"],
         facility_id: json["facility_id"],

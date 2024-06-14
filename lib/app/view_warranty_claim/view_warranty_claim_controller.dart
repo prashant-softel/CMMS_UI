@@ -86,6 +86,7 @@ class ViewWarrantyClaimController extends GetxController {
   var equipmentList = <EquipmentModel>[];
 
 ////TextEditing controller
+  final currenttimeController = TextEditingController();
   final equipmentNameTextController = TextEditingController();
   final supplierNameTextController = TextEditingController();
   final serialNoTextController = TextEditingController();

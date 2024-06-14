@@ -18,6 +18,7 @@ class CreateWarrantyClaimModel {
   int? currencyId;
   String? requestToSupplier;
   String? warrantyStartAt;
+  String? currentTime;
   String? warrantyEndAt;
   String? warrantyClaimTitle;
   String? warrantyDescription;
@@ -46,6 +47,7 @@ class CreateWarrantyClaimModel {
     this.severity,
     this.requestToSupplier,
     this.warrantyStartAt,
+    this.currentTime,
     this.warrantyEndAt,
     this.warrantyClaimTitle,
     this.warrantyDescription,
@@ -73,6 +75,7 @@ class CreateWarrantyClaimModel {
         approxdailyloss: json['approxdailyloss'],
         severity: json['severity'],
         requestToSupplier: json['requestToSupplier'],
+        currentTime: json['date_of_claim'],
         warrantyStartAt: json['warrantyStartAt'],
         warrantyEndAt: json['warrantyEndAt'],
         warrantyClaimTitle: json['warrantyClaimTitle'],
@@ -110,6 +113,7 @@ class CreateWarrantyClaimModel {
         "currencyId": currencyId,
         "approxdailyloss": approxdailyloss,
         "requestToSupplier": requestToSupplier,
+        "date_of_claim": currentTime,
         "warrantyStartAt": warrantyStartAt,
         "warrantyEndAt": warrantyEndAt,
         "warrantyClaimTitle": warrantyClaimTitle,

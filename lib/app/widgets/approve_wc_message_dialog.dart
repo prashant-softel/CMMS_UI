@@ -81,7 +81,7 @@ class WCMessageApproveDialog extends GetView {
             child: ElevatedButton(
               style: Styles.darkBlueElevatedButtonStyle,
               onPressed: () {
-                Get.offAllNamed(Routes.warrantyClaimList);
+                Get.toNamed(Routes.warrantyClaimList);
               },
               child: const Text('WC List'),
             ),
