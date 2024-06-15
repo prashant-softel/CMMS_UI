@@ -372,26 +372,29 @@ class IncidentReportDetailsModel {
 
 ///Details of Injured Person
 class DetailsOfInjuredPersonUpdate {
-  DetailsOfInjuredPersonUpdate(
-      {this.incidents_id,
-      this.name,
-      this.person_type,
-      this.age,
-      this.sex,
-      this.gender,
-      this.designation,
-      this.address,
-      this.name_contractor,
-      this.body_part_and_nature_of_injury,
-      this.work_experience_years,
-      this.plant_equipment_involved,
-      this.location_of_incident});
+  DetailsOfInjuredPersonUpdate({
+    this.incidents_id,
+    this.name,
+    this.person_type,
+    this.age,
+    this.sex,
+    this.gender,
+    this.designation,
+    this.address,
+    this.name_contractor,
+    this.body_part_and_nature_of_injury,
+    this.work_experience_years,
+    this.plant_equipment_involved,
+    this.location_of_incident,
+    this.injured_item_id,
+  });
 
   int? incidents_id;
+  int? injured_item_id;
   String? name;
   int? person_type;
   int? age;
-  int? sex;
+  String? sex;
   String? gender;
   String? designation;
   String? address;
@@ -403,6 +406,7 @@ class DetailsOfInjuredPersonUpdate {
 
   factory DetailsOfInjuredPersonUpdate.fromJson(Map<String, dynamic> json) =>
       DetailsOfInjuredPersonUpdate(
+        injured_item_id: json["injured_item_id"],
         incidents_id: json['incidents_id'],
         name: json['name'],
         person_type: json['person_type'],
@@ -419,6 +423,7 @@ class DetailsOfInjuredPersonUpdate {
       );
 
   Map<String, dynamic> toJson() => {
+        "injured_item_id": injured_item_id,
         "incidents_id": incidents_id,
         "name": name,
         "person_type": person_type,
@@ -434,6 +439,7 @@ class DetailsOfInjuredPersonUpdate {
         "location_of_incident": location_of_incident
       };
 }
+
 // Details Of Other injured Person
 class DetailsOfOtherInjuredPersonUpdate {
   DetailsOfOtherInjuredPersonUpdate(
@@ -465,7 +471,8 @@ class DetailsOfOtherInjuredPersonUpdate {
   String? plant_equipment_involved;
   String? location_of_incident;
 
-  factory DetailsOfOtherInjuredPersonUpdate.fromJson(Map<String, dynamic> json) =>
+  factory DetailsOfOtherInjuredPersonUpdate.fromJson(
+          Map<String, dynamic> json) =>
       DetailsOfOtherInjuredPersonUpdate(
         incidents_id: json['incidents_id'],
         name: json['name'],
@@ -498,9 +505,6 @@ class DetailsOfOtherInjuredPersonUpdate {
         "location_of_incident": location_of_incident
       };
 }
-
-
-
 
 //Investigation team
 class InvestigationTeamUpdate {
