@@ -80,48 +80,59 @@ class ObservationListMobile extends GetView<ObservationListController> {
                                         children: [
                                           Text(
                                             'Type of Observation:',
-                                            style: TextStyle(color: Colors.grey),
+                                            style:
+                                                TextStyle(color: Colors.grey),
                                           ),
                                           Text(
                                             'Month Of Observation : ',
-                                            style: TextStyle(color: Colors.grey),
+                                            style:
+                                                TextStyle(color: Colors.grey),
                                           ),
                                           Text(
                                             'Date of Observation :',
-                                            style: TextStyle(color: Colors.grey),
+                                            style:
+                                                TextStyle(color: Colors.grey),
                                           ),
                                           Text(
                                             'Contractor Name  : ',
-                                            style: TextStyle(color: Colors.grey),
+                                            style:
+                                                TextStyle(color: Colors.grey),
                                           ),
                                           Text(
                                             'Location of Observation:',
-                                            style: TextStyle(color: Colors.grey),
+                                            style:
+                                                TextStyle(color: Colors.grey),
                                           ),
-      
+
                                           Text(
                                             'Source of Observation:',
-                                            style: TextStyle(color: Colors.grey),
+                                            style:
+                                                TextStyle(color: Colors.grey),
                                           ),
                                           Text(
                                             'Risk Type:',
-                                            style: TextStyle(color: Colors.grey),
+                                            style:
+                                                TextStyle(color: Colors.grey),
                                           ),
                                           Text(
                                             'Contact Number:',
-                                            style: TextStyle(color: Colors.grey),
+                                            style:
+                                                TextStyle(color: Colors.grey),
                                           ),
                                           Text(
                                             'Target Date:',
-                                            style: TextStyle(color: Colors.grey),
+                                            style:
+                                                TextStyle(color: Colors.grey),
                                           ),
                                           Text(
                                             'Closer Date:',
-                                            style: TextStyle(color: Colors.grey),
+                                            style:
+                                                TextStyle(color: Colors.grey),
                                           ),
                                           Text(
                                             'Cost type:',
-                                            style: TextStyle(color: Colors.grey),
+                                            style:
+                                                TextStyle(color: Colors.grey),
                                           ),
                                           // Text(
                                           //   'Status:',
@@ -222,13 +233,14 @@ class ObservationListMobile extends GetView<ObservationListController> {
                                               style: TextStyle(
                                                   fontSize: 14,
                                                   fontWeight: FontWeight.w600,
-                                                  color: ColorValues.addNewColor),
+                                                  color:
+                                                      ColorValues.addNewColor),
                                             ),
                                             Dimens.boxWidth10,
                                             GestureDetector(
                                                 onTap: () {
-                                                  controller
-                                                      .goToCreateObservation();
+                                                  // controller
+                                                  //     .goToCreateObservation();
                                                 },
                                                 child: Icon(Icons.edit)),
                                           ],

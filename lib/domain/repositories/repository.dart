@@ -13,6 +13,7 @@ import 'package:cmms/domain/models/documentmaster_model.dart';
 import 'package:cmms/domain/models/dsm_list_model.dart';
 import 'package:cmms/domain/models/escalation_matrix_list_model.dart';
 import 'package:cmms/domain/models/get_mc_task_equipment_model.dart';
+import 'package:cmms/domain/models/get_observation_list_model.dart';
 import 'package:cmms/domain/models/get_statutory_by_id_model.dart';
 import 'package:cmms/domain/models/get_statutory_list_model.dart';
 import 'package:cmms/domain/models/grievance_type_model.dart';
@@ -1773,6 +1774,49 @@ class Repository {
       } //
       else {
         Utility.showDialog(res.errorCode.toString(), 'GetstatutoryDataList');
+        return [];
+      }
+    } catch (error) {
+      print(error.toString());
+      return [];
+    }
+  }
+
+  Future<List<GetObservationList>> getObservationDataList({
+    required int? facility_id,
+    bool? isExport,
+    String? start_date,
+    String? end_date,
+    required bool isLoading,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+
+      log(auth);
+      final res = await _dataRepository.getObservationDataList(
+        facility_id: facility_id,
+        start_date: start_date,
+        end_date: end_date,
+        isLoading: isLoading,
+        auth: auth,
+      );
+      print('getObservationDataList: ${res.data}');
+
+      if (!res.hasError) {
+        final jsonObservationListModels = jsonDecode(res.data);
+        // print(res.data); `6
+        final List<GetObservationList> _getObservationModelList =
+            jsonObservationListModels
+                .map<GetObservationList>((m) =>
+                    GetObservationList.fromJson(Map<String, dynamic>.from(m)))
+                .toList();
+        String jsonData =
+            getObservationListModelToJson(_getObservationModelList);
+
+        return _getObservationModelList.reversed.toList();
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString(), 'getObservationList');
         return [];
       }
     } catch (error) {
@@ -14672,8 +14716,7 @@ class Repository {
         return true;
       } //
       else {
-        Utility.showDialog(
-            res.errorCode.toString(), 'Update Document Master');
+        Utility.showDialog(res.errorCode.toString(), 'Update Document Master');
         return false;
       }
     } catch (error) {
@@ -14696,8 +14739,7 @@ class Repository {
       if (!res.hasError) {
         //get delete response back from API
       } else {
-        Utility.showDialog(
-            res.errorCode.toString(), 'delete DocumentMaster ');
+        Utility.showDialog(res.errorCode.toString(), 'delete DocumentMaster ');
       }
     } catch (error) {
       print(error.toString());

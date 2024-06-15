@@ -986,6 +986,26 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> getObservationDataList({
+    required bool isLoading,
+    required String auth,
+    int? facility_id,
+    String? start_date,
+    String? end_date,
+  }) async {
+    ResponseModel responseModel = await apiWrapper.makeRequest(
+      'MISMaster/GetObservationSheetReport?facility_id=$facility_id&start_date=$end_date&end_date=$start_date',
+      Request.getMultiparts,
+      null,
+      isLoading,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
   Future<ResponseModel> getWaterDataList({
     required bool isLoading,
     required String auth,
@@ -9521,7 +9541,8 @@ class ConnectHelper {
 
     return responseModel;
   }
- // DocumentMaster
+
+  // DocumentMaster
   //Get
   Future<ResponseModel> getDocumentMaster(
       {required bool isLoading, required String auth}) async {
