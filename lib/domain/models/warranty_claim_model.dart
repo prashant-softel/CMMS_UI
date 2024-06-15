@@ -28,7 +28,7 @@ class WarrantyClaimModel {
     this.estimated_cost,
     this.quantity,
     this.status,
-
+    this.status_code
   });
 
   int? wc_id;
@@ -46,8 +46,10 @@ class WarrantyClaimModel {
   int? estimated_cost;
   int? quantity;
   String? status;
+  int? status_code;
 
-  factory WarrantyClaimModel.fromJson(Map<String, dynamic> json) => WarrantyClaimModel(
+  factory WarrantyClaimModel.fromJson(Map<String, dynamic> json) =>
+      WarrantyClaimModel(
         wc_id: json["wc_id"],
         facility_id: json["facility_id"],
         facility_name: json["facility_name"],
@@ -65,7 +67,7 @@ class WarrantyClaimModel {
         estimated_cost: json["estimated_cost"],
         quantity: json["quantity"],
         status: json["status"],
-        
+        status_code: json["status_code"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -84,6 +86,6 @@ class WarrantyClaimModel {
         "estimated_cost": estimated_cost,
         "quantity": quantity,
         "status": status,
-
+        "status_code": status_code,
       };
 }

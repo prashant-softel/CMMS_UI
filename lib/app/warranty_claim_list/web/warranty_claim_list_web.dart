@@ -265,58 +265,63 @@ class _WarrantyClaimListWebState extends State<WarrantyClaimListWeb> {
                                   SizedBox(
                                     height: 20,
                                   ),
-                                  controller.warrantyClaimList.isEmpty == true && controller.isLoading == false
+                                  controller.warrantyClaimList.isEmpty ==
+                                              true &&
+                                          controller.isLoading == false
                                       ? Center(child: Text('No data'))
                                       : controller.isLoading.value == true
-                                      ? Center(child: Text("Data Loading......"))
-                                      : Expanded(
-                                          child: ValueListenableBuilder(
-                                              valueListenable:
-                                                  controller.columnVisibility,
-                                              builder: (context, value, child) {
-                                                final dataSource =
-                                                    WarrantyClaimListDataSource(
-                                                        controller);
+                                          ? Center(
+                                              child: Text("Data Loading......"))
+                                          : Expanded(
+                                              child: ValueListenableBuilder(
+                                                  valueListenable: controller
+                                                      .columnVisibility,
+                                                  builder:
+                                                      (context, value, child) {
+                                                    final dataSource =
+                                                        WarrantyClaimListDataSource(
+                                                            controller);
 
-                                                return PaginatedDataTable2(
-                                                  columnSpacing: 10,
-                                                  dataRowHeight: 70,
-                                                  source:
-                                                      dataSource, // Custom DataSource class
-                                                  // headingRowHeight:
-                                                  //     Get.height * 0.12,
-                                                  minWidth: 2500,
-                                                  showCheckboxColumn: false,
-                                                  rowsPerPage:
-                                                      10, // Number of rows per page
-                                                  availableRowsPerPage: [
-                                                    10,
-                                                    20,
-                                                    30,
-                                                    50
-                                                  ],
-                                                  columns: [
-                                                    for (var entry
-                                                        in value.entries)
-                                                      if (entry.value)
+                                                    return PaginatedDataTable2(
+                                                      columnSpacing: 10,
+                                                      dataRowHeight: 70,
+                                                      source:
+                                                          dataSource, // Custom DataSource class
+                                                      // headingRowHeight:
+                                                      //     Get.height * 0.12,
+                                                      minWidth: 2500,
+                                                      showCheckboxColumn: false,
+                                                      rowsPerPage:
+                                                          10, // Number of rows per page
+                                                      availableRowsPerPage: [
+                                                        10,
+                                                        20,
+                                                        30,
+                                                        50
+                                                      ],
+                                                      columns: [
+                                                        for (var entry
+                                                            in value.entries)
+                                                          if (entry.value)
+                                                            buildDataColumn(
+                                                              entry.key,
+                                                              controller
+                                                                      .filterText[
+                                                                  entry.key]!,
+                                                              controller
+                                                                      .columnwidth[
+                                                                  entry.key],
+                                                            ),
                                                         buildDataColumn(
-                                                          entry.key,
-                                                          controller.filterText[
-                                                              entry.key]!,
+                                                          'Actions',
                                                           controller
-                                                                  .columnwidth[
-                                                              entry.key],
+                                                              .actionFilterText,
+                                                          150,
                                                         ),
-                                                    buildDataColumn(
-                                                      'Actions',
-                                                      controller
-                                                          .actionFilterText,
-                                                      150,
-                                                    ),
-                                                  ],
-                                                );
-                                              }),
-                                        ),
+                                                      ],
+                                                    );
+                                                  }),
+                                            ),
                                 ],
                               ),
                             ),
@@ -461,7 +466,7 @@ class WarrantyClaimListDataSource extends DataTableSource {
       '${WarrantyClaimListDetails?.equipment_category ?? ''}',
       '${WarrantyClaimListDetails?.equipment_name ?? ''}',
       '${WarrantyClaimListDetails?.estimated_cost ?? ''}',
-      '${WarrantyClaimListDetails?.status ?? ''}',
+      '${WarrantyClaimListDetails?.status_code ?? ''}',
       'Actions',
     ];
     var cells = [];
@@ -492,7 +497,7 @@ class WarrantyClaimListDataSource extends DataTableSource {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        '${WarrantyClaimListDetails?.wc_id}',
+                        'WC${WarrantyClaimListDetails?.wc_id}',
                       ),
                       Dimens.boxHeight10,
                       Align(
@@ -508,10 +513,21 @@ class WarrantyClaimListDataSource extends DataTableSource {
                                             orElse: () =>
                                                 WarrantyClaimModel(wc_id: 00),
                                           )
-                                          ?.status ==
-                                      "Waiting for Submit Approval"
-                                  ? ColorValues.appGreenColor
-                                  : ColorValues.appRedColor),
+                                          ?.status_code ==
+                                      192 // waiting for approval
+                                  ? ColorValues.yellowColor
+                                  : controller.warrantyClaimList
+                                          .firstWhere(
+                                            (e) =>
+                                                e?.wc_id ==
+                                                WarrantyClaimListDetails!.wc_id,
+                                            orElse: () =>
+                                                WarrantyClaimModel(wc_id: 00),
+                                          )
+                                          ?.status_code ==
+                                      194
+                                      ?ColorValues.appGreenColor
+                                      :ColorValues.appRedColor),
                           child: Text(
                             '${WarrantyClaimListDetails?.status}',
                             style: Styles.white10.copyWith(
@@ -585,7 +601,7 @@ class WarrantyClaimListDataSource extends DataTableSource {
                                     0
                                 ? TableActionButton(
                                     color: ColorValues.appGreenColor,
-                                    icon: Icons.edit,
+                                    icon: Icons.check,
                                     message: 'Approve/Reject',
                                     onPress: () {
                                       controller.viewWarrantyClaim(

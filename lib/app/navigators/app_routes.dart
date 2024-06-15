@@ -318,7 +318,7 @@ abstract class _Paths {
   static const addUser = '/addUser';
   static const viewUserDetail = '/view-user-detail';
   static const featureTypeListScreen = '/feature-Type-List-Screen';
-  static const editWarrantyClaimContentWeb = '/edit-warranty-claim-content-web';
+  static const editWarrantyClaimContentWeb = '/edit-warranty-claim';
   static const bloodTypeListScreen = '/blood-Type-List-Screen';
   static const countryTypeListScreen = '/country-Type-List-Screen';
   static const stateTypeListScreen = '/state-Type-List-Screen';

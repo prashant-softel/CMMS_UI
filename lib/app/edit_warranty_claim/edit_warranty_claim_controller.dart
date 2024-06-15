@@ -178,6 +178,7 @@ class EditWarrantyClaimController extends GetxController {
   final costOfReplacementTextController = TextEditingController();
   final orderReferenceNoTextController = TextEditingController();
   final affectedSerialNoTextController = TextEditingController();
+  final currentdateTextController = TextEditingController();
 
   final blockTextController = TextEditingController();
   final parentEquipmentTextController = TextEditingController();
@@ -312,6 +313,7 @@ class EditWarrantyClaimController extends GetxController {
           editWarrantyClaimDetailsModel.value?.equipment_name ?? '';
       selectedEquipmentCategory.value =
           editWarrantyClaimDetailsModel.value?.equipment_category ?? '';
+      setSelectedSeverity(_editWarrantyClaimDetails.severity ?? '');
       // selectedAffectedPart.value =
       //     editWarrantyClaimDetailsModel.value?.affected_part ?? '';
       failureDateTimeCtrlrWeb.text =

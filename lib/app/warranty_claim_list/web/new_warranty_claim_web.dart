@@ -15,6 +15,7 @@ import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:multi_select_flutter/multi_select_flutter.dart';
 
@@ -572,7 +573,8 @@ class NewWarrantyClaimWeb extends GetView<WarrantyClaimController> {
                                                       label:
                                                           'Approximate Daily Loss: ',
                                                       numberTextField: true,
-                                                      textController: controller.approxdailylosstxtcontroller,
+                                                      textController: controller
+                                                          .approxdailylosstxtcontroller,
                                                     ),
                                                     Row(
                                                       mainAxisAlignment:
@@ -623,6 +625,18 @@ class NewWarrantyClaimWeb extends GetView<WarrantyClaimController> {
                                                   children: [
                                                     Column(
                                                       children: [
+                                                        CustomTextField(
+                                                          textController: controller
+                                                              .currentStartDateCtrlrWeb,
+                                                          label:
+                                                              'Applied At:',
+                                                          suffixIcon: Icon(Icons
+                                                              .calendar_month),
+                                                          onTap: () {
+                                                            pickcurrentStartDate_web(
+                                                                context);
+                                                          },
+                                                        ),
                                                         CustomTextField(
                                                           textController: controller
                                                               .affectedSerialNoTextController,
@@ -1672,25 +1686,46 @@ class NewWarrantyClaimWeb extends GetView<WarrantyClaimController> {
 
     return newDate;
   }
-
-  Future<TimeOfDay?> pickTime2_web(BuildContext context) async {
-    DateTime dateTime = controller.selectedWarrantyStartDateTime.value;
-    //final initialTime = TimeOfDay(hour: 12, minute: 0);
-    final newTime = await showTimePicker(
-        context: context,
-        initialTime: TimeOfDay(hour: dateTime.hour, minute: dateTime.minute),
-        builder: (BuildContext context, Widget? child) {
-          return Theme(
-            data: ThemeData.light(),
-            child: child!,
-          );
-        });
-
-    if (newTime == null) {
-      return null;
+  Future pickcurrentStartDate_web(BuildContext context) async {
+    var dateTime = controller.selectedcurrentStartDate.value;
+    final date = await pickDate2_web(context);
+    if (date == null) {
+      return;
     }
 
-    return newTime;
+    dateTime = DateTime(
+      date.year,
+      date.month,
+      date.day,
+    );
+    controller.dateController.value = dateTime;
+    controller.currentStartDateCtrlrWeb
+      ..text = DateFormat('yyyy-MM-dd').format(dateTime)
+      ..selection = TextSelection.fromPosition(
+        TextPosition(
+          offset: controller.currentStartDateCtrlrWeb.text.length,
+          affinity: TextAffinity.upstream,
+        ),
+      );
+    print(
+        'Current Date: ${controller.currentStartDateCtrlrWeb.text}');
+    controller.currentStartDateCtrlrWebBuffer =
+        DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(dateTime);
+    print(
+        'Current Date sending Time: ${controller.currentStartDateCtrlrWebBuffer}');
+  }
+
+  Future<DateTime?> pickcurrentDate2_web(BuildContext context) async {
+    DateTime? dateTime = controller.selectedcurrentStartDate.value;
+    //final initialDate = DateTime.now();
+    final newDate = await showDatePicker(
+      context: context,
+      initialDate: dateTime,
+      firstDate: DateTime(DateTime.now().year - 5),
+      lastDate: DateTime(DateTime.now().year + 5),
+    );
+    if (newDate == null) return null;
+    return newDate;
   }
 
 ////Warranty End Date

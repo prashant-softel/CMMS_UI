@@ -111,7 +111,9 @@ class ViewWarrantyClaimWeb extends GetView<ViewWarrantyClaimController> {
                                   height: 30,
                                 ),
                                 CustomAppBar(
-                                  title: 'Warranty Claim: Details'.tr,
+                                  title: 'Warranty Claim Details'.tr,
+                                  action: Text(
+                                      "WC Id: ${controller.viewWarrantyClaimDetailsModel.value?.wc_id}"),
                                 ),
                                 Dimens.boxHeight10,
                                 Wrap(
@@ -150,19 +152,18 @@ class ViewWarrantyClaimWeb extends GetView<ViewWarrantyClaimController> {
                                                         width: 20,
                                                       ),
                                                       SizedBox(
-                                                        width: MediaQuery.of(
-                                                                    context)
-                                                                .size
-                                                                .width /
-                                                            2.70,
+                                                        width:
+                                                            MediaQuery.of(context)
+                                                                    .size
+                                                                    .width /
+                                                                2.70,
                                                         child: CustomTextField(
                                                           textController: controller
                                                               .equipmentNameTextController,
                                                           readOnly: true,
                                                           hintText:
                                                               '${controller.viewWarrantyClaimDetailsModel.value?.equipment_name}',
-                                                          label:
-                                                              'Equipment Name',
+                                                          label: 'Equipment Name',
                                                           suffixIcon: Icon(Icons
                                                               .arrow_drop_down),
                                                         ),
@@ -424,7 +425,8 @@ class ViewWarrantyClaimWeb extends GetView<ViewWarrantyClaimController> {
                                                                               children: [
                                                                                 affectedparts('${data!.name}', context)
                                                                               ],
-                                                                            )).toList())),
+                                                                            ))
+                                                                        .toList())),
                                                             )
                                                           ],
                                                         ),

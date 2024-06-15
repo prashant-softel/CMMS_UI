@@ -834,15 +834,23 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                               DataColumn2(
                                                 fixedWidth: 100,
                                                 label: Text(
-                                                  'Site name',
+                                                  'Site Name',
                                                   style: Styles.blackBold14,
                                                 ),
                                                 // size: ColumnSize.L,
                                               ),
                                               DataColumn2(
-                                                fixedWidth: 120,
+                                                fixedWidth: 100,
                                                 label: Text(
-                                                  'WO number',
+                                                  'WO Number',
+                                                  style: Styles.blackBold14,
+                                                ),
+                                                // size: ColumnSize.L,
+                                              ),
+                                              DataColumn2(
+                                                fixedWidth: 250,
+                                                label: Text(
+                                                  'WO Description',
                                                   style: Styles.blackBold14,
                                                 ),
                                                 // size: ColumnSize.L,
@@ -850,31 +858,15 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                               DataColumn2(
                                                 fixedWidth: 200,
                                                 label: Text(
-                                                  'WO description',
-                                                  style: Styles.blackBold14,
-                                                ),
-                                                // size: ColumnSize.L,
-                                              ),
-                                              DataColumn2(
-                                                fixedWidth: 300,
-                                                label: Text(
                                                   'Status',
                                                   style: Styles.blackBold14,
                                                 ),
                                                 // size: ColumnSize.L,
                                               ),
                                               DataColumn2(
-                                                fixedWidth: 250,
+                                                fixedWidth: 150,
                                                 label: Text(
-                                                  'Asset category',
-                                                  style: Styles.blackBold14,
-                                                ),
-                                                // size: ColumnSize.L,
-                                              ),
-                                              DataColumn2(
-                                                fixedWidth: 400,
-                                                label: Text(
-                                                  'Asset name',
+                                                  'Asset Category',
                                                   style: Styles.blackBold14,
                                                 ),
                                                 // size: ColumnSize.L,
@@ -882,21 +874,29 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                               DataColumn2(
                                                 fixedWidth: 250,
                                                 label: Text(
-                                                  'Schedule start date',
+                                                  'Asset Name',
                                                   style: Styles.blackBold14,
                                                 ),
                                                 // size: ColumnSize.L,
                                               ),
                                               DataColumn2(
-                                                fixedWidth: 250,
+                                                fixedWidth: 180,
                                                 label: Text(
-                                                  'Schedule end date',
+                                                  'Schedule Start Date',
                                                   style: Styles.blackBold14,
                                                 ),
                                                 // size: ColumnSize.L,
                                               ),
                                               DataColumn2(
-                                                fixedWidth: 100,
+                                                fixedWidth: 180,
+                                                label: Text(
+                                                  'Schedule End Date',
+                                                  style: Styles.blackBold14,
+                                                ),
+                                                // size: ColumnSize.L,
+                                              ),
+                                              DataColumn2(
+                                                fixedWidth: 60,
                                                 label: Text(
                                                   'Action',
                                                   style: Styles.blackBold14,
@@ -929,14 +929,48 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                         .allItems[index]
                                                         ?.asset_name ??
                                                     '')),
-                                                DataCell(Text(controller
-                                                        .allItems[index]
-                                                        ?.start_date ??
-                                                    '')),
-                                                DataCell(Text(controller
-                                                        .allItems[index]
-                                                        ?.end_date ??
-                                                    '')),
+                                                DataCell(
+                                                  Text(controller
+                                                              .allItems[index]
+                                                              ?.start_date !=
+                                                          null
+                                                      ? controller
+                                                          .allItems[index]!
+                                                          .start_date!
+                                                          .substring(
+                                                              0,
+                                                              controller
+                                                                      .allItems[
+                                                                          index]!
+                                                                      .start_date!
+                                                                      .length -
+                                                                  9)
+                                                      : controller
+                                                              .allItems[index]
+                                                              ?.start_date ??
+                                                          ''),
+                                                ),
+                                                DataCell(
+                                                  Text(controller
+                                                              .allItems[index]
+                                                              ?.end_date !=
+                                                          null
+                                                      ? controller
+                                                          .allItems[index]!
+                                                          .end_date!
+                                                          .substring(
+                                                              0,
+                                                              controller
+                                                                      .allItems[
+                                                                          index]!
+                                                                      .end_date!
+                                                                      .length -
+                                                                  9)
+                                                      : controller
+                                                              .allItems[index]
+                                                              ?.end_date ??
+                                                          ''),
+                                                ),
                                                 DataCell(
                                                   Row(
                                                     children: [
@@ -1443,15 +1477,23 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                               DataColumn2(
                                                 fixedWidth: 100,
                                                 label: Text(
-                                                  'Site name',
+                                                  'Site Name',
                                                   style: Styles.blackBold14,
                                                 ),
                                                 // size: ColumnSize.L,
                                               ),
                                               DataColumn2(
-                                                fixedWidth: 120,
+                                                fixedWidth: 100,
                                                 label: Text(
-                                                  'WO number',
+                                                  'WO Number',
+                                                  style: Styles.blackBold14,
+                                                ),
+                                                // size: ColumnSize.L,
+                                              ),
+                                              DataColumn2(
+                                                fixedWidth: 250,
+                                                label: Text(
+                                                  'WO Description',
                                                   style: Styles.blackBold14,
                                                 ),
                                                 // size: ColumnSize.L,
@@ -1459,31 +1501,15 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                               DataColumn2(
                                                 fixedWidth: 200,
                                                 label: Text(
-                                                  'WO description',
-                                                  style: Styles.blackBold14,
-                                                ),
-                                                // size: ColumnSize.L,
-                                              ),
-                                              DataColumn2(
-                                                fixedWidth: 300,
-                                                label: Text(
                                                   'Status',
                                                   style: Styles.blackBold14,
                                                 ),
                                                 // size: ColumnSize.L,
                                               ),
                                               DataColumn2(
-                                                fixedWidth: 250,
+                                                fixedWidth: 150,
                                                 label: Text(
-                                                  'Asset category',
-                                                  style: Styles.blackBold14,
-                                                ),
-                                                // size: ColumnSize.L,
-                                              ),
-                                              DataColumn2(
-                                                fixedWidth: 400,
-                                                label: Text(
-                                                  'Asset name',
+                                                  'Asset Category',
                                                   style: Styles.blackBold14,
                                                 ),
                                                 // size: ColumnSize.L,
@@ -1491,21 +1517,29 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                               DataColumn2(
                                                 fixedWidth: 250,
                                                 label: Text(
-                                                  'Schedule start date',
+                                                  'Asset Name',
                                                   style: Styles.blackBold14,
                                                 ),
                                                 // size: ColumnSize.L,
                                               ),
                                               DataColumn2(
-                                                fixedWidth: 250,
+                                                fixedWidth: 180,
                                                 label: Text(
-                                                  'Schedule end date',
+                                                  'Schedule Start Date',
                                                   style: Styles.blackBold14,
                                                 ),
                                                 // size: ColumnSize.L,
                                               ),
                                               DataColumn2(
-                                                fixedWidth: 100,
+                                                fixedWidth: 180,
+                                                label: Text(
+                                                  'Schedule End Date',
+                                                  style: Styles.blackBold14,
+                                                ),
+                                                // size: ColumnSize.L,
+                                              ),
+                                              DataColumn2(
+                                                fixedWidth: 60,
                                                 label: Text(
                                                   'Action',
                                                   style: Styles.blackBold14,
@@ -1559,20 +1593,76 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                         ?.item_list?[index]
                                                         .asset_name ??
                                                     '')),
-                                                DataCell(Text(controller
-                                                        .dashboardBmList
-                                                        .value
-                                                        ?.cmDashboadDetails
-                                                        ?.item_list?[index]
-                                                        .start_date ??
-                                                    '')),
-                                                DataCell(Text(controller
-                                                        .dashboardBmList
-                                                        .value
-                                                        ?.cmDashboadDetails
-                                                        ?.item_list?[index]
-                                                        .end_date ??
-                                                    '')),
+                                                DataCell(
+                                                  Text(controller
+                                                              .dashboardBmList
+                                                              .value
+                                                              ?.cmDashboadDetails
+                                                              ?.item_list?[
+                                                                  index]
+                                                              .start_date !=
+                                                          null
+                                                      ? controller
+                                                          .dashboardBmList
+                                                          .value!
+                                                          .cmDashboadDetails!
+                                                          .item_list![index]
+                                                          .start_date!
+                                                          .substring(
+                                                              0,
+                                                              controller
+                                                                      .dashboardBmList
+                                                                      .value!
+                                                                      .cmDashboadDetails!
+                                                                      .item_list![
+                                                                          index]
+                                                                      .start_date!
+                                                                      .length -
+                                                                  9)
+                                                      : controller
+                                                              .dashboardBmList
+                                                              .value
+                                                              ?.cmDashboadDetails
+                                                              ?.item_list?[
+                                                                  index]
+                                                              .start_date ??
+                                                          ''),
+                                                ),
+                                                DataCell(
+                                                  Text(controller
+                                                              .dashboardBmList
+                                                              .value
+                                                              ?.cmDashboadDetails
+                                                              ?.item_list?[
+                                                                  index]
+                                                              .end_date !=
+                                                          null
+                                                      ? controller
+                                                          .dashboardBmList
+                                                          .value!
+                                                          .cmDashboadDetails!
+                                                          .item_list![index]
+                                                          .end_date!
+                                                          .substring(
+                                                              0,
+                                                              controller
+                                                                      .dashboardBmList
+                                                                      .value!
+                                                                      .cmDashboadDetails!
+                                                                      .item_list![
+                                                                          index]
+                                                                      .end_date!
+                                                                      .length -
+                                                                  9)
+                                                      : controller
+                                                              .dashboardBmList
+                                                              .value
+                                                              ?.cmDashboadDetails
+                                                              ?.item_list?[
+                                                                  index]
+                                                              .end_date ??
+                                                          ''),
+                                                ),
                                                 DataCell(
                                                   Row(
                                                     children: [
@@ -2080,15 +2170,23 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                               DataColumn2(
                                                 fixedWidth: 100,
                                                 label: Text(
-                                                  'Site name',
+                                                  'Site Name',
                                                   style: Styles.blackBold14,
                                                 ),
                                                 // size: ColumnSize.L,
                                               ),
                                               DataColumn2(
-                                                fixedWidth: 120,
+                                                fixedWidth: 100,
                                                 label: Text(
-                                                  'WO number',
+                                                  'WO Number',
+                                                  style: Styles.blackBold14,
+                                                ),
+                                                // size: ColumnSize.L,
+                                              ),
+                                              DataColumn2(
+                                                fixedWidth: 250,
+                                                label: Text(
+                                                  'WO Description',
                                                   style: Styles.blackBold14,
                                                 ),
                                                 // size: ColumnSize.L,
@@ -2096,31 +2194,15 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                               DataColumn2(
                                                 fixedWidth: 200,
                                                 label: Text(
-                                                  'WO description',
-                                                  style: Styles.blackBold14,
-                                                ),
-                                                // size: ColumnSize.L,
-                                              ),
-                                              DataColumn2(
-                                                fixedWidth: 300,
-                                                label: Text(
                                                   'Status',
                                                   style: Styles.blackBold14,
                                                 ),
                                                 // size: ColumnSize.L,
                                               ),
                                               DataColumn2(
-                                                fixedWidth: 250,
+                                                fixedWidth: 150,
                                                 label: Text(
-                                                  'Asset category',
-                                                  style: Styles.blackBold14,
-                                                ),
-                                                // size: ColumnSize.L,
-                                              ),
-                                              DataColumn2(
-                                                fixedWidth: 400,
-                                                label: Text(
-                                                  'Asset name',
+                                                  'Asset Category',
                                                   style: Styles.blackBold14,
                                                 ),
                                                 // size: ColumnSize.L,
@@ -2128,21 +2210,29 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                               DataColumn2(
                                                 fixedWidth: 250,
                                                 label: Text(
-                                                  'Schedule start date',
+                                                  'Asset Name',
                                                   style: Styles.blackBold14,
                                                 ),
                                                 // size: ColumnSize.L,
                                               ),
                                               DataColumn2(
-                                                fixedWidth: 250,
+                                                fixedWidth: 180,
                                                 label: Text(
-                                                  'Schedule end date',
+                                                  'Schedule Start Date',
                                                   style: Styles.blackBold14,
                                                 ),
                                                 // size: ColumnSize.L,
                                               ),
                                               DataColumn2(
-                                                fixedWidth: 100,
+                                                fixedWidth: 180,
+                                                label: Text(
+                                                  'Schedule End Date',
+                                                  style: Styles.blackBold14,
+                                                ),
+                                                // size: ColumnSize.L,
+                                              ),
+                                              DataColumn2(
+                                                fixedWidth: 60,
                                                 label: Text(
                                                   'Action',
                                                   style: Styles.blackBold14,
@@ -2196,20 +2286,76 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                         ?.item_list?[index]
                                                         .asset_name ??
                                                     '')),
-                                                DataCell(Text(controller
-                                                        .dashboardPmList
-                                                        .value
-                                                        ?.cmDashboadDetails
-                                                        ?.item_list?[index]
-                                                        .start_date ??
-                                                    '')),
-                                                DataCell(Text(controller
-                                                        .dashboardPmList
-                                                        .value
-                                                        ?.cmDashboadDetails
-                                                        ?.item_list?[index]
-                                                        .end_date ??
-                                                    '')),
+                                                DataCell(
+                                                  Text(controller
+                                                              .dashboardPmList
+                                                              .value
+                                                              ?.cmDashboadDetails
+                                                              ?.item_list?[
+                                                                  index]
+                                                              .start_date !=
+                                                          null
+                                                      ? controller
+                                                          .dashboardPmList
+                                                          .value!
+                                                          .cmDashboadDetails!
+                                                          .item_list![index]
+                                                          .start_date!
+                                                          .substring(
+                                                              0,
+                                                              controller
+                                                                      .dashboardPmList
+                                                                      .value!
+                                                                      .cmDashboadDetails!
+                                                                      .item_list![
+                                                                          index]
+                                                                      .start_date!
+                                                                      .length -
+                                                                  9)
+                                                      : controller
+                                                              .dashboardPmList
+                                                              .value
+                                                              ?.cmDashboadDetails
+                                                              ?.item_list?[
+                                                                  index]
+                                                              .start_date ??
+                                                          ''),
+                                                ),
+                                                DataCell(
+                                                  Text(controller
+                                                              .dashboardPmList
+                                                              .value
+                                                              ?.cmDashboadDetails
+                                                              ?.item_list?[
+                                                                  index]
+                                                              .end_date !=
+                                                          null
+                                                      ? controller
+                                                          .dashboardPmList
+                                                          .value!
+                                                          .cmDashboadDetails!
+                                                          .item_list![index]
+                                                          .end_date!
+                                                          .substring(
+                                                              0,
+                                                              controller
+                                                                      .dashboardPmList
+                                                                      .value!
+                                                                      .cmDashboadDetails!
+                                                                      .item_list![
+                                                                          index]
+                                                                      .end_date!
+                                                                      .length -
+                                                                  9)
+                                                      : controller
+                                                              .dashboardPmList
+                                                              .value
+                                                              ?.cmDashboadDetails
+                                                              ?.item_list?[
+                                                                  index]
+                                                              .end_date ??
+                                                          ''),
+                                                ),
                                                 DataCell(
                                                   Row(
                                                     children: [
@@ -2723,15 +2869,23 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                               DataColumn2(
                                                 fixedWidth: 100,
                                                 label: Text(
-                                                  'Site name',
+                                                  'Site Name',
                                                   style: Styles.blackBold14,
                                                 ),
                                                 // size: ColumnSize.L,
                                               ),
                                               DataColumn2(
-                                                fixedWidth: 120,
+                                                fixedWidth: 100,
                                                 label: Text(
-                                                  'WO number',
+                                                  'WO Number',
+                                                  style: Styles.blackBold14,
+                                                ),
+                                                // size: ColumnSize.L,
+                                              ),
+                                              DataColumn2(
+                                                fixedWidth: 250,
+                                                label: Text(
+                                                  'WO Description',
                                                   style: Styles.blackBold14,
                                                 ),
                                                 // size: ColumnSize.L,
@@ -2739,31 +2893,15 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                               DataColumn2(
                                                 fixedWidth: 200,
                                                 label: Text(
-                                                  'WO description',
-                                                  style: Styles.blackBold14,
-                                                ),
-                                                // size: ColumnSize.L,
-                                              ),
-                                              DataColumn2(
-                                                fixedWidth: 300,
-                                                label: Text(
                                                   'Status',
                                                   style: Styles.blackBold14,
                                                 ),
                                                 // size: ColumnSize.L,
                                               ),
                                               DataColumn2(
-                                                fixedWidth: 250,
+                                                fixedWidth: 150,
                                                 label: Text(
-                                                  'Asset category',
-                                                  style: Styles.blackBold14,
-                                                ),
-                                                // size: ColumnSize.L,
-                                              ),
-                                              DataColumn2(
-                                                fixedWidth: 400,
-                                                label: Text(
-                                                  'Asset name',
+                                                  'Asset Category',
                                                   style: Styles.blackBold14,
                                                 ),
                                                 // size: ColumnSize.L,
@@ -2771,21 +2909,29 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                               DataColumn2(
                                                 fixedWidth: 250,
                                                 label: Text(
-                                                  'Schedule start date',
+                                                  'Asset Name',
                                                   style: Styles.blackBold14,
                                                 ),
                                                 // size: ColumnSize.L,
                                               ),
                                               DataColumn2(
-                                                fixedWidth: 250,
+                                                fixedWidth: 180,
                                                 label: Text(
-                                                  'Schedule end date',
+                                                  'Schedule Start Date',
                                                   style: Styles.blackBold14,
                                                 ),
                                                 // size: ColumnSize.L,
                                               ),
                                               DataColumn2(
-                                                fixedWidth: 100,
+                                                fixedWidth: 180,
+                                                label: Text(
+                                                  'Schedule End Date',
+                                                  style: Styles.blackBold14,
+                                                ),
+                                                // size: ColumnSize.L,
+                                              ),
+                                              DataColumn2(
+                                                fixedWidth: 60,
                                                 label: Text(
                                                   'Action',
                                                   style: Styles.blackBold14,
@@ -2839,20 +2985,76 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                         ?.item_list?[index]
                                                         .asset_name ??
                                                     '')),
-                                                DataCell(Text(controller
-                                                        .dashboardMcList
-                                                        .value
-                                                        ?.cmDashboadDetails
-                                                        ?.item_list?[index]
-                                                        .start_date ??
-                                                    '')),
-                                                DataCell(Text(controller
-                                                        .dashboardMcList
-                                                        .value
-                                                        ?.cmDashboadDetails
-                                                        ?.item_list?[index]
-                                                        .end_date ??
-                                                    '')),
+                                                DataCell(
+                                                  Text(controller
+                                                              .dashboardMcList
+                                                              .value
+                                                              ?.cmDashboadDetails
+                                                              ?.item_list?[
+                                                                  index]
+                                                              .start_date !=
+                                                          null
+                                                      ? controller
+                                                          .dashboardMcList
+                                                          .value!
+                                                          .cmDashboadDetails!
+                                                          .item_list![index]
+                                                          .start_date!
+                                                          .substring(
+                                                              0,
+                                                              controller
+                                                                      .dashboardMcList
+                                                                      .value!
+                                                                      .cmDashboadDetails!
+                                                                      .item_list![
+                                                                          index]
+                                                                      .start_date!
+                                                                      .length -
+                                                                  9)
+                                                      : controller
+                                                              .dashboardMcList
+                                                              .value
+                                                              ?.cmDashboadDetails
+                                                              ?.item_list?[
+                                                                  index]
+                                                              .start_date ??
+                                                          ''),
+                                                ),
+                                               DataCell(
+                                                  Text(controller
+                                                              .dashboardMcList
+                                                              .value
+                                                              ?.cmDashboadDetails
+                                                              ?.item_list?[
+                                                                  index]
+                                                              .end_date !=
+                                                          null
+                                                      ? controller
+                                                          .dashboardMcList
+                                                          .value!
+                                                          .cmDashboadDetails!
+                                                          .item_list![index]
+                                                          .end_date!
+                                                          .substring(
+                                                              0,
+                                                              controller
+                                                                      .dashboardMcList
+                                                                      .value!
+                                                                      .cmDashboadDetails!
+                                                                      .item_list![
+                                                                          index]
+                                                                      .end_date!
+                                                                      .length -
+                                                                  9)
+                                                      : controller
+                                                              .dashboardMcList
+                                                              .value
+                                                              ?.cmDashboadDetails
+                                                              ?.item_list?[
+                                                                  index]
+                                                              .end_date ??
+                                                          ''),
+                                                ),
                                                 DataCell(
                                                   Row(
                                                     children: [
@@ -3364,15 +3566,23 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                               DataColumn2(
                                                 fixedWidth: 100,
                                                 label: Text(
-                                                  'Site name',
+                                                  'Site Name',
                                                   style: Styles.blackBold14,
                                                 ),
                                                 // size: ColumnSize.L,
                                               ),
                                               DataColumn2(
-                                                fixedWidth: 120,
+                                                fixedWidth: 100,
                                                 label: Text(
-                                                  'WO number',
+                                                  'WO Number',
+                                                  style: Styles.blackBold14,
+                                                ),
+                                                // size: ColumnSize.L,
+                                              ),
+                                              DataColumn2(
+                                                fixedWidth: 250,
+                                                label: Text(
+                                                  'WO Description',
                                                   style: Styles.blackBold14,
                                                 ),
                                                 // size: ColumnSize.L,
@@ -3380,31 +3590,15 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                               DataColumn2(
                                                 fixedWidth: 200,
                                                 label: Text(
-                                                  'WO description',
-                                                  style: Styles.blackBold14,
-                                                ),
-                                                // size: ColumnSize.L,
-                                              ),
-                                              DataColumn2(
-                                                fixedWidth: 300,
-                                                label: Text(
                                                   'Status',
                                                   style: Styles.blackBold14,
                                                 ),
                                                 // size: ColumnSize.L,
                                               ),
                                               DataColumn2(
-                                                fixedWidth: 250,
+                                                fixedWidth: 150,
                                                 label: Text(
-                                                  'Asset category',
-                                                  style: Styles.blackBold14,
-                                                ),
-                                                // size: ColumnSize.L,
-                                              ),
-                                              DataColumn2(
-                                                fixedWidth: 400,
-                                                label: Text(
-                                                  'Asset name',
+                                                  'Asset Category',
                                                   style: Styles.blackBold14,
                                                 ),
                                                 // size: ColumnSize.L,
@@ -3412,21 +3606,29 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                               DataColumn2(
                                                 fixedWidth: 250,
                                                 label: Text(
-                                                  'Schedule start date',
+                                                  'Asset Name',
                                                   style: Styles.blackBold14,
                                                 ),
                                                 // size: ColumnSize.L,
                                               ),
                                               DataColumn2(
-                                                fixedWidth: 250,
+                                                fixedWidth: 180,
                                                 label: Text(
-                                                  'Schedule end date',
+                                                  'Schedule Start Date',
                                                   style: Styles.blackBold14,
                                                 ),
                                                 // size: ColumnSize.L,
                                               ),
                                               DataColumn2(
-                                                fixedWidth: 100,
+                                                fixedWidth: 180,
+                                                label: Text(
+                                                  'Schedule End Date',
+                                                  style: Styles.blackBold14,
+                                                ),
+                                                // size: ColumnSize.L,
+                                              ),
+                                              DataColumn2(
+                                                fixedWidth: 60,
                                                 label: Text(
                                                   'Action',
                                                   style: Styles.blackBold14,
@@ -3480,20 +3682,76 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                         ?.item_list?[index]
                                                         .asset_name ??
                                                     '')),
-                                                DataCell(Text(controller
-                                                        .dashboardIrList
-                                                        .value
-                                                        ?.cmDashboadDetails
-                                                        ?.item_list?[index]
-                                                        .start_date ??
-                                                    '')),
-                                                DataCell(Text(controller
-                                                        .dashboardIrList
-                                                        .value
-                                                        ?.cmDashboadDetails
-                                                        ?.item_list?[index]
-                                                        .end_date ??
-                                                    '')),
+                                                DataCell(
+                                                  Text(controller
+                                                              .dashboardIrList
+                                                              .value
+                                                              ?.cmDashboadDetails
+                                                              ?.item_list?[
+                                                                  index]
+                                                              .start_date !=
+                                                          null
+                                                      ? controller
+                                                          .dashboardIrList
+                                                          .value!
+                                                          .cmDashboadDetails!
+                                                          .item_list![index]
+                                                          .start_date!
+                                                          .substring(
+                                                              0,
+                                                              controller
+                                                                      .dashboardIrList
+                                                                      .value!
+                                                                      .cmDashboadDetails!
+                                                                      .item_list![
+                                                                          index]
+                                                                      .start_date!
+                                                                      .length -
+                                                                  9)
+                                                      : controller
+                                                              .dashboardIrList
+                                                              .value
+                                                              ?.cmDashboadDetails
+                                                              ?.item_list?[
+                                                                  index]
+                                                              .start_date ??
+                                                          ''),
+                                                ),
+                                                DataCell(
+                                                  Text(controller
+                                                              .dashboardIrList
+                                                              .value
+                                                              ?.cmDashboadDetails
+                                                              ?.item_list?[
+                                                                  index]
+                                                              .end_date !=
+                                                          null
+                                                      ? controller
+                                                          .dashboardIrList
+                                                          .value!
+                                                          .cmDashboadDetails!
+                                                          .item_list![index]
+                                                          .end_date!
+                                                          .substring(
+                                                              0,
+                                                              controller
+                                                                      .dashboardIrList
+                                                                      .value!
+                                                                      .cmDashboadDetails!
+                                                                      .item_list![
+                                                                          index]
+                                                                      .end_date!
+                                                                      .length -
+                                                                  9)
+                                                      : controller
+                                                              .dashboardIrList
+                                                              .value
+                                                              ?.cmDashboadDetails
+                                                              ?.item_list?[
+                                                                  index]
+                                                              .end_date ??
+                                                          ''),
+                                                ),
                                                 DataCell(
                                                   Row(
                                                     children: [
@@ -4004,15 +4262,23 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                               DataColumn2(
                                                 fixedWidth: 100,
                                                 label: Text(
-                                                  'Site name',
+                                                  'Site Name',
                                                   style: Styles.blackBold14,
                                                 ),
                                                 // size: ColumnSize.L,
                                               ),
                                               DataColumn2(
-                                                fixedWidth: 120,
+                                                fixedWidth: 100,
                                                 label: Text(
-                                                  'WO number',
+                                                  'WO Number',
+                                                  style: Styles.blackBold14,
+                                                ),
+                                                // size: ColumnSize.L,
+                                              ),
+                                              DataColumn2(
+                                                fixedWidth: 250,
+                                                label: Text(
+                                                  'WO Description',
                                                   style: Styles.blackBold14,
                                                 ),
                                                 // size: ColumnSize.L,
@@ -4020,31 +4286,15 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                               DataColumn2(
                                                 fixedWidth: 200,
                                                 label: Text(
-                                                  'WO description',
-                                                  style: Styles.blackBold14,
-                                                ),
-                                                // size: ColumnSize.L,
-                                              ),
-                                              DataColumn2(
-                                                fixedWidth: 300,
-                                                label: Text(
                                                   'Status',
                                                   style: Styles.blackBold14,
                                                 ),
                                                 // size: ColumnSize.L,
                                               ),
                                               DataColumn2(
-                                                fixedWidth: 250,
+                                                fixedWidth: 150,
                                                 label: Text(
-                                                  'Asset category',
-                                                  style: Styles.blackBold14,
-                                                ),
-                                                // size: ColumnSize.L,
-                                              ),
-                                              DataColumn2(
-                                                fixedWidth: 400,
-                                                label: Text(
-                                                  'Asset name',
+                                                  'Asset Category',
                                                   style: Styles.blackBold14,
                                                 ),
                                                 // size: ColumnSize.L,
@@ -4052,21 +4302,29 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                               DataColumn2(
                                                 fixedWidth: 250,
                                                 label: Text(
-                                                  'Schedule start date',
+                                                  'Asset Name',
                                                   style: Styles.blackBold14,
                                                 ),
                                                 // size: ColumnSize.L,
                                               ),
                                               DataColumn2(
-                                                fixedWidth: 250,
+                                                fixedWidth: 180,
                                                 label: Text(
-                                                  'Schedule end date',
+                                                  'Schedule Start Date',
                                                   style: Styles.blackBold14,
                                                 ),
                                                 // size: ColumnSize.L,
                                               ),
                                               DataColumn2(
-                                                fixedWidth: 100,
+                                                fixedWidth: 180,
+                                                label: Text(
+                                                  'Schedule End Date',
+                                                  style: Styles.blackBold14,
+                                                ),
+                                                // size: ColumnSize.L,
+                                              ),
+                                              DataColumn2(
+                                                fixedWidth: 60,
                                                 label: Text(
                                                   'Action',
                                                   style: Styles.blackBold14,
@@ -4120,20 +4378,76 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                         ?.item_list?[index]
                                                         .asset_name ??
                                                     '')),
-                                                DataCell(Text(controller
-                                                        .dashboardSmList
-                                                        .value
-                                                        ?.cmDashboadDetails
-                                                        ?.item_list?[index]
-                                                        .start_date ??
-                                                    '')),
-                                                DataCell(Text(controller
-                                                        .dashboardSmList
-                                                        .value
-                                                        ?.cmDashboadDetails
-                                                        ?.item_list?[index]
-                                                        .end_date ??
-                                                    '')),
+                                                DataCell(
+                                                  Text(controller
+                                                              .dashboardSmList
+                                                              .value
+                                                              ?.cmDashboadDetails
+                                                              ?.item_list?[
+                                                                  index]
+                                                              .start_date !=
+                                                          null
+                                                      ? controller
+                                                          .dashboardSmList
+                                                          .value!
+                                                          .cmDashboadDetails!
+                                                          .item_list![index]
+                                                          .start_date!
+                                                          .substring(
+                                                              0,
+                                                              controller
+                                                                      .dashboardSmList
+                                                                      .value!
+                                                                      .cmDashboadDetails!
+                                                                      .item_list![
+                                                                          index]
+                                                                      .start_date!
+                                                                      .length -
+                                                                  9)
+                                                      : controller
+                                                              .dashboardSmList
+                                                              .value
+                                                              ?.cmDashboadDetails
+                                                              ?.item_list?[
+                                                                  index]
+                                                              .start_date ??
+                                                          ''),
+                                                ),
+                                                DataCell(
+                                                  Text(controller
+                                                              .dashboardSmList
+                                                              .value
+                                                              ?.cmDashboadDetails
+                                                              ?.item_list?[
+                                                                  index]
+                                                              .end_date !=
+                                                          null
+                                                      ? controller
+                                                          .dashboardSmList
+                                                          .value!
+                                                          .cmDashboadDetails!
+                                                          .item_list![index]
+                                                          .end_date!
+                                                          .substring(
+                                                              0,
+                                                              controller
+                                                                      .dashboardSmList
+                                                                      .value!
+                                                                      .cmDashboadDetails!
+                                                                      .item_list![
+                                                                          index]
+                                                                      .end_date!
+                                                                      .length -
+                                                                  9)
+                                                      : controller
+                                                              .dashboardSmList
+                                                              .value
+                                                              ?.cmDashboadDetails
+                                                              ?.item_list?[
+                                                                  index]
+                                                              .end_date ??
+                                                          ''),
+                                                ),
                                                 DataCell(
                                                   Row(
                                                     children: [
