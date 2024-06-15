@@ -22,6 +22,7 @@ class CreateIncidentReportModel {
   int? inverstigated_by;
   // int? verified_by;
   int? risk_type;
+  int? is_other_injured;
   bool? esi_applicability;
   bool? legal_applicability;
   bool? rca_required;
@@ -62,6 +63,7 @@ class CreateIncidentReportModel {
     this.reporting_datetime,
     this.legal_applicability_remark,
     this.esi_applicability_remark,
+    this.is_other_injured,
     this.victim_id,
     this.title,
     this.action_taken_by,
@@ -111,6 +113,7 @@ class CreateIncidentReportModel {
         legal_applicability_remark: json['legal_applicability_remark'],
         esi_applicability_remark: json['esi_applicability_remark'],
         victim_id: json['victim_id'],
+        is_other_injured: json['is_other_injured'],
         title: json['title'],
         action_taken_by: json['action_taken_by'],
         action_taken_datetime: json['action_taken_datetime'],
@@ -157,8 +160,8 @@ class CreateIncidentReportModel {
             ? List<DetailsOfInjuredPerson>.from(json["injured_person"]
                 ?.map((x) => DetailsOfInjuredPerson.fromJson(x)))
             : [],
-            //Otherinjured_person
-             Otherinjured_person: json['Otherinjured_person'] != null
+        //Otherinjured_person
+        Otherinjured_person: json['Otherinjured_person'] != null
             ? List<DetailsOfOtherInjuredPerson>.from(json["Otherinjured_person"]
                 ?.map((x) => DetailsOfOtherInjuredPerson.fromJson(x)))
             : [],
@@ -184,7 +187,7 @@ class CreateIncidentReportModel {
         "victim_id": victim_id,
         "title": title,
         "is_person_involved": is_person_involved,
-
+        "is_other_injured": is_other_injured,
         "action_taken_by": action_taken_by,
         "action_taken_datetime": action_taken_datetime,
         "inverstigated_by": inverstigated_by,
@@ -215,7 +218,8 @@ class CreateIncidentReportModel {
         "immediate_correction":
             List<dynamic>.from(immediate_correction!.map((x) => x)),
         "injured_person": List<dynamic>.from(injured_person!.map((x) => x)),
-        "Otherinjured_person": List<dynamic>.from(Otherinjured_person!.map((x) => x)),
+        "Otherinjured_person":
+            List<dynamic>.from(Otherinjured_person!.map((x) => x)),
         "proposed_action_plan":
             List<dynamic>.from(proposed_action_plan!.map((x) => x)),
         "investigation_team":
@@ -225,30 +229,29 @@ class CreateIncidentReportModel {
 
 ///Details of Injured Person
 class DetailsOfInjuredPerson {
-  DetailsOfInjuredPerson(
-      {this.injured_item_id,
-      this.incidents_id,
-      this.name,
-      this.person_type,
-      this.other_victim,
-      this.age,
-      this.sex,
-      this.designation,
-      this.address,
-      this.name_contractor,
-      this.body_part_and_nature_of_injury,
-      this.work_experience_years,
-      this.plant_equipment_involved,
-      this.location_of_incident});
+  DetailsOfInjuredPerson({
+    this.injured_item_id,
+    this.incidents_id,
+    this.name,
+    this.person_type,
+    this.age,
+    this.sex,
+    this.designation,
+    this.address,
+    this.name_contractor,
+    this.body_part_and_nature_of_injury,
+    this.work_experience_years,
+    this.plant_equipment_involved,
+    this.location_of_incident,
+  });
 
   int? injured_item_id;
   int? incidents_id;
 
   String? name;
   int? person_type;
-  String? other_victim;
   int? age;
-  int? sex;
+  String? sex;
   String? designation;
   String? address;
   String? name_contractor;
@@ -263,7 +266,6 @@ class DetailsOfInjuredPerson {
         incidents_id: json['incidents_id'],
         name: json['name'],
         person_type: json['person_type'],
-        other_victim: json['other_victim'],
         age: json['age'],
         sex: json['sex'],
         designation: json['designation'],
@@ -280,7 +282,6 @@ class DetailsOfInjuredPerson {
         "incidents_id": incidents_id,
         "name": name,
         "person_type": person_type,
-        "other_victim": other_victim,
         "age": age,
         "sex": sex,
         "designation": designation,
@@ -295,30 +296,30 @@ class DetailsOfInjuredPerson {
 
 ///Details of other Injured Person
 class DetailsOfOtherInjuredPerson {
-  DetailsOfOtherInjuredPerson(
-      {this.injured_item_id,
-      this.Otherinjured_item_id,
-      this.incidents_id,
-      this.name,
-      this.person_type,
-      this.other_victim,
-      this.age,
-      this.sex,
-      this.designation,
-      this.address,
-      this.name_contractor,
-      this.body_part_and_nature_of_injury,
-      this.work_experience_years,
-      this.plant_equipment_involved,
-      this.location_of_incident});
+  DetailsOfOtherInjuredPerson({
+    this.injured_item_id,
+    this.Otherinjured_item_id,
+    this.incidents_id,
+    this.name,
+    this.person_type,
+    this.other_injured = 1,
+    this.age,
+    this.sex,
+    this.designation,
+    this.address,
+    this.name_contractor,
+    this.body_part_and_nature_of_injury,
+    this.work_experience_years,
+    this.plant_equipment_involved,
+    this.location_of_incident,
+  });
 
   int? injured_item_id;
   int? Otherinjured_item_id;
   int? incidents_id;
-
+  int? other_injured;
   String? name;
   int? person_type;
-  String? other_victim;
   int? age;
   String? sex;
   String? designation;
@@ -334,8 +335,8 @@ class DetailsOfOtherInjuredPerson {
         injured_item_id: json['injured_item_id'],
         incidents_id: json['incidents_id'],
         name: json['name'],
+        other_injured: json['other_injured'],
         person_type: json['person_type'],
-        other_victim: json['other_victim'],
         age: json['age'],
         sex: json['sex'],
         designation: json['designation'],
@@ -351,8 +352,8 @@ class DetailsOfOtherInjuredPerson {
         "injured_item_id": injured_item_id,
         "incidents_id": incidents_id,
         "name": name,
+        "other_injured": other_injured,
         "person_type": person_type,
-        "other_victim": other_victim,
         "age": age,
         "sex": sex,
         "designation": designation,
