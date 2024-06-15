@@ -45,6 +45,7 @@ class ComplianceController extends GetxController {
   bool openExpireOnFDatePicker = false;
   bool openReNewOnDatePicker = false;
   Rx<bool> isIssueDateInvalid = false.obs;
+  Rx<bool> isRenewDateInvalid = false.obs;
 
   Rx<bool> isLoading = true.obs;
   Rx<bool> isExpiresonInvalid = false.obs;
@@ -277,10 +278,10 @@ class ComplianceController extends GetxController {
 
   void reNewCompliance(int? position) async {
     try {
-      // checkCompiliace();
-      // if (isFormInvalid.value) {
-      //   return;
-      // }
+      checkRenewCompiliace();
+      if (isFormInvalid.value) {
+        return;
+      }
       String _issueDateTc = issueDateTc.text.trim();
       String _reNewOnDateTc = reNewOnDateTc.text.trim();
 
@@ -339,6 +340,13 @@ class ComplianceController extends GetxController {
 
     if (expireOnDateTc.text.trim().length < 3) {
       isExpiresonInvalid.value = true;
+      isFormInvalid.value = true;
+    }
+  }
+
+  void checkRenewCompiliace() {
+    if (reNewOnDateTc.text.trim().length < 3) {
+      isRenewDateInvalid.value = true;
       isFormInvalid.value = true;
     }
   }
