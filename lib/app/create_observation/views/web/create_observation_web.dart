@@ -253,19 +253,18 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                                                         5),
                                                           ),
                                                           child:
-                                                              DropdownWebStock(
-                                                            width: MediaQuery.of(
+                                                              LoginCustomTextfield(
+                                                            width: (MediaQuery.of(
                                                                         context)
                                                                     .size
-                                                                    .width /
-                                                                5,
-                                                            dropdownList:
-                                                                controller
-                                                                    .costType,
-                                                            // selectedValue: ,
-                                                            onValueChanged:
-                                                                (costType,
-                                                                    selectedValue) {},
+                                                                    .width *
+                                                                .2),
+                                                            keyboardType:
+                                                                TextInputType
+                                                                    .number,
+
+                                                            // textController:
+                                                            //     controller.challanNoCtrlr,
                                                           ),
                                                         ),
                                                       ],
