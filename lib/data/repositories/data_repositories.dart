@@ -5587,5 +5587,20 @@ class DataRepository extends DomainRepository {
       isLoading: isLoading,
     );
   }
+
+  Future<ResponseModel> getScheduleCourseList({
+    required String auth,
+    int? facilityId,
+    dynamic startDate,
+    dynamic endDate,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.getScheduleCourseList(
+        auth: auth,
+        facilityId: facilityId ?? 0,
+        isLoading: isLoading ?? false,
+        startDate: startDate,
+        endDate: endDate,
+      );
 //end
 }

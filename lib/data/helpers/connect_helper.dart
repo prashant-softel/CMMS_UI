@@ -9521,7 +9521,8 @@ class ConnectHelper {
 
     return responseModel;
   }
- // DocumentMaster
+
+  // DocumentMaster
   //Get
   Future<ResponseModel> getDocumentMaster(
       {required bool isLoading, required String auth}) async {
@@ -9612,6 +9613,25 @@ class ConnectHelper {
       Request.get,
       null,
       isLoading,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
+  Future<ResponseModel> getScheduleCourseList({
+    required String auth,
+    int? facilityId,
+    dynamic startDate,
+    dynamic endDate,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Training/GetScheduleCourseList?facility_id=$facilityId&start_date=$startDate&end_date=$endDate',
+      Request.get,
+      null,
+      isLoading ?? true,
       {
         'Authorization': 'Bearer $auth',
       },
