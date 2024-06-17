@@ -1,12 +1,22 @@
 import 'package:cmms/app/calibration_View/calibration_View_controller.dart';
+import 'package:cmms/app/constant/constant.dart';
+import 'package:cmms/app/controllers/file_upload_controller.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
+import 'package:cmms/app/utils/user_access_constants.dart';
+import 'package:cmms/app/widgets/body_custom_app_bar.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
+import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/custom_swich_toggle.dart';
+import 'package:cmms/app/widgets/custom_textField.dart';
+import 'package:cmms/app/widgets/file_upload_widget_web2.dart';
+import 'package:cmms/app/widgets/file_upload_with_dropzone_widget.dart';
 import 'package:cmms/app/widgets/history_table_widget_web.dart';
+import 'package:cmms/app/widgets/table_action_button.dart';
+import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:scrollable_table_view/scrollable_table_view.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../theme/color_values.dart';
 import '../../theme/dimens.dart';
 import '../../theme/styles.dart';
@@ -16,6 +26,8 @@ class CalibrationViewContentWeb extends GetView<CalibrationViewController> {
 
   ///
   var controller = Get.find<CalibrationViewController>();
+  final FileUploadController dropzoneController =
+      Get.put(FileUploadController());
   @override
   Widget build(BuildContext context) {
     return SelectionArea(
@@ -93,6 +105,15 @@ class CalibrationViewContentWeb extends GetView<CalibrationViewController> {
                               ),
                             ),
                             Spacer(),
+                            Text(
+                              "Calibration ID:",
+                              style: Styles.black17,
+                            ),
+                            Text(
+                              "${controller.calibrationDetailModel.value?.calibrationId ?? ""}",
+                              style: Styles.blue17,
+                            ),
+                            Dimens.boxWidth8,
                             Padding(
                               padding: const EdgeInsets.all(10.0),
                               child: CustomElevatedButton(
@@ -212,201 +233,369 @@ class CalibrationViewContentWeb extends GetView<CalibrationViewController> {
                                   )
                                 ],
                               ),
-                              Container(
-                                margin: Dimens.edgeInsets20,
-                                height: 300,
-                                decoration: BoxDecoration(
-                                  border: Border.all(
-                                    color:
-                                        ColorValues.lightGreyColorWithOpacity35,
-                                    width: 1,
-                                  ),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: ColorValues.appBlueBackgroundColor,
-                                      spreadRadius: 2,
-                                      blurRadius: 5,
-                                      offset: Offset(0, 2),
-                                    ),
-                                  ],
-                                ),
-                                child: Column(
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.all(10.0),
+                              controller.calibrationDetailModel.value
+                                          ?.statusId ==
+                                      214
+                                  ? Container(
+                                      height: Get.height * 0.2,
+                                      width: Get.width,
+                                      padding: EdgeInsets.all(10),
                                       child: Row(
                                         children: [
-                                          Text(
-                                            "Calibration Certificates",
-                                            style: Styles.blue700,
+                                          Expanded(
+                                            flex: 2,
+                                            child:
+                                                FileUploadWidgetWithDropzone(),
+                                          ),
+                                          Dimens.boxWidth10,
+                                          Expanded(
+                                            flex: 8,
+                                            child: Padding(
+                                              padding: const EdgeInsets.only(
+                                                  top: 15),
+                                              child:
+                                                  FileUploadDetailsWidgetWeb2(),
+                                            ),
                                           ),
                                         ],
-                                      ),
-                                    ),
-                                    Divider(
-                                      color: ColorValues.greyLightColour,
-                                    ),
-                                    Expanded(
-                                      child: ScrollableTableView(
-                                        columns: [
-                                          "Sr.",
-                                          "View",
-                                          "File Name",
-                                          "File Category",
-                                          "File Size",
-                                          "Status",
-                                        ].map((column) {
-                                          return TableViewColumn(
-                                            label: column,
-                                            minWidth: Get.width * 0.15,
-                                          );
-                                        }).toList(),
-                                        rows: [].map((record) {
-                                          return TableViewRow(
-                                            height: 90,
-                                            cells: record.map((value) {
-                                              return TableViewCell(
-                                                child: Text("no data found"),
-                                              );
-                                            }).toList(),
-                                          );
-                                        }).toList(),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              Container(
-                                margin: Dimens.edgeInsets20,
-                                height: 300,
-                                decoration: BoxDecoration(
-                                  border: Border.all(
-                                    color:
-                                        ColorValues.lightGreyColorWithOpacity35,
-                                    width: 1,
-                                  ),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: ColorValues.appBlueBackgroundColor,
-                                      spreadRadius: 2,
-                                      blurRadius: 5,
-                                      offset: Offset(0, 2),
-                                    ),
-                                  ],
-                                ),
-                                child: Column(
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.all(10.0),
-                                      child: Row(
-                                        children: [
-                                          Text(
-                                            "Equipment Image ",
-                                            style: Styles.blue700,
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                    Divider(
-                                      color: ColorValues.greyLightColour,
-                                    ),
-                                    Expanded(
-                                      child: ScrollableTableView(
-                                        columns: [
-                                          "Sr.",
-                                          "View",
-                                          "File Name",
-                                          "File Category",
-                                          "File Size",
-                                          "Status",
-                                        ].map((column) {
-                                          return TableViewColumn(
-                                            label: column,
-                                            minWidth: Get.width * 0.15,
-                                          );
-                                        }).toList(),
-                                        rows: [
-                                          // [
-                                          //   "1",
-                                          //   "Milk",
-                                          //   "20.00",
-                                          //   "---",
-                                          //   "status"
-                                          // ],
-                                          // [
-                                          //   "2",
-                                          //   "Soap",
-                                          //   "10.00",
-                                          //   "---",
-                                          //   "status"
-                                          // ],
-                                          // ...List.generate(
-                                          //   controller.historyLog?.length ?? 0,
-                                          //   (index) {
-                                          //     var getHistoryListDetails =
-                                          //         controller.historyLog?[index];
-                                          //     return [
-                                          //       '${getHistoryListDetails?.created_at}',
-                                          //       '${getHistoryListDetails?.created_by_name ?? ''}',
-                                          //       '${getHistoryListDetails?.comment ?? ''}',
-                                          //       '--',
-                                          //       '${getHistoryListDetails?.status ?? ''}',
-                                          //     ];
-                                          //   },
-                                          // ),
-                                          // // [
-                                        ].map((record) {
-                                          return TableViewRow(
-                                            height: 90,
-                                            cells: record.map((value) {
-                                              return TableViewCell(
-                                                child: Text(value),
-                                              );
-                                            }).toList(),
-                                          );
-                                        }).toList(),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              controller.historyList != null &&
-                                      controller.historyList!.isNotEmpty
-                                  ? //
-                                  Container(
-                                      margin: Dimens.edgeInsets20,
-                                      constraints: BoxConstraints(
-                                        maxHeight: 500,
-                                        minHeight: 100,
-                                      ),
-                                      child: //
-                                          HistoryTableWidgetWeb(
-                                        historyList: controller.historyList,
                                       ),
                                     )
-                                  //)
+                                  : Dimens.box0,
+                              controller.calibrationId.value > 0 &&
+                                      controller.calibrationDetailModel.value!
+                                              .file_list!.length >
+                                          0
+                                  ? Container(
+                                      // width:
+                                      //     MediaQuery.of(context).size.width /
+                                      //         1.2,
+                                      height: ((controller.file_list!.length) *
+                                              41) +
+                                          117,
+                                      margin: Dimens.edgeInsets20,
+                                      decoration: BoxDecoration(
+                                        border: Border.all(
+                                            color: Colors.grey.withOpacity(.3)),
+                                      ),
+
+                                      child: Column(
+                                        children: [
+                                          Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: Row(
+                                              children: [
+                                                Text(
+                                                  "Uploaded Images ",
+                                                  style: Styles.blue700,
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          Expanded(
+                                            child: DataTable2(
+                                              border: TableBorder.all(
+                                                color: Color.fromARGB(
+                                                    255, 206, 229, 234),
+                                              ),
+                                              dataRowHeight: 40,
+                                              columns: [
+                                                DataColumn(
+                                                  label: Text(
+                                                    "File Description",
+                                                    style: TextStyle(
+                                                      fontSize: 15,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                    ),
+                                                  ),
+                                                ),
+                                                DataColumn(
+                                                  label: Text(
+                                                    "View Image",
+                                                    style: TextStyle(
+                                                      fontSize: 15,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                              rows: List<DataRow>.generate(
+                                                controller.file_list?.length ??
+                                                    0,
+                                                (index) => DataRow(
+                                                  cells: [
+                                                    DataCell(Text(
+                                                      controller
+                                                              .file_list![index]
+                                                              ?.description
+                                                              .toString() ??
+                                                          '',
+                                                    )),
+                                                    DataCell(
+                                                      // Text("View Image"),
+                                                      Wrap(
+                                                        children: [
+                                                          TableActionButton(
+                                                            color: ColorValues
+                                                                .appDarkBlueColor,
+                                                            icon: Icons
+                                                                .visibility,
+                                                            message: 'view',
+                                                            onPress: () async {
+                                                              String baseUrl =
+                                                                  'http://172.20.43.9:83/';
+                                                              String fileName = controller
+                                                                      .file_list![
+                                                                          index]
+                                                                      ?.fileName ??
+                                                                  "";
+                                                              String fullUrl =
+                                                                  baseUrl +
+                                                                      fileName;
+                                                              if (await canLaunch(
+                                                                  fullUrl)) {
+                                                                await launch(
+                                                                    fullUrl);
+                                                              } else {
+                                                                throw 'Could not launch $fullUrl';
+                                                              }
+                                                              // String baseUrl = 'http://172.20.43.9:83/';
+                                                            },
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    )
+                                  : Dimens.box0,
+                              // Container(
+                              //   margin: Dimens.edgeInsets20,
+                              //   height: 300,
+                              //   decoration: BoxDecoration(
+                              //     border: Border.all(
+                              //       color:
+                              //           ColorValues.lightGreyColorWithOpacity35,
+                              //       width: 1,
+                              //     ),
+                              //     boxShadow: [
+                              //       BoxShadow(
+                              //         color: ColorValues.appBlueBackgroundColor,
+                              //         spreadRadius: 2,
+                              //         blurRadius: 5,
+                              //         offset: Offset(0, 2),
+                              //       ),
+                              //     ],
+                              //   ),
+                              //   child: Column(
+                              //     children: [
+                              //       Padding(
+                              //         padding: const EdgeInsets.all(10.0),
+                              //         child: Row(
+                              //           children: [
+                              //             Text(
+                              //               "Calibration Certificates",
+                              //               style: Styles.blue700,
+                              //             ),
+                              //           ],
+                              //         ),
+                              //       ),
+                              //       Divider(
+                              //         color: ColorValues.greyLightColour,
+                              //       ),
+                              //       Expanded(
+                              //         child: ScrollableTableView(
+                              //           columns: [
+                              //             "Sr.",
+                              //             "View",
+                              //             "File Name",
+                              //             "File Category",
+                              //             "File Size",
+                              //             "Status",
+                              //           ].map((column) {
+                              //             return TableViewColumn(
+                              //               label: column,
+                              //               minWidth: Get.width * 0.15,
+                              //             );
+                              //           }).toList(),
+                              //           rows: [].map((record) {
+                              //             return TableViewRow(
+                              //               height: 90,
+                              //               cells: record.map((value) {
+                              //                 return TableViewCell(
+                              //                   child: Text("no data found"),
+                              //                 );
+                              //               }).toList(),
+                              //             );
+                              //           }).toList(),
+                              //         ),
+                              //       ),
+                              //     ],
+                              //   ),
+                              // ),
+
+                              // Container(
+                              //   margin: Dimens.edgeInsets20,
+                              //   height: 300,
+                              //   decoration: BoxDecoration(
+                              //     border: Border.all(
+                              //       color:
+                              //           ColorValues.lightGreyColorWithOpacity35,
+                              //       width: 1,
+                              //     ),
+                              //     boxShadow: [
+                              //       BoxShadow(
+                              //         color: ColorValues.appBlueBackgroundColor,
+                              //         spreadRadius: 2,
+                              //         blurRadius: 5,
+                              //         offset: Offset(0, 2),
+                              //       ),
+                              //     ],
+                              //   ),
+                              //   child: Column(
+                              //     children: [
+                              //       Padding(
+                              //         padding: const EdgeInsets.all(10.0),
+                              //         child: Row(
+                              //           children: [
+                              //             Text(
+                              //               "Equipment Image ",
+                              //               style: Styles.blue700,
+                              //             ),
+                              //           ],
+                              //         ),
+                              //       ),
+                              //       Divider(
+                              //         color: ColorValues.greyLightColour,
+                              //       ),
+                              //       Expanded(
+                              //         child: ScrollableTableView(
+                              //           columns: [
+                              //             "Sr.",
+                              //             "View",
+                              //             "File Name",
+                              //             "File Category",
+                              //             "File Size",
+                              //             "Status",
+                              //           ].map((column) {
+                              //             return TableViewColumn(
+                              //               label: column,
+                              //               minWidth: Get.width * 0.15,
+                              //             );
+                              //           }).toList(),
+                              //           rows: [
+                              //             // [
+                              //             //   "1",
+                              //             //   "Milk",
+                              //             //   "20.00",
+                              //             //   "---",
+                              //             //   "status"
+                              //             // ],
+                              //             // [
+                              //             //   "2",
+                              //             //   "Soap",
+                              //             //   "10.00",
+                              //             //   "---",
+                              //             //   "status"
+                              //             // ],
+                              //             // ...List.generate(
+                              //             //   controller.historyLog?.length ?? 0,
+                              //             //   (index) {
+                              //             //     var getHistoryListDetails =
+                              //             //         controller.historyLog?[index];
+                              //             //     return [
+                              //             //       '${getHistoryListDetails?.created_at}',
+                              //             //       '${getHistoryListDetails?.created_by_name ?? ''}',
+                              //             //       '${getHistoryListDetails?.comment ?? ''}',
+                              //             //       '--',
+                              //             //       '${getHistoryListDetails?.status ?? ''}',
+                              //             //     ];
+                              //             //   },
+                              //             // ),
+                              //             // // [
+                              //           ].map((record) {
+                              //             return TableViewRow(
+                              //               height: 90,
+                              //               cells: record.map((value) {
+                              //                 return TableViewCell(
+                              //                   child: Text(value),
+                              //                 );
+                              //               }).toList(),
+                              //             );
+                              //           }).toList(),
+                              //         ),
+                              //       ),
+                              //     ],
+                              //   ),
+                              // ),
+
+                              (controller.historyList != null &&
+                                      controller.historyList!.isNotEmpty)
+                                  ? Container(
+                                      margin: Dimens.edgeInsets20,
+                                      height:
+                                          ((controller.historyList?.length ??
+                                                      0) *
+                                                  40) +
+                                              120,
+                                      decoration: BoxDecoration(
+                                        border: Border.all(
+                                          color: ColorValues
+                                              .lightGreyColorWithOpacity35,
+                                          width: 1,
+                                        ),
+                                      ),
+                                      child: //
+                                          Column(
+                                        children: [
+                                          Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: Row(
+                                              children: [
+                                                Text(
+                                                  "Calibration History ",
+                                                  style: Styles.blue700,
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          Expanded(
+                                            child: HistoryTableWidgetWeb(
+                                              historyList:
+                                                  controller.historyList,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    )
+                                  //  )
                                   : //
                                   Dimens.box0,
-                              Row(
-                                children: [
-                                  Text(
-                                    "Any Damages:",
-                                    style: Styles.blackBold15,
-                                  ),
-                                  Dimens.boxWidth10,
-                                  CustomSwitchTroggle(
-                                    value: controller.calibrationDetailModel
-                                                .value?.is_damaged ==
-                                            0
-                                        ? false
-                                        : true,
-                                    // onChanged: (value) {
-                                    // //  controller.toggle();
-                                    // }
-                                  ),
-                                ],
-                              ),
-                              Dimens.boxHeight60,
+                              controller.calibrationDetailModel.value
+                                          ?.statusId ==
+                                      214
+                                  ? Row(
+                                      children: [
+                                        Text(
+                                          "Any Damages:",
+                                          style: Styles.blackBold15,
+                                        ),
+                                        Dimens.boxWidth10,
+                                        CustomSwitchTroggle(
+                                            value: controller.isToggleOn.value,
+                                            onChanged: (value) {
+                                              controller.toggle();
+                                            }),
+                                      ],
+                                    )
+                                  : Dimens.box0,
+                              Dimens.boxHeight10,
                               // Row(
                               //   children: [
                               //     Text(
@@ -458,44 +647,259 @@ class CalibrationViewContentWeb extends GetView<CalibrationViewController> {
                               //     ),
                               //   ],
                               // ),
-
-                              Dimens.boxHeight60,
+                              // controller.calibrationDetailModel.value
+                              //             ?.statusId ==
+                              //         214
+                              //     ?
+                              Container(
+                                margin: Dimens.edgeInsets15,
+                                child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    CustomRichText(title: "Comment:"),
+                                    Dimens.boxWidth10,
+                                    LoginCustomTextfield(
+                                      width: (Get.width * .6),
+                                      maxLine: 5,
+                                      textController: controller.commentCtrlr,
+                                    ),
+                                  ],
+                                ),
+                              )
+                              // : Dimens.box0,
+                              //  Dimens.boxHeight30,
+                              ,
                               Container(
                                 margin: EdgeInsets.only(bottom: 40, top: 40),
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Container(
-                                      height: 35,
-                                      //width: (Get.width * .2) - 90,
-                                      child: CustomElevatedButton(
-                                        backgroundColor:
-                                            ColorValues.appDarkBlueColor,
-                                        text: "Print",
-                                        onPressed: () {},
-                                      ),
-                                    ),
-                                    Dimens.boxWidth20,
-                                    Container(
-                                      height: 35,
-                                      // width: (Get.width * .2) - 90,
-                                      child: CustomElevatedButton(
-                                        backgroundColor: ColorValues.redColor,
-                                        text: "Cancel",
-                                        onPressed: () {},
-                                      ),
-                                    ),
-                                    // Dimens.boxWidth20,
                                     // Container(
                                     //   height: 35,
                                     //   //width: (Get.width * .2) - 90,
                                     //   child: CustomElevatedButton(
                                     //     backgroundColor:
-                                    //         ColorValues.appGreenColor,
-                                    //     text: "Submit",
+                                    //         ColorValues.appDarkBlueColor,
+                                    //     text: "Print",
                                     //     onPressed: () {},
                                     //   ),
                                     // ),
+                                    // Dimens.boxWidth20,
+                                    // Container(
+                                    //   height: 35,
+                                    //   // width: (Get.width * .2) - 90,
+                                    //   child: CustomElevatedButton(
+                                    //     backgroundColor: ColorValues.redColor,
+                                    //     text: "Cancel",
+                                    //     onPressed: () {
+                                    //       Get.back();
+                                    //     },
+                                    //   ),
+                                    // ),
+                                    controller.calibrationDetailModel.value
+                                                    ?.statusId ==
+                                                213 &&
+                                            varUserAccessModel
+                                                    .value.access_list!
+                                                    .where((e) =>
+                                                        e.feature_id ==
+                                                            UserAccessConstants
+                                                                .kCalibrationFeatureId &&
+                                                        e.add ==
+                                                            UserAccessConstants
+                                                                .kHaveAddAccess)
+                                                    .length >
+                                                0
+                                        ? Container(
+                                            height: 35,
+                                            //width: (Get.width * .2) - 90,
+                                            child: CustomElevatedButton(
+                                              backgroundColor:
+                                                  ColorValues.startColor,
+                                              text: "Start Calibration",
+                                              onPressed: () {
+                                                controller
+                                                    .isStartCalibrationDialog(
+                                                  calibrationName:
+                                                      '${controller.calibrationDetailModel.value?.assetName}',
+                                                  calibrationId:
+                                                      '${controller.calibrationDetailModel.value?.calibrationId}',
+                                                );
+                                              },
+                                            ),
+                                          )
+                                        : Dimens.box0,
+                                    controller.calibrationDetailModel.value
+                                                    ?.statusId ==
+                                                211 &&
+                                            varUserAccessModel
+                                                    .value.access_list!
+                                                    .where((e) =>
+                                                        e.feature_id ==
+                                                            UserAccessConstants
+                                                                .kCalibrationFeatureId &&
+                                                        e.add ==
+                                                            UserAccessConstants
+                                                                .kHaveApproveAccess)
+                                                    .length >
+                                                0
+                                        ? Container(
+                                            height: 35,
+                                            //width: (Get.width * .2) - 90,
+                                            child: CustomElevatedButton(
+                                              backgroundColor:
+                                                  ColorValues.approveColor,
+                                              text: "Approve",
+                                              onPressed: () {
+                                                controller
+                                                    .approveRequestCalibration();
+                                              },
+                                            ),
+                                          )
+                                        : Dimens.box0,
+                                    Dimens.boxWidth20,
+                                    controller.calibrationDetailModel.value
+                                                    ?.statusId ==
+                                                211 &&
+                                            varUserAccessModel
+                                                    .value.access_list!
+                                                    .where((e) =>
+                                                        e.feature_id ==
+                                                            UserAccessConstants
+                                                                .kCalibrationFeatureId &&
+                                                        e.add ==
+                                                            UserAccessConstants
+                                                                .kHaveApproveAccess)
+                                                    .length >
+                                                0
+                                        ? Container(
+                                            height: 35,
+                                            //width: (Get.width * .2) - 90,
+                                            child: CustomElevatedButton(
+                                              backgroundColor:
+                                                  ColorValues.rejectColor,
+                                              text: "Reject",
+                                              onPressed: () {
+                                                controller
+                                                    .rejectRequestCalibration();
+                                              },
+                                            ),
+                                          )
+                                        : Dimens.box0,
+                                    Dimens.boxWidth20,
+                                    controller.calibrationDetailModel.value
+                                                    ?.statusId ==
+                                                214 &&
+                                            varUserAccessModel
+                                                    .value.access_list!
+                                                    .where((e) =>
+                                                        e.feature_id ==
+                                                            UserAccessConstants
+                                                                .kCalibrationFeatureId &&
+                                                        e.add ==
+                                                            UserAccessConstants
+                                                                .kHaveAddAccess)
+                                                    .length >
+                                                0
+                                        ? Container(
+                                            height: 35,
+                                            //width: (Get.width * .2) - 90,
+                                            child: CustomElevatedButton(
+                                              backgroundColor:
+                                                  ColorValues.completeColor,
+                                              text: "Complete",
+                                              onPressed: () {
+                                                controller.completeCalibration(
+                                                    fileIds: dropzoneController
+                                                        .fileIds);
+                                              },
+                                            ),
+                                          )
+                                        : Dimens.box0,
+                                    controller.calibrationDetailModel.value
+                                                    ?.statusId ==
+                                                216 &&
+                                            varUserAccessModel
+                                                    .value.access_list!
+                                                    .where((e) =>
+                                                        e.feature_id ==
+                                                            UserAccessConstants
+                                                                .kCalibrationFeatureId &&
+                                                        e.add ==
+                                                            UserAccessConstants
+                                                                .kHaveApproveAccess)
+                                                    .length >
+                                                0
+                                        ? Container(
+                                            height: 35,
+                                            //width: (Get.width * .2) - 90,
+                                            child: CustomElevatedButton(
+                                              backgroundColor:
+                                                  ColorValues.approveColor,
+                                              text: "Approve",
+                                              onPressed: () {
+                                                controller
+                                                    .approveCloseCalibration();
+                                              },
+                                            ),
+                                          )
+                                        : Dimens.box0,
+                                    Dimens.boxWidth20,
+                                    controller.calibrationDetailModel.value
+                                                    ?.statusId ==
+                                                216 &&
+                                            varUserAccessModel
+                                                    .value.access_list!
+                                                    .where((e) =>
+                                                        e.feature_id ==
+                                                            UserAccessConstants
+                                                                .kCalibrationFeatureId &&
+                                                        e.add ==
+                                                            UserAccessConstants
+                                                                .kHaveApproveAccess)
+                                                    .length >
+                                                0
+                                        ? Container(
+                                            height: 35,
+                                            //width: (Get.width * .2) - 90,
+                                            child: CustomElevatedButton(
+                                              backgroundColor:
+                                                  ColorValues.rejectColor,
+                                              text: "Reject",
+                                              onPressed: () {
+                                                controller
+                                                    .rejectCloseCalibration();
+                                              },
+                                            ),
+                                          )
+                                        : Dimens.box0,
+                                    controller.calibrationDetailModel.value
+                                                    ?.statusId ==
+                                                215 &&
+                                            varUserAccessModel
+                                                    .value.access_list!
+                                                    .where((e) =>
+                                                        e.feature_id ==
+                                                            UserAccessConstants
+                                                                .kCalibrationFeatureId &&
+                                                        e.add ==
+                                                            UserAccessConstants
+                                                                .kHaveApproveAccess)
+                                                    .length >
+                                                0
+                                        ? Container(
+                                            height: 35,
+                                            //width: (Get.width * .2) - 90,
+                                            child: CustomElevatedButton(
+                                              backgroundColor:
+                                                  ColorValues.closeColor,
+                                              text: "Close",
+                                              onPressed: () {
+                                                controller.closeCalibration();
+                                              },
+                                            ),
+                                          )
+                                        : Dimens.box0,
                                   ],
                                 ),
                               )

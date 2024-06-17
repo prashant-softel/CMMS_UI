@@ -2639,6 +2639,18 @@ class DataRepository extends DomainRepository {
     return response;
   }
 
+  Future<ResponseModel> skipCalibration({
+    auth,
+    bool? isLoading,
+    skipCalibrationtoJsonString,
+  }) async {
+    var response = await connectHelper.skipCalibration(
+        auth: auth,
+        isLoading: isLoading,
+        skipCalibrationtoJsonString: skipCalibrationtoJsonString);
+    return response;
+  }
+
   Future<ResponseModel> approveRequestCalibration({
     auth,
     bool? isLoading,
@@ -5448,7 +5460,8 @@ class DataRepository extends DomainRepository {
         StatutoryCompliance_id: StatutoryCompliance_id);
     return response;
   }
-   // Compliance Status
+
+  // Compliance Status
   //get
   Future<ResponseModel> getComplianceStatus({
     required bool isLoading,

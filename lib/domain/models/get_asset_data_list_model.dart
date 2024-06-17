@@ -16,21 +16,22 @@ class GetAssetDataModel {
   dynamic serial_number;
   dynamic returned_qty;
   String? return_remarks;
-
-  GetAssetDataModel(
-      {this.id,
-      this.asset_type,
-      this.name,
-      this.asset_code,
-      this.cat_name,
-      this.serial_number,
-      this.returned_qty,
-      this.return_remarks
-      // this.status,
-      });
+  int? mrs_item_id;
+  GetAssetDataModel({
+    this.id,
+    this.asset_type,
+    this.name,
+    this.asset_code,
+    this.cat_name,
+    this.serial_number,
+    this.returned_qty,
+    this.return_remarks,
+    this.mrs_item_id,
+  });
 
   GetAssetDataModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
+    mrs_item_id = json['mrs_item_id'];
     serial_number = json['serial_number'];
     asset_type = json['asset_type'];
     name = json['asset_name'];
@@ -42,6 +43,7 @@ class GetAssetDataModel {
 
   Map<String, dynamic> toJson() => {
         "id": id,
+        "mrs_item_id": mrs_item_id,
         "serial_number": serial_number,
         "asset_type": asset_type,
         "asset_name": name,

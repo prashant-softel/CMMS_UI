@@ -7723,6 +7723,31 @@ class Repository {
     }
   }
 
+  Future<bool> skipCalibration(
+      {bool? isLoading, skipCalibrationtoJsonString}) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      log(auth);
+      final res = await _dataRepository.skipCalibration(
+          auth: auth,
+          isLoading: isLoading,
+          skipCalibrationtoJsonString:
+              json.encode(skipCalibrationtoJsonString));
+      print({"res.data", res.data});
+      if (!res.hasError) {
+        Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
+
+        return true;
+      } else {
+        Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
+        return false;
+      }
+    } catch (error) {
+      log(error.toString());
+      return false;
+    }
+  }
+
   Future<bool> approveJobCards({bool? isLoading, approveJsonString}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
@@ -14456,6 +14481,7 @@ class Repository {
       print(error.toString());
     }
   }
+
   //Compliance Status
   //get
   Future<List<ComplianceStatusModel>> getComplianceStatus({
