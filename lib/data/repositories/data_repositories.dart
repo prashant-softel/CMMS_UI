@@ -715,6 +715,22 @@ class DataRepository extends DomainRepository {
     );
   }
 
+  Future<ResponseModel> getObservationDataList({
+    int? facility_id,
+    String? start_date,
+    String? end_date,
+    required bool isLoading,
+    required String auth,
+  }) async {
+    return await connectHelper.getObservationDataList(
+      isLoading: isLoading,
+      auth: auth,
+      facility_id: facility_id,
+      start_date: start_date,
+      end_date: end_date,
+    );
+  }
+
   Future<ResponseModel> getWaterDataList({
     int? facility_id,
     String? start_date,
@@ -5524,7 +5540,8 @@ class DataRepository extends DomainRepository {
         ComplianceStatus_id: ComplianceStatus_id);
     return response;
   }
-   // DocumentMaster
+
+  // DocumentMaster
   //get
   Future<ResponseModel> getDocumentMaster({
     required bool isLoading,
@@ -5570,9 +5587,7 @@ class DataRepository extends DomainRepository {
     DocumentMaster_id,
   }) async {
     var response = await connectHelper.deleteDocumentMaster(
-        auth: auth,
-        isLoading: isLoading,
-        DocumentMaster_id: DocumentMaster_id);
+        auth: auth, isLoading: isLoading, DocumentMaster_id: DocumentMaster_id);
     return response;
   }
 

@@ -260,27 +260,26 @@ class _ComplianceWebState extends State<ComplianceWeb> {
                                                                     textController:
                                                                         controller
                                                                             .reNewOnDateTc,
-                                                                    // errorController:
-                                                                    //     controller
-                                                                    //             .isExpiresonInvalid
-                                                                    //             .value
-                                                                    //         ? "Required field"
-                                                                    //         : null,
-                                                                    // onChanged:
-                                                                    //     (value) {
-                                                                    //   if (value
-                                                                    //           .trim()
-                                                                    //           .length >
-                                                                    //       0) {
-                                                                    //     controller
-                                                                    //         .isExpiresonInvalid
-                                                                    //         .value = false;
-                                                                    //   } else {
-                                                                    //     controller
-                                                                    //         .isExpiresonInvalid
-                                                                    //         .value = true;
-                                                                    //   }
-                                                                    // },
+                                                                    errorController: controller
+                                                                            .isRenewDateInvalid
+                                                                            .value
+                                                                        ? "Required field"
+                                                                        : null,
+                                                                    onChanged:
+                                                                        (value) {
+                                                                      if (value
+                                                                              .trim()
+                                                                              .length >
+                                                                          0) {
+                                                                        controller
+                                                                            .isRenewDateInvalid
+                                                                            .value = false;
+                                                                      } else {
+                                                                        controller
+                                                                            .isRenewDateInvalid
+                                                                            .value = true;
+                                                                      }
+                                                                    },
                                                                   ),
                                                                 ],
                                                               )
@@ -539,7 +538,7 @@ class _ComplianceWebState extends State<ComplianceWeb> {
                                                 .format(p0.value);
                                         controller.openExpireOnFDatePicker =
                                             !controller.openExpireOnFDatePicker;
-                                        controller.isExpiresonInvalid.value =
+                                        controller.isRenewDateInvalid.value =
                                             false;
                                         controller.update(['stock_Mangement']);
                                       },
@@ -635,7 +634,7 @@ class _ComplianceWebState extends State<ComplianceWeb> {
                                       backgroundColor: ColorValues.submitColor,
                                       text: 'Re-New',
                                       onPressed: () {
-                                        // controller.isFormInvalid.value = false;
+                                        controller.isFormInvalid.value = false;
                                         controller.reNewCompliance(1);
                                       },
                                     ),

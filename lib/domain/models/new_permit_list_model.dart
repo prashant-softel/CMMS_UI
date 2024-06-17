@@ -28,27 +28,32 @@ class NewPermitModel {
   int? isExpired;
   int? tbT_Done_Check;
   String? endDate;
+  int? jc_id;
+  int? jc_status;
 
-  NewPermitModel(
-      {this.permitId,
-      this.ptwStatus,
-      this.permitSiteNo,
-      this.permitType,
-      this.permitTypeName,
-      this.equipmentCategoryId,
-      this.equipment_categories,
-      this.workingAreaId,
-      this.workingAreaName,
-      this.description,
-      this.requestByName,
-      this.requestById,
-      this.requestDatetime,
-      this.approvedByName,
-      this.approvedDatetime,
-      this.current_status_short,
-      this.isExpired,
-      this.tbT_Done_Check,
-      this.endDate});
+  NewPermitModel({
+    this.permitId,
+    this.ptwStatus,
+    this.permitSiteNo,
+    this.permitType,
+    this.permitTypeName,
+    this.equipmentCategoryId,
+    this.equipment_categories,
+    this.workingAreaId,
+    this.workingAreaName,
+    this.description,
+    this.requestByName,
+    this.requestById,
+    this.requestDatetime,
+    this.approvedByName,
+    this.approvedDatetime,
+    this.current_status_short,
+    this.isExpired,
+    this.tbT_Done_Check,
+    this.endDate,
+    this.jc_id,
+    this.jc_status,
+  });
 
   factory NewPermitModel.fromJson(Map<String, dynamic> json) => NewPermitModel(
         permitId: json['permitId'],
@@ -74,6 +79,8 @@ class NewPermitModel {
         isExpired: json['isExpired'],
         tbT_Done_Check: json['tbT_Done_Check'],
         endDate: json['endDate'],
+        jc_id: json['jc_id'],
+        jc_status: json['jc_status'],
       );
 
   Map<String, dynamic> toJson() => {
@@ -96,7 +103,9 @@ class NewPermitModel {
         'current_status_short': current_status_short,
         'isExpired': isExpired,
         "tbT_Done_Check": tbT_Done_Check,
-        "endDate": endDate
+        "endDate": endDate,
+        'jc_id': jc_id,
+        'jc_status': jc_status,
         // return data;
       };
 }

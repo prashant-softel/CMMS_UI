@@ -22,7 +22,6 @@ import 'package:intl/intl.dart';
 import 'package:rxdart/subjects.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 import '../../domain/models/facility_model.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 
 import 'package:cmms/domain/models/incident_risk_type_model.dart';
 
@@ -120,7 +119,7 @@ class AddIncidentReportController extends GetxController {
   Rx<String> selectedIBusinessList = ''.obs;
   Rx<bool> isBodyinjuredListSelected = true.obs;
   Rx<String> selectedIBodyinjuredList = ''.obs;
-   RxBool isDateInvalid = false.obs;
+  RxBool isDateInvalid = false.obs;
 
   int selectedBusinessListId = 0;
   int selectedBodyinjuredListId = 0;
@@ -207,7 +206,7 @@ class AddIncidentReportController extends GetxController {
       IncidentReportDetailsModel().obs;
   RxList<IncidentReportDetailsModel?>? incidentReportDetailsList =
       <IncidentReportDetailsModel?>[].obs;
-var isToggleOn = false.obs;
+  var isToggleOn = false.obs;
 //Incident Report List
   var incidentReportList = <IncidentReportListModel>[];
 
@@ -240,8 +239,8 @@ var isToggleOn = false.obs;
     rowsPerPage: 10,
   );
   //switch toggle
-   final isSuccess = false.obs;
-    void toggle() {
+  final isSuccess = false.obs;
+  void toggle() {
     isToggleOn.value = !isToggleOn.value;
   }
 
@@ -328,8 +327,8 @@ var isToggleOn = false.obs;
   RxList<List<Map<String, String>>> rowInjuredPersonItem =
       <List<Map<String, String>>>[].obs;
   // Details of other injured person
-  RxList<List<Map<String,String>>>rowOtherInjuredPersonItem=
-  <List<Map<String, String>>>[].obs;
+  RxList<List<Map<String, String>>> rowOtherInjuredPersonItem =
+      <List<Map<String, String>>>[].obs;
 
   //why why analysis
   RxList<List<Map<String, String>>> rowWhyWhyAnalysisItem =
@@ -592,46 +591,46 @@ var isToggleOn = false.obs;
       });
     } catch (e) {}
 
-    typeOfJbFocusNode.addListener(() {
-      if (!typeOfJbFocusNode.hasFocus) {
-        typeOfJbScrollController.jumpTo(0.0);
-      }
-    });
-    personInvolvedFocusNode.addListener(() {
-      if (!personInvolvedFocusNode.hasFocus) {
-        personInvolvedScrollController.jumpTo(0.0);
-      }
-    });
-    personAuthorizedInvolvedFocusNode.addListener(() {
-      if (!personAuthorizedInvolvedFocusNode.hasFocus) {
-        personAuthorizedInvolvedScrollController.jumpTo(0.0);
-      }
-    });
-    instructionsFocusNode.addListener(() {
-      if (!instructionsFocusNode.hasFocus) {
-        instructionsScrollController.jumpTo(0.0);
-      }
-    });
-    safetyEquipmentsFocusNode.addListener(() {
-      if (!safetyEquipmentsFocusNode.hasFocus) {
-        safetyEquipmentsScrollController.jumpTo(0.0);
-      }
-    });
-    correctSafeFocusNode.addListener(() {
-      if (!correctSafeFocusNode.hasFocus) {
-        correctSafeScrollController.jumpTo(0.0);
-      }
-    });
-    unsafeConditionsFocusNode.addListener(() {
-      if (!unsafeConditionsFocusNode.hasFocus) {
-        unsafeConditionsScrollController.jumpTo(0.0);
-      }
-    });
-    unsafeActCauseFocusNode.addListener(() {
-      if (!unsafeActCauseFocusNode.hasFocus) {
-        unsafeActCauseScrollController.jumpTo(0.0);
-      }
-    });
+    // typeOfJbFocusNode.addListener(() {
+    //   if (!typeOfJbFocusNode.hasFocus) {
+    //     typeOfJbScrollController.jumpTo(0.0);
+    //   }
+    // });
+    // personInvolvedFocusNode.addListener(() {
+    //   if (!personInvolvedFocusNode.hasFocus) {
+    //     personInvolvedScrollController.jumpTo(0.0);
+    //   }
+    // });
+    // personAuthorizedInvolvedFocusNode.addListener(() {
+    //   if (!personAuthorizedInvolvedFocusNode.hasFocus) {
+    //     personAuthorizedInvolvedScrollController.jumpTo(0.0);
+    //   }
+    // });
+    // instructionsFocusNode.addListener(() {
+    //   if (!instructionsFocusNode.hasFocus) {
+    //     instructionsScrollController.jumpTo(0.0);
+    //   }
+    // });
+    // safetyEquipmentsFocusNode.addListener(() {
+    //   if (!safetyEquipmentsFocusNode.hasFocus) {
+    //     safetyEquipmentsScrollController.jumpTo(0.0);
+    //   }
+    // });
+    // correctSafeFocusNode.addListener(() {
+    //   if (!correctSafeFocusNode.hasFocus) {
+    //     correctSafeScrollController.jumpTo(0.0);
+    //   }
+    // });
+    // unsafeConditionsFocusNode.addListener(() {
+    //   if (!unsafeConditionsFocusNode.hasFocus) {
+    //     unsafeConditionsScrollController.jumpTo(0.0);
+    //   }
+    // });
+    // unsafeActCauseFocusNode.addListener(() {
+    //   if (!unsafeActCauseFocusNode.hasFocus) {
+    //     unsafeActCauseScrollController.jumpTo(0.0);
+    //   }
+    // });
     super.onInit();
   }
 
@@ -640,7 +639,6 @@ var isToggleOn = false.obs;
       final _irId = await incidentReportPresenter.getValue();
       if (_irId == null || _irId == '' || _irId == "null") {
         var dataFromPreviousScreen = Get.arguments;
-
         irId.value = dataFromPreviousScreen['irId'];
         incidentReportPresenter.saveValue(irId: irId.value.toString());
       } else {
@@ -829,7 +827,7 @@ var isToggleOn = false.obs;
           '${incidentReportDetailsModel.value?.generation_loss ?? 0}';
       selectedSeverity.value =
           '${incidentReportDetailsModel.value?.severity ?? ''}';
-      selectedRiskTypeId = incidentReportDetailsModel.value?.risk_type ?? 0;
+      incidenttypeId = incidentReportDetailsModel.value?.risk_type ?? 0;
       selectedRiskTypeList.value =
           incidentReportDetailsModel.value?.risk_type_name ?? '';
       detailInvestigationTeamValue.value =
@@ -951,7 +949,7 @@ var isToggleOn = false.obs;
           },
           {
             "key": "Gender ",
-            "value": '${element?.gender}',
+            "value": '${element?.sex}',
           },
           {'key': "Trade/Designation ", "value": '${element?.designation}'},
           {'key': "Address ", "value": '${element?.address}'},
@@ -975,65 +973,70 @@ var isToggleOn = false.obs;
             'key': "Exact Location ",
             "value": '${element?.location_of_incident}'
           },
+          {
+            'key': "injured_item_id",
+            "value": "${element?.injured_item_id}",
+          },
           {'key': "Action ", "value": ''},
         ]);
-        dropdownVictimNameMapperData[element!.name ?? ""] = victimNameList
-            .firstWhere((e) => e.name == element.name, orElse: null);
+        dropdownVictimNameMapperData[element!.name ?? ""] =
+            victimNameList.firstWhereOrNull(
+          (e) => e.name == element.name,
+        );
       });
     }
+
     ///Details of other Injured person
 
-     rowOtherInjuredPersonItem.value = [];
-_incidentReportDetails?.Otherinjured_person?.forEach((element) {
-  rowOtherInjuredPersonItem.value.add([
-    {
-      "key": "Name of Other Injured Person ",
-      "value": '${element?.name}',
-    },
-    {
-      "key": "Gender ",
-      "value": '${element?.gender}',
-    },
-    {
-      "key": "Trade/Designation ",
-      "value": '${element?.designation}',
-    },
-    {
-      "key": "Address ",
-      "value": '${element?.address}',
-    },
-    {
-      "key": "Name of Contractor ",
-      "value": '${element?.name_contractor}',
-    },
-    {
-      "key": "Body part injured ",
-      "value": '${element?.body_part_and_nature_of_injury}',
-    },
-    {
-      'key': "Work experience ",
-      "value": '${element?.work_experience_years}',
-    },
-    {
-      "key": "Plant & Equipment ",
-      "value": '${element?.plant_equipment_involved}',
-    },
-    {
-      'key': "Exact Location ",
-      "value": '${element?.location_of_incident}',
-    },
-    {
-      'key': "Action ",
-      "value": '',
-    },
-  ]);
+    rowOtherInjuredPersonItem.value = [];
+    _incidentReportDetails?.Otherinjured_person?.forEach((element) {
+      rowOtherInjuredPersonItem.value.add([
+        {
+          "key": "Name of Other Injured Person ",
+          "value": '${element?.name}',
+        },
+        {
+          "key": "Gender ",
+          "value": '${element?.gender}',
+        },
+        {
+          "key": "Trade/Designation ",
+          "value": '${element?.designation}',
+        },
+        {
+          "key": "Address ",
+          "value": '${element?.address}',
+        },
+        {
+          "key": "Name of Contractor ",
+          "value": '${element?.name_contractor}',
+        },
+        {
+          "key": "Body part injured ",
+          "value": '${element?.body_part_and_nature_of_injury}',
+        },
+        {
+          'key': "Work experience ",
+          "value": '${element?.work_experience_years}',
+        },
+        {
+          "key": "Plant & Equipment ",
+          "value": '${element?.plant_equipment_involved}',
+        },
+        {
+          'key': "Exact Location ",
+          "value": '${element?.location_of_incident}',
+        },
+        {
+          'key': "Action ",
+          "value": '',
+        },
+      ]);
 
-  dropdownVictimNameMapperData[element!.name ?? ""] = victimNameList
-      .firstWhere((e) => e.name == element.name, orElse:null);
-});
-
+      // dropdownVictimNameMapperData[element!.name ?? ""] = victimNameList
+      //     .firstWhere((e) => e.name == element.name, orElse: null);
+    });
   }
-  
 
   void victimNameSelected(_selectedVictimNameIds) {
     selectedVictimNameIdList.value = <int>[];
@@ -1285,12 +1288,16 @@ _incidentReportDetails?.Otherinjured_person?.forEach((element) {
         "key": "Body part injured ",
         "value": 'Please Select',
       },
-      {'key': "work experience ", "value": ''},
+      {'key': "work experience ", "value": ""},
       {
         "key": "Plant & Equipment ",
         "value": 'Please Select',
       },
       {'key': "Exact Location ", "value": ''},
+      {
+        'key': "injured_item_id",
+        "value": "",
+      },
       {'key': "Action ", "value": ''},
     ]);
   }
@@ -1563,7 +1570,7 @@ _incidentReportDetails?.Otherinjured_person?.forEach((element) {
 
     int typeofincidentListIndex =
         incidentrisktypeList.indexWhere((x) => x.name == value);
-    incidenttypeId = incidentrisktypeList[typeofincidentListIndex].id?? 0;
+    incidenttypeId = incidentrisktypeList[typeofincidentListIndex].id ?? 0;
 
     if (incidenttypeId > 0) {
       isRiskTypeListSelected.value = true;
@@ -1571,14 +1578,12 @@ _incidentReportDetails?.Otherinjured_person?.forEach((element) {
     selectedRiskTypeList.value = value;
     print('Type of incident Id: $incidenttypeId');
   }
-  
+
   void checkForm() {
     if (selectedBlock.value == '') {
       isBlockSelected.value = false;
     }
-    if (startDateTimeCtrlr.text == '') {
-      
-    }
+    if (startDateTimeCtrlr.text == '') {}
     if (selectedRiskTypeList.value == '') {
       isRiskTypeListSelected.value = false;
     }
@@ -1708,17 +1713,9 @@ _incidentReportDetails?.Otherinjured_person?.forEach((element) {
           injured_item_id: 0,
           incidents_id: 0,
           name: dropdownVictimNameMapperData[element[0]["value"]]?.name,
-          other_victim:
-              selectedOption.value == "Other" ? element[1]["value"] ?? '0' : "",
           person_type: 1,
           age: 30,
-          sex: dropdownVictimNameMapperData[element[1]["value"]]?.gender ==
-                  "Male"
-              ? 1
-              : dropdownVictimNameMapperData[element[1]["value"]]?.gender ==
-                      "Female"
-                  ? 2
-                  : 3,
+          sex: element[1]["value"] ?? '0',
           designation: element[2]["value"] ?? '0',
           address: element[3]["value"] ?? '0',
           name_contractor:
@@ -1733,15 +1730,14 @@ _incidentReportDetails?.Otherinjured_person?.forEach((element) {
 
         detailsOfInjuredPersonItems.add(item);
       });
-  ///Details of other Injured Person
+
+      ///Details of other Injured Person
       List<DetailsOfOtherInjuredPerson> detailsOfOtherInjuredPersonItems = [];
       rowOtherInjuredPersonItem.forEach((element) {
         DetailsOfOtherInjuredPerson item = DetailsOfOtherInjuredPerson(
           Otherinjured_item_id: 0,
           incidents_id: 0,
           name: element[0]["value"] ?? '0',
-          other_victim:
-              selectedOption.value == "Other" ? element[1]["value"] ?? '0' : "",
           person_type: 1,
           age: 30,
           sex: element[1]["value"] ?? '0',
@@ -1759,6 +1755,7 @@ _incidentReportDetails?.Otherinjured_person?.forEach((element) {
 
         detailsOfOtherInjuredPersonItems.add(item);
       });
+
       ///Proposed Action Plan
       List<ProposedActionPlan> proposedActionItems = [];
       rowItem.forEach((element) {
@@ -1805,7 +1802,7 @@ _incidentReportDetails?.Otherinjured_person?.forEach((element) {
               action_taken_datetime: actionTakenDateTimeCtrlrBuffer,
               inverstigated_by: selectedIncidentInvestigationDoneById,
               // verified_by: selectedIncidentInvestigationVerificationDoneById,
-              risk_type: selectedRiskTypeId,
+              risk_type: incidenttypeId,
               esi_applicability: esiApplicabilityValue.value,
               legal_applicability: legalApplicabilityValue.value,
               rca_required: rCAUploadRequiredValue.value,
@@ -1825,6 +1822,7 @@ _incidentReportDetails?.Otherinjured_person?.forEach((element) {
               uploadfileIds: fileIds,
               //new data adding
               type_of_job: _jobType,
+              is_other_injured: isToggleOn.value == true ? 1 : 0,
               is_person_involved: _is_person_involved,
               is_person_authorized: _personAuthorized,
               instructions_given: _instruction,
@@ -1839,7 +1837,7 @@ _incidentReportDetails?.Otherinjured_person?.forEach((element) {
               immediate_correction: immediateCorrectionItems,
               proposed_action_plan: proposedActionItems,
               injured_person: detailsOfInjuredPersonItems,
-              Otherinjured_person:detailsOfOtherInjuredPersonItems,
+              Otherinjured_person: detailsOfOtherInjuredPersonItems,
               investigation_team: investigation_team_list);
 
       var incidentReportJsonString = createIncidentReportModel.toJson();
@@ -1974,15 +1972,12 @@ _incidentReportDetails?.Otherinjured_person?.forEach((element) {
       List<DetailsOfInjuredPerson> detailsOfInjuredPersonItems = [];
       rowInjuredPersonItem.forEach((element) {
         DetailsOfInjuredPerson item = DetailsOfInjuredPerson(
-          injured_item_id:
-              dropdownVictimNameMapperData[element[0]["value"]]?.id,
+          injured_item_id: int.tryParse('${element[9]["value"] ?? '0'}'),
           incidents_id: irId.value,
           name: element[0]["value"],
-          other_victim: element[1]["value"] ?? '0',
           person_type: 1,
           age: 30,
-          sex: int.tryParse(
-              '${element[1]["value"] == "Male" ? 1 : element[1]["value"] == "Female" ? 2 : element[1]["value"] == "TransGender" ? 3 : 0}'),
+          sex: element[1]["value"],
           designation: element[2]["value"] ?? '0',
           address: element[3]["value"] ?? '0',
           name_contractor: element[4]["value"],
@@ -1995,7 +1990,7 @@ _incidentReportDetails?.Otherinjured_person?.forEach((element) {
         detailsOfInjuredPersonItems.add(item);
       });
 
-        ///Details of Injured other Person for update
+      ///Details of Injured other Person for update
       List<DetailsOfOtherInjuredPerson> detailsOfOtherInjuredPersonItems = [];
       rowOtherInjuredPersonItem.forEach((element) {
         DetailsOfOtherInjuredPerson item = DetailsOfOtherInjuredPerson(
@@ -2003,7 +1998,6 @@ _incidentReportDetails?.Otherinjured_person?.forEach((element) {
               dropdownVictimNameMapperData[element[0]["value"]]?.id,
           incidents_id: irId.value,
           name: element[0]["value"],
-          other_victim: element[1]["value"] ?? '0',
           person_type: 1,
           age: 30,
           sex: element[1]["value"] ?? '0',
@@ -2031,7 +2025,7 @@ _incidentReportDetails?.Otherinjured_person?.forEach((element) {
               action_taken_by: selectedAssetRestorationActionTakenById,
               inverstigated_by: selectedIncidentInvestigationDoneById,
               // verified_by: selectedIncidentInvestigationVerificationDoneById,
-              risk_type: selectedRiskTypeId,
+              risk_type: incidenttypeId,
               legal_applicability:
                   incidentReportDetailsModel.value?.legal_applicability_name ==
                           "YES"
@@ -2078,7 +2072,7 @@ _incidentReportDetails?.Otherinjured_person?.forEach((element) {
               immediate_correction: immediateCorrectionItems,
               proposed_action_plan: [],
               injured_person: detailsOfInjuredPersonItems,
-              Otherinjured_person:detailsOfOtherInjuredPersonItems,
+              Otherinjured_person: detailsOfOtherInjuredPersonItems,
               investigation_team: investigation_team_list);
 
       var updateIncidentReportJsonString = updateIncidentReportModel.toJson();
@@ -2213,24 +2207,22 @@ _incidentReportDetails?.Otherinjured_person?.forEach((element) {
               dropdownVictimNameMapperData[element[0]["value"]]?.id,
           incidents_id: irId.value,
           name: element[0]["value"],
-          other_victim: element[1]["value"] ?? '0',
           person_type: 1,
           age: 30,
-          sex: int.tryParse(
-              '${element[2]["value"] == "Male" ? 1 : element[2]["value"] == "Female" ? 2 : element[2]["value"] == "TransGender" ? 3 : 0}'),
-          designation: element[3]["value"] ?? '0',
-          address: element[4]["value"] ?? '0',
-          name_contractor: element[5]["value"],
-          body_part_and_nature_of_injury: element[6]["value"],
-          work_experience_years: int.tryParse('${element[7]["value"] ?? '0'}'),
-          plant_equipment_involved: element[8]["value"],
-          location_of_incident: element[9]["value"] ?? '0',
+          sex: element[1]["value"],
+          designation: element[2]["value"] ?? '0',
+          address: element[3]["value"] ?? '0',
+          name_contractor: element[4]["value"],
+          body_part_and_nature_of_injury: element[5]["value"],
+          work_experience_years: int.tryParse('${element[6]["value"] ?? '0'}'),
+          plant_equipment_involved: element[7]["value"],
+          location_of_incident: element[8]["value"] ?? '0',
         );
 
         detailsOfInjuredPersonItems.add(item);
       });
 
-       ///Details of Other Injured Person for update
+      ///Details of Other Injured Person for update
       List<DetailsOfOtherInjuredPerson> detailsOfOtherInjuredPersonItems = [];
       rowOtherInjuredPersonItem.forEach((element) {
         DetailsOfOtherInjuredPerson item = DetailsOfOtherInjuredPerson(
@@ -2238,7 +2230,6 @@ _incidentReportDetails?.Otherinjured_person?.forEach((element) {
               dropdownVictimNameMapperData[element[0]["value"]]?.id,
           incidents_id: irId.value,
           name: element[0]["value"],
-          other_victim: element[1]["value"] ?? '0',
           person_type: 1,
           age: 30,
           sex: element[1]["value"] ?? '0',
@@ -2265,7 +2256,7 @@ _incidentReportDetails?.Otherinjured_person?.forEach((element) {
               action_taken_by: selectedAssetRestorationActionTakenById,
               inverstigated_by: selectedIncidentInvestigationDoneById,
               // verified_by: selectedIncidentInvestigationVerificationDoneById,
-              risk_type: selectedRiskTypeId,
+              risk_type: incidenttypeId,
               legal_applicability:
                   incidentReportDetailsModel.value?.legal_applicability_name ==
                           "YES"
@@ -2312,7 +2303,7 @@ _incidentReportDetails?.Otherinjured_person?.forEach((element) {
               immediate_correction: immediateCorrectionItems,
               proposed_action_plan: proposedActionItems,
               injured_person: detailsOfInjuredPersonItems,
-              Otherinjured_person:detailsOfOtherInjuredPersonItems,
+              Otherinjured_person: detailsOfOtherInjuredPersonItems,
               investigation_team: investigation_team_list);
 
       var updateIncidentReportJsonString = updateIncidentReportModel.toJson();
@@ -2334,6 +2325,3 @@ _incidentReportDetails?.Otherinjured_person?.forEach((element) {
     print('Argument$id');
   }
 }
-
-
-

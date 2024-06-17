@@ -932,6 +932,14 @@ class PermitListDataSource extends DataTableSource {
                                                       .length >
                                                   0 &&
                                               controller.newPermitList
+                                                      .firstWhereOrNull(
+                                                        (e) =>
+                                                            "${e?.permitId}" ==
+                                                            "${PermitDetails?.permitId}",
+                                                      )
+                                                      ?.jc_status !=
+                                                  158 &&
+                                              controller.newPermitList
                                                       .firstWhere(
                                                         (e) =>
                                                             "${e?.permitId}" ==
@@ -991,7 +999,6 @@ class PermitListDataSource extends DataTableSource {
                                                                   ?.endDate ??
                                                               "") ==
                                                       true
-
                                               //||
                                               // controller.newPermitList
                                               //         .firstWhere(
