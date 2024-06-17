@@ -2203,8 +2203,7 @@ class AddIncidentReportController extends GetxController {
       List<DetailsOfInjuredPerson> detailsOfInjuredPersonItems = [];
       rowInjuredPersonItem.forEach((element) {
         DetailsOfInjuredPerson item = DetailsOfInjuredPerson(
-          injured_item_id:
-              dropdownVictimNameMapperData[element[0]["value"]]?.id,
+          injured_item_id: int.tryParse('${element[9]["value"] ?? '0'}'),
           incidents_id: irId.value,
           name: element[0]["value"],
           person_type: 1,
