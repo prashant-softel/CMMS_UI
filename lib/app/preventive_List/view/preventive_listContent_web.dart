@@ -66,16 +66,16 @@ class PreventiveChecklistListContentWeb
                     ),
                     InkWell(
                       onTap: () {
-                        controller.type.value == 1
+                        controller.type.value == AppConstants.kPM
                             ? Get.offNamed(Routes.preventive)
-                            : controller.type.value == 2
+                            : controller.type.value == AppConstants.kAudit
                                 ? Get.offNamed(Routes.audit)
                                 : Get.offNamed(Routes.misDashboard);
                       },
-                      child: controller.type.value == 1
+                      child: controller.type.value == AppConstants.kPM
                           ? Text(" / PREVENTIVE MAINTENANCE",
                               style: Styles.greyLight14)
-                          : controller.type.value == 2
+                          : controller.type.value == AppConstants.kAudit
                               ? Text(" / AUDIT", style: Styles.greyLight14)
                               : Text(" / MIS", style: Styles.greyLight14),
                     ),
@@ -248,24 +248,26 @@ class PreventiveChecklistListContentWeb
                                                         textController: controller
                                                             .checklistNumberCtrlr,
 
-                                                              //validate
-                                                    errorController: controller
-                                                            .ischecklistNumberInvalid
-                                                            .value
-                                                        ? "Required field"
-                                                        : null,
-                                                    onChanged: (value) {
-                                                      if (value.trim().length >
-                                                          0) {
-                                                        controller
-                                                            .ischecklistNumberInvalid
-                                                            .value = false;
-                                                      } else {
-                                                        controller
-                                                            .ischecklistNumberInvalid
-                                                            .value = true;
-                                                      }
-                                                    },
+                                                        //validate
+                                                        errorController: controller
+                                                                .ischecklistNumberInvalid
+                                                                .value
+                                                            ? "Required field"
+                                                            : null,
+                                                        onChanged: (value) {
+                                                          if (value
+                                                                  .trim()
+                                                                  .length >
+                                                              0) {
+                                                            controller
+                                                                .ischecklistNumberInvalid
+                                                                .value = false;
+                                                          } else {
+                                                            controller
+                                                                .ischecklistNumberInvalid
+                                                                .value = true;
+                                                          }
+                                                        },
 
                                                         focusNode: controller
                                                             .checklistFocus,

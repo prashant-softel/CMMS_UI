@@ -2667,6 +2667,18 @@ class DataRepository extends DomainRepository {
     return response;
   }
 
+  Future<ResponseModel> skipCalibration({
+    auth,
+    bool? isLoading,
+    skipCalibrationtoJsonString,
+  }) async {
+    var response = await connectHelper.skipCalibration(
+        auth: auth,
+        isLoading: isLoading,
+        skipCalibrationtoJsonString: skipCalibrationtoJsonString);
+    return response;
+  }
+
   Future<ResponseModel> approveRequestCalibration({
     auth,
     bool? isLoading,

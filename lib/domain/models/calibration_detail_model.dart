@@ -37,6 +37,8 @@ class CalibrationDetailModel {
   dynamic receivedDate;
   dynamic assetHealthStatus;
   int? is_damaged;
+  List<FileList>? file_list;
+
   CalibrationDetailModel(
       {this.calibrationId,
       this.requestApprovedBy,
@@ -68,12 +70,16 @@ class CalibrationDetailModel {
       this.responsiblePerson,
       this.receivedDate,
       this.assetHealthStatus,
-      this.is_damaged});
+      this.is_damaged,this.file_list});
 
   factory CalibrationDetailModel.fromJson(Map<String, dynamic> json) {
     return CalibrationDetailModel(
       calibrationId: json['calibration_id'],
       is_damaged: json['is_damaged'] ?? 0,
+      file_list: json["file_list"] != null
+          ? List<FileList>.from(
+              json["file_list"].map((x) => FileList.fromJson(x)))
+          : [],
       requestApprovedBy: json['request_approved_by'],
       requestRejectedBy: json['request_rejected_by'],
       requestApprovedAt: json['request_approved_at'] == null
@@ -119,4 +125,40 @@ class CalibrationDetailModel {
       assetHealthStatus: json['asset_health_status'],
     );
   }
+}
+
+class FileList {
+  FileList({
+    this.id,
+    this.fileName,
+    this.fileCategory,
+    this.fileSize,
+    this.status,
+    this.description,
+  });
+
+  int? id;
+  String? fileName;
+  String? fileCategory;
+  int? fileSize;
+  int? status;
+  String? description;
+
+  factory FileList.fromJson(Map<String, dynamic> json) => FileList(
+        id: json["id"],
+        fileName: json["fileName"],
+        fileCategory: json['fileCategory'],
+        fileSize: json['fileSize'],
+        status: json['status'],
+        description: json['description'] ?? '',
+      );
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "fileName": fileName,
+        "fileCategory": fileCategory,
+        "fileSize": fileSize,
+        "status": status,
+        "description": description,
+      };
 }
