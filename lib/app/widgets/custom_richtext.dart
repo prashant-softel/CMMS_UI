@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class CustomRichText extends StatefulWidget {
   final String title;
   final int? maxline;
-  final bool includeAsterisk; 
+  final bool includeAsterisk;
 
   CustomRichText({
     super.key,
@@ -44,11 +44,13 @@ class _CustomRichTextState extends State<CustomRichText> {
 class CustomRichTextMobile extends StatefulWidget {
   final String title;
   final int? maxline;
+  final bool includeAsterisk;
 
   CustomRichTextMobile({
     super.key,
     required this.title,
     this.maxline,
+    this.includeAsterisk = true,
   });
 
   @override
@@ -61,24 +63,23 @@ class _CustomRichTextMobileState extends State<CustomRichTextMobile> {
     return RichText(
       maxLines: widget.maxline,
       text: TextSpan(
-        text: widget.title,
-        style: TextStyle(
-          color: ColorValues.blackColor,
-          fontSize: Dimens.fourteen,
-          fontFamily: 'Poppins',
-        ),
-        children:
-             [
-                TextSpan(
-                  text: '*',
-                  style: TextStyle(
-                    color: ColorValues.orangeColor,
-                    fontWeight: FontWeight.bold,
+          text: widget.title,
+          style: TextStyle(
+            color: ColorValues.blackColor,
+            fontSize: Dimens.fourteen,
+            fontFamily: 'Poppins',
+          ),
+          children: widget.includeAsterisk
+              ? [
+                  TextSpan(
+                    text: '*',
+                    style: TextStyle(
+                      color: ColorValues.orangeColor,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
-                ),
-              ]
-            
-      ),
+                ]
+              : []),
     );
   }
 }

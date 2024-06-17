@@ -21,11 +21,11 @@ class _ToolsRequiredWidgetState extends State<ToolsRequiredWidget> {
   @override
   Widget build(BuildContext context) {
     return Obx(
-      () => 
-          Column(
-            crossAxisAlignment : CrossAxisAlignment.start,
-              children: [
-       CustomRichTextMobile(title: 'Tools Required For Fault: '),
+      () => Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+        CustomRichTextMobile(
+          title: 'Tools Required For Error: ',
+          includeAsterisk: false,
+        ),
         Dimens.boxHeight2,
         Container(
           decoration: BoxDecoration(

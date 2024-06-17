@@ -1,5 +1,6 @@
 import 'package:cmms/app/home/home_controller.dart';
 import 'package:cmms/app/master_responsibility/responsivility_controller.dart';
+import 'package:cmms/app/master_responsibility/view/responsivility_content_mobile.dart';
 import 'package:cmms/app/master_responsibility/view/responsivility_content_web.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -45,9 +46,7 @@ class ResponsibilityListScreen extends GetView<ResponsibilityListController> {
                         children: [
                           if (Responsive.isMobile(context))
                             Expanded(
-                              child: Align(
-                                  alignment: Alignment.center,
-                                  child: Text("Data Coming Soon......")),
+                              child: ResponsibilityListContentMobile(),
                             ),
                           if (Responsive.isDesktop(context))
                             Expanded(
