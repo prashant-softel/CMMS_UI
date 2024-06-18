@@ -32,23 +32,25 @@ class CreateObservationMobile extends GetView<CreateObservationController> {
                           child: Obx(
                             () => DropdownWebStock(
                               width: MediaQuery.of(context).size.width,
-                              dropdownList: controller.ownerList,
-                              isValueSelected:
-                                  controller.isSelectedBusinessType.value,
-                              selectedValue:
-                                  controller.selectedBusinessType.value,
-                              onValueChanged: controller.onValueChanged,
+                              dropdownList: [],
+                              // isValueSelected:
+                              //     controller.isSelectedBusinessType.value,
+                              // selectedValue:
+                              //     controller.selectedBusinessType.value,
+                              onValueChanged: (p0, p1) {},
                             ),
                           ),
                         ),
-      
+
                         Dimens.boxHeight10,
                         CustomRichText(title: 'Location of Observation'),
                         Dimens.boxHeight10,
                         TextField(
                           style: GoogleFonts.lato(
                             textStyle: TextStyle(
-                                fontSize: 16.0, height: 1.0, color: Colors.black),
+                                fontSize: 16.0,
+                                height: 1.0,
+                                color: Colors.black),
                           ),
                           decoration: InputDecoration(
                             hintText: 'Enter Location of Observation',
@@ -56,7 +58,7 @@ class CreateObservationMobile extends GetView<CreateObservationController> {
                           ),
                         ),
                         Dimens.boxHeight10,
-      
+
                         CustomRichText(title: 'Contractor Name'),
                         Dimens.boxHeight10,
                         SizedBox(
@@ -64,16 +66,12 @@ class CreateObservationMobile extends GetView<CreateObservationController> {
                           child: Obx(
                             () => DropdownWebStock(
                               width: MediaQuery.of(context).size.width,
-                              dropdownList: controller.ownerList,
-                              isValueSelected:
-                                  controller.isSelectedBusinessType.value,
-                              selectedValue:
-                                  controller.selectedBusinessType.value,
+                              dropdownList: [],
                               onValueChanged: controller.onValueChanged,
                             ),
                           ),
                         ),
-      
+
                         Dimens.boxHeight10,
                         CustomRichText(title: 'Source of Observation'),
                         Dimens.boxHeight10,
@@ -82,11 +80,7 @@ class CreateObservationMobile extends GetView<CreateObservationController> {
                           child: Obx(
                             () => DropdownWebStock(
                               width: MediaQuery.of(context).size.width,
-                              dropdownList: controller.ownerList,
-                              isValueSelected:
-                                  controller.isSelectedBusinessType.value,
-                              selectedValue:
-                                  controller.selectedBusinessType.value,
+                              dropdownList: [],
                               onValueChanged: controller.onValueChanged,
                             ),
                           ),
@@ -99,11 +93,7 @@ class CreateObservationMobile extends GetView<CreateObservationController> {
                           child: Obx(
                             () => DropdownWebStock(
                               width: MediaQuery.of(context).size.width,
-                              dropdownList: controller.ownerList,
-                              isValueSelected:
-                                  controller.isSelectedBusinessType.value,
-                              selectedValue:
-                                  controller.selectedBusinessType.value,
+                              dropdownList: [],
                               onValueChanged: controller.onValueChanged,
                             ),
                           ),
@@ -128,7 +118,9 @@ class CreateObservationMobile extends GetView<CreateObservationController> {
                         TextField(
                           style: GoogleFonts.lato(
                             textStyle: TextStyle(
-                                fontSize: 16.0, height: 1.0, color: Colors.black),
+                                fontSize: 16.0,
+                                height: 1.0,
+                                color: Colors.black),
                           ),
                           decoration: InputDecoration(
                             hintText: 'Enter Corrective',
@@ -157,7 +149,9 @@ class CreateObservationMobile extends GetView<CreateObservationController> {
                         TextField(
                           style: GoogleFonts.lato(
                             textStyle: TextStyle(
-                                fontSize: 16.0, height: 1.0, color: Colors.black),
+                                fontSize: 16.0,
+                                height: 1.0,
+                                color: Colors.black),
                           ),
                           decoration: InputDecoration(
                             hintText: 'Enter Responsible Person',
@@ -170,7 +164,9 @@ class CreateObservationMobile extends GetView<CreateObservationController> {
                         TextField(
                           style: GoogleFonts.lato(
                             textStyle: TextStyle(
-                                fontSize: 16.0, height: 1.0, color: Colors.black),
+                                fontSize: 16.0,
+                                height: 1.0,
+                                color: Colors.black),
                           ),
                           decoration: InputDecoration(
                             hintText: 'Enter Contact Number*',
@@ -183,7 +179,9 @@ class CreateObservationMobile extends GetView<CreateObservationController> {
                         TextField(
                           style: GoogleFonts.lato(
                             textStyle: TextStyle(
-                                fontSize: 16.0, height: 1.0, color: Colors.black),
+                                fontSize: 16.0,
+                                height: 1.0,
+                                color: Colors.black),
                           ),
                           decoration: InputDecoration(
                             hintText: 'Enter Target Date',
@@ -196,7 +194,9 @@ class CreateObservationMobile extends GetView<CreateObservationController> {
                         TextField(
                           style: GoogleFonts.lato(
                             textStyle: TextStyle(
-                                fontSize: 16.0, height: 1.0, color: Colors.black),
+                                fontSize: 16.0,
+                                height: 1.0,
+                                color: Colors.black),
                           ),
                           decoration: InputDecoration(
                             hintText: 'Enter Action Taken',
@@ -206,17 +206,13 @@ class CreateObservationMobile extends GetView<CreateObservationController> {
                         Dimens.boxHeight10,
                         CustomRichText(title: 'Cost Type*'),
                         Dimens.boxHeight10,
-      
+
                         SizedBox(
                           height: 45,
                           child: Obx(
                             () => DropdownWebStock(
                               width: MediaQuery.of(context).size.width,
-                              dropdownList: controller.ownerList,
-                              isValueSelected:
-                                  controller.isSelectedBusinessType.value,
-                              selectedValue:
-                                  controller.selectedBusinessType.value,
+                              dropdownList: [],
                               onValueChanged: controller.onValueChanged,
                             ),
                           ),
