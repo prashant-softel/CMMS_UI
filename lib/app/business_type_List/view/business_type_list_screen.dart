@@ -1,3 +1,4 @@
+import 'package:cmms/app/business_type_List/view/business_type_listContent_mobile.dart';
 import 'package:cmms/app/home/home_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -45,9 +46,7 @@ class BusinessTypeListScreen extends GetView<BusinessTypeListController> {
                         children: [
                           if (Responsive.isMobile(context))
                             Expanded(
-                              child: Align(
-                                  alignment: Alignment.center,
-                                  child: Text("Data Coming Soon......")),
+                              child: BusinessTypeListContentMobile(),
                             ),
                           if (Responsive.isDesktop(context))
                             Expanded(

@@ -9705,5 +9705,24 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> getScheduleCourseList({
+    required String auth,
+    int? facilityId,
+    dynamic startDate,
+    dynamic endDate,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Training/GetScheduleCourseList?facility_id=$facilityId&start_date=$startDate&end_date=$endDate',
+      Request.get,
+      null,
+      isLoading ?? true,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
   //end
 }

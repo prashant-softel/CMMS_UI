@@ -83,6 +83,7 @@ import 'package:cmms/domain/models/req_order_details_by_id_model.dart';
 import 'package:cmms/domain/models/request_order_list.model.dart';
 import 'package:cmms/domain/models/risk_type_list_model.dart';
 import 'package:cmms/domain/models/safety_measure_list_model.dart';
+import 'package:cmms/domain/models/schedule_course_list_model.dart';
 import 'package:cmms/domain/models/sop_list_model.dart';
 import 'package:cmms/domain/models/asset_type_list_model.dart';
 import 'package:cmms/domain/models/facility_type_list_model.dart';
@@ -14793,6 +14794,41 @@ class Repository {
       return [];
     } catch (error) {
       log(error.toString());
+      return [];
+    }
+  }
+  Future<List<ScheduleCourseListModel>> getScheduleCourseList({
+    int? facility_id,
+    String? start_date,
+    String? end_date,
+    bool? isLoading,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      log(auth);
+      final res = await _dataRepository.getScheduleCourseList(
+        auth: auth,
+        facilityId: facility_id,
+        startDate: start_date,
+        endDate: end_date,
+        isLoading: isLoading,
+      );
+      print('Get Schedule Course List: ${res.data}');
+      if (!res.hasError) {
+        final jsonscheduleCourseListModels = jsonDecode(res.data);
+        final List<ScheduleCourseListModel> _trainingList =
+            jsonscheduleCourseListModels
+                .map<ScheduleCourseListModel>((m) =>
+                    ScheduleCourseListModel.fromJson(
+                        Map<String, dynamic>.from(m)))
+                .toList();
+        return _trainingList;
+      } else {
+        Utility.showDialog(res.errorCode.toString(), 'getScheduleCourseList');
+        return [];
+      }
+    } catch (error) {
+      print(error.toString());
       return [];
     }
   }
