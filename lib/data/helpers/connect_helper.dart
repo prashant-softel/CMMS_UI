@@ -4707,14 +4707,15 @@ class ConnectHelper {
       },
     );
 
- var res = responseModel.data;
+    var res = responseModel.data;
     var parsedJson = json.decode(res);
     Get.dialog<void>(CalibrationDialog(
         data: parsedJson['message'],
         calbrationId: parsedJson['id'][0],
         type: 7));
     print('jcId2:${parsedJson['id']}');
-    return responseModel;  }
+    return responseModel;
+  }
 
   Future<ResponseModel> approveCloseCalibration({
     required String auth,
@@ -4732,14 +4733,15 @@ class ConnectHelper {
       },
     );
 
- var res = responseModel.data;
+    var res = responseModel.data;
     var parsedJson = json.decode(res);
     Get.dialog<void>(CalibrationDialog(
         data: parsedJson['message'],
         calbrationId: parsedJson['id'][0],
         type: 5));
     print('jcId2:${parsedJson['id']}');
-    return responseModel;  }
+    return responseModel;
+  }
 
   Future<ResponseModel> closeCalibration({
     required String auth,
@@ -4757,14 +4759,15 @@ class ConnectHelper {
       },
     );
 
- var res = responseModel.data;
+    var res = responseModel.data;
     var parsedJson = json.decode(res);
     Get.dialog<void>(CalibrationDialog(
         data: parsedJson['message'],
         calbrationId: parsedJson['id'][0],
         type: 4));
     print('jcId2:${parsedJson['id']}');
-    return responseModel;  }
+    return responseModel;
+  }
 
   Future<ResponseModel> completeCalibration({
     required String auth,
@@ -7077,17 +7080,19 @@ class ConnectHelper {
     return responseModel;
   }
 
-  Future<ResponseModel> scheduleLinkToPermit({
-    required String auth,
-    scheduleId,
-    permitId,
-    activity,
-    bool? isLoading,
-  }) async {
+  Future<ResponseModel> scheduleLinkToPermit(
+      {required String auth,
+      scheduleId,
+      permitId,
+      activity,
+      bool? isLoading,
+      type}) async {
     var responseModel = await apiWrapper.makeRequest(
       // 'PMScheduleView/LinkPermitToPMTask?schedule_id=$scheduleId&permit_id=$permitId',
 
-      'PMScheduleView/LinkPermitToPMTask?task_id=$scheduleId&permit_id=$permitId',
+      type == 3
+          ? 'AuditPlan/AuditLinkToPermit?audit_id=$scheduleId&ptw_id=$permitId'
+          : 'PMScheduleView/LinkPermitToPMTask?task_id=$scheduleId&permit_id=$permitId',
       Request.put,
       null,
       isLoading ?? false,
@@ -7101,7 +7106,8 @@ class ConnectHelper {
     Get.dialog<void>(LinkToPermitDialog(
         data: parsedJson['message'],
         taskId: scheduleId,
-        activity: activity //parsedJson['id']
+        activity: activity,
+        type: type //parsedJson['id']
         ));
     print('jcId2:${parsedJson['id']}');
     return responseModel;

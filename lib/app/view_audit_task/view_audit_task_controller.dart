@@ -3,6 +3,7 @@ import 'package:cmms/app/utils/utility.dart';
 import 'package:cmms/app/view_audit_task/view_audit_task_presenter.dart';
 import 'package:cmms/domain/models/comment_model.dart';
 import 'package:cmms/domain/models/history_model.dart';
+import 'package:cmms/domain/models/job_details_model.dart';
 import 'package:cmms/domain/models/pm_task_view_list_model.dart';
 import 'package:cmms/domain/models/update_pm_task_execution_model.dart';
 import 'package:flutter/material.dart';
@@ -25,6 +26,8 @@ class ViewAuditTaskController extends GetxController {
   TextEditingController rejectCommentTextFieldCtrlr = TextEditingController();
   Rx<int> auditTaskId = 0.obs;
   Rx<int> type = 0.obs;
+  Rx<JobDetailsModel?> jobDetailsModel = JobDetailsModel().obs;
+  Rx<PmtaskViewModel?> pmtaskViewModel = PmtaskViewModel().obs;
 
   RxInt selectedValue = 1.obs;
   Rx<PmtaskViewModel> auditTasknDetailModel = PmtaskViewModel().obs;
@@ -244,6 +247,42 @@ class ViewAuditTaskController extends GetxController {
     }
   }
 
+  createNewPermit() {
+    clearStoreData();
+    clearTypeStoreData();
+    clearisCheckedtoreData();
+    clearjobmodelValue();
+    clearpmTaskValue();
+    Get.toNamed(Routes.createPermit, arguments: {
+      "pmTaskModel": auditTasknDetailModel.value,
+      "jobModel": jobDetailsModel.value,
+      "permitId": 0,
+      "isChecked": false,
+      "type": 3,
+      "isFromPmTaskDetails": true,
+    });
+  }
+
+  void clearStoreData() {
+    viewAuditTaskPresenter.clearStoreData();
+  }
+
+  void clearTypeStoreData() {
+    viewAuditTaskPresenter.clearTypeValue();
+  }
+
+  void clearisCheckedtoreData() {
+    viewAuditTaskPresenter.clearisCheckedValue();
+  }
+
+  void clearjobmodelValue() {
+    viewAuditTaskPresenter.clearjobmodelValue();
+  }
+
+  void clearpmTaskValue() {
+    viewAuditTaskPresenter.clearpmTaskValue();
+  }
+
   void startAuditTask() async {
     Map<String, dynamic>? responseMapStart =
         await viewAuditTaskPresenter.startAuditTask(
@@ -395,8 +434,7 @@ class ViewAuditTaskController extends GetxController {
     List<Schedules> schedule = <Schedules>[];
     // checklistObservations?.forEach((e) {
     schedule.add(Schedules(
-        schedule_id:
-            auditTasknDetailModel.value.schedules![0].schedule_id ?? 0,
+        schedule_id: auditTasknDetailModel.value.schedules![0].schedule_id ?? 0,
         add_observations: addObservations));
     // });
 

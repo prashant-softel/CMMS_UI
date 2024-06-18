@@ -809,6 +809,18 @@ class _ViewAuditTaskWebState extends State<ViewAuditTaskWeb> {
                                                 ),
                                               )
                                             : Dimens.box0,
+                                        Container(
+                                          height: 45,
+                                          child: CustomElevatedButton(
+                                            backgroundColor:
+                                                ColorValues.appGreenColor,
+                                            text: "Create New Permit",
+                                            icon: Icons.add,
+                                            onPressed: () {
+                                              controller.createNewPermit();
+                                            },
+                                          ),
+                                        ),
                                         Dimens.boxWidth20,
 
                                         controller.auditTasknDetailModel.value.status == 422 &&

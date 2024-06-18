@@ -34,12 +34,11 @@ class PreventiveCheckPointController extends GetxController {
   var minRangeCtrlr = TextEditingController();
   var maxRangeCtrlr = TextEditingController();
   RxBool isContainerVisible = false.obs;
-   Rx<bool> isFormInvalid = false.obs;
-   Rx<bool>  isCheckPointInvalid= false.obs;
-   Rx<bool>  isRequiremetInvalid= false.obs;
- Rx<bool>  isFailureInvalid= false.obs;
-   
-  
+  Rx<bool> isFormInvalid = false.obs;
+  Rx<bool> isCheckPointInvalid = false.obs;
+  Rx<bool> isRequiremetInvalid = false.obs;
+  Rx<bool> isFailureInvalid = false.obs;
+
   var requirementCtrlr = TextEditingController();
   var failurewtgCtrlr = TextEditingController();
   int selectedEquipmentId = 0;
@@ -240,10 +239,10 @@ class PreventiveCheckPointController extends GetxController {
   }
 
   Future<bool> createCheckpoint() async {
-    checkFormCheck();
-    if(isFormInvalid.value){
-      return true;
-    }
+    // checkFormCheck();
+    // if(isFormInvalid.value){
+    //   return true;
+    // }
     int _failurewtg = int.tryParse(failurewtgCtrlr.text.trim()) ?? 0;
     String _checkPoint = checkPointCtrlr.text.trim();
     String _requirement = requirementCtrlr.text.trim();
@@ -422,19 +421,17 @@ class PreventiveCheckPointController extends GetxController {
     switch (list.runtimeType) {
       case RxList<PreventiveCheckListModel>:
         {
-          if(value != "Please Select"){
+          if (value != "Please Select") {
             int checklistIndex = checkList.indexWhere((x) => x?.name == value);
-          selectedchecklistId.value =
-              checkList[checklistIndex]?.id.toString() ?? "";
-              isSelectedchecklist.value=true;
-          cleardata();
-          getCheckPointlist(
-              selectedchecklistId: selectedchecklistId.value,
-              facilityId: facilityId);
-
-          }else{
+            selectedchecklistId.value =
+                checkList[checklistIndex]?.id.toString() ?? "";
+            isSelectedchecklist.value = true;
+            cleardata();
+            getCheckPointlist(
+                selectedchecklistId: selectedchecklistId.value,
+                facilityId: facilityId);
+          } else {
             // selectedchecklistId=0;
-
           }
         }
 
@@ -458,8 +455,8 @@ class PreventiveCheckPointController extends GetxController {
   }
 
   Future<bool> updateCheckPoint(checkPontId) async {
-      checkFormCheck();
-    if(isFormInvalid.value){
+    checkFormCheck();
+    if (isFormInvalid.value) {
       return true;
     }
     String _checkPoint = checkPointCtrlr.text.trim();
@@ -505,24 +502,23 @@ class PreventiveCheckPointController extends GetxController {
         isExport: true);
   }
 
-  void checkFormCheck(){
-      if (selectedchecklist == '') {
+  void checkFormCheck() {
+    if (selectedchecklist == '') {
       isSelectedchecklist.value = false;
       isFormInvalid.value = true;
     }
-      if (checkPointCtrlr.text.trim().length < 3) {
+    if (checkPointCtrlr.text.trim().length < 3) {
       isCheckPointInvalid.value = true;
       isFormInvalid.value = true;
     }
-       if (requirementCtrlr.text.trim().length < 3) {
+    if (requirementCtrlr.text.trim().length < 3) {
       isRequiremetInvalid.value = true;
       isFormInvalid.value = true;
     }
 
-   if (failurewtgCtrlr.text.trim().length < 3) {
+    if (failurewtgCtrlr.text.trim().length < 3) {
       isFailureInvalid.value = true;
       isFormInvalid.value = true;
     }
-
   }
 }

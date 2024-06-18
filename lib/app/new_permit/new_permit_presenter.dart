@@ -43,16 +43,12 @@ class NewPermitPresenter {
         isLoading: isLoading ?? false,
       );
 
-  Future<List<EmployeeListModel>> getEmployeePermitList({
-    required bool isLoading,
-    required int? facility_id,
-    int? featureId
-  }) async {
+  Future<List<EmployeeListModel>> getEmployeePermitList(
+      {required bool isLoading,
+      required int? facility_id,
+      int? featureId}) async {
     return newPermitUsecase.getEmployeePermitList(
-      isLoading: isLoading,
-      facility_id: facility_id,
-      featureId: featureId
-    );
+        isLoading: isLoading, facility_id: facility_id, featureId: featureId);
   }
 
   Future<List<EmployeeListModel>> getPermitIssuerList({
@@ -127,7 +123,7 @@ class NewPermitPresenter {
         // facilityId: 45,
         // facilityId: facilityId ?? 0,
         id: id,
-        facilityId:facilityId,
+        facilityId: facilityId,
         isLoading: isLoading ?? false,
       );
 
@@ -201,7 +197,7 @@ class NewPermitPresenter {
       await newPermitUsecase.getPermitHistory(
         moduleType: moduleType,
         permitId: permitId,
-        facilityId:facilityId,
+        facilityId: facilityId,
         isLoading: isLoading,
       );
 
@@ -224,18 +220,18 @@ class NewPermitPresenter {
     );
   }
 
-  Future<Map<String, dynamic>?> createNewPermitForPm({
-    newPermit,
-    required int pmTaskId,
-    String? activity,
-    required bool isLoading,
-  }) async {
+  Future<Map<String, dynamic>?> createNewPermitForPm(
+      {newPermit,
+      required int pmTaskId,
+      String? activity,
+      required bool isLoading,
+      int? type}) async {
     return newPermitUsecase.createNewPermitForPm(
-      newPermit: newPermit,
-      pmTaskId: pmTaskId,
-      activity: activity,
-      isLoading: isLoading,
-    );
+        newPermit: newPermit,
+        pmTaskId: pmTaskId,
+        activity: activity,
+        isLoading: isLoading,
+        type: type);
   }
 
   Future<Map<String, dynamic>?> updateNewPermit({
@@ -256,14 +252,11 @@ class NewPermitPresenter {
         newPermit: newPermit, isLoading: isLoading, resubmit: true);
   }
 
-  Future<NewPermitDetailModel?> getNewPermitDetail({
-    bool? isLoading,
-    required int permitId,
-    required int facilityId
-  }) async {
+  Future<NewPermitDetailModel?> getNewPermitDetail(
+      {bool? isLoading, required int permitId, required int facilityId}) async {
     return newPermitUsecase.getNewPermitDetail(
       permitId: permitId,
-      facilityId:facilityId,
+      facilityId: facilityId,
       isLoading: isLoading ?? false,
     );
   }
@@ -281,6 +274,7 @@ class NewPermitPresenter {
   void saveValue({String? permitId}) async {
     return newPermitUsecase.saveValue(permitId: permitId);
   }
+
   void saveValuee({String? type}) async {
     return newPermitUsecase.saveValuee(type: type);
   }

@@ -18,9 +18,7 @@ class CreateAuditUsecase {
   Future<List<EmployeeListModel>> getEmployeePermitList(
       {required bool isLoading, required int? facility_id}) async {
     return repository.getEmployeePermitList(
-      isLoading: isLoading,
-      facility_id: facility_id,
-    );
+        isLoading: isLoading, facility_id: facility_id, featureId: 3);
   }
 
   Future<List<EmployeeModel?>?> getAssignedToEmployee({

@@ -218,18 +218,10 @@ class NewPermitUsecase {
         jobId,
         isLoading,
       );
-  Future<Map<String, dynamic>> createNewPermitForPm({
-    newPermit,
-    pmTaskId,
-    activity,
-    bool? isLoading,
-  }) async =>
+  Future<Map<String, dynamic>> createNewPermitForPm(
+          {newPermit, pmTaskId, activity, bool? isLoading, type}) async =>
       await repository.createNewPermitForPm(
-        newPermit,
-        pmTaskId,
-        activity,
-        isLoading,
-      );
+          newPermit, pmTaskId, activity, isLoading, type);
   Future<Map<String, dynamic>> updateNewPermit(
           {newPermit, bool? isLoading, required bool resubmit}) async =>
       await repository.updateNewPermit(newPermit, isLoading, resubmit);

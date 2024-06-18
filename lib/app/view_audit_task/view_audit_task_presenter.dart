@@ -18,7 +18,17 @@ class ViewAuditTaskPresenter {
       isLoading: isLoading,
     );
   }
-
+void clearStoreData() async =>
+      viewAuditTaskUsecase.clearStoreData();
+  void clearTypeValue() async =>
+      viewAuditTaskUsecase.clearTypeValue();
+  void clearisCheckedValue() async =>
+      viewAuditTaskUsecase.clearisCheckedValue();
+  void clearjobmodelValue() async =>
+      viewAuditTaskUsecase.clearjobmodelValue();
+  void clearpmTaskValue() async =>
+      viewAuditTaskUsecase.clearpmTaskValue();
+ 
   Future<Map<String, dynamic>?> auditTaskCloseButton({
     auditTaskCloseJsonString,
     required bool isLoading,

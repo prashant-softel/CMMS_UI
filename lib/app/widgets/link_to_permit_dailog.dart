@@ -1,5 +1,6 @@
 import 'package:cmms/app/new_permit/new_permit_controller.dart';
 import 'package:cmms/app/theme/color_values.dart';
+import 'package:cmms/app/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../navigators/app_pages.dart';
@@ -11,13 +12,14 @@ class LinkToPermitDialog extends GetView {
   String? data;
   int? taskId;
   String? activity;
-
+  int? type;
   LinkToPermitDialog(
       {super.key,
       this.approveIncidentReportData,
       this.data,
       this.taskId,
-      this.activity});
+      this.activity,
+      this.type});
   final NewPermitController controller = Get.find();
 
   @override
@@ -88,43 +90,72 @@ class LinkToPermitDialog extends GetView {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Spacer(),
-                ElevatedButton(
-                  style: Styles.greenElevatedButtonStyle,
-                  onPressed: () {
-                    // _controller.getIncidentReportList(
-                    //     _controller.facilityId,
-                    //     _controller.formattedTodate,
-                    //     _controller.formattedFromdate,
-                    //     false);
-                    //  Get.offAllNamed(Routes.createMrs, arguments: {"jcId": jcId![0]});
-                    Get.offAllNamed(Routes.pmTaskView,
-                        arguments: {'pmTaskId': taskId});
-                    Get.back();
-                  },
-                  child: const Text('View Task'),
-                ),
+                type == 3
+                    ? ElevatedButton(
+                        style: Styles.greenElevatedButtonStyle,
+                        onPressed: () {
+                          // _controller.getIncidentReportList(
+                          //     _controller.facilityId,
+                          //     _controller.formattedTodate,
+                          //     _controller.formattedFromdate,
+                          //     false);
+                          //  Get.offAllNamed(Routes.createMrs, arguments: {"jcId": jcId![0]});
+                          Get.offAllNamed(Routes.pmTaskView,
+                              arguments: {'pmTaskId': taskId});
+                          Get.back();
+                        },
+                        child: const Text('View Audit'),
+                      )
+                    : ElevatedButton(
+                        style: Styles.greenElevatedButtonStyle,
+                        onPressed: () {
+                          // _controller.getIncidentReportList(
+                          //     _controller.facilityId,
+                          //     _controller.formattedTodate,
+                          //     _controller.formattedFromdate,
+                          //     false);
+                          //  Get.offAllNamed(Routes.createMrs, arguments: {"jcId": jcId![0]});
+                          Get.toNamed(Routes.viewAuditTask,
+                              arguments: {'auditTaskId': taskId, 'type': type});
+                          Get.back();
+                        },
+                        child: const Text('View Task'),
+                      ),
                 Dimens.boxWidth10,
-                ElevatedButton(
-                  style: Styles.yellowElevatedButtonStyle,
-                  onPressed: () {
-                    // _controller.getIncidentReportList(
-                    //     _controller.facilityId,
-                    //     _controller.formattedTodate,
-                    //     _controller.formattedFromdate,
-                    //     false);
-                    //  Get.offAllNamed(Routes.createMrs, arguments: {"jcId": jcId![0]});
-                    Get.offAllNamed(Routes.createMrs, arguments: {
-                      "whereUsedId": taskId,
-                      "activity": activity,
-                      "whereUsed": 27,
-                      "type": 2,
-                      "fromActorTypeId": 2,
-                      "to_actor_type_id": 3
-                    });
-                    Get.back();
-                  },
-                  child: const Text('Add Mrs'),
-                ),
+                type == 3
+                    ? Dimens.box0
+                    : ElevatedButton(
+                        style: Styles.yellowElevatedButtonStyle,
+                        onPressed: () {
+                          // _controller.getIncidentReportList(
+                          //     _controller.facilityId,
+                          //     _controller.formattedTodate,
+                          //     _controller.formattedFromdate,
+                          //     false);
+                          //  Get.offAllNamed(Routes.createMrs, arguments: {"jcId": jcId![0]});
+                          Get.toNamed(Routes.auditTask,
+                              arguments: {'type': AppConstants.kAudit});
+
+                          Get.back();
+                        },
+                        child: const Text('Add Mrs'),
+                      ),
+                type == 3
+                    ? ElevatedButton(
+                        style: Styles.yellowElevatedButtonStyle,
+                        onPressed: () {
+                          // _controller.getIncidentReportList(
+                          //     _controller.facilityId,
+                          //     _controller.formattedTodate,
+                          //     _controller.formattedFromdate,
+                          //     false);
+                          //  Get.offAllNamed(Routes.createMrs, arguments: {"jcId": jcId![0]});
+                          Get.offAllNamed(Routes.createMrs, arguments: {});
+                          Get.back();
+                        },
+                        child: const Text('Audit list'),
+                      )
+                    : Dimens.box0,
                 Spacer()
               ],
             ),
