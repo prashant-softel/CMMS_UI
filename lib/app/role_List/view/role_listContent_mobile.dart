@@ -49,7 +49,7 @@ class RoleListContentMobile
                                   Row(
                                     children: [
                                       Text(
-                                        'CheckList Id: ',
+                                        'Role Id: ',
                                         style: const TextStyle(
                                             color: ColorValues.blackColor,
                                             fontWeight: FontWeight.w400),
@@ -65,7 +65,7 @@ class RoleListContentMobile
                                   ),
                                   Row(children: [
                                     Text(
-                                      'Module Name: ',
+                                      'Role: ',
                                       style: const TextStyle(
                                           color: ColorValues.blackColor,
                                           fontWeight: FontWeight.w400),

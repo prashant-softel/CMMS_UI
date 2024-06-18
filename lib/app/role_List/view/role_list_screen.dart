@@ -1,4 +1,5 @@
 import 'package:cmms/app/home/home_controller.dart';
+import 'package:cmms/app/role_List/view/role_listContent_mobile.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -47,9 +48,7 @@ class RoleListScreen extends GetView<RoleListController> {
                         children: [
                           if (Responsive.isMobile(context))
                             Expanded(
-                              child: Align(
-                                  alignment: Alignment.center,
-                                  child: Text("Data Coming Soon......")),
+                              child: RoleListContentMobile(),
                             ),
                           if (Responsive.isDesktop(context))
                             Expanded(

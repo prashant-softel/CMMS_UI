@@ -1,4 +1,5 @@
 import 'package:cmms/app/home/home_controller.dart';
+import 'package:cmms/app/inventory_status_list/view/inventory_status_list_mobile.dart';
 import 'package:cmms/app/inventory_status_list/view/inventory_status_list_web.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -45,9 +46,7 @@ class InventoryStatusListScreen extends GetView<InventoryStatusListController> {
                         children: [
                           if (Responsive.isMobile(context))
                             Expanded(
-                              child: Align(
-                                  alignment: Alignment.center,
-                                  child: Text("Data Coming Soon......")),
+                              child: InventoryStatusListContentMobile(),
                             ),
                           if (Responsive.isDesktop(context))
                             Expanded(

@@ -4,8 +4,7 @@ import 'package:get/get.dart';
 import '../../../domain/models/competency_model.dart';
 import '../competency_list_controller.dart';
 
-class CompetencyListContentMobile
-    extends GetView<CompetencyListController> {
+class CompetencyListContentMobile extends GetView<CompetencyListController> {
   CompetencyListContentMobile({Key? key}) : super(key: key);
 
   @override
@@ -48,7 +47,7 @@ class CompetencyListContentMobile
                                   Row(
                                     children: [
                                       Text(
-                                        'CheckList Id: ',
+                                        'Competency Id: ',
                                         style: const TextStyle(
                                             color: ColorValues.blackColor,
                                             fontWeight: FontWeight.w400),
@@ -64,7 +63,7 @@ class CompetencyListContentMobile
                                   ),
                                   Row(children: [
                                     Text(
-                                      'Name: ',
+                                      'Competency Name: ',
                                       style: const TextStyle(
                                           color: ColorValues.blackColor,
                                           fontWeight: FontWeight.w400),
@@ -86,7 +85,7 @@ class CompetencyListContentMobile
                                   Row(//
                                       children: [
                                     Text(
-                                      'Description: ',
+                                      'Competency Description: ',
                                       style: const TextStyle(
                                           color: ColorValues.blackColor,
                                           fontWeight: FontWeight.w400),
@@ -96,9 +95,7 @@ class CompetencyListContentMobile
                                     ),
                                     Expanded(
                                       child: Text(
-                                        competencyModel
-                                                ?.description ??
-                                            '',
+                                        competencyModel?.description ?? '',
                                         style: const TextStyle(
                                           color: ColorValues.navyBlueColor,
                                           fontWeight: FontWeight.bold,
