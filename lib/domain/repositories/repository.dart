@@ -436,11 +436,7 @@ class Repository {
   }
 
   Future<Map<String, dynamic>> createNewPermitForPm(
-    newPermit,
-    pmTaskId,
-    activity,
-    bool? isLoading,
-  ) async {
+      newPermit, pmTaskId, activity, bool? isLoading, type) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.createNewPermitForPm(
@@ -468,8 +464,11 @@ class Repository {
           var responseMap = json.decode(res.data);
           var permitForJob = responseMap['id'];
           print('CreateForJobPermitResponse:${permitForJob[0]}');
-          if (pmTaskId != null) {
-            scheduleLinkToPermit(pmTaskId, activity, permitForJob[0], true);
+          if (pmTaskId != null && type == 3) {
+            scheduleLinkToPermit(
+                pmTaskId, activity, permitForJob[0], true, type);
+          } else {
+            scheduleLinkToPermit(pmTaskId, activity, permitForJob[0], true, 0);
           }
           return responseMap;
         }
@@ -11490,20 +11489,16 @@ class Repository {
   }
 
   Future<Map<String, dynamic>> scheduleLinkToPermit(
-    scheduleId,
-    activity,
-    permitId,
-    bool? isLoading,
-  ) async {
+      scheduleId, activity, permitId, bool? isLoading, type) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.scheduleLinkToPermit(
-        auth: auth,
-        scheduleId: scheduleId,
-        permitId: permitId,
-        activity: activity,
-        isLoading: isLoading ?? false,
-      );
+          auth: auth,
+          scheduleId: scheduleId,
+          permitId: permitId,
+          activity: activity,
+          isLoading: isLoading ?? false,
+          type: type);
 
       if (!res.hasError) {
         if (res.errorCode == 200) {
@@ -14794,6 +14789,7 @@ class Repository {
       return [];
     }
   }
+
   Future<List<ScheduleCourseListModel>> getScheduleCourseList({
     int? facility_id,
     String? start_date,

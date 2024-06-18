@@ -75,7 +75,10 @@ class NewPermitWeb extends GetView<NewPermitController> {
                             : controller.typee.value == 2
                                 ? Get.offAllNamed(Routes.pmTaskView,
                                     arguments: {'pmTaskId': taskId})
-                                : Get.offNamed(Routes.newPermitList);
+                                : controller.typee.value == 3
+                                    ? Get.offAllNamed(Routes.pmTaskView,
+                                        arguments: {'pmTaskId': taskId})
+                                    : Get.offNamed(Routes.newPermitList);
                       },
                       child: controller.typee.value == 1
                           ? Text(
@@ -87,10 +90,15 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                   "/ PM TASK",
                                   style: Styles.greyLight14,
                                 )
-                              : Text(
-                                  "/ PERMIT LIST",
-                                  style: Styles.greyLight14,
-                                )),
+                              : controller.typee.value == 3
+                                  ? Text(
+                                      "/ AUDIT TASK ",
+                                      style: Styles.greyLight14,
+                                    )
+                                  : Text(
+                                      "/ PERMIT LIST",
+                                      style: Styles.greyLight14,
+                                    )),
                   controller.newPermitDetailsModel.value?.permitNo == null
                       ? Text(
                           " / ADD NEW PERMIT",
@@ -140,14 +148,17 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                 Padding(
                                   padding: const EdgeInsets.only(
                                       top: 10, right: 10, left: 10),
-                                  child: controller.pmtaskViewModel?.id != null
+                                  child: controller.typee.value == 2
                                       ? Text('REQUEST A PERMIT FOR PM',
                                           style: Styles.blackBold14)
-                                      : (controller.jobModel?.id != null)
-                                          ? Text('REQUEST A PERMIT FOR JOB',
+                                      : controller.typee.value == 3
+                                          ? Text('REQUEST A PERMIT FOR AUDIT',
                                               style: Styles.blackBold14)
-                                          : Text('REQUEST A PERMIT TO WORK',
-                                              style: Styles.blackBold14),
+                                          : (controller.jobModel?.id != null)
+                                              ? Text('REQUEST A PERMIT FOR JOB',
+                                                  style: Styles.blackBold14)
+                                              : Text('REQUEST A PERMIT TO WORK',
+                                                  style: Styles.blackBold14),
                                 ),
                               ],
                             ),
@@ -172,7 +183,7 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                           columns: [
                                             DataColumn2(
                                               fixedWidth: 105,
-                                              label: Text('PM Task ID'),
+                                              label: Text('Task ID'),
                                             ),
                                             DataColumn2(
                                               label: Text('Plan Title'),
@@ -1347,8 +1358,9 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                                                   // String
                                                                   //     baseUrl =
                                                                   //     "http://65.0.20.19/CMMS_API/";
-                                                                  String baseUrl =
-                                                                  'http://172.20.43.9:83/';
+                                                                  String
+                                                                      baseUrl =
+                                                                      'http://172.20.43.9:83/';
                                                                   String
                                                                       fileName =
                                                                       controller
@@ -2139,7 +2151,7 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                           child: CustomElevatedButton(
                                             backgroundColor:
                                                 ColorValues.appGreenColor,
-                                            text: "Submit For Approval",
+                                            text: "Submit For Approval1",
                                             onPressed: () {
                                               controller.isFormInvalid.value =
                                                   false;
