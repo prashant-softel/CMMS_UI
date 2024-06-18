@@ -74,6 +74,7 @@ class AddEscalationMatrixContentWeb
                             ),
                             InkWell(
                               onTap: () {
+                                controller.clearStoreData();
                                 Get.offNamed(Routes.escalationMatrixListWeb);
                               },
                               child: Text(
@@ -92,7 +93,6 @@ class AddEscalationMatrixContentWeb
                         child: Container(
                           margin: EdgeInsets.all(10),
                           child: Card(
-                            // color: Colors.lightBlue.shade50,
                             color: ColorValues.cardColor,
                             elevation: 10,
                             shape: RoundedRectangleBorder(
@@ -151,10 +151,10 @@ class AddEscalationMatrixContentWeb
                                                 5,
                                         child: DropdownWebWidget(
                                           dropdownList: controller.status,
-                                          isValueSelected: controller
-                                              .isTypePermitSelected.value,
-                                          selectedValue: controller
-                                              .selectedTypePermit.value,
+                                          isValueSelected:
+                                              controller.isStatusSelected.value,
+                                          selectedValue:
+                                              controller.selectedStatus.value,
                                           onValueChanged:
                                               controller.onValueChanged,
                                         ),

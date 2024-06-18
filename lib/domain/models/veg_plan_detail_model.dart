@@ -28,29 +28,30 @@ class VegPlanDetailModel {
   String? statusLong;
   List<Schedules>? schedules;
 
-  VegPlanDetailModel(
-      {this.id,
-      this.planId,
-      this.facilityId,
-      this.title,
-      this.description,
-      this.frequencyId,
-      this.frequency,
-      this.assignedToId,
-      this.assignedTo,
-      this.startDate,
-      this.noOfCleaningDays,
-      this.createdById,
-      this.createdBy,
-      this.createdAt,
-      this.approvedById,
-      this.approvedBy,
-      this.approvedAt,
-      this.deletedBy,
-      this.status,
-      this.statusShort,
-      this.statusLong,
-      this.schedules});
+  VegPlanDetailModel({
+    this.id,
+    this.planId,
+    this.facilityId,
+    this.title,
+    this.description,
+    this.frequencyId,
+    this.frequency,
+    this.assignedToId,
+    this.assignedTo,
+    this.startDate,
+    this.noOfCleaningDays,
+    this.createdById,
+    this.createdBy,
+    this.createdAt,
+    this.approvedById,
+    this.approvedBy,
+    this.approvedAt,
+    this.deletedBy,
+    this.status,
+    this.statusShort,
+    this.statusLong,
+    this.schedules,
+  });
 
   factory VegPlanDetailModel.fromJson(Map<String, dynamic> json) {
     return VegPlanDetailModel(
@@ -125,22 +126,23 @@ class Schedules {
   String? statusShort;
   List<EquipmentList?>? equipments;
 
-  Schedules(
-      {this.id,
-      this.scheduleId,
-      this.executionId,
-      this.cleaningDay,
-      this.cleaningType,
-      this.cleaningTypeName,
-      this.blocks,
-      this.invs,
-      this.smbs,
-      this.scheduledModules,
-      this.scheduledArea,
-      this.plannedDate,
-      this.status,
-      this.statusShort,
-      this.equipments});
+  Schedules({
+    this.id,
+    this.scheduleId,
+    this.executionId,
+    this.cleaningDay,
+    this.cleaningType,
+    this.cleaningTypeName,
+    this.blocks,
+    this.invs,
+    this.smbs,
+    this.scheduledModules,
+    this.scheduledArea,
+    this.plannedDate,
+    this.status,
+    this.statusShort,
+    this.equipments,
+  });
 
   factory Schedules.fromJson(Map<String, dynamic> json) => Schedules(
         id: json['id'],
@@ -194,19 +196,22 @@ class EquipmentList {
   String? shortStatus;
   int? updatedById;
   int? grassCuttingArea;
+  int? cleaningDay;
 
-  EquipmentList(
-      {this.id,
-      this.equipmentName,
-      this.parentId,
-      this.parentName,
-      this.moduleQuantity,
-      this.noOfPlanDay,
-      this.scheduledCleaningDate,
-      this.actualCleaningDate,
-      this.shortStatus,
-      this.updatedById,
-      this.grassCuttingArea});
+  EquipmentList({
+    this.id,
+    this.equipmentName,
+    this.parentId,
+    this.parentName,
+    this.moduleQuantity,
+    this.noOfPlanDay,
+    this.scheduledCleaningDate,
+    this.actualCleaningDate,
+    this.shortStatus,
+    this.updatedById,
+    this.grassCuttingArea,
+    this.cleaningDay,
+  });
 
   factory EquipmentList.fromJson(Map<String, dynamic> json) => EquipmentList(
         id: json["id"],

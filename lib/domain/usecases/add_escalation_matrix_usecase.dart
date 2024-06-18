@@ -1,37 +1,14 @@
 import 'package:cmms/domain/domain.dart';
-import 'package:cmms/domain/models/history_model.dart';
-import 'package:cmms/domain/models/incident_report_details_model.dart';
-import 'package:cmms/domain/models/incident_report_list_model.dart';
+import 'package:cmms/domain/models/escalation_details_model.dart';
 import 'package:cmms/domain/models/module_model.dart';
 import 'package:cmms/domain/models/role_model.dart';
 import 'package:cmms/domain/models/status_list_model.dart';
-import 'package:cmms/domain/models/type_permit_model.dart';
-
-import '../models/facility_model.dart';
 
 class AddEscalationMatrixUsecase {
   final Repository _repository;
 
   AddEscalationMatrixUsecase(this._repository);
-
-  Future<void> generateToken() async {
-    return await _repository.generateToken();
-  }
-
-   Future<List<HistoryModel>?> getIncidentReportHistory({
-    moduleType,
-    facilityId,
-    id,
-    bool? isLoading,
-  }) async =>
-      await _repository.getHistory(
-        moduleType,
-        id,
-        facilityId,
-        isLoading,
-      );
-
-    Future<Map<String, dynamic>> createEscalationMatrix({
+  Future<Map<String, dynamic>> createEscalationMatrix({
     createEscalationMatrix,
     bool? isLoading,
   }) async =>
@@ -40,42 +17,18 @@ class AddEscalationMatrixUsecase {
         isLoading,
       );
 
-      
-
-   Future<List<InventoryModel>> getInventoryList({
-    required bool isLoading,
-    required int? facilityId,
-    int? blockId,
-    required String categoryIds,
-  }) async {
-    return _repository.getInventoryList(
-      isLoading: isLoading,
-      facilityId: facilityId,
-      blockId: blockId,
-      categoryIds: categoryIds,
-    );
-  }
-
-  Future<IncidentReportDetailsModel?> getIncidentReportDetail({
-    bool? isLoading,  
-    required int id,
+  Future<List<EscalationDetails?>> getEscalationDetail({
+    int? moduleId,
+    int? statusId,
+    bool? isLoading,
   }) async =>
-      await _repository.getIncidentReportDetail(
-        id: id,
-        isLoading: isLoading ?? false,
+      await _repository.getEscalationDetail(
+        moduleId: moduleId,
+        statusId: statusId,
+        isLoading: isLoading,
       );
 
-
-   Future<List<TypePermitModel?>?> getTypePermitList(
-    bool? isLoading,
-    int? facility_id
-    ) async =>
-      await _repository.getTypePermitList(
-        isLoading,
-        facility_id
-        );
-    
-   Future<List<ModuleModel?>?> getModuleList({
+  Future<List<ModuleModel?>?> getModuleList({
     int? type,
     int? facilityId,
     bool? isLoading,
@@ -85,7 +38,7 @@ class AddEscalationMatrixUsecase {
         facilityId,
         isLoading,
       );
-   Future<StatusList?> getStatusList({
+  Future<StatusList?> getStatusList({
     int? moduleId,
     bool? isLoading,
   }) async =>
@@ -94,34 +47,32 @@ class AddEscalationMatrixUsecase {
         isLoading: isLoading ?? false,
       );
 
-   Future<List<RoleModel?>?> getRoleList({
+  Future<List<RoleModel?>?> getRoleList({
     bool? isLoading,
   }) async =>
       await _repository.getRoleList(
         isLoading,
       );
 
-   Future<List<IncidentReportListModel>> getIncidentReportList({
-    required bool isLoading,
-    required int? facility_id,
-    String? start_date,
-    required String end_date,
-  }) async {
-    return _repository.getIncidentReportList(
-      isLoading: isLoading,
-      facility_id: facility_id,
-      start_date: start_date,
-      end_date: end_date,
-    );
-  }
+  void saveStatusValue({String? statusId}) async => _repository.saveValue(
+        LocalKeys.statusId,
+        statusId,
+      );
+  Future<String?> getStatusValue() async => await _repository.getStringValue(
+        LocalKeys.statusId,
+      );
+  void clearStatusValue() async => _repository.clearData(
+        LocalKeys.statusId,
+      );
 
-  
-  Future<List<FacilityModel?>?> getFacilityList() async =>
-      await _repository.getFacilityList(true);
-
-   Future<List<FacilityModel?>?> getFacilityPlantList() async =>
-      await _repository.getFacilityList(true);
-
-  Future<String?> getUserAccessList() async =>
-      await _repository.getUserAccessData(LocalKeys.userAccess);
+  void saveModuleValue({String? moduleId}) async => _repository.saveValue(
+        LocalKeys.moduleId,
+        moduleId,
+      );
+  Future<String?> getModuleValue() async => await _repository.getStringValue(
+        LocalKeys.moduleId,
+      );
+  void clearModuleValue() async => _repository.clearData(
+        LocalKeys.moduleId,
+      );
 }

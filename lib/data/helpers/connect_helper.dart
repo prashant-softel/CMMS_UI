@@ -3291,8 +3291,8 @@ class ConnectHelper {
     //  int? facility_id
   }) async {
     ResponseModel responseModel = await apiWrapper.makeRequest(
-      'EM/GetEscalationMatrix',
-      Request.getMultiparts,
+      'EM/GetEscalationMatrixList',
+      Request.get,
       null,
       isLoading,
       {
