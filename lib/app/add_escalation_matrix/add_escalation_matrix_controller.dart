@@ -25,7 +25,7 @@ class AddEscalationMatrixController extends GetxController {
 
   RxList<List<Map<String, String>>> rowItem = <List<Map<String, String>>>[].obs;
   List<Escalation> days = [];
-  Map<String, RoleModel> dropdownMapperData = {};
+  Map<dynamic, dynamic> dropdownMapperData = {};
   Map<String, PaiedModel> paiddropdownMapperData = {};
   RxBool isStatusSelected = true.obs;
   RxString selectedStatus = ''.obs;
@@ -33,14 +33,17 @@ class AddEscalationMatrixController extends GetxController {
   void addRowItem() {
     rowItem.add([
       {"key": "Duration (Days)", "value": ''},
+      {"key": "Escalation Role Id", "value": ''},
       {'key': "Escalation Roles and Levels", "value": 'Please Select'},
       {'key': "Action", "value": ''},
     ]);
   }
 
   RxList<ModuleModel?> moduleList = <ModuleModel>[].obs;
+  ModuleModel moduleModel = ModuleModel();
   Rx<StatusList?> statusList = StatusList().obs;
   RxList<Status?> status = <Status>[].obs;
+  Status statusModel = Status();
   Rx<bool> isModuleListSelected = true.obs;
   Rx<String> selectedModuleList = ''.obs;
   int type = 1;
@@ -81,16 +84,22 @@ class AddEscalationMatrixController extends GetxController {
       await getModuleList(facilityId.value, type, true);
       await getRoleList();
       if (module_id.value != 0) {
+        await getStatusList(moduleId: module_id.value);
         await getEscalationDetail(
-          module_id: module_id.value,
-          status_id: status_id.value,
+          moduleId: module_id.value,
+          statusId: status_id.value,
           isLoading: true,
         );
-        await getStatusList(moduleId: module_id.value);
       }
     });
     addRowItem();
     super.onInit();
+  }
+
+  @override
+  void onClose() async {
+    clearStoreData();
+    super.onClose();
   }
 
   Future<void> setId() async {
@@ -122,29 +131,62 @@ class AddEscalationMatrixController extends GetxController {
   }
 
   Future<void> getEscalationDetail({
-    int? module_id,
-    int? status_id,
+    int? moduleId,
+    int? statusId,
     bool? isLoading,
   }) async {
     final _matrixDetails = await addEscalationPresenter.getEscalationDetail(
-      moduleId: module_id ?? 0,
-      statusId: status_id ?? 0,
+      moduleId: moduleId ?? 0,
+      statusId: statusId ?? 0,
       isLoading: isLoading,
     );
     if (_matrixDetails.isNotEmpty) {
       escalation_details_list.value = _matrixDetails;
       escalation_details.value = escalation_details_list.firstWhereOrNull(
-        (element) => element?.module_id == module_id,
+        (element) => element?.module_id == module_id.value,
       );
       status_escalation_list?.value =
           escalation_details.value!.status_escalation!;
       status_escalation.value = status_escalation_list!.firstWhereOrNull(
-        (element) => element.status_id == status_id,
+        (element) => element.status_id == status_id.value,
       )!;
       escalation_list.value = status_escalation.value.escalation!;
       escalation.value = escalation_list.firstWhereOrNull(
         (element) => element.role_id != null,
       )!;
+      module_id.value = escalation_details.value?.module_id ?? 0;
+      status_id.value = status_escalation.value.status_id ?? 0;
+      statusModel =
+          status.firstWhereOrNull((element) => element?.id == status_id.value)!;
+      moduleModel = moduleList
+          .firstWhereOrNull((element) => element?.id == module_id.value)!;
+      selectedStatus.value = statusModel.name ?? "";
+      selectedModuleList.value = moduleModel.name ?? "";
+
+      rowItem.value = [];
+      escalation_list.forEach((element) {
+        rowItem.add([
+          {
+            "key": "Duration (Days)",
+            "value": '${element.days}',
+          },
+          {
+            "key": "Escalation Role Id",
+            "value": '${element.role_id}',
+          },
+          {
+            'key': "Escalation Roles and Levels",
+            "value": '${element.role_name}',
+          },
+          {
+            'key': "Action ",
+            "value": '',
+          },
+        ]);
+        dropdownMapperData[element.role_name ?? ""] = roleList.firstWhereOrNull(
+          (e) => e?.name == element.role_name,
+        );
+      });
     }
     update(["escalation-matrix"]);
   }
@@ -230,11 +272,10 @@ class AddEscalationMatrixController extends GetxController {
   }
 
   void createEscalationMatrix() async {
-    List<Escalation> days = [];
     rowItem.value.forEach((element) {
       Escalation day = Escalation(
         days: int.tryParse(element[0]["value"] ?? '0'),
-        role_id: dropdownMapperData[element[1]["value"]]?.id,
+        role_id: int.tryParse(element[1]["value"] ?? "0"),
       );
       days.add(day);
     });

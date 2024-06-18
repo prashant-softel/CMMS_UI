@@ -719,9 +719,7 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                                 ],
                                               ),
                                             )
-                                         
-                                          : 
-                                          Dimens.box0,
+                                          : Dimens.box0,
                                     ],
                                   ),
                                 ),
@@ -1028,7 +1026,7 @@ class AddRowInGoodsOrder extends StatelessWidget {
                   DataColumn2(
                       fixedWidth: 90,
                       label: Text(
-                        "Cost",
+                        "Unit Cost",
                         style: TextStyle(
                             fontSize: 15, fontWeight: FontWeight.bold),
                       )),

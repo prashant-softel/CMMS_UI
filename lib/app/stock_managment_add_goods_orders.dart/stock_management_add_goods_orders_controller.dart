@@ -62,10 +62,10 @@ class StockManagementAddGoodsOrdersController extends GetxController {
   Rx<int> roId = 0.obs;
   var commentCtrlr = TextEditingController();
   Rx<String> selectedFacility = ''.obs;
-  Rx<String> selectedUnitCurrency = ''.obs;
+  Rx<String> selectedUnitCurrency = 'Indian Rupee'.obs;
 
   RxList<String?> selectedUnitCurrencyList = <String>[].obs;
-  int selectedUnitCurrencyId = 0;
+  int selectedUnitCurrencyId = 69;
   RxList<int?> selectedUnitCurrencyIdList = <int>[].obs;
   BehaviorSubject<int> _facilityId = BehaviorSubject.seeded(0);
   StreamSubscription<int>? facilityIdStreamSubscription;
