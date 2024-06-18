@@ -60,12 +60,31 @@ class ApproveReturnMrsContentWeb extends GetView<ApproveReturnMrsController> {
                         style: Styles.greyLight14),
                   ),
                   InkWell(
-                    onTap: () {
-                      Get.offNamed(Routes.returnMrsList);
-                    },
-                    child: Text(" / RETURN MRS LIST ",
-                        style: Styles.greyLight14),
-                  ),
+                      onTap: () {
+                        var taskId;
+                        var jobId;
+                        controller.type.value == 1
+                            ? Get.offAllNamed(Routes.jobDetails,
+                                arguments: {'jobId': jobId})
+                            : controller.type.value == 2
+                                ? Get.offAllNamed(Routes.pmTaskView,
+                                    arguments: {'pmTaskId': taskId})
+                                : Get.offNamed(Routes.returnMrsList);
+                      },
+                      child: controller.type.value == 1
+                          ? Text(
+                              "/ JOB",
+                              style: Styles.greyLight14,
+                            )
+                          : controller.type.value == 2
+                              ? Text(
+                                  "/ PM TASK",
+                                  style: Styles.greyLight14,
+                                )
+                              : Text(
+                                  "/ RETURN MRS LIST",
+                                  style: Styles.greyLight14,
+                                )),
                   Text(" / RETURN EQUIPMENT DETAILS",
                       style: Styles.greyLight14)
                 ],
@@ -489,10 +508,34 @@ class ApproveReturnMrsContentWeb extends GetView<ApproveReturnMrsController> {
                                   children: [
                                     CustomRichText(title: "Comment:"),
                                     Dimens.boxWidth10,
-                                    LoginCustomTextfield(
+                                    Container(
                                       width: (Get.width * .6),
-                                      maxLine: 5,
-                                      textController: controller.commentCtrlr,
+                                      decoration: BoxDecoration(
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: Colors.black26,
+                                            offset: const Offset(
+                                              5.0,
+                                              5.0,
+                                            ),
+                                            blurRadius: 5.0,
+                                            spreadRadius: 1.0,
+                                          ),
+                                          BoxShadow(
+                                            color: ColorValues.whiteColor,
+                                            offset: const Offset(0.0, 0.0),
+                                            blurRadius: 0.0,
+                                            spreadRadius: 0.0,
+                                          ),
+                                        ],
+                                        color: ColorValues.whiteColor,
+                                        borderRadius: BorderRadius.circular(5),
+                                      ),
+                                      child: LoginCustomTextfield(
+                                        width: (Get.width * .6),
+                                        maxLine: 5,
+                                        textController: controller.commentCtrlr,
+                                      ),
                                     ),
                                   ],
                                 ),

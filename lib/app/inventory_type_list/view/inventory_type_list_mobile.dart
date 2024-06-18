@@ -48,7 +48,7 @@ class InventoryTypeListContentMobile
                                   Row(
                                     children: [
                                       Text(
-                                        'CheckList Id: ',
+                                        'Id: ',
                                         style: const TextStyle(
                                             color: ColorValues.blackColor,
                                             fontWeight: FontWeight.w400),
@@ -64,7 +64,7 @@ class InventoryTypeListContentMobile
                                   ),
                                   Row(children: [
                                     Text(
-                                      'CheckList Number: ',
+                                      'Asset Type Name: ',
                                       style: const TextStyle(
                                           color: ColorValues.blackColor,
                                           fontWeight: FontWeight.w400),
@@ -86,7 +86,7 @@ class InventoryTypeListContentMobile
                                   Row(//
                                       children: [
                                     Text(
-                                      'Category: ',
+                                      'Asset Type Description: ',
                                       style: const TextStyle(
                                           color: ColorValues.blackColor,
                                           fontWeight: FontWeight.w400),
@@ -104,79 +104,6 @@ class InventoryTypeListContentMobile
                                       ),
                                     )
                                   ]),
-                                  Row(children: [
-                                    Text(
-                                      'Frequency: ',
-                                      style: const TextStyle(
-                                          color: ColorValues.blackColor,
-                                          fontWeight: FontWeight.w400),
-                                    ),
-                                    SizedBox(
-                                      width: 5,
-                                    ),
-                                    Expanded(
-                                      child: Text(
-                                        "${inventoryTypeListModel?.description ?? ''}",
-                                        style: const TextStyle(
-                                          color: ColorValues.navyBlueColor,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                    )
-                                  ]),
-                                  Row(children: [
-                                    Column(
-                                      children: [
-                                        Text(
-                                          'Duration',
-                                          style: const TextStyle(
-                                              color: ColorValues.blackColor,
-                                              fontWeight: FontWeight.w400),
-                                        ),
-                                        Text(
-                                          "${inventoryTypeListModel?.status ?? ''} min.",
-                                          style: const TextStyle(
-                                            color: ColorValues.navyBlueColor,
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                        )
-                                      ],
-                                    ),
-                                    Expanded(
-                                      child: Column(
-                                        children: [
-                                          Text(
-                                            'ManPower',
-                                            style: const TextStyle(
-                                                color: ColorValues.blackColor,
-                                                fontWeight: FontWeight.w500),
-                                          ),
-                                          Text(
-                                            "${inventoryTypeListModel?.id ?? ''}",
-                                            style: const TextStyle(
-                                              color: ColorValues.navyBlueColor,
-                                              fontWeight: FontWeight.bold,
-                                            ),
-                                          )
-                                        ],
-                                      ),
-                                    )
-                                  ]),
-                                  SwitchListTile(
-                                    visualDensity: VisualDensity.comfortable,
-                                    title: Text(
-                                      'Active Status: ',
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.w600,
-                                      ),
-                                    ),
-                                    value: inventoryTypeListModel?.status == 1
-                                        ? true
-                                        : false,
-                                    onChanged: (value) {},
-                                    activeColor: ColorValues.greenColor,
-                                  ),
                                 ]),
                           ),
                         ),

@@ -47,7 +47,7 @@ class DesignationListContentMobile extends GetView<DesignationListController> {
                                   Row(
                                     children: [
                                       Text(
-                                        'CheckList Id: ',
+                                        'Designation Id: ',
                                         style: const TextStyle(
                                             color: ColorValues.blackColor,
                                             fontWeight: FontWeight.w400),
@@ -63,7 +63,7 @@ class DesignationListContentMobile extends GetView<DesignationListController> {
                                   ),
                                   Row(children: [
                                     Text(
-                                      'Module Name: ',
+                                      'Designation:',
                                       style: const TextStyle(
                                           color: ColorValues.blackColor,
                                           fontWeight: FontWeight.w400),

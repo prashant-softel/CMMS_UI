@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:cmms/app/grievance_type/grievance_type_presenter.dart';
 import 'package:cmms/app/home/home_controller.dart';
+import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/theme/color_values.dart';
 import 'package:cmms/app/theme/styles.dart';
 import 'package:cmms/domain/models/grievance_type_model.dart';
@@ -207,6 +208,11 @@ class GrievanceTypeController extends GetxController {
     await {
       cleardata(),
     };
+  }
+  Future<void> createChecklist() async {
+    Get.toNamed(
+      Routes.createCheckList,
+    );
   }
 
   cleardata() {

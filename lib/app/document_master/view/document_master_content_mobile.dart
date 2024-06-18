@@ -27,7 +27,7 @@ class DocumentMasterContentMobile
                         ? controller.DocumentMaster.length
                         : 0,
                     itemBuilder: (context, index) {
-                      final preventiveCheckListModel =
+                      final documentListModel =
                           (controller.DocumentMaster != null)
                               ? controller.DocumentMaster[index]
                               : DocumentMasterModel();
@@ -54,7 +54,7 @@ class DocumentMasterContentMobile
                                             fontWeight: FontWeight.w400),
                                       ),
                                       Text(
-                                        '${preventiveCheckListModel.id ?? 0}',
+                                        '${documentListModel.id ?? 0}',
                                         style: const TextStyle(
                                           fontWeight: FontWeight.bold,
                                           color: ColorValues.navyBlueColor,
@@ -64,7 +64,7 @@ class DocumentMasterContentMobile
                                   ),
                                   Row(children: [
                                     Text(
-                                      'Name: ',
+                                      'Document Name: ',
                                       style: const TextStyle(
                                           color: ColorValues.blackColor,
                                           fontWeight: FontWeight.w400),
@@ -74,7 +74,7 @@ class DocumentMasterContentMobile
                                     ),
                                     Expanded(
                                       child: Text(
-                                        '${preventiveCheckListModel.name}'
+                                        '${documentListModel.name}'
                                         '',
                                         style: const TextStyle(
                                           color: ColorValues.navyBlueColor,
@@ -83,29 +83,29 @@ class DocumentMasterContentMobile
                                       ),
                                     ),
                                   ]),
-                                  // Row(//
-                                  //     children: [
-                                  //   Text(
-                                  //     'Category: ',
-                                  //     style: const TextStyle(
-                                  //         color: ColorValues.blackColor,
-                                  //         fontWeight: FontWeight.w400),
-                                  //   ),
-                                  //   SizedBox(
-                                  //     width: 5,
-                                  //   ),
-                                  //   Expanded(
-                                  //     child: Text(
-                                  //       preventiveCheckListModel
-                                  //               ?.category_name ??
-                                  //           '',
-                                  //       style: const TextStyle(
-                                  //         color: ColorValues.navyBlueColor,
-                                  //         fontWeight: FontWeight.bold,
-                                  //       ),
-                                  //     ),
-                                  //   )
-                                  // ]),
+                                  Row(
+                                      children: [
+                                    Text(
+                                      'Document Description: ',
+                                      style: const TextStyle(
+                                          color: ColorValues.blackColor,
+                                          fontWeight: FontWeight.w400),
+                                    ),
+                                    SizedBox(
+                                      width: 5,
+                                    ),
+                                    Expanded(
+                                      child: Text(
+                                        documentListModel
+                                                .description ??
+                                            '',
+                                        style: const TextStyle(
+                                          color: ColorValues.navyBlueColor,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    )
+                                  ]),
                                   // Row(children: [
                                   //   Text(
                                   //     'Frequency: ',
@@ -118,7 +118,7 @@ class DocumentMasterContentMobile
                                   //   ),
                                   //   Expanded(
                                   //     child: Text(
-                                  //       "${preventiveCheckListModel?.frequency_name ?? ''}",
+                                  //       "${documentListModel?.frequency_name ?? ''}",
                                   //       style: const TextStyle(
                                   //         color: ColorValues.navyBlueColor,
                                   //         fontWeight: FontWeight.bold,
@@ -136,7 +136,7 @@ class DocumentMasterContentMobile
                                   //             fontWeight: FontWeight.w400),
                                   //       ),
                                   //       Text(
-                                  //         "${preventiveCheckListModel?.duration ?? ''} min.",
+                                  //         "${documentListModel?.duration ?? ''} min.",
                                   //         style: const TextStyle(
                                   //           color: ColorValues.navyBlueColor,
                                   //           fontWeight: FontWeight.bold,
@@ -154,7 +154,7 @@ class DocumentMasterContentMobile
                                   //               fontWeight: FontWeight.w500),
                                   //         ),
                                   //         Text(
-                                  //           "${preventiveCheckListModel?.manPower ?? ''}",
+                                  //           "${documentListModel?.manPower ?? ''}",
                                   //           style: const TextStyle(
                                   //             color: ColorValues.navyBlueColor,
                                   //             fontWeight: FontWeight.bold,
@@ -173,7 +173,7 @@ class DocumentMasterContentMobile
                                   //       fontWeight: FontWeight.w600,
                                   //     ),
                                   //   ),
-                                  //   value: preventiveCheckListModel?.status == 1
+                                  //   value: documentListModel?.status == 1
                                   //       ? true
                                   //       : false,
                                   //   onChanged: (value) {},
