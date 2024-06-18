@@ -78,6 +78,11 @@ class EscalationMatrixListController extends GetxController {
     }
   }
 
+  void clearStoreData() {
+    escalationMatrixPresenter.clearStatusValue();
+    escalationMatrixPresenter.clearModuleValue();
+  }
+
   void search(String keyword) {
     if (keyword.isEmpty) {
       matrixlist.value = buffermatrixlist;
@@ -127,8 +132,11 @@ class EscalationMatrixListController extends GetxController {
     update(['escalator_matrix_list']);
   }
 
-  Future<void> viewEscalationMatrix(
-      {required int moudle_id, required int status_id}) async {
+  Future<void> viewEscalationMatrix({
+    required int moudle_id,
+    required int status_id,
+  }) async {
+    clearStoreData();
     Get.toNamed(
       Routes.viewEscalatiomMatrixContentWeb,
       arguments: {
@@ -138,8 +146,17 @@ class EscalationMatrixListController extends GetxController {
     );
   }
 
-  Future<void> editEscalationMatrix({int? id}) async {
-    Get.toNamed(Routes.addIncidentReportContentWeb, arguments: id);
-    print('Argument$id');
+  Future<void> editEscalationMatrix({
+    required int moudle_id,
+    required int status_id,
+  }) async {
+    clearStoreData();
+    Get.toNamed(
+      Routes.addEscalatiomMatrixContentWeb,
+      arguments: {
+        "module_id": moudle_id,
+        "status_id": status_id,
+      },
+    );
   }
 }

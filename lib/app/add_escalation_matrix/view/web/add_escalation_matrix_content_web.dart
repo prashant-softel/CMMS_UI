@@ -1,5 +1,3 @@
-// import 'package:cmms/app/add_job/views/widgets/work_area_widget.dart';
-
 import 'package:cmms/app/add_escalation_matrix/add_escalation_matrix_controller.dart';
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
@@ -213,9 +211,16 @@ class AddEscalationMatrixContentWeb
       );
 }
 
-class AddRowInEscalation extends StatelessWidget {
-  final AddEscalationMatrixController controller = Get.find();
+class AddRowInEscalation extends StatefulWidget {
   AddRowInEscalation({super.key});
+
+  @override
+  State<AddRowInEscalation> createState() => _AddRowInEscalationState();
+}
+
+class _AddRowInEscalationState extends State<AddRowInEscalation> {
+  final AddEscalationMatrixController controller = Get.find();
+
   @override
   Widget build(BuildContext context) {
     return Obx(
@@ -301,109 +306,225 @@ class AddRowInEscalation extends StatelessWidget {
                         ),
                       ),
                     ],
-                    rows: List.generate(
-                      controller.rowItem.length,
-                      (rowIndex) {
-                        var row = controller.rowItem[rowIndex];
-                        return DataRow(
-                          cells: row.map(
-                            (mapData) {
-                              return DataCell(
-                                (mapData['key'] == "Duration (Days)")
-                                    ? Padding(
-                                        padding: const EdgeInsets.only(
-                                            left: 20, right: 20, top: 5),
-                                        child: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.center,
-                                          children: [
-                                            SizedBox(
-                                              width: Get.width * .2,
-                                              child: LoginCustomTextfield(
-                                                keyboardType:
-                                                    TextInputType.number,
-                                                inputFormatters: <TextInputFormatter>[
-                                                  FilteringTextInputFormatter
-                                                      .digitsOnly
-                                                ],
-                                                maxLine: 1,
-                                                textController:
-                                                    new TextEditingController(
-                                                        text:
-                                                            mapData["value"] ??
-                                                                ''),
-                                                onChanged: (txt) {
-                                                  mapData["value"] = txt;
-                                                },
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      )
-                                    : (mapData['key'] ==
-                                            "Escalation Roles and Levels")
-                                        ? SizedBox(
-                                            width: Get.width * .2,
-                                            child: DropdownWebWidget(
-                                              dropdownList: controller.roleList,
-                                              isValueSelected: controller
-                                                  .isSelectedRole.value,
-                                              selectedValue: mapData["value"],
-                                              onValueChanged:
-                                                  (list, selectedValue) {
-                                                print(
-                                                  "dropdownData:${{
-                                                    selectedValue: selectedValue
-                                                  }}",
-                                                );
-                                                mapData["value"] =
-                                                    selectedValue;
-                                                controller.dropdownMapperData[
-                                                        selectedValue] =
-                                                    list.firstWhere(
-                                                  (element) =>
-                                                      element.name ==
-                                                      selectedValue,
-                                                  orElse: null,
-                                                );
-                                              },
-                                            ),
-                                          )
-                                        : (mapData['key'] == "Action")
-                                            ? Padding(
-                                                padding:
-                                                    EdgeInsets.only(top: 5),
-                                                child: Column(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.start,
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    TableActionButton(
-                                                      color: ColorValues
-                                                          .appRedColor,
-                                                      icon:
-                                                          Icons.delete_outlined,
-                                                      label: '',
-                                                      message: '',
-                                                      onPress: () {
-                                                        controller.rowItem
-                                                            .remove(row);
-                                                        controller.update();
-                                                      },
-                                                    )
-                                                  ],
-                                                ),
-                                              )
-                                            : Text(mapData['key'] ?? ''),
-                              );
-                            },
-                          ).toList(),
-                        );
-                      },
-                    ),
+                    rows: controller.rowItem.map((record) {
+                      return DataRow.byIndex(
+                        index: controller.rowItem.indexOf(record),
+                        cells: record
+                            .where((mapData) =>
+                                mapData['key'] != "Escalation Role Id")
+                            .map((mapData) {
+                          if (mapData['key'] == "Duration (Days)") {
+                            return DataCell(
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                    left: 20, right: 20, top: 5),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    SizedBox(
+                                      width: Get.width * .2,
+                                      child: LoginCustomTextfield(
+                                        keyboardType: TextInputType.number,
+                                        inputFormatters: <TextInputFormatter>[
+                                          FilteringTextInputFormatter.digitsOnly
+                                        ],
+                                        maxLine: 1,
+                                        textController:
+                                            new TextEditingController(
+                                                text: mapData["value"] ?? ''),
+                                        onChanged: (txt) {
+                                          mapData["value"] = txt;
+                                        },
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            );
+                          } else if (mapData['key'] ==
+                              "Escalation Roles and Levels") {
+                            return DataCell(
+                              SizedBox(
+                                width: Get.width * .2,
+                                child: DropdownWebWidget(
+                                  dropdownList: controller.roleList,
+                                  isValueSelected:
+                                      controller.isSelectedRole.value,
+                                  selectedValue: mapData["value"],
+                                  onValueChanged: (list, selectedValue) {
+                                    // setState(() {
+                                    print(
+                                      "dropdownData:${{
+                                        selectedValue: selectedValue
+                                      }}",
+                                    );
+                                    mapData["value"] = selectedValue;
+                                    controller
+                                            .dropdownMapperData[selectedValue] =
+                                        list.firstWhere(
+                                      (element) =>
+                                          element.name == selectedValue,
+                                    );
+                                    final escalationData = controller
+                                        .dropdownMapperData[selectedValue];
+                                    if (escalationData != null) {
+                                      final roleId =
+                                          escalationData.id.toString();
+                                      final rowIndex =
+                                          controller.rowItem.indexWhere(
+                                        (row) =>
+                                            row[2]['value'] == selectedValue,
+                                      );
+                                      if (rowIndex != -1) {
+                                        // Update the value of 'Escalation Role Id' in the correct row
+                                        controller.rowItem[rowIndex][1]
+                                            ['value'] = roleId;
+                                        print(
+                                            "Updated rowItem: ${controller.rowItem[rowIndex]}");
+                                      } else {
+                                        print(
+                                            "Row with selected value not found.");
+                                      }
+                                    }
+                                    // });
+                                  },
+                                ),
+                              ),
+                            );
+                          } else if (mapData['key'] == "Action") {
+                            return DataCell(
+                              Padding(
+                                padding: EdgeInsets.only(top: 5),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    TableActionButton(
+                                      color: ColorValues.appRedColor,
+                                      icon: Icons.delete_outlined,
+                                      label: '',
+                                      message: '',
+                                      onPress: () {
+                                        controller.rowItem.remove(record);
+                                        controller.update();
+                                      },
+                                    )
+                                  ],
+                                ),
+                              ),
+                            );
+                          } else {
+                            return DataCell(
+                              Text(mapData['value'] ?? ""),
+                            );
+                          }
+                        }).toList(),
+                      );
+                    }).toList(),
+                    // rows: List.generate(
+                    //   controller.rowItem.length,
+                    //   (rowIndex) {
+                    //     var row = controller.rowItem[rowIndex];
+                    //     return DataRow(
+                    //       cells: row.map(
+                    //         (mapData) {
+                    //           return DataCell(
+                    //             (mapData['key'] == "Duration (Days)")
+                    //                 ? Padding(
+                    //                     padding: const EdgeInsets.only(
+                    //                         left: 20, right: 20, top: 5),
+                    //                     child: Column(
+                    //                       mainAxisAlignment:
+                    //                           MainAxisAlignment.center,
+                    //                       crossAxisAlignment:
+                    //                           CrossAxisAlignment.center,
+                    //                       children: [
+                    //                         SizedBox(
+                    //                           width: Get.width * .2,
+                    //                           child: LoginCustomTextfield(
+                    //                             keyboardType:
+                    //                                 TextInputType.number,
+                    //                             inputFormatters: <TextInputFormatter>[
+                    //                               FilteringTextInputFormatter
+                    //                                   .digitsOnly
+                    //                             ],
+                    //                             maxLine: 1,
+                    //                             textController:
+                    //                                 new TextEditingController(
+                    //                                     text:
+                    //                                         mapData["value"] ??
+                    //                                             ''),
+                    //                             onChanged: (txt) {
+                    //                               mapData["value"] = txt;
+                    //                             },
+                    //                           ),
+                    //                         ),
+                    //                       ],
+                    //                     ),
+                    //                   )
+                    //                 : (mapData['key'] ==
+                    //                         "Escalation Roles and Levels")
+                    //                     ? SizedBox(
+                    //                         width: Get.width * .2,
+                    //                         child: DropdownWebWidget(
+                    //                           dropdownList: controller.roleList,
+                    //                           isValueSelected: controller
+                    //                               .isSelectedRole.value,
+                    //                           selectedValue: mapData["value"],
+                    //                           onValueChanged:
+                    //                               (list, selectedValue) {
+                    //                             print(
+                    //                               "dropdownData:${{
+                    //                                 selectedValue: selectedValue
+                    //                               }}",
+                    //                             );
+                    //                             mapData["value"] =
+                    //                                 selectedValue;
+                    //                             controller.dropdownMapperData[
+                    //                                     selectedValue] =
+                    //                                 list.firstWhere(
+                    //                               (element) =>
+                    //                                   element.name ==
+                    //                                   selectedValue,
+                    //                               orElse: null,
+                    //                             );
+                    //                           },
+                    //                         ),
+                    //                       )
+                    //                     : (mapData['key'] == "Action")
+                    //                         ? Padding(
+                    //                             padding:
+                    //                                 EdgeInsets.only(top: 5),
+                    //                             child: Column(
+                    //                               mainAxisAlignment:
+                    //                                   MainAxisAlignment.start,
+                    //                               crossAxisAlignment:
+                    //                                   CrossAxisAlignment.start,
+                    //                               children: [
+                    //                                 TableActionButton(
+                    //                                   color: ColorValues
+                    //                                       .appRedColor,
+                    //                                   icon:
+                    //                                       Icons.delete_outlined,
+                    //                                   label: '',
+                    //                                   message: '',
+                    //                                   onPress: () {
+                    //                                     controller.rowItem
+                    //                                         .remove(row);
+                    //                                     controller.update();
+                    //                                   },
+                    //                                 )
+                    //                               ],
+                    //                             ),
+                    //                           )
+                    //                         : Text(mapData['key'] ?? ''),
+                    //           );
+                    //         },
+                    //       ).toList(),
+                    //     );
+                    //   },
+                    // ),
                   ),
                 ),
               ),

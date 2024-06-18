@@ -104,6 +104,7 @@ class EscalationMatrixListWeb extends GetView<EscalationMatrixListController> {
                                           icon: Icons.add,
                                           color: ColorValues.addNewColor,
                                           onPressed: () {
+                                            controller.clearStoreData();
                                             Get.toNamed(
                                               Routes
                                                   .addEscalatiomMatrixContentWeb,
@@ -416,7 +417,12 @@ class EscalationListDataSource extends DataTableSource {
                                 color: ColorValues.appYellowColor,
                                 icon: Icons.edit,
                                 message: 'Edit',
-                                onPress: () {},
+                                onPress: () {
+                                  controller.editEscalationMatrix(
+                                    moudle_id: Escalation?.moduleId ?? 0,
+                                    status_id: Escalation?.statusId ?? 0,
+                                  );
+                                },
                               ),
                               TableActionButton(
                                 color: Colors.red,
