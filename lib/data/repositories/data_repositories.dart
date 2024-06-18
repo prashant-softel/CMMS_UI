@@ -2667,6 +2667,18 @@ class DataRepository extends DomainRepository {
     return response;
   }
 
+  Future<ResponseModel> skipCalibration({
+    auth,
+    bool? isLoading,
+    skipCalibrationtoJsonString,
+  }) async {
+    var response = await connectHelper.skipCalibration(
+        auth: auth,
+        isLoading: isLoading,
+        skipCalibrationtoJsonString: skipCalibrationtoJsonString);
+    return response;
+  }
+
   Future<ResponseModel> approveRequestCalibration({
     auth,
     bool? isLoading,
@@ -5602,5 +5614,20 @@ class DataRepository extends DomainRepository {
       isLoading: isLoading,
     );
   }
+
+  Future<ResponseModel> getScheduleCourseList({
+    required String auth,
+    int? facilityId,
+    dynamic startDate,
+    dynamic endDate,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.getScheduleCourseList(
+        auth: auth,
+        facilityId: facilityId ?? 0,
+        isLoading: isLoading ?? false,
+        startDate: startDate,
+        endDate: endDate,
+      );
 //end
 }

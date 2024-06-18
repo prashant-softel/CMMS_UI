@@ -11,6 +11,7 @@ import 'package:cmms/domain/models/course_category_model.dart';
 import 'package:cmms/domain/models/dashboard_model.dart';
 import 'package:cmms/domain/models/documentmaster_model.dart';
 import 'package:cmms/domain/models/dsm_list_model.dart';
+import 'package:cmms/domain/models/escalation_details_model.dart';
 import 'package:cmms/domain/models/escalation_matrix_list_model.dart';
 import 'package:cmms/domain/models/get_mc_task_equipment_model.dart';
 import 'package:cmms/domain/models/get_observation_list_model.dart';
@@ -83,6 +84,7 @@ import 'package:cmms/domain/models/req_order_details_by_id_model.dart';
 import 'package:cmms/domain/models/request_order_list.model.dart';
 import 'package:cmms/domain/models/risk_type_list_model.dart';
 import 'package:cmms/domain/models/safety_measure_list_model.dart';
+import 'package:cmms/domain/models/schedule_course_list_model.dart';
 import 'package:cmms/domain/models/sop_list_model.dart';
 import 'package:cmms/domain/models/asset_type_list_model.dart';
 import 'package:cmms/domain/models/facility_type_list_model.dart';
@@ -735,7 +737,7 @@ class Repository {
     }
   }
 
-  Future<NewPermitDetailModel?> getEscalationDetail({
+  Future<List<EscalationDetails?>> getEscalationDetail({
     int? moduleId,
     int? statusId,
     bool? isLoading,
@@ -748,25 +750,21 @@ class Repository {
         statusId: statusId,
         isLoading: isLoading ?? false,
       );
-
-      print({"permitdetail", res.data});
-
       if (!res.hasError) {
         if (res.errorCode == 200) {
-          final NewPermitDetailModel _newPermitDetailModel =
-              newPermitDetailModelFromJson(res.data);
-
-          var responseMap = _newPermitDetailModel;
+          final List<EscalationDetails> _escalationDetails =
+              EscalationDetailsFromJson(res.data);
+          var responseMap = _escalationDetails;
           print({"responsedata", responseMap});
           return responseMap;
         }
       } else {
         Utility.showDialog(res.errorCode.toString(), 'escalation');
       }
-      return null;
+      return [];
     } catch (error) {
       print(error.toString());
-      return null;
+      return [];
     }
   }
 
@@ -7795,6 +7793,31 @@ class Repository {
     }
   }
 
+  Future<bool> skipCalibration(
+      {bool? isLoading, skipCalibrationtoJsonString}) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      log(auth);
+      final res = await _dataRepository.skipCalibration(
+          auth: auth,
+          isLoading: isLoading,
+          skipCalibrationtoJsonString:
+              json.encode(skipCalibrationtoJsonString));
+      print({"res.data", res.data});
+      if (!res.hasError) {
+        Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
+
+        return true;
+      } else {
+        Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
+        return false;
+      }
+    } catch (error) {
+      log(error.toString());
+      return false;
+    }
+  }
+
   Future<bool> approveJobCards({bool? isLoading, approveJsonString}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
@@ -14768,6 +14791,41 @@ class Repository {
       return [];
     } catch (error) {
       log(error.toString());
+      return [];
+    }
+  }
+  Future<List<ScheduleCourseListModel>> getScheduleCourseList({
+    int? facility_id,
+    String? start_date,
+    String? end_date,
+    bool? isLoading,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      log(auth);
+      final res = await _dataRepository.getScheduleCourseList(
+        auth: auth,
+        facilityId: facility_id,
+        startDate: start_date,
+        endDate: end_date,
+        isLoading: isLoading,
+      );
+      print('Get Schedule Course List: ${res.data}');
+      if (!res.hasError) {
+        final jsonscheduleCourseListModels = jsonDecode(res.data);
+        final List<ScheduleCourseListModel> _trainingList =
+            jsonscheduleCourseListModels
+                .map<ScheduleCourseListModel>((m) =>
+                    ScheduleCourseListModel.fromJson(
+                        Map<String, dynamic>.from(m)))
+                .toList();
+        return _trainingList;
+      } else {
+        Utility.showDialog(res.errorCode.toString(), 'getScheduleCourseList');
+        return [];
+      }
+    } catch (error) {
+      print(error.toString());
       return [];
     }
   }

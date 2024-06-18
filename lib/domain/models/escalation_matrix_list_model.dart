@@ -1,4 +1,5 @@
 import 'dart:convert';
+
 List<EscalationMatListModel> escalationMatListModelFromJson(String str) =>
     List<EscalationMatListModel>.from(
         json.decode(str).map((x) => EscalationMatListModel.fromJson(x)));
@@ -13,12 +14,13 @@ class EscalationMatListModel {
   String? statusName;
   List<Escalation>? escalation;
 
-  EscalationMatListModel(
-      {this.moduleId,
-      this.moduleName,
-      this.statusId,
-      this.statusName,
-      this.escalation});
+  EscalationMatListModel({
+    this.moduleId,
+    this.moduleName,
+    this.statusId,
+    this.statusName,
+    this.escalation,
+  });
 
   EscalationMatListModel.fromJson(Map<String, dynamic> json) {
     moduleId = json['module_id'];

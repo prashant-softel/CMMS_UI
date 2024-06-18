@@ -2,13 +2,12 @@ import 'dart:async';
 
 import 'package:cmms/app/add_escalation_matrix/add_escalation_matrix_presenter.dart';
 import 'package:cmms/app/app.dart';
-import 'package:cmms/domain/domain.dart';
 import 'package:cmms/domain/models/create_escalation_matrix_model.dart';
+import 'package:cmms/domain/models/escalation_details_model.dart';
 import 'package:cmms/domain/models/module_model.dart';
 import 'package:cmms/domain/models/paiyed_model.dart';
 import 'package:cmms/domain/models/role_model.dart';
 import 'package:cmms/domain/models/status_list_model.dart';
-import 'package:cmms/domain/models/type_permit_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rxdart/subjects.dart';
@@ -28,6 +27,8 @@ class AddEscalationMatrixController extends GetxController {
   List<Escalation> days = [];
   Map<String, RoleModel> dropdownMapperData = {};
   Map<String, PaiedModel> paiddropdownMapperData = {};
+  RxBool isStatusSelected = true.obs;
+  RxString selectedStatus = ''.obs;
 
   void addRowItem() {
     rowItem.add([
@@ -42,26 +43,9 @@ class AddEscalationMatrixController extends GetxController {
   RxList<Status?> status = <Status>[].obs;
   Rx<bool> isModuleListSelected = true.obs;
   Rx<String> selectedModuleList = ''.obs;
-  int? selectedModuleListId = 0;
   int type = 1;
-  int statusId = 0;
-
-  ///Permit Type
-  RxList<TypePermitModel?> typePermitList = <TypePermitModel>[].obs;
-  Rx<bool> isTypePermitSelected = true.obs;
-  Rx<String> selectedTypePermit = ''.obs;
-  Rx<String> selectedTypeOfPermit = ''.obs;
-  int selectedTypePermitId = 0;
-
-  Rx<bool> isTypePermit = true.obs;
-  Rx<String> selectedStartDate = ''.obs;
-  Rx<bool> isStartdate = true.obs;
-  Rx<bool> isEnddate = true.obs;
-
-  Rx<bool> isFormInvalid = false.obs;
-
-  Rx<String> selectedFacility = ''.obs;
-  String username = '';
+  RxInt status_id = 0.obs;
+  RxInt module_id = 0.obs;
 
   RxList<FacilityModel?> facilityList = <FacilityModel>[].obs;
   Rx<bool> isFacilitySelected = true.obs;
@@ -70,68 +54,103 @@ class AddEscalationMatrixController extends GetxController {
     rowsPerPage: 10,
   );
 
-  ///Plant Name
-  RxList<FacilityModel?> facilityPlantList = <FacilityModel>[].obs;
-  Rx<bool> isFacilityPlantSelected = true.obs;
-  Rx<String> selectedPlantFacility = ''.obs;
-
-  ///Equipment name List
-  RxList<InventoryModel?> eqipmentNameList = <InventoryModel>[].obs;
-  Rx<String> selectedEquipmentName = ''.obs;
-  Rx<bool> isEquipmentNameSelected = true.obs;
-  int selectedEquipmentnameId = 0;
   RxList<RoleModel?> roleList = <RoleModel>[].obs;
   Rx<String> selectedRole = ''.obs;
   Rx<bool> isSelectedRole = true.obs;
   int? selectedRoleListId = 0;
+  RxList<EscalationDetails?> escalation_details_list =
+      <EscalationDetails>[].obs;
+  Rx<EscalationDetails?> escalation_details = EscalationDetails().obs;
+  RxList<StatusEscalation>? status_escalation_list = <StatusEscalation>[].obs;
+  Rx<StatusEscalation> status_escalation = StatusEscalation().obs;
+  RxList<EscalationDetail> escalation_list = <EscalationDetail>[].obs;
+  Rx<EscalationDetail> escalation = EscalationDetail().obs;
 
   BehaviorSubject<int> _facilityId = BehaviorSubject.seeded(0);
   Stream<int> get facilityId$ => _facilityId.stream;
   int get facilityId1 => _facilityId.value;
-
   StreamSubscription<int>? facilityIdStreamSubscription;
-  int facilityId = 0;
+  RxInt facilityId = 0.obs;
 
-  ///
-  int? id = 0;
   @override
   void onInit() async {
-    id = Get.arguments;
-    print('EscalationMatrix_Id:$id');
-    facilityIdStreamSubscription = homeController.facilityId$.listen((event) {
-      facilityId = event;
-      Future.delayed(Duration(seconds: 1), () {
-        getFacilityList();
-      });
-    });
-    Future.delayed(Duration(seconds: 1), () {
-      getModuleList(facilityId, type, true);
-    });
-    Future.delayed(Duration(seconds: 1), () {
-      getRoleList();
+    await setId();
+    facilityIdStreamSubscription =
+        homeController.facilityId$.listen((event) async {
+      facilityId.value = event;
+      await getModuleList(facilityId.value, type, true);
+      await getRoleList();
+      if (module_id.value != 0) {
+        await getEscalationDetail(
+          module_id: module_id.value,
+          status_id: status_id.value,
+          isLoading: true,
+        );
+        await getStatusList(moduleId: module_id.value);
+      }
     });
     addRowItem();
-    // await getIncidentReportHistory(id: id!);
-
     super.onInit();
   }
 
-  Future<void> getFacilityList() async {
-    final _facilityList = await addEscalationPresenter.getFacilityList();
-    //print('Facility25:$_facilityList');
-    if (_facilityList != null) {
-      for (var facility in _facilityList) {
-        facilityList.add(facility);
+  Future<void> setId() async {
+    try {
+      final _status_id = await addEscalationPresenter.getStatusValue();
+      final _module_id = await addEscalationPresenter.getModuleValue();
+      if (_status_id == null || _status_id == "" || _status_id == 0) {
+        var dataFromPrevioursScreen = Get.arguments;
+        status_id.value = dataFromPrevioursScreen['status_id'];
+        module_id.value = dataFromPrevioursScreen['module_id'];
+        addEscalationPresenter.saveStatusValue(
+          statusId: status_id.value.toString(),
+        );
+        addEscalationPresenter.saveModuleValue(
+          moduleId: module_id.value.toString(),
+        );
+      } else {
+        status_id.value = int.tryParse(_status_id) ?? 0;
+        module_id.value = int.tryParse(_module_id!) ?? 0;
       }
-
-      selectedFacility.value = facilityList[0]?.name ?? '';
-      _facilityId.sink.add(facilityList[0]?.id ?? 0);
+    } catch (e) {
+      print(e);
     }
+  }
+
+  void clearStoreData() {
+    addEscalationPresenter.clearStatusValue();
+    addEscalationPresenter.clearModuleValue();
+  }
+
+  Future<void> getEscalationDetail({
+    int? module_id,
+    int? status_id,
+    bool? isLoading,
+  }) async {
+    final _matrixDetails = await addEscalationPresenter.getEscalationDetail(
+      moduleId: module_id ?? 0,
+      statusId: status_id ?? 0,
+      isLoading: isLoading,
+    );
+    if (_matrixDetails.isNotEmpty) {
+      escalation_details_list.value = _matrixDetails;
+      escalation_details.value = escalation_details_list.firstWhereOrNull(
+        (element) => element?.module_id == module_id,
+      );
+      status_escalation_list?.value =
+          escalation_details.value!.status_escalation!;
+      status_escalation.value = status_escalation_list!.firstWhereOrNull(
+        (element) => element.status_id == status_id,
+      )!;
+      escalation_list.value = status_escalation.value.escalation!;
+      escalation.value = escalation_list.firstWhereOrNull(
+        (element) => element.role_id != null,
+      )!;
+    }
+    update(["escalation-matrix"]);
   }
 
   Future<void> getRoleList() async {
     final list = await addEscalationPresenter.getRoleList();
-
     if (list != null) {
       for (var _roleList in list) {
         roleList.add(_roleList);
@@ -170,11 +189,11 @@ class AddEscalationMatrixController extends GetxController {
           if (value != "Please Select") {
             int moduleListIndex =
                 moduleList.indexWhere((x) => x?.name == value);
-            selectedModuleListId = moduleList[moduleListIndex]?.id ?? 0;
-            getStatusList(moduleId: selectedModuleListId);
-            print('Module List Id: $selectedModuleListId');
+            module_id.value = moduleList[moduleListIndex]?.id ?? 0;
+            getStatusList(moduleId: module_id.value);
+            print('Module List Id: $module_id.value');
           } else {
-            selectedModuleListId = 0;
+            module_id.value = 0;
           }
         }
         break;
@@ -194,10 +213,10 @@ class AddEscalationMatrixController extends GetxController {
         {
           if (value != "Please Select") {
             int statusIndex = status.indexWhere((x) => x?.name == value);
-            statusId = status[statusIndex]?.id ?? 0;
-            selectedTypePermit.value = value;
+            status_id.value = status[statusIndex]?.id ?? 0;
+            selectedStatus.value = value;
           } else {
-            statusId = 0;
+            status_id.value = 0;
           }
         }
         break;
@@ -225,11 +244,11 @@ class AddEscalationMatrixController extends GetxController {
     late List<Status_escalation> state_escalation_list = [];
 
     state_escalation_list
-        .add(Status_escalation(status_id: statusId, escalation: days));
+        .add(Status_escalation(status_id: status_id.value, escalation: days));
 
     CreateEscalationMatrixModel createEscalationMatrixModel =
         CreateEscalationMatrixModel(
-      module_id: selectedModuleListId,
+      module_id: module_id.value,
       status_escalation: state_escalation_list,
     );
 

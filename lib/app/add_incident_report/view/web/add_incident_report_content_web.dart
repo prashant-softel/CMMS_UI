@@ -4492,11 +4492,17 @@ class ImmediateCorrection extends StatelessWidget {
 }
 
 ///Details of Injured person
-class DetailsOfInjuredPerson extends StatelessWidget {
-  final AddIncidentReportController controller = Get.find();
+class DetailsOfInjuredPerson extends StatefulWidget {
   DetailsOfInjuredPerson({
     super.key,
   });
+
+  @override
+  State<DetailsOfInjuredPerson> createState() => _DetailsOfInjuredPersonState();
+}
+
+class _DetailsOfInjuredPersonState extends State<DetailsOfInjuredPerson> {
+  final AddIncidentReportController controller = Get.find();
 
   @override
   Widget build(
@@ -4568,96 +4574,240 @@ class DetailsOfInjuredPerson extends StatelessWidget {
                   ],
                 ),
               ),
-              Expanded(
-                child: DataTable2(
-                  minWidth: 2000,
-                  dataRowHeight: 60,
-                  columnSpacing: 10,
-                  border: TableBorder.all(
-                      color: Color.fromARGB(255, 206, 229, 234)),
-                  columns: [
-                    DataColumn2(
-                        // fixedWidth: 300,
-                        label: Text(
-                      "Name of Injured\nPerson ",
-                      style:
-                          TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
-                    )),
-                    DataColumn2(
-                        // fixedWidth: 300,
-                        label: Text(
-                      "Gender ",
-                      style:
-                          TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
-                    )),
-                    DataColumn2(
-                        // fixedWidth: 220,
-                        label: Text(
-                      "Trade/Designation ",
-                      style:
-                          TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
-                    )),
-                    DataColumn2(
-                        // fixedWidth: 220,
-                        label: Text(
-                      "Address ",
-                      style:
-                          TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
-                    )),
-                    DataColumn2(
-                        // fixedWidth: 220,
-                        label: Text(
-                      "Name of Contractor ",
-                      style:
-                          TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
-                    )),
-                    DataColumn2(
-                        // fixedWidth: 220,
-                        label: Text(
-                      "Body part injured ",
-                      style:
-                          TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
-                    )),
-                    DataColumn2(
-                        // fixedWidth: 220,
-                        label: Text(
-                      "work experience ",
-                      style:
-                          TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
-                    )),
-                    DataColumn2(
-                        // fixedWidth: 220,
-                        label: Text(
-                      "Plant & Equipment ",
-                      style:
-                          TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
-                    )),
-                    DataColumn2(
-                        // fixedWidth: 220,
-                        label: Text(
-                      "Exact Location ",
-                      style:
-                          TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
-                    )),
-                    DataColumn2(
-                        fixedWidth: 60,
-                        label: Text(
-                          "Action ",
-                          style: TextStyle(
-                              fontSize: 15, fontWeight: FontWeight.bold),
-                        )),
-                  ],
-                  rows: controller.rowInjuredPersonItem.value.map((record) {
-                    return DataRow.byIndex(
-                      index:
-                          controller.rowInjuredPersonItem.value.indexOf(record),
-                      cells: record
-                          .where(
-                              (mapData) => mapData['key'] != 'injured_item_id')
-                          .map((mapData) {
-                        if (mapData['key'] == "Name of Injured Person ") {
-                          return DataCell(
-                            Padding(
+              Obx(
+                () => Expanded(
+                  child: DataTable2(
+                    minWidth: 2000,
+                    dataRowHeight: 60,
+                    columnSpacing: 10,
+                    border: TableBorder.all(
+                        color: Color.fromARGB(255, 206, 229, 234)),
+                    columns: [
+                      DataColumn2(
+                          // fixedWidth: 300,
+                          label: Text(
+                        "Name of Injured\nPerson ",
+                        style: TextStyle(
+                            fontSize: 12, fontWeight: FontWeight.bold),
+                      )),
+                      DataColumn2(
+                          // fixedWidth: 300,
+                          label: Text(
+                        "Gender ",
+                        style: TextStyle(
+                            fontSize: 12, fontWeight: FontWeight.bold),
+                      )),
+                      DataColumn2(
+                          // fixedWidth: 220,
+                          label: Text(
+                        "Trade/Designation ",
+                        style: TextStyle(
+                            fontSize: 12, fontWeight: FontWeight.bold),
+                      )),
+                      DataColumn2(
+                          // fixedWidth: 220,
+                          label: Text(
+                        "Address ",
+                        style: TextStyle(
+                            fontSize: 12, fontWeight: FontWeight.bold),
+                      )),
+                      DataColumn2(
+                          // fixedWidth: 220,
+                          label: Text(
+                        "Name of Contractor ",
+                        style: TextStyle(
+                            fontSize: 12, fontWeight: FontWeight.bold),
+                      )),
+                      DataColumn2(
+                          // fixedWidth: 220,
+                          label: Text(
+                        "Body part injured ",
+                        style: TextStyle(
+                            fontSize: 12, fontWeight: FontWeight.bold),
+                      )),
+                      DataColumn2(
+                          // fixedWidth: 220,
+                          label: Text(
+                        "work experience ",
+                        style: TextStyle(
+                            fontSize: 12, fontWeight: FontWeight.bold),
+                      )),
+                      DataColumn2(
+                          // fixedWidth: 220,
+                          label: Text(
+                        "Plant & Equipment ",
+                        style: TextStyle(
+                            fontSize: 12, fontWeight: FontWeight.bold),
+                      )),
+                      DataColumn2(
+                          // fixedWidth: 220,
+                          label: Text(
+                        "Exact Location ",
+                        style: TextStyle(
+                            fontSize: 12, fontWeight: FontWeight.bold),
+                      )),
+                      DataColumn2(
+                          fixedWidth: 60,
+                          label: Text(
+                            "Action ",
+                            style: TextStyle(
+                                fontSize: 15, fontWeight: FontWeight.bold),
+                          )),
+                    ],
+                    rows: controller.rowInjuredPersonItem.value.map((record) {
+                      return DataRow.byIndex(
+                        index: controller.rowInjuredPersonItem.value
+                            .indexOf(record),
+                        cells: record
+                            .where((mapData) =>
+                                mapData['key'] != 'injured_item_id')
+                            .map((mapData) {
+                          if (mapData['key'] == "Name of Injured Person ") {
+                            return DataCell(
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                    left: 10, right: 10, top: 10),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Container(
+                                      decoration: BoxDecoration(
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: Colors.black26,
+                                            offset: const Offset(
+                                              5.0,
+                                              5.0,
+                                            ),
+                                            blurRadius: 5.0,
+                                            spreadRadius: 1.0,
+                                          ),
+                                        ],
+                                        color: ColorValues.whiteColor,
+                                        borderRadius: BorderRadius.circular(5),
+                                      ),
+                                      child: IgnorePointer(
+                                        ignoring: controller
+                                                    .incidentReportDetailsModel
+                                                    .value
+                                                    ?.status ==
+                                                183
+                                            ? true
+                                            : false,
+                                        child: DropdownWebStock(
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width /
+                                              4,
+                                          dropdownList:
+                                              controller.victimNameList,
+                                          selectedValue: mapData["value"],
+                                          onValueChanged:
+                                              (list, selectedValue) {
+                                            setState(() {
+                                              print({
+                                                selectedValue: selectedValue
+                                              });
+                                              if (selectedValue != null) {
+                                                controller.updateSelectedOption(
+                                                    selectedValue);
+                                              }
+                                              mapData["value"] = selectedValue;
+                                              controller.dropdownVictimNameMapperData[
+                                                      selectedValue] =
+                                                  list.firstWhere(
+                                                      (element) =>
+                                                          element.name ==
+                                                          selectedValue,
+                                                      orElse: null);
+
+                                              final injuredPersonData = controller
+                                                      .dropdownVictimNameMapperData[
+                                                  selectedValue];
+                                              if (injuredPersonData != null) {
+                                                final genderValue =
+                                                    injuredPersonData.gender;
+                                                final designationValue =
+                                                    injuredPersonData
+                                                        .designation;
+                                                final city =
+                                                    injuredPersonData.city;
+                                                final String experince =
+                                                    injuredPersonData.experince
+                                                        .toString();
+                                                // Find the corresponding row in the rowInjuredPersonItem list
+                                                final row = controller
+                                                    .rowInjuredPersonItem
+                                                    .firstWhere((row) =>
+                                                        row[0]['value'] ==
+                                                        selectedValue);
+                                                row[1]['value'] = genderValue;
+                                                row[2]['value'] =
+                                                    designationValue;
+                                                row[3]['value'] = city;
+                                                row[6]['value'] = experince;
+                                                controller.update();
+                                              }
+                                            });
+                                          },
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            );
+                          } else if (mapData['key'] == "Gender ") {
+                            return DataCell(
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                    left: 10, right: 10, top: 10),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      "${mapData["value"] != "" ? mapData["value"] : "Select Employee"}",
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            );
+                          } else if (mapData['key'] == "Trade/Designation ") {
+                            return DataCell(
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                    left: 10, right: 10, top: 10),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      "${mapData["value"] != "" ? mapData["value"] : "Select Employee"}",
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            );
+                          } else if (mapData['key'] == "Address ") {
+                            return DataCell(
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                    left: 10, right: 10, top: 10),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      "${mapData["value"] != "" ? mapData["value"] : "Select Employee"}",
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            );
+                          } else if (mapData['key'] == "Name of Contractor ") {
+                            return DataCell(Padding(
                               padding: const EdgeInsets.only(
                                   left: 10, right: 10, top: 10),
                               child: Column(
@@ -4692,294 +4842,34 @@ class DetailsOfInjuredPerson extends StatelessWidget {
                                         width:
                                             MediaQuery.of(context).size.width /
                                                 4,
-                                        dropdownList: controller.victimNameList,
+                                        dropdownList: controller.businessList,
                                         selectedValue: mapData["value"],
                                         onValueChanged: (list, selectedValue) {
                                           print({selectedValue: selectedValue});
-                                          if (selectedValue != null) {
-                                            controller.updateSelectedOption(
-                                                selectedValue);
-                                          }
                                           mapData["value"] = selectedValue;
-                                          controller.dropdownVictimNameMapperData[
+                                          controller.dropdownBusinessListMapperData[
                                                   selectedValue] =
                                               list.firstWhere(
                                                   (element) =>
                                                       element.name ==
                                                       selectedValue,
                                                   orElse: null);
-
-                                          final injuredPersonData = controller
-                                                  .dropdownVictimNameMapperData[
-                                              selectedValue];
-                                          if (injuredPersonData != null) {
-                                            final genderValue =
-                                                injuredPersonData.gender;
-                                            final designationValue =
-                                                injuredPersonData.designation;
-                                            final city = injuredPersonData.city;
-                                            final String experince =
-                                                injuredPersonData.experince
-                                                    .toString();
-                                            // Find the corresponding row in the rowInjuredPersonItem list
-                                            final row = controller
-                                                .rowInjuredPersonItem
-                                                .firstWhere((row) =>
-                                                    row[0]['value'] ==
-                                                    selectedValue);
-
-                                            // Update the values in the row
-                                            row[1]['value'] =
-                                                genderValue; // Update the value for "Gender"
-                                            row[2]['value'] =
-                                                designationValue; // Update the value for "Trade/Designation"
-                                            row[3]['value'] =
-                                                city; // Update the value for "Trade/Designation"
-                                            row[6]['value'] =
-                                                experince; // Update the value for "Trade/Designation"
-                                          }
                                         },
                                       ),
                                     ),
                                   ),
                                 ],
                               ),
-                            ),
-                          );
-                        } else if (mapData['key'] == "Gender ") {
-                          return DataCell(
-                            Padding(
+                            ));
+                          } else if (mapData['key'] == "Body part injured ") {
+                            return DataCell(Padding(
                               padding: const EdgeInsets.only(
                                   left: 10, right: 10, top: 10),
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text(
-                                    "${mapData["value"] != "" ? mapData["value"] : "Select Employee"}",
-                                  ),
-                                ],
-                              ),
-                            ),
-                          );
-                        } else if (mapData['key'] == "Trade/Designation ") {
-                          return DataCell(
-                            Padding(
-                              padding: const EdgeInsets.only(
-                                  left: 10, right: 10, top: 10),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    "${mapData["value"] != "" ? mapData["value"] : "Select Employee"}",
-                                  ),
-                                ],
-                              ),
-                            ),
-                          );
-                        } else if (mapData['key'] == "Address ") {
-                          return DataCell(
-                            Padding(
-                              padding: const EdgeInsets.only(
-                                  left: 10, right: 10, top: 10),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    "${mapData["value"] != "" ? mapData["value"] : "Select Employee"}",
-                                  ),
-                                ],
-                              ),
-                            ),
-                          );
-                        } else if (mapData['key'] == "Name of Contractor ") {
-                          return DataCell(Padding(
-                            padding: const EdgeInsets.only(
-                                left: 10, right: 10, top: 10),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Container(
-                                  decoration: BoxDecoration(
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: Colors.black26,
-                                        offset: const Offset(
-                                          5.0,
-                                          5.0,
-                                        ),
-                                        blurRadius: 5.0,
-                                        spreadRadius: 1.0,
-                                      ),
-                                    ],
-                                    color: ColorValues.whiteColor,
-                                    borderRadius: BorderRadius.circular(5),
-                                  ),
-                                  child: IgnorePointer(
-                                    ignoring: controller
-                                                .incidentReportDetailsModel
-                                                .value
-                                                ?.status ==
-                                            183
-                                        ? true
-                                        : false,
-                                    child: DropdownWebStock(
-                                      width:
-                                          MediaQuery.of(context).size.width / 4,
-                                      dropdownList: controller.businessList,
-                                      selectedValue: mapData["value"],
-                                      onValueChanged: (list, selectedValue) {
-                                        print({selectedValue: selectedValue});
-                                        mapData["value"] = selectedValue;
-                                        controller.dropdownBusinessListMapperData[
-                                                selectedValue] =
-                                            list.firstWhere(
-                                                (element) =>
-                                                    element.name ==
-                                                    selectedValue,
-                                                orElse: null);
-                                      },
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ));
-                        } else if (mapData['key'] == "Body part injured ") {
-                          return DataCell(Padding(
-                            padding: const EdgeInsets.only(
-                                left: 10, right: 10, top: 10),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Container(
-                                  decoration: BoxDecoration(
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: Colors.black26,
-                                        offset: const Offset(
-                                          5.0,
-                                          5.0,
-                                        ),
-                                        blurRadius: 5.0,
-                                        spreadRadius: 1.0,
-                                      ),
-                                    ],
-                                    color: ColorValues.whiteColor,
-                                    borderRadius: BorderRadius.circular(5),
-                                  ),
-                                  child: IgnorePointer(
-                                    ignoring: controller
-                                                .incidentReportDetailsModel
-                                                .value
-                                                ?.status ==
-                                            183
-                                        ? true
-                                        : false,
-                                    child: DropdownWebStock(
-                                      width:
-                                          MediaQuery.of(context).size.width / 4,
-                                      dropdownList: controller.bodyinjuredList,
-                                      selectedValue: mapData["value"],
-                                      onValueChanged: (list, selectedValue) {
-                                        print({selectedValue: selectedValue});
-                                        mapData["value"] = selectedValue;
-                                        controller.dropdownBodyinjuredListMapperData[
-                                                selectedValue] =
-                                            list.firstWhere(
-                                                (element) =>
-                                                    element.name ==
-                                                    selectedValue,
-                                                orElse: null);
-                                      },
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ));
-                        } else if (mapData['key'] == "work experience ") {
-                          return DataCell(
-                            Padding(
-                              padding: const EdgeInsets.only(
-                                  left: 10, right: 10, top: 10),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    "${mapData["value"] != "" ? mapData["value"] : "Select Employee"}",
-                                  ),
-                                ],
-                              ),
-                            ),
-                          );
-                        } else if (mapData['key'] == "Plant & Equipment ") {
-                          return DataCell(Padding(
-                            padding: const EdgeInsets.only(
-                                left: 10, right: 10, top: 10),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Container(
-                                  decoration: BoxDecoration(
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: Colors.black26,
-                                        offset: const Offset(
-                                          5.0,
-                                          5.0,
-                                        ),
-                                        blurRadius: 5.0,
-                                        spreadRadius: 1.0,
-                                      ),
-                                    ],
-                                    color: ColorValues.whiteColor,
-                                    borderRadius: BorderRadius.circular(5),
-                                  ),
-                                  child: IgnorePointer(
-                                    ignoring: controller
-                                                .incidentReportDetailsModel
-                                                .value
-                                                ?.status ==
-                                            183
-                                        ? true
-                                        : false,
-                                    child: DropdownWebStock(
-                                      width:
-                                          MediaQuery.of(context).size.width / 4,
-                                      dropdownList: controller.eqipmentNameList,
-                                      selectedValue: mapData["value"],
-                                      onValueChanged: (list, selectedValue) {
-                                        print({selectedValue: selectedValue});
-                                        mapData["value"] = selectedValue;
-                                        controller.dropdownEquipmentNameMapperData[
-                                                selectedValue] =
-                                            list.firstWhere(
-                                                (element) =>
-                                                    element.name ==
-                                                    selectedValue,
-                                                orElse: null);
-                                      },
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ));
-                        } else if (mapData['key'] == "Exact Location ") {
-                          return DataCell(Padding(
-                            padding: EdgeInsets.only(top: 10),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Container(
+                                  Container(
                                     decoration: BoxDecoration(
                                       boxShadow: [
                                         BoxShadow(
@@ -5003,574 +4893,701 @@ class DetailsOfInjuredPerson extends StatelessWidget {
                                               183
                                           ? true
                                           : false,
-                                      child: LoginCustomTextfield(
-                                        keyboardType: TextInputType.text,
-                                        // inputFormatters: <
-                                        //     TextInputFormatter>[
-                                        //   FilteringTextInputFormatter
-                                        //       .digitsOnly
-                                        // ],
-                                        maxLine: 1,
-                                        textController:
-                                            new TextEditingController(
-                                                text: mapData["value"] ?? ''),
-                                        onChanged: (txt) {
-                                          mapData["value"] = txt;
+                                      child: DropdownWebStock(
+                                        width:
+                                            MediaQuery.of(context).size.width /
+                                                4,
+                                        dropdownList:
+                                            controller.bodyinjuredList,
+                                        selectedValue: mapData["value"],
+                                        onValueChanged: (list, selectedValue) {
+                                          print({selectedValue: selectedValue});
+                                          mapData["value"] = selectedValue;
+                                          controller.dropdownBodyinjuredListMapperData[
+                                                  selectedValue] =
+                                              list.firstWhere(
+                                                  (element) =>
+                                                      element.name ==
+                                                      selectedValue,
+                                                  orElse: null);
                                         },
                                       ),
-                                    )),
-                              ],
-                            ),
-                          ));
-                        } else if (mapData['key'] == "Action ") {
-                          return DataCell(Padding(
-                            padding: EdgeInsets.only(top: 10),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                IgnorePointer(
-                                  ignoring: controller
-                                              .incidentReportDetailsModel
-                                              .value
-                                              ?.status ==
-                                          183
-                                      ? true
-                                      : false,
-                                  child: TableActionButton(
-                                    color: ColorValues.appRedColor,
-                                    icon: Icons.delete,
-                                    label: '',
-                                    message: '',
-                                    onPress: () {
-                                      controller.rowInjuredPersonItem
-                                          .remove(record);
-                                    },
+                                    ),
                                   ),
-                                )
-                              ],
-                            ),
-                          ));
-                        } else {
-                          return DataCell(
-                            Text(mapData['value'] ?? ""),
-                          );
-                        }
-                      }).toList(),
-                    );
-                  }).toList(),
-                  // rows: controller.rowInjuredPersonItem.value.map((record) {
-                  //   return DataRow(
-                  //     // height: 130,
-                  //     cells: record.map((mapData) {
-                  //       return DataCell(
-                  //         (mapData['key'] == "Name of Injured Person ")
-                  //             ? Padding(
-                  //                 padding: const EdgeInsets.only(
-                  //                     left: 10, right: 10, top: 10),
-                  //                 child: Column(
-                  //                   mainAxisAlignment: MainAxisAlignment.start,
-                  //                   crossAxisAlignment:
-                  //                       CrossAxisAlignment.start,
-                  //                   children: [
-                  //                     Container(
-                  //                       decoration: BoxDecoration(
-                  //                         boxShadow: [
-                  //                           BoxShadow(
-                  //                             color: Colors.black26,
-                  //                             offset: const Offset(
-                  //                               5.0,
-                  //                               5.0,
-                  //                             ),
-                  //                             blurRadius: 5.0,
-                  //                             spreadRadius: 1.0,
-                  //                           ),
-                  //                         ],
-                  //                         color: ColorValues.whiteColor,
-                  //                         borderRadius:
-                  //                             BorderRadius.circular(5),
-                  //                       ),
-                  //                       child: IgnorePointer(
-                  //                         ignoring: controller
-                  //                                     .incidentReportDetailsModel
-                  //                                     .value
-                  //                                     ?.status ==
-                  //                                 183
-                  //                             ? true
-                  //                             : false,
-                  //                         child: DropdownWebStock(
-                  //                           width: MediaQuery.of(context)
-                  //                                   .size
-                  //                                   .width /
-                  //                               4,
-                  //                           dropdownList:
-                  //                               controller.victimNameList,
-                  //                           selectedValue: mapData["value"],
-                  //                           onValueChanged:
-                  //                               (list, selectedValue) {
-                  //                             print({
-                  //                               selectedValue: selectedValue
-                  //                             });
-                  //                             if (selectedValue != null) {
-                  //                               controller.updateSelectedOption(
-                  //                                   selectedValue);
-                  //                             }
-                  //                             mapData["value"] = selectedValue;
-                  //                             controller.dropdownVictimNameMapperData[
-                  //                                     selectedValue] =
-                  //                                 list.firstWhere(
-                  //                                     (element) =>
-                  //                                         element.name ==
-                  //                                         selectedValue,
-                  //                                     orElse: null);
+                                ],
+                              ),
+                            ));
+                          } else if (mapData['key'] == "work experience ") {
+                            return DataCell(
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                    left: 10, right: 10, top: 10),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      "${mapData["value"] != "" ? mapData["value"] : "Select Employee"}",
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            );
+                          } else if (mapData['key'] == "Plant & Equipment ") {
+                            return DataCell(Padding(
+                              padding: const EdgeInsets.only(
+                                  left: 10, right: 10, top: 10),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Container(
+                                    decoration: BoxDecoration(
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.black26,
+                                          offset: const Offset(
+                                            5.0,
+                                            5.0,
+                                          ),
+                                          blurRadius: 5.0,
+                                          spreadRadius: 1.0,
+                                        ),
+                                      ],
+                                      color: ColorValues.whiteColor,
+                                      borderRadius: BorderRadius.circular(5),
+                                    ),
+                                    child: IgnorePointer(
+                                      ignoring: controller
+                                                  .incidentReportDetailsModel
+                                                  .value
+                                                  ?.status ==
+                                              183
+                                          ? true
+                                          : false,
+                                      child: DropdownWebStock(
+                                        width:
+                                            MediaQuery.of(context).size.width /
+                                                4,
+                                        dropdownList:
+                                            controller.eqipmentNameList,
+                                        selectedValue: mapData["value"],
+                                        onValueChanged: (list, selectedValue) {
+                                          print({selectedValue: selectedValue});
+                                          mapData["value"] = selectedValue;
+                                          controller.dropdownEquipmentNameMapperData[
+                                                  selectedValue] =
+                                              list.firstWhere(
+                                                  (element) =>
+                                                      element.name ==
+                                                      selectedValue,
+                                                  orElse: null);
+                                        },
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ));
+                          } else if (mapData['key'] == "Exact Location ") {
+                            return DataCell(Padding(
+                              padding: EdgeInsets.only(top: 10),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Container(
+                                      decoration: BoxDecoration(
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: Colors.black26,
+                                            offset: const Offset(
+                                              5.0,
+                                              5.0,
+                                            ),
+                                            blurRadius: 5.0,
+                                            spreadRadius: 1.0,
+                                          ),
+                                        ],
+                                        color: ColorValues.whiteColor,
+                                        borderRadius: BorderRadius.circular(5),
+                                      ),
+                                      child: IgnorePointer(
+                                        ignoring: controller
+                                                    .incidentReportDetailsModel
+                                                    .value
+                                                    ?.status ==
+                                                183
+                                            ? true
+                                            : false,
+                                        child: LoginCustomTextfield(
+                                          keyboardType: TextInputType.text,
+                                          // inputFormatters: <
+                                          //     TextInputFormatter>[
+                                          //   FilteringTextInputFormatter
+                                          //       .digitsOnly
+                                          // ],
+                                          maxLine: 1,
+                                          textController:
+                                              new TextEditingController(
+                                                  text: mapData["value"] ?? ''),
+                                          onChanged: (txt) {
+                                            mapData["value"] = txt;
+                                          },
+                                        ),
+                                      )),
+                                ],
+                              ),
+                            ));
+                          } else if (mapData['key'] == "Action ") {
+                            return DataCell(Padding(
+                              padding: EdgeInsets.only(top: 10),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  IgnorePointer(
+                                    ignoring: controller
+                                                .incidentReportDetailsModel
+                                                .value
+                                                ?.status ==
+                                            183
+                                        ? true
+                                        : false,
+                                    child: TableActionButton(
+                                      color: ColorValues.appRedColor,
+                                      icon: Icons.delete,
+                                      label: '',
+                                      message: '',
+                                      onPress: () {
+                                        controller.rowInjuredPersonItem
+                                            .remove(record);
+                                      },
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ));
+                          } else {
+                            return DataCell(
+                              Text(mapData['value'] ?? ""),
+                            );
+                          }
+                        }).toList(),
+                      );
+                    }).toList(),
+                    // rows: controller.rowInjuredPersonItem.value.map((record) {
+                    //   return DataRow(
+                    //     // height: 130,
+                    //     cells: record.map((mapData) {
+                    //       return DataCell(
+                    //         (mapData['key'] == "Name of Injured Person ")
+                    //             ? Padding(
+                    //                 padding: const EdgeInsets.only(
+                    //                     left: 10, right: 10, top: 10),
+                    //                 child: Column(
+                    //                   mainAxisAlignment: MainAxisAlignment.start,
+                    //                   crossAxisAlignment:
+                    //                       CrossAxisAlignment.start,
+                    //                   children: [
+                    //                     Container(
+                    //                       decoration: BoxDecoration(
+                    //                         boxShadow: [
+                    //                           BoxShadow(
+                    //                             color: Colors.black26,
+                    //                             offset: const Offset(
+                    //                               5.0,
+                    //                               5.0,
+                    //                             ),
+                    //                             blurRadius: 5.0,
+                    //                             spreadRadius: 1.0,
+                    //                           ),
+                    //                         ],
+                    //                         color: ColorValues.whiteColor,
+                    //                         borderRadius:
+                    //                             BorderRadius.circular(5),
+                    //                       ),
+                    //                       child: IgnorePointer(
+                    //                         ignoring: controller
+                    //                                     .incidentReportDetailsModel
+                    //                                     .value
+                    //                                     ?.status ==
+                    //                                 183
+                    //                             ? true
+                    //                             : false,
+                    //                         child: DropdownWebStock(
+                    //                           width: MediaQuery.of(context)
+                    //                                   .size
+                    //                                   .width /
+                    //                               4,
+                    //                           dropdownList:
+                    //                               controller.victimNameList,
+                    //                           selectedValue: mapData["value"],
+                    //                           onValueChanged:
+                    //                               (list, selectedValue) {
+                    //                             print({
+                    //                               selectedValue: selectedValue
+                    //                             });
+                    //                             if (selectedValue != null) {
+                    //                               controller.updateSelectedOption(
+                    //                                   selectedValue);
+                    //                             }
+                    //                             mapData["value"] = selectedValue;
+                    //                             controller.dropdownVictimNameMapperData[
+                    //                                     selectedValue] =
+                    //                                 list.firstWhere(
+                    //                                     (element) =>
+                    //                                         element.name ==
+                    //                                         selectedValue,
+                    //                                     orElse: null);
+                    //                             final injuredPersonData = controller
+                    //                                     .dropdownVictimNameMapperData[
+                    //                                 selectedValue];
+                    //                             if (injuredPersonData != null) {
+                    //                               final genderValue =
+                    //                                   injuredPersonData.gender;
+                    //                               final designationValue =
+                    //                                   injuredPersonData
+                    //                                       .designation;
+                    //                               final city =
+                    //                                   injuredPersonData.city;
+                    //                               final String experince =
+                    //                                   injuredPersonData.experince
+                    //                                       .toString();
+                    //                               // Find the corresponding row in the rowInjuredPersonItem list
+                    //                               final row = controller
+                    //                                   .rowInjuredPersonItem
+                    //                                   .firstWhere((row) =>
+                    //                                       row[0]['value'] ==
+                    //                                       selectedValue);
 
-                  //                             final injuredPersonData = controller
-                  //                                     .dropdownVictimNameMapperData[
-                  //                                 selectedValue];
-                  //                             if (injuredPersonData != null) {
-                  //                               final genderValue =
-                  //                                   injuredPersonData.gender;
-                  //                               final designationValue =
-                  //                                   injuredPersonData
-                  //                                       .designation;
-                  //                               final city =
-                  //                                   injuredPersonData.city;
-                  //                               final String experince =
-                  //                                   injuredPersonData.experince
-                  //                                       .toString();
-                  //                               // Find the corresponding row in the rowInjuredPersonItem list
-                  //                               final row = controller
-                  //                                   .rowInjuredPersonItem
-                  //                                   .firstWhere((row) =>
-                  //                                       row[0]['value'] ==
-                  //                                       selectedValue);
-
-                  //                               // Update the values in the row
-                  //                               row[1]['value'] =
-                  //                                   genderValue; // Update the value for "Gender"
-                  //                               row[2]['value'] =
-                  //                                   designationValue; // Update the value for "Trade/Designation"
-                  //                               row[3]['value'] =
-                  //                                   city; // Update the value for "Trade/Designation"
-                  //                               row[6]['value'] =
-                  //                                   experince; // Update the value for "Trade/Designation"
-                  //                             }
-                  //                           },
-                  //                         ),
-                  //                       ),
-                  //                     ),
-                  //                   ],
-                  //                 ),
-                  //               )
-                  //             : (mapData['key'] == "Gender ")
-                  //                 ? Padding(
-                  //                     padding: const EdgeInsets.only(
-                  //                         left: 10, right: 10, top: 10),
-                  //                     child: Column(
-                  //                       mainAxisAlignment:
-                  //                           MainAxisAlignment.start,
-                  //                       crossAxisAlignment:
-                  //                           CrossAxisAlignment.start,
-                  //                       children: [
-                  //                         Text(
-                  //                           "${mapData["value"] != "" ? mapData["value"] : "Select Employee"}",
-                  //                         ),
-                  //                       ],
-                  //                     ),
-                  //                   )
-                  //                 : (mapData['key'] == "Trade/Designation ")
-                  //                     ? Padding(
-                  //                         padding: const EdgeInsets.only(
-                  //                             left: 10, right: 10, top: 10),
-                  //                         child: Column(
-                  //                           mainAxisAlignment:
-                  //                               MainAxisAlignment.start,
-                  //                           crossAxisAlignment:
-                  //                               CrossAxisAlignment.start,
-                  //                           children: [
-                  //                             Text(
-                  //                               "${mapData["value"] != "" ? mapData["value"] : "Select Employee"}",
-                  //                             ),
-                  //                           ],
-                  //                         ),
-                  //                       )
-                  //                     : (mapData['key'] == "Address ")
-                  //                         ? Padding(
-                  //                             padding: const EdgeInsets.only(
-                  //                                 left: 10, right: 10, top: 10),
-                  //                             child: Column(
-                  //                               mainAxisAlignment:
-                  //                                   MainAxisAlignment.start,
-                  //                               crossAxisAlignment:
-                  //                                   CrossAxisAlignment.start,
-                  //                               children: [
-                  //                                 Text(
-                  //                                   "${mapData["value"] != "" ? mapData["value"] : "Select Employee"}",
-                  //                                 ),
-                  //                               ],
-                  //                             ),
-                  //                           )
-                  //                         : (mapData['key'] ==
-                  //                                 "Name of Contractor ")
-                  //                             ? Padding(
-                  //                                 padding:
-                  //                                     const EdgeInsets.only(
-                  //                                         left: 10,
-                  //                                         right: 10,
-                  //                                         top: 10),
-                  //                                 child: Column(
-                  //                                   mainAxisAlignment:
-                  //                                       MainAxisAlignment.start,
-                  //                                   crossAxisAlignment:
-                  //                                       CrossAxisAlignment
-                  //                                           .start,
-                  //                                   children: [
-                  //                                     Container(
-                  //                                       decoration:
-                  //                                           BoxDecoration(
-                  //                                         boxShadow: [
-                  //                                           BoxShadow(
-                  //                                             color: Colors
-                  //                                                 .black26,
-                  //                                             offset:
-                  //                                                 const Offset(
-                  //                                               5.0,
-                  //                                               5.0,
-                  //                                             ),
-                  //                                             blurRadius: 5.0,
-                  //                                             spreadRadius: 1.0,
-                  //                                           ),
-                  //                                         ],
-                  //                                         color: ColorValues
-                  //                                             .whiteColor,
-                  //                                         borderRadius:
-                  //                                             BorderRadius
-                  //                                                 .circular(5),
-                  //                                       ),
-                  //                                       child: IgnorePointer(
-                  //                                         ignoring: controller
-                  //                                                     .incidentReportDetailsModel
-                  //                                                     .value
-                  //                                                     ?.status ==
-                  //                                                 183
-                  //                                             ? true
-                  //                                             : false,
-                  //                                         child:
-                  //                                             DropdownWebStock(
-                  //                                           width: MediaQuery.of(
-                  //                                                       context)
-                  //                                                   .size
-                  //                                                   .width /
-                  //                                               4,
-                  //                                           dropdownList:
-                  //                                               controller
-                  //                                                   .businessList,
-                  //                                           selectedValue:
-                  //                                               mapData[
-                  //                                                   "value"],
-                  //                                           onValueChanged: (list,
-                  //                                               selectedValue) {
-                  //                                             print({
-                  //                                               selectedValue:
-                  //                                                   selectedValue
-                  //                                             });
-                  //                                             mapData["value"] =
-                  //                                                 selectedValue;
-                  //                                             controller.dropdownBusinessListMapperData[
-                  //                                                     selectedValue] =
-                  //                                                 list.firstWhere(
-                  //                                                     (element) =>
-                  //                                                         element
-                  //                                                             .name ==
-                  //                                                         selectedValue,
-                  //                                                     orElse:
-                  //                                                         null);
-                  //                                           },
-                  //                                         ),
-                  //                                       ),
-                  //                                     ),
-                  //                                   ],
-                  //                                 ),
-                  //                               )
-                  //                             : (mapData['key'] ==
-                  //                                     "Body part injured ")
-                  //                                 ? Padding(
-                  //                                     padding:
-                  //                                         const EdgeInsets.only(
-                  //                                             left: 10,
-                  //                                             right: 10,
-                  //                                             top: 10),
-                  //                                     child: Column(
-                  //                                       mainAxisAlignment:
-                  //                                           MainAxisAlignment
-                  //                                               .start,
-                  //                                       crossAxisAlignment:
-                  //                                           CrossAxisAlignment
-                  //                                               .start,
-                  //                                       children: [
-                  //                                         Container(
-                  //                                           decoration:
-                  //                                               BoxDecoration(
-                  //                                             boxShadow: [
-                  //                                               BoxShadow(
-                  //                                                 color: Colors
-                  //                                                     .black26,
-                  //                                                 offset:
-                  //                                                     const Offset(
-                  //                                                   5.0,
-                  //                                                   5.0,
-                  //                                                 ),
-                  //                                                 blurRadius:
-                  //                                                     5.0,
-                  //                                                 spreadRadius:
-                  //                                                     1.0,
-                  //                                               ),
-                  //                                             ],
-                  //                                             color: ColorValues
-                  //                                                 .whiteColor,
-                  //                                             borderRadius:
-                  //                                                 BorderRadius
-                  //                                                     .circular(
-                  //                                                         5),
-                  //                                           ),
-                  //                                           child:
-                  //                                               IgnorePointer(
-                  //                                             ignoring: controller
-                  //                                                         .incidentReportDetailsModel
-                  //                                                         .value
-                  //                                                         ?.status ==
-                  //                                                     183
-                  //                                                 ? true
-                  //                                                 : false,
-                  //                                             child:
-                  //                                                 DropdownWebStock(
-                  //                                               width: MediaQuery.of(
-                  //                                                           context)
-                  //                                                       .size
-                  //                                                       .width /
-                  //                                                   4,
-                  //                                               dropdownList:
-                  //                                                   controller
-                  //                                                       .bodyinjuredList,
-                  //                                               selectedValue:
-                  //                                                   mapData[
-                  //                                                       "value"],
-                  //                                               onValueChanged:
-                  //                                                   (list,
-                  //                                                       selectedValue) {
-                  //                                                 print({
-                  //                                                   selectedValue:
-                  //                                                       selectedValue
-                  //                                                 });
-                  //                                                 mapData["value"] =
-                  //                                                     selectedValue;
-                  //                                                 controller.dropdownBodyinjuredListMapperData[selectedValue] = list.firstWhere(
-                  //                                                     (element) =>
-                  //                                                         element
-                  //                                                             .name ==
-                  //                                                         selectedValue,
-                  //                                                     orElse:
-                  //                                                         null);
-                  //                                               },
-                  //                                             ),
-                  //                                           ),
-                  //                                         ),
-                  //                                       ],
-                  //                                     ),
-                  //                                   )
-                  //                                 : (mapData['key'] ==
-                  //                                         "work experience ")
-                  //                                     ? Padding(
-                  //                                         padding:
-                  //                                             const EdgeInsets
-                  //                                                 .only(
-                  //                                                 left: 10,
-                  //                                                 right: 10,
-                  //                                                 top: 10),
-                  //                                         child: Column(
-                  //                                           mainAxisAlignment:
-                  //                                               MainAxisAlignment
-                  //                                                   .start,
-                  //                                           crossAxisAlignment:
-                  //                                               CrossAxisAlignment
-                  //                                                   .start,
-                  //                                           children: [
-                  //                                             Text(
-                  //                                               "${mapData["value"] != "" ? mapData["value"] : "Select Employee"}",
-                  //                                             ),
-                  //                                           ],
-                  //                                         ),
-                  //                                       )
-                  //                                     : (mapData['key'] ==
-                  //                                             "Plant & Equipment ")
-                  //                                         ? Padding(
-                  //                                             padding:
-                  //                                                 const EdgeInsets
-                  //                                                     .only(
-                  //                                                     left: 10,
-                  //                                                     right: 10,
-                  //                                                     top: 10),
-                  //                                             child: Column(
-                  //                                               mainAxisAlignment:
-                  //                                                   MainAxisAlignment
-                  //                                                       .start,
-                  //                                               crossAxisAlignment:
-                  //                                                   CrossAxisAlignment
-                  //                                                       .start,
-                  //                                               children: [
-                  //                                                 Container(
-                  //                                                   decoration:
-                  //                                                       BoxDecoration(
-                  //                                                     boxShadow: [
-                  //                                                       BoxShadow(
-                  //                                                         color:
-                  //                                                             Colors.black26,
-                  //                                                         offset:
-                  //                                                             const Offset(
-                  //                                                           5.0,
-                  //                                                           5.0,
-                  //                                                         ),
-                  //                                                         blurRadius:
-                  //                                                             5.0,
-                  //                                                         spreadRadius:
-                  //                                                             1.0,
-                  //                                                       ),
-                  //                                                     ],
-                  //                                                     color: ColorValues
-                  //                                                         .whiteColor,
-                  //                                                     borderRadius:
-                  //                                                         BorderRadius.circular(
-                  //                                                             5),
-                  //                                                   ),
-                  //                                                   child:
-                  //                                                       IgnorePointer(
-                  //                                                     ignoring: controller.incidentReportDetailsModel.value?.status ==
-                  //                                                             183
-                  //                                                         ? true
-                  //                                                         : false,
-                  //                                                     child:
-                  //                                                         DropdownWebStock(
-                  //                                                       width:
-                  //                                                           MediaQuery.of(context).size.width /
-                  //                                                               4,
-                  //                                                       dropdownList:
-                  //                                                           controller.eqipmentNameList,
-                  //                                                       selectedValue:
-                  //                                                           mapData["value"],
-                  //                                                       onValueChanged:
-                  //                                                           (list,
-                  //                                                               selectedValue) {
-                  //                                                         print({
-                  //                                                           selectedValue:
-                  //                                                               selectedValue
-                  //                                                         });
-                  //                                                         mapData["value"] =
-                  //                                                             selectedValue;
-                  //                                                         controller.dropdownEquipmentNameMapperData[selectedValue] = list.firstWhere(
-                  //                                                             (element) => element.name == selectedValue,
-                  //                                                             orElse: null);
-                  //                                                       },
-                  //                                                     ),
-                  //                                                   ),
-                  //                                                 ),
-                  //                                               ],
-                  //                                             ),
-                  //                                           )
-                  //                                         : (mapData['key'] ==
-                  //                                                 "Exact Location ")
-                  //                                             ? Padding(
-                  //                                                 padding:
-                  //                                                     EdgeInsets
-                  //                                                         .only(
-                  //                                                             top: 10),
-                  //                                                 child: Column(
-                  //                                                   mainAxisAlignment:
-                  //                                                       MainAxisAlignment
-                  //                                                           .start,
-                  //                                                   crossAxisAlignment:
-                  //                                                       CrossAxisAlignment
-                  //                                                           .start,
-                  //                                                   children: [
-                  //                                                     Container(
-                  //                                                         decoration:
-                  //                                                             BoxDecoration(
-                  //                                                           boxShadow: [
-                  //                                                             BoxShadow(
-                  //                                                               color: Colors.black26,
-                  //                                                               offset: const Offset(
-                  //                                                                 5.0,
-                  //                                                                 5.0,
-                  //                                                               ),
-                  //                                                               blurRadius: 5.0,
-                  //                                                               spreadRadius: 1.0,
-                  //                                                             ),
-                  //                                                           ],
-                  //                                                           color:
-                  //                                                               ColorValues.whiteColor,
-                  //                                                           borderRadius:
-                  //                                                               BorderRadius.circular(5),
-                  //                                                         ),
-                  //                                                         child:
-                  //                                                             IgnorePointer(
-                  //                                                           ignoring: controller.incidentReportDetailsModel.value?.status == 183
-                  //                                                               ? true
-                  //                                                               : false,
-                  //                                                           child:
-                  //                                                               LoginCustomTextfield(
-                  //                                                             keyboardType: TextInputType.text,
-                  //                                                             // inputFormatters: <
-                  //                                                             //     TextInputFormatter>[
-                  //                                                             //   FilteringTextInputFormatter
-                  //                                                             //       .digitsOnly
-                  //                                                             // ],
-                  //                                                             maxLine: 1,
-                  //                                                             textController: new TextEditingController(text: mapData["value"] ?? ''),
-                  //                                                             onChanged: (txt) {
-                  //                                                               mapData["value"] = txt;
-                  //                                                             },
-                  //                                                           ),
-                  //                                                         )),
-                  //                                                   ],
-                  //                                                 ),
-                  //                                               )
-                  //                                             : (mapData['key'] ==
-                  //                                                     "Action ")
-                  //                                                 ? Padding(
-                  //                                                     padding: EdgeInsets
-                  //                                                         .only(
-                  //                                                             top: 10),
-                  //                                                     child:
-                  //                                                         Column(
-                  //                                                       mainAxisAlignment:
-                  //                                                           MainAxisAlignment.start,
-                  //                                                       crossAxisAlignment:
-                  //                                                           CrossAxisAlignment.start,
-                  //                                                       children: [
-                  //                                                         IgnorePointer(
-                  //                                                           ignoring: controller.incidentReportDetailsModel.value?.status == 183
-                  //                                                               ? true
-                  //                                                               : false,
-                  //                                                           child:
-                  //                                                               TableActionButton(
-                  //                                                             color: ColorValues.appRedColor,
-                  //                                                             icon: Icons.delete,
-                  //                                                             label: '',
-                  //                                                             message: '',
-                  //                                                             onPress: () {
-                  //                                                               controller.rowInjuredPersonItem.remove(record);
-                  //                                                             },
-                  //                                                           ),
-                  //                                                         )
-                  //                                                       ],
-                  //                                                     ),
-                  //                                                   )
-                  //                                                 : Text(mapData[
-                  //                                                         'key'] ??
-                  //                                                     ''),
-                  //       );
-                  //     }).toList(),
-                  //   );
-                  // }).toList(),
+                    //                               // Update the values in the row
+                    //                               row[1]['value'] =
+                    //                                   genderValue; // Update the value for "Gender"
+                    //                               row[2]['value'] =
+                    //                                   designationValue; // Update the value for "Trade/Designation"
+                    //                               row[3]['value'] =
+                    //                                   city; // Update the value for "Trade/Designation"
+                    //                               row[6]['value'] =
+                    //                                   experince; // Update the value for "Trade/Designation"
+                    //                             }
+                    //                           },
+                    //                         ),
+                    //                       ),
+                    //                     ),
+                    //                   ],
+                    //                 ),
+                    //               )
+                    //             : (mapData['key'] == "Gender ")
+                    //                 ? Padding(
+                    //                     padding: const EdgeInsets.only(
+                    //                         left: 10, right: 10, top: 10),
+                    //                     child: Column(
+                    //                       mainAxisAlignment:
+                    //                           MainAxisAlignment.start,
+                    //                       crossAxisAlignment:
+                    //                           CrossAxisAlignment.start,
+                    //                       children: [
+                    //                         Text(
+                    //                           "${mapData["value"] != "" ? mapData["value"] : "Select Employee"}",
+                    //                         ),
+                    //                       ],
+                    //                     ),
+                    //                   )
+                    //                 : (mapData['key'] == "Trade/Designation ")
+                    //                     ? Padding(
+                    //                         padding: const EdgeInsets.only(
+                    //                             left: 10, right: 10, top: 10),
+                    //                         child: Column(
+                    //                           mainAxisAlignment:
+                    //                               MainAxisAlignment.start,
+                    //                           crossAxisAlignment:
+                    //                               CrossAxisAlignment.start,
+                    //                           children: [
+                    //                             Text(
+                    //                               "${mapData["value"] != "" ? mapData["value"] : "Select Employee"}",
+                    //                             ),
+                    //                           ],
+                    //                         ),
+                    //                       )
+                    //                     : (mapData['key'] == "Address ")
+                    //                         ? Padding(
+                    //                             padding: const EdgeInsets.only(
+                    //                                 left: 10, right: 10, top: 10),
+                    //                             child: Column(
+                    //                               mainAxisAlignment:
+                    //                                   MainAxisAlignment.start,
+                    //                               crossAxisAlignment:
+                    //                                   CrossAxisAlignment.start,
+                    //                               children: [
+                    //                                 Text(
+                    //                                   "${mapData["value"] != "" ? mapData["value"] : "Select Employee"}",
+                    //                                 ),
+                    //                               ],
+                    //                             ),
+                    //                           )
+                    //                         : (mapData['key'] ==
+                    //                                 "Name of Contractor ")
+                    //                             ? Padding(
+                    //                                 padding:
+                    //                                     const EdgeInsets.only(
+                    //                                         left: 10,
+                    //                                         right: 10,
+                    //                                         top: 10),
+                    //                                 child: Column(
+                    //                                   mainAxisAlignment:
+                    //                                       MainAxisAlignment.start,
+                    //                                   crossAxisAlignment:
+                    //                                       CrossAxisAlignment
+                    //                                           .start,
+                    //                                   children: [
+                    //                                     Container(
+                    //                                       decoration:
+                    //                                           BoxDecoration(
+                    //                                         boxShadow: [
+                    //                                           BoxShadow(
+                    //                                             color: Colors
+                    //                                                 .black26,
+                    //                                             offset:
+                    //                                                 const Offset(
+                    //                                               5.0,
+                    //                                               5.0,
+                    //                                             ),
+                    //                                             blurRadius: 5.0,
+                    //                                             spreadRadius: 1.0,
+                    //                                           ),
+                    //                                         ],
+                    //                                         color: ColorValues
+                    //                                             .whiteColor,
+                    //                                         borderRadius:
+                    //                                             BorderRadius
+                    //                                                 .circular(5),
+                    //                                       ),
+                    //                                       child: IgnorePointer(
+                    //                                         ignoring: controller
+                    //                                                     .incidentReportDetailsModel
+                    //                                                     .value
+                    //                                                     ?.status ==
+                    //                                                 183
+                    //                                             ? true
+                    //                                             : false,
+                    //                                         child:
+                    //                                             DropdownWebStock(
+                    //                                           width: MediaQuery.of(
+                    //                                                       context)
+                    //                                                   .size
+                    //                                                   .width /
+                    //                                               4,
+                    //                                           dropdownList:
+                    //                                               controller
+                    //                                                   .businessList,
+                    //                                           selectedValue:
+                    //                                               mapData[
+                    //                                                   "value"],
+                    //                                           onValueChanged: (list,
+                    //                                               selectedValue) {
+                    //                                             print({
+                    //                                               selectedValue:
+                    //                                                   selectedValue
+                    //                                             });
+                    //                                             mapData["value"] =
+                    //                                                 selectedValue;
+                    //                                             controller.dropdownBusinessListMapperData[
+                    //                                                     selectedValue] =
+                    //                                                 list.firstWhere(
+                    //                                                     (element) =>
+                    //                                                         element
+                    //                                                             .name ==
+                    //                                                         selectedValue,
+                    //                                                     orElse:
+                    //                                                         null);
+                    //                                           },
+                    //                                         ),
+                    //                                       ),
+                    //                                     ),
+                    //                                   ],
+                    //                                 ),
+                    //                               )
+                    //                             : (mapData['key'] ==
+                    //                                     "Body part injured ")
+                    //                                 ? Padding(
+                    //                                     padding:
+                    //                                         const EdgeInsets.only(
+                    //                                             left: 10,
+                    //                                             right: 10,
+                    //                                             top: 10),
+                    //                                     child: Column(
+                    //                                       mainAxisAlignment:
+                    //                                           MainAxisAlignment
+                    //                                               .start,
+                    //                                       crossAxisAlignment:
+                    //                                           CrossAxisAlignment
+                    //                                               .start,
+                    //                                       children: [
+                    //                                         Container(
+                    //                                           decoration:
+                    //                                               BoxDecoration(
+                    //                                             boxShadow: [
+                    //                                               BoxShadow(
+                    //                                                 color: Colors
+                    //                                                     .black26,
+                    //                                                 offset:
+                    //                                                     const Offset(
+                    //                                                   5.0,
+                    //                                                   5.0,
+                    //                                                 ),
+                    //                                                 blurRadius:
+                    //                                                     5.0,
+                    //                                                 spreadRadius:
+                    //                                                     1.0,
+                    //                                               ),
+                    //                                             ],
+                    //                                             color: ColorValues
+                    //                                                 .whiteColor,
+                    //                                             borderRadius:
+                    //                                                 BorderRadius
+                    //                                                     .circular(
+                    //                                                         5),
+                    //                                           ),
+                    //                                           child:
+                    //                                               IgnorePointer(
+                    //                                             ignoring: controller
+                    //                                                         .incidentReportDetailsModel
+                    //                                                         .value
+                    //                                                         ?.status ==
+                    //                                                     183
+                    //                                                 ? true
+                    //                                                 : false,
+                    //                                             child:
+                    //                                                 DropdownWebStock(
+                    //                                               width: MediaQuery.of(
+                    //                                                           context)
+                    //                                                       .size
+                    //                                                       .width /
+                    //                                                   4,
+                    //                                               dropdownList:
+                    //                                                   controller
+                    //                                                       .bodyinjuredList,
+                    //                                               selectedValue:
+                    //                                                   mapData[
+                    //                                                       "value"],
+                    //                                               onValueChanged:
+                    //                                                   (list,
+                    //                                                       selectedValue) {
+                    //                                                 print({
+                    //                                                   selectedValue:
+                    //                                                       selectedValue
+                    //                                                 });
+                    //                                                 mapData["value"] =
+                    //                                                     selectedValue;
+                    //                                                 controller.dropdownBodyinjuredListMapperData[selectedValue] = list.firstWhere(
+                    //                                                     (element) =>
+                    //                                                         element
+                    //                                                             .name ==
+                    //                                                         selectedValue,
+                    //                                                     orElse:
+                    //                                                         null);
+                    //                                               },
+                    //                                             ),
+                    //                                           ),
+                    //                                         ),
+                    //                                       ],
+                    //                                     ),
+                    //                                   )
+                    //                                 : (mapData['key'] ==
+                    //                                         "work experience ")
+                    //                                     ? Padding(
+                    //                                         padding:
+                    //                                             const EdgeInsets
+                    //                                                 .only(
+                    //                                                 left: 10,
+                    //                                                 right: 10,
+                    //                                                 top: 10),
+                    //                                         child: Column(
+                    //                                           mainAxisAlignment:
+                    //                                               MainAxisAlignment
+                    //                                                   .start,
+                    //                                           crossAxisAlignment:
+                    //                                               CrossAxisAlignment
+                    //                                                   .start,
+                    //                                           children: [
+                    //                                             Text(
+                    //                                               "${mapData["value"] != "" ? mapData["value"] : "Select Employee"}",
+                    //                                             ),
+                    //                                           ],
+                    //                                         ),
+                    //                                       )
+                    //                                     : (mapData['key'] ==
+                    //                                             "Plant & Equipment ")
+                    //                                         ? Padding(
+                    //                                             padding:
+                    //                                                 const EdgeInsets
+                    //                                                     .only(
+                    //                                                     left: 10,
+                    //                                                     right: 10,
+                    //                                                     top: 10),
+                    //                                             child: Column(
+                    //                                               mainAxisAlignment:
+                    //                                                   MainAxisAlignment
+                    //                                                       .start,
+                    //                                               crossAxisAlignment:
+                    //                                                   CrossAxisAlignment
+                    //                                                       .start,
+                    //                                               children: [
+                    //                                                 Container(
+                    //                                                   decoration:
+                    //                                                       BoxDecoration(
+                    //                                                     boxShadow: [
+                    //                                                       BoxShadow(
+                    //                                                         color:
+                    //                                                             Colors.black26,
+                    //                                                         offset:
+                    //                                                             const Offset(
+                    //                                                           5.0,
+                    //                                                           5.0,
+                    //                                                         ),
+                    //                                                         blurRadius:
+                    //                                                             5.0,
+                    //                                                         spreadRadius:
+                    //                                                             1.0,
+                    //                                                       ),
+                    //                                                     ],
+                    //                                                     color: ColorValues
+                    //                                                         .whiteColor,
+                    //                                                     borderRadius:
+                    //                                                         BorderRadius.circular(
+                    //                                                             5),
+                    //                                                   ),
+                    //                                                   child:
+                    //                                                       IgnorePointer(
+                    //                                                     ignoring: controller.incidentReportDetailsModel.value?.status ==
+                    //                                                             183
+                    //                                                         ? true
+                    //                                                         : false,
+                    //                                                     child:
+                    //                                                         DropdownWebStock(
+                    //                                                       width:
+                    //                                                           MediaQuery.of(context).size.width /
+                    //                                                               4,
+                    //                                                       dropdownList:
+                    //                                                           controller.eqipmentNameList,
+                    //                                                       selectedValue:
+                    //                                                           mapData["value"],
+                    //                                                       onValueChanged:
+                    //                                                           (list,
+                    //                                                               selectedValue) {
+                    //                                                         print({
+                    //                                                           selectedValue:
+                    //                                                               selectedValue
+                    //                                                         });
+                    //                                                         mapData["value"] =
+                    //                                                             selectedValue;
+                    //                                                         controller.dropdownEquipmentNameMapperData[selectedValue] = list.firstWhere(
+                    //                                                             (element) => element.name == selectedValue,
+                    //                                                             orElse: null);
+                    //                                                       },
+                    //                                                     ),
+                    //                                                   ),
+                    //                                                 ),
+                    //                                               ],
+                    //                                             ),
+                    //                                           )
+                    //                                         : (mapData['key'] ==
+                    //                                                 "Exact Location ")
+                    //                                             ? Padding(
+                    //                                                 padding:
+                    //                                                     EdgeInsets
+                    //                                                         .only(
+                    //                                                             top: 10),
+                    //                                                 child: Column(
+                    //                                                   mainAxisAlignment:
+                    //                                                       MainAxisAlignment
+                    //                                                           .start,
+                    //                                                   crossAxisAlignment:
+                    //                                                       CrossAxisAlignment
+                    //                                                           .start,
+                    //                                                   children: [
+                    //                                                     Container(
+                    //                                                         decoration:
+                    //                                                             BoxDecoration(
+                    //                                                           boxShadow: [
+                    //                                                             BoxShadow(
+                    //                                                               color: Colors.black26,
+                    //                                                               offset: const Offset(
+                    //                                                                 5.0,
+                    //                                                                 5.0,
+                    //                                                               ),
+                    //                                                               blurRadius: 5.0,
+                    //                                                               spreadRadius: 1.0,
+                    //                                                             ),
+                    //                                                           ],
+                    //                                                           color:
+                    //                                                               ColorValues.whiteColor,
+                    //                                                           borderRadius:
+                    //                                                               BorderRadius.circular(5),
+                    //                                                         ),
+                    //                                                         child:
+                    //                                                             IgnorePointer(
+                    //                                                           ignoring: controller.incidentReportDetailsModel.value?.status == 183
+                    //                                                               ? true
+                    //                                                               : false,
+                    //                                                           child:
+                    //                                                               LoginCustomTextfield(
+                    //                                                             keyboardType: TextInputType.text,
+                    //                                                             // inputFormatters: <
+                    //                                                             //     TextInputFormatter>[
+                    //                                                             //   FilteringTextInputFormatter
+                    //                                                             //       .digitsOnly
+                    //                                                             // ],
+                    //                                                             maxLine: 1,
+                    //                                                             textController: new TextEditingController(text: mapData["value"] ?? ''),
+                    //                                                             onChanged: (txt) {
+                    //                                                               mapData["value"] = txt;
+                    //                                                             },
+                    //                                                           ),
+                    //                                                         )),
+                    //                                                   ],
+                    //                                                 ),
+                    //                                               )
+                    //                                             : (mapData['key'] ==
+                    //                                                     "Action ")
+                    //                                                 ? Padding(
+                    //                                                     padding: EdgeInsets
+                    //                                                         .only(
+                    //                                                             top: 10),
+                    //                                                     child:
+                    //                                                         Column(
+                    //                                                       mainAxisAlignment:
+                    //                                                           MainAxisAlignment.start,
+                    //                                                       crossAxisAlignment:
+                    //                                                           CrossAxisAlignment.start,
+                    //                                                       children: [
+                    //                                                         IgnorePointer(
+                    //                                                           ignoring: controller.incidentReportDetailsModel.value?.status == 183
+                    //                                                               ? true
+                    //                                                               : false,
+                    //                                                           child:
+                    //                                                               TableActionButton(
+                    //                                                             color: ColorValues.appRedColor,
+                    //                                                             icon: Icons.delete,
+                    //                                                             label: '',
+                    //                                                             message: '',
+                    //                                                             onPress: () {
+                    //                                                               controller.rowInjuredPersonItem.remove(record);
+                    //                                                             },
+                    //                                                           ),
+                    //                                                         )
+                    //                                                       ],
+                    //                                                     ),
+                    //                                                   )
+                    //                                                 : Text(mapData[
+                    //                                                         'key'] ??
+                    //                                                     ''),
+                    //       );
+                    //     }).toList(),
+                    //   );
+                    // }).toList(),
+                  ),
                 ),
               ),
             ]),

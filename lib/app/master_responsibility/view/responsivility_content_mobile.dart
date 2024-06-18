@@ -49,7 +49,7 @@ class ResponsibilityListContentMobile
                                   Row(
                                     children: [
                                       Text(
-                                        'CheckList Id: ',
+                                        'Rsponsibility Id: ',
                                         style: const TextStyle(
                                             color: ColorValues.blackColor,
                                             fontWeight: FontWeight.w400),
@@ -65,7 +65,7 @@ class ResponsibilityListContentMobile
                                   ),
                                   Row(children: [
                                     Text(
-                                      'Module Name: ',
+                                      'Responsibility Name: ',
                                       style: const TextStyle(
                                           color: ColorValues.blackColor,
                                           fontWeight: FontWeight.w400),
@@ -76,6 +76,27 @@ class ResponsibilityListContentMobile
                                     Expanded(
                                       child: Text(
                                         '${roleModel?.name}'
+                                        '',
+                                        style: const TextStyle(
+                                          color: ColorValues.navyBlueColor,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ),
+                                  ]),
+                                  Row(children: [
+                                    Text(
+                                      'Responsibility Description: ',
+                                      style: const TextStyle(
+                                          color: ColorValues.blackColor,
+                                          fontWeight: FontWeight.w400),
+                                    ),
+                                    SizedBox(
+                                      width: 5,
+                                    ),
+                                    Expanded(
+                                      child: Text(
+                                        '${roleModel?.description}'
                                         '',
                                         style: const TextStyle(
                                           color: ColorValues.navyBlueColor,

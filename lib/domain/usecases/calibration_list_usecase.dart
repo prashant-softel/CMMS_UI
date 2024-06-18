@@ -14,7 +14,7 @@ class CalibrationListUsecase {
   }) async {
     return _repository.getBusinessList(
       isLoading: isLoading,
-      facilityId:facilityId,
+      facilityId: facilityId,
       businessType: businessType,
     );
   }
@@ -39,6 +39,13 @@ class CalibrationListUsecase {
   }) async =>
       await _repository.rejectRequestCalibration(
           rejectCalibrationtoJsonString: rejectCalibrationtoJsonString,
+          isLoading: isLoading);
+  Future<bool> skipCalibration({
+    skipCalibrationtoJsonString,
+    bool? isLoading,
+  }) async =>
+      await _repository.skipCalibration(
+          skipCalibrationtoJsonString: skipCalibrationtoJsonString,
           isLoading: isLoading);
   Future<bool> approveRequestCalibration({
     approveCalibrationtoJsonString,
@@ -69,17 +76,18 @@ class CalibrationListUsecase {
       await _repository.closeCalibration(
           closeCalibrationtoJsonString: closeCalibrationtoJsonString,
           isLoading: isLoading);
-  Future<bool> completeCalibration({
-    completeCalibrationtoJsonString,
-    bool? isLoading,
-  }) async =>
-      await _repository.completeCalibration(
-          completeCalibrationtoJsonString: completeCalibrationtoJsonString,
-          isLoading: isLoading);
+  // Future<bool> completeCalibration({
+  //   completeCalibrationtoJsonString,
+  //   bool? isLoading,
+  // }) async =>
+  //     await _repository.completeCalibration(
+  //         completeCalibrationtoJsonString: completeCalibrationtoJsonString,
+  //         isLoading: isLoading);
   Future<bool> startCalibration(
           {required Object calibrationId, required bool isLoading}) async =>
       await _repository.startCalibration(
         calibrationId,
         isLoading,
       );
+  void clearValue() async => _repository.clearData(LocalKeys.calibrationId);
 }

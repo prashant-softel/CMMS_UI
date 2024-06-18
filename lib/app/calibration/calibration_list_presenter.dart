@@ -47,6 +47,16 @@ class CalibrationListPresenter {
     );
   }
 
+  Future<bool> skipCalibration({
+    skipCalibrationtoJsonString,
+    required bool isLoading,
+  }) async {
+    return calibrationListUsecase.skipCalibration(
+      skipCalibrationtoJsonString: skipCalibrationtoJsonString,
+      isLoading: isLoading,
+    );
+  }
+
   Future<bool> approveRequestCalibration({
     approveCalibrationtoJsonString,
     required bool isLoading,
@@ -87,15 +97,15 @@ class CalibrationListPresenter {
     );
   }
 
-  Future<bool> completeCalibration({
-    completeCalibrationtoJsonString,
-    required bool isLoading,
-  }) async {
-    return calibrationListUsecase.completeCalibration(
-      completeCalibrationtoJsonString: completeCalibrationtoJsonString,
-      isLoading: isLoading,
-    );
-  }
+  // Future<bool> completeCalibration({
+  //   completeCalibrationtoJsonString,
+  //   required bool isLoading,
+  // }) async {
+  //   return calibrationListUsecase.completeCalibration(
+  //     completeCalibrationtoJsonString: completeCalibrationtoJsonString,
+  //     isLoading: isLoading,
+  //   );
+  // }
 
   Future<bool> startCalibration(String? calibrationId,
           {required bool isLoading}) async =>
@@ -103,4 +113,5 @@ class CalibrationListPresenter {
         calibrationId: calibrationId ?? 0,
         isLoading: isLoading,
       );
+  void clearValue() async => calibrationListUsecase.clearValue();
 }

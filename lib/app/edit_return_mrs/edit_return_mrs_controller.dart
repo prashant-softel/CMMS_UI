@@ -138,7 +138,11 @@ class EditMrsReturnController extends GetxController {
       rowFaultyItem.value = [];
       returnMrsDetailsModel.value!.cmmrsFaultyItems?.forEach((element) {
         rowFaultyItem.value.add([
-          {"key": "Drop_down", "value": '${element.name}'},
+          {
+            "key": "Drop_down",
+            "value": '${element.name}',
+            "id": '${element.mrs_item_id}'
+          },
           {'key': "code", "value": ''},
           {'key': "Material_Type", "value": ''},
           {'key': "Material_Category", "value": ''},
@@ -173,7 +177,7 @@ class EditMrsReturnController extends GetxController {
 
   void addRowFaultyItem() {
     rowFaultyItem.add([
-      {"key": "Drop_down", "value": 'Please Select'},
+      {"key": "Drop_down", "value": 'Please Select', "id": ''},
       {'key': "code", "value": ''},
       {'key': "Material_Type", "value": ''},
       {'key': "Material_Category", "value": ''},
@@ -204,8 +208,7 @@ class EditMrsReturnController extends GetxController {
       FaultyItemsCmms item = FaultyItemsCmms(
         assetMasterItemID:
             dropdownFaultyMapperData.value[element[0]["value"]]?.id,
-        mrsItemID: 0,
-        // dropdownFaultyMapperData.value[element[0]["value"]].issued_qty,
+        mrsItemID: int.tryParse(element[0]["id"] ?? '0'),
         sr_no: element[4]["value"] ?? '0',
         returned_qty: int.tryParse(element[5]["value"] ?? '0'),
         return_remarks: element[6]["value"] ?? '0',

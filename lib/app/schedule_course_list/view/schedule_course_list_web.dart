@@ -4,6 +4,7 @@ import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/schedule_course_list/schedule_course_list_controller.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/date_picker.dart';
+import 'package:cmms/domain/models/schedule_course_list_model.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -17,75 +18,23 @@ class ScheduleCourseWeb extends StatefulWidget {
   _ScheduleCourseWebState createState() => _ScheduleCourseWebState();
 }
 
-final List<Map<dynamic, dynamic>> scheduleData = [
-  {
-    "Schedule ID": "S1",
-    "Course ID": "C1",
-    "Schedule Date": "2023/01/12",
-    "Training Company": "Company Name",
-    "Trainer": "Trainer",
-    "Mode": "Offline",
-    "Venue": "Company",
-    "Status": "Pending",
-  },
-  {
-    "Schedule ID": "S2",
-    "Course ID": "C2",
-    "Schedule Date": "2023/01/11",
-    "Training Company": "Company",
-    "Trainer": "Trainer",
-    "Mode": "Online",
-    "Venue": "Company",
-    "Status": "Completed",
-  },
-  {
-    "Schedule ID": "S3",
-    "Course ID": "C3",
-    "Schedule Date": "2023/01/12",
-    "Training Company": "Company",
-    "Trainer": "Trainer",
-    "Mode": "Online",
-    "Venue": "Company",
-    "Status": "Pending",
-  },
-  {
-    "Schedule ID": "S4",
-    "Course ID": "C4",
-    "Schedule Date": "2023/01/12",
-    "Training Company": "Company",
-    "Trainer": "Trainer",
-    "Mode": "Online",
-    "Venue": "Company",
-    "Status": "Pending",
-  },
-  {
-    "Schedule ID": "S5",
-    "Course ID": "C5",
-    "Schedule Date": "2023/01/12",
-    "Training Company": "Company",
-    "Trainer": "Trainer",
-    "Mode": "Offline",
-    "Venue": "Company",
-    "Status": "Completed",
-  },
-];
-
 class _ScheduleCourseWebState extends State<ScheduleCourseWeb> {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<ScheduleCourseListController>(
-      id: "stock_Mangement_Date",
+      id: "schedule_list",
       builder: (controller) {
-        return SelectionArea(
-          child: Stack(
-            children: [
-              SingleChildScrollView(
-                child: Column(
-                  children: [
-                    HeaderWidget(),
-                    Container(
-                      height: 45,
-                      decoration: BoxDecoration(
+        return Scaffold(
+          body: Obx(
+            () => SelectionArea(
+              child: Stack(
+                children: [
+                  Column(
+                    children: [
+                      HeaderWidget(),
+                      Container(
+                        height: 45,
+                        decoration: BoxDecoration(
                           border: Border.all(
                               color: Color.fromARGB(255, 227, 224, 224),
                               width: 1),
@@ -97,332 +46,322 @@ class _ScheduleCourseWebState extends State<ScheduleCourseWeb> {
                               blurRadius: 5,
                               offset: Offset(0, 2),
                             )
-                          ]),
-                      child: Row(
-                        children: [
-                          Icon(
-                            Icons.home,
-                            color: ColorValues.greyLightColor,
-                          ),
-                          InkWell(
-                            onTap: () {
-                              Get.offNamed(Routes.home);
-                            },
-                            child: Text(
-                              "DASHBOARD",
+                          ],
+                        ),
+                        child: Row(
+                          children: [
+                            Icon(
+                              Icons.home,
+                              color: ColorValues.greyLightColor,
+                            ),
+                            InkWell(
+                              onTap: () {
+                                Get.offNamed(Routes.home);
+                              },
+                              child: Text(
+                                "DASHBOARD",
+                                style: Styles.greyLight14,
+                              ),
+                            ),
+                            InkWell(
+                              onTap: () {
+                                Get.offNamed(Routes.misDashboard);
+                              },
+                              child: Text(
+                                " / MIS",
+                                style: Styles.greyLight14,
+                              ),
+                            ),
+                            Text(
+                              " / SCHEDULE COURSE LIST",
                               style: Styles.greyLight14,
                             ),
-                          ),
-                          InkWell(
-                            onTap: () {
-                              Get.offNamed(Routes.misDashboard);
-                            },
-                            child: Text(
-                              " / MIS",
-                              style: Styles.greyLight14,
-                            ),
-                          ),
-                          Text(
-                            " / SCHEDULE COURSE LIST",
-                            style: Styles.greyLight14,
-                          )
-                        ],
+                          ],
+                        ),
                       ),
-                    ),
-                    Stack(
-                      children: [
-                        Container(
-                          width: Get.width * 7,
-                          margin: EdgeInsets.only(left: 10, top: 20, right: 10),
-                          height: Get.height,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Expanded(
-                                child: SingleChildScrollView(
-                                  child: Container(
-                                    margin: EdgeInsets.only(
-                                        left: 10, top: 10, right: 10),
-                                    child: Column(
-                                      children: [
-                                        Card(
-                                          color: Color.fromARGB(
-                                              255, 245, 248, 250),
-                                          elevation: 10,
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(10.0),
+                      Expanded(
+                        child: ScrollConfiguration(
+                          behavior: ScrollConfiguration.of(context)
+                              .copyWith(scrollbars: false),
+                          child: SingleChildScrollView(
+                            child: Container(
+                              width: Get.width * 7,
+                              margin: EdgeInsets.all(10),
+                              height: Get.height * .84,
+                              child: Card(
+                                color: Color.fromARGB(255, 245, 248, 250),
+                                elevation: 10,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10.0),
+                                ),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.all(10.0),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            "Schedule Course List",
+                                            style: Styles.blackBold16,
                                           ),
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
+                                          Spacer(),
+                                          Row(
                                             children: [
-                                              Row(children: [
-                                                Padding(
-                                                  padding: EdgeInsets.only(
-                                                    left: 20,
-                                                    top: 20,
-                                                  ),
-                                                  child: Text(
-                                                    "Schedule Course List",
-                                                    style: Styles.blackBold16,
-                                                  ),
-                                                ),
-                                                Spacer(),
-                                                Row(
-                                                  children: [
-                                                    CustomRichText(
-                                                        title: 'Date Range'),
-                                                    Dimens.boxWidth10,
-                                                    CustomTextFieldForStock(
-                                                      width:
-                                                          MediaQuery.of(context)
-                                                                  .size
-                                                                  .width /
-                                                              5,
-                                                      numberTextField: true,
-                                                      onTap: () {
-                                                        controller
-                                                                .openFromDateToStartDatePicker =
-                                                            !controller
-                                                                .openFromDateToStartDatePicker;
-                                                        controller.update([
-                                                          'stock_Mangement_Date'
-                                                        ]);
-                                                      },
-                                                      hintText:
-                                                          '${controller.formattedFromdate.toString()} - ${controller.formattedTodate.toString()}',
-                                                    ),
-                                                  ],
-                                                ),
-                                              ]),
-                                              Divider(
-                                                color:
-                                                    ColorValues.greyLightColor,
+                                              CustomRichText(
+                                                  title: 'Date Range'),
+                                              Dimens.boxWidth10,
+                                              CustomTextFieldForStock(
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width /
+                                                    5,
+                                                numberTextField: true,
+                                                onTap: () {
+                                                  controller
+                                                          .openFromDateToStartDatePicker =
+                                                      !controller
+                                                          .openFromDateToStartDatePicker;
+                                                  controller.update(
+                                                      ['stock_Mangement_Date']);
+                                                },
+                                                hintText:
+                                                    '${controller.formattedFromdate.toString()} - ${controller.formattedTodate.toString()}',
                                               ),
-                                              Container(
-                                                color: Color.fromARGB(
-                                                    255, 245, 248, 250),
-                                                width: Get.width,
-                                                height: Get.height,
-                                                child: Padding(
-                                                  padding:
-                                                      const EdgeInsets.all(16),
-                                                  child: DataTable2(
-                                                    // fixedLeftColumns: 1,
-                                                    headingRowHeight: 70,
-                                                    columnSpacing: 12,
-                                                    horizontalMargin: 12,
-                                                    headingRowColor:
-                                                        MaterialStateColor
-                                                            .resolveWith(
-                                                      (states) {
-                                                        return ColorValues
-                                                            .lightGreyColor;
-                                                      },
-                                                    ),
-                                                    // fixedColumnsColor: ColorValues
-                                                    //     .appYellowColor,
-                                                    // minWidth: 2350,
-                                                    columns: [
-                                                      DataColumn2(
-                                                        // fixedWidth: 70,
-                                                        label: Text(
-                                                          "Schedule ID",
-                                                          style: Styles
-                                                              .blackBold14,
-                                                        ),
-                                                        // size: ColumnSize.L,
-                                                      ),
-                                                      DataColumn2(
-                                                        // fixedWidth: 110,
-                                                        label: Text(
-                                                          "Course ID",
-                                                          style: Styles
-                                                              .blackBold14,
-                                                        ),
-                                                        // size: ColumnSize.L,
-                                                      ),
-                                                      DataColumn2(
-                                                        // fixedWidth: 110,
-                                                        label: Text(
-                                                          "Schedule Date",
-                                                          style: Styles
-                                                              .blackBold14,
-                                                        ),
-                                                        // size: ColumnSize.L,
-                                                      ),
-                                                      DataColumn2(
-                                                        // fixedWidth: 160,
-                                                        label: Text(
-                                                          "Training Company",
-                                                          style: Styles
-                                                              .blackBold14,
-                                                        ),
-                                                        size: ColumnSize.L,
-                                                      ),
-                                                      DataColumn2(
-                                                        // fixedWidth: 110,
-                                                        label: Text(
-                                                          "Trainer",
-                                                          style: Styles
-                                                              .blackBold14,
-                                                        ),
-                                                        // size: ColumnSize.L,
-                                                      ),
-                                                      DataColumn2(
-                                                        // fixedWidth: 90,
-                                                        label: Text(
-                                                          "Mode",
-                                                          style: Styles
-                                                              .blackBold14,
-                                                        ),
-                                                        // size: ColumnSize.L,
-                                                      ),
-                                                      DataColumn2(
-                                                        // fixedWidth: 90,
-                                                        label: Text(
-                                                          "Venue",
-                                                          style: Styles
-                                                              .blackBold14,
-                                                        ),
-                                                        // size: ColumnSize.L,
-                                                      ),
-                                                      DataColumn2(
-                                                        // fixedWidth: 90,
-                                                        label: Text(
-                                                          "Status",
-                                                          style: Styles
-                                                              .blackBold14,
-                                                        ),
-                                                        // size: ColumnSize.L,
-                                                      ),
-                                                      DataColumn2(
-                                                          label: Text("Action",
-                                                              style: Styles
-                                                                  .blackBold14))
-                                                    ],
-                                                    rows: scheduleData.map(
-                                                      (data) {
-                                                        return DataRow(
-                                                          cells: [
-                                                            DataCell(Text(data[
-                                                                "Schedule ID"
-                                                                    .toString()])),
-                                                            DataCell(Text(data[
-                                                                "Course ID"])),
-                                                            DataCell(Text(data[
-                                                                "Schedule Date"])),
-                                                            DataCell(Text(data[
-                                                                "Training Company"])),
-                                                            DataCell(Text(data[
-                                                                "Trainer"])),
-                                                            DataCell(Text(
-                                                                data["Mode"])),
-                                                            DataCell(Text(
-                                                                data["Venue"])),
-                                                            DataCell(Text(data[
-                                                                "Status"])),
-                                                            DataCell(
-                                                              Row(
-                                                                children: [
-                                                                  TableActionButton(
-                                                                    color: ColorValues
-                                                                        .executeColor,
-                                                                    icon: Icons
-                                                                        .arrow_forward,
-                                                                    message:
-                                                                        "Execute",
-                                                                    onPress:
-                                                                        () {
-                                                                      Get.toNamed(
-                                                                        Routes
-                                                                            .executeCourse,
-                                                                      );
-                                                                    },
-                                                                  ),
-                                                                  TableActionButton(
-                                                                    color: ColorValues
-                                                                        .viewColor,
-                                                                    icon: Icons
-                                                                        .visibility_outlined,
-                                                                    message:
-                                                                        "View",
-                                                                    onPress:
-                                                                        () {
-                                                                      Get.toNamed(
-                                                                        Routes
-                                                                            .executeCourse,
-                                                                      );
-                                                                    },
-                                                                  ),
-                                                                ],
-                                                              ),
-                                                            ),
-                                                          ],
-                                                        );
-                                                      },
-                                                    ).toList(),
-                                                  ),
-                                                ),
-                                              )
                                             ],
                                           ),
-                                        )
+                                        ],
+                                      ),
+                                    ),
+                                    Divider(
+                                      color: ColorValues.greyLightColour,
+                                    ),
+                                    Dimens.boxHeight10,
+                                    Row(
+                                      children: [
+                                        PopupMenuButton<String>(
+                                          tooltip: "",
+                                          elevation: 25.0,
+                                          child: Container(
+                                            height: 35,
+                                            margin: EdgeInsets.only(left: 10),
+                                            padding: EdgeInsets.only(
+                                                top: 4,
+                                                bottom: 4,
+                                                right: 8,
+                                                left: 8),
+                                            decoration: BoxDecoration(
+                                                color: ColorValues
+                                                    .appLightBlueColor,
+                                                borderRadius:
+                                                    BorderRadius.circular(5),
+                                                boxShadow: [
+                                                  BoxShadow(
+                                                    color: Colors.black26,
+                                                    offset:
+                                                        const Offset(4.0, 2.0),
+                                                    blurRadius: 5.0,
+                                                    spreadRadius: 1.0,
+                                                  ),
+                                                ]),
+                                            child: Text(
+                                              'Column Visibility',
+                                              style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.w400,
+                                              ),
+                                            ),
+                                          ),
+                                          itemBuilder: (BuildContext context) =>
+                                              <PopupMenuEntry<String>>[]
+                                                ..addAll(
+                                                  controller.columnVisibility
+                                                      .value.entries
+                                                      .map(
+                                                    (e) {
+                                                      return PopupMenuItem<
+                                                          String>(
+                                                        child:
+                                                            ValueListenableBuilder(
+                                                          valueListenable:
+                                                              controller
+                                                                  .columnVisibility,
+                                                          builder: (
+                                                            context,
+                                                            value,
+                                                            child,
+                                                          ) {
+                                                            return Row(
+                                                              children: [
+                                                                Checkbox(
+                                                                  value: value[
+                                                                      e.key],
+                                                                  onChanged:
+                                                                      (newValue) {
+                                                                    controller
+                                                                        .setColumnVisibility(
+                                                                      e.key,
+                                                                      newValue!,
+                                                                    );
+                                                                  },
+                                                                ),
+                                                                Text(e.key),
+                                                              ],
+                                                            );
+                                                          },
+                                                        ),
+                                                      );
+                                                    },
+                                                  ),
+                                                ),
+                                          onSelected: (String value) {},
+                                        ),
+                                        Spacer(),
+                                        Container(
+                                          width: 300,
+                                          height: 40,
+                                          margin: Dimens.edgeInsets0_0_16_0,
+                                          child: TextField(
+                                            style: GoogleFonts.lato(
+                                              textStyle: TextStyle(
+                                                fontSize: 16.0,
+                                                height: 1.0,
+                                                color: Colors.black,
+                                              ),
+                                            ),
+                                            onChanged: (value) {
+                                              controller.search(value);
+                                            },
+                                            decoration: InputDecoration(
+                                              enabledBorder:
+                                                  const OutlineInputBorder(
+                                                borderSide: const BorderSide(
+                                                  color: Colors.grey,
+                                                  width: 0.0,
+                                                ),
+                                              ),
+                                              focusedBorder:
+                                                  const OutlineInputBorder(
+                                                borderSide: const BorderSide(
+                                                  color: Colors.grey,
+                                                  width: 0.0,
+                                                ),
+                                              ),
+                                              contentPadding:
+                                                  Dimens.edgeInsets05_10,
+                                              hintText: 'search'.tr,
+                                              hintStyle: Styles.grey16,
+                                            ),
+                                          ),
+                                        ),
                                       ],
                                     ),
-                                  ),
+                                    SizedBox(
+                                      height: 20,
+                                    ),
+                                    controller.scourseList.isEmpty == true &&
+                                            controller.isLoading == false
+                                        ? Center(
+                                            child: Text('No data'),
+                                          )
+                                        : controller.isLoading.value == true
+                                            ? Center(
+                                                child:
+                                                    Text("Data Loading......"),
+                                              )
+                                            : Expanded(
+                                                child: ValueListenableBuilder(
+                                                  valueListenable: controller
+                                                      .columnVisibility,
+                                                  builder:
+                                                      (context, value, child) {
+                                                    final dataSource =
+                                                        ScheduleCourseListDataSource(
+                                                            controller);
+                                                    return PaginatedDataTable2(
+                                                      dataRowHeight: 45,
+                                                      source: dataSource,
+                                                      minWidth: Get.width * 1.2,
+                                                      showCheckboxColumn: false,
+                                                      rowsPerPage: 10,
+                                                      availableRowsPerPage: [
+                                                        10,
+                                                        20,
+                                                        30,
+                                                        50
+                                                      ],
+                                                      columns: [
+                                                        for (var entry
+                                                            in value.entries)
+                                                          if (entry.value)
+                                                            buildDataColumn(
+                                                              entry.key,
+                                                              controller
+                                                                      .filterText[
+                                                                  entry.key]!,
+                                                              controller
+                                                                      .columnwidth[
+                                                                  entry.key],
+                                                            ),
+                                                        buildDataColumn(
+                                                          'Actions',
+                                                          controller
+                                                              .ActionFilterText,
+                                                          250,
+                                                        ),
+                                                      ],
+                                                    );
+                                                  },
+                                                ),
+                                              ),
+                                  ],
                                 ),
-                              )
-                            ],
+                              ),
+                            ),
                           ),
-                        )
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-              if (controller.openFromDateToStartDatePicker)
-                Positioned(
-                  right: 230,
-                  top: 90,
-                  child: DatePickerWidget(
-                    selectionMode: DateRangePickerSelectionMode.range,
-                    monthCellStyle: DateRangePickerMonthCellStyle(
-                      todayCellDecoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: ColorValues.appDarkBlueColor),
-                    ), // last date of this year
-                    // controller: DateRangePickerController(),
-                    initialSelectedRange: PickerDateRange(
-                      controller.fromDate.value,
-                      controller.toDate.value,
-                    ),
-
-                    onSubmit: (value) {
-                      print('po valu ${value.toString()}');
-                      PickerDateRange? data = value as PickerDateRange;
-
-                      var pickUpDate =
-                          DateTime.parse(data.startDate.toString());
-                      controller.fromDate.value = pickUpDate;
-                      var dropDate = DateTime.parse(data.endDate.toString());
-                      dropDate != null
-                          ? controller.toDate.value = dropDate
-                          : controller.toDate.value = pickUpDate;
-
-                      // controller.getNewPermitListByDate();
-                      controller.openFromDateToStartDatePicker =
-                          !controller.openFromDateToStartDatePicker;
-                      controller.update(['stock_Mangement_Date']);
-
-                      // Get.toNamed(
-                      //   Routes.stockManagementGoodsOrdersScreen,
-                      // );
-                    },
+                        ),
+                      ),
+                    ],
                   ),
-                ),
-            ],
+                  if (controller.openFromDateToStartDatePicker)
+                    Positioned(
+                      right: 230,
+                      top: 90,
+                      child: DatePickerWidget(
+                        selectionMode: DateRangePickerSelectionMode.range,
+                        monthCellStyle: DateRangePickerMonthCellStyle(
+                          todayCellDecoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: ColorValues.appDarkBlueColor),
+                        ),
+                        initialSelectedRange: PickerDateRange(
+                          controller.fromDate.value,
+                          controller.toDate.value,
+                        ),
+                        onSubmit: (value) {
+                          print('po valu ${value.toString()}');
+                          PickerDateRange? data = value as PickerDateRange;
+                          var pickUpDate =
+                              DateTime.parse(data.startDate.toString());
+                          controller.fromDate.value = pickUpDate;
+                          var dropDate =
+                              DateTime.parse(data.endDate.toString());
+                          dropDate != null
+                              ? controller.toDate.value = dropDate
+                              : controller.toDate.value = pickUpDate;
+                          controller.geScheduleCourseListByDate();
+                          controller.openFromDateToStartDatePicker =
+                              !controller.openFromDateToStartDatePicker;
+                          controller.update(['stock_Mangement_Date']);
+                        },
+                      ),
+                    ),
+                ],
+              ),
+            ),
           ),
         );
       },
@@ -431,53 +370,15 @@ class _ScheduleCourseWebState extends State<ScheduleCourseWeb> {
 }
 
 DataColumn2 buildDataColumn(
-  // String columnName,
   String header,
-
-  /// ColumnSize columnSize,
   RxString filterText,
   double? fixedWidth,
-  //  {required Function(String) onSearchCallBack}
 ) {
-  return //
-      DataColumn2(
-    // size: columnSize,
+  return DataColumn2(
     fixedWidth: fixedWidth,
-
-    label: //
-        Column(
-      mainAxisAlignment: MainAxisAlignment.center, //
+    label: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        SizedBox(
-          height: Get.height * 0.05,
-          child: TextField(
-            style: GoogleFonts.lato(
-              textStyle:
-                  TextStyle(fontSize: 16.0, height: 1.0, color: Colors.black),
-            ),
-            onChanged: (value) {
-              filterText.value = value;
-            },
-            textAlign: TextAlign.left,
-            decoration: InputDecoration(
-              hintText: 'Filter',
-              contentPadding:
-                  EdgeInsets.fromLTRB(5, 0, 5, 0), // Reduced vertical padding
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(5),
-                borderSide: BorderSide(color: Colors.black),
-              ),
-              focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(5),
-                borderSide: BorderSide(color: Colors.black),
-              ),
-              enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(5),
-                borderSide: BorderSide(color: Colors.black),
-              ),
-            ),
-          ),
-        ),
         Align(
           alignment: Alignment.centerLeft,
           child: Text(
@@ -488,4 +389,152 @@ DataColumn2 buildDataColumn(
       ],
     ),
   );
+}
+
+class ScheduleCourseListDataSource extends DataTableSource {
+  final ScheduleCourseListController controller;
+
+  late List<ScheduleCourseListModel?> filteredScheduleCourseList;
+
+  ScheduleCourseListDataSource(this.controller) {
+    filterUsers();
+  }
+
+  void filterUsers() {
+    filteredScheduleCourseList = <ScheduleCourseListModel?>[];
+    filteredScheduleCourseList = controller.scourseList.where((ScheduleCourse) {
+      return (ScheduleCourse?.scheduleID ?? '')
+              .toString()
+              .toLowerCase()
+              .contains(controller.ScheduleIdFilterText.value.toLowerCase()) &&
+          (ScheduleCourse?.courseID ?? '')
+              .toString()
+              .toLowerCase()
+              .contains(controller.CourseIdFilterText.value.toLowerCase()) &&
+          (ScheduleCourse?.scheduleDate ?? '')
+              .toString()
+              .toLowerCase()
+              .contains(
+                  controller.ScheduledateFilterText.value.toLowerCase()) &&
+          (ScheduleCourse?.trainingCompany ?? '')
+              .toString()
+              .toLowerCase()
+              .contains(
+                  controller.TrainingcompanyFilterText.value.toLowerCase()) &&
+          (ScheduleCourse?.trainer ?? '')
+              .toString()
+              .toLowerCase()
+              .contains(controller.trainerFilterText.value.toLowerCase()) &&
+          (ScheduleCourse?.mode ?? '')
+              .toString()
+              .toLowerCase()
+              .contains(controller.modeFilterText.value.toLowerCase()) &&
+          (ScheduleCourse?.venue ?? '')
+              .toString()
+              .toLowerCase()
+              .contains(controller.venueFilterText.value.toLowerCase());
+    }).toList();
+  }
+
+  @override
+  DataRow? getRow(int index) {
+    final ScheduleCourse = filteredScheduleCourseList[index];
+    String schedDate = ScheduleCourse!.scheduleDate != null
+        ? ScheduleCourse.scheduleDate.toString()
+        : '';
+    if (schedDate.length > 0) {
+      schedDate = schedDate.substring(0, schedDate.length - 9);
+    }
+
+    var cellsBuffer = [
+      "id",
+      '${ScheduleCourse.courseID ?? ''}',
+      schedDate,
+      '${ScheduleCourse.trainingCompany ?? ''}',
+      '${ScheduleCourse.trainer ?? 0}',
+      '${ScheduleCourse.mode ?? 0}',
+      '${ScheduleCourse.venue ?? ''}',
+      'Actions',
+    ];
+    var cells = [];
+    int i = 0;
+
+    for (var entry in controller.columnVisibility.value.entries) {
+      if (entry.key == "search") {
+        return null;
+      }
+      if (entry.value) {
+        cells.add(cellsBuffer[i]);
+      }
+      i++;
+    }
+    cells.add('Actions');
+
+    return DataRow.byIndex(
+      index: index,
+      cells: cells.map((value) {
+        return DataCell(
+          Padding(
+            padding: EdgeInsets.zero,
+            child: (value == 'id')
+                ? Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'SC${ScheduleCourse?.scheduleID}',
+                      ),
+                    ],
+                  )
+                : (value == 'Actions')
+                    ? Wrap(
+                        children: [
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Wrap(
+                                children: [
+                                  TableActionButton(
+                                    color: ColorValues.appDarkBlueColor,
+                                    icon: Icons.visibility,
+                                    message: 'View',
+                                    onPress: () {
+                                      Get.toNamed(
+                                        Routes.executeCourse,
+                                      );
+                                    },
+                                  ),
+                                  TableActionButton(
+                                    color: ColorValues.executeColor,
+                                    icon: Icons.arrow_forward,
+                                    message: 'Execute',
+                                    onPress: () {
+                                      Get.toNamed(
+                                        Routes.executeCourse,
+                                      );
+                                    },
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ],
+                      )
+                    : Text(value.toString()),
+          ),
+        );
+      }).toList(),
+      onSelectChanged: (_) {
+        // controller.viewCourse(courseId: TrainingCourse?.id ?? 0);
+      },
+    );
+  }
+
+  @override
+  int get rowCount => filteredScheduleCourseList.length;
+
+  @override
+  bool get isRowCountApproximate => false;
+
+  @override
+  int get selectedRowCount => 0;
 }
