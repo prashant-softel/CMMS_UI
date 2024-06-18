@@ -1,12 +1,16 @@
 import 'dart:async';
-
-import 'package:cmms/app/app.dart';
 import 'package:cmms/app/create_observation/create_observation_presenter.dart';
-import 'package:cmms/domain/models/business_list_model.dart';
-import 'package:cmms/domain/models/business_type_model.dart';
+import 'package:cmms/domain/models/Compliance_Status_model.dart';
+import 'package:cmms/domain/models/Statutory_Compliance_model.dart';
+import 'package:cmms/domain/models/createStatutory_model.dart';
 import 'package:cmms/domain/models/facility_model.dart';
+import 'package:cmms/domain/models/get_statutory_list_model.dart';
+import 'package:cmms/domain/models/history_model.dart';
 import 'package:cmms/domain/models/type_model.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:rxdart/subjects.dart';
+import '../home/home_controller.dart';
 
 class CreateObservationController extends GetxController {
   ///
@@ -14,18 +18,18 @@ class CreateObservationController extends GetxController {
     this.createObservationPresenter,
   );
   CreateObservationPresenter createObservationPresenter;
-  HomeController homeController = Get.find();
-  RxList<BusinessListModel?> ownerList = <BusinessListModel>[].obs;
-  Rx<bool> isSelectedBusinessType = true.obs;
 
-  int selectedBusinessTypeId = 1;
-  Rx<String> selectedBusinessType = ''.obs;
-
-  ///
-
+  final HomeController homeController = Get.find();
+  Rx<String> selectedFacility = ''.obs;
+  BehaviorSubject<int> _facilityId = BehaviorSubject.seeded(0);
+  StreamSubscription<int>? facilityIdStreamSubscription;
+  Stream<int> get facilityId$ => _facilityId.stream;
   RxList<FacilityModel?> facilityList = <FacilityModel>[].obs;
-
-  Rx<String> selectedBlock = ''.obs;
+  RxList<HistoryModel?>? historyList = <HistoryModel?>[].obs;
+  bool openObsDatePicker = false;
+  bool openTargetObsDatePicker = false;
+  var obsDateTc = TextEditingController();
+  var targetObsDateTc = TextEditingController();
   RxList<MonthModel> month = <MonthModel>[
     MonthModel(name: 'Jan', id: "1"),
     MonthModel(name: 'Feb', id: "2"),
@@ -60,68 +64,198 @@ class CreateObservationController extends GetxController {
     MonthModel(name: 'Opex ', id: "2"),
   ].obs;
 
-  ///
-  // final excel = Excel.createExcel();
-  // int facilityId = 0;
-  // int userId = 0;
-  // String? facilityName;
-  // JobModel? jobModel;
-  // PaginationController paginationController = PaginationController(
-  //   rowCount: 0,
-  //   rowsPerPage: 10,
-  // );
-  StreamSubscription<int>? facilityIdStreamSubscription;
-  StreamSubscription<String>? facilityNameStreamSubscription;
-
-  ///
+  Rx<bool> isLoading = true.obs;
+  int facilityId = 0;
+  Rx<int> obsId = 0.obs;
   @override
   void onInit() async {
-    // facilityIdStreamSubscription = homeController.facilityId$.listen((event) {
-    //   facilityId = event;
-    //   // Future.delayed(Duration(seconds: 1), () {
-    //   // userId = varUserAccessModel.value.user_id ?? 0;
-    //   // if (userId != null) {
+    try {
+      await setUserId();
+      facilityIdStreamSubscription = homeController.facilityId$.listen((event) {
+        facilityId = event;
+        Future.delayed(Duration(seconds: 1), () {
+          getFacilityList();
+        });
+      });
+      if (obsId.value != 0) {
+        Future.delayed(Duration(seconds: 1), () {
+          // getObsDetail(id: obsId.value);
+          getObsHistory(id: obsId.value);
+        });
+      }
+    } catch (e) {}
 
-    //   // }
-    //   // });
-    // });
-    // facilityNameStreamSubscription =
-    //     homeController.facilityName$.listen((event) {
-    //   facilityName = event;
-
-    //   // });
-    // });
     super.onInit();
   }
 
-  Future<void> getFacilityList({bool? isLoading}) async {
-    facilityList.value = <FacilityModel>[];
-    List<FacilityModel?>? _facilityList = <FacilityModel?>[];
+  Future<void> setUserId() async {
+    try {
+      final _obsId = await createObservationPresenter.getValue();
 
-    _facilityList = await createObservationPresenter.getFacilityList();
-    if (_facilityList != null && _facilityList.isNotEmpty) {
-      facilityList.value = _facilityList;
-    }
-    if (facilityList.isNotEmpty) {
-      selectedBlock.value = facilityList[0]?.name ?? '';
+      if (_obsId == null || _obsId == '' || _obsId == "null") {
+        var dataFromPreviousScreen = Get.arguments;
+
+        obsId.value = dataFromPreviousScreen['obsId'];
+
+        createObservationPresenter.saveValue(obsId: obsId.value.toString());
+      } else {
+        obsId.value = int.tryParse(_obsId) ?? 0;
+      }
+    } catch (e) {
+      print(e.toString() + 'obsId');
+      //  Utility.showDialog(e.toString() + 'userId');
     }
   }
 
-  void onValueChanged(dynamic list, dynamic value) {
-    switch (list.runtimeType) {
-      case RxList<BusinessTypeModel>:
-        {
-          if (value != "Please Select") {
-            int equipmentIndex = ownerList.indexWhere((x) => x?.name == value);
-          selectedBusinessTypeId = ownerList[equipmentIndex]?.id ?? 0;
-            
-          }else{
-            selectedBusinessTypeId=0;
+  // Future<void> getObsDetail({required int id}) async {
+  //   final _getObsDetail = await createObservationPresenter.getObsDetail(id: id);
 
+  //   if (_getObsDetail != null) {
+  //     // getObsById.value = _getObsDetail;
 
-          }
-        }
-        break;
+  //     // issueDateTc.text = getObsById.value?.created_at ?? '';
+  //     // expireOnDateTc.text = getObsById.value?.end_date ?? "";
+  //     // commentsCtrl.text = getObsById.value?.description ?? "";
+  //   }
+  // }
+
+  Future<void> getObsHistory({required int id}) async {
+    int moduleType = 406;
+
+    historyList?.value = await createObservationPresenter.getHistory(
+          moduleType,
+          id,
+          true,
+        ) ??
+        [];
+    update(["historyList"]);
+  }
+
+  Future<void> getFacilityList() async {
+    final _facilityList = await createObservationPresenter.getFacilityList();
+
+    if (_facilityList != null) {
+      for (var facility in _facilityList) {
+        facilityList.add(facility);
+      }
+
+      selectedFacility.value = facilityList[0]?.name ?? '';
+      _facilityId.sink.add(facilityList[0]?.id ?? 0);
     }
+  }
+
+  // void createCompliance(int? position) async {
+  //   try {
+  //     checkCompiliace();
+  //     if (isFormInvalid.value) {
+  //       return;
+  //     }
+  //     String _issueDateTc = issueDateTc.text.trim();
+  //     String _expireOnDateTc = expireOnDateTc.text.trim();
+  //     String _commentsCtrl = commentsCtrl.text.trim();
+
+  //     CreateStatutoryModel createStatutoryModel = CreateStatutoryModel(
+  //         facility_id: facilityId,
+  //         Comment: _commentsCtrl,
+  //         compliance_id: selectedStatutoryComplianceId,
+  //         issue_date: _issueDateTc,
+  //         expires_on: _expireOnDateTc,
+  //         renewFlag: 0,
+  //         renew_date: "",
+  //         status_of_aplication_id: selectedStatusOfAplicationId);
+
+  //     // Convert the CreateStatutoryModel instance to JSON
+  //     var createComplianceModelJsonString = createStatutoryModel.toJson();
+
+  //     // Call the createCompliance function from stockManagementAddGoodsOrdersPresenter
+  //     Map<String, dynamic>? responseCreateComplianceModel =
+  //         await createObservationPresenter.createCompliance(
+  //       createCompliance: createComplianceModelJsonString,
+  //       isLoading: true,
+  //       position: position,
+  //     );
+
+  //     // Handle the response
+  //     if (responseCreateComplianceModel == null) {
+  //       // CreateNewPermitDialog();
+  //       // showAlertDialog();
+  //     }
+  //     print(
+  //         'Create  create Compliance  data: $createComplianceModelJsonString');
+  //   } catch (e) {
+  //     print(e);
+  //   }
+  // }
+
+  // void updateCompliance(int? postion) async {
+  //   try {
+  //     checkCompiliace();
+  //     if (isFormInvalid.value) {
+  //       return;
+  //     }
+  //     String _issueDateTc = issueDateTc.text.trim();
+  //     String _expireOnDateTc = expireOnDateTc.text.trim();
+  //     String _commentsCtrl = commentsCtrl.text.trim();
+
+  //     CreateStatutoryModel createStatutoryModel = CreateStatutoryModel(
+  //         facility_id: facilityId,
+  //         Comment: _commentsCtrl,
+  //         compliance_id: selectedStatutoryComplianceId,
+  //         issue_date: _issueDateTc,
+  //         expires_on: _expireOnDateTc,
+  //         renewFlag: 0,
+  //         renew_date: "",
+  //         status_of_aplication_id: selectedStatusOfAplicationId);
+
+  //     // Convert the CreateStatutoryModel instance to JSON
+  //     var createComplianceModelJsonString = createStatutoryModel.toJson();
+
+  //     // Call the createCompliance function from stockManagementAddGoodsOrdersPresenter
+  //     Map<String, dynamic>? responseCreateComplianceModel =
+  //         await createObservationPresenter.createCompliance(
+  //       createCompliance: createComplianceModelJsonString,
+  //       isLoading: true,
+  //     );
+
+  //     // Handle the response
+  //     if (responseCreateComplianceModel == null) {
+  //       // CreateNewPermitDialog();
+  //       // showAlertDialog();
+  //     }
+  //     print(
+  //         'Create  create Compliance  data: $createComplianceModelJsonString');
+  //   } catch (e) {
+  //     print(e);
+  //   }
+  // }
+
+  // void checkCompiliace() {
+  //   if (selectedStatutoryCompliance.value == '') {
+  //     isStatutoryComplianceSelected.value = false;
+  //     isFormInvalid.value = true;
+  //   }
+  //   if (selectedStatusOfAplication.value == '') {
+  //     isStatusOfAplicationSelected.value = false;
+  //     isFormInvalid.value = true;
+  //   }
+  //   if (issueDateTc.text.trim().length < 3) {
+  //     isIssueDateInvalid.value = true;
+  //     isFormInvalid.value = true;
+  //   }
+
+  //   if (expireOnDateTc.text.trim().length < 3) {
+  //     isExpiresonInvalid.value = true;
+  //     isFormInvalid.value = true;
+  //   }
+  // }
+
+  void clearStoreData() {
+    // createObservationPresenter.clearValue();
+    // createObservationPresenter.clearRenewValue();
+  }
+
+  void onValueChanged(dynamic list, dynamic value) {
+    print("$value");
+    switch (list.runtimeType) {}
   }
 }
