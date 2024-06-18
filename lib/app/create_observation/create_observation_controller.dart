@@ -3,6 +3,7 @@ import 'package:cmms/app/create_observation/create_observation_presenter.dart';
 import 'package:cmms/domain/models/Compliance_Status_model.dart';
 import 'package:cmms/domain/models/Statutory_Compliance_model.dart';
 import 'package:cmms/domain/models/createStatutory_model.dart';
+import 'package:cmms/domain/models/create_obs_model.dart';
 import 'package:cmms/domain/models/facility_model.dart';
 import 'package:cmms/domain/models/get_statutory_list_model.dart';
 import 'package:cmms/domain/models/history_model.dart';
@@ -29,7 +30,7 @@ class CreateObservationController extends GetxController {
   bool openObsDatePicker = false;
   bool openTargetObsDatePicker = false;
   var obsDateTc = TextEditingController();
-  var targetObsDateTc = TextEditingController();
+  var targetDateTc = TextEditingController();
   RxList<MonthModel> month = <MonthModel>[
     MonthModel(name: 'Jan', id: "1"),
     MonthModel(name: 'Feb', id: "2"),
@@ -144,92 +145,98 @@ class CreateObservationController extends GetxController {
     }
   }
 
-  // void createCompliance(int? position) async {
-  //   try {
-  //     checkCompiliace();
-  //     if (isFormInvalid.value) {
-  //       return;
-  //     }
-  //     String _issueDateTc = issueDateTc.text.trim();
-  //     String _expireOnDateTc = expireOnDateTc.text.trim();
-  //     String _commentsCtrl = commentsCtrl.text.trim();
+  void createObs(int? position) async {
+    try {
+      // checkObs();
+      // if (isFormInvalid.value) {
+      //   return;
+      // }
+      String _obsDateTc = obsDateTc.text.trim();
+      String _targetDateTc = targetDateTc.text.trim();
+      // String _commentsCtrl = commentsCtrl.text.trim();
 
-  //     CreateStatutoryModel createStatutoryModel = CreateStatutoryModel(
-  //         facility_id: facilityId,
-  //         Comment: _commentsCtrl,
-  //         compliance_id: selectedStatutoryComplianceId,
-  //         issue_date: _issueDateTc,
-  //         expires_on: _expireOnDateTc,
-  //         renewFlag: 0,
-  //         renew_date: "",
-  //         status_of_aplication_id: selectedStatusOfAplicationId);
+      CreateObsModel createObsModel = CreateObsModel(
+        facility_id: facilityId,
+        contact_number: "",
+        contractor_name: "",
+        cost_type: "",
+        date_of_observation: _obsDateTc,
+        location_of_observation: "",
+        observation_description: "",
+        preventive_action: "",
+        responsible_person: "",
+        risk_type_id: 1,
+        source_of_observation: "",
+        target_date: _targetDateTc,
+        type_of_observation: "",
+        uploadfileIds: [],
+      );
 
-  //     // Convert the CreateStatutoryModel instance to JSON
-  //     var createComplianceModelJsonString = createStatutoryModel.toJson();
+      // Convert the CreateObsModel instance to JSON
+      var createObsModelJsonString = createObsModel.toJson();
 
-  //     // Call the createCompliance function from stockManagementAddGoodsOrdersPresenter
-  //     Map<String, dynamic>? responseCreateComplianceModel =
-  //         await createObservationPresenter.createCompliance(
-  //       createCompliance: createComplianceModelJsonString,
-  //       isLoading: true,
-  //       position: position,
-  //     );
+      // Call the createObs function from stockManagementAddGoodsOrdersPresenter
+      Map<String, dynamic>? responseCreateObsModel =
+          await createObservationPresenter.createObs(
+        createObs: createObsModelJsonString,
+        isLoading: true,
+        position: position,
+      );
 
-  //     // Handle the response
-  //     if (responseCreateComplianceModel == null) {
-  //       // CreateNewPermitDialog();
-  //       // showAlertDialog();
-  //     }
-  //     print(
-  //         'Create  create Compliance  data: $createComplianceModelJsonString');
-  //   } catch (e) {
-  //     print(e);
-  //   }
-  // }
+      // Handle the response
+      if (responseCreateObsModel == null) {
+        // CreateNewPermitDialog();
+        // showAlertDialog();
+      }
+      print('Create  create Obseravtion  data: $createObsModelJsonString');
+    } catch (e) {
+      print(e);
+    }
+  }
 
   // void updateCompliance(int? postion) async {
   //   try {
-  //     checkCompiliace();
+  //     checkObs();
   //     if (isFormInvalid.value) {
   //       return;
   //     }
-  //     String _issueDateTc = issueDateTc.text.trim();
-  //     String _expireOnDateTc = expireOnDateTc.text.trim();
+  //     String _obsDateTc = issueDateTc.text.trim();
+  //     String _targetDateTc = expireOnDateTc.text.trim();
   //     String _commentsCtrl = commentsCtrl.text.trim();
 
-  //     CreateStatutoryModel createStatutoryModel = CreateStatutoryModel(
+  //     CreateObsModel createObsModel = CreateObsModel(
   //         facility_id: facilityId,
   //         Comment: _commentsCtrl,
   //         compliance_id: selectedStatutoryComplianceId,
-  //         issue_date: _issueDateTc,
-  //         expires_on: _expireOnDateTc,
+  //         issue_date: _obsDateTc,
+  //         expires_on: _targetDateTc,
   //         renewFlag: 0,
   //         renew_date: "",
   //         status_of_aplication_id: selectedStatusOfAplicationId);
 
-  //     // Convert the CreateStatutoryModel instance to JSON
-  //     var createComplianceModelJsonString = createStatutoryModel.toJson();
+  //     // Convert the CreateObsModel instance to JSON
+  //     var createObsModelJsonString = createObsModel.toJson();
 
-  //     // Call the createCompliance function from stockManagementAddGoodsOrdersPresenter
-  //     Map<String, dynamic>? responseCreateComplianceModel =
-  //         await createObservationPresenter.createCompliance(
-  //       createCompliance: createComplianceModelJsonString,
+  //     // Call the createObs function from stockManagementAddGoodsOrdersPresenter
+  //     Map<String, dynamic>? responseCreateObsModel =
+  //         await createObservationPresenter.createObs(
+  //       createObs: createObsModelJsonString,
   //       isLoading: true,
   //     );
 
   //     // Handle the response
-  //     if (responseCreateComplianceModel == null) {
+  //     if (responseCreateObsModel == null) {
   //       // CreateNewPermitDialog();
   //       // showAlertDialog();
   //     }
   //     print(
-  //         'Create  create Compliance  data: $createComplianceModelJsonString');
+  //         'Create  create Compliance  data: $createObsModelJsonString');
   //   } catch (e) {
   //     print(e);
   //   }
   // }
 
-  // void checkCompiliace() {
+  // void checkObs() {
   //   if (selectedStatutoryCompliance.value == '') {
   //     isStatutoryComplianceSelected.value = false;
   //     isFormInvalid.value = true;

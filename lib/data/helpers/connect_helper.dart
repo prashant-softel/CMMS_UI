@@ -3356,6 +3356,31 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> createObs(
+      {required String auth, createObs, bool? isLoading, int? position}) async {
+    var responseModel = await apiWrapper.makeRequest(
+      position == 1
+          ? 'MISMaster/CreateObservation'
+          : 'MISMaster/UpdateObservation',
+      Request.post,
+      createObs,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    print('Create Observation Response:${responseModel.data}');
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    // if (res.e != null) {
+    //   Get.dialog<void>(WarrantyClaimErrorDialog());
+    // } else {
+
+    return responseModel;
+  }
+
   Future<ResponseModel> createWaterData({
     required String auth,
     createWaterData,

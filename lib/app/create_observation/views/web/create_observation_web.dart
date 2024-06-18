@@ -1,7 +1,9 @@
+import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/controllers/file_upload_controller.dart';
 import 'package:cmms/app/create_observation/create_observation_controller.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
+import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/custom_textField.dart';
@@ -38,235 +40,148 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
       builder: (controller) {
         return SelectionArea(
           child: Scaffold(
-            body: Container(
-              color: Color.fromARGB(255, 234, 236, 238),
-              width: Get.width,
-              height: Get.height,
-              child: Column(
-                children: [
-                  HeaderWidget(),
-                  AppBarCreateObservation(),
-                  Expanded(
-                    child: SingleChildScrollView(
-                      child: Stack(
-                        children: [
-                          Container(
-                            margin:
-                                EdgeInsets.only(left: 10, top: 10, right: 10),
-                            child: Column(
-                              children: [
-                                Card(
-                                  color: Color.fromARGB(255, 245, 248, 250),
-                                  elevation: 10,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(10.0),
-                                  ),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Padding(
-                                        padding:
-                                            EdgeInsets.only(left: 20, top: 20),
-                                        child: Text(
-                                          "Create Observation",
-                                          style: Styles.blackBold16,
+              body: Container(
+                color: Color.fromARGB(255, 234, 236, 238),
+                width: Get.width,
+                height: Get.height,
+                child: Column(
+                  children: [
+                    HeaderWidget(),
+                    AppBarCreateObservation(),
+                    Expanded(
+                      child: SingleChildScrollView(
+                        child: Stack(
+                          children: [
+                            Container(
+                              margin:
+                                  EdgeInsets.only(left: 10, top: 10, right: 10),
+                              child: Column(
+                                children: [
+                                  Card(
+                                    color: Color.fromARGB(255, 245, 248, 250),
+                                    elevation: 10,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(10.0),
+                                    ),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Padding(
+                                          padding: EdgeInsets.only(
+                                              left: 20, top: 20),
+                                          child: Text(
+                                            "Create Observation",
+                                            style: Styles.blackBold16,
+                                          ),
                                         ),
-                                      ),
-                                      Divider(
-                                        color: ColorValues.greyLightColour,
-                                      ),
-                                      Container(
-                                        color:
-                                            Color.fromARGB(255, 245, 248, 250),
-                                        width: Get.width,
-                                        height: Get.height,
-                                        child: Padding(
-                                          padding: const EdgeInsets.all(16),
-                                          child: Container(
-                                            margin: Dimens.edgeInsets20,
-                                            child: Column(
-                                              children: [
-                                                Row(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    Spacer(),
-                                                    Column(
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .end,
-                                                      children: [
-                                                        Dimens.boxHeight5,
-                                                        Row(
-                                                          children: [
-                                                            CustomRichText(
-                                                                title:
-                                                                    'Contractor Name'),
-                                                            Dimens.boxWidth10,
-                                                            LoginCustomTextfield(
-                                                              width: (MediaQuery.of(
-                                                                          context)
-                                                                      .size
-                                                                      .width *
-                                                                  .2),
-                                                              keyboardType:
-                                                                  TextInputType
-                                                                      .number,
-                                                              inputFormatters: [
-                                                                FilteringTextInputFormatter
-                                                                    .deny(
-                                                                  RegExp(
-                                                                      '[\'^]'),
-                                                                )
-                                                              ],
-                                                              // textController:
-                                                              //     controller.challanNoCtrlr,
-                                                            ),
-                                                          ],
-                                                        ),
-                                                        Dimens.boxHeight5,
-                                                        Row(
-                                                          children: [
-                                                            CustomRichText(
-                                                                title:
-                                                                    'Risk Type'),
-                                                            Dimens.boxWidth10,
-                                                            Container(
-                                                              decoration:
-                                                                  BoxDecoration(
-                                                                // boxShadow: [
-                                                                //   BoxShadow(
-                                                                //     color: Colors
-                                                                //         .black26,
-                                                                //     offset:
-                                                                //         const Offset(
-                                                                //       5.0,
-                                                                //       5.0,
-                                                                //     ),
-                                                                //     blurRadius: 5.0,
-                                                                //     spreadRadius: 1.0,
-                                                                //   ),
-                                                                // ],
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            5),
-                                                              ),
-                                                              child:
-                                                                  DropdownWebStock(
-                                                                width: MediaQuery.of(
+                                        Divider(
+                                          color: ColorValues.greyLightColour,
+                                        ),
+                                        Container(
+                                          color: Color.fromARGB(
+                                              255, 245, 248, 250),
+                                          width: Get.width,
+                                          height: Get.height,
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(16),
+                                            child: Container(
+                                              margin: Dimens.edgeInsets20,
+                                              child: Column(
+                                                children: [
+                                                  Row(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      Spacer(),
+                                                      Column(
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .end,
+                                                        children: [
+                                                          Dimens.boxHeight5,
+                                                          Row(
+                                                            children: [
+                                                              CustomRichText(
+                                                                  title:
+                                                                      'Contractor Name'),
+                                                              Dimens.boxWidth10,
+                                                              LoginCustomTextfield(
+                                                                width: (MediaQuery.of(
                                                                             context)
                                                                         .size
-                                                                        .width /
-                                                                    5,
-                                                                dropdownList:
-                                                                    controller
-                                                                        .riskType,
-                                                                // selectedValue: ,
-                                                                onValueChanged:
-                                                                    (riskType,
-                                                                        selectedValue) {},
+                                                                        .width *
+                                                                    .2),
+                                                                keyboardType:
+                                                                    TextInputType
+                                                                        .number,
+                                                                inputFormatters: [
+                                                                  FilteringTextInputFormatter
+                                                                      .deny(
+                                                                    RegExp(
+                                                                        '[\'^]'),
+                                                                  )
+                                                                ],
+                                                                // textController:
+                                                                //     controller.challanNoCtrlr,
                                                               ),
-                                                            ),
-                                                          ],
-                                                        ),
-                                                        Dimens.boxHeight5,
-                                                        Row(
-                                                          children: [
-                                                            CustomRichText(
-                                                                title:
-                                                                    'Corrective/Preventive Action'),
-                                                            Dimens.boxWidth10,
-                                                            LoginCustomTextfield(
-                                                              width: (MediaQuery.of(
-                                                                          context)
-                                                                      .size
-                                                                      .width *
-                                                                  .2),
-                                                              keyboardType:
-                                                                  TextInputType
-                                                                      .number,
-
-                                                              // textController:
-                                                              //     controller.challanNoCtrlr,
-                                                            ),
-                                                          ],
-                                                        ),
-                                                        Dimens.boxHeight5,
-                                                        Row(
-                                                          children: [
-                                                            CustomRichText(
-                                                                title:
-                                                                    'Responsible Person'),
-                                                            Dimens.boxWidth10,
-                                                            LoginCustomTextfield(
-                                                              width: (MediaQuery.of(
-                                                                          context)
-                                                                      .size
-                                                                      .width *
-                                                                  .2),
-                                                              keyboardType:
-                                                                  TextInputType
-                                                                      .number,
-
-                                                              // textController:
-                                                              //     controller.challanNoCtrlr,
-                                                            ),
-                                                          ],
-                                                        ),
-                                                        Dimens.boxHeight5,
-                                                        Row(
-                                                          children: [
-                                                            CustomRichText(
-                                                                title:
-                                                                    'Contact Number'),
-                                                            Dimens.boxWidth10,
-                                                            LoginCustomTextfield(
-                                                              width: (MediaQuery.of(
-                                                                          context)
-                                                                      .size
-                                                                      .width *
-                                                                  .2),
-                                                              keyboardType:
-                                                                  TextInputType
-                                                                      .number,
-
-                                                              // textController:
-                                                              //     controller.challanNoCtrlr,
-                                                            ),
-                                                          ],
-                                                        ),
-                                                        Dimens.boxHeight5,
-                                                        Row(
-                                                          children: [
-                                                            CustomRichText(
-                                                                title:
-                                                                    'Cost type'),
-                                                            Dimens.boxWidth10,
-                                                            Container(
-                                                              decoration:
-                                                                  BoxDecoration(
-                                                                // boxShadow: [
-                                                                //   BoxShadow(
-                                                                //     color: Colors
-                                                                //         .black26,
-                                                                //     offset:
-                                                                //         const Offset(
-                                                                //       5.0,
-                                                                //       5.0,
-                                                                //     ),
-                                                                //     blurRadius: 5.0,
-                                                                //     spreadRadius: 1.0,
-                                                                //   ),
-                                                                // ],
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            5),
+                                                            ],
+                                                          ),
+                                                          Dimens.boxHeight5,
+                                                          Row(
+                                                            children: [
+                                                              CustomRichText(
+                                                                  title:
+                                                                      'Risk Type'),
+                                                              Dimens.boxWidth10,
+                                                              Container(
+                                                                decoration:
+                                                                    BoxDecoration(
+                                                                  // boxShadow: [
+                                                                  //   BoxShadow(
+                                                                  //     color: Colors
+                                                                  //         .black26,
+                                                                  //     offset:
+                                                                  //         const Offset(
+                                                                  //       5.0,
+                                                                  //       5.0,
+                                                                  //     ),
+                                                                  //     blurRadius: 5.0,
+                                                                  //     spreadRadius: 1.0,
+                                                                  //   ),
+                                                                  // ],
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              5),
+                                                                ),
+                                                                child:
+                                                                    DropdownWebStock(
+                                                                  width: MediaQuery.of(
+                                                                              context)
+                                                                          .size
+                                                                          .width /
+                                                                      5,
+                                                                  dropdownList:
+                                                                      controller
+                                                                          .riskType,
+                                                                  // selectedValue: ,
+                                                                  onValueChanged:
+                                                                      (riskType,
+                                                                          selectedValue) {},
+                                                                ),
                                                               ),
-                                                              child:
-                                                                  LoginCustomTextfield(
+                                                            ],
+                                                          ),
+                                                          Dimens.boxHeight5,
+                                                          Row(
+                                                            children: [
+                                                              CustomRichText(
+                                                                  title:
+                                                                      'Corrective/Preventive Action'),
+                                                              Dimens.boxWidth10,
+                                                              LoginCustomTextfield(
                                                                 width: (MediaQuery.of(
                                                                             context)
                                                                         .size
@@ -279,475 +194,589 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                                                 // textController:
                                                                 //     controller.challanNoCtrlr,
                                                               ),
-                                                            ),
-                                                          ],
-                                                        ),
+                                                            ],
+                                                          ),
+                                                          Dimens.boxHeight5,
+                                                          Row(
+                                                            children: [
+                                                              CustomRichText(
+                                                                  title:
+                                                                      'Responsible Person'),
+                                                              Dimens.boxWidth10,
+                                                              LoginCustomTextfield(
+                                                                width: (MediaQuery.of(
+                                                                            context)
+                                                                        .size
+                                                                        .width *
+                                                                    .2),
+                                                                keyboardType:
+                                                                    TextInputType
+                                                                        .number,
 
-                                                        Dimens.boxHeight5,
-                                                        // if (reNew == 1)
-                                                        // Row(
-                                                        //   children: [
-                                                        //     CustomRichText(
-                                                        //         title: 'ReNew Date '),
-                                                        //     Dimens.boxWidth10,
-                                                        //     CustomTextFieldForStock(
-                                                        //       width:
-                                                        //           MediaQuery.of(context)
-                                                        //                   .size
-                                                        //                   .width /
-                                                        //               5,
-                                                        //       numberTextField: true,
-                                                        //       onTap: () {
-                                                        //         // controller
-                                                        //         //         .openObsDatePicker =
-                                                        //         //     !controller
-                                                        //         //         .openObsDatePicker;
-                                                        //         // controller.update(
-                                                        //         //     ['stock_Mangement']);
-                                                        //       },
-                                                        //       // textController:
-                                                        //       //     controller.obsDateTc,
-                                                        //     ),
-                                                        //   ],
-                                                        // ),
-                                                      ],
-                                                    ),
-                                                    Spacer(),
-                                                    Column(
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .end,
-                                                      children: [
-                                                        Dimens.boxWidth5,
-                                                        Row(
-                                                          children: [
-                                                            CustomRichText(
-                                                                title:
-                                                                    'Date of Observation'),
-                                                            Dimens.boxWidth10,
-                                                            CustomTextFieldForStock(
-                                                              width: MediaQuery.of(
-                                                                          context)
-                                                                      .size
-                                                                      .width /
-                                                                  5,
-                                                              numberTextField:
-                                                                  true,
-                                                              onTap: () {
-                                                                controller
-                                                                        .openObsDatePicker =
-                                                                    !controller
-                                                                        .openObsDatePicker;
-                                                                controller
-                                                                    .update([
-                                                                  'stock_Mangement'
-                                                                ]);
-                                                              },
-                                                              textController:
-                                                                  controller
-                                                                      .obsDateTc,
-                                                            ),
-                                                          ],
-                                                        ),
-                                                        Dimens.boxHeight5,
-                                                        Row(
-                                                          children: [
-                                                            CustomRichText(
-                                                                title:
-                                                                    'Type of Observation'),
-                                                            Dimens.boxWidth10,
-                                                            Container(
-                                                              decoration:
-                                                                  BoxDecoration(
-                                                                // boxShadow: [
-                                                                //   BoxShadow(
-                                                                //     color: Colors
-                                                                //         .black26,
-                                                                //     offset:
-                                                                //         const Offset(
-                                                                //       5.0,
-                                                                //       5.0,
-                                                                //     ),
-                                                                //     blurRadius: 5.0,
-                                                                //     spreadRadius: 1.0,
-                                                                //   ),
-                                                                // ],
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            5),
+                                                                // textController:
+                                                                //     controller.challanNoCtrlr,
                                                               ),
-                                                              child:
-                                                                  DropdownWebStock(
+                                                            ],
+                                                          ),
+                                                          Dimens.boxHeight5,
+                                                          Row(
+                                                            children: [
+                                                              CustomRichText(
+                                                                  title:
+                                                                      'Contact Number'),
+                                                              Dimens.boxWidth10,
+                                                              LoginCustomTextfield(
+                                                                width: (MediaQuery.of(
+                                                                            context)
+                                                                        .size
+                                                                        .width *
+                                                                    .2),
+                                                                keyboardType:
+                                                                    TextInputType
+                                                                        .number,
+
+                                                                // textController:
+                                                                //     controller.challanNoCtrlr,
+                                                              ),
+                                                            ],
+                                                          ),
+                                                          Dimens.boxHeight5,
+                                                          Row(
+                                                            children: [
+                                                              CustomRichText(
+                                                                  title:
+                                                                      'Cost type'),
+                                                              Dimens.boxWidth10,
+                                                              Container(
+                                                                decoration:
+                                                                    BoxDecoration(
+                                                                  // boxShadow: [
+                                                                  //   BoxShadow(
+                                                                  //     color: Colors
+                                                                  //         .black26,
+                                                                  //     offset:
+                                                                  //         const Offset(
+                                                                  //       5.0,
+                                                                  //       5.0,
+                                                                  //     ),
+                                                                  //     blurRadius: 5.0,
+                                                                  //     spreadRadius: 1.0,
+                                                                  //   ),
+                                                                  // ],
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              5),
+                                                                ),
+                                                                child:
+                                                                    LoginCustomTextfield(
+                                                                  width: (MediaQuery.of(
+                                                                              context)
+                                                                          .size
+                                                                          .width *
+                                                                      .2),
+                                                                  keyboardType:
+                                                                      TextInputType
+                                                                          .number,
+
+                                                                  // textController:
+                                                                  //     controller.challanNoCtrlr,
+                                                                ),
+                                                              ),
+                                                            ],
+                                                          ),
+
+                                                          Dimens.boxHeight5,
+                                                          // if (reNew == 1)
+                                                          // Row(
+                                                          //   children: [
+                                                          //     CustomRichText(
+                                                          //         title: 'ReNew Date '),
+                                                          //     Dimens.boxWidth10,
+                                                          //     CustomTextFieldForStock(
+                                                          //       width:
+                                                          //           MediaQuery.of(context)
+                                                          //                   .size
+                                                          //                   .width /
+                                                          //               5,
+                                                          //       numberTextField: true,
+                                                          //       onTap: () {
+                                                          //         // controller
+                                                          //         //         .openObsDatePicker =
+                                                          //         //     !controller
+                                                          //         //         .openObsDatePicker;
+                                                          //         // controller.update(
+                                                          //         //     ['stock_Mangement']);
+                                                          //       },
+                                                          //       // textController:
+                                                          //       //     controller.obsDateTc,
+                                                          //     ),
+                                                          //   ],
+                                                          // ),
+                                                        ],
+                                                      ),
+                                                      Spacer(),
+                                                      Column(
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .end,
+                                                        children: [
+                                                          Dimens.boxWidth5,
+                                                          Row(
+                                                            children: [
+                                                              CustomRichText(
+                                                                  title:
+                                                                      'Date of Observation'),
+                                                              Dimens.boxWidth10,
+                                                              CustomTextFieldForStock(
                                                                 width: MediaQuery.of(
                                                                             context)
                                                                         .size
                                                                         .width /
                                                                     5,
-                                                                dropdownList:
+                                                                numberTextField:
+                                                                    true,
+                                                                onTap: () {
+                                                                  controller
+                                                                          .openObsDatePicker =
+                                                                      !controller
+                                                                          .openObsDatePicker;
+                                                                  controller
+                                                                      .update([
+                                                                    'stock_Mangement'
+                                                                  ]);
+                                                                },
+                                                                textController:
                                                                     controller
-                                                                        .typeOfObservation,
-                                                                // selectedValue: ,
-                                                                onValueChanged:
-                                                                    (typeOfObservation,
-                                                                        selectedValue) {},
+                                                                        .obsDateTc,
                                                               ),
-                                                            ),
-                                                          ],
-                                                        ),
-                                                        Dimens.boxHeight5,
-                                                        Row(
-                                                          children: [
-                                                            CustomRichText(
-                                                                title:
-                                                                    'Location of Observation'),
-                                                            Dimens.boxWidth10,
-                                                            LoginCustomTextfield(
-                                                              width: (MediaQuery.of(
-                                                                          context)
-                                                                      .size
-                                                                      .width *
-                                                                  .2),
-                                                              keyboardType:
-                                                                  TextInputType
-                                                                      .number,
+                                                            ],
+                                                          ),
+                                                          Dimens.boxHeight5,
+                                                          Row(
+                                                            children: [
+                                                              CustomRichText(
+                                                                  title:
+                                                                      'Type of Observation'),
+                                                              Dimens.boxWidth10,
+                                                              Container(
+                                                                decoration:
+                                                                    BoxDecoration(
+                                                                  // boxShadow: [
+                                                                  //   BoxShadow(
+                                                                  //     color: Colors
+                                                                  //         .black26,
+                                                                  //     offset:
+                                                                  //         const Offset(
+                                                                  //       5.0,
+                                                                  //       5.0,
+                                                                  //     ),
+                                                                  //     blurRadius: 5.0,
+                                                                  //     spreadRadius: 1.0,
+                                                                  //   ),
+                                                                  // ],
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              5),
+                                                                ),
+                                                                child:
+                                                                    DropdownWebStock(
+                                                                  width: MediaQuery.of(
+                                                                              context)
+                                                                          .size
+                                                                          .width /
+                                                                      5,
+                                                                  dropdownList:
+                                                                      controller
+                                                                          .typeOfObservation,
+                                                                  // selectedValue: ,
+                                                                  onValueChanged:
+                                                                      (typeOfObservation,
+                                                                          selectedValue) {},
+                                                                ),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                          Dimens.boxHeight5,
+                                                          Row(
+                                                            children: [
+                                                              CustomRichText(
+                                                                  title:
+                                                                      'Location of Observation'),
+                                                              Dimens.boxWidth10,
+                                                              LoginCustomTextfield(
+                                                                width: (MediaQuery.of(
+                                                                            context)
+                                                                        .size
+                                                                        .width *
+                                                                    .2),
+                                                                keyboardType:
+                                                                    TextInputType
+                                                                        .number,
 
-                                                              // textController:
-                                                              //     controller.challanNoCtrlr,
-                                                            ),
-                                                          ],
-                                                        ),
-                                                        Dimens.boxHeight5,
-                                                        Row(
-                                                          children: [
-                                                            CustomRichText(
-                                                                title:
-                                                                    'Source of Observation'),
-                                                            Dimens.boxWidth10,
-                                                            Container(
-                                                              decoration:
-                                                                  BoxDecoration(
-                                                                // boxShadow: [
-                                                                //   BoxShadow(
-                                                                //     color: Colors
-                                                                //         .black26,
-                                                                //     offset:
-                                                                //         const Offset(
-                                                                //       5.0,
-                                                                //       5.0,
-                                                                //     ),
-                                                                //     blurRadius: 5.0,
-                                                                //     spreadRadius: 1.0,
-                                                                //   ),
-                                                                // ],
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            5),
+                                                                // textController:
+                                                                //     controller.challanNoCtrlr,
                                                               ),
-                                                              child:
-                                                                  DropdownWebStock(
+                                                            ],
+                                                          ),
+                                                          Dimens.boxHeight5,
+                                                          Row(
+                                                            children: [
+                                                              CustomRichText(
+                                                                  title:
+                                                                      'Source of Observation'),
+                                                              Dimens.boxWidth10,
+                                                              Container(
+                                                                decoration:
+                                                                    BoxDecoration(
+                                                                  // boxShadow: [
+                                                                  //   BoxShadow(
+                                                                  //     color: Colors
+                                                                  //         .black26,
+                                                                  //     offset:
+                                                                  //         const Offset(
+                                                                  //       5.0,
+                                                                  //       5.0,
+                                                                  //     ),
+                                                                  //     blurRadius: 5.0,
+                                                                  //     spreadRadius: 1.0,
+                                                                  //   ),
+                                                                  // ],
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              5),
+                                                                ),
+                                                                child:
+                                                                    DropdownWebStock(
+                                                                  width: MediaQuery.of(
+                                                                              context)
+                                                                          .size
+                                                                          .width /
+                                                                      5,
+                                                                  dropdownList:
+                                                                      controller
+                                                                          .sourceOfObservation,
+                                                                  // selectedValue: ,
+                                                                  onValueChanged:
+                                                                      (sourceOfObservation,
+                                                                          selectedValue) {},
+                                                                ),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                          Dimens.boxHeight5,
+                                                          // Row(
+                                                          //   children: [
+                                                          //     CustomRichText(
+                                                          //         title:
+                                                          //             'Action Taken'),
+                                                          //     Dimens.boxWidth10,
+                                                          //     LoginCustomTextfield(
+                                                          //       width: (MediaQuery.of(
+                                                          //                   context)
+                                                          //               .size
+                                                          //               .width *
+                                                          //           .2),
+                                                          //       keyboardType:
+                                                          //           TextInputType
+                                                          //               .number,
+
+                                                          //       // textController:
+                                                          //       //     controller.challanNoCtrlr,
+                                                          //     ),
+                                                          //   ],
+                                                          // ),
+                                                          // Dimens.boxHeight5,
+                                                          Row(
+                                                            children: [
+                                                              CustomRichText(
+                                                                  title:
+                                                                      'Target Date'),
+                                                              Dimens.boxWidth10,
+                                                              CustomTextFieldForStock(
                                                                 width: MediaQuery.of(
                                                                             context)
                                                                         .size
                                                                         .width /
                                                                     5,
-                                                                dropdownList:
+                                                                numberTextField:
+                                                                    true,
+                                                                onTap: () {
+                                                                  controller
+                                                                          .openTargetObsDatePicker =
+                                                                      !controller
+                                                                          .openTargetObsDatePicker;
+                                                                  controller
+                                                                      .update([
+                                                                    'stock_Mangement'
+                                                                  ]);
+                                                                },
+                                                                textController:
                                                                     controller
-                                                                        .sourceOfObservation,
-                                                                // selectedValue: ,
-                                                                onValueChanged:
-                                                                    (sourceOfObservation,
-                                                                        selectedValue) {},
+                                                                        .targetDateTc,
+                                                              ),
+                                                            ],
+                                                          ),
+                                                          Dimens.boxHeight5,
+                                                          // Row(
+                                                          //   children: [
+                                                          //     CustomRichText(
+                                                          //         title:
+                                                          //             'Closer Date'),
+                                                          //     Dimens.boxWidth10,
+                                                          //     CustomTextFieldForStock(
+                                                          //       width: MediaQuery.of(
+                                                          //                   context)
+                                                          //               .size
+                                                          //               .width /
+                                                          //           5,
+                                                          //       numberTextField: true,
+                                                          //       onTap: () {
+                                                          //         // controller
+                                                          //         //         .openObsDatePicker =
+                                                          //         //     !controller
+                                                          //         //         .openObsDatePicker;
+                                                          //         // controller.update(
+                                                          //         //     ['stock_Mangement']);
+                                                          //       },
+                                                          //       // textController:
+                                                          //       //     controller.obsDateTc,
+                                                          //     ),
+                                                          //   ],
+                                                          // ),
+                                                          // Dimens.boxHeight5,
+                                                        ],
+                                                      ),
+                                                      Spacer(),
+                                                    ],
+                                                  ),
+                                                  Dimens.boxHeight20,
+                                                  Padding(
+                                                    padding: const EdgeInsets
+                                                        .symmetric(
+                                                        horizontal: 20),
+                                                    child: Row(children: [
+                                                      Text(
+                                                          'Observation Description: ',
+                                                          style: Styles.blue14),
+                                                      Expanded(
+                                                        child: TextField(
+                                                          style:
+                                                              GoogleFonts.lato(
+                                                            textStyle: TextStyle(
+                                                                fontSize: 16.0,
+                                                                height: 1.0,
+                                                                color: Colors
+                                                                    .black),
+                                                          ),
+                                                          decoration:
+                                                              InputDecoration(
+                                                            disabledBorder:
+                                                                OutlineInputBorder(
+                                                              borderSide:
+                                                                  BorderSide(
+                                                                color: ColorValues
+                                                                    .appLightGreyColor,
+                                                                width: 1.0,
                                                               ),
                                                             ),
-                                                          ],
-                                                        ),
-                                                        Dimens.boxHeight5,
-                                                        // Row(
-                                                        //   children: [
-                                                        //     CustomRichText(
-                                                        //         title:
-                                                        //             'Action Taken'),
-                                                        //     Dimens.boxWidth10,
-                                                        //     LoginCustomTextfield(
-                                                        //       width: (MediaQuery.of(
-                                                        //                   context)
-                                                        //               .size
-                                                        //               .width *
-                                                        //           .2),
-                                                        //       keyboardType:
-                                                        //           TextInputType
-                                                        //               .number,
-
-                                                        //       // textController:
-                                                        //       //     controller.challanNoCtrlr,
-                                                        //     ),
-                                                        //   ],
-                                                        // ),
-                                                        // Dimens.boxHeight5,
-                                                        Row(
-                                                          children: [
-                                                            CustomRichText(
-                                                                title:
-                                                                    'Target Date'),
-                                                            Dimens.boxWidth10,
-                                                            CustomTextFieldForStock(
-                                                              width: MediaQuery.of(
-                                                                          context)
-                                                                      .size
-                                                                      .width /
-                                                                  5,
-                                                              numberTextField:
-                                                                  true,
-                                                              onTap: () {
-                                                                controller
-                                                                        .openTargetObsDatePicker =
-                                                                    !controller
-                                                                        .openTargetObsDatePicker;
-                                                                controller
-                                                                    .update([
-                                                                  'stock_Mangement'
-                                                                ]);
-                                                              },
-                                                              textController:
-                                                                  controller
-                                                                      .targetObsDateTc,
+                                                            enabledBorder:
+                                                                OutlineInputBorder(
+                                                              borderSide:
+                                                                  BorderSide(
+                                                                color: ColorValues
+                                                                    .appLightBlueColor,
+                                                                width: 1.0,
+                                                              ),
                                                             ),
-                                                          ],
-                                                        ),
-                                                        Dimens.boxHeight5,
-                                                        // Row(
-                                                        //   children: [
-                                                        //     CustomRichText(
-                                                        //         title:
-                                                        //             'Closer Date'),
-                                                        //     Dimens.boxWidth10,
-                                                        //     CustomTextFieldForStock(
-                                                        //       width: MediaQuery.of(
-                                                        //                   context)
-                                                        //               .size
-                                                        //               .width /
-                                                        //           5,
-                                                        //       numberTextField: true,
-                                                        //       onTap: () {
-                                                        //         // controller
-                                                        //         //         .openObsDatePicker =
-                                                        //         //     !controller
-                                                        //         //         .openObsDatePicker;
-                                                        //         // controller.update(
-                                                        //         //     ['stock_Mangement']);
-                                                        //       },
-                                                        //       // textController:
-                                                        //       //     controller.obsDateTc,
-                                                        //     ),
-                                                        //   ],
-                                                        // ),
-                                                        // Dimens.boxHeight5,
-                                                      ],
-                                                    ),
-                                                    Spacer(),
-                                                  ],
-                                                ),
-                                                Dimens.boxHeight20,
-                                                Padding(
-                                                  padding: const EdgeInsets
-                                                      .symmetric(
-                                                      horizontal: 20),
-                                                  child: Row(children: [
-                                                    Text(
-                                                        'Observation Description: ',
-                                                        style: Styles.blue14),
-                                                    Expanded(
-                                                      child: TextField(
-                                                        style: GoogleFonts.lato(
-                                                          textStyle: TextStyle(
-                                                              fontSize: 16.0,
-                                                              height: 1.0,
-                                                              color:
-                                                                  Colors.black),
-                                                        ),
-                                                        decoration:
-                                                            InputDecoration(
-                                                          disabledBorder:
-                                                              OutlineInputBorder(
-                                                            borderSide:
-                                                                BorderSide(
-                                                              color: ColorValues
-                                                                  .appLightGreyColor,
-                                                              width: 1.0,
+                                                            focusedBorder:
+                                                                OutlineInputBorder(
+                                                              borderSide:
+                                                                  BorderSide(
+                                                                color: ColorValues
+                                                                    .appLightBlueColor,
+                                                                width: 1.0,
+                                                              ),
                                                             ),
                                                           ),
-                                                          enabledBorder:
-                                                              OutlineInputBorder(
-                                                            borderSide:
-                                                                BorderSide(
-                                                              color: ColorValues
-                                                                  .appLightBlueColor,
-                                                              width: 1.0,
-                                                            ),
-                                                          ),
-                                                          focusedBorder:
-                                                              OutlineInputBorder(
-                                                            borderSide:
-                                                                BorderSide(
-                                                              color: ColorValues
-                                                                  .appLightBlueColor,
-                                                              width: 1.0,
-                                                            ),
-                                                          ),
+                                                          keyboardType:
+                                                              TextInputType
+                                                                  .multiline,
+                                                          minLines: 3,
+                                                          maxLines: null,
                                                         ),
-                                                        keyboardType:
-                                                            TextInputType
-                                                                .multiline,
-                                                        minLines: 3,
-                                                        maxLines: null,
+                                                      ),
+                                                    ]),
+                                                  ),
+                                                  Dimens.boxHeight15,
+                                                  Center(
+                                                    child: Container(
+                                                      height: Get.height * 0.2,
+                                                      width:
+                                                          MediaQuery.of(context)
+                                                                  .size
+                                                                  .width /
+                                                              1.2,
+                                                      constraints:
+                                                          BoxConstraints(
+                                                              maxWidth: 1400),
+                                                      padding:
+                                                          EdgeInsets.all(10),
+                                                      child: Row(
+                                                        children: [
+                                                          Expanded(
+                                                            flex: 2,
+                                                            child:
+                                                                FileUploadWidgetWithDropzone(),
+                                                          ),
+                                                          Dimens.boxWidth10,
+                                                          Expanded(
+                                                            flex: 8,
+                                                            child: Padding(
+                                                              padding:
+                                                                  const EdgeInsets
+                                                                      .only(
+                                                                      top: 15),
+                                                              child:
+                                                                  FileUploadDetailsWidgetWeb2(),
+                                                            ),
+                                                          ),
+                                                        ],
                                                       ),
                                                     ),
-                                                  ]),
-                                                ),
-                                                Dimens.boxHeight15,
-                                                Center(
-                                                  child: Container(
-                                                    height: Get.height * 0.2,
-                                                    width:
-                                                        MediaQuery.of(context)
-                                                                .size
-                                                                .width /
-                                                            1.2,
-                                                    constraints: BoxConstraints(
-                                                        maxWidth: 1400),
-                                                    padding: EdgeInsets.all(10),
-                                                    child: Row(
-                                                      children: [
-                                                        Expanded(
-                                                          flex: 2,
-                                                          child:
-                                                              FileUploadWidgetWithDropzone(),
-                                                        ),
-                                                        Dimens.boxWidth10,
-                                                        Expanded(
-                                                          flex: 8,
-                                                          child: Padding(
-                                                            padding:
-                                                                const EdgeInsets
-                                                                    .only(
-                                                                    top: 15),
-                                                            child:
-                                                                FileUploadDetailsWidgetWeb2(),
-                                                          ),
-                                                        ),
-                                                      ],
-                                                    ),
                                                   ),
-                                                ),
-                                                Dimens.boxHeight15,
-                                                Row(
-                                                  children: [
-                                                    Spacer(),
-                                                    CustomElevatedButton(
-                                                      backgroundColor:
-                                                          ColorValues
-                                                              .appRedColor,
-                                                      text: 'cancel',
-                                                      onPressed: () {
-                                                        // controller.AddInventory();
-                                                      },
-                                                    ),
-                                                    Dimens.boxWidth15,
-                                                    CustomElevatedButton(
-                                                      backgroundColor:
-                                                          ColorValues
-                                                              .appGreenColor,
-                                                      text: 'Submit',
-                                                      onPressed: () {
-                                                        // controller.submitPurchaseOrderData();
-                                                      },
-                                                    ),
-                                                    Spacer()
-                                                  ],
-                                                ),
-                                                Dimens.boxHeight15,
-                                              ],
+                                                  Dimens.boxHeight15,
+                                                  Row(
+                                                    children: [
+                                                      Spacer(),
+                                                      CustomElevatedButton(
+                                                        backgroundColor:
+                                                            ColorValues
+                                                                .appRedColor,
+                                                        text: 'cancel',
+                                                        onPressed: () {
+                                                          // controller.AddInventory();
+                                                        },
+                                                      ),
+                                                      Dimens.boxWidth15,
+                                                      CustomElevatedButton(
+                                                        backgroundColor:
+                                                            ColorValues
+                                                                .appGreenColor,
+                                                        text: 'Submit',
+                                                        onPressed: () {
+                                                          // controller.submitPurchaseOrderData();
+                                                        },
+                                                      ),
+                                                      Spacer()
+                                                    ],
+                                                  ),
+                                                  Dimens.boxHeight15,
+                                                ],
+                                              ),
                                             ),
                                           ),
                                         ),
-                                      ),
-                                    ],
+                                      ],
+                                    ),
                                   ),
+                                ],
+                              ),
+                            ),
+                            if (controller.openObsDatePicker)
+                              Positioned(
+                                right: 65,
+                                top: 230,
+                                child: DatePickerWidget(
+                                  // last date of this year
+                                  controller: DateRangePickerController(),
+                                  selectionChanges: (p0) {
+                                    print('po valu ${p0.value.toString()}');
+                                    controller.obsDateTc.text =
+                                        DateFormat('yyyy-MM-dd')
+                                            .format(p0.value);
+                                    controller.openObsDatePicker =
+                                        !controller.openObsDatePicker;
+                                    controller.update(['stock_Mangement']);
+                                  },
                                 ),
-                              ],
-                            ),
-                          ),
-                          if (controller.openObsDatePicker)
-                            Positioned(
-                              right: 65,
-                              top: 230,
-                              child: DatePickerWidget(
-                                // last date of this year
-                                controller: DateRangePickerController(),
-                                selectionChanges: (p0) {
-                                  print('po valu ${p0.value.toString()}');
-                                  controller.obsDateTc.text =
-                                      DateFormat('yyyy-MM-dd').format(p0.value);
-                                  controller.openObsDatePicker =
-                                      !controller.openObsDatePicker;
-                                  controller.update(['stock_Mangement']);
-                                },
                               ),
-                            ),
-                          if (controller.openTargetObsDatePicker)
-                            Positioned(
-                              right: 65,
-                              top: 230,
-                              child: DatePickerWidget(
-                                // last date of this year
-                                controller: DateRangePickerController(),
-                                selectionChanges: (p0) {
-                                  print('po valu ${p0.value.toString()}');
-                                  controller.targetObsDateTc.text =
-                                      DateFormat('yyyy-MM-dd').format(p0.value);
-                                  controller.openTargetObsDatePicker =
-                                      !controller.openTargetObsDatePicker;
-                                  controller.update(['stock_Mangement']);
-                                },
+                            if (controller.openTargetObsDatePicker)
+                              Positioned(
+                                right: 65,
+                                top: 230,
+                                child: DatePickerWidget(
+                                  // last date of this year
+                                  controller: DateRangePickerController(),
+                                  selectionChanges: (p0) {
+                                    print('po valu ${p0.value.toString()}');
+                                    controller.targetDateTc.text =
+                                        DateFormat('yyyy-MM-dd')
+                                            .format(p0.value);
+                                    controller.openTargetObsDatePicker =
+                                        !controller.openTargetObsDatePicker;
+                                    controller.update(['stock_Mangement']);
+                                  },
+                                ),
                               ),
-                            ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
-            // floatingActionButton: Row(
-            //   children: [
-            //     Spacer(),
-            //     Container(
-            //       height: 40,
-            //       child: CustomElevatedButton(
-            //         backgroundColor: ColorValues.cancelColor,
-            //         text: 'Cancel',
-            //         onPressed: () {
-            //           Get.back();
-            //         },
-            //       ),
-            //     ),
-            //     Dimens.boxWidth15,
-            //     Container(
-            //       height: 40,
-            //       child: CustomElevatedButton(
-            //         backgroundColor: ColorValues.submitColor,
-            //         text: 'Update',
-            //         onPressed: () {
-            //           // controller.createGoodsOrder();
-            //         },
-            //       ),
-            //     ),
-            //     Spacer(),
-            //   ],
-            // ),
-          ),
+              floatingActionButton: Obx(() => varUserAccessModel
+                          .value.access_list!
+                          .where((e) =>
+                              e.feature_id ==
+                                  UserAccessConstants.kGoodsFeatureId &&
+                              e.add == UserAccessConstants.kHaveAddAccess)
+                          .length >
+                      0
+                  ? Row(
+                      children: [
+                        Spacer(),
+                        Container(
+                          height: 40,
+                          child: CustomElevatedButton(
+                            backgroundColor: ColorValues.cancelColor,
+                            text: 'Cancel',
+                            onPressed: () {
+                              Get.toNamed(Routes.complianceScreen);
+                            },
+                          ),
+                        ),
+                        Dimens.boxWidth15,
+                        controller.obsId == 0
+                            ? Container(
+                                height: 40,
+                                child: CustomElevatedButton(
+                                  backgroundColor: ColorValues.submitColor,
+                                  text: 'Submit',
+                                  onPressed: () {
+                                    // controller.isFormInvalid.value = false;
+                                    controller.createObs(1);
+                                  },
+                                ),
+                              )
+                            : Container(
+                                height: 40,
+                                child: CustomElevatedButton(
+                                  backgroundColor: ColorValues.submitColor,
+                                  text: 'Update',
+                                  onPressed: () {
+                                    // controller.isFormInvalid.value = false;
+                                    controller.createObs(0);
+                                  },
+                                ),
+                              ),
+                        Spacer(),
+                      ],
+                    )
+                  : Dimens.box0)),
         );
         // );
       },

@@ -590,8 +590,7 @@ class _ComplianceWebState extends State<ComplianceWeb> {
                                 backgroundColor: ColorValues.cancelColor,
                                 text: 'Cancel',
                                 onPressed: () {
-                                  Get.toNamed(
-                                      Routes.stockManagementGoodsOrdersScreen);
+                                  Get.toNamed(Routes.complianceScreen);
                                 },
                               ),
                             ),
@@ -619,7 +618,7 @@ class _ComplianceWebState extends State<ComplianceWeb> {
                                           text: 'Update',
                                           onPressed: () {
                                             // controller.isFormInvalid.value = false;
-                                            controller.createCompliance(0);
+                                            controller.updateCompliance(0);
                                           },
                                         ),
                                       )

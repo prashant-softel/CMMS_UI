@@ -27,4 +27,14 @@ class CreateObservationUsecase {
         facilityId,
         isLoading,
       );
+  Future<Map<String, dynamic>> createObs({
+    createObs,
+    bool? isLoading,
+    int? position,
+  }) async =>
+      await repository.createObs(
+        createObs,
+        isLoading,
+        position,
+      );
 }

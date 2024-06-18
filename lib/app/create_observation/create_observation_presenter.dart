@@ -27,4 +27,12 @@ class CreateObservationPresenter {
         id: id,
         isLoading: isLoading,
       );
+  Future<Map<String, dynamic>?> createObs(
+      {createObs, required bool isLoading, int? position}) async {
+    return createObservationUsecase.createObs(
+      createObs: createObs,
+      isLoading: isLoading,
+      position: position,
+    );
+  }
 }
