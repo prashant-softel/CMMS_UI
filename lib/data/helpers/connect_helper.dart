@@ -15,6 +15,7 @@ import 'package:cmms/app/widgets/abandon_veg_execution_dialog.dart';
 import 'package:cmms/app/widgets/approve_wc_message_dialog.dart';
 import 'package:cmms/app/widgets/audit_plan_approve_msg_dialog.dart';
 import 'package:cmms/app/widgets/audit_plan_reject_msg_dialog.dart';
+import 'package:cmms/app/widgets/calibration_dialog.dart';
 import 'package:cmms/app/widgets/compliance_message_approve_dialog.dart';
 import 'package:cmms/app/widgets/create_escalation_matrix_dialog.dart';
 import 'package:cmms/app/widgets/create_incident_report_dialog.dart';
@@ -4635,6 +4636,32 @@ class ConnectHelper {
       },
     );
 
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    Get.dialog<void>(CalibrationDialog(
+        data: parsedJson['message'],
+        calbrationId: parsedJson['id'][0],
+        type: 4));
+    print('jcId2:${parsedJson['id']}');
+    return responseModel;
+  }
+
+  Future<ResponseModel> skipCalibration({
+    required String auth,
+    bool? isLoading,
+    required skipCalibrationtoJsonString,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Calibration/SkipCalibration',
+      Request.put,
+      skipCalibrationtoJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
     return responseModel;
   }
 
@@ -4654,6 +4681,13 @@ class ConnectHelper {
       },
     );
 
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    Get.dialog<void>(CalibrationDialog(
+        data: parsedJson['message'],
+        calbrationId: parsedJson['id'][0],
+        type: 3));
+    print('jcId2:${parsedJson['id']}');
     return responseModel;
   }
 
@@ -4673,8 +4707,14 @@ class ConnectHelper {
       },
     );
 
-    return responseModel;
-  }
+ var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    Get.dialog<void>(CalibrationDialog(
+        data: parsedJson['message'],
+        calbrationId: parsedJson['id'][0],
+        type: 7));
+    print('jcId2:${parsedJson['id']}');
+    return responseModel;  }
 
   Future<ResponseModel> approveCloseCalibration({
     required String auth,
@@ -4692,8 +4732,14 @@ class ConnectHelper {
       },
     );
 
-    return responseModel;
-  }
+ var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    Get.dialog<void>(CalibrationDialog(
+        data: parsedJson['message'],
+        calbrationId: parsedJson['id'][0],
+        type: 5));
+    print('jcId2:${parsedJson['id']}');
+    return responseModel;  }
 
   Future<ResponseModel> closeCalibration({
     required String auth,
@@ -4711,8 +4757,14 @@ class ConnectHelper {
       },
     );
 
-    return responseModel;
-  }
+ var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    Get.dialog<void>(CalibrationDialog(
+        data: parsedJson['message'],
+        calbrationId: parsedJson['id'][0],
+        type: 4));
+    print('jcId2:${parsedJson['id']}');
+    return responseModel;  }
 
   Future<ResponseModel> completeCalibration({
     required String auth,
@@ -4729,7 +4781,13 @@ class ConnectHelper {
         'Authorization': 'Bearer $auth',
       },
     );
-
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    Get.dialog<void>(CalibrationDialog(
+        data: parsedJson['message'],
+        calbrationId: parsedJson['id'][0],
+        type: 6));
+    print('jcId2:${parsedJson['id']}');
     return responseModel;
   }
 
@@ -5708,6 +5766,13 @@ class ConnectHelper {
       },
     );
 
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    Get.dialog<void>(CalibrationDialog(
+        data: parsedJson['message'],
+        calbrationId: parsedJson['id'][0],
+        type: 2));
+    print('jcId2:${parsedJson['id']}');
     return responseModel;
   }
 

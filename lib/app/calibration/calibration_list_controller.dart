@@ -4,6 +4,8 @@ import 'package:cmms/app/theme/color_values.dart';
 import 'package:cmms/app/theme/dimens.dart';
 import 'package:cmms/app/theme/styles.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
+import 'package:cmms/app/widgets/custom_textField.dart';
+import 'package:cmms/app/widgets/dropdown_web.dart';
 import 'package:cmms/domain/models/comment_model.dart';
 import 'package:cmms/domain/models/request_calibration_model.dart';
 import 'package:flutter/material.dart';
@@ -35,8 +37,9 @@ class CalibrationListController extends GetxController {
   int selectedvenderId = 0;
   StreamSubscription<int>? facilityIdStreamSubscription;
   int facilityId = 0;
-  RxList<CalibrationListModel?>? calibrationList =
-      <CalibrationListModel?>[].obs;
+  RxList<CalibrationListModel?> calibrationList = <CalibrationListModel?>[].obs;
+  RxList<CalibrationListModel?> filteredData = <CalibrationListModel>[].obs;
+
   CalibrationListModel? calibrationListModel;
   RxList<String> CalibrationListTableColumns = <String>[].obs;
   PaginationController paginationController = PaginationController(
@@ -52,9 +55,58 @@ class CalibrationListController extends GetxController {
     isToggleOn.value = !isToggleOn.value;
   }
 
+  final columnVisibility = ValueNotifier<Map<String, bool>>({
+    "Equipment Category": true,
+    "Equipment Name": true,
+    "Serial No.": true,
+    // "Calibration Certificates":true,
+    // "Installation date":true,
+    "Last Calibration date": true,
+    "Next Due Date": true,
+    "Frequency": true,
+    // "Status":true,
+  });
+  final Map<String, double> columnwidth = {
+    "Equipment Category": 250,
+    "Equipment Name": 350,
+    "Serial No.": 250,
+    // "Calibration Certificates":250,
+    // "Installation date":250,
+    "Last Calibration date": 250,
+    "Next Due Date": 250,
+    "Frequency": 200,
+    // "Status",
+  };
+  Map<String, RxString> filterText = {};
+  void setColumnVisibility(String columnName, bool isVisible) {
+    final newVisibility = Map<String, bool>.from(columnVisibility.value)
+      ..[columnName] = isVisible;
+    columnVisibility.value = newVisibility;
+    // print({"updated columnVisibility": columnVisibility});
+  }
+
+  Rx<bool> isLoading = true.obs;
+  RxString categoryFilterText = ''.obs;
+  RxString titleFilterText = ''.obs;
+  RxString lastDoneDateFilterText = ''.obs;
+  RxString dueDateFilterText = ''.obs;
+  RxString srNoFilterText = ''.obs;
+
+  RxString frequencyFilterText = ''.obs;
+
   ///
   @override
   void onInit() async {
+    this.filterText = {
+      "Equipment Category": categoryFilterText,
+      "Equipment Name": titleFilterText,
+      "Serial No.": srNoFilterText,
+      // "Calibration Certificates":,
+      // "Installation date":,
+      "Last Calibration date": lastDoneDateFilterText,
+      "Next Due Date": dueDateFilterText,
+      "Frequency": frequencyFilterText,
+    };
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
       facilityId = event;
       if (facilityId > 0) {
@@ -70,25 +122,62 @@ class CalibrationListController extends GetxController {
     super.onInit();
   }
 
+  void search(String keyword) {
+    if (keyword.isEmpty) {
+      calibrationList.value = filteredData;
+      return;
+    }
+
+    List<CalibrationListModel?> filteredList = filteredData
+        .where((item) =>
+            (item?.asset_name?.toString().toLowerCase().contains(keyword.toLowerCase()) ?? false) ||
+            (item?.asset_serial
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false) ||
+            (item?.frequency_name
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false) ||
+            (item?.category_name
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false) ||
+            (item?.next_calibration_due_date
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false) ||
+            (item?.last_calibration_date
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false) ||
+            (item?.frequency_name
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false))
+        .toList();
+    calibrationList.value = filteredList;
+
+    // pmTaskList.value = filteredData
+    //     .where((item) => item!.maintenance_order_number!
+    //         .toLowerCase()
+    //         .contains(keyword.toLowerCase()))
+    //     .toList();
+  }
+
   Future<void> getCalibrationList(int facilityId, bool isLoading) async {
-    calibrationList?.value = <CalibrationListModel>[];
+    calibrationList.value = <CalibrationListModel>[];
     final _calibrationList = await calibrationListPresenter.getCalibrationList(
         facilityId: facilityId, isLoading: isLoading);
     if (_calibrationList != null) {
-      calibrationList!.value = _calibrationList;
-      paginationController = PaginationController(
-        rowCount: calibrationList?.length ?? 0,
-        rowsPerPage: 10,
-      );
-
-      if (calibrationList != null && calibrationList!.isNotEmpty) {
-        calibrationListModel = calibrationList![0];
-        var calibrationListJson = calibrationListModel?.toJson();
-        CalibrationListTableColumns.value = <String>[];
-        for (var key in calibrationListJson?.keys.toList() ?? []) {
-          CalibrationListTableColumns.add(key);
-        }
-      }
+      calibrationList.value = _calibrationList;
+      filteredData.value = calibrationList.value;
     }
   }
 
@@ -116,11 +205,10 @@ class CalibrationListController extends GetxController {
         {
           if (value != "Please Select") {
             int facilityIndex =
-              venderNameList.indexWhere((x) => x?.name == value);
-          selectedvenderId = venderNameList[facilityIndex]?.id ?? 0;
-            
-          }else{
-            selectedvenderId=0;
+                venderNameList.indexWhere((x) => x?.name == value);
+            selectedvenderId = venderNameList[facilityIndex]?.id ?? 0;
+          } else {
+            selectedvenderId = 0;
           }
         }
         break;
@@ -292,6 +380,28 @@ class CalibrationListController extends GetxController {
     }
   }
 
+  skipCalibration(calibrationId) async {
+    {
+      String _comment = commentCtrlr.text.trim();
+
+      CommentModel commentCalibrationModel =
+          CommentModel(id: int.tryParse(calibrationId), comment: _comment);
+
+      var skipCalibrationtoJsonString = commentCalibrationModel.toJson();
+      print({
+        "rejectCalskipCalibrationibrationJsonString",
+        skipCalibrationtoJsonString
+      });
+      final response = await calibrationListPresenter.skipCalibration(
+        skipCalibrationtoJsonString: skipCalibrationtoJsonString,
+        isLoading: true,
+      );
+      if (response == true) {
+        getCalibrationList(facilityId, true);
+      }
+    }
+  }
+
   closeCalibration(calibrationId) async {
     {
       String _comment = commentCtrlr.text.trim();
@@ -311,25 +421,25 @@ class CalibrationListController extends GetxController {
     }
   }
 
-  completeCalibration(calibrationId) async {
-    {
-      String _comment = commentCtrlr.text.trim();
+  // completeCalibration(calibrationId) async {
+  //   {
+  //     String _comment = commentCtrlr.text.trim();
 
-      var completeCalibrationtoJsonString = {
-        "calibration_id": int.tryParse(calibrationId),
-        "comment": _comment,
-        "is_damaged": isToggleOn == true ? 1 : 0
-      };
-      // print({"rejectCalibrationJsonString", completeCalibrationtoJsonString});
-      final response = await calibrationListPresenter.completeCalibration(
-        completeCalibrationtoJsonString: completeCalibrationtoJsonString,
-        isLoading: true,
-      );
-      if (response == true) {
-        getCalibrationList(facilityId, true);
-      }
-    }
-  }
+  //     var completeCalibrationtoJsonString = {
+  //       "calibration_id": int.tryParse(calibrationId),
+  //       "comment": _comment,
+  //       "is_damaged": isToggleOn == true ? 1 : 0
+  //     };
+  //     // print({"rejectCalibrationJsonString", completeCalibrationtoJsonString});
+  //     final response = await calibrationListPresenter.completeCalibration(
+  //       completeCalibrationtoJsonString: completeCalibrationtoJsonString,
+  //       isLoading: true,
+  //     );
+  //     if (response == true) {
+  //       getCalibrationList(facilityId, true);
+  //     }
+  //   }
+  // }
 
   void isCommentCalibrationDialog(
       {String? calibrationId, String? calibrationName, int? type}) {
@@ -349,7 +459,9 @@ class CalibrationListController extends GetxController {
                               ? "Close Calibration"
                               : type == 4
                                   ? "Approve Close Calibration"
-                                  : "Reject Close Calibration ",
+                                  : type == 6
+                                      ? "Skip Calibration"
+                                      : "Reject Close Calibration ",
                   style: TextStyle(
                     color: ColorValues.blackColor,
                     fontWeight: FontWeight.bold,
@@ -453,7 +565,9 @@ class CalibrationListController extends GetxController {
                                 ? closeCalibration(calibrationId)
                                 : type == 4
                                     ? approveCloseCalibration(calibrationId)
-                                    : rejectCloseCalibration(calibrationId);
+                                    : type == 6
+                                        ? skipCalibration(calibrationId)
+                                        : rejectCloseCalibration(calibrationId);
                   },
                 ),
               ),
@@ -589,7 +703,7 @@ class CalibrationListController extends GetxController {
                   text: "Submit",
                   onPressed: () {
                     Get.back();
-                    completeCalibration(calibrationId);
+                    //completeCalibration(calibrationId);
                   },
                 ),
               ),
@@ -598,5 +712,244 @@ class CalibrationListController extends GetxController {
         ],
       ),
     );
+  }
+
+  void calibrationRequest({
+    required String equipmentName,
+    required String previousDate,
+    required String nextDate,
+    required String calibrationId,
+  }) {
+    Get.dialog(AlertDialog(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(Radius.circular(15.0)),
+      ),
+      insetPadding: Dimens.edgeInsets10_0_10_0,
+      contentPadding: EdgeInsets.zero,
+      title: Column(
+        children: [
+          Row(
+            children: [
+              Text(
+                'Asset Calibration',
+                textAlign: TextAlign.center,
+                style: Styles.blackBold20,
+              ),
+              Text(
+                ': ${equipmentName}',
+                textAlign: TextAlign.center,
+                style: Styles.black18,
+              ),
+            ],
+          ),
+        ],
+      ),
+      content: Builder(builder: (context) {
+        var height = Get.height;
+        previousDateController.text = previousDate;
+        nextDueDateController.text = nextDate;
+
+        return Obx(
+          () => Container(
+            margin: Dimens.edgeInsets15,
+            padding: Dimens.edgeInsets25,
+            height: height / 2.5,
+            width: double.infinity,
+            decoration: BoxDecoration(
+              border: Border.all(
+                color: ColorValues.appBlueBackgroundColor,
+                width: 1,
+              ),
+              boxShadow: [
+                BoxShadow(
+                  color: ColorValues.appBlueBackgroundColor,
+                  spreadRadius: 2,
+                  blurRadius: 5,
+                  offset: Offset(0, 2),
+                ),
+              ],
+            ),
+            child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Column(
+                        children: [
+                          Text("Previous Calibration"),
+                          Text("                         Date:"),
+                        ],
+                      ),
+                      Container(
+                          decoration: BoxDecoration(
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black26,
+                                offset: const Offset(
+                                  2.0,
+                                  3.0,
+                                ),
+                                blurRadius: 3.0,
+                                spreadRadius: 1.0,
+                              ),
+                            ],
+                            color: ColorValues.whiteColor,
+                            borderRadius: BorderRadius.circular(5),
+                          ),
+                          width: Get.width / 5,
+                          child: LoginCustomTextfield(
+                            textController: previousDateController,
+                            ontap: () {
+                              _selectDate(context, 1);
+                            },
+                            widget: Icon(
+                              Icons.calendar_month,
+                              color: ColorValues.greyLightColor,
+                            ),
+                          ))
+                    ],
+                  ),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Column(
+                        children: [
+                          Text("Due Date For Next"),
+                          Text("             Calibration:"),
+                        ],
+                      ),
+                      Container(
+                          decoration: BoxDecoration(
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black26,
+                                offset: const Offset(
+                                  2.0,
+                                  3.0,
+                                ),
+                                blurRadius: 3.0,
+                                spreadRadius: 1.0,
+                              ),
+                            ],
+                            color: ColorValues.whiteColor,
+                            borderRadius: BorderRadius.circular(5),
+                          ),
+                          width: Get.width / 5,
+                          child: LoginCustomTextfield(
+                            textController: nextDueDateController,
+                            ontap: () {
+                              _selectDate(context, 2);
+                            },
+                            widget: Icon(
+                              Icons.calendar_month,
+                              color: ColorValues.greyLightColor,
+                            ),
+                          ))
+                    ],
+                  ),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text("Vender Name :"),
+                      Container(
+                        decoration: BoxDecoration(
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black26,
+                              offset: const Offset(
+                                2.0,
+                                3.0,
+                              ),
+                              blurRadius: 3.0,
+                              spreadRadius: 1.0,
+                            ),
+                          ],
+                          color: ColorValues.whiteColor,
+                          borderRadius: BorderRadius.circular(5),
+                        ),
+                        width: Get.width / 5,
+                        child: DropdownWebWidget(
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black26,
+                              offset: const Offset(
+                                5.0,
+                                5.0,
+                              ),
+                              blurRadius: 5.0,
+                              spreadRadius: 1.0,
+                            ),
+                            BoxShadow(
+                              color: ColorValues.whiteColor,
+                              offset: const Offset(0.0, 0.0),
+                              blurRadius: 0.0,
+                              spreadRadius: 0.0,
+                            ),
+                          ],
+                          dropdownList: venderNameList,
+                          isValueSelected: isVenderNameSelected.value,
+                          selectedValue: selectedVender.value,
+                          onValueChanged: onValueChanged,
+                        ),
+                      )
+                    ],
+                  ),
+                  SizedBox(
+                    height: 30,
+                  ),
+                  Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                    CustomElevatedButton(
+                      text: "Cancel",
+                      onPressed: () {
+                        Get.back();
+                      },
+                      backgroundColor: ColorValues.appRedColor,
+                      textColor: ColorValues.whiteColor,
+                    ),
+                    Dimens.boxWidth30,
+                    CustomElevatedButton(
+                      text: "Start",
+                      onPressed: () {
+                        requestCalibration(int.tryParse(calibrationId) ?? 0);
+                        Get.back();
+                      },
+                      backgroundColor: ColorValues.appGreenColor,
+                      textColor: ColorValues.whiteColor,
+                    ),
+                  ]),
+                ]),
+          ),
+        );
+      }),
+      actions: [],
+    ));
+  }
+
+  Future<void> _selectDate(BuildContext context, int type) async {
+    DateTime today = DateTime.now();
+    var date = await showDatePicker(
+      context: context,
+      cancelText: "Clear",
+      confirmText: "Ok",
+      initialDate: DateTime(today.year, today.month, today.day),
+      firstDate: DateTime(1900),
+      lastDate: DateTime(today.year + 18, today.month, today.day),
+    );
+    if (type == 1) {
+      previousDateController.text = date.toString().substring(0, 10);
+    } else {
+      nextDueDateController.text = date.toString().substring(0, 10);
+    }
+  }
+
+  void clearStoreData() {
+    calibrationListPresenter.clearValue();
   }
 }

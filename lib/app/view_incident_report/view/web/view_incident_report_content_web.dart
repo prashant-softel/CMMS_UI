@@ -20,16 +20,6 @@ import 'package:url_launcher/url_launcher.dart';
 class ViewIncidentReportContentWeb
     extends GetView<ViewIncidentReportController> {
   ViewIncidentReportContentWeb({super.key});
-
-  final FileUploadController dropzoneController =
-      Get.put(FileUploadController());
-
-  bool valuefirst = false;
-  bool _switchValue = false;
-
-  // final homeController = Get.find<HomeController>();
-  // final ViewIncidentReportController controller = Get.find();
-
   @override
   Widget build(BuildContext context) => SelectionArea(
         child: Scaffold(
@@ -883,7 +873,7 @@ class ViewIncidentReportContentWeb
                                                                               .toString() ??
                                                                           '')),
                                                                       DataCell(Text(
-                                                                          '${controller.detailsOfInjuredPersonList?[index]?.sex == 1 ? "Male" : controller.detailsOfInjuredPersonList?[index]?.sex == 2 ? "Female" : controller.detailsOfInjuredPersonList?[index]?.sex == 3 ? "TransGender" : "".toString()}')),
+                                                                          '${controller.detailsOfInjuredPersonList?[index]?.sex}')),
                                                                       DataCell(Text(controller
                                                                               .detailsOfInjuredPersonList?[index]
                                                                               ?.designation

@@ -2,14 +2,11 @@ import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/theme/dimens.dart';
 import 'package:cmms/app/utils/user_access_constants.dart';
-import 'package:cmms/app/widgets/custom_textField.dart';
-import 'package:cmms/app/widgets/dropdown_web.dart';
 import 'package:cmms/domain/models/calibration_list_model.dart';
+import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_test/flutter_test.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:scrollable_table_view/scrollable_table_view.dart';
 import '../../navigators/app_pages.dart';
 import '../../theme/color_values.dart';
 import '../../theme/styles.dart';
@@ -25,976 +22,400 @@ class CalibrationListContentWeb extends GetView<CalibrationListController> {
   List<String> filterdata = ["SetUp", "Close", "cpmplete", "pending"];
   @override
   Widget build(BuildContext context) {
-    return SelectionArea(
-      child: Column(
-        children: [
-          HeaderWidget(),
-          Container(
-            height: 45,
-            decoration: BoxDecoration(
-              border: Border.all(
-                color: Color.fromARGB(255, 227, 224, 224),
-                width: 1,
-              ),
-              boxShadow: [
-                BoxShadow(
-                  color: Color.fromARGB(255, 236, 234, 234).withOpacity(0.5),
-                  spreadRadius: 2,
-                  blurRadius: 5,
-                  offset: Offset(0, 2),
+    return Obx(() {
+      final dataSource = CalibrationDataSource(controller);
+
+      return SelectionArea(
+        child: Column(
+          children: [
+            HeaderWidget(),
+            Container(
+              height: 45,
+              decoration: BoxDecoration(
+                border: Border.all(
+                  color: Color.fromARGB(255, 227, 224, 224),
+                  width: 1,
                 ),
-              ],
-            ),
-            child: Row(
-              children: [
-                Icon(
-                  Icons.home,
-                  color: ColorValues.greyLightColor,
-                ),
-                InkWell(
-                  onTap: () {
-                    Get.offNamed(Routes.home);
-                  },
-                  child: Text(
-                    "DASHBOARD",
-                    style: Styles.greyLight14,
+                boxShadow: [
+                  BoxShadow(
+                    color: Color.fromARGB(255, 236, 234, 234).withOpacity(0.5),
+                    spreadRadius: 2,
+                    blurRadius: 5,
+                    offset: Offset(0, 2),
                   ),
-                ),
-                InkWell(
-                  onTap: () {
-                    Get.offNamed(Routes.masterDashboard);
-                  },
-                  child: Text(" / MASTERS", style: Styles.greyLight14),
-                ),
-                Text(" / CALIBRATION LIST", style: Styles.greyLight14),
-              ],
-            ),
-          ),
-          Flexible(
-            child: Obx(
-              () => Container(
-                width: Get.width * 7,
-                margin: EdgeInsets.only(left: 10, top: 30),
-                height: Get.height,
-                child: Card(
-                  color: Color.fromARGB(255, 245, 248, 250),
-                  elevation: 10,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              "Calibration List",
-                              style: Styles.blackBold16,
-                            ),
-                            GestureDetector(
-                              onTap: () {
-                                _filterDialog();
-                              },
-                              child: Icon(
-                                Icons.filter_alt_rounded,
-                                color: ColorValues.lightGreyTextColor,
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                      Divider(
-                        color: ColorValues.greyLightColour,
-                      ),
-                      Row(
-                        children: [
-                          // Container(
-                          //   height: 35,
-                          //   margin: EdgeInsets.only(left: 10),
-                          //   child: CustomElevatedButton(
-                          //       backgroundColor: ColorValues.appLightBlueColor,
-                          //       onPressed: () {},
-                          //       text: 'Copy'),
-                          // ),
-                          // Container(
-                          //   height: 35,
-                          //   margin: EdgeInsets.only(left: 10),
-                          //   child: CustomElevatedButton(
-                          //       backgroundColor: ColorValues.appLightBlueColor,
-                          //       onPressed: () {},
-                          //       text: 'Excel'),
-                          // ),
-                          // Container(
-                          //   height: 35,
-                          //   margin: EdgeInsets.only(left: 10),
-                          //   child: CustomElevatedButton(
-                          //       backgroundColor: ColorValues.appLightBlueColor,
-                          //       onPressed: () {},
-                          //       text: 'PDF'),
-                          // ),
-                          // Container(
-                          //   height: 35,
-                          //   margin: EdgeInsets.only(left: 10),
-                          //   child: CustomElevatedButton(
-                          //     backgroundColor: ColorValues.appLightBlueColor,
-                          //     onPressed: () {},
-                          //     text: 'columnVisibility'.tr,
-                          //   ),
-                          // ),
-                          Spacer(),
-                          Container(
-                            width: 200,
-                            height: 40,
-                            margin: Dimens.edgeInsets0_0_16_0,
-                            child: TextField(
-                              style: GoogleFonts.lato(
-                                textStyle: TextStyle(
-                                    fontSize: 16.0,
-                                    height: 1.0,
-                                    color: Colors.black),
-                              ),
-                              decoration: InputDecoration(
-                                enabledBorder: const OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                      color: Colors.grey, width: 0.0),
-                                ),
-                                focusedBorder: const OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                      color: Colors.grey, width: 0.0),
-                                ),
-                                contentPadding: Dimens.edgeInsets10_0_0_0,
-                                hintText: 'search'.tr,
-                                hintStyle: Styles.grey12,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      Expanded(
-                        child: Container(
-                          margin: Dimens.edgeInsets15,
-                          decoration: BoxDecoration(
-                            border: Border.all(
-                              color: ColorValues.lightGreyColorWithOpacity35,
-                              width: 1,
-                            ),
-                            boxShadow: [
-                              BoxShadow(
-                                color: ColorValues.appBlueBackgroundColor,
-                                spreadRadius: 2,
-                                blurRadius: 5,
-                                offset: Offset(0, 2),
-                              ),
-                            ],
-                          ),
-                          child: controller.calibrationList!.isEmpty
-                              ? ScrollableTableView(
-                                  columns: [
-                                    "Equipment Category",
-                                    "Equipment Name",
-                                    "Serial No.",
-                                    "Last Calibration date",
-                                    "Next Due Date",
-                                    "Calibration Frequency",
-                                    "Action",
-                                  ].map((column) {
-                                    return TableViewColumn(
-                                      label: column,
-                                      minWidth: Get.width * 0.12,
-                                    );
-                                  }).toList(),
-                                  rows: [
-                                    ...List.generate(
-                                      controller.calibrationList?.length ?? 0,
-                                      (index) {
-                                        return [
-                                          '',
-                                          '',
-                                          '',
-                                          '',
-                                          '',
-                                          '',
-                                          '',
-                                        ];
-                                      },
-                                    ),
-                                  ].map((record) {
-                                    return TableViewRow(
-                                      height: 60,
-                                      cells: record.map((value) {
-                                        return TableViewCell(
-                                          child: Text(value),
-                                        );
-                                      }).toList(),
-                                    );
-                                  }).toList(),
-                                )
-                              : ScrollableTableView(
-                                  paginationController:
-                                      controller.paginationController,
-                                  columns: [
-                                    "Equipment Category",
-                                    "Equipment Name",
-                                    "Serial No.",
-                                    // "Calibration Certificates",
-                                    // "Installation date",
-                                    "Last Calibration date",
-                                    "Next Due Date",
-                                    "Calibration Frequency",
-                                    // "Status",
-                                    "Action",
-                                  ].map((column) {
-                                    return TableViewColumn(
-                                      label: column,
-                                      minWidth: Get.width * 0.12,
-                                    );
-                                  }).toList(),
-                                  rows: controller.calibrationList!
-                                      .map(
-                                          (calibrationListListDetails) =>
-                                              TableViewRow(height: 90, cells: [
-                                                TableViewCell(
-                                                    child: Text(
-                                                  '${calibrationListListDetails?.category_name}',
-                                                )),
-                                                TableViewCell(
-                                                    child: Column(
-                                                  children: [
-                                                    Text(
-                                                      '${calibrationListListDetails?.asset_name}',
-                                                    ),
-                                                    Dimens.boxHeight10,
-                                                    Align(
-                                                      alignment:
-                                                          Alignment.centerRight,
-                                                      child: Container(
-                                                        padding: Dimens
-                                                            .edgeInsets8_2_8_2,
-                                                        decoration:
-                                                            BoxDecoration(
-                                                          color: calibrationListListDetails
-                                                                      ?.statusID ==
-                                                                  218
-                                                              ? ColorValues
-                                                                  .appRedColor
-                                                              : calibrationListListDetails
-                                                                          ?.statusID ==
-                                                                      211
-                                                                  ? ColorValues
-                                                                      .blueColor
-                                                                  : calibrationListListDetails
-                                                                              ?.statusID ==
-                                                                          214
-                                                                      ? ColorValues
-                                                                          .appGreenColor
-                                                                      : calibrationListListDetails?.statusID ==
-                                                                              213
-                                                                          ? ColorValues
-                                                                              .appYellowColor
-                                                                          : calibrationListListDetails?.statusID == 217
-                                                                              ? ColorValues.appGreenColor
-                                                                              : ColorValues.appDarkBlueColor,
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(4),
-                                                        ),
-                                                        child: Text(
-                                                          '${calibrationListListDetails?.calibration_status}',
-                                                          style: Styles.white10
-                                                              .copyWith(
-                                                            color: Colors.white,
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ],
-                                                )),
-                                                TableViewCell(
-                                                    child: Text(
-                                                        '${calibrationListListDetails?.asset_serial}')),
-                                                TableViewCell(
-                                                    child: Text(
-                                                        '${calibrationListListDetails?.last_calibration_date}')),
-                                                TableViewCell(
-                                                    child: Text(
-                                                        '${calibrationListListDetails?.next_calibration_due_date}')),
-                                                TableViewCell(
-                                                    child: Text(
-                                                  '${calibrationListListDetails?.frequency_name}',
-                                                  //$
-                                                  //   {calibrationListListDetails?.statusID}
-
-                                                  // '${calibrationListListDetails?.frequency_name}'
-                                                )),
-                                                TableViewCell(
-                                                    child: Wrap(children: [
-                                                  controller.calibrationList!
-                                                                  .firstWhere(
-                                                                    (e) =>
-                                                                        e?.asset_id ==
-                                                                        calibrationListListDetails!
-                                                                            .asset_id,
-                                                                    orElse: () =>
-                                                                        CalibrationListModel(
-                                                                            asset_id:
-                                                                                00),
-                                                                  )
-                                                                  ?.statusID ==
-                                                              0 ||
-                                                          controller
-                                                                  .calibrationList!
-                                                                  .firstWhere(
-                                                                    (e) =>
-                                                                        e?.asset_id ==
-                                                                        calibrationListListDetails!
-                                                                            .asset_id,
-                                                                    orElse: () =>
-                                                                        CalibrationListModel(
-                                                                            asset_id:
-                                                                                00),
-                                                                  )
-                                                                  ?.statusID ==
-                                                              212
-                                                      ? TableActionButton(
-                                                          color: ColorValues
-                                                              .lightGreenColor,
-                                                          message:
-                                                              'Request Calibration',
-                                                          icon: Icons
-                                                              .compass_calibration,
-                                                          onPress: () {
-                                                            requestCalibration(
-                                                              equipmentName:
-                                                                  '${calibrationListListDetails?.asset_name}',
-                                                              previousDate:
-                                                                  '${calibrationListListDetails?.last_calibration_date}',
-                                                              nextDate:
-                                                                  '${calibrationListListDetails?.next_calibration_due_date}',
-                                                              calibrationId:
-                                                                  '${calibrationListListDetails?.asset_id}',
-                                                            );
-                                                          },
-                                                        )
-                                                      : Dimens.box0,
-                                                  controller.calibrationList!
-                                                              .firstWhere(
-                                                                (e) =>
-                                                                    e?.asset_id ==
-                                                                    calibrationListListDetails!
-                                                                        .asset_id,
-                                                                orElse: () =>
-                                                                    CalibrationListModel(
-                                                                        asset_id:
-                                                                            00),
-                                                              )
-                                                              ?.statusID ==
-                                                          0
-                                                      ? Dimens.box0
-                                                      : TableActionButton(
-                                                          color: ColorValues
-                                                              .viewColor,
-                                                          icon: Icons
-                                                              .remove_red_eye_outlined,
-                                                          message: 'View',
-                                                          onPress: () {
-                                                            int calibrationId =
-                                                                calibrationListListDetails
-                                                                        ?.calibration_id ??
-                                                                    0;
-                                                            Get.toNamed(
-                                                                Routes
-                                                                    .calibrationViewScreen,
-                                                                arguments:
-                                                                    calibrationId);
-                                                          },
-                                                        ),
-                                                  // TableActionButton(
-                                                  //   color: ColorValues
-                                                  //       .appDarkBlueColor,
-                                                  //   icon: Icons.add,
-                                                  //   message:
-                                                  //       'Add Calibration Detail',
-                                                  //   onPress: () {
-                                                  //     Get.toNamed(Routes
-                                                  //         .calibrationDetail);
-                                                  //   },
-                                                  // ),
-                                                  // TableActionButton(
-                                                  //   color: ColorValues
-                                                  //       .appDarkBlueColor,
-                                                  //   icon: Icons.check,
-                                                  //   message: 'Approve',
-                                                  //   onPress: () {},
-                                                  // ),
-
-                                                  controller.calibrationList!
-                                                                  .firstWhere(
-                                                                    (e) =>
-                                                                        e?.asset_id ==
-                                                                        calibrationListListDetails!
-                                                                            .asset_id,
-                                                                    orElse: () =>
-                                                                        CalibrationListModel(
-                                                                            asset_id:
-                                                                                00),
-                                                                  )
-                                                                  ?.statusID ==
-                                                              211 &&
-                                                          varUserAccessModel
-                                                                  .value
-                                                                  .access_list!
-                                                                  .where((e) =>
-                                                                      e.feature_id ==
-                                                                          UserAccessConstants
-                                                                              .kCalibrationFeatureId &&
-                                                                      e.approve ==
-                                                                          UserAccessConstants
-                                                                              .kHaveApproveAccess)
-                                                                  .length >
-                                                              0
-                                                      ? TableActionButton(
-                                                          color: ColorValues
-                                                              .rejectColor,
-                                                          icon: Icons.close,
-                                                          message: 'Reject',
-                                                          onPress: () {
-                                                            controller.isCommentCalibrationDialog(
-                                                                calibrationName:
-                                                                    '${calibrationListListDetails?.asset_name}',
-                                                                calibrationId:
-                                                                    '${calibrationListListDetails?.calibration_id}',
-                                                                type: 1);
-                                                          },
-                                                        )
-                                                      : Dimens.box0,
-                                                  controller.calibrationList!
-                                                                  .firstWhere(
-                                                                    (e) =>
-                                                                        e?.asset_id ==
-                                                                        calibrationListListDetails!
-                                                                            .asset_id,
-                                                                    orElse: () =>
-                                                                        CalibrationListModel(
-                                                                            asset_id:
-                                                                                00),
-                                                                  )
-                                                                  ?.statusID ==
-                                                              213 &&
-                                                          varUserAccessModel
-                                                                  .value
-                                                                  .access_list!
-                                                                  .where((e) =>
-                                                                      e.feature_id ==
-                                                                              UserAccessConstants
-                                                                                  .kCalibrationFeatureId &&
-                                                                          e.issue ==
-                                                                              UserAccessConstants
-                                                                                  .kHaveIssueAccess ||
-                                                                      e.approve ==
-                                                                          UserAccessConstants
-                                                                              .kHaveApproveAccess)
-                                                                  .length >
-                                                              0
-                                                      ? TableActionButton(
-                                                          color: ColorValues
-                                                              .startColor,
-                                                          message:
-                                                              'Start Calibration',
-                                                          icon: Icons.alarm,
-                                                          onPress: () {
-                                                            controller
-                                                                .isStartCalibrationDialog(
-                                                              calibrationName:
-                                                                  '${calibrationListListDetails?.asset_name}',
-                                                              calibrationId:
-                                                                  '${calibrationListListDetails?.calibration_id}',
-                                                            );
-                                                          },
-                                                        )
-                                                      : Dimens.box0,
-                                                  controller.calibrationList!
-                                                              .firstWhere(
-                                                                (e) =>
-                                                                    e?.asset_id ==
-                                                                    calibrationListListDetails!
-                                                                        .asset_id,
-                                                                orElse: () =>
-                                                                    CalibrationListModel(
-                                                                        asset_id:
-                                                                            00),
-                                                              )
-                                                              ?.statusID ==
-                                                          0
-                                                      ? Dimens.box0
-                                                      : TableActionButton(
-                                                          color: ColorValues
-                                                              .deleteColor,
-                                                          icon: Icons.delete,
-                                                          message: 'Delete',
-                                                          onPress: () {},
-                                                        ),
-                                                  controller.calibrationList!
-                                                                  .firstWhere(
-                                                                    (e) =>
-                                                                        e?.asset_id ==
-                                                                        calibrationListListDetails!
-                                                                            .asset_id,
-                                                                    orElse: () =>
-                                                                        CalibrationListModel(
-                                                                            asset_id:
-                                                                                00),
-                                                                  )
-                                                                  ?.statusID ==
-                                                              216 &&
-                                                          varUserAccessModel
-                                                                  .value
-                                                                  .access_list!
-                                                                  .where((e) =>
-                                                                      e.feature_id ==
-                                                                          UserAccessConstants
-                                                                              .kCalibrationFeatureId &&
-                                                                      e.approve ==
-                                                                          UserAccessConstants
-                                                                              .kHaveApproveAccess)
-                                                                  .length >
-                                                              0
-                                                      ? TableActionButton(
-                                                          color: ColorValues
-                                                              .approveColor,
-                                                          icon: Icons.check,
-                                                          message: 'Approve',
-                                                          onPress: () {
-                                                            controller.isCommentCalibrationDialog(
-                                                                calibrationName:
-                                                                    '${calibrationListListDetails?.asset_name}',
-                                                                calibrationId:
-                                                                    '${calibrationListListDetails?.calibration_id}',
-                                                                type: 4);
-                                                          },
-                                                        )
-                                                      : Dimens.box0,
-                                                  controller.calibrationList!
-                                                              .firstWhere(
-                                                                (e) =>
-                                                                    e?.asset_id ==
-                                                                    calibrationListListDetails!
-                                                                        .asset_id,
-                                                                orElse: () =>
-                                                                    CalibrationListModel(
-                                                                        asset_id:
-                                                                            00),
-                                                              )
-                                                              ?.statusID ==
-                                                          214
-                                                      ? TableActionButton(
-                                                          color: ColorValues
-                                                              .completeColor,
-                                                          icon: Icons.done,
-                                                          message: 'Complete',
-                                                          onPress: () {
-                                                            controller
-                                                                .isCompleteCalibrationDialog(
-                                                              calibrationName:
-                                                                  '${calibrationListListDetails?.asset_name}',
-                                                              calibrationId:
-                                                                  '${calibrationListListDetails?.calibration_id}',
-                                                            );
-                                                          },
-                                                        )
-                                                      : Dimens.box0,
-                                                  controller.calibrationList!
-                                                                  .firstWhere(
-                                                                    (e) =>
-                                                                        e?.asset_id ==
-                                                                        calibrationListListDetails!
-                                                                            .asset_id,
-                                                                    orElse: () =>
-                                                                        CalibrationListModel(
-                                                                            asset_id:
-                                                                                00),
-                                                                  )
-                                                                  ?.statusID ==
-                                                              215 &&
-                                                          varUserAccessModel
-                                                                  .value
-                                                                  .access_list!
-                                                                  .where((e) =>
-                                                                      e.feature_id ==
-                                                                          UserAccessConstants
-                                                                              .kCalibrationFeatureId &&
-                                                                      e.approve ==
-                                                                          UserAccessConstants
-                                                                              .kHaveApproveAccess)
-                                                                  .length >
-                                                              0
-                                                      ? TableActionButton(
-                                                          color: ColorValues
-                                                              .completeColor,
-                                                          icon: Icons.done,
-                                                          message: 'Close',
-                                                          onPress: () {
-                                                            controller.isCommentCalibrationDialog(
-                                                                calibrationName:
-                                                                    '${calibrationListListDetails?.asset_name}',
-                                                                calibrationId:
-                                                                    '${calibrationListListDetails?.calibration_id}',
-                                                                type: 3);
-                                                          },
-                                                        )
-                                                      : Dimens.box0,
-                                                  controller.calibrationList!
-                                                                  .firstWhere(
-                                                                    (e) =>
-                                                                        e?.asset_id ==
-                                                                        calibrationListListDetails!
-                                                                            .asset_id,
-                                                                    orElse: () =>
-                                                                        CalibrationListModel(
-                                                                            asset_id:
-                                                                                00),
-                                                                  )
-                                                                  ?.statusID ==
-                                                              211 &&
-                                                          varUserAccessModel
-                                                                  .value
-                                                                  .access_list!
-                                                                  .where((e) =>
-                                                                      e.feature_id ==
-                                                                          UserAccessConstants
-                                                                              .kCalibrationFeatureId &&
-                                                                      e.approve ==
-                                                                          UserAccessConstants
-                                                                              .kHaveApproveAccess)
-                                                                  .length >
-                                                              0
-                                                      ? TableActionButton(
-                                                          color: ColorValues
-                                                              .approveColor,
-                                                          icon: Icons.check,
-                                                          message: 'Approve',
-                                                          onPress: () {
-                                                            controller.isCommentCalibrationDialog(
-                                                                calibrationName:
-                                                                    '${calibrationListListDetails?.asset_name}',
-                                                                calibrationId:
-                                                                    '${calibrationListListDetails?.calibration_id}',
-                                                                type: 2);
-                                                          },
-                                                        )
-                                                      : Dimens.box0,
-                                                  // '${calibrationListListDetails?.frequency_name}'
-                                                ])),
-                                              ]))
-                                      .toList()),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 25),
-                        child: ValueListenableBuilder(
-                            valueListenable: controller.paginationController,
-                            builder: (context, value, child) {
-                              return Row(children: [
-                                Text(
-                                    "${controller.paginationController.currentPage}  of ${controller.paginationController.pageCount}"),
-                                Row(children: [
-                                  IconButton(
-                                    onPressed: controller.paginationController
-                                                .currentPage <=
-                                            1
-                                        ? null
-                                        : () {
-                                            controller.paginationController
-                                                .previous();
-                                          },
-                                    iconSize: 20,
-                                    splashRadius: 20,
-                                    icon: Icon(
-                                      Icons.arrow_back_ios_new_rounded,
-                                      color: controller.paginationController
-                                                  .currentPage <=
-                                              1
-                                          ? Colors.black26
-                                          : Theme.of(context).primaryColor,
-                                    ),
-                                  ),
-                                  IconButton(
-                                    onPressed: controller.paginationController
-                                                .currentPage >=
-                                            controller
-                                                .paginationController.pageCount
-                                        ? null
-                                        : () {
-                                            controller.paginationController
-                                                .next();
-                                          },
-                                    iconSize: 20,
-                                    splashRadius: 20,
-                                    icon: Icon(
-                                      Icons.arrow_forward_ios_rounded,
-                                      color: controller.paginationController
-                                                  .currentPage >=
-                                              controller.paginationController
-                                                  .pageCount
-                                          ? Colors.black26
-                                          : Theme.of(context).primaryColor,
-                                    ),
-                                  ),
-                                ]),
-                              ]);
-                            }),
-                      ),
-                    ],
-                  ),
-                ),
+                ],
               ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  void requestCalibration({
-    required String equipmentName,
-    required String previousDate,
-    required String nextDate,
-    required String calibrationId,
-  }) {
-    Get.dialog(AlertDialog(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(Radius.circular(15.0)),
-      ),
-      insetPadding: Dimens.edgeInsets10_0_10_0,
-      contentPadding: EdgeInsets.zero,
-      title: Column(
-        children: [
-          Row(
-            children: [
-              Text(
-                'Asset Calibration',
-                textAlign: TextAlign.center,
-                style: Styles.blackBold20,
-              ),
-              Text(
-                ': ${equipmentName}',
-                textAlign: TextAlign.center,
-                style: Styles.black18,
-              ),
-            ],
-          ),
-        ],
-      ),
-      content: Builder(builder: (context) {
-        var height = Get.height;
-        controller.previousDateController.text = previousDate;
-        controller.nextDueDateController.text = nextDate;
-
-        return Obx(
-          () => Container(
-            margin: Dimens.edgeInsets15,
-            padding: Dimens.edgeInsets25,
-            height: height / 2.5,
-            width: double.infinity,
-            decoration: BoxDecoration(
-              border: Border.all(
-                color: ColorValues.appBlueBackgroundColor,
-                width: 1,
-              ),
-              boxShadow: [
-                BoxShadow(
-                  color: ColorValues.appBlueBackgroundColor,
-                  spreadRadius: 2,
-                  blurRadius: 5,
-                  offset: Offset(0, 2),
-                ),
-              ],
-            ),
-            child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
+              child: Row(
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Column(
-                        children: [
-                          Text("Previous Calibration"),
-                          Text("                         Date:"),
-                        ],
+                  Icon(
+                    Icons.home,
+                    color: ColorValues.greyLightColor,
+                  ),
+                  InkWell(
+                    onTap: () {
+                      Get.offNamed(Routes.home);
+                    },
+                    child: Text(
+                      "DASHBOARD",
+                      style: Styles.greyLight14,
+                    ),
+                  ),
+                  InkWell(
+                    onTap: () {
+                      Get.offNamed(Routes.masterDashboard);
+                    },
+                    child: Text(" / MASTERS", style: Styles.greyLight14),
+                  ),
+                  Text(" / CALIBRATION LIST", style: Styles.greyLight14),
+                ],
+              ),
+            ),
+            Expanded(
+              child: Stack(
+                children: [
+                  Container(
+                    width: Get.width * 7,
+                    margin: EdgeInsets.only(left: 10, top: 15),
+                    height: Get.height * .85,
+                    child: Card(
+                      color: Color.fromARGB(255, 245, 248, 250),
+                      elevation: 10,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.0),
                       ),
-                      Container(
-                          decoration: BoxDecoration(
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black26,
-                                offset: const Offset(
-                                  2.0,
-                                  3.0,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: Row(
+                              children: [
+                                Text(
+                                  "Calibration List ",
+                                  style: Styles.blackBold16,
                                 ),
-                                blurRadius: 3.0,
-                                spreadRadius: 1.0,
+                                // Spacer(),
+                                // Row(
+                                //   children: [
+                                //     CustomRichText(title: 'Date Range'),
+                                //     Dimens.boxWidth10,
+                                //     CustomTextFieldForStock(
+                                //       width:
+                                //           MediaQuery.of(context).size.width / 5,
+                                //       numberTextField: true,
+                                //       onTap: () {
+                                //         controller.openFromDateToStartDatePicker =
+                                //             !controller
+                                //                 .openFromDateToStartDatePicker;
+                                //         controller.update(
+                                //             ['PreventiveMaintenanceTask']);
+                                //       },
+                                //       hintText:
+                                //           '${controller.formattedFromdate.toString()} To ${controller.formattedTodate.toString()}',
+                                //     ),
+                                //   ],
+                                // ),
+                              ],
+                            ),
+                          ),
+                          Divider(
+                            color: ColorValues.greyLightColour,
+                          ),
+                          Row(
+                            children: [
+                              // Container(
+                              //   height: 35,
+                              //   margin: EdgeInsets.only(left: 10),
+                              //   child: CustomElevatedButton(
+                              //       backgroundColor:
+                              //           ColorValues.appLightBlueColor,
+                              //       onPressed: () {},
+                              //       text: 'Copy'),
+                              // ),
+                              // Container(
+                              //   height: 35,
+                              //   margin: EdgeInsets.only(left: 10),
+                              //   child: CustomElevatedButton(
+                              //       backgroundColor:
+                              //           ColorValues.appLightBlueColor,
+                              //       onPressed: () {},
+                              //       text: 'Excel'),
+                              // ),
+                              // Container(
+                              //   height: 35,
+                              //   margin: EdgeInsets.only(left: 10),
+                              //   child: CustomElevatedButton(
+                              //       backgroundColor:
+                              //           ColorValues.appLightBlueColor,
+                              //       onPressed: () {},
+                              //       text: 'PDF'),
+                              // ),
+                              PopupMenuButton<String>(
+                                tooltip: "",
+                                elevation: 25.0,
+                                child: Container(
+                                  height: 35,
+                                  margin: EdgeInsets.only(left: 10),
+                                  padding: EdgeInsets.only(
+                                      top: 4, bottom: 4, right: 8, left: 8),
+                                  decoration: BoxDecoration(
+                                      color: ColorValues.appLightBlueColor,
+                                      borderRadius: BorderRadius.circular(5),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.black26,
+                                          offset: const Offset(4.0, 2.0),
+                                          blurRadius: 5.0,
+                                          spreadRadius: 1.0,
+                                        ),
+                                      ]),
+                                  child: Text(
+                                    'Column Visibility',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w400,
+                                    ),
+                                  ),
+                                ),
+                                itemBuilder: (BuildContext context) =>
+                                    <PopupMenuEntry<String>>[]..addAll(
+                                          controller
+                                              .columnVisibility.value.entries
+                                              .map((e) {
+                                        return PopupMenuItem<String>(
+                                            child: ValueListenableBuilder(
+                                                valueListenable:
+                                                    controller.columnVisibility,
+                                                builder:
+                                                    (context, value, child) {
+                                                  return Row(
+                                                    children: [
+                                                      Checkbox(
+                                                        value: value[e.key],
+                                                        onChanged: (newValue) {
+                                                          controller
+                                                              .setColumnVisibility(
+                                                                  e.key,
+                                                                  newValue!);
+                                                        },
+                                                      ),
+                                                      Text(e.key),
+                                                    ],
+                                                  );
+                                                }));
+                                      })),
+                                onSelected: (String value) {
+                                  // Handle column selection
+                                },
+                              ),
+                              Container(
+                                decoration: BoxDecoration(boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black26,
+                                    offset: const Offset(2.0, 1.0),
+                                    blurRadius: 5.0,
+                                    spreadRadius: 1.0,
+                                  )
+                                ]),
+                                height: 35,
+                                margin: EdgeInsets.only(left: 10),
+                                child: CustomElevatedButton(
+                                    backgroundColor:
+                                        ColorValues.appLightBlueColor,
+                                    onPressed: () {
+                                      // controller.export();
+                                    },
+                                    text: 'Excel'),
+                              ),
+                              Spacer(),
+                              Container(
+                                width: 300,
+                                height: 40,
+                                margin: Dimens.edgeInsets0_0_16_0,
+                                child: TextField(
+                                  style: GoogleFonts.lato(
+                                    textStyle: TextStyle(
+                                        fontSize: 16.0,
+                                        height: 1.0,
+                                        color: Colors.black),
+                                  ),
+                                  decoration: InputDecoration(
+                                    enabledBorder: const OutlineInputBorder(
+                                      borderSide: const BorderSide(
+                                          color: Colors.grey, width: 0.0),
+                                    ),
+                                    focusedBorder: const OutlineInputBorder(
+                                      borderSide: const BorderSide(
+                                          color: Colors.grey, width: 0.0),
+                                    ),
+                                    contentPadding: Dimens.edgeInsets10_0_0_0,
+                                    hintText: 'search'.tr,
+                                    hintStyle: Styles.grey12,
+                                  ),
+                                  onChanged: (value) =>
+                                      controller.search(value),
+                                ),
                               ),
                             ],
-                            color: ColorValues.whiteColor,
-                            borderRadius: BorderRadius.circular(5),
                           ),
-                          width: Get.width / 5,
-                          child: LoginCustomTextfield(
-                            textController: controller.previousDateController,
-                            ontap: () {
-                              _selectDate(context, 1);
-                            },
-                            widget: Icon(
-                              Icons.calendar_month,
-                              color: ColorValues.greyLightColor,
-                            ),
-                          ))
-                    ],
-                  ),
-                  SizedBox(
-                    height: 15,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Column(
-                        children: [
-                          Text("Due Date For Next"),
-                          Text("             Calibration:"),
+                          SizedBox(
+                            height: 20,
+                          ),
+                          // controller.calibrationList.isEmpty == true &&
+                          //         controller.isLoading == false
+                          //     ? Center(child: Text('No data'))
+                          //     : controller.isLoading.value == true
+                          //         ? Center(child: Text('Data Loading......'))
+                          //         :
+                          Expanded(
+                            child: ValueListenableBuilder(
+                                valueListenable: controller.columnVisibility,
+                                builder: (context, value, child) {
+                                  final dataSource =
+                                      CalibrationDataSource(controller);
+
+                                  return PaginatedDataTable2(
+                                    // fixedLeftColumns: 1,
+                                    // dataRowHeight: Get.height * 0.10,
+                                    columnSpacing: 10,
+                                    source:
+                                        dataSource, // Custom DataSource class
+                                    // headingRowHeight:
+                                    //     Get.height * 0.12,
+                                    minWidth: 2000, //Get.width * 1.2,
+                                    showCheckboxColumn: false,
+                                    rowsPerPage: 10, // Number of rows per page
+                                    availableRowsPerPage: [10, 20, 30, 50],
+                                    columns: [
+                                      for (var entry in value.entries)
+                                        if (entry.value)
+                                          buildDataColumn(
+                                            entry.key,
+                                            controller.filterText[entry.key]!,
+                                            controller.columnwidth[entry.key],
+                                          ),
+                                      buildDataColumn(
+                                        'Actions',
+                                        controller.titleFilterText,
+                                        200,
+                                      ),
+                                    ],
+                                  );
+                                }),
+                          )
                         ],
                       ),
-                      Container(
-                          decoration: BoxDecoration(
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black26,
-                                offset: const Offset(
-                                  2.0,
-                                  3.0,
-                                ),
-                                blurRadius: 3.0,
-                                spreadRadius: 1.0,
-                              ),
-                            ],
-                            color: ColorValues.whiteColor,
-                            borderRadius: BorderRadius.circular(5),
-                          ),
-                          width: Get.width / 5,
-                          child: LoginCustomTextfield(
-                            textController: controller.nextDueDateController,
-                            ontap: () {
-                              _selectDate(context, 2);
-                            },
-                            widget: Icon(
-                              Icons.calendar_month,
-                              color: ColorValues.greyLightColor,
-                            ),
-                          ))
-                    ],
-                  ),
-                  SizedBox(
-                    height: 15,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text("Vender Name :"),
-                      Container(
-                        decoration: BoxDecoration(
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black26,
-                              offset: const Offset(
-                                2.0,
-                                3.0,
-                              ),
-                              blurRadius: 3.0,
-                              spreadRadius: 1.0,
-                            ),
-                          ],
-                          color: ColorValues.whiteColor,
-                          borderRadius: BorderRadius.circular(5),
-                        ),
-                        width: Get.width / 5,
-                        child: DropdownWebWidget(
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black26,
-                              offset: const Offset(
-                                5.0,
-                                5.0,
-                              ),
-                              blurRadius: 5.0,
-                              spreadRadius: 1.0,
-                            ),
-                            BoxShadow(
-                              color: ColorValues.whiteColor,
-                              offset: const Offset(0.0, 0.0),
-                              blurRadius: 0.0,
-                              spreadRadius: 0.0,
-                            ),
-                          ],
-                          dropdownList: controller.venderNameList,
-                          isValueSelected:
-                              controller.isVenderNameSelected.value,
-                          selectedValue: controller.selectedVender.value,
-                          onValueChanged: controller.onValueChanged,
-                        ),
-                      )
-                    ],
-                  ),
-                  SizedBox(
-                    height: 30,
-                  ),
-                  Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                    CustomElevatedButton(
-                      text: "Cancel",
-                      onPressed: () {
-                        Get.back();
-                      },
-                      backgroundColor: ColorValues.appRedColor,
-                      textColor: ColorValues.whiteColor,
                     ),
-                    Dimens.boxWidth30,
-                    CustomElevatedButton(
-                      text: "Start",
-                      onPressed: () {
-                        controller.requestCalibration(
-                            int.tryParse(calibrationId) ?? 0);
-                        Get.back();
-                      },
-                      backgroundColor: ColorValues.appGreenColor,
-                      textColor: ColorValues.whiteColor,
-                    ),
-                  ]),
-                ]),
-          ),
-        );
-      }),
-      actions: [],
-    ));
+                  ),
+                  // if (controller.openFromDateToStartDatePicker)
+                  //   Positioned(
+                  //     right: 70,
+                  //     top: 65,
+                  //     child: DatePickerWidget(
+                  //       selectionMode: DateRangePickerSelectionMode.range,
+                  //       monthCellStyle: DateRangePickerMonthCellStyle(
+                  //         todayCellDecoration: BoxDecoration(
+                  //             shape: BoxShape.circle,
+                  //             color: ColorValues.appDarkBlueColor),
+                  //       ), // last date of this year
+                  //       // controller: DateRangePickerController(),
+                  //       initialSelectedRange: PickerDateRange(
+                  //         controller.fromDate.value,
+                  //         controller.toDate.value,
+                  //       ),
+
+                  //       onSubmit: (value) {
+                  //         print('po valu ${value.toString()}');
+                  //         PickerDateRange? data = value as PickerDateRange;
+
+                  //         var pickUpDate =
+                  //             DateTime.parse(data.startDate.toString());
+                  //         controller.fromDate.value = pickUpDate;
+                  //         var dropDate = DateTime.parse(data.endDate.toString());
+                  //         dropDate != null
+                  //             ? controller.toDate.value = dropDate
+                  //             : controller.toDate.value = pickUpDate;
+
+                  //         controller.getPmTaskListByDate();
+                  //         controller.openFromDateToStartDatePicker =
+                  //             !controller.openFromDateToStartDatePicker;
+                  //         controller.update(['PreventiveMaintenanceTask']);
+
+                  //         // Get.toNamed(
+                  //         //   Routes.stockManagementGoodsOrdersScreen,
+                  //         // );
+                  //       },
+                  //     ),
+                  //   ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      );
+    });
   }
 
-  Future<void> _selectDate(BuildContext context, int type) async {
-    DateTime today = DateTime.now();
-    var date = await showDatePicker(
-      context: context,
-      cancelText: "Clear",
-      confirmText: "Ok",
-      initialDate: DateTime(today.year, today.month, today.day),
-      firstDate: DateTime(1900),
-      lastDate: DateTime(today.year + 18, today.month, today.day),
+  DataColumn2 buildDataColumn(
+    // String columnName,
+    String header,
+
+    /// ColumnSize columnSize,
+    RxString filterText,
+    double? fixedWidth,
+    //  {required Function(String) onSearchCallBack}
+  ) {
+    return //
+        DataColumn2(
+      // size: columnSize,
+      fixedWidth: fixedWidth,
+
+      label: //
+          Column(
+              mainAxisAlignment: MainAxisAlignment.center, //
+              children: [
+            // SizedBox(
+            //   height: Get.height * 0.05,
+            //   child: TextField(
+            //     style: GoogleFonts.lato(
+            //       textStyle: TextStyle(
+            //           fontSize: 16.0, height: 1.0, color: Colors.black),
+            //     ),
+            //     onChanged: (value) {
+            //       filterText.value = value;
+            //       //   onSearchCallBack(value);
+            //     },
+            //     textAlign: TextAlign.left,
+            //     decoration: InputDecoration(
+            //       hintText: 'Filter',
+            //       contentPadding: EdgeInsets.fromLTRB(
+            //           5, 0, 5, 0), // Reduced vertical padding
+            //       border: OutlineInputBorder(
+            //         borderRadius: BorderRadius.circular(5),
+            //         borderSide: BorderSide(color: Colors.black),
+            //       ),
+            //       focusedBorder: OutlineInputBorder(
+            //         borderRadius: BorderRadius.circular(5),
+            //         borderSide: BorderSide(color: Colors.black),
+            //       ),
+            //       enabledBorder: OutlineInputBorder(
+            //         borderRadius: BorderRadius.circular(5),
+            //         borderSide: BorderSide(color: Colors.black),
+            //       ),
+            //     ),
+            //   ),
+            // ),
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                header,
+                style: Styles.black16W500,
+              ),
+            ),
+          ]),
+      // ),
     );
-    if (type == 1) {
-      controller.previousDateController.text = date.toString().substring(0, 10);
-    } else {
-      controller.nextDueDateController.text = date.toString().substring(0, 10);
-    }
   }
 }
 
@@ -1072,4 +493,272 @@ _filterText(String text) {
       child: Text(text),
     ),
   );
+}
+
+class CalibrationDataSource extends DataTableSource {
+  final CalibrationListController controller;
+
+  late List<CalibrationListModel?> filteredCalibrationList;
+
+  CalibrationDataSource(this.controller) {
+    filterpmTasks();
+  }
+
+  ///
+  void filterpmTasks() {
+    filteredCalibrationList = <CalibrationListModel?>[];
+    filteredCalibrationList = controller.calibrationList.where((Calibration) {
+      return (Calibration?.category_name ?? '')
+              .toLowerCase()
+              .contains(controller.categoryFilterText.value.toLowerCase()) &&
+          (Calibration?.asset_name ?? '')
+              .toString()
+              .toLowerCase()
+              .contains(controller.titleFilterText.value.toLowerCase()) &&
+          (Calibration?.asset_serial ?? '')
+              .toString()
+              .toLowerCase()
+              .contains(controller.srNoFilterText.value.toLowerCase()) &&
+          (Calibration?.next_calibration_due_date ?? '')
+              .toString()
+              .toLowerCase()
+              .contains(controller.dueDateFilterText.value.toLowerCase()) &&
+          (Calibration?.last_calibration_date ?? '')
+              .toString()
+              .toLowerCase()
+              .contains(
+                  controller.lastDoneDateFilterText.value.toLowerCase()) &&
+          (Calibration?.frequency_name ?? '')
+              .toLowerCase()
+              .contains(controller.frequencyFilterText.value.toLowerCase());
+
+      // Add other filter conditions as needed
+    }).toList();
+  }
+
+  @override
+  DataRow? getRow(int index) {
+    // print({"getRow call"});
+    final calibrationDetails = filteredCalibrationList[index];
+
+    // controller.calibrationId.value = calibrationDetails?.id ?? 0;
+    var cellsBuffer = [
+      "category", //'${calibrationDetails?.category_name ?? ''}',
+      '${calibrationDetails?.asset_name ?? ''}',
+      '${calibrationDetails?.asset_serial ?? ''}',
+      '${calibrationDetails?.last_calibration_date ?? ''}',
+      '${calibrationDetails?.next_calibration_due_date ?? ''}',
+      '${calibrationDetails?.frequency_name ?? ''}',
+      'Actions',
+    ];
+    var cells = [];
+    int i = 0;
+
+    for (var entry in controller.columnVisibility.value.entries) {
+      // print({"entry.value entry": entry});
+      if (entry.key == "search") {
+        return null;
+      }
+      if (entry.value) {
+        // print({"entry.value removed": entry.key});
+        cells.add(cellsBuffer[i]);
+      }
+      i++;
+    }
+    cells.add('Actions');
+
+    // print({"cell": cells});
+    return DataRow.byIndex(
+      index: index,
+      cells: cells.map((value) {
+        return DataCell(
+          Padding(
+            padding: EdgeInsets.zero,
+            child: (value == 'category')
+                ? Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        '${calibrationDetails?.category_name}',
+                      ),
+                      Dimens.boxHeight5,
+                      Align(
+                        alignment: Alignment.centerRight,
+                        child: Container(
+                          padding: Dimens.edgeInsets8_2_8_2,
+                          decoration: BoxDecoration(
+                            color: calibrationDetails?.statusID == 218
+                                ? ColorValues.appRedColor
+                                : calibrationDetails?.statusID == 211
+                                    ? ColorValues.blueColor
+                                    : calibrationDetails?.statusID == 214
+                                        ? ColorValues.appGreenColor
+                                        : calibrationDetails?.statusID == 213
+                                            ? ColorValues.appYellowColor
+                                            : calibrationDetails?.statusID ==
+                                                    217
+                                                ? ColorValues.appGreenColor
+                                                : ColorValues.appDarkBlueColor,
+                            borderRadius: BorderRadius.circular(4),
+                          ),
+                          child: Text(
+                            '${calibrationDetails?.calibration_status}',
+                            style: Styles.white10.copyWith(
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  )
+                : (value == 'Actions')
+                    ? Wrap(children: [
+                        controller.calibrationList
+                                        .firstWhere(
+                                          (e) =>
+                                              e?.asset_id ==
+                                              calibrationDetails!.asset_id,
+                                          orElse: () => CalibrationListModel(
+                                              asset_id: 00),
+                                        )
+                                        ?.statusID ==
+                                    0 ||
+                                controller.calibrationList
+                                        .firstWhere(
+                                          (e) =>
+                                              e?.asset_id ==
+                                              calibrationDetails!.asset_id,
+                                          orElse: () => CalibrationListModel(
+                                              asset_id: 00),
+                                        )
+                                        ?.statusID ==
+                                    212
+                            ? TableActionButton(
+                                color: ColorValues.lightGreenColor,
+                                message: 'Request Calibration',
+                                icon: Icons.compass_calibration,
+                                onPress: () {
+                                  controller.calibrationRequest(
+                                    equipmentName:
+                                        '${calibrationDetails?.asset_name}',
+                                    previousDate:
+                                        '${calibrationDetails?.last_calibration_date}',
+                                    nextDate:
+                                        '${calibrationDetails?.next_calibration_due_date}',
+                                    calibrationId:
+                                        '${calibrationDetails?.asset_id}',
+                                  );
+                                },
+                              )
+                            : Dimens.box0,
+                        controller.calibrationList
+                                        .firstWhere(
+                                          (e) =>
+                                              e?.asset_id ==
+                                              calibrationDetails!.asset_id,
+                                          orElse: () => CalibrationListModel(
+                                              asset_id: 00),
+                                        )
+                                        ?.statusID ==
+                                    0 ||
+                                controller.calibrationList
+                                        .firstWhere(
+                                          (e) =>
+                                              e?.asset_id ==
+                                              calibrationDetails!.asset_id,
+                                          orElse: () => CalibrationListModel(
+                                              asset_id: 00),
+                                        )
+                                        ?.statusID ==
+                                    212
+                            ? TableActionButton(
+                                color: ColorValues.startColor,
+                                message: 'Skip Calibration',
+                                icon: Icons.skip_next,
+                                onPress: () {
+                                  controller.isCommentCalibrationDialog(
+                                      calibrationName:
+                                          '${calibrationDetails?.asset_name}',
+                                      calibrationId:
+                                          '${calibrationDetails?.calibration_id}',
+                                      type: 6);
+                                },
+                              )
+                            : Dimens.box0,
+                        controller.calibrationList
+                                    .firstWhere(
+                                      (e) =>
+                                          e?.asset_id ==
+                                          calibrationDetails!.asset_id,
+                                      orElse: () =>
+                                          CalibrationListModel(asset_id: 00),
+                                    )
+                                    ?.statusID ==
+                                0
+                            ? Dimens.box0
+                            : TableActionButton(
+                                color: ColorValues.viewColor,
+                                icon: Icons.remove_red_eye_outlined,
+                                message: 'View',
+                                onPress: () {
+                                  controller.clearStoreData();
+                                  int calibrationId =
+                                      calibrationDetails?.calibration_id ?? 0;
+                                  Get.toNamed(Routes.calibrationViewScreen,
+                                      arguments: {
+                                        'calibrationId': calibrationId
+                                      });
+                                },
+                              ),
+                        controller.calibrationList
+                                    .firstWhere(
+                                      (e) =>
+                                          e?.asset_id ==
+                                          calibrationDetails!.asset_id,
+                                      orElse: () =>
+                                          CalibrationListModel(asset_id: 00),
+                                    )
+                                    ?.statusID ==
+                                0
+                            ? Dimens.box0
+                            : TableActionButton(
+                                color: ColorValues.deleteColor,
+                                icon: Icons.delete,
+                                message: 'Delete',
+                                onPress: () {},
+                              ),
+                      ])
+                    : Text(value.toString()),
+          ),
+        );
+      }).toList(),
+      //   ],
+      onSelectChanged: (_) {
+        controller.clearStoreData();
+        int calibrationId = calibrationDetails?.calibration_id ?? 0;
+        if (calibrationId > 0) {
+          varUserAccessModel.value.access_list!
+                      .where((e) =>
+                          e.feature_id ==
+                                  UserAccessConstants.kCalibrationFeatureId &&
+                              e.issue == UserAccessConstants.kHaveViewAccess ||
+                          e.approve == UserAccessConstants.kHaveApproveAccess)
+                      .length >
+                  0
+              ? Get.toNamed(Routes.calibrationViewScreen,
+                  arguments: {'calibrationId': calibrationId})
+              : null;
+        }
+      },
+    );
+  }
+
+  @override
+  int get rowCount => filteredCalibrationList.length;
+
+  @override
+  bool get isRowCountApproximate => false;
+
+  @override
+  int get selectedRowCount => 0;
 }
