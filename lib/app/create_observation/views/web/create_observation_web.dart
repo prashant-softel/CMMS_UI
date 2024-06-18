@@ -8,6 +8,7 @@ import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/custom_textField.dart';
 import 'package:cmms/app/widgets/date_picker.dart';
+import 'package:cmms/app/widgets/dropdown_web.dart';
 import 'package:cmms/app/widgets/file_upload_widget_web2.dart';
 import 'package:cmms/app/widgets/file_upload_with_dropzone_widget.dart';
 import 'package:cmms/app/widgets/stock_dropdown.dart';
@@ -129,15 +130,8 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                                                   title:
                                                                       'Risk Type'),
                                                               Dimens.boxWidth10,
-                                                              Container(
-                                                                decoration:
-                                                                    BoxDecoration(
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              5),
-                                                                ),
-                                                                child:
+                                                              Obx(
+                                                                () =>
                                                                     DropdownWebStock(
                                                                   width: MediaQuery.of(
                                                                               context)
@@ -146,11 +140,18 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                                                       5,
                                                                   dropdownList:
                                                                       controller
-                                                                          .riskType,
-                                                                  // selectedValue: ,
+                                                                          .incidentrisktypeList,
+                                                                  isValueSelected:
+                                                                      controller
+                                                                          .isRiskTypeListSelected
+                                                                          .value,
+                                                                  selectedValue:
+                                                                      controller
+                                                                          .selectedRiskTypeList
+                                                                          .value,
                                                                   onValueChanged:
-                                                                      (riskType,
-                                                                          selectedValue) {},
+                                                                      controller
+                                                                          .onValueChanged,
                                                                 ),
                                                               ),
                                                             ],

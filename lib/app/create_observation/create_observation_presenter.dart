@@ -1,5 +1,6 @@
 import 'package:cmms/domain/models/facility_model.dart';
 import 'package:cmms/domain/models/history_model.dart';
+import 'package:cmms/domain/models/incident_risk_type_model.dart';
 import 'package:cmms/domain/usecases/create_observation_usecase.dart';
 
 class CreateObservationPresenter {
@@ -14,6 +15,14 @@ class CreateObservationPresenter {
     String? obsId,
   }) async {
     return createObservationUsecase.saveValue(obsId: obsId);
+  }
+
+  Future<List<IncidentRiskTypeModell>> getIncidentRiskType(
+      {required bool isLoading, required int facilityId}) async {
+    return createObservationUsecase.getIncidentRiskType(
+      isLoading: isLoading,
+      facilityId: facilityId,
+    );
   }
 
   Future<String?> getValue() async => await createObservationUsecase.getValue();

@@ -7,6 +7,7 @@ import 'package:cmms/domain/models/create_obs_model.dart';
 import 'package:cmms/domain/models/facility_model.dart';
 import 'package:cmms/domain/models/get_statutory_list_model.dart';
 import 'package:cmms/domain/models/history_model.dart';
+import 'package:cmms/domain/models/incident_risk_type_model.dart';
 import 'package:cmms/domain/models/type_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -38,6 +39,12 @@ class CreateObservationController extends GetxController {
   var costTypeCtrlr = TextEditingController();
   var locationOfObservationCtrlr = TextEditingController();
   var discriptionCtrlr = TextEditingController();
+  RxList<IncidentRiskTypeModell> incidentrisktypeList =
+      <IncidentRiskTypeModell>[].obs;
+  Rx<bool> isRiskTypeListSelected = true.obs;
+  Rx<String> selectedRiskTypeList = ''.obs;
+  int selectedRiskTypeId = 0;
+  int incidenttypeId = 0;
 
   RxList<MonthModel> month = <MonthModel>[
     MonthModel(name: 'Jan', id: "1"),
@@ -84,6 +91,9 @@ class CreateObservationController extends GetxController {
         facilityId = event;
         Future.delayed(Duration(seconds: 1), () {
           getFacilityList();
+        });
+        Future.delayed(Duration(seconds: 1), () {
+          getIncidentRiskType(facilityId);
         });
       });
       if (obsId.value != 0) {
@@ -228,7 +238,7 @@ class CreateObservationController extends GetxController {
   //         expires_on: _targetDateTc,
   //         renewFlag: 0,
   //         renew_date: "",
-  //         status_of_aplication_id: selectedStatusOfAplicationId);
+  //         status_of_aplication_id: incidenttypeId);
 
   //     // Convert the CreateObsModel instance to JSON
   //     var createObsModelJsonString = createObsModel.toJson();
@@ -257,8 +267,8 @@ class CreateObservationController extends GetxController {
   //     isStatutoryComplianceSelected.value = false;
   //     isFormInvalid.value = true;
   //   }
-  //   if (selectedStatusOfAplication.value == '') {
-  //     isStatusOfAplicationSelected.value = false;
+  //   if (selectedRiskTypeList.value == '') {
+  //     isRiskTypeListSelected.value = false;
   //     isFormInvalid.value = true;
   //   }
   //   if (issueDateTc.text.trim().length < 3) {
@@ -277,8 +287,35 @@ class CreateObservationController extends GetxController {
     // createObservationPresenter.clearRenewValue();
   }
 
+  Future<void> getIncidentRiskType(int facilityId) async {
+    incidentrisktypeList.value = <IncidentRiskTypeModell>[];
+    final _irisktypeList = await createObservationPresenter.getIncidentRiskType(
+      facilityId: facilityId,
+      isLoading: true,
+    );
+    for (var facilityType_list in _irisktypeList) {
+      incidentrisktypeList.add(facilityType_list);
+    }
+  }
+
   void onValueChanged(dynamic list, dynamic value) {
     print("$value");
-    switch (list.runtimeType) {}
+    switch (list.runtimeType) {
+      case RxList<IncidentRiskTypeModell>:
+        {
+          if (value != "Please Select") {
+            int statusIndex =
+                incidentrisktypeList.indexWhere((x) => x?.name == value);
+            incidenttypeId = incidentrisktypeList[statusIndex]?.id ?? 0;
+            selectedRiskTypeList.value = value;
+            isRiskTypeListSelected.value = true;
+            print(
+                "selectedBusinessTypeId: ${incidenttypeId} \n ${selectedRiskTypeList}");
+          } else {
+            incidenttypeId = 0;
+          }
+        }
+        break;
+    }
   }
 }
