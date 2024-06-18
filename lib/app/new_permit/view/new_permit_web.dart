@@ -1599,7 +1599,7 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                                                           DataColumn(
                                                                               label: Text("Contact No")),
                                                                           DataColumn(
-                                                                              label: Text("Responsibility")),
+                                                                              label: Text("Designation")),
                                                                           DataColumn(
                                                                               label: Text("Action")),
                                                                         ],
@@ -1805,7 +1805,7 @@ class NewPermitWeb extends GetView<NewPermitController> {
                                                                       DataColumn2(
                                                                           label:
                                                                               Text(
-                                                                        "Responsibility",
+                                                                        "Designation",
                                                                         style: TextStyle(
                                                                             fontSize:
                                                                                 15,

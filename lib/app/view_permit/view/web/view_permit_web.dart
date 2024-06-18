@@ -234,7 +234,7 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                                       onTap: () async {
                                         String pdfUrl =
                                             // 'http://65.0.20.19/CMMS_API/Upload/1779/0/0/Ptw%20sop%20file%20pdf.pdf';
-                                        "http://172.20.43.9:83/Upload/1/0/0/Ptw%20sop%20file%20pdf.pdf";
+                                            "http://172.20.43.9:83/Upload/1/0/0/Ptw%20sop%20file%20pdf.pdf";
                                         // String pdfPath =
                                         //     html.window.location.origin +
                                         //         '/' +
@@ -1525,7 +1525,7 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                                                                     DataColumn(
                                                                         label:
                                                                             Text(
-                                                                      "Responsibility",
+                                                                      "Designation",
                                                                       style: TextStyle(
                                                                           fontSize:
                                                                               15,
@@ -2367,7 +2367,7 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                                                         // String baseUrl =
                                                         //     "http://65.0.20.19/CMMS_API/";
                                                         String baseUrl =
-                                                        'http://172.20.43.9:83/';
+                                                            'http://172.20.43.9:83/';
                                                         String fileName =
                                                             controller
                                                                     .file_list![
@@ -2764,8 +2764,7 @@ class ViewPermitWeb extends GetView<ViewPermitController> {
                                                       .value
                                                       ?.request_datetime !=
                                                   null
-                                              ? DateFormat(
-                                                      'yyyy-MM-dd HH:mm')
+                                              ? DateFormat('yyyy-MM-dd HH:mm')
                                                   .format(controller
                                                       .viewPermitDetailsModel
                                                       .value!
