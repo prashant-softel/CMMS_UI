@@ -1,5 +1,6 @@
 import 'package:cmms/domain/models/facility_model.dart';
 import 'package:cmms/domain/models/history_model.dart';
+import 'package:cmms/domain/models/incident_risk_type_model.dart';
 import 'package:cmms/domain/repositories/local_storage_keys.dart';
 import 'package:cmms/domain/repositories/repository.dart';
 
@@ -37,4 +38,11 @@ class CreateObservationUsecase {
         isLoading,
         position,
       );
+  Future<List<IncidentRiskTypeModell>> getIncidentRiskType(
+      {required bool isLoading, required int facilityId}) async {
+    return repository.getIncidentRiskType(
+      isLoading: isLoading,
+      facilityId: facilityId,
+    );
+  }
 }
