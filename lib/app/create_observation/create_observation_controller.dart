@@ -31,6 +31,14 @@ class CreateObservationController extends GetxController {
   bool openTargetObsDatePicker = false;
   var obsDateTc = TextEditingController();
   var targetDateTc = TextEditingController();
+  var contractorNameCtrlr = TextEditingController();
+  var correctivePreventiveCtrlr = TextEditingController();
+  var responsiblePersonCtrlr = TextEditingController();
+  var contactNumberCtrlr = TextEditingController();
+  var costTypeCtrlr = TextEditingController();
+  var locationOfObservationCtrlr = TextEditingController();
+  var discriptionCtrlr = TextEditingController();
+
   RxList<MonthModel> month = <MonthModel>[
     MonthModel(name: 'Jan', id: "1"),
     MonthModel(name: 'Feb', id: "2"),
@@ -151,25 +159,33 @@ class CreateObservationController extends GetxController {
       // if (isFormInvalid.value) {
       //   return;
       // }
+      String _contractorNameCtrlr = contractorNameCtrlr.text.trim();
+      String _correctivePreventiveCtrlr = correctivePreventiveCtrlr.text.trim();
+      String _responsiblePersonCtrlr = responsiblePersonCtrlr.text.trim();
+      String _contactNumberCtrlr = contactNumberCtrlr.text.trim();
+      String _costTypeCtrlr = costTypeCtrlr.text.trim();
       String _obsDateTc = obsDateTc.text.trim();
+      String _discriptionCtrlr = discriptionCtrlr.text.trim();
+
+      String _locationOfObservationCtrlr =
+          locationOfObservationCtrlr.text.trim();
       String _targetDateTc = targetDateTc.text.trim();
-      // String _commentsCtrl = commentsCtrl.text.trim();
 
       CreateObsModel createObsModel = CreateObsModel(
         facility_id: facilityId,
-        contact_number: "",
-        contractor_name: "",
-        cost_type: "",
+        contact_number: _contactNumberCtrlr,
+        contractor_name: _contractorNameCtrlr,
+        cost_type: _costTypeCtrlr,
         date_of_observation: _obsDateTc,
-        location_of_observation: "",
-        observation_description: "",
-        preventive_action: "",
-        responsible_person: "",
+        location_of_observation: _locationOfObservationCtrlr,
+        observation_description: _discriptionCtrlr,
+        preventive_action: _correctivePreventiveCtrlr,
+        responsible_person: _responsiblePersonCtrlr,
         risk_type_id: 1,
-        source_of_observation: "",
+        source_of_observation: "madhuban",
         target_date: _targetDateTc,
         type_of_observation: "",
-        uploadfileIds: [],
+        uploadfileIds: [101, 202],
       );
 
       // Convert the CreateObsModel instance to JSON

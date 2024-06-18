@@ -116,15 +116,9 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                                                 keyboardType:
                                                                     TextInputType
                                                                         .number,
-                                                                inputFormatters: [
-                                                                  FilteringTextInputFormatter
-                                                                      .deny(
-                                                                    RegExp(
-                                                                        '[\'^]'),
-                                                                  )
-                                                                ],
-                                                                // textController:
-                                                                //     controller.challanNoCtrlr,
+                                                                textController:
+                                                                    controller
+                                                                        .contractorNameCtrlr,
                                                               ),
                                                             ],
                                                           ),
@@ -138,19 +132,6 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                                               Container(
                                                                 decoration:
                                                                     BoxDecoration(
-                                                                  // boxShadow: [
-                                                                  //   BoxShadow(
-                                                                  //     color: Colors
-                                                                  //         .black26,
-                                                                  //     offset:
-                                                                  //         const Offset(
-                                                                  //       5.0,
-                                                                  //       5.0,
-                                                                  //     ),
-                                                                  //     blurRadius: 5.0,
-                                                                  //     spreadRadius: 1.0,
-                                                                  //   ),
-                                                                  // ],
                                                                   borderRadius:
                                                                       BorderRadius
                                                                           .circular(
@@ -187,12 +168,9 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                                                         .size
                                                                         .width *
                                                                     .2),
-                                                                keyboardType:
-                                                                    TextInputType
-                                                                        .number,
-
-                                                                // textController:
-                                                                //     controller.challanNoCtrlr,
+                                                                textController:
+                                                                    controller
+                                                                        .correctivePreventiveCtrlr,
                                                               ),
                                                             ],
                                                           ),
@@ -209,12 +187,9 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                                                         .size
                                                                         .width *
                                                                     .2),
-                                                                keyboardType:
-                                                                    TextInputType
-                                                                        .number,
-
-                                                                // textController:
-                                                                //     controller.challanNoCtrlr,
+                                                                textController:
+                                                                    controller
+                                                                        .responsiblePersonCtrlr,
                                                               ),
                                                             ],
                                                           ),
@@ -234,9 +209,9 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                                                 keyboardType:
                                                                     TextInputType
                                                                         .number,
-
-                                                                // textController:
-                                                                //     controller.challanNoCtrlr,
+                                                                textController:
+                                                                    controller
+                                                                        .contactNumberCtrlr,
                                                               ),
                                                             ],
                                                           ),
@@ -245,24 +220,11 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                                             children: [
                                                               CustomRichText(
                                                                   title:
-                                                                      'Cost type'),
+                                                                      'Cost Type'),
                                                               Dimens.boxWidth10,
                                                               Container(
                                                                 decoration:
                                                                     BoxDecoration(
-                                                                  // boxShadow: [
-                                                                  //   BoxShadow(
-                                                                  //     color: Colors
-                                                                  //         .black26,
-                                                                  //     offset:
-                                                                  //         const Offset(
-                                                                  //       5.0,
-                                                                  //       5.0,
-                                                                  //     ),
-                                                                  //     blurRadius: 5.0,
-                                                                  //     spreadRadius: 1.0,
-                                                                  //   ),
-                                                                  // ],
                                                                   borderRadius:
                                                                       BorderRadius
                                                                           .circular(
@@ -275,44 +237,14 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                                                           .size
                                                                           .width *
                                                                       .2),
-                                                                  keyboardType:
-                                                                      TextInputType
-                                                                          .number,
-
-                                                                  // textController:
-                                                                  //     controller.challanNoCtrlr,
+                                                                  textController:
+                                                                      controller
+                                                                          .costTypeCtrlr,
                                                                 ),
                                                               ),
                                                             ],
                                                           ),
-
                                                           Dimens.boxHeight5,
-                                                          // if (reNew == 1)
-                                                          // Row(
-                                                          //   children: [
-                                                          //     CustomRichText(
-                                                          //         title: 'ReNew Date '),
-                                                          //     Dimens.boxWidth10,
-                                                          //     CustomTextFieldForStock(
-                                                          //       width:
-                                                          //           MediaQuery.of(context)
-                                                          //                   .size
-                                                          //                   .width /
-                                                          //               5,
-                                                          //       numberTextField: true,
-                                                          //       onTap: () {
-                                                          //         // controller
-                                                          //         //         .openObsDatePicker =
-                                                          //         //     !controller
-                                                          //         //         .openObsDatePicker;
-                                                          //         // controller.update(
-                                                          //         //     ['stock_Mangement']);
-                                                          //       },
-                                                          //       // textController:
-                                                          //       //     controller.obsDateTc,
-                                                          //     ),
-                                                          //   ],
-                                                          // ),
                                                         ],
                                                       ),
                                                       Spacer(),
@@ -411,12 +343,9 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                                                         .size
                                                                         .width *
                                                                     .2),
-                                                                keyboardType:
-                                                                    TextInputType
-                                                                        .number,
-
-                                                                // textController:
-                                                                //     controller.challanNoCtrlr,
+                                                                textController:
+                                                                    controller
+                                                                        .locationOfObservationCtrlr,
                                                               ),
                                                             ],
                                                           ),
@@ -430,19 +359,6 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                                               Container(
                                                                 decoration:
                                                                     BoxDecoration(
-                                                                  // boxShadow: [
-                                                                  //   BoxShadow(
-                                                                  //     color: Colors
-                                                                  //         .black26,
-                                                                  //     offset:
-                                                                  //         const Offset(
-                                                                  //       5.0,
-                                                                  //       5.0,
-                                                                  //     ),
-                                                                  //     blurRadius: 5.0,
-                                                                  //     spreadRadius: 1.0,
-                                                                  //   ),
-                                                                  // ],
                                                                   borderRadius:
                                                                       BorderRadius
                                                                           .circular(
@@ -467,28 +383,6 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                                             ],
                                                           ),
                                                           Dimens.boxHeight5,
-                                                          // Row(
-                                                          //   children: [
-                                                          //     CustomRichText(
-                                                          //         title:
-                                                          //             'Action Taken'),
-                                                          //     Dimens.boxWidth10,
-                                                          //     LoginCustomTextfield(
-                                                          //       width: (MediaQuery.of(
-                                                          //                   context)
-                                                          //               .size
-                                                          //               .width *
-                                                          //           .2),
-                                                          //       keyboardType:
-                                                          //           TextInputType
-                                                          //               .number,
-
-                                                          //       // textController:
-                                                          //       //     controller.challanNoCtrlr,
-                                                          //     ),
-                                                          //   ],
-                                                          // ),
-                                                          // Dimens.boxHeight5,
                                                           Row(
                                                             children: [
                                                               CustomRichText(
@@ -520,33 +414,6 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                                             ],
                                                           ),
                                                           Dimens.boxHeight5,
-                                                          // Row(
-                                                          //   children: [
-                                                          //     CustomRichText(
-                                                          //         title:
-                                                          //             'Closer Date'),
-                                                          //     Dimens.boxWidth10,
-                                                          //     CustomTextFieldForStock(
-                                                          //       width: MediaQuery.of(
-                                                          //                   context)
-                                                          //               .size
-                                                          //               .width /
-                                                          //           5,
-                                                          //       numberTextField: true,
-                                                          //       onTap: () {
-                                                          //         // controller
-                                                          //         //         .openObsDatePicker =
-                                                          //         //     !controller
-                                                          //         //         .openObsDatePicker;
-                                                          //         // controller.update(
-                                                          //         //     ['stock_Mangement']);
-                                                          //       },
-                                                          //       // textController:
-                                                          //       //     controller.obsDateTc,
-                                                          //     ),
-                                                          //   ],
-                                                          // ),
-                                                          // Dimens.boxHeight5,
                                                         ],
                                                       ),
                                                       Spacer(),
@@ -563,6 +430,8 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                                           style: Styles.blue14),
                                                       Expanded(
                                                         child: TextField(
+                                                          controller: controller
+                                                              .discriptionCtrlr,
                                                           style:
                                                               GoogleFonts.lato(
                                                             textStyle: TextStyle(
@@ -647,33 +516,6 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                                       ),
                                                     ),
                                                   ),
-                                                  Dimens.boxHeight15,
-                                                  Row(
-                                                    children: [
-                                                      Spacer(),
-                                                      CustomElevatedButton(
-                                                        backgroundColor:
-                                                            ColorValues
-                                                                .appRedColor,
-                                                        text: 'cancel',
-                                                        onPressed: () {
-                                                          // controller.AddInventory();
-                                                        },
-                                                      ),
-                                                      Dimens.boxWidth15,
-                                                      CustomElevatedButton(
-                                                        backgroundColor:
-                                                            ColorValues
-                                                                .appGreenColor,
-                                                        text: 'Submit',
-                                                        onPressed: () {
-                                                          // controller.submitPurchaseOrderData();
-                                                        },
-                                                      ),
-                                                      Spacer()
-                                                    ],
-                                                  ),
-                                                  Dimens.boxHeight15,
                                                 ],
                                               ),
                                             ),
