@@ -872,6 +872,45 @@ class Repository {
     }
   }
 
+  Future<Map<String, dynamic>> createObs(
+      createObs, bool? isLoading, int? position) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.createObs(
+        auth: auth,
+        createObs: createObs,
+        isLoading: isLoading ?? false,
+        position: position,
+      );
+
+      var resourceData = res.data;
+
+      print('Response create Observation order : ${resourceData}');
+
+      if (!res.hasError) {
+        Fluttertoast.showToast(
+            msg: "Observation Add Successfully...", fontSize: 16.0);
+        Get.offNamed(
+          Routes.statutory,
+        );
+
+        // if (res.errorCode == 200) {
+        //   var responseMap = json.decode(res.data);
+        //   return responseMap;
+        // }
+
+        // Fluttertoast.showToast(msg: "Data add successfully...", fontSize: 16.0);
+      } else {
+        Utility.showDialog(res.errorCode.toString(), 'Observation ');
+        //return '';
+      }
+      return Map();
+    } catch (error) {
+      print(error.toString());
+      return Map();
+    }
+  }
+
   Future<Map<String, dynamic>> createWaterData(
     createWaterData,
     bool? isLoading,

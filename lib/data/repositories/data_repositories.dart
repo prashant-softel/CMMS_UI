@@ -1959,6 +1959,17 @@ class DataRepository extends DomainRepository {
         isLoading: isLoading ?? false,
         position: position,
       );
+  Future<ResponseModel> createObs(
+          {required String auth,
+          createObs,
+          bool? isLoading,
+          int? position}) async =>
+      await connectHelper.createObs(
+        auth: auth,
+        createObs: createObs,
+        isLoading: isLoading ?? false,
+        position: position,
+      );
   Future<ResponseModel> createWaterData({
     required String auth,
     createWaterData,
@@ -4107,20 +4118,20 @@ class DataRepository extends DomainRepository {
           facilityId: facilityId ?? 0,
           isLoading: isLoading ?? false,
           userId: userId);
-  Future<ResponseModel> scheduleLinkToPermit({
-    required String auth,
-    scheduleId,
-    permitId,
-    activity,
-    bool? isLoading,type
-  }) async =>
+  Future<ResponseModel> scheduleLinkToPermit(
+          {required String auth,
+          scheduleId,
+          permitId,
+          activity,
+          bool? isLoading,
+          type}) async =>
       await connectHelper.scheduleLinkToPermit(
-        auth: auth,
-        scheduleId: scheduleId,
-        permitId: permitId,
-        activity: activity,
-        isLoading: isLoading ?? false,type:type
-      );
+          auth: auth,
+          scheduleId: scheduleId,
+          permitId: permitId,
+          activity: activity,
+          isLoading: isLoading ?? false,
+          type: type);
   Future<ResponseModel> setPmTask({
     required String auth,
     scheduleId,
