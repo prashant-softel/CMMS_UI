@@ -98,7 +98,7 @@ abstract class LocalKeys {
   static const year = 'year';
   static const hazardous = 'hazardous';
   static const courseId = 'courseId';
-  static const statusId = 'statusId';
-  static const moduleId = 'moduleId';
+  static const statusId = 'status_id';
+  static const moduleId = 'module_id';
   static const date = 'date';
 }

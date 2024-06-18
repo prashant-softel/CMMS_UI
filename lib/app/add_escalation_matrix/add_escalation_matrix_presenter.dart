@@ -1,35 +1,40 @@
+import 'package:cmms/domain/models/escalation_details_model.dart';
 import 'package:cmms/domain/models/module_model.dart';
 import 'package:cmms/domain/models/role_model.dart';
 import 'package:cmms/domain/models/status_list_model.dart';
-import 'package:cmms/domain/models/type_permit_model.dart';
 import 'package:cmms/domain/usecases/add_escalation_matrix_usecase.dart';
 
-import '../../domain/models/facility_model.dart';
-
 class AddEscalationMatrixPresenter {
-  AddEscalationMatrixPresenter(this.viewIncidentReportUsecase);
-  AddEscalationMatrixUsecase viewIncidentReportUsecase;
+  AddEscalationMatrixPresenter(this.addEscalationMatrixUsecase);
+  AddEscalationMatrixUsecase addEscalationMatrixUsecase;
 
   Future<Map<String, dynamic>?> createEscalationMatrix({
     createEscalationMatrix,
     required bool isLoading,
   }) async {
-    return viewIncidentReportUsecase.createEscalationMatrix(
+    return addEscalationMatrixUsecase.createEscalationMatrix(
       createEscalationMatrix: createEscalationMatrix,
       isLoading: isLoading,
     );
   }
 
-  Future<List<TypePermitModel?>?> getTypePermitList(
-          {required int facility_id}) async =>
-      await viewIncidentReportUsecase.getTypePermitList(true, facility_id);
+  Future<List<EscalationDetails?>> getEscalationDetail({
+    int? moduleId,
+    int? statusId,
+    bool? isLoading,
+  }) async =>
+      await addEscalationMatrixUsecase.getEscalationDetail(
+        moduleId: moduleId,
+        statusId: statusId,
+        isLoading: isLoading,
+      );
 
   Future<List<ModuleModel?>?> getModuleList({
     int? facilityId,
     int? type,
     bool? isLoading,
   }) async =>
-      await viewIncidentReportUsecase.getModuleList(
+      await addEscalationMatrixUsecase.getModuleList(
         facilityId: facilityId ?? 0,
         type: type,
         isLoading: isLoading ?? false,
@@ -39,7 +44,7 @@ class AddEscalationMatrixPresenter {
     int? moduleId,
     bool? isLoading,
   }) async =>
-      await viewIncidentReportUsecase.getStatusList(
+      await addEscalationMatrixUsecase.getStatusList(
         moduleId: moduleId,
         isLoading: isLoading ?? false,
       );
@@ -47,15 +52,27 @@ class AddEscalationMatrixPresenter {
   Future<List<RoleModel?>?> getRoleList({
     bool? isLoading,
   }) async =>
-      await viewIncidentReportUsecase.getRoleList(
+      await addEscalationMatrixUsecase.getRoleList(
         isLoading: isLoading ?? false,
       );
 
-  Future<List<FacilityModel?>?> getFacilityList() async =>
-      await viewIncidentReportUsecase.getFacilityList();
+  void saveStatusValue({String? statusId}) async {
+    return addEscalationMatrixUsecase.saveStatusValue(statusId: statusId);
+  }
 
-  Future<String?> getUserAccessList() async =>
-      await viewIncidentReportUsecase.getUserAccessList();
+  void clearStatusValue() async =>
+      addEscalationMatrixUsecase.clearStatusValue();
 
-  ///
+  Future<String?> getStatusValue() async =>
+      await addEscalationMatrixUsecase.getStatusValue();
+
+  void saveModuleValue({String? moduleId}) async {
+    return addEscalationMatrixUsecase.saveModuleValue(moduleId: moduleId);
+  }
+
+  void clearModuleValue() async =>
+      addEscalationMatrixUsecase.clearModuleValue();
+
+  Future<String?> getModuleValue() async =>
+      await addEscalationMatrixUsecase.getModuleValue();
 }

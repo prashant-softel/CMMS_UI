@@ -11,6 +11,7 @@ import 'package:cmms/domain/models/course_category_model.dart';
 import 'package:cmms/domain/models/dashboard_model.dart';
 import 'package:cmms/domain/models/documentmaster_model.dart';
 import 'package:cmms/domain/models/dsm_list_model.dart';
+import 'package:cmms/domain/models/escalation_details_model.dart';
 import 'package:cmms/domain/models/escalation_matrix_list_model.dart';
 import 'package:cmms/domain/models/get_mc_task_equipment_model.dart';
 import 'package:cmms/domain/models/get_observation_list_model.dart';
@@ -735,7 +736,7 @@ class Repository {
     }
   }
 
-  Future<NewPermitDetailModel?> getEscalationDetail({
+  Future<List<EscalationDetails?>> getEscalationDetail({
     int? moduleId,
     int? statusId,
     bool? isLoading,
@@ -748,25 +749,21 @@ class Repository {
         statusId: statusId,
         isLoading: isLoading ?? false,
       );
-
-      print({"permitdetail", res.data});
-
       if (!res.hasError) {
         if (res.errorCode == 200) {
-          final NewPermitDetailModel _newPermitDetailModel =
-              newPermitDetailModelFromJson(res.data);
-
-          var responseMap = _newPermitDetailModel;
+          final List<EscalationDetails> _escalationDetails =
+              EscalationDetailsFromJson(res.data);
+          var responseMap = _escalationDetails;
           print({"responsedata", responseMap});
           return responseMap;
         }
       } else {
         Utility.showDialog(res.errorCode.toString(), 'escalation');
       }
-      return null;
+      return [];
     } catch (error) {
       print(error.toString());
-      return null;
+      return [];
     }
   }
 

@@ -4,11 +4,10 @@ import 'package:cmms/app/app.dart';
 import 'package:cmms/app/escalation_matrix_list/escalation_matrix_list_presenter.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/domain/models/escalation_matrix_list_model.dart';
-import 'package:cmms/domain/models/incident_report_list_model.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rxdart/subjects.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
-import '../../domain/models/facility_model.dart';
 
 class EscalationMatrixListController extends GetxController {
   EscalationMatrixListController(this.escalationMatrixPresenter);
@@ -16,183 +15,127 @@ class EscalationMatrixListController extends GetxController {
 
   final HomeController homeController = Get.find();
   RxList<EscalationMatListModel> matrixlist = <EscalationMatListModel>[].obs;
-  RxList<EscalationMatListModel> Buffermatrixlist =
+  RxList<EscalationMatListModel> buffermatrixlist =
       <EscalationMatListModel>[].obs;
-  var incidentReportList = <IncidentReportListModel>[];
-
-  RxList<FacilityModel?> facilityList = <FacilityModel>[].obs;
-  Rx<bool> isFacilitySelected = true.obs;
-  Rx<String> selectedFacility = ''.obs;
-
-//   PaginationController paginationController = PaginationController(
-//     rowCount: 0,
-//     rowsPerPage: 10,
-//   );
   PaginationController paginationEscalationMatrixController =
       PaginationController(
     rowCount: 0,
     rowsPerPage: 10,
   );
-
+  RxBool isLoading = true.obs;
   BehaviorSubject<int> _facilityId = BehaviorSubject.seeded(0);
   Stream<int> get facilityId$ => _facilityId.stream;
   int get facilityId1 => _facilityId.value;
 
   StreamSubscription<int>? facilityIdStreamSubscription;
-  int facilityId = 0;
+  RxInt facilityId = 0.obs;
 
-  ///
-// int? wc_id = 0;
+  final columnVisibility = ValueNotifier<Map<String, bool>>({
+    "Module ID": true,
+    "Module Name": true,
+    "Status Name": true,
+    "No Of Escalation": true,
+  });
+
+  final Map<String, double> columnwidth = {
+    "Module ID": 150,
+    "Module Name": 400,
+    "Status Name": 400,
+    "No Of Escalation": 200,
+  };
+
+  RxString ModuleIdFilterText = ''.obs;
+  RxString ModuleNameFilterText = ''.obs;
+  RxString StatusNameFilterText = ''.obs;
+  RxString NoOfEscalationFilterText = ''.obs;
+  RxString ActionFilterText = ''.obs;
+
+  Map<String, RxString> filterText = {};
+  void setColumnVisibility(String columnName, bool isVisible) {
+    final newVisibility = Map<String, bool>.from(columnVisibility.value)
+      ..[columnName] = isVisible;
+    columnVisibility.value = newVisibility;
+    print({"updated columnVisibility": columnVisibility});
+  }
+
   @override
   void onInit() async {
-    // wc_id = Get.arguments;
-    // print('WC_Id:$wc_id');
-    facilityIdStreamSubscription = homeController.facilityId$.listen((event) {
-      facilityId = event;
-      Future.delayed(Duration(seconds: 2), () {
-        getEscalationMatrixList();
+    try {
+      this.filterText = {
+        "Module ID": ModuleIdFilterText,
+        "Module Name": ModuleNameFilterText,
+        "Status Name": StatusNameFilterText,
+        "No Of Escalation": NoOfEscalationFilterText,
+      };
+      facilityIdStreamSubscription =
+          homeController.facilityId$.listen((event) async {
+        facilityId.value = event;
+        await getEscalationMatrixList();
       });
-    });
-
-    Future.delayed(Duration(seconds: 1), () {
-      getFacilityList();
-    });
-
-    super.onInit();
+      super.onInit();
+    } catch (e) {
+      print(e);
+    }
   }
 
   void search(String keyword) {
-    print('Keyword: $keyword');
     if (keyword.isEmpty) {
-      matrixlist.value = Buffermatrixlist.value;
+      matrixlist.value = buffermatrixlist;
       return;
     }
-    List<EscalationMatListModel> filteredList = Buffermatrixlist.where((item) =>
-        (item.moduleName.toString().contains(keyword.toLowerCase()) ?? false) ||
-        (item.statusName
-                .toString()
-                .toLowerCase()
-                .contains(keyword.toLowerCase()) ??
-            false)).toList();
-    matrixlist.value == filteredList;
-  }
-
-  Future<void> getFacilityList() async {
-    final _facilityList = await escalationMatrixPresenter.getFacilityList();
-    //print('Facility25:$_facilityList');
-    if (_facilityList != null) {
-      for (var facility in _facilityList) {
-        facilityList.add(facility);
-      }
-
-      selectedFacility.value = facilityList[0]?.name ?? '';
-      _facilityId.sink.add(facilityList[0]?.id ?? 0);
-    }
+    List<EscalationMatListModel> filteredList = buffermatrixlist
+        .where((item) =>
+            (item.moduleId
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false) ||
+            (item.moduleName
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false) ||
+            (item.statusName
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false) ||
+            (item.statusName
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false))
+        .toList();
+    matrixlist.value = filteredList;
   }
 
   Future<void> getEscalationMatrixList() async {
-    matrixlist.value.clear();
     matrixlist.value = <EscalationMatListModel>[];
-    Buffermatrixlist.value = <EscalationMatListModel>[];
+    buffermatrixlist.value = <EscalationMatListModel>[];
     final _matrixlist = await escalationMatrixPresenter.getEscalationMatrixList(
-        isLoading: true);
-    for (var matrix_list in _matrixlist) {
-      matrixlist.add(matrix_list);
-      Buffermatrixlist.add(matrix_list);
+      isLoading: isLoading.value,
+    );
+    if (_matrixlist.isNotEmpty) {
+      buffermatrixlist.value = _matrixlist;
+      matrixlist.value = _matrixlist;
     }
+    isLoading.value = false;
+    paginationEscalationMatrixController = PaginationController(
+      rowCount: matrixlist.length,
+      rowsPerPage: 10,
+    );
+    update(['escalator_matrix_list']);
   }
 
-  // Future<void> getEscalationMatrixList(
-  //     bool isLoading) async {
-  //   escalationMatrixList.value = <EscalationMatrixListModel>[];
-
-  //   final list = await escalationMatrixPresenter.getEscalationMatrixList(
-  //       isLoading: isLoading,
-  //       module: "JOB"
-  //       );
-
-  //   print('Escalation Matrix List:$list');
-  //   for (var escalation_list in list) {
-  //     escalationMatrixList.add(escalation_list);
-  //   }
-  //   escalationMatrixList = list;
-  //   paginationEscalationMatrixController = PaginationController(
-  //     rowCount: escalationMatrixList.length,
-  //     rowsPerPage: 10,
-  //   );
-  //   update(['incident_report_list']);
-  // }
-
-  void onValueChanged(dynamic list, dynamic value) {
-    print('Valuesd:${value}');
-    switch (list.runtimeType) {
-      case RxList<FacilityModel>:
-        {
-          if (value != "Please Select") {
-            int facilityIndex =
-                facilityList.indexWhere((x) => x?.name == value);
-
-            _facilityId.add(facilityList[facilityIndex]?.id ?? 0);
-          } else {
-            facilityId = 0;
-          }
-        }
-        break;
-
-      default:
-        {
-          //statements;
-        }
-        break;
-    }
-  }
-
-  // void checkForm() {
-
-  //   if (warrantyClaimTitleTextController.text == '') {
-  //     Fluttertoast.showToast(
-  //         msg: 'Title Field cannot be empty', timeInSecForIosWeb: 5);
-  //   }
-  //   if (warrantyClaimBriefDescTextController.text == '') {
-  //     Fluttertoast.showToast(
-  //         msg: 'Description Field cannot be empty', timeInSecForIosWeb: 5);
-  //   }
-  //   if (affectedSerialNoTextController.text == '') {
-  //     Fluttertoast.showToast(
-  //         msg: 'Affected Serial No Field cannot be empty',
-  //         timeInSecForIosWeb: 5);
-  //   }
-  //   if (failureDateTimeCtrlrWebBuffer == null) {
-  //     Fluttertoast.showToast(
-  //         msg: 'Failure Date Time Field cannot be empty',
-  //         timeInSecForIosWeb: 5);
-  //   }
-
-  //   if (orderReferenceNoTextController.text == '') {
-  //     Fluttertoast.showToast(
-  //         msg: 'Order Reference No Field cannot be empty',
-  //         timeInSecForIosWeb: 5);
-  //   }
-  //   if (costOfReplacementTextController.text == '') {
-  //     Fluttertoast.showToast(
-  //         msg: 'Cost of Replacement Field cannot be empty',
-  //         timeInSecForIosWeb: 5);
-  //   }
-  //   if (immediateCorrectiveActionTextController.text == '') {
-  //     Fluttertoast.showToast(
-  //         msg: 'Corrective Action Field cannot be empty',
-  //         timeInSecForIosWeb: 5);
-  //   }
-  //   if (requestManufactureTextController.text == '') {
-  //     Fluttertoast.showToast(
-  //         msg: 'Request Field cannot be empty', timeInSecForIosWeb: 5);
-  //   }
-
-  // }
-
-  Future<void> viewEscalationMatrix({int? id}) async {
-    Get.toNamed(Routes.viewEscalatiomMatrixContentWeb, arguments: id);
-    print('Argument$id');
+  Future<void> viewEscalationMatrix(
+      {required int moudle_id, required int status_id}) async {
+    Get.toNamed(
+      Routes.viewEscalatiomMatrixContentWeb,
+      arguments: {
+        "module_id": moudle_id,
+        "status_id": status_id,
+      },
+    );
   }
 
   Future<void> editEscalationMatrix({int? id}) async {
