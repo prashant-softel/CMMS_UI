@@ -295,19 +295,6 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                                               Container(
                                                                 decoration:
                                                                     BoxDecoration(
-                                                                  // boxShadow: [
-                                                                  //   BoxShadow(
-                                                                  //     color: Colors
-                                                                  //         .black26,
-                                                                  //     offset:
-                                                                  //         const Offset(
-                                                                  //       5.0,
-                                                                  //       5.0,
-                                                                  //     ),
-                                                                  //     blurRadius: 5.0,
-                                                                  //     spreadRadius: 1.0,
-                                                                  //   ),
-                                                                  // ],
                                                                   borderRadius:
                                                                       BorderRadius
                                                                           .circular(
@@ -322,11 +309,18 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                                                       5,
                                                                   dropdownList:
                                                                       controller
-                                                                          .typeOfObservation,
-                                                                  // selectedValue: ,
+                                                                          .typeOfObsList,
+                                                                  isValueSelected:
+                                                                      controller
+                                                                          .isSelectedTypeOfObs
+                                                                          .value,
+                                                                  selectedValue:
+                                                                      controller
+                                                                          .selectedTypeOfObs
+                                                                          .value,
                                                                   onValueChanged:
-                                                                      (typeOfObservation,
-                                                                          selectedValue) {},
+                                                                      controller
+                                                                          .onValueChanged,
                                                                 ),
                                                               ),
                                                             ],

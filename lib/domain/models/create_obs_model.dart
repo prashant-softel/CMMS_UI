@@ -14,9 +14,9 @@ class CreateObsModel {
 
   String? cost_type;
   String? date_of_observation;
-  String? type_of_observation;
+  int? type_of_observation;
   String? location_of_observation;
-  String? source_of_observation;
+  int? source_of_observation;
   String? target_date;
   String? observation_description;
   dynamic uploadfileIds;
