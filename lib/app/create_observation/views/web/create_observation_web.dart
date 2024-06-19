@@ -11,6 +11,7 @@ import 'package:cmms/app/widgets/date_picker.dart';
 import 'package:cmms/app/widgets/dropdown_web.dart';
 import 'package:cmms/app/widgets/file_upload_widget_web2.dart';
 import 'package:cmms/app/widgets/file_upload_with_dropzone_widget.dart';
+import 'package:cmms/app/widgets/history_table_widget_web.dart';
 import 'package:cmms/app/widgets/stock_dropdown.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -560,6 +561,60 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                                       ),
                                                     ),
                                                   ),
+                                                  Dimens.boxHeight15,
+                                                  (controller.historyList !=
+                                                              null &&
+                                                          controller
+                                                              .historyList!
+                                                              .isNotEmpty)
+                                                      ? Container(
+                                                          margin: Dimens
+                                                              .edgeInsets20,
+                                                          height: ((controller
+                                                                          .historyList
+                                                                          ?.length ??
+                                                                      0) *
+                                                                  40) +
+                                                              120,
+                                                          decoration:
+                                                              BoxDecoration(
+                                                            border: Border.all(
+                                                              color: ColorValues
+                                                                  .lightGreyColorWithOpacity35,
+                                                              width: 1,
+                                                            ),
+                                                          ),
+                                                          child: //
+                                                              Column(
+                                                            children: [
+                                                              Padding(
+                                                                padding:
+                                                                    const EdgeInsets
+                                                                        .all(
+                                                                        8.0),
+                                                                child: Row(
+                                                                  children: [
+                                                                    Text(
+                                                                      "Statutory Compliance  History ",
+                                                                      style: Styles
+                                                                          .blue700,
+                                                                    ),
+                                                                  ],
+                                                                ),
+                                                              ),
+                                                              Expanded(
+                                                                child:
+                                                                    HistoryTableWidgetWeb(
+                                                                  historyList:
+                                                                      controller
+                                                                          .historyList,
+                                                                ),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        )
+                                                      : Dimens.box0,
+                                                  Dimens.boxHeight15,
                                                 ],
                                               ),
                                             ),

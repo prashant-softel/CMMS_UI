@@ -120,7 +120,7 @@ class CreateObservationController extends GetxController {
   }
 
   Future<void> getObsHistory({required int id}) async {
-    int moduleType = 406;
+    int moduleType = 407;
 
     historyList?.value = await createObservationPresenter.getHistory(
           moduleType,
