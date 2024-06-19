@@ -1,4 +1,3 @@
-
 import '../../domain/models/asset_master_model.dart';
 import '../../domain/models/frequency_model.dart';
 import '../../domain/models/inventory_category_model.dart';
@@ -58,5 +57,26 @@ class AssetMasterPresenter {
       isLoading: isLoading,
     );
     return true;
+  }
+  void clearValue() async => moduleUsecase.clearValue();
+   void clearpmTaskValue() async => moduleUsecase.clearpmTaskValue();
+  void clearStoreTaskData() {
+    moduleUsecase.clearStoreTaskData();
+  }
+
+  void clearStoreTaskActivityData() {
+    moduleUsecase.clearStoreTaskActivityData();
+  }
+
+  void clearStoreTaskfromActorData() {
+    moduleUsecase.clearStoreTaskfromActorData();
+  }
+
+  void clearStoreTasktoActorData() {
+    moduleUsecase.clearStoreTasktoActorData();
+  }
+
+  void clearStoreTaskWhereUsedData() {
+    moduleUsecase.clearStoreTaskWhereUsedData();
   }
 }

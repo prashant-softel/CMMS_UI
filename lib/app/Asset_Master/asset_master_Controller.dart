@@ -1,8 +1,10 @@
+// asset controller master
 import 'dart:async';
 
 import 'package:cmms/app/app.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 import '../../domain/models/asset_master_model.dart';
 import '../../domain/models/create_modulelist_model.dart';
@@ -39,15 +41,77 @@ class AssetMasterController extends GetxController {
       <InventoryCategoryModel>[].obs;
   Rx<String> selectedequipment = ''.obs;
   Rx<bool> isSelectedequipment = true.obs;
+  Rx<bool> isLoading = true.obs;
+  RxString materialNameFilterText = ''.obs;
+    RxString acdcFilterText = ''.obs;
+  RxString materialTypeFilterText = ''.obs;
+  RxString materialCategoryFilterText = ''.obs;
+  
+    RxString minRequiredQtyFilterText = ''.obs;
+     RxString minReorderQtyTextFilterText = ''.obs;
+      RxString descriptionFilterText = ''.obs;
+      RxString unitofMeasurementFilterText = ''.obs;
+      RxString approvalRequiredFilterText = ''.obs;
+
+      
+
+      
+     
+
+   RxList<AssetMasterModel?> AssetList = <AssetMasterModel?>[].obs;
   RxList<int> selectedEquipmentCategoryIdList = <int>[].obs;
   RxList<AssetMasterModel?>? moduleList = <AssetMasterModel?>[].obs;
   RxList<AssetMasterModel> buffermodulelist = <AssetMasterModel>[].obs;
+  Rx<DateTime> fromDate = DateTime.now().subtract(Duration(days: 7)).obs;
+    Rx<DateTime> toDate = DateTime.now().obs;
+  bool openFromDateToStartDatePicker = false;
+
+  String get formattedFromdate =>
+      DateFormat('dd/MM/yyyy').format(fromDate.value);
+  String get formattedTodate => DateFormat('dd/MM/yyyy').format(toDate.value);
+  String get formattedTodate1 => DateFormat('yyyy-MM-dd').format(toDate.value);
+  String get formattedFromdate1 =>
+      DateFormat('yyyy-MM-dd').format(fromDate.value);
   int facilityId = 0;
   int type = 1;
   PaginationController paginationController = PaginationController(
     rowCount: 0,
     rowsPerPage: 10,
   );
+  RxString mdmFilterText = ''.obs;
+   Rx<int> AssetId = 0.obs;
+
+    final columnVisibility = ValueNotifier<Map<String, bool>>({
+    "MDM Code": true,
+    "Material Name": true,
+    "AC/DC": true,
+    "Material Type": true,
+    "Material Category": true,
+    "Min. Required Qty":true,
+    "Min. Reorder Qty":true,
+    "Description":true,
+    "Unit Of Measurement":true,
+    "Approval Required":true,
+  });
+    final Map<String, double> columnwidth = {
+     "MDM Code": 200,
+    "Material Name": 400,
+    "AC/DC": 200,
+    "Material Type": 200,
+    "Material Category": 200,
+     "Min. Required Qty":200,
+    "Min. Reorder Qty":200,
+    "Description":300,
+    "Unit Of Measurement":200,
+    "Approval Required":200,
+  };
+    Map<String, RxString> filterText = {};
+  void setColumnVisibility(String columnName, bool isVisible) {
+    final newVisibility = Map<String, bool>.from(columnVisibility.value)
+      ..[columnName] = isVisible;
+    columnVisibility.value = newVisibility;
+    // print({"updated columnVisibility": columnVisibility});
+  }
 
   AssetMasterModel? moduleListModel;
   var isToggleOn = false.obs;
@@ -58,6 +122,7 @@ class AssetMasterController extends GetxController {
   var isToggle5On = false.obs;
   var isToggle6On = false.obs;
   final isSuccess = false.obs;
+
 
   void toggle() {
     isToggleOn.value = !isToggleOn.value;
@@ -97,20 +162,34 @@ class AssetMasterController extends GetxController {
   StreamSubscription<int>? facilityIdStreamSubscription;
   @override
   void onInit() async {
+    this.filterText={
+        "MDM Code": mdmFilterText,
+    "Material Name": materialNameFilterText,
+    "AC/DC": acdcFilterText,
+    "Material Type": materialTypeFilterText,
+    "Material Category": materialCategoryFilterText,
+     "Min. Required Qty":minRequiredQtyFilterText,
+    "Min. Reorder Qty":minReorderQtyTextFilterText,
+    "Description":descriptionFilterText,
+    "Unit Of Measurement":unitofMeasurementFilterText,
+    "Approval Required":approvalRequiredFilterText,
+
+    };
+
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
       facilityId = event;
       Future.delayed(Duration(seconds: 2), () {
-        getAssetMasterList(facilityId, type, true, false);
+        getAssetMasterList(facilityId, type, false);
       });
     });
     super.onInit();
   }
 
   Future<void> getAssetMasterList(
-      int facilityId, int type, bool isLoading, bool? isExport) async {
+      int facilityId, int type, bool? isExport) async {
     moduleList?.value = <AssetMasterModel>[];
     final _moduleList = await moduleListPresenter.getAssetMasterList(
-        facilityId: facilityId, type: type, isLoading: isLoading,isExport:isExport);
+        facilityId: facilityId, type: type, isLoading: isLoading.value,isExport:isExport);
     buffermodulelist.value = <AssetMasterModel>[];
     // moduleList!.value = _moduleList ?? <AssetMasterModel>[];
     buffermodulelist.value =
@@ -123,20 +202,10 @@ class AssetMasterController extends GetxController {
           _moduleList.whereType<AssetMasterModel>().toList() ??
               <AssetMasterModel>[];
 
-      paginationController = PaginationController(
-        rowCount: moduleList!.length,
-        rowsPerPage: 30,
-      );
 
-      if (moduleList != null && moduleList!.isNotEmpty) {
-        moduleListModel = moduleList![0];
-        var preventiveCheckListJson = moduleListModel?.toJson();
-        moduleListTableColumns.value = <String>[];
-        for (var key in preventiveCheckListJson?.keys.toList() ?? []) {
-          moduleListTableColumns.add(key);
-        }
+        isLoading.value=false;
       }
-    }
+    
   }
 
   void search(String keyword) {
@@ -197,7 +266,7 @@ class AssetMasterController extends GetxController {
       );
       return true;
     }
-    getAssetMasterList(facilityId, type, true, false);
+    getAssetMasterList(facilityId, type, false);
     return true;
   }
 
@@ -220,7 +289,7 @@ class AssetMasterController extends GetxController {
     isToggle5On.value = false;
     isToggle6On.value = false;
     Future.delayed(Duration(seconds: 1), () {
-      getAssetMasterList(facilityId, type, true, false);
+      getAssetMasterList(facilityId, type, false);
     });
     Future.delayed(Duration(seconds: 5), () {
       isSuccess.value = false;
@@ -264,7 +333,7 @@ class AssetMasterController extends GetxController {
                 onPressed: () {
                   deleteModulelist(module_id).then((value) {
                     Get.back();
-                    getAssetMasterList(facilityId, type, true, false);
+                    getAssetMasterList(facilityId, type, false);
                   });
                 },
                 child: Text('YES'),
@@ -312,7 +381,37 @@ class AssetMasterController extends GetxController {
   //   );
   //   return true;
   // }
+  void getmoduleListByDate(){
+ getAssetMasterList(facilityId,type,false);
+  }
+void clearStoreData() {
+    moduleListPresenter.clearValue();
+  }
+   void clearpmTaskValue() {
+    moduleListPresenter.clearpmTaskValue();
+  }
+
+  void clearStoreTaskData() {
+    moduleListPresenter.clearStoreTaskData();
+  }
+
+  void clearStoreTaskActivityData() {
+    moduleListPresenter.clearStoreTaskActivityData();
+  }
+
+  void clearStoreTaskfromActorData() {
+    moduleListPresenter.clearStoreTaskfromActorData();
+  }
+
+  void clearStoreTasktoActorData() {
+    moduleListPresenter.clearStoreTasktoActorData();
+  }
+
+  void clearStoreTaskWhereUsedData() {
+    moduleListPresenter.clearStoreTaskWhereUsedData();
+  }
   void export() {
-    getAssetMasterList(facilityId, type, true, true);
+    getAssetMasterList(facilityId, type,true);
   }
 }
+
