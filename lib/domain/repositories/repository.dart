@@ -891,7 +891,7 @@ class Repository {
         Fluttertoast.showToast(
             msg: "Observation Add Successfully...", fontSize: 16.0);
         Get.offNamed(
-          Routes.statutory,
+          Routes.observationListScreen,
         );
 
         // if (res.errorCode == 200) {

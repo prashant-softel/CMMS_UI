@@ -191,10 +191,10 @@ class CreateObservationController extends GetxController {
         observation_description: _discriptionCtrlr,
         preventive_action: _correctivePreventiveCtrlr,
         responsible_person: _responsiblePersonCtrlr,
-        risk_type_id: 1,
-        source_of_observation: "madhuban",
+        risk_type_id: incidenttypeId,
+        source_of_observation: 1,
         target_date: _targetDateTc,
-        type_of_observation: "",
+        type_of_observation: 2,
         uploadfileIds: [101, 202],
       );
 
