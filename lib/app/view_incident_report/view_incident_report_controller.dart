@@ -107,6 +107,9 @@ class ViewIncidentReportController extends GetxController {
 
   RxList<DetailsOfInjuredPersonUpdate?>? detailsOfInjuredPersonList =
       <DetailsOfInjuredPersonUpdate?>[].obs;
+
+  RxList<DetailsOfOtherInjuredPersonUpdate?>? detailsOfOtherInjuredPersonList =
+      <DetailsOfOtherInjuredPersonUpdate?>[].obs;
   RxList<WhyWhyAnalysisUpdate?>? whyWhyAnalysisList =
       <WhyWhyAnalysisUpdate?>[].obs;
 
@@ -329,6 +332,8 @@ class ViewIncidentReportController extends GetxController {
       ///New Data adding
       detailsOfInjuredPersonList?.value =
           incidentReportDetailsModel.value?.injured_person ?? [];
+           detailsOfOtherInjuredPersonList?.value =
+          incidentReportDetailsModel.value?.Otherinjured_person ?? [];
       whyWhyAnalysisList?.value =
           incidentReportDetailsModel.value?.why_why_analysis ?? [];
       rootCauseList?.value = incidentReportDetailsModel.value?.root_cause ?? [];
@@ -341,6 +346,8 @@ class ViewIncidentReportController extends GetxController {
       file_list?.value = incidentReportDetailsModel.value?.fileList ?? [];
     }
   }
+//other injured person
+
 
   void approveIncidentReportButton({int? id}) async {
     {

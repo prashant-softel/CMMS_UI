@@ -929,6 +929,228 @@ class ViewIncidentReportContentWeb
                                                         ],
                                                       ),
                                                     ),
+
+                        
+
+                                                     ///Details Of OtherInjured Person
+                                              controller
+                                                      .detailsOfOtherInjuredPersonList!
+                                                      .isEmpty
+                                                  ? Dimens.box0
+                                                  : Container(
+                                                      margin:
+                                                          Dimens.edgeInsets20,
+                                                      height: ((controller
+                                                                      .detailsOfOtherInjuredPersonList
+                                                                      ?.length ??
+                                                                  0) *
+                                                              50) +
+                                                          125,
+                                                      // width:
+                                                      //     MediaQuery.of(context)
+                                                      //             .size
+                                                      //             .width /
+                                                      //         1.2,
+                                                      decoration: BoxDecoration(
+                                                        border: Border.all(
+                                                          color: ColorValues
+                                                              .lightGreyColorWithOpacity35,
+                                                          width: 1,
+                                                        ),
+                                                        boxShadow: [
+                                                          BoxShadow(
+                                                            color: ColorValues
+                                                                .appBlueBackgroundColor,
+                                                            spreadRadius: 2,
+                                                            blurRadius: 5,
+                                                            offset:
+                                                                Offset(0, 2),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                      child: Column(
+                                                        children: [
+                                                          Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                    .all(10.0),
+                                                            child: Row(
+                                                              children: [
+                                                                Text(
+                                                                  "Details Of Other Injured Person",
+                                                                  style: Styles
+                                                                      .blue700,
+                                                                ),
+                                                              ],
+                                                            ),
+                                                          ),
+                                                          // Divider(
+                                                          //   color: ColorValues.greyLightColour,
+                                                          // ),
+                                                          Expanded(
+                                                            child: DataTable2(
+                                                              border: TableBorder.all(
+                                                                  color: Color
+                                                                      .fromARGB(
+                                                                          255,
+                                                                          206,
+                                                                          229,
+                                                                          234)),
+                                                              columns: [
+                                                                DataColumn(
+                                                                    label: Text(
+                                                                  "Name Of Injured\nPerson",
+                                                                  style: TextStyle(
+                                                                      fontSize:
+                                                                          12,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold),
+                                                                )),
+                                                                DataColumn(
+                                                                    label: Text(
+                                                                  "Gender",
+                                                                  style: TextStyle(
+                                                                      fontSize:
+                                                                          12,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold),
+                                                                )),
+                                                                DataColumn(
+                                                                    label: Text(
+                                                                  "Trade/\nDesignation",
+                                                                  style: TextStyle(
+                                                                      fontSize:
+                                                                          12,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold),
+                                                                )),
+                                                                DataColumn(
+                                                                    label: Text(
+                                                                  "Address",
+                                                                  style: TextStyle(
+                                                                      fontSize:
+                                                                          12,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold),
+                                                                )),
+                                                                DataColumn(
+                                                                    label: Text(
+                                                                  "Name Of\nContractor",
+                                                                  style: TextStyle(
+                                                                      fontSize:
+                                                                          12,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold),
+                                                                )),
+                                                                DataColumn(
+                                                                    label: Text(
+                                                                  "Body Part\nInjured",
+                                                                  style: TextStyle(
+                                                                      fontSize:
+                                                                          12,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold),
+                                                                )),
+                                                                DataColumn(
+                                                                    label: Text(
+                                                                  "Work Experience",
+                                                                  style: TextStyle(
+                                                                      fontSize:
+                                                                          12,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold),
+                                                                )),
+                                                                DataColumn(
+                                                                    label: Text(
+                                                                  "Plant &\nEquipment",
+                                                                  style: TextStyle(
+                                                                      fontSize:
+                                                                          12,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold),
+                                                                )),
+                                                                DataColumn(
+                                                                    label: Text(
+                                                                  "Exact Location",
+                                                                  style: TextStyle(
+                                                                      fontSize:
+                                                                          12,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold),
+                                                                )),
+                                                              ],
+                                                              rows: List<
+                                                                  DataRow>.generate(
+                                                                controller
+                                                                        .detailsOfOtherInjuredPersonList
+                                                                        ?.length ??
+                                                                    0,
+                                                                (index) =>
+                                                                    DataRow(
+                                                                        cells: [
+                                                                      DataCell(Text(controller
+                                                                              .detailsOfOtherInjuredPersonList?[index]
+                                                                              ?.name
+                                                                              .toString() ??
+                                                                          '')),
+                                                                      DataCell(Text(
+                                                                          '${controller.detailsOfOtherInjuredPersonList?[index]?.sex}')),
+                                                                      DataCell(Text(controller
+                                                                              .detailsOfOtherInjuredPersonList?[index]
+                                                                              ?.designation
+                                                                              .toString() ??
+                                                                          '')),
+                                                                      DataCell(
+                                                                        Text(
+                                                                          controller.detailsOfOtherInjuredPersonList?[index]?.address.toString() ??
+                                                                              '',
+                                                                          overflow:
+                                                                              TextOverflow.ellipsis,
+                                                                        ),
+                                                                      ),
+                                                                      DataCell(Text(controller
+                                                                              .detailsOfOtherInjuredPersonList?[index]
+                                                                              ?.name_contractor
+                                                                              .toString() ??
+                                                                          '')),
+                                                                      DataCell(Text(controller
+                                                                              .detailsOfOtherInjuredPersonList?[index]
+                                                                              ?.body_part_and_nature_of_injury
+                                                                              .toString() ??
+                                                                          '')),
+                                                                      DataCell(Text(controller
+                                                                              .detailsOfOtherInjuredPersonList?[index]
+                                                                              ?.work_experience_years
+                                                                              .toString() ??
+                                                                          '')),
+                                                                      DataCell(Text(controller
+                                                                              .detailsOfOtherInjuredPersonList?[index]
+                                                                              ?.plant_equipment_involved
+                                                                              .toString() ??
+                                                                          '')),
+                                                                      DataCell(Text(controller
+                                                                              .detailsOfOtherInjuredPersonList?[index]
+                                                                              ?.location_of_incident
+                                                                              .toString() ??
+                                                                          '')),
+                                                                    ]),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+
+
                                               controller.incidentReportDetailsModel
                                                           .value?.fileList ==
                                                       null

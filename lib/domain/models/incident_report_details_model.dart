@@ -86,6 +86,7 @@ class IncidentReportDetailsModel {
     this.is_why_why_required,
     this.is_investigation_required,
     this.injured_person,
+    this.Otherinjured_person,
     this.fileList,
 
     // this.additionalEmailEmployees,
@@ -279,6 +280,10 @@ class IncidentReportDetailsModel {
             ? List<DetailsOfInjuredPersonUpdate>.from(json["injured_person"]
                 ?.map((x) => DetailsOfInjuredPersonUpdate.fromJson(x)))
             : [],
+             Otherinjured_person: json['other_injured'] != null
+            ? List<DetailsOfOtherInjuredPersonUpdate>.from(json["other_injured"]
+                ?.map((x) => DetailsOfOtherInjuredPersonUpdate.fromJson(x)))
+            : [],
         fileList: json['file_list'] != null
             ? List<FileList>.from(
                 json["file_list"]?.map((x) => FileList.fromJson(x)))
@@ -363,6 +368,7 @@ class IncidentReportDetailsModel {
         "investigation_team":
             List<dynamic>.from(investigation_team!.map((x) => x)),
         "injured_person": List<dynamic>.from(injured_person!.map((x) => x)),
+        "Otherinjured_person": List<dynamic>.from(Otherinjured_person!.map((x) => x)),
         "file_list": List<dynamic>.from(fileList!.map((x) => x)),
 
         // "externalEmails": List<dynamic>.from(externalEmails!.map((x) => x)),
@@ -455,7 +461,7 @@ class DetailsOfOtherInjuredPersonUpdate {
   String? name;
   int? person_type;
   int? age;
-  int? sex;
+  String? sex;
   String? gender;
   String? designation;
   String? address;
