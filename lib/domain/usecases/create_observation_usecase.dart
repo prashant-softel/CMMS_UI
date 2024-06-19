@@ -1,6 +1,7 @@
 import 'package:cmms/domain/models/facility_model.dart';
 import 'package:cmms/domain/models/history_model.dart';
 import 'package:cmms/domain/models/incident_risk_type_model.dart';
+import 'package:cmms/domain/models/source_of_obs_list_model.dart';
 import 'package:cmms/domain/models/type_of_obs_list_model.dart';
 import 'package:cmms/domain/repositories/local_storage_keys.dart';
 import 'package:cmms/domain/repositories/repository.dart';
@@ -51,6 +52,12 @@ class CreateObservationUsecase {
     bool isLoading = true,
   }) async =>
       await repository.getTypeOfObservationList(
+        isLoading: isLoading,
+      );
+  Future<List<SourceOfObservationListModel?>?> getSourceObservationList({
+    bool isLoading = true,
+  }) async =>
+      await repository.getSourceObservationList(
         isLoading: isLoading,
       );
 }

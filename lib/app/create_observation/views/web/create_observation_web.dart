@@ -282,6 +282,27 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                                                 textController:
                                                                     controller
                                                                         .obsDateTc,
+                                                                errorController:
+                                                                    controller
+                                                                            .isObsDateTcInvalid
+                                                                            .value
+                                                                        ? "Required field"
+                                                                        : null,
+                                                                onChanged:
+                                                                    (value) {
+                                                                  if (value
+                                                                          .trim()
+                                                                          .length >
+                                                                      0) {
+                                                                    controller
+                                                                        .isObsDateTcInvalid
+                                                                        .value = false;
+                                                                  } else {
+                                                                    controller
+                                                                        .isObsDateTcInvalid
+                                                                        .value = true;
+                                                                  }
+                                                                },
                                                               ),
                                                             ],
                                                           ),
@@ -368,11 +389,18 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                                                       5,
                                                                   dropdownList:
                                                                       controller
-                                                                          .sourceOfObservation,
-                                                                  // selectedValue: ,
+                                                                          .sourceOfObsList,
+                                                                  isValueSelected:
+                                                                      controller
+                                                                          .isSelectedSourceOfObs
+                                                                          .value,
+                                                                  selectedValue:
+                                                                      controller
+                                                                          .selectedSourceOfObs
+                                                                          .value,
                                                                   onValueChanged:
-                                                                      (sourceOfObservation,
-                                                                          selectedValue) {},
+                                                                      controller
+                                                                          .onValueChanged,
                                                                 ),
                                                               ),
                                                             ],
@@ -405,6 +433,27 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                                                 textController:
                                                                     controller
                                                                         .targetDateTc,
+                                                                errorController:
+                                                                    controller
+                                                                            .isTargetDateInvalid
+                                                                            .value
+                                                                        ? "Required field"
+                                                                        : null,
+                                                                onChanged:
+                                                                    (value) {
+                                                                  if (value
+                                                                          .trim()
+                                                                          .length >
+                                                                      0) {
+                                                                    controller
+                                                                        .isTargetDateInvalid
+                                                                        .value = false;
+                                                                  } else {
+                                                                    controller
+                                                                        .isTargetDateInvalid
+                                                                        .value = true;
+                                                                  }
+                                                                },
                                                               ),
                                                             ],
                                                           ),
@@ -536,6 +585,7 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                             .format(p0.value);
                                     controller.openObsDatePicker =
                                         !controller.openObsDatePicker;
+                                    controller.isObsDateTcInvalid.value = false;
                                     controller.update(['stock_Mangement']);
                                   },
                                 ),
@@ -554,6 +604,8 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                             .format(p0.value);
                                     controller.openTargetObsDatePicker =
                                         !controller.openTargetObsDatePicker;
+                                    controller.isTargetDateInvalid.value =
+                                        false;
                                     controller.update(['stock_Mangement']);
                                   },
                                 ),
@@ -594,7 +646,7 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                   backgroundColor: ColorValues.submitColor,
                                   text: 'Submit',
                                   onPressed: () {
-                                    // controller.isFormInvalid.value = false;
+                                    controller.isFormInvalid.value = false;
                                     controller.createObs(1);
                                   },
                                 ),

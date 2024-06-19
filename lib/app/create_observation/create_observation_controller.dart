@@ -1,14 +1,10 @@
 import 'dart:async';
 import 'package:cmms/app/create_observation/create_observation_presenter.dart';
-import 'package:cmms/domain/models/Compliance_Status_model.dart';
-import 'package:cmms/domain/models/Statutory_Compliance_model.dart';
-import 'package:cmms/domain/models/createStatutory_model.dart';
 import 'package:cmms/domain/models/create_obs_model.dart';
 import 'package:cmms/domain/models/facility_model.dart';
-import 'package:cmms/domain/models/get_statutory_list_model.dart';
 import 'package:cmms/domain/models/history_model.dart';
 import 'package:cmms/domain/models/incident_risk_type_model.dart';
-import 'package:cmms/domain/models/type_model.dart';
+import 'package:cmms/domain/models/source_of_obs_list_model.dart';
 import 'package:cmms/domain/models/type_of_obs_list_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -16,12 +12,10 @@ import 'package:rxdart/subjects.dart';
 import '../home/home_controller.dart';
 
 class CreateObservationController extends GetxController {
-  ///
   CreateObservationController(
     this.createObservationPresenter,
   );
   CreateObservationPresenter createObservationPresenter;
-
   final HomeController homeController = Get.find();
   Rx<String> selectedFacility = ''.obs;
   BehaviorSubject<int> _facilityId = BehaviorSubject.seeded(0);
@@ -44,49 +38,22 @@ class CreateObservationController extends GetxController {
       <IncidentRiskTypeModell>[].obs;
   Rx<bool> isRiskTypeListSelected = true.obs;
   Rx<bool> isTypeOfObsListSelected = true.obs;
-
+  Rx<bool> isSourceOfObsListSelected = true.obs;
   Rx<String> selectedRiskTypeList = ''.obs;
   int selectedRiskTypeId = 0;
   int incidenttypeId = 0;
   int typeOfObsId = 0;
-
   RxList<TypeOfObsListModel?> typeOfObsList = <TypeOfObsListModel>[].obs;
   Rx<String> selectedTypeOfObs = ''.obs;
   Rx<bool> isSelectedTypeOfObs = true.obs;
-
-  RxList<MonthModel> month = <MonthModel>[
-    MonthModel(name: 'Jan', id: "1"),
-    MonthModel(name: 'Feb', id: "2"),
-    MonthModel(name: 'March', id: "3"),
-    MonthModel(name: 'April', id: "4"),
-    MonthModel(name: 'May', id: "5"),
-    MonthModel(name: 'June', id: "6"),
-    MonthModel(name: 'July', id: "7"),
-    MonthModel(name: 'Aug', id: "8"),
-    MonthModel(name: 'Sept', id: "9"),
-    MonthModel(name: 'Oct', id: "10"),
-    MonthModel(name: 'Nov', id: "11"),
-    MonthModel(name: 'Dec', id: "12"),
-  ].obs;
-  RxList<MonthModel> typeOfObservation = <MonthModel>[
-    MonthModel(name: 'Unsafe Act', id: "1"),
-    MonthModel(name: 'Unsafe Condition', id: "2"),
-    MonthModel(name: 'Statutory Non Compliance', id: "3"),
-  ].obs;
-  RxList<MonthModel> sourceOfObservation = <MonthModel>[
-    MonthModel(name: 'Site Inspection ', id: "1"),
-    MonthModel(name: 'Monitoring Checklist of Electrical ', id: "2"),
-    MonthModel(name: 'Vehicle fitness Checklist ', id: "3"),
-  ].obs;
-  RxList<MonthModel> riskType = <MonthModel>[
-    MonthModel(name: 'Major ', id: "1"),
-    MonthModel(name: 'Significant ', id: "2"),
-    MonthModel(name: 'Moderate ', id: "3"),
-  ].obs;
-  RxList<MonthModel> costType = <MonthModel>[
-    MonthModel(name: 'Capex ', id: "1"),
-    MonthModel(name: 'Opex ', id: "2"),
-  ].obs;
+  int sourceOfObsId = 0;
+  RxList<SourceOfObservationListModel?> sourceOfObsList =
+      <SourceOfObservationListModel>[].obs;
+  Rx<String> selectedSourceOfObs = ''.obs;
+  Rx<bool> isSelectedSourceOfObs = true.obs;
+  RxBool isFormInvalid = false.obs;
+  Rx<bool> isObsDateTcInvalid = false.obs;
+  Rx<bool> isTargetDateInvalid = false.obs;
 
   Rx<bool> isLoading = true.obs;
   int facilityId = 0;
@@ -105,6 +72,9 @@ class CreateObservationController extends GetxController {
         });
         Future.delayed(Duration(seconds: 1), () {
           getTypeOfObservationList();
+        });
+        Future.delayed(Duration(seconds: 1), () {
+          getSourceObservationList();
         });
       });
       if (obsId.value != 0) {
@@ -176,10 +146,10 @@ class CreateObservationController extends GetxController {
 
   void createObs(int? position) async {
     try {
-      // checkObs();
-      // if (isFormInvalid.value) {
-      //   return;
-      // }
+      checkObs();
+      if (isFormInvalid.value) {
+        return;
+      }
       String _contractorNameCtrlr = contractorNameCtrlr.text.trim();
       String _correctivePreventiveCtrlr = correctivePreventiveCtrlr.text.trim();
       String _responsiblePersonCtrlr = responsiblePersonCtrlr.text.trim();
@@ -203,7 +173,7 @@ class CreateObservationController extends GetxController {
         preventive_action: _correctivePreventiveCtrlr,
         responsible_person: _responsiblePersonCtrlr,
         risk_type_id: incidenttypeId,
-        source_of_observation: 1,
+        source_of_observation: sourceOfObsId,
         target_date: _targetDateTc,
         type_of_observation: typeOfObsId,
         uploadfileIds: [101, 202],
@@ -231,67 +201,29 @@ class CreateObservationController extends GetxController {
     }
   }
 
-  // void updateCompliance(int? postion) async {
-  //   try {
-  //     checkObs();
-  //     if (isFormInvalid.value) {
-  //       return;
-  //     }
-  //     String _obsDateTc = issueDateTc.text.trim();
-  //     String _targetDateTc = expireOnDateTc.text.trim();
-  //     String _commentsCtrl = commentsCtrl.text.trim();
+  void checkObs() {
+    if (selectedRiskTypeList.value == '') {
+      isRiskTypeListSelected.value = false;
+      isFormInvalid.value = true;
+    }
+    if (selectedSourceOfObs.value == '') {
+      isSourceOfObsListSelected.value = false;
+      isFormInvalid.value = true;
+    }
+    if (selectedTypeOfObs.value == '') {
+      isTypeOfObsListSelected.value = false;
+      isFormInvalid.value = true;
+    }
+    if (obsDateTc.text.trim().length < 3) {
+      isObsDateTcInvalid.value = true;
+      isFormInvalid.value = true;
+    }
 
-  //     CreateObsModel createObsModel = CreateObsModel(
-  //         facility_id: facilityId,
-  //         Comment: _commentsCtrl,
-  //         compliance_id: selectedStatutoryComplianceId,
-  //         issue_date: _obsDateTc,
-  //         expires_on: _targetDateTc,
-  //         renewFlag: 0,
-  //         renew_date: "",
-  //         status_of_aplication_id: incidenttypeId);
-
-  //     // Convert the CreateObsModel instance to JSON
-  //     var createObsModelJsonString = createObsModel.toJson();
-
-  //     // Call the createObs function from stockManagementAddGoodsOrdersPresenter
-  //     Map<String, dynamic>? responseCreateObsModel =
-  //         await createObservationPresenter.createObs(
-  //       createObs: createObsModelJsonString,
-  //       isLoading: true,
-  //     );
-
-  //     // Handle the response
-  //     if (responseCreateObsModel == null) {
-  //       // CreateNewPermitDialog();
-  //       // showAlertDialog();
-  //     }
-  //     print(
-  //         'Create  create Compliance  data: $createObsModelJsonString');
-  //   } catch (e) {
-  //     print(e);
-  //   }
-  // }
-
-  // void checkObs() {
-  //   if (selectedStatutoryCompliance.value == '') {
-  //     isStatutoryComplianceSelected.value = false;
-  //     isFormInvalid.value = true;
-  //   }
-  //   if (selectedRiskTypeList.value == '') {
-  //     isRiskTypeListSelected.value = false;
-  //     isFormInvalid.value = true;
-  //   }
-  //   if (issueDateTc.text.trim().length < 3) {
-  //     isIssueDateInvalid.value = true;
-  //     isFormInvalid.value = true;
-  //   }
-
-  //   if (expireOnDateTc.text.trim().length < 3) {
-  //     isExpiresonInvalid.value = true;
-  //     isFormInvalid.value = true;
-  //   }
-  // }
+    if (targetDateTc.text.trim().length < 3) {
+      isTargetDateInvalid.value = true;
+      isFormInvalid.value = true;
+    }
+  }
 
   void clearStoreData() {
     // createObservationPresenter.clearValue();
@@ -318,6 +250,19 @@ class CreateObservationController extends GetxController {
       isLoading.value = false;
       for (var _typeOfObsList in list) {
         typeOfObsList.add(_typeOfObsList);
+      }
+    }
+  }
+
+  Future<void> getSourceObservationList() async {
+    sourceOfObsList.clear();
+    final list = await createObservationPresenter.getSourceObservationList(
+      isLoading: isLoading.value,
+    );
+    if (list != null) {
+      isLoading.value = false;
+      for (var _sourceOfObsList in list) {
+        sourceOfObsList.add(_sourceOfObsList);
       }
     }
   }
@@ -352,6 +297,21 @@ class CreateObservationController extends GetxController {
                 "selectedBusinessTypeId: ${typeOfObsId} \n ${selectedTypeOfObs}");
           } else {
             typeOfObsId = 0;
+          }
+        }
+        break;
+      case RxList<SourceOfObservationListModel>:
+        {
+          if (value != "Please Select") {
+            int sourceOfObsIndex =
+                sourceOfObsList.indexWhere((x) => x?.name == value);
+            sourceOfObsId = sourceOfObsList[sourceOfObsIndex]?.id ?? 0;
+            selectedSourceOfObs.value = value;
+            isSourceOfObsListSelected.value = true;
+            print(
+                "selectedBusinessTypeId: ${sourceOfObsId} \n ${selectedSourceOfObs}");
+          } else {
+            sourceOfObsId = 0;
           }
         }
         break;

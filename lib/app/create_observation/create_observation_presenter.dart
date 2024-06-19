@@ -1,6 +1,7 @@
 import 'package:cmms/domain/models/facility_model.dart';
 import 'package:cmms/domain/models/history_model.dart';
 import 'package:cmms/domain/models/incident_risk_type_model.dart';
+import 'package:cmms/domain/models/source_of_obs_list_model.dart';
 import 'package:cmms/domain/models/type_of_obs_list_model.dart';
 import 'package:cmms/domain/usecases/create_observation_usecase.dart';
 
@@ -30,6 +31,13 @@ class CreateObservationPresenter {
     required bool isLoading,
   }) async {
     return createObservationUsecase.getTypeOfObservationList(
+        isLoading: isLoading);
+  }
+
+  Future<List<SourceOfObservationListModel?>?> getSourceObservationList({
+    required bool isLoading,
+  }) async {
+    return createObservationUsecase.getSourceObservationList(
         isLoading: isLoading);
   }
 
