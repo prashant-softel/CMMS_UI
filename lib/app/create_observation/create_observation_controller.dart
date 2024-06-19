@@ -79,7 +79,7 @@ class CreateObservationController extends GetxController {
       });
       if (obsId.value != 0) {
         Future.delayed(Duration(seconds: 1), () {
-          // getObsDetail(id: obsId.value);
+          getObsDetail(id: obsId.value);
           getObsHistory(id: obsId.value);
         });
       }
@@ -107,17 +107,17 @@ class CreateObservationController extends GetxController {
     }
   }
 
-  // Future<void> getObsDetail({required int id}) async {
-  //   final _getObsDetail = await createObservationPresenter.getObsDetail(id: id);
+  Future<void> getObsDetail({required int id}) async {
+    final _getObsDetail = await createObservationPresenter.getObsDetail(id: id);
 
-  //   if (_getObsDetail != null) {
-  //     // getObsById.value = _getObsDetail;
+    if (_getObsDetail != null) {
+      // getObsById.value = _getObsDetail;
 
-  //     // issueDateTc.text = getObsById.value?.created_at ?? '';
-  //     // expireOnDateTc.text = getObsById.value?.end_date ?? "";
-  //     // commentsCtrl.text = getObsById.value?.description ?? "";
-  //   }
-  // }
+      // issueDateTc.text = getObsById.value?.created_at ?? '';
+      // expireOnDateTc.text = getObsById.value?.end_date ?? "";
+      // commentsCtrl.text = getObsById.value?.description ?? "";
+    }
+  }
 
   Future<void> getObsHistory({required int id}) async {
     int moduleType = 406;

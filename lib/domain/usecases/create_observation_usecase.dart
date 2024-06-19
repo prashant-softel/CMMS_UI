@@ -1,4 +1,5 @@
 import 'package:cmms/domain/models/facility_model.dart';
+import 'package:cmms/domain/models/get_obs_deatils_by_id_model.dart';
 import 'package:cmms/domain/models/history_model.dart';
 import 'package:cmms/domain/models/incident_risk_type_model.dart';
 import 'package:cmms/domain/models/source_of_obs_list_model.dart';
@@ -29,6 +30,14 @@ class CreateObservationUsecase {
         id,
         facilityId,
         isLoading,
+      );
+  Future<GetObservationById?> getObsDetail({
+    bool? isLoading,
+    required int id,
+  }) async =>
+      await repository.getObsDetail(
+        id: id,
+        isLoading: isLoading ?? false,
       );
   Future<Map<String, dynamic>> createObs({
     createObs,

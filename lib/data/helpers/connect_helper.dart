@@ -995,7 +995,7 @@ class ConnectHelper {
     String? end_date,
   }) async {
     ResponseModel responseModel = await apiWrapper.makeRequest(
-      'MISMaster/GetObservationSheetReport?facility_id=$facility_id&start_date=$end_date&end_date=$start_date',
+      'MISMaster/GetObservationList?facility_id=$facility_id&fromDate=$end_date&toDate=$start_date',
       Request.getMultiparts,
       null,
       isLoading,
@@ -4053,6 +4053,24 @@ class ConnectHelper {
   }) async {
     var responseModel = await apiWrapper.makeRequest(
       'MISMaster/GetStatutoryById?id=$id',
+      Request.get,
+      null,
+      isLoading ?? false,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    print('GetStatutoryById${responseModel.data}');
+    return responseModel;
+  }
+
+  Future<ResponseModel> getObsDetail({
+    required String auth,
+    bool? isLoading,
+    int? id,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'MISMaster/GetObservationById?observation_id=$id',
       Request.get,
       null,
       isLoading ?? false,
