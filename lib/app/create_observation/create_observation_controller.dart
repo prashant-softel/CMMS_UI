@@ -9,6 +9,7 @@ import 'package:cmms/domain/models/get_statutory_list_model.dart';
 import 'package:cmms/domain/models/history_model.dart';
 import 'package:cmms/domain/models/incident_risk_type_model.dart';
 import 'package:cmms/domain/models/type_model.dart';
+import 'package:cmms/domain/models/type_of_obs_list_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rxdart/subjects.dart';
@@ -42,9 +43,16 @@ class CreateObservationController extends GetxController {
   RxList<IncidentRiskTypeModell> incidentrisktypeList =
       <IncidentRiskTypeModell>[].obs;
   Rx<bool> isRiskTypeListSelected = true.obs;
+  Rx<bool> isTypeOfObsListSelected = true.obs;
+
   Rx<String> selectedRiskTypeList = ''.obs;
   int selectedRiskTypeId = 0;
   int incidenttypeId = 0;
+  int typeOfObsId = 0;
+
+  RxList<TypeOfObsListModel?> typeOfObsList = <TypeOfObsListModel>[].obs;
+  Rx<String> selectedTypeOfObs = ''.obs;
+  Rx<bool> isSelectedTypeOfObs = true.obs;
 
   RxList<MonthModel> month = <MonthModel>[
     MonthModel(name: 'Jan', id: "1"),
@@ -94,6 +102,9 @@ class CreateObservationController extends GetxController {
         });
         Future.delayed(Duration(seconds: 1), () {
           getIncidentRiskType(facilityId);
+        });
+        Future.delayed(Duration(seconds: 1), () {
+          getTypeOfObservationList();
         });
       });
       if (obsId.value != 0) {
@@ -194,7 +205,7 @@ class CreateObservationController extends GetxController {
         risk_type_id: incidenttypeId,
         source_of_observation: 1,
         target_date: _targetDateTc,
-        type_of_observation: 2,
+        type_of_observation: typeOfObsId,
         uploadfileIds: [101, 202],
       );
 
@@ -298,6 +309,19 @@ class CreateObservationController extends GetxController {
     }
   }
 
+  Future<void> getTypeOfObservationList() async {
+    typeOfObsList.clear();
+    final list = await createObservationPresenter.getTypeOfObservationList(
+      isLoading: isLoading.value,
+    );
+    if (list != null) {
+      isLoading.value = false;
+      for (var _typeOfObsList in list) {
+        typeOfObsList.add(_typeOfObsList);
+      }
+    }
+  }
+
   void onValueChanged(dynamic list, dynamic value) {
     print("$value");
     switch (list.runtimeType) {
@@ -313,6 +337,21 @@ class CreateObservationController extends GetxController {
                 "selectedBusinessTypeId: ${incidenttypeId} \n ${selectedRiskTypeList}");
           } else {
             incidenttypeId = 0;
+          }
+        }
+        break;
+      case RxList<TypeOfObsListModel>:
+        {
+          if (value != "Please Select") {
+            int typeOfObsIndex =
+                typeOfObsList.indexWhere((x) => x?.name == value);
+            typeOfObsId = typeOfObsList[typeOfObsIndex]?.id ?? 0;
+            selectedTypeOfObs.value = value;
+            isTypeOfObsListSelected.value = true;
+            print(
+                "selectedBusinessTypeId: ${typeOfObsId} \n ${selectedTypeOfObs}");
+          } else {
+            typeOfObsId = 0;
           }
         }
         break;
