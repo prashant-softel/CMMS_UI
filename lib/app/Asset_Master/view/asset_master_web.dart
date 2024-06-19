@@ -1,13 +1,19 @@
+import 'package:cmms/app/Statutory/views/web/statutory_web.dart';
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
+import 'package:cmms/app/widgets/custom_richtext.dart';
+import 'package:cmms/app/widgets/date_picker.dart';
+import 'package:cmms/domain/models/asset_master_model.dart';
+import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
+import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 import '../asset_master_Controller.dart';
 // import '../mrs_Details_Controller.dart';
 // import '../preventive_list_controller.dart';
@@ -483,442 +489,232 @@ class AssetMasterWeb extends GetView<AssetMasterController> {
                     //             .length >
                     //         0
                     //     ?
-                    Expanded(
-                      child: Container(
-                        width: Get.width * 7,
-                        margin: EdgeInsets.only(left: 10, top: 15),
-                        height: Get.height / 1.1,
-                        child: Card(
-                          color: Color.fromARGB(255, 251, 252, 253),
-                          elevation: 10,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10.0),
-                          ),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              CustomAppBar(
-                                title: 'Material Master',
-                                action: Row(children: [
-                                  Dimens.boxWidth10,
-                                  Container(
-                                    height: 35,
-                                    margin: EdgeInsets.only(left: 10),
-                                    child: CustomElevatedButton(
-                                        backgroundColor:
-                                            ColorValues.appLightBlueColor,
-                                        onPressed: () {
-                                          controller.export();
-                                        },
-                                        text: 'Excel'),
-                                  ),
-                                  Dimens.boxWidth14,
-                                  Container(
-                                    width: 300,
-                                    height: 40,
-                                    margin: Dimens.edgeInsets0_0_16_0,
-                                    child: TextField(
-                                      style: GoogleFonts.lato(
-                                        textStyle: TextStyle(
-                                            fontSize: 16.0,
-                                            height: 1.0,
-                                            color: Colors.black),
-                                      ),
-                                      onChanged: (value) =>
-                                          controller.search(value),
-                                      decoration: InputDecoration(
-                                        enabledBorder: const OutlineInputBorder(
-                                          borderSide: const BorderSide(
-                                            color: Colors.grey,
-                                            width: 0.0,
-                                          ),
-                                        ),
-                                        focusedBorder: const OutlineInputBorder(
-                                          borderSide: const BorderSide(
-                                            color: Colors.grey,
-                                            width: 0.0,
-                                          ),
-                                        ),
-                                        contentPadding: Dimens.edgeInsets05_10,
-                                        hintText: 'search'.tr,
-                                        hintStyle: Styles.grey16,
-                                      ),
-                                    ),
-                                  ),
-                                  varUserAccessModel.value.access_list!
-                                              .where((e) =>
-                                                  e.feature_id ==
-                                                      UserAccessConstants
-                                                          .kassetmasterFeatureId &&
-                                                  e.add ==
-                                                      UserAccessConstants
-                                                          .kHaveAddAccess)
-                                              .length >
-                                          0
-                                      ? ActionButton(
-                                          icon: Icons.add,
-                                          label: 'Add Material'.tr,
-                                          onPressed: () {
-                                            Get.offNamed(Routes.addassetMaster);
-                                          },
-                                          color: ColorValues.addNewColor,
-                                        )
-                                      : Dimens.box0,
-                                  Dimens.boxWidth10,
-                                ]),
-                              ),
-                              Divider(
-                                color: ColorValues.greyLightColour,
-                              ),
-                              Row(
+                    // Expanded(
+                    //   child: Container(
+                    //     width: Get.width * 7,
+                    //     margin: EdgeInsets.only(left: 10, top: 15),
+                    //     height: Get.height / 1.1,
+                    //     child: Card(
+                    //       color: Color.fromARGB(255, 251, 252, 253),
+                    //       elevation: 10,
+                    //       shape: RoundedRectangleBorder(
+                    //         borderRadius: BorderRadius.circular(10.0),
+                    //       ),
+                    //       child: Column(
+                    //         crossAxisAlignment: CrossAxisAlignment.start,
+                    //         children: [
+                    //           CustomAppBar(
+                    //             title: 'Material Master',
+                    //             action: Row(children: [
+                    //               Dimens.boxWidth10,
+                    //               Container(
+                    //                 height: 35,
+                    //                 margin: EdgeInsets.only(left: 10),
+                    //                 child: CustomElevatedButton(
+                    //                     backgroundColor:
+                    //                         ColorValues.appLightBlueColor,
+                    //                     onPressed: () {
+                    //                       controller.export();
+                    //                     },
+                    //                     text: 'Excel'),
+                    //               ),
+                     Expanded(
+                  child: Stack(children: [
+                    Container(
+                      width: Get.width * 7,
+                      margin: EdgeInsets.only(
+                          left: 10, top: 10, right: 10, bottom: 10),
+                      height: Get.height,
+                      child: Card(
+                        color: Color.fromARGB(255, 245, 248, 250),
+                        elevation: 10,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: Row(
+                                // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
-                                  // Container(
-                                  //   height: 45,
-                                  //   margin: EdgeInsets.only(left: 10),
-                                  //   child: CustomElevatedButton(
-                                  //       backgroundColor:
-                                  //           ColorValues.appLightBlueColor,
-                                  //       onPressed: () {
-                                  //         FlutterClipboard.copy(controller
-                                  //                 .moduleList![0]
-                                  //                 .toString())
-                                  //             .then((value) {
-                                  //           print("copy data");
-                                  //         });
-                                  //       },
-                                  //       text: 'Copy'),
-                                  // ),
-                                  // Container(
-                                  //   height: 45,
-                                  //   margin: EdgeInsets.only(left: 10),
-                                  //   child: CustomElevatedButton(
-                                  //       backgroundColor:
-                                  //           ColorValues.appLightBlueColor,
-                                  //       onPressed: () {},
-                                  //       text: 'Excel'),
-                                  // ),
-                                  // Container(
-                                  //   height: 45,
-                                  //   margin: EdgeInsets.only(left: 10),
-                                  //   child: CustomElevatedButton(
-                                  //       backgroundColor:
-                                  //           ColorValues.appLightBlueColor,
-                                  //       onPressed: () {},
-                                  //       text: 'PDF'),
-                                  // ),
-                                  // Container(
-                                  //   height: 45,
-                                  //   margin: EdgeInsets.only(left: 10),
-                                  //   child: CustomElevatedButton(
-                                  //     backgroundColor:
-                                  //         ColorValues.appLightBlueColor,
-                                  //     onPressed: () {},
-                                  //     text: 'columnVisibility'.tr,
-                                  //   ),
-                                  // )
+                                  Text(
+                                    "Material List",
+                                    style: Styles.blackBold16,
+                                  ),
+                                  Spacer(),
+                                  Row(
+                                    children: [
+                                      CustomRichText(title: 'Date Range'),
+                                      Dimens.boxWidth10,
+                                      CustomTextFieldForStock(
+                                        width:
+                                            MediaQuery.of(context).size.width /
+                                                5,
+                                        numberTextField: true,
+                                        onTap: () {
+                                          controller
+                                                  .openFromDateToStartDatePicker =
+                                              !controller
+                                                  .openFromDateToStartDatePicker;
+                                          controller
+                                              .update(['stock_Mangement_Date']);
+                                        },
+                                        hintText:
+                                            '${controller.formattedFromdate.toString()} To ${controller.formattedTodate.toString()}',
+                                      ),
+                                    ],
+                                  ),
                                 ],
                               ),
-                              SizedBox(
-                                height: 5,
-                              ),
-                              controller.moduleList!.isEmpty
-                                  ? Container(
-                                      height: Get.height / 1.75,
-                                      margin: Dimens.edgeInsets20,
-                                      decoration: BoxDecoration(
-                                        border: Border.all(
-                                          color: ColorValues
-                                              .lightGreyColorWithOpacity35,
-                                          width: 1,
-                                        ),
-                                        boxShadow: [
-                                          BoxShadow(
-                                            color: ColorValues
-                                                .appBlueBackgroundColor,
-                                            spreadRadius: 2,
-                                            blurRadius: 5,
-                                            offset: Offset(0, 2),
-                                          ),
-                                        ],
-                                      ),
-                                      child: ScrollableTableView(
-                                        columns: [
-                                          "MDM Code",
-                                          "Material Name",
-                                          "AC/DC",
-                                          "Material Type",
-                                          "Material Category ",
-                                          "Min. Required Qty ",
-                                          "Min. Reorder Qty ",
-                                          "Description",
-                                          "Unit Of Measurement",
-                                          "Approval Required",
-                                          "Action"
-                                        ].map((column) {
-                                          if (column == "Action") {
-                                            return TableViewColumn(
-                                              label: column,
-                                              minWidth: Get.width *
-                                                  0.08, // Set the desired width for the "Action" column
-                                            );
-                                          } else if (column == "Description" ||
-                                              column == "Material Name") {
-                                            return TableViewColumn(
-                                              label: column,
-                                              minWidth: Get.width *
-                                                  0.25, // Set the desired width for the "Description" column
-                                            );
-                                          } else {
-                                            return TableViewColumn(
-                                              label: column,
-                                              minWidth: Get.width * 0.16,
-                                            );
-                                          }
-                                        }).toList(),
-                                        rows: [
-                                          ...List.generate(
-                                            controller.moduleList?.length ?? 0,
-                                            (index) {
-                                              return [
-                                                '',
-                                                '',
-                                                '',
-                                                '',
-                                                '',
-                                                '',
-                                                '',
-                                                '',
-                                                '',
-                                                '',
-                                                '',
-                                              ];
-                                            },
-                                          ),
-                                        ].map((record) {
-                                          return TableViewRow(
-                                            height: 60,
-                                            cells: record.map((value) {
-                                              return TableViewCell(
-                                                child: Text(value),
-                                              );
-                                            }).toList(),
-                                          );
-                                        }).toList(),
-                                      ),
-                                    )
-                                  : Container(
-                                      height: Get.height / 1.67,
-                                      margin: Dimens.edgeInsets20,
-                                      decoration: BoxDecoration(
-                                        border: Border.all(
-                                          color: ColorValues
-                                              .lightGreyColorWithOpacity35,
-                                          width: 1,
-                                        ),
-                                        boxShadow: [
-                                          BoxShadow(
-                                            color: ColorValues
-                                                .appBlueBackgroundColor,
-                                            spreadRadius: 2,
-                                            blurRadius: 5,
-                                            offset: Offset(0, 2),
-                                          ),
-                                        ],
-                                      ),
-                                      child: ScrollableTableView(
-                                        paginationController:
-                                            controller.paginationController,
-                                        columns: [
-                                          "MDM Code",
-                                          "Material Name",
-                                          "AC/DC",
-                                          "Material Type",
-                                          "Material Category ",
-                                          "Min. Required Qty ",
-                                          "Min. Reorder Qty ",
-                                          "Description",
-                                          "Unit Of Measurement",
-                                          "Approval Required",
-                                          "Action"
-                                        ].map((column) {
-                                          if (column == "Action") {
-                                            return TableViewColumn(
-                                              label: column,
-                                              minWidth: Get.width *
-                                                  0.12, // Set the desired width for the "Action" column
-                                            );
-                                          } else if (column == "Description" ||
-                                              column == "Material Name") {
-                                            return TableViewColumn(
-                                              label: column,
-                                              minWidth: Get.width *
-                                                  0.25, // Set the desired width for the "Description" column
-                                            );
-                                          } else {
-                                            return TableViewColumn(
-                                              label: column,
-                                              minWidth: Get.width * 0.16,
-                                            );
-                                          }
-                                        }).toList(),
-                                        rows: //
-                                            [
-                                          ...List.generate(
-                                            controller.moduleList?.length ?? 0,
-                                            (index) {
-                                              var moduleListDetails =
-                                                  controller.moduleList?[index];
-                                              return [
-                                                '${moduleListDetails?.asset_code}',
-                                                '${moduleListDetails?.asset_name}',
-                                                'AC',
-                                                '${moduleListDetails?.asset_type}',
-                                                '${moduleListDetails?.cat_name}',
-                                                '2',
-                                                '2',
-                                                '${moduleListDetails?.description}',
-                                                '${moduleListDetails?.measurement}',
-                                                '${moduleListDetails?.approval_required}',
-                                                "Action"
-                                              ];
-                                            },
-                                          ),
-                                        ].map((_moduleList) {
-                                          return TableViewRow(
-                                              height: 30,
-                                              cells: _moduleList.map((value) {
-                                                return TableViewCell(
-                                                    child: Column(children: [
-                                                  // Divider(
-                                                  //   color: ColorValues
-                                                  //       .greyLightColour,
-                                                  // ),
-                                                  // (value == 'No')
-                                                  //     ? CustomSwitchTroggle(
-                                                  //   value: value ==
-                                                  //       'No'
-                                                  //       ? true
-                                                  //       : false,
-                                                  //   onChanged:
-                                                  //       (value) {},
-                                                  // )
-                                                  //     :
-                                                  (value == "Action")
-                                                      ? Row(children: [
-                                                          // varUserAccessModel.value.access_list!.where((e) => e.feature_id == 5 && e.edit == 1).length >
-                                                          //     0
-                                                          //     ?
-                                                          TableActionButton(
-                                                            color: ColorValues
-                                                                .appLightBlueColor,
-                                                            icon: Icons.edit,
-                                                            message: 'Edit',
-                                                            onPress: () {},
-                                                          ),
-                                                          //     : Container(),
-                                                          // varUserAccessModel.value.access_list!.where((e) => e.feature_id == 5 && e.delete == 1).length >
-                                                          //     0
-                                                          //     ?
-                                                          TableActionButton(
-                                                            color: ColorValues
-                                                                .appRedColor,
-                                                            icon: Icons.delete,
-                                                            message: 'Delete',
-                                                            onPress: () {
-                                                              print(_moduleList[
-                                                                  0]);
-                                                              controller.isDeleteDialog(
-                                                                  module_id:
-                                                                      _moduleList[
-                                                                          0],
-                                                                  module:
-                                                                      _moduleList[
-                                                                          1]);
-                                                            },
-                                                          )
-                                                          // : Container()
-                                                        ])
-                                                      : Text(
-                                                          value,
-                                                        ),
-                                                ]));
-                                              }).toList());
-                                        }).toList(),
-                                      ),
+                            ),
+                            Divider(
+                              color: ColorValues.greyLightColour,
+                            ),
+                            Row(
+                              children: [
+                                Container(
+                                  height: 35,
+                                  margin: EdgeInsets.only(left: 10),
+                                  child: CustomElevatedButton(
+                                      backgroundColor:
+                                          ColorValues.appLightBlueColor,
+                                      onPressed: () {
+                                        controller.export();
+                                      },
+                                      text: 'Excel'),
+                                ),
+                                Spacer(),
+                                Container(
+                                  width: 300,
+                                  height: 40,
+                                  margin: Dimens.edgeInsets0_0_16_0,
+                                  child: TextField(
+                                    style: GoogleFonts.lato(
+                                      textStyle: TextStyle(
+                                          fontSize: 16.0,
+                                          height: 1.0,
+                                          color: Colors.black),
                                     ),
-                              Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 25),
-                                child: ValueListenableBuilder(
-                                    valueListenable:
-                                        controller.paginationController,
-                                    builder: (context, value, child) {
-                                      return Row(children: [
-                                        Text(
-                                            "${controller.paginationController.currentPage}  of ${controller.paginationController.pageCount}"),
-                                        Row(children: [
-                                          IconButton(
-                                            onPressed: controller
-                                                        .paginationController
-                                                        .currentPage <=
-                                                    1
-                                                ? null
-                                                : () {
-                                                    controller
-                                                        .paginationController
-                                                        .previous();
-                                                  },
-                                            iconSize: 20,
-                                            splashRadius: 20,
-                                            icon: Icon(
-                                              Icons.arrow_back_ios_new_rounded,
-                                              color: controller
-                                                          .paginationController
-                                                          .currentPage <=
-                                                      1
-                                                  ? Colors.black26
-                                                  : Theme.of(context)
-                                                      .primaryColor,
-                                            ),
-                                          ),
-                                          IconButton(
-                                            onPressed: controller
-                                                        .paginationController
-                                                        .currentPage >=
-                                                    controller
-                                                        .paginationController
-                                                        .pageCount
-                                                ? null
-                                                : () {
-                                                    controller
-                                                        .paginationController
-                                                        .next();
-                                                  },
-                                            iconSize: 20,
-                                            splashRadius: 20,
-                                            icon: Icon(
-                                              Icons.arrow_forward_ios_rounded,
-                                              color: controller
-                                                          .paginationController
-                                                          .currentPage >=
-                                                      controller
-                                                          .paginationController
-                                                          .pageCount
-                                                  ? Colors.black26
-                                                  : Theme.of(context)
-                                                      .primaryColor,
-                                            ),
-                                          ),
-                                        ]),
-                                      ]);
-                                    }),
-                              ),
-                            ],
-                          ),
+                                    onChanged: (value) =>
+                                        controller.search(value),
+                                    decoration: InputDecoration(
+                                      enabledBorder: const OutlineInputBorder(
+                                        borderSide: const BorderSide(
+                                          color: Colors.grey,
+                                          width: 0.0,
+                                        ),
+                                      ),
+                                      focusedBorder: const OutlineInputBorder(
+                                        borderSide: const BorderSide(
+                                          color: Colors.grey,
+                                          width: 0.0,
+                                        ),
+                                      ),
+                                      contentPadding: Dimens.edgeInsets05_10,
+                                      hintText: 'search'.tr,
+                                      hintStyle: Styles.grey16,
+                                    ),
+                                  ),
+                                ),
+                              ]
+                            ),
+                             controller.moduleList!.isEmpty == true &&
+                                    controller.isLoading == false
+                                ? Center(child: Text('No data'))
+                                : controller.isLoading.value == true
+                                    ? Center(child: Text("Data Loading......"))
+                                    : Expanded(
+                                        child: ValueListenableBuilder(
+                                            valueListenable:
+                                                controller.columnVisibility,
+                                            builder: (context, value, child) {
+                                              final dataSource =
+                                                  AssetListDataSource(controller);
+
+                                              return PaginatedDataTable2(
+                                                // fixedLeftColumns: 1,
+                                                dataRowHeight:
+                                                    70, //Get.height * 0.10,
+                                                columnSpacing: 10,
+                                                source:
+                                                    dataSource, // Custom DataSource class
+                                                // headingRowHeight: Get.height * 0.12,
+                                                minWidth: 3000,
+                                                showCheckboxColumn: false,
+                                                rowsPerPage:
+                                                    10, // Number of rows per page
+                                                availableRowsPerPage: [
+                                                  10,
+                                                  20,
+                                                  30,
+                                                  50
+                                                ],
+                                                columns: [
+                                                  for (var entry
+                                                      in value.entries)
+                                                    if (entry.value)
+                                                      buildDataColumn(
+                                                        entry.key,
+                                                        controller.filterText[
+                                                            entry.key]!,
+                                                        controller.columnwidth[
+                                                            entry.key],
+                                                      ),
+                                              
+                                                ],
+                                              );
+                                            }),
+                                      )
+                          ],
                         ),
                       ),
-                    )
-                    //  : Container()
+                    ),
+                      if (controller.openFromDateToStartDatePicker)
+                      Positioned(
+                        right: 150,
+                        top: 85,
+                        child: DatePickerWidget(
+                          selectionMode: DateRangePickerSelectionMode.range,
+                          monthCellStyle: DateRangePickerMonthCellStyle(
+                            todayCellDecoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: ColorValues.appDarkBlueColor),
+                          ), // last date of this year
+                          // controller: DateRangePickerController(),
+                          initialSelectedRange: PickerDateRange(
+                            controller.fromDate.value,
+                            controller.toDate.value,
+                          ),
+
+                          onSubmit: (value) {
+                            print('po valu ${value.toString()}');
+                            PickerDateRange? data = value as PickerDateRange;
+
+                            var pickUpDate =
+                                DateTime.parse(data.startDate.toString());
+                            controller.fromDate.value = pickUpDate;
+                            var dropDate =
+                                DateTime.parse(data.endDate.toString());
+                            dropDate != null
+                                ? controller.toDate.value = dropDate
+                                : controller.toDate.value = pickUpDate;
+
+                            controller.getmoduleListByDate();
+                            controller.openFromDateToStartDatePicker =
+                                !controller.openFromDateToStartDatePicker;
+                            controller.update(['stock_Mangement_Date']);
+
+                            // Get.toNamed(
+                            //   Routes.stockManagementGoodsOrdersScreen,
+                            // );
+                                   },
+                              ),
+                            ),
+                        ],
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -928,4 +724,166 @@ class AssetMasterWeb extends GetView<AssetMasterController> {
       ),
     );
   }
+}DataColumn2 buildDataColumn(
+    // String columnName,
+    String header,
+
+    /// ColumnSize columnSize,
+    RxString filterText,
+    double? fixedWidth,
+    //  {required Function(String) onSearchCallBack}
+  ) {
+    return //
+        DataColumn2(
+      // size: columnSize,
+      fixedWidth: fixedWidth,
+
+      label: //
+          Column(
+              mainAxisAlignment: MainAxisAlignment.center, //
+              children: [
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                header,
+                style: Styles.black16W500,
+              ),
+            ),
+          ]),
+      // ),
+    );
+  }
+
+
+class AssetListDataSource extends DataTableSource {
+  final AssetMasterController controller;
+
+  late List<AssetMasterModel?> filteredAssetList;
+
+  AssetListDataSource(this.controller) {
+    filterAsset();
+  }
+    void filterAsset() {
+    filteredAssetList = <AssetMasterModel?>[];
+    filteredAssetList = controller.moduleList!.where((Mrs) {
+      return (Mrs?.asset_code ?? '')
+              .toString()
+              .toLowerCase()
+              .contains(controller.mdmFilterText.value.toLowerCase()) &&
+          (Mrs?.asset_name ?? '')
+              .toLowerCase()
+              .contains(controller.materialNameFilterText.value.toLowerCase()) &&
+          (Mrs?.section ?? '')
+              .toLowerCase()
+              .contains(controller.acdcFilterText.value.toLowerCase()) &&
+          (Mrs?.asset_type ?? '')
+              .toString()
+              .toLowerCase()
+              .contains(controller.acdcFilterText.value.toLowerCase()) &&
+          (Mrs?.cat_name ?? '')
+              .toString()
+              .toLowerCase()
+              .contains(controller.materialCategoryFilterText.value.toLowerCase()) &&
+          (Mrs?.max_request_qty ?? '')
+          
+              .toLowerCase()
+              .contains(controller.minRequiredQtyFilterText.value.toLowerCase())&&
+            (Mrs?.reorder_qty ?? '')
+              .toLowerCase()
+              .contains(controller.minReorderQtyTextFilterText.value.toLowerCase())&&
+            (Mrs?.description ?? '')
+              .toString()
+              .toLowerCase()
+              .contains(controller.descriptionFilterText.value.toLowerCase()) &&
+            (Mrs?.measurement ?? '')
+              .toString()
+              .toLowerCase()
+              .contains(controller.unitofMeasurementFilterText.value.toLowerCase()) &&
+               (Mrs?.approval_required ?? '')
+              .toString()
+              .toLowerCase()
+              .contains(controller.approvalRequiredFilterText.value.toLowerCase());
+              
+
+              
+
+      // Add other filter conditions as needed
+    }).toList();
+    // print({"filteredmoduleList": filteredmoduleList});
+  }
+@override
+  DataRow? getRow(int index) {
+
+    final AssetDetails = filteredAssetList[index];
+
+    controller.AssetId.value = AssetDetails?.asset_Type_id ?? 0;
+    var cellsBuffer = [
+      '${AssetDetails?.asset_code ?? ''}',
+      '${AssetDetails?.asset_name ?? ''}',
+      '${AssetDetails?.section ?? ''}',
+       '${AssetDetails?.asset_type ?? ''}',
+      '${AssetDetails?.cat_name ?? ''}',
+      '${AssetDetails?.max_request_qty ?? ''}',
+      '${AssetDetails?.reorder_qty ?? ''}',
+      '${AssetDetails?.description ?? ''}',
+         '${AssetDetails?.measurement ?? ''}',
+      '${AssetDetails?.approval_required ?? ''}',
+
+    ];
+    var cells = [];
+    int i = 0;
+
+    for (var entry in controller.columnVisibility.value.entries) {
+      // print({"entry.value entry": entry});
+      if (entry.key == "search") {
+      return null;
+    }
+    if (entry.value) {
+      cells.add(cellsBuffer[i]);
+    }
+    i++;
+  }
+    // print({"cell": cells});
+    return DataRow.byIndex(
+      index: index,
+      cells: cells.map((value) {
+        return DataCell(
+          Padding(
+            padding: EdgeInsets.zero,
+            child: Text(value.toString()),
+          ),
+        );
+      }).toList(),
+      //   ],
+      onSelectChanged: (_) {
+        controller.clearStoreData();
+
+        // final _flutterSecureStorage = const FlutterSecureStorage();
+
+        // _flutterSecureStorage.delete(key: "AssetId");
+        Get.toNamed(
+          Routes.mrsViewScreen,
+          arguments: {'AssetId': AssetDetails?.asset_Type_id, 'type': 0},
+        );
+      },
+    );
+  }
+
+  @override
+  int get rowCount => filteredAssetList.length;
+
+  @override
+  bool get isRowCountApproximate => false;
+
+  @override
+  int get selectedRowCount => 0;
 }
+
+
+
+
+            //                       Dimens.boxWidth14,
+            //                       Container(
+            //                         width: 300,
+            //                         height: 40,
+            //                         margin

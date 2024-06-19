@@ -25,6 +25,10 @@ class AssetMasterModel {
   int? unit_measurement_ID;
   int? approval_required_id;
   String? fileData;
+  String? section;
+  String? max_request_qty;
+  String? reorder_qty; 
+
   // String? action;
 
   AssetMasterModel({
@@ -44,6 +48,9 @@ class AssetMasterModel {
     this.unit_measurement_ID,
     this.approval_required_id,
     this.fileData,
+    this.section,
+    this.max_request_qty,
+    this.reorder_qty,
     // this.asset_name,
   });
 
@@ -66,6 +73,10 @@ class AssetMasterModel {
         unit_measurement_ID: json['unit_measurement_ID'],
         approval_required_id: json['approval_required_id'],
 
+section: json['section'],
+max_request_qty: json['max_request_qty'],
+reorder_qty: json['reorder_qty'],
+
       );
 
   Map<String, dynamic> toJson() => {
@@ -84,6 +95,9 @@ class AssetMasterModel {
     "asset_Type_id": asset_Type_id,
     "item_category_ID": item_category_ID,
     "unit_measurement_ID": unit_measurement_ID,
-          "approval_required_id" : approval_required_id
+          "approval_required_id" : approval_required_id,
+          "section" : section,
+          "max_request_qty" : max_request_qty,
+          "reorder_qty" : reorder_qty
       };
 }
