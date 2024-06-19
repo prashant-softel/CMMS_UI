@@ -2267,6 +2267,16 @@ class DataRepository extends DomainRepository {
         id: id,
         isLoading: isLoading ?? false,
       );
+  Future<ResponseModel> getObsDetail({
+    required String auth,
+    bool? isLoading,
+    int? id,
+  }) async =>
+      await connectHelper.getObsDetail(
+        auth: auth,
+        id: id,
+        isLoading: isLoading ?? false,
+      );
   Future<ResponseModel> getHistory({
     String? auth,
     int? moduleType,

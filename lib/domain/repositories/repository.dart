@@ -14,6 +14,7 @@ import 'package:cmms/domain/models/dsm_list_model.dart';
 import 'package:cmms/domain/models/escalation_details_model.dart';
 import 'package:cmms/domain/models/escalation_matrix_list_model.dart';
 import 'package:cmms/domain/models/get_mc_task_equipment_model.dart';
+import 'package:cmms/domain/models/get_obs_deatils_by_id_model.dart';
 import 'package:cmms/domain/models/get_observation_list_model.dart';
 import 'package:cmms/domain/models/get_statutory_by_id_model.dart';
 import 'package:cmms/domain/models/get_statutory_list_model.dart';
@@ -2633,6 +2634,37 @@ class Repository {
         return __getStatutoryDetailModel;
       } else {
         Utility.showDialog(res.errorCode.toString(), 'get Statutory Detail');
+      }
+      return null;
+    } catch (error) {
+      print(error.toString());
+      return null;
+    }
+  }
+
+  Future<GetObservationById?> getObsDetail({
+    bool? isLoading,
+    int? id,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getObsDetail(
+        auth: auth,
+        id: id,
+        isLoading: isLoading ?? false,
+      );
+
+      print({"GetObservationById", res.data});
+
+      if (!res.hasError) {
+        final GetObservationById _getObservationDetailModel =
+            getObservationByIdModelFromJson(res.data);
+
+        print({"get GetObservationById Detail", _getObservationDetailModel});
+        return _getObservationDetailModel;
+      } else {
+        Utility.showDialog(
+            res.errorCode.toString(), 'get GetObservationById Detail');
       }
       return null;
     } catch (error) {
