@@ -401,26 +401,26 @@ class TypeOfObsWeb extends GetView<TypeOfObsController> {
                                         height: 15,
                                       ),
                                       Row(
-                                        // children: [
+                                          // children: [
                                           // Expanded(
                                           //   child: CustomRichText(
                                           //       title: 'Status: '),
                                           // ),
-                                        //   SizedBox(
-                                        //     width: 4,
-                                        //   ),
-                                        //   // Checkbox(
-                                        //   //   value: controller
-                                        //   //       .isCheckedRequire.value,
-                                        //   //   onChanged: (bool? value) {
-                                        //   //     controller
-                                        //   //         .requiretoggleCheckbox();
-                                        //   //     print(
-                                        //   //         'Checkbox:${controller.isCheckedRequire.value}');
-                                        //   //   },
-                                        //   // ),
-                                        // ],
-                                      ),
+                                          //   SizedBox(
+                                          //     width: 4,
+                                          //   ),
+                                          //   // Checkbox(
+                                          //   //   value: controller
+                                          //   //       .isCheckedRequire.value,
+                                          //   //   onChanged: (bool? value) {
+                                          //   //     controller
+                                          //   //         .requiretoggleCheckbox();
+                                          //   //     print(
+                                          //   //         'Checkbox:${controller.isCheckedRequire.value}');
+                                          //   //   },
+                                          //   // ),
+                                          // ],
+                                          ),
                                       SizedBox(
                                         height: 15,
                                       ),
@@ -613,8 +613,7 @@ class TypeOfObsWeb extends GetView<TypeOfObsController> {
                                                   )),
                                             ],
                                             rows: List.generate(
-                                              controller
-                                                      .TypeOfObsList.length ??
+                                              controller.TypeOfObsList.length ??
                                                   0,
                                               (index) {
                                                 var TypeOfObsListDetails =
