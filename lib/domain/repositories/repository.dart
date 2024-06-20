@@ -852,7 +852,7 @@ class Repository {
       if (!res.hasError) {
         Fluttertoast.showToast(
             msg: "Statutory Compliance Add Successfully...", fontSize: 16.0);
-        Get.offNamed(
+        Get.offAllNamed(
           Routes.statutory,
         );
 
@@ -891,7 +891,7 @@ class Repository {
       if (!res.hasError) {
         Fluttertoast.showToast(
             msg: "Observation Add Successfully...", fontSize: 16.0);
-        Get.offNamed(
+        Get.offAllNamed(
           Routes.observationListScreen,
         );
 

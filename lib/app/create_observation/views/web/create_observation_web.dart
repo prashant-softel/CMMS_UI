@@ -907,7 +907,7 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                   backgroundColor: ColorValues.submitColor,
                                   text: 'Update',
                                   onPressed: () {
-                                    // controller.isFormInvalid.value = false;
+                                    controller.isFormInvalid.value = false;
                                     controller.createObs(0);
                                   },
                                 ),
