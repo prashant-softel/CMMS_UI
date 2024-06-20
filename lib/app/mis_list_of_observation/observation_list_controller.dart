@@ -75,14 +75,14 @@ class ObservationListController extends GetxController {
     "Status": true,
   });
   final Map<String, double> columnwidth = {
-    "Month": 150,
-    "Date of Observation": 150,
-    "Contractor Name": 150,
+    "Month": 100,
+    "Observation Date": 100,
+    "Contractor Name": 180,
     "Location": 150,
-    "Type": 150,
+    "Type": 100,
     "Source": 150,
     "Risk Type": 150,
-    "Corrective/Preventive": 150,
+    "Corrective": 150,
     "Responsible": 150,
     "Target Date": 150,
     "Action Taken": 150,
@@ -140,13 +140,19 @@ class ObservationListController extends GetxController {
             (item.id?.toString().toLowerCase().contains(keyword.toLowerCase()) ?? false) ||
             (item.id?.toString().toLowerCase().contains(keyword.toLowerCase()) ??
                 false) ||
-            (item.action_taken?.toString().toLowerCase().contains(keyword.toLowerCase()) ??
+            (item.contact_number?.toString().toLowerCase().contains(keyword.toLowerCase()) ??
                 false) ||
-            (item.closer_date?.toString().toLowerCase().contains(keyword.toLowerCase()) ??
+            (item.corrective_action
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
                 false) ||
             (item.contractor_name?.toString().toLowerCase().contains(keyword.toLowerCase()) ??
                 false) ||
-            (item.corrective_action?.toString().toLowerCase().contains(keyword.toLowerCase()) ??
+            (item.corrective_action
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
                 false) ||
             (item.cost_type?.toString().toLowerCase().contains(keyword.toLowerCase()) ??
                 false) ||
@@ -159,11 +165,7 @@ class ObservationListController extends GetxController {
                     .toLowerCase()
                     .contains(keyword.toLowerCase()) ??
                 false) ||
-            (item.observation_description
-                    ?.toString()
-                    .toLowerCase()
-                    .contains(keyword.toLowerCase()) ??
-                false))
+            (item.observation_description?.toString().toLowerCase().contains(keyword.toLowerCase()) ?? false))
         .toList();
     getObservationList.value = filteredList;
   }

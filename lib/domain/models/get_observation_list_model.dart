@@ -11,87 +11,118 @@ String getObservationListModelToJson(List<GetObservationList> data) =>
 
 class GetObservationList {
   int? id;
-  String? month_of_observation;
-  String? date_of_observation;
+  int? facility_id;
   String? contractor_name;
-  String? location_of_observation;
-  String? type_of_observation;
-  String? source_of_observation;
-  String? risk_type;
-  String? observation_description;
-  String? corrective_action;
+  int? risk_type_id;
+  String? risk_type_name;
+  String? preventive_action;
   String? responsible_person;
+  String? contact_number;
+  String? cost_type;
+  String? date_of_observation;
+  int? type_of_observation;
+  int? source_of_observation;
+
   String? target_date;
+  String? observation_description;
+  String? created_at;
+  String? updated_at;
+  String? updated_by;
+
+  String? month_of_observation;
+  String? status;
+  int? status_code;
+  String? location_of_observation;
+  String? corrective_action;
+  String? days_remaining;
+
+  String? risk_type;
   String? action_taken;
   String? closer_date;
-  String? cost_type;
-  int? days_remaining;
-  String? timeline;
-  String? status;
 
   GetObservationList({
     this.id,
-    this.timeline,
-    this.days_remaining,
     this.contractor_name,
     this.date_of_observation,
     this.responsible_person,
-    this.corrective_action,
-    this.risk_type,
     this.type_of_observation,
-    this.month_of_observation,
-    this.closer_date,
     this.cost_type,
-    this.location_of_observation,
     this.source_of_observation,
     this.observation_description,
-    this.action_taken,
     this.target_date,
+    this.contact_number,
+    this.created_at,
+    this.facility_id,
+    this.preventive_action,
+    this.risk_type_id,
+    this.risk_type_name,
+    this.updated_at,
+    this.updated_by,
+    this.corrective_action,
+    this.days_remaining,
+    this.location_of_observation,
+    this.month_of_observation,
     this.status,
+    this.status_code,
+    this.risk_type,
+    this.action_taken,
+    this.closer_date,
   });
 
   factory GetObservationList.fromJson(Map<String, dynamic> json) {
     return GetObservationList(
       id: json['id'],
-      month_of_observation: json['month_of_observation'],
+      contractor_name: json['contractor_name'],
       date_of_observation:
           Utility.getFormatedyearMonthDay(json['date_of_observation']),
-      contractor_name: json['contractor_name'],
-      location_of_observation: json['location_of_observation'],
-      timeline: json['timeline'],
-      days_remaining: json['days_remaining'],
       responsible_person: json['responsible_person'],
-      corrective_action: json['corrective_action'],
-      risk_type: json['risk_type'],
       type_of_observation: json['type_of_observation'],
-      closer_date: Utility.getFormatedyearMonthDay(json['closer_date']),
       cost_type: json['cost_type'],
       source_of_observation: json['source_of_observation'],
       observation_description: json['observation_description'],
-      action_taken: json['action_taken'],
+      target_date: json['target_date'],
+      contact_number: json['contact_number'],
+      created_at: json['created_at'],
+      facility_id: json['facility_id'],
+      preventive_action: json['preventive_action'],
+      risk_type_id: json['risk_type_id'],
+      risk_type_name: json['risk_type_name'],
+      updated_at: json['updated_at'],
+      updated_by: json['updated_by'],
+      corrective_action: json['corrective_action'],
+      days_remaining: json['days_remaining'],
+      location_of_observation: json['location_of_observation'],
+      month_of_observation: json['month_of_observation'],
       status: json['status'],
-      target_date: Utility.getFormatedyearMonthDay(json['target_date']),
+      status_code: json['status_code'],
+      risk_type: json['risk_type'],
+      action_taken: json['action_taken'],
+      closer_date: json['closer_date'],
     );
   }
 
   Map<String, dynamic> toJson() => {
         'id': id,
-        'month_of_observation': month_of_observation,
-        'date_of_observation': date_of_observation,
         'contractor_name': contractor_name,
-        'location_of_observation': location_of_observation,
-        'type_of_observation': type_of_observation,
-        'source_of_observation': source_of_observation,
-        'risk_type': risk_type,
-        'observation_description': observation_description,
-        'corrective_action': corrective_action,
+        'date_of_observation': date_of_observation,
         'responsible_person': responsible_person,
-        'target_date': target_date,
-        'action_taken': action_taken,
-        'closer_date': closer_date,
+        'type_of_observation': type_of_observation,
         'cost_type': cost_type,
+        'source_of_observation': source_of_observation,
+        'observation_description': observation_description,
+        'target_date': target_date,
+        'contact_number': contact_number,
+        'created_at': created_at,
+        'facility_id': facility_id,
+        'risk_type_name': risk_type_name,
+        'updated_by': updated_by,
+        'preventive_action': preventive_action,
+        'risk_type_id': risk_type_id,
+        'corrective_action': corrective_action,
         'days_remaining': days_remaining,
-        'timeline': timeline,
-        'status': status
+        'location_of_observation': location_of_observation,
+        'month_of_observation': month_of_observation,
+        'status': status,
+        'status_code': status_code,
       };
 }
