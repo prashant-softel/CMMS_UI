@@ -469,9 +469,9 @@ class ObservationListDataSource extends DataTableSource {
       '${ObservationListDetails?.date_of_observation ?? ''}',
       '${ObservationListDetails?.contractor_name ?? ''}',
       '${ObservationListDetails?.location_of_observation ?? ''}',
+      '${ObservationListDetails?.type_of_observation ?? ''}',
       '${ObservationListDetails?.source_of_observation ?? ''}',
-      '${ObservationListDetails?.risk_type ?? ''}',
-      '${ObservationListDetails?.observation_description ?? ''}',
+      '${ObservationListDetails?.risk_type_name ?? ''}',
       '${ObservationListDetails?.corrective_action ?? ''}',
       '${ObservationListDetails?.responsible_person ?? ''}',
       '${ObservationListDetails?.target_date ?? ''}',
@@ -514,90 +514,34 @@ class ObservationListDataSource extends DataTableSource {
                         message: 'View',
                         onPress: () {
                           // controller.clearStoreData();
-                          int srId = ObservationListDetails?.id ?? 0;
-                          if (srId != 0) {
+                          int obsId = ObservationListDetails?.id ?? 0;
+                          if (obsId != 0) {
                             Get.toNamed(
                               Routes.createObservation,
                               arguments: {
-                                'srId': ObservationListDetails?.id,
+                                'obsId': ObservationListDetails?.id,
                               },
                             );
                           }
                         },
                       ),
-                      controller.getObservationList
-                                      .firstWhere(
-                                        (e) =>
-                                            e.id == ObservationListDetails!.id,
-                                        orElse: () =>
-                                            GetObservationList(id: 00),
-                                      )
-                                      .status ==
-                                  504 &&
-                              varUserAccessModel.value.access_list!
-                                      .where((e) =>
-                                          e.feature_id ==
-                                              UserAccessConstants
-                                                  .kSatutoryFeatureId &&
-                                          e.edit ==
-                                              UserAccessConstants
-                                                  .kHaveAddAccess)
-                                      .length >
-                                  0
-                          ? TableActionButton(
-                              color: ColorValues.editColor,
-                              icon: Icons.edit,
-                              message: 'Edit',
-                              onPress: () {
-                                // controller.clearStoreData();
-                                int srId = ObservationListDetails?.id ?? 0;
-                                if (srId != 0) {
-                                  Get.toNamed(
-                                    Routes.complianceScreen,
-                                    arguments: {
-                                      'srId': ObservationListDetails?.id,
-                                    },
-                                  );
-                                }
+                      TableActionButton(
+                        color: ColorValues.editColor,
+                        icon: Icons.edit,
+                        message: 'Edit',
+                        onPress: () {
+                          // controller.clearStoreData();
+                          int obsId = ObservationListDetails?.id ?? 0;
+                          if (obsId != 0) {
+                            Get.toNamed(
+                              Routes.createObservation,
+                              arguments: {
+                                'obsId': ObservationListDetails?.id,
                               },
-                            )
-                          : Dimens.box0,
-                      // ObservationListDetails?.status == 'inactive'
-                      //     ? TableActionButton(
-                      //         color: Color.fromARGB(255, 116, 78, 130),
-                      //         icon: Icons.ads_click,
-                      //         message: 'Re-New',
-                      //         onPress: () {
-                      //           controller.clearStoreData();
-                      //           int srId = ObservationListDetails?.id ?? 0;
-                      //           int reNew = 1;
-                      //           if (srId != 0) {
-                      //             Get.toNamed(
-                      //               Routes.complianceScreen,
-                      //               arguments: {
-                      //                 'srId': ObservationListDetails?.id,
-                      //                 'reNew': reNew,
-                      //               },
-                      //             );
-                      //           }
-                      //         },
-                      //       )
-                      // : Dimens.box0,
-                      // TableActionButton(
-                      //   color: Color.fromARGB(255, 120, 110, 123),
-                      //   icon: Icons.history,
-                      //   message: 'History',
-                      //   onPress: () {
-                      //     controller.clearStoreData();
-                      //     Get.toNamed(
-                      //       Routes.complianceHistoryScreen,
-                      //       arguments: {
-                      //         "compliance_id":
-                      //             ObservationListDetails?.compliance_id
-                      //       },
-                      //     );
-                      //   },
-                      // ),
+                            );
+                          }
+                        },
+                      ),
                     ],
                   )
                 : Text(value.toString()),

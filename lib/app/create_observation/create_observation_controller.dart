@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:cmms/app/create_observation/create_observation_presenter.dart';
 import 'package:cmms/domain/models/create_obs_model.dart';
 import 'package:cmms/domain/models/facility_model.dart';
+import 'package:cmms/domain/models/get_obs_deatils_by_id_model.dart';
 import 'package:cmms/domain/models/history_model.dart';
 import 'package:cmms/domain/models/incident_risk_type_model.dart';
 import 'package:cmms/domain/models/source_of_obs_list_model.dart';
@@ -49,26 +50,19 @@ class CreateObservationController extends GetxController {
   int sourceOfObsId = 0;
   RxList<SourceOfObservationListModel?> sourceOfObsList =
       <SourceOfObservationListModel>[].obs;
+  Rx<GetObservationById?> getObsById = GetObservationById().obs;
   Rx<String> selectedSourceOfObs = ''.obs;
   Rx<bool> isSelectedSourceOfObs = true.obs;
   RxBool isFormInvalid = false.obs;
   Rx<bool> isObsDateTcInvalid = false.obs;
   Rx<bool> isTargetDateInvalid = false.obs;
-Rx<bool> isContractorInvalid = false.obs;
+  Rx<bool> isContractorInvalid = false.obs;
 
-Rx<bool> isCorrectiveInvalid = false.obs;
-Rx<bool> isResponsibleInvalid = false.obs;
-Rx<bool> isContactNumberInvalid = false.obs;
-Rx<bool> isCostInvalid = false.obs;
-Rx<bool> islocationofObservationInvalid = false.obs;
-
-
-
-
-
-
-
-  
+  Rx<bool> isCorrectiveInvalid = false.obs;
+  Rx<bool> isResponsibleInvalid = false.obs;
+  Rx<bool> isContactNumberInvalid = false.obs;
+  Rx<bool> isCostInvalid = false.obs;
+  Rx<bool> islocationofObservationInvalid = false.obs;
 
   Rx<bool> isLoading = true.obs;
   int facilityId = 0;
@@ -122,15 +116,26 @@ Rx<bool> islocationofObservationInvalid = false.obs;
     }
   }
 
+  void clearStoreData() {
+    createObservationPresenter.clearValue();
+  }
+
   Future<void> getObsDetail({required int id}) async {
     final _getObsDetail = await createObservationPresenter.getObsDetail(id: id);
 
     if (_getObsDetail != null) {
-      // getObsById.value = _getObsDetail;
+      getObsById.value = _getObsDetail;
 
-      // issueDateTc.text = getObsById.value?.created_at ?? '';
-      // expireOnDateTc.text = getObsById.value?.end_date ?? "";
-      // commentsCtrl.text = getObsById.value?.description ?? "";
+      contactNumberCtrlr.text = getObsById.value?.contact_number ?? '';
+      contractorNameCtrlr.text = getObsById.value?.contractor_name ?? "";
+      correctivePreventiveCtrlr.text =
+          getObsById.value?.preventive_action ?? "";
+      costTypeCtrlr.text = getObsById.value?.cost_type ?? "";
+      discriptionCtrlr.text = getObsById.value?.observation_description ?? "";
+      locationOfObservationCtrlr.text =
+          getObsById.value?.location_of_observation ?? "";
+      targetDateTc.text = getObsById.value?.target_date ?? "";
+      obsDateTc.text = getObsById.value?.date_of_observation ?? "";
     }
   }
 
@@ -217,64 +222,56 @@ Rx<bool> islocationofObservationInvalid = false.obs;
   }
 
   void checkObs() {
-
-            
-if(incidenttypeId == 0){
-  isRiskTypeListSelected.value=false;
-  isFormInvalid.value = true;
-}
- if (contractorNameCtrlr.text.trim()=='') {
+    if (incidenttypeId == 0) {
+      isRiskTypeListSelected.value = false;
+      isFormInvalid.value = true;
+    }
+    if (contractorNameCtrlr.text.trim() == '') {
       isContractorInvalid.value = true;
       isFormInvalid.value = true;
     }
 
-if (correctivePreventiveCtrlr.text.trim()=='') {
+    if (correctivePreventiveCtrlr.text.trim() == '') {
       isCorrectiveInvalid.value = true;
       isFormInvalid.value = true;
     }
-if (responsiblePersonCtrlr.text.trim()=='') {
+    if (responsiblePersonCtrlr.text.trim() == '') {
       isResponsibleInvalid.value = true;
       isFormInvalid.value = true;
     }
 
-    if (contactNumberCtrlr.text.trim()=='') {
+    if (contactNumberCtrlr.text.trim() == '') {
       isContactNumberInvalid.value = true;
       isFormInvalid.value = true;
     }
-      if (costTypeCtrlr.text.trim()=='') {
+    if (costTypeCtrlr.text.trim() == '') {
       isCostInvalid.value = true;
       isFormInvalid.value = true;
     }
-    
-  if (obsDateTc.text.trim()=='') {
+
+    if (obsDateTc.text.trim() == '') {
       isObsDateTcInvalid.value = true;
       isFormInvalid.value = true;
     }
-    
-    if(typeOfObsId == 0){
-  isSelectedTypeOfObs.value=false;
-  isFormInvalid.value = true;
-}
-if(sourceOfObsId == 0){
-  isSelectedSourceOfObs.value=false;
-  isFormInvalid.value = true;
-}
 
+    if (typeOfObsId == 0) {
+      isSelectedTypeOfObs.value = false;
+      isFormInvalid.value = true;
+    }
+    if (sourceOfObsId == 0) {
+      isSelectedSourceOfObs.value = false;
+      isFormInvalid.value = true;
+    }
 
-
- if (targetDateTc.text.trim().length == 0) {
+    if (targetDateTc.text.trim().length == 0) {
       isTargetDateInvalid.value = true;
       isFormInvalid.value = true;
     }
 
-
- if (locationOfObservationCtrlr.text.trim().length == 0) {
+    if (locationOfObservationCtrlr.text.trim().length == 0) {
       islocationofObservationInvalid.value = true;
       isFormInvalid.value = true;
     }
-
-
-
 
     // if (selectedRiskTypeList.value == '') {
     //   isRiskTypeListSelected.value = false;
@@ -297,11 +294,6 @@ if(sourceOfObsId == 0){
     //   isTargetDateInvalid.value = true;
     //   isFormInvalid.value = true;
     // }
-  }
-
-  void clearStoreData() {
-    // createObservationPresenter.clearValue();
-    // createObservationPresenter.clearRenewValue();
   }
 
   Future<void> getIncidentRiskType(int facilityId) async {
@@ -383,7 +375,7 @@ if(sourceOfObsId == 0){
             sourceOfObsId = sourceOfObsList[sourceOfObsIndex]?.id ?? 0;
             selectedSourceOfObs.value = value;
             isSourceOfObsListSelected.value = true;
-            isSelectedSourceOfObs.value=true;
+            isSelectedSourceOfObs.value = true;
             print(
                 "selectedBusinessTypeId: ${sourceOfObsId} \n ${selectedSourceOfObs}");
           } else {

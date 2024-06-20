@@ -56,7 +56,9 @@ class CreateObservationUsecase {
       facilityId: facilityId,
     );
   }
-
+ void clearValue() async => repository.clearData(
+        LocalKeys.obsId,
+      );
   Future<List<TypeOfObsListModel?>?> getTypeOfObservationList({
     bool isLoading = true,
   }) async =>
