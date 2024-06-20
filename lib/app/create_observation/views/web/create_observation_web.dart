@@ -128,7 +128,7 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                                           ? "Required field"
                                                           : null,
                                                       onChanged: (value) {
-                                                        if (value.trim().length.isEmpty) {
+                                                        if (value.trim().length > 0) {
                                                           controller
                                                               .isContractorInvalid
                                                               .value = false;
@@ -198,7 +198,7 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                                           ? "Required field"
                                                           : null,
                                                       onChanged: (value) {
-                                                        if (value.trim().isEmpty) {
+                                                        if (value.trim().length > 0) {
                                                           controller
                                                               .isCorrectiveInvalid
                                                               .value = false;
@@ -234,7 +234,7 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                                           ? "Required field"
                                                           : null,
                                                       onChanged: (value) {
-                                                        if (value.trim().isEmpty) {
+                                                        if (value.trim().length>0) {
                                                           controller
                                                               .isResponsibleInvalid
                                                               .value = false;
@@ -273,7 +273,7 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                                           ? "Required field"
                                                           : null,
                                                       onChanged: (value) {
-                                                        if (value.trim().isEmpty) {
+                                                        if (value.trim().length>0) {
                                                           controller
                                                               .isContactNumberInvalid
                                                               .value = false;
@@ -318,7 +318,7 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                                           ? "Required field"
                                                           : null,
                                                       onChanged: (value) {
-                                                        if (value.trim().isEmpty) {
+                                                        if (value.trim().length>0) {
                                                           controller
                                                               .isCostInvalid
                                                               .value = false;
@@ -378,8 +378,7 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                                                   onChanged:
                                                                       (value) {
                                                                     if (value
-                                                                            .trim()
-                                                                            .isEmpty) {
+                                                                            .trim().length>0) {
                                                                       controller
                                                                           .isObsDateTcInvalid
                                                                           .value = false;
@@ -455,7 +454,7 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                                           ? "Required field"
                                                           : null,
                                                       onChanged: (value) {
-                                                        if (value.trim().isEmpty) {
+                                                        if (value.trim().length>0) {
                                                           controller
                                                               .islocationofObservationInvalid
                                                               .value = false;
@@ -545,8 +544,7 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                                                   onChanged:
                                                                       (value) {
                                                                     if (value
-                                                                            .trim()
-                                                                            .isEmpty) {
+                                                                            .trim().length>0) {
                                                                       controller
                                                                           .isTargetDateInvalid
                                                                           .value = false;
