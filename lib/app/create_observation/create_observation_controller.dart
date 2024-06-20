@@ -54,6 +54,21 @@ class CreateObservationController extends GetxController {
   RxBool isFormInvalid = false.obs;
   Rx<bool> isObsDateTcInvalid = false.obs;
   Rx<bool> isTargetDateInvalid = false.obs;
+Rx<bool> isContractorInvalid = false.obs;
+
+Rx<bool> isCorrectiveInvalid = false.obs;
+Rx<bool> isResponsibleInvalid = false.obs;
+Rx<bool> isContactNumberInvalid = false.obs;
+Rx<bool> isCostInvalid = false.obs;
+Rx<bool> islocationofObservationInvalid = false.obs;
+
+
+
+
+
+
+
+  
 
   Rx<bool> isLoading = true.obs;
   int facilityId = 0;
@@ -202,27 +217,86 @@ class CreateObservationController extends GetxController {
   }
 
   void checkObs() {
-    if (selectedRiskTypeList.value == '') {
-      isRiskTypeListSelected.value = false;
-      isFormInvalid.value = true;
-    }
-    if (selectedSourceOfObs.value == '') {
-      isSourceOfObsListSelected.value = false;
-      isFormInvalid.value = true;
-    }
-    if (selectedTypeOfObs.value == '') {
-      isTypeOfObsListSelected.value = false;
-      isFormInvalid.value = true;
-    }
-    if (obsDateTc.text.trim().length < 3) {
-      isObsDateTcInvalid.value = true;
+
+            
+if(incidenttypeId == 0){
+  isRiskTypeListSelected.value=false;
+  isFormInvalid.value = true;
+}
+ if (contractorNameCtrlr.text.trim().isEmpty) {
+      isContractorInvalid.value = true;
       isFormInvalid.value = true;
     }
 
-    if (targetDateTc.text.trim().length < 3) {
+if (correctivePreventiveCtrlr.text.trim().isEmpty) {
+      isCorrectiveInvalid.value = true;
+      isFormInvalid.value = true;
+    }
+if (responsiblePersonCtrlr.text.trim().isEmpty) {
+      isResponsibleInvalid.value = true;
+      isFormInvalid.value = true;
+    }
+
+    if (contactNumberCtrlr.text.trim().isEmpty) {
+      isContactNumberInvalid.value = true;
+      isFormInvalid.value = true;
+    }
+      if (costTypeCtrlr.text.trim().isEmpty) {
+      isCostInvalid.value = true;
+      isFormInvalid.value = true;
+    }
+    
+  if (obsDateTc.text.trim().isEmpty) {
+      isObsDateTcInvalid.value = true;
+      isFormInvalid.value = true;
+    }
+    
+    if(typeOfObsId == 0){
+  isSelectedTypeOfObs.value=false;
+  isFormInvalid.value = true;
+}
+if(sourceOfObsId == 0){
+  isSelectedSourceOfObs.value=false;
+  isFormInvalid.value = true;
+}
+
+
+
+ if (targetDateTc.text.trim().length == 0) {
       isTargetDateInvalid.value = true;
       isFormInvalid.value = true;
     }
+
+
+ if (locationOfObservationCtrlr.text.trim().length == 0) {
+      islocationofObservationInvalid.value = true;
+      isFormInvalid.value = true;
+    }
+
+
+
+
+    // if (selectedRiskTypeList.value == '') {
+    //   isRiskTypeListSelected.value = false;
+    //   isFormInvalid.value = true;
+    // }
+    // if (selectedSourceOfObs.value == '') {
+    //   isSourceOfObsListSelected.value = false;
+    //   isFormInvalid.value = true;
+    // }
+    // if (selectedTypeOfObs.value == '') {
+    //   isTypeOfObsListSelected.value = false;
+    //   isFormInvalid.value = true;
+    // }
+    // if (obsDateTc.text.trim().length < 3) {
+    //   isObsDateTcInvalid.value = true;
+    //   isFormInvalid.value = true;
+    // }
+
+    // if (targetDateTc.text.trim().length < 3) {
+    //   isTargetDateInvalid.value = true;
+    //   isFormInvalid.value = true;
+    // }
   }
 
   void clearStoreData() {
