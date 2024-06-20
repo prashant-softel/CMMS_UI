@@ -187,8 +187,10 @@ class CreateObservationController extends GetxController {
       String _locationOfObservationCtrlr =
           locationOfObservationCtrlr.text.trim();
       String _targetDateTc = targetDateTc.text.trim();
+      int idToSend = position == 1 ? 0 : obsId.value;
 
       CreateObsModel createObsModel = CreateObsModel(
+        id: idToSend,
         facility_id: facilityId,
         contact_number: _contactNumberCtrlr,
         contractor_name: _contractorNameCtrlr,
@@ -391,6 +393,4 @@ class CreateObservationController extends GetxController {
         break;
     }
   }
-
 }
-

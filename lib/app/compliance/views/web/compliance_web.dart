@@ -607,9 +607,10 @@ class _ComplianceWebState extends State<ComplianceWeb> {
                                       },
                                     ),
                                   )
-                                : controller.getStatutoryById.value!
-                                            .activation_status ==
-                                        "active"
+                                : controller.srId > 0 &&
+                                        controller.getStatutoryById.value!
+                                                .status_id ==
+                                            504
                                     ? Container(
                                         height: 40,
                                         child: CustomElevatedButton(
@@ -623,10 +624,14 @@ class _ComplianceWebState extends State<ComplianceWeb> {
                                         ),
                                       )
                                     : Dimens.box0,
+                            Dimens.boxWidth10,
                             controller.getStatutoryById.value!
                                             .activation_status ==
                                         "inactive" &&
-                                    controller.srId > 0
+                                    controller.srId > 0 &&
+                                    controller
+                                            .getStatutoryById.value!.daysLeft ==
+                                        0
                                 ? Container(
                                     height: 40,
                                     child: CustomElevatedButton(

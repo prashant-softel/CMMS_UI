@@ -499,8 +499,7 @@ class StatutoryListDataSource extends DataTableSource {
         return DataCell(
           Padding(
             padding: EdgeInsets.zero,
-            child: 
-            (value == 'id')
+            child: (value == 'id')
                 ? Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -547,8 +546,7 @@ class StatutoryListDataSource extends DataTableSource {
                       ),
                     ],
                   )
-                :
-                 (value == 'Actions')
+                : (value == 'Actions')
                     ? Row(
                         children: [
                           TableActionButton(
@@ -568,26 +566,34 @@ class StatutoryListDataSource extends DataTableSource {
                               }
                             },
                           ),
+                          // controller.getStatutoryList
+                          //                 .firstWhere(
+                          //                   (e) =>
+                          //                       e.id ==
+                          //                       StatutoryListDetails!.id,
+                          //                   orElse: () =>
+                          //                       GetStatutoryList(id: 00),
+                          //                 )
+                          //                 .status_id ==
+                          //             504 &&
+                          //         varUserAccessModel.value.access_list!
+                          //                 .where((e) =>
+                          //                     e.feature_id ==
+                          //                         UserAccessConstants
+                          //                             .kSatutoryFeatureId &&
+                          //                     e.edit ==
+                          //                         UserAccessConstants
+                          //                             .kHaveAddAccess)
+                          //                 .length >
+                          //             0
+                          //     ?
                           controller.getStatutoryList
-                                          .firstWhere(
-                                            (e) =>
-                                                e.id ==
-                                                StatutoryListDetails!.id,
-                                            orElse: () =>
-                                                GetStatutoryList(id: 00),
-                                          )
-                                          .status_id ==
-                                      504 &&
-                                  varUserAccessModel.value.access_list!
-                                          .where((e) =>
-                                              e.feature_id ==
-                                                  UserAccessConstants
-                                                      .kSatutoryFeatureId &&
-                                              e.edit ==
-                                                  UserAccessConstants
-                                                      .kHaveAddAccess)
-                                          .length >
-                                      0
+                                      .firstWhere(
+                                        (e) => e.id == StatutoryListDetails!.id,
+                                        orElse: () => GetStatutoryList(id: 00),
+                                      )
+                                      .status_id ==
+                                  504
                               ? TableActionButton(
                                   color: ColorValues.editColor,
                                   icon: Icons.edit,
