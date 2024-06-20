@@ -50,6 +50,7 @@ class ObservationListController extends GetxController {
   RxString responsibleFilterText = ''.obs;
   RxString targetDateFilterText = ''.obs;
   RxString actionTakenFilterText = ''.obs;
+
   RxString closerDateFilterText = ''.obs;
   RxString costTypeFilterText = ''.obs;
   RxString statusFilterText = ''.obs;
@@ -59,6 +60,7 @@ class ObservationListController extends GetxController {
   RxString userDateFilterText = ''.obs;
 
   final columnVisibility = ValueNotifier<Map<String, bool>>({
+    "Id": true,
     "Month": true,
     "Date of Observation": true,
     "Contractor Name": true,
@@ -75,6 +77,7 @@ class ObservationListController extends GetxController {
     "Status": true,
   });
   final Map<String, double> columnwidth = {
+    "Id": 100,
     "Month": 100,
     "Observation Date": 100,
     "Contractor Name": 180,
@@ -102,6 +105,7 @@ class ObservationListController extends GetxController {
   @override
   void onInit() async {
     this.filterText = {
+      "Id": idFilterText,
       "Month": monthFilterText,
       "Date of Observation": dateofObservationFilterText,
       "Contractor Name": contractorNameFilterText,

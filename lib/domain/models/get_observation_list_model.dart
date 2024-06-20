@@ -30,7 +30,7 @@ class GetObservationList {
   String? updated_by;
 
   String? month_of_observation;
-  String? status;
+  String? short_status;
   int? status_code;
   String? location_of_observation;
   String? corrective_action;
@@ -62,7 +62,7 @@ class GetObservationList {
     this.days_remaining,
     this.location_of_observation,
     this.month_of_observation,
-    this.status,
+    this.short_status,
     this.status_code,
     this.risk_type,
     this.action_taken,
@@ -80,7 +80,7 @@ class GetObservationList {
       cost_type: json['cost_type'],
       source_of_observation: json['source_of_observation'],
       observation_description: json['observation_description'],
-      target_date: json['target_date'],
+      target_date: Utility.getFormatedyearMonthDay(json['target_date']),
       contact_number: json['contact_number'],
       created_at: json['created_at'],
       facility_id: json['facility_id'],
@@ -93,11 +93,11 @@ class GetObservationList {
       days_remaining: json['days_remaining'],
       location_of_observation: json['location_of_observation'],
       month_of_observation: json['month_of_observation'],
-      status: json['status'],
+      short_status: json['short_status'],
       status_code: json['status_code'],
       risk_type: json['risk_type'],
       action_taken: json['action_taken'],
-      closer_date: json['closer_date'],
+      closer_date: Utility.getFormatedyearMonthDay(json['closer_date']),
     );
   }
 
@@ -122,7 +122,7 @@ class GetObservationList {
         'days_remaining': days_remaining,
         'location_of_observation': location_of_observation,
         'month_of_observation': month_of_observation,
-        'status': status,
+        'short_status': short_status,
         'status_code': status_code,
       };
 }

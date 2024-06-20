@@ -499,7 +499,8 @@ class StatutoryListDataSource extends DataTableSource {
         return DataCell(
           Padding(
             padding: EdgeInsets.zero,
-            child: (value == 'id')
+            child: 
+            (value == 'id')
                 ? Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -546,7 +547,8 @@ class StatutoryListDataSource extends DataTableSource {
                       ),
                     ],
                   )
-                : (value == 'Actions')
+                :
+                 (value == 'Actions')
                     ? Row(
                         children: [
                           TableActionButton(
