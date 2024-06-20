@@ -106,30 +106,30 @@ class _ViewObservationWebState extends State<ViewObservationWeb> {
                                           style: Styles.blackBold18,
                                         ),
                                         Spacer(),
-                                        // Container(
-                                        //   padding: EdgeInsets.all(5),
-                                        //   decoration: BoxDecoration(
-                                        //     borderRadius:
-                                        //         BorderRadius.circular(10),
-                                        //     border: Border.all(
-                                        //       color: ColorValues.approveColor,
-                                        //       width: 1,
-                                        //     ),
-                                        //     boxShadow: [
-                                        //       BoxShadow(
-                                        //           color: ColorValues
-                                        //               .approveColor),
-                                        //     ],
-                                        //   ),
-                                        //   // child: Center(
-                                        //   //   child: Text(
-                                        //   //     "Status ${controller.getObsById.value!.status_short == null ? "" : controller.getObsById.value!.status_short}",
-                                        //   //     style: TextStyle(
-                                        //   //       color: Colors.white,
-                                        //   //     ),
-                                        //   //   ),
-                                        //   // ),
-                                        // ),
+                                        Container(
+                                          padding: EdgeInsets.all(5),
+                                          decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(10),
+                                            border: Border.all(
+                                              color: ColorValues.approveColor,
+                                              width: 1,
+                                            ),
+                                            boxShadow: [
+                                              BoxShadow(
+                                                  color:
+                                                      ColorValues.approveColor),
+                                            ],
+                                          ),
+                                          child: Center(
+                                            child: Text(
+                                              "Status ${controller.getObsById.value!.short_status == null ? "" : controller.getObsById.value!.short_status}",
+                                              style: TextStyle(
+                                                color: Colors.white,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
                                       ],
                                     ),
                                   ),

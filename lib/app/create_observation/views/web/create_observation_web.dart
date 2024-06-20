@@ -116,10 +116,49 @@ class _ViewHazWasteDataWebState extends State<CreateObservationWeb> {
                                         children: [
                                           Padding(
                                             padding: EdgeInsets.only(
-                                                left: 20, top: 20),
-                                            child: Text(
-                                              "Create Observation",
-                                              style: Styles.blackBold16,
+                                                right: 20,
+                                                top: 5,
+                                                bottom: 5,
+                                                left: 20),
+                                            child: Row(
+                                              children: [
+                                                Text(
+                                                  "Create Observation",
+                                                  style: Styles.blackBold16,
+                                                ),
+                                                Spacer(),
+                                                controller.obsId == 0
+                                                    ? Dimens.box0
+                                                    : Container(
+                                                        padding:
+                                                            EdgeInsets.all(5),
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(10),
+                                                          border: Border.all(
+                                                            color: ColorValues
+                                                                .approveColor,
+                                                            width: 1,
+                                                          ),
+                                                          boxShadow: [
+                                                            BoxShadow(
+                                                                color: ColorValues
+                                                                    .approveColor),
+                                                          ],
+                                                        ),
+                                                        child: Center(
+                                                          child: Text(
+                                                            "Status ${controller.getObsById.value!.short_status == null ? "" : controller.getObsById.value!.short_status}",
+                                                            style: TextStyle(
+                                                              color:
+                                                                  Colors.white,
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ),
+                                              ],
                                             ),
                                           ),
                                           Divider(
