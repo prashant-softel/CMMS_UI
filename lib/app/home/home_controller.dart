@@ -110,6 +110,7 @@ class HomeController extends GetxController {
   String get formattedFromdate1 =>
       DateFormat('yyyy-MM-dd').format(fromDate.value);
   RxMap<String, double> getDataMap = <String, double>{}.obs;
+  RxMap<String, double> getWoDataMap = <String, double>{}.obs;
 
   // Map<String, double> getDataMap // = {};
   //     () {
@@ -138,6 +139,14 @@ class HomeController extends GetxController {
   RxInt lowStockItemsSum = 0.obs;
   RxInt poItemsAwaitedSum = 0.obs;
   List<Color> getColorList() {
+    return [
+      Colors.blue,
+      Colors.green,
+      Colors.orange,
+    ];
+  }
+
+  List<Color> getWoColorList() {
     return [
       Colors.blue,
       Colors.green,

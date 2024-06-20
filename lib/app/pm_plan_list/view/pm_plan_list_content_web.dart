@@ -267,54 +267,61 @@ class _PmPlanListContentWebState extends State<PmPlanListContentWeb> {
                               SizedBox(
                                 height: 20,
                               ),
-                              controller.pmPlanList.isEmpty == true && controller.isLoading == false
-                              ?Center(child: Text("No data"))
-                              :controller.isLoading.value==true
-                              ? Center(child: Text("Data Loading......"))
-                                  : Expanded(
-                                      child: ValueListenableBuilder(
-                                          valueListenable:
-                                              controller.columnVisibility,
-                                          builder: (context, value, child) {
-                                            final dataSource =
-                                                PmPlanDataSource(controller);
+                              controller.pmPlanList.isEmpty == true &&
+                                      controller.isLoading == false
+                                  ? Center(child: Text("No data"))
+                                  : controller.isLoading.value == true
+                                      ? Center(
+                                          child: Text("Data Loading......"))
+                                      : Expanded(
+                                          child: ValueListenableBuilder(
+                                              valueListenable:
+                                                  controller.columnVisibility,
+                                              builder: (context, value, child) {
+                                                final dataSource =
+                                                    PmPlanDataSource(
+                                                        controller);
 
-                                            return PaginatedDataTable2(
-                                              // fixedLeftColumns: 1,
-                                              // dataRowHeight: Get.height * 0.12,
-                                              columnSpacing: 10,
-                                              source:
-                                                  dataSource, // Custom DataSource class
-                                              // headingRowHeight: Get.height * 0.12,
-                                              minWidth: 2000, //Get.width * 1.2,
-                                              showCheckboxColumn: false,
-                                              rowsPerPage:
-                                                  10, // Number of rows per page
-                                              availableRowsPerPage: [
-                                                10,
-                                                20,
-                                                30,
-                                                50
-                                              ],
-                                              columns: [
-                                                for (var entry in value.entries)
-                                                  if (entry.value)
+                                                return PaginatedDataTable2(
+                                                  // fixedLeftColumns: 1,
+                                                  // dataRowHeight: Get.height * 0.12,
+                                                  columnSpacing: 10,
+                                                  source:
+                                                      dataSource, // Custom DataSource class
+                                                  // headingRowHeight: Get.height * 0.12,
+                                                  minWidth:
+                                                      2000, //Get.width * 1.2,
+                                                  showCheckboxColumn: false,
+                                                  rowsPerPage:
+                                                      10, // Number of rows per page
+                                                  availableRowsPerPage: [
+                                                    10,
+                                                    20,
+                                                    30,
+                                                    50
+                                                  ],
+                                                  columns: [
+                                                    for (var entry
+                                                        in value.entries)
+                                                      if (entry.value)
+                                                        buildDataColumn(
+                                                          entry.key,
+                                                          controller.filterText[
+                                                              entry.key]!,
+                                                          controller
+                                                                  .columnwidth[
+                                                              entry.key],
+                                                        ),
                                                     buildDataColumn(
-                                                      entry.key,
-                                                      controller.filterText[
-                                                          entry.key]!,
-                                                      controller.columnwidth[
-                                                          entry.key],
+                                                      'Actions',
+                                                      controller
+                                                          .tittleFilterText,
+                                                      200,
                                                     ),
-                                                buildDataColumn(
-                                                  'Actions',
-                                                  controller.tittleFilterText,
-                                                  200,
-                                                ),
-                                              ],
-                                            );
-                                          }),
-                                    )
+                                                  ],
+                                                );
+                                              }),
+                                        )
                             ]),
                       ),
                     ),
@@ -552,23 +559,26 @@ class PmPlanDataSource extends DataTableSource {
                                 },
                               )
                             : Dimens.box0,
-                            controller.pmPlanList
+                        controller.pmPlanList
                                         .firstWhere(
-                                          (e) => e?.plan_id == pmPlanDetails!.plan_id,
-                                          orElse: () => PmPlanListModel(plan_id: 00),
+                                          (e) =>
+                                              e?.plan_id ==
+                                              pmPlanDetails!.plan_id,
+                                          orElse: () =>
+                                              PmPlanListModel(plan_id: 00),
                                         )
                                         ?.status_id ==
                                     401 &&
-                        varUserAccessModel.value.access_list!
-                                    .where((e) =>
-                                        e.feature_id ==
-                                            UserAccessConstants
-                                                .kPmPlanFeatureId &&
-                                        e.edit ==
-                                            UserAccessConstants
-                                                .kHaveDeleteAccess)
-                                    .length >
-                                0
+                                varUserAccessModel.value.access_list!
+                                        .where((e) =>
+                                            e.feature_id ==
+                                                UserAccessConstants
+                                                    .kPmPlanFeatureId &&
+                                            e.edit ==
+                                                UserAccessConstants
+                                                    .kHaveDeleteAccess)
+                                        .length >
+                                    0
                             ? TableActionButton(
                                 color: ColorValues.editColor,
                                 icon: Icons.edit,

@@ -1,4 +1,5 @@
 import 'package:cmms/app/constant/constant.dart';
+import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/dash_multiselect_dialog_field.dart';
 import 'package:cmms/app/widgets/date_picker.dart';
 import 'package:flutter/material.dart';
@@ -10,7 +11,7 @@ import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:pie_chart/pie_chart.dart';
 import 'package:semicircle_indicator/semicircle_indicator.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
-
+import 'package:syncfusion_flutter_charts/charts.dart';
 import '../../navigators/app_pages.dart';
 
 class DashBoardHomeWeb extends GetView<HomeController> {
@@ -19,6 +20,19 @@ class DashBoardHomeWeb extends GetView<HomeController> {
   }) : super(key: key);
 
   final screenWidth = Get.width;
+  Color getColor(String category) {
+    switch (category) {
+      case 'WO On-time':
+        return Colors.green;
+      case 'WO Delay':
+        return Colors.red;
+      case 'WO Backlog':
+        return Colors.blue;
+      default:
+        return Colors.grey;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return GetBuilder<HomeController>(
@@ -556,145 +570,189 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                             child: Column(
                                               children: [
                                                 Row(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    Align(
-                                                        alignment:
-                                                            Alignment.topLeft,
-                                                        child: Column(
-                                                          children: [
-                                                            Text(
-                                                                "Schedule Compliance",
-                                                                style: Styles
-                                                                    .black15),
-                                                            Dimens.boxHeight10,
-                                                            SemicircularIndicator(
-                                                              radius: 60,
-                                                              color: Color
-                                                                  .fromARGB(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      Align(
+                                                          alignment:
+                                                              Alignment.topLeft,
+                                                          child: Container(
+                                                            height: 100,
+                                                            width: 150,
+                                                            child: Column(
+                                                              crossAxisAlignment:
+                                                                  CrossAxisAlignment
+                                                                      .start,
+                                                              children: [
+                                                                Row(
+                                                                  children: [
+                                                                    Text(
+                                                                      "WO on-time",
+                                                                      style: Styles
+                                                                          .black13,
+                                                                    ),
+                                                                    Dimens
+                                                                        .boxWidth20,
+                                                                    // Spacer(),
+                                                                    Text(
+                                                                        '${controller.woOnTimeSum.value}'),
+                                                                  ],
+                                                                ),
+                                                                Row(
+                                                                  children: [
+                                                                    Text(
+                                                                      "WO delay",
+                                                                      style: Styles
+                                                                          .black13,
+                                                                    ),
+                                                                    Dimens
+                                                                        .boxWidth37,
+                                                                    // Spacer(),
+                                                                    Text(
+                                                                        '${controller.woDelaySum.value}'),
+                                                                  ],
+                                                                ),
+                                                                Row(
+                                                                  children: [
+                                                                    Text(
+                                                                      "WO backlog",
+                                                                      style: Styles
+                                                                          .black13,
+                                                                    ),
+                                                                    Dimens
+                                                                        .boxWidth20,
+                                                                    // Spacer(),
+                                                                    Text(
+                                                                        '${controller.woBacklogSum.value}'),
+                                                                  ],
+                                                                ),
+                                                              ],
+                                                            ),
+                                                          )),
+                                                      // Dimens.boxWidth5,
+                                                      Container(
+                                                        height: 140,
+                                                        width: 150,
+                                                        child: SfCircularChart(
+                                                          // title: ChartTitle(
+                                                          //     textStyle: Styles
+                                                          //         .black15,
+                                                          //     text:
+                                                          //         'Work Order Statistics'),
+                                                          legend: Legend(
+                                                              isVisible: true,
+                                                              overflowMode:
+                                                                  LegendItemOverflowMode
+                                                                      .wrap),
+                                                          series: <PieSeries<
+                                                              _ChartData,
+                                                              String>>[
+                                                            PieSeries<
+                                                                _ChartData,
+                                                                String>(
+                                                              dataSource: [
+                                                                _ChartData(
+                                                                    'WO On-time',
+                                                                    (controller
+                                                                            .woOnTimeSum
+                                                                            .value) /
+                                                                        (controller
+                                                                            .totalSum
+                                                                            .value) *
+                                                                        100),
+                                                                _ChartData(
+                                                                    'WO Delay',
+                                                                    (controller
+                                                                            .woDelaySum
+                                                                            .value) /
+                                                                        (controller
+                                                                            .totalSum
+                                                                            .value) *
+                                                                        100),
+                                                                _ChartData(
+                                                                    'WO Backlog',
+                                                                    (controller
+                                                                            .woBacklogSum
+                                                                            .value) /
+                                                                        (controller
+                                                                            .totalSum
+                                                                            .value) *
+                                                                        100),
+                                                              ],
+                                                              xValueMapper:
+                                                                  (_ChartData data,
+                                                                          _) =>
+                                                                      data.category,
+                                                              yValueMapper:
+                                                                  (_ChartData data,
+                                                                          _) =>
+                                                                      data.value,
+                                                              // dataLabelSettings:
+                                                              //     DataLabelSettings(
+                                                              //   isVisible: true,
+                                                              //   labelAlignment:
+                                                              //       ChartDataLabelAlignment
+                                                              //           .top,
+                                                              //   labelPosition:
+                                                              //       ChartDataLabelPosition
+                                                              //           .outside,
+                                                              //   textStyle: TextStyle(
+                                                              //       fontSize:
+                                                              //           12,
+                                                              //       color: Colors
+                                                              //           .black),
+                                                              // ),
+                                                              // borderRadius: BorderRadius.circular(15),
+                                                              // color: const Color.fromRGBO(52, 138, 199, 1),
+                                                              animationDuration:
+                                                                  1000,
+                                                              animationDelay: 0,
+                                                              explode: true,
+                                                              // explodeIndex: 0,
+                                                              // explodeOffset:
+                                                              //     '10%',
+                                                              // radius: '75%',
+                                                              dataLabelSettings:
+                                                                  DataLabelSettings(
+                                                                isVisible: true,
+                                                                labelPosition:
+                                                                    ChartDataLabelPosition
+                                                                        .outside,
+                                                                textStyle:
+                                                                    TextStyle(
+                                                                        fontSize:
+                                                                            12),
+                                                                connectorLineSettings:
+                                                                    ConnectorLineSettings(
+                                                                  color: const Color
+                                                                      .fromARGB(
                                                                       255,
-                                                                      195,
-                                                                      146,
-                                                                      230),
-                                                              backgroundColor:
-                                                                  Colors
-                                                                      .lightGreen,
-                                                              strokeWidth: 13,
-                                                              bottomPadding: 0,
-                                                              child: Text(
-                                                                '${((controller.scheduleComplianceCompletedSum.value) / (controller.scheduleComplianceTotalSum.value) * 100).toString()}%',
-                                                                style: TextStyle(
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .bold,
-                                                                    fontSize:
-                                                                        20.0,
-                                                                    color: Colors
-                                                                        .redAccent),
+                                                                      151,
+                                                                      66,
+                                                                      66),
+                                                                  width: 30,
+                                                                ),
                                                               ),
+                                                              dataLabelMapper:
+                                                                  (_ChartData data,
+                                                                          _) =>
+                                                                      '${data.category}\n${data.value.toStringAsFixed(1)}%',
+
+                                                              pointColorMapper:
+                                                                  (_ChartData data,
+                                                                          _) =>
+                                                                      getColor(data
+                                                                          .category),
+                                                              enableTooltip:
+                                                                  true,
                                                             ),
                                                           ],
-                                                        )),
-                                                    Spacer(),
-                                                    Container(
-                                                      height: Get.height * 0.09,
-                                                      width: Get.width * 0.09,
-                                                      margin: EdgeInsets.only(
-                                                          left: 20, right: 10),
-                                                      padding: EdgeInsets.only(
-                                                          left: 10,
-                                                          top: 10,
-                                                          right: 10),
-                                                      decoration: BoxDecoration(
-                                                          color: Colors.white,
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(10),
-                                                          boxShadow: [
-                                                            BoxShadow(
-                                                              color:
-                                                                  Colors.grey,
-                                                              offset: Offset(
-                                                                  0.0, 1.0),
-                                                              blurRadius: 6.0,
-                                                            ),
-                                                          ]),
-                                                      child: Column(
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
-                                                        children: [
-                                                          Row(
-                                                            children: [
-                                                              Text(
-                                                                "Total",
-                                                                style: TextStyle(
-                                                                    fontSize:
-                                                                        Get.width *
-                                                                                0.009 -
-                                                                            1),
-                                                              ),
-                                                              Spacer(),
-                                                              Text(
-                                                                '${controller.scheduleComplianceTotalSum}',
-                                                                style: TextStyle(
-                                                                    fontSize:
-                                                                        Get.width *
-                                                                                0.009 -
-                                                                            1),
-                                                              ),
-                                                            ],
-                                                          ),
-                                                          // Dimens.boxHeight2,
-                                                          Row(
-                                                            children: [
-                                                              Text(
-                                                                "Completed",
-                                                                style: TextStyle(
-                                                                    fontSize:
-                                                                        Get.width *
-                                                                                0.009 -
-                                                                            1),
-                                                              ),
-                                                              Spacer(),
-                                                              Text(
-                                                                '${controller.scheduleComplianceCompletedSum}',
-                                                                style: TextStyle(
-                                                                    fontSize:
-                                                                        Get.width *
-                                                                                0.009 -
-                                                                            1),
-                                                              ),
-                                                            ],
-                                                          ),
-                                                          // Dimens.boxHeight5,
-                                                          Row(
-                                                            children: [
-                                                              Text(
-                                                                "Pending",
-                                                                style: TextStyle(
-                                                                    fontSize:
-                                                                        Get.width *
-                                                                                0.009 -
-                                                                            1),
-                                                              ),
-                                                              Spacer(),
-                                                              Text(
-                                                                '${controller.scheduleCompliancePendingSum}',
-                                                                style: TextStyle(
-                                                                    fontSize:
-                                                                        Get.width *
-                                                                                0.009 -
-                                                                            1),
-                                                              ),
-                                                            ],
-                                                          ),
-                                                        ],
+                                                        ),
                                                       ),
-                                                    ),
-                                                  ],
-                                                ),
+
+                                                      // Spacer(),
+                                                    ]),
                                                 // Dimens.boxHeight20,
                                               ],
                                             ),
@@ -769,41 +827,54 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                 ],
                                               )),
                                         ),
+                                        Expanded(
+                                          flex: 2,
+                                          child: Container(
+                                              padding: EdgeInsets.only(top: 15),
+                                              decoration: BoxDecoration(
+                                                color:
+                                                    ColorValues.lightBlueColor,
+                                                borderRadius:
+                                                    BorderRadius.circular(10),
+                                                boxShadow: [
+                                                  BoxShadow(
+                                                    color: Colors.grey,
+                                                    offset: Offset(0.0, 1.0),
+                                                    blurRadius: 6.0,
+                                                  ),
+                                                ],
+                                              ),
+                                              height: 150,
+                                              child: Column(
+                                                children: [
+                                                  Text("Low Stock Items",
+                                                      style: Styles.black15),
+                                                  Container(
+                                                    height: 35,
+                                                    child: CustomElevatedButton(
+                                                        backgroundColor:
+                                                            ColorValues
+                                                                .appLightBlueColor,
+                                                        onPressed: () {},
+                                                        text:
+                                                            '${controller.lowStockItemsSum}'),
+                                                  ),
+                                                  Text("PO Items Awaited",
+                                                      style: Styles.black15),
+                                                  Container(
+                                                    height: 35,
+                                                    child: CustomElevatedButton(
+                                                        backgroundColor:
+                                                            ColorValues
+                                                                .appLightBlueColor,
+                                                        onPressed: () {},
+                                                        text:
+                                                            '${controller.poItemsAwaitedSum}'),
+                                                  ),
+                                                ],
+                                              )),
+                                        ),
                                       ],
-                                    ),
-                                    Dimens.boxHeight10,
-                                    Container(
-                                      // height: 70,
-                                      width: Get.width * .92,
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceAround,
-                                        children: [
-                                          _gridList(
-                                            tittle: "WO on-time",
-                                            percent:
-                                                '${((controller.woOnTimeSum.value) / (controller.totalSum.value) * 100).toStringAsFixed(1)}%',
-                                          ),
-                                          _gridList(
-                                            tittle: "WO delay",
-                                            percent:
-                                                '${((controller.woDelaySum.value) / (controller.totalSum.value) * 100).toStringAsFixed(1)}%',
-                                          ),
-                                          _gridList(
-                                            tittle: "WO backlog",
-                                            percent:
-                                                '${((controller.woBacklogSum.value) / (controller.totalSum.value) * 100).toStringAsFixed(1)}%',
-                                          ),
-                                          _gridList(
-                                              tittle: "Low stock items",
-                                              percent:
-                                                  '${controller.lowStockItemsSum}'),
-                                          _gridList(
-                                              tittle: "PO Items Awaited",
-                                              percent:
-                                                  '${controller.poItemsAwaitedSum}'),
-                                        ],
-                                      ),
                                     ),
                                     Dimens.boxHeight10,
                                     Expanded(
@@ -1415,38 +1486,54 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                 ],
                                               )),
                                         ),
+                                        Expanded(
+                                          flex: 2,
+                                          child: Container(
+                                              padding: EdgeInsets.only(top: 15),
+                                              decoration: BoxDecoration(
+                                                color:
+                                                    ColorValues.lightBlueColor,
+                                                borderRadius:
+                                                    BorderRadius.circular(10),
+                                                boxShadow: [
+                                                  BoxShadow(
+                                                    color: Colors.grey,
+                                                    offset: Offset(0.0, 1.0),
+                                                    blurRadius: 6.0,
+                                                  ),
+                                                ],
+                                              ),
+                                              height: 150,
+                                              child: Column(
+                                                children: [
+                                                  Text("Low Stock Items",
+                                                      style: Styles.black15),
+                                                  Container(
+                                                    height: 35,
+                                                    child: CustomElevatedButton(
+                                                        backgroundColor:
+                                                            ColorValues
+                                                                .appLightBlueColor,
+                                                        onPressed: () {},
+                                                        text:
+                                                            '${controller.dashboardBmList.value?.cmDashboadDetails?.low_stock_items ?? 0}'),
+                                                  ),
+                                                  Text("PO Items Awaited",
+                                                      style: Styles.black15),
+                                                  Container(
+                                                    height: 35,
+                                                    child: CustomElevatedButton(
+                                                        backgroundColor:
+                                                            ColorValues
+                                                                .appLightBlueColor,
+                                                        onPressed: () {},
+                                                        text:
+                                                            '${controller.dashboardBmList.value?.cmDashboadDetails?.po_items_awaited ?? 0}'),
+                                                  ),
+                                                ],
+                                              )),
+                                        ),
                                       ],
-                                    ),
-                                    Dimens.boxHeight10,
-                                    Container(
-                                      // height: 70,
-                                      width: Get.width * .92,
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceAround,
-                                        children: [
-                                          _gridList(
-                                              tittle: "WO on-time",
-                                              percent:
-                                                  '${((controller.dashboardBmList.value?.cmDashboadDetails?.wo_on_time ?? 0) / (controller.dashboardBmList.value?.cmDashboadDetails?.total ?? 1) * 100).toString()}%'),
-                                          _gridList(
-                                              tittle: "WO delay",
-                                              percent:
-                                                  '${((controller.dashboardBmList.value?.cmDashboadDetails?.wo_delay ?? 0) / (controller.dashboardBmList.value?.cmDashboadDetails?.total ?? 1) * 100).toString()}%'),
-                                          _gridList(
-                                              tittle: "WO backlog",
-                                              percent:
-                                                  '${((controller.dashboardBmList.value?.cmDashboadDetails?.wo_backlog ?? 0) / (controller.dashboardBmList.value?.cmDashboadDetails?.total ?? 1) * 100).toString()}%'),
-                                          _gridList(
-                                              tittle: "Low stock items",
-                                              percent:
-                                                  '${controller.dashboardBmList.value?.cmDashboadDetails?.low_stock_items}'),
-                                          _gridList(
-                                              tittle: "PO Items Awaited",
-                                              percent:
-                                                  '${controller.dashboardBmList.value?.cmDashboadDetails?.po_items_awaited}'),
-                                        ],
-                                      ),
                                     ),
                                     Dimens.boxHeight10,
                                     Expanded(
@@ -2104,47 +2191,60 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                         ),
                                                       );
                                                     }),
-                                                  )
+                                                  ),
+                                                ],
+                                              )),
+                                        ),
+                                        Expanded(
+                                          flex: 2,
+                                          child: Container(
+                                              padding: EdgeInsets.only(top: 15),
+                                              decoration: BoxDecoration(
+                                                color:
+                                                    ColorValues.lightBlueColor,
+                                                borderRadius:
+                                                    BorderRadius.circular(10),
+                                                boxShadow: [
+                                                  BoxShadow(
+                                                    color: Colors.grey,
+                                                    offset: Offset(0.0, 1.0),
+                                                    blurRadius: 6.0,
+                                                  ),
+                                                ],
+                                              ),
+                                              height: 150,
+                                              child: Column(
+                                                children: [
+                                                  Text("Low Stock Items",
+                                                      style: Styles.black15),
+                                                  Container(
+                                                    height: 35,
+                                                    child: CustomElevatedButton(
+                                                        backgroundColor:
+                                                            ColorValues
+                                                                .appLightBlueColor,
+                                                        onPressed: () {},
+                                                        text:
+                                                            '${controller.dashboardPmList.value?.cmDashboadDetails?.low_stock_items ?? 0}'),
+                                                  ),
+                                                  Text("PO Items Awaited",
+                                                      style: Styles.black15),
+                                                  Container(
+                                                    height: 35,
+                                                    child: CustomElevatedButton(
+                                                        backgroundColor:
+                                                            ColorValues
+                                                                .appLightBlueColor,
+                                                        onPressed: () {},
+                                                        text:
+                                                            '${controller.dashboardPmList.value?.cmDashboadDetails?.po_items_awaited ?? 0}'),
+                                                  ),
                                                 ],
                                               )),
                                         ),
                                       ],
                                     ),
                                     Dimens.boxHeight10,
-                                    SingleChildScrollView(
-                                      scrollDirection: Axis.horizontal,
-                                      child: Container(
-                                        // height: 70,
-                                        width: Get.width * .92,
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceAround,
-                                          children: [
-                                            _gridList(
-                                                tittle: "WO on-time",
-                                                percent:
-                                                    '${((controller.dashboardPmList.value?.cmDashboadDetails?.wo_on_time ?? 0) / (controller.dashboardPmList.value?.cmDashboadDetails?.total ?? 1) * 100).toString()}%'),
-                                            _gridList(
-                                                tittle: "WO delay",
-                                                percent:
-                                                    '${((controller.dashboardPmList.value?.cmDashboadDetails?.wo_delay ?? 0) / (controller.dashboardPmList.value?.cmDashboadDetails?.total ?? 1) * 100).toString()}%'),
-                                            _gridList(
-                                                tittle: "WO backlog",
-                                                percent:
-                                                    '${((controller.dashboardPmList.value?.cmDashboadDetails?.wo_backlog ?? 0) / (controller.dashboardPmList.value?.cmDashboadDetails?.total ?? 1) * 100).toString()}%'),
-                                            _gridList(
-                                                tittle: "Low stock items",
-                                                percent:
-                                                    '${controller.dashboardPmList.value?.cmDashboadDetails?.low_stock_items}'),
-                                            _gridList(
-                                                tittle: "PO Items Awaited",
-                                                percent:
-                                                    '${controller.dashboardPmList.value?.cmDashboadDetails?.po_items_awaited ?? 0}%'),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                    // Dimens.boxHeight10,
                                     Expanded(
                                       child: Container(
                                         color:
@@ -2802,48 +2902,56 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                 ],
                                               )),
                                         ),
+                                        Expanded(
+                                          flex: 2,
+                                          child: Container(
+                                              padding: EdgeInsets.only(top: 15),
+                                              decoration: BoxDecoration(
+                                                color:
+                                                    ColorValues.lightBlueColor,
+                                                borderRadius:
+                                                    BorderRadius.circular(10),
+                                                boxShadow: [
+                                                  BoxShadow(
+                                                    color: Colors.grey,
+                                                    offset: Offset(0.0, 1.0),
+                                                    blurRadius: 6.0,
+                                                  ),
+                                                ],
+                                              ),
+                                              height: 150,
+                                              child: Column(
+                                                children: [
+                                                  Text("Low Stock Items",
+                                                      style: Styles.black15),
+                                                  Container(
+                                                    height: 35,
+                                                    child: CustomElevatedButton(
+                                                        backgroundColor:
+                                                            ColorValues
+                                                                .appLightBlueColor,
+                                                        onPressed: () {},
+                                                        text:
+                                                            '${controller.dashboardMcList.value?.cmDashboadDetails?.low_stock_items ?? 0}'),
+                                                  ),
+                                                  Text("PO Items Awaited",
+                                                      style: Styles.black15),
+                                                  Container(
+                                                    height: 35,
+                                                    child: CustomElevatedButton(
+                                                        backgroundColor:
+                                                            ColorValues
+                                                                .appLightBlueColor,
+                                                        onPressed: () {},
+                                                        text:
+                                                            '${controller.dashboardMcList.value?.cmDashboadDetails?.po_items_awaited ?? 0}'),
+                                                  ),
+                                                ],
+                                              )),
+                                        ),
                                       ],
                                     ),
                                     Dimens.boxHeight10,
-                                    SingleChildScrollView(
-                                      scrollDirection: Axis.horizontal,
-                                      child: Container(
-                                        // height: 70,
-                                        width: Get.width * .92,
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceAround,
-                                          children: [
-                                            _gridList(
-                                              tittle: "WO on-time",
-                                              percent:
-                                                  '${((controller.dashboardMcList.value?.cmDashboadDetails?.wo_on_time ?? 0) / (controller.dashboardMcList.value?.cmDashboadDetails?.total ?? 1) * 100).toString()}%',
-                                            ),
-                                            _gridList(
-                                              tittle: "WO delay",
-                                              percent:
-                                                  '${((controller.dashboardMcList.value?.cmDashboadDetails?.wo_delay ?? 0) / (controller.dashboardMcList.value?.cmDashboadDetails?.total ?? 1) * 100).toString()}%',
-                                            ),
-                                            _gridList(
-                                              tittle: "WO backlog",
-                                              percent:
-                                                  '${((controller.dashboardMcList.value?.cmDashboadDetails?.wo_backlog ?? 0) / (controller.dashboardMcList.value?.cmDashboadDetails?.total ?? 1) * 100).toString()}%',
-                                            ),
-                                            _gridList(
-                                              tittle: "Low stock items",
-                                              percent:
-                                                  '${controller.dashboardMcList.value?.cmDashboadDetails?.low_stock_items} %',
-                                            ),
-                                            _gridList(
-                                              tittle: "PO Items Awaited",
-                                              percent:
-                                                  '${controller.dashboardMcList.value?.cmDashboadDetails?.po_items_awaited}',
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                    // Dimens.boxHeight10,
                                     Expanded(
                                       child: Container(
                                         color:
@@ -3020,7 +3128,7 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                               .start_date ??
                                                           ''),
                                                 ),
-                                               DataCell(
+                                                DataCell(
                                                   Text(controller
                                                               .dashboardMcList
                                                               .value
@@ -3501,46 +3609,56 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                 ],
                                               )),
                                         ),
+                                        Expanded(
+                                          flex: 2,
+                                          child: Container(
+                                              padding: EdgeInsets.only(top: 15),
+                                              decoration: BoxDecoration(
+                                                color:
+                                                    ColorValues.lightBlueColor,
+                                                borderRadius:
+                                                    BorderRadius.circular(10),
+                                                boxShadow: [
+                                                  BoxShadow(
+                                                    color: Colors.grey,
+                                                    offset: Offset(0.0, 1.0),
+                                                    blurRadius: 6.0,
+                                                  ),
+                                                ],
+                                              ),
+                                              height: 150,
+                                              child: Column(
+                                                children: [
+                                                  Text("Low Stock Items",
+                                                      style: Styles.black15),
+                                                  Container(
+                                                    height: 35,
+                                                    child: CustomElevatedButton(
+                                                        backgroundColor:
+                                                            ColorValues
+                                                                .appLightBlueColor,
+                                                        onPressed: () {},
+                                                        text:
+                                                            '${controller.dashboardIrList.value?.cmDashboadDetails?.low_stock_items ?? 0}'),
+                                                  ),
+                                                  Text("PO Items Awaited",
+                                                      style: Styles.black15),
+                                                  Container(
+                                                    height: 35,
+                                                    child: CustomElevatedButton(
+                                                        backgroundColor:
+                                                            ColorValues
+                                                                .appLightBlueColor,
+                                                        onPressed: () {},
+                                                        text:
+                                                            '${controller.dashboardIrList.value?.cmDashboadDetails?.po_items_awaited ?? 0}'),
+                                                  ),
+                                                ],
+                                              )),
+                                        ),
                                       ],
                                     ),
                                     Dimens.boxHeight10,
-                                    SingleChildScrollView(
-                                      scrollDirection: Axis.horizontal,
-                                      child: Container(
-                                        // height: 70,
-                                        width: Get.width * .92,
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceAround,
-                                          children: [
-                                            _gridList(
-                                              tittle: "WO on-time",
-                                              percent:
-                                                  '${((controller.dashboardIrList.value?.cmDashboadDetails?.wo_on_time ?? 0) / (controller.dashboardIrList.value?.cmDashboadDetails?.total ?? 1) * 100).toString()}%',
-                                            ),
-                                            _gridList(
-                                              tittle: "WO delay",
-                                              percent:
-                                                  '${((controller.dashboardIrList.value?.cmDashboadDetails?.wo_delay ?? 0) / (controller.dashboardIrList.value?.cmDashboadDetails?.total ?? 1) * 100).toString()}%',
-                                            ),
-                                            _gridList(
-                                              tittle: "WO backlog",
-                                              percent:
-                                                  '${((controller.dashboardIrList.value?.cmDashboadDetails?.wo_backlog ?? 0) / (controller.dashboardIrList.value?.cmDashboadDetails?.total ?? 1) * 100).toString()}%',
-                                            ),
-                                            _gridList(
-                                                tittle: "Low stock items",
-                                                percent:
-                                                    '${controller.dashboardIrList.value?.cmDashboadDetails?.low_stock_items}'),
-                                            _gridList(
-                                                tittle: "PO Items Awaited",
-                                                percent:
-                                                    '${controller.dashboardIrList.value?.cmDashboadDetails?.po_items_awaited}'),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                    // Dimens.boxHeight10,
                                     Expanded(
                                       child: Container(
                                         color:
@@ -4197,46 +4315,56 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                 ],
                                               )),
                                         ),
+                                        Expanded(
+                                          flex: 2,
+                                          child: Container(
+                                              padding: EdgeInsets.only(top: 15),
+                                              decoration: BoxDecoration(
+                                                color:
+                                                    ColorValues.lightBlueColor,
+                                                borderRadius:
+                                                    BorderRadius.circular(10),
+                                                boxShadow: [
+                                                  BoxShadow(
+                                                    color: Colors.grey,
+                                                    offset: Offset(0.0, 1.0),
+                                                    blurRadius: 6.0,
+                                                  ),
+                                                ],
+                                              ),
+                                              height: 150,
+                                              child: Column(
+                                                children: [
+                                                  Text("Low Stock Items",
+                                                      style: Styles.black15),
+                                                  Container(
+                                                    height: 35,
+                                                    child: CustomElevatedButton(
+                                                        backgroundColor:
+                                                            ColorValues
+                                                                .appLightBlueColor,
+                                                        onPressed: () {},
+                                                        text:
+                                                            '${controller.dashboardSmList.value?.cmDashboadDetails?.low_stock_items ?? 0}'),
+                                                  ),
+                                                  Text("PO Items Awaited",
+                                                      style: Styles.black15),
+                                                  Container(
+                                                    height: 35,
+                                                    child: CustomElevatedButton(
+                                                        backgroundColor:
+                                                            ColorValues
+                                                                .appLightBlueColor,
+                                                        onPressed: () {},
+                                                        text:
+                                                            '${controller.dashboardSmList.value?.cmDashboadDetails?.po_items_awaited ?? 0}'),
+                                                  ),
+                                                ],
+                                              )),
+                                        ),
                                       ],
                                     ),
                                     Dimens.boxHeight10,
-                                    SingleChildScrollView(
-                                      scrollDirection: Axis.horizontal,
-                                      child: Container(
-                                        // height: 70,
-                                        width: Get.width * .92,
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceAround,
-                                          children: [
-                                            _gridList(
-                                              tittle: "WO on-time",
-                                              percent:
-                                                  '${((controller.dashboardBmList.value?.cmDashboadDetails?.completed ?? 0) / (controller.dashboardBmList.value?.cmDashboadDetails?.total ?? 1) * 100).toStringAsFixed(1).toString()}%',
-                                            ),
-                                            _gridList(
-                                              tittle: "WO delay",
-                                              percent:
-                                                  '${((controller.dashboardBmList.value?.cmDashboadDetails?.wo_delay ?? 0) / (controller.dashboardBmList.value?.cmDashboadDetails?.total ?? 1) * 100).toStringAsFixed(1).toString()}%',
-                                            ),
-                                            _gridList(
-                                              tittle: "WO backlog",
-                                              percent:
-                                                  '${((controller.dashboardBmList.value?.cmDashboadDetails?.wo_backlog ?? 0) / (controller.dashboardBmList.value?.cmDashboadDetails?.total ?? 1) * 100).toStringAsFixed(1).toString()}%',
-                                            ),
-                                            _gridList(
-                                                tittle: "Low stock items",
-                                                percent:
-                                                    '${controller.dashboardSmList.value?.cmDashboadDetails?.low_stock_items}'),
-                                            _gridList(
-                                                tittle: "PO Items Awaited",
-                                                percent:
-                                                    '${controller.dashboardSmList.value?.cmDashboadDetails?.po_items_awaited}'),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                    // Dimens.boxHeight10,
                                     Expanded(
                                       child: Container(
                                         color:
@@ -4548,54 +4676,6 @@ class DashBoardHomeWeb extends GetView<HomeController> {
         });
   }
 
-  _gridList({
-    required String tittle,
-    required String percent,
-  }) {
-    return SelectionArea(
-      child: MouseRegion(
-        cursor: SystemMouseCursors.click,
-        child: Container(
-          decoration: BoxDecoration(
-            color: Color(0xFF363A40),
-            borderRadius: BorderRadius.circular(5),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.grey,
-                offset: Offset(0.0, 1.0),
-                blurRadius: 6.0,
-              ),
-            ],
-          ),
-          margin: EdgeInsets.only(left: 10, right: 10),
-          width: 150,
-          height: 52,
-          padding: EdgeInsets.only(left: 10, right: 10, top: 3),
-          child: Column(
-            children: [
-              Text(
-                tittle,
-                style: TextStyle(
-                    color: ColorValues.whiteColor,
-                    fontSize: 15,
-                    fontWeight: FontWeight.w200),
-                textAlign: TextAlign.center,
-              ),
-              Text(
-                percent,
-                style: TextStyle(
-                    color: ColorValues.whiteColor,
-                    fontSize: 15,
-                    fontWeight: FontWeight.w200),
-                textAlign: TextAlign.center,
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
   _isDeleteDialog() {
     Get.dialog(
       AlertDialog(
@@ -4631,4 +4711,11 @@ class DashBoardHomeWeb extends GetView<HomeController> {
       ),
     );
   }
+}
+
+class _ChartData {
+  _ChartData(this.category, this.value);
+
+  final String category;
+  final double value;
 }
