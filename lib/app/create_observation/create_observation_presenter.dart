@@ -20,6 +20,7 @@ class CreateObservationPresenter {
     return createObservationUsecase.saveValue(obsId: obsId);
   }
 
+  void clearValue() async => createObservationUsecase.clearValue();
   Future<List<IncidentRiskTypeModell>> getIncidentRiskType(
       {required bool isLoading, required int facilityId}) async {
     return createObservationUsecase.getIncidentRiskType(
