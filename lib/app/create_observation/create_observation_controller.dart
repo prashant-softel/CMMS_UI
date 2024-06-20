@@ -127,6 +127,7 @@ class CreateObservationController extends GetxController {
       getObsById.value = _getObsDetail;
 
       contactNumberCtrlr.text = getObsById.value?.contact_number ?? '';
+      responsiblePersonCtrlr.text = getObsById.value?.responsible_person ?? '';
       contractorNameCtrlr.text = getObsById.value?.contractor_name ?? "";
       correctivePreventiveCtrlr.text =
           getObsById.value?.preventive_action ?? "";
@@ -136,6 +137,11 @@ class CreateObservationController extends GetxController {
           getObsById.value?.location_of_observation ?? "";
       targetDateTc.text = getObsById.value?.target_date ?? "";
       obsDateTc.text = getObsById.value?.date_of_observation ?? "";
+      selectedRiskTypeList.value = getObsById.value?.risk_type_name ?? '';
+      selectedTypeOfObs.value =
+          getObsById.value?.type_of_observation_name ?? '';
+      selectedSourceOfObs.value =
+          getObsById.value?.source_of_observation_name ?? '';
     }
   }
 
