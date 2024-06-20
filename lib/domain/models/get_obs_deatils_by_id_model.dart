@@ -14,6 +14,8 @@ class GetObservationById {
   String? preventive_action;
   String? responsible_person;
   String? contact_number;
+  String? short_status;
+
   String? cost_type;
   String? date_of_observation;
   int? type_of_observation;
@@ -38,6 +40,7 @@ class GetObservationById {
     this.responsible_person,
     this.contact_number,
     this.cost_type,
+    this.short_status,
     this.date_of_observation,
     this.type_of_observation,
     this.type_of_observation_name,
@@ -56,6 +59,7 @@ class GetObservationById {
     return GetObservationById(
       id: json['id'],
       facility_id: json['facility_id'],
+      short_status: json['short_status'],
       contact_number: json['contact_number'],
       contractor_name: json['contractor_name'],
       cost_type: json['cost_type'],
