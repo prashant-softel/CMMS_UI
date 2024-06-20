@@ -539,7 +539,7 @@ class ObservationListDataSource extends DataTableSource {
                               int obsId = ObservationListDetails?.id ?? 0;
                               if (obsId != 0) {
                                 Get.toNamed(
-                                  Routes.createObservation,
+                                  Routes.viewObservationScreen,
                                   arguments: {
                                     'obsId': ObservationListDetails?.id,
                                   },
