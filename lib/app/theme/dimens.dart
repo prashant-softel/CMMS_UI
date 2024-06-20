@@ -42,6 +42,8 @@ abstract class Dimens {
   static double thirtyTwo = 32.sp;
   static double thirtyFour = 34.sp;
   static double thirtyFive = 35.sp;
+  static double thirtySeven = 37.sp;
+
   static double thirtySix = 36.sp;
   static double thirtyEight = 38.sp;
   static double thirtyNine = 39.sp;
@@ -1353,6 +1355,8 @@ abstract class Dimens {
   static SizedBox boxWidth30 = SizedBox(width: thirty);
   static SizedBox boxWidth40 = SizedBox(width: fourty);
   static SizedBox boxWidth35 = SizedBox(width: thirtyFive);
+  static SizedBox boxWidth37 = SizedBox(width: thirtySeven);
+
   static SizedBox boxWidth50 = SizedBox(width: fifty);
   static SizedBox boxWidth47 = SizedBox(width: fortySeven);
   static SizedBox boxWidth60 = SizedBox(width: sixty);
