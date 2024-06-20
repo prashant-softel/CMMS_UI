@@ -1661,7 +1661,7 @@ class NewPermitController extends GetxController {
         newPermit: jobJsonString,
         pmTaskId: pmTaskId!,
         activity: activity,
-        isLoading: true,type:3
+        isLoading: true,type:type,
       );
       if (responseNewPermitCreatedForJob != null) {
         //  CreateNewPermitDialog();
