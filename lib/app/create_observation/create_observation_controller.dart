@@ -391,4 +391,6 @@ class CreateObservationController extends GetxController {
         break;
     }
   }
+
 }
+

@@ -167,6 +167,8 @@ import 'package:cmms/app/view_mc_plan/view/view_mc_planning_screen.dart';
 import 'package:cmms/app/view_mc_plan/view_mc_planning_binding.dart';
 import 'package:cmms/app/view_mis_plan/view/view_mis_plan_screen.dart';
 import 'package:cmms/app/view_mis_plan/view_mis_plan_binding.dart';
+import 'package:cmms/app/view_observation/view_observation_binding.dart';
+import 'package:cmms/app/view_observation/views/view_observation_screen.dart';
 import 'package:cmms/app/view_permit/new_view_permit_binding.dart';
 import 'package:cmms/app/view_permit/view/view_permit_screen.dart';
 import 'package:cmms/app/view_request_orders/request_goods_orders_view_binding.dart';
@@ -1345,10 +1347,15 @@ class AppPages {
       page: ComplianceStatusScreen.new,
       binding: ComplianceStatusBinding(),
     ),
-     GetPage<dynamic>(
+    GetPage<dynamic>(
       name: _Paths.DocumentMaster,
       page: DocumentMasterScreen.new,
       binding: DocumentMasterBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.viewObservationScreen,
+      page: ViewObservationScreen.new,
+      binding: ViewObservationBinding(),
     ),
   ];
 }
