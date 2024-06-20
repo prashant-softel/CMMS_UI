@@ -1,5 +1,3 @@
-import 'package:cmms/app/Statutory/statutory_controller.dart';
-import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/home/home_screen.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/mis_list_of_observation/observation_list_controller.dart';
@@ -7,13 +5,11 @@ import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/theme/color_values.dart';
 import 'package:cmms/app/theme/dimens.dart';
 import 'package:cmms/app/theme/styles.dart';
-import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/app/widgets/action_button.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/date_picker.dart';
 import 'package:cmms/domain/models/get_observation_list_model.dart';
-import 'package:cmms/domain/models/get_statutory_list_model.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -464,21 +460,21 @@ class ObservationListDataSource extends DataTableSource {
     controller.ObservationId.value = ObservationListDetails?.id ?? 0;
     var cellsBuffer = [
       // '${ObservationListDetails?.id ?? ''}',
-      // "id",
+      "id",
       '${ObservationListDetails?.month_of_observation ?? ''}',
       '${ObservationListDetails?.date_of_observation ?? ''}',
       '${ObservationListDetails?.contractor_name ?? ''}',
       '${ObservationListDetails?.location_of_observation ?? ''}',
       '${ObservationListDetails?.type_of_observation ?? ''}',
       '${ObservationListDetails?.source_of_observation ?? ''}',
-      '${ObservationListDetails?.risk_type_name ?? ''}',
+      '${ObservationListDetails?.risk_type ?? ''}',
       '${ObservationListDetails?.corrective_action ?? ''}',
       '${ObservationListDetails?.responsible_person ?? ''}',
       '${ObservationListDetails?.target_date ?? ''}',
       '${ObservationListDetails?.action_taken ?? ''}',
       '${ObservationListDetails?.closer_date ?? ''}',
       '${ObservationListDetails?.cost_type ?? ''}',
-      '${ObservationListDetails?.status ?? ''}',
+      '${ObservationListDetails?.status_code ?? ''}',
 
       'Actions',
     ];
@@ -505,46 +501,72 @@ class ObservationListDataSource extends DataTableSource {
         return DataCell(
           Padding(
             padding: EdgeInsets.zero,
-            child: (value == 'Actions')
-                ? Row(
+            child: (value == 'id')
+                ? Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      TableActionButton(
-                        color: ColorValues.viewColor,
-                        icon: Icons.remove_red_eye_outlined,
-                        message: 'View',
-                        onPress: () {
-                          // controller.clearStoreData();
-                          int obsId = ObservationListDetails?.id ?? 0;
-                          if (obsId != 0) {
-                            Get.toNamed(
-                              Routes.createObservation,
-                              arguments: {
-                                'obsId': ObservationListDetails?.id,
-                              },
-                            );
-                          }
-                        },
+                      Text(
+                        ' OBS ${ObservationListDetails?.id}',
                       ),
-                      TableActionButton(
-                        color: ColorValues.editColor,
-                        icon: Icons.edit,
-                        message: 'Edit',
-                        onPress: () {
-                          // controller.clearStoreData();
-                          int obsId = ObservationListDetails?.id ?? 0;
-                          if (obsId != 0) {
-                            Get.toNamed(
-                              Routes.createObservation,
-                              arguments: {
-                                'obsId': ObservationListDetails?.id,
-                              },
-                            );
-                          }
-                        },
+                      Dimens.boxHeight10,
+                      Align(
+                        alignment: Alignment.centerRight,
+                        child: Container(
+                          padding: Dimens.edgeInsets8_2_8_2,
+                          decoration: BoxDecoration(
+                            color: ColorValues.addNewColor,
+                            borderRadius: BorderRadius.circular(4),
+                          ),
+                          child: Text(
+                            '${ObservationListDetails?.short_status}',
+                            style: Styles.white10.copyWith(
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
                       ),
                     ],
                   )
-                : Text(value.toString()),
+                : (value == 'Actions')
+                    ? Row(
+                        children: [
+                          TableActionButton(
+                            color: ColorValues.viewColor,
+                            icon: Icons.remove_red_eye_outlined,
+                            message: 'View',
+                            onPress: () {
+                              // controller.clearStoreData();
+                              int obsId = ObservationListDetails?.id ?? 0;
+                              if (obsId != 0) {
+                                Get.toNamed(
+                                  Routes.createObservation,
+                                  arguments: {
+                                    'obsId': ObservationListDetails?.id,
+                                  },
+                                );
+                              }
+                            },
+                          ),
+                          TableActionButton(
+                            color: ColorValues.editColor,
+                            icon: Icons.edit,
+                            message: 'Edit',
+                            onPress: () {
+                              // controller.clearStoreData();
+                              int obsId = ObservationListDetails?.id ?? 0;
+                              if (obsId != 0) {
+                                Get.toNamed(
+                                  Routes.createObservation,
+                                  arguments: {
+                                    'obsId': ObservationListDetails?.id,
+                                  },
+                                );
+                              }
+                            },
+                          ),
+                        ],
+                      )
+                    : Text(value.toString()),
           ),
         );
       }).toList(),
