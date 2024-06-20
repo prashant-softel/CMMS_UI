@@ -4,6 +4,7 @@ CreateObsModel createObsModelFromJson(String str) =>
     CreateObsModel.fromJson(json.decode(str));
 
 class CreateObsModel {
+  int? id;
   int? facility_id;
   String? contractor_name;
 
@@ -22,6 +23,7 @@ class CreateObsModel {
   dynamic uploadfileIds;
 
   CreateObsModel({
+    this.id,
     this.facility_id,
     this.contractor_name,
     this.risk_type_id,
@@ -40,6 +42,7 @@ class CreateObsModel {
 
   factory CreateObsModel.fromJson(Map<String, dynamic> json) {
     return CreateObsModel(
+      id: json['id'],
       facility_id: json['facility_id'],
       contractor_name: json['contractor_name'],
       risk_type_id: json['risk_type_id'],
@@ -57,6 +60,7 @@ class CreateObsModel {
     );
   }
   Map<String, dynamic> toJson() => {
+        "id": id,
         "facility_id": facility_id,
         "contractor_name": contractor_name,
         "risk_type_id": risk_type_id,
