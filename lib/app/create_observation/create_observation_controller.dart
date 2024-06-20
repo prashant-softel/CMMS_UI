@@ -223,30 +223,30 @@ if(incidenttypeId == 0){
   isRiskTypeListSelected.value=false;
   isFormInvalid.value = true;
 }
- if (contractorNameCtrlr.text.trim().isEmpty) {
+ if (contractorNameCtrlr.text.trim()=='') {
       isContractorInvalid.value = true;
       isFormInvalid.value = true;
     }
 
-if (correctivePreventiveCtrlr.text.trim().isEmpty) {
+if (correctivePreventiveCtrlr.text.trim()=='') {
       isCorrectiveInvalid.value = true;
       isFormInvalid.value = true;
     }
-if (responsiblePersonCtrlr.text.trim().isEmpty) {
+if (responsiblePersonCtrlr.text.trim()=='') {
       isResponsibleInvalid.value = true;
       isFormInvalid.value = true;
     }
 
-    if (contactNumberCtrlr.text.trim().isEmpty) {
+    if (contactNumberCtrlr.text.trim()=='') {
       isContactNumberInvalid.value = true;
       isFormInvalid.value = true;
     }
-      if (costTypeCtrlr.text.trim().isEmpty) {
+      if (costTypeCtrlr.text.trim()=='') {
       isCostInvalid.value = true;
       isFormInvalid.value = true;
     }
     
-  if (obsDateTc.text.trim().isEmpty) {
+  if (obsDateTc.text.trim()=='') {
       isObsDateTcInvalid.value = true;
       isFormInvalid.value = true;
     }
@@ -367,6 +367,7 @@ if(sourceOfObsId == 0){
             typeOfObsId = typeOfObsList[typeOfObsIndex]?.id ?? 0;
             selectedTypeOfObs.value = value;
             isTypeOfObsListSelected.value = true;
+            isSelectedTypeOfObs.value = true;
             print(
                 "selectedBusinessTypeId: ${typeOfObsId} \n ${selectedTypeOfObs}");
           } else {
@@ -382,6 +383,7 @@ if(sourceOfObsId == 0){
             sourceOfObsId = sourceOfObsList[sourceOfObsIndex]?.id ?? 0;
             selectedSourceOfObs.value = value;
             isSourceOfObsListSelected.value = true;
+            isSelectedSourceOfObs.value=true;
             print(
                 "selectedBusinessTypeId: ${sourceOfObsId} \n ${selectedSourceOfObs}");
           } else {
