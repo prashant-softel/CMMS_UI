@@ -86,8 +86,7 @@ class ModuleCleaningListExecutionController extends GetxController {
   }
 
   void getMcExcustionListByDate() {
-    getMCTaskList(
-        facilityId, formattedFromdate1, formattedTodate1,  false);
+    getMCTaskList(facilityId, formattedFromdate1, formattedTodate1, false);
   }
 
   Rx<bool> isLoading = true.obs;
@@ -108,7 +107,7 @@ class ModuleCleaningListExecutionController extends GetxController {
       facilityId = event;
       Future.delayed(Duration(seconds: 1), () async {
         await getMCTaskList(
-            facilityId, formattedTodate1, formattedFromdate1,  false);
+            facilityId, formattedTodate1, formattedFromdate1, false);
       });
     });
     super.onInit();
@@ -122,7 +121,11 @@ class ModuleCleaningListExecutionController extends GetxController {
 
     List<MCTaskListModel?> filteredList = filteredData
         .where((item) =>
-            (item?.id?.toString().toLowerCase().contains(keyword.toLowerCase()) ?? false) ||
+            (item?.executionId
+                    ?.toString()
+                    .toLowerCase()
+                    .contains(keyword.toLowerCase()) ??
+                false) ||
             (item?.planId?.toString().toLowerCase().contains(keyword.toLowerCase()) ??
                 false) ||
             (item?.title?.toString().toLowerCase().contains(keyword.toLowerCase()) ??
@@ -144,13 +147,9 @@ class ModuleCleaningListExecutionController extends GetxController {
                     .toLowerCase()
                     .contains(keyword.toLowerCase()) ??
                 false) ||
-            (item?.doneDate
-                    ?.toString()
-                    .toLowerCase()
-                    .contains(keyword.toLowerCase()) ??
+            (item?.doneDate?.toString().toLowerCase().contains(keyword.toLowerCase()) ??
                 false) ||
-            (item?.status?.toString().toLowerCase().contains(keyword.toLowerCase()) ??
-                false))
+            (item?.status?.toString().toLowerCase().contains(keyword.toLowerCase()) ?? false))
         .toList();
     mcTaskList.value = filteredList;
 
@@ -178,8 +177,8 @@ class ModuleCleaningListExecutionController extends GetxController {
     // print('abandon id Button Data:${id}');
   }
 
-  Future<void> getMCTaskList(int facilityId, dynamic startDate, dynamic endDate,
-       bool isExport) async {
+  Future<void> getMCTaskList(
+      int facilityId, dynamic startDate, dynamic endDate, bool isExport) async {
     mcTaskList.value = <MCTaskListModel>[];
 
     final list = await moduleCleaningListExecutionPresenter.getMCTaskList(
@@ -193,7 +192,7 @@ class ModuleCleaningListExecutionController extends GetxController {
     for (var mc_task_list in list) {
       mcTaskList.add(mc_task_list);
     }
-  
+
     mcTaskList.value = list;
     filteredData.value = mcTaskList.value;
     paginationController = PaginationController(
@@ -228,7 +227,7 @@ class ModuleCleaningListExecutionController extends GetxController {
   //   getGoodsOrdersList(facilityId, formattedFromdate1, formattedTodate1, false);
   // }
   void export() {
-    getMCTaskList(facilityId, formattedFromdate1, formattedTodate1,  true);
+    getMCTaskList(facilityId, formattedFromdate1, formattedTodate1, true);
   }
 }
 

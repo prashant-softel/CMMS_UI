@@ -465,7 +465,7 @@ class MCExcutionListDataSource extends DataTableSource {
   void filtersMcExcution() {
     filteredMCExcutionList = <MCTaskListModel?>[];
     filteredMCExcutionList = controller.mcTaskList.where((McExcutionList) {
-      return (McExcutionList!.id ?? '')
+      return (McExcutionList!.executionId ?? '')
               .toString()
               .contains(controller.IDFilterText.value.toLowerCase()) &&
           (McExcutionList.title ?? '')
@@ -499,7 +499,7 @@ class MCExcutionListDataSource extends DataTableSource {
     // print({"getRow call"});
     final McExcutionListDetails = filteredMCExcutionList[index];
 
-    controller.Id.value = McExcutionListDetails?.id ?? 0;
+    controller.Id.value = McExcutionListDetails?.executionId ?? 0;
     var cellsBuffer = [
       // '${McExcutionListDetails?.id ?? ''}',
       "id",
@@ -544,7 +544,7 @@ class MCExcutionListDataSource extends DataTableSource {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'MC ${McExcutionListDetails?.id}',
+                        'MC ${McExcutionListDetails?.executionId}',
                       ),
                       Dimens.boxHeight10,
                       Align(
@@ -555,9 +555,11 @@ class MCExcutionListDataSource extends DataTableSource {
                             color: controller.mcTaskList
                                         .firstWhere(
                                           (e) =>
-                                              e?.id ==
-                                              McExcutionListDetails!.id,
-                                          orElse: () => MCTaskListModel(id: 00),
+                                              e?.executionId ==
+                                              McExcutionListDetails!
+                                                  .executionId,
+                                          orElse: () =>
+                                              MCTaskListModel(executionId: 00),
                                         )
                                         ?.status ==
                                     301
@@ -583,7 +585,7 @@ class MCExcutionListDataSource extends DataTableSource {
                             icon: Icons.remove_red_eye_outlined,
                             message: 'View',
                             onPress: () {
-                              int id = McExcutionListDetails?.id ?? 0;
+                              int id = McExcutionListDetails?.executionId ?? 0;
                               int planId = McExcutionListDetails?.planId ?? 0;
                               if (id != 0) {
                                 controller.clearStoreDataMcid();
@@ -611,7 +613,8 @@ class MCExcutionListDataSource extends DataTableSource {
                                   onPress: () {
                                     controller.clearStoreDataMcid();
                                     controller.clearStoreDataPlanid();
-                                    int id = McExcutionListDetails?.id ?? 0;
+                                    int id =
+                                        McExcutionListDetails?.executionId ?? 0;
                                     int planId =
                                         McExcutionListDetails?.planId ?? 0;
                                     if (id != 0) {
@@ -643,7 +646,8 @@ class MCExcutionListDataSource extends DataTableSource {
                                   onPress: () {
                                     controller.clearStoreDataMcid();
                                     controller.clearStoreDataPlanid();
-                                    int id = McExcutionListDetails?.id ?? 0;
+                                    int id =
+                                        McExcutionListDetails?.executionId ?? 0;
                                     int planId =
                                         McExcutionListDetails?.planId ?? 0;
                                     if (id != 0) {
@@ -666,7 +670,7 @@ class MCExcutionListDataSource extends DataTableSource {
       }).toList(),
       //   ],
       onSelectChanged: (_) {
-        int id = McExcutionListDetails?.id ?? 0;
+        int id = McExcutionListDetails?.executionId ?? 0;
         int planId = McExcutionListDetails?.planId ?? 0;
         if (id != 0) {
           controller.clearStoreDataMcid();

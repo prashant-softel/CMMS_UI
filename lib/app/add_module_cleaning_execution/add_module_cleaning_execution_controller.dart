@@ -152,7 +152,8 @@ class AddModuleCleaningExecutionController extends GetxController {
         await getInventoryCategoryList();
         if (mcid > 0) {
           //   Future.delayed(Duration(seconds: 1), () {
-          await getMCExecutionDetail(executionId: mcid.value, facilityId: facilityId);
+          await getMCExecutionDetail(
+              executionId: mcid.value, facilityId: facilityId);
           await getMCTaskEquipmentList(mcid.value, true);
           //  });
         }
@@ -208,8 +209,9 @@ class AddModuleCleaningExecutionController extends GetxController {
   Future<void> getMCTaskEquipmentList(int taskId, bool isLoading) async {
     equipmenTasktList.value = <GetMCTaskEquipmentList>[];
 
-    final list = await addModuleCleaningExecutionPresenter
-        .getMCTaskEquipmentList(isLoading: isLoading, taskId: taskId, facilityId: facilityId);
+    final list =
+        await addModuleCleaningExecutionPresenter.getMCTaskEquipmentList(
+            isLoading: isLoading, taskId: taskId, facilityId: facilityId);
     // print('incidentReportFacilityId$facilityId');
     // print('Incident Report List:$list');
     for (var equipment_list in list) {
@@ -446,7 +448,8 @@ class AddModuleCleaningExecutionController extends GetxController {
     }
   }
 
-  Future<void> getMCExecutionDetail({required int executionId,required int facilityId}) async {
+  Future<void> getMCExecutionDetail(
+      {required int executionId, required int facilityId}) async {
     // newPermitDetails!.value = <NewPermitListModel>[];
     mcExecutionDetailsList?.value = <EndMCExecutionDetailsModel>[];
 
@@ -472,10 +475,10 @@ class AddModuleCleaningExecutionController extends GetxController {
         rowItem.value.add([
           {"key": "Schedule Id", "value": '${element.scheduleId}'},
           {"key": "Days", "value": '${element.cleaningDay}'},
-          {"key": "Scheduled Module", "value": '${element.scheduledModules}'},
-          {"key": "Cleaned", "value": '${element.cleanedModules}'},
-          {"key": "Abandoned", "value": '${element.abandonedModules}'},
-          {"key": "Pending", "value": '${element.pendingModules}'},
+          {"key": "Scheduled Module", "value": '${element.scheduled}'},
+          {"key": "Cleaned", "value": '${element.cleaned}'},
+          {"key": "Abandoned", "value": '${element.abandoned}'},
+          {"key": "Pending", "value": '${element.pending}'},
           {"key": "Type", "value": '${element.cleaningTypeName}'},
           {"key": "Water Used", "value": '${element.waterUsed}'},
           {"key": "Remark", "value": '${element.remark}'},
@@ -492,22 +495,24 @@ class AddModuleCleaningExecutionController extends GetxController {
       case RxList<FacilityModel>:
         {
           if (value != "Please Select") {
-            int facilityIndex = facilityList.indexWhere((x) => x?.name == value);
+            int facilityIndex =
+                facilityList.indexWhere((x) => x?.name == value);
 
-          _facilityId.add(facilityList[facilityIndex]?.id ?? 0);
+            _facilityId.add(facilityList[facilityIndex]?.id ?? 0);
           } else {
-            facilityId=0;
+            facilityId = 0;
           }
         }
         break;
       case RxList<ModuleListModel>:
         {
           if (value != "Please Select") {
-            int moduleListIndex = moduleList.indexWhere((x) => x?.name == value);
-          selectedModuleListId = moduleList[moduleListIndex]?.id ?? 0;
-          print('Module List Id: $selectedModuleListId');
+            int moduleListIndex =
+                moduleList.indexWhere((x) => x?.name == value);
+            selectedModuleListId = moduleList[moduleListIndex]?.id ?? 0;
+            print('Module List Id: $selectedModuleListId');
           } else {
-            selectedModuleListId=0;
+            selectedModuleListId = 0;
           }
         }
         break;

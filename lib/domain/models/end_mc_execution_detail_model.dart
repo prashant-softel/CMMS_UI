@@ -14,6 +14,8 @@ class EndMCExecutionDetailsModel {
   String? title;
   String? description;
   String? frequency;
+  String? assignedTo;
+  String? startDate;
   int? noOfDays;
   String? plannedBy;
   String? plannedAt;
@@ -32,6 +34,8 @@ class EndMCExecutionDetailsModel {
     this.title,
     this.description,
     this.frequency,
+    this.startDate,
+    this.assignedTo,
     this.noOfDays,
     this.plannedBy,
     this.plannedAt,
@@ -52,6 +56,8 @@ class EndMCExecutionDetailsModel {
         title: json['title'],
         description: json['description'] ?? '',
         frequency: json['frequency'],
+        assignedTo: json['assignedTo'],
+        startDate: json['startDate'],
         noOfDays: json["noOfDays"],
         plannedBy: json['plannedBy'],
         plannedAt: json['plannedAt'],
@@ -74,6 +80,8 @@ class EndMCExecutionDetailsModel {
         "title": title,
         "description": description,
         "frequency": frequency,
+        "assignedTo": assignedTo,
+        "startDate": startDate,
         "noOfDays": noOfDays,
         "plannedBy": plannedBy,
         "plannedAt": plannedAt,
@@ -95,12 +103,12 @@ class Schedules {
     this.executionId,
     this.cleaningDay,
     this.cleaningTypeName,
-    this.scheduledModules,
-    this.cleanedModules,
-    this.abandonedModules,
-    this.pendingModules,
+    this.scheduled,
+    this.cleaned,
+    this.abandoned,
+    this.pending,
     this.waterUsed,
-    this.execution_date,
+    this.start_date,
     this.remark,
     this.status,
     this.status_short,
@@ -112,12 +120,12 @@ class Schedules {
   int? executionId;
   int? cleaningDay;
   String? cleaningTypeName;
-  int? scheduledModules;
-  int? cleanedModules;
-  int? abandonedModules;
-  int? pendingModules;
+  int? scheduled;
+  int? cleaned;
+  int? abandoned;
+  int? pending;
   int? waterUsed;
-  String? execution_date;
+  String? start_date;
   String? remark;
   int? status;
   String? status_short;
@@ -129,12 +137,12 @@ class Schedules {
         executionId: json['executionId'],
         cleaningDay: json['cleaningDay'],
         cleaningTypeName: json['cleaningTypeName'],
-        scheduledModules: json['scheduledModules'],
-        cleanedModules: json['cleanedModules'],
-        abandonedModules: json['abandonedModules'],
-        pendingModules: json['pendingModules'],
+        scheduled: json['scheduled'],
+        cleaned: json['cleaned'],
+        abandoned: json['abandoned'],
+        pending: json['pending'],
         waterUsed: json['waterUsed'],
-        execution_date: Utility.getFormatedyearMonthDay(json['execution_date']),
+        start_date: Utility.getFormatedyearMonthDay(json['start_date']),
         remark: json['remark'] ?? '',
         status_short: json['status_short'],
         status: json['status'],
@@ -150,12 +158,12 @@ class Schedules {
         "executionId": executionId,
         "cleaningDay": cleaningDay,
         "cleaningTypeName": cleaningTypeName,
-        "scheduledModules": scheduledModules,
-        "cleanedModules": cleanedModules,
-        "abandonedModules": abandonedModules,
-        "pendingModules": pendingModules,
+        "scheduled": scheduled,
+        "cleaned": cleaned,
+        "abandoned": abandoned,
+        "pending": pending,
         "waterUsed": waterUsed,
-        "execution_date": execution_date,
+        "start_date": start_date,
         "remark": remark,
         "status": status,
         "status_short": status_short,
