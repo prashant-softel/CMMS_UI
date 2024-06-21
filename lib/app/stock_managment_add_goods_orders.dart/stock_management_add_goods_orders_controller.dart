@@ -121,7 +121,7 @@ class StockManagementAddGoodsOrdersController extends GetxController {
   RxList<GetRODetailsByIDModel?>? getRoDetailsByIDModelList =
       <GetRODetailsByIDModel?>[].obs;
   RxList<GetAssetDataModel?>? goDetailsList = <GetAssetDataModel?>[].obs;
-  RxList<Items?>? goDetails = <Items?>[].obs;
+  RxList<Items?>? goDetailslist = <Items?>[].obs;
 
 //all textfield tc
   var challanNoCtrlr = TextEditingController();
@@ -359,9 +359,9 @@ class StockManagementAddGoodsOrdersController extends GetxController {
       print(
           'Additioanl Email Employees${_getPurchaseDetailsById.goDetails.length}');
       rowItem = <List<Map<String, String>>>[].obs;
-      goDetails?.value = _getPurchaseDetailsById.goDetails;
+      goDetailslist?.value = _getPurchaseDetailsById.goDetails;
 
-      _getPurchaseDetailsById.goDetails.forEach((element) {
+      getPurchaseDetailsByIDModel.value?.goDetails.forEach((element) {
         rowItem.add(
           [
             {
@@ -394,9 +394,12 @@ class StockManagementAddGoodsOrdersController extends GetxController {
           ],
         );
 
-        // dropdownMapperData[element.assetItem_Name ?? ""] = goDetails!
-        //     .firstWhere((e) => e?.assetItem_Name == element.assetItem_Name,
-        //         orElse: null)!;
+        dropdownMapperData[element.assetItem_Name ?? ""] = goDetailslist!
+            .firstWhere((e) => e?.asset_type == element.asset_type,
+                orElse: null)!;
+        paiddropdownMapperData[element.paid_by_name ?? ""] = goDetailslist!
+            .firstWhere((e) => e?.paid_by_name == element.paid_by_name,
+                orElse: null)!;
       });
 
       challanDateTc.text =
@@ -651,8 +654,7 @@ class StockManagementAddGoodsOrdersController extends GetxController {
           accepted_qty: 0,
           damaged_qty: 0,
           requested_qty: dropdownMapperData[element[0]["value"]]?.ordered_qty,
-          assetMasterItemID:
-              dropdownMapperData[element[0]["value"]]?.assetMasterItemID,
+          assetMasterItemID: dropdownMapperData[element[0]["value"]]?.id,
           cost: dropdownMapperData[element[0]["value"]]
               ?.cost, // double.tryParse(element[3]["value"] ?? '0'),
           ordered_qty: double.tryParse(element[3]["value"] ?? '0'),
@@ -733,12 +735,14 @@ class StockManagementAddGoodsOrdersController extends GetxController {
         lost_qty: 0,
         accepted_qty: 0,
         damaged_qty: 0,
-        requested_qty: double.tryParse(element[2]["value"] ?? '0'),
-        goItemID: int.tryParse('${element[0]["id"]}'),
-        assetMasterItemID: int.tryParse('${element[0]["assetMasterItemID"]}'),
-        cost: double.tryParse(element[3]["value"] ?? '0'),
-        ordered_qty: double.tryParse(element[4]["value"] ?? '0'),
-        paid_by_ID: int.tryParse('${element[1]["id"]}'),
+        requested_qty: dropdownMapperData[element[0]["value"]]?.ordered_qty,
+        assetMasterItemID: dropdownMapperData[element[0]["value"]]?.id,
+        cost: dropdownMapperData[element[0]["value"]]
+            ?.cost, // double.tryParse(element[3]["value"] ?? '0'),
+        ordered_qty: double.tryParse(element[3]["value"] ?? '0'),
+        paid_by_ID: paiddropdownMapperData[element[4]["value"]]?.id,
+
+        goItemID: int.tryParse('${element[0]["id"]}') ?? 0,
       );
 
       // poID: paiddropdownMapperData[element[1]["value"]]?.id)
