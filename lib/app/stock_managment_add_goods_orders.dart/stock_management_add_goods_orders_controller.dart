@@ -120,7 +120,7 @@ class StockManagementAddGoodsOrdersController extends GetxController {
       GetRODetailsByIDModel().obs;
   RxList<GetRODetailsByIDModel?>? getRoDetailsByIDModelList =
       <GetRODetailsByIDModel?>[].obs;
-  RxList<GoDetails?>? goDetailsList = <GoDetails?>[].obs;
+  RxList<GetAssetDataModel?>? goDetailsList = <GetAssetDataModel?>[].obs;
   RxList<Items?>? goDetails = <Items?>[].obs;
 
 //all textfield tc

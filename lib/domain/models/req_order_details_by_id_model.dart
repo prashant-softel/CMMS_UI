@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:cmms/domain/models/get_asset_data_list_model.dart';
+
 List<GetRODetailsByIDModel> getRODetailsByIDModelFromJson(String str) =>
     List<GetRODetailsByIDModel>.from(
         json.decode(str).map((x) => GetRODetailsByIDModel.fromJson(x)));
@@ -25,7 +27,7 @@ class GetRODetailsByIDModel {
   String? generatedAt;
   int? number_of_masters;
 
-  List<GoDetails>? request_order_items;
+  List<GetAssetDataModel>? request_order_items;
 
   GetRODetailsByIDModel({
     this.request_order_id,
@@ -63,9 +65,9 @@ class GetRODetailsByIDModel {
         number_of_masters: parsedJson["number_of_masters"] ?? "",
         rejectedAt: parsedJson["rejectedAt"] ?? "",
         rejectedBy: parsedJson["rejectedBy"] ?? "",
-        request_order_items: List<GoDetails>.from(
+        request_order_items: List<GetAssetDataModel>.from(
             parsedJson["request_order_items"]
-                .map((x) => GoDetails.fromJson(x))),
+                .map((x) => GetAssetDataModel.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -89,64 +91,64 @@ class GetRODetailsByIDModel {
       };
 }
 
-class GoDetails {
-  int? itemID;
-  int? requestID;
-  int? assetMasterItemID;
-  double? cost;
-  double? ordered_qty;
-  String? name;
-  int? accepted_qty;
-  String? comment;
-  String? asset_name;
-  String? asset_code;
-  String? asset_type;
-  String? asset_cat;
+// class GoDetails {
+//   int? itemID;
+//   int? requestID;
+//   int? id;
+//   double? cost;
+//   double? ordered_qty;
+//   String? name;
+//   int? accepted_qty;
+//   String? comment;
+//   String? asset_name;
+//   String? asset_code;
+//   String? asset_type;
+//   String? asset_cat;
 
-  GoDetails(
-      {this.itemID,
-      this.requestID,
-      this.assetMasterItemID,
-      this.cost,
-      this.ordered_qty,
-      this.name,
-      this.accepted_qty,
-      this.comment,
-      this.asset_code,
-      this.asset_name,
-      this.asset_type,
-      this.asset_cat});
+//   GoDetails(
+//       {this.itemID,
+//       this.requestID,
+//       this.id,
+//       this.cost,
+//       this.ordered_qty,
+//       this.name,
+//       this.accepted_qty,
+//       this.comment,
+//       this.asset_code,
+//       this.asset_name,
+//       this.asset_type,
+//       this.asset_cat});
 
-  GoDetails.fromJson(Map<String, dynamic> json) {
-    itemID = json['itemID'];
-    requestID = json['requestID'];
-    assetMasterItemID = json['assetMasterItemID'];
-    cost = json['cost'];
-    ordered_qty = json['ordered_qty'];
-    name = json['asset_name'];
-    accepted_qty = json['accepted_qty'];
-    comment = json['comment'];
-    asset_code = json['asset_code'];
-    asset_name = json['asset_name'];
-    asset_type = json['asset_type'];
-    asset_cat = json['asset_cat'];
-  }
+//   GoDetails.fromJson(Map<String, dynamic> json) {
+//     itemID = json['itemID'];
+//     requestID = json['requestID'];
+//     id = json['id'];
+//     cost = json['cost'];
+//     ordered_qty = json['ordered_qty'];
+//     name = json['asset_name'];
+//     accepted_qty = json['accepted_qty'];
+//     comment = json['comment'];
+//     asset_code = json['asset_code'];
+//     asset_name = json['asset_name'];
+//     asset_type = json['asset_type'];
+//     asset_cat = json['asset_cat'];
+//   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['itemID'] = this.itemID;
-    data['requestID'] = this.requestID;
-    data['assetMasterItemID'] = this.assetMasterItemID;
-    data['cost'] = this.cost;
-    data['ordered_qty'] = this.ordered_qty;
-    data['asset_name'] = this.name;
-    data['accepted_qty'] = this.accepted_qty;
-    data['comment'] = this.comment;
-    data['asset_code'] = this.asset_code;
-    data['asset_name'] = this.asset_name;
-    data['asset_type'] = this.asset_type;
-    data['asset_cat'] = this.asset_cat;
+//   Map<String, dynamic> toJson() {
+//     final Map<String, dynamic> data = new Map<String, dynamic>();
+//     data['itemID'] = this.itemID;
+//     data['requestID'] = this.requestID;
+//     data['id'] = this.id;
+//     data['cost'] = this.cost;
+//     data['ordered_qty'] = this.ordered_qty;
+//     data['asset_name'] = this.name;
+//     data['accepted_qty'] = this.accepted_qty;
+//     data['comment'] = this.comment;
+//     data['asset_code'] = this.asset_code;
+//     data['asset_name'] = this.asset_name;
+//     data['asset_type'] = this.asset_type;
+//     data['asset_cat'] = this.asset_cat;
 
-    return data;
-  }
-}
+//     return data;
+//   }
+// }
