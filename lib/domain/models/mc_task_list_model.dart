@@ -15,7 +15,7 @@ String mcTaskListModelToJson(List<MCTaskListModel> data) =>
 
 class MCTaskListModel {
   MCTaskListModel({
-    this.id,
+    this.executionId,
     this.planId,
     this.responsibility,
     this.frequency,
@@ -28,7 +28,7 @@ class MCTaskListModel {
     this.title,
   });
 
-  int? id;
+  int? executionId;
   int? planId;
   String? responsibility;
   String? frequency;
@@ -42,7 +42,7 @@ class MCTaskListModel {
 
   factory MCTaskListModel.fromJson(Map<String, dynamic> json) =>
       MCTaskListModel(
-        id: json["id"],
+        executionId: json["executionId"],
         planId: json["planId"],
         responsibility: json["responsibility"] ?? '',
         frequency: json["frequency"],
@@ -56,7 +56,7 @@ class MCTaskListModel {
       );
 
   Map<String, dynamic> toJson() => {
-        "id": id,
+        "executionId": executionId,
         "planId": planId,
         "responsibility": responsibility,
         "frequency": frequency,

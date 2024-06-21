@@ -111,7 +111,7 @@ class ViewModuleCleaningExecutionContentWeb
                                         Row(
                                           children: [
                                             Text(
-                                              'Create Module Cleaning Execution',
+                                              'View Module Cleaning Execution',
                                               style: Styles.black17,
                                             ),
                                             Spacer(),
@@ -477,25 +477,25 @@ class ViewModuleCleaningExecutionContentWeb
                                                       DataCell(Text(controller
                                                               .listSchedules?[
                                                                   index]
-                                                              ?.scheduledModules
+                                                              ?.scheduled
                                                               .toString() ??
                                                           '')),
                                                       DataCell(Text(controller
                                                               .listSchedules?[
                                                                   index]
-                                                              ?.cleanedModules
+                                                              ?.cleaned
                                                               .toString() ??
                                                           '')),
                                                       DataCell(Text(controller
                                                               .listSchedules?[
                                                                   index]
-                                                              ?.abandonedModules
+                                                              ?.abandoned
                                                               .toString() ??
                                                           '')),
                                                       DataCell(Text(controller
                                                               .listSchedules?[
                                                                   index]
-                                                              ?.pendingModules
+                                                              ?.pending
                                                               .toString() ??
                                                           '')),
                                                       DataCell(Text(controller
@@ -513,13 +513,13 @@ class ViewModuleCleaningExecutionContentWeb
                                                       DataCell(Text(controller
                                                               .listSchedules?[
                                                                   index]
-                                                              ?.execution_date
+                                                              ?.start_date
                                                               .toString() ??
                                                           '')),
                                                       DataCell(Text(controller
                                                               .listSchedules?[
                                                                   index]
-                                                              ?.execution_date
+                                                              ?.start_date
                                                               .toString() ??
                                                           '')),
                                                       DataCell(Text(controller
