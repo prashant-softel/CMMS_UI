@@ -17,20 +17,47 @@ class GetAssetDataModel {
   dynamic returned_qty;
   String? return_remarks;
   int? mrs_item_id;
-  GetAssetDataModel({
-    this.id,
-    this.asset_type,
-    this.name,
-    this.asset_code,
-    this.cat_name,
-    this.serial_number,
-    this.returned_qty,
-    this.return_remarks,
-    this.mrs_item_id,
-  });
+  int? itemID;
+  int? requestID;
+  // int? assetMasterItemID;
+  double? cost;
+  double? ordered_qty;
+  int? accepted_qty;
+  String? comment;
+  String? asset_name;
+  String? asset_cat;
+  GetAssetDataModel(
+      {this.id,
+      this.asset_type,
+      this.name,
+      this.asset_code,
+      this.cat_name,
+      this.serial_number,
+      this.returned_qty,
+      this.return_remarks,
+      this.mrs_item_id,
+      this.accepted_qty,
+      // this.assetMasterItemID,
+      this.asset_cat,
+      this.asset_name,
+      this.comment,
+      this.cost,
+      this.itemID,
+      this.ordered_qty,
+      this.requestID});
 
   GetAssetDataModel.fromJson(Map<String, dynamic> json) {
+    accepted_qty = json['accepted_qty'];
     id = json['id'];
+    // assetMasterItemID = json['assetMasterItemID'];
+    asset_cat = json['asset_cat'];
+    asset_name = json['asset_name'];
+    comment = json['comment'];
+    cost = json['cost'];
+    itemID = json['itemID'];
+    ordered_qty = json['ordered_qty'];
+    requestID = json['requestID'];
+
     mrs_item_id = json['mrs_item_id'];
     serial_number = json['serial_number'];
     asset_type = json['asset_type'];
@@ -42,6 +69,16 @@ class GetAssetDataModel {
   }
 
   Map<String, dynamic> toJson() => {
+        "accepted_qty": accepted_qty,
+        // "assetMasterItemID": assetMasterItemID,
+        "asset_cat": asset_cat,
+        "asset_name": asset_name,
+        "comment": comment,
+        "cost": cost,
+        "itemID": itemID,
+        "ordered_qty": ordered_qty,
+        "requestID": requestID,
+        "id": id,
         "id": id,
         "mrs_item_id": mrs_item_id,
         "serial_number": serial_number,
