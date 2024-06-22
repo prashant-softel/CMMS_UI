@@ -132,7 +132,7 @@ class Items {
       this.damaged_qty,
       this.id,
       this.assetItem_Name,
-      // this.locationID,
+      this.asset_cat,
       this.spare_status,
       this.remarks,
       this.receive_later,
@@ -148,7 +148,7 @@ class Items {
   int? id;
   int? assetMasterItemID;
   String? assetItem_Name;
-  // int? locationID;
+  String? asset_cat;
   double? cost;
   double? ordered_qty;
   double? received_qty;
@@ -175,7 +175,6 @@ class Items {
         storage_rack_no: json["storage_rack_no"],
         storage_row_no: json["storage_row_no"],
         storage_column_no: json["storage_column_no"],
-
         goItemID: json["goItemID"],
         cost: json["cost"],
         requested_qty: json["requested_qty"],
@@ -187,7 +186,7 @@ class Items {
         paid_by_ID: json["paid_by_ID"],
         id: json['id'],
         assetItem_Name: json['assetItem_Name'],
-        // locationID: json['location_ID'],
+        asset_cat: json['asset_cat'],
         spare_status: json['spare_status'],
         remarks: json['remarks'],
         receive_later: json['receive_later'],
@@ -204,7 +203,6 @@ class Items {
         "storage_rack_no": storage_rack_no == null ? "" : storage_rack_no,
         "storage_row_no": storage_row_no == null ? "" : storage_row_no,
         "storage_column_no": storage_column_no == null ? "" : storage_column_no,
-
         "goItemID": goItemID,
         "cost": cost,
         "ordered_qty": ordered_qty,
@@ -216,7 +214,7 @@ class Items {
         "damaged_qty": damaged_qty,
         "id": id == null ? 0 : id,
         "assetItem_Name": assetItem_Name == null ? "" : assetItem_Name,
-        // // // "locationID": locationID == null ? 0 : locationID,
+        "asset_cat": asset_cat == null ? "" : asset_cat,
         "spare_status": spare_status == null ? 0 : spare_status,
         "remarks": remarks == null ? "" : remarks,
         "receive_later": receive_later == null ? 0 : receive_later,
