@@ -220,7 +220,7 @@ class _JobCardContentWebState extends State<JobCardContentWeb> {
                                           : Expanded(
                                               child: PaginatedDataTable2(
                                                 columnSpacing: 10,
-                                                dataRowHeight: 90,
+                                                dataRowHeight: 70,
                                                 source: dataSource,
                                                 minWidth: Get.width * 1.2,
                                                 showCheckboxColumn: false,
