@@ -9081,7 +9081,7 @@ class ConnectHelper {
     required bool isLoading,
   }) async {
     ResponseModel responseModel = await apiWrapper.makeRequest(
-      'Attendence/GetAttendanceList?facility_id=$facilityId&year=$year',
+      'Attendence/GetAttendanceList?facility_id=$facilityId&year=2024',
       Request.get,
       null,
       isLoading,

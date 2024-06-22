@@ -5,12 +5,14 @@ List<AttendanceListModel> AttendanceListModelFromJson(String str) =>
         json.decode(str).map((x) => AttendanceListModel.fromJson(x)));
 
 class AttendanceListModel {
+  int? facility_id;
   int? month_id;
   String? month_name;
   int? year;
   List<MonthData>? month_data;
 
   AttendanceListModel({
+    this.facility_id,
     this.month_id,
     this.month_name,
     this.year,
@@ -19,9 +21,10 @@ class AttendanceListModel {
 
   factory AttendanceListModel.fromJson(Map<String, dynamic> json) =>
       AttendanceListModel(
+        facility_id: json["facility_id"],
         month_id: json["month_id"],
         month_name: json["month_name"],
-        year: json["year"],
+        year: json["years"],
         month_data: json["month_data"] != null
             ? List<MonthData>.from(
                 json["month_data"].map(
@@ -48,10 +51,10 @@ class MonthData {
   });
 
   factory MonthData.fromJson(Map<String, dynamic> json) => MonthData(
-        date: json["date"],
+        date: DateTime.parse(json['date']).day,
         hfe_employees: json['hfe_employees'],
-        less_than_35: json['less_than_35'],
-        between_30_to_50: json['between_30_to_50'],
-        greater_than_50: json['greater_than_50'],
+        less_than_35: json['age_lessthan_35'],
+        between_30_to_50: json['age_Between_35_50'],
+        greater_than_50: json['age_Greater_50'],
       );
 }
