@@ -405,7 +405,7 @@ class ReturnMrsListDataSource extends DataTableSource {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'MRS${MrsDetails?.id}',
+                        'RMRS${MrsDetails?.id}',
                       ),
                       Dimens.boxHeight10,
                       Align(
@@ -588,7 +588,7 @@ class ReturnMrsListDataSource extends DataTableSource {
                                   controller.clearStoreData();
                                   int mrsId = MrsDetails?.id ?? 0;
                                   Get.toNamed(Routes.approverReturnMrs,
-                                      arguments: {'mrsId': mrsId});
+                                      arguments: {'mrsId': mrsId, 'type': 0});
                                 },
                               )
                             : Dimens.box0,
