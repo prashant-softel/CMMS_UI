@@ -41,15 +41,15 @@ class ReturnMrsListController extends GetxController {
   Rx<int> MrsId = 0.obs;
 
   final columnVisibility = ValueNotifier<Map<String, bool>>({
-    "MRS ID": true,
-    "MRS Details": true,
+    "RMRS ID": true,
+    "RMRS Details": true,
     "Order Date": true,
     "Activity": true,
     "Where Used": true,
   });
   final Map<String, double> columnwidth = {
-    "MRS ID": 200,
-    "MRS Details": 400,
+    "RMRS ID": 200,
+    "RMRS Details": 400,
     "Order Date": 200,
     "Activity": 200,
     "Where Used": 200,
@@ -66,8 +66,8 @@ class ReturnMrsListController extends GetxController {
   @override
   void onInit() async {
     this.filterText = {
-      "MRS ID": idFilterText,
-      "MRS Details": mrsDetailFilterText,
+      "RMRS ID": idFilterText,
+      "RMRS Details": mrsDetailFilterText,
       "Order Date": orderDateFilterText,
       "Activity": activityFilterText,
       "Where Used": whereusedFilterText
