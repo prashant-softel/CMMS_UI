@@ -12,6 +12,7 @@ import 'package:cmms/domain/repositories/repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import '../../domain/models/file_upload_model.dart';
@@ -85,6 +86,7 @@ class PreventiveMaintenanceExecutionController extends GetxController {
   var itemExistsWithZeroDifference = <bool>[].obs;
   var returnitemExists = <int>[].obs;
   Rx<bool> allTrue = false.obs;
+  Rx<bool> isforminvalid = false.obs;
 
   ///fileIDs
   int fileIds = 0;
@@ -435,8 +437,20 @@ class PreventiveMaintenanceExecutionController extends GetxController {
     ));
   }
 
+  void checkform() {
+    if (commentCtrlr.text == '') {
+      isforminvalid.value = true;
+    } else {
+      isforminvalid.value = false;
+    }
+  }
+
   closePmTaskExecution() async {
     {
+      checkform();
+      if (isforminvalid.value == true) {
+        Fluttertoast.showToast(msg: "Please Enter Comment!");
+      }
       String _comment = commentCtrlr.text.trim();
       int ptwId = pmtaskViewModel.value?.permit_id ?? 0;
 
