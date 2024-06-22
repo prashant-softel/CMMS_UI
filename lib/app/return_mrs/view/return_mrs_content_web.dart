@@ -655,7 +655,7 @@ class ReturnMrsListDataSource extends DataTableSource {
 
                                   int mrsId = MrsDetails?.id ?? 0;
                                   Get.toNamed(Routes.approverReturnMrs,
-                                      arguments: {'mrsId': mrsId});
+                                      arguments: {'mrsId': mrsId, 'type': 0});
                                 },
                               )
                             : Dimens.box0
