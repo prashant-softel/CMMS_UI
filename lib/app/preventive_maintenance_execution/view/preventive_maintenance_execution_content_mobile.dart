@@ -464,7 +464,8 @@ class PreventiveMaintenanceExecutionContentMobile
                           children: [
                             Container(
                                 // margin: EdgeInsets.only(left: 20),
-                                child: CustomRichText(title: "Comment:")),
+                                child: CustomRichTextMobile(
+                                    title: "Comment:", includeAsterisk: false)),
                             Dimens.boxHeight5,
                             Container(
                                 width: Get.width,
@@ -531,16 +532,39 @@ class PreventiveMaintenanceExecutionContentMobile
                                 backgroundColor: ColorValues.closeColor,
                                 text: "Close",
                                 onPressed: () {
-                                  Get.dialog(CustonApproveRejectDialog(
-                                    text: "Execution Close",
-                                    controller: controller,
-                                    buttonText: "Close",
-                                    style: Styles.navyBlueElevatedButtonStyle,
-                                    onPressed: () {
-                                      //  controller.closePmTaskExecution();
-                                      //  Get.back();
-                                    },
-                                  ));
+                                  controller.listMrsByTaskId!.value
+                                                  .firstWhereOrNull(
+                                                    (element) =>
+                                                        element?.jobCardId !=
+                                                            0 ||
+                                                        element?.pmId != 0,
+                                                  )
+                                                  ?.mrs_return_ID ==
+                                              0 &&
+                                          controller.allTrue.value == false
+                                      ? Get.defaultDialog(
+                                          radius: 5,
+                                          title: 'Alert',
+                                          middleText:
+                                              'Please return all items!',
+                                          textConfirm: 'OK',
+                                          onConfirm: () {
+                                            Get.back(); // Close the dialog
+                                          },
+                                          buttonColor:
+                                              ColorValues.appGreenColor,
+                                          confirmTextColor: Colors.white,
+                                        )
+                                      : Get.dialog(CustonApproveRejectDialog(
+                                          text: "Execution Close",
+                                          controller: controller,
+                                          buttonText: "Close",
+                                          style: Styles
+                                              .navyBlueElevatedButtonStyle,
+                                          onPressed: () {
+                                            controller.closePmTaskExecution();
+                                          },
+                                        ));
                                 },
                               ),
                             ),
