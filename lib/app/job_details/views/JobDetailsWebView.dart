@@ -771,7 +771,7 @@ class JobDetailsWebView extends GetView<JobDetailsController> {
                                                     DataColumn2(
                                                         fixedWidth: 130,
                                                         label: Text(
-                                                          "Mrs ID",
+                                                          "MRS ID",
                                                           style: TextStyle(
                                                               fontSize: 15,
                                                               fontWeight:
