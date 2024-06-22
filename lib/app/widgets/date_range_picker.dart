@@ -11,12 +11,6 @@ class DateRangePickerWidget extends StatefulWidget {
 }
 
 class _DateRangePickerWidgetState extends State<DateRangePickerWidget> {
-  // List<DateTime?> _selectedDateRange = [
-  //   null, null
-  //   // DateTime(DateTime.now().day - 7),
-  //   // DateTime.now()
-  // ];
-
   List<DateTime?> _selectedDateRange = [
     DateTime.now().subtract(Duration(days: 6)),
     DateTime.now(),
@@ -25,15 +19,15 @@ class _DateRangePickerWidgetState extends State<DateRangePickerWidget> {
   void _showDateRangePicker() async {
     List<DateTime?>? picked = await showCalendarDatePicker2Dialog(
       context: context,
-      config: CalendarDatePicker2WithActionButtonsConfig(calendarType: CalendarDatePicker2Type.range,
+      config: CalendarDatePicker2WithActionButtonsConfig(
+        calendarType: CalendarDatePicker2Type.range,
         selectedDayHighlightColor: ColorValues.primaryColor,
         selectedRangeHighlightColor: ColorValues.primaryColor,
         weekdayLabelTextStyle: TextStyle(color: Colors.black),
         controlsTextStyle: TextStyle(color: Colors.black),
         dayTextStyle: TextStyle(color: Colors.black),
         selectedDayTextStyle: TextStyle(
-          color: Colors
-              .white, // Use dayTextStyleOnSelected instead of daySelectedTextStyle
+          color: Colors.white,
         ),
         yearTextStyle: TextStyle(color: Colors.black),
       ),

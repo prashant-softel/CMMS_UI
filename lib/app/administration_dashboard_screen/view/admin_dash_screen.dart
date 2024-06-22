@@ -107,6 +107,7 @@ class AdminDashboardScreen extends GetView<AdminDashboardController> {
                               createContentTile(
                                 title: "Attendace",
                                 onTap: () {
+                                  controller.clearStoreData();
                                   DateTime date = DateTime.now();
                                   String currentDate =
                                       DateFormat("yyyy-MM-dd").format(date);

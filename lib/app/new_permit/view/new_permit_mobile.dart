@@ -153,7 +153,9 @@ class NewPermitMobile extends GetView<NewPermitController> {
                           ),
                         ),
                         Dimens.boxHeight2,
-                        _buildStartDateField_mobile(context, 1),
+                        IgnorePointer(
+                            ignoring: true,
+                            child: _buildStartDateField_mobile(context, 1)),
                         Dimens.boxHeight15,
                         _buildPermitDescriptionField_mobile(context),
                         Obx(
@@ -235,6 +237,7 @@ class NewPermitMobile extends GetView<NewPermitController> {
                                                 .isNotEmpty)
                                             ? controller
                                                 .selectedEquipmentNameIdList
+                                                .value
                                             : [],
                                         items: controller.equipmentNameList
                                             .map(
@@ -513,7 +516,7 @@ class NewPermitMobile extends GetView<NewPermitController> {
                                                       // String baseUrl =
                                                       //     "http://65.0.20.19/CMMS_API/";
                                                       String baseUrl =
-                                                      'http://172.20.43.9:83/';
+                                                          'http://172.20.43.9:83/';
                                                       String fileName =
                                                           controller
                                                                   .file_list![
@@ -1715,7 +1718,7 @@ class NewPermitMobile extends GetView<NewPermitController> {
           scrollController: controller.commentScroll,
           keyboardType: TextInputType.multiline,
           maxLines: 5,
-          autofocus: true,
+          autofocus: false,
           decoration: InputDecoration(
             fillColor: ColorValues.whiteColor,
             filled: true,
