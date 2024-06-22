@@ -7664,7 +7664,7 @@ class ConnectHelper {
       int? userId}) async {
     var responseModel = await apiWrapper.makeRequest(
       //'SMReports/GetPlantStockReport?facility_id=$facilityId&StartDate=$endDate&EndDate=$startDate',
-      'SMReports/GetFaultyMaterialReport?facility_id=45&StartDate=2020-01-01&EndDate=2023-08-30',
+      'SMReports/GetFaultyMaterialReport?facility_id=${facilityId}&StartDate=${endDate}&EndDate=${startDate}',
       Request.get,
       null,
       isLoading ?? false,
@@ -9081,7 +9081,7 @@ class ConnectHelper {
     required bool isLoading,
   }) async {
     ResponseModel responseModel = await apiWrapper.makeRequest(
-      'Attendence/GetAttendanceList?facility_id=$facilityId&year=$year',
+      'Attendence/GetAttendanceList?facility_id=$facilityId&year=2024',
       Request.get,
       null,
       isLoading,

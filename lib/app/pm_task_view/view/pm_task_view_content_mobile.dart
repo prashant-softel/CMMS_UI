@@ -11,6 +11,7 @@ import 'package:cmms/domain/models/mrs_list_by_jobId.dart';
 import 'package:cmms/domain/models/pm_task_view_list_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:cmms/app/pm_task_view/view/tbt_dialog.dart';
 
 import '../../../domain/models/history_model.dart';
 import '../../utils/user_access_constants.dart';
@@ -487,7 +488,14 @@ class PreventiveTaskViewContentMobile
                                                     CrossAxisAlignment.start,
                                                 children: [
                                                   Row(children: [
-                                                    Text('MRS ID: ',
+                                                    Text(
+                                                        controller
+                                                                    .listMrsByTaskId?[
+                                                                        index]
+                                                                    ?.is_mrs_return ==
+                                                                0
+                                                            ? 'MRS ID: '
+                                                            : 'RMRS ID: ',
                                                         style: Styles
                                                             .appDarkGrey12),
                                                     SizedBox(
@@ -495,8 +503,13 @@ class PreventiveTaskViewContentMobile
                                                     ),
                                                     Expanded(
                                                       child: Text(
-                                                          'MRS${pmTaskMrsModel?.mrsId}'
-                                                          '',
+                                                          controller
+                                                                      .listMrsByTaskId?[
+                                                                          index]
+                                                                      ?.is_mrs_return ==
+                                                                  0
+                                                              ? 'MRS${pmTaskMrsModel?.mrsId}'
+                                                              : 'RMRS${pmTaskMrsModel?.mrs_return_ID}',
                                                           style: Styles
                                                               .appDarkBlue12),
                                                     ),
@@ -536,40 +549,73 @@ class PreventiveTaskViewContentMobile
                                                   ]),
                                                   Row(//
                                                       children: [
-                                                    GestureDetector(
-                                                      onTap: () {
-                                                        controller
-                                                            .clearStoreData();
-                                                        int mrsId =
-                                                            pmTaskMrsModel
-                                                                    ?.mrsId ??
-                                                                0;
-                                                        Get.toNamed(
-                                                            Routes.editMrs,
-                                                            arguments: {
-                                                              'mrsId': mrsId
-                                                            });
-                                                      },
-                                                      child: Container(
-                                                        padding: Dimens
-                                                            .edgeInsets8_2_8_2,
-                                                        decoration:
-                                                            BoxDecoration(
-                                                          color: ColorValues
-                                                              .editColor,
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(4),
-                                                        ),
-                                                        child: Text(
-                                                          'Edit',
-                                                          style: Styles.white10
-                                                              .copyWith(
-                                                            color: Colors.white,
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ),
+                                                    controller
+                                                                    .listMrsByTaskId?[
+                                                                        index]
+                                                                    ?.status ==
+                                                                323 ||
+                                                            controller
+                                                                    .listMrsByTaskId?[
+                                                                        index]
+                                                                    ?.status ==
+                                                                321 ||
+                                                            controller
+                                                                    .listMrsByTaskId?[
+                                                                        index]
+                                                                    ?.status ==
+                                                                324
+                                                        ? Dimens.box0
+                                                        : varUserAccessModel
+                                                                    .value
+                                                                    .access_list!
+                                                                    .where((e) =>
+                                                                        e.feature_id ==
+                                                                            UserAccessConstants
+                                                                                .kMrsFeatureId &&
+                                                                        e.edit ==
+                                                                            UserAccessConstants.kHaveEditAccess)
+                                                                    .length >
+                                                                0
+                                                            ? GestureDetector(
+                                                                onTap: () {
+                                                                  controller
+                                                                      .clearStoreData();
+                                                                  int mrsId =
+                                                                      pmTaskMrsModel
+                                                                              ?.mrsId ??
+                                                                          0;
+                                                                  Get.toNamed(
+                                                                      Routes
+                                                                          .editMrs,
+                                                                      arguments: {
+                                                                        'mrsId':
+                                                                            mrsId
+                                                                      });
+                                                                },
+                                                                child:
+                                                                    Container(
+                                                                  padding: Dimens
+                                                                      .edgeInsets8_2_8_2,
+                                                                  decoration:
+                                                                      BoxDecoration(
+                                                                    color: ColorValues
+                                                                        .editColor,
+                                                                    borderRadius:
+                                                                        BorderRadius
+                                                                            .circular(4),
+                                                                  ),
+                                                                  child: Text(
+                                                                    'Edit',
+                                                                    style: Styles
+                                                                        .white10
+                                                                        .copyWith(
+                                                                      color: Colors
+                                                                          .white,
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                              )
+                                                            : Dimens.box0,
                                                     Spacer(),
                                                     GestureDetector(
                                                       onTap: () {
@@ -580,12 +626,31 @@ class PreventiveTaskViewContentMobile
                                                             pmTaskMrsModel
                                                                     ?.mrsId ??
                                                                 0;
-                                                        Get.toNamed(
-                                                            Routes
-                                                                .mrsApprovalScreen,
-                                                            arguments: {
-                                                              'mrsId': mrsId
-                                                            });
+                                                        int? rmrsId = controller
+                                                            .listMrsByTaskId?[
+                                                                index]
+                                                            ?.mrs_return_ID;
+                                                        controller
+                                                                    .listMrsByTaskId?[
+                                                                        index]
+                                                                    ?.is_mrs_return ==
+                                                                0
+                                                            ? Get.toNamed(
+                                                                Routes
+                                                                    .mrsApprovalScreen,
+                                                                arguments: {
+                                                                    'mrsId':
+                                                                        mrsId,
+                                                                    'type': 2
+                                                                  })
+                                                            : Get.toNamed(
+                                                                Routes
+                                                                    .approverReturnMrs,
+                                                                arguments: {
+                                                                    'mrsId':
+                                                                        rmrsId,
+                                                                    'type': 2
+                                                                  });
                                                       },
                                                       child: Container(
                                                         padding: Dimens
@@ -788,7 +853,22 @@ class PreventiveTaskViewContentMobile
                                                 ColorValues.linktopermitColor,
                                             text: "Start",
                                             onPressed: () {
-                                              controller.setPmTask();
+                                              controller.pmtaskViewModel.value
+                                                          ?.ptw_tbt_done ==
+                                                      1
+                                                  ? controller.setPmTask()
+                                                  : Get.dialog<void>(
+                                                      TbtDonePMTaskDialog(
+                                                          ptw_id: controller
+                                                                  .pmtaskViewModel
+                                                                  .value
+                                                                  ?.permit_id ??
+                                                              0,
+                                                          id: controller
+                                                                  .pmtaskViewModel
+                                                                  .value
+                                                                  ?.id ??
+                                                              0));
                                             },
                                           ),
                                         )

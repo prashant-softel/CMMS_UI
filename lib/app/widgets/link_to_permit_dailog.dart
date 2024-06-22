@@ -134,9 +134,14 @@ class LinkToPermitDialog extends GetView {
                           //     _controller.formattedFromdate,
                           //     false);
                           //  Get.offAllNamed(Routes.createMrs, arguments: {"jcId": jcId![0]});
-                          Get.toNamed(Routes.auditTask,
-                              arguments: {'type': AppConstants.kAudit});
-
+                          Get.offAllNamed(Routes.createMrs, arguments: {
+                            "whereUsedId": taskId,
+                            "activity": activity,
+                            "whereUsed": 27,
+                            "type": 2,
+                            "fromActorTypeId": 2,
+                            "to_actor_type_id": 3
+                          });
                           Get.back();
                         },
                         child: const Text('Add Mrs'),
