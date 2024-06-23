@@ -21,6 +21,10 @@ class AdminDashboardController extends GetxController {
     super.onInit();
   }
 
+  void clearStoreData() {
+    adminDashboardPresenter.clearDateValue();
+  }
+
   void updateDropdownValue(String value) {
     selectedFacility.value = value;
   }

@@ -53,6 +53,7 @@ class AttendanceWeb extends GetView<AttendanceController> {
                   ),
                   InkWell(
                     onTap: () {
+                      controller.clearStoreData();
                       Get.offNamed(Routes.admin_dashboard);
                     },
                     child: Text(

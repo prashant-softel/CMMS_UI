@@ -14002,7 +14002,7 @@ class Repository {
         AttendaceModel attendanceModel = AttendaceModel.fromJson(response);
         return null;
       } else {
-        Utility.showDialog(res.errorCode.toString(), 'getdsmDataList');
+        Utility.showDialog(res.errorCode.toString(), 'getAttendanceDetails');
         return null;
       }
     } catch (error) {

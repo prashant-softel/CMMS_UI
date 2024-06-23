@@ -8,4 +8,5 @@ class AdminDashboardUsecase {
 
   Future<List<FacilityModel?>?> getFacilityList(isLoading) async =>
       await _repository.getFacilityListByUserId(isLoading);
+      void clearDateValue() async => _repository.clearData(LocalKeys.date);
 }

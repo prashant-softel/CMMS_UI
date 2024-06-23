@@ -7,4 +7,5 @@ class AdminDashboardPresenter {
 
   Future<List<FacilityModel?>?> getFacilityList(bool isLoading) async =>
       await adminDashboardUsecase.getFacilityList(isLoading);
+  void clearDateValue() async => adminDashboardUsecase.clearDateValue();
 }

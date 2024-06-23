@@ -126,7 +126,65 @@ class _NewPermitListWebState extends State<NewPermitListWeb> {
                                                           .width /
                                                       5,
                                                   numberTextField: true,
-                                                  onTap: () {
+                                                  onTap: () async {
+                                                    // List<DateTime?>
+                                                    //     _selectedDateRange = [
+                                                    //   controller.fromDate.value,
+                                                    //   controller.toDate.value
+                                                    // ];
+                                                    // List<DateTime?>? picked =
+                                                    //     await showCalendarDatePicker2Dialog(
+                                                    //   context: context,
+                                                    //   config:
+                                                    //       CalendarDatePicker2WithActionButtonsConfig(
+                                                    //     calendarType:
+                                                    //         CalendarDatePicker2Type
+                                                    //             .range,
+                                                    //     selectedDayHighlightColor:
+                                                    //         ColorValues
+                                                    //             .primaryColor,
+                                                    //     selectedRangeHighlightColor:
+                                                    //         ColorValues
+                                                    //             .primaryColor,
+                                                    //     weekdayLabelTextStyle:
+                                                    //         TextStyle(
+                                                    //             color: Colors
+                                                    //                 .black),
+                                                    //     controlsTextStyle:
+                                                    //         TextStyle(
+                                                    //             color: Colors
+                                                    //                 .black),
+                                                    //     dayTextStyle: TextStyle(
+                                                    //         color:
+                                                    //             Colors.black),
+                                                    //     selectedDayTextStyle:
+                                                    //         TextStyle(
+                                                    //       color: Colors.white,
+                                                    //     ),
+                                                    //     yearTextStyle:
+                                                    //         TextStyle(
+                                                    //             color: Colors
+                                                    //                 .black),
+                                                    //   ),
+                                                    //   dialogSize:
+                                                    //       const Size(300, 400),
+                                                    //   value: _selectedDateRange,
+                                                    //   dialogBackgroundColor:
+                                                    //       Colors.white,
+                                                    // );
+                                                    // if (picked != null) {
+                                                    //   print("${picked[0]}");
+                                                    //   print("${picked[1]}");
+                                                    //   controller
+                                                    //           .fromDate.value =
+                                                    //       picked[0] ??
+                                                    //           DateTime.now();
+                                                    //   controller.toDate.value =
+                                                    //       picked[1] ??
+                                                    //           DateTime.now();
+                                                    // }
+                                                    // controller
+                                                    //     .getNewPermitListByDate();
                                                     controller
                                                             .openFromDateToStartDatePicker =
                                                         !controller
