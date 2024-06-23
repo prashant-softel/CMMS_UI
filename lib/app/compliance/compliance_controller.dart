@@ -128,8 +128,11 @@ class ComplianceController extends GetxController {
       getStatutoryById.value = _getStatutoryDetail;
       selectedStatutoryCompliance.value =
           getStatutoryById.value?.compilanceName ?? '';
+      selectedStatutoryComplianceId =
+          getStatutoryById.value?.compliance_id ?? 0;
       selectedStatusOfAplication.value =
           getStatutoryById.value?.status_of_application ?? '';
+      selectedStatusOfAplicationId = getStatutoryById.value?.status_id ?? 0;
       issueDateTc.text = getStatutoryById.value?.created_at ?? '';
       expireOnDateTc.text = getStatutoryById.value?.end_date ?? "";
       commentsCtrl.text = getStatutoryById.value?.description ?? "";
