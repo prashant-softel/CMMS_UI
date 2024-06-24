@@ -1,5 +1,6 @@
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/constant/constant.dart';
+import 'package:cmms/app/home/widgets/mobile_drawer.dart';
 import 'package:cmms/app/incident_report_dashboard/incident_report_controller.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/utils/user_access_constants.dart';
@@ -27,137 +28,138 @@ class IncidentReportDashboardScreen
     return Scaffold(
       appBar: Responsive.isMobile(context)
           ? AppBar(
+              // leading: IconButton(
+              //   icon: Icons.menu,
+              //   onPressed: () {},
+              // ),
+              title: Text("Incident Report"),
               centerTitle: true,
               elevation: 0,
             )
           : null,
       drawer: //
           (Responsive.isMobile(context) || Responsive.isTablet(context))
-              ? HomeDrawer() //ResponsiveSideMenu()
+              ? HomeDrawerMobile() //ResponsiveSideMenu()
               : null,
-      body: Obx(
-        () => Stack(
-          children: [
-            AnimatedContainer(
-              duration: Duration(milliseconds: 450),
-              margin: EdgeInsets.only(
-                  left: homeController.menuButton.value ? 250.0 : 70.0),
-              width: Get.width,
-              height: Get.height,
-              child: Row(
-                children: [
-                  SizedBox(
-                    height: 40,
-                  ),
-                  // (Responsive.isMobile(context) || Responsive.isTablet(context))
-                  //     ? Dimens.box0
-                  //     :
-                  //     //
-                  //     HomeDrawer(),
-                  Expanded(
-                    child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          if (Responsive.isMobile(context))
-                            Obx(
-                              () => Container(
-                                width: Get.width,
-                                child: Padding(
-                                  padding: const EdgeInsets.all(15.0),
+      body: Stack(
+        children: [
+          AnimatedContainer(
+            duration: Duration(milliseconds: 450),
+            margin: EdgeInsets.only(
+              left: Responsive.isDesktop(context)
+                  ? homeController.menuButton.value
+                      ? 250.0
+                      : 70.0
+                  : 0,
+            ),
+            width: Get.width,
+            height: Get.height,
+            child: Row(
+              children: [
+                SizedBox(
+                  height: 40,
+                ),
+                // (Responsive.isMobile(context) || Responsive.isTablet(context))
+                //     ? Dimens.box0
+                //     :
+                //     //
+                //     HomeDrawer(),
+                Expanded(
+                  child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        if (Responsive.isDesktop(context))
+                          HeaderWidgetAllDash(),
+                        Container(
+                          margin: EdgeInsets.only(left: 20),
+                          child: Row(
+                            children: [
+                              Text(
+                                "Incident Report",
+                                style: TextStyle(
+                                  color: Color.fromARGB(255, 159, 156, 156),
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w400,
                                 ),
                               ),
-                            ),
-                          if (Responsive.isDesktop(context))
-                            HeaderWidgetAllDash(),
-                          Container(
-                            margin: EdgeInsets.only(left: 20),
-                            child: Row(
-                              children: [
-                                Text(
-                                  "Incident Report",
-                                  style: TextStyle(
-                                    color: Color.fromARGB(255, 159, 156, 156),
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w400,
-                                  ),
+                              SizedBox(
+                                  width:
+                                      10), // Add some space between the text and the line
+                              Expanded(
+                                child: Divider(
+                                  color: Colors
+                                      .grey, // Customize the color of the line if needed
+                                  height:
+                                      1, // Adjust the height of the line if needed
                                 ),
-                                SizedBox(
-                                    width:
-                                        10), // Add some space between the text and the line
-                                Expanded(
-                                  child: Divider(
-                                    color: Colors
-                                        .grey, // Customize the color of the line if needed
-                                    height:
-                                        1, // Adjust the height of the line if needed
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          GridView.count(
-                            shrinkWrap: true,
-                            primary: false,
-                            padding: const EdgeInsets.all(16),
-                            crossAxisSpacing: 70,
-                            mainAxisSpacing: 6,
-                            crossAxisCount:
-                                Responsive.isMobile(context) ? 2 : 5,
-                            childAspectRatio: Responsive.isMobile(context)
-                                ? (itemWidth / itemHeight)
-                                : 5,
-                            children: <Widget>[
-                              varUserAccessModel.value.access_list!
-                                          .where((e) =>
-                                              e.feature_id ==
-                                                  UserAccessConstants
-                                                      .kIncidentReportFeatureId &&
-                                              e.view ==
-                                                  UserAccessConstants
-                                                      .kHaveViewAccess)
-                                          .length >
-                                      0
-                                  ? _incidentReportList(
-                                      tittle: "Incident Report List",
-                                      ontap: () {
-                                        Get.toNamed(
-                                          Routes.incidentReportListWeb,
-                                        );
-                                      })
-                                  : Dimens.box0,
-                              if (Responsive.isDesktop(context))
-                                varUserAccessModel.value.access_list!
-                                            .where((e) =>
-                                                e.feature_id ==
-                                                    UserAccessConstants
-                                                        .kIncidentReportFeatureId &&
-                                                e.view ==
-                                                    UserAccessConstants
-                                                        .kHaveViewAccess)
-                                            .length >
-                                        0
-                                    ? _incidentReportList(
-                                        tittle: "Add Incident Report",
-                                        ontap: () {
-                                          Get.toNamed(
-                                            Routes.addIncidentReportContentWeb,
-                                          );
-                                        })
-                                    : Dimens.box0
+                              ),
                             ],
-                          )
-                        ]),
-                  ),
-                ],
-              ),
+                          ),
+                        ),
+                        GridView.count(
+                          shrinkWrap: true,
+                          primary: false,
+                          padding: const EdgeInsets.all(16),
+                          crossAxisSpacing: 70,
+                          mainAxisSpacing: 6,
+                          crossAxisCount: Responsive.isMobile(context) ? 2 : 5,
+                          childAspectRatio: Responsive.isMobile(context)
+                              ? (itemWidth / itemHeight)
+                              : 5,
+                          children: <Widget>[
+                            varUserAccessModel.value.access_list!
+                                        .where((e) =>
+                                            e.feature_id ==
+                                                UserAccessConstants
+                                                    .kIncidentReportFeatureId &&
+                                            e.view ==
+                                                UserAccessConstants
+                                                    .kHaveViewAccess)
+                                        .length >
+                                    0
+                                ? _incidentReportList(
+                                    tittle: "Incident Report List",
+                                    ontap: () {
+                                      Get.toNamed(
+                                        Routes.incidentReportListWeb,
+                                      );
+                                    })
+                                : Dimens.box0,
+                            //if (Responsive.isDesktop(context))
+                            varUserAccessModel.value.access_list!
+                                        .where((e) =>
+                                            e.feature_id ==
+                                                UserAccessConstants
+                                                    .kIncidentReportFeatureId &&
+                                            e.view ==
+                                                UserAccessConstants
+                                                    .kHaveViewAccess)
+                                        .length >
+                                    0
+                                ? _incidentReportList(
+                                    tittle: "Add Incident Report",
+                                    ontap: () {
+                                      Get.toNamed(
+                                        Routes.addIncidentReportContentWeb,
+                                      );
+                                    })
+                                : Dimens.box0
+                          ],
+                        )
+                      ]),
+                ),
+              ],
             ),
-            AnimatedPositioned(
-              duration: Duration(milliseconds: 450),
-              child: HomeDrawer(),
-            ),
-          ],
-        ),
+          ),
+          Responsive.isDesktop(context)
+              ? AnimatedPositioned(
+                  duration: Duration(milliseconds: 450),
+                  child: HomeDrawer(),
+                )
+              : Dimens.box0
+        ],
       ),
+      //  ),
     );
   }
 
@@ -171,28 +173,23 @@ class IncidentReportDashboardScreen
             color: ColorValues.skyBlueColor,
             borderRadius: BorderRadius.circular(2),
           ),
-          padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-          child:
-              // Row(
-              //   crossAxisAlignment: CrossAxisAlignment.center,
-              //   mainAxisAlignment: MainAxisAlignment.center,
-              //   children: [
-              Center(
-            child: Text(
-              tittle,
-              style: TextStyle(
-                  color: ColorValues.whiteColor,
-                  fontSize: 14,
-                  fontWeight: FontWeight.w700),
-
-              textAlign: TextAlign.center, //☺ Updated
-            ),
+          padding: EdgeInsets.all(9),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Expanded(
+                child: Text(
+                  tittle,
+                  style: TextStyle(
+                      color: ColorValues.whiteColor,
+                      fontSize: 14,
+                      fontWeight: FontWeight.w700),
+                  textAlign: TextAlign.center,
+                ),
+              ),
+            ],
           ),
-          // SizedBox(
-          //   height: 5,
-          // ),
-          // ],
-          // ),
         ),
       ),
     );
