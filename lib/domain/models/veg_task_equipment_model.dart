@@ -14,8 +14,8 @@ class VegTaskEquipmentList {
   List<SMB>? smbs;
   bool isExpanded;
   String? selectedDay;
-  bool? isAbandonedChecked;
-  bool? isCleanedChecked;
+  bool isAbandonedChecked;
+  bool isCleanedChecked;
 
   VegTaskEquipmentList({
     this.invId,
@@ -65,8 +65,8 @@ class SMB {
   int? executedDay;
   int? isAbandoned;
   String? abandonedAt;
-  bool? isCleanedSmbCheck;
-  bool? isAbandonSmbCheck;
+  bool isCleanedSmbCheck;
+  bool isAbandonSmbCheck;
 
   SMB({
     this.parentId,
@@ -81,6 +81,8 @@ class SMB {
     this.executedDay,
     this.isAbandoned,
     this.abandonedAt,
+    this.isCleanedSmbCheck = false,
+    this.isAbandonSmbCheck = false,
   });
 
   factory SMB.fromJson(Map<String, dynamic> json) => SMB(

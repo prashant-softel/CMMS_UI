@@ -63,6 +63,7 @@ import 'package:cmms/app/widgets/start_veg_execution_dialog.dart';
 import 'package:cmms/app/widgets/update_incident_report_dialog.dart';
 import 'package:cmms/app/widgets/update_mc_execution_dialog.dart';
 import 'package:cmms/app/widgets/update_permit_dialog.dart';
+import 'package:cmms/app/widgets/update_veg_execution_dialog.dart';
 import 'package:cmms/app/widgets/veg_plan_message_approve_dialog.dart';
 import 'package:cmms/app/widgets/veg_plan_message_dialog.dart';
 import 'package:cmms/app/widgets/veg_plan_message_reject_dialog.dart';
@@ -8584,7 +8585,7 @@ class ConnectHelper {
     int? executionId,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
-      'Vegetation/StartVegetationExecution?executionId=$executionId',
+      'Vegetation/EndVegetationExecution?executionId=$executionId',
       Request.put,
       null,
       isLoading ?? true,
@@ -8697,6 +8698,31 @@ class ConnectHelper {
     var parsedJson = json.decode(res);
     Get.dialog<void>(
         AbandonVegScheduleMessageDialog(data: parsedJson['message']));
+    return responseModel;
+  }
+
+  Future<ResponseModel> updateVegScheduleExecution({
+    required String auth,
+    updateVegJson,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Vegetation/UpdateVegScheduleExecution',
+      Request.put,
+      updateVegJson,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    print('Update VEG Execution Response:${responseModel.data}');
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    Get.dialog<void>(UpdateVegExecutionDialog(
+      data: parsedJson['message'],
+      mcExecutionId: parsedJson['id'],
+    ));
     return responseModel;
   }
 

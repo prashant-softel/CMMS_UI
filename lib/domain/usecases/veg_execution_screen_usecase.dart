@@ -86,6 +86,16 @@ class VegExecutionUsecase {
         abandoneScheduleJsonString,
         isLoading,
       );
+      
+  Future<Map<String, dynamic>?> updateVegScheduleExecution({
+    updateVegJson,
+    required bool isLoading,
+  }) async {
+    return repository.updateVegScheduleExecution(
+      updateVegJson: updateVegJson,
+      isLoading: isLoading,
+    );
+  }
 
   void savePlanId({String? vegid}) async =>
       repository.saveValue(LocalKeys.vegid, vegid);

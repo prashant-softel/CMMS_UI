@@ -34,9 +34,7 @@ class VegetationExecutionDialog extends GetView<VegExecutionController> {
                   Dimens.boxWidth10,
                   Text(
                     "${cleaningDay}",
-                    style: TextStyle(
-                      fontSize: 20,
-                    ),
+                    style: TextStyle(fontSize: 20),
                   ),
                 ],
               ),
@@ -45,18 +43,9 @@ class VegetationExecutionDialog extends GetView<VegExecutionController> {
                 children: [
                   Row(
                     children: [
-                      SizedBox(
-                        width: 50,
-                      ),
-                      Text(
-                        'Remark: ',
-                        style: TextStyle(
-                          fontSize: 17,
-                        ),
-                      ),
-                      SizedBox(
-                        width: 5,
-                      ),
+                      SizedBox(width: 50),
+                      Text('Remark: ', style: TextStyle(fontSize: 17)),
+                      SizedBox(width: 5),
                       LoginCustomTextfield(
                         width: MediaQuery.of(context).size.width * .2,
                         textController: controller.remarkTextFieldCtrlr,
@@ -70,7 +59,6 @@ class VegetationExecutionDialog extends GetView<VegExecutionController> {
           ),
           content: Builder(
             builder: (context) {
-              var height = MediaQuery.of(context).size.height;
               return Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
@@ -87,8 +75,8 @@ class VegetationExecutionDialog extends GetView<VegExecutionController> {
                     ),
                   ],
                 ),
-                height: height / 1.5,
-                width: double.infinity,
+                height: MediaQuery.of(context).size.height / 1.5,
+                width: Get.width * .7,
                 child: SingleChildScrollView(
                   child: Column(
                     children: [
@@ -101,54 +89,42 @@ class VegetationExecutionDialog extends GetView<VegExecutionController> {
                               flex: 2,
                               child: Text(
                                 "Assets",
-                                style: TextStyle(
-                                  color: Color(0xff31576D),
-                                ),
+                                style: TextStyle(color: Color(0xff31576D)),
                               ),
                             ),
                             Expanded(
                               flex: 1,
                               child: Text(
-                                "Modules",
-                                style: TextStyle(
-                                  color: Color(0xff31576D),
-                                ),
+                                "Area",
+                                style: TextStyle(color: Color(0xff31576D)),
                               ),
                             ),
                             Expanded(
                               flex: 1,
                               child: Text(
                                 "Scheduled Day",
-                                style: TextStyle(
-                                  color: Color(0xff31576D),
-                                ),
+                                style: TextStyle(color: Color(0xff31576D)),
                               ),
                             ),
                             Expanded(
                               flex: 1,
                               child: Text(
                                 "Cleaned",
-                                style: TextStyle(
-                                  color: Color(0xff31576D),
-                                ),
+                                style: TextStyle(color: Color(0xff31576D)),
                               ),
                             ),
                             Expanded(
                               flex: 1,
                               child: Text(
                                 "Abandoned",
-                                style: TextStyle(
-                                  color: Color(0xff31576D),
-                                ),
+                                style: TextStyle(color: Color(0xff31576D)),
                               ),
                             ),
                             Expanded(
                               flex: 1,
                               child: Text(
                                 "Executed Day",
-                                style: TextStyle(
-                                  color: Color(0xff31576D),
-                                ),
+                                style: TextStyle(color: Color(0xff31576D)),
                               ),
                             ),
                           ],
@@ -184,7 +160,7 @@ class VegetationExecutionDialog extends GetView<VegExecutionController> {
                                               e!.isExpanded
                                                   ? Icons.arrow_drop_down
                                                   : Icons.arrow_drop_up,
-                                            )
+                                            ),
                                           ],
                                         ),
                                       ),
@@ -235,7 +211,8 @@ class VegetationExecutionDialog extends GetView<VegExecutionController> {
                                               },
                                             );
                                             print(
-                                                'Element Cancel:${e.isCleanedChecked}');
+                                              'Element Cancel:${e.isCleanedChecked}',
+                                            );
                                           },
                                         ),
                                       ),
@@ -309,19 +286,16 @@ class VegetationExecutionDialog extends GetView<VegExecutionController> {
                                                               .isCleanedSmbCheck,
                                                           onChanged:
                                                               (bool? value) {
-                                                            // controller.toggleItemSelection(index);
-                                                            setState(
-                                                              () {
-                                                                smbItems.isCleanedSmbCheck =
-                                                                    !smbItems
-                                                                        .isCleanedSmbCheck!;
-                                                                if (smbItems
-                                                                    .isCleanedSmbCheck!) {
-                                                                  smbItems.isAbandonSmbCheck =
-                                                                      false;
-                                                                }
-                                                              },
-                                                            );
+                                                            setState(() {
+                                                              smbItems.isCleanedSmbCheck =
+                                                                  !smbItems
+                                                                      .isCleanedSmbCheck;
+                                                              if (smbItems
+                                                                  .isCleanedSmbCheck) {
+                                                                smbItems.isAbandonSmbCheck =
+                                                                    false;
+                                                              }
+                                                            });
                                                             print(
                                                                 'Element Cancel:${e.isCleanedChecked}');
                                                           },
@@ -338,21 +312,18 @@ class VegetationExecutionDialog extends GetView<VegExecutionController> {
                                                               .isAbandonSmbCheck,
                                                           onChanged:
                                                               (bool? value) {
-                                                            setState(
-                                                              () {
-                                                                smbItems.isAbandonSmbCheck =
-                                                                    !smbItems
-                                                                        .isAbandonSmbCheck!;
-                                                                if (smbItems
-                                                                    .isAbandonSmbCheck!) {
-                                                                  smbItems.isCleanedSmbCheck =
-                                                                      false;
-                                                                }
-                                                              },
-                                                            );
+                                                            setState(() {
+                                                              smbItems.isAbandonSmbCheck =
+                                                                  !smbItems
+                                                                      .isAbandonSmbCheck!;
+                                                              if (smbItems
+                                                                  .isAbandonSmbCheck!) {
+                                                                smbItems.isCleanedSmbCheck =
+                                                                    false;
+                                                              }
+                                                            });
                                                             print(
-                                                              'Element Cancel:${smbItems.isAbandonSmbCheck}',
-                                                            );
+                                                                'Element Cancel:${smbItems.isAbandonSmbCheck}');
                                                           },
                                                         ),
                                                       ),
@@ -421,12 +392,12 @@ class VegetationExecutionDialog extends GetView<VegExecutionController> {
                     backgroundColor: ColorValues.greenColor,
                     text: 'Submit',
                     onPressed: () {
-                      // controller.updateMCScheduleExecution(
-                      //   scheduleId: scheduleId,
-                      //   cleaningDay: cleaningDay,
-                      //   remark: '${controller.remarkCtrlrWeb.text}',
-                      // );
-                      // Get.back();
+                      controller.updateVegScheduleExecution(
+                        scheduleId: scheduleId,
+                        cleaningDay: cleaningDay,
+                        remark: '${controller.remarkCtrlrWeb.text}',
+                      );
+                      Get.back();
                     },
                   ),
                 ),

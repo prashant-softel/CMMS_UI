@@ -52,9 +52,8 @@ class FileUploadDetailsWidgetWeb2 extends StatelessWidget {
                   size: ColumnSize.S,
                 ),
               ],
-              rows:
-                  _fileUploadController.pickedFiles.value.map<DataRow>((_file) {
-                final pickedFileIndex = _fileUploadController.pickedFiles.value
+              rows: _fileUploadController.pickedFiles.map<DataRow>((_file) {
+                final pickedFileIndex = _fileUploadController.pickedFiles
                     .indexWhere((f) => f == _file);
                 return DataRow(
                     onSelectChanged: (bool? selected) {
@@ -130,7 +129,7 @@ class FileUploadDetailsWidgetWeb2 extends StatelessWidget {
                       ),
                       DataCell(
                         FutureBuilder<int>(
-                          future: _file.length(),
+                          future: Future.value(_file.size),
                           builder: (BuildContext context,
                               AsyncSnapshot<int> snapshot) {
                             if (snapshot.connectionState ==
