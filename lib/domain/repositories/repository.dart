@@ -12066,7 +12066,7 @@ class Repository {
           };
           exportToExcel(checklistData, "pmPlanlist.xlsx");
         }
-        return _PmPlanListModelList.reversed.toList();
+        return _PmPlanListModelList;
       } else {
         Utility.showDialog(res.errorCode.toString(), 'getPmPlanList');
         return [];

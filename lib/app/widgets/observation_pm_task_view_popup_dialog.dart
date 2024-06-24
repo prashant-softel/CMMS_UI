@@ -597,16 +597,14 @@ class ObservationPMTaskViewDialog extends GetView {
                                                     .listMrsByTaskId?.length ??
                                                 0,
                                             (index) => DataRow(cells: [
+                                              DataCell(Text('${index + 1}')),
                                               DataCell(Text(controller
-                                                      .listMrsByTaskId?[index]
-                                                      ?.jobCardId
-                                                      .toString() ??
-                                                  '')),
-                                              DataCell(Text(controller
-                                                      .listMrsByTaskId?[index]
-                                                      ?.mrsId
-                                                      .toString() ??
-                                                  '')),
+                                                          .listMrsByTaskId?[
+                                                              index]
+                                                          ?.is_mrs_return ==
+                                                      0
+                                                  ? "MRS${controller.listMrsByTaskId?[index]?.mrsId.toString() ?? ''}"
+                                                  : "RMRS${controller.listMrsByTaskId?[index]?.mrs_return_ID.toString() ?? ''}")),
                                               DataCell(Text(controller
                                                       .listMrsByTaskId?[index]
                                                       ?.mrsItems ??
@@ -625,10 +623,14 @@ class ObservationPMTaskViewDialog extends GetView {
                                                           ColorValues.viewColor,
                                                       icon:
                                                           Icons.remove_red_eye,
-                                                      message: "View MRS",
+                                                      message: "View",
                                                       onPress: () {
                                                         controller
                                                             .clearMrsStoreData();
+                                                        int? rmrsId = controller
+                                                            .listMrsByTaskId?[
+                                                                index]
+                                                            ?.mrs_return_ID;
                                                         String mrsId = controller
                                                                 .listMrsByTaskId?[
                                                                     index]
@@ -636,15 +638,29 @@ class ObservationPMTaskViewDialog extends GetView {
                                                                 .toString() ??
                                                             "";
                                                         print({"mrsId": mrsId});
-                                                        Get.toNamed(
-                                                            Routes
-                                                                .mrsViewScreen,
-                                                            arguments: {
-                                                              'mrsId':
-                                                                  int.tryParse(
-                                                                      "$mrsId"),
-                                                              'type':2
-                                                            });
+                                                        print({"retmrsId": rmrsId});
+                                                        controller
+                                                                    .listMrsByTaskId?[
+                                                                        index]
+                                                                    ?.is_mrs_return ==
+                                                                0
+                                                            ? Get.toNamed(
+                                                                Routes
+                                                                    .mrsViewScreen,
+                                                                arguments: {
+                                                                    'mrsId': int
+                                                                        .tryParse(
+                                                                            "$mrsId"),
+                                                                    'type': 2
+                                                                  })
+                                                            : Get.toNamed(
+                                                                Routes
+                                                                    .approverReturnMrs,
+                                                                arguments: {
+                                                                    'mrsId':
+                                                                        rmrsId,
+                                                                    'type': 2
+                                                                  });
                                                       }),
                                                   // controller.pmtaskViewModel
                                                   //             .value?.status ==

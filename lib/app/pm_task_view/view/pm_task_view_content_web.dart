@@ -203,7 +203,7 @@ class PreventiveMaintenanceTaskViewContentWeb
                                                 CrossAxisAlignment.start,
                                             children: [
                                               Text(
-                                                  "${controller.pmtaskViewModel.value?.id ?? ""}",
+                                                  "PMT${controller.pmtaskViewModel.value?.id ?? ""}",
                                                   style: Styles.blue17),
                                               Text(
                                                   "${controller.pmtaskViewModel.value?.plan_title ?? ""}",
@@ -397,31 +397,32 @@ class PreventiveMaintenanceTaskViewContentWeb
                                                         MainAxisAlignment
                                                             .spaceEvenly,
                                                     children: [
-                                                      controller.pmtaskViewModel.value
-                                                                          ?.status ==
-                                                                      167 &&
-                                                                  varUserAccessModel
-                                                                          .value
-                                                                          .access_list!
-                                                                          .where((e) =>
-                                                                              e.feature_id == UserAccessConstants.kPmTaskFeatureId &&
-                                                                              e.add ==
-                                                                                  UserAccessConstants
-                                                                                      .kHaveAddAccess)
-                                                                          .length >
-                                                                      0 ||
-                                                              controller
-                                                                      .pmtaskViewModel
-                                                                      .value
-                                                                      ?.status ==
-                                                                  161 ||
-                                                              controller
-                                                                      .pmtaskViewModel
-                                                                      .value
-                                                                      ?.status ==
-                                                                  162
-                                                          ? Dimens.box0
-                                                          : TableActionButton(
+                                                      // controller.pmtaskViewModel.value
+                                                      //                     ?.status ==
+                                                      //                 167 &&
+                                                      //             varUserAccessModel
+                                                      //                     .value
+                                                      //                     .access_list!
+                                                      //                     .where((e) =>
+                                                      //                         e.feature_id == UserAccessConstants.kPmTaskFeatureId &&
+                                                      //                         e.add ==
+                                                      //                             UserAccessConstants
+                                                      //                                 .kHaveAddAccess)
+                                                      //                     .length >
+                                                      //                 0 ||
+                                                      //         controller
+                                                      //                 .pmtaskViewModel
+                                                      //                 .value
+                                                      //                 ?.status ==
+                                                      //             161 ||
+                                                      //         controller
+                                                      //                 .pmtaskViewModel
+                                                      //                 .value
+                                                      //                 ?.status ==
+                                                      //             162
+                                                      //     ? Dimens.box0
+                                                          // :
+                                                           TableActionButton(
                                                               color: ColorValues
                                                                   .viewColor,
                                                               icon: Icons
@@ -844,7 +845,7 @@ class PreventiveMaintenanceTaskViewContentWeb
                                                                           icon: Icons
                                                                               .remove_red_eye,
                                                                           message:
-                                                                              "View MRS",
+                                                                              "View",
                                                                           onPress:
                                                                               () {
                                                                             controller.clearMrsStoreData();

@@ -272,7 +272,7 @@ class CreateMrsReturnContentWeb extends GetView<CreateMrsReturnController> {
                                                 80) +
                                             60,
                                     child: DataTable2(
-                                      minWidth: 1600,
+                                      minWidth: 2000,
                                       border: TableBorder.all(
                                           color: Color.fromARGB(
                                               255, 206, 229, 234)),
@@ -341,6 +341,14 @@ class CreateMrsReturnContentWeb extends GetView<CreateMrsReturnController> {
                                               fontSize: 15,
                                               fontWeight: FontWeight.bold),
                                         )),
+                                        // DataColumn2(
+                                        //     // fixedWidth: 150,
+                                        //     label: Text(
+                                        //   "Action",
+                                        //   style: TextStyle(
+                                        //       fontSize: 15,
+                                        //       fontWeight: FontWeight.bold),
+                                        // )),
                                       ],
                                       rows: controller.rowItem.value
                                           .map((record) {
