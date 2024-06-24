@@ -594,14 +594,12 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                                           .end,
                                                                            crossAxisAlignment: CrossAxisAlignment.center,
                                                                   children: [
-                                                                    Positioned(
-                                                                      left: 0,
-                                                                      top: 0,
+                                                                    Align(
+                                                                       alignment: Alignment.topLeft,
                                                                       child: Icon(
                                                                           Icons
                                                                               .pie_chart,
-                                                                              size: 20,color: Colors.red), // replace with your desired icon or image
-                                                                              
+                                                                              size: 20,color: Colors.red),
                                                                     ),
                                                                     SizedBox(width: 10),
 
@@ -623,12 +621,11 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                                       MainAxisAlignment
                                                                           .end,
                                                                   children: [
-                                                                    Positioned(
-                                                                      left: 0,
-                                                                      top: 0,
+                                                                    Align(
+                                                                       alignment: Alignment.topLeft,
                                                                       child: Icon(
                                                                           Icons
-                                                                              .pie_chart, size: 20,color: Colors.blue), // replace with your desired icon or image
+                                                                              .pie_chart, size: 20,color: Colors.blue),
                                                                     ),
                                                                      SizedBox(width: 10),
 
@@ -649,12 +646,11 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                                       MainAxisAlignment
                                                                           .end,
                                                                   children: [
-                                                                    Positioned(
-                                                                      left: 0,
-                                                                      top: 0,
+                                                                    Align(
+                                                                       alignment: Alignment.topLeft,
                                                                       child: Icon(
                                                                           Icons
-                                                                              .pie_chart, size: 20,color: Colors.green), // replace with your desired icon or image
+                                                                              .pie_chart, size: 20,color: Colors.green),
                                                                     ),
                                                                      SizedBox(width: 10),
                                                                     Text(
@@ -1519,14 +1515,12 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                                           .end,
                                                                            crossAxisAlignment: CrossAxisAlignment.center,
                                                                   children: [
-                                                                    Positioned(
-                                                                      left: 0,
-                                                                      top: 0,
+                                                                    Align(
+                                                                       alignment: Alignment.topLeft,
                                                                       child: Icon(
                                                                           Icons
                                                                               .pie_chart,
-                                                                              size: 20,color: Colors.red), // replace with your desired icon or image
-                                                                              
+                                                                              size: 20,color: Colors.red),
                                                                     ),
                                                                     SizedBox(width: 10),
 
@@ -1548,12 +1542,11 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                                       MainAxisAlignment
                                                                           .end,
                                                                   children: [
-                                                                    Positioned(
-                                                                      left: 0,
-                                                                      top: 0,
+                                                                    Align(
+                                                                       alignment: Alignment.topLeft,
                                                                       child: Icon(
                                                                           Icons
-                                                                              .pie_chart, size: 20,color: Colors.blue), // replace with your desired icon or image
+                                                                              .pie_chart, size: 20,color: Colors.blue),
                                                                     ),
                                                                      SizedBox(width: 10),
 
@@ -1574,12 +1567,11 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                                       MainAxisAlignment
                                                                           .end,
                                                                   children: [
-                                                                    Positioned(
-                                                                      left: 0,
-                                                                      top: 0,
+                                                                    Align(
+                                                                       alignment: Alignment.topLeft,
                                                                       child: Icon(
                                                                           Icons
-                                                                              .pie_chart, size: 20,color: Colors.green), // replace with your desired icon or image
+                                                                              .pie_chart, size: 20,color: Colors.green),
                                                                     ),
                                                                      SizedBox(width: 10),
                                                                     Text(
@@ -2198,14 +2190,12 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                                           .end,
                                                                            crossAxisAlignment: CrossAxisAlignment.center,
                                                                   children: [
-                                                                    Positioned(
-                                                                      left: 0,
-                                                                      top: 0,
+                                                                    Align(
+                                                                       alignment: Alignment.topLeft,
                                                                       child: Icon(
                                                                           Icons
                                                                               .pie_chart,
-                                                                              size: 20,color: Colors.red), // replace with your desired icon or image
-                                                                              
+                                                                              size: 20,color: Colors.red),
                                                                     ),
                                                                     SizedBox(width: 10),
 
@@ -2227,12 +2217,11 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                                       MainAxisAlignment
                                                                           .end,
                                                                   children: [
-                                                                    Positioned(
-                                                                      left: 0,
-                                                                      top: 0,
+                                                                    Align(
+                                                                       alignment: Alignment.topLeft,
                                                                       child: Icon(
                                                                           Icons
-                                                                              .pie_chart, size: 20,color: Colors.blue), // replace with your desired icon or image
+                                                                              .pie_chart, size: 20,color: Colors.blue),
                                                                     ),
                                                                      SizedBox(width: 10),
 
@@ -2253,12 +2242,11 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                                       MainAxisAlignment
                                                                           .end,
                                                                   children: [
-                                                                    Positioned(
-                                                                      left: 0,
-                                                                      top: 0,
+                                                                    Align(
+                                                                       alignment: Alignment.topLeft,
                                                                       child: Icon(
                                                                           Icons
-                                                                              .pie_chart, size: 20,color: Colors.green), // replace with your desired icon or image
+                                                                              .pie_chart, size: 20,color: Colors.green),
                                                                     ),
                                                                      SizedBox(width: 10),
                                                                     Text(
@@ -3040,14 +3028,12 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                                           .end,
                                                                            crossAxisAlignment: CrossAxisAlignment.center,
                                                                   children: [
-                                                                    Positioned(
-                                                                      left: 0,
-                                                                      top: 0,
+                                                                    Align(
+                                                                       alignment: Alignment.topLeft,
                                                                       child: Icon(
                                                                           Icons
                                                                               .pie_chart,
-                                                                              size: 20,color: Colors.red), // replace with your desired icon or image
-                                                                              
+                                                                              size: 20,color: Colors.red),
                                                                     ),
                                                                     SizedBox(width: 10),
 
@@ -3069,12 +3055,11 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                                       MainAxisAlignment
                                                                           .end,
                                                                   children: [
-                                                                    Positioned(
-                                                                      left: 0,
-                                                                      top: 0,
+                                                                    Align(
+                                                                       alignment: Alignment.topLeft,
                                                                       child: Icon(
                                                                           Icons
-                                                                              .pie_chart, size: 20,color: Colors.blue), // replace with your desired icon or image
+                                                                              .pie_chart, size: 20,color: Colors.blue),
                                                                     ),
                                                                      SizedBox(width: 10),
 
@@ -3095,12 +3080,11 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                                       MainAxisAlignment
                                                                           .end,
                                                                   children: [
-                                                                    Positioned(
-                                                                      left: 0,
-                                                                      top: 0,
+                                                                    Align(
+                                                                       alignment: Alignment.topLeft,
                                                                       child: Icon(
                                                                           Icons
-                                                                              .pie_chart, size: 20,color: Colors.green), // replace with your desired icon or image
+                                                                              .pie_chart, size: 20,color: Colors.green),
                                                                     ),
                                                                      SizedBox(width: 10),
                                                                     Text(
@@ -3882,14 +3866,12 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                                           .end,
                                                                            crossAxisAlignment: CrossAxisAlignment.center,
                                                                   children: [
-                                                                    Positioned(
-                                                                      left: 0,
-                                                                      top: 0,
+                                                                    Align(
+                                                                       alignment: Alignment.topLeft,
                                                                       child: Icon(
                                                                           Icons
                                                                               .pie_chart,
-                                                                              size: 20,color: Colors.red), // replace with your desired icon or image
-                                                                              
+                                                                              size: 20,color: Colors.red),
                                                                     ),
                                                                     SizedBox(width: 10),
 
@@ -3911,12 +3893,11 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                                       MainAxisAlignment
                                                                           .end,
                                                                   children: [
-                                                                    Positioned(
-                                                                      left: 0,
-                                                                      top: 0,
+                                                                    Align(
+                                                                       alignment: Alignment.topLeft,
                                                                       child: Icon(
                                                                           Icons
-                                                                              .pie_chart, size: 20,color: Colors.blue), // replace with your desired icon or image
+                                                                              .pie_chart, size: 20,color: Colors.blue),
                                                                     ),
                                                                      SizedBox(width: 10),
 
@@ -3937,12 +3918,11 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                                       MainAxisAlignment
                                                                           .end,
                                                                   children: [
-                                                                    Positioned(
-                                                                      left: 0,
-                                                                      top: 0,
+                                                                    Align(
+                                                                       alignment: Alignment.topLeft,
                                                                       child: Icon(
                                                                           Icons
-                                                                              .pie_chart, size: 20,color: Colors.green), // replace with your desired icon or image
+                                                                              .pie_chart, size: 20,color: Colors.green),
                                                                     ),
                                                                      SizedBox(width: 10),
                                                                     Text(
@@ -4723,14 +4703,12 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                                           .end,
                                                                            crossAxisAlignment: CrossAxisAlignment.center,
                                                                   children: [
-                                                                    Positioned(
-                                                                      left: 0,
-                                                                      top: 0,
+                                                                    Align(
+                                                                       alignment: Alignment.topLeft,
                                                                       child: Icon(
                                                                           Icons
                                                                               .pie_chart,
-                                                                              size: 20,color: Colors.red), // replace with your desired icon or image
-                                                                              
+                                                                              size: 20,color: Colors.red),
                                                                     ),
                                                                     SizedBox(width: 10),
 
@@ -4752,12 +4730,11 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                                       MainAxisAlignment
                                                                           .end,
                                                                   children: [
-                                                                    Positioned(
-                                                                      left: 0,
-                                                                      top: 0,
+                                                                    Align(
+                                                                       alignment: Alignment.topLeft,
                                                                       child: Icon(
                                                                           Icons
-                                                                              .pie_chart, size: 20,color: Colors.blue), // replace with your desired icon or image
+                                                                              .pie_chart, size: 20,color: Colors.blue),
                                                                     ),
                                                                      SizedBox(width: 10),
 
@@ -4778,12 +4755,11 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                                       MainAxisAlignment
                                                                           .end,
                                                                   children: [
-                                                                    Positioned(
-                                                                      left: 0,
-                                                                      top: 0,
+                                                                    Align(
+                                                                       alignment: Alignment.topLeft,
                                                                       child: Icon(
                                                                           Icons
-                                                                              .pie_chart, size: 20,color: Colors.green), // replace with your desired icon or image
+                                                                              .pie_chart, size: 20,color: Colors.green),
                                                                     ),
                                                                      SizedBox(width: 10),
                                                                     Text(
