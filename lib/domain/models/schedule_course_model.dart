@@ -12,6 +12,7 @@ class ScheduleTrainingCourse {
     this.internalEmployees,
     this.externalEmployees,
     this.uploadfile_ids,
+    this.facility_id,
   });
 
   int? courseId;
@@ -26,6 +27,7 @@ class ScheduleTrainingCourse {
   List<InternalEmployee>? internalEmployees;
   List<ExternalEmployees>? externalEmployees;
   List<dynamic>? uploadfile_ids;
+  int? facility_id;
 
   factory ScheduleTrainingCourse.fromJson(Map<String, dynamic> json) =>
       ScheduleTrainingCourse(
@@ -38,6 +40,7 @@ class ScheduleTrainingCourse {
         venue: json["venue"],
         mode: json['mode'],
         hfeEmployeeId: json["hfeEmployeeId"],
+        facility_id: json['facility_id'],
         internalEmployees: json["internalEmployees"] != null
             ? List<InternalEmployee>.from(
                 json["internalEmployees"].map(
@@ -64,6 +67,7 @@ class ScheduleTrainingCourse {
         "hfeEmployeeId": hfeEmployeeId,
         "venue": venue,
         'mode': mode,
+        "facility_id": facility_id,
         "internalEmployees": internalEmployees,
         "externalEmployees": externalEmployees,
         "uploadfile_ids": uploadfile_ids,

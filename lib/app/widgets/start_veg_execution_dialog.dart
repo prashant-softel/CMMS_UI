@@ -6,12 +6,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class StartVegExecutionMessageDialog extends GetView {
-  String? data;
-  List<dynamic>? startVegId;
+  final String? data;
+  final List<dynamic>? startVegId;
 
   StartVegExecutionMessageDialog({super.key, this.data, this.startVegId});
-  // final ModuleCleaningListExecutionController _controller = Get.find();
-
 
   @override
   Widget build(BuildContext context) {
@@ -23,18 +21,19 @@ class StartVegExecutionMessageDialog extends GetView {
         insetPadding: Dimens.edgeInsets10_0_10_0,
         contentPadding: EdgeInsets.zero,
         title: Text(
-          data == "Plan Execution started" ?'Start Vegetation Plan Execution' : 'Start Vegetation Schedule Execution',
+          data == "Plan Execution started"
+              ? 'Start Vegetation Plan Execution'
+              : 'Start Vegetation Schedule Execution',
           textAlign: TextAlign.center,
           style: TextStyle(color: Colors.black),
         ),
-        content: Builder(builder: (context) {
-          var height = MediaQuery.of(context).size.height;
-
-          return Container(
-            padding: Dimens.edgeInsets05_0_5_0,
-            height: 50,
-            width: double.infinity,
-            child: Column(
+        content: Builder(
+          builder: (context) {
+            return Container(
+              padding: Dimens.edgeInsets05_0_5_0,
+              height: 50,
+              width: double.infinity,
+              child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   Divider(
@@ -46,15 +45,25 @@ class StartVegExecutionMessageDialog extends GetView {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Text(
-                          '${data} ', style: TextStyle(color: Colors.green),textAlign: TextAlign.center),
+                        '${data} ',
+                        style: TextStyle(color: Colors.green),
+                        textAlign: TextAlign.center,
+                      ),
                       Text('with id '),
-                      Text('${startVegId}',style: TextStyle(color: Colors.blue, fontWeight: FontWeight.bold),)
+                      Text(
+                        '${startVegId}',
+                        style: TextStyle(
+                          color: Colors.blue,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
                     ],
                   ),
-                      
-                ]),
-          );
-        }),
+                ],
+              ),
+            );
+          },
+        ),
         actions: [
           Dimens.boxWidth10,
           Center(
@@ -62,9 +71,6 @@ class StartVegExecutionMessageDialog extends GetView {
               style: Styles.darkBlueElevatedButtonStyle,
               onPressed: () {
                 Get.offAllNamed(Routes.vegExecutionListScreen);
-                // _controller.getMCTaskList(_controller.facilityId, _controller.formattedTodate, _controller.formattedFromdate, true);
-                
-                Get.back();
               },
               child: const Text('Ok'),
             ),

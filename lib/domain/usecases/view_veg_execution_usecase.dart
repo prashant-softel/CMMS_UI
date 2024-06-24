@@ -1,5 +1,4 @@
 import 'package:cmms/domain/domain.dart';
-import 'package:cmms/domain/models/facility_model.dart';
 import 'package:cmms/domain/models/veg_execution_details_model.dart';
 
 class ViewVegExecutionUsecase {
@@ -17,9 +16,9 @@ class ViewVegExecutionUsecase {
   }) async =>
       await repository.getVegExecutionDetail(
         executionId: executionId,
-        facilityId:facilityId,
+        facilityId: facilityId,
         isLoading: isLoading ?? false,
-      );  
+      );
 
   // Future<Map<String, dynamic>> vegExecutionApprovedButton({
   //   mcExecutionApproveJsonString,
@@ -30,25 +29,19 @@ class ViewVegExecutionUsecase {
   //       isLoading,
   //     );
 
-  Future<List<FacilityModel?>?> getFacilityList() async =>
-      await repository.getFacilityList(true);
+  void saveExecutionId({String? vegexe}) async =>
+      repository.saveValue(LocalKeys.vegexe, vegexe);
 
-  Future<List<FacilityModel?>?> getFacilityPlantList() async =>
-      await repository.getFacilityList(true);
+  Future<String?> getExecutionId() async =>
+      await repository.getStringValue(LocalKeys.vegexe);
 
-  Future<String?> getUserAccessList() async =>
-      await repository.getUserAccessData(LocalKeys.userAccess);
+  void clearExecutionId() async => repository.clearData(LocalKeys.vegexe);
 
-
-  void saveValueVegId({String? vegid}) async =>
+  void savePlanId({String? vegid}) async =>
       repository.saveValue(LocalKeys.vegid, vegid);
 
-  Future<String?> getValueVegId() async =>
+  Future<String?> getPlanId() async =>
       await repository.getStringValue(LocalKeys.vegid);
 
-  void saveValuePlanId({String? vegplanId}) async =>
-      repository.saveValue(LocalKeys.vegplanId, vegplanId);
-
-  Future<String?> getValuePlanId() async =>
-      await repository.getStringValue(LocalKeys.vegplanId);
+  void clearPlanId() async => repository.clearData(LocalKeys.vegid);
 }

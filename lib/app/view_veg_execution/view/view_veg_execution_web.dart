@@ -75,20 +75,17 @@ class ViewVegExecutionContentWeb extends GetView<ViewVegExecutionController> {
                           ),
                           InkWell(
                             onTap: () {
-                              Get.offNamed(Routes.vegetationDashboard);
-                            },
-                            child: Text(" / VEGETATION CONTROL",
-                                style: Styles.greyLight14),
-                          ),
-                          InkWell(
-                            onTap: () {
                               Get.offNamed(Routes.vegExecutionListScreen);
                             },
-                            child: Text(" / VEGETATION PLAN EXECUTION LIST",
-                                style: Styles.greyLight14),
+                            child: Text(
+                              " / VEGETATION EXECUTION LIST",
+                              style: Styles.greyLight14,
+                            ),
                           ),
-                          Text(" / VIEW VEGETATION PLAN EXECUTION",
-                              style: Styles.greyLight14)
+                          Text(
+                            " / VIEW VEGETATION PLAN EXECUTION",
+                            style: Styles.greyLight14,
+                          )
                         ],
                       ),
                     ),
@@ -152,7 +149,7 @@ class ViewVegExecutionContentWeb extends GetView<ViewVegExecutionController> {
                                               ),
                                               child: Center(
                                                   child: Text(
-                                                '${controller.vegExecutionDetailsModel.value?.statusShort}',
+                                                '${controller.vegExecutionDetailsModel.value?.status_short}',
                                                 style: TextStyle(
                                                     color: Colors.white),
                                               )),
@@ -477,25 +474,25 @@ class ViewVegExecutionContentWeb extends GetView<ViewVegExecutionController> {
                                                       DataCell(Text(controller
                                                               .listSchedules?[
                                                                   index]
-                                                              ?.scheduledModules
+                                                              ?.scheduled
                                                               .toString() ??
                                                           '')),
                                                       DataCell(Text(controller
                                                               .listSchedules?[
                                                                   index]
-                                                              ?.cleanedModules
+                                                              ?.cleaned
                                                               .toString() ??
                                                           '')),
                                                       DataCell(Text(controller
                                                               .listSchedules?[
                                                                   index]
-                                                              ?.abandonedModules
+                                                              ?.abandoned
                                                               .toString() ??
                                                           '')),
                                                       DataCell(Text(controller
                                                               .listSchedules?[
                                                                   index]
-                                                              ?.pendingModules
+                                                              ?.pending
                                                               .toString() ??
                                                           '')),
                                                       DataCell(Text(controller
@@ -513,13 +510,13 @@ class ViewVegExecutionContentWeb extends GetView<ViewVegExecutionController> {
                                                       DataCell(Text(controller
                                                               .listSchedules?[
                                                                   index]
-                                                              ?.executionDate
+                                                              ?.start_date
                                                               .toString() ??
                                                           '')),
                                                       DataCell(Text(controller
                                                               .listSchedules?[
                                                                   index]
-                                                              ?.executionDate
+                                                              ?.end_date
                                                               .toString() ??
                                                           '')),
                                                       DataCell(Text(controller
@@ -531,7 +528,7 @@ class ViewVegExecutionContentWeb extends GetView<ViewVegExecutionController> {
                                                       DataCell(Text(controller
                                                               .listSchedules?[
                                                                   index]
-                                                              ?.statusShort
+                                                              ?.status_short
                                                               .toString() ??
                                                           '')),
                                                       DataCell(Column(
@@ -590,6 +587,7 @@ class ViewVegExecutionContentWeb extends GetView<ViewVegExecutionController> {
                                             ],
                                           ),
                                         ),
+
                                         ///MC Execution History
                                         // Container(
                                         //   margin: Dimens.edgeInsets20,
@@ -752,7 +750,7 @@ class ViewVegExecutionContentWeb extends GetView<ViewVegExecutionController> {
                                         //     ],
                                         //   ),
                                         // ),
-                                       
+
                                         Row(
                                           mainAxisAlignment:
                                               MainAxisAlignment.center,

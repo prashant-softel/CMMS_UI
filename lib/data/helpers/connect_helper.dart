@@ -12,6 +12,7 @@ import 'package:cmms/app/widgets/Incident_report_message_approve_dialog.dart';
 import 'package:cmms/app/widgets/abandon_execution_message_dialog.dart';
 import 'package:cmms/app/widgets/abandon_schedule_execution_message_dialog.dart';
 import 'package:cmms/app/widgets/abandon_veg_execution_dialog.dart';
+import 'package:cmms/app/widgets/abandon_veg_schedule_message_dialog.dart';
 import 'package:cmms/app/widgets/approve_wc_message_dialog.dart';
 import 'package:cmms/app/widgets/audit_plan_approve_msg_dialog.dart';
 import 'package:cmms/app/widgets/audit_plan_reject_msg_dialog.dart';
@@ -25,7 +26,8 @@ import 'package:cmms/app/widgets/create_sop_dialog.dart';
 import 'package:cmms/app/widgets/end_execution_message_dialog.dart';
 import 'package:cmms/app/widgets/end_mc_execution_message_dialog.dart';
 import 'package:cmms/app/widgets/end_mc_schedule_execution_message.dart';
-import 'package:cmms/app/widgets/end_veg_schedule_execution_message_dialog.dart';
+import 'package:cmms/app/widgets/end_veg_execution_message_dialog.dart';
+import 'package:cmms/app/widgets/end_veg_schedule_execution.dart';
 import 'package:cmms/app/widgets/goods_order_message_approve_dialog.dart';
 import 'package:cmms/app/widgets/goods_order_message_close_dialog.dart';
 import 'package:cmms/app/widgets/goods_order_message_reject_dialog.dart';
@@ -8534,6 +8536,170 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> getVegTaskEquipmentList({
+    required String auth,
+    required int facilityId,
+    bool? isLoading,
+    int? executionId,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Vegetation/GetVegTaskExecutionEquipmentList?taskId=$executionId&facility_id=$facilityId',
+      Request.get,
+      null,
+      isLoading ?? false,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    print('MCExecutionResponseModel${responseModel.data}');
+    return responseModel;
+  }
+
+  Future<ResponseModel> startVegExecutionButton({
+    required String auth,
+    bool? isLoading,
+    int? executionId,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Vegetation/StartVegetationExecution?executionId=$executionId',
+      Request.put,
+      null,
+      isLoading ?? true,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    Get.dialog<void>(StartVegExecutionMessageDialog(
+      data: parsedJson['message'],
+      startVegId: parsedJson['id'],
+    ));
+    return responseModel;
+  }
+
+  Future<ResponseModel> endVegExecutionButton({
+    required String auth,
+    bool? isLoading,
+    int? executionId,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Vegetation/StartVegetationExecution?executionId=$executionId',
+      Request.put,
+      null,
+      isLoading ?? true,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    Get.dialog<void>(EndVegExecutionMessageDialog(
+      data: parsedJson['message'],
+      endVegId: parsedJson['id'],
+    ));
+    return responseModel;
+  }
+
+  Future<ResponseModel> abandonVegExecutionButton({
+    required String auth,
+    abandoneJsonString,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Vegetation/AbandonVegetationExecution',
+      Request.put,
+      abandoneJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    print('AbandonExecutionResponse: ${responseModel.data}');
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    Get.dialog<void>(
+        AbandonVegExecutionMessageDialog(data: parsedJson['message']));
+    return responseModel;
+  }
+
+  Future<ResponseModel> startVegExecutionScheduleButton({
+    required String auth,
+    bool? isLoading,
+    int? scheduleId,
+  }) async {
+    // facilityId = 45;
+    var responseModel = await apiWrapper.makeRequest(
+      'Vegetation/StartVegScheduleExecution?scheduleId=$scheduleId',
+      Request.put,
+      // {'comment': "$comment", 'id': id},
+      null,
+      isLoading ?? true,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    // print('StartExecutionResponse: ${responseModel.data}');
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    Get.dialog<void>(StartVegExecutionMessageDialog(
+      data: parsedJson['message'],
+      startVegId: parsedJson['id'],
+    ));
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> endVegScheduleExecutionButton({
+    required String auth,
+    bool? isLoading,
+    int? scheduleId,
+  }) async {
+    // facilityId = 45;
+    var responseModel = await apiWrapper.makeRequest(
+      'Vegetation/EndVegScheduleExecution?scheduleId=$scheduleId',
+      Request.put,
+      null,
+      isLoading ?? true,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    Get.dialog<void>(
+      EndVegScheduleMessageDialog(
+        data: parsedJson['message'],
+        endVegId: parsedJson['id'],
+      ),
+    );
+    return responseModel;
+  }
+
+  Future<ResponseModel> abandonVegScheduleExecutionButton({
+    required String auth,
+    abandoneScheduleJsonString,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Vegetation/AbandonVegetationSchedule',
+      Request.put,
+      abandoneScheduleJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    print('AbandonExecutionResponse: ${responseModel.data}');
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    Get.dialog<void>(
+        AbandonVegScheduleMessageDialog(data: parsedJson['message']));
+    return responseModel;
+  }
+
   Future<ResponseModel> createIncidentRiskType({
     required String auth,
     bool? isLoading,
@@ -8603,83 +8769,6 @@ class ConnectHelper {
       },
     );
 
-    return responseModel;
-  }
-
-  Future<ResponseModel> startVegExecutionScheduleButton({
-    required String auth,
-    bool? isLoading,
-    int? scheduleId,
-  }) async {
-    // facilityId = 45;
-    var responseModel = await apiWrapper.makeRequest(
-      'Vegetation/StartVegScheduleExecution?scheduleId=$scheduleId',
-      Request.put,
-      // {'comment': "$comment", 'id': id},
-      null,
-      isLoading ?? true,
-      {
-        'Authorization': 'Bearer $auth',
-      },
-    );
-    // print('StartExecutionResponse: ${responseModel.data}');
-    var res = responseModel.data;
-    var parsedJson = json.decode(res);
-    Get.dialog<void>(StartVegExecutionMessageDialog(
-      data: parsedJson['message'],
-      startVegId: parsedJson['id'],
-    ));
-
-    return responseModel;
-  }
-
-  Future<ResponseModel> endVegScheduleExecutionButton({
-    required String auth,
-    bool? isLoading,
-    int? scheduleId,
-  }) async {
-    // facilityId = 45;
-    var responseModel = await apiWrapper.makeRequest(
-      'Vegetation/EndVegScheduleExecution?scheduleId=$scheduleId',
-      Request.put,
-      // {'comment': "$comment", 'id': id},
-      null,
-      isLoading ?? true,
-      {
-        'Authorization': 'Bearer $auth',
-      },
-    );
-    // print('StartExecutionResponse: ${responseModel.data}');
-    var res = responseModel.data;
-    var parsedJson = json.decode(res);
-    Get.dialog<void>(EndVegScheduleExecutionMessageDialog(
-      data: parsedJson['message'],
-      endVegId: parsedJson['id'],
-    ));
-
-    return responseModel;
-  }
-
-  Future<ResponseModel> abandonVegExecutionButton({
-    required String auth,
-    abandoneJsonString,
-    bool? isLoading,
-  }) async {
-    var responseModel = await apiWrapper.makeRequest(
-      'Cleaning/AbandonVegetationExecution',
-      Request.put,
-      abandoneJsonString,
-      isLoading ?? false,
-      {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer $auth',
-      },
-    );
-    print('AbandonExecutionResponse: ${responseModel.data}');
-    var res = responseModel.data;
-    var parsedJson = json.decode(res);
-    Get.dialog<void>(
-        AbandonVegExecutionMessageDialog(data: parsedJson['message']));
     return responseModel;
   }
 
@@ -9326,7 +9415,7 @@ class ConnectHelper {
     isLoading,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
-      '',
+      'Training/ScheduleCourse',
       Request.post,
       scheduleCourseJson,
       isLoading ?? false,

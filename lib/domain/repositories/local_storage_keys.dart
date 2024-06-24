@@ -47,7 +47,7 @@ abstract class LocalKeys {
   static const mcid = 'mcid';
   static const planId = 'planId';
   static const vegid = 'vegid';
-  static const vegplanId = 'vegplanId';
+  static const vegexe = 'vegexe';
 
   static const refreshToken = 'refresh-token';
   static const userType = 'userType';

@@ -30,6 +30,7 @@ abstract class Routes {
   static const editVegetationPlanScreen = _Paths.editVegetationPlanScreen;
   static const vegExecutionListScreen = _Paths.vegExecutionListScreen;
   static const viewVegExecutionPlanScreen = _Paths.viewVegExecutionPlanScreen;
+  static const vegExecutionScreen = _Paths.vegExecutionScreen;
 
   static const createCheckList = _Paths.createCheckList;
   static const preventiveList = _Paths.preventiveList;
@@ -261,6 +262,7 @@ abstract class _Paths {
   static const vegExecutionListScreen =
       '/vegetation-execution-plan-list-screen';
   static const viewVegExecutionPlanScreen = '/view_vegetation_execution_plan';
+  static const vegExecutionScreen = '/veg-execution-screen';
 
   // static const create_checkList = '/create_preventive_checklist-screen';
   // static const preventive_List = '/preventive-list-screen';

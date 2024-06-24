@@ -152,6 +152,8 @@ import 'package:cmms/app/training_courses/views/training_course_screen.dart';
 import 'package:cmms/app/transaction_report/view/transaction_report_list_screen.dart';
 import 'package:cmms/app/type_water_master/type_water_master_binding.dart';
 import 'package:cmms/app/type_water_master/view/type_water_master_screen.dart';
+import 'package:cmms/app/veg_execution_screen/veg_execution_screen_binding.dart';
+import 'package:cmms/app/veg_execution_screen/view/veg_execution_screen.dart';
 import 'package:cmms/app/vegetation_control/vegetation_binding.dart';
 import 'package:cmms/app/vegetation_control/view/vegetation_dashboard_screen.dart';
 import 'package:cmms/app/vegetation_execution_plan_list/veg_execution_list_binding.dart';
@@ -657,6 +659,11 @@ class AppPages {
       name: _Paths.viewVegExecutionPlanScreen,
       page: ViewVegExecutionScreen.new,
       binding: ViewVegExecutionBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.vegExecutionScreen,
+      page: VegExecutionScreen.new,
+      binding: VegExecutionBinding(),
     ),
     GetPage<dynamic>(
       name: _Paths.pmTaskView,

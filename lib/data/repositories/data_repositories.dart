@@ -4869,6 +4869,84 @@ class DataRepository extends DomainRepository {
         executionId: executionId,
         isLoading: isLoading ?? false,
       );
+  Future<ResponseModel> getVegTaskEquipmentList({
+    required int facilityId,
+    required String auth,
+    bool? isLoading,
+    int? executionId,
+  }) async =>
+      await connectHelper.getVegTaskEquipmentList(
+        auth: auth,
+        facilityId: facilityId,
+        executionId: executionId,
+        isLoading: isLoading ?? false,
+      );
+  Future<ResponseModel> startVegExecutionButton({
+    required String auth,
+    int? executionId,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.startVegExecutionButton(
+        auth: auth,
+        executionId: executionId,
+        isLoading: isLoading ?? false,
+      );
+
+  Future<ResponseModel> endVegExecutionButton({
+    required String auth,
+    int? executionId,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.endVegExecutionButton(
+        auth: auth,
+        executionId: executionId,
+        isLoading: isLoading ?? false,
+      );
+
+  Future<ResponseModel> abandonVegExecutionButton({
+    required String auth,
+    abandoneJsonString,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.abandonVegExecutionButton(
+        auth: auth,
+        abandoneJsonString: abandoneJsonString,
+        isLoading: isLoading ?? false,
+      );
+
+  Future<ResponseModel> startVegExecutionScheduleButton({
+    required String auth,
+    int? scheduleId,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.startVegExecutionScheduleButton(
+        auth: auth,
+        scheduleId: scheduleId,
+        isLoading: isLoading ?? false,
+      );
+
+  Future<ResponseModel> endVegScheduleExecutionButton({
+    required String auth,
+    int? scheduleId,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.endVegScheduleExecutionButton(
+        auth: auth,
+        scheduleId: scheduleId,
+        isLoading: isLoading ?? false,
+      );
+
+  Future<ResponseModel> abandonVegScheduleExecutionButton({
+    required String auth,
+    abandoneScheduleJsonString,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.abandonVegScheduleExecutionButton(
+        auth: auth,
+        abandoneScheduleJsonString: abandoneScheduleJsonString,
+        isLoading: isLoading ?? false,
+      );
+
   Future<ResponseModel> createIncidentRiskType({
     auth,
     bool? isLoading,
@@ -4915,39 +4993,6 @@ class DataRepository extends DomainRepository {
         auth: auth, isLoading: isLoading, risktype_id: risktype_id);
     return response;
   }
-
-  Future<ResponseModel> startVegExecutionScheduleButton({
-    required String auth,
-    int? scheduleId,
-    bool? isLoading,
-  }) async =>
-      await connectHelper.startVegExecutionScheduleButton(
-        auth: auth,
-        scheduleId: scheduleId,
-        isLoading: isLoading ?? false,
-      );
-
-  Future<ResponseModel> endVegScheduleExecutionButton({
-    required String auth,
-    int? scheduleId,
-    bool? isLoading,
-  }) async =>
-      await connectHelper.endVegScheduleExecutionButton(
-        auth: auth,
-        scheduleId: scheduleId,
-        isLoading: isLoading ?? false,
-      );
-
-  Future<ResponseModel> abandonVegExecutionButton({
-    required String auth,
-    abandoneJsonString,
-    bool? isLoading,
-  }) async =>
-      await connectHelper.abandonVegExecutionButton(
-        auth: auth,
-        abandoneJsonString: abandoneJsonString,
-        isLoading: isLoading ?? false,
-      );
 
   Future<ResponseModel> createWorkType({
     auth,

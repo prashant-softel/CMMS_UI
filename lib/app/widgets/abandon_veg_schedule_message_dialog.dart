@@ -1,16 +1,15 @@
-import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/theme/color_values.dart';
-import 'package:cmms/app/theme/dimens.dart';
-import 'package:cmms/app/theme/styles.dart';
-import 'package:cmms/app/veg_execution_screen/veg_execution_screen_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../navigators/app_pages.dart';
+import '../theme/dimens.dart';
+import '../theme/styles.dart';
 
-class AbandonVegExecutionMessageDialog extends GetView<VegExecutionController> {
-  final String? createData;
+class AbandonVegScheduleMessageDialog extends GetView {
   final String? data;
 
-  AbandonVegExecutionMessageDialog({super.key, this.createData, this.data});
+  AbandonVegScheduleMessageDialog({super.key, this.data});
+
   @override
   Widget build(BuildContext context) {
     return StatefulBuilder(
@@ -22,7 +21,7 @@ class AbandonVegExecutionMessageDialog extends GetView<VegExecutionController> {
           insetPadding: Dimens.edgeInsets10_0_10_0,
           contentPadding: EdgeInsets.zero,
           title: Text(
-            'Abandon Execution',
+            'Abandon Schedule Execution',
             textAlign: TextAlign.center,
             style: TextStyle(color: Colors.black),
           ),
