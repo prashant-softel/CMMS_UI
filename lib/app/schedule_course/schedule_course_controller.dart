@@ -343,6 +343,7 @@ class ScheduleController extends GetxController {
       trainingAgencyId: selectedTrainingAgencyId.value,
       dateOfTraining: _dateOfTraining,
       venue: _venue,
+      facility_id: facilityId.value,
       trainerName: _trainerName,
       hfeEmployeeId: selectedEmployeeId.value,
       mode: selectedModeName.value,

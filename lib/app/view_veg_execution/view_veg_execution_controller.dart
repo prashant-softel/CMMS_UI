@@ -15,39 +15,19 @@ import 'package:scrollable_table_view/scrollable_table_view.dart';
 
 class ViewVegExecutionController extends GetxController {
   ViewVegExecutionController(this.viewVegExecutionPresenter);
-  
+
   ViewVegExecutionPresenter viewVegExecutionPresenter;
 
   final HomeController homeController = Get.find();
   Rx<String> selectedFacility = ''.obs;
   Schedules? selectedSchedule;
 
-  // RxList<GetMCTaskEquipmentList?> equipmenTasktList =
-  // <GetMCTaskEquipmentList?>[].obs;
-
   Rx<List<List<Map<String, String>>>> rowItem =
       Rx<List<List<Map<String, String>>>>([]);
   Map<String, RoleModel> dropdownMapperData = {};
 
-  // List<Escalation> days = [];
-  // Map<String, PaiedModel> paiddropdownMapperData = {};
-
   TextEditingController approveCommentTextFieldCtrlr = TextEditingController();
   TextEditingController rejectCommentTextFieldCtrlr = TextEditingController();
-
-  // void addRowItem() {
-  //   rowItem.value.add([
-  //     {"key": "Days", "value": ''},
-  //     {"key": "Scheduled Module", "value": ''},
-  //     {"key": "Cleaned", "value": ''},
-  //     {"key": "Abandoned", "value": ''},
-  //     {"key": "Pending", "value": ''},
-  //     {"key": "Water Used", "value": ''},
-  //     {"key": "Start Date", "value": ''},
-  //     {'key': "End Date", "value": ''},
-  //     {'key': "Remark", "value": ''},
-  //   ]);
-  // }
 
   RxList<ModuleListModel?> moduleList = <ModuleListModel>[].obs;
   Rx<bool> isModuleListSelected = true.obs;
@@ -90,7 +70,7 @@ class ViewVegExecutionController extends GetxController {
       Future.delayed(Duration(seconds: 1), () {
         getVegExecutionDetail(executionId: vegid.value, facilityId: facilityId);
       });
-          super.onInit();
+      super.onInit();
     } catch (e) {
       print(e);
     }
@@ -98,35 +78,34 @@ class ViewVegExecutionController extends GetxController {
 
   Future<void> setVegId() async {
     try {
-      final _vegid = await viewVegExecutionPresenter.getValueVegId();
-      final _vegplanId =
-          await viewVegExecutionPresenter.getValuePlanId();
+      final _vegid = await viewVegExecutionPresenter.getExecutionId();
+      final _vegPlanId = await viewVegExecutionPresenter.getPlanId();
 
       if (_vegid == null || _vegid == '' || _vegid == "null") {
         var dataFromPreviousScreen = Get.arguments;
-
-        vegid.value = dataFromPreviousScreen['vegid'];
-        vegplanId.value = dataFromPreviousScreen['vegplanId'];
-
-        viewVegExecutionPresenter.saveValueVegId(
-            vegid: vegid.value.toString());
-        viewVegExecutionPresenter.saveValuePlanId(
-            vegplanId: vegplanId.value.toString());
+        vegid.value = dataFromPreviousScreen['vegexe'];
+        vegplanId.value = dataFromPreviousScreen['vegid'];
+        viewVegExecutionPresenter.saveExecutionId(
+            vegexe: vegid.value.toString());
+        viewVegExecutionPresenter.savePlanId(vegid: vegplanId.value.toString());
       } else {
         vegid.value = int.tryParse(_vegid) ?? 0;
-        vegplanId.value = int.tryParse(_vegplanId.toString()) ?? 0;
+        vegplanId.value = int.tryParse(_vegPlanId ?? "") ?? 0;
       }
     } catch (e) {
-      Utility.showDialog(e.toString(), 'vegid');
+      Utility.showDialog(e.toString(), 'vegexe');
     }
   }
 
-    Future<void> getVegExecutionDetail({required int executionId,required int facilityId}) async {
-    // newPermitDetails!.value = <NewPermitListModel>[];
+  Future<void> getVegExecutionDetail({
+    required int executionId,
+    required int facilityId,
+  }) async {
     vegExecutionDetailsList?.value = <VegExecutionDetailsModel>[];
 
-    final _vegExecutionDetails = await viewVegExecutionPresenter
-        .getVegExecutionDetail(executionId: executionId, facilityId: facilityId);
+    final _vegExecutionDetails =
+        await viewVegExecutionPresenter.getVegExecutionDetail(
+            executionId: executionId, facilityId: facilityId);
     print('View Vegetation Execution Detail:$_vegExecutionDetails');
 
     if (_vegExecutionDetails != null) {
@@ -140,29 +119,36 @@ class ViewVegExecutionController extends GetxController {
     }
   }
 
+  void clearStoreData() {
+    viewVegExecutionPresenter.clearExecutionId();
+    viewVegExecutionPresenter.clearPlanId();
+  }
+
   void onValueChanged(dynamic list, dynamic value) {
     print('Valuesd:${value}');
     switch (list.runtimeType) {
       case RxList<FacilityModel>:
         {
-         if (value != "Please Select") {
-            int facilityIndex = facilityList.indexWhere((x) => x?.name == value);
+          if (value != "Please Select") {
+            int facilityIndex =
+                facilityList.indexWhere((x) => x?.name == value);
 
-          _facilityId.add(facilityList[facilityIndex]?.id ?? 0);
-         } else {
-           facilityId=0;
-         }
+            _facilityId.add(facilityList[facilityIndex]?.id ?? 0);
+          } else {
+            facilityId = 0;
+          }
         }
         break;
       case RxList<ModuleListModel>:
         {
-         if (value != "Please Select") {
-            int moduleListIndex = moduleList.indexWhere((x) => x?.name == value);
-          selectedModuleListId = moduleList[moduleListIndex]?.id ?? 0;
-          print('Module List Id: $selectedModuleListId');
-         } else {
-           selectedModuleListId=0;
-         }
+          if (value != "Please Select") {
+            int moduleListIndex =
+                moduleList.indexWhere((x) => x?.name == value);
+            selectedModuleListId = moduleList[moduleListIndex]?.id ?? 0;
+            print('Module List Id: $selectedModuleListId');
+          } else {
+            selectedModuleListId = 0;
+          }
         }
         break;
 

@@ -106,6 +106,7 @@ import 'package:cmms/domain/models/update_pm_task_execution_model.dart';
 import 'package:cmms/domain/models/user_detail_model.dart';
 import 'package:cmms/domain/models/veg_execution_details_model.dart';
 import 'package:cmms/domain/models/veg_plan_detail_model.dart';
+import 'package:cmms/domain/models/veg_task_equipment_model.dart';
 import 'package:cmms/domain/models/veg_task_list_model.dart';
 import 'package:cmms/domain/models/vegetation_equipment_model.dart';
 import 'package:cmms/domain/models/vegetation_list_plan_model.dart';
@@ -13255,6 +13256,189 @@ class Repository {
     }
   }
 
+  Future<List<VegTaskEquipmentList?>> getVegTaskEquipmentList({
+    bool? isLoading,
+    required int facilityId,
+    int? executionId,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getVegTaskEquipmentList(
+        auth: auth,
+        facilityId: facilityId,
+        executionId: executionId,
+        isLoading: isLoading ?? false,
+      );
+      print({"VegExecutiondetail", res.data});
+      if (!res.hasError) {
+        if (res.errorCode == 200) {
+          final List<VegTaskEquipmentList> vegtask =
+              vegTaskEquipmentListFromJson(res.data);
+          var responseMap = vegtask;
+          print({"VegExecutionResponseData", responseMap});
+          return responseMap;
+        }
+      } else {
+        Utility.showDialog(res.errorCode.toString(), 'VegExecutionDetail');
+      }
+      return [];
+    } catch (error) {
+      print(error.toString());
+      return [];
+    }
+  }
+
+  Future<void> startVegExecutionButton(
+    int? executionId,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.startVegExecutionButton(
+        auth: auth,
+        executionId: executionId,
+        isLoading: isLoading ?? false,
+      );
+      print('StartExecutionResponse55: ${res.data}');
+      if (!res.hasError) {
+      } else {
+        Utility.showDialog(res.errorCode.toString(), 'startVegExecutionButton');
+      }
+    } catch (error) {
+      log(error.toString());
+    }
+  }
+
+  Future<void> endVegExecutionButton(
+    int? executionId,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.endVegExecutionButton(
+        auth: auth,
+        executionId: executionId,
+        isLoading: isLoading ?? false,
+      );
+      print('endExecutionResponse55: ${res.data}');
+      if (!res.hasError) {
+        //  return _permitIssueModel;
+      } else {
+        Utility.showDialog(res.errorCode.toString(), 'endVegExecutionButton');
+      }
+    } catch (error) {
+      log(error.toString());
+    }
+  }
+
+  Future<Map<String, dynamic>> abandonVegExecutionButton(
+    abandoneJsonString,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.abandonVegExecutionButton(
+        auth: auth,
+        abandoneJsonString: json.encode(abandoneJsonString),
+        isLoading: isLoading ?? false,
+      );
+      var resourceData = res.data;
+      print('Response Abandon Execution: ${resourceData}');
+      if (!res.hasError) {
+        if (res.errorCode == 200) {
+          var responseMap = json.decode(res.data);
+          return responseMap;
+        }
+      } else {
+        Utility.showDialog(res.errorCode.toString(), 'abandonExecutionButton');
+        //return '';
+      }
+      return Map();
+    } catch (error) {
+      print(error.toString());
+      return Map();
+    }
+  }
+
+  Future<void> startVegExecutionScheduleButton(
+    int? scheduleId,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+
+      final res = await _dataRepository.startVegExecutionScheduleButton(
+        auth: auth,
+        scheduleId: scheduleId,
+        isLoading: isLoading ?? false,
+      );
+      print('StartScheduleExecutionResponse55: ${res.data}');
+
+      if (!res.hasError) {
+        //  return _permitIssueModel;
+      } else {
+        Utility.showDialog(
+            res.errorCode.toString(), 'startVegScheduleExecutionButton');
+      }
+    } catch (error) {
+      log(error.toString());
+    }
+  }
+
+  Future<void> endVegScheduleExecutionButton(
+    int? scheduleId,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+
+      final res = await _dataRepository.endVegScheduleExecutionButton(
+        auth: auth,
+        scheduleId: scheduleId,
+        isLoading: isLoading ?? false,
+      );
+      print('EndScheduleExecutionResponse55: ${res.data}');
+
+      if (!res.hasError) {
+        //  return _permitIssueModel;
+      } else {
+        Utility.showDialog(
+            res.errorCode.toString(), 'endVegScheduleExecutionButton');
+      }
+    } catch (error) {
+      log(error.toString());
+    }
+  }
+
+  Future<Map<String, dynamic>> abandonVegScheduleButton(
+    abandoneScheduleJsonString,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.abandonVegScheduleExecutionButton(
+        auth: auth,
+        abandoneScheduleJsonString: json.encode(abandoneScheduleJsonString),
+        isLoading: isLoading ?? false,
+      );
+      var resourceData = res.data;
+      print('Response Abandon Schedule Execution: ${resourceData}');
+      if (!res.hasError) {
+        if (res.errorCode == 200) {
+          var responseMap = json.decode(res.data);
+          return responseMap;
+        }
+      } else {
+        Utility.showDialog(
+            res.errorCode.toString(), 'abandonScheduleExecutionButton');
+      }
+      return Map();
+    } catch (error) {
+      print(error.toString());
+      return Map();
+    }
+  }
+
   Future<bool> createIncidentRiskType(
       {bool? isLoading, incidentRiskTypeJsonString}) async {
     try {
@@ -13349,89 +13533,6 @@ class Repository {
       }
     } catch (error) {
       print(error.toString());
-    }
-  }
-
-  Future<void> startVegExecutionScheduleButton(
-    int? scheduleId,
-    bool? isLoading,
-  ) async {
-    try {
-      final auth = await getSecuredValue(LocalKeys.authToken);
-
-      final res = await _dataRepository.startVegExecutionScheduleButton(
-        auth: auth,
-        scheduleId: scheduleId,
-        isLoading: isLoading ?? false,
-      );
-      print('StartScheduleExecutionResponse55: ${res.data}');
-
-      if (!res.hasError) {
-        //  return _permitIssueModel;
-      } else {
-        Utility.showDialog(
-            res.errorCode.toString(), 'startVegScheduleExecutionButton');
-      }
-    } catch (error) {
-      log(error.toString());
-    }
-  }
-
-  Future<void> endVegScheduleExecutionButton(
-    int? scheduleId,
-    bool? isLoading,
-  ) async {
-    try {
-      final auth = await getSecuredValue(LocalKeys.authToken);
-
-      final res = await _dataRepository.endVegScheduleExecutionButton(
-        auth: auth,
-        scheduleId: scheduleId,
-        isLoading: isLoading ?? false,
-      );
-      print('EndScheduleExecutionResponse55: ${res.data}');
-
-      if (!res.hasError) {
-        //  return _permitIssueModel;
-      } else {
-        Utility.showDialog(
-            res.errorCode.toString(), 'endVegScheduleExecutionButton');
-      }
-    } catch (error) {
-      log(error.toString());
-    }
-  }
-
-  Future<Map<String, dynamic>> abandonVegExecutionButton(
-    abandoneJsonString,
-    bool? isLoading,
-  ) async {
-    try {
-      final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.abandonVegExecutionButton(
-        auth: auth,
-        abandoneJsonString: json.encode(abandoneJsonString),
-        isLoading: isLoading ?? false,
-      );
-
-      var resourceData = res.data;
-      print('Response Abandon Execution: ${resourceData}');
-
-      if (!res.hasError) {
-        if (res.errorCode == 200) {
-          var responseMap = json.decode(res.data);
-          return responseMap;
-        } else {
-          // Get.dialog<void>(WarrantyClaimErrorDialog());
-        }
-      } else {
-        Utility.showDialog(res.errorCode.toString(), 'abandonExecutionButton');
-        //return '';
-      }
-      return Map();
-    } catch (error) {
-      print(error.toString());
-      return Map();
     }
   }
 

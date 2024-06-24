@@ -18,17 +18,21 @@ class ViewVegExecutionPresenter {
     );
   }
 
-  void saveValueVegId({String? vegid}) async {
-    return viewVegExecutionUsecase.saveValueVegId(vegid: vegid);
+  void saveExecutionId({String? vegexe}) async {
+    return viewVegExecutionUsecase.saveExecutionId(vegexe: vegexe);
   }
 
-  Future<String?> getValueVegId() async =>
-      await viewVegExecutionUsecase.getValueVegId();
+  Future<String?> getExecutionId() async =>
+      await viewVegExecutionUsecase.getExecutionId();
 
-  void saveValuePlanId({String? vegplanId}) async {
-    return viewVegExecutionUsecase.saveValuePlanId(vegplanId: vegplanId);
+  void clearExecutionId() async => viewVegExecutionUsecase.clearExecutionId();
+
+  void savePlanId({String? vegid}) async {
+    return viewVegExecutionUsecase.savePlanId(vegid: vegid);
   }
 
-  Future<String?> getValuePlanId() async =>
-      await viewVegExecutionUsecase.getValuePlanId();
+  Future<String?> getPlanId() async =>
+      await viewVegExecutionUsecase.getPlanId();
+
+  void clearPlanId() async => viewVegExecutionUsecase.clearPlanId();
 }

@@ -39,7 +39,7 @@ class VegTaskListModel {
 
   factory VegTaskListModel.fromJson(Map<String, dynamic> json) =>
       VegTaskListModel(
-        id: json['id'],
+        id: json['executionId'],
         planId: json['planId'],
         responsibility: json['responsibility'] ?? '',
         frequency: json['frequency'],
@@ -54,7 +54,7 @@ class VegTaskListModel {
       );
 
   Map<String, dynamic> toJson() => {
-        "id": id,
+        "executionId": id,
         "planId": planId,
         "responsibility": responsibility,
         "frequency": frequency,

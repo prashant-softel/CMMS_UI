@@ -2,15 +2,15 @@ import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/theme/color_values.dart';
 import 'package:cmms/app/theme/dimens.dart';
 import 'package:cmms/app/theme/styles.dart';
-import 'package:cmms/app/veg_execution_screen/veg_execution_screen_controller.dart';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:flutter/material.dart';
 
-class AbandonVegExecutionMessageDialog extends GetView<VegExecutionController> {
-  final String? createData;
+class EndVegScheduleMessageDialog extends GetView {
   final String? data;
+  final List<dynamic>? endVegId;
 
-  AbandonVegExecutionMessageDialog({super.key, this.createData, this.data});
+  EndVegScheduleMessageDialog({super.key, this.data, this.endVegId});
+
   @override
   Widget build(BuildContext context) {
     return StatefulBuilder(
@@ -22,7 +22,7 @@ class AbandonVegExecutionMessageDialog extends GetView<VegExecutionController> {
           insetPadding: Dimens.edgeInsets10_0_10_0,
           contentPadding: EdgeInsets.zero,
           title: Text(
-            'Abandon Execution',
+            'End Vegetation Schedule Execution',
             textAlign: TextAlign.center,
             style: TextStyle(color: Colors.black),
           ),
@@ -39,10 +39,20 @@ class AbandonVegExecutionMessageDialog extends GetView<VegExecutionController> {
                       color: ColorValues.greyLightColour,
                       thickness: 1,
                     ),
-                    Text(
-                      '${data}',
-                      style: TextStyle(color: Colors.green),
-                      textAlign: TextAlign.center,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text('${data} ',
+                            style: TextStyle(color: Colors.green),
+                            textAlign: TextAlign.center),
+                        Text('with id '),
+                        Text(
+                          '${endVegId}',
+                          style: TextStyle(
+                              color: Colors.blue, fontWeight: FontWeight.bold),
+                        )
+                      ],
                     ),
                   ],
                 ),
@@ -56,6 +66,7 @@ class AbandonVegExecutionMessageDialog extends GetView<VegExecutionController> {
                 style: Styles.darkBlueElevatedButtonStyle,
                 onPressed: () {
                   Get.offAllNamed(Routes.vegExecutionListScreen);
+                  Get.back();
                 },
                 child: const Text('Ok'),
               ),

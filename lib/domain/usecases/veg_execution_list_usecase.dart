@@ -28,7 +28,6 @@ class VegExecutionListUsecase {
     );
   }
 
-  void clearValueVegId() async => repository.clearData(LocalKeys.vegid);
-  void clearValueVegPlanId() async => repository.clearData(LocalKeys.vegplanId);
-
+  void clearPlanId() async => repository.clearData(LocalKeys.vegid);
+  void clearExecutionId() async => repository.clearData(LocalKeys.vegexe);
 }

@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:cmms/app/home/home_controller.dart';
+import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/vegetation_execution_plan_list/veg_execution_list_presenter.dart';
 import 'package:cmms/domain/models/veg_task_list_model.dart';
 import 'package:flutter/material.dart';
@@ -55,7 +56,7 @@ class VegExecutionListController extends GetxController {
     "ID": true,
     "Title": true,
     "Plan ID": true,
-    // "Responsibility": true,
+    "Responsibility": true,
     "Frequency": true,
     "No Of Days": true,
     "Start Date": true,
@@ -67,7 +68,7 @@ class VegExecutionListController extends GetxController {
     "ID": 150,
     "Title": 200,
     "Plan ID": 100,
-    // "Responsibility": 200,
+    "Responsibility": 200,
     "Frequency": 163,
     "No Of Days": 153,
     "Start Date": 130,
@@ -94,7 +95,7 @@ class VegExecutionListController extends GetxController {
       "ID": IDFilterText,
       "Title": titleFilterText,
       "Plan ID": planIDFilterText,
-      // "Responsibility": responsibilityFilterText,
+      "Responsibility": responsibilityFilterText,
       "Frequency": frequencyFilterText,
       "No Of Days": noOfDaysFilterText,
       "Start Date": startDateFilterText,
@@ -201,6 +202,7 @@ class VegExecutionListController extends GetxController {
       for (var key in vegTaskListJson?.keys.toList() ?? []) {
         vegTaskListTableColumns.add(key);
       }
+      isLoading.value = false;
     }
 
     // update(['veg_task_list']);
@@ -210,15 +212,34 @@ class VegExecutionListController extends GetxController {
     switch (list.runtimeType) {}
   }
 
-  void clearStoreDataVegid() {
-    vegExecutionListPresenter.clearValueVegId();
-  }
-
-  void clearStoreDataVegPlanid() {
-    vegExecutionListPresenter.clearValueVegPlanId();
+  void clearStoreData() {
+    vegExecutionListPresenter.clearExecutionId();
+    vegExecutionListPresenter.clearPlanId();
   }
 
   void export() {
     getVegTaskList(facilityId, true);
+  }
+
+  void viewVegetation(int executionId, int planId) {
+    clearStoreData();
+    Get.toNamed(
+      Routes.viewVegExecutionPlanScreen,
+      arguments: {
+        "vegexe": executionId,
+        "vegid": planId,
+      },
+    );
+  }
+
+  void executeVegetation(int executionId, int planId) {
+    clearStoreData();
+    Get.toNamed(
+      Routes.vegExecutionScreen,
+      arguments: {
+        "vegexe": executionId,
+        "vegid": planId,
+      },
+    );
   }
 }

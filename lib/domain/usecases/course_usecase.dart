@@ -12,7 +12,7 @@ class CourseUsecase {
 
   Future<List<EmployeeListModel>> getEmployeeList(
       {required bool isLoading, required int? facility_id}) async {
-    return repository.getEmployeePermitList(
+    return repository.getEmployeeList(
       isLoading: isLoading,
       facility_id: facility_id,
     );

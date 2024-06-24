@@ -30,8 +30,8 @@ class VegExecutionListPresenter {
     );
   }
 
-  void clearValueVegId() async =>
-      vegExecutionListUsecase.clearValueVegId();
-  void clearValueVegPlanId() async =>
-      vegExecutionListUsecase.clearValueVegPlanId();
+  void clearPlanId() async =>
+      vegExecutionListUsecase.clearPlanId();
+  void clearExecutionId() async =>
+      vegExecutionListUsecase.clearExecutionId();
 }

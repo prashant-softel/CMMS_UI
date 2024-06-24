@@ -32,7 +32,6 @@ class _VegExecutionListWebState extends State<VegExecutionListWeb> {
         builder: (controller) {
           return Obx(
             () {
-              final dataSource = VegExcutionListDataSource(controller);
               return SelectionArea(
                 child: SingleChildScrollView(
                   child: Column(
@@ -378,12 +377,10 @@ class _VegExecutionListWebState extends State<VegExecutionListWeb> {
                                   controller.fromDate.value,
                                   controller.toDate.value,
                                 ),
-
                                 onSubmit: (value) {
                                   print('po valu ${value.toString()}');
                                   PickerDateRange? data =
                                       value as PickerDateRange;
-
                                   var pickUpDate =
                                       DateTime.parse(data.startDate.toString());
                                   controller.fromDate.value = pickUpDate;
@@ -397,10 +394,6 @@ class _VegExecutionListWebState extends State<VegExecutionListWeb> {
                                   controller.openFromDateToStartDatePicker =
                                       !controller.openFromDateToStartDatePicker;
                                   controller.update(['stock_Mangement_Date']);
-
-                                  // Get.toNamed(
-                                  //   Routes.stockManagementGoodsOrdersScreen,
-                                  // );
                                 },
                               ),
                             ),
@@ -498,10 +491,8 @@ class VegExcutionListDataSource extends DataTableSource {
       // '${VegExcutionListDetails?.id ?? ''}',
       "id",
       '${VegExcutionListDetails?.title ?? ''}',
-      '${VegExcutionListDetails?.planId ?? ''}',
-
-      // '${VegExcutionListDetails?.responsibility ?? ''}',
-
+      "vcPlanId",
+      '${VegExcutionListDetails?.responsibility ?? ''}',
       '${VegExcutionListDetails?.frequency ?? ''}',
       '${VegExcutionListDetails?.noOfDays ?? ''}',
       '${VegExcutionListDetails?.startDate ?? ''}',
@@ -570,99 +561,84 @@ class VegExcutionListDataSource extends DataTableSource {
                       ),
                     ],
                   )
-                : (value == 'Actions')
-                    ? Wrap(
-                        children: [
-                          TableActionButton(
-                            color: ColorValues.appDarkBlueColor,
-                            icon: Icons.remove_red_eye_outlined,
-                            message: 'View',
-                            onPress: () {
-                              int id = VegExcutionListDetails?.id ?? 0;
-                              int vegplanId =
-                                  VegExcutionListDetails?.planId ?? 0;
-                              if (id != 0) {
-                                controller.clearStoreDataVegid();
-                                controller.clearStoreDataVegPlanid();
-                                Get.toNamed(Routes.viewVegExecutionPlanScreen,
-                                    arguments: {
-                                      'vegid': id,
-                                      "vegplanId": vegplanId
-                                    });
-                              }
-                            },
-                          ),
-                          varUserAccessModel.value.access_list!
-                                      .where((e) =>
-                                          e.feature_id ==
-                                              UserAccessConstants
-                                                  .kVegetationControlexeFeatureId &&
-                                          e.edit ==
-                                              UserAccessConstants
-                                                  .kHaveEditAccess)
-                                      .length >
-                                  0
-                              ? TableActionButton(
-                                  color: ColorValues.appYellowColor,
-                                  icon: Icons.edit,
-                                  message: 'Edit',
-                                  onPress: () {
-                                    // controller.clearStoreDatavegid();
-                                    // controller.clearStoreDataPlanid();
-                                    // int id = VegExcutionListDetails?.id ?? 0;
-                                    // int vegplanId = VegExcutionListDetails?.vegplanId ?? 0;
-                                    // if (id != 0) {
-                                    //   Get.toNamed(
-                                    //       Routes.addModuleCleaningExecutionContentWeb,
-                                    //       arguments: {"vegid": id, "vegplanId": vegplanId});
-                                    // }
-                                  },
-                                )
-                              : Dimens.box0,
-                          varUserAccessModel.value.access_list!
-                                      .where((e) =>
-                                          e.feature_id ==
-                                              UserAccessConstants
-                                                  .kVegetationControlexeFeatureId &&
-                                          e.approve ==
-                                              UserAccessConstants
-                                                  .kHaveApproveAccess)
-                                      .length >
-                                  0
-                              ? TableActionButton(
-                                  color: ColorValues.appGreenColor,
-                                  icon: Icons.add,
-                                  message: 'Start/End',
-                                  onPress: () {
-                                    // controller.clearStoreDatavegid();
-                                    // controller.clearStoreDataPlanid();
-                                    // int id = VegExcutionListDetails?.id ?? 0;
-                                    // int vegplanId = VegExcutionListDetails?.vegplanId ?? 0;
-                                    // if (id != 0) {
-                                    //   Get.toNamed(
-                                    //       Routes.addModuleCleaningExecutionContentWeb,
-                                    //       arguments: {"vegid": id, "vegplanId": vegplanId});
-                                    // }
-                                  },
-                                )
-                              : Dimens.box0,
-                        ],
+                : (value == 'vcPlanId')
+                    ? Text(
+                        'VC ${VegExcutionListDetails?.planId}',
                       )
-                    : Text(value.toString()),
+                    : (value == 'Actions')
+                        ? Wrap(
+                            children: [
+                              TableActionButton(
+                                color: ColorValues.appDarkBlueColor,
+                                icon: Icons.remove_red_eye_outlined,
+                                message: 'View',
+                                onPress: () {
+                                  int executionId =
+                                      VegExcutionListDetails?.id ?? 0;
+                                  int planId =
+                                      VegExcutionListDetails?.planId ?? 0;
+                                  controller.viewVegetation(
+                                    executionId,
+                                    planId,
+                                  );
+                                },
+                              ),
+                              // varUserAccessModel.value.access_list!
+                              //             .where((e) =>
+                              //                 e.feature_id ==
+                              //                     UserAccessConstants
+                              //                         .kVegetationControlexeFeatureId &&
+                              //                 e.edit ==
+                              //                     UserAccessConstants
+                              //                         .kHaveEditAccess)
+                              //             .length >
+                              //         0
+                              //     ? TableActionButton(
+                              //         color: ColorValues.appYellowColor,
+                              //         icon: Icons.edit,
+                              //         message: 'Edit',
+                              //         onPress: () {},
+                              //       )
+                              // : Dimens.box0,
+                              varUserAccessModel.value.access_list!
+                                          .where((e) =>
+                                              e.feature_id ==
+                                                  UserAccessConstants
+                                                      .kVegetationControlexeFeatureId &&
+                                              e.approve ==
+                                                  UserAccessConstants
+                                                      .kHaveApproveAccess)
+                                          .length >
+                                      0
+                                  ? TableActionButton(
+                                      color: ColorValues.appGreenColor,
+                                      icon: Icons.add,
+                                      message: 'Start/End',
+                                      onPress: () {
+                                        int executionId =
+                                            VegExcutionListDetails?.id ?? 0;
+                                        int planId =
+                                            VegExcutionListDetails?.planId ?? 0;
+                                        controller.executeVegetation(
+                                          executionId,
+                                          planId,
+                                        );
+                                      },
+                                    )
+                                  : Dimens.box0,
+                            ],
+                          )
+                        : Text(
+                            value.toString(),
+                          ),
           ),
         );
       }).toList(),
-      //   ],
-      // onSelectChanged: (_) {
-      //   int id = VegExcutionListDetails?.id ?? 0;
-      //   int vegplanId = VegExcutionListDetails?.planId ?? 0;
-      //   if (id != 0) {
-      //     // controller.clearStoreDatavegid();
-      //     // controller.clearStoreDataPlanid();
-      //     Get.toNamed(Routes.addModuleCleaningExecutionContentWeb,
-      //         arguments: {"id": id, "vegplanId": vegplanId});
-      //   }
-      // },
+      onSelectChanged: (_) {
+        int executionId = VegExcutionListDetails?.id ?? 0;
+        int planId = VegExcutionListDetails?.planId ?? 0;
+        controller.viewVegetation(executionId, planId);
+      },
     );
   }
 

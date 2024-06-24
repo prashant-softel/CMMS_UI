@@ -19,53 +19,55 @@ class VegExecutionDetailsModel {
   String? abandonedBy;
   String? abandonedAt;
   int? status;
-  String? statusShort;
+  String? status_short;
   String? statusLong;
   List<Schedules>? schedules;
 
-  VegExecutionDetailsModel(
-      {this.id,
-      this.executionId,
-      this.title,
-      this.description,
-      this.frequency,
-      this.assignedTo,
-      this.startDate,
-      this.noOfDays,
-      this.plannedBy,
-      this.plannedAt,
-      this.startedBy,
-      this.startedAt,
-      this.abandonedBy,
-      this.abandonedAt,
-      this.status,
-      this.statusShort,
-      this.statusLong,
-      this.schedules});
+  VegExecutionDetailsModel({
+    this.id,
+    this.executionId,
+    this.title,
+    this.description,
+    this.frequency,
+    this.assignedTo,
+    this.startDate,
+    this.noOfDays,
+    this.plannedBy,
+    this.plannedAt,
+    this.startedBy,
+    this.startedAt,
+    this.abandonedBy,
+    this.abandonedAt,
+    this.status,
+    this.status_short,
+    this.statusLong,
+    this.schedules,
+  });
 
   factory VegExecutionDetailsModel.fromJson(Map<String, dynamic> json) =>
       VegExecutionDetailsModel(
-          id: json['id'],
-          executionId: json['executionId'],
-          title: json['title'],
-          description: json['description'],
-          frequency: json['frequency'],
-          assignedTo: json['assignedTo'],
-          startDate: json['startDate'],
-          noOfDays: json['noOfDays'],
-          plannedBy: json['plannedBy'],
-          plannedAt: json['plannedAt'],
-          startedBy: json['startedBy'],
-          startedAt: json['startedAt'],
-          abandonedBy: json['abandonedBy'],
-          abandonedAt: json['abandonedAt'],
-          status: json['status'],
-          statusShort: json['status_short'],
-          statusLong: json['status_long'],
-          schedules: json["schedules"] != null
-              ? List<Schedules>.from(
-                  json["schedules"].map((x) => Schedules.fromJson(x)))
-              : []);
+        id: json['id'],
+        executionId: json['executionId'],
+        title: json['title'],
+        description: json['description'],
+        frequency: json['frequency'],
+        assignedTo: json['assignedTo'],
+        startDate: json['startDate'],
+        noOfDays: json['noOfDays'],
+        plannedBy: json['plannedBy'],
+        plannedAt: json['plannedAt'],
+        startedBy: json['startedBy'],
+        startedAt: json['startedAt'],
+        abandonedBy: json['abandonedBy'],
+        abandonedAt: json['abandonedAt'],
+        status: json['status'],
+        status_short: json['status_short'],
+        statusLong: json['status_long'],
+        schedules: json["schedules"] != null
+            ? List<Schedules>.from(
+                json["schedules"].map((x) => Schedules.fromJson(x)))
+            : [],
+      );
 
   Map<String, dynamic> toJson() => {
         'id': id,
@@ -83,7 +85,7 @@ class VegExecutionDetailsModel {
         'abandonedBy': abandonedBy,
         'abandonedAt': abandonedAt,
         'status': status,
-        'status_short': statusShort,
+        'status_short': status_short,
         'status_long': statusLong,
         'schedules': List<dynamic>.from(schedules!.map((x) => x))
       };
@@ -95,33 +97,36 @@ class Schedules {
   int? executionId;
   int? cleaningDay;
   String? cleaningTypeName;
-  int? scheduledModules;
-  int? cleanedModules;
-  int? abandonedModules;
-  int? pendingModules;
+  int? scheduled;
+  int? cleaned;
+  int? abandoned;
+  int? pending;
   int? waterUsed;
-  String? executionDate;
+  String? start_date;
+  String? end_date;
   String? remark;
   int? status;
-  String? statusShort;
+  String? status_short;
   List<Equipments>? equipments;
 
-  Schedules(
-      {this.id,
-      this.scheduleId,
-      this.executionId,
-      this.cleaningDay,
-      this.cleaningTypeName,
-      this.scheduledModules,
-      this.cleanedModules,
-      this.abandonedModules,
-      this.pendingModules,
-      this.waterUsed,
-      this.executionDate,
-      this.remark,
-      this.status,
-      this.statusShort,
-      this.equipments});
+  Schedules({
+    this.id,
+    this.scheduleId,
+    this.executionId,
+    this.cleaningDay,
+    this.cleaningTypeName,
+    this.scheduled,
+    this.cleaned,
+    this.abandoned,
+    this.start_date,
+    this.end_date,
+    this.pending,
+    this.waterUsed,
+    this.remark,
+    this.status,
+    this.status_short,
+    this.equipments,
+  });
 
   factory Schedules.fromJson(Map<String, dynamic> json) => Schedules(
       id: json['id'],
@@ -129,15 +134,15 @@ class Schedules {
       executionId: json['executionId'],
       cleaningDay: json['cleaningDay'],
       cleaningTypeName: json['cleaningTypeName'],
-      scheduledModules: json['scheduledModules'],
-      cleanedModules: json['cleanedModules'],
-      abandonedModules: json['abandonedModules'],
-      pendingModules: json['pendingModules'],
+      scheduled: json['scheduled'],
+      cleaned: json['cleaned'],
+      abandoned: json['abandoned'],
+      pending: json['pending'],
+      start_date: json['start_date'],
       waterUsed: json['waterUsed'],
-      executionDate: json['execution_date'],
       remark: json['remark'],
       status: json['status'],
-      statusShort: json['status_short'],
+      status_short: json['status_short'],
       equipments: json["equipments"] != null
           ? List<Equipments>.from(
               json["equipments"].map((x) => Equipments.fromJson(x)))
@@ -149,15 +154,14 @@ class Schedules {
         'executionId': executionId,
         'cleaningDay': cleaningDay,
         'cleaningTypeName': cleaningTypeName,
-        'scheduledModules': scheduledModules,
-        'cleanedModules': cleanedModules,
-        'abandonedModules': abandonedModules,
-        'pendingModules': pendingModules,
+        'scheduled': scheduled,
+        'cleaned': cleaned,
+        'abandoned': abandoned,
+        'pending': pending,
         'waterUsed': waterUsed,
-        'execution_date': executionDate,
         'remark': remark,
         'status': status,
-        'status_short': statusShort,
+        'status_short': status_short,
         'equipment': List<dynamic>.from(equipments!.map((x) => x)),
       };
 }
@@ -217,7 +221,6 @@ class Equipments {
       };
 }
 
-String vegExecutionModelToJson(Schedules data) =>
-    json.encode(data.toJson());
+String vegExecutionModelToJson(Schedules data) => json.encode(data.toJson());
 String vegExecutionDetailsModelToJson(Equipments data) =>
     json.encode(data.toJson());
