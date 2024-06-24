@@ -36,7 +36,8 @@ class PmPlanContentMobile extends GetView<PmPlanListController> {
                           shrinkWrap: true,
                           itemCount: controller.pmPlanList?.length ?? 0,
                           itemBuilder: (context, index) {
-                            final pmTaskModel = controller.pmPlanList[index] ?? PmPlanListModel();
+                            final pmTaskModel = controller.pmPlanList[index] ??
+                                PmPlanListModel();
                             return GestureDetector(
                               onTap: () {
                                 // controller.clearStoreData();
@@ -56,7 +57,8 @@ class PmPlanContentMobile extends GetView<PmPlanListController> {
                                   child: Padding(
                                     padding: const EdgeInsets.all(10.0),
                                     child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
                                         Row(
                                           children: [
@@ -71,7 +73,8 @@ class PmPlanContentMobile extends GetView<PmPlanListController> {
                                               'PMP${pmTaskModel.plan_id ?? 0}',
                                               style: TextStyle(
                                                 fontWeight: FontWeight.bold,
-                                                color: ColorValues.navyBlueColor,
+                                                color:
+                                                    ColorValues.navyBlueColor,
                                               ),
                                             ),
                                             Spacer(),
@@ -79,30 +82,49 @@ class PmPlanContentMobile extends GetView<PmPlanListController> {
                                               padding: Dimens.edgeInsets8_2_8_2,
                                               decoration: BoxDecoration(
                                                 color: ColorValues.addNewColor,
-                                                borderRadius: BorderRadius.circular(4),
+                                                borderRadius:
+                                                    BorderRadius.circular(4),
                                               ),
                                               child: Text(
                                                 '${pmTaskModel.status_name}',
-                                                style: Styles.white10.copyWith(color: Colors.white),
+                                                style: Styles.white10.copyWith(
+                                                    color: Colors.white),
                                               ),
                                             ),
                                           ],
                                         ),
-                                        buildInfoRow('Plan Title: ', pmTaskModel.plan_name ?? ''),
-                                        buildInfoRow('Start Date: ', pmTaskModel.plan_date ?? ''),
-                                        buildInfoRow('Next Schedule Date: ', pmTaskModel.next_schedule_date ?? ''),
+                                        buildInfoRow('Plan Title: ',
+                                            pmTaskModel.plan_name ?? ''),
+                                        buildInfoRow('Start Date: ',
+                                            pmTaskModel.plan_date ?? ''),
+                                        buildInfoRow(
+                                            'Next Schedule Date: ',
+                                            pmTaskModel.next_schedule_date ??
+                                                ''),
                                         Row(
                                           children: [
-                                            buildColumnInfo('Frequency', pmTaskModel.plan_freq_name ?? ''),
+                                            buildColumnInfo(
+                                                'Frequency',
+                                                pmTaskModel.plan_freq_name ??
+                                                    ''),
                                             Spacer(),
-                                            buildColumnInfo('Created By', pmTaskModel.created_by_name ?? ''),
+                                            buildColumnInfo(
+                                                'Created By',
+                                                pmTaskModel.created_by_name ??
+                                                    ''),
                                           ],
                                         ),
                                         Row(
                                           children: [
-                                            buildColumnInfo('Assigned To', pmTaskModel.assign_to_name ?? ''),
+                                            buildColumnInfo(
+                                                'Assigned To',
+                                                pmTaskModel.assign_to_name ??
+                                                    ''),
                                             Spacer(),
-                                            buildColumnInfo('Category', pmTaskModel.category_name ?? ''),
+                                            buildColumnInfo(
+                                                'Category',
+                                                pmTaskModel.category_name ??
+                                                    ''),
                                           ],
                                         ),
                                       ],
@@ -117,38 +139,38 @@ class PmPlanContentMobile extends GetView<PmPlanListController> {
                     ],
                   ),
                 ),
-                     if (controller.openFromDateToStartDatePicker)
-                   Positioned(
-                     top:50,
-                          left: 10,
-                          right:10,
-                      child: DatePickerWidget(
-                        selectionMode: DateRangePickerSelectionMode.range,
-                        monthCellStyle: DateRangePickerMonthCellStyle(
-                          todayCellDecoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: ColorValues.appDarkBlueColor,
-                          ),
+                if (controller.openFromDateToStartDatePicker)
+                  Positioned(
+                    top: 50,
+                    left: 10,
+                    right: 10,
+                    child: DatePickerWidget(
+                      selectionMode: DateRangePickerSelectionMode.range,
+                      monthCellStyle: DateRangePickerMonthCellStyle(
+                        todayCellDecoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: ColorValues.appDarkBlueColor,
                         ),
-                        initialSelectedRange: PickerDateRange(
-                          controller.fromDate.value,
-                          controller.toDate.value,
-                        ),
-                        onSubmit: (value) {
-                          print('Selected date range: ${value.toString()}');
-                          if (value is PickerDateRange) {
-                            var pickUpDate = value.startDate ?? DateTime.now();
-                            var dropDate = value.endDate ?? pickUpDate;
-                            controller.fromDate.value = pickUpDate;
-                            controller.toDate.value = dropDate;
-                            controller.getPmPlanListByDate();
-                            controller.openFromDateToStartDatePicker = false;
-                            controller.update(['PreventiveMaintenanceTask']);
-                          }
-                        },
                       ),
+                      initialSelectedRange: PickerDateRange(
+                        controller.fromDate.value,
+                        controller.toDate.value,
+                      ),
+                      onSubmit: (value) {
+                        print('Selected date range: ${value.toString()}');
+                        if (value is PickerDateRange) {
+                          var pickUpDate = value.startDate ?? DateTime.now();
+                          var dropDate = value.endDate ?? pickUpDate;
+                          controller.fromDate.value = pickUpDate;
+                          controller.toDate.value = dropDate;
+                          controller.getPmPlanListByDate();
+                          controller.openFromDateToStartDatePicker = false;
+                          controller.update(['PreventiveMaintenanceTask']);
+                        }
+                      },
                     ),
-                  Dimens.boxHeight10,
+                  ),
+                Dimens.boxHeight10,
               ],
             ),
           ),
