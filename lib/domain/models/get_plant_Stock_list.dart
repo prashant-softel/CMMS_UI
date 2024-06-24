@@ -99,7 +99,7 @@ class StockDetails {
       issued_date: parsedJson['issued_date'],
       facility_Is_Block: parsedJson['facility_Is_Block'],
       facility_Is_Block_of_name: parsedJson['facility_Is_Block_of_name'],
-      name: parsedJson['asset_name'],
+      name: "${parsedJson['asset_name']} (${parsedJson['serial_number']})",
       inward: parsedJson['inward'],
       opening: parsedJson['opening'],
       outward: parsedJson['outward'],

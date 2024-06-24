@@ -640,7 +640,32 @@ class PreventiveMaintenanceExecutionContentWeb
                                                     confirmTextColor:
                                                         Colors.white,
                                                   )
-                                                : controller
+                                                : controller.listMrsByTaskId!
+                                                                .value
+                                                                .firstWhereOrNull(
+                                                                  (element) =>
+                                                                      element?.jobCardId !=
+                                                                          0 ||
+                                                                      element?.pmId !=
+                                                                          0,
+                                                                )
+                                                                ?.status !=
+                                                            323 
+                                                    ? Get.defaultDialog(
+                                                        radius: 5,
+                                                        title: 'Alert',
+                                                        middleText:
+                                                            'Please get Return MRS approved!',
+                                                        textConfirm: 'OK',
+                                                        onConfirm: () {
+                                                          Get.back(); // Close the dialog
+                                                        },
+                                                        buttonColor: ColorValues
+                                                            .appGreenColor,
+                                                        confirmTextColor:
+                                                            Colors.white,
+                                                      )
+                                                    : controller
                                                     .closePmTaskExecution();
                                           }),
                                     ),
