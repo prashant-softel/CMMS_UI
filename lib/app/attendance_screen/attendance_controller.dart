@@ -32,54 +32,6 @@ class AttendanceController extends GetxController {
   bool isLoading = true;
   Rx<AttendaceModel?>? getAttendanceDetails = Rx<AttendaceModel?>(null);
 
-  // Rx<AttendaceModel>? getAttendanceDetails = AttendaceModel(
-  //   date: "2024-06-11",
-  //   facilityId: 1,
-  //   hfeAttendance: [
-  //     HFEEmployeeAttendance(
-  //       id: 27,
-  //       name: "Test Engineer",
-  //       present: true.obs,
-  //       inTime: "10:00 AM",
-  //       outTime: "6:00 PM",
-  //     ),
-  //     HFEEmployeeAttendance(
-  //       id: 32,
-  //       name: "Majid Shaikh",
-  //       present: true.obs,
-  //       inTime: "10:00 AM",
-  //       outTime: "6:00 PM",
-  //     ),
-  //     HFEEmployeeAttendance(
-  //       id: 48,
-  //       name: "Shiva Kumar",
-  //       present: false.obs,
-  //       inTime: "",
-  //       outTime: "",
-  //     ),
-  //     HFEEmployeeAttendance(
-  //       id: 50,
-  //       name: "Guru Kumar",
-  //       present: false.obs,
-  //       inTime: "",
-  //       outTime: "",
-  //     ),
-  //     HFEEmployeeAttendance(
-  //       id: 50,
-  //       name: "Naresh D",
-  //       present: true.obs,
-  //       inTime: "10:00 AM",
-  //       outTime: "6:00 PM",
-  //     ),
-  //   ],
-  //   contractAttendance: ContractLabourAttendance(
-  //     between35to50: 10,
-  //     lessThan35: 10,
-  //     greaterThan50: 10,
-  //     purpose: "I dont Remember",
-  //   ),
-  // ).obs;
-
   @override
   void onInit() async {
     try {
@@ -124,52 +76,56 @@ class AttendanceController extends GetxController {
   }
 
   Future<void> getAttendanceData({required String date}) async {
-    // try {
-    final _attendanceDetails = await attendancePresenter.getAttendanceDetail(
-      facilityId: facilityId.value,
-      date: date,
-      isLoading: isLoading,
-    );
-    if (_attendanceDetails != null) {
-      getAttendanceDetails?.value = _attendanceDetails;
-      final contractAttendance =
-          getAttendanceDetails?.value?.contractAttendance;
-      lessThan35.text = contractAttendance?.lessThan35?.toString() ?? '';
-      between35To50.text = contractAttendance?.between35to50?.toString() ?? '';
-      greaterThan50.text = contractAttendance?.greaterThan50?.toString() ?? '';
-      purposeCtrl.text = contractAttendance?.purpose ?? '';
+    try {
+      final _attendanceDetails = await attendancePresenter.getAttendanceDetail(
+        facilityId: facilityId.value,
+        date: date,
+        isLoading: isLoading,
+      );
+      if (_attendanceDetails?.hfeAttendance?.length != 0) {
+        getAttendanceDetails?.value = _attendanceDetails;
+        final contractAttendance =
+            getAttendanceDetails?.value?.contractAttendance;
+        lessThan35.text = contractAttendance?.lessThan35?.toString() ?? '';
+        between35To50.text =
+            contractAttendance?.between35to50?.toString() ?? '';
+        greaterThan50.text =
+            contractAttendance?.greaterThan50?.toString() ?? '';
+        purposeCtrl.text = contractAttendance?.purpose ?? '';
 
-      attendanceModel.value = List<HFEEmployeeAttendance>.generate(
-        getAttendanceDetails!.value!.hfeAttendance!.length,
-        (index) {
-          var hfe = getAttendanceDetails!.value!.hfeAttendance![index];
-          return HFEEmployeeAttendance(
-            id: hfe?.id,
-            name: hfe?.name,
-            present: hfe!.present,
-            inTime: hfe.inTime,
-            outTime: hfe.outTime,
-          );
-        },
-      );
-      inTimeControllers = List.generate(
-        attendanceModel.length,
-        (index) => TextEditingController(),
-      );
-      outTimeControllers = List.generate(
-        attendanceModel.length,
-        (index) => TextEditingController(),
-      );
-      for (int i = 0; i < attendanceModel.length; i++) {
-        inTimeControllers[i].text = attendanceModel[i]!.inTime!;
-        outTimeControllers[i].text = attendanceModel[i]!.outTime!;
+        attendanceModel.value = List<HFEEmployeeAttendance>.generate(
+          getAttendanceDetails!.value!.hfeAttendance!.length,
+          (index) {
+            var hfe = getAttendanceDetails!.value!.hfeAttendance![index];
+            return HFEEmployeeAttendance(
+              id: hfe?.id,
+              name: hfe?.name,
+              present: hfe!.present,
+              inTime: hfe.inTime,
+              outTime: hfe.outTime,
+            );
+          },
+        );
+        inTimeControllers = List.generate(
+          attendanceModel.length,
+          (index) => TextEditingController(),
+        );
+        outTimeControllers = List.generate(
+          attendanceModel.length,
+          (index) => TextEditingController(),
+        );
+        for (int i = 0; i < attendanceModel.length; i++) {
+          if (attendanceModel[i]!.inTime != null) {
+            inTimeControllers[i].text = attendanceModel[i]!.inTime ?? "";
+            outTimeControllers[i].text = attendanceModel[i]!.outTime ?? "";
+          }
+        }
+      } else {
+        await getEmployeeList(facilityId.value);
       }
-    } else {
-      await getEmployeeList(facilityId.value);
+    } catch (e) {
+      print('Error in getAttendanceData: $e');
     }
-    // } catch (e) {
-    //   print('Error in getAttendanceData: $e');
-    // }
   }
 
   Future<void> getEmployeeList(int facilityId) async {

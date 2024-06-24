@@ -21,11 +21,11 @@ class FileUploadDetailsWidgetMobile extends StatelessWidget {
             ListView.builder(
           shrinkWrap: true,
           physics: NeverScrollableScrollPhysics(),
-          itemCount: _fileUploadController.pickedFiles.value.length,
+          itemCount: _fileUploadController.pickedFiles.length,
           itemBuilder: (context, index) {
-            final _file = _fileUploadController.pickedFiles.value[index];
-            final pickedFileIndex = _fileUploadController.pickedFiles.value
-                .indexWhere((f) => f == _file);
+            final _file = _fileUploadController.pickedFiles[index];
+            final pickedFileIndex =
+                _fileUploadController.pickedFiles.indexWhere((f) => f == _file);
             return //
                 Obx(
               () => //
@@ -111,7 +111,7 @@ class FileUploadDetailsWidgetMobile extends StatelessWidget {
                     ListTile(
                       leading: Text('Size'),
                       title: FutureBuilder<int>(
-                        future: _file.length(),
+                        future: Future.value(_file.size),
                         builder: (BuildContext context,
                             AsyncSnapshot<int> snapshot) {
                           if (snapshot.connectionState ==

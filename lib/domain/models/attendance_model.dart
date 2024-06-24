@@ -20,8 +20,8 @@ class AttendaceModel {
             ? List<HFEEmployeeAttendance>.from(json["hfeAttendance"]
                 .map((x) => HFEEmployeeAttendance.fromJson(x)))
             : [],
-        contractAttendance: json["contractAttendance"] != null
-            ? ContractLabourAttendance.fromJson(json["contractAttendance"])
+        contractAttendance: json["contractAttendances"] != null
+            ? ContractLabourAttendance.fromJson(json["contractAttendances"])
             : null,
       );
 
@@ -53,8 +53,8 @@ class HFEEmployeeAttendance {
         id: json["employee_id"],
         name: json["name"],
         present: RxBool(json["present"]),
-        inTime: json["inTime"],
-        outTime: json["outTime"],
+        inTime: json["in_Time"],
+        outTime: json["out_Time"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -84,9 +84,9 @@ class ContractLabourAttendance {
   factory ContractLabourAttendance.fromJson(Map<String, dynamic> json) =>
       ContractLabourAttendance(
         contractor_id: json["contractor_id"],
-        lessThan35: json["lessThan35"],
-        between35to50: json["between35to50"],
-        greaterThan50: json["greaterThan50"],
+        lessThan35: json["age_Less_Than35"],
+        between35to50: json["age_Between_35And50"],
+        greaterThan50: json["age_Greater50"],
         purpose: json["purpose"],
       );
 

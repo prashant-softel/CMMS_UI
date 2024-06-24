@@ -86,6 +86,16 @@ class VegExecutionPresenter {
     );
   }
 
+  Future<Map<String, dynamic>?> updateVegScheduleExecution({
+    updateVegJson,
+    required bool isLoading,
+  }) async {
+    return vegExecutionUsecase.updateVegScheduleExecution(
+      updateVegJson: updateVegJson,
+      isLoading: isLoading,
+    );
+  }
+
   void savePlanId({String? vegid}) async =>
       vegExecutionUsecase.savePlanId(vegid: vegid);
   Future<String?> getPlanId() async => await vegExecutionUsecase.getPlanId();

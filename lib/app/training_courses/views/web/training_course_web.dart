@@ -134,17 +134,13 @@ class _TrainingCourseWebState extends State<TrainingCourseWeb> {
                                             ],
                                           ),
                                           Dimens.boxWidth10,
-                                          Container(
-                                            margin: EdgeInsets.only(right: 10),
-                                            height: 30,
-                                            child: CustomElevatedButton(
-                                              backgroundColor:
-                                                  ColorValues.addNewColor,
-                                              onPressed: () {
-                                                controller.addNewCourse();
-                                              },
-                                              text: 'Add New',
-                                            ),
+                                          ActionButton(
+                                            icon: Icons.add,
+                                            label: "Add New",
+                                            onPressed: () {
+                                              controller.addNewCourse();
+                                            },
+                                            color: ColorValues.addNewColor,
                                           ),
                                         ],
                                       ),

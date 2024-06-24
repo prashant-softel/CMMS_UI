@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'dart:async';
 import 'dart:convert';
-import 'package:image_picker/image_picker.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:http/http.dart' as http;
 
 import '../../domain/models/file_upload_model.dart';
@@ -11,19 +11,15 @@ import '../../domain/repositories/repository.dart';
 import '../utils/utility.dart';
 
 class FileUploadController extends GetxController {
-  ///
   var repository = Get.find<Repository>();
 
-  ///
-  final Uri apiUrl =
-      // Uri.parse('http://65.0.20.19/CMMS_API/api/FileUpload/UploadFile');
-  Uri.parse('http://172.20.43.9:83/api/FileUpload/UploadFile');
+  final Uri apiUrl = Uri.parse('http://172.20.43.9:83/api/FileUpload/UploadFile');
 
   Rx<bool> blnHiglight = false.obs;
   Rx<List<int>> progresses = Rx(<int>[]);
   Rx<int> progress = 0.obs;
   Rx<int> index = 0.obs;
-  RxList<XFile> pickedFiles = <XFile>[].obs;
+  RxList<PlatformFile> pickedFiles = <PlatformFile>[].obs;
   Rx<bool> uploadingImage = false.obs;
   Rx<bool> showUploadButton = true.obs;
   var selectedEvent = FileUploadEvents.BEFORE.obs;
@@ -33,31 +29,31 @@ class FileUploadController extends GetxController {
   List<List<int>>? bytesDataList;
   Rx<double?> tileHeight = 0.0.obs;
 
-  ///fileIDs
   List<dynamic> fileIds = [];
 
-  ///
   @override
   void onInit() async {
     token = await repository.getSecuredValue(LocalKeys.authToken);
     super.onInit();
   }
 
-  ///
-  Future<List<XFile>> addFiles() async {
-    final ImagePicker picker = ImagePicker();
-    final List<XFile> newFiles = await picker.pickMultiImage();
-    pickedFiles.addAll(newFiles);
-    initializeDescriptionControllers(
-        newFiles); // assuming this method takes a list of XFile
-    return pickedFiles.value;
+  Future<List<PlatformFile>> addFiles() async {
+    final FilePickerResult? result = await FilePicker.platform.pickFiles(
+      allowMultiple: true,
+      type: FileType.custom,
+      allowedExtensions: ['jpg', 'pdf', 'doc', 'docx', 'xls', 'xlsx', 'png', 'jpeg', 'csv', 'txt'],
+    );
+
+    if (result != null) {
+      pickedFiles.addAll(result.files);
+      initializeDescriptionControllers(result.files); // assuming this method takes a list of PlatformFile
+    }
+    return pickedFiles;
   }
 
-  Future<void> uploadSingleFile(XFile file, List<int> bytesData, String token,
+  Future<void> uploadSingleFile(PlatformFile file, List<int> bytesData, String token,
       int index, TextEditingController descriptionController,
       {required Function(double) uploadProgressCallback}) async {
-    ///
-
     String boundary = '----${DateTime.now().millisecondsSinceEpoch}';
     var headers = {
       "Authorization": "Bearer $token",
@@ -97,8 +93,7 @@ class FileUploadController extends GetxController {
     var length = requestBody.fold<int>(0, (sum, list) => sum + list.length);
     int totalSent = 0;
 
-    StreamController<List<int>> streamController =
-        StreamController<List<int>>();
+    StreamController<List<int>> streamController = StreamController<List<int>>();
 
     stream.transform(StreamTransformer<List<int>, List<int>>.fromHandlers(
       handleData: (data, sink) {
@@ -107,7 +102,6 @@ class FileUploadController extends GetxController {
         uploadProgressCallback(progress.toDouble());
         sink.add(data);
 
-        // Update the progress at the current index
         var updatedProgresses = List<int>.from(progresses.value);
         updatedProgresses[index] = progress;
         progresses.value = updatedProgresses;
@@ -152,7 +146,7 @@ class FileUploadController extends GetxController {
     }
   }
 
-  Future<void> uploadFiles(List<XFile> files, List<List<int>> bytesDataList,
+  Future<void> uploadFiles(List<PlatformFile> files, List<List<int>> bytesDataList,
       String token, List<TextEditingController> descriptionCtrlrs,
       {required Function(double) uploadProgressCallback}) async {
     progresses.value = List<int>.filled(files.length, 0);
@@ -171,13 +165,13 @@ class FileUploadController extends GetxController {
         },
       );
     }
-  } //
+  }
 
   void setSelectedEvent(FileUploadEvents event) {
     selectedEvent.value = event;
   }
 
-  void initializeDescriptionControllers(List<XFile> files) {
+  void initializeDescriptionControllers(List<PlatformFile> files) {
     newDescriptionCtrlrs = List<TextEditingController>.generate(
       files.length,
       (index) => TextEditingController(),
@@ -185,27 +179,21 @@ class FileUploadController extends GetxController {
     descriptionCtrlrs.addAll(newDescriptionCtrlrs);
   }
 
-  void removeFile(file) {
+  void removeFile(PlatformFile file) {
     try {
-      // remove file
-      List<XFile> fileList = List.from(pickedFiles);
+      List<PlatformFile> fileList = List.from(pickedFiles);
       fileList.removeWhere((item) => item.name == file.name);
-      pickedFiles.value = fileList; //new modified list
+      pickedFiles.value = fileList;
 
-      // remove description controller
-      List<TextEditingController> _descriptionCtrlrsList =
-          List.from(descriptionCtrlrs);
+      List<TextEditingController> _descriptionCtrlrsList = List.from(descriptionCtrlrs);
       _descriptionCtrlrsList.removeAt(index.value);
       descriptionCtrlrs = _descriptionCtrlrsList;
 
-      //remove progress indicator
       List<int> _progressList = List.from(progresses.value);
       _progressList.removeAt(index.value);
       progresses.value = _progressList;
-      //update at the end
       index.value = pickedFiles.length - 1;
-    } //
-    catch (e) {
+    } catch (e) {
       print(e);
     }
   }
@@ -216,7 +204,7 @@ class FileUploadController extends GetxController {
       bytesDataList = [];
 
       for (var file in pickedFiles) {
-        bytesDataList!.add(await file.readAsBytes());
+        bytesDataList!.add(file.bytes!);
       }
 
       if (pickedFiles.isEmpty || pickedFiles.length != bytesDataList!.length) {
@@ -248,6 +236,4 @@ class FileUploadController extends GetxController {
       print('No files selected');
     }
   }
-
-  ///
 }

@@ -13439,6 +13439,34 @@ class Repository {
     }
   }
 
+  Future<Map<String, dynamic>> updateVegScheduleExecution({
+    updateVegJson,
+    bool? isLoading,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.updateVegScheduleExecution(
+        auth: auth,
+        updateVegJson: json.encode(updateVegJson),
+        isLoading: isLoading ?? false,
+      );
+      var resourceData = res.data;
+      print('Response MC Schedule Execution Report: ${resourceData}');
+      if (!res.hasError) {
+        if (res.errorCode == 200) {
+          var responseMap = json.decode(res.data);
+          return responseMap;
+        }
+      } else {
+        Utility.showDialog(res.errorCode.toString(), 'updateMCExecution');
+      }
+      return Map();
+    } catch (error) {
+      print(error.toString());
+      return Map();
+    }
+  }
+
   Future<bool> createIncidentRiskType(
       {bool? isLoading, incidentRiskTypeJsonString}) async {
     try {
@@ -14101,7 +14129,7 @@ class Repository {
       if (!res.hasError) {
         var response = json.decode(res.data);
         AttendaceModel attendanceModel = AttendaceModel.fromJson(response);
-        return null;
+        return attendanceModel;
       } else {
         Utility.showDialog(res.errorCode.toString(), 'getAttendanceDetails');
         return null;

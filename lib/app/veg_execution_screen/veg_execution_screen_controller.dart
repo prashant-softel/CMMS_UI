@@ -5,6 +5,7 @@ import 'package:cmms/app/home/home_controller.dart';
 import 'package:cmms/app/utils/utility.dart';
 import 'package:cmms/app/veg_execution_screen/veg_execution_screen_presenter.dart';
 import 'package:cmms/domain/models/comment_model.dart';
+import 'package:cmms/domain/models/update_vegetation_execution_model.dart';
 import 'package:cmms/domain/models/veg_execution_details_model.dart';
 import 'package:cmms/domain/models/veg_task_equipment_model.dart';
 import 'package:flutter/material.dart';
@@ -37,6 +38,7 @@ class VegExecutionController extends GetxController {
   final TextEditingController scheduleExecutionTextFieldCtrlr =
       TextEditingController();
   TextEditingController remarkTextFieldCtrlr = TextEditingController();
+  TextEditingController remarkCtrlrWeb = TextEditingController();
 
   @override
   void onInit() async {
@@ -54,7 +56,6 @@ class VegExecutionController extends GetxController {
           facilityId: facilityId.value,
         );
       });
-      super.onInit();
     } catch (e) {
       print(e);
     }
@@ -193,5 +194,45 @@ class VegExecutionController extends GetxController {
   void clearStoreData() {
     vegExecutionPresenter.clearExecutionId();
     vegExecutionPresenter.clearPlanId();
+  }
+
+  void updateVegScheduleExecution({
+    int? scheduleId,
+    int? cleaningDay,
+    String? remark,
+  }) async {
+    {
+      rowItem.value.forEach((element) {});
+      print('data${rowItem.value}');
+      List<int> cleanedEquipmentIds = [];
+      List<int> abandonedEquipmentIds = [];
+      vegTaskEquipment.forEach((e) {
+        e?.smbs?.forEach((element) {
+          if (element.isAbandonSmbCheck!) {
+            abandonedEquipmentIds.add(element.smbId ?? 0);
+          }
+          if (element.isCleanedSmbCheck!) {
+            cleanedEquipmentIds.add(element.smbId!);
+          }
+        });
+      });
+      print('cleaned:$cleanedEquipmentIds');
+
+      UpdateVegExecution updateVegScheduleExecutionModel = UpdateVegExecution(
+        scheduleId: scheduleId ?? 0,
+        executionId: vegexe.value,
+        cleaningDay: cleaningDay ?? 0,
+        remark: remark ?? "",
+        cleanedEquipmentIds: cleanedEquipmentIds,
+        abandonedEquipmentIds: abandonedEquipmentIds,
+      );
+      var updateVegJson = updateVegScheduleExecutionModel.toJson();
+      Map<String, dynamic>? responseVegScheduleExecution =
+          await vegExecutionPresenter.updateVegScheduleExecution(
+        updateVegJson: updateVegJson,
+        isLoading: true,
+      );
+      print('Update MC Schedule Execution data: $updateVegJson');
+    }
   }
 }

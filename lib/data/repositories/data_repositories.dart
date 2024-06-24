@@ -4947,6 +4947,17 @@ class DataRepository extends DomainRepository {
         isLoading: isLoading ?? false,
       );
 
+  Future<ResponseModel> updateVegScheduleExecution({
+    required String auth,
+    updateVegJson,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.updateVegScheduleExecution(
+        auth: auth,
+        updateVegJson: updateVegJson,
+        isLoading: isLoading ?? false,
+      );
+
   Future<ResponseModel> createIncidentRiskType({
     auth,
     bool? isLoading,

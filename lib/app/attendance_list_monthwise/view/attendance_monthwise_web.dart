@@ -1,3 +1,4 @@
+import 'package:calendar_date_picker2/calendar_date_picker2.dart';
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/attendance_list_monthwise/attendance_monthwise_controlller.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
@@ -115,13 +116,65 @@ class AttendanceMonthWiseWeb extends GetView<AttendanceListMonthController> {
                                                       .width /
                                                   5,
                                               numberTextField: true,
-                                              onTap: () {
-                                                controller
-                                                        .openFromDateToStartDatePicker =
-                                                    !controller
-                                                        .openFromDateToStartDatePicker;
-                                                controller.update(
-                                                    ['attendance-list-month']);
+                                              onTap: () async {
+                                                List<DateTime?>
+                                                    _selectedDateRange = [
+                                                  controller.fromDate.value,
+                                                  controller.toDate.value
+                                                ];
+                                                List<DateTime?>? picked =
+                                                    await showCalendarDatePicker2Dialog(
+                                                  context: context,
+                                                  config:
+                                                      CalendarDatePicker2WithActionButtonsConfig(
+                                                    calendarType:
+                                                        CalendarDatePicker2Type
+                                                            .range,
+                                                    selectedDayHighlightColor:
+                                                        ColorValues
+                                                            .primaryColor,
+                                                    selectedRangeHighlightColor:
+                                                        ColorValues
+                                                            .primaryColor,
+                                                    weekdayLabelTextStyle:
+                                                        TextStyle(
+                                                            color:
+                                                                Colors.black),
+                                                    controlsTextStyle:
+                                                        TextStyle(
+                                                            color:
+                                                                Colors.black),
+                                                    dayTextStyle: TextStyle(
+                                                        color: Colors.black),
+                                                    selectedDayTextStyle:
+                                                        TextStyle(
+                                                      color: Colors.white,
+                                                    ),
+                                                    yearTextStyle: TextStyle(
+                                                        color: Colors.black),
+                                                  ),
+                                                  dialogSize:
+                                                      const Size(300, 400),
+                                                  value: _selectedDateRange,
+                                                  dialogBackgroundColor:
+                                                      Colors.white,
+                                                );
+                                                if (picked != null) {
+                                                  print("${picked[0]}");
+                                                  print("${picked[1]}");
+                                                  controller.fromDate.value =
+                                                      picked[0] ??
+                                                          DateTime.now();
+                                                  controller.toDate.value =
+                                                      picked[1] ??
+                                                          DateTime.now();
+                                                }
+                                                // controller
+                                                //         .openFromDateToStartDatePicker =
+                                                //     !controller
+                                                //         .openFromDateToStartDatePicker;
+                                                // controller.update(
+                                                //     ['attendance-list-month']);
                                               },
                                               hintText:
                                                   '${controller.formattedFromdate.toString()} - ${controller.formattedTodate.toString()}',
