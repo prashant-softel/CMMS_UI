@@ -507,10 +507,10 @@ class ReceiveGoodsOrdersController extends GetxController {
   }
 
   void createGoodsOrder() async {
-    // checkForm();
-    // if (isFormInvalid.value) {
-    //   return;
-    // }
+    checkForm();
+    if (isFormInvalid.value) {
+      return;
+    }
     String _challanNoCtrlr = challanNoCtrlr.text.trim();
     String _pOCtrlr = pOCtrlr.text.trim();
     String _frieghtToPayPaidCtrlr = frieghtToPayPaidCtrlr.text.trim();
@@ -595,127 +595,127 @@ class ReceiveGoodsOrdersController extends GetxController {
   }
 
   //validation check from
-  // void checkForm() {
-  //   if (challanNoCtrlr.text.trim().length < 3) {
-  //     isInvoiceNumberInvalid.value = true;
-  //   }
-  //   if (isInvoiceNumberInvalid.value == true) {
-  //     isFormInvalid.value = true;
-  //   }
-  //   if (frieghtToPayPaidCtrlr.text.trim().length < 3) {
-  //     isDeliverChalanInvalid.value = true;
-  //   }
+  void checkForm() {
+    if (challanNoCtrlr.text.trim().length < 3) {
+      isInvoiceNumberInvalid.value = true;
+    }
+    if (isInvoiceNumberInvalid.value == true) {
+      isFormInvalid.value = true;
+    }
+    if (frieghtToPayPaidCtrlr.text.trim().length < 3) {
+      isDeliverChalanInvalid.value = true;
+    }
 
-  //   if (isDeliverChalanInvalid.value == true) {
-  //     isFormInvalid.value = true;
-  //   }
+    if (isDeliverChalanInvalid.value == true) {
+      isFormInvalid.value = true;
+    }
 
-  //   ///
-  //   if (noOfPackagesReceivedCtrlr.text.trim().length < 3) {
-  //     isCountOfPackageReceivedInvalid.value = true;
-  //   }
+    ///
+    if (noOfPackagesReceivedCtrlr.text.trim().length < 3) {
+      isCountOfPackageReceivedInvalid.value = true;
+    }
 
-  //   if (isCountOfPackageReceivedInvalid.value == true) {
-  //     isFormInvalid.value = true;
-  //   }
+    if (isCountOfPackageReceivedInvalid.value == true) {
+      isFormInvalid.value = true;
+    }
 
-  //   if (vehicleNoCtrlr.text.trim().length < 3) {
-  //     isVehicalInvalid.value = true;
-  //   }
+    if (vehicleNoCtrlr.text.trim().length < 3) {
+      isVehicalInvalid.value = true;
+    }
 
-  //   if (isVehicalInvalid.value == true) {
-  //     isFormInvalid.value = true;
-  //   }
-  //   if (conditionOfPackagesReceivedCtrlr.text.trim().length < 3) {
-  //     isGateInwardRegisterInvalid.value = true;
-  //   }
+    if (isVehicalInvalid.value == true) {
+      isFormInvalid.value = true;
+    }
+    if (conditionOfPackagesReceivedCtrlr.text.trim().length < 3) {
+      isGateInwardRegisterInvalid.value = true;
+    }
 
-  //   if (isGateInwardRegisterInvalid.value == true) {
-  //     isFormInvalid.value = true;
-  //   }
+    if (isGateInwardRegisterInvalid.value == true) {
+      isFormInvalid.value = true;
+    }
 
-  //   if (freightValueCtrlr.text.trim().length < 3) {
-  //     isFreightInvalid.value = true;
-  //   }
+    if (freightValueCtrlr.text.trim().length < 3) {
+      isFreightInvalid.value = true;
+    }
 
-  //   if (isFreightInvalid.value == true) {
-  //     isFormInvalid.value = true;
-  //   }
-  //   if (lrNoCtrlr.text.trim().length < 3) {
-  //     isLrNoInvalid.value = true;
-  //   }
+    if (isFreightInvalid.value == true) {
+      isFormInvalid.value = true;
+    }
+    if (lrNoCtrlr.text.trim().length < 3) {
+      isLrNoInvalid.value = true;
+    }
 
-  //   if (isLrNoInvalid.value == true) {
-  //     isFormInvalid.value = true;
-  //   }
-  //   if (receivedDateTc.text.trim().length < 3) {
-  //     isMaterialReciveDateInvalid.value = true;
-  //   }
+    if (isLrNoInvalid.value == true) {
+      isFormInvalid.value = true;
+    }
+    if (receivedDateTc.text.trim().length < 3) {
+      isMaterialReciveDateInvalid.value = true;
+    }
 
-  //   if (isMaterialReciveDateInvalid.value == true) {
-  //     isFormInvalid.value = true;
-  //   }
+    if (isMaterialReciveDateInvalid.value == true) {
+      isFormInvalid.value = true;
+    }
 
-  //   if (challanDateTc.text.trim().length < 3) {
-  //     isDeliveryChallanDateInvalid.value = true;
-  //   }
+    if (challanDateTc.text.trim().length < 3) {
+      isDeliveryChallanDateInvalid.value = true;
+    }
 
-  //   if (isDeliveryChallanDateInvalid.value == true) {
-  //     isFormInvalid.value = true;
-  //   }
-  //   if (purchaseDateTc.text.trim().length < 3) {
-  //     isInvoiceDateInvalid.value = true;
-  //   }
+    if (isDeliveryChallanDateInvalid.value == true) {
+      isFormInvalid.value = true;
+    }
+    if (purchaseDateTc.text.trim().length < 3) {
+      isInvoiceDateInvalid.value = true;
+    }
 
-  //   if (isInvoiceDateInvalid.value == true) {
-  //     isFormInvalid.value = true;
-  //   }
+    if (isInvoiceDateInvalid.value == true) {
+      isFormInvalid.value = true;
+    }
 
-  //   if (jobRefCtrlr.text.trim().length < 3) {
-  //     isEWayBillInvalid.value = true;
-  //   }
+    if (jobRefCtrlr.text.trim().length < 3) {
+      isEWayBillInvalid.value = true;
+    }
 
-  //   if (isEWayBillInvalid.value == true) {
-  //     isFormInvalid.value = true;
-  //   }
-  //   if (inspectionReportCtrlr.text.trim().length < 3) {
-  //     isInspectionReportInvalid.value = true;
-  //   }
+    if (isEWayBillInvalid.value == true) {
+      isFormInvalid.value = true;
+    }
+    if (inspectionReportCtrlr.text.trim().length < 3) {
+      isInspectionReportInvalid.value = true;
+    }
 
-  //   if (isInspectionReportInvalid.value == true) {
-  //     isFormInvalid.value = true;
-  //   }
-  //   if (girNoCtrlr.text.trim().length < 3) {
-  //     isGrnNoInvalid.value = true;
-  //   }
+    if (isInspectionReportInvalid.value == true) {
+      isFormInvalid.value = true;
+    }
+    if (girNoCtrlr.text.trim().length < 3) {
+      isGrnNoInvalid.value = true;
+    }
 
-  //   if (isGrnNoInvalid.value == true) {
-  //     isFormInvalid.value = true;
-  //   } else {
-  //     isFormInvalid.value = false;
-  //   }
-  //   if (TextEditingController().text.isEmpty) {
-  //     isCostInvalid.value = true;
-  //   } else {
-  //     isCostInvalid.value = false;
-  //   }
-  //   if (TextEditingController().text.isEmpty) {
-  //     isRequestedInvalid.value = true;
-  //   } else {
-  //     isRequestedInvalid.value = false;
-  //   }
-  //   if (TextEditingController().text.isEmpty) {
-  //     isAccepetedInvalid.value = true;
-  //   } else {
-  //     isAccepetedInvalid.value = false;
-  //   }
-  // }
+    if (isGrnNoInvalid.value == true) {
+      isFormInvalid.value = true;
+    } else {
+      isFormInvalid.value = false;
+    }
+    if (TextEditingController().text.isEmpty) {
+      isCostInvalid.value = true;
+    } else {
+      isCostInvalid.value = false;
+    }
+    if (TextEditingController().text.isEmpty) {
+      isRequestedInvalid.value = true;
+    } else {
+      isRequestedInvalid.value = false;
+    }
+    if (TextEditingController().text.isEmpty) {
+      isAccepetedInvalid.value = true;
+    } else {
+      isAccepetedInvalid.value = false;
+    }
+  }
 
   void updateGOReceive() async {
-    // checkForm();
-    // if (isFormInvalid.value) {
-    //   return;
-    // }
+    checkForm();
+    if (isFormInvalid.value) {
+      return;
+    }
     String _challanNoCtrlr = challanNoCtrlr.text.trim();
     String _pOCtrlr = pOCtrlr.text.trim();
     String _frieghtToPayPaidCtrlr = frieghtToPayPaidCtrlr.text.trim();
@@ -809,10 +809,10 @@ class ReceiveGoodsOrdersController extends GetxController {
   }
 
   void updateGOReceiveIsSubmit0() async {
-    // checkForm();
-    // if (isFormInvalid.value) {
-    //   return;
-    // }
+    checkForm();
+    if (isFormInvalid.value) {
+      return;
+    }
     String _challanNoCtrlr = challanNoCtrlr.text.trim();
     String _pOCtrlr = pOCtrlr.text.trim();
     String _frieghtToPayPaidCtrlr = frieghtToPayPaidCtrlr.text.trim();
