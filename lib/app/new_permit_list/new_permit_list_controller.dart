@@ -82,12 +82,14 @@ class NewPermitListController extends GetxController {
 
   RxString ActionFilterText = ''.obs;
 
-  Rx<DateTime> fromDate = DateTime.now().subtract(Duration(days: 70)).obs;
+ Rx<DateTime> fromDate = DateTime.now().subtract(Duration(days: 7)).obs;
   Rx<DateTime> toDate = DateTime.now().obs;
-  // Rx<DateTime> fromDate = DateTime.now().subtract(Duration(days: 7)).obs;
   String get formattedFromdate =>
+      DateFormat('dd/MM/yyyy').format(fromDate.value);
+  String get formattedTodate => DateFormat('dd/MM/yyyy').format(toDate.value);
+  String get formattedTodate1 => DateFormat('yyyy-MM-dd').format(toDate.value);
+  String get formattedFromdate1 =>
       DateFormat('yyyy-MM-dd').format(fromDate.value);
-  String get formattedTodate => DateFormat('yyyy-MM-dd').format(toDate.value);
 
   RxList<NewPermitModel?> newPermitList = <NewPermitModel?>[].obs;
   RxList<NewPermitModel?> filteredData = <NewPermitModel>[].obs;
@@ -421,7 +423,7 @@ class NewPermitListController extends GetxController {
   }
 
   void getNewPermitListByDate() {
-    getNewPermitList(facilityId, userId, formattedFromdate, formattedTodate,
+    getNewPermitList(facilityId, userId, formattedFromdate1, formattedTodate1,
         false, false, false);
   }
 

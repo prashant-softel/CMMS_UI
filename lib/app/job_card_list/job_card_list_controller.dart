@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:cmms/app/job_card_list/job_card_presenter.dart';
 import 'package:cmms/domain/models/job_card_model.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 import '../home/home_controller.dart';
 
@@ -17,6 +18,7 @@ class JobCardListController extends GetxController {
   int facilityId = 0;
   RxList<JobCardModel?> jobList = <JobCardModel?>[].obs;
   RxList<JobCardModel?> filteredData = <JobCardModel>[].obs;
+  bool openFromDateToStartDatePicker = false;
   PaginationController paginationController = PaginationController(
     rowCount: 0,
     rowsPerPage: 10,
@@ -40,11 +42,22 @@ class JobCardListController extends GetxController {
 
   Rx<int> jobId = 0.obs;
 
+   Rx<DateTime> fromDate = DateTime.now().subtract(Duration(days: 7)).obs;
+  Rx<DateTime> toDate = DateTime.now().obs;
+  String get formattedFromdate =>
+      DateFormat('dd/MM/yyyy').format(fromDate.value);
+  String get formattedTodate => DateFormat('dd/MM/yyyy').format(toDate.value);
+  String get formattedTodate1 => DateFormat('yyyy-MM-dd').format(toDate.value);
+  String get formattedFromdate1 =>
+      DateFormat('yyyy-MM-dd').format(fromDate.value);
+
+
   void search(String keyword) {
     if (keyword.isEmpty) {
       jobList.value = filteredData;
       return;
     }
+    
 
     List<JobCardModel?> filteredList = filteredData
         .where((item) =>
@@ -92,14 +105,17 @@ class JobCardListController extends GetxController {
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
       facilityId = event;
       Future.delayed(Duration(seconds: 1), () {
-        jobCardList(facilityId, false);
+        jobCardList(facilityId,formattedTodate1, formattedFromdate1, false);
       });
     });
 
     super.onInit();
   }
+   void getjobcardListByDate() {
+    jobCardList(facilityId, formattedTodate1, formattedFromdate1, false);
+  }
 
-  Future<void> jobCardList(int facilityId, bool isExport) async {
+  Future<void> jobCardList(int facilityId, dynamic startDate, dynamic endDate, bool isExport) async {
     jobList.value = <JobCardModel>[];
     final _jobList = await jobCardPresenter.jobCardList(
         facilityId: facilityId, isLoading: isLoading.value, isExport: isExport);
@@ -130,6 +146,6 @@ class JobCardListController extends GetxController {
   }
 
   void export() {
-    jobCardList(facilityId, true);
+    jobCardList(facilityId, formattedTodate1, formattedFromdate1,true);
   }
 }
