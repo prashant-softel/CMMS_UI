@@ -5464,21 +5464,21 @@ class Repository {
 
   ///Close Permit
   Future<Map<String, dynamic>> permitCloseButton(
-    // String? comment,
-    // String? id,
-    closePermitJsonString,
-    bool? isLoading,
-    int? jobId,
-  ) async {
+      // String? comment,
+      // String? id,
+      closePermitJsonString,
+      bool? isLoading,
+      int? jobId,
+      int? closetype) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
 
       final res = await _dataRepository.permitCloseButton(
-        auth: auth,
-        closePermitJsonString: json.encode(closePermitJsonString),
-        isLoading: isLoading ?? false,
-        jobId: jobId,
-      );
+          auth: auth,
+          closePermitJsonString: json.encode(closePermitJsonString),
+          isLoading: isLoading ?? false,
+          jobId: jobId,
+          closetype: closetype);
       print('PermitCloseRequestResponse: ${res.data}');
 
       if (!res.hasError) {
@@ -7947,7 +7947,7 @@ class Repository {
           approveJsonString: json.encode(approveJsonString));
       print({"res.data", res.data});
       if (!res.hasError) {
-        permitCloseButton(closePtwJsonString, isLoading, 0);
+        permitCloseButton(closePtwJsonString, isLoading, 0, 0);
         Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
         // Get.offAllNamed(Routes.jobList);
         return true;
@@ -12199,19 +12199,23 @@ class Repository {
   }
 
   Future<bool> ClosePMTaskExecution(
-      {bool? isLoading, closetoJsonString, closePtwJsonString}) async {
+      {bool? isLoading,
+      closetoJsonString,
+      closePtwJsonString,
+      int? closetype}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       log(auth);
       final res = await _dataRepository.ClosePMTaskExecution(
-          auth: auth,
-          isLoading: isLoading,
-          ClosePMTaskExecutionJsonString: json.encode(closetoJsonString));
+        auth: auth,
+        isLoading: isLoading,
+        ClosePMTaskExecutionJsonString: json.encode(closetoJsonString),
+      );
 
       print({"res.data", res.data});
       if (!res.hasError) {
         Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
-        permitCloseButton(closePtwJsonString, isLoading, 0);
+        permitCloseButton(closePtwJsonString, isLoading, 0, closetype);
         return true;
       } else {
         Fluttertoast.showToast(msg: res.data, fontSize: 45.0);

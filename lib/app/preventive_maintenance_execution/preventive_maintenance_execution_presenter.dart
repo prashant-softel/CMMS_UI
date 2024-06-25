@@ -47,15 +47,16 @@ class PreventiveMaintenanceExecutionPresenter {
         id: id,
         isLoading: isLoading,
       );
-  Future<bool> closePmTaskExecution({
-    closetoJsonString,
-    closePtwJsonString,
-    required bool isLoading,
-  }) async {
+  Future<bool> closePmTaskExecution(
+      {closetoJsonString,
+      closePtwJsonString,
+      required bool isLoading,
+      int? closetype}) async {
     return preventiveMaintenanceExecutionUsecase.closePmTaskExecution(
       closetoJsonString: closetoJsonString,
       closePtwJsonString: closePtwJsonString,
       isLoading: isLoading,
+      closetype: closetype,
     );
   }
 
