@@ -641,16 +641,16 @@ class PreventiveMaintenanceExecutionContentWeb
                                                         Colors.white,
                                                   )
                                                 : controller.listMrsByTaskId!
-                                                                .value
-                                                                .firstWhereOrNull(
-                                                                  (element) =>
-                                                                      element?.jobCardId !=
-                                                                          0 ||
-                                                                      element?.pmId !=
-                                                                          0,
-                                                                )
-                                                                ?.status !=
-                                                            323 
+                                                            .value
+                                                            .firstWhereOrNull(
+                                                              (element) =>
+                                                                  element?.jobCardId !=
+                                                                      0 ||
+                                                                  element?.pmId !=
+                                                                      0,
+                                                            )
+                                                            ?.status !=
+                                                        323 && controller.listMrsByTaskId!.isNotEmpty
                                                     ? Get.defaultDialog(
                                                         radius: 5,
                                                         title: 'Alert',
@@ -666,7 +666,7 @@ class PreventiveMaintenanceExecutionContentWeb
                                                             Colors.white,
                                                       )
                                                     : controller
-                                                    .closePmTaskExecution();
+                                                        .closePmTaskExecution();
                                           }),
                                     ),
                                     Dimens.boxWidth10,

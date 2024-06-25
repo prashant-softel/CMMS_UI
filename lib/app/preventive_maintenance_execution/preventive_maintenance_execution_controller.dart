@@ -437,20 +437,8 @@ class PreventiveMaintenanceExecutionController extends GetxController {
     ));
   }
 
-  void checkform() {
-    if (commentCtrlr.text == '') {
-      isforminvalid.value = true;
-    } else {
-      isforminvalid.value = false;
-    }
-  }
-
   closePmTaskExecution() async {
     {
-      checkform();
-      if (isforminvalid.value == true) {
-        Fluttertoast.showToast(msg: "Please Enter Comment!");
-      }
       String _comment = commentCtrlr.text.trim();
       int ptwId = pmtaskViewModel.value?.permit_id ?? 0;
 
