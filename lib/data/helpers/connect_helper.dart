@@ -8,6 +8,7 @@ import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/job_card_details/views/widgets/carry_forward_Job_dialog.dart';
 import 'package:cmms/app/job_card_details/views/widgets/close_job_dialog.dart';
 import 'package:cmms/app/job_card_details/views/widgets/job_card_updated_dialog.dart';
+import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/widgets/Incident_report_message_approve_dialog.dart';
 import 'package:cmms/app/widgets/abandon_execution_message_dialog.dart';
 import 'package:cmms/app/widgets/abandon_schedule_execution_message_dialog.dart';
@@ -1993,12 +1994,12 @@ class ConnectHelper {
     return responseModel;
   }
 
-  Future<ResponseModel> permitCloseButton({
-    required String auth,
-    closePermitJsonString,
-    bool? isLoading,
-    int? jobId,
-  }) async {
+  Future<ResponseModel> permitCloseButton(
+      {required String auth,
+      closePermitJsonString,
+      bool? isLoading,
+      int? jobId,
+      int? closetype}) async {
     // facilityId = 45;
     var responseModel = await apiWrapper.makeRequest(
       'Permit/PermitClose',
@@ -2014,8 +2015,10 @@ class ConnectHelper {
     print('PermitCloseResponse: ${responseModel.data}');
     var res = responseModel.data;
     var parsedJson = json.decode(res);
-    Get.dialog<void>(
-        PermitMessageCloseDialog(data: parsedJson['message'], jobId: jobId));
+    closetype == 1
+        ? Get.offAllNamed(Routes.pmTask)
+        : Get.dialog<void>(PermitMessageCloseDialog(
+            data: parsedJson['message'], jobId: jobId));
 
     return responseModel;
   }
