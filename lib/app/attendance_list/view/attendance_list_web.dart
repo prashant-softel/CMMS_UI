@@ -161,6 +161,7 @@ class _AttendanceListWebState extends State<AttendanceListWeb> {
                                     Dimens.boxHeight10,
                                     // First way of data showing
                                     Row(
+                                      crossAxisAlignment : CrossAxisAlignment.start,
                                       children: controller.attendance_list
                                           .map((attendance) {
                                         return _buildSection(attendance);
