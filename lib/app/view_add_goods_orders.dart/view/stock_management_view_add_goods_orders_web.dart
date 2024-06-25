@@ -906,7 +906,7 @@ class _ViewAddGoodsOrdersWebState extends State<ViewAddGoodsOrdersWeb> {
                                           DataColumn2(
                                               fixedWidth: 110,
                                               label: Text(
-                                                "Cost",
+                                                "Unit Cost",
                                                 style: TextStyle(
                                                     fontSize: 15,
                                                     fontWeight:
@@ -1271,7 +1271,8 @@ class _ViewAddGoodsOrdersWebState extends State<ViewAddGoodsOrdersWeb> {
                                                   (index) => DataRow(cells: [
                                                     DataCell(Text(controller
                                                             .historyList?[index]
-                                                            ?.createdAt?.result
+                                                            ?.createdAt
+                                                            ?.result
                                                             .toString() ??
                                                         '')),
                                                     DataCell(Text(controller
