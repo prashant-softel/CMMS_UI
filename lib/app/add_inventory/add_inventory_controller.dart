@@ -396,10 +396,35 @@ class AddInventoryController extends GetxController {
   }
 
   void checkForm() {
-    if (selectedBlocks.value == "") {
+    if (selectedBlockListId== 0) {
       isBlocksSelected.value = false;
       isFormValid.value = false;
     }
+ if (selectedTypeNameId== 0) {
+      isTypeNameSelected.value = false;
+      isFormValid.value = false;
+    }
+     if (selectedStatusNameId== 0) {
+      isStatusNameSelected.value = false;
+      isFormValid.value = false;
+    }
+    
+    
+if (assetsNameCtrlr.text.trim().length == 0) {
+      isAssetsNameInvalid.value = false;
+      isFormValid.value = false;
+    }
+      if (selectedEquipmentnameId== 0) {
+      isEquipmentNameSelected.value = false;
+      isFormValid.value = false;
+    }
+    
+          if (selectedEquipmentCategoryNameId== 0) {
+      isEquipmentCategoryNameSelected.value = false;
+      isFormValid.value = false;
+    }
+    
+    
     // if (selectedUnitCurrency.value == "") {
     //   isUnitCurrencySelected.value = false;
     //   isFormValid.value = false;
@@ -421,6 +446,9 @@ class AddInventoryController extends GetxController {
       isCostInvalid.value = true;
       isFormValid.value = false;
     }
+
+    
+    
 
     // if (selectedEquipmentName.value == "") {
     //   isEquipmentNameSelected.value = false;
@@ -454,14 +482,14 @@ class AddInventoryController extends GetxController {
     //   isTypeNameSelected.value = false;
     //   isFormValid.value = false;
     // }
-    if (selectedEquipmentCategoryName.value == "") {
-      isEquipmentCategoryNameSelected.value = false;
-      isFormValid.value = false;
-    }
-    if (selectedStatusName.value == "") {
-      isStatusNameSelected.value = false;
-      isFormValid.value = false;
-    }
+    // if (selectedEquipmentCategoryName.value == "") {
+    //   isEquipmentCategoryNameSelected.value = false;
+    //   isFormValid.value = false;
+    // }
+    // if (selectedStatusName.value == "") {
+    //   isStatusNameSelected.value = false;
+    //   isFormValid.value = false;
+    // }
     // if (serialNoCtrlr.text.trim().length == 0) {
     //   isSerialNoInvalid.value = true;
     //   isFormValid.value = false;
@@ -1000,7 +1028,7 @@ class AddInventoryController extends GetxController {
                 eqipmentNameList.indexWhere((x) => x?.name == value);
             selectedEquipmentnameId =
                 eqipmentNameList[eqipmentNameListIndex]?.id ?? 0;
-            // isEquipmentNameSelected.value = true;
+            isEquipmentNameSelected.value = true;
             print({"selectedEquipmentnameId", selectedEquipmentnameId});
           } else {
             selectedEquipmentnameId = 0;
