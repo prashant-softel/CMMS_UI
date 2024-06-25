@@ -528,10 +528,11 @@ class PlantListDataSource extends DataTableSource {
   DataRow? getRow(int index) {
     // print({"getRow call"});
     final PlantDetails = filteredPlantList[index];
+    String nameWithoutSerial = (PlantDetails?.name ?? '').split(' (')[0];
 
     // controller.PlantId.value = PlantDetails?.asset_name ?? 0;
     var cellsBuffer = [
-      '${PlantDetails?.name ?? ''}',
+      nameWithoutSerial,
       '${PlantDetails?.asset_code ?? ''}',
       '${PlantDetails?.asset_type ?? ''}',
       '${PlantDetails?.opening ?? ''}',
