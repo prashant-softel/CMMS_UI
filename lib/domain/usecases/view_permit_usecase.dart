@@ -81,10 +81,7 @@ class ViewPermitUsecase {
     int? jobId,
   }) async =>
       await repository.permitCloseButton(
-        closePermitJsonString,
-        isLoading,
-        jobId,
-      );
+          closePermitJsonString, isLoading, jobId, 0);
 
   // Future<void> permitCancelRequestButton({
   //   String? comment,
