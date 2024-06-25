@@ -142,7 +142,7 @@ class CreateMrsReturnController extends GetxController {
       //  }
       update(["AssetList"]);
     }
-    addRowFaultyItem();
+    // addRowFaultyItem();
   }
 
   void addRowFaultyItem() {
@@ -168,7 +168,7 @@ class CreateMrsReturnController extends GetxController {
       {'key': "Used_Qty", "value": ''},
       {'key': "Return_Qty", "value": ''},
       {'key': "Remark", "value": ''},
-      // {'key': "Action ", "value": ''},
+      {'key': "Action ", "value": ''},
     ]);
   }
 
