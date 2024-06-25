@@ -19,6 +19,7 @@ class NewPermitListMobile extends GetView<NewPermitListController> {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<NewPermitListController>(
+       id: 'stock_Mangement_Date',
       builder: (controller) {
         return Scaffold(
           body: Obx(() => Stack(
@@ -31,7 +32,7 @@ class NewPermitListMobile extends GetView<NewPermitListController> {
                           onPressed: () {
                             controller.openFromDateToStartDatePicker =
                                 !controller.openFromDateToStartDatePicker;
-                            controller.update(['PreventiveMaintenanceTask']);
+                            controller.update(['stock_Mangement_Date']);
                           },
                         ),
                         Expanded(
@@ -45,10 +46,10 @@ class NewPermitListMobile extends GetView<NewPermitListController> {
                                   controller.newPermitList != null
                                       ? controller.newPermitList[index]
                                       : NewPermitModel();
-                              var status =
-                                  newPermitListModel?.current_status_short
-                                          .toString() ??
-                                      '';
+                              var status = newPermitListModel
+                                      ?.current_status_short
+                                      .toString() ??
+                                  '';
                               print('Current Status: $status');
                               return GestureDetector(
                                 onTap: () {
@@ -94,7 +95,7 @@ class NewPermitListMobile extends GetView<NewPermitListController> {
                                                         status.toLowerCase()),
                                                   ),
                                                   padding: const EdgeInsets
-                                                          .symmetric(
+                                                      .symmetric(
                                                       horizontal: 10,
                                                       vertical: 5),
                                                   child: Center(
@@ -209,8 +210,7 @@ class NewPermitListMobile extends GetView<NewPermitListController> {
                                           ),
                                           Row(
                                             mainAxisAlignment:
-                                                MainAxisAlignment
-                                                    .spaceBetween,
+                                                MainAxisAlignment.spaceBetween,
                                             children: [
                                               Expanded(
                                                 child: Text(
@@ -253,9 +253,8 @@ class NewPermitListMobile extends GetView<NewPermitListController> {
                                                           null)
                                                       ? DateFormat(
                                                               'dd-MMM-yyyy hh:mm')
-                                                          .format(
-                                                              newPermitListModel!
-                                                                  .approvedDatetime!)
+                                                          .format(newPermitListModel!
+                                                              .approvedDatetime!)
                                                       : '',
                                                   style: const TextStyle(
                                                     fontWeight: FontWeight.bold,
@@ -266,16 +265,16 @@ class NewPermitListMobile extends GetView<NewPermitListController> {
                                               ),
                                             ],
                                           ),
-                                          if (varUserAccessModel.value
-                                                  .access_list!
-                                                  .where((e) =>
-                                                      e.feature_id ==
-                                                          UserAccessConstants
-                                                              .kPermitFeatureId &&
-                                                      e.edit ==
-                                                          UserAccessConstants
-                                                              .kHaveEditAccess)
-                                                  .isNotEmpty)
+                                          if (varUserAccessModel
+                                              .value.access_list!
+                                              .where((e) =>
+                                                  e.feature_id ==
+                                                      UserAccessConstants
+                                                          .kPermitFeatureId &&
+                                                  e.edit ==
+                                                      UserAccessConstants
+                                                          .kHaveEditAccess)
+                                              .isNotEmpty)
                                             CustomElevatedButton(
                                               onPressed: () {
                                                 var _newPermitListId =
@@ -301,37 +300,48 @@ class NewPermitListMobile extends GetView<NewPermitListController> {
                       ],
                     ),
                   ),
-                 if (controller.openFromDateToStartDatePicker)
-  Positioned(
-    top: 50,
-    left: 10,
-    right: 10,
-    child: DatePickerWidget(
-      selectionMode: DateRangePickerSelectionMode.range,
-      monthCellStyle: DateRangePickerMonthCellStyle(
-        todayCellDecoration: BoxDecoration(
-          shape: BoxShape.circle,
-          color: ColorValues.appDarkBlueColor,
-        ),
-      ),
-      initialSelectedRange: PickerDateRange(
-        controller.fromDate.value,
-        controller.toDate.value,
-      ),
-      onSubmit: (value) {
-        print('Selected date range: ${value.toString()}');
-        if (value is PickerDateRange) {
-          var pickUpDate = value.startDate ?? DateTime.now();
-          var dropDate = value.endDate ?? pickUpDate;
-          controller.fromDate.value = pickUpDate;
-          controller.toDate.value = dropDate;
-          controller.getNewPermitListByDate();
-          controller.openFromDateToStartDatePicker = false;
-          controller.update(['PreventiveMaintenanceTask']);
-        }
-      },
-    ),
-  ),
+                  if (controller.openFromDateToStartDatePicker)
+                    Positioned(
+                      top: 50,
+                      left: 10,
+                      right: 10,
+                      child: DatePickerWidget(
+                        selectionMode: DateRangePickerSelectionMode.range,
+                        monthCellStyle: DateRangePickerMonthCellStyle(
+                          todayCellDecoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: ColorValues.appDarkBlueColor,
+                          ),
+                        ),
+                        initialSelectedRange: PickerDateRange(
+                          controller.fromDate.value,
+                          controller.toDate.value,
+                        ),
+                      onSubmit: (value) {
+                          print('po valu ${value.toString()}');
+                          PickerDateRange? data = value as PickerDateRange;
+
+                          var pickUpDate =
+                              DateTime.parse(data.startDate.toString());
+                          controller.fromDate.value = pickUpDate;
+                          var dropDate =
+                              DateTime.parse(data.endDate.toString());
+                          dropDate != null
+                              ? controller.toDate.value = dropDate
+                              : controller.toDate.value = pickUpDate;
+
+                          controller.getNewPermitListByDate();
+                          controller.openFromDateToStartDatePicker =
+                              !controller.openFromDateToStartDatePicker;
+                          controller.update(['stock_Mangement_Date']);
+
+                          // Get.toNamed(
+                          //   Routes.stockManagementGoodsOrdersScreen,
+                          // );
+                        
+                        },
+                      ),
+                    ),
                   Dimens.boxHeight10,
                 ],
               )),
