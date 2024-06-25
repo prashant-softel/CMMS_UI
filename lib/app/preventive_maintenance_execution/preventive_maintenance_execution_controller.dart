@@ -469,16 +469,16 @@ class PreventiveMaintenanceExecutionController extends GetxController {
 
       final response =
           await preventiveMaintenanceExecutionPresenter.closePmTaskExecution(
-        closetoJsonString: closetoJsonString,
-        closePtwJsonString: closePtwJsonString,
-        isLoading: true,
-      );
-      if (response == true) {
-        final _flutterSecureStorage = const FlutterSecureStorage();
+              closetoJsonString: closetoJsonString,
+              closePtwJsonString: closePtwJsonString,
+              isLoading: true,
+              closetype: 1);
+      // if (response == true) {
+      //   final _flutterSecureStorage = const FlutterSecureStorage();
 
-        _flutterSecureStorage.delete(key: "pmTaskId");
-        Get.offAllNamed(Routes.pmTask);
-      }
+      //   _flutterSecureStorage.delete(key: "pmTaskId");
+      //   Get.offAllNamed(Routes.pmTask);
+      // }
     }
   }
 

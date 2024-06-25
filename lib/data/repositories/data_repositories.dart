@@ -1234,18 +1234,18 @@ class DataRepository extends DomainRepository {
         jobId: jobId,
       );
 
-  Future<ResponseModel> permitCloseButton({
-    required String auth,
-    closePermitJsonString,
-    bool? isLoading,
-    int? jobId,
-  }) async =>
+  Future<ResponseModel> permitCloseButton(
+          {required String auth,
+          closePermitJsonString,
+          bool? isLoading,
+          int? jobId,
+          int? closetype}) async =>
       await connectHelper.permitCloseButton(
-        auth: auth,
-        closePermitJsonString: closePermitJsonString,
-        isLoading: isLoading ?? false,
-        jobId: jobId,
-      );
+          auth: auth,
+          closePermitJsonString: closePermitJsonString,
+          isLoading: isLoading ?? false,
+          jobId: jobId,
+          closetype: closetype);
 
   Future<ResponseModel> rejectJobCard({
     auth,
