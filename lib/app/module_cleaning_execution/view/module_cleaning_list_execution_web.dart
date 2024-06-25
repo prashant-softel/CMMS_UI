@@ -676,7 +676,7 @@ class MCExcutionListDataSource extends DataTableSource {
           controller.clearStoreDataMcid();
           controller.clearStoreDataPlanid();
           Get.toNamed(Routes.addModuleCleaningExecutionContentWeb,
-              arguments: {"id": id, "planId": planId});
+              arguments: {"mcid": id, "planId": planId});
         }
       },
     );

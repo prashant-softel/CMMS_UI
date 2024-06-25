@@ -375,7 +375,7 @@ class AddModuleCleaningExecutionController extends GetxController {
   Future<void> startMCExecutionButton() async {
     final _startMCExecutionBtn =
         await addModuleCleaningExecutionPresenter.startMCExecutionButton(
-      executionId: data['id'],
+      executionId: mcid.value,
     );
 
     // print('Plan Data:${data['planId']}');
@@ -384,7 +384,7 @@ class AddModuleCleaningExecutionController extends GetxController {
   Future<void> endMcExecutionButton() async {
     final _endMCExecutionBtn =
         await addModuleCleaningExecutionPresenter.endMcExecutionButton(
-      executionId: data['id'],
+      executionId: mcid.value,
     );
 
     // print('Plan Data:${data['planId']}');
@@ -422,7 +422,7 @@ class AddModuleCleaningExecutionController extends GetxController {
       EndMCExecutionModel endMCModel = EndMCExecutionModel(
           scheduleId: data['planId'],
           // scheduleId: scheduleId.first,
-          executionId: data['id'],
+          executionId: mcid.value,
           cleaningDay: data['cleaningDays'],
           waterUsed: data['waterUsed'],
           remark: _remark,

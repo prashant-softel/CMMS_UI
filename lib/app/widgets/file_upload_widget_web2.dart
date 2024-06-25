@@ -24,8 +24,8 @@ class FileUploadDetailsWidgetWeb2 extends StatelessWidget {
               horizontalMargin: 5,
               lmRatio: 2,
               columnSpacing: 5,
-              headingRowHeight: Get.height * 0.06,
-              dataRowHeight: Get.height * 0.08,
+              headingRowHeight: 40,
+              dataRowHeight: 50,
               border: TableBorder.all(color: ColorValues.appLightBlueColor),
               columns: [
                 // DataColumn2(

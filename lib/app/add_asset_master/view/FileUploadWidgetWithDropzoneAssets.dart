@@ -79,7 +79,7 @@ class _FileUploadWidgetWithDropzoneAssetsState extends State<FileUploadWidgetWit
                                         height: Get.height * 0.05,
                                         child: ElevatedButton.icon(
                                           onPressed: () {
-                                            controller.selectFiles();
+                                            controller.addFiles();
                                           },
                                           icon: Icon(Icons.search),
                                           label: Text(
@@ -152,7 +152,7 @@ class _FileUploadWidgetWithDropzoneAssetsState extends State<FileUploadWidgetWit
                                         height: Get.height * 0.05,
                                         child: ElevatedButton.icon(
                                           onPressed: () {
-                                            controller.selectFiles();
+                                            controller.addFiles();
                                           },
                                           icon: Icon(Icons.search),
                                           label: Text(

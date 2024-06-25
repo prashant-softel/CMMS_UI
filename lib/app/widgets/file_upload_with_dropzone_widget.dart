@@ -32,7 +32,7 @@ class _FileUploadWidgetWithDropzoneState
       () => //
           (Responsive.isDesktop(context))
               ? Container(
-                  height: Get.height * 0.16,
+                  height: 145,
                   child: //
                       ClipRRect(
                     borderRadius: BorderRadius.circular(10),
@@ -71,10 +71,10 @@ class _FileUploadWidgetWithDropzoneState
 
                                   /// CHOOSE FILE BUTTON
                                   SizedBox(
-                                    height: Get.height * 0.03,
+                                    height: 23,
                                     child: ElevatedButton.icon(
                                       onPressed: () {
-                                        controller.selectFiles();
+                                        controller.addFiles();
                                         controller.showUploadButton.value =
                                             true;
                                       },
@@ -102,7 +102,7 @@ class _FileUploadWidgetWithDropzoneState
                                   /// UPLOAD BUTTON
                                   controller.showUploadButton == true
                                       ? SizedBox(
-                                          height: Get.height * 0.03,
+                                          height: 23,
                                           child: ElevatedButton(
                                             onPressed: () {
                                               controller.uploadSelectedFiles();
@@ -127,7 +127,7 @@ class _FileUploadWidgetWithDropzoneState
                                               ),
                                             )
                                           : SizedBox(
-                                              height: Get.height * 0.03,
+                                              height: 28,
                                               child: ElevatedButton(
                                                 onPressed: () {},
                                                 child: const Text(
@@ -182,7 +182,7 @@ class _FileUploadWidgetWithDropzoneState
                                         height: Get.height * 0.05,
                                         child: ElevatedButton.icon(
                                           onPressed: () {
-                                            controller.selectFiles();
+                                            controller.addFiles();
                                           },
                                           icon: Icon(Icons.search),
                                           label: Text(
