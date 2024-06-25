@@ -81,7 +81,7 @@ class PreventiveMaintenanceTaskViewContentWeb
 
                         Get.offNamed(Routes.pmTask);
                       },
-                      child: Text(" / PM Task list".toUpperCase(),
+                      child: Text(" / PM TASK LIST",
                           style: Styles.greyLight14),
                     ),
                     Text(" / PM TASK VIEW", style: Styles.greyLight14)
