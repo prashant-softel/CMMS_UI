@@ -469,6 +469,7 @@ class AddInventoryScreen extends GetView<AddInventoryController> {
                                             Row(
                                               children: [
                                                 CustomRichText(
+                                                    includeAsterisk: false,
                                                     title: 'Parent Equipment'),
                                                 SizedBox(
                                                   child: Container(
@@ -537,6 +538,7 @@ class AddInventoryScreen extends GetView<AddInventoryController> {
                                             Row(
                                               children: [
                                                 CustomRichText(
+                                                    includeAsterisk: false,
                                                     title: "Serial No"),
                                                 Container(
                                                   // decoration: BoxDecoration(
