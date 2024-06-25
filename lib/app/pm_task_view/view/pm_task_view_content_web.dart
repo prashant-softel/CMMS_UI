@@ -397,32 +397,31 @@ class PreventiveMaintenanceTaskViewContentWeb
                                                         MainAxisAlignment
                                                             .spaceEvenly,
                                                     children: [
-                                                      // controller.pmtaskViewModel.value
-                                                      //                     ?.status ==
-                                                      //                 167 &&
-                                                      //             varUserAccessModel
-                                                      //                     .value
-                                                      //                     .access_list!
-                                                      //                     .where((e) =>
-                                                      //                         e.feature_id == UserAccessConstants.kPmTaskFeatureId &&
-                                                      //                         e.add ==
-                                                      //                             UserAccessConstants
-                                                      //                                 .kHaveAddAccess)
-                                                      //                     .length >
-                                                      //                 0 ||
-                                                      //         controller
-                                                      //                 .pmtaskViewModel
-                                                      //                 .value
-                                                      //                 ?.status ==
-                                                      //             161 ||
-                                                      //         controller
-                                                      //                 .pmtaskViewModel
-                                                      //                 .value
-                                                      //                 ?.status ==
-                                                      //             162
-                                                      //     ? Dimens.box0
-                                                          // :
-                                                           TableActionButton(
+                                                      controller.pmtaskViewModel.value
+                                                                          ?.status ==
+                                                                      167 && //permit approved
+                                                                  varUserAccessModel
+                                                                          .value
+                                                                          .access_list!
+                                                                          .where((e) =>
+                                                                              e.feature_id == UserAccessConstants.kPmTaskFeatureId &&
+                                                                              e.view ==
+                                                                                  UserAccessConstants
+                                                                                      .kHaveViewAccess)
+                                                                          .length >
+                                                                      0 ||
+                                                              controller
+                                                                      .pmtaskViewModel
+                                                                      .value
+                                                                      ?.status ==
+                                                                  163 || //permit waiting for approval
+                                                              controller
+                                                                      .pmtaskViewModel
+                                                                      .value
+                                                                      ?.status ==
+                                                                  162 // assigned 
+                                                          ? Dimens.box0
+                                                          : TableActionButton(
                                                               color: ColorValues
                                                                   .viewColor,
                                                               icon: Icons
@@ -954,7 +953,6 @@ class PreventiveMaintenanceTaskViewContentWeb
                             ),
                           ),
                         )
-                     
                       ],
                     ),
                   ),
