@@ -100,8 +100,7 @@ class EditMrsReturnContentWeb extends GetView<EditMrsReturnController> {
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(10),
                                     border: Border.all(
-                                      color:
-                                          Color.fromARGB(255, 227, 224, 224),
+                                      color: Color.fromARGB(255, 227, 224, 224),
                                       width: 1,
                                     ),
                                     boxShadow: [
@@ -122,8 +121,8 @@ class EditMrsReturnContentWeb extends GetView<EditMrsReturnController> {
                                       ),
                                     ],
                                   ),
-                                  width: (MediaQuery.of(context).size.width *
-                                      .2),
+                                  width:
+                                      (MediaQuery.of(context).size.width * .2),
                                   child: LoginCustomTextfield(
                                     // inputFormatters: [
                                     //   FilteringTextInputFormatter.deny(
@@ -138,8 +137,7 @@ class EditMrsReturnContentWeb extends GetView<EditMrsReturnController> {
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(10),
                                     border: Border.all(
-                                      color:
-                                          Color.fromARGB(255, 227, 224, 224),
+                                      color: Color.fromARGB(255, 227, 224, 224),
                                       width: 1,
                                     ),
                                     boxShadow: [
@@ -162,9 +160,8 @@ class EditMrsReturnContentWeb extends GetView<EditMrsReturnController> {
                                   ),
                                   child: LoginCustomTextfield(
                                     // enabled: false,
-                                    width:
-                                        (MediaQuery.of(context).size.width *
-                                            .2),
+                                    width: (MediaQuery.of(context).size.width *
+                                        .2),
                                     textController: controller.whereUsedCtrlr,
                                   )),
                             ],
@@ -239,8 +236,7 @@ class EditMrsReturnContentWeb extends GetView<EditMrsReturnController> {
                               Container(
                                 // height: 300,
                                 height:
-                                    ((controller.StockDetailsList.length ??
-                                                0) *
+                                    ((controller.StockDetailsList.length ?? 0) *
                                             80) +
                                         60,
                                 child: DataTable2(
@@ -314,8 +310,7 @@ class EditMrsReturnContentWeb extends GetView<EditMrsReturnController> {
                                           fontWeight: FontWeight.bold),
                                     )),
                                   ],
-                                  rows:
-                                      controller.rowItem.value.map((record) {
+                                  rows: controller.rowItem.value.map((record) {
                                     return DataRow(
                                       // height: 60,
                                       cells: record.map((mapData) {
@@ -325,10 +320,9 @@ class EditMrsReturnContentWeb extends GetView<EditMrsReturnController> {
                                                   children: [
                                                     Padding(
                                                       padding:
-                                                          const EdgeInsets
-                                                              .all(6.0),
-                                                      child:
-                                                          DropdownWebWidget(
+                                                          const EdgeInsets.all(
+                                                              6.0),
+                                                      child: DropdownWebWidget(
                                                         width: MediaQuery.of(
                                                                     context)
                                                                 .size
@@ -339,9 +333,9 @@ class EditMrsReturnContentWeb extends GetView<EditMrsReturnController> {
                                                                 .where((p0) {
                                                           return !controller
                                                                   .rowItem
-                                                                  .map((p0) =>
-                                                                      p0[0][
-                                                                          "value"])
+                                                                  .map((p0) => p0[
+                                                                          0]
+                                                                      ["value"])
                                                                   .contains(p0!
                                                                       .name) &&
                                                               p0.consumed_qty !=
@@ -361,9 +355,8 @@ class EditMrsReturnContentWeb extends GetView<EditMrsReturnController> {
                                                                       element
                                                                           .name ==
                                                                       selectedValue,
-                                                                  orElse:
-                                                                      null);
-                    
+                                                                  orElse: null);
+
                                                           // Check if all relevant dropdowns are selected
                                                           var relevantItems = controller
                                                                   .StockDetailsList
@@ -374,11 +367,12 @@ class EditMrsReturnContentWeb extends GetView<EditMrsReturnController> {
                                                           controller
                                                                   .allDropdownsSelected
                                                                   .value =
-                                                              relevantItems.every((item) => controller
-                                                                  .dropdownMapperData
-                                                                  .containsKey(
-                                                                      item!
-                                                                          .name));
+                                                              relevantItems.every(
+                                                                  (item) => controller
+                                                                      .dropdownMapperData
+                                                                      .containsKey(
+                                                                          item!
+                                                                              .name));
                                                         },
                                                       ),
                                                     ), // Obx(() {
@@ -395,15 +389,13 @@ class EditMrsReturnContentWeb extends GetView<EditMrsReturnController> {
                                                     // }),
                                                   ],
                                                 )
-                                              : (mapData['key'] ==
-                                                      "Return_Qty")
+                                              : (mapData['key'] == "Return_Qty")
                                                   ? Padding(
                                                       padding:
-                                                          const EdgeInsets
-                                                              .all(8.0),
+                                                          const EdgeInsets.all(
+                                                              8.0),
                                                       child: Container(
-                                                        width:
-                                                            (Get.width / 8),
+                                                        width: (Get.width / 8),
                                                         child:
                                                             LoginCustomTextfield(
                                                           inputFormatters: <TextInputFormatter>[
@@ -457,9 +449,8 @@ class EditMrsReturnContentWeb extends GetView<EditMrsReturnController> {
                                                   //           ],
                                                   //         ),
                                                   //       )
-                    
-                                                  : (mapData['key'] ==
-                                                          "Sr_No")
+
+                                                  : (mapData['key'] == "Sr_No")
                                                       ? Text(
                                                           "${controller.dropdownMapperData.value[record[0]['value']]?.serial_no ?? ""}")
                                                       : (mapData['key'] ==
@@ -682,8 +673,7 @@ class EditMrsReturnContentWeb extends GetView<EditMrsReturnController> {
                                           (mapData['key'] == "Drop_down")
                                               ? Padding(
                                                   padding:
-                                                      const EdgeInsets.all(
-                                                          5.0),
+                                                      const EdgeInsets.all(5.0),
                                                   child: DropdownWebWidget(
                                                     width:
                                                         MediaQuery.of(context)
@@ -695,8 +685,8 @@ class EditMrsReturnContentWeb extends GetView<EditMrsReturnController> {
                                                         .where((p0) {
                                                           return !controller
                                                               .rowItem
-                                                              .map((p0) => p0[
-                                                                  0]["value"])
+                                                              .map((p0) => p0[0]
+                                                                  ["value"])
                                                               .contains(
                                                                   p0!.name);
                                                         })
@@ -704,8 +694,8 @@ class EditMrsReturnContentWeb extends GetView<EditMrsReturnController> {
                                                         .obs,
                                                     selectedValue:
                                                         mapData["value"],
-                                                    onValueChanged: (list,
-                                                        selectedValue) {
+                                                    onValueChanged:
+                                                        (list, selectedValue) {
                                                       print({
                                                         "web",
                                                         controller
@@ -725,15 +715,14 @@ class EditMrsReturnContentWeb extends GetView<EditMrsReturnController> {
                                                     },
                                                   ),
                                                 )
-                                              : (mapData['key'] ==
-                                                      "Return_Qty")
+                                              : (mapData['key'] == "Return_Qty")
                                                   ? Padding(
                                                       padding:
-                                                          const EdgeInsets
-                                                              .all(8.0),
+                                                          const EdgeInsets.all(
+                                                              8.0),
                                                       child: Container(
-                                                          width: (Get.width *
-                                                              .5),
+                                                          width:
+                                                              (Get.width * .5),
                                                           // padding: EdgeInsets.all(value),
                                                           decoration:
                                                               BoxDecoration(
@@ -746,8 +735,7 @@ class EditMrsReturnContentWeb extends GetView<EditMrsReturnController> {
                                                                   5.0,
                                                                   5.0,
                                                                 ),
-                                                                blurRadius:
-                                                                    5.0,
+                                                                blurRadius: 5.0,
                                                                 spreadRadius:
                                                                     1.0,
                                                               ),
@@ -778,8 +766,7 @@ class EditMrsReturnContentWeb extends GetView<EditMrsReturnController> {
                                                             },
                                                           )),
                                                     )
-                                                  : (mapData['key'] ==
-                                                          "Remark")
+                                                  : (mapData['key'] == "Remark")
                                                       ? Padding(
                                                           padding:
                                                               const EdgeInsets
@@ -837,16 +824,18 @@ class EditMrsReturnContentWeb extends GetView<EditMrsReturnController> {
                                                           ? Padding(
                                                               padding:
                                                                   const EdgeInsets
-                                                                      .all(
-                                                                      8.0),
+                                                                      .all(8.0),
                                                               child: Container(
-                                                                  width: (Get.width * .5),
+                                                                  width:
+                                                                      (Get.width *
+                                                                          .5),
                                                                   // padding: EdgeInsets.all(value),
-                                                                  decoration: BoxDecoration(
+                                                                  decoration:
+                                                                      BoxDecoration(
                                                                     boxShadow: [
                                                                       BoxShadow(
-                                                                        color:
-                                                                            Colors.black26,
+                                                                        color: Colors
+                                                                            .black26,
                                                                         offset:
                                                                             const Offset(
                                                                           5.0,
@@ -861,20 +850,21 @@ class EditMrsReturnContentWeb extends GetView<EditMrsReturnController> {
                                                                     color: ColorValues
                                                                         .whiteColor,
                                                                     borderRadius:
-                                                                        BorderRadius.circular(
-                                                                            5),
+                                                                        BorderRadius
+                                                                            .circular(5),
                                                                   ),
-                                                                  child: LoginCustomTextfield(
+                                                                  child:
+                                                                      LoginCustomTextfield(
                                                                     // inputFormatters: <
                                                                     //     TextInputFormatter>[
                                                                     //   FilteringTextInputFormatter
                                                                     //       .digitsOnly
                                                                     // ],
-                                                                    maxLine:
-                                                                        1,
+                                                                    maxLine: 1,
                                                                     textController:
                                                                         new TextEditingController(
-                                                                            text: mapData["value"] ?? ''),
+                                                                            text:
+                                                                                mapData["value"] ?? ''),
                                                                     onChanged:
                                                                         (txt) {
                                                                       mapData["value"] =
@@ -930,7 +920,8 @@ class EditMrsReturnContentWeb extends GetView<EditMrsReturnController> {
                           child: Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              CustomRichText(title: "Comment:"),
+                              CustomRichText(
+                                  title: "Comment:", includeAsterisk: false),
                               Dimens.boxWidth10,
                               Container(
                                   width: (Get.width * .6),
@@ -975,8 +966,7 @@ class EditMrsReturnContentWeb extends GetView<EditMrsReturnController> {
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(10),
                                     border: Border.all(
-                                      color:
-                                          Color.fromARGB(255, 227, 224, 224),
+                                      color: Color.fromARGB(255, 227, 224, 224),
                                       width: 1,
                                     ),
                                     boxShadow: [
@@ -997,15 +987,14 @@ class EditMrsReturnContentWeb extends GetView<EditMrsReturnController> {
                                       ),
                                     ],
                                   ),
-                                  width: (MediaQuery.of(context).size.width *
-                                      .2),
+                                  width:
+                                      (MediaQuery.of(context).size.width * .2),
                                   child: LoginCustomTextfield(
                                     // inputFormatters: [
                                     //   FilteringTextInputFormatter.deny(
                                     //       RegExp(r'\s')),
                                     // ],
-                                    textController:
-                                        controller.setTemlateCtrlr,
+                                    textController: controller.setTemlateCtrlr,
                                   )),
                             ],
                           ),
@@ -1031,7 +1020,9 @@ class EditMrsReturnContentWeb extends GetView<EditMrsReturnController> {
                               child: CustomElevatedButton(
                                 backgroundColor: ColorValues.redColor,
                                 text: "Cancel",
-                                onPressed: () {},
+                                onPressed: () {
+                                  Get.offNamed(Routes.returnMrsList);
+                                },
                               ),
                             ),
                           ],
