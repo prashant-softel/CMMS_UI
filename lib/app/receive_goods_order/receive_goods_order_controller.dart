@@ -321,6 +321,8 @@ class ReceiveGoodsOrdersController extends GetxController {
           getPurchaseDetailsByIDModel.value?.vendor_name ?? "";
       selectedUnitCurrency.value =
           getPurchaseDetailsByIDModel.value?.currency ?? "";
+      selectedUnitCurrencyId =
+          getPurchaseDetailsByIDModel.value?.currencyID ?? 0;
       // idList =
       //     _getPurchaseDetailsById.goDetails!.map((e) => e.assetMasterItemID).toList();
       // print('AssetsItemId:$idList');
@@ -452,7 +454,7 @@ class ReceiveGoodsOrdersController extends GetxController {
     ]);
   }
 
-    Future<void> checkform() async {
+  Future<void> checkform() async {
     if (approveCommentTextFieldCtrlr.text == '') {
       isFormInvalid.value = true;
     } else {
@@ -462,7 +464,7 @@ class ReceiveGoodsOrdersController extends GetxController {
 
   void approveGOReceiveButton({int? id}) async {
     {
-         await checkform();
+      await checkform();
       if (isFormInvalid.value == true) {
         Fluttertoast.showToast(msg: "Please Enter Comment!");
 
