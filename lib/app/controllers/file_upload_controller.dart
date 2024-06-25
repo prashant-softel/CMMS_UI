@@ -13,10 +13,11 @@ import '../utils/utility.dart';
 class FileUploadController extends GetxController {
   var repository = Get.find<Repository>();
 
-  final Uri apiUrl = Uri.parse('http://172.20.43.9:83/api/FileUpload/UploadFile');
+  final Uri apiUrl =
+      Uri.parse('http://172.20.43.9:83/api/FileUpload/UploadFile');
 
   Rx<bool> blnHiglight = false.obs;
-  Rx<List<int>> progresses = Rx(<int>[]);
+  RxList<int> progresses = <int>[].obs;
   Rx<int> progress = 0.obs;
   Rx<int> index = 0.obs;
   RxList<PlatformFile> pickedFiles = <PlatformFile>[].obs;
@@ -37,22 +38,29 @@ class FileUploadController extends GetxController {
     super.onInit();
   }
 
-  Future<List<PlatformFile>> addFiles() async {
+  addFiles() async {
     final FilePickerResult? result = await FilePicker.platform.pickFiles(
       allowMultiple: true,
-      type: FileType.custom,
-      allowedExtensions: ['jpg', 'pdf', 'doc', 'docx', 'xls', 'xlsx', 'png', 'jpeg', 'csv', 'txt'],
+      type: FileType.any,
     );
 
     if (result != null) {
       pickedFiles.addAll(result.files);
-      initializeDescriptionControllers(result.files); // assuming this method takes a list of PlatformFile
+      initializeDescriptionControllers(result.files);
+      bytesDataList = [];
+      for (var file in pickedFiles) {
+        bytesDataList?.add(file.bytes!);
+      }
+      if (bytesDataList!.length != pickedFiles.length) {
+        print('Failed to read some files bytes data');
+        pickedFiles.clear();
+        bytesDataList = null;
+      }
     }
-    return pickedFiles;
   }
 
-  Future<void> uploadSingleFile(PlatformFile file, List<int> bytesData, String token,
-      int index, TextEditingController descriptionController,
+  Future<void> uploadSingleFile(PlatformFile file, List<int> bytesData,
+      String token, int index, TextEditingController descriptionController,
       {required Function(double) uploadProgressCallback}) async {
     String boundary = '----${DateTime.now().millisecondsSinceEpoch}';
     var headers = {
@@ -93,7 +101,8 @@ class FileUploadController extends GetxController {
     var length = requestBody.fold<int>(0, (sum, list) => sum + list.length);
     int totalSent = 0;
 
-    StreamController<List<int>> streamController = StreamController<List<int>>();
+    StreamController<List<int>> streamController =
+        StreamController<List<int>>();
 
     stream.transform(StreamTransformer<List<int>, List<int>>.fromHandlers(
       handleData: (data, sink) {
@@ -146,8 +155,11 @@ class FileUploadController extends GetxController {
     }
   }
 
-  Future<void> uploadFiles(List<PlatformFile> files, List<List<int>> bytesDataList,
-      String token, List<TextEditingController> descriptionCtrlrs,
+  Future<void> uploadFiles(
+      List<PlatformFile> files,
+      List<List<int>> bytesDataList,
+      String token,
+      List<TextEditingController> descriptionCtrlrs,
       {required Function(double) uploadProgressCallback}) async {
     progresses.value = List<int>.filled(files.length, 0);
 
@@ -185,11 +197,12 @@ class FileUploadController extends GetxController {
       fileList.removeWhere((item) => item.name == file.name);
       pickedFiles.value = fileList;
 
-      List<TextEditingController> _descriptionCtrlrsList = List.from(descriptionCtrlrs);
+      List<TextEditingController> _descriptionCtrlrsList =
+          List.from(descriptionCtrlrs);
       _descriptionCtrlrsList.removeAt(index.value);
       descriptionCtrlrs = _descriptionCtrlrsList;
 
-      List<int> _progressList = List.from(progresses.value);
+      List<int> _progressList = List.from(progresses);
       _progressList.removeAt(index.value);
       progresses.value = _progressList;
       index.value = pickedFiles.length - 1;
@@ -198,24 +211,30 @@ class FileUploadController extends GetxController {
     }
   }
 
-  selectFiles() async {
-    try {
-      pickedFiles.value = await addFiles();
-      bytesDataList = [];
+  // selectFiles() async {
+  //   try {
+  //     pickedFiles.value = await addFiles();
 
-      for (var file in pickedFiles) {
-        bytesDataList!.add(file.bytes!);
-      }
-
-      if (pickedFiles.isEmpty || pickedFiles.length != bytesDataList!.length) {
-        print('No files selected or failed to read bytes data');
-        pickedFiles.clear();
-        bytesDataList = null;
-      }
-    } catch (e) {
-      Utility.showDialog(e.toString(), ' selectFiles');
-    }
-  }
+  //     if (pickedFiles.isNotEmpty) {
+  //       // pickedFiles.assignAll(files);
+  //       bytesDataList = [];
+  //       for (var file in pickedFiles) {
+  //         bytesDataList!.add(file.bytes!);
+  //       }
+  //       if (bytesDataList!.length != pickedFiles.length) {
+  //         print('Failed to read some files bytes data');
+  //         pickedFiles.clear();
+  //         bytesDataList = null;
+  //       }
+  //     } else {
+  //       print('No files selected');
+  //       pickedFiles.clear();
+  //       bytesDataList = null;
+  //     }
+  //   } catch (e) {
+  //     Utility.showDialog(e.toString(), ' selectFiles');
+  //   }
+  // }
 
   uploadSelectedFiles() async {
     fileIds.clear();

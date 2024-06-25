@@ -26,10 +26,11 @@ class FileUploadDetailsWidgetWeb extends StatelessWidget {
                     horizontalMargin: 5,
                     lmRatio: 2,
                     columnSpacing: 5,
-                    headingRowHeight: Get.height * 0.06,
-                    dataRowHeight: Get.height * 0.08,
-                    border:
-                        TableBorder.all(color: ColorValues.appLightBlueColor),
+                    headingRowHeight: 40,
+                    dataRowHeight: 50,
+                    border: TableBorder.all(
+                      color: ColorValues.appLightBlueColor,
+                    ),
                     columns: [
                       // DataColumn2(
                       //   label: Text('Event'),
@@ -55,10 +56,9 @@ class FileUploadDetailsWidgetWeb extends StatelessWidget {
                         size: ColumnSize.S,
                       ),
                     ],
-                    rows: _fileUploadController.pickedFiles
-                        .map<DataRow>((_file) {
-                      final pickedFileIndex = _fileUploadController
-                          .pickedFiles
+                    rows:
+                        _fileUploadController.pickedFiles.map<DataRow>((_file) {
+                      final pickedFileIndex = _fileUploadController.pickedFiles
                           .indexWhere((f) => f == _file);
                       return DataRow(
                           onSelectChanged: (bool? selected) {

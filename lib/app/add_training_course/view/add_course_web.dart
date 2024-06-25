@@ -575,12 +575,20 @@ class AddCourseWeb extends GetView<AddCourseController> {
                                 ),
                                 Center(
                                   child: Container(
-                                    height: Get.height * 0.2,
+                                    margin: EdgeInsets.all(10),
+                                    height:
+                                        (dropzoneController.pickedFiles.length *
+                                                50) +
+                                            80,
                                     width:
                                         MediaQuery.of(context).size.width / 1.2,
-                                    constraints: BoxConstraints(maxWidth: 1400),
-                                    padding: EdgeInsets.all(10),
+                                    constraints: BoxConstraints(
+                                      maxWidth: 1400,
+                                      minHeight: 160,
+                                    ),
                                     child: Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
                                         Expanded(
                                           flex: 2,
@@ -589,12 +597,7 @@ class AddCourseWeb extends GetView<AddCourseController> {
                                         Dimens.boxWidth10,
                                         Expanded(
                                           flex: 8,
-                                          child: Padding(
-                                            padding:
-                                                const EdgeInsets.only(top: 15),
-                                            child:
-                                                FileUploadDetailsWidgetWeb2(),
-                                          ),
+                                          child: FileUploadDetailsWidgetWeb2(),
                                         ),
                                       ],
                                     ),
