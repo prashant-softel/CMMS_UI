@@ -341,14 +341,14 @@ class CreateMrsReturnContentWeb extends GetView<CreateMrsReturnController> {
                                               fontSize: 15,
                                               fontWeight: FontWeight.bold),
                                         )),
-                                        // DataColumn2(
-                                        //     // fixedWidth: 150,
-                                        //     label: Text(
-                                        //   "Action",
-                                        //   style: TextStyle(
-                                        //       fontSize: 15,
-                                        //       fontWeight: FontWeight.bold),
-                                        // )),
+                                        DataColumn2(
+                                            fixedWidth: 100,
+                                            label: Text(
+                                          "Action",
+                                          style: TextStyle(
+                                              fontSize: 15,
+                                              fontWeight: FontWeight.bold),
+                                        )),
                                       ],
                                       rows: controller.rowItem.value
                                           .map((record) {
@@ -463,38 +463,38 @@ class CreateMrsReturnContentWeb extends GetView<CreateMrsReturnController> {
                                                             ),
                                                           ),
                                                         )
-                                                      // : (mapData['key'] ==
-                                                      //         "Action ")
-                                                      //     ? Padding(
-                                                      //         padding: EdgeInsets
-                                                      //             .only(
-                                                      //                 top: 10),
-                                                      //         child: Column(
-                                                      //           mainAxisAlignment:
-                                                      //               MainAxisAlignment
-                                                      //                   .start,
-                                                      //           crossAxisAlignment:
-                                                      //               CrossAxisAlignment
-                                                      //                   .start,
-                                                      //           children: [
-                                                      //             TableActionButton(
-                                                      //               color: ColorValues
-                                                      //                   .appRedColor,
-                                                      //               icon: Icons
-                                                      //                   .delete,
-                                                      //               label: '',
-                                                      //               message: '',
-                                                      //               onPress:
-                                                      //                   () {
-                                                      //                 controller
-                                                      //                     .rowItem
-                                                      //                     .remove(
-                                                      //                         record);
-                                                      //               },
-                                                      //             )
-                                                      //           ],
-                                                      //         ),
-                                                      //       )
+                                                      : (mapData['key'] ==
+                                                              "Action ")
+                                                          ? Padding(
+                                                              padding: EdgeInsets
+                                                                  .only(
+                                                                      top: 10),
+                                                              child: Column(
+                                                                mainAxisAlignment:
+                                                                    MainAxisAlignment
+                                                                        .start,
+                                                                crossAxisAlignment:
+                                                                    CrossAxisAlignment
+                                                                        .start,
+                                                                children: [
+                                                                  TableActionButton(
+                                                                    color: ColorValues
+                                                                        .appRedColor,
+                                                                    icon: Icons
+                                                                        .delete,
+                                                                    label: '',
+                                                                    message: '',
+                                                                    onPress:
+                                                                        () {
+                                                                      controller
+                                                                          .rowItem
+                                                                          .remove(
+                                                                              record);
+                                                                    },
+                                                                  )
+                                                                ],
+                                                              ),
+                                                            )
 
                                                       : (mapData['key'] ==
                                                               "Sr_No")
