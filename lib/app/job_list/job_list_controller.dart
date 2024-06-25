@@ -26,6 +26,7 @@ class JobListController extends GetxController {
   ///
   RxList<JobModel?> jobList = <JobModel?>[].obs;
   RxList<JobModel?> filteredData = <JobModel?>[].obs;
+   bool openFromDateToStartDatePicker = false;
 
   RxList<FacilityModel?> facilityList = <FacilityModel>[].obs;
   RxList<BlockModel?> blockList = <BlockModel>[].obs;
@@ -62,9 +63,20 @@ class JobListController extends GetxController {
     rowCount: 0,
     rowsPerPage: 10,
   );
+
+    Rx<DateTime> fromDate = DateTime.now().subtract(Duration(days: 7)).obs;
+  Rx<DateTime> toDate = DateTime.now().obs;
+
+    String get formattedFromdate =>
+      DateFormat('dd/MM/yyyy').format(fromDate.value);
+  String get formattedTodate => DateFormat('dd/MM/yyyy').format(toDate.value);
+  String get formattedTodate1 => DateFormat('yyyy-MM-dd').format(toDate.value);
+  String get formattedFromdate1 =>
+      DateFormat('yyyy-MM-dd').format(fromDate.value);
   StreamSubscription<int>? facilityIdStreamSubscription;
   StreamSubscription<String>? facilityNameStreamSubscription;
 
+  ///
   ///
   @override
   void onInit() async {
@@ -73,7 +85,7 @@ class JobListController extends GetxController {
       // Future.delayed(Duration(seconds: 1), () {
       // userId = varUserAccessModel.value.user_id ?? 0;
       // if (userId != null) {
-      getJobList(userId, false, false, false);
+      getJobList(userId, false,formattedTodate1, formattedFromdate1, false, false);
       // }
       // });
     });
@@ -89,7 +101,7 @@ class JobListController extends GetxController {
   void switchFacility(String? facilityName) {
     facilityId =
         facilityList.indexWhere((facility) => facility?.name == facilityName);
-    getJobList(userId, false, false, false);
+    getJobList(userId, false,formattedTodate1, formattedFromdate1, false, false);
   }
 
   Future<void> getFacilityList({bool? isLoading}) async {
@@ -150,7 +162,7 @@ class JobListController extends GetxController {
   }
 
   Future<void> getJobList(
-      int userId, bool self_view, bool isLoading, bool isExport) async {
+      int userId, bool self_view, formattedTodate1, formattedFromdate1,bool isLoading, bool isExport) async {
     jobList.value = <JobModel>[];
     filteredData.value = <JobModel>[];
 
@@ -186,7 +198,12 @@ class JobListController extends GetxController {
           jobListTableColumns.add(key);
         }
       }
+      
     }
+      update(['PreventiveMaintenanceTask']);
+  }
+    void getjobListByDate() {
+    getJobList(facilityId,false, formattedTodate1, formattedFromdate1, false,false);
   }
 
   void goToAddJobScreen() {
@@ -349,7 +366,7 @@ class JobListController extends GetxController {
       isBlockSelected.value = true;
     }
     selectedBlock.value = selectedValue;
-    getJobList(userId, false, false, false);
+    getJobList(userId, false, formattedTodate1, formattedFromdate1,false, false);
   }
 
   void clearStoreData() {
@@ -357,7 +374,7 @@ class JobListController extends GetxController {
   }
 
   void export() {
-    getJobList(userId, true, true, true);
+    getJobList(userId, true, formattedTodate1, formattedFromdate1,true, true);
   }
 
   ///

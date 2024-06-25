@@ -9,12 +9,12 @@ import 'package:google_fonts/google_fonts.dart';
 import '../theme/dimens.dart';
 import '../theme/styles.dart';
 
-class PermitApprovedDialog extends GetView {
-  String? permitApprovedDialog;
-  int? permitId;
-  String? ptwStatus;
-  int? jobId;
-  int? type;
+class PermitApprovedDialog extends GetView<ViewPermitController> {
+  final String? permitApprovedDialog;
+  final int? permitId;
+  final String? ptwStatus;
+  final int? jobId;
+  final int? type;
 
   PermitApprovedDialog(
       {super.key,
@@ -23,8 +23,6 @@ class PermitApprovedDialog extends GetView {
       this.ptwStatus,
       this.jobId,
       this.type});
-  final ViewPermitController controller = Get.find();
-
   @override
   Widget build(BuildContext context) {
     return StatefulBuilder(builder: ((context, setState) {
@@ -40,8 +38,6 @@ class PermitApprovedDialog extends GetView {
           // style: TextStyle(color: Colors.green),
         ),
         content: Builder(builder: (context) {
-          var height = MediaQuery.of(context).size.height;
-
           return Container(
             padding: Dimens.edgeInsets05_0_5_0,
             height: MediaQuery.of(context).size.height / 1,
@@ -266,25 +262,58 @@ class PermitApprovedDialog extends GetView {
                         ),
                         CustomRichText(title: 'Comment'),
                         Dimens.boxHeight10,
-                        TextField(
-                          style: GoogleFonts.lato(
-                            textStyle: TextStyle(
-                                fontSize: 16.0,
-                                height: 1.0,
-                                color: Colors.black),
-                          ),
-                          controller: controller.approveCommentTextFieldCtrlr,
-                          maxLines: 4,
-                          decoration: InputDecoration(
-                            hintText: 'Comment here....',
-                            enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Colors.black,
+                        Obx(
+                         () => TextField(
+                            style: GoogleFonts.lato(
+                              textStyle: TextStyle(
+                                  fontSize: 16.0,
+                                  height: 1.0,
+                                  color: Colors.black),
+                            ),
+                            controller: controller.approveCommentTextFieldCtrlr,
+                            maxLines: 4,
+                            decoration: InputDecoration(
+                               hintText: 'Comment here....',
+                              fillColor: ColorValues.whiteColor,
+                              filled: true,
+                              contentPadding: Dimens.edgeInsets05_10,
+                              border: InputBorder.none,
+                                                          enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Colors.black,
+                                ),
                               ),
+                              focusedBorder:OutlineInputBorder(
+                                 borderSide: BorderSide(color: Colors.black),
+                              ),
+                              focusedErrorBorder:
+                                  controller.iscommentTextInvalid.value
+                                      ? OutlineInputBorder(
+                                          borderRadius: BorderRadius.circular(5),
+                                          borderSide: BorderSide(
+                                            color: ColorValues.redColorDark,
+                                          ),
+                                        )
+                                      : InputBorder.none,
+                              errorBorder: controller.iscommentTextInvalid.value
+                                  ? OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(5),
+                                      borderSide: BorderSide(
+                                        color: ColorValues.redColorDark,
+                                      ),
+                                    )
+                                  : null,
+                              errorText: controller.iscommentTextInvalid.value
+                                  ? "Required field"
+                                  : null,
                             ),
-                            focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: Colors.black),
-                            ),
+                            onChanged: (value) {
+                              if (value.trim().length > 3) {
+                                controller.iscommentTextInvalid.value = false;
+                              } else {
+                                controller.iscommentTextInvalid.value = true;
+                              }
+                            },
                           ),
                         ),
                       ],
@@ -330,13 +359,17 @@ class PermitApprovedDialog extends GetView {
             ElevatedButton(
               style: Styles.greenElevatedButtonStyle,
               onPressed: () {
-                controller.permitApprovedButton(
-                    permitId: permitId,
-                    ptwStatus: '$ptwStatus',
-                    jobId: jobId,
-                    type: type);
-                print('jobId:$jobId');
-                Get.offAndToNamed(Routes.newPermitList);
+                if (controller.checkComment()) {
+                  return;
+                } else {
+                  controller.permitApprovedButton(
+                      permitId: permitId,
+                      ptwStatus: '$ptwStatus',
+                      jobId: jobId,
+                      type: type);
+                  print('jobId:$jobId');
+                  Get.offAndToNamed(Routes.newPermitList);
+                }
               },
               child: Text(
                   '${ptwStatus == '133' ? 'Extend Approve' : 'Approve Permit'}'),
