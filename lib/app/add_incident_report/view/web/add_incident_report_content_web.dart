@@ -5853,15 +5853,8 @@ class DetailsOfOtherPerson extends StatelessWidget {
                                                               4,
                                                       dropdownList:
                                                           controller.genderList,
-                                                      selectedValue: controller
-                                                                  .selectedOption ==
-                                                              "Other"
-                                                          ? mapData["value"]
-                                                          : controller
-                                                              .dropdownVictimNameMapperData[
-                                                                  record[0]
-                                                                      ['value']]
-                                                              ?.gender,
+                                                      selectedValue:
+                                                          mapData["value"],
                                                       onValueChanged: (list,
                                                           selectedValue) {
                                                         print({

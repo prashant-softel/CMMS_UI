@@ -878,6 +878,10 @@ class AddIncidentReportController extends GetxController {
           incidentReportDetailsModel.value?.legal_applicability == 1
               ? true
               : false;
+      isToggleOn.value =
+          incidentReportDetailsModel.value?.Otherinjured_person == []
+              ? false
+              : true;
 
       ///why why Analysis
       rowWhyWhyAnalysisItem.value = [];
@@ -992,12 +996,12 @@ class AddIncidentReportController extends GetxController {
     _incidentReportDetails?.Otherinjured_person?.forEach((element) {
       rowOtherInjuredPersonItem.value.add([
         {
-          "key": "Name of Other Injured Person ",
+          "key": "Name of Injured Person ",
           "value": '${element?.name}',
         },
         {
           "key": "Gender ",
-          "value": '${element?.gender}',
+          "value": '${element?.sex}',
         },
         {
           "key": "Trade/Designation ",
@@ -1016,7 +1020,7 @@ class AddIncidentReportController extends GetxController {
           "value": '${element?.body_part_and_nature_of_injury}',
         },
         {
-          'key': "Work experience ",
+          'key': "work experience ",
           "value": '${element?.work_experience_years}',
         },
         {
