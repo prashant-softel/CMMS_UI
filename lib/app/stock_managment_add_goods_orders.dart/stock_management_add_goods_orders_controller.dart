@@ -397,9 +397,8 @@ class StockManagementAddGoodsOrdersController extends GetxController {
         dropdownMapperData[element.assetItem_Name ?? ""] = goDetailslist!
             .firstWhere((e) => e?.asset_type == element.asset_type,
                 orElse: null)!;
-        paiddropdownMapperData[element.paid_by_name ?? ""] = goDetailslist!
-            .firstWhere((e) => e?.paid_by_name == element.paid_by_name,
-                orElse: null)!;
+        paiddropdownMapperData[element.paid_by_name ?? ""] = paid
+            .firstWhere((e) => e?.name == element.paid_by_name, orElse: null)!;
       });
 
       challanDateTc.text =
