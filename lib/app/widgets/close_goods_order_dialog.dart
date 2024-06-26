@@ -92,7 +92,7 @@ class GoodsOrderCloseDialog extends GetView {
               onPressed: () {
                 _controller.goodsOrderCloseButton(id: id);
                 print('Goods order id:$id');
-                Get.offAllNamed(Routes.stockManagementGoodsOrdersScreen);
+                // Get.offAllNamed(Routes.stockManagementGoodsOrdersScreen);
               },
               child: Text('Close Goods'),
             ),

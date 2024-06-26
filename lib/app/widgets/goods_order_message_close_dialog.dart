@@ -1,5 +1,5 @@
 import 'package:cmms/app/theme/color_values.dart';
-import 'package:cmms/app/view_add_goods_orders.dart/stock_management_view_add_goods_orders_controller.dart';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../navigators/app_pages.dart';
@@ -11,7 +11,7 @@ class GoodsOrderMessageCloseDialog extends GetView {
   List<dynamic>? id;
 
   GoodsOrderMessageCloseDialog({super.key, this.data, this.id});
-  final ViewAddGoodsOrdersController _controller = Get.find();
+  // final ViewAddGoodsOrdersController controller = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -81,7 +81,7 @@ class GoodsOrderMessageCloseDialog extends GetView {
             child: ElevatedButton(
               style: Styles.darkBlueElevatedButtonStyle,
               onPressed: () {
-                Get.offAllNamed(Routes.stockManagementGoodsOrdersScreen);
+                Get.offNamed(Routes.stockManagementGoodsOrdersScreen);
               },
               child: const Text('Ok'),
             ),
