@@ -129,9 +129,9 @@ class PurchaseGoodsorderListController extends GetxController {
     switch (list.runtimeType) {}
   }
 
-  void getPmTaskListByDate() {
+  void getROListByDate() {
     getRequestOrderList(
-        facilityId, formattedFromdate1, formattedTodate1, false);
+        facilityId, formattedTodate1,formattedFromdate1, false);
   }
 
   void search(String keyword) {
