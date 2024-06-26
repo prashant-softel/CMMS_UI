@@ -551,9 +551,9 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                         Expanded(
                                           flex: 2,
                                           child: Container(
-                                            margin: EdgeInsets.only(left: 20),
+                                            margin: EdgeInsets.only(left: 10),
                                             padding: EdgeInsets.only(
-                                                left: 20, top: 20),
+                                                left: 10, top: 10),
                                             decoration: BoxDecoration(
                                               color: ColorValues.lightBlueColor,
                                               borderRadius:
@@ -1468,9 +1468,9 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                         Expanded(
                                           flex: 2,
                                           child: Container(
-                                            margin: EdgeInsets.only(left: 20),
+                                            margin: EdgeInsets.only(left: 10),
                                             padding: EdgeInsets.only(
-                                                left: 20, top: 20),
+                                                left: 10, top: 10),
                                             decoration: BoxDecoration(
                                               color: ColorValues.lightBlueColor,
                                               borderRadius:
@@ -1593,7 +1593,7 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                           flex: 2,
                                           child: Container(
                                               margin: EdgeInsets.only(
-                                                  left: 10, right: 20),
+                                                  left: 10, right: 10),
                                               padding: EdgeInsets.only(
                                                   left: 10, top: 10),
                                               decoration: BoxDecoration(
@@ -2138,9 +2138,9 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                         Expanded(
                                           flex: 2,
                                           child: Container(
-                                            margin: EdgeInsets.only(left: 20),
+                                            margin: EdgeInsets.only(left: 10),
                                             padding: EdgeInsets.only(
-                                                left: 20, top: 20),
+                                                left: 10, top: 10),
                                             decoration: BoxDecoration(
                                               color: ColorValues.lightBlueColor,
                                               borderRadius:
@@ -2263,7 +2263,7 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                           flex: 2,
                                           child: Container(
                                               margin: EdgeInsets.only(
-                                                  left: 10, right: 20),
+                                                  left: 10, right: 10),
                                               padding: EdgeInsets.only(
                                                   left: 10, top: 10),
                                               decoration: BoxDecoration(
@@ -2972,9 +2972,9 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                        Expanded(
                                           flex: 2,
                                           child: Container(
-                                            margin: EdgeInsets.only(left: 20),
+                                            margin: EdgeInsets.only(left: 10),
                                             padding: EdgeInsets.only(
-                                                left: 20, top: 20),
+                                                left: 10, top: 10),
                                             decoration: BoxDecoration(
                                               color: ColorValues.lightBlueColor,
                                               borderRadius:
@@ -3097,7 +3097,7 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                           flex: 2,
                                           child: Container(
                                               margin: EdgeInsets.only(
-                                                  left: 10, right: 20),
+                                                  left: 10, right: 10),
                                               padding: EdgeInsets.only(
                                                   left: 10, top: 10),
                                               decoration: BoxDecoration(
@@ -3806,9 +3806,9 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                        Expanded(
                                           flex: 2,
                                           child: Container(
-                                            margin: EdgeInsets.only(left: 20),
+                                            margin: EdgeInsets.only(left: 10),
                                             padding: EdgeInsets.only(
-                                                left: 20, top: 20),
+                                                left: 10, top: 10),
                                             decoration: BoxDecoration(
                                               color: ColorValues.lightBlueColor,
                                               borderRadius:
@@ -3931,7 +3931,7 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                           flex: 2,
                                           child: Container(
                                               margin: EdgeInsets.only(
-                                                  left: 10, right: 20),
+                                                  left: 10, right: 10),
                                               padding: EdgeInsets.only(
                                                   left: 10, top: 10),
                                               decoration: BoxDecoration(
@@ -4639,9 +4639,9 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                         Expanded(
                                           flex: 2,
                                           child: Container(
-                                            margin: EdgeInsets.only(left: 20),
+                                            margin: EdgeInsets.only(left: 10),
                                             padding: EdgeInsets.only(
-                                                left: 20, top: 20),
+                                                left: 10, top: 10),
                                             decoration: BoxDecoration(
                                               color: ColorValues.lightBlueColor,
                                               borderRadius:
@@ -4764,7 +4764,7 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                           flex: 2,
                                           child: Container(
                                               margin: EdgeInsets.only(
-                                                  left: 10, right: 20),
+                                                  left: 10, right: 10),
                                               padding: EdgeInsets.only(
                                                   left: 10, top: 10),
                                               decoration: BoxDecoration(
