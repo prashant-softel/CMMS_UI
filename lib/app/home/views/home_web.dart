@@ -553,7 +553,7 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                           child: Container(
                                             margin: EdgeInsets.only(left: 10),
                                             padding: EdgeInsets.only(
-                                                left: 10, top: 10),
+                                                left: 10, top: 12),
                                             decoration: BoxDecoration(
                                               color: ColorValues.lightBlueColor,
                                               borderRadius:
@@ -581,7 +581,9 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                           crossAxisAlignment:
                                                               CrossAxisAlignment
                                                                   .start,
+
                                                           children: [
+                                                            Dimens.boxHeight8,
                                                             Row(
                                                               children: [
                                                                 Icon(
@@ -638,6 +640,7 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                             ),
                                                             Dimens.boxHeight5,
                                                             Row(
+
                                                               children: [
                                                                 Icon(
                                                                     Icons
@@ -663,6 +666,7 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                                 ),
                                                               ],
                                                             ),
+                                                         Dimens.boxHeight8,
                                                           ],
                                                         ),
                                                       ),
@@ -894,7 +898,7 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                 children: [
                                                   Text("Low Stock Items",
                                                       style: Styles.black15),
-                                                  SizedBox(height: 5),
+                                                  SizedBox(height: 2),
                                                   Container(
                                                     height: 35,
                                                     child: CustomElevatedButton(
@@ -905,10 +909,10 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                         text:
                                                             '${controller.lowStockItemsSum}'),
                                                   ),
-                                                  SizedBox(height: 10),
+                                                  SizedBox(height: 8),
                                                   Text("PO Items Awaited",
                                                       style: Styles.black15),
-                                                  SizedBox(height: 5),
+                                                  SizedBox(height: 2),
                                                   Container(
                                                     height: 35,
                                                     child: CustomElevatedButton(
@@ -1499,6 +1503,7 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                               CrossAxisAlignment
                                                                   .start,
                                                           children: [
+                                                            Dimens.boxHeight8,
                                                             Row(
                                                               children: [
                                                                 Icon(
@@ -1580,6 +1585,7 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                                 ),
                                                               ],
                                                             ),
+                                                          Dimens.boxHeight8,
                                                           ],
                                                         ),
                                                       ),
@@ -1680,7 +1686,7 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                 children: [
                                                   Text("Low Stock Items",
                                                       style: Styles.black15),
-                                                  SizedBox(height: 5),
+                                                  SizedBox(height: 2),
                                                   Container(
                                                     height: 35,
                                                     child: CustomElevatedButton(
@@ -1691,10 +1697,10 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                         text:
                                                             '${controller.dashboardBmList.value?.cmDashboadDetails?.low_stock_items ?? 0}'),
                                                   ),
-                                                  SizedBox(height: 10),
+                                                  SizedBox(height: 8),
                                                   Text("PO Items Awaited",
                                                       style: Styles.black15),
-                                                  SizedBox(height: 5),
+                                                  SizedBox(height: 2),
                                                   Container(
                                                     height: 35,
                                                     child: CustomElevatedButton(
@@ -2169,6 +2175,7 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                               CrossAxisAlignment
                                                                   .start,
                                                           children: [
+                                                            Dimens.boxHeight8,
                                                             Row(
                                                               children: [
                                                                 Icon(
@@ -2250,6 +2257,7 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                                 ),
                                                               ],
                                                             ),
+                                                          Dimens.boxHeight8,
                                                           ],
                                                         ),
                                                       ),
@@ -2350,7 +2358,7 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                 children: [
                                                   Text("Low Stock Items",
                                                       style: Styles.black15),
-                                                  SizedBox(height: 5),
+                                                  SizedBox(height: 2),
                                                   Container(
                                                     height: 35,
                                                     child: CustomElevatedButton(
@@ -2361,10 +2369,10 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                         text:
                                                             '${controller.dashboardPmList.value?.cmDashboadDetails?.low_stock_items ?? 0}'),
                                                   ),
-                                                  SizedBox(height: 10),
+                                                  SizedBox(height: 8),
                                                   Text("PO Items Awaited",
                                                       style: Styles.black15),
-                                                  SizedBox(height: 5),
+                                                  SizedBox(height: 2),
                                                   Container(
                                                     height: 35,
                                                     child: CustomElevatedButton(
@@ -3003,6 +3011,7 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                               CrossAxisAlignment
                                                                   .start,
                                                           children: [
+                                                            Dimens.boxHeight8,
                                                             Row(
                                                               children: [
                                                                 Icon(
@@ -3084,6 +3093,7 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                                 ),
                                                               ],
                                                             ),
+                                                          Dimens.boxHeight8,
                                                           ],
                                                         ),
                                                       ),
@@ -3184,7 +3194,7 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                 children: [
                                                   Text("Low Stock Items",
                                                       style: Styles.black15),
-                                                  SizedBox(height: 5),
+                                                  SizedBox(height: 2),
                                                   Container(
                                                     height: 35,
                                                     child: CustomElevatedButton(
@@ -3195,10 +3205,10 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                         text:
                                                             '${controller.dashboardMcList.value?.cmDashboadDetails?.low_stock_items ?? 0}'),
                                                   ),
-                                                  SizedBox(height: 10),
+                                                  SizedBox(height: 8),
                                                   Text("PO Items Awaited",
                                                       style: Styles.black15),
-                                                  SizedBox(height: 5),
+                                                  SizedBox(height: 2),
                                                   Container(
                                                     height: 35,
                                                     child: CustomElevatedButton(
@@ -3837,6 +3847,7 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                               CrossAxisAlignment
                                                                   .start,
                                                           children: [
+                                                            Dimens.boxHeight8,
                                                             Row(
                                                               children: [
                                                                 Icon(
@@ -3918,6 +3929,7 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                                 ),
                                                               ],
                                                             ),
+                                                          Dimens.boxHeight8,
                                                           ],
                                                         ),
                                                       ),
@@ -4018,7 +4030,7 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                 children: [
                                                   Text("Low Stock Items",
                                                       style: Styles.black15),
-                                                  SizedBox(height: 5),
+                                                  SizedBox(height: 2),
                                                   Container(
                                                     height: 35,
                                                     child: CustomElevatedButton(
@@ -4029,10 +4041,10 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                         text:
                                                             '${controller.dashboardIrList.value?.cmDashboadDetails?.low_stock_items ?? 0}'),
                                                   ),
-                                                  SizedBox(height: 10),
+                                                  SizedBox(height: 8),
                                                   Text("PO Items Awaited",
                                                       style: Styles.black15),
-                                                  SizedBox(height: 5),
+                                                  SizedBox(height: 2),
                                                   Container(
                                                     height: 35,
                                                     child: CustomElevatedButton(
@@ -4670,6 +4682,7 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                               CrossAxisAlignment
                                                                   .start,
                                                           children: [
+                                                            Dimens.boxHeight8,
                                                             Row(
                                                               children: [
                                                                 Icon(
@@ -4751,6 +4764,7 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                                 ),
                                                               ],
                                                             ),
+                                                          Dimens.boxHeight8,
                                                           ],
                                                         ),
                                                       ),
@@ -4851,7 +4865,7 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                 children: [
                                                   Text("Low Stock Items",
                                                       style: Styles.black15),
-                                                  SizedBox(height: 5),
+                                                  SizedBox(height: 2),
                                                   Container(
                                                     height: 35,
                                                     child: CustomElevatedButton(
@@ -4862,10 +4876,10 @@ class DashBoardHomeWeb extends GetView<HomeController> {
                                                         text:
                                                             '${controller.dashboardSmList.value?.cmDashboadDetails?.low_stock_items ?? 0}'),
                                                   ),
-                                                  SizedBox(height: 10),
+                                                  SizedBox(height: 8),
                                                   Text("PO Items Awaited",
                                                       style: Styles.black15),
-                                                  SizedBox(height: 5),
+                                                  SizedBox(height: 2),
                                                   Container(
                                                     height: 35,
                                                     child: CustomElevatedButton(
