@@ -396,35 +396,33 @@ class AddInventoryController extends GetxController {
   }
 
   void checkForm() {
-    if (selectedBlockListId== 0) {
+    if (selectedBlockListId == 0) {
       isBlocksSelected.value = false;
       isFormValid.value = false;
     }
- if (selectedTypeNameId== 0) {
+    if (selectedTypeNameId == 0) {
       isTypeNameSelected.value = false;
       isFormValid.value = false;
     }
-     if (selectedStatusNameId== 0) {
+    if (selectedStatusNameId == 0) {
       isStatusNameSelected.value = false;
       isFormValid.value = false;
     }
-    
-    
-if (assetsNameCtrlr.text.trim().length == 0) {
+
+    if (assetsNameCtrlr.text.trim().length == 0) {
       isAssetsNameInvalid.value = false;
       isFormValid.value = false;
     }
-      if (selectedEquipmentnameId== 0) {
+    if (selectedEquipmentnameId == 0) {
       isEquipmentNameSelected.value = false;
       isFormValid.value = false;
     }
-    
-          if (selectedEquipmentCategoryNameId== 0) {
+
+    if (selectedEquipmentCategoryNameId == 0) {
       isEquipmentCategoryNameSelected.value = false;
       isFormValid.value = false;
     }
-    
-    
+
     // if (selectedUnitCurrency.value == "") {
     //   isUnitCurrencySelected.value = false;
     //   isFormValid.value = false;
@@ -446,9 +444,6 @@ if (assetsNameCtrlr.text.trim().length == 0) {
       isCostInvalid.value = true;
       isFormValid.value = false;
     }
-
-    
-    
 
     // if (selectedEquipmentName.value == "") {
     //   isEquipmentNameSelected.value = false;
@@ -778,7 +773,7 @@ if (assetsNameCtrlr.text.trim().length == 0) {
     final _manufacturerModelNameList =
         await addInventoryPresenter.getmanufacturerList(
       isLoading: true,
-      BusinessType: 8,
+      BusinessType: 7,
     );
     for (var manufacturerName in _manufacturerModelNameList) {
       manufacturerModelNameList.add(manufacturerName);
