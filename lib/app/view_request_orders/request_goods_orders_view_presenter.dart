@@ -69,10 +69,12 @@ class PurchaseGoodsorderViewPresenter {
 
   Future<List<HistoryModel>?> getRoHistory(
     moduleType,
+    facilityId,
     id,
     isLoading,
   ) async =>
       await purchaseGoodsorderViewUsecase.getRoHistory(
+        facilityId: facilityId,
         moduleType: moduleType,
         id: id,
         isLoading: isLoading,
