@@ -34,7 +34,7 @@ class AddInventoryController extends GetxController {
   RxList<int?> selectedWorkAreaIdList = <int>[].obs;
   final HomeController homeController = Get.find();
   FocusNode nameFocus = FocusNode();
-  RxBool isFormValid = false.obs;
+  RxBool isFormValid = true.obs;
   ScrollController nameScroll = ScrollController();
   FocusNode wdescFocus = FocusNode();
   ScrollController wdescScroll = ScrollController();
@@ -135,6 +135,7 @@ class AddInventoryController extends GetxController {
       <InventoryStatusListModel>[].obs;
   Rx<String> selectedStatusName = ''.obs;
   Rx<bool> isStatusNameSelected = true.obs;
+  Rx<bool> isSupplierNameSelected = true.obs;
   int selectedStatusNameId = 0;
 
   ///type of inventroy
@@ -408,17 +409,18 @@ class AddInventoryController extends GetxController {
       isStatusNameSelected.value = false;
       isFormValid.value = false;
     }
-
-    if (assetsNameCtrlr.text.trim().length == 0) {
-      isAssetsNameInvalid.value = false;
+    
+    
+if (assetsNameCtrlr.text.trim().length == 0) {
+      isAssetsNameInvalid.value = true;
       isFormValid.value = false;
     }
-    if (selectedEquipmentnameId == 0) {
-      isEquipmentNameSelected.value = false;
-      isFormValid.value = false;
-    }
-
-    if (selectedEquipmentCategoryNameId == 0) {
+    //   if (selectedEquipmentnameId== 0) {
+    //   isEquipmentNameSelected.value = false;
+    //   isFormValid.value = false;
+    // }
+    
+          if (selectedEquipmentCategoryNameId== 0) {
       isEquipmentCategoryNameSelected.value = false;
       isFormValid.value = false;
     }
@@ -431,19 +433,22 @@ class AddInventoryController extends GetxController {
     //   isStatusNameSelected.value = false;
     //   isFormValid.value = false;
     // }
-    if (parentEquipmentNoCtrlr.text.trim().length == 0) {
-      isParentEquipmentInvalid.value = false;
-      isFormValid.value = false;
-    }
+    // if (parentEquipmentNoCtrlr.text.trim().length == 0) {
+    //   isParentEquipmentInvalid.value = false;
+    //   isFormValid.value = false;
+    // }
 
-    if (modelNoCtrlr.text.trim().length == 0) {
-      isModelInvalid.value = true;
-      isFormValid.value = false;
-    }
-    if (costCtrlr.text.trim().length == 0) {
-      isCostInvalid.value = true;
-      isFormValid.value = false;
-    }
+    // if (modelNoCtrlr.text.trim().length == 0) {
+    //   isModelInvalid.value = true;
+    //   isFormValid.value = false;
+    // }
+    // if (costCtrlr.text.trim().length == 0) {
+    //   isCostInvalid.value = true;
+    //   isFormValid.value = false;
+    // }
+
+    
+    
 
     // if (selectedEquipmentName.value == "") {
     //   isEquipmentNameSelected.value = false;
@@ -668,7 +673,7 @@ class AddInventoryController extends GetxController {
 // /add inventory
   Future<bool> AddInventory({List<dynamic>? fileIds}) async {
     checkForm();
-    if (isFormValid.value == false) {
+    if (!isFormValid.value) {
       return false;
     }
     String _serialNoCtrlr = serialNoCtrlr.text.trim();
@@ -929,7 +934,7 @@ class AddInventoryController extends GetxController {
                 manufacturerModelNameList[manufacturerModelNameIndex]?.id ?? 0;
             selectedmanufacturerName.value = value;
             isManufacturerSelected.value = true;
-            iswarrantymanufacturerSelected.value = true;
+            // iswarrantymanufacturerSelected.value = true;
           } else {
             selectedmanufacturerNameId = 0;
           }
@@ -942,7 +947,7 @@ class AddInventoryController extends GetxController {
                 warrantyNameList.indexWhere((x) => x?.name == value);
             selectedWarrentyNameId = warrantyNameList[warrantyIndex]?.id ?? 0;
             selectedWarrantyName.value = value;
-            isWarrentyNameSelected.value = true;
+            // isWarrentyNameSelected.value = true;
           } else {
             selectedWarrentyNameId = 0;
           }
@@ -985,7 +990,7 @@ class AddInventoryController extends GetxController {
             selectedwarrantyUsageTermNameId =
                 warrantyNameList[warrantyUsageTermIndex]?.id ?? 0;
             selectedwarrantyUsageTermListName.value = value;
-            iswarrantyUsageTermNameSelected.value = true;
+            // iswarrantyUsageTermNameSelected.value = true;
           } else {
             selectedwarrantyUsageTermNameId = 0;
           }

@@ -579,23 +579,23 @@ class AddInventoryScreen extends GetView<AddInventoryController> {
                                                     ],
                                                     textController: controller
                                                         .serialNoCtrlr,
-                                                    errorController: controller
-                                                            .isSerialNoInvalid
-                                                            .value
-                                                        ? "Required field"
-                                                        : null,
-                                                    onChanged: (value) {
-                                                      if (value.trim().length >
-                                                          1) {
-                                                        controller
-                                                            .isSerialNoInvalid
-                                                            .value = false;
-                                                      } else {
-                                                        controller
-                                                            .isSerialNoInvalid
-                                                            .value = true;
-                                                      }
-                                                    },
+                                                    // errorController: controller
+                                                    //         .isSerialNoInvalid
+                                                    //         .value
+                                                    //     ? "Required field"
+                                                    //     : null,
+                                                    // onChanged: (value) {
+                                                    //   if (value.trim().length >
+                                                    //       1) {
+                                                    //     controller
+                                                    //         .isSerialNoInvalid
+                                                    //         .value = false;
+                                                    //   } else {
+                                                    //     controller
+                                                    //         .isSerialNoInvalid
+                                                    //         .value = true;
+                                                    //   }
+                                                    // },
                                                   ),
                                                 ),
                                               ],
