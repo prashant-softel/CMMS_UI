@@ -46,12 +46,13 @@ class _CalibrationTabWidgetState extends State<CalibrationTabWidget> {
                           children: [
                             Row(
                               children: [
-                                CustomRichText(title: "Calibration Frequency"),
+                                CustomRichText(
+                                    includeAsterisk: false,
+                                    title: "Calibration Frequency"),
                                 Dimens.boxWidth5,
                                 SizedBox(
                                   child: Container(
                                     decoration: BoxDecoration(
-                                      
                                       borderRadius: BorderRadius.circular(2),
                                     ),
                                     child: DropdownWebStock(
@@ -74,6 +75,7 @@ class _CalibrationTabWidgetState extends State<CalibrationTabWidget> {
                             Row(
                               children: [
                                 CustomRichText(
+                                    includeAsterisk: false,
                                     title: "Calibration remainder In"),
                                 SizedBox(width: 10),
                                 Container(
@@ -93,23 +95,23 @@ class _CalibrationTabWidgetState extends State<CalibrationTabWidget> {
                                     controller:
                                         controller.calibrationRemaingCtrlr,
 
-                                        //  errorController: controller
-                                        //                     .isSerialNoInvalid
-                                        //                     .value
-                                        //                 ? "Required field"
-                                        //                 : null,
-                                        //             onChanged: (value) {
-                                        //               if (value.trim().length >
-                                        //                   1) {
-                                        //                 controller
-                                        //                     .isSerialNoInvalid
-                                        //                     .value = false;
-                                        //               } else {
-                                        //                 controller
-                                        //                     .isSerialNoInvalid
-                                        //                     .value = true;
-                                        //               }
-                                        //               },
+                                    //  errorController: controller
+                                    //                     .isSerialNoInvalid
+                                    //                     .value
+                                    //                 ? "Required field"
+                                    //                 : null,
+                                    //             onChanged: (value) {
+                                    //               if (value.trim().length >
+                                    //                   1) {
+                                    //                 controller
+                                    //                     .isSerialNoInvalid
+                                    //                     .value = false;
+                                    //               } else {
+                                    //                 controller
+                                    //                     .isSerialNoInvalid
+                                    //                     .value = true;
+                                    //               }
+                                    //               },
                                     focusNode: controller.calremFocus,
                                     scrollController: controller.calremScroll,
                                     decoration: InputDecoration(
@@ -139,37 +141,35 @@ class _CalibrationTabWidgetState extends State<CalibrationTabWidget> {
                           children: [
                             Row(
                               children: [
-                                CustomRichText(title: 'Received Date  : '),
+                                CustomRichText(
+                                    includeAsterisk: false,
+                                    title: 'Received Date  : '),
                                 Dimens.boxWidth10,
                                 CustomTextFieldForStock(
-                                  width: MediaQuery.of(context).size.width / 5,
-                                  numberTextField: true,
-                                  onTap: () {
-                                    controller.openLastCalibrationDatePicker =
-                                        !controller
-                                            .openLastCalibrationDatePicker;
-                                    controller.update(['calibration_tab']);
-                                  },
-                                  textController:
-                                      controller.lastCalibrationDateTc,
-                                       errorController: controller
-                                                            .isReceivedDateInvalid
-                                                            .value
-                                                        ? "Required field"
-                                                        : null,
-                                                    onChanged: (value) {
-                                                      if (value.trim().length >
-                                                          1) {
-                                                        controller
-                                                            .isReceivedDateInvalid
-                                                            .value = false;
-                                                      } else {
-                                                        controller
-                                                            .isReceivedDateInvalid
-                                                            .value = true;
-                                                      }
-                                                    }
-                                ),
+                                    width:
+                                        MediaQuery.of(context).size.width / 5,
+                                    numberTextField: true,
+                                    onTap: () {
+                                      controller.openLastCalibrationDatePicker =
+                                          !controller
+                                              .openLastCalibrationDatePicker;
+                                      controller.update(['calibration_tab']);
+                                    },
+                                    textController:
+                                        controller.lastCalibrationDateTc,
+                                    errorController:
+                                        controller.isReceivedDateInvalid.value
+                                            ? "Required field"
+                                            : null,
+                                    onChanged: (value) {
+                                      if (value.trim().length > 1) {
+                                        controller.isReceivedDateInvalid.value =
+                                            false;
+                                      } else {
+                                        controller.isReceivedDateInvalid.value =
+                                            true;
+                                      }
+                                    }),
                               ],
                             ),
                             Dimens.boxHeight5,

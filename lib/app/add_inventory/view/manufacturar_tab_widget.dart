@@ -39,7 +39,9 @@ class ManufacturarTabWidget extends StatelessWidget {
                         children: [
                           Row(
                             children: [
-                              CustomRichText(title: "Manufacturer Name"),
+                              CustomRichText(
+                                  includeAsterisk: false,
+                                  title: "Manufacturer Name"),
                               SizedBox(
                                 child: Container(
                                   decoration: BoxDecoration(
@@ -63,7 +65,8 @@ class ManufacturarTabWidget extends StatelessWidget {
                           ),
                           Row(
                             children: [
-                              CustomRichText(title: "Model"),
+                              CustomRichText(
+                                  includeAsterisk: false, title: "Model"),
                               Container(
                                 decoration: BoxDecoration(
                                     border: Border.all(
@@ -79,26 +82,18 @@ class ManufacturarTabWidget extends StatelessWidget {
                                   minWidth: 100,
                                 ),
                                 child: LoginCustomTextfield(
-                                  textController: controller.modelNoCtrlr,
-                                      errorController: controller
-                                                            .isModelInvalid
-                                                            .value
-                                                        ? "Required field"
-                                                        : null,
-                                                    onChanged: (value) {
-                                                      if (value.trim().length >
-                                                          0) {
-                                                        controller
-                                                            .isModelInvalid
-                                                            .value = false;
-                                                      } else {
-                                                        controller
-                                                            .isModelInvalid
-                                                            .value = true;
-                                                      }
-                                                    }
-
-                                ),
+                                    textController: controller.modelNoCtrlr,
+                                    errorController:
+                                        controller.isModelInvalid.value
+                                            ? "Required field"
+                                            : null,
+                                    onChanged: (value) {
+                                      if (value.trim().length > 0) {
+                                        controller.isModelInvalid.value = false;
+                                      } else {
+                                        controller.isModelInvalid.value = true;
+                                      }
+                                    }),
                               ),
                             ],
                           ),
@@ -119,7 +114,8 @@ class ManufacturarTabWidget extends StatelessWidget {
                           // ),
                           Row(
                             children: [
-                              CustomRichText(title: "Cost"),
+                              CustomRichText(
+                                  includeAsterisk: false, title: "Cost"),
                               Container(
                                 decoration: BoxDecoration(
                                     border: Border.all(
@@ -135,29 +131,22 @@ class ManufacturarTabWidget extends StatelessWidget {
                                   minWidth: 100,
                                 ),
                                 child: LoginCustomTextfield(
-                                  keyboardType: TextInputType.number,
-                                  inputFormatters: <TextInputFormatter>[
-                                    FilteringTextInputFormatter.digitsOnly
-                                  ],
-                                  textController: controller.costCtrlr,
-                                      errorController: controller
-                                                            .isCostInvalid
-                                                            .value
-                                                        ? "Required field"
-                                                        : null,
-                                                    onChanged: (value) {
-                                                      if (value.trim().length >
-                                                          0) {
-                                                        controller
-                                                            .isCostInvalid
-                                                            .value = false;
-                                                      } else {
-                                                        controller
-                                                            .isCostInvalid
-                                                            .value = true;
-                                                      }
-                                                    }
-                                ),
+                                    keyboardType: TextInputType.number,
+                                    inputFormatters: <TextInputFormatter>[
+                                      FilteringTextInputFormatter.digitsOnly
+                                    ],
+                                    textController: controller.costCtrlr,
+                                    errorController:
+                                        controller.isCostInvalid.value
+                                            ? "Required field"
+                                            : null,
+                                    onChanged: (value) {
+                                      if (value.trim().length > 0) {
+                                        controller.isCostInvalid.value = false;
+                                      } else {
+                                        controller.isCostInvalid.value = true;
+                                      }
+                                    }),
                               ),
                             ],
                           ),
@@ -169,7 +158,9 @@ class ManufacturarTabWidget extends StatelessWidget {
                         children: [
                           Row(
                             children: [
-                              CustomRichText(title: "Supplier Name"),
+                              CustomRichText(
+                                  includeAsterisk: false,
+                                  title: "Supplier Name"),
                               SizedBox(
                                 child: Container(
                                   decoration: BoxDecoration(
@@ -194,7 +185,9 @@ class ManufacturarTabWidget extends StatelessWidget {
                           ),
                           Row(
                             children: [
-                              CustomRichText(title: "Parent Equipment S No."),
+                              CustomRichText(
+                                  includeAsterisk: false,
+                                  title: "Parent Equipment S No."),
                               Container(
                                 decoration: BoxDecoration(
                                     border: Border.all(
@@ -210,37 +203,32 @@ class ManufacturarTabWidget extends StatelessWidget {
                                   minWidth: 100,
                                 ),
                                 child: LoginCustomTextfield(
-                                  keyboardType: TextInputType.number,
-                                  inputFormatters: <TextInputFormatter>[
-                                    FilteringTextInputFormatter.digitsOnly
-                                  ],
-                                  textController:
-                                      controller.parentEquipmentNoCtrlr,
-                                         errorController: controller
-                                                            .isParentEquipmentInvalid
-                                                            .value
-                                                        ? "Required field"
-                                                        : null,
-                                                    onChanged: (value) {
-                                                      if (value.trim().length >
-                                                          0) {
-                                                        controller
-                                                            .isParentEquipmentInvalid
-                                                            .value = false;
-                                                      } else {
-                                                        controller
-                                                            .isParentEquipmentInvalid
-                                                            .value = true;
-                                                      }
-                                                    }
-
-                                ),
+                                    keyboardType: TextInputType.number,
+                                    inputFormatters: <TextInputFormatter>[
+                                      FilteringTextInputFormatter.digitsOnly
+                                    ],
+                                    textController:
+                                        controller.parentEquipmentNoCtrlr,
+                                    errorController: controller
+                                            .isParentEquipmentInvalid.value
+                                        ? "Required field"
+                                        : null,
+                                    onChanged: (value) {
+                                      if (value.trim().length > 0) {
+                                        controller.isParentEquipmentInvalid
+                                            .value = false;
+                                      } else {
+                                        controller.isParentEquipmentInvalid
+                                            .value = true;
+                                      }
+                                    }),
                               ),
                             ],
                           ),
                           Row(
                             children: [
-                              CustomRichText(title: "Currency"),
+                              CustomRichText(
+                                  includeAsterisk: false, title: "Currency"),
                               SizedBox(
                                 child: Container(
                                   decoration: BoxDecoration(

@@ -97,22 +97,20 @@ class AddInventoryController extends GetxController {
   var costCtrlr = TextEditingController();
   var warrentyDescriptionCtrlr = TextEditingController();
 
-   Rx<bool> isDescriptionInvalid = false.obs;
-    
- Rx<bool> isCertificateNumberInvalid = false.obs;
- 
- Rx<bool> isModelInvalid = false.obs;
- Rx<bool> isCostInvalid = false.obs;
- Rx<bool> isParentEquipmentInvalid = false.obs;
- 
+  Rx<bool> isDescriptionInvalid = false.obs;
 
+  Rx<bool> isCertificateNumberInvalid = false.obs;
+
+  Rx<bool> isModelInvalid = false.obs;
+  Rx<bool> isCostInvalid = false.obs;
+  Rx<bool> isParentEquipmentInvalid = false.obs;
 
   Rx<bool> isExpireDateInvalid = false.obs;
   RxBool isStartDateInvalid = false.obs;
   RxBool isSerialNoInvalid = false.obs;
   RxBool isAssetsNameInvalid = false.obs;
   RxBool isReceivedDateInvalid = false.obs;
-  
+
   RxBool isAssetDescInvalid = false.obs;
 
   int selectedEquipmentId = 0;
@@ -398,23 +396,48 @@ class AddInventoryController extends GetxController {
   }
 
   void checkForm() {
-    if (selectedBlocks.value == "") {
+    if (selectedBlockListId== 0) {
       isBlocksSelected.value = false;
       isFormValid.value = false;
     }
-     if (selectedUnitCurrency.value == "") {
-      isUnitCurrencySelected.value = false;
+ if (selectedTypeNameId== 0) {
+      isTypeNameSelected.value = false;
       isFormValid.value = false;
     }
-    if (selectedsupplierrName.value == "") {
+     if (selectedStatusNameId== 0) {
       isStatusNameSelected.value = false;
       isFormValid.value = false;
     }
-      if (parentEquipmentNoCtrlr.text.trim().length == 0) {
-      isParentEquipmentInvalid.value = false;
+    
+    
+if (assetsNameCtrlr.text.trim().length == 0) {
+      isAssetsNameInvalid.value = false;
+      isFormValid.value = false;
+    }
+      if (selectedEquipmentnameId== 0) {
+      isEquipmentNameSelected.value = false;
       isFormValid.value = false;
     }
     
+          if (selectedEquipmentCategoryNameId== 0) {
+      isEquipmentCategoryNameSelected.value = false;
+      isFormValid.value = false;
+    }
+    
+    
+    // if (selectedUnitCurrency.value == "") {
+    //   isUnitCurrencySelected.value = false;
+    //   isFormValid.value = false;
+    // }
+    // if (selectedsupplierrName.value == "") {
+    //   isStatusNameSelected.value = false;
+    //   isFormValid.value = false;
+    // }
+    if (parentEquipmentNoCtrlr.text.trim().length == 0) {
+      isParentEquipmentInvalid.value = false;
+      isFormValid.value = false;
+    }
+
     if (modelNoCtrlr.text.trim().length == 0) {
       isModelInvalid.value = true;
       isFormValid.value = false;
@@ -424,80 +447,83 @@ class AddInventoryController extends GetxController {
       isFormValid.value = false;
     }
 
-    if (selectedEquipmentName.value == "") {
-      isEquipmentNameSelected.value = false;
-      isFormValid.value = false;
-    }
-     if (selectedmanufacturerName.value == "") {
-      isManufacturerSelected.value = false;
-      isFormValid.value = false;
-    }
-      if (selectedfrequency.value == '') {
-      isSelectedfrequency.value = false;
-      isFormValid.value = false;
-    }
-      if (selectedWarrantyName.value == '') {
-      isWarrentyNameSelected.value = false;
-      isFormValid.value = false;
-    }
-     if (selectedWarrantyName == '') {
-      isWarrentyNameSelected.value = false;
-      isFormValid.value = false;
-    }
-        if (selectedmanufacturerName.value == '') {
-      iswarrantymanufacturerSelected.value = false;
-      isFormValid.value = false;
-    }
-    if (selectedwarrantyUsageTermListName.value == '') {
-      iswarrantyUsageTermNameSelected.value = false;
-      isFormValid.value = false;
-    }
-    if (selectedTypeName.value == "") {
-      isTypeNameSelected.value = false;
-      isFormValid.value = false;
-    }
-    if (selectedEquipmentCategoryName.value == "") {
-      isEquipmentCategoryNameSelected.value = false;
-      isFormValid.value = false;
-    }
-    if (selectedStatusName.value == "") {
-      isStatusNameSelected.value = false;
-      isFormValid.value = false;
-    }
-    if (serialNoCtrlr.text.trim().length == 0) {
-      isSerialNoInvalid.value = true;
-      isFormValid.value = false;
-    }
-    if (assetsNameCtrlr.text.trim().length == 0) {
-      isAssetsNameInvalid.value = true;
-      isFormValid.value = false;
-    }
-     if (certificateNoCtrlr.text.trim().length == 0) {
-      isCertificateNumberInvalid.value = true;
-      isFormValid.value = false;
-    }
-
-        if (lastCalibrationDateTc.text.trim().length == 0) {
-      isReceivedDateInvalid.value = true;
-      isFormValid.value = false;
-    }
     
-       if (startDateTc.text.trim().length == 0) {
-      isStartDateInvalid.value = true;
-      isFormValid.value = false;
-    }
-         if (expireDateTc.text.trim().length == 0) {
-      isExpireDateInvalid.value = true;
-      isFormValid.value = false;
-    }
+    
+
+    // if (selectedEquipmentName.value == "") {
+    //   isEquipmentNameSelected.value = false;
+    //   isFormValid.value = false;
+    // }
+    // if (selectedmanufacturerName.value == "") {
+    //   isManufacturerSelected.value = false;
+    //   isFormValid.value = false;
+    // }
+    // if (selectedfrequency.value == '') {
+    //   isSelectedfrequency.value = false;
+    //   isFormValid.value = false;
+    // }
+    // if (selectedWarrantyName.value == '') {
+    //   isWarrentyNameSelected.value = false;
+    //   isFormValid.value = false;
+    // }
+    // if (selectedWarrantyName == '') {
+    //   isWarrentyNameSelected.value = false;
+    //   isFormValid.value = false;
+    // }
+    // if (selectedmanufacturerName.value == '') {
+    //   iswarrantymanufacturerSelected.value = false;
+    //   isFormValid.value = false;
+    // }
+    // if (selectedwarrantyUsageTermListName.value == '') {
+    //   iswarrantyUsageTermNameSelected.value = false;
+    //   isFormValid.value = false;
+    // }
+    // if (selectedTypeName.value == "") {
+    //   isTypeNameSelected.value = false;
+    //   isFormValid.value = false;
+    // }
+    // if (selectedEquipmentCategoryName.value == "") {
+    //   isEquipmentCategoryNameSelected.value = false;
+    //   isFormValid.value = false;
+    // }
+    // if (selectedStatusName.value == "") {
+    //   isStatusNameSelected.value = false;
+    //   isFormValid.value = false;
+    // }
+    // if (serialNoCtrlr.text.trim().length == 0) {
+    //   isSerialNoInvalid.value = true;
+    //   isFormValid.value = false;
+    // }
+    // if (assetsNameCtrlr.text.trim().length == 0) {
+    //   isAssetsNameInvalid.value = true;
+    //   isFormValid.value = false;
+    // }
+    // if (certificateNoCtrlr.text.trim().length == 0) {
+    //   isCertificateNumberInvalid.value = true;
+    //   isFormValid.value = false;
+    // }
+
+    // if (lastCalibrationDateTc.text.trim().length == 0) {
+    //   isReceivedDateInvalid.value = true;
+    //   isFormValid.value = false;
+    // }
+
+    // if (startDateTc.text.trim().length == 0) {
+    //   isStartDateInvalid.value = true;
+    //   isFormValid.value = false;
+    // }
+    // if (expireDateTc.text.trim().length == 0) {
+    //   isExpireDateInvalid.value = true;
+    //   isFormValid.value = false;
+    // }
     if (assesDiscriptionCtrlr.text.trim().length == 0) {
       isAssetDescInvalid.value = true;
       isFormValid.value = false;
     }
-     if (warrentyDescriptionCtrlr.text.trim().length == 0) {
-      isDescriptionInvalid.value = true;
-      isFormValid.value = false;
-    }
+    // if (warrentyDescriptionCtrlr.text.trim().length == 0) {
+    //   isDescriptionInvalid.value = true;
+    //   isFormValid.value = false;
+    // }
   }
 
   Future<bool> updateInventory({List<dynamic>? fileIds}) async {
@@ -907,10 +933,8 @@ class AddInventoryController extends GetxController {
             selectedmanufacturerNameId =
                 manufacturerModelNameList[manufacturerModelNameIndex]?.id ?? 0;
             selectedmanufacturerName.value = value;
-            isManufacturerSelected.value=true;
-            iswarrantymanufacturerSelected.value=true;
-                                        
-
+            isManufacturerSelected.value = true;
+            iswarrantymanufacturerSelected.value = true;
           } else {
             selectedmanufacturerNameId = 0;
           }
@@ -923,7 +947,7 @@ class AddInventoryController extends GetxController {
                 warrantyNameList.indexWhere((x) => x?.name == value);
             selectedWarrentyNameId = warrantyNameList[warrantyIndex]?.id ?? 0;
             selectedWarrantyName.value = value;
-            isWarrentyNameSelected.value=true;
+            isWarrentyNameSelected.value = true;
           } else {
             selectedWarrentyNameId = 0;
           }
@@ -937,7 +961,7 @@ class AddInventoryController extends GetxController {
             selectedsupplierrNameId =
                 supplierNameModelNameList[supplierIndex]?.id ?? 0;
             selectedsupplierrName.value = value;
-            isStatusNameSelected.value=true;
+            isStatusNameSelected.value = true;
           } else {
             selectedsupplierrNameId = 0;
           }
@@ -952,7 +976,7 @@ class AddInventoryController extends GetxController {
                 unitCurrencyList[unitCurrencyListIndex]?.id ?? 0;
             print('CurrencyId${selectedUnitCurrencyId}');
             selectedUnitCurrency.value = value;
-            isUnitCurrencySelected.value=true;
+            isUnitCurrencySelected.value = true;
           } else {
             selectedUnitCurrencyId = 0;
           }
@@ -966,7 +990,7 @@ class AddInventoryController extends GetxController {
             selectedwarrantyUsageTermNameId =
                 warrantyNameList[warrantyUsageTermIndex]?.id ?? 0;
             selectedwarrantyUsageTermListName.value = value;
-            iswarrantyUsageTermNameSelected.value=true;
+            iswarrantyUsageTermNameSelected.value = true;
           } else {
             selectedwarrantyUsageTermNameId = 0;
           }

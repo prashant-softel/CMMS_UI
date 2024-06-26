@@ -50,6 +50,7 @@ class ViewPermitController extends GetxController {
 
   ViewPermitPresenter viewPermitPresenter;
   JobListPresenter jobListPresenter;
+  RxBool iscommentTextInvalid = false.obs;
 
   ///Print Global key
   final GlobalKey<State<StatefulWidget>> printKey = GlobalKey();
@@ -545,11 +546,6 @@ class ViewPermitController extends GetxController {
   void permitApprovedButton(
       {int? permitId, String? ptwStatus, int? jobId, int? type}) async {
     {
-      if (approveCommentTextFieldCtrlr.text == '') {
-        Fluttertoast.showToast(
-            msg: "Please Enter Comment!", timeInSecForIosWeb: 5, fontSize: 16);
-        return;
-      }
       String _approveComment = approveCommentTextFieldCtrlr.text.trim();
 
       AproveExtendPermitModel commentRejectCancelPermitModel =
@@ -2802,5 +2798,14 @@ class ViewPermitController extends GetxController {
 
   void clearStoreDataPMtaskId() {
     viewPermitPresenter.clearStoreDataPMtaskId();
+  }
+  bool checkComment(){
+    if(approveCommentTextFieldCtrlr.text ==""){
+      iscommentTextInvalid.value=true;
+      return true;
+    }
+
+    return false;
+
   }
 }

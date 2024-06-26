@@ -1,6 +1,7 @@
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/home/widgets/mobile_header_widget.dart';
 import 'package:cmms/app/incident_report_list/incident_report_list_controller.dart';
+import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/widgets/date_picker.dart';
 import 'package:cmms/domain/models/incident_report_list_model.dart';
 import 'package:flutter/material.dart';
@@ -47,9 +48,17 @@ class IncidentReportListMobile extends GetView<IncidentReportListController> {
                                         : IncidentReportListModel();
                                 return GestureDetector(
                                   onTap: () {
-                                    // var _jobId = jobModel?.id ?? 0;
-                                    controller.viewIncidentReport(
-                                        id: incidentReportListModel?.id);
+                                    controller.clearStoreData();
+
+                                    int irId = incidentReportListModel?.id ?? 0;
+                                    if (irId != 0) {
+                                      Get.toNamed(
+                                          Routes.viewIncidentReportScreen,
+                                          arguments: {'irId': irId});
+                                    }
+                                    // // var _jobId = jobModel?.id ?? 0;
+                                    // controller.viewIncidentReport(
+                                    //     id: incidentReportListModel?.id);
                                   },
                                   child: Container(
                                     margin:
