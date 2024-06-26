@@ -173,7 +173,7 @@ class StockManagementGoodsOrdersController extends GetxController {
         goodsOrdersListTableColumns.add(key);
       }
     }
-    }
+  }
 
   void onValueChanged(dynamic list, dynamic value) {
     switch (list.runtimeType) {}

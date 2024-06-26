@@ -131,7 +131,7 @@ class PurchaseGoodsorderListController extends GetxController {
 
   void getROListByDate() {
     getRequestOrderList(
-        facilityId, formattedTodate1,formattedFromdate1, false);
+        facilityId, formattedTodate1, formattedFromdate1, false);
   }
 
   void search(String keyword) {
