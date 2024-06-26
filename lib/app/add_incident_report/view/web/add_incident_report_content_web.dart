@@ -6204,7 +6204,7 @@ class DetailsOfOtherPerson extends StatelessWidget {
                                                                       child:
                                                                           LoginCustomTextfield(
                                                                         keyboardType:
-                                                                            TextInputType.text,
+                                                                            TextInputType.number,
                                                                         maxLine:
                                                                             1,
                                                                         textController:
