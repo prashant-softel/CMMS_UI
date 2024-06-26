@@ -9667,7 +9667,7 @@ class Repository {
       if (!res.hasError) {
         Fluttertoast.showToast(msg: "Data add successfully...", fontSize: 16.0);
 
-        Get.offAndToNamed(Routes.inventoryList);
+        Get.offNamed(Routes.inventoryList);
 
         return true;
       } //

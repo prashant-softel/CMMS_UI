@@ -211,19 +211,20 @@ class ManufacturarTabWidget extends StatelessWidget {
                                     ],
                                     textController:
                                         controller.parentEquipmentNoCtrlr,
-                                    errorController: controller
-                                            .isParentEquipmentInvalid.value
-                                        ? "Required field"
-                                        : null,
-                                    onChanged: (value) {
-                                      if (value.trim().length > 0) {
-                                        controller.isParentEquipmentInvalid
-                                            .value = false;
-                                      } else {
-                                        controller.isParentEquipmentInvalid
-                                            .value = true;
-                                      }
-                                    }),
+                                    // errorController: controller
+                                    //         .isParentEquipmentInvalid.value
+                                    //     ? "Required field"
+                                    //     : null,
+                                    // onChanged: (value) {
+                                    //   if (value.trim().length > 0) {
+                                    //     controller.isParentEquipmentInvalid
+                                    //         .value = false;
+                                    //   } else {
+                                    //     controller.isParentEquipmentInvalid
+                                    //         .value = true;
+                                    //   }
+                                    // }
+                                    ),
                               ),
                             ],
                           ),

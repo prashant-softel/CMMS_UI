@@ -34,7 +34,7 @@ class AddInventoryController extends GetxController {
   RxList<int?> selectedWorkAreaIdList = <int>[].obs;
   final HomeController homeController = Get.find();
   FocusNode nameFocus = FocusNode();
-  RxBool isFormValid = false.obs;
+  RxBool isFormValid = true.obs;
   ScrollController nameScroll = ScrollController();
   FocusNode wdescFocus = FocusNode();
   ScrollController wdescScroll = ScrollController();
@@ -415,10 +415,10 @@ if (assetsNameCtrlr.text.trim().length == 0) {
       isAssetsNameInvalid.value = true;
       isFormValid.value = false;
     }
-      if (selectedEquipmentnameId== 0) {
-      isEquipmentNameSelected.value = false;
-      isFormValid.value = false;
-    }
+    //   if (selectedEquipmentnameId== 0) {
+    //   isEquipmentNameSelected.value = false;
+    //   isFormValid.value = false;
+    // }
     
           if (selectedEquipmentCategoryNameId== 0) {
       isEquipmentCategoryNameSelected.value = false;
@@ -434,19 +434,19 @@ if (assetsNameCtrlr.text.trim().length == 0) {
     //   isStatusNameSelected.value = false;
     //   isFormValid.value = false;
     // }
-    if (parentEquipmentNoCtrlr.text.trim().length == 0) {
-      isParentEquipmentInvalid.value = false;
-      isFormValid.value = false;
-    }
+    // if (parentEquipmentNoCtrlr.text.trim().length == 0) {
+    //   isParentEquipmentInvalid.value = false;
+    //   isFormValid.value = false;
+    // }
 
-    if (modelNoCtrlr.text.trim().length == 0) {
-      isModelInvalid.value = true;
-      isFormValid.value = false;
-    }
-    if (costCtrlr.text.trim().length == 0) {
-      isCostInvalid.value = true;
-      isFormValid.value = false;
-    }
+    // if (modelNoCtrlr.text.trim().length == 0) {
+    //   isModelInvalid.value = true;
+    //   isFormValid.value = false;
+    // }
+    // if (costCtrlr.text.trim().length == 0) {
+    //   isCostInvalid.value = true;
+    //   isFormValid.value = false;
+    // }
 
     
     
@@ -674,7 +674,7 @@ if (assetsNameCtrlr.text.trim().length == 0) {
 // /add inventory
   Future<bool> AddInventory({List<dynamic>? fileIds}) async {
     checkForm();
-    if (isFormValid.value == false) {
+    if (!isFormValid.value) {
       return false;
     }
     String _serialNoCtrlr = serialNoCtrlr.text.trim();
