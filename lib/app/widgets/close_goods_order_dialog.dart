@@ -45,7 +45,7 @@ class GoodsOrderCloseDialog extends GetView {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      CustomRichText(title: 'Comment'),
+                      CustomRichText(title: 'Comment', includeAsterisk: false),
                       SizedBox(
                         height: 20,
                       ),
@@ -80,7 +80,7 @@ class GoodsOrderCloseDialog extends GetView {
           Row(mainAxisAlignment: MainAxisAlignment.center, children: [
             Dimens.boxWidth10,
             ElevatedButton(
-              style: Styles.yellowElevatedButtonStyle,
+              style: Styles.darkRedElevatedButtonStyle,
               onPressed: () {
                 Get.back();
               },
@@ -88,11 +88,11 @@ class GoodsOrderCloseDialog extends GetView {
             ),
             Dimens.boxWidth20,
             ElevatedButton(
-              style: Styles.darkRedElevatedButtonStyle,
+              style: Styles.darkBlueElevatedButtonStyle,
               onPressed: () {
                 _controller.goodsOrderCloseButton(id: id);
                 print('Goods order id:$id');
-                Get.toNamed(Routes.stockManagementGoodsOrdersScreen);
+                Get.offAllNamed(Routes.stockManagementGoodsOrdersScreen);
               },
               child: Text('Close Goods'),
             ),
