@@ -409,9 +409,8 @@ class AddInventoryController extends GetxController {
       isStatusNameSelected.value = false;
       isFormValid.value = false;
     }
-    
-    
-if (assetsNameCtrlr.text.trim().length == 0) {
+
+    if (assetsNameCtrlr.text.trim().length == 0) {
       isAssetsNameInvalid.value = true;
       isFormValid.value = false;
     }
@@ -419,8 +418,8 @@ if (assetsNameCtrlr.text.trim().length == 0) {
     //   isEquipmentNameSelected.value = false;
     //   isFormValid.value = false;
     // }
-    
-          if (selectedEquipmentCategoryNameId== 0) {
+
+    if (selectedEquipmentCategoryNameId == 0) {
       isEquipmentCategoryNameSelected.value = false;
       isFormValid.value = false;
     }
@@ -446,9 +445,6 @@ if (assetsNameCtrlr.text.trim().length == 0) {
     //   isCostInvalid.value = true;
     //   isFormValid.value = false;
     // }
-
-    
-    
 
     // if (selectedEquipmentName.value == "") {
     //   isEquipmentNameSelected.value = false;
@@ -789,7 +785,7 @@ if (assetsNameCtrlr.text.trim().length == 0) {
     supplierNameModelNameList.value = <SupplierNameModel>[];
     final _supplierList = await addInventoryPresenter.getSupplierList(
       isLoading: true,
-      BusinessType: 5,
+      BusinessType: 4,
     );
     for (var manuSupplierName in _supplierList) {
       supplierNameModelNameList.add(manuSupplierName);
