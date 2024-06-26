@@ -419,7 +419,7 @@ class _StockManagementGoodsOrdersWebState
                                       ? controller.toDate.value = dropDate
                                       : controller.toDate.value = pickUpDate;
 
-                                  controller.getGOListByDate();
+                                  controller.getPmTaskListByDate();
                                   controller.openFromDateToStartDatePicker =
                                       !controller.openFromDateToStartDatePicker;
                                   controller.update(['stock_Mangement_Date']);
