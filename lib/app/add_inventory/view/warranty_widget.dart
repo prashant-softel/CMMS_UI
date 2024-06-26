@@ -107,19 +107,19 @@ class _WarrantyTabWidgetState extends State<WarrantyTabWidget> {
                                       (MediaQuery.of(context).size.width * .2),
                                   textController:
                                       controller.warrentyDescriptionCtrlr,
-                                  errorController:
-                                      controller.isDescriptionInvalid.value
-                                          ? "Required field"
-                                          : null,
-                                  onChanged: (value) {
-                                    if (value.trim().length > 1) {
-                                      controller.isDescriptionInvalid.value =
-                                          false;
-                                    } else {
-                                      controller.isDescriptionInvalid.value =
-                                          true;
-                                    }
-                                  }
+                                  // errorController:
+                                  //     controller.isDescriptionInvalid.value
+                                  //         ? "Required field"
+                                  //         : null,
+                                  // onChanged: (value) {
+                                  //   if (value.trim().length > 1) {
+                                  //     controller.isDescriptionInvalid.value =
+                                  //         false;
+                                  //   } else {
+                                  //     controller.isDescriptionInvalid.value =
+                                  //         true;
+                                  //   }
+                                  // }
                                   // focusnode: controller.wdescFocus,
                                   // scroll: controller.wdescScroll,
                                   ),
@@ -140,19 +140,20 @@ class _WarrantyTabWidgetState extends State<WarrantyTabWidget> {
                                     controller.update(['warranty_tab']);
                                   },
                                   textController: controller.startDateTc,
-                                  errorController:
-                                      controller.isStartDateInvalid.value
-                                          ? "Required field"
-                                          : null,
-                                  onChanged: (value) {
-                                    if (value.trim().length > 1) {
-                                      controller.isStartDateInvalid.value =
-                                          false;
-                                    } else {
-                                      controller.isStartDateInvalid.value =
-                                          true;
-                                    }
-                                  }),
+                                  // errorController:
+                                  //     controller.isStartDateInvalid.value
+                                  //         ? "Required field"
+                                  //         : null,
+                                  // onChanged: (value) {
+                                  //   if (value.trim().length > 1) {
+                                  //     controller.isStartDateInvalid.value =
+                                  //         false;
+                                  //   } else {
+                                  //     controller.isStartDateInvalid.value =
+                                  //         true;
+                                  //   }
+                                  // }
+                                  ),
                             ],
                           ),
                           Dimens.boxHeight10,
@@ -214,19 +215,20 @@ class _WarrantyTabWidgetState extends State<WarrantyTabWidget> {
                                     ],
                                     textController:
                                         controller.certificateNoCtrlr,
-                                    errorController: controller
-                                            .isCertificateNumberInvalid.value
-                                        ? "Required field"
-                                        : null,
-                                    onChanged: (value) {
-                                      if (value.trim().length > 1) {
-                                        controller.isCertificateNumberInvalid
-                                            .value = false;
-                                      } else {
-                                        controller.isCertificateNumberInvalid
-                                            .value = true;
-                                      }
-                                    }),
+                                    // errorController: controller
+                                    //         .isCertificateNumberInvalid.value
+                                    //     ? "Required field"
+                                    //     : null,
+                                    // onChanged: (value) {
+                                    //   if (value.trim().length > 1) {
+                                    //     controller.isCertificateNumberInvalid
+                                    //         .value = false;
+                                    //   } else {
+                                    //     controller.isCertificateNumberInvalid
+                                    //         .value = true;
+                                    //   }
+                                    // }
+                                    ),
                               ),
                             ],
                           ),
@@ -265,19 +267,20 @@ class _WarrantyTabWidgetState extends State<WarrantyTabWidget> {
                                     controller.update(['warranty_tab']);
                                   },
                                   textController: controller.expireDateTc,
-                                  errorController:
-                                      controller.isExpireDateInvalid.value
-                                          ? "Required field"
-                                          : null,
-                                  onChanged: (value) {
-                                    if (value.trim().length > 1) {
-                                      controller.isExpireDateInvalid.value =
-                                          false;
-                                    } else {
-                                      controller.isExpireDateInvalid.value =
-                                          true;
-                                    }
-                                  }),
+                                  // errorController:
+                                  //     controller.isExpireDateInvalid.value
+                                  //         ? "Required field"
+                                  //         : null,
+                                  // onChanged: (value) {
+                                  //   if (value.trim().length > 1) {
+                                  //     controller.isExpireDateInvalid.value =
+                                  //         false;
+                                  //   } else {
+                                  //     controller.isExpireDateInvalid.value =
+                                  //         true;
+                                  //   }
+                                  // }
+                                  ),
                             ],
                           ),
                           Dimens.boxHeight10,

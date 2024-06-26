@@ -135,6 +135,7 @@ class AddInventoryController extends GetxController {
       <InventoryStatusListModel>[].obs;
   Rx<String> selectedStatusName = ''.obs;
   Rx<bool> isStatusNameSelected = true.obs;
+  Rx<bool> isSupplierNameSelected = true.obs;
   int selectedStatusNameId = 0;
 
   ///type of inventroy
@@ -411,7 +412,7 @@ class AddInventoryController extends GetxController {
     
     
 if (assetsNameCtrlr.text.trim().length == 0) {
-      isAssetsNameInvalid.value = false;
+      isAssetsNameInvalid.value = true;
       isFormValid.value = false;
     }
       if (selectedEquipmentnameId== 0) {
@@ -934,7 +935,7 @@ if (assetsNameCtrlr.text.trim().length == 0) {
                 manufacturerModelNameList[manufacturerModelNameIndex]?.id ?? 0;
             selectedmanufacturerName.value = value;
             isManufacturerSelected.value = true;
-            iswarrantymanufacturerSelected.value = true;
+            // iswarrantymanufacturerSelected.value = true;
           } else {
             selectedmanufacturerNameId = 0;
           }
@@ -947,7 +948,7 @@ if (assetsNameCtrlr.text.trim().length == 0) {
                 warrantyNameList.indexWhere((x) => x?.name == value);
             selectedWarrentyNameId = warrantyNameList[warrantyIndex]?.id ?? 0;
             selectedWarrantyName.value = value;
-            isWarrentyNameSelected.value = true;
+            // isWarrentyNameSelected.value = true;
           } else {
             selectedWarrentyNameId = 0;
           }
@@ -990,7 +991,7 @@ if (assetsNameCtrlr.text.trim().length == 0) {
             selectedwarrantyUsageTermNameId =
                 warrantyNameList[warrantyUsageTermIndex]?.id ?? 0;
             selectedwarrantyUsageTermListName.value = value;
-            iswarrantyUsageTermNameSelected.value = true;
+            // iswarrantyUsageTermNameSelected.value = true;
           } else {
             selectedwarrantyUsageTermNameId = 0;
           }
