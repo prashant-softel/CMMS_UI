@@ -347,4 +347,9 @@ class MastersController extends GetxController {
   void clearStoreUserIdData() {
     mastersPresenter.clearStoreUserIdData();
   }
+    Future<void> documentUpload() async {
+    Get.toNamed(
+      Routes.documentUploadScreen,
+    );
+  }
 }
