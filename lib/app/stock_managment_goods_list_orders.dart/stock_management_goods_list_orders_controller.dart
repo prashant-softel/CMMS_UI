@@ -189,8 +189,8 @@ class StockManagementGoodsOrdersController extends GetxController {
     print('Argument5:$id');
   }
 
-  void getPmTaskListByDate() {
-    getGoodsOrdersList(facilityId, formattedFromdate1, formattedTodate1, false);
+  void getGOListByDate() {
+    getGoodsOrdersList(facilityId, formattedTodate1, formattedFromdate1, false);
   }
 
   Future<void> deleteGoodsOrders(String? id) async {

@@ -420,7 +420,7 @@ class _PurchaseGoodsorderListWebState extends State<PurchaseGoodsorderListWeb> {
                                       ? controller.toDate.value = dropDate
                                       : controller.toDate.value = pickUpDate;
 
-                                  controller.getPmTaskListByDate();
+                                  controller.getROListByDate();
                                   controller.openFromDateToStartDatePicker =
                                       !controller.openFromDateToStartDatePicker;
                                   controller.update(['stock_Mangement_Date']);
